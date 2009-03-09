@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?ifndef SourceDir ?>
+<?ifdef Debug ?>
+<?define SourceDir="Debug"?>
+<?else?>
+<?define SourceDir="Release"?>
+<?endif?>
+<?endif?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="907aa5cc-9366-45ec-a832-e433652c0c1b" Name="Europlan 2.0" Language="1031" Version="0.0.0.2" Manufacturer="bluesource mobile solutions gmbh" UpgradeCode="ca795401-2df9-4ed9-8770-f230bd4ab9dc">
+		<Package InstallerVersion="200" Compressed="yes" />
+
+		<Media Id="1" Cabinet="europlan20.cab" EmbedCab="yes" />
+
+    <PropertyRef Id="NETFRAMEWORK20"/>
+    <Condition Message="Für das Setup muss der Benutzer der Administratorgruppe angehören, um die Installation fortsetzen zu können. Das Setup wird abgebrochen, weil der aktuelle Benutzer nicht der Administratorgruppe angehört.">AdminUser</Condition>
+    <Condition Message="Für das Setup muss der Benutzer der Administratorgruppe angehören, um die Installation fortsetzen zu können. Das Setup wird abgebrochen, weil der aktuelle Benutzer nicht der Administratorgruppe angehört.">Privileged</Condition>
+    <Condition Message="Um top-contact zu installieren, muss das .NET Framework 2.0 muss installiert sein.">Installed OR NETFRAMEWORK20</Condition>
+    <Condition Message="Die Installation dieses Produkts konnte nicht durchgeführt werden, weil es auf diesem Betriebssystem nicht unterstützt wird. Weitere Informationen zu den unterstützten Konfigurationen finden Sie in der Produktdokumentation.">(((VersionNT=500 AND ServicePackLevel>=4) OR (VersionNT=501 AND ServicePackLevel>=1) OR (VersionNT=502) ) AND (NOT VersionNT64)) OR (VersionNT=502 AND ServicePackLevel>=1 AND VersionNT64) OR (VersionNT>502)</Condition>
+
+    <WixVariable Id='WixUIBannerBmp' Value='europlan-banner.bmp' />
+    <WixVariable Id='WixUIDialogBmp' Value='europlan-dlg.bmp' />
+    <WixVariable Id='WixUILicenseRtf' Value='eula.rtf' />
+
+    <Property Id="ALLUSERS">1</Property>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLLOCATION" Name="Europlan 2.0">
+          <Directory Id="LogsDir" Name="Logs" />
+        </Directory>
+			</Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuDir" Name="Europlan 2.0" />
+      </Directory>
+    </Directory>
+
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Component Id="Application.Europlan.exe" Guid="{F46A6464-3585-4df6-8840-88563ACE9A32}">
+        <File Id="Application.Europlan.exe" Name="Europlan.exe" Source="..\Application\bin\$(var.SourceDir)\Europlan.exe" Vital="yes" KeyPath="yes" />
+      </Component>
+      <Component Id="Application.Europlan.exe.Shortcut" Guid="{EB7EA824-037C-4069-AC86-36196FE2E9C8}">
+        <RegistryKey Root="HKCU" Key="Software\bluesource\Europlan 2.0">
+          <RegistryValue Value="europlan20" Type="string" KeyPath="yes" />
+        </RegistryKey>
+        <Shortcut Id="Application.Europlan.exe" Directory="ProgramMenuDir" Name="Europlan 2.0" Advertise="no" Target="[INSTALLLOCATION]\Europlan.exe"  Description="Startet die Europlan 2.0 Anwendung" >
+          <Icon Id="Application.Europlan.exe" SourceFile="..\Application\bin\$(var.SourceDir)\Europlan.exe"/>
+        </Shortcut>
+        <RemoveFolder Id="RemoveShorcutFolder" On="uninstall" Directory="ProgramMenuDir" />
+      </Component>
+      <Component Id="Application.Europlan.exe.config" Guid="{F2339A3F-114C-4f9c-AA83-1BE7CD077FA3}">
+        <File Id="Application.Europlan.exe.config" Name="Europlan.exe.config" Source="..\Application\bin\$(var.SourceDir)\Europlan.exe.config" Vital="yes" KeyPath="yes" />
+      </Component>
+      <Component Id="Application.log4net.dll" Guid="{C7DAD039-9AFB-4fad-B09C-43AFADA77A08}">
+        <File Id="Application.log4net.dll" Name="log4net.dll" Source="..\Application\bin\$(var.SourceDir)\log4net.dll" Vital="yes" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="LogsDir">
+      <Component Id="LogsDir" Guid="{841138E6-AD8C-404e-9E48-09CFD7485416}">
+        <CreateFolder>
+          <Permission User="Everyone" GenericAll="yes"/>
+        </CreateFolder>
+      </Component>
+      <Component Id="LogsDir.Europlan.log" Guid="{944DE010-51EC-40cd-8215-B619308B6618}">
+        <RemoveFile Id="LogsDir.Europlan.log" Name="Europlan.log*" On="uninstall" />
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id="ProductFeature" Title="main" Level="1" AllowAdvertise="no" Description="Installiert die europlan 2.0 Anwendung">
+      <ComponentRef Id="Application.Europlan.exe"/>
+      <ComponentRef Id="Application.Europlan.exe.Shortcut"/>
+      <ComponentRef Id="Application.Europlan.exe.config"/>
+      <ComponentRef Id="Application.log4net.dll"/>
+
+      <ComponentRef Id="LogsDir"/>
+      <ComponentRef Id="LogsDir.Europlan.log"/>
+    </Feature>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+    <UIRef Id="WixUI_InstallDir"/>
+
+  </Product>
+</Wix>
