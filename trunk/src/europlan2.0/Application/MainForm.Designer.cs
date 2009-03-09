@@ -111,18 +111,18 @@ namespace Europlan.Application {
 			// 
 			this.BottomRebar1.CommandManager = this.uiCommandManager1;
 			this.BottomRebar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.BottomRebar1.Location = new System.Drawing.Point(0, 489);
+			this.BottomRebar1.Location = new System.Drawing.Point(0, 505);
 			this.BottomRebar1.Name = "BottomRebar1";
-			this.BottomRebar1.Size = new System.Drawing.Size(884, 0);
+			this.BottomRebar1.Size = new System.Drawing.Size(808, 0);
 			this.BottomRebar1.TabIndex = 3;
 			// 
 			// RightRebar1
 			// 
 			this.RightRebar1.CommandManager = this.uiCommandManager1;
 			this.RightRebar1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.RightRebar1.Location = new System.Drawing.Point(884, 24);
+			this.RightRebar1.Location = new System.Drawing.Point(808, 24);
 			this.RightRebar1.Name = "RightRebar1";
-			this.RightRebar1.Size = new System.Drawing.Size(0, 465);
+			this.RightRebar1.Size = new System.Drawing.Size(0, 481);
 			this.RightRebar1.TabIndex = 2;
 			// 
 			// LeftRebar1
@@ -131,7 +131,7 @@ namespace Europlan.Application {
 			this.LeftRebar1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.LeftRebar1.Location = new System.Drawing.Point(0, 24);
 			this.LeftRebar1.Name = "LeftRebar1";
-			this.LeftRebar1.Size = new System.Drawing.Size(0, 465);
+			this.LeftRebar1.Size = new System.Drawing.Size(0, 481);
 			this.LeftRebar1.TabIndex = 1;
 			// 
 			// uiCommandBar1
@@ -148,7 +148,7 @@ namespace Europlan.Application {
 			this.uiCommandBar1.LockCommandBar = Janus.Windows.UI.InheritableBoolean.True;
 			this.uiCommandBar1.Name = "uiCommandBar1";
 			this.uiCommandBar1.RowIndex = 0;
-			this.uiCommandBar1.Size = new System.Drawing.Size(884, 24);
+			this.uiCommandBar1.Size = new System.Drawing.Size(808, 24);
 			this.uiCommandBar1.TabIndex = 0;
 			// 
 			// Hilfe1
@@ -170,7 +170,7 @@ namespace Europlan.Application {
 			this.TopRebar1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.TopRebar1.Location = new System.Drawing.Point(0, 0);
 			this.TopRebar1.Name = "TopRebar1";
-			this.TopRebar1.Size = new System.Drawing.Size(884, 24);
+			this.TopRebar1.Size = new System.Drawing.Size(808, 24);
 			this.TopRebar1.TabIndex = 0;
 			// 
 			// uiCommandManager1
@@ -213,7 +213,7 @@ namespace Europlan.Application {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(884, 489);
+			this.ClientSize = new System.Drawing.Size(808, 505);
 			this.Controls.Add(this.LeftRebar1);
 			this.Controls.Add(this.RightRebar1);
 			this.Controls.Add(this.TopRebar1);

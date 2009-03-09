@@ -17,11 +17,29 @@ namespace Europlan.Application {
 			log4net.Config.XmlConfigurator.Configure();
 			log.Debug("Starting Application");
 
+			if (IsApplicationAlreadyRunning()) {
+				MessageBox.Show("Es läuft bereits eine Instanz von Top-Contact auf diesem Rechner.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return;
+			}
+
 			System.Windows.Forms.Application.EnableVisualStyles();
 			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 			System.Windows.Forms.Application.Run(new MainForm());
 			
 		}
+
+		static bool IsApplicationAlreadyRunning() {
+			string proc = Process.GetCurrentProcess().ProcessName;
+			log.Debug("IsApplicationAlreadyRunning - checking for process: " + proc);
+			Process[] processes = Process.GetProcessesByName(proc);
+			if (processes.Length > 1) {
+				log.Error("IsApplicationAlreadyRunning -process is already running");
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 	}
 
 }
