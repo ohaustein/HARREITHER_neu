@@ -11,5 +11,14 @@ namespace Europlan.Application {
 		public MainForm() {
 			InitializeComponent();
 		}
+
+		private void Beenden_Click(object sender, Janus.Windows.UI.CommandBars.CommandEventArgs e) {
+			// TODO: Ask for saving
+			System.Windows.Forms.Application.Exit();
+		}
+
+		private void Update_Click(object sender, Janus.Windows.UI.CommandBars.CommandEventArgs e) {
+
+		}
 	}
 }
