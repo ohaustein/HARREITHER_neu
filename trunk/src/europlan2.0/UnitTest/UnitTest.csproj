@@ -7,7 +7,7 @@
     <ProjectGuid>{9A2C3D9F-7B0E-415D-8092-01EF5C213A3F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTest</RootNamespace>
+    <RootNamespace>Europlan.UnitTest</RootNamespace>
     <AssemblyName>UnitTest</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
