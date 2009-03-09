@@ -219,7 +219,7 @@ namespace Europlan.Application {
 			this.Controls.Add(this.TopRebar1);
 			this.Controls.Add(this.BottomRebar1);
 			this.Name = "MainForm";
-			this.Text = "Form1";
+			this.Text = "Europlan";
 			((System.ComponentModel.ISupportInitialize)(this.BottomRebar1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.RightRebar1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.LeftRebar1)).EndInit();
