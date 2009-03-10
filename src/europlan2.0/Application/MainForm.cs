@@ -12,13 +12,12 @@ namespace Europlan.Application {
 			InitializeComponent();
 		}
 
-		private void Beenden_Click(object sender, Janus.Windows.UI.CommandBars.CommandEventArgs e) {
-			// TODO: Ask for saving
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+			// TODO: check if anything has to be saved...
 			System.Windows.Forms.Application.Exit();
 		}
 
-		private void Update_Click(object sender, Janus.Windows.UI.CommandBars.CommandEventArgs e) {
 
-		}
+
 	}
 }
