@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using log4net;
 using System.Diagnostics;
+using Star.SettingsXpress;
 
 namespace Europlan.Application {
 	
@@ -17,6 +18,9 @@ namespace Europlan.Application {
 		static void Main() {
 			log4net.Config.XmlConfigurator.Configure();
 			log.Debug("Starting Application");
+
+			// using a customized class of SettingsFile which does not consider the assembly version for storing the settings
+			SettingsFile.Create();
 
 			if (IsApplicationAlreadyRunning()) {
 				MessageBox.Show("Es läuft bereits eine Instanz von Top-Contact auf diesem Rechner.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
