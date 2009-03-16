@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using log4net;
 using System.Diagnostics;
 using Star.SettingsXpress;
+using System.Threading;
+using System.Globalization;
 
 namespace Europlan.Application {
 	
@@ -21,6 +23,10 @@ namespace Europlan.Application {
 
 			// using a customized class of SettingsFile which does not consider the assembly version for storing the settings
 			SettingsFile.Create();
+
+			SettingsKey settings = SettingsFile.Settings["OptionsForm"];
+			string language = settings.GetSetting("Language", Thread.CurrentThread.CurrentUICulture.ToString());
+			Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
 
 			if (IsApplicationAlreadyRunning()) {
 				MessageBox.Show("Es läuft bereits eine Instanz von Europlan auf diesem Rechner.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
