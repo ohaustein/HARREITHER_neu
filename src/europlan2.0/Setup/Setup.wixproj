@@ -62,4 +62,41 @@
 	<Target Name="AfterBuild">
 	</Target>
 	-->
+  <ItemGroup>
+    <BootstrapperFile Include="Microsoft.Net.Framework.2.0">
+      <ProductName>Microsoft .NET Framework 2.0</ProductName>
+    </BootstrapperFile>
+    <BootstrapperFile Include="Microsoft.Windows.Installer.3.1">
+      <ProductName>Microsoft Windows Installer 3.1</ProductName>
+    </BootstrapperFile>
+  </ItemGroup>
+  <Target Name="Bootstrapper" Inputs="$(OutDir)$(TargetFileName)" Outputs="$(OutDir)\Setup.exe" Condition=" '$(OutputType)'=='package' ">
+    <GenerateBootstrapper ApplicationName="top-contact" ApplicationFile="instmsi.exe" BootstrapperItems="@(BootstrapperFile)" ComponentsLocation="HomeSite" OutputPath="$(OutputPath)\en-US\" Culture="en-US" />
+  </Target>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets" />
+  <PropertyGroup>
+    <CoreBuildDependsOn>
+      BuildOnlySettings;
+      PrepareForBuild;
+      PreBuildEvent;
+      ResolveReferences;
+      AddCompilerDefineConstants;
+      CompileAndLink;
+      GetTargetPath;
+      IncrementalClean;
+	  Bootstrapper;
+      PostBuildEvent
+    </CoreBuildDependsOn>
+    <PostBuildEvent>copy "$(SolutionDir)StartSetup\$(OutDir)instmsi.exe" "$(TargetDir)en-US\instmsi.exe"
+copy "$(TargetDir)europlan20.msi" "$(TargetDir)setup.msi"
+cd $(ProjectDir)
+for /F "tokens=1,2,3,4,5 delims=/.: " %%a in (%27utils\datetime%27) do set SUFFIX=%%c-%%b-%%a_%%d%%e
+mkdir $(TargetDir)\setup-%SUFFIX%
+mkdir $(TargetDir)\latest_setup
+7z.exe a "$(TargetDir)setup-%SUFFIX%\europlan20.zip" "$(TargetDir)en-US\instmsi.exe" "$(TargetDir)en-US\setup.exe" "$(TargetDir)setup.msi" || echo Postbuild: warning CS0003: Zip archive was not built
+del "$(TargetDir)setup.msi"
+ChilkatZipSE.exe -u BLUESOSFX_7WD8XKDznOuG -cfg chilkat-settings.xml -exe "$(TargetDir)setup-%SUFFIX%\europlan20.exe" "$(TargetDir)setup-%SUFFIX%\europlan20.zip" || echo Postbuild: warning CS0004: Setup exe was not built
+copy /y $(TargetDir)\setup-%SUFFIX%\%2a.%2a $(TargetDir)\latest_setup
+set ERRORLEVEL=0</PostBuildEvent>
+  </PropertyGroup>
 </Project>
