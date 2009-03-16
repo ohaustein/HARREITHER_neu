@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Star.SettingsXpress;
+using System.Resources;
+using System.Reflection;
+using System.Threading;
 
 namespace Europlan.Application {
 	public partial class MainForm : Form {
@@ -39,6 +42,21 @@ namespace Europlan.Application {
 				settings.StoreSetting("Maximized", true);
 			}
 			SettingsFile.Update();
+		}
+
+		private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
+			OptionsForm options = new OptionsForm();
+			DialogResult result = options.ShowDialog();
+			if (result == DialogResult.OK && options.RestartRequired) {
+				System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(this.GetType());
+				string message = resources.GetString("RestartMessage", Thread.CurrentThread.CurrentUICulture);
+				string caption = resources.GetString("RestartCaption");
+				result = MessageBox.Show(message, caption, MessageBoxButtons.OKCancel);
+				if (result == DialogResult.OK) {
+					System.Windows.Forms.Application.Restart();
+				}
+			}
+			options.Dispose();
 		}
 
 
