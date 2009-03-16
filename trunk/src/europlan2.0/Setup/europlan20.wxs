@@ -30,6 +30,8 @@
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLLOCATION" Name="Europlan 2.0">
           <Directory Id="LogsDir" Name="Logs" />
+          <Directory Id="Lang_DE" Name="de" />
+          <Directory Id="Lang_EN" Name="en" />
         </Directory>
 			</Directory>
       <Directory Id="ProgramMenuFolder">
@@ -58,6 +60,18 @@
       </Component>
     </DirectoryRef>
 
+    <DirectoryRef Id="Lang_DE">
+      <Component Id="Application.de.Europlan.resources.dll" Guid="{8A55AFCC-725B-4fdc-A62F-B6E070D6445C}">
+        <File Id="Application.de.Europlan.resources.dll" Name="Europlan.resources.dll" Source="..\Application\bin\$(var.SourceDir)\de\Europlan.resources.dll" Vital="yes" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="Lang_EN">
+      <Component Id="Application.en.Europlan.resources.dll" Guid="{333A0DDA-9E6A-43e0-A5A1-A19E6E0E5A51}">
+        <File Id="Application.en.Europlan.resources.dll" Name="Europlan.resources.dll" Source="..\Application\bin\$(var.SourceDir)\en\Europlan.resources.dll" Vital="yes" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
     <DirectoryRef Id="LogsDir">
       <Component Id="LogsDir" Guid="{841138E6-AD8C-404e-9E48-09CFD7485416}">
         <CreateFolder>
@@ -74,6 +88,9 @@
       <ComponentRef Id="Application.Europlan.exe.Shortcut"/>
       <ComponentRef Id="Application.Europlan.exe.config"/>
       <ComponentRef Id="Application.log4net.dll"/>
+
+      <ComponentRef Id="Application.de.Europlan.resources.dll"/>
+      <ComponentRef Id="Application.en.Europlan.resources.dll"/>
 
       <ComponentRef Id="LogsDir"/>
       <ComponentRef Id="LogsDir.Europlan.log"/>
