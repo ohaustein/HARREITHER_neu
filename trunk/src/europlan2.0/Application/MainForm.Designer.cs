@@ -23,6 +23,7 @@ namespace Europlan.Application {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.mainMenu = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -34,61 +35,79 @@ namespace Europlan.Application {
 			// 
 			// mainMenu
 			// 
+			this.mainMenu.AccessibleDescription = null;
+			this.mainMenu.AccessibleName = null;
+			resources.ApplyResources(this.mainMenu, "mainMenu");
+			this.mainMenu.BackgroundImage = null;
+			this.mainMenu.Font = null;
 			this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem});
-			this.mainMenu.Location = new System.Drawing.Point(0, 0);
 			this.mainMenu.Name = "mainMenu";
-			this.mainMenu.Size = new System.Drawing.Size(808, 24);
-			this.mainMenu.TabIndex = 0;
-			this.mainMenu.Text = "mainMenu";
 			// 
 			// fileToolStripMenuItem
 			// 
+			this.fileToolStripMenuItem.AccessibleDescription = null;
+			this.fileToolStripMenuItem.AccessibleName = null;
+			resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
+			this.fileToolStripMenuItem.BackgroundImage = null;
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-			this.fileToolStripMenuItem.Text = "&Datei";
+			this.fileToolStripMenuItem.ShortcutKeyDisplayString = null;
 			// 
 			// exitToolStripMenuItem
 			// 
+			this.exitToolStripMenuItem.AccessibleDescription = null;
+			this.exitToolStripMenuItem.AccessibleName = null;
+			resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
+			this.exitToolStripMenuItem.BackgroundImage = null;
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-			this.exitToolStripMenuItem.Text = "&Beednen";
+			this.exitToolStripMenuItem.ShortcutKeyDisplayString = null;
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
+			this.helpToolStripMenuItem.AccessibleDescription = null;
+			this.helpToolStripMenuItem.AccessibleName = null;
+			resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+			this.helpToolStripMenuItem.BackgroundImage = null;
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.infoToolStripMenuItem,
             this.updateToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-			this.helpToolStripMenuItem.Text = "&Hilfe";
+			this.helpToolStripMenuItem.ShortcutKeyDisplayString = null;
 			// 
 			// infoToolStripMenuItem
 			// 
+			this.infoToolStripMenuItem.AccessibleDescription = null;
+			this.infoToolStripMenuItem.AccessibleName = null;
+			resources.ApplyResources(this.infoToolStripMenuItem, "infoToolStripMenuItem");
+			this.infoToolStripMenuItem.BackgroundImage = null;
 			this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-			this.infoToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-			this.infoToolStripMenuItem.Text = "Info";
+			this.infoToolStripMenuItem.ShortcutKeyDisplayString = null;
 			// 
 			// updateToolStripMenuItem
 			// 
+			this.updateToolStripMenuItem.AccessibleDescription = null;
+			this.updateToolStripMenuItem.AccessibleName = null;
+			resources.ApplyResources(this.updateToolStripMenuItem, "updateToolStripMenuItem");
+			this.updateToolStripMenuItem.BackgroundImage = null;
 			this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-			this.updateToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-			this.updateToolStripMenuItem.Text = "Auf Aktualisierungen prüfen...";
+			this.updateToolStripMenuItem.ShortcutKeyDisplayString = null;
 			// 
 			// MainForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AccessibleDescription = null;
+			this.AccessibleName = null;
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(808, 505);
+			this.BackgroundImage = null;
 			this.Controls.Add(this.mainMenu);
+			this.Font = null;
+			this.Icon = null;
 			this.MainMenuStrip = this.mainMenu;
 			this.Name = "MainForm";
-			this.Text = "Europlan";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.mainMenu.ResumeLayout(false);
