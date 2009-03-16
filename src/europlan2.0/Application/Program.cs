@@ -23,7 +23,7 @@ namespace Europlan.Application {
 			SettingsFile.Create();
 
 			if (IsApplicationAlreadyRunning()) {
-				MessageBox.Show("Es läuft bereits eine Instanz von Top-Contact auf diesem Rechner.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("Es läuft bereits eine Instanz von Europlan auf diesem Rechner.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
 
@@ -38,7 +38,7 @@ namespace Europlan.Application {
 			log.Debug("IsApplicationAlreadyRunning - checking for process: " + proc);
 			Process[] processes = Process.GetProcessesByName(proc);
 			if (processes.Length > 1) {
-				log.Error("IsApplicationAlreadyRunning -process is already running");
+				log.Error("IsApplicationAlreadyRunning - process is already running");
 				return true;
 			} else {
 				return false;
