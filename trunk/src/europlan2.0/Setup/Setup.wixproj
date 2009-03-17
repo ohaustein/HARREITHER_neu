@@ -71,7 +71,7 @@
     </BootstrapperFile>
   </ItemGroup>
   <Target Name="Bootstrapper" Inputs="$(OutDir)$(TargetFileName)" Outputs="$(OutDir)\Setup.exe" Condition=" '$(OutputType)'=='package' ">
-    <GenerateBootstrapper ApplicationName="top-contact" ApplicationFile="instmsi.exe" BootstrapperItems="@(BootstrapperFile)" ComponentsLocation="HomeSite" OutputPath="$(OutputPath)\en-US\" Culture="en-US" />
+    <GenerateBootstrapper ApplicationName="Europlan 2.0" ApplicationFile="instmsi.exe" BootstrapperItems="@(BootstrapperFile)" ComponentsLocation="HomeSite" OutputPath="$(OutputPath)\en-US\" Culture="en-US" />
   </Target>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets" />
   <PropertyGroup>
