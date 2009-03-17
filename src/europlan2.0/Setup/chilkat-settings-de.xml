@@ -3,8 +3,8 @@
 <Zip2SecureExe>
     <PublisherName>bluesource mobile solutions gmbh</PublisherName>
     <PublisherUrl>http://www.bluesource.at/</PublisherUrl>
-    <ExeFile>bin\Release\europlan20.exe</ExeFile>
-    <ZipFile>bin\Release\europlan20.zip</ZipFile>
+    <ExeFile />
+    <ZipFile />
     <Password />
     <SfxConfig>
         <AutoTemp>1</AutoTemp>
