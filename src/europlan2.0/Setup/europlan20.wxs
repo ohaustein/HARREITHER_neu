@@ -17,7 +17,7 @@
     <PropertyRef Id="NETFRAMEWORK20"/>
     <Condition Message="Für das Setup muss der Benutzer der Administratorgruppe angehören, um die Installation fortsetzen zu können. Das Setup wird abgebrochen, weil der aktuelle Benutzer nicht der Administratorgruppe angehört.">AdminUser</Condition>
     <Condition Message="Für das Setup muss der Benutzer der Administratorgruppe angehören, um die Installation fortsetzen zu können. Das Setup wird abgebrochen, weil der aktuelle Benutzer nicht der Administratorgruppe angehört.">Privileged</Condition>
-    <Condition Message="Um top-contact zu installieren, muss das .NET Framework 2.0 muss installiert sein.">Installed OR NETFRAMEWORK20</Condition>
+    <Condition Message="Um Europlan 2.0 zu installieren, muss das .NET Framework 2.0 muss installiert sein.">Installed OR NETFRAMEWORK20</Condition>
     <Condition Message="Die Installation dieses Produkts konnte nicht durchgeführt werden, weil es auf diesem Betriebssystem nicht unterstützt wird. Weitere Informationen zu den unterstützten Konfigurationen finden Sie in der Produktdokumentation.">(((VersionNT=500 AND ServicePackLevel>=4) OR (VersionNT=501 AND ServicePackLevel>=1) OR (VersionNT=502) ) AND (NOT VersionNT64)) OR (VersionNT=502 AND ServicePackLevel>=1 AND VersionNT64) OR (VersionNT>502)</Condition>
 
     <WixVariable Id='WixUIBannerBmp' Value='imgs\europlan-banner.bmp' />
