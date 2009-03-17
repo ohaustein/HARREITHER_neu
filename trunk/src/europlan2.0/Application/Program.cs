@@ -44,8 +44,17 @@ namespace Europlan.Application {
 			log.Debug("IsApplicationAlreadyRunning - checking for process: " + proc);
 			Process[] processes = Process.GetProcessesByName(proc);
 			if (processes.Length > 1) {
-				log.Error("IsApplicationAlreadyRunning - process is already running");
-				return true;
+				log.Error("Process is already running - waiting as app may have been restarted");
+				// wait as maybe the application got restarted and the process is not killed completely
+				System.Threading.Thread.Sleep(2000);
+				processes = Process.GetProcessesByName(proc);
+				if (processes.Length > 1) {
+					log.Error("Process is already running - waiting did not help");
+					return true;
+				} else {
+					log.Debug("Waiting solved the problem - application can be started");
+					return false;
+				}
 			} else {
 				return false;
 			}
