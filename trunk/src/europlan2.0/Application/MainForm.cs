@@ -14,6 +14,7 @@ namespace Europlan.Application {
 	public partial class MainForm : Form {
 		public MainForm() {
 			InitializeComponent();
+			this.updateController.CheckForUpdateAsync();
 		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -61,6 +62,12 @@ namespace Europlan.Application {
 
 		private void updateToolStripMenuItem_Click(object sender, EventArgs e) {
 			this.updateController.UpdateInteractive();
+		}
+
+		private void updateController_CheckForUpdateCompleted(object sender, Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs e) {
+			if (e.Error == null  && e.Result) {
+				this.updateController.UpdateInteractive(this, Kjs.AppLife.Update.Controller.ErrorDisplayLevel.ShowExceptionMessage);
+			}
 		}
 
 
