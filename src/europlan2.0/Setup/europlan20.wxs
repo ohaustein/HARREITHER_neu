@@ -58,12 +58,18 @@
       <Component Id="Application.log4net.dll" Guid="{C7DAD039-9AFB-4fad-B09C-43AFADA77A08}">
         <File Id="Application.log4net.dll" Name="log4net.dll" Source="..\Application\bin\$(var.SourceDir)\log4net.dll" Vital="yes" KeyPath="yes" />
       </Component>
+      <Component Id="Application.Kjs.AppLife.Update.Controller.dll" Guid="{0D32A437-4F68-4f20-BF57-E6DBE86151F7}">
+        <File Id="Application.Kjs.AppLife.Update.Controller.dll" Name="Kjs.AppLife.Update.Controller.dll" Source="..\Application\bin\$(var.SourceDir)\Kjs.AppLife.Update.Controller.dll" Vital="yes" KeyPath="yes" />
+      </Component>      
     </DirectoryRef>
 
     <DirectoryRef Id="Lang_DE">
       <Component Id="Application.de.Europlan.resources.dll" Guid="{8A55AFCC-725B-4fdc-A62F-B6E070D6445C}">
         <File Id="Application.de.Europlan.resources.dll" Name="Europlan.resources.dll" Source="..\Application\bin\$(var.SourceDir)\de\Europlan.resources.dll" Vital="yes" KeyPath="yes" />
       </Component>
+      <Component Id="Application.de.Kjs.AppLife.Update.Controller.resources.dll" Guid="{BEAD2E7D-E846-48ad-A8B9-E37D7F83635A}">
+        <File Id="Application.de.Kjs.AppLife.Update.Controller.resources.dll" Name="Kjs.AppLife.Update.Controller.resources.dll" Source="..\Application\bin\$(var.SourceDir)\de\Kjs.AppLife.Update.Controller.resources.dll" Vital="yes" KeyPath="yes" />
+      </Component>       
     </DirectoryRef>
 
     <DirectoryRef Id="Lang_EN">
@@ -88,8 +94,11 @@
       <ComponentRef Id="Application.Europlan.exe.Shortcut"/>
       <ComponentRef Id="Application.Europlan.exe.config"/>
       <ComponentRef Id="Application.log4net.dll"/>
+      <ComponentRef Id="Application.Kjs.AppLife.Update.Controller.dll"/>
 
       <ComponentRef Id="Application.de.Europlan.resources.dll"/>
+      <ComponentRef Id="Application.de.Kjs.AppLife.Update.Controller.resources.dll"/>
+
       <ComponentRef Id="Application.en.Europlan.resources.dll"/>
 
       <ComponentRef Id="LogsDir"/>
