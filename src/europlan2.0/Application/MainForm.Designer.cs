@@ -95,6 +95,7 @@ namespace Europlan.Application {
 			// 
 			this.updateController.BypassProxyOnLocal = true;
 			this.updateController.Version = ((System.Version)(resources.GetObject("updateController.Version")));
+			this.updateController.CheckForUpdateCompleted += new Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventHandler(this.updateController_CheckForUpdateCompleted);
 			// 
 			// MainForm
 			// 
