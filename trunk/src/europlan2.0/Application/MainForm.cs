@@ -59,6 +59,10 @@ namespace Europlan.Application {
 			options.Dispose();
 		}
 
+		private void updateToolStripMenuItem_Click(object sender, EventArgs e) {
+			this.updateController.UpdateInteractive();
+		}
+
 
 
 	}
