@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Zip2SecureExe>
+    <PublisherName>bluesource mobile solutions gmbh</PublisherName>
+    <PublisherUrl>http://www.bluesource.at/</PublisherUrl>
+    <ExeFile />
+    <ZipFile />
+    <Password />
+    <SfxConfig>
+        <AutoTemp>1</AutoTemp>
+        <DeleteAfterSetup>0</DeleteAfterSetup>
+        <ShowFin>0</ShowFin>
+        <ShowMain>0</ShowMain>
+        <ShowProgress>1</ShowProgress>
+        <WaitForSetup>0</WaitForSetup>
+        <Encryption>0</Encryption>
+        <KeyLength>128</KeyLength>
+        <MainTitle />
+        <MainCaption />
+        <FinTitle />
+        <FinCaption />
+        <ProgressTitle>Europlan 2.0 Setup</ProgressTitle>
+        <ProgressCaption>Extracting setup ...</ProgressCaption>
+        <PwTitle />
+        <PwCaption />
+        <SetupExe>setup.exe</SetupExe>
+        <UnzipDir />
+        <DefaultDir />
+        <IconFile />
+        <Url />
+    </SfxConfig>
+</Zip2SecureExe>
