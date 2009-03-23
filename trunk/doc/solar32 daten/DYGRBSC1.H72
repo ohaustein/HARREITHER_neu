@@ -1,0 +1,1688 @@
+[DATEI]
+CONTROL="DYGRBSC1"
+QUELLE="H72"
+ZIEL="SOL"
+NACHRICHT=""
+VERSION="01"
+ZEIT="200901271539"
+
+[PROJEKT]
+A_GRUND=109.20
+L_GRUND=12000
+LAMBDA_G=2.00
+GW_TIEFE=2.0
+ZETA=0.50
+GEB_TYP_BEZ="Einfamilienhaus"
+GEB_LAGE_BEZ="moderate Abschirmung"
+GEB_MASSE_BEZ="mittelschwere Gebäudemasse"
+GEB_LUFT_BEZ="sehr dicht"
+THETA_E=-13.0
+THETA_ME=8.0
+GEB_PHIN=8908
+GEB_PHIRH=0
+GEB_PHIHL=8908
+VAR_BEM=""
+VAR_BEZ="Standard-Variante"
+VAR_NR=1
+WBRUECKE12831="1"
+WGRAD_WR_JN="0"
+BODEN_EXPON=42200
+BODEN_WL=2.00
+LUFT_DW=3.00
+VOL_GEB_NETTO=0.00
+GEB_TYP="0"
+GEB_LAGE="1"
+GEB_MASSE="1"
+GEB_LUFT="0"
+
+[EBENE]
+CODE="01"
+TEXT="Untergeschoss"
+
+   [ZONE]
+   CODE="001"
+   TEXT="Untergeschoss"
+
+      [FBEZUG]
+      CODE="001"
+      TEMP_HEIZ=20.0
+      TEXT="Keller 2"
+
+      [RAUMTAB]
+      CODE="001"
+      A_RAUM=5.49
+      L_MAX_RAUM=2340
+      B_RAUM=2340
+      VOL_RAUM=13.2
+      HOEHE_RAUM=2400
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.55
+
+      [RAUMERG]
+      CODE="001"
+      Q_NORM=210
+      Q_LUFT=74
+      Q_HEIZ=210
+      Q_BEREIN=188
+      Q_AUFHEIZ=0
+      PHI_HL=210
+      PHI_RH=0
+      PHI_HLNETTO=210
+      PHI_T=136
+      PHI_TE=136
+      PHI_VMIN=74
+      PHI_VINF=0
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=2200
+         LHOEHE=2950
+         FUNKTION_IST="95"
+         RICHTUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=3600
+         LHOEHE=2950
+         FUNKTION_IST="95"
+         RICHTUNG_IST=270
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=7
+         ANZAHL=1
+         BREITE=2340
+         LHOEHE=2340
+         FUNKTION_IST="96"
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="FB02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=8
+         ANZAHL=1
+         BREITE=1800
+         LHOEHE=2950
+         FUNKTION_IST="01"
+         RICHTUNG_IST=180
+         ABZUG="0"
+         *[KONSTR]
+         CODE="IW01"
+         QUELLE="H72"
+         TYP_GRENZ="2"
+
+      [FBEZUG]
+      CODE="002"
+      TEMP_HEIZ=24.0
+      TEXT="Keller 1"
+
+      [RAUMTAB]
+      CODE="002"
+      A_RAUM=22.20
+      L_MAX_RAUM=4710
+      B_RAUM=4710
+      VOL_RAUM=53.3
+      HOEHE_RAUM=2400
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.55
+
+      [RAUMERG]
+      CODE="002"
+      Q_NORM=728
+      Q_LUFT=335
+      Q_HEIZ=728
+      Q_BEREIN=669
+      Q_AUFHEIZ=0
+      PHI_HL=728
+      PHI_RH=0
+      PHI_HLNETTO=728
+      PHI_T=393
+      PHI_TE=393
+      PHI_VMIN=335
+      PHI_VINF=80
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=1000
+         LHOEHE=600
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=0
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=1000
+         LHOEHE=2200
+         FUNKTION_IST="04"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=0
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AT01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=5850
+         LHOEHE=2950
+         FUNKTION_IST="95"
+         RICHTUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=4
+         ANZAHL=1
+         BREITE=4500
+         LHOEHE=2950
+         FUNKTION_IST="95"
+         RICHTUNG_IST=90
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+         [BTTAB]
+         CODE="05"
+         ID=5
+         ANZAHL=1
+         BREITE=1500
+         LHOEHE=2950
+         FUNKTION_IST="01"
+         RICHTUNG_IST=270
+         ABZUG="0"
+         *[KONSTR]
+         CODE="IW01"
+         QUELLE="H72"
+         TYP_GRENZ="2"
+
+         [BTTAB]
+         CODE="06"
+         ID=6
+         ANZAHL=1
+         BREITE=4710
+         LHOEHE=4710
+         FUNKTION_IST="96"
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="FB02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+      [FBEZUG]
+      CODE="003"
+      TEMP_HEIZ=18.0
+      TEXT="Vorkeller"
+
+      [RAUMTAB]
+      CODE="003"
+      A_RAUM=14.95
+      L_MAX_RAUM=3870
+      B_RAUM=3870
+      VOL_RAUM=35.9
+      HOEHE_RAUM=2400
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.55
+
+      [RAUMERG]
+      CODE="003"
+      Q_NORM=506
+      Q_LUFT=189
+      Q_HEIZ=506
+      Q_BEREIN=451
+      Q_AUFHEIZ=0
+      PHI_HL=506
+      PHI_RH=0
+      PHI_HLNETTO=506
+      PHI_T=317
+      PHI_TE=317
+      PHI_VMIN=189
+      PHI_VINF=0
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=3300
+         LHOEHE=2950
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW02"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=2
+         BREITE=800
+         LHOEHE=2010
+         FUNKTION_IST="05"
+         RICHTUNG_IST=270
+         ABZUG="1"
+         *[KONSTR]
+         CODE="IT01"
+         QUELLE="H72"
+         TYP_GRENZ="2"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=3000
+         LHOEHE=2950
+         FUNKTION_IST="01"
+         RICHTUNG_IST=270
+         ABZUG="0"
+         *[KONSTR]
+         CODE="IW01"
+         QUELLE="H72"
+         TYP_GRENZ="2"
+
+         [BTTAB]
+         CODE="04"
+         ID=4
+         ANZAHL=1
+         BREITE=3870
+         LHOEHE=3870
+         FUNKTION_IST="96"
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="FB02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+      [FBEZUG]
+      CODE="004"
+      TEMP_HEIZ=18.0
+      TEXT="Technikraum"
+
+      [RAUMTAB]
+      CODE="004"
+      A_RAUM=16.15
+      L_MAX_RAUM=4020
+      B_RAUM=4020
+      VOL_RAUM=38.8
+      HOEHE_RAUM=2400
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.55
+
+      [RAUMERG]
+      CODE="004"
+      Q_NORM=409
+      Q_LUFT=204
+      Q_HEIZ=409
+      Q_BEREIN=365
+      Q_AUFHEIZ=0
+      PHI_HL=409
+      PHI_RH=0
+      PHI_HLNETTO=409
+      PHI_T=204
+      PHI_TE=204
+      PHI_VMIN=204
+      PHI_VINF=49
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=1000
+         LHOEHE=600
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=5100
+         LHOEHE=2950
+         FUNKTION_IST="95"
+         RICHTUNG_IST=180
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=3650
+         LHOEHE=2950
+         FUNKTION_IST="95"
+         RICHTUNG_IST=270
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=5
+         ANZAHL=1
+         BREITE=2800
+         LHOEHE=2950
+         FUNKTION_IST="01"
+         RICHTUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="IW01"
+         QUELLE="H72"
+         TYP_GRENZ="2"
+
+         [BTTAB]
+         CODE="05"
+         ID=6
+         ANZAHL=1
+         BREITE=4020
+         LHOEHE=4020
+         FUNKTION_IST="96"
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="FB02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+      [FBEZUG]
+      CODE="005"
+      TEMP_HEIZ=20.0
+      TEXT="Waschküche"
+
+      [RAUMTAB]
+      CODE="005"
+      A_RAUM=9.13
+      L_MAX_RAUM=3020
+      B_RAUM=3020
+      VOL_RAUM=21.9
+      HOEHE_RAUM=2400
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.55
+
+      [RAUMERG]
+      CODE="005"
+      Q_NORM=438
+      Q_LUFT=123
+      Q_HEIZ=438
+      Q_BEREIN=398
+      Q_AUFHEIZ=0
+      PHI_HL=438
+      PHI_RH=0
+      PHI_HLNETTO=438
+      PHI_T=315
+      PHI_TE=315
+      PHI_VMIN=123
+      PHI_VINF=29
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=1000
+         LHOEHE=600
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=2900
+         LHOEHE=2950
+         FUNKTION_IST="95"
+         RICHTUNG_IST=180
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=3900
+         LHOEHE=2950
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW02"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=4
+         ANZAHL=1
+         BREITE=3020
+         LHOEHE=3020
+         FUNKTION_IST="96"
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="FB02"
+         QUELLE="H72"
+         TYP_GRENZ="3"
+         TYP_GRENZ_RAND="0"
+
+[EBENE]
+CODE="02"
+TEXT="Erdgeschoss"
+
+   [ZONE]
+   CODE="002"
+   TEXT="Erdgeschoss"
+
+      [FBEZUG]
+      CODE="001"
+      TEMP_HEIZ=22.0
+      TEXT="Essen Wohnen"
+
+      [RAUMTAB]
+      CODE="001"
+      A_RAUM=45.92
+      L_MAX_RAUM=6780
+      B_RAUM=6780
+      VOL_RAUM=120.8
+      HOEHE_RAUM=2630
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.40
+
+      [RAUMERG]
+      CODE="001"
+      Q_NORM=1517
+      Q_LUFT=719
+      Q_HEIZ=1517
+      Q_BEREIN=1472
+      Q_AUFHEIZ=0
+      PHI_HL=1517
+      PHI_RH=0
+      PHI_HLNETTO=1517
+      PHI_T=798
+      PHI_TE=798
+      PHI_VMIN=719
+      PHI_VINF=259
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=900
+         LHOEHE=2300
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=0
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=9000
+         LHOEHE=3030
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=1000
+         LHOEHE=2300
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=6
+         ANZAHL=1
+         BREITE=3600
+         LHOEHE=2300
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="05"
+         ID=9
+         ANZAHL=1
+         BREITE=8300
+         LHOEHE=3030
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="06"
+         ID=13
+         ANZAHL=1
+         BREITE=4250
+         LHOEHE=3500
+         FUNKTION_IST="08"
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="FB01"
+         QUELLE="H72"
+         TYP_GRENZ="2"
+
+         [BTTAB]
+         CODE="07"
+         ID=14
+         ANZAHL=1
+         BREITE=4500
+         LHOEHE=3030
+         FUNKTION_IST="00"
+         RICHTUNG_IST=90
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="2"
+
+      [FBEZUG]
+      CODE="002"
+      TEMP_HEIZ=18.0
+      TEXT="Vorraum"
+
+      [RAUMTAB]
+      CODE="002"
+      A_RAUM=13.66
+      L_MAX_RAUM=3700
+      B_RAUM=3700
+      VOL_RAUM=35.9
+      HOEHE_RAUM=2630
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.40
+
+      [RAUMERG]
+      CODE="002"
+      Q_NORM=402
+      Q_LUFT=189
+      Q_HEIZ=402
+      Q_BEREIN=402
+      Q_AUFHEIZ=0
+      PHI_HL=402
+      PHI_RH=0
+      PHI_HLNETTO=402
+      PHI_T=212
+      PHI_TE=212
+      PHI_VMIN=189
+      PHI_VINF=45
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=900
+         LHOEHE=2010
+         FUNKTION_IST="04"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AT01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=3
+         ANZAHL=1
+         BREITE=1150
+         LHOEHE=2300
+         FUNKTION_IST="04"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AT01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=5
+         ANZAHL=1
+         BREITE=5700
+         LHOEHE=3030
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+      [FBEZUG]
+      CODE="003"
+      TEMP_HEIZ=18.0
+      TEXT="WC"
+
+      [RAUMTAB]
+      CODE="003"
+      A_RAUM=2.65
+      L_MAX_RAUM=1630
+      B_RAUM=1630
+      VOL_RAUM=7.0
+      HOEHE_RAUM=2630
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=1.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.40
+
+      [RAUMERG]
+      CODE="003"
+      Q_NORM=233
+      Q_LUFT=110
+      Q_HEIZ=233
+      Q_BEREIN=233
+      Q_AUFHEIZ=0
+      PHI_HL=233
+      PHI_RH=0
+      PHI_HLNETTO=233
+      PHI_T=122
+      PHI_TE=122
+      PHI_VMIN=110
+      PHI_VINF=9
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=900
+         LHOEHE=2300
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=2500
+         LHOEHE=3030
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=1350
+         LHOEHE=3030
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=4
+         ANZAHL=1
+         BREITE=1600
+         LHOEHE=3030
+         FUNKTION_IST="01"
+         TEMP_NACHBAR_IST=15.0
+         RICHTUNG_IST=270
+         ABZUG="0"
+         *[KONSTR]
+         CODE="IW01"
+         QUELLE="H72"
+         TYP_GRENZ="2"
+
+      [FBEZUG]
+      CODE="004"
+      TEMP_HEIZ=20.0
+      TEXT="Kochen"
+
+      [RAUMTAB]
+      CODE="004"
+      A_RAUM=13.13
+      L_MAX_RAUM=3620
+      B_RAUM=3620
+      VOL_RAUM=34.5
+      HOEHE_RAUM=2630
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.40
+
+      [RAUMERG]
+      CODE="004"
+      Q_NORM=458
+      Q_LUFT=194
+      Q_HEIZ=458
+      Q_BEREIN=458
+      Q_AUFHEIZ=0
+      PHI_HL=458
+      PHI_RH=0
+      PHI_HLNETTO=458
+      PHI_T=264
+      PHI_TE=264
+      PHI_VMIN=194
+      PHI_VINF=70
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=2300
+         LHOEHE=900
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=4100
+         LHOEHE=3030
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=1000
+         LHOEHE=2300
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=4
+         ANZAHL=1
+         BREITE=3750
+         LHOEHE=3030
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+[EBENE]
+CODE="03"
+TEXT="Dachgeschoss"
+
+   [ZONE]
+   CODE="003"
+   TEXT="Dachgeschoss"
+
+      [FBEZUG]
+      CODE="001"
+      TEMP_HEIZ=22.0
+      TEXT="Zimmer 1"
+
+      [RAUMTAB]
+      CODE="001"
+      A_RAUM=12.30
+      L_MAX_RAUM=3510
+      B_RAUM=3510
+      VOL_RAUM=36.9
+      HOEHE_RAUM=3000
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.25
+
+      [RAUMERG]
+      CODE="001"
+      Q_NORM=610
+      Q_LUFT=220
+      Q_HEIZ=610
+      Q_BEREIN=568
+      Q_AUFHEIZ=0
+      PHI_HL=610
+      PHI_RH=0
+      PHI_HLNETTO=610
+      PHI_T=391
+      PHI_TE=391
+      PHI_VMIN=220
+      PHI_VINF=79
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=900
+         LHOEHE=2300
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=0
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=4200
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=2300
+         LHOEHE=800
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=4
+         ANZAHL=1
+         BREITE=3700
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="05"
+         ID=5
+         ANZAHL=1
+         BREITE=3510
+         LHOEHE=3510
+         FUNKTION_IST="06"
+         TEMP_NACHBAR_IST=-13.0
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="DA01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="06"
+         ID=7
+         ANZAHL=1
+         BREITE=2000
+         LHOEHE=3500
+         FUNKTION_IST="08"
+         TEMP_NACHBAR_IST=-13.0
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="FB03"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+      [FBEZUG]
+      CODE="002"
+      TEMP_HEIZ=22.0
+      TEXT="Zimmer 2"
+
+      [RAUMTAB]
+      CODE="002"
+      A_RAUM=14.94
+      L_MAX_RAUM=3870
+      B_RAUM=3870
+      VOL_RAUM=44.8
+      HOEHE_RAUM=3000
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.25
+
+      [RAUMERG]
+      CODE="002"
+      Q_NORM=623
+      Q_LUFT=267
+      Q_HEIZ=623
+      Q_BEREIN=623
+      Q_AUFHEIZ=0
+      PHI_HL=623
+      PHI_RH=0
+      PHI_HLNETTO=623
+      PHI_T=357
+      PHI_TE=357
+      PHI_VMIN=267
+      PHI_VINF=96
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=900
+         LHOEHE=2300
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=0
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=4000
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=2300
+         LHOEHE=800
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=4
+         ANZAHL=1
+         BREITE=3600
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="05"
+         ID=5
+         ANZAHL=1
+         BREITE=3870
+         LHOEHE=3870
+         FUNKTION_IST="06"
+         TEMP_NACHBAR_IST=-13.0
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="DA01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+      [FBEZUG]
+      CODE="003"
+      TEMP_HEIZ=24.0
+      TEXT="Bad"
+
+      [RAUMTAB]
+      CODE="003"
+      A_RAUM=13.26
+      L_MAX_RAUM=3640
+      B_RAUM=3640
+      VOL_RAUM=39.8
+      HOEHE_RAUM=3000
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=1.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.25
+
+      [RAUMERG]
+      CODE="003"
+      Q_NORM=1381
+      Q_LUFT=751
+      Q_HEIZ=1381
+      Q_BEREIN=1374
+      Q_AUFHEIZ=0
+      PHI_HL=1381
+      PHI_RH=0
+      PHI_HLNETTO=1381
+      PHI_T=630
+      PHI_TE=492
+      PHI_VMIN=751
+      PHI_VINF=60
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=4
+         BREITE=900
+         LHOEHE=2300
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=4900
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=1200
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=4
+         ANZAHL=1
+         BREITE=1200
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="05"
+         ID=5
+         ANZAHL=1
+         BREITE=1200
+         LHOEHE=3250
+         FUNKTION_IST="01"
+         TEMP_NACHBAR_IST=20.0
+         RICHTUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="IW02"
+         QUELLE="H72"
+         TYP_GRENZ="1"
+
+         [BTTAB]
+         CODE="06"
+         ID=11
+         ANZAHL=1
+         BREITE=800
+         LHOEHE=2010
+         FUNKTION_IST="05"
+         TEMP_NACHBAR_IST=18.0
+         RICHTUNG_IST=90
+         ABZUG="1"
+         *[KONSTR]
+         CODE="IT01"
+         QUELLE="H72"
+         TYP_GRENZ="1"
+
+         [BTTAB]
+         CODE="07"
+         ID=7
+         ANZAHL=1
+         BREITE=4300
+         LHOEHE=3250
+         FUNKTION_IST="01"
+         TEMP_NACHBAR_IST=18.0
+         RICHTUNG_IST=90
+         ABZUG="0"
+         *[KONSTR]
+         CODE="IW02"
+         QUELLE="H72"
+         TYP_GRENZ="1"
+
+         [BTTAB]
+         CODE="08"
+         ID=8
+         ANZAHL=1
+         BREITE=2700
+         LHOEHE=3250
+         FUNKTION_IST="01"
+         TEMP_NACHBAR_IST=20.0
+         RICHTUNG_IST=180
+         ABZUG="0"
+         *[KONSTR]
+         CODE="IW02"
+         QUELLE="H72"
+         TYP_GRENZ="1"
+
+         [BTTAB]
+         CODE="09"
+         ID=9
+         ANZAHL=1
+         BREITE=3640
+         LHOEHE=3640
+         FUNKTION_IST="07"
+         TEMP_NACHBAR_IST=20.0
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="FB01"
+         QUELLE="H72"
+         TYP_GRENZ="1"
+
+         [BTTAB]
+         CODE="10"
+         ID=10
+         ANZAHL=1
+         BREITE=3640
+         LHOEHE=3640
+         FUNKTION_IST="06"
+         TEMP_NACHBAR_IST=-13.0
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="DA01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+      [FBEZUG]
+      CODE="004"
+      TEMP_HEIZ=18.0
+      TEXT="Vorraum"
+
+      [RAUMTAB]
+      CODE="004"
+      A_RAUM=15.84
+      L_MAX_RAUM=3980
+      B_RAUM=3980
+      VOL_RAUM=47.5
+      HOEHE_RAUM=3000
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.25
+
+      [RAUMERG]
+      CODE="004"
+      Q_NORM=441
+      Q_LUFT=250
+      Q_HEIZ=441
+      Q_BEREIN=441
+      Q_AUFHEIZ=0
+      PHI_HL=441
+      PHI_RH=0
+      PHI_HLNETTO=441
+      PHI_T=191
+      PHI_TE=191
+      PHI_VMIN=250
+      PHI_VINF=60
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=2
+         ANZAHL=1
+         BREITE=2300
+         LHOEHE=800
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=3
+         ANZAHL=1
+         BREITE=3500
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=4
+         ANZAHL=1
+         BREITE=3980
+         LHOEHE=3980
+         FUNKTION_IST="06"
+         TEMP_NACHBAR_IST=-13.0
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="DA01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+      [FBEZUG]
+      CODE="005"
+      TEMP_HEIZ=20.0
+      TEXT="Schlafen"
+
+      [RAUMTAB]
+      CODE="005"
+      A_RAUM=14.51
+      L_MAX_RAUM=3810
+      B_RAUM=3810
+      VOL_RAUM=43.5
+      HOEHE_RAUM=3000
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.25
+
+      [RAUMERG]
+      CODE="005"
+      Q_NORM=595
+      Q_LUFT=244
+      Q_HEIZ=595
+      Q_BEREIN=595
+      Q_AUFHEIZ=0
+      PHI_HL=595
+      PHI_RH=0
+      PHI_HLNETTO=595
+      PHI_T=351
+      PHI_TE=351
+      PHI_VMIN=244
+      PHI_VINF=88
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=900
+         LHOEHE=2300
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=4750
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=2300
+         LHOEHE=800
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=4
+         ANZAHL=1
+         BREITE=3700
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=270
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="05"
+         ID=5
+         ANZAHL=1
+         BREITE=3810
+         LHOEHE=3810
+         FUNKTION_IST="06"
+         TEMP_NACHBAR_IST=-13.0
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="DA01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+      [FBEZUG]
+      CODE="006"
+      TEMP_HEIZ=22.0
+      TEXT="Ankleide"
+
+      [RAUMTAB]
+      CODE="006"
+      A_RAUM=10.05
+      L_MAX_RAUM=3170
+      B_RAUM=3170
+      VOL_RAUM=30.1
+      HOEHE_RAUM=3000
+      ART_BEHEIZUNG=0
+      RAUM_N_MIN=0.50
+      HOEHE_RAUM_ER=0.00
+      DZ_DECKE_RAUM=0.25
+
+      [RAUMERG]
+      CODE="006"
+      Q_NORM=497
+      Q_LUFT=179
+      Q_HEIZ=497
+      Q_BEREIN=497
+      Q_AUFHEIZ=0
+      PHI_HL=497
+      PHI_RH=0
+      PHI_HLNETTO=497
+      PHI_T=317
+      PHI_TE=317
+      PHI_VMIN=179
+      PHI_VINF=65
+      PHI_VSUC=0
+      PHI_VMECHINF=0
+
+         [BTTAB]
+         CODE="01"
+         ID=1
+         ANZAHL=1
+         BREITE=2300
+         LHOEHE=800
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="02"
+         ID=2
+         ANZAHL=1
+         BREITE=3700
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=90
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="03"
+         ID=3
+         ANZAHL=1
+         BREITE=900
+         LHOEHE=2300
+         FUNKTION_IST="02"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="1"
+         *[KONSTR]
+         CODE="AF01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="04"
+         ID=4
+         ANZAHL=1
+         BREITE=3350
+         LHOEHE=3250
+         FUNKTION_IST="00"
+         TEMP_NACHBAR_IST=-13.0
+         RICHTUNG_IST=180
+         ABZUG="0"
+         *[KONSTR]
+         CODE="AW01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
+
+         [BTTAB]
+         CODE="05"
+         ID=5
+         ANZAHL=1
+         BREITE=3170
+         LHOEHE=3170
+         FUNKTION_IST="06"
+         TEMP_NACHBAR_IST=-13.0
+         NEIGUNG_IST=0
+         ABZUG="0"
+         *[KONSTR]
+         CODE="DA01"
+         QUELLE="H72"
+         TYP_GRENZ="0"
