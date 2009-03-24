@@ -26,7 +26,7 @@
         <SetupExe>setup.exe</SetupExe>
         <UnzipDir />
         <DefaultDir />
-        <IconFile />
+        <IconFile>..\Application\Harreither.ico</IconFile>
         <Url />
     </SfxConfig>
 </Zip2SecureExe>
