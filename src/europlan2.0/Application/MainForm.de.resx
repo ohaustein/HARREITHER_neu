@@ -120,6 +120,9 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Beenden</value>
   </data>
+  <data name="NewProjectTitle" xml:space="preserve">
+    <value>unbekannt</value>
+  </data>
   <data name="RestartCaption" xml:space="preserve">
     <value>"Neustart erforderlich..."</value>
   </data>
