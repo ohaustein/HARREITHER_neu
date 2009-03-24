@@ -53,9 +53,9 @@ namespace Europlan.Application {
 			this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
-			this.treeView1 = new System.Windows.Forms.TreeView();
+			this.projectTree = new System.Windows.Forms.TreeView();
 			this.mainMenu.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.splitContainer.Panel1.SuspendLayout();
@@ -253,10 +253,10 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.helpToolStripButton, "helpToolStripButton");
 			this.helpToolStripButton.Name = "helpToolStripButton";
 			// 
-			// statusStrip1
+			// statusStrip
 			// 
-			resources.ApplyResources(this.statusStrip1, "statusStrip1");
-			this.statusStrip1.Name = "statusStrip1";
+			resources.ApplyResources(this.statusStrip, "statusStrip");
+			this.statusStrip.Name = "statusStrip";
 			// 
 			// splitContainer
 			// 
@@ -266,19 +266,19 @@ namespace Europlan.Application {
 			// 
 			// splitContainer.Panel1
 			// 
-			this.splitContainer.Panel1.Controls.Add(this.treeView1);
+			this.splitContainer.Panel1.Controls.Add(this.projectTree);
 			// 
-			// treeView1
+			// projectTree
 			// 
-			resources.ApplyResources(this.treeView1, "treeView1");
-			this.treeView1.Name = "treeView1";
+			resources.ApplyResources(this.projectTree, "projectTree");
+			this.projectTree.Name = "projectTree";
 			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.splitContainer);
-			this.Controls.Add(this.statusStrip1);
+			this.Controls.Add(this.statusStrip);
 			this.Controls.Add(this.toolStrip1);
 			this.Controls.Add(this.mainMenu);
 			this.MainMenuStrip = this.mainMenu;
@@ -326,9 +326,9 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
-		private System.Windows.Forms.StatusStrip statusStrip1;
+		private System.Windows.Forms.StatusStrip statusStrip;
 		private System.Windows.Forms.SplitContainer splitContainer;
-		private System.Windows.Forms.TreeView treeView1;
+		private System.Windows.Forms.TreeView projectTree;
 
 	}
 }

@@ -496,31 +496,31 @@
   <data name="helpToolStripButton.Text" xml:space="preserve">
     <value>&amp;Hilfe</value>
   </data>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>105, 24</value>
   </metadata>
-  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 483</value>
   </data>
-  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="statusStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>808, 22</value>
   </data>
-  <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
+  <data name="statusStrip.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="statusStrip1.Text" xml:space="preserve">
-    <value>statusStrip1</value>
+  <data name="statusStrip.Text" xml:space="preserve">
+    <value>statusStrip</value>
   </data>
-  <data name="&gt;&gt;statusStrip1.Name" xml:space="preserve">
-    <value>statusStrip1</value>
+  <data name="&gt;&gt;statusStrip.Name" xml:space="preserve">
+    <value>statusStrip</value>
   </data>
-  <data name="&gt;&gt;statusStrip1.Type" xml:space="preserve">
+  <data name="&gt;&gt;statusStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;statusStrip1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;statusStrip.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;statusStrip.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="splitContainer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -529,28 +529,28 @@
   <data name="splitContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 49</value>
   </data>
-  <data name="treeView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="projectTree.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="treeView1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="projectTree.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="treeView1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="projectTree.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 430</value>
   </data>
-  <data name="treeView1.TabIndex" type="System.Int32, mscorlib">
+  <data name="projectTree.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;treeView1.Name" xml:space="preserve">
-    <value>treeView1</value>
+  <data name="&gt;&gt;projectTree.Name" xml:space="preserve">
+    <value>projectTree</value>
   </data>
-  <data name="&gt;&gt;treeView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;projectTree.Type" xml:space="preserve">
     <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;treeView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;projectTree.Parent" xml:space="preserve">
     <value>splitContainer.Panel1</value>
   </data>
-  <data name="&gt;&gt;treeView1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;projectTree.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel1.Name" xml:space="preserve">
