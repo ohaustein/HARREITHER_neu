@@ -11,13 +11,14 @@ namespace Europlan.Application {
 	
 	static class Program {
 
+		private static System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Program));
 		private static readonly ILog log = LogManager.GetLogger(typeof(Program));
 		
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
-		static void Main() {
+		static void Main(string[] args) {
 			log4net.Config.XmlConfigurator.Configure();
 			log.Debug("Starting Application");
 
@@ -29,13 +30,21 @@ namespace Europlan.Application {
 			Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
 
 			if (IsApplicationAlreadyRunning()) {
-				MessageBox.Show("Es läuft bereits eine Instanz von Europlan auf diesem Rechner.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				string message = resources.GetString("AlreadyRunningMessage", Thread.CurrentThread.CurrentUICulture);
+				string caption = resources.GetString("AlreadyRunningCaption", Thread.CurrentThread.CurrentUICulture);
+				MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
 
 			System.Windows.Forms.Application.EnableVisualStyles();
 			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-			System.Windows.Forms.Application.Run(new MainForm());
+			MainForm mainForm = new MainForm();
+
+			if (args.Length != 0) {
+				mainForm.ProjectToLoad = args[0];
+			}
+
+			System.Windows.Forms.Application.Run(mainForm);
 			
 		}
 

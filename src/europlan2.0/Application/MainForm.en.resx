@@ -158,4 +158,7 @@
     <value>Due to changes in the settings, an application restart is required.
 Press OK to restart now.</value>
   </data>
+  <data name="NewProjectTitle" xml:space="preserve">
+    <value>unknown</value>
+  </data>
 </root>
