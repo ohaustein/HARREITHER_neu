@@ -9,11 +9,20 @@ using Star.SettingsXpress;
 using System.Resources;
 using System.Reflection;
 using System.Threading;
+using log4net;
 
 namespace Europlan.Application {
 	public partial class MainForm : Form {
+		
+		private string projectFileName = null;
+		private Project currentProject = null;
+
+		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+		private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
+
 		public MainForm() {
 			InitializeComponent();
+			
 			this.updateController.CheckForUpdateAsync();
 		}
 
@@ -31,9 +40,55 @@ namespace Europlan.Application {
 			} else {
 				this.WindowState = FormWindowState.Normal;
 			}
+
+			Project.ProjectLoaded += new Project.ProjectLoadedHandler(myProject_ProjectLoaded);
+			Project.ProjectSaved += new Project.ProjectSavedHandler(myProject_ProjectSaved);
+
+			if (projectFileName != null) {
+				LoadProject();
+			} else {
+				NewProject();
+			}
+		}
+
+		private void LoadProject() {
+			try {
+				// TODO: ask for saving unsaved changes
+				if (projectFileName != null) {
+					Project.Load(projectFileName);
+					currentProject = Project.Instance;
+				}
+			} catch (Exception ex) {
+				log.Error("Problem loading project:", ex);
+				currentProject = null;
+				projectFileName = null;
+			}
+		}
+
+		private void SaveProject() {
+			try {
+				if (currentProject != null && projectFileName != null) {
+					Project.Save(projectFileName);
+				}
+			} catch (Exception ex) {
+				log.Error("Problem saving project:", ex);
+			}
+		}
+
+		private void NewProject() {
+			if (currentProject == null) {
+				currentProject = Project.New();
+			} else {
+				// TODO
+			}
+			projectFileName = null;
+			UpdateTitle();
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+			Project.ProjectLoaded -= myProject_ProjectLoaded;
+			Project.ProjectSaved -= myProject_ProjectSaved;
+
 			SettingsKey settings = SettingsFile.Settings["MainForm"];
 			if (this.WindowState == FormWindowState.Normal) {
 				settings.StorePoint("Location", this.Location);
@@ -49,9 +104,8 @@ namespace Europlan.Application {
 			OptionsForm options = new OptionsForm();
 			DialogResult result = options.ShowDialog();
 			if (result == DialogResult.OK && options.RestartRequired) {
-				System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(this.GetType());
 				string message = resources.GetString("RestartMessage", Thread.CurrentThread.CurrentUICulture);
-				string caption = resources.GetString("RestartCaption");
+				string caption = resources.GetString("RestartCaption", Thread.CurrentThread.CurrentUICulture);
 				result = MessageBox.Show(message, caption, MessageBoxButtons.OKCancel);
 				if (result == DialogResult.OK) {
 					System.Windows.Forms.Application.Restart();
@@ -70,7 +124,76 @@ namespace Europlan.Application {
 			}
 		}
 
+		void myProject_ProjectSaved(object sender) {
+			UpdateTitle();
+		}
 
+		private void UpdateTitle() {
+			string title = "Europlan - [";
+			if (projectFileName != null) {
+				title += projectFileName;
+			} else {
+				title += resources.GetString("NewProjectTitle", Thread.CurrentThread.CurrentUICulture);
+			}
+			title += "]";
+			this.Text = title;
+		}
+
+		void myProject_ProjectLoaded(object sender) {
+			UpdateTitle();
+		}
+
+		public string ProjectToLoad {
+			set {
+				this.projectFileName = value;
+			}
+		}
+
+		private void openToolStripMenuItem_Click(object sender, EventArgs e) {
+			OpenFileDialog dialog = new OpenFileDialog();
+			dialog.CheckFileExists = true;
+			dialog.CheckPathExists = true;
+			dialog.DefaultExt = "epp";
+			dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
+			dialog.Multiselect = false;
+			DialogResult result = dialog.ShowDialog();
+			if (result == DialogResult.OK) {
+				projectFileName = dialog.FileName;
+				LoadProject();
+			}
+		}
+
+		private void newToolStripMenuItem_Click(object sender, EventArgs e) {
+			NewProject();
+		}
+
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (projectFileName == null) {
+				SaveFileDialog dialog = new SaveFileDialog();
+				dialog.CheckPathExists = true;
+				dialog.DefaultExt = "epp";
+				dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
+				DialogResult result = dialog.ShowDialog();
+				if (result == DialogResult.OK) {
+					projectFileName = dialog.FileName;
+					SaveProject();
+				}
+			} else {
+				SaveProject();
+			}
+		}
+
+		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
+			SaveFileDialog dialog = new SaveFileDialog();
+			dialog.CheckPathExists = true;
+			dialog.DefaultExt = "epp";
+			dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
+			DialogResult result = dialog.ShowDialog();
+			if (result == DialogResult.OK) {
+				projectFileName = dialog.FileName;
+				SaveProject();
+			}
+		}
 
 	}
 }
