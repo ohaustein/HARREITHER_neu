@@ -35,6 +35,7 @@ namespace Europlan.Application {
 			SettingsKey settings = SettingsFile.Settings["MainForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
 			this.Size = settings.GetSize("Size", this.Size);
+			this.splitContainer.SplitterDistance = settings.GetSetting("SplitterDistance", this.splitContainer.SplitterDistance);
 			if (settings.GetSetting("Maximized", false)) {
 				this.WindowState = FormWindowState.Maximized;
 			} else {
@@ -97,6 +98,7 @@ namespace Europlan.Application {
 			} else if (this.WindowState == FormWindowState.Maximized) {
 				settings.StoreSetting("Maximized", true);
 			}
+			settings.StoreSetting("SplitterDistance", this.splitContainer.SplitterDistance);
 			SettingsFile.Update();
 		}
 
