@@ -260,6 +260,7 @@ namespace Europlan.Application {
 			// 
 			// splitContainer
 			// 
+			this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			resources.ApplyResources(this.splitContainer, "splitContainer");
 			this.splitContainer.Name = "splitContainer";
 			// 
