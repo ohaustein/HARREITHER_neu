@@ -42,16 +42,54 @@
     <DirectoryRef Id="INSTALLLOCATION">
       <Component Id="Application.Europlan.exe" Guid="{F46A6464-3585-4df6-8840-88563ACE9A32}">
         <File Id="Application.Europlan.exe" Name="Europlan.exe" Source="..\Application\bin\$(var.SourceDir)\Europlan.exe" Vital="yes" KeyPath="yes" />
+        <ProgId Id="Application.Europlan.exe" Description="Europlan 2.0">
+          <Extension Id="e2p">
+            <Verb Id="open" TargetFile="Application.Europlan.exe" Argument="%1" />
+          </Extension>
+        </ProgId>
+        <!--<RegistryKey Root="HKCR" Key=".e2p">
+          <RegistryValue Value="Application.Europlan.exe" Type="string" />
+        </RegistryKey>-->
+      </Component>
+      <Component Id="Application.Europlan.exe.FileAssociation.Icon" Guid="{9096DDFD-046E-4324-B097-2D270636FA3F}">
+        <RegistryKey Root="HKCR" Key=".e2p">
+          <RegistryValue Value="Application.Europlan.exe" Type="string" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key="Application.Europlan.exe">
+          <RegistryValue Value="Europlan 2.0" Type="string" Action="write" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key="Application.Europlan.exe\DefaultIcon">
+          <RegistryValue Value="[INSTALLLOCATION]\Europlan.exe,0" Type="string" Action="write" />
+        </RegistryKey>
       </Component>
       <Component Id="Application.Europlan.exe.Shortcut" Guid="{EB7EA824-037C-4069-AC86-36196FE2E9C8}">
         <RegistryKey Root="HKCU" Key="Software\bluesource\Europlan 2.0">
           <RegistryValue Value="europlan20" Type="string" KeyPath="yes" />
         </RegistryKey>
-        <Shortcut Id="Application.Europlan.exe" Directory="ProgramMenuDir" Name="Europlan 2.0" Advertise="no" Target="[INSTALLLOCATION]\Europlan.exe"  Description="Startet die Europlan 2.0 Anwendung" >
+        <Shortcut Id="Application.Europlan.exe" Directory="ProgramMenuDir" Name="Europlan 2.0" Advertise="no" Target="[INSTALLLOCATION]Europlan.exe"  Description="Startet die Europlan 2.0 Anwendung" >
           <Icon Id="Application.Europlan.exe" SourceFile="..\Application\bin\$(var.SourceDir)\Europlan.exe"/>
         </Shortcut>
         <RemoveFolder Id="RemoveShorcutFolder" On="uninstall" Directory="ProgramMenuDir" />
       </Component>
+      <!--<Component Id="Application.Europlan.exe.FileAssociation" Guid="">
+        <ProgId Id="Application.Europlan.exe" Description="Europlan 2.0">
+          <Extension Id="e2p">
+            <Verb Id="open" TargetFile="Application.Europlan.exe" Argument="%1" />
+          </Extension>
+        </ProgId>
+        <RegistryKey Root="HKCR" Key="test">
+          <RegistryValue Value="Application.Europlan.exe" Type="string" KeyPath="yes" />
+        </RegistryKey>-->
+        <!--<RegistryKey Root="HKCR" Key="Application.Europlan.exe">
+          <RegistryValue Value="Application.Europlan.exe" Type="string" Action="write" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key="Application.Europlan.exe\DefaultIcon">
+          <RegistryValue Value="[INSTALLLOCATION]\Europlan.exe,1" Type="string" Action="write" />
+        </RegistryKey>-->
+        <!--<Registry Id="Application.Europlan.exe.FileIcon1" Root="HKCR" Key=".e2p" Action="write" Type="string" Value="Application.Europlan.exe" />
+        <Registry Id="Application.Europlan.exe.FileIcon2" Root="HKCR" Key="Application.Europlan.exe" Action="write" Type="string" Value="Europlan 2.0" />
+        <Registry Id="Application.Europlan.exe.FileIcon3" Root="HKCR" Key="Application.Europlan.exe\DefaultIcon" Action="write" Type="string" Value="[INSTALLLOCATION]\Europlan.exe,1" />-->
+      <!--</Component>-->
       <Component Id="Application.Europlan.exe.config" Guid="{F2339A3F-114C-4f9c-AA83-1BE7CD077FA3}">
         <File Id="Application.Europlan.exe.config" Name="Europlan.exe.config" Source="..\Application\bin\$(var.SourceDir)\Europlan.exe.config" Vital="yes" KeyPath="yes" />
       </Component>
@@ -92,6 +130,10 @@
     <Feature Id="ProductFeature" Title="main" Level="1" AllowAdvertise="no" Description="Installiert die europlan 2.0 Anwendung">
       <ComponentRef Id="Application.Europlan.exe"/>
       <ComponentRef Id="Application.Europlan.exe.Shortcut"/>
+      <ComponentRef Id="Application.Europlan.exe.FileAssociation.Icon"/>
+      <!--<ComponentRef Id="Application.Europlan.exe.FileAssociation"/>-->
+      <!--<ComponentRef Id="blub1"/>
+      <ComponentRef Id="blub2"/>-->
       <ComponentRef Id="Application.Europlan.exe.config"/>
       <ComponentRef Id="Application.log4net.dll"/>
       <ComponentRef Id="Application.Kjs.AppLife.Update.Controller.dll"/>
