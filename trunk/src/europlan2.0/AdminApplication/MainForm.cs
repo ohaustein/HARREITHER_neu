@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Europlan.Licensing;
+using System.IO;
 
 namespace Europlan.AdminApplication {
 	public partial class MainForm : Form {
@@ -13,7 +14,10 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void btnNewLicense_Click(object sender, EventArgs e) {
-			License newLicense = new License(new LicenseKey());
+			LicenseTemplate newLicense = new LicenseTemplate();
+			foreach (string module in LicenseEditor.availableModules) {
+				newLicense.SetModuleEnabled(module, false);
+			}
 			LicenseItem newItem = new LicenseItem(newLicense);
 			this.lstLicenses.Items.Add(newItem);
 			/*foreach (LicenseItem item in this.lstLicenses.Items) {
@@ -31,11 +35,24 @@ namespace Europlan.AdminApplication {
 			if (this.licenseEditor1.License == item.License) {
 				if (!e.IsSelected) {
 					this.licenseEditor1.License = null;
-					this.licenseEditor1.Enabled = false;
+					this.btnSaveLicense.Enabled = false;
 				}
 			} else if (e.IsSelected) {
 				this.licenseEditor1.License = item.License;
-				this.licenseEditor1.Enabled = true;
+				this.btnSaveLicense.Enabled = true;
+			}
+		}
+
+		private void btnSaveLicense_Click(object sender, EventArgs e) {
+			License lic = this.licenseEditor1.License.CreateLicense();
+			if (lic != null) {
+				SaveFileDialog dialog = new SaveFileDialog();
+				dialog.DefaultExt = ".lic";
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					using (Stream s = new FileStream(dialog.FileName, FileMode.Create)) {
+						lic.SaveLicense(s);
+					}
+				}
 			}
 		}
 	}

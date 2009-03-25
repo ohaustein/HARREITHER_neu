@@ -7,14 +7,19 @@ using Europlan.Licensing;
 namespace Europlan.AdminApplication {
 	public class LicenseItem : ListViewItem {
 
-		private License license;
+		private LicenseTemplate license;
 
-		public LicenseItem(License license) {
+		public LicenseItem(LicenseTemplate license) {
 			this.license = license;
-			this.Text = (license.LicensedTo == null || license.LicensedTo.Length == 0) ? "neue Lizenz" : license.LicensedTo; // TODO
+			this.Text = license.DisplayName;
+			this.license.NameChanged += new EventHandler(license_NameChanged);
 		}
 
-		public License License {
+		private void license_NameChanged(object sender, EventArgs e) {
+			this.Text = license.DisplayName;
+		}
+
+		public LicenseTemplate License {
 			get { return this.license; }
 		}
 	}

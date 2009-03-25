@@ -9,6 +9,8 @@ namespace Europlan.Licensing {
 	public class HardwareId {
 		private byte[] id = null;
 
+		private static byte[] currentSystemId = null;
+
 		public HardwareId() {
 			this.id = GetCurrentSystemId();
 		}
@@ -117,23 +119,26 @@ namespace Europlan.Licensing {
 		}
 
 		public static byte[] GetCurrentSystemId() {
-			string currentSystemId = GetCPUId() + GetMotherBoardID();
-			byte[] hashedId = EncryptionManager.Instance.HashString(currentSystemId);
-			int i = 0;
-			int j = hashedId.Length;
-			while (j > 9) {
-				hashedId[i] ^= hashedId[--j];
-				if (i == 8) {
-					i = 0;
-				} else {
-					i++;
+			if (currentSystemId == null) {
+				string currentSystemIdString = GetCPUId() + GetMotherBoardID();
+				byte[] hashedId = EncryptionManager.Instance.HashString(currentSystemIdString);
+				int i = 0;
+				int j = hashedId.Length;
+				while (j > 9) {
+					hashedId[i] ^= hashedId[--j];
+					if (i == 8) {
+						i = 0;
+					} else {
+						i++;
+					}
 				}
+				byte[] result = new byte[9];
+				for (i = 0; i < 9; i++) {
+					result[i] = hashedId[i];
+				}
+				currentSystemId = result;
 			}
-			byte[] result = new byte[9];
-			for (i = 0; i < 9; i++) {
-				result[i] = hashedId[i];
-			}
-			return result;
+			return currentSystemId;
 		}
 
 		public static string GetCurrentSystemIdString() {

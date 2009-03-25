@@ -4,36 +4,14 @@ using System.Text;
 using System.Xml.Serialization;
 
 namespace Europlan.Licensing {
-	public class LicensedModule {
-		private string name = null;
-		private bool enabled = false;
-
-		public LicensedModule() {
+	public class LicensedModule : AbstractLicensedModule {
+		public LicensedModule() : base() {
 		}
 
-		public LicensedModule(string name) {
-			this.name = name;
+		public LicensedModule(string name) : base(name) {
 		}
 
-		public LicensedModule(string name, bool enabled) {
-			this.name = name;
-			this.enabled = enabled;
-		}
-
-		[XmlAttribute("name")]
-		public string Name {
-			get { return this.name; }
-			set { this.name = value; }
-		}
-
-		[XmlAttribute("enabled")]
-		public bool Enabled {
-			get { return this.enabled; }
-			set { this.enabled = value; }
-		}
-
-		public override string ToString() {
-			return this.name + ":" + (this.enabled ? "1" : "0");
+		public LicensedModule(string name, bool enabled) : base(name, enabled) {
 		}
 	}
 }

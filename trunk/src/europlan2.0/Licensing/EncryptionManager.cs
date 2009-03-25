@@ -28,7 +28,12 @@ namespace Europlan.Licensing {
 		}
 
 		public string Key {
-			get { return this.provider.ToXmlString(!this.PublicOnly); }
+			get {
+				if (this.provider == null) {
+					return null;
+				}
+				return this.provider.ToXmlString(!this.PublicOnly);
+			}
 			set {
 				this.provider = new RSACryptoServiceProvider(512);
 				this.provider.FromXmlString(value);
@@ -36,7 +41,10 @@ namespace Europlan.Licensing {
 		}
 
 		public bool PublicOnly {
-			get { return this.provider.PublicOnly; }
+			get {
+				Debug.Assert(this.provider != null);
+				return this.provider.PublicOnly;
+			}
 		}
 
 		public string CalculateSignature(string text) {
@@ -48,16 +56,19 @@ namespace Europlan.Licensing {
 		}
 
 		public bool VerifySignature(String text, String base64signature) {
+			Debug.Assert(this.provider != null);
 			byte[] textContent = this.byteConverter.GetBytes(text);
 			byte[] signature = Convert.FromBase64String(base64signature);
 			return this.provider.VerifyData(textContent, this.hashAlgorithm, signature);
 		}
 
 		public string HashData(byte[] data) {
+			Debug.Assert(this.provider != null);
 			return Convert.ToBase64String(this.hashAlgorithm.ComputeHash(data));
 		}
 
 		public byte[] HashString(string text) {
+			Debug.Assert(this.provider != null);
 			byte[] data = this.byteConverter.GetBytes(text);
 			return this.hashAlgorithm.ComputeHash(data);
 		}

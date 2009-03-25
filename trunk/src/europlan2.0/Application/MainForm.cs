@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
@@ -10,6 +9,7 @@ using System.Resources;
 using System.Reflection;
 using System.Threading;
 using log4net;
+using Europlan.Licensing;
 
 namespace Europlan.Application {
 	public partial class MainForm : Form {
@@ -22,7 +22,19 @@ namespace Europlan.Application {
 
 		public MainForm() {
 			InitializeComponent();
-			
+
+			if (!LicenseManager.Instance.LicenseFound || !LicenseManager.Instance.License.IsValid) {
+				this.newToolStripMenuItem.Enabled = false;
+				this.newToolStripButton.Enabled = false;
+				this.openToolStripMenuItem.Enabled = false;
+				this.openToolStripButton.Enabled = false;
+				this.saveToolStripMenuItem.Enabled = false;
+				this.saveToolStripButton.Enabled = false;
+				this.saveAsToolStripMenuItem.Enabled = false;
+				this.printToolStripButton.Enabled = false;
+				this.UpdateTitle();
+			}
+
 			this.updateController.CheckForUpdateAsync();
 		}
 
@@ -45,10 +57,12 @@ namespace Europlan.Application {
 			Project.ProjectLoaded += new Project.ProjectLoadedHandler(myProject_ProjectLoaded);
 			Project.ProjectSaved += new Project.ProjectSavedHandler(myProject_ProjectSaved);
 
-			if (projectFileName != null) {
-				LoadProject();
-			} else {
-				NewProject();
+			if (LicenseManager.Instance.LicenseFound && LicenseManager.Instance.License.IsValid) {
+				if (projectFileName != null) {
+					LoadProject();
+				} else {
+					NewProject();
+				}
 			}
 		}
 
@@ -131,14 +145,18 @@ namespace Europlan.Application {
 		}
 
 		private void UpdateTitle() {
-			string title = "Europlan - [";
-			if (projectFileName != null) {
-				title += projectFileName;
+			if (!LicenseManager.Instance.LicenseFound || !LicenseManager.Instance.License.IsValid) {
+				this.Text = "Europlan - (" + resources.GetString("NotLicensed", Thread.CurrentThread.CurrentUICulture) + ")";
 			} else {
-				title += resources.GetString("NewProjectTitle", Thread.CurrentThread.CurrentUICulture);
+				string title = "Europlan - [";
+				if (projectFileName != null) {
+					title += projectFileName;
+				} else {
+					title += resources.GetString("NewProjectTitle", Thread.CurrentThread.CurrentUICulture);
+				}
+				title += "]";
+				this.Text = title;
 			}
-			title += "]";
-			this.Text = title;
 		}
 
 		void myProject_ProjectLoaded(object sender) {
@@ -195,6 +213,12 @@ namespace Europlan.Application {
 				projectFileName = dialog.FileName;
 				SaveProject();
 			}
+		}
+
+		private void licenseToolStripMenuItem_Click(object sender, EventArgs e) {
+			LicenseForm license = new LicenseForm();
+			license.ShowDialog();
+			license.Dispose();
 		}
 
 	}

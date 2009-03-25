@@ -9,20 +9,19 @@ using Europlan.Licensing;
 namespace Europlan.AdminApplication {
 	public partial class LicenseEditor : UserControl {
 
-		private License license = null;
+		private LicenseTemplate license = null;
 
 		public static readonly string[] availableModules = { "Produkt 1", "Produkt 2", "Produkt 3", "Produkt 4", "Feature 1", "Feature 2", "Feature 3" };
 
 		public LicenseEditor() {
 			InitializeComponent();
-			this.UpdateGui();
-			this.EnabledChanged += new EventHandler(LicenseEditor_EnabledChanged);
-			foreach (string availableModule in availableModules) {
+			/*foreach (string availableModule in availableModules) {
 				this.lstModules.Items.Add(new ModuleItem(new LicensedModule(availableModule, false)));
-			}
+			}*/
+			this.UpdateGui();
 		}
 
-		public License License {
+		public LicenseTemplate License {
 			get { return this.license; }
 			set {
 				this.license = value;
@@ -31,36 +30,42 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void UpdateGui() {
+			this.Enabled = this.license != null;
 			if (this.license == null) {
-				if (this.Enabled) {
-					txtKey.Text = "AAAA-AAAA-AAAA-AAAA";
-				} else {
-					txtKey.Text = "";
-				}
 				txtLicensedTo.Text = "";
+				dtpValidUntil.Value = DateTime.Today;
 				txtHeader.Text = "";
-				this.CheckModules();
+				lstModules.Items.Clear();
 				lstSystems.Items.Clear();
 				txtSystem.Text = "";
 			} else {
-				txtKey.Text = this.license.Key.KeyString;
 				txtLicensedTo.Text = this.license.LicensedTo;
+				dtpValidUntil.Value = this.license.ValidUntil;
 				txtHeader.Text = this.license.Header;
+				this.UpdateModulesEnablement();
+				this.RefreshSystemList();
 			}
 			
 		}
 
-		private void CheckModules() {
-			foreach (ModuleItem item in this.lstModules.Items) {
+		private void UpdateModulesEnablement() {
+			lstModules.Items.Clear();
+			if (this.license != null) {
+				foreach (LicensedModuleTemplate module in license.Modules) {
+					lstModules.Items.Add(new ModuleItem(module));
+				}
+			}
+			/*foreach (ModuleItem item in this.lstModules.Items) {
 				if (this.license == null) {
 					item.Checked = false;
 				} else {
 					item.Checked = this.license.IsModuleEnabled(item.Module.Name);
 				}
-			}
+				// TODO handle modules that are in license but not in list!!! 
+			}*/
 		}
 
-		private void txtKey_KeyDown(object sender, KeyEventArgs e) {
+		/*private void txtKey_KeyDown(object sender, KeyEventArgs e) {
 			char keyChar = (char)e.KeyValue;
 			keyChar = char.ToUpper(keyChar);
 			if (e.KeyCode == Keys.Delete) {
@@ -126,15 +131,50 @@ namespace Europlan.AdminApplication {
 			txtKey.SelectionLength = 0;
 
 			return true;
+		}*/
+
+		private void txtLicensedTo_TextChanged(object sender, EventArgs e) {
+			if (this.license != null) {
+				this.license.LicensedTo = txtLicensedTo.Text;
+			}
 		}
 
-		private void btnGenerateKey_Click(object sender, EventArgs e) {
-			LicenseKey key = new LicenseKey();
-			txtKey.Text = key.KeyString;
+		private void dtpValidUntil_ValueChanged(object sender, EventArgs e) {
+			if (this.license != null) {
+				this.license.ValidUntil = dtpValidUntil.Value;
+			}
 		}
 
-		private void LicenseEditor_EnabledChanged(object sender, EventArgs e) {
-			//this.UpdateGui();
+		private void txtHeader_TextChanged(object sender, EventArgs e) {
+			if (this.license != null) {
+				this.license.Header = txtHeader.Text;
+			}
+		}
+
+		private void lstModules_ItemChecked(object sender, ItemCheckedEventArgs e) {
+			if (this.license != null) {
+				ModuleItem item = e.Item as ModuleItem;
+				if (item != null) {
+					item.Module.Enabled = item.Checked;
+				}
+			}
+		}
+
+		private void btnAddSystem_Click(object sender, EventArgs e) {
+			if (this.license != null) {
+				LicensedSystemTemplate system = new LicensedSystemTemplate();
+				this.license.Systems.Add(system);
+				this.RefreshSystemList();
+			}
+		}
+
+		private void RefreshSystemList() {
+			lstSystems.Items.Clear();
+			if (this.license != null) {
+				foreach (LicensedSystemTemplate system in this.license.Systems) {
+					lstSystems.Items.Add(new ListViewItem(system.Id));
+				}
+			}
 		}
 	}
 }

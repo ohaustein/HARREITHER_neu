@@ -161,4 +161,7 @@ Press OK to restart now.</value>
   <data name="NewProjectTitle" xml:space="preserve">
     <value>unknown</value>
   </data>
+  <data name="NotLicensed" xml:space="preserve">
+    <value>not licensed</value>
+  </data>
 </root>

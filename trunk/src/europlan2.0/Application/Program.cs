@@ -6,6 +6,8 @@ using System.Diagnostics;
 using Star.SettingsXpress;
 using System.Threading;
 using System.Globalization;
+using Europlan.Licensing;
+using System.IO;
 
 namespace Europlan.Application {
 	
