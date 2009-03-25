@@ -7,15 +7,15 @@ using Europlan.Licensing;
 namespace Europlan.AdminApplication {
 	public class ModuleItem : ListViewItem {
 
-		private LicensedModule module;
+		private LicensedModuleTemplate module;
 
-		public ModuleItem(LicensedModule module) {
+		public ModuleItem(LicensedModuleTemplate module) {
 			this.module = module;
 			this.Text = this.module.Name;
 			this.Checked = this.module.Enabled;
 		}
 
-		public LicensedModule Module {
+		public LicensedModuleTemplate Module {
 			get { return this.module; }
 		}
 	}

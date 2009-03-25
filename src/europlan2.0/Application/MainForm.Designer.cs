@@ -56,6 +56,7 @@ namespace Europlan.Application {
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
 			this.projectTree = new System.Windows.Forms.TreeView();
+			this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainMenu.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.splitContainer.Panel1.SuspendLayout();
@@ -140,6 +141,7 @@ namespace Europlan.Application {
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.licenseToolStripMenuItem,
             this.settingsToolStripMenuItem});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
@@ -270,8 +272,15 @@ namespace Europlan.Application {
 			// 
 			// projectTree
 			// 
+			this.projectTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			resources.ApplyResources(this.projectTree, "projectTree");
 			this.projectTree.Name = "projectTree";
+			// 
+			// licenseToolStripMenuItem
+			// 
+			this.licenseToolStripMenuItem.Name = "licenseToolStripMenuItem";
+			resources.ApplyResources(this.licenseToolStripMenuItem, "licenseToolStripMenuItem");
+			this.licenseToolStripMenuItem.Click += new System.EventHandler(this.licenseToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -329,6 +338,7 @@ namespace Europlan.Application {
 		private System.Windows.Forms.StatusStrip statusStrip;
 		private System.Windows.Forms.SplitContainer splitContainer;
 		private System.Windows.Forms.TreeView projectTree;
+		private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem;
 
 	}
 }

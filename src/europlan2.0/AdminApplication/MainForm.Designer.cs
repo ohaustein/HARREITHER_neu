@@ -30,6 +30,7 @@ namespace Europlan.AdminApplication {
 			this.btnNewLicense = new System.Windows.Forms.Button();
 			this.lstLicenses = new System.Windows.Forms.ListView();
 			this.licenseEditor1 = new Europlan.AdminApplication.LicenseEditor();
+			this.btnSaveLicense = new System.Windows.Forms.Button();
 			this.tabControl1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -39,8 +40,8 @@ namespace Europlan.AdminApplication {
 			// 
 			// tabControl1
 			// 
-			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Controls.Add(this.tabPage2);
+			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabControl1.Location = new System.Drawing.Point(0, 0);
 			this.tabControl1.Name = "tabControl1";
@@ -55,7 +56,7 @@ namespace Europlan.AdminApplication {
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage1.Size = new System.Drawing.Size(748, 496);
 			this.tabPage1.TabIndex = 0;
-			this.tabPage1.Text = "Kunden";
+			this.tabPage1.Text = "tabPage1";
 			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
 			// tabPage2
@@ -84,6 +85,7 @@ namespace Europlan.AdminApplication {
 			// 
 			this.splitContainer1.Panel2.AutoScroll = true;
 			this.splitContainer1.Panel2.AutoScrollMinSize = new System.Drawing.Size(400, 0);
+			this.splitContainer1.Panel2.Controls.Add(this.btnSaveLicense);
 			this.splitContainer1.Panel2.Controls.Add(this.licenseEditor1);
 			this.splitContainer1.Size = new System.Drawing.Size(742, 490);
 			this.splitContainer1.SplitterDistance = 246;
@@ -121,15 +123,28 @@ namespace Europlan.AdminApplication {
 			// 
 			// licenseEditor1
 			// 
+			this.licenseEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.licenseEditor1.AutoScroll = true;
 			this.licenseEditor1.AutoScrollMinSize = new System.Drawing.Size(400, 0);
-			this.licenseEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.licenseEditor1.Enabled = false;
 			this.licenseEditor1.License = null;
-			this.licenseEditor1.Location = new System.Drawing.Point(0, 0);
+			this.licenseEditor1.Location = new System.Drawing.Point(3, 3);
 			this.licenseEditor1.Name = "licenseEditor1";
-			this.licenseEditor1.Size = new System.Drawing.Size(492, 490);
+			this.licenseEditor1.Size = new System.Drawing.Size(486, 455);
 			this.licenseEditor1.TabIndex = 0;
+			// 
+			// btnSaveLicense
+			// 
+			this.btnSaveLicense.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnSaveLicense.Location = new System.Drawing.Point(358, 464);
+			this.btnSaveLicense.Name = "btnSaveLicense";
+			this.btnSaveLicense.Size = new System.Drawing.Size(131, 23);
+			this.btnSaveLicense.TabIndex = 1;
+			this.btnSaveLicense.Text = "Lizenz erzeugen";
+			this.btnSaveLicense.UseVisualStyleBackColor = true;
+			this.btnSaveLicense.Click += new System.EventHandler(this.btnSaveLicense_Click);
 			// 
 			// MainForm
 			// 
@@ -157,6 +172,7 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.ListView lstLicenses;
 		private System.Windows.Forms.Button btnNewLicense;
 		private LicenseEditor licenseEditor1;
+		private System.Windows.Forms.Button btnSaveLicense;
 	}
 }
 
