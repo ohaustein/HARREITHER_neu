@@ -42,6 +42,7 @@
     <Compile Include="AbstractLicense.cs" />
     <Compile Include="AbstractLicensedSystem.cs" />
     <Compile Include="AbstractLicensedModule.cs" />
+    <Compile Include="ILicensableModule.cs" />
     <Compile Include="LicensedSystemTemplate.cs" />
     <Compile Include="LicensedModuleTemplate.cs" />
     <Compile Include="LicenseTemplate.cs" />

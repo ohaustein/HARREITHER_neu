@@ -36,6 +36,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LicenseEditor\SystemEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LicenseEditor\SystemEditor.Designer.cs">
+      <DependentUpon>SystemEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="LicenseEditor\SystemItem.cs" />
     <Compile Include="LicenseEditor\LicenseEditor.cs">
       <SubType>UserControl</SubType>
@@ -56,6 +62,10 @@
     <EmbeddedResource Include="LicenseEditor\LicenseEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LicenseEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LicenseEditor\SystemEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SystemEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <SubType>Designer</SubType>

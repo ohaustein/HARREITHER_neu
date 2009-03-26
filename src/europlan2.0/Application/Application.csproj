@@ -63,6 +63,10 @@
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <EmbeddedResource Include="LicenseForm.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>LicenseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LicenseForm.en.resx">
       <DependentUpon>LicenseForm.cs</DependentUpon>
       <SubType>Designer</SubType>

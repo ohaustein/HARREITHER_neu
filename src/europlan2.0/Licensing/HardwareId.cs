@@ -7,6 +7,9 @@ using System.Diagnostics;
 
 namespace Europlan.Licensing {
 	public class HardwareId {
+
+		public static readonly string hardwareIdKeyChars = "0123456789abcdef";
+		
 		private byte[] id = null;
 
 		private static byte[] currentSystemId = null;

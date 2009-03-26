@@ -9,7 +9,6 @@ namespace Europlan.Licensing {
 		protected DateTime addedDate = DateTime.Now;
 		protected string annotation = "";
 
-
 		public LicensedSystemTemplate() : base() {
 		}
 
@@ -19,13 +18,19 @@ namespace Europlan.Licensing {
 		[XmlAttribute("added")]
 		public DateTime AddedDate {
 			get { return this.addedDate; }
-			set { this.addedDate = value; }
+			set {
+				this.addedDate = value;
+				this.OnChanged();
+			}
 		}
 
 		[XmlAttribute("annotation")]
 		public string Annotation {
 			get { return this.annotation; }
-			set { this.annotation = value; }
+			set {
+				this.annotation = value;
+				this.OnChanged();
+			}
 		}
 
 		public LicensedSystem CreateSystem() {

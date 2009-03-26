@@ -15,10 +15,26 @@ namespace Europlan.Licensing {
 			this.id = new HardwareId(id);
 		}
 
+		protected event EventHandler changed;
+
+		public event EventHandler Changed {
+			add { this.changed += value; }
+			remove { this.changed -= value; }
+		}
+
+		protected void OnChanged() {
+			if (this.changed != null) {
+				this.changed(this, EventArgs.Empty);
+			}
+		}
+
 		[XmlAttribute("id")]
 		public string Id {
 			get { return this.id.IdString; }
-			set { this.id = new HardwareId(value); }
+			set {
+				this.id = new HardwareId(value);
+				this.OnChanged();
+			}
 		}
 
 		public override string ToString() {
