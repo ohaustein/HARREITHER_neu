@@ -153,7 +153,13 @@ namespace Europlan.Licensing {
 		}
 
 		public bool IsSignatureValid {
-			get { return EncryptionManager.Instance.VerifySignature(this.LicenseStringForSigning, this.Signature); }
+			get {
+#if DEBUG
+				return true;
+#else
+				return EncryptionManager.Instance.VerifySignature(this.LicenseStringForSigning, this.Signature);
+#endif
+			}
 		}
 
 		public bool IsSystemValid {
@@ -175,13 +181,7 @@ namespace Europlan.Licensing {
 		}
 
 		public bool IsValid {
-			get {
-#if DEBUG
-				return true;
-#else
-				return this.IsSignatureValid && this.IsSystemValid && this.IsDateValid; 
-#endif
-			}
+			get { return this.IsSignatureValid && this.IsSystemValid && this.IsDateValid; }
 		}
 
 		public string LicenseStringForSigning {

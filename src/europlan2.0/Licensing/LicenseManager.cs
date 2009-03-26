@@ -42,6 +42,15 @@ namespace Europlan.Licensing {
 			} else {
 				log.Warn("No license found");
 			}
+#if DEBUG
+			if (this.license == null) {
+				this.license = new License();
+				this.license.LicensedTo = "Development License";
+				this.license.Header = "";
+				this.license.ValidUntil = DateTime.Today.AddYears(1);
+				this.license.Systems.Add(new LicensedSystem());
+			}
+#endif
 		}
 
 		public bool ImportLicense(string filename) {
