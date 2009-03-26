@@ -117,87 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnOk.Text" xml:space="preserve">
-    <value>&amp;Close</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Licensed for:</value>
-  </data>
-  <data name="btnImport.Text" xml:space="preserve">
-    <value>&amp;Import license</value>
-  </data>
-  <data name="lblHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 13</value>
-  </data>
-  <data name="lblHeader.Text" xml:space="preserve">
-    <value>Page header:</value>
-  </data>
-  <data name="lblValidUntil.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="lblValidUntil.Text" xml:space="preserve">
-    <value>Valid until:</value>
-  </data>
-  <data name="lblModules.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 13</value>
-  </data>
-  <data name="lblModules.Text" xml:space="preserve">
-    <value>Installed licenses:</value>
-  </data>
-  <data name="lblLicenseSystemInvalid.Text" xml:space="preserve">
-    <value>The license is not valid for the current system. Please contact Kontakt-Name via lizenz@dummy.at or +43-0000-LIZENZ to request a license for this system. For requesting a license you have to post your hardware ID which is displayed in this dialog.</value>
-  </data>
-  <data name="lblLicenseDateInvalid.Text" xml:space="preserve">
-    <value>The validity of the license has expired. Please contact Kontakt-Name via lizenz@dummy.at or +43-0000-LIZENZ to request a new license.</value>
-  </data>
-  <data name="lblLicenseSignatureInvalid.Text" xml:space="preserve">
-    <value>The license is invalid because she was modified by a non authorised person. Please use your original license or contact Kontakt-Name via lizenz@dummy.at or +43-0000-LIZENZ for requesting a new license.</value>
-  </data>
-  <data name="lblLicenseMissing.Text" xml:space="preserve">
-    <value>No license was found. If you already have a valid license please import it via the button 'Import license'. If you do not have a valid license please contact Kontakt-Name via lizenz@dummy.at or +43-0000-LIZENZ to request a license. For requesting a license you have to post your hardware ID which is displayed in this dialog.
-</value>
-  </data>
-  <data name="lblLicenseInvalidUnknown.Text" xml:space="preserve">
-    <value>The license is invalid. If you already have a valid license please import it via the button 'Import license'. If you do not have a valid license please contact Kontakt-Name via lizenz@dummy.at or +43-0000-LIZENZ to request a license. For requesting a license you have to post your hardware ID which is displayed in this dialog.</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>License</value>
-  </data>
   <data name="LicenseDateNotValidMessage" xml:space="preserve">
-    <value>It was not possible to import the selected license file because the validity of this license has already expired.</value>
+    <value>Die ausgewählte Lizenzdatei konnte nicht importiert werden, da die Gültigkeit der Lizenz bereits abgelaufen ist.</value>
   </data>
   <data name="LicenseFileDescription" xml:space="preserve">
-    <value>Europlan 2.0 license</value>
+    <value>Europlan 2.0 Lizenz</value>
   </data>
   <data name="LicenseImportedMessage" xml:space="preserve">
-    <value>The selected license is valid and was imported.</value>
+    <value>Die ausgewählte Lizenz ist gültig und wurde importiert.</value>
   </data>
   <data name="LicenseImportFailedTitle" xml:space="preserve">
-    <value>Error on import</value>
+    <value>Fehler beim Importieren</value>
   </data>
   <data name="LicenseImportOkTitle" xml:space="preserve">
-    <value>License imported</value>
+    <value>Lizenz importiert</value>
   </data>
   <data name="LicenseNotFoundMessage" xml:space="preserve">
-    <value>The selected license file was not found.</value>
+    <value>Die ausgewählte Lizenzdatei konnte nicht gefunden werden.</value>
   </data>
   <data name="LicenseNotReadableMessage" xml:space="preserve">
-    <value>The selected license file was not readable. Either you don't have the permission to open this file or this file is not a valid Europlan 2.0 license file.</value>
+    <value>Die ausgewählte Lizenzdatei konnte nicht gelesen werden. Sie besitzen entweder keine Rechte diese Datei zu öffnen oder die Datei ist keine gültige Europlan 2.0 Lizenzdatei.</value>
   </data>
   <data name="LicenseNotValidMessage" xml:space="preserve">
-    <value>It was not possible to import the selected license file.</value>
+    <value>Die ausgewählte Lizenzdatei konnte nicht importiert werden.</value>
   </data>
   <data name="LicenseSignatureNotValidMessage" xml:space="preserve">
-    <value>It was not possible to import the selected license file because this license file was modified by a not authorised person.</value>
+    <value>Die ausgewählte Lizenzdatei konnte nicht importiert werden, da sie von nicht authorisierter Stelle modifiziert wurde.</value>
   </data>
   <data name="LicenseSystemNotValidMessage" xml:space="preserve">
-    <value>It was not possible to import the selected license file because this license file is not valid for the current system.</value>
+    <value>Die ausgewählte Lizenzdatei konnte nicht importiert werden, da sie auf dem aktuellen Rechner nicht gültig ist.</value>
   </data>
   <data name="LicenseTemporaryImportedMessage" xml:space="preserve">
-    <value>The selected license is valid and was imported. But because it was not possible to save it permanently under '{0}', the license has to be imported again when the program is restarted.</value>
+    <value>Die ausgewählte Lizenz ist gültig und wurde importiert. Sie konnte allerdings nicht permanent unter '{0}' gespeichert werden und muss beim nächsten Starten des Programms erneut importiert werden.</value>
   </data>
 </root>

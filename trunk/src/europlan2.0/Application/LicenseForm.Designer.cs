@@ -34,8 +34,15 @@ namespace Europlan.Application {
 			this.lblValidUntil = new System.Windows.Forms.Label();
 			this.lstModule = new System.Windows.Forms.ListView();
 			this.lblModules = new System.Windows.Forms.Label();
-			this.lblValid = new System.Windows.Forms.Label();
-			this.txtValid = new System.Windows.Forms.TextBox();
+			this.lblHardwareId = new System.Windows.Forms.Label();
+			this.txtHardwareId = new System.Windows.Forms.TextBox();
+			this.panModules = new System.Windows.Forms.Panel();
+			this.lblLicenseSystemInvalid = new System.Windows.Forms.Label();
+			this.lblLicenseDateInvalid = new System.Windows.Forms.Label();
+			this.lblLicenseSignatureInvalid = new System.Windows.Forms.Label();
+			this.lblLicenseMissing = new System.Windows.Forms.Label();
+			this.lblLicenseInvalidUnknown = new System.Windows.Forms.Label();
+			this.panModules.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// btnOk
@@ -44,6 +51,7 @@ namespace Europlan.Application {
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOk.Name = "btnOk";
 			this.btnOk.UseVisualStyleBackColor = true;
+			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
 			// 
 			// label1
 			// 
@@ -53,21 +61,22 @@ namespace Europlan.Application {
 			// txtLicensedTo
 			// 
 			resources.ApplyResources(this.txtLicensedTo, "txtLicensedTo");
-			this.txtLicensedTo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.txtLicensedTo.BackColor = System.Drawing.SystemColors.Window;
+			this.txtLicensedTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.txtLicensedTo.Name = "txtLicensedTo";
 			this.txtLicensedTo.ReadOnly = true;
 			// 
 			// txtHeader
 			// 
 			resources.ApplyResources(this.txtHeader, "txtHeader");
-			this.txtHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.txtHeader.BackColor = System.Drawing.SystemColors.Window;
+			this.txtHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.txtHeader.Name = "txtHeader";
 			this.txtHeader.ReadOnly = true;
 			// 
 			// btnImport
 			// 
 			resources.ApplyResources(this.btnImport, "btnImport");
-			this.btnImport.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnImport.Name = "btnImport";
 			this.btnImport.UseVisualStyleBackColor = true;
 			this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
@@ -80,7 +89,8 @@ namespace Europlan.Application {
 			// txtValidUntil
 			// 
 			resources.ApplyResources(this.txtValidUntil, "txtValidUntil");
-			this.txtValidUntil.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.txtValidUntil.BackColor = System.Drawing.SystemColors.Window;
+			this.txtValidUntil.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.txtValidUntil.Name = "txtValidUntil";
 			this.txtValidUntil.ReadOnly = true;
 			// 
@@ -91,9 +101,8 @@ namespace Europlan.Application {
 			// 
 			// lstModule
 			// 
-			resources.ApplyResources(this.lstModule, "lstModule");
-			this.lstModule.BackColor = System.Drawing.SystemColors.Control;
 			this.lstModule.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.lstModule, "lstModule");
 			this.lstModule.MultiSelect = false;
 			this.lstModule.Name = "lstModule";
 			this.lstModule.UseCompatibleStateImageBehavior = false;
@@ -104,29 +113,71 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.lblModules, "lblModules");
 			this.lblModules.Name = "lblModules";
 			// 
-			// lblValid
+			// lblHardwareId
 			// 
-			resources.ApplyResources(this.lblValid, "lblValid");
-			this.lblValid.Name = "lblValid";
+			resources.ApplyResources(this.lblHardwareId, "lblHardwareId");
+			this.lblHardwareId.Name = "lblHardwareId";
 			// 
-			// txtValid
+			// txtHardwareId
 			// 
-			resources.ApplyResources(this.txtValid, "txtValid");
-			this.txtValid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.txtValid.Name = "txtValid";
-			this.txtValid.ReadOnly = true;
+			resources.ApplyResources(this.txtHardwareId, "txtHardwareId");
+			this.txtHardwareId.BackColor = System.Drawing.SystemColors.Window;
+			this.txtHardwareId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.txtHardwareId.Name = "txtHardwareId";
+			this.txtHardwareId.ReadOnly = true;
+			// 
+			// panModules
+			// 
+			resources.ApplyResources(this.panModules, "panModules");
+			this.panModules.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panModules.Controls.Add(this.lstModule);
+			this.panModules.Name = "panModules";
+			// 
+			// lblLicenseSystemInvalid
+			// 
+			resources.ApplyResources(this.lblLicenseSystemInvalid, "lblLicenseSystemInvalid");
+			this.lblLicenseSystemInvalid.ForeColor = System.Drawing.Color.Red;
+			this.lblLicenseSystemInvalid.Name = "lblLicenseSystemInvalid";
+			// 
+			// lblLicenseDateInvalid
+			// 
+			resources.ApplyResources(this.lblLicenseDateInvalid, "lblLicenseDateInvalid");
+			this.lblLicenseDateInvalid.ForeColor = System.Drawing.Color.Red;
+			this.lblLicenseDateInvalid.Name = "lblLicenseDateInvalid";
+			// 
+			// lblLicenseSignatureInvalid
+			// 
+			resources.ApplyResources(this.lblLicenseSignatureInvalid, "lblLicenseSignatureInvalid");
+			this.lblLicenseSignatureInvalid.ForeColor = System.Drawing.Color.Red;
+			this.lblLicenseSignatureInvalid.Name = "lblLicenseSignatureInvalid";
+			// 
+			// lblLicenseMissing
+			// 
+			resources.ApplyResources(this.lblLicenseMissing, "lblLicenseMissing");
+			this.lblLicenseMissing.ForeColor = System.Drawing.Color.Red;
+			this.lblLicenseMissing.Name = "lblLicenseMissing";
+			// 
+			// lblLicenseInvalidUnknown
+			// 
+			resources.ApplyResources(this.lblLicenseInvalidUnknown, "lblLicenseInvalidUnknown");
+			this.lblLicenseInvalidUnknown.ForeColor = System.Drawing.Color.Red;
+			this.lblLicenseInvalidUnknown.Name = "lblLicenseInvalidUnknown";
 			// 
 			// LicenseForm
 			// 
 			this.AcceptButton = this.btnOk;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.SystemColors.ControlDark;
 			this.ControlBox = false;
-			this.Controls.Add(this.lblValid);
-			this.Controls.Add(this.txtValid);
+			this.Controls.Add(this.lblLicenseInvalidUnknown);
+			this.Controls.Add(this.lblLicenseMissing);
+			this.Controls.Add(this.lblLicenseSignatureInvalid);
+			this.Controls.Add(this.lblLicenseDateInvalid);
+			this.Controls.Add(this.lblLicenseSystemInvalid);
+			this.Controls.Add(this.panModules);
+			this.Controls.Add(this.lblHardwareId);
+			this.Controls.Add(this.txtHardwareId);
 			this.Controls.Add(this.lblModules);
-			this.Controls.Add(this.lstModule);
 			this.Controls.Add(this.lblValidUntil);
 			this.Controls.Add(this.txtValidUntil);
 			this.Controls.Add(this.lblHeader);
@@ -142,6 +193,7 @@ namespace Europlan.Application {
 			this.TopMost = true;
 			this.Load += new System.EventHandler(this.LicenseForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LicenseForm_FormClosing);
+			this.panModules.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -159,7 +211,13 @@ namespace Europlan.Application {
 		private System.Windows.Forms.Label lblValidUntil;
 		private System.Windows.Forms.ListView lstModule;
 		private System.Windows.Forms.Label lblModules;
-		private System.Windows.Forms.Label lblValid;
-		private System.Windows.Forms.TextBox txtValid;
+		private System.Windows.Forms.Label lblHardwareId;
+		private System.Windows.Forms.TextBox txtHardwareId;
+		private System.Windows.Forms.Panel panModules;
+		private System.Windows.Forms.Label lblLicenseSystemInvalid;
+		private System.Windows.Forms.Label lblLicenseDateInvalid;
+		private System.Windows.Forms.Label lblLicenseSignatureInvalid;
+		private System.Windows.Forms.Label lblLicenseMissing;
+		private System.Windows.Forms.Label lblLicenseInvalidUnknown;
 	}
 }

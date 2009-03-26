@@ -24,8 +24,10 @@ namespace Europlan.AdminApplication {
 		/// </summary>
 		private void InitializeComponent() {
 			this.btnAddSystem = new System.Windows.Forms.Button();
-			this.txtSystem = new System.Windows.Forms.TextBox();
 			this.lstSystems = new System.Windows.Forms.ListView();
+			this.colHardwareId = new System.Windows.Forms.ColumnHeader();
+			this.colSystemAddedAt = new System.Windows.Forms.ColumnHeader();
+			this.colAnnotation = new System.Windows.Forms.ColumnHeader();
 			this.lblSystem = new System.Windows.Forms.Label();
 			this.lstModules = new System.Windows.Forms.ListView();
 			this.lblModules = new System.Windows.Forms.Label();
@@ -35,50 +37,57 @@ namespace Europlan.AdminApplication {
 			this.txtLicensedTo = new System.Windows.Forms.TextBox();
 			this.lblValidUntil = new System.Windows.Forms.Label();
 			this.dtpValidUntil = new System.Windows.Forms.DateTimePicker();
-			this.colSystemAddedAt = new System.Windows.Forms.ColumnHeader();
-			this.colSystemId = new System.Windows.Forms.ColumnHeader();
-			this.colAnnotation = new System.Windows.Forms.ColumnHeader();
+			this.syeCurrentSystem = new Europlan.AdminApplication.SystemEditor();
 			this.SuspendLayout();
 			// 
 			// btnAddSystem
 			// 
-			this.btnAddSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAddSystem.Location = new System.Drawing.Point(439, 430);
+			this.btnAddSystem.Location = new System.Drawing.Point(4, 429);
 			this.btnAddSystem.Name = "btnAddSystem";
-			this.btnAddSystem.Size = new System.Drawing.Size(109, 23);
+			this.btnAddSystem.Size = new System.Drawing.Size(134, 23);
 			this.btnAddSystem.TabIndex = 26;
 			this.btnAddSystem.Text = "Neuer Rechner";
 			this.btnAddSystem.UseVisualStyleBackColor = true;
 			this.btnAddSystem.Click += new System.EventHandler(this.btnAddSystem_Click);
-			// 
-			// txtSystem
-			// 
-			this.txtSystem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtSystem.BackColor = System.Drawing.SystemColors.Window;
-			this.txtSystem.Enabled = false;
-			this.txtSystem.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-			this.txtSystem.Location = new System.Drawing.Point(144, 432);
-			this.txtSystem.Name = "txtSystem";
-			this.txtSystem.ReadOnly = true;
-			this.txtSystem.Size = new System.Drawing.Size(289, 20);
-			this.txtSystem.TabIndex = 25;
 			// 
 			// lstSystems
 			// 
 			this.lstSystems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.lstSystems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colHardwareId,
             this.colSystemAddedAt,
-            this.colSystemId,
             this.colAnnotation});
+			this.lstSystems.FullRowSelect = true;
+			this.lstSystems.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.lstSystems.HideSelection = false;
 			this.lstSystems.Location = new System.Drawing.Point(144, 305);
+			this.lstSystems.MultiSelect = false;
 			this.lstSystems.Name = "lstSystems";
+			this.lstSystems.ShowGroups = false;
 			this.lstSystems.Size = new System.Drawing.Size(404, 119);
 			this.lstSystems.TabIndex = 24;
 			this.lstSystems.UseCompatibleStateImageBehavior = false;
 			this.lstSystems.View = System.Windows.Forms.View.Details;
+			this.lstSystems.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lstSystems_ItemSelectionChanged);
+			this.lstSystems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstSystems_KeyDown);
+			// 
+			// colHardwareId
+			// 
+			this.colHardwareId.DisplayIndex = 1;
+			this.colHardwareId.Text = "Hardware ID";
+			this.colHardwareId.Width = 130;
+			// 
+			// colSystemAddedAt
+			// 
+			this.colSystemAddedAt.DisplayIndex = 0;
+			this.colSystemAddedAt.Text = "Hinzugefügt am";
+			this.colSystemAddedAt.Width = 90;
+			// 
+			// colAnnotation
+			// 
+			this.colAnnotation.Text = "Anmerkung";
+			this.colAnnotation.Width = 170;
 			// 
 			// lblSystem
 			// 
@@ -86,7 +95,7 @@ namespace Europlan.AdminApplication {
 			this.lblSystem.Name = "lblSystem";
 			this.lblSystem.Size = new System.Drawing.Size(137, 16);
 			this.lblSystem.TabIndex = 23;
-			this.lblSystem.Text = "Rechner:";
+			this.lblSystem.Text = "Lizenzierte Rechner:";
 			this.lblSystem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// lstModules
@@ -108,7 +117,7 @@ namespace Europlan.AdminApplication {
 			this.lblModules.Name = "lblModules";
 			this.lblModules.Size = new System.Drawing.Size(137, 16);
 			this.lblModules.TabIndex = 21;
-			this.lblModules.Text = "Module:";
+			this.lblModules.Text = "Lizenzierte Produkte:";
 			this.lblModules.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// lblHeader
@@ -117,7 +126,7 @@ namespace Europlan.AdminApplication {
 			this.lblHeader.Name = "lblHeader";
 			this.lblHeader.Size = new System.Drawing.Size(137, 16);
 			this.lblHeader.TabIndex = 20;
-			this.lblHeader.Text = "Kopf:";
+			this.lblHeader.Text = "Seitenkopf:";
 			this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// txtHeader
@@ -139,7 +148,7 @@ namespace Europlan.AdminApplication {
 			this.lblLicensedTo.Name = "lblLicensedTo";
 			this.lblLicensedTo.Size = new System.Drawing.Size(137, 16);
 			this.lblLicensedTo.TabIndex = 18;
-			this.lblLicensedTo.Text = "Lizenznehmer:";
+			this.lblLicensedTo.Text = "Lizenziert für:";
 			this.lblLicensedTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// txtLicensedTo
@@ -173,20 +182,16 @@ namespace Europlan.AdminApplication {
 			this.dtpValidUntil.TabIndex = 29;
 			this.dtpValidUntil.ValueChanged += new System.EventHandler(this.dtpValidUntil_ValueChanged);
 			// 
-			// colSystemAddedAt
+			// syeCurrentSystem
 			// 
-			this.colSystemAddedAt.Text = "Hinzugefügt am";
-			this.colSystemAddedAt.Width = 90;
-			// 
-			// colSystemId
-			// 
-			this.colSystemId.Text = "Rechner ID";
-			this.colSystemId.Width = 130;
-			// 
-			// colAnnotation
-			// 
-			this.colAnnotation.Text = "Anmerkung";
-			this.colAnnotation.Width = 170;
+			this.syeCurrentSystem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.syeCurrentSystem.Enabled = false;
+			this.syeCurrentSystem.LicensedSystem = null;
+			this.syeCurrentSystem.Location = new System.Drawing.Point(144, 430);
+			this.syeCurrentSystem.Name = "syeCurrentSystem";
+			this.syeCurrentSystem.Size = new System.Drawing.Size(404, 105);
+			this.syeCurrentSystem.TabIndex = 31;
 			// 
 			// LicenseEditor
 			// 
@@ -194,10 +199,10 @@ namespace Europlan.AdminApplication {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
 			this.AutoScrollMinSize = new System.Drawing.Size(400, 0);
+			this.Controls.Add(this.syeCurrentSystem);
 			this.Controls.Add(this.dtpValidUntil);
 			this.Controls.Add(this.lblValidUntil);
 			this.Controls.Add(this.btnAddSystem);
-			this.Controls.Add(this.txtSystem);
 			this.Controls.Add(this.lstSystems);
 			this.Controls.Add(this.lblSystem);
 			this.Controls.Add(this.lstModules);
@@ -207,7 +212,7 @@ namespace Europlan.AdminApplication {
 			this.Controls.Add(this.lblLicensedTo);
 			this.Controls.Add(this.txtLicensedTo);
 			this.Name = "LicenseEditor";
-			this.Size = new System.Drawing.Size(551, 509);
+			this.Size = new System.Drawing.Size(551, 589);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -216,7 +221,6 @@ namespace Europlan.AdminApplication {
 		#endregion
 
 		private System.Windows.Forms.Button btnAddSystem;
-		private System.Windows.Forms.TextBox txtSystem;
 		private System.Windows.Forms.ListView lstSystems;
 		private System.Windows.Forms.Label lblSystem;
 		private System.Windows.Forms.ListView lstModules;
@@ -228,7 +232,8 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.Label lblValidUntil;
 		private System.Windows.Forms.DateTimePicker dtpValidUntil;
 		private System.Windows.Forms.ColumnHeader colSystemAddedAt;
-		private System.Windows.Forms.ColumnHeader colSystemId;
+		private System.Windows.Forms.ColumnHeader colHardwareId;
 		private System.Windows.Forms.ColumnHeader colAnnotation;
+		private SystemEditor syeCurrentSystem;
 	}
 }

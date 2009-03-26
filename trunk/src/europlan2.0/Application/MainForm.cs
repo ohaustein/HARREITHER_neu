@@ -17,13 +17,28 @@ namespace Europlan.Application {
 		private string projectFileName = null;
 		private Project currentProject = null;
 
+		private static readonly string defaultTitle = "Europlan";
+		private string title;
+
 		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 		private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
 
 		public MainForm() {
 			InitializeComponent();
 
-			if (!LicenseManager.Instance.LicenseFound || !LicenseManager.Instance.License.IsValid) {
+			LicenseManager.Instance.LicenseChanged += new EventHandler(licenseManager_LicenseChanged);
+
+			this.UpdateAvailableFeatures();
+
+			this.updateController.CheckForUpdateAsync();
+		}
+
+		private void licenseManager_LicenseChanged(object sender, EventArgs e) {
+			this.UpdateAvailableFeatures();
+		}
+
+		private void UpdateAvailableFeatures() {
+			if (!LicenseManager.Instance.LicenseFoundAndValid) {
 				this.newToolStripMenuItem.Enabled = false;
 				this.newToolStripButton.Enabled = false;
 				this.openToolStripMenuItem.Enabled = false;
@@ -32,10 +47,20 @@ namespace Europlan.Application {
 				this.saveToolStripButton.Enabled = false;
 				this.saveAsToolStripMenuItem.Enabled = false;
 				this.printToolStripButton.Enabled = false;
+				this.title = MainForm.defaultTitle + " (" + resources.GetString("NotLicensed", Thread.CurrentThread.CurrentUICulture) + ")";
+				this.UpdateTitle();
+			} else {
+				this.newToolStripMenuItem.Enabled = true;
+				this.newToolStripButton.Enabled = true;
+				this.openToolStripMenuItem.Enabled = true;
+				this.openToolStripButton.Enabled = true;
+				this.saveToolStripMenuItem.Enabled = true;
+				this.saveToolStripButton.Enabled = true;
+				this.saveAsToolStripMenuItem.Enabled = true;
+				this.printToolStripButton.Enabled = true;
+				this.title = MainForm.defaultTitle;
 				this.UpdateTitle();
 			}
-
-			this.updateController.CheckForUpdateAsync();
 		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -57,12 +82,16 @@ namespace Europlan.Application {
 			Project.ProjectLoaded += new Project.ProjectLoadedHandler(myProject_ProjectLoaded);
 			Project.ProjectSaved += new Project.ProjectSavedHandler(myProject_ProjectSaved);
 
-			if (LicenseManager.Instance.LicenseFound && LicenseManager.Instance.License.IsValid) {
-				if (projectFileName != null) {
-					LoadProject();
-				} else {
-					NewProject();
-				}
+			if (projectFileName != null) {
+				LoadProject();
+			} else {
+				NewProject();
+			}
+
+			if (!LicenseManager.Instance.LicenseFoundAndValid) {
+				LicenseForm license = new LicenseForm();
+				license.ShowDialog();
+				license.Dispose();
 			}
 		}
 
@@ -145,10 +174,10 @@ namespace Europlan.Application {
 		}
 
 		private void UpdateTitle() {
-			if (!LicenseManager.Instance.LicenseFound || !LicenseManager.Instance.License.IsValid) {
-				this.Text = "Europlan - (" + resources.GetString("NotLicensed", Thread.CurrentThread.CurrentUICulture) + ")";
+			if (!LicenseManager.Instance.LicenseFoundAndValid) {
+				this.Text = this.title;
 			} else {
-				string title = "Europlan - [";
+				string title = this.title + " - [";
 				if (projectFileName != null) {
 					title += projectFileName;
 				} else {

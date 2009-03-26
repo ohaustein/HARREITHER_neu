@@ -47,13 +47,20 @@ namespace Europlan.AdminApplication {
 			License lic = this.licenseEditor1.License.CreateLicense();
 			if (lic != null) {
 				SaveFileDialog dialog = new SaveFileDialog();
-				dialog.DefaultExt = ".lic";
+				dialog.CheckPathExists = true;
+				dialog.DefaultExt = "epl";
+				dialog.Filter = "Europlan 2.0 Lizenz (*.epl)|*.epl";
+
 				if (dialog.ShowDialog() == DialogResult.OK) {
 					using (Stream s = new FileStream(dialog.FileName, FileMode.Create)) {
 						lic.SaveLicense(s);
 					}
 				}
 			}
+		}
+
+		private void beendenToolStripMenuItem_Click(object sender, EventArgs e) {
+			System.Windows.Forms.Application.Exit();
 		}
 	}
 }

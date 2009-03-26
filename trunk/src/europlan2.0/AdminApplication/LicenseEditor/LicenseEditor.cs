@@ -37,7 +37,6 @@ namespace Europlan.AdminApplication {
 				txtHeader.Text = "";
 				lstModules.Items.Clear();
 				lstSystems.Items.Clear();
-				txtSystem.Text = "";
 			} else {
 				txtLicensedTo.Text = this.license.LicensedTo;
 				dtpValidUntil.Value = this.license.ValidUntil;
@@ -162,9 +161,11 @@ namespace Europlan.AdminApplication {
 
 		private void btnAddSystem_Click(object sender, EventArgs e) {
 			if (this.license != null) {
-				LicensedSystemTemplate system = new LicensedSystemTemplate();
+				LicensedSystemTemplate system = new LicensedSystemTemplate("000000-000000-000000");
+				SystemItem newItem = new SystemItem(system);
 				this.license.Systems.Add(system);
-				this.RefreshSystemList();
+				this.lstSystems.Items.Add(newItem);
+				newItem.Selected = true;
 			}
 		}
 
@@ -172,7 +173,44 @@ namespace Europlan.AdminApplication {
 			lstSystems.Items.Clear();
 			if (this.license != null) {
 				foreach (LicensedSystemTemplate system in this.license.Systems) {
-					lstSystems.Items.Add(new ListViewItem(system.Id));
+					lstSystems.Items.Add(new SystemItem(system));
+				}
+			}
+		}
+
+		private void lstSystems_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e) {
+			SystemItem item = e.Item as SystemItem;
+			if (item == null) {
+				return;
+			}
+			if (this.syeCurrentSystem.LicensedSystem == item.LicensedSystem) {
+				if (!e.IsSelected) {
+					this.syeCurrentSystem.LicensedSystem = null;
+				}
+			} else if (e.IsSelected) {
+				this.syeCurrentSystem.LicensedSystem = item.LicensedSystem;
+			}
+			/*LicensedSystem sytem = e.Item.Tag as LicensedSystem;
+			if (system == null) {
+				return;
+			}
+			if (this.licenseEditor1.License == item.License) {
+				if (!e.IsSelected) {
+					this.licenseEditor1.License = null;
+					this.btnSaveLicense.Enabled = false;
+				}
+			} else if (e.IsSelected) {
+				this.licenseEditor1.License = item.License;
+				this.btnSaveLicense.Enabled = true;
+			}*/
+
+		}
+
+		private void lstSystems_KeyDown(object sender, KeyEventArgs e) {
+			if (e.KeyCode == Keys.Delete) {
+				ListView.SelectedListViewItemCollection items = this.lstSystems.SelectedItems;
+				foreach (ListViewItem item in items) {
+					this.lstSystems.Items.Remove(item);
 				}
 			}
 		}

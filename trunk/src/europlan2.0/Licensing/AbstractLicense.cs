@@ -36,7 +36,7 @@ namespace Europlan.Licensing {
 		public string DisplayName {
 			get {
 				string result = (string.IsNullOrEmpty(this.licensedTo)) ? "neue Lizenz" : this.licensedTo;
-				result += " (" + this.validUntil.ToShortDateString() + ")";
+				//result += " (" + this.validUntil.ToShortDateString() + ")";
 				return result; // TODO
 			}
 		}

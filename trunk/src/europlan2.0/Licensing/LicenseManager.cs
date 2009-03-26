@@ -21,6 +21,19 @@ namespace Europlan.Licensing {
 			}
 		}
 
+		private event EventHandler licenseChanged;
+
+		public event EventHandler LicenseChanged {
+			add { this.licenseChanged += value; }
+			remove { this.licenseChanged -= value; }
+		}
+
+		private void OnLicenseChanged() {
+			if (this.licenseChanged != null) {
+				this.licenseChanged(this, EventArgs.Empty);
+			}
+		}
+
 		private License license = null;
 		private string dataDirPath;
 
@@ -28,7 +41,9 @@ namespace Europlan.Licensing {
 			if (EncryptionManager.Instance.Key == null) {
 				EncryptionManager.Instance.Key = "<RSAKeyValue><Modulus>16CcCS56V1YIkjht12jOg5G2597D2lv+AwKMAKvueYpT2X5iE42yuKm/DFDhEIeyGckKe+Edz/T4OtpIq+5oTQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
 			}
-			this.dataDirPath = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath), "data");
+			
+			this.dataDirPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
+			//this.dataDirPath = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath), "data");
 			string licensePath = Path.Combine(this.dataDirPath, licenseFileName);
 			if (File.Exists(licensePath)) {
 				try {
@@ -53,27 +68,46 @@ namespace Europlan.Licensing {
 #endif
 		}
 
-		public bool ImportLicense(string filename) {
+		public ImportLicenseResultEnum ImportLicense(string filename) {
 			if (File.Exists(filename)) {
+				bool copied = false;
 				try {
+					License newLicense;
 					using (Stream s = new FileStream(filename, FileMode.Open)) {
-						this.license = License.LoadLicense(s);
+						newLicense = License.LoadLicense(s);
 					}
-					try {
-						if (!Directory.Exists(this.dataDirPath)) {
-							Directory.CreateDirectory(this.dataDirPath);
+					if (!newLicense.IsValid) {
+						if (!newLicense.IsSignatureValid) {
+							return ImportLicenseResultEnum.LICENSE_SIGNATURE_NOT_VALID;
+						} else if (!newLicense.IsSystemValid) {
+							return ImportLicenseResultEnum.LICENSE_SYSTEM_NOT_VALID;
+						} else if (!newLicense.IsDateValid) {
+							return ImportLicenseResultEnum.LICENSE_DATE_NOT_VALID;
+						} else {
+							return ImportLicenseResultEnum.LICENSE_NOT_VALID;
 						}
-						File.Copy(filename, Path.Combine(this.dataDirPath, licenseFileName));
+					}
+					this.license = newLicense;
+					try {
+						File.Copy(filename, Path.Combine(this.dataDirPath, licenseFileName), true);
+						copied = true;
 					} catch (Exception e) {
 						log.Warn("Cannot copy license to data directory", e);
 					}
 				} catch (Exception e) {
 					log.Error("Cannot read license file", e);
+					return ImportLicenseResultEnum.LICENSE_NOT_READABLE;
+				}
+				this.OnLicenseChanged();
+				if (copied) {
+					return ImportLicenseResultEnum.LICENSE_IMPORTED;
+				} else {
+					return ImportLicenseResultEnum.LICENSE_TEMPORARY_IMPORTED;
 				}
 			} else {
 				log.Warn("License '" + filename + "' not found");
+				return ImportLicenseResultEnum.LICENSE_NOT_FOUND;
 			}
-			return this.LicenseFound;
 		}
 
 		public License License {
@@ -83,5 +117,24 @@ namespace Europlan.Licensing {
 		public bool LicenseFound {
 			get { return this.license != null; }
 		}
+
+		public bool LicenseFoundAndValid {
+			get { return this.license != null && this.license.IsValid; }
+		}
+
+		public string LincensePath {
+			get { return Path.Combine(this.dataDirPath, LicenseManager.licenseFileName); }
+		}
+	}
+
+	public enum ImportLicenseResultEnum {
+		LICENSE_IMPORTED,
+		LICENSE_NOT_FOUND,
+		LICENSE_NOT_READABLE,
+		LICENSE_DATE_NOT_VALID,
+		LICENSE_SIGNATURE_NOT_VALID,
+		LICENSE_SYSTEM_NOT_VALID,
+		LICENSE_NOT_VALID,
+		LICENSE_TEMPORARY_IMPORTED
 	}
 }
