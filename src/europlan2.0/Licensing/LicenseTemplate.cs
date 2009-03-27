@@ -15,6 +15,13 @@ namespace Europlan.Licensing {
 			return new LicensedModuleTemplate(moduleName);
 		}
 
+		public string Signature {
+			get {
+				Debug.Assert(!EncryptionManager.Instance.PublicOnly);
+				return EncryptionManager.Instance.CalculateSignature(this.LicenseStringForSigning);
+			}
+		}
+
 		[XmlAttribute("email")]
 		public string Email {
 			get { return this.email; }

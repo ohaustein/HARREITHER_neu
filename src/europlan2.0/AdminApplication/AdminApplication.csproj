@@ -36,6 +36,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LicenseManager.cs" />
     <Compile Include="LicenseEditor\SystemEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>

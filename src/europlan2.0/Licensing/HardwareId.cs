@@ -11,18 +11,37 @@ namespace Europlan.Licensing {
 		public static readonly string hardwareIdKeyChars = "0123456789abcdef";
 		
 		private byte[] id = null;
+		private byte checksum = 0;
 
 		private static byte[] currentSystemId = null;
 
 		public HardwareId() {
 			this.id = GetCurrentSystemId();
+			this.checksum = GetChecksum(this.id);
 		}
 
 		public HardwareId(byte[] id) {
-			if (id.Length != 9) {
+			if (id.Length < 8 || id.Length > 9) {
 				throw new Exception("invalid system id");
 			}
-			this.id = id;
+			if (id.Length == 9) {
+				this.id = new byte[8];
+				for (int i = 0; i < 8; i++) {
+					this.id[i] = id[i];
+				}
+				this.checksum = id[8];
+			} else {
+				this.id = id;
+				this.checksum = GetChecksum(this.id);
+			}
+		}
+
+		private static byte GetChecksum(byte[] id) {
+			byte checksum = 0;
+			for (int i = 0; i < 8; i++) {
+				checksum ^= id[i];
+			}
+			return checksum;
 		}
 
 		public HardwareId(string idString) {
@@ -47,7 +66,11 @@ namespace Europlan.Licensing {
 			if (i < 9 || tmp.Length > 0) {
 				throw new Exception("invalid system id");
 			}
-			this.id = tmpId;
+			this.id = new byte[8];
+			for (i = 0; i < 8; i++) {
+				this.id[i] = tmpId[i];
+			}
+			this.checksum = tmpId[8];
 		}
 
 		public override string ToString() {
@@ -60,7 +83,7 @@ namespace Europlan.Licensing {
 		public string IdString {
 			get {
 				Debug.Assert(this.id != null);
-				string systemId = string.Format("{0:x2}{1:x2}{2:x2}-{3:x2}{4:x2}{5:x2}-{6:x2}{7:x2}{8:x2}", this.id[0], this.id[1], this.id[2], this.id[3], this.id[4], this.id[5], this.id[6], this.id[7], this.id[8]);
+				string systemId = string.Format("{0:x2}{1:x2}{2:x2}-{3:x2}{4:x2}{5:x2}-{6:x2}{7:x2}{8:x2}", this.id[0], this.id[1], this.id[2], this.id[3], this.id[4], this.id[5], this.id[6], this.id[7], this.checksum);
 				return systemId;
 			}
 		}
@@ -71,6 +94,11 @@ namespace Europlan.Licensing {
 				return this.id;
 			}
 		}
+
+		public bool IsValid {
+			get { return this.checksum == GetChecksum(this.id); }
+		}
+
 
 		public override bool Equals(object obj) {
 			HardwareId other = obj as HardwareId;
@@ -91,7 +119,7 @@ namespace Europlan.Licensing {
 				this.id[5] == other.id[5] &&
 				this.id[6] == other.id[6] &&
 				this.id[7] == other.id[7] &&
-				this.id[8] == other.id[8];
+				this.checksum == other.checksum;
 		}
 
 		public override int GetHashCode() {
