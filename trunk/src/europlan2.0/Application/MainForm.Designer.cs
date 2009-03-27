@@ -37,6 +37,7 @@ namespace Europlan.Application {
 			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,10 +57,11 @@ namespace Europlan.Application {
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
 			this.projectTree = new System.Windows.Forms.TreeView();
-			this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.button1 = new System.Windows.Forms.Button();
 			this.mainMenu.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.splitContainer.Panel1.SuspendLayout();
+			this.splitContainer.Panel2.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -145,6 +147,12 @@ namespace Europlan.Application {
             this.settingsToolStripMenuItem});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
+			// 
+			// licenseToolStripMenuItem
+			// 
+			this.licenseToolStripMenuItem.Name = "licenseToolStripMenuItem";
+			resources.ApplyResources(this.licenseToolStripMenuItem, "licenseToolStripMenuItem");
+			this.licenseToolStripMenuItem.Click += new System.EventHandler(this.licenseToolStripMenuItem_Click);
 			// 
 			// settingsToolStripMenuItem
 			// 
@@ -270,17 +278,22 @@ namespace Europlan.Application {
 			// 
 			this.splitContainer.Panel1.Controls.Add(this.projectTree);
 			// 
+			// splitContainer.Panel2
+			// 
+			this.splitContainer.Panel2.Controls.Add(this.button1);
+			// 
 			// projectTree
 			// 
 			this.projectTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			resources.ApplyResources(this.projectTree, "projectTree");
 			this.projectTree.Name = "projectTree";
 			// 
-			// licenseToolStripMenuItem
+			// button1
 			// 
-			this.licenseToolStripMenuItem.Name = "licenseToolStripMenuItem";
-			resources.ApplyResources(this.licenseToolStripMenuItem, "licenseToolStripMenuItem");
-			this.licenseToolStripMenuItem.Click += new System.EventHandler(this.licenseToolStripMenuItem_Click);
+			resources.ApplyResources(this.button1, "button1");
+			this.button1.Name = "button1";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// MainForm
 			// 
@@ -299,6 +312,7 @@ namespace Europlan.Application {
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
 			this.splitContainer.Panel1.ResumeLayout(false);
+			this.splitContainer.Panel2.ResumeLayout(false);
 			this.splitContainer.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -339,6 +353,7 @@ namespace Europlan.Application {
 		private System.Windows.Forms.SplitContainer splitContainer;
 		private System.Windows.Forms.TreeView projectTree;
 		private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem;
+		private System.Windows.Forms.Button button1;
 
 	}
 }

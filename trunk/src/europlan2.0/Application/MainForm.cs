@@ -250,5 +250,9 @@ namespace Europlan.Application {
 			license.Dispose();
 		}
 
+		private void button1_Click(object sender, EventArgs e) {
+			BuildingDataImportManager.Instance.ImportBuildingData();
+		}
+
 	}
 }

@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataExchange\BuildingDataImportManager.cs" />
+    <Compile Include="DataExchange\IBuildingDataImporter.cs" />
+    <Compile Include="DataExchange\SOLAR32Importer.cs" />
     <Compile Include="LicenseForm.cs">
       <SubType>Form</SubType>
     </Compile>
