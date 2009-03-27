@@ -30,6 +30,7 @@ namespace Europlan.Application {
 
 		private void InitializeRoom() {
 			name = "";
+			id = "";
 			temperature = 0;
 			area = 0;
 			heatPower = 0;

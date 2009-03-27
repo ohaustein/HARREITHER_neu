@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using log4net;
+using System.Xml.Serialization;
 
 namespace Europlan.Application {
 	
@@ -11,7 +12,7 @@ namespace Europlan.Application {
 		private string name;
 		private string id;
 
-		private IList<Room> rooms;
+		private List<Room> rooms;
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(Floor));
 
@@ -26,6 +27,7 @@ namespace Europlan.Application {
 
 		private void InitializeFloor() {
 			name = "";
+			id = "";
 			rooms = new List<Room>();
 		}
 
@@ -39,7 +41,7 @@ namespace Europlan.Application {
 			set { id = value; }
 		}
 
-		public IList<Room> Rooms {
+		public List<Room> Rooms {
 			get {
 				return rooms;
 			}

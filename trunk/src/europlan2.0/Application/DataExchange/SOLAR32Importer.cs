@@ -29,7 +29,7 @@ namespace Europlan.Application {
 			}
 		}
 
-		public IList<Floor> ImportBuildingDataFromFile(string fileName) {
+		public List<Floor> ImportBuildingDataFromFile(string fileName) {
 			try {
 				using (FileStream fs = File.Open(fileName, FileMode.Open, FileAccess.Read)) {
 					using (StreamReader sr = new StreamReader(fs, Encoding.Default)) {
@@ -42,8 +42,8 @@ namespace Europlan.Application {
 			return null;
 		}
 
-		private IList<Floor> ParseData(StreamReader reader) {
-			IList<Floor> floors = new List<Floor>();
+		private List<Floor> ParseData(StreamReader reader) {
+			List<Floor> floors = new List<Floor>();
 			string line = "";
 			Floor floor = null;
 			Room room = null;
@@ -59,14 +59,14 @@ namespace Europlan.Application {
 						floor.Rooms.Add(room);
 					}
 				} else if (line.StartsWith("CODE")) {
-					string code = (line.Split('='))[1];
+					string code = (line.Split('='))[1].Trim('\"');
 					if ((floor != null) && (floor.Id == "")) {
 						floor.Id = code;
 					} else if ((room != null) && (room.Id == "")) {
 						room.Id = code;
 					}
 				} else if (line.StartsWith("TEXT")) {
-					string text = (line.Split('='))[1];
+					string text = (line.Split('='))[1].Trim('\"');
 					if ((floor != null) && (floor.Name == "")) {
 						floor.Name = text;
 					} else if ((room != null) && (room.Name == "")) {
