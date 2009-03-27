@@ -100,7 +100,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Project\Floor.cs" />
     <Compile Include="Project\Project.cs" />
+    <Compile Include="Project\Room.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>

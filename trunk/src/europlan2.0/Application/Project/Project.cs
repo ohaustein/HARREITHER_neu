@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 
 namespace Europlan.Application {
 
-	[XmlRoot("project")]
 	public class Project {
 
 		private static Project instance = null;
@@ -26,6 +25,8 @@ namespace Europlan.Application {
 
 		public static event ProjectLoadedHandler ProjectLoaded;
 		public static event ProjectSavedHandler ProjectSaved;
+
+		IList<Floor> floors;
 
 		protected Project() {
 			log.Debug("default constructor called");
@@ -55,39 +56,35 @@ namespace Europlan.Application {
 			projectContact = "";
 			projectNotes = "";
 			projectEditor = "";
+
+			floors = new List<Floor>();
 		}
 
-		[XmlAttribute("projectName")]
 		public string ProjectName {
 			get { return projectName; }
 			set { projectName = value; }
 		}
 
-		[XmlAttribute("projectContact")]
 		public string ProjectContact {
 			get { return projectContact; }
 			set { projectContact = value; }
 		}
 
-		[XmlAttribute("projectNotes")]
 		public string ProjectNotes {
 			get { return projectNotes; }
 			set { projectNotes = value; }
 		}
 
-		[XmlAttribute("projectCreated")]
 		public DateTime ProjectCreated {
 			get { return projectCreated; }
 			set { projectCreated = value; }
 		}
 
-		[XmlAttribute("projectLastChanged")]
 		public DateTime ProjectLastChanged {
 			get { return projectLastChanged; }
 			set { projectLastChanged = value; }
 		}
 
-		[XmlAttribute("projectEditor")]
 		public string ProjectEditor {
 			get { return projectEditor; }
 			set { projectEditor = value; }
