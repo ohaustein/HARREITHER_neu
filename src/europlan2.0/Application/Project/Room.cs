@@ -9,6 +9,7 @@ namespace Europlan.Application {
 	public class Room {
 
 		private string name;
+		private string id;
 		private int temperature;
 		private float area;
 		private int heatPower;
@@ -40,6 +41,11 @@ namespace Europlan.Application {
 		public string Name {
 			get { return name; }
 			set { name = value; }
+		}
+
+		public string Id {
+			get { return id; }
+			set { id = value; }
 		}
 
 		public int Temperature {
