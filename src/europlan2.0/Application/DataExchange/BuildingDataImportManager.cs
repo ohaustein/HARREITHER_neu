@@ -72,7 +72,7 @@ namespace Europlan.Application {
 			if (result == DialogResult.OK) {
 				foreach (IBuildingDataImporter importer in importers) {
 					if (importer.FileExtension.Equals(Path.GetExtension(dialog.FileName), StringComparison.InvariantCultureIgnoreCase)) {
-						IList<Floor> floors = importer.ImportBuildingDataFromFile(dialog.FileName);
+						Project.Instance.Floors = importer.ImportBuildingDataFromFile(dialog.FileName);
 					}
 				}
 			}
