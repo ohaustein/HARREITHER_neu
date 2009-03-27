@@ -31,11 +31,11 @@ namespace Europlan.AdminApplication {
 			this.colLicensedTo = new System.Windows.Forms.ColumnHeader();
 			this.colValidUntil = new System.Windows.Forms.ColumnHeader();
 			this.btnSaveLicense = new System.Windows.Forms.Button();
-			this.licenseEditor1 = new Europlan.AdminApplication.LicenseEditor();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.licenseEditor1 = new Europlan.AdminApplication.LicenseEditor();
 			this.tabControl1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -142,26 +142,12 @@ namespace Europlan.AdminApplication {
 			this.btnSaveLicense.UseVisualStyleBackColor = true;
 			this.btnSaveLicense.Click += new System.EventHandler(this.btnSaveLicense_Click);
 			// 
-			// licenseEditor1
-			// 
-			this.licenseEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.licenseEditor1.AutoScroll = true;
-			this.licenseEditor1.AutoScrollMinSize = new System.Drawing.Size(400, 0);
-			this.licenseEditor1.Enabled = false;
-			this.licenseEditor1.License = null;
-			this.licenseEditor1.Location = new System.Drawing.Point(3, 3);
-			this.licenseEditor1.Name = "licenseEditor1";
-			this.licenseEditor1.Size = new System.Drawing.Size(557, 513);
-			this.licenseEditor1.TabIndex = 0;
-			// 
 			// tabPage1
 			// 
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(854, 578);
+			this.tabPage1.Size = new System.Drawing.Size(854, 554);
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "tabPage1";
 			this.tabPage1.UseVisualStyleBackColor = true;
@@ -192,6 +178,20 @@ namespace Europlan.AdminApplication {
 			this.beendenToolStripMenuItem.Text = "&Beenden";
 			this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
 			// 
+			// licenseEditor1
+			// 
+			this.licenseEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.licenseEditor1.AutoScroll = true;
+			this.licenseEditor1.AutoScrollMinSize = new System.Drawing.Size(400, 0);
+			this.licenseEditor1.Enabled = false;
+			this.licenseEditor1.License = null;
+			this.licenseEditor1.Location = new System.Drawing.Point(3, 3);
+			this.licenseEditor1.Name = "licenseEditor1";
+			this.licenseEditor1.Size = new System.Drawing.Size(557, 513);
+			this.licenseEditor1.TabIndex = 0;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,6 +201,8 @@ namespace Europlan.AdminApplication {
 			this.Controls.Add(this.menuStrip1);
 			this.Name = "MainForm";
 			this.Text = "Europlan Admin";
+			this.Load += new System.EventHandler(this.MainForm_Load);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.tabControl1.ResumeLayout(false);
 			this.tabPage2.ResumeLayout(false);
 			this.splitContainer1.Panel1.ResumeLayout(false);

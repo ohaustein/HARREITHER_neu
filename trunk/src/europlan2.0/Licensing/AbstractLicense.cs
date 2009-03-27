@@ -13,7 +13,6 @@ namespace Europlan.Licensing {
 		protected DateTime validUntil = DateTime.Now;
 		protected List<ModuleType> modules;
 		protected List<SystemType> systems;
-		protected string signature = null;
 
 		public AbstractLicense() {
 			this.modules = new List<ModuleType>();
@@ -135,33 +134,6 @@ namespace Europlan.Licensing {
 			set { this.systems = value; }
 		}
 
-		[XmlAttribute("signature")]
-		public string Signature {
-			get {
-				Debug.Assert(!EncryptionManager.Instance.PublicOnly || this.signature != null);
-				if (!EncryptionManager.Instance.PublicOnly) {
-					return EncryptionManager.Instance.CalculateSignature(this.LicenseStringForSigning);
-				} else {
-					return this.signature;
-				}
-			}
-			set {
-				if (EncryptionManager.Instance.PublicOnly) {
-					this.signature = value;
-				}
-			}
-		}
-
-		public bool IsSignatureValid {
-			get {
-#if DEBUG
-				return true;
-#else
-				return EncryptionManager.Instance.VerifySignature(this.LicenseStringForSigning, this.Signature);
-#endif
-			}
-		}
-
 		public bool IsSystemValid {
 			get {
 				HardwareId curId = new HardwareId();
@@ -180,8 +152,8 @@ namespace Europlan.Licensing {
 			}
 		}
 
-		public bool IsValid {
-			get { return this.IsSignatureValid && this.IsSystemValid && this.IsDateValid; }
+		public virtual bool IsValid {
+			get { return this.IsSystemValid && this.IsDateValid; }
 		}
 
 		public string LicenseStringForSigning {

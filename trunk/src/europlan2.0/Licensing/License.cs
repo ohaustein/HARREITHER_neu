@@ -9,8 +9,30 @@ namespace Europlan.Licensing {
 	[XmlRoot("license")]
 	public class License : AbstractLicense<LicensedModule, LicensedSystem> {
 
+		protected string signature = "";
+
 		protected override LicensedModule NewModule(string moduleName) {
 			return new LicensedModule(moduleName);
+		}
+
+		[XmlAttribute("signature")]
+		public string Signature {
+			get { return this.signature; }
+			set { this.signature = value; }
+		}
+
+		public bool IsSignatureValid {
+			get {
+#if DEBUG
+				return true;
+#else
+				return EncryptionManager.Instance.VerifySignature(this.LicenseStringForSigning, this.Signature);
+#endif
+			}
+		}
+
+		public override bool IsValid {
+			get { return this.IsSignatureValid && this.IsSystemValid && this.IsDateValid; }
 		}
 
 		public static License LoadLicense(Stream stream) {

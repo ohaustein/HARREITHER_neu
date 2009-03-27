@@ -20,6 +20,7 @@ namespace Europlan.AdminApplication {
 			}
 			LicenseItem newItem = new LicenseItem(newLicense);
 			this.lstLicenses.Items.Add(newItem);
+			LicenseManager.Instance.Licenses.Add(newLicense);
 			/*foreach (LicenseItem item in this.lstLicenses.Items) {
 				item.Selected = item == newItem;
 			}*/
@@ -61,6 +62,34 @@ namespace Europlan.AdminApplication {
 
 		private void beendenToolStripMenuItem_Click(object sender, EventArgs e) {
 			System.Windows.Forms.Application.Exit();
+		}
+
+		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+			try {
+				string licensesFile = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath), "licenses.xml");
+				using (Stream s = new FileStream(licensesFile, FileMode.Create)) {
+					LicenseManager.Instance.SaveLicenseManager(s);
+				}
+			} catch (Exception ex) {
+				// TODO log
+			}
+		}
+
+		private void MainForm_Load(object sender, EventArgs e) {
+			try {
+				string licensesFile = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath), "licenses.xml");
+				if (File.Exists(licensesFile)) {
+					using (Stream s = new FileStream(licensesFile, FileMode.Open)) {
+						LicenseManager.LoadLicenseManager(s);
+					}
+					foreach (LicenseTemplate license in LicenseManager.Instance.Licenses) {
+						LicenseItem item = new LicenseItem(license);
+						this.lstLicenses.Items.Add(item);
+					}
+				}
+			} catch (Exception ex) {
+				// TODO log
+			}
 		}
 	}
 }
