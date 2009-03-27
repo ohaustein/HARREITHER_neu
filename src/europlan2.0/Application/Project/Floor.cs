@@ -38,6 +38,15 @@ namespace Europlan.Application {
 			get { return id; }
 			set { id = value; }
 		}
+
+		public IList<Room> Rooms {
+			get {
+				return rooms;
+			}
+			set {
+				rooms = value;
+			}
+		}
 	
 	}
 
