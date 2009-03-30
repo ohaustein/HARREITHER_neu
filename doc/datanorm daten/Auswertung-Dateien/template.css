@@ -1,0 +1,142 @@
+body {
+	font-family:Arial;
+	font-size:12px;
+	color:#000000;
+	margin:5px;
+	padding:5px;
+	height:100%;
+	background-color:#ffffff;
+	scrollbar-face-color: #eee;
+	scrollbar-shadow-color: #687888;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-3dlight-color: #687888;
+	scrollbar-darkshadow-color: #DCE0E2;
+	scrollbar-track-color: #BCBFC0;
+	scrollbar-arrow-color: #6E7E88;
+}
+table {
+	border:0px solid;
+	border-collapse:collapse;
+}
+td {
+	border:0px solid;
+}
+.g_space1 {
+	height:35px;
+}
+.g_space2 {
+	height:25px;
+}
+.g_space3 {
+	height:10px;
+}
+.h_table {
+	margin-right:50px;
+}
+.h_kleintext {
+	font-family:Arial;
+	font-size:9px;
+	color:#808080;
+}
+.d_table {
+	margin-top:15px;
+	margin-bottom:30px;
+}
+.d_titel {
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+}
+.d_inhalt_title {
+	width:100px;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:normal;
+}
+.d_inhalt_content {
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+}
+.d_legende {
+	font-family:Arial;
+	font-size:10px;
+	font-weight:normal;
+}
+.m_table {
+	width:100%;
+}
+.m_col1 {
+  width:10px;
+	height:1px;
+}
+.m_col2 {
+	width:140px;
+	height:1px;
+}
+.m_col3 {
+	width:300px;
+	height:1px;
+}
+.m_col4 {
+	width:10%;
+	height:1px;
+}
+.m_col5 {
+	width:70px;
+	height:1px;
+}
+.m_col6 {
+	width:70px;
+	height:1px;
+}
+.m_col7 {
+	width:90%;
+	height:1px;
+}
+.m_titel {
+	font-family:Arial;
+	font-size:12px;
+	color:#FFFFFF;
+	border-bottom:1px solid #B0B0B0;
+	/*background-color:#990000;*/
+	background-color:#808080;
+}
+.m_artikelnummer {
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+	color:#808080;
+}
+.m_kurztext1 {
+	font-family:Arial;
+	font-size:11px;
+	font-weight:bold;
+	color: #990000;
+}
+.m_kurztext2 {
+	font-family:Arial;
+	font-size:11px;
+	font-weight:bold;
+	color: #990000;
+}
+.m_preis1 {
+	font-family:Arial;
+	font-size:12px;
+	color: #808080;
+}
+.m_preis2 {
+	font-family:Arial;
+	font-size:12px;
+	color: #808080;
+}
+.m_bild {
+	height:128px;
+	width:128px;
+	border:0px;
+}
+.m_ausschreibungstext {
+	font-family:courier;
+	font-size:12px;
+	color: #808080;
+}
