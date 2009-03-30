@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using log4net;
 using System.Xml.Serialization;
+using System.Windows.Forms;
 
 namespace Europlan.Application {
 	
@@ -49,7 +50,14 @@ namespace Europlan.Application {
 				rooms = value;
 			}
 		}
-	
+
+		internal void InitializeTree(System.Windows.Forms.TreeNode floors) {
+			TreeNode floor = new TreeNode(this.Name);
+			floors.Nodes.Add(floor);
+			foreach (Room room in rooms) {
+				room.InitializeTree(floor);
+			}
+		}
 	}
 
 }

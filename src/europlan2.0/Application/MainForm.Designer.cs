@@ -57,11 +57,9 @@ namespace Europlan.Application {
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
 			this.projectTree = new System.Windows.Forms.TreeView();
-			this.button1 = new System.Windows.Forms.Button();
 			this.mainMenu.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.splitContainer.Panel1.SuspendLayout();
-			this.splitContainer.Panel2.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -280,20 +278,15 @@ namespace Europlan.Application {
 			// 
 			// splitContainer.Panel2
 			// 
-			this.splitContainer.Panel2.Controls.Add(this.button1);
+			resources.ApplyResources(this.splitContainer.Panel2, "splitContainer.Panel2");
 			// 
 			// projectTree
 			// 
 			this.projectTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			resources.ApplyResources(this.projectTree, "projectTree");
+			this.projectTree.FullRowSelect = true;
 			this.projectTree.Name = "projectTree";
-			// 
-			// button1
-			// 
-			resources.ApplyResources(this.button1, "button1");
-			this.button1.Name = "button1";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
 			// 
 			// MainForm
 			// 
@@ -312,7 +305,6 @@ namespace Europlan.Application {
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
 			this.splitContainer.Panel1.ResumeLayout(false);
-			this.splitContainer.Panel2.ResumeLayout(false);
 			this.splitContainer.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -353,7 +345,6 @@ namespace Europlan.Application {
 		private System.Windows.Forms.SplitContainer splitContainer;
 		private System.Windows.Forms.TreeView projectTree;
 		private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem;
-		private System.Windows.Forms.Button button1;
 
 	}
 }

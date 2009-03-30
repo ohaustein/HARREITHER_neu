@@ -4,6 +4,8 @@ using System.Text;
 using log4net;
 using System.IO;
 using System.Xml.Serialization;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace Europlan.Application {
 
@@ -13,6 +15,7 @@ namespace Europlan.Application {
 		private static Project instance = null;
 		private static readonly object padlock = new object();
 		private static readonly ILog log = LogManager.GetLogger(typeof(Project));
+		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 		
 		private string projectName;
 		private string projectContact;
@@ -51,8 +54,9 @@ namespace Europlan.Application {
 		}
 
 		private void InitializeProject() {
-			projectCreated = DateTime.MinValue;
-			projectLastChanged = DateTime.MinValue;
+			DateTime now = DateTime.Now;
+			projectCreated = now;
+			projectLastChanged = now;
 			projectName = "";
 			projectContact = "";
 			projectNotes = "";
@@ -110,11 +114,7 @@ namespace Europlan.Application {
 
 		public static void Save(string filename) {
 			lock (padlock) {
-				DateTime now = DateTime.Now;
-				if (Instance.ProjectCreated == DateTime.MinValue) {
-					Instance.ProjectCreated = now;
-				}
-				Instance.ProjectLastChanged = now;
+				Instance.ProjectLastChanged = DateTime.Now;
 
 				XmlSerializer s = new XmlSerializer(typeof(Project));
 				TextWriter w = new StreamWriter(filename);
@@ -133,5 +133,26 @@ namespace Europlan.Application {
 			}			
 		}
 
+
+		internal void InitializeTreeView(System.Windows.Forms.TreeView tree) {
+			tree.Nodes.Clear();
+
+			// root note
+			string localized = resources.GetString("Project", Thread.CurrentThread.CurrentUICulture);
+			TreeNode root = new TreeNode(localized == null ? "Projekt" : localized);
+			tree.Nodes.Add(root);
+			root.Tag = typeof(ProjectSummaryPanel);
+
+			// building (floors and rooms)
+			localized = resources.GetString("Floors", Thread.CurrentThread.CurrentUICulture);
+			TreeNode floorsNode = new TreeNode(localized == null ? "Geschoﬂe" : localized);
+			tree.Nodes.Add(floorsNode);
+			foreach (Floor floor in floors) {
+				floor.InitializeTree(floorsNode);
+			}
+
+
+			tree.ExpandAll();
+		}
 	}
 }
