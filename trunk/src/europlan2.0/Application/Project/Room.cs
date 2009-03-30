@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using log4net;
+using System.Windows.Forms;
 
 namespace Europlan.Application {
 	
@@ -78,8 +79,11 @@ namespace Europlan.Application {
 			get { return normalizedCoolPower; }
 			set { normalizedCoolPower = value; }
 		}
-
-
+		
+		internal void InitializeTree(TreeNode floor) {
+			TreeNode room = new TreeNode(this.Name);
+			floor.Nodes.Add(room);
+		}
 	}
 
 }

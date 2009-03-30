@@ -88,6 +88,8 @@ namespace Europlan.Application {
 				NewProject();
 			}
 
+			Project.Instance.InitializeTreeView(this.projectTree);
+
 			if (!LicenseManager.Instance.LicenseFoundAndValid) {
 				LicenseForm license = new LicenseForm();
 				license.ShowDialog();
@@ -123,10 +125,12 @@ namespace Europlan.Application {
 			if (currentProject == null) {
 				currentProject = Project.New();
 			} else {
-				// TODO
+				// TODO - check for unsaved changes...
+				currentProject = Project.New();
 			}
 			projectFileName = null;
 			UpdateTitle();
+			Project.Instance.InitializeTreeView(this.projectTree);
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -171,6 +175,7 @@ namespace Europlan.Application {
 
 		void myProject_ProjectSaved(object sender) {
 			UpdateTitle();
+			Project.Instance.InitializeTreeView(this.projectTree);
 		}
 
 		private void UpdateTitle() {
@@ -190,6 +195,7 @@ namespace Europlan.Application {
 
 		void myProject_ProjectLoaded(object sender) {
 			UpdateTitle();
+			Project.Instance.InitializeTreeView(this.projectTree);
 		}
 
 		public string ProjectToLoad {
@@ -252,6 +258,23 @@ namespace Europlan.Application {
 
 		private void button1_Click(object sender, EventArgs e) {
 			BuildingDataImportManager.Instance.ImportBuildingData();
+			Project.Instance.InitializeTreeView(this.projectTree);
+		}
+
+		private void projectTree_AfterSelect(object sender, TreeViewEventArgs e) {
+			TreeNode selectedNode = e.Node;
+			splitContainer.Panel2.Controls.Clear();
+			if (selectedNode != null && selectedNode.Tag != null) {
+				UserControl control = null;
+				if (selectedNode.Tag is Type) {
+					control = (UserControl)Activator.CreateInstance(selectedNode.Tag as Type);
+					selectedNode.Tag = control;
+				} else {
+					control = selectedNode.Tag as UserControl;
+				}
+				splitContainer.Panel2.Controls.Add(control);
+				control.Dock = DockStyle.Fill;
+			}
 		}
 
 	}
