@@ -17,7 +17,7 @@ namespace Europlan.Application {
 
 
 		public void UpdateControl() {
-
+			
 		}
 
 		public bool AllowLeave() {
