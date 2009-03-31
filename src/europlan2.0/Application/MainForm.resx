@@ -117,17 +117,153 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitContainer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="splitContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 49</value>
+  </data>
+  <data name="projectTree.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="projectTree.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="projectTree.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 430</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="projectTree.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;projectTree.Name" xml:space="preserve">
+    <value>projectTree</value>
+  </data>
+  <data name="&gt;&gt;projectTree.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;projectTree.Parent" xml:space="preserve">
+    <value>splitContainer.Panel1</value>
+  </data>
+  <data name="&gt;&gt;projectTree.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel1.Name" xml:space="preserve">
+    <value>splitContainer.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel1.Parent" xml:space="preserve">
+    <value>splitContainer</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="splitContainer.Panel2.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="splitContainer.Panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="splitContainer.Panel2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel2.Name" xml:space="preserve">
+    <value>splitContainer.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>808, 434</value>
+  </data>
+  <data name="splitContainer.SplitterDistance" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
+  <data name="splitContainer.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Name" xml:space="preserve">
+    <value>splitContainer</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="mainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Datei</value>
+  </data>
+  <data name="cutToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+X</value>
+  </data>
+  <data name="cutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="cutToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ausschneiden</value>
+  </data>
+  <data name="copyToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+C</value>
+  </data>
+  <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="copyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="pasteToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+V</value>
+  </data>
+  <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="editToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Bearbeiten</value>
+  </data>
+  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 20</value>
+  </data>
+  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Optionen</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Hilfe</value>
+  </data>
   <data name="mainMenu.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="mainMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>808, 24</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="mainMenu.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -146,13 +282,6 @@
   <data name="&gt;&gt;mainMenu.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Datei</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="newToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+N</value>
   </data>
@@ -192,45 +321,6 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Beenden</value>
   </data>
-  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
-  <data name="editToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Bearbeiten</value>
-  </data>
-  <data name="cutToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+X</value>
-  </data>
-  <data name="cutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="cutToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ausschneiden</value>
-  </data>
-  <data name="copyToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+C</value>
-  </data>
-  <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="copyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Kopieren</value>
-  </data>
-  <data name="pasteToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+V</value>
-  </data>
-  <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Einfügen</value>
-  </data>
-  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 20</value>
-  </data>
-  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Optionen</value>
-  </data>
   <data name="licenseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 22</value>
   </data>
@@ -242,12 +332,6 @@
   </data>
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Einstellungen</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Hilfe</value>
   </data>
   <data name="infoToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F1</value>
@@ -528,90 +612,6 @@
   </data>
   <data name="&gt;&gt;statusStrip.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="splitContainer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="splitContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 49</value>
-  </data>
-  <data name="projectTree.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="projectTree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="projectTree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 430</value>
-  </data>
-  <data name="projectTree.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;projectTree.Name" xml:space="preserve">
-    <value>projectTree</value>
-  </data>
-  <data name="&gt;&gt;projectTree.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;projectTree.Parent" xml:space="preserve">
-    <value>splitContainer.Panel1</value>
-  </data>
-  <data name="&gt;&gt;projectTree.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Panel1.Name" xml:space="preserve">
-    <value>splitContainer.Panel1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Panel1.Parent" xml:space="preserve">
-    <value>splitContainer</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="splitContainer.Panel2.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="splitContainer.Panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 10, 10, 10</value>
-  </data>
-  <data name="splitContainer.Panel2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 10, 10, 10</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Panel2.Name" xml:space="preserve">
-    <value>splitContainer.Panel2</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Panel2.Parent" xml:space="preserve">
-    <value>splitContainer</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>808, 434</value>
-  </data>
-  <data name="splitContainer.SplitterDistance" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
-  <data name="splitContainer.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Name" xml:space="preserve">
-    <value>splitContainer</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;splitContainer.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

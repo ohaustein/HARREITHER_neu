@@ -21,8 +21,8 @@ namespace Europlan.Application {
 			txtProjectName.Lines = project.ProjectName;
 			txtContact.Lines = project.ProjectContact;
 			txtNotes.Lines = project.ProjectNotes;
-			dateCreated.Value = project.ProjectCreated;
-			dateChanged.Value = project.ProjectLastChanged;
+			txtCreated.Text = project.ProjectCreated.ToShortDateString(); ;
+			txtChanged.Text = project.ProjectLastChanged.ToShortDateString();
 			txtEditor.Text = project.ProjectEditor;
 		}
 
