@@ -95,6 +95,7 @@ namespace Europlan.Application {
 			this.txtProjectName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.txtProjectName.Size = new System.Drawing.Size(442, 69);
 			this.txtProjectName.TabIndex = 6;
+			this.txtProjectName.TextChanged += new System.EventHandler(this.txtProjectName_TextChanged);
 			// 
 			// txtContact
 			// 
@@ -106,6 +107,7 @@ namespace Europlan.Application {
 			this.txtContact.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.txtContact.Size = new System.Drawing.Size(442, 69);
 			this.txtContact.TabIndex = 7;
+			this.txtContact.TextChanged += new System.EventHandler(this.txtContact_TextChanged);
 			// 
 			// txtNotes
 			// 
@@ -117,6 +119,7 @@ namespace Europlan.Application {
 			this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.txtNotes.Size = new System.Drawing.Size(442, 69);
 			this.txtNotes.TabIndex = 8;
+			this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
 			// 
 			// dateCreated
 			// 
@@ -145,6 +148,7 @@ namespace Europlan.Application {
 			this.txtEditor.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
 			this.txtEditor.Size = new System.Drawing.Size(442, 20);
 			this.txtEditor.TabIndex = 11;
+			this.txtEditor.TextChanged += new System.EventHandler(this.txtEditor_TextChanged);
 			// 
 			// ProjectSummaryPanel
 			// 

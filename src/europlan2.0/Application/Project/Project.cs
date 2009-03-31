@@ -17,9 +17,9 @@ namespace Europlan.Application {
 		private static readonly ILog log = LogManager.GetLogger(typeof(Project));
 		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 		
-		private string projectName;
-		private string projectContact;
-		private string projectNotes;
+		private string[] projectName;
+		private string[] projectContact;
+		private string[] projectNotes;
 		private DateTime projectCreated;
 		private DateTime projectLastChanged;
 		private string projectEditor;
@@ -57,25 +57,25 @@ namespace Europlan.Application {
 			DateTime now = DateTime.Now;
 			projectCreated = now;
 			projectLastChanged = now;
-			projectName = "";
-			projectContact = "";
-			projectNotes = "";
+			projectName = new string[] { "" };
+			projectContact = new string[] { "" };
+			projectNotes = new string[] { "" };
 			projectEditor = "";
 
 			floors = new List<Floor>();
 		}
 
-		public string ProjectName {
+		public string[] ProjectName {
 			get { return projectName; }
 			set { projectName = value; }
 		}
 
-		public string ProjectContact {
+		public string[] ProjectContact {
 			get { return projectContact; }
 			set { projectContact = value; }
 		}
 
-		public string ProjectNotes {
+		public string[] ProjectNotes {
 			get { return projectNotes; }
 			set { projectNotes = value; }
 		}
@@ -103,7 +103,7 @@ namespace Europlan.Application {
 		public static void Load(string filename) {
 			lock (padlock) {
 				XmlSerializer s = new XmlSerializer(typeof(Project));
-				TextReader r = new StreamReader(filename);
+				Stream r = new FileStream(filename, FileMode.Open);
 				instance = (Project)s.Deserialize(r);
 				r.Close();
 			}
@@ -117,7 +117,7 @@ namespace Europlan.Application {
 				Instance.ProjectLastChanged = DateTime.Now;
 
 				XmlSerializer s = new XmlSerializer(typeof(Project));
-				TextWriter w = new StreamWriter(filename);
+				Stream w = new FileStream(filename, FileMode.Create);
 				s.Serialize(w, Instance);
 				w.Close();
 			}
