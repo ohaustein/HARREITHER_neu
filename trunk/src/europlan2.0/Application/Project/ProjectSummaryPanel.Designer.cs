@@ -39,7 +39,7 @@ namespace Europlan.Application {
 			// 
 			// lblProjectName
 			// 
-			this.lblProjectName.Location = new System.Drawing.Point(3, 0);
+			this.lblProjectName.Location = new System.Drawing.Point(3, 3);
 			this.lblProjectName.Name = "lblProjectName";
 			this.lblProjectName.Size = new System.Drawing.Size(120, 23);
 			this.lblProjectName.TabIndex = 0;
@@ -47,7 +47,7 @@ namespace Europlan.Application {
 			// 
 			// lblContact
 			// 
-			this.lblContact.Location = new System.Drawing.Point(3, 78);
+			this.lblContact.Location = new System.Drawing.Point(3, 81);
 			this.lblContact.Name = "lblContact";
 			this.lblContact.Size = new System.Drawing.Size(120, 23);
 			this.lblContact.TabIndex = 1;
@@ -55,7 +55,7 @@ namespace Europlan.Application {
 			// 
 			// lblNotes
 			// 
-			this.lblNotes.Location = new System.Drawing.Point(3, 153);
+			this.lblNotes.Location = new System.Drawing.Point(3, 156);
 			this.lblNotes.Name = "lblNotes";
 			this.lblNotes.Size = new System.Drawing.Size(120, 23);
 			this.lblNotes.TabIndex = 2;
@@ -63,7 +63,7 @@ namespace Europlan.Application {
 			// 
 			// lblCreated
 			// 
-			this.lblCreated.Location = new System.Drawing.Point(3, 228);
+			this.lblCreated.Location = new System.Drawing.Point(3, 231);
 			this.lblCreated.Name = "lblCreated";
 			this.lblCreated.Size = new System.Drawing.Size(120, 23);
 			this.lblCreated.TabIndex = 3;
@@ -71,7 +71,7 @@ namespace Europlan.Application {
 			// 
 			// lblChanged
 			// 
-			this.lblChanged.Location = new System.Drawing.Point(3, 254);
+			this.lblChanged.Location = new System.Drawing.Point(3, 257);
 			this.lblChanged.Name = "lblChanged";
 			this.lblChanged.Size = new System.Drawing.Size(120, 23);
 			this.lblChanged.TabIndex = 4;
@@ -79,7 +79,7 @@ namespace Europlan.Application {
 			// 
 			// lblEditor
 			// 
-			this.lblEditor.Location = new System.Drawing.Point(4, 280);
+			this.lblEditor.Location = new System.Drawing.Point(4, 283);
 			this.lblEditor.Name = "lblEditor";
 			this.lblEditor.Size = new System.Drawing.Size(120, 23);
 			this.lblEditor.TabIndex = 5;
@@ -89,11 +89,11 @@ namespace Europlan.Application {
 			// 
 			this.txtProjectName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtProjectName.Location = new System.Drawing.Point(130, 0);
+			this.txtProjectName.Location = new System.Drawing.Point(130, 3);
 			this.txtProjectName.Multiline = true;
 			this.txtProjectName.Name = "txtProjectName";
 			this.txtProjectName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.txtProjectName.Size = new System.Drawing.Size(442, 69);
+			this.txtProjectName.Size = new System.Drawing.Size(583, 69);
 			this.txtProjectName.TabIndex = 6;
 			this.txtProjectName.TextChanged += new System.EventHandler(this.txtProjectName_TextChanged);
 			// 
@@ -101,11 +101,11 @@ namespace Europlan.Application {
 			// 
 			this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtContact.Location = new System.Drawing.Point(130, 75);
+			this.txtContact.Location = new System.Drawing.Point(130, 78);
 			this.txtContact.Multiline = true;
 			this.txtContact.Name = "txtContact";
 			this.txtContact.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.txtContact.Size = new System.Drawing.Size(442, 69);
+			this.txtContact.Size = new System.Drawing.Size(583, 69);
 			this.txtContact.TabIndex = 7;
 			this.txtContact.TextChanged += new System.EventHandler(this.txtContact_TextChanged);
 			// 
@@ -113,11 +113,11 @@ namespace Europlan.Application {
 			// 
 			this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtNotes.Location = new System.Drawing.Point(130, 150);
+			this.txtNotes.Location = new System.Drawing.Point(130, 153);
 			this.txtNotes.Multiline = true;
 			this.txtNotes.Name = "txtNotes";
 			this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.txtNotes.Size = new System.Drawing.Size(442, 69);
+			this.txtNotes.Size = new System.Drawing.Size(583, 69);
 			this.txtNotes.TabIndex = 8;
 			this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
 			// 
@@ -125,7 +125,7 @@ namespace Europlan.Application {
 			// 
 			this.dateCreated.CustomFormat = "";
 			this.dateCreated.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateCreated.Location = new System.Drawing.Point(130, 225);
+			this.dateCreated.Location = new System.Drawing.Point(130, 228);
 			this.dateCreated.Name = "dateCreated";
 			this.dateCreated.Size = new System.Drawing.Size(125, 20);
 			this.dateCreated.TabIndex = 9;
@@ -134,7 +134,7 @@ namespace Europlan.Application {
 			// 
 			this.dateChanged.CustomFormat = "";
 			this.dateChanged.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateChanged.Location = new System.Drawing.Point(130, 251);
+			this.dateChanged.Location = new System.Drawing.Point(130, 254);
 			this.dateChanged.Name = "dateChanged";
 			this.dateChanged.Size = new System.Drawing.Size(125, 20);
 			this.dateChanged.TabIndex = 10;
@@ -143,10 +143,10 @@ namespace Europlan.Application {
 			// 
 			this.txtEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtEditor.Location = new System.Drawing.Point(130, 277);
+			this.txtEditor.Location = new System.Drawing.Point(130, 280);
 			this.txtEditor.Name = "txtEditor";
 			this.txtEditor.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtEditor.Size = new System.Drawing.Size(442, 20);
+			this.txtEditor.Size = new System.Drawing.Size(583, 20);
 			this.txtEditor.TabIndex = 11;
 			this.txtEditor.TextChanged += new System.EventHandler(this.txtEditor_TextChanged);
 			// 
@@ -168,7 +168,7 @@ namespace Europlan.Application {
 			this.Controls.Add(this.lblContact);
 			this.Controls.Add(this.lblProjectName);
 			this.Name = "ProjectSummaryPanel";
-			this.Size = new System.Drawing.Size(575, 390);
+			this.Size = new System.Drawing.Size(716, 473);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

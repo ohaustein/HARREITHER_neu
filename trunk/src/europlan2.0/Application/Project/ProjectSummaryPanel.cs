@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace Europlan.Application {
 	public partial class ProjectSummaryPanel : UserControl, IEditorUserControl {
+
+		public event ProjectStructureChangedHandler ProjectStructureChanged;
+		
 		public ProjectSummaryPanel() {
 			InitializeComponent();
 			UpdateControl();

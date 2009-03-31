@@ -268,6 +268,8 @@ namespace Europlan.Application {
 				UserControl control = null;
 				if (selectedNode.Tag is Type) {
 					control = (UserControl)Activator.CreateInstance(selectedNode.Tag as Type);
+					(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
+
 					selectedNode.Tag = control;
 				} else {
 					control = selectedNode.Tag as UserControl;
@@ -275,6 +277,10 @@ namespace Europlan.Application {
 				splitContainer.Panel2.Controls.Add(control);
 				control.Dock = DockStyle.Fill;
 			}
+		}
+
+		void MainForm_ProjectStructureChanged(object sender) {
+			Project.Instance.InitializeTreeView(this.projectTree);
 		}
 
 	}

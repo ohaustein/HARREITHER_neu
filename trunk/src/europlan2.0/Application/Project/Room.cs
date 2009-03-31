@@ -82,6 +82,7 @@ namespace Europlan.Application {
 		
 		internal void InitializeTree(TreeNode floor) {
 			TreeNode room = new TreeNode(this.Name);
+			room.Tag = typeof(RoomSummaryPanel);
 			floor.Nodes.Add(room);
 		}
 	}
