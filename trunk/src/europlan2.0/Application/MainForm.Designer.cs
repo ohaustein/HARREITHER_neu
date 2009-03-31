@@ -25,6 +25,8 @@ namespace Europlan.Application {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+			this.splitContainer = new System.Windows.Forms.SplitContainer();
+			this.projectTree = new System.Windows.Forms.TreeView();
 			this.mainMenu = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,13 +57,33 @@ namespace Europlan.Application {
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
-			this.splitContainer = new System.Windows.Forms.SplitContainer();
-			this.projectTree = new System.Windows.Forms.TreeView();
-			this.mainMenu.SuspendLayout();
-			this.toolStrip1.SuspendLayout();
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.SuspendLayout();
+			this.mainMenu.SuspendLayout();
+			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// splitContainer
+			// 
+			this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.splitContainer, "splitContainer");
+			this.splitContainer.Name = "splitContainer";
+			// 
+			// splitContainer.Panel1
+			// 
+			this.splitContainer.Panel1.Controls.Add(this.projectTree);
+			// 
+			// splitContainer.Panel2
+			// 
+			resources.ApplyResources(this.splitContainer.Panel2, "splitContainer.Panel2");
+			// 
+			// projectTree
+			// 
+			this.projectTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.projectTree, "projectTree");
+			this.projectTree.FullRowSelect = true;
+			this.projectTree.Name = "projectTree";
+			this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
 			// 
 			// mainMenu
 			// 
@@ -127,16 +149,19 @@ namespace Europlan.Application {
 			// 
 			this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
 			resources.ApplyResources(this.cutToolStripMenuItem, "cutToolStripMenuItem");
+			this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
 			// 
 			// copyToolStripMenuItem
 			// 
 			this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
 			resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
+			this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
 			// 
 			// pasteToolStripMenuItem
 			// 
 			this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
 			resources.ApplyResources(this.pasteToolStripMenuItem, "pasteToolStripMenuItem");
+			this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
 			// 
 			// optionsToolStripMenuItem
 			// 
@@ -266,28 +291,6 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.statusStrip, "statusStrip");
 			this.statusStrip.Name = "statusStrip";
 			// 
-			// splitContainer
-			// 
-			this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.splitContainer, "splitContainer");
-			this.splitContainer.Name = "splitContainer";
-			// 
-			// splitContainer.Panel1
-			// 
-			this.splitContainer.Panel1.Controls.Add(this.projectTree);
-			// 
-			// splitContainer.Panel2
-			// 
-			resources.ApplyResources(this.splitContainer.Panel2, "splitContainer.Panel2");
-			// 
-			// projectTree
-			// 
-			this.projectTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			resources.ApplyResources(this.projectTree, "projectTree");
-			this.projectTree.FullRowSelect = true;
-			this.projectTree.Name = "projectTree";
-			this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
-			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -300,12 +303,12 @@ namespace Europlan.Application {
 			this.Name = "MainForm";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+			this.splitContainer.Panel1.ResumeLayout(false);
+			this.splitContainer.ResumeLayout(false);
 			this.mainMenu.ResumeLayout(false);
 			this.mainMenu.PerformLayout();
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
-			this.splitContainer.Panel1.ResumeLayout(false);
-			this.splitContainer.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

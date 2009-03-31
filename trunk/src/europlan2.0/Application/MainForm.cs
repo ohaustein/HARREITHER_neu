@@ -273,14 +273,58 @@ namespace Europlan.Application {
 					selectedNode.Tag = control;
 				} else {
 					control = selectedNode.Tag as UserControl;
+
 				}
 				splitContainer.Panel2.Controls.Add(control);
 				control.Dock = DockStyle.Fill;
+				(control as IEditorUserControl).UpdateControl();
 			}
 		}
 
 		void MainForm_ProjectStructureChanged(object sender) {
 			Project.Instance.InitializeTreeView(this.projectTree);
+		}
+
+		private Control GetActiveControl() {
+			Control activeControl = this.ActiveControl;
+			while (activeControl != null && activeControl is ContainerControl) {
+				activeControl = (activeControl as ContainerControl).ActiveControl;
+			}
+			return activeControl;
+		}
+
+		private void cutToolStripMenuItem_Click(object sender, EventArgs e) {
+			Control activeControl = GetActiveControl();
+			if (activeControl != null) {
+				if (activeControl is TextBoxBase) {
+					(activeControl as TextBoxBase).Cut();
+				} else {
+					Clipboard.SetText(activeControl.Text);
+					activeControl.Text = "";
+				}
+			}
+		}
+
+		private void copyToolStripMenuItem_Click(object sender, EventArgs e) {
+			Control activeControl = GetActiveControl();
+			if (activeControl != null) {
+				if (activeControl is TextBoxBase) {
+					(activeControl as TextBoxBase).Copy();
+				} else {
+					Clipboard.SetText(activeControl.Text);
+				}
+			}
+		}
+
+		private void pasteToolStripMenuItem_Click(object sender, EventArgs e) {
+			Control activeControl = GetActiveControl();
+			if (activeControl != null) {
+				if (activeControl is TextBoxBase) {
+					(activeControl as TextBoxBase).Paste();
+				} else {
+					activeControl.Text = Clipboard.GetText();
+				}
+			}
 		}
 
 	}

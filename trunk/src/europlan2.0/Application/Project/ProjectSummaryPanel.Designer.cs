@@ -32,9 +32,9 @@ namespace Europlan.Application {
 			this.txtProjectName = new System.Windows.Forms.TextBox();
 			this.txtContact = new System.Windows.Forms.TextBox();
 			this.txtNotes = new System.Windows.Forms.TextBox();
-			this.dateCreated = new System.Windows.Forms.DateTimePicker();
-			this.dateChanged = new System.Windows.Forms.DateTimePicker();
 			this.txtEditor = new System.Windows.Forms.TextBox();
+			this.txtCreated = new System.Windows.Forms.TextBox();
+			this.txtChanged = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// lblProjectName
@@ -121,24 +121,6 @@ namespace Europlan.Application {
 			this.txtNotes.TabIndex = 8;
 			this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
 			// 
-			// dateCreated
-			// 
-			this.dateCreated.CustomFormat = "";
-			this.dateCreated.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateCreated.Location = new System.Drawing.Point(130, 228);
-			this.dateCreated.Name = "dateCreated";
-			this.dateCreated.Size = new System.Drawing.Size(125, 20);
-			this.dateCreated.TabIndex = 9;
-			// 
-			// dateChanged
-			// 
-			this.dateChanged.CustomFormat = "";
-			this.dateChanged.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateChanged.Location = new System.Drawing.Point(130, 254);
-			this.dateChanged.Name = "dateChanged";
-			this.dateChanged.Size = new System.Drawing.Size(125, 20);
-			this.dateChanged.TabIndex = 10;
-			// 
 			// txtEditor
 			// 
 			this.txtEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -150,14 +132,32 @@ namespace Europlan.Application {
 			this.txtEditor.TabIndex = 11;
 			this.txtEditor.TextChanged += new System.EventHandler(this.txtEditor_TextChanged);
 			// 
+			// txtCreated
+			// 
+			this.txtCreated.Location = new System.Drawing.Point(129, 228);
+			this.txtCreated.Name = "txtCreated";
+			this.txtCreated.ReadOnly = true;
+			this.txtCreated.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+			this.txtCreated.Size = new System.Drawing.Size(168, 20);
+			this.txtCreated.TabIndex = 12;
+			// 
+			// txtChanged
+			// 
+			this.txtChanged.Location = new System.Drawing.Point(129, 254);
+			this.txtChanged.Name = "txtChanged";
+			this.txtChanged.ReadOnly = true;
+			this.txtChanged.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+			this.txtChanged.Size = new System.Drawing.Size(168, 20);
+			this.txtChanged.TabIndex = 13;
+			// 
 			// ProjectSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
+			this.Controls.Add(this.txtChanged);
+			this.Controls.Add(this.txtCreated);
 			this.Controls.Add(this.txtEditor);
-			this.Controls.Add(this.dateChanged);
-			this.Controls.Add(this.dateCreated);
 			this.Controls.Add(this.txtNotes);
 			this.Controls.Add(this.txtContact);
 			this.Controls.Add(this.txtProjectName);
@@ -185,9 +185,9 @@ namespace Europlan.Application {
 		private System.Windows.Forms.TextBox txtProjectName;
 		private System.Windows.Forms.TextBox txtContact;
 		private System.Windows.Forms.TextBox txtNotes;
-		private System.Windows.Forms.DateTimePicker dateCreated;
-		private System.Windows.Forms.DateTimePicker dateChanged;
 		private System.Windows.Forms.TextBox txtEditor;
+		private System.Windows.Forms.TextBox txtCreated;
+		private System.Windows.Forms.TextBox txtChanged;
 
 	}
 }
