@@ -53,6 +53,7 @@ namespace Europlan.Application {
 
 		internal void InitializeTree(System.Windows.Forms.TreeNode floors) {
 			TreeNode floor = new TreeNode(this.Name);
+			floor.Tag = typeof(FloorSummaryPanel);
 			floors.Nodes.Add(floor);
 			foreach (Room room in rooms) {
 				room.InitializeTree(floor);

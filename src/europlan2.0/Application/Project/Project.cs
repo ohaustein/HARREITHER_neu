@@ -135,6 +135,10 @@ namespace Europlan.Application {
 
 
 		internal void InitializeTreeView(System.Windows.Forms.TreeView tree) {
+			int selectedIndex = 0;
+			if (tree.SelectedNode != null) {
+				selectedIndex = tree.SelectedNode.Index;
+			}
 			tree.Nodes.Clear();
 
 			// root note
@@ -146,6 +150,7 @@ namespace Europlan.Application {
 			// building (floors and rooms)
 			localized = resources.GetString("Floors", Thread.CurrentThread.CurrentUICulture);
 			TreeNode floorsNode = new TreeNode(localized == null ? "Geschoﬂe" : localized);
+			floorsNode.Tag = typeof(FloorsSummaryPanel);
 			tree.Nodes.Add(floorsNode);
 			foreach (Floor floor in floors) {
 				floor.InitializeTree(floorsNode);
@@ -153,6 +158,11 @@ namespace Europlan.Application {
 
 
 			tree.ExpandAll();
+			if (selectedIndex != 0) {
+				tree.SelectedNode = tree.Nodes[selectedIndex];
+			} else {
+				tree.SelectedNode = root;
+			}
 		}
 	}
 }

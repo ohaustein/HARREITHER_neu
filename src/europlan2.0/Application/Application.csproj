@@ -99,6 +99,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\FloorsSummaryPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FloorsSummaryPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\ProjectSummaryPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
@@ -109,6 +113,18 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Project\Floor.cs" />
+    <Compile Include="Project\FloorsSummaryPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\FloorsSummaryPanel.Designer.cs">
+      <DependentUpon>FloorsSummaryPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\FloorSummaryPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\FloorSummaryPanel.Designer.cs">
+      <DependentUpon>FloorSummaryPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\Project.cs" />
     <Compile Include="Project\ProjectSummaryPanel.cs">
       <SubType>UserControl</SubType>
@@ -117,6 +133,12 @@
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\Room.cs" />
+    <Compile Include="Project\RoomSummaryPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\RoomSummaryPanel.Designer.cs">
+      <DependentUpon>RoomSummaryPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
