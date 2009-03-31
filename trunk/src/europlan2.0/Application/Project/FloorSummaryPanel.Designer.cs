@@ -23,8 +23,16 @@ namespace Europlan.Application {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			components = new System.ComponentModel.Container();
+			this.SuspendLayout();
+			// 
+			// FloorSummaryPanel
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Name = "FloorSummaryPanel";
+			this.Size = new System.Drawing.Size(527, 264);
+			this.ResumeLayout(false);
+
 		}
 
 		#endregion

@@ -17,6 +17,7 @@ namespace Europlan.Application {
 		private int coolPower;
 		private int normalizedHeatPower;
 		private int normalizedCoolPower;
+		private TreeNode roomNode;
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(Room));
 
@@ -81,9 +82,9 @@ namespace Europlan.Application {
 		}
 		
 		internal void InitializeTree(TreeNode floor) {
-			TreeNode room = new TreeNode(this.Name);
-			room.Tag = typeof(RoomSummaryPanel);
-			floor.Nodes.Add(room);
+			roomNode = new TreeNode(this.Name);
+			roomNode.Tag = typeof(RoomSummaryPanel);
+			floor.Nodes.Add(roomNode);
 		}
 	}
 

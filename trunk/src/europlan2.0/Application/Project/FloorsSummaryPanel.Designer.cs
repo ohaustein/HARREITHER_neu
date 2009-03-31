@@ -30,9 +30,9 @@ namespace Europlan.Application {
 			// 
 			this.btnImport.Location = new System.Drawing.Point(4, 4);
 			this.btnImport.Name = "btnImport";
-			this.btnImport.Size = new System.Drawing.Size(169, 23);
+			this.btnImport.Size = new System.Drawing.Size(212, 23);
 			this.btnImport.TabIndex = 0;
-			this.btnImport.Text = "Lastberechnung importieren...";
+			this.btnImport.Text = "Gebäude- und Lastdaten importieren...";
 			this.btnImport.UseVisualStyleBackColor = true;
 			this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
 			// 

@@ -103,9 +103,17 @@
       <SubType>Designer</SubType>
       <DependentUpon>FloorsSummaryPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\FloorSummaryPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FloorSummaryPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\ProjectSummaryPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\RoomSummaryPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RoomSummaryPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

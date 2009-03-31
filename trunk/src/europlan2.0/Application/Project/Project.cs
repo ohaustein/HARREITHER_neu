@@ -24,6 +24,9 @@ namespace Europlan.Application {
 		private DateTime projectLastChanged;
 		private string projectEditor;
 
+		private TreeNode rootNode = null;
+		private TreeNode floorsNode = null;
+
 		public delegate void ProjectLoadedHandler(object sender);
 		public delegate void ProjectSavedHandler(object sender);
 
@@ -62,6 +65,14 @@ namespace Europlan.Application {
 			projectNotes = new string[] { "" };
 			projectEditor = "";
 
+			// root node
+			string localized = resources.GetString("Project", Thread.CurrentThread.CurrentUICulture);
+			rootNode = new TreeNode(localized == null ? "Projekt" : localized);
+
+			// building (floors and rooms)
+			localized = resources.GetString("Floors", Thread.CurrentThread.CurrentUICulture);
+			floorsNode = new TreeNode(localized == null ? "Geschoﬂe" : localized);
+			
 			floors = new List<Floor>();
 		}
 
@@ -141,27 +152,22 @@ namespace Europlan.Application {
 			}
 			tree.Nodes.Clear();
 
-			// root note
-			string localized = resources.GetString("Project", Thread.CurrentThread.CurrentUICulture);
-			TreeNode root = new TreeNode(localized == null ? "Projekt" : localized);
-			tree.Nodes.Add(root);
-			root.Tag = typeof(ProjectSummaryPanel);
 
-			// building (floors and rooms)
-			localized = resources.GetString("Floors", Thread.CurrentThread.CurrentUICulture);
-			TreeNode floorsNode = new TreeNode(localized == null ? "Geschoﬂe" : localized);
+			tree.Nodes.Add(rootNode);
+			rootNode.Tag = typeof(ProjectSummaryPanel);
+
 			floorsNode.Tag = typeof(FloorsSummaryPanel);
 			tree.Nodes.Add(floorsNode);
+			
 			foreach (Floor floor in floors) {
 				floor.InitializeTree(floorsNode);
 			}
-
-
+			
 			tree.ExpandAll();
 			if (selectedIndex != 0) {
 				tree.SelectedNode = tree.Nodes[selectedIndex];
 			} else {
-				tree.SelectedNode = root;
+				tree.SelectedNode = rootNode;
 			}
 		}
 	}

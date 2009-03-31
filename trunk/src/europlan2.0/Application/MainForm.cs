@@ -20,6 +20,8 @@ namespace Europlan.Application {
 		private static readonly string defaultTitle = "Europlan";
 		private string title;
 
+		private Dictionary<Type, UserControl> userControls = new Dictionary<Type, UserControl>();
+
 		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 		private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
 
@@ -267,13 +269,16 @@ namespace Europlan.Application {
 			if (selectedNode != null && selectedNode.Tag != null) {
 				UserControl control = null;
 				if (selectedNode.Tag is Type) {
-					control = (UserControl)Activator.CreateInstance(selectedNode.Tag as Type);
-					(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
-
+					if (userControls.ContainsKey(selectedNode.Tag as Type)) {
+						control = userControls[selectedNode.Tag as Type];
+					} else {
+						control = (UserControl)Activator.CreateInstance(selectedNode.Tag as Type);
+						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
+						userControls[selectedNode.Tag as Type] = control;
+					}
 					selectedNode.Tag = control;
 				} else {
 					control = selectedNode.Tag as UserControl;
-
 				}
 				splitContainer.Panel2.Controls.Add(control);
 				control.Dock = DockStyle.Fill;
