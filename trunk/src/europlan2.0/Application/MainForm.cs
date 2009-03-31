@@ -208,7 +208,7 @@ namespace Europlan.Application {
 			OpenFileDialog dialog = new OpenFileDialog();
 			dialog.CheckFileExists = true;
 			dialog.CheckPathExists = true;
-			dialog.DefaultExt = "epp";
+			dialog.DefaultExt = "e2p";
 			dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
 			dialog.Multiselect = false;
 			DialogResult result = dialog.ShowDialog();
@@ -226,7 +226,7 @@ namespace Europlan.Application {
 			if (projectFileName == null) {
 				SaveFileDialog dialog = new SaveFileDialog();
 				dialog.CheckPathExists = true;
-				dialog.DefaultExt = "epp";
+				dialog.DefaultExt = "e2p";
 				dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
 				DialogResult result = dialog.ShowDialog();
 				if (result == DialogResult.OK) {
@@ -241,7 +241,7 @@ namespace Europlan.Application {
 		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.CheckPathExists = true;
-			dialog.DefaultExt = "epp";
+			dialog.DefaultExt = "e2p";
 			dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
 			DialogResult result = dialog.ShowDialog();
 			if (result == DialogResult.OK) {
