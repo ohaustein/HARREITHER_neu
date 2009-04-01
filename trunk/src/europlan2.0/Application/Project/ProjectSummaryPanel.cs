@@ -10,6 +10,7 @@ namespace Europlan.Application {
 	public partial class ProjectSummaryPanel : UserControl, IEditorUserControl {
 
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
+		public event ProjectChangedHandler ProjectChanged;
 		
 		public ProjectSummaryPanel() {
 			InitializeComponent();
@@ -32,18 +33,30 @@ namespace Europlan.Application {
 
 		private void txtProjectName_TextChanged(object sender, EventArgs e) {
 			Project.Instance.ProjectName = txtProjectName.Lines;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
 		}
 
 		private void txtEditor_TextChanged(object sender, EventArgs e) {
 			Project.Instance.ProjectEditor = txtEditor.Text;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
 		}
 
 		private void txtNotes_TextChanged(object sender, EventArgs e) {
 			Project.Instance.ProjectNotes = txtNotes.Lines;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
 		}
 
 		private void txtContact_TextChanged(object sender, EventArgs e) {
 			Project.Instance.ProjectContact = txtContact.Lines;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
 		}
 
 	}

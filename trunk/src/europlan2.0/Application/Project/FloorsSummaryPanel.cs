@@ -10,6 +10,7 @@ namespace Europlan.Application {
 	public partial class FloorsSummaryPanel : UserControl, IEditorUserControl {
 
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
+		public event ProjectChangedHandler ProjectChanged;
 		
 		public FloorsSummaryPanel() {
 			InitializeComponent();
@@ -19,6 +20,9 @@ namespace Europlan.Application {
 			BuildingDataImportManager.Instance.ImportBuildingData();
 			if (ProjectStructureChanged != null) {
 				ProjectStructureChanged(null);
+			}
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
 			}
 		}
 

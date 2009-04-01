@@ -21,6 +21,7 @@ namespace Europlan.Application {
 		private string title;
 
 		private Dictionary<Type, UserControl> userControls = new Dictionary<Type, UserControl>();
+		private bool guiUpdateInProgress = false;
 
 		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 		private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
@@ -275,6 +276,7 @@ namespace Europlan.Application {
 					} else {
 						control = (UserControl)Activator.CreateInstance(guiRepresentation.AssociatedPanelType);
 						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
+						(control as IEditorUserControl).ProjectChanged += new ProjectChangedHandler(MainForm_ProjectChanged);
 						userControls[guiRepresentation.AssociatedPanelType] = control;
 					}
 					control.Tag = selectedNode.Tag;
@@ -284,19 +286,31 @@ namespace Europlan.Application {
 					} else {
 						control = (UserControl)Activator.CreateInstance(selectedNode.Tag as Type);
 						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
+						(control as IEditorUserControl).ProjectChanged += new ProjectChangedHandler(MainForm_ProjectChanged);
 						userControls[selectedNode.Tag as Type] = control;
 					}
 				} 
 				if (control != null) {
+					guiUpdateInProgress = true;
 					splitContainer.Panel2.Controls.Add(control);
 					control.Dock = DockStyle.Fill;
 					(control as IEditorUserControl).UpdateControl();
+					guiUpdateInProgress = false;
 				}
 			}
 		}
 
 		void MainForm_ProjectStructureChanged(object sender) {
-			Project.Instance.InitializeTreeView(this.projectTree);
+			if (!guiUpdateInProgress) {
+				Project.Instance.InitializeTreeView(this.projectTree);
+			}
+		}
+
+
+		void MainForm_ProjectChanged(object sender) {
+			if (!guiUpdateInProgress) {
+				
+			}
 		}
 
 		private Control GetActiveControl() {
