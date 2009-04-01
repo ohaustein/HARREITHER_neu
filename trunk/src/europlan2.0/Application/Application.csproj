@@ -48,6 +48,7 @@
     <Compile Include="DataExchange\IBuildingDataImporter.cs" />
     <Compile Include="DataExchange\SOLAR32Importer.cs" />
     <Compile Include="Interfaces\IEditorUserControl.cs" />
+    <Compile Include="Interfaces\IGuiRepresentation.cs" />
     <Compile Include="LicenseForm.cs">
       <SubType>Form</SubType>
     </Compile>

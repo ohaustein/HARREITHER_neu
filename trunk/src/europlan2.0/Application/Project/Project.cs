@@ -6,11 +6,12 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Windows.Forms;
 using System.Threading;
+using System.Drawing;
 
 namespace Europlan.Application {
 
 	[XmlRootAttribute("Project")]
-	public class Project {
+	public class Project : IGuiRepresentation {
 
 		private static Project instance = null;
 		private static readonly object padlock = new object();
@@ -154,7 +155,7 @@ namespace Europlan.Application {
 
 
 			tree.Nodes.Add(rootNode);
-			rootNode.Tag = typeof(ProjectSummaryPanel);
+			rootNode.Tag = this;
 
 			floorsNode.Tag = typeof(FloorsSummaryPanel);
 			tree.Nodes.Add(floorsNode);
@@ -170,5 +171,19 @@ namespace Europlan.Application {
 				tree.SelectedNode = rootNode;
 			}
 		}
+
+
+		public Type AssociatedPanelType {
+			get { 
+				return typeof(ProjectSummaryPanel);
+			}
+		}
+
+		public Icon AssociatedIcon {
+			get { 
+				return null; 
+			}
+		}
+
 	}
 }

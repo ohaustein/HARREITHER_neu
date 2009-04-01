@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace Europlan.Application {
 	
 	
-	public class Room {
+	public class Room : IGuiRepresentation {
 
 		private string name;
 		private string id;
@@ -83,9 +83,22 @@ namespace Europlan.Application {
 		
 		internal void InitializeTree(TreeNode floor) {
 			roomNode = new TreeNode(this.Name);
-			roomNode.Tag = typeof(RoomSummaryPanel);
+			roomNode.Tag = this;
 			floor.Nodes.Add(roomNode);
 		}
+
+		public Type AssociatedPanelType {
+			get {
+				return typeof(RoomSummaryPanel);
+			}
+		}
+
+		public System.Drawing.Icon AssociatedIcon {
+			get {
+				return null;
+			}
+		}
+
 	}
 
 }
