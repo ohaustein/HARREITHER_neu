@@ -268,7 +268,17 @@ namespace Europlan.Application {
 			splitContainer.Panel2.Controls.Clear();
 			if (selectedNode != null && selectedNode.Tag != null) {
 				UserControl control = null;
-				if (selectedNode.Tag is Type) {
+				if (selectedNode.Tag is IGuiRepresentation) {
+					IGuiRepresentation guiRepresentation = selectedNode.Tag as IGuiRepresentation;
+					if (userControls.ContainsKey(guiRepresentation.AssociatedPanelType)) {
+						control = userControls[guiRepresentation.AssociatedPanelType];
+					} else {
+						control = (UserControl)Activator.CreateInstance(guiRepresentation.AssociatedPanelType);
+						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
+						userControls[guiRepresentation.AssociatedPanelType] = control;
+					}
+					control.Tag = selectedNode.Tag;
+				} else if (selectedNode.Tag is Type) {
 					if (userControls.ContainsKey(selectedNode.Tag as Type)) {
 						control = userControls[selectedNode.Tag as Type];
 					} else {
@@ -276,13 +286,12 @@ namespace Europlan.Application {
 						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
 						userControls[selectedNode.Tag as Type] = control;
 					}
-					selectedNode.Tag = control;
-				} else {
-					control = selectedNode.Tag as UserControl;
+				} 
+				if (control != null) {
+					splitContainer.Panel2.Controls.Add(control);
+					control.Dock = DockStyle.Fill;
+					(control as IEditorUserControl).UpdateControl();
 				}
-				splitContainer.Panel2.Controls.Add(control);
-				control.Dock = DockStyle.Fill;
-				(control as IEditorUserControl).UpdateControl();
 			}
 		}
 

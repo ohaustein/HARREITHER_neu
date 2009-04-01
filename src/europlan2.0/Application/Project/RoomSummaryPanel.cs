@@ -10,14 +10,20 @@ namespace Europlan.Application {
 	public partial class RoomSummaryPanel : UserControl, IEditorUserControl {
 		
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
+
+		private Room room;
 		
 		public RoomSummaryPanel() {
 			InitializeComponent();
+			room = null;
 		}
 
 
 		public void UpdateControl() {
-			
+			if (this.Tag != null) {
+				this.room = this.Tag as Room;
+				this.txtName.Text = room.Name;
+			}
 		}
 
 		public bool AllowLeave() {
