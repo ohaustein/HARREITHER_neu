@@ -5,16 +5,30 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using Youseful.Installer.WI;
 
 namespace StartSetup {
 	public class Program {
 
 		static void Main(string[] args) {
 			try {
+
+				/*int found = 0;
+				int i = 0;
+				while (found == 0) {  // ERROR_SUCCESS = 0
+					string foundProduct = new string(' ', 39);
+					found = Msidll.MsiEnumRelatedProducts("{ca795401-2df9-4ed9-8770-f230bd4ab9dc}", 0, i, foundProduct);
+					i++;
+				}*/
+
+				string foundProduct = new string(' ', 39);
+				bool found = (Msidll.MsiEnumRelatedProducts("{ca795401-2df9-4ed9-8770-f230bd4ab9dc}", 0, 0, foundProduct) == 0 );
+				found = false;
+				//found = false;
 				Process installProcess = new Process();
 				//MessageBox.Show(Application.StartupPath);
 				installProcess.StartInfo.FileName = "msiexec";
-				installProcess.StartInfo.Arguments = "/i \"" + Path.Combine(Application.StartupPath, "setup.msi") + "\"";
+				installProcess.StartInfo.Arguments = "/i \"" + Path.Combine(Application.StartupPath, "setup.msi") + (found ? "\" REINSTALL=ALL REINSTALLMODE=vomus" : "\"");
 				//MessageBox.Show(installProcess.StartInfo.Arguments);
 				installProcess.StartInfo.CreateNoWindow = true;
 

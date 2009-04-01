@@ -11,7 +11,7 @@ namespace Europlan.AdminApplication {
 
 		private LicenseTemplate license = null;
 
-		public static readonly string[] availableModules = { "Produkt 1", "Produkt 2", "Produkt 3", "Produkt 4", "Feature 1", "Feature 2", "Feature 3" };
+		public static readonly string[] availableModules = { "Produkt 1", "Produkt 2", "Produkt 3", "Produkt 4" };
 
 		public LicenseEditor() {
 			InitializeComponent();
@@ -33,12 +33,14 @@ namespace Europlan.AdminApplication {
 			this.Enabled = this.license != null;
 			if (this.license == null) {
 				txtLicensedTo.Text = "";
+				txtEmail.Text = "";
 				dtpValidUntil.Value = DateTime.Today;
 				txtHeader.Text = "";
 				lstModules.Items.Clear();
 				lstSystems.Items.Clear();
 			} else {
 				txtLicensedTo.Text = this.license.LicensedTo;
+				txtEmail.Text = this.license.Email;
 				dtpValidUntil.Value = this.license.ValidUntil;
 				txtHeader.Text = this.license.Header;
 				this.UpdateModulesEnablement();
@@ -135,6 +137,12 @@ namespace Europlan.AdminApplication {
 		private void txtLicensedTo_TextChanged(object sender, EventArgs e) {
 			if (this.license != null) {
 				this.license.LicensedTo = txtLicensedTo.Text;
+			}
+		}
+
+		private void txtEmail_TextChanged(object sender, EventArgs e) {
+			if (this.license != null) {
+				this.license.Email = txtEmail.Text;
 			}
 		}
 
