@@ -133,6 +133,7 @@ namespace Europlan.Application {
 				currentProject = Project.New();
 			}
 			projectFileName = null;
+			projectUnsaved = false;
 			UpdateTitle();
 			Project.Instance.InitializeTreeView(this.projectTree);
 		}
@@ -203,6 +204,7 @@ namespace Europlan.Application {
 		}
 
 		void myProject_ProjectLoaded(object sender) {
+			projectUnsaved = false;
 			UpdateTitle();
 			Project.Instance.InitializeTreeView(this.projectTree);
 		}
