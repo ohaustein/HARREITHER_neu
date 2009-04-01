@@ -68,8 +68,41 @@ namespace Europlan.Application {
 		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-			// TODO: check if anything has to be saved...
-			System.Windows.Forms.Application.Exit();
+			if (CheckForUnsavedChanges()) {
+				System.Windows.Forms.Application.Exit();
+			}
+		}
+
+		private bool CheckForUnsavedChanges() {
+			if (projectUnsaved) {
+				string messageText = resources.GetString("UnsavedMessage", Thread.CurrentThread.CurrentUICulture);
+				string caption = resources.GetString("UnsavedCaption", Thread.CurrentThread.CurrentUICulture);
+				DialogResult result = MessageBox.Show(messageText, caption, MessageBoxButtons.YesNoCancel);
+				if (result == DialogResult.Cancel) {
+					return false;
+				} else if (result == DialogResult.No) {
+					return true;
+				} else if (result == DialogResult.Yes) {
+					string tempFileName = projectFileName;
+					if (projectFileName == null) {
+						SaveFileDialog dialog = new SaveFileDialog();
+						dialog.CheckPathExists = true;
+						dialog.DefaultExt = "e2p";
+						dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
+						result = dialog.ShowDialog();
+						if (result == DialogResult.OK) {
+							projectFileName = dialog.FileName;
+							SaveProject();
+						} else {
+							return false;
+						}
+					} else {
+						SaveProject();
+					}
+					projectFileName = tempFileName;
+				}
+			}
+			return true;
 		}
 
 		private void MainForm_Load(object sender, EventArgs e) {
@@ -103,7 +136,6 @@ namespace Europlan.Application {
 
 		private void LoadProject() {
 			try {
-				// TODO: ask for saving unsaved changes
 				if (projectFileName != null) {
 					Project.Load(projectFileName);
 					currentProject = Project.Instance;
@@ -126,16 +158,17 @@ namespace Europlan.Application {
 		}
 
 		private void NewProject() {
-			if (currentProject == null) {
-				currentProject = Project.New();
-			} else {
-				// TODO - check for unsaved changes...
-				currentProject = Project.New();
+			if (CheckForUnsavedChanges()) {
+				if (currentProject == null) {
+					currentProject = Project.New();
+				} else {
+					currentProject = Project.New();
+				}
+				projectFileName = null;
+				projectUnsaved = false;
+				UpdateTitle();
+				Project.Instance.InitializeTreeView(this.projectTree);
 			}
-			projectFileName = null;
-			projectUnsaved = false;
-			UpdateTitle();
-			Project.Instance.InitializeTreeView(this.projectTree);
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -216,16 +249,18 @@ namespace Europlan.Application {
 		}
 
 		private void openToolStripMenuItem_Click(object sender, EventArgs e) {
-			OpenFileDialog dialog = new OpenFileDialog();
-			dialog.CheckFileExists = true;
-			dialog.CheckPathExists = true;
-			dialog.DefaultExt = "e2p";
-			dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
-			dialog.Multiselect = false;
-			DialogResult result = dialog.ShowDialog();
-			if (result == DialogResult.OK) {
-				projectFileName = dialog.FileName;
-				LoadProject();
+			if (CheckForUnsavedChanges()) {
+				OpenFileDialog dialog = new OpenFileDialog();
+				dialog.CheckFileExists = true;
+				dialog.CheckPathExists = true;
+				dialog.DefaultExt = "e2p";
+				dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
+				dialog.Multiselect = false;
+				DialogResult result = dialog.ShowDialog();
+				if (result == DialogResult.OK) {
+					projectFileName = dialog.FileName;
+					LoadProject();
+				}
 			}
 		}
 
