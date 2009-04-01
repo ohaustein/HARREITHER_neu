@@ -10,13 +10,18 @@ namespace Europlan.Application {
 	public partial class FloorSummaryPanel : UserControl, IEditorUserControl {
 		
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
+
+		private Floor floor;
 		
 		public FloorSummaryPanel() {
 			InitializeComponent();
 		}
 		
 		public void UpdateControl() {
-		
+			if (this.Tag != null) {
+				this.floor = this.Tag as Floor;
+				this.txtName.Text = floor.Name;
+			}		
 		}
 
 		public bool AllowLeave() {

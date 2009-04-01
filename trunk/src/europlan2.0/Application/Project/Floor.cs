@@ -6,9 +6,9 @@ using System.Xml.Serialization;
 using System.Windows.Forms;
 
 namespace Europlan.Application {
-	
 
-	public class Floor {
+
+	public class Floor : IGuiRepresentation {
 
 		private string name;
 		private string id;
@@ -54,12 +54,28 @@ namespace Europlan.Application {
 
 		internal void InitializeTree(System.Windows.Forms.TreeNode floors) {
 			floorNode = new TreeNode(this.Name);
-			floorNode.Tag = typeof(FloorSummaryPanel);
+			floorNode.Tag = this;
 			floors.Nodes.Add(floorNode);
 			foreach (Room room in rooms) {
 				room.InitializeTree(floorNode);
 			}
 		}
+
+		#region IGuiRepresentation Members
+
+		public Type AssociatedPanelType {
+			get { 
+				return typeof(FloorSummaryPanel);
+			}
+		}
+
+		public System.Drawing.Icon AssociatedIcon {
+			get {
+				return null;
+			}
+		}
+
+		#endregion
 	}
 
 }
