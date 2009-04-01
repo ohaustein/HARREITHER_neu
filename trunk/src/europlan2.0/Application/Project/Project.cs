@@ -152,7 +152,8 @@ namespace Europlan.Application {
 				selectedIndex = tree.SelectedNode.Index;
 			}
 			tree.Nodes.Clear();
-
+			rootNode.Nodes.Clear();
+			floorsNode.Nodes.Clear();
 
 			tree.Nodes.Add(rootNode);
 			rootNode.Tag = this;

@@ -28,5 +28,9 @@ namespace Europlan.Application {
 			return true;
 		}
 
+		private void txtName_TextChanged(object sender, EventArgs e) {
+			this.floor.Name = this.txtName.Text;
+		}
+
 	}
 }

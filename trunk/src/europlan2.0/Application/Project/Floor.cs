@@ -35,7 +35,12 @@ namespace Europlan.Application {
 
 		public string Name {
 			get { return name; }
-			set { name = value; }
+			set { 
+				name = value;
+				if (floorNode != null) {
+					floorNode.Text = name;
+				}
+			}
 		}
 
 		public string Id {
