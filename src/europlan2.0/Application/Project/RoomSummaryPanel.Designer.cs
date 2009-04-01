@@ -36,6 +36,7 @@ namespace Europlan.Application {
 			this.txtName.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
 			this.txtName.Size = new System.Drawing.Size(463, 20);
 			this.txtName.TabIndex = 13;
+			this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
 			// 
 			// lblName
 			// 
@@ -45,6 +46,7 @@ namespace Europlan.Application {
 			this.lblName.TabIndex = 12;
 			this.lblName.Text = "Name:";
 			this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.lblName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
 			// 
 			// RoomSummaryPanel
 			// 

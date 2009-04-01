@@ -43,7 +43,12 @@ namespace Europlan.Application {
 
 		public string Name {
 			get { return name; }
-			set { name = value; }
+			set { 
+				name = value;
+				if (roomNode != null) {
+					roomNode.Text = name;
+				}
+			}
 		}
 
 		public string Id {

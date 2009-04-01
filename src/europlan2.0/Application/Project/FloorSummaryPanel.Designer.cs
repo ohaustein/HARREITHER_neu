@@ -36,6 +36,7 @@ namespace Europlan.Application {
 			this.txtName.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
 			this.txtName.Size = new System.Drawing.Size(464, 20);
 			this.txtName.TabIndex = 15;
+			this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
 			// 
 			// lblName
 			// 

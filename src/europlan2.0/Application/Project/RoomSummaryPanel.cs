@@ -30,6 +30,10 @@ namespace Europlan.Application {
 			return true;
 		}
 
+		private void txtName_TextChanged(object sender, EventArgs e) {
+			this.room.Name = this.txtName.Text;
+		}
+
 
 	}
 }
