@@ -22,6 +22,7 @@ namespace Europlan.Application {
 
 		private Dictionary<Type, UserControl> userControls = new Dictionary<Type, UserControl>();
 		private bool guiUpdateInProgress = false;
+		private bool projectUnsaved = false;
 
 		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 		private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
@@ -177,6 +178,7 @@ namespace Europlan.Application {
 		}
 
 		void myProject_ProjectSaved(object sender) {
+			projectUnsaved = false;
 			UpdateTitle();
 			Project.Instance.InitializeTreeView(this.projectTree);
 		}
@@ -191,7 +193,11 @@ namespace Europlan.Application {
 				} else {
 					title += resources.GetString("NewProjectTitle", Thread.CurrentThread.CurrentUICulture);
 				}
+				if (projectUnsaved) {
+					title += "*";
+				}
 				title += "]";
+
 				this.Text = title;
 			}
 		}
@@ -309,7 +315,8 @@ namespace Europlan.Application {
 
 		void MainForm_ProjectChanged(object sender) {
 			if (!guiUpdateInProgress) {
-				
+				projectUnsaved = true;
+				UpdateTitle();
 			}
 		}
 
