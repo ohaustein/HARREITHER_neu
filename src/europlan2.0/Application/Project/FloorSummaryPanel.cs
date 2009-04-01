@@ -10,6 +10,7 @@ namespace Europlan.Application {
 	public partial class FloorSummaryPanel : UserControl, IEditorUserControl {
 		
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
+		public event ProjectChangedHandler ProjectChanged;
 
 		private Floor floor;
 		
@@ -30,6 +31,9 @@ namespace Europlan.Application {
 
 		private void txtName_TextChanged(object sender, EventArgs e) {
 			this.floor.Name = this.txtName.Text;
+			if (ProjectStructureChanged != null) {
+				ProjectStructureChanged(this);
+			}
 		}
 
 	}

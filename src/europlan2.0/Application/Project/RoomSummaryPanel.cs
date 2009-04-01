@@ -10,6 +10,7 @@ namespace Europlan.Application {
 	public partial class RoomSummaryPanel : UserControl, IEditorUserControl {
 		
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
+		public event ProjectChangedHandler ProjectChanged;
 
 		private Room room;
 		
@@ -32,6 +33,9 @@ namespace Europlan.Application {
 
 		private void txtName_TextChanged(object sender, EventArgs e) {
 			this.room.Name = this.txtName.Text;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
 		}
 
 
