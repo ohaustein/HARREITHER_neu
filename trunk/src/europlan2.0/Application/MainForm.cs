@@ -172,19 +172,23 @@ namespace Europlan.Application {
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-			Project.ProjectLoaded -= myProject_ProjectLoaded;
-			Project.ProjectSaved -= myProject_ProjectSaved;
+			if (CheckForUnsavedChanges()) {
+				Project.ProjectLoaded -= myProject_ProjectLoaded;
+				Project.ProjectSaved -= myProject_ProjectSaved;
 
-			SettingsKey settings = SettingsFile.Settings["MainForm"];
-			if (this.WindowState == FormWindowState.Normal) {
-				settings.StorePoint("Location", this.Location);
-				settings.StoreSize("Size", this.Size);
-				settings.StoreSetting("Maximized", false);
-			} else if (this.WindowState == FormWindowState.Maximized) {
-				settings.StoreSetting("Maximized", true);
+				SettingsKey settings = SettingsFile.Settings["MainForm"];
+				if (this.WindowState == FormWindowState.Normal) {
+					settings.StorePoint("Location", this.Location);
+					settings.StoreSize("Size", this.Size);
+					settings.StoreSetting("Maximized", false);
+				} else if (this.WindowState == FormWindowState.Maximized) {
+					settings.StoreSetting("Maximized", true);
+				}
+				settings.StoreSetting("SplitterDistance", this.splitContainer.SplitterDistance);
+				SettingsFile.Update();
+			} else {
+				e.Cancel = true;
 			}
-			settings.StoreSetting("SplitterDistance", this.splitContainer.SplitterDistance);
-			SettingsFile.Update();
 		}
 
 		private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
