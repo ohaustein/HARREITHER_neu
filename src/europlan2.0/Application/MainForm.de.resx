@@ -137,4 +137,10 @@ Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 22</value>
   </data>
+  <data name="UnsavedCaption" xml:space="preserve">
+    <value>Änderungen speichern?</value>
+  </data>
+  <data name="UnsavedMessage" xml:space="preserve">
+    <value>Änderungen speichern?</value>
+  </data>
 </root>

@@ -164,4 +164,10 @@ Press OK to restart now.</value>
   <data name="NotLicensed" xml:space="preserve">
     <value>not licensed</value>
   </data>
+  <data name="UnsavedCaption" xml:space="preserve">
+    <value>Save changes?</value>
+  </data>
+  <data name="UnsavedMessage" xml:space="preserve">
+    <value>Save changes?</value>
+  </data>
 </root>
