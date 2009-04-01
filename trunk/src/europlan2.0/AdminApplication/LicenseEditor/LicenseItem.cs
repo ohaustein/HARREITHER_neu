@@ -13,6 +13,12 @@ namespace Europlan.AdminApplication {
 		public LicenseItem(LicenseTemplate license) {
 			this.license = license;
 			this.Text = license.DisplayName;
+			if (this.license.ValidUntil < DateTime.Today.AddDays(7)) {
+				//this.Font = new System.Drawing.Font(this.Font, System.Drawing.FontStyle.Bold);
+				this.ForeColor = System.Drawing.Color.Red;
+			} else {
+				this.ForeColor = System.Drawing.Color.Black;
+			}
 			this.dateItem = new ListViewSubItem(this, this.license.ValidUntil.ToShortDateString());
 			this.SubItems.Add(this.dateItem);
 			this.license.NameChanged += new EventHandler(license_NameChanged);
@@ -21,6 +27,11 @@ namespace Europlan.AdminApplication {
 		private void license_NameChanged(object sender, EventArgs e) {
 			this.Text = license.DisplayName;
 			this.dateItem.Text = license.ValidUntil.ToShortDateString();
+			if (this.license.ValidUntil < DateTime.Today.AddDays(7)) {
+				this.ForeColor = System.Drawing.Color.Red;
+			} else {
+				this.ForeColor = System.Drawing.Color.Black;
+			}
 		}
 
 		public LicenseTemplate License {

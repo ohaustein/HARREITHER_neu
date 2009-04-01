@@ -38,11 +38,13 @@ namespace Europlan.AdminApplication {
 			this.lblValidUntil = new System.Windows.Forms.Label();
 			this.dtpValidUntil = new System.Windows.Forms.DateTimePicker();
 			this.syeCurrentSystem = new Europlan.AdminApplication.SystemEditor();
+			this.lblEmail = new System.Windows.Forms.Label();
+			this.txtEmail = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// btnAddSystem
 			// 
-			this.btnAddSystem.Location = new System.Drawing.Point(4, 429);
+			this.btnAddSystem.Location = new System.Drawing.Point(4, 455);
 			this.btnAddSystem.Name = "btnAddSystem";
 			this.btnAddSystem.Size = new System.Drawing.Size(134, 23);
 			this.btnAddSystem.TabIndex = 26;
@@ -61,7 +63,7 @@ namespace Europlan.AdminApplication {
 			this.lstSystems.FullRowSelect = true;
 			this.lstSystems.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.lstSystems.HideSelection = false;
-			this.lstSystems.Location = new System.Drawing.Point(144, 305);
+			this.lstSystems.Location = new System.Drawing.Point(144, 331);
 			this.lstSystems.MultiSelect = false;
 			this.lstSystems.Name = "lstSystems";
 			this.lstSystems.ShowGroups = false;
@@ -91,7 +93,7 @@ namespace Europlan.AdminApplication {
 			// 
 			// lblSystem
 			// 
-			this.lblSystem.Location = new System.Drawing.Point(1, 305);
+			this.lblSystem.Location = new System.Drawing.Point(1, 331);
 			this.lblSystem.Name = "lblSystem";
 			this.lblSystem.Size = new System.Drawing.Size(137, 16);
 			this.lblSystem.TabIndex = 23;
@@ -103,7 +105,7 @@ namespace Europlan.AdminApplication {
 			this.lstModules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.lstModules.CheckBoxes = true;
-			this.lstModules.Location = new System.Drawing.Point(144, 180);
+			this.lstModules.Location = new System.Drawing.Point(144, 206);
 			this.lstModules.Name = "lstModules";
 			this.lstModules.Size = new System.Drawing.Size(404, 119);
 			this.lstModules.TabIndex = 22;
@@ -113,7 +115,7 @@ namespace Europlan.AdminApplication {
 			// 
 			// lblModules
 			// 
-			this.lblModules.Location = new System.Drawing.Point(1, 180);
+			this.lblModules.Location = new System.Drawing.Point(1, 206);
 			this.lblModules.Name = "lblModules";
 			this.lblModules.Size = new System.Drawing.Size(137, 16);
 			this.lblModules.TabIndex = 21;
@@ -122,7 +124,7 @@ namespace Europlan.AdminApplication {
 			// 
 			// lblHeader
 			// 
-			this.lblHeader.Location = new System.Drawing.Point(1, 56);
+			this.lblHeader.Location = new System.Drawing.Point(1, 82);
 			this.lblHeader.Name = "lblHeader";
 			this.lblHeader.Size = new System.Drawing.Size(137, 16);
 			this.lblHeader.TabIndex = 20;
@@ -135,7 +137,7 @@ namespace Europlan.AdminApplication {
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.txtHeader.BackColor = System.Drawing.SystemColors.Window;
 			this.txtHeader.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-			this.txtHeader.Location = new System.Drawing.Point(144, 55);
+			this.txtHeader.Location = new System.Drawing.Point(144, 81);
 			this.txtHeader.Multiline = true;
 			this.txtHeader.Name = "txtHeader";
 			this.txtHeader.Size = new System.Drawing.Size(404, 118);
@@ -165,7 +167,7 @@ namespace Europlan.AdminApplication {
 			// 
 			// lblValidUntil
 			// 
-			this.lblValidUntil.Location = new System.Drawing.Point(1, 30);
+			this.lblValidUntil.Location = new System.Drawing.Point(1, 56);
 			this.lblValidUntil.Name = "lblValidUntil";
 			this.lblValidUntil.Size = new System.Drawing.Size(137, 16);
 			this.lblValidUntil.TabIndex = 28;
@@ -176,7 +178,7 @@ namespace Europlan.AdminApplication {
 			// 
 			this.dtpValidUntil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.dtpValidUntil.Location = new System.Drawing.Point(144, 29);
+			this.dtpValidUntil.Location = new System.Drawing.Point(144, 55);
 			this.dtpValidUntil.Name = "dtpValidUntil";
 			this.dtpValidUntil.Size = new System.Drawing.Size(404, 20);
 			this.dtpValidUntil.TabIndex = 29;
@@ -188,10 +190,31 @@ namespace Europlan.AdminApplication {
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.syeCurrentSystem.Enabled = false;
 			this.syeCurrentSystem.LicensedSystem = null;
-			this.syeCurrentSystem.Location = new System.Drawing.Point(144, 430);
+			this.syeCurrentSystem.Location = new System.Drawing.Point(144, 456);
 			this.syeCurrentSystem.Name = "syeCurrentSystem";
 			this.syeCurrentSystem.Size = new System.Drawing.Size(404, 105);
 			this.syeCurrentSystem.TabIndex = 31;
+			// 
+			// lblEmail
+			// 
+			this.lblEmail.Location = new System.Drawing.Point(1, 30);
+			this.lblEmail.Name = "lblEmail";
+			this.lblEmail.Size = new System.Drawing.Size(137, 16);
+			this.lblEmail.TabIndex = 33;
+			this.lblEmail.Text = "E-Mail:";
+			this.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// txtEmail
+			// 
+			this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.txtEmail.BackColor = System.Drawing.SystemColors.Window;
+			this.txtEmail.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+			this.txtEmail.Location = new System.Drawing.Point(144, 29);
+			this.txtEmail.Name = "txtEmail";
+			this.txtEmail.Size = new System.Drawing.Size(404, 20);
+			this.txtEmail.TabIndex = 32;
+			this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
 			// 
 			// LicenseEditor
 			// 
@@ -199,6 +222,8 @@ namespace Europlan.AdminApplication {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
 			this.AutoScrollMinSize = new System.Drawing.Size(400, 0);
+			this.Controls.Add(this.lblEmail);
+			this.Controls.Add(this.txtEmail);
 			this.Controls.Add(this.syeCurrentSystem);
 			this.Controls.Add(this.dtpValidUntil);
 			this.Controls.Add(this.lblValidUntil);
@@ -235,5 +260,7 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.ColumnHeader colHardwareId;
 		private System.Windows.Forms.ColumnHeader colAnnotation;
 		private SystemEditor syeCurrentSystem;
+		private System.Windows.Forms.Label lblEmail;
+		private System.Windows.Forms.TextBox txtEmail;
 	}
 }
