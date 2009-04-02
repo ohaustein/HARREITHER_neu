@@ -77,7 +77,7 @@ namespace Europlan.Application {
 						if (Project.Instance.Floors.Count != 0) {
 							string message = resources.GetString("SyncMessage", Thread.CurrentThread.CurrentUICulture);
 							string caption = resources.GetString("SyncCaption", Thread.CurrentThread.CurrentUICulture);
-							result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo);
+							result = MessageBox.Show(message, caption, MessageBoxButtons.YesNoCancel);
 							if (result == DialogResult.Yes) {
 								foreach (Floor floor in floors) {
 									Floor f = Project.Instance.Floors.Find(delegate(Floor f1) { return f1.Id == floor.Id; });
@@ -85,7 +85,7 @@ namespace Europlan.Application {
 										f.Synchronize(floor);
 									}
 								}
-							} else {
+							} else if (result == DialogResult.No) {
 								Project.Instance.Floors = floors;
 							}
 						} else {
