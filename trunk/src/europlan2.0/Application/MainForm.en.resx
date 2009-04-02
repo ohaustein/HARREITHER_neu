@@ -170,4 +170,10 @@ Press OK to restart now.</value>
   <data name="UnsavedMessage" xml:space="preserve">
     <value>Save changes?</value>
   </data>
+  <data name="SyncCaption" xml:space="preserve">
+    <value>Synchronize?</value>
+  </data>
+  <data name="SyncMessage" xml:space="preserve">
+    <value>There are already floors/rooms available. Press yes to synchronize or press no to overwrite the existing data with the imported.</value>
+  </data>
 </root>
