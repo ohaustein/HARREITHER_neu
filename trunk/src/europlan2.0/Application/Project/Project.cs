@@ -153,9 +153,9 @@ namespace Europlan.Application {
 
 
 		internal void InitializeTreeView(System.Windows.Forms.TreeView tree) {
-			int selectedIndex = 0;
+			TreeNode selectedNode = null;
 			if (tree.SelectedNode != null) {
-				selectedIndex = tree.SelectedNode.Index;
+				selectedNode = tree.SelectedNode;
 			}
 			tree.Nodes.Clear();
 			rootNode.Nodes.Clear();
@@ -172,10 +172,10 @@ namespace Europlan.Application {
 			}
 			
 			tree.ExpandAll();
-			if (selectedIndex != 0) {
-				tree.SelectedNode = tree.Nodes[selectedIndex];
+			if (selectedNode != null) {
+				tree.SelectedNode = selectedNode;
 			} else {
-				tree.SelectedNode = rootNode;
+				//tree.SelectedNode = rootNode;
 			}
 		}
 
