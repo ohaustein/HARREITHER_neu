@@ -5,6 +5,7 @@ using log4net;
 using System.Reflection;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace Europlan.Application {
 	
@@ -13,7 +14,7 @@ namespace Europlan.Application {
 		private static BuildingDataImportManager instance = null;
 		private static readonly object padlock = new object();
 		private static readonly ILog log = LogManager.GetLogger(typeof(BuildingDataImportManager));
-		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildingDataImportManager));
+		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
 		private IList<IBuildingDataImporter> importers;
 
@@ -74,8 +75,8 @@ namespace Europlan.Application {
 					if (importer.FileExtension.Equals(Path.GetExtension(dialog.FileName), StringComparison.InvariantCultureIgnoreCase)) {
 						List<Floor> floors = importer.ImportBuildingDataFromFile(dialog.FileName);
 						if (Project.Instance.Floors.Count != 0) {
-							string message = "";
-							string caption = "";
+							string message = resources.getstring("SyncMessage", Thread.CurrentThread.CurrentUICulture);
+							string caption = resources.getstring("SyncCaption", Thread.CurrentThread.CurrentUICulture);
 							result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo);
 							if (result == DialogResult.Yes) {
 								foreach (Floor floor in floors) {
