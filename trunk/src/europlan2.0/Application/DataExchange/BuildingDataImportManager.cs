@@ -72,7 +72,24 @@ namespace Europlan.Application {
 			if (result == DialogResult.OK) {
 				foreach (IBuildingDataImporter importer in importers) {
 					if (importer.FileExtension.Equals(Path.GetExtension(dialog.FileName), StringComparison.InvariantCultureIgnoreCase)) {
-						Project.Instance.Floors = importer.ImportBuildingDataFromFile(dialog.FileName);
+						List<Floor> floors = importer.ImportBuildingDataFromFile(dialog.FileName);
+						if (Project.Instance.Floors.Count != 0) {
+							string message = "";
+							string caption = "";
+							result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo);
+							if (result == DialogResult.Yes) {
+								foreach (Floor floor in floors) {
+									Floor f = Project.Instance.Floors.Find(delegate(Floor f1) { return f1.Id == floor.Id; });
+									if (f != null) {
+										f.Synchronize(floor);
+									}
+								}
+							} else {
+								Project.Instance.Floors = floors;
+							}
+						} else {
+							Project.Instance.Floors = floors;
+						}
 					}
 				}
 			}
