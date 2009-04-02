@@ -24,15 +24,32 @@ namespace Europlan.Application {
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
+			projectFloorsSource.DataSource = Project.Instance.Floors;
+			projectFloorsSource.ResetBindings(false);
 		}
 
 		public void UpdateControl() {
-
+			projectFloorsSource.DataSource = Project.Instance.Floors;
+			projectFloorsSource.ResetBindings(false);
 		}
 
 		public bool AllowLeave() {
 			return true;
 		}
 
+		private void FloorsSummaryPanel_Load(object sender, EventArgs e) {
+		}
+
+		private void gridFloors_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+			if (ProjectStructureChanged != null) {
+				ProjectStructureChanged(this);
+			}
+		}
+
+		private void gridFloors_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
+			if (ProjectStructureChanged != null) {
+				ProjectStructureChanged(this);
+			}
+		}
 	}
 }
