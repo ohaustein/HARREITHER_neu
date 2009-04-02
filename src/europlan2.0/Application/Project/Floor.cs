@@ -39,6 +39,8 @@ namespace Europlan.Application {
 				Room r = this.Rooms.Find(delegate(Room r1) { return r1.Id == room.Id; });
 				if (r != null) {
 					r.Synchronize(room);
+				} else {
+					this.Rooms.Add(room);
 				}
 			}
 		}

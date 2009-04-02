@@ -83,6 +83,8 @@ namespace Europlan.Application {
 									Floor f = Project.Instance.Floors.Find(delegate(Floor f1) { return f1.Id == floor.Id; });
 									if (f != null) {
 										f.Synchronize(floor);
+									} else {
+										Project.Instance.Floors.Add(floor);
 									}
 								}
 							} else if (result == DialogResult.No) {
