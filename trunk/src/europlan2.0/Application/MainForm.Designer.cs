@@ -81,6 +81,8 @@ namespace Europlan.Application {
 			// 
 			this.projectTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			resources.ApplyResources(this.projectTree, "projectTree");
+			this.projectTree.FullRowSelect = true;
+			this.projectTree.HideSelection = false;
 			this.projectTree.Name = "projectTree";
 			this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
 			// 

@@ -8,6 +8,7 @@ using System.Threading;
 using System.Globalization;
 using Europlan.Licensing;
 using System.IO;
+using Microsoft.Win32;
 
 namespace Europlan.Application {
 	
@@ -15,7 +16,9 @@ namespace Europlan.Application {
 
 		private static System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Program));
 		private static readonly ILog log = LogManager.GetLogger(typeof(Program));
-		
+
+		public static string updateSubDir = "de";
+
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
@@ -29,6 +32,16 @@ namespace Europlan.Application {
 			startingForm.Update();
 			log4net.Config.XmlConfigurator.Configure();
 			log.Debug("Starting Application");
+
+			RegistryKey key = Registry.LocalMachine.OpenSubKey("Software\\bluesource\\Europlan2.0");
+			if (key != null) {
+				string val = key.GetValue("SetupLanguage") as string;
+				if (val != null) {
+					if (val.Equals("en", StringComparison.InvariantCultureIgnoreCase)) {
+						Program.updateSubDir = "en";
+					}
+				}
+			}
 
 			// using a customized class of SettingsFile which does not consider the assembly version for storing the settings
 			SettingsFile.Create();
