@@ -33,6 +33,16 @@ namespace Europlan.Application {
 			rooms = new List<Room>();
 		}
 
+		internal void Synchronize(Floor floor) {
+			this.Name = floor.Name;
+			foreach (Room room in floor.Rooms) {
+				Room r = this.Rooms.Find(delegate(Room r1) { return r1.Id == room.Id; });
+				if (r != null) {
+					r.Synchronize(room);
+				}
+			}
+		}
+
 		public string Name {
 			get { return name; }
 			set { 
@@ -66,8 +76,6 @@ namespace Europlan.Application {
 			}
 		}
 
-		#region IGuiRepresentation Members
-
 		public Type AssociatedPanelType {
 			get { 
 				return typeof(FloorSummaryPanel);
@@ -80,7 +88,6 @@ namespace Europlan.Application {
 			}
 		}
 
-		#endregion
 	}
 
 }

@@ -41,6 +41,17 @@ namespace Europlan.Application {
 			normalizedCoolPower = 0;
 		}
 
+
+		internal void Synchronize(Room room) {
+			this.Name = room.Name;
+			this.Temperature = room.Temperature;
+			this.Area = room.Area;
+			this.HeatPower = room.HeatPower;
+			this.CoolPower = room.CoolPower;
+			this.NormalizedHeatPower = room.NormalizedHeatPower;
+			this.NormalizedCoolPower = room.NormalizedCoolPower;
+		}
+
 		public string Name {
 			get { return name; }
 			set { 
