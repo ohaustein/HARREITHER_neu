@@ -12,7 +12,7 @@ namespace Europlan.Application {
 
 		private string name;
 		private string id;
-		private TreeNode floorNode;
+		private TreeNode floorNode = new TreeNode();
 
 		private List<Room> rooms;
 
@@ -24,7 +24,7 @@ namespace Europlan.Application {
 
 		public Floor(string name) {
 			InitializeFloor();
-			this.name = name;
+			this.Name = name;
 		}
 
 		private void InitializeFloor() {
@@ -70,9 +70,9 @@ namespace Europlan.Application {
 		}
 
 		internal void InitializeTree(System.Windows.Forms.TreeNode floors) {
-			floorNode = new TreeNode(this.Name);
 			floorNode.Tag = this;
 			floors.Nodes.Add(floorNode);
+			floorNode.Nodes.Clear();
 			foreach (Room room in rooms) {
 				room.InitializeTree(floorNode);
 			}
