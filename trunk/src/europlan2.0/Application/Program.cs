@@ -21,6 +21,12 @@ namespace Europlan.Application {
 		/// </summary>
 		[STAThread]
 		static void Main(string[] args) {
+			System.Windows.Forms.Application.EnableVisualStyles();
+			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+			
+			StartingForm startingForm = new StartingForm();
+			startingForm.Show();
+			startingForm.Update();
 			log4net.Config.XmlConfigurator.Configure();
 			log.Debug("Starting Application");
 
@@ -38,14 +44,12 @@ namespace Europlan.Application {
 				return;
 			}
 
-			System.Windows.Forms.Application.EnableVisualStyles();
-			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 			MainForm mainForm = new MainForm();
 
 			if (args.Length != 0) {
 				mainForm.ProjectToLoad = args[0];
 			}
-
+			startingForm.Close();
 			System.Windows.Forms.Application.Run(mainForm);
 			
 		}
