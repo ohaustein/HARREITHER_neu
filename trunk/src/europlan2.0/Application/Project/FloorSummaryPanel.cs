@@ -22,6 +22,8 @@ namespace Europlan.Application {
 			if (this.Tag != null) {
 				this.floor = this.Tag as Floor;
 				this.txtName.Text = floor.Name;
+				this.floorRoomsSource.DataSource = this.floor.Rooms;
+				this.floorRoomsSource.ResetBindings(false);
 			}		
 		}
 
@@ -31,6 +33,18 @@ namespace Europlan.Application {
 
 		private void txtName_TextChanged(object sender, EventArgs e) {
 			this.floor.Name = this.txtName.Text;
+			if (ProjectStructureChanged != null) {
+				ProjectStructureChanged(this);
+			}
+		}
+
+		private void gridRooms_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+			if (ProjectStructureChanged != null) {
+				ProjectStructureChanged(this);
+			}
+		}
+
+		private void gridRooms_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
 			if (ProjectStructureChanged != null) {
 				ProjectStructureChanged(this);
 			}

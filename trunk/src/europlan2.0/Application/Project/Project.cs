@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using System.Windows.Forms;
 using System.Threading;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace Europlan.Application {
 
@@ -111,6 +112,11 @@ namespace Europlan.Application {
 			get { return floors; }
 			set { floors = value; }
 		}
+
+		/*public void SetFloors(List<Floor> floors) {
+			this.floors.Clear();
+			this.floors = new List<Floor>(floors);
+		}*/
 
 		public static void Load(string filename) {
 			lock (padlock) {
