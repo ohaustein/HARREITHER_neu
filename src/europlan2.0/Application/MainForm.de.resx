@@ -137,6 +137,12 @@ Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 22</value>
   </data>
+  <data name="SyncCaption" xml:space="preserve">
+    <value>Synchronisieren?</value>
+  </data>
+  <data name="SyncMessage" xml:space="preserve">
+    <value>Es sind bereits Geschoße bzw. Räume vorhanden. Wählen Sie ja, um die Daten zu synchronisieren oder nein, um die vorhandenen Daten durch die importieren zu ersetzen.</value>
+  </data>
   <data name="UnsavedCaption" xml:space="preserve">
     <value>Änderungen speichern?</value>
   </data>
