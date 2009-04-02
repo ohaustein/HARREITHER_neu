@@ -37,12 +37,11 @@ namespace Europlan.Application {
 			return true;
 		}
 
-		private void FloorsSummaryPanel_Load(object sender, EventArgs e) {
-		}
-
 		private void gridFloors_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-			if (ProjectStructureChanged != null) {
-				ProjectStructureChanged(this);
+			if (this.gridFloors.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn && e.RowIndex >= 0) {
+				if (ProjectStructureChanged != null) {
+					ProjectStructureChanged(this);
+				}
 			}
 		}
 

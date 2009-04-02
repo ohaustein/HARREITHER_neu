@@ -74,6 +74,7 @@ if ([System.Windows.Forms.MessageBox]::Show("Bitte im Konsolenfenster überprüfen
 
   $i = [int]0
   $replaceVersionFiles | ForEach-Object -process {
+    echo "Update $_"
     $content = Get-Content $_
     $j = [int]0
     $findVersionStrings[$i] | ForEach-Object -process {
@@ -89,7 +90,9 @@ if ([System.Windows.Forms.MessageBox]::Show("Bitte im Konsolenfenster überprüfen
     $i++
   }
   
-  svn commit -m $newVersion curVersion.txt $replaceVersionFiles
+  if ([System.Windows.Forms.MessageBox]::Show("Sollen die modifizierten Dateien eingecheckt werden?", "Einchecken?", [System.Windows.Forms.MessageBoxButtons]::YesNo) -eq [System.Windows.Forms.DialogResult]::Yes) {
+    svn commit -m $newVersion curVersion.txt $replaceVersionFiles
+  }
 } else {
   echo "Abgebrochen"
 }

@@ -61,9 +61,9 @@ namespace Europlan.Application {
             this.associatedPanelTypeDataGridViewTextBoxColumn});
 			this.gridFloors.DataMember = "Floors";
 			this.gridFloors.DataSource = this.projectFloorsSource;
-			this.gridFloors.Location = new System.Drawing.Point(4, 33);
+			this.gridFloors.Location = new System.Drawing.Point(3, 33);
 			this.gridFloors.Name = "gridFloors";
-			this.gridFloors.Size = new System.Drawing.Size(671, 297);
+			this.gridFloors.Size = new System.Drawing.Size(672, 297);
 			this.gridFloors.TabIndex = 1;
 			this.gridFloors.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFloors_CellValueChanged);
 			this.gridFloors.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridFloors_UserDeletedRow);
@@ -123,7 +123,6 @@ namespace Europlan.Application {
 			this.Controls.Add(this.btnImport);
 			this.Name = "FloorsSummaryPanel";
 			this.Size = new System.Drawing.Size(678, 333);
-			this.Load += new System.EventHandler(this.FloorsSummaryPanel_Load);
 			((System.ComponentModel.ISupportInitialize)(this.gridFloors)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.projectFloorsSource)).EndInit();
 			this.ResumeLayout(false);

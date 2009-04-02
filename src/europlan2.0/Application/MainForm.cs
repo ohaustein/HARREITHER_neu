@@ -30,6 +30,8 @@ namespace Europlan.Application {
 		public MainForm() {
 			InitializeComponent();
 
+			this.updateController.UpdateLocation = "http://www.top-contact.at/EuroplanUpdates/" + Program.updateSubDir;
+
 			LicenseManager.Instance.LicenseChanged += new EventHandler(licenseManager_LicenseChanged);
 
 			this.UpdateAvailableFeatures();
@@ -311,7 +313,11 @@ namespace Europlan.Application {
 
 		private void projectTree_AfterSelect(object sender, TreeViewEventArgs e) {
 			TreeNode selectedNode = e.Node;
-			splitContainer.Panel2.Controls.Clear();
+			Control oldControl = null;
+			if (splitContainer.Panel2.Controls.Count > 0) {
+				oldControl = splitContainer.Panel2.Controls[0];
+			}
+			//splitContainer.Panel2.Controls.Clear();
 			if (selectedNode != null && selectedNode.Tag != null) {
 				UserControl control = null;
 				if (selectedNode.Tag is IGuiRepresentation) {
@@ -337,8 +343,11 @@ namespace Europlan.Application {
 				} 
 				if (control != null) {
 					guiUpdateInProgress = true;
-					splitContainer.Panel2.Controls.Add(control);
-					control.Dock = DockStyle.Fill;
+					if (control != oldControl) {
+						splitContainer.Panel2.Controls.Clear();
+						splitContainer.Panel2.Controls.Add(control);
+						control.Dock = DockStyle.Fill;
+					}
 					(control as IEditorUserControl).UpdateControl();
 					guiUpdateInProgress = false;
 				}
@@ -348,6 +357,8 @@ namespace Europlan.Application {
 		void MainForm_ProjectStructureChanged(object sender) {
 			if (!guiUpdateInProgress) {
 				Project.Instance.InitializeTreeView(this.projectTree);
+				projectUnsaved = true;
+				UpdateTitle();
 			}
 		}
 
