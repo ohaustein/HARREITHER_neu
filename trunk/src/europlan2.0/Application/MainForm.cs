@@ -30,7 +30,8 @@ namespace Europlan.Application {
 		public MainForm() {
 			InitializeComponent();
 
-			this.updateController.UpdateLocation = "http://helios.bluesource.at/EuroplanUpdates/" + Program.updateSubDir;
+			this.updateController.UpdateLocation = Program.updateLocation;
+			this.updateController.PublicKeyToken = Program.updatePublicKey;
 
 			LicenseManager.Instance.LicenseChanged += new EventHandler(licenseManager_LicenseChanged);
 
