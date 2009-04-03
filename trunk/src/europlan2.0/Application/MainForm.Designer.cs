@@ -205,7 +205,11 @@ namespace Europlan.Application {
 			// 
 			// updateController
 			// 
+			this.updateController.ApplicationId = new System.Guid("1f24573e-033c-448d-8e15-9f396e67e44e");
 			this.updateController.BypassProxyOnLocal = true;
+			this.updateController.PublicKeyToken = resources.GetString("updateController.PublicKeyToken");
+			this.updateController.UpdateLocation = "http://helios.bluesource.at/EuroplanUpdates/";
+			this.updateController.UseHostAssemblyVersion = true;
 			this.updateController.Version = ((System.Version)(resources.GetObject("updateController.Version")));
 			this.updateController.CheckForUpdateCompleted += new Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventHandler(this.updateController_CheckForUpdateCompleted);
 			// 
