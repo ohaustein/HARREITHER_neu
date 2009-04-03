@@ -37,6 +37,12 @@ namespace Europlan.Application {
 			this.lblCool = new System.Windows.Forms.Label();
 			this.txtNormCool = new System.Windows.Forms.TextBox();
 			this.lblNormCool = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// txtName
@@ -46,7 +52,7 @@ namespace Europlan.Application {
 			this.txtName.Location = new System.Drawing.Point(129, 2);
 			this.txtName.Name = "txtName";
 			this.txtName.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtName.Size = new System.Drawing.Size(451, 20);
+			this.txtName.Size = new System.Drawing.Size(406, 20);
 			this.txtName.TabIndex = 13;
 			this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
 			// 
@@ -67,7 +73,7 @@ namespace Europlan.Application {
 			this.txtArea.Location = new System.Drawing.Point(129, 25);
 			this.txtArea.Name = "txtArea";
 			this.txtArea.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtArea.Size = new System.Drawing.Size(451, 20);
+			this.txtArea.Size = new System.Drawing.Size(406, 20);
 			this.txtArea.TabIndex = 15;
 			this.txtArea.TextChanged += new System.EventHandler(this.txtArea_TextChanged);
 			// 
@@ -87,7 +93,7 @@ namespace Europlan.Application {
 			this.txtTemperature.Location = new System.Drawing.Point(129, 48);
 			this.txtTemperature.Name = "txtTemperature";
 			this.txtTemperature.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtTemperature.Size = new System.Drawing.Size(451, 20);
+			this.txtTemperature.Size = new System.Drawing.Size(406, 20);
 			this.txtTemperature.TabIndex = 17;
 			this.txtTemperature.TextChanged += new System.EventHandler(this.txtTemperature_TextChanged);
 			// 
@@ -107,7 +113,7 @@ namespace Europlan.Application {
 			this.txtHeat.Location = new System.Drawing.Point(129, 71);
 			this.txtHeat.Name = "txtHeat";
 			this.txtHeat.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtHeat.Size = new System.Drawing.Size(451, 20);
+			this.txtHeat.Size = new System.Drawing.Size(406, 20);
 			this.txtHeat.TabIndex = 19;
 			this.txtHeat.TextChanged += new System.EventHandler(this.txtHeat_TextChanged);
 			// 
@@ -127,7 +133,7 @@ namespace Europlan.Application {
 			this.txtNormHeat.Location = new System.Drawing.Point(129, 94);
 			this.txtNormHeat.Name = "txtNormHeat";
 			this.txtNormHeat.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtNormHeat.Size = new System.Drawing.Size(451, 20);
+			this.txtNormHeat.Size = new System.Drawing.Size(406, 20);
 			this.txtNormHeat.TabIndex = 21;
 			this.txtNormHeat.TextChanged += new System.EventHandler(this.txtNormHeat_TextChanged);
 			// 
@@ -147,7 +153,7 @@ namespace Europlan.Application {
 			this.txtCool.Location = new System.Drawing.Point(129, 117);
 			this.txtCool.Name = "txtCool";
 			this.txtCool.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtCool.Size = new System.Drawing.Size(451, 20);
+			this.txtCool.Size = new System.Drawing.Size(406, 20);
 			this.txtCool.TabIndex = 23;
 			this.txtCool.TextChanged += new System.EventHandler(this.txtCool_TextChanged);
 			// 
@@ -167,7 +173,7 @@ namespace Europlan.Application {
 			this.txtNormCool.Location = new System.Drawing.Point(129, 140);
 			this.txtNormCool.Name = "txtNormCool";
 			this.txtNormCool.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtNormCool.Size = new System.Drawing.Size(451, 20);
+			this.txtNormCool.Size = new System.Drawing.Size(406, 20);
 			this.txtNormCool.TabIndex = 25;
 			this.txtNormCool.TextChanged += new System.EventHandler(this.txtNormCool_TextChanged);
 			// 
@@ -180,10 +186,76 @@ namespace Europlan.Application {
 			this.lblNormCool.Text = "Kühllast (bereinigt):";
 			this.lblNormCool.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label1.Location = new System.Drawing.Point(541, 25);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(32, 23);
+			this.label1.TabIndex = 26;
+			this.label1.Text = "m²";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label2
+			// 
+			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label2.Location = new System.Drawing.Point(541, 48);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(32, 23);
+			this.label2.TabIndex = 27;
+			this.label2.Text = "°C";
+			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label3
+			// 
+			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label3.Location = new System.Drawing.Point(541, 71);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(32, 23);
+			this.label3.TabIndex = 28;
+			this.label3.Text = "W";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label4
+			// 
+			this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label4.Location = new System.Drawing.Point(541, 94);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(32, 23);
+			this.label4.TabIndex = 29;
+			this.label4.Text = "W";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label5
+			// 
+			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label5.Location = new System.Drawing.Point(541, 117);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(32, 23);
+			this.label5.TabIndex = 30;
+			this.label5.Text = "W";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label6
+			// 
+			this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label6.Location = new System.Drawing.Point(541, 140);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(32, 23);
+			this.label6.TabIndex = 31;
+			this.label6.Text = "W";
+			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// RoomSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.label5);
+			this.Controls.Add(this.label4);
+			this.Controls.Add(this.label3);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.label1);
 			this.Controls.Add(this.txtNormCool);
 			this.Controls.Add(this.lblNormCool);
 			this.Controls.Add(this.txtCool);
@@ -221,5 +293,11 @@ namespace Europlan.Application {
 		private System.Windows.Forms.Label lblCool;
 		private System.Windows.Forms.TextBox txtNormCool;
 		private System.Windows.Forms.Label lblNormCool;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label label6;
 	}
 }
