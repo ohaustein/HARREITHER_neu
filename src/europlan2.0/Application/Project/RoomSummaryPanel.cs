@@ -64,7 +64,7 @@ namespace Europlan.Application {
 				}
 			} catch (Exception ex) {
 				MessageBox.Show("");
-				this.txtArea.Text = room.Area.ToString();
+				this.txtTemperature.Text = room.Temperature.ToString();
 			}
 		}
 
@@ -76,7 +76,7 @@ namespace Europlan.Application {
 				}
 			} catch (Exception ex) {
 				MessageBox.Show("");
-				this.txtArea.Text = room.Area.ToString();
+				this.txtHeat.Text = room.HeatPower.ToString();
 			}
 		}
 
@@ -88,7 +88,7 @@ namespace Europlan.Application {
 				}
 			} catch (Exception ex) {
 				MessageBox.Show("");
-				this.txtArea.Text = room.Area.ToString();
+				this.txtNormHeat.Text = room.NormalizedHeatPower.ToString();
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace Europlan.Application {
 				}
 			} catch (Exception ex) {
 				MessageBox.Show("");
-				this.txtArea.Text = room.Area.ToString();
+				this.txtCool.Text = room.CoolPower.ToString();
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace Europlan.Application {
 				}
 			} catch (Exception ex) {
 				MessageBox.Show("");
-				this.txtArea.Text = room.Area.ToString();
+				this.txtNormCool.Text = room.NormalizedCoolPower.ToString();
 			}
 		}
 
