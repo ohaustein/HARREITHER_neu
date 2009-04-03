@@ -38,14 +38,19 @@ $replaceVersionStrings[2][1] = $fileVersionReplace
 
 # .\Setup\europlan20.wxs
 $replaceVersionFiles[3] = ".\Setup\europlan20.wxs"
-$findVersionStrings[3] = new-object string[] 3
-$replaceVersionStrings[3] = new-object string[] 3
-$findVersionStrings[3][0] = '<Product Id="${GUID}" Name="Europlan 2\.0" Language="1031" Version="${VERSION}" Manufacturer="bluesource mobile solutions gmbh" UpgradeCode="\{ca795401-2df9-4ed9-8770-f230bd4ab9dc\}">'
-$replaceVersionStrings[3][0] = '<Product Id="${GUID}" Name="Europlan 2.0" Language="1031" Version="${VERSION}" Manufacturer="bluesource mobile solutions gmbh" UpgradeCode="{ca795401-2df9-4ed9-8770-f230bd4ab9dc}">'
-$findVersionStrings[3][1] = '<UpgradeVersion OnlyDetect="no" MigrateFeatures="yes" Minimum="0\.0\.0\.0" IncludeMinimum="yes" Maximum="${VERSION}" IncludeMaximum="no" Property="OLDVERSIONFOUND" />'
-$replaceVersionStrings[3][1] = '<UpgradeVersion OnlyDetect="no" MigrateFeatures="yes" Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="${VERSION}" IncludeMaximum="no" Property="OLDVERSIONFOUND" />'
-$findVersionStrings[3][2] = '<UpgradeVersion OnlyDetect="yes" Minimum="${VERSION}" IncludeMinimum="no" Property="NEWVERSIONFOUND" />'
-$replaceVersionStrings[3][2] = '<UpgradeVersion OnlyDetect="yes" Minimum="${VERSION}" IncludeMinimum="no" Property="NEWVERSIONFOUND" />'
+$findVersionStrings[3] = new-object string[] 2
+$replaceVersionStrings[3] = new-object string[] 2
+$findVersionStrings[3][0] = '<\?define ProductVersion="${VERSION}" \?>'
+$replaceVersionStrings[3][0] = '<?define ProductVersion="${VERSION}" ?>'
+$findVersionStrings[3][1] = '<\?define ProductId="${GUID}" \?>'
+$replaceVersionStrings[3][1] = '<?define ProductId="${GUID}" ?>'
+
+#$findVersionStrings[3][0] = '<Product Id="${GUID}" Name="Europlan 2\.0" Language="1031" Version="${VERSION}" Manufacturer="bluesource mobile solutions gmbh" UpgradeCode="\{ca795401-2df9-4ed9-8770-f230bd4ab9dc\}">'
+#$replaceVersionStrings[3][0] = '<Product Id="${GUID}" Name="Europlan 2.0" Language="1031" Version="${VERSION}" Manufacturer="bluesource mobile solutions gmbh" UpgradeCode="{ca795401-2df9-4ed9-8770-f230bd4ab9dc}">'
+#$findVersionStrings[3][1] = '<UpgradeVersion OnlyDetect="no" MigrateFeatures="yes" Minimum="0\.0\.0\.0" IncludeMinimum="yes" Maximum="${VERSION}" IncludeMaximum="no" Property="OLDVERSIONFOUND" />'
+#$replaceVersionStrings[3][1] = '<UpgradeVersion OnlyDetect="no" MigrateFeatures="yes" Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="${VERSION}" IncludeMaximum="no" Property="OLDVERSIONFOUND" />'
+#$findVersionStrings[3][2] = '<UpgradeVersion OnlyDetect="yes" Minimum="${VERSION}" IncludeMinimum="no" Property="NEWVERSIONFOUND" />'
+#$replaceVersionStrings[3][2] = '<UpgradeVersion OnlyDetect="yes" Minimum="${VERSION}" IncludeMinimum="no" Property="NEWVERSIONFOUND" />'
 
 #$updateFiles = [string]"curVersion.txt"
 #$replaceVersionFiles | ForEach-Object -process {
