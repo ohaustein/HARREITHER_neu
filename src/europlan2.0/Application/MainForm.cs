@@ -244,6 +244,7 @@ namespace Europlan.Application {
 			projectUnsaved = false;
 			UpdateTitle();
 			Project.Instance.InitializeTreeView(this.projectTree);
+			this.projectTree.SelectedNode = this.projectTree.Nodes[0];
 		}
 
 		public string ProjectToLoad {
@@ -304,11 +305,6 @@ namespace Europlan.Application {
 			LicenseForm license = new LicenseForm();
 			license.ShowDialog();
 			license.Dispose();
-		}
-
-		private void button1_Click(object sender, EventArgs e) {
-			BuildingDataImportManager.Instance.ImportBuildingData();
-			Project.Instance.InitializeTreeView(this.projectTree);
 		}
 
 		private void projectTree_AfterSelect(object sender, TreeViewEventArgs e) {

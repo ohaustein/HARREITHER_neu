@@ -175,7 +175,7 @@ namespace Europlan.Application {
 			if (selectedNode != null) {
 				tree.SelectedNode = selectedNode;
 			} else {
-				//tree.SelectedNode = rootNode;
+				tree.SelectedNode = rootNode;
 			}
 		}
 
