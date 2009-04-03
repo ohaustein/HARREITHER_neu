@@ -63,18 +63,21 @@ if ([System.Windows.Forms.MessageBox]::Show("Bitte im Konsolenfenster überprüfen
 
   $oldVersion = Get-Content .\curversion.txt
   $sv = $oldVersion.Split('.')
-  $minor = [int]$sv[3]
-  $minor++
-  $sv[3] = [string]$minor
+  $inc = [int]$sv[2]
+  $inc++
+  $sv[2] = [string]$inc
+  $sv[3] = "0"
   $newVersion = $sv[0] + '.' + $sv[1] + '.' + $sv[2] + '.' + $sv[3]
   $newVersion > .\curversion.txt
 
+  echo "Neue Version: $newVersion"
+  
   $guid = [guid]::NewGuid()
   $newGuid = '{' + $guid.ToString() + '}'
 
   $i = [int]0
   $replaceVersionFiles | ForEach-Object -process {
-    echo "Update $_"
+    echo "Aktualisiere version in $_"
     $content = Get-Content $_
     $j = [int]0
     $findVersionStrings[$i] | ForEach-Object -process {
