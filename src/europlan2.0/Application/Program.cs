@@ -17,7 +17,8 @@ namespace Europlan.Application {
 		private static System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Program));
 		private static readonly ILog log = LogManager.GetLogger(typeof(Program));
 
-		public static string updateSubDir = "de";
+		public static string updateLocation = null;
+		public static string updatePublicKey = null;
 
 		/// <summary>
 		/// The main entry point for the application.
@@ -38,9 +39,20 @@ namespace Europlan.Application {
 				string val = key.GetValue("SetupLanguage") as string;
 				if (val != null) {
 					if (val.Equals("en", StringComparison.InvariantCultureIgnoreCase)) {
-						Program.updateSubDir = "en";
+						Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/en";
+						Program.updatePublicKey = "<RSAKeyValue><Modulus>zx6ZJaMzPDozUcY5l0oq4y40M8qAyQobnURZXiVmsWxT5TnYa55yoxiZn9n" +
+												  "ftDpsPc0duQTgwVUag1sj9uxzWp3ANn1bQtgohH0tsm1+j4fxA3Y91ba/v7zSfNfa6To1wnNOHNeyy1O" +
+												  "40Pt4eXQXnbzmTocs322J+luWZPC3Fbc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValu" +
+												  "e>";
 					}
 				}
+			}
+			if (Program.updateLocation == null) {
+				Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/de";
+				Program.updatePublicKey = "<RSAKeyValue><Modulus>vdBsdX09tG4aP1oLqHWHB3N6hHsEx+x0YbavsjRPuxhf1yLgkQFTN1Z26sV" +
+										  "EkIKnfQxxvcfcWClR4P9Xurm2dyoeA2z80nexnKuyVQAW3K72Z0kkFKEj/OFeXoEWJi1rPrNXjwaQ3zV" +
+										  "hn4WL1GKso8HiQlp34twvAJGx2A6JW7s=</Modulus><Exponent>AQAB</Exponent></RSAKeyValu" +
+										  "e>";
 			}
 
 			// using a customized class of SettingsFile which does not consider the assembly version for storing the settings
