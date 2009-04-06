@@ -43,6 +43,7 @@ namespace Europlan.Licensing {
 			lic.LicensedTo = this.licensedTo;
 			lic.Header = this.header;
 			lic.ValidUntil = this.validUntil;
+			lic.Signature = this.Signature;
 			foreach (LicensedModuleTemplate module in this.modules) {
 				lic.Modules.Add(module.CreateModule());
 			}
