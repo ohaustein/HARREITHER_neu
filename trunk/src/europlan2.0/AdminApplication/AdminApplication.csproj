@@ -36,6 +36,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LicenseEditor\DateColumn.cs" />
+    <Compile Include="LicenseEditor\DateEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LicenseEditor\DateCell.cs" />
+    <Compile Include="LicenseEditor\HardwareIdColumn.cs" />
+    <Compile Include="LicenseEditor\HardwareIdCell.cs" />
+    <Compile Include="LicenseEditor\HardwareIdEditingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LicenseEditor\HardwareIdBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LicenseEditor\HardwareIdBox.Designer.cs">
+      <DependentUpon>HardwareIdBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="LicenseManager.cs" />
     <Compile Include="LicenseEditor\SystemEditor.cs">
       <SubType>UserControl</SubType>
@@ -60,6 +76,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="LicenseEditor\HardwareIdBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>HardwareIdBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LicenseEditor\LicenseEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LicenseEditor.cs</DependentUpon>
@@ -82,6 +102,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\Europlan.Licensing.LicenseTemplate.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

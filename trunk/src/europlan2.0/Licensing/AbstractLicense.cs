@@ -136,7 +136,6 @@ namespace Europlan.Licensing {
 
 		public bool IsSystemValid {
 			get {
-				HardwareId curId = new HardwareId();
 				foreach (SystemType system in this.systems) {
 					if (system.MatchesCurrentSystem) {
 						return true;

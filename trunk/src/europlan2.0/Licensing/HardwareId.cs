@@ -16,8 +16,24 @@ namespace Europlan.Licensing {
 		private static byte[] currentSystemId = null;
 
 		public HardwareId() {
-			this.id = GetCurrentSystemId();
-			this.checksum = GetChecksum(this.id);
+			this.id = new byte[8];
+			for (int i = 0; i < this.id.Length; i++) {
+				this.id[i] = 0;
+			}
+			this.checksum = 0;
+		}
+
+		public HardwareId(bool currentSystem) {
+			if (currentSystem) {
+				this.id = GetCurrentSystemId();
+				this.checksum = GetChecksum(this.id);
+			} else {
+				this.id = new byte[8];
+				for (int i = 0; i < this.id.Length; i++) {
+					this.id[i] = 0;
+				}
+				this.checksum = 0;
+			}
 		}
 
 		public HardwareId(byte[] id) {

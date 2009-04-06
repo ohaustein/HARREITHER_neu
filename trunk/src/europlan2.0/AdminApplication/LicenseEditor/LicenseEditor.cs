@@ -5,6 +5,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using Europlan.Licensing;
+using System.ComponentModel;
 
 namespace Europlan.AdminApplication {
 	public partial class LicenseEditor : UserControl {
@@ -18,18 +19,19 @@ namespace Europlan.AdminApplication {
 			/*foreach (string availableModule in availableModules) {
 				this.lstModules.Items.Add(new ModuleItem(new LicensedModule(availableModule, false)));
 			}*/
-			this.UpdateGui();
+			this.UpdateGui(true);
 		}
 
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public LicenseTemplate License {
 			get { return this.license; }
 			set {
 				this.license = value;
-				this.UpdateGui();
+				this.UpdateGui(false);
 			}
 		}
 
-		private void UpdateGui() {
+		private void UpdateGui(bool initial) {
 			this.Enabled = this.license != null;
 			if (this.license == null) {
 				txtLicensedTo.Text = "";
@@ -37,7 +39,10 @@ namespace Europlan.AdminApplication {
 				dtpValidUntil.Value = DateTime.Today;
 				txtHeader.Text = "";
 				lstModules.Items.Clear();
-				lstSystems.Items.Clear();
+				if (!initial) {
+					licenseTemplateBindingSource.DataSource = null;
+					licenseTemplateBindingSource.ResetBindings(false);
+				}
 			} else {
 				txtLicensedTo.Text = this.license.LicensedTo;
 				txtEmail.Text = this.license.Email;
@@ -45,6 +50,17 @@ namespace Europlan.AdminApplication {
 				txtHeader.Text = this.license.Header;
 				this.UpdateModulesEnablement();
 				this.RefreshSystemList();
+				licenseTemplateBindingSource.DataSource = this.license.Systems;
+				licenseTemplateBindingSource.ResetBindings(false);
+			}
+			foreach (DataGridViewRow row in this.dataGridView1.Rows) {
+				string idString = row.Cells[this.idDataGridViewTextBoxColumn.Index].Value as string;
+				HardwareId hwId = (idString == null) ? null : new HardwareId(idString);
+				if (hwId == null || hwId.IsValid) {
+					row.Cells[this.idDataGridViewTextBoxColumn.Index].ErrorText = null;
+				} else {
+					row.Cells[this.idDataGridViewTextBoxColumn.Index].ErrorText = "Keine gültige Hardware ID";
+				}
 			}
 			
 		}
@@ -65,74 +81,6 @@ namespace Europlan.AdminApplication {
 				// TODO handle modules that are in license but not in list!!! 
 			}*/
 		}
-
-		/*private void txtKey_KeyDown(object sender, KeyEventArgs e) {
-			char keyChar = (char)e.KeyValue;
-			keyChar = char.ToUpper(keyChar);
-			if (e.KeyCode == Keys.Delete) {
-				keyChar = 'A';
-			}
-			if (e.Alt ||
-				e.Control ||
-				(LicenseKey.licenseKeyChars.IndexOf(keyChar) < 0 &&
-					keyChar != '-' &&
-					e.KeyCode != Keys.Back)
-				) {
-				e.Handled = !(
-					e.KeyCode == Keys.Left					// allow LEFT
-					|| e.KeyCode == Keys.Right				// allow RIGHT
-					//|| e.Control && e.KeyCode == Keys.A		// allow 'select all'
-					|| e.Control && e.KeyCode == Keys.C		// allow 'copy'
-				);
-				if (e.Control && e.KeyCode == Keys.V) {
-					if (Clipboard.ContainsText()) {
-						string text = Clipboard.GetText();
-						while (txtKey.SelectionStart < 19 && text.Length > 0) {
-							this.VirtualKeyPress(text[0], txtKey.SelectionStart);
-							text = text.Substring(1);
-						}
-					}
-				}
-				return;
-			}
-			int selStart = txtKey.SelectionStart;
-			if (e.KeyCode == Keys.Back) {
-				if (selStart != 0) {
-					if (selStart % 5 == 0) {
-						selStart--;
-					}
-					txtKey.Text = txtKey.Text.Substring(0, selStart - 1) + 'A' + txtKey.Text.Substring(selStart);
-					txtKey.SelectionStart = selStart - 1;
-					txtKey.SelectionLength = 0;
-				}
-				e.Handled = true;
-				return;
-			}
-			if (selStart > 18) {
-				e.Handled = true;
-				return;
-			}
-			e.Handled = this.VirtualKeyPress(keyChar, selStart);
-			return;
-		}
-
-		private bool VirtualKeyPress(char keyChar, int pos) {
-			if (keyChar == '-') {
-				if (pos % 5 == 4) {
-					txtKey.SelectionStart++;
-					txtKey.SelectionLength = 0;
-				}
-				return true;
-			}
-			if (pos % 5 == 4) {
-				pos++;
-			}
-			txtKey.Text = txtKey.Text.Substring(0, pos) + keyChar + txtKey.Text.Substring(pos + 1);
-			txtKey.SelectionStart = pos + 1;
-			txtKey.SelectionLength = 0;
-
-			return true;
-		}*/
 
 		private void txtLicensedTo_TextChanged(object sender, EventArgs e) {
 			if (this.license != null) {
@@ -167,60 +115,39 @@ namespace Europlan.AdminApplication {
 			}
 		}
 
-		private void btnAddSystem_Click(object sender, EventArgs e) {
-			if (this.license != null) {
-				LicensedSystemTemplate system = new LicensedSystemTemplate("000000-000000-000000");
-				SystemItem newItem = new SystemItem(system);
-				this.license.Systems.Add(system);
-				this.lstSystems.Items.Add(newItem);
-				newItem.Selected = true;
-			}
-		}
-
 		private void RefreshSystemList() {
-			lstSystems.Items.Clear();
-			if (this.license != null) {
-				foreach (LicensedSystemTemplate system in this.license.Systems) {
-					lstSystems.Items.Add(new SystemItem(system));
+			// TODO
+		}
+
+		//private void dataGridView1_KeyDown(object sender, KeyEventArgs e) {
+		//    if (this.dataGridView1.SelectedCells.Count == 1) {
+		//        DataGridViewTextBoxCell cell = this.dataGridView1.SelectedCells[0] as DataGridViewTextBoxCell;
+		//        if (cell != null) {
+		//        }
+		//    }
+
+		//}
+
+		//private bool VirtualKeyPress(char keyChar, int pos, DataGridViewTextBoxCell cell) {
+		//    if (pos % 7 == 6) {
+		//        pos++;
+		//    }
+		//    /*txtHardwareId.Text = txtHardwareId.Text.Substring(0, pos) + keyChar + txtHardwareId.Text.Substring(pos + 1);
+		//    txtHardwareId.SelectionStart = pos + 1;
+		//    txtHardwareId.SelectionLength = 0;*/
+
+		//    return true;
+		//}
+
+		private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) {
+			if (dataGridView1.Columns[e.ColumnIndex] == this.idDataGridViewTextBoxColumn) {
+				if (new HardwareId((string)e.FormattedValue).IsValid) {
+					dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = null;
+				} else {
+					dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "Keine gültige Hardware ID";
 				}
 			}
 		}
 
-		private void lstSystems_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e) {
-			SystemItem item = e.Item as SystemItem;
-			if (item == null) {
-				return;
-			}
-			if (this.syeCurrentSystem.LicensedSystem == item.LicensedSystem) {
-				if (!e.IsSelected) {
-					this.syeCurrentSystem.LicensedSystem = null;
-				}
-			} else if (e.IsSelected) {
-				this.syeCurrentSystem.LicensedSystem = item.LicensedSystem;
-			}
-			/*LicensedSystem sytem = e.Item.Tag as LicensedSystem;
-			if (system == null) {
-				return;
-			}
-			if (this.licenseEditor1.License == item.License) {
-				if (!e.IsSelected) {
-					this.licenseEditor1.License = null;
-					this.btnSaveLicense.Enabled = false;
-				}
-			} else if (e.IsSelected) {
-				this.licenseEditor1.License = item.License;
-				this.btnSaveLicense.Enabled = true;
-			}*/
-
-		}
-
-		private void lstSystems_KeyDown(object sender, KeyEventArgs e) {
-			if (e.KeyCode == Keys.Delete) {
-				ListView.SelectedListViewItemCollection items = this.lstSystems.SelectedItems;
-				foreach (ListViewItem item in items) {
-					this.lstSystems.Items.Remove(item);
-				}
-			}
-		}
 	}
 }

@@ -23,11 +23,9 @@ namespace Europlan.AdminApplication {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.btnAddSystem = new System.Windows.Forms.Button();
-			this.lstSystems = new System.Windows.Forms.ListView();
-			this.colHardwareId = new System.Windows.Forms.ColumnHeader();
-			this.colSystemAddedAt = new System.Windows.Forms.ColumnHeader();
-			this.colAnnotation = new System.Windows.Forms.ColumnHeader();
+			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.lblSystem = new System.Windows.Forms.Label();
 			this.lstModules = new System.Windows.Forms.ListView();
 			this.lblModules = new System.Windows.Forms.Label();
@@ -37,59 +35,23 @@ namespace Europlan.AdminApplication {
 			this.txtLicensedTo = new System.Windows.Forms.TextBox();
 			this.lblValidUntil = new System.Windows.Forms.Label();
 			this.dtpValidUntil = new System.Windows.Forms.DateTimePicker();
-			this.syeCurrentSystem = new Europlan.AdminApplication.SystemEditor();
 			this.lblEmail = new System.Windows.Forms.Label();
 			this.txtEmail = new System.Windows.Forms.TextBox();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.licenseTemplateBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewHardwareIdColumn1 = new Europlan.AdminApplication.HardwareIdColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.matchesCurrentSystemDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.addedDateDataGridViewTextBoxColumn = new Europlan.AdminApplication.DateColumn();
+			this.idDataGridViewTextBoxColumn = new Europlan.AdminApplication.HardwareIdColumn();
+			this.annotationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.licenseTemplateBindingSource)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// btnAddSystem
-			// 
-			this.btnAddSystem.Location = new System.Drawing.Point(4, 455);
-			this.btnAddSystem.Name = "btnAddSystem";
-			this.btnAddSystem.Size = new System.Drawing.Size(134, 23);
-			this.btnAddSystem.TabIndex = 26;
-			this.btnAddSystem.Text = "Neuer Rechner";
-			this.btnAddSystem.UseVisualStyleBackColor = true;
-			this.btnAddSystem.Click += new System.EventHandler(this.btnAddSystem_Click);
-			// 
-			// lstSystems
-			// 
-			this.lstSystems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.lstSystems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colHardwareId,
-            this.colSystemAddedAt,
-            this.colAnnotation});
-			this.lstSystems.FullRowSelect = true;
-			this.lstSystems.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-			this.lstSystems.HideSelection = false;
-			this.lstSystems.Location = new System.Drawing.Point(144, 331);
-			this.lstSystems.MultiSelect = false;
-			this.lstSystems.Name = "lstSystems";
-			this.lstSystems.ShowGroups = false;
-			this.lstSystems.Size = new System.Drawing.Size(404, 119);
-			this.lstSystems.TabIndex = 24;
-			this.lstSystems.UseCompatibleStateImageBehavior = false;
-			this.lstSystems.View = System.Windows.Forms.View.Details;
-			this.lstSystems.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lstSystems_ItemSelectionChanged);
-			this.lstSystems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstSystems_KeyDown);
-			// 
-			// colHardwareId
-			// 
-			this.colHardwareId.DisplayIndex = 1;
-			this.colHardwareId.Text = "Hardware ID";
-			this.colHardwareId.Width = 130;
-			// 
-			// colSystemAddedAt
-			// 
-			this.colSystemAddedAt.DisplayIndex = 0;
-			this.colSystemAddedAt.Text = "Hinzugefügt am";
-			this.colSystemAddedAt.Width = 90;
-			// 
-			// colAnnotation
-			// 
-			this.colAnnotation.Text = "Anmerkung";
-			this.colAnnotation.Width = 170;
 			// 
 			// lblSystem
 			// 
@@ -108,7 +70,7 @@ namespace Europlan.AdminApplication {
 			this.lstModules.Location = new System.Drawing.Point(144, 206);
 			this.lstModules.Name = "lstModules";
 			this.lstModules.Size = new System.Drawing.Size(404, 119);
-			this.lstModules.TabIndex = 22;
+			this.lstModules.TabIndex = 4;
 			this.lstModules.UseCompatibleStateImageBehavior = false;
 			this.lstModules.View = System.Windows.Forms.View.List;
 			this.lstModules.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lstModules_ItemChecked);
@@ -141,7 +103,7 @@ namespace Europlan.AdminApplication {
 			this.txtHeader.Multiline = true;
 			this.txtHeader.Name = "txtHeader";
 			this.txtHeader.Size = new System.Drawing.Size(404, 118);
-			this.txtHeader.TabIndex = 19;
+			this.txtHeader.TabIndex = 3;
 			this.txtHeader.TextChanged += new System.EventHandler(this.txtHeader_TextChanged);
 			// 
 			// lblLicensedTo
@@ -162,7 +124,7 @@ namespace Europlan.AdminApplication {
 			this.txtLicensedTo.Location = new System.Drawing.Point(144, 3);
 			this.txtLicensedTo.Name = "txtLicensedTo";
 			this.txtLicensedTo.Size = new System.Drawing.Size(404, 20);
-			this.txtLicensedTo.TabIndex = 17;
+			this.txtLicensedTo.TabIndex = 0;
 			this.txtLicensedTo.TextChanged += new System.EventHandler(this.txtLicensedTo_TextChanged);
 			// 
 			// lblValidUntil
@@ -181,19 +143,8 @@ namespace Europlan.AdminApplication {
 			this.dtpValidUntil.Location = new System.Drawing.Point(144, 55);
 			this.dtpValidUntil.Name = "dtpValidUntil";
 			this.dtpValidUntil.Size = new System.Drawing.Size(404, 20);
-			this.dtpValidUntil.TabIndex = 29;
+			this.dtpValidUntil.TabIndex = 2;
 			this.dtpValidUntil.ValueChanged += new System.EventHandler(this.dtpValidUntil_ValueChanged);
-			// 
-			// syeCurrentSystem
-			// 
-			this.syeCurrentSystem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.syeCurrentSystem.Enabled = false;
-			this.syeCurrentSystem.LicensedSystem = null;
-			this.syeCurrentSystem.Location = new System.Drawing.Point(144, 456);
-			this.syeCurrentSystem.Name = "syeCurrentSystem";
-			this.syeCurrentSystem.Size = new System.Drawing.Size(404, 105);
-			this.syeCurrentSystem.TabIndex = 31;
 			// 
 			// lblEmail
 			// 
@@ -213,8 +164,108 @@ namespace Europlan.AdminApplication {
 			this.txtEmail.Location = new System.Drawing.Point(144, 29);
 			this.txtEmail.Name = "txtEmail";
 			this.txtEmail.Size = new System.Drawing.Size(404, 20);
-			this.txtEmail.TabIndex = 32;
+			this.txtEmail.TabIndex = 1;
 			this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
+			// 
+			// panel1
+			// 
+			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panel1.Controls.Add(this.dataGridView1);
+			this.panel1.Location = new System.Drawing.Point(144, 331);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(404, 205);
+			this.panel1.TabIndex = 35;
+			// 
+			// dataGridView1
+			// 
+			this.dataGridView1.AllowUserToResizeRows = false;
+			this.dataGridView1.AutoGenerateColumns = false;
+			this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.matchesCurrentSystemDataGridViewCheckBoxColumn,
+            this.addedDateDataGridViewTextBoxColumn,
+            this.idDataGridViewTextBoxColumn,
+            this.annotationDataGridViewTextBoxColumn});
+			this.dataGridView1.DataMember = "Systems";
+			this.dataGridView1.DataSource = this.licenseTemplateBindingSource;
+			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+			this.dataGridView1.MultiSelect = false;
+			this.dataGridView1.Name = "dataGridView1";
+			this.dataGridView1.Size = new System.Drawing.Size(402, 203);
+			this.dataGridView1.TabIndex = 5;
+			this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
+			// 
+			// licenseTemplateBindingSource
+			// 
+			this.licenseTemplateBindingSource.DataSource = typeof(Europlan.Licensing.LicenseTemplate);
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "AddedDate";
+			this.dataGridViewTextBoxColumn1.HeaderText = "Hinzugefügt am";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.Width = 120;
+			// 
+			// dataGridViewHardwareIdColumn1
+			// 
+			this.dataGridViewHardwareIdColumn1.DataPropertyName = "Id";
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.dataGridViewHardwareIdColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+			this.dataGridViewHardwareIdColumn1.HeaderText = "Hardware ID";
+			this.dataGridViewHardwareIdColumn1.Name = "dataGridViewHardwareIdColumn1";
+			this.dataGridViewHardwareIdColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewHardwareIdColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.DataPropertyName = "Id";
+			this.dataGridViewTextBoxColumn2.HeaderText = "Hardware ID";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.DataPropertyName = "Annotation";
+			this.dataGridViewTextBoxColumn3.HeaderText = "Anmerkung";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			// 
+			// matchesCurrentSystemDataGridViewCheckBoxColumn
+			// 
+			this.matchesCurrentSystemDataGridViewCheckBoxColumn.DataPropertyName = "MatchesCurrentSystem";
+			this.matchesCurrentSystemDataGridViewCheckBoxColumn.HeaderText = "MatchesCurrentSystem";
+			this.matchesCurrentSystemDataGridViewCheckBoxColumn.Name = "matchesCurrentSystemDataGridViewCheckBoxColumn";
+			this.matchesCurrentSystemDataGridViewCheckBoxColumn.ReadOnly = true;
+			this.matchesCurrentSystemDataGridViewCheckBoxColumn.Visible = false;
+			// 
+			// addedDateDataGridViewTextBoxColumn
+			// 
+			this.addedDateDataGridViewTextBoxColumn.DataPropertyName = "AddedDate";
+			this.addedDateDataGridViewTextBoxColumn.HeaderText = "Hinzugefügt am";
+			this.addedDateDataGridViewTextBoxColumn.Name = "addedDateDataGridViewTextBoxColumn";
+			this.addedDateDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.addedDateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.addedDateDataGridViewTextBoxColumn.Width = 120;
+			// 
+			// idDataGridViewTextBoxColumn
+			// 
+			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.idDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+			this.idDataGridViewTextBoxColumn.HeaderText = "Hardware ID";
+			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.idDataGridViewTextBoxColumn.Width = 170;
+			// 
+			// annotationDataGridViewTextBoxColumn
+			// 
+			this.annotationDataGridViewTextBoxColumn.DataPropertyName = "Annotation";
+			this.annotationDataGridViewTextBoxColumn.HeaderText = "Anmerkung";
+			this.annotationDataGridViewTextBoxColumn.Name = "annotationDataGridViewTextBoxColumn";
+			this.annotationDataGridViewTextBoxColumn.Width = 200;
 			// 
 			// LicenseEditor
 			// 
@@ -222,13 +273,11 @@ namespace Europlan.AdminApplication {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
 			this.AutoScrollMinSize = new System.Drawing.Size(400, 0);
+			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.lblEmail);
 			this.Controls.Add(this.txtEmail);
-			this.Controls.Add(this.syeCurrentSystem);
 			this.Controls.Add(this.dtpValidUntil);
 			this.Controls.Add(this.lblValidUntil);
-			this.Controls.Add(this.btnAddSystem);
-			this.Controls.Add(this.lstSystems);
 			this.Controls.Add(this.lblSystem);
 			this.Controls.Add(this.lstModules);
 			this.Controls.Add(this.lblModules);
@@ -238,6 +287,9 @@ namespace Europlan.AdminApplication {
 			this.Controls.Add(this.txtLicensedTo);
 			this.Name = "LicenseEditor";
 			this.Size = new System.Drawing.Size(551, 589);
+			this.panel1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.licenseTemplateBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -245,8 +297,6 @@ namespace Europlan.AdminApplication {
 
 		#endregion
 
-		private System.Windows.Forms.Button btnAddSystem;
-		private System.Windows.Forms.ListView lstSystems;
 		private System.Windows.Forms.Label lblSystem;
 		private System.Windows.Forms.ListView lstModules;
 		private System.Windows.Forms.Label lblModules;
@@ -256,11 +306,18 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.TextBox txtLicensedTo;
 		private System.Windows.Forms.Label lblValidUntil;
 		private System.Windows.Forms.DateTimePicker dtpValidUntil;
-		private System.Windows.Forms.ColumnHeader colSystemAddedAt;
-		private System.Windows.Forms.ColumnHeader colHardwareId;
-		private System.Windows.Forms.ColumnHeader colAnnotation;
-		private SystemEditor syeCurrentSystem;
 		private System.Windows.Forms.Label lblEmail;
 		private System.Windows.Forms.TextBox txtEmail;
+		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.BindingSource licenseTemplateBindingSource;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private HardwareIdColumn dataGridViewHardwareIdColumn1;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn matchesCurrentSystemDataGridViewCheckBoxColumn;
+		private DateColumn addedDateDataGridViewTextBoxColumn;
+		private HardwareIdColumn idDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn annotationDataGridViewTextBoxColumn;
 	}
 }

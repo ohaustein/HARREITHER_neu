@@ -15,6 +15,7 @@ namespace Europlan.AdminApplication {
 
 		private void btnNewLicense_Click(object sender, EventArgs e) {
 			LicenseTemplate newLicense = new LicenseTemplate();
+			newLicense.ValidUntil = DateTime.Now.AddYears(1);
 			foreach (string module in LicenseEditor.availableModules) {
 				newLicense.SetModuleEnabled(module, false);
 			}

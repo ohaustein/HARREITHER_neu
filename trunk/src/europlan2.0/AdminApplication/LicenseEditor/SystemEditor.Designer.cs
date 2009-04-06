@@ -82,6 +82,7 @@ namespace Europlan.AdminApplication {
 			// 
 			this.dtpAdded.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.dtpAdded.Format = System.Windows.Forms.DateTimePickerFormat.Short;
 			this.dtpAdded.Location = new System.Drawing.Point(96, 19);
 			this.dtpAdded.Name = "dtpAdded";
 			this.dtpAdded.Size = new System.Drawing.Size(305, 20);

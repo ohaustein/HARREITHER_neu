@@ -42,7 +42,7 @@ namespace Europlan.Licensing {
 		}
 
 		public bool MatchesCurrentSystem {
-			get { return new HardwareId().Equals(this.id); }
+			get { return new HardwareId(true).Equals(this.id); }
 		}
 	}
 }
