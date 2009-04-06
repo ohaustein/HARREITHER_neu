@@ -11,7 +11,8 @@ namespace Europlan.Application {
 
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
-		
+		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+
 		public FloorsSummaryPanel() {
 			InitializeComponent();
 		}
@@ -48,6 +49,17 @@ namespace Europlan.Application {
 		private void gridFloors_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
 			if (ProjectStructureChanged != null) {
 				ProjectStructureChanged(this);
+			}
+		}
+
+		private void gridFloors_CellClick(object sender, DataGridViewCellEventArgs e) {
+			if (this.gridFloors.Columns[e.ColumnIndex] == this.colView) {
+				Floor f = this.gridFloors.Rows[e.RowIndex].DataBoundItem as Floor;
+				if (f != null) {
+					if (TreeSelectionRequested != null) {
+						TreeSelectionRequested(this, f);
+					}
+				}
 			}
 		}
 	}

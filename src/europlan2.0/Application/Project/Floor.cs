@@ -90,6 +90,19 @@ namespace Europlan.Application {
 			}
 		}
 
+		public TreeNode FindNode(object element) {
+			if (element == this) {
+				return floorNode;
+			} else {
+				foreach (Room r in rooms) {
+					TreeNode node = r.FindNode(element);
+					if (node != null) {
+						return node;
+					}
+				}
+			}
+			return null;
+		}
 	}
 
 }

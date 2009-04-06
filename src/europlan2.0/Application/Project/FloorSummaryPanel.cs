@@ -11,6 +11,7 @@ namespace Europlan.Application {
 		
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
+		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 
 		private Floor floor;
 		
@@ -48,6 +49,18 @@ namespace Europlan.Application {
 			if (ProjectStructureChanged != null) {
 				ProjectStructureChanged(this);
 			}
+		}
+
+		private void gridRooms_CellClick(object sender, DataGridViewCellEventArgs e) {
+			if (this.gridRooms.Columns[e.ColumnIndex] == this.colView) {
+				Room r = this.gridRooms.Rows[e.RowIndex].DataBoundItem as Room;
+				if (r != null) {
+					if (TreeSelectionRequested != null) {
+						TreeSelectionRequested(this, r);
+					}
+				}
+			}
+
 		}
 
 	}

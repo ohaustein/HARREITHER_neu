@@ -11,7 +11,8 @@ namespace Europlan.Application {
 
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
-		
+		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+
 		public ProjectSummaryPanel() {
 			InitializeComponent();
 			UpdateControl();

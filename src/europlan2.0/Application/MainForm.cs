@@ -325,6 +325,7 @@ namespace Europlan.Application {
 						control = (UserControl)Activator.CreateInstance(guiRepresentation.AssociatedPanelType);
 						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
 						(control as IEditorUserControl).ProjectChanged += new ProjectChangedHandler(MainForm_ProjectChanged);
+						(control as IEditorUserControl).TreeSelectionRequested += new TreeSelectionRequestedHandler(MainForm_TreeSelectionRequested);
 						userControls[guiRepresentation.AssociatedPanelType] = control;
 					}
 					control.Tag = selectedNode.Tag;
@@ -335,6 +336,7 @@ namespace Europlan.Application {
 						control = (UserControl)Activator.CreateInstance(selectedNode.Tag as Type);
 						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
 						(control as IEditorUserControl).ProjectChanged += new ProjectChangedHandler(MainForm_ProjectChanged);
+						(control as IEditorUserControl).TreeSelectionRequested += new TreeSelectionRequestedHandler(MainForm_TreeSelectionRequested);
 						userControls[selectedNode.Tag as Type] = control;
 					}
 				} 
@@ -349,6 +351,11 @@ namespace Europlan.Application {
 					guiUpdateInProgress = false;
 				}
 			}
+		}
+
+		private void MainForm_TreeSelectionRequested(object sender, object requestedItem) {
+			TreeNode node = Project.Instance.FindNode(requestedItem);
+			this.projectTree.SelectedNode = node;
 		}
 
 		void MainForm_ProjectStructureChanged(object sender) {

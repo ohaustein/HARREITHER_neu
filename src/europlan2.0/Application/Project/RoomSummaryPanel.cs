@@ -11,6 +11,7 @@ namespace Europlan.Application {
 		
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
+		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 
 		private Room room;
 		

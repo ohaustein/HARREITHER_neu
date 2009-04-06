@@ -114,6 +114,12 @@ namespace Europlan.Application {
 			}
 		}
 
+		public TreeNode FindNode(object element) {
+			if (element == this) {
+				return roomNode;
+			}
+			return null;
+		}
 	}
 
 }
