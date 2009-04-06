@@ -192,5 +192,21 @@ namespace Europlan.Application {
 			}
 		}
 
+		public TreeNode FindNode(object element) {
+			if (element == this) {
+				return rootNode;
+			} else if (element == typeof(FloorsSummaryPanel)) {
+				return floorsNode;
+			} else {
+				foreach (Floor f in floors) {
+					TreeNode node = f.FindNode(element);
+					if (node != null) {
+						return node;
+					}
+				}
+			}
+			return null;
+		}
+
 	}
 }
