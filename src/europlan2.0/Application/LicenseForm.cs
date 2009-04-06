@@ -25,7 +25,7 @@ namespace Europlan.Application {
 		private void LicenseForm_Load(object sender, EventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["LicenseForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
-			this.txtHardwareId.Text = new HardwareId().IdString;
+			this.txtHardwareId.Text = new HardwareId(true).IdString;
 			this.UpdateLicenseInfo();
 		}
 
