@@ -17,6 +17,7 @@ namespace Europlan.Application {
 		private static System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Program));
 		private static readonly ILog log = LogManager.GetLogger(typeof(Program));
 
+		public static Guid updateGuid = new Guid();
 		public static string updateLocation = null;
 		public static string updatePublicKey = null;
 
@@ -39,6 +40,7 @@ namespace Europlan.Application {
 				string val = key.GetValue("SetupLanguage") as string;
 				if (val != null) {
 					if (val.Equals("en", StringComparison.InvariantCultureIgnoreCase)) {
+						Program.updateGuid = new System.Guid("d38bcedd-464a-4fc9-8263-fbf6e43a4cae");
 						Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/en";
 						Program.updatePublicKey = "<RSAKeyValue><Modulus>zx6ZJaMzPDozUcY5l0oq4y40M8qAyQobnURZXiVmsWxT5TnYa55yoxiZn9n" +
 												  "ftDpsPc0duQTgwVUag1sj9uxzWp3ANn1bQtgohH0tsm1+j4fxA3Y91ba/v7zSfNfa6To1wnNOHNeyy1O" +
@@ -48,6 +50,7 @@ namespace Europlan.Application {
 				}
 			}
 			if (Program.updateLocation == null) {
+				Program.updateGuid = new System.Guid("1f24573e-033c-448d-8e15-9f396e67e44e");
 				Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/de";
 				Program.updatePublicKey = "<RSAKeyValue><Modulus>vdBsdX09tG4aP1oLqHWHB3N6hHsEx+x0YbavsjRPuxhf1yLgkQFTN1Z26sV" +
 										  "EkIKnfQxxvcfcWClR4P9Xurm2dyoeA2z80nexnKuyVQAW3K72Z0kkFKEj/OFeXoEWJi1rPrNXjwaQ3zV" +

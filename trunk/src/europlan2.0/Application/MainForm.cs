@@ -30,14 +30,13 @@ namespace Europlan.Application {
 		public MainForm() {
 			InitializeComponent();
 
+			this.updateController.ApplicationId = Program.updateGuid;
 			this.updateController.UpdateLocation = Program.updateLocation;
 			this.updateController.PublicKeyToken = Program.updatePublicKey;
 
 			LicenseManager.Instance.LicenseChanged += new EventHandler(licenseManager_LicenseChanged);
 
 			this.UpdateAvailableFeatures();
-
-			this.updateController.CheckForUpdateAsync();
 		}
 
 		private void licenseManager_LicenseChanged(object sender, EventArgs e) {
@@ -133,6 +132,7 @@ namespace Europlan.Application {
 				license.ShowDialog();
 				license.Dispose();
 			}
+			this.updateController.CheckForUpdateAsync();
 		}
 
 		private void LoadProject() {
