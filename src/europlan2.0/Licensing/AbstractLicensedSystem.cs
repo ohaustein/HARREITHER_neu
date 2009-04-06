@@ -8,7 +8,7 @@ namespace Europlan.Licensing {
 		private HardwareId id = null;
 
 		public AbstractLicensedSystem() {
-			this.id = new HardwareId();
+			this.id = new HardwareId(true);
 		}
 
 		public AbstractLicensedSystem(string id) {
