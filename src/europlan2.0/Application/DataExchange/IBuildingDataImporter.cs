@@ -14,7 +14,7 @@ namespace Europlan.Application {
 			get;
 		}
 
-		List<Floor> ImportBuildingDataFromFile(string fileName);
+		FloorList ImportBuildingDataFromFile(string fileName);
 
 	}
 

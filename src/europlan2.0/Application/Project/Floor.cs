@@ -8,16 +8,20 @@ using System.Threading;
 
 namespace Europlan.Application {
 
-
-	public class Floor : IGuiRepresentation {
+	[Serializable()]
+	public class Floor : IGuiRepresentation, IClipboard {
 
 		private string name;
 		private string id;
+
 		private TreeNode floorNode = new TreeNode();
 
 		private List<Room> rooms;
 
+		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Floor));
+
+		[NonSerialized]
 		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
 		public Floor() {
@@ -32,8 +36,8 @@ namespace Europlan.Application {
 		public Floor(Floor floor) {
 			InitializeFloor();
 			string copyOf = resources.GetString("CopyOf", Thread.CurrentThread.CurrentUICulture);
-			this.name = copyOf + floor.Name;
-			foreach (Room room in rooms) {
+			this.Name = copyOf + " " + floor.Name;
+			foreach (Room room in floor.rooms) {
 				this.rooms.Add(new Room(room));
 			}
 		}
@@ -114,6 +118,43 @@ namespace Europlan.Application {
 			}
 			return null;
 		}
+
+		public bool SupportsCut {
+			get { return false; }
+		}
+
+		public bool SupportsCopy {
+			get { return true; }
+		}
+
+		public string DataFormat {
+			get { return this.GetType().ToString(); }
+		}
+
+		public bool SupportsPaste(string data) {
+			if (data == typeof(Room).ToString()) {
+				return true;
+			}
+			return false;
+		}
+
+		public string SupportedPasteFormat {
+			get { return typeof(Room).ToString(); }
+		}
+
+		public object Copy() {
+			return new Floor(this);
+		}
+
+		public void Paste(object o) {
+			if (o.GetType() == typeof(Room)) {
+				rooms.Add(o as Room);
+				
+			} else {
+				throw new Exception("Paste of this type not supported");
+			}			
+		}
+
 	}
 
 }

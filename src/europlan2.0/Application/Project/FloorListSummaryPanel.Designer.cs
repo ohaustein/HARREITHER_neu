@@ -1,5 +1,5 @@
 namespace Europlan.Application {
-	partial class FloorsSummaryPanel {
+	partial class FloorListSummaryPanel {
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
