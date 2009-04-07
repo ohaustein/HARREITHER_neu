@@ -28,6 +28,7 @@ namespace Europlan.Application {
 
 		private TreeNode rootNode = null;
 		private TreeNode floorsNode = null;
+		private TreeNode regulatorCircuitsNode = null;
 
 		public delegate void ProjectLoadedHandler(object sender);
 		public delegate void ProjectSavedHandler(object sender);
@@ -36,6 +37,7 @@ namespace Europlan.Application {
 		public static event ProjectSavedHandler ProjectSaved;
 
 		List<Floor> floors;
+		List<RegulatorCircuit> regulatorCircuits;
 
 		protected Project() {
 			log.Debug("default constructor called");
@@ -74,8 +76,12 @@ namespace Europlan.Application {
 			// building (floors and rooms)
 			localized = resources.GetString("Floors", Thread.CurrentThread.CurrentUICulture);
 			floorsNode = new TreeNode(localized == null ? "Geschoﬂe" : localized);
+
+			localized = resources.GetString("RegulatorCircuits", Thread.CurrentThread.CurrentUICulture);
+			regulatorCircuitsNode = new TreeNode(localized == null ? "Regelkreise" : localized);
 			
 			floors = new List<Floor>();
+			regulatorCircuits = new List<RegulatorCircuit>();
 		}
 
 		public string[] ProjectName {
@@ -111,6 +117,11 @@ namespace Europlan.Application {
 		public List<Floor> Floors {
 			get { return floors; }
 			set { floors = value; }
+		}
+
+		public List<RegulatorCircuit> RegulatorCircuits {
+			get { return regulatorCircuits; }
+			set { regulatorCircuits = value; }
 		}
 
 		/*public void SetFloors(List<Floor> floors) {
@@ -160,13 +171,17 @@ namespace Europlan.Application {
 			tree.Nodes.Clear();
 			rootNode.Nodes.Clear();
 			floorsNode.Nodes.Clear();
+			regulatorCircuitsNode.Nodes.Clear();
 
 			tree.Nodes.Add(rootNode);
 			rootNode.Tag = this;
 
+			regulatorCircuitsNode.Tag = typeof(RegulatorCircuitsSummaryPanel);
+			rootNode.Nodes.Add(regulatorCircuitsNode);
+
 			floorsNode.Tag = typeof(FloorsSummaryPanel);
-			tree.Nodes.Add(floorsNode);
-			
+			rootNode.Nodes.Add(floorsNode);
+		
 			foreach (Floor floor in floors) {
 				floor.InitializeTree(floorsNode);
 			}

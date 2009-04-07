@@ -75,7 +75,7 @@ namespace Europlan.Application {
 				} else if (line.StartsWith("TEMP_HEIZ")) {
 					string temp = (line.Split('='))[1];
 					if (room != null) {
-						room.Temperature = (int)float.Parse(temp, System.Globalization.CultureInfo.CreateSpecificCulture("en-us"));
+						room.RoomTemperature = (int)float.Parse(temp, System.Globalization.CultureInfo.CreateSpecificCulture("en-us"));
 					}
 				} else if (line.StartsWith("A_RAUM")) {
 					string area = (line.Split('='))[1];
