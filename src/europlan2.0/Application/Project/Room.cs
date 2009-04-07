@@ -11,7 +11,7 @@ namespace Europlan.Application {
 
 		private string name;
 		private string id;
-		private int temperature;
+		private int roomTemperature;
 		private float area;
 		private int heatPower;
 		private int coolPower;
@@ -33,7 +33,7 @@ namespace Europlan.Application {
 		private void InitializeRoom() {
 			name = "";
 			id = "";
-			temperature = 0;
+			roomTemperature = 0;
 			area = 0;
 			heatPower = 0;
 			coolPower = 0;
@@ -44,7 +44,7 @@ namespace Europlan.Application {
 
 		internal void Synchronize(Room room) {
 			this.Name = room.Name;
-			this.Temperature = room.Temperature;
+			this.RoomTemperature = room.RoomTemperature;
 			this.Area = room.Area;
 			this.HeatPower = room.HeatPower;
 			this.CoolPower = room.CoolPower;
@@ -67,9 +67,9 @@ namespace Europlan.Application {
 			set { id = value; }
 		}
 
-		public int Temperature {
-			get { return temperature; }
-			set { temperature = value; }
+		public int RoomTemperature {
+			get { return roomTemperature; }
+			set { roomTemperature = value; }
 		}
 
 		public float Area {

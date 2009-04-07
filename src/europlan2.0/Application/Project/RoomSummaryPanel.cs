@@ -26,7 +26,7 @@ namespace Europlan.Application {
 				this.room = this.Tag as Room;
 				this.txtName.Text = room.Name;
 				this.txtArea.Text = room.Area.ToString();
-				this.txtTemperature.Text = room.Temperature.ToString();
+				this.txtTemperature.Text = room.RoomTemperature.ToString();
 				this.txtHeat.Text = room.HeatPower.ToString();
 				this.txtNormHeat.Text = room.NormalizedHeatPower.ToString();
 				this.txtCool.Text = room.CoolPower.ToString();
@@ -67,14 +67,14 @@ namespace Europlan.Application {
 		private void txtTemperature_TextChanged(object sender, EventArgs e) {
 			try {
 				if (this.txtTemperature.Text.Length > 0) {
-					this.room.Temperature = Int32.Parse(this.txtTemperature.Text);
+					this.room.RoomTemperature = Int32.Parse(this.txtTemperature.Text);
 					if (ProjectChanged != null) {
 						ProjectChanged(null);
 					}
 				}
 			} catch (Exception ex) {
 				MessageBox.Show("Fehler im Format der Eingabe");
-				this.txtTemperature.Text = room.Temperature.ToString();
+				this.txtTemperature.Text = room.RoomTemperature.ToString();
 			}
 		}
 
