@@ -176,4 +176,10 @@ Press OK to restart now.</value>
   <data name="SyncMessage" xml:space="preserve">
     <value>There are already floors/rooms available. Press yes to synchronize or press no to overwrite the existing data with the imported.</value>
   </data>
+  <data name="CopyOf" xml:space="preserve">
+    <value>Copy of</value>
+  </data>
+  <data name="Regulator Circuits" xml:space="preserve">
+    <value>Regulator Circuits</value>
+  </data>
 </root>
