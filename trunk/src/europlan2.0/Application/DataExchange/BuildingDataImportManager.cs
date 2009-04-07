@@ -73,7 +73,7 @@ namespace Europlan.Application {
 			if (result == DialogResult.OK) {
 				foreach (IBuildingDataImporter importer in importers) {
 					if (importer.FileExtension.Equals(Path.GetExtension(dialog.FileName), StringComparison.InvariantCultureIgnoreCase)) {
-						List<Floor> floors = importer.ImportBuildingDataFromFile(dialog.FileName);
+						FloorList floors = importer.ImportBuildingDataFromFile(dialog.FileName);
 						if (Project.Instance.Floors.Count != 0) {
 							string message = resources.GetString("SyncMessage", Thread.CurrentThread.CurrentUICulture);
 							string caption = resources.GetString("SyncCaption", Thread.CurrentThread.CurrentUICulture);

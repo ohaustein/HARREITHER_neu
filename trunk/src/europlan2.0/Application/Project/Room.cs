@@ -6,9 +6,9 @@ using System.Windows.Forms;
 using System.Threading;
 
 namespace Europlan.Application {
-	
-	
-	public class Room : IGuiRepresentation {
+
+	[Serializable()]
+	public class Room : IGuiRepresentation, IClipboard {
 
 		private string name;
 		private string id;
@@ -18,9 +18,13 @@ namespace Europlan.Application {
 		private int coolPower;
 		private int normalizedHeatPower;
 		private int normalizedCoolPower;
+
 		private TreeNode roomNode = new TreeNode();
 
+		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Room));
+
+		[NonSerialized]
 		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
 		public Room() {
@@ -35,7 +39,7 @@ namespace Europlan.Application {
 		public Room(Room room) {
 			InitializeRoom();
 			string copyOf = resources.GetString("CopyOf", Thread.CurrentThread.CurrentUICulture);
-			this.name = copyOf + room.Name;
+			this.Name = copyOf + " " + room.Name;
 			this.roomTemperature = room.RoomTemperature;
 			this.area = room.Area;
 			this.heatPower = room.HeatPower;
@@ -134,6 +138,35 @@ namespace Europlan.Application {
 			}
 			return null;
 		}
+
+		public bool SupportsCut {
+			get { return false; }
+		}
+
+		public bool SupportsCopy {
+			get { return true; }
+		}
+
+		public string DataFormat {
+			get { return this.GetType().ToString(); }
+		}
+
+		public bool SupportsPaste(string data) {
+			return false;
+		}
+
+		public string SupportedPasteFormat {
+			get { return null; }
+		}
+
+		public object Copy() {
+			return new Room(this);
+		}
+
+		public void Paste(object o) {
+			throw new Exception("Paste not supported");
+		}
+
 	}
 
 }

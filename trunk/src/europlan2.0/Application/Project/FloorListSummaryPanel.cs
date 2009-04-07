@@ -7,13 +7,13 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace Europlan.Application {
-	public partial class FloorsSummaryPanel : UserControl, IEditorUserControl {
+	public partial class FloorListSummaryPanel : UserControl, IEditorUserControl {
 
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 
-		public FloorsSummaryPanel() {
+		public FloorListSummaryPanel() {
 			InitializeComponent();
 		}
 
@@ -30,6 +30,7 @@ namespace Europlan.Application {
 		}
 
 		public void UpdateControl() {
+
 			projectFloorsSource.DataSource = Project.Instance.Floors;
 			projectFloorsSource.ResetBindings(false);
 		}
@@ -39,7 +40,9 @@ namespace Europlan.Application {
 		}
 
 		private void gridFloors_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-			if (this.gridFloors.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn && e.RowIndex >= 0) {
+			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridFloors.Columns.Count &&
+			  (this.gridFloors.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn) &&
+			  e.RowIndex >= 0 && e.RowIndex < this.gridFloors.Rows.Count) {
 				if (ProjectStructureChanged != null) {
 					ProjectStructureChanged(this);
 				}
@@ -53,7 +56,9 @@ namespace Europlan.Application {
 		}
 
 		private void gridFloors_CellClick(object sender, DataGridViewCellEventArgs e) {
-			if (this.gridFloors.Columns[e.ColumnIndex] == this.colView) {
+			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridFloors.Columns.Count &&
+			  this.gridFloors.Columns[e.ColumnIndex] == this.colView &&
+			  e.RowIndex >= 0 && e.RowIndex < this.gridFloors.Rows.Count) {
 				Floor f = this.gridFloors.Rows[e.RowIndex].DataBoundItem as Floor;
 				if (f != null) {
 					if (TreeSelectionRequested != null) {
@@ -62,5 +67,8 @@ namespace Europlan.Application {
 				}
 			}
 		}
+
+
+
 	}
 }

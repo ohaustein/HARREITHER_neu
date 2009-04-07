@@ -47,6 +47,7 @@
     <Compile Include="DataExchange\BuildingDataImportManager.cs" />
     <Compile Include="DataExchange\IBuildingDataImporter.cs" />
     <Compile Include="DataExchange\SOLAR32Importer.cs" />
+    <Compile Include="Interfaces\IClipboard.cs" />
     <Compile Include="Interfaces\IEditorUserControl.cs" />
     <Compile Include="Interfaces\IGuiRepresentation.cs" />
     <Compile Include="LicenseForm.cs">
@@ -100,9 +101,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\FloorsSummaryPanel.resx">
+    <EmbeddedResource Include="Project\FloorListSummaryPanel.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>FloorsSummaryPanel.cs</DependentUpon>
+      <DependentUpon>FloorListSummaryPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\FloorSummaryPanel.resx">
       <SubType>Designer</SubType>
@@ -130,11 +131,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Project\Floor.cs" />
-    <Compile Include="Project\FloorsSummaryPanel.cs">
+    <Compile Include="Project\FloorList.cs" />
+    <Compile Include="Project\FloorListSummaryPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Project\FloorsSummaryPanel.Designer.cs">
-      <DependentUpon>FloorsSummaryPanel.cs</DependentUpon>
+    <Compile Include="Project\FloorListSummaryPanel.Designer.cs">
+      <DependentUpon>FloorListSummaryPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\FloorSummaryPanel.cs">
       <SubType>UserControl</SubType>

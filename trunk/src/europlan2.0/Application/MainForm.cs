@@ -339,7 +339,7 @@ namespace Europlan.Application {
 						(control as IEditorUserControl).TreeSelectionRequested += new TreeSelectionRequestedHandler(MainForm_TreeSelectionRequested);
 						userControls[selectedNode.Tag as Type] = control;
 					}
-				} 
+				}
 				if (control != null) {
 					guiUpdateInProgress = true;
 					if (control != oldControl) {
@@ -399,6 +399,16 @@ namespace Europlan.Application {
 			if (activeControl != null) {
 				if (activeControl is TextBoxBase) {
 					(activeControl as TextBoxBase).Copy();
+				} else if (activeControl == projectTree) {
+					if (projectTree.SelectedNode != null) {
+						if (projectTree.SelectedNode.Tag is IClipboard) {
+							IClipboard clipboardObject = projectTree.SelectedNode.Tag as IClipboard;
+							if (clipboardObject.SupportsCopy) {
+								DataFormats.Format format =  DataFormats.GetFormat(clipboardObject.DataFormat);
+								Clipboard.SetData(format.Name, clipboardObject.Copy());
+							}
+						}
+					}
 				} else {
 					Clipboard.SetText(activeControl.Text);
 				}
@@ -410,6 +420,24 @@ namespace Europlan.Application {
 			if (activeControl != null) {
 				if (activeControl is TextBoxBase) {
 					(activeControl as TextBoxBase).Paste();
+				} else if (activeControl == projectTree) {
+					if (projectTree.SelectedNode != null) {
+						if (projectTree.SelectedNode.Tag is IClipboard) {
+							IClipboard clipboardObject = projectTree.SelectedNode.Tag as IClipboard;
+							if (clipboardObject.SupportedPasteFormat != null) {
+								DataFormats.Format format = DataFormats.GetFormat(clipboardObject.SupportedPasteFormat);
+								if (Clipboard.ContainsData(format.Name)) {
+									object o = Clipboard.GetData(format.Name);
+									if (o != null) {
+										clipboardObject.Paste(o);
+										Project.Instance.InitializeTreeView(this.projectTree);
+										projectUnsaved = true;
+										UpdateTitle();
+									}
+								}
+							}
+						}
+					}
 				} else {
 					activeControl.Text = Clipboard.GetText();
 				}

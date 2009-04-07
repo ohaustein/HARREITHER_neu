@@ -36,7 +36,7 @@ namespace Europlan.Application {
 		public static event ProjectLoadedHandler ProjectLoaded;
 		public static event ProjectSavedHandler ProjectSaved;
 
-		List<Floor> floors;
+		FloorList floors;
 		List<RegulatorCircuit> regulatorCircuits;
 
 		protected Project() {
@@ -80,7 +80,7 @@ namespace Europlan.Application {
 			localized = resources.GetString("RegulatorCircuits", Thread.CurrentThread.CurrentUICulture);
 			regulatorCircuitsNode = new TreeNode(localized == null ? "Regelkreise" : localized);
 			
-			floors = new List<Floor>();
+			floors = new FloorList();
 			regulatorCircuits = new List<RegulatorCircuit>();
 		}
 
@@ -114,7 +114,7 @@ namespace Europlan.Application {
 			set { projectEditor = value; }
 		}
 
-		public List<Floor> Floors {
+		public FloorList Floors {
 			get { return floors; }
 			set { floors = value; }
 		}
@@ -179,7 +179,7 @@ namespace Europlan.Application {
 			regulatorCircuitsNode.Tag = typeof(RegulatorCircuitsSummaryPanel);
 			rootNode.Nodes.Add(regulatorCircuitsNode);
 
-			floorsNode.Tag = typeof(FloorsSummaryPanel);
+			floorsNode.Tag = floors;
 			rootNode.Nodes.Add(floorsNode);
 		
 			foreach (Floor floor in floors) {
@@ -210,7 +210,7 @@ namespace Europlan.Application {
 		public TreeNode FindNode(object element) {
 			if (element == this) {
 				return rootNode;
-			} else if (element == typeof(FloorsSummaryPanel)) {
+			} else if (element == typeof(FloorListSummaryPanel)) {
 				return floorsNode;
 			} else {
 				foreach (Floor f in floors) {

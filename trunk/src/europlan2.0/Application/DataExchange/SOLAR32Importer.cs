@@ -29,7 +29,7 @@ namespace Europlan.Application {
 			}
 		}
 
-		public List<Floor> ImportBuildingDataFromFile(string fileName) {
+		public FloorList ImportBuildingDataFromFile(string fileName) {
 			try {
 				using (FileStream fs = File.Open(fileName, FileMode.Open, FileAccess.Read)) {
 					using (StreamReader sr = new StreamReader(fs, Encoding.Default)) {
@@ -42,8 +42,8 @@ namespace Europlan.Application {
 			return null;
 		}
 
-		private List<Floor> ParseData(StreamReader reader) {
-			List<Floor> floors = new List<Floor>();
+		private FloorList ParseData(StreamReader reader) {
+			FloorList floors = new FloorList();
 			string line = "";
 			Floor floor = null;
 			Room room = null;
