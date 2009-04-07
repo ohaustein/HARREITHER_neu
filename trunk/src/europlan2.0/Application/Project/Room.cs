@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using log4net;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Europlan.Application {
 	
@@ -20,6 +21,7 @@ namespace Europlan.Application {
 		private TreeNode roomNode = new TreeNode();
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(Room));
+		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
 		public Room() {
 			InitializeRoom();
@@ -28,6 +30,18 @@ namespace Europlan.Application {
 		public Room(string name) {
 			InitializeRoom();
 			this.Name = name;
+		}
+
+		public Room(Room room) {
+			InitializeRoom();
+			string copyOf = resources.GetString("CopyOf", Thread.CurrentThread.CurrentUICulture);
+			this.name = copyOf + room.Name;
+			this.roomTemperature = room.RoomTemperature;
+			this.area = room.Area;
+			this.heatPower = room.HeatPower;
+			this.coolPower = room.CoolPower;
+			this.normalizedHeatPower = room.NormalizedHeatPower;
+			this.normalizedCoolPower = room.NormalizedCoolPower;
 		}
 
 		private void InitializeRoom() {
