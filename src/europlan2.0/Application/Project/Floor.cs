@@ -4,6 +4,7 @@ using System.Text;
 using log4net;
 using System.Xml.Serialization;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Europlan.Application {
 
@@ -17,6 +18,7 @@ namespace Europlan.Application {
 		private List<Room> rooms;
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(Floor));
+		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
 		public Floor() {
 			InitializeFloor();
@@ -25,6 +27,15 @@ namespace Europlan.Application {
 		public Floor(string name) {
 			InitializeFloor();
 			this.Name = name;
+		}
+
+		public Floor(Floor floor) {
+			InitializeFloor();
+			string copyOf = resources.GetString("CopyOf", Thread.CurrentThread.CurrentUICulture);
+			this.name = copyOf + floor.Name;
+			foreach (Room room in rooms) {
+				this.rooms.Add(new Room(room));
+			}
 		}
 
 		private void InitializeFloor() {
