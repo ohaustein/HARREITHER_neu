@@ -27,7 +27,7 @@ namespace Europlan.Application {
 		private static readonly int[] decimalPlaces = new int[]    {    0,    0,          1,    0,         0,         0};
 		private static readonly string[] masks = new string[]      { "90", "90", "999990.9", "90", "9999990", "9999990"};
 
-		public EventHandler ValueChanged;
+		public event EventHandler ValueChanged;
 
 		public NumericEditBox() {
 			InitializeComponent();
@@ -203,6 +203,15 @@ namespace Europlan.Application {
 			} else {
 				e.Handled = true;
 			}
+		}
+
+		private void txtValue_Validating(object sender, CancelEventArgs e) {
+			this.Value = this.Value; // reset the Value to correct text
+		}
+
+		public HorizontalAlignment TextAlign {
+			get { return this.txtValue.TextAlign; }
+			set { this.txtValue.TextAlign = value; }
 		}
 	}
 }

@@ -35,6 +35,7 @@ namespace Europlan.Application {
 			this.txtValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.txtValue.TextChanged += new System.EventHandler(this.maskedTextBox1_TextChanged);
 			this.txtValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+			this.txtValue.Validating += new System.ComponentModel.CancelEventHandler(this.txtValue_Validating);
 			// 
 			// NumericEditBox
 			// 

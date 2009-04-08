@@ -12,7 +12,7 @@ namespace Europlan.AdminApplication {
 
 		private HardwareId value = new HardwareId("000000-000000-000000");
 
-		public EventHandler ValueChanged;
+		public event EventHandler ValueChanged;
 
 		public HardwareIdBox() {
 			InitializeComponent();
