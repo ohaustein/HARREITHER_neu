@@ -40,8 +40,12 @@ namespace Europlan.Application {
 		}
 
 		private void gridRooms_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-			if (ProjectStructureChanged != null) {
-				ProjectStructureChanged(this);
+			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridRooms.Columns.Count &&
+					(this.gridRooms.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn) &&
+					e.RowIndex >= 0 && e.RowIndex < this.gridRooms.Rows.Count) {
+				if (ProjectStructureChanged != null) {
+					ProjectStructureChanged(this);
+				}
 			}
 		}
 
@@ -52,7 +56,10 @@ namespace Europlan.Application {
 		}
 
 		private void gridRooms_CellClick(object sender, DataGridViewCellEventArgs e) {
-			if (this.gridRooms.Columns[e.ColumnIndex] == this.colView) {
+			//this.gridRooms.EditMode = (e.ColumnIndex == -1 ? DataGridViewEditMode.EditOnKeystroke : DataGridViewEditMode.EditOnEnter);
+			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridRooms.Columns.Count &&
+					this.gridRooms.Columns[e.ColumnIndex] == this.colView &&
+					e.RowIndex >= 0 && e.RowIndex < this.gridRooms.Rows.Count) {
 				Room r = this.gridRooms.Rows[e.RowIndex].DataBoundItem as Room;
 				if (r != null) {
 					if (TreeSelectionRequested != null) {
@@ -61,6 +68,15 @@ namespace Europlan.Application {
 				}
 			}
 
+		}
+
+		private void gridRooms_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e) {
+			if (e.RowIndex >= 0 && e.RowIndex < this.gridRooms.Rows.Count &&
+					this.gridRooms.Rows[e.RowIndex].DataBoundItem == null) {
+				e.PaintCells(e.ClipBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border | DataGridViewPaintParts.ErrorIcon | DataGridViewPaintParts.Focus | DataGridViewPaintParts.SelectionBackground);
+				e.PaintHeader(DataGridViewPaintParts.All);
+				e.Handled = true;
+			}
 		}
 
 	}

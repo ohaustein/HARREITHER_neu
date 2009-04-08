@@ -18,6 +18,7 @@ namespace Europlan.Application {
 		private int coolPower;
 		private int normalizedHeatPower;
 		private int normalizedCoolPower;
+		private int additionalHeatPower;
 
 		private TreeNode roomNode = new TreeNode();
 
@@ -113,6 +114,17 @@ namespace Europlan.Application {
 		public int NormalizedCoolPower {
 			get { return normalizedCoolPower; }
 			set { normalizedCoolPower = value; }
+		}
+
+		public int AdditionalHeatPower {
+			get { return additionalHeatPower; }
+			set { additionalHeatPower = value; }
+		}
+
+		[System.Xml.Serialization.XmlIgnore()]
+		public int FloorHeatingLoss {
+			get { return heatPower - normalizedHeatPower; }
+			set { normalizedHeatPower = heatPower - value; }
 		}
 		
 		internal void InitializeTree(TreeNode floor) {

@@ -24,71 +24,63 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void txtHardwareId_KeyDown(object sender, KeyEventArgs e) {
-			char keyChar = (char)e.KeyValue;
-			keyChar = char.ToLower(keyChar);
 			if (e.KeyCode == Keys.Delete) {
-				keyChar = '0';
-			}
-			if (e.Alt ||
-				e.Control ||
-				(HardwareId.hardwareIdKeyChars.IndexOf(keyChar) < 0 &&
-				//keyChar != '-' &&
-					e.KeyCode != Keys.Back)
-				) {
-				e.Handled = !(
-					e.KeyCode == Keys.Left					// allow LEFT
-					|| e.KeyCode == Keys.Right				// allow RIGHT
-					//|| e.Control && e.KeyCode == Keys.A		// allow 'select all'
-					|| e.Control && e.KeyCode == Keys.C		// allow 'copy'
-					|| e.KeyCode == Keys.End				// allow end
-					|| e.KeyCode == Keys.Home				// allow home
-				);
-				e.SuppressKeyPress = e.Handled;
-				if (e.Control && e.KeyCode == Keys.V) {
-					if (Clipboard.ContainsText()) {
-						string text = Clipboard.GetText();
-						while (txtHardwareId.SelectionStart < 20 && text.Length > 0) {
-							if (HardwareId.hardwareIdKeyChars.IndexOf(text[0]) >= 0) {
-								this.VirtualKeyPress(text[0], txtHardwareId.SelectionStart);
-							}
-							text = text.Substring(1);
+				//if (this.txtHardwareId.SelectionLength == 0) {
+					int sel = this.txtHardwareId.SelectionStart;
+					if (sel < 20) {
+						this.VirtualKeyPress('0', this.txtHardwareId.SelectionStart);
+					}
+				//} else {
+				//	int end = this.txtHardwareId.SelectionStart + this.txtHardwareId.SelectionLength;
+				//	while (this.txtHardwareId.SelectionStart < end) {
+				//		this.VirtualKeyPress('0', this.txtHardwareId.SelectionStart);
+				//	}
+				//}
+				e.Handled = true;
+				e.SuppressKeyPress = true;
+				return;
+			} else if (e.KeyCode == Keys.Back) {
+				int sel = this.txtHardwareId.SelectionStart + this.txtHardwareId.SelectionLength;
+				if (sel > 0) {
+					this.VirtualKeyPress('0', sel - 1);
+					this.txtHardwareId.SelectionStart = sel - 1;
+					this.txtHardwareId.SelectionLength = 0;
+				}
+				e.Handled = true;
+				e.SuppressKeyPress = true;
+				return;
+			} else if (e.Control && e.KeyCode == Keys.C) {
+				Clipboard.SetText(this.txtHardwareId.SelectedText);
+				e.Handled = true;
+				e.SuppressKeyPress = true;
+				return;
+			} else if (e.Control && e.KeyCode == Keys.V) {
+				if (Clipboard.ContainsText()) {
+					string text = Clipboard.GetText();
+					while (txtHardwareId.SelectionStart < 20 && text.Length > 0) {
+						if (HardwareId.hardwareIdKeyChars.IndexOf(text[0]) >= 0) {
+							this.VirtualKeyPress(text[0], txtHardwareId.SelectionStart);
 						}
+						text = text.Substring(1);
 					}
 				}
-				return;
-			}
-			int selStart = txtHardwareId.SelectionStart;
-			if (e.KeyCode == Keys.Back) {
-				if (selStart != 0) {
-					if (selStart % 7 == 0) {
-						selStart--;
-					}
-					txtHardwareId.Text = txtHardwareId.Text.Substring(0, selStart - 1) + '0' + txtHardwareId.Text.Substring(selStart);
-					txtHardwareId.SelectionStart = selStart - 1;
-					txtHardwareId.SelectionLength = 0;
-				}
 				e.Handled = true;
-				e.SuppressKeyPress = e.Handled;
+				e.SuppressKeyPress = true;
 				return;
-			}
-			if (selStart > 19) {
+			} else if (e.Control && e.KeyCode == Keys.A) {
+				this.txtHardwareId.SelectionStart = 0;
+				this.txtHardwareId.SelectionLength = this.txtHardwareId.Text.Length;
 				e.Handled = true;
-				e.SuppressKeyPress = e.Handled;
+				e.SuppressKeyPress = true;
+				return;
+			} else if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Home || e.KeyCode == Keys.End) {
+				e.Handled = false;
+				e.SuppressKeyPress = false;
 				return;
 			}
-			e.Handled = this.VirtualKeyPress(keyChar, selStart);
-			e.SuppressKeyPress = e.Handled;
-			return;
 		}
 
 		private bool VirtualKeyPress(char keyChar, int pos) {
-			/*if (keyChar == '-') {
-				if (pos % 7 == 6) {
-					txtHardwareId.SelectionStart++;
-					txtHardwareId.SelectionLength = 0;
-				}
-				return true;
-			}*/
 			if (pos % 7 == 6) {
 				pos++;
 			}
@@ -116,6 +108,19 @@ namespace Europlan.AdminApplication {
 			if (this.ValueChanged != null) {
 				this.ValueChanged(this, args);
 			}
+		}
+
+		private void txtHardwareId_KeyPress(object sender, KeyPressEventArgs e) {
+			char keyChar = e.KeyChar;
+			keyChar = char.ToLower(keyChar);
+			int selStart = txtHardwareId.SelectionStart;
+
+			if (selStart > 19) {
+				e.Handled = true;
+				return;
+			}
+			e.Handled = this.VirtualKeyPress(keyChar, selStart);
+			return;
 		}
 	}
 }

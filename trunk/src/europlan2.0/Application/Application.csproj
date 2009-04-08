@@ -109,6 +109,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>FloorSummaryPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NumericEditBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NumericEditBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\ProjectSummaryPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
@@ -143,6 +147,17 @@
     </Compile>
     <Compile Include="Project\FloorSummaryPanel.Designer.cs">
       <DependentUpon>FloorSummaryPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NumericColumn.cs" />
+    <Compile Include="Controls\NumericEditingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NumericCell.cs" />
+    <Compile Include="Controls\NumericEditBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NumericEditBox.Designer.cs">
+      <DependentUpon>NumericEditBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\Project.cs" />
     <Compile Include="Project\ProjectSummaryPanel.cs">
