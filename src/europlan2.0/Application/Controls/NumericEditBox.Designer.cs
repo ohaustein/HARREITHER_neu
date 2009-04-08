@@ -1,5 +1,5 @@
-namespace Europlan.AdminApplication {
-	partial class HardwareIdBox {
+namespace Europlan.Application {
+	partial class NumericEditBox {
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
@@ -23,26 +23,27 @@ namespace Europlan.AdminApplication {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.txtHardwareId = new System.Windows.Forms.TextBox();
+			this.txtValue = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
-			// txtHardwareId
+			// txtValue
 			// 
-			this.txtHardwareId.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtHardwareId.Location = new System.Drawing.Point(0, 0);
-			this.txtHardwareId.Name = "txtHardwareId";
-			this.txtHardwareId.Size = new System.Drawing.Size(349, 20);
-			this.txtHardwareId.TabIndex = 0;
-			this.txtHardwareId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHardwareId_KeyDown);
-			this.txtHardwareId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHardwareId_KeyPress);
+			this.txtValue.Location = new System.Drawing.Point(0, 0);
+			this.txtValue.Name = "txtValue";
+			this.txtValue.Size = new System.Drawing.Size(150, 20);
+			this.txtValue.TabIndex = 2;
+			this.txtValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.txtValue.TextChanged += new System.EventHandler(this.maskedTextBox1_TextChanged);
+			this.txtValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
 			// 
-			// HardwareIdBox
+			// NumericEditBox
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.txtHardwareId);
-			this.Name = "HardwareIdBox";
-			this.Size = new System.Drawing.Size(349, 20);
+			this.BackColor = System.Drawing.SystemColors.Window;
+			this.Controls.Add(this.txtValue);
+			this.Name = "NumericEditBox";
+			this.Size = new System.Drawing.Size(150, 20);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -50,6 +51,7 @@ namespace Europlan.AdminApplication {
 
 		#endregion
 
-		private System.Windows.Forms.TextBox txtHardwareId;
+		private System.Windows.Forms.TextBox txtValue;
+
 	}
 }

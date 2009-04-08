@@ -18,11 +18,28 @@ namespace Europlan.Application {
 		}
 
 		public void UpdateControl() {
-
+			regulatoryCircuitsSource.DataSource = Project.Instance.RegulatorCircuits;
+			regulatoryCircuitsSource.ResetBindings(false);
 		}
 
 		public bool AllowLeave() {
 			return true;
+		}
+
+		private void regulatoryCircuitsGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.regulatoryCircuitsGrid.Columns.Count &&
+					(this.regulatoryCircuitsGrid.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn) &&
+					e.RowIndex >= 0 && e.RowIndex < this.regulatoryCircuitsGrid.Rows.Count) {
+				if (ProjectChanged != null) {
+					ProjectChanged(this);
+				}
+			}
+		}
+
+		private void regulatoryCircuitsGrid_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
+			if (ProjectChanged != null) {
+				ProjectChanged(this);
+			}
 		}
 
 	}

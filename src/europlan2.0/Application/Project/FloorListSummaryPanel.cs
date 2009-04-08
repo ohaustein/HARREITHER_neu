@@ -68,6 +68,15 @@ namespace Europlan.Application {
 			}
 		}
 
+		private void gridFloors_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e) {
+			if (e.RowIndex >= 0 && e.RowIndex < this.gridFloors.Rows.Count &&
+					this.gridFloors.Rows[e.RowIndex].DataBoundItem == null) {
+				e.PaintCells(e.ClipBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border | DataGridViewPaintParts.ErrorIcon | DataGridViewPaintParts.Focus | DataGridViewPaintParts.SelectionBackground);
+				e.PaintHeader(DataGridViewPaintParts.All);
+				e.Handled = true;
+			}
+		}
+
 
 
 	}
