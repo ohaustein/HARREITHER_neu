@@ -25,7 +25,7 @@ namespace Europlan.Application {
 			if (this.Tag != null) {
 				this.room = this.Tag as Room;
 				this.txtName.Text = room.Name;
-				this.txtArea.Text = room.Area.ToString();
+				this.txtArea.Value = (decimal)room.Area;
 				this.txtTemperature.Text = room.RoomTemperature.ToString();
 				this.txtHeat.Text = room.HeatPower.ToString();
 				this.txtNormHeat.Text = room.NormalizedHeatPower.ToString();
@@ -46,21 +46,9 @@ namespace Europlan.Application {
 		}
 
 		private void txtArea_TextChanged(object sender, EventArgs e) {
-			try {
-				if (this.txtArea.Text.Length > 0) {
-					string replacedText = this.txtArea.Text.Replace('.', ',');
-					this.room.Area = float.Parse(replacedText);
-					if (ProjectChanged != null) {
-						ProjectChanged(null);
-					}
-					if (replacedText != this.txtArea.Text) {
-						this.txtArea.Text = replacedText;
-						this.txtArea.SelectionStart = this.txtArea.Text.Length;
-					}
-				}
-			} catch (Exception ex) {
-				MessageBox.Show("Fehler im Format der Eingabe");
-				this.txtArea.Text = room.Area.ToString();
+			this.room.Area = (float)this.txtArea.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
 			}
 		}
 

@@ -25,7 +25,6 @@ namespace Europlan.Application {
 		private void InitializeComponent() {
 			this.txtName = new System.Windows.Forms.TextBox();
 			this.lblName = new System.Windows.Forms.Label();
-			this.txtArea = new System.Windows.Forms.TextBox();
 			this.lblArea = new System.Windows.Forms.Label();
 			this.txtTemperature = new System.Windows.Forms.TextBox();
 			this.lblTemperature = new System.Windows.Forms.Label();
@@ -43,6 +42,7 @@ namespace Europlan.Application {
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
+			this.txtArea = new Europlan.Application.NumericEditBox();
 			this.SuspendLayout();
 			// 
 			// txtName
@@ -65,17 +65,6 @@ namespace Europlan.Application {
 			this.lblName.Text = "Name:";
 			this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.lblName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
-			// 
-			// txtArea
-			// 
-			this.txtArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtArea.Location = new System.Drawing.Point(129, 25);
-			this.txtArea.Name = "txtArea";
-			this.txtArea.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtArea.Size = new System.Drawing.Size(406, 20);
-			this.txtArea.TabIndex = 15;
-			this.txtArea.TextChanged += new System.EventHandler(this.txtArea_TextChanged);
 			// 
 			// lblArea
 			// 
@@ -246,10 +235,30 @@ namespace Europlan.Application {
 			this.label6.Text = "W";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// txtArea
+			// 
+			this.txtArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.txtArea.BackColor = System.Drawing.SystemColors.Window;
+			this.txtArea.ClientBorder = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.txtArea.EditType = Europlan.Application.NumericEditBox.NumericEditType.ROOM_AREA;
+			this.txtArea.Location = new System.Drawing.Point(129, 25);
+			this.txtArea.Name = "txtArea";
+			this.txtArea.Size = new System.Drawing.Size(406, 20);
+			this.txtArea.TabIndex = 32;
+			this.txtArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+			this.txtArea.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtArea.ValueChanged += new System.EventHandler(this.txtArea_TextChanged);
+			// 
 			// RoomSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.txtArea);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.label4);
@@ -266,7 +275,6 @@ namespace Europlan.Application {
 			this.Controls.Add(this.lblHeat);
 			this.Controls.Add(this.txtTemperature);
 			this.Controls.Add(this.lblTemperature);
-			this.Controls.Add(this.txtArea);
 			this.Controls.Add(this.lblArea);
 			this.Controls.Add(this.txtName);
 			this.Controls.Add(this.lblName);
@@ -281,7 +289,6 @@ namespace Europlan.Application {
 
 		private System.Windows.Forms.TextBox txtName;
 		private System.Windows.Forms.Label lblName;
-		private System.Windows.Forms.TextBox txtArea;
 		private System.Windows.Forms.Label lblArea;
 		private System.Windows.Forms.TextBox txtTemperature;
 		private System.Windows.Forms.Label lblTemperature;
@@ -299,5 +306,6 @@ namespace Europlan.Application {
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
+		private NumericEditBox txtArea;
 	}
 }
