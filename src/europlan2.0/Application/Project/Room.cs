@@ -30,6 +30,7 @@ namespace Europlan.Application {
 
 		public Room() {
 			InitializeRoom();
+			this.Name = "";
 		}
 
 		public Room(string name) {
@@ -76,7 +77,7 @@ namespace Europlan.Application {
 			set { 
 				name = value;
 				if (roomNode != null) {
-					roomNode.Text = name;
+					roomNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : name);
 				}
 			}
 		}

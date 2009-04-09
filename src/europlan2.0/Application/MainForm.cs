@@ -347,7 +347,9 @@ namespace Europlan.Application {
 						splitContainer.Panel2.Controls.Add(control);
 						control.Dock = DockStyle.Fill;
 					}
-					(control as IEditorUserControl).UpdateControl();
+					if (control.Tag != oldControl.Tag) {
+						(control as IEditorUserControl).UpdateControl();
+					}
 					guiUpdateInProgress = false;
 				}
 			}

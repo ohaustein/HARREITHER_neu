@@ -17,8 +17,8 @@ namespace Europlan.Application {
 			base.DefaultCellStyle.Format = this.NumericCellTemplate.FormatString;
 		}
 
-		[Category("Appearance"), DefaultValue(NumericEditBox.NumericEditType.DEFAULT), Description("The type of the cell")]
-		public NumericEditBox.NumericEditType NumEditType {
+		[Category("Appearance"), DefaultValue(NumericBox.NumericEditType.DEFAULT), Description("The type of the cell")]
+		public NumericBox.NumericEditType NumEditType {
 			get { return this.NumericCellTemplate.NumEditType; }
 			set {
 				this.NumericCellTemplate.NumEditType = value;

@@ -26,15 +26,10 @@ namespace Europlan.Application {
 			this.txtName = new System.Windows.Forms.TextBox();
 			this.lblName = new System.Windows.Forms.Label();
 			this.lblArea = new System.Windows.Forms.Label();
-			this.txtTemperature = new System.Windows.Forms.TextBox();
 			this.lblTemperature = new System.Windows.Forms.Label();
-			this.txtHeat = new System.Windows.Forms.TextBox();
 			this.lblHeat = new System.Windows.Forms.Label();
-			this.txtNormHeat = new System.Windows.Forms.TextBox();
 			this.lblNormHeat = new System.Windows.Forms.Label();
-			this.txtCool = new System.Windows.Forms.TextBox();
 			this.lblCool = new System.Windows.Forms.Label();
-			this.txtNormCool = new System.Windows.Forms.TextBox();
 			this.lblNormCool = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -42,7 +37,12 @@ namespace Europlan.Application {
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
-			this.txtArea = new Europlan.Application.NumericEditBox();
+			this.txtNormCool = new Europlan.Application.NumericBox();
+			this.txtCool = new Europlan.Application.NumericBox();
+			this.txtNormHeat = new Europlan.Application.NumericBox();
+			this.txtHeat = new Europlan.Application.NumericBox();
+			this.txtTemperature = new Europlan.Application.NumericBox();
+			this.txtArea = new Europlan.Application.NumericBox();
 			this.SuspendLayout();
 			// 
 			// txtName
@@ -75,17 +75,6 @@ namespace Europlan.Application {
 			this.lblArea.Text = "Fläche:";
 			this.lblArea.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// txtTemperature
-			// 
-			this.txtTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtTemperature.Location = new System.Drawing.Point(129, 48);
-			this.txtTemperature.Name = "txtTemperature";
-			this.txtTemperature.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtTemperature.Size = new System.Drawing.Size(406, 20);
-			this.txtTemperature.TabIndex = 17;
-			this.txtTemperature.TextChanged += new System.EventHandler(this.txtTemperature_TextChanged);
-			// 
 			// lblTemperature
 			// 
 			this.lblTemperature.Location = new System.Drawing.Point(3, 48);
@@ -94,17 +83,6 @@ namespace Europlan.Application {
 			this.lblTemperature.TabIndex = 16;
 			this.lblTemperature.Text = "Norminnentemperatur:";
 			this.lblTemperature.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// txtHeat
-			// 
-			this.txtHeat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtHeat.Location = new System.Drawing.Point(129, 71);
-			this.txtHeat.Name = "txtHeat";
-			this.txtHeat.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtHeat.Size = new System.Drawing.Size(406, 20);
-			this.txtHeat.TabIndex = 19;
-			this.txtHeat.TextChanged += new System.EventHandler(this.txtHeat_TextChanged);
 			// 
 			// lblHeat
 			// 
@@ -115,17 +93,6 @@ namespace Europlan.Application {
 			this.lblHeat.Text = "Heizlast:";
 			this.lblHeat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// txtNormHeat
-			// 
-			this.txtNormHeat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtNormHeat.Location = new System.Drawing.Point(129, 94);
-			this.txtNormHeat.Name = "txtNormHeat";
-			this.txtNormHeat.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtNormHeat.Size = new System.Drawing.Size(406, 20);
-			this.txtNormHeat.TabIndex = 21;
-			this.txtNormHeat.TextChanged += new System.EventHandler(this.txtNormHeat_TextChanged);
-			// 
 			// lblNormHeat
 			// 
 			this.lblNormHeat.Location = new System.Drawing.Point(3, 94);
@@ -135,17 +102,6 @@ namespace Europlan.Application {
 			this.lblNormHeat.Text = "Heizlast (bereinigt):";
 			this.lblNormHeat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// txtCool
-			// 
-			this.txtCool.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtCool.Location = new System.Drawing.Point(129, 117);
-			this.txtCool.Name = "txtCool";
-			this.txtCool.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtCool.Size = new System.Drawing.Size(406, 20);
-			this.txtCool.TabIndex = 23;
-			this.txtCool.TextChanged += new System.EventHandler(this.txtCool_TextChanged);
-			// 
 			// lblCool
 			// 
 			this.lblCool.Location = new System.Drawing.Point(3, 117);
@@ -154,17 +110,6 @@ namespace Europlan.Application {
 			this.lblCool.TabIndex = 22;
 			this.lblCool.Text = "Kühllast:";
 			this.lblCool.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// txtNormCool
-			// 
-			this.txtNormCool.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtNormCool.Location = new System.Drawing.Point(129, 140);
-			this.txtNormCool.Name = "txtNormCool";
-			this.txtNormCool.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtNormCool.Size = new System.Drawing.Size(406, 20);
-			this.txtNormCool.TabIndex = 25;
-			this.txtNormCool.TextChanged += new System.EventHandler(this.txtNormCool_TextChanged);
 			// 
 			// lblNormCool
 			// 
@@ -235,18 +180,131 @@ namespace Europlan.Application {
 			this.label6.Text = "W";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// txtNormCool
+			// 
+			this.txtNormCool.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.txtNormCool.EditType = Europlan.Application.NumericBox.NumericEditType.ROOM_COOL_POWER;
+			this.txtNormCool.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtNormCool.Location = new System.Drawing.Point(129, 140);
+			this.txtNormCool.Name = "txtNormCool";
+			this.txtNormCool.Size = new System.Drawing.Size(406, 20);
+			this.txtNormCool.TabIndex = 38;
+			this.txtNormCool.Text = "0";
+			this.txtNormCool.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtNormCool.ValueChanged += new System.EventHandler(this.txtNormCool_TextChanged);
+			// 
+			// txtCool
+			// 
+			this.txtCool.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.txtCool.EditType = Europlan.Application.NumericBox.NumericEditType.ROOM_COOL_POWER;
+			this.txtCool.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtCool.Location = new System.Drawing.Point(129, 117);
+			this.txtCool.Name = "txtCool";
+			this.txtCool.Size = new System.Drawing.Size(406, 20);
+			this.txtCool.TabIndex = 37;
+			this.txtCool.Text = "0";
+			this.txtCool.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtCool.ValueChanged += new System.EventHandler(this.txtCool_TextChanged);
+			// 
+			// txtNormHeat
+			// 
+			this.txtNormHeat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.txtNormHeat.EditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+			this.txtNormHeat.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtNormHeat.Location = new System.Drawing.Point(129, 94);
+			this.txtNormHeat.Name = "txtNormHeat";
+			this.txtNormHeat.Size = new System.Drawing.Size(406, 20);
+			this.txtNormHeat.TabIndex = 36;
+			this.txtNormHeat.Text = "0";
+			this.txtNormHeat.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtNormHeat.ValueChanged += new System.EventHandler(this.txtNormHeat_TextChanged);
+			// 
+			// txtHeat
+			// 
+			this.txtHeat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.txtHeat.EditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+			this.txtHeat.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtHeat.Location = new System.Drawing.Point(129, 71);
+			this.txtHeat.Name = "txtHeat";
+			this.txtHeat.Size = new System.Drawing.Size(406, 20);
+			this.txtHeat.TabIndex = 35;
+			this.txtHeat.Text = "0";
+			this.txtHeat.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtHeat.ValueChanged += new System.EventHandler(this.txtHeat_TextChanged);
+			// 
+			// txtTemperature
+			// 
+			this.txtTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.txtTemperature.EditType = Europlan.Application.NumericBox.NumericEditType.ROOM_TEMPERATURE;
+			this.txtTemperature.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtTemperature.Location = new System.Drawing.Point(129, 48);
+			this.txtTemperature.Name = "txtTemperature";
+			this.txtTemperature.Size = new System.Drawing.Size(406, 20);
+			this.txtTemperature.TabIndex = 34;
+			this.txtTemperature.Text = "0";
+			this.txtTemperature.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtTemperature.ValueChanged += new System.EventHandler(this.txtTemperature_TextChanged);
+			// 
 			// txtArea
 			// 
 			this.txtArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtArea.BackColor = System.Drawing.SystemColors.Window;
-			this.txtArea.ClientBorder = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.txtArea.EditType = Europlan.Application.NumericEditBox.NumericEditType.ROOM_AREA;
+			this.txtArea.EditType = Europlan.Application.NumericBox.NumericEditType.DEFAULT;
+			this.txtArea.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			this.txtArea.Location = new System.Drawing.Point(129, 25);
 			this.txtArea.Name = "txtArea";
 			this.txtArea.Size = new System.Drawing.Size(406, 20);
-			this.txtArea.TabIndex = 32;
-			this.txtArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+			this.txtArea.TabIndex = 33;
+			this.txtArea.Text = "0";
 			this.txtArea.Value = new decimal(new int[] {
             0,
             0,
@@ -258,6 +316,11 @@ namespace Europlan.Application {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.txtNormCool);
+			this.Controls.Add(this.txtCool);
+			this.Controls.Add(this.txtNormHeat);
+			this.Controls.Add(this.txtHeat);
+			this.Controls.Add(this.txtTemperature);
 			this.Controls.Add(this.txtArea);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.label5);
@@ -265,15 +328,10 @@ namespace Europlan.Application {
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
-			this.Controls.Add(this.txtNormCool);
 			this.Controls.Add(this.lblNormCool);
-			this.Controls.Add(this.txtCool);
 			this.Controls.Add(this.lblCool);
-			this.Controls.Add(this.txtNormHeat);
 			this.Controls.Add(this.lblNormHeat);
-			this.Controls.Add(this.txtHeat);
 			this.Controls.Add(this.lblHeat);
-			this.Controls.Add(this.txtTemperature);
 			this.Controls.Add(this.lblTemperature);
 			this.Controls.Add(this.lblArea);
 			this.Controls.Add(this.txtName);
@@ -290,15 +348,10 @@ namespace Europlan.Application {
 		private System.Windows.Forms.TextBox txtName;
 		private System.Windows.Forms.Label lblName;
 		private System.Windows.Forms.Label lblArea;
-		private System.Windows.Forms.TextBox txtTemperature;
 		private System.Windows.Forms.Label lblTemperature;
-		private System.Windows.Forms.TextBox txtHeat;
 		private System.Windows.Forms.Label lblHeat;
-		private System.Windows.Forms.TextBox txtNormHeat;
 		private System.Windows.Forms.Label lblNormHeat;
-		private System.Windows.Forms.TextBox txtCool;
 		private System.Windows.Forms.Label lblCool;
-		private System.Windows.Forms.TextBox txtNormCool;
 		private System.Windows.Forms.Label lblNormCool;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
@@ -306,6 +359,11 @@ namespace Europlan.Application {
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
-		private NumericEditBox txtArea;
+		private NumericBox txtArea;
+		private NumericBox txtTemperature;
+		private NumericBox txtHeat;
+		private NumericBox txtNormHeat;
+		private NumericBox txtCool;
+		private NumericBox txtNormCool;
 	}
 }

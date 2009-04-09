@@ -27,9 +27,9 @@ namespace Europlan.Application {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.btnImport = new System.Windows.Forms.Button();
 			this.gridFloors = new System.Windows.Forms.DataGridView();
-			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.associatedIconDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.associatedPanelTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.projectFloorsSource = new System.Windows.Forms.BindingSource(this.components);
@@ -77,9 +77,28 @@ namespace Europlan.Application {
 			this.gridFloors.Size = new System.Drawing.Size(672, 297);
 			this.gridFloors.TabIndex = 1;
 			this.gridFloors.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFloors_CellValueChanged);
+			this.gridFloors.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridFloors_UserAddedRow);
 			this.gridFloors.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.gridFloors_RowPrePaint);
 			this.gridFloors.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridFloors_UserDeletedRow);
 			this.gridFloors.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFloors_CellClick);
+			// 
+			// associatedIconDataGridViewImageColumn
+			// 
+			this.associatedIconDataGridViewImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+			this.associatedIconDataGridViewImageColumn.DataPropertyName = "AssociatedIcon";
+			this.associatedIconDataGridViewImageColumn.HeaderText = "";
+			this.associatedIconDataGridViewImageColumn.Name = "associatedIconDataGridViewImageColumn";
+			this.associatedIconDataGridViewImageColumn.ReadOnly = true;
+			this.associatedIconDataGridViewImageColumn.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.nameDataGridViewTextBoxColumn.ToolTipText = "Bezeichnung des Geschoﬂes";
+			this.nameDataGridViewTextBoxColumn.Width = 200;
 			// 
 			// colView
 			// 
@@ -91,25 +110,6 @@ namespace Europlan.Application {
 			this.colView.Text = "...";
 			this.colView.UseColumnTextForButtonValue = true;
 			this.colView.Width = 64;
-			// 
-			// associatedIconDataGridViewImageColumn
-			// 
-			this.associatedIconDataGridViewImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-			this.associatedIconDataGridViewImageColumn.DataPropertyName = "AssociatedIcon";
-			this.associatedIconDataGridViewImageColumn.HeaderText = "";
-			this.associatedIconDataGridViewImageColumn.Name = "associatedIconDataGridViewImageColumn";
-			this.associatedIconDataGridViewImageColumn.ReadOnly = true;
-			this.associatedIconDataGridViewImageColumn.Visible = false;
-			this.associatedIconDataGridViewImageColumn.Width = 5;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.nameDataGridViewTextBoxColumn.ToolTipText = "Bezeichnung des Geschoﬂes";
-			this.nameDataGridViewTextBoxColumn.Width = 200;
 			// 
 			// idDataGridViewTextBoxColumn
 			// 

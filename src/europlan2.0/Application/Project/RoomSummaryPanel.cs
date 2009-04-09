@@ -46,21 +46,24 @@ namespace Europlan.Application {
 		}
 
 		private void txtArea_TextChanged(object sender, EventArgs e) {
-			this.room.Area = (float)this.txtArea.Value;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			try {
+				this.room.Area = (float)this.txtArea.Value;
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
+				}
+			} catch (Exception) {
+				MessageBox.Show("Fehler im Format der Eingabe");
+				this.txtTemperature.Text = room.RoomTemperature.ToString();
 			}
 		}
 
 		private void txtTemperature_TextChanged(object sender, EventArgs e) {
 			try {
-				if (this.txtTemperature.Text.Length > 0) {
-					this.room.RoomTemperature = Int32.Parse(this.txtTemperature.Text);
-					if (ProjectChanged != null) {
-						ProjectChanged(null);
-					}
+				this.room.RoomTemperature = (int)this.txtTemperature.Value;
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
 				}
-			} catch (Exception ex) {
+			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
 				this.txtTemperature.Text = room.RoomTemperature.ToString();
 			}
@@ -68,13 +71,11 @@ namespace Europlan.Application {
 
 		private void txtHeat_TextChanged(object sender, EventArgs e) {
 			try {
-				if (this.txtHeat.Text.Length > 0) {
-					this.room.HeatPower = Int32.Parse(this.txtHeat.Text);
-					if (ProjectChanged != null) {
-						ProjectChanged(null);
-					}
+				this.room.HeatPower = (int)this.txtHeat.Value;
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
 				}
-			} catch (Exception ex) {
+			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
 				this.txtHeat.Text = room.HeatPower.ToString();
 			}
@@ -82,13 +83,11 @@ namespace Europlan.Application {
 
 		private void txtNormHeat_TextChanged(object sender, EventArgs e) {
 			try {
-				if (this.txtNormHeat.Text.Length > 0) {
-					this.room.NormalizedHeatPower = Int32.Parse(this.txtNormHeat.Text);
-					if (ProjectChanged != null) {
-						ProjectChanged(null);
-					}
+				this.room.NormalizedHeatPower = (int)this.txtNormHeat.Value;
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
 				}
-			} catch (Exception ex) {
+			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
 				this.txtNormHeat.Text = room.NormalizedHeatPower.ToString();
 			}
@@ -96,13 +95,11 @@ namespace Europlan.Application {
 
 		private void txtCool_TextChanged(object sender, EventArgs e) {
 			try {
-				if (this.txtCool.Text.Length > 0) {
-					this.room.CoolPower = Int32.Parse(this.txtCool.Text);
-					if (ProjectChanged != null) {
-						ProjectChanged(null);
-					}
+				this.room.CoolPower = (int)this.txtCool.Value;
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
 				}
-			} catch (Exception ex) {
+			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
 				this.txtCool.Text = room.CoolPower.ToString();
 			}
@@ -110,13 +107,11 @@ namespace Europlan.Application {
 
 		private void txtNormCool_TextChanged(object sender, EventArgs e) {
 			try {
-				if (this.txtNormCool.Text.Length > 0) {
-					this.room.NormalizedCoolPower = Int32.Parse(this.txtNormCool.Text);
-					if (ProjectChanged != null) {
-						ProjectChanged(null);
-					}
+				this.room.NormalizedCoolPower = (int)this.txtNormCool.Value;
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
 				}
-			} catch (Exception ex) {
+			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
 				this.txtNormCool.Text = room.NormalizedCoolPower.ToString();
 			}

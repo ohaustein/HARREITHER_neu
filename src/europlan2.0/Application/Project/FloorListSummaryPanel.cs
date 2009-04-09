@@ -77,6 +77,12 @@ namespace Europlan.Application {
 			}
 		}
 
+		private void gridFloors_UserAddedRow(object sender, DataGridViewRowEventArgs e) {
+			if (ProjectStructureChanged != null) {
+				ProjectStructureChanged(this);
+			}
+		}
+
 
 
 	}
