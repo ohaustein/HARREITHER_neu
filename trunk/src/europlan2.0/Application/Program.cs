@@ -79,7 +79,6 @@ namespace Europlan.Application {
 			}
 			startingForm.Close();
 			System.Windows.Forms.Application.Run(mainForm);
-			
 		}
 
 		static bool IsApplicationAlreadyRunning() {

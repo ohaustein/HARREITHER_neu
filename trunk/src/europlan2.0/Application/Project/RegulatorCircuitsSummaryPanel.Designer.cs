@@ -26,7 +26,7 @@ namespace Europlan.Application {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			this.regulatoryCircuitsGrid = new System.Windows.Forms.DataGridView();
+			this.gridRegulatoryCircuits = new System.Windows.Forms.DataGridView();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.flowTemperatureDataGridViewTextBoxColumn = new Europlan.Application.NumericColumn();
@@ -34,17 +34,17 @@ namespace Europlan.Application {
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsGrid)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// regulatoryCircuitsGrid
+			// gridRegulatoryCircuits
 			// 
-			this.regulatoryCircuitsGrid.AllowUserToResizeRows = false;
-			this.regulatoryCircuitsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			this.gridRegulatoryCircuits.AllowUserToResizeRows = false;
+			this.gridRegulatoryCircuits.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.regulatoryCircuitsGrid.AutoGenerateColumns = false;
+			this.gridRegulatoryCircuits.AutoGenerateColumns = false;
 			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -52,21 +52,21 @@ namespace Europlan.Application {
 			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
 			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.regulatoryCircuitsGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			this.regulatoryCircuitsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.regulatoryCircuitsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.gridRegulatoryCircuits.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this.gridRegulatoryCircuits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridRegulatoryCircuits.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.flowTemperatureDataGridViewTextBoxColumn});
-			this.regulatoryCircuitsGrid.DataMember = "RegulatorCircuits";
-			this.regulatoryCircuitsGrid.DataSource = this.regulatoryCircuitsSource;
-			this.regulatoryCircuitsGrid.Location = new System.Drawing.Point(3, 3);
-			this.regulatoryCircuitsGrid.MultiSelect = false;
-			this.regulatoryCircuitsGrid.Name = "regulatoryCircuitsGrid";
-			this.regulatoryCircuitsGrid.Size = new System.Drawing.Size(507, 255);
-			this.regulatoryCircuitsGrid.TabIndex = 0;
-			this.regulatoryCircuitsGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.regulatoryCircuitsGrid_CellValueChanged);
-			this.regulatoryCircuitsGrid.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.regulatoryCircuitsGrid_UserDeletedRow);
+			this.gridRegulatoryCircuits.DataMember = "RegulatorCircuits";
+			this.gridRegulatoryCircuits.DataSource = this.regulatoryCircuitsSource;
+			this.gridRegulatoryCircuits.Location = new System.Drawing.Point(3, 3);
+			this.gridRegulatoryCircuits.MultiSelect = false;
+			this.gridRegulatoryCircuits.Name = "gridRegulatoryCircuits";
+			this.gridRegulatoryCircuits.Size = new System.Drawing.Size(507, 255);
+			this.gridRegulatoryCircuits.TabIndex = 0;
+			this.gridRegulatoryCircuits.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.regulatoryCircuitsGrid_CellValueChanged);
+			this.gridRegulatoryCircuits.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.regulatoryCircuitsGrid_UserDeletedRow);
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -127,10 +127,10 @@ namespace Europlan.Application {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.regulatoryCircuitsGrid);
+			this.Controls.Add(this.gridRegulatoryCircuits);
 			this.Name = "RegulatorCircuitsSummaryPanel";
 			this.Size = new System.Drawing.Size(513, 261);
-			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsGrid)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).EndInit();
 			this.ResumeLayout(false);
 
@@ -138,7 +138,7 @@ namespace Europlan.Application {
 
 		#endregion
 
-		private System.Windows.Forms.DataGridView regulatoryCircuitsGrid;
+		private System.Windows.Forms.DataGridView gridRegulatoryCircuits;
 		private System.Windows.Forms.BindingSource regulatoryCircuitsSource;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
