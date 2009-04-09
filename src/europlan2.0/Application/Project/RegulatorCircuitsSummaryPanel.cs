@@ -27,9 +27,9 @@ namespace Europlan.Application {
 		}
 
 		private void regulatoryCircuitsGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.regulatoryCircuitsGrid.Columns.Count &&
-					(this.regulatoryCircuitsGrid.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn) &&
-					e.RowIndex >= 0 && e.RowIndex < this.regulatoryCircuitsGrid.Rows.Count) {
+			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridRegulatoryCircuits.Columns.Count &&
+					(this.gridRegulatoryCircuits.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn) &&
+					e.RowIndex >= 0 && e.RowIndex < this.gridRegulatoryCircuits.Rows.Count) {
 				if (ProjectChanged != null) {
 					ProjectChanged(this);
 				}

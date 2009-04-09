@@ -411,6 +411,20 @@ namespace Europlan.Application {
 							}
 						}
 					}
+				} else if (activeControl is DataGridView) {
+					DataGridView grid = activeControl as DataGridView;
+					if (grid.SelectedRows.Count > 0 && grid.SelectedRows[0].DataBoundItem != null && grid.SelectedRows[0].DataBoundItem is IClipboard) {
+						IClipboard selectedItem = grid.SelectedRows[0].DataBoundItem as IClipboard;
+						if (selectedItem.SupportsCopy) {
+							DataFormats.Format format = DataFormats.GetFormat(selectedItem.DataFormat);
+							Clipboard.SetData(format.Name, selectedItem.Copy());
+						}
+						/*if (grid.Name == "gridFloors") {
+
+						} else if (grid.Name = "gridRooms") {
+
+						}*/
+					}
 				} else {
 					Clipboard.SetText(activeControl.Text);
 				}
@@ -426,6 +440,26 @@ namespace Europlan.Application {
 					if (projectTree.SelectedNode != null) {
 						if (projectTree.SelectedNode.Tag is IClipboard) {
 							IClipboard clipboardObject = projectTree.SelectedNode.Tag as IClipboard;
+							if (clipboardObject.SupportedPasteFormat != null) {
+								DataFormats.Format format = DataFormats.GetFormat(clipboardObject.SupportedPasteFormat);
+								if (Clipboard.ContainsData(format.Name)) {
+									object o = Clipboard.GetData(format.Name);
+									if (o != null) {
+										clipboardObject.Paste(o);
+										Project.Instance.InitializeTreeView(this.projectTree);
+										projectUnsaved = true;
+										UpdateTitle();
+									}
+								}
+							}
+						}
+					}
+				} else if (activeControl is DataGridView) {
+					DataGridView grid = activeControl as DataGridView;
+					if (grid.DataSource is BindingSource) {
+						BindingSource source = grid.DataSource as BindingSource;
+						if (source.DataSource is IClipboard) {
+							IClipboard clipboardObject = source.DataSource as IClipboard;
 							if (clipboardObject.SupportedPasteFormat != null) {
 								DataFormats.Format format = DataFormats.GetFormat(clipboardObject.SupportedPasteFormat);
 								if (Clipboard.ContainsData(format.Name)) {

@@ -16,7 +16,7 @@ namespace Europlan.Application {
 
 		private TreeNode floorNode = new TreeNode();
 
-		private List<Room> rooms;
+		private RoomList rooms;
 
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Floor));
@@ -45,7 +45,7 @@ namespace Europlan.Application {
 		private void InitializeFloor() {
 			name = "";
 			id = "";
-			rooms = new List<Room>();
+			rooms = new RoomList();
 		}
 
 		internal void Synchronize(Floor floor) {
@@ -75,7 +75,7 @@ namespace Europlan.Application {
 			set { id = value; }
 		}
 
-		public List<Room> Rooms {
+		public RoomList Rooms {
 			get {
 				return rooms;
 			}

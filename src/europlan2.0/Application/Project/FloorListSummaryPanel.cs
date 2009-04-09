@@ -82,8 +82,5 @@ namespace Europlan.Application {
 				ProjectStructureChanged(this);
 			}
 		}
-
-
-
 	}
 }
