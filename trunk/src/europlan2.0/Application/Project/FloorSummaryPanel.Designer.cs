@@ -25,23 +25,18 @@ namespace Europlan.Application {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.txtName = new System.Windows.Forms.TextBox();
 			this.lblName = new System.Windows.Forms.Label();
 			this.gridRooms = new System.Windows.Forms.DataGridView();
-			this.floorRoomsSource = new System.Windows.Forms.BindingSource(this.components);
-			this.numericColumn1 = new Europlan.Application.NumericColumn();
-			this.numericColumn2 = new Europlan.Application.NumericColumn();
-			this.numericColumn3 = new Europlan.Application.NumericColumn();
-			this.numericColumn4 = new Europlan.Application.NumericColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Area = new Europlan.Application.NumericColumn();
@@ -52,6 +47,11 @@ namespace Europlan.Application {
 			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.associatedPanelTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.associatedIconDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+			this.floorRoomsSource = new System.Windows.Forms.BindingSource(this.components);
+			this.numericColumn1 = new Europlan.Application.NumericColumn();
+			this.numericColumn2 = new Europlan.Application.NumericColumn();
+			this.numericColumn3 = new Europlan.Application.NumericColumn();
+			this.numericColumn4 = new Europlan.Application.NumericColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridRooms)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.floorRoomsSource)).BeginInit();
 			this.SuspendLayout();
@@ -111,51 +111,10 @@ namespace Europlan.Application {
 			this.gridRooms.Size = new System.Drawing.Size(578, 233);
 			this.gridRooms.TabIndex = 16;
 			this.gridRooms.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRooms_CellValueChanged);
+			this.gridRooms.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridRooms_UserAddedRow);
 			this.gridRooms.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.gridRooms_RowPrePaint);
 			this.gridRooms.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridRooms_UserDeletedRow);
 			this.gridRooms.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRooms_CellClick);
-			// 
-			// floorRoomsSource
-			// 
-			this.floorRoomsSource.DataSource = typeof(Europlan.Application.Floor);
-			// 
-			// numericColumn1
-			// 
-			this.numericColumn1.DataPropertyName = "Area";
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle7.Format = "F1";
-			this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle7;
-			this.numericColumn1.HeaderText = "A (m≤)";
-			this.numericColumn1.Name = "numericColumn1";
-			this.numericColumn1.NumEditType = Europlan.Application.NumericEditBox.NumericEditType.ROOM_AREA;
-			// 
-			// numericColumn2
-			// 
-			this.numericColumn2.DataPropertyName = "RoomTemperature";
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle8.Format = "F0";
-			this.numericColumn2.DefaultCellStyle = dataGridViewCellStyle8;
-			this.numericColumn2.HeaderText = "Ti (∞C)";
-			this.numericColumn2.Name = "numericColumn2";
-			this.numericColumn2.ToolTipText = "Norminnentemperatur laut W‰rmebedarfsberechnung";
-			// 
-			// numericColumn3
-			// 
-			this.numericColumn3.DataPropertyName = "HeatPower";
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle9.Format = "F0";
-			this.numericColumn3.DefaultCellStyle = dataGridViewCellStyle9;
-			this.numericColumn3.HeaderText = "Heizlast";
-			this.numericColumn3.Name = "numericColumn3";
-			// 
-			// numericColumn4
-			// 
-			this.numericColumn4.DataPropertyName = "NormalizedHeatPower";
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle10.Format = "F0";
-			this.numericColumn4.DefaultCellStyle = dataGridViewCellStyle10;
-			this.numericColumn4.HeaderText = "Heizlast (normiert)";
-			this.numericColumn4.Name = "numericColumn4";
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -179,11 +138,11 @@ namespace Europlan.Application {
 			// 
 			this.Area.DataPropertyName = "Area";
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F0";
+			dataGridViewCellStyle2.Format = "F1";
 			this.Area.DefaultCellStyle = dataGridViewCellStyle2;
 			this.Area.HeaderText = "A (m≤)";
 			this.Area.Name = "Area";
-			this.Area.NumEditType = Europlan.Application.NumericEditBox.NumericEditType.ROOM_AREA;
+			this.Area.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_AREA;
 			this.Area.ToolTipText = "Raumfl‰che";
 			this.Area.Width = 50;
 			// 
@@ -195,7 +154,7 @@ namespace Europlan.Application {
 			this.RoomTemperature.DefaultCellStyle = dataGridViewCellStyle3;
 			this.RoomTemperature.HeaderText = "Ti (∞C)";
 			this.RoomTemperature.Name = "RoomTemperature";
-			this.RoomTemperature.NumEditType = Europlan.Application.NumericEditBox.NumericEditType.ROOM_TEMPERATURE;
+			this.RoomTemperature.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_TEMPERATURE;
 			this.RoomTemperature.ToolTipText = "Norminnentemperatur laut W‰rmebedarfsberechnung";
 			this.RoomTemperature.Width = 40;
 			// 
@@ -207,7 +166,7 @@ namespace Europlan.Application {
 			this.HeatPower.DefaultCellStyle = dataGridViewCellStyle4;
 			this.HeatPower.HeaderText = "QN (W)";
 			this.HeatPower.Name = "HeatPower";
-			this.HeatPower.NumEditType = Europlan.Application.NumericEditBox.NumericEditType.ROOM_HEAT_POWER;
+			this.HeatPower.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.HeatPower.ToolTipText = "Normw‰rmebedarf laut W‰rmebedarfsrechnung";
 			this.HeatPower.Width = 50;
 			// 
@@ -219,7 +178,7 @@ namespace Europlan.Application {
 			this.FloorHeatingLoss.DefaultCellStyle = dataGridViewCellStyle5;
 			this.FloorHeatingLoss.HeaderText = "QFB (W)";
 			this.FloorHeatingLoss.Name = "FloorHeatingLoss";
-			this.FloorHeatingLoss.NumEditType = Europlan.Application.NumericEditBox.NumericEditType.ROOM_HEAT_POWER;
+			this.FloorHeatingLoss.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.FloorHeatingLoss.ToolTipText = "im W‰rmebedarf enthaltene Fuﬂbodentransmissionen";
 			this.FloorHeatingLoss.Width = 50;
 			// 
@@ -231,7 +190,7 @@ namespace Europlan.Application {
 			this.AdditionalHeatPower.DefaultCellStyle = dataGridViewCellStyle6;
 			this.AdditionalHeatPower.HeaderText = "QFr (W)";
 			this.AdditionalHeatPower.Name = "AdditionalHeatPower";
-			this.AdditionalHeatPower.NumEditType = Europlan.Application.NumericEditBox.NumericEditType.ROOM_HEAT_POWER;
+			this.AdditionalHeatPower.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.AdditionalHeatPower.ToolTipText = "zus‰tzliche Fremdw‰rmeleistung";
 			this.AdditionalHeatPower.Width = 50;
 			// 
@@ -260,6 +219,48 @@ namespace Europlan.Application {
 			this.associatedIconDataGridViewImageColumn.Name = "associatedIconDataGridViewImageColumn";
 			this.associatedIconDataGridViewImageColumn.ReadOnly = true;
 			this.associatedIconDataGridViewImageColumn.Visible = false;
+			// 
+			// floorRoomsSource
+			// 
+			this.floorRoomsSource.DataSource = typeof(Europlan.Application.Floor);
+			// 
+			// numericColumn1
+			// 
+			this.numericColumn1.DataPropertyName = "Area";
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle7.Format = "F1";
+			this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle7;
+			this.numericColumn1.HeaderText = "A (m≤)";
+			this.numericColumn1.Name = "numericColumn1";
+			this.numericColumn1.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_AREA;
+			// 
+			// numericColumn2
+			// 
+			this.numericColumn2.DataPropertyName = "RoomTemperature";
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle8.Format = "F0";
+			this.numericColumn2.DefaultCellStyle = dataGridViewCellStyle8;
+			this.numericColumn2.HeaderText = "Ti (∞C)";
+			this.numericColumn2.Name = "numericColumn2";
+			this.numericColumn2.ToolTipText = "Norminnentemperatur laut W‰rmebedarfsberechnung";
+			// 
+			// numericColumn3
+			// 
+			this.numericColumn3.DataPropertyName = "HeatPower";
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle9.Format = "F0";
+			this.numericColumn3.DefaultCellStyle = dataGridViewCellStyle9;
+			this.numericColumn3.HeaderText = "Heizlast";
+			this.numericColumn3.Name = "numericColumn3";
+			// 
+			// numericColumn4
+			// 
+			this.numericColumn4.DataPropertyName = "NormalizedHeatPower";
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle10.Format = "F0";
+			this.numericColumn4.DefaultCellStyle = dataGridViewCellStyle10;
+			this.numericColumn4.HeaderText = "Heizlast (normiert)";
+			this.numericColumn4.Name = "numericColumn4";
 			// 
 			// FloorSummaryPanel
 			// 

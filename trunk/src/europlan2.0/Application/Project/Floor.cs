@@ -65,7 +65,7 @@ namespace Europlan.Application {
 			set { 
 				name = value;
 				if (floorNode != null) {
-					floorNode.Text = name;
+					floorNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : name);
 				}
 			}
 		}

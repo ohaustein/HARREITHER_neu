@@ -94,7 +94,7 @@ namespace Europlan.Application {
 			this.flowTemperatureDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
 			this.flowTemperatureDataGridViewTextBoxColumn.HeaderText = "TvHeiz (°C)";
 			this.flowTemperatureDataGridViewTextBoxColumn.Name = "flowTemperatureDataGridViewTextBoxColumn";
-			this.flowTemperatureDataGridViewTextBoxColumn.NumEditType = Europlan.Application.NumericEditBox.NumericEditType.REGULATORY_CIRCUIT_TEMP;
+			this.flowTemperatureDataGridViewTextBoxColumn.NumEditType = Europlan.Application.NumericBox.NumericEditType.REGULATORY_CIRCUIT_TEMP;
 			this.flowTemperatureDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.flowTemperatureDataGridViewTextBoxColumn.ToolTipText = "Vorlauftemperatur im Heizbetrieb";
 			this.flowTemperatureDataGridViewTextBoxColumn.Width = 50;

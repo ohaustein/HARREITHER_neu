@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace Europlan.Application {
 	public class NumericCell : DataGridViewTextBoxCell {
 
-		private NumericEditBox.NumericEditType numEditType = NumericEditBox.NumericEditType.DEFAULT;
+		private NumericBox.NumericEditType numEditType = NumericBox.NumericEditType.DEFAULT;
 
 		public NumericCell() {
 		}
@@ -24,12 +25,12 @@ namespace Europlan.Application {
 			base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
 			NumericEditingControl ctl = (NumericEditingControl)DataGridView.EditingControl;
 			ctl.EditType = this.numEditType;
-			ctl.ClientBorder = BorderStyle.None;
-			/*Console.WriteLine("(" + this.DataGridView.Rows[rowIndex].Height + " - " + ctl.Height + ") / 2"); 
-			ctl.Top = (this.DataGridView.Rows[rowIndex].Height - ctl.Height + 1) / 2;*/
-			ctl.Value = Convert.ToDecimal(this.Value);
-			ctl.SelectAll();
-			//ctl.Value = new decimal((int)this.Value);
+			ctl.BorderStyle = BorderStyle.None;
+			ctl.Value = Convert.ToDecimal(initialFormattedValue);
+			/*if (!this.lastKeyEnteredEditMode) {
+				ctl.SelectionStart = ctl.Text.Length;
+				ctl.SelectionLength = 0;
+			}*/
 		}
 
 		public override object DefaultNewRowValue {
@@ -38,8 +39,8 @@ namespace Europlan.Application {
 			}
 		}
 
-		[DefaultValue(NumericEditBox.NumericEditType.DEFAULT)]
-		public NumericEditBox.NumericEditType NumEditType {
+		[DefaultValue(NumericBox.NumericEditType.DEFAULT)]
+		public NumericBox.NumericEditType NumEditType {
 			get { return this.numEditType; }
 			set {
 				this.numEditType = value;
@@ -47,10 +48,10 @@ namespace Europlan.Application {
 			}
 		}
 
-		internal void SetNumEditType(int rowIndex, NumericEditBox.NumericEditType numEditType) {
+		internal void SetNumEditType(int rowIndex, NumericBox.NumericEditType numEditType) {
 			this.numEditType = numEditType;
 			if (OwnsEditingControl(rowIndex)) {
-				this.EditingNumericEditBox.EditType = numEditType;
+				this.EditingNumericBox.EditType = numEditType;
 			}
 		}
 
@@ -62,7 +63,7 @@ namespace Europlan.Application {
 			return editingControl != null && rowIndex == editingControl.EditingControlRowIndex;
 		}
 
-		private NumericEditingControl EditingNumericEditBox {
+		private NumericEditingControl EditingNumericBox {
 			get { return this.DataGridView.EditingControl as NumericEditingControl; }
 		}
 
@@ -85,7 +86,15 @@ namespace Europlan.Application {
 		}
 
 		public string FormatString {
-			get { return "F" + NumericEditBox.DecimalPlaces(this.NumEditType); }
+			get { return "F" + NumericBox.DecimalPlaces(this.NumEditType); }
+		}
+
+		public override System.Drawing.Rectangle PositionEditingPanel(System.Drawing.Rectangle cellBounds, System.Drawing.Rectangle cellClip, DataGridViewCellStyle cellStyle, bool singleVerticalBorderAdded, bool singleHorizontalBorderAdded, bool isFirstDisplayedColumn, bool isFirstDisplayedRow) {
+			int height = DataGridView.EditingControl.Height;
+			Rectangle rect = base.PositionEditingPanel(cellBounds, cellClip, cellStyle, singleVerticalBorderAdded, singleHorizontalBorderAdded, isFirstDisplayedColumn, isFirstDisplayedRow);
+			Console.WriteLine("height: " + height + "/" + rect.Height);
+			rect = new Rectangle(rect.X , rect.Y + (rect.Height - height) / 2, rect.Width , height);
+			return rect;
 		}
 	}
 }
