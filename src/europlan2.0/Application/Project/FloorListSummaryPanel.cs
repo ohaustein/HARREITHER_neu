@@ -30,29 +30,44 @@ namespace Europlan.Application {
 		}
 
 		public void UpdateControl() {
+			List<DataGridViewColumn> selectedCols = null;
+			Floor selectedFloor = null;
+			if (this.gridFloors.SelectedRows.Count > 0) {
+				selectedFloor = this.gridFloors.SelectedRows[0].DataBoundItem as Floor;
+			} else if (this.gridFloors.SelectedCells.Count > 0) {
+				selectedCols = new List<DataGridViewColumn>();
+				foreach (DataGridViewCell cell in this.gridFloors.SelectedCells) {
+					if (selectedFloor == null) {
+						selectedFloor = cell.OwningRow.DataBoundItem as Floor;
+					}
+					if (selectedFloor != null && selectedFloor == cell.OwningRow.DataBoundItem) {
+						selectedCols.Add(cell.OwningColumn);
+					}
+				}
+			}
 
 			projectFloorsSource.DataSource = Project.Instance.Floors;
 			projectFloorsSource.ResetBindings(false);
-		}
 
-		public bool AllowLeave() {
-			return true;
-		}
-
-		private void gridFloors_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridFloors.Columns.Count &&
-			  (this.gridFloors.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn) &&
-			  e.RowIndex >= 0 && e.RowIndex < this.gridFloors.Rows.Count) {
-				if (ProjectStructureChanged != null) {
-					ProjectStructureChanged(this);
+			if (selectedFloor != null) {
+				foreach (DataGridViewRow row in this.gridFloors.Rows) {
+					if (row.DataBoundItem == selectedFloor) {
+						if (selectedCols == null) {
+							row.Selected = true;
+						} else {
+							foreach (DataGridViewColumn col in selectedCols) {
+								if (row.Cells[col.Index].Visible) {
+									row.Cells[col.Index].Selected = true;
+								}
+							}
+						}
+					}
 				}
 			}
 		}
 
-		private void gridFloors_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
-			if (ProjectStructureChanged != null) {
-				ProjectStructureChanged(this);
-			}
+		public bool AllowLeave() {
+			return true;
 		}
 
 		private void gridFloors_CellClick(object sender, DataGridViewCellEventArgs e) {
@@ -77,10 +92,25 @@ namespace Europlan.Application {
 			}
 		}
 
-		private void gridFloors_UserAddedRow(object sender, DataGridViewRowEventArgs e) {
+		private void gridFloors_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridFloors.Columns.Count &&
+			  (this.gridFloors.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn) &&
+			  e.RowIndex >= 0 && e.RowIndex < this.gridFloors.Rows.Count) {
+				if (ProjectStructureChanged != null) {
+					ProjectStructureChanged(this);
+				}
+			}
+		}
+
+		private void gridFloors_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
+			gridFloors.AllowUserToAddRows = true;
 			if (ProjectStructureChanged != null) {
 				ProjectStructureChanged(this);
 			}
+		}
+
+		private void gridFloors_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
+			gridFloors.AllowUserToAddRows = false;
 		}
 	}
 }

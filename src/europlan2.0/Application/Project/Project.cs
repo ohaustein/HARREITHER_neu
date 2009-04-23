@@ -69,19 +69,22 @@ namespace Europlan.Application {
 			projectNotes = new string[] { "" };
 			projectEditor = "";
 
+			floors = new FloorList();
+			regulatorCircuits = new List<RegulatorCircuit>();
+
 			// root node
 			string localized = resources.GetString("Project", Thread.CurrentThread.CurrentUICulture);
 			rootNode = new TreeNode(localized == null ? "Projekt" : localized);
+			rootNode.Tag = this;
 
 			// building (floors and rooms)
 			localized = resources.GetString("Floors", Thread.CurrentThread.CurrentUICulture);
 			floorsNode = new TreeNode(localized == null ? "Geschoﬂe" : localized);
+			floorsNode.Tag = floors;
 
 			localized = resources.GetString("RegulatorCircuits", Thread.CurrentThread.CurrentUICulture);
 			regulatorCircuitsNode = new TreeNode(localized == null ? "Regelkreise" : localized);
-			
-			floors = new FloorList();
-			regulatorCircuits = new List<RegulatorCircuit>();
+			regulatorCircuitsNode.Tag = typeof(RegulatorCircuitsSummaryPanel);
 		}
 
 		public string[] ProjectName {
@@ -164,7 +167,7 @@ namespace Europlan.Application {
 
 
 		internal void InitializeTreeView(System.Windows.Forms.TreeView tree) {
-			TreeNode selectedNode = null;
+			/*TreeNode selectedNode = null;
 			if (tree.SelectedNode != null) {
 				selectedNode = tree.SelectedNode;
 			}
@@ -191,6 +194,35 @@ namespace Europlan.Application {
 				tree.SelectedNode = selectedNode;
 			} else {
 				tree.SelectedNode = rootNode;
+			}*/
+			this.UpdateTreeView(tree);
+		}
+
+		internal void UpdateTreeView(System.Windows.Forms.TreeView tree) {
+			bool expand = (tree.Nodes.Count == 0 || this.rootNode.Nodes.Count == 0);
+			// insert root node if missing
+			if (tree.Nodes.Count != 1 || tree.Nodes[0] != this.rootNode) {
+				tree.Nodes.Clear();
+				tree.Nodes.Add(this.rootNode);
+			}
+			// insert regulatory circuit node if missing
+			if (this.rootNode.Nodes.Count == 0 || this.rootNode.Nodes[0] != this.regulatorCircuitsNode) {
+				this.rootNode.Nodes.Insert(0, this.regulatorCircuitsNode);
+			}
+			// insert floors node if missing
+			if (this.rootNode.Nodes.Count == 1 || this.rootNode.Nodes[1] != this.floorsNode) {
+				this.rootNode.Nodes.Insert(1, this.floorsNode);
+			}
+			// remove other nodes
+			while (this.rootNode.Nodes.Count > 2) {
+				this.rootNode.Nodes.RemoveAt(2);
+			}
+
+			// update floors
+			this.floors.UpdateTree(floorsNode);
+
+			if (expand) {
+				this.rootNode.Expand();
 			}
 		}
 
