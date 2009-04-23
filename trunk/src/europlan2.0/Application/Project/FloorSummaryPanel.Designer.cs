@@ -37,6 +37,7 @@ namespace Europlan.Application {
 			this.txtName = new System.Windows.Forms.TextBox();
 			this.lblName = new System.Windows.Forms.Label();
 			this.gridRooms = new System.Windows.Forms.DataGridView();
+			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Area = new Europlan.Application.NumericColumn();
@@ -44,7 +45,6 @@ namespace Europlan.Application {
 			this.HeatPower = new Europlan.Application.NumericColumn();
 			this.FloorHeatingLoss = new Europlan.Application.NumericColumn();
 			this.AdditionalHeatPower = new Europlan.Application.NumericColumn();
-			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.associatedPanelTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.associatedIconDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
 			this.floorRoomsSource = new System.Windows.Forms.BindingSource(this.components);
@@ -111,10 +111,20 @@ namespace Europlan.Application {
 			this.gridRooms.Size = new System.Drawing.Size(578, 233);
 			this.gridRooms.TabIndex = 16;
 			this.gridRooms.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRooms_CellValueChanged);
-			this.gridRooms.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridRooms_UserAddedRow);
+			this.gridRooms.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridRooms_UserDeletingRow);
 			this.gridRooms.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.gridRooms_RowPrePaint);
 			this.gridRooms.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridRooms_UserDeletedRow);
 			this.gridRooms.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRooms_CellClick);
+			// 
+			// colView
+			// 
+			this.colView.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.colView.HeaderText = "Bearbeiten";
+			this.colView.Name = "colView";
+			this.colView.ReadOnly = true;
+			this.colView.Text = "...";
+			this.colView.UseColumnTextForButtonValue = true;
+			this.colView.Width = 64;
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -193,16 +203,6 @@ namespace Europlan.Application {
 			this.AdditionalHeatPower.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.AdditionalHeatPower.ToolTipText = "zusätzliche Fremdwärmeleistung";
 			this.AdditionalHeatPower.Width = 50;
-			// 
-			// colView
-			// 
-			this.colView.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.colView.HeaderText = "Bearbeiten";
-			this.colView.Name = "colView";
-			this.colView.ReadOnly = true;
-			this.colView.Text = "...";
-			this.colView.UseColumnTextForButtonValue = true;
-			this.colView.Width = 64;
 			// 
 			// associatedPanelTypeDataGridViewTextBoxColumn
 			// 

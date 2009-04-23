@@ -27,6 +27,8 @@ namespace Europlan.Application {
 		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 		private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
 
+		private IEditorUserControl currentEditorUserControl = null;
+
 		public MainForm() {
 			InitializeComponent();
 
@@ -311,10 +313,10 @@ namespace Europlan.Application {
 		private void projectTree_AfterSelect(object sender, TreeViewEventArgs e) {
 			TreeNode selectedNode = e.Node;
 			Control oldControl = null;
+			bool tagChanged = true;
 			if (splitContainer.Panel2.Controls.Count > 0) {
 				oldControl = splitContainer.Panel2.Controls[0];
 			}
-			//splitContainer.Panel2.Controls.Clear();
 			if (selectedNode != null && selectedNode.Tag != null) {
 				UserControl control = null;
 				if (selectedNode.Tag is IGuiRepresentation) {
@@ -328,7 +330,10 @@ namespace Europlan.Application {
 						(control as IEditorUserControl).TreeSelectionRequested += new TreeSelectionRequestedHandler(MainForm_TreeSelectionRequested);
 						userControls[guiRepresentation.AssociatedPanelType] = control;
 					}
-					control.Tag = selectedNode.Tag;
+					if (control.Tag != selectedNode.Tag) {
+						tagChanged = true;
+						control.Tag = selectedNode.Tag;
+					}
 				} else if (selectedNode.Tag is Type) {
 					if (userControls.ContainsKey(selectedNode.Tag as Type)) {
 						control = userControls[selectedNode.Tag as Type];
@@ -347,7 +352,8 @@ namespace Europlan.Application {
 						splitContainer.Panel2.Controls.Add(control);
 						control.Dock = DockStyle.Fill;
 					}
-					if (control.Tag != oldControl.Tag) {
+					//if (oldControl == null || control.Tag != oldControl.Tag) {
+					if (tagChanged) {
 						(control as IEditorUserControl).UpdateControl();
 					}
 					guiUpdateInProgress = false;
@@ -476,6 +482,11 @@ namespace Europlan.Application {
 					}
 				} else {
 					activeControl.Text = Clipboard.GetText();
+				}
+			}
+			if (splitContainer.Panel2.Controls.Count > 0) {
+				if (splitContainer.Panel2.Controls[0] is IEditorUserControl) {
+					(splitContainer.Panel2.Controls[0] as IEditorUserControl).UpdateControl();
 				}
 			}
 		}

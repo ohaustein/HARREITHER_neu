@@ -49,5 +49,32 @@ namespace Europlan.Application {
 			}
 		}
 
+		internal void UpdateTree(System.Windows.Forms.TreeNode floorsNode) {
+			int i = 0;
+			bool expand = floorsNode.Nodes.Count == 0;
+			foreach (Floor floor in this) {
+				int index = floorsNode.Nodes.IndexOf(floor.Node);
+				if (index < 0) {
+					floorsNode.Nodes.Insert(i, floor.Node);
+				} else if (index > i) {
+					if (floor.Node.IsSelected) {
+						for (int j = i; j < index; j++) {
+							floorsNode.Nodes.RemoveAt(i);
+						}
+					} else {
+						floorsNode.Nodes.RemoveAt(index);
+						floorsNode.Nodes.Insert(i, floor.Node);
+					}
+				}
+				floor.UpdateTree();
+				i++;
+			}
+			while (floorsNode.Nodes.Count > i) {
+				floorsNode.Nodes.RemoveAt(i);
+			}
+			if (expand) {
+				floorsNode.Expand();
+			}
+		}
 	}
 }

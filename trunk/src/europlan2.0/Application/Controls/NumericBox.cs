@@ -112,7 +112,10 @@ namespace Europlan.Application {
 
 		public override string Text {
 			get { return base.Text; }
-			set { base.Text = value; }
+			set {
+				// TODO implement
+				base.Text = value;
+			}
 		}
 
 		public static int DecimalPlaces(NumericBox.NumericEditType type) {

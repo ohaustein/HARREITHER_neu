@@ -46,6 +46,7 @@ namespace Europlan.Application {
 			name = "";
 			id = "";
 			rooms = new RoomList();
+			this.floorNode.Tag = this;
 		}
 
 		internal void Synchronize(Floor floor) {
@@ -84,13 +85,44 @@ namespace Europlan.Application {
 			}
 		}
 
-		internal void InitializeTree(System.Windows.Forms.TreeNode floors) {
+		/*internal void InitializeTree(System.Windows.Forms.TreeNode floors) {
 			floorNode.Tag = this;
 			floors.Nodes.Add(floorNode);
 			floorNode.Nodes.Clear();
 			foreach (Room room in rooms) {
 				room.InitializeTree(floorNode);
 			}
+		}*/
+
+		internal void UpdateTree() {
+			int i = 0;
+			bool expand = this.Node.Nodes.Count == 0;
+			foreach (Room room in this.Rooms) {
+				int index = this.Node.Nodes.IndexOf(room.Node);
+				if (index < 0) {
+					this.Node.Nodes.Insert(i, room.Node);
+				} else if (index > i) {
+					if (room.Node.IsSelected) {
+						for (int j = i; j < index; j++) {
+							this.Node.Nodes.RemoveAt(i);
+						}
+					} else {
+						this.Node.Nodes.RemoveAt(index);
+						this.Node.Nodes.Insert(i, room.Node);
+					}
+				}
+				i++;
+			}
+			while (this.Node.Nodes.Count > i) {
+				this.Node.Nodes.RemoveAt(i);
+			}
+			if (expand) {
+				this.Node.Expand();
+			}
+		}
+
+		internal TreeNode Node {
+			get { return this.floorNode; }
 		}
 
 		public Type AssociatedPanelType {

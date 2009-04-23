@@ -59,6 +59,7 @@ namespace Europlan.Application {
 			coolPower = 0;
 			normalizedHeatPower = 0;
 			normalizedCoolPower = 0;
+			roomNode.Tag = this;
 		}
 
 
@@ -128,10 +129,10 @@ namespace Europlan.Application {
 			set { normalizedHeatPower = heatPower - value; }
 		}
 		
-		internal void InitializeTree(TreeNode floor) {
+		/*internal void InitializeTree(TreeNode floor) {
 			roomNode.Tag = this;
 			floor.Nodes.Add(roomNode);
-		}
+		}*/
 
 		public Type AssociatedPanelType {
 			get {
@@ -178,6 +179,10 @@ namespace Europlan.Application {
 
 		public void Paste(object o) {
 			throw new Exception("Paste not supported");
+		}
+
+		internal TreeNode Node {
+			get { return this.roomNode; }
 		}
 
 	}
