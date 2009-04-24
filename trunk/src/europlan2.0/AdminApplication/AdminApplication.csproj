@@ -114,9 +114,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Licensing\Licensing.csproj">
+    <ProjectReference Include="..\Common\Common.csproj">
       <Project>{849BE2F8-4D35-43DA-A075-FD8672B8A687}</Project>
-      <Name>Licensing</Name>
+      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

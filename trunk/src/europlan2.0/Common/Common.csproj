@@ -7,8 +7,8 @@
     <ProjectGuid>{849BE2F8-4D35-43DA-A075-FD8672B8A687}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Europlan.Licensing</RootNamespace>
-    <AssemblyName>Licensing</AssemblyName>
+    <RootNamespace>Europlan.Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
