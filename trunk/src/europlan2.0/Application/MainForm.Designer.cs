@@ -40,6 +40,7 @@ namespace Europlan.Application {
 			this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.stockListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +58,8 @@ namespace Europlan.Application {
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
+			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.demandedHeatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.mainMenu.SuspendLayout();
@@ -101,6 +104,7 @@ namespace Europlan.Application {
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
+            this.importToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -168,6 +172,7 @@ namespace Europlan.Application {
 			// 
 			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.licenseToolStripMenuItem,
+            this.stockListToolStripMenuItem,
             this.settingsToolStripMenuItem});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
@@ -177,6 +182,12 @@ namespace Europlan.Application {
 			this.licenseToolStripMenuItem.Name = "licenseToolStripMenuItem";
 			resources.ApplyResources(this.licenseToolStripMenuItem, "licenseToolStripMenuItem");
 			this.licenseToolStripMenuItem.Click += new System.EventHandler(this.licenseToolStripMenuItem_Click);
+			// 
+			// stockListToolStripMenuItem
+			// 
+			this.stockListToolStripMenuItem.Name = "stockListToolStripMenuItem";
+			resources.ApplyResources(this.stockListToolStripMenuItem, "stockListToolStripMenuItem");
+			this.stockListToolStripMenuItem.Click += new System.EventHandler(this.stockListToolStripMenuItem_Click);
 			// 
 			// settingsToolStripMenuItem
 			// 
@@ -207,7 +218,6 @@ namespace Europlan.Application {
 			// 
 			this.updateController.ApplicationId = new System.Guid("1f24573e-033c-448d-8e15-9f396e67e44e");
 			this.updateController.BypassProxyOnLocal = true;
-			this.updateController.PublicKeyToken = resources.GetString("updateController.PublicKeyToken");
 			this.updateController.UpdateLocation = "http://helios.bluesource.at/EuroplanUpdates/";
 			this.updateController.UseHostAssemblyVersion = true;
 			this.updateController.Version = ((System.Version)(resources.GetObject("updateController.Version")));
@@ -296,6 +306,19 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.statusStrip, "statusStrip");
 			this.statusStrip.Name = "statusStrip";
 			// 
+			// importToolStripMenuItem
+			// 
+			this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.demandedHeatToolStripMenuItem});
+			this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+			resources.ApplyResources(this.importToolStripMenuItem, "importToolStripMenuItem");
+			// 
+			// demandedHeatToolStripMenuItem
+			// 
+			this.demandedHeatToolStripMenuItem.Name = "demandedHeatToolStripMenuItem";
+			resources.ApplyResources(this.demandedHeatToolStripMenuItem, "demandedHeatToolStripMenuItem");
+			this.demandedHeatToolStripMenuItem.Click += new System.EventHandler(this.demandedHeatToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -353,6 +376,9 @@ namespace Europlan.Application {
 		private System.Windows.Forms.SplitContainer splitContainer;
 		private System.Windows.Forms.TreeView projectTree;
 		private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem stockListToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem demandedHeatToolStripMenuItem;
 
 	}
 }

@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Threading;
 using log4net;
 using Europlan.Licensing;
+using System.IO;
 
 namespace Europlan.Application {
 	public partial class MainForm : Form {
@@ -351,6 +352,9 @@ namespace Europlan.Application {
 						splitContainer.Panel2.Controls.Clear();
 						splitContainer.Panel2.Controls.Add(control);
 						control.Dock = DockStyle.Fill;
+						if (control is IEditorUserControl) {
+							currentEditorUserControl = control as IEditorUserControl;
+						}
 					}
 					//if (oldControl == null || control.Tag != oldControl.Tag) {
 					if (tagChanged) {
@@ -487,6 +491,39 @@ namespace Europlan.Application {
 			if (splitContainer.Panel2.Controls.Count > 0) {
 				if (splitContainer.Panel2.Controls[0] is IEditorUserControl) {
 					(splitContainer.Panel2.Controls[0] as IEditorUserControl).UpdateControl();
+				}
+			}
+		}
+
+		private void stockListToolStripMenuItem_Click(object sender, EventArgs e) {
+			OpenFileDialog dialog = new OpenFileDialog();
+			dialog.CheckFileExists = true;
+			dialog.CheckPathExists = true;
+			dialog.DefaultExt = "001";
+			dialog.Filter = "Datanorm (*.001)|*.001";
+			dialog.Multiselect = false;
+			DialogResult result = dialog.ShowDialog();
+			if (result == DialogResult.OK) {
+				StreamReader sr = new StreamReader(dialog.FileName, System.Text.Encoding.GetEncoding(850));
+                string line;
+				while ((line = sr.ReadLine()) != null) {
+					if (line.StartsWith("A")) {
+						string[] positions = line.Split(';');
+						
+					}
+				}
+
+			}
+		}
+
+		private void demandedHeatToolStripMenuItem_Click(object sender, EventArgs e) {
+			BuildingDataImportManager.Instance.ImportBuildingData();
+			if (!guiUpdateInProgress) {
+				Project.Instance.InitializeTreeView(this.projectTree);
+				projectUnsaved = true;
+				UpdateTitle();
+				if (currentEditorUserControl != null) {
+					currentEditorUserControl.UpdateControl();
 				}
 			}
 		}
