@@ -39,6 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Articles\Construction.cs" />
+    <Compile Include="Articles\ConstructionLayer.cs" />
+    <Compile Include="Articles\ConstructionManager.cs" />
+    <Compile Include="Articles\ConstructionType.cs" />
+    <Compile Include="Articles\ConstructionScopeEnum.cs" />
+    <Compile Include="Articles\ConstructionTypeManager.cs" />
+    <Compile Include="Articles\MaterialType.cs" />
+    <Compile Include="Articles\Material.cs" />
     <Compile Include="Licensing\AbstractLicense.cs" />
     <Compile Include="Licensing\AbstractLicensedSystem.cs" />
     <Compile Include="Licensing\AbstractLicensedModule.cs" />
