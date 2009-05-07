@@ -39,14 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Articles\Construction.cs" />
-    <Compile Include="Articles\ConstructionLayer.cs" />
-    <Compile Include="Articles\ConstructionManager.cs" />
-    <Compile Include="Articles\ConstructionType.cs" />
-    <Compile Include="Articles\ConstructionScopeEnum.cs" />
-    <Compile Include="Articles\ConstructionTypeManager.cs" />
-    <Compile Include="Articles\MaterialType.cs" />
-    <Compile Include="Articles\Material.cs" />
+    <Compile Include="Configuration\Construction.cs" />
+    <Compile Include="Configuration\ConstructionLayer.cs" />
+    <Compile Include="Configuration\ConstructionManager.cs" />
+    <Compile Include="Configuration\ConstructionType.cs" />
+    <Compile Include="Configuration\ConstructionScopeEnum.cs" />
+    <Compile Include="Configuration\ConstructionTypeManager.cs" />
+    <Compile Include="Configuration\MaterialType.cs" />
+    <Compile Include="Configuration\Material.cs" />
     <Compile Include="Licensing\AbstractLicense.cs" />
     <Compile Include="Licensing\AbstractLicensedSystem.cs" />
     <Compile Include="Licensing\AbstractLicensedModule.cs" />
