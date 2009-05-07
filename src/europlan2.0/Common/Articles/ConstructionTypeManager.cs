@@ -28,7 +28,7 @@ namespace Europlan.Common {
 			this.constructionTypes.Add(type.Id, type);
 			type = new ConstructionType("StdDämm", "Standard Wärmedämmkonstruktion", ConstructionScopeEnum.PanelConstruction, false);
 			this.constructionTypes.Add(type.Id, type);
-			type = new ConstructionType("UserDämm", "Benutzer Wärmedämmkonstruktion", ConstructionScopeEnum.PanelConstruction, false);
+			type = new ConstructionType("UserDämm", "Benutzer Wärmedämmkonstruktion", ConstructionScopeEnum.PanelConstruction, true);
 			this.constructionTypes.Add(type.Id, type);
 		}
 
