@@ -11,6 +11,7 @@ using System.Threading;
 using log4net;
 using Europlan.Licensing;
 using System.IO;
+using Europlan.Common;
 
 namespace Europlan.Application {
 	public partial class MainForm : Form {
@@ -504,14 +505,20 @@ namespace Europlan.Application {
 			dialog.Multiselect = false;
 			DialogResult result = dialog.ShowDialog();
 			if (result == DialogResult.OK) {
-				StreamReader sr = new StreamReader(dialog.FileName, System.Text.Encoding.GetEncoding(850));
-                string line;
-				while ((line = sr.ReadLine()) != null) {
-					if (line.StartsWith("A")) {
-						string[] positions = line.Split(';');
+				//StreamReader sr = new StreamReader(dialog.FileName, System.Text.Encoding.GetEncoding(850));
+				//string line;
+				//DataNormDataSet dataSet = new DataNormDataSet();
+				//while ((line = sr.ReadLine()) != null) {
+				//    if (line.StartsWith("A")) {
+				//        DataNormDataSet.DataNormRow row = dataSet.DataNorm.NewDataNormRow();
+				//        string[] positions = line.Split(';');
+				//        row.ID = positions[2];
+				//        row.Name = positions[4].Trim() + " " + positions[5].Trim();
+				//        row.Price = Int32.Parse(positions[9]) / 100;
+				//        dataSet.DataNorm.Rows.Add(row);
 						
-					}
-				}
+				//    }
+				//}
 
 			}
 		}
