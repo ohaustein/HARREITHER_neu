@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Drawing;
 using System.ComponentModel;
+using Europlan.Common;
 
 namespace Europlan.Application {
 
@@ -38,6 +39,7 @@ namespace Europlan.Application {
 
 		FloorList floors;
 		List<RegulatorCircuit> regulatorCircuits;
+		private Configuration configuration = null;
 
 		protected Project() {
 			log.Debug("default constructor called");
@@ -71,6 +73,8 @@ namespace Europlan.Application {
 
 			floors = new FloorList();
 			regulatorCircuits = new List<RegulatorCircuit>();
+
+			configuration = Configuration.AdminTemplate + Configuration.UserTemplate;
 
 			// root node
 			string localized = resources.GetString("Project", Thread.CurrentThread.CurrentUICulture);
@@ -120,6 +124,11 @@ namespace Europlan.Application {
 		public FloorList Floors {
 			get { return floors; }
 			set { floors = value; }
+		}
+
+		public Configuration Config {
+			get { return configuration; }
+			set { configuration = value; }
 		}
 
 		public List<RegulatorCircuit> RegulatorCircuits {
