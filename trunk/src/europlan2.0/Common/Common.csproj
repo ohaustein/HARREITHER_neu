@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\Construction.cs" />
     <Compile Include="Configuration\ConstructionLayer.cs" />
     <Compile Include="Configuration\ConstructionManager.cs" />
