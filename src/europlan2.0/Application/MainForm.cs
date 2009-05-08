@@ -173,6 +173,9 @@ namespace Europlan.Application {
 				projectUnsaved = false;
 				UpdateTitle();
 				Project.Instance.InitializeTreeView(this.projectTree);
+				if (currentEditorUserControl != null) {
+					currentEditorUserControl.UpdateControl();
+				}
 			}
 		}
 
