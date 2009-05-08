@@ -12,6 +12,7 @@ namespace Europlan.Common {
 		private static Configuration adminTemplate = null;
 		private static Configuration userTemplate = null;
 		private static readonly object padlock = new object();
+		private static string appDataPath = System.Windows.Forms.Application.CommonAppDataPath.Substring(0, System.Windows.Forms.Application.CommonAppDataPath.IndexOf(System.Windows.Forms.Application.ProductVersion));
 
 
 		// IMPORTANT!!!
@@ -65,7 +66,7 @@ namespace Europlan.Common {
 						try {
 							if (adminTemplate == null) {
 								XmlSerializer s = new XmlSerializer(typeof(Configuration));
-								Stream r = new FileStream(Path.Combine(System.Windows.Forms.Application.CommonAppDataPath, "global.conf"), FileMode.Open);
+								Stream r = new FileStream(Path.Combine(appDataPath, "global.conf"), FileMode.Open);
 								adminTemplate = (Configuration)s.Deserialize(r);
 								r.Close();
 							}
@@ -90,7 +91,7 @@ namespace Europlan.Common {
 						try {
 							if (userTemplate == null) {
 								XmlSerializer s = new XmlSerializer(typeof(Configuration));
-								Stream r = new FileStream(Path.Combine(System.Windows.Forms.Application.CommonAppDataPath, "custom.conf"), FileMode.Open);
+								Stream r = new FileStream(Path.Combine(appDataPath, "custom.conf"), FileMode.Open);
 								userTemplate = adminTemplate + (Configuration)s.Deserialize(r);
 								r.Close();
 							}
@@ -115,9 +116,9 @@ namespace Europlan.Common {
 				XmlSerializer s = new XmlSerializer(typeof(Configuration));
 				string filename = "";
 				if (this.type == ConfigurationType.AdminConfiguration) {
-					filename = Path.Combine(System.Windows.Forms.Application.CommonAppDataPath, "global.conf");
+					filename = Path.Combine(appDataPath, "global.conf");
 				} else if (this.type == ConfigurationType.UserConfiguration) {
-					filename = Path.Combine(System.Windows.Forms.Application.CommonAppDataPath, "custom.conf");
+					filename = Path.Combine(appDataPath, "custom.conf");
 				} else {
 					// TODO
 					return;
