@@ -24,7 +24,7 @@ namespace Europlan.Common {
 			this.userDefined = false;
 		}
 
-		public Material(string id, string name, string partNumber, Nullable<int> denomination, string unit, MaterialTypeEnum type, bool userDefined) {
+		public Material(string id, string name, string partNumber, Nullable<int> denomination, string unit, float price, MaterialTypeEnum type, bool userDefined) {
 			this.id = id;
 			this.name = name;
 			this.partNumber = partNumber;
