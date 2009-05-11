@@ -111,6 +111,28 @@ namespace Europlan.Common {
 			set { type = value; }
 		}
 
+		public List<Material> Materials {
+			get {
+				if (type == ConfigurationType.ProjectConfiguration) {
+					return null;
+				} else {
+					return null;
+				}
+			}
+			set { }
+		}
+
+		public List<Construction> Constructions {
+			get {
+				if (type == ConfigurationType.ProjectConfiguration) {
+					return null;
+				} else {
+					return null;
+				}
+			}
+			set { }
+		}
+
 		public void Save() {
 			try {
 				XmlSerializer s = new XmlSerializer(typeof(Configuration));
