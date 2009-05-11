@@ -78,7 +78,6 @@ namespace Europlan.Common {
 				}
 			}
 
-
 			config.type = second.type;
 			 
 
@@ -143,7 +142,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public Dictionary<string, Material> Materials {
 			get {
-				return materials;
+				return this.materials;
 			}
 			set {
 				this.materials = value;
@@ -153,7 +152,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public Dictionary<string, Construction> Constructions {
 			get {
-				return constructions;
+				return this.constructions;
 			}
 			set {
 				this.constructions = value;
