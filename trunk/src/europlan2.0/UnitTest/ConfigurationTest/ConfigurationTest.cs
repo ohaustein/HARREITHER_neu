@@ -21,7 +21,20 @@ namespace Europlan.UnitTest {
 		}
 
 		[Test]
-		public void TestConfiguration() {
+		public void TestMaterialConfiguration() {
+
+			config.Materials.Add("MAT01", new Material("MAT01", "Testmaterial", "MAT01", 100, "Stk", (float)3.14, MaterialTypeEnum.Euroval, true));
+			config.Materials.Add("MAT02", new Material("MAT02", "Testmaterial 2", "MAT02", 10, "m", (float)30.14, MaterialTypeEnum.Euroval, false));
+			config.Materials.Add("MAT03", new Material("MAT03", "Testmaterial 3", "MAT03", 150, "mm²", (float)0.14, MaterialTypeEnum.General, false));
+
+			Assert.AreEqual(0, config.SerializableMaterials.Count);
+
+			config.Type = Configuration.ConfigurationType.AdminConfiguration;
+			Assert.AreEqual(2, config.SerializableMaterials.Count);
+
+			config.Type = Configuration.ConfigurationType.ProjectConfiguration;
+			Assert.AreEqual(1, config.SerializableMaterials.Count);
+
 		}
 
 	}
