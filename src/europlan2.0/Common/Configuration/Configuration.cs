@@ -21,6 +21,8 @@ namespace Europlan.Common {
 		//
 		// IMPORTANT!!!
 		private ConfigurationType type;
+		private Dictionary<string, Material> materials;
+		private Dictionary<string, Construction> constructions;
 
 		public enum ConfigurationType {
 			InitializedConfiguration,
@@ -35,6 +37,8 @@ namespace Europlan.Common {
 
 		private void InitializeConfiguration() {
 			this.type = ConfigurationType.InitializedConfiguration;
+			this.materials = new Dictionary<string, Material>();
+			this.constructions = new Dictionary<string, Construction>();
 		}
 
 		public static Configuration operator+(Configuration config1, Configuration config2) {
@@ -51,7 +55,32 @@ namespace Europlan.Common {
 				second = config1;
 			}
 
+			foreach (Material material in config1.Materials.Values) {
+				if (!config.Materials.ContainsKey(material.Id)) {
+					config.Materials.Add(material.Id, material);
+				}
+			}
+			foreach (Material material in config2.Materials.Values) {
+				if (!config.Materials.ContainsKey(material.Id)) {
+					config.Materials.Add(material.Id, material);
+				}
+			}
+
+			foreach (Construction construction in config1.Constructions.Values) {
+				if (!config.Constructions.ContainsKey(construction.Id)) {
+					config.Constructions.Add(construction.Id, construction);
+				}
+			}
+
+			foreach (Construction construction in config2.Constructions.Values) {
+				if (!config.Constructions.ContainsKey(construction.Id)) {
+					config.Constructions.Add(construction.Id, construction);
+				}
+			}
+
+
 			config.type = second.type;
+			 
 
 			return config;
 		}
@@ -111,26 +140,71 @@ namespace Europlan.Common {
 			set { type = value; }
 		}
 
-		public List<Material> Materials {
+		[XmlIgnore]
+		public Dictionary<string, Material> Materials {
 			get {
-				if (type == ConfigurationType.ProjectConfiguration) {
-					return null;
-				} else {
-					return null;
-				}
+				return materials;
 			}
-			set { }
+			set {
+				this.materials = value;
+			}
 		}
 
-		public List<Construction> Constructions {
+		[XmlIgnore]
+		public Dictionary<string, Construction> Constructions {
 			get {
-				if (type == ConfigurationType.ProjectConfiguration) {
-					return null;
-				} else {
-					return null;
-				}
+				return constructions;
 			}
-			set { }
+			set {
+				this.constructions = value;
+			}
+		}
+		public List<Material> SerializableMaterials {
+			get {
+				List<Material> materialList = new List<Material>();
+				if (type == ConfigurationType.ProjectConfiguration || type == ConfigurationType.UserConfiguration) {
+					foreach (Material material in this.materials.Values) {
+						if (material.UserDefined) {
+							materialList.Add(material);
+						}
+					}
+				} else if (type == ConfigurationType.AdminConfiguration) {
+					foreach (Material material in this.materials.Values) {
+						if (!material.UserDefined) {
+							materialList.Add(material);
+						}
+					}
+				}
+				return materialList;
+			}
+			set {
+				// do nothing
+				List<Material> test = value;
+			}
+		}
+
+		public List<Construction> SerializableConstructions {
+			get {
+				List<Construction> constructionList = new List<Construction>();
+				if (type == ConfigurationType.ProjectConfiguration || type == ConfigurationType.UserConfiguration) {
+					foreach (Construction construction in this.constructions.Values) {
+						if (construction.Type.UserDefined) {
+							constructionList.Add(construction);
+						}
+					}
+				} else if (type == ConfigurationType.AdminConfiguration) {
+					foreach (Construction construction in this.constructions.Values) {
+						if (!construction.Type.UserDefined) {
+							constructionList.Add(construction);
+						}
+					}
+				}
+				return constructionList;
+			}
+			set {
+				// do nothing
+				List<Construction> test = value;
+			}
 		}
 
 		public void Save() {

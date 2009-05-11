@@ -75,6 +75,7 @@ namespace Europlan.Application {
 			regulatorCircuits = new List<RegulatorCircuit>();
 
 			configuration = Configuration.AdminTemplate + Configuration.UserTemplate;
+			configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 
 			// root node
 			string localized = resources.GetString("Project", Thread.CurrentThread.CurrentUICulture);
