@@ -159,6 +159,7 @@ namespace Europlan.Common {
 				this.constructions = value;
 			}
 		}
+
 		public List<Material> SerializableMaterials {
 			get {
 				List<Material> materialList = new List<Material>();
