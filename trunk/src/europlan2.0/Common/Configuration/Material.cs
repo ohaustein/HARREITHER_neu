@@ -35,6 +35,15 @@ namespace Europlan.Common {
 			this.userDefined = userDefined;
 		}
 
+		public override bool Equals(object obj) {
+			if (obj is Material) {
+				if ((obj as Material).Id == this.Id) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public string Id {
 			get { return id; }
 			set { id = value; }
