@@ -31,7 +31,7 @@ namespace Europlan.Common {
 					return true;
 				}
 			}
-			return false;
+			return base.Equals(obj);
 		}
 
 		public string Id {
