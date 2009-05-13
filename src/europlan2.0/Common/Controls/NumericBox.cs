@@ -1,0 +1,206 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Forms;
+using System.Threading;
+
+namespace Europlan.Common {
+	public class NumericBox : TextBox {
+
+		public enum NumericEditType {
+			DEFAULT = 0,
+			REGULATORY_CIRCUIT_TEMP = 1,
+			ROOM_AREA = 2,
+			ROOM_TEMPERATURE = 3,
+			ROOM_HEAT_POWER = 4,
+			ROOM_COOL_POWER = 5,
+			FLOOR_CONSTRUCTION_THICKNESS = 6
+		}
+		                                                                              //  DEF  RCTMP           AREA  TEMP             HPW             CPW,   CONSTR_THICK
+		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] { null,    0,              0,    0,              0,              0,              0 };
+		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] { null,   99, Int32.MaxValue,   99, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue };
+		private static readonly int[] decimalPlaces = new int[]                        {    0,    0,              1,    0,              0,              0,              2 };
+		private static readonly string[] masks = new string[]                          {  "0", "90",     "999990.9", "90",      "9999990",      "9999990",    "999990.99" };
+
+		private NumericBox.NumericEditType editType = NumericBox.NumericEditType.DEFAULT;
+		public event EventHandler ValueChanged;
+
+		private bool internalValueChange = false;
+
+		//private decimal lastValue = 0;
+
+		public NumericBox() {
+			this.InternalValue = 0;
+		}
+
+		public NumericBox.NumericEditType EditType {
+			get { return this.editType; }
+			set { this.editType = value; }
+		}
+
+		protected virtual void OnValueChanged(EventArgs args) {
+			if (this.ValueChanged != null) {
+				this.ValueChanged(this, args);
+			}
+		}
+
+		public decimal InternalValue {
+			get { return this.Value; }
+			set {
+				this.internalValueChange = true;
+				this.Value = value;
+				this.internalValueChange = false;
+			}
+		}
+
+		public decimal Value {
+			get {
+				decimal val;
+				if (this.Text.Length == 0) {
+					val = 0;
+				} else {
+					string text = this.Text;
+					if (text.StartsWith(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator)) {
+						text = "0" + text;
+					} else if (text.StartsWith("-" + Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator)) {
+						text = "-0" + text.Substring(1);
+					}
+					//try {
+					if (!decimal.TryParse(text, out val)) {
+						//val = Convert.ToDecimal(text);
+					//} catch (Exception) {
+						if (text.StartsWith("-")) {
+							val = (this.MinValue.HasValue ? this.MinValue.Value : decimal.MinValue);
+						} else {
+							val = (this.MaxValue.HasValue ? this.MaxValue.Value : decimal.MaxValue);
+						}
+					}
+				}
+				if (this.MaxValue.HasValue && val > this.MaxValue.Value) {
+					val = this.MaxValue.Value;
+				}
+				if (this.MinValue.HasValue && val < this.MinValue.Value) {
+					val = this.MinValue.Value;
+				}
+				return val;
+				//return this.numValueBox.Value;
+			}
+			set {
+				/*NumberFormatInfo info = new NumberFormatInfo();
+				String.Format(*/
+				/*string formatString = masks[(int)this.editType];
+				formatString = formatString.Replace('9', '0');
+				formatString = "{0:" + formatString + "}";
+				string formattedString = String.Format(formatString, value);
+				int i = 0;
+				while (i < formattedString.Length && formattedString[i] == '0') {
+					formattedString = formattedString.Substring(0, i) + ' ' + formattedString.Substring(i + 1);
+					i++;
+				}
+				this.maskedTextBox1.Text = formattedString;*/
+				//this.lastValue = value;
+				decimal correctedVal = value;
+				if (this.MaxValue.HasValue && correctedVal > this.MaxValue.Value) {
+					correctedVal = this.MaxValue.Value;
+				}
+				if (this.MinValue.HasValue && correctedVal < this.MinValue.Value) {
+					correctedVal = this.MinValue.Value;
+				}
+				this.Text = correctedVal.ToString();
+				//this.numValueBox.Value = value;
+			}
+		}
+
+		public override string Text {
+			get { return base.Text; }
+			set {
+				// TODO implement
+				base.Text = value;
+			}
+		}
+
+		public static int DecimalPlaces(NumericBox.NumericEditType type) {
+			return decimalPlaces[(int)type];
+		}
+
+		protected override void OnTextChanged(EventArgs e) {
+			if (!this.internalValueChange) {
+				base.OnTextChanged(e);
+				this.OnValueChanged(e);
+			}
+		}
+
+		private string decimalCharacters = "0123456789";
+
+		/*protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e) {
+			if (e.KeyCode == Keys.Escape) {
+				e.IsInputKey = false;
+			} else {
+				base.OnPreviewKeyDown(e);
+			}
+		}*/
+
+		protected override void OnKeyPress(KeyPressEventArgs e) {
+			base.OnKeyPress(e);
+			string decimalSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+			if (decimalCharacters.IndexOf(e.KeyChar) >= 0) {
+				if (this.Text.StartsWith("-") && this.SelectionStart == 0 && this.SelectionLength == 0) {
+					this.SelectionStart = 1;
+				}
+			} else if (e.KeyChar == '-') {
+				if (this.MinValue.HasValue && this.MinValue.Value >= 0) {
+					e.Handled = true;
+				} else {
+					if (this.Text.StartsWith("-")) {
+						e.Handled = true;
+					} else {
+						int selStart = this.SelectionStart;
+						int selLength = this.SelectionLength;
+						this.Text = "-" + this.Text;
+						this.SelectionStart = selStart + 1;
+						this.SelectionLength = selLength;
+						e.Handled = true;
+					}
+				}
+			} else if (e.KeyChar == '+') {
+				if (this.Text.StartsWith("-")) {
+					int sel = this.SelectionStart;
+					this.Text = this.Text.Substring(1);
+					this.SelectionStart = (sel == 0 ? 0 : sel - 1);
+					e.Handled = true;
+				} else {
+					e.Handled = true;
+				}
+			} else if (e.KeyChar == '.' || e.KeyChar == ',' || decimalSeparator.IndexOf(e.KeyChar) >= 0) {
+				if ((this.Text.Contains(decimalSeparator) && !this.SelectedText.Contains(decimalSeparator)) || decimalPlaces[(int)this.editType] == 0) {
+					e.Handled = true;
+				} else {
+					int selStart = this.SelectionStart;
+					int selEnd = this.SelectionStart + this.SelectionLength;
+					this.Text = this.Text.Substring(0, selStart) + decimalSeparator + this.Text.Substring(selEnd);
+					this.SelectionStart = selStart + decimalSeparator.Length;
+					this.SelectionLength = 0;
+					e.Handled = true;
+				}
+			} else if (e.KeyChar == '\b') {
+			/*} else if (((int)e.KeyChar)  == 27) {
+				this.Value = this.lastValue;*/
+			} else {
+				e.Handled = true;
+			}
+		}
+
+		protected override void OnValidating(System.ComponentModel.CancelEventArgs e) {
+			this.InternalValue = this.Value; // reset value to correct displayed string
+			base.OnValidating(e);
+		}
+
+		public Nullable<decimal> MinValue {
+			get { return minValue[(int)this.editType]; }
+		}
+
+		public Nullable<decimal> MaxValue {
+			get { return maxValue[(int)this.editType]; }
+		}
+	}
+}

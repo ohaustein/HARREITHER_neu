@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
+	[XmlInclude(typeof(FloorConstruction))]
 	public class Construction {
 		private string id;
 		private string name;
@@ -33,9 +35,31 @@ namespace Europlan.Common {
 			set { name = value; }
 		}
 
+		[XmlIgnore()]
 		public ConstructionType Type {
 			get { return type; }
 			set { type = value; }
+		}
+
+		public string TypeId {
+			get { return (type == null ? null : type.Id); }
+			set {
+				if (value == null) {
+					type = null;
+				} else {
+					type = ConstructionTypeManager.Instance.GetConstructionTypeById(value);
+				}
+			}
+		}
+
+		public ConstructionScopeEnum Scope {
+			get {
+				if (type == null) {
+					return ConstructionScopeEnum.UnknownConstruction;
+				} else {
+					return this.type.Scope;
+				}
+			}
 		}
 
 		public List<ConstructionLayer> Layers {
