@@ -134,6 +134,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public ConfigurationType Type {
 			get { return type; }
 			set { type = value; }
@@ -174,12 +175,10 @@ namespace Europlan.Common {
 							materialList.Add(material);
 						}
 					}
+				} else {
+					materialList = materials;
 				}
 				return materialList;
-			}
-			set {
-				// do nothing
-				List<Material> test = value;
 			}
 		}
 
@@ -198,12 +197,10 @@ namespace Europlan.Common {
 							constructionList.Add(construction);
 						}
 					}
+				} else {
+					constructionList = constructions;
 				}
 				return constructionList;
-			}
-			set {
-				// do nothing
-				List<Construction> test = value;
 			}
 		}
 
