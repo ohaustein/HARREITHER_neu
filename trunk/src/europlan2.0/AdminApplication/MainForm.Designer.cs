@@ -23,75 +23,107 @@ namespace Europlan.AdminApplication {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.tabControl1 = new System.Windows.Forms.TabControl();
-			this.tabPage2 = new System.Windows.Forms.TabPage();
-			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.components = new System.ComponentModel.Container();
+			this.mainTabControl = new System.Windows.Forms.TabControl();
+			this.tabPageLicenses = new System.Windows.Forms.TabPage();
+			this.splitContainerLicenses = new System.Windows.Forms.SplitContainer();
 			this.btnNewLicense = new System.Windows.Forms.Button();
 			this.lstLicenses = new System.Windows.Forms.ListView();
 			this.colLicensedTo = new System.Windows.Forms.ColumnHeader();
 			this.colValidUntil = new System.Windows.Forms.ColumnHeader();
 			this.btnSaveLicense = new System.Windows.Forms.Button();
+			this.licenseEditor1 = new Europlan.AdminApplication.LicenseEditor();
+			this.tabPageArticles = new System.Windows.Forms.TabPage();
+			this.articlesTabControl = new System.Windows.Forms.TabControl();
+			this.tabPageFloorHeating = new System.Windows.Forms.TabPage();
+			this.tabPagePanelHeating = new System.Windows.Forms.TabPage();
+			this.tabPageDistributor = new System.Windows.Forms.TabPage();
+			this.tabPageInsulation = new System.Windows.Forms.TabPage();
+			this.tabPageGeneral = new System.Windows.Forms.TabPage();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.txtCurrency = new System.Windows.Forms.TextBox();
+			this.lblCurrency = new System.Windows.Forms.Label();
+			this.tabPageConstructions = new System.Windows.Forms.TabPage();
+			this.panBottom = new System.Windows.Forms.Panel();
+			this.btnView = new System.Windows.Forms.Button();
+			this.btnNew = new System.Windows.Forms.Button();
+			this.constructionEditorPage = new Europlan.AdminApplication.ConstructionEditorPage();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.licenseEditor1 = new Europlan.AdminApplication.LicenseEditor();
-			this.tabControl1.SuspendLayout();
-			this.tabPage2.SuspendLayout();
-			this.splitContainer1.Panel1.SuspendLayout();
-			this.splitContainer1.Panel2.SuspendLayout();
-			this.splitContainer1.SuspendLayout();
+			this.cmsNew = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.tsmiNewFloorConstruction = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiNewInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiNewWallConstruction = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmsView = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.tsmiFloorConstruction = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
+			this.mainTabControl.SuspendLayout();
+			this.tabPageLicenses.SuspendLayout();
+			this.splitContainerLicenses.Panel1.SuspendLayout();
+			this.splitContainerLicenses.Panel2.SuspendLayout();
+			this.splitContainerLicenses.SuspendLayout();
+			this.tabPageArticles.SuspendLayout();
+			this.articlesTabControl.SuspendLayout();
+			this.panel1.SuspendLayout();
+			this.tabPageConstructions.SuspendLayout();
+			this.panBottom.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
+			this.cmsNew.SuspendLayout();
+			this.cmsView.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// tabControl1
+			// mainTabControl
 			// 
-			this.tabControl1.Controls.Add(this.tabPage2);
-			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tabControl1.Location = new System.Drawing.Point(0, 24);
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(984, 640);
-			this.tabControl1.TabIndex = 0;
+			this.mainTabControl.Controls.Add(this.tabPageLicenses);
+			this.mainTabControl.Controls.Add(this.tabPageArticles);
+			this.mainTabControl.Controls.Add(this.tabPageConstructions);
+			this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.mainTabControl.Location = new System.Drawing.Point(0, 24);
+			this.mainTabControl.Name = "mainTabControl";
+			this.mainTabControl.SelectedIndex = 0;
+			this.mainTabControl.Size = new System.Drawing.Size(787, 489);
+			this.mainTabControl.TabIndex = 0;
 			// 
-			// tabPage2
+			// tabPageLicenses
 			// 
-			this.tabPage2.Controls.Add(this.splitContainer1);
-			this.tabPage2.Location = new System.Drawing.Point(4, 22);
-			this.tabPage2.Name = "tabPage2";
-			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(976, 614);
-			this.tabPage2.TabIndex = 1;
-			this.tabPage2.Text = "Lizenzen";
-			this.tabPage2.UseVisualStyleBackColor = true;
+			this.tabPageLicenses.Controls.Add(this.splitContainerLicenses);
+			this.tabPageLicenses.Location = new System.Drawing.Point(4, 22);
+			this.tabPageLicenses.Name = "tabPageLicenses";
+			this.tabPageLicenses.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageLicenses.Size = new System.Drawing.Size(779, 463);
+			this.tabPageLicenses.TabIndex = 1;
+			this.tabPageLicenses.Text = "Lizenzen";
+			this.tabPageLicenses.UseVisualStyleBackColor = true;
 			// 
-			// splitContainer1
+			// splitContainerLicenses
 			// 
-			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer1.Location = new System.Drawing.Point(3, 3);
-			this.splitContainer1.Name = "splitContainer1";
+			this.splitContainerLicenses.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainerLicenses.Location = new System.Drawing.Point(3, 3);
+			this.splitContainerLicenses.Name = "splitContainerLicenses";
 			// 
-			// splitContainer1.Panel1
+			// splitContainerLicenses.Panel1
 			// 
-			this.splitContainer1.Panel1.Controls.Add(this.btnNewLicense);
-			this.splitContainer1.Panel1.Controls.Add(this.lstLicenses);
+			this.splitContainerLicenses.Panel1.Controls.Add(this.btnNewLicense);
+			this.splitContainerLicenses.Panel1.Controls.Add(this.lstLicenses);
 			// 
-			// splitContainer1.Panel2
+			// splitContainerLicenses.Panel2
 			// 
-			this.splitContainer1.Panel2.AutoScroll = true;
-			this.splitContainer1.Panel2.AutoScrollMinSize = new System.Drawing.Size(400, 0);
-			this.splitContainer1.Panel2.Controls.Add(this.btnSaveLicense);
-			this.splitContainer1.Panel2.Controls.Add(this.licenseEditor1);
-			this.splitContainer1.Size = new System.Drawing.Size(970, 608);
-			this.splitContainer1.SplitterDistance = 260;
-			this.splitContainer1.TabIndex = 0;
+			this.splitContainerLicenses.Panel2.AutoScroll = true;
+			this.splitContainerLicenses.Panel2.AutoScrollMinSize = new System.Drawing.Size(400, 0);
+			this.splitContainerLicenses.Panel2.Controls.Add(this.btnSaveLicense);
+			this.splitContainerLicenses.Panel2.Controls.Add(this.licenseEditor1);
+			this.splitContainerLicenses.Size = new System.Drawing.Size(773, 457);
+			this.splitContainerLicenses.SplitterDistance = 207;
+			this.splitContainerLicenses.TabIndex = 0;
 			// 
 			// btnNewLicense
 			// 
 			this.btnNewLicense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.btnNewLicense.Location = new System.Drawing.Point(3, 582);
+			this.btnNewLicense.Location = new System.Drawing.Point(3, 431);
 			this.btnNewLicense.Name = "btnNewLicense";
-			this.btnNewLicense.Size = new System.Drawing.Size(254, 23);
+			this.btnNewLicense.Size = new System.Drawing.Size(201, 23);
 			this.btnNewLicense.TabIndex = 1;
 			this.btnNewLicense.Text = "Neue Lizenz";
 			this.btnNewLicense.UseVisualStyleBackColor = true;
@@ -113,7 +145,7 @@ namespace Europlan.AdminApplication {
 			this.lstLicenses.MultiSelect = false;
 			this.lstLicenses.Name = "lstLicenses";
 			this.lstLicenses.ShowGroups = false;
-			this.lstLicenses.Size = new System.Drawing.Size(254, 573);
+			this.lstLicenses.Size = new System.Drawing.Size(201, 422);
 			this.lstLicenses.TabIndex = 0;
 			this.lstLicenses.UseCompatibleStateImageBehavior = false;
 			this.lstLicenses.View = System.Windows.Forms.View.Details;
@@ -132,7 +164,7 @@ namespace Europlan.AdminApplication {
 			// btnSaveLicense
 			// 
 			this.btnSaveLicense.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnSaveLicense.Location = new System.Drawing.Point(572, 582);
+			this.btnSaveLicense.Location = new System.Drawing.Point(428, 431);
 			this.btnSaveLicense.Name = "btnSaveLicense";
 			this.btnSaveLicense.Size = new System.Drawing.Size(131, 23);
 			this.btnSaveLicense.TabIndex = 1;
@@ -140,13 +172,182 @@ namespace Europlan.AdminApplication {
 			this.btnSaveLicense.UseVisualStyleBackColor = true;
 			this.btnSaveLicense.Click += new System.EventHandler(this.btnSaveLicense_Click);
 			// 
+			// licenseEditor1
+			// 
+			this.licenseEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.licenseEditor1.AutoScroll = true;
+			this.licenseEditor1.AutoScrollMinSize = new System.Drawing.Size(400, 0);
+			this.licenseEditor1.Enabled = false;
+			this.licenseEditor1.Location = new System.Drawing.Point(3, 3);
+			this.licenseEditor1.Name = "licenseEditor1";
+			this.licenseEditor1.Size = new System.Drawing.Size(556, 422);
+			this.licenseEditor1.TabIndex = 0;
+			// 
+			// tabPageArticles
+			// 
+			this.tabPageArticles.Controls.Add(this.articlesTabControl);
+			this.tabPageArticles.Controls.Add(this.panel1);
+			this.tabPageArticles.Location = new System.Drawing.Point(4, 22);
+			this.tabPageArticles.Name = "tabPageArticles";
+			this.tabPageArticles.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageArticles.Size = new System.Drawing.Size(779, 463);
+			this.tabPageArticles.TabIndex = 2;
+			this.tabPageArticles.Text = "Artikelstamm";
+			this.tabPageArticles.UseVisualStyleBackColor = true;
+			// 
+			// articlesTabControl
+			// 
+			this.articlesTabControl.Controls.Add(this.tabPageFloorHeating);
+			this.articlesTabControl.Controls.Add(this.tabPagePanelHeating);
+			this.articlesTabControl.Controls.Add(this.tabPageDistributor);
+			this.articlesTabControl.Controls.Add(this.tabPageInsulation);
+			this.articlesTabControl.Controls.Add(this.tabPageGeneral);
+			this.articlesTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.articlesTabControl.Location = new System.Drawing.Point(3, 30);
+			this.articlesTabControl.Multiline = true;
+			this.articlesTabControl.Name = "articlesTabControl";
+			this.articlesTabControl.SelectedIndex = 0;
+			this.articlesTabControl.Size = new System.Drawing.Size(773, 430);
+			this.articlesTabControl.TabIndex = 1;
+			// 
+			// tabPageFloorHeating
+			// 
+			this.tabPageFloorHeating.Location = new System.Drawing.Point(4, 22);
+			this.tabPageFloorHeating.Name = "tabPageFloorHeating";
+			this.tabPageFloorHeating.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageFloorHeating.Size = new System.Drawing.Size(765, 404);
+			this.tabPageFloorHeating.TabIndex = 0;
+			this.tabPageFloorHeating.Text = "Fuﬂbodenheizung";
+			this.tabPageFloorHeating.UseVisualStyleBackColor = true;
+			// 
+			// tabPagePanelHeating
+			// 
+			this.tabPagePanelHeating.Location = new System.Drawing.Point(4, 22);
+			this.tabPagePanelHeating.Name = "tabPagePanelHeating";
+			this.tabPagePanelHeating.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPagePanelHeating.Size = new System.Drawing.Size(765, 404);
+			this.tabPagePanelHeating.TabIndex = 1;
+			this.tabPagePanelHeating.Text = "Wandheizung";
+			this.tabPagePanelHeating.UseVisualStyleBackColor = true;
+			// 
+			// tabPageDistributor
+			// 
+			this.tabPageDistributor.Location = new System.Drawing.Point(4, 22);
+			this.tabPageDistributor.Name = "tabPageDistributor";
+			this.tabPageDistributor.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageDistributor.Size = new System.Drawing.Size(765, 404);
+			this.tabPageDistributor.TabIndex = 2;
+			this.tabPageDistributor.Text = "Verteiler";
+			this.tabPageDistributor.UseVisualStyleBackColor = true;
+			// 
+			// tabPageInsulation
+			// 
+			this.tabPageInsulation.Location = new System.Drawing.Point(4, 22);
+			this.tabPageInsulation.Name = "tabPageInsulation";
+			this.tabPageInsulation.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageInsulation.Size = new System.Drawing.Size(765, 404);
+			this.tabPageInsulation.TabIndex = 3;
+			this.tabPageInsulation.Text = "D‰mmung";
+			this.tabPageInsulation.UseVisualStyleBackColor = true;
+			// 
+			// tabPageGeneral
+			// 
+			this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
+			this.tabPageGeneral.Name = "tabPageGeneral";
+			this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageGeneral.Size = new System.Drawing.Size(765, 404);
+			this.tabPageGeneral.TabIndex = 4;
+			this.tabPageGeneral.Text = "Allgemein";
+			this.tabPageGeneral.UseVisualStyleBackColor = true;
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.txtCurrency);
+			this.panel1.Controls.Add(this.lblCurrency);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel1.Location = new System.Drawing.Point(3, 3);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(773, 27);
+			this.panel1.TabIndex = 0;
+			// 
+			// txtCurrency
+			// 
+			this.txtCurrency.Location = new System.Drawing.Point(62, 3);
+			this.txtCurrency.Name = "txtCurrency";
+			this.txtCurrency.Size = new System.Drawing.Size(102, 20);
+			this.txtCurrency.TabIndex = 1;
+			// 
+			// lblCurrency
+			// 
+			this.lblCurrency.AutoSize = true;
+			this.lblCurrency.Location = new System.Drawing.Point(5, 6);
+			this.lblCurrency.Name = "lblCurrency";
+			this.lblCurrency.Size = new System.Drawing.Size(51, 13);
+			this.lblCurrency.TabIndex = 0;
+			this.lblCurrency.Text = "W‰hrung";
+			// 
+			// tabPageConstructions
+			// 
+			this.tabPageConstructions.Controls.Add(this.panBottom);
+			this.tabPageConstructions.Controls.Add(this.constructionEditorPage);
+			this.tabPageConstructions.Location = new System.Drawing.Point(4, 22);
+			this.tabPageConstructions.Name = "tabPageConstructions";
+			this.tabPageConstructions.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageConstructions.Size = new System.Drawing.Size(779, 463);
+			this.tabPageConstructions.TabIndex = 3;
+			this.tabPageConstructions.Text = "Konstruktionen";
+			this.tabPageConstructions.UseVisualStyleBackColor = true;
+			// 
+			// panBottom
+			// 
+			this.panBottom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.panBottom.Controls.Add(this.btnView);
+			this.panBottom.Controls.Add(this.btnNew);
+			this.panBottom.Location = new System.Drawing.Point(3, 434);
+			this.panBottom.Name = "panBottom";
+			this.panBottom.Size = new System.Drawing.Size(773, 29);
+			this.panBottom.TabIndex = 1;
+			// 
+			// btnView
+			// 
+			this.btnView.Location = new System.Drawing.Point(125, 3);
+			this.btnView.Name = "btnView";
+			this.btnView.Size = new System.Drawing.Size(231, 23);
+			this.btnView.TabIndex = 1;
+			this.btnView.Text = "Angezeigte Konstruktionen (Alle)";
+			this.btnView.UseVisualStyleBackColor = true;
+			this.btnView.Click += new System.EventHandler(this.btnView_Click);
+			// 
+			// btnNew
+			// 
+			this.btnNew.Location = new System.Drawing.Point(5, 3);
+			this.btnNew.Name = "btnNew";
+			this.btnNew.Size = new System.Drawing.Size(114, 23);
+			this.btnNew.TabIndex = 0;
+			this.btnNew.Text = "Neue Konstruktion";
+			this.btnNew.UseVisualStyleBackColor = true;
+			this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+			// 
+			// constructionEditorPage
+			// 
+			this.constructionEditorPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.constructionEditorPage.Location = new System.Drawing.Point(3, 3);
+			this.constructionEditorPage.Name = "constructionEditorPage";
+			this.constructionEditorPage.Size = new System.Drawing.Size(773, 425);
+			this.constructionEditorPage.TabIndex = 0;
+			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateiToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(984, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(787, 24);
 			this.menuStrip1.TabIndex = 1;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -166,37 +367,90 @@ namespace Europlan.AdminApplication {
 			this.beendenToolStripMenuItem.Text = "&Beenden";
 			this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
 			// 
-			// licenseEditor1
+			// cmsNew
 			// 
-			this.licenseEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.licenseEditor1.AutoScroll = true;
-			this.licenseEditor1.AutoScrollMinSize = new System.Drawing.Size(400, 0);
-			this.licenseEditor1.Enabled = false;
-			this.licenseEditor1.Location = new System.Drawing.Point(3, 3);
-			this.licenseEditor1.Name = "licenseEditor1";
-			this.licenseEditor1.Size = new System.Drawing.Size(700, 573);
-			this.licenseEditor1.TabIndex = 0;
+			this.cmsNew.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewFloorConstruction,
+            this.tsmiNewInsulationConstruction,
+            this.tsmiNewWallConstruction});
+			this.cmsNew.Name = "cmsNew";
+			this.cmsNew.Size = new System.Drawing.Size(215, 92);
+			// 
+			// tsmiNewFloorConstruction
+			// 
+			this.tsmiNewFloorConstruction.Name = "tsmiNewFloorConstruction";
+			this.tsmiNewFloorConstruction.Size = new System.Drawing.Size(214, 22);
+			this.tsmiNewFloorConstruction.Text = "Fuﬂbodenkonstruktion";
+			this.tsmiNewFloorConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+			// 
+			// tsmiNewInsulationConstruction
+			// 
+			this.tsmiNewInsulationConstruction.Name = "tsmiNewInsulationConstruction";
+			this.tsmiNewInsulationConstruction.Size = new System.Drawing.Size(214, 22);
+			this.tsmiNewInsulationConstruction.Text = "W‰rmed‰mmkonstruktion";
+			this.tsmiNewInsulationConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+			// 
+			// tsmiNewWallConstruction
+			// 
+			this.tsmiNewWallConstruction.Name = "tsmiNewWallConstruction";
+			this.tsmiNewWallConstruction.Size = new System.Drawing.Size(214, 22);
+			this.tsmiNewWallConstruction.Text = "Wandkonstruktion";
+			this.tsmiNewWallConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+			// 
+			// cmsView
+			// 
+			this.cmsView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiFloorConstruction,
+            this.tsmiInsulationConstruction});
+			this.cmsView.Name = "cmsView";
+			this.cmsView.Size = new System.Drawing.Size(228, 48);
+			// 
+			// tsmiFloorConstruction
+			// 
+			this.tsmiFloorConstruction.Checked = true;
+			this.tsmiFloorConstruction.CheckOnClick = true;
+			this.tsmiFloorConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.tsmiFloorConstruction.Name = "tsmiFloorConstruction";
+			this.tsmiFloorConstruction.Size = new System.Drawing.Size(227, 22);
+			this.tsmiFloorConstruction.Text = "Fuﬂbodenkonstruktionen";
+			this.tsmiFloorConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
+			// 
+			// tsmiInsulationConstruction
+			// 
+			this.tsmiInsulationConstruction.Checked = true;
+			this.tsmiInsulationConstruction.CheckOnClick = true;
+			this.tsmiInsulationConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.tsmiInsulationConstruction.Name = "tsmiInsulationConstruction";
+			this.tsmiInsulationConstruction.Size = new System.Drawing.Size(227, 22);
+			this.tsmiInsulationConstruction.Text = "W‰rmed‰mmkonstruktionen";
+			this.tsmiInsulationConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(984, 664);
-			this.Controls.Add(this.tabControl1);
+			this.ClientSize = new System.Drawing.Size(787, 513);
+			this.Controls.Add(this.mainTabControl);
 			this.Controls.Add(this.menuStrip1);
 			this.Name = "MainForm";
 			this.Text = "Europlan Admin";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-			this.tabControl1.ResumeLayout(false);
-			this.tabPage2.ResumeLayout(false);
-			this.splitContainer1.Panel1.ResumeLayout(false);
-			this.splitContainer1.Panel2.ResumeLayout(false);
-			this.splitContainer1.ResumeLayout(false);
+			this.mainTabControl.ResumeLayout(false);
+			this.tabPageLicenses.ResumeLayout(false);
+			this.splitContainerLicenses.Panel1.ResumeLayout(false);
+			this.splitContainerLicenses.Panel2.ResumeLayout(false);
+			this.splitContainerLicenses.ResumeLayout(false);
+			this.tabPageArticles.ResumeLayout(false);
+			this.articlesTabControl.ResumeLayout(false);
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
+			this.tabPageConstructions.ResumeLayout(false);
+			this.panBottom.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			this.cmsNew.ResumeLayout(false);
+			this.cmsView.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -204,9 +458,9 @@ namespace Europlan.AdminApplication {
 
 		#endregion
 
-		private System.Windows.Forms.TabControl tabControl1;
-		private System.Windows.Forms.TabPage tabPage2;
-		private System.Windows.Forms.SplitContainer splitContainer1;
+		private System.Windows.Forms.TabControl mainTabControl;
+		private System.Windows.Forms.TabPage tabPageLicenses;
+		private System.Windows.Forms.SplitContainer splitContainerLicenses;
 		private System.Windows.Forms.ListView lstLicenses;
 		private System.Windows.Forms.Button btnNewLicense;
 		private LicenseEditor licenseEditor1;
@@ -216,6 +470,28 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
+		private System.Windows.Forms.TabPage tabPageArticles;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.TabControl articlesTabControl;
+		private System.Windows.Forms.TabPage tabPageFloorHeating;
+		private System.Windows.Forms.TabPage tabPagePanelHeating;
+		private System.Windows.Forms.TextBox txtCurrency;
+		private System.Windows.Forms.Label lblCurrency;
+		private System.Windows.Forms.TabPage tabPageDistributor;
+		private System.Windows.Forms.TabPage tabPageInsulation;
+		private System.Windows.Forms.TabPage tabPageGeneral;
+		private System.Windows.Forms.TabPage tabPageConstructions;
+		private Europlan.AdminApplication.ConstructionEditorPage constructionEditorPage;
+		private System.Windows.Forms.Panel panBottom;
+		private System.Windows.Forms.Button btnNew;
+		private System.Windows.Forms.ContextMenuStrip cmsNew;
+		private System.Windows.Forms.ToolStripMenuItem tsmiNewFloorConstruction;
+		private System.Windows.Forms.ToolStripMenuItem tsmiNewInsulationConstruction;
+		private System.Windows.Forms.ToolStripMenuItem tsmiNewWallConstruction;
+		private System.Windows.Forms.Button btnView;
+		private System.Windows.Forms.ContextMenuStrip cmsView;
+		private System.Windows.Forms.ToolStripMenuItem tsmiFloorConstruction;
+		private System.Windows.Forms.ToolStripMenuItem tsmiInsulationConstruction;
 	}
 }
 

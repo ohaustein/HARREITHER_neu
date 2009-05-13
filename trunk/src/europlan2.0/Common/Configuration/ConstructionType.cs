@@ -42,5 +42,8 @@ namespace Europlan.Common {
 			set { userDefined = value; }
 		}
 
+		public override string ToString() {
+			return this.name;
+		}
 	}
 }

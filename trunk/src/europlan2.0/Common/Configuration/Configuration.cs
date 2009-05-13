@@ -21,8 +21,8 @@ namespace Europlan.Common {
 		//
 		// IMPORTANT!!!
 		private ConfigurationType type;
-		private Dictionary<string, Material> materials;
-		private Dictionary<string, Construction> constructions;
+		private List<Material> materials;
+		private List<Construction> constructions;
 
 		public enum ConfigurationType {
 			InitializedConfiguration,
@@ -37,8 +37,8 @@ namespace Europlan.Common {
 
 		private void InitializeConfiguration() {
 			this.type = ConfigurationType.InitializedConfiguration;
-			this.materials = new Dictionary<string, Material>();
-			this.constructions = new Dictionary<string, Construction>();
+			this.materials = new List<Material>();
+			this.constructions = new List<Construction>();
 		}
 
 		public static Configuration operator+(Configuration config1, Configuration config2) {
@@ -55,26 +55,26 @@ namespace Europlan.Common {
 				second = config1;
 			}
 
-			foreach (Material material in config1.Materials.Values) {
-				if (!config.Materials.ContainsKey(material.Id)) {
-					config.Materials.Add(material.Id, material);
+			foreach (Material material in config1.Materials) {
+				if (!config.Materials.Contains(material)) {
+					config.Materials.Add(material);
 				}
 			}
-			foreach (Material material in config2.Materials.Values) {
-				if (!config.Materials.ContainsKey(material.Id)) {
-					config.Materials.Add(material.Id, material);
-				}
-			}
-
-			foreach (Construction construction in config1.Constructions.Values) {
-				if (!config.Constructions.ContainsKey(construction.Id)) {
-					config.Constructions.Add(construction.Id, construction);
+			foreach (Material material in config2.Materials) {
+				if (!config.Materials.Contains(material)) {
+					config.Materials.Add(material);
 				}
 			}
 
-			foreach (Construction construction in config2.Constructions.Values) {
-				if (!config.Constructions.ContainsKey(construction.Id)) {
-					config.Constructions.Add(construction.Id, construction);
+			foreach (Construction construction in config1.Constructions) {
+				if (!config.Constructions.Contains(construction)) {
+					config.Constructions.Add(construction);
+				}
+			}
+
+			foreach (Construction construction in config2.Constructions) {
+				if (!config.Constructions.Contains(construction)) {
+					config.Constructions.Add(construction);
 				}
 			}
 
@@ -140,7 +140,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public Dictionary<string, Material> Materials {
+		public List<Material> Materials {
 			get {
 				return this.materials;
 			}
@@ -150,7 +150,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public Dictionary<string, Construction> Constructions {
+		public List<Construction> Constructions {
 			get {
 				return this.constructions;
 			}
@@ -163,13 +163,13 @@ namespace Europlan.Common {
 			get {
 				List<Material> materialList = new List<Material>();
 				if (type == ConfigurationType.ProjectConfiguration || type == ConfigurationType.UserConfiguration) {
-					foreach (Material material in this.materials.Values) {
+					foreach (Material material in this.materials) {
 						if (material.UserDefined) {
 							materialList.Add(material);
 						}
 					}
 				} else if (type == ConfigurationType.AdminConfiguration) {
-					foreach (Material material in this.materials.Values) {
+					foreach (Material material in this.materials) {
 						if (!material.UserDefined) {
 							materialList.Add(material);
 						}
@@ -187,13 +187,13 @@ namespace Europlan.Common {
 			get {
 				List<Construction> constructionList = new List<Construction>();
 				if (type == ConfigurationType.ProjectConfiguration || type == ConfigurationType.UserConfiguration) {
-					foreach (Construction construction in this.constructions.Values) {
+					foreach (Construction construction in this.constructions) {
 						if (construction.Type.UserDefined) {
 							constructionList.Add(construction);
 						}
 					}
 				} else if (type == ConfigurationType.AdminConfiguration) {
-					foreach (Construction construction in this.constructions.Values) {
+					foreach (Construction construction in this.constructions) {
 						if (!construction.Type.UserDefined) {
 							constructionList.Add(construction);
 						}
@@ -222,7 +222,7 @@ namespace Europlan.Common {
 				Stream w = new FileStream(filename, FileMode.Create);
 				s.Serialize(w, this);
 				w.Close();
-			} catch {
+			} catch (Exception e) {
 				// TODO
 			}
 		}

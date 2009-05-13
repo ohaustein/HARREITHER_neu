@@ -36,6 +36,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContructionEditor\ConstructionEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContructionEditor\ConstructionEditor.Designer.cs">
+      <DependentUpon>ConstructionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContructionEditor\ConstructionEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContructionEditor\ConstructionEditorForm.Designer.cs">
+      <DependentUpon>ConstructionEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContructionEditor\ConstructionEditorPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContructionEditor\ConstructionEditorPage.Designer.cs">
+      <DependentUpon>ConstructionEditorPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="LicenseEditor\DateColumn.cs" />
     <Compile Include="LicenseEditor\DateEditingControl.cs">
       <SubType>Component</SubType>
@@ -76,6 +94,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ContructionEditor\ConstructionEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConstructionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContructionEditor\ConstructionEditorForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConstructionEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContructionEditor\ConstructionEditorPage.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConstructionEditorPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LicenseEditor\HardwareIdBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HardwareIdBox.cs</DependentUpon>
@@ -102,6 +132,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\Europlan.Common.Construction.datasource" />
+    <None Include="Properties\DataSources\Europlan.Common.ConstructionListWrapper.datasource" />
     <None Include="Properties\DataSources\Europlan.Licensing.LicenseTemplate.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

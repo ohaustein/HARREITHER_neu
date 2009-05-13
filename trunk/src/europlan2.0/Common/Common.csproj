@@ -34,6 +34,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -42,12 +43,22 @@
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\Construction.cs" />
     <Compile Include="Configuration\ConstructionLayer.cs" />
-    <Compile Include="Configuration\ConstructionManager.cs" />
+    <Compile Include="Configuration\ConstructionListWrapper.cs" />
     <Compile Include="Configuration\ConstructionType.cs" />
     <Compile Include="Configuration\ConstructionScopeEnum.cs" />
     <Compile Include="Configuration\ConstructionTypeManager.cs" />
+    <Compile Include="Configuration\InsulationConstruction.cs" />
+    <Compile Include="Configuration\FloorConstruction.cs" />
     <Compile Include="Configuration\MaterialType.cs" />
     <Compile Include="Configuration\Material.cs" />
+    <Compile Include="Controls\NumericBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NumericCell.cs" />
+    <Compile Include="Controls\NumericColumn.cs" />
+    <Compile Include="Controls\NumericEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Licensing\AbstractLicense.cs" />
     <Compile Include="Licensing\AbstractLicensedSystem.cs" />
     <Compile Include="Licensing\AbstractLicensedModule.cs" />
