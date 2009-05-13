@@ -37,6 +37,11 @@ namespace Europlan.UnitTest {
 			Assert.AreEqual(1, config.SerializableMaterials.Count);
 			config.Save();
 
+
+			Material material = new Material("MAT01", "Testmaterial", "MAT01", 100, "Stk", (float)3.14, MaterialTypeEnum.Euroval, true);
+			Assert.IsTrue(config.Materials.Contains(material));
+			material = new Material("MAT011", "Testmaterial", "MAT01", 100, "Stk", (float)3.14, MaterialTypeEnum.Euroval, true);
+			Assert.IsFalse(config.Materials.Contains(material));
 		}
 
 	}
