@@ -25,6 +25,15 @@ namespace Europlan.Common {
 			this.layers = new List<ConstructionLayer>();
 		}
 
+		public override bool Equals(object obj) {
+			if (obj is Construction) {
+				if ((obj as Construction).Id == this.Id) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public string Id {
 			get { return id; }
 			set { id = value; }
