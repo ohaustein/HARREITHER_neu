@@ -44,5 +44,33 @@ namespace Europlan.UnitTest {
 			Assert.IsFalse(config.Materials.Contains(material));
 		}
 
+		[Test]
+		public void TestConstructaionConfiguration() {
+
+			ConstructionType userConType = new ConstructionType("TYPE01", "Testtype", ConstructionScopeEnum.FloorConstruction, true);
+			ConstructionType adminConType = new ConstructionType("TYPE02", "Testtype 2", ConstructionScopeEnum.FloorConstruction, false);
+			
+			Construction construction = new Construction("CON01", "Testconstruction", userConType);
+			config.Constructions.Add(construction);
+			construction = new Construction("CON02", "Testconstruction 2", adminConType);
+			config.Constructions.Add(construction);
+
+			Assert.AreEqual(2, config.SerializableConstructions.Count);
+
+			config.Type = Configuration.ConfigurationType.AdminConfiguration;
+			Assert.AreEqual(1, config.SerializableConstructions.Count);
+			config.Save();
+
+			config.Type = Configuration.ConfigurationType.UserConfiguration;
+			Assert.AreEqual(1, config.SerializableConstructions.Count);
+			config.Save();
+
+
+			construction = new Construction("CON01", "Testconstruction", userConType);
+			Assert.IsTrue(config.Constructions.Contains(construction));
+			construction = new Construction("CON011", "Testconstruction", userConType);
+			Assert.IsFalse(config.Constructions.Contains(construction));
+		}
+
 	}
 }
