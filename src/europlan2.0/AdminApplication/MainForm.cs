@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Europlan.Licensing;
 using System.IO;
 using Europlan.Common;
+using Star.SettingsXpress;
 
 namespace Europlan.AdminApplication {
 	public partial class MainForm : Form {
