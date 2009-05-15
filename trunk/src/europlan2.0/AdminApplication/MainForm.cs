@@ -67,6 +67,16 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["MainForm"];
+			if (this.WindowState == FormWindowState.Normal) {
+				settings.StorePoint("Location", this.Location);
+				settings.StoreSize("Size", this.Size);
+				settings.StoreSetting("Maximized", false);
+			} else if (this.WindowState == FormWindowState.Maximized) {
+				settings.StoreSetting("Maximized", true);
+			}
+			SettingsFile.Update();
+
 			try {
 				string licensesFile = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath), "licenses.xml");
 				using (Stream s = new FileStream(licensesFile, FileMode.Create)) {
@@ -79,6 +89,15 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void MainForm_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["MainForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
+			this.Size = settings.GetSize("Size", this.Size);
+			if (settings.GetSetting("Maximized", false)) {
+				this.WindowState = FormWindowState.Maximized;
+			} else {
+				this.WindowState = FormWindowState.Normal;
+			}
+
 			try {
 				string licensesFile = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath), "licenses.xml");
 				if (File.Exists(licensesFile)) {
