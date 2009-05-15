@@ -47,12 +47,9 @@ namespace Europlan.UnitTest {
 		[Test]
 		public void TestConstructaionConfiguration() {
 
-			ConstructionType userConType = new ConstructionType("TYPE01", "Testtype", ConstructionScopeEnum.FloorConstruction, true);
-			ConstructionType adminConType = new ConstructionType("TYPE02", "Testtype 2", ConstructionScopeEnum.FloorConstruction, false);
-			
-			Construction construction = new Construction("CON01", "Testconstruction", userConType);
+			Construction construction = new Construction("CON01", "Testconstruction", ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH));
 			config.Constructions.Add(construction);
-			construction = new Construction("CON02", "Testconstruction 2", adminConType);
+			construction = new Construction("CON02", "Testconstruction 2", ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH));
 			config.Constructions.Add(construction);
 
 			Assert.AreEqual(2, config.SerializableConstructions.Count);
@@ -66,9 +63,9 @@ namespace Europlan.UnitTest {
 			config.Save();
 
 
-			construction = new Construction("CON01", "Testconstruction", userConType);
+			construction = new Construction("CON01", "Testconstruction", ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH));
 			Assert.IsTrue(config.Constructions.Contains(construction));
-			construction = new Construction("CON011", "Testconstruction", userConType);
+			construction = new Construction("CON011", "Testconstruction", ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH));
 			Assert.IsFalse(config.Constructions.Contains(construction));
 		}
 
