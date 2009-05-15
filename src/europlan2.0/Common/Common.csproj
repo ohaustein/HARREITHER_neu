@@ -76,6 +76,7 @@
     <Compile Include="MapiMailMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Licensing\HardwareId.cs" />
+    <Compile Include="Settings\SettingsXpress.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />

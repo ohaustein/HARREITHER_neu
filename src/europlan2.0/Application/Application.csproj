@@ -194,7 +194,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Settings\SettingsXpress.cs" />
     <Compile Include="StartingForm.cs">
       <SubType>Form</SubType>
     </Compile>
