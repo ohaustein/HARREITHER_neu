@@ -29,11 +29,11 @@ namespace Europlan.UnitTest {
 
 			Assert.AreEqual(0, config.SerializableMaterials.Count);
 
-			Category category = new Category("euroval", "Euroval", CategoryType.Floor);
+			Category category = new Category("euroval", "Euroval", CategoryType.Floor, 1);
 			config.Categories.Add(category);
-			category = new Category("modulwand", "Modul Wand", CategoryType.Wall);
+			category = new Category("modulwand", "Modul Wand", CategoryType.Wall, 1);
 			config.Categories.Add(category);
-			category = new Category("eigenDecke", "Modul Decke", CategoryType.Ceiling);
+			category = new Category("eigenDecke", "Modul Decke", CategoryType.Ceiling, 1);
 			config.Categories.Add(category);
 
 			config.MaterialToCategoryMapping.Add("EV15", "euroval");
