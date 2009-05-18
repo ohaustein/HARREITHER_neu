@@ -1,5 +1,5 @@
 namespace Europlan.AdminApplication {
-	partial class ConstructionEditorPage {
+	partial class ConstructionEditorGrid {
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>

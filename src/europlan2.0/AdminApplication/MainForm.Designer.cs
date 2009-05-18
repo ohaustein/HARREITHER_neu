@@ -43,7 +43,7 @@ namespace Europlan.AdminApplication {
 			this.txtCurrency = new System.Windows.Forms.TextBox();
 			this.lblCurrency = new System.Windows.Forms.Label();
 			this.tabPageConstructions = new System.Windows.Forms.TabPage();
-			this.constructionEditorPage = new Europlan.AdminApplication.ConstructionEditorPage();
+			this.constructionEditorPage = new Europlan.AdminApplication.ConstructionEditorGrid();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -375,7 +375,7 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.TabPage tabPageInsulation;
 		private System.Windows.Forms.TabPage tabPageGeneral;
 		private System.Windows.Forms.TabPage tabPageConstructions;
-		private Europlan.AdminApplication.ConstructionEditorPage constructionEditorPage;
+		private Europlan.AdminApplication.ConstructionEditorGrid constructionEditorPage;
 	}
 }
 
