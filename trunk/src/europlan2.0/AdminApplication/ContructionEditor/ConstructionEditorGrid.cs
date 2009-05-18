@@ -8,12 +8,12 @@ using System.Windows.Forms;
 using Europlan.Common;
 
 namespace Europlan.AdminApplication {
-	public partial class ConstructionEditorPage : UserControl {
+	public partial class ConstructionEditorGrid : UserControl {
 
 		private ConstructionScopeEnum filter = ConstructionScopeEnum.All;
 		private ConstructionListWrapper wrapper;
 
-		public ConstructionEditorPage() {
+		public ConstructionEditorGrid() {
 			InitializeComponent();
 			this.wrapper = new ConstructionListWrapper();
 			this.constructionsWrapperBindingSource.DataSource = this.wrapper;
