@@ -23,9 +23,9 @@ namespace Europlan.UnitTest {
 		[Test]
 		public void TestMaterialConfiguration() {
 
-			config.Materials.Add(new Material("MAT01", "Testmaterial", "MAT01", 100, "Stk", (float)3.14, null, true));
-			config.Materials.Add(new Material("MAT02", "Testmaterial 2", "MAT02", 10, "m", (float)30.14, null, false));
-			config.Materials.Add(new Material("MAT03", "Testmaterial 3", "MAT03", 150, "mm²", (float)0.14, null, false));
+			config.Materials.Add(new Material("MAT01", "Testmaterial", "MAT01", 100, "Stk", (float)3.14, "", null, true));
+			config.Materials.Add(new Material("MAT02", "Testmaterial 2", "MAT02", 10, "m", (float)30.14, "", null, false));
+			config.Materials.Add(new Material("MAT03", "Testmaterial 3", "MAT03", 150, "mm²", (float)0.14, "", null, false));
 
 			Assert.AreEqual(0, config.SerializableMaterials.Count);
 
@@ -49,9 +49,9 @@ namespace Europlan.UnitTest {
 			config.Save();
 
 
-			Material material = new Material("MAT01", "Testmaterial", "MAT01", 100, "Stk", (float)3.14, null, true);
+			Material material = new Material("MAT01", "Testmaterial", "MAT01", 100, "Stk", (float)3.14, "", null, true);
 			Assert.IsTrue(config.Materials.Contains(material));
-			material = new Material("MAT011", "Testmaterial", "MAT01", 100, "Stk", (float)3.14, null, true);
+			material = new Material("MAT011", "Testmaterial", "MAT01", 100, "Stk", (float)3.14, "", null, true);
 			Assert.IsFalse(config.Materials.Contains(material));
 		}
 
