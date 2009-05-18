@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Europlan.Common {
 	public enum MaterialTypeEnum {
+		None,
 		Euroval,
 		Modul,
 		Hitherm,
