@@ -27,10 +27,10 @@ namespace Europlan.UnitTest {
 			config.Materials.Add(new Material("MAT02", "Testmaterial 2", "MAT02", 10, "m", (float)30.14, null, false));
 			config.Materials.Add(new Material("MAT03", "Testmaterial 3", "MAT03", 150, "mm²", (float)0.14, null, false));
 
-			Assert.AreEqual(3, config.SerializableMaterials.Count);
+			Assert.AreEqual(0, config.SerializableMaterials.Count);
 
 			config.Type = Configuration.ConfigurationType.AdminConfiguration;
-			Assert.AreEqual(2, config.SerializableMaterials.Count);
+			Assert.AreEqual(0, config.SerializableMaterials.Count);
 			config.Save();
 
 			config.Type = Configuration.ConfigurationType.UserConfiguration;
