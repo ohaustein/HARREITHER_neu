@@ -11,6 +11,7 @@ namespace Europlan.Common {
 		private Nullable<int> denomination; // Stückelung
 		private string unit;
 		private float price;
+		private string discountGroup;
 		private bool userDefined;
 		private Category category;
 
@@ -21,17 +22,19 @@ namespace Europlan.Common {
 			this.denomination = null;
 			this.unit = "";
 			this.price = 0;
+			this.discountGroup = "";
 			this.userDefined = false;
 			this.category = null;
 		}
 
-		public Material(string id, string name, string partNumber, Nullable<int> denomination, string unit, float price, Category category, bool userDefined) {
+		public Material(string id, string name, string partNumber, Nullable<int> denomination, string unit, float price, string discountGroup, Category category, bool userDefined) {
 			this.id = id;
 			this.name = name;
 			this.partNumber = partNumber;
 			this.denomination = denomination;
 			this.unit = unit;
 			this.price = price;
+			this.discountGroup = discountGroup;
 			this.userDefined = userDefined;
 			this.category = category;
 		}
@@ -73,6 +76,12 @@ namespace Europlan.Common {
 		public float Price {
 			get { return price; }
 			set { price = value; }
+		}
+
+		[XmlIgnore]
+		public string DiscountGroup {
+			get { return discountGroup; }
+			set { discountGroup = value; }
 		}
 
 		public bool UserDefined {

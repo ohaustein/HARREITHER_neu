@@ -25,6 +25,7 @@ namespace Europlan.Common {
 		private List<Category> categories;
 		private List<Construction> constructions;
 		private SerializableDictionary<string, string> materialToCategoryMapping;
+		private Dictionary<string, float> discounts;
 
 		public enum ConfigurationType {
 			InitializedConfiguration,
@@ -43,23 +44,40 @@ namespace Europlan.Common {
 			this.constructions = new List<Construction>();
 			this.categories = new List<Category>();
 			this.materialToCategoryMapping = new SerializableDictionary<string, string>();
+			this.discounts = new Dictionary<string, float>();
 			try {
 				StreamReader sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.001"), System.Text.Encoding.GetEncoding(850));
 				string line;
 				while ((line = sr.ReadLine()) != null) {
 					if (line.StartsWith("A")) {
 						string[] positions = line.Split(';');
-						string id = positions[2];
+						string id = positions[2].Trim();
 						string name = positions[4].Trim() + " " + positions[5].Trim();
 						float price = Int32.Parse(positions[9]) / 100;
+						string discountGroup = positions[10].Trim();
 						int denomination = Int32.Parse(positions[6]);
-						string unit = positions[8];
-						this.materials.Add(new Material(id, name, id, denomination, unit, price, null, false));
+						string unit = positions[8].Trim(); ;
+						this.materials.Add(new Material(id, name, id, denomination, unit, price, discountGroup, null, false));
 					}
 				}
 			} catch (Exception ex) {
 				// TODO
 			}
+			try {
+				StreamReader sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.RAB"), System.Text.Encoding.GetEncoding(850));
+				string line;
+				while ((line = sr.ReadLine()) != null) {
+					if (line.StartsWith("R")) {
+						string[] positions = line.Split(';');
+						string discountGroup = positions[2].Trim();
+						float discount = Int32.Parse(positions[4]) / 100;
+						this.discounts.Add(discountGroup, discount);
+					}
+				}
+			} catch (Exception ex) {
+				// TODO
+			}
+
 		}
 
 		public void RecalculateMaterialToCategoryMapping() {
@@ -230,6 +248,16 @@ namespace Europlan.Common {
 			}
 			set {
 				this.constructions = value;
+			}
+		}
+
+		[XmlIgnore]
+		public Dictionary<string, float> Discounts {
+			get {
+				return this.discounts;
+			}
+			set {
+				this.discounts = value;
 			}
 		}
 
