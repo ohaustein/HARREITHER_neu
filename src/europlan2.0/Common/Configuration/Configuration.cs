@@ -22,7 +22,9 @@ namespace Europlan.Common {
 		// IMPORTANT!!!
 		private ConfigurationType type;
 		private List<Material> materials;
+		private List<Category> categories;
 		private List<Construction> constructions;
+		private SerializableDictionary<string, string> materialToCategoryMapping;
 
 		public enum ConfigurationType {
 			InitializedConfiguration,
@@ -39,6 +41,36 @@ namespace Europlan.Common {
 			this.type = ConfigurationType.InitializedConfiguration;
 			this.materials = new List<Material>();
 			this.constructions = new List<Construction>();
+			this.categories = new List<Category>();
+			this.materialToCategoryMapping = new SerializableDictionary<string, string>();
+		}
+
+		private void InitializeMaterialToCategoryMapping() {
+
+			StreamReader sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.001"), System.Text.Encoding.GetEncoding(850));
+			string line;
+			while ((line = sr.ReadLine()) != null) {
+				if (line.StartsWith("A")) {
+					string[] positions = line.Split(';');
+					string id = positions[2];
+					string name = positions[4].Trim() + " " + positions[5].Trim();
+					float price = Int32.Parse(positions[9]) / 100;
+					this.materials.Add(new Material(id, name, "", null, "", price, null, false));
+				}
+			}
+
+			foreach (Material material in materials) {
+				if (materialToCategoryMapping.ContainsKey(material.Id)) {
+					string categoryId = materialToCategoryMapping[material.Id];
+					foreach (Category category in categories) {
+						if (category.Id == categoryId) {
+							material.Category = category;
+							category.Materials.Add(material);
+							continue;
+						}
+					}
+				}
+			}
 		}
 
 		public static Configuration operator+(Configuration config1, Configuration config2) {
@@ -78,8 +110,31 @@ namespace Europlan.Common {
 				}
 			}
 
-			config.type = second.type;
-			 
+			foreach (Category category in config1.Categories) {
+				if (!config.Categories.Contains(category)) {
+					config.Categories.Add(category);
+				}
+			}
+
+			foreach (Category category in config2.Categories) {
+				if (!config.Categories.Contains(category)) {
+					config.Categories.Add(category);
+				}
+			}
+
+			foreach (string materialId in config1.MaterialToCategoryMapping.Keys) {
+				if (!config.MaterialToCategoryMapping.ContainsKey(materialId)) {
+					config.MaterialToCategoryMapping.Add(materialId, config1.MaterialToCategoryMapping[materialId]);
+				}
+			}
+
+			foreach (string materialId in config2.MaterialToCategoryMapping.Keys) {
+				if (!config.MaterialToCategoryMapping.ContainsKey(materialId)) {
+					config.MaterialToCategoryMapping.Add(materialId, config2.MaterialToCategoryMapping[materialId]);
+				}
+			}
+
+			config.type = second.type;			 
 
 			return config;
 		}
@@ -104,10 +159,13 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				adminTemplate.InitializeMaterialToCategoryMapping();
 				adminTemplate.type = ConfigurationType.AdminConfiguration;
 				return adminTemplate;
 			}
 		}
+
+
 
 		/// <summary>
 		/// Gets a user template of the configuration object
@@ -129,6 +187,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				userTemplate.InitializeMaterialToCategoryMapping();
 				userTemplate.type = ConfigurationType.UserConfiguration;
 				return userTemplate;
 			}
@@ -151,12 +210,31 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public List<Category> Categories {
+			get {
+				return this.categories;
+			}
+			set {
+				this.categories = value;
+			}
+		}
+
+		[XmlIgnore]
 		public List<Construction> Constructions {
 			get {
 				return this.constructions;
 			}
 			set {
 				this.constructions = value;
+			}
+		}
+
+		public SerializableDictionary<string, string> MaterialToCategoryMapping {
+			get {
+				return this.materialToCategoryMapping;
+			}
+			set {
+				this.materialToCategoryMapping = value;
 			}
 		}
 
@@ -169,16 +247,18 @@ namespace Europlan.Common {
 							materialList.Add(material);
 						}
 					}
-				} else if (type == ConfigurationType.AdminConfiguration) {
-					foreach (Material material in this.materials) {
-						if (!material.UserDefined) {
-							materialList.Add(material);
-						}
-					}
-				} else {
-					materialList = materials;
-				}
+				} 
 				return materialList;
+			}
+		}
+
+		public List<Category> SerializableCategories {
+			get {
+				List<Category> categoriesList = new List<Category>();
+				if (type == ConfigurationType.AdminConfiguration) {
+					categoriesList = categories;
+				}
+				return categoriesList;
 			}
 		}
 

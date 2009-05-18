@@ -500,30 +500,30 @@ namespace Europlan.Application {
 		}
 
 		private void stockListToolStripMenuItem_Click(object sender, EventArgs e) {
-			OpenFileDialog dialog = new OpenFileDialog();
-			dialog.CheckFileExists = true;
-			dialog.CheckPathExists = true;
-			dialog.DefaultExt = "001";
-			dialog.Filter = "Datanorm (*.001)|*.001";
-			dialog.Multiselect = false;
-			DialogResult result = dialog.ShowDialog();
-			if (result == DialogResult.OK) {
-				//StreamReader sr = new StreamReader(dialog.FileName, System.Text.Encoding.GetEncoding(850));
-				//string line;
-				//DataNormDataSet dataSet = new DataNormDataSet();
-				//while ((line = sr.ReadLine()) != null) {
-				//    if (line.StartsWith("A")) {
-				//        DataNormDataSet.DataNormRow row = dataSet.DataNorm.NewDataNormRow();
-				//        string[] positions = line.Split(';');
-				//        row.ID = positions[2];
-				//        row.Name = positions[4].Trim() + " " + positions[5].Trim();
-				//        row.Price = Int32.Parse(positions[9]) / 100;
-				//        dataSet.DataNorm.Rows.Add(row);
+			//OpenFileDialog dialog = new OpenFileDialog();
+			//dialog.CheckFileExists = true;
+			//dialog.CheckPathExists = true;
+			//dialog.DefaultExt = "001";
+			//dialog.Filter = "Datanorm (*.001)|*.001";
+			//dialog.Multiselect = false;
+			//DialogResult result = dialog.ShowDialog();
+			//if (result == DialogResult.OK) {
+			//    //StreamReader sr = new StreamReader(dialog.FileName, System.Text.Encoding.GetEncoding(850));
+			//    //string line;
+			//    //DataNormDataSet dataSet = new DataNormDataSet();
+			//    //while ((line = sr.ReadLine()) != null) {
+			//    //    if (line.StartsWith("A")) {
+			//    //        DataNormDataSet.DataNormRow row = dataSet.DataNorm.NewDataNormRow();
+			//    //        string[] positions = line.Split(';');
+			//    //        row.ID = positions[2];
+			//    //        row.Name = positions[4].Trim() + " " + positions[5].Trim();
+			//    //        row.Price = Int32.Parse(positions[9]) / 100;
+			//    //        dataSet.DataNorm.Rows.Add(row);
 						
-				//    }
-				//}
+			//    //    }
+			//    //}
 
-			}
+			//}
 		}
 
 		private void demandedHeatToolStripMenuItem_Click(object sender, EventArgs e) {

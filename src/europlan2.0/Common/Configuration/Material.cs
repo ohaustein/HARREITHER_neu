@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	public class Material {
@@ -10,8 +11,8 @@ namespace Europlan.Common {
 		private Nullable<int> denomination; // Stückelung
 		private string unit;
 		private float price;
-		private MaterialTypeEnum type;
 		private bool userDefined;
+		private Category category;
 
 		public Material() {
 			this.id = "";
@@ -20,19 +21,19 @@ namespace Europlan.Common {
 			this.denomination = null;
 			this.unit = "";
 			this.price = 0;
-			this.type = MaterialTypeEnum.General;
 			this.userDefined = false;
+			this.category = null;
 		}
 
-		public Material(string id, string name, string partNumber, Nullable<int> denomination, string unit, float price, MaterialTypeEnum type, bool userDefined) {
+		public Material(string id, string name, string partNumber, Nullable<int> denomination, string unit, float price, Category category, bool userDefined) {
 			this.id = id;
 			this.name = name;
 			this.partNumber = partNumber;
 			this.denomination = denomination;
 			this.unit = unit;
 			this.price = price;
-			this.type = type;
 			this.userDefined = userDefined;
+			this.category = category;
 		}
 
 		public override bool Equals(object obj) {
@@ -74,14 +75,15 @@ namespace Europlan.Common {
 			set { price = value; }
 		}
 
-		public MaterialTypeEnum Type {
-			get { return type; }
-			set { type = value; }
-		}
-
 		public bool UserDefined {
 			get { return userDefined; }
 			set { userDefined = value; }
+		}
+
+		[XmlIgnore]
+		public Category Category {
+			get { return category; }
+			set { category = value; }
 		}
 	}
 }
