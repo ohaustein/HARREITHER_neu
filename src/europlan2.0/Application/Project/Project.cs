@@ -148,6 +148,7 @@ namespace Europlan.Application {
 				Stream r = new FileStream(filename, FileMode.Open);
 				instance = (Project)s.Deserialize(r);
 				r.Close();
+				instance.configuration.RecalculateMaterialToCategoryMapping();
 			}
 			if (ProjectLoaded != null) {
 				Project.ProjectLoaded(Instance);

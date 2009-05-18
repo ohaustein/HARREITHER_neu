@@ -29,6 +29,17 @@ namespace Europlan.UnitTest {
 
 			Assert.AreEqual(0, config.SerializableMaterials.Count);
 
+			Category category = new Category("euroval", "Euroval", CategoryType.Floor);
+			config.Categories.Add(category);
+			category = new Category("modulwand", "Modul Wand", CategoryType.Wall);
+			config.Categories.Add(category);
+			category = new Category("eigenDecke", "Modul Decke", CategoryType.Ceiling);
+			config.Categories.Add(category);
+
+			config.MaterialToCategoryMapping.Add("EV15", "euroval");
+			config.MaterialToCategoryMapping.Add("MK30", "modulwand");
+			config.MaterialToCategoryMapping.Add("MAT01", "eigenDecke");
+
 			config.Type = Configuration.ConfigurationType.AdminConfiguration;
 			Assert.AreEqual(0, config.SerializableMaterials.Count);
 			config.Save();
@@ -68,6 +79,22 @@ namespace Europlan.UnitTest {
 			construction = new Construction("CON011", "Testconstruction", ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH));
 			Assert.IsFalse(config.Constructions.Contains(construction));
 		}
+
+		//[Test]
+		//public void TestMaterialToCategoryMapping() {
+		//    config = Configuration.AdminTemplate;
+
+		//    Category category = new Category("euroval", "Euroval", CategoryType.Floor);
+		//    config.Categories.Add(category);
+		//    category = new Category("modulwand", "Modul Wand", CategoryType.Wall);
+		//    config.Categories.Add(category);
+
+		//    config.MaterialToCategoryMapping.Add("EV15", "euroval");
+		//    config.MaterialToCategoryMapping.Add("MK30", "modulwand");
+
+		//    config.Save();
+
+		//}
 
 	}
 }
