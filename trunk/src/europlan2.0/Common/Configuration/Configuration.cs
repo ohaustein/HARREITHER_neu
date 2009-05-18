@@ -43,16 +43,20 @@ namespace Europlan.Common {
 			this.constructions = new List<Construction>();
 			this.categories = new List<Category>();
 			this.materialToCategoryMapping = new SerializableDictionary<string, string>();
-			StreamReader sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.001"), System.Text.Encoding.GetEncoding(850));
-			string line;
-			while ((line = sr.ReadLine()) != null) {
-				if (line.StartsWith("A")) {
-					string[] positions = line.Split(';');
-					string id = positions[2];
-					string name = positions[4].Trim() + " " + positions[5].Trim();
-					float price = Int32.Parse(positions[9]) / 100;
-					this.materials.Add(new Material(id, name, "", null, "", price, null, false));
+			try {
+				StreamReader sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.001"), System.Text.Encoding.GetEncoding(850));
+				string line;
+				while ((line = sr.ReadLine()) != null) {
+					if (line.StartsWith("A")) {
+						string[] positions = line.Split(';');
+						string id = positions[2];
+						string name = positions[4].Trim() + " " + positions[5].Trim();
+						float price = Int32.Parse(positions[9]) / 100;
+						this.materials.Add(new Material(id, name, "", null, "", price, null, false));
+					}
 				}
+			} catch (Exception ex) {
+				// TODO
 			}
 		}
 
