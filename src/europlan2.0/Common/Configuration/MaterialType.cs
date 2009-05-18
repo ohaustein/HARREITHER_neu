@@ -4,12 +4,13 @@ using System.Text;
 
 namespace Europlan.Common {
 	public enum MaterialTypeEnum {
-		None,
-		Euroval,
-		Modul,
-		Hitherm,
-		Distributor,	// Verteiler
-		Insulation,		// Dämmung
-		General
+		UnknownMaterial = 0,
+		Euroval = 1,
+		Modul = 2,
+		Hitherm = 4,
+		Distributor = 8,	// Verteiler
+		Insulation = 16,		// Dämmung
+		General = 32,
+		All = 63
 	}
 }

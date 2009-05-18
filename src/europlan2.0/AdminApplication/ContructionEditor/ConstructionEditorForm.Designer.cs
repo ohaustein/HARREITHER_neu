@@ -23,29 +23,30 @@ namespace Europlan.AdminApplication {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.panel2 = new System.Windows.Forms.Panel();
+			this.panelBottom = new System.Windows.Forms.Panel();
+			this.panelTop = new System.Windows.Forms.Panel();
 			this.lblType = new System.Windows.Forms.Label();
 			this.constructionEditor = new Europlan.AdminApplication.ConstructionEditor();
-			this.panel2.SuspendLayout();
+			this.panelTop.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// panel1
+			// panelBottom
 			// 
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel1.Location = new System.Drawing.Point(0, 357);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(667, 50);
-			this.panel1.TabIndex = 1;
+			this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panelBottom.Location = new System.Drawing.Point(0, 357);
+			this.panelBottom.Name = "panelBottom";
+			this.panelBottom.Size = new System.Drawing.Size(667, 50);
+			this.panelBottom.TabIndex = 1;
+			this.panelBottom.Visible = false;
 			// 
-			// panel2
+			// panelTop
 			// 
-			this.panel2.Controls.Add(this.lblType);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel2.Location = new System.Drawing.Point(0, 0);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(667, 32);
-			this.panel2.TabIndex = 2;
+			this.panelTop.Controls.Add(this.lblType);
+			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panelTop.Location = new System.Drawing.Point(0, 0);
+			this.panelTop.Name = "panelTop";
+			this.panelTop.Size = new System.Drawing.Size(667, 32);
+			this.panelTop.TabIndex = 2;
 			// 
 			// lblType
 			// 
@@ -73,20 +74,20 @@ namespace Europlan.AdminApplication {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(667, 407);
 			this.Controls.Add(this.constructionEditor);
-			this.Controls.Add(this.panel2);
-			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.panelTop);
+			this.Controls.Add(this.panelBottom);
 			this.Name = "ConstructionEditorForm";
 			this.Text = "ConstructionEditorForm";
-			this.panel2.ResumeLayout(false);
-			this.panel2.PerformLayout();
+			this.panelTop.ResumeLayout(false);
+			this.panelTop.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.Panel panelBottom;
+		private System.Windows.Forms.Panel panelTop;
 		private System.Windows.Forms.Label lblType;
 		private ConstructionEditor constructionEditor;
 
