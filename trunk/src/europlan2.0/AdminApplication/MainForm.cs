@@ -116,14 +116,14 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void btnNew_Click(object sender, EventArgs e) {
-			this.cmsNew.Show(this.btnNew, new Point(0, this.btnNew.Height));
+			//this.cmsNew.Show(this.btnNew, new Point(0, this.btnNew.Height));
 		}
 
 		private void btnView_Click(object sender, EventArgs e) {
-			this.cmsView.Show(this.btnView, new Point(0, this.btnView.Height));
+			//this.cmsView.Show(this.btnView, new Point(0, this.btnView.Height));
 		}
 
-		private void cmsViewItem_Click(object sender, EventArgs e) {
+		/*private void cmsViewItem_Click(object sender, EventArgs e) {
 			int i = 0;
 			string selected = "";
 			if (this.tsmiFloorConstruction.Checked) {
@@ -167,6 +167,6 @@ namespace Europlan.AdminApplication {
 				form.ShowDialog();
 				this.constructionEditorPage.AddConstruction(c);
 			}
-		}
+		}*/
 	}
 }

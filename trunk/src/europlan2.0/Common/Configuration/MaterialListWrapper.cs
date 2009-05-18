@@ -4,36 +4,30 @@ using System.Text;
 using System.ComponentModel;
 
 namespace Europlan.Common {
-	public class ConstructionListWrapper : IList<Construction>, IBindingList, IBindingListView {
+	public class MaterialListWrapper : IList<Material>, IBindingList, IBindingListView {
 
-		private List<Construction> constructions;
+		private List<Material> constructions;
 
-		private Nullable<ConstructionScopeEnum> filter = null;
+		private Nullable<MaterialTypeEnum> filter = null;
 
-		public ConstructionListWrapper() {
-			this.constructions = Configuration.AdminTemplate.Constructions;
+		public MaterialListWrapper() {
+			this.constructions = Configuration.AdminTemplate.Materials;
 		}
 
-		/*private void OnListChanged(ListChangedEventArgs args) {
-			if (this.ListChanged != null) {
-				this.ListChanged(this, args);
-			}
-		}*/
-
 		#region IEnumerable<Construction> Members
-		public IEnumerator<Construction> GetEnumerator() {
-			return new ConstructionListEnumerator(this.constructions, (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value));
+		public IEnumerator<Material> GetEnumerator() {
+			return new MaterialListEnumerator(this.constructions, (this.filter == null ? MaterialTypeEnum.All : this.filter.Value));
 		}
 		#endregion
 
 		#region IEnumerable Members
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-			return new ConstructionListEnumerator(this.constructions, (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value));
+			return new MaterialListEnumerator(this.constructions, (this.filter == null ? MaterialTypeEnum.All : this.filter.Value));
 		}
 		#endregion
 
 		#region ICollection<Construction> Members
-		public void Add(Construction item) {
+		public void Add(Material item) {
 			this.constructions.Add(item);
 		}
 
@@ -41,12 +35,12 @@ namespace Europlan.Common {
 			this.constructions.Clear();
 		}
 
-		public bool Contains(Construction item) {
+		public bool Contains(Material item) {
 			return this.IndexOf(item) >= 0;
 		}
 
-		public void CopyTo(Construction[] array, int arrayIndex) {
-			IEnumerator<Construction> e = this.GetEnumerator();
+		public void CopyTo(Material[] array, int arrayIndex) {
+			IEnumerator<Material> e = this.GetEnumerator();
 			int i = arrayIndex;
 			while (e.MoveNext()) {
 				array[i] = e.Current;
@@ -56,7 +50,7 @@ namespace Europlan.Common {
 
 		public int Count {
 			get {
-				IEnumerator<Construction> e = this.GetEnumerator();
+				IEnumerator<Material> e = this.GetEnumerator();
 				int i = 0;
 				while (e.MoveNext()) {
 					i++;
@@ -69,7 +63,7 @@ namespace Europlan.Common {
 			get { return false; }
 		}
 
-		public bool Remove(Construction item) {
+		public bool Remove(Material item) {
 			bool result = this.constructions.Remove(item);
 			return result;
 		}
@@ -77,7 +71,7 @@ namespace Europlan.Common {
 
 		#region ICollection Members
 		public void CopyTo(Array array, int index) {
-			IEnumerator<Construction> e = this.GetEnumerator();
+			IEnumerator<Material> e = this.GetEnumerator();
 			int i = index;
 			while (e.MoveNext()) {
 				array.SetValue(e.Current, i);
@@ -94,11 +88,11 @@ namespace Europlan.Common {
 		}
 		#endregion
 
-		#region IList<Construction> Members
-		public int IndexOf(Construction item) {
+		#region IList<Material> Members
+		public int IndexOf(Material item) {
 			int found = -1;
 			int i = 0;
-			IEnumerator<Construction> e = this.GetEnumerator();
+			IEnumerator<Material> e = this.GetEnumerator();
 			while (found < 0 && e.MoveNext()) {
 				if (e.Current == item) {
 					found = i;
@@ -111,20 +105,20 @@ namespace Europlan.Common {
 		private int GetNode(int index) {
 			int i = 0;
 			int current = 0;
-			while (current < this.constructions.Count && (this.filter != null && ((this.filter.Value & this.constructions[current].Scope) == ConstructionScopeEnum.UnknownConstruction))) {
+			// TODO while (current < this.constructions.Count && (this.filter != null && ((this.filter.Value & this.constructions[current].Type) == MaterialTypeEnum.UnknownMaterial))) {
 				current++;
-			}
+			// TODO}
 			while (i < index && current < this.constructions.Count) {
 				current++;
-				while (current < this.constructions.Count && (this.filter != null && ((this.filter.Value & this.constructions[current].Scope) == ConstructionScopeEnum.UnknownConstruction))) {
+				// TODOwhile (current < this.constructions.Count && (this.filter != null && ((this.filter.Value & this.constructions[current].Type) == MaterialTypeEnum.UnknownMaterial))) {
 					current++;
-				}
+					// TODO}
 				i++;
 			}
 			return current < this.constructions.Count ? current : -1;
 		}
 
-		public void Insert(int index, Construction item) {
+		public void Insert(int index, Material item) {
 			int node = this.GetNode(index);
 			if (node < 0) {
 				this.constructions.Insert(this.constructions.Count, item);
@@ -142,7 +136,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public Construction this[int index] {
+		public Material this[int index] {
 			get {
 				int node = this.GetNode(index);
 				if (node < 0) {
@@ -164,27 +158,27 @@ namespace Europlan.Common {
 
 		#region IList Members
 		public int Add(object value) {
-			if (value is Construction) {
-				this.constructions.Add((Construction)value);
+			if (value is Material) {
+				this.constructions.Add((Material)value);
 				return this.constructions.Count - 1;
 			} else {
-				throw new ArgumentException("Object to add is not a construction");
+				throw new ArgumentException("Object to add is not a material");
 			}
 		}
 
 		public bool Contains(object value) {
-			return (value is Construction ? this.Contains((Construction)value) : false);
+			return (value is Material ? this.Contains((Material)value) : false);
 		}
 
 		public int IndexOf(object value) {
-			return (value is Construction ? this.IndexOf((Construction)value) : -1);
+			return (value is Material ? this.IndexOf((Material)value) : -1);
 		}
 
 		public void Insert(int index, object value) {
-			if (value is Construction) {
-				this.Insert(index, (Construction)value);
+			if (value is Material) {
+				this.Insert(index, (Material)value);
 			} else {
-				throw new ArgumentException("Object to insert is not a construction");
+				throw new ArgumentException("Object to insert is not a material");
 			}
 		}
 
@@ -193,8 +187,8 @@ namespace Europlan.Common {
 		}
 
 		public void Remove(object value) {
-			if (value is Construction) {
-				this.constructions.Remove((Construction)value);
+			if (value is Material) {
+				this.constructions.Remove((Material)value);
 			}
 		}
 
@@ -208,15 +202,15 @@ namespace Europlan.Common {
 				}
 			}
 			set {
-				if (value is Construction) {
+				if (value is Material) {
 					int node = this.GetNode(index);
 					if (node < 0) {
 						throw new ArgumentOutOfRangeException();
 					} else {
-						this.constructions[node] = (Construction)value;
+						this.constructions[node] = (Material)value;
 					}
 				} else {
-					throw new ArgumentException("Object to set is not a construction");
+					throw new ArgumentException("Object to set is not a material");
 				}
 			}
 		}
@@ -298,19 +292,26 @@ namespace Europlan.Common {
 				if (value == null) {
 					this.filter = null;
 				} else if (Int32.TryParse(value, out i)) {
-					this.filter = ConstructionScopeEnum.UnknownConstruction;
-					if ((i & ((int)ConstructionScopeEnum.FloorConstruction)) != 0) {
-						this.filter = this.filter | ConstructionScopeEnum.FloorConstruction;
+					this.filter = MaterialTypeEnum.UnknownMaterial;
+					if ((i & ((int)MaterialTypeEnum.Euroval)) != 0) {
+						this.filter = this.filter | MaterialTypeEnum.Euroval;
 					}
-					if ((i & ((int)ConstructionScopeEnum.InsulationConstruction)) != 0) {
-						this.filter = this.filter | ConstructionScopeEnum.InsulationConstruction;
+					if ((i & ((int)MaterialTypeEnum.Modul)) != 0) {
+						this.filter = this.filter | MaterialTypeEnum.Modul;
 					}
-					if ((i & ((int)ConstructionScopeEnum.WallConstruction)) != 0) {
-						this.filter = this.filter | ConstructionScopeEnum.WallConstruction;
+					if ((i & ((int)MaterialTypeEnum.Hitherm)) != 0) {
+						this.filter = this.filter | MaterialTypeEnum.Hitherm;
 					}
-					if ((i & ((int)ConstructionScopeEnum.CeilingConstruction)) != 0) {
-						this.filter = this.filter | ConstructionScopeEnum.CeilingConstruction;
+					if ((i & ((int)MaterialTypeEnum.Distributor)) != 0) {
+						this.filter = this.filter | MaterialTypeEnum.Distributor;
 					}
+					if ((i & ((int)MaterialTypeEnum.Insulation)) != 0) {
+						this.filter = this.filter | MaterialTypeEnum.Insulation;
+					}
+					if ((i & ((int)MaterialTypeEnum.General)) != 0) {
+						this.filter = this.filter | MaterialTypeEnum.General;
+					}
+
 				}
 			}
 		}
@@ -332,20 +333,20 @@ namespace Europlan.Common {
 		}
 		#endregion
 
-		public ConstructionScopeEnum ConstructionScopeFilter {
-			get { return (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value); }
-			set { this.filter = (value == ConstructionScopeEnum.All ? (Nullable<ConstructionScopeEnum>)null : (Nullable<ConstructionScopeEnum>)value); }
+		public MaterialTypeEnum MaterialTypeFilter {
+			get { return (this.filter == null ? MaterialTypeEnum.All : this.filter.Value); }
+			set { this.filter = (value == MaterialTypeEnum.All ? (Nullable<MaterialTypeEnum>)null : (Nullable<MaterialTypeEnum>)value); }
 		}
 	}
 
-	public class ConstructionListEnumerator : IEnumerator<Construction> {
+	public class MaterialListEnumerator : IEnumerator<Material> {
 
-		private List<Construction> list;
+		private List<Material> list;
 		int currentNode;
 		private bool finished;
-		private ConstructionScopeEnum filter;
+		private MaterialTypeEnum filter;
 
-		internal ConstructionListEnumerator(List<Construction> list, ConstructionScopeEnum filter) {
+		internal MaterialListEnumerator(List<Material> list, MaterialTypeEnum filter) {
 			this.list = list;
 			this.currentNode = -1;
 			this.finished = false;
@@ -353,7 +354,7 @@ namespace Europlan.Common {
 		}
 
 		#region IEnumerator<Construction> Members
-		public Construction Current {
+		public Material Current {
 			get {
 				if (this.currentNode <= 0 || this.finished) {
 					return null;
@@ -387,9 +388,9 @@ namespace Europlan.Common {
 				} else {
 					this.currentNode++;
 				}
-				while (this.currentNode < this.list.Count && ((this.list[this.currentNode].Scope & this.filter) == ConstructionScopeEnum.UnknownConstruction)) {
+				// TODOwhile (this.currentNode < this.list.Count && ((this.list[this.currentNode].Type & this.filter) == MaterialTypeEnum.UnknownMaterial)) {
 					this.currentNode++;
-				}
+					// TODO}
 				if (this.currentNode >= this.list.Count) {
 					this.finished = true;
 				}

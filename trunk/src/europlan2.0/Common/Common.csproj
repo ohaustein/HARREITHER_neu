@@ -48,6 +48,7 @@
     <Compile Include="Configuration\ConstructionType.cs" />
     <Compile Include="Configuration\ConstructionScopeEnum.cs" />
     <Compile Include="Configuration\ConstructionTypeManager.cs" />
+    <Compile Include="Configuration\MaterialListWrapper.cs" />
     <Compile Include="Configuration\InsulationConstruction.cs" />
     <Compile Include="Configuration\FloorConstruction.cs" />
     <Compile Include="Configuration\MaterialType.cs" />

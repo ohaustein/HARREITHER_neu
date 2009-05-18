@@ -23,7 +23,6 @@ namespace Europlan.AdminApplication {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.components = new System.ComponentModel.Container();
 			this.mainTabControl = new System.Windows.Forms.TabControl();
 			this.tabPageLicenses = new System.Windows.Forms.TabPage();
 			this.splitContainerLicenses = new System.Windows.Forms.SplitContainer();
@@ -44,20 +43,10 @@ namespace Europlan.AdminApplication {
 			this.txtCurrency = new System.Windows.Forms.TextBox();
 			this.lblCurrency = new System.Windows.Forms.Label();
 			this.tabPageConstructions = new System.Windows.Forms.TabPage();
-			this.panBottom = new System.Windows.Forms.Panel();
-			this.btnView = new System.Windows.Forms.Button();
-			this.btnNew = new System.Windows.Forms.Button();
 			this.constructionEditorPage = new Europlan.AdminApplication.ConstructionEditorPage();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmsNew = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tsmiNewFloorConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewWallConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmsView = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tsmiFloorConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainTabControl.SuspendLayout();
 			this.tabPageLicenses.SuspendLayout();
 			this.splitContainerLicenses.Panel1.SuspendLayout();
@@ -67,10 +56,7 @@ namespace Europlan.AdminApplication {
 			this.articlesTabControl.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabPageConstructions.SuspendLayout();
-			this.panBottom.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
-			this.cmsNew.SuspendLayout();
-			this.cmsView.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// mainTabControl
@@ -290,7 +276,6 @@ namespace Europlan.AdminApplication {
 			// 
 			// tabPageConstructions
 			// 
-			this.tabPageConstructions.Controls.Add(this.panBottom);
 			this.tabPageConstructions.Controls.Add(this.constructionEditorPage);
 			this.tabPageConstructions.Location = new System.Drawing.Point(4, 22);
 			this.tabPageConstructions.Name = "tabPageConstructions";
@@ -300,45 +285,15 @@ namespace Europlan.AdminApplication {
 			this.tabPageConstructions.Text = "Konstruktionen";
 			this.tabPageConstructions.UseVisualStyleBackColor = true;
 			// 
-			// panBottom
-			// 
-			this.panBottom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.panBottom.Controls.Add(this.btnView);
-			this.panBottom.Controls.Add(this.btnNew);
-			this.panBottom.Location = new System.Drawing.Point(3, 434);
-			this.panBottom.Name = "panBottom";
-			this.panBottom.Size = new System.Drawing.Size(773, 29);
-			this.panBottom.TabIndex = 1;
-			// 
-			// btnView
-			// 
-			this.btnView.Location = new System.Drawing.Point(125, 3);
-			this.btnView.Name = "btnView";
-			this.btnView.Size = new System.Drawing.Size(231, 23);
-			this.btnView.TabIndex = 1;
-			this.btnView.Text = "Angezeigte Konstruktionen (Alle)";
-			this.btnView.UseVisualStyleBackColor = true;
-			this.btnView.Click += new System.EventHandler(this.btnView_Click);
-			// 
-			// btnNew
-			// 
-			this.btnNew.Location = new System.Drawing.Point(5, 3);
-			this.btnNew.Name = "btnNew";
-			this.btnNew.Size = new System.Drawing.Size(114, 23);
-			this.btnNew.TabIndex = 0;
-			this.btnNew.Text = "Neue Konstruktion";
-			this.btnNew.UseVisualStyleBackColor = true;
-			this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-			// 
 			// constructionEditorPage
 			// 
 			this.constructionEditorPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.constructionEditorPage.Filter = Europlan.Common.ConstructionScopeEnum.All;
 			this.constructionEditorPage.Location = new System.Drawing.Point(3, 3);
 			this.constructionEditorPage.Name = "constructionEditorPage";
-			this.constructionEditorPage.Size = new System.Drawing.Size(773, 425);
+			this.constructionEditorPage.Size = new System.Drawing.Size(773, 460);
 			this.constructionEditorPage.TabIndex = 0;
 			// 
 			// menuStrip1
@@ -367,64 +322,6 @@ namespace Europlan.AdminApplication {
 			this.beendenToolStripMenuItem.Text = "&Beenden";
 			this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
 			// 
-			// cmsNew
-			// 
-			this.cmsNew.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewFloorConstruction,
-            this.tsmiNewInsulationConstruction,
-            this.tsmiNewWallConstruction});
-			this.cmsNew.Name = "cmsNew";
-			this.cmsNew.Size = new System.Drawing.Size(215, 92);
-			// 
-			// tsmiNewFloorConstruction
-			// 
-			this.tsmiNewFloorConstruction.Name = "tsmiNewFloorConstruction";
-			this.tsmiNewFloorConstruction.Size = new System.Drawing.Size(214, 22);
-			this.tsmiNewFloorConstruction.Text = "Fuﬂbodenkonstruktion";
-			this.tsmiNewFloorConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
-			// 
-			// tsmiNewInsulationConstruction
-			// 
-			this.tsmiNewInsulationConstruction.Name = "tsmiNewInsulationConstruction";
-			this.tsmiNewInsulationConstruction.Size = new System.Drawing.Size(214, 22);
-			this.tsmiNewInsulationConstruction.Text = "W‰rmed‰mmkonstruktion";
-			this.tsmiNewInsulationConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
-			// 
-			// tsmiNewWallConstruction
-			// 
-			this.tsmiNewWallConstruction.Name = "tsmiNewWallConstruction";
-			this.tsmiNewWallConstruction.Size = new System.Drawing.Size(214, 22);
-			this.tsmiNewWallConstruction.Text = "Wandkonstruktion";
-			this.tsmiNewWallConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
-			// 
-			// cmsView
-			// 
-			this.cmsView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiFloorConstruction,
-            this.tsmiInsulationConstruction});
-			this.cmsView.Name = "cmsView";
-			this.cmsView.Size = new System.Drawing.Size(228, 48);
-			// 
-			// tsmiFloorConstruction
-			// 
-			this.tsmiFloorConstruction.Checked = true;
-			this.tsmiFloorConstruction.CheckOnClick = true;
-			this.tsmiFloorConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.tsmiFloorConstruction.Name = "tsmiFloorConstruction";
-			this.tsmiFloorConstruction.Size = new System.Drawing.Size(227, 22);
-			this.tsmiFloorConstruction.Text = "Fuﬂbodenkonstruktionen";
-			this.tsmiFloorConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
-			// 
-			// tsmiInsulationConstruction
-			// 
-			this.tsmiInsulationConstruction.Checked = true;
-			this.tsmiInsulationConstruction.CheckOnClick = true;
-			this.tsmiInsulationConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.tsmiInsulationConstruction.Name = "tsmiInsulationConstruction";
-			this.tsmiInsulationConstruction.Size = new System.Drawing.Size(227, 22);
-			this.tsmiInsulationConstruction.Text = "W‰rmed‰mmkonstruktionen";
-			this.tsmiInsulationConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -446,11 +343,8 @@ namespace Europlan.AdminApplication {
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			this.tabPageConstructions.ResumeLayout(false);
-			this.panBottom.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
-			this.cmsNew.ResumeLayout(false);
-			this.cmsView.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -482,16 +376,6 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.TabPage tabPageGeneral;
 		private System.Windows.Forms.TabPage tabPageConstructions;
 		private Europlan.AdminApplication.ConstructionEditorPage constructionEditorPage;
-		private System.Windows.Forms.Panel panBottom;
-		private System.Windows.Forms.Button btnNew;
-		private System.Windows.Forms.ContextMenuStrip cmsNew;
-		private System.Windows.Forms.ToolStripMenuItem tsmiNewFloorConstruction;
-		private System.Windows.Forms.ToolStripMenuItem tsmiNewInsulationConstruction;
-		private System.Windows.Forms.ToolStripMenuItem tsmiNewWallConstruction;
-		private System.Windows.Forms.Button btnView;
-		private System.Windows.Forms.ContextMenuStrip cmsView;
-		private System.Windows.Forms.ToolStripMenuItem tsmiFloorConstruction;
-		private System.Windows.Forms.ToolStripMenuItem tsmiInsulationConstruction;
 	}
 }
 

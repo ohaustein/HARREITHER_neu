@@ -54,6 +54,12 @@
     <Compile Include="ContructionEditor\ConstructionEditorPage.Designer.cs">
       <DependentUpon>ConstructionEditorPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContructionEditor\MaterialEditorGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContructionEditor\MaterialEditorGrid.Designer.cs">
+      <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="LicenseEditor\DateColumn.cs" />
     <Compile Include="LicenseEditor\DateEditingControl.cs">
       <SubType>Component</SubType>
@@ -106,6 +112,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>ConstructionEditorPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ContructionEditor\MaterialEditorGrid.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LicenseEditor\HardwareIdBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HardwareIdBox.cs</DependentUpon>
@@ -134,6 +144,7 @@
     </Compile>
     <None Include="Properties\DataSources\Europlan.Common.Construction.datasource" />
     <None Include="Properties\DataSources\Europlan.Common.ConstructionListWrapper.datasource" />
+    <None Include="Properties\DataSources\Europlan.Common.MaterialListWrapper.datasource" />
     <None Include="Properties\DataSources\Europlan.Licensing.LicenseTemplate.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
