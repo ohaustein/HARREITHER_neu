@@ -52,7 +52,9 @@ namespace Europlan.Common {
 						string id = positions[2];
 						string name = positions[4].Trim() + " " + positions[5].Trim();
 						float price = Int32.Parse(positions[9]) / 100;
-						this.materials.Add(new Material(id, name, "", null, "", price, null, false));
+						int denomination = Int32.Parse(positions[6]);
+						string unit = positions[8];
+						this.materials.Add(new Material(id, name, id, denomination, unit, price, null, false));
 					}
 				}
 			} catch (Exception ex) {
