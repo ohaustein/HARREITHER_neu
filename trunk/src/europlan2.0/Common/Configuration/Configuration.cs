@@ -43,10 +43,6 @@ namespace Europlan.Common {
 			this.constructions = new List<Construction>();
 			this.categories = new List<Category>();
 			this.materialToCategoryMapping = new SerializableDictionary<string, string>();
-		}
-
-		private void InitializeMaterialToCategoryMapping() {
-
 			StreamReader sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.001"), System.Text.Encoding.GetEncoding(850));
 			string line;
 			while ((line = sr.ReadLine()) != null) {
@@ -58,7 +54,9 @@ namespace Europlan.Common {
 					this.materials.Add(new Material(id, name, "", null, "", price, null, false));
 				}
 			}
+		}
 
+		public void RecalculateMaterialToCategoryMapping() {
 			foreach (Material material in materials) {
 				if (materialToCategoryMapping.ContainsKey(material.Id)) {
 					string categoryId = materialToCategoryMapping[material.Id];
@@ -159,7 +157,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				adminTemplate.InitializeMaterialToCategoryMapping();
+				adminTemplate.RecalculateMaterialToCategoryMapping();
 				adminTemplate.type = ConfigurationType.AdminConfiguration;
 				return adminTemplate;
 			}
@@ -187,7 +185,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				userTemplate.InitializeMaterialToCategoryMapping();
+				userTemplate.RecalculateMaterialToCategoryMapping();
 				userTemplate.type = ConfigurationType.UserConfiguration;
 				return userTemplate;
 			}
@@ -255,7 +253,7 @@ namespace Europlan.Common {
 		public List<Category> SerializableCategories {
 			get {
 				List<Category> categoriesList = new List<Category>();
-				if (type == ConfigurationType.AdminConfiguration) {
+				if (type == ConfigurationType.AdminConfiguration || type == ConfigurationType.InitializedConfiguration) {
 					categoriesList = categories;
 				}
 				return categoriesList;
