@@ -33,15 +33,7 @@ namespace Europlan.AdminApplication {
 			this.btnSaveLicense = new System.Windows.Forms.Button();
 			this.licenseEditor1 = new Europlan.AdminApplication.LicenseEditor();
 			this.tabPageArticles = new System.Windows.Forms.TabPage();
-			this.articlesTabControl = new System.Windows.Forms.TabControl();
-			this.tabPageFloorHeating = new System.Windows.Forms.TabPage();
-			this.tabPagePanelHeating = new System.Windows.Forms.TabPage();
-			this.tabPageDistributor = new System.Windows.Forms.TabPage();
-			this.tabPageInsulation = new System.Windows.Forms.TabPage();
-			this.tabPageGeneral = new System.Windows.Forms.TabPage();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.txtCurrency = new System.Windows.Forms.TextBox();
-			this.lblCurrency = new System.Windows.Forms.Label();
+			this.materialMapper1 = new Europlan.AdminApplication.MaterialMapper();
 			this.tabPageConstructions = new System.Windows.Forms.TabPage();
 			this.constructionEditorPage = new Europlan.AdminApplication.ConstructionEditorGrid();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -53,8 +45,6 @@ namespace Europlan.AdminApplication {
 			this.splitContainerLicenses.Panel2.SuspendLayout();
 			this.splitContainerLicenses.SuspendLayout();
 			this.tabPageArticles.SuspendLayout();
-			this.articlesTabControl.SuspendLayout();
-			this.panel1.SuspendLayout();
 			this.tabPageConstructions.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -84,6 +74,7 @@ namespace Europlan.AdminApplication {
 			// 
 			// splitContainerLicenses
 			// 
+			this.splitContainerLicenses.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.splitContainerLicenses.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainerLicenses.Location = new System.Drawing.Point(3, 3);
 			this.splitContainerLicenses.Name = "splitContainerLicenses";
@@ -107,9 +98,9 @@ namespace Europlan.AdminApplication {
 			// 
 			this.btnNewLicense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.btnNewLicense.Location = new System.Drawing.Point(3, 431);
+			this.btnNewLicense.Location = new System.Drawing.Point(3, 427);
 			this.btnNewLicense.Name = "btnNewLicense";
-			this.btnNewLicense.Size = new System.Drawing.Size(201, 23);
+			this.btnNewLicense.Size = new System.Drawing.Size(197, 23);
 			this.btnNewLicense.TabIndex = 1;
 			this.btnNewLicense.Text = "Neue Lizenz";
 			this.btnNewLicense.UseVisualStyleBackColor = true;
@@ -131,7 +122,7 @@ namespace Europlan.AdminApplication {
 			this.lstLicenses.MultiSelect = false;
 			this.lstLicenses.Name = "lstLicenses";
 			this.lstLicenses.ShowGroups = false;
-			this.lstLicenses.Size = new System.Drawing.Size(201, 422);
+			this.lstLicenses.Size = new System.Drawing.Size(197, 418);
 			this.lstLicenses.TabIndex = 0;
 			this.lstLicenses.UseCompatibleStateImageBehavior = false;
 			this.lstLicenses.View = System.Windows.Forms.View.Details;
@@ -150,7 +141,7 @@ namespace Europlan.AdminApplication {
 			// btnSaveLicense
 			// 
 			this.btnSaveLicense.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnSaveLicense.Location = new System.Drawing.Point(428, 431);
+			this.btnSaveLicense.Location = new System.Drawing.Point(424, 427);
 			this.btnSaveLicense.Name = "btnSaveLicense";
 			this.btnSaveLicense.Size = new System.Drawing.Size(131, 23);
 			this.btnSaveLicense.TabIndex = 1;
@@ -168,13 +159,12 @@ namespace Europlan.AdminApplication {
 			this.licenseEditor1.Enabled = false;
 			this.licenseEditor1.Location = new System.Drawing.Point(3, 3);
 			this.licenseEditor1.Name = "licenseEditor1";
-			this.licenseEditor1.Size = new System.Drawing.Size(556, 422);
+			this.licenseEditor1.Size = new System.Drawing.Size(552, 418);
 			this.licenseEditor1.TabIndex = 0;
 			// 
 			// tabPageArticles
 			// 
-			this.tabPageArticles.Controls.Add(this.articlesTabControl);
-			this.tabPageArticles.Controls.Add(this.panel1);
+			this.tabPageArticles.Controls.Add(this.materialMapper1);
 			this.tabPageArticles.Location = new System.Drawing.Point(4, 22);
 			this.tabPageArticles.Name = "tabPageArticles";
 			this.tabPageArticles.Padding = new System.Windows.Forms.Padding(3);
@@ -183,96 +173,13 @@ namespace Europlan.AdminApplication {
 			this.tabPageArticles.Text = "Artikelstamm";
 			this.tabPageArticles.UseVisualStyleBackColor = true;
 			// 
-			// articlesTabControl
+			// materialMapper1
 			// 
-			this.articlesTabControl.Controls.Add(this.tabPageFloorHeating);
-			this.articlesTabControl.Controls.Add(this.tabPagePanelHeating);
-			this.articlesTabControl.Controls.Add(this.tabPageDistributor);
-			this.articlesTabControl.Controls.Add(this.tabPageInsulation);
-			this.articlesTabControl.Controls.Add(this.tabPageGeneral);
-			this.articlesTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.articlesTabControl.Location = new System.Drawing.Point(3, 30);
-			this.articlesTabControl.Multiline = true;
-			this.articlesTabControl.Name = "articlesTabControl";
-			this.articlesTabControl.SelectedIndex = 0;
-			this.articlesTabControl.Size = new System.Drawing.Size(773, 430);
-			this.articlesTabControl.TabIndex = 1;
-			// 
-			// tabPageFloorHeating
-			// 
-			this.tabPageFloorHeating.Location = new System.Drawing.Point(4, 22);
-			this.tabPageFloorHeating.Name = "tabPageFloorHeating";
-			this.tabPageFloorHeating.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageFloorHeating.Size = new System.Drawing.Size(765, 404);
-			this.tabPageFloorHeating.TabIndex = 0;
-			this.tabPageFloorHeating.Text = "Fuﬂbodenheizung";
-			this.tabPageFloorHeating.UseVisualStyleBackColor = true;
-			// 
-			// tabPagePanelHeating
-			// 
-			this.tabPagePanelHeating.Location = new System.Drawing.Point(4, 22);
-			this.tabPagePanelHeating.Name = "tabPagePanelHeating";
-			this.tabPagePanelHeating.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPagePanelHeating.Size = new System.Drawing.Size(765, 404);
-			this.tabPagePanelHeating.TabIndex = 1;
-			this.tabPagePanelHeating.Text = "Wandheizung";
-			this.tabPagePanelHeating.UseVisualStyleBackColor = true;
-			// 
-			// tabPageDistributor
-			// 
-			this.tabPageDistributor.Location = new System.Drawing.Point(4, 22);
-			this.tabPageDistributor.Name = "tabPageDistributor";
-			this.tabPageDistributor.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageDistributor.Size = new System.Drawing.Size(765, 404);
-			this.tabPageDistributor.TabIndex = 2;
-			this.tabPageDistributor.Text = "Verteiler";
-			this.tabPageDistributor.UseVisualStyleBackColor = true;
-			// 
-			// tabPageInsulation
-			// 
-			this.tabPageInsulation.Location = new System.Drawing.Point(4, 22);
-			this.tabPageInsulation.Name = "tabPageInsulation";
-			this.tabPageInsulation.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageInsulation.Size = new System.Drawing.Size(765, 404);
-			this.tabPageInsulation.TabIndex = 3;
-			this.tabPageInsulation.Text = "D‰mmung";
-			this.tabPageInsulation.UseVisualStyleBackColor = true;
-			// 
-			// tabPageGeneral
-			// 
-			this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
-			this.tabPageGeneral.Name = "tabPageGeneral";
-			this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageGeneral.Size = new System.Drawing.Size(765, 404);
-			this.tabPageGeneral.TabIndex = 4;
-			this.tabPageGeneral.Text = "Allgemein";
-			this.tabPageGeneral.UseVisualStyleBackColor = true;
-			// 
-			// panel1
-			// 
-			this.panel1.Controls.Add(this.txtCurrency);
-			this.panel1.Controls.Add(this.lblCurrency);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel1.Location = new System.Drawing.Point(3, 3);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(773, 27);
-			this.panel1.TabIndex = 0;
-			// 
-			// txtCurrency
-			// 
-			this.txtCurrency.Location = new System.Drawing.Point(62, 3);
-			this.txtCurrency.Name = "txtCurrency";
-			this.txtCurrency.Size = new System.Drawing.Size(102, 20);
-			this.txtCurrency.TabIndex = 1;
-			// 
-			// lblCurrency
-			// 
-			this.lblCurrency.AutoSize = true;
-			this.lblCurrency.Location = new System.Drawing.Point(5, 6);
-			this.lblCurrency.Name = "lblCurrency";
-			this.lblCurrency.Size = new System.Drawing.Size(51, 13);
-			this.lblCurrency.TabIndex = 0;
-			this.lblCurrency.Text = "W‰hrung";
+			this.materialMapper1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.materialMapper1.Location = new System.Drawing.Point(3, 3);
+			this.materialMapper1.Name = "materialMapper1";
+			this.materialMapper1.Size = new System.Drawing.Size(773, 457);
+			this.materialMapper1.TabIndex = 0;
 			// 
 			// tabPageConstructions
 			// 
@@ -339,9 +246,6 @@ namespace Europlan.AdminApplication {
 			this.splitContainerLicenses.Panel2.ResumeLayout(false);
 			this.splitContainerLicenses.ResumeLayout(false);
 			this.tabPageArticles.ResumeLayout(false);
-			this.articlesTabControl.ResumeLayout(false);
-			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
 			this.tabPageConstructions.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
@@ -365,17 +269,9 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
 		private System.Windows.Forms.TabPage tabPageArticles;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.TabControl articlesTabControl;
-		private System.Windows.Forms.TabPage tabPageFloorHeating;
-		private System.Windows.Forms.TabPage tabPagePanelHeating;
-		private System.Windows.Forms.TextBox txtCurrency;
-		private System.Windows.Forms.Label lblCurrency;
-		private System.Windows.Forms.TabPage tabPageDistributor;
-		private System.Windows.Forms.TabPage tabPageInsulation;
-		private System.Windows.Forms.TabPage tabPageGeneral;
 		private System.Windows.Forms.TabPage tabPageConstructions;
 		private Europlan.AdminApplication.ConstructionEditorGrid constructionEditorPage;
+		private MaterialMapper materialMapper1;
 	}
 }
 

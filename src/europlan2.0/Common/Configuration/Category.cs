@@ -14,25 +14,28 @@ namespace Europlan.Common {
 		General
 	}
 
-	public class Category {
+	public class Category : IComparable {
 
 		private string id;
 		private string name;
 		private CategoryType type;
 		private List<Material> materials;
+		private int order;
 
 		public Category() {
-			this.id = "";
+			this.id = System.Guid.NewGuid().ToString();
 			this.name = "";
 			this.type = CategoryType.General;
 			this.materials = new List<Material>();
+			this.order = 0;
 		}
 
-		public Category(string id, string name, CategoryType type) {
+		public Category(string id, string name, CategoryType type, int order) {
 			this.id = id;
 			this.name = name;
 			this.type = type;
 			this.materials = new List<Material>();
+			this.order = order;
 		}
 
 		public override bool Equals(object obj) {
@@ -42,6 +45,17 @@ namespace Europlan.Common {
 				}
 			}
 			return base.Equals(obj);
+		}
+
+		public override string ToString() {
+			return this.name;
+		}
+
+		public int CompareTo(object obj) {
+			if (obj is Category) {
+				return this.Order.CompareTo((obj as Category).Order);
+			}
+			return 0;
 		}
 
 		public string Id {
@@ -67,6 +81,11 @@ namespace Europlan.Common {
 			set {
 				this.materials = value;
 			}
+		}
+
+		public int Order {
+			get { return this.order; }
+			set { this.order = value; }
 		}
 
 	}
