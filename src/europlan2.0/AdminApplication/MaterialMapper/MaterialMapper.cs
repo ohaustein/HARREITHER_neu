@@ -80,6 +80,7 @@ namespace Europlan.AdminApplication {
 				btnRemove.Enabled = false;
 				selectedCategory = null;
 				InitializeCategorizedMaterialListView();
+				UpdateButtons();
 			}
 		}
 
@@ -103,6 +104,7 @@ namespace Europlan.AdminApplication {
 				btnDown.Enabled = selectedCategory.Order < listCategories.Items.Count;
 			}
 			InitializeCategorizedMaterialListView();
+			UpdateButtons();
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e) {
@@ -117,6 +119,7 @@ namespace Europlan.AdminApplication {
 				}
 				UpdateCategoryList();
 				InitializeUncategorizedMaterialListView();
+				UpdateButtons();
 			}
 		}
 
@@ -150,15 +153,20 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void listUncategorizedMaterials_SelectedIndexChanged(object sender, EventArgs e) {
-			if (listUncategorizedMaterials.SelectedIndices.Count != 0) {
+			UpdateButtons();
+		}
+
+		private void listCategorizedMaterials_SelectedIndexChanged(object sender, EventArgs e) {
+			UpdateButtons();
+		}
+
+		private void UpdateButtons() {
+			if (listUncategorizedMaterials.SelectedItems.Count != 0 && selectedCategory != null) {
 				btnCategorize.Enabled = true;
 			} else {
 				btnCategorize.Enabled = false;
 			}
-		}
-
-		private void listCategorizedMaterials_SelectedIndexChanged(object sender, EventArgs e) {
-			if (listCategorizedMaterials.SelectedIndices.Count != 0) {
+			if (listCategorizedMaterials.SelectedItems.Count != 0 && selectedCategory != null) {
 				btnUncategorize.Enabled = true;
 			} else {
 				btnUncategorize.Enabled = false;
@@ -177,6 +185,7 @@ namespace Europlan.AdminApplication {
 				}
 				InitializeUncategorizedMaterialListView();
 				InitializeCategorizedMaterialListView();
+				UpdateButtons();
 			}
 		}
 
@@ -195,6 +204,7 @@ namespace Europlan.AdminApplication {
 				}
 				InitializeUncategorizedMaterialListView();
 				InitializeCategorizedMaterialListView();
+				UpdateButtons();
 			}
 		}
 	}

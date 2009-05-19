@@ -23,18 +23,18 @@ namespace Europlan.AdminApplication {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			System.Windows.Forms.ListViewGroup listViewGroup25 = new System.Windows.Forms.ListViewGroup("Boden", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup26 = new System.Windows.Forms.ListViewGroup("Wand", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup27 = new System.Windows.Forms.ListViewGroup("Decke", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup28 = new System.Windows.Forms.ListViewGroup("Verteiler", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup29 = new System.Windows.Forms.ListViewGroup("Dämmung", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup30 = new System.Windows.Forms.ListViewGroup("Allgemein", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup31 = new System.Windows.Forms.ListViewGroup("Boden", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup32 = new System.Windows.Forms.ListViewGroup("Wand", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup33 = new System.Windows.Forms.ListViewGroup("Decke", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup34 = new System.Windows.Forms.ListViewGroup("Verteiler", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup35 = new System.Windows.Forms.ListViewGroup("Dämmung", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewGroup listViewGroup36 = new System.Windows.Forms.ListViewGroup("Allgemein", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Boden", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Wand", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Decke", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Verteiler", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Dämmung", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Allgemein", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Boden", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Wand", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Decke", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("Verteiler", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup11 = new System.Windows.Forms.ListViewGroup("Dämmung", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewGroup listViewGroup12 = new System.Windows.Forms.ListViewGroup("Allgemein", System.Windows.Forms.HorizontalAlignment.Left);
 			this.listUncategorizedMaterials = new System.Windows.Forms.ListView();
 			this.columnHeaderName = new System.Windows.Forms.ColumnHeader();
 			this.columnHeaderPartNumber = new System.Windows.Forms.ColumnHeader();
@@ -69,28 +69,27 @@ namespace Europlan.AdminApplication {
             this.columnHeaderPartNumber});
 			this.listUncategorizedMaterials.FullRowSelect = true;
 			this.listUncategorizedMaterials.GridLines = true;
-			listViewGroup25.Header = "Boden";
-			listViewGroup25.Name = "listViewGroupFloor";
-			listViewGroup26.Header = "Wand";
-			listViewGroup26.Name = "listViewGroupWall";
-			listViewGroup27.Header = "Decke";
-			listViewGroup27.Name = "listViewGroupCeiling";
-			listViewGroup28.Header = "Verteiler";
-			listViewGroup28.Name = "listViewGroupDistributor";
-			listViewGroup29.Header = "Dämmung";
-			listViewGroup29.Name = "listViewGroupInsulation";
-			listViewGroup30.Header = "Allgemein";
-			listViewGroup30.Name = "listViewGroupGeneral";
+			listViewGroup1.Header = "Boden";
+			listViewGroup1.Name = "listViewGroupFloor";
+			listViewGroup2.Header = "Wand";
+			listViewGroup2.Name = "listViewGroupWall";
+			listViewGroup3.Header = "Decke";
+			listViewGroup3.Name = "listViewGroupCeiling";
+			listViewGroup4.Header = "Verteiler";
+			listViewGroup4.Name = "listViewGroupDistributor";
+			listViewGroup5.Header = "Dämmung";
+			listViewGroup5.Name = "listViewGroupInsulation";
+			listViewGroup6.Header = "Allgemein";
+			listViewGroup6.Name = "listViewGroupGeneral";
 			this.listUncategorizedMaterials.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup25,
-            listViewGroup26,
-            listViewGroup27,
-            listViewGroup28,
-            listViewGroup29,
-            listViewGroup30});
+            listViewGroup1,
+            listViewGroup2,
+            listViewGroup3,
+            listViewGroup4,
+            listViewGroup5,
+            listViewGroup6});
 			this.listUncategorizedMaterials.HideSelection = false;
 			this.listUncategorizedMaterials.Location = new System.Drawing.Point(3, 23);
-			this.listUncategorizedMaterials.MultiSelect = false;
 			this.listUncategorizedMaterials.Name = "listUncategorizedMaterials";
 			this.listUncategorizedMaterials.ShowGroups = false;
 			this.listUncategorizedMaterials.Size = new System.Drawing.Size(268, 558);
@@ -291,28 +290,27 @@ namespace Europlan.AdminApplication {
             this.columnHeader2});
 			this.listCategorizedMaterials.FullRowSelect = true;
 			this.listCategorizedMaterials.GridLines = true;
-			listViewGroup31.Header = "Boden";
-			listViewGroup31.Name = "listViewGroupFloor";
-			listViewGroup32.Header = "Wand";
-			listViewGroup32.Name = "listViewGroupWall";
-			listViewGroup33.Header = "Decke";
-			listViewGroup33.Name = "listViewGroupCeiling";
-			listViewGroup34.Header = "Verteiler";
-			listViewGroup34.Name = "listViewGroupDistributor";
-			listViewGroup35.Header = "Dämmung";
-			listViewGroup35.Name = "listViewGroupInsulation";
-			listViewGroup36.Header = "Allgemein";
-			listViewGroup36.Name = "listViewGroupGeneral";
+			listViewGroup7.Header = "Boden";
+			listViewGroup7.Name = "listViewGroupFloor";
+			listViewGroup8.Header = "Wand";
+			listViewGroup8.Name = "listViewGroupWall";
+			listViewGroup9.Header = "Decke";
+			listViewGroup9.Name = "listViewGroupCeiling";
+			listViewGroup10.Header = "Verteiler";
+			listViewGroup10.Name = "listViewGroupDistributor";
+			listViewGroup11.Header = "Dämmung";
+			listViewGroup11.Name = "listViewGroupInsulation";
+			listViewGroup12.Header = "Allgemein";
+			listViewGroup12.Name = "listViewGroupGeneral";
 			this.listCategorizedMaterials.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup31,
-            listViewGroup32,
-            listViewGroup33,
-            listViewGroup34,
-            listViewGroup35,
-            listViewGroup36});
+            listViewGroup7,
+            listViewGroup8,
+            listViewGroup9,
+            listViewGroup10,
+            listViewGroup11,
+            listViewGroup12});
 			this.listCategorizedMaterials.HideSelection = false;
 			this.listCategorizedMaterials.Location = new System.Drawing.Point(90, 169);
-			this.listCategorizedMaterials.MultiSelect = false;
 			this.listCategorizedMaterials.Name = "listCategorizedMaterials";
 			this.listCategorizedMaterials.ShowGroups = false;
 			this.listCategorizedMaterials.Size = new System.Drawing.Size(445, 412);
