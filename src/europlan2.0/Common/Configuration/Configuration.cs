@@ -214,7 +214,7 @@ namespace Europlan.Common {
 						int order = 1;
 						foreach (Category c in userTemplate.categories) {
 							if (c.Type == (CategoryType)i) {
-								if (c.Order > order) {
+								if (c.Order >= order) {
 									order = c.Order + 1;
 								}
 							}
