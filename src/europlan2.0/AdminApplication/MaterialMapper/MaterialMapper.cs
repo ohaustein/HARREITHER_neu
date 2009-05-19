@@ -11,9 +11,12 @@ using System.Collections;
 namespace Europlan.AdminApplication {
 	public partial class MaterialMapper : UserControl {
 
+		private Category selectedCategory = null;
+
 		public MaterialMapper() {
 			InitializeComponent();
 			InitializeUncategorizedMaterialListView();
+			InitializeCategorizedMaterialListView();
 			cmbRootCategories.SelectedIndex = 0;
 		}
 
@@ -29,7 +32,20 @@ namespace Europlan.AdminApplication {
 					listUncategorizedMaterials.Items.Add(item);
 				}
 			}
-			listUncategorizedMaterials.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+			listUncategorizedMaterials.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+		}
+
+		private void InitializeCategorizedMaterialListView() {
+			listCategorizedMaterials.Items.Clear();
+			if (selectedCategory != null) {
+				foreach (Material material in selectedCategory.Materials) {
+			        string[] mat = new string[] { material.Name, material.PartNumber };
+			        ListViewItem item = new ListViewItem(mat);
+			        item.Tag = material;
+			        listCategorizedMaterials.Items.Add(item);
+				}
+			}
+			listCategorizedMaterials.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 		}
 
 		private void splitContainer_SplitterMoved(object sender, SplitterEventArgs e) {
@@ -62,6 +78,8 @@ namespace Europlan.AdminApplication {
 				btnDown.Enabled = false;
 				btnUp.Enabled = false;
 				btnRemove.Enabled = false;
+				selectedCategory = null;
+				InitializeCategorizedMaterialListView();
 			}
 		}
 
@@ -75,7 +93,7 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void listCategories_SelectedIndexChanged(object sender, EventArgs e) {
-			Category selectedCategory = (listCategories.SelectedItem as Category);
+			selectedCategory = (listCategories.SelectedItem as Category);
 
 			if (selectedCategory != null) {
 				txtCategoryName.Text = selectedCategory.Name;
@@ -84,12 +102,22 @@ namespace Europlan.AdminApplication {
 				btnUp.Enabled = selectedCategory.Order > 1;
 				btnDown.Enabled = selectedCategory.Order < listCategories.Items.Count;
 			}
+			InitializeCategorizedMaterialListView();
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e) {
 			Category selectedCategory = (listCategories.SelectedItem as Category);
-			Configuration.AdminTemplate.Categories.Remove(selectedCategory);
-			UpdateCategoryList();
+			if (selectedCategory != null) {
+				Configuration.AdminTemplate.Categories.Remove(selectedCategory);
+				foreach (Material material in selectedCategory.Materials) {
+					material.Category = null;
+					if (Configuration.AdminTemplate.MaterialToCategoryMapping.ContainsKey(material.Id)) {
+						Configuration.AdminTemplate.MaterialToCategoryMapping.Remove(material.Id);
+					}
+				}
+				UpdateCategoryList();
+				InitializeUncategorizedMaterialListView();
+			}
 		}
 
 		private void txtCategoryName_TextChanged(object sender, EventArgs e) {
@@ -119,6 +147,55 @@ namespace Europlan.AdminApplication {
 			listCategories.Items[listCategories.SelectedIndex + 1] = cat1;
 			listCategories.Items[listCategories.SelectedIndex] = cat2;
 			listCategories.SelectedIndex++;
+		}
+
+		private void listUncategorizedMaterials_SelectedIndexChanged(object sender, EventArgs e) {
+			if (listUncategorizedMaterials.SelectedIndices.Count != 0) {
+				btnCategorize.Enabled = true;
+			} else {
+				btnCategorize.Enabled = false;
+			}
+		}
+
+		private void listCategorizedMaterials_SelectedIndexChanged(object sender, EventArgs e) {
+			if (listCategorizedMaterials.SelectedIndices.Count != 0) {
+				btnUncategorize.Enabled = true;
+			} else {
+				btnUncategorize.Enabled = false;
+			}
+		}
+
+		private void btnCategorize_Click(object sender, EventArgs e) {
+			if ((selectedCategory != null) && (listUncategorizedMaterials.SelectedIndices.Count != 0)) {
+				foreach (ListViewItem item in listUncategorizedMaterials.SelectedItems) {
+					if (item.Tag != null && item.Tag is Material) {
+						Material material = item.Tag as Material;
+						material.Category = selectedCategory;
+						selectedCategory.Materials.Add(material);
+						Configuration.AdminTemplate.MaterialToCategoryMapping[material.Id] = selectedCategory.Id;
+					}
+				}
+				InitializeUncategorizedMaterialListView();
+				InitializeCategorizedMaterialListView();
+			}
+		}
+
+		private void btnUncategorize_Click(object sender, EventArgs e) {
+			if (selectedCategory != null) {
+				foreach (ListViewItem item in listCategorizedMaterials.SelectedItems) {
+					if (item.Tag != null && item.Tag is Material) {
+						Material material = item.Tag as Material;
+						material.Category = null;
+						selectedCategory.Materials.Remove(material);
+						if (Configuration.AdminTemplate.MaterialToCategoryMapping.ContainsKey(material.Id)) {
+							Configuration.AdminTemplate.MaterialToCategoryMapping.Remove(material.Id);
+						}
+						
+					}
+				}
+				InitializeUncategorizedMaterialListView();
+				InitializeCategorizedMaterialListView();
+			}
 		}
 	}
 }
