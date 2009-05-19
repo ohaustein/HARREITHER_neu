@@ -40,18 +40,18 @@ namespace Europlan.Application {
 			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Area = new Europlan.Application.NumericColumn();
-			this.RoomTemperature = new Europlan.Application.NumericColumn();
-			this.HeatPower = new Europlan.Application.NumericColumn();
-			this.FloorHeatingLoss = new Europlan.Application.NumericColumn();
-			this.AdditionalHeatPower = new Europlan.Application.NumericColumn();
+			this.Area = new Europlan.Common.NumericColumn();
+			this.RoomTemperature = new Europlan.Common.NumericColumn();
+			this.HeatPower = new Europlan.Common.NumericColumn();
+			this.FloorHeatingLoss = new Europlan.Common.NumericColumn();
+			this.AdditionalHeatPower = new Europlan.Common.NumericColumn();
 			this.associatedPanelTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.associatedIconDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
 			this.floorRoomsSource = new System.Windows.Forms.BindingSource(this.components);
-			this.numericColumn1 = new Europlan.Application.NumericColumn();
-			this.numericColumn2 = new Europlan.Application.NumericColumn();
-			this.numericColumn3 = new Europlan.Application.NumericColumn();
-			this.numericColumn4 = new Europlan.Application.NumericColumn();
+			this.numericColumn1 = new Europlan.Common.NumericColumn();
+			this.numericColumn2 = new Europlan.Common.NumericColumn();
+			this.numericColumn3 = new Europlan.Common.NumericColumn();
+			this.numericColumn4 = new Europlan.Common.NumericColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridRooms)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.floorRoomsSource)).BeginInit();
 			this.SuspendLayout();
@@ -152,7 +152,7 @@ namespace Europlan.Application {
 			this.Area.DefaultCellStyle = dataGridViewCellStyle2;
 			this.Area.HeaderText = "A (m≤)";
 			this.Area.Name = "Area";
-			this.Area.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_AREA;
+			this.Area.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.Area.ToolTipText = "Raumfl‰che";
 			this.Area.Width = 50;
 			// 
@@ -164,7 +164,7 @@ namespace Europlan.Application {
 			this.RoomTemperature.DefaultCellStyle = dataGridViewCellStyle3;
 			this.RoomTemperature.HeaderText = "Ti (∞C)";
 			this.RoomTemperature.Name = "RoomTemperature";
-			this.RoomTemperature.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_TEMPERATURE;
+			this.RoomTemperature.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
 			this.RoomTemperature.ToolTipText = "Norminnentemperatur laut W‰rmebedarfsberechnung";
 			this.RoomTemperature.Width = 40;
 			// 
@@ -176,7 +176,7 @@ namespace Europlan.Application {
 			this.HeatPower.DefaultCellStyle = dataGridViewCellStyle4;
 			this.HeatPower.HeaderText = "QN (W)";
 			this.HeatPower.Name = "HeatPower";
-			this.HeatPower.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+			this.HeatPower.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.HeatPower.ToolTipText = "Normw‰rmebedarf laut W‰rmebedarfsrechnung";
 			this.HeatPower.Width = 50;
 			// 
@@ -188,7 +188,7 @@ namespace Europlan.Application {
 			this.FloorHeatingLoss.DefaultCellStyle = dataGridViewCellStyle5;
 			this.FloorHeatingLoss.HeaderText = "QFB (W)";
 			this.FloorHeatingLoss.Name = "FloorHeatingLoss";
-			this.FloorHeatingLoss.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+			this.FloorHeatingLoss.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.FloorHeatingLoss.ToolTipText = "im W‰rmebedarf enthaltene Fuﬂbodentransmissionen";
 			this.FloorHeatingLoss.Width = 50;
 			// 
@@ -200,7 +200,7 @@ namespace Europlan.Application {
 			this.AdditionalHeatPower.DefaultCellStyle = dataGridViewCellStyle6;
 			this.AdditionalHeatPower.HeaderText = "QFr (W)";
 			this.AdditionalHeatPower.Name = "AdditionalHeatPower";
-			this.AdditionalHeatPower.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+			this.AdditionalHeatPower.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.AdditionalHeatPower.ToolTipText = "zus‰tzliche Fremdw‰rmeleistung";
 			this.AdditionalHeatPower.Width = 50;
 			// 
@@ -232,7 +232,7 @@ namespace Europlan.Application {
 			this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle7;
 			this.numericColumn1.HeaderText = "A (m≤)";
 			this.numericColumn1.Name = "numericColumn1";
-			this.numericColumn1.NumEditType = Europlan.Application.NumericBox.NumericEditType.ROOM_AREA;
+			this.numericColumn1.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			// 
 			// numericColumn2
 			// 
@@ -284,17 +284,17 @@ namespace Europlan.Application {
 		private System.Windows.Forms.Label lblName;
 		private System.Windows.Forms.DataGridView gridRooms;
 		private System.Windows.Forms.BindingSource floorRoomsSource;
-		private NumericColumn numericColumn1;
-		private NumericColumn numericColumn2;
-		private NumericColumn numericColumn3;
-		private NumericColumn numericColumn4;
+		private Europlan.Common.NumericColumn numericColumn1;
+		private Europlan.Common.NumericColumn numericColumn2;
+		private Europlan.Common.NumericColumn numericColumn3;
+		private Europlan.Common.NumericColumn numericColumn4;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-		private NumericColumn Area;
-		private NumericColumn RoomTemperature;
-		private NumericColumn HeatPower;
-		private NumericColumn FloorHeatingLoss;
-		private NumericColumn AdditionalHeatPower;
+		private Europlan.Common.NumericColumn Area;
+		private Europlan.Common.NumericColumn RoomTemperature;
+		private Europlan.Common.NumericColumn HeatPower;
+		private Europlan.Common.NumericColumn FloorHeatingLoss;
+		private Europlan.Common.NumericColumn AdditionalHeatPower;
 		private System.Windows.Forms.DataGridViewButtonColumn colView;
 		private System.Windows.Forms.DataGridViewTextBoxColumn associatedPanelTypeDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewImageColumn associatedIconDataGridViewImageColumn;

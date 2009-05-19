@@ -44,9 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\NumericBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="DataExchange\BuildingDataImportManager.cs" />
     <Compile Include="DataExchange\IBuildingDataImporter.cs" />
     <Compile Include="DataExchange\SOLAR32Importer.cs" />
@@ -168,11 +165,6 @@
     <Compile Include="Project\FloorSummaryPanel.Designer.cs">
       <DependentUpon>FloorSummaryPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NumericColumn.cs" />
-    <Compile Include="Controls\NumericEditingControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\NumericCell.cs" />
     <Compile Include="Project\Project.cs" />
     <Compile Include="Project\ProjectSummaryPanel.cs">
       <SubType>UserControl</SubType>
