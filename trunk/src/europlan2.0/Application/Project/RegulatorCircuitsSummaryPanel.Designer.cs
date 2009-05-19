@@ -29,7 +29,7 @@ namespace Europlan.Application {
 			this.gridRegulatoryCircuits = new System.Windows.Forms.DataGridView();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.flowTemperatureDataGridViewTextBoxColumn = new Europlan.Application.NumericColumn();
+			this.flowTemperatureDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.regulatoryCircuitsSource = new System.Windows.Forms.BindingSource(this.components);
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,7 +94,7 @@ namespace Europlan.Application {
 			this.flowTemperatureDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
 			this.flowTemperatureDataGridViewTextBoxColumn.HeaderText = "TvHeiz (°C)";
 			this.flowTemperatureDataGridViewTextBoxColumn.Name = "flowTemperatureDataGridViewTextBoxColumn";
-			this.flowTemperatureDataGridViewTextBoxColumn.NumEditType = Europlan.Application.NumericBox.NumericEditType.REGULATORY_CIRCUIT_TEMP;
+			this.flowTemperatureDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.REGULATORY_CIRCUIT_TEMP;
 			this.flowTemperatureDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.flowTemperatureDataGridViewTextBoxColumn.ToolTipText = "Vorlauftemperatur im Heizbetrieb";
 			this.flowTemperatureDataGridViewTextBoxColumn.Width = 50;
@@ -145,6 +145,6 @@ namespace Europlan.Application {
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-		private NumericColumn flowTemperatureDataGridViewTextBoxColumn;
+		private Europlan.Common.NumericColumn flowTemperatureDataGridViewTextBoxColumn;
 	}
 }

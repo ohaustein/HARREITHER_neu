@@ -54,12 +54,6 @@
     <Compile Include="ContructionEditor\ConstructionEditorGrid.Designer.cs">
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
     </Compile>
-    <Compile Include="MaterialEditor\MaterialEditorGrid.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MaterialEditor\MaterialEditorGrid.Designer.cs">
-      <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
-    </Compile>
     <Compile Include="LicenseEditor\DateColumn.cs" />
     <Compile Include="LicenseEditor\DateEditingControl.cs">
       <SubType>Component</SubType>
@@ -117,10 +111,6 @@
     <EmbeddedResource Include="ContructionEditor\ConstructionEditorGrid.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MaterialEditor\MaterialEditorGrid.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LicenseEditor\HardwareIdBox.resx">
       <SubType>Designer</SubType>

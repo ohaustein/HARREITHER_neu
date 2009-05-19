@@ -37,12 +37,12 @@ namespace Europlan.Application {
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
-			this.txtNormCool = new Europlan.Application.NumericBox();
-			this.txtCool = new Europlan.Application.NumericBox();
-			this.txtNormHeat = new Europlan.Application.NumericBox();
-			this.txtHeat = new Europlan.Application.NumericBox();
-			this.txtTemperature = new Europlan.Application.NumericBox();
-			this.txtArea = new Europlan.Application.NumericBox();
+			this.txtNormCool = new Europlan.Common.NumericBox();
+			this.txtCool = new Europlan.Common.NumericBox();
+			this.txtNormHeat = new Europlan.Common.NumericBox();
+			this.txtHeat = new Europlan.Common.NumericBox();
+			this.txtTemperature = new Europlan.Common.NumericBox();
+			this.txtArea = new Europlan.Common.NumericBox();
 			this.SuspendLayout();
 			// 
 			// txtName
@@ -184,7 +184,7 @@ namespace Europlan.Application {
 			// 
 			this.txtNormCool.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtNormCool.EditType = Europlan.Application.NumericBox.NumericEditType.ROOM_COOL_POWER;
+			this.txtNormCool.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
 			this.txtNormCool.InternalValue = new decimal(new int[] {
             0,
             0,
@@ -206,7 +206,7 @@ namespace Europlan.Application {
 			// 
 			this.txtCool.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtCool.EditType = Europlan.Application.NumericBox.NumericEditType.ROOM_COOL_POWER;
+			this.txtCool.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
 			this.txtCool.InternalValue = new decimal(new int[] {
             0,
             0,
@@ -228,7 +228,7 @@ namespace Europlan.Application {
 			// 
 			this.txtNormHeat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtNormHeat.EditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+			this.txtNormHeat.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.txtNormHeat.InternalValue = new decimal(new int[] {
             0,
             0,
@@ -250,7 +250,7 @@ namespace Europlan.Application {
 			// 
 			this.txtHeat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtHeat.EditType = Europlan.Application.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+			this.txtHeat.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.txtHeat.InternalValue = new decimal(new int[] {
             0,
             0,
@@ -272,7 +272,7 @@ namespace Europlan.Application {
 			// 
 			this.txtTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtTemperature.EditType = Europlan.Application.NumericBox.NumericEditType.ROOM_TEMPERATURE;
+			this.txtTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
 			this.txtTemperature.InternalValue = new decimal(new int[] {
             0,
             0,
@@ -294,7 +294,7 @@ namespace Europlan.Application {
 			// 
 			this.txtArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtArea.EditType = Europlan.Application.NumericBox.NumericEditType.DEFAULT;
+			this.txtArea.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.txtArea.InternalValue = new decimal(new int[] {
             0,
             0,
@@ -359,11 +359,11 @@ namespace Europlan.Application {
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
-		private NumericBox txtArea;
-		private NumericBox txtTemperature;
-		private NumericBox txtHeat;
-		private NumericBox txtNormHeat;
-		private NumericBox txtCool;
-		private NumericBox txtNormCool;
+		private Europlan.Common.NumericBox txtArea;
+		private Europlan.Common.NumericBox txtTemperature;
+		private Europlan.Common.NumericBox txtHeat;
+		private Europlan.Common.NumericBox txtNormHeat;
+		private Europlan.Common.NumericBox txtCool;
+		private Europlan.Common.NumericBox txtNormCool;
 	}
 }
