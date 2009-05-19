@@ -45,6 +45,18 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void UpdateConstructionScopeOfGui() {
+			MaterialListWrapper insulations = new MaterialListWrapper();
+			insulations.FilterCategory = CategoryType.Insulation;
+			//this.colMaterial.DataSource = insulations;
+			this.colMaterial.ValueMember = "Material";
+			this.colMaterial.DisplayMember = "Name";
+			//this.colMaterial.Items.Add(null);
+			this.colMaterial.Items.Clear();
+			//this.colMaterial.Items.Add(Material.EmptyMaterial);
+			this.colMaterial.Items.Add(new MaterialItem("", null));
+			foreach (Material m in insulations) {
+				this.colMaterial.Items.Add(new MaterialItem(m.Name, m));
+			}
 			switch (this.ConstructionScope) {
 				case ConstructionScopeEnum.FloorConstruction:
 					this.cbPeFoil.Visible = false;
@@ -108,6 +120,30 @@ namespace Europlan.AdminApplication {
 		private void numThickness_ValueChanged(object sender, EventArgs e) {
 			if (this.construction is FloorConstruction) {
 				(this.construction as FloorConstruction).FloorThickness = (float)this.numThickness.Value;
+			}
+		}
+
+		private class MaterialItem {
+			private string name;
+			private Material material;
+
+			public MaterialItem(string name, Material material) {
+				this.name = name;
+				this.material = material;
+			}
+
+			public string Name {
+				get { return this.name; }
+			}
+
+			public Material Material {
+				get { return this.material; }
+			}
+		}
+
+		public void ClearSelection() {
+			foreach (DataGridViewRow row in this.dataGridView1.SelectedRows) {
+				row.Selected = false;
 			}
 		}
 	}
