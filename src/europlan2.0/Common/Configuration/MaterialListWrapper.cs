@@ -11,7 +11,7 @@ namespace Europlan.Common {
 		private Nullable<CategoryType> filter = null;
 
 		public MaterialListWrapper() {
-			this.materials = Configuration.AdminTemplate.Materials;
+			this.materials = Configuration.UserTemplate.Materials;
 		}
 
 		#region IEnumerable<Construction> Members
@@ -221,7 +221,12 @@ namespace Europlan.Common {
 		}
 
 		public object AddNew() {
+			if (this.filter == null) {
+				throw new NotSupportedException("The method or operation is not implemented");
+			}
 			Material m = new Material();
+			m.Category = Configuration.UserTemplate.GetUserDefinedCategoryForCategoryType(this.filter.Value);
+			m.UserDefined = true;
 			this.materials.Add(m);
 			return m;
 		}
@@ -231,7 +236,7 @@ namespace Europlan.Common {
 		}
 
 		public bool AllowNew {
-			get { return this.filter == CategoryType.General; }
+			get { return this.filter == CategoryType.General || this.filter == CategoryType.Insulation; }
 		}
 
 		public bool AllowRemove {

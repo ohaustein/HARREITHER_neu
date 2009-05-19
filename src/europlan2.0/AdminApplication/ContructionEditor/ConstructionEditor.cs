@@ -142,7 +142,7 @@ namespace Europlan.AdminApplication {
 		}
 
 		public void ClearSelection() {
-			foreach (DataGridViewRow row in this.dataGridView1.SelectedRows) {
+			foreach (DataGridViewRow row in this.gridLayers.SelectedRows) {
 				row.Selected = false;
 			}
 		}
