@@ -296,10 +296,33 @@ namespace Europlan.Common {
 
 		public SerializableDictionary<string, string> MaterialToCategoryMapping {
 			get {
-				return this.materialToCategoryMapping;
+				SerializableDictionary<string, string> mapping = new SerializableDictionary<string, string>();
+				if (type == ConfigurationType.ProjectConfiguration || type == ConfigurationType.UserConfiguration) {
+					foreach (Material material in this.materials) {
+						if ((material.UserDefined) && (material.Category != null)) {
+							if (!mapping.ContainsKey(material.Id)) {
+								mapping.Add(material.Id, material.Category.Id);
+							}
+						}
+					}
+				} else if (type == ConfigurationType.AdminConfiguration) {
+					foreach (Material material in this.materials) {
+						if ((!material.UserDefined) && (material.Category != null)) {
+							if (!mapping.ContainsKey(material.Id)) {
+								mapping.Add(material.Id, material.Category.Id);
+							}
+						}
+					}
+				} else {
+					mapping = this.materialToCategoryMapping;
+				}
+				return mapping;
 			}
 			set {
-				this.materialToCategoryMapping = value;
+				if (type == ConfigurationType.InitializedConfiguration) {
+					this.materialToCategoryMapping = value;
+					RecalculateMaterialToCategoryMapping();
+				}
 			}
 		}
 
