@@ -16,7 +16,7 @@ namespace Europlan.Common {
 		private Category category;
 
 		public Material() {
-			this.id = "";
+			this.id = System.Guid.NewGuid().ToString();
 			this.name = "";
 			this.partNumber = "";
 			this.denomination = null;
