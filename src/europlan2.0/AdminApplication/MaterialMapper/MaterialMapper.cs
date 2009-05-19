@@ -113,9 +113,6 @@ namespace Europlan.AdminApplication {
 				Configuration.AdminTemplate.Categories.Remove(selectedCategory);
 				foreach (Material material in selectedCategory.Materials) {
 					material.Category = null;
-					if (Configuration.AdminTemplate.MaterialToCategoryMapping.ContainsKey(material.Id)) {
-						Configuration.AdminTemplate.MaterialToCategoryMapping.Remove(material.Id);
-					}
 				}
 				UpdateCategoryList();
 				InitializeUncategorizedMaterialListView();
@@ -180,7 +177,6 @@ namespace Europlan.AdminApplication {
 						Material material = item.Tag as Material;
 						material.Category = selectedCategory;
 						selectedCategory.Materials.Add(material);
-						Configuration.AdminTemplate.MaterialToCategoryMapping[material.Id] = selectedCategory.Id;
 					}
 				}
 				InitializeUncategorizedMaterialListView();
@@ -196,10 +192,6 @@ namespace Europlan.AdminApplication {
 						Material material = item.Tag as Material;
 						material.Category = null;
 						selectedCategory.Materials.Remove(material);
-						if (Configuration.AdminTemplate.MaterialToCategoryMapping.ContainsKey(material.Id)) {
-							Configuration.AdminTemplate.MaterialToCategoryMapping.Remove(material.Id);
-						}
-						
 					}
 				}
 				InitializeUncategorizedMaterialListView();
