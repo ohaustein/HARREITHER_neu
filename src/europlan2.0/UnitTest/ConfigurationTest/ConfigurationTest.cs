@@ -36,10 +36,6 @@ namespace Europlan.UnitTest {
 			category = new Category("eigenDecke", "Modul Decke", CategoryType.Ceiling, 1);
 			config.Categories.Add(category);
 
-			config.MaterialToCategoryMapping.Add("EV15", "euroval");
-			config.MaterialToCategoryMapping.Add("MK30", "modulwand");
-			config.MaterialToCategoryMapping.Add("MAT01", "eigenDecke");
-
 			config.Type = Configuration.ConfigurationType.AdminConfiguration;
 			Assert.AreEqual(0, config.SerializableMaterials.Count);
 			config.Save();
