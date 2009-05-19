@@ -6,33 +6,33 @@ using System.ComponentModel;
 namespace Europlan.Common {
 	public class MaterialListWrapper : IList<Material>, IBindingList, IBindingListView {
 
-		private List<Material> constructions;
+		private List<Material> materials;
 
-		private Nullable<MaterialTypeEnum> filter = null;
+		private Nullable<CategoryType> filter = null;
 
 		public MaterialListWrapper() {
-			this.constructions = Configuration.AdminTemplate.Materials;
+			this.materials = Configuration.AdminTemplate.Materials;
 		}
 
 		#region IEnumerable<Construction> Members
 		public IEnumerator<Material> GetEnumerator() {
-			return new MaterialListEnumerator(this.constructions, (this.filter == null ? MaterialTypeEnum.All : this.filter.Value));
+			return new MaterialListEnumerator(this.materials, this.filter);
 		}
 		#endregion
 
 		#region IEnumerable Members
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-			return new MaterialListEnumerator(this.constructions, (this.filter == null ? MaterialTypeEnum.All : this.filter.Value));
+			return new MaterialListEnumerator(this.materials, this.filter);
 		}
 		#endregion
 
 		#region ICollection<Construction> Members
 		public void Add(Material item) {
-			this.constructions.Add(item);
+			this.materials.Add(item);
 		}
 
 		public void Clear() {
-			this.constructions.Clear();
+			this.materials.Clear();
 		}
 
 		public bool Contains(Material item) {
@@ -64,7 +64,7 @@ namespace Europlan.Common {
 		}
 
 		public bool Remove(Material item) {
-			bool result = this.constructions.Remove(item);
+			bool result = this.materials.Remove(item);
 			return result;
 		}
 		#endregion
@@ -105,32 +105,32 @@ namespace Europlan.Common {
 		private int GetNode(int index) {
 			int i = 0;
 			int current = 0;
-			// TODO while (current < this.constructions.Count && (this.filter != null && ((this.filter.Value & this.constructions[current].Type) == MaterialTypeEnum.UnknownMaterial))) {
+			while (current < this.materials.Count && (this.filter != null && (this.materials[current].Category == null || this.filter.Value != this.materials[current].Category.Type))) {
 				current++;
-			// TODO}
-			while (i < index && current < this.constructions.Count) {
+			}
+			while (i < index && current < this.materials.Count) {
 				current++;
-				// TODOwhile (current < this.constructions.Count && (this.filter != null && ((this.filter.Value & this.constructions[current].Type) == MaterialTypeEnum.UnknownMaterial))) {
+				while (current < this.materials.Count && (this.filter != null && (this.materials[current].Category == null || this.filter.Value != this.materials[current].Category.Type))) {
 					current++;
-					// TODO}
+				}
 				i++;
 			}
-			return current < this.constructions.Count ? current : -1;
+			return current < this.materials.Count ? current : -1;
 		}
 
 		public void Insert(int index, Material item) {
 			int node = this.GetNode(index);
 			if (node < 0) {
-				this.constructions.Insert(this.constructions.Count, item);
+				this.materials.Insert(this.materials.Count, item);
 			} else {
-				this.constructions.Insert(node, item);
+				this.materials.Insert(node, item);
 			}
 		}
 
 		public void RemoveAt(int index) {
 			int node = this.GetNode(index);
 			if (node >= 0) {
-				this.constructions.RemoveAt(node);
+				this.materials.RemoveAt(node);
 			} else {
 				throw new ArgumentOutOfRangeException();
 			}
@@ -142,7 +142,7 @@ namespace Europlan.Common {
 				if (node < 0) {
 					throw new ArgumentOutOfRangeException();
 				} else {
-					return this.constructions[node];
+					return this.materials[node];
 				}
 			}
 			set {
@@ -150,7 +150,7 @@ namespace Europlan.Common {
 				if (node < 0) {
 					throw new ArgumentOutOfRangeException();
 				} else {
-					this.constructions[node] = value;
+					this.materials[node] = value;
 				}
 			}
 		}
@@ -159,8 +159,8 @@ namespace Europlan.Common {
 		#region IList Members
 		public int Add(object value) {
 			if (value is Material) {
-				this.constructions.Add((Material)value);
-				return this.constructions.Count - 1;
+				this.materials.Add((Material)value);
+				return this.materials.Count - 1;
 			} else {
 				throw new ArgumentException("Object to add is not a material");
 			}
@@ -188,7 +188,7 @@ namespace Europlan.Common {
 
 		public void Remove(object value) {
 			if (value is Material) {
-				this.constructions.Remove((Material)value);
+				this.materials.Remove((Material)value);
 			}
 		}
 
@@ -198,7 +198,7 @@ namespace Europlan.Common {
 				if (node < 0) {
 					throw new ArgumentOutOfRangeException();
 				} else {
-					return this.constructions[node];
+					return this.materials[node];
 				}
 			}
 			set {
@@ -207,7 +207,7 @@ namespace Europlan.Common {
 					if (node < 0) {
 						throw new ArgumentOutOfRangeException();
 					} else {
-						this.constructions[node] = (Material)value;
+						this.materials[node] = (Material)value;
 					}
 				} else {
 					throw new ArgumentException("Object to set is not a material");
@@ -221,7 +221,9 @@ namespace Europlan.Common {
 		}
 
 		public object AddNew() {
-			throw new NotSupportedException("The method or operation is not implemented.");
+			Material m = new Material();
+			this.materials.Add(m);
+			return m;
 		}
 
 		public bool AllowEdit {
@@ -229,7 +231,7 @@ namespace Europlan.Common {
 		}
 
 		public bool AllowNew {
-			get { return false; }
+			get { return this.filter == CategoryType.General; }
 		}
 
 		public bool AllowRemove {
@@ -292,26 +294,21 @@ namespace Europlan.Common {
 				if (value == null) {
 					this.filter = null;
 				} else if (Int32.TryParse(value, out i)) {
-					this.filter = MaterialTypeEnum.UnknownMaterial;
-					if ((i & ((int)MaterialTypeEnum.Euroval)) != 0) {
-						this.filter = this.filter | MaterialTypeEnum.Euroval;
+					if (i == ((int)CategoryType.General)) {
+						this.filter = CategoryType.General;
+					} else if (i == ((int)CategoryType.Floor)) {
+						this.filter = CategoryType.Floor;
+					} else if (i == ((int)CategoryType.Wall)) {
+						this.filter = CategoryType.Wall;
+					} else if (i == ((int)CategoryType.Ceiling)) {
+						this.filter = CategoryType.Ceiling;
+					} else if (i == ((int)CategoryType.Distributor)) {
+						this.filter = CategoryType.Distributor;
+					} else if (i == ((int)CategoryType.Insulation)) {
+						this.filter = CategoryType.Insulation;
+					} else {
+						this.filter = null;
 					}
-					if ((i & ((int)MaterialTypeEnum.Modul)) != 0) {
-						this.filter = this.filter | MaterialTypeEnum.Modul;
-					}
-					if ((i & ((int)MaterialTypeEnum.Hitherm)) != 0) {
-						this.filter = this.filter | MaterialTypeEnum.Hitherm;
-					}
-					if ((i & ((int)MaterialTypeEnum.Distributor)) != 0) {
-						this.filter = this.filter | MaterialTypeEnum.Distributor;
-					}
-					if ((i & ((int)MaterialTypeEnum.Insulation)) != 0) {
-						this.filter = this.filter | MaterialTypeEnum.Insulation;
-					}
-					if ((i & ((int)MaterialTypeEnum.General)) != 0) {
-						this.filter = this.filter | MaterialTypeEnum.General;
-					}
-
 				}
 			}
 		}
@@ -333,9 +330,9 @@ namespace Europlan.Common {
 		}
 		#endregion
 
-		public MaterialTypeEnum MaterialTypeFilter {
-			get { return (this.filter == null ? MaterialTypeEnum.All : this.filter.Value); }
-			set { this.filter = (value == MaterialTypeEnum.All ? (Nullable<MaterialTypeEnum>)null : (Nullable<MaterialTypeEnum>)value); }
+		public Nullable<CategoryType> FilterCategory {
+			get { return this.filter; }
+			set { this.filter = value; }
 		}
 	}
 
@@ -344,9 +341,9 @@ namespace Europlan.Common {
 		private List<Material> list;
 		int currentNode;
 		private bool finished;
-		private MaterialTypeEnum filter;
+		private Nullable<CategoryType> filter;
 
-		internal MaterialListEnumerator(List<Material> list, MaterialTypeEnum filter) {
+		internal MaterialListEnumerator(List<Material> list, Nullable<CategoryType> filter) {
 			this.list = list;
 			this.currentNode = -1;
 			this.finished = false;
@@ -388,9 +385,9 @@ namespace Europlan.Common {
 				} else {
 					this.currentNode++;
 				}
-				// TODOwhile (this.currentNode < this.list.Count && ((this.list[this.currentNode].Type & this.filter) == MaterialTypeEnum.UnknownMaterial)) {
+				while (this.currentNode < this.list.Count && (this.filter != null && (this.list[currentNode].Category == null || this.list[this.currentNode].Category.Type != this.filter.Value))) {
 					this.currentNode++;
-					// TODO}
+				}
 				if (this.currentNode >= this.list.Count) {
 					this.finished = true;
 				}

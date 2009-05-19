@@ -12,6 +12,7 @@ namespace Europlan.AdminApplication {
 
 		private ConstructionScopeEnum filter = ConstructionScopeEnum.All;
 		private ConstructionListWrapper wrapper;
+		private bool adminMode = false;
 
 		public ConstructionEditorGrid() {
 			InitializeComponent();
@@ -30,6 +31,14 @@ namespace Europlan.AdminApplication {
 					cef.ShowDialog();
 					this.constructionsWrapperBindingSource.ResetBindings(false);
 				}
+			}
+		}
+
+		public bool AdminMode {
+			get { return this.adminMode; }
+			set {
+				this.adminMode = value;
+
 			}
 		}
 
@@ -52,7 +61,11 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void btnNew_Click(object sender, EventArgs e) {
-			this.cmsNew.Show(this.btnNew, new Point(0, this.btnNew.Height));
+			if (this.adminMode) {
+				this.cmsNewAdmin.Show(this.btnNew, new Point(0, this.btnNew.Height));
+			} else {
+				this.cmsNew.Show(this.btnNew, new Point(0, this.btnNew.Height));
+			}
 		}
 
 		private void btnView_Click(object sender, EventArgs e) {
@@ -91,12 +104,29 @@ namespace Europlan.AdminApplication {
 			Construction c = null;
 			if (sender == this.tsmiNewFloorConstruction) {
 				c = new FloorConstruction();
-				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH);
+				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH);
 			} else if (sender == this.tsmiNewInsulationConstruction) {
 				c = new InsulationConstruction();
+				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_DAEMM);
+			}
+			if (c != null) {
+				ConstructionEditorForm form = new ConstructionEditorForm(c);
+				form.ShowDialog();
+				this.AddConstruction(c);
+			}
+		}
+
+		private void tsmiNewConstructionAdmin_Click(object sender, EventArgs e) {
+			Construction c = null;
+			if (sender == this.tsmiNewFloorConstructionScreedAdmin) {
+				c = new FloorConstruction();
+				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH);
+			} else if (sender == this.tsmiNewFloorConstructionDryAdmin) {
+				c = new FloorConstruction();
+				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TROCKEN);
+			} else if (sender == this.tsmiNewInsulationConstructionAdmin) {
+				c = new InsulationConstruction();
 				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_DAEMM);
-			} else if (sender == this.tsmiNewWallConstruction) {
-				// TODO
 			}
 			if (c != null) {
 				ConstructionEditorForm form = new ConstructionEditorForm(c);

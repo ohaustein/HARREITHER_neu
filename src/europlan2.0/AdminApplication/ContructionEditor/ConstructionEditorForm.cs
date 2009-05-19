@@ -12,6 +12,11 @@ namespace Europlan.AdminApplication {
 		public ConstructionEditorForm(Construction construction) {
 			InitializeComponent();
 			this.InitializeForm(construction);
+			this.FormClosing += new FormClosingEventHandler(ConstructionEditorForm_FormClosing);
+		}
+
+		private void ConstructionEditorForm_FormClosing(object sender, FormClosingEventArgs e) {
+			this.constructionEditor.ClearSelection();
 		}
 
 		private void InitializeForm(Construction construction) {

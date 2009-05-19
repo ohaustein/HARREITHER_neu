@@ -14,13 +14,17 @@ namespace Europlan.Common {
 			ROOM_TEMPERATURE = 3,
 			ROOM_HEAT_POWER = 4,
 			ROOM_COOL_POWER = 5,
-			FLOOR_CONSTRUCTION_THICKNESS = 6
+			FLOOR_CONSTRUCTION_THICKNESS = 6,
+			LAMBDA_VALUE = 7,
+			R_VALUE = 8,
+			DENOMINATION = 9,
+			PRICE = 10
 		}
-		                                                                              //  DEF  RCTMP           AREA  TEMP             HPW             CPW,   CONSTR_THICK
-		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] { null,    0,              0,    0,              0,              0,              0 };
-		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] { null,   99, Int32.MaxValue,   99, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue };
-		private static readonly int[] decimalPlaces = new int[]                        {    0,    0,              1,    0,              0,              0,              2 };
-		private static readonly string[] masks = new string[]                          {  "0", "90",     "999990.9", "90",      "9999990",      "9999990",    "999990.99" };
+		                                                                              //  DEF  RCTMP           AREA  TEMP             HPW             CPW,   CONSTR_THICK,         LAMBDA,              R,   DENOMINATION,          PRICE
+		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] { null,    0,              0,    0,              0,              0,              0,              0,              0,              0,              0 };
+		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] { null,   99, Int32.MaxValue,   99, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue };
+		private static readonly int[] decimalPlaces = new int[]                        {    0,    0,              1,    0,              0,              0,              2,              3,              3,              0,              2 };
+		private static readonly string[] masks = new string[]                          {  "0", "90",     "999990.9", "90",      "9999990",      "9999990",    "999990.99",   "999990.999",   "999990.999",       "999990",    "999990.99" };
 
 		private NumericBox.NumericEditType editType = NumericBox.NumericEditType.DEFAULT;
 		public event EventHandler ValueChanged;

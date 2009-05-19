@@ -500,6 +500,9 @@ namespace Europlan.Application {
 		}
 
 		private void stockListToolStripMenuItem_Click(object sender, EventArgs e) {
+			MaterialForm mf = new MaterialForm();
+			mf.Filter = CategoryType.Floor;
+			mf.ShowDialog();
 			//OpenFileDialog dialog = new OpenFileDialog();
 			//dialog.CheckFileExists = true;
 			//dialog.CheckPathExists = true;
