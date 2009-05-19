@@ -87,7 +87,9 @@ namespace Europlan.Common {
 					foreach (Category category in categories) {
 						if (category.Id == categoryId) {
 							material.Category = category;
-							category.Materials.Add(material);
+							if (!category.Materials.Contains(material)) {
+								category.Materials.Add(material);
+							}
 							continue;
 						}
 					}
@@ -180,9 +182,9 @@ namespace Europlan.Common {
 							adminTemplate = new Configuration();
 						}
 					}
+					adminTemplate.RecalculateMaterialToCategoryMapping();
+					adminTemplate.type = ConfigurationType.AdminConfiguration;
 				}
-				adminTemplate.RecalculateMaterialToCategoryMapping();
-				adminTemplate.type = ConfigurationType.AdminConfiguration;
 				return adminTemplate;
 			}
 		}
@@ -208,9 +210,9 @@ namespace Europlan.Common {
 							userTemplate = new Configuration();
 						}
 					}
+					userTemplate.RecalculateMaterialToCategoryMapping();
+					userTemplate.type = ConfigurationType.UserConfiguration;
 				}
-				userTemplate.RecalculateMaterialToCategoryMapping();
-				userTemplate.type = ConfigurationType.UserConfiguration;
 				return userTemplate;
 			}
 		}
