@@ -210,6 +210,18 @@ namespace Europlan.Common {
 							userTemplate = new Configuration();
 						}
 					}
+					for (int i = 0; i < Enum.GetNames(typeof(CategoryType)).Length; i++) {
+						int order = 1;
+						foreach (Category c in userTemplate.categories) {
+							if (c.Type == (CategoryType)i) {
+								if (c.Order > order) {
+									order = c.Order + 1;
+								}
+							}
+						}
+						Category category = new Category(i.ToString(), "UserDefined", (CategoryType)i, order);
+						userTemplate.categories.Add(category);
+					}
 					userTemplate.RecalculateMaterialToCategoryMapping();
 					userTemplate.type = ConfigurationType.UserConfiguration;
 				}
