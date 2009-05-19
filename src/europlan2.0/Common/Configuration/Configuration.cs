@@ -229,6 +229,25 @@ namespace Europlan.Common {
 			}
 		}
 
+		public List<Category> GetCategoriesForCategoryType(CategoryType type) {
+			List<Category> result = new List<Category>();
+			foreach (Category c in this.categories) {
+				if (c.Type == type) {
+					result.Add(c);
+				}
+			}
+			result.Sort();
+			return result;
+		}
+
+		public Category GetUserDefinedCategoryForCategoryType(CategoryType type) {
+			List<Category> categories = GetCategoriesForCategoryType(type);
+			if (categories.Count != 0) {
+				return categories[categories.Count - 1];
+			}
+			return null;
+		}
+
 		[XmlIgnore]
 		public ConfigurationType Type {
 			get { return type; }
