@@ -30,17 +30,19 @@ namespace Europlan.AdminApplication.ContructionEditor {
 		}
 
 		public bool AllowToAdd {
-			get { return this.dataGridView1.AllowUserToAddRows; }
-			set { this.dataGridView1.AllowUserToAddRows = value; }
+			get { return this.gridMaterials.AllowUserToAddRows; }
+			set { this.gridMaterials.AllowUserToAddRows = value; }
 		}
 
 		private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
 			Console.WriteLine("added");
 			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
-				DataGridViewRow row = this.dataGridView1.Rows[i];
+				DataGridViewRow row = this.gridMaterials.Rows[i];
 				if (row.DataBoundItem != null) {
 					row.ReadOnly = !(row.DataBoundItem as Material).UserDefined;
-					row.DefaultCellStyle.ForeColor = SystemColors.GrayText;
+					if (row.ReadOnly) {
+						row.DefaultCellStyle.ForeColor = SystemColors.GrayText;
+					}
 				}
 			}
 		}
