@@ -9,9 +9,12 @@ using Europlan.Common;
 using System.Collections;
 
 namespace Europlan.AdminApplication {
+
 	public partial class MaterialMapper : UserControl {
 
 		private Category selectedCategory = null;
+		ListViewSorter uncategorizedSorter = new ListViewSorter();
+		ListViewSorter categorizedSorter = new ListViewSorter();
 
 		public MaterialMapper() {
 			InitializeComponent();
@@ -26,26 +29,34 @@ namespace Europlan.AdminApplication {
 			foreach (Material material in config.Materials) {
 				if (material.Category == null) {
 					//string[] mat = new string[] { material.Name, material.PartNumber, material.Denomination.Value.ToString(), material.Unit, material.Price.ToString("0.00") };
-					string[] mat = new string[] { material.Name, material.PartNumber };
+					string[] mat = new string[] { material.PartNumber, material.Name};
 					ListViewItem item = new ListViewItem(mat);
 					item.Tag = material;
 					listUncategorizedMaterials.Items.Add(item);
 				}
 			}
 			listUncategorizedMaterials.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+			listUncategorizedMaterials.ListViewItemSorter = uncategorizedSorter;
+			if (!(listUncategorizedMaterials.ListViewItemSorter is ListViewSorter))
+				return;
+			uncategorizedSorter = (ListViewSorter)listUncategorizedMaterials.ListViewItemSorter;
 		}
 
 		private void InitializeCategorizedMaterialListView() {
 			listCategorizedMaterials.Items.Clear();
 			if (selectedCategory != null) {
 				foreach (Material material in selectedCategory.Materials) {
-			        string[] mat = new string[] { material.Name, material.PartNumber };
+					string[] mat = new string[] { material.PartNumber, material.Name };
 			        ListViewItem item = new ListViewItem(mat);
 			        item.Tag = material;
 			        listCategorizedMaterials.Items.Add(item);
 				}
 			}
 			listCategorizedMaterials.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+			listCategorizedMaterials.ListViewItemSorter = categorizedSorter;
+			if (!(listCategorizedMaterials.ListViewItemSorter is ListViewSorter))
+				return;
+			categorizedSorter = (ListViewSorter)listCategorizedMaterials.ListViewItemSorter;
 		}
 
 		private void splitContainer_SplitterMoved(object sender, SplitterEventArgs e) {
@@ -171,7 +182,7 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void btnCategorize_Click(object sender, EventArgs e) {
-			if ((selectedCategory != null) && (listUncategorizedMaterials.SelectedIndices.Count != 0)) {
+			if ((selectedCategory != null) && (listUncategorizedMaterials.SelectedItems.Count != 0)) {
 				foreach (ListViewItem item in listUncategorizedMaterials.SelectedItems) {
 					if (item.Tag != null && item.Tag is Material) {
 						Material material = item.Tag as Material;
@@ -199,5 +210,70 @@ namespace Europlan.AdminApplication {
 				UpdateButtons();
 			}
 		}
+
+		private void listUncategorizedMaterials_ColumnClick(object sender, ColumnClickEventArgs e) {
+			if (uncategorizedSorter.LastSort == e.Column) {
+				if (listUncategorizedMaterials.Sorting == SortOrder.Ascending)
+					listUncategorizedMaterials.Sorting = SortOrder.Descending;
+				else
+					listUncategorizedMaterials.Sorting = SortOrder.Ascending;
+			} else {
+				listUncategorizedMaterials.Sorting = SortOrder.Descending;
+			}
+			uncategorizedSorter.ByColumn = e.Column;
+
+			listUncategorizedMaterials.Sort();
+		}
+
+		private void listCategorizedMaterials_ColumnClick(object sender, ColumnClickEventArgs e) {
+			if (categorizedSorter.LastSort == e.Column) {
+				if (listCategorizedMaterials.Sorting == SortOrder.Ascending)
+					listCategorizedMaterials.Sorting = SortOrder.Descending;
+				else
+					listCategorizedMaterials.Sorting = SortOrder.Ascending;
+			} else {
+				listCategorizedMaterials.Sorting = SortOrder.Descending;
+			}
+			categorizedSorter.ByColumn = e.Column;
+
+			listCategorizedMaterials.Sort();
+		}
 	}
+
+	public class ListViewSorter : System.Collections.IComparer {
+		public int Compare(object o1, object o2) {
+			if (!(o1 is ListViewItem))
+				return (0);
+			if (!(o2 is ListViewItem))
+				return (0);
+
+			ListViewItem lvi1 = (ListViewItem)o2;
+			string str1 = lvi1.SubItems[ByColumn].Text;
+			ListViewItem lvi2 = (ListViewItem)o1;
+			string str2 = lvi2.SubItems[ByColumn].Text;
+
+			int result;
+			if (lvi1.ListView.Sorting == SortOrder.Ascending)
+				result = String.Compare(str1, str2);
+			else
+				result = String.Compare(str2, str1);
+
+			LastSort = ByColumn;
+
+			return (result);
+		}
+
+
+		public int ByColumn {
+			get { return Column; }
+			set { Column = value; }
+		}
+		int Column = 0;
+
+		public int LastSort {
+			get { return LastColumn; }
+			set { LastColumn = value; }
+		}
+		int LastColumn = 0;
+	} 
 }
