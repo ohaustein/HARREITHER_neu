@@ -10,8 +10,12 @@ namespace Europlan.Common {
 
 		private Nullable<CategoryType> filter = null;
 
-		public MaterialListWrapper() {
-			this.materials = Configuration.UserTemplate.Materials;
+		public MaterialListWrapper(Configuration.ConfigurationType type) {
+			if (type == Configuration.ConfigurationType.AdminConfiguration) {
+				this.materials = Configuration.UserTemplate.Materials;
+			} else {
+				this.materials = Configuration.UserTemplate.Materials;
+			}
 		}
 
 		#region IEnumerable<Construction> Members

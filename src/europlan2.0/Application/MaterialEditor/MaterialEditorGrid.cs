@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Europlan.Common;
 
-namespace Europlan.AdminApplication.ContructionEditor {
+namespace Europlan.Application.ContructionEditor {
 	public partial class MaterialEditorGrid : UserControl {
 
 		private Nullable<CategoryType> filter;
@@ -15,7 +15,7 @@ namespace Europlan.AdminApplication.ContructionEditor {
 
 		public MaterialEditorGrid() {
 			InitializeComponent();
-			this.wrapper = new MaterialListWrapper();
+			this.wrapper = new MaterialListWrapper(Configuration.ConfigurationType.UserConfiguration);
 			this.materialsWrapperBindingSource.DataSource = this.wrapper;
 			this.materialsWrapperBindingSource.ResetBindings(false);
 		}
@@ -44,6 +44,14 @@ namespace Europlan.AdminApplication.ContructionEditor {
 						row.DefaultCellStyle.ForeColor = SystemColors.GrayText;
 					}
 				}
+			}
+		}
+
+		private void gridMaterials_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
+			e.Cancel = true;
+			if (e.Row.DataBoundItem is Material && (e.Row.DataBoundItem as Material).UserDefined) {
+				this.wrapper.Remove(e.Row.DataBoundItem);
+				this.materialsWrapperBindingSource.ResetBindings(false);
 			}
 		}
 	}

@@ -120,7 +120,6 @@ namespace Europlan.AdminApplication {
 			this.gridConstructions.Size = new System.Drawing.Size(704, 398);
 			this.gridConstructions.TabIndex = 3;
 			this.gridConstructions.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridConstructions_UserDeletingRow);
-			this.gridConstructions.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridConstructions_UserDeletedRow);
 			this.gridConstructions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridConstructions_CellClick);
 			// 
 			// colId
