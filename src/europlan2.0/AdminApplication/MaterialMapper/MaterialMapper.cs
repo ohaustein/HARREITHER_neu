@@ -183,30 +183,43 @@ namespace Europlan.AdminApplication {
 
 		private void btnCategorize_Click(object sender, EventArgs e) {
 			if ((selectedCategory != null) && (listUncategorizedMaterials.SelectedItems.Count != 0)) {
+				List<ListViewItem> items = new List<ListViewItem>();
 				foreach (ListViewItem item in listUncategorizedMaterials.SelectedItems) {
+					items.Add(item);
+				}
+				foreach (ListViewItem item in items) {
 					if (item.Tag != null && item.Tag is Material) {
 						Material material = item.Tag as Material;
 						material.Category = selectedCategory;
 						selectedCategory.Materials.Add(material);
+						listUncategorizedMaterials.Items.Remove(item);						
+						listCategorizedMaterials.Items.Add(item);
 					}
 				}
-				InitializeUncategorizedMaterialListView();
-				InitializeCategorizedMaterialListView();
+				//InitializeUncategorizedMaterialListView();
+				//InitializeCategorizedMaterialListView();
 				UpdateButtons();
 			}
 		}
 
 		private void btnUncategorize_Click(object sender, EventArgs e) {
 			if (selectedCategory != null) {
+				List<ListViewItem> items = new List<ListViewItem>();
 				foreach (ListViewItem item in listCategorizedMaterials.SelectedItems) {
+					items.Add(item);
+				}
+				foreach (ListViewItem item in items) {
 					if (item.Tag != null && item.Tag is Material) {
 						Material material = item.Tag as Material;
 						material.Category = null;
 						selectedCategory.Materials.Remove(material);
+						listCategorizedMaterials.Items.Remove(item);
+						listUncategorizedMaterials.Items.Add(item);
 					}
 				}
-				InitializeUncategorizedMaterialListView();
-				InitializeCategorizedMaterialListView();
+
+				//InitializeUncategorizedMaterialListView();
+				//InitializeCategorizedMaterialListView();
 				UpdateButtons();
 			}
 		}
