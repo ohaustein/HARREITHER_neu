@@ -36,10 +36,15 @@ namespace Europlan.AdminApplication {
 			System.Windows.Forms.ListViewGroup listViewGroup11 = new System.Windows.Forms.ListViewGroup("Dämmung", System.Windows.Forms.HorizontalAlignment.Left);
 			System.Windows.Forms.ListViewGroup listViewGroup12 = new System.Windows.Forms.ListViewGroup("Allgemein", System.Windows.Forms.HorizontalAlignment.Left);
 			this.listUncategorizedMaterials = new System.Windows.Forms.ListView();
-			this.columnHeaderName = new System.Windows.Forms.ColumnHeader();
 			this.columnHeaderPartNumber = new System.Windows.Forms.ColumnHeader();
+			this.columnHeaderName = new System.Windows.Forms.ColumnHeader();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
 			this.label1 = new System.Windows.Forms.Label();
+			this.listCategorizedMaterials = new System.Windows.Forms.ListView();
+			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+			this.btnUncategorize = new System.Windows.Forms.Button();
+			this.btnCategorize = new System.Windows.Forms.Button();
 			this.btnDown = new System.Windows.Forms.Button();
 			this.btnUp = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
@@ -49,11 +54,6 @@ namespace Europlan.AdminApplication {
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.cmbRootCategories = new System.Windows.Forms.ComboBox();
-			this.btnCategorize = new System.Windows.Forms.Button();
-			this.btnUncategorize = new System.Windows.Forms.Button();
-			this.listCategorizedMaterials = new System.Windows.Forms.ListView();
-			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.Panel2.SuspendLayout();
 			this.splitContainer.SuspendLayout();
@@ -65,8 +65,8 @@ namespace Europlan.AdminApplication {
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.listUncategorizedMaterials.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderName,
-            this.columnHeaderPartNumber});
+            this.columnHeaderPartNumber,
+            this.columnHeaderName});
 			this.listUncategorizedMaterials.FullRowSelect = true;
 			this.listUncategorizedMaterials.GridLines = true;
 			listViewGroup1.Header = "Boden";
@@ -93,22 +93,22 @@ namespace Europlan.AdminApplication {
 			this.listUncategorizedMaterials.Name = "listUncategorizedMaterials";
 			this.listUncategorizedMaterials.ShowGroups = false;
 			this.listUncategorizedMaterials.Size = new System.Drawing.Size(268, 558);
+			this.listUncategorizedMaterials.Sorting = System.Windows.Forms.SortOrder.Descending;
 			this.listUncategorizedMaterials.TabIndex = 0;
 			this.listUncategorizedMaterials.UseCompatibleStateImageBehavior = false;
 			this.listUncategorizedMaterials.View = System.Windows.Forms.View.Details;
 			this.listUncategorizedMaterials.SelectedIndexChanged += new System.EventHandler(this.listUncategorizedMaterials_SelectedIndexChanged);
-			// 
-			// columnHeaderName
-			// 
-			this.columnHeaderName.DisplayIndex = 1;
-			this.columnHeaderName.Text = "Name";
-			this.columnHeaderName.Width = 97;
+			this.listUncategorizedMaterials.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listUncategorizedMaterials_ColumnClick);
 			// 
 			// columnHeaderPartNumber
 			// 
-			this.columnHeaderPartNumber.DisplayIndex = 0;
 			this.columnHeaderPartNumber.Text = "Bestellnr.";
 			this.columnHeaderPartNumber.Width = 73;
+			// 
+			// columnHeaderName
+			// 
+			this.columnHeaderName.Text = "Name";
+			this.columnHeaderName.Width = 97;
 			// 
 			// splitContainer
 			// 
@@ -149,6 +149,79 @@ namespace Europlan.AdminApplication {
 			this.label1.Size = new System.Drawing.Size(209, 13);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Artikel ohne Zuordnung zu einer Kategorie:";
+			// 
+			// listCategorizedMaterials
+			// 
+			this.listCategorizedMaterials.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.listCategorizedMaterials.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2,
+            this.columnHeader1});
+			this.listCategorizedMaterials.FullRowSelect = true;
+			this.listCategorizedMaterials.GridLines = true;
+			listViewGroup7.Header = "Boden";
+			listViewGroup7.Name = "listViewGroupFloor";
+			listViewGroup8.Header = "Wand";
+			listViewGroup8.Name = "listViewGroupWall";
+			listViewGroup9.Header = "Decke";
+			listViewGroup9.Name = "listViewGroupCeiling";
+			listViewGroup10.Header = "Verteiler";
+			listViewGroup10.Name = "listViewGroupDistributor";
+			listViewGroup11.Header = "Dämmung";
+			listViewGroup11.Name = "listViewGroupInsulation";
+			listViewGroup12.Header = "Allgemein";
+			listViewGroup12.Name = "listViewGroupGeneral";
+			this.listCategorizedMaterials.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup7,
+            listViewGroup8,
+            listViewGroup9,
+            listViewGroup10,
+            listViewGroup11,
+            listViewGroup12});
+			this.listCategorizedMaterials.HideSelection = false;
+			this.listCategorizedMaterials.Location = new System.Drawing.Point(90, 169);
+			this.listCategorizedMaterials.Name = "listCategorizedMaterials";
+			this.listCategorizedMaterials.ShowGroups = false;
+			this.listCategorizedMaterials.Size = new System.Drawing.Size(445, 412);
+			this.listCategorizedMaterials.Sorting = System.Windows.Forms.SortOrder.Descending;
+			this.listCategorizedMaterials.TabIndex = 2;
+			this.listCategorizedMaterials.UseCompatibleStateImageBehavior = false;
+			this.listCategorizedMaterials.View = System.Windows.Forms.View.Details;
+			this.listCategorizedMaterials.SelectedIndexChanged += new System.EventHandler(this.listCategorizedMaterials_SelectedIndexChanged);
+			this.listCategorizedMaterials.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listCategorizedMaterials_ColumnClick);
+			// 
+			// columnHeader2
+			// 
+			this.columnHeader2.Text = "Bestellnr.";
+			this.columnHeader2.Width = 73;
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Text = "Name";
+			this.columnHeader1.Width = 97;
+			// 
+			// btnUncategorize
+			// 
+			this.btnUncategorize.Enabled = false;
+			this.btnUncategorize.Location = new System.Drawing.Point(20, 314);
+			this.btnUncategorize.Name = "btnUncategorize";
+			this.btnUncategorize.Size = new System.Drawing.Size(50, 50);
+			this.btnUncategorize.TabIndex = 10;
+			this.btnUncategorize.Text = "<<";
+			this.btnUncategorize.UseVisualStyleBackColor = true;
+			this.btnUncategorize.Click += new System.EventHandler(this.btnUncategorize_Click);
+			// 
+			// btnCategorize
+			// 
+			this.btnCategorize.Enabled = false;
+			this.btnCategorize.Location = new System.Drawing.Point(20, 258);
+			this.btnCategorize.Name = "btnCategorize";
+			this.btnCategorize.Size = new System.Drawing.Size(50, 50);
+			this.btnCategorize.TabIndex = 9;
+			this.btnCategorize.Text = ">>";
+			this.btnCategorize.UseVisualStyleBackColor = true;
+			this.btnCategorize.Click += new System.EventHandler(this.btnCategorize_Click);
 			// 
 			// btnDown
 			// 
@@ -257,79 +330,6 @@ namespace Europlan.AdminApplication {
 			this.cmbRootCategories.Size = new System.Drawing.Size(442, 21);
 			this.cmbRootCategories.TabIndex = 0;
 			this.cmbRootCategories.SelectedIndexChanged += new System.EventHandler(this.cmbRootCategories_SelectedIndexChanged);
-			// 
-			// btnCategorize
-			// 
-			this.btnCategorize.Enabled = false;
-			this.btnCategorize.Location = new System.Drawing.Point(20, 258);
-			this.btnCategorize.Name = "btnCategorize";
-			this.btnCategorize.Size = new System.Drawing.Size(50, 50);
-			this.btnCategorize.TabIndex = 9;
-			this.btnCategorize.Text = ">>";
-			this.btnCategorize.UseVisualStyleBackColor = true;
-			this.btnCategorize.Click += new System.EventHandler(this.btnCategorize_Click);
-			// 
-			// btnUncategorize
-			// 
-			this.btnUncategorize.Enabled = false;
-			this.btnUncategorize.Location = new System.Drawing.Point(20, 314);
-			this.btnUncategorize.Name = "btnUncategorize";
-			this.btnUncategorize.Size = new System.Drawing.Size(50, 50);
-			this.btnUncategorize.TabIndex = 10;
-			this.btnUncategorize.Text = "<<";
-			this.btnUncategorize.UseVisualStyleBackColor = true;
-			this.btnUncategorize.Click += new System.EventHandler(this.btnUncategorize_Click);
-			// 
-			// listCategorizedMaterials
-			// 
-			this.listCategorizedMaterials.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.listCategorizedMaterials.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-			this.listCategorizedMaterials.FullRowSelect = true;
-			this.listCategorizedMaterials.GridLines = true;
-			listViewGroup7.Header = "Boden";
-			listViewGroup7.Name = "listViewGroupFloor";
-			listViewGroup8.Header = "Wand";
-			listViewGroup8.Name = "listViewGroupWall";
-			listViewGroup9.Header = "Decke";
-			listViewGroup9.Name = "listViewGroupCeiling";
-			listViewGroup10.Header = "Verteiler";
-			listViewGroup10.Name = "listViewGroupDistributor";
-			listViewGroup11.Header = "Dämmung";
-			listViewGroup11.Name = "listViewGroupInsulation";
-			listViewGroup12.Header = "Allgemein";
-			listViewGroup12.Name = "listViewGroupGeneral";
-			this.listCategorizedMaterials.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup7,
-            listViewGroup8,
-            listViewGroup9,
-            listViewGroup10,
-            listViewGroup11,
-            listViewGroup12});
-			this.listCategorizedMaterials.HideSelection = false;
-			this.listCategorizedMaterials.Location = new System.Drawing.Point(90, 169);
-			this.listCategorizedMaterials.Name = "listCategorizedMaterials";
-			this.listCategorizedMaterials.ShowGroups = false;
-			this.listCategorizedMaterials.Size = new System.Drawing.Size(445, 412);
-			this.listCategorizedMaterials.TabIndex = 2;
-			this.listCategorizedMaterials.UseCompatibleStateImageBehavior = false;
-			this.listCategorizedMaterials.View = System.Windows.Forms.View.Details;
-			this.listCategorizedMaterials.SelectedIndexChanged += new System.EventHandler(this.listCategorizedMaterials_SelectedIndexChanged);
-			// 
-			// columnHeader1
-			// 
-			this.columnHeader1.DisplayIndex = 1;
-			this.columnHeader1.Text = "Name";
-			this.columnHeader1.Width = 97;
-			// 
-			// columnHeader2
-			// 
-			this.columnHeader2.DisplayIndex = 0;
-			this.columnHeader2.Text = "Bestellnr.";
-			this.columnHeader2.Width = 73;
 			// 
 			// MaterialMapper
 			// 
