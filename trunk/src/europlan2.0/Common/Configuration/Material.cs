@@ -20,6 +20,7 @@ namespace Europlan.Common {
 			this.name = "";
 			this.partNumber = "";
 			this.denomination = null;
+			//this.denomination = 1; // TODO NumericCell does not support null values (yet) => Mit Harreither abklären
 			this.unit = "";
 			this.price = 0;
 			this.discountGroup = "";

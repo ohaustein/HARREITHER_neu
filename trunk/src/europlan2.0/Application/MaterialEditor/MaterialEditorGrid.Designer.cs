@@ -1,4 +1,4 @@
-namespace Europlan.AdminApplication.ContructionEditor {
+namespace Europlan.Application.ContructionEditor {
 	partial class MaterialEditorGrid {
 		/// <summary> 
 		/// Required designer variable.
@@ -28,13 +28,6 @@ namespace Europlan.AdminApplication.ContructionEditor {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridMaterials = new System.Windows.Forms.DataGridView();
-			this.materialsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.userDefinedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.partNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +35,13 @@ namespace Europlan.AdminApplication.ContructionEditor {
 			this.denominationDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.unitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.priceDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+			this.materialsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridMaterials)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.materialsWrapperBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -72,59 +72,8 @@ namespace Europlan.AdminApplication.ContructionEditor {
 			this.gridMaterials.Name = "gridMaterials";
 			this.gridMaterials.Size = new System.Drawing.Size(612, 440);
 			this.gridMaterials.TabIndex = 2;
+			this.gridMaterials.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridMaterials_UserDeletingRow);
 			this.gridMaterials.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
-			// 
-			// materialsWrapperBindingSource
-			// 
-			this.materialsWrapperBindingSource.DataSource = typeof(Europlan.Common.MaterialListWrapper);
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-			this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-			this.dataGridViewTextBoxColumn1.HeaderText = "Nr.";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.Width = 50;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-			this.dataGridViewTextBoxColumn2.FillWeight = 150F;
-			this.dataGridViewTextBoxColumn2.HeaderText = "Bezeichnung";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.Width = 150;
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.DataPropertyName = "PartNumber";
-			this.dataGridViewTextBoxColumn3.FillWeight = 70F;
-			this.dataGridViewTextBoxColumn3.HeaderText = "Bestellnr.";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.Width = 70;
-			// 
-			// dataGridViewTextBoxColumn4
-			// 
-			this.dataGridViewTextBoxColumn4.DataPropertyName = "Denomination";
-			this.dataGridViewTextBoxColumn4.FillWeight = 75F;
-			this.dataGridViewTextBoxColumn4.HeaderText = "Verpackungs- einheit";
-			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-			this.dataGridViewTextBoxColumn4.Width = 75;
-			// 
-			// dataGridViewTextBoxColumn5
-			// 
-			this.dataGridViewTextBoxColumn5.DataPropertyName = "Unit";
-			this.dataGridViewTextBoxColumn5.FillWeight = 50F;
-			this.dataGridViewTextBoxColumn5.HeaderText = "Einheit";
-			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-			this.dataGridViewTextBoxColumn5.Width = 50;
-			// 
-			// dataGridViewTextBoxColumn6
-			// 
-			this.dataGridViewTextBoxColumn6.DataPropertyName = "Price";
-			this.dataGridViewTextBoxColumn6.FillWeight = 60F;
-			this.dataGridViewTextBoxColumn6.HeaderText = "Preis pro Einheit";
-			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-			this.dataGridViewTextBoxColumn6.Width = 60;
 			// 
 			// userDefinedDataGridViewCheckBoxColumn
 			// 
@@ -185,7 +134,7 @@ namespace Europlan.AdminApplication.ContructionEditor {
 			// 
 			this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
+			dataGridViewCellStyle3.Format = "F2";
 			this.priceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.priceDataGridViewTextBoxColumn.FillWeight = 60F;
 			this.priceDataGridViewTextBoxColumn.HeaderText = "Preis pro Einheit";
@@ -194,6 +143,58 @@ namespace Europlan.AdminApplication.ContructionEditor {
 			this.priceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.priceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.priceDataGridViewTextBoxColumn.Width = 60;
+			// 
+			// materialsWrapperBindingSource
+			// 
+			this.materialsWrapperBindingSource.DataSource = typeof(Europlan.Common.MaterialListWrapper);
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+			this.dataGridViewTextBoxColumn1.FillWeight = 50F;
+			this.dataGridViewTextBoxColumn1.HeaderText = "Nr.";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.Width = 50;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+			this.dataGridViewTextBoxColumn2.FillWeight = 150F;
+			this.dataGridViewTextBoxColumn2.HeaderText = "Bezeichnung";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.Width = 150;
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.DataPropertyName = "PartNumber";
+			this.dataGridViewTextBoxColumn3.FillWeight = 70F;
+			this.dataGridViewTextBoxColumn3.HeaderText = "Bestellnr.";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.Width = 70;
+			// 
+			// dataGridViewTextBoxColumn4
+			// 
+			this.dataGridViewTextBoxColumn4.DataPropertyName = "Denomination";
+			this.dataGridViewTextBoxColumn4.FillWeight = 75F;
+			this.dataGridViewTextBoxColumn4.HeaderText = "Verpackungs- einheit";
+			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			this.dataGridViewTextBoxColumn4.Width = 75;
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this.dataGridViewTextBoxColumn5.DataPropertyName = "Unit";
+			this.dataGridViewTextBoxColumn5.FillWeight = 50F;
+			this.dataGridViewTextBoxColumn5.HeaderText = "Einheit";
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			this.dataGridViewTextBoxColumn5.Width = 50;
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.DataPropertyName = "Price";
+			this.dataGridViewTextBoxColumn6.FillWeight = 60F;
+			this.dataGridViewTextBoxColumn6.HeaderText = "Preis pro Einheit";
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+			this.dataGridViewTextBoxColumn6.Width = 60;
 			// 
 			// MaterialEditorGrid
 			// 

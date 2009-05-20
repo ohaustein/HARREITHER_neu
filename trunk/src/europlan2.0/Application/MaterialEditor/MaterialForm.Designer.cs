@@ -23,19 +23,19 @@ namespace Europlan.Application {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.megFloor = new Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid();
+			this.megFloor = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.tabPageFloor = new System.Windows.Forms.TabPage();
 			this.tabPageWall = new System.Windows.Forms.TabPage();
-			this.megWall = new Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid();
+			this.megWall = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabPageCeiling = new System.Windows.Forms.TabPage();
-			this.megCeiling = new Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid();
+			this.megCeiling = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabPageDistributor = new System.Windows.Forms.TabPage();
-			this.megDistributor = new Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid();
+			this.megDistributor = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabPageInsulation = new System.Windows.Forms.TabPage();
-			this.megInsulation = new Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid();
+			this.megInsulation = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabPageGeneral = new System.Windows.Forms.TabPage();
-			this.megGeneral = new Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid();
+			this.megGeneral = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabs.SuspendLayout();
 			this.tabPageFloor.SuspendLayout();
 			this.tabPageWall.SuspendLayout();
@@ -207,18 +207,18 @@ namespace Europlan.Application {
 
 		#endregion
 
-		private Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid megFloor;
+		private Europlan.Application.ContructionEditor.MaterialEditorGrid megFloor;
 		private System.Windows.Forms.TabControl tabs;
 		private System.Windows.Forms.TabPage tabPageFloor;
 		private System.Windows.Forms.TabPage tabPageWall;
-		private Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid megWall;
+		private Europlan.Application.ContructionEditor.MaterialEditorGrid megWall;
 		private System.Windows.Forms.TabPage tabPageCeiling;
-		private Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid megCeiling;
+		private Europlan.Application.ContructionEditor.MaterialEditorGrid megCeiling;
 		private System.Windows.Forms.TabPage tabPageDistributor;
-		private Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid megDistributor;
+		private Europlan.Application.ContructionEditor.MaterialEditorGrid megDistributor;
 		private System.Windows.Forms.TabPage tabPageInsulation;
-		private Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid megInsulation;
+		private Europlan.Application.ContructionEditor.MaterialEditorGrid megInsulation;
 		private System.Windows.Forms.TabPage tabPageGeneral;
-		private Europlan.AdminApplication.ContructionEditor.MaterialEditorGrid megGeneral;
+		private Europlan.Application.ContructionEditor.MaterialEditorGrid megGeneral;
 	}
 }

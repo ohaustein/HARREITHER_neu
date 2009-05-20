@@ -207,7 +207,7 @@ namespace Europlan.Common {
 							}
 						} catch {
 							// TODO
-							userTemplate = new Configuration();
+							userTemplate = AdminTemplate + new Configuration();
 						}
 					}
 					for (int i = 0; i < Enum.GetNames(typeof(CategoryType)).Length; i++) {

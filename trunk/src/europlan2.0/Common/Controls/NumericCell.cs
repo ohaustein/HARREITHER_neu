@@ -26,7 +26,9 @@ namespace Europlan.Common {
 			NumericEditingControl ctl = (NumericEditingControl)DataGridView.EditingControl;
 			ctl.EditType = this.numEditType;
 			ctl.BorderStyle = BorderStyle.None;
-			ctl.Value = Convert.ToDecimal(initialFormattedValue);
+			if (!initialFormattedValue.Equals(String.Empty)) {
+				ctl.Value = Convert.ToDecimal(initialFormattedValue);
+			}
 			/*if (!this.lastKeyEnteredEditMode) {
 				ctl.SelectionStart = ctl.Text.Length;
 				ctl.SelectionLength = 0;

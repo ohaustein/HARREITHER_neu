@@ -136,14 +136,9 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void gridConstructions_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
-			Console.WriteLine("deleting");
 			e.Cancel = true;
 			this.wrapper.Remove(e.Row.DataBoundItem);
 			this.constructionsWrapperBindingSource.ResetBindings(false);
-		}
-
-		private void gridConstructions_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
-			Console.WriteLine("deleted");
 		}
 	}
 }
