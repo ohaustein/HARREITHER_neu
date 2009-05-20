@@ -202,7 +202,7 @@ namespace Europlan.Common {
 							if (userTemplate == null) {
 								XmlSerializer s = new XmlSerializer(typeof(Configuration));
 								Stream r = new FileStream(Path.Combine(appDataPath, "custom.conf"), FileMode.Open);
-								userTemplate = adminTemplate + (Configuration)s.Deserialize(r);
+								userTemplate = AdminTemplate + (Configuration)s.Deserialize(r);
 								r.Close();
 							}
 						} catch {
