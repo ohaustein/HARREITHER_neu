@@ -12,7 +12,7 @@ namespace Europlan.Common {
 
 		public MaterialListWrapper(Configuration.ConfigurationType type) {
 			if (type == Configuration.ConfigurationType.AdminConfiguration) {
-				this.materials = Configuration.UserTemplate.Materials;
+				this.materials = Configuration.AdminTemplate.Materials;
 			} else {
 				this.materials = Configuration.UserTemplate.Materials;
 			}
