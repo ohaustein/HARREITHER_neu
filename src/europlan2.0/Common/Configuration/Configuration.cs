@@ -81,6 +81,7 @@ namespace Europlan.Common {
 		}
 
 		public void RecalculateMaterialToCategoryMapping() {
+			List<Material> materialsToRemove = new List<Material>();
 			foreach (Material material in materials) {
 				if (materialToCategoryMapping.ContainsKey(material.Id)) {
 					string categoryId = materialToCategoryMapping[material.Id];
@@ -93,6 +94,13 @@ namespace Europlan.Common {
 							continue;
 						}
 					}
+				} else {
+					materialsToRemove.Add(material);
+				}
+			}
+			if (this.type == ConfigurationType.UserConfiguration || this.type == ConfigurationType.ProjectConfiguration) {
+				foreach (Material material in materialsToRemove) {
+					materials.Remove(material);
 				}
 			}
 		}
@@ -182,8 +190,8 @@ namespace Europlan.Common {
 							adminTemplate = new Configuration();
 						}
 					}
-					adminTemplate.RecalculateMaterialToCategoryMapping();
 					adminTemplate.type = ConfigurationType.AdminConfiguration;
+					adminTemplate.RecalculateMaterialToCategoryMapping();
 				}
 				return adminTemplate;
 			}
@@ -222,8 +230,8 @@ namespace Europlan.Common {
 						Category category = new Category(i.ToString(), "UserDefined", (CategoryType)i, order);
 						userTemplate.categories.Add(category);
 					}
-					userTemplate.RecalculateMaterialToCategoryMapping();
 					userTemplate.type = ConfigurationType.UserConfiguration;
+					userTemplate.RecalculateMaterialToCategoryMapping();
 				}
 				return userTemplate;
 			}
