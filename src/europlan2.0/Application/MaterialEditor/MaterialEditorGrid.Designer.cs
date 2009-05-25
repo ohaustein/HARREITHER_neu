@@ -73,7 +73,10 @@ namespace Europlan.Application.ContructionEditor {
 			this.gridMaterials.Size = new System.Drawing.Size(612, 440);
 			this.gridMaterials.TabIndex = 2;
 			this.gridMaterials.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridMaterials_UserDeletingRow);
+			this.gridMaterials.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gridMaterials_CellBeginEdit);
+			this.gridMaterials.CancelRowEdit += new System.Windows.Forms.QuestionEventHandler(this.gridMaterials_CancelRowEdit);
 			this.gridMaterials.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
+			this.gridMaterials.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMaterials_CellEndEdit);
 			// 
 			// userDefinedDataGridViewCheckBoxColumn
 			// 

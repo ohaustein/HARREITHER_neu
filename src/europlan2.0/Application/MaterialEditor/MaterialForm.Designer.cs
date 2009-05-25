@@ -194,6 +194,7 @@ namespace Europlan.Application {
 			this.Controls.Add(this.tabs);
 			this.Name = "MaterialForm";
 			this.Text = "MaterialForm";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MaterialForm_FormClosing);
 			this.tabs.ResumeLayout(false);
 			this.tabPageFloor.ResumeLayout(false);
 			this.tabPageWall.ResumeLayout(false);

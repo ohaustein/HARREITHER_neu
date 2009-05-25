@@ -231,6 +231,7 @@ namespace Europlan.Common {
 			Material m = new Material();
 			m.Category = Configuration.UserTemplate.GetUserDefinedCategoryForCategoryType(this.filter.Value);
 			m.UserDefined = true;
+			m.IsNew = true;
 			this.materials.Add(m);
 			return m;
 		}

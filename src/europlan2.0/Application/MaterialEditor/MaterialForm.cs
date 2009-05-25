@@ -22,5 +22,14 @@ namespace Europlan.Application {
 			get { return this.megFloor.Filter; }
 			set { this.megFloor.Filter = value; }
 		}
+
+		private void MaterialForm_FormClosing(object sender, FormClosingEventArgs e) {
+			this.megCeiling.Cleanup();
+			this.megDistributor.Cleanup();
+			this.megFloor.Cleanup();
+			this.megGeneral.Cleanup();
+			this.megInsulation.Cleanup();
+			this.megWall.Cleanup();
+		}
 	}
 }
