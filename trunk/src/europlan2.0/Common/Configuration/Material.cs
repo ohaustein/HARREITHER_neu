@@ -128,6 +128,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		internal bool IsNew {
 			get { return this.isNew; }
 			set { this.isNew = value; }
