@@ -402,6 +402,31 @@ namespace Europlan.Common {
 			}
 		}
 
+		public void Export(string filePath) {
+			// TODO:
+			// versioning of constructions
+
+			if (Directory.Exists(filePath)) {
+				try {
+					XmlSerializer s = new XmlSerializer(typeof(Configuration));
+					string filename = "";
+					if (this.type == ConfigurationType.AdminConfiguration) {
+						filename = Path.Combine(filePath, "global.conf");
+					} else if (this.type == ConfigurationType.UserConfiguration) {
+						filename = Path.Combine(filePath, "custom.conf");
+					} else {
+						// TODO
+						return;
+					}
+					Stream w = new FileStream(filename, FileMode.Create);
+					s.Serialize(w, this);
+					w.Close();
+				} catch (Exception e) {
+					// TODO
+				}
+			}
+		}
+
 
 	}
 
