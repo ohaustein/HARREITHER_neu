@@ -42,6 +42,8 @@ namespace Europlan.Application.ContructionEditor {
 					row.ReadOnly = !(row.DataBoundItem as Material).UserDefined;
 					if (row.ReadOnly) {
 						row.DefaultCellStyle.ForeColor = SystemColors.GrayText;
+					} else {
+						row.DefaultCellStyle.ForeColor = SystemColors.ControlText;
 					}
 				}
 			}
@@ -52,6 +54,16 @@ namespace Europlan.Application.ContructionEditor {
 			if (e.Row.DataBoundItem is Material && (e.Row.DataBoundItem as Material).UserDefined) {
 				this.wrapper.Remove(e.Row.DataBoundItem);
 				this.materialsWrapperBindingSource.ResetBindings(false);
+			}
+		}
+
+		public void Cleanup() {
+			if (this.gridMaterials.SelectedCells.Count > 0) {
+				if (this.gridMaterials.SelectedCells[0].OwningRow.DataBoundItem == null) {
+					this.gridMaterials.CancelEdit();
+				} else {
+					this.gridMaterials.EndEdit();
+				}
 			}
 		}
 	}
