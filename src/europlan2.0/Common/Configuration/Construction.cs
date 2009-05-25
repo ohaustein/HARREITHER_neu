@@ -12,6 +12,7 @@ namespace Europlan.Common {
 		private ConstructionType type;
 		private List<ConstructionLayer> layers;
 		private List<Construction> versionedConstructions;
+		private bool hasBeenDeleted = false;
 
 		public Construction() {
 			this.id = "";
@@ -75,6 +76,11 @@ namespace Europlan.Common {
 		public string Name {
 			get { return name; }
 			set { name = value; }
+		}
+
+		public bool HasBeenDeleted {
+			get { return hasBeenDeleted; }
+			set { hasBeenDeleted = value; }
 		}
 
 		[XmlIgnore()]
