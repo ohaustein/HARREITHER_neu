@@ -403,8 +403,9 @@ namespace Europlan.Common {
 		}
 
 		public void Export(string filePath) {
-			// TODO:
-			// versioning of constructions
+			foreach (Construction construction in this.constructions) {
+				construction.UpdateVersions();
+			}
 
 			if (Directory.Exists(filePath)) {
 				try {

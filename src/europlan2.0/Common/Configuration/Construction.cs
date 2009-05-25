@@ -7,36 +7,69 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(FloorConstruction))]
 	public class Construction {
 		private string id;
+		private int version;
 		private string name;
 		private ConstructionType type;
 		private List<ConstructionLayer> layers;
+		private List<Construction> versionedConstructions;
 
 		public Construction() {
 			this.id = "";
+			this.version = 0;
 			this.name = "";
 			this.type = null;
 			this.layers = new List<ConstructionLayer>();
+			this.versionedConstructions = new List<Construction>();
 		}
 
 		public Construction(string id, string name, ConstructionType type) {
 			this.id = id;
+			this.version = 0;
 			this.name = name;
 			this.type = type;
 			this.layers = new List<ConstructionLayer>();
+			this.versionedConstructions = new List<Construction>();
 		}
 
 		public override bool Equals(object obj) {
 			if (obj is Construction) {
-				if ((obj as Construction).Id == this.Id) {
+				Construction construction = obj as Construction;
+				if ((construction.Id == this.Id) && 
+					(construction.name == this.name) && 
+					(construction.version == this.version) && 
+					(construction.layers.Count == this.layers.Count)) {
+					foreach (ConstructionLayer layer in this.layers) {
+						if (!construction.layers.Contains(layer)) {
+							return false;
+						}
+					}
 					return true;
 				}
 			}
 			return base.Equals(obj);
 		}
 
+		public void InitializeVersion(int version) {
+			if (versionedConstructions.Count >= version) {
+				Construction versioned = versionedConstructions[version];
+				this.name = versioned.name;
+				this.type = versioned.type;
+				this.layers = versioned.layers;
+			}
+		}
+
 		public string Id {
 			get { return id; }
 			set { id = value; }
+		}
+
+		public int VersionCount {
+			get { return this.versionedConstructions.Count; }
+		}
+
+		public int Version {
+			get { return this.version; }
+			set { this.version = value; }
 		}
 
 		public string Name {
@@ -71,11 +104,17 @@ namespace Europlan.Common {
 			}
 		}
 
+		public List<Construction> VersionedConstructions {
+			get { return versionedConstructions; }
+			set { versionedConstructions = value; }
+		}
+
 		public List<ConstructionLayer> Layers {
 			get { return layers; }
 			set { layers = value; }
 		}
 
+		[XmlIgnore]
 		public float Thickness {
 			get {
 				float thickness = 0;
@@ -86,6 +125,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public float RValue {
 			get {
 				float rValue = 0;
@@ -93,6 +133,29 @@ namespace Europlan.Common {
 					rValue += layer.RValue;
 				}
 				return rValue;
+			}
+		}
+
+		public void UpdateVersions() {
+			Construction versioned = null;
+			if (versionedConstructions.Count > 0) {
+				Construction versionedConstruction = versionedConstructions[versionedConstructions.Count - 1];
+				if (!versionedConstruction.Equals(this)) {
+					versioned = new Construction(this.id, this.name, this.type);
+					foreach (ConstructionLayer layer in this.layers) {
+						versioned.layers.Add(layer);
+					}
+				}
+			} else {
+				versioned = new Construction(this.id, this.name, this.type);
+				foreach (ConstructionLayer layer in this.layers) {
+					versioned.layers.Add(layer);
+				}
+			}
+			if (versioned != null) {
+				this.versionedConstructions.Add(versioned);
+				this.version = versionedConstructions.Count;
+				versioned.version = this.version;
 			}
 		}
 	}
