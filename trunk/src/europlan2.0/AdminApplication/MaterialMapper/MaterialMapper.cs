@@ -187,6 +187,8 @@ namespace Europlan.AdminApplication {
 				foreach (ListViewItem item in listUncategorizedMaterials.SelectedItems) {
 					items.Add(item);
 				}
+				listCategorizedMaterials.BeginUpdate();
+				listUncategorizedMaterials.BeginUpdate();
 				foreach (ListViewItem item in items) {
 					if (item.Tag != null && item.Tag is Material) {
 						Material material = item.Tag as Material;
@@ -196,8 +198,8 @@ namespace Europlan.AdminApplication {
 						listCategorizedMaterials.Items.Add(item);
 					}
 				}
-				//InitializeUncategorizedMaterialListView();
-				//InitializeCategorizedMaterialListView();
+				listCategorizedMaterials.EndUpdate();
+				listUncategorizedMaterials.EndUpdate();
 				UpdateButtons();
 			}
 		}
@@ -208,6 +210,8 @@ namespace Europlan.AdminApplication {
 				foreach (ListViewItem item in listCategorizedMaterials.SelectedItems) {
 					items.Add(item);
 				}
+				listCategorizedMaterials.BeginUpdate();
+				listUncategorizedMaterials.BeginUpdate();
 				foreach (ListViewItem item in items) {
 					if (item.Tag != null && item.Tag is Material) {
 						Material material = item.Tag as Material;
@@ -217,9 +221,8 @@ namespace Europlan.AdminApplication {
 						listUncategorizedMaterials.Items.Add(item);
 					}
 				}
-
-				//InitializeUncategorizedMaterialListView();
-				//InitializeCategorizedMaterialListView();
+				listCategorizedMaterials.EndUpdate();
+				listUncategorizedMaterials.EndUpdate();
 				UpdateButtons();
 			}
 		}
