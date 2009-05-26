@@ -384,6 +384,18 @@ namespace Europlan.Common {
 			}
 		}
 
+		public void Reset() {
+			if (this.type == ConfigurationType.AdminConfiguration) {
+				adminTemplate = null;
+				adminTemplate = Configuration.AdminTemplate;
+			} else if (this.type == ConfigurationType.UserConfiguration) {
+				userTemplate = null;
+				userTemplate = Configuration.UserTemplate;
+			} else {
+				log.Error("Reset() is not supported for this configuration type");
+			}
+		}
+
 		public void Save() {
 			try {
 				XmlSerializer s = new XmlSerializer(typeof(Configuration));
