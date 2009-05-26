@@ -15,7 +15,7 @@ namespace Europlan.Application.ContructionEditor {
 
 		public MaterialEditorGrid() {
 			InitializeComponent();
-			this.wrapper = new MaterialListWrapper(Configuration.ConfigurationType.UserConfiguration);
+			this.wrapper = new MaterialListWrapper(Configuration.ConfigurationType.UserConfiguration); // TODO
 			this.materialsWrapperBindingSource.DataSource = this.wrapper;
 			this.materialsWrapperBindingSource.ResetBindings(false);
 		}

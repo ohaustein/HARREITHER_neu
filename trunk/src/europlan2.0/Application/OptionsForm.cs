@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Star.SettingsXpress;
 using System.IO;
 using System.Globalization;
+using Europlan.Common;
 
 namespace Europlan.Application {
 	public partial class OptionsForm : Form {
@@ -50,6 +51,10 @@ namespace Europlan.Application {
 				}
 			}
 			SettingsFile.Update();
+		}
+
+		private void btnCancel_Click(object sender, EventArgs e) {
+			Configuration.UserTemplate.Reset();
 		}
 	}
 }

@@ -35,16 +35,16 @@ namespace Europlan.Application {
 			this.tabConstructions = new System.Windows.Forms.TabPage();
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.tabPageFloor = new System.Windows.Forms.TabPage();
-			this.megFloor = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabPageWall = new System.Windows.Forms.TabPage();
-			this.megWall = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabPageCeiling = new System.Windows.Forms.TabPage();
-			this.megCeiling = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabPageDistributor = new System.Windows.Forms.TabPage();
-			this.megDistributor = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabPageInsulation = new System.Windows.Forms.TabPage();
-			this.megInsulation = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabPageGeneral = new System.Windows.Forms.TabPage();
+			this.megFloor = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
+			this.megWall = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
+			this.megCeiling = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
+			this.megDistributor = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
+			this.megInsulation = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.megGeneral = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.constructionEditorGrid1 = new Europlan.Common.ConstructionEditorGrid();
 			this.panel1.SuspendLayout();
@@ -80,6 +80,7 @@ namespace Europlan.Application {
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
+			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
 			// 
 			// btnOk
 			// 
@@ -145,26 +146,12 @@ namespace Europlan.Application {
 			this.tabPageFloor.Name = "tabPageFloor";
 			this.tabPageFloor.UseVisualStyleBackColor = true;
 			// 
-			// megFloor
-			// 
-			this.megFloor.AllowToAdd = false;
-			resources.ApplyResources(this.megFloor, "megFloor");
-			this.megFloor.Filter = Europlan.Common.CategoryType.Floor;
-			this.megFloor.Name = "megFloor";
-			// 
 			// tabPageWall
 			// 
 			this.tabPageWall.Controls.Add(this.megWall);
 			resources.ApplyResources(this.tabPageWall, "tabPageWall");
 			this.tabPageWall.Name = "tabPageWall";
 			this.tabPageWall.UseVisualStyleBackColor = true;
-			// 
-			// megWall
-			// 
-			this.megWall.AllowToAdd = false;
-			resources.ApplyResources(this.megWall, "megWall");
-			this.megWall.Filter = Europlan.Common.CategoryType.Wall;
-			this.megWall.Name = "megWall";
 			// 
 			// tabPageCeiling
 			// 
@@ -173,26 +160,12 @@ namespace Europlan.Application {
 			this.tabPageCeiling.Name = "tabPageCeiling";
 			this.tabPageCeiling.UseVisualStyleBackColor = true;
 			// 
-			// megCeiling
-			// 
-			this.megCeiling.AllowToAdd = false;
-			resources.ApplyResources(this.megCeiling, "megCeiling");
-			this.megCeiling.Filter = Europlan.Common.CategoryType.Ceiling;
-			this.megCeiling.Name = "megCeiling";
-			// 
 			// tabPageDistributor
 			// 
 			this.tabPageDistributor.Controls.Add(this.megDistributor);
 			resources.ApplyResources(this.tabPageDistributor, "tabPageDistributor");
 			this.tabPageDistributor.Name = "tabPageDistributor";
 			this.tabPageDistributor.UseVisualStyleBackColor = true;
-			// 
-			// megDistributor
-			// 
-			this.megDistributor.AllowToAdd = false;
-			resources.ApplyResources(this.megDistributor, "megDistributor");
-			this.megDistributor.Filter = Europlan.Common.CategoryType.Distributor;
-			this.megDistributor.Name = "megDistributor";
 			// 
 			// tabPageInsulation
 			// 
@@ -201,19 +174,47 @@ namespace Europlan.Application {
 			this.tabPageInsulation.Name = "tabPageInsulation";
 			this.tabPageInsulation.UseVisualStyleBackColor = true;
 			// 
-			// megInsulation
-			// 
-			this.megInsulation.AllowToAdd = true;
-			resources.ApplyResources(this.megInsulation, "megInsulation");
-			this.megInsulation.Filter = Europlan.Common.CategoryType.Insulation;
-			this.megInsulation.Name = "megInsulation";
-			// 
 			// tabPageGeneral
 			// 
 			this.tabPageGeneral.Controls.Add(this.megGeneral);
 			resources.ApplyResources(this.tabPageGeneral, "tabPageGeneral");
 			this.tabPageGeneral.Name = "tabPageGeneral";
 			this.tabPageGeneral.UseVisualStyleBackColor = true;
+			// 
+			// megFloor
+			// 
+			this.megFloor.AllowToAdd = false;
+			resources.ApplyResources(this.megFloor, "megFloor");
+			this.megFloor.Filter = Europlan.Common.CategoryType.Floor;
+			this.megFloor.Name = "megFloor";
+			// 
+			// megWall
+			// 
+			this.megWall.AllowToAdd = false;
+			resources.ApplyResources(this.megWall, "megWall");
+			this.megWall.Filter = Europlan.Common.CategoryType.Wall;
+			this.megWall.Name = "megWall";
+			// 
+			// megCeiling
+			// 
+			this.megCeiling.AllowToAdd = false;
+			resources.ApplyResources(this.megCeiling, "megCeiling");
+			this.megCeiling.Filter = Europlan.Common.CategoryType.Ceiling;
+			this.megCeiling.Name = "megCeiling";
+			// 
+			// megDistributor
+			// 
+			this.megDistributor.AllowToAdd = false;
+			resources.ApplyResources(this.megDistributor, "megDistributor");
+			this.megDistributor.Filter = Europlan.Common.CategoryType.Distributor;
+			this.megDistributor.Name = "megDistributor";
+			// 
+			// megInsulation
+			// 
+			this.megInsulation.AllowToAdd = true;
+			resources.ApplyResources(this.megInsulation, "megInsulation");
+			this.megInsulation.Filter = Europlan.Common.CategoryType.Insulation;
+			this.megInsulation.Name = "megInsulation";
 			// 
 			// megGeneral
 			// 

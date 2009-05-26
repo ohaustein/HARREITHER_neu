@@ -16,7 +16,7 @@ namespace Europlan.Common {
 
 		public ConstructionEditorGrid() {
 			InitializeComponent();
-			this.wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.AdminConfiguration); // TODO
+			this.wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration); // TODO
 			this.constructionsWrapperBindingSource.DataSource = this.wrapper;
 			this.constructionsWrapperBindingSource.ResetBindings(false);
 		}
@@ -28,6 +28,9 @@ namespace Europlan.Common {
 					throw new Exception("Type must either be AdminConfiguration or UserConfiguration");
 				}
 				this.adminMode = value == Configuration.ConfigurationType.AdminConfiguration;
+				this.wrapper = new ConstructionListWrapper(this.adminMode ? Configuration.ConfigurationType.AdminConfiguration : Configuration.ConfigurationType.UserConfiguration);
+				this.constructionsWrapperBindingSource.DataSource = this.wrapper;
+				this.constructionsWrapperBindingSource.ResetBindings(false);
 			}
 		}
 
