@@ -50,6 +50,10 @@ namespace Europlan.Common {
 			return base.Equals(obj);
 		}
 
+		public override int GetHashCode() {
+			return base.GetHashCode();
+		}
+
 		public void InitializeVersion(int version) {
 			if (versionedConstructions.Count >= version) {
 				Construction versioned = versionedConstructions[version];
