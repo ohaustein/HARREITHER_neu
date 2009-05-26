@@ -199,8 +199,6 @@ namespace Europlan.Common {
 			}
 		}
 
-
-
 		/// <summary>
 		/// Gets a user template of the configuration object
 		/// </summary>
