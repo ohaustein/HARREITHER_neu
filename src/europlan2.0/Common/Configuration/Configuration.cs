@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
+using log4net;
 
 namespace Europlan.Common {
 
@@ -14,6 +15,7 @@ namespace Europlan.Common {
 		private static readonly object padlock = new object();
 		private static string appDataPath = System.Windows.Forms.Application.CommonAppDataPath.Substring(0, System.Windows.Forms.Application.CommonAppDataPath.IndexOf(System.Windows.Forms.Application.ProductVersion));
 
+		private static readonly ILog log = LogManager.GetLogger(typeof(Configuration));
 
 		// IMPORTANT!!!
 		//
@@ -61,7 +63,7 @@ namespace Europlan.Common {
 					}
 				}
 			} catch (Exception ex) {
-				// TODO
+				log.Error("Error while parsing DATANORM.001 file", ex);
 			}
 			try {
 				StreamReader sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.RAB"), System.Text.Encoding.GetEncoding(850));
@@ -75,7 +77,7 @@ namespace Europlan.Common {
 					}
 				}
 			} catch (Exception ex) {
-				// TODO
+				log.Error("Error while parsing DATANORM.RAB file", ex);
 			}
 
 		}
@@ -185,8 +187,8 @@ namespace Europlan.Common {
 								adminTemplate = (Configuration)s.Deserialize(r);
 								r.Close();
 							}
-						} catch {
-							// TODO
+						} catch (Exception ex) {
+							log.Error("Error while loading global.conf", ex);
 							adminTemplate = new Configuration();
 						}
 					}
@@ -213,8 +215,8 @@ namespace Europlan.Common {
 								userTemplate = AdminTemplate + (Configuration)s.Deserialize(r);
 								r.Close();
 							}
-						} catch {
-							// TODO
+						} catch (Exception ex) {
+							log.Error("Error while loading custom.conf", ex);
 							userTemplate = AdminTemplate + new Configuration();
 						}
 					}
@@ -391,14 +393,14 @@ namespace Europlan.Common {
 				} else if (this.type == ConfigurationType.UserConfiguration) {
 					filename = Path.Combine(appDataPath, "custom.conf");
 				} else {
-					// TODO
+					log.Error("Save() has been called for configuration type which is not supported: " + this.type);
 					return;
 				}
 				Stream w = new FileStream(filename, FileMode.Create);
 				s.Serialize(w, this);
 				w.Close();
-			} catch (Exception e) {
-				// TODO
+			} catch (Exception ex) {
+				log.Error("Error while saving configuration", ex);
 			}
 		}
 
@@ -413,17 +415,15 @@ namespace Europlan.Common {
 					string filename = "";
 					if (this.type == ConfigurationType.AdminConfiguration) {
 						filename = Path.Combine(filePath, "global.conf");
-					} else if (this.type == ConfigurationType.UserConfiguration) {
-						filename = Path.Combine(filePath, "custom.conf");
 					} else {
-						// TODO
+						log.Error("Export() has been called for configuration type which is not supported: " + this.type);
 						return;
 					}
 					Stream w = new FileStream(filename, FileMode.Create);
 					s.Serialize(w, this);
 					w.Close();
-				} catch (Exception e) {
-					// TODO
+				} catch (Exception ex) {
+					log.Error("Error while exporting configuration", ex);
 				}
 			}
 		}
