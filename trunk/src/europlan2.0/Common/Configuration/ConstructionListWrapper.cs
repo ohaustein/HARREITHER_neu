@@ -6,39 +6,40 @@ using System.ComponentModel;
 namespace Europlan.Common {
 	public class ConstructionListWrapper : IList<Construction>, IBindingList, IBindingListView {
 
-		private List<Construction> constructions;
+		private Configuration.ConfigurationType type;
 
 		private Nullable<ConstructionScopeEnum> filter = null;
 
-		public ConstructionListWrapper() {
-			this.constructions = Configuration.AdminTemplate.Constructions;
+		public ConstructionListWrapper(Configuration.ConfigurationType type) {
+			if (!(type == Configuration.ConfigurationType.UserConfiguration || type == Configuration.ConfigurationType.AdminConfiguration)) {
+				throw new Exception("type must be UserConfiguration or AdminConfiguration");
+			}
+			this.type = type;
 		}
 
-		/*private void OnListChanged(ListChangedEventArgs args) {
-			if (this.ListChanged != null) {
-				this.ListChanged(this, args);
-			}
-		}*/
+		private List<Construction> Constructions {
+			get { return (this.type == Configuration.ConfigurationType.AdminConfiguration ? Configuration.AdminTemplate.Constructions : Configuration.UserTemplate.Constructions); }
+		}
 
 		#region IEnumerable<Construction> Members
 		public IEnumerator<Construction> GetEnumerator() {
-			return new ConstructionListEnumerator(this.constructions, (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value));
+			return new ConstructionListEnumerator(this.type, (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value));
 		}
 		#endregion
 
 		#region IEnumerable Members
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-			return new ConstructionListEnumerator(this.constructions, (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value));
+			return new ConstructionListEnumerator(this.type, (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value));
 		}
 		#endregion
 
 		#region ICollection<Construction> Members
 		public void Add(Construction item) {
-			this.constructions.Add(item);
+			this.Constructions.Add(item);
 		}
 
 		public void Clear() {
-			this.constructions.Clear();
+			this.Constructions.Clear();
 		}
 
 		public bool Contains(Construction item) {
@@ -70,7 +71,7 @@ namespace Europlan.Common {
 		}
 
 		public bool Remove(Construction item) {
-			bool result = this.constructions.Remove(item);
+			bool result = this.Constructions.Remove(item);
 			return result;
 		}
 		#endregion
@@ -111,32 +112,32 @@ namespace Europlan.Common {
 		private int GetNode(int index) {
 			int i = 0;
 			int current = 0;
-			while (current < this.constructions.Count && (this.filter != null && ((this.filter.Value & this.constructions[current].Scope) == ConstructionScopeEnum.UnknownConstruction))) {
+			while (current < this.Constructions.Count && ((this.filter != null && ((this.filter.Value & this.Constructions[current].Scope) == ConstructionScopeEnum.UnknownConstruction))) || this.Constructions[current].HasBeenDeleted) {
 				current++;
 			}
-			while (i < index && current < this.constructions.Count) {
+			while (i < index && current < this.Constructions.Count) {
 				current++;
-				while (current < this.constructions.Count && (this.filter != null && ((this.filter.Value & this.constructions[current].Scope) == ConstructionScopeEnum.UnknownConstruction))) {
+				while (current < this.Constructions.Count && ((this.filter != null && ((this.filter.Value & this.Constructions[current].Scope) == ConstructionScopeEnum.UnknownConstruction))) || this.Constructions[current].HasBeenDeleted) {
 					current++;
 				}
 				i++;
 			}
-			return current < this.constructions.Count ? current : -1;
+			return current < this.Constructions.Count ? current : -1;
 		}
 
 		public void Insert(int index, Construction item) {
 			int node = this.GetNode(index);
 			if (node < 0) {
-				this.constructions.Insert(this.constructions.Count, item);
+				this.Constructions.Insert(this.Constructions.Count, item);
 			} else {
-				this.constructions.Insert(node, item);
+				this.Constructions.Insert(node, item);
 			}
 		}
 
 		public void RemoveAt(int index) {
 			int node = this.GetNode(index);
 			if (node >= 0) {
-				this.constructions.RemoveAt(node);
+				this.Constructions.RemoveAt(node);
 			} else {
 				throw new ArgumentOutOfRangeException();
 			}
@@ -148,7 +149,7 @@ namespace Europlan.Common {
 				if (node < 0) {
 					throw new ArgumentOutOfRangeException();
 				} else {
-					return this.constructions[node];
+					return this.Constructions[node];
 				}
 			}
 			set {
@@ -156,7 +157,7 @@ namespace Europlan.Common {
 				if (node < 0) {
 					throw new ArgumentOutOfRangeException();
 				} else {
-					this.constructions[node] = value;
+					this.Constructions[node] = value;
 				}
 			}
 		}
@@ -165,8 +166,8 @@ namespace Europlan.Common {
 		#region IList Members
 		public int Add(object value) {
 			if (value is Construction) {
-				this.constructions.Add((Construction)value);
-				return this.constructions.Count - 1;
+				this.Constructions.Add((Construction)value);
+				return this.Constructions.Count - 1;
 			} else {
 				throw new ArgumentException("Object to add is not a construction");
 			}
@@ -194,7 +195,7 @@ namespace Europlan.Common {
 
 		public void Remove(object value) {
 			if (value is Construction) {
-				this.constructions.Remove((Construction)value);
+				this.Constructions.Remove((Construction)value);
 			}
 		}
 
@@ -204,7 +205,7 @@ namespace Europlan.Common {
 				if (node < 0) {
 					throw new ArgumentOutOfRangeException();
 				} else {
-					return this.constructions[node];
+					return this.Constructions[node];
 				}
 			}
 			set {
@@ -213,7 +214,7 @@ namespace Europlan.Common {
 					if (node < 0) {
 						throw new ArgumentOutOfRangeException();
 					} else {
-						this.constructions[node] = (Construction)value;
+						this.Constructions[node] = (Construction)value;
 					}
 				} else {
 					throw new ArgumentException("Object to set is not a construction");
@@ -340,16 +341,22 @@ namespace Europlan.Common {
 
 	public class ConstructionListEnumerator : IEnumerator<Construction> {
 
-		private List<Construction> list;
-		int currentNode;
+		private Configuration.ConfigurationType type;
+		private int currentNode;
 		private bool finished;
 		private ConstructionScopeEnum filter;
 
-		internal ConstructionListEnumerator(List<Construction> list, ConstructionScopeEnum filter) {
-			this.list = list;
+		internal ConstructionListEnumerator(Configuration.ConfigurationType type, ConstructionScopeEnum filter) {
+			if (!(type == Configuration.ConfigurationType.UserConfiguration || type == Configuration.ConfigurationType.AdminConfiguration)) {
+				throw new Exception("type must be UserConfiguration or AdminConfiguration");
+			}
 			this.currentNode = -1;
 			this.finished = false;
 			this.filter = filter;
+		}
+
+		private List<Construction> List {
+			get { return (this.type == Configuration.ConfigurationType.AdminConfiguration ? Configuration.AdminTemplate.Constructions : Configuration.UserTemplate.Constructions); }
 		}
 
 		#region IEnumerator<Construction> Members
@@ -358,7 +365,7 @@ namespace Europlan.Common {
 				if (this.currentNode <= 0 || this.finished) {
 					return null;
 				} else {
-					return this.list[this.currentNode];
+					return this.List[this.currentNode];
 				}
 			}
 		}
@@ -375,7 +382,7 @@ namespace Europlan.Common {
 				if (this.currentNode <= 0 || this.finished) {
 					return null;
 				} else {
-					return this.list[this.currentNode];
+					return this.List[this.currentNode];
 				}
 			}
 		}
@@ -387,10 +394,10 @@ namespace Europlan.Common {
 				} else {
 					this.currentNode++;
 				}
-				while (this.currentNode < this.list.Count && ((this.list[this.currentNode].Scope & this.filter) == ConstructionScopeEnum.UnknownConstruction)) {
+				while (this.currentNode < this.List.Count && (((this.List[this.currentNode].Scope & this.filter) == ConstructionScopeEnum.UnknownConstruction) || this.List[this.currentNode].HasBeenDeleted)) {
 					this.currentNode++;
 				}
-				if (this.currentNode >= this.list.Count) {
+				if (this.currentNode >= this.List.Count) {
 					this.finished = true;
 				}
 			}

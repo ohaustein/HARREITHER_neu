@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Europlan.Common;
 
-namespace Europlan.AdminApplication {
+namespace Europlan.Common {
 	public partial class ConstructionEditorGrid : UserControl {
 
 		private ConstructionScopeEnum filter = ConstructionScopeEnum.All;
@@ -16,9 +16,19 @@ namespace Europlan.AdminApplication {
 
 		public ConstructionEditorGrid() {
 			InitializeComponent();
-			this.wrapper = new ConstructionListWrapper();
+			this.wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.AdminConfiguration); // TODO
 			this.constructionsWrapperBindingSource.DataSource = this.wrapper;
 			this.constructionsWrapperBindingSource.ResetBindings(false);
+		}
+
+		public Configuration.ConfigurationType Type {
+			get { return this.adminMode ? Configuration.ConfigurationType.AdminConfiguration : Configuration.ConfigurationType.UserConfiguration; }
+			set {
+				if (!(value == Configuration.ConfigurationType.AdminConfiguration || value == Configuration.ConfigurationType.UserConfiguration)) {
+					throw new Exception("Type must either be AdminConfiguration or UserConfiguration");
+				}
+				this.adminMode = value == Configuration.ConfigurationType.AdminConfiguration;
+			}
 		}
 
 		private void gridConstructions_CellClick(object sender, DataGridViewCellEventArgs e) {
@@ -28,17 +38,14 @@ namespace Europlan.AdminApplication {
 				Construction c = this.gridConstructions.Rows[e.RowIndex].DataBoundItem as Construction;
 				if (c != null) {
 					ConstructionEditorForm cef = new ConstructionEditorForm(c);
+					if (!this.adminMode) {
+						if (c.Type != null && !c.Type.UserDefined) {
+							cef.ReadOnly = true;
+						}
+					}
 					cef.ShowDialog();
 					this.constructionsWrapperBindingSource.ResetBindings(false);
 				}
-			}
-		}
-
-		public bool AdminMode {
-			get { return this.adminMode; }
-			set {
-				this.adminMode = value;
-
 			}
 		}
 
@@ -137,8 +144,58 @@ namespace Europlan.AdminApplication {
 
 		private void gridConstructions_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
 			e.Cancel = true;
-			this.wrapper.Remove(e.Row.DataBoundItem);
-			this.constructionsWrapperBindingSource.ResetBindings(false);
+			bool refresh = false;
+			if (e.Row.DataBoundItem is Construction) {
+				Construction c = e.Row.DataBoundItem as Construction;
+				if (c.Type == null || c.Type.UserDefined) {
+					this.wrapper.Remove(c);
+					refresh = true;
+				} else {
+					if (this.adminMode) {
+						if (c.VersionCount == 0) {
+							this.wrapper.Remove(c);
+						} else {
+							c.HasBeenDeleted = true;
+						}
+						refresh = true;
+					}
+				}
+			} else {
+				this.wrapper.Remove(e.Row.DataBoundItem);
+				refresh = true;
+			}
+			if (refresh) {
+				this.constructionsWrapperBindingSource.ResetBindings(false);
+			}
 		}
+
+		private void gridConstructions_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
+			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
+				DataGridViewRow row = this.gridConstructions.Rows[i];
+				if (row.DataBoundItem != null) {
+					row.ReadOnly = !this.adminMode && (row.DataBoundItem as Construction).Type != null && !(row.DataBoundItem as Construction).Type.UserDefined;
+					if (row.ReadOnly) {
+						row.DefaultCellStyle.ForeColor = SystemColors.GrayText;
+					} else {
+						row.DefaultCellStyle.ForeColor = SystemColors.ControlText;
+					}
+				}
+			}
+		}
+
+		/*private void gridConstructions_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e) {
+			e.PaintCells(e.ClipBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border | DataGridViewPaintParts.ErrorIcon | DataGridViewPaintParts.Focus | DataGridViewPaintParts.SelectionBackground);
+			e.PaintCells(e.ClipBounds, DataGridViewPaintParts.All);
+			e.PaintHeader(DataGridViewPaintParts.All);
+		}
+
+		private void gridConstructions_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
+			if (e.PaintParts == DataGridViewPaintParts.All && e.ColumnIndex == this.colEdit.Index) {
+				if (e.RowIndex >= 0 && e.RowIndex < this.gridConstructions.Rows.Count &&
+					(this.gridConstructions.Rows[e.RowIndex].DataBoundItem == null || !(this.gridConstructions.Rows[e.RowIndex].DataBoundItem as Construction).Type.UserDefined)) {
+					e.Handled = true;
+				}
+			}
+		}*/
 	}
 }

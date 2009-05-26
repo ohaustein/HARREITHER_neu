@@ -6,37 +6,40 @@ using System.ComponentModel;
 namespace Europlan.Common {
 	public class MaterialListWrapper : IList<Material>, IBindingList, IBindingListView {
 
-		private List<Material> materials;
+		private Configuration.ConfigurationType type;
 
 		private Nullable<CategoryType> filter = null;
 
 		public MaterialListWrapper(Configuration.ConfigurationType type) {
-			if (type == Configuration.ConfigurationType.AdminConfiguration) {
-				this.materials = Configuration.AdminTemplate.Materials;
-			} else {
-				this.materials = Configuration.UserTemplate.Materials;
+			if (!(type == Configuration.ConfigurationType.UserConfiguration || type == Configuration.ConfigurationType.AdminConfiguration)) {
+				throw new Exception("type must be UserConfiguration or AdminConfiguration");
 			}
+			this.type = type;
+		}
+
+		private List<Material> Materials {
+			get { return (this.type == Configuration.ConfigurationType.AdminConfiguration ? Configuration.AdminTemplate.Materials : Configuration.UserTemplate.Materials); }
 		}
 
 		#region IEnumerable<Construction> Members
 		public IEnumerator<Material> GetEnumerator() {
-			return new MaterialListEnumerator(this.materials, this.filter);
+			return new MaterialListEnumerator(this.type, this.filter);
 		}
 		#endregion
 
 		#region IEnumerable Members
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-			return new MaterialListEnumerator(this.materials, this.filter);
+			return new MaterialListEnumerator(this.type, this.filter);
 		}
 		#endregion
 
 		#region ICollection<Construction> Members
 		public void Add(Material item) {
-			this.materials.Add(item);
+			this.Materials.Add(item);
 		}
 
 		public void Clear() {
-			this.materials.Clear();
+			this.Materials.Clear();
 		}
 
 		public bool Contains(Material item) {
@@ -68,7 +71,7 @@ namespace Europlan.Common {
 		}
 
 		public bool Remove(Material item) {
-			bool result = this.materials.Remove(item);
+			bool result = this.Materials.Remove(item);
 			return result;
 		}
 		#endregion
@@ -109,32 +112,32 @@ namespace Europlan.Common {
 		private int GetNode(int index) {
 			int i = 0;
 			int current = 0;
-			while (current < this.materials.Count && (this.filter != null && (this.materials[current].Category == null || this.filter.Value != this.materials[current].Category.Type))) {
+			while (current < this.Materials.Count && (this.filter != null && (this.Materials[current].Category == null || this.filter.Value != this.Materials[current].Category.Type))) {
 				current++;
 			}
-			while (i < index && current < this.materials.Count) {
+			while (i < index && current < this.Materials.Count) {
 				current++;
-				while (current < this.materials.Count && (this.filter != null && (this.materials[current].Category == null || this.filter.Value != this.materials[current].Category.Type))) {
+				while (current < this.Materials.Count && (this.filter != null && (this.Materials[current].Category == null || this.filter.Value != this.Materials[current].Category.Type))) {
 					current++;
 				}
 				i++;
 			}
-			return current < this.materials.Count ? current : -1;
+			return current < this.Materials.Count ? current : -1;
 		}
 
 		public void Insert(int index, Material item) {
 			int node = this.GetNode(index);
 			if (node < 0) {
-				this.materials.Insert(this.materials.Count, item);
+				this.Materials.Insert(this.Materials.Count, item);
 			} else {
-				this.materials.Insert(node, item);
+				this.Materials.Insert(node, item);
 			}
 		}
 
 		public void RemoveAt(int index) {
 			int node = this.GetNode(index);
 			if (node >= 0) {
-				this.materials.RemoveAt(node);
+				this.Materials.RemoveAt(node);
 			} else {
 				throw new ArgumentOutOfRangeException();
 			}
@@ -146,7 +149,7 @@ namespace Europlan.Common {
 				if (node < 0) {
 					throw new ArgumentOutOfRangeException();
 				} else {
-					return this.materials[node];
+					return this.Materials[node];
 				}
 			}
 			set {
@@ -154,7 +157,7 @@ namespace Europlan.Common {
 				if (node < 0) {
 					throw new ArgumentOutOfRangeException();
 				} else {
-					this.materials[node] = value;
+					this.Materials[node] = value;
 				}
 			}
 		}
@@ -163,8 +166,8 @@ namespace Europlan.Common {
 		#region IList Members
 		public int Add(object value) {
 			if (value is Material) {
-				this.materials.Add((Material)value);
-				return this.materials.Count - 1;
+				this.Materials.Add((Material)value);
+				return this.Materials.Count - 1;
 			} else {
 				throw new ArgumentException("Object to add is not a material");
 			}
@@ -192,7 +195,7 @@ namespace Europlan.Common {
 
 		public void Remove(object value) {
 			if (value is Material) {
-				this.materials.Remove((Material)value);
+				this.Materials.Remove((Material)value);
 			}
 		}
 
@@ -202,7 +205,7 @@ namespace Europlan.Common {
 				if (node < 0) {
 					throw new ArgumentOutOfRangeException();
 				} else {
-					return this.materials[node];
+					return this.Materials[node];
 				}
 			}
 			set {
@@ -211,7 +214,7 @@ namespace Europlan.Common {
 					if (node < 0) {
 						throw new ArgumentOutOfRangeException();
 					} else {
-						this.materials[node] = (Material)value;
+						this.Materials[node] = (Material)value;
 					}
 				} else {
 					throw new ArgumentException("Object to set is not a material");
@@ -232,7 +235,7 @@ namespace Europlan.Common {
 			m.Category = Configuration.UserTemplate.GetUserDefinedCategoryForCategoryType(this.filter.Value);
 			m.UserDefined = true;
 			m.IsNew = true;
-			this.materials.Add(m);
+			this.Materials.Add(m);
 			return m;
 		}
 
@@ -348,16 +351,20 @@ namespace Europlan.Common {
 
 	public class MaterialListEnumerator : IEnumerator<Material> {
 
-		private List<Material> list;
-		int currentNode;
+		private Configuration.ConfigurationType type;
+		private int currentNode;
 		private bool finished;
 		private Nullable<CategoryType> filter;
 
-		internal MaterialListEnumerator(List<Material> list, Nullable<CategoryType> filter) {
-			this.list = list;
+		internal MaterialListEnumerator(Configuration.ConfigurationType type, Nullable<CategoryType> filter) {
+			this.type = type;
 			this.currentNode = -1;
 			this.finished = false;
 			this.filter = filter;
+		}
+
+		private List<Material> List {
+			get { return (this.type == Configuration.ConfigurationType.AdminConfiguration ? Configuration.AdminTemplate.Materials : Configuration.UserTemplate.Materials); }
 		}
 
 		#region IEnumerator<Construction> Members
@@ -366,7 +373,7 @@ namespace Europlan.Common {
 				if (this.currentNode <= 0 || this.finished) {
 					return null;
 				} else {
-					return this.list[this.currentNode];
+					return this.List[this.currentNode];
 				}
 			}
 		}
@@ -383,7 +390,7 @@ namespace Europlan.Common {
 				if (this.currentNode <= 0 || this.finished) {
 					return null;
 				} else {
-					return this.list[this.currentNode];
+					return this.List[this.currentNode];
 				}
 			}
 		}
@@ -395,10 +402,10 @@ namespace Europlan.Common {
 				} else {
 					this.currentNode++;
 				}
-				while (this.currentNode < this.list.Count && (this.filter != null && (this.list[currentNode].Category == null || this.list[this.currentNode].Category.Type != this.filter.Value))) {
+				while (this.currentNode < this.List.Count && (this.filter != null && (this.List[currentNode].Category == null || this.List[this.currentNode].Category.Type != this.filter.Value))) {
 					this.currentNode++;
 				}
-				if (this.currentNode >= this.list.Count) {
+				if (this.currentNode >= this.List.Count) {
 					this.finished = true;
 				}
 			}

@@ -34,8 +34,7 @@ namespace Europlan.Application.ContructionEditor {
 			set { this.gridMaterials.AllowUserToAddRows = value; }
 		}
 
-		private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
-			Console.WriteLine("added");
+		private void gridMaterials_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
 			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
 				DataGridViewRow row = this.gridMaterials.Rows[i];
 				if (row.DataBoundItem != null) {

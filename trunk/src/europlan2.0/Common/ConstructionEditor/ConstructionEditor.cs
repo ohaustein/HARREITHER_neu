@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Europlan.Common;
 
-namespace Europlan.AdminApplication {
+namespace Europlan.Common {
 	public partial class ConstructionEditor : UserControl {
 
 		private ConstructionScopeEnum defaultConstructionScope = ConstructionScopeEnum.FloorConstruction;
@@ -145,6 +145,49 @@ namespace Europlan.AdminApplication {
 			foreach (DataGridViewRow row in this.gridLayers.SelectedRows) {
 				row.Selected = false;
 			}
+		}
+
+		public void Cleanup() {
+			if (this.gridLayers.SelectedCells.Count > 0) {
+				if (this.gridLayers.SelectedCells[0].OwningRow.DataBoundItem == null) {
+					this.gridLayers.CancelEdit();
+				} else {
+					this.gridLayers.EndEdit();
+				}
+			}
+		}
+
+
+		public bool ReadOnly {
+			set {
+				this.gridLayers.ReadOnly = value;
+				this.gridLayers.AllowUserToAddRows = !value;
+				this.txtId.ReadOnly = value;
+				this.txtName.ReadOnly = value;
+				this.numThickness.ReadOnly = value;
+				this.cbPeFoil.Enabled = !value;
+				if (value) {
+					this.gridLayers.DefaultCellStyle.ForeColor = SystemColors.GrayText;
+					//this.gridLayers.DefaultCellStyle.BackColor = SystemColors.Control;
+					this.txtId.BackColor = SystemColors.Window;
+					this.txtName.BackColor = SystemColors.Window;
+					this.numThickness.BackColor = SystemColors.Window;
+					this.txtId.ForeColor = SystemColors.GrayText;
+					this.txtName.ForeColor = SystemColors.GrayText;
+					this.numThickness.ForeColor = SystemColors.GrayText;
+				} else {
+					this.gridLayers.DefaultCellStyle.ForeColor = SystemColors.WindowText;
+					//this.gridLayers.DefaultCellStyle.BackColor = SystemColors.Window;
+					this.txtId.BackColor = SystemColors.Window;
+					this.txtName.BackColor = SystemColors.Window;
+					this.numThickness.BackColor = SystemColors.Window;
+					this.txtId.ForeColor = SystemColors.WindowText;
+					this.txtName.ForeColor = SystemColors.WindowText;
+					this.numThickness.ForeColor = SystemColors.WindowText;
+				}
+
+			}
+			get { return this.gridLayers.ReadOnly; }
 		}
 	}
 }
