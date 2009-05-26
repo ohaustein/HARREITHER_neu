@@ -8,9 +8,13 @@ using Europlan.Licensing;
 using System.IO;
 using Europlan.Common;
 using Star.SettingsXpress;
+using log4net;
 
 namespace Europlan.AdminApplication {
 	public partial class MainForm : Form {
+
+		private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
+
 		public MainForm() {
 			InitializeComponent();
 		}
@@ -84,7 +88,7 @@ namespace Europlan.AdminApplication {
 					LicenseManager.Instance.SaveLicenseManager(s);
 				}
 			} catch (Exception ex) {
-				// TODO log
+				log.Error("Problem while saving licenses", ex);
 			}
 			Configuration.AdminTemplate.Save();
 		}
@@ -111,7 +115,7 @@ namespace Europlan.AdminApplication {
 					}
 				}
 			} catch (Exception ex) {
-				// TODO log
+				log.Error("Problem while loading licenses", ex);
 			}
 		}
 
