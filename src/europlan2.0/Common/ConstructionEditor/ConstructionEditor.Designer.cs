@@ -1,4 +1,4 @@
-namespace Europlan.AdminApplication {
+namespace Europlan.Common {
 	partial class ConstructionEditor {
 		/// <summary> 
 		/// Required designer variable.
@@ -111,7 +111,6 @@ namespace Europlan.AdminApplication {
             this.colLambdaValue,
             this.colThickness,
             this.colRValue});
-			this.gridLayers.DataMember = "Layers";
 			this.gridLayers.DataSource = this.constructionBindingSource;
 			this.gridLayers.Location = new System.Drawing.Point(3, 81);
 			this.gridLayers.Name = "gridLayers";
@@ -178,6 +177,7 @@ namespace Europlan.AdminApplication {
 			// 
 			// constructionBindingSource
 			// 
+			this.constructionBindingSource.DataMember = "Layers";
 			this.constructionBindingSource.DataSource = typeof(Europlan.Common.Construction);
 			// 
 			// dataGridViewComboBoxColumn1
@@ -318,8 +318,8 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.TextBox txtName;
 		private System.Windows.Forms.Label lblName;
 		private System.Windows.Forms.Label lblThickness;
-		private System.Windows.Forms.DataGridView gridLayers;
 		private System.Windows.Forms.BindingSource constructionBindingSource;
+		private System.Windows.Forms.DataGridView gridLayers;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;

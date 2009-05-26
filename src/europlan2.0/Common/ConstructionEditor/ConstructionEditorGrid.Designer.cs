@@ -1,4 +1,4 @@
-namespace Europlan.AdminApplication {
+namespace Europlan.Common {
 	partial class ConstructionEditorGrid {
 		/// <summary> 
 		/// Required designer variable.
@@ -29,14 +29,6 @@ namespace Europlan.AdminApplication {
 			this.btnView = new System.Windows.Forms.Button();
 			this.btnNew = new System.Windows.Forms.Button();
 			this.gridConstructions = new System.Windows.Forms.DataGridView();
-			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.thicknessDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colRValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
-			this.colScope = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.constructionsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.cmsView = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tsmiFloorConstruction = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +39,14 @@ namespace Europlan.AdminApplication {
 			this.tsmiNewFloorConstructionScreedAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiNewFloorConstructionDryAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiNewInsulationConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
+			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.thicknessDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colRValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colScope = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.constructionsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,10 +55,10 @@ namespace Europlan.AdminApplication {
 			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panBottom.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridConstructions)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.constructionsWrapperBindingSource)).BeginInit();
 			this.cmsView.SuspendLayout();
 			this.cmsNew.SuspendLayout();
 			this.cmsNewAdmin.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.constructionsWrapperBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// panBottom
@@ -120,71 +120,8 @@ namespace Europlan.AdminApplication {
 			this.gridConstructions.Size = new System.Drawing.Size(704, 398);
 			this.gridConstructions.TabIndex = 3;
 			this.gridConstructions.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridConstructions_UserDeletingRow);
+			this.gridConstructions.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridConstructions_RowsAdded);
 			this.gridConstructions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridConstructions_CellClick);
-			// 
-			// colId
-			// 
-			this.colId.DataPropertyName = "Id";
-			this.colId.FillWeight = 50F;
-			this.colId.HeaderText = "Nr.";
-			this.colId.Name = "colId";
-			this.colId.ReadOnly = true;
-			this.colId.Width = 50;
-			// 
-			// colName
-			// 
-			this.colName.DataPropertyName = "Name";
-			this.colName.FillWeight = 150F;
-			this.colName.HeaderText = "Bezeichnung";
-			this.colName.Name = "colName";
-			this.colName.ReadOnly = true;
-			this.colName.Width = 150;
-			// 
-			// colType
-			// 
-			this.colType.DataPropertyName = "Type";
-			this.colType.FillWeight = 150F;
-			this.colType.HeaderText = "Type";
-			this.colType.Name = "colType";
-			this.colType.ReadOnly = true;
-			this.colType.Width = 150;
-			// 
-			// thicknessDataGridViewTextBoxColumn
-			// 
-			this.thicknessDataGridViewTextBoxColumn.DataPropertyName = "Thickness";
-			this.thicknessDataGridViewTextBoxColumn.HeaderText = "Thickness";
-			this.thicknessDataGridViewTextBoxColumn.Name = "thicknessDataGridViewTextBoxColumn";
-			this.thicknessDataGridViewTextBoxColumn.ReadOnly = true;
-			this.thicknessDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// colRValue
-			// 
-			this.colRValue.DataPropertyName = "RValue";
-			this.colRValue.FillWeight = 50F;
-			this.colRValue.HeaderText = "R (m²K/W)";
-			this.colRValue.Name = "colRValue";
-			this.colRValue.ReadOnly = true;
-			this.colRValue.Width = 50;
-			// 
-			// colEdit
-			// 
-			this.colEdit.FillWeight = 65F;
-			this.colEdit.HeaderText = "Bearbeiten";
-			this.colEdit.Name = "colEdit";
-			this.colEdit.ReadOnly = true;
-			this.colEdit.Width = 65;
-			// 
-			// colScope
-			// 
-			this.colScope.DataPropertyName = "Scope";
-			this.colScope.HeaderText = "Scope";
-			this.colScope.Name = "colScope";
-			this.colScope.ReadOnly = true;
-			this.colScope.Visible = false;
-			// 
-			// constructionsWrapperBindingSource
-			// 
-			this.constructionsWrapperBindingSource.DataSource = typeof(Europlan.Common.ConstructionListWrapper);
 			// 
 			// cmsView
 			// 
@@ -243,7 +180,7 @@ namespace Europlan.AdminApplication {
             this.tsmiNewFloorConstructionDryAdmin,
             this.tsmiNewInsulationConstructionAdmin});
 			this.cmsNewAdmin.Name = "cmsNew";
-			this.cmsNewAdmin.Size = new System.Drawing.Size(250, 92);
+			this.cmsNewAdmin.Size = new System.Drawing.Size(250, 70);
 			// 
 			// tsmiNewFloorConstructionScreedAdmin
 			// 
@@ -265,6 +202,72 @@ namespace Europlan.AdminApplication {
 			this.tsmiNewInsulationConstructionAdmin.Size = new System.Drawing.Size(249, 22);
 			this.tsmiNewInsulationConstructionAdmin.Text = "Wärmedämmkonstruktion";
 			this.tsmiNewInsulationConstructionAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
+			// 
+			// colEdit
+			// 
+			this.colEdit.FillWeight = 65F;
+			this.colEdit.HeaderText = "Bearbeiten";
+			this.colEdit.Name = "colEdit";
+			this.colEdit.ReadOnly = true;
+			this.colEdit.Text = "...";
+			this.colEdit.UseColumnTextForButtonValue = true;
+			this.colEdit.Width = 65;
+			// 
+			// colId
+			// 
+			this.colId.DataPropertyName = "Id";
+			this.colId.FillWeight = 50F;
+			this.colId.HeaderText = "Nr.";
+			this.colId.Name = "colId";
+			this.colId.ReadOnly = true;
+			this.colId.Width = 50;
+			// 
+			// colName
+			// 
+			this.colName.DataPropertyName = "Name";
+			this.colName.FillWeight = 150F;
+			this.colName.HeaderText = "Bezeichnung";
+			this.colName.Name = "colName";
+			this.colName.ReadOnly = true;
+			this.colName.Width = 150;
+			// 
+			// colType
+			// 
+			this.colType.DataPropertyName = "Type";
+			this.colType.FillWeight = 150F;
+			this.colType.HeaderText = "Type";
+			this.colType.Name = "colType";
+			this.colType.ReadOnly = true;
+			this.colType.Width = 150;
+			// 
+			// thicknessDataGridViewTextBoxColumn
+			// 
+			this.thicknessDataGridViewTextBoxColumn.DataPropertyName = "Thickness";
+			this.thicknessDataGridViewTextBoxColumn.HeaderText = "Thickness";
+			this.thicknessDataGridViewTextBoxColumn.Name = "thicknessDataGridViewTextBoxColumn";
+			this.thicknessDataGridViewTextBoxColumn.ReadOnly = true;
+			this.thicknessDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// colRValue
+			// 
+			this.colRValue.DataPropertyName = "RValue";
+			this.colRValue.FillWeight = 50F;
+			this.colRValue.HeaderText = "R (m²K/W)";
+			this.colRValue.Name = "colRValue";
+			this.colRValue.ReadOnly = true;
+			this.colRValue.Width = 50;
+			// 
+			// colScope
+			// 
+			this.colScope.DataPropertyName = "Scope";
+			this.colScope.HeaderText = "Scope";
+			this.colScope.Name = "colScope";
+			this.colScope.ReadOnly = true;
+			this.colScope.Visible = false;
+			// 
+			// constructionsWrapperBindingSource
+			// 
+			this.constructionsWrapperBindingSource.DataSource = typeof(Europlan.Common.ConstructionListWrapper);
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -329,10 +332,10 @@ namespace Europlan.AdminApplication {
 			this.Size = new System.Drawing.Size(704, 424);
 			this.panBottom.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridConstructions)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.constructionsWrapperBindingSource)).EndInit();
 			this.cmsView.ResumeLayout(false);
 			this.cmsNew.ResumeLayout(false);
 			this.cmsNewAdmin.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.constructionsWrapperBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -350,13 +353,6 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.Button btnNew;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 		private System.Windows.Forms.DataGridView gridConstructions;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colType;
-		private System.Windows.Forms.DataGridViewTextBoxColumn thicknessDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colRValue;
-		private System.Windows.Forms.DataGridViewButtonColumn colEdit;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colScope;
 		private System.Windows.Forms.ContextMenuStrip cmsView;
 		private System.Windows.Forms.ToolStripMenuItem tsmiFloorConstruction;
 		private System.Windows.Forms.ToolStripMenuItem tsmiInsulationConstruction;
@@ -367,6 +363,13 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.ToolStripMenuItem tsmiNewFloorConstructionScreedAdmin;
 		private System.Windows.Forms.ToolStripMenuItem tsmiNewInsulationConstructionAdmin;
 		private System.Windows.Forms.ToolStripMenuItem tsmiNewFloorConstructionDryAdmin;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colType;
+		private System.Windows.Forms.DataGridViewTextBoxColumn thicknessDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colRValue;
+		private System.Windows.Forms.DataGridViewButtonColumn colEdit;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colScope;
 
 	}
 }

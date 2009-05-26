@@ -35,7 +35,7 @@ namespace Europlan.AdminApplication {
 			this.tabPageArticles = new System.Windows.Forms.TabPage();
 			this.materialMapper1 = new Europlan.AdminApplication.MaterialMapper();
 			this.tabPageConstructions = new System.Windows.Forms.TabPage();
-			this.constructionEditorPage = new Europlan.AdminApplication.ConstructionEditorGrid();
+			this.constructionEditorPage = new Europlan.Common.ConstructionEditorGrid();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -194,7 +194,6 @@ namespace Europlan.AdminApplication {
 			// 
 			// constructionEditorPage
 			// 
-			this.constructionEditorPage.AdminMode = true;
 			this.constructionEditorPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
@@ -203,6 +202,7 @@ namespace Europlan.AdminApplication {
 			this.constructionEditorPage.Name = "constructionEditorPage";
 			this.constructionEditorPage.Size = new System.Drawing.Size(773, 460);
 			this.constructionEditorPage.TabIndex = 0;
+			this.constructionEditorPage.Type = Europlan.Common.Configuration.ConfigurationType.AdminConfiguration;
 			// 
 			// menuStrip1
 			// 
@@ -271,7 +271,7 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
 		private System.Windows.Forms.TabPage tabPageArticles;
 		private System.Windows.Forms.TabPage tabPageConstructions;
-		private Europlan.AdminApplication.ConstructionEditorGrid constructionEditorPage;
+		private Europlan.Common.ConstructionEditorGrid constructionEditorPage;
 		private MaterialMapper materialMapper1;
 	}
 }

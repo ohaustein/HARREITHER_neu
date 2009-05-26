@@ -1,4 +1,4 @@
-namespace Europlan.AdminApplication {
+namespace Europlan.Common {
 	partial class ConstructionEditorForm {
 		/// <summary>
 		/// Required designer variable.
@@ -26,7 +26,7 @@ namespace Europlan.AdminApplication {
 			this.panelBottom = new System.Windows.Forms.Panel();
 			this.panelTop = new System.Windows.Forms.Panel();
 			this.lblType = new System.Windows.Forms.Label();
-			this.constructionEditor = new Europlan.AdminApplication.ConstructionEditor();
+			this.constructionEditor = new Europlan.Common.ConstructionEditor();
 			this.panelTop.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -78,6 +78,7 @@ namespace Europlan.AdminApplication {
 			this.Controls.Add(this.panelBottom);
 			this.Name = "ConstructionEditorForm";
 			this.Text = "ConstructionEditorForm";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConstructionEditorForm_FormClosing_1);
 			this.panelTop.ResumeLayout(false);
 			this.panelTop.PerformLayout();
 			this.ResumeLayout(false);

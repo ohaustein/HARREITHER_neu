@@ -53,6 +53,24 @@
     <Compile Include="Configuration\FloorConstruction.cs" />
     <Compile Include="Configuration\MaterialType.cs" />
     <Compile Include="Configuration\Material.cs" />
+    <Compile Include="ConstructionEditor\ConstructionEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConstructionEditor\ConstructionEditor.Designer.cs">
+      <DependentUpon>ConstructionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConstructionEditor\ConstructionEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConstructionEditor\ConstructionEditorForm.Designer.cs">
+      <DependentUpon>ConstructionEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConstructionEditor\ConstructionEditorGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConstructionEditor\ConstructionEditorGrid.Designer.cs">
+      <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NumericBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -80,6 +98,20 @@
     <Compile Include="Licensing\HardwareId.cs" />
     <Compile Include="SerializableDictionary.cs" />
     <Compile Include="Settings\SettingsXpress.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConstructionEditor\ConstructionEditor.resx">
+      <DependentUpon>ConstructionEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConstructionEditor\ConstructionEditorForm.resx">
+      <DependentUpon>ConstructionEditorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConstructionEditor\ConstructionEditorGrid.resx">
+      <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />

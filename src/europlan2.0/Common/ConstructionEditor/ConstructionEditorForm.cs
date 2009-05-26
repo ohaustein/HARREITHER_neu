@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Europlan.Common;
 
-namespace Europlan.AdminApplication {
+namespace Europlan.Common {
 	public partial class ConstructionEditorForm : Form {
 		public ConstructionEditorForm(Construction construction) {
 			InitializeComponent();
@@ -43,6 +43,15 @@ namespace Europlan.AdminApplication {
 		protected override void OnClosing(CancelEventArgs e) {
 
 			base.OnClosing(e);
+		}
+
+		private void ConstructionEditorForm_FormClosing_1(object sender, FormClosingEventArgs e) {
+			this.constructionEditor.Cleanup();
+		}
+
+		public bool ReadOnly {
+			set { this.constructionEditor.ReadOnly = value; }
+			get { return this.constructionEditor.ReadOnly; }
 		}
 	}
 }
