@@ -82,10 +82,15 @@ namespace Europlan.Application {
 					if (room != null) {
 						room.Area = float.Parse(area, System.Globalization.CultureInfo.CreateSpecificCulture("en-us"));
 					}
-				} else if (line.StartsWith("Q_NORM")) {
+				} else if (line.StartsWith("Q_HEIZ")) {
 					string heat = (line.Split('='))[1];
 					if (room != null) {
 						room.HeatPower = Int32.Parse(heat);
+					}
+				} else if (line.StartsWith("Q_KUEHL")) {
+					string cool = (line.Split('='))[1];
+					if (room != null) {
+						room.CoolPower = Int32.Parse(cool);
 					}
 				} else if (line.StartsWith("Q_BEREIN")) {
 					string normHeat = (line.Split('='))[1];
