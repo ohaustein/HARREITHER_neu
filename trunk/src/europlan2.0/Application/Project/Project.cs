@@ -93,7 +93,7 @@ namespace Europlan.Application {
 			regulatorCircuitsNode.Tag = typeof(RegulatorCircuitsSummaryPanel);
 
 			localized = resources.GetString("QuickDimensioning", Thread.CurrentThread.CurrentUICulture);
-			quickDimensioningNode = new TreeNode(localized == null ? "Schnellauslegung" : localized);
+			quickDimensioningNode = new TreeNode(localized == null ? "Flächenaufstellung" : localized);
 			quickDimensioningNode.Tag = typeof(QuickDimensioningPanel);
 
 		}
