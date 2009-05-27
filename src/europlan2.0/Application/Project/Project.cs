@@ -30,6 +30,7 @@ namespace Europlan.Application {
 		private TreeNode rootNode = null;
 		private TreeNode floorsNode = null;
 		private TreeNode regulatorCircuitsNode = null;
+		private TreeNode quickDimensioningNode = null;
 
 		public delegate void ProjectLoadedHandler(object sender);
 		public delegate void ProjectSavedHandler(object sender);
@@ -90,6 +91,11 @@ namespace Europlan.Application {
 			localized = resources.GetString("RegulatorCircuits", Thread.CurrentThread.CurrentUICulture);
 			regulatorCircuitsNode = new TreeNode(localized == null ? "Regelkreise" : localized);
 			regulatorCircuitsNode.Tag = typeof(RegulatorCircuitsSummaryPanel);
+
+			localized = resources.GetString("QuickDimensioning", Thread.CurrentThread.CurrentUICulture);
+			quickDimensioningNode = new TreeNode(localized == null ? "Schnellauslegung" : localized);
+			quickDimensioningNode.Tag = typeof(QuickDimensioningPanel);
+
 		}
 
 		public string[] ProjectName {
@@ -224,9 +230,14 @@ namespace Europlan.Application {
 			if (this.rootNode.Nodes.Count == 1 || this.rootNode.Nodes[1] != this.floorsNode) {
 				this.rootNode.Nodes.Insert(1, this.floorsNode);
 			}
+			// insert quick dimensioning node if missing
+			if (this.rootNode.Nodes.Count == 2 || this.rootNode.Nodes[2] != this.quickDimensioningNode) {
+				this.rootNode.Nodes.Insert(2, this.quickDimensioningNode);
+			}
+
 			// remove other nodes
-			while (this.rootNode.Nodes.Count > 2) {
-				this.rootNode.Nodes.RemoveAt(2);
+			while (this.rootNode.Nodes.Count > 3) {
+				this.rootNode.Nodes.RemoveAt(3);
 			}
 
 			// update floors
