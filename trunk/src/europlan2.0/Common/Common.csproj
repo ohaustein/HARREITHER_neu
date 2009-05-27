@@ -94,6 +94,12 @@
     <Compile Include="Licensing\LicensedSystem.cs" />
     <Compile Include="Licensing\LicenseManager.cs" />
     <Compile Include="MapiMailMessage.cs" />
+    <Compile Include="Products\ModulKlimaDeckeProduct.cs" />
+    <Compile Include="Products\ModulKlimaBodenProduct.cs" />
+    <Compile Include="Products\HithermCompactProduct.cs" />
+    <Compile Include="Products\HithermProduct.cs" />
+    <Compile Include="Products\EurovalProduct.cs" />
+    <Compile Include="Products\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Licensing\HardwareId.cs" />
     <Compile Include="SerializableDictionary.cs" />

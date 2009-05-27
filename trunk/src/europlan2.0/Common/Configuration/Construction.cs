@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml.Serialization;
 
 namespace Europlan.Common {
+	
 	[XmlInclude(typeof(FloorConstruction))]
 	public class Construction {
 		private string id;
@@ -151,13 +152,13 @@ namespace Europlan.Common {
 			if (versionedConstructions.Count > 0) {
 				Construction versionedConstruction = versionedConstructions[versionedConstructions.Count - 1];
 				if (!versionedConstruction.Equals(this)) {
-					versioned = new Construction(this.id, this.name, this.type);
+					versioned = this.Clone();
 					foreach (ConstructionLayer layer in this.layers) {
 						versioned.layers.Add(layer);
 					}
 				}
 			} else {
-				versioned = new Construction(this.id, this.name, this.type);
+				versioned = this.Clone();
 				foreach (ConstructionLayer layer in this.layers) {
 					versioned.layers.Add(layer);
 				}
@@ -168,5 +169,10 @@ namespace Europlan.Common {
 				versioned.version = this.version;
 			}
 		}
+
+		public virtual Construction Clone() {
+			throw new Exception("No implementation for Clone() in class Construction");
+		}
+
 	}
 }
