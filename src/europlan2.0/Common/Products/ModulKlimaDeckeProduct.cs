@@ -12,6 +12,10 @@ namespace Europlan.Common {
 
 		}
 
+		public override void Initialize() {
+			quickDimensioningHeatPower = 80;
+		}
+
 		public static ModulKlimaDeckeProduct Instance {
 			get {
 				if (instance == null) {

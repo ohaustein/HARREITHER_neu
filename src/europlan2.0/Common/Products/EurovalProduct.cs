@@ -12,6 +12,10 @@ namespace Europlan.Common {
 
 		}
 
+		public override void Initialize() {
+			quickDimensioningHeatPower = 50;
+		}
+
 		public static EurovalProduct Instance {
 			get {
 				if (instance == null) {
@@ -24,7 +28,8 @@ namespace Europlan.Common {
 				return instance;
 			}
 		}
-	
+
+
 	}
 	
 }

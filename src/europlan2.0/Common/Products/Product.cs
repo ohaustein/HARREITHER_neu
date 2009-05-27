@@ -9,11 +9,21 @@ namespace Europlan.Common {
 	public abstract class Product {
 
 		protected static readonly object padlock = new object();
+		protected int quickDimensioningHeatPower = 0;
 
-		protected Product() {
-
+		public Product() {
+			Initialize();
 		}
 
+		public abstract void Initialize();
 
+		public int QuickDimensioningHeatPower {
+			get {
+				return quickDimensioningHeatPower;
+			}
+			set {
+				quickDimensioningHeatPower = value;
+			}
+		}
 	}
 }
