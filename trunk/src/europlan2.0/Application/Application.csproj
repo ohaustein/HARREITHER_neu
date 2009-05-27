@@ -123,6 +123,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\QuickDimensioningPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>QuickDimensioningPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\RegulatorCircuitsSummaryPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RegulatorCircuitsSummaryPanel.cs</DependentUpon>
@@ -140,6 +144,12 @@
       <DependentUpon>StartingForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Project\QuickDimensioningPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\QuickDimensioningPanel.Designer.cs">
+      <DependentUpon>QuickDimensioningPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\RoomList.cs" />
     <Compile Include="Project\Floor.cs" />
     <Compile Include="Project\FloorList.cs" />
