@@ -18,5 +18,10 @@ namespace Europlan.Common {
 			get { return floorThickness; }
 			set { floorThickness = value; }
 		}
+
+		public override Construction Clone() {
+			FloorConstruction construction = new FloorConstruction(this.Id, this.Name, this.Type, this.Thickness);
+			return construction;
+		}
 	}
 }

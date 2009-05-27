@@ -18,5 +18,10 @@ namespace Europlan.Common {
 			get { return peFoil; }
 			set { peFoil = value; }
 		}
+
+		public override Construction Clone() {
+			InsulationConstruction construction = new InsulationConstruction(this.Id, this.Name, this.Type, this.PeFoil);
+			return construction;
+		}
 	}
 }
