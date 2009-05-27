@@ -29,6 +29,12 @@ namespace Europlan.Common {
 		private SerializableDictionary<string, string> materialToCategoryMapping;
 		private Dictionary<string, float> discounts;
 
+		private EurovalProduct eurovalProduct = EurovalProduct.Instance;
+		private HithermProduct hithermProduct = HithermProduct.Instance;
+		private HithermCompactProduct hithermCompactProduct = HithermCompactProduct.Instance;
+		private ModulKlimaBodenProduct modulKlimaBodenProduct = ModulKlimaBodenProduct.Instance;
+		private ModulKlimaDeckeProduct modulKlimaDeckeProduct = ModulKlimaDeckeProduct.Instance;
+
 		public enum ConfigurationType {
 			InitializedConfiguration,
 			AdminConfiguration,
@@ -380,6 +386,31 @@ namespace Europlan.Common {
 				}
 				return constructionList;
 			}
+		}
+
+		public EurovalProduct EurovalProduct {
+			get { return eurovalProduct; }
+			set { eurovalProduct = value; }
+		}
+
+		public HithermProduct HithermProduct {
+			get { return hithermProduct; }
+			set { hithermProduct = value; }
+		}
+
+		public HithermCompactProduct HithermCompactProduct {
+			get { return hithermCompactProduct; }
+			set { hithermCompactProduct = value; }
+		}
+
+		public ModulKlimaBodenProduct ModulKlimaBodenProduct {
+			get { return modulKlimaBodenProduct; }
+			set { modulKlimaBodenProduct = value; }
+		}
+
+		public ModulKlimaDeckeProduct ModulKlimaDeckeProduct {
+			get { return modulKlimaDeckeProduct; }
+			set { modulKlimaDeckeProduct = value; }
 		}
 
 		public void Reset() {

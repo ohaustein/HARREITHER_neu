@@ -12,6 +12,10 @@ namespace Europlan.Common {
 
 		}
 
+		public override void Initialize() {
+			quickDimensioningHeatPower = 100;
+		}
+
 		public static HithermCompactProduct Instance {
 			get {
 				if (instance == null) {
