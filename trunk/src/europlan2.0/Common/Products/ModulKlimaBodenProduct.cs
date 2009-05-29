@@ -5,10 +5,8 @@ using System.Text;
 namespace Europlan.Common {
 	
 	public class ModulKlimaBodenProduct : Product {
-
-		private static ModulKlimaBodenProduct instance = null;
-
-		protected ModulKlimaBodenProduct() {
+		
+		public ModulKlimaBodenProduct() {
 
 		}
 
@@ -16,18 +14,6 @@ namespace Europlan.Common {
 			quickDimensioningHeatPower = 50;
 		}
 
-		public static ModulKlimaBodenProduct Instance {
-			get {
-				if (instance == null) {
-					lock (padlock) {
-						if (instance == null) {
-							instance = new ModulKlimaBodenProduct();
-						}
-					}
-				}
-				return instance;
-			}
-		}
 	
 	}
 	

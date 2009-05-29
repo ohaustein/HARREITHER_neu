@@ -6,29 +6,13 @@ namespace Europlan.Common {
 	
 	public class EurovalProduct : Product {
 
-		private static EurovalProduct instance = null;
-
-		protected EurovalProduct() {
+		public EurovalProduct() {
 
 		}
 
 		public override void Initialize() {
 			quickDimensioningHeatPower = 50;
 		}
-
-		public static EurovalProduct Instance {
-			get {
-				if (instance == null) {
-					lock (padlock) {
-						if (instance == null) {
-							instance = new EurovalProduct();
-						}
-					}
-				}
-				return instance;
-			}
-		}
-
 
 	}
 	
