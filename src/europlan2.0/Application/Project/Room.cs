@@ -19,6 +19,7 @@ namespace Europlan.Application {
 		private int normalizedHeatPower;
 		private int normalizedCoolPower;
 		private int additionalHeatPower;
+		private string roomTypeId;
 
 		private TreeNode roomNode = new TreeNode();
 
@@ -48,6 +49,7 @@ namespace Europlan.Application {
 			this.coolPower = room.CoolPower;
 			this.normalizedHeatPower = room.NormalizedHeatPower;
 			this.normalizedCoolPower = room.NormalizedCoolPower;
+			this.roomTypeId = room.roomTypeId;
 		}
 
 		private void InitializeRoom() {
@@ -60,6 +62,7 @@ namespace Europlan.Application {
 			normalizedHeatPower = 0;
 			normalizedCoolPower = 0;
 			roomNode.Tag = this;
+			roomTypeId = "";
 		}
 
 
@@ -71,6 +74,7 @@ namespace Europlan.Application {
 			this.CoolPower = room.CoolPower;
 			this.NormalizedHeatPower = room.NormalizedHeatPower;
 			this.NormalizedCoolPower = room.NormalizedCoolPower;
+			this.RoomTypeId = room.RoomTypeId;
 		}
 
 		public string Name {
@@ -86,6 +90,11 @@ namespace Europlan.Application {
 		public string Id {
 			get { return id; }
 			set { id = value; }
+		}
+
+		public string RoomTypeId {
+			get { return roomTypeId; }
+			set { roomTypeId = value; }
 		}
 
 		public int RoomTemperature {
