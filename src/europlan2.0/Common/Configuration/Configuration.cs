@@ -29,11 +29,11 @@ namespace Europlan.Common {
 		private SerializableDictionary<string, string> materialToCategoryMapping;
 		private Dictionary<string, float> discounts;
 
-		private EurovalProduct eurovalProduct = EurovalProduct.Instance;
-		private HithermProduct hithermProduct = HithermProduct.Instance;
-		private HithermCompactProduct hithermCompactProduct = HithermCompactProduct.Instance;
-		private ModulKlimaBodenProduct modulKlimaBodenProduct = ModulKlimaBodenProduct.Instance;
-		private ModulKlimaDeckeProduct modulKlimaDeckeProduct = ModulKlimaDeckeProduct.Instance;
+		private EurovalProduct eurovalProduct = new EurovalProduct();
+		private HithermProduct hithermProduct = new HithermProduct();
+		private HithermCompactProduct hithermCompactProduct = new HithermCompactProduct();
+		private ModulKlimaBodenProduct modulKlimaBodenProduct = new ModulKlimaBodenProduct();
+		private ModulKlimaDeckeProduct modulKlimaDeckeProduct = new ModulKlimaDeckeProduct();
 
 		public enum ConfigurationType {
 			InitializedConfiguration,

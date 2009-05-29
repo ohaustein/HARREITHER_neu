@@ -8,8 +8,8 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(EurovalProduct))]
 	public abstract class Product {
 
-		protected static readonly object padlock = new object();
 		protected int quickDimensioningHeatPower = 0;
+		protected int quickDimensioningCoolPower = 0;
 
 		public Product() {
 			Initialize();
@@ -25,5 +25,16 @@ namespace Europlan.Common {
 				quickDimensioningHeatPower = value;
 			}
 		}
+
+
+		public int QuickDimensioningCoolPower {
+			get {
+				return quickDimensioningCoolPower;
+			}
+			set {
+				quickDimensioningCoolPower = value;
+			}
+		}
+
 	}
 }

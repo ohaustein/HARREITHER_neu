@@ -6,9 +6,7 @@ namespace Europlan.Common {
 	
 	public class HithermCompactProduct : Product {
 
-		private static HithermCompactProduct instance = null;
-
-		protected HithermCompactProduct() {
+		public HithermCompactProduct() {
 
 		}
 
@@ -16,18 +14,6 @@ namespace Europlan.Common {
 			quickDimensioningHeatPower = 100;
 		}
 
-		public static HithermCompactProduct Instance {
-			get {
-				if (instance == null) {
-					lock (padlock) {
-						if (instance == null) {
-							instance = new HithermCompactProduct();
-						}
-					}
-				}
-				return instance;
-			}
-		}
 	
 	}
 	
