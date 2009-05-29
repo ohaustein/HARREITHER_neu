@@ -12,7 +12,7 @@ namespace Europlan.Common {
 		private bool userDefined = false;
 
 		public RoomType() {
-			id = System.Guid.NewGuid();
+			id = System.Guid.NewGuid().ToString();
 		}
 
 		public string Id {
