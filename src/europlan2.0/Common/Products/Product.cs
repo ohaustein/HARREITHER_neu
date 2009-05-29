@@ -10,6 +10,8 @@ namespace Europlan.Common {
 
 		protected int quickDimensioningHeatPower = 0;
 		protected int quickDimensioningCoolPower = 0;
+		protected bool canHeat = false;
+		protected bool canCool = false;
 
 		public Product() {
 			Initialize();
@@ -18,22 +20,23 @@ namespace Europlan.Common {
 		public abstract void Initialize();
 
 		public int QuickDimensioningHeatPower {
-			get {
-				return quickDimensioningHeatPower;
-			}
-			set {
-				quickDimensioningHeatPower = value;
-			}
+			get { return quickDimensioningHeatPower; }
+			set { quickDimensioningHeatPower = value; }
+		}
+		
+		public int QuickDimensioningCoolPower {
+			get { return quickDimensioningCoolPower; }
+			set { quickDimensioningCoolPower = value; }
 		}
 
+		public bool CanHeat {
+			get { return canHeat; }
+			set { canHeat = value; }
+		}
 
-		public int QuickDimensioningCoolPower {
-			get {
-				return quickDimensioningCoolPower;
-			}
-			set {
-				quickDimensioningCoolPower = value;
-			}
+		public bool CanCool {
+			get { return canCool; }
+			set { canCool = value; }
 		}
 
 	}
