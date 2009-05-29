@@ -28,6 +28,7 @@ namespace Europlan.Common {
 		private List<Construction> constructions;
 		private SerializableDictionary<string, string> materialToCategoryMapping;
 		private Dictionary<string, float> discounts;
+		private List<RoomType> roomTypes;
 
 		private EurovalProduct eurovalProduct = new EurovalProduct();
 		private HithermProduct hithermProduct = new HithermProduct();
@@ -53,6 +54,7 @@ namespace Europlan.Common {
 			this.categories = new List<Category>();
 			this.materialToCategoryMapping = new SerializableDictionary<string, string>();
 			this.discounts = new Dictionary<string, float>();
+			this.roomTypes = new List<RoomType>();
 			try {
 				StreamReader sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.001"), System.Text.Encoding.GetEncoding(850));
 				string line;
@@ -171,6 +173,18 @@ namespace Europlan.Common {
 			foreach (string materialId in config2.MaterialToCategoryMapping.Keys) {
 				if (!config.MaterialToCategoryMapping.ContainsKey(materialId)) {
 					config.MaterialToCategoryMapping.Add(materialId, config2.MaterialToCategoryMapping[materialId]);
+				}
+			}
+
+			foreach (RoomType roomType in config1.RoomTypes) {
+				if (!config.RoomTypes.Contains(roomType)) {
+					config.RoomTypes.Add(roomType);
+				}
+			}
+
+			foreach (RoomType roomType in config2.RoomTypes) {
+				if (!config.RoomTypes.Contains(roomType)) {
+					config.RoomTypes.Add(roomType);
 				}
 			}
 
@@ -308,6 +322,16 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public List<RoomType> RoomTypes {
+			get {
+				return this.roomTypes;
+			}
+			set {
+				this.roomTypes = value;
+			}
+		}
+
 		public SerializableDictionary<string, string> MaterialToCategoryMapping {
 			get {
 				SerializableDictionary<string, string> mapping = new SerializableDictionary<string, string>();
@@ -385,6 +409,28 @@ namespace Europlan.Common {
 					constructionList = constructions;
 				}
 				return constructionList;
+			}
+		}
+
+		public List<RoomType> SerializableRoomTypes {
+			get {
+				List<RoomType> result = new List<RoomType>();
+				if (type == ConfigurationType.ProjectConfiguration || type == ConfigurationType.UserConfiguration) {
+					foreach (RoomType roomType in this.roomTypes) {
+						if (roomType.UserDefined) {
+							result.Add(roomType);
+						}
+					}
+				} else if (type == ConfigurationType.AdminConfiguration) {
+					foreach (RoomType roomType in this.roomTypes) {
+						if (!roomType.UserDefined) {
+							result.Add(roomType);
+						}
+					}
+				} else {
+					result = roomTypes;
+				}
+				return result;
 			}
 		}
 
