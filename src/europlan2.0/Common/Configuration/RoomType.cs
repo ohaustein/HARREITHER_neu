@@ -15,6 +15,19 @@ namespace Europlan.Common {
 			id = System.Guid.NewGuid().ToString();
 		}
 
+		public override bool Equals(object obj) {
+			if (obj is RoomType) {
+				if ((obj as RoomType).Id == this.Id) {
+					return true;
+				}
+			}
+			return base.Equals(obj);
+		}
+
+		public override int GetHashCode() {
+			return base.GetHashCode();
+		}
+
 		public string Id {
 			get { return id; }
 			set { id = value; }
