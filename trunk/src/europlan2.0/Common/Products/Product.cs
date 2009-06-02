@@ -6,10 +6,15 @@ using System.Xml.Serialization;
 namespace Europlan.Common {
 
 	[XmlInclude(typeof(EurovalProduct))]
+	[XmlInclude(typeof(HithermProduct))]
+	[XmlInclude(typeof(HithermCompactProduct))]
+	[XmlInclude(typeof(ModulKlimaBodenProduct))]
+	[XmlInclude(typeof(ModulKlimaDeckeProduct))]
 	public abstract class Product {
 
 		protected int quickDimensioningHeatPower = 0;
 		protected int quickDimensioningCoolPower = 0;
+		protected int quickDimensioningCircuits = 0;
 		protected bool canHeat = false;
 		protected bool canCool = false;
 
@@ -18,6 +23,7 @@ namespace Europlan.Common {
 		}
 
 		public abstract void Initialize();
+		public abstract Product Clone();
 
 		public int QuickDimensioningHeatPower {
 			get { return quickDimensioningHeatPower; }
@@ -27,6 +33,11 @@ namespace Europlan.Common {
 		public int QuickDimensioningCoolPower {
 			get { return quickDimensioningCoolPower; }
 			set { quickDimensioningCoolPower = value; }
+		}
+
+		public int QuickDimensioningCircuits {
+			get { return quickDimensioningCircuits; }
+			set { quickDimensioningCircuits = value; }
 		}
 
 		public bool CanHeat {

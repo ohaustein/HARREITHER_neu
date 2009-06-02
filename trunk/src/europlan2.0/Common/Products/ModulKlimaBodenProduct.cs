@@ -14,7 +14,10 @@ namespace Europlan.Common {
 			quickDimensioningHeatPower = 50;
 		}
 
-	
+		public override Product Clone() {
+			ModulKlimaBodenProduct product = new ModulKlimaBodenProduct();
+			return product;
+		}
 	}
 	
 }
