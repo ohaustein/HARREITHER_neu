@@ -29,7 +29,7 @@ namespace Europlan.Application {
 			System.Windows.Forms.Application.EnableVisualStyles();
 			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
-			ResourcesManager.resources = new System.ComponentModel.ComponentResourceManager(typeof(Program));
+			ResourcesManager.resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
 			StartingForm startingForm = new StartingForm();
 			startingForm.Show();
