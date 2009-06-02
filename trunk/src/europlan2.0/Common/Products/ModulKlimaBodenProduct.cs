@@ -5,8 +5,8 @@ using System.Text;
 namespace Europlan.Common {
 	
 	public class ModulKlimaBodenProduct : Product {
-		
-		public ModulKlimaBodenProduct() {
+
+		public ModulKlimaBodenProduct(Room room) : base(room) {
 
 		}
 
@@ -14,8 +14,8 @@ namespace Europlan.Common {
 			quickDimensioningHeatPower = 50;
 		}
 
-		public override Product Clone() {
-			ModulKlimaBodenProduct product = new ModulKlimaBodenProduct();
+		public override Product Clone(Room room) {
+			ModulKlimaBodenProduct product = new ModulKlimaBodenProduct(room);
 			return product;
 		}
 	}

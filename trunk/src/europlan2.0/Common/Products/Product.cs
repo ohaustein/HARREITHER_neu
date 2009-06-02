@@ -18,12 +18,15 @@ namespace Europlan.Common {
 		protected bool canHeat = false;
 		protected bool canCool = false;
 
-		public Product() {
+		protected Room associatedRoom = null;
+
+		public Product(Room room) {
+			associatedRoom = room;
 			Initialize();
 		}
 
 		public abstract void Initialize();
-		public abstract Product Clone();
+		public abstract Product Clone(Room room);
 
 		public int QuickDimensioningHeatPower {
 			get { return quickDimensioningHeatPower; }
