@@ -151,9 +151,31 @@ namespace Europlan.Common {
 			set { quickDimensioningHeatLoad = value; }
 		}
 
+		public int GetDefaultQuickDimensioningHeatLoad() {
+			if (this.RoomTypeId != "") {
+				foreach (RoomType type in Project.Instance.Config.RoomTypes) {
+					if (this.RoomTypeId == type.Id) {
+						return (int)(this.area * type.HeatLoadPerSquareMeter);
+					}
+				}
+			}
+			return 0;
+		}
+
 		public int QuickDimensioningCoolLoad {
 			get { return quickDimensioningCoolLoad; }
 			set { quickDimensioningCoolLoad = value; }
+		}
+
+		public int GetDefaultQuickDimensioningCoolLoad() {
+			if (this.RoomTypeId != "") {
+				foreach (RoomType type in Project.Instance.Config.RoomTypes) {
+					if (this.RoomTypeId == type.Id) {
+						return (int)(this.area * type.CoolLoadPerSquareMeter);
+					}
+				}
+			}
+			return 0;
 		}
 
 		[System.Xml.Serialization.XmlIgnore()]
