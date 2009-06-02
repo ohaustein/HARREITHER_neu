@@ -80,6 +80,12 @@
     <Compile Include="Controls\NumericEditingControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DataExchange\BuildingDataImportManager.cs" />
+    <Compile Include="DataExchange\IBuildingDataImporter.cs" />
+    <Compile Include="DataExchange\SOLAR32Importer.cs" />
+    <Compile Include="Interfaces\IClipboard.cs" />
+    <Compile Include="Interfaces\IEditorUserControl.cs" />
+    <Compile Include="Interfaces\IGuiRepresentation.cs" />
     <Compile Include="Licensing\AbstractLicense.cs" />
     <Compile Include="Licensing\AbstractLicensedSystem.cs" />
     <Compile Include="Licensing\AbstractLicensedModule.cs" />
@@ -101,8 +107,52 @@
     <Compile Include="Products\HithermProduct.cs" />
     <Compile Include="Products\EurovalProduct.cs" />
     <Compile Include="Products\Product.cs" />
+    <Compile Include="Project\Floor.cs" />
+    <Compile Include="Project\FloorList.cs" />
+    <Compile Include="Project\FloorListSummaryPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\FloorListSummaryPanel.Designer.cs">
+      <DependentUpon>FloorListSummaryPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\FloorSummaryPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\FloorSummaryPanel.Designer.cs">
+      <DependentUpon>FloorSummaryPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Project.cs" />
+    <Compile Include="Project\ProjectSummaryPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\ProjectSummaryPanel.Designer.cs">
+      <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\QuickDimensioning.cs" />
+    <Compile Include="Project\QuickDimensioningPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\QuickDimensioningPanel.Designer.cs">
+      <DependentUpon>QuickDimensioningPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\RegulatorCircuit.cs" />
+    <Compile Include="Project\RegulatorCircuitsSummaryPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\RegulatorCircuitsSummaryPanel.Designer.cs">
+      <DependentUpon>RegulatorCircuitsSummaryPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Room.cs" />
+    <Compile Include="Project\RoomList.cs" />
+    <Compile Include="Project\RoomSummaryPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\RoomSummaryPanel.Designer.cs">
+      <DependentUpon>RoomSummaryPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Licensing\HardwareId.cs" />
+    <Compile Include="Resources\ResourcesManager.cs" />
     <Compile Include="SerializableDictionary.cs" />
     <Compile Include="Settings\SettingsXpress.cs" />
   </ItemGroup>
@@ -119,9 +169,30 @@
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <EmbeddedResource Include="Project\FloorListSummaryPanel.resx">
+      <DependentUpon>FloorListSummaryPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\FloorSummaryPanel.resx">
+      <DependentUpon>FloorSummaryPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ProjectSummaryPanel.resx">
+      <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\QuickDimensioningPanel.resx">
+      <DependentUpon>QuickDimensioningPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\RegulatorCircuitsSummaryPanel.resx">
+      <DependentUpon>RegulatorCircuitsSummaryPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\RoomSummaryPanel.resx">
+      <DependentUpon>RoomSummaryPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
