@@ -26,7 +26,7 @@ namespace Europlan.Application {
 		private bool guiUpdateInProgress = false;
 		private bool projectUnsaved = false;
 
-		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
 		private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
 
 		private IEditorUserControl currentEditorUserControl = null;
