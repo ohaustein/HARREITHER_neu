@@ -5,6 +5,7 @@ using log4net;
 using System.Windows.Forms;
 using System.Threading;
 using Europlan.Common;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 
@@ -111,6 +112,21 @@ namespace Europlan.Common {
 			set { roomTypeId = value; }
 		}
 
+		[XmlIgnore]
+		public RoomType RoomType{
+			get {
+				if (this.RoomTypeId != "") {
+					foreach (RoomType type in Project.Instance.Config.RoomTypes) {
+						if (this.RoomTypeId == type.Id) {
+							return type;
+						}
+					}
+				}
+				return null;
+			}
+			set { this.RoomTypeId = value.Id;}
+		}
+
 		public int RoomTemperature {
 			get { return roomTemperature; }
 			set { roomTemperature = value; }
@@ -152,12 +168,8 @@ namespace Europlan.Common {
 		}
 
 		public int GetDefaultQuickDimensioningHeatLoad() {
-			if (this.RoomTypeId != "") {
-				foreach (RoomType type in Project.Instance.Config.RoomTypes) {
-					if (this.RoomTypeId == type.Id) {
-						return (int)(this.area * type.HeatLoadPerSquareMeter);
-					}
-				}
+			if (this.RoomType != null) {
+				return (int)(this.area * this.RoomType.HeatLoadPerSquareMeter);
 			}
 			return 0;
 		}
@@ -168,12 +180,8 @@ namespace Europlan.Common {
 		}
 
 		public int GetDefaultQuickDimensioningCoolLoad() {
-			if (this.RoomTypeId != "") {
-				foreach (RoomType type in Project.Instance.Config.RoomTypes) {
-					if (this.RoomTypeId == type.Id) {
-						return (int)(this.area * type.CoolLoadPerSquareMeter);
-					}
-				}
+			if (this.RoomType != null) {
+				return (int)(this.area * this.RoomType.CoolLoadPerSquareMeter);
 			}
 			return 0;
 		}
