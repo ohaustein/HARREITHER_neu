@@ -7,8 +7,8 @@ namespace Europlan.Common {
 
 		private string id;
 		private string name = "";
-		private int heatPowerPerSquareMeter = 0;
-		private int coolPowerPerSquareMeter = 0;
+		private int heatLoadPerSquareMeter = 0;
+		private int coolLoadPerSquareMeter = 0;
 		private bool userDefined = false;
 
 		public RoomType() {
@@ -38,14 +38,14 @@ namespace Europlan.Common {
 			set { name = value; }
 		}
 
-		public int HeatPowerPerSquareMeter {
-			get { return heatPowerPerSquareMeter; }
-			set { heatPowerPerSquareMeter = value; }
+		public int HeatLoadPerSquareMeter {
+			get { return heatLoadPerSquareMeter; }
+			set { heatLoadPerSquareMeter = value; }
 		}
 
-		public int CoolPowerPerSquareMeter {
-			get { return coolPowerPerSquareMeter; }
-			set { coolPowerPerSquareMeter = value; }
+		public int CoolLoadPerSquareMeter {
+			get { return coolLoadPerSquareMeter; }
+			set { coolLoadPerSquareMeter = value; }
 		}
 
 		public bool UserDefined {
