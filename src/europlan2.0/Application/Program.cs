@@ -9,12 +9,12 @@ using System.Globalization;
 using Europlan.Licensing;
 using System.IO;
 using Microsoft.Win32;
+using Europlan.Common;
 
 namespace Europlan.Application {
 	
 	static class Program {
 
-		private static System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Program));
 		private static readonly ILog log = LogManager.GetLogger(typeof(Program));
 
 		public static Guid updateGuid = new Guid();
@@ -28,7 +28,9 @@ namespace Europlan.Application {
 		static void Main(string[] args) {
 			System.Windows.Forms.Application.EnableVisualStyles();
 			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-			
+
+			ResourcesManager.resources = new System.ComponentModel.ComponentResourceManager(typeof(Program));
+
 			StartingForm startingForm = new StartingForm();
 			startingForm.Show();
 			startingForm.Update();
@@ -66,8 +68,8 @@ namespace Europlan.Application {
 			Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
 
 			if (IsApplicationAlreadyRunning()) {
-				string message = resources.GetString("AlreadyRunningMessage", Thread.CurrentThread.CurrentUICulture);
-				string caption = resources.GetString("AlreadyRunningCaption", Thread.CurrentThread.CurrentUICulture);
+				string message = ResourcesManager.resources.GetString("AlreadyRunningMessage", Thread.CurrentThread.CurrentUICulture);
+				string caption = ResourcesManager.resources.GetString("AlreadyRunningCaption", Thread.CurrentThread.CurrentUICulture);
 				MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
