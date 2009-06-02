@@ -14,7 +14,10 @@ namespace Europlan.Common {
 			quickDimensioningHeatPower = 100;
 		}
 
-	
+		public override Product Clone() {
+			HithermCompactProduct product = new HithermCompactProduct();
+			return product;
+		}
 	}
 	
 }

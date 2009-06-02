@@ -4,6 +4,7 @@ using System.Text;
 using log4net;
 using System.Windows.Forms;
 using System.Threading;
+using Europlan.Common;
 
 namespace Europlan.Application {
 
@@ -14,12 +15,16 @@ namespace Europlan.Application {
 		private string id;
 		private int roomTemperature;
 		private float area;
-		private int heatPower;
-		private int coolPower;
-		private int normalizedHeatPower;
-		private int normalizedCoolPower;
-		private int additionalHeatPower;
+		private int heatLoad;
+		private int coolLoad;
+		private int normalizedHeatLoad;
+		private int normalizedCoolLoad;
+		private int quickDimensioningHeatLoad = 0;
+		private int quickDimensioningCoolLoad = 0;
+		private int additionalHeatLoad;
 		private string roomTypeId;
+
+		private List<Product> usedProducts;
 
 		private TreeNode roomNode = new TreeNode();
 
@@ -45,11 +50,15 @@ namespace Europlan.Application {
 			this.Name = copyOf + " " + room.Name;
 			this.roomTemperature = room.RoomTemperature;
 			this.area = room.Area;
-			this.heatPower = room.HeatPower;
-			this.coolPower = room.CoolPower;
-			this.normalizedHeatPower = room.NormalizedHeatPower;
-			this.normalizedCoolPower = room.NormalizedCoolPower;
+			this.heatLoad = room.HeatLoad;
+			this.coolLoad = room.CoolLoad;
+			this.normalizedHeatLoad = room.NormalizedHeatLoad;
+			this.normalizedCoolLoad = room.NormalizedCoolLoad;
 			this.roomTypeId = room.roomTypeId;
+			this.usedProducts = new List<Product>();
+			foreach (Product product in room.UsedProducts) {
+				this.usedProducts.Add(product.Clone());
+			}
 		}
 
 		private void InitializeRoom() {
@@ -57,12 +66,13 @@ namespace Europlan.Application {
 			id = "";
 			roomTemperature = 0;
 			area = 0;
-			heatPower = 0;
-			coolPower = 0;
-			normalizedHeatPower = 0;
-			normalizedCoolPower = 0;
+			heatLoad = 0;
+			coolLoad = 0;
+			normalizedHeatLoad = 0;
+			normalizedCoolLoad = 0;
 			roomNode.Tag = this;
 			roomTypeId = "";
+			this.usedProducts = new List<Product>();
 		}
 
 
@@ -70,11 +80,15 @@ namespace Europlan.Application {
 			this.Name = room.Name;
 			this.RoomTemperature = room.RoomTemperature;
 			this.Area = room.Area;
-			this.HeatPower = room.HeatPower;
-			this.CoolPower = room.CoolPower;
-			this.NormalizedHeatPower = room.NormalizedHeatPower;
-			this.NormalizedCoolPower = room.NormalizedCoolPower;
+			this.HeatLoad = room.HeatLoad;
+			this.CoolLoad = room.CoolLoad;
+			this.NormalizedHeatLoad = room.NormalizedHeatLoad;
+			this.NormalizedCoolLoad = room.NormalizedCoolLoad;
 			this.RoomTypeId = room.RoomTypeId;
+			this.usedProducts = new List<Product>();
+			foreach (Product product in room.UsedProducts) {
+				this.usedProducts.Add(product.Clone());
+			}
 		}
 
 		public string Name {
@@ -107,35 +121,50 @@ namespace Europlan.Application {
 			set { area = value; }
 		}
 
-		public int HeatPower {
-			get { return heatPower; }
-			set { heatPower = value; }
+		public int HeatLoad {
+			get { return heatLoad; }
+			set { heatLoad = value; }
 		}
 
-		public int CoolPower {
-			get { return coolPower; }
-			set { coolPower = value; }
+		public int CoolLoad {
+			get { return coolLoad; }
+			set { coolLoad = value; }
 		}
 
-		public int NormalizedHeatPower {
-			get { return normalizedHeatPower; }
-			set { normalizedHeatPower = value; }
+		public int NormalizedHeatLoad {
+			get { return normalizedHeatLoad; }
+			set { normalizedHeatLoad = value; }
 		}
 
-		public int NormalizedCoolPower {
-			get { return normalizedCoolPower; }
-			set { normalizedCoolPower = value; }
+		public int NormalizedCoolLoad {
+			get { return normalizedCoolLoad; }
+			set { normalizedCoolLoad = value; }
 		}
 
-		public int AdditionalHeatPower {
-			get { return additionalHeatPower; }
-			set { additionalHeatPower = value; }
+		public int AdditionalHeatLoad {
+			get { return additionalHeatLoad; }
+			set { additionalHeatLoad = value; }
+		}
+
+		public int QuickDimensioningHeatLoad {
+			get { return quickDimensioningHeatLoad; }
+			set { quickDimensioningHeatLoad = value; }
+		}
+
+		public int QuickDimensioningCoolLoad {
+			get { return quickDimensioningCoolLoad; }
+			set { quickDimensioningCoolLoad = value; }
 		}
 
 		[System.Xml.Serialization.XmlIgnore()]
 		public int FloorHeatingLoss {
-			get { return heatPower - normalizedHeatPower; }
-			set { normalizedHeatPower = heatPower - value; }
+			get { return heatLoad - normalizedHeatLoad; }
+			set { normalizedHeatLoad = heatLoad - value; }
+		}
+
+		public List<Product> UsedProducts {
+			get { return usedProducts; }
+			set { usedProducts = value; }
 		}
 		
 		/*internal void InitializeTree(TreeNode floor) {

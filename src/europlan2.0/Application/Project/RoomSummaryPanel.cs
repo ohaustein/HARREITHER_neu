@@ -27,10 +27,10 @@ namespace Europlan.Application {
 				this.txtName.Text = room.Name;
 				this.txtArea.Value = (decimal)room.Area;
 				this.txtTemperature.Text = room.RoomTemperature.ToString();
-				this.txtHeat.Text = room.HeatPower.ToString();
-				this.txtNormHeat.Text = room.NormalizedHeatPower.ToString();
-				this.txtCool.Text = room.CoolPower.ToString();
-				this.txtNormCool.Text = room.NormalizedCoolPower.ToString();
+				this.txtHeat.Text = room.HeatLoad.ToString();
+				this.txtNormHeat.Text = room.NormalizedHeatLoad.ToString();
+				this.txtCool.Text = room.CoolLoad.ToString();
+				this.txtNormCool.Text = room.NormalizedCoolLoad.ToString();
 			}
 		}
 
@@ -71,49 +71,49 @@ namespace Europlan.Application {
 
 		private void txtHeat_TextChanged(object sender, EventArgs e) {
 			try {
-				this.room.HeatPower = (int)this.txtHeat.Value;
+				this.room.HeatLoad = (int)this.txtHeat.Value;
 				if (ProjectChanged != null) {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
-				this.txtHeat.Text = room.HeatPower.ToString();
+				this.txtHeat.Text = room.HeatLoad.ToString();
 			}
 		}
 
 		private void txtNormHeat_TextChanged(object sender, EventArgs e) {
 			try {
-				this.room.NormalizedHeatPower = (int)this.txtNormHeat.Value;
+				this.room.NormalizedHeatLoad = (int)this.txtNormHeat.Value;
 				if (ProjectChanged != null) {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
-				this.txtNormHeat.Text = room.NormalizedHeatPower.ToString();
+				this.txtNormHeat.Text = room.NormalizedHeatLoad.ToString();
 			}
 		}
 
 		private void txtCool_TextChanged(object sender, EventArgs e) {
 			try {
-				this.room.CoolPower = (int)this.txtCool.Value;
+				this.room.CoolLoad = (int)this.txtCool.Value;
 				if (ProjectChanged != null) {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
-				this.txtCool.Text = room.CoolPower.ToString();
+				this.txtCool.Text = room.CoolLoad.ToString();
 			}
 		}
 
 		private void txtNormCool_TextChanged(object sender, EventArgs e) {
 			try {
-				this.room.NormalizedCoolPower = (int)this.txtNormCool.Value;
+				this.room.NormalizedCoolLoad = (int)this.txtNormCool.Value;
 				if (ProjectChanged != null) {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
-				this.txtNormCool.Text = room.NormalizedCoolPower.ToString();
+				this.txtNormCool.Text = room.NormalizedCoolLoad.ToString();
 			}
 		}
 

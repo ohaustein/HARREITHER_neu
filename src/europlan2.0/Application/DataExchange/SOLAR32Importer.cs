@@ -85,17 +85,17 @@ namespace Europlan.Application {
 				} else if (line.StartsWith("Q_HEIZ")) {
 					string heat = (line.Split('='))[1];
 					if (room != null) {
-						room.HeatPower = Int32.Parse(heat);
+						room.HeatLoad = Int32.Parse(heat);
 					}
 				} else if (line.StartsWith("Q_KUEHL")) {
 					string cool = (line.Split('='))[1];
 					if (room != null) {
-						room.CoolPower = Int32.Parse(cool);
+						room.CoolLoad = Int32.Parse(cool);
 					}
 				} else if (line.StartsWith("Q_BEREIN")) {
 					string normHeat = (line.Split('='))[1];
 					if (room != null) {
-						room.NormalizedHeatPower = Int32.Parse(normHeat);
+						room.NormalizedHeatLoad = Int32.Parse(normHeat);
 					}
 				}
 			}

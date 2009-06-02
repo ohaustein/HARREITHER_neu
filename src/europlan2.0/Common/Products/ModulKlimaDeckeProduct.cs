@@ -13,7 +13,11 @@ namespace Europlan.Common {
 		public override void Initialize() {
 			quickDimensioningHeatPower = 80;
 		}
-	
+
+		public override Product Clone() {
+			ModulKlimaDeckeProduct product = new ModulKlimaDeckeProduct();
+			return product;
+		}	
 	}
 	
 }
