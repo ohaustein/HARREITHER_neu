@@ -22,7 +22,9 @@ namespace Europlan.Common {
 
 		public Product(Room room) {
 			associatedRoom = room;
-			room.UsedProducts.Add(this);
+			if (room != null) {
+				room.UsedProducts.Add(this);
+			}
 			Initialize();
 		}
 
