@@ -15,13 +15,19 @@ namespace Europlan.Common {
 		}
 
 		public override void Initialize() {
-			quickDimensioningHeatPower = 50;
+			quickDimensioningHeatPowerPerSquareMeter = 50;
+			canHeat = true;
+			canCool = false;
 		}
 
 		public override Product Clone(Room room) {
 			EurovalProduct product = new EurovalProduct(this);
 			product.AssociatedRoom = room;
 			return product;
+		}
+
+		public override int CalculateQuickDimensioningCircuits() {
+			return 0;
 		}
 
 	}

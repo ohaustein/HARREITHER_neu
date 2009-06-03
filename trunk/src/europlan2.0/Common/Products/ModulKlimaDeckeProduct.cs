@@ -15,14 +15,22 @@ namespace Europlan.Common {
 		}
 
 		public override void Initialize() {
-			quickDimensioningHeatPower = 80;
+			quickDimensioningHeatPowerPerSquareMeter = 80;
+			quickDimensioningCoolPowerPerSquareMeter = 80;
+			canHeat = true;
+			canCool = true;
 		}
 
 		public override Product Clone(Room room) {
 			ModulKlimaDeckeProduct product = new ModulKlimaDeckeProduct(this);
 			product.AssociatedRoom = room;
 			return product;
-		}	
+		}
+
+		public override int CalculateQuickDimensioningCircuits() {
+			return (int)Math.Ceiling(quickDimensioningPlannedArea / 18);
+		}
+
 	}
 	
 }
