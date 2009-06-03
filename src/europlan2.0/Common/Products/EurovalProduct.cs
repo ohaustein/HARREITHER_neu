@@ -27,6 +27,7 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateQuickDimensioningCircuits() {
+			quickDimensioningCircuits = (int)Math.Ceiling(quickDimensioningPlannedArea / 15);
 		}
 
 		public override void CalculateQuickDimensioningPlannedArea() {
