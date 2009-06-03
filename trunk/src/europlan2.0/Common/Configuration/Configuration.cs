@@ -30,11 +30,11 @@ namespace Europlan.Common {
 		private Dictionary<string, float> discounts;
 		private List<RoomType> roomTypes;
 
-		private EurovalProduct eurovalProduct = new EurovalProduct(null);
-		private HithermProduct hithermProduct = new HithermProduct(null);
-		private HithermCompactProduct hithermCompactProduct = new HithermCompactProduct(null);
-		private ModulKlimaBodenProduct modulKlimaBodenProduct = new ModulKlimaBodenProduct(null);
-		private ModulKlimaDeckeProduct modulKlimaDeckeProduct = new ModulKlimaDeckeProduct(null);
+		private EurovalProduct eurovalProduct = new EurovalProduct();
+		private HithermProduct hithermProduct = new HithermProduct();
+		private HithermCompactProduct hithermCompactProduct = new HithermCompactProduct();
+		private ModulKlimaBodenProduct modulKlimaBodenProduct = new ModulKlimaBodenProduct();
+		private ModulKlimaDeckeProduct modulKlimaDeckeProduct = new ModulKlimaDeckeProduct();
 
 		public enum ConfigurationType {
 			InitializedConfiguration,

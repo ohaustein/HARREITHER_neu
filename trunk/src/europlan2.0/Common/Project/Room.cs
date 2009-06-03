@@ -36,7 +36,7 @@ namespace Europlan.Common {
 		private int additionalHeatLoad;
 		private string roomTypeId;
 
-		private List<Product> usedProducts;
+		private List<Product> usedProductsForQuickDimensioning;
 
 		private TreeNode roomNode = new TreeNode();
 
@@ -72,9 +72,9 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributor = room.QuickDimensioningDistributor;
 			this.quickDimensioningComments = room.QuickDimensioningComments;
 			this.roomTypeId = room.roomTypeId;
-			this.usedProducts = new List<Product>();
-			foreach (Product product in room.UsedProducts) {
-				this.usedProducts.Add(product.Clone(this));
+			this.usedProductsForQuickDimensioning = new List<Product>();
+			foreach (Product product in room.UsedProductsForQuickDimensioning) {
+				this.usedProductsForQuickDimensioning.Add(product.Clone(this));
 			}
 		}
 
@@ -89,7 +89,7 @@ namespace Europlan.Common {
 			normalizedCoolLoad = 0;
 			roomNode.Tag = this;
 			roomTypeId = "";
-			this.usedProducts = new List<Product>();
+			this.usedProductsForQuickDimensioning = new List<Product>();
 			this.quickDimensioningHeatLoad = 0;
 			this.quickDimensioningCoolLoad = 0;
 			this.quickDimensioningRoomController = RoomController.None;
@@ -112,9 +112,9 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributor = room.QuickDimensioningDistributor;
 			this.quickDimensioningComments = room.QuickDimensioningComments;
 			this.RoomTypeId = room.RoomTypeId;
-			this.usedProducts = new List<Product>();
-			foreach (Product product in room.UsedProducts) {
-				this.usedProducts.Add(product.Clone(this));
+			this.usedProductsForQuickDimensioning = new List<Product>();
+			foreach (Product product in room.UsedProductsForQuickDimensioning) {
+				this.usedProductsForQuickDimensioning.Add(product.Clone(this));
 			}
 		}
 
@@ -217,7 +217,7 @@ namespace Europlan.Common {
 			get { 
 				if (this.QuickDimensioningRoomController != RoomController.None) {
 					int nr = 0;
-					foreach (Product product in usedProducts) {
+					foreach (Product product in usedProductsForQuickDimensioning) {
 						nr += product.QuickDimensioningCircuits;
 					}
 					return nr;
@@ -247,9 +247,9 @@ namespace Europlan.Common {
 			set { normalizedHeatLoad = heatLoad - value; }
 		}
 
-		public List<Product> UsedProducts {
-			get { return usedProducts; }
-			set { usedProducts = value; }
+		public List<Product> UsedProductsForQuickDimensioning {
+			get { return usedProductsForQuickDimensioning; }
+			set { usedProductsForQuickDimensioning = value; }
 		}
 		
 		/*internal void InitializeTree(TreeNode floor) {

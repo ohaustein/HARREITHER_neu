@@ -6,7 +6,11 @@ namespace Europlan.Common {
 	
 	public class HithermCompactProduct : Product {
 
-		public HithermCompactProduct(Room room)	: base(room) {
+		public HithermCompactProduct() {
+
+		}
+
+		protected HithermCompactProduct(HithermCompactProduct product) : base(product) {
 
 		}
 
@@ -15,7 +19,8 @@ namespace Europlan.Common {
 		}
 
 		public override Product Clone(Room room) {
-			HithermCompactProduct product = new HithermCompactProduct(room);
+			HithermCompactProduct product = new HithermCompactProduct(this);
+			product.AssociatedRoom = room;
 			return product;
 		}
 	}

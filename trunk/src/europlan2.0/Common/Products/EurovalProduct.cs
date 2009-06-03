@@ -6,7 +6,11 @@ namespace Europlan.Common {
 	
 	public class EurovalProduct : Product {
 
-		public EurovalProduct(Room room) : base(room) {
+		public EurovalProduct(){
+
+		}
+
+		protected EurovalProduct(EurovalProduct product) : base(product) {
 
 		}
 
@@ -15,7 +19,8 @@ namespace Europlan.Common {
 		}
 
 		public override Product Clone(Room room) {
-			EurovalProduct product = new EurovalProduct(room);
+			EurovalProduct product = new EurovalProduct(this);
+			product.AssociatedRoom = room;
 			return product;
 		}
 

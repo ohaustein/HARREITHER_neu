@@ -6,7 +6,11 @@ namespace Europlan.Common {
 	
 	public class ModulKlimaDeckeProduct : Product {
 
-		public ModulKlimaDeckeProduct(Room room) : base(room) {
+		public ModulKlimaDeckeProduct() {
+
+		}
+
+		protected ModulKlimaDeckeProduct(ModulKlimaDeckeProduct product) : base(product) {
 
 		}
 
@@ -15,7 +19,8 @@ namespace Europlan.Common {
 		}
 
 		public override Product Clone(Room room) {
-			ModulKlimaDeckeProduct product = new ModulKlimaDeckeProduct(room);
+			ModulKlimaDeckeProduct product = new ModulKlimaDeckeProduct(this);
+			product.AssociatedRoom = room;
 			return product;
 		}	
 	}

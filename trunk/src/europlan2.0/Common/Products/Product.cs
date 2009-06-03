@@ -18,14 +18,27 @@ namespace Europlan.Common {
 		protected bool canHeat = false;
 		protected bool canCool = false;
 
-		protected Room associatedRoom = null;
+		private Room associatedRoom = null;
 
-		public Product(Room room) {
+		public Product() {
+			Initialize();
+		}
+
+		protected Product(Room room) {
 			associatedRoom = room;
 			if (room != null) {
-				room.UsedProducts.Add(this);
+				room.UsedProductsForQuickDimensioning.Add(this);
 			}
 			Initialize();
+		}
+
+		public Product(Product product) {
+			this.quickDimensioningHeatPower = product.quickDimensioningHeatPower;
+			this.quickDimensioningCoolPower = product.quickDimensioningCoolPower;
+			this.quickDimensioningCircuits = product.quickDimensioningCircuits;
+			this.canHeat = product.canHeat;
+			this.canCool = product.canCool;
+			this.associatedRoom = null;
 		}
 
 		public abstract void Initialize();
@@ -54,6 +67,16 @@ namespace Europlan.Common {
 		public bool CanCool {
 			get { return canCool; }
 			set { canCool = value; }
+		}
+
+		protected Room AssociatedRoom {
+			get { return associatedRoom; }
+			set { 
+				associatedRoom = value;
+				if (associatedRoom != null && !associatedRoom.UsedProductsForQuickDimensioning.Contains(this)) {
+					associatedRoom.UsedProductsForQuickDimensioning.Add(this);
+				}			
+			}
 		}
 
 	}
