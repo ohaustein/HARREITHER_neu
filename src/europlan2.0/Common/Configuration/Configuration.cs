@@ -164,15 +164,15 @@ namespace Europlan.Common {
 				}
 			}
 
-			foreach (string materialId in config1.MaterialToCategoryMapping.Keys) {
-				if (!config.MaterialToCategoryMapping.ContainsKey(materialId)) {
-					config.MaterialToCategoryMapping.Add(materialId, config1.MaterialToCategoryMapping[materialId]);
+			foreach (string materialId in config1.materialToCategoryMapping.Keys) {
+				if (!config.materialToCategoryMapping.ContainsKey(materialId)) {
+					config.materialToCategoryMapping.Add(materialId, config1.materialToCategoryMapping[materialId]);
 				}
 			}
 
-			foreach (string materialId in config2.MaterialToCategoryMapping.Keys) {
-				if (!config.MaterialToCategoryMapping.ContainsKey(materialId)) {
-					config.MaterialToCategoryMapping.Add(materialId, config2.MaterialToCategoryMapping[materialId]);
+			foreach (string materialId in config2.materialToCategoryMapping.Keys) {
+				if (!config.materialToCategoryMapping.ContainsKey(materialId)) {
+					config.materialToCategoryMapping.Add(materialId, config2.materialToCategoryMapping[materialId]);
 				}
 			}
 
