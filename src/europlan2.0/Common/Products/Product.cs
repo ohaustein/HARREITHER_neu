@@ -12,9 +12,10 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(ModulKlimaDeckeProduct))]
 	public abstract class Product {
 
-		protected int quickDimensioningHeatPower = 0;
-		protected int quickDimensioningCoolPower = 0;
+		protected int quickDimensioningHeatPowerPerSquareMeter = 0;
+		protected int quickDimensioningCoolPowerPerSquareMeter = 0;
 		protected int quickDimensioningCircuits = 0;
+		protected float quickDimensioningPlannedArea = 0;
 		protected bool canHeat = false;
 		protected bool canCool = false;
 
@@ -33,29 +34,61 @@ namespace Europlan.Common {
 		}
 
 		public Product(Product product) {
-			this.quickDimensioningHeatPower = product.quickDimensioningHeatPower;
-			this.quickDimensioningCoolPower = product.quickDimensioningCoolPower;
+			this.quickDimensioningHeatPowerPerSquareMeter = product.quickDimensioningHeatPowerPerSquareMeter;
+			this.quickDimensioningCoolPowerPerSquareMeter = product.quickDimensioningCoolPowerPerSquareMeter;
 			this.quickDimensioningCircuits = product.quickDimensioningCircuits;
 			this.canHeat = product.canHeat;
 			this.canCool = product.canCool;
+			this.quickDimensioningPlannedArea = 0;
 			this.associatedRoom = null;
 		}
 
 		public abstract void Initialize();
 		public abstract Product Clone(Room room);
+		public abstract int CalculateQuickDimensioningCircuits();
 
 		public int QuickDimensioningHeatPower {
-			get { return quickDimensioningHeatPower; }
-			set { quickDimensioningHeatPower = value; }
+			get {
+				if (canHeat) {
+					return (int)quickDimensioningPlannedArea * quickDimensioningHeatPowerPerSquareMeter;
+				}
+				return 0; 
+			}
 		}
 		
 		public int QuickDimensioningCoolPower {
-			get { return quickDimensioningCoolPower; }
-			set { quickDimensioningCoolPower = value; }
+			get {
+				if (canCool) {
+					return (int)quickDimensioningPlannedArea * quickDimensioningCoolPowerPerSquareMeter;
+				}
+				return 0; 
+			}
+		}
+
+		public int QuickDimensioningHeatPowerPerSquareMeter {
+			get { return quickDimensioningHeatPowerPerSquareMeter; }
+			set { quickDimensioningHeatPowerPerSquareMeter = value; }
+		}
+
+		public int QuickDimensioningCoolPowerPerSquareMeter {
+			get { return quickDimensioningCoolPowerPerSquareMeter; }
+			set { quickDimensioningCoolPowerPerSquareMeter = value; }
+		}
+
+		public float QuickDimensioningPlannedArea {
+			get {
+				return quickDimensioningPlannedArea; 
+			}
+			set { quickDimensioningPlannedArea = value; }
 		}
 
 		public int QuickDimensioningCircuits {
-			get { return quickDimensioningCircuits; }
+			get {
+				if (quickDimensioningCircuits == 0) {
+					CalculateQuickDimensioningCircuits();
+				}
+				return quickDimensioningCircuits; 
+			}
 			set { quickDimensioningCircuits = value; }
 		}
 
