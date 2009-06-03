@@ -27,8 +27,14 @@ namespace Europlan.Common {
 			return product;
 		}
 
-		public override int CalculateQuickDimensioningCircuits() {
-			return (int)Math.Ceiling(quickDimensioningPlannedArea / 18);
+		public override void CalculateQuickDimensioningCircuits() {
+			quickDimensioningCircuits = (int)Math.Ceiling(quickDimensioningPlannedArea / 18);
+		}
+
+		public override void CalculateQuickDimensioningPlannedArea() {
+			if (this.AssociatedRoom != null) {
+				this.quickDimensioningPlannedArea = this.AssociatedRoom.Area;
+			}
 		}
 
 	}
