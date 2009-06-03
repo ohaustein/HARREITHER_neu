@@ -96,7 +96,8 @@ namespace Europlan.Common {
 			set {
 				if (value != this.Euroval) {
 					if (value) {
-						this.colEuroval = new DataGridViewTextBoxColumn();
+						this.colEuroval = new NumericColumn();
+						(this.colEuroval as NumericColumn).NumEditType = NumericBox.NumericEditType.ROOM_AREA;
 						this.colEuroval.HeaderText = "Euroval\n(m²)";
 						this.colEuroval.Width = 70;
 						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colEuroval);
@@ -119,7 +120,8 @@ namespace Europlan.Common {
 			set {
 				if (value != this.Hitherm) {
 					if (value) {
-						this.colHitherm = new DataGridViewTextBoxColumn();
+						this.colHitherm = new NumericColumn();
+						(this.colHitherm as NumericColumn).NumEditType = NumericBox.NumericEditType.ROOM_AREA;
 						this.colHitherm.HeaderText = "Hitherm\n(m²)";
 						this.colHitherm.Width = 70;
 						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colHitherm);
@@ -142,7 +144,8 @@ namespace Europlan.Common {
 			set {
 				if (value != this.HithermCompact) {
 					if (value) {
-						this.colHithermCompact = new DataGridViewTextBoxColumn();
+						this.colHithermCompact = new NumericColumn();
+						(this.colHithermCompact as NumericColumn).NumEditType = NumericBox.NumericEditType.ROOM_AREA;
 						this.colHithermCompact.Width = 70;
 						this.colHithermCompact.HeaderText = "Hitherm Co\n(m²)";
 						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colHithermCompact);
@@ -165,7 +168,8 @@ namespace Europlan.Common {
 			set {
 				if (value != this.ModulKlimaBoden) {
 					if (value) {
-						this.colModulKlimaBoden = new DataGridViewTextBoxColumn();
+						this.colModulKlimaBoden = new NumericColumn();
+						(this.colModulKlimaBoden as NumericColumn).NumEditType = NumericBox.NumericEditType.ROOM_AREA;
 						this.colModulKlimaBoden.HeaderText = "Klimaboden\n(m²)";
 						this.colModulKlimaBoden.Width = 70;
 						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colModulKlimaBoden);
@@ -188,7 +192,8 @@ namespace Europlan.Common {
 			set {
 				if (value != this.ModulKlimaDecke) {
 					if (value) {
-						this.colModulKlimaDecke = new DataGridViewTextBoxColumn();
+						this.colModulKlimaDecke = new NumericColumn();
+						(this.colModulKlimaDecke as NumericColumn).NumEditType = NumericBox.NumericEditType.ROOM_AREA;
 						this.colModulKlimaDecke.HeaderText = "Klimadecke\n(m²)";
 						this.colModulKlimaDecke.Width = 70;
 						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colModulKlimaDecke);
@@ -203,6 +208,16 @@ namespace Europlan.Common {
 						this.colModulKlimaDeckeCircuits = null;
 					}
 				}
+			}
+		}
+
+		private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) {
+			if (this.colEuroval != null && e.ColumnIndex == this.colEuroval.Index) {
+				Console.WriteLine(e.FormattedValue);
+			} else if (this.colHitherm != null && e.ColumnIndex == this.colHitherm.Index) {
+			} else if (this.colHithermCompact != null && e.ColumnIndex == this.colHithermCompact.Index) {
+			} else if (this.colModulKlimaBoden != null && e.ColumnIndex == this.colModulKlimaBoden.Index) {
+			} else if (this.colModulKlimaDecke != null && e.ColumnIndex == this.colModulKlimaDecke.Index) {
 			}
 		}
 	}

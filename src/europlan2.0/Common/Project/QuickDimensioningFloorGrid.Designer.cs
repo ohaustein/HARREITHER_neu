@@ -34,10 +34,7 @@ namespace Europlan.Common {
 			this.textBox3 = new System.Windows.Forms.TextBox();
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.roomBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colRoomController = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRoomTemperature = new Europlan.Common.NumericColumn();
@@ -46,9 +43,12 @@ namespace Europlan.Common {
 			this.colHeatLoad = new Europlan.Common.NumericColumn();
 			this.colCoolLoad = new Europlan.Common.NumericColumn();
 			this.colNrOfServos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colRoomController = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.colDistributor = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.roomBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.roomBindingSource)).BeginInit();
@@ -86,6 +86,7 @@ namespace Europlan.Common {
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.Size = new System.Drawing.Size(753, 265);
 			this.dataGridView1.TabIndex = 0;
+			this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
 			// 
 			// panel1
 			// 
@@ -119,32 +120,13 @@ namespace Europlan.Common {
 			this.textBox1.Size = new System.Drawing.Size(45, 20);
 			this.textBox1.TabIndex = 0;
 			// 
-			// roomBindingSource
+			// colRoomController
 			// 
-			this.roomBindingSource.DataSource = typeof(Europlan.Common.Room);
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "QuickDimensioningNrOfServos";
-			this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-			this.dataGridViewTextBoxColumn1.HeaderText = "Stell- motore";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			this.dataGridViewTextBoxColumn1.Width = 50;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "QuickDimensioningDistributor";
-			this.dataGridViewTextBoxColumn2.FillWeight = 50F;
-			this.dataGridViewTextBoxColumn2.HeaderText = "Verteiler";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.Width = 50;
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.DataPropertyName = "QuickDimensioningComments";
-			this.dataGridViewTextBoxColumn3.HeaderText = "Kommentar";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.colRoomController.DataPropertyName = "QuickDimensioningRoomController";
+			this.colRoomController.FillWeight = 60F;
+			this.colRoomController.HeaderText = "Raum- controller";
+			this.colRoomController.Name = "colRoomController";
+			this.colRoomController.Width = 60;
 			// 
 			// colId
 			// 
@@ -180,7 +162,7 @@ namespace Europlan.Common {
 			// 
 			this.colArea.DataPropertyName = "Area";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
+			dataGridViewCellStyle3.Format = "F1";
 			this.colArea.DefaultCellStyle = dataGridViewCellStyle3;
 			this.colArea.FillWeight = 50F;
 			this.colArea.HeaderText = "Raumfl. (m²)";
@@ -236,14 +218,6 @@ namespace Europlan.Common {
 			this.colNrOfServos.ReadOnly = true;
 			this.colNrOfServos.Width = 50;
 			// 
-			// colRoomController
-			// 
-			this.colRoomController.DataPropertyName = "QuickDimensioningRoomController";
-			this.colRoomController.FillWeight = 60F;
-			this.colRoomController.HeaderText = "Raum- controller";
-			this.colRoomController.Name = "colRoomController";
-			this.colRoomController.Width = 60;
-			// 
 			// colDistributor
 			// 
 			this.colDistributor.DataPropertyName = "QuickDimensioningDistributor";
@@ -257,6 +231,33 @@ namespace Europlan.Common {
 			this.colComments.DataPropertyName = "QuickDimensioningComments";
 			this.colComments.HeaderText = "Bemerkung";
 			this.colComments.Name = "colComments";
+			// 
+			// roomBindingSource
+			// 
+			this.roomBindingSource.DataSource = typeof(Europlan.Common.Room);
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "QuickDimensioningNrOfServos";
+			this.dataGridViewTextBoxColumn1.FillWeight = 50F;
+			this.dataGridViewTextBoxColumn1.HeaderText = "Stell- motore";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.Width = 50;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.DataPropertyName = "QuickDimensioningDistributor";
+			this.dataGridViewTextBoxColumn2.FillWeight = 50F;
+			this.dataGridViewTextBoxColumn2.HeaderText = "Verteiler";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.Width = 50;
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.DataPropertyName = "QuickDimensioningComments";
+			this.dataGridViewTextBoxColumn3.HeaderText = "Kommentar";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
 			// 
 			// QuickDimensioningFloorGrid
 			// 

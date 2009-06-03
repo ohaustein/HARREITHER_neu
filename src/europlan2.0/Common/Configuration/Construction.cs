@@ -4,8 +4,9 @@ using System.Text;
 using System.Xml.Serialization;
 
 namespace Europlan.Common {
-	
+
 	[XmlInclude(typeof(FloorConstruction))]
+	[XmlInclude(typeof(InsulationConstruction))]
 	public class Construction {
 		private string id;
 		private int version;
