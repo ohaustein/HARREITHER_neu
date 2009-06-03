@@ -147,6 +147,9 @@ namespace Europlan.Common {
 							return type;
 						}
 					}
+				} else if (Project.Instance.Config.RoomTypes.Count > 0) {
+					this.RoomTypeId = Project.Instance.Config.RoomTypes[0].Id;
+					return Project.Instance.Config.RoomTypes[0];
 				}
 				return null;
 			}
