@@ -69,7 +69,8 @@ namespace Europlan.Common {
 			set { canCool = value; }
 		}
 
-		protected Room AssociatedRoom {
+		[XmlIgnore]
+		public Room AssociatedRoom {
 			get { return associatedRoom; }
 			set { 
 				associatedRoom = value;

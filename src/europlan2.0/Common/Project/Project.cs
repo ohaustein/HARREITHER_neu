@@ -154,9 +154,20 @@ namespace Europlan.Common {
 				instance = (Project)s.Deserialize(r);
 				r.Close();
 				instance.configuration.RecalculateMaterialToCategoryMapping();
+				instance.RecalculateQuickDimensioningRoomToProjectMapping();
 			}
 			if (ProjectLoaded != null) {
 				Project.ProjectLoaded(Instance);
+			}
+		}
+
+		private void RecalculateQuickDimensioningRoomToProjectMapping() {
+			foreach (Floor floor in floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (Product product in room.UsedProductsForQuickDimensioning) {
+						product.AssociatedRoom = room;
+					}
+				}
 			}
 		}
 
