@@ -29,6 +29,7 @@ namespace Europlan.Common {
 			this.btnView = new System.Windows.Forms.Button();
 			this.btnNew = new System.Windows.Forms.Button();
 			this.gridConstructions = new System.Windows.Forms.DataGridView();
+			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.cmsView = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tsmiFloorConstruction = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,7 +40,6 @@ namespace Europlan.Common {
 			this.tsmiNewFloorConstructionScreedAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiNewFloorConstructionDryAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiNewInsulationConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
-			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -123,6 +123,16 @@ namespace Europlan.Common {
 			this.gridConstructions.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridConstructions_RowsAdded);
 			this.gridConstructions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridConstructions_CellClick);
 			// 
+			// colEdit
+			// 
+			this.colEdit.FillWeight = 65F;
+			this.colEdit.HeaderText = "Bearbeiten";
+			this.colEdit.Name = "colEdit";
+			this.colEdit.ReadOnly = true;
+			this.colEdit.Text = "...";
+			this.colEdit.UseColumnTextForButtonValue = true;
+			this.colEdit.Width = 65;
+			// 
 			// cmsView
 			// 
 			this.cmsView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -202,16 +212,6 @@ namespace Europlan.Common {
 			this.tsmiNewInsulationConstructionAdmin.Size = new System.Drawing.Size(249, 22);
 			this.tsmiNewInsulationConstructionAdmin.Text = "Wärmedämmkonstruktion";
 			this.tsmiNewInsulationConstructionAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
-			// 
-			// colEdit
-			// 
-			this.colEdit.FillWeight = 65F;
-			this.colEdit.HeaderText = "Bearbeiten";
-			this.colEdit.Name = "colEdit";
-			this.colEdit.ReadOnly = true;
-			this.colEdit.Text = "...";
-			this.colEdit.UseColumnTextForButtonValue = true;
-			this.colEdit.Width = 65;
 			// 
 			// colId
 			// 
