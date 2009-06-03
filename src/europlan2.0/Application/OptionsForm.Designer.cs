@@ -32,7 +32,6 @@ namespace Europlan.Application {
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabGeneral = new System.Windows.Forms.TabPage();
 			this.tabMaterials = new System.Windows.Forms.TabPage();
-			this.tabConstructions = new System.Windows.Forms.TabPage();
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.tabPageFloor = new System.Windows.Forms.TabPage();
 			this.tabPageWall = new System.Windows.Forms.TabPage();
@@ -40,18 +39,18 @@ namespace Europlan.Application {
 			this.tabPageDistributor = new System.Windows.Forms.TabPage();
 			this.tabPageInsulation = new System.Windows.Forms.TabPage();
 			this.tabPageGeneral = new System.Windows.Forms.TabPage();
+			this.tabConstructions = new System.Windows.Forms.TabPage();
+			this.constructionEditorGrid1 = new Europlan.Common.ConstructionEditorGrid();
 			this.megFloor = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.megWall = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.megCeiling = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.megDistributor = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.megInsulation = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.megGeneral = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
-			this.constructionEditorGrid1 = new Europlan.Common.ConstructionEditorGrid();
 			this.panel1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabGeneral.SuspendLayout();
 			this.tabMaterials.SuspendLayout();
-			this.tabConstructions.SuspendLayout();
 			this.tabs.SuspendLayout();
 			this.tabPageFloor.SuspendLayout();
 			this.tabPageWall.SuspendLayout();
@@ -59,6 +58,7 @@ namespace Europlan.Application {
 			this.tabPageDistributor.SuspendLayout();
 			this.tabPageInsulation.SuspendLayout();
 			this.tabPageGeneral.SuspendLayout();
+			this.tabConstructions.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// lblLanguage
@@ -88,6 +88,7 @@ namespace Europlan.Application {
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOk.Name = "btnOk";
 			this.btnOk.UseVisualStyleBackColor = true;
+			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
 			// 
 			// panel1
 			// 
@@ -119,13 +120,6 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.tabMaterials, "tabMaterials");
 			this.tabMaterials.Name = "tabMaterials";
 			this.tabMaterials.UseVisualStyleBackColor = true;
-			// 
-			// tabConstructions
-			// 
-			this.tabConstructions.Controls.Add(this.constructionEditorGrid1);
-			resources.ApplyResources(this.tabConstructions, "tabConstructions");
-			this.tabConstructions.Name = "tabConstructions";
-			this.tabConstructions.UseVisualStyleBackColor = true;
 			// 
 			// tabs
 			// 
@@ -181,6 +175,20 @@ namespace Europlan.Application {
 			this.tabPageGeneral.Name = "tabPageGeneral";
 			this.tabPageGeneral.UseVisualStyleBackColor = true;
 			// 
+			// tabConstructions
+			// 
+			this.tabConstructions.Controls.Add(this.constructionEditorGrid1);
+			resources.ApplyResources(this.tabConstructions, "tabConstructions");
+			this.tabConstructions.Name = "tabConstructions";
+			this.tabConstructions.UseVisualStyleBackColor = true;
+			// 
+			// constructionEditorGrid1
+			// 
+			resources.ApplyResources(this.constructionEditorGrid1, "constructionEditorGrid1");
+			this.constructionEditorGrid1.Filter = Europlan.Common.ConstructionScopeEnum.All;
+			this.constructionEditorGrid1.Name = "constructionEditorGrid1";
+			this.constructionEditorGrid1.Type = Europlan.Common.Configuration.ConfigurationType.UserConfiguration;
+			// 
 			// megFloor
 			// 
 			this.megFloor.AllowToAdd = false;
@@ -223,13 +231,6 @@ namespace Europlan.Application {
 			this.megGeneral.Filter = Europlan.Common.CategoryType.General;
 			this.megGeneral.Name = "megGeneral";
 			// 
-			// constructionEditorGrid1
-			// 
-			resources.ApplyResources(this.constructionEditorGrid1, "constructionEditorGrid1");
-			this.constructionEditorGrid1.Filter = Europlan.Common.ConstructionScopeEnum.All;
-			this.constructionEditorGrid1.Name = "constructionEditorGrid1";
-			this.constructionEditorGrid1.Type = Europlan.Common.Configuration.ConfigurationType.UserConfiguration;
-			// 
 			// OptionsForm
 			// 
 			this.AcceptButton = this.btnOk;
@@ -242,7 +243,6 @@ namespace Europlan.Application {
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "OptionsForm";
-			this.TopMost = true;
 			this.Load += new System.EventHandler(this.OptionsForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
 			this.panel1.ResumeLayout(false);
@@ -250,7 +250,6 @@ namespace Europlan.Application {
 			this.tabGeneral.ResumeLayout(false);
 			this.tabGeneral.PerformLayout();
 			this.tabMaterials.ResumeLayout(false);
-			this.tabConstructions.ResumeLayout(false);
 			this.tabs.ResumeLayout(false);
 			this.tabPageFloor.ResumeLayout(false);
 			this.tabPageWall.ResumeLayout(false);
@@ -258,6 +257,7 @@ namespace Europlan.Application {
 			this.tabPageDistributor.ResumeLayout(false);
 			this.tabPageInsulation.ResumeLayout(false);
 			this.tabPageGeneral.ResumeLayout(false);
+			this.tabConstructions.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

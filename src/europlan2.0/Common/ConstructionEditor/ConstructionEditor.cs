@@ -105,8 +105,8 @@ namespace Europlan.Common {
 				this.numThickness.Value = 0;
 				this.cbPeFoil.Checked = false;
 			}
-			this.constructionBindingSource.DataSource = this.construction;
-			this.constructionBindingSource.ResetBindings(false);
+			this.constructionLayerBindingSource.DataSource = this.construction == null ? null : this.construction.Layers;
+			this.constructionLayerBindingSource.ResetBindings(false);
 		}
 
 		private void txtId_TextChanged(object sender, EventArgs e) {

@@ -56,5 +56,9 @@ namespace Europlan.Application {
 		private void btnCancel_Click(object sender, EventArgs e) {
 			Configuration.UserTemplate.Reset();
 		}
+
+		private void btnOk_Click(object sender, EventArgs e) {
+			Configuration.UserTemplate.Save();
+		}
 	}
 }

@@ -129,6 +129,12 @@
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\QuickDimensioning.cs" />
+    <Compile Include="Project\QuickDimensioningFloorGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\QuickDimensioningFloorGrid.Designer.cs">
+      <DependentUpon>QuickDimensioningFloorGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\QuickDimensioningPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,6 +187,10 @@
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\QuickDimensioningFloorGrid.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>QuickDimensioningFloorGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\QuickDimensioningPanel.resx">
       <DependentUpon>QuickDimensioningPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -193,6 +203,10 @@
       <DependentUpon>RoomSummaryPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\ConstructionLayer.datasource" />
+    <None Include="Properties\DataSources\Room.datasource" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
