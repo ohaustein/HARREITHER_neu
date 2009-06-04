@@ -46,8 +46,8 @@ namespace Europlan.Common {
 
 		public abstract void Initialize();
 		public abstract Product Clone(Room room);
-		public abstract void CalculateQuickDimensioningCircuits();
-		public abstract void CalculateQuickDimensioningPlannedArea();
+		public abstract int GetDeflautQuickDimensioningCircuits();
+		public abstract float GetDefaultQuickDimensioningPlannedArea();
 
 		public int QuickDimensioningHeatPower {
 			get {
