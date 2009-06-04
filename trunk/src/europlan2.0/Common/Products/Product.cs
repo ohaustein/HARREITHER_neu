@@ -15,10 +15,10 @@ namespace Europlan.Common {
 		protected int quickDimensioningHeatPowerPerSquareMeter = 0;
 		protected int quickDimensioningCoolPowerPerSquareMeter = 0;
 		protected int quickDimensioningCircuits = 0;
+		protected int quickDimensioningCircuitsAsString = null;
 		protected float quickDimensioningPlannedArea = 0;
 		protected bool canHeat = false;
 		protected bool canCool = false;
-
 		private Room associatedRoom = null;
 
 		public Product() {
@@ -37,6 +37,7 @@ namespace Europlan.Common {
 			this.quickDimensioningHeatPowerPerSquareMeter = product.quickDimensioningHeatPowerPerSquareMeter;
 			this.quickDimensioningCoolPowerPerSquareMeter = product.quickDimensioningCoolPowerPerSquareMeter;
 			this.quickDimensioningCircuits = product.quickDimensioningCircuits;
+			this.quickDimensioningCircuitsAsString = product.quickDimensioningCircuitsAsString;
 			this.canHeat = product.canHeat;
 			this.canCool = product.canCool;
 			this.quickDimensioningPlannedArea = 0;
@@ -78,9 +79,6 @@ namespace Europlan.Common {
 
 		public float QuickDimensioningPlannedArea {
 			get {
-				if (quickDimensioningPlannedArea == 0) {
-					CalculateQuickDimensioningPlannedArea();
-				}
 				return quickDimensioningPlannedArea; 
 			}
 			set { quickDimensioningPlannedArea = value; }
@@ -88,12 +86,26 @@ namespace Europlan.Common {
 
 		public int QuickDimensioningCircuits {
 			get {
-				if (quickDimensioningCircuits == 0) {
-					CalculateQuickDimensioningCircuits();
-				}
 				return quickDimensioningCircuits; 
 			}
 			set { quickDimensioningCircuits = value; }
+		}
+
+		public string QuickDimensioningCircuitsAsString {
+			get {
+				if (quickDimensioningCircuitsAsString == null) {
+					return quickDimensioningCircuits.ToString();
+				} else {
+					quickDimensioningCircuitsAsString;
+				}
+			}
+			set {
+				if (Int32.TryParse(value, quickDimensioningCircuits)) {
+					quickDimensioningCircuitsAsString = null;
+				} else {
+					quickDimensioningCircuitsAsString = value; 
+				}
+			}
 		}
 
 		public bool CanHeat {
