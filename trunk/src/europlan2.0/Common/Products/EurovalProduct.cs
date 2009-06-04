@@ -26,16 +26,17 @@ namespace Europlan.Common {
 			return product;
 		}
 
-		public override void CalculateQuickDimensioningCircuits() {
+		public override int GetDeflautQuickDimensioningCircuits() {
 			// TODO
 			// vorlauftemperatur und verlegeabstand berücksichtigen
-			quickDimensioningCircuits = (int)Math.Ceiling(quickDimensioningPlannedArea / 15);
+			return (int)Math.Ceiling(quickDimensioningPlannedArea / 15);
 		}
 
-		public override void CalculateQuickDimensioningPlannedArea() {
+		public override float GetDefaultQuickDimensioningPlannedArea() {
 			if (this.AssociatedRoom != null) {
-				this.quickDimensioningPlannedArea = this.AssociatedRoom.Area;
+				return this.AssociatedRoom.Area;
 			}
+			return 0;
 		}
 
 	}
