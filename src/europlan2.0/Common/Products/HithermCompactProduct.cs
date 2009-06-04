@@ -31,9 +31,7 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateQuickDimensioningPlannedArea() {
-			if (this.AssociatedRoom != null) {
-				this.quickDimensioningPlannedArea = this.AssociatedRoom.Area;
-			}
+			return 0;
 		}
 
 	}
