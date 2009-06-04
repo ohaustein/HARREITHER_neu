@@ -31,7 +31,7 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateQuickDimensioningPlannedArea() {
-			return 0;
+			this.quickDimensioningPlannedArea = 0;
 		}
 
 	}
