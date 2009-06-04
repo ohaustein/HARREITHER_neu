@@ -15,7 +15,7 @@ namespace Europlan.Common {
 		protected int quickDimensioningHeatPowerPerSquareMeter = 0;
 		protected int quickDimensioningCoolPowerPerSquareMeter = 0;
 		protected int quickDimensioningCircuits = 0;
-		protected int quickDimensioningCircuitsAsString = null;
+		protected string quickDimensioningCircuitsAsString = null;
 		protected float quickDimensioningPlannedArea = 0;
 		protected bool canHeat = false;
 		protected bool canCool = false;
@@ -96,11 +96,11 @@ namespace Europlan.Common {
 				if (quickDimensioningCircuitsAsString == null) {
 					return quickDimensioningCircuits.ToString();
 				} else {
-					quickDimensioningCircuitsAsString;
+					return quickDimensioningCircuitsAsString;
 				}
 			}
 			set {
-				if (Int32.TryParse(value, quickDimensioningCircuits)) {
+				if (Int32.TryParse(value, out quickDimensioningCircuits)) {
 					quickDimensioningCircuitsAsString = null;
 				} else {
 					quickDimensioningCircuitsAsString = value; 
