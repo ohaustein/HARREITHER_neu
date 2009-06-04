@@ -26,7 +26,7 @@ namespace Europlan.Common {
 			return product;
 		}
 
-		public override int GetDeflautQuickDimensioningCircuits() {
+		public override int GetDefaultQuickDimensioningCircuits() {
 			return (int)Math.Ceiling(quickDimensioningPlannedArea / 10);
 		}
 

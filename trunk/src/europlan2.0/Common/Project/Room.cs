@@ -254,6 +254,15 @@ namespace Europlan.Common {
 			get { return usedProductsForQuickDimensioning; }
 			set { usedProductsForQuickDimensioning = value; }
 		}
+
+		public P GetProductForQuickDimensioning<P>() where P : Product {
+			foreach (Product product in this.usedProductsForQuickDimensioning) {
+				if (product.GetType() == typeof(P)) {
+					return (P)product;
+				}
+			}
+			return null;
+		}
 		
 		/*internal void InitializeTree(TreeNode floor) {
 			roomNode.Tag = this;

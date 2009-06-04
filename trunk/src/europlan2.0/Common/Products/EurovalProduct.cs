@@ -26,7 +26,7 @@ namespace Europlan.Common {
 			return product;
 		}
 
-		public override int GetDeflautQuickDimensioningCircuits() {
+		public override int GetDefaultQuickDimensioningCircuits() {
 			// TODO
 			// vorlauftemperatur und verlegeabstand berücksichtigen
 			return (int)Math.Ceiling(quickDimensioningPlannedArea / 15);

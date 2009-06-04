@@ -11,16 +11,16 @@ namespace Europlan.Common {
 
 		private Floor floor = null;
 
-		private DataGridViewColumn colEuroval = null;
-		private DataGridViewColumn colEurovalCircuits = null;
-		private DataGridViewColumn colHitherm = null;
-		private DataGridViewColumn colHithermCircuits = null;
-		private DataGridViewColumn colHithermCompact = null;
-		private DataGridViewColumn colHithermCompactCircuits = null;
-		private DataGridViewColumn colModulKlimaBoden = null;
-		private DataGridViewColumn colModulKlimaBodenCircuits = null;
-		private DataGridViewColumn colModulKlimaDecke = null;
-		private DataGridViewColumn colModulKlimaDeckeCircuits = null;
+		/*private DataGridViewColumn colEurovalOld = null;
+		private DataGridViewColumn colEurovalCircuitsOld = null;
+		private DataGridViewColumn colHithermOld = null;
+		private DataGridViewColumn colHithermCircuitsOld = null;
+		private DataGridViewColumn colHithermCompactOld = null;
+		private DataGridViewColumn colHithermCompactCircuitsOld = null;
+		private DataGridViewColumn colModulKlimaBodenOld = null;
+		private DataGridViewColumn colModulKlimaBodenCircuitsOld = null;
+		private DataGridViewColumn colModulKlimaDeckeOld = null;
+		private DataGridViewColumn colModulKlimaDeckeCircuitsOld = null;*/
 
 		public QuickDimensioningFloorGrid() {
 			InitializeComponent();
@@ -36,6 +36,7 @@ namespace Europlan.Common {
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RCF, "RCF"));
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RCRadio, "RCRadio"));
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RF, "RF"));
+
 		}
 
 		private class RoomControllerItem {
@@ -78,6 +79,16 @@ namespace Europlan.Common {
 				this.floor = value;
 				this.roomBindingSource.DataSource = this.floor.Rooms;
 				this.roomBindingSource.ResetBindings(false);
+				foreach (DataGridViewRow row in this.dataGridView1.Rows) {
+					Room room = row.DataBoundItem as Room;
+					if (room != null) {
+						EurovalProduct euroval = room.GetProductForQuickDimensioning<EurovalProduct>();
+						if (euroval != null) {
+							row.Cells[this.colEuroval.Index].Value = euroval.QuickDimensioningPlannedArea;
+							row.Cells[this.colEurovalCircuits.Index].Value = euroval.QuickDimensioningCircuits;
+						}
+					}
+				}
 			}
 		}
 
@@ -92,132 +103,122 @@ namespace Europlan.Common {
 		}
 
 		public bool Euroval {
-			get { return this.colEuroval != null; }
+			get { return this.colEuroval.Visible; }
 			set {
-				if (value != this.Euroval) {
-					if (value) {
-						this.colEuroval = new NumericColumn();
-						(this.colEuroval as NumericColumn).NumEditType = NumericBox.NumericEditType.ROOM_AREA;
-						this.colEuroval.HeaderText = "Euroval\n(m²)";
-						this.colEuroval.Width = 70;
-						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colEuroval);
-						this.colEurovalCircuits = new DataGridViewTextBoxColumn();
-						this.colEurovalCircuits.HeaderText = "Euroval\nHeizkreise";
-						this.colEurovalCircuits.Width = 70;
-						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colEurovalCircuits);
-					} else {
-						this.dataGridView1.Columns.Remove(this.colEuroval);
-						this.dataGridView1.Columns.Remove(this.colEurovalCircuits);
-						this.colEuroval = null;
-						this.colEurovalCircuits = null;
-					}
-				}
+				this.colEuroval.Visible = value;
+				this.colEurovalCircuits.Visible = value;
 			}
 		}
 
 		public bool Hitherm {
-			get { return this.colHitherm != null; }
+			get { return this.colHitherm.Visible; }
 			set {
-				if (value != this.Hitherm) {
-					if (value) {
-						this.colHitherm = new NumericColumn();
-						(this.colHitherm as NumericColumn).NumEditType = NumericBox.NumericEditType.ROOM_AREA;
-						this.colHitherm.HeaderText = "Hitherm\n(m²)";
-						this.colHitherm.Width = 70;
-						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colHitherm);
-						this.colHithermCircuits = new DataGridViewTextBoxColumn();
-						this.colHithermCircuits.HeaderText = "Hitherm\nHeizkreise";
-						this.colHithermCircuits.Width = 70;
-						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colHithermCircuits);
-					} else {
-						this.dataGridView1.Columns.Remove(this.colHitherm);
-						this.dataGridView1.Columns.Remove(this.colHithermCircuits);
-						this.colHitherm = null;
-						this.colHithermCircuits = null;
-					}
-				}
+				this.colHitherm.Visible = value;
+				this.colHithermCircuits.Visible = value;
 			}
 		}
 
 		public bool HithermCompact {
-			get { return this.colHithermCompact != null; }
+			get { return this.colHithermCompact.Visible; }
 			set {
-				if (value != this.HithermCompact) {
-					if (value) {
-						this.colHithermCompact = new NumericColumn();
-						(this.colHithermCompact as NumericColumn).NumEditType = NumericBox.NumericEditType.ROOM_AREA;
-						this.colHithermCompact.Width = 70;
-						this.colHithermCompact.HeaderText = "Hitherm Co\n(m²)";
-						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colHithermCompact);
-						this.colHithermCompactCircuits = new DataGridViewTextBoxColumn();
-						this.colHithermCompactCircuits.HeaderText = "Hitherm Co\nHeizkreise";
-						this.colHithermCompactCircuits.Width = 70;
-						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colHithermCompactCircuits);
-					} else {
-						this.dataGridView1.Columns.Remove(this.colHithermCompact);
-						this.dataGridView1.Columns.Remove(this.colHithermCompactCircuits);
-						this.colHithermCompact = null;
-						this.colHithermCompactCircuits = null;
-					}
-				}
+				this.colHithermCompact.Visible = value;
+				this.colHithermCompactCircuits.Visible = value;
 			}
 		}
 
 		public bool ModulKlimaBoden {
-			get { return this.colModulKlimaBoden != null; }
+			get { return this.colModulKlimaBoden.Visible; }
 			set {
-				if (value != this.ModulKlimaBoden) {
-					if (value) {
-						this.colModulKlimaBoden = new NumericColumn();
-						(this.colModulKlimaBoden as NumericColumn).NumEditType = NumericBox.NumericEditType.ROOM_AREA;
-						this.colModulKlimaBoden.HeaderText = "Klimaboden\n(m²)";
-						this.colModulKlimaBoden.Width = 70;
-						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colModulKlimaBoden);
-						this.colModulKlimaBodenCircuits = new DataGridViewTextBoxColumn();
-						this.colModulKlimaBodenCircuits.HeaderText = "Klimaboden\nHeizkreise";
-						this.colModulKlimaBodenCircuits.Width = 70;
-						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colModulKlimaBodenCircuits);
-					} else {
-						this.dataGridView1.Columns.Remove(this.colModulKlimaBoden);
-						this.dataGridView1.Columns.Remove(this.colModulKlimaBodenCircuits);
-						this.colModulKlimaBoden = null;
-						this.colModulKlimaBodenCircuits = null;
-					}
-				}
+				this.colModulKlimaBoden.Visible = value;
+				this.colModulKlimaBodenCircuits.Visible = value;
 			}
 		}
 
 		public bool ModulKlimaDecke {
-			get { return this.colModulKlimaDecke != null; }
+			get { return this.colModulKlimaDecke.Visible; }
 			set {
-				if (value != this.ModulKlimaDecke) {
-					if (value) {
-						this.colModulKlimaDecke = new NumericColumn();
-						(this.colModulKlimaDecke as NumericColumn).NumEditType = NumericBox.NumericEditType.ROOM_AREA;
-						this.colModulKlimaDecke.HeaderText = "Klimadecke\n(m²)";
-						this.colModulKlimaDecke.Width = 70;
-						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colModulKlimaDecke);
-						this.colModulKlimaDeckeCircuits = new DataGridViewTextBoxColumn();
-						this.colModulKlimaDeckeCircuits.HeaderText = "Klimadecke\nHeizkreise";
-						this.colModulKlimaDeckeCircuits.Width = 70;
-						this.dataGridView1.Columns.Insert(this.colNrOfServos.Index, this.colModulKlimaDeckeCircuits);
-					} else {
-						this.dataGridView1.Columns.Remove(this.colModulKlimaDecke);
-						this.dataGridView1.Columns.Remove(this.colModulKlimaDeckeCircuits);
-						this.colModulKlimaDecke = null;
-						this.colModulKlimaDeckeCircuits = null;
-					}
-				}
+				this.colModulKlimaDecke.Visible = value;
+				this.colModulKlimaDeckeCircuits.Visible = value;
 			}
 		}
 
 		private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) {
-			if (this.colEuroval != null && e.ColumnIndex == this.colEuroval.Index) {
-				Console.WriteLine(e.FormattedValue);
-			} else if (this.colHitherm != null && e.ColumnIndex == this.colHitherm.Index) {
-			} else if (this.colHithermCompact != null && e.ColumnIndex == this.colHithermCompact.Index) {
-			} else if (this.colModulKlimaBoden != null && e.ColumnIndex == this.colModulKlimaBoden.Index) {
-			} else if (this.colModulKlimaDecke != null && e.ColumnIndex == this.colModulKlimaDecke.Index) {
+			/*Room room = this.dataGridView1.Rows[e.RowIndex].DataBoundItem as Room;
+			if (room != null) {
+				if (this.colEuroval != null && e.ColumnIndex == this.colEuroval.Index) {
+					Console.WriteLine(e.FormattedValue);
+					Product product = room.GetProductForQuickDimensioning(typeof(EurovalProduct));
+					if (product == null) {
+					}
+					product.QuickDimensioningPlannedArea = 
+				} else if (this.colHitherm != null && e.ColumnIndex == this.colHitherm.Index) {
+				} else if (this.colHithermCompact != null && e.ColumnIndex == this.colHithermCompact.Index) {
+				} else if (this.colModulKlimaBoden != null && e.ColumnIndex == this.colModulKlimaBoden.Index) {
+				} else if (this.colModulKlimaDecke != null && e.ColumnIndex == this.colModulKlimaDecke.Index) {
+				}
+			}*/
+		}
+
+		private void dataGridView1_CellValidated(object sender, DataGridViewCellEventArgs e) {
+			Room room = this.dataGridView1.Rows[e.RowIndex].DataBoundItem as Room;
+			if (room != null) {
+				if (e.ColumnIndex == this.colEuroval.Index) {
+					Product product = room.GetProductForQuickDimensioning<EurovalProduct>();
+					if (product == null) {
+						product = Project.Instance.Config.EurovalProduct.Clone(room);
+					}
+					decimal area = 0;
+					object o = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+					if (o != null) {
+						area = (decimal)o;
+					}
+					bool setCircuits = (product.QuickDimensioningCircuits == product.GetDefaultQuickDimensioningCircuits());
+					product.QuickDimensioningPlannedArea = (float)area;
+					if (setCircuits) {
+						product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
+					}
+				} else if (e.ColumnIndex == this.colEurovalCircuits.Index) {
+				} else if (e.ColumnIndex == this.colHitherm.Index) {
+				} else if (e.ColumnIndex == this.colHithermCircuits.Index) {
+				} else if (e.ColumnIndex == this.colHithermCompact.Index) {
+				} else if (e.ColumnIndex == this.colHithermCompactCircuits.Index) {
+				} else if (e.ColumnIndex == this.colModulKlimaBoden.Index) {
+				} else if (e.ColumnIndex == this.colModulKlimaBodenCircuits.Index) {
+				} else if (e.ColumnIndex == this.colModulKlimaDecke.Index) {
+				} else if (e.ColumnIndex == this.colModulKlimaDeckeCircuits.Index) {
+				}
+			}
+		}
+
+		private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
+			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
+				DataGridViewRow row = this.dataGridView1.Rows[i];
+				Room room = row.DataBoundItem as Room;
+				if (room != null) {
+					EurovalProduct euroval = room.GetProductForQuickDimensioning<EurovalProduct>();
+					if (this.colEuroval.Visible && euroval != null) {
+						row.Cells[this.colEuroval.Index].Value = (decimal)euroval.QuickDimensioningPlannedArea;
+						row.Cells[this.colEurovalCircuits.Index].Value = euroval.QuickDimensioningCircuits;
+					}
+				}
+			}
+
+		}
+
+		private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e) {
+			Room room = this.dataGridView1.Rows[e.RowIndex].DataBoundItem as Room;
+			if (room != null) {
+				if (e.ColumnIndex == this.colHeatLoad.Index && room.QuickDimensioningHeatLoad == 0) {
+					this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = room.GetDefaultQuickDimensioningHeatLoad();
+				} else if (e.ColumnIndex == this.colCoolLoad.Index && room.QuickDimensioningCoolLoad == 0) {
+					this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = room.GetDefaultQuickDimensioningCoolLoad();
+				} else if (e.ColumnIndex == this.colEuroval.Index || e.ColumnIndex == this.colEurovalCircuits.Index && room.GetProductForQuickDimensioning<EurovalProduct>() == null) {
+					Product product = Project.Instance.Config.EurovalProduct.Clone(room);
+					product.QuickDimensioningPlannedArea = product.GetDefaultQuickDimensioningPlannedArea();
+					this.dataGridView1.Rows[e.RowIndex].Cells[this.colEuroval.Index].Value = (decimal)product.QuickDimensioningPlannedArea;
+					product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
+					this.dataGridView1.Rows[e.RowIndex].Cells[this.colEurovalCircuits.Index].Value = product.QuickDimensioningCircuitsAsString;
+				}
 			}
 		}
 	}
