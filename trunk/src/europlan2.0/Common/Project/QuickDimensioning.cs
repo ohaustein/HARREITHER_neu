@@ -7,6 +7,22 @@ namespace Europlan.Common {
 	
 	public class QuickDimensioning : IGuiRepresentation {
 
+		public enum ProductCheckState {
+			None,
+			Heat,
+			Cool,
+			HeatAndCool
+		}
+
+		
+		private ProductCheckState eurovalCheckState = ProductCheckState.None;
+		private ProductCheckState hithermCheckState = ProductCheckState.None;
+		private ProductCheckState hithermCompactCheckState = ProductCheckState.None;
+		private ProductCheckState modulBodenCheckState = ProductCheckState.None;
+		private ProductCheckState modulDeckeCheckState = ProductCheckState.None;
+		private float flowTemperature = 35;
+		private Europlan.Common.EurovalProduct.LayDistance layDistance = Europlan.Common.EurovalProduct.LayDistance.EV20;
+
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(QuickDimensioning));
 
@@ -24,6 +40,41 @@ namespace Europlan.Common {
 
 		public System.Drawing.Icon AssociatedIcon {
 			get { return null; }
+		}
+
+		public ProductCheckState EurovalCheckState {
+			get { return eurovalCheckState; }
+			set { eurovalCheckState = value; }
+		}
+
+		public ProductCheckState HithermCheckState {
+			get { return hithermCheckState; }
+			set { hithermCheckState = value; }
+		}
+
+		public ProductCheckState HithermCompactCheckState {
+			get { return hithermCompactCheckState; }
+			set { hithermCompactCheckState = value; }
+		}
+
+		public ProductCheckState ModulBodenCheckState {
+			get { return modulBodenCheckState; }
+			set { modulBodenCheckState = value; }
+		}
+
+		public ProductCheckState ModulDeckeCheckState {
+			get { return modulDeckeCheckState; }
+			set { modulDeckeCheckState = value; }
+		}
+
+		public float FlowTemperature {
+			get { return flowTemperature; }
+			set { flowTemperature = value; }
+		}
+
+		public Europlan.Common.EurovalProduct.LayDistance LayDistance {
+			get { return layDistance; }
+			set { layDistance = value; }
 		}
 
 	}

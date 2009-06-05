@@ -40,6 +40,7 @@ namespace Europlan.Common {
 		FloorList floors;
 		List<RegulatorCircuit> regulatorCircuits;
 		private Configuration configuration = null;
+		private QuickDimensioning quickDimensioning = null;
 
 		protected Project() {
 			log.Debug("default constructor called");
@@ -73,6 +74,7 @@ namespace Europlan.Common {
 
 			floors = new FloorList();
 			regulatorCircuits = new List<RegulatorCircuit>();
+			quickDimensioning = new QuickDimensioning();
 
 			configuration = Configuration.AdminTemplate + Configuration.UserTemplate;
 			configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
@@ -93,7 +95,7 @@ namespace Europlan.Common {
 
 			localized = resources.GetString("QuickDimensioning", Thread.CurrentThread.CurrentUICulture);
 			quickDimensioningNode = new TreeNode(localized == null ? "Flächenaufstellung" : localized);
-			quickDimensioningNode.Tag = typeof(QuickDimensioningPanel);
+			quickDimensioningNode.Tag = quickDimensioning;
 
 		}
 
@@ -140,6 +142,11 @@ namespace Europlan.Common {
 		public List<RegulatorCircuit> RegulatorCircuits {
 			get { return regulatorCircuits; }
 			set { regulatorCircuits = value; }
+		}
+
+		public QuickDimensioning QuickDimensioning {
+			get { return quickDimensioning; }
+			set { quickDimensioning = value; }
 		}
 
 		/*public void SetFloors(List<Floor> floors) {
