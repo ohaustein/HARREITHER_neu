@@ -34,6 +34,9 @@ namespace Europlan.Common {
 			return 0;
 		}
 
+		public override float QuickDimensioningMaximumArea {
+			get { return Int32.MaxValue; }
+		}
 	}
 	
 }

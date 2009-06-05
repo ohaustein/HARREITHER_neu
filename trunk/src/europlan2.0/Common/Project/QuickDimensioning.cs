@@ -8,10 +8,10 @@ namespace Europlan.Common {
 	public class QuickDimensioning : IGuiRepresentation {
 
 		public enum ProductCheckState {
-			None,
-			Heat,
-			Cool,
-			HeatAndCool
+			None = 0,
+			Heat = 1,
+			Cool = 2,
+			HeatAndCool = 3
 		}
 
 		
