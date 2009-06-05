@@ -84,6 +84,10 @@ namespace Europlan.Common {
 			set { quickDimensioningPlannedArea = value; }
 		}
 
+		public abstract float QuickDimensioningMaximumArea {
+			get;
+		}
+
 		public int QuickDimensioningCircuits {
 			get {
 				return quickDimensioningCircuits; 

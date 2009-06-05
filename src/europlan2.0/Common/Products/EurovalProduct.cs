@@ -49,6 +49,14 @@ namespace Europlan.Common {
 			return 0;
 		}
 
+		public override float QuickDimensioningMaximumArea {
+			get {
+				if (this.AssociatedRoom != null) {
+					return this.AssociatedRoom.Area;
+				}
+				return 0;
+			}
+		}
 	}
 	
 }

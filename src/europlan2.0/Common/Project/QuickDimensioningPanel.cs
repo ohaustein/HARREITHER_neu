@@ -22,6 +22,13 @@ namespace Europlan.Common {
 		public void UpdateControl() {
 			//Project.Instance.Config.
 
+			this.cbEurovalHeat.Checked = ((Project.Instance.QuickDimensioning.EurovalCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbHithermHeat.Checked = ((Project.Instance.QuickDimensioning.HithermCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbHithermCompactHeat.Checked = ((Project.Instance.QuickDimensioning.HithermCompactCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbModulKlimaBodenHeat.Checked = ((Project.Instance.QuickDimensioning.ModulBodenCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbModulKlimaDeckeHeat.Checked = ((Project.Instance.QuickDimensioning.ModulDeckeCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbModulKlimaDeckeCool.Checked = ((Project.Instance.QuickDimensioning.ModulDeckeCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
+
 			this.grids.Clear();
 
 			List<TabPage> pagesToRemove = new List<TabPage>();
@@ -82,40 +89,214 @@ namespace Europlan.Common {
 		}
 
 		private void cbEurovalHeat_CheckedChanged(object sender, EventArgs e) {
-			foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
-				grid.Euroval = this.EurovalHeating;
+			DialogResult result = DialogResult.None;
+			if (!this.EurovalHeating) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<EurovalProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?", "Euroval entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
 			}
+			if (result == DialogResult.No) {
+				this.EurovalHeating = !this.EurovalHeating;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.Euroval = this.EurovalHeating;
+				}
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							EurovalProduct product = room.GetProductForQuickDimensioning<EurovalProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+			}
+			Project.Instance.QuickDimensioning.EurovalCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbHithermHeat_CheckedChanged(object sender, EventArgs e) {
-			foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
-				grid.Hitherm = this.HithermHeating;
+			DialogResult result = DialogResult.None;
+			if (!this.HithermHeating) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<HithermProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?", "Hitherm entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
 			}
+			if (result == DialogResult.No) {
+				this.HithermHeating = !this.HithermHeating;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.Hitherm = this.HithermHeating;
+				}
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							HithermProduct product = room.GetProductForQuickDimensioning<HithermProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+			}
+			Project.Instance.QuickDimensioning.HithermCheckState = (this.HithermHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbHithermCompactHeat_CheckedChanged(object sender, EventArgs e) {
-			foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
-				grid.HithermCompact = this.HithermCompactHeating;
+			DialogResult result = DialogResult.None;
+			if (!this.HithermCompactHeating) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<HithermCompactProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?", "Hitherm Compact entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
 			}
+			if (result == DialogResult.No) {
+				this.HithermCompactHeating = !this.HithermCompactHeating;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.HithermCompact = this.HithermCompactHeating;
+				}
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							HithermCompactProduct product = room.GetProductForQuickDimensioning<HithermCompactProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+			}
+			Project.Instance.QuickDimensioning.HithermCompactCheckState = (this.HithermCompactHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbModulKlimaBodenHeat_CheckedChanged(object sender, EventArgs e) {
-			foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
-				grid.ModulKlimaBoden = this.ModulKlimaBodenHeating;
+			DialogResult result = DialogResult.None;
+			if (!this.ModulKlimaBodenHeating) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<ModulKlimaBodenProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?", "Modul Klimaboden entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
 			}
+			if (result == DialogResult.No) {
+				this.ModulKlimaBodenHeating = !this.ModulKlimaBodenHeating;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.ModulKlimaBoden = this.ModulKlimaBodenHeating;
+				}
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							ModulKlimaBodenProduct product = room.GetProductForQuickDimensioning<ModulKlimaBodenProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+			}
+			Project.Instance.QuickDimensioning.ModulBodenCheckState = (this.ModulKlimaBodenHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbModulKlimaDeckeHeat_CheckedChanged(object sender, EventArgs e) {
-			foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
-				grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			DialogResult result = DialogResult.None;
+			if (!this.ModulKlimaDeckeHeating && !this.ModulKlimaDeckeCooling) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<ModulKlimaDeckeProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Modul Klimadecke wirklich aus der Flächenaufstellung entfernen?", "Modul Klimadecke entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
 			}
+			if (result == DialogResult.No) {
+				this.ModulKlimaDeckeHeating = !this.ModulKlimaDeckeHeating;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+				}
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							ModulKlimaDeckeProduct product = room.GetProductForQuickDimensioning<ModulKlimaDeckeProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+			}
+			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) & (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbModulKlimaDeckeCool_CheckedChanged(object sender, EventArgs e) {
-			foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
-				grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
-				grid.Cooling = this.ModulKlimaDeckeCooling;
+			DialogResult result = DialogResult.None;
+			if (!this.ModulKlimaDeckeHeating && !this.ModulKlimaDeckeCooling) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<ModulKlimaDeckeProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Modul Klimadecke wirklich aus der Flächenaufstellung entfernen?", "Modul Klimadecke entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
 			}
+			if (result == DialogResult.No) {
+				this.ModulKlimaDeckeCooling = !this.ModulKlimaDeckeCooling;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+					grid.Cooling = this.ModulKlimaDeckeCooling;
+				}
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							ModulKlimaDeckeProduct product = room.GetProductForQuickDimensioning<ModulKlimaDeckeProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+			}
+			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) & (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 	}
 }

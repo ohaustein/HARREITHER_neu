@@ -94,9 +94,22 @@ namespace Europlan.Common {
 		public override System.Drawing.Rectangle PositionEditingPanel(System.Drawing.Rectangle cellBounds, System.Drawing.Rectangle cellClip, DataGridViewCellStyle cellStyle, bool singleVerticalBorderAdded, bool singleHorizontalBorderAdded, bool isFirstDisplayedColumn, bool isFirstDisplayedRow) {
 			int height = DataGridView.EditingControl.Height;
 			Rectangle rect = base.PositionEditingPanel(cellBounds, cellClip, cellStyle, singleVerticalBorderAdded, singleHorizontalBorderAdded, isFirstDisplayedColumn, isFirstDisplayedRow);
-			Console.WriteLine("height: " + height + "/" + rect.Height);
 			rect = new Rectangle(rect.X , rect.Y + (rect.Height - height) / 2, rect.Width , height);
 			return rect;
+		}
+
+		protected override Rectangle GetErrorIconBounds(Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex) {
+			Rectangle bounds = base.GetErrorIconBounds(graphics, cellStyle, rowIndex);
+			bounds = new Rectangle(2, bounds.Y, bounds.Width, bounds.Height);
+			return bounds;
+			//return base.GetErrorIconBounds(graphics, cellStyle, rowIndex);
+		}
+
+		protected override Rectangle GetContentBounds(Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex) {
+			Rectangle bounds = base.GetContentBounds(graphics, cellStyle, rowIndex);
+			Rectangle errorIconBounds = this.GetErrorIconBounds(graphics, cellStyle, rowIndex);
+			bounds = new Rectangle(bounds.X + errorIconBounds.Width, bounds.Y, bounds.Width - errorIconBounds.Width, bounds.Height);
+			return bounds;
 		}
 	}
 }

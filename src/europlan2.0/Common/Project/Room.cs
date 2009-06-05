@@ -244,6 +244,34 @@ namespace Europlan.Common {
 			set { quickDimensioningRoomController = value; }
 		}
 
+		public bool QuickDimensioningHeatLoadCovered {
+			get { return this.QuickDimensioningCoveredHeatLoad >= this.quickDimensioningHeatLoad; }
+		}
+
+		public bool QuickDimensioningCoolLoadCovered {
+			get { return this.QuickDimensioningCoveredCoolLoad >= this.quickDimensioningCoolLoad; }
+		}
+
+		public int QuickDimensioningCoveredHeatLoad {
+			get {
+				int coveredLoad = 0;
+				foreach (Product product in this.UsedProductsForQuickDimensioning) {
+					coveredLoad += product.QuickDimensioningHeatPower;
+				}
+				return coveredLoad;
+			}
+		}
+
+		public int QuickDimensioningCoveredCoolLoad {
+			get {
+				int coveredLoad = 0;
+				foreach (Product product in this.UsedProductsForQuickDimensioning) {
+					coveredLoad += product.QuickDimensioningCoolPower;
+				}
+				return coveredLoad;
+			}
+		}
+
 		[System.Xml.Serialization.XmlIgnore()]
 		public int FloorHeatingLoss {
 			get { return heatLoad - normalizedHeatLoad; }
