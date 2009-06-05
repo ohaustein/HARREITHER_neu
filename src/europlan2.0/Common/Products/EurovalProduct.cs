@@ -6,6 +6,16 @@ namespace Europlan.Common {
 	
 	public class EurovalProduct : Product {
 
+		public enum LayDistance {
+			EV5,
+			EV10,
+			EV15,
+			EV20,
+			EV25,
+			EV30,
+			EV35
+		}
+
 		public EurovalProduct(){
 
 		}
