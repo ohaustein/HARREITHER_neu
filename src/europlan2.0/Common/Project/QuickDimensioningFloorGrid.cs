@@ -286,14 +286,17 @@ namespace Europlan.Common {
 			DataGridViewColumn colProductCircuits = this.GetProductCircuitsColumn<P>();
 			Room room = row.DataBoundItem as Room;
 			P product = room.GetProductForQuickDimensioning<P>();
-			if (product == null) {
+			object o = row.Cells[colProductArea.Index].Value;
+			if (product == null && (o != null && (decimal)o != 0)) {
 				log.Warn("Product for validated cell is null");
 				product = (P)Project.Instance.Config.GetProduct<P>().Clone(room);
 				product.QuickDimensioningPlannedArea = product.GetDefaultQuickDimensioningPlannedArea();
 				row.Cells[colProductArea.Index].Value = (decimal)product.QuickDimensioningPlannedArea;
 			}
-			string circuits = row.Cells[colProductCircuits.Index].Value as string;
-			product.QuickDimensioningCircuitsAsString = circuits;
+			if (product != null) {
+				string circuits = row.Cells[colProductCircuits.Index].Value as string;
+				product.QuickDimensioningCircuitsAsString = circuits;
+			}
 		}
 
 		private void CheckLoadsCovered(DataGridViewRow row) {
@@ -389,10 +392,10 @@ namespace Europlan.Common {
 					this.AddProduct<HithermCompactProduct>(this.dataGridView1.Rows[e.RowIndex]);
 				} else if ((e.ColumnIndex == this.colModulKlimaBoden.Index || e.ColumnIndex == this.colModulKlimaBodenCircuits.Index) && room.GetProductForQuickDimensioning<ModulKlimaBodenProduct>() == null) {
 					// Modul Klimadecke
-					this.AddProduct<ModulKlimaDeckeProduct>(this.dataGridView1.Rows[e.RowIndex]);
+					this.AddProduct<ModulKlimaBodenProduct>(this.dataGridView1.Rows[e.RowIndex]);
 				} else if ((e.ColumnIndex == this.colModulKlimaDecke.Index || e.ColumnIndex == this.colModulKlimaDeckeCircuits.Index) && room.GetProductForQuickDimensioning<ModulKlimaDeckeProduct>() == null) {
 					// Modul Klimaboden
-					this.AddProduct<ModulKlimaBodenProduct>(this.dataGridView1.Rows[e.RowIndex]);
+					this.AddProduct<ModulKlimaDeckeProduct>(this.dataGridView1.Rows[e.RowIndex]);
 				}
 			}
 		}
