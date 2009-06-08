@@ -459,6 +459,23 @@ namespace Europlan.Common {
 			set { modulKlimaDeckeProduct = value; }
 		}
 
+		public P GetProduct<P>() where P: Product {
+			if (typeof(P) == typeof(EurovalProduct)) {
+				return this.EurovalProduct as P;
+			} else if (typeof(P) == typeof(HithermProduct)) {
+				return this.HithermProduct as P;
+			} else if (typeof(P) == typeof(HithermCompactProduct)) {
+				return this.HithermCompactProduct as P;
+			} else if (typeof(P) == typeof(ModulKlimaBodenProduct)) {
+				return this.ModulKlimaBodenProduct as P;
+			} else if (typeof(P) == typeof(ModulKlimaDeckeProduct)) {
+				return this.ModulKlimaDeckeProduct as P;
+			} else {
+				log.Warn("unknown product");
+			}
+			return null;
+		}
+
 		public void Reset() {
 			if (this.type == ConfigurationType.AdminConfiguration) {
 				adminTemplate = null;
