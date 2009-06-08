@@ -52,7 +52,7 @@ namespace Europlan.Common {
 		public int QuickDimensioningHeatPower {
 			get {
 				if (canHeat) {
-					return (int)QuickDimensioningPlannedArea * quickDimensioningHeatPowerPerSquareMeter;
+					return (int)(QuickDimensioningPlannedArea * quickDimensioningHeatPowerPerSquareMeter);
 				}
 				return 0; 
 			}
@@ -61,7 +61,7 @@ namespace Europlan.Common {
 		public int QuickDimensioningCoolPower {
 			get {
 				if (canCool) {
-					return (int)QuickDimensioningPlannedArea * quickDimensioningCoolPowerPerSquareMeter;
+					return (int)(QuickDimensioningPlannedArea * quickDimensioningCoolPowerPerSquareMeter);
 				}
 				return 0; 
 			}

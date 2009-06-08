@@ -356,6 +356,15 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void txtAllocation_ValueChanged(object sender, EventArgs e) {
+			float allocation = (float)this.txtAllocation.Value;
+			Project.Instance.QuickDimensioning.CeilingAllocation = allocation;
+		}
+
+		private void cmbDistance_SelectedIndexChanged(object sender, EventArgs e) {
+			Project.Instance.QuickDimensioning.LayDistance = (EurovalProduct.LayDistance)this.cmbDistance.SelectedIndex;
+		}
+
 		//private void txtAllocation_ValueChanged(object sender, EventArgs e) {
 		//    int percent = (int)this.txtAllocation.Value;
 		//    if (!(percent > 0) || !(percent <= 100)) {
