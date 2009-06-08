@@ -60,8 +60,13 @@ namespace Europlan.Common {
 				TabPage page = new TabPage(floor.Name);
 				page.UseVisualStyleBackColor = true;
 				QuickDimensioningFloorGrid grid = new QuickDimensioningFloorGrid();
-				grid.Floor = floor;
 				grid.Euroval = this.EurovalHeating;
+				grid.Hitherm = this.HithermHeating;
+				grid.HithermCompact = this.HithermCompactHeating;
+				grid.ModulKlimaBoden = this.ModulKlimaBodenHeating;
+				grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+				grid.Cooling = this.ModulKlimaDeckeCooling;
+				grid.Floor = floor;
 				page.Controls.Add(grid);
 				grid.Dock = DockStyle.Fill;
 				this.tabQuickDimensioning.TabPages.Add(page);
