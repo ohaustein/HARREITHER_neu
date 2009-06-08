@@ -210,8 +210,70 @@ namespace Europlan.Common {
 					string circuits = row.Cells[this.colEurovalCircuits.Index].Value as string;
 					product.QuickDimensioningCircuitsAsString = circuits;
 				} else if (e.ColumnIndex == this.colHitherm.Index) {
+					Product product = room.GetProductForQuickDimensioning<HithermProduct>();
+					object o = row.Cells[this.colHitherm.Index].Value;
+					if (o == null || (decimal)o == 0) {
+						if (product != null) {
+							room.UsedProductsForQuickDimensioning.Remove(product);
+						}
+						row.Cells[this.colHitherm.Index].Value = null;
+						row.Cells[this.colHithermCircuits.Index].Value = null;
+					} else {
+						if (product == null) {
+							log.Warn("Product for validated cell is null");
+							product = Project.Instance.Config.HithermProduct.Clone(room);
+						}
+						decimal area = (decimal)o;
+						bool setCircuits = (product.QuickDimensioningCircuits == product.GetDefaultQuickDimensioningCircuits());
+						product.QuickDimensioningPlannedArea = (float)area;
+						if (setCircuits) {
+							product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
+							row.Cells[this.colHithermCircuits.Index].Value = product.QuickDimensioningCircuitsAsString;
+						}
+					}
+
+					// check if heat- and coolload are covered
+					this.CheckLoadsCovered(row);
+
+					// check if planned area exceeds maximum area
+					if (product == null || product.QuickDimensioningPlannedArea <= product.QuickDimensioningMaximumArea) {
+						row.Cells[this.colHitherm.Index].ErrorText = null;
+					} else {
+						row.Cells[this.colHitherm.Index].ErrorText = "Die geplante Fläche ist größer als die maximal verfügbare Fläche";
+					}
 				} else if (e.ColumnIndex == this.colHithermCircuits.Index) {
 				} else if (e.ColumnIndex == this.colHithermCompact.Index) {
+					Product product = room.GetProductForQuickDimensioning<HithermCompactProduct>();
+					object o = row.Cells[this.colHithermCompact.Index].Value;
+					if (o == null || (decimal)o == 0) {
+						if (product != null) {
+							room.UsedProductsForQuickDimensioning.Remove(product);
+						}
+						row.Cells[this.colHithermCompact.Index].Value = null;
+						row.Cells[this.colHithermCompactCircuits.Index].Value = null;
+					} else {
+						if (product == null) {
+							log.Warn("Product for validated cell is null");
+							product = Project.Instance.Config.HithermCompactProduct.Clone(room);
+						}
+						decimal area = (decimal)o;
+						bool setCircuits = (product.QuickDimensioningCircuits == product.GetDefaultQuickDimensioningCircuits());
+						product.QuickDimensioningPlannedArea = (float)area;
+						if (setCircuits) {
+							product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
+							row.Cells[this.colHithermCircuits.Index].Value = product.QuickDimensioningCircuitsAsString;
+						}
+					}
+
+					// check if heat- and coolload are covered
+					this.CheckLoadsCovered(row);
+
+					// check if planned area exceeds maximum area
+					if (product == null || product.QuickDimensioningPlannedArea <= product.QuickDimensioningMaximumArea) {
+						row.Cells[this.colHitherm.Index].ErrorText = null;
+					} else {
+						row.Cells[this.colHitherm.Index].ErrorText = "Die geplante Fläche ist größer als die maximal verfügbare Fläche";
+					}
 				} else if (e.ColumnIndex == this.colHithermCompactCircuits.Index) {
 				} else if (e.ColumnIndex == this.colModulKlimaBoden.Index) {
 				} else if (e.ColumnIndex == this.colModulKlimaBodenCircuits.Index) {
@@ -243,6 +305,40 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void ValidateProductArea(int colAreaIndex, int colCircuitsIndex, Product product, Product productTemplate, DataGridViewRow row) {
+			Room room = row.DataBoundItem as Room;
+			object o = row.Cells[colAreaIndex].Value;
+			if (o == null || (decimal)o == 0) {
+				if (product != null) {
+					room.UsedProductsForQuickDimensioning.Remove(product);
+				}
+				row.Cells[colAreaIndex].Value = null;
+				row.Cells[colCircuitsIndex].Value = null;
+			} else {
+				if (product == null) {
+					log.Warn("Product for validated cell is null");
+					product = productTemplate.Clone(room);
+				}
+				decimal area = (decimal)o;
+				bool setCircuits = (product.QuickDimensioningCircuits == product.GetDefaultQuickDimensioningCircuits());
+				product.QuickDimensioningPlannedArea = (float)area;
+				if (setCircuits) {
+					product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
+					row.Cells[colCircuitsIndex].Value = product.QuickDimensioningCircuitsAsString;
+				}
+			}
+
+			// check if heat- and coolload are covered
+			this.CheckLoadsCovered(row);
+
+			// check if planned area exceeds maximum area
+			if (product == null || product.QuickDimensioningPlannedArea <= product.QuickDimensioningMaximumArea) {
+				row.Cells[colAreaIndex].ErrorText = null;
+			} else {
+				row.Cells[colAreaIndex].ErrorText = "Die geplante Fläche ist größer als die maximal verfügbare Fläche";
+			}
+		}
+
 		private void CheckLoadsCovered(DataGridViewRow row) {
 			Room room = row.DataBoundItem as Room;
 			if (room.QuickDimensioningHeatLoadCovered && (room.QuickDimensioningCoolLoadCovered || !this.Cooling)) {
@@ -263,11 +359,41 @@ namespace Europlan.Common {
 				DataGridViewRow row = this.dataGridView1.Rows[i];
 				Room room = row.DataBoundItem as Room;
 				if (room != null) {
+					// Euroval
 					EurovalProduct euroval = room.GetProductForQuickDimensioning<EurovalProduct>();
 					if (this.colEuroval.Visible && euroval != null) {
 						row.Cells[this.colEuroval.Index].Value = (decimal)euroval.QuickDimensioningPlannedArea;
-						row.Cells[this.colEurovalCircuits.Index].Value = euroval.QuickDimensioningCircuits;
+						row.Cells[this.colEurovalCircuits.Index].Value = euroval.QuickDimensioningCircuitsAsString;
 					}
+
+					// Hitherm
+					HithermProduct hitherm = room.GetProductForQuickDimensioning<HithermProduct>();
+					if (this.colHitherm.Visible && hitherm != null) {
+						row.Cells[this.colHitherm.Index].Value = (decimal)hitherm.QuickDimensioningPlannedArea;
+						row.Cells[this.colHithermCircuits.Index].Value = hitherm.QuickDimensioningCircuitsAsString;
+					}
+
+					// Hitherm Comact
+					HithermCompactProduct hithermCompact = room.GetProductForQuickDimensioning<HithermCompactProduct>();
+					if (this.colHithermCompact.Visible && hithermCompact != null) {
+						row.Cells[this.colHithermCompact.Index].Value = (decimal)hithermCompact.QuickDimensioningPlannedArea;
+						row.Cells[this.colHithermCompactCircuits.Index].Value = hithermCompact.QuickDimensioningCircuitsAsString;
+					}
+
+					// Module Klimaboden
+					ModulKlimaBodenProduct klimaBoden = room.GetProductForQuickDimensioning<ModulKlimaBodenProduct>();
+					if (this.colModulKlimaBoden.Visible && klimaBoden != null) {
+						row.Cells[this.colModulKlimaBoden.Index].Value = (decimal)klimaBoden.QuickDimensioningPlannedArea;
+						row.Cells[this.colModulKlimaBodenCircuits.Index].Value = klimaBoden.QuickDimensioningCircuitsAsString;
+					}
+
+					// Module Klimadecke
+					ModulKlimaDeckeProduct klimaDecke = room.GetProductForQuickDimensioning<ModulKlimaDeckeProduct>();
+					if (this.colModulKlimaDecke.Visible && klimaDecke != null) {
+						row.Cells[this.colModulKlimaDecke.Index].Value = (decimal)klimaDecke.QuickDimensioningPlannedArea;
+						row.Cells[this.colModulKlimaDeckeCircuits.Index].Value = klimaDecke.QuickDimensioningCircuitsAsString;
+					}
+
 					this.CheckLoadsCovered(row);
 				}
 			}
@@ -301,6 +427,50 @@ namespace Europlan.Common {
 					// get and set default circuits
 					product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
 					this.dataGridView1.Rows[e.RowIndex].Cells[this.colEurovalCircuits.Index].Value = product.QuickDimensioningCircuitsAsString;
+				} else if ((e.ColumnIndex == this.colHitherm.Index || e.ColumnIndex == this.colHithermCircuits.Index) && room.GetProductForQuickDimensioning<HithermProduct>() == null) {
+					// get new Hitherm Product
+					Product product = Project.Instance.Config.HithermProduct.Clone(room);
+
+					// get and set default area
+					product.QuickDimensioningPlannedArea = product.GetDefaultQuickDimensioningPlannedArea();
+					this.dataGridView1.Rows[e.RowIndex].Cells[this.colHitherm.Index].Value = (decimal)product.QuickDimensioningPlannedArea;
+
+					// get and set default circuits
+					product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
+					this.dataGridView1.Rows[e.RowIndex].Cells[this.colHithermCircuits.Index].Value = product.QuickDimensioningCircuitsAsString;
+				} else if ((e.ColumnIndex == this.colHithermCompact.Index || e.ColumnIndex == this.colHithermCompactCircuits.Index) && room.GetProductForQuickDimensioning<HithermCompactProduct>() == null) {
+					// get new Hitherm Compact Product
+					Product product = Project.Instance.Config.HithermCompactProduct.Clone(room);
+
+					// get and set default area
+					product.QuickDimensioningPlannedArea = product.GetDefaultQuickDimensioningPlannedArea();
+					this.dataGridView1.Rows[e.RowIndex].Cells[this.colHithermCompact.Index].Value = (decimal)product.QuickDimensioningPlannedArea;
+
+					// get and set default circuits
+					product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
+					this.dataGridView1.Rows[e.RowIndex].Cells[this.colHithermCompactCircuits.Index].Value = product.QuickDimensioningCircuitsAsString;
+				} else if ((e.ColumnIndex == this.colModulKlimaBoden.Index || e.ColumnIndex == this.colModulKlimaBodenCircuits.Index) && room.GetProductForQuickDimensioning<ModulKlimaBodenProduct>() == null) {
+					// get new Modul Klimaboden Product
+					Product product = Project.Instance.Config.ModulKlimaBodenProduct.Clone(room);
+
+					// get and set default area
+					product.QuickDimensioningPlannedArea = product.GetDefaultQuickDimensioningPlannedArea();
+					this.dataGridView1.Rows[e.RowIndex].Cells[this.colModulKlimaBoden.Index].Value = (decimal)product.QuickDimensioningPlannedArea;
+
+					// get and set default circuits
+					product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
+					this.dataGridView1.Rows[e.RowIndex].Cells[this.colModulKlimaBodenCircuits.Index].Value = product.QuickDimensioningCircuitsAsString;
+				} else if ((e.ColumnIndex == this.colModulKlimaDecke.Index || e.ColumnIndex == this.colModulKlimaDeckeCircuits.Index) && room.GetProductForQuickDimensioning<ModulKlimaDeckeProduct>() == null) {
+					// get new Modul Klimaboden Product
+					Product product = Project.Instance.Config.ModulKlimaDeckeProduct.Clone(room);
+
+					// get and set default area
+					product.QuickDimensioningPlannedArea = product.GetDefaultQuickDimensioningPlannedArea();
+					this.dataGridView1.Rows[e.RowIndex].Cells[this.colModulKlimaDecke.Index].Value = (decimal)product.QuickDimensioningPlannedArea;
+
+					// get and set default circuits
+					product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
+					this.dataGridView1.Rows[e.RowIndex].Cells[this.colModulKlimaDeckeCircuits.Index].Value = product.QuickDimensioningCircuitsAsString;
 				}
 			}
 		}
