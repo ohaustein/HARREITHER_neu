@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace Europlan.Common {
 	public partial class QuickDimensioningPanel : UserControl, IEditorUserControl {
@@ -28,6 +29,20 @@ namespace Europlan.Common {
 			this.cbModulKlimaBodenHeat.Checked = ((Project.Instance.QuickDimensioning.ModulBodenCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
 			this.cbModulKlimaDeckeHeat.Checked = ((Project.Instance.QuickDimensioning.ModulDeckeCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
 			this.cbModulKlimaDeckeCool.Checked = ((Project.Instance.QuickDimensioning.ModulDeckeCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
+
+			this.lblTemp1.Visible = this.EurovalHeating;
+			this.txtTemperature.Visible = this.EurovalHeating;
+			this.lblTemp2.Visible = this.EurovalHeating;
+			this.cmbDistance.Visible = this.EurovalHeating;
+			this.lblDistance.Visible = this.EurovalHeating;
+
+			this.lblAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.txtAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+
+			this.txtTemperature.Text = Project.Instance.QuickDimensioning.FlowTemperature.ToString();
+			this.cmbDistance.SelectedIndex = (int)Project.Instance.QuickDimensioning.LayDistance;
+			this.txtAllocation.Text = Project.Instance.QuickDimensioning.CeilingAllocation.ToString();
 
 			this.grids.Clear();
 
@@ -120,6 +135,11 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			this.lblTemp1.Visible = this.EurovalHeating;
+			this.txtTemperature.Visible = this.EurovalHeating;
+			this.lblTemp2.Visible = this.EurovalHeating;
+			this.cmbDistance.Visible = this.EurovalHeating;
+			this.lblDistance.Visible = this.EurovalHeating;
 			Project.Instance.QuickDimensioning.EurovalCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
 		}
 
@@ -260,6 +280,9 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			this.lblAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.txtAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) & (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
@@ -296,7 +319,51 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			this.lblAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.txtAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) & (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
+
+		//private void txtAllocation_Validating(object sender, CancelEventArgs e) {
+		//    float percent = 0;
+		//    if (float.TryParse(txtAllocation.Text, out percent)) {
+		//        if (!(percent >= 0) || !(percent <= 100)) {
+		//            DialogResult result = MessageBox.Show("Der Belegefaktor muss zwischen 1% und 100% liegen.\nDrücken Sie Ja, um den Belegefaktor zu korrigieren oder\nNein, um den Standardwert einzutragen", "Ungültiger Belegefaktor", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+		//            if (result.Equals(DialogResult.Yes)) {
+		//                e.Cancel = true;
+		//            } else {
+		//                txtAllocation.Text = "100";
+		//            }
+		//        }
+		//    } else {
+		//        e.Cancel = true;
+		//    }
+		//}
+
+
+		private void txtTemperature_ValueChanged(object sender, EventArgs e) {
+			float temperature = (float)this.txtTemperature.Value;
+			Project.Instance.QuickDimensioning.FlowTemperature = temperature;
+			if (temperature <= 31.25) {
+				this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV5;
+			} else if (temperature > 31.25 && temperature <= 33.75) {
+				this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV15;
+			} else if (temperature > 33.75 && temperature <= 36.25) {
+				this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV20;
+			} else if (temperature > 36.25) {
+				this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV25;
+			}
+		}
+
+		//private void txtAllocation_ValueChanged(object sender, EventArgs e) {
+		//    int percent = (int)this.txtAllocation.Value;
+		//    if (!(percent > 0) || !(percent <= 100)) {
+		//        DialogResult result = MessageBox.Show("Der Belegefaktor muss zwischen 1% und 100% liegen.\nDrücken Sie Ja, um den Belegefaktor zu korrigieren oder\nNein, um den Standardwert einzutragen", "Ungültiger Belegefaktor", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+		//        if (result.Equals(DialogResult.No)) {
+		//            txtAllocation.Value = 80;
+		//        } 
+		//    }
+		//}
 	}
 }
