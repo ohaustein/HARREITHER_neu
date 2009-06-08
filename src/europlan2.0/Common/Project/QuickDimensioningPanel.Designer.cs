@@ -23,9 +23,10 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.components = new System.ComponentModel.Container();
 			this.tabQuickDimensioning = new System.Windows.Forms.TabControl();
 			this.pageSettings = new System.Windows.Forms.TabPage();
+			this.txtAllocation = new Europlan.Common.NumericBox();
+			this.txtTemperature = new Europlan.Common.NumericBox();
 			this.lblAllocation2 = new System.Windows.Forms.Label();
 			this.lblAllocation = new System.Windows.Forms.Label();
 			this.lblDistance = new System.Windows.Forms.Label();
@@ -53,9 +54,6 @@ namespace Europlan.Common {
 			this.cbModulKlimaDeckeCool = new System.Windows.Forms.CheckBox();
 			this.lblModulKlimaDecke = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
-			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.txtAllocation = new Europlan.Common.NumericBox();
-			this.txtTemperature = new Europlan.Common.NumericBox();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -93,6 +91,45 @@ namespace Europlan.Common {
 			this.pageSettings.Text = "Einstellungen";
 			this.pageSettings.UseVisualStyleBackColor = true;
 			// 
+			// txtAllocation
+			// 
+			this.txtAllocation.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
+			this.txtAllocation.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtAllocation.Location = new System.Drawing.Point(391, 187);
+			this.txtAllocation.Name = "txtAllocation";
+			this.txtAllocation.Size = new System.Drawing.Size(56, 20);
+			this.txtAllocation.TabIndex = 25;
+			this.txtAllocation.Text = "0";
+			this.txtAllocation.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			// 
+			// txtTemperature
+			// 
+			this.txtTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
+			this.txtTemperature.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtTemperature.Location = new System.Drawing.Point(412, 96);
+			this.txtTemperature.Name = "txtTemperature";
+			this.txtTemperature.Size = new System.Drawing.Size(56, 20);
+			this.txtTemperature.TabIndex = 24;
+			this.txtTemperature.Text = "0";
+			this.txtTemperature.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtTemperature.ValueChanged += new System.EventHandler(this.txtTemperature_ValueChanged);
+			// 
 			// lblAllocation2
 			// 
 			this.lblAllocation2.AutoSize = true;
@@ -114,7 +151,7 @@ namespace Europlan.Common {
 			// lblDistance
 			// 
 			this.lblDistance.AutoSize = true;
-			this.lblDistance.Location = new System.Drawing.Point(572, 98);
+			this.lblDistance.Location = new System.Drawing.Point(530, 99);
 			this.lblDistance.Name = "lblDistance";
 			this.lblDistance.Size = new System.Drawing.Size(81, 13);
 			this.lblDistance.TabIndex = 19;
@@ -131,7 +168,7 @@ namespace Europlan.Common {
             "EV25",
             "EV30",
             "EV35"});
-			this.cmbDistance.Location = new System.Drawing.Point(483, 96);
+			this.cmbDistance.Location = new System.Drawing.Point(617, 96);
 			this.cmbDistance.Name = "cmbDistance";
 			this.cmbDistance.Size = new System.Drawing.Size(83, 21);
 			this.cmbDistance.TabIndex = 5;
@@ -139,12 +176,11 @@ namespace Europlan.Common {
 			// lblTemp2
 			// 
 			this.lblTemp2.AutoSize = true;
-			this.lblTemp2.Location = new System.Drawing.Point(407, 98);
+			this.lblTemp2.Location = new System.Drawing.Point(474, 98);
 			this.lblTemp2.Name = "lblTemp2";
 			this.lblTemp2.Size = new System.Drawing.Size(40, 13);
 			this.lblTemp2.TabIndex = 3;
 			this.lblTemp2.Text = "°C (Tv)";
-			this.toolTip.SetToolTip(this.lblTemp2, "Vorlauftemperatur");
 			// 
 			// label2
 			// 
@@ -160,11 +196,10 @@ namespace Europlan.Common {
 			// 
 			this.lblTemp1.Location = new System.Drawing.Point(315, 94);
 			this.lblTemp1.Name = "lblTemp1";
-			this.lblTemp1.Size = new System.Drawing.Size(24, 20);
+			this.lblTemp1.Size = new System.Drawing.Size(93, 20);
 			this.lblTemp1.TabIndex = 23;
-			this.lblTemp1.Text = "Tv";
+			this.lblTemp1.Text = "Vorlauftemperatur";
 			this.lblTemp1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.toolTip.SetToolTip(this.lblTemp1, "Vorlauftemperatur");
 			// 
 			// label1
 			// 
@@ -256,6 +291,7 @@ namespace Europlan.Common {
 			// 
 			this.lblHeat.BackColor = System.Drawing.Color.Transparent;
 			this.lblHeat.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblHeat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblHeat.Location = new System.Drawing.Point(123, 3);
 			this.lblHeat.Margin = new System.Windows.Forms.Padding(3);
 			this.lblHeat.Name = "lblHeat";
@@ -268,6 +304,7 @@ namespace Europlan.Common {
 			// 
 			this.lblCool.BackColor = System.Drawing.Color.Transparent;
 			this.lblCool.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblCool.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblCool.Location = new System.Drawing.Point(188, 3);
 			this.lblCool.Margin = new System.Windows.Forms.Padding(3);
 			this.lblCool.Name = "lblCool";
@@ -447,6 +484,7 @@ namespace Europlan.Common {
 			// label4
 			// 
 			this.label4.BackColor = System.Drawing.Color.Transparent;
+			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label4.Location = new System.Drawing.Point(315, 74);
 			this.label4.Margin = new System.Windows.Forms.Padding(3);
 			this.label4.Name = "label4";
@@ -454,45 +492,6 @@ namespace Europlan.Common {
 			this.label4.TabIndex = 18;
 			this.label4.Text = "Annahmen";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// txtAllocation
-			// 
-			this.txtAllocation.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
-			this.txtAllocation.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtAllocation.Location = new System.Drawing.Point(391, 187);
-			this.txtAllocation.Name = "txtAllocation";
-			this.txtAllocation.Size = new System.Drawing.Size(56, 20);
-			this.txtAllocation.TabIndex = 25;
-			this.txtAllocation.Text = "0";
-			this.txtAllocation.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			// 
-			// txtTemperature
-			// 
-			this.txtTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
-			this.txtTemperature.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtTemperature.Location = new System.Drawing.Point(345, 96);
-			this.txtTemperature.Name = "txtTemperature";
-			this.txtTemperature.Size = new System.Drawing.Size(56, 20);
-			this.txtTemperature.TabIndex = 24;
-			this.txtTemperature.Text = "0";
-			this.txtTemperature.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtTemperature.ValueChanged += new System.EventHandler(this.txtTemperature_ValueChanged);
 			// 
 			// QuickDimensioningPanel
 			// 
@@ -534,7 +533,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label lblTemp2;
-		private System.Windows.Forms.ToolTip toolTip;
 		private System.Windows.Forms.ComboBox cmbDistance;
 		private System.Windows.Forms.Label lblDistance;
 		private System.Windows.Forms.Label label4;
