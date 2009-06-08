@@ -18,13 +18,15 @@ namespace Europlan.Common {
 			LAMBDA_VALUE = 7,
 			R_VALUE = 8,
 			DENOMINATION = 9,
-			PRICE = 10
+			PRICE = 10,
+			FLOW_TEMPERATUR = 11,
+			PERCENTAGE = 12
 		}
-		                                                                              //  DEF  RCTMP           AREA  TEMP             HPW             CPW,   CONSTR_THICK,         LAMBDA,              R,   DENOMINATION,          PRICE
-		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] { null,    0,              0,    0,              0,              0,              0,              0,              0,              0,              0 };
-		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] { null,   99, Int32.MaxValue,   99, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue };
-		private static readonly int[] decimalPlaces = new int[]                        {    0,    0,              1,    0,              0,              0,              2,              3,              3,              0,              2 };
-		private static readonly string[] masks = new string[]                          {  "0", "90",     "999990.9", "90",      "9999990",      "9999990",    "999990.99",   "999990.999",   "999990.999",       "999990",    "999990.99" };
+		                                                                              //  DEF  RCTMP       AREA  TEMP             HPW             CPW  CONSTR_THICK        LAMBDA             R,   DENOMINATION        PRICE    FLOW_TEMP   PERC
+		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] { null,    0,          0,    0,              0,              0,            0,            0,            0,              0,           0,           0,     0 };
+		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] { null,   99,       null,   99, Int32.MaxValue, Int32.MaxValue,         null,         null,         null, Int32.MaxValue,        null,        null,   100 };
+		private static readonly int[] decimalPlaces = new int[]                        {    0,    0,          1,    0,              0,              0,            2,            3,            3,              0,           2,           1,     0 };
+		private static readonly string[] masks = new string[]                          {  "0", "90", "999990.9", "90",      "9999990",      "9999990",  "999990.99", "999990.999", "999990.999",       "999990", "999990.99", "999990.99", "990" };
 
 		private NumericBox.NumericEditType editType = NumericBox.NumericEditType.DEFAULT;
 		public event EventHandler ValueChanged;
