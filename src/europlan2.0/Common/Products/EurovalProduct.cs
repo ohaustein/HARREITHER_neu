@@ -39,7 +39,32 @@ namespace Europlan.Common {
 		public override int GetDefaultQuickDimensioningCircuits() {
 			// TODO
 			// vorlauftemperatur und verlegeabstand berücksichtigen
-			return (int)Math.Ceiling(quickDimensioningPlannedArea / 15);
+			LayDistance distance = Project.Instance.QuickDimensioning.LayDistance;
+			double factor = 0;
+			switch (distance) {
+				case LayDistance.EV5:
+					factor = 10;
+					break;
+				case LayDistance.EV10:
+					factor = 7.5;
+					break;
+				case LayDistance.EV15:
+					factor = 6.7;
+					break;
+				case LayDistance.EV20:
+					factor = 5;
+					break;
+				case LayDistance.EV25:
+					factor = 4;
+					break;
+				case LayDistance.EV30:
+					factor = 3.5;
+					break;
+				case LayDistance.EV35:
+					factor = 3;
+					break;
+			}
+			return (int)Math.Ceiling(quickDimensioningPlannedArea / factor);
 		}
 
 		public override float GetDefaultQuickDimensioningPlannedArea() {

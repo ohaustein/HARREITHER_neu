@@ -33,7 +33,7 @@ namespace Europlan.Common {
 
 		public override float GetDefaultQuickDimensioningPlannedArea() {
 			if (this.AssociatedRoom != null) {
-				return this.AssociatedRoom.Area;
+				return this.AssociatedRoom.Area * Project.Instance.QuickDimensioning.CeilingAllocation / 100;
 			}
 			return 0;
 		}
