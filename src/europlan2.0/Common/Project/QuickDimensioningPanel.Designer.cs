@@ -25,8 +25,6 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.tabQuickDimensioning = new System.Windows.Forms.TabControl();
 			this.pageSettings = new System.Windows.Forms.TabPage();
-			this.txtAllocation = new Europlan.Common.NumericBox();
-			this.txtTemperature = new Europlan.Common.NumericBox();
 			this.lblAllocation2 = new System.Windows.Forms.Label();
 			this.lblAllocation = new System.Windows.Forms.Label();
 			this.lblDistance = new System.Windows.Forms.Label();
@@ -54,6 +52,8 @@ namespace Europlan.Common {
 			this.cbModulKlimaDeckeCool = new System.Windows.Forms.CheckBox();
 			this.lblModulKlimaDecke = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
+			this.txtAllocation = new Europlan.Common.NumericBox();
+			this.txtTemperature = new Europlan.Common.NumericBox();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -90,45 +90,6 @@ namespace Europlan.Common {
 			this.pageSettings.TabIndex = 0;
 			this.pageSettings.Text = "Einstellungen";
 			this.pageSettings.UseVisualStyleBackColor = true;
-			// 
-			// txtAllocation
-			// 
-			this.txtAllocation.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
-			this.txtAllocation.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtAllocation.Location = new System.Drawing.Point(391, 187);
-			this.txtAllocation.Name = "txtAllocation";
-			this.txtAllocation.Size = new System.Drawing.Size(56, 20);
-			this.txtAllocation.TabIndex = 25;
-			this.txtAllocation.Text = "0";
-			this.txtAllocation.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			// 
-			// txtTemperature
-			// 
-			this.txtTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
-			this.txtTemperature.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtTemperature.Location = new System.Drawing.Point(412, 96);
-			this.txtTemperature.Name = "txtTemperature";
-			this.txtTemperature.Size = new System.Drawing.Size(56, 20);
-			this.txtTemperature.TabIndex = 24;
-			this.txtTemperature.Text = "0";
-			this.txtTemperature.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtTemperature.ValueChanged += new System.EventHandler(this.txtTemperature_ValueChanged);
 			// 
 			// lblAllocation2
 			// 
@@ -172,6 +133,7 @@ namespace Europlan.Common {
 			this.cmbDistance.Name = "cmbDistance";
 			this.cmbDistance.Size = new System.Drawing.Size(83, 21);
 			this.cmbDistance.TabIndex = 5;
+			this.cmbDistance.SelectedIndexChanged += new System.EventHandler(this.cmbDistance_SelectedIndexChanged);
 			// 
 			// lblTemp2
 			// 
@@ -492,6 +454,46 @@ namespace Europlan.Common {
 			this.label4.TabIndex = 18;
 			this.label4.Text = "Annahmen";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// txtAllocation
+			// 
+			this.txtAllocation.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
+			this.txtAllocation.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtAllocation.Location = new System.Drawing.Point(391, 187);
+			this.txtAllocation.Name = "txtAllocation";
+			this.txtAllocation.Size = new System.Drawing.Size(56, 20);
+			this.txtAllocation.TabIndex = 25;
+			this.txtAllocation.Text = "0";
+			this.txtAllocation.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtAllocation.ValueChanged += new System.EventHandler(this.txtAllocation_ValueChanged);
+			// 
+			// txtTemperature
+			// 
+			this.txtTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
+			this.txtTemperature.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtTemperature.Location = new System.Drawing.Point(412, 96);
+			this.txtTemperature.Name = "txtTemperature";
+			this.txtTemperature.Size = new System.Drawing.Size(56, 20);
+			this.txtTemperature.TabIndex = 24;
+			this.txtTemperature.Text = "0";
+			this.txtTemperature.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtTemperature.ValueChanged += new System.EventHandler(this.txtTemperature_ValueChanged);
 			// 
 			// QuickDimensioningPanel
 			// 
