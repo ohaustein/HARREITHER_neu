@@ -19,7 +19,7 @@ namespace Europlan.Common {
 			R_VALUE = 8,
 			DENOMINATION = 9,
 			PRICE = 10,
-			FLOW_TEMPERATUR = 11,
+			FLOW_TEMPERATURE = 11,
 			PERCENTAGE = 12
 		}
 		                                                                              //  DEF  RCTMP       AREA  TEMP             HPW             CPW  CONSTR_THICK        LAMBDA             R,   DENOMINATION        PRICE    FLOW_TEMP   PERC
