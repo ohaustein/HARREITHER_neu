@@ -80,6 +80,8 @@ namespace Europlan.Common {
 				this.tabQuickDimensioning.TabPages.Add(page);
 				this.grids.Add(floor, grid);
 			}
+
+			this.tabQuickDimensioning.TabPages.Add(pageSummary);
 		}
 
 		public bool AllowLeave() {
