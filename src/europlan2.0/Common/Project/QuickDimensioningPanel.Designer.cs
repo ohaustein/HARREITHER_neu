@@ -57,10 +57,10 @@ namespace Europlan.Common {
 			this.cbBkaCool = new System.Windows.Forms.CheckBox();
 			this.lblTemp4 = new System.Windows.Forms.Label();
 			this.lblTemp3 = new System.Windows.Forms.Label();
+			this.pageSummary = new System.Windows.Forms.TabPage();
 			this.txtCoolTemperature = new Europlan.Common.NumericBox();
 			this.txtAllocation = new Europlan.Common.NumericBox();
 			this.txtHeatTemperature = new Europlan.Common.NumericBox();
-			this.pageSummary = new System.Windows.Forms.TabPage();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -175,11 +175,13 @@ namespace Europlan.Common {
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label1.Location = new System.Drawing.Point(7, 7);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(187, 24);
+			this.label1.Size = new System.Drawing.Size(873, 29);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Flächenaufstellung";
 			// 
@@ -528,6 +530,16 @@ namespace Europlan.Common {
 			this.lblTemp3.TabIndex = 27;
 			this.lblTemp3.Text = "Vorlauftemperatur\r\n(Kühlen)";
 			// 
+			// pageSummary
+			// 
+			this.pageSummary.Location = new System.Drawing.Point(4, 22);
+			this.pageSummary.Name = "pageSummary";
+			this.pageSummary.Padding = new System.Windows.Forms.Padding(3);
+			this.pageSummary.Size = new System.Drawing.Size(886, 405);
+			this.pageSummary.TabIndex = 1;
+			this.pageSummary.Text = "Ergebnis Flächenaufstellung";
+			this.pageSummary.UseVisualStyleBackColor = true;
+			// 
 			// txtCoolTemperature
 			// 
 			this.txtCoolTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
@@ -587,16 +599,6 @@ namespace Europlan.Common {
             0,
             0});
 			this.txtHeatTemperature.ValueChanged += new System.EventHandler(this.txtTemperature_ValueChanged);
-			// 
-			// pageSummary
-			// 
-			this.pageSummary.Location = new System.Drawing.Point(4, 22);
-			this.pageSummary.Name = "pageSummary";
-			this.pageSummary.Padding = new System.Windows.Forms.Padding(3);
-			this.pageSummary.Size = new System.Drawing.Size(886, 405);
-			this.pageSummary.TabIndex = 1;
-			this.pageSummary.Text = "Ergebnis Flächenaufstellung";
-			this.pageSummary.UseVisualStyleBackColor = true;
 			// 
 			// QuickDimensioningPanel
 			// 
