@@ -499,7 +499,7 @@ namespace Europlan.Common {
 			if (selectedRoomType != null) {
 				Console.WriteLine(selectedRoomType.Name);
 				if (selectedRoomType.Value == this.newRoomType) {
-					NewRoomTypeForm form = new NewRoomTypeForm();
+					NewRoomTypeForm form = new NewRoomTypeForm(Project.Instance.Config);
 					form.SelectedRoomType = selectedRoomType.Value;
 					form.ShowDialog();
 					(sender as DataGridViewComboBoxEditingControl).SelectedValueChanged -= new EventHandler(combo_SelectedValueChanged);
