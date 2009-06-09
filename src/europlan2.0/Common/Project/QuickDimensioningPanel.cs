@@ -68,7 +68,7 @@ namespace Europlan.Common {
 				grid.HithermCompact = this.HithermCompactHeating;
 				grid.ModulKlimaBoden = this.ModulKlimaBodenHeating;
 				grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
-				grid.Cooling = this.ModulKlimaDeckeCooling;
+				grid.Cooling = this.ModulKlimaDeckeCooling || this.ConcreteActivationCooling;
 				grid.Floor = floor;
 				page.Controls.Add(grid);
 				grid.Dock = DockStyle.Fill;
@@ -222,6 +222,7 @@ namespace Europlan.Common {
 			} else {
 				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
 					grid.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
+					grid.Cooling = this.ModulKlimaDeckeCooling | this.ConcreteActivationCooling;
 				}
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
@@ -401,7 +402,7 @@ namespace Europlan.Common {
 			} else {
 				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
 					grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
-					grid.Cooling = this.ModulKlimaDeckeCooling;
+					grid.Cooling = this.ModulKlimaDeckeCooling | this.ConcreteActivationCooling;
 				}
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
