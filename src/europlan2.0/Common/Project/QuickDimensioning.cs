@@ -20,7 +20,8 @@ namespace Europlan.Common {
 		private ProductCheckState hithermCompactCheckState = ProductCheckState.None;
 		private ProductCheckState modulBodenCheckState = ProductCheckState.None;
 		private ProductCheckState modulDeckeCheckState = ProductCheckState.None;
-		private float flowTemperature = 35;
+		private float heatFlowTemperature = 35;
+		private float coolFlowTemperature = 16;
 		private Europlan.Common.EurovalProduct.LayDistance layDistance = Europlan.Common.EurovalProduct.LayDistance.EV20;
 		private float ceilingAllocation = 80;
 
@@ -73,9 +74,14 @@ namespace Europlan.Common {
 			set { modulDeckeCheckState = value; }
 		}
 
-		public float FlowTemperature {
-			get { return flowTemperature; }
-			set { flowTemperature = value; }
+		public float HeatFlowTemperature {
+			get { return heatFlowTemperature; }
+			set { heatFlowTemperature = value; }
+		}
+
+		public float CoolFlowTemperature {
+			get { return coolFlowTemperature; }
+			set { coolFlowTemperature = value; }
 		}
 
 		public Europlan.Common.EurovalProduct.LayDistance LayDistance {
