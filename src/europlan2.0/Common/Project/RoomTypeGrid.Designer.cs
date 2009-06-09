@@ -24,13 +24,15 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridRoomTypes = new System.Windows.Forms.DataGridView();
+			this.roomTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.userDefinedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.roomTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridRoomTypes)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.roomTypeBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -54,6 +56,10 @@ namespace Europlan.Common {
 			this.gridRoomTypes.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridRoomTypes_UserDeletingRow);
 			this.gridRoomTypes.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridRoomTypes_RowsAdded);
 			// 
+			// roomTypeBindingSource
+			// 
+			this.roomTypeBindingSource.DataSource = typeof(Europlan.Common.RoomType);
+			// 
 			// idDataGridViewTextBoxColumn
 			// 
 			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
@@ -71,14 +77,26 @@ namespace Europlan.Common {
 			// heatLoadPerSquareMeterDataGridViewTextBoxColumn
 			// 
 			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn.DataPropertyName = "HeatLoadPerSquareMeter";
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle1.Format = "F0";
+			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
 			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn.HeaderText = "Heizlast (W/m²)";
 			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn.Name = "heatLoadPerSquareMeterDataGridViewTextBoxColumn";
+			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			// 
 			// coolLoadPerSquareMeterDataGridViewTextBoxColumn
 			// 
 			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn.DataPropertyName = "CoolLoadPerSquareMeter";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle2.Format = "F0";
+			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
 			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn.HeaderText = "Kühllast (W/m²)";
 			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn.Name = "coolLoadPerSquareMeterDataGridViewTextBoxColumn";
+			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
+			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			// 
 			// userDefinedDataGridViewCheckBoxColumn
 			// 
@@ -86,10 +104,6 @@ namespace Europlan.Common {
 			this.userDefinedDataGridViewCheckBoxColumn.HeaderText = "UserDefined";
 			this.userDefinedDataGridViewCheckBoxColumn.Name = "userDefinedDataGridViewCheckBoxColumn";
 			this.userDefinedDataGridViewCheckBoxColumn.Visible = false;
-			// 
-			// roomTypeBindingSource
-			// 
-			this.roomTypeBindingSource.DataSource = typeof(Europlan.Common.RoomType);
 			// 
 			// RoomTypeGrid
 			// 
@@ -107,11 +121,11 @@ namespace Europlan.Common {
 		#endregion
 
 		private System.Windows.Forms.DataGridView gridRoomTypes;
+		private System.Windows.Forms.BindingSource roomTypeBindingSource;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn heatLoadPerSquareMeterDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn coolLoadPerSquareMeterDataGridViewTextBoxColumn;
+		private NumericColumn heatLoadPerSquareMeterDataGridViewTextBoxColumn;
+		private NumericColumn coolLoadPerSquareMeterDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn userDefinedDataGridViewCheckBoxColumn;
-		private System.Windows.Forms.BindingSource roomTypeBindingSource;
 	}
 }
