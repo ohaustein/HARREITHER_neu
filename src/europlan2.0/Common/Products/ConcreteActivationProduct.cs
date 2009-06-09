@@ -21,6 +21,12 @@ namespace Europlan.Common {
 			canCool = true;
 		}
 
+		public override Product Clone(Room room) {
+			ConcreteActivationProduct product = new ConcreteActivationProduct(this);
+			product.AssociatedRoom = room;
+			return product;
+		}
+
 	}
 	
 }
