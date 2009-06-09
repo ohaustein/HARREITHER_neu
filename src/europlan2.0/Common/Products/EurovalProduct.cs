@@ -37,8 +37,6 @@ namespace Europlan.Common {
 		}
 
 		public override int GetDefaultQuickDimensioningCircuits() {
-			// TODO
-			// vorlauftemperatur und verlegeabstand berücksichtigen
 			LayDistance distance = Project.Instance.QuickDimensioning.LayDistance;
 			double factor = 0;
 			switch (distance) {
