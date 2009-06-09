@@ -64,6 +64,11 @@ namespace Europlan.Common {
 			}
 
 			foreach (Floor floor in Project.Instance.Floors) {
+				foreach (Room room in floor.Rooms) {
+					if (!room.QuickDimensioningInitialized) {
+						room.InitializeQuickDimensioning();
+					}
+				}
 				TabPage page = new TabPage(floor.Name);
 				page.UseVisualStyleBackColor = true;
 				QuickDimensioningFloorGrid grid = new QuickDimensioningFloorGrid();
