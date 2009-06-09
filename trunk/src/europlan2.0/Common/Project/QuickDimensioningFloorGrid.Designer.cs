@@ -36,6 +36,7 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.roomBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.panel1 = new System.Windows.Forms.Panel();
@@ -54,6 +55,8 @@ namespace Europlan.Common {
 			this.colCoolLoad = new Europlan.Common.NumericColumn();
 			this.colEuroval = new Europlan.Common.NumericColumn();
 			this.colEurovalCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colConcreteActivation = new Europlan.Common.NumericColumn();
+			this.colConcreteActivationCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colHitherm = new Europlan.Common.NumericColumn();
 			this.colHithermCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colHithermCompact = new Europlan.Common.NumericColumn();
@@ -95,6 +98,8 @@ namespace Europlan.Common {
             this.colCoolLoad,
             this.colEuroval,
             this.colEurovalCircuits,
+            this.colConcreteActivation,
+            this.colConcreteActivationCircuits,
             this.colHitherm,
             this.colHithermCircuits,
             this.colHithermCompact,
@@ -274,11 +279,33 @@ namespace Europlan.Common {
 			this.colEurovalCircuits.Visible = false;
 			this.colEurovalCircuits.Width = 70;
 			// 
-			// colHitherm
+			// colConcreteActivation
 			// 
 			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle8.Format = "F0";
-			this.colHitherm.DefaultCellStyle = dataGridViewCellStyle8;
+			this.colConcreteActivation.DefaultCellStyle = dataGridViewCellStyle8;
+			this.colConcreteActivation.FillWeight = 70F;
+			this.colConcreteActivation.HeaderText = "Betonkernaktivierung";
+			this.colConcreteActivation.Name = "colConcreteActivation";
+			this.colConcreteActivation.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.colConcreteActivation.Visible = false;
+			this.colConcreteActivation.Width = 70;
+			// 
+			// colConcreteActivationCircuits
+			// 
+			this.colConcreteActivationCircuits.FillWeight = 70F;
+			this.colConcreteActivationCircuits.HeaderText = "Betonkernaktivierung Heizkreise";
+			this.colConcreteActivationCircuits.Name = "colConcreteActivationCircuits";
+			this.colConcreteActivationCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colConcreteActivationCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colConcreteActivationCircuits.Visible = false;
+			this.colConcreteActivationCircuits.Width = 70;
+			// 
+			// colHitherm
+			// 
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle9.Format = "F0";
+			this.colHitherm.DefaultCellStyle = dataGridViewCellStyle9;
 			this.colHitherm.FillWeight = 70F;
 			this.colHitherm.HeaderText = "Hitherm\n(m²)";
 			this.colHitherm.Name = "colHitherm";
@@ -300,9 +327,9 @@ namespace Europlan.Common {
 			// 
 			// colHithermCompact
 			// 
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle9.Format = "F0";
-			this.colHithermCompact.DefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle10.Format = "F0";
+			this.colHithermCompact.DefaultCellStyle = dataGridViewCellStyle10;
 			this.colHithermCompact.FillWeight = 70F;
 			this.colHithermCompact.HeaderText = "Hitherm Co\n(m²)";
 			this.colHithermCompact.Name = "colHithermCompact";
@@ -322,9 +349,9 @@ namespace Europlan.Common {
 			// 
 			// colModulKlimaBoden
 			// 
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle10.Format = "F0";
-			this.colModulKlimaBoden.DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle11.Format = "F0";
+			this.colModulKlimaBoden.DefaultCellStyle = dataGridViewCellStyle11;
 			this.colModulKlimaBoden.FillWeight = 70F;
 			this.colModulKlimaBoden.HeaderText = "Klimaboden\n(m²)";
 			this.colModulKlimaBoden.Name = "colModulKlimaBoden";
@@ -344,9 +371,9 @@ namespace Europlan.Common {
 			// 
 			// colModulKlimaDecke
 			// 
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle11.Format = "F0";
-			this.colModulKlimaDecke.DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle12.Format = "F0";
+			this.colModulKlimaDecke.DefaultCellStyle = dataGridViewCellStyle12;
 			this.colModulKlimaDecke.FillWeight = 70F;
 			this.colModulKlimaDecke.HeaderText = "Klimadecke\n(m²)";
 			this.colModulKlimaDecke.Name = "colModulKlimaDecke";
@@ -367,8 +394,8 @@ namespace Europlan.Common {
 			// colNrOfServos
 			// 
 			this.colNrOfServos.DataPropertyName = "QuickDimensioningNrOfServos";
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.colNrOfServos.DefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.colNrOfServos.DefaultCellStyle = dataGridViewCellStyle13;
 			this.colNrOfServos.FillWeight = 50F;
 			this.colNrOfServos.HeaderText = "Stell-\nmotore";
 			this.colNrOfServos.Name = "colNrOfServos";
@@ -433,6 +460,8 @@ namespace Europlan.Common {
 		private NumericColumn colCoolLoad;
 		private NumericColumn colEuroval;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colEurovalCircuits;
+		private NumericColumn colConcreteActivation;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colConcreteActivationCircuits;
 		private NumericColumn colHitherm;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colHithermCircuits;
 		private NumericColumn colHithermCompact;
