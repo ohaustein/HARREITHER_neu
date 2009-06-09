@@ -99,6 +99,12 @@ namespace Europlan.Common {
 			}
 		}
 
+		public bool ConcreteActivation {
+			// TODO !!!
+			get { return false; }
+			set { ; }
+		}
+
 		public bool Hitherm {
 			get { return this.colHitherm.Visible; }
 			set { this.SetProductAvailable<HithermProduct>(value); }
