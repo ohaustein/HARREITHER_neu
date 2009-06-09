@@ -474,6 +474,39 @@ namespace Europlan.Common {
 			Project.Instance.QuickDimensioning.LayDistance = (EurovalProduct.LayDistance)this.cmbDistance.SelectedIndex;
 		}
 
+		private void tabQuickDimensioning_Selecting(object sender, TabControlCancelEventArgs e) {
+			if (e.TabPage == this.pageSummary) {
+				this.colEurovalArea.Visible = this.EurovalHeating;
+				this.colEurovalCircuits.Visible = this.EurovalHeating;
+				this.colConcreteActivationArea.Visible = this.ConcreteActivationHeating | this.ConcreteActivationCooling;
+				this.colConcreteActivationCircuits.Visible = this.ConcreteActivationHeating | this.ConcreteActivationCooling;
+				this.colHithermArea.Visible = this.HithermHeating;
+				this.colHithermCircuits.Visible = this.HithermHeating;
+				this.colHithermCompactArea.Visible = this.HithermCompactHeating;
+				this.colHithermCompactCircuits.Visible = this.HithermCompactHeating;
+				this.colModulKlimaBodenArea.Visible = this.ModulKlimaBodenHeating;
+				this.colModulKlimaBodenCircuits.Visible = this.ModulKlimaBodenHeating;
+				this.colModulKlimaDeckeArea.Visible = this.ModulKlimaDeckeHeating | this.ModulKlimaDeckeCooling;
+				this.colModulKlimaDeckeCircuits.Visible = this.ModulKlimaDeckeHeating | this.ModulKlimaDeckeCooling;
+				this.colCoolLoad.Visible = this.ConcreteActivationCooling | this.ModulKlimaDeckeCooling;
+				List<IQuickDimensioningSummary> summary = new List<IQuickDimensioningSummary>();
+				foreach (Floor floor in Project.Instance.Floors) {
+					summary.Add(new QuickDimensioningFloorSummary(floor));
+				}
+				summary.Add(new QuickDimensioningProjectSummary());
+				this.iQuickDimensioningSummaryBindingSource.DataSource = summary;
+				this.iQuickDimensioningSummaryBindingSource.ResetBindings(false);
+			}
+		}
+
+		private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
+			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
+				if (this.dataGridView2.Rows[i].DataBoundItem is QuickDimensioningProjectSummary) {
+					this.dataGridView2.Rows[i].DefaultCellStyle.Font = new Font(this.dataGridView2.Font, FontStyle.Bold);
+				}
+			}
+		}
+
 		//private void txtAllocation_ValueChanged(object sender, EventArgs e) {
 		//    int percent = (int)this.txtAllocation.Value;
 		//    if (!(percent > 0) || !(percent <= 100)) {

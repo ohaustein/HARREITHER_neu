@@ -15,7 +15,7 @@ namespace Europlan.Application.ContructionEditor {
 
 		public MaterialEditorGrid() {
 			InitializeComponent();
-			this.wrapper = new MaterialListWrapper(Configuration.ConfigurationType.UserConfiguration); // TODO
+			this.wrapper = new MaterialListWrapper(Configuration.ConfigurationType.UserConfiguration); // TODO anpassen, falls MaterialEditorGrid auch für admin verwendet werden soll!
 			this.materialsWrapperBindingSource.DataSource = this.wrapper;
 			this.materialsWrapperBindingSource.ResetBindings(false);
 		}

@@ -69,6 +69,7 @@ namespace Europlan.Application.ContructionEditor {
 			this.gridMaterials.DataSource = this.materialsWrapperBindingSource;
 			this.gridMaterials.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridMaterials.Location = new System.Drawing.Point(0, 0);
+			this.gridMaterials.MultiSelect = false;
 			this.gridMaterials.Name = "gridMaterials";
 			this.gridMaterials.Size = new System.Drawing.Size(612, 440);
 			this.gridMaterials.TabIndex = 2;
