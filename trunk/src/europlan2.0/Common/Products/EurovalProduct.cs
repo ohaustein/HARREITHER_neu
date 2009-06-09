@@ -62,7 +62,7 @@ namespace Europlan.Common {
 					factor = 3;
 					break;
 			}
-			return (int)Math.Ceiling(quickDimensioningPlannedArea / factor);
+			return (int)Math.Ceiling(quickDimensioningPlannedArea / (100/factor));
 		}
 
 		public override float GetDefaultQuickDimensioningPlannedArea() {
