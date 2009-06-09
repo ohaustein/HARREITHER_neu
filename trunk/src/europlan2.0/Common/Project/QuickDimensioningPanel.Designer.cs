@@ -55,11 +55,12 @@ namespace Europlan.Common {
 			this.lblBka = new System.Windows.Forms.Label();
 			this.cbBkaHeat = new System.Windows.Forms.CheckBox();
 			this.cbBkaCool = new System.Windows.Forms.CheckBox();
-			this.txtAllocation = new Europlan.Common.NumericBox();
-			this.txtHeatTemperature = new Europlan.Common.NumericBox();
-			this.txtCoolTemperature = new Europlan.Common.NumericBox();
 			this.lblTemp4 = new System.Windows.Forms.Label();
 			this.lblTemp3 = new System.Windows.Forms.Label();
+			this.txtCoolTemperature = new Europlan.Common.NumericBox();
+			this.txtAllocation = new Europlan.Common.NumericBox();
+			this.txtHeatTemperature = new Europlan.Common.NumericBox();
+			this.pageSummary = new System.Windows.Forms.TabPage();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -68,6 +69,7 @@ namespace Europlan.Common {
 			// tabQuickDimensioning
 			// 
 			this.tabQuickDimensioning.Controls.Add(this.pageSettings);
+			this.tabQuickDimensioning.Controls.Add(this.pageSummary);
 			this.tabQuickDimensioning.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabQuickDimensioning.Location = new System.Drawing.Point(0, 0);
 			this.tabQuickDimensioning.Name = "tabQuickDimensioning";
@@ -509,6 +511,43 @@ namespace Europlan.Common {
 			this.cbBkaCool.UseVisualStyleBackColor = false;
 			this.cbBkaCool.CheckedChanged += new System.EventHandler(this.cbBkaCool_CheckedChanged);
 			// 
+			// lblTemp4
+			// 
+			this.lblTemp4.AutoSize = true;
+			this.lblTemp4.Location = new System.Drawing.Point(474, 130);
+			this.lblTemp4.Name = "lblTemp4";
+			this.lblTemp4.Size = new System.Drawing.Size(40, 13);
+			this.lblTemp4.TabIndex = 26;
+			this.lblTemp4.Text = "°C (Tv)";
+			// 
+			// lblTemp3
+			// 
+			this.lblTemp3.Location = new System.Drawing.Point(313, 131);
+			this.lblTemp3.Name = "lblTemp3";
+			this.lblTemp3.Size = new System.Drawing.Size(93, 29);
+			this.lblTemp3.TabIndex = 27;
+			this.lblTemp3.Text = "Vorlauftemperatur\r\n(Kühlen)";
+			// 
+			// txtCoolTemperature
+			// 
+			this.txtCoolTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
+			this.txtCoolTemperature.InternalValue = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+			this.txtCoolTemperature.Location = new System.Drawing.Point(412, 128);
+			this.txtCoolTemperature.Name = "txtCoolTemperature";
+			this.txtCoolTemperature.ReadOnly = true;
+			this.txtCoolTemperature.Size = new System.Drawing.Size(56, 20);
+			this.txtCoolTemperature.TabIndex = 28;
+			this.txtCoolTemperature.Text = "16";
+			this.txtCoolTemperature.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+			// 
 			// txtAllocation
 			// 
 			this.txtAllocation.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
@@ -549,42 +588,15 @@ namespace Europlan.Common {
             0});
 			this.txtHeatTemperature.ValueChanged += new System.EventHandler(this.txtTemperature_ValueChanged);
 			// 
-			// txtCoolTemperature
+			// pageSummary
 			// 
-			this.txtCoolTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
-			this.txtCoolTemperature.InternalValue = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-			this.txtCoolTemperature.Location = new System.Drawing.Point(412, 128);
-			this.txtCoolTemperature.Name = "txtCoolTemperature";
-			this.txtCoolTemperature.ReadOnly = true;
-			this.txtCoolTemperature.Size = new System.Drawing.Size(56, 20);
-			this.txtCoolTemperature.TabIndex = 28;
-			this.txtCoolTemperature.Text = "16";
-			this.txtCoolTemperature.Value = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-			// 
-			// lblTemp4
-			// 
-			this.lblTemp4.AutoSize = true;
-			this.lblTemp4.Location = new System.Drawing.Point(474, 130);
-			this.lblTemp4.Name = "lblTemp4";
-			this.lblTemp4.Size = new System.Drawing.Size(40, 13);
-			this.lblTemp4.TabIndex = 26;
-			this.lblTemp4.Text = "°C (Tv)";
-			// 
-			// lblTemp3
-			// 
-			this.lblTemp3.Location = new System.Drawing.Point(313, 131);
-			this.lblTemp3.Name = "lblTemp3";
-			this.lblTemp3.Size = new System.Drawing.Size(93, 29);
-			this.lblTemp3.TabIndex = 27;
-			this.lblTemp3.Text = "Vorlauftemperatur\r\n(Kühlen)";
+			this.pageSummary.Location = new System.Drawing.Point(4, 22);
+			this.pageSummary.Name = "pageSummary";
+			this.pageSummary.Padding = new System.Windows.Forms.Padding(3);
+			this.pageSummary.Size = new System.Drawing.Size(886, 405);
+			this.pageSummary.TabIndex = 1;
+			this.pageSummary.Text = "Ergebnis Flächenaufstellung";
+			this.pageSummary.UseVisualStyleBackColor = true;
 			// 
 			// QuickDimensioningPanel
 			// 
@@ -640,5 +652,6 @@ namespace Europlan.Common {
 		private NumericBox txtCoolTemperature;
 		private System.Windows.Forms.Label lblTemp4;
 		private System.Windows.Forms.Label lblTemp3;
+		private System.Windows.Forms.TabPage pageSummary;
 	}
 }
