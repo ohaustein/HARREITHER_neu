@@ -285,7 +285,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle8.Format = "F0";
 			this.colConcreteActivation.DefaultCellStyle = dataGridViewCellStyle8;
 			this.colConcreteActivation.FillWeight = 70F;
-			this.colConcreteActivation.HeaderText = "Betonkernaktivierung";
+			this.colConcreteActivation.HeaderText = "BKA\n(m²)";
 			this.colConcreteActivation.Name = "colConcreteActivation";
 			this.colConcreteActivation.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colConcreteActivation.Visible = false;
@@ -294,7 +294,7 @@ namespace Europlan.Common {
 			// colConcreteActivationCircuits
 			// 
 			this.colConcreteActivationCircuits.FillWeight = 70F;
-			this.colConcreteActivationCircuits.HeaderText = "Betonkernaktivierung Heizkreise";
+			this.colConcreteActivationCircuits.HeaderText = "BKA\nHeizkreise";
 			this.colConcreteActivationCircuits.Name = "colConcreteActivationCircuits";
 			this.colConcreteActivationCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colConcreteActivationCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
