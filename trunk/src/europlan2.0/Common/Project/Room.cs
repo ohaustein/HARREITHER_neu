@@ -35,6 +35,7 @@ namespace Europlan.Common {
 		private string quickDimensioningComments;
 		private int additionalHeatLoad;
 		private string roomTypeId;
+		private bool quickDimensioningInitialized = false;
 
 		private List<Product> usedProductsForQuickDimensioning;
 
@@ -348,6 +349,19 @@ namespace Europlan.Common {
 			get { return this.roomNode; }
 		}
 
+		public bool QuickDimensioningInitialized {
+			get { return this.quickDimensioningInitialized; }
+			set { this.quickDimensioningInitialized = value; }
+		}
+
+		public void InitializeQuickDimensioning() {
+			if (this.quickDimensioningInitialized) {
+				log.Warn("trying to initialize quick dimensioning, but it was already initialized before");
+			} else {
+				this.QuickDimensioningHeatLoad = this.GetDefaultQuickDimensioningHeatLoad();
+				this.quickDimensioningInitialized = true;
+			}
+		}
 	}
 
 }
