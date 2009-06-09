@@ -77,11 +77,16 @@ namespace Europlan.Common {
 				grid.Floor = floor;
 				page.Controls.Add(grid);
 				grid.Dock = DockStyle.Fill;
+				grid.ProjectChanged += new ProjectChangedHandler(grid_ProjectChanged);
 				this.tabQuickDimensioning.TabPages.Add(page);
 				this.grids.Add(floor, grid);
 			}
 
 			this.tabQuickDimensioning.TabPages.Add(pageSummary);
+		}
+
+		private void grid_ProjectChanged(object sender) {
+			this.OnProjectChanged();
 		}
 
 		public bool AllowLeave() {
@@ -159,6 +164,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				this.OnProjectChanged();
 			}
 			this.lblTemp1.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
 			this.txtHeatTemperature.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
@@ -199,6 +205,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				this.OnProjectChanged();
 			}
 
 			this.lblTemp1.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
@@ -241,6 +248,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				this.OnProjectChanged();
 			}
 			
 			this.lblTemp3.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
@@ -280,6 +288,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				this.OnProjectChanged();
 			}
 			Project.Instance.QuickDimensioning.HithermCheckState = (this.HithermHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
 		}
@@ -315,6 +324,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				this.OnProjectChanged();
 			}
 			Project.Instance.QuickDimensioning.HithermCompactCheckState = (this.HithermCompactHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
 		}
@@ -350,6 +360,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				this.OnProjectChanged();
 			}
 			Project.Instance.QuickDimensioning.ModulBodenCheckState = (this.ModulKlimaBodenHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
 		}
@@ -385,6 +396,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				this.OnProjectChanged();
 			}
 			this.lblAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
@@ -424,6 +436,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				this.OnProjectChanged();
 			}
 			this.lblAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
@@ -463,15 +476,18 @@ namespace Europlan.Common {
 			} else if (temperature > 36.25) {
 				this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV25;
 			}
+			this.OnProjectChanged();
 		}
 
 		private void txtAllocation_ValueChanged(object sender, EventArgs e) {
 			float allocation = (float)this.txtAllocation.Value;
 			Project.Instance.QuickDimensioning.CeilingAllocation = allocation;
+			this.OnProjectChanged();
 		}
 
 		private void cmbDistance_SelectedIndexChanged(object sender, EventArgs e) {
 			Project.Instance.QuickDimensioning.LayDistance = (EurovalProduct.LayDistance)this.cmbDistance.SelectedIndex;
+			this.OnProjectChanged();
 		}
 
 		private void tabQuickDimensioning_Selecting(object sender, TabControlCancelEventArgs e) {
@@ -504,6 +520,12 @@ namespace Europlan.Common {
 				if (this.dataGridView2.Rows[i].DataBoundItem is QuickDimensioningProjectSummary) {
 					this.dataGridView2.Rows[i].DefaultCellStyle.Font = new Font(this.dataGridView2.Font, FontStyle.Bold);
 				}
+			}
+		}
+
+		private void OnProjectChanged() {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
 			}
 		}
 
