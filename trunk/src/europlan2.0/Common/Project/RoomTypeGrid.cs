@@ -56,8 +56,7 @@ namespace Europlan.Common {
 				}
 			}
 		}
-
-
+		
 		public void Cleanup() {
 			if (this.gridRoomTypes.SelectedCells.Count > 0) {
 				if (this.gridRoomTypes.SelectedCells[0].OwningRow.DataBoundItem == null) {
@@ -65,6 +64,19 @@ namespace Europlan.Common {
 				} else {
 					this.gridRoomTypes.EndEdit();
 				}
+			}
+		}
+
+		public RoomType SelectedRoomType {
+			get { 
+				RoomType type = null;
+				if (this.gridRoomTypes.SelectedRows.Count > 0) {
+					type = this.gridRoomTypes.SelectedRows[0].DataBoundItem as RoomType;
+				} else if (this.gridRoomTypes.SelectedCells.Count > 0) {
+					type = this.gridRoomTypes.SelectedCells[0].OwningRow.DataBoundItem as RoomType;
+				}
+
+				return type;
 			}
 		}
 

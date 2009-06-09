@@ -19,13 +19,15 @@ namespace Europlan.Common {
 		public RoomType SelectedRoomType {
 			get { return this.selectedRoomType; }
 			set {
-				this.selectedRoomType = value;
 				// TODO select room type
+				//this.selectedRoomType = value;
 			}
 		}
 
 		private void NewRoomTypeForm_FormClosing(object sender, FormClosingEventArgs e) {
+			this.selectedRoomType = gridRoomTypes.SelectedRoomType;
 			gridRoomTypes.Cleanup();
+			this.selectedRoomType = gridRoomTypes.SelectedRoomType;
 		}
 	}
 }
