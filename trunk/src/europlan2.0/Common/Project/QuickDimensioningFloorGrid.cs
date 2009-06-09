@@ -495,15 +495,19 @@ namespace Europlan.Common {
 		}
 
 		private void combo_SelectedValueChanged(object sender, EventArgs e) {
-			RoomTypeItem selectedRoomType = (sender as DataGridViewComboBoxEditingControl).SelectedItem as RoomTypeItem;
+			DataGridViewComboBoxEditingControl combo = (sender as DataGridViewComboBoxEditingControl);
+			RoomTypeItem selectedRoomType = combo.SelectedItem as RoomTypeItem;
 			if (selectedRoomType != null) {
 				Console.WriteLine(selectedRoomType.Name);
 				if (selectedRoomType.Value == this.newRoomType) {
 					NewRoomTypeForm form = new NewRoomTypeForm(Project.Instance.Config);
-					form.SelectedRoomType = selectedRoomType.Value;
+					form.SelectedRoomType = (this.dataGridView1.Rows[(sender as DataGridViewComboBoxEditingControl).EditingControlRowIndex].DataBoundItem as Room).RoomType;
 					form.ShowDialog();
 					(sender as DataGridViewComboBoxEditingControl).SelectedValueChanged -= new EventHandler(combo_SelectedValueChanged);
+					//combo.SelectedValue = form.SelectedRoomType;
+					//this.dataGridView1.EndEdit();
 					this.dataGridView1.CancelEdit();
+					// TODO
 				}
 			}
 		}

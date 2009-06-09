@@ -144,12 +144,15 @@
     <Compile Include="Project\QuickDimensioningFloorGrid.Designer.cs">
       <DependentUpon>QuickDimensioningFloorGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\QuickDimensioningFloorSummary.cs" />
     <Compile Include="Project\QuickDimensioningPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Project\QuickDimensioningPanel.Designer.cs">
       <DependentUpon>QuickDimensioningPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\QuickDimensioningProjectSummary.cs" />
+    <Compile Include="Project\IQuickDimensioningSummary.cs" />
     <Compile Include="Project\RegulatorCircuit.cs" />
     <Compile Include="Project\RegulatorCircuitsSummaryPanel.cs">
       <SubType>UserControl</SubType>
@@ -239,6 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\ConstructionLayer.datasource" />
+    <None Include="Properties\DataSources\IQuickDimensioningSummary.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\DataSources\RoomType.datasource" />
   </ItemGroup>
