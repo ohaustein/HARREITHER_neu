@@ -11,6 +11,7 @@ namespace Europlan.Common {
 	public partial class QuickDimensioningFloorGrid : UserControl {
 
 		private Floor floor = null;
+		private RoomType newRoomType;
 
 		private static ILog log = LogManager.GetLogger(typeof(QuickDimensioningFloorGrid));
 
@@ -21,6 +22,11 @@ namespace Europlan.Common {
 			foreach (RoomType roomType in Project.Instance.Config.RoomTypes) {
 				this.colRoomType.Items.Add(new RoomTypeItem(roomType));
 			}
+			this.newRoomType = new RoomType();
+			this.newRoomType.Name = "<Neu>";
+			this.newRoomType.Id = "<NEW>";
+			this.newRoomType.UserDefined = true;
+			this.colRoomType.Items.Add(new RoomTypeItem(this.newRoomType));
 			this.colRoomController.ValueMember = "Controller";
 			this.colRoomController.DisplayMember = "Name";
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.None, ""));
@@ -28,7 +34,6 @@ namespace Europlan.Common {
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RCF, "RCF"));
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RCRadio, "RC-Funk"));
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RF, "RF"));
-
 		}
 
 		private class RoomControllerItem {
@@ -475,6 +480,31 @@ namespace Europlan.Common {
 			} else {
 				log.Warn("unknown product");
 				return null;
+			}
+		}
+
+		private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e) {
+			Console.WriteLine(e.Control);
+			if (e.Control is DataGridViewComboBoxEditingControl) {
+				DataGridViewComboBoxEditingControl combo = (e.Control as DataGridViewComboBoxEditingControl);
+				if (combo.Items.Count > 0 && combo.Items[0] is RoomTypeItem) {
+					combo.SelectedValueChanged -= new EventHandler(combo_SelectedValueChanged);
+					combo.SelectedValueChanged += new EventHandler(combo_SelectedValueChanged);
+				}
+			}
+		}
+
+		private void combo_SelectedValueChanged(object sender, EventArgs e) {
+			RoomTypeItem selectedRoomType = (sender as DataGridViewComboBoxEditingControl).SelectedItem as RoomTypeItem;
+			if (selectedRoomType != null) {
+				Console.WriteLine(selectedRoomType.Name);
+				if (selectedRoomType.Value == this.newRoomType) {
+					NewRoomTypeForm form = new NewRoomTypeForm();
+					form.SelectedRoomType = selectedRoomType.Value;
+					form.ShowDialog();
+					(sender as DataGridViewComboBoxEditingControl).SelectedValueChanged -= new EventHandler(combo_SelectedValueChanged);
+					this.dataGridView1.CancelEdit();
+				}
 			}
 		}
 	}
