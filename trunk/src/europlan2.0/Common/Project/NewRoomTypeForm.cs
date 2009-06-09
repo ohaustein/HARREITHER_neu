@@ -11,8 +11,9 @@ namespace Europlan.Common {
 
 		private RoomType selectedRoomType;
 
-		public NewRoomTypeForm() {
+		public NewRoomTypeForm(Configuration config) {
 			InitializeComponent();
+			gridRoomTypes.Config = config;
 		}
 
 		public RoomType SelectedRoomType {
@@ -21,6 +22,10 @@ namespace Europlan.Common {
 				this.selectedRoomType = value;
 				// TODO select room type
 			}
+		}
+
+		private void NewRoomTypeForm_FormClosing(object sender, FormClosingEventArgs e) {
+			gridRoomTypes.Cleanup();
 		}
 	}
 }
