@@ -13,9 +13,9 @@ namespace Europlan.Common {
 			Cool = 2,
 			HeatAndCool = 3
 		}
-
 		
 		private ProductCheckState eurovalCheckState = ProductCheckState.None;
+		private ProductCheckState concreteActivationCheckState = ProductCheckState.None;
 		private ProductCheckState hithermCheckState = ProductCheckState.None;
 		private ProductCheckState hithermCompactCheckState = ProductCheckState.None;
 		private ProductCheckState modulBodenCheckState = ProductCheckState.None;
@@ -46,6 +46,11 @@ namespace Europlan.Common {
 		public ProductCheckState EurovalCheckState {
 			get { return eurovalCheckState; }
 			set { eurovalCheckState = value; }
+		}
+
+		public ProductCheckState ConcreteActivationCheckState {
+			get { return concreteActivationCheckState; }
+			set { concreteActivationCheckState = value; }
 		}
 
 		public ProductCheckState HithermCheckState {

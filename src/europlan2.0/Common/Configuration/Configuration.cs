@@ -31,6 +31,7 @@ namespace Europlan.Common {
 		private List<RoomType> roomTypes;
 
 		private EurovalProduct eurovalProduct = new EurovalProduct();
+		private ConcreteActivationProduct concreteActivationProduct = new ConcreteActivationProduct();
 		private HithermProduct hithermProduct = new HithermProduct();
 		private HithermCompactProduct hithermCompactProduct = new HithermCompactProduct();
 		private ModulKlimaBodenProduct modulKlimaBodenProduct = new ModulKlimaBodenProduct();
@@ -439,6 +440,11 @@ namespace Europlan.Common {
 			set { eurovalProduct = value; }
 		}
 
+		public ConcreteActivationProduct ConcreteActivationProduct {
+			get { return concreteActivationProduct; }
+			set { concreteActivationProduct = value; }
+		}
+
 		public HithermProduct HithermProduct {
 			get { return hithermProduct; }
 			set { hithermProduct = value; }
@@ -462,6 +468,8 @@ namespace Europlan.Common {
 		public P GetProduct<P>() where P: Product {
 			if (typeof(P) == typeof(EurovalProduct)) {
 				return this.EurovalProduct as P;
+			} else if (typeof(P) == typeof(ConcreteActivationProduct)) {
+				return this.ConcreteActivationProduct as P;
 			} else if (typeof(P) == typeof(HithermProduct)) {
 				return this.HithermProduct as P;
 			} else if (typeof(P) == typeof(HithermCompactProduct)) {
