@@ -44,7 +44,7 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.quickDimensioningGrid = new System.Windows.Forms.DataGridView();
 			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRoomTemperature = new Europlan.Common.NumericColumn();
@@ -70,9 +70,6 @@ namespace Europlan.Common {
 			this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.roomBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.textBox3 = new System.Windows.Forms.TextBox();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.numericColumn1 = new Europlan.Common.NumericColumn();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.numericColumn2 = new Europlan.Common.NumericColumn();
@@ -85,16 +82,15 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.numericColumn6 = new Europlan.Common.NumericColumn();
 			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.roomBindingSource)).BeginInit();
-			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// dataGridView1
+			// quickDimensioningGrid
 			// 
-			this.dataGridView1.AllowUserToAddRows = false;
-			this.dataGridView1.AllowUserToDeleteRows = false;
-			this.dataGridView1.AutoGenerateColumns = false;
+			this.quickDimensioningGrid.AllowUserToAddRows = false;
+			this.quickDimensioningGrid.AllowUserToDeleteRows = false;
+			this.quickDimensioningGrid.AutoGenerateColumns = false;
 			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -102,9 +98,9 @@ namespace Europlan.Common {
 			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
 			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.quickDimensioningGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this.quickDimensioningGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.quickDimensioningGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colName,
             this.colRoomTemperature,
@@ -128,18 +124,20 @@ namespace Europlan.Common {
             this.colRoomController,
             this.colDistributor,
             this.colComments});
-			this.dataGridView1.DataSource = this.roomBindingSource;
-			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-			this.dataGridView1.MultiSelect = false;
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.Size = new System.Drawing.Size(753, 265);
-			this.dataGridView1.TabIndex = 0;
-			this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
-			this.dataGridView1.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValidated);
-			this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
-			this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
-			this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
+			this.quickDimensioningGrid.DataSource = this.roomBindingSource;
+			this.quickDimensioningGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.quickDimensioningGrid.Location = new System.Drawing.Point(0, 0);
+			this.quickDimensioningGrid.MultiSelect = false;
+			this.quickDimensioningGrid.Name = "quickDimensioningGrid";
+			this.quickDimensioningGrid.Size = new System.Drawing.Size(753, 265);
+			this.quickDimensioningGrid.TabIndex = 0;
+			this.quickDimensioningGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.quickDimensioningGrid_CellValueChanged);
+			this.quickDimensioningGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
+			this.quickDimensioningGrid.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValidated);
+			this.quickDimensioningGrid.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.quickDimensioningGrid_PreviewKeyDown);
+			this.quickDimensioningGrid.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
+			this.quickDimensioningGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
+			this.quickDimensioningGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
 			// 
 			// colId
 			// 
@@ -400,35 +398,12 @@ namespace Europlan.Common {
 			// 
 			// panel1
 			// 
-			this.panel1.Controls.Add(this.textBox3);
-			this.panel1.Controls.Add(this.textBox2);
-			this.panel1.Controls.Add(this.textBox1);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.panel1.Location = new System.Drawing.Point(0, 265);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(753, 26);
 			this.panel1.TabIndex = 1;
-			// 
-			// textBox3
-			// 
-			this.textBox3.Location = new System.Drawing.Point(424, 3);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(45, 20);
-			this.textBox3.TabIndex = 2;
-			// 
-			// textBox2
-			// 
-			this.textBox2.Location = new System.Drawing.Point(373, 3);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(45, 20);
-			this.textBox2.TabIndex = 1;
-			// 
-			// textBox1
-			// 
-			this.textBox1.Location = new System.Drawing.Point(225, 3);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(45, 20);
-			this.textBox1.TabIndex = 0;
+			this.panel1.Visible = false;
 			// 
 			// numericColumn1
 			// 
@@ -570,26 +545,21 @@ namespace Europlan.Common {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.dataGridView1);
+			this.Controls.Add(this.quickDimensioningGrid);
 			this.Controls.Add(this.panel1);
 			this.Name = "QuickDimensioningFloorGrid";
 			this.Size = new System.Drawing.Size(753, 291);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningGrid)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.roomBindingSource)).EndInit();
-			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridView quickDimensioningGrid;
 		private System.Windows.Forms.BindingSource roomBindingSource;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.TextBox textBox3;
-		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;

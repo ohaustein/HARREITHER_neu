@@ -26,7 +26,7 @@ namespace Europlan.Common {
 				int heatLoad = 0;
 				foreach (Floor floor in Project.Instance.Floors) {
 					foreach (Room room in floor.Rooms) {
-						heatLoad += room.HeatLoad;
+						heatLoad += room.QuickDimensioningHeatLoad;
 					}
 				}
 				return heatLoad;
@@ -38,7 +38,7 @@ namespace Europlan.Common {
 				int coolLoad = 0;
 				foreach (Floor floor in Project.Instance.Floors) {
 					foreach (Room room in floor.Rooms) {
-						coolLoad += room.CoolLoad;
+						coolLoad += room.QuickDimensioningCoolLoad;
 					}
 				}
 				return coolLoad;
