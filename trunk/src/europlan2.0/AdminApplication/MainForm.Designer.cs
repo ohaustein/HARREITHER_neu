@@ -39,6 +39,8 @@ namespace Europlan.AdminApplication {
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.artikelUndKostruktionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainTabControl.SuspendLayout();
 			this.tabPageLicenses.SuspendLayout();
 			this.splitContainerLicenses.Panel1.SuspendLayout();
@@ -217,6 +219,7 @@ namespace Europlan.AdminApplication {
 			// dateiToolStripMenuItem
 			// 
 			this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToolStripMenuItem,
             this.beendenToolStripMenuItem});
 			this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
 			this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
@@ -229,6 +232,21 @@ namespace Europlan.AdminApplication {
 			this.beendenToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
 			this.beendenToolStripMenuItem.Text = "&Beenden";
 			this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
+			// 
+			// exportToolStripMenuItem
+			// 
+			this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.artikelUndKostruktionenToolStripMenuItem});
+			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+			this.exportToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+			this.exportToolStripMenuItem.Text = "Exportieren";
+			// 
+			// artikelUndKostruktionenToolStripMenuItem
+			// 
+			this.artikelUndKostruktionenToolStripMenuItem.Name = "artikelUndKostruktionenToolStripMenuItem";
+			this.artikelUndKostruktionenToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+			this.artikelUndKostruktionenToolStripMenuItem.Text = "Artikel und Kostruktionen...";
+			this.artikelUndKostruktionenToolStripMenuItem.Click += new System.EventHandler(this.artikelUndKostruktionenToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -273,6 +291,8 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.TabPage tabPageConstructions;
 		private Europlan.Common.ConstructionEditorGrid constructionEditorPage;
 		private MaterialMapper materialMapper1;
+		private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem artikelUndKostruktionenToolStripMenuItem;
 	}
 }
 

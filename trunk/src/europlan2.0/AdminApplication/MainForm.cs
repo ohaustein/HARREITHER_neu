@@ -127,6 +127,17 @@ namespace Europlan.AdminApplication {
 			//this.cmsView.Show(this.btnView, new Point(0, this.btnView.Height));
 		}
 
+		private void artikelUndKostruktionenToolStripMenuItem_Click(object sender, EventArgs e) {
+			Configuration.AdminTemplate.Save();
+			FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+			string appDataPath = System.Windows.Forms.Application.CommonAppDataPath.Substring(0, System.Windows.Forms.Application.CommonAppDataPath.IndexOf(System.Windows.Forms.Application.ProductVersion));
+
+			if (dialog.ShowDialog() == DialogResult.OK) {
+				File.Copy(Path.Combine(appDataPath, "global.conf"), Path.Combine(dialog.SelectedPath, "global.conf"), true);
+			}
+		}
+
 		/*private void cmsViewItem_Click(object sender, EventArgs e) {
 			int i = 0;
 			string selected = "";
