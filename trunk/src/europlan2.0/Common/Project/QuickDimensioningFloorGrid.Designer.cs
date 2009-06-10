@@ -141,7 +141,6 @@ namespace Europlan.Common {
 			this.quickDimensioningGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.quickDimensioningGrid_RowsAdded);
 			this.quickDimensioningGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.quickDimensioningGrid_CellClick);
 			this.quickDimensioningGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.quickDimensioningGrid_EditingControlShowing);
-			this.quickDimensioningGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.quickDimensioningGrid_CellContentClick);
 			// 
 			// roomBindingSource
 			// 
@@ -340,8 +339,9 @@ namespace Europlan.Common {
 			// colQuickDimensioningRoomType
 			// 
 			this.colRoomType.DataPropertyName = "QuickDimensioningRoomType";
-			this.colRoomType.HeaderText = "QuickDimensioningRoomType";
-			this.colRoomType.Name = "colQuickDimensioningRoomType";
+			this.colRoomType.FillWeight = 80F;
+			this.colRoomType.HeaderText = "Raumtyp";
+			this.colRoomType.Name = "colRoomType";
 			this.colRoomType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colRoomType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colRoomType.Width = 80;

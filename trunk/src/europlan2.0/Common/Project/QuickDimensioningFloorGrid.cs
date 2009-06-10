@@ -214,9 +214,8 @@ namespace Europlan.Common {
 				} else if (e.ColumnIndex == this.colConcreteActivationCircuits.Index) {
 					// Concrete Activation circuits
 					this.ValidateProductCircuits<ConcreteActivationProduct>(row);
-				} else if (e.ColumnIndex == this.colHithermCompact.Index) {
-					// Hitherm Compact
-					this.ValidateProductArea<HithermCompactProduct>(row);
+				} else if (e.ColumnIndex == this.colHitherm.Index) {
+					// Hitherm
 					this.ValidateProductArea<HithermProduct>(row);
 				} else if (e.ColumnIndex == this.colHithermCircuits.Index) {
 					// Hitherm circuits
@@ -585,12 +584,6 @@ namespace Europlan.Common {
 
 		private void quickDimensioningGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
 			this.OnProjectChanged();
-		}
-
-		private void quickDimensioningGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-			if (e.ColumnIndex == this.colRoomType.Index) {
-				Console.WriteLine(this.quickDimensioningGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewComboBoxCell);
-			}
 		}
 
 		private void quickDimensioningGrid_CellClick(object sender, DataGridViewCellEventArgs e) {
