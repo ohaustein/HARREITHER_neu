@@ -38,9 +38,11 @@ namespace Europlan.AdminApplication {
 			this.constructionEditorPage = new Europlan.Common.ConstructionEditorGrid();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.artikelUndKostruktionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.datanormDateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainTabControl.SuspendLayout();
 			this.tabPageLicenses.SuspendLayout();
 			this.splitContainerLicenses.Panel1.SuspendLayout();
@@ -219,19 +221,12 @@ namespace Europlan.AdminApplication {
 			// dateiToolStripMenuItem
 			// 
 			this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importToolStripMenuItem,
             this.exportToolStripMenuItem,
             this.beendenToolStripMenuItem});
 			this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
 			this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
 			this.dateiToolStripMenuItem.Text = "&Datei";
-			// 
-			// beendenToolStripMenuItem
-			// 
-			this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-			this.beendenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-			this.beendenToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-			this.beendenToolStripMenuItem.Text = "&Beenden";
-			this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
 			// 
 			// exportToolStripMenuItem
 			// 
@@ -247,6 +242,29 @@ namespace Europlan.AdminApplication {
 			this.artikelUndKostruktionenToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
 			this.artikelUndKostruktionenToolStripMenuItem.Text = "Artikel und Kostruktionen...";
 			this.artikelUndKostruktionenToolStripMenuItem.Click += new System.EventHandler(this.artikelUndKostruktionenToolStripMenuItem_Click);
+			// 
+			// beendenToolStripMenuItem
+			// 
+			this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
+			this.beendenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+			this.beendenToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+			this.beendenToolStripMenuItem.Text = "&Beenden";
+			this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
+			// 
+			// importToolStripMenuItem
+			// 
+			this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.datanormDateiToolStripMenuItem});
+			this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+			this.importToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+			this.importToolStripMenuItem.Text = "Importieren";
+			// 
+			// datanormDateiToolStripMenuItem
+			// 
+			this.datanormDateiToolStripMenuItem.Name = "datanormDateiToolStripMenuItem";
+			this.datanormDateiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.datanormDateiToolStripMenuItem.Text = "Datanorm...";
+			this.datanormDateiToolStripMenuItem.Click += new System.EventHandler(this.datanormDateiToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -293,6 +311,8 @@ namespace Europlan.AdminApplication {
 		private MaterialMapper materialMapper1;
 		private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem artikelUndKostruktionenToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem datanormDateiToolStripMenuItem;
 	}
 }
 
