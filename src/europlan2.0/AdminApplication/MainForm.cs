@@ -138,6 +138,19 @@ namespace Europlan.AdminApplication {
 			}
 		}
 
+		private void datanormDateiToolStripMenuItem_Click(object sender, EventArgs e) {
+			FolderBrowserDialog dialog = new FolderBrowserDialog();
+			string appDataPath = System.Windows.Forms.Application.CommonAppDataPath.Substring(0, System.Windows.Forms.Application.CommonAppDataPath.IndexOf(System.Windows.Forms.Application.ProductVersion));
+			if (dialog.ShowDialog() == DialogResult.OK) {
+				if (File.Exists(Path.Combine(dialog.SelectedPath, "DATANORM.001"))) {
+					File.Copy(Path.Combine(dialog.SelectedPath, "DATANORM.001"), Path.Combine(appDataPath, "DATANORM.001"), true);
+				}
+				if (File.Exists(Path.Combine(dialog.SelectedPath, "DATANORM.RAB"))) {
+					File.Copy(Path.Combine(dialog.SelectedPath, "DATANORM.RAB"), Path.Combine(appDataPath, "DATANORM.RAB"), true);
+				}
+			}
+		}
+
 		/*private void cmsViewItem_Click(object sender, EventArgs e) {
 			int i = 0;
 			string selected = "";
