@@ -27,8 +27,8 @@ $replaceVersionStrings[1][0] = $assemblyVersionReplace
 $findVersionStrings[1][1] = $fileVersionFind
 $replaceVersionStrings[1][1] = $fileVersionReplace
 
-# .\Licensing\Properties\AssemblyInfo.cs
-$replaceVersionFiles[2] = ".\Licensing\Properties\AssemblyInfo.cs"
+# .\Common\Properties\AssemblyInfo.cs
+$replaceVersionFiles[2] = ".\Common\Properties\AssemblyInfo.cs"
 $findVersionStrings[2] = new-object string[] 2
 $replaceVersionStrings[2] = new-object string[] 2
 $findVersionStrings[2][0] = $assemblyVersionFind
