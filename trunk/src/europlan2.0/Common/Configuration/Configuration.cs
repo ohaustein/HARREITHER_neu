@@ -56,8 +56,9 @@ namespace Europlan.Common {
 			this.materialToCategoryMapping = new SerializableDictionary<string, string>();
 			this.discounts = new Dictionary<string, float>();
 			this.roomTypes = new List<RoomType>();
+			StreamReader sr = null;
 			try {
-				StreamReader sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.001"), System.Text.Encoding.GetEncoding(850));
+				sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.001"), System.Text.Encoding.GetEncoding(850));
 				string line;
 				while ((line = sr.ReadLine()) != null) {
 					if (line.StartsWith("A")) {
@@ -73,9 +74,13 @@ namespace Europlan.Common {
 				}
 			} catch (Exception ex) {
 				log.Error("Error while parsing DATANORM.001 file", ex);
+			} finally {
+				if (sr != null) {
+					sr.Close();
+				}
 			}
 			try {
-				StreamReader sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.RAB"), System.Text.Encoding.GetEncoding(850));
+				sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.RAB"), System.Text.Encoding.GetEncoding(850));
 				string line;
 				while ((line = sr.ReadLine()) != null) {
 					if (line.StartsWith("R")) {
@@ -87,6 +92,10 @@ namespace Europlan.Common {
 				}
 			} catch (Exception ex) {
 				log.Error("Error while parsing DATANORM.RAB file", ex);
+			} finally {
+				if (sr != null) {
+					sr.Close();
+				}
 			}
 
 		}
