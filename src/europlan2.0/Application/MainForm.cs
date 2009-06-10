@@ -511,5 +511,71 @@ namespace Europlan.Application {
 			}
 		}
 
+		private void importGlobalConfToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (this.CheckForUnsavedChanges()) {
+				if (this.openGlobalConfDialog.ShowDialog() == DialogResult.OK) {
+					string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
+					if (!Path.GetDirectoryName(this.openGlobalConfDialog.FileName).Equals(appDataPath)) {
+						File.Copy(this.openGlobalConfDialog.FileName, Path.Combine(appDataPath, "global.conf"), true);
+						Configuration.ResetConfigurations();
+					}
+					if (projectFileName == null) {
+						// reset project
+						if (currentProject == null) {
+							currentProject = Project.New();
+						} else {
+							currentProject = Project.New();
+						}
+						projectFileName = null;
+						projectUnsaved = false;
+						UpdateTitle();
+						Project.Instance.InitializeTreeView(this.projectTree);
+						if (currentEditorUserControl != null) {
+							currentEditorUserControl.UpdateControl();
+						}
+					} else {
+						LoadProject();
+					}
+				}
+			}
+		}
+
+		private void datanormToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (this.CheckForUnsavedChanges()) {
+				OpenFileDialog dialog = new OpenFileDialog();
+				//FolderBrowserDialog dialog = new FolderBrowserDialog();
+				dialog.Filter = "Datanorm|DATANORM.001";
+				string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					string path = Path.GetDirectoryName(dialog.FileName);
+					if (!path.Equals(appDataPath)) {
+						if (File.Exists(Path.Combine(path, "DATANORM.001"))) {
+							File.Copy(Path.Combine(path, "DATANORM.001"), Path.Combine(appDataPath, "DATANORM.001"), true);
+						}
+						if (File.Exists(Path.Combine(path, "DATANORM.RAB"))) {
+							File.Copy(Path.Combine(path, "DATANORM.RAB"), Path.Combine(appDataPath, "DATANORM.RAB"), true);
+						}
+					}
+					if (projectFileName == null) {
+						// reset project
+						if (currentProject == null) {
+							currentProject = Project.New();
+						} else {
+							currentProject = Project.New();
+						}
+						projectFileName = null;
+						projectUnsaved = false;
+						UpdateTitle();
+						Project.Instance.InitializeTreeView(this.projectTree);
+						if (currentEditorUserControl != null) {
+							currentEditorUserControl.UpdateControl();
+						}
+					} else {
+						LoadProject();
+					}
+				}
+			}
+		}
+
 	}
 }

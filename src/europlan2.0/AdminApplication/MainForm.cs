@@ -131,7 +131,7 @@ namespace Europlan.AdminApplication {
 			Configuration.AdminTemplate.Save();
 			FolderBrowserDialog dialog = new FolderBrowserDialog();
 
-			string appDataPath = System.Windows.Forms.Application.CommonAppDataPath.Substring(0, System.Windows.Forms.Application.CommonAppDataPath.IndexOf(System.Windows.Forms.Application.ProductVersion));
+			string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 
 			if (dialog.ShowDialog() == DialogResult.OK) {
 				File.Copy(Path.Combine(appDataPath, "global.conf"), Path.Combine(dialog.SelectedPath, "global.conf"), true);
@@ -139,14 +139,18 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void datanormDateiToolStripMenuItem_Click(object sender, EventArgs e) {
-			FolderBrowserDialog dialog = new FolderBrowserDialog();
-			string appDataPath = System.Windows.Forms.Application.CommonAppDataPath.Substring(0, System.Windows.Forms.Application.CommonAppDataPath.IndexOf(System.Windows.Forms.Application.ProductVersion));
+			OpenFileDialog dialog = new OpenFileDialog();
+			dialog.Filter = "Datanorm|DATANORM.001";
+			string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 			if (dialog.ShowDialog() == DialogResult.OK) {
-				if (File.Exists(Path.Combine(dialog.SelectedPath, "DATANORM.001"))) {
-					File.Copy(Path.Combine(dialog.SelectedPath, "DATANORM.001"), Path.Combine(appDataPath, "DATANORM.001"), true);
-				}
-				if (File.Exists(Path.Combine(dialog.SelectedPath, "DATANORM.RAB"))) {
-					File.Copy(Path.Combine(dialog.SelectedPath, "DATANORM.RAB"), Path.Combine(appDataPath, "DATANORM.RAB"), true);
+				string path = Path.GetDirectoryName(dialog.FileName);
+				if (!path.Equals(appDataPath)) {
+					if (File.Exists(Path.Combine(path, "DATANORM.001"))) {
+						File.Copy(Path.Combine(path, "DATANORM.001"), Path.Combine(appDataPath, "DATANORM.001"), true);
+					}
+					if (File.Exists(Path.Combine(path, "DATANORM.RAB"))) {
+						File.Copy(Path.Combine(path, "DATANORM.RAB"), Path.Combine(appDataPath, "DATANORM.RAB"), true);
+					}
 				}
 			}
 		}
