@@ -25,7 +25,7 @@ namespace Europlan.Common {
 				this.colRoomType.Items.Add(new RoomTypeItem(roomType));
 			}
 			this.newRoomType = new RoomType();
-			this.newRoomType.Name = "<Neu>";
+			this.newRoomType.Name = "<Neu/Bearbeiten>";
 			this.newRoomType.Id = "<NEW>";
 			this.newRoomType.UserDefined = true;
 			this.colRoomType.Items.Add(new RoomTypeItem(this.newRoomType));
