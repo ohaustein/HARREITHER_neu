@@ -59,6 +59,9 @@ namespace Europlan.Application {
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
+			this.importGlobalConfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openGlobalConfDialog = new System.Windows.Forms.OpenFileDialog();
+			this.datanormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.mainMenu.SuspendLayout();
@@ -125,7 +128,9 @@ namespace Europlan.Application {
 			// importToolStripMenuItem
 			// 
 			this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.demandedHeatToolStripMenuItem});
+            this.demandedHeatToolStripMenuItem,
+            this.importGlobalConfToolStripMenuItem,
+            this.datanormToolStripMenuItem});
 			this.importToolStripMenuItem.Name = "importToolStripMenuItem";
 			resources.ApplyResources(this.importToolStripMenuItem, "importToolStripMenuItem");
 			// 
@@ -311,6 +316,22 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.statusStrip, "statusStrip");
 			this.statusStrip.Name = "statusStrip";
 			// 
+			// importGlobalConfToolStripMenuItem
+			// 
+			this.importGlobalConfToolStripMenuItem.Name = "importGlobalConfToolStripMenuItem";
+			resources.ApplyResources(this.importGlobalConfToolStripMenuItem, "importGlobalConfToolStripMenuItem");
+			this.importGlobalConfToolStripMenuItem.Click += new System.EventHandler(this.importGlobalConfToolStripMenuItem_Click);
+			// 
+			// openGlobalConfDialog
+			// 
+			resources.ApplyResources(this.openGlobalConfDialog, "openGlobalConfDialog");
+			// 
+			// datanormToolStripMenuItem
+			// 
+			this.datanormToolStripMenuItem.Name = "datanormToolStripMenuItem";
+			resources.ApplyResources(this.datanormToolStripMenuItem, "datanormToolStripMenuItem");
+			this.datanormToolStripMenuItem.Click += new System.EventHandler(this.datanormToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -370,6 +391,9 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem demandedHeatToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem importGlobalConfToolStripMenuItem;
+		private System.Windows.Forms.OpenFileDialog openGlobalConfDialog;
+		private System.Windows.Forms.ToolStripMenuItem datanormToolStripMenuItem;
 
 	}
 }

@@ -13,7 +13,7 @@ namespace Europlan.Common {
 		private static Configuration adminTemplate = null;
 		private static Configuration userTemplate = null;
 		private static readonly object padlock = new object();
-		private static string appDataPath = System.Windows.Forms.Application.CommonAppDataPath.Substring(0, System.Windows.Forms.Application.CommonAppDataPath.IndexOf(System.Windows.Forms.Application.ProductVersion));
+		private static string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(Configuration));
 
@@ -265,6 +265,11 @@ namespace Europlan.Common {
 				}
 				return userTemplate;
 			}
+		}
+
+		public static void ResetConfigurations() {
+			adminTemplate = null;
+			userTemplate = null;
 		}
 
 		public List<Category> GetCategoriesForCategoryType(CategoryType type) {
