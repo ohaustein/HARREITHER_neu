@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UpdateProject BuilderVersion="1.3.0.23" SchemaVersion="1.1" xmlns="http://www.kineticjump.com/AppLifeUpdate/ProjectSchema">
-	<Properties ApplicationID="1f24573e-033c-448d-8e15-9f396e67e44e" ApplicationName="Europlan 2.0" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vdBsdX09tG4aP1oLqHWHB3N6hHsEx+x0YbavsjRPuxhf1yLgkQFTN1Z26sVEkIKnfQxxvcfcWClR4P9Xurm2dyoeA2z80nexnKuyVQAW3K72Z0kkFKEj/OFeXoEWJi1rPrNXjwaQ3zVhn4WL1GKso8HiQlp34twvAJGx2A6JW7s=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;8b665HmN+DY5gAArY0crNGPDpm+hibcdoCWOz3UKec+mMR7fVVIjOYdWgR8CgR1WzBd5am6lZ7rxRAva6NoYrQ==&lt;/P&gt;&lt;Q&gt;yQHE8L+vEefup5hkda8kMVrEOh73orl/n/Lotw5lCqf+Sr9fYEs/Wfz+qN0sAECxgw5dQh1hmqC8cwtRK7hLBw==&lt;/Q&gt;&lt;DP&gt;PFm6PJmf+KxI1Iy2SDWXMqAJUv6hXEkLq1RU/7OfZuORAMhNRvaXdqAz105PiL4zUgY2OHzg7DF+U9eF0gXIjQ==&lt;/DP&gt;&lt;DQ&gt;i+uDX+LOxzQf2OIn7BPCqeh498xerRNbV8gLXoHSrBxM01Nr3OgEbWvDCWEMJBDkgEobeM5jBvQkuiCCnGBpOQ==&lt;/DQ&gt;&lt;InverseQ&gt;v9D25Q6G8fOZbeBu6Rbevp3KGfnUdITstY4fh15aDgjbZofAu0C6RfiHjeByQwNrsQUB1u7hpW5MMMlEk5GPDg==&lt;/InverseQ&gt;&lt;D&gt;IveHU2l7+YYi7bK/3QuxkUzTsB4ddlr34ZxO54w9d+D4nuA88FmHI/WYuI0YoWqAQkgNmAF+dPs/qyw+1BYsJ5wZZQmLLTbfaCKBwNEBbSWk1lIk33ZTKPXDs9ZLOr0LC0jW31XaVQZYhr8xSkSkP3y2ezux7HFHPccpoS7OMUk=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\de" UpdateLocation="" BuildLocation="updates-de Updates" PublishVersion="2.0.2.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions\v2.0.2.0\europlan20-de.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
-	<CurrentSummary>Meilenstein 2</CurrentSummary>
+	<Properties ApplicationID="1f24573e-033c-448d-8e15-9f396e67e44e" ApplicationName="Europlan 2.0" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vdBsdX09tG4aP1oLqHWHB3N6hHsEx+x0YbavsjRPuxhf1yLgkQFTN1Z26sVEkIKnfQxxvcfcWClR4P9Xurm2dyoeA2z80nexnKuyVQAW3K72Z0kkFKEj/OFeXoEWJi1rPrNXjwaQ3zVhn4WL1GKso8HiQlp34twvAJGx2A6JW7s=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;8b665HmN+DY5gAArY0crNGPDpm+hibcdoCWOz3UKec+mMR7fVVIjOYdWgR8CgR1WzBd5am6lZ7rxRAva6NoYrQ==&lt;/P&gt;&lt;Q&gt;yQHE8L+vEefup5hkda8kMVrEOh73orl/n/Lotw5lCqf+Sr9fYEs/Wfz+qN0sAECxgw5dQh1hmqC8cwtRK7hLBw==&lt;/Q&gt;&lt;DP&gt;PFm6PJmf+KxI1Iy2SDWXMqAJUv6hXEkLq1RU/7OfZuORAMhNRvaXdqAz105PiL4zUgY2OHzg7DF+U9eF0gXIjQ==&lt;/DP&gt;&lt;DQ&gt;i+uDX+LOxzQf2OIn7BPCqeh498xerRNbV8gLXoHSrBxM01Nr3OgEbWvDCWEMJBDkgEobeM5jBvQkuiCCnGBpOQ==&lt;/DQ&gt;&lt;InverseQ&gt;v9D25Q6G8fOZbeBu6Rbevp3KGfnUdITstY4fh15aDgjbZofAu0C6RfiHjeByQwNrsQUB1u7hpW5MMMlEk5GPDg==&lt;/InverseQ&gt;&lt;D&gt;IveHU2l7+YYi7bK/3QuxkUzTsB4ddlr34ZxO54w9d+D4nuA88FmHI/WYuI0YoWqAQkgNmAF+dPs/qyw+1BYsJ5wZZQmLLTbfaCKBwNEBbSWk1lIk33ZTKPXDs9ZLOr0LC0jW31XaVQZYhr8xSkSkP3y2ezux7HFHPccpoS7OMUk=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\de" UpdateLocation="" BuildLocation="updates-de Updates" PublishVersion="2.0.3.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions\v2.0.3.0\europlan20-de.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
+	<CurrentSummary>Meilenstein 6</CurrentSummary>
 	<CurrentCustomData />
 	<NoUpdateDisplayText />
 	<AssemblyReferences />
@@ -12,6 +12,13 @@
 		<AppLifeUpdate BuilderVersion="1.3.0.23" type="full" xmlns="http://www.kineticjump.com/AppLifeUpdate/DirectorSchema">
 			<Application AppId="1f24573e-033c-448d-8e15-9f396e67e44e" NoUpdateDisplayText="">
 				<Versions>
+					<Version number="2.0.3.0" postdate="2009-06-10T14:25:09.0512048Z" signature="egE1nC1L9qRRdDtXI5HNexqbHkzmlJApxVb7SkSiXD7lUEgoCM9UGfqAZ0cEWOjPHF3tZZzmSPd3JmV8EUhVGHFhjuhEfxeeGjj818DbvDrIuLnhsQ0MAsCXxvsp06gvyEjXCEr/3LUdAXAXdgZCoYzigMwpJ/wJFkyVafVk0LY=" fileSize="811353">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Meilenstein 6</Summary>
+						<CustomData></CustomData>
+					</Version>
 					<Version number="2.0.2.0" postdate="2009-04-06T11:15:39.3205626Z" signature="JxUp1wVTyuUtrQiP53xFTeIclhbe3PLr9t/5f4saz9XQ80KTDfS1mvtpWjnygmn6tydBASCtWlMezVt392/Eti2s3OJNWQPSB9eAThgPmKJ6ZXEtVzBmES/YQf2v6pfEsbu6w/0zBzqR93dp10EzFUWSxgV1sf5BS1SDmvF5+Xc=" fileSize="648827">
 						<Targets>
 							<Target number="0.0.0.0" includeAllGreater="false" />
