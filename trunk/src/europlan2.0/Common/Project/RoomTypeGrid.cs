@@ -10,6 +10,7 @@ namespace Europlan.Common {
 	public partial class RoomTypeGrid : UserControl {
 
 		private bool adminMode = false;
+		private Configuration config;
 
 		public RoomTypeGrid() {
 			InitializeComponent();
@@ -17,6 +18,7 @@ namespace Europlan.Common {
 
 		public Configuration Config {
 			set {
+				config = value;
 				if (!(value.Type == Configuration.ConfigurationType.AdminConfiguration || value.Type == Configuration.ConfigurationType.ProjectConfiguration)) {
 					throw new Exception("Type must either be AdminConfiguration or ProjectConfiguration");
 				}
@@ -53,6 +55,23 @@ namespace Europlan.Common {
 			if (!adminMode) {
 				if (e.Row.DataBoundItem is RoomType && !(e.Row.DataBoundItem as RoomType).UserDefined) {
 					e.Cancel = true;
+					return;
+				}
+			} else {
+				if (gridRoomTypes.RowCount == 1) {
+					e.Cancel = true;
+					return;
+				}
+			}
+			RoomType type = e.Row.DataBoundItem as RoomType;
+			Project project = Project.Instance;
+			if (project != null) {
+				foreach (Floor floor in project.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.RoomType == type) {
+							room.RoomType = config.RoomTypes[0];
+						}
+					}
 				}
 			}
 		}
