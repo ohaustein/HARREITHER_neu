@@ -37,6 +37,7 @@ namespace Europlan.Common {
 			this.lblTemp2.Visible = this.EurovalHeating;
 			this.cmbDistance.Visible = this.EurovalHeating;
 			this.lblDistance.Visible = this.EurovalHeating;
+			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 
 			this.lblTemp3.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
 			this.lblTemp4.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
@@ -176,6 +177,7 @@ namespace Europlan.Common {
 			this.lblTemp2.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
 			this.cmbDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
 			this.lblDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
+			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			Project.Instance.QuickDimensioning.EurovalCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
 		}
 
@@ -218,6 +220,7 @@ namespace Europlan.Common {
 			this.lblTemp2.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
 			this.cmbDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
 			this.lblDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
+			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.ConcreteActivationHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ConcreteActivationCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
@@ -259,6 +262,7 @@ namespace Europlan.Common {
 			this.lblTemp3.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
 			this.lblTemp4.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
 			this.txtCoolTemperature.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
+			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.ConcreteActivationHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ConcreteActivationCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
@@ -406,6 +410,7 @@ namespace Europlan.Common {
 			this.lblAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.txtAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
@@ -449,6 +454,7 @@ namespace Europlan.Common {
 			this.lblTemp3.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
 			this.lblTemp4.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
 			this.txtCoolTemperature.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
+			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 

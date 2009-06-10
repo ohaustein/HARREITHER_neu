@@ -43,8 +43,11 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tabQuickDimensioning = new System.Windows.Forms.TabControl();
 			this.pageSettings = new System.Windows.Forms.TabPage();
+			this.txtCoolTemperature = new Europlan.Common.NumericBox();
 			this.lblTemp4 = new System.Windows.Forms.Label();
 			this.lblTemp3 = new System.Windows.Forms.Label();
+			this.txtAllocation = new Europlan.Common.NumericBox();
+			this.txtHeatTemperature = new Europlan.Common.NumericBox();
 			this.lblAllocation2 = new System.Windows.Forms.Label();
 			this.lblAllocation = new System.Windows.Forms.Label();
 			this.lblDistance = new System.Windows.Forms.Label();
@@ -74,13 +77,9 @@ namespace Europlan.Common {
 			this.lblBka = new System.Windows.Forms.Label();
 			this.cbBkaHeat = new System.Windows.Forms.CheckBox();
 			this.cbBkaCool = new System.Windows.Forms.CheckBox();
-			this.label4 = new System.Windows.Forms.Label();
+			this.lblAssumptions = new System.Windows.Forms.Label();
 			this.pageSummary = new System.Windows.Forms.TabPage();
 			this.dataGridView2 = new System.Windows.Forms.DataGridView();
-			this.txtCoolTemperature = new Europlan.Common.NumericBox();
-			this.txtAllocation = new Europlan.Common.NumericBox();
-			this.txtHeatTemperature = new Europlan.Common.NumericBox();
-			this.iQuickDimensioningSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colArea = new Europlan.Common.NumericColumn();
 			this.colHeatLoad = new Europlan.Common.NumericColumn();
@@ -99,6 +98,7 @@ namespace Europlan.Common {
 			this.colModulKlimaDeckeCircuits = new Europlan.Common.NumericColumn();
 			this.colNrOfServos = new Europlan.Common.NumericColumn();
 			this.colRoomControllers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.iQuickDimensioningSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -135,7 +135,7 @@ namespace Europlan.Common {
 			this.pageSettings.Controls.Add(this.lblTemp1);
 			this.pageSettings.Controls.Add(this.label1);
 			this.pageSettings.Controls.Add(this.tableLayoutPanel1);
-			this.pageSettings.Controls.Add(this.label4);
+			this.pageSettings.Controls.Add(this.lblAssumptions);
 			this.pageSettings.Location = new System.Drawing.Point(4, 22);
 			this.pageSettings.Name = "pageSettings";
 			this.pageSettings.Padding = new System.Windows.Forms.Padding(3);
@@ -143,6 +143,26 @@ namespace Europlan.Common {
 			this.pageSettings.TabIndex = 0;
 			this.pageSettings.Text = "Einstellungen";
 			this.pageSettings.UseVisualStyleBackColor = true;
+			// 
+			// txtCoolTemperature
+			// 
+			this.txtCoolTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
+			this.txtCoolTemperature.InternalValue = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+			this.txtCoolTemperature.Location = new System.Drawing.Point(412, 128);
+			this.txtCoolTemperature.Name = "txtCoolTemperature";
+			this.txtCoolTemperature.ReadOnly = true;
+			this.txtCoolTemperature.Size = new System.Drawing.Size(56, 20);
+			this.txtCoolTemperature.TabIndex = 28;
+			this.txtCoolTemperature.Text = "16";
+			this.txtCoolTemperature.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
 			// 
 			// lblTemp4
 			// 
@@ -160,6 +180,46 @@ namespace Europlan.Common {
 			this.lblTemp3.Size = new System.Drawing.Size(93, 29);
 			this.lblTemp3.TabIndex = 27;
 			this.lblTemp3.Text = "Vorlauftemperatur\r\n(Kühlen)";
+			// 
+			// txtAllocation
+			// 
+			this.txtAllocation.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
+			this.txtAllocation.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtAllocation.Location = new System.Drawing.Point(391, 211);
+			this.txtAllocation.Name = "txtAllocation";
+			this.txtAllocation.Size = new System.Drawing.Size(56, 20);
+			this.txtAllocation.TabIndex = 25;
+			this.txtAllocation.Text = "0";
+			this.txtAllocation.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtAllocation.ValueChanged += new System.EventHandler(this.txtAllocation_ValueChanged);
+			// 
+			// txtHeatTemperature
+			// 
+			this.txtHeatTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
+			this.txtHeatTemperature.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtHeatTemperature.Location = new System.Drawing.Point(412, 96);
+			this.txtHeatTemperature.Name = "txtHeatTemperature";
+			this.txtHeatTemperature.Size = new System.Drawing.Size(56, 20);
+			this.txtHeatTemperature.TabIndex = 24;
+			this.txtHeatTemperature.Text = "0";
+			this.txtHeatTemperature.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtHeatTemperature.ValueChanged += new System.EventHandler(this.txtTemperature_ValueChanged);
 			// 
 			// lblAllocation2
 			// 
@@ -560,17 +620,17 @@ namespace Europlan.Common {
 			this.cbBkaCool.UseVisualStyleBackColor = false;
 			this.cbBkaCool.CheckedChanged += new System.EventHandler(this.cbBkaCool_CheckedChanged);
 			// 
-			// label4
+			// lblAssumptions
 			// 
-			this.label4.BackColor = System.Drawing.Color.Transparent;
-			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label4.Location = new System.Drawing.Point(315, 74);
-			this.label4.Margin = new System.Windows.Forms.Padding(3);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(93, 17);
-			this.label4.TabIndex = 18;
-			this.label4.Text = "Annahmen";
-			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.lblAssumptions.BackColor = System.Drawing.Color.Transparent;
+			this.lblAssumptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblAssumptions.Location = new System.Drawing.Point(315, 74);
+			this.lblAssumptions.Margin = new System.Windows.Forms.Padding(3);
+			this.lblAssumptions.Name = "lblAssumptions";
+			this.lblAssumptions.Size = new System.Drawing.Size(93, 17);
+			this.lblAssumptions.TabIndex = 18;
+			this.lblAssumptions.Text = "Annahmen";
+			this.lblAssumptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// pageSummary
 			// 
@@ -626,70 +686,6 @@ namespace Europlan.Common {
 			this.dataGridView2.TabIndex = 2;
 			this.dataGridView2.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView2_RowsAdded);
 			// 
-			// txtCoolTemperature
-			// 
-			this.txtCoolTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
-			this.txtCoolTemperature.InternalValue = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-			this.txtCoolTemperature.Location = new System.Drawing.Point(412, 128);
-			this.txtCoolTemperature.Name = "txtCoolTemperature";
-			this.txtCoolTemperature.ReadOnly = true;
-			this.txtCoolTemperature.Size = new System.Drawing.Size(56, 20);
-			this.txtCoolTemperature.TabIndex = 28;
-			this.txtCoolTemperature.Text = "16";
-			this.txtCoolTemperature.Value = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-			// 
-			// txtAllocation
-			// 
-			this.txtAllocation.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
-			this.txtAllocation.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtAllocation.Location = new System.Drawing.Point(391, 211);
-			this.txtAllocation.Name = "txtAllocation";
-			this.txtAllocation.Size = new System.Drawing.Size(56, 20);
-			this.txtAllocation.TabIndex = 25;
-			this.txtAllocation.Text = "0";
-			this.txtAllocation.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtAllocation.ValueChanged += new System.EventHandler(this.txtAllocation_ValueChanged);
-			// 
-			// txtHeatTemperature
-			// 
-			this.txtHeatTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
-			this.txtHeatTemperature.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtHeatTemperature.Location = new System.Drawing.Point(412, 96);
-			this.txtHeatTemperature.Name = "txtHeatTemperature";
-			this.txtHeatTemperature.Size = new System.Drawing.Size(56, 20);
-			this.txtHeatTemperature.TabIndex = 24;
-			this.txtHeatTemperature.Text = "0";
-			this.txtHeatTemperature.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtHeatTemperature.ValueChanged += new System.EventHandler(this.txtTemperature_ValueChanged);
-			// 
-			// iQuickDimensioningSummaryBindingSource
-			// 
-			this.iQuickDimensioningSummaryBindingSource.DataSource = typeof(Europlan.Common.IQuickDimensioningSummary);
-			// 
 			// colName
 			// 
 			this.colName.DataPropertyName = "Name";
@@ -702,7 +698,7 @@ namespace Europlan.Common {
 			// 
 			this.colArea.DataPropertyName = "Area";
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F0";
+			dataGridViewCellStyle2.Format = "F1";
 			this.colArea.DefaultCellStyle = dataGridViewCellStyle2;
 			this.colArea.FillWeight = 50F;
 			this.colArea.Frozen = true;
@@ -751,7 +747,7 @@ namespace Europlan.Common {
 			// 
 			this.colEurovalArea.DataPropertyName = "EurovalArea";
 			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle5.Format = "F0";
+			dataGridViewCellStyle5.Format = "F1";
 			this.colEurovalArea.DefaultCellStyle = dataGridViewCellStyle5;
 			this.colEurovalArea.FillWeight = 70F;
 			this.colEurovalArea.HeaderText = "Euroval\n(m²)";
@@ -782,7 +778,7 @@ namespace Europlan.Common {
 			// 
 			this.colConcreteActivationArea.DataPropertyName = "ConcreteActivationArea";
 			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle7.Format = "F0";
+			dataGridViewCellStyle7.Format = "F1";
 			this.colConcreteActivationArea.DefaultCellStyle = dataGridViewCellStyle7;
 			this.colConcreteActivationArea.FillWeight = 70F;
 			this.colConcreteActivationArea.HeaderText = "BKA\n(m²)";
@@ -813,7 +809,7 @@ namespace Europlan.Common {
 			// 
 			this.colHithermArea.DataPropertyName = "HithermArea";
 			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle9.Format = "F0";
+			dataGridViewCellStyle9.Format = "F1";
 			this.colHithermArea.DefaultCellStyle = dataGridViewCellStyle9;
 			this.colHithermArea.FillWeight = 70F;
 			this.colHithermArea.HeaderText = "Hitherm\n(m²)";
@@ -844,7 +840,7 @@ namespace Europlan.Common {
 			// 
 			this.colHithermCompactArea.DataPropertyName = "HithermCompactArea";
 			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle11.Format = "F0";
+			dataGridViewCellStyle11.Format = "F1";
 			this.colHithermCompactArea.DefaultCellStyle = dataGridViewCellStyle11;
 			this.colHithermCompactArea.FillWeight = 70F;
 			this.colHithermCompactArea.HeaderText = "Hitherm Co\n(m²)";
@@ -875,7 +871,7 @@ namespace Europlan.Common {
 			// 
 			this.colModulKlimaBodenArea.DataPropertyName = "ModulKlimaBodenArea";
 			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle13.Format = "F0";
+			dataGridViewCellStyle13.Format = "F1";
 			this.colModulKlimaBodenArea.DefaultCellStyle = dataGridViewCellStyle13;
 			this.colModulKlimaBodenArea.FillWeight = 70F;
 			this.colModulKlimaBodenArea.HeaderText = "Klimboden\n(m²)";
@@ -906,7 +902,7 @@ namespace Europlan.Common {
 			// 
 			this.colModulKlimaDeckeArea.DataPropertyName = "ModulKlimaDeckeArea";
 			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle15.Format = "F0";
+			dataGridViewCellStyle15.Format = "F1";
 			this.colModulKlimaDeckeArea.DefaultCellStyle = dataGridViewCellStyle15;
 			this.colModulKlimaDeckeArea.FillWeight = 70F;
 			this.colModulKlimaDeckeArea.HeaderText = "Klimadecke\n(m²)";
@@ -955,6 +951,10 @@ namespace Europlan.Common {
 			this.colRoomControllers.ReadOnly = true;
 			this.colRoomControllers.Width = 150;
 			// 
+			// iQuickDimensioningSummaryBindingSource
+			// 
+			this.iQuickDimensioningSummaryBindingSource.DataSource = typeof(Europlan.Common.IQuickDimensioningSummary);
+			// 
 			// QuickDimensioningPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1000,7 +1000,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblTemp2;
 		private System.Windows.Forms.ComboBox cmbDistance;
 		private System.Windows.Forms.Label lblDistance;
-		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label lblAssumptions;
 		private System.Windows.Forms.Label lblTemp1;
 		private System.Windows.Forms.Label lblAllocation;
 		private System.Windows.Forms.Label lblAllocation2;
