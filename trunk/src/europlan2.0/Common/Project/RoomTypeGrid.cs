@@ -68,8 +68,8 @@ namespace Europlan.Common {
 			if (project != null) {
 				foreach (Floor floor in project.Floors) {
 					foreach (Room room in floor.Rooms) {
-						if (room.RoomType == type) {
-							room.RoomType = config.RoomTypes[0];
+						if (room.QuickDimensioningRoomType == type) {
+							room.QuickDimensioningRoomType = config.RoomTypes[0];
 						}
 					}
 				}

@@ -149,7 +149,7 @@ namespace Europlan.Common {
 		private bool heatLoadWasDefault = false;
 		private bool coolLoadWasDefault = false;
 
-		private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) {
+		private void quickDimensioningGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) {
 			if (e.ColumnIndex == this.colRoomType.Index) {
 				Room room = this.quickDimensioningGrid.Rows[e.RowIndex].DataBoundItem as Room;
 				if (room != null) {
@@ -159,7 +159,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void dataGridView1_CellValidated(object sender, DataGridViewCellEventArgs e) {
+		private void quickDimensioningGrid_CellValidated(object sender, DataGridViewCellEventArgs e) {
 			DataGridViewRow row = this.quickDimensioningGrid.Rows[e.RowIndex];
 			Room room = row.DataBoundItem as Room;
 			if (room != null) {
@@ -336,7 +336,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
+		private void quickDimensioningGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
 			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
 				DataGridViewRow row = this.quickDimensioningGrid.Rows[i];
 				if (row.DataBoundItem is Room) {
@@ -379,7 +379,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e) {
+		private void quickDimensioningGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e) {
 			Room room = this.quickDimensioningGrid.Rows[e.RowIndex].DataBoundItem as Room;
 			if (room != null) {
 				if (e.ColumnIndex == this.colHeatLoad.Index && room.QuickDimensioningHeatLoad == 0) {
@@ -487,7 +487,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e) {
+		private void quickDimensioningGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e) {
 			Console.WriteLine(e.Control);
 			if (e.Control is DataGridViewComboBoxEditingControl) {
 				DataGridViewComboBoxEditingControl combo = (e.Control as DataGridViewComboBoxEditingControl);
@@ -505,7 +505,7 @@ namespace Europlan.Common {
 				Console.WriteLine(selectedRoomType.Name);
 				if (selectedRoomType.Value == this.newRoomType) {
 					NewRoomTypeForm form = new NewRoomTypeForm(Project.Instance.Config);
-					form.SelectedRoomType = (this.quickDimensioningGrid.Rows[(sender as DataGridViewComboBoxEditingControl).EditingControlRowIndex].DataBoundItem as Room).RoomType;
+					form.SelectedRoomType = (this.quickDimensioningGrid.Rows[(sender as DataGridViewComboBoxEditingControl).EditingControlRowIndex].DataBoundItem as Room).QuickDimensioningRoomType;
 					form.ShowDialog();
 					(sender as DataGridViewComboBoxEditingControl).SelectedValueChanged -= new EventHandler(combo_SelectedValueChanged);
 
@@ -554,6 +554,7 @@ namespace Europlan.Common {
 						col == this.colHithermCompact || col == this.colHithermCompactCircuits ||
 						col == this.colModulKlimaBoden || col == this.colModulKlimaBodenCircuits ||
 						col == this.colModulKlimaDecke || col == this.colModulKlimaDeckeCircuits) {
+					e.IsInputKey = false;
 					this.quickDimensioningGrid.BeginEdit(true);
 					cell.Value = null;
 					this.quickDimensioningGrid.EndEdit();
@@ -584,6 +585,47 @@ namespace Europlan.Common {
 
 		private void quickDimensioningGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
 			this.OnProjectChanged();
+		}
+
+		private void quickDimensioningGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+			if (e.ColumnIndex == this.colRoomType.Index) {
+				Console.WriteLine(this.quickDimensioningGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewComboBoxCell);
+			}
+		}
+
+		private void quickDimensioningGrid_CellClick(object sender, DataGridViewCellEventArgs e) {
+			if (e.ColumnIndex == this.colRevert.Index) {
+				DataGridViewRow row = this.quickDimensioningGrid.Rows[e.RowIndex];
+				Room room = row.DataBoundItem as Room;
+				if (room != null) {
+					room.RevertQuickDimensioning();
+
+					// reset product values;
+					row.Cells[this.colEuroval.Index].Value = null;
+					row.Cells[this.colEurovalCircuits.Index].Value = null;
+					row.Cells[this.colConcreteActivation.Index].Value = null;
+					row.Cells[this.colConcreteActivationCircuits.Index].Value = null;
+					row.Cells[this.colHitherm.Index].Value = null;
+					row.Cells[this.colHithermCircuits.Index].Value = null;
+					row.Cells[this.colHithermCompact.Index].Value = null;
+					row.Cells[this.colHithermCompactCircuits.Index].Value = null;
+					row.Cells[this.colModulKlimaBoden.Index].Value = null;
+					row.Cells[this.colModulKlimaBodenCircuits.Index].Value = null;
+					row.Cells[this.colModulKlimaDecke.Index].Value = null;
+					row.Cells[this.colModulKlimaDeckeCircuits.Index].Value = null;
+
+					row.Cells[this.colEuroval.Index].ErrorText = null;
+					row.Cells[this.colConcreteActivation.Index].ErrorText = null;
+					row.Cells[this.colHitherm.Index].ErrorText = null;
+					row.Cells[this.colHithermCompact.Index].ErrorText = null;
+					row.Cells[this.colModulKlimaBoden.Index].ErrorText = null;
+					row.Cells[this.colModulKlimaDecke.Index].ErrorText = null;
+
+					this.CheckLoadsCovered(row);
+
+					this.quickDimensioningGrid.Invalidate();
+				}
+			}
 		}
 	}
 }
