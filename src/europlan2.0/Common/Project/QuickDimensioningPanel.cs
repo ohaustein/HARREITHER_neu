@@ -540,6 +540,26 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void btnRevert_Click(object sender, EventArgs e) {
+			if (MessageBox.Show("Wollen Sie die Flächenaufstellung wirklich zurücksetzen? Alle Daten, die Sie in der Flächenaufstellung bereits eingegeben haben, gehen dadurch verloren.", "Wirklich Zurücksetzen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						room.RevertQuickDimensioning();
+					}
+				}
+				QuickDimensioning qd = Project.Instance.QuickDimensioning;
+				qd.EurovalCheckState = QuickDimensioning.ProductCheckState.None;
+				qd.ConcreteActivationCheckState = QuickDimensioning.ProductCheckState.None;
+				qd.HithermCheckState = QuickDimensioning.ProductCheckState.None;
+				qd.HithermCompactCheckState = QuickDimensioning.ProductCheckState.None;
+				qd.ModulBodenCheckState = QuickDimensioning.ProductCheckState.None;
+				qd.ModulDeckeCheckState = QuickDimensioning.ProductCheckState.None;
+				// TODO revert parameters
+
+				this.UpdateControl();
+			}
+		}
+
 		//private void txtAllocation_ValueChanged(object sender, EventArgs e) {
 		//    int percent = (int)this.txtAllocation.Value;
 		//    if (!(percent > 0) || !(percent <= 100)) {

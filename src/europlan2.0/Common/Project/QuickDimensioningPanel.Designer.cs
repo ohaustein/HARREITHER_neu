@@ -99,6 +99,7 @@ namespace Europlan.Common {
 			this.colNrOfServos = new Europlan.Common.NumericColumn();
 			this.colRoomControllers = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.iQuickDimensioningSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnRevert = new System.Windows.Forms.Button();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -121,6 +122,7 @@ namespace Europlan.Common {
 			// 
 			// pageSettings
 			// 
+			this.pageSettings.Controls.Add(this.btnRevert);
 			this.pageSettings.Controls.Add(this.txtCoolTemperature);
 			this.pageSettings.Controls.Add(this.lblTemp4);
 			this.pageSettings.Controls.Add(this.lblTemp3);
@@ -955,6 +957,16 @@ namespace Europlan.Common {
 			// 
 			this.iQuickDimensioningSummaryBindingSource.DataSource = typeof(Europlan.Common.IQuickDimensioningSummary);
 			// 
+			// btnRevert
+			// 
+			this.btnRevert.Location = new System.Drawing.Point(11, 239);
+			this.btnRevert.Name = "btnRevert";
+			this.btnRevert.Size = new System.Drawing.Size(251, 23);
+			this.btnRevert.TabIndex = 29;
+			this.btnRevert.Text = "Flächenaufstellung zurücksetzen";
+			this.btnRevert.UseVisualStyleBackColor = true;
+			this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
+			// 
 			// QuickDimensioningPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1033,5 +1045,6 @@ namespace Europlan.Common {
 		private NumericColumn colModulKlimaDeckeCircuits;
 		private NumericColumn colNrOfServos;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colRoomControllers;
+		private System.Windows.Forms.Button btnRevert;
 	}
 }

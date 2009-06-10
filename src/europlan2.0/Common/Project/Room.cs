@@ -28,13 +28,14 @@ namespace Europlan.Common {
 		private int coolLoad;
 		private int normalizedHeatLoad;
 		private int normalizedCoolLoad;
+		private int quickDimensioningRoomTemperature;
 		private int quickDimensioningHeatLoad;
 		private int quickDimensioningCoolLoad;
 		private RoomController quickDimensioningRoomController = RoomController.None;
 		private string quickDimensioningDistributor;
 		private string quickDimensioningComments;
 		private int additionalHeatLoad;
-		private string roomTypeId;
+		private string quickDimensioningRoomTypeId;
 		private bool quickDimensioningInitialized = false;
 
 		private List<Product> usedProductsForQuickDimensioning;
@@ -72,7 +73,7 @@ namespace Europlan.Common {
 			this.quickDimensioningRoomController = room.QuickDimensioningRoomController;
 			this.quickDimensioningDistributor = room.QuickDimensioningDistributor;
 			this.quickDimensioningComments = room.QuickDimensioningComments;
-			this.roomTypeId = room.roomTypeId;
+			this.quickDimensioningRoomTypeId = room.quickDimensioningRoomTypeId;
 			this.usedProductsForQuickDimensioning = new List<Product>();
 			foreach (Product product in room.UsedProductsForQuickDimensioning) {
 				this.usedProductsForQuickDimensioning.Add(product.Clone(this));
@@ -89,7 +90,7 @@ namespace Europlan.Common {
 			normalizedHeatLoad = 0;
 			normalizedCoolLoad = 0;
 			roomNode.Tag = this;
-			roomTypeId = "";
+			quickDimensioningRoomTypeId = "";
 			this.usedProductsForQuickDimensioning = new List<Product>();
 			this.quickDimensioningHeatLoad = 0;
 			this.quickDimensioningCoolLoad = 0;
@@ -112,7 +113,7 @@ namespace Europlan.Common {
 			this.quickDimensioningRoomController = room.QuickDimensioningRoomController;
 			this.quickDimensioningDistributor = room.QuickDimensioningDistributor;
 			this.quickDimensioningComments = room.QuickDimensioningComments;
-			this.RoomTypeId = room.RoomTypeId;
+			this.quickDimensioningRoomTypeId = room.QuickDimensioningRoomTypeId;
 			this.usedProductsForQuickDimensioning = new List<Product>();
 			foreach (Product product in room.UsedProductsForQuickDimensioning) {
 				this.usedProductsForQuickDimensioning.Add(product.Clone(this));
@@ -134,27 +135,27 @@ namespace Europlan.Common {
 			set { id = value; }
 		}
 
-		public string RoomTypeId {
-			get { return roomTypeId; }
-			set { roomTypeId = value; }
+		public string QuickDimensioningRoomTypeId {
+			get { return quickDimensioningRoomTypeId; }
+			set { quickDimensioningRoomTypeId = value; }
 		}
 
 		[XmlIgnore]
-		public RoomType RoomType{
+		public RoomType QuickDimensioningRoomType{
 			get {
-				if (this.RoomTypeId != "") {
+				if (this.QuickDimensioningRoomTypeId != "") {
 					foreach (RoomType type in Project.Instance.Config.RoomTypes) {
-						if (this.RoomTypeId == type.Id) {
+						if (this.QuickDimensioningRoomTypeId == type.Id) {
 							return type;
 						}
 					}
 				} else if (Project.Instance.Config.RoomTypes.Count > 0) {
-					this.RoomTypeId = Project.Instance.Config.RoomTypes[0].Id;
+					this.QuickDimensioningRoomTypeId = Project.Instance.Config.RoomTypes[0].Id;
 					return Project.Instance.Config.RoomTypes[0];
 				}
 				return null;
 			}
-			set { this.RoomTypeId = value.Id;}
+			set { this.QuickDimensioningRoomTypeId = value.Id;}
 		}
 
 		public int RoomTemperature {
@@ -198,8 +199,8 @@ namespace Europlan.Common {
 		}
 
 		public int GetDefaultQuickDimensioningHeatLoad() {
-			if (this.RoomType != null) {
-				return (int)(this.area * this.RoomType.HeatLoadPerSquareMeter);
+			if (this.QuickDimensioningRoomType != null) {
+				return (int)(this.area * this.QuickDimensioningRoomType.HeatLoadPerSquareMeter);
 			}
 			return 0;
 		}
@@ -210,8 +211,8 @@ namespace Europlan.Common {
 		}
 
 		public int GetDefaultQuickDimensioningCoolLoad() {
-			if (this.RoomType != null) {
-				return (int)(this.area * this.RoomType.CoolLoadPerSquareMeter);
+			if (this.QuickDimensioningRoomType != null) {
+				return (int)(this.area * this.QuickDimensioningRoomType.CoolLoadPerSquareMeter);
 			}
 			return 0;
 		}
@@ -271,6 +272,11 @@ namespace Europlan.Common {
 				}
 				return coveredLoad;
 			}
+		}
+
+		public int QuickDimensioningRoomTemperature {
+			get { return quickDimensioningRoomTemperature; }
+			set { quickDimensioningRoomTemperature = value; }
 		}
 
 		[System.Xml.Serialization.XmlIgnore()]
@@ -358,9 +364,27 @@ namespace Europlan.Common {
 			if (this.quickDimensioningInitialized) {
 				log.Warn("trying to initialize quick dimensioning, but it was already initialized before");
 			} else {
-				this.QuickDimensioningHeatLoad = this.GetDefaultQuickDimensioningHeatLoad();
+				int heatload = this.HeatLoad;
+				if (heatload <= 0) {
+					heatload = this.GetDefaultQuickDimensioningHeatLoad();
+				}
+				this.QuickDimensioningHeatLoad = heatLoad;
+				this.QuickDimensioningRoomTemperature = this.RoomTemperature;
 				this.quickDimensioningInitialized = true;
 			}
+		}
+
+		public void RevertQuickDimensioning() {
+			this.usedProductsForQuickDimensioning.Clear();
+			this.QuickDimensioningRoomType = Project.Instance.Config.RoomTypes[0];
+			this.quickDimensioningComments = "";
+			this.quickDimensioningCoolLoad = 0;
+			this.quickDimensioningDistributor = "";
+			this.quickDimensioningHeatLoad = 0;
+			this.quickDimensioningRoomController = RoomController.None;
+			this.quickDimensioningRoomTemperature = 0;
+			this.quickDimensioningInitialized = false;
+			this.InitializeQuickDimensioning();
 		}
 	}
 
