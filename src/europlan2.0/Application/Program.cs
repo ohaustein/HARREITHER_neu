@@ -78,6 +78,7 @@ namespace Europlan.Application {
 
 			if (args.Length != 0) {
 				string projectFile = "";
+				// path containing spaces will lead to fragmentation of filename in args array
 				foreach (string part in args) {
 					projectFile += part + " ";
 				}
