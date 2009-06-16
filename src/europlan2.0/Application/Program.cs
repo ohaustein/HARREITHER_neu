@@ -77,7 +77,11 @@ namespace Europlan.Application {
 			MainForm mainForm = new MainForm();
 
 			if (args.Length != 0) {
-				mainForm.ProjectToLoad = args[0];
+				string projectFile = "";
+				foreach (string part in args) {
+					projectFile += part + " ";
+				}
+				mainForm.ProjectToLoad = projectFile.TrimEnd(); ;
 			}
 			startingForm.Close();
 			System.Windows.Forms.Application.Run(mainForm);
