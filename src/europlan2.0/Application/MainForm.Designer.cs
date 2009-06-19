@@ -33,6 +33,8 @@ namespace Europlan.Application {
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.demandedHeatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.importGlobalConfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.datanormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,9 +61,12 @@ namespace Europlan.Application {
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
-			this.importGlobalConfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openGlobalConfDialog = new System.Windows.Forms.OpenFileDialog();
-			this.datanormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.recentProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.mainMenu.SuspendLayout();
@@ -106,9 +111,14 @@ namespace Europlan.Application {
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
+            this.toolStripSeparator4,
             this.importToolStripMenuItem,
+            this.toolStripSeparator5,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.recentProjectsToolStripMenuItem,
+            this.toolStripSeparator3,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
@@ -139,6 +149,18 @@ namespace Europlan.Application {
 			this.demandedHeatToolStripMenuItem.Name = "demandedHeatToolStripMenuItem";
 			resources.ApplyResources(this.demandedHeatToolStripMenuItem, "demandedHeatToolStripMenuItem");
 			this.demandedHeatToolStripMenuItem.Click += new System.EventHandler(this.demandedHeatToolStripMenuItem_Click);
+			// 
+			// importGlobalConfToolStripMenuItem
+			// 
+			this.importGlobalConfToolStripMenuItem.Name = "importGlobalConfToolStripMenuItem";
+			resources.ApplyResources(this.importGlobalConfToolStripMenuItem, "importGlobalConfToolStripMenuItem");
+			this.importGlobalConfToolStripMenuItem.Click += new System.EventHandler(this.importGlobalConfToolStripMenuItem_Click);
+			// 
+			// datanormToolStripMenuItem
+			// 
+			this.datanormToolStripMenuItem.Name = "datanormToolStripMenuItem";
+			resources.ApplyResources(this.datanormToolStripMenuItem, "datanormToolStripMenuItem");
+			this.datanormToolStripMenuItem.Click += new System.EventHandler(this.datanormToolStripMenuItem_Click);
 			// 
 			// saveToolStripMenuItem
 			// 
@@ -316,21 +338,34 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.statusStrip, "statusStrip");
 			this.statusStrip.Name = "statusStrip";
 			// 
-			// importGlobalConfToolStripMenuItem
-			// 
-			this.importGlobalConfToolStripMenuItem.Name = "importGlobalConfToolStripMenuItem";
-			resources.ApplyResources(this.importGlobalConfToolStripMenuItem, "importGlobalConfToolStripMenuItem");
-			this.importGlobalConfToolStripMenuItem.Click += new System.EventHandler(this.importGlobalConfToolStripMenuItem_Click);
-			// 
 			// openGlobalConfDialog
 			// 
 			resources.ApplyResources(this.openGlobalConfDialog, "openGlobalConfDialog");
 			// 
-			// datanormToolStripMenuItem
+			// toolStripSeparator2
 			// 
-			this.datanormToolStripMenuItem.Name = "datanormToolStripMenuItem";
-			resources.ApplyResources(this.datanormToolStripMenuItem, "datanormToolStripMenuItem");
-			this.datanormToolStripMenuItem.Click += new System.EventHandler(this.datanormToolStripMenuItem_Click);
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+			// 
+			// recentProjectsToolStripMenuItem
+			// 
+			resources.ApplyResources(this.recentProjectsToolStripMenuItem, "recentProjectsToolStripMenuItem");
+			this.recentProjectsToolStripMenuItem.Name = "recentProjectsToolStripMenuItem";
+			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+			// 
+			// toolStripSeparator5
+			// 
+			this.toolStripSeparator5.Name = "toolStripSeparator5";
+			resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
 			// 
 			// MainForm
 			// 
@@ -394,6 +429,11 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripMenuItem importGlobalConfToolStripMenuItem;
 		private System.Windows.Forms.OpenFileDialog openGlobalConfDialog;
 		private System.Windows.Forms.ToolStripMenuItem datanormToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripMenuItem recentProjectsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 
 	}
 }

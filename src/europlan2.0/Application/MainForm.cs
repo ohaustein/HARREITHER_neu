@@ -26,6 +26,8 @@ namespace Europlan.Application {
 		private bool guiUpdateInProgress = false;
 		private bool projectUnsaved = false;
 
+		Queue<string> mruList = new Queue<string>();
+
 		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
 		private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
 
@@ -120,6 +122,18 @@ namespace Europlan.Application {
 				this.WindowState = FormWindowState.Normal;
 			}
 
+			string recentProjectsSetting = settings.GetSetting("RecentProjects", "");
+			string[] recentProjects = recentProjectsSetting.Split(';');
+			recentProjectsToolStripMenuItem.DropDownItems.Clear();
+			foreach (string item in recentProjects) {
+				if (File.Exists(item)) {
+					mruList.Enqueue(item);
+					ToolStripMenuItem fileRecent = new ToolStripMenuItem(item, null, RecentProject_click);
+					recentProjectsToolStripMenuItem.DropDownItems.Add(fileRecent);
+				}
+			}
+			recentProjectsToolStripMenuItem.Enabled = mruList.Count > 0;
+
 			Project.ProjectLoaded += new Project.ProjectLoadedHandler(myProject_ProjectLoaded);
 			Project.ProjectSaved += new Project.ProjectSavedHandler(myProject_ProjectSaved);
 
@@ -139,11 +153,34 @@ namespace Europlan.Application {
 			this.updateController.CheckForUpdateAsync();
 		}
 
+		private void AddRecentProject(string fileName) {
+			if (!mruList.Contains(projectFileName)) {
+				mruList.Enqueue(projectFileName);
+				if (mruList.Count > 6) {
+					mruList.Dequeue();
+				}
+			}
+			recentProjectsToolStripMenuItem.DropDownItems.Clear();
+			foreach (string item in mruList) {
+				ToolStripMenuItem fileRecent = new ToolStripMenuItem(item, null, RecentProject_click);
+				recentProjectsToolStripMenuItem.DropDownItems.Add(fileRecent);
+			}
+			recentProjectsToolStripMenuItem.Enabled = mruList.Count > 0;
+		}
+
+		private void RecentProject_click(object sender, EventArgs e) {
+			if (CheckForUnsavedChanges()) {
+				projectFileName = sender.ToString();
+				LoadProject();
+			}
+		}
+
 		private void LoadProject() {
 			try {
 				if (projectFileName != null) {
 					Project.Load(projectFileName);
 					currentProject = Project.Instance;
+					AddRecentProject(projectFileName);
 				}
 			} catch (Exception ex) {
 				log.Error("Problem loading project:", ex);
@@ -156,6 +193,7 @@ namespace Europlan.Application {
 			try {
 				if (currentProject != null && projectFileName != null) {
 					Project.Save(projectFileName);
+					AddRecentProject(projectFileName);
 				}
 			} catch (Exception ex) {
 				log.Error("Problem saving project:", ex);
@@ -192,6 +230,15 @@ namespace Europlan.Application {
 				} else if (this.WindowState == FormWindowState.Maximized) {
 					settings.StoreSetting("Maximized", true);
 				}
+
+				string recentProjects = "";
+				foreach (string recentProject in mruList) {
+					recentProjects += recentProject;
+					recentProjects += ";";
+				}
+				recentProjects = recentProjects.TrimEnd(';');
+				settings.StoreSetting("RecentProjects", recentProjects);
+
 				settings.StoreSetting("SplitterDistance", this.splitContainer.SplitterDistance);
 				SettingsFile.Update();
 			} else {
