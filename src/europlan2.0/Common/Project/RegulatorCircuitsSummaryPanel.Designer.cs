@@ -27,13 +27,13 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridRegulatoryCircuits = new System.Windows.Forms.DataGridView();
-			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.flowTemperatureDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.regulatoryCircuitsSource = new System.Windows.Forms.BindingSource(this.components);
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.flowTemperatureDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).BeginInit();
 			this.SuspendLayout();
@@ -68,37 +68,6 @@ namespace Europlan.Common {
 			this.gridRegulatoryCircuits.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.regulatoryCircuitsGrid_CellValueChanged);
 			this.gridRegulatoryCircuits.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.regulatoryCircuitsGrid_UserDeletedRow);
 			// 
-			// idDataGridViewTextBoxColumn
-			// 
-			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			this.idDataGridViewTextBoxColumn.HeaderText = "Nr.";
-			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.idDataGridViewTextBoxColumn.ToolTipText = "Eindeutige Regelkreisnummer";
-			this.idDataGridViewTextBoxColumn.Width = 50;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.nameDataGridViewTextBoxColumn.ToolTipText = "Bezeichnung des Regelkreises";
-			this.nameDataGridViewTextBoxColumn.Width = 200;
-			// 
-			// flowTemperatureDataGridViewTextBoxColumn
-			// 
-			this.flowTemperatureDataGridViewTextBoxColumn.DataPropertyName = "FlowTemperature";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F0";
-			this.flowTemperatureDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-			this.flowTemperatureDataGridViewTextBoxColumn.HeaderText = "TvHeiz (°C)";
-			this.flowTemperatureDataGridViewTextBoxColumn.Name = "flowTemperatureDataGridViewTextBoxColumn";
-			this.flowTemperatureDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.REGULATORY_CIRCUIT_TEMP;
-			this.flowTemperatureDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.flowTemperatureDataGridViewTextBoxColumn.ToolTipText = "Vorlauftemperatur im Heizbetrieb";
-			this.flowTemperatureDataGridViewTextBoxColumn.Width = 50;
-			// 
 			// regulatoryCircuitsSource
 			// 
 			this.regulatoryCircuitsSource.DataSource = typeof(Europlan.Common.Project);
@@ -123,6 +92,37 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
 			this.dataGridViewTextBoxColumn3.Width = 80;
 			// 
+			// idDataGridViewTextBoxColumn
+			// 
+			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+			this.idDataGridViewTextBoxColumn.HeaderText = "Nr.";
+			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.idDataGridViewTextBoxColumn.ToolTipText = "Eindeutige Regelkreisnummer";
+			this.idDataGridViewTextBoxColumn.Width = 50;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.nameDataGridViewTextBoxColumn.ToolTipText = "Bezeichnung des Regelkreises";
+			this.nameDataGridViewTextBoxColumn.Width = 200;
+			// 
+			// flowTemperatureDataGridViewTextBoxColumn
+			// 
+			this.flowTemperatureDataGridViewTextBoxColumn.DataPropertyName = "HeatFlowTemperature";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle2.Format = "F0";
+			this.flowTemperatureDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+			this.flowTemperatureDataGridViewTextBoxColumn.HeaderText = "TvHeiz (°C)";
+			this.flowTemperatureDataGridViewTextBoxColumn.Name = "flowTemperatureDataGridViewTextBoxColumn";
+			this.flowTemperatureDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.REGULATORY_CIRCUIT_TEMP;
+			this.flowTemperatureDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.flowTemperatureDataGridViewTextBoxColumn.ToolTipText = "Vorlauftemperatur im Heizbetrieb";
+			this.flowTemperatureDataGridViewTextBoxColumn.Width = 50;
+			// 
 			// RegulatorCircuitsSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,6 +145,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-		private Europlan.Common.NumericColumn flowTemperatureDataGridViewTextBoxColumn;
+		private NumericColumn flowTemperatureDataGridViewTextBoxColumn;
 	}
 }
