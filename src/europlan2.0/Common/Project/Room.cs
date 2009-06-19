@@ -26,8 +26,7 @@ namespace Europlan.Common {
 		private float area;
 		private int heatLoad;
 		private int coolLoad;
-		private int normalizedHeatLoad;
-		private int normalizedCoolLoad;
+		private int floorHeatingLoss;
 		private int quickDimensioningRoomTemperature;
 		private int quickDimensioningHeatLoad;
 		private int quickDimensioningCoolLoad;
@@ -66,8 +65,7 @@ namespace Europlan.Common {
 			this.area = room.Area;
 			this.heatLoad = room.HeatLoad;
 			this.coolLoad = room.CoolLoad;
-			this.normalizedHeatLoad = room.NormalizedHeatLoad;
-			this.normalizedCoolLoad = room.NormalizedCoolLoad;
+			this.floorHeatingLoss = room.FloorHeatingLoss;
 			this.quickDimensioningHeatLoad = room.QuickDimensioningHeatLoad;
 			this.quickDimensioningCoolLoad = room.QuickDimensioningCoolLoad;
 			this.quickDimensioningRoomController = room.QuickDimensioningRoomController;
@@ -87,8 +85,7 @@ namespace Europlan.Common {
 			area = 0;
 			heatLoad = 0;
 			coolLoad = 0;
-			normalizedHeatLoad = 0;
-			normalizedCoolLoad = 0;
+			floorHeatingLoss = 0;
 			roomNode.Tag = this;
 			quickDimensioningRoomTypeId = "";
 			this.usedProductsForQuickDimensioning = new List<Product>();
@@ -178,19 +175,26 @@ namespace Europlan.Common {
 			set { coolLoad = value; }
 		}
 
+		[XmlIgnore]
 		public int NormalizedHeatLoad {
-			get { return normalizedHeatLoad; }
-			set { normalizedHeatLoad = value; }
+			get { return heatLoad - floorHeatingLoss; }
+			set { floorHeatingLoss = heatLoad - value; }
 		}
 
+		[XmlIgnore]
 		public int NormalizedCoolLoad {
-			get { return normalizedCoolLoad; }
-			set { normalizedCoolLoad = value; }
+			get { return coolLoad; }
+			set { /*TODO*/; }
 		}
 
 		public int AdditionalHeatLoad {
 			get { return additionalHeatLoad; }
 			set { additionalHeatLoad = value; }
+		}
+
+		public int FloorHeatingLoss {
+			get { return floorHeatingLoss; }
+			set { floorHeatingLoss = value; }
 		}
 
 		public int QuickDimensioningHeatLoad {
@@ -277,12 +281,6 @@ namespace Europlan.Common {
 		public int QuickDimensioningRoomTemperature {
 			get { return quickDimensioningRoomTemperature; }
 			set { quickDimensioningRoomTemperature = value; }
-		}
-
-		[System.Xml.Serialization.XmlIgnore()]
-		public int FloorHeatingLoss {
-			get { return heatLoad - normalizedHeatLoad; }
-			set { normalizedHeatLoad = heatLoad - value; }
 		}
 
 		public List<Product> UsedProductsForQuickDimensioning {
