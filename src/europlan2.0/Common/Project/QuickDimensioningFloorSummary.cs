@@ -135,7 +135,7 @@ namespace Europlan.Common {
 						if (controllers.ContainsKey(room.QuickDimensioningRoomController)) {
 							c = controllers[room.QuickDimensioningRoomController];
 						}
-						c += room.QuickDimensioningNrOfServos;
+						c++;
 						controllers[room.QuickDimensioningRoomController] = c;
 					}
 				}
