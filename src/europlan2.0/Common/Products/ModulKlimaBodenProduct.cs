@@ -16,6 +16,7 @@ namespace Europlan.Common {
 
 		public override void Initialize() {
 			quickDimensioningHeatPowerPerSquareMeter = 50;
+			quickDimensioningCoolPowerPerSquareMeter = 50;
 			canHeat = true;
 			canCool = false;
 		}
