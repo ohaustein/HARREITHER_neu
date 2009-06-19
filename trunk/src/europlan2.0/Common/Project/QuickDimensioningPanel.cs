@@ -24,16 +24,20 @@ namespace Europlan.Common {
 			//Project.Instance.Config.
 
 			this.cbEurovalHeat.Checked = ((Project.Instance.QuickDimensioning.EurovalCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbEurovalCool.Checked = ((Project.Instance.QuickDimensioning.EurovalCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbBkaHeat.Checked = ((Project.Instance.QuickDimensioning.ConcreteActivationCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
 			this.cbBkaCool.Checked = ((Project.Instance.QuickDimensioning.ConcreteActivationCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbHithermHeat.Checked = ((Project.Instance.QuickDimensioning.HithermCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbHithermCool.Checked = ((Project.Instance.QuickDimensioning.HithermCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbHithermCompactHeat.Checked = ((Project.Instance.QuickDimensioning.HithermCompactCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbHithermCompactCool.Checked = ((Project.Instance.QuickDimensioning.HithermCompactCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbModulKlimaBodenHeat.Checked = ((Project.Instance.QuickDimensioning.ModulBodenCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbModulKlimaBodenCool.Checked = ((Project.Instance.QuickDimensioning.ModulBodenCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbModulKlimaDeckeHeat.Checked = ((Project.Instance.QuickDimensioning.ModulDeckeCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
 			this.cbModulKlimaDeckeCool.Checked = ((Project.Instance.QuickDimensioning.ModulDeckeCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 
 			this.lblTemp1.Visible = this.EurovalHeating;
-			this.txtHeatTemperature.Visible = this.EurovalHeating;
+			this.cmbHeatFlowTemperature.Visible = this.EurovalHeating;
 			this.lblTemp2.Visible = this.EurovalHeating;
 			this.cmbDistance.Visible = this.EurovalHeating;
 			this.lblDistance.Visible = this.EurovalHeating;
@@ -47,7 +51,18 @@ namespace Europlan.Common {
 			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.txtAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 
-			this.txtHeatTemperature.Text = Project.Instance.QuickDimensioning.HeatFlowTemperature.ToString();
+			int index = 0;
+			if (Project.Instance.QuickDimensioning.HeatFlowTemperature == 30) {
+				index = 0;
+			} else if (Project.Instance.QuickDimensioning.HeatFlowTemperature == 35) {
+				index = 1;
+			} else if (Project.Instance.QuickDimensioning.HeatFlowTemperature == 40) {
+				index = 2;
+			} else if (Project.Instance.QuickDimensioning.HeatFlowTemperature == 45) {
+				index = 3;
+			}
+
+			this.cmbHeatFlowTemperature.SelectedIndex = index;
 			this.txtCoolTemperature.Text = Project.Instance.QuickDimensioning.CoolFlowTemperature.ToString();
 			this.cmbDistance.SelectedIndex = (int)Project.Instance.QuickDimensioning.LayDistance;
 			this.txtAllocation.Text = Project.Instance.QuickDimensioning.CeilingAllocation.ToString();
@@ -79,7 +94,7 @@ namespace Europlan.Common {
 				grid.HithermCompact = this.HithermCompactHeating;
 				grid.ModulKlimaBoden = this.ModulKlimaBodenHeating;
 				grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
-				grid.Cooling = this.ModulKlimaDeckeCooling || this.ConcreteActivationCooling;
+				grid.Cooling = this.Cooling;
 				grid.Floor = floor;
 				page.Controls.Add(grid);
 				grid.Dock = DockStyle.Fill;
@@ -99,9 +114,36 @@ namespace Europlan.Common {
 			return true;
 		}
 
+		public bool Heating {
+			get {
+				return this.EurovalHeating ||
+						this.ConcreteActivationHeating ||
+						this.HithermHeating ||
+						this.HithermCompactHeating ||
+						this.ModulKlimaBodenHeating ||
+						this.ModulKlimaDeckeHeating;
+			}
+		}
+
+		public bool Cooling {
+			get {
+				return this.EurovalCooling ||
+						this.ConcreteActivationCooling ||
+						this.HithermCooling ||
+						this.HithermCompactCooling ||
+						this.ModulKlimaBodenCooling ||
+						this.ModulKlimaDeckeCooling;
+			}
+		}
+
 		public bool EurovalHeating {
 			get { return this.cbEurovalHeat.Checked; }
 			set { this.cbEurovalHeat.Checked = value; }
+		}
+
+		public bool EurovalCooling {
+			get { return this.cbEurovalCool.Checked; }
+			set { this.cbEurovalCool.Checked = value; }
 		}
 
 		public bool ConcreteActivationHeating {
@@ -119,14 +161,29 @@ namespace Europlan.Common {
 			set { this.cbHithermHeat.Checked = value; }
 		}
 
+		public bool HithermCooling {
+			get { return this.cbHithermCool.Checked; }
+			set { this.cbHithermCool.Checked = value; }
+		}
+
 		public bool HithermCompactHeating {
 			get { return this.cbHithermCompactHeat.Checked; }
 			set { this.cbHithermCompactHeat.Checked = value; }
 		}
 
+		public bool HithermCompactCooling {
+			get { return this.cbHithermCompactCool.Checked; }
+			set { this.cbHithermCompactCool.Checked = value; }
+		}
+
 		public bool ModulKlimaBodenHeating {
 			get { return this.cbModulKlimaBodenHeat.Checked; }
 			set { this.cbModulKlimaBodenHeat.Checked = value; }
+		}
+
+		public bool ModulKlimaBodenCooling {
+			get { return this.cbModulKlimaBodenCool.Checked; }
+			set { this.cbModulKlimaBodenCool.Checked = value; }
 		}
 
 		public bool ModulKlimaDeckeHeating {
@@ -141,7 +198,7 @@ namespace Europlan.Common {
 
 		private void cbEurovalHeat_CheckedChanged(object sender, EventArgs e) {
 			DialogResult result = DialogResult.None;
-			if (!this.EurovalHeating) {
+			if (!this.EurovalHeating && !this.EurovalCooling) {
 				bool productFound = false;
 				foreach (Floor floor in Project.Instance.Floors) {
 					foreach (Room room in floor.Rooms) {
@@ -151,14 +208,15 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?", "Euroval entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
 				this.EurovalHeating = !this.EurovalHeating;
 			} else {
 				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
-					grid.Euroval = this.EurovalHeating;
+					grid.Euroval = this.EurovalHeating || this.EurovalCooling;
+					grid.Cooling = this.Cooling;
 				}
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
@@ -172,13 +230,56 @@ namespace Europlan.Common {
 				}
 				this.OnProjectChanged();
 			}
-			this.lblTemp1.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
-			this.txtHeatTemperature.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
-			this.lblTemp2.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
+
+			this.lblTemp1.Visible = this.Heating;
+			this.cmbHeatFlowTemperature.Visible = this.Heating;
+			this.lblTemp2.Visible = this.Heating;
 			this.cmbDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
 			this.lblDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
-			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
 			Project.Instance.QuickDimensioning.EurovalCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
+		}
+
+		private void cbEurovalCool_CheckedChanged(object sender, EventArgs e) {
+			DialogResult result = DialogResult.None;
+			if (!this.EurovalHeating && !this.EurovalCooling) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<EurovalProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
+			}
+			if (result == DialogResult.No) {
+				this.EurovalCooling = !this.EurovalCooling;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.Euroval = this.EurovalHeating || this.EurovalCooling;
+					grid.Cooling = this.Cooling;
+				}
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							EurovalProduct product = room.GetProductForQuickDimensioning<EurovalProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+				this.OnProjectChanged();
+			}
+
+			this.lblTemp3.Visible = this.Cooling;
+			this.lblTemp4.Visible = this.Cooling;
+			this.txtCoolTemperature.Visible = this.Cooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.EurovalCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbBkaHeat_CheckedChanged(object sender, EventArgs e) {
@@ -201,6 +302,7 @@ namespace Europlan.Common {
 			} else {
 				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
 					grid.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
+					grid.Cooling = this.Cooling;
 				}
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
@@ -215,12 +317,12 @@ namespace Europlan.Common {
 				this.OnProjectChanged();
 			}
 
-			this.lblTemp1.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
-			this.txtHeatTemperature.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
-			this.lblTemp2.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
+			this.lblTemp1.Visible = this.Heating;
+			this.cmbHeatFlowTemperature.Visible = this.Heating;
+			this.lblTemp2.Visible = this.Heating;
 			this.cmbDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
 			this.lblDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
-			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
 			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.ConcreteActivationHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ConcreteActivationCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
@@ -244,7 +346,7 @@ namespace Europlan.Common {
 			} else {
 				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
 					grid.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
-					grid.Cooling = this.ModulKlimaDeckeCooling | this.ConcreteActivationCooling;
+					grid.Cooling = this.Cooling;
 				}
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
@@ -258,17 +360,17 @@ namespace Europlan.Common {
 				}
 				this.OnProjectChanged();
 			}
-			
-			this.lblTemp3.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
-			this.lblTemp4.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
-			this.txtCoolTemperature.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
-			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+
+			this.lblTemp3.Visible = this.Cooling;
+			this.lblTemp4.Visible = this.Cooling;
+			this.txtCoolTemperature.Visible = this.Cooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
 			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.ConcreteActivationHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ConcreteActivationCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbHithermHeat_CheckedChanged(object sender, EventArgs e) {
 			DialogResult result = DialogResult.None;
-			if (!this.HithermHeating) {
+			if (!this.HithermHeating && !this.HithermCooling) {
 				bool productFound = false;
 				foreach (Floor floor in Project.Instance.Floors) {
 					foreach (Room room in floor.Rooms) {
@@ -278,14 +380,15 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?", "Hitherm entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
 				this.HithermHeating = !this.HithermHeating;
 			} else {
 				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
-					grid.Hitherm = this.HithermHeating;
+					grid.Hitherm = this.HithermHeating || this.HithermCooling;
+					grid.Cooling = this.Cooling;
 				}
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
@@ -299,12 +402,59 @@ namespace Europlan.Common {
 				}
 				this.OnProjectChanged();
 			}
-			Project.Instance.QuickDimensioning.HithermCheckState = (this.HithermHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
+
+			this.lblTemp1.Visible = this.Heating;
+			this.cmbHeatFlowTemperature.Visible = this.Heating;
+			this.lblTemp2.Visible = this.Heating;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			Project.Instance.QuickDimensioning.HithermCheckState = (this.HithermHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+		}
+
+		private void cbHithermCool_CheckedChanged(object sender, EventArgs e) {
+			DialogResult result = DialogResult.None;
+			if (!this.HithermHeating && !this.HithermCooling) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<HithermProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
+			}
+			if (result == DialogResult.No) {
+				this.HithermCooling = !this.HithermCooling;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.Hitherm = this.HithermHeating || this.HithermCooling;
+					grid.Cooling = this.Cooling;
+				}
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							HithermProduct product = room.GetProductForQuickDimensioning<HithermProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+				this.OnProjectChanged();
+			}
+
+			this.lblTemp3.Visible = this.Cooling;
+			this.lblTemp4.Visible = this.Cooling;
+			this.txtCoolTemperature.Visible = this.Cooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			Project.Instance.QuickDimensioning.HithermCheckState = (this.HithermHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbHithermCompactHeat_CheckedChanged(object sender, EventArgs e) {
 			DialogResult result = DialogResult.None;
-			if (!this.HithermCompactHeating) {
+			if (!this.HithermCompactHeating && !this.HithermCompactCooling) {
 				bool productFound = false;
 				foreach (Floor floor in Project.Instance.Floors) {
 					foreach (Room room in floor.Rooms) {
@@ -314,14 +464,15 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?", "Hitherm Compact entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
 				this.HithermCompactHeating = !this.HithermCompactHeating;
 			} else {
 				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
-					grid.HithermCompact = this.HithermCompactHeating;
+					grid.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
+					grid.Cooling = this.Cooling;
 				}
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
@@ -335,12 +486,59 @@ namespace Europlan.Common {
 				}
 				this.OnProjectChanged();
 			}
-			Project.Instance.QuickDimensioning.HithermCompactCheckState = (this.HithermCompactHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
+
+			this.lblTemp1.Visible = this.Heating;
+			this.cmbHeatFlowTemperature.Visible = this.Heating;
+			this.lblTemp2.Visible = this.Heating;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			Project.Instance.QuickDimensioning.HithermCompactCheckState = (this.HithermCompactHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+		}
+
+		private void cbHithermCompactCool_CheckedChanged(object sender, EventArgs e) {
+			DialogResult result = DialogResult.None;
+			if (!this.HithermCompactHeating && !this.HithermCompactCooling) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<HithermCompactProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
+			}
+			if (result == DialogResult.No) {
+				this.HithermCompactCooling = !this.HithermCompactCooling;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
+					grid.Cooling = this.Cooling;
+				}
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							HithermCompactProduct product = room.GetProductForQuickDimensioning<HithermCompactProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+				this.OnProjectChanged();
+			}
+
+			this.lblTemp3.Visible = this.Cooling;
+			this.lblTemp4.Visible = this.Cooling;
+			this.txtCoolTemperature.Visible = this.Cooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			Project.Instance.QuickDimensioning.HithermCompactCheckState = (this.HithermCompactHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbModulKlimaBodenHeat_CheckedChanged(object sender, EventArgs e) {
 			DialogResult result = DialogResult.None;
-			if (!this.ModulKlimaBodenHeating) {
+			if (!this.ModulKlimaBodenHeating && !this.ModulKlimaBodenCooling) {
 				bool productFound = false;
 				foreach (Floor floor in Project.Instance.Floors) {
 					foreach (Room room in floor.Rooms) {
@@ -350,14 +548,15 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?", "Modul Klimaboden entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
 				this.ModulKlimaBodenHeating = !this.ModulKlimaBodenHeating;
 			} else {
 				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
-					grid.ModulKlimaBoden = this.ModulKlimaBodenHeating;
+					grid.ModulKlimaBoden = this.ModulKlimaBodenHeating || this.ModulKlimaBodenCooling;
+					grid.Cooling = this.Cooling;
 				}
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
@@ -371,7 +570,54 @@ namespace Europlan.Common {
 				}
 				this.OnProjectChanged();
 			}
-			Project.Instance.QuickDimensioning.ModulBodenCheckState = (this.ModulKlimaBodenHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
+
+			this.lblTemp1.Visible = this.Heating;
+			this.cmbHeatFlowTemperature.Visible = this.Heating;
+			this.lblTemp2.Visible = this.Heating;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			Project.Instance.QuickDimensioning.ModulBodenCheckState = (this.ModulKlimaBodenHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaBodenCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+		}
+
+		private void cbModulKlimaBodenCool_CheckedChanged(object sender, EventArgs e) {
+			DialogResult result = DialogResult.None;
+			if (!this.ModulKlimaBodenHeating && !this.ModulKlimaBodenCooling) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<ModulKlimaBodenProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
+			}
+			if (result == DialogResult.No) {
+				this.ModulKlimaBodenCooling = !this.ModulKlimaBodenCooling;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.ModulKlimaBoden = this.ModulKlimaBodenHeating || this.ModulKlimaBodenCooling;
+					grid.Cooling = this.Cooling;
+				}
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							ModulKlimaBodenProduct product = room.GetProductForQuickDimensioning<ModulKlimaBodenProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+				this.OnProjectChanged();
+			}
+
+			this.lblTemp3.Visible = this.Cooling;
+			this.lblTemp4.Visible = this.Cooling;
+			this.txtCoolTemperature.Visible = this.Cooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			Project.Instance.QuickDimensioning.ModulBodenCheckState = (this.ModulKlimaBodenHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaBodenCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbModulKlimaDeckeHeat_CheckedChanged(object sender, EventArgs e) {
@@ -394,6 +640,7 @@ namespace Europlan.Common {
 			} else {
 				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
 					grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+					grid.Cooling = this.Cooling;
 				}
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
@@ -407,10 +654,14 @@ namespace Europlan.Common {
 				}
 				this.OnProjectChanged();
 			}
+
+			this.lblTemp1.Visible = this.Heating;
+			this.cmbHeatFlowTemperature.Visible = this.Heating;
+			this.lblTemp2.Visible = this.Heating;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
 			this.lblAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.txtAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
-			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
@@ -434,7 +685,7 @@ namespace Europlan.Common {
 			} else {
 				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
 					grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
-					grid.Cooling = this.ModulKlimaDeckeCooling | this.ConcreteActivationCooling;
+					grid.Cooling = this.Cooling;
 				}
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
@@ -451,10 +702,10 @@ namespace Europlan.Common {
 			this.lblAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.txtAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
-			this.lblTemp3.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
-			this.lblTemp4.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
-			this.txtCoolTemperature.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
-			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.lblTemp3.Visible = this.Cooling;
+			this.lblTemp4.Visible = this.Cooling;
+			this.txtCoolTemperature.Visible = this.Cooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
 			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
@@ -474,18 +725,20 @@ namespace Europlan.Common {
 		//    }
 		//}
 
-
-		private void txtTemperature_ValueChanged(object sender, EventArgs e) {
-			float temperature = (float)this.txtHeatTemperature.Value;
-			Project.Instance.QuickDimensioning.HeatFlowTemperature = temperature;
-			if (temperature <= 31.25) {
-				this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV5;
-			} else if (temperature > 31.25 && temperature <= 33.75) {
-				this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV15;
-			} else if (temperature > 33.75 && temperature <= 36.25) {
-				this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV20;
-			} else if (temperature > 36.25) {
-				this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV25;
+		private void cmbHeatFlowTemperature_SelectedIndexChanged(object sender, EventArgs e) {
+			switch (cmbHeatFlowTemperature.SelectedIndex) {
+				case 0:
+					this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV5;
+					break;
+				case 1:
+					this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV15;
+					break;
+				case 2:
+					this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV20;
+					break;
+				case 3:
+					this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV25;
+					break;
 			}
 			this.OnProjectChanged();
 		}
@@ -503,19 +756,19 @@ namespace Europlan.Common {
 
 		private void tabQuickDimensioning_Selecting(object sender, TabControlCancelEventArgs e) {
 			if (e.TabPage == this.pageSummary) {
-				this.colEurovalArea.Visible = this.EurovalHeating;
-				this.colEurovalCircuits.Visible = this.EurovalHeating;
+				this.colEurovalArea.Visible = this.EurovalHeating | this.EurovalCooling;
+				this.colEurovalCircuits.Visible = this.EurovalHeating | this.EurovalCooling;
 				this.colConcreteActivationArea.Visible = this.ConcreteActivationHeating | this.ConcreteActivationCooling;
 				this.colConcreteActivationCircuits.Visible = this.ConcreteActivationHeating | this.ConcreteActivationCooling;
-				this.colHithermArea.Visible = this.HithermHeating;
-				this.colHithermCircuits.Visible = this.HithermHeating;
-				this.colHithermCompactArea.Visible = this.HithermCompactHeating;
-				this.colHithermCompactCircuits.Visible = this.HithermCompactHeating;
-				this.colModulKlimaBodenArea.Visible = this.ModulKlimaBodenHeating;
-				this.colModulKlimaBodenCircuits.Visible = this.ModulKlimaBodenHeating;
+				this.colHithermArea.Visible = this.HithermHeating | this.HithermCooling;
+				this.colHithermCircuits.Visible = this.HithermHeating | this.HithermCooling;
+				this.colHithermCompactArea.Visible = this.HithermCompactHeating | this.HithermCompactCooling;
+				this.colHithermCompactCircuits.Visible = this.HithermCompactHeating | this.HithermCompactCooling;
+				this.colModulKlimaBodenArea.Visible = this.ModulKlimaBodenHeating | this.ModulKlimaBodenCooling;
+				this.colModulKlimaBodenCircuits.Visible = this.ModulKlimaBodenHeating | this.ModulKlimaBodenCooling;
 				this.colModulKlimaDeckeArea.Visible = this.ModulKlimaDeckeHeating | this.ModulKlimaDeckeCooling;
 				this.colModulKlimaDeckeCircuits.Visible = this.ModulKlimaDeckeHeating | this.ModulKlimaDeckeCooling;
-				this.colCoolLoad.Visible = this.ConcreteActivationCooling | this.ModulKlimaDeckeCooling;
+				this.colCoolLoad.Visible = this.Cooling;
 				List<IQuickDimensioningSummary> summary = new List<IQuickDimensioningSummary>();
 				foreach (Floor floor in Project.Instance.Floors) {
 					summary.Add(new QuickDimensioningFloorSummary(floor));
