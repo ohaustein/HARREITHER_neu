@@ -24,6 +24,7 @@ namespace Europlan.Common {
 		private float coolFlowTemperature = 16;
 		private Europlan.Common.EurovalProduct.LayDistance layDistance = Europlan.Common.EurovalProduct.LayDistance.EV20;
 		private float ceilingAllocation = 80;
+		private List<QuickDimensioningDistributor> distributors;
 
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(QuickDimensioning));
@@ -33,7 +34,7 @@ namespace Europlan.Common {
 		}
 
 		private void InitializeQuickDimensioning() {
-
+			distributors = new List<QuickDimensioningDistributor>();
 		}
 
 		public Type AssociatedPanelType {
@@ -92,6 +93,11 @@ namespace Europlan.Common {
 		public float CeilingAllocation {
 			get { return ceilingAllocation; }
 			set { ceilingAllocation = value; }
+		}
+
+		public List<QuickDimensioningDistributor> Distributors {
+			get { return distributors; }
+			set { distributors = value; }
 		}
 
 	}
