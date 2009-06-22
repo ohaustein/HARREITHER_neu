@@ -546,7 +546,7 @@ namespace Europlan.Common {
 				DataGridViewColumn col = cell.OwningColumn;
 				DataGridViewRow row = cell.OwningRow;
 				if (col == this.colRoomTemperature || col == this.colHeatLoad || col == this.colCoolLoad ||
-						col == this.colRoomController || col == this.colDistributor || col == this.colComments ||
+						col == this.colRoomController || col == this.colComments ||
 						col == this.colEuroval || col == this.colEurovalCircuits ||
 						col == this.colConcreteActivation || col == this.colConcreteActivationCircuits ||
 						col == this.colHitherm || col == this.colHithermCircuits ||
