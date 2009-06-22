@@ -80,7 +80,7 @@ namespace Europlan.Common {
 			this.cbBkaCool = new System.Windows.Forms.CheckBox();
 			this.lblAssumptions = new System.Windows.Forms.Label();
 			this.pageDistributors = new System.Windows.Forms.TabPage();
-			this.quickDimensioningDistributorsSummary1 = new Europlan.Common.QuickDimensioningDistributorsSummary();
+			this.quickDimensioningDistributorsSummary = new Europlan.Common.QuickDimensioningDistributorsSummary();
 			this.pageSummary = new System.Windows.Forms.TabPage();
 			this.dataGridView2 = new System.Windows.Forms.DataGridView();
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -646,7 +646,7 @@ namespace Europlan.Common {
 			// 
 			// pageDistributors
 			// 
-			this.pageDistributors.Controls.Add(this.quickDimensioningDistributorsSummary1);
+			this.pageDistributors.Controls.Add(this.quickDimensioningDistributorsSummary);
 			this.pageDistributors.Location = new System.Drawing.Point(4, 22);
 			this.pageDistributors.Name = "pageDistributors";
 			this.pageDistributors.Padding = new System.Windows.Forms.Padding(3);
@@ -655,13 +655,14 @@ namespace Europlan.Common {
 			this.pageDistributors.Text = "Verteiler";
 			this.pageDistributors.UseVisualStyleBackColor = true;
 			// 
-			// quickDimensioningDistributorsSummary1
+			// quickDimensioningDistributorsSummary
 			// 
-			this.quickDimensioningDistributorsSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.quickDimensioningDistributorsSummary1.Location = new System.Drawing.Point(3, 3);
-			this.quickDimensioningDistributorsSummary1.Name = "quickDimensioningDistributorsSummary1";
-			this.quickDimensioningDistributorsSummary1.Size = new System.Drawing.Size(880, 399);
-			this.quickDimensioningDistributorsSummary1.TabIndex = 0;
+			this.quickDimensioningDistributorsSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.quickDimensioningDistributorsSummary.Location = new System.Drawing.Point(3, 3);
+			this.quickDimensioningDistributorsSummary.Name = "quickDimensioningDistributorsSummary";
+			this.quickDimensioningDistributorsSummary.Size = new System.Drawing.Size(880, 399);
+			this.quickDimensioningDistributorsSummary.TabIndex = 0;
+			this.quickDimensioningDistributorsSummary.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.quickDimensioningDistributorsSummary_ProjectChanged);
 			// 
 			// pageSummary
 			// 
@@ -1067,6 +1068,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnRevert;
 		private System.Windows.Forms.ComboBox cmbHeatFlowTemperature;
 		private System.Windows.Forms.TabPage pageDistributors;
-		private QuickDimensioningDistributorsSummary quickDimensioningDistributorsSummary1;
+		private QuickDimensioningDistributorsSummary quickDimensioningDistributorsSummary;
 	}
 }
