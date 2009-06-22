@@ -24,9 +24,9 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
-			this.listDistributors = new System.Windows.Forms.ListView();
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
+			this.listDistributors = new System.Windows.Forms.ListBox();
 			this.SuspendLayout();
 			// 
 			// txtDistributor
@@ -35,20 +35,6 @@ namespace Europlan.Common {
 			this.txtDistributor.Name = "txtDistributor";
 			this.txtDistributor.Size = new System.Drawing.Size(125, 20);
 			this.txtDistributor.TabIndex = 0;
-			// 
-			// listDistributors
-			// 
-			this.listDistributors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.listDistributors.FullRowSelect = true;
-			this.listDistributors.HideSelection = false;
-			this.listDistributors.Location = new System.Drawing.Point(4, 70);
-			this.listDistributors.MultiSelect = false;
-			this.listDistributors.Name = "listDistributors";
-			this.listDistributors.Size = new System.Drawing.Size(125, 285);
-			this.listDistributors.TabIndex = 1;
-			this.listDistributors.UseCompatibleStateImageBehavior = false;
-			this.listDistributors.View = System.Windows.Forms.View.List;
 			// 
 			// btnAdd
 			// 
@@ -70,13 +56,23 @@ namespace Europlan.Common {
 			this.btnRemove.UseVisualStyleBackColor = true;
 			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
 			// 
+			// listDistributors
+			// 
+			this.listDistributors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.listDistributors.FormattingEnabled = true;
+			this.listDistributors.Location = new System.Drawing.Point(4, 69);
+			this.listDistributors.Name = "listDistributors";
+			this.listDistributors.Size = new System.Drawing.Size(125, 277);
+			this.listDistributors.TabIndex = 4;
+			// 
 			// QuickDimensioningDistributorsSummary
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.listDistributors);
 			this.Controls.Add(this.btnRemove);
 			this.Controls.Add(this.btnAdd);
-			this.Controls.Add(this.listDistributors);
 			this.Controls.Add(this.txtDistributor);
 			this.Name = "QuickDimensioningDistributorsSummary";
 			this.Size = new System.Drawing.Size(701, 358);
@@ -88,8 +84,8 @@ namespace Europlan.Common {
 		#endregion
 
 		private System.Windows.Forms.TextBox txtDistributor;
-		private System.Windows.Forms.ListView listDistributors;
 		private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.Button btnRemove;
+		private System.Windows.Forms.ListBox listDistributors;
 	}
 }
