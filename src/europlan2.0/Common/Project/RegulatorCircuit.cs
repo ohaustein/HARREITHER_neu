@@ -10,6 +10,7 @@ namespace Europlan.Common {
 		private string name;
 		private string id;
 		private int heatFlowTemperature;
+		private int coolFlowTemperature;
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(RegulatorCircuit));
 
@@ -30,6 +31,7 @@ namespace Europlan.Common {
 				id += Project.Instance.RegulatorCircuits.Count + 1;
 			}
 			heatFlowTemperature = 35;
+			coolFlowTemperature = 16;
 		}
 
 		public string Name {
@@ -45,6 +47,11 @@ namespace Europlan.Common {
 		public int HeatFlowTemperature {
 			get { return heatFlowTemperature; }
 			set { heatFlowTemperature = value; }
+		}
+
+		public int CoolFlowTemperature {
+			get { return coolFlowTemperature; }
+			set { coolFlowTemperature = value; }
 		}
 
 	}
