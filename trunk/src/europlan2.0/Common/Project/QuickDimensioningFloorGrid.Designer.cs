@@ -80,7 +80,6 @@ namespace Europlan.Common {
 			this.colModulKlimaDeckeCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colNrOfServos = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRoomController = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.colDistributor = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRevert = new System.Windows.Forms.DataGridViewButtonColumn();
 			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningGrid)).BeginInit();
@@ -123,7 +122,6 @@ namespace Europlan.Common {
             this.colModulKlimaDeckeCircuits,
             this.colNrOfServos,
             this.colRoomController,
-            this.colDistributor,
             this.colComments,
             this.colRevert});
 			this.quickDimensioningGrid.DataSource = this.roomBindingSource;
@@ -336,7 +334,7 @@ namespace Europlan.Common {
 			this.colArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colArea.Width = 50;
 			// 
-			// colQuickDimensioningRoomType
+			// colRoomType
 			// 
 			this.colRoomType.DataPropertyName = "QuickDimensioningRoomType";
 			this.colRoomType.FillWeight = 80F;
@@ -530,14 +528,6 @@ namespace Europlan.Common {
 			this.colRoomController.Name = "colRoomController";
 			this.colRoomController.Width = 60;
 			// 
-			// colDistributor
-			// 
-			this.colDistributor.DataPropertyName = "QuickDimensioningDistributor";
-			this.colDistributor.FillWeight = 50F;
-			this.colDistributor.HeaderText = "Verteiler";
-			this.colDistributor.Name = "colDistributor";
-			this.colDistributor.Width = 50;
-			// 
 			// colComments
 			// 
 			this.colComments.DataPropertyName = "QuickDimensioningComments";
@@ -606,7 +596,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn colModulKlimaDeckeCircuits;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colNrOfServos;
 		private System.Windows.Forms.DataGridViewComboBoxColumn colRoomController;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colDistributor;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colComments;
 		private System.Windows.Forms.DataGridViewButtonColumn colRevert;
 	}
