@@ -95,7 +95,10 @@ namespace Europlan.Common {
 			get {
 				return quickDimensioningCircuits; 
 			}
-			set { quickDimensioningCircuits = value; }
+			set {
+				quickDimensioningCircuits = value;
+				this.CheckPlannedCircuits();
+			}
 		}
 
 		public string QuickDimensioningCircuitsAsString {
@@ -112,6 +115,7 @@ namespace Europlan.Common {
 				} else {
 					quickDimensioningCircuitsAsString = value; 
 				}
+				this.CheckPlannedCircuits();
 			}
 		}
 
@@ -141,5 +145,16 @@ namespace Europlan.Common {
 			set { quickDimensioningConnectedDistributors = value; }
 		}
 
+		protected void CheckPlannedCircuits() {
+			int plannedCircuits = 0;
+			string distributor = null;
+			foreach (KeyValuePair<string, int> connectedDist in this.quickDimensioningConnectedDistributors) {
+				plannedCircuits += connectedDist.Value;
+				distributor = connectedDist.Key;
+			}
+			if (plannedCircuits > this.QuickDimensioningCircuits) {
+				this.quickDimensioningConnectedDistributors[distributor] -= (plannedCircuits - this.QuickDimensioningCircuits);
+			}
+		}
 	}
 }
