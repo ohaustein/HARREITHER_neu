@@ -24,23 +24,23 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle88 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle89 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle90 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle92 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle93 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle94 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle95 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle96 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle97 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle98 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle99 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle100 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle101 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle102 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tabQuickDimensioning = new System.Windows.Forms.TabControl();
 			this.pageSettings = new System.Windows.Forms.TabPage();
 			this.cmbHeatFlowTemperature = new System.Windows.Forms.ComboBox();
@@ -100,6 +100,7 @@ namespace Europlan.Common {
 			this.colNrOfServos = new Europlan.Common.NumericColumn();
 			this.colRoomControllers = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.iQuickDimensioningSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.pageDistributors = new System.Windows.Forms.TabPage();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -111,6 +112,7 @@ namespace Europlan.Common {
 			// tabQuickDimensioning
 			// 
 			this.tabQuickDimensioning.Controls.Add(this.pageSettings);
+			this.tabQuickDimensioning.Controls.Add(this.pageDistributors);
 			this.tabQuickDimensioning.Controls.Add(this.pageSummary);
 			this.tabQuickDimensioning.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabQuickDimensioning.Location = new System.Drawing.Point(0, 0);
@@ -654,14 +656,14 @@ namespace Europlan.Common {
 			this.dataGridView2.AllowUserToAddRows = false;
 			this.dataGridView2.AllowUserToDeleteRows = false;
 			this.dataGridView2.AutoGenerateColumns = false;
-			dataGridViewCellStyle86.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle86.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle86.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle86.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle86.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle86.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle86.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle86;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
@@ -703,9 +705,9 @@ namespace Europlan.Common {
 			// colArea
 			// 
 			this.colArea.DataPropertyName = "Area";
-			dataGridViewCellStyle87.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle87.Format = "F1";
-			this.colArea.DefaultCellStyle = dataGridViewCellStyle87;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle2.Format = "F1";
+			this.colArea.DefaultCellStyle = dataGridViewCellStyle2;
 			this.colArea.FillWeight = 50F;
 			this.colArea.Frozen = true;
 			this.colArea.HeaderText = "Fläche\n(m²)";
@@ -719,9 +721,9 @@ namespace Europlan.Common {
 			// colHeatLoad
 			// 
 			this.colHeatLoad.DataPropertyName = "HeatLoad";
-			dataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle88.Format = "F0";
-			this.colHeatLoad.DefaultCellStyle = dataGridViewCellStyle88;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle3.Format = "F0";
+			this.colHeatLoad.DefaultCellStyle = dataGridViewCellStyle3;
 			this.colHeatLoad.FillWeight = 50F;
 			this.colHeatLoad.Frozen = true;
 			this.colHeatLoad.HeaderText = "Heizlast\n(W)";
@@ -735,9 +737,9 @@ namespace Europlan.Common {
 			// colCoolLoad
 			// 
 			this.colCoolLoad.DataPropertyName = "CoolLoad";
-			dataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle89.Format = "F0";
-			this.colCoolLoad.DefaultCellStyle = dataGridViewCellStyle89;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle4.Format = "F0";
+			this.colCoolLoad.DefaultCellStyle = dataGridViewCellStyle4;
 			this.colCoolLoad.FillWeight = 50F;
 			this.colCoolLoad.Frozen = true;
 			this.colCoolLoad.HeaderText = "Kühllast\n(W)";
@@ -752,9 +754,9 @@ namespace Europlan.Common {
 			// colEurovalArea
 			// 
 			this.colEurovalArea.DataPropertyName = "EurovalArea";
-			dataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle90.Format = "F1";
-			this.colEurovalArea.DefaultCellStyle = dataGridViewCellStyle90;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle5.Format = "F1";
+			this.colEurovalArea.DefaultCellStyle = dataGridViewCellStyle5;
 			this.colEurovalArea.FillWeight = 70F;
 			this.colEurovalArea.HeaderText = "Euroval\n(m²)";
 			this.colEurovalArea.Name = "colEurovalArea";
@@ -768,9 +770,9 @@ namespace Europlan.Common {
 			// colEurovalCircuits
 			// 
 			this.colEurovalCircuits.DataPropertyName = "EurovalCircuits";
-			dataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle91.Format = "F0";
-			this.colEurovalCircuits.DefaultCellStyle = dataGridViewCellStyle91;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle6.Format = "F0";
+			this.colEurovalCircuits.DefaultCellStyle = dataGridViewCellStyle6;
 			this.colEurovalCircuits.FillWeight = 70F;
 			this.colEurovalCircuits.HeaderText = "Euroval\nHeizkreise";
 			this.colEurovalCircuits.Name = "colEurovalCircuits";
@@ -783,9 +785,9 @@ namespace Europlan.Common {
 			// colConcreteActivationArea
 			// 
 			this.colConcreteActivationArea.DataPropertyName = "ConcreteActivationArea";
-			dataGridViewCellStyle92.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle92.Format = "F1";
-			this.colConcreteActivationArea.DefaultCellStyle = dataGridViewCellStyle92;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle7.Format = "F1";
+			this.colConcreteActivationArea.DefaultCellStyle = dataGridViewCellStyle7;
 			this.colConcreteActivationArea.FillWeight = 70F;
 			this.colConcreteActivationArea.HeaderText = "BKA\n(m²)";
 			this.colConcreteActivationArea.Name = "colConcreteActivationArea";
@@ -799,9 +801,9 @@ namespace Europlan.Common {
 			// colConcreteActivationCircuits
 			// 
 			this.colConcreteActivationCircuits.DataPropertyName = "ConcreteActivationCircuits";
-			dataGridViewCellStyle93.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle93.Format = "F0";
-			this.colConcreteActivationCircuits.DefaultCellStyle = dataGridViewCellStyle93;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle8.Format = "F0";
+			this.colConcreteActivationCircuits.DefaultCellStyle = dataGridViewCellStyle8;
 			this.colConcreteActivationCircuits.FillWeight = 70F;
 			this.colConcreteActivationCircuits.HeaderText = "BKA\nHeizkreise";
 			this.colConcreteActivationCircuits.Name = "colConcreteActivationCircuits";
@@ -814,9 +816,9 @@ namespace Europlan.Common {
 			// colHithermArea
 			// 
 			this.colHithermArea.DataPropertyName = "HithermArea";
-			dataGridViewCellStyle94.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle94.Format = "F1";
-			this.colHithermArea.DefaultCellStyle = dataGridViewCellStyle94;
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle9.Format = "F1";
+			this.colHithermArea.DefaultCellStyle = dataGridViewCellStyle9;
 			this.colHithermArea.FillWeight = 70F;
 			this.colHithermArea.HeaderText = "Hitherm\n(m²)";
 			this.colHithermArea.Name = "colHithermArea";
@@ -830,9 +832,9 @@ namespace Europlan.Common {
 			// colHithermCircuits
 			// 
 			this.colHithermCircuits.DataPropertyName = "HithermCircuits";
-			dataGridViewCellStyle95.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle95.Format = "F0";
-			this.colHithermCircuits.DefaultCellStyle = dataGridViewCellStyle95;
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle10.Format = "F0";
+			this.colHithermCircuits.DefaultCellStyle = dataGridViewCellStyle10;
 			this.colHithermCircuits.FillWeight = 70F;
 			this.colHithermCircuits.HeaderText = "Hitherm\nHeizkreise";
 			this.colHithermCircuits.Name = "colHithermCircuits";
@@ -845,9 +847,9 @@ namespace Europlan.Common {
 			// colHithermCompactArea
 			// 
 			this.colHithermCompactArea.DataPropertyName = "HithermCompactArea";
-			dataGridViewCellStyle96.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle96.Format = "F1";
-			this.colHithermCompactArea.DefaultCellStyle = dataGridViewCellStyle96;
+			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle11.Format = "F1";
+			this.colHithermCompactArea.DefaultCellStyle = dataGridViewCellStyle11;
 			this.colHithermCompactArea.FillWeight = 70F;
 			this.colHithermCompactArea.HeaderText = "Hitherm Co\n(m²)";
 			this.colHithermCompactArea.Name = "colHithermCompactArea";
@@ -861,9 +863,9 @@ namespace Europlan.Common {
 			// colHithermCompactCircuits
 			// 
 			this.colHithermCompactCircuits.DataPropertyName = "HithermCompactCircuits";
-			dataGridViewCellStyle97.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle97.Format = "F0";
-			this.colHithermCompactCircuits.DefaultCellStyle = dataGridViewCellStyle97;
+			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle12.Format = "F0";
+			this.colHithermCompactCircuits.DefaultCellStyle = dataGridViewCellStyle12;
 			this.colHithermCompactCircuits.FillWeight = 70F;
 			this.colHithermCompactCircuits.HeaderText = "Hitherm Co\nHeizkreise";
 			this.colHithermCompactCircuits.Name = "colHithermCompactCircuits";
@@ -876,9 +878,9 @@ namespace Europlan.Common {
 			// colModulKlimaBodenArea
 			// 
 			this.colModulKlimaBodenArea.DataPropertyName = "ModulKlimaBodenArea";
-			dataGridViewCellStyle98.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle98.Format = "F1";
-			this.colModulKlimaBodenArea.DefaultCellStyle = dataGridViewCellStyle98;
+			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle13.Format = "F1";
+			this.colModulKlimaBodenArea.DefaultCellStyle = dataGridViewCellStyle13;
 			this.colModulKlimaBodenArea.FillWeight = 70F;
 			this.colModulKlimaBodenArea.HeaderText = "Klimboden\n(m²)";
 			this.colModulKlimaBodenArea.Name = "colModulKlimaBodenArea";
@@ -892,9 +894,9 @@ namespace Europlan.Common {
 			// colModulKlimaBodenCircuits
 			// 
 			this.colModulKlimaBodenCircuits.DataPropertyName = "ModulKlimaBodenCircuits";
-			dataGridViewCellStyle99.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle99.Format = "F0";
-			this.colModulKlimaBodenCircuits.DefaultCellStyle = dataGridViewCellStyle99;
+			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle14.Format = "F0";
+			this.colModulKlimaBodenCircuits.DefaultCellStyle = dataGridViewCellStyle14;
 			this.colModulKlimaBodenCircuits.FillWeight = 70F;
 			this.colModulKlimaBodenCircuits.HeaderText = "Klimaboden\nHeizkreise";
 			this.colModulKlimaBodenCircuits.Name = "colModulKlimaBodenCircuits";
@@ -907,9 +909,9 @@ namespace Europlan.Common {
 			// colModulKlimaDeckeArea
 			// 
 			this.colModulKlimaDeckeArea.DataPropertyName = "ModulKlimaDeckeArea";
-			dataGridViewCellStyle100.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle100.Format = "F1";
-			this.colModulKlimaDeckeArea.DefaultCellStyle = dataGridViewCellStyle100;
+			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle15.Format = "F1";
+			this.colModulKlimaDeckeArea.DefaultCellStyle = dataGridViewCellStyle15;
 			this.colModulKlimaDeckeArea.FillWeight = 70F;
 			this.colModulKlimaDeckeArea.HeaderText = "Klimadecke\n(m²)";
 			this.colModulKlimaDeckeArea.Name = "colModulKlimaDeckeArea";
@@ -923,9 +925,9 @@ namespace Europlan.Common {
 			// colModulKlimaDeckeCircuits
 			// 
 			this.colModulKlimaDeckeCircuits.DataPropertyName = "ModulKlimaDeckeCircuits";
-			dataGridViewCellStyle101.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle101.Format = "F0";
-			this.colModulKlimaDeckeCircuits.DefaultCellStyle = dataGridViewCellStyle101;
+			dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle16.Format = "F0";
+			this.colModulKlimaDeckeCircuits.DefaultCellStyle = dataGridViewCellStyle16;
 			this.colModulKlimaDeckeCircuits.FillWeight = 70F;
 			this.colModulKlimaDeckeCircuits.HeaderText = "Klimadecke\nHeizkreise";
 			this.colModulKlimaDeckeCircuits.Name = "colModulKlimaDeckeCircuits";
@@ -938,9 +940,9 @@ namespace Europlan.Common {
 			// colNrOfServos
 			// 
 			this.colNrOfServos.DataPropertyName = "NrOfServos";
-			dataGridViewCellStyle102.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle102.Format = "F0";
-			this.colNrOfServos.DefaultCellStyle = dataGridViewCellStyle102;
+			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle17.Format = "F0";
+			this.colNrOfServos.DefaultCellStyle = dataGridViewCellStyle17;
 			this.colNrOfServos.HeaderText = "Stell-\nmotore";
 			this.colNrOfServos.Name = "colNrOfServos";
 			this.colNrOfServos.ReadOnly = true;
@@ -960,6 +962,16 @@ namespace Europlan.Common {
 			// iQuickDimensioningSummaryBindingSource
 			// 
 			this.iQuickDimensioningSummaryBindingSource.DataSource = typeof(Europlan.Common.IQuickDimensioningSummary);
+			// 
+			// pageDistributors
+			// 
+			this.pageDistributors.Location = new System.Drawing.Point(4, 22);
+			this.pageDistributors.Name = "pageDistributors";
+			this.pageDistributors.Padding = new System.Windows.Forms.Padding(3);
+			this.pageDistributors.Size = new System.Drawing.Size(886, 405);
+			this.pageDistributors.TabIndex = 2;
+			this.pageDistributors.Text = "Verteiler";
+			this.pageDistributors.UseVisualStyleBackColor = true;
 			// 
 			// QuickDimensioningPanel
 			// 
@@ -1040,5 +1052,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn colRoomControllers;
 		private System.Windows.Forms.Button btnRevert;
 		private System.Windows.Forms.ComboBox cmbHeatFlowTemperature;
+		private System.Windows.Forms.TabPage pageDistributors;
 	}
 }
