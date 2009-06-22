@@ -21,6 +21,7 @@ namespace Europlan.Common {
 		protected bool canHeat = false;
 		protected bool canCool = false;
 		private Room associatedRoom = null;
+		private SerializableDictionary<string, int> connectedDistributors = new SerializableDictionary<string,int>();
 
 		public Product() {
 			Initialize();
@@ -43,6 +44,7 @@ namespace Europlan.Common {
 			this.canCool = product.canCool;
 			this.quickDimensioningPlannedArea = 0;
 			this.associatedRoom = null;
+			this.connectedDistributors = new SerializableDictionary<string, int>();
 		}
 
 		public abstract void Initialize();
@@ -132,6 +134,11 @@ namespace Europlan.Common {
 					associatedRoom.UsedProductsForQuickDimensioning.Add(this);
 				}			
 			}
+		}
+
+		public SerializableDictionary<string, int> ConnectedDistributors {
+			get { return connectedDistributors; }
+			set { connectedDistributors = value; }
 		}
 
 	}
