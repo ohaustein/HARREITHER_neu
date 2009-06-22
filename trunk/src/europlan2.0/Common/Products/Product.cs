@@ -136,7 +136,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public SerializableDictionary<string, int> ConnectedDistributors {
+		public SerializableDictionary<string, int> QuickDimensioningConnectedDistributors {
 			get { return quickDimensioningConnectedDistributors; }
 			set { quickDimensioningConnectedDistributors = value; }
 		}
