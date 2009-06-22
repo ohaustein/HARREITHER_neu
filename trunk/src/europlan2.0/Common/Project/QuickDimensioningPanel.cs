@@ -103,6 +103,7 @@ namespace Europlan.Common {
 				this.grids.Add(floor, grid);
 			}
 
+			this.tabQuickDimensioning.TabPages.Add(pageDistributors);
 			this.tabQuickDimensioning.TabPages.Add(pageSummary);
 		}
 
