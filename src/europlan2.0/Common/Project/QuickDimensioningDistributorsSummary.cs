@@ -55,7 +55,7 @@ namespace Europlan.Common {
 				foreach (Floor floor in project.Floors) {
 					foreach (Room room in floor.Rooms) {
 						foreach (Product product in room.UsedProductsForQuickDimensioning) {
-							product.ConnectedDistributors.Remove(distributor.Id);
+							product.QuickDimensioningConnectedDistributors.Remove(distributor.Id);
 						}
 					}
 				}
