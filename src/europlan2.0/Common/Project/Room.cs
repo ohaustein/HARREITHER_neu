@@ -31,7 +31,6 @@ namespace Europlan.Common {
 		private int quickDimensioningHeatLoad;
 		private int quickDimensioningCoolLoad;
 		private RoomController quickDimensioningRoomController = RoomController.None;
-		private string quickDimensioningDistributor;
 		private string quickDimensioningComments;
 		private int additionalHeatLoad;
 		private string quickDimensioningRoomTypeId;
@@ -69,7 +68,6 @@ namespace Europlan.Common {
 			this.quickDimensioningHeatLoad = room.QuickDimensioningHeatLoad;
 			this.quickDimensioningCoolLoad = room.QuickDimensioningCoolLoad;
 			this.quickDimensioningRoomController = room.QuickDimensioningRoomController;
-			this.quickDimensioningDistributor = room.QuickDimensioningDistributor;
 			this.quickDimensioningComments = room.QuickDimensioningComments;
 			this.quickDimensioningRoomTypeId = room.quickDimensioningRoomTypeId;
 			this.usedProductsForQuickDimensioning = new List<Product>();
@@ -92,7 +90,6 @@ namespace Europlan.Common {
 			this.quickDimensioningHeatLoad = 0;
 			this.quickDimensioningCoolLoad = 0;
 			this.quickDimensioningRoomController = RoomController.None;
-			this.quickDimensioningDistributor = "";
 			this.quickDimensioningComments = "";
 		}
 
@@ -108,7 +105,6 @@ namespace Europlan.Common {
 			this.quickDimensioningHeatLoad = room.QuickDimensioningHeatLoad;
 			this.quickDimensioningCoolLoad = room.QuickDimensioningCoolLoad;
 			this.quickDimensioningRoomController = room.QuickDimensioningRoomController;
-			this.quickDimensioningDistributor = room.QuickDimensioningDistributor;
 			this.quickDimensioningComments = room.QuickDimensioningComments;
 			this.quickDimensioningRoomTypeId = room.QuickDimensioningRoomTypeId;
 			this.usedProductsForQuickDimensioning = new List<Product>();
@@ -233,11 +229,6 @@ namespace Europlan.Common {
 				}
 				return 0;
 			}
-		}
-
-		public string QuickDimensioningDistributor {
-			get { return quickDimensioningDistributor; }
-			set { quickDimensioningDistributor = value; }
 		}
 
 		public string QuickDimensioningComments {
@@ -377,7 +368,6 @@ namespace Europlan.Common {
 			this.QuickDimensioningRoomType = Project.Instance.Config.RoomTypes[0];
 			this.quickDimensioningComments = "";
 			this.quickDimensioningCoolLoad = 0;
-			this.quickDimensioningDistributor = "";
 			this.quickDimensioningHeatLoad = 0;
 			this.quickDimensioningRoomController = RoomController.None;
 			this.quickDimensioningRoomTemperature = 0;
