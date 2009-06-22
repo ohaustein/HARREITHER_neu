@@ -237,7 +237,9 @@ namespace Europlan.Application {
 					recentProjects += ";";
 				}
 				recentProjects = recentProjects.TrimEnd(';');
-				settings.StoreSetting("RecentProjects", recentProjects);
+				if (recentProjects != string.Empty) {
+					settings.StoreSetting("RecentProjects", recentProjects);
+				}
 
 				settings.StoreSetting("SplitterDistance", this.splitContainer.SplitterDistance);
 				SettingsFile.Update();
