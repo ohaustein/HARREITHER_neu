@@ -814,6 +814,10 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void quickDimensioningDistributorsSummary_ProjectChanged(object sender) {
+			this.OnProjectChanged();
+		}
+
 		//private void txtAllocation_ValueChanged(object sender, EventArgs e) {
 		//    int percent = (int)this.txtAllocation.Value;
 		//    if (!(percent > 0) || !(percent <= 100)) {
