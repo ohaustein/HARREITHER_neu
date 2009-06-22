@@ -13,16 +13,15 @@ namespace Europlan.Common {
 
 		public QuickDimensioningDistributorsSummary() {
 			InitializeComponent();
+			UpdateControl();
 		}
 
 		public void UpdateControl() {
-			listDistributors.Clear();
+			listDistributors.Items.Clear();
 			if (Project.Instance != null) {
 				List<QuickDimensioningDistributor> distributors = Project.Instance.QuickDimensioning.Distributors;
 				foreach (QuickDimensioningDistributor distributor in distributors) {
-					ListViewItem item = new ListViewItem(distributor.Name);
-					item.Tag = distributor;
-					listDistributors.Items.Add(item);
+					listDistributors.Items.Add(distributor);
 				}
 			}
 		}

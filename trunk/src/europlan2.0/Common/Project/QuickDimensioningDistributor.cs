@@ -27,6 +27,10 @@ namespace Europlan.Common {
 			return base.Equals(obj);
 		}
 
+		public override string ToString() {
+			return this.name;
+		}
+
 		public override int GetHashCode() {
 			return base.GetHashCode();
 		}
