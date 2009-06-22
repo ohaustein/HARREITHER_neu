@@ -30,6 +30,7 @@ namespace Europlan.Common {
 		private int quickDimensioningRoomTemperature;
 		private int quickDimensioningHeatLoad;
 		private int quickDimensioningCoolLoad;
+		private int quickDimensioningNrOfServos;
 		private RoomController quickDimensioningRoomController = RoomController.None;
 		private string quickDimensioningComments;
 		private int additionalHeatLoad;
@@ -67,9 +68,10 @@ namespace Europlan.Common {
 			this.floorHeatingLoss = room.FloorHeatingLoss;
 			this.quickDimensioningHeatLoad = room.QuickDimensioningHeatLoad;
 			this.quickDimensioningCoolLoad = room.QuickDimensioningCoolLoad;
+			this.quickDimensioningNrOfServos = room.quickDimensioningNrOfServos;
 			this.quickDimensioningRoomController = room.QuickDimensioningRoomController;
 			this.quickDimensioningComments = room.QuickDimensioningComments;
-			this.quickDimensioningRoomTypeId = room.quickDimensioningRoomTypeId;
+			this.quickDimensioningRoomTypeId = room.quickDimensioningRoomTypeId; // used the member instead of the public property on purpose here!
 			this.usedProductsForQuickDimensioning = new List<Product>();
 			foreach (Product product in room.UsedProductsForQuickDimensioning) {
 				this.usedProductsForQuickDimensioning.Add(product.Clone(this));
@@ -89,6 +91,7 @@ namespace Europlan.Common {
 			this.usedProductsForQuickDimensioning = new List<Product>();
 			this.quickDimensioningHeatLoad = 0;
 			this.quickDimensioningCoolLoad = 0;
+			this.quickDimensioningNrOfServos = -1;
 			this.quickDimensioningRoomController = RoomController.None;
 			this.quickDimensioningComments = "";
 		}
@@ -104,6 +107,7 @@ namespace Europlan.Common {
 			this.NormalizedCoolLoad = room.NormalizedCoolLoad;
 			this.quickDimensioningHeatLoad = room.QuickDimensioningHeatLoad;
 			this.quickDimensioningCoolLoad = room.QuickDimensioningCoolLoad;
+			this.quickDimensioningNrOfServos = room.quickDimensioningNrOfServos;
 			this.quickDimensioningRoomController = room.QuickDimensioningRoomController;
 			this.quickDimensioningComments = room.QuickDimensioningComments;
 			this.quickDimensioningRoomTypeId = room.QuickDimensioningRoomTypeId;
@@ -217,17 +221,30 @@ namespace Europlan.Common {
 			return 0;
 		}
 
-		[XmlIgnore]
-		public int QuickDimensioningNrOfServos {
-			get { 
-				if (this.QuickDimensioningRoomController != RoomController.None) {
-					int nr = 0;
-					foreach (Product product in usedProductsForQuickDimensioning) {
-						nr += product.QuickDimensioningCircuits;
-					}
-					return nr;
+		private int GetDefaultNrOfServos() {
+			if (this.QuickDimensioningRoomController != RoomController.None) {
+				int nr = 0;
+				foreach (Product product in usedProductsForQuickDimensioning) {
+					nr += product.QuickDimensioningCircuits;
 				}
-				return 0;
+				return nr;
+			}
+			return 0;
+		}
+
+		public int QuickDimensioningNrOfServos {
+			get {
+				if (this.quickDimensioningNrOfServos >= 0) {
+					return this.quickDimensioningNrOfServos;
+				}
+				return this.GetDefaultNrOfServos();
+			}
+			set {
+				if (value == this.GetDefaultNrOfServos()) {
+					this.quickDimensioningNrOfServos = -1;
+				} else {
+					this.quickDimensioningNrOfServos = value;
+				}
 			}
 		}
 

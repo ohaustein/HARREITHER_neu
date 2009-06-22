@@ -339,11 +339,6 @@ namespace Europlan.Common {
 			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
 				DataGridViewRow row = this.quickDimensioningGrid.Rows[i];
 				if (row.DataBoundItem is Room) {
-					/*EurovalProduct euroval = room.GetProductForQuickDimensioning<EurovalProduct>();
-					if (this.colEuroval.Visible && euroval != null) {
-						row.Cells[this.colEuroval.Index].Value = (decimal)euroval.QuickDimensioningPlannedArea;
-						row.Cells[this.colEurovalCircuits.Index].Value = euroval.QuickDimensioningCircuitsAsString;
-					}*/
 					// Euroval
 					this.ShowProduct<EurovalProduct>(row);
 
@@ -396,16 +391,6 @@ namespace Europlan.Common {
 					}
 					this.quickDimensioningGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = coolload;
 				} else if ((e.ColumnIndex == this.colEuroval.Index || e.ColumnIndex == this.colEurovalCircuits.Index) && room.GetProductForQuickDimensioning<EurovalProduct>() == null) {
-					/*// get new Euroval Product
-					Product product = Project.Instance.Config.EurovalProduct.Clone(room);
-
-					// get and set default area
-					product.QuickDimensioningPlannedArea = product.GetDefaultQuickDimensioningPlannedArea();
-					this.dataGridView1.Rows[e.RowIndex].Cells[this.colEuroval.Index].Value = (decimal)product.QuickDimensioningPlannedArea;
-
-					// get and set default circuits
-					product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
-					this.dataGridView1.Rows[e.RowIndex].Cells[this.colEurovalCircuits.Index].Value = product.QuickDimensioningCircuitsAsString;*/
 					// Euroval
 					this.AddProduct<EurovalProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
 				} else if ((e.ColumnIndex == this.colConcreteActivation.Index || e.ColumnIndex == this.colConcreteActivationCircuits.Index) && room.GetProductForQuickDimensioning<ConcreteActivationProduct>() == null) {
@@ -423,6 +408,8 @@ namespace Europlan.Common {
 				} else if ((e.ColumnIndex == this.colModulKlimaDecke.Index || e.ColumnIndex == this.colModulKlimaDeckeCircuits.Index) && room.GetProductForQuickDimensioning<ModulKlimaDeckeProduct>() == null) {
 					// Modul Klimaboden
 					this.AddProduct<ModulKlimaDeckeProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
+				} else if (e.ColumnIndex == this.colNrOfServos.Index) {
+					// TODO
 				}
 			}
 		}

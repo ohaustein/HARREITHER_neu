@@ -78,7 +78,7 @@ namespace Europlan.Common {
 			this.colModulKlimaBodenCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colModulKlimaDecke = new Europlan.Common.NumericColumn();
 			this.colModulKlimaDeckeCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colNrOfServos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colNrOfServos = new Europlan.Common.NumericColumn();
 			this.colRoomController = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRevert = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -513,11 +513,13 @@ namespace Europlan.Common {
 			// 
 			this.colNrOfServos.DataPropertyName = "QuickDimensioningNrOfServos";
 			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle13.Format = "F0";
 			this.colNrOfServos.DefaultCellStyle = dataGridViewCellStyle13;
 			this.colNrOfServos.FillWeight = 50F;
 			this.colNrOfServos.HeaderText = "Stell-\nmotore";
 			this.colNrOfServos.Name = "colNrOfServos";
-			this.colNrOfServos.ReadOnly = true;
+			this.colNrOfServos.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colNrOfServos.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colNrOfServos.Width = 50;
 			// 
 			// colRoomController
@@ -594,7 +596,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn colModulKlimaBodenCircuits;
 		private NumericColumn colModulKlimaDecke;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colModulKlimaDeckeCircuits;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colNrOfServos;
+		private NumericColumn colNrOfServos;
 		private System.Windows.Forms.DataGridViewComboBoxColumn colRoomController;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colComments;
 		private System.Windows.Forms.DataGridViewButtonColumn colRevert;
