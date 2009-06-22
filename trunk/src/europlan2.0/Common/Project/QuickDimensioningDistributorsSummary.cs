@@ -17,12 +17,19 @@ namespace Europlan.Common {
 		}
 
 		public void UpdateControl() {
+			object oldSelectedItem = listDistributors.SelectedItem;
 			listDistributors.Items.Clear();
 			if (Project.Instance != null) {
 				List<QuickDimensioningDistributor> distributors = Project.Instance.QuickDimensioning.Distributors;
 				foreach (QuickDimensioningDistributor distributor in distributors) {
 					listDistributors.Items.Add(distributor);
 				}
+			}
+			if (oldSelectedItem != null) {
+				listDistributors.SelectedItem = oldSelectedItem;
+			}
+			if (listDistributors.SelectedItem == null && listDistributors.Items.Count > 0) {
+				listDistributors.SelectedIndex = 0;
 			}
 		}
 
@@ -63,6 +70,42 @@ namespace Europlan.Common {
 			this.OnProjectChanged();
 			UpdateControl();
 		}
+
+		private void listDistributors_SelectedValueChanged(object sender, EventArgs e) {
+			QuickDimensioningDistributor distributor = this.listDistributors.SelectedItem as QuickDimensioningDistributor;
+			this.distributorGrid.Distributor = distributor;
+		}
+
+		public bool Euroval {
+			get { return this.distributorGrid.Euroval; }
+			set { this.distributorGrid.Euroval = value; }
+		}
+
+		public bool ConcreteActivation {
+			get { return this.distributorGrid.ConcreteActivation; }
+			set { this.distributorGrid.ConcreteActivation = value; }
+		}
+
+		public bool Hitherm {
+			get { return this.distributorGrid.Hitherm; }
+			set { this.distributorGrid.Hitherm = value; }
+		}
+
+		public bool HithermCompact {
+			get { return this.distributorGrid.HithermCompact; }
+			set { this.distributorGrid.HithermCompact = value; }
+		}
+
+		public bool ModulKlimaBoden {
+			get { return this.distributorGrid.ModulKlimaBoden; }
+			set { this.distributorGrid.ModulKlimaBoden = value; }
+		}
+
+		public bool ModulKlimaDecke {
+			get { return this.distributorGrid.ModulKlimaDecke; }
+			set { this.distributorGrid.ModulKlimaDecke = value; }
+		}
+
 
 	}
 }

@@ -74,6 +74,11 @@
     <Compile Include="ConstructionEditor\ConstructionEditorGrid.Designer.cs">
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataGridViewNumericUpDownCell.cs" />
+    <Compile Include="Controls\DataGridViewNumericUpDownColumn.cs" />
+    <Compile Include="Controls\DataGridViewNumericUpDownEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\NumericBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -139,6 +144,12 @@
     </Compile>
     <Compile Include="Project\QuickDimensioning.cs" />
     <Compile Include="Project\QuickDimensioningDistributor.cs" />
+    <Compile Include="Project\QuickDimensioningDistributorGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\QuickDimensioningDistributorGrid.Designer.cs">
+      <DependentUpon>QuickDimensioningDistributorGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\QuickDimensioningDistributorsSummary.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -160,6 +171,7 @@
     </Compile>
     <Compile Include="Project\QuickDimensioningProjectSummary.cs" />
     <Compile Include="Project\IQuickDimensioningSummary.cs" />
+    <Compile Include="Project\QuickDimensioningRoomDistributorsWrapper.cs" />
     <Compile Include="Project\RegulatorCircuit.cs" />
     <Compile Include="Project\RegulatorCircuitsSummaryPanel.cs">
       <SubType>UserControl</SubType>
@@ -222,6 +234,10 @@
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\QuickDimensioningDistributorGrid.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>QuickDimensioningDistributorGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\QuickDimensioningDistributorsSummary.resx">
       <SubType>Designer</SubType>
       <DependentUpon>QuickDimensioningDistributorsSummary.cs</DependentUpon>
@@ -254,6 +270,7 @@
   <ItemGroup>
     <None Include="Properties\DataSources\ConstructionLayer.datasource" />
     <None Include="Properties\DataSources\IQuickDimensioningSummary.datasource" />
+    <None Include="Properties\DataSources\QuickDimensioningRoomDistributorsWrapper.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\DataSources\RoomType.datasource" />
   </ItemGroup>

@@ -27,6 +27,7 @@ namespace Europlan.Common {
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.listDistributors = new System.Windows.Forms.ListBox();
+			this.distributorGrid = new Europlan.Common.QuickDimensioningDistributorGrid();
 			this.SuspendLayout();
 			// 
 			// txtDistributor
@@ -65,11 +66,24 @@ namespace Europlan.Common {
 			this.listDistributors.Name = "listDistributors";
 			this.listDistributors.Size = new System.Drawing.Size(125, 277);
 			this.listDistributors.TabIndex = 4;
+			this.listDistributors.SelectedValueChanged += new System.EventHandler(this.listDistributors_SelectedValueChanged);
+			// 
+			// distributorGrid
+			// 
+			this.distributorGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.distributorGrid.Distributor = null;
+			this.distributorGrid.Location = new System.Drawing.Point(216, 3);
+			this.distributorGrid.Name = "distributorGrid";
+			this.distributorGrid.Size = new System.Drawing.Size(482, 352);
+			this.distributorGrid.TabIndex = 5;
 			// 
 			// QuickDimensioningDistributorsSummary
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.distributorGrid);
 			this.Controls.Add(this.listDistributors);
 			this.Controls.Add(this.btnRemove);
 			this.Controls.Add(this.btnAdd);
@@ -87,5 +101,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.Button btnRemove;
 		private System.Windows.Forms.ListBox listDistributors;
+		private QuickDimensioningDistributorGrid distributorGrid;
 	}
 }

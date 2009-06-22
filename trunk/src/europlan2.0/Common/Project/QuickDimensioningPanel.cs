@@ -88,11 +88,11 @@ namespace Europlan.Common {
 				TabPage page = new TabPage(floor.Name);
 				page.UseVisualStyleBackColor = true;
 				QuickDimensioningFloorGrid grid = new QuickDimensioningFloorGrid();
-				grid.Euroval = this.EurovalHeating;
+				grid.Euroval = this.EurovalHeating || this.EurovalCooling;
 				grid.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
-				grid.Hitherm = this.HithermHeating;
-				grid.HithermCompact = this.HithermCompactHeating;
-				grid.ModulKlimaBoden = this.ModulKlimaBodenHeating;
+				grid.Hitherm = this.HithermHeating || this.HithermCooling;
+				grid.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
+				grid.ModulKlimaBoden = this.ModulKlimaBodenHeating || this.ModulKlimaBodenCooling;
 				grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 				grid.Cooling = this.Cooling;
 				grid.Floor = floor;
@@ -102,6 +102,13 @@ namespace Europlan.Common {
 				this.tabQuickDimensioning.TabPages.Add(page);
 				this.grids.Add(floor, grid);
 			}
+
+			this.quickDimensioningDistributorsSummary.Euroval = this.EurovalHeating || this.EurovalCooling;
+			this.quickDimensioningDistributorsSummary.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
+			this.quickDimensioningDistributorsSummary.Hitherm = this.HithermHeating || this.HithermCooling;
+			this.quickDimensioningDistributorsSummary.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
+			this.quickDimensioningDistributorsSummary.ModulKlimaBoden = this.ModulKlimaBodenHeating || this.ModulKlimaBodenCooling;
+			this.quickDimensioningDistributorsSummary.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 
 			this.tabQuickDimensioning.TabPages.Add(pageDistributors);
 			this.tabQuickDimensioning.TabPages.Add(pageSummary);
@@ -219,6 +226,7 @@ namespace Europlan.Common {
 					grid.Euroval = this.EurovalHeating || this.EurovalCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.Euroval = this.EurovalHeating || this.EurovalCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -263,6 +271,7 @@ namespace Europlan.Common {
 					grid.Euroval = this.EurovalHeating || this.EurovalCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.Euroval = this.EurovalHeating || this.EurovalCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -305,6 +314,7 @@ namespace Europlan.Common {
 					grid.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -349,6 +359,7 @@ namespace Europlan.Common {
 					grid.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -391,6 +402,7 @@ namespace Europlan.Common {
 					grid.Hitherm = this.HithermHeating || this.HithermCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.Hitherm = this.HithermHeating || this.HithermCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -433,6 +445,7 @@ namespace Europlan.Common {
 					grid.Hitherm = this.HithermHeating || this.HithermCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.Hitherm = this.HithermHeating || this.HithermCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -475,6 +488,7 @@ namespace Europlan.Common {
 					grid.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -517,6 +531,7 @@ namespace Europlan.Common {
 					grid.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -559,6 +574,7 @@ namespace Europlan.Common {
 					grid.ModulKlimaBoden = this.ModulKlimaBodenHeating || this.ModulKlimaBodenCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.ModulKlimaBoden = this.ModulKlimaBodenHeating || this.ModulKlimaBodenCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -601,6 +617,7 @@ namespace Europlan.Common {
 					grid.ModulKlimaBoden = this.ModulKlimaBodenHeating || this.ModulKlimaBodenCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.ModulKlimaBoden = this.ModulKlimaBodenHeating || this.ModulKlimaBodenCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -643,6 +660,7 @@ namespace Europlan.Common {
 					grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -688,6 +706,7 @@ namespace Europlan.Common {
 					grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 					grid.Cooling = this.Cooling;
 				}
+				this.quickDimensioningDistributorsSummary.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 				if (result == DialogResult.Yes) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
@@ -777,6 +796,8 @@ namespace Europlan.Common {
 				summary.Add(new QuickDimensioningProjectSummary());
 				this.iQuickDimensioningSummaryBindingSource.DataSource = summary;
 				this.iQuickDimensioningSummaryBindingSource.ResetBindings(false);
+			} else if (e.TabPage == this.pageDistributors) {
+				this.quickDimensioningDistributorsSummary.UpdateControl();
 			}
 		}
 

@@ -214,7 +214,6 @@ namespace Europlan.Application.ContructionEditor {
 
 		private System.Windows.Forms.BindingSource materialsWrapperBindingSource;
 		private System.Windows.Forms.DataGridView gridMaterials;
-		private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
