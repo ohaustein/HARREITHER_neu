@@ -138,6 +138,12 @@
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\QuickDimensioning.cs" />
+    <Compile Include="Project\QuickDimensioningDistributorsSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\QuickDimensioningDistributorsSummary.Designer.cs">
+      <DependentUpon>QuickDimensioningDistributorsSummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\QuickDimensioningFloorGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -214,6 +220,10 @@
     <EmbeddedResource Include="Project\ProjectSummaryPanel.resx">
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\QuickDimensioningDistributorsSummary.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>QuickDimensioningDistributorsSummary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\QuickDimensioningFloorGrid.resx">
       <SubType>Designer</SubType>
