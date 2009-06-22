@@ -138,6 +138,7 @@
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\QuickDimensioning.cs" />
+    <Compile Include="Project\QuickDimensioningDistributor.cs" />
     <Compile Include="Project\QuickDimensioningDistributorsSummary.cs">
       <SubType>UserControl</SubType>
     </Compile>
