@@ -125,7 +125,7 @@ namespace Europlan.Common {
 			if (product != null) {
 				if (circuits == null && product.QuickDimensioningConnectedDistributors.ContainsKey(this.distributor.Id)) {
 					product.QuickDimensioningConnectedDistributors.Remove(this.distributor.Id);
-				} else {
+				} else if (circuits != null) {
 					product.QuickDimensioningConnectedDistributors[this.distributor.Id] = circuits.Value;
 				}
 			} else {

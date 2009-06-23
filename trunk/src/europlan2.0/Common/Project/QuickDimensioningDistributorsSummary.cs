@@ -114,6 +114,7 @@ namespace Europlan.Common {
 		private void cmbDistributors_SelectedIndexChanged(object sender, EventArgs e) {
 			QuickDimensioningDistributor distributor = this.cmbDistributors.SelectedItem as QuickDimensioningDistributor;
 			this.distributorGrid.Distributor = distributor;
+			UpdateRemainingConnectors();
 		}
 
 		private void btnNewDistributor_Click(object sender, EventArgs e) {

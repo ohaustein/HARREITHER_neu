@@ -37,6 +37,7 @@ namespace Europlan.Common {
 		public void Cleanup() {
 			if (this.gridDistributors.SelectedCells.Count > 0) {
 				if (this.gridDistributors.SelectedCells[0].OwningRow.DataBoundItem == null) {
+					bool dirty = this.gridDistributors.IsCurrentRowDirty;
 					this.gridDistributors.CancelEdit();
 				} else {
 					this.gridDistributors.EndEdit();
