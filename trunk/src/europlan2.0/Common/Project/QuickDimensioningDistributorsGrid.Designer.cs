@@ -38,7 +38,6 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridRooms = new System.Windows.Forms.DataGridView();
-			this.dataSourceRooms = new System.Windows.Forms.BindingSource(this.components);
 			this.colRoomId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRoomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colFloorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,6 +53,7 @@ namespace Europlan.Common {
 			this.colModulKlimaBodenPlannedCircuits = new Europlan.Common.DataGridViewNumericUpDownColumn();
 			this.colModulKlimaDeckeOpenCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colModulKlimaDeckePlannedCircuits = new Europlan.Common.DataGridViewNumericUpDownColumn();
+			this.dataSourceRooms = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridRooms)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataSourceRooms)).BeginInit();
 			this.SuspendLayout();
@@ -93,11 +93,8 @@ namespace Europlan.Common {
 			this.gridRooms.Name = "gridRooms";
 			this.gridRooms.Size = new System.Drawing.Size(645, 390);
 			this.gridRooms.TabIndex = 0;
+			this.gridRooms.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRooms_CellValueChanged);
 			this.gridRooms.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridRooms_RowsAdded);
-			// 
-			// dataSourceRooms
-			// 
-			this.dataSourceRooms.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
 			// 
 			// colRoomId
 			// 
@@ -265,12 +262,16 @@ namespace Europlan.Common {
 			this.colModulKlimaDeckePlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colModulKlimaDeckePlannedCircuits.Width = 70;
 			// 
-			// QuickDimensioningDistributorGrid
+			// dataSourceRooms
+			// 
+			this.dataSourceRooms.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
+			// 
+			// QuickDimensioningDistributorsGrid
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.gridRooms);
-			this.Name = "QuickDimensioningDistributorGrid";
+			this.Name = "QuickDimensioningDistributorsGrid";
 			this.Size = new System.Drawing.Size(645, 390);
 			((System.ComponentModel.ISupportInitialize)(this.gridRooms)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataSourceRooms)).EndInit();

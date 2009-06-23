@@ -14,6 +14,11 @@ namespace Europlan.Common {
 		public QuickDimensioningDistributorsSummary() {
 			InitializeComponent();
 			UpdateControl();
+			this.distributorGrid.ProjectChanged += new ProjectChangedHandler(distributorGrid_ProjectChanged);
+		}
+
+		void distributorGrid_ProjectChanged(object sender) {
+			OnProjectChanged();
 		}
 
 		public void UpdateControl() {
