@@ -108,6 +108,12 @@
     <Compile Include="Licensing\LicensedSystem.cs" />
     <Compile Include="Licensing\LicenseManager.cs" />
     <Compile Include="MapiMailMessage.cs" />
+    <Compile Include="Project\NewQuickDimensioningDistributorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\NewQuickDimensioningDistributorForm.Designer.cs">
+      <DependentUpon>NewQuickDimensioningDistributorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\NewRoomTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +155,12 @@
     </Compile>
     <Compile Include="Project\QuickDimensioningDistributorGrid.Designer.cs">
       <DependentUpon>QuickDimensioningDistributorGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\QuickDimensioningDistributorsGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\QuickDimensioningDistributorsGrid.Designer.cs">
+      <DependentUpon>QuickDimensioningDistributorsGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\QuickDimensioningDistributorsSummary.cs">
       <SubType>UserControl</SubType>
@@ -218,6 +230,10 @@
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\NewQuickDimensioningDistributorForm.resx">
+      <DependentUpon>NewQuickDimensioningDistributorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\FloorListSummaryPanel.resx">
       <DependentUpon>FloorListSummaryPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -237,6 +253,10 @@
     <EmbeddedResource Include="Project\QuickDimensioningDistributorGrid.resx">
       <SubType>Designer</SubType>
       <DependentUpon>QuickDimensioningDistributorGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\QuickDimensioningDistributorsGrid.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>QuickDimensioningDistributorsGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\QuickDimensioningDistributorsSummary.resx">
       <SubType>Designer</SubType>
@@ -270,6 +290,7 @@
   <ItemGroup>
     <None Include="Properties\DataSources\ConstructionLayer.datasource" />
     <None Include="Properties\DataSources\IQuickDimensioningSummary.datasource" />
+    <None Include="Properties\DataSources\QuickDimensioningDistributor.datasource" />
     <None Include="Properties\DataSources\QuickDimensioningRoomDistributorsWrapper.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\DataSources\RoomType.datasource" />

@@ -8,16 +8,16 @@ using System.Windows.Forms;
 using log4net;
 
 namespace Europlan.Common {
-	public partial class QuickDimensioningDistributorGrid : UserControl {
+	public partial class QuickDimensioningDistributorsGrid : UserControl {
 
 		private QuickDimensioningDistributor distributor = null;
 
 		private Dictionary<Type, DataGridViewColumn> productOpenColumns;
 		private Dictionary<Type, DataGridViewColumn> productPlannedColumns;
 
-		private static ILog log = LogManager.GetLogger(typeof(QuickDimensioningDistributorGrid));
+		private static ILog log = LogManager.GetLogger(typeof(QuickDimensioningDistributorsGrid));
 
-		public QuickDimensioningDistributorGrid() {
+		public QuickDimensioningDistributorsGrid() {
 			InitializeComponent();
 		}
 

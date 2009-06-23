@@ -23,84 +23,77 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.txtDistributor = new System.Windows.Forms.TextBox();
-			this.btnAdd = new System.Windows.Forms.Button();
-			this.btnRemove = new System.Windows.Forms.Button();
-			this.listDistributors = new System.Windows.Forms.ListBox();
-			this.distributorGrid = new Europlan.Common.QuickDimensioningDistributorGrid();
+			this.cmbDistributors = new System.Windows.Forms.ComboBox();
+			this.distributorGrid = new Europlan.Common.QuickDimensioningDistributorsGrid();
+			this.label1 = new System.Windows.Forms.Label();
+			this.button1 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
-			// txtDistributor
+			// cmbDistributors
 			// 
-			this.txtDistributor.Location = new System.Drawing.Point(4, 43);
-			this.txtDistributor.Name = "txtDistributor";
-			this.txtDistributor.Size = new System.Drawing.Size(125, 20);
-			this.txtDistributor.TabIndex = 0;
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(135, 41);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(75, 23);
-			this.btnAdd.TabIndex = 2;
-			this.btnAdd.Text = "+";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-			// 
-			// btnRemove
-			// 
-			this.btnRemove.Location = new System.Drawing.Point(135, 70);
-			this.btnRemove.Name = "btnRemove";
-			this.btnRemove.Size = new System.Drawing.Size(75, 23);
-			this.btnRemove.TabIndex = 3;
-			this.btnRemove.Text = "-";
-			this.btnRemove.UseVisualStyleBackColor = true;
-			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-			// 
-			// listDistributors
-			// 
-			this.listDistributors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.listDistributors.FormattingEnabled = true;
-			this.listDistributors.Location = new System.Drawing.Point(4, 69);
-			this.listDistributors.Name = "listDistributors";
-			this.listDistributors.Size = new System.Drawing.Size(125, 277);
-			this.listDistributors.TabIndex = 4;
-			this.listDistributors.SelectedValueChanged += new System.EventHandler(this.listDistributors_SelectedValueChanged);
+			this.cmbDistributors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbDistributors.FormattingEnabled = true;
+			this.cmbDistributors.Location = new System.Drawing.Point(82, 2);
+			this.cmbDistributors.Name = "cmbDistributors";
+			this.cmbDistributors.Size = new System.Drawing.Size(173, 21);
+			this.cmbDistributors.TabIndex = 6;
+			this.cmbDistributors.SelectedIndexChanged += new System.EventHandler(this.cmbDistributors_SelectedIndexChanged);
 			// 
 			// distributorGrid
 			// 
 			this.distributorGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.distributorGrid.ConcreteActivation = true;
 			this.distributorGrid.Distributor = null;
-			this.distributorGrid.Location = new System.Drawing.Point(216, 3);
+			this.distributorGrid.Euroval = true;
+			this.distributorGrid.Hitherm = true;
+			this.distributorGrid.HithermCompact = true;
+			this.distributorGrid.Location = new System.Drawing.Point(3, 29);
+			this.distributorGrid.ModulKlimaBoden = true;
+			this.distributorGrid.ModulKlimaDecke = true;
 			this.distributorGrid.Name = "distributorGrid";
-			this.distributorGrid.Size = new System.Drawing.Size(482, 352);
+			this.distributorGrid.Size = new System.Drawing.Size(695, 326);
 			this.distributorGrid.TabIndex = 5;
+			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(3, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(73, 23);
+			this.label1.TabIndex = 7;
+			this.label1.Text = "Verteiler:";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(261, 1);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(176, 23);
+			this.button1.TabIndex = 8;
+			this.button1.Text = "Verteiler anlegen/löschen";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.btnNewDistributor_Click);
 			// 
 			// QuickDimensioningDistributorsSummary
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.button1);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.cmbDistributors);
 			this.Controls.Add(this.distributorGrid);
-			this.Controls.Add(this.listDistributors);
-			this.Controls.Add(this.btnRemove);
-			this.Controls.Add(this.btnAdd);
-			this.Controls.Add(this.txtDistributor);
 			this.Name = "QuickDimensioningDistributorsSummary";
 			this.Size = new System.Drawing.Size(701, 358);
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.TextBox txtDistributor;
-		private System.Windows.Forms.Button btnAdd;
-		private System.Windows.Forms.Button btnRemove;
-		private System.Windows.Forms.ListBox listDistributors;
-		private QuickDimensioningDistributorGrid distributorGrid;
+		private QuickDimensioningDistributorsGrid distributorGrid;
+		private System.Windows.Forms.ComboBox cmbDistributors;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button button1;
 	}
 }
