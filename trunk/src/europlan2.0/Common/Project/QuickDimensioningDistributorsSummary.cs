@@ -18,7 +18,36 @@ namespace Europlan.Common {
 		}
 
 		void distributorGrid_ProjectChanged(object sender) {
+			UpdateRemainingConnectors();
 			OnProjectChanged();
+		}
+
+		private void UpdateRemainingConnectors() {
+			QuickDimensioningDistributor distributor = cmbDistributors.SelectedItem as QuickDimensioningDistributor;
+			int count = 0;
+			if (distributor != null) {
+				Project project = Project.Instance;
+				if (project != null) {
+					foreach (Floor floor in project.Floors) {
+						foreach (Room room in floor.Rooms) {
+							foreach (Product product in room.UsedProductsForQuickDimensioning) {
+								if (product.QuickDimensioningConnectedDistributors.ContainsKey(distributor.Id)) {
+									count += product.QuickDimensioningConnectedDistributors[distributor.Id];
+								}
+							}
+						}
+					}
+				}
+				lblRemainingLabel.Visible = true;
+				if (count <= 12) {
+					lblRemaining.Text = "" + (12 - count);
+				} else {
+					lblRemaining.Text = "Dem Verteiler sind zu viele Heizkreise zugeordnet!!!";
+				}
+			} else {
+				lblRemainingLabel.Visible = false;
+				lblRemaining.Text = "";
+			}
 		}
 
 		public void UpdateControl() {
@@ -37,6 +66,7 @@ namespace Europlan.Common {
 				cmbDistributors.SelectedIndex = 0;
 			}
 			this.distributorGrid.Distributor = cmbDistributors.SelectedItem as QuickDimensioningDistributor;
+			UpdateRemainingConnectors();
 		}
 
 		public bool AllowLeave() {

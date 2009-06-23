@@ -24,9 +24,11 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.cmbDistributors = new System.Windows.Forms.ComboBox();
-			this.distributorGrid = new Europlan.Common.QuickDimensioningDistributorsGrid();
 			this.label1 = new System.Windows.Forms.Label();
 			this.button1 = new System.Windows.Forms.Button();
+			this.lblRemainingLabel = new System.Windows.Forms.Label();
+			this.lblRemaining = new System.Windows.Forms.Label();
+			this.distributorGrid = new Europlan.Common.QuickDimensioningDistributorsGrid();
 			this.SuspendLayout();
 			// 
 			// cmbDistributors
@@ -38,23 +40,6 @@ namespace Europlan.Common {
 			this.cmbDistributors.Size = new System.Drawing.Size(173, 21);
 			this.cmbDistributors.TabIndex = 6;
 			this.cmbDistributors.SelectedIndexChanged += new System.EventHandler(this.cmbDistributors_SelectedIndexChanged);
-			// 
-			// distributorGrid
-			// 
-			this.distributorGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.distributorGrid.ConcreteActivation = true;
-			this.distributorGrid.Distributor = null;
-			this.distributorGrid.Euroval = true;
-			this.distributorGrid.Hitherm = true;
-			this.distributorGrid.HithermCompact = true;
-			this.distributorGrid.Location = new System.Drawing.Point(3, 29);
-			this.distributorGrid.ModulKlimaBoden = true;
-			this.distributorGrid.ModulKlimaDecke = true;
-			this.distributorGrid.Name = "distributorGrid";
-			this.distributorGrid.Size = new System.Drawing.Size(695, 326);
-			this.distributorGrid.TabIndex = 5;
 			// 
 			// label1
 			// 
@@ -75,10 +60,48 @@ namespace Europlan.Common {
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.btnNewDistributor_Click);
 			// 
+			// lblRemainingLabel
+			// 
+			this.lblRemainingLabel.Location = new System.Drawing.Point(3, 26);
+			this.lblRemainingLabel.Name = "lblRemainingLabel";
+			this.lblRemainingLabel.Size = new System.Drawing.Size(118, 23);
+			this.lblRemainingLabel.TabIndex = 9;
+			this.lblRemainingLabel.Text = "Verfügbare Anschlüße:";
+			this.lblRemainingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// lblRemaining
+			// 
+			this.lblRemaining.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lblRemaining.Location = new System.Drawing.Point(127, 26);
+			this.lblRemaining.Name = "lblRemaining";
+			this.lblRemaining.Size = new System.Drawing.Size(571, 23);
+			this.lblRemaining.TabIndex = 10;
+			this.lblRemaining.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// distributorGrid
+			// 
+			this.distributorGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.distributorGrid.ConcreteActivation = true;
+			this.distributorGrid.Distributor = null;
+			this.distributorGrid.Euroval = true;
+			this.distributorGrid.Hitherm = true;
+			this.distributorGrid.HithermCompact = true;
+			this.distributorGrid.Location = new System.Drawing.Point(3, 52);
+			this.distributorGrid.ModulKlimaBoden = true;
+			this.distributorGrid.ModulKlimaDecke = true;
+			this.distributorGrid.Name = "distributorGrid";
+			this.distributorGrid.Size = new System.Drawing.Size(695, 303);
+			this.distributorGrid.TabIndex = 5;
+			// 
 			// QuickDimensioningDistributorsSummary
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.lblRemaining);
+			this.Controls.Add(this.lblRemainingLabel);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.cmbDistributors);
@@ -95,5 +118,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ComboBox cmbDistributors;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Label lblRemainingLabel;
+		private System.Windows.Forms.Label lblRemaining;
 	}
 }
