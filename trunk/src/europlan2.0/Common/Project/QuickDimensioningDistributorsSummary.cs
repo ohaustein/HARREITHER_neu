@@ -17,20 +17,21 @@ namespace Europlan.Common {
 		}
 
 		public void UpdateControl() {
-			object oldSelectedItem = listDistributors.SelectedItem;
-			listDistributors.Items.Clear();
+			object oldSelectedItem = cmbDistributors.SelectedItem;
+			cmbDistributors.Items.Clear();
 			if (Project.Instance != null) {
 				List<QuickDimensioningDistributor> distributors = Project.Instance.QuickDimensioning.Distributors;
 				foreach (QuickDimensioningDistributor distributor in distributors) {
-					listDistributors.Items.Add(distributor);
+					cmbDistributors.Items.Add(distributor);
 				}
 			}
 			if (oldSelectedItem != null) {
-				listDistributors.SelectedItem = oldSelectedItem;
+				cmbDistributors.SelectedItem = oldSelectedItem;
 			}
-			if (listDistributors.SelectedItem == null && listDistributors.Items.Count > 0) {
-				listDistributors.SelectedIndex = 0;
+			if (cmbDistributors.SelectedItem == null && cmbDistributors.Items.Count > 0) {
+				cmbDistributors.SelectedIndex = 0;
 			}
+			this.distributorGrid.Distributor = cmbDistributors.SelectedItem as QuickDimensioningDistributor;
 		}
 
 		public bool AllowLeave() {
@@ -41,39 +42,6 @@ namespace Europlan.Common {
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
-		}
-
-		private void btnAdd_Click(object sender, EventArgs e) {
-			if (txtDistributor.Text != "") {
-				QuickDimensioningDistributor distributor = new QuickDimensioningDistributor();
-				distributor.Name = txtDistributor.Text;
-				txtDistributor.Text = "";
-				Project.Instance.QuickDimensioning.Distributors.Add(distributor);
-				this.OnProjectChanged();
-				UpdateControl();
-			}
-		}
-
-		private void btnRemove_Click(object sender, EventArgs e) {
-			if (listDistributors.SelectedIndex >= 0) {
-				Project project = Project.Instance;
-				QuickDimensioningDistributor distributor = listDistributors.SelectedItem as QuickDimensioningDistributor;
-				project.QuickDimensioning.Distributors.Remove(distributor);
-				foreach (Floor floor in project.Floors) {
-					foreach (Room room in floor.Rooms) {
-						foreach (Product product in room.UsedProductsForQuickDimensioning) {
-							product.QuickDimensioningConnectedDistributors.Remove(distributor.Id);
-						}
-					}
-				}
-			}
-			this.OnProjectChanged();
-			UpdateControl();
-		}
-
-		private void listDistributors_SelectedValueChanged(object sender, EventArgs e) {
-			QuickDimensioningDistributor distributor = this.listDistributors.SelectedItem as QuickDimensioningDistributor;
-			this.distributorGrid.Distributor = distributor;
 		}
 
 		public bool Euroval {
@@ -104,6 +72,18 @@ namespace Europlan.Common {
 		public bool ModulKlimaDecke {
 			get { return this.distributorGrid.ModulKlimaDecke; }
 			set { this.distributorGrid.ModulKlimaDecke = value; }
+		}
+
+		private void cmbDistributors_SelectedIndexChanged(object sender, EventArgs e) {
+			QuickDimensioningDistributor distributor = this.cmbDistributors.SelectedItem as QuickDimensioningDistributor;
+			this.distributorGrid.Distributor = distributor;
+		}
+
+		private void btnNewDistributor_Click(object sender, EventArgs e) {
+			NewQuickDimensioningDistributorForm form = new NewQuickDimensioningDistributorForm(Project.Instance);
+			form.ShowDialog();
+			this.OnProjectChanged();
+			UpdateControl();
 		}
 
 
