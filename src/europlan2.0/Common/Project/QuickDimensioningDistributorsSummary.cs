@@ -39,9 +39,11 @@ namespace Europlan.Common {
 					}
 				}
 				lblRemainingLabel.Visible = true;
-				if (count <= 12) {
+				if (count < 12) {
 					lblRemaining.Text = "" + (12 - count);
-				} else {
+				} else if (count == 12) {
+					lblRemaining.Text = "Alle Anschlüße des Verteilers sind belegt.";
+				} else  {
 					lblRemaining.Text = "Dem Verteiler sind zu viele Heizkreise zugeordnet!!!";
 				}
 			} else {
