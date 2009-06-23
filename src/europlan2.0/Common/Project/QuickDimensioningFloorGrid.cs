@@ -533,7 +533,7 @@ namespace Europlan.Common {
 				DataGridViewColumn col = cell.OwningColumn;
 				DataGridViewRow row = cell.OwningRow;
 				if (col == this.colRoomTemperature || col == this.colHeatLoad || col == this.colCoolLoad ||
-						col == this.colRoomController || col == this.colComments ||
+						col == this.colRoomController || col == this.colComments || col == this.colNrOfServos ||
 						col == this.colEuroval || col == this.colEurovalCircuits ||
 						col == this.colConcreteActivation || col == this.colConcreteActivationCircuits ||
 						col == this.colHitherm || col == this.colHithermCircuits ||
@@ -556,6 +556,10 @@ namespace Europlan.Common {
 						this.ValidateProductArea<ModulKlimaBodenProduct>(row);
 					} else if (col == this.colModulKlimaDecke) {
 						this.ValidateProductArea<ModulKlimaDeckeProduct>(row);
+					} else if (col == this.colNrOfServos) {
+						this.quickDimensioningGrid.BeginEdit(true);
+						cell.Value = -1;
+						this.quickDimensioningGrid.EndEdit();
 					}
 					this.CheckLoadsCovered(row);
 					this.OnProjectChanged();

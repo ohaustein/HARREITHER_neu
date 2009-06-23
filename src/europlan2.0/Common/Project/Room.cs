@@ -387,6 +387,7 @@ namespace Europlan.Common {
 			this.quickDimensioningCoolLoad = 0;
 			this.quickDimensioningHeatLoad = 0;
 			this.quickDimensioningRoomController = RoomController.None;
+			this.quickDimensioningNrOfServos = -1;
 			this.quickDimensioningRoomTemperature = 0;
 			this.quickDimensioningInitialized = false;
 			this.InitializeQuickDimensioning();
