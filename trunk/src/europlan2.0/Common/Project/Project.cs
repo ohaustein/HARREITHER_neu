@@ -55,7 +55,11 @@ namespace Europlan.Common {
 				if (instance == null) {
 					lock (padlock) {
 						if (instance == null) {
-							instance = new Project();
+							try {
+								instance = new Project();
+							} catch {
+								instance = null;
+							} 
 						}
 					}
 				}
