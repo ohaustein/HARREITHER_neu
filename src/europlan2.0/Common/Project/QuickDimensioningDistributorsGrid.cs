@@ -10,6 +10,8 @@ using log4net;
 namespace Europlan.Common {
 	public partial class QuickDimensioningDistributorsGrid : UserControl {
 
+		public event ProjectChangedHandler ProjectChanged;
+
 		private QuickDimensioningDistributor distributor = null;
 
 		private Dictionary<Type, DataGridViewColumn> productOpenColumns;
@@ -19,6 +21,12 @@ namespace Europlan.Common {
 
 		public QuickDimensioningDistributorsGrid() {
 			InitializeComponent();
+		}
+
+		private void OnProjectChanged() {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
 		}
 
 		public QuickDimensioningDistributor Distributor {
@@ -143,6 +151,10 @@ namespace Europlan.Common {
 				log.Warn("unknown product");
 				return null;
 			}
+		}
+
+		private void gridRooms_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+			this.OnProjectChanged();
 		}
 	}
 }
