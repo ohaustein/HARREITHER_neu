@@ -108,6 +108,24 @@ namespace Europlan.Common {
 		internal void UpdateTree() {
 			int i = 0;
 			bool expand = this.Node.Nodes.Count == 0;
+			
+			foreach (Distributor distributor in this.Distributors) {
+				int index = this.Node.Nodes.IndexOf(distributor.Node);
+				if (index < 0) {
+					this.Node.Nodes.Insert(i, distributor.Node);
+				} else if (index > i) {
+					if (distributor.Node.IsSelected) {
+						for (int j = i; j < index; j++) {
+							this.Node.Nodes.RemoveAt(i);
+						}
+					} else {
+						this.Node.Nodes.RemoveAt(index);
+						this.Node.Nodes.Insert(i, distributor.Node);
+					}
+				}
+				i++;
+			}
+
 			foreach (Room room in this.Rooms) {
 				int index = this.Node.Nodes.IndexOf(room.Node);
 				if (index < 0) {
