@@ -20,8 +20,8 @@ namespace Europlan.Common {
 			RF
 		}
 
-		private string name;
 		private string id;
+		private string name;
 		private int roomTemperature;
 		private float area;
 		private int heatLoad;
@@ -79,8 +79,8 @@ namespace Europlan.Common {
 		}
 
 		private void InitializeRoom() {
-			name = "";
 			id = "";
+			name = "";
 			roomTemperature = 0;
 			area = 0;
 			heatLoad = 0;
@@ -117,19 +117,24 @@ namespace Europlan.Common {
 			}
 		}
 
+		public string Id {
+			get { return id; }
+			set { 
+				id = value;
+				if (roomNode != null) {
+					roomNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : id + ": " + name);
+				}		
+			}
+		}
+		
 		public string Name {
 			get { return name; }
 			set { 
 				name = value;
 				if (roomNode != null) {
-					roomNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : name);
+					roomNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : id + ": " + name);
 				}
 			}
-		}
-
-		public string Id {
-			get { return id; }
-			set { id = value; }
 		}
 
 		public string QuickDimensioningRoomTypeId {

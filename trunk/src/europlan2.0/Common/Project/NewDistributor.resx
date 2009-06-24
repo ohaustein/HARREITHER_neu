@@ -117,45 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CopyOf" xml:space="preserve">
-    <value>Kopie von</value>
-  </data>
-  <data name="DefaultRegulatorCircuits" xml:space="preserve">
-    <value>Standardregelkreis</value>
-  </data>
-  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Beenden</value>
-  </data>
-  <data name="NewProjectTitle" xml:space="preserve">
-    <value>unbekannt</value>
-  </data>
-  <data name="NotLicensed" xml:space="preserve">
-    <value>nicht lizenziert</value>
-  </data>
-  <data name="RegulatorCircuits" xml:space="preserve">
-    <value>Regelkreise</value>
-  </data>
-  <data name="RestartCaption" xml:space="preserve">
-    <value>"Neustart erforderlich..."</value>
-  </data>
-  <data name="RestartMessage" xml:space="preserve">
-    <value>Durch die Änderungen an den Einstellungen ist ein Neustart erforderlich.
-Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="SyncCaption" xml:space="preserve">
-    <value>Synchronisieren?</value>
-  </data>
-  <data name="SyncMessage" xml:space="preserve">
-    <value>Es sind bereits Geschoße bzw. Räume vorhanden. Wählen Sie ja, um die Daten zu synchronisieren oder nein, um die vorhandenen Daten durch die importieren zu ersetzen.</value>
-  </data>
-  <data name="UnsavedCaption" xml:space="preserve">
-    <value>Änderungen speichern?</value>
-  </data>
-  <data name="UnsavedMessage" xml:space="preserve">
-    <value>Änderungen speichern?</value>
-  </data>
 </root>

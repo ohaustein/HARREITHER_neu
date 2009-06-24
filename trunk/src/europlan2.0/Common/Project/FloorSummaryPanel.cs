@@ -40,7 +40,7 @@ namespace Europlan.Common {
 				}
 			}
 
-			this.txtName.Text = floor.Name;
+			this.lblFloorName.Text = floor.Name;
 			this.floorRoomsSource.ResetBindings(false);
 
 			if (selectedRoom != null) {
@@ -62,13 +62,6 @@ namespace Europlan.Common {
 
 		public bool AllowLeave() {
 			return true;
-		}
-
-		private void txtName_TextChanged(object sender, EventArgs e) {
-			this.floor.Name = this.txtName.Text;
-			if (ProjectStructureChanged != null) {
-				ProjectStructureChanged(this);
-			}
 		}
 
 		private void gridRooms_CellClick(object sender, DataGridViewCellEventArgs e) {
@@ -114,6 +107,20 @@ namespace Europlan.Common {
 
 		private void gridRooms_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
 			gridRooms.AllowUserToAddRows = false;
+		}
+
+		private void btnAddDistributor_Click(object sender, EventArgs e) {
+			// TODO: check if regulator circuit is available
+			NewDistributor form = new NewDistributor();
+			DialogResult result = form.ShowDialog();
+			if (result == DialogResult.OK) {
+				if (form.Distributor != null) {
+					this.floor.Distributors.Add(form.Distributor);
+					if (ProjectChanged != null) {
+						ProjectChanged(this);
+					}
+				}
+			}
 		}
 	}
 }

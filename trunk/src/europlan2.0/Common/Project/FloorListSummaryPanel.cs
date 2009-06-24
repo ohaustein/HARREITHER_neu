@@ -17,17 +17,17 @@ namespace Europlan.Common {
 			InitializeComponent();
 		}
 
-		private void btnImport_Click(object sender, EventArgs e) {
-			BuildingDataImportManager.Instance.ImportBuildingData();
-			if (ProjectStructureChanged != null) {
-				ProjectStructureChanged(null);
-			}
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
-			}
-			projectFloorsSource.DataSource = Project.Instance.Floors;
-			projectFloorsSource.ResetBindings(false);
-		}
+		//private void btnImport_Click(object sender, EventArgs e) {
+		//    BuildingDataImportManager.Instance.ImportBuildingData();
+		//    if (ProjectStructureChanged != null) {
+		//        ProjectStructureChanged(null);
+		//    }
+		//    if (ProjectChanged != null) {
+		//        ProjectChanged(null);
+		//    }
+		//    projectFloorsSource.DataSource = Project.Instance.Floors;
+		//    projectFloorsSource.ResetBindings(false);
+		//}
 
 		public void UpdateControl() {
 			List<DataGridViewColumn> selectedCols = null;
@@ -112,5 +112,6 @@ namespace Europlan.Common {
 		private void gridFloors_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
 			gridFloors.AllowUserToAddRows = false;
 		}
+
 	}
 }

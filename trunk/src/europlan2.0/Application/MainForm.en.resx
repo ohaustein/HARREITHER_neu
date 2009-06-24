@@ -182,4 +182,7 @@ Press OK to restart now.</value>
   <data name="Regulator Circuits" xml:space="preserve">
     <value>Regulator Circuits</value>
   </data>
+  <data name="DefaultRegulatorCircuits" xml:space="preserve">
+    <value>Default regulator circuit</value>
+  </data>
 </root>
