@@ -110,19 +110,19 @@ namespace Europlan.Common {
 		}
 
 		private void btnAddDistributor_Click(object sender, EventArgs e) {
-			// TODO: check if regulator circuit is available
-			NewDistributor form = new NewDistributor();
-			DialogResult result = form.ShowDialog();
-			if (result == DialogResult.OK) {
-				if (form.Distributor != null) {
-					this.floor.Distributors.Add(form.Distributor);
-					//if (ProjectChanged != null) {
-					//    ProjectChanged(this);
-					//}
-					if (ProjectStructureChanged != null) {
-						ProjectStructureChanged(this);
+			if (Project.Instance != null && Project.Instance.RegulatorCircuits.Count > 0) {
+				NewDistributor form = new NewDistributor();
+				DialogResult result = form.ShowDialog();
+				if (result == DialogResult.OK) {
+					if (form.Distributor != null) {
+						this.floor.Distributors.Add(form.Distributor);
+						if (ProjectStructureChanged != null) {
+							ProjectStructureChanged(this);
+						}
 					}
 				}
+			} else {
+				MessageBox.Show("Ein Verteiler benötigt einen Regelkreis, an den er angeschlossen werden kann. Bitte legen Sie unter 'Regelkreise' zumindest einen Regelkreis an", "Kein Regelkreis vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
 		}
 	}

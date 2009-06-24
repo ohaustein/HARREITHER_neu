@@ -13,12 +13,15 @@ namespace Europlan.Common {
 		public event ProjectChangedHandler ProjectChanged;
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 
+		private Distributor distributor;
+
 		public DistributorPanel() {
 			InitializeComponent();
 		}
 
 		public void UpdateControl() {
-			//if (this.Tag != null) {
+			if (this.Tag != null) {
+				this.distributor = this.Tag as Distributor;
 			//    this.room = this.Tag as Room;
 			//    this.txtName.Text = room.Name;
 			//    this.txtArea.Value = (decimal)room.Area;
@@ -27,7 +30,7 @@ namespace Europlan.Common {
 			//    this.txtNormHeat.Text = room.NormalizedHeatLoad.ToString();
 			//    this.txtCool.Text = room.CoolLoad.ToString();
 			//    this.txtNormCool.Text = room.NormalizedCoolLoad.ToString();
-			//}
+			}
 		}
 
 		public bool AllowLeave() {
