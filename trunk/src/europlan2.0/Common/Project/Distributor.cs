@@ -50,6 +50,10 @@ namespace Europlan.Common {
 			}
 		}
 
+		internal TreeNode Node {
+			get { return this.distributorNode; }
+		}
+
 		[XmlIgnore]
 		public RegulatorCircuit RegulatorCircuit {
 			get {

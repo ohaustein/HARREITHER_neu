@@ -116,8 +116,11 @@ namespace Europlan.Common {
 			if (result == DialogResult.OK) {
 				if (form.Distributor != null) {
 					this.floor.Distributors.Add(form.Distributor);
-					if (ProjectChanged != null) {
-						ProjectChanged(this);
+					//if (ProjectChanged != null) {
+					//    ProjectChanged(this);
+					//}
+					if (ProjectStructureChanged != null) {
+						ProjectStructureChanged(this);
 					}
 				}
 			}
