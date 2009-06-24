@@ -54,6 +54,10 @@ namespace Europlan.Common {
 			set { coolFlowTemperature = value; }
 		}
 
+		public override string ToString() {
+			return id + " - " + name;
+		}
+
 	}
 
 }

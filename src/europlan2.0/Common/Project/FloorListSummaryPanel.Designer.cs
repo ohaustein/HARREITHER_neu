@@ -25,7 +25,6 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			this.btnImport = new System.Windows.Forms.Button();
 			this.gridFloors = new System.Windows.Forms.DataGridView();
 			this.associatedIconDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,17 +36,6 @@ namespace Europlan.Common {
 			((System.ComponentModel.ISupportInitialize)(this.gridFloors)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.projectFloorsSource)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// btnImport
-			// 
-			this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnImport.Location = new System.Drawing.Point(463, 4);
-			this.btnImport.Name = "btnImport";
-			this.btnImport.Size = new System.Drawing.Size(212, 23);
-			this.btnImport.TabIndex = 0;
-			this.btnImport.Text = "Gebäude- und Lastdaten importieren...";
-			this.btnImport.UseVisualStyleBackColor = true;
-			this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
 			// 
 			// gridFloors
 			// 
@@ -150,7 +138,6 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.gridFloors);
-			this.Controls.Add(this.btnImport);
 			this.Name = "FloorListSummaryPanel";
 			this.Size = new System.Drawing.Size(678, 333);
 			((System.ComponentModel.ISupportInitialize)(this.gridFloors)).EndInit();
@@ -162,7 +149,6 @@ namespace Europlan.Common {
 
 		#endregion
 
-		private System.Windows.Forms.Button btnImport;
 		private System.Windows.Forms.DataGridView gridFloors;
 		private System.Windows.Forms.BindingSource projectFloorsSource;
 		private System.Windows.Forms.DataGridViewImageColumn associatedIconDataGridViewImageColumn;

@@ -17,6 +17,7 @@ namespace Europlan.Common {
 		private TreeNode floorNode = new TreeNode();
 
 		private RoomList rooms;
+		private DistributorList distributors;
 
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Floor));
@@ -46,6 +47,7 @@ namespace Europlan.Common {
 			name = "";
 			id = "";
 			rooms = new RoomList();
+			distributors = new DistributorList();
 			this.floorNode.Tag = this;
 		}
 
@@ -82,6 +84,15 @@ namespace Europlan.Common {
 			}
 			set {
 				rooms = value;
+			}
+		}
+
+		public DistributorList Distributors {
+			get {
+				return distributors;
+			}
+			set {
+				distributors = value;
 			}
 		}
 
@@ -147,6 +158,12 @@ namespace Europlan.Common {
 						return node;
 					}
 				}
+				foreach (Distributor d in distributors) {
+					TreeNode node = d.FindNode(element);
+					if (node != null) {
+						return node;
+					}
+				}
 			}
 			return null;
 		}
@@ -181,7 +198,8 @@ namespace Europlan.Common {
 		public void Paste(object o) {
 			if (o.GetType() == typeof(Room)) {
 				rooms.Add(o as Room);
-				
+			} else if (o.GetType() == typeof(Distributor)) {
+				distributors.Add(o as Distributor);
 			} else {
 				throw new Exception("Paste of this type not supported");
 			}			

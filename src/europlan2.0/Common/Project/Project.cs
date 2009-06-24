@@ -201,6 +201,8 @@ namespace Europlan.Common {
 		public static Project New() {
 			lock (padlock) {
 				Instance.InitializeProject();
+				string localized = ResourcesManager.resources.GetString("DefaultRegulatorCircuits", Thread.CurrentThread.CurrentUICulture);
+				Instance.RegulatorCircuits.Add(new RegulatorCircuit(localized));
 				return Instance;
 			}			
 		}
