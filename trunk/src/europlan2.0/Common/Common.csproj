@@ -116,11 +116,11 @@
     <Compile Include="Project\DistributorPanel.Designer.cs">
       <DependentUpon>DistributorPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\NewDistributor.cs">
+    <Compile Include="Project\NewDistributorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Project\NewDistributor.Designer.cs">
-      <DependentUpon>NewDistributor.cs</DependentUpon>
+    <Compile Include="Project\NewDistributorForm.Designer.cs">
+      <DependentUpon>NewDistributorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\NewQuickDimensioningDistributorForm.cs">
       <SubType>Form</SubType>
@@ -248,9 +248,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>DistributorPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\NewDistributor.resx">
+    <EmbeddedResource Include="Project\NewDistributorForm.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>NewDistributor.cs</DependentUpon>
+      <DependentUpon>NewDistributorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\NewQuickDimensioningDistributorForm.resx">
       <DependentUpon>NewQuickDimensioningDistributorForm.cs</DependentUpon>

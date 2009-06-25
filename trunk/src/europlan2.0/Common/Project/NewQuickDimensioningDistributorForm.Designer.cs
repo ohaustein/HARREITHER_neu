@@ -40,8 +40,10 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(356, 218);
 			this.Controls.Add(this.gridQuickDimensioningDistributor);
+			this.MaximizeBox = false;
 			this.Name = "NewQuickDimensioningDistributorForm";
 			this.Text = "Verteiler";
+			this.Load += new System.EventHandler(this.NewQuickDimensioningDistributorForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewQuickDimensioningDistributorForm_FormClosing);
 			this.ResumeLayout(false);
 
