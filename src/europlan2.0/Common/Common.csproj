@@ -244,6 +244,10 @@
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\DistributorPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DistributorPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\NewDistributor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NewDistributor.cs</DependentUpon>
