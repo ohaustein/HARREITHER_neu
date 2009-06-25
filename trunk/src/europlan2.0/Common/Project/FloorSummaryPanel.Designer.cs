@@ -35,10 +35,6 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridRooms = new System.Windows.Forms.DataGridView();
-			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
-			this.btnAddDistributor = new System.Windows.Forms.Button();
-			this.label1 = new System.Windows.Forms.Label();
-			this.lblFloorName = new System.Windows.Forms.Label();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Area = new Europlan.Common.NumericColumn();
@@ -48,7 +44,11 @@ namespace Europlan.Common {
 			this.AdditionalHeatLoad = new Europlan.Common.NumericColumn();
 			this.associatedPanelTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.associatedIconDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.floorRoomsSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnAddDistributor = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
+			this.lblFloorName = new System.Windows.Forms.Label();
 			this.numericColumn1 = new Europlan.Common.NumericColumn();
 			this.numericColumn2 = new Europlan.Common.NumericColumn();
 			this.numericColumn3 = new Europlan.Common.NumericColumn();
@@ -96,45 +96,6 @@ namespace Europlan.Common {
 			this.gridRooms.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.gridRooms_RowPrePaint);
 			this.gridRooms.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridRooms_UserDeletedRow);
 			this.gridRooms.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRooms_CellClick);
-			// 
-			// colView
-			// 
-			this.colView.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.colView.HeaderText = "Bearbeiten";
-			this.colView.Name = "colView";
-			this.colView.ReadOnly = true;
-			this.colView.Text = "...";
-			this.colView.UseColumnTextForButtonValue = true;
-			this.colView.Width = 64;
-			// 
-			// btnAddDistributor
-			// 
-			this.btnAddDistributor.Location = new System.Drawing.Point(7, 27);
-			this.btnAddDistributor.Name = "btnAddDistributor";
-			this.btnAddDistributor.Size = new System.Drawing.Size(118, 23);
-			this.btnAddDistributor.TabIndex = 17;
-			this.btnAddDistributor.Text = "Verteiler anlegen";
-			this.btnAddDistributor.UseVisualStyleBackColor = true;
-			this.btnAddDistributor.Click += new System.EventHandler(this.btnAddDistributor_Click);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(3, 0);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(152, 24);
-			this.label1.TabIndex = 18;
-			this.label1.Text = "Geschoﬂdaten:";
-			// 
-			// lblFloorName
-			// 
-			this.lblFloorName.AutoSize = true;
-			this.lblFloorName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblFloorName.Location = new System.Drawing.Point(161, 0);
-			this.lblFloorName.Name = "lblFloorName";
-			this.lblFloorName.Size = new System.Drawing.Size(0, 24);
-			this.lblFloorName.TabIndex = 19;
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -230,9 +191,48 @@ namespace Europlan.Common {
 			this.associatedIconDataGridViewImageColumn.ReadOnly = true;
 			this.associatedIconDataGridViewImageColumn.Visible = false;
 			// 
+			// colView
+			// 
+			this.colView.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.colView.HeaderText = "Bearbeiten";
+			this.colView.Name = "colView";
+			this.colView.ReadOnly = true;
+			this.colView.Text = "...";
+			this.colView.UseColumnTextForButtonValue = true;
+			this.colView.Width = 64;
+			// 
 			// floorRoomsSource
 			// 
 			this.floorRoomsSource.DataSource = typeof(Europlan.Common.Floor);
+			// 
+			// btnAddDistributor
+			// 
+			this.btnAddDistributor.Location = new System.Drawing.Point(3, 27);
+			this.btnAddDistributor.Name = "btnAddDistributor";
+			this.btnAddDistributor.Size = new System.Drawing.Size(118, 23);
+			this.btnAddDistributor.TabIndex = 17;
+			this.btnAddDistributor.Text = "Verteiler anlegen";
+			this.btnAddDistributor.UseVisualStyleBackColor = true;
+			this.btnAddDistributor.Click += new System.EventHandler(this.btnAddDistributor_Click);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.Location = new System.Drawing.Point(3, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(152, 24);
+			this.label1.TabIndex = 18;
+			this.label1.Text = "Geschoﬂdaten:";
+			// 
+			// lblFloorName
+			// 
+			this.lblFloorName.AutoSize = true;
+			this.lblFloorName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblFloorName.Location = new System.Drawing.Point(161, 0);
+			this.lblFloorName.Name = "lblFloorName";
+			this.lblFloorName.Size = new System.Drawing.Size(0, 24);
+			this.lblFloorName.TabIndex = 19;
 			// 
 			// numericColumn1
 			// 

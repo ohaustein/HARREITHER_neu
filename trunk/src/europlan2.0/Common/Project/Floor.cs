@@ -43,6 +43,10 @@ namespace Europlan.Common {
 			}
 		}
 
+		public override string ToString() {
+			return this.Name;
+		}
+
 		private void InitializeFloor() {
 			name = "";
 			id = "";

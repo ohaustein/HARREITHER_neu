@@ -13,6 +13,8 @@ namespace Europlan.Common {
 		private string id;
 		private string name;
 		private string regulatorCircuitId;
+		private int maxCircuits;
+		private List<string> additionalFloors;
 
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Distributor));
@@ -27,6 +29,8 @@ namespace Europlan.Common {
 			id = "";
 			name = "";
 			regulatorCircuitId = "";
+			maxCircuits = 12;
+			additionalFloors = new List<string>();
 			distributorNode.Tag = this;
 		}
 
@@ -50,8 +54,41 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public List<Floor> AdditionalFloors {
+			get {
+				List<Floor> floors = new List<Floor>();
+				foreach (string floorId in additionalFloors) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						if (floor.Id == floorId) {
+							floors.Add(floor);
+							continue;
+						}
+					}
+				}
+				return floors;
+			}
+			set {
+				foreach (Floor floor in value) {
+					if (!additionalFloors.Contains(floor.Id)) {
+						additionalFloors.Add(floor.Id);
+					}
+				}
+			}
+		}
+
+		public int MaxCircuits {
+			get { return maxCircuits; }
+			set { maxCircuits = value; }
+		}
+		
 		internal TreeNode Node {
 			get { return this.distributorNode; }
+		}
+
+		public List<string> AdditionalFloorIds {
+			get { return additionalFloors; }
+			set { additionalFloors = value; }
 		}
 
 		[XmlIgnore]
