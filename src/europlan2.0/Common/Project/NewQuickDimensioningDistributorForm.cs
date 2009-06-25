@@ -18,6 +18,14 @@ namespace Europlan.Common {
 
 		private void NewQuickDimensioningDistributorForm_FormClosing(object sender, FormClosingEventArgs e) {
 			gridQuickDimensioningDistributor.Cleanup();
+			SettingsKey settings = SettingsFile.Settings["NewQuickDimensioningDistributorForm"];
+			settings.StorePoint("Location", this.Location);
+			SettingsFile.Update();
+		}
+
+		private void NewQuickDimensioningDistributorForm_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["NewQuickDimensioningDistributorForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
 		}
 	}
 }

@@ -102,6 +102,7 @@ namespace Europlan.Common {
 			this.colNrOfServos = new Europlan.Common.NumericColumn();
 			this.colRoomControllers = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.iQuickDimensioningSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnPrint = new System.Windows.Forms.Button();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -657,8 +658,14 @@ namespace Europlan.Common {
 			// 
 			// quickDimensioningDistributorsSummary
 			// 
+			this.quickDimensioningDistributorsSummary.ConcreteActivation = true;
 			this.quickDimensioningDistributorsSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.quickDimensioningDistributorsSummary.Euroval = true;
+			this.quickDimensioningDistributorsSummary.Hitherm = true;
+			this.quickDimensioningDistributorsSummary.HithermCompact = true;
 			this.quickDimensioningDistributorsSummary.Location = new System.Drawing.Point(3, 3);
+			this.quickDimensioningDistributorsSummary.ModulKlimaBoden = true;
+			this.quickDimensioningDistributorsSummary.ModulKlimaDecke = true;
 			this.quickDimensioningDistributorsSummary.Name = "quickDimensioningDistributorsSummary";
 			this.quickDimensioningDistributorsSummary.Size = new System.Drawing.Size(880, 399);
 			this.quickDimensioningDistributorsSummary.TabIndex = 0;
@@ -666,6 +673,7 @@ namespace Europlan.Common {
 			// 
 			// pageSummary
 			// 
+			this.pageSummary.Controls.Add(this.btnPrint);
 			this.pageSummary.Controls.Add(this.dataGridView2);
 			this.pageSummary.Location = new System.Drawing.Point(4, 22);
 			this.pageSummary.Name = "pageSummary";
@@ -679,6 +687,9 @@ namespace Europlan.Common {
 			// 
 			this.dataGridView2.AllowUserToAddRows = false;
 			this.dataGridView2.AllowUserToDeleteRows = false;
+			this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridView2.AutoGenerateColumns = false;
 			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -709,12 +720,11 @@ namespace Europlan.Common {
             this.colNrOfServos,
             this.colRoomControllers});
 			this.dataGridView2.DataSource = this.iQuickDimensioningSummaryBindingSource;
-			this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView2.Location = new System.Drawing.Point(3, 3);
+			this.dataGridView2.Location = new System.Drawing.Point(3, 52);
 			this.dataGridView2.MultiSelect = false;
 			this.dataGridView2.Name = "dataGridView2";
 			this.dataGridView2.ReadOnly = true;
-			this.dataGridView2.Size = new System.Drawing.Size(880, 399);
+			this.dataGridView2.Size = new System.Drawing.Size(880, 350);
 			this.dataGridView2.TabIndex = 2;
 			this.dataGridView2.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView2_RowsAdded);
 			// 
@@ -987,6 +997,16 @@ namespace Europlan.Common {
 			// 
 			this.iQuickDimensioningSummaryBindingSource.DataSource = typeof(Europlan.Common.IQuickDimensioningSummary);
 			// 
+			// btnPrint
+			// 
+			this.btnPrint.Location = new System.Drawing.Point(7, 7);
+			this.btnPrint.Name = "btnPrint";
+			this.btnPrint.Size = new System.Drawing.Size(203, 39);
+			this.btnPrint.TabIndex = 3;
+			this.btnPrint.Text = "Ergebnis drucken/exportieren...";
+			this.btnPrint.UseVisualStyleBackColor = true;
+			this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+			// 
 			// QuickDimensioningPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1069,5 +1089,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ComboBox cmbHeatFlowTemperature;
 		private System.Windows.Forms.TabPage pageDistributors;
 		private QuickDimensioningDistributorsSummary quickDimensioningDistributorsSummary;
+		private System.Windows.Forms.Button btnPrint;
 	}
 }

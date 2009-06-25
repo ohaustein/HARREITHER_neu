@@ -111,7 +111,7 @@ namespace Europlan.Common {
 
 		private void btnAddDistributor_Click(object sender, EventArgs e) {
 			if (Project.Instance != null && Project.Instance.RegulatorCircuits.Count > 0) {
-				NewDistributor form = new NewDistributor();
+				NewDistributorForm form = new NewDistributorForm();
 				DialogResult result = form.ShowDialog();
 				if (result == DialogResult.OK) {
 					if (form.Distributor != null) {

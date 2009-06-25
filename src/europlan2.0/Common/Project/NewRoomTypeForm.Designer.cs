@@ -40,8 +40,10 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(567, 313);
 			this.Controls.Add(this.gridRoomTypes);
+			this.MinimizeBox = false;
 			this.Name = "NewRoomTypeForm";
 			this.Text = "Raumtypen";
+			this.Load += new System.EventHandler(this.NewRoomTypeForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewRoomTypeForm_FormClosing);
 			this.ResumeLayout(false);
 

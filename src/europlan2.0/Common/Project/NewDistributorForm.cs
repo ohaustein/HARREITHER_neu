@@ -5,13 +5,14 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Star.SettingsXpress;
 
 namespace Europlan.Common {
-	public partial class NewDistributor : Form {
+	public partial class NewDistributorForm : Form {
 
 		private Distributor distributor = null;
 
-		public NewDistributor() {
+		public NewDistributorForm() {
 			InitializeComponent();
 			Inititalize();
 		}
@@ -38,6 +39,10 @@ namespace Europlan.Common {
 		}
 
 		private void NewDistributor_FormClosing(object sender, FormClosingEventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["NewDistributorForm"];
+			settings.StorePoint("Location", this.Location);
+			settings.StoreSize("Size", this.Size);
+			SettingsFile.Update();
 			if (this.DialogResult == DialogResult.OK) {
 				if (txtId.Text == "") {
 					MessageBox.Show("Bitte geben Sie eine eindeutige Verteilernummer ein.", "Ungültige Verteilernummer", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -70,6 +75,12 @@ namespace Europlan.Common {
 
 		public Distributor Distributor {
 			get { return distributor; }
+		}
+
+		private void NewDistributorForm_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["NewDistributorForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
+			this.Size = settings.GetSize("Size", this.Size);
 		}
 	}
 }

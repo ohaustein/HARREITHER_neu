@@ -839,6 +839,10 @@ namespace Europlan.Common {
 			this.OnProjectChanged();
 		}
 
+		private void btnPrint_Click(object sender, EventArgs e) {
+
+		}
+
 		//private void txtAllocation_ValueChanged(object sender, EventArgs e) {
 		//    int percent = (int)this.txtAllocation.Value;
 		//    if (!(percent > 0) || !(percent <= 100)) {

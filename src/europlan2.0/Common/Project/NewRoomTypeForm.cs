@@ -28,6 +28,18 @@ namespace Europlan.Common {
 			this.selectedRoomType = gridRoomTypes.SelectedRoomType;
 			gridRoomTypes.Cleanup();
 			this.selectedRoomType = gridRoomTypes.SelectedRoomType;
+
+			SettingsKey settings = SettingsFile.Settings["NewDistributorForm"];
+			settings.StorePoint("Location", this.Location);
+			settings.StoreSize("Size", this.Size);
+			SettingsFile.Update();
+
+		}
+
+		private void NewRoomTypeForm_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["NewDistributorForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
+			this.Size = settings.GetSize("Size", this.Size);
 		}
 	}
 }

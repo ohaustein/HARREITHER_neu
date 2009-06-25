@@ -1,5 +1,5 @@
 namespace Europlan.Common {
-	partial class NewDistributor {
+	partial class NewDistributorForm {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -113,7 +113,7 @@ namespace Europlan.Common {
 			this.cmbCircuit.Size = new System.Drawing.Size(268, 21);
 			this.cmbCircuit.TabIndex = 8;
 			// 
-			// NewDistributor
+			// NewDistributorForm
 			// 
 			this.AcceptButton = this.btnOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -132,8 +132,9 @@ namespace Europlan.Common {
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "NewDistributor";
+			this.Name = "NewDistributorForm";
 			this.Text = "Verteiler anlegen";
+			this.Load += new System.EventHandler(this.NewDistributorForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewDistributor_FormClosing);
 			this.ResumeLayout(false);
 			this.PerformLayout();
