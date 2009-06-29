@@ -47,6 +47,10 @@ namespace Europlan.Common {
 				return 0;
 			}
 		}
+
+		public override string Name {
+			get { return "Modul Klimadecke"; }
+		}
 	}
 	
 }

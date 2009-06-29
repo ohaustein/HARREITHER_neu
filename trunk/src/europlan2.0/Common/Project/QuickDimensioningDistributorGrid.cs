@@ -38,7 +38,11 @@ namespace Europlan.Common {
 			if (this.gridDistributors.SelectedCells.Count > 0) {
 				if (this.gridDistributors.SelectedCells[0].OwningRow.DataBoundItem == null) {
 					bool dirty = this.gridDistributors.IsCurrentRowDirty;
+					bool clear = (this.quickDimensioningDistributorBindingSource.DataSource as List<QuickDimensioningDistributor>).Count == 1;
 					this.gridDistributors.CancelEdit();
+					if (clear) {
+						(this.quickDimensioningDistributorBindingSource.DataSource as List<QuickDimensioningDistributor>).Clear();
+					}
 				} else {
 					this.gridDistributors.EndEdit();
 				}

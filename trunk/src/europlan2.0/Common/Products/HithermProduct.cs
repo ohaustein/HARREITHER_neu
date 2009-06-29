@@ -38,6 +38,10 @@ namespace Europlan.Common {
 		public override float QuickDimensioningMaximumArea {
 			get { return Int32.MaxValue; }
 		}
+
+		public override string Name {
+			get { return "Hitherm"; }
+		}
 	}
 	
 }

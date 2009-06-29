@@ -100,6 +100,25 @@ namespace Europlan.Common {
 			set { distributors = value; }
 		}
 
+		public List<QuickDimensioningDistributorsReportWrapper> GetQuickDimensioningDistributorsReports() {
+			List<QuickDimensioningDistributorsReportWrapper> result = new List<QuickDimensioningDistributorsReportWrapper>();
+			Dictionary<string, QuickDimensioningDistributor> distributorMapping = new Dictionary<string, QuickDimensioningDistributor>();
+			foreach (QuickDimensioningDistributor distributor in Project.Instance.QuickDimensioning.Distributors) {
+				distributorMapping.Add(distributor.Id, distributor);
+			}
+			foreach (Floor floor in Project.Instance.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (Product product in room.UsedProductsForQuickDimensioning) {
+						foreach (KeyValuePair<string, int> distributorEntry in product.QuickDimensioningConnectedDistributors) {
+							if (distributorMapping.ContainsKey(distributorEntry.Key) && distributorEntry.Value > 0) {
+								result.Add(new QuickDimensioningDistributorsReportWrapper(distributorMapping[distributorEntry.Key], product));
+							}
+						}
+					}
+				}
+			}
+			return result;
+		}
 	}
 	
 }

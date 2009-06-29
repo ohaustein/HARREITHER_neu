@@ -27,6 +27,9 @@ namespace Europlan.Common {
 			return product;
 		}
 
+		public override string Name {
+			get { return "Betonkernaktivierung"; }
+		}
 	}
 	
 }
