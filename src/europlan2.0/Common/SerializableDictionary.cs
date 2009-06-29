@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 namespace Europlan.Common {
 
 	[XmlRoot("dictionary")]
+	[Serializable()]
 	public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable {
 
 

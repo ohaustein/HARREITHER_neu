@@ -11,6 +11,7 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(HithermCompactProduct))]
 	[XmlInclude(typeof(ModulKlimaBodenProduct))]
 	[XmlInclude(typeof(ModulKlimaDeckeProduct))]
+	[Serializable()]
 	public abstract class Product {
 
 		protected int quickDimensioningHeatPowerPerSquareMeter = 0;

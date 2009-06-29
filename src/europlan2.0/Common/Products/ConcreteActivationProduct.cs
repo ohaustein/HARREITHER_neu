@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Europlan.Common {
-	
+
+	[Serializable()]
 	public class ConcreteActivationProduct : EurovalProduct {
 
 		public ConcreteActivationProduct(){
