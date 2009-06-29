@@ -12,6 +12,10 @@ using log4net;
 using Europlan.Licensing;
 using System.IO;
 using Europlan.Common;
+#if CLIPBOARD_TEST
+using System.Runtime.Serialization.Formatters.Binary;
+#endif
+
 
 namespace Europlan.Application {
 	public partial class MainForm : Form {
@@ -470,6 +474,9 @@ namespace Europlan.Application {
 							IClipboard clipboardObject = projectTree.SelectedNode.Tag as IClipboard;
 							if (clipboardObject.SupportsCopy) {
 								DataFormats.Format format =  DataFormats.GetFormat(clipboardObject.DataFormat);
+#if CLIPBOARD_TEST
+								IsSerializable(clipboardObject.Copy());
+#endif
 								Clipboard.SetData(format.Name, clipboardObject.Copy());
 							}
 						}
@@ -480,6 +487,9 @@ namespace Europlan.Application {
 						IClipboard selectedItem = grid.SelectedRows[0].DataBoundItem as IClipboard;
 						if (selectedItem.SupportsCopy) {
 							DataFormats.Format format = DataFormats.GetFormat(selectedItem.DataFormat);
+#if CLIPBOARD_TEST
+							IsSerializable(selectedItem.Copy());
+#endif
 							Clipboard.SetData(format.Name, selectedItem.Copy());
 						}
 						/*if (grid.Name == "gridFloors") {
@@ -493,6 +503,25 @@ namespace Europlan.Application {
 				}
 			}
 		}
+
+#if CLIPBOARD_TEST
+		private static bool IsSerializable(object obj)
+		{
+		  System.IO.MemoryStream mem = new System.IO.MemoryStream();
+		  BinaryFormatter bin = new BinaryFormatter();
+		  try
+		  {
+			bin.Serialize(mem, obj);
+			return true;
+		  }
+		  catch(Exception ex)
+		  {
+			MessageBox.Show("Your object cannot be serialized." + 
+							 " The reason is: " + ex.ToString());
+			return false;
+		  }
+		}
+#endif
 
 		private void pasteToolStripMenuItem_Click(object sender, EventArgs e) {
 			Control activeControl = GetActiveControl();
