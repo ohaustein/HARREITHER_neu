@@ -26,6 +26,10 @@ namespace Europlan.Common {
 			get { return this.floor.Name; }
 		}
 
+		public string RoomType {
+			get { return this.room.QuickDimensioningRoomType.Name; }
+		}
+
 		public int RoomTemperature {
 			get { return this.room.QuickDimensioningRoomTemperature; }
 		}
