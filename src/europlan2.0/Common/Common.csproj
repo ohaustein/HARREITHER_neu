@@ -188,6 +188,7 @@
     <Compile Include="Project\QuickDimensioningDistributorsGrid.Designer.cs">
       <DependentUpon>QuickDimensioningDistributorsGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\QuickDimensioningDistributorsReportWrapper.cs" />
     <Compile Include="Project\QuickDimensioningDistributorsSummary.cs">
       <SubType>UserControl</SubType>
     </Compile>

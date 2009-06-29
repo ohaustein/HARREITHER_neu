@@ -156,5 +156,9 @@ namespace Europlan.Common {
 				this.quickDimensioningConnectedDistributors[distributor] -= (plannedCircuits - this.QuickDimensioningCircuits);
 			}
 		}
+
+		public abstract string Name {
+			get;
+		}
 	}
 }
