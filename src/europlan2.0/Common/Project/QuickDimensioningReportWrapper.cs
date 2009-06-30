@@ -9,9 +9,16 @@ namespace Europlan.Common {
 		private Room room;
 		private Floor floor;
 
-		public QuickDimensioningReportWrapper(Room room, Floor floor) {
+		private float[] productArea = new float[6];
+		private int[] productCircuits = new int[6];		
+
+		public QuickDimensioningReportWrapper(Room room, Floor floor, List<string> productOrder) {
 			this.room = room;
 			this.floor = floor;
+			foreach (Product product in room.UsedProductsForQuickDimensioning) {
+				productArea[productOrder.IndexOf(product.Name)] = product.QuickDimensioningPlannedArea;
+				productCircuits[productOrder.IndexOf(product.Name)] = product.QuickDimensioningCircuits;
+			}
 		}
 
 		public string RoomId {
@@ -58,13 +65,65 @@ namespace Europlan.Common {
 			get { return this.room.QuickDimensioningComments; }
 		}
 
-		public float EurovalArea {
-			get { return 0; }
+		public float Product1Area {
+			get { return productArea[0]; }
+			set { productArea[0] = value; }
 		}
 
-		public int EurovalCircuits {
-			get { return 0; }
+		public int Product1Circuits {
+			get { return productCircuits[0]; }
+			set { productCircuits[0] = value; }
 		}
 
+		public float Product2Area {
+			get { return productArea[1]; }
+			set { productArea[1] = value; }
+		}
+
+		public int Product2Circuits {
+			get { return productCircuits[1]; }
+			set { productCircuits[1] = value; }
+		}
+
+		public float Product3Area {
+			get { return productArea[2]; }
+			set { productArea[2] = value; }
+		}
+
+		public int Product3Circuits {
+			get { return productCircuits[2]; }
+			set { productCircuits[2] = value; }
+		}
+
+		public float Product4Area {
+			get { return productArea[3]; }
+			set { productArea[3] = value; }
+		}
+
+		public int Product4Circuits {
+			get { return productCircuits[3]; }
+			set { productCircuits[3] = value; }
+		}
+
+		public float Product5Area {
+			get { return productArea[4]; }
+			set { productArea[4] = value; }
+		}
+
+		public int Product5Circuits {
+			get { return productCircuits[4]; }
+			set { productCircuits[4] = value; }
+		}
+
+		public float Product6Area {
+			get { return productArea[5]; }
+			set { productArea[5] = value; }
+		}
+
+		public int Product6Circuits {
+			get { return productCircuits[5]; }
+			set { productCircuits[5] = value; }
+		}
+		
 	}
 }

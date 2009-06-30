@@ -119,6 +119,41 @@ namespace Europlan.Common {
 			}
 			return result;
 		}
+
+		public List<QuickDimensioningReportWrapper> GetQuickDimensioningRoomReports() {
+			List<string> productOrder = GetPlannedProducts();
+			List<QuickDimensioningReportWrapper> wrapperList = new List<QuickDimensioningReportWrapper>();
+			foreach (Floor floor in Project.Instance.Floors) {
+				foreach (Room room in floor.Rooms) {
+					QuickDimensioningReportWrapper wrapper = new QuickDimensioningReportWrapper(room, floor, productOrder);
+					wrapperList.Add(wrapper);
+				}
+			}
+			return wrapperList;
+		}
+
+		public List<string> GetPlannedProducts() {
+			List<string> productOrder = new List<string>();
+			if (eurovalCheckState != ProductCheckState.None) {
+				productOrder.Add(Project.Instance.Config.EurovalProduct.Name);
+			}
+			if (concreteActivationCheckState != ProductCheckState.None) {
+				productOrder.Add(Project.Instance.Config.ConcreteActivationProduct.Name);
+			}
+			if (hithermCheckState != ProductCheckState.None) {
+				productOrder.Add(Project.Instance.Config.HithermProduct.Name);
+			}
+			if (hithermCompactCheckState != ProductCheckState.None) {
+				productOrder.Add(Project.Instance.Config.HithermCompactProduct.Name);
+			}
+			if (modulBodenCheckState != ProductCheckState.None) {
+				productOrder.Add(Project.Instance.Config.ModulKlimaBodenProduct.Name);
+			}
+			if (modulDeckeCheckState != ProductCheckState.None) {
+				productOrder.Add(Project.Instance.Config.ModulKlimaDeckeProduct.Name);
+			}
+			return productOrder;
+		}
 	}
 	
 }
