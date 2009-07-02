@@ -24,24 +24,10 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tabQuickDimensioning = new System.Windows.Forms.TabControl();
+			this.pageSummary = new System.Windows.Forms.TabPage();
+			this.button1 = new System.Windows.Forms.Button();
+			this.listLabelPreviewControl1 = new combit.ListLabel14.ListLabelPreviewControl();
 			this.pageSettings = new System.Windows.Forms.TabPage();
 			this.cmbHeatFlowTemperature = new System.Windows.Forms.ComboBox();
 			this.btnRevert = new System.Windows.Forms.Button();
@@ -81,42 +67,23 @@ namespace Europlan.Common {
 			this.lblAssumptions = new System.Windows.Forms.Label();
 			this.pageDistributors = new System.Windows.Forms.TabPage();
 			this.quickDimensioningDistributorsSummary = new Europlan.Common.QuickDimensioningDistributorsSummary();
-			this.pageSummary = new System.Windows.Forms.TabPage();
-			this.dataGridView2 = new System.Windows.Forms.DataGridView();
-			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colArea = new Europlan.Common.NumericColumn();
-			this.colHeatLoad = new Europlan.Common.NumericColumn();
-			this.colCoolLoad = new Europlan.Common.NumericColumn();
-			this.colEurovalArea = new Europlan.Common.NumericColumn();
-			this.colEurovalCircuits = new Europlan.Common.NumericColumn();
-			this.colConcreteActivationArea = new Europlan.Common.NumericColumn();
-			this.colConcreteActivationCircuits = new Europlan.Common.NumericColumn();
-			this.colHithermArea = new Europlan.Common.NumericColumn();
-			this.colHithermCircuits = new Europlan.Common.NumericColumn();
-			this.colHithermCompactArea = new Europlan.Common.NumericColumn();
-			this.colHithermCompactCircuits = new Europlan.Common.NumericColumn();
-			this.colModulKlimaBodenArea = new Europlan.Common.NumericColumn();
-			this.colModulKlimaBodenCircuits = new Europlan.Common.NumericColumn();
-			this.colModulKlimaDeckeArea = new Europlan.Common.NumericColumn();
-			this.colModulKlimaDeckeCircuits = new Europlan.Common.NumericColumn();
-			this.colNrOfServos = new Europlan.Common.NumericColumn();
-			this.colRoomControllers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.listLabel1 = new combit.ListLabel14.ListLabel();
+			this.quickDimensioningRoomDistributorsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.iQuickDimensioningSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.btnPrint = new System.Windows.Forms.Button();
 			this.tabQuickDimensioning.SuspendLayout();
+			this.pageSummary.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.pageDistributors.SuspendLayout();
-			this.pageSummary.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningRoomDistributorsWrapperBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.iQuickDimensioningSummaryBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabQuickDimensioning
 			// 
+			this.tabQuickDimensioning.Controls.Add(this.pageSummary);
 			this.tabQuickDimensioning.Controls.Add(this.pageSettings);
 			this.tabQuickDimensioning.Controls.Add(this.pageDistributors);
-			this.tabQuickDimensioning.Controls.Add(this.pageSummary);
 			this.tabQuickDimensioning.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabQuickDimensioning.Location = new System.Drawing.Point(0, 0);
 			this.tabQuickDimensioning.Name = "tabQuickDimensioning";
@@ -124,6 +91,61 @@ namespace Europlan.Common {
 			this.tabQuickDimensioning.Size = new System.Drawing.Size(894, 431);
 			this.tabQuickDimensioning.TabIndex = 0;
 			this.tabQuickDimensioning.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabQuickDimensioning_Selecting);
+			// 
+			// pageSummary
+			// 
+			this.pageSummary.Controls.Add(this.button1);
+			this.pageSummary.Controls.Add(this.listLabelPreviewControl1);
+			this.pageSummary.Location = new System.Drawing.Point(4, 22);
+			this.pageSummary.Name = "pageSummary";
+			this.pageSummary.Padding = new System.Windows.Forms.Padding(3);
+			this.pageSummary.Size = new System.Drawing.Size(886, 405);
+			this.pageSummary.TabIndex = 1;
+			this.pageSummary.Text = "Ergebnis Flächenaufstellung";
+			this.pageSummary.UseVisualStyleBackColor = true;
+			// 
+			// button1
+			// 
+			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button1.Location = new System.Drawing.Point(798, 379);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(82, 23);
+			this.button1.TabIndex = 5;
+			this.button1.Text = "button1";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click_1);
+			// 
+			// listLabelPreviewControl1
+			// 
+			this.listLabelPreviewControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.listLabelPreviewControl1.BackColor = System.Drawing.SystemColors.Control;
+			this.listLabelPreviewControl1.CloseMode = combit.ListLabel14.LlPreviewControlCloseMode.DeleteFile;
+			this.listLabelPreviewControl1.CurrentPage = 0;
+			this.listLabelPreviewControl1.ForceReadOnly = false;
+			this.listLabelPreviewControl1.Location = new System.Drawing.Point(0, 0);
+			this.listLabelPreviewControl1.Name = "listLabelPreviewControl1";
+			this.listLabelPreviewControl1.Size = new System.Drawing.Size(887, 373);
+			this.listLabelPreviewControl1.SlideshowMode = false;
+			this.listLabelPreviewControl1.TabIndex = 4;
+			this.listLabelPreviewControl1.Text = "listLabelPreviewControl1";
+			this.listLabelPreviewControl1.ToolbarButtons.Exit = combit.ListLabel14.LlButtonState.Invisible;
+			this.listLabelPreviewControl1.ToolbarButtons.GotoFirst = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.GotoLast = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.GotoNext = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.GotoPrev = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.PageRange = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.PrintAllPages = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.PrintCurrentPage = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.PrintToFax = combit.ListLabel14.LlButtonState.Invisible;
+			this.listLabelPreviewControl1.ToolbarButtons.SaveAs = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.SendTo = combit.ListLabel14.LlButtonState.Invisible;
+			this.listLabelPreviewControl1.ToolbarButtons.SlideshowMode = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.ZoomCombo = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.ZoomReset = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.ZoomRevert = combit.ListLabel14.LlButtonState.Default;
+			this.listLabelPreviewControl1.ToolbarButtons.ZoomTimes2 = combit.ListLabel14.LlButtonState.Default;
 			// 
 			// pageSettings
 			// 
@@ -671,341 +693,24 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributorsSummary.TabIndex = 0;
 			this.quickDimensioningDistributorsSummary.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.quickDimensioningDistributorsSummary_ProjectChanged);
 			// 
-			// pageSummary
+			// listLabel1
 			// 
-			this.pageSummary.Controls.Add(this.btnPrint);
-			this.pageSummary.Controls.Add(this.dataGridView2);
-			this.pageSummary.Location = new System.Drawing.Point(4, 22);
-			this.pageSummary.Name = "pageSummary";
-			this.pageSummary.Padding = new System.Windows.Forms.Padding(3);
-			this.pageSummary.Size = new System.Drawing.Size(886, 405);
-			this.pageSummary.TabIndex = 1;
-			this.pageSummary.Text = "Ergebnis Flächenaufstellung";
-			this.pageSummary.UseVisualStyleBackColor = true;
+			this.listLabel1.AutoDesignerFile = "Reporting/QuickDimensioning.lst";
+			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
+			this.listLabel1.DataSource = this.quickDimensioningRoomDistributorsWrapperBindingSource;
+			this.listLabel1.DebugLogFilePath = "C:\\Dokumente und Einstellungen\\neudorfer\\Anwendungsdaten\\COMBIT.LOG";
+			this.listLabel1.LicensingInfo = "5hKHEQ";
+			this.listLabel1.MaxRTFVersion = 65280;
+			this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
+			this.listLabel1.Unit = combit.ListLabel14.LlUnits.Millimeter_1_100;
 			// 
-			// dataGridView2
+			// quickDimensioningRoomDistributorsWrapperBindingSource
 			// 
-			this.dataGridView2.AllowUserToAddRows = false;
-			this.dataGridView2.AllowUserToDeleteRows = false;
-			this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.dataGridView2.AutoGenerateColumns = false;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colName,
-            this.colArea,
-            this.colHeatLoad,
-            this.colCoolLoad,
-            this.colEurovalArea,
-            this.colEurovalCircuits,
-            this.colConcreteActivationArea,
-            this.colConcreteActivationCircuits,
-            this.colHithermArea,
-            this.colHithermCircuits,
-            this.colHithermCompactArea,
-            this.colHithermCompactCircuits,
-            this.colModulKlimaBodenArea,
-            this.colModulKlimaBodenCircuits,
-            this.colModulKlimaDeckeArea,
-            this.colModulKlimaDeckeCircuits,
-            this.colNrOfServos,
-            this.colRoomControllers});
-			this.dataGridView2.DataSource = this.iQuickDimensioningSummaryBindingSource;
-			this.dataGridView2.Location = new System.Drawing.Point(3, 52);
-			this.dataGridView2.MultiSelect = false;
-			this.dataGridView2.Name = "dataGridView2";
-			this.dataGridView2.ReadOnly = true;
-			this.dataGridView2.Size = new System.Drawing.Size(880, 350);
-			this.dataGridView2.TabIndex = 2;
-			this.dataGridView2.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView2_RowsAdded);
-			// 
-			// colName
-			// 
-			this.colName.DataPropertyName = "Name";
-			this.colName.Frozen = true;
-			this.colName.HeaderText = "Bezeichnung";
-			this.colName.Name = "colName";
-			this.colName.ReadOnly = true;
-			// 
-			// colArea
-			// 
-			this.colArea.DataPropertyName = "Area";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F1";
-			this.colArea.DefaultCellStyle = dataGridViewCellStyle2;
-			this.colArea.FillWeight = 50F;
-			this.colArea.Frozen = true;
-			this.colArea.HeaderText = "Fläche\n(m²)";
-			this.colArea.Name = "colArea";
-			this.colArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.colArea.ReadOnly = true;
-			this.colArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colArea.Width = 50;
-			// 
-			// colHeatLoad
-			// 
-			this.colHeatLoad.DataPropertyName = "HeatLoad";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
-			this.colHeatLoad.DefaultCellStyle = dataGridViewCellStyle3;
-			this.colHeatLoad.FillWeight = 50F;
-			this.colHeatLoad.Frozen = true;
-			this.colHeatLoad.HeaderText = "Heizlast\n(W)";
-			this.colHeatLoad.Name = "colHeatLoad";
-			this.colHeatLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
-			this.colHeatLoad.ReadOnly = true;
-			this.colHeatLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colHeatLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colHeatLoad.Width = 50;
-			// 
-			// colCoolLoad
-			// 
-			this.colCoolLoad.DataPropertyName = "CoolLoad";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F0";
-			this.colCoolLoad.DefaultCellStyle = dataGridViewCellStyle4;
-			this.colCoolLoad.FillWeight = 50F;
-			this.colCoolLoad.Frozen = true;
-			this.colCoolLoad.HeaderText = "Kühllast\n(W)";
-			this.colCoolLoad.Name = "colCoolLoad";
-			this.colCoolLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
-			this.colCoolLoad.ReadOnly = true;
-			this.colCoolLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colCoolLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colCoolLoad.Visible = false;
-			this.colCoolLoad.Width = 50;
-			// 
-			// colEurovalArea
-			// 
-			this.colEurovalArea.DataPropertyName = "EurovalArea";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle5.Format = "F1";
-			this.colEurovalArea.DefaultCellStyle = dataGridViewCellStyle5;
-			this.colEurovalArea.FillWeight = 70F;
-			this.colEurovalArea.HeaderText = "Euroval\n(m²)";
-			this.colEurovalArea.Name = "colEurovalArea";
-			this.colEurovalArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.colEurovalArea.ReadOnly = true;
-			this.colEurovalArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colEurovalArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colEurovalArea.Visible = false;
-			this.colEurovalArea.Width = 70;
-			// 
-			// colEurovalCircuits
-			// 
-			this.colEurovalCircuits.DataPropertyName = "EurovalCircuits";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle6.Format = "F0";
-			this.colEurovalCircuits.DefaultCellStyle = dataGridViewCellStyle6;
-			this.colEurovalCircuits.FillWeight = 70F;
-			this.colEurovalCircuits.HeaderText = "Euroval\nHeizkreise";
-			this.colEurovalCircuits.Name = "colEurovalCircuits";
-			this.colEurovalCircuits.ReadOnly = true;
-			this.colEurovalCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colEurovalCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colEurovalCircuits.Visible = false;
-			this.colEurovalCircuits.Width = 70;
-			// 
-			// colConcreteActivationArea
-			// 
-			this.colConcreteActivationArea.DataPropertyName = "ConcreteActivationArea";
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle7.Format = "F1";
-			this.colConcreteActivationArea.DefaultCellStyle = dataGridViewCellStyle7;
-			this.colConcreteActivationArea.FillWeight = 70F;
-			this.colConcreteActivationArea.HeaderText = "BKA\n(m²)";
-			this.colConcreteActivationArea.Name = "colConcreteActivationArea";
-			this.colConcreteActivationArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.colConcreteActivationArea.ReadOnly = true;
-			this.colConcreteActivationArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colConcreteActivationArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colConcreteActivationArea.Visible = false;
-			this.colConcreteActivationArea.Width = 70;
-			// 
-			// colConcreteActivationCircuits
-			// 
-			this.colConcreteActivationCircuits.DataPropertyName = "ConcreteActivationCircuits";
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle8.Format = "F0";
-			this.colConcreteActivationCircuits.DefaultCellStyle = dataGridViewCellStyle8;
-			this.colConcreteActivationCircuits.FillWeight = 70F;
-			this.colConcreteActivationCircuits.HeaderText = "BKA\nHeizkreise";
-			this.colConcreteActivationCircuits.Name = "colConcreteActivationCircuits";
-			this.colConcreteActivationCircuits.ReadOnly = true;
-			this.colConcreteActivationCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colConcreteActivationCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colConcreteActivationCircuits.Visible = false;
-			this.colConcreteActivationCircuits.Width = 70;
-			// 
-			// colHithermArea
-			// 
-			this.colHithermArea.DataPropertyName = "HithermArea";
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle9.Format = "F1";
-			this.colHithermArea.DefaultCellStyle = dataGridViewCellStyle9;
-			this.colHithermArea.FillWeight = 70F;
-			this.colHithermArea.HeaderText = "Hitherm\n(m²)";
-			this.colHithermArea.Name = "colHithermArea";
-			this.colHithermArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.colHithermArea.ReadOnly = true;
-			this.colHithermArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colHithermArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colHithermArea.Visible = false;
-			this.colHithermArea.Width = 70;
-			// 
-			// colHithermCircuits
-			// 
-			this.colHithermCircuits.DataPropertyName = "HithermCircuits";
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle10.Format = "F0";
-			this.colHithermCircuits.DefaultCellStyle = dataGridViewCellStyle10;
-			this.colHithermCircuits.FillWeight = 70F;
-			this.colHithermCircuits.HeaderText = "Hitherm\nHeizkreise";
-			this.colHithermCircuits.Name = "colHithermCircuits";
-			this.colHithermCircuits.ReadOnly = true;
-			this.colHithermCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colHithermCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colHithermCircuits.Visible = false;
-			this.colHithermCircuits.Width = 70;
-			// 
-			// colHithermCompactArea
-			// 
-			this.colHithermCompactArea.DataPropertyName = "HithermCompactArea";
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle11.Format = "F1";
-			this.colHithermCompactArea.DefaultCellStyle = dataGridViewCellStyle11;
-			this.colHithermCompactArea.FillWeight = 70F;
-			this.colHithermCompactArea.HeaderText = "Hitherm Co\n(m²)";
-			this.colHithermCompactArea.Name = "colHithermCompactArea";
-			this.colHithermCompactArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.colHithermCompactArea.ReadOnly = true;
-			this.colHithermCompactArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colHithermCompactArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colHithermCompactArea.Visible = false;
-			this.colHithermCompactArea.Width = 70;
-			// 
-			// colHithermCompactCircuits
-			// 
-			this.colHithermCompactCircuits.DataPropertyName = "HithermCompactCircuits";
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle12.Format = "F0";
-			this.colHithermCompactCircuits.DefaultCellStyle = dataGridViewCellStyle12;
-			this.colHithermCompactCircuits.FillWeight = 70F;
-			this.colHithermCompactCircuits.HeaderText = "Hitherm Co\nHeizkreise";
-			this.colHithermCompactCircuits.Name = "colHithermCompactCircuits";
-			this.colHithermCompactCircuits.ReadOnly = true;
-			this.colHithermCompactCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colHithermCompactCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colHithermCompactCircuits.Visible = false;
-			this.colHithermCompactCircuits.Width = 70;
-			// 
-			// colModulKlimaBodenArea
-			// 
-			this.colModulKlimaBodenArea.DataPropertyName = "ModulKlimaBodenArea";
-			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle13.Format = "F1";
-			this.colModulKlimaBodenArea.DefaultCellStyle = dataGridViewCellStyle13;
-			this.colModulKlimaBodenArea.FillWeight = 70F;
-			this.colModulKlimaBodenArea.HeaderText = "Klimboden\n(m²)";
-			this.colModulKlimaBodenArea.Name = "colModulKlimaBodenArea";
-			this.colModulKlimaBodenArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.colModulKlimaBodenArea.ReadOnly = true;
-			this.colModulKlimaBodenArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colModulKlimaBodenArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colModulKlimaBodenArea.Visible = false;
-			this.colModulKlimaBodenArea.Width = 70;
-			// 
-			// colModulKlimaBodenCircuits
-			// 
-			this.colModulKlimaBodenCircuits.DataPropertyName = "ModulKlimaBodenCircuits";
-			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle14.Format = "F0";
-			this.colModulKlimaBodenCircuits.DefaultCellStyle = dataGridViewCellStyle14;
-			this.colModulKlimaBodenCircuits.FillWeight = 70F;
-			this.colModulKlimaBodenCircuits.HeaderText = "Klimaboden\nHeizkreise";
-			this.colModulKlimaBodenCircuits.Name = "colModulKlimaBodenCircuits";
-			this.colModulKlimaBodenCircuits.ReadOnly = true;
-			this.colModulKlimaBodenCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colModulKlimaBodenCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colModulKlimaBodenCircuits.Visible = false;
-			this.colModulKlimaBodenCircuits.Width = 70;
-			// 
-			// colModulKlimaDeckeArea
-			// 
-			this.colModulKlimaDeckeArea.DataPropertyName = "ModulKlimaDeckeArea";
-			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle15.Format = "F1";
-			this.colModulKlimaDeckeArea.DefaultCellStyle = dataGridViewCellStyle15;
-			this.colModulKlimaDeckeArea.FillWeight = 70F;
-			this.colModulKlimaDeckeArea.HeaderText = "Klimadecke\n(m²)";
-			this.colModulKlimaDeckeArea.Name = "colModulKlimaDeckeArea";
-			this.colModulKlimaDeckeArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.colModulKlimaDeckeArea.ReadOnly = true;
-			this.colModulKlimaDeckeArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colModulKlimaDeckeArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colModulKlimaDeckeArea.Visible = false;
-			this.colModulKlimaDeckeArea.Width = 70;
-			// 
-			// colModulKlimaDeckeCircuits
-			// 
-			this.colModulKlimaDeckeCircuits.DataPropertyName = "ModulKlimaDeckeCircuits";
-			dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle16.Format = "F0";
-			this.colModulKlimaDeckeCircuits.DefaultCellStyle = dataGridViewCellStyle16;
-			this.colModulKlimaDeckeCircuits.FillWeight = 70F;
-			this.colModulKlimaDeckeCircuits.HeaderText = "Klimadecke\nHeizkreise";
-			this.colModulKlimaDeckeCircuits.Name = "colModulKlimaDeckeCircuits";
-			this.colModulKlimaDeckeCircuits.ReadOnly = true;
-			this.colModulKlimaDeckeCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colModulKlimaDeckeCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colModulKlimaDeckeCircuits.Visible = false;
-			this.colModulKlimaDeckeCircuits.Width = 70;
-			// 
-			// colNrOfServos
-			// 
-			this.colNrOfServos.DataPropertyName = "NrOfServos";
-			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle17.Format = "F0";
-			this.colNrOfServos.DefaultCellStyle = dataGridViewCellStyle17;
-			this.colNrOfServos.HeaderText = "Stell-\nmotore";
-			this.colNrOfServos.Name = "colNrOfServos";
-			this.colNrOfServos.ReadOnly = true;
-			this.colNrOfServos.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colNrOfServos.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colNrOfServos.Width = 50;
-			// 
-			// colRoomControllers
-			// 
-			this.colRoomControllers.DataPropertyName = "RoomControllers";
-			this.colRoomControllers.FillWeight = 150F;
-			this.colRoomControllers.HeaderText = "Raum-\ncontroller";
-			this.colRoomControllers.Name = "colRoomControllers";
-			this.colRoomControllers.ReadOnly = true;
-			this.colRoomControllers.Width = 150;
+			this.quickDimensioningRoomDistributorsWrapperBindingSource.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
 			// 
 			// iQuickDimensioningSummaryBindingSource
 			// 
 			this.iQuickDimensioningSummaryBindingSource.DataSource = typeof(Europlan.Common.IQuickDimensioningSummary);
-			// 
-			// btnPrint
-			// 
-			this.btnPrint.Location = new System.Drawing.Point(7, 7);
-			this.btnPrint.Name = "btnPrint";
-			this.btnPrint.Size = new System.Drawing.Size(203, 39);
-			this.btnPrint.TabIndex = 3;
-			this.btnPrint.Text = "Ergebnis drucken/exportieren...";
-			this.btnPrint.UseVisualStyleBackColor = true;
-			this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
 			// 
 			// QuickDimensioningPanel
 			// 
@@ -1015,12 +720,12 @@ namespace Europlan.Common {
 			this.Name = "QuickDimensioningPanel";
 			this.Size = new System.Drawing.Size(894, 431);
 			this.tabQuickDimensioning.ResumeLayout(false);
+			this.pageSummary.ResumeLayout(false);
 			this.pageSettings.ResumeLayout(false);
 			this.pageSettings.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.pageDistributors.ResumeLayout(false);
-			this.pageSummary.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningRoomDistributorsWrapperBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.iQuickDimensioningSummaryBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
@@ -1064,31 +769,15 @@ namespace Europlan.Common {
 		private NumericBox txtCoolTemperature;
 		private System.Windows.Forms.Label lblTemp4;
 		private System.Windows.Forms.Label lblTemp3;
-		private System.Windows.Forms.TabPage pageSummary;
-		private System.Windows.Forms.DataGridView dataGridView2;
 		private System.Windows.Forms.BindingSource iQuickDimensioningSummaryBindingSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-		private NumericColumn colArea;
-		private NumericColumn colHeatLoad;
-		private NumericColumn colCoolLoad;
-		private NumericColumn colEurovalArea;
-		private NumericColumn colEurovalCircuits;
-		private NumericColumn colConcreteActivationArea;
-		private NumericColumn colConcreteActivationCircuits;
-		private NumericColumn colHithermArea;
-		private NumericColumn colHithermCircuits;
-		private NumericColumn colHithermCompactArea;
-		private NumericColumn colHithermCompactCircuits;
-		private NumericColumn colModulKlimaBodenArea;
-		private NumericColumn colModulKlimaBodenCircuits;
-		private NumericColumn colModulKlimaDeckeArea;
-		private NumericColumn colModulKlimaDeckeCircuits;
-		private NumericColumn colNrOfServos;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colRoomControllers;
 		private System.Windows.Forms.Button btnRevert;
 		private System.Windows.Forms.ComboBox cmbHeatFlowTemperature;
 		private System.Windows.Forms.TabPage pageDistributors;
 		private QuickDimensioningDistributorsSummary quickDimensioningDistributorsSummary;
-		private System.Windows.Forms.Button btnPrint;
+		private combit.ListLabel14.ListLabel listLabel1;
+		private System.Windows.Forms.BindingSource quickDimensioningRoomDistributorsWrapperBindingSource;
+		private System.Windows.Forms.TabPage pageSummary;
+		private combit.ListLabel14.ListLabelPreviewControl listLabelPreviewControl1;
+		private System.Windows.Forms.Button button1;
 	}
 }
