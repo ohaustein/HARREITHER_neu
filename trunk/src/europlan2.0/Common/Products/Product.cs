@@ -161,5 +161,9 @@ namespace Europlan.Common {
 		public abstract string Name {
 			get;
 		}
+
+		public abstract string QuickDimensioningName {
+			get;
+		}
 	}
 }
