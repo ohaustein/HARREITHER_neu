@@ -16,8 +16,8 @@ namespace Europlan.Common {
 			this.room = room;
 			this.floor = floor;
 			foreach (Product product in room.UsedProductsForQuickDimensioning) {
-				productArea[productOrder.IndexOf(product.Name)] = product.QuickDimensioningPlannedArea;
-				productCircuits[productOrder.IndexOf(product.Name)] = product.QuickDimensioningCircuits;
+				productArea[productOrder.IndexOf(product.QuickDimensioningName)] = product.QuickDimensioningPlannedArea;
+				productCircuits[productOrder.IndexOf(product.QuickDimensioningName)] = product.QuickDimensioningCircuits;
 			}
 		}
 
