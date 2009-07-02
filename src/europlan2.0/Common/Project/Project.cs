@@ -18,7 +18,8 @@ namespace Europlan.Common {
 		private static readonly object padlock = new object();
 		private static readonly ILog log = LogManager.GetLogger(typeof(Project));
 		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
-		
+
+		private string projectNumber;
 		private string[] projectName;
 		private string[] projectContact;
 		private string[] projectNotes;
@@ -70,6 +71,7 @@ namespace Europlan.Common {
 
 		private void InitializeProject() {
 			DateTime now = DateTime.Now;
+			projectNumber = "";
 			projectCreated = now;
 			projectLastChanged = now;
 			projectName = new string[] { "" };
@@ -111,6 +113,11 @@ namespace Europlan.Common {
 		public string[] ProjectName {
 			get { return projectName; }
 			set { projectName = value; }
+		}
+
+		public string ProjectNumber {
+			get { return projectNumber; }
+			set { projectNumber = value; }
 		}
 
 		public string[] ProjectContact {
