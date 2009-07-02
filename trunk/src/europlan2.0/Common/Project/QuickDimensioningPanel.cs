@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Reflection;
 
 namespace Europlan.Common {
 	public partial class QuickDimensioningPanel : UserControl, IEditorUserControl {
@@ -746,6 +747,7 @@ namespace Europlan.Common {
 		//}
 
 		private void cmbHeatFlowTemperature_SelectedIndexChanged(object sender, EventArgs e) {
+			Project.Instance.QuickDimensioning.HeatFlowTemperature = (float)Int32.Parse((string)cmbHeatFlowTemperature.SelectedItem);
 			switch (cmbHeatFlowTemperature.SelectedIndex) {
 				case 0:
 					this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV5;
@@ -776,19 +778,19 @@ namespace Europlan.Common {
 
 		private void tabQuickDimensioning_Selecting(object sender, TabControlCancelEventArgs e) {
 			if (e.TabPage == this.pageSummary) {
-				this.colEurovalArea.Visible = this.EurovalHeating | this.EurovalCooling;
-				this.colEurovalCircuits.Visible = this.EurovalHeating | this.EurovalCooling;
-				this.colConcreteActivationArea.Visible = this.ConcreteActivationHeating | this.ConcreteActivationCooling;
-				this.colConcreteActivationCircuits.Visible = this.ConcreteActivationHeating | this.ConcreteActivationCooling;
-				this.colHithermArea.Visible = this.HithermHeating | this.HithermCooling;
-				this.colHithermCircuits.Visible = this.HithermHeating | this.HithermCooling;
-				this.colHithermCompactArea.Visible = this.HithermCompactHeating | this.HithermCompactCooling;
-				this.colHithermCompactCircuits.Visible = this.HithermCompactHeating | this.HithermCompactCooling;
-				this.colModulKlimaBodenArea.Visible = this.ModulKlimaBodenHeating | this.ModulKlimaBodenCooling;
-				this.colModulKlimaBodenCircuits.Visible = this.ModulKlimaBodenHeating | this.ModulKlimaBodenCooling;
-				this.colModulKlimaDeckeArea.Visible = this.ModulKlimaDeckeHeating | this.ModulKlimaDeckeCooling;
-				this.colModulKlimaDeckeCircuits.Visible = this.ModulKlimaDeckeHeating | this.ModulKlimaDeckeCooling;
-				this.colCoolLoad.Visible = this.Cooling;
+				//this.colEurovalArea.Visible = this.EurovalHeating | this.EurovalCooling;
+				//this.colEurovalCircuits.Visible = this.EurovalHeating | this.EurovalCooling;
+				//this.colConcreteActivationArea.Visible = this.ConcreteActivationHeating | this.ConcreteActivationCooling;
+				//this.colConcreteActivationCircuits.Visible = this.ConcreteActivationHeating | this.ConcreteActivationCooling;
+				//this.colHithermArea.Visible = this.HithermHeating | this.HithermCooling;
+				//this.colHithermCircuits.Visible = this.HithermHeating | this.HithermCooling;
+				//this.colHithermCompactArea.Visible = this.HithermCompactHeating | this.HithermCompactCooling;
+				//this.colHithermCompactCircuits.Visible = this.HithermCompactHeating | this.HithermCompactCooling;
+				//this.colModulKlimaBodenArea.Visible = this.ModulKlimaBodenHeating | this.ModulKlimaBodenCooling;
+				//this.colModulKlimaBodenCircuits.Visible = this.ModulKlimaBodenHeating | this.ModulKlimaBodenCooling;
+				//this.colModulKlimaDeckeArea.Visible = this.ModulKlimaDeckeHeating | this.ModulKlimaDeckeCooling;
+				//this.colModulKlimaDeckeCircuits.Visible = this.ModulKlimaDeckeHeating | this.ModulKlimaDeckeCooling;
+				//this.colCoolLoad.Visible = this.Cooling;
 				List<IQuickDimensioningSummary> summary = new List<IQuickDimensioningSummary>();
 				foreach (Floor floor in Project.Instance.Floors) {
 					summary.Add(new QuickDimensioningFloorSummary(floor));
@@ -796,17 +798,93 @@ namespace Europlan.Common {
 				summary.Add(new QuickDimensioningProjectSummary());
 				this.iQuickDimensioningSummaryBindingSource.DataSource = summary;
 				this.iQuickDimensioningSummaryBindingSource.ResetBindings(false);
+
+				DataSet data = new DataSet();
+				List<QuickDimensioningReportWrapper> reportWrapper = Project.Instance.QuickDimensioning.GetQuickDimensioningRoomReports();
+				DataTable rooms = ListToDataTable<QuickDimensioningReportWrapper>(reportWrapper);
+				DataTable distributors = ListToDataTable<QuickDimensioningDistributorsReportWrapper>(Project.Instance.QuickDimensioning.GetQuickDimensioningDistributorsReports());
+				rooms.TableName = "QuickDimensioningReportWrapper";
+				distributors.TableName = "QuickDimensioningDistributorsReportWrapper";
+
+				data.Tables.Add(rooms);
+				data.Tables.Add(distributors);
+
+				//listLabel1.DataSource = Project.Instance.QuickDimensioning.GetQuickDimensioningRoomReports();
+				listLabel1.DataSource = data;
+				listLabel1.PreviewControl = listLabelPreviewControl1;
+				string projectName = "";
+				foreach (string line in Project.Instance.ProjectName) {
+					projectName += line + "\n";
+				}
+				projectName = projectName.TrimEnd();
+				listLabel1.Variables.Add("@ProjectName", projectName);
+				listLabel1.Variables.Add("@ProjectEditor", Project.Instance.ProjectEditor);
+				listLabel1.Variables.Add("@NrOfProducts", Project.Instance.QuickDimensioning.GetPlannedProducts().Count);
+				listLabel1.Variables.Add("@PartnerContact", Licensing.LicenseManager.Instance.License.Header.Replace("\r", ""));
+				if (this.Heating) {
+					listLabel1.Variables.Add("@tvHeat", Project.Instance.QuickDimensioning.HeatFlowTemperature);
+				} else {
+					listLabel1.Variables.Add("@tvHeat", -1);
+				}
+				if (this.Cooling) {
+					listLabel1.Variables.Add("@tvCool", Project.Instance.QuickDimensioning.CoolFlowTemperature);
+				} else {
+					listLabel1.Variables.Add("@tvCool", -1);
+				}
+				if (this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling) {
+					listLabel1.Variables.Add("@Allocation", Project.Instance.QuickDimensioning.CeilingAllocation + "%");
+				} else {
+					listLabel1.Variables.Add("@Allocation", "");
+				}
+				listLabel1.Variables.Add("@PartnerLogo", Image.FromFile("Reporting/partner.jpg"));
+				string usedRoomTypes = "";
+				foreach (RoomType roomType in Project.Instance.Config.RoomTypes) {
+					foreach (QuickDimensioningReportWrapper wrapper in reportWrapper) {
+						if (wrapper.RoomType == roomType.Name) {
+							usedRoomTypes += roomType.Name + ": " + roomType.HeatLoadPerSquareMeter + "W/m² - " + roomType.CoolLoadPerSquareMeter + "W/m²\n";
+							break;
+						}
+					}
+				}
+				usedRoomTypes = usedRoomTypes.TrimEnd();
+				listLabel1.Variables.Add("@RoomTypes", usedRoomTypes);
+				int i = 1;
+				foreach (string productName in Project.Instance.QuickDimensioning.GetPlannedProducts()) {
+					listLabel1.Variables.Add("@Product" + i, productName);
+					i++;
+				}
+				
+				listLabel1.AutoDesignerPreview = true;
+				listLabel1.Print(combit.ListLabel14.LlProject.List, @"Reporting/QuickDimensioning.lst", false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, "");
+			
+				
 			} else if (e.TabPage == this.pageDistributors) {
 				this.quickDimensioningDistributorsSummary.UpdateControl();
 			}
 		}
 
-		private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
-			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
-				if (this.dataGridView2.Rows[i].DataBoundItem is QuickDimensioningProjectSummary) {
-					this.dataGridView2.Rows[i].DefaultCellStyle.Font = new Font(this.dataGridView2.Font, FontStyle.Bold);
-				}
+		public static DataTable ListToDataTable<T>(List<T> list) {
+			DataTable dt = new DataTable();
+
+			foreach (PropertyInfo info in typeof(T).GetProperties()) {
+				dt.Columns.Add(new DataColumn(info.Name, info.PropertyType));
 			}
+			foreach (T t in list) {
+				DataRow row = dt.NewRow();
+				foreach (PropertyInfo info in typeof(T).GetProperties()) {
+					row[info.Name] = info.GetValue(t, null);
+				}
+				dt.Rows.Add(row);
+			}
+			return dt;
+		}
+
+		private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
+			//for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
+			//    if (this.dataGridView2.Rows[i].DataBoundItem is QuickDimensioningProjectSummary) {
+			//        this.dataGridView2.Rows[i].DefaultCellStyle.Font = new Font(this.dataGridView2.Font, FontStyle.Bold);
+			//    }
+			//}
 		}
 
 		private void OnProjectChanged() {
@@ -839,8 +917,29 @@ namespace Europlan.Common {
 			this.OnProjectChanged();
 		}
 
-		private void btnPrint_Click(object sender, EventArgs e) {
+		//private void btnPrint_Click(object sender, EventArgs e) {
 
+		//}
+
+		//private void button1_Click(object sender, EventArgs e) {
+		//    List<QuickDimensioningReportWrapper> wrapperList = new List<QuickDimensioningReportWrapper>();
+		//    foreach (Floor floor in Project.Instance.Floors) {
+		//        foreach (Room room in floor.Rooms) {
+		//            QuickDimensioningReportWrapper wrapper = new QuickDimensioningReportWrapper(room, floor);
+		//            wrapperList.Add(wrapper);
+		//        }
+		//    }
+			
+		//    //listLabelPreviewControl1
+		//    listLabel1.DataSource = wrapperList;
+		//    listLabel1.PreviewControl = listLabelPreviewControl1;
+		//    //listLabel1.AutoDesignerPreview = true;
+		//    listLabel1.Print(combit.ListLabel14.LlProject.List, @"C:\Dokumente und Einstellungen\neudorfer\Desktop\test.lst", false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, "");
+						
+		//}
+
+		private void button1_Click_1(object sender, EventArgs e) {
+			listLabel1.Design();
 		}
 
 		//private void txtAllocation_ValueChanged(object sender, EventArgs e) {
