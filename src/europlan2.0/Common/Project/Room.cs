@@ -73,9 +73,9 @@ namespace Europlan.Common {
 			this.quickDimensioningComments = room.QuickDimensioningComments;
 			this.quickDimensioningRoomTypeId = room.quickDimensioningRoomTypeId; // used the member instead of the public property on purpose here!
 			this.usedProductsForQuickDimensioning = new List<Product>();
-			foreach (Product product in room.UsedProductsForQuickDimensioning) {
-				this.usedProductsForQuickDimensioning.Add(product.Clone(this));
-			}
+			//foreach (Product product in room.UsedProductsForQuickDimensioning) {
+			//    this.usedProductsForQuickDimensioning.Add(product.Clone(this));
+			//}
 		}
 
 		private void InitializeRoom() {
@@ -397,6 +397,7 @@ namespace Europlan.Common {
 			this.quickDimensioningInitialized = false;
 			this.InitializeQuickDimensioning();
 		}
+
 	}
 
 }
