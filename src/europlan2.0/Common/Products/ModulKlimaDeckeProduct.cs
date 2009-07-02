@@ -52,6 +52,10 @@ namespace Europlan.Common {
 		public override string Name {
 			get { return "Modul Klimadecke"; }
 		}
+
+		public override string QuickDimensioningName {
+			get { return "Modul\nKlima\ndecke"; }
+		}
 	}
 	
 }

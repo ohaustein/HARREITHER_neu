@@ -51,6 +51,10 @@ namespace Europlan.Common {
 		public override string Name {
 			get { return "Modul Klimaboden"; }
 		}
+
+		public override string QuickDimensioningName {
+			get { return "Modul\nKlima-\nboden"; }
+		}
 	}
 	
 }

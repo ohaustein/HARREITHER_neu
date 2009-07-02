@@ -31,6 +31,10 @@ namespace Europlan.Common {
 		public override string Name {
 			get { return "Betonkernaktivierung"; }
 		}
+
+		public override string QuickDimensioningName {
+			get { return "BKA"; }
+		}
 	}
 	
 }

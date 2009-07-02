@@ -43,6 +43,10 @@ namespace Europlan.Common {
 		public override string Name {
 			get { return "Hitherm Compact"; }
 		}
+
+		public override string QuickDimensioningName {
+			get { return "Hitherm\nCompact"; }
+		}
 	}
 	
 }

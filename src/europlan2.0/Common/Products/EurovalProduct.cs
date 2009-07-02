@@ -86,6 +86,10 @@ namespace Europlan.Common {
 		public override string Name {
 			get { return "Euroval"; }
 		}
+
+		public override string QuickDimensioningName {
+			get { return "Euroval"; }
+		}
 	}
 	
 }
