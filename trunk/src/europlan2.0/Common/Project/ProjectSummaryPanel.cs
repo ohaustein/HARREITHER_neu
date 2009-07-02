@@ -20,6 +20,7 @@ namespace Europlan.Common {
 
 		public void UpdateControl() {
 			Project project = Project.Instance;
+			txtNumber.Text = project.ProjectNumber;
 			txtProjectName.Lines = project.ProjectName;
 			txtContact.Lines = project.ProjectContact;
 			txtNotes.Lines = project.ProjectNotes;
@@ -55,6 +56,13 @@ namespace Europlan.Common {
 
 		private void txtContact_TextChanged(object sender, EventArgs e) {
 			Project.Instance.ProjectContact = txtContact.Lines;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void txtNumber_TextChanged(object sender, EventArgs e) {
+			Project.Instance.ProjectNumber = txtNumber.Text;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
