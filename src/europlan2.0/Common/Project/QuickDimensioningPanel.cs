@@ -732,22 +732,6 @@ namespace Europlan.Common {
 			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
-		//private void txtAllocation_Validating(object sender, CancelEventArgs e) {
-		//    float percent = 0;
-		//    if (float.TryParse(txtAllocation.Text, out percent)) {
-		//        if (!(percent >= 0) || !(percent <= 100)) {
-		//            DialogResult result = MessageBox.Show("Der Belegefaktor muss zwischen 1% und 100% liegen.\nDrücken Sie Ja, um den Belegefaktor zu korrigieren oder\nNein, um den Standardwert einzutragen", "Ungültiger Belegefaktor", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-		//            if (result.Equals(DialogResult.Yes)) {
-		//                e.Cancel = true;
-		//            } else {
-		//                txtAllocation.Text = "100";
-		//            }
-		//        }
-		//    } else {
-		//        e.Cancel = true;
-		//    }
-		//}
-
 		private void cmbHeatFlowTemperature_SelectedIndexChanged(object sender, EventArgs e) {
 			Project.Instance.QuickDimensioning.HeatFlowTemperature = (float)Int32.Parse((string)cmbHeatFlowTemperature.SelectedItem);
 			switch (cmbHeatFlowTemperature.SelectedIndex) {
@@ -780,19 +764,6 @@ namespace Europlan.Common {
 
 		private void tabQuickDimensioning_Selecting(object sender, TabControlCancelEventArgs e) {
 			if (e.TabPage == this.pageSummary) {
-				//this.colEurovalArea.Visible = this.EurovalHeating | this.EurovalCooling;
-				//this.colEurovalCircuits.Visible = this.EurovalHeating | this.EurovalCooling;
-				//this.colConcreteActivationArea.Visible = this.ConcreteActivationHeating | this.ConcreteActivationCooling;
-				//this.colConcreteActivationCircuits.Visible = this.ConcreteActivationHeating | this.ConcreteActivationCooling;
-				//this.colHithermArea.Visible = this.HithermHeating | this.HithermCooling;
-				//this.colHithermCircuits.Visible = this.HithermHeating | this.HithermCooling;
-				//this.colHithermCompactArea.Visible = this.HithermCompactHeating | this.HithermCompactCooling;
-				//this.colHithermCompactCircuits.Visible = this.HithermCompactHeating | this.HithermCompactCooling;
-				//this.colModulKlimaBodenArea.Visible = this.ModulKlimaBodenHeating | this.ModulKlimaBodenCooling;
-				//this.colModulKlimaBodenCircuits.Visible = this.ModulKlimaBodenHeating | this.ModulKlimaBodenCooling;
-				//this.colModulKlimaDeckeArea.Visible = this.ModulKlimaDeckeHeating | this.ModulKlimaDeckeCooling;
-				//this.colModulKlimaDeckeCircuits.Visible = this.ModulKlimaDeckeHeating | this.ModulKlimaDeckeCooling;
-				//this.colCoolLoad.Visible = this.Cooling;
 				List<IQuickDimensioningSummary> summary = new List<IQuickDimensioningSummary>();
 				foreach (Floor floor in Project.Instance.Floors) {
 					summary.Add(new QuickDimensioningFloorSummary(floor));
@@ -811,7 +782,6 @@ namespace Europlan.Common {
 				data.Tables.Add(rooms);
 				data.Tables.Add(distributors);
 
-				//listLabel1.DataSource = Project.Instance.QuickDimensioning.GetQuickDimensioningRoomReports();
 				listLabel1.DataSource = data;
 				listLabel1.PreviewControl = listLabelPreviewControl1;
 				string projectName = "";
@@ -905,14 +875,6 @@ namespace Europlan.Common {
 			return dt;
 		}
 
-		private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
-			//for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
-			//    if (this.dataGridView2.Rows[i].DataBoundItem is QuickDimensioningProjectSummary) {
-			//        this.dataGridView2.Rows[i].DefaultCellStyle.Font = new Font(this.dataGridView2.Font, FontStyle.Bold);
-			//    }
-			//}
-		}
-
 		private void OnProjectChanged() {
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
@@ -943,39 +905,9 @@ namespace Europlan.Common {
 			this.OnProjectChanged();
 		}
 
-		//private void btnPrint_Click(object sender, EventArgs e) {
-
-		//}
-
-		//private void button1_Click(object sender, EventArgs e) {
-		//    List<QuickDimensioningReportWrapper> wrapperList = new List<QuickDimensioningReportWrapper>();
-		//    foreach (Floor floor in Project.Instance.Floors) {
-		//        foreach (Room room in floor.Rooms) {
-		//            QuickDimensioningReportWrapper wrapper = new QuickDimensioningReportWrapper(room, floor);
-		//            wrapperList.Add(wrapper);
-		//        }
-		//    }
-			
-		//    //listLabelPreviewControl1
-		//    listLabel1.DataSource = wrapperList;
-		//    listLabel1.PreviewControl = listLabelPreviewControl1;
-		//    //listLabel1.AutoDesignerPreview = true;
-		//    listLabel1.Print(combit.ListLabel14.LlProject.List, @"C:\Dokumente und Einstellungen\neudorfer\Desktop\test.lst", false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, "");
-						
-		//}
-
 		private void button1_Click_1(object sender, EventArgs e) {
 			listLabel1.Design();
 		}
 
-		//private void txtAllocation_ValueChanged(object sender, EventArgs e) {
-		//    int percent = (int)this.txtAllocation.Value;
-		//    if (!(percent > 0) || !(percent <= 100)) {
-		//        DialogResult result = MessageBox.Show("Der Belegefaktor muss zwischen 1% und 100% liegen.\nDrücken Sie Ja, um den Belegefaktor zu korrigieren oder\nNein, um den Standardwert einzutragen", "Ungültiger Belegefaktor", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-		//        if (result.Equals(DialogResult.No)) {
-		//            txtAllocation.Value = 80;
-		//        } 
-		//    }
-		//}
 	}
 }
