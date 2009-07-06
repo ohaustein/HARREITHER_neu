@@ -185,4 +185,16 @@ Press OK to restart now.</value>
   <data name="DefaultRegulatorCircuits" xml:space="preserve">
     <value>Default regulator circuit</value>
   </data>
+  <data name="RC" xml:space="preserve">
+    <value>RC</value>
+  </data>
+  <data name="RCF" xml:space="preserve">
+    <value>RCF</value>
+  </data>
+  <data name="RCRadio" xml:space="preserve">
+    <value>RC-Radio</value>
+  </data>
+  <data name="RF" xml:space="preserve">
+    <value>RF</value>
+  </data>
 </root>

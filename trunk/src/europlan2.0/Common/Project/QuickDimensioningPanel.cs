@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Reflection;
+using System.Threading;
 
 namespace Europlan.Common {
 	public partial class QuickDimensioningPanel : UserControl, IEditorUserControl {
@@ -16,6 +17,7 @@ namespace Europlan.Common {
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 
 		private Dictionary<Floor, QuickDimensioningFloorGrid> grids = new Dictionary<Floor, QuickDimensioningFloorGrid>();
+		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
 
 		public QuickDimensioningPanel() {
 			InitializeComponent();
@@ -853,7 +855,31 @@ namespace Europlan.Common {
 					listLabel1.Variables.Add("@Product" + i, productName);
 					i++;
 				}
-				
+				Dictionary<Room.RoomController, int> roomControllers = new Dictionary<Room.RoomController, int>();
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.QuickDimensioningRoomController != Room.RoomController.None) {
+							if (!roomControllers.ContainsKey(room.QuickDimensioningRoomController)) {
+								roomControllers.Add(room.QuickDimensioningRoomController, 1);
+							} else {
+								roomControllers[room.QuickDimensioningRoomController] = roomControllers[room.QuickDimensioningRoomController] + 1;
+							}
+						}
+					}
+				}
+				string controllersSummary = null;
+				string localized = "";
+				foreach (KeyValuePair<Room.RoomController, int> kvp in roomControllers) {
+					if (controllersSummary != null) {
+						controllersSummary += ", ";
+					} else {
+						controllersSummary = "";
+					}
+					localized = resources.GetString(kvp.Key.ToString(), Thread.CurrentThread.CurrentUICulture);
+					controllersSummary += kvp.Value.ToString() + " * " + localized;
+				}
+				listLabel1.Variables.Add("@RoomControllers", controllersSummary);
+
 				listLabel1.AutoDesignerPreview = true;
 				listLabel1.Print(combit.ListLabel14.LlProject.List, @"Reporting/QuickDimensioning.lst", false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, "");
 			
