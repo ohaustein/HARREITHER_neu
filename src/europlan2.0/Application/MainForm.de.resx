@@ -132,6 +132,15 @@
   <data name="NotLicensed" xml:space="preserve">
     <value>nicht lizenziert</value>
   </data>
+  <data name="RC" xml:space="preserve">
+    <value>RC</value>
+  </data>
+  <data name="RCF" xml:space="preserve">
+    <value>RCF</value>
+  </data>
+  <data name="RCRadio" xml:space="preserve">
+    <value>RC-Funk</value>
+  </data>
   <data name="RegulatorCircuits" xml:space="preserve">
     <value>Regelkreise</value>
   </data>
@@ -141,6 +150,9 @@
   <data name="RestartMessage" xml:space="preserve">
     <value>Durch die Änderungen an den Einstellungen ist ein Neustart erforderlich.
 Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
+  </data>
+  <data name="RF" xml:space="preserve">
+    <value>RF</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">

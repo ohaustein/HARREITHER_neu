@@ -31,10 +31,8 @@ namespace Europlan.Common {
 			this.pageSettings = new System.Windows.Forms.TabPage();
 			this.cmbHeatFlowTemperature = new System.Windows.Forms.ComboBox();
 			this.btnRevert = new System.Windows.Forms.Button();
-			this.txtCoolTemperature = new Europlan.Common.NumericBox();
 			this.lblTemp4 = new System.Windows.Forms.Label();
 			this.lblTemp3 = new System.Windows.Forms.Label();
-			this.txtAllocation = new Europlan.Common.NumericBox();
 			this.lblAllocation2 = new System.Windows.Forms.Label();
 			this.lblAllocation = new System.Windows.Forms.Label();
 			this.lblDistance = new System.Windows.Forms.Label();
@@ -66,8 +64,10 @@ namespace Europlan.Common {
 			this.cbBkaCool = new System.Windows.Forms.CheckBox();
 			this.lblAssumptions = new System.Windows.Forms.Label();
 			this.pageDistributors = new System.Windows.Forms.TabPage();
-			this.quickDimensioningDistributorsSummary = new Europlan.Common.QuickDimensioningDistributorsSummary();
 			this.listLabel1 = new combit.ListLabel14.ListLabel();
+			this.txtCoolTemperature = new Europlan.Common.NumericBox();
+			this.txtAllocation = new Europlan.Common.NumericBox();
+			this.quickDimensioningDistributorsSummary = new Europlan.Common.QuickDimensioningDistributorsSummary();
 			this.quickDimensioningRoomDistributorsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.iQuickDimensioningSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabQuickDimensioning.SuspendLayout();
@@ -88,7 +88,7 @@ namespace Europlan.Common {
 			this.tabQuickDimensioning.Location = new System.Drawing.Point(0, 0);
 			this.tabQuickDimensioning.Name = "tabQuickDimensioning";
 			this.tabQuickDimensioning.SelectedIndex = 0;
-			this.tabQuickDimensioning.Size = new System.Drawing.Size(894, 431);
+			this.tabQuickDimensioning.Size = new System.Drawing.Size(920, 538);
 			this.tabQuickDimensioning.TabIndex = 0;
 			this.tabQuickDimensioning.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabQuickDimensioning_Selecting);
 			// 
@@ -151,10 +151,8 @@ namespace Europlan.Common {
 			// 
 			this.pageSettings.Controls.Add(this.cmbHeatFlowTemperature);
 			this.pageSettings.Controls.Add(this.btnRevert);
-			this.pageSettings.Controls.Add(this.txtCoolTemperature);
 			this.pageSettings.Controls.Add(this.lblTemp4);
 			this.pageSettings.Controls.Add(this.lblTemp3);
-			this.pageSettings.Controls.Add(this.txtAllocation);
 			this.pageSettings.Controls.Add(this.lblAllocation2);
 			this.pageSettings.Controls.Add(this.lblAllocation);
 			this.pageSettings.Controls.Add(this.lblDistance);
@@ -165,10 +163,12 @@ namespace Europlan.Common {
 			this.pageSettings.Controls.Add(this.label1);
 			this.pageSettings.Controls.Add(this.tableLayoutPanel1);
 			this.pageSettings.Controls.Add(this.lblAssumptions);
+			this.pageSettings.Controls.Add(this.txtCoolTemperature);
+			this.pageSettings.Controls.Add(this.txtAllocation);
 			this.pageSettings.Location = new System.Drawing.Point(4, 22);
 			this.pageSettings.Name = "pageSettings";
 			this.pageSettings.Padding = new System.Windows.Forms.Padding(3);
-			this.pageSettings.Size = new System.Drawing.Size(886, 405);
+			this.pageSettings.Size = new System.Drawing.Size(912, 512);
 			this.pageSettings.TabIndex = 0;
 			this.pageSettings.Text = "Einstellungen";
 			this.pageSettings.UseVisualStyleBackColor = true;
@@ -198,26 +198,6 @@ namespace Europlan.Common {
 			this.btnRevert.UseVisualStyleBackColor = true;
 			this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
 			// 
-			// txtCoolTemperature
-			// 
-			this.txtCoolTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
-			this.txtCoolTemperature.InternalValue = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-			this.txtCoolTemperature.Location = new System.Drawing.Point(412, 128);
-			this.txtCoolTemperature.Name = "txtCoolTemperature";
-			this.txtCoolTemperature.ReadOnly = true;
-			this.txtCoolTemperature.Size = new System.Drawing.Size(56, 20);
-			this.txtCoolTemperature.TabIndex = 28;
-			this.txtCoolTemperature.Text = "16";
-			this.txtCoolTemperature.Value = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-			// 
 			// lblTemp4
 			// 
 			this.lblTemp4.AutoSize = true;
@@ -234,26 +214,6 @@ namespace Europlan.Common {
 			this.lblTemp3.Size = new System.Drawing.Size(93, 29);
 			this.lblTemp3.TabIndex = 27;
 			this.lblTemp3.Text = "Vorlauftemperatur\r\n(Kühlen)";
-			// 
-			// txtAllocation
-			// 
-			this.txtAllocation.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
-			this.txtAllocation.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtAllocation.Location = new System.Drawing.Point(391, 211);
-			this.txtAllocation.Name = "txtAllocation";
-			this.txtAllocation.Size = new System.Drawing.Size(56, 20);
-			this.txtAllocation.TabIndex = 25;
-			this.txtAllocation.Text = "0";
-			this.txtAllocation.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.txtAllocation.ValueChanged += new System.EventHandler(this.txtAllocation_ValueChanged);
 			// 
 			// lblAllocation2
 			// 
@@ -335,7 +295,7 @@ namespace Europlan.Common {
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label1.Location = new System.Drawing.Point(7, 7);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(873, 29);
+			this.label1.Size = new System.Drawing.Size(899, 29);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Flächenaufstellung";
 			// 
@@ -678,6 +638,57 @@ namespace Europlan.Common {
 			this.pageDistributors.Text = "Verteiler";
 			this.pageDistributors.UseVisualStyleBackColor = true;
 			// 
+			// listLabel1
+			// 
+			this.listLabel1.AutoDesignerFile = "Reporting/QuickDimensioning.lst";
+			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
+			this.listLabel1.DataSource = this.quickDimensioningRoomDistributorsWrapperBindingSource;
+			this.listLabel1.DebugLogFilePath = "C:\\Dokumente und Einstellungen\\neudorfer\\Anwendungsdaten\\COMBIT.LOG";
+			this.listLabel1.LicensingInfo = "5hKHEQ";
+			this.listLabel1.MaxRTFVersion = 65280;
+			this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
+			this.listLabel1.Unit = combit.ListLabel14.LlUnits.Millimeter_1_100;
+			// 
+			// txtCoolTemperature
+			// 
+			this.txtCoolTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
+			this.txtCoolTemperature.InternalValue = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+			this.txtCoolTemperature.Location = new System.Drawing.Point(412, 128);
+			this.txtCoolTemperature.Name = "txtCoolTemperature";
+			this.txtCoolTemperature.ReadOnly = true;
+			this.txtCoolTemperature.Size = new System.Drawing.Size(56, 20);
+			this.txtCoolTemperature.TabIndex = 28;
+			this.txtCoolTemperature.Text = "16";
+			this.txtCoolTemperature.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+			// 
+			// txtAllocation
+			// 
+			this.txtAllocation.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
+			this.txtAllocation.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtAllocation.Location = new System.Drawing.Point(391, 211);
+			this.txtAllocation.Name = "txtAllocation";
+			this.txtAllocation.Size = new System.Drawing.Size(56, 20);
+			this.txtAllocation.TabIndex = 25;
+			this.txtAllocation.Text = "0";
+			this.txtAllocation.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.txtAllocation.ValueChanged += new System.EventHandler(this.txtAllocation_ValueChanged);
+			// 
 			// quickDimensioningDistributorsSummary
 			// 
 			this.quickDimensioningDistributorsSummary.ConcreteActivation = true;
@@ -693,17 +704,6 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributorsSummary.TabIndex = 0;
 			this.quickDimensioningDistributorsSummary.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.quickDimensioningDistributorsSummary_ProjectChanged);
 			// 
-			// listLabel1
-			// 
-			this.listLabel1.AutoDesignerFile = "Reporting/QuickDimensioning.lst";
-			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
-			this.listLabel1.DataSource = this.quickDimensioningRoomDistributorsWrapperBindingSource;
-			this.listLabel1.DebugLogFilePath = "C:\\Dokumente und Einstellungen\\neudorfer\\Anwendungsdaten\\COMBIT.LOG";
-			this.listLabel1.LicensingInfo = "5hKHEQ";
-			this.listLabel1.MaxRTFVersion = 65280;
-			this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
-			this.listLabel1.Unit = combit.ListLabel14.LlUnits.Millimeter_1_100;
-			// 
 			// quickDimensioningRoomDistributorsWrapperBindingSource
 			// 
 			this.quickDimensioningRoomDistributorsWrapperBindingSource.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
@@ -718,7 +718,7 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tabQuickDimensioning);
 			this.Name = "QuickDimensioningPanel";
-			this.Size = new System.Drawing.Size(894, 431);
+			this.Size = new System.Drawing.Size(920, 538);
 			this.tabQuickDimensioning.ResumeLayout(false);
 			this.pageSummary.ResumeLayout(false);
 			this.pageSettings.ResumeLayout(false);
