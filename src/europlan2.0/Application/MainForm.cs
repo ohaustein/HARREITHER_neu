@@ -29,6 +29,7 @@ namespace Europlan.Application {
 		private Dictionary<Type, UserControl> userControls = new Dictionary<Type, UserControl>();
 		private bool guiUpdateInProgress = false;
 		private bool projectUnsaved = false;
+		private TreeNode selectedTreeNode = null;
 
 		Queue<string> mruList = new Queue<string>();
 
@@ -369,16 +370,21 @@ namespace Europlan.Application {
 		}
 
 		private void projectTree_AfterSelect(object sender, TreeViewEventArgs e) {
-			TreeNode selectedNode = e.Node;
+			if (selectedTreeNode != null) {
+				selectedTreeNode.NodeFont = new Font(this.projectTree.Font, FontStyle.Regular);
+			}
+			selectedTreeNode = e.Node;
+			selectedTreeNode.NodeFont = new Font(this.projectTree.Font, FontStyle.Bold);
+			selectedTreeNode.Text = selectedTreeNode.Text;
 			Control oldControl = null;
 			bool tagChanged = true;
 			if (splitContainer.Panel2.Controls.Count > 0) {
 				oldControl = splitContainer.Panel2.Controls[0];
 			}
-			if (selectedNode != null && selectedNode.Tag != null) {
+			if (selectedTreeNode != null && selectedTreeNode.Tag != null) {
 				UserControl control = null;
-				if (selectedNode.Tag is IGuiRepresentation) {
-					IGuiRepresentation guiRepresentation = selectedNode.Tag as IGuiRepresentation;
+				if (selectedTreeNode.Tag is IGuiRepresentation) {
+					IGuiRepresentation guiRepresentation = selectedTreeNode.Tag as IGuiRepresentation;
 					if (userControls.ContainsKey(guiRepresentation.AssociatedPanelType)) {
 						control = userControls[guiRepresentation.AssociatedPanelType];
 					} else {
@@ -388,19 +394,19 @@ namespace Europlan.Application {
 						(control as IEditorUserControl).TreeSelectionRequested += new TreeSelectionRequestedHandler(MainForm_TreeSelectionRequested);
 						userControls[guiRepresentation.AssociatedPanelType] = control;
 					}
-					if (control.Tag != selectedNode.Tag) {
+					if (control.Tag != selectedTreeNode.Tag) {
 						tagChanged = true;
-						control.Tag = selectedNode.Tag;
+						control.Tag = selectedTreeNode.Tag;
 					}
-				} else if (selectedNode.Tag is Type) {
-					if (userControls.ContainsKey(selectedNode.Tag as Type)) {
-						control = userControls[selectedNode.Tag as Type];
+				} else if (selectedTreeNode.Tag is Type) {
+					if (userControls.ContainsKey(selectedTreeNode.Tag as Type)) {
+						control = userControls[selectedTreeNode.Tag as Type];
 					} else {
-						control = (UserControl)Activator.CreateInstance(selectedNode.Tag as Type);
+						control = (UserControl)Activator.CreateInstance(selectedTreeNode.Tag as Type);
 						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
 						(control as IEditorUserControl).ProjectChanged += new ProjectChangedHandler(MainForm_ProjectChanged);
 						(control as IEditorUserControl).TreeSelectionRequested += new TreeSelectionRequestedHandler(MainForm_TreeSelectionRequested);
-						userControls[selectedNode.Tag as Type] = control;
+						userControls[selectedTreeNode.Tag as Type] = control;
 					}
 				}
 				if (control != null) {
