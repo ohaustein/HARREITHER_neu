@@ -253,6 +253,11 @@ namespace Europlan.Common {
 		}
 
 		internal void UpdateTreeView(System.Windows.Forms.TreeView tree) {
+			TreeNode selectedNode = null;
+			if (tree.SelectedNode != null) {
+				selectedNode = tree.SelectedNode;
+			}
+
 			bool expand = (tree.Nodes.Count == 0 || this.rootNode.Nodes.Count == 0);
 			// insert root node if missing
 			if (tree.Nodes.Count != 1 || tree.Nodes[0] != this.rootNode) {
@@ -286,6 +291,12 @@ namespace Europlan.Common {
 
 			if (expand) {
 				this.rootNode.Expand();
+			}
+
+			if (selectedNode != null) {
+				tree.SelectedNode = selectedNode;
+			} else {
+				tree.SelectedNode = rootNode;
 			}
 		}
 
