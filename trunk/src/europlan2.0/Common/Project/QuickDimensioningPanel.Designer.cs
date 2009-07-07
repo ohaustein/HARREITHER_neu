@@ -63,11 +63,11 @@ namespace Europlan.Common {
 			this.cbBkaHeat = new System.Windows.Forms.CheckBox();
 			this.cbBkaCool = new System.Windows.Forms.CheckBox();
 			this.lblAssumptions = new System.Windows.Forms.Label();
-			this.pageDistributors = new System.Windows.Forms.TabPage();
-			this.listLabel1 = new combit.ListLabel14.ListLabel();
 			this.txtCoolTemperature = new Europlan.Common.NumericBox();
 			this.txtAllocation = new Europlan.Common.NumericBox();
+			this.pageDistributors = new System.Windows.Forms.TabPage();
 			this.quickDimensioningDistributorsSummary = new Europlan.Common.QuickDimensioningDistributorsSummary();
+			this.listLabel1 = new combit.ListLabel14.ListLabel();
 			this.quickDimensioningRoomDistributorsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.iQuickDimensioningSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabQuickDimensioning.SuspendLayout();
@@ -122,7 +122,6 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.listLabelPreviewControl1.BackColor = System.Drawing.SystemColors.Control;
-			this.listLabelPreviewControl1.CloseMode = combit.ListLabel14.LlPreviewControlCloseMode.DeleteFile;
 			this.listLabelPreviewControl1.CurrentPage = 0;
 			this.listLabelPreviewControl1.ForceReadOnly = false;
 			this.listLabelPreviewControl1.Location = new System.Drawing.Point(0, 0);
@@ -628,27 +627,6 @@ namespace Europlan.Common {
 			this.lblAssumptions.Text = "Annahmen";
 			this.lblAssumptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// pageDistributors
-			// 
-			this.pageDistributors.Controls.Add(this.quickDimensioningDistributorsSummary);
-			this.pageDistributors.Location = new System.Drawing.Point(4, 22);
-			this.pageDistributors.Name = "pageDistributors";
-			this.pageDistributors.Padding = new System.Windows.Forms.Padding(3);
-			this.pageDistributors.Size = new System.Drawing.Size(912, 512);
-			this.pageDistributors.TabIndex = 2;
-			this.pageDistributors.Text = "Verteiler";
-			this.pageDistributors.UseVisualStyleBackColor = true;
-			// 
-			// listLabel1
-			// 
-			this.listLabel1.AutoDesignerFile = "Reporting/QuickDimensioning.lst";
-			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
-			this.listLabel1.DebugLogFilePath = "C:\\Dokumente und Einstellungen\\neudorfer\\Anwendungsdaten\\COMBIT.LOG";
-			this.listLabel1.LicensingInfo = "5hKHEQ";
-			this.listLabel1.MaxRTFVersion = 65280;
-			this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
-			this.listLabel1.Unit = combit.ListLabel14.LlUnits.Millimeter_1_100;
-			// 
 			// txtCoolTemperature
 			// 
 			this.txtCoolTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
@@ -689,6 +667,17 @@ namespace Europlan.Common {
             0});
 			this.txtAllocation.ValueChanged += new System.EventHandler(this.txtAllocation_ValueChanged);
 			// 
+			// pageDistributors
+			// 
+			this.pageDistributors.Controls.Add(this.quickDimensioningDistributorsSummary);
+			this.pageDistributors.Location = new System.Drawing.Point(4, 22);
+			this.pageDistributors.Name = "pageDistributors";
+			this.pageDistributors.Padding = new System.Windows.Forms.Padding(3);
+			this.pageDistributors.Size = new System.Drawing.Size(912, 512);
+			this.pageDistributors.TabIndex = 2;
+			this.pageDistributors.Text = "Verteiler";
+			this.pageDistributors.UseVisualStyleBackColor = true;
+			// 
 			// quickDimensioningDistributorsSummary
 			// 
 			this.quickDimensioningDistributorsSummary.ConcreteActivation = true;
@@ -703,6 +692,16 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributorsSummary.Size = new System.Drawing.Size(906, 506);
 			this.quickDimensioningDistributorsSummary.TabIndex = 0;
 			this.quickDimensioningDistributorsSummary.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.quickDimensioningDistributorsSummary_ProjectChanged);
+			// 
+			// listLabel1
+			// 
+			this.listLabel1.AutoDesignerFile = "Reporting/QuickDimensioning.lst";
+			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
+			this.listLabel1.DebugLogFilePath = "C:\\Dokumente und Einstellungen\\neudorfer\\Anwendungsdaten\\COMBIT.LOG";
+			this.listLabel1.LicensingInfo = "5hKHEQ";
+			this.listLabel1.MaxRTFVersion = 65280;
+			this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
+			this.listLabel1.Unit = combit.ListLabel14.LlUnits.Millimeter_1_100;
 			// 
 			// quickDimensioningRoomDistributorsWrapperBindingSource
 			// 

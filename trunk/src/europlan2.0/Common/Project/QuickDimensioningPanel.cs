@@ -765,7 +765,7 @@ namespace Europlan.Common {
 
 		private void tabQuickDimensioning_Selected(object sender, TabControlEventArgs e) {
 			if (e.TabPage == this.pageSummary) {
-				listLabel1.Print(combit.ListLabel14.LlProject.List, @"Reporting/QuickDimensioning.lst", false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.StandardWait, "Test", false, null);
+				listLabel1.Print(combit.ListLabel14.LlProject.List, @"Reporting/QuickDimensioning.lst", false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, null);
 			}
 		}
 
