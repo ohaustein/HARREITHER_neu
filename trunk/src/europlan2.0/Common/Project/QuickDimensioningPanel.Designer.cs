@@ -91,6 +91,7 @@ namespace Europlan.Common {
 			this.tabQuickDimensioning.Size = new System.Drawing.Size(920, 538);
 			this.tabQuickDimensioning.TabIndex = 0;
 			this.tabQuickDimensioning.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabQuickDimensioning_Selecting);
+			this.tabQuickDimensioning.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabQuickDimensioning_Selected);
 			// 
 			// pageSummary
 			// 
@@ -99,7 +100,7 @@ namespace Europlan.Common {
 			this.pageSummary.Location = new System.Drawing.Point(4, 22);
 			this.pageSummary.Name = "pageSummary";
 			this.pageSummary.Padding = new System.Windows.Forms.Padding(3);
-			this.pageSummary.Size = new System.Drawing.Size(886, 405);
+			this.pageSummary.Size = new System.Drawing.Size(912, 512);
 			this.pageSummary.TabIndex = 1;
 			this.pageSummary.Text = "Ergebnis Flächenaufstellung";
 			this.pageSummary.UseVisualStyleBackColor = true;
@@ -107,7 +108,7 @@ namespace Europlan.Common {
 			// button1
 			// 
 			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.button1.Location = new System.Drawing.Point(798, 379);
+			this.button1.Location = new System.Drawing.Point(824, 483);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(82, 23);
 			this.button1.TabIndex = 5;
@@ -126,7 +127,7 @@ namespace Europlan.Common {
 			this.listLabelPreviewControl1.ForceReadOnly = false;
 			this.listLabelPreviewControl1.Location = new System.Drawing.Point(0, 0);
 			this.listLabelPreviewControl1.Name = "listLabelPreviewControl1";
-			this.listLabelPreviewControl1.Size = new System.Drawing.Size(887, 373);
+			this.listLabelPreviewControl1.Size = new System.Drawing.Size(906, 477);
 			this.listLabelPreviewControl1.SlideshowMode = false;
 			this.listLabelPreviewControl1.TabIndex = 4;
 			this.listLabelPreviewControl1.Text = "listLabelPreviewControl1";
@@ -633,7 +634,7 @@ namespace Europlan.Common {
 			this.pageDistributors.Location = new System.Drawing.Point(4, 22);
 			this.pageDistributors.Name = "pageDistributors";
 			this.pageDistributors.Padding = new System.Windows.Forms.Padding(3);
-			this.pageDistributors.Size = new System.Drawing.Size(886, 405);
+			this.pageDistributors.Size = new System.Drawing.Size(912, 512);
 			this.pageDistributors.TabIndex = 2;
 			this.pageDistributors.Text = "Verteiler";
 			this.pageDistributors.UseVisualStyleBackColor = true;
@@ -642,7 +643,6 @@ namespace Europlan.Common {
 			// 
 			this.listLabel1.AutoDesignerFile = "Reporting/QuickDimensioning.lst";
 			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
-			this.listLabel1.DataSource = this.quickDimensioningRoomDistributorsWrapperBindingSource;
 			this.listLabel1.DebugLogFilePath = "C:\\Dokumente und Einstellungen\\neudorfer\\Anwendungsdaten\\COMBIT.LOG";
 			this.listLabel1.LicensingInfo = "5hKHEQ";
 			this.listLabel1.MaxRTFVersion = 65280;
@@ -700,7 +700,7 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributorsSummary.ModulKlimaBoden = true;
 			this.quickDimensioningDistributorsSummary.ModulKlimaDecke = true;
 			this.quickDimensioningDistributorsSummary.Name = "quickDimensioningDistributorsSummary";
-			this.quickDimensioningDistributorsSummary.Size = new System.Drawing.Size(880, 399);
+			this.quickDimensioningDistributorsSummary.Size = new System.Drawing.Size(906, 506);
 			this.quickDimensioningDistributorsSummary.TabIndex = 0;
 			this.quickDimensioningDistributorsSummary.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.quickDimensioningDistributorsSummary_ProjectChanged);
 			// 
