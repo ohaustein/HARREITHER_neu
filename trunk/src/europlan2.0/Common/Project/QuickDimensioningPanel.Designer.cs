@@ -69,14 +69,12 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributorsSummary = new Europlan.Common.QuickDimensioningDistributorsSummary();
 			this.listLabel1 = new combit.ListLabel14.ListLabel();
 			this.quickDimensioningRoomDistributorsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.iQuickDimensioningSummaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSummary.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.pageDistributors.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningRoomDistributorsWrapperBindingSource)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.iQuickDimensioningSummaryBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabQuickDimensioning
@@ -707,10 +705,6 @@ namespace Europlan.Common {
 			// 
 			this.quickDimensioningRoomDistributorsWrapperBindingSource.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
 			// 
-			// iQuickDimensioningSummaryBindingSource
-			// 
-			this.iQuickDimensioningSummaryBindingSource.DataSource = typeof(Europlan.Common.IQuickDimensioningSummary);
-			// 
 			// QuickDimensioningPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -725,7 +719,6 @@ namespace Europlan.Common {
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.pageDistributors.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningRoomDistributorsWrapperBindingSource)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.iQuickDimensioningSummaryBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -768,7 +761,6 @@ namespace Europlan.Common {
 		private NumericBox txtCoolTemperature;
 		private System.Windows.Forms.Label lblTemp4;
 		private System.Windows.Forms.Label lblTemp3;
-		private System.Windows.Forms.BindingSource iQuickDimensioningSummaryBindingSource;
 		private System.Windows.Forms.Button btnRevert;
 		private System.Windows.Forms.ComboBox cmbHeatFlowTemperature;
 		private System.Windows.Forms.TabPage pageDistributors;
