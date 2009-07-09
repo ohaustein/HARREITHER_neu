@@ -820,7 +820,7 @@ namespace Europlan.Common {
 					listLabel1.Variables.Add("@Allocation", "");
 				}
 				//TODO
-				string filename = Path.Combine(System.Windows.Forms.Application.CommonAppDataPath, "partner.jpg");
+				string filename = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath), "partner.jpg");
 				if (File.Exists(filename)) {
 					listLabel1.Variables.Add("@PartnerLogo", Image.FromFile(filename));
 				}
