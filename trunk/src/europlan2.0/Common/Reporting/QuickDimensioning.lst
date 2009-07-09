@@ -20,7 +20,7 @@
  CreatedByApp=<unknown>
  CreatedByDLL=<unknown>
  CreatedByUser=<unknown>
- LastModified=7/6/2009, 10:01:18 AM
+ LastModified=7/9/2009, 3:34:04 PM
  LastModifiedByApp=EUROPLAN.VSHOST.EXE [8.0.50727.42]
  LastModifiedByDLL=CMLL14.DLL [14.8.2009.12916 (09-05-05 16:53)]
  LastModifiedByUser=neudorfer on CAPRICA
@@ -50,6 +50,7 @@
  EnhancedExpressions=TRUE
  EnhancedOldExpressions=FALSE
  Decimals=2
+ DefaultMedium=FILE
  RealDataPreviewPageLimit=-2
  DefFont={(0,0,0),12.000000,-16,0,0,0,400,0,0,0,0,4,0,0,0,Arial}
  HelpLines.Horizontal=
@@ -98,7 +99,7 @@
  LinkID=29
  LinkToID=0
  LinkMode=32
- LinkTest=-10882
+ LinkTest=-283
  LayerID=0
  GroupID=0
  Identifier=
@@ -131,7 +132,7 @@
  BkColor3=LL.Color.White
  BkColor2=LL.Color.White
  BkColor.Alpha=50
- CurrentTable=0
+ CurrentTable=
  ColumnCount=1
  ColumnCount.Distance=1000
  [@Tables]
@@ -42744,7 +42745,7 @@
  LinkID=91
  LinkToID=0
  LinkMode=32
- LinkTest=-31453
+ LinkTest=-29448
  LayerID=0
  GroupID=0
  Identifier=
@@ -42781,7 +42782,7 @@
  LinkID=45
  LinkToID=0
  LinkMode=32
- LinkTest=-14816
+ LinkTest=-26058
  LayerID=0
  GroupID=0
  Identifier=
@@ -42816,7 +42817,7 @@
  LinkID=31
  LinkToID=0
  LinkMode=32
- LinkTest=-15719
+ LinkTest=-28303
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -42921,7 +42922,7 @@
  LinkID=35
  LinkToID=0
  LinkMode=32
- LinkTest=-17830
+ LinkTest=-10918
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -42994,7 +42995,7 @@
  LinkID=52
  LinkToID=0
  LinkMode=32
- LinkTest=-29030
+ LinkTest=-12067
  LayerID=0
  GroupID=0
  Identifier=
@@ -43030,7 +43031,7 @@
  LinkID=10
  LinkToID=0
  LinkMode=32
- LinkTest=-26477
+ LinkTest=-1382
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -43134,12 +43135,12 @@
 	{
 	DisplayName=
 	Condition=True
-	SourceTray=7
+	SourceTray=15
 	ForcePaperFormat=True
 	UsePhysicalPaper=True
 	PaperFormat=9
-	PaperFormat.cx=296920
-	PaperFormat.cy=209970
+	PaperFormat.cx=297010
+	PaperFormat.cy=210010
 	PaperFormat.Orientation=2
 	Copies=1
 	Duplex=1
