@@ -27,6 +27,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="listlabel14VS2005, Version=14.6.0.16557, Culture=neutral, PublicKeyToken=a7a30592cb4a94be, processorArchitecture=MSIL">
