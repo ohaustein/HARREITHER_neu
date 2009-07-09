@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.Reflection;
 using System.Threading;
+using System.IO;
 
 namespace Europlan.Common {
 	public partial class QuickDimensioningPanel : UserControl, IEditorUserControl {
@@ -818,7 +819,11 @@ namespace Europlan.Common {
 				} else {
 					listLabel1.Variables.Add("@Allocation", "");
 				}
-				listLabel1.Variables.Add("@PartnerLogo", Image.FromFile("Reporting/partner.jpg"));
+				//TODO
+				string filename = System.Windows.Forms.Application.CommonAppDataPath + "partner.jpg";
+				if (File.Exists(filename)) {
+					listLabel1.Variables.Add("@PartnerLogo", Image.FromFile(filename));
+				}
 				string usedRoomTypes = "";
 				foreach (RoomType roomType in Project.Instance.Config.RoomTypes) {
 					foreach (QuickDimensioningReportWrapper wrapper in reportWrapper) {
