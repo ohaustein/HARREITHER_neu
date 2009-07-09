@@ -26,8 +26,8 @@ namespace Europlan.Common {
 			this.components = new System.ComponentModel.Container();
 			this.tabQuickDimensioning = new System.Windows.Forms.TabControl();
 			this.pageSummary = new System.Windows.Forms.TabPage();
+			this.quickDimensioningReporting = new Europlan.EuroplanReporting.QuickDimensioningReporting();
 			this.button1 = new System.Windows.Forms.Button();
-			this.listLabelPreviewControl1 = new combit.ListLabel14.ListLabelPreviewControl();
 			this.pageSettings = new System.Windows.Forms.TabPage();
 			this.cmbHeatFlowTemperature = new System.Windows.Forms.ComboBox();
 			this.btnRevert = new System.Windows.Forms.Button();
@@ -67,7 +67,6 @@ namespace Europlan.Common {
 			this.txtAllocation = new Europlan.Common.NumericBox();
 			this.pageDistributors = new System.Windows.Forms.TabPage();
 			this.quickDimensioningDistributorsSummary = new Europlan.Common.QuickDimensioningDistributorsSummary();
-			this.listLabel1 = new combit.ListLabel14.ListLabel();
 			this.quickDimensioningRoomDistributorsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSummary.SuspendLayout();
@@ -89,12 +88,11 @@ namespace Europlan.Common {
 			this.tabQuickDimensioning.Size = new System.Drawing.Size(920, 538);
 			this.tabQuickDimensioning.TabIndex = 0;
 			this.tabQuickDimensioning.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabQuickDimensioning_Selecting);
-			this.tabQuickDimensioning.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabQuickDimensioning_Selected);
 			// 
 			// pageSummary
 			// 
+			this.pageSummary.Controls.Add(this.quickDimensioningReporting);
 			this.pageSummary.Controls.Add(this.button1);
-			this.pageSummary.Controls.Add(this.listLabelPreviewControl1);
 			this.pageSummary.Location = new System.Drawing.Point(4, 22);
 			this.pageSummary.Name = "pageSummary";
 			this.pageSummary.Padding = new System.Windows.Forms.Padding(3);
@@ -102,6 +100,16 @@ namespace Europlan.Common {
 			this.pageSummary.TabIndex = 1;
 			this.pageSummary.Text = "Ergebnis Flächenaufstellung";
 			this.pageSummary.UseVisualStyleBackColor = true;
+			// 
+			// quickDimensioningReporting
+			// 
+			this.quickDimensioningReporting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.quickDimensioningReporting.Location = new System.Drawing.Point(6, 6);
+			this.quickDimensioningReporting.Name = "quickDimensioningReporting";
+			this.quickDimensioningReporting.Size = new System.Drawing.Size(900, 471);
+			this.quickDimensioningReporting.TabIndex = 6;
 			// 
 			// button1
 			// 
@@ -113,37 +121,6 @@ namespace Europlan.Common {
 			this.button1.Text = "button1";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click_1);
-			// 
-			// listLabelPreviewControl1
-			// 
-			this.listLabelPreviewControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.listLabelPreviewControl1.BackColor = System.Drawing.SystemColors.Control;
-			this.listLabelPreviewControl1.CurrentPage = 0;
-			this.listLabelPreviewControl1.ForceReadOnly = false;
-			this.listLabelPreviewControl1.Location = new System.Drawing.Point(0, 0);
-			this.listLabelPreviewControl1.Name = "listLabelPreviewControl1";
-			this.listLabelPreviewControl1.Size = new System.Drawing.Size(906, 477);
-			this.listLabelPreviewControl1.SlideshowMode = false;
-			this.listLabelPreviewControl1.TabIndex = 4;
-			this.listLabelPreviewControl1.Text = "listLabelPreviewControl1";
-			this.listLabelPreviewControl1.ToolbarButtons.Exit = combit.ListLabel14.LlButtonState.Invisible;
-			this.listLabelPreviewControl1.ToolbarButtons.GotoFirst = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.GotoLast = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.GotoNext = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.GotoPrev = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.PageRange = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.PrintAllPages = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.PrintCurrentPage = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.PrintToFax = combit.ListLabel14.LlButtonState.Invisible;
-			this.listLabelPreviewControl1.ToolbarButtons.SaveAs = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.SendTo = combit.ListLabel14.LlButtonState.Invisible;
-			this.listLabelPreviewControl1.ToolbarButtons.SlideshowMode = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.ZoomCombo = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.ZoomReset = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.ZoomRevert = combit.ListLabel14.LlButtonState.Default;
-			this.listLabelPreviewControl1.ToolbarButtons.ZoomTimes2 = combit.ListLabel14.LlButtonState.Default;
 			// 
 			// pageSettings
 			// 
@@ -691,16 +668,6 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributorsSummary.TabIndex = 0;
 			this.quickDimensioningDistributorsSummary.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.quickDimensioningDistributorsSummary_ProjectChanged);
 			// 
-			// listLabel1
-			// 
-			this.listLabel1.AutoDesignerFile = "Reporting/QuickDimensioning.lst";
-			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
-			this.listLabel1.DebugLogFilePath = "C:\\Dokumente und Einstellungen\\neudorfer\\Anwendungsdaten\\COMBIT.LOG";
-			this.listLabel1.LicensingInfo = "5hKHEQ";
-			this.listLabel1.MaxRTFVersion = 65280;
-			this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
-			this.listLabel1.Unit = combit.ListLabel14.LlUnits.Millimeter_1_100;
-			// 
 			// quickDimensioningRoomDistributorsWrapperBindingSource
 			// 
 			this.quickDimensioningRoomDistributorsWrapperBindingSource.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
@@ -765,10 +732,9 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ComboBox cmbHeatFlowTemperature;
 		private System.Windows.Forms.TabPage pageDistributors;
 		private QuickDimensioningDistributorsSummary quickDimensioningDistributorsSummary;
-		private combit.ListLabel14.ListLabel listLabel1;
 		private System.Windows.Forms.BindingSource quickDimensioningRoomDistributorsWrapperBindingSource;
 		private System.Windows.Forms.TabPage pageSummary;
-		private combit.ListLabel14.ListLabelPreviewControl listLabelPreviewControl1;
 		private System.Windows.Forms.Button button1;
+		private Europlan.EuroplanReporting.QuickDimensioningReporting quickDimensioningReporting;
 	}
 }
