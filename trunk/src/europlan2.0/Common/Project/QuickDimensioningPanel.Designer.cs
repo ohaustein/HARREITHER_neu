@@ -693,9 +693,7 @@ namespace Europlan.Common {
 			// 
 			// listLabel1
 			// 
-			this.listLabel1.AutoDesignerFile = "Reporting/QuickDimensioning.lst";
 			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
-			this.listLabel1.DebugLogFilePath = "C:\\Dokumente und Einstellungen\\neudorfer\\Anwendungsdaten\\COMBIT.LOG";
 			this.listLabel1.LicensingInfo = "5hKHEQ";
 			this.listLabel1.MaxRTFVersion = 65280;
 			this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
