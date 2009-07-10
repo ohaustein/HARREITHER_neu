@@ -766,8 +766,12 @@ namespace Europlan.Common {
 
 		private void tabQuickDimensioning_Selected(object sender, TabControlEventArgs e) {
 			if (e.TabPage == this.pageSummary) {
-				string projectPath = Path.Combine(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Reporting"), "QuickDimensioning.lst");
-				listLabel1.Print(combit.ListLabel14.LlProject.List, projectPath, false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, null);
+				string filename = Path.Combine(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Reporting"), "QuickDimensioning.lst");
+				try {
+					listLabel1.Print(combit.ListLabel14.LlProject.List, filename, false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, null);
+				} catch (Exception ex) {
+					MessageBox.Show("Problem beim Erstellen der Vorschau:" + ex.ToString());
+				}
 			}
 		}
 
@@ -920,6 +924,10 @@ namespace Europlan.Common {
 
 		private void button1_Click_1(object sender, EventArgs e) {
 			listLabel1.Design();
+		}
+
+		private void listLabel1_DefinePrintOptions(object sender, EventArgs e) {
+			
 		}
 
 	}
