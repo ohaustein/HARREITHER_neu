@@ -696,8 +696,10 @@ namespace Europlan.Common {
 			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
 			this.listLabel1.LicensingInfo = "5hKHEQ";
 			this.listLabel1.MaxRTFVersion = 65280;
+			this.listLabel1.NoParameterCheck = true;
 			this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
 			this.listLabel1.Unit = combit.ListLabel14.LlUnits.Millimeter_1_100;
+			this.listLabel1.DefinePrintOptions += new combit.ListLabel14.DefinePrintOptionsHandler(this.listLabel1_DefinePrintOptions);
 			// 
 			// quickDimensioningRoomDistributorsWrapperBindingSource
 			// 
