@@ -5,11 +5,14 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Europlan.Common {
 	public partial class QuickDimensioningDistributorsSummary : UserControl {
 
 		public event ProjectChangedHandler ProjectChanged;
+
+		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
 
 		public QuickDimensioningDistributorsSummary() {
 			InitializeComponent();
@@ -57,6 +60,12 @@ namespace Europlan.Common {
 			cmbDistributors.Items.Clear();
 			if (Project.Instance != null) {
 				List<QuickDimensioningDistributor> distributors = Project.Instance.QuickDimensioning.Distributors;
+				if (distributors.Count == 0) {
+					QuickDimensioningDistributor distributor = new QuickDimensioningDistributor();
+					string localized = resources.GetString("Distributor1", Thread.CurrentThread.CurrentUICulture);
+					distributor.Name = localized;
+					distributors.Add(distributor);
+				}
 				foreach (QuickDimensioningDistributor distributor in distributors) {
 					cmbDistributors.Items.Add(distributor);
 				}

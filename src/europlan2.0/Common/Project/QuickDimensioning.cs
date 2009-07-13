@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using log4net;
-using System.Threading;
 
 namespace Europlan.Common {
 	
@@ -26,7 +25,6 @@ namespace Europlan.Common {
 		private Europlan.Common.EurovalProduct.LayDistance layDistance = Europlan.Common.EurovalProduct.LayDistance.EV20;
 		private float ceilingAllocation = 80;
 		private List<QuickDimensioningDistributor> distributors;
-		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
 
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(QuickDimensioning));
@@ -37,10 +35,6 @@ namespace Europlan.Common {
 
 		private void InitializeQuickDimensioning() {
 			distributors = new List<QuickDimensioningDistributor>();
-			QuickDimensioningDistributor distributor = new QuickDimensioningDistributor();
-			string localized = resources.GetString("Distributor1", Thread.CurrentThread.CurrentUICulture);
-			distributor.Name = localized;
-			distributors.Add(distributor);
 		}
 
 		public Type AssociatedPanelType {
