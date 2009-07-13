@@ -91,9 +91,9 @@ namespace Europlan.Common {
 				bool planned = wrapper.IsProductPlanned<P>();
 				DataGridViewCell openCell = row.Cells[this.GetProductOpenColumn<P>().Index];
 				DataGridViewCell plannedCell = row.Cells[this.GetProductPlannedColumn<P>().Index];
-				openCell.Style.BackColor = (planned ? openCell.InheritedStyle.BackColor : SystemColors.Control);
+				openCell.Style.BackColor = (planned ? row.DefaultCellStyle.BackColor : SystemColors.Control);
 				plannedCell.ReadOnly = !planned;
-				plannedCell.Style.BackColor = (planned ? plannedCell.InheritedStyle.BackColor : SystemColors.Control);
+				plannedCell.Style.BackColor = (planned ? row.DefaultCellStyle.BackColor : SystemColors.Control);
 				DataGridViewNumericUpDownCell plannedUpDownCell = plannedCell as DataGridViewNumericUpDownCell;
 				if (plannedUpDownCell != null) {
 					plannedUpDownCell.Maximum = wrapper.GetMaximumPlannableCircuits<P>();
