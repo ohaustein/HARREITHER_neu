@@ -770,7 +770,9 @@ namespace Europlan.Common {
 				try {
 					listLabel1.Print(combit.ListLabel14.LlProject.List, filename, false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, null);
 				} catch (Exception ex) {
-					MessageBox.Show("Problem beim Erstellen der Vorschau:" + ex.ToString());
+					MessageBox.Show("Es konnte kein Drucker gefunden werden.\nBitte stellen Sie sicher, dass ein Drucker installiert ist.", "Kein Drucker vorhanden...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					this.tabQuickDimensioning.SelectedTab = this.pageSettings;
+					//MessageBox.Show("Problem beim Erstellen der Vorschau:" + ex.ToString());
 				}
 			}
 		}
