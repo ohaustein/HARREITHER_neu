@@ -21,13 +21,18 @@ namespace Europlan.Common {
 		}
 
 		private void gridDistributors_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
-			QuickDimensioningDistributor distributor = e.Row.DataBoundItem as QuickDimensioningDistributor;
-			Project project = Project.Instance;
-			if (project != null) {
-				foreach (Floor floor in project.Floors) {
-					foreach (Room room in floor.Rooms) {
-						foreach (Product product in room.UsedProductsForQuickDimensioning) {
-							product.QuickDimensioningConnectedDistributors.Remove(distributor.Id);
+			if (this.quickDimensioningDistributorBindingSource.Count <= 1) {
+				MessageBox.Show("Der Verteiler kann nicht gelöscht werden, da für die Flächenaufstellung mindestens ein Verteiler vorhanden sein muss.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				e.Cancel = true;
+			} else {
+				QuickDimensioningDistributor distributor = e.Row.DataBoundItem as QuickDimensioningDistributor;
+				Project project = Project.Instance;
+				if (project != null) {
+					foreach (Floor floor in project.Floors) {
+						foreach (Room room in floor.Rooms) {
+							foreach (Product product in room.UsedProductsForQuickDimensioning) {
+								product.QuickDimensioningConnectedDistributors.Remove(distributor.Id);
+							}
 						}
 					}
 				}
