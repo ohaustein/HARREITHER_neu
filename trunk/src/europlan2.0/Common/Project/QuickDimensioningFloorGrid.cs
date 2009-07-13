@@ -380,14 +380,14 @@ namespace Europlan.Common {
 			if (room != null) {
 				if (e.ColumnIndex == this.colHeatLoad.Index && room.QuickDimensioningHeatLoad == 0) {
 					// get and set default heatload (if heatload is already set use it, if it is not set get default heatload for quickdimensioning)
-					int heatload = room.HeatLoad;
+					int heatload = room.NormalizedHeatLoad;
 					if (heatload <= 0) {
 						heatload = room.GetDefaultQuickDimensioningHeatLoad();
 					}
 					this.quickDimensioningGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = heatload;
 				} else if (e.ColumnIndex == this.colCoolLoad.Index && room.QuickDimensioningCoolLoad == 0) {
 					// get and set default coolload (if coolload is already set use it, if it is not set get default coolload for quickdimensioning)
-					int coolload = room.CoolLoad;
+					int coolload = room.NormalizedCoolLoad;
 					if (coolload <= 0) {
 						coolload = room.GetDefaultQuickDimensioningCoolLoad();
 					}
