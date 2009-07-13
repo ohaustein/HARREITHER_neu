@@ -94,6 +94,8 @@ namespace Europlan.Common {
 			this.gridRooms.Size = new System.Drawing.Size(645, 390);
 			this.gridRooms.TabIndex = 0;
 			this.gridRooms.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRooms_CellValueChanged);
+			this.gridRooms.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gridRooms_CellBeginEdit);
+			this.gridRooms.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.gridRooms_PreviewKeyDown);
 			this.gridRooms.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridRooms_RowsAdded);
 			// 
 			// colRoomId

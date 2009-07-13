@@ -302,5 +302,19 @@ namespace Europlan.Common {
 				return base.ProcessKeyEventArgs(ref m);
 			}
 		}
+
+		protected override void OnTextChanged(EventArgs e) {
+			if (String.IsNullOrEmpty(this.Text)) {
+				if (this.Minimum > 0) {
+					this.Value = this.Minimum;
+				} else if (this.Maximum < 0) {
+					this.Value = this.Maximum;
+				} else {
+					this.Value = 0;
+				}
+				this.Text = "";
+			}
+			base.OnTextChanged(e);
+		}
 	}
 }

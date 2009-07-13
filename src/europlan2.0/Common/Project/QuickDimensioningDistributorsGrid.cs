@@ -156,5 +156,40 @@ namespace Europlan.Common {
 		private void gridRooms_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
 			this.OnProjectChanged();
 		}
+
+		private void gridRooms_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
+			if (e.KeyCode == Keys.Delete && this.gridRooms.SelectedCells.Count == 1 &&
+					this.gridRooms.SelectedRows.Count == 0 && this.gridRooms.SelectedCells[0].Value != null) {
+				DataGridViewCell cell = this.gridRooms.SelectedCells[0];
+				if (!cell.ReadOnly) {
+					e.IsInputKey = false;
+					this.gridRooms.BeginEdit(true);
+					cell.Value = null;
+					this.gridRooms.EndEdit();
+				}
+			}
+		}
+
+		private void gridRooms_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e) {
+			DataGridViewNumericUpDownCell cell = this.gridRooms.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewNumericUpDownCell;
+			if (cell != null && cell.Value == null) {
+				int count = 0;
+				if (this.distributor != null) {
+					Project project = Project.Instance;
+					if (project != null) {
+						foreach (Floor floor in project.Floors) {
+							foreach (Room room in floor.Rooms) {
+								foreach (Product product in room.UsedProductsForQuickDimensioning) {
+									if (product.QuickDimensioningConnectedDistributors.ContainsKey(distributor.Id)) {
+										count += product.QuickDimensioningConnectedDistributors[distributor.Id];
+									}
+								}
+							}
+						}
+					}
+					cell.Value = (count >= 12 ? 0 : (count + cell.Maximum > 12 ? 12 - count : (int)cell.Maximum));
+				}
+			}
+		}
 	}
 }
