@@ -123,6 +123,9 @@
   <data name="DefaultRegulatorCircuits" xml:space="preserve">
     <value>Standardregelkreis</value>
   </data>
+  <data name="Distributor1" xml:space="preserve">
+    <value>Verteiler 1</value>
+  </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Beenden</value>
   </data>

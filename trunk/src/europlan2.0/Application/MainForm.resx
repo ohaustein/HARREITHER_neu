@@ -1082,4 +1082,7 @@
   <data name="RF" xml:space="preserve">
     <value>RF</value>
   </data>
+  <data name="Distributor1" xml:space="preserve">
+    <value>Verteiler 1</value>
+  </data>
 </root>
