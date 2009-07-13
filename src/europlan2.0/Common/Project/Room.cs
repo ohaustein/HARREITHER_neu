@@ -182,8 +182,8 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public int NormalizedHeatLoad {
-			get { return heatLoad - floorHeatingLoss; }
-			set { floorHeatingLoss = heatLoad - value; }
+			get { return heatLoad - floorHeatingLoss - additionalHeatLoad; }
+			set { floorHeatingLoss = heatLoad - additionalHeatLoad - value; }
 		}
 
 		[XmlIgnore]
