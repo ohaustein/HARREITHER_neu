@@ -29,7 +29,7 @@ namespace Europlan.Common {
 
 		private TreeNode rootNode = null;
 		private TreeNode floorsNode = null;
-		private TreeNode facilityDetailsNode = null;
+		//private TreeNode facilityDetailsNode = null;
 		private TreeNode regulatorCircuitsNode = null;
 		private TreeNode quickDimensioningNode = null;
 
@@ -96,9 +96,9 @@ namespace Europlan.Common {
 			floorsNode = new TreeNode(localized == null ? "Geschoße" : localized);
 			floorsNode.Tag = floors;
 
-			localized = resources.GetString("FacilityDetails", Thread.CurrentThread.CurrentUICulture);
-			facilityDetailsNode = new TreeNode(localized == null ? "Anlagedaten" : localized);
-			facilityDetailsNode.Tag = typeof(FacilityDetailsSummaryPanel);
+			//localized = resources.GetString("FacilityDetails", Thread.CurrentThread.CurrentUICulture);
+			//facilityDetailsNode = new TreeNode(localized == null ? "Anlagedaten" : localized);
+			//facilityDetailsNode.Tag = typeof(FacilityDetailsSummaryPanel);
 
 			localized = resources.GetString("RegulatorCircuits", Thread.CurrentThread.CurrentUICulture);
 			regulatorCircuitsNode = new TreeNode(localized == null ? "Regelkreise" : localized);
@@ -265,25 +265,25 @@ namespace Europlan.Common {
 				tree.Nodes.Add(this.rootNode);
 			}
 			// insert facility details node if missing
-			if (this.rootNode.Nodes.Count == 0 || this.rootNode.Nodes[0] != this.facilityDetailsNode) {
-				this.rootNode.Nodes.Insert(0, this.facilityDetailsNode);
-			}
+			//if (this.rootNode.Nodes.Count == 0 || this.rootNode.Nodes[0] != this.facilityDetailsNode) {
+			//	this.rootNode.Nodes.Insert(0, this.facilityDetailsNode);
+			//}
 			// insert regulatory circuit node if missing
-			if (this.rootNode.Nodes.Count == 1 || this.rootNode.Nodes[1] != this.regulatorCircuitsNode) {
+			if (this.rootNode.Nodes.Count == 0 || this.rootNode.Nodes[0] != this.regulatorCircuitsNode) {
 				this.rootNode.Nodes.Insert(1, this.regulatorCircuitsNode);
 			}
 			// insert floors node if missing
-			if (this.rootNode.Nodes.Count == 2 || this.rootNode.Nodes[2] != this.floorsNode) {
+			if (this.rootNode.Nodes.Count == 1 || this.rootNode.Nodes[1] != this.floorsNode) {
 				this.rootNode.Nodes.Insert(2, this.floorsNode);
 			}
 			// insert quick dimensioning node if missing
-			if (this.rootNode.Nodes.Count == 3 || this.rootNode.Nodes[3] != this.quickDimensioningNode) {
+			if (this.rootNode.Nodes.Count == 2 || this.rootNode.Nodes[2] != this.quickDimensioningNode) {
 				this.rootNode.Nodes.Insert(3, this.quickDimensioningNode);
 			}
 
 			// remove other nodes
-			while (this.rootNode.Nodes.Count > 4) {
-				this.rootNode.Nodes.RemoveAt(4);
+			while (this.rootNode.Nodes.Count > 3) {
+				this.rootNode.Nodes.RemoveAt(3);
 			}
 
 			// update floors
