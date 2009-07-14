@@ -93,8 +93,8 @@ namespace Europlan.Common {
 			// 
 			// pageSummary
 			// 
-			this.pageSummary.Controls.Add(this.button1);
 			this.pageSummary.Controls.Add(this.listLabelPreviewControl1);
+			this.pageSummary.Controls.Add(this.button1);
 			this.pageSummary.Location = new System.Drawing.Point(4, 22);
 			this.pageSummary.Name = "pageSummary";
 			this.pageSummary.Padding = new System.Windows.Forms.Padding(3);
@@ -106,6 +106,7 @@ namespace Europlan.Common {
 			// button1
 			// 
 			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button1.Enabled = false;
 			this.button1.Location = new System.Drawing.Point(824, 483);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(82, 23);
@@ -124,7 +125,7 @@ namespace Europlan.Common {
 			this.listLabelPreviewControl1.ForceReadOnly = false;
 			this.listLabelPreviewControl1.Location = new System.Drawing.Point(0, 0);
 			this.listLabelPreviewControl1.Name = "listLabelPreviewControl1";
-			this.listLabelPreviewControl1.Size = new System.Drawing.Size(906, 477);
+			this.listLabelPreviewControl1.Size = new System.Drawing.Size(906, 506);
 			this.listLabelPreviewControl1.SlideshowMode = false;
 			this.listLabelPreviewControl1.TabIndex = 4;
 			this.listLabelPreviewControl1.Text = "listLabelPreviewControl1";
@@ -694,6 +695,7 @@ namespace Europlan.Common {
 			// listLabel1
 			// 
 			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
+			this.listLabel1.DebugLogFilePath = "C:\\Users\\neudorfer.BLUESOURCE\\AppData\\Roaming\\COMBIT.LOG";
 			this.listLabel1.LicensingInfo = "5hKHEQ";
 			this.listLabel1.MaxRTFVersion = 65280;
 			this.listLabel1.NoParameterCheck = true;
