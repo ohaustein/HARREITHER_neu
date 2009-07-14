@@ -776,8 +776,8 @@ namespace Europlan.Common {
 					DialogResult result = MessageBox.Show("Die Anwendung konnte keinen installierten Drucker finden. Drücken Sie OK, um einen Standarddrucker einzurichten, mit dem die Vorschau und der Export in eine Datei ermöglicht wird oder Abbrechen, um manuell einen Drucker einzurichten.", "Kein Drucker vorhanden...", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 					if (result == DialogResult.OK) {
 						System.Diagnostics.Process p = new System.Diagnostics.Process();
-						string myMail = "rundll32 printui.dll,PrintUIEntry /if /b \"Europlan 2.0 Reporting\" /f %windir%\\inf\\ntprint.inf /r \"lpt1:\" /m \"AGFA-AccuSet v52.3\"";
-						p.StartInfo.FileName = myMail;
+						p.StartInfo.FileName = "rundll32.exe";
+						p.StartInfo.Arguments = "printui.dll,PrintUIEntry /if /b \"Europlan 2.0 Reporting\" /f %windir%\\inf\\ntprint.inf /r \"lpt1:\" /m \"AGFA-AccuSet v52.3\"";
 						p.Start();
 					} else {
 						this.tabQuickDimensioning.SelectedTab = this.pageSettings;
