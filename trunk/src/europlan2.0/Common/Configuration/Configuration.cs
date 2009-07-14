@@ -37,6 +37,8 @@ namespace Europlan.Common {
 		private ModulKlimaBodenProduct modulKlimaBodenProduct = new ModulKlimaBodenProduct();
 		private ModulKlimaDeckeProduct modulKlimaDeckeProduct = new ModulKlimaDeckeProduct();
 
+		private string partnerLogo;
+
 		public enum ConfigurationType {
 			InitializedConfiguration,
 			AdminConfiguration,
@@ -56,6 +58,9 @@ namespace Europlan.Common {
 			this.materialToCategoryMapping = new SerializableDictionary<string, string>();
 			this.discounts = new Dictionary<string, float>();
 			this.roomTypes = new List<RoomType>();
+
+			this.partnerLogo = "";
+
 			StreamReader sr = null;
 			try {
 				sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.001"), System.Text.Encoding.GetEncoding(850));
@@ -139,6 +144,12 @@ namespace Europlan.Common {
 				second = config1;
 			}
 
+			if (first.partnerLogo != "") {
+				config.partnerLogo = first.partnerLogo;
+			}
+			if (second.partnerLogo != "") {
+				config.partnerLogo = second.partnerLogo;
+			}
 			foreach (Material material in config1.Materials) {
 				if (!config.Materials.Contains(material)) {
 					config.Materials.Add(material);
@@ -344,6 +355,19 @@ namespace Europlan.Common {
 			}
 			set {
 				this.roomTypes = value;
+			}
+		}
+
+		public string PartnerLogo {
+			get {
+				if (type == ConfigurationType.UserConfiguration) {
+					return this.partnerLogo;
+				} else {
+					return "";
+				}
+			}
+			set {
+				this.partnerLogo = value;
 			}
 		}
 

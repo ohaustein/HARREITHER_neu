@@ -38,6 +38,10 @@ namespace Europlan.Application {
 				} catch (Exception) {
 				}
 			}
+			string partnerLogo = Configuration.UserTemplate.PartnerLogo;
+			if (partnerLogo != "" && File.Exists(partnerLogo)) {
+				this.pictureBox1.Image = Image.FromFile(partnerLogo);
+			}
 			cmbLanguage.SelectedItem = CultureInfo.GetCultureInfo((string)settings.GetSetting("Language", "de"));
 		}
 
@@ -59,6 +63,26 @@ namespace Europlan.Application {
 
 		private void btnOk_Click(object sender, EventArgs e) {
 			Configuration.UserTemplate.Save();
+		}
+
+		private void button1_Click(object sender, EventArgs e) {
+			OpenFileDialog dialog = new OpenFileDialog();
+			dialog.CheckFileExists = true;
+			dialog.CheckPathExists = true;
+			dialog.DefaultExt = "e2p";
+			dialog.Filter = "Logo (*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG";
+			dialog.Multiselect = false;
+			DialogResult result = dialog.ShowDialog();
+			if (result == DialogResult.OK) {
+				string partnerLogo = dialog.FileName;
+				this.pictureBox1.Image = Image.FromFile(partnerLogo);
+				Configuration.UserTemplate.PartnerLogo = partnerLogo;
+			}
+		}
+
+		private void button2_Click(object sender, EventArgs e) {
+			pictureBox1.Image = null;
+			Configuration.UserTemplate.PartnerLogo = "";
 		}
 	}
 }
