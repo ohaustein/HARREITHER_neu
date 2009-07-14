@@ -32,7 +32,7 @@
   <ItemGroup>
     <Reference Include="listlabel14VS2005, Version=14.6.0.16557, Culture=neutral, PublicKeyToken=a7a30592cb4a94be, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\combit\LL14\Programmable Samples and Declarations\Microsoft .NET\listlabel14VS2005.dll</HintPath>
+      <HintPath>..\..\..\lib\listlabel\optional\dotnet\listlabel14VS2005.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
