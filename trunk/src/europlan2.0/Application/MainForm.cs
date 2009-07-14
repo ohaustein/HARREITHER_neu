@@ -216,6 +216,7 @@ namespace Europlan.Application {
 				projectUnsaved = false;
 				UpdateTitle();
 				Project.Instance.InitializeTreeView(this.projectTree);
+				projectTree.SelectedNode = projectTree.Nodes[0];
 				if (currentEditorUserControl != null) {
 					currentEditorUserControl.UpdateControl();
 				}
