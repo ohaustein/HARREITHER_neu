@@ -20,11 +20,11 @@
  CreatedByApp=<unknown>
  CreatedByDLL=<unknown>
  CreatedByUser=<unknown>
- LastModified=7/14/2009, 9:39:47 AM
+ LastModified=7/14/2009, 3:15:51 PM
  LastModifiedByApp=EUROPLAN.VSHOST.EXE [8.0.50727.42]
  LastModifiedByDLL=CMLL14.DLL [14.8.2009.12916 (09-05-05 16:53)]
  LastModifiedByUser=neudorfer on CAPRICA
- CreatedByCallFrom=CMLL14.DLL
+ CreatedByCallFrom=
  [@DatabaseStructure]
   {
   [DatabaseStructure]
@@ -63,7 +63,7 @@
  DefaultSize.Objecttype10=(0,0,76520,32420)
  DefaultSize.Objecttype11=(0,0,63920,23610)
  DefaultSize.Objecttype12=(0,0,76020,48260)
- ObjectCount=7
+ ObjectCount=8
 [UserSection]
 
 [SumVariables]
@@ -99,7 +99,7 @@
  LinkID=29
  LinkToID=0
  LinkMode=32
- LinkTest=-31755
+ LinkTest=-9190
  LayerID=0
  GroupID=0
  Identifier=
@@ -42745,11 +42745,11 @@
  LinkID=91
  LinkToID=0
  LinkMode=32
- LinkTest=-18870
+ LinkTest=-23757
  LayerID=0
  GroupID=0
  Identifier=
- Condition=True
+ Condition=if(IsNULL (@PartnerLogo),false, true)
  UserLocked=False
  WrapBefore=False
  ExportAsPicture=False
@@ -42782,7 +42782,7 @@
  LinkID=45
  LinkToID=0
  LinkMode=32
- LinkTest=-23428
+ LinkTest=-3672
  LayerID=0
  GroupID=0
  Identifier=
@@ -42817,7 +42817,7 @@
  LinkID=31
  LinkToID=0
  LinkMode=32
- LinkTest=-4585
+ LinkTest=-14946
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -42922,7 +42922,7 @@
  LinkID=35
  LinkToID=0
  LinkMode=32
- LinkTest=-29424
+ LinkTest=-25463
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -42930,7 +42930,7 @@
  UserLocked=False
  WrapBefore=False
  ExportAsPicture=False
- Position/Left=81710
+ Position/Left=84230
  Position/Top=6290
  Position/Width=74380
  Position/Height=12820
@@ -42995,7 +42995,7 @@
  LinkID=52
  LinkToID=0
  LinkMode=32
- LinkTest=-31268
+ LinkTest=-32691
  LayerID=0
  GroupID=0
  Identifier=
@@ -43003,10 +43003,10 @@
  UserLocked=False
  WrapBefore=False
  ExportAsPicture=False
- Position/Left=8230
- Position/Top=6070
- Position/Width=72310
- Position/Height=18850
+ Position/Left=8000
+ Position/Top=6000
+ Position/Width=75000
+ Position/Height=20000
  Direction=0
  Frame/Layout=0
  Frame/Left/Spacing=0
@@ -43031,7 +43031,7 @@
  LinkID=10
  LinkToID=0
  LinkMode=32
- LinkTest=-19390
+ LinkTest=-2758
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -43039,7 +43039,7 @@
  UserLocked=False
  WrapBefore=False
  ExportAsPicture=False
- Position/Left=81980
+ Position/Left=84500
  Position/Top=19810
  Position/Width=74380
  Position/Height=7510
@@ -43097,11 +43097,48 @@
 	}
    }
   }
+[Object]
+ ObjectID=5
+ ObjectName=Bild
+ Locked=FALSE
+ LinkID=13
+ LinkToID=0
+ LinkMode=32
+ LinkTest=-5983
+ LayerID=0
+ GroupID=0
+ Identifier=
+ Condition=if(IsNULL (@PartnerLogo),true,false)
+ UserLocked=False
+ WrapBefore=False
+ ExportAsPicture=False
+ Position/Left=8000
+ Position/Top=6000
+ Position/Width=75000
+ Position/Height=20000
+ Direction=0
+ Frame/Layout=0
+ Frame/Left/Spacing=0
+ Frame/Left/Line=False
+ Frame/Top/Spacing=0
+ Frame/Top/Line=False
+ Frame/Right/Spacing=0
+ Frame/Right/Line=False
+ Frame/Bottom/Spacing=0
+ Frame/Bottom/Line=False
+ PDFLevel=0
+ PDFText=
+ Mode=0
+ Filename=Harreither.png
+ bRelPath=True
+ OriginalSize=False
+ bIsotropic=True
+ Alignment=0
 [UserVariables]
  User1=@Allocation;"80%"
  User2=@NrOfProducts;6
  User3=@PartnerContact;"Harreither Ges.m.b.H. - Gesundes Heizen und Kühlen¶3334 Gaflenz, Oberland 71¶Tel: +43 (0) 7353 - 000"
- User4=@PartnerLogo;
+ User4=@PartnerLogo;NULL()
  User5=@Product1;"Product1"
  User6=@Product2;"Product2"
  User7=@Product3;"Product3"
