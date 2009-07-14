@@ -9,12 +9,14 @@ using System.Globalization;
 using System.Reflection;
 using System.Threading;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Europlan.Common {
 	public partial class QuickDimensioningPanel : UserControl, IEditorUserControl {
 
-		//[DllImport("shell32.dll", EntryPoint = "ShellExecute")]
-		//public static extern long ShellExecute(int hwnd, string cmd, string file, string param1, string param2, int swmode);
+
+		[DllImport("shell32.dll", EntryPoint = "ShellExecute")]
+		public static extern long ShellExecute(int hwnd, string cmd, string file, string param1, string param2, int swmode);
 
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
@@ -772,17 +774,23 @@ namespace Europlan.Common {
 				string filename = Path.Combine(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Reporting"), "QuickDimensioning.lst");
 				try {
 					listLabel1.Print(combit.ListLabel14.LlProject.List, filename, false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, null);
-				} catch (Exception ex) {
+				} catch (Exception) {
 					DialogResult result = MessageBox.Show("Die Anwendung konnte keinen installierten Drucker finden. Drücken Sie OK, um einen Standarddrucker einzurichten, mit dem die Vorschau und der Export in eine Datei ermöglicht wird oder Abbrechen, um manuell einen Drucker einzurichten.", "Kein Drucker vorhanden...", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 					if (result == DialogResult.OK) {
-						System.Diagnostics.Process p = new System.Diagnostics.Process();
-						p.StartInfo.FileName = "rundll32.exe";
-						p.StartInfo.Arguments = "printui.dll,PrintUIEntry /if /b \"Europlan 2.0 Reporting\" /f %windir%\\inf\\ntprint.inf /r \"lpt1:\" /m \"AGFA-AccuSet v52.3\"";
-						p.Start();
+						try {
+							System.Diagnostics.Process p = new System.Diagnostics.Process();
+							p.StartInfo.FileName = "rundll32.exe";
+							p.StartInfo.Arguments = "printui.dll,PrintUIEntry /if /b \"Europlan 2.0 Reporting\" /f " + Environment.GetEnvironmentVariable("windir") + "\\inf\\ntprint.inf /r \"lpt1:\" /m \"HP LaserJet 4\"";
+							p.Start();
+							p.WaitForExit();
+							listLabel1.Print(combit.ListLabel14.LlProject.List, filename, false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, null);
+						} catch (Exception) {
+							MessageBox.Show("Fehler bei der automatischen Einrichtung eines Druckers. Richten Sie bitte manuell einen beliebigen Drucker ein.");
+							this.tabQuickDimensioning.SelectedTab = this.pageSettings;
+						}
 					} else {
 						this.tabQuickDimensioning.SelectedTab = this.pageSettings;
 					}
-					//MessageBox.Show("Problem beim Erstellen der Vorschau:" + ex.ToString());
 				}
 			}
 		}
