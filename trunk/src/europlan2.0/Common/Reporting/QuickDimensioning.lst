@@ -20,11 +20,11 @@
  CreatedByApp=<unknown>
  CreatedByDLL=<unknown>
  CreatedByUser=<unknown>
- LastModified=7/9/2009, 3:34:04 PM
+ LastModified=7/14/2009, 9:39:47 AM
  LastModifiedByApp=EUROPLAN.VSHOST.EXE [8.0.50727.42]
  LastModifiedByDLL=CMLL14.DLL [14.8.2009.12916 (09-05-05 16:53)]
  LastModifiedByUser=neudorfer on CAPRICA
- CreatedByCallFrom=
+ CreatedByCallFrom=CMLL14.DLL
  [@DatabaseStructure]
   {
   [DatabaseStructure]
@@ -99,7 +99,7 @@
  LinkID=29
  LinkToID=0
  LinkMode=32
- LinkTest=-283
+ LinkTest=-31755
  LayerID=0
  GroupID=0
  Identifier=
@@ -42745,7 +42745,7 @@
  LinkID=91
  LinkToID=0
  LinkMode=32
- LinkTest=-29448
+ LinkTest=-18870
  LayerID=0
  GroupID=0
  Identifier=
@@ -42770,8 +42770,8 @@
  PDFLevel=0
  PDFText=
  Mode=0
- Filename=D:\Projekte\europlan2.0\trunk\src\europlan2.0\Application\Harreither.png
- bRelPath=False
+ Filename=Harreither.png
+ bRelPath=True
  OriginalSize=False
  bIsotropic=True
  Alignment=0
@@ -42782,7 +42782,7 @@
  LinkID=45
  LinkToID=0
  LinkMode=32
- LinkTest=-26058
+ LinkTest=-23428
  LayerID=0
  GroupID=0
  Identifier=
@@ -42817,7 +42817,7 @@
  LinkID=31
  LinkToID=0
  LinkMode=32
- LinkTest=-28303
+ LinkTest=-4585
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -42922,7 +42922,7 @@
  LinkID=35
  LinkToID=0
  LinkMode=32
- LinkTest=-10918
+ LinkTest=-29424
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -42995,7 +42995,7 @@
  LinkID=52
  LinkToID=0
  LinkMode=32
- LinkTest=-12067
+ LinkTest=-31268
  LayerID=0
  GroupID=0
  Identifier=
@@ -43031,7 +43031,7 @@
  LinkID=10
  LinkToID=0
  LinkMode=32
- LinkTest=-1382
+ LinkTest=-19390
  LayerID=0
  GroupID=0
  Identifier=ProjectName
