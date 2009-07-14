@@ -774,7 +774,7 @@ namespace Europlan.Common {
 				string filename = Path.Combine(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Reporting"), "QuickDimensioning.lst");
 				try {
 					listLabel1.Print(combit.ListLabel14.LlProject.List, filename, false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, null);
-				} catch (Exception) {
+				} catch (Exception ex) {
 					DialogResult result = MessageBox.Show("Die Anwendung konnte keinen installierten Drucker finden. Drücken Sie OK, um einen Standarddrucker einzurichten, mit dem die Vorschau und der Export in eine Datei ermöglicht wird oder Abbrechen, um manuell einen Drucker einzurichten.", "Kein Drucker vorhanden...", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 					if (result == DialogResult.OK) {
 						try {
@@ -789,7 +789,7 @@ namespace Europlan.Common {
 							this.tabQuickDimensioning.SelectedTab = this.pageSettings;
 						}
 					} else {
-						this.tabQuickDimensioning.SelectedTab = this.pageSettings;
+						//this.tabQuickDimensioning.SelectedTab = this.pageSettings;
 					}
 				}
 			}
@@ -847,9 +847,12 @@ namespace Europlan.Common {
 					listLabel1.Variables.Add("@Allocation", "");
 				}
 				//TODO
-				string filename = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath), "partner.jpg");
+				//string filename = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath), "partner.jpg");
+				string filename = Configuration.UserTemplate.PartnerLogo;
 				if (File.Exists(filename)) {
 					listLabel1.Variables.Add("@PartnerLogo", Image.FromFile(filename));
+				} else {
+					listLabel1.Variables.Add("@PartnerLogo", "(NULL)");
 				}
 				string usedRoomTypes = "";
 				foreach (RoomType roomType in Project.Instance.Config.RoomTypes) {
@@ -946,10 +949,6 @@ namespace Europlan.Common {
 
 		private void button1_Click_1(object sender, EventArgs e) {
 			listLabel1.Design();
-		}
-
-		private void listLabel1_DefinePrintOptions(object sender, EventArgs e) {
-			
 		}
 
 	}
