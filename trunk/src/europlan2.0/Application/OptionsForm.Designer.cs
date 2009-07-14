@@ -31,6 +31,7 @@ namespace Europlan.Application {
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabGeneral = new System.Windows.Forms.TabPage();
+			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.label1 = new System.Windows.Forms.Label();
@@ -50,7 +51,6 @@ namespace Europlan.Application {
 			this.megGeneral = new Europlan.Application.ContructionEditor.MaterialEditorGrid();
 			this.tabConstructions = new System.Windows.Forms.TabPage();
 			this.constructionEditorGrid1 = new Europlan.Common.ConstructionEditorGrid();
-			this.button2 = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabGeneral.SuspendLayout();
@@ -122,6 +122,13 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.tabGeneral, "tabGeneral");
 			this.tabGeneral.Name = "tabGeneral";
 			this.tabGeneral.UseVisualStyleBackColor = true;
+			// 
+			// button2
+			// 
+			resources.ApplyResources(this.button2, "button2");
+			this.button2.Name = "button2";
+			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// button1
 			// 
@@ -258,13 +265,6 @@ namespace Europlan.Application {
 			this.constructionEditorGrid1.Filter = Europlan.Common.ConstructionScopeEnum.All;
 			this.constructionEditorGrid1.Name = "constructionEditorGrid1";
 			this.constructionEditorGrid1.Type = Europlan.Common.Configuration.ConfigurationType.UserConfiguration;
-			// 
-			// button2
-			// 
-			resources.ApplyResources(this.button2, "button2");
-			this.button2.Name = "button2";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// OptionsForm
 			// 
