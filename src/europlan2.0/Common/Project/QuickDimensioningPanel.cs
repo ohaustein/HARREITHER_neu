@@ -76,11 +76,22 @@ namespace Europlan.Common {
 			this.cmbDistance.SelectedIndex = (int)Project.Instance.QuickDimensioning.LayDistance;
 			this.txtAllocation.Text = Project.Instance.QuickDimensioning.CeilingAllocation.ToString();
 
-			this.grids.Clear();
+			//this.grids.Clear();
+			List<Floor> floorsToRemove = new List<Floor>();
+			foreach (Floor floor in grids.Keys) {
+				floorsToRemove.Add(floor);
+			}
+			foreach (Floor floor in floorsToRemove) {
+				QuickDimensioningFloorGrid grid = this.grids[floor];
+				grid.ProjectChanged -= new ProjectChangedHandler(grid_ProjectChanged);
+				this.grids.Remove(floor);
+				grid.Dispose();
+				GC.Collect();
+			}
 
 			List<TabPage> pagesToRemove = new List<TabPage>();
 			foreach (TabPage page in this.tabQuickDimensioning.TabPages) {
-				if (page != this.pageSettings) {
+				if (page != pageSettings) {
 					pagesToRemove.Add(page);
 				}
 			}
@@ -94,6 +105,7 @@ namespace Europlan.Common {
 						room.InitializeQuickDimensioning();
 					}
 				}
+
 				TabPage page = new TabPage(floor.Name);
 				page.UseVisualStyleBackColor = true;
 				QuickDimensioningFloorGrid grid = new QuickDimensioningFloorGrid();
@@ -774,6 +786,7 @@ namespace Europlan.Common {
 				string filename = Path.Combine(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Reporting"), "QuickDimensioning.lst");
 				try {
 					listLabel1.Print(combit.ListLabel14.LlProject.List, filename, false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, null);
+					GC.Collect();
 				} catch (Exception ex) {
 					DialogResult result = MessageBox.Show("Die Anwendung konnte keinen installierten Drucker finden. Drücken Sie OK, um einen Standarddrucker einzurichten, mit dem die Vorschau und der Export in eine Datei ermöglicht wird oder Abbrechen, um manuell einen Drucker einzurichten.", "Kein Drucker vorhanden...", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 					if (result == DialogResult.OK) {
