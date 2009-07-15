@@ -18,6 +18,7 @@ namespace Europlan.Common {
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 
 		private combit.ListLabel14.ListLabel listLabel1;
+		private combit.ListLabel14.ListLabelPreviewControl listLabelPreviewControl1;
 		DataSet reportingData;
 
 		private Dictionary<Floor, QuickDimensioningFloorGrid> grids = new Dictionary<Floor, QuickDimensioningFloorGrid>();
@@ -785,7 +786,7 @@ namespace Europlan.Common {
 			if (e.TabPage == this.pageSummary) {
 				string filename = Path.Combine(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Reporting"), "QuickDimensioning.lst");
 				try {
-					listLabel1.Print(combit.ListLabel14.LlProject.List, filename, false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, null);
+					listLabel1.Print(combit.ListLabel14.LlProject.List, filename, false, combit.ListLabel14.LlPrintMode.PreviewControl, combit.ListLabel14.LlBoxType.None, "", false, Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath));
 					GC.Collect();
 				} catch (Exception ex) {
 					DialogResult result = MessageBox.Show("Die Anwendung konnte keinen installierten Drucker finden. Drücken Sie OK, um einen Standarddrucker einzurichten, mit dem die Vorschau und der Export in eine Datei ermöglicht wird oder Abbrechen, um manuell einen Drucker einzurichten.", "Kein Drucker vorhanden...", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
@@ -816,8 +817,16 @@ namespace Europlan.Common {
 				Cursor.Current = Cursors.WaitCursor;
 
 				if (listLabel1 != null) {
+					listLabel1.PreviewControl = null;
 					listLabel1.Dispose();
 					listLabel1 = null;
+				}
+
+				if (listLabelPreviewControl1 != null) {
+					this.pageSummary.Controls.Remove(this.listLabelPreviewControl1);
+					listLabelPreviewControl1.FileName = null;
+					listLabelPreviewControl1.Dispose();
+					listLabelPreviewControl1 = null;
 				}
 
 				if (reportingData != null) {
@@ -826,9 +835,11 @@ namespace Europlan.Common {
 					reportingData = null;
 				}
 
+
+
 				this.listLabel1 = new combit.ListLabel14.ListLabel();
 				reportingData = new DataSet();
-
+				listLabelPreviewControl1 = new combit.ListLabel14.ListLabelPreviewControl();
 
 				this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
 				this.listLabel1.LicensingInfo = "5hKHEQ";
@@ -836,6 +847,38 @@ namespace Europlan.Common {
 				this.listLabel1.NoParameterCheck = true;
 				this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
 				this.listLabel1.Unit = combit.ListLabel14.LlUnits.Millimeter_1_100;
+
+				//this.listLabelPreviewControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+				//			| System.Windows.Forms.AnchorStyles.Left)
+				//			| System.Windows.Forms.AnchorStyles.Right)));
+				this.listLabelPreviewControl1.CloseMode = combit.ListLabel14.LlPreviewControlCloseMode.DeleteFile;
+				this.listLabelPreviewControl1.Dock = DockStyle.Fill;
+				this.listLabelPreviewControl1.BackColor = System.Drawing.SystemColors.Control;
+				this.listLabelPreviewControl1.CurrentPage = 0;
+				this.listLabelPreviewControl1.ForceReadOnly = true;
+				this.listLabelPreviewControl1.Location = new System.Drawing.Point(0, 0);
+				this.listLabelPreviewControl1.Name = "listLabelPreviewControl1";
+				this.listLabelPreviewControl1.Size = new System.Drawing.Size(906, 506);
+				this.listLabelPreviewControl1.SlideshowMode = false;
+				this.listLabelPreviewControl1.TabIndex = 4;
+				this.listLabelPreviewControl1.Text = "listLabelPreviewControl1";
+				this.listLabelPreviewControl1.ToolbarButtons.Exit = combit.ListLabel14.LlButtonState.Invisible;
+				this.listLabelPreviewControl1.ToolbarButtons.GotoFirst = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.GotoLast = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.GotoNext = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.GotoPrev = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.PageRange = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.PrintAllPages = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.PrintCurrentPage = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.PrintToFax = combit.ListLabel14.LlButtonState.Invisible;
+				this.listLabelPreviewControl1.ToolbarButtons.SaveAs = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.SendTo = combit.ListLabel14.LlButtonState.Invisible;
+				this.listLabelPreviewControl1.ToolbarButtons.SlideshowMode = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.ZoomCombo = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.ZoomReset = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.ZoomRevert = combit.ListLabel14.LlButtonState.Default;
+				this.listLabelPreviewControl1.ToolbarButtons.ZoomTimes2 = combit.ListLabel14.LlButtonState.Default;
+				this.pageSummary.Controls.Add(this.listLabelPreviewControl1);
 
 				List<QuickDimensioningReportWrapper> reportWrapper = Project.Instance.QuickDimensioning.GetQuickDimensioningRoomReports();
 				DataTable rooms = ListToDataTable<QuickDimensioningReportWrapper>(reportWrapper);
