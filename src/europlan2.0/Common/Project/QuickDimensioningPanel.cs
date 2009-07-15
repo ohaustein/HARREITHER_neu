@@ -9,18 +9,16 @@ using System.Globalization;
 using System.Reflection;
 using System.Threading;
 using System.IO;
-using System.Runtime.InteropServices;
 
 namespace Europlan.Common {
 	public partial class QuickDimensioningPanel : UserControl, IEditorUserControl {
 
-
-		[DllImport("shell32.dll", EntryPoint = "ShellExecute")]
-		public static extern long ShellExecute(int hwnd, string cmd, string file, string param1, string param2, int swmode);
-
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+
+		private combit.ListLabel14.ListLabel listLabel1;
+		DataSet reportingData;
 
 		private Dictionary<Floor, QuickDimensioningFloorGrid> grids = new Dictionary<Floor, QuickDimensioningFloorGrid>();
 		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
@@ -817,25 +815,36 @@ namespace Europlan.Common {
 				Cursor current = Cursor.Current;
 				Cursor.Current = Cursors.WaitCursor;
 
-				//List<IQuickDimensioningSummary> summary = new List<IQuickDimensioningSummary>();
-				//foreach (Floor floor in Project.Instance.Floors) {
-				//    summary.Add(new QuickDimensioningFloorSummary(floor));
-				//}
-				//summary.Add(new QuickDimensioningProjectSummary());
-				//this.iQuickDimensioningSummaryBindingSource.DataSource = summary;
-				//this.iQuickDimensioningSummaryBindingSource.ResetBindings(false);
+				if (listLabel1 != null) {
+					listLabel1.Dispose();
+					listLabel1 = null;
+				}
 
-				DataSet data = new DataSet();
+				if (reportingData == null) {
+					reportingData = new DataSet();
+				} else {
+					reportingData.Clear();
+				}
+
+				this.listLabel1 = new combit.ListLabel14.ListLabel();
+
+				this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
+				this.listLabel1.LicensingInfo = "5hKHEQ";
+				this.listLabel1.MaxRTFVersion = 65280;
+				this.listLabel1.NoParameterCheck = true;
+				this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
+				this.listLabel1.Unit = combit.ListLabel14.LlUnits.Millimeter_1_100;
+
 				List<QuickDimensioningReportWrapper> reportWrapper = Project.Instance.QuickDimensioning.GetQuickDimensioningRoomReports();
 				DataTable rooms = ListToDataTable<QuickDimensioningReportWrapper>(reportWrapper);
 				DataTable distributors = ListToDataTable<QuickDimensioningDistributorsReportWrapper>(Project.Instance.QuickDimensioning.GetQuickDimensioningDistributorsReports());
 				rooms.TableName = "QuickDimensioningReportWrapper";
 				distributors.TableName = "QuickDimensioningDistributorsReportWrapper";
 
-				data.Tables.Add(rooms);
-				data.Tables.Add(distributors);
+				reportingData.Tables.Add(rooms);
+				reportingData.Tables.Add(distributors);
 
-				listLabel1.DataSource = data;
+				listLabel1.DataSource = reportingData;
 
 				string projectName = "";
 				foreach (string line in Project.Instance.ProjectName) {
@@ -914,6 +923,7 @@ namespace Europlan.Common {
 			} else if (e.TabPage == this.pageDistributors) {
 				this.quickDimensioningDistributorsSummary.UpdateControl();
 			}
+			
 		}
 
 		public static DataTable ListToDataTable<T>(List<T> list) {

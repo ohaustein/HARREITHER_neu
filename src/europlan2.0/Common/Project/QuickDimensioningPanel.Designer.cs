@@ -67,7 +67,6 @@ namespace Europlan.Common {
 			this.txtAllocation = new Europlan.Common.NumericBox();
 			this.pageDistributors = new System.Windows.Forms.TabPage();
 			this.quickDimensioningDistributorsSummary = new Europlan.Common.QuickDimensioningDistributorsSummary();
-			this.listLabel1 = new combit.ListLabel14.ListLabel();
 			this.quickDimensioningRoomDistributorsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSummary.SuspendLayout();
@@ -692,16 +691,6 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributorsSummary.TabIndex = 0;
 			this.quickDimensioningDistributorsSummary.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.quickDimensioningDistributorsSummary_ProjectChanged);
 			// 
-			// listLabel1
-			// 
-			this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
-			this.listLabel1.DebugLogFilePath = "C:\\Users\\neudorfer.BLUESOURCE\\AppData\\Roaming\\COMBIT.LOG";
-			this.listLabel1.LicensingInfo = "5hKHEQ";
-			this.listLabel1.MaxRTFVersion = 65280;
-			this.listLabel1.NoParameterCheck = true;
-			this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
-			this.listLabel1.Unit = combit.ListLabel14.LlUnits.Millimeter_1_100;
-			// 
 			// quickDimensioningRoomDistributorsWrapperBindingSource
 			// 
 			this.quickDimensioningRoomDistributorsWrapperBindingSource.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
@@ -766,7 +755,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ComboBox cmbHeatFlowTemperature;
 		private System.Windows.Forms.TabPage pageDistributors;
 		private QuickDimensioningDistributorsSummary quickDimensioningDistributorsSummary;
-		private combit.ListLabel14.ListLabel listLabel1;
 		private System.Windows.Forms.BindingSource quickDimensioningRoomDistributorsWrapperBindingSource;
 		private System.Windows.Forms.TabPage pageSummary;
 		private combit.ListLabel14.ListLabelPreviewControl listLabelPreviewControl1;
