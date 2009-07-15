@@ -121,6 +121,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				form.Dispose();
 			} else {
 				MessageBox.Show("Ein Verteiler benötigt einen Regelkreis, an den er angeschlossen werden kann. Bitte legen Sie unter 'Regelkreise' zumindest einen Regelkreis an", "Kein Regelkreis vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
