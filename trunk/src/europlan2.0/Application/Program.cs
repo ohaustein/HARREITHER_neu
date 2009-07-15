@@ -85,7 +85,9 @@ namespace Europlan.Application {
 				mainForm.ProjectToLoad = projectFile.TrimEnd(); ;
 			}
 			startingForm.Close();
+			startingForm.Dispose();
 			System.Windows.Forms.Application.Run(mainForm);
+			mainForm.Dispose();
 		}
 
 		static bool IsApplicationAlreadyRunning() {
