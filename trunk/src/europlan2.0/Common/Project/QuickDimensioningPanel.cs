@@ -88,6 +88,7 @@ namespace Europlan.Common {
 				grid.Dispose();
 				GC.Collect();
 			}
+			floorsToRemove.Clear();
 
 			List<TabPage> pagesToRemove = new List<TabPage>();
 			foreach (TabPage page in this.tabQuickDimensioning.TabPages) {
@@ -98,6 +99,7 @@ namespace Europlan.Common {
 			foreach (TabPage page in pagesToRemove) {
 				this.tabQuickDimensioning.TabPages.Remove(page);
 			}
+			pagesToRemove.Clear();
 
 			foreach (Floor floor in Project.Instance.Floors) {
 				foreach (Room room in floor.Rooms) {
