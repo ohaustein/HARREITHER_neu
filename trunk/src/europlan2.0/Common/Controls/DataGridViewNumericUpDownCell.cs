@@ -12,8 +12,8 @@ namespace Europlan.Common {
 	/// </summary>
 	public class DataGridViewNumericUpDownCell : DataGridViewTextBoxCell {
 		// Used in KeyEntersEditMode function
-		[System.Runtime.InteropServices.DllImport("USER32.DLL", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-		private static extern short VkKeyScan(char key);
+		//[System.Runtime.InteropServices.DllImport("USER32.DLL", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+		//private static extern short VkKeyScan(char key);
 
 		// Used in TranslateAlignment function
 		private static readonly DataGridViewContentAlignment anyRight = DataGridViewContentAlignment.TopRight |
