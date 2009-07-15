@@ -820,13 +820,15 @@ namespace Europlan.Common {
 					listLabel1 = null;
 				}
 
-				if (reportingData == null) {
-					reportingData = new DataSet();
-				} else {
+				if (reportingData != null) {
 					reportingData.Clear();
+					reportingData.Dispose();
+					reportingData = null;
 				}
 
 				this.listLabel1 = new combit.ListLabel14.ListLabel();
+				reportingData = new DataSet();
+
 
 				this.listLabel1.AutoDestination = combit.ListLabel14.LlPrintMode.PreviewControl;
 				this.listLabel1.LicensingInfo = "5hKHEQ";
