@@ -78,8 +78,8 @@ namespace Europlan.Common {
 			this.colModulKlimaBodenCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colModulKlimaDecke = new Europlan.Common.NumericColumn();
 			this.colModulKlimaDeckeCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colNrOfServos = new Europlan.Common.NumericColumn();
 			this.colRoomController = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.colNrOfServos = new Europlan.Common.NumericColumn();
 			this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRevert = new System.Windows.Forms.DataGridViewButtonColumn();
 			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningGrid)).BeginInit();
@@ -120,8 +120,8 @@ namespace Europlan.Common {
             this.colModulKlimaBodenCircuits,
             this.colModulKlimaDecke,
             this.colModulKlimaDeckeCircuits,
-            this.colNrOfServos,
             this.colRoomController,
+            this.colNrOfServos,
             this.colComments,
             this.colRevert});
 			this.quickDimensioningGrid.DataSource = this.roomBindingSource;
@@ -509,6 +509,14 @@ namespace Europlan.Common {
 			this.colModulKlimaDeckeCircuits.Visible = false;
 			this.colModulKlimaDeckeCircuits.Width = 70;
 			// 
+			// colRoomController
+			// 
+			this.colRoomController.DataPropertyName = "QuickDimensioningRoomController";
+			this.colRoomController.FillWeight = 60F;
+			this.colRoomController.HeaderText = "Raum-\ncontroller";
+			this.colRoomController.Name = "colRoomController";
+			this.colRoomController.Width = 60;
+			// 
 			// colNrOfServos
 			// 
 			this.colNrOfServos.DataPropertyName = "QuickDimensioningNrOfServos";
@@ -521,14 +529,6 @@ namespace Europlan.Common {
 			this.colNrOfServos.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colNrOfServos.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colNrOfServos.Width = 50;
-			// 
-			// colRoomController
-			// 
-			this.colRoomController.DataPropertyName = "QuickDimensioningRoomController";
-			this.colRoomController.FillWeight = 60F;
-			this.colRoomController.HeaderText = "Raum-\ncontroller";
-			this.colRoomController.Name = "colRoomController";
-			this.colRoomController.Width = 60;
 			// 
 			// colComments
 			// 
@@ -596,8 +596,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn colModulKlimaBodenCircuits;
 		private NumericColumn colModulKlimaDecke;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colModulKlimaDeckeCircuits;
-		private NumericColumn colNrOfServos;
 		private System.Windows.Forms.DataGridViewComboBoxColumn colRoomController;
+		private NumericColumn colNrOfServos;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colComments;
 		private System.Windows.Forms.DataGridViewButtonColumn colRevert;
 	}
