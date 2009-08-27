@@ -20,7 +20,7 @@
  CreatedByApp=<unknown>
  CreatedByDLL=<unknown>
  CreatedByUser=<unknown>
- LastModified=8/27/2009, 3:02:27 PM
+ LastModified=8/27/2009, 4:29:41 PM
  LastModifiedByApp=EUROPLAN.VSHOST.EXE [8.0.50727.42]
  LastModifiedByDLL=CMLL14.DLL [14.9.2009.19413 (09-07-08 13:35)]
  LastModifiedByUser=neudorfer on CAPRICA
@@ -99,7 +99,7 @@
  LinkID=29
  LinkToID=0
  LinkMode=32
- LinkTest=-27716
+ LinkTest=-26530
  LayerID=0
  GroupID=0
  Identifier=
@@ -132,7 +132,7 @@
  BkColor3=LL.Color.White
  BkColor2=LL.Color.White
  BkColor.Alpha=50
- CurrentTable=0
+ CurrentTable=1
  ColumnCount=1
  ColumnCount.Distance=1000
  [@Tables]
@@ -50221,7 +50221,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningDistributorsReportWrapper.ProductName
-		 Width=30000
+		 Width=45000
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -50608,7 +50608,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningDistributorsReportWrapper.Distributor
-		 Width=140000
+		 Width=155000
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -50922,7 +50922,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Produkt"
-		 Width=30000
+		 Width=45000
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -51154,7 +51154,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Summe"
-		 Width=110000
+		 Width=125000
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -51449,7 +51449,7 @@
  LinkID=91
  LinkToID=0
  LinkMode=32
- LinkTest=-12597
+ LinkTest=-11066
  LayerID=0
  GroupID=0
  Identifier=
@@ -51486,7 +51486,7 @@
  LinkID=45
  LinkToID=0
  LinkMode=32
- LinkTest=-27444
+ LinkTest=-12561
  LayerID=0
  GroupID=0
  Identifier=
@@ -51521,7 +51521,7 @@
  LinkID=31
  LinkToID=0
  LinkMode=32
- LinkTest=-26418
+ LinkTest=-21963
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51626,7 +51626,7 @@
  LinkID=35
  LinkToID=0
  LinkMode=32
- LinkTest=-21338
+ LinkTest=-18715
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51699,7 +51699,7 @@
  LinkID=52
  LinkToID=0
  LinkMode=32
- LinkTest=-31045
+ LinkTest=-24215
  LayerID=0
  GroupID=0
  Identifier=
@@ -51735,7 +51735,7 @@
  LinkID=10
  LinkToID=0
  LinkMode=32
- LinkTest=-16017
+ LinkTest=-28043
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51808,7 +51808,7 @@
  LinkID=13
  LinkToID=0
  LinkMode=32
- LinkTest=-4003
+ LinkTest=-9038
  LayerID=0
  GroupID=0
  Identifier=
