@@ -27,7 +27,7 @@ namespace Europlan.Common {
 			this.label1 = new System.Windows.Forms.Label();
 			this.button1 = new System.Windows.Forms.Button();
 			this.lblRemainingLabel = new System.Windows.Forms.Label();
-			this.lblRemaining = new System.Windows.Forms.Label();
+			this.lblPlanned = new System.Windows.Forms.Label();
 			this.distributorGrid = new Europlan.Common.QuickDimensioningDistributorsGrid();
 			this.SuspendLayout();
 			// 
@@ -66,18 +66,18 @@ namespace Europlan.Common {
 			this.lblRemainingLabel.Name = "lblRemainingLabel";
 			this.lblRemainingLabel.Size = new System.Drawing.Size(118, 23);
 			this.lblRemainingLabel.TabIndex = 9;
-			this.lblRemainingLabel.Text = "Verfügbare Anschlüße:";
+			this.lblRemainingLabel.Text = "Verplante Anschlüße:";
 			this.lblRemainingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// lblRemaining
+			// lblPlanned
 			// 
-			this.lblRemaining.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			this.lblPlanned.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.lblRemaining.Location = new System.Drawing.Point(127, 26);
-			this.lblRemaining.Name = "lblRemaining";
-			this.lblRemaining.Size = new System.Drawing.Size(571, 23);
-			this.lblRemaining.TabIndex = 10;
-			this.lblRemaining.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.lblPlanned.Location = new System.Drawing.Point(127, 26);
+			this.lblPlanned.Name = "lblPlanned";
+			this.lblPlanned.Size = new System.Drawing.Size(571, 23);
+			this.lblPlanned.TabIndex = 10;
+			this.lblPlanned.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// distributorGrid
 			// 
@@ -100,7 +100,7 @@ namespace Europlan.Common {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.lblRemaining);
+			this.Controls.Add(this.lblPlanned);
 			this.Controls.Add(this.lblRemainingLabel);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.label1);
@@ -119,6 +119,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Label lblRemainingLabel;
-		private System.Windows.Forms.Label lblRemaining;
+		private System.Windows.Forms.Label lblPlanned;
 	}
 }
