@@ -86,8 +86,14 @@ namespace Europlan.Application {
 			}
 			startingForm.Close();
 			startingForm.Dispose();
-			System.Windows.Forms.Application.Run(mainForm);
-			mainForm.Dispose();
+			try {
+				System.Windows.Forms.Application.Run(mainForm);
+				mainForm.Dispose();
+			} catch (Exception ex) {
+#if DEBUG
+				MessageBox.Show("Catched unhandled exception: " + ex.StackTrace);
+#endif
+			}			
 		}
 
 		static bool IsApplicationAlreadyRunning() {

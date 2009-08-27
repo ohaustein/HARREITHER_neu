@@ -269,7 +269,12 @@ namespace Europlan.Application {
 		}
 
 		private void updateToolStripMenuItem_Click(object sender, EventArgs e) {
-			this.updateController.UpdateInteractive();
+			try {
+				this.updateController.UpdateInteractive();
+			} catch (Exception ex) {
+				// TODO
+				MessageBox.Show("Es wird bereits auf eine Aktualisierung geprüft...");
+			}
 		}
 
 		private void updateController_CheckForUpdateCompleted(object sender, Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs e) {

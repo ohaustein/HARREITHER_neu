@@ -963,7 +963,11 @@ namespace Europlan.Common {
 					controllersSummary += kvp.Value.ToString() + " * " + localized;
 				}
 				listLabel1.Variables.Add("@RoomControllers", controllersSummary);
-			
+#if DEBUG
+				if (MessageBox.Show("Designer?", "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					listLabel1.Design();
+				}
+#endif
 				Cursor.Current = current;
 			} else if (e.TabPage == this.pageDistributors) {
 				this.quickDimensioningDistributorsSummary.UpdateControl();
@@ -1015,10 +1019,6 @@ namespace Europlan.Common {
 
 		private void quickDimensioningDistributorsSummary_ProjectChanged(object sender) {
 			this.OnProjectChanged();
-		}
-
-		private void button1_Click_1(object sender, EventArgs e) {
-			listLabel1.Design();
 		}
 
 	}
