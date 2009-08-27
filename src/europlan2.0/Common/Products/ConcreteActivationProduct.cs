@@ -33,7 +33,7 @@ namespace Europlan.Common {
 		}
 
 		public override string QuickDimensioningName {
-			get { return "BKA"; }
+			get { return "BKA\n(m²)"; }
 		}
 	}
 	

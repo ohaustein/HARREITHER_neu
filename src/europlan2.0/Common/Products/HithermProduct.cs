@@ -45,7 +45,7 @@ namespace Europlan.Common {
 		}
 
 		public override string QuickDimensioningName {
-			get { return "Hitherm"; }
+			get { return "Hitherm\n(m²)"; }
 		}
 	}
 	
