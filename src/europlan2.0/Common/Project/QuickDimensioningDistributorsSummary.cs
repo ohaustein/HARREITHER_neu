@@ -110,6 +110,11 @@ namespace Europlan.Common {
 			set { this.distributorGrid.HithermCompact = value; }
 		}
 
+		public bool HithermCompactRoof {
+			get { return this.distributorGrid.HithermCompactRoof; }
+			set { this.distributorGrid.HithermCompactRoof = value; }
+		}
+		
 		public bool ModulKlimaBoden {
 			get { return this.distributorGrid.ModulKlimaBoden; }
 			set { this.distributorGrid.ModulKlimaBoden = value; }

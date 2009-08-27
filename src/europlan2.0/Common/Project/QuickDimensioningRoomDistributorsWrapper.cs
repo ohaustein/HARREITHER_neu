@@ -173,6 +173,15 @@ namespace Europlan.Common {
 			set { this.SetPlannedCircuits<HithermCompactProduct>(value); }
 		}
 
+		// Hitherm Compact Dachschräge
+		public OpenCircuits HithermCompactRoofOpenCircuits {
+			get { return this.GetOpenCircuits<HithermCompactRoofProduct>(); }
+		}
+		public Nullable<int> HithermCompactRoofPlannedCircuits {
+			get { return this.GetPlannedCircuits<HithermCompactRoofProduct>(); }
+			set { this.SetPlannedCircuits<HithermCompactRoofProduct>(value); }
+		}
+
 		// ModulKlimaBoden
 		public OpenCircuits ModulKlimaBodenOpenCircuits {
 			get { return this.GetOpenCircuits<ModulKlimaBodenProduct>(); }

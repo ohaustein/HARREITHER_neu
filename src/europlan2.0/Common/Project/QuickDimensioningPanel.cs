@@ -39,6 +39,8 @@ namespace Europlan.Common {
 			this.cbHithermCool.Checked = ((Project.Instance.QuickDimensioning.HithermCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbHithermCompactHeat.Checked = ((Project.Instance.QuickDimensioning.HithermCompactCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
 			this.cbHithermCompactCool.Checked = ((Project.Instance.QuickDimensioning.HithermCompactCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
+			this.cbHithermCompactRoofHeat.Checked = ((Project.Instance.QuickDimensioning.HithermCompactRoofCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbHithermCompactRoofCool.Checked = ((Project.Instance.QuickDimensioning.HithermCompactRoofCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbModulKlimaBodenHeat.Checked = ((Project.Instance.QuickDimensioning.ModulBodenCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
 			this.cbModulKlimaBodenCool.Checked = ((Project.Instance.QuickDimensioning.ModulBodenCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbModulKlimaDeckeHeat.Checked = ((Project.Instance.QuickDimensioning.ModulDeckeCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
@@ -114,6 +116,7 @@ namespace Europlan.Common {
 				grid.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 				grid.Hitherm = this.HithermHeating || this.HithermCooling;
 				grid.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
+				grid.HithermCompactRoof = this.HithermCompactRoofHeating || this.HithermCompactRoofCooling;
 				grid.ModulKlimaBoden = this.ModulKlimaBodenHeating || this.ModulKlimaBodenCooling;
 				grid.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 				grid.Cooling = this.Cooling;
@@ -129,6 +132,7 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributorsSummary.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.quickDimensioningDistributorsSummary.Hitherm = this.HithermHeating || this.HithermCooling;
 			this.quickDimensioningDistributorsSummary.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
+			this.quickDimensioningDistributorsSummary.HithermCompactRoof = this.HithermCompactRoofHeating || this.HithermCompactRoofCooling;
 			this.quickDimensioningDistributorsSummary.ModulKlimaBoden = this.ModulKlimaBodenHeating || this.ModulKlimaBodenCooling;
 			this.quickDimensioningDistributorsSummary.ModulKlimaDecke = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 
@@ -150,6 +154,7 @@ namespace Europlan.Common {
 						this.ConcreteActivationHeating ||
 						this.HithermHeating ||
 						this.HithermCompactHeating ||
+						this.HithermCompactRoofHeating ||
 						this.ModulKlimaBodenHeating ||
 						this.ModulKlimaDeckeHeating;
 			}
@@ -161,6 +166,7 @@ namespace Europlan.Common {
 						this.ConcreteActivationCooling ||
 						this.HithermCooling ||
 						this.HithermCompactCooling ||
+						this.HithermCompactRoofCooling ||
 						this.ModulKlimaBodenCooling ||
 						this.ModulKlimaDeckeCooling;
 			}
@@ -206,6 +212,16 @@ namespace Europlan.Common {
 			set { this.cbHithermCompactCool.Checked = value; }
 		}
 
+		public bool HithermCompactRoofHeating {
+			get { return this.cbHithermCompactRoofHeat.Checked; }
+			set { this.cbHithermCompactRoofHeat.Checked = value; }
+		}
+
+		public bool HithermCompactRoofCooling {
+			get { return this.cbHithermCompactRoofCool.Checked; }
+			set { this.cbHithermCompactRoofCool.Checked = value; }
+		}
+
 		public bool ModulKlimaBodenHeating {
 			get { return this.cbModulKlimaBodenHeat.Checked; }
 			set { this.cbModulKlimaBodenHeat.Checked = value; }
@@ -238,7 +254,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?", "Euroval entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -283,7 +299,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?", "Euroval entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -414,7 +430,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?", "Hitherm entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -457,7 +473,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?", "Hitherm entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -500,7 +516,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?", "Hitherm Compact entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -543,7 +559,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?", "Hitherm Compact entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -574,6 +590,93 @@ namespace Europlan.Common {
 			Project.Instance.QuickDimensioning.HithermCompactCheckState = (this.HithermCompactHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
+
+		private void cbHithermCompactRoofHeat_CheckedChanged(object sender, EventArgs e) {
+			DialogResult result = DialogResult.None;
+			if (!this.HithermCompactRoofHeating && !this.HithermCompactRoofCooling) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<HithermCompactRoofProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact Dachschräge wirklich aus der Flächenaufstellung entfernen?", "Hitherm Compact Dachschräge entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
+			}
+			if (result == DialogResult.No) {
+				this.HithermCompactRoofHeating = !this.HithermCompactRoofHeating;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.HithermCompactRoof = this.HithermCompactRoofHeating || this.HithermCompactRoofCooling;
+					grid.Cooling = this.Cooling;
+				}
+				this.quickDimensioningDistributorsSummary.HithermCompactRoof = this.HithermCompactRoofHeating || this.HithermCompactRoofCooling;
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							HithermCompactRoofProduct product = room.GetProductForQuickDimensioning<HithermCompactRoofProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+				this.OnProjectChanged();
+			}
+
+			this.lblTemp1.Visible = this.Heating;
+			this.cmbHeatFlowTemperature.Visible = this.Heating;
+			this.lblTemp2.Visible = this.Heating;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			Project.Instance.QuickDimensioning.HithermCompactRoofCheckState = (this.HithermCompactRoofHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactRoofCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+		}
+
+		private void cbHithermCompactRoofCool_CheckedChanged(object sender, EventArgs e) {
+			DialogResult result = DialogResult.None;
+			if (!this.HithermCompactRoofHeating && !this.HithermCompactRoofCooling) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<HithermCompactRoofProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact Dachschräge wirklich aus der Flächenaufstellung entfernen?", "Hitherm Compact Dachschräge entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
+			}
+			if (result == DialogResult.No) {
+				this.HithermCompactRoofCooling = !this.HithermCompactRoofCooling;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.HithermCompactRoof = this.HithermCompactRoofHeating || this.HithermCompactRoofCooling;
+					grid.Cooling = this.Cooling;
+				}
+				this.quickDimensioningDistributorsSummary.HithermCompactRoof = this.HithermCompactRoofHeating || this.HithermCompactRoofCooling;
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							HithermCompactRoofProduct product = room.GetProductForQuickDimensioning<HithermCompactRoofProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+				this.OnProjectChanged();
+			}
+
+			this.lblTemp3.Visible = this.Cooling;
+			this.lblTemp4.Visible = this.Cooling;
+			this.txtCoolTemperature.Visible = this.Cooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			Project.Instance.QuickDimensioning.HithermCompactRoofCheckState = (this.HithermCompactRoofHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactRoofCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+		}
+
 		private void cbModulKlimaBodenHeat_CheckedChanged(object sender, EventArgs e) {
 			DialogResult result = DialogResult.None;
 			if (!this.ModulKlimaBodenHeating && !this.ModulKlimaBodenCooling) {
@@ -586,7 +689,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?", "Modul Klimaboden entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -629,7 +732,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show("Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?", "Modul Klimaboden entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {

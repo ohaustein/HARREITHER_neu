@@ -52,6 +52,14 @@ namespace Europlan.Common {
 			get;
 		}
 
+		float HithermCompactRoofArea {
+			get;
+		}
+
+		int HithermCompactRoofCircuits {
+			get;
+		}
+
 		float ModulKlimaBodenArea {
 			get;
 		}
