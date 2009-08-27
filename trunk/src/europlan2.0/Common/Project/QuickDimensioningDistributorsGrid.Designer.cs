@@ -37,7 +37,10 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridRooms = new System.Windows.Forms.DataGridView();
+			this.dataSourceRooms = new System.Windows.Forms.BindingSource(this.components);
 			this.colRoomId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRoomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colFloorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,11 +52,12 @@ namespace Europlan.Common {
 			this.colHithermPlannedCircuits = new Europlan.Common.DataGridViewNumericUpDownColumn();
 			this.colHithermCompactOpenCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colHithermCompactPlannedCircuits = new Europlan.Common.DataGridViewNumericUpDownColumn();
+			this.colHithermCompactRoofOpenCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colHithermCompactRoofPlannedCircuits = new Europlan.Common.DataGridViewNumericUpDownColumn();
 			this.colModulKlimaBodenOpenCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colModulKlimaBodenPlannedCircuits = new Europlan.Common.DataGridViewNumericUpDownColumn();
 			this.colModulKlimaDeckeOpenCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colModulKlimaDeckePlannedCircuits = new Europlan.Common.DataGridViewNumericUpDownColumn();
-			this.dataSourceRooms = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridRooms)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataSourceRooms)).BeginInit();
 			this.SuspendLayout();
@@ -82,6 +86,8 @@ namespace Europlan.Common {
             this.colHithermPlannedCircuits,
             this.colHithermCompactOpenCircuits,
             this.colHithermCompactPlannedCircuits,
+            this.colHithermCompactRoofOpenCircuits,
+            this.colHithermCompactRoofPlannedCircuits,
             this.colModulKlimaBodenOpenCircuits,
             this.colModulKlimaBodenPlannedCircuits,
             this.colModulKlimaDeckeOpenCircuits,
@@ -97,6 +103,10 @@ namespace Europlan.Common {
 			this.gridRooms.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gridRooms_CellBeginEdit);
 			this.gridRooms.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.gridRooms_PreviewKeyDown);
 			this.gridRooms.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridRooms_RowsAdded);
+			// 
+			// dataSourceRooms
+			// 
+			this.dataSourceRooms.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
 			// 
 			// colRoomId
 			// 
@@ -216,11 +226,35 @@ namespace Europlan.Common {
 			this.colHithermCompactPlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colHithermCompactPlannedCircuits.Width = 70;
 			// 
+			// colHithermCompactRoofOpenCircuits
+			// 
+			this.colHithermCompactRoofOpenCircuits.DataPropertyName = "HithermCompactRoofOpenCircuits";
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.colHithermCompactRoofOpenCircuits.DefaultCellStyle = dataGridViewCellStyle10;
+			this.colHithermCompactRoofOpenCircuits.FillWeight = 70F;
+			this.colHithermCompactRoofOpenCircuits.HeaderText = "Hitherm Co\nDach offene\nHeizkreise";
+			this.colHithermCompactRoofOpenCircuits.Name = "colHithermCompactRoofOpenCircuits";
+			this.colHithermCompactRoofOpenCircuits.ReadOnly = true;
+			this.colHithermCompactRoofOpenCircuits.Width = 70;
+			// 
+			// colHithermCompactRoofPlannedCircuits
+			// 
+			this.colHithermCompactRoofPlannedCircuits.DataPropertyName = "HithermCompactRoofPlannedCircuits";
+			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.colHithermCompactRoofPlannedCircuits.DefaultCellStyle = dataGridViewCellStyle11;
+			this.colHithermCompactRoofPlannedCircuits.FillWeight = 70F;
+			this.colHithermCompactRoofPlannedCircuits.HeaderText = "Hitherm Co\nDach angeschl.\nHeizkreise";
+			this.colHithermCompactRoofPlannedCircuits.Name = "colHithermCompactRoofPlannedCircuits";
+			this.colHithermCompactRoofPlannedCircuits.ReadOnly = true;
+			this.colHithermCompactRoofPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colHithermCompactRoofPlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.colHithermCompactRoofPlannedCircuits.Width = 70;
+			// 
 			// colModulKlimaBodenOpenCircuits
 			// 
 			this.colModulKlimaBodenOpenCircuits.DataPropertyName = "ModulKlimaBodenOpenCircuits";
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.colModulKlimaBodenOpenCircuits.DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.colModulKlimaBodenOpenCircuits.DefaultCellStyle = dataGridViewCellStyle12;
 			this.colModulKlimaBodenOpenCircuits.FillWeight = 70F;
 			this.colModulKlimaBodenOpenCircuits.HeaderText = "Klimaboden\noffene\nHeizkreise";
 			this.colModulKlimaBodenOpenCircuits.Name = "colModulKlimaBodenOpenCircuits";
@@ -230,8 +264,8 @@ namespace Europlan.Common {
 			// colModulKlimaBodenPlannedCircuits
 			// 
 			this.colModulKlimaBodenPlannedCircuits.DataPropertyName = "ModulKlimaBodenPlannedCircuits";
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.colModulKlimaBodenPlannedCircuits.DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.colModulKlimaBodenPlannedCircuits.DefaultCellStyle = dataGridViewCellStyle13;
 			this.colModulKlimaBodenPlannedCircuits.FillWeight = 70F;
 			this.colModulKlimaBodenPlannedCircuits.HeaderText = "Klimaboden\nangeschl.\nHeizkreise";
 			this.colModulKlimaBodenPlannedCircuits.Name = "colModulKlimaBodenPlannedCircuits";
@@ -243,8 +277,8 @@ namespace Europlan.Common {
 			// colModulKlimaDeckeOpenCircuits
 			// 
 			this.colModulKlimaDeckeOpenCircuits.DataPropertyName = "ModulKlimaDeckeOpenCircuits";
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.colModulKlimaDeckeOpenCircuits.DefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.colModulKlimaDeckeOpenCircuits.DefaultCellStyle = dataGridViewCellStyle14;
 			this.colModulKlimaDeckeOpenCircuits.FillWeight = 70F;
 			this.colModulKlimaDeckeOpenCircuits.HeaderText = "Klimadecke\noffene\nHeizkreise";
 			this.colModulKlimaDeckeOpenCircuits.Name = "colModulKlimaDeckeOpenCircuits";
@@ -254,8 +288,8 @@ namespace Europlan.Common {
 			// colModulKlimaDeckePlannedCircuits
 			// 
 			this.colModulKlimaDeckePlannedCircuits.DataPropertyName = "ModulKlimaDeckePlannedCircuits";
-			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.colModulKlimaDeckePlannedCircuits.DefaultCellStyle = dataGridViewCellStyle13;
+			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.colModulKlimaDeckePlannedCircuits.DefaultCellStyle = dataGridViewCellStyle15;
 			this.colModulKlimaDeckePlannedCircuits.FillWeight = 70F;
 			this.colModulKlimaDeckePlannedCircuits.HeaderText = "Klimadecke\nangeschl.\nHeizkreise";
 			this.colModulKlimaDeckePlannedCircuits.Name = "colModulKlimaDeckePlannedCircuits";
@@ -263,10 +297,6 @@ namespace Europlan.Common {
 			this.colModulKlimaDeckePlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colModulKlimaDeckePlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colModulKlimaDeckePlannedCircuits.Width = 70;
-			// 
-			// dataSourceRooms
-			// 
-			this.dataSourceRooms.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
 			// 
 			// QuickDimensioningDistributorsGrid
 			// 
@@ -296,6 +326,8 @@ namespace Europlan.Common {
 		private DataGridViewNumericUpDownColumn colHithermPlannedCircuits;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colHithermCompactOpenCircuits;
 		private DataGridViewNumericUpDownColumn colHithermCompactPlannedCircuits;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colHithermCompactRoofOpenCircuits;
+		private DataGridViewNumericUpDownColumn colHithermCompactRoofPlannedCircuits;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colModulKlimaBodenOpenCircuits;
 		private DataGridViewNumericUpDownColumn colModulKlimaBodenPlannedCircuits;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colModulKlimaDeckeOpenCircuits;

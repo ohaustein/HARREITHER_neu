@@ -116,6 +116,7 @@
     <Compile Include="Licensing\LicensedSystem.cs" />
     <Compile Include="Licensing\LicenseManager.cs" />
     <Compile Include="MapiMailMessage.cs" />
+    <Compile Include="Products\HithermCompactRoofProduct.cs" />
     <Compile Include="Project\FacilityDetailsSummaryPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

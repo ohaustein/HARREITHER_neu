@@ -123,6 +123,11 @@ namespace Europlan.Common {
 			set { this.SetProductAvailable<HithermCompactProduct>(value); }
 		}
 
+		public bool HithermCompactRoof {
+			get { return this.colHithermCompactRoof.Visible; }
+			set { this.SetProductAvailable<HithermCompactRoofProduct>(value); }
+		}
+
 		public bool ModulKlimaBoden {
 			get { return this.colModulKlimaBoden.Visible; }
 			set { this.SetProductAvailable<ModulKlimaBodenProduct>(value); }
@@ -227,6 +232,12 @@ namespace Europlan.Common {
 					} else if (e.ColumnIndex == this.colHithermCompactCircuits.Index) {
 						// Hitherm Compact circuits
 						this.ValidateProductCircuits<HithermCompactProduct>(row);
+					} else if (e.ColumnIndex == this.colHithermCompactRoof.Index) {
+						// Hitherm Compact Roof
+						this.ValidateProductArea<HithermCompactRoofProduct>(row);
+					} else if (e.ColumnIndex == this.colHithermCompactRoofCircuits.Index) {
+						// Hitherm Compact Roof circuits
+						this.ValidateProductCircuits<HithermCompactRoofProduct>(row);
 					} else if (e.ColumnIndex == this.colModulKlimaBoden.Index) {
 						// Modul Klimaboden
 						this.ValidateProductArea<ModulKlimaBodenProduct>(row);
@@ -352,6 +363,9 @@ namespace Europlan.Common {
 
 					// Hitherm Comact
 					this.ShowProduct<HithermCompactProduct>(row);
+					
+					// Hitherm Comact
+					this.ShowProduct<HithermCompactRoofProduct>(row);
 
 					// Module Klimaboden
 					this.ShowProduct<ModulKlimaBodenProduct>(row);
@@ -404,6 +418,9 @@ namespace Europlan.Common {
 				} else if ((e.ColumnIndex == this.colHithermCompact.Index || e.ColumnIndex == this.colHithermCompactCircuits.Index) && room.GetProductForQuickDimensioning<HithermCompactProduct>() == null) {
 					// Hitherm Compact
 					this.AddProduct<HithermCompactProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
+				} else if ((e.ColumnIndex == this.colHithermCompactRoof.Index || e.ColumnIndex == this.colHithermCompactRoofCircuits.Index) && room.GetProductForQuickDimensioning<HithermCompactRoofProduct>() == null) {
+					// Hitherm Compact Roof
+					this.AddProduct<HithermCompactRoofProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
 				} else if ((e.ColumnIndex == this.colModulKlimaBoden.Index || e.ColumnIndex == this.colModulKlimaBodenCircuits.Index) && room.GetProductForQuickDimensioning<ModulKlimaBodenProduct>() == null) {
 					// Modul Klimadecke
 					this.AddProduct<ModulKlimaBodenProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
@@ -443,6 +460,7 @@ namespace Europlan.Common {
 				this.productAreaColumns.Add(typeof(ConcreteActivationProduct), this.colConcreteActivation);
 				this.productAreaColumns.Add(typeof(HithermProduct), this.colHitherm);
 				this.productAreaColumns.Add(typeof(HithermCompactProduct), this.colHithermCompact);
+				this.productAreaColumns.Add(typeof(HithermCompactRoofProduct), this.colHithermCompactRoof);
 				this.productAreaColumns.Add(typeof(ModulKlimaBodenProduct), this.colModulKlimaBoden);
 				this.productAreaColumns.Add(typeof(ModulKlimaDeckeProduct), this.colModulKlimaDecke);
 			}
@@ -463,6 +481,7 @@ namespace Europlan.Common {
 				this.productCircuitsColumns.Add(typeof(ConcreteActivationProduct), this.colConcreteActivationCircuits);
 				this.productCircuitsColumns.Add(typeof(HithermProduct), this.colHithermCircuits);
 				this.productCircuitsColumns.Add(typeof(HithermCompactProduct), this.colHithermCompactCircuits);
+				this.productCircuitsColumns.Add(typeof(HithermCompactRoofProduct), this.colHithermCompactRoofCircuits);
 				this.productCircuitsColumns.Add(typeof(ModulKlimaBodenProduct), this.colModulKlimaBodenCircuits);
 				this.productCircuitsColumns.Add(typeof(ModulKlimaDeckeProduct), this.colModulKlimaDeckeCircuits);
 			}
@@ -540,6 +559,7 @@ namespace Europlan.Common {
 						col == this.colConcreteActivation || col == this.colConcreteActivationCircuits ||
 						col == this.colHitherm || col == this.colHithermCircuits ||
 						col == this.colHithermCompact || col == this.colHithermCompactCircuits ||
+						col == this.colHithermCompactRoof || col == this.colHithermCompactRoofCircuits ||
 						col == this.colModulKlimaBoden || col == this.colModulKlimaBodenCircuits ||
 						col == this.colModulKlimaDecke || col == this.colModulKlimaDeckeCircuits) {
 					e.IsInputKey = false;
@@ -554,6 +574,8 @@ namespace Europlan.Common {
 						this.ValidateProductArea<HithermProduct>(row);
 					} else if (col == this.colHithermCompact) {
 						this.ValidateProductArea<HithermCompactProduct>(row);
+					} else if (col == this.colHithermCompactRoof) {
+						this.ValidateProductArea<HithermCompactRoofProduct>(row);
 					} else if (col == this.colModulKlimaBoden) {
 						this.ValidateProductArea<ModulKlimaBodenProduct>(row);
 					} else if (col == this.colModulKlimaDecke) {
@@ -595,6 +617,8 @@ namespace Europlan.Common {
 					row.Cells[this.colHithermCircuits.Index].Value = null;
 					row.Cells[this.colHithermCompact.Index].Value = null;
 					row.Cells[this.colHithermCompactCircuits.Index].Value = null;
+					row.Cells[this.colHithermCompactRoof.Index].Value = null;
+					row.Cells[this.colHithermCompactRoofCircuits.Index].Value = null;
 					row.Cells[this.colModulKlimaBoden.Index].Value = null;
 					row.Cells[this.colModulKlimaBodenCircuits.Index].Value = null;
 					row.Cells[this.colModulKlimaDecke.Index].Value = null;
@@ -604,6 +628,7 @@ namespace Europlan.Common {
 					row.Cells[this.colConcreteActivation.Index].ErrorText = null;
 					row.Cells[this.colHitherm.Index].ErrorText = null;
 					row.Cells[this.colHithermCompact.Index].ErrorText = null;
+					row.Cells[this.colHithermCompactRoof.Index].ErrorText = null;
 					row.Cells[this.colModulKlimaBoden.Index].ErrorText = null;
 					row.Cells[this.colModulKlimaDecke.Index].ErrorText = null;
 

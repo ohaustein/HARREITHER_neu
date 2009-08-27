@@ -18,6 +18,7 @@ namespace Europlan.Common {
 		private ProductCheckState concreteActivationCheckState = ProductCheckState.None;
 		private ProductCheckState hithermCheckState = ProductCheckState.None;
 		private ProductCheckState hithermCompactCheckState = ProductCheckState.None;
+		private ProductCheckState hithermCompactRoofCheckState = ProductCheckState.None;
 		private ProductCheckState modulBodenCheckState = ProductCheckState.None;
 		private ProductCheckState modulDeckeCheckState = ProductCheckState.None;
 		private float heatFlowTemperature = 35;
@@ -63,6 +64,11 @@ namespace Europlan.Common {
 		public ProductCheckState HithermCompactCheckState {
 			get { return hithermCompactCheckState; }
 			set { hithermCompactCheckState = value; }
+		}
+
+		public ProductCheckState HithermCompactRoofCheckState {
+			get { return hithermCompactRoofCheckState; }
+			set { hithermCompactRoofCheckState = value; }
 		}
 
 		public ProductCheckState ModulBodenCheckState {
@@ -145,6 +151,9 @@ namespace Europlan.Common {
 			}
 			if (hithermCompactCheckState != ProductCheckState.None) {
 				productOrder.Add(Project.Instance.Config.HithermCompactProduct.QuickDimensioningName);
+			}
+			if (hithermCompactRoofCheckState != ProductCheckState.None) {
+				productOrder.Add(Project.Instance.Config.HithermCompactRoofProduct.QuickDimensioningName);
 			}
 			if (modulBodenCheckState != ProductCheckState.None) {
 				productOrder.Add(Project.Instance.Config.ModulKlimaBodenProduct.QuickDimensioningName);

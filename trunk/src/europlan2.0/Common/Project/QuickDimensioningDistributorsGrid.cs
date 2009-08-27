@@ -75,6 +75,11 @@ namespace Europlan.Common {
 			set { this.SetProductVisible<HithermCompactProduct>(value); }
 		}
 
+		public bool HithermCompactRoof {
+			get { return this.IsProductVisible<HithermCompactRoofProduct>(); }
+			set { this.SetProductVisible<HithermCompactRoofProduct>(value); }
+		}
+
 		public bool ModulKlimaBoden {
 			get { return this.IsProductVisible<ModulKlimaBodenProduct>(); }
 			set { this.SetProductVisible<ModulKlimaBodenProduct>(value); }
@@ -108,6 +113,7 @@ namespace Europlan.Common {
 				this.EnableProductInRoom<ConcreteActivationProduct>(row);
 				this.EnableProductInRoom<HithermProduct>(row);
 				this.EnableProductInRoom<HithermCompactProduct>(row);
+				this.EnableProductInRoom<HithermCompactRoofProduct>(row);
 				this.EnableProductInRoom<ModulKlimaBodenProduct>(row);
 				this.EnableProductInRoom<ModulKlimaDeckeProduct>(row);
 			}
@@ -121,6 +127,7 @@ namespace Europlan.Common {
 				this.productOpenColumns.Add(typeof(ConcreteActivationProduct), this.colConcreteActivationOpenCircuits);
 				this.productOpenColumns.Add(typeof(HithermProduct), this.colHithermOpenCircuits);
 				this.productOpenColumns.Add(typeof(HithermCompactProduct), this.colHithermCompactOpenCircuits);
+				this.productOpenColumns.Add(typeof(HithermCompactRoofProduct), this.colHithermCompactRoofOpenCircuits);
 				this.productOpenColumns.Add(typeof(ModulKlimaBodenProduct), this.colModulKlimaBodenOpenCircuits);
 				this.productOpenColumns.Add(typeof(ModulKlimaDeckeProduct), this.colModulKlimaDeckeOpenCircuits);
 			}
@@ -141,6 +148,7 @@ namespace Europlan.Common {
 				this.productPlannedColumns.Add(typeof(ConcreteActivationProduct), this.colConcreteActivationPlannedCircuits);
 				this.productPlannedColumns.Add(typeof(HithermProduct), this.colHithermPlannedCircuits);
 				this.productPlannedColumns.Add(typeof(HithermCompactProduct), this.colHithermCompactPlannedCircuits);
+				this.productPlannedColumns.Add(typeof(HithermCompactRoofProduct), this.colHithermCompactRoofPlannedCircuits);
 				this.productPlannedColumns.Add(typeof(ModulKlimaBodenProduct), this.colModulKlimaBodenPlannedCircuits);
 				this.productPlannedColumns.Add(typeof(ModulKlimaDeckeProduct), this.colModulKlimaDeckePlannedCircuits);
 			}

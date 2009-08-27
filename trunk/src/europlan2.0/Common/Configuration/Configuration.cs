@@ -34,6 +34,7 @@ namespace Europlan.Common {
 		private ConcreteActivationProduct concreteActivationProduct = new ConcreteActivationProduct();
 		private HithermProduct hithermProduct = new HithermProduct();
 		private HithermCompactProduct hithermCompactProduct = new HithermCompactProduct();
+		private HithermCompactRoofProduct hithermCompactRoofProduct = new HithermCompactRoofProduct();
 		private ModulKlimaBodenProduct modulKlimaBodenProduct = new ModulKlimaBodenProduct();
 		private ModulKlimaDeckeProduct modulKlimaDeckeProduct = new ModulKlimaDeckeProduct();
 
@@ -493,6 +494,11 @@ namespace Europlan.Common {
 			set { hithermCompactProduct = value; }
 		}
 
+		public HithermCompactRoofProduct HithermCompactRoofProduct {
+			get { return hithermCompactRoofProduct; }
+			set { hithermCompactRoofProduct = value; }
+		}
+
 		public ModulKlimaBodenProduct ModulKlimaBodenProduct {
 			get { return modulKlimaBodenProduct; }
 			set { modulKlimaBodenProduct = value; }
@@ -512,6 +518,8 @@ namespace Europlan.Common {
 				return this.HithermProduct as P;
 			} else if (typeof(P) == typeof(HithermCompactProduct)) {
 				return this.HithermCompactProduct as P;
+			} else if (typeof(P) == typeof(HithermCompactRoofProduct)) {
+				return this.HithermCompactRoofProduct as P;
 			} else if (typeof(P) == typeof(ModulKlimaBodenProduct)) {
 				return this.ModulKlimaBodenProduct as P;
 			} else if (typeof(P) == typeof(ModulKlimaDeckeProduct)) {

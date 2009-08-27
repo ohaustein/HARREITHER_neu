@@ -100,6 +100,14 @@ namespace Europlan.Common {
 			get { return this.GetProductCircuits<HithermCompactProduct>(); }
 		}
 
+		public float HithermCompactRoofArea {
+			get { return this.GetProductArea<HithermCompactRoofProduct>(); }
+		}
+
+		public int HithermCompactRoofCircuits {
+			get { return this.GetProductCircuits<HithermCompactRoofProduct>(); }
+		}
+
 		public float ModulKlimaBodenArea {
 			get { return this.GetProductArea<ModulKlimaBodenProduct>(); }
 		}

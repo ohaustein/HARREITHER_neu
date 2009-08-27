@@ -9,8 +9,8 @@ namespace Europlan.Common {
 		private Room room;
 		private Floor floor;
 
-		private float[] productArea = new float[6];
-		private int[] productCircuits = new int[6];		
+		private float[] productArea = new float[7];
+		private int[] productCircuits = new int[7];		
 
 		public QuickDimensioningReportWrapper(Room room, Floor floor, List<string> productOrder) {
 			this.room = room;
@@ -123,6 +123,16 @@ namespace Europlan.Common {
 		public int Product6Circuits {
 			get { return productCircuits[5]; }
 			set { productCircuits[5] = value; }
+		}
+
+		public float Product7Area {
+			get { return productArea[6]; }
+			set { productArea[6] = value; }
+		}
+
+		public int Product7Circuits {
+			get { return productCircuits[6]; }
+			set { productCircuits[6] = value; }
 		}
 		
 	}
