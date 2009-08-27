@@ -20,9 +20,9 @@
  CreatedByApp=<unknown>
  CreatedByDLL=<unknown>
  CreatedByUser=<unknown>
- LastModified=7/14/2009, 3:15:51 PM
+ LastModified=8/27/2009, 10:56:21 AM
  LastModifiedByApp=EUROPLAN.VSHOST.EXE [8.0.50727.42]
- LastModifiedByDLL=CMLL14.DLL [14.8.2009.12916 (09-05-05 16:53)]
+ LastModifiedByDLL=CMLL14.DLL [14.9.2009.19413 (09-07-08 13:35)]
  LastModifiedByUser=neudorfer on CAPRICA
  CreatedByCallFrom=
  [@DatabaseStructure]
@@ -60,7 +60,7 @@
  DefaultSize.Objecttype5=(0,0,72310,18850)
  DefaultSize.Objecttype6=(0,0,281370,159640)
  DefaultSize.Objecttype7=(0,0,46590,16150)
- DefaultSize.Objecttype10=(0,0,76520,32420)
+ DefaultSize.Objecttype10=(0,0,278840,10530)
  DefaultSize.Objecttype11=(0,0,63920,23610)
  DefaultSize.Objecttype12=(0,0,76020,48260)
  ObjectCount=8
@@ -99,7 +99,7 @@
  LinkID=29
  LinkToID=0
  LinkMode=32
- LinkTest=-9190
+ LinkTest=-13373
  LayerID=0
  GroupID=0
  Identifier=
@@ -107,7 +107,7 @@
  UserLocked=False
  WrapBefore=False
  Position/Left=7850
- Position/Top=42930
+ Position/Top=42830
  Position/Width=281370
  Position/Height=159640
  Direction=0
@@ -22453,110 +22453,8 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text="Summe"
-		 Width=60000
-		 Height=10000
-		 FixedHeight=0
-		 bIsotropic=True
-		 PlainTextFormat=True
-		 Align=0
-		 AlignDecPosition=-10000
-		 VAlign=0
-		 Adjusted=False
-		 LineWrap=1
-		 ForceWrap=False
-		 FlowControl=False
-		 Spacing.Line=0
-		 bFill=0
-		 Raster=1
-		 BkColor=LL.Color.LightGray
-		 BkColor3=LL.Color.White
-		 BkColor2=LL.Color.White
-		 BkColor.Alpha=50
-		 FgColor=LL.Color.Black
-		 SpaceOptimization=True
-		 Link.URL=
-		 WithText=False
-		 [Frame]
-		  {
-		  Default=True
-		  Layout=1
-		  [Left]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Top]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Right]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Bottom]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  }
-		 [Font]
-		  {
-		  Default=False
-		  FaceName="Arial"
-		  GdiCharSet=0
-		  Size=8
-		  Width=0
-		  Bold=True
-		  Italic=False
-		  Underline=False
-		  Strikeout=False
-		  Color=LL.Color.Black
-		  PitchAndFamily=34
-		  OutPrecision=3
-		  }
-		 Direction=0
-		 BarWidth=0
-		 [BarWidth]
-		  {
-		  Align=0
-		  }
-		 BarRatio=0
-		 ExportAsPicture=False
-		 Condition=True
-		 }
-		[Column]
-		 {
-		 Identifier=
-		 OutputFormatter=
-		 Text=""
-		 Width=25000
+		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
+		 Width=85000
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -24573,110 +24471,8 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text="Summe"
-		 Width=55000
-		 Height=10000
-		 FixedHeight=0
-		 bIsotropic=True
-		 PlainTextFormat=True
-		 Align=0
-		 AlignDecPosition=-10000
-		 VAlign=0
-		 Adjusted=False
-		 LineWrap=1
-		 ForceWrap=False
-		 FlowControl=False
-		 Spacing.Line=0
-		 bFill=0
-		 Raster=1
-		 BkColor=LL.Color.LightGray
-		 BkColor3=LL.Color.White
-		 BkColor2=LL.Color.White
-		 BkColor.Alpha=50
-		 FgColor=LL.Color.Black
-		 SpaceOptimization=True
-		 Link.URL=
-		 WithText=False
-		 [Frame]
-		  {
-		  Default=True
-		  Layout=1
-		  [Left]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Top]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Right]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Bottom]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  }
-		 [Font]
-		  {
-		  Default=False
-		  FaceName="Arial"
-		  GdiCharSet=0
-		  Size=8
-		  Width=0
-		  Bold=True
-		  Italic=False
-		  Underline=False
-		  Strikeout=False
-		  Color=LL.Color.Black
-		  PitchAndFamily=34
-		  OutPrecision=3
-		  }
-		 Direction=0
-		 BarWidth=0
-		 [BarWidth]
-		  {
-		  Align=0
-		  }
-		 BarRatio=0
-		 ExportAsPicture=False
-		 Condition=True
-		 }
-		[Column]
-		 {
-		 Identifier=
-		 OutputFormatter=
-		 Text=""
-		 Width=25000
+		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
+		 Width=80000
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -27101,110 +26897,8 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text="Summe"
-		 Width=44000
-		 Height=10000
-		 FixedHeight=0
-		 bIsotropic=True
-		 PlainTextFormat=True
-		 Align=0
-		 AlignDecPosition=-10000
-		 VAlign=0
-		 Adjusted=False
-		 LineWrap=1
-		 ForceWrap=False
-		 FlowControl=False
-		 Spacing.Line=0
-		 bFill=0
-		 Raster=1
-		 BkColor=LL.Color.LightGray
-		 BkColor3=LL.Color.White
-		 BkColor2=LL.Color.White
-		 BkColor.Alpha=50
-		 FgColor=LL.Color.Black
-		 SpaceOptimization=True
-		 Link.URL=
-		 WithText=False
-		 [Frame]
-		  {
-		  Default=True
-		  Layout=1
-		  [Left]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Top]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Right]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Bottom]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  }
-		 [Font]
-		  {
-		  Default=False
-		  FaceName="Arial"
-		  GdiCharSet=0
-		  Size=8
-		  Width=0
-		  Bold=True
-		  Italic=False
-		  Underline=False
-		  Strikeout=False
-		  Color=LL.Color.Black
-		  PitchAndFamily=34
-		  OutPrecision=3
-		  }
-		 Direction=0
-		 BarWidth=0
-		 [BarWidth]
-		  {
-		  Align=0
-		  }
-		 BarRatio=0
-		 ExportAsPicture=False
-		 Condition=True
-		 }
-		[Column]
-		 {
-		 Identifier=
-		 OutputFormatter=
-		 Text=""
-		 Width=25000
+		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
+		 Width=69000
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -30037,110 +29731,8 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text="Summe"
-		 Width=44000
-		 Height=10000
-		 FixedHeight=0
-		 bIsotropic=True
-		 PlainTextFormat=True
-		 Align=0
-		 AlignDecPosition=-10000
-		 VAlign=0
-		 Adjusted=False
-		 LineWrap=1
-		 ForceWrap=False
-		 FlowControl=False
-		 Spacing.Line=0
-		 bFill=0
-		 Raster=1
-		 BkColor=LL.Color.LightGray
-		 BkColor3=LL.Color.White
-		 BkColor2=LL.Color.White
-		 BkColor.Alpha=50
-		 FgColor=LL.Color.Black
-		 SpaceOptimization=True
-		 Link.URL=
-		 WithText=False
-		 [Frame]
-		  {
-		  Default=True
-		  Layout=1
-		  [Left]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Top]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Right]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Bottom]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  }
-		 [Font]
-		  {
-		  Default=False
-		  FaceName="Arial"
-		  GdiCharSet=0
-		  Size=8
-		  Width=0
-		  Bold=True
-		  Italic=False
-		  Underline=False
-		  Strikeout=False
-		  Color=LL.Color.Black
-		  PitchAndFamily=34
-		  OutPrecision=3
-		  }
-		 Direction=0
-		 BarWidth=0
-		 [BarWidth]
-		  {
-		  Align=0
-		  }
-		 BarRatio=0
-		 ExportAsPicture=False
-		 Condition=True
-		 }
-		[Column]
-		 {
-		 Identifier=
-		 OutputFormatter=
-		 Text=""
-		 Width=25000
+		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
+		 Width=69000
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -33381,110 +32973,8 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text="Summe"
-		 Width=40000
-		 Height=10000
-		 FixedHeight=0
-		 bIsotropic=True
-		 PlainTextFormat=True
-		 Align=0
-		 AlignDecPosition=-10000
-		 VAlign=0
-		 Adjusted=False
-		 LineWrap=1
-		 ForceWrap=False
-		 FlowControl=False
-		 Spacing.Line=0
-		 bFill=0
-		 Raster=1
-		 BkColor=LL.Color.LightGray
-		 BkColor3=LL.Color.White
-		 BkColor2=LL.Color.White
-		 BkColor.Alpha=50
-		 FgColor=LL.Color.Black
-		 SpaceOptimization=True
-		 Link.URL=
-		 WithText=False
-		 [Frame]
-		  {
-		  Default=True
-		  Layout=1
-		  [Left]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Top]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Right]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Bottom]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  }
-		 [Font]
-		  {
-		  Default=False
-		  FaceName="Arial"
-		  GdiCharSet=0
-		  Size=8
-		  Width=0
-		  Bold=True
-		  Italic=False
-		  Underline=False
-		  Strikeout=False
-		  Color=LL.Color.Black
-		  PitchAndFamily=34
-		  OutPrecision=3
-		  }
-		 Direction=0
-		 BarWidth=0
-		 [BarWidth]
-		  {
-		  Align=0
-		  }
-		 BarRatio=0
-		 ExportAsPicture=False
-		 Condition=True
-		 }
-		[Column]
-		 {
-		 Identifier=
-		 OutputFormatter=
-		 Text=""
-		 Width=20000
+		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
+		 Width=60000
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -37133,110 +36623,8 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text="Summe"
-		 Width=35000
-		 Height=10000
-		 FixedHeight=0
-		 bIsotropic=True
-		 PlainTextFormat=True
-		 Align=0
-		 AlignDecPosition=-10000
-		 VAlign=0
-		 Adjusted=False
-		 LineWrap=1
-		 ForceWrap=False
-		 FlowControl=False
-		 Spacing.Line=0
-		 bFill=0
-		 Raster=1
-		 BkColor=LL.Color.LightGray
-		 BkColor3=LL.Color.White
-		 BkColor2=LL.Color.White
-		 BkColor.Alpha=50
-		 FgColor=LL.Color.Black
-		 SpaceOptimization=True
-		 Link.URL=
-		 WithText=False
-		 [Frame]
-		  {
-		  Default=True
-		  Layout=1
-		  [Left]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Top]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Right]
-		   {
-		   Spacing=1000
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  [Bottom]
-		   {
-		   Spacing=500
-		   Line=True
-		   [Line]
-			{
-			Color=LL.Color.Black
-			LineType=0
-			}
-		   LineWidth=0
-		   }
-		  }
-		 [Font]
-		  {
-		  Default=False
-		  FaceName="Arial"
-		  GdiCharSet=0
-		  Size=8
-		  Width=0
-		  Bold=True
-		  Italic=False
-		  Underline=False
-		  Strikeout=False
-		  Color=LL.Color.Black
-		  PitchAndFamily=34
-		  OutPrecision=3
-		  }
-		 Direction=0
-		 BarWidth=0
-		 [BarWidth]
-		  {
-		  Align=0
-		  }
-		 BarRatio=0
-		 ExportAsPicture=False
-		 Condition=True
-		 }
-		[Column]
-		 {
-		 Identifier=
-		 OutputFormatter=
-		 Text=""
-		 Width=20000
+		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
+		 Width=55000
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42745,7 +42133,7 @@
  LinkID=91
  LinkToID=0
  LinkMode=32
- LinkTest=-23757
+ LinkTest=-15946
  LayerID=0
  GroupID=0
  Identifier=
@@ -42782,7 +42170,7 @@
  LinkID=45
  LinkToID=0
  LinkMode=32
- LinkTest=-3672
+ LinkTest=-9844
  LayerID=0
  GroupID=0
  Identifier=
@@ -42790,10 +42178,10 @@
  UserLocked=False
  WrapBefore=False
  ExportAsPicture=False
- Position/Left=5250
- Position/Top=183550
- Position/Width=286670
- Position/Height=17520
+ Position/Left=9170
+ Position/Top=190540
+ Position/Width=278840
+ Position/Height=10530
  Direction=0
  Frame/Layout=0
  Frame/Left/Spacing=0
@@ -42808,7 +42196,7 @@
  PDFText=
  bAllowPageBreak=False
  bFormatFromVar=FALSE
- Contents={\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fnil\fcharset0 Arial;}}{}{\colortbl ;\red0\green0\blue0;}{}{\*\generator Msftedit 5.41.15.1515;}\viewkind4\uc1\pard\cf1\fs16 Hinweis auf Planungsgenauigkeit....\par{}\par{}Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... Noch zu definieren... \fs24\par{}}{}
+ Contents={\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fnil\fcharset0 Harreither Light;}{\f1\fnil\fcharset0 Arial;}}{}{\colortbl ;\red0\green0\blue0;}{}{\*\generator Msftedit 5.41.21.2509;}\viewkind4\uc1\pard\qj\b\f0\fs16 Hinweis: \par{}\b0 Die Fl\'e4chenaufstellung ist eine \'fcberschl\'e4gige Berechnung zur Absch\'e4tzung der Materialkosten. Vor der Ausf\'fchrung muss in jedem Fall eine exakte Planung durchgef\'fchrt werden.\par{}Dabei k\'f6nnen sich \'c4nderungen gegen\'fcber der Fl\'e4chenaufstellung ergeben.\cf1\f1\fs24\par{}}{}
  bWYSIWYGDialog=TRUE
 [Object]
  ObjectID=1
@@ -42817,7 +42205,7 @@
  LinkID=31
  LinkToID=0
  LinkMode=32
- LinkTest=-14946
+ LinkTest=-31331
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -42922,7 +42310,7 @@
  LinkID=35
  LinkToID=0
  LinkMode=32
- LinkTest=-25463
+ LinkTest=-9966
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -42995,7 +42383,7 @@
  LinkID=52
  LinkToID=0
  LinkMode=32
- LinkTest=-32691
+ LinkTest=-20085
  LayerID=0
  GroupID=0
  Identifier=
@@ -43031,7 +42419,7 @@
  LinkID=10
  LinkToID=0
  LinkMode=32
- LinkTest=-2758
+ LinkTest=-12041
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -43104,7 +42492,7 @@
  LinkID=13
  LinkToID=0
  LinkMode=32
- LinkTest=-5983
+ LinkTest=-14482
  LayerID=0
  GroupID=0
  Identifier=
