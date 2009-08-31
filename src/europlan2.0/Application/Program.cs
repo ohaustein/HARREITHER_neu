@@ -88,7 +88,7 @@ namespace Europlan.Application {
 			startingForm.Dispose();
 			try {
 				System.Windows.Forms.Application.Run(mainForm);
-				mainForm.Dispose();
+				//mainForm.Dispose();
 			} catch (Exception ex) {
 #if DEBUG
 				MessageBox.Show("Catched unhandled exception: " + ex.StackTrace);

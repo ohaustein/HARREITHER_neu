@@ -921,14 +921,14 @@ namespace Europlan.Common {
 
 				if (listLabel1 != null) {
 					listLabel1.PreviewControl = null;
-					listLabel1.Dispose();
+					//listLabel1.Dispose();
 					listLabel1 = null;
 				}
 
 				if (listLabelPreviewControl1 != null) {
 					this.pageSummary.Controls.Remove(this.listLabelPreviewControl1);
 					listLabelPreviewControl1.FileName = null;
-					listLabelPreviewControl1.Dispose();
+					//listLabelPreviewControl1.Dispose();
 					listLabelPreviewControl1 = null;
 				}
 
