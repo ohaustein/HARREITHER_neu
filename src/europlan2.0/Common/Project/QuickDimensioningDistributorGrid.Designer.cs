@@ -64,7 +64,7 @@ namespace Europlan.Common {
 			// 
 			// quickDimensioningDistributorBindingSource
 			// 
-			this.quickDimensioningDistributorBindingSource.DataSource = typeof(Europlan.Common.QuickDimensioningDistributor);
+			this.quickDimensioningDistributorBindingSource.DataSource = typeof(Europlan.Common.Distributor);
 			// 
 			// QuickDimensioningDistributorGrid
 			// 

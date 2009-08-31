@@ -25,7 +25,6 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.cmbDistributors = new System.Windows.Forms.ComboBox();
 			this.label1 = new System.Windows.Forms.Label();
-			this.button1 = new System.Windows.Forms.Button();
 			this.lblRemainingLabel = new System.Windows.Forms.Label();
 			this.lblPlanned = new System.Windows.Forms.Label();
 			this.distributorGrid = new Europlan.Common.QuickDimensioningDistributorsGrid();
@@ -37,7 +36,7 @@ namespace Europlan.Common {
 			this.cmbDistributors.FormattingEnabled = true;
 			this.cmbDistributors.Location = new System.Drawing.Point(82, 2);
 			this.cmbDistributors.Name = "cmbDistributors";
-			this.cmbDistributors.Size = new System.Drawing.Size(173, 21);
+			this.cmbDistributors.Size = new System.Drawing.Size(232, 21);
 			this.cmbDistributors.TabIndex = 6;
 			this.cmbDistributors.SelectedIndexChanged += new System.EventHandler(this.cmbDistributors_SelectedIndexChanged);
 			// 
@@ -49,16 +48,6 @@ namespace Europlan.Common {
 			this.label1.TabIndex = 7;
 			this.label1.Text = "Verteiler:";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(261, 1);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(176, 23);
-			this.button1.TabIndex = 8;
-			this.button1.Text = "Verteiler anlegen/löschen";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.btnNewDistributor_Click);
 			// 
 			// lblRemainingLabel
 			// 
@@ -89,6 +78,7 @@ namespace Europlan.Common {
 			this.distributorGrid.Euroval = true;
 			this.distributorGrid.Hitherm = true;
 			this.distributorGrid.HithermCompact = true;
+			this.distributorGrid.HithermCompactRoof = true;
 			this.distributorGrid.Location = new System.Drawing.Point(3, 52);
 			this.distributorGrid.ModulKlimaBoden = true;
 			this.distributorGrid.ModulKlimaDecke = true;
@@ -102,7 +92,6 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.lblPlanned);
 			this.Controls.Add(this.lblRemainingLabel);
-			this.Controls.Add(this.button1);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.cmbDistributors);
 			this.Controls.Add(this.distributorGrid);
@@ -117,7 +106,6 @@ namespace Europlan.Common {
 		private QuickDimensioningDistributorsGrid distributorGrid;
 		private System.Windows.Forms.ComboBox cmbDistributors;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Label lblRemainingLabel;
 		private System.Windows.Forms.Label lblPlanned;
 	}

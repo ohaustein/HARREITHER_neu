@@ -42,6 +42,7 @@ namespace Europlan.Common {
 
 			this.lblFloorName.Text = floor.Name;
 			this.floorRoomsSource.ResetBindings(false);
+			this.btnRemoveDistributor.Enabled = floor.Distributors.Count > 0;
 
 			if (selectedRoom != null) {
 				foreach (DataGridViewRow row in this.gridRooms.Rows) {
@@ -124,6 +125,50 @@ namespace Europlan.Common {
 				form.Dispose();
 			} else {
 				MessageBox.Show("Ein Verteiler benötigt einen Regelkreis, an den er angeschlossen werden kann. Bitte legen Sie unter 'Regelkreise' zumindest einen Regelkreis an", "Kein Regelkreis vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+		}
+
+		private void btnRemoveDistributor_Click(object sender, EventArgs e) {
+			if (Project.Instance != null) {
+				SelectDistributorForm form = new SelectDistributorForm(floor.Distributors);
+				if (form.ShowDialog() == DialogResult.OK) {
+					Distributor toDelete = form.SelectedDistributor;
+					if (toDelete != null) {
+						bool usedForQuickDimensioning = false;
+						foreach (Floor f in Project.Instance.Floors) {
+							foreach (Room r in f.Rooms) {
+								foreach (Product p in r.UsedProductsForQuickDimensioning) {
+									if (p.QuickDimensioningConnectedDistributors.ContainsKey(toDelete.Id)) {
+										usedForQuickDimensioning = true;
+									}
+								}
+							}
+						}
+						if (usedForQuickDimensioning) {
+							if (MessageBox.Show("Die Zuordnung von Heizkreisen and diesen Verteiler geht in der Flächenaufstellung verloren, wenn der Verteiler gelöscht wird. Trotzdem löschen?", "Verteiler löschen?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+								foreach (Floor f in Project.Instance.Floors) {
+									foreach (Room r in f.Rooms) {
+										foreach (Product p in r.UsedProductsForQuickDimensioning) {
+											if (p.QuickDimensioningConnectedDistributors.ContainsKey(toDelete.Id)) {
+												p.QuickDimensioningConnectedDistributors.Remove(toDelete.Id);
+											}
+										}
+									}
+								}
+								floor.Distributors.Remove(toDelete);
+								if (ProjectStructureChanged != null) {
+									ProjectStructureChanged(this);
+								}
+							}
+						} else {
+							floor.Distributors.Remove(toDelete);
+							if (ProjectStructureChanged != null) {
+								ProjectStructureChanged(this);
+							}
+						}
+					}
+				}
+				form.Dispose();
 			}
 		}
 	}

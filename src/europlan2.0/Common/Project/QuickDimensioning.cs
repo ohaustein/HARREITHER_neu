@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using log4net;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	
@@ -25,7 +26,7 @@ namespace Europlan.Common {
 		private float coolFlowTemperature = 16;
 		private Europlan.Common.EurovalProduct.LayDistance layDistance = Europlan.Common.EurovalProduct.LayDistance.EV20;
 		private float ceilingAllocation = 80;
-		private List<QuickDimensioningDistributor> distributors;
+		//private List<QuickDimensioningDistributor> distributors;
 
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(QuickDimensioning));
@@ -35,7 +36,7 @@ namespace Europlan.Common {
 		}
 
 		private void InitializeQuickDimensioning() {
-			distributors = new List<QuickDimensioningDistributor>();
+			//distributors = new List<QuickDimensioningDistributor>();
 		}
 
 		public Type AssociatedPanelType {
@@ -101,15 +102,23 @@ namespace Europlan.Common {
 			set { ceilingAllocation = value; }
 		}
 
-		public List<QuickDimensioningDistributor> Distributors {
-			get { return distributors; }
-			set { distributors = value; }
+		[XmlIgnore]
+		public List<Distributor> Distributors {
+		    get {
+				List<Distributor> result = new List<Distributor>();
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Distributor distributor in floor.Distributors) {
+						result.Add(distributor);
+					}
+				}
+				return result;
+			}
 		}
 
 		public List<QuickDimensioningDistributorsReportWrapper> GetQuickDimensioningDistributorsReports() {
 			List<QuickDimensioningDistributorsReportWrapper> result = new List<QuickDimensioningDistributorsReportWrapper>();
-			Dictionary<string, QuickDimensioningDistributor> distributorMapping = new Dictionary<string, QuickDimensioningDistributor>();
-			foreach (QuickDimensioningDistributor distributor in Project.Instance.QuickDimensioning.Distributors) {
+			Dictionary<string, Distributor> distributorMapping = new Dictionary<string, Distributor>();
+			foreach (Distributor distributor in Project.Instance.QuickDimensioning.Distributors) {
 				distributorMapping.Add(distributor.Id, distributor);
 			}
 			foreach (Floor floor in Project.Instance.Floors) {

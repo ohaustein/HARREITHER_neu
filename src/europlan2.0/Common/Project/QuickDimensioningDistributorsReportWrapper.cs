@@ -4,16 +4,16 @@ using System.Text;
 
 namespace Europlan.Common {
 	public class QuickDimensioningDistributorsReportWrapper {
-		private QuickDimensioningDistributor distributor;
+		private Distributor distributor;
 		private Product product;
 
-		public QuickDimensioningDistributorsReportWrapper(QuickDimensioningDistributor distributor, Product product) {
+		public QuickDimensioningDistributorsReportWrapper(Distributor distributor, Product product) {
 			this.distributor = distributor;
 			this.product = product;
 		}
 
 		public string Distributor {
-			get { return this.distributor.Name; }
+			get { return this.distributor.ToString(); }
 		}
 
 		public string RoomId {

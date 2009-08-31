@@ -998,9 +998,14 @@ namespace Europlan.Common {
 				foreach (string line in Project.Instance.ProjectName) {
 					projectName += line + "\n";
 				}
+				string comments = "";
+				foreach (string line in Project.Instance.ProjectNotes) {
+					comments += line + "\n";
+				}
 				projectName = projectName.TrimEnd();
 				listLabel1.Variables.Add("@ProjectName", projectName);
 				listLabel1.Variables.Add("@ProjectEditor", Project.Instance.ProjectEditor);
+				listLabel1.Variables.Add("@Comments", comments);
 				listLabel1.Variables.Add("@NrOfProducts", Project.Instance.QuickDimensioning.GetPlannedProducts().Count);
 				listLabel1.Variables.Add("@PartnerContact", Licensing.LicenseManager.Instance.License.Header.Replace("\r", ""));
 				if (this.Heating) {
@@ -1112,6 +1117,7 @@ namespace Europlan.Common {
 				qd.ConcreteActivationCheckState = QuickDimensioning.ProductCheckState.None;
 				qd.HithermCheckState = QuickDimensioning.ProductCheckState.None;
 				qd.HithermCompactCheckState = QuickDimensioning.ProductCheckState.None;
+				qd.HithermCompactRoofCheckState = QuickDimensioning.ProductCheckState.None;
 				qd.ModulBodenCheckState = QuickDimensioning.ProductCheckState.None;
 				qd.ModulDeckeCheckState = QuickDimensioning.ProductCheckState.None;
 				// TODO revert parameters

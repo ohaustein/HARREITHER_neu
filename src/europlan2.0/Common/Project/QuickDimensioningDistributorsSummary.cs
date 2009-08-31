@@ -26,7 +26,7 @@ namespace Europlan.Common {
 		}
 
 		private void UpdateRemainingConnectors() {
-			QuickDimensioningDistributor distributor = cmbDistributors.SelectedItem as QuickDimensioningDistributor;
+			Distributor distributor = cmbDistributors.SelectedItem as Distributor;
 			int count = 0;
 			if (distributor != null) {
 				Project project = Project.Instance;
@@ -59,14 +59,14 @@ namespace Europlan.Common {
 			object oldSelectedItem = cmbDistributors.SelectedItem;
 			cmbDistributors.Items.Clear();
 			if (Project.Instance != null) {
-				List<QuickDimensioningDistributor> distributors = Project.Instance.QuickDimensioning.Distributors;
-				if (distributors.Count == 0) {
-					QuickDimensioningDistributor distributor = new QuickDimensioningDistributor();
-					string localized = resources.GetString("Distributor1", Thread.CurrentThread.CurrentUICulture);
-					distributor.Name = localized;
-					distributors.Add(distributor);
-				}
-				foreach (QuickDimensioningDistributor distributor in distributors) {
+				List<Distributor> distributors = Project.Instance.QuickDimensioning.Distributors;
+				//if (distributors.Count == 0) {
+				//    QuickDimensioningDistributor distributor = new QuickDimensioningDistributor();
+				//    string localized = resources.GetString("Distributor1", Thread.CurrentThread.CurrentUICulture);
+				//    distributor.Name = localized;
+				//    distributors.Add(distributor);
+				//}
+				foreach (Distributor distributor in distributors) {
 					cmbDistributors.Items.Add(distributor);
 				}
 			}
@@ -76,7 +76,7 @@ namespace Europlan.Common {
 			if (cmbDistributors.SelectedItem == null && cmbDistributors.Items.Count > 0) {
 				cmbDistributors.SelectedIndex = 0;
 			}
-			this.distributorGrid.Distributor = cmbDistributors.SelectedItem as QuickDimensioningDistributor;
+			this.distributorGrid.Distributor = cmbDistributors.SelectedItem as Distributor;
 			UpdateRemainingConnectors();
 		}
 
@@ -126,17 +126,17 @@ namespace Europlan.Common {
 		}
 
 		private void cmbDistributors_SelectedIndexChanged(object sender, EventArgs e) {
-			QuickDimensioningDistributor distributor = this.cmbDistributors.SelectedItem as QuickDimensioningDistributor;
+			Distributor distributor = this.cmbDistributors.SelectedItem as Distributor;
 			this.distributorGrid.Distributor = distributor;
 			UpdateRemainingConnectors();
 		}
 
-		private void btnNewDistributor_Click(object sender, EventArgs e) {
-			NewQuickDimensioningDistributorForm form = new NewQuickDimensioningDistributorForm(Project.Instance);
-			form.ShowDialog();
-			this.OnProjectChanged();
-			UpdateControl();
-		}
+		//private void btnNewDistributor_Click(object sender, EventArgs e) {
+		//    NewQuickDimensioningDistributorForm form = new NewQuickDimensioningDistributorForm(Project.Instance);
+		//    form.ShowDialog();
+		//    this.OnProjectChanged();
+		//    UpdateControl();
+		//}
 
 
 	}

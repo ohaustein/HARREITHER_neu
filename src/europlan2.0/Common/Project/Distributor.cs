@@ -25,6 +25,10 @@ namespace Europlan.Common {
 			InitializeDistributor();
 		}
 
+		public override string ToString() {
+			return this.id + ": " + this.name;
+		}
+
 		private void InitializeDistributor() {
 			id = "";
 			name = "";
