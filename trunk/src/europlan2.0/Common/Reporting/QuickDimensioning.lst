@@ -20,7 +20,7 @@
  CreatedByApp=<unknown>
  CreatedByDLL=<unknown>
  CreatedByUser=<unknown>
- LastModified=8/27/2009, 4:29:41 PM
+ LastModified=8/31/2009, 9:23:13 AM
  LastModifiedByApp=EUROPLAN.VSHOST.EXE [8.0.50727.42]
  LastModifiedByDLL=CMLL14.DLL [14.9.2009.19413 (09-07-08 13:35)]
  LastModifiedByUser=neudorfer on CAPRICA
@@ -56,14 +56,14 @@
  HelpLines.Horizontal=
  HelpLines.Vertical=
  PDF.MaxOutlineDepth=2
- DefaultSize.Objecttype1=(0,0,72540,13890)
+ DefaultSize.Objecttype1=(0,0,64080,18120)
  DefaultSize.Objecttype5=(0,0,72310,18850)
- DefaultSize.Objecttype6=(0,0,281370,159640)
+ DefaultSize.Objecttype6=(0,0,281370,173650)
  DefaultSize.Objecttype7=(0,0,46590,16150)
- DefaultSize.Objecttype10=(0,0,278840,10530)
+ DefaultSize.Objecttype10=(0,0,278840,17400)
  DefaultSize.Objecttype11=(0,0,63920,23610)
  DefaultSize.Objecttype12=(0,0,76020,48260)
- ObjectCount=8
+ ObjectCount=7
 [UserSection]
 
 [SumVariables]
@@ -99,7 +99,7 @@
  LinkID=29
  LinkToID=0
  LinkMode=32
- LinkTest=-26530
+ LinkTest=-9075
  LayerID=0
  GroupID=0
  Identifier=
@@ -107,9 +107,9 @@
  UserLocked=False
  WrapBefore=False
  Position/Left=7850
- Position/Top=42930
+ Position/Top=28920
  Position/Width=281370
- Position/Height=159640
+ Position/Height=173650
  Direction=0
  PDFLevel=0
  PDFText=
@@ -132,7 +132,7 @@
  BkColor3=LL.Color.White
  BkColor2=LL.Color.White
  BkColor.Alpha=50
- CurrentTable=1
+ CurrentTable=0
  ColumnCount=1
  ColumnCount.Distance=1000
  [@Tables]
@@ -12745,6 +12745,199 @@
 	 {
 	 [Lines]
 	  {
+	  [Line]
+	   {
+	   [Columns]
+		{
+		[Column]
+		 {
+		 Identifier=
+		 OutputFormatter=
+		 Text="Bemerkungen:"
+		 Width=20000
+		 Height=10000
+		 FixedHeight=0
+		 bIsotropic=True
+		 PlainTextFormat=True
+		 Align=0
+		 AlignDecPosition=-10000
+		 VAlign=0
+		 Adjusted=False
+		 LineWrap=1
+		 ForceWrap=False
+		 FlowControl=False
+		 Spacing.Line=0
+		 bFill=0
+		 Raster=1
+		 BkColor=LL.Color.LightGray
+		 BkColor3=LL.Color.White
+		 BkColor2=LL.Color.White
+		 BkColor.Alpha=50
+		 FgColor=LL.Color.Black
+		 SpaceOptimization=True
+		 Link.URL=
+		 WithText=False
+		 [Frame]
+		  {
+		  Default=False
+		  Layout=1
+		  [Left]
+		   {
+		   Spacing=1000
+		   Line=False
+		   }
+		  [Top]
+		   {
+		   Spacing=500
+		   Line=False
+		   }
+		  [Right]
+		   {
+		   Spacing=1000
+		   Line=False
+		   }
+		  [Bottom]
+		   {
+		   Spacing=500
+		   Line=False
+		   }
+		  }
+		 [Font]
+		  {
+		  Default=False
+		  FaceName="Arial"
+		  GdiCharSet=0
+		  Size=8.0
+		  Width=0
+		  Bold=True
+		  Italic=False
+		  Underline=False
+		  Strikeout=False
+		  Color=LL.Color.Black
+		  PitchAndFamily=34
+		  OutPrecision=3
+		  }
+		 Direction=0
+		 BarWidth=0
+		 [BarWidth]
+		  {
+		  Align=0
+		  }
+		 BarRatio=0
+		 ExportAsPicture=False
+		 Condition=True
+		 }
+		[Column]
+		 {
+		 Identifier=
+		 OutputFormatter=
+		 Text=@Comments
+		 Width=209000
+		 Height=10000
+		 FixedHeight=0
+		 bIsotropic=True
+		 PlainTextFormat=True
+		 Align=0
+		 AlignDecPosition=-10000
+		 VAlign=2
+		 Adjusted=False
+		 LineWrap=1
+		 ForceWrap=False
+		 FlowControl=False
+		 Spacing.Line=0
+		 bFill=0
+		 Raster=1
+		 BkColor=LL.Color.LightGray
+		 BkColor3=LL.Color.White
+		 BkColor2=LL.Color.White
+		 BkColor.Alpha=50
+		 FgColor=LL.Color.Black
+		 SpaceOptimization=True
+		 Link.URL=
+		 WithText=False
+		 [Frame]
+		  {
+		  Default=False
+		  Layout=1
+		  [Left]
+		   {
+		   Spacing=1000
+		   Line=False
+		   }
+		  [Top]
+		   {
+		   Spacing=500
+		   Line=False
+		   }
+		  [Right]
+		   {
+		   Spacing=1000
+		   Line=False
+		   }
+		  [Bottom]
+		   {
+		   Spacing=500
+		   Line=False
+		   }
+		  }
+		 [Font]
+		  {
+		  Default=False
+		  FaceName="Arial"
+		  GdiCharSet=0
+		  Size=8.0
+		  Width=0
+		  Bold=False
+		  Italic=False
+		  Underline=False
+		  Strikeout=False
+		  Color=LL.Color.Black
+		  PitchAndFamily=34
+		  OutPrecision=3
+		  }
+		 Direction=0
+		 BarWidth=0
+		 [BarWidth]
+		  {
+		  Align=0
+		  }
+		 BarRatio=0
+		 ExportAsPicture=False
+		 Condition=True
+		 }
+		}
+	   [Options]
+		{
+		Description=Header
+		[LFont]
+		 {
+		 Default=False
+		 FaceName="Arial"
+		 GdiCharSet=0
+		 Size=8.0
+		 Width=0
+		 Bold=False
+		 Italic=False
+		 Underline=False
+		 Strikeout=False
+		 Color=LL.Color.Black
+		 PitchAndFamily=34
+		 OutPrecision=3
+		 }
+		LCondition=True
+		DisplayInDesigner=@Comments != ""
+		IgnoreEmpty=True
+		PDFLevel=0
+		PDFText=
+		[ReservedSpace]
+		 {
+		 Left=0
+		 Top=0
+		 Right=0
+		 Bottom=0
+		 }
+		}
+	   }
 	  [Line]
 	   {
 	   [Columns]
@@ -51449,7 +51642,7 @@
  LinkID=91
  LinkToID=0
  LinkMode=32
- LinkTest=-11066
+ LinkTest=-6756
  LayerID=0
  GroupID=0
  Identifier=
@@ -51486,7 +51679,7 @@
  LinkID=45
  LinkToID=0
  LinkMode=32
- LinkTest=-12561
+ LinkTest=-24310
  LayerID=0
  GroupID=0
  Identifier=
@@ -51521,7 +51714,7 @@
  LinkID=31
  LinkToID=0
  LinkMode=32
- LinkTest=-21963
+ LinkTest=-32019
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51529,10 +51722,10 @@
  UserLocked=False
  WrapBefore=False
  ExportAsPicture=False
- Position/Left=8230
- Position/Top=27490
- Position/Width=72540
- Position/Height=13890
+ Position/Left=148400
+ Position/Top=6000
+ Position/Width=64080
+ Position/Height=20000
  Direction=0
  bFill=0
  BkColor=LL.Color.Black
@@ -51548,7 +51741,7 @@
  PDFLevel=0
  PDFText=
  bPageWrap=False
- bBottomAligned=True
+ bBottomAligned=False
  [@Lines]
   {
   [Lines]
@@ -51617,47 +51810,6 @@
 	Tab=0
 	TabAlign=0
 	}
-   }
-  }
-[Object]
- ObjectID=1
- ObjectName=Text
- Locked=FALSE
- LinkID=35
- LinkToID=0
- LinkMode=32
- LinkTest=-18715
- LayerID=0
- GroupID=0
- Identifier=ProjectName
- Condition=True
- UserLocked=False
- WrapBefore=False
- ExportAsPicture=False
- Position/Left=84230
- Position/Top=6290
- Position/Width=74380
- Position/Height=12820
- Direction=0
- bFill=0
- BkColor=LL.Color.Black
- Frame/Layout=0
- Frame/Left/Spacing=0
- Frame/Left/Line=False
- Frame/Top/Spacing=0
- Frame/Top/Line=False
- Frame/Right/Spacing=0
- Frame/Right/Line=False
- Frame/Bottom/Spacing=0
- Frame/Bottom/Line=False
- PDFLevel=0
- PDFText=
- bPageWrap=False
- bBottomAligned=True
- [@Lines]
-  {
-  [Lines]
-   {
    [Line]
 	{
 	[Font]
@@ -51686,56 +51838,20 @@
 	Spacing.Line=0
 	OutputFormatter=
 	Condition=True
-	Text=@PartnerContact
+	Text="Bearbeiter: " + @ProjectEditor 
 	Tab=0
 	TabAlign=0
 	}
    }
   }
 [Object]
- ObjectID=5
- ObjectName=Bild
- Locked=FALSE
- LinkID=52
- LinkToID=0
- LinkMode=32
- LinkTest=-24215
- LayerID=0
- GroupID=0
- Identifier=
- Condition=True
- UserLocked=False
- WrapBefore=False
- ExportAsPicture=False
- Position/Left=8000
- Position/Top=6000
- Position/Width=75000
- Position/Height=20000
- Direction=0
- Frame/Layout=0
- Frame/Left/Spacing=0
- Frame/Left/Line=False
- Frame/Top/Spacing=0
- Frame/Top/Line=False
- Frame/Right/Spacing=0
- Frame/Right/Line=False
- Frame/Bottom/Spacing=0
- Frame/Bottom/Line=False
- PDFLevel=0
- PDFText=
- Mode=2
- Variablename=@PartnerLogo
- OriginalSize=False
- bIsotropic=True
- Alignment=3
-[Object]
  ObjectID=1
  ObjectName=Text
  Locked=FALSE
- LinkID=10
+ LinkID=35
  LinkToID=0
  LinkMode=32
- LinkTest=-28043
+ LinkTest=-11283
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51743,10 +51859,10 @@
  UserLocked=False
  WrapBefore=False
  ExportAsPicture=False
- Position/Left=84500
- Position/Top=19810
- Position/Width=74380
- Position/Height=7510
+ Position/Left=85000
+ Position/Top=6000
+ Position/Width=62210
+ Position/Height=20000
  Direction=0
  bFill=0
  BkColor=LL.Color.Black
@@ -51795,7 +51911,7 @@
 	Spacing.Line=0
 	OutputFormatter=
 	Condition=True
-	Text="Bearbeiter: " +@ProjectEditor
+	Text=@PartnerContact
 	Tab=0
 	TabAlign=0
 	}
@@ -51805,10 +51921,46 @@
  ObjectID=5
  ObjectName=Bild
  Locked=FALSE
+ LinkID=52
+ LinkToID=0
+ LinkMode=32
+ LinkTest=-5954
+ LayerID=0
+ GroupID=0
+ Identifier=
+ Condition=True
+ UserLocked=False
+ WrapBefore=False
+ ExportAsPicture=False
+ Position/Left=8000
+ Position/Top=6000
+ Position/Width=75000
+ Position/Height=20000
+ Direction=0
+ Frame/Layout=0
+ Frame/Left/Spacing=0
+ Frame/Left/Line=False
+ Frame/Top/Spacing=0
+ Frame/Top/Line=False
+ Frame/Right/Spacing=0
+ Frame/Right/Line=False
+ Frame/Bottom/Spacing=0
+ Frame/Bottom/Line=False
+ PDFLevel=0
+ PDFText=
+ Mode=2
+ Variablename=@PartnerLogo
+ OriginalSize=False
+ bIsotropic=True
+ Alignment=3
+[Object]
+ ObjectID=5
+ ObjectName=Bild
+ Locked=FALSE
  LinkID=13
  LinkToID=0
  LinkMode=32
- LinkTest=-9038
+ LinkTest=-5660
  LayerID=0
  GroupID=0
  Identifier=
@@ -51840,23 +51992,24 @@
  Alignment=0
 [UserVariables]
  User1=@Allocation;"80%"
- User2=@NrOfProducts;6
- User3=@PartnerContact;"Harreither Ges.m.b.H. - Gesundes Heizen und Kühlen¶3334 Gaflenz, Oberland 71¶Tel: +43 (0) 7353 - 000"
- User4=@PartnerLogo;NULL()
- User5=@Product1;"Product1"
- User6=@Product2;"Product2"
- User7=@Product3;"Product3"
- User8=@Product4;"Product4"
- User9=@Product5;"Product5"
- User10=@Product6;"Product6"
- User11=@Product7;"Product7"
- User12=@ProjectEditor;"NeuChr"
- User13=@ProjectName;"ProjectName"
- User14=@ProjectNumber;"2009-001"
- User15=@RoomControllers;"1 * RC, 3 * RCF"
- User16=@RoomTypes;"Standard: 70 W/m² - 70 W/m²"
- User17=@tvCool;16
- User18=@tvHeat;35
+ User2=@Comments;""
+ User3=@NrOfProducts;6
+ User4=@PartnerContact;"Harreither Ges.m.b.H. - Gesundes Heizen und Kühlen¶3334 Gaflenz, Oberland 71¶Tel: +43 (0) 7353 - 000"
+ User5=@PartnerLogo;NULL()
+ User6=@Product1;"Product1"
+ User7=@Product2;"Product2"
+ User8=@Product3;"Product3"
+ User9=@Product4;"Product4"
+ User10=@Product5;"Product5"
+ User11=@Product6;"Product6"
+ User12=@Product7;"Product7"
+ User13=@ProjectEditor;"NeuChr"
+ User14=@ProjectName;"ProjectName"
+ User15=@ProjectNumber;"2009-001"
+ User16=@RoomControllers;"1 * RC, 3 * RCF"
+ User17=@RoomTypes;"Standard: 70 W/m² - 70 W/m²"
+ User18=@tvCool;16
+ User19=@tvHeat;35
 [Parameters]
  [@Parameters]
   {

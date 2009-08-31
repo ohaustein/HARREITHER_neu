@@ -12,7 +12,7 @@ namespace Europlan.Common {
 
 		public event ProjectChangedHandler ProjectChanged;
 
-		private QuickDimensioningDistributor distributor = null;
+		private Distributor distributor = null;
 
 		private Dictionary<Type, DataGridViewColumn> productOpenColumns;
 		private Dictionary<Type, DataGridViewColumn> productPlannedColumns;
@@ -29,7 +29,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public QuickDimensioningDistributor Distributor {
+		public Distributor Distributor {
 			get { return this.distributor; }
 			set {
 				this.distributor = value;

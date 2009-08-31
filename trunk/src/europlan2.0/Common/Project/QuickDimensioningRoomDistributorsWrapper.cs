@@ -7,9 +7,9 @@ namespace Europlan.Common {
 
 		private Room room;
 		private Floor floor;
-		private QuickDimensioningDistributor distributor;
+		private Distributor distributor;
 
-		public QuickDimensioningRoomDistributorsWrapper(Room room, Floor floor, QuickDimensioningDistributor distributor) {
+		public QuickDimensioningRoomDistributorsWrapper(Room room, Floor floor, Distributor distributor) {
 			this.room = room;
 			this.floor = floor;
 			this.distributor = distributor;

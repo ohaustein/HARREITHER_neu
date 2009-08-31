@@ -13,7 +13,7 @@ namespace Europlan.Common {
 			InitializeComponent();
 		}
 
-		public List<QuickDimensioningDistributor> Distributors {
+		public List<Distributor> Distributors {
 			set { 
 				quickDimensioningDistributorBindingSource.DataSource = value;
 				quickDimensioningDistributorBindingSource.ResetBindings(false);
@@ -25,7 +25,7 @@ namespace Europlan.Common {
 				MessageBox.Show("Der Verteiler kann nicht gelöscht werden, da für die Flächenaufstellung mindestens ein Verteiler vorhanden sein muss.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				e.Cancel = true;
 			} else {
-				QuickDimensioningDistributor distributor = e.Row.DataBoundItem as QuickDimensioningDistributor;
+				Distributor distributor = e.Row.DataBoundItem as Distributor;
 				Project project = Project.Instance;
 				if (project != null) {
 					foreach (Floor floor in project.Floors) {
@@ -43,10 +43,10 @@ namespace Europlan.Common {
 			if (this.gridDistributors.SelectedCells.Count > 0) {
 				if (this.gridDistributors.SelectedCells[0].OwningRow.DataBoundItem == null) {
 					bool dirty = this.gridDistributors.IsCurrentRowDirty;
-					bool clear = (this.quickDimensioningDistributorBindingSource.DataSource as List<QuickDimensioningDistributor>).Count == 1;
+					bool clear = (this.quickDimensioningDistributorBindingSource.DataSource as List<Distributor>).Count == 1;
 					this.gridDistributors.CancelEdit();
 					if (clear) {
-						(this.quickDimensioningDistributorBindingSource.DataSource as List<QuickDimensioningDistributor>).Clear();
+						(this.quickDimensioningDistributorBindingSource.DataSource as List<Distributor>).Clear();
 					}
 				} else {
 					this.gridDistributors.EndEdit();
