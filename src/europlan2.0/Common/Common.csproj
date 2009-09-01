@@ -98,6 +98,9 @@
     <Compile Include="DataExchange\BuildingDataImportManager.cs" />
     <Compile Include="DataExchange\IBuildingDataImporter.cs" />
     <Compile Include="DataExchange\SOLAR32Importer.cs" />
+    <Compile Include="EN1264\ap.cs" />
+    <Compile Include="EN1264\EN1264.cs" />
+    <Compile Include="EN1264\spline3.cs" />
     <Compile Include="Interfaces\IClipboard.cs" />
     <Compile Include="Interfaces\IEditorUserControl.cs" />
     <Compile Include="Interfaces\IGuiRepresentation.cs" />
