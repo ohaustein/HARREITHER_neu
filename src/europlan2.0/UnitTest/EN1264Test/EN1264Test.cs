@@ -26,6 +26,8 @@ namespace Europlan.UnitTest {
 			Assert.AreEqual(12.33151731, Math.Round(result, 8));
 			result = norm.Heizmitteluebertemperatur(17, 20, 25);
 			Assert.AreEqual(-6.38292944, Math.Round(result, 8));
+			result = norm.Heizmitteluebertemperatur(15, 17, 26);
+			Assert.AreEqual(-9.966577309, Math.Round(result, 9));
 		}
 
 		[Test]
@@ -34,6 +36,14 @@ namespace Europlan.UnitTest {
 			Assert.AreEqual(0.597987928, Math.Round(result, 9));
 			result = norm.ab(EN1264.alpha0, EN1264.alphaKuehlen, EN1264.sU0, EN1264.lambdaU0, EN1264.lambdaE, 0.1);
 			Assert.AreEqual(0.472265004, Math.Round(result, 9));
+		}
+
+		[Test]
+		public void TestABFlaeche() {
+			double result = norm.abFlaeche(6.5, 1.485465233, 1.06, 0.01);
+			Assert.AreEqual(0.90715409, Math.Round(result, 8));
+			result = norm.abFlaeche(6.5, 1.111028037, 1.06, 0);
+			Assert.AreEqual(1, Math.Round(result, 0));
 		}
 
 		[Test]
@@ -66,6 +76,14 @@ namespace Europlan.UnitTest {
 			Assert.AreEqual(1.046, result);
 			result = norm.au(0.225, 0.10);
 			Assert.AreEqual(1.0295, result);
+		}
+
+		[Test]
+		public void TestAUFlaeche() {
+			double result = norm.auFlaeche(EN1264.alpha0, EN1264.alphaHeizen, 0.045, 1.0, 0.002, 60);
+			Assert.AreEqual(1.485465233, Math.Round(result, 9));
+			result = norm.auFlaeche(EN1264.alpha0, EN1264.alphaHeizen, 0.045, 1.0, 0.01, 0.32);
+			Assert.AreEqual(1.111028037, Math.Round(result, 9));
 		}
 
 		[Test]
@@ -131,16 +149,36 @@ namespace Europlan.UnitTest {
 		}
 
 		[Test]
-		public void TestWaermedurchgangskoeffizient() {
-			double result = norm.WaermedurchgangsKoeffizient(6.5, 0.5);
+		public void TestWaermedurchgangsKoeffizientRohr() {
+			double result = norm.WaermedurchgangsKoeffizientRohr(6.5, 0.5);
 			Assert.AreEqual(3.25, result);
 		}
 
 		[Test]
-		public void TestWaermestromdichte() {
-			double result = norm.WaermedurchgangsKoeffizient(6.5, 0.5);
+		public void TestWaermestromDichteRohr() {
+			double result = norm.WaermestromDichteRohr(6.5, 0.5);
 			Assert.AreEqual(3.25, result);
 		}
+
+		[Test]
+		public void TestWaermestromDichteFlaeche() {
+			double result = norm.WaermestromDichteFlaeche(6.5, 0.90715409, 1.06, 1.485465233, 14.79782077);
+			Assert.AreEqual(137.39, Math.Round(result, 2));
+			result = norm.WaermestromDichteFlaeche(6.5, 1, 1.06, 1.111028037, -9.966577309);
+			Assert.AreEqual(-76.29, Math.Round(result, 2));
+		}
+
+		[Test]
+		public void TestOberflaechenTemperatur() {
+			double result = norm.OberflaechenTemperatur(40.0, 10.8, 25);
+			Assert.AreEqual(28.7037, Math.Round(result, 4));
+		}	
+
+		[Test]
+		public void TestTaupunktTemperatur() {
+			double result = norm.TaupunktTemperatur(0.5, 26);
+			Assert.AreEqual(14.76, Math.Round(result, 2));
+		}		
 
 		[Test]
 		public void TestWaermeverlustUnten() {
