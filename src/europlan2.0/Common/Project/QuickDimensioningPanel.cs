@@ -1003,6 +1003,7 @@ namespace Europlan.Common {
 					comments += line + "\n";
 				}
 				projectName = projectName.TrimEnd();
+				listLabel1.Variables.Add("@ProjectNumber", Project.Instance.ProjectNumber.TrimEnd());
 				listLabel1.Variables.Add("@ProjectName", projectName);
 				listLabel1.Variables.Add("@ProjectEditor", Project.Instance.ProjectEditor);
 				listLabel1.Variables.Add("@Comments", comments);
