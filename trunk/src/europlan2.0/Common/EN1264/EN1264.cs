@@ -15,6 +15,8 @@ namespace Europlan.Common {
 		public const double alpha0 = 10.8;
 		public const double alphaHeizen = 10.8;
 		public const double alphaKuehlen = 6.5;
+		public const double B0 = 6.5;
+		public const double atmt = 1.06;
 		public const double lambdaU0 = 1;
 		public const double sU0 = 0.045;
 		public const double sU = 0.035;
@@ -64,6 +66,10 @@ namespace Europlan.Common {
 			return numerator / denominator;
 		}
 
+		public double abFlaeche(double B, double au, double atmt, double RlambdaB) {
+			return 1.0 / (1 + B * au * atmt * RlambdaB);
+		}
+
 		public double at(double RlambdaB) {
 			double[] x = { 0, 0.05, 0.10, 0.15 };
 			double[] y = { 1.23, 1.188, 1.156, 1.134 };
@@ -98,6 +104,12 @@ namespace Europlan.Common {
 			double[] xr = { 0, 0.05, 0.10, 0.15 };
 			spline3.buildcubicspline(xr, yt, 4, 0, 0, 0, 0, ref c);
 			return spline3.splineinterpolation(ref c, RlambdaB);
+		}
+
+		public double auFlaeche(double alpha0, double alpha, double sU0, double lambdaU0, double sU, double lambdaE) {
+			double numerator = (1 / alpha0) + (sU0 / lambdaU0);
+			double denominator = (1 / alpha) + (sU / lambdaE);
+			return numerator / denominator;
 		}
 
 		public double mu(double su) {
@@ -175,12 +187,24 @@ namespace Europlan.Common {
 				(1.0 / (2.0 * lambdaR0)) * (Math.Log(D / (D - (2.0 * sr0)))))));
 		}
 
-		public double WaermedurchgangsKoeffizient(double B, double potenzProdukt) {
+		public double WaermedurchgangsKoeffizientRohr(double B, double potenzProdukt) {
 			return B * potenzProdukt;
 		}
 
-		public double WaermestromDichte(double K, double heizmittelUebertemperatur) {
+		public double WaermestromDichteRohr(double K, double heizmittelUebertemperatur) {
 			return K * heizmittelUebertemperatur;
+		}
+
+		public double WaermestromDichteFlaeche(double B, double ab, double atmt, double au, double heizmittelUebertemperatur) {
+			return B * ab * atmt * au * heizmittelUebertemperatur;
+		}
+
+		public double OberflaechenTemperatur(double waermestrom, double alpha, double raumTemperatur) {
+			return (waermestrom / alpha) + raumTemperatur;
+		}
+
+		public double TaupunktTemperatur(double luftFeuchte, double raumTemperatur) {
+			return (Math.Pow(luftFeuchte, 0.12468828) * (raumTemperatur + 109.8)) - 109.8;
 		}
 
 		public double WaemeverlustUnten(double alpha, double RlambdaB, double sU, double lambdaU, double RalphaDecke, double RlambdaIns, double RlambdaDecke, double RlambdaPutz, double q, double innenTemperatur, double untenTemperatur) {
