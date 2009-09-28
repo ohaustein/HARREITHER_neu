@@ -1,0 +1,335 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Forms;
+
+namespace Europlan.Common {
+	[Serializable()]
+	public class PlannedProduct : IGuiRepresentation {
+
+		private Product plannedProduct;
+		private Room room;
+		private TreeNode productNode = null;
+
+		private bool coverHeatLoad = true;
+		private bool coverCoolLoad = true;
+		private double requestedHeatLoad;
+		private double requestedCoolLoad;
+
+		internal PlannedProduct() {
+			this.plannedProduct = null;
+			this.room = null;
+		}
+
+		public PlannedProduct(Product plannedProduct) {
+			this.productNode = new TreeNode();
+			this.productNode.Tag = this;
+			this.Product = plannedProduct;
+		}
+
+		public PlannedProduct(Room room) {
+			this.plannedProduct = null;
+			this.room = room;
+		}
+
+		public Product.ProductType PlannedProductType {
+			get {
+				if (plannedProduct == null) {
+					return Product.ProductType.REST;
+				} else {
+					return plannedProduct.Type;
+				}
+			}
+		}
+
+		public string System {
+			get {
+				if (plannedProduct == null) {
+					return null;
+				} else {
+					return plannedProduct.Name;
+				}
+			}
+		}
+
+		public string Comment {
+			get {
+				if (plannedProduct == null) {
+					return "Restposition";
+				} else {
+					return plannedProduct.Comment;
+				}
+			}
+		}
+
+		public float FloorArea {
+			get {
+				if (plannedProduct == null) {
+					Room room = this.room;
+					float area = room.Area;
+					foreach (PlannedProduct product in room.PlannedProducts) {
+						if (product != this) {
+							area -= product.Product.PlannedFloorArea;
+						}
+					}
+					if (area < 0) {
+						area = 0;
+					}
+					return area;
+				} else {
+					return plannedProduct.PlannedFloorArea;
+				}
+			}
+		}
+
+		public Nullable<float> PlannedArea {
+			get {
+				if (plannedProduct == null) {
+					return null;
+				} else {
+					return plannedProduct.PlannedFloorArea;
+				}
+			}
+		}
+
+		/*[System.Xml.Serialization.XmlIgnore]
+		public Nullable<float> PlannedAreaPercentage {
+			get {
+				if (plannedProduct == null) {
+					return null;
+				} else {
+					return plannedProduct.PlannedFloorArea * 100 / this.AvailableFloorArea;
+				}
+			}
+			set {
+				if (plannedProduct != null) {
+					this.plannedProduct.PlannedFloorArea = (float)(this.AvailableFloorArea * value / 100);
+				}
+			}
+		}*/
+
+		public double PlannedHeatLoad {
+			get {
+				if (plannedProduct == null) {
+					double heatLoad = this.room.NormalizedHeatLoad;
+					foreach (PlannedProduct pp in this.room.PlannedProducts) {
+						heatLoad -= pp.PlannedHeatLoad;
+					}
+					return Math.Round(-heatLoad, 0);
+				} else {
+					return Math.Round(plannedProduct.PlannedHeatLoad, 0);
+				}
+			}
+		}
+
+		public string PlannedHeatLoadString {
+			get {
+				double plannedHeatLoad = this.PlannedHeatLoad;
+				if (plannedProduct == null) {
+					return (plannedHeatLoad >= 0 ? "+" : "") + plannedHeatLoad.ToString();
+				}
+				return plannedHeatLoad.ToString();
+			}
+		}
+
+		public double PlannedCoolLoad {
+			get {
+				if (plannedProduct == null) {
+					double coolLoad = this.room.NormalizedCoolLoad;
+					foreach (PlannedProduct pp in this.room.PlannedProducts) {
+						coolLoad -= pp.PlannedCoolLoad;
+					}
+					return Math.Round(-coolLoad, 0);
+				} else {
+					return Math.Round(plannedProduct.PlannedCoolLoad, 0);
+				}
+			}
+		}
+
+		public string PlannedCoolLoadString {
+			get {
+				double plannedCoolLoad = this.PlannedCoolLoad;
+				if (plannedProduct == null) {
+					return (plannedCoolLoad >= 0 ? "+" : "") + plannedCoolLoad.ToString();
+				}
+				return plannedCoolLoad.ToString();
+			}
+		}
+
+		public bool CoverHeatLoad {
+			get { return this.coverHeatLoad; }
+			set { this.coverHeatLoad = value; }
+		}
+
+		public bool CoverCoolLoad {
+			get { return this.coverCoolLoad; }
+			set { this.coverCoolLoad = value; }
+		}
+
+		public double RequestedHeatLoad {
+			get {
+				if (this.coverHeatLoad) {
+					return this.NecessaryHeatLoad;
+				} else {
+					return this.requestedHeatLoad;
+				}
+			}
+			set { this.requestedHeatLoad = Math.Round(value, 1); }
+		}
+
+		public double RequestedCoolLoad {
+			get {
+				if (this.coverCoolLoad) {
+					return this.NecessaryCoolLoad;
+				} else {
+					return this.requestedCoolLoad;
+				}
+			}
+			set { this.requestedCoolLoad = Math.Round(value, 1); }
+		}
+
+		[System.Xml.Serialization.XmlIgnore]
+		public float RequestedHeatLoadPercentage {
+			get {
+				if (this.coverHeatLoad) {
+					return 100;
+				}
+				if (this.NecessaryHeatLoad == 0) {
+					return 0;
+				}
+				return (float)Math.Round(this.requestedHeatLoad * 100 / this.NecessaryHeatLoad, 1);
+			}
+			set {
+				if (this.NecessaryHeatLoad != 0) {
+					this.requestedHeatLoad = this.NecessaryHeatLoad * value / 100;
+				}
+			}
+		}
+
+		[System.Xml.Serialization.XmlIgnore]
+		public float RequestedCoolLoadPercentage {
+			get {
+				if (this.coverCoolLoad) {
+					return 100;
+				}
+				if (this.NecessaryCoolLoad == 0) {
+					return 0;
+				}
+				return (float)(this.requestedCoolLoad * 100 / this.NecessaryCoolLoad);
+			}
+			set {
+				if (this.NecessaryCoolLoad != 0) {
+					this.requestedCoolLoad = this.NecessaryCoolLoad * value / 100;
+				}
+			}
+		}
+
+		public double RequestedHeatLoadPerSqM {
+			get { return (this.PlannedArea.HasValue ? this.RequestedHeatLoad / this.PlannedArea.Value : 0); }
+		}
+
+		public Product Product {
+			get { return this.plannedProduct; }
+			set {
+				this.plannedProduct = value;
+				if (this.plannedProduct != null) {
+					this.room = null;
+					if (this.productNode == null) {
+						this.productNode = new TreeNode();
+						this.productNode.Tag = this;
+					}
+					this.productNode.Text = this.PlannedProductType.ToString() + ": " + this.System;
+				} else {
+					this.productNode = null;
+				}
+			}
+		}
+
+		public TreeNode Node {
+			get { return this.productNode; }
+		}
+
+		public double NecessaryHeatLoad {
+			get {
+				if (this.plannedProduct.AssociatedRoom == null) {
+					return 0;
+				}
+				double heatLoad = this.plannedProduct.AssociatedRoom.NormalizedHeatLoad;
+				bool selfFound = false;
+				foreach (PlannedProduct product in this.plannedProduct.AssociatedRoom.PlannedProducts) {
+					if (product != this) {
+						//heatLoad -= product.Product.PlannedHeatLoad;
+						if (product.CoverHeatLoad) {
+							if (!selfFound) {
+								heatLoad = 0;
+								break;
+							}
+						} else {
+							heatLoad -= product.RequestedHeatLoad;
+						}
+					} else {
+						//break;
+						selfFound = true;
+					}
+				}
+				if (heatLoad < 0) {
+					heatLoad = 0;
+				}
+				return heatLoad;
+			}
+		}
+
+		public double NecessaryCoolLoad {
+			get {
+				if (this.plannedProduct.AssociatedRoom == null) {
+					return 0;
+				}
+				double coolLoad = this.plannedProduct.AssociatedRoom.NormalizedCoolLoad;
+				foreach (PlannedProduct product in this.plannedProduct.AssociatedRoom.PlannedProducts) {
+					if (product != this) {
+						coolLoad -= product.Product.PlannedCoolLoad;
+					}
+				}
+				if (coolLoad < 0) {
+					coolLoad = 0;
+				}
+				return coolLoad;
+			}
+		}
+
+		public void ConfigureProductDefault() {
+			this.requestedCoolLoad = this.NecessaryCoolLoad;
+			this.requestedHeatLoad = this.NecessaryHeatLoad;
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad);
+		}
+
+		#region IGuiRepresentation Members
+
+		public Type AssociatedPanelType {
+			get {
+				if (this.plannedProduct is EurovalProduct) {
+					return typeof(PlannedEurovalProductPanel);
+				}
+				return null;
+			}
+		}
+
+		public System.Drawing.Icon AssociatedIcon {
+			get { return null; }
+		}
+
+		#endregion
+
+		internal void FinalizeLoading() {
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad);
+			this.plannedProduct.FinalizeLoading();
+		}
+
+		public TreeNode FindNode(object element) {
+			if (element == this) {
+				return this.Node;
+			}
+			return null;
+		}
+	}
+}

@@ -14,6 +14,13 @@ namespace Europlan.Common {
 	[Serializable()]
 	public abstract class Product {
 
+		public enum ProductType {
+			FBH,
+			WH,
+			DH,
+			REST
+		}
+
 		protected int quickDimensioningHeatPowerPerSquareMeter = 0;
 		protected int quickDimensioningCoolPowerPerSquareMeter = 0;
 		protected int quickDimensioningCircuits = 0;
@@ -23,6 +30,11 @@ namespace Europlan.Common {
 		protected bool canCool = false;
 		private Room associatedRoom = null;
 		private SerializableDictionary<string, int> quickDimensioningConnectedDistributors = new SerializableDictionary<string,int>();
+
+		protected string comment = null;
+		protected float plannedFloorArea = 0;
+		protected float plannedRoofArea = 0;
+		protected float plannedWallArea = 0;
 
 		public Product() {
 			Initialize();
@@ -164,6 +176,88 @@ namespace Europlan.Common {
 
 		public abstract string QuickDimensioningName {
 			get;
+		}
+
+		public abstract ProductType Type {
+			get;
+		}
+
+		public string Comment {
+			get { return this.comment; }
+			set { this.comment = value; }
+		}
+
+		public float PlannedFloorArea {
+			get { return plannedFloorArea; }
+			set { plannedFloorArea = value; }
+		}
+
+		public float PlannedRoofArea {
+			get { return plannedRoofArea; }
+			set { plannedRoofArea = value; }
+		}
+
+		public float PlannedWallArea {
+			get { return plannedWallArea; }
+			set { plannedWallArea = value; }
+		}
+
+		public float TotalPlannedArea {
+			get { return this.plannedFloorArea + this.plannedRoofArea + this.plannedWallArea; }
+		}
+
+		public abstract double PlannedHeatLoad {
+			get;
+		}
+
+		public abstract double PlannedCoolLoad {
+			get;
+		}
+
+		/*public abstract double RequestedHeatLoad {
+			get;
+			set;
+		}
+
+		public abstract double RequestedCoolLoad {
+			get;
+			set;
+		}*/
+
+		/*public double NecessaryHeatLoad {
+			get {
+				double heatLoad = this.AssociatedRoom.NormalizedHeatLoad;
+				foreach (PlannedProduct product in this.AssociatedRoom.PlannedProducts) {
+					if (product.Product != this) {
+						heatLoad -= product.Product.PlannedHeatLoad;
+					}
+				}
+				if (heatLoad < 0) {
+					heatLoad = 0;
+				}
+				return heatLoad;
+			}
+		}
+
+		public double NecessaryCoolLoad {
+			get {
+				double coolLoad = this.AssociatedRoom.NormalizedCoolLoad;
+				foreach (PlannedProduct product in this.AssociatedRoom.PlannedProducts) {
+					if (product.Product != this) {
+						coolLoad -= product.Product.PlannedCoolLoad;
+					}
+				}
+				if (coolLoad < 0) {
+					coolLoad = 0;
+				}
+				return coolLoad;
+			}
+		}*/
+
+		public abstract void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad);
+
+		internal virtual void FinalizeLoading() {
+			// nothing to do
 		}
 	}
 }

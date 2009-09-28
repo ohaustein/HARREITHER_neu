@@ -5,6 +5,7 @@ using System.Text;
 namespace Europlan.Common {
 
 	[Serializable()]
+	[ProductName("Hitherm Compact Dachschräge")]
 	public class HithermCompactRoofProduct : HithermCompactProduct {
 
 		public HithermCompactRoofProduct() {
@@ -29,6 +30,10 @@ namespace Europlan.Common {
 
 		public override string QuickDimensioningName {
 			get { return "Hitherm\nCompact\nDachschr.\n(m²)"; }
+		}
+
+		public override ProductType Type {
+			get { return ProductType.DH; }
 		}
 	}
 

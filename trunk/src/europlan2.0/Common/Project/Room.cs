@@ -38,6 +38,7 @@ namespace Europlan.Common {
 		private bool quickDimensioningInitialized = false;
 
 		private List<Product> usedProductsForQuickDimensioning;
+		private List<PlannedProduct> plannedProducts;
 
 		private TreeNode roomNode = new TreeNode();
 
@@ -73,6 +74,7 @@ namespace Europlan.Common {
 			this.quickDimensioningComments = room.QuickDimensioningComments;
 			this.quickDimensioningRoomTypeId = room.quickDimensioningRoomTypeId; // used the member instead of the public property on purpose here!
 			this.usedProductsForQuickDimensioning = new List<Product>();
+			this.plannedProducts = new List<PlannedProduct>();
 			//foreach (Product product in room.UsedProductsForQuickDimensioning) {
 			//    this.usedProductsForQuickDimensioning.Add(product.Clone(this));
 			//}
@@ -89,6 +91,7 @@ namespace Europlan.Common {
 			roomNode.Tag = this;
 			quickDimensioningRoomTypeId = "";
 			this.usedProductsForQuickDimensioning = new List<Product>();
+			this.plannedProducts = new List<PlannedProduct>();
 			this.quickDimensioningHeatLoad = 0;
 			this.quickDimensioningCoolLoad = 0;
 			this.quickDimensioningNrOfServos = -1;
@@ -114,6 +117,10 @@ namespace Europlan.Common {
 			this.usedProductsForQuickDimensioning = new List<Product>();
 			foreach (Product product in room.UsedProductsForQuickDimensioning) {
 				this.usedProductsForQuickDimensioning.Add(product.Clone(this));
+			}
+			this.plannedProducts = new List<PlannedProduct>();
+			foreach (PlannedProduct product in room.PlannedProducts) {
+				this.plannedProducts.Add(new PlannedProduct(product.Product.Clone(this)));
 			}
 		}
 
@@ -172,7 +179,10 @@ namespace Europlan.Common {
 
 		public int HeatLoad {
 			get { return heatLoad; }
-			set { heatLoad = value; }
+			set {
+				heatLoad = value;
+				this.CorrectPlanning();
+			}
 		}
 
 		public int CoolLoad {
@@ -200,6 +210,12 @@ namespace Europlan.Common {
 		public int FloorHeatingLoss {
 			get { return floorHeatingLoss; }
 			set { floorHeatingLoss = value; }
+		}
+
+		private void CorrectPlanning() {
+			foreach (PlannedProduct pp in this.PlannedProducts) {
+				pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad);
+			}
 		}
 
 		public int QuickDimensioningHeatLoad {
@@ -301,6 +317,16 @@ namespace Europlan.Common {
 			set { usedProductsForQuickDimensioning = value; }
 		}
 
+		public List<PlannedProduct> PlannedProducts {
+			get { return plannedProducts; }
+			set {
+				plannedProducts = value;
+				foreach (PlannedProduct p in plannedProducts) {
+					p.Product.AssociatedRoom = this;
+				}
+			}
+		}
+
 		public P GetProductForQuickDimensioning<P>() where P : Product {
 			foreach (Product product in this.usedProductsForQuickDimensioning) {
 				if (product.GetType() == typeof(P)) {
@@ -330,6 +356,13 @@ namespace Europlan.Common {
 		public TreeNode FindNode(object element) {
 			if (element == this) {
 				return roomNode;
+			} else {
+				foreach (PlannedProduct pp in this.PlannedProducts) {
+					TreeNode node = pp.FindNode(element);
+					if (node != null) {
+						return node;
+					}
+				}
 			}
 			return null;
 		}
@@ -398,6 +431,43 @@ namespace Europlan.Common {
 			this.InitializeQuickDimensioning();
 		}
 
+		internal void UpdateTree() {
+			int i = 0;
+			bool expand = this.Node.Nodes.Count == 0;
+			foreach (PlannedProduct product in this.PlannedProducts) {
+				int index = this.Node.Nodes.IndexOf(product.Node);
+				if (index < 0) {
+					this.Node.Nodes.Insert(i, product.Node);
+				} else if (index > i) {
+					if (product.Node.IsSelected) {
+						for (int j = i; j < index; j++) {
+							this.Node.Nodes.RemoveAt(i);
+						}
+					} else {
+						this.Node.Nodes.RemoveAt(index);
+						this.Node.Nodes.Insert(i, product.Node);
+					}
+				}
+				i++;
+			}
+			while (this.Node.Nodes.Count > i) {
+				this.Node.Nodes.RemoveAt(i);
+			}
+			if (expand) {
+				this.Node.Expand();
+			}
+		}
+	
+		internal void FinalizeLoading() {
+ 			foreach (PlannedProduct pp in this.plannedProducts) {
+				pp.Product.AssociatedRoom = this;
+				pp.FinalizeLoading();
+			}
+			foreach (Product p in this.usedProductsForQuickDimensioning) {
+				p.AssociatedRoom = this;
+				p.FinalizeLoading();
+			}
+		}
 	}
 
 }

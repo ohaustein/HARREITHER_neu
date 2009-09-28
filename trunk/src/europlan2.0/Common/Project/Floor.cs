@@ -144,6 +144,7 @@ namespace Europlan.Common {
 						this.Node.Nodes.Insert(i, room.Node);
 					}
 				}
+				room.UpdateTree();
 				i++;
 			}
 			while (this.Node.Nodes.Count > i) {
@@ -227,6 +228,12 @@ namespace Europlan.Common {
 			}			
 		}
 
+
+		internal void FinalizeLoading() {
+			foreach (Room room in this.rooms) {
+				room.FinalizeLoading();
+			}
+		}
 	}
 
 }

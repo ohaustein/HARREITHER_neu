@@ -20,13 +20,18 @@ namespace Europlan.Common {
 			DENOMINATION = 9,
 			PRICE = 10,
 			FLOW_TEMPERATURE = 11,
-			PERCENTAGE = 12
+			PERCENTAGE = 12,
+			POWER_WITH_SIGN = 13
 		}
-		                                                                              //  DEF  RCTMP       AREA  TEMP             HPW             CPW  CONSTR_THICK        LAMBDA             R,   DENOMINATION        PRICE    FLOW_TEMP   PERC
-		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] { null,    0,          0,    0,              0,              0,            0,            0,            0,              0,           0,           0,     0 };
-		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] { null,   99,       null,   99, Int32.MaxValue, Int32.MaxValue,         null,         null,         null, Int32.MaxValue,        null,        null,   100 };
-		private static readonly int[] decimalPlaces = new int[]                        {    0,    0,          1,    0,              0,              0,            2,            3,            3,              0,           2,           1,     0 };
-		private static readonly string[] masks = new string[]                          {  "0", "90", "999990.9", "90",      "9999990",      "9999990",  "999990.99", "999990.999", "999990.999",       "999990", "999990.99", "999990.99", "990" };
+		                                                                              //   DEF   RCTMP       AREA   TEMP             HPW             CPW  CONSTR_THICK        LAMBDA             R,   DENOMINATION        PRICE    FLOW_TEMP   PERC    PWR_SIGN
+		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] {  null,     0,          0,     0,              0,              0,            0,            0,            0,              0,           0,           0,      0,      null };
+		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] {  null,    99,       null,    99, Int32.MaxValue, Int32.MaxValue,         null,         null,         null, Int32.MaxValue,        null,        null,    100,      null };
+		private static readonly int[] decimalPlaces = new int[]                        {     0,     0,          1,     0,              0,              0,            2,            3,            3,              0,           2,           1,      1,         0 };
+		private static readonly string[] masks = new string[]                          {   "0",  "90", "999990.9",  "90",      "9999990",      "9999990",  "999990.99", "999990.999", "999990.999",       "999990", "999990.99", "999990.99", "990.9", "9999990"};
+		private static readonly bool[] sign = new bool[]                               { false, false,      false, false,          false,          false,        false,        false,        false,          false,       false,       false,   false,      true};
+
+		private Nullable<decimal> realMaxValue = null;
+		private Nullable<decimal> realMinValue = null;
 
 		private NumericBox.NumericEditType editType = NumericBox.NumericEditType.DEFAULT;
 		public event EventHandler ValueChanged;
@@ -105,14 +110,19 @@ namespace Europlan.Common {
 				}
 				this.maskedTextBox1.Text = formattedString;*/
 				//this.lastValue = value;
-				decimal correctedVal = value;
+				decimal correctedVal = Math.Round(value, decimalPlaces[(int)this.editType]);
 				if (this.MaxValue.HasValue && correctedVal > this.MaxValue.Value) {
 					correctedVal = this.MaxValue.Value;
 				}
 				if (this.MinValue.HasValue && correctedVal < this.MinValue.Value) {
 					correctedVal = this.MinValue.Value;
 				}
-				this.Text = correctedVal.ToString();
+				string text = "";
+				if (correctedVal >= 0 && sign[(int)this.editType]) {
+					text = "+";
+				}
+				text += correctedVal.ToString();
+				this.Text = text;
 				//this.numValueBox.Value = value;
 			}
 		}
@@ -202,11 +212,33 @@ namespace Europlan.Common {
 		}
 
 		public Nullable<decimal> MinValue {
-			get { return minValue[(int)this.editType]; }
+			get { return (this.realMinValue.HasValue ? this.realMinValue.Value : minValue[(int)this.editType]); }
+			set {
+				if (value.HasValue) {
+					if (minValue[(int)this.editType].HasValue && value.Value <= minValue[(int)this.editType]) {
+						this.realMinValue = null;
+					} else {
+						this.realMinValue = value;
+					}
+				} else {
+					this.realMinValue = null;
+				}
+			}
 		}
 
 		public Nullable<decimal> MaxValue {
-			get { return maxValue[(int)this.editType]; }
+			get { return (this.realMaxValue.HasValue ? this.realMaxValue.Value : maxValue[(int)this.editType]); }
+			set {
+				if (value.HasValue) {
+					if (maxValue[(int)this.editType].HasValue && value.Value >= maxValue[(int)this.editType]) {
+						this.realMaxValue = null;
+					} else {
+						this.realMaxValue = value;
+					}
+				} else {
+					this.realMaxValue = null;
+				}
+			}
 		}
 	}
 }

@@ -375,6 +375,15 @@ namespace Europlan.Application {
 			license.Dispose();
 		}
 
+		private void projectTree_BeforeSelect(object sender, TreeViewCancelEventArgs e) {
+			if (splitContainer.Panel2.Controls.Count > 0) {
+				IEditorUserControl oldControl = splitContainer.Panel2.Controls[0] as IEditorUserControl;
+				if (oldControl != null && !oldControl.AllowLeave()) {
+					e.Cancel = true;
+				}
+			}
+		}
+
 		private void projectTree_AfterSelect(object sender, TreeViewEventArgs e) {
 			if (selectedTreeNode != null) {
 				selectedTreeNode.NodeFont = new Font(this.projectTree.Font, FontStyle.Regular);
@@ -391,14 +400,18 @@ namespace Europlan.Application {
 				UserControl control = null;
 				if (selectedTreeNode.Tag is IGuiRepresentation) {
 					IGuiRepresentation guiRepresentation = selectedTreeNode.Tag as IGuiRepresentation;
-					if (userControls.ContainsKey(guiRepresentation.AssociatedPanelType)) {
-						control = userControls[guiRepresentation.AssociatedPanelType];
+					Type associatedPanelType = guiRepresentation.AssociatedPanelType;
+					if (associatedPanelType == null) {
+						associatedPanelType = typeof(EmptyEditorUserControl);
+					}
+					if (userControls.ContainsKey(associatedPanelType)) {
+						control = userControls[associatedPanelType];
 					} else {
-						control = (UserControl)Activator.CreateInstance(guiRepresentation.AssociatedPanelType);
+						control = (UserControl)Activator.CreateInstance(associatedPanelType);
 						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
 						(control as IEditorUserControl).ProjectChanged += new ProjectChangedHandler(MainForm_ProjectChanged);
 						(control as IEditorUserControl).TreeSelectionRequested += new TreeSelectionRequestedHandler(MainForm_TreeSelectionRequested);
-						userControls[guiRepresentation.AssociatedPanelType] = control;
+						userControls[associatedPanelType] = control;
 					}
 					if (control.Tag != selectedTreeNode.Tag) {
 						tagChanged = true;
@@ -666,6 +679,5 @@ namespace Europlan.Application {
 				}
 			}
 		}
-
 	}
 }

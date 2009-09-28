@@ -24,15 +24,15 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridFloors = new System.Windows.Forms.DataGridView();
+			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.label1 = new System.Windows.Forms.Label();
 			this.associatedIconDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.associatedPanelTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.projectFloorsSource = new System.Windows.Forms.BindingSource(this.components);
-			this.label1 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.gridFloors)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.projectFloorsSource)).BeginInit();
 			this.SuspendLayout();
@@ -44,14 +44,14 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.gridFloors.AutoGenerateColumns = false;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gridFloors.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridFloors.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
 			this.gridFloors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridFloors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.associatedIconDataGridViewImageColumn,
@@ -72,24 +72,6 @@ namespace Europlan.Common {
 			this.gridFloors.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridFloors_UserDeletedRow);
 			this.gridFloors.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFloors_CellClick);
 			// 
-			// associatedIconDataGridViewImageColumn
-			// 
-			this.associatedIconDataGridViewImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-			this.associatedIconDataGridViewImageColumn.DataPropertyName = "AssociatedIcon";
-			this.associatedIconDataGridViewImageColumn.HeaderText = "";
-			this.associatedIconDataGridViewImageColumn.Name = "associatedIconDataGridViewImageColumn";
-			this.associatedIconDataGridViewImageColumn.ReadOnly = true;
-			this.associatedIconDataGridViewImageColumn.Visible = false;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.nameDataGridViewTextBoxColumn.ToolTipText = "Bezeichnung des Geschoﬂes";
-			this.nameDataGridViewTextBoxColumn.Width = 200;
-			// 
 			// colView
 			// 
 			this.colView.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -100,6 +82,35 @@ namespace Europlan.Common {
 			this.colView.Text = "...";
 			this.colView.UseColumnTextForButtonValue = true;
 			this.colView.Width = 64;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.Location = new System.Drawing.Point(3, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(106, 24);
+			this.label1.TabIndex = 2;
+			this.label1.Text = "Geschoﬂe";
+			// 
+			// associatedIconDataGridViewImageColumn
+			// 
+			this.associatedIconDataGridViewImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+			this.associatedIconDataGridViewImageColumn.DataPropertyName = "AssociatedIcon";
+			this.associatedIconDataGridViewImageColumn.HeaderText = "";
+			this.associatedIconDataGridViewImageColumn.Name = "associatedIconDataGridViewImageColumn";
+			this.associatedIconDataGridViewImageColumn.ReadOnly = true;
+			this.associatedIconDataGridViewImageColumn.Visible = false;
+			this.associatedIconDataGridViewImageColumn.Width = 5;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.nameDataGridViewTextBoxColumn.ToolTipText = "Bezeichnung des Geschoﬂes";
+			this.nameDataGridViewTextBoxColumn.Width = 200;
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -121,16 +132,6 @@ namespace Europlan.Common {
 			// projectFloorsSource
 			// 
 			this.projectFloorsSource.DataSource = typeof(Europlan.Common.Project);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(4, 4);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(106, 24);
-			this.label1.TabIndex = 2;
-			this.label1.Text = "Geschoﬂe";
 			// 
 			// FloorListSummaryPanel
 			// 

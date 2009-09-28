@@ -207,9 +207,16 @@ namespace Europlan.Common {
 			return (Math.Pow(luftFeuchte, 0.12468828) * (raumTemperatur + 109.8)) - 109.8;
 		}
 
-		public double WaemeverlustUnten(double alpha, double RlambdaB, double sU, double lambdaU, double RalphaDecke, double RlambdaIns, double RlambdaDecke, double RlambdaPutz, double q, double innenTemperatur, double untenTemperatur) {
-			double Ro = (1.0 / alpha) + RlambdaB + (sU / lambdaU);
+		public double WaermeverlustUnten(double alpha, double RlambdaB, double sU, double lambdaU, double RalphaDecke, double RlambdaIns, double RlambdaDecke, double RlambdaPutz, double q, double innenTemperatur, double untenTemperatur) {
+			//double Ro = (1.0 / alpha) + RlambdaB + (sU / lambdaU);
 			double Ru = RlambdaIns + RlambdaDecke + RlambdaPutz + RalphaDecke;
+			//double qu = (1.0 / Ru) * ((Ro * q) + innenTemperatur - untenTemperatur);
+			//return qu;
+			return WaermeverlustUnten(alpha, RlambdaB, sU, lambdaU, Ru, q, innenTemperatur, untenTemperatur);
+		}
+
+		public double WaermeverlustUnten(double alpha, double RlambdaB, double sU, double lambdaU, double Ru, double q, double innenTemperatur, double untenTemperatur) {
+			double Ro = (1.0 / alpha) + RlambdaB + (sU / lambdaU);
 			double qu = (1.0 / Ru) * ((Ro * q) + innenTemperatur - untenTemperatur);
 			return qu;
 		}
