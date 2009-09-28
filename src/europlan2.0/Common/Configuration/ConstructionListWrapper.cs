@@ -11,14 +11,14 @@ namespace Europlan.Common {
 		private Nullable<ConstructionScopeEnum> filter = null;
 
 		public ConstructionListWrapper(Configuration.ConfigurationType type) {
-			if (!(type == Configuration.ConfigurationType.UserConfiguration || type == Configuration.ConfigurationType.AdminConfiguration)) {
-				throw new Exception("type must be UserConfiguration or AdminConfiguration");
+			if (!(type == Configuration.ConfigurationType.UserConfiguration || type == Configuration.ConfigurationType.AdminConfiguration || type == Configuration.ConfigurationType.ProjectConfiguration)) {
+				throw new Exception("type must be UserConfiguration or AdminConfiguration or ProjectConfiguration");
 			}
 			this.type = type;
 		}
 
 		private List<Construction> Constructions {
-			get { return (this.type == Configuration.ConfigurationType.AdminConfiguration ? Configuration.AdminTemplate.Constructions : Configuration.UserTemplate.Constructions); }
+			get { return (this.type == Configuration.ConfigurationType.AdminConfiguration ? Configuration.AdminTemplate.Constructions : (this.type == Configuration.ConfigurationType.UserConfiguration ? Configuration.UserTemplate.Constructions : Project.Instance.Config.Constructions)); }
 		}
 
 		#region IEnumerable<Construction> Members
@@ -347,16 +347,17 @@ namespace Europlan.Common {
 		private ConstructionScopeEnum filter;
 
 		internal ConstructionListEnumerator(Configuration.ConfigurationType type, ConstructionScopeEnum filter) {
-			if (!(type == Configuration.ConfigurationType.UserConfiguration || type == Configuration.ConfigurationType.AdminConfiguration)) {
-				throw new Exception("type must be UserConfiguration or AdminConfiguration");
+			if (!(type == Configuration.ConfigurationType.UserConfiguration || type == Configuration.ConfigurationType.AdminConfiguration || type == Configuration.ConfigurationType.ProjectConfiguration)) {
+				throw new Exception("type must be UserConfiguration or AdminConfiguration or ProjectConfiguration");
 			}
+			this.type = type;
 			this.currentNode = -1;
 			this.finished = false;
 			this.filter = filter;
 		}
 
 		private List<Construction> List {
-			get { return (this.type == Configuration.ConfigurationType.AdminConfiguration ? Configuration.AdminTemplate.Constructions : Configuration.UserTemplate.Constructions); }
+			get { return (this.type == Configuration.ConfigurationType.AdminConfiguration ? Configuration.AdminTemplate.Constructions : (this.type == Configuration.ConfigurationType.UserConfiguration ? Configuration.UserTemplate.Constructions : Project.Instance.Config.Constructions)); }
 		}
 
 		#region IEnumerator<Construction> Members

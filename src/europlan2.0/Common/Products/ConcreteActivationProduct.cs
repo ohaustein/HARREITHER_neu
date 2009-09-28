@@ -5,6 +5,7 @@ using System.Text;
 namespace Europlan.Common {
 
 	[Serializable()]
+	[ProductName("Betonkernaktivierung")]
 	public class ConcreteActivationProduct : EurovalProduct {
 
 		public ConcreteActivationProduct(){
@@ -34,6 +35,10 @@ namespace Europlan.Common {
 
 		public override string QuickDimensioningName {
 			get { return "BKA\n(m²)"; }
+		}
+
+		public override ProductType Type {
+			get { return ProductType.FBH; }
 		}
 	}
 	

@@ -5,6 +5,7 @@ using System.Text;
 namespace Europlan.Common {
 
 	[Serializable()]
+	[ProductName("Modul Klimaboden")]
 	public class ModulKlimaBodenProduct : Product {
 
 		public ModulKlimaBodenProduct() {
@@ -54,6 +55,22 @@ namespace Europlan.Common {
 
 		public override string QuickDimensioningName {
 			get { return "Modul\nKlima-\nboden\n(m²)"; }
+		}
+
+		public override ProductType Type {
+			get { return ProductType.FBH; }
+		}
+
+		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad) {
+			// TODO
+		}
+
+		public override double PlannedCoolLoad {
+			get { return 0; }
+		}
+
+		public override double PlannedHeatLoad {
+			get { return 0; }
 		}
 	}
 	

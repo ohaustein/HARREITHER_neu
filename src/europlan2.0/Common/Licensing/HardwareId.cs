@@ -4,11 +4,13 @@ using System.Text;
 using System.Globalization;
 using System.Management;
 using System.Diagnostics;
+using log4net;
 
 namespace Europlan.Licensing {
 	public class HardwareId {
 
 		public static readonly string hardwareIdKeyChars = "0123456789abcdef";
+		public static ILog log = LogManager.GetLogger(typeof(HardwareId));
 		
 		private byte[] id = null;
 		private byte checksum = 0;
@@ -167,7 +169,21 @@ namespace Europlan.Licensing {
 
 		public static byte[] GetCurrentSystemId() {
 			if (currentSystemId == null) {
-				string currentSystemIdString = GetCPUId() + GetMotherBoardID();
+				string cpuId;
+				try {
+					cpuId = GetCPUId();
+				} catch (Exception e) {
+					log.Error("Cannot get CpuID", e);
+					cpuId = "no CPU found";
+				}
+				string motherBoardId = "no Motherboard found";
+				try {
+					motherBoardId = GetMotherBoardID();
+				} catch (Exception e) {
+					log.Error("Cannot get MotherBoardID", e);
+					motherBoardId = "no Motherboard found";
+				}
+				string currentSystemIdString = cpuId + motherBoardId;
 				byte[] hashedId = EncryptionManager.Instance.HashString(currentSystemIdString);
 				int i = 0;
 				int j = hashedId.Length;

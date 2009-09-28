@@ -5,6 +5,7 @@ using System.Text;
 namespace Europlan.Common {
 
 	[Serializable()]
+	[ProductName("Hitherm Compact")]
 	public class HithermCompactProduct : Product {
 
 		public HithermCompactProduct() {
@@ -46,6 +47,22 @@ namespace Europlan.Common {
 
 		public override string QuickDimensioningName {
 			get { return "Hitherm\nCompact\n(m²)"; }
+		}
+
+		public override ProductType Type {
+			get { return ProductType.WH; }
+		}
+
+		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad) {
+			// TODO
+		}
+
+		public override double PlannedCoolLoad {
+			get { return 0; }
+		}
+
+		public override double PlannedHeatLoad {
+			get { return 0; }
 		}
 	}
 	

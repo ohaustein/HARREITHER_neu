@@ -87,6 +87,12 @@
     <Compile Include="Controls\DataGridViewNumericUpDownEditingControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\EmptyEditorUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EmptyEditorUserControl.Designer.cs">
+      <DependentUpon>EmptyEditorUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NumericBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -119,6 +125,7 @@
     <Compile Include="Licensing\LicensedSystem.cs" />
     <Compile Include="Licensing\LicenseManager.cs" />
     <Compile Include="MapiMailMessage.cs" />
+    <Compile Include="Products\ProductNameAttribute.cs" />
     <Compile Include="Products\HithermCompactRoofProduct.cs" />
     <Compile Include="Project\FacilityDetailsSummaryPanel.cs">
       <SubType>UserControl</SubType>
@@ -139,6 +146,12 @@
     </Compile>
     <Compile Include="Project\NewDistributorForm.Designer.cs">
       <DependentUpon>NewDistributorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\NewHeatingSystemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\NewHeatingSystemForm.Designer.cs">
+      <DependentUpon>NewHeatingSystemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\NewRoomTypeForm.cs">
       <SubType>Form</SubType>
@@ -167,6 +180,13 @@
     <Compile Include="Project\FloorSummaryPanel.Designer.cs">
       <DependentUpon>FloorSummaryPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\PlannedEurovalProductPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\PlannedEurovalProductPanel.Designer.cs">
+      <DependentUpon>PlannedEurovalProductPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\PlannedProduct.cs" />
     <Compile Include="Project\Project.cs" />
     <Compile Include="Project\ProjectSummaryPanel.cs">
       <SubType>UserControl</SubType>
@@ -232,6 +252,12 @@
     <Compile Include="Project\RoomTypeGrid.Designer.cs">
       <DependentUpon>RoomTypeGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\SelectConstructionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\SelectConstructionForm.Designer.cs">
+      <DependentUpon>SelectConstructionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\SelectDistributorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -277,9 +303,17 @@
       <DependentUpon>FloorSummaryPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\NewHeatingSystemForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NewHeatingSystemForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\NewRoomTypeForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NewRoomTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\PlannedEurovalProductPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PlannedEurovalProductPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\ProjectSummaryPanel.resx">
       <DependentUpon>ProjectSummaryPanel.cs</DependentUpon>
@@ -317,12 +351,17 @@
       <SubType>Designer</SubType>
       <DependentUpon>RoomTypeGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\SelectConstructionForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SelectConstructionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\SelectDistributorForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SelectDistributorForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\Construction.datasource" />
     <None Include="Properties\DataSources\ConstructionLayer.datasource" />
     <None Include="Properties\DataSources\Distributor.datasource" />
     <None Include="Properties\DataSources\IQuickDimensioningSummary.datasource" />

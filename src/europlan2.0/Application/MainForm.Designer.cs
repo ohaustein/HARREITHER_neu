@@ -96,6 +96,7 @@ namespace Europlan.Application {
 			this.projectTree.HideSelection = false;
 			this.projectTree.Name = "projectTree";
 			this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
+			this.projectTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.projectTree_BeforeSelect);
 			// 
 			// mainMenu
 			// 

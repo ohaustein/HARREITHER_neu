@@ -176,13 +176,20 @@ namespace Europlan.Common {
 				Stream r = new FileStream(filename, FileMode.Open);
 				instance = (Project)s.Deserialize(r);
 				r.Close();
-				instance.configuration = Configuration.UserTemplate + instance.configuration;
+				instance.configuration = (Configuration.AdminTemplate + Configuration.UserTemplate) + instance.configuration;
 				instance.configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 				instance.configuration.RecalculateMaterialToCategoryMapping();
 				instance.RecalculateQuickDimensioningRoomToProjectMapping();
+				instance.FinalizeLoading();
 			}
 			if (ProjectLoaded != null) {
 				Project.ProjectLoaded(Instance);
+			}
+		}
+
+		internal void FinalizeLoading() {
+			foreach (Floor floor in this.floors) {
+				floor.FinalizeLoading();
 			}
 		}
 

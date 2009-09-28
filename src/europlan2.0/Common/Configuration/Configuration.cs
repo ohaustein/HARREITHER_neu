@@ -586,6 +586,15 @@ namespace Europlan.Common {
 			}
 		}
 
+		public Construction GetConstruction(string id) {
+			foreach (Construction constr in this.Constructions) {
+				if (constr.Id == id) {
+					return constr;
+				}
+			}
+			return null;
+		}
+
 
 	}
 

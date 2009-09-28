@@ -182,11 +182,11 @@ namespace Europlan.UnitTest {
 
 		[Test]
 		public void TestWaermeverlustUnten() {
-			double result = norm.WaemeverlustUnten(EN1264.alphaHeizen, 0.1, EN1264.sU, EN1264.lambdaU, EN1264.rAlphaDecke, 1.25, 0.11, 0.015, 37.76, 20, 20);
+			double result = norm.WaermeverlustUnten(EN1264.alphaHeizen, 0.1, EN1264.sU, EN1264.lambdaU, EN1264.rAlphaDecke, 1.25, 0.11, 0.015, 37.76, 20, 20);
 			Assert.AreEqual(5.42, Math.Round(result, 2));
-			result = norm.WaemeverlustUnten(8, 0, 0.015, 1.2, EN1264.rAlphaDecke, 1.25, 0.11, 0.02, 100.71, 20, -18);
+			result = norm.WaermeverlustUnten(8, 0, 0.015, 1.2, EN1264.rAlphaDecke, 1.25, 0.11, 0.02, 100.71, 20, -18);
 			Assert.AreEqual(33.45, Math.Round(result, 2));
-			result = norm.WaemeverlustUnten(EN1264.alpha0, 0.1, 0.035, 1.2, EN1264.rAlphaDecke, 1.25, 0.11, 0.02, -17.17, 25, 25);
+			result = norm.WaermeverlustUnten(EN1264.alpha0, 0.1, 0.035, 1.2, EN1264.rAlphaDecke, 1.25, 0.11, 0.02, -17.17, 25, 25);
 			Assert.AreEqual(-2.46, Math.Round(result, 2));
 		}
 
