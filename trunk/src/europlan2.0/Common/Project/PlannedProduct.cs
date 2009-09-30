@@ -15,6 +15,8 @@ namespace Europlan.Common {
 		private bool coverCoolLoad = true;
 		private double requestedHeatLoad;
 		private double requestedCoolLoad;
+		private bool calculateHeat = false;
+		private bool calculateCool = false;
 
 		internal PlannedProduct() {
 			this.plannedProduct = null;
@@ -154,6 +156,16 @@ namespace Europlan.Common {
 				}
 				return plannedCoolLoad.ToString();
 			}
+		}
+
+		public bool CalculateHeat {
+			get { return this.calculateHeat; }
+			set { this.calculateHeat = value; }
+		}
+
+		public bool CalculateCool {
+			get { return this.calculateCool; }
+			set { this.calculateCool = value; }
 		}
 
 		public bool CoverHeatLoad {
@@ -300,7 +312,7 @@ namespace Europlan.Common {
 		public void ConfigureProductDefault() {
 			this.requestedCoolLoad = this.NecessaryCoolLoad;
 			this.requestedHeatLoad = this.NecessaryHeatLoad;
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad);
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool);
 		}
 
 		#region IGuiRepresentation Members
@@ -321,7 +333,7 @@ namespace Europlan.Common {
 		#endregion
 
 		internal void FinalizeLoading() {
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad);
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool);
 			this.plannedProduct.FinalizeLoading();
 		}
 

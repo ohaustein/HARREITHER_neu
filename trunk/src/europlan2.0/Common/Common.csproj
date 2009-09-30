@@ -63,6 +63,7 @@
     <Compile Include="Configuration\FloorConstruction.cs" />
     <Compile Include="Configuration\MaterialType.cs" />
     <Compile Include="Configuration\Material.cs" />
+    <Compile Include="Configuration\ProductParameterAttribute.cs" />
     <Compile Include="Configuration\RoomType.cs" />
     <Compile Include="ConstructionEditor\ConstructionEditor.cs">
       <SubType>UserControl</SubType>

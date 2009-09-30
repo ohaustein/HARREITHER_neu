@@ -214,7 +214,7 @@ namespace Europlan.Common {
 
 		private void CorrectPlanning() {
 			foreach (PlannedProduct pp in this.PlannedProducts) {
-				pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad);
+				pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool);
 			}
 		}
 

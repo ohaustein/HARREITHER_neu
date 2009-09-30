@@ -30,6 +30,8 @@ namespace Europlan.Common {
 		private Dictionary<string, float> discounts;
 		private List<RoomType> roomTypes;
 
+		private SerializableDictionary<Type, SerializableDictionary<string, string>> productConfiguration = new SerializableDictionary<Type,SerializableDictionary<string,string>>();
+
 		private EurovalProduct eurovalProduct = new EurovalProduct();
 		private ConcreteActivationProduct concreteActivationProduct = new ConcreteActivationProduct();
 		private HithermProduct hithermProduct = new HithermProduct();
@@ -104,6 +106,41 @@ namespace Europlan.Common {
 				}
 			}
 
+			SerializableDictionary<string, string> current;
+			// Euroval Config
+			if (this.productConfiguration.ContainsKey(typeof(EurovalProduct))) {
+				current = this.productConfiguration[typeof(EurovalProduct)];
+				foreach (System.Reflection.PropertyInfo info in typeof(EurovalProduct).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty)) {
+					if (current.ContainsKey(info.Name)) {
+						if (info.PropertyType == typeof(int)) {
+							int value = 0;
+							if (int.TryParse(current[info.Name], out value)) {
+								info.SetValue(null, value, null);
+							} else {
+								log.Warn("Error when trying to set Product Configuration");
+							}
+						} else if (info.PropertyType == typeof(double)) {
+							double value = 0;
+							if (double.TryParse(current[info.Name], out value)) {
+								info.SetValue(null, value, null);
+							} else {
+								log.Warn("Error when trying to set Product Configuration");
+							}
+						} else if (info.PropertyType == typeof(float)) {
+							float value = 0;
+							if (float.TryParse(current[info.Name], out value)) {
+								info.SetValue(null, value, null);
+							} else {
+								log.Warn("Error when trying to set Product Configuration");
+							}
+						} else if (info.PropertyType == typeof(string)) {
+							info.SetValue(null, current[info.Name], null);
+						} else {
+							log.Warn("Error when trying to set Product Configuration");
+						}
+					}
+				}
+			}
 		}
 
 		public void RecalculateMaterialToCategoryMapping() {

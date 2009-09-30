@@ -9,45 +9,55 @@ namespace Europlan.Common {
 	[ProductName("Euroval")]
 	public class EurovalProduct : Product {
 
-		private static readonly double su0 = 0.045; /* Mindestüberdeckung fix??? */
-		private static readonly double alpha0 = 10.8; /* Fixwert für FBH fix??? */
-		private static readonly double alphaFbk = 6.5; //6.5; /* für FBK fix??? */
-		private static readonly double alphaFbh = 10.8; /* für FBH fix??? */
-		private static readonly double lambdaR0 = 0.35; /* fix ??? */
-		private static readonly double lambdaR = 0.22; /* für PP Rohr laut Tabelle A.13 fix??? */
-		private static readonly double lambdaU0 = 1; /* fix??? */
-		private static readonly double lambdaE = 1.2; /* Estrichleitfähigkeit, fix */
-		private static readonly double rohrAussenD = 0.0206505; /* Aussendurchmesser Euroval Rohr */
-		private static readonly double rohrInnenD = 0.0153; /* Rohrinnendurchmesser */
-		private static readonly double rohrInnenA = 0.000183783; /* Rohrinnenquerschnitt */
-		private static readonly double ag = 1.1034; /* Ovalrohr Geometriefaktor für Euroval */
-		private static readonly double sr0 = 0.002; /* fix ??? */
-		private static readonly double sr = 0.00238; /* Aus Euroval Normprüfdaten */
-		private static readonly double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
-		private static readonly double rho = 1000; /* kg/m³ ... Dichte des Mediums */
-		private static readonly double v = 0.00000101; /* m²/s ... kinematische Viskosität */
-
-		private Nullable<LayDistance> plannedLayDistance = null;
-		private Nullable<LayDistance> requestedLayDistance = null;
-		private double plannedQ = 0;
-		private double plannedQRim = 0;
-		private double plannedQResidence = 0;
-		private double plannedQU = 0;
-		private double plannedDeltaRho = 0;
-		private double plannedPipeLength = 0;
+		private static double su0 = 0.035; /* Mindestüberdeckung fix??? */
+		private static double alpha0 = 10.8; /* Fixwert für FBH fix??? */
+		private static double alphaFbk = 6.5; //6.5; /* für FBK fix??? */
+		private static double alphaFbh = 10.8; /* für FBH fix??? */
+		private static double lambdaR0 = 0.35; /* fix ??? */
+		private static double lambdaR = 0.22; /* für PP Rohr laut Tabelle A.13 fix??? */
+		private static double lambdaU0 = 1; /* fix??? */
+		private static double lambdaE = 1.2; /* Estrichleitfähigkeit, fix */
+		private static double rohrAussenD = 0.0206505; /* Aussendurchmesser Euroval Rohr */
+		private static double rohrInnenD = 0.0153; /* Rohrinnendurchmesser */
+		private static double rohrInnenA = 0.000183783; /* Rohrinnenquerschnitt */
+		private static double ag = 1.1034; /* Ovalrohr Geometriefaktor für Euroval */
+		private static double sr0 = 0.002; /* fix ??? */
+		private static double sr = 0.00238; /* Aus Euroval Normprüfdaten */
+		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
+		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
+		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
+		private static double defaultThetaVHeat = 35;
+		private static double defaultThetaRHeat = 30;
+		private static double defaultThetaVCool = 17;
+		private static double defaultThetaRCool = 20;
 
 		private float plannedAreaReduced = 0;
 		private float plannedAreaUnheated = 0;
+		private float plannedRimLength = 0;
+		private int plannedRimCorners = 0;
+		private float plannedRoomTemperatureBelowHeat = 10;
+		private float plannedRoomTemperatureBelowCool = 30;
+		private Construction plannedFloorConstruction = null;
+		private Construction plannedInsulationConstruction = null;
 
-		private float plannedRim = 0;
-		private Nullable<RimType> plannedRimType = null;
+		private Nullable<LayDistance> requestedLayDistance = null;
 		private Nullable<RimType> requestedRimType = null;
-		private int plannedCornersRim = 0;
 
-		private float plannedRoomTemperatureBelow = 10;
+		private Nullable<LayDistance> plannedLayDistance = null;
+		private Nullable<RimType> plannedRimType = null;
 
-		private Construction floorConstruction = null;
-		private Construction insulationConstruction = null;
+		private double plannedQHeat = 0;
+		private double plannedQHeatRim = 0;
+		private double plannedQHeatResidence = 0;
+		private double plannedQHeatU = 0;
+		private double plannedDeltaRhoHeat = 0;
+		private double plannedQCool = 0;
+		private double plannedQCoolRim = 0;
+		private double plannedQCoolResidence = 0;
+		private double plannedQCoolU = 0;
+		private double plannedDeltaRhoCool = 0;
+
+		private double plannedPipeLength = 0;
 
 		public enum LayDistance {
 			EV5,
@@ -92,11 +102,153 @@ namespace Europlan.Common {
 			return product;
 		}
 
+		[ProductParameter]
+		public static double ConfigSu0 {
+			get { return su0; }
+			set { su0 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlpha0 {
+			get { return EurovalProduct.alpha0; }
+			set { EurovalProduct.alpha0 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaFbk {
+			get { return EurovalProduct.alphaFbk; }
+			set { EurovalProduct.alphaFbk = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaFbh {
+			get { return EurovalProduct.alphaFbh; }
+			set { EurovalProduct.alphaFbh = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLambdaR0 {
+			get { return EurovalProduct.lambdaR0; }
+			set { EurovalProduct.lambdaR0 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLambdaR {
+			get { return EurovalProduct.lambdaR; }
+			set { EurovalProduct.lambdaR = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLambdaU0 {
+			get { return EurovalProduct.lambdaU0; }
+			set { EurovalProduct.lambdaU0 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLambdaE {
+			get { return EurovalProduct.lambdaE; }
+			set { EurovalProduct.lambdaE = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRohrAussenD {
+			get { return EurovalProduct.rohrAussenD; }
+			set { EurovalProduct.rohrAussenD = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRohrInnenD {
+			get { return EurovalProduct.rohrInnenD; }
+			set { EurovalProduct.rohrInnenD = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRohrInnenA {
+			get { return EurovalProduct.rohrInnenA; }
+			set { EurovalProduct.rohrInnenA = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAg {
+			get { return EurovalProduct.ag; }
+			set { EurovalProduct.ag = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSr0 {
+			get { return EurovalProduct.sr0; }
+			set { EurovalProduct.sr0 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSr {
+			get { return EurovalProduct.sr; }
+			set { EurovalProduct.sr = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigC {
+			get { return EurovalProduct.c; }
+			set { EurovalProduct.c = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRho {
+			get { return EurovalProduct.rho; }
+			set { EurovalProduct.rho = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigV {
+			get { return EurovalProduct.v; }
+			set { EurovalProduct.v = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigDefaultThetaVHeat {
+			get { return EurovalProduct.defaultThetaVHeat; }
+			set { EurovalProduct.defaultThetaVHeat = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigDefaultThetaRHeat {
+			get { return EurovalProduct.defaultThetaRHeat; }
+			set { EurovalProduct.defaultThetaRHeat = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigDefaultThetaVCool {
+			get { return EurovalProduct.defaultThetaVCool; }
+			set { EurovalProduct.defaultThetaVCool = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigDefaultThetaRCool {
+			get { return EurovalProduct.defaultThetaRCool; }
+			set { EurovalProduct.defaultThetaRCool = value; }
+		}
+
+		/// <summary>
+		/// Returns the default number of circuit for the planned area (for quick dimensioning)
+		/// </summary>
 		public override int GetDefaultQuickDimensioningCircuits() {
 			LayDistance distance = Project.Instance.QuickDimensioning.LayDistance;
 			return (int)Math.Ceiling(quickDimensioningPlannedArea / (100/GetPipeLengthPerSqm(distance)));
 		}
 
+		/// <summary>
+		/// Gets the default area that should be planned for this product in quick dimensioning
+		/// </summary>
+		public override float GetDefaultQuickDimensioningPlannedArea() {
+			if (this.AssociatedRoom != null) {
+				return this.AssociatedRoom.Area;
+			}
+			return 0;
+		}
+
+		/// <summary>
+		/// Returns the pipe length in m per m² for the specified laydistance 
+		/// </summary>
 		private static double GetPipeLengthPerSqm(LayDistance distance) {
 			switch (distance) {
 				case LayDistance.EV5:
@@ -118,12 +270,15 @@ namespace Europlan.Common {
 			}
 		}
 
+		/// <summary>
+		/// Returns distance between two pipes in m for specified laydistance 
+		/// </summary>
 		private static double GetTeilung(LayDistance distance) {
 			switch (distance) {
 				case LayDistance.EV5:
-					return 0.05;
-				case LayDistance.EV10:
 					return 0.1;
+				case LayDistance.EV10:
+					return 0.125;
 				case LayDistance.EV15:
 					return 0.15;
 				case LayDistance.EV20:
@@ -139,7 +294,10 @@ namespace Europlan.Common {
 			}
 		}
 
-		private static LayDistance GetLayDistanceRim(RimType rimType) {
+		/// <summary>
+		/// Returns the laydistance for the specified rimtype
+		/// </summary>
+		private static LayDistance GetRimLayDistance(RimType rimType) {
 			switch (rimType) {
 				case RimType.EV15_60:
 				case RimType.EV15_120:
@@ -158,7 +316,10 @@ namespace Europlan.Common {
 			}
 		}
 
-		private static int GetWidthRim(RimType rimType) {
+		/// <summary>
+		/// Returns the width of the rim in cm for the specified rimtype
+		/// </summary>
+		private static int GetRimWidth(RimType rimType) {
 			switch (rimType) {
 				case RimType.EV5_40:
 					return 40;
@@ -182,13 +343,10 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override float GetDefaultQuickDimensioningPlannedArea() {
-			if (this.AssociatedRoom != null) {
-				return this.AssociatedRoom.Area;
-			}
-			return 0;
-		}
-
+		#region QuickDimensioning
+		/// <summary>
+		/// The maximum area that this product can use in quick dimensioning
+		/// </summary>
 		public override float QuickDimensioningMaximumArea {
 			get {
 				if (this.AssociatedRoom != null) {
@@ -198,48 +356,421 @@ namespace Europlan.Common {
 			}
 		}
 
+		/// <summary>
+		/// The name of this product that is shown in quick dimensioning
+		/// </summary>
+		public override string QuickDimensioningName {
+			get { return "Euroval\n(m²)"; }
+		}
+		#endregion QuickDimensioning
+
+		/// <summary>
+		/// The name of this product
+		/// </summary>
 		public override string Name {
 			get { return "Euroval"; }
 		}
 
-		public override string QuickDimensioningName {
-			get { return "Euroval\n(m²)"; }
-		}
-
+		/// <summary>
+		/// The type of this product
+		/// </summary>
 		public override ProductType Type {
 			get { return ProductType.FBH; }
 		}
 
-		public Nullable<LayDistance> PlannedLayDistance {
-			get { return this.plannedLayDistance; }
-			set {
-				//
-				this.plannedLayDistance = value;
-			}
-		}
-
+		#region Auslegung
+		/// <summary>
+		/// The lay distance that the user requested for this product in the planning.
+		/// If this is property is null the optimal lay distance will be calculated.
+		/// </summary>
 		public Nullable<LayDistance> RequestedLayDistance {
 			get { return this.requestedLayDistance; }
 			set { this.requestedLayDistance = value; }
 		}
 
-		private double CalculateQForLayDistance(LayDistance distance, Nullable<RimType> distanceRim, out double qU, out double q, out double qRim, out double qResidence, out double deltaRho, out double pipeLength) {
+		/// <summary>
+		/// The rim type the user requested for this product in the planning.
+		/// If this property is null the optimal rim type will be calculated.
+		/// </summary>
+		public Nullable<RimType> RequestedRimType {
+			get { return this.requestedRimType; }
+			set { this.requestedRimType = value; }
+		}
+
+		/// <summary>
+		/// The length of the rim the user planned.
+		/// </summary>
+		public float PlannedRimLength {
+			get { return this.plannedRimLength; }
+			set { this.plannedRimLength = value; }
+		}
+
+		/// <summary>
+		/// The number of corners in the rim the user planned.
+		/// </summary>
+		public int PlannedRimCorners {
+			get { return this.plannedRimCorners; }
+			set { this.plannedRimCorners = value; }
+		}
+
+		/// <summary>
+		/// The temperature of the room below used for the heating calcuation
+		/// </summary>
+		public float PlannedRoomTemperatureBelowHeat {
+			get { return this.plannedRoomTemperatureBelowHeat; }
+			set { this.plannedRoomTemperatureBelowHeat = value; }
+		}
+
+		/// <summary>
+		/// The temperature of the room below used for the cooling calculation
+		/// </summary>
+		public float PlannedRoomTemperatureBelowCool {
+			get { return this.plannedRoomTemperatureBelowCool; }
+			set { this.plannedRoomTemperatureBelowCool = value; }
+		}
+
+		/// <summary>
+		/// The id of the planned floor construction for serialization
+		/// </summary>
+		public string PlannedFloorConstructionId {
+			get { return (this.plannedFloorConstruction == null ? "" : this.plannedFloorConstruction.Id); }
+			set { this.plannedFloorConstruction = Project.Instance.Config.GetConstruction(value); }
+		}
+
+		/// <summary>
+		/// The id of the planned insulation construction for serialization
+		/// </summary>
+		public string PlannedInsulationConstructionId {
+			get { return (this.plannedInsulationConstruction == null ? "" : this.plannedInsulationConstruction.Id); }
+			set { this.plannedInsulationConstruction = Project.Instance.Config.GetConstruction(value); }
+		}
+
+		/// <summary>
+		/// The planned floor contruction
+		/// </summary>
+		[XmlIgnore]
+		public Construction PlannedFloorConstruction {
+			get { return this.plannedFloorConstruction; }
+			set { this.plannedFloorConstruction = value; }
+		}
+
+		/// <summary>
+		/// The planned insulation construction
+		/// </summary>
+		[XmlIgnore]
+		public Construction PlannedInsulationConstruction {
+			get { return this.plannedInsulationConstruction; }
+			set { this.plannedInsulationConstruction = value; }
+		}
+
+		/// <summary>
+		/// The r-value of the planned floor construction
+		/// </summary>
+		[XmlIgnore]
+		public float PlannedFloorConstructionRValue {
+			get { return (this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue); }
+		}
+
+		/// <summary>
+		/// The r-value of the planned insulation construction
+		/// </summary>
+		[XmlIgnore]
+		public float PlannedInsulationConstructionRValue {
+			get { return (this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue); }
+		}
+
+		/// <summary>
+		/// The area which is planned reduced (50%).
+		/// Half of this area is subtracted from the planned area for calculation.
+		/// </summary>
+		public float PlannedAreaReduced {
+			get { return this.plannedAreaReduced; }
+			set { this.plannedAreaReduced = value; }
+		}
+
+		/// <summary>
+		/// The area which is planned unheated.
+		/// This area is subtracted from the planned area for calculation.
+		/// </summary>
+		public float PlannedAreaUnheated {
+			get { return this.plannedAreaUnheated; }
+			set { this.plannedAreaUnheated = value; }
+		}
+
+		/// <summary>
+		/// The area that is occupied by the planned rim
+		/// </summary>
+		[XmlIgnore]
+		public float PlannedAreaRim {
+			get {
+				if (this.plannedRimType.HasValue) {
+					float rimWidth = ((float)GetRimWidth(this.plannedRimType.Value)) / 100.0f;
+					float realRimLength = this.plannedRimLength - rimWidth * this.plannedRimCorners;
+					return realRimLength * rimWidth;
+				} else {
+					return 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// The area that is occupied by the residence area.
+		/// This area is again divided into reduced (<seealso cref="PlannedAreaReduced">PlannedAreaReduced</seealso>), 
+		/// unheated (<seealso cref="PlannedAreaUnheated">PlannedAreaUnheated</seealso>) and normal parts.
+		/// </summary>
+		[XmlIgnore]
+		public float PlannedAreaResidence {
+			get { return this.PlannedFloorArea - this.PlannedAreaRim; }
+		}
+
+		/// <summary>
+		/// The percentage of the total room area that is occupied by the planned area.
+		/// </summary>
+		[XmlIgnore]
+		public float PlannedFloorAreaPercentage {
+			get { return (this.AvailableFloorArea <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AvailableFloorArea); }
+			set { this.PlannedFloorArea = (float)(this.AvailableFloorArea * value / 100); }
+		}
+		#endregion Auslegung
+
+		#region Auslegung calculated values
+		/// <summary>
+		/// The lay distance used for calculation. This is either the lay distance the user requested
+		/// or if the user did not request any specific lay distance the optimal lay distance is
+		/// calculated.
+		/// </summary>
+		[XmlIgnore]
+		public Nullable<LayDistance> PlannedLayDistance {
+			get { return this.plannedLayDistance; }
+			set { this.plannedLayDistance = value; }
+		}
+
+		/// <summary>
+		/// The rim type used for calculation. This is either the rim type the user requested
+		/// or if the user did not request any specific rim type the optimal rim type is
+		/// calculated.
+		/// </summary>
+		[XmlIgnore]
+		public Nullable<RimType> PlannedRimType {
+			get { return this.plannedRimType; }
+			set { this.plannedRimType = value; }
+		}
+
+		/// <summary>
+		/// The lay distance of the rim type used for calculation.
+		/// </summary>
+		[XmlIgnore]
+		public Nullable<LayDistance> PlannedRimLayDistance {
+			get { return this.plannedRimType == null ? (Nullable<LayDistance>)null : (Nullable<LayDistance>)GetRimLayDistance(this.plannedRimType.Value); }
+		}
+
+		/// <summary>
+		/// The width of the rim type used for calculation.
+		/// </summary>
+		[XmlIgnore]
+		public int PlannedRimWidth {
+			get { return this.plannedRimType == null ? 0 : GetRimWidth(this.plannedRimType.Value); }
+		}
+
+		#region Heat Load
+		/// <summary>
+		/// The heat load per m² that results of the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedHeatLoadPerSqM {
+			get { return this.plannedQHeat; }
+		}
+
+		/// <summary>
+		/// The heat load per m² that is emmited in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedHeatLoadPerSqMBelow {
+			get { return this.plannedQHeatU; }
+		}
+
+		/// <summary>
+		/// The heat load per m² that is emmited outside of the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedHeatLoadPerSqMH20 {
+			get { return this.plannedQHeat + this.plannedQHeatU; }
+		}
+
+		/// <summary>
+		/// The heat load per m² that is emmited by the rim area in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedHeatLoadPerSqMRim {
+			get { return this.plannedQHeatRim; }
+		}
+
+		/// <summary>
+		/// The heat load per m² that is emmited by the residence area in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedHeatLoadPerSqMResidence {
+			get { return this.plannedQHeatResidence; }
+		}
+
+		/// <summary>
+		/// The total heat load that is emmited in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public override double PlannedHeatLoad {
+			get { return Math.Round(plannedQHeat * PlannedFloorArea, 1); }
+		}
+
+		/// <summary>
+		/// The total heat load that is emmited by the rim area in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedHeatLoadRim {
+			get { return Math.Round(this.PlannedAreaRim * this.plannedQHeatRim, 0); }
+		}
+
+		/// <summary>
+		/// The total heat load that is emmited by the residence area in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedHeatLoadResidence {
+			get { return Math.Round(this.PlannedAreaResidence * this.plannedQHeatResidence, 0); }
+		}
+
+		/// <summary>
+		/// The pressure loss for heating, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedDeltaRhoHeat {
+			get { return this.plannedDeltaRhoHeat; }
+		}
+		#endregion Heat Load
+
+		#region Cool Load
+		/// <summary>
+		/// The cool load per m² that results of the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedCoolLoadPerSqM {
+			get { return this.plannedQCool; }
+		}
+
+		/// <summary>
+		/// The heat load per m² that is emmited in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedCoolLoadPerSqMBelow {
+			get { return this.plannedQCoolU; }
+		}
+
+		/// <summary>
+		/// The cool load per m² that is emmited outside of the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedCoolLoadPerSqMH20 {
+			get { return this.plannedQCool + this.plannedQCoolU; }
+		}
+
+		/// <summary>
+		/// The cool load per m² that is emmited by the rim area in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedCoolLoadPerSqMRim {
+			get { return this.plannedQCoolRim; }
+		}
+
+		/// <summary>
+		/// The cool load per m² that is emmited by the residence area in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedCoolLoadPerSqMResidence {
+			get { return this.plannedQCoolResidence; }
+		}
+
+		/// <summary>
+		/// The total cool load that is emmited in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public override double PlannedCoolLoad {
+			get { return Math.Round(plannedQCool * PlannedFloorArea, 1); }
+		}
+
+		/// <summary>
+		/// The total cool load that is emmited by the rim area in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedCoolLoadRim {
+			get { return Math.Round(this.PlannedAreaRim * this.plannedQCoolRim, 0); }
+		}
+
+		/// <summary>
+		/// The total cool load that is emmited by the residence area in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedCoolLoadResidence {
+			get { return Math.Round(this.PlannedAreaResidence * this.plannedQCoolResidence, 0); }
+		}
+
+		/// <summary>
+		/// The pressure loss for cooling, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedDeltaRhoCool {
+			get { return this.plannedDeltaRhoCool; }
+		}
+
+		[XmlIgnore]
+		public double PlannedFloorTemperatureHeatRim {
+			get { return this.plannedQHeatRim / alphaFbh + this.AssociatedRoom.RoomTemperature; }
+		}
+
+		[XmlIgnore]
+		public double PlannedFloorTemperatureCoolRim {
+			get { return this.plannedQCoolRim / alphaFbk + this.AssociatedRoom.RoomTemperature; }
+		}
+
+		[XmlIgnore]
+		public double PlannedFloorTemperatureHeatResidence {
+			get { return this.plannedQHeatResidence / alphaFbh + this.AssociatedRoom.RoomTemperature; }
+		}
+
+		[XmlIgnore]
+		public double PlannedFloorTemperatureCoolResidence {
+			get { return this.plannedQCoolResidence / alphaFbk + this.AssociatedRoom.RoomTemperature; }
+		}
+		#endregion Cool Load
+
+		[XmlIgnore]
+		public double PlannedPipeLength {
+			get { return this.plannedPipeLength; }
+		}
+		#endregion Auslegung calculated values
+
+		private void CalculateQForLayDistance(LayDistance distance, Nullable<RimType> distanceRim,
+				out double qHeatU, out double qHeat, out double qHeatRim, out double qHeatResidence, out double deltaRhoHeat,
+				out double qCoolU, out double qCool, out double qCoolRim, out double qCoolResidence, out double deltaRhoCool,
+				out double pipeLength) {
 			if (this.plannedFloorArea == 0) {
-				qU = 0;
-				q = 0;
-				qRim = 0;
-				qResidence = 0;
-				deltaRho = 0;
+				qHeatU = 0;
+				qHeat = 0;
+				qHeatRim = 0;
+				qHeatResidence = 0;
+				deltaRhoHeat = 0;
+				qCoolU = 0;
+				qCool = 0;
+				qCoolRim = 0;
+				qCoolResidence = 0;
+				deltaRhoCool = 0;
 				pipeLength = 0;
-				return 0;
+				return;
 			}
 
 			EN1264 en1264 = EN1264.Instance;
 
 			double su = 0.045; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
 			double lambdaU = 1.2; /* Estrich??? */
-			double rLambdaB = this.floorConstruction == null ? 0 : this.floorConstruction.RValue;  //0.1; /* Annahme Parkett mit 0.1 m²K/W; durch echte Konstruktion ersetzen! */
-			double rLambdaIns = this.insulationConstruction == null ? 0 : this.insulationConstruction.RValue;
+			double rLambdaB = this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue;  //0.1; /* Annahme Parkett mit 0.1 m²K/W; durch echte Konstruktion ersetzen! */
+			double rLambdaIns = this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue;
 			double rLambdaDecke = 0.11; /* Fußbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 			double rLambdaPutz = 0.02; /* Fußbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 			double rAlphaDecke = 0.17; /* Wärmeübergang Decke; fix??? */
@@ -250,98 +781,168 @@ namespace Europlan.Common {
 			double aUnb = this.PlannedAreaUnheated;	// unbeheizte Fläche
 			double aFbh = aGes - aRed / 2 - aUnb;	// wirksam beheizte Fläche
 
-			bool calculateWithRim = distanceRim.HasValue && (this.plannedRim - this.plannedCornersRim * GetWidthRim(distanceRim.Value) / 100 > 0);
+			bool calculateWithRim = distanceRim.HasValue && (this.plannedRimLength - this.plannedRimCorners * GetRimWidth(distanceRim.Value) / 100 > 0);
 			double lRz = 0;
 			double bRz = 0;
 			double aRz = 0;
 			double lRlRz = 0;
 			if (calculateWithRim) {
-				lRz = this.plannedRim - this.plannedCornersRim * bRz;			// Länge der Randzone
-				bRz = ((float)GetWidthRim(distanceRim.Value)) / 100;
+				lRz = this.plannedRimLength - this.plannedRimCorners * bRz;			      // Tatsächliche länge der Randzone berechnen
+				bRz = ((float)GetRimWidth(distanceRim.Value)) / 100;
 				lRz = lRz < 0 ? 0 : lRz;
-				aRz = lRz * bRz;
-
-				lRlRz = aRz * GetPipeLengthPerSqm(GetLayDistanceRim(distanceRim.Value));
+				aRz = lRz * bRz;                                                          // Fläche der Randzone berechnen
+				lRlRz = aRz * GetPipeLengthPerSqm(GetRimLayDistance(distanceRim.Value));  // Rohrlänge der Randzone berechnen
 			}
-			double aAz = aFbh - aRz;
-			double lRlAz = aAz * GetPipeLengthPerSqm(distance);
+			double aAz = aFbh - aRz;                                                      // Fläche der Aufenthaltszone berechnen
+			double lRlAz = aAz * GetPipeLengthPerSqm(distance);                           // Rohlänge der Aufenthaltszone berechnen
 			double lRlGes = lRlRz + lRlAz;
 
-			double thetaVrz = 35;
-			double thetaRrz = 35;
-			double thetaVaz = 35;
-			double thetaRaz = 30;
+			{ // Heizlastberechnung
+				double thetaVrz = defaultThetaVHeat;
+				double thetaRrz = defaultThetaVHeat;
+				double thetaVaz = defaultThetaVHeat;
+				double thetaRaz = defaultThetaRHeat;
 
-			double dThetaRz = 0;
+				double dThetaRz = 0;
 
-			if (calculateWithRim) {
-				thetaRrz = thetaVrz - (thetaVrz - thetaRaz) * lRlRz / lRlGes;
-				thetaVaz = thetaRrz;
-				dThetaRz = en1264.Heizmitteluebertemperatur(thetaVrz, thetaRrz, this.AssociatedRoom.RoomTemperature);
+				if (calculateWithRim) {
+					thetaRrz = thetaVrz - (thetaVrz - thetaRaz) * lRlRz / lRlGes;
+					thetaVaz = thetaRrz;
+					dThetaRz = en1264.Heizmitteluebertemperatur(thetaVrz, thetaRrz, this.AssociatedRoom.RoomTemperature);
+					//                                                                        // Heizmittelübertemperatur der Randzone berechnen
+				}
+				double dThetaAz = en1264.Heizmitteluebertemperatur(thetaVaz, thetaRaz, this.AssociatedRoom.RoomTemperature);
+				//                                                                            // Heizmittelübertemperatur der Aufenthaltszone berechnen
+
+				double tRz = 0;
+				double ppRz = 0;
+				double bgRz = 0;
+				double khRz = 0;
+				double qRz = 0;
+				if (calculateWithRim) {
+					tRz = EurovalProduct.GetTeilung(GetRimLayDistance(distanceRim.Value));    // Teilung der Randzone
+					ppRz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag);
+					//                                                                        // Potenzprodukt der Randzone berechnen
+					bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
+					//                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
+					khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
+					qRz = en1264.WaermestromDichteRohr(khRz, dThetaRz);                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
+				}
+
+				double tAz = EurovalProduct.GetTeilung(distance);                             // Teilung der Aufenthaltszone
+				double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag);
+				//                                                                            // Potenzprodukt der Aufenthaltszone berechnen
+				double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
+				//                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
+				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
+				double qAz = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
+
+				double QFbh = aRz * qRz + aAz * qAz;                                          // gesamte in den Raum abgegebene Wärme
+
+				qHeat = QFbh / aGes;
+				qHeatRim = qRz;
+				qHeatResidence = qAz;
+				qHeatU = en1264.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDecke, rLambdaIns, rLambdaDecke, rLambdaPutz, qHeat, this.AssociatedRoom.RoomTemperature, this.PlannedRoomTemperatureBelowHeat);
+				//                                                                           // Wärmeverlust nach unten berechnen
+
+				// hydraulische Berechnung
+				double qH2o = (qHeat + qHeatU) * aGes;                                        // gesamte aufgenommene Leistung berechnen
+				double deltaT = thetaVrz - thetaRaz;                                          // gesamte Spreizung
+				deltaRhoHeat = en1264.Druckverlust(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, lRlGes);
+				//                                                                           // gesamten Druckverlust berechnen
 			}
-			double dThetaAz = en1264.Heizmitteluebertemperatur(thetaVaz, thetaRaz, this.AssociatedRoom.RoomTemperature);
 
-			double tRz = 0;
-			double ppRz = 0;
-			double bgRz = 0;
-			double khRz = 0;
-			double qRz = 0;
-			if (calculateWithRim) {
-				tRz = EurovalProduct.GetTeilung(GetLayDistanceRim(distanceRim.Value));
-				ppRz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag);
-				bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
-				khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);
-				qRz = en1264.WaermestromDichteRohr(khRz, dThetaRz);
+			{ // Kühllastberechnung
+				double thetaVrz = defaultThetaVCool;
+				double thetaRrz = defaultThetaVCool;
+				double thetaVaz = defaultThetaVCool;
+				double thetaRaz = defaultThetaRCool;
+
+				double dThetaRz = 0;
+
+				if (calculateWithRim) {
+					thetaRrz = thetaVrz - (thetaVrz - thetaRaz) * lRlRz / lRlGes;
+					thetaVaz = thetaRrz;
+					dThetaRz = en1264.Heizmitteluebertemperatur(thetaVrz, thetaRrz, this.AssociatedRoom.RoomTemperature);
+					//                                                                        // Heizmittelübertemperatur der Randzone berechnen
+				}
+				double dThetaAz = en1264.Heizmitteluebertemperatur(thetaVaz, thetaRaz, this.AssociatedRoom.RoomTemperature);
+				//                                                                            // Heizmittelübertemperatur der Aufenthaltszone berechnen
+
+				double tRz = 0;
+				double ppRz = 0;
+				double bgRz = 0;
+				double khRz = 0;
+				double qRz = 0;
+				if (calculateWithRim) {
+					tRz = EurovalProduct.GetTeilung(GetRimLayDistance(distanceRim.Value));    // Teilung der Randzone
+					ppRz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag);
+					//                                                                        // Potenzprodukt der Randzone berechnen
+					bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
+					//                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
+					khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
+					qRz = en1264.WaermestromDichteRohr(khRz, dThetaRz);                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
+				}
+
+				double tAz = EurovalProduct.GetTeilung(distance);                             // Teilung der Aufenthaltszone
+				double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag);
+				//                                                                            // Potenzprodukt der Aufenthaltszone berechnen
+				double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
+				//                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
+				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
+				double qAz = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
+
+				double QFbk = aRz * qRz + aAz * qAz;                                          // gesamte in den Raum abgegebene Wärme
+
+				qCool = QFbk / aGes;
+				qCoolRim = qRz;
+				qCoolResidence = qAz;
+				qCoolU = en1264.WaermeverlustUnten(alphaFbk, rLambdaB, su, lambdaU, rAlphaDecke, rLambdaIns, rLambdaDecke, rLambdaPutz, qCool, this.AssociatedRoom.RoomTemperature, this.PlannedRoomTemperatureBelowCool);
+				//                                                                           // Kühlverlust nach unten berechnen
+
+				// hydraulische Berechnung
+				double qH2o = (qCool + qCoolU) * aGes;                                        // gesamte aufgenommene Leistung berechnen
+				double deltaT = thetaVrz - thetaRaz;                                          // gesamte Spreizung
+				deltaRhoCool = en1264.Druckverlust(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, lRlGes);
+				//                                                                           // gesamten Druckverlust berechnen
 			}
-
-			double tAz = EurovalProduct.GetTeilung(distance);
-			double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag);
-			double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
-			double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);
-			double qAz = en1264.WaermestromDichteRohr(khAz, dThetaAz);
-
-			double qFbh = aRz * qRz + aAz * qAz;
-			q = qFbh / aGes;
-
-			qU = en1264.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDecke, rLambdaIns, rLambdaDecke, rLambdaPutz, q, this.AssociatedRoom.RoomTemperature, this.PlannedRoomTemperatureBelow);
-
-			qRim = qRz;
-			qResidence = qAz;
-
-			// hydraulische Berechnung
-			double qH2o = (q + qU) * aGes;
-			double deltaT = thetaVrz - thetaRaz;
-			pipeLength = lRlGes;
-			deltaRho = en1264.Druckverlust(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, lRlGes);
-
-			return q;
+			pipeLength = lRlGes;                                                          // gesamte Rohrlänge
 		}
 
-		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad) {
-
+		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool) {
 			LayDistance[] teilungen =
 				(this.requestedLayDistance == null ?
 				new LayDistance[] { LayDistance.EV35, LayDistance.EV30, LayDistance.EV25, LayDistance.EV20, LayDistance.EV15, LayDistance.EV10, LayDistance.EV5 } :
 				new LayDistance[] { this.requestedLayDistance.Value });
-			RimType[] randzonen =
+			Nullable<RimType>[] randzonen =
 				(this.requestedRimType == null ?
-				new RimType[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 } :
-				new RimType[] { this.requestedRimType.Value });
+					(this.plannedRimLength > 0 ? new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 } :
+					new Nullable<RimType>[] { null }) :
+				new Nullable<RimType>[] { this.requestedRimType.Value });
 			bool found = false;
 			int i = 0;
 			int j = 0;
-			double q = 0;
-			double qU = 0;
-			double qRim = 0;
-			double qResidence = 0;
-			double deltaRho = 0;
+			double qHeat = 0;
+			double qHeatU = 0;
+			double qHeatRim = 0;
+			double qHeatResidence = 0;
+			double deltaRhoHeat = 0;
+			double qCool = 0;
+			double qCoolU = 0;
+			double qCoolRim = 0;
+			double qCoolResidence = 0;
+			double deltaRhoCool = 0;
 			double pipeLength = 0;
-			Nullable<RimType> distanceRim = this.plannedRim > 0 ? (Nullable<RimType>)RimType.EV15_60 : (Nullable<RimType>)null;
+			Nullable<RimType> distanceRim = this.plannedRimLength > 0 ? (Nullable<RimType>)RimType.EV15_60 : (Nullable<RimType>)null;
 			while (!found && i < teilungen.Length) {
 				j = 0;
 				while (!found && j < randzonen.Length) {
-					this.CalculateQForLayDistance(teilungen[i], randzonen[j], out qU, out q, out qRim, out qResidence, out deltaRho, out pipeLength);
-					if (q * this.PlannedFloorArea >= requestedHeatLoad) {
+					this.CalculateQForLayDistance(teilungen[i], randzonen[j],
+						out qHeatU, out qHeat, out qHeatRim, out qHeatResidence, out deltaRhoHeat,
+						out qCoolU, out qCool, out qCoolRim, out qCoolResidence, out deltaRhoCool,
+						out pipeLength);
+					if ((!calculateHeat || qHeat * this.PlannedFloorArea >= requestedHeatLoad) &&
+							(!calculateCool || -qCool * this.PlannedFloorArea >= requestedCoolLoad)) {
 						found = true;
 					} else {
 						j++;
@@ -357,171 +958,33 @@ namespace Europlan.Common {
 			}
 			this.PlannedLayDistance = teilungen[i];
 			this.PlannedRimType = randzonen[j];
-			this.plannedQ = q;
-			this.plannedQU = qU;
-			this.plannedQRim = qRim;
-			this.plannedQResidence = qResidence;
+			if (requestedHeatLoad > 0) {
+				this.plannedQHeat = qHeat;
+				this.plannedQHeatU = qHeatU;
+				this.plannedQHeatRim = qHeatRim;
+				this.plannedQHeatResidence = qHeatResidence;
+				this.plannedDeltaRhoHeat = deltaRhoHeat;
+			} else {
+				this.plannedQHeat = 0;
+				this.plannedQHeatU = 0;
+				this.plannedQHeatRim = 0;
+				this.plannedQHeatResidence = 0;
+				this.plannedDeltaRhoHeat = 0;
+			}
+			if (requestedCoolLoad > 0) {
+				this.plannedQCool = -qCool;
+				this.plannedQCoolU = -qCoolU;
+				this.plannedQCoolRim = -qCoolRim;
+				this.plannedQCoolResidence = -qCoolResidence;
+				this.plannedDeltaRhoCool = deltaRhoCool;
+			} else {
+				this.plannedQCool = 0;
+				this.plannedQCoolU = 0;
+				this.plannedQCoolRim = 0;
+				this.plannedQCoolResidence = 0;
+				this.plannedDeltaRhoCool = 0;
+			}
 			this.plannedPipeLength = pipeLength;
-			this.plannedDeltaRho = deltaRho;
-		}
-
-		public double PlannedHeatLoadPerSqM {
-			get { return this.plannedQ; }
-		}
-
-		public double PlannedHeatLoadPerSqMBelow {
-			get { return this.plannedQU; }
-		}
-
-		public double PlannedHeatLoadPerSqMH20 {
-			get { return this.plannedQ + this.plannedQU; }
-		}
-
-		public double PlannedHeatLoadPerSqMRim {
-			get { return this.plannedQRim; }
-		}
-
-		public double PlannedHeatLoadPerSqMResidence {
-			get { return this.plannedQResidence; }
-		}
-
-		public override double PlannedHeatLoad {
-			get { return Math.Round(plannedQ * PlannedFloorArea, 1); }
-		}
-
-		public double PlannedHeatLoadRim {
-			get { return Math.Round(this.PlannedAreaRim * this.plannedQRim, 0); }
-		}
-
-		public double PlannedHeatLoadResidence {
-			get { return Math.Round(this.PlannedAreaResidence * this.plannedQResidence, 0); }
-		}
-
-		public override double PlannedCoolLoad {
-			get { return 0; }
-		}
-
-		[XmlIgnore]
-		public Construction PlannedFloorConstruction {
-			get { return this.floorConstruction; }
-			set { this.floorConstruction = value;  }
-		}
-
-		[XmlIgnore]
-		public Construction PlannedInsulationConstruction {
-			get { return this.insulationConstruction; }
-			set { this.insulationConstruction = value; }
-		}
-
-		public string PlannedFloorConstructionId {
-			get { return (this.floorConstruction == null ? "" : this.floorConstruction.Id); }
-			set { this.floorConstruction = Project.Instance.Config.GetConstruction(value); }
-		}
-
-		public string PlannedInsulationConstructionId {
-			get { return (this.insulationConstruction == null ? "" : this.insulationConstruction.Id); }
-			set { this.insulationConstruction = Project.Instance.Config.GetConstruction(value); }
-		}
-
-		public float PlannedFloorConstructionRValue {
-			get { return (this.floorConstruction == null ? 0 : this.floorConstruction.RValue); }
-		}
-
-		public float PlannedInsulationConstructionRValue {
-			get { return (this.insulationConstruction == null ? 0 : this.insulationConstruction.RValue); }
-		}
-
-		[XmlIgnore]
-		public float PlannedFloorAreaPercentage {
-			get {
-				return (this.AvailableFloorArea <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AvailableFloorArea);
-			}
-			set {
-				this.PlannedFloorArea = (float)(this.AvailableFloorArea * value / 100);
-			}
-		}
-
-		public float AvailableFloorArea {
-			get {
-				Room room = this.AssociatedRoom;
-				float area = room.Area;
-				foreach (PlannedProduct product in room.PlannedProducts) {
-					if (product.Product != this) {
-						area -= product.Product.PlannedFloorArea;
-					}
-				}
-				if (area < 0) {
-					area = 0;
-				}
-				return area;
-			}
-		}
-
-		public float PlannedAreaReduced {
-			get { return this.plannedAreaReduced; }
-			set { this.plannedAreaReduced = value; }
-		}
-
-		public float PlannedAreaUnheated {
-			get { return this.plannedAreaUnheated; }
-			set { this.plannedAreaUnheated = value; }
-		}
-
-		public float PlannedAreaRim {
-			get {
-				if (this.plannedRimType.HasValue) {
-					float rimWidth = ((float)GetWidthRim(this.plannedRimType.Value)) / 100.0f;
-					float realRimLength = this.plannedRim - rimWidth * this.plannedCornersRim;
-					return realRimLength * rimWidth; 
-				} else {
-					return 0;
-				}
-			}
-		}
-
-		public float PlannedAreaResidence {
-			get { return this.PlannedFloorArea - this.PlannedAreaRim; }
-		}
-
-		public Nullable<RimType> PlannedRimType {
-			get { return this.plannedRimType; }
-			set { this.plannedRimType = value; }
-		}
-
-		public Nullable<RimType> RequestedRimType {
-			get { return this.requestedRimType; }
-			set { this.requestedRimType = value; }
-		}
-
-		public Nullable<LayDistance> PlannedLayDistanceRim {
-			get { return this.plannedRimType == null ? (Nullable<LayDistance>)null : (Nullable<LayDistance>)GetLayDistanceRim(this.plannedRimType.Value); }
-		}
-
-		public int PlannedRimWidth {
-			get { return this.plannedRimType == null ? 0 : GetWidthRim(this.plannedRimType.Value); }
-		}
-
-		public float PlannedRim {
-			get { return this.plannedRim; }
-			set { this.plannedRim = value; }
-		}
-
-		public int PlannedCornersRim {
-			get { return this.plannedCornersRim; }
-			set { this.plannedCornersRim = value; }
-		}
-
-		public float PlannedRoomTemperatureBelow {
-			get { return this.plannedRoomTemperatureBelow; }
-			set { this.plannedRoomTemperatureBelow = value; }
-		}
-
-		public double PlannedDeltaRho {
-			get { return this.plannedDeltaRho; }
-		}
-
-		public double PlannedPipeLength {
-			get { return this.plannedPipeLength; }
 		}
 	}
 	
