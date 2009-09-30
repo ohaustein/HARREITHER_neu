@@ -187,6 +187,22 @@ namespace Europlan.Common {
 			set { this.comment = value; }
 		}
 
+		public float AvailableFloorArea {
+			get {
+				Room room = this.AssociatedRoom;
+				float area = room.Area;
+				foreach (PlannedProduct product in room.PlannedProducts) {
+					if (product.Product != this) {
+						area -= product.Product.PlannedFloorArea;
+					}
+				}
+				if (area < 0) {
+					area = 0;
+				}
+				return area;
+			}
+		}
+
 		public float PlannedFloorArea {
 			get { return plannedFloorArea; }
 			set { plannedFloorArea = value; }
@@ -254,7 +270,7 @@ namespace Europlan.Common {
 			}
 		}*/
 
-		public abstract void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad);
+		public abstract void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool);
 
 		internal virtual void FinalizeLoading() {
 			// nothing to do

@@ -53,7 +53,7 @@ namespace Europlan.Common {
 			get { return ProductType.WH; }
 		}
 
-		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad) {
+		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool) {
 			// TODO
 		}
 

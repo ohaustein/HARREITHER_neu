@@ -95,11 +95,13 @@ namespace Europlan.Common {
 			AREA_PERCENTAGE = 32,
 			AREA_REDUCED = 64,
 			AREA_UNHEATED = 128,
-			ROOM_TEMERATURE_BELOW = 256,
-			RIM_LENGTH = 512,
-			CORNERS = 1024,
-			LAY_DISTANCE = 2048,
-			RIM_TYPE = 4096
+			ROOM_TEMERATURE_BELOW_HEAT = 256,
+			ROOM_TEMERATURE_BELOW_COOL = 512,
+			RIM_LENGTH = 1024,
+			CORNERS = 2048,
+			LAY_DISTANCE = 4096,
+			RIM_TYPE = 8192,
+			CALCULATION_TYPE = 16384
 		}
 
 		public void UpdateControl() {
@@ -116,11 +118,13 @@ namespace Europlan.Common {
 		private int ignoreAreaPercentage = 0;
 		private int ignoreAreaReduced = 0;
 		private int ignoreAreaUnheated = 0;
-		private int ignoreRoomTemperatureBelow = 0;
+		private int ignoreRoomTemperatureBelowHeat = 0;
+		private int ignoreRoomTemperatureBelowCool = 0;
 		private int ignoreRim = 0;
 		private int ignoreCorners = 0;
 		private int ignoreLayDistance = 0;
 		private int ignoreRimType = 0;
+		private int ignoreCalculationType = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			this.product = this.Tag as PlannedProduct;
@@ -135,20 +139,73 @@ namespace Europlan.Common {
 				ignoreAreaPercentage++;
 				ignoreAreaReduced++;
 				ignoreAreaUnheated++;
-				ignoreRoomTemperatureBelow++;
+				ignoreRoomTemperatureBelowHeat++;
+				ignoreRoomTemperatureBelowCool++;
 				ignoreRim++;
 				ignoreCorners++;
 				ignoreLayDistance++;
 				ignoreRim++;
+				ignoreCalculationType++;
 
 				EurovalProduct evProduct = this.product.Product as EurovalProduct;
+
+				bool showHeat = this.product.RequestedHeatLoad > 0;
+				bool showCool = this.product.RequestedCoolLoad > 0;
+				bool showRim = evProduct.PlannedAreaRim > 0;
+				bool showResidence = true;
+
+				this.lblQSollHeat.Visible = showHeat;
+				this.lblQkSollHeat.Visible = showHeat;
+				this.lblQfbhHeat.Visible = showHeat;
+				this.lblQRestHeat.Visible = showHeat;
+				this.lblRimVaHeat.Visible = showHeat && showRim;
+				this.lblRimBHeat.Visible = showHeat && showRim;
+				this.lblRimTfbHeat.Visible = showHeat && showRim;
+				this.lblRimQHeat.Visible = showHeat && showRim;
+				this.lblResidenceVaHeat.Visible = showHeat && showResidence;
+				this.lblResidenceAHeat.Visible = showHeat && showResidence;
+				this.lblResidenceTfbHeat.Visible = showHeat && showResidence;
+				this.lblResidenceQHeat.Visible = showHeat && showResidence;
+				this.lblConnectionAHeat.Visible = showHeat;
+				this.lblConnectionQHeat.Visible = showHeat;
+				this.lblCircuitCountHeat.Visible = showHeat;
+				this.lblPipeLengthHeat.Visible = showHeat;
+				this.lblMhHeat.Visible = showHeat;
+				this.lblDeltaPHeat.Visible = showHeat;
+				this.lblSpreizungHeat.Visible = showHeat;
+
+				this.lblQSollCool.Visible = showCool;
+				this.lblQkSollCool.Visible = showCool;
+				this.lblQfbhCool.Visible = showCool;
+				this.lblQRestCool.Visible = showCool;
+				this.lblRimVaCool.Visible = showCool && showRim;
+				this.lblRimBCool.Visible = showCool && showRim;
+				this.lblRimTfbCool.Visible = showCool && showRim;
+				this.lblRimQCool.Visible = showCool && showRim;
+				this.lblResidenceVaCool.Visible = showCool && showResidence;
+				this.lblResidenceACool.Visible = showCool && showResidence;
+				this.lblResidenceTfbCool.Visible = showCool && showResidence;
+				this.lblResidenceQCool.Visible = showCool && showResidence;
+				this.lblConnectionACool.Visible = showCool;
+				this.lblConnectionQCool.Visible = showCool;
+				this.lblCircuitCountCool.Visible = showCool;
+				this.lblPipeLengthCool.Visible = showCool;
+				this.lblMhCool.Visible = showCool;
+				this.lblDeltaPCool.Visible = showCool;
+				this.lblSpreizungCool.Visible = showCool;
+
+				this.rbCalculateHeat.Enabled = this.product.RequestedHeatLoad > 0;
+				this.rbCalculateCool.Enabled = this.product.RequestedCoolLoad > 0;
+				this.rbCalculateBoth.Enabled = this.product.RequestedHeatLoad > 0 && this.product.RequestedCoolLoad > 0;
+				this.numCorners.Enabled = evProduct.PlannedAreaRim > 0;
+				this.cmbRimType.Enabled = evProduct.PlannedAreaRim > 0;
+
 				this.numArea.MaxValue = (decimal)evProduct.AvailableFloorArea;
 				this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
 				this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
+				this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
 				if (this.product.NecessaryHeatLoad > 0) {
 					this.chkCoverHeatLoad.Enabled = true;
-					this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
-					this.numCoolLoad.MaxValue = (decimal)this.product.NecessaryCoolLoad;
 					if ((skipFields & (FieldEnum.HEAT_LOAD | FieldEnum.HEAT_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
 						if (this.product.CoverHeatLoad) {
 							this.chkCoverHeatLoad.Checked = true;
@@ -174,8 +231,20 @@ namespace Europlan.Common {
 					this.chkCoverHeatLoad.Enabled = false;
 					this.chkCoverHeatLoad.Checked = false;
 				}
+				this.numCoolLoad.MaxValue = (decimal)this.product.NecessaryCoolLoad;
 				if (this.product.NecessaryCoolLoad > 0) {
-					// TODO checkbox
+					this.chkCoverCoolLoad.Enabled = true;
+					if ((skipFields & (FieldEnum.COOL_LOAD | FieldEnum.COOL_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
+						if (this.product.CoverCoolLoad) {
+							this.chkCoverCoolLoad.Checked = true;
+							this.numCoolLoad.Enabled = false;
+							this.numCoolLoadPercentage.Enabled = false;
+						} else {
+							this.chkCoverCoolLoad.Checked = false;
+							this.numCoolLoad.Enabled = true;
+							this.numCoolLoadPercentage.Enabled = true;
+						}
+					}
 					if ((skipFields & FieldEnum.COOL_LOAD) == FieldEnum.NONE) {
 						this.numCoolLoad.Value = Math.Round((decimal)this.product.RequestedCoolLoad, 2);
 					}
@@ -211,14 +280,17 @@ namespace Europlan.Common {
 				}
 				this.txtFloorConstruction.Text = (evProduct.PlannedFloorConstruction == null ? "" : evProduct.PlannedFloorConstruction.Id + ": " + evProduct.PlannedFloorConstruction.Name);
 				this.txtInsulationConstruction.Text = (evProduct.PlannedInsulationConstruction == null ? "" : evProduct.PlannedInsulationConstruction.Name);
-				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW) == FieldEnum.NONE) {
-					this.numRoomTemperatureBelow.Value = Math.Round((decimal)evProduct.PlannedRoomTemperatureBelow, 2);
+				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
+					this.numRoomTemperatureBelowHeat.Value = Math.Round((decimal)evProduct.PlannedRoomTemperatureBelowHeat, 2);
+				}
+				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_COOL) == FieldEnum.NONE) {
+					this.numRoomTemperatureBelowCool.Value = Math.Round((decimal)evProduct.PlannedRoomTemperatureBelowCool, 2);
 				}
 				if ((skipFields & FieldEnum.RIM_LENGTH) == FieldEnum.NONE) {
-					this.numRim.Value = Math.Round((decimal)evProduct.PlannedRim, 2);
+					this.numRim.Value = Math.Round((decimal)evProduct.PlannedRimLength, 2);
 				}
-				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW) == FieldEnum.NONE) {
-					this.numCorners.Value = (decimal)evProduct.PlannedCornersRim;
+				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
+					this.numCorners.Value = (decimal)evProduct.PlannedRimCorners;
 				}
 
 				if ((skipFields & FieldEnum.LAY_DISTANCE) == FieldEnum.NONE) {
@@ -228,7 +300,13 @@ namespace Europlan.Common {
 					this.cmbRimType.SelectedItem = new RimTypeItem(evProduct.RequestedRimType, "");
 				}
 
-				// general
+				if ((skipFields & FieldEnum.CALCULATION_TYPE) == FieldEnum.NONE) {
+					this.rbCalculateHeat.Checked = this.product.CalculateHeat && !this.product.CalculateCool;
+					this.rbCalculateCool.Checked = this.product.CalculateCool && !this.product.CalculateHeat;
+					this.rbCalculateBoth.Checked = this.product.CalculateHeat && this.product.CalculateCool;
+				}
+
+				// General
 				this.lblQSollHeat.Text = Math.Round(this.product.RequestedHeatLoad, 2).ToString();
 				this.lblQSollCool.Text = Math.Round(this.product.RequestedCoolLoad, 2).ToString();
 				this.lblQkSollHeat.Text = Math.Round(this.product.RequestedHeatLoadPerSqM, 2).ToString();
@@ -240,9 +318,9 @@ namespace Europlan.Common {
 				this.lblQRestHeat.Text = (qRestHeat > 0 ? "+" : "") + Math.Round(qRestHeat, 2).ToString();
 				this.lblQRestCool.Text = (qRestCool > 0 ? "+" : "") + Math.Round(qRestCool, 2).ToString();
 
-				// randzone
+				// Randzone
 				if (evProduct.PlannedRimType.HasValue) {
-					switch (evProduct.PlannedLayDistanceRim) {
+					switch (evProduct.PlannedRimLayDistance) {
 						case EurovalProduct.LayDistance.EV5:
 							this.lblRimVaHeat.Text = "EV5";
 							this.lblRimVaCool.Text = "EV5";
@@ -278,10 +356,10 @@ namespace Europlan.Common {
 					}
 					this.lblRimBHeat.Text = evProduct.PlannedRimWidth.ToString();
 					this.lblRimBCool.Text = evProduct.PlannedRimWidth.ToString();
-					this.lblRimTfbHeat.Text = "???";
-					this.lblRimTfbCool.Text = "???";
+					this.lblRimTfbHeat.Text = Math.Round(evProduct.PlannedFloorTemperatureHeatRim, 1).ToString();
+					this.lblRimTfbCool.Text = Math.Round(evProduct.PlannedFloorTemperatureCoolRim, 1).ToString();
 					this.lblRimQHeat.Text = evProduct.PlannedHeatLoadRim.ToString();
-					this.lblRimQCool.Text = "0";
+					this.lblRimQCool.Text = evProduct.PlannedCoolLoadRim.ToString();
 				} else {
 					this.lblRimVaHeat.Text = "";
 					this.lblRimVaCool.Text = "";
@@ -293,7 +371,7 @@ namespace Europlan.Common {
 					this.lblRimQCool.Text = "";
 				}
 
-				// aufenthaltszone
+				// Aufenthaltszone
 				if (evProduct.PlannedLayDistance.HasValue) {
 					switch (evProduct.PlannedLayDistance) {
 						case EurovalProduct.LayDistance.EV5:
@@ -331,10 +409,10 @@ namespace Europlan.Common {
 					}
 					this.lblResidenceAHeat.Text = evProduct.PlannedAreaResidence.ToString();
 					this.lblResidenceACool.Text = evProduct.PlannedAreaResidence.ToString();
-					this.lblResidenceTfbHeat.Text = "???";
-					this.lblResidenceTfbCool.Text = "???";
+					this.lblResidenceTfbHeat.Text = Math.Round(evProduct.PlannedFloorTemperatureHeatResidence, 1).ToString();
+					this.lblResidenceTfbCool.Text = Math.Round(evProduct.PlannedFloorTemperatureCoolResidence, 1).ToString();
 					this.lblResidenceQHeat.Text = evProduct.PlannedHeatLoadResidence.ToString();
-					this.lblResidenceQCool.Text = "0";
+					this.lblResidenceQCool.Text = evProduct.PlannedCoolLoadResidence.ToString();
 				} else {
 					this.lblResidenceVaHeat.Text = "";
 					this.lblResidenceVaCool.Text = "";
@@ -359,7 +437,7 @@ namespace Europlan.Common {
 				this.lblPipeLengthCool.Text = Math.Round(evProduct.PlannedPipeLength, 1).ToString();
 				this.lblMhHeat.Text = "";
 				this.lblMhCool.Text = "";
-				this.lblDeltaPHeat.Text = Math.Round(evProduct.PlannedDeltaRho, 1).ToString();
+				this.lblDeltaPHeat.Text = Math.Round(evProduct.PlannedDeltaRhoHeat, 1).ToString();
 				this.lblDeltaPCool.Text = "";
 				this.lblSpreizungHeat.Text = "5";
 				this.lblSpreizungCool.Text = "0";
@@ -374,11 +452,13 @@ namespace Europlan.Common {
 				ignoreAreaPercentage--;
 				ignoreAreaReduced--;
 				ignoreAreaUnheated--;
-				ignoreRoomTemperatureBelow--;
+				ignoreRoomTemperatureBelowHeat--;
+				ignoreRoomTemperatureBelowCool--;
 				ignoreRim--;
 				ignoreCorners--;
 				ignoreLayDistance--;
 				ignoreRim--;
+				ignoreCalculationType--;
 			}
 			// TODO
 		}
@@ -398,7 +478,7 @@ namespace Europlan.Common {
 						reconfigure = true;
 					}
 					if (reconfigure || pp.CoverHeatLoad || pp.CoverCoolLoad) {
-						pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad);
+						pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool);
 					}
 				}
 			}
@@ -421,12 +501,27 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void chkCoverCoolLoad_CheckedChanged(object sender, EventArgs e) {
+			if (ignoreCoverCoolLoad == 0) {
+				if (this.chkCoverCoolLoad.Checked) {
+					this.numCoolLoad.Enabled = false;
+					this.numCoolLoadPercentage.Enabled = false;
+					this.numCoolLoadPercentage.Value = 100;
+				} else {
+					this.numCoolLoad.Enabled = true;
+					this.numCoolLoadPercentage.Enabled = true;
+					this.numCoolLoadPercentage.Value = 100;
+				}
+				this.product.CoverCoolLoad = this.chkCoverCoolLoad.Checked;
+			}
+		}
+
 		private void numHeatLoadPercentage_ValueChanged(object sender, EventArgs e) {
 			if (ignoreHeatLoadPercentage == 0) {
 				ignoreHeatLoad++;
 				this.product.RequestedHeatLoadPercentage = (float)this.numHeatLoadPercentage.Value;
 				this.numHeatLoad.Value = (decimal)this.product.RequestedHeatLoad;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 				this.UpdateControl(FieldEnum.HEAT_LOAD_PERCENTAGE);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -435,12 +530,26 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void numCoolLoadPercentage_ValueChanged(object sender, EventArgs e) {
+			if (ignoreCoolLoadPercentage == 0) {
+				ignoreCoolLoad++;
+				this.product.RequestedCoolLoadPercentage = (float)this.numCoolLoadPercentage.Value;
+				this.numCoolLoad.Value = (decimal)this.product.RequestedCoolLoad;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
+				this.UpdateControl(FieldEnum.COOL_LOAD_PERCENTAGE);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				ignoreCoolLoad--;
+			}
+		}
+
 		private void numHeatLoad_ValueChanged(object sender, EventArgs e) {
 			if (ignoreHeatLoad == 0) {
 				ignoreHeatLoadPercentage++;
 				this.product.RequestedHeatLoad = (double)this.numHeatLoad.Value;
 				this.numHeatLoadPercentage.Value = (decimal)this.product.RequestedHeatLoadPercentage;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 				this.UpdateControl(FieldEnum.HEAT_LOAD);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -449,12 +558,26 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void numCoolLoad_ValueChanged(object sender, EventArgs e) {
+			if (ignoreCoolLoad == 0) {
+				ignoreCoolLoadPercentage++;
+				this.product.RequestedCoolLoad = (double)this.numCoolLoad.Value;
+				this.numCoolLoadPercentage.Value = (decimal)this.product.RequestedCoolLoadPercentage;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
+				this.UpdateControl(FieldEnum.COOL_LOAD);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				ignoreCoolLoadPercentage--;
+			}
+		}
+
 		private void numAreaPercentage_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaPercentage == 0) {
 				ignoreArea++;
 				(this.product.Product as EurovalProduct).PlannedFloorAreaPercentage = (float)this.numAreaPercentage.Value;
 				this.numArea.Value = (decimal)this.product.PlannedArea;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 				this.UpdateControl(FieldEnum.AREA_PERCENTAGE);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -468,7 +591,7 @@ namespace Europlan.Common {
 				ignoreAreaPercentage++;
 				(this.product.Product as EurovalProduct).PlannedFloorArea = (float)this.numArea.Value;
 				this.numAreaPercentage.Value = (decimal)(this.product.Product as EurovalProduct).PlannedFloorAreaPercentage;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 				this.UpdateControl(FieldEnum.AREA);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -485,7 +608,7 @@ namespace Europlan.Common {
 				if (evProduct.PlannedAreaReduced + evProduct.PlannedAreaUnheated > evProduct.PlannedFloorArea) {
 					evProduct.PlannedAreaUnheated = evProduct.PlannedFloorArea - evProduct.PlannedAreaReduced;
 				}
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 				this.UpdateControl(FieldEnum.AREA_REDUCED);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -502,7 +625,7 @@ namespace Europlan.Common {
 				if (evProduct.PlannedAreaReduced + evProduct.PlannedAreaUnheated > evProduct.PlannedFloorArea) {
 					evProduct.PlannedAreaReduced = evProduct.PlannedFloorArea - evProduct.PlannedAreaUnheated;
 				}
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 				this.UpdateControl(FieldEnum.AREA_UNHEATED);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -517,7 +640,7 @@ namespace Europlan.Common {
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
 					(this.product.Product as EurovalProduct).PlannedFloorConstruction = form.SelectedConstruction;
-					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 					this.UpdateControl(FieldEnum.NONE);
 				}
 			}
@@ -530,18 +653,29 @@ namespace Europlan.Common {
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
 					(this.product.Product as EurovalProduct).PlannedInsulationConstruction = form.SelectedConstruction;
-					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 					this.UpdateControl(FieldEnum.NONE);
 				}
 			}
 			form.Dispose();
 		}
 
-		private void numRoomTemperatureBelow_ValueChanged(object sender, EventArgs e) {
-			if (ignoreRoomTemperatureBelow == 0) {
-				(this.product.Product as EurovalProduct).PlannedRoomTemperatureBelow = (float)this.numRoomTemperatureBelow.Value;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
-				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW);
+		private void numRoomTemperatureBelowHeat_ValueChanged(object sender, EventArgs e) {
+			if (ignoreRoomTemperatureBelowHeat == 0) {
+				(this.product.Product as EurovalProduct).PlannedRoomTemperatureBelowHeat = (float)this.numRoomTemperatureBelowHeat.Value;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
+				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_HEAT);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}
+
+		private void numRoomTemperatureBelowCool_ValueChanged(object sender, EventArgs e) {
+			if (ignoreRoomTemperatureBelowCool == 0) {
+				(this.product.Product as EurovalProduct).PlannedRoomTemperatureBelowCool = (float)this.numRoomTemperatureBelowCool.Value;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
+				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_COOL);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
 				}
@@ -550,8 +684,8 @@ namespace Europlan.Common {
 
 		private void numRim_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRim == 0) {
-				(this.product.Product as EurovalProduct).PlannedRim = (float)this.numRim.Value;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+				(this.product.Product as EurovalProduct).PlannedRimLength = (float)this.numRim.Value;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 				this.UpdateControl(FieldEnum.RIM_LENGTH);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -561,8 +695,8 @@ namespace Europlan.Common {
 
 		private void numCorners_ValueChanged(object sender, EventArgs e) {
 			if (ignoreCorners == 0) {
-				(this.product.Product as EurovalProduct).PlannedCornersRim = (int)this.numCorners.Value;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+				(this.product.Product as EurovalProduct).PlannedRimCorners = (int)this.numCorners.Value;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 				this.UpdateControl(FieldEnum.CORNERS);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -573,7 +707,7 @@ namespace Europlan.Common {
 		private void cmbLayDistance_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreLayDistance == 0) {
 				(this.product.Product as EurovalProduct).RequestedLayDistance = (this.cmbLayDistance.SelectedItem as LayDistanceItem).layDistance;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 				this.UpdateControl(FieldEnum.LAY_DISTANCE);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -584,13 +718,34 @@ namespace Europlan.Common {
 		private void cmbRimType_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreRimType == 0) {
 				(this.product.Product as EurovalProduct).RequestedRimType = (this.cmbRimType.SelectedItem as RimTypeItem).rimType;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
 				this.UpdateControl(FieldEnum.RIM_TYPE);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
 				}
 			}
 
+		}
+
+		private void rbCalculationType_CheckedChanged(object sender, EventArgs e) {
+			if (ignoreCalculationType == 0) {
+				this.product.CalculateHeat = this.rbCalculateHeat.Checked || this.rbCalculateBoth.Checked;
+				this.product.CalculateCool = this.rbCalculateCool.Checked || this.rbCalculateBoth.Checked;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
+				this.UpdateControl(FieldEnum.CALCULATION_TYPE);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}
+
+		private void numHeatLoad_Leave(object sender, EventArgs e) {
+			if (this.product.RequestedCoolLoad == 0 && !this.rbCalculateHeat.Checked) {
+				this.rbCalculateHeat.Checked = true;
+			}
+			if (this.product.RequestedHeatLoad == 0 && this.product.RequestedCoolLoad > 0 && !this.rbCalculateCool.Checked) {
+				this.rbCalculateCool.Checked = true;
+			}
 		}
 	}
 }
