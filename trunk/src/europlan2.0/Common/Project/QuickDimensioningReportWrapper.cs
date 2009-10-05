@@ -10,14 +10,14 @@ namespace Europlan.Common {
 		private Floor floor;
 
 		private float[] productArea = new float[7];
-		private int[] productCircuits = new int[7];		
+		private string[] productCircuits = new string[7];		
 
 		public QuickDimensioningReportWrapper(Room room, Floor floor, List<string> productOrder) {
 			this.room = room;
 			this.floor = floor;
 			foreach (Product product in room.UsedProductsForQuickDimensioning) {
 				productArea[productOrder.IndexOf(product.QuickDimensioningName)] = product.QuickDimensioningPlannedArea;
-				productCircuits[productOrder.IndexOf(product.QuickDimensioningName)] = product.QuickDimensioningCircuits;
+				productCircuits[productOrder.IndexOf(product.QuickDimensioningName)] = product.QuickDimensioningCircuitsAsString;
 			}
 		}
 
@@ -70,7 +70,7 @@ namespace Europlan.Common {
 			set { productArea[0] = value; }
 		}
 
-		public int Product1Circuits {
+		public string Product1Circuits {
 			get { return productCircuits[0]; }
 			set { productCircuits[0] = value; }
 		}
@@ -80,7 +80,7 @@ namespace Europlan.Common {
 			set { productArea[1] = value; }
 		}
 
-		public int Product2Circuits {
+		public string Product2Circuits {
 			get { return productCircuits[1]; }
 			set { productCircuits[1] = value; }
 		}
@@ -90,7 +90,7 @@ namespace Europlan.Common {
 			set { productArea[2] = value; }
 		}
 
-		public int Product3Circuits {
+		public string Product3Circuits {
 			get { return productCircuits[2]; }
 			set { productCircuits[2] = value; }
 		}
@@ -100,7 +100,7 @@ namespace Europlan.Common {
 			set { productArea[3] = value; }
 		}
 
-		public int Product4Circuits {
+		public string Product4Circuits {
 			get { return productCircuits[3]; }
 			set { productCircuits[3] = value; }
 		}
@@ -110,7 +110,7 @@ namespace Europlan.Common {
 			set { productArea[4] = value; }
 		}
 
-		public int Product5Circuits {
+		public string Product5Circuits {
 			get { return productCircuits[4]; }
 			set { productCircuits[4] = value; }
 		}
@@ -120,7 +120,7 @@ namespace Europlan.Common {
 			set { productArea[5] = value; }
 		}
 
-		public int Product6Circuits {
+		public string Product6Circuits {
 			get { return productCircuits[5]; }
 			set { productCircuits[5] = value; }
 		}
@@ -130,7 +130,7 @@ namespace Europlan.Common {
 			set { productArea[6] = value; }
 		}
 
-		public int Product7Circuits {
+		public string Product7Circuits {
 			get { return productCircuits[6]; }
 			set { productCircuits[6] = value; }
 		}

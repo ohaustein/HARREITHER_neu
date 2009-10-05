@@ -20,7 +20,7 @@
  CreatedByApp=<unknown>
  CreatedByDLL=<unknown>
  CreatedByUser=<unknown>
- LastModified=10/5/2009, 3:01:18 PM
+ LastModified=10/5/2009, 4:32:10 PM
  LastModifiedByApp=EUROPLAN.VSHOST.EXE [8.0.50727.42]
  LastModifiedByDLL=CMLL14.DLL [14.10.2009.23612 (09-08-19 12:56)]
  LastModifiedByUser=neudorfer on CAPRICA
@@ -99,7 +99,7 @@
  LinkID=29
  LinkToID=0
  LinkMode=32
- LinkTest=-19105
+ LinkTest=-28343
  LayerID=0
  GroupID=0
  Identifier=
@@ -1055,7 +1055,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product1Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product1Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product1Circuits
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -2294,7 +2294,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product1Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product1Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product1Circuits
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -2476,7 +2476,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product2Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product2Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product2Circuits
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -3715,7 +3715,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product1Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product1Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product1Circuits
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -3897,7 +3897,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product2Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product2Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product2Circuits
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -4079,7 +4079,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product3Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product3Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product3Circuits
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -5318,7 +5318,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product1Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product1Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product1Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -5500,7 +5500,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product2Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product2Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product2Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -5682,7 +5682,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product3Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product3Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product3Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -5864,7 +5864,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product4Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product4Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product4Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -7103,7 +7103,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product1Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product1Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product1Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -7285,7 +7285,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product2Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product2Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product2Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -7467,7 +7467,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product3Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product3Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product3Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -7649,7 +7649,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product4Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product4Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product4Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -7831,7 +7831,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product5Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product5Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product5Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -9070,7 +9070,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product1Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product1Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product1Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -9252,7 +9252,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product2Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product2Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product2Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -9434,7 +9434,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product3Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product3Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product3Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -9616,7 +9616,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product4Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product4Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product4Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -9798,7 +9798,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product5Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product5Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product5Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -9980,7 +9980,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product6Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product6Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product6Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -11219,7 +11219,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product1Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product1Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product1Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -11401,7 +11401,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product2Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product2Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product2Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -11583,7 +11583,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product3Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product3Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product3Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -11765,7 +11765,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product4Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product4Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product4Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -11947,7 +11947,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product5Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product5Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product5Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -12129,7 +12129,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product6Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product6Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product6Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -12311,7 +12311,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=if (QuickDimensioningReportWrapper.Product7Circuits>0, Fstr$(QuickDimensioningReportWrapper.Product7Circuits,"?&"), "")
+		 Text=QuickDimensioningReportWrapper.Product7Circuits
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -28042,7 +28042,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -29102,7 +29102,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -30060,7 +30060,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -30264,7 +30264,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -31324,7 +31324,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -31528,7 +31528,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -32486,7 +32486,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -32690,7 +32690,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -32894,7 +32894,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product3Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -33954,7 +33954,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -34158,7 +34158,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -34362,7 +34362,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product3Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
 		 Width=10000
 		 Height=10000
 		 FixedHeight=0
@@ -35320,7 +35320,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -35524,7 +35524,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -35728,7 +35728,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product3Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -35932,7 +35932,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product4Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -36992,7 +36992,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -37196,7 +37196,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -37400,7 +37400,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product3Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -37604,7 +37604,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product4Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -38562,7 +38562,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -38766,7 +38766,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -38970,7 +38970,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product3Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -39174,7 +39174,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product4Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -39378,7 +39378,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product5Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -40438,7 +40438,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -40642,7 +40642,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -40846,7 +40846,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product3Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -41050,7 +41050,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product4Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -41254,7 +41254,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product5Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -42212,7 +42212,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -42416,7 +42416,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -42620,7 +42620,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product3Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -42824,7 +42824,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product4Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -43028,7 +43028,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product5Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -43232,7 +43232,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product6Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product6Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -44292,7 +44292,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -44496,7 +44496,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -44700,7 +44700,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product3Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -44904,7 +44904,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product4Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -45108,7 +45108,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product5Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -45312,7 +45312,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product6Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product6Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -46270,7 +46270,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -46474,7 +46474,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -46678,7 +46678,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product3Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -46882,7 +46882,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product4Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -47086,7 +47086,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product5Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -47290,7 +47290,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product6Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product6Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -47494,7 +47494,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product7Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product7Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -48554,7 +48554,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product1Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -48758,7 +48758,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product2Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -48962,7 +48962,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product3Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -49166,7 +49166,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product4Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -49370,7 +49370,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product5Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -49574,7 +49574,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product6Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product6Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -49778,7 +49778,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.Product7Circuits),"?&")
+		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product7Circuits)),"?&")
 		 Width=7000
 		 Height=10000
 		 FixedHeight=0
@@ -51644,7 +51644,7 @@
  LinkID=91
  LinkToID=0
  LinkMode=32
- LinkTest=-15544
+ LinkTest=-28496
  LayerID=0
  GroupID=0
  Identifier=
@@ -51681,7 +51681,7 @@
  LinkID=45
  LinkToID=0
  LinkMode=32
- LinkTest=-28543
+ LinkTest=-8986
  LayerID=0
  GroupID=0
  Identifier=
@@ -51716,7 +51716,7 @@
  LinkID=31
  LinkToID=0
  LinkMode=32
- LinkTest=-1438
+ LinkTest=-19785
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51874,7 +51874,7 @@
  LinkID=35
  LinkToID=0
  LinkMode=32
- LinkTest=-8056
+ LinkTest=-30944
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51947,7 +51947,7 @@
  LinkID=52
  LinkToID=0
  LinkMode=32
- LinkTest=-19576
+ LinkTest=-5645
  LayerID=0
  GroupID=0
  Identifier=
@@ -51983,7 +51983,7 @@
  LinkID=13
  LinkToID=0
  LinkMode=32
- LinkTest=-14166
+ LinkTest=-5378
  LayerID=0
  GroupID=0
  Identifier=
