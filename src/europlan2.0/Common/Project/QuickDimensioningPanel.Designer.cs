@@ -45,12 +45,6 @@ namespace Europlan.Common {
 			this.cbEurovalCool = new System.Windows.Forms.CheckBox();
 			this.lblHeat = new System.Windows.Forms.Label();
 			this.lblCool = new System.Windows.Forms.Label();
-			this.cbModulKlimaDeckeCool = new System.Windows.Forms.CheckBox();
-			this.cbModulKlimaDeckeHeat = new System.Windows.Forms.CheckBox();
-			this.lblModulKlimaDecke = new System.Windows.Forms.Label();
-			this.cbModulKlimaBodenCool = new System.Windows.Forms.CheckBox();
-			this.cbModulKlimaBodenHeat = new System.Windows.Forms.CheckBox();
-			this.lblModulKlimaBoden = new System.Windows.Forms.Label();
 			this.cbHithermCompactCool = new System.Windows.Forms.CheckBox();
 			this.cbHithermCompactHeat = new System.Windows.Forms.CheckBox();
 			this.lblHithermCompact = new System.Windows.Forms.Label();
@@ -60,15 +54,21 @@ namespace Europlan.Common {
 			this.lblBka = new System.Windows.Forms.Label();
 			this.cbBkaHeat = new System.Windows.Forms.CheckBox();
 			this.cbBkaCool = new System.Windows.Forms.CheckBox();
+			this.lblModulKlimaDecke = new System.Windows.Forms.Label();
+			this.cbModulKlimaDeckeHeat = new System.Windows.Forms.CheckBox();
+			this.cbModulKlimaDeckeCool = new System.Windows.Forms.CheckBox();
+			this.lblModulKlimaBoden = new System.Windows.Forms.Label();
+			this.cbModulKlimaBodenHeat = new System.Windows.Forms.CheckBox();
+			this.cbModulKlimaBodenCool = new System.Windows.Forms.CheckBox();
+			this.lblHithermCompactRoof = new System.Windows.Forms.Label();
+			this.cbHithermCompactRoofHeat = new System.Windows.Forms.CheckBox();
+			this.cbHithermCompactRoofCool = new System.Windows.Forms.CheckBox();
 			this.lblAssumptions = new System.Windows.Forms.Label();
 			this.txtCoolTemperature = new Europlan.Common.NumericBox();
 			this.txtAllocation = new Europlan.Common.NumericBox();
 			this.pageDistributors = new System.Windows.Forms.TabPage();
 			this.quickDimensioningDistributorsSummary = new Europlan.Common.QuickDimensioningDistributorsSummary();
 			this.quickDimensioningRoomDistributorsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.lblHithermCompactRoof = new System.Windows.Forms.Label();
-			this.cbHithermCompactRoofHeat = new System.Windows.Forms.CheckBox();
-			this.cbHithermCompactRoofCool = new System.Windows.Forms.CheckBox();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -306,7 +306,7 @@ namespace Europlan.Common {
 			this.lblEuroval.Name = "lblEuroval";
 			this.lblEuroval.Size = new System.Drawing.Size(165, 17);
 			this.lblEuroval.TabIndex = 1;
-			this.lblEuroval.Text = "Euroval";
+			this.lblEuroval.Text = "Euroval®";
 			this.lblEuroval.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// cbEurovalHeat
@@ -362,90 +362,6 @@ namespace Europlan.Common {
 			this.lblCool.Text = "Kühlen";
 			this.lblCool.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// cbModulKlimaDeckeCool
-			// 
-			this.cbModulKlimaDeckeCool.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.cbModulKlimaDeckeCool.BackColor = System.Drawing.Color.Transparent;
-			this.cbModulKlimaDeckeCool.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.cbModulKlimaDeckeCool.Location = new System.Drawing.Point(230, 164);
-			this.cbModulKlimaDeckeCool.Name = "cbModulKlimaDeckeCool";
-			this.cbModulKlimaDeckeCool.Size = new System.Drawing.Size(50, 17);
-			this.cbModulKlimaDeckeCool.TabIndex = 16;
-			this.cbModulKlimaDeckeCool.UseVisualStyleBackColor = false;
-			this.cbModulKlimaDeckeCool.CheckedChanged += new System.EventHandler(this.cbModulKlimaDeckeCool_CheckedChanged);
-			// 
-			// cbModulKlimaDeckeHeat
-			// 
-			this.cbModulKlimaDeckeHeat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.cbModulKlimaDeckeHeat.BackColor = System.Drawing.Color.Transparent;
-			this.cbModulKlimaDeckeHeat.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.cbModulKlimaDeckeHeat.Location = new System.Drawing.Point(174, 164);
-			this.cbModulKlimaDeckeHeat.Name = "cbModulKlimaDeckeHeat";
-			this.cbModulKlimaDeckeHeat.Size = new System.Drawing.Size(50, 17);
-			this.cbModulKlimaDeckeHeat.TabIndex = 17;
-			this.cbModulKlimaDeckeHeat.UseVisualStyleBackColor = false;
-			this.cbModulKlimaDeckeHeat.CheckedChanged += new System.EventHandler(this.cbModulKlimaDeckeHeat_CheckedChanged);
-			// 
-			// lblModulKlimaDecke
-			// 
-			this.lblModulKlimaDecke.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.lblModulKlimaDecke.BackColor = System.Drawing.Color.Transparent;
-			this.lblModulKlimaDecke.Location = new System.Drawing.Point(3, 164);
-			this.lblModulKlimaDecke.Margin = new System.Windows.Forms.Padding(3);
-			this.lblModulKlimaDecke.Name = "lblModulKlimaDecke";
-			this.lblModulKlimaDecke.Size = new System.Drawing.Size(165, 17);
-			this.lblModulKlimaDecke.TabIndex = 9;
-			this.lblModulKlimaDecke.Text = "Modul Klimadecke";
-			this.lblModulKlimaDecke.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// cbModulKlimaBodenCool
-			// 
-			this.cbModulKlimaBodenCool.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.cbModulKlimaBodenCool.BackColor = System.Drawing.Color.Transparent;
-			this.cbModulKlimaBodenCool.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.cbModulKlimaBodenCool.Location = new System.Drawing.Point(230, 141);
-			this.cbModulKlimaBodenCool.Name = "cbModulKlimaBodenCool";
-			this.cbModulKlimaBodenCool.Size = new System.Drawing.Size(50, 17);
-			this.cbModulKlimaBodenCool.TabIndex = 14;
-			this.cbModulKlimaBodenCool.UseVisualStyleBackColor = false;
-			this.cbModulKlimaBodenCool.CheckedChanged += new System.EventHandler(this.cbModulKlimaBodenCool_CheckedChanged);
-			// 
-			// cbModulKlimaBodenHeat
-			// 
-			this.cbModulKlimaBodenHeat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.cbModulKlimaBodenHeat.BackColor = System.Drawing.Color.Transparent;
-			this.cbModulKlimaBodenHeat.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.cbModulKlimaBodenHeat.Location = new System.Drawing.Point(174, 141);
-			this.cbModulKlimaBodenHeat.Name = "cbModulKlimaBodenHeat";
-			this.cbModulKlimaBodenHeat.Size = new System.Drawing.Size(50, 17);
-			this.cbModulKlimaBodenHeat.TabIndex = 13;
-			this.cbModulKlimaBodenHeat.UseVisualStyleBackColor = false;
-			this.cbModulKlimaBodenHeat.CheckedChanged += new System.EventHandler(this.cbModulKlimaBodenHeat_CheckedChanged);
-			// 
-			// lblModulKlimaBoden
-			// 
-			this.lblModulKlimaBoden.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.lblModulKlimaBoden.BackColor = System.Drawing.Color.Transparent;
-			this.lblModulKlimaBoden.Location = new System.Drawing.Point(3, 141);
-			this.lblModulKlimaBoden.Margin = new System.Windows.Forms.Padding(3);
-			this.lblModulKlimaBoden.Name = "lblModulKlimaBoden";
-			this.lblModulKlimaBoden.Size = new System.Drawing.Size(165, 17);
-			this.lblModulKlimaBoden.TabIndex = 8;
-			this.lblModulKlimaBoden.Text = "Modul Klimaboden";
-			this.lblModulKlimaBoden.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
 			// cbHithermCompactCool
 			// 
 			this.cbHithermCompactCool.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -485,7 +401,7 @@ namespace Europlan.Common {
 			this.lblHithermCompact.Name = "lblHithermCompact";
 			this.lblHithermCompact.Size = new System.Drawing.Size(165, 17);
 			this.lblHithermCompact.TabIndex = 7;
-			this.lblHithermCompact.Text = "Hitherm Compact";
+			this.lblHithermCompact.Text = "Hitherm® Compact";
 			this.lblHithermCompact.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// cbHithermCool
@@ -527,7 +443,7 @@ namespace Europlan.Common {
 			this.lblHitherm.Name = "lblHitherm";
 			this.lblHitherm.Size = new System.Drawing.Size(165, 17);
 			this.lblHitherm.TabIndex = 6;
-			this.lblHitherm.Text = "Hitherm";
+			this.lblHitherm.Text = "Hitherm®";
 			this.lblHitherm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// lblBka
@@ -571,6 +487,132 @@ namespace Europlan.Common {
 			this.cbBkaCool.UseVisualStyleBackColor = false;
 			this.cbBkaCool.CheckedChanged += new System.EventHandler(this.cbBkaCool_CheckedChanged);
 			// 
+			// lblModulKlimaDecke
+			// 
+			this.lblModulKlimaDecke.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lblModulKlimaDecke.BackColor = System.Drawing.Color.Transparent;
+			this.lblModulKlimaDecke.Location = new System.Drawing.Point(3, 164);
+			this.lblModulKlimaDecke.Margin = new System.Windows.Forms.Padding(3);
+			this.lblModulKlimaDecke.Name = "lblModulKlimaDecke";
+			this.lblModulKlimaDecke.Size = new System.Drawing.Size(165, 17);
+			this.lblModulKlimaDecke.TabIndex = 9;
+			this.lblModulKlimaDecke.Text = "Modul Klimadecke";
+			this.lblModulKlimaDecke.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// cbModulKlimaDeckeHeat
+			// 
+			this.cbModulKlimaDeckeHeat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.cbModulKlimaDeckeHeat.BackColor = System.Drawing.Color.Transparent;
+			this.cbModulKlimaDeckeHeat.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.cbModulKlimaDeckeHeat.Location = new System.Drawing.Point(174, 164);
+			this.cbModulKlimaDeckeHeat.Name = "cbModulKlimaDeckeHeat";
+			this.cbModulKlimaDeckeHeat.Size = new System.Drawing.Size(50, 17);
+			this.cbModulKlimaDeckeHeat.TabIndex = 17;
+			this.cbModulKlimaDeckeHeat.UseVisualStyleBackColor = false;
+			this.cbModulKlimaDeckeHeat.CheckedChanged += new System.EventHandler(this.cbModulKlimaDeckeHeat_CheckedChanged);
+			// 
+			// cbModulKlimaDeckeCool
+			// 
+			this.cbModulKlimaDeckeCool.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.cbModulKlimaDeckeCool.BackColor = System.Drawing.Color.Transparent;
+			this.cbModulKlimaDeckeCool.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.cbModulKlimaDeckeCool.Location = new System.Drawing.Point(230, 164);
+			this.cbModulKlimaDeckeCool.Name = "cbModulKlimaDeckeCool";
+			this.cbModulKlimaDeckeCool.Size = new System.Drawing.Size(50, 17);
+			this.cbModulKlimaDeckeCool.TabIndex = 16;
+			this.cbModulKlimaDeckeCool.UseVisualStyleBackColor = false;
+			this.cbModulKlimaDeckeCool.CheckedChanged += new System.EventHandler(this.cbModulKlimaDeckeCool_CheckedChanged);
+			// 
+			// lblModulKlimaBoden
+			// 
+			this.lblModulKlimaBoden.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lblModulKlimaBoden.BackColor = System.Drawing.Color.Transparent;
+			this.lblModulKlimaBoden.Location = new System.Drawing.Point(3, 141);
+			this.lblModulKlimaBoden.Margin = new System.Windows.Forms.Padding(3);
+			this.lblModulKlimaBoden.Name = "lblModulKlimaBoden";
+			this.lblModulKlimaBoden.Size = new System.Drawing.Size(165, 17);
+			this.lblModulKlimaBoden.TabIndex = 8;
+			this.lblModulKlimaBoden.Text = "Modul Klimaboden";
+			this.lblModulKlimaBoden.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// cbModulKlimaBodenHeat
+			// 
+			this.cbModulKlimaBodenHeat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.cbModulKlimaBodenHeat.BackColor = System.Drawing.Color.Transparent;
+			this.cbModulKlimaBodenHeat.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.cbModulKlimaBodenHeat.Location = new System.Drawing.Point(174, 141);
+			this.cbModulKlimaBodenHeat.Name = "cbModulKlimaBodenHeat";
+			this.cbModulKlimaBodenHeat.Size = new System.Drawing.Size(50, 17);
+			this.cbModulKlimaBodenHeat.TabIndex = 13;
+			this.cbModulKlimaBodenHeat.UseVisualStyleBackColor = false;
+			this.cbModulKlimaBodenHeat.CheckedChanged += new System.EventHandler(this.cbModulKlimaBodenHeat_CheckedChanged);
+			// 
+			// cbModulKlimaBodenCool
+			// 
+			this.cbModulKlimaBodenCool.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.cbModulKlimaBodenCool.BackColor = System.Drawing.Color.Transparent;
+			this.cbModulKlimaBodenCool.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.cbModulKlimaBodenCool.Location = new System.Drawing.Point(230, 141);
+			this.cbModulKlimaBodenCool.Name = "cbModulKlimaBodenCool";
+			this.cbModulKlimaBodenCool.Size = new System.Drawing.Size(50, 17);
+			this.cbModulKlimaBodenCool.TabIndex = 14;
+			this.cbModulKlimaBodenCool.UseVisualStyleBackColor = false;
+			this.cbModulKlimaBodenCool.CheckedChanged += new System.EventHandler(this.cbModulKlimaBodenCool_CheckedChanged);
+			// 
+			// lblHithermCompactRoof
+			// 
+			this.lblHithermCompactRoof.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lblHithermCompactRoof.BackColor = System.Drawing.Color.Transparent;
+			this.lblHithermCompactRoof.Location = new System.Drawing.Point(3, 118);
+			this.lblHithermCompactRoof.Margin = new System.Windows.Forms.Padding(3);
+			this.lblHithermCompactRoof.Name = "lblHithermCompactRoof";
+			this.lblHithermCompactRoof.Size = new System.Drawing.Size(165, 17);
+			this.lblHithermCompactRoof.TabIndex = 7;
+			this.lblHithermCompactRoof.Text = "Hitherm® Compact Dachschräge";
+			this.lblHithermCompactRoof.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// cbHithermCompactRoofHeat
+			// 
+			this.cbHithermCompactRoofHeat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.cbHithermCompactRoofHeat.BackColor = System.Drawing.Color.Transparent;
+			this.cbHithermCompactRoofHeat.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.cbHithermCompactRoofHeat.Location = new System.Drawing.Point(174, 118);
+			this.cbHithermCompactRoofHeat.Name = "cbHithermCompactRoofHeat";
+			this.cbHithermCompactRoofHeat.Size = new System.Drawing.Size(50, 17);
+			this.cbHithermCompactRoofHeat.TabIndex = 12;
+			this.cbHithermCompactRoofHeat.UseVisualStyleBackColor = false;
+			this.cbHithermCompactRoofHeat.CheckedChanged += new System.EventHandler(this.cbHithermCompactRoofHeat_CheckedChanged);
+			// 
+			// cbHithermCompactRoofCool
+			// 
+			this.cbHithermCompactRoofCool.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.cbHithermCompactRoofCool.BackColor = System.Drawing.Color.Transparent;
+			this.cbHithermCompactRoofCool.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.cbHithermCompactRoofCool.Location = new System.Drawing.Point(230, 118);
+			this.cbHithermCompactRoofCool.Name = "cbHithermCompactRoofCool";
+			this.cbHithermCompactRoofCool.Size = new System.Drawing.Size(50, 17);
+			this.cbHithermCompactRoofCool.TabIndex = 15;
+			this.cbHithermCompactRoofCool.UseVisualStyleBackColor = false;
+			this.cbHithermCompactRoofCool.CheckedChanged += new System.EventHandler(this.cbHithermCompactRoofCool_CheckedChanged);
+			// 
 			// lblAssumptions
 			// 
 			this.lblAssumptions.BackColor = System.Drawing.Color.Transparent;
@@ -592,6 +634,12 @@ namespace Europlan.Common {
             0,
             0});
 			this.txtCoolTemperature.Location = new System.Drawing.Point(412, 128);
+			this.txtCoolTemperature.MaxValue = null;
+			this.txtCoolTemperature.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			this.txtCoolTemperature.Name = "txtCoolTemperature";
 			this.txtCoolTemperature.ReadOnly = true;
 			this.txtCoolTemperature.Size = new System.Drawing.Size(56, 20);
@@ -612,6 +660,16 @@ namespace Europlan.Common {
             0,
             0});
 			this.txtAllocation.Location = new System.Drawing.Point(391, 233);
+			this.txtAllocation.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.txtAllocation.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			this.txtAllocation.Name = "txtAllocation";
 			this.txtAllocation.Size = new System.Drawing.Size(56, 20);
 			this.txtAllocation.TabIndex = 25;
@@ -653,48 +711,6 @@ namespace Europlan.Common {
 			// quickDimensioningRoomDistributorsWrapperBindingSource
 			// 
 			this.quickDimensioningRoomDistributorsWrapperBindingSource.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
-			// 
-			// lblHithermCompactRoof
-			// 
-			this.lblHithermCompactRoof.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.lblHithermCompactRoof.BackColor = System.Drawing.Color.Transparent;
-			this.lblHithermCompactRoof.Location = new System.Drawing.Point(3, 118);
-			this.lblHithermCompactRoof.Margin = new System.Windows.Forms.Padding(3);
-			this.lblHithermCompactRoof.Name = "lblHithermCompactRoof";
-			this.lblHithermCompactRoof.Size = new System.Drawing.Size(165, 17);
-			this.lblHithermCompactRoof.TabIndex = 7;
-			this.lblHithermCompactRoof.Text = "Hitherm Compact Dachschräge";
-			this.lblHithermCompactRoof.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// cbHithermCompactRoofHeat
-			// 
-			this.cbHithermCompactRoofHeat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.cbHithermCompactRoofHeat.BackColor = System.Drawing.Color.Transparent;
-			this.cbHithermCompactRoofHeat.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.cbHithermCompactRoofHeat.Location = new System.Drawing.Point(174, 118);
-			this.cbHithermCompactRoofHeat.Name = "cbHithermCompactRoofHeat";
-			this.cbHithermCompactRoofHeat.Size = new System.Drawing.Size(50, 17);
-			this.cbHithermCompactRoofHeat.TabIndex = 12;
-			this.cbHithermCompactRoofHeat.UseVisualStyleBackColor = false;
-			this.cbHithermCompactRoofHeat.CheckedChanged += new System.EventHandler(this.cbHithermCompactRoofHeat_CheckedChanged);
-			// 
-			// cbHithermCompactRoofCool
-			// 
-			this.cbHithermCompactRoofCool.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.cbHithermCompactRoofCool.BackColor = System.Drawing.Color.Transparent;
-			this.cbHithermCompactRoofCool.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.cbHithermCompactRoofCool.Location = new System.Drawing.Point(230, 118);
-			this.cbHithermCompactRoofCool.Name = "cbHithermCompactRoofCool";
-			this.cbHithermCompactRoofCool.Size = new System.Drawing.Size(50, 17);
-			this.cbHithermCompactRoofCool.TabIndex = 15;
-			this.cbHithermCompactRoofCool.UseVisualStyleBackColor = false;
-			this.cbHithermCompactRoofCool.CheckedChanged += new System.EventHandler(this.cbHithermCompactRoofCool_CheckedChanged);
 			// 
 			// QuickDimensioningPanel
 			// 
