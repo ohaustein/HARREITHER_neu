@@ -20,9 +20,9 @@
  CreatedByApp=<unknown>
  CreatedByDLL=<unknown>
  CreatedByUser=<unknown>
- LastModified=8/31/2009, 9:23:13 AM
+ LastModified=10/5/2009, 3:01:18 PM
  LastModifiedByApp=EUROPLAN.VSHOST.EXE [8.0.50727.42]
- LastModifiedByDLL=CMLL14.DLL [14.9.2009.19413 (09-07-08 13:35)]
+ LastModifiedByDLL=CMLL14.DLL [14.10.2009.23612 (09-08-19 12:56)]
  LastModifiedByUser=neudorfer on CAPRICA
  CreatedByCallFrom=
  [@DatabaseStructure]
@@ -99,7 +99,7 @@
  LinkID=29
  LinkToID=0
  LinkMode=32
- LinkTest=-9075
+ LinkTest=-19105
  LayerID=0
  GroupID=0
  Identifier=
@@ -222,6 +222,7 @@
 	  LineWidth=0
 	  }
 	 }
+	Height=100000
 	ColumnCount=0
 	ColumnCount.Distance=1000
 	ColumnBreakCondition=False
@@ -28245,7 +28246,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=99000
 		 Height=10000
 		 FixedHeight=0
@@ -29305,7 +29306,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=@RoomControllers
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=99000
 		 Height=10000
 		 FixedHeight=0
@@ -30467,7 +30468,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=84000
 		 Height=10000
 		 FixedHeight=0
@@ -31731,7 +31732,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=@RoomControllers
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=84000
 		 Height=10000
 		 FixedHeight=0
@@ -33097,7 +33098,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=70000
 		 Height=10000
 		 FixedHeight=0
@@ -34565,7 +34566,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=@RoomControllers
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=70000
 		 Height=10000
 		 FixedHeight=0
@@ -36135,7 +36136,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=65000
 		 Height=10000
 		 FixedHeight=0
@@ -37807,7 +37808,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=@RoomControllers
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=65000
 		 Height=10000
 		 FixedHeight=0
@@ -39581,7 +39582,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=65000
 		 Height=10000
 		 FixedHeight=0
@@ -41457,7 +41458,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=@RoomControllers
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=65000
 		 Height=10000
 		 FixedHeight=0
@@ -43435,7 +43436,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=50000
 		 Height=10000
 		 FixedHeight=0
@@ -45515,7 +45516,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=@RoomControllers
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=50000
 		 Height=10000
 		 FixedHeight=0
@@ -47697,7 +47698,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=30000
 		 Height=10000
 		 FixedHeight=0
@@ -49981,7 +49982,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text=@RoomControllers
+		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
 		 Width=30000
 		 Height=10000
 		 FixedHeight=0
@@ -50204,6 +50205,7 @@
 	  LineWidth=0
 	  }
 	 }
+	Height=100000
 	ColumnCount=0
 	ColumnCount.Distance=1000
 	ColumnBreakCondition=False
@@ -51642,7 +51644,7 @@
  LinkID=91
  LinkToID=0
  LinkMode=32
- LinkTest=-6756
+ LinkTest=-15544
  LayerID=0
  GroupID=0
  Identifier=
@@ -51679,7 +51681,7 @@
  LinkID=45
  LinkToID=0
  LinkMode=32
- LinkTest=-24310
+ LinkTest=-28543
  LayerID=0
  GroupID=0
  Identifier=
@@ -51714,7 +51716,7 @@
  LinkID=31
  LinkToID=0
  LinkMode=32
- LinkTest=-32019
+ LinkTest=-1438
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51814,6 +51816,27 @@
 	{
 	[Font]
 	 {
+	 Default=True
+	 }
+	Align=0
+	Adjusted=False
+	Uneraseable=False
+	LineWrap=1
+	PageWrapAllowed=True
+	ForceWrap=False
+	SpaceOptimization=False
+	Spacing.Paragraph=0
+	Spacing.Line=0
+	OutputFormatter=
+	Condition=True
+	Text=" "
+	Tab=0
+	TabAlign=0
+	}
+   [Line]
+	{
+	[Font]
+	 {
 	 Default=False
 	 FaceName="Arial"
 	 GdiCharSet=0
@@ -51851,7 +51874,7 @@
  LinkID=35
  LinkToID=0
  LinkMode=32
- LinkTest=-11283
+ LinkTest=-8056
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51924,7 +51947,7 @@
  LinkID=52
  LinkToID=0
  LinkMode=32
- LinkTest=-5954
+ LinkTest=-19576
  LayerID=0
  GroupID=0
  Identifier=
@@ -51960,7 +51983,7 @@
  LinkID=13
  LinkToID=0
  LinkMode=32
- LinkTest=-5660
+ LinkTest=-14166
  LayerID=0
  GroupID=0
  Identifier=
