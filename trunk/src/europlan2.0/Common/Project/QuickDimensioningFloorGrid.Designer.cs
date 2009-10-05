@@ -216,7 +216,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle6.Format = "F1";
 			this.colEuroval.DefaultCellStyle = dataGridViewCellStyle6;
 			this.colEuroval.FillWeight = 70F;
-			this.colEuroval.HeaderText = "Euroval\n(m²)";
+			this.colEuroval.HeaderText = "Euroval®\n(m²)";
 			this.colEuroval.Name = "colEuroval";
 			this.colEuroval.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colEuroval.Visible = false;
@@ -227,7 +227,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colEurovalCircuits.DefaultCellStyle = dataGridViewCellStyle7;
 			this.colEurovalCircuits.FillWeight = 70F;
-			this.colEurovalCircuits.HeaderText = "Euroval\nHeizkreise";
+			this.colEurovalCircuits.HeaderText = "Euroval®\nHeizkreise";
 			this.colEurovalCircuits.Name = "colEurovalCircuits";
 			this.colEurovalCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colEurovalCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -262,7 +262,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle9.Format = "F1";
 			this.colHitherm.DefaultCellStyle = dataGridViewCellStyle9;
 			this.colHitherm.FillWeight = 70F;
-			this.colHitherm.HeaderText = "Hitherm\n(m²)";
+			this.colHitherm.HeaderText = "Hitherm®\n(m²)";
 			this.colHitherm.Name = "colHitherm";
 			this.colHitherm.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colHitherm.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -273,7 +273,7 @@ namespace Europlan.Common {
 			// colHithermCircuits
 			// 
 			this.colHithermCircuits.FillWeight = 70F;
-			this.colHithermCircuits.HeaderText = "Hitherm\nHeizkreise";
+			this.colHithermCircuits.HeaderText = "Hitherm®\nHeizkreise";
 			this.colHithermCircuits.Name = "colHithermCircuits";
 			this.colHithermCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colHithermCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -286,7 +286,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle10.Format = "F1";
 			this.colHithermCompact.DefaultCellStyle = dataGridViewCellStyle10;
 			this.colHithermCompact.FillWeight = 70F;
-			this.colHithermCompact.HeaderText = "Hitherm Co\n(m²)";
+			this.colHithermCompact.HeaderText = "Hitherm® Co\n(m²)";
 			this.colHithermCompact.Name = "colHithermCompact";
 			this.colHithermCompact.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colHithermCompact.Visible = false;
@@ -295,7 +295,7 @@ namespace Europlan.Common {
 			// colHithermCompactCircuits
 			// 
 			this.colHithermCompactCircuits.FillWeight = 70F;
-			this.colHithermCompactCircuits.HeaderText = "Hitherm Co\nHeizkreise";
+			this.colHithermCompactCircuits.HeaderText = "Hitherm® Co\nHeizkreise";
 			this.colHithermCompactCircuits.Name = "colHithermCompactCircuits";
 			this.colHithermCompactCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colHithermCompactCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -308,7 +308,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle11.Format = "F1";
 			this.colHithermCompactRoof.DefaultCellStyle = dataGridViewCellStyle11;
 			this.colHithermCompactRoof.FillWeight = 70F;
-			this.colHithermCompactRoof.HeaderText = "Hitherm Co\nDach (m²)";
+			this.colHithermCompactRoof.HeaderText = "Hitherm® Co\nDach (m²)";
 			this.colHithermCompactRoof.Name = "colHithermCompactRoof";
 			this.colHithermCompactRoof.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colHithermCompactRoof.Visible = false;
@@ -317,7 +317,7 @@ namespace Europlan.Common {
 			// colHithermCompactRoofCircuits
 			// 
 			this.colHithermCompactRoofCircuits.FillWeight = 70F;
-			this.colHithermCompactRoofCircuits.HeaderText = "Hitherm Co\nDach Hkr.";
+			this.colHithermCompactRoofCircuits.HeaderText = "Hitherm® Co\nDach Hkr.";
 			this.colHithermCompactRoofCircuits.Name = "colHithermCompactRoofCircuits";
 			this.colHithermCompactRoofCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colHithermCompactRoofCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;

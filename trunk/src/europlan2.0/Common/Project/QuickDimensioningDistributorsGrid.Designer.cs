@@ -137,7 +137,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colEurovalOpenCircuits.DefaultCellStyle = dataGridViewCellStyle2;
 			this.colEurovalOpenCircuits.FillWeight = 70F;
-			this.colEurovalOpenCircuits.HeaderText = "Euroval\noffene\nHeizkreise";
+			this.colEurovalOpenCircuits.HeaderText = "Euroval®\noffene\nHeizkreise";
 			this.colEurovalOpenCircuits.Name = "colEurovalOpenCircuits";
 			this.colEurovalOpenCircuits.ReadOnly = true;
 			this.colEurovalOpenCircuits.Width = 70;
@@ -148,7 +148,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colEurovalPlannedCircuits.DefaultCellStyle = dataGridViewCellStyle3;
 			this.colEurovalPlannedCircuits.FillWeight = 70F;
-			this.colEurovalPlannedCircuits.HeaderText = "Euroval\nangeschl.\nHeizkreise";
+			this.colEurovalPlannedCircuits.HeaderText = "Euroval®\nangeschl.\nHeizkreise";
 			this.colEurovalPlannedCircuits.Name = "colEurovalPlannedCircuits";
 			this.colEurovalPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colEurovalPlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -184,7 +184,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colHithermOpenCircuits.DefaultCellStyle = dataGridViewCellStyle6;
 			this.colHithermOpenCircuits.FillWeight = 70F;
-			this.colHithermOpenCircuits.HeaderText = "Hitherm\noffene\nHeizkreise";
+			this.colHithermOpenCircuits.HeaderText = "Hitherm®\noffene\nHeizkreise";
 			this.colHithermOpenCircuits.Name = "colHithermOpenCircuits";
 			this.colHithermOpenCircuits.ReadOnly = true;
 			this.colHithermOpenCircuits.Width = 70;
@@ -195,7 +195,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colHithermPlannedCircuits.DefaultCellStyle = dataGridViewCellStyle7;
 			this.colHithermPlannedCircuits.FillWeight = 70F;
-			this.colHithermPlannedCircuits.HeaderText = "Hitherm\nangeschl.\nHeizkreise";
+			this.colHithermPlannedCircuits.HeaderText = "Hitherm®\nangeschl.\nHeizkreise";
 			this.colHithermPlannedCircuits.Name = "colHithermPlannedCircuits";
 			this.colHithermPlannedCircuits.ReadOnly = true;
 			this.colHithermPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -208,7 +208,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colHithermCompactOpenCircuits.DefaultCellStyle = dataGridViewCellStyle8;
 			this.colHithermCompactOpenCircuits.FillWeight = 70F;
-			this.colHithermCompactOpenCircuits.HeaderText = "Hitherm Co\noffene\nHeizkreise";
+			this.colHithermCompactOpenCircuits.HeaderText = "Hitherm® Co\noffene\nHeizkreise";
 			this.colHithermCompactOpenCircuits.Name = "colHithermCompactOpenCircuits";
 			this.colHithermCompactOpenCircuits.ReadOnly = true;
 			this.colHithermCompactOpenCircuits.Width = 70;
@@ -219,7 +219,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colHithermCompactPlannedCircuits.DefaultCellStyle = dataGridViewCellStyle9;
 			this.colHithermCompactPlannedCircuits.FillWeight = 70F;
-			this.colHithermCompactPlannedCircuits.HeaderText = "Hitherm Co\nangeschl.\nHeizkreise";
+			this.colHithermCompactPlannedCircuits.HeaderText = "Hitherm® Co\nangeschl.\nHeizkreise";
 			this.colHithermCompactPlannedCircuits.Name = "colHithermCompactPlannedCircuits";
 			this.colHithermCompactPlannedCircuits.ReadOnly = true;
 			this.colHithermCompactPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -232,7 +232,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colHithermCompactRoofOpenCircuits.DefaultCellStyle = dataGridViewCellStyle10;
 			this.colHithermCompactRoofOpenCircuits.FillWeight = 70F;
-			this.colHithermCompactRoofOpenCircuits.HeaderText = "Hitherm Co\nDach offene\nHeizkreise";
+			this.colHithermCompactRoofOpenCircuits.HeaderText = "Hitherm® Co\nDach offene\nHeizkreise";
 			this.colHithermCompactRoofOpenCircuits.Name = "colHithermCompactRoofOpenCircuits";
 			this.colHithermCompactRoofOpenCircuits.ReadOnly = true;
 			this.colHithermCompactRoofOpenCircuits.Width = 70;
@@ -243,7 +243,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colHithermCompactRoofPlannedCircuits.DefaultCellStyle = dataGridViewCellStyle11;
 			this.colHithermCompactRoofPlannedCircuits.FillWeight = 70F;
-			this.colHithermCompactRoofPlannedCircuits.HeaderText = "Hitherm Co\nDach angeschl.\nHeizkreise";
+			this.colHithermCompactRoofPlannedCircuits.HeaderText = "Hitherm® Co\nDach angeschl.\nHeizkreise";
 			this.colHithermCompactRoofPlannedCircuits.Name = "colHithermCompactRoofPlannedCircuits";
 			this.colHithermCompactRoofPlannedCircuits.ReadOnly = true;
 			this.colHithermCompactRoofPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;

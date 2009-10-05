@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Euroval")]
+	[ProductName("Euroval®")]
 	public class EurovalProduct : Product {
 
 		private static double su0 = 0.035; /* Mindestüberdeckung fix??? */
@@ -360,7 +360,7 @@ namespace Europlan.Common {
 		/// The name of this product that is shown in quick dimensioning
 		/// </summary>
 		public override string QuickDimensioningName {
-			get { return "Euroval\n(m²)"; }
+			get { return "Euroval®\n(m²)"; }
 		}
 		#endregion QuickDimensioning
 
@@ -368,7 +368,7 @@ namespace Europlan.Common {
 		/// The name of this product
 		/// </summary>
 		public override string Name {
-			get { return "Euroval"; }
+			get { return "Euroval®"; }
 		}
 
 		/// <summary>
