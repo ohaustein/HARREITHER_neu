@@ -5,7 +5,7 @@ using System.Text;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Modul Klimadecke")]
+	[ProductName("Modul Klima-Decke")]
 	public class ModulKlimaDeckeProduct : Product {
 
 		public ModulKlimaDeckeProduct() {
@@ -51,11 +51,11 @@ namespace Europlan.Common {
 		}
 
 		public override string Name {
-			get { return "Modul Klimadecke"; }
+			get { return "Modul Klima-Decke"; }
 		}
 
 		public override string QuickDimensioningName {
-			get { return "Modul\nKlima\ndecke\n(m²)"; }
+			get { return "Modul\nKlima\nDecke\n(m²)"; }
 		}
 
 		public override ProductType Type {

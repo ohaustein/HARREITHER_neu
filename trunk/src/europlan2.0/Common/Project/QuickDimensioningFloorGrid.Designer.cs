@@ -285,88 +285,88 @@ namespace Europlan.Common {
 			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle10.Format = "F1";
 			this.colHithermCompact.DefaultCellStyle = dataGridViewCellStyle10;
-			this.colHithermCompact.FillWeight = 70F;
+			this.colHithermCompact.FillWeight = 75F;
 			this.colHithermCompact.HeaderText = "Hitherm® Co\n(m²)";
 			this.colHithermCompact.Name = "colHithermCompact";
 			this.colHithermCompact.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colHithermCompact.Visible = false;
-			this.colHithermCompact.Width = 70;
+			this.colHithermCompact.Width = 75;
 			// 
 			// colHithermCompactCircuits
 			// 
-			this.colHithermCompactCircuits.FillWeight = 70F;
+			this.colHithermCompactCircuits.FillWeight = 75F;
 			this.colHithermCompactCircuits.HeaderText = "Hitherm® Co\nHeizkreise";
 			this.colHithermCompactCircuits.Name = "colHithermCompactCircuits";
 			this.colHithermCompactCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colHithermCompactCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colHithermCompactCircuits.Visible = false;
-			this.colHithermCompactCircuits.Width = 70;
+			this.colHithermCompactCircuits.Width = 75;
 			// 
 			// colHithermCompactRoof
 			// 
 			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle11.Format = "F1";
 			this.colHithermCompactRoof.DefaultCellStyle = dataGridViewCellStyle11;
-			this.colHithermCompactRoof.FillWeight = 70F;
+			this.colHithermCompactRoof.FillWeight = 75F;
 			this.colHithermCompactRoof.HeaderText = "Hitherm® Co\nDach (m²)";
 			this.colHithermCompactRoof.Name = "colHithermCompactRoof";
 			this.colHithermCompactRoof.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colHithermCompactRoof.Visible = false;
-			this.colHithermCompactRoof.Width = 70;
+			this.colHithermCompactRoof.Width = 75;
 			// 
 			// colHithermCompactRoofCircuits
 			// 
-			this.colHithermCompactRoofCircuits.FillWeight = 70F;
+			this.colHithermCompactRoofCircuits.FillWeight = 75F;
 			this.colHithermCompactRoofCircuits.HeaderText = "Hitherm® Co\nDach Hkr.";
 			this.colHithermCompactRoofCircuits.Name = "colHithermCompactRoofCircuits";
 			this.colHithermCompactRoofCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colHithermCompactRoofCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colHithermCompactRoofCircuits.Visible = false;
-			this.colHithermCompactRoofCircuits.Width = 70;
+			this.colHithermCompactRoofCircuits.Width = 75;
 			// 
 			// colModulKlimaBoden
 			// 
 			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle12.Format = "F1";
 			this.colModulKlimaBoden.DefaultCellStyle = dataGridViewCellStyle12;
-			this.colModulKlimaBoden.FillWeight = 70F;
-			this.colModulKlimaBoden.HeaderText = "Klimaboden\n(m²)";
+			this.colModulKlimaBoden.FillWeight = 75F;
+			this.colModulKlimaBoden.HeaderText = "Klima-Boden\n(m²)";
 			this.colModulKlimaBoden.Name = "colModulKlimaBoden";
 			this.colModulKlimaBoden.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colModulKlimaBoden.Visible = false;
-			this.colModulKlimaBoden.Width = 70;
+			this.colModulKlimaBoden.Width = 75;
 			// 
 			// colModulKlimaBodenCircuits
 			// 
-			this.colModulKlimaBodenCircuits.FillWeight = 70F;
-			this.colModulKlimaBodenCircuits.HeaderText = "Klimaboden\nHeizkreise";
+			this.colModulKlimaBodenCircuits.FillWeight = 75F;
+			this.colModulKlimaBodenCircuits.HeaderText = "Klima-Boden\nHeizkreise";
 			this.colModulKlimaBodenCircuits.Name = "colModulKlimaBodenCircuits";
 			this.colModulKlimaBodenCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colModulKlimaBodenCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colModulKlimaBodenCircuits.Visible = false;
-			this.colModulKlimaBodenCircuits.Width = 70;
+			this.colModulKlimaBodenCircuits.Width = 75;
 			// 
 			// colModulKlimaDecke
 			// 
 			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle13.Format = "F1";
 			this.colModulKlimaDecke.DefaultCellStyle = dataGridViewCellStyle13;
-			this.colModulKlimaDecke.FillWeight = 70F;
-			this.colModulKlimaDecke.HeaderText = "Klimadecke\n(m²)";
+			this.colModulKlimaDecke.FillWeight = 75F;
+			this.colModulKlimaDecke.HeaderText = "Klima-Decke\n(m²)";
 			this.colModulKlimaDecke.Name = "colModulKlimaDecke";
 			this.colModulKlimaDecke.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colModulKlimaDecke.Visible = false;
-			this.colModulKlimaDecke.Width = 70;
+			this.colModulKlimaDecke.Width = 75;
 			// 
 			// colModulKlimaDeckeCircuits
 			// 
-			this.colModulKlimaDeckeCircuits.FillWeight = 70F;
-			this.colModulKlimaDeckeCircuits.HeaderText = "Klimadecke\nHeizkreise";
+			this.colModulKlimaDeckeCircuits.FillWeight = 750F;
+			this.colModulKlimaDeckeCircuits.HeaderText = "Klima-Decke\nHeizkreise";
 			this.colModulKlimaDeckeCircuits.Name = "colModulKlimaDeckeCircuits";
 			this.colModulKlimaDeckeCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colModulKlimaDeckeCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colModulKlimaDeckeCircuits.Visible = false;
-			this.colModulKlimaDeckeCircuits.Width = 70;
+			this.colModulKlimaDeckeCircuits.Width = 75;
 			// 
 			// colRoomController
 			// 
