@@ -498,7 +498,7 @@ namespace Europlan.Common {
 			this.lblModulKlimaDecke.Name = "lblModulKlimaDecke";
 			this.lblModulKlimaDecke.Size = new System.Drawing.Size(165, 17);
 			this.lblModulKlimaDecke.TabIndex = 9;
-			this.lblModulKlimaDecke.Text = "Modul Klimadecke";
+			this.lblModulKlimaDecke.Text = "Modul Klima-Decke";
 			this.lblModulKlimaDecke.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// cbModulKlimaDeckeHeat
@@ -540,7 +540,7 @@ namespace Europlan.Common {
 			this.lblModulKlimaBoden.Name = "lblModulKlimaBoden";
 			this.lblModulKlimaBoden.Size = new System.Drawing.Size(165, 17);
 			this.lblModulKlimaBoden.TabIndex = 8;
-			this.lblModulKlimaBoden.Text = "Modul Klimaboden";
+			this.lblModulKlimaBoden.Text = "Modul Klima-Boden";
 			this.lblModulKlimaBoden.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// cbModulKlimaBodenHeat
