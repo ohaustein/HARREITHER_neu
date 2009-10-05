@@ -225,6 +225,24 @@ namespace Europlan.UnitTest {
 			double result = norm.Druckverlust(854.0, EN1264.c, 5, 0.000183783, EN1264.dichte, 0.0153, EN1264.viskositaet, EN1264.k, 80.0);
 			Assert.AreEqual(54.37, Math.Round(result, 2));
 		}
+
+		[Test]
+		public void TestDefaultSpreizung() {
+			Assert.AreEqual(5.0, norm.DefaultSpreizung(25.9));
+			Assert.AreEqual(5.0, norm.DefaultSpreizung(30.0));
+			Assert.AreEqual(5.0, norm.DefaultSpreizung(32.5));
+			Assert.AreEqual(5.0, norm.DefaultSpreizung(35.0));
+			Assert.AreEqual(6.0, norm.DefaultSpreizung(38.0));
+			Assert.AreEqual(6.7, Math.Round(norm.DefaultSpreizung(40.0), 1));
+			Assert.AreEqual(7.0, norm.DefaultSpreizung(41.0));
+			Assert.AreEqual(8.0, norm.DefaultSpreizung(44.0));
+			Assert.AreEqual(8.0, norm.DefaultSpreizung(45.5));
+			Assert.AreEqual(8.0, norm.DefaultSpreizung(46.5));
+			Assert.AreEqual(10.0, norm.DefaultSpreizung(50.0));
+			Assert.AreEqual(10.0, norm.DefaultSpreizung(52.5));
+			Assert.AreEqual(10.0, norm.DefaultSpreizung(55.0));
+			Assert.AreEqual(10.0, norm.DefaultSpreizung(59.7));
+		}
 		
 	}
 }

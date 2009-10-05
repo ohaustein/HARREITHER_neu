@@ -1048,30 +1048,35 @@ namespace Europlan.Common {
 					listLabel1.Variables.Add("@Product" + i, productName);
 					i++;
 				}
-				Dictionary<Room.RoomController, int> roomControllers = new Dictionary<Room.RoomController, int>();
-				foreach (Floor floor in Project.Instance.Floors) {
-					foreach (Room room in floor.Rooms) {
-						if (room.QuickDimensioningRoomController != Room.RoomController.None) {
-							if (!roomControllers.ContainsKey(room.QuickDimensioningRoomController)) {
-								roomControllers.Add(room.QuickDimensioningRoomController, 1);
-							} else {
-								roomControllers[room.QuickDimensioningRoomController] = roomControllers[room.QuickDimensioningRoomController] + 1;
-							}
-						}
-					}
-				}
-				string controllersSummary = null;
-				string localized = "";
-				foreach (KeyValuePair<Room.RoomController, int> kvp in roomControllers) {
-					if (controllersSummary != null) {
-						controllersSummary += ", ";
-					} else {
-						controllersSummary = "";
-					}
-					localized = resources.GetString(kvp.Key.ToString(), Thread.CurrentThread.CurrentUICulture);
-					controllersSummary += kvp.Value.ToString() + " * " + localized;
-				}
-				listLabel1.Variables.Add("@RoomControllers", controllersSummary);
+
+				// ---------------------------------------------------------------------------------------------------
+				// RoomControllers are now aggregated in the report itself
+				// ---------------------------------------------------------------------------------------------------
+				//Dictionary<Room.RoomController, int> roomControllers = new Dictionary<Room.RoomController, int>();
+				//foreach (Floor floor in Project.Instance.Floors) {
+				//    foreach (Room room in floor.Rooms) {
+				//        if (room.QuickDimensioningRoomController != Room.RoomController.None) {
+				//            if (!roomControllers.ContainsKey(room.QuickDimensioningRoomController)) {
+				//                roomControllers.Add(room.QuickDimensioningRoomController, 1);
+				//            } else {
+				//                roomControllers[room.QuickDimensioningRoomController] = roomControllers[room.QuickDimensioningRoomController] + 1;
+				//            }
+				//        }
+				//    }
+				//}
+				//string controllersSummary = null;
+				//string localized = "";
+				//foreach (KeyValuePair<Room.RoomController, int> kvp in roomControllers) {
+				//    if (controllersSummary != null) {
+				//        controllersSummary += ", ";
+				//    } else {
+				//        controllersSummary = "";
+				//    }
+				//    localized = resources.GetString(kvp.Key.ToString(), Thread.CurrentThread.CurrentUICulture);
+				//    controllersSummary += kvp.Value.ToString() + " * " + localized;
+				//}
+				//listLabel1.Variables.Add("@RoomControllers", controllersSummary);
+				// ---------------------------------------------------------------------------------------------------
 #if DEBUG
 				if (MessageBox.Show("Designer?", "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 					listLabel1.Design();
