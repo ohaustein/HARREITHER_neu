@@ -252,6 +252,30 @@ namespace Europlan.Common {
 			double lambda = WiderstandsBeiwert(reynoldsZahl, k, rohrInnenDurchmesser);
 			return (lambda * (rohrLaenge / rohrInnenDurchmesser) * dichte * (Math.Pow(flussGeschwindigkeit, 2) / 2)) / 100;
 		}
+
+		public double DefaultSpreizung(double vorlaufTemperatur) {
+			double[] x = { 30.0, 32.5, 35.0, 38.0, 41.0, 44.0, 46.5, 50.0, 52.5, 55.0};
+			double[] y = {  5.0,  5.0,  5.0,  6.0,  7.0,  8.0,  8.0, 10.0, 10.0, 10.0};
+			double[] c = null;
+			spline3.buildcubicspline(x, y, 10, 0, 0, 0, 0, ref c);
+			if (vorlaufTemperatur < 35.0) {
+				return 5.0;
+			} else if (vorlaufTemperatur > 35.0 && vorlaufTemperatur <= 38.0) {
+				return 5.0 * (vorlaufTemperatur - 38.0) / (35.0 - 38.0) + 6.0 * (vorlaufTemperatur - 35.0) / (38.0 - 35.0);
+			} else if (vorlaufTemperatur > 38.0 && vorlaufTemperatur <= 41.0) {
+				return 6.0 * (vorlaufTemperatur - 41.0) / (38.0 - 41.0) + 7.0 * (vorlaufTemperatur - 38.0) / (41.0 - 38.0);
+			} else if (vorlaufTemperatur > 41.0 && vorlaufTemperatur <= 44.0) {
+				return 7.0 * (vorlaufTemperatur - 44.0) / (41.0 - 44.0) + 8.0 * (vorlaufTemperatur - 41.0) / (44.0 - 41.0);
+			} else if (vorlaufTemperatur > 44.0 && vorlaufTemperatur <= 46.5) {
+				return 8.0;
+			} else if (vorlaufTemperatur > 46.5 && vorlaufTemperatur <= 50) {
+				return 8 * (vorlaufTemperatur - 50.0) / (46.5 - 50.0) + 10.0 * (vorlaufTemperatur - 46.5) / (50.0 - 46.5);
+			} else if (vorlaufTemperatur > 50.0) {
+				return 10.0;
+			} else {
+				return spline3.splineinterpolation(ref c, vorlaufTemperatur);
+			}
+		}
 	}
 
 }
