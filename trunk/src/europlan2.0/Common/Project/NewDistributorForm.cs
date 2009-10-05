@@ -26,10 +26,10 @@ namespace Europlan.Common {
 				}
 			}
 			int count = distributorIds.Count + 1;
-			while (distributorIds.Contains("VT" + count)) {
+			while (distributorIds.Contains("VT" + String.Format("{0:00}", count))) {
 				count++;
 			}
-			txtId.Text = "VT" + count;
+			txtId.Text = "VT" + String.Format("{0:00}", count);
 			foreach (RegulatorCircuit circuit in project.RegulatorCircuits) {
 				cmbCircuit.Items.Add(circuit);
 			}

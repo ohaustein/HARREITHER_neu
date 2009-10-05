@@ -28,7 +28,7 @@ namespace Europlan.Common {
 			name = "";
 			id = "RK";
 			if (Project.Instance != null) {
-				id += Project.Instance.RegulatorCircuits.Count + 1;
+				id += String.Format("{0:00}", Project.Instance.RegulatorCircuits.Count + 1);
 			}
 			heatFlowTemperature = 35;
 			coolFlowTemperature = 16;
