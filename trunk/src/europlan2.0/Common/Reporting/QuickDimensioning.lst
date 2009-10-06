@@ -20,7 +20,7 @@
  CreatedByApp=<unknown>
  CreatedByDLL=<unknown>
  CreatedByUser=<unknown>
- LastModified=10/6/2009, 10:06:45 AM
+ LastModified=10/6/2009, 11:04:23 AM
  LastModifiedByApp=EUROPLAN.VSHOST.EXE [8.0.50727.42]
  LastModifiedByDLL=CMLL14.DLL [14.10.2009.23612 (09-08-19 12:56)]
  LastModifiedByUser=neudorfer on CAPRICA
@@ -99,7 +99,7 @@
  LinkID=29
  LinkToID=0
  LinkMode=32
- LinkTest=-26470
+ LinkTest=-9022
  LayerID=0
  GroupID=0
  Identifier=
@@ -132,7 +132,7 @@
  BkColor3=LL.Color.White
  BkColor2=LL.Color.White
  BkColor.Alpha=50
- CurrentTable=0
+ CurrentTable=1
  ColumnCount=1
  ColumnCount.Distance=1000
  [@Tables]
@@ -51437,7 +51437,7 @@
 		 }
 		[Column]
 		 {
-		 Identifier=
+		 Identifier=DistributorSum
 		 OutputFormatter=
 		 Text=Fstr$(Sum (QuickDimensioningDistributorsReportWrapper.Amount),"?&")
 		 Width=29980
@@ -51530,7 +51530,7 @@
 		 {
 		 Identifier=
 		 OutputFormatter=
-		 Text="Dem Verteiler sind zuviele Heizkreise zugeordnet"
+		 Text=Cond(Sum (QuickDimensioningDistributorsReportWrapper.Amount) > 12,"Dem Verteiler sind zuviele Heizkreise zugeordnet"," ")
 		 Width=79980
 		 Height=10000
 		 FixedHeight=0
@@ -51551,7 +51551,7 @@
 		 BkColor2=LL.Color.White
 		 BkColor.Alpha=50
 		 FgColor=LL.Color.Black
-		 SpaceOptimization=True
+		 SpaceOptimization=False
 		 Link.URL=
 		 WithText=False
 		 [Frame]
@@ -51591,7 +51591,7 @@
 		  }
 		 BarRatio=0
 		 ExportAsPicture=False
-		 Condition=Sum(QuickDimensioningDistributorsReportWrapper.Amount) > 12
+		 Condition=True
 		 }
 		}
 	   [Options]
@@ -51644,7 +51644,7 @@
  LinkID=91
  LinkToID=0
  LinkMode=32
- LinkTest=-2419
+ LinkTest=-18953
  LayerID=0
  GroupID=0
  Identifier=
@@ -51681,7 +51681,7 @@
  LinkID=45
  LinkToID=0
  LinkMode=32
- LinkTest=-11898
+ LinkTest=-18883
  LayerID=0
  GroupID=0
  Identifier=
@@ -51716,7 +51716,7 @@
  LinkID=31
  LinkToID=0
  LinkMode=32
- LinkTest=-4835
+ LinkTest=-7454
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51874,7 +51874,7 @@
  LinkID=35
  LinkToID=0
  LinkMode=32
- LinkTest=-9124
+ LinkTest=-32457
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51947,7 +51947,7 @@
  LinkID=52
  LinkToID=0
  LinkMode=32
- LinkTest=-27124
+ LinkTest=-12487
  LayerID=0
  GroupID=0
  Identifier=
@@ -51983,7 +51983,7 @@
  LinkID=13
  LinkToID=0
  LinkMode=32
- LinkTest=-17061
+ LinkTest=-28655
  LayerID=0
  GroupID=0
  Identifier=
@@ -52020,7 +52020,7 @@
  LinkID=7
  LinkToID=0
  LinkMode=32
- LinkTest=-4607
+ LinkTest=-14468
  LayerID=0
  GroupID=0
  Identifier=
@@ -52093,7 +52093,7 @@
  LinkID=20
  LinkToID=0
  LinkMode=32
- LinkTest=-30765
+ LinkTest=-16618
  LayerID=0
  GroupID=0
  Identifier=
