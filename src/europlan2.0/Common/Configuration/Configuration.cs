@@ -648,6 +648,35 @@ namespace Europlan.Common {
 			get { return this.productConfiguration; }
 			set { this.productConfiguration = value; }
 		}
+
+		public string GetProductParameter<T>(string parameterName) where T: Product {
+			if (!this.productConfiguration.ContainsKey(typeof(T))) {
+				return null;
+			}
+			if (!this.productConfiguration[typeof(T)].ContainsKey(parameterName)) {
+				return null;
+			}
+			return this.productConfiguration[typeof(T)][parameterName];
+		}
+
+		public void AddProductParameter<T>(string parameterName, string value) where T : Product {
+			if (!this.productConfiguration.ContainsKey(typeof(T))) {
+				this.productConfiguration[typeof(T)] = new SerializableDictionary<string, string>();
+			}
+			this.productConfiguration[typeof(T)][parameterName] = value;
+		}
+
+		public void RemoveParameter<T>(string parameterName) where T : Product {
+			if (!this.productConfiguration.ContainsKey(typeof(T))) {
+				return;
+			}
+			if (this.productConfiguration[typeof(T)].ContainsKey(parameterName)) {
+				this.productConfiguration[typeof(T)].Remove(parameterName);
+			}
+			if (this.productConfiguration[typeof(T)].Count == 0) {
+				this.productConfiguration.Remove(typeof(T));
+			}
+		}
 	}
 
 }
