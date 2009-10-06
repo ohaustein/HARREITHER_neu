@@ -20,7 +20,7 @@
  CreatedByApp=<unknown>
  CreatedByDLL=<unknown>
  CreatedByUser=<unknown>
- LastModified=10/5/2009, 4:32:10 PM
+ LastModified=10/6/2009, 10:06:45 AM
  LastModifiedByApp=EUROPLAN.VSHOST.EXE [8.0.50727.42]
  LastModifiedByDLL=CMLL14.DLL [14.10.2009.23612 (09-08-19 12:56)]
  LastModifiedByUser=neudorfer on CAPRICA
@@ -56,14 +56,14 @@
  HelpLines.Horizontal=
  HelpLines.Vertical=
  PDF.MaxOutlineDepth=2
- DefaultSize.Objecttype1=(0,0,64080,18120)
+ DefaultSize.Objecttype1=(0,0,116880,4230)
  DefaultSize.Objecttype5=(0,0,72310,18850)
- DefaultSize.Objecttype6=(0,0,281370,173650)
+ DefaultSize.Objecttype6=(0,0,281370,169150)
  DefaultSize.Objecttype7=(0,0,46590,16150)
  DefaultSize.Objecttype10=(0,0,278840,17400)
  DefaultSize.Objecttype11=(0,0,63920,23610)
  DefaultSize.Objecttype12=(0,0,76020,48260)
- ObjectCount=7
+ ObjectCount=9
 [UserSection]
 
 [SumVariables]
@@ -99,7 +99,7 @@
  LinkID=29
  LinkToID=0
  LinkMode=32
- LinkTest=-28343
+ LinkTest=-26470
  LayerID=0
  GroupID=0
  Identifier=
@@ -109,7 +109,7 @@
  Position/Left=7850
  Position/Top=28920
  Position/Width=281370
- Position/Height=173650
+ Position/Height=169150
  Direction=0
  PDFLevel=0
  PDFText=
@@ -152,7 +152,7 @@
 	[GroupFooterLines]
 	 {
 	 bAlsoOnEmptyGroup=False
-	 bKeepTogether=False
+	 bKeepTogether=True
 	 }
 	[DataLines]
 	 {
@@ -251,7 +251,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomId
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -353,7 +353,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomName
-		 Width=50000
+		 Width=49990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -455,7 +455,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomType
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -557,7 +557,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomTemperature > 0, Fstr$(QuickDimensioningReportWrapper.RoomTemperature,"?&.#"), "")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -659,7 +659,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomArea > 0, Fstr$(QuickDimensioningReportWrapper.RoomArea,"?&.##"), "")
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -761,7 +761,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomHeatLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomHeatLoad,"?&"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -863,7 +863,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomCoolLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomCoolLoad,"?&"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -965,7 +965,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product1Area>0, Fstr$(QuickDimensioningReportWrapper.Product1Area,"?&.##"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -1056,7 +1056,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product1Circuits
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -1147,7 +1147,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomNrOfServos>0, Fstr$(QuickDimensioningReportWrapper.RoomNrOfServos,"?&"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -1249,7 +1249,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Cond(QuickDimensioningReportWrapper.RoomController = "None", "", Cond(QuickDimensioningReportWrapper.RoomController = "RCRadio", "RC-Funk",QuickDimensioningReportWrapper.RoomController ) )
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -1351,7 +1351,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomComments
-		 Width=79000
+		 Width=78980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -1490,7 +1490,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomId
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -1592,7 +1592,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomName
-		 Width=45000
+		 Width=44980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -1694,7 +1694,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomType
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -1796,7 +1796,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomTemperature > 0, Fstr$(QuickDimensioningReportWrapper.RoomTemperature,"?&.#"), "")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -1898,7 +1898,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomArea > 0, Fstr$(QuickDimensioningReportWrapper.RoomArea,"?&.##"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -2000,7 +2000,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomHeatLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomHeatLoad,"?&"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -2102,7 +2102,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomCoolLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomCoolLoad,"?&"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -2204,7 +2204,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product1Area>0, Fstr$(QuickDimensioningReportWrapper.Product1Area,"?&.##"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -2295,7 +2295,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product1Circuits
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -2386,7 +2386,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product2Area>0, Fstr$(QuickDimensioningReportWrapper.Product2Area,"?&.##"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -2477,7 +2477,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product2Circuits
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -2568,7 +2568,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomNrOfServos>0, Fstr$(QuickDimensioningReportWrapper.RoomNrOfServos,"?&"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -2670,7 +2670,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Cond(QuickDimensioningReportWrapper.RoomController = "None", "", Cond(QuickDimensioningReportWrapper.RoomController = "RCRadio", "RC-Funk",QuickDimensioningReportWrapper.RoomController ) )
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -2772,7 +2772,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomComments
-		 Width=64000
+		 Width=63990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -2911,7 +2911,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomId
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3013,7 +3013,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomName
-		 Width=34000
+		 Width=33980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3115,7 +3115,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomType
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3217,7 +3217,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomTemperature > 0, Fstr$(QuickDimensioningReportWrapper.RoomTemperature,"?&.#"), "")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3319,7 +3319,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomArea > 0, Fstr$(QuickDimensioningReportWrapper.RoomArea,"?&.##"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3421,7 +3421,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomHeatLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomHeatLoad,"?&"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3523,7 +3523,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomCoolLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomCoolLoad,"?&"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3625,7 +3625,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product1Area>0, Fstr$(QuickDimensioningReportWrapper.Product1Area,"?&.##"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3716,7 +3716,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product1Circuits
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3807,7 +3807,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product2Area>0, Fstr$(QuickDimensioningReportWrapper.Product2Area,"?&.##"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3898,7 +3898,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product2Circuits
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -3989,7 +3989,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product3Area>0, Fstr$(QuickDimensioningReportWrapper.Product3Area,"?&.##"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -4080,7 +4080,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product3Circuits
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -4171,7 +4171,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomNrOfServos>0, Fstr$(QuickDimensioningReportWrapper.RoomNrOfServos,"?&"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -4273,7 +4273,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Cond(QuickDimensioningReportWrapper.RoomController = "None", "", Cond(QuickDimensioningReportWrapper.RoomController = "RCRadio", "RC-Funk",QuickDimensioningReportWrapper.RoomController ) )
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -4375,7 +4375,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomComments
-		 Width=50000
+		 Width=49990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -4514,7 +4514,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomId
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -4616,7 +4616,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomName
-		 Width=34000
+		 Width=33980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -4718,7 +4718,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomType
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -4820,7 +4820,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomTemperature > 0, Fstr$(QuickDimensioningReportWrapper.RoomTemperature,"?&.#"), "")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -4922,7 +4922,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomArea > 0, Fstr$(QuickDimensioningReportWrapper.RoomArea,"?&.##"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5024,7 +5024,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomHeatLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomHeatLoad,"?&"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5126,7 +5126,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomCoolLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomCoolLoad,"?&"), "")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5228,7 +5228,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product1Area>0, Fstr$(QuickDimensioningReportWrapper.Product1Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5319,7 +5319,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product1Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5410,7 +5410,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product2Area>0, Fstr$(QuickDimensioningReportWrapper.Product2Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5501,7 +5501,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product2Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5592,7 +5592,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product3Area>0, Fstr$(QuickDimensioningReportWrapper.Product3Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5683,7 +5683,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product3Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5774,7 +5774,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product4Area>0, Fstr$(QuickDimensioningReportWrapper.Product4Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5865,7 +5865,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product4Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -5956,7 +5956,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomNrOfServos>0, Fstr$(QuickDimensioningReportWrapper.RoomNrOfServos,"?&"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -6058,7 +6058,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Cond(QuickDimensioningReportWrapper.RoomController = "None", "", Cond(QuickDimensioningReportWrapper.RoomController = "RCRadio", "RC-Funk",QuickDimensioningReportWrapper.RoomController ) )
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -6160,7 +6160,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomComments
-		 Width=45000
+		 Width=44980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -6299,7 +6299,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomId
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -6401,7 +6401,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomName
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -6503,7 +6503,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomType
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -6605,7 +6605,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomTemperature > 0, Fstr$(QuickDimensioningReportWrapper.RoomTemperature,"?&.#"), "")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -6707,7 +6707,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomArea > 0, Fstr$(QuickDimensioningReportWrapper.RoomArea,"?&.##"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -6809,7 +6809,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomHeatLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomHeatLoad,"?&"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -6911,7 +6911,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomCoolLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomCoolLoad,"?&"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7013,7 +7013,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product1Area>0, Fstr$(QuickDimensioningReportWrapper.Product1Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7104,7 +7104,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product1Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7195,7 +7195,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product2Area>0, Fstr$(QuickDimensioningReportWrapper.Product2Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7286,7 +7286,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product2Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7377,7 +7377,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product3Area>0, Fstr$(QuickDimensioningReportWrapper.Product3Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7468,7 +7468,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product3Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7559,7 +7559,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product4Area>0, Fstr$(QuickDimensioningReportWrapper.Product4Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7650,7 +7650,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product4Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7741,7 +7741,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product5Area>0, Fstr$(QuickDimensioningReportWrapper.Product5Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7832,7 +7832,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product5Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -7923,7 +7923,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomNrOfServos>0, Fstr$(QuickDimensioningReportWrapper.RoomNrOfServos,"?&"), "")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -8025,7 +8025,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Cond(QuickDimensioningReportWrapper.RoomController = "None", "", Cond(QuickDimensioningReportWrapper.RoomController = "RCRadio", "RC-Funk",QuickDimensioningReportWrapper.RoomController ) )
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -8127,7 +8127,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomComments
-		 Width=45000
+		 Width=44980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -8266,7 +8266,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomId
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -8368,7 +8368,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomName
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -8470,7 +8470,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomType
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -8572,7 +8572,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomTemperature > 0, Fstr$(QuickDimensioningReportWrapper.RoomTemperature,"?&.#"), "")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -8674,7 +8674,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomArea > 0, Fstr$(QuickDimensioningReportWrapper.RoomArea,"?&.##"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -8776,7 +8776,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomHeatLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomHeatLoad,"?&"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -8878,7 +8878,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomCoolLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomCoolLoad,"?&"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -8980,7 +8980,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product1Area>0, Fstr$(QuickDimensioningReportWrapper.Product1Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9071,7 +9071,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product1Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9162,7 +9162,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product2Area>0, Fstr$(QuickDimensioningReportWrapper.Product2Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9253,7 +9253,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product2Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9344,7 +9344,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product3Area>0, Fstr$(QuickDimensioningReportWrapper.Product3Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9435,7 +9435,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product3Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9526,7 +9526,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product4Area>0, Fstr$(QuickDimensioningReportWrapper.Product4Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9617,7 +9617,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product4Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9708,7 +9708,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product5Area>0, Fstr$(QuickDimensioningReportWrapper.Product5Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9799,7 +9799,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product5Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9890,7 +9890,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product6Area>0, Fstr$(QuickDimensioningReportWrapper.Product6Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -9981,7 +9981,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product6Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -10072,7 +10072,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomNrOfServos>0, Fstr$(QuickDimensioningReportWrapper.RoomNrOfServos,"?&"), "")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -10174,7 +10174,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Cond(QuickDimensioningReportWrapper.RoomController = "None", "", Cond(QuickDimensioningReportWrapper.RoomController = "RCRadio", "RC-Funk",QuickDimensioningReportWrapper.RoomController ) )
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -10276,7 +10276,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomComments
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -10415,7 +10415,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomId
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -10517,7 +10517,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomName
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -10619,7 +10619,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomType
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -10721,7 +10721,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomTemperature > 0, Fstr$(QuickDimensioningReportWrapper.RoomTemperature,"?&.#"), "")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -10823,7 +10823,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomArea > 0, Fstr$(QuickDimensioningReportWrapper.RoomArea,"?&.##"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -10925,7 +10925,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomHeatLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomHeatLoad,"?&"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11027,7 +11027,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomCoolLoad > 0, Fstr$(QuickDimensioningReportWrapper.RoomCoolLoad,"?&"), "")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11129,7 +11129,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product1Area>0, Fstr$(QuickDimensioningReportWrapper.Product1Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11220,7 +11220,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product1Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11311,7 +11311,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product2Area>0, Fstr$(QuickDimensioningReportWrapper.Product2Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11402,7 +11402,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product2Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11493,7 +11493,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product3Area>0, Fstr$(QuickDimensioningReportWrapper.Product3Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11584,7 +11584,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product3Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11675,7 +11675,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product4Area>0, Fstr$(QuickDimensioningReportWrapper.Product4Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11766,7 +11766,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product4Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11857,7 +11857,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product5Area>0, Fstr$(QuickDimensioningReportWrapper.Product5Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -11948,7 +11948,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product5Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -12039,7 +12039,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product6Area>0, Fstr$(QuickDimensioningReportWrapper.Product6Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -12130,7 +12130,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product6Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -12221,7 +12221,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.Product7Area>0, Fstr$(QuickDimensioningReportWrapper.Product7Area,"?&.##"), "")
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -12312,7 +12312,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.Product7Circuits
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -12403,7 +12403,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (QuickDimensioningReportWrapper.RoomNrOfServos>0, Fstr$(QuickDimensioningReportWrapper.RoomNrOfServos,"?&"), "")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -12505,7 +12505,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Cond(QuickDimensioningReportWrapper.RoomController = "None", "", Cond(QuickDimensioningReportWrapper.RoomController = "RCRadio", "RC-Funk",QuickDimensioningReportWrapper.RoomController ) )
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -12607,7 +12607,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.RoomComments
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -12755,7 +12755,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Bemerkungen:"
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -12833,7 +12833,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Comments
-		 Width=209000
+		 Width=208990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -12948,7 +12948,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Flächenaufstellung " + @ProjectNumber
-		 Width=100000
+		 Width=99990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13026,7 +13026,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Annahmen:"
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13104,7 +13104,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumtyp: Heizlast - Kühhlast"
-		 Width=50000
+		 Width=49990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13182,7 +13182,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Vorlauftemp. Heizen ="
-		 Width=32000
+		 Width=31990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13260,7 +13260,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(@tvHeat,"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13338,7 +13338,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="°C"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13416,7 +13416,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Belegefaktor Decke ="
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13494,7 +13494,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Allocation
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13609,7 +13609,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=
-		 Width=120000
+		 Width=119990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13687,7 +13687,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@RoomTypes
-		 Width=50000
+		 Width=49990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13765,7 +13765,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Vorlauftemp. Kühlen ="
-		 Width=32000
+		 Width=31990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13843,7 +13843,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(@tvCool,"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -13921,7 +13921,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="°C"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -14036,7 +14036,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Nr"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -14138,7 +14138,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raum"
-		 Width=50000
+		 Width=49990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -14240,7 +14240,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumtyp"
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -14331,7 +14331,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="T (°C)"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -14433,7 +14433,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumfl. (m²)"
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -14535,7 +14535,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Heizlast (W)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -14637,7 +14637,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Kühllast (W)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -14739,7 +14739,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product1
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -14830,7 +14830,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -14921,7 +14921,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Stellm."
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -15023,7 +15023,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumcontr."
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -15125,7 +15125,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Bemerkungen"
-		 Width=79000
+		 Width=78980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -15264,7 +15264,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Nr"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -15366,7 +15366,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raum"
-		 Width=45000
+		 Width=44980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -15468,7 +15468,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumtyp"
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -15559,7 +15559,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="T (°C)"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -15661,7 +15661,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumfl. (m²)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -15763,7 +15763,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Heizlast (W)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -15865,7 +15865,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Kühllast (W)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -15967,7 +15967,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product1
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -16058,7 +16058,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -16149,7 +16149,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product2
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -16240,7 +16240,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -16331,7 +16331,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Stellm."
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -16433,7 +16433,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumcontr."
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -16535,7 +16535,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Bemerkungen"
-		 Width=64000
+		 Width=63990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -16674,7 +16674,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Nr"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -16776,7 +16776,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raum"
-		 Width=34000
+		 Width=33980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -16878,7 +16878,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumtyp"
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -16969,7 +16969,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="T (°C)"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -17071,7 +17071,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumfl. (m²)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -17173,7 +17173,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Heizlast (W)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -17275,7 +17275,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Kühllast (W)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -17377,7 +17377,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product1
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -17468,7 +17468,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -17559,7 +17559,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product2
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -17650,7 +17650,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -17741,7 +17741,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product3
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -17832,7 +17832,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -17923,7 +17923,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Stellm."
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -18025,7 +18025,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumcontr."
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -18127,7 +18127,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Bemerkungen"
-		 Width=50000
+		 Width=49990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -18266,7 +18266,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Nr"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -18368,7 +18368,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raum"
-		 Width=34000
+		 Width=33980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -18470,7 +18470,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumtyp"
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -18561,7 +18561,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="T (°C)"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -18663,7 +18663,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumfl. (m²)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -18765,7 +18765,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Heizlast (W)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -18867,7 +18867,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Kühllast (W)"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -18969,7 +18969,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product1
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -19060,7 +19060,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -19151,7 +19151,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product2
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -19242,7 +19242,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -19333,7 +19333,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product3
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -19424,7 +19424,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -19515,7 +19515,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product4
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -19606,7 +19606,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -19697,7 +19697,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Stellm."
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -19799,7 +19799,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumcontr."
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -19901,7 +19901,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Bemerkungen"
-		 Width=45000
+		 Width=44980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -20040,7 +20040,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Nr"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -20142,7 +20142,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raum"
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -20244,7 +20244,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumtyp"
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -20335,7 +20335,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="T (°C)"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -20437,7 +20437,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumfl. (m²)"
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -20539,7 +20539,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Heizlast (W)"
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -20641,7 +20641,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Kühllast (W)"
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -20743,7 +20743,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product1
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -20834,7 +20834,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -20925,7 +20925,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product2
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21016,7 +21016,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21107,7 +21107,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product3
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21198,7 +21198,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21289,7 +21289,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product4
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21380,7 +21380,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21471,7 +21471,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product5
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21562,7 +21562,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21653,7 +21653,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Stellm."
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21755,7 +21755,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumcontr."
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21857,7 +21857,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Bemerkungen"
-		 Width=45000
+		 Width=44980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -21996,7 +21996,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Nr"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -22098,7 +22098,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raum"
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -22200,7 +22200,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumtyp"
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -22291,7 +22291,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="T (°C)"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -22393,7 +22393,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumfl. (m²)"
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -22495,7 +22495,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Heizlast (W)"
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -22597,7 +22597,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Kühllast (W)"
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -22699,7 +22699,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product1
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -22790,7 +22790,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -22881,7 +22881,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product2
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -22972,7 +22972,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23063,7 +23063,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product3
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23154,7 +23154,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23245,7 +23245,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product4
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23336,7 +23336,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23427,7 +23427,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product5
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23518,7 +23518,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23609,7 +23609,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product6
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23700,7 +23700,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23791,7 +23791,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Stellm."
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23893,7 +23893,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumcontr."
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -23995,7 +23995,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Bemerkungen"
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -24134,7 +24134,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Nr"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -24236,7 +24236,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raum"
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -24338,7 +24338,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumtyp"
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -24429,7 +24429,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="T (°C)"
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -24531,7 +24531,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumfl. (m²)"
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -24633,7 +24633,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Heizlast (W)"
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -24735,7 +24735,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Kühllast (W)"
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -24837,7 +24837,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product1
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -24928,7 +24928,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25019,7 +25019,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product2
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25110,7 +25110,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25201,7 +25201,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product3
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25292,7 +25292,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25383,7 +25383,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product4
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25474,7 +25474,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25565,7 +25565,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product5
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25656,7 +25656,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25747,7 +25747,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product6
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25838,7 +25838,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -25929,7 +25929,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=@Product7
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -26020,7 +26020,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="HKr."
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -26111,7 +26111,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Stellm."
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -26213,7 +26213,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumcontr."
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -26315,7 +26315,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Bemerkungen"
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -26498,7 +26498,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.FloorName
-		 Width=60000
+		 Width=59990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -26630,7 +26630,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.FloorName
-		 Width=55000
+		 Width=54990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -26762,7 +26762,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.FloorName
-		 Width=44000
+		 Width=43990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -26894,7 +26894,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.FloorName
-		 Width=44000
+		 Width=43990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -27026,7 +27026,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.FloorName
-		 Width=40000
+		 Width=39980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -27158,7 +27158,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.FloorName
-		 Width=35000
+		 Width=34980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -27290,7 +27290,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningReportWrapper.FloorName
-		 Width=35000
+		 Width=34980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -27431,7 +27431,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
-		 Width=85000
+		 Width=84980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -27533,7 +27533,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -27635,7 +27635,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -27737,7 +27737,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -27839,7 +27839,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -27941,7 +27941,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -28043,7 +28043,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -28145,7 +28145,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -28247,7 +28247,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=99000
+		 Width=98990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -28389,7 +28389,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Gesamt"
-		 Width=60000
+		 Width=59990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -28491,7 +28491,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -28593,7 +28593,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -28695,7 +28695,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -28797,7 +28797,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -28899,7 +28899,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -29001,7 +29001,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -29103,7 +29103,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -29205,7 +29205,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -29307,7 +29307,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=99000
+		 Width=98990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -29449,7 +29449,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
-		 Width=80000
+		 Width=79980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -29551,7 +29551,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -29653,7 +29653,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -29755,7 +29755,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -29857,7 +29857,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -29959,7 +29959,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -30061,7 +30061,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -30163,7 +30163,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -30265,7 +30265,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -30367,7 +30367,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -30469,7 +30469,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=84000
+		 Width=83980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -30611,7 +30611,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Gesamt"
-		 Width=55000
+		 Width=54990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -30713,7 +30713,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -30815,7 +30815,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -30917,7 +30917,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -31019,7 +31019,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -31121,7 +31121,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -31223,7 +31223,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -31325,7 +31325,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -31427,7 +31427,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -31529,7 +31529,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -31631,7 +31631,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -31733,7 +31733,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=84000
+		 Width=83980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -31875,7 +31875,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
-		 Width=69000
+		 Width=68980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -31977,7 +31977,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -32079,7 +32079,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -32181,7 +32181,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -32283,7 +32283,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -32385,7 +32385,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -32487,7 +32487,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -32589,7 +32589,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -32691,7 +32691,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -32793,7 +32793,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product3Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -32895,7 +32895,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -32997,7 +32997,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -33099,7 +33099,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=70000
+		 Width=69990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -33241,7 +33241,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Gesamt"
-		 Width=44000
+		 Width=43990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -33343,7 +33343,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -33445,7 +33445,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -33547,7 +33547,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -33649,7 +33649,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -33751,7 +33751,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -33853,7 +33853,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -33955,7 +33955,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -34057,7 +34057,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -34159,7 +34159,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -34261,7 +34261,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product3Area),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -34363,7 +34363,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -34465,7 +34465,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -34567,7 +34567,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=70000
+		 Width=69990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -34709,7 +34709,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
-		 Width=69000
+		 Width=68980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -34811,7 +34811,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -34913,7 +34913,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -35015,7 +35015,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -35117,7 +35117,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -35219,7 +35219,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -35321,7 +35321,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -35423,7 +35423,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -35525,7 +35525,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -35627,7 +35627,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product3Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -35729,7 +35729,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -35831,7 +35831,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product4Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -35933,7 +35933,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -36035,7 +36035,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -36137,7 +36137,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 OR CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0), ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=65000
+		 Width=64990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -36279,7 +36279,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Gesamt"
-		 Width=44000
+		 Width=43990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -36381,7 +36381,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=25000
+		 Width=24990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -36483,7 +36483,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -36585,7 +36585,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -36687,7 +36687,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -36789,7 +36789,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=15000
+		 Width=14990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -36891,7 +36891,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -36993,7 +36993,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -37095,7 +37095,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -37197,7 +37197,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -37299,7 +37299,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product3Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -37401,7 +37401,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -37503,7 +37503,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product4Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -37605,7 +37605,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -37707,7 +37707,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -37809,7 +37809,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=65000
+		 Width=64990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -37951,7 +37951,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
-		 Width=60000
+		 Width=59990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -38053,7 +38053,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -38155,7 +38155,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -38257,7 +38257,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -38359,7 +38359,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -38461,7 +38461,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -38563,7 +38563,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -38665,7 +38665,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -38767,7 +38767,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -38869,7 +38869,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product3Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -38971,7 +38971,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -39073,7 +39073,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product4Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -39175,7 +39175,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -39277,7 +39277,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product5Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -39379,7 +39379,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -39481,7 +39481,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -39583,7 +39583,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=65000
+		 Width=64990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -39725,7 +39725,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Gesamt"
-		 Width=40000
+		 Width=39980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -39827,7 +39827,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -39929,7 +39929,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -40031,7 +40031,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -40133,7 +40133,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -40235,7 +40235,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -40337,7 +40337,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -40439,7 +40439,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -40541,7 +40541,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -40643,7 +40643,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -40745,7 +40745,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product3Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -40847,7 +40847,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -40949,7 +40949,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product4Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -41051,7 +41051,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -41153,7 +41153,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product5Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -41255,7 +41255,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -41357,7 +41357,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -41459,7 +41459,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=65000
+		 Width=64990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -41601,7 +41601,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
-		 Width=55000
+		 Width=54990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -41703,7 +41703,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -41805,7 +41805,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -41907,7 +41907,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42009,7 +42009,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42111,7 +42111,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42213,7 +42213,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42315,7 +42315,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42417,7 +42417,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42519,7 +42519,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product3Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42621,7 +42621,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42723,7 +42723,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product4Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42825,7 +42825,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -42927,7 +42927,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product5Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -43029,7 +43029,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -43131,7 +43131,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product6Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -43233,7 +43233,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product6Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -43335,7 +43335,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -43437,7 +43437,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=50000
+		 Width=49990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -43579,7 +43579,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Gesamt"
-		 Width=35000
+		 Width=34980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -43681,7 +43681,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -43783,7 +43783,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -43885,7 +43885,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -43987,7 +43987,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -44089,7 +44089,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -44191,7 +44191,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -44293,7 +44293,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -44395,7 +44395,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -44497,7 +44497,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -44599,7 +44599,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product3Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -44701,7 +44701,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -44803,7 +44803,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product4Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -44905,7 +44905,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -45007,7 +45007,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product5Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -45109,7 +45109,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -45211,7 +45211,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product6Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -45313,7 +45313,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product6Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -45415,7 +45415,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -45517,7 +45517,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=50000
+		 Width=49990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -45659,7 +45659,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Summe " + QuickDimensioningReportWrapper.FloorName
-		 Width=55000
+		 Width=54990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -45761,7 +45761,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -45863,7 +45863,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -45965,7 +45965,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -46067,7 +46067,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -46169,7 +46169,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -46271,7 +46271,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -46373,7 +46373,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -46475,7 +46475,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -46577,7 +46577,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product3Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -46679,7 +46679,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -46781,7 +46781,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product4Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -46883,7 +46883,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -46985,7 +46985,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product5Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -47087,7 +47087,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -47189,7 +47189,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product6Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -47291,7 +47291,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product6Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -47393,7 +47393,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product7Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -47495,7 +47495,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product7Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -47597,7 +47597,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -47699,7 +47699,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -47841,7 +47841,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Gesamt"
-		 Width=35000
+		 Width=34980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -47943,7 +47943,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=20000
+		 Width=19990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -48045,7 +48045,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=""
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -48147,7 +48147,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.RoomArea),"?&.##"))
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -48249,7 +48249,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomHeatLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -48351,7 +48351,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomCoolLoad),"?&")
-		 Width=12000
+		 Width=11980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -48453,7 +48453,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product1Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -48555,7 +48555,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product1Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -48657,7 +48657,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product2Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -48759,7 +48759,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product2Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -48861,7 +48861,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product3Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -48963,7 +48963,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product3Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -49065,7 +49065,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product4Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -49167,7 +49167,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product4Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -49269,7 +49269,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product5Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -49371,7 +49371,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product5Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -49473,7 +49473,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product6Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -49575,7 +49575,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product6Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -49677,7 +49677,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=val(Fstr$(Sum (QuickDimensioningReportWrapper.Product7Area),"?&.##"))
-		 Width=13000
+		 Width=12980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -49779,7 +49779,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(Val(QuickDimensioningReportWrapper.Product7Circuits)),"?&")
-		 Width=7000
+		 Width=6980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -49881,7 +49881,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum(QuickDimensioningReportWrapper.RoomNrOfServos),"?&")
-		 Width=10000
+		 Width=9990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -49983,7 +49983,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RC"),"?&") + " * RC", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RC") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCF"),"?&") + " * RCF", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCF") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio"),"?&") + " * RC-Funk", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RCRadio") != 0 AND CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0 , ", ", "") +¤if (CountIf (QuickDimensioningReportWrapper.RoomController = "RF") != 0, Fstr$(CountIf (QuickDimensioningReportWrapper.RoomController = "RF"),"?&") + " * RF", "")
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -50234,7 +50234,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningDistributorsReportWrapper.RoomId
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -50325,7 +50325,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningDistributorsReportWrapper.RoomName
-		 Width=50000
+		 Width=49990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -50416,7 +50416,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningDistributorsReportWrapper.ProductName
-		 Width=45000
+		 Width=44980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -50507,7 +50507,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(QuickDimensioningDistributorsReportWrapper.Amount,"?&")
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -50644,7 +50644,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Verteileranschlussdaten " + @ProjectNumber
-		 Width=140000
+		 Width=139980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -50803,7 +50803,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=QuickDimensioningDistributorsReportWrapper.Distributor
-		 Width=155000
+		 Width=154990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -50935,7 +50935,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raumnr."
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -51026,7 +51026,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Raum"
-		 Width=50000
+		 Width=49990
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -51117,7 +51117,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Produkt"
-		 Width=45000
+		 Width=44980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -51208,7 +51208,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Anschlüsse"
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -51349,7 +51349,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Summe"
-		 Width=125000
+		 Width=124980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -51440,7 +51440,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text=Fstr$(Sum (QuickDimensioningDistributorsReportWrapper.Amount),"?&")
-		 Width=30000
+		 Width=29980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -51531,7 +51531,7 @@
 		 Identifier=
 		 OutputFormatter=
 		 Text="Dem Verteiler sind zuviele Heizkreise zugeordnet"
-		 Width=80000
+		 Width=79980
 		 Height=10000
 		 FixedHeight=0
 		 bIsotropic=True
@@ -51644,7 +51644,7 @@
  LinkID=91
  LinkToID=0
  LinkMode=32
- LinkTest=-28496
+ LinkTest=-2419
  LayerID=0
  GroupID=0
  Identifier=
@@ -51681,7 +51681,7 @@
  LinkID=45
  LinkToID=0
  LinkMode=32
- LinkTest=-8986
+ LinkTest=-11898
  LayerID=0
  GroupID=0
  Identifier=
@@ -51689,8 +51689,8 @@
  UserLocked=False
  WrapBefore=False
  ExportAsPicture=False
- Position/Left=9170
- Position/Top=190540
+ Position/Left=8910
+ Position/Top=187630
  Position/Width=278840
  Position/Height=10530
  Direction=0
@@ -51716,7 +51716,7 @@
  LinkID=31
  LinkToID=0
  LinkMode=32
- LinkTest=-19785
+ LinkTest=-4835
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51874,7 +51874,7 @@
  LinkID=35
  LinkToID=0
  LinkMode=32
- LinkTest=-30944
+ LinkTest=-9124
  LayerID=0
  GroupID=0
  Identifier=ProjectName
@@ -51947,7 +51947,7 @@
  LinkID=52
  LinkToID=0
  LinkMode=32
- LinkTest=-5645
+ LinkTest=-27124
  LayerID=0
  GroupID=0
  Identifier=
@@ -51983,7 +51983,7 @@
  LinkID=13
  LinkToID=0
  LinkMode=32
- LinkTest=-5378
+ LinkTest=-17061
  LayerID=0
  GroupID=0
  Identifier=
@@ -52013,26 +52013,173 @@
  OriginalSize=False
  bIsotropic=True
  Alignment=0
+[Object]
+ ObjectID=1
+ ObjectName=Text
+ Locked=FALSE
+ LinkID=7
+ LinkToID=0
+ LinkMode=32
+ LinkTest=-4607
+ LayerID=0
+ GroupID=0
+ Identifier=
+ Condition=True
+ UserLocked=False
+ WrapBefore=False
+ ExportAsPicture=False
+ Position/Left=7930
+ Position/Top=200710
+ Position/Width=116880
+ Position/Height=4230
+ Direction=0
+ bFill=0
+ BkColor=LL.Color.Black
+ Frame/Layout=0
+ Frame/Left/Spacing=0
+ Frame/Left/Line=False
+ Frame/Top/Spacing=0
+ Frame/Top/Line=False
+ Frame/Right/Spacing=0
+ Frame/Right/Line=False
+ Frame/Bottom/Spacing=0
+ Frame/Bottom/Line=False
+ PDFLevel=0
+ PDFText=
+ bPageWrap=False
+ bBottomAligned=False
+ [@Lines]
+  {
+  [Lines]
+   {
+   [Line]
+	{
+	[Font]
+	 {
+	 Default=False
+	 FaceName="Arial"
+	 GdiCharSet=0
+	 Size=8.0
+	 Width=0
+	 Bold=False
+	 Italic=False
+	 Underline=False
+	 Strikeout=False
+	 Color=LL.Color.Black
+	 PitchAndFamily=34
+	 OutPrecision=3
+	 }
+	Align=0
+	Adjusted=False
+	Uneraseable=False
+	LineWrap=1
+	PageWrapAllowed=True
+	ForceWrap=False
+	SpaceOptimization=True
+	Spacing.Paragraph=0
+	Spacing.Line=0
+	OutputFormatter=
+	Condition=True
+	Text=@FileName
+	Tab=0
+	TabAlign=0
+	}
+   }
+  }
+[Object]
+ ObjectID=1
+ ObjectName=Text
+ Locked=FALSE
+ LinkID=20
+ LinkToID=0
+ LinkMode=32
+ LinkTest=-30765
+ LayerID=0
+ GroupID=0
+ Identifier=
+ Condition=True
+ UserLocked=False
+ WrapBefore=False
+ ExportAsPicture=False
+ Position/Left=172410
+ Position/Top=199650
+ Position/Width=116880
+ Position/Height=4230
+ Direction=0
+ bFill=0
+ BkColor=LL.Color.Black
+ Frame/Layout=0
+ Frame/Left/Spacing=0
+ Frame/Left/Line=False
+ Frame/Top/Spacing=0
+ Frame/Top/Line=False
+ Frame/Right/Spacing=0
+ Frame/Right/Line=False
+ Frame/Bottom/Spacing=0
+ Frame/Bottom/Line=False
+ PDFLevel=0
+ PDFText=
+ bPageWrap=False
+ bBottomAligned=False
+ [@Lines]
+  {
+  [Lines]
+   {
+   [Line]
+	{
+	[Font]
+	 {
+	 Default=False
+	 FaceName="Arial"
+	 GdiCharSet=0
+	 Size=8.0
+	 Width=0
+	 Bold=False
+	 Italic=False
+	 Underline=False
+	 Strikeout=False
+	 Color=LL.Color.Black
+	 PitchAndFamily=34
+	 OutPrecision=3
+	 }
+	Align=2
+	Adjusted=False
+	Uneraseable=False
+	LineWrap=1
+	PageWrapAllowed=True
+	ForceWrap=False
+	SpaceOptimization=True
+	Spacing.Paragraph=0
+	Spacing.Line=0
+	OutputFormatter=
+	Condition=True
+	Text="Seite " + Page$() +"/" +TotalPages$()
+	Tab=0
+	TabAlign=0
+	}
+   }
+  }
 [UserVariables]
  User1=@Allocation;"80%"
  User2=@Comments;""
- User3=@NrOfProducts;6
- User4=@PartnerContact;"Harreither Ges.m.b.H. - Gesundes Heizen und Kühlen¶3334 Gaflenz, Oberland 71¶Tel: +43 (0) 7353 - 000"
- User5=@PartnerLogo;NULL()
- User6=@Product1;"Product1"
- User7=@Product2;"Product2"
- User8=@Product3;"Product3"
- User9=@Product4;"Product4"
- User10=@Product5;"Product5"
- User11=@Product6;"Product6"
- User12=@Product7;"Product7"
- User13=@ProjectEditor;"NeuChr"
- User14=@ProjectName;"ProjectName"
- User15=@ProjectNumber;"2009-001"
- User16=@RoomControllers;"1 * RC, 3 * RCF"
- User17=@RoomTypes;"Standard: 70 W/m² - 70 W/m²"
- User18=@tvCool;16
- User19=@tvHeat;35
+ User3=@FileName;"Test.e2p"
+ User4=@NrOfProducts;6
+ User5=@PartnerContact;"Harreither Ges.m.b.H. - Gesundes Heizen und Kühlen¶3334 Gaflenz, Oberland 71¶Tel: +43 (0) 7353 - 000"
+ User6=@PartnerLogo;NULL()
+ User7=@Product1;"Product1"
+ User8=@Product2;"Product2"
+ User9=@Product3;"Product3"
+ User10=@Product4;"Product4"
+ User11=@Product5;"Product5"
+ User12=@Product6;"Product6"
+ User13=@Product7;"Product7"
+ User14=@ProjectEditor;"NeuChr"
+ User15=@ProjectName;"ProjectName"
+ User16=@ProjectNumber;"2009-001"
+ User17=@RoomControllers;"1 * RC, 3 * RCF"
+ User18=@RoomTypes;"Standard: 70 W/m² - 70 W/m²"
+ User19=@tvCool;16
+ User20=@tvHeat;35
 [Parameters]
  [@Parameters]
   {
