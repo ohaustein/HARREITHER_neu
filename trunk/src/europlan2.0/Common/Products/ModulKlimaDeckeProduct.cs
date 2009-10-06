@@ -8,6 +8,20 @@ namespace Europlan.Common {
 	[ProductName("Modul Klima-Decke")]
 	public class ModulKlimaDeckeProduct : Product {
 
+		private static double module_100_40_area = 0.9925 * 0.4;
+		private static double module_100_30_area = 0.9925 * 0.295;
+		private static double module_120_30_area = 1.194 * 0.295;
+		private static double module_80_30_area = 0.791 * 0.295;
+
+		private List<KlimaFlaechenModul> modules_100_40L = new List<KlimaFlaechenModul>();
+		private List<KlimaFlaechenModul> modules_100_30L = new List<KlimaFlaechenModul>();
+		private List<KlimaFlaechenModul> modules_120_30L = new List<KlimaFlaechenModul>();
+		private List<KlimaFlaechenModul> modules_80_30L = new List<KlimaFlaechenModul>();
+		private List<KlimaFlaechenModul> modules_100_40R = new List<KlimaFlaechenModul>();
+		private List<KlimaFlaechenModul> modules_100_30R = new List<KlimaFlaechenModul>();
+		private List<KlimaFlaechenModul> modules_120_30R = new List<KlimaFlaechenModul>();
+		private List<KlimaFlaechenModul> modules_80_30R = new List<KlimaFlaechenModul>();
+
 		public ModulKlimaDeckeProduct() {
 
 		}
@@ -69,8 +83,132 @@ namespace Europlan.Common {
 			get { return ProductType.DH; }
 		}
 
+		public int ModuleCount_100_40L {
+			get { return this.modules_100_40L.Count; }
+			set {
+				while (value > this.modules_100_40L.Count) {
+					this.modules_100_40L.Add(new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT));
+				}
+				if (value < this.modules_100_40L.Count) {
+					this.modules_100_40L.RemoveRange(value, this.modules_100_40L.Count - value);
+				}
+			}
+		}
+
+		public int ModuleCount_100_30L {
+			get { return this.modules_100_30L.Count; }
+			set {
+				while (value > this.modules_100_30L.Count) {
+					this.modules_100_30L.Add(new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT));
+				}
+				if (value < this.modules_100_30L.Count) {
+					this.modules_100_30L.RemoveRange(value, this.modules_100_30L.Count - value);
+				}
+			}
+		}
+
+		public int ModuleCount_120_30L {
+			get { return this.modules_100_30L.Count; }
+			set {
+				while (value > this.modules_120_30L.Count) {
+					this.modules_120_30L.Add(new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT));
+				}
+				if (value < this.modules_120_30L.Count) {
+					this.modules_120_30L.RemoveRange(value, this.modules_120_30L.Count - value);
+				}
+			}
+		}
+
+		public int ModuleCount_80_30L {
+			get { return this.modules_80_30L.Count; }
+			set {
+				while (value > this.modules_80_30L.Count) {
+					this.modules_80_30L.Add(new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT));
+				}
+				if (value < this.modules_100_30L.Count) {
+					this.modules_80_30L.RemoveRange(value, this.modules_80_30L.Count - value);
+				}
+			}
+		}
+
+		public int ModuleCount_100_40R {
+			get { return this.modules_100_40R.Count; }
+			set {
+				while (value > this.modules_100_40R.Count) {
+					this.modules_100_40R.Add(new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT));
+				}
+				if (value < this.modules_100_40R.Count) {
+					this.modules_100_40R.RemoveRange(value, this.modules_100_40R.Count - value);
+				}
+			}
+		}
+
+		public int ModuleCount_100_30R {
+			get { return this.modules_100_30R.Count; }
+			set {
+				while (value > this.modules_100_30R.Count) {
+					this.modules_100_30R.Add(new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT));
+				}
+				if (value < this.modules_100_30L.Count) {
+					this.modules_100_30R.RemoveRange(value, this.modules_100_30R.Count - value);
+				}
+			}
+		}
+
+		public int ModuleCount_120_30R {
+			get { return this.modules_100_30R.Count; }
+			set {
+				while (value > this.modules_120_30R.Count) {
+					this.modules_120_30R.Add(new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT));
+				}
+				if (value < this.modules_120_30R.Count) {
+					this.modules_120_30R.RemoveRange(value, this.modules_120_30R.Count - value);
+				}
+			}
+		}
+
+		public int ModuleCount_80_30R {
+			get { return this.modules_80_30R.Count; }
+			set {
+				while (value > this.modules_80_30R.Count) {
+					this.modules_80_30R.Add(new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT));
+				}
+				if (value < this.modules_100_30R.Count) {
+					this.modules_80_30R.RemoveRange(value, this.modules_80_30R.Count - value);
+				}
+			}
+		}
+
 		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool) {
 			// TODO
+			double thetaV = 35;
+			double thetaR = 30;
+
+			EN1264 en1264 = EN1264.Instance;
+
+			double deltaThetaH = en1264.Heizmitteluebertemperatur(thetaV, thetaR, this.AssociatedRoom.RoomTemperature);
+
+			//en1264.WaermestromDichteFlaeche(
+		}
+
+		public override float PlannedFloorArea {
+			get { return 0; }
+			set { }
+		}
+
+		public override float PlannedWallArea {
+			get { return 0; }
+			set { }
+		}
+
+		public override float PlannedRoofArea {
+			get {
+				return (float)((this.modules_100_30L.Count + this.modules_100_30R.Count) * module_100_30_area + 
+					(this.modules_100_40L.Count + this.modules_100_40R.Count) * module_100_40_area + 
+					(this.modules_120_30L.Count + this.modules_120_30R.Count) * module_120_30_area + 
+					(this.modules_80_30L.Count + this.modules_80_30R.Count) * module_80_30_area);
+			}
+			set { }
 		}
 
 		public override double PlannedCoolLoad {

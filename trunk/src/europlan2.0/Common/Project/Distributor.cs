@@ -12,9 +12,11 @@ namespace Europlan.Common {
 
 		private string id;
 		private string name;
-		private string regulatorCircuitId;
+		private string regulatorCircuitId = null;
+		private RegulatorCircuit regulatorCircuit = null;
 		private int maxCircuits;
 		private List<string> additionalFloors;
+		private List<Product> plannedConnectedProducts = new List<Product>();
 
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Distributor));
@@ -98,23 +100,33 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public RegulatorCircuit RegulatorCircuit {
 			get {
-				RegulatorCircuit circuit = null;
-				if (Project.Instance != null) {
-					foreach (RegulatorCircuit c in Project.Instance.RegulatorCircuits) {
-						if (c.Id == regulatorCircuitId) {
-							circuit = c;
-							continue;
+				if (this.regulatorCircuitId != null) {
+					if (Project.Instance != null) {
+						foreach (RegulatorCircuit c in Project.Instance.RegulatorCircuits) {
+							if (c.Id == regulatorCircuitId) {
+								this.regulatorCircuit = c;
+								continue;
+							}
 						}
 					}
+					this.regulatorCircuitId = null;
 				}
-				return circuit;
+				return this.regulatorCircuit;
 			}
-			set { regulatorCircuitId = value.Id; }
+			set {
+				this.regulatorCircuit = value;
+				this.regulatorCircuitId = null;
+			}
 		}
 
 		public string RegulatorCircuitId {
-			get { return regulatorCircuitId; }
-			set { regulatorCircuitId = value; }
+			get {
+				if (this.RegulatorCircuit == null) {
+					return null;
+				}
+				return this.regulatorCircuit.Id;
+			}
+			set { this.regulatorCircuitId = value; }
 		}
 
 		public TreeNode FindNode(object element) {
@@ -123,7 +135,7 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
-
+		
 		public Type AssociatedPanelType {
 			get {
 				return typeof(DistributorPanel);
@@ -136,6 +148,10 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public List<Product> PlannedConnectedProducts {
+			get { return this.plannedConnectedProducts; }
+		}
 	}
 
 }

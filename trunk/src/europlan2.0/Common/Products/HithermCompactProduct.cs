@@ -64,6 +64,21 @@ namespace Europlan.Common {
 			// TODO
 		}
 
+		public override float PlannedFloorArea {
+			get { return 0; }
+			set { }
+		}
+
+		public override float PlannedWallArea {
+			get { return 0; }
+			set { }
+		}
+
+		public override float PlannedRoofArea {
+			get { return 0; }
+			set { }
+		}
+
 		public override double PlannedCoolLoad {
 			get { return 0; }
 		}

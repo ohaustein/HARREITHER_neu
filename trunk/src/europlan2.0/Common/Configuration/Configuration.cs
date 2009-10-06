@@ -135,6 +135,13 @@ namespace Europlan.Common {
 							}
 						} else if (info.PropertyType == typeof(string)) {
 							info.SetValue(null, current[info.Name], null);
+						} else if (info.PropertyType == typeof(bool)) {
+							bool value = false;
+							if (bool.TryParse(current[info.Name], out value)) {
+								info.SetValue(null, value, null);
+							} else {
+								log.Warn("Error when trying to set Product Configuration");
+							}
 						} else {
 							log.Warn("Error when trying to set Product Configuration");
 						}

@@ -126,6 +126,7 @@
     <Compile Include="Licensing\LicensedSystem.cs" />
     <Compile Include="Licensing\LicenseManager.cs" />
     <Compile Include="MapiMailMessage.cs" />
+    <Compile Include="Products\KlimaFlaechenModul.cs" />
     <Compile Include="Products\ProductNameAttribute.cs" />
     <Compile Include="Products\HithermCompactRoofProduct.cs" />
     <Compile Include="Project\FacilityDetailsSummaryPanel.cs">
@@ -253,6 +254,12 @@
     <Compile Include="Project\RoomTypeGrid.Designer.cs">
       <DependentUpon>RoomTypeGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\SelectConnectionForProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\SelectConnectionForProductForm.Designer.cs">
+      <DependentUpon>SelectConnectionForProductForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\SelectConstructionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,6 +358,10 @@
     <EmbeddedResource Include="Project\RoomTypeGrid.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RoomTypeGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\SelectConnectionForProductForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SelectConnectionForProductForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\SelectConstructionForm.resx">
       <SubType>Designer</SubType>
