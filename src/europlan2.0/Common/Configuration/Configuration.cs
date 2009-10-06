@@ -259,6 +259,28 @@ namespace Europlan.Common {
 				}
 			}
 
+			foreach (Type t in config1.productConfiguration.Keys) {
+				if (!config.productConfiguration.ContainsKey(t)) {
+					config.productConfiguration[t] = new SerializableDictionary<string, string>();
+				}
+				foreach (string parameterName in config1.productConfiguration[t].Keys) {
+					if (!config.productConfiguration[t].ContainsKey(parameterName)) {
+						config.productConfiguration[t][parameterName] = config1.productConfiguration[t][parameterName];
+					}
+				}
+			}
+
+			foreach (Type t in config2.productConfiguration.Keys) {
+				if (!config.productConfiguration.ContainsKey(t)) {
+					config.productConfiguration[t] = new SerializableDictionary<string, string>();
+				}
+				foreach (string parameterName in config2.productConfiguration[t].Keys) {
+					if (!config.productConfiguration[t].ContainsKey(parameterName)) {
+						config.productConfiguration[t][parameterName] = config2.productConfiguration[t][parameterName];
+					}
+				}
+			}
+
 			config.type = second.type;			 
 
 			return config;
