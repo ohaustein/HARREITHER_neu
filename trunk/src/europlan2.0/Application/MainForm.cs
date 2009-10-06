@@ -134,7 +134,7 @@ namespace Europlan.Application {
 				if (File.Exists(item)) {
 					mruList.Enqueue(item);
 					ToolStripMenuItem fileRecent = new ToolStripMenuItem(item, null, RecentProject_click);
-					recentProjectsToolStripMenuItem.DropDownItems.Add(fileRecent);
+					recentProjectsToolStripMenuItem.DropDownItems.Insert(0, fileRecent);
 				}
 			}
 			recentProjectsToolStripMenuItem.Enabled = mruList.Count > 0;
@@ -168,7 +168,7 @@ namespace Europlan.Application {
 			recentProjectsToolStripMenuItem.DropDownItems.Clear();
 			foreach (string item in mruList) {
 				ToolStripMenuItem fileRecent = new ToolStripMenuItem(item, null, RecentProject_click);
-				recentProjectsToolStripMenuItem.DropDownItems.Add(fileRecent);
+				recentProjectsToolStripMenuItem.DropDownItems.Insert(0, fileRecent);
 			}
 			recentProjectsToolStripMenuItem.Enabled = mruList.Count > 0;
 		}
