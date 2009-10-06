@@ -26,6 +26,7 @@ namespace Europlan.Common {
 		private DateTime projectCreated;
 		private DateTime projectLastChanged;
 		private string projectEditor;
+		private string projectFileName;
 
 		private TreeNode rootNode = null;
 		private TreeNode floorsNode = null;
@@ -78,6 +79,7 @@ namespace Europlan.Common {
 			projectContact = new string[] { "" };
 			projectNotes = new string[] { "" };
 			projectEditor = "";
+			projectFileName = "";
 
 			floors = new FloorList();
 			regulatorCircuits = new List<RegulatorCircuit>();
@@ -113,6 +115,12 @@ namespace Europlan.Common {
 		public string[] ProjectName {
 			get { return projectName; }
 			set { projectName = value; }
+		}
+
+		[XmlIgnore]
+		public string ProjectFileName {
+			get { return projectFileName; }
+			set { projectFileName = value; }
 		}
 
 		public string ProjectNumber {
@@ -181,6 +189,7 @@ namespace Europlan.Common {
 				instance.configuration.RecalculateMaterialToCategoryMapping();
 				instance.RecalculateQuickDimensioningRoomToProjectMapping();
 				instance.FinalizeLoading();
+				instance.ProjectFileName = filename;
 			}
 			if (ProjectLoaded != null) {
 				Project.ProjectLoaded(Instance);
@@ -209,6 +218,7 @@ namespace Europlan.Common {
 
 				XmlSerializer s = new XmlSerializer(typeof(Project));
 				Stream w = new FileStream(filename, FileMode.Create);
+				Instance.ProjectFileName = filename;
 				s.Serialize(w, Instance);
 				w.Close();
 			}
