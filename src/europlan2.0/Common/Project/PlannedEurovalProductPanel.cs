@@ -442,6 +442,12 @@ namespace Europlan.Common {
 				this.lblSpreizungHeat.Text = "5";
 				this.lblSpreizungCool.Text = "0";
 
+				if (evProduct.PlannedConnectedDistributor == null) {
+					this.txtDistributor.Text = "";
+				} else {
+					this.txtDistributor.Text = evProduct.PlannedConnectedDistributor.Name;
+				}
+
 				ignoreCoverHeatLoad--;
 				ignoreHeatLoad--;
 				ignoreHeatLoadPercentage--;

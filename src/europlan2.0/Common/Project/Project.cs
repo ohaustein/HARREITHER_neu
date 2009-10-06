@@ -346,5 +346,15 @@ namespace Europlan.Common {
 			return null;
 		}
 
+		public Distributor GetDistributor(string id) {
+			foreach (Floor f in this.floors) {
+				foreach (Distributor d in f.Distributors) {
+					if (d.Id == id) {
+						return d;
+					}
+				}
+			}
+			return null;
+		}
 	}
 }

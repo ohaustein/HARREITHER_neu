@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	[Serializable()]
@@ -34,6 +35,7 @@ namespace Europlan.Common {
 			this.room = room;
 		}
 
+		[XmlIgnore]
 		public Product.ProductType PlannedProductType {
 			get {
 				if (plannedProduct == null) {
@@ -44,6 +46,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public string System {
 			get {
 				if (plannedProduct == null) {
@@ -54,6 +57,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public string Comment {
 			get {
 				if (plannedProduct == null) {
@@ -64,6 +68,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public float FloorArea {
 			get {
 				if (plannedProduct == null) {
@@ -84,6 +89,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public Nullable<float> PlannedArea {
 			get {
 				if (plannedProduct == null) {
@@ -110,6 +116,7 @@ namespace Europlan.Common {
 			}
 		}*/
 
+		[XmlIgnore]
 		public double PlannedHeatLoad {
 			get {
 				if (plannedProduct == null) {
@@ -124,6 +131,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public string PlannedHeatLoadString {
 			get {
 				double plannedHeatLoad = this.PlannedHeatLoad;
@@ -134,6 +142,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public double PlannedCoolLoad {
 			get {
 				if (plannedProduct == null) {
@@ -148,6 +157,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public string PlannedCoolLoadString {
 			get {
 				double plannedCoolLoad = this.PlannedCoolLoad;

@@ -100,6 +100,19 @@ namespace Europlan.Common {
 			}
 		}
 
+		public DistributorList GetAllAvailableDistributors() {
+			DistributorList list = new DistributorList();
+			list.AddRange(this.distributors);
+			foreach (Floor f in Project.Instance.Floors) {
+				foreach (Distributor d in f.Distributors) {
+					if (d.AdditionalFloors.Contains(this)) {
+						list.Add(d);
+					}
+				}
+			}
+			return list;
+		}
+
 		/*internal void InitializeTree(System.Windows.Forms.TreeNode floors) {
 			floorNode.Tag = this;
 			floors.Nodes.Add(floorNode);

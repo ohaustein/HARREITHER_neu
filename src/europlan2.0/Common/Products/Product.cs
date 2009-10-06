@@ -30,11 +30,10 @@ namespace Europlan.Common {
 		protected bool canCool = false;
 		private Room associatedRoom = null;
 		private SerializableDictionary<string, int> quickDimensioningConnectedDistributors = new SerializableDictionary<string,int>();
+		private Distributor plannedConnectedDistributor = null;
+		private string plannedConnectedDistributorId = null;
 
 		protected string comment = null;
-		protected float plannedFloorArea = 0;
-		protected float plannedRoofArea = 0;
-		protected float plannedWallArea = 0;
 
 		public Product() {
 			Initialize();
@@ -207,23 +206,23 @@ namespace Europlan.Common {
 			}
 		}
 
-		public float PlannedFloorArea {
-			get { return plannedFloorArea; }
-			set { plannedFloorArea = value; }
+		public abstract float PlannedFloorArea {
+			get;
+			set;
 		}
 
-		public float PlannedRoofArea {
-			get { return plannedRoofArea; }
-			set { plannedRoofArea = value; }
+		public abstract float PlannedRoofArea {
+			get;
+			set;
 		}
 
-		public float PlannedWallArea {
-			get { return plannedWallArea; }
-			set { plannedWallArea = value; }
+		public abstract float PlannedWallArea {
+			get;
+			set;
 		}
 
 		public float TotalPlannedArea {
-			get { return this.plannedFloorArea + this.plannedRoofArea + this.plannedWallArea; }
+			get { return this.PlannedFloorArea + this.PlannedRoofArea + this.PlannedWallArea; }
 		}
 
 		public abstract double PlannedHeatLoad {
@@ -234,50 +233,44 @@ namespace Europlan.Common {
 			get;
 		}
 
-		/*public abstract double RequestedHeatLoad {
-			get;
-			set;
+		public string PlannedConnectedDistributorId {
+			get {
+				if (this.PlannedConnectedDistributor == null) {
+					return null;
+				}
+				return this.plannedConnectedDistributor.Id;
+			}
+			set { this.plannedConnectedDistributorId = value; }
 		}
 
-		public abstract double RequestedCoolLoad {
-			get;
-			set;
-		}*/
-
-		/*public double NecessaryHeatLoad {
+		[XmlIgnore]
+		public Distributor PlannedConnectedDistributor {
 			get {
-				double heatLoad = this.AssociatedRoom.NormalizedHeatLoad;
-				foreach (PlannedProduct product in this.AssociatedRoom.PlannedProducts) {
-					if (product.Product != this) {
-						heatLoad -= product.Product.PlannedHeatLoad;
-					}
+				if (this.plannedConnectedDistributorId != null) {
+					// find correct distributor first
+					this.plannedConnectedDistributor = Project.Instance.GetDistributor(this.plannedConnectedDistributorId);
+					this.plannedConnectedDistributorId = null;
 				}
-				if (heatLoad < 0) {
-					heatLoad = 0;
+				return this.plannedConnectedDistributor;
+			}
+			set {
+				if (this.plannedConnectedDistributor != null && this.plannedConnectedDistributor.PlannedConnectedProducts.Contains(this)) {
+					this.plannedConnectedDistributor.PlannedConnectedProducts.Remove(this);
 				}
-				return heatLoad;
+				this.plannedConnectedDistributor = value;
+				this.plannedConnectedDistributorId = null;
+				if (this.plannedConnectedDistributor != null && !this.plannedConnectedDistributor.PlannedConnectedProducts.Contains(this)) {
+					this.plannedConnectedDistributor.PlannedConnectedProducts.Add(this);
+				}
 			}
 		}
-
-		public double NecessaryCoolLoad {
-			get {
-				double coolLoad = this.AssociatedRoom.NormalizedCoolLoad;
-				foreach (PlannedProduct product in this.AssociatedRoom.PlannedProducts) {
-					if (product.Product != this) {
-						coolLoad -= product.Product.PlannedCoolLoad;
-					}
-				}
-				if (coolLoad < 0) {
-					coolLoad = 0;
-				}
-				return coolLoad;
-			}
-		}*/
 
 		public abstract void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool);
 
 		internal virtual void FinalizeLoading() {
-			// nothing to do
+			if (this.plannedConnectedDistributorId != null) {
+				this.PlannedConnectedDistributor = Project.Instance.GetDistributor(this.plannedConnectedDistributorId);
+			}
 		}
 	}
 }
