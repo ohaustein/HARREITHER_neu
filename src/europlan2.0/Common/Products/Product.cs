@@ -178,6 +178,10 @@ namespace Europlan.Common {
 			get;
 		}
 
+		public abstract string FullName {
+			get;
+		}
+
 		public abstract ProductType Type {
 			get;
 		}

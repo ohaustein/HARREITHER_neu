@@ -372,6 +372,13 @@ namespace Europlan.Common {
 		}
 
 		/// <summary>
+		/// The full name of this product
+		/// </summary>
+		public override string FullName {
+			get { return "Euroval® Systemfußboden"; }
+		}
+
+		/// <summary>
 		/// The type of this product
 		/// </summary>
 		public override ProductType Type {

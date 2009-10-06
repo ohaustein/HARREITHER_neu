@@ -57,6 +57,13 @@ namespace Europlan.Common {
 			get { return "Modul\nKlima-\nBoden\n(m²)"; }
 		}
 
+		/// <summary>
+		/// The full name of this product
+		/// </summary>
+		public override string FullName {
+			get { return Name; }
+		}
+
 		public override ProductType Type {
 			get { return ProductType.FBH; }
 		}

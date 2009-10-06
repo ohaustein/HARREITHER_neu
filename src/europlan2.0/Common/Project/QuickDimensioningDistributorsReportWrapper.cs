@@ -25,7 +25,7 @@ namespace Europlan.Common {
 		}
 
 		public string ProductName {
-			get { return this.product.Name; }
+			get { return this.product.FullName; }
 		}
 
 		public int Amount {
