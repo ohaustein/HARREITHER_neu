@@ -20,6 +20,7 @@ namespace Europlan.Common {
 		public void UpdateControl() {
 			regulatoryCircuitsSource.DataSource = Project.Instance.RegulatorCircuits;
 			regulatoryCircuitsSource.ResetBindings(false);
+			coolFlowTemperatureDataGridViewTextBoxColumn.Visible = Project.Instance.CalculateCoolLoad;
 		}
 
 		public bool AllowLeave() {

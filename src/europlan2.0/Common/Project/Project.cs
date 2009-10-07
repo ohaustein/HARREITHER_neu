@@ -28,6 +28,14 @@ namespace Europlan.Common {
 		private string projectEditor;
 		private string projectFileName;
 
+		// facility details
+		private int normOutsideTemperature;
+		private bool variableSpreizung;
+		private bool calculateCoolLoad;
+		private int outsideTemperatureForCooling;
+		private int relativeHumidity;
+		private int insideTemperatureForCooling;
+
 		private TreeNode rootNode = null;
 		private TreeNode floorsNode = null;
 		private TreeNode facilityDetailsNode = null;
@@ -80,6 +88,12 @@ namespace Europlan.Common {
 			projectNotes = new string[] { "" };
 			projectEditor = "";
 			projectFileName = "";
+			normOutsideTemperature = -16;
+			variableSpreizung = false;
+			calculateCoolLoad = false;
+			outsideTemperatureForCooling = 30;
+			relativeHumidity = 50;
+			insideTemperatureForCooling = 25;
 
 			floors = new FloorList();
 			regulatorCircuits = new List<RegulatorCircuit>();
@@ -151,6 +165,36 @@ namespace Europlan.Common {
 		public string ProjectEditor {
 			get { return projectEditor; }
 			set { projectEditor = value; }
+		}
+
+		public int NormOutsideTemperature {
+			get { return normOutsideTemperature; }
+			set { normOutsideTemperature = value; }
+		}
+
+		public bool VariableSpreizung {
+			get { return variableSpreizung; }
+			set { variableSpreizung = value; }
+		}
+
+		public bool CalculateCoolLoad {
+			get { return calculateCoolLoad; }
+			set { calculateCoolLoad = value; }
+		}
+
+		public int OutsideTemperatureForCooling {
+			get { return outsideTemperatureForCooling; }
+			set { outsideTemperatureForCooling = value; }
+		}
+		
+		public int RelativeHumidity {
+			get { return relativeHumidity; }
+			set { relativeHumidity = value; }
+		}
+
+		public int InsideTemperatureForCooling {
+			get { return insideTemperatureForCooling; }
+			set { insideTemperatureForCooling = value; }
 		}
 
 		public FloorList Floors {
