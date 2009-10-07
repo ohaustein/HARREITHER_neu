@@ -15,6 +15,8 @@ namespace Europlan.Common {
 		private string regulatorCircuitId = null;
 		private RegulatorCircuit regulatorCircuit = null;
 		private int maxCircuits;
+		private int flanschKugelHaehne;
+		private bool einbauSchrank;
 		private List<string> additionalFloors;
 		private List<Product> plannedConnectedProducts = new List<Product>();
 
@@ -36,6 +38,8 @@ namespace Europlan.Common {
 			name = "";
 			regulatorCircuitId = "";
 			maxCircuits = 12;
+			flanschKugelHaehne = 2;
+			einbauSchrank = true;
 			additionalFloors = new List<string>();
 			distributorNode.Tag = this;
 		}
@@ -87,7 +91,17 @@ namespace Europlan.Common {
 			get { return maxCircuits; }
 			set { maxCircuits = value; }
 		}
-		
+
+		public int FlanschKugelHaehne {
+			get { return flanschKugelHaehne; }
+			set { flanschKugelHaehne = value; }
+		}
+
+		public bool EinbauSchrank {
+			get { return einbauSchrank; }
+			set { einbauSchrank = value; }
+		}
+
 		internal TreeNode Node {
 			get { return this.distributorNode; }
 		}

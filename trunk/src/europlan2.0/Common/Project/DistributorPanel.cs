@@ -25,6 +25,8 @@ namespace Europlan.Common {
 				this.lblId.Text = distributor.Id;
 				this.txtName.Text = distributor.Name;
 				this.numMaxCircuits.Value = distributor.MaxCircuits;
+				this.numFlanschkugelhaehne.Value = distributor.FlanschKugelHaehne;
+				this.chkEinbauschrank.Checked = distributor.EinbauSchrank;
 				Project project = Project.Instance;
 				this.cmbCircuit.Items.Clear();
 				foreach (RegulatorCircuit circuit in project.RegulatorCircuits) {
@@ -77,6 +79,20 @@ namespace Europlan.Common {
 					this.distributor.AdditionalFloorIds.Remove(floor.Id);
 				}
 			}
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numFlanschkugelhaehne_ValueChanged(object sender, EventArgs e) {
+			distributor.FlanschKugelHaehne = (int)this.numFlanschkugelhaehne.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void chkEinbauschrank_CheckedChanged(object sender, EventArgs e) {
+			distributor.EinbauSchrank = this.chkEinbauschrank.Checked;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
