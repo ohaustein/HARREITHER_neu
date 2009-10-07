@@ -53,7 +53,7 @@ namespace Europlan.Common {
 		/// The full name of this product
 		/// </summary>
 		public override string FullName {
-			get { return Name; }
+			get { return "Hitherm® Klimawand"; }
 		}
 
 		public override ProductType Type {
