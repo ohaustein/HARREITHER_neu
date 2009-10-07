@@ -1049,7 +1049,7 @@ namespace Europlan.Common {
 					i++;
 				}
 
-				listLabel1.Variables.Add("@FileName", Project.Instance.ProjectFileName);
+				listLabel1.Variables.Add("@FileName", Path.GetFileName(Project.Instance.ProjectFileName));
 
 				// ---------------------------------------------------------------------------------------------------
 				// RoomControllers are now aggregated in the report itself
