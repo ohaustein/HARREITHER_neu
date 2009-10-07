@@ -383,7 +383,7 @@ namespace Europlan.Common {
 		/// The full name of this product
 		/// </summary>
 		public override string FullName {
-			get { return "Euroval® Systemfußboden"; }
+			get { return "Euroval® Fußbodenheizung"; }
 		}
 
 		/// <summary>
