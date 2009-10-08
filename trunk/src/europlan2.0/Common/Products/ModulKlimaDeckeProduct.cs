@@ -179,7 +179,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool) {
+		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
 			// TODO
 			double thetaV = 35;
 			double thetaR = 30;
@@ -189,6 +189,8 @@ namespace Europlan.Common {
 			double deltaThetaH = en1264.Heizmitteluebertemperatur(thetaV, thetaR, this.AssociatedRoom.RoomHeatTemperature);
 
 			//en1264.WaermestromDichteFlaeche(
+			errorMsg = "Noch nicht implementiert";
+			return false;
 		}
 
 		public override float PlannedFloorArea {

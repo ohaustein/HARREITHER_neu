@@ -334,7 +334,8 @@ namespace Europlan.Common {
 			this.requestedHeatLoad = this.NecessaryHeatLoad;
 			this.calculateHeat = this.requestedHeatLoad > 0;
 			this.calculateCool = this.requestedCoolLoad > 0;
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool);
+			string errorMsg;
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg);
 		}
 
 		#region IGuiRepresentation Members
@@ -355,7 +356,8 @@ namespace Europlan.Common {
 		#endregion
 
 		internal void FinalizeLoading() {
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool);
+			string errorMsg;
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg);
 			this.plannedProduct.FinalizeLoading();
 		}
 

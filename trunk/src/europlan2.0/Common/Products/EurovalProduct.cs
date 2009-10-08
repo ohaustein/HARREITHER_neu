@@ -960,7 +960,21 @@ namespace Europlan.Common {
 			this.plannedPipeLength = originalPipeLength;
 		}
 
-		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool) {
+		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
+			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || this.PlannedConnectionVorlauf == null || this.PlannedConnectionRuecklauf == null) {
+				errorMsg = "Fehlende Eingaben: ";
+				if (plannedFloorConstruction == null) {
+					errorMsg += "Fuﬂbodenkonstruktion, ";
+				}
+				if (plannedInsulationConstruction == null) {
+					errorMsg += "W‰rmed‰mmkonstruktion, ";
+				}
+				if (PlannedConnectionVorlauf == null || PlannedConnectionRuecklauf == null) {
+					errorMsg += "Heizkreisanschluﬂ, ";
+				}
+				errorMsg = errorMsg.Substring(0, errorMsg.Length - 2);
+				return false;
+			}
 			LayDistance[] teilungen =
 				(this.requestedLayDistance == null ?
 				new LayDistance[] { LayDistance.EV35, LayDistance.EV30, LayDistance.EV25, LayDistance.EV20, LayDistance.EV15, LayDistance.EV10, LayDistance.EV5 } :
@@ -1042,6 +1056,8 @@ namespace Europlan.Common {
 				this.plannedSpreizungCool = 0;
 			}
 			this.plannedPipeLength = pipeLength;
+			errorMsg = null;
+			return true;
 		}
 	}
 	
