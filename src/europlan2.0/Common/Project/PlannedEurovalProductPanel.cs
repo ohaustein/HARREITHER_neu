@@ -57,8 +57,6 @@ namespace Europlan.Common {
 		public PlannedEurovalProductPanel() {
 			InitializeComponent();
 
-			this.tabs.TabPages.Remove(this.pageCircuit); // TODO remove (just disables the circuit page for the current release)
-
 			this.cmbLayDistance.Items.Clear();
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(null, "Automatisch"));
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.LayDistance.EV35, "EV35"));
@@ -107,6 +105,11 @@ namespace Europlan.Common {
 		}
 
 		public void UpdateControl() {
+			this.product = this.Tag as PlannedProduct;
+			this.tabs.SelectedTab = this.pageInput;
+			if (this.product != null) {
+				(this.product.Product as EurovalProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
+			}
 			this.UpdateControl(FieldEnum.NONE);
 		}
 
@@ -129,7 +132,6 @@ namespace Europlan.Common {
 		private int ignoreCalculationType = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
-			this.product = this.Tag as PlannedProduct;
 			if (this.product != null) {
 				ignoreCoverHeatLoad++;
 				ignoreHeatLoad++;
@@ -440,7 +442,7 @@ namespace Europlan.Common {
 				this.lblMhHeat.Text = "";
 				this.lblMhCool.Text = "";
 				this.lblDeltaPHeat.Text = Math.Round(evProduct.PlannedDeltaRhoHeat, 1).ToString();
-				this.lblDeltaPCool.Text = "";
+				this.lblDeltaPCool.Text = Math.Round(evProduct.PlannedDeltaRhoCool, 1).ToString(); ;
 				this.lblSpreizungHeat.Text = "5";
 				this.lblSpreizungCool.Text = "0";
 

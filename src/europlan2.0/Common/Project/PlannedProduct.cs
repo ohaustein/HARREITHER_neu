@@ -179,7 +179,7 @@ namespace Europlan.Common {
 		}
 
 		public bool CalculateHeat {
-			get { return this.calculateHeat; }
+			get { return this.calculateHeat || !this.calculateCool; }
 			set { this.calculateHeat = value; }
 		}
 

@@ -886,8 +886,8 @@ namespace Europlan.Common {
 			}
 
 			{ // Kühllastberechnung
-				double thetaVrz = 17;
-				double thetaRaz = 20;
+				double thetaVrz = 16;
+				double thetaRaz = 22;
 				this.GetCoolFlow(out thetaVrz, out thetaRaz);
 				double thetaRrz = thetaVrz;
 				double thetaVaz = thetaVrz;
@@ -897,10 +897,10 @@ namespace Europlan.Common {
 				if (calculateWithRim) {
 					thetaRrz = thetaVrz - (thetaVrz - thetaRaz) * lRlRz / lRlGes;
 					thetaVaz = thetaRrz;
-					dThetaRz = en1264.Heizmitteluebertemperatur(thetaVrz, thetaRrz, this.AssociatedRoom.RoomHeatTemperature);
+					dThetaRz = en1264.Heizmitteluebertemperatur(thetaVrz, thetaRrz, this.AssociatedRoom.RoomCoolTemperature);
 					//                                                                        // Heizmittelübertemperatur der Randzone berechnen
 				}
-				double dThetaAz = en1264.Heizmitteluebertemperatur(thetaVaz, thetaRaz, this.AssociatedRoom.RoomHeatTemperature);
+				double dThetaAz = en1264.Heizmitteluebertemperatur(thetaVaz, thetaRaz, this.AssociatedRoom.RoomCoolTemperature);
 				//                                                                            // Heizmittelübertemperatur der Aufenthaltszone berechnen
 
 				double tRz = 0;
@@ -931,7 +931,7 @@ namespace Europlan.Common {
 				qCool = QFbk / aGes;
 				qCoolRim = qRz;
 				qCoolResidence = qAz;
-				qCoolU = en1264.WaermeverlustUnten(alphaFbk, rLambdaB, su, lambdaU, rAlphaDecke, rLambdaIns, rLambdaDecke, rLambdaPutz, qCool, this.AssociatedRoom.RoomHeatTemperature, this.PlannedRoomTemperatureBelowCool);
+				qCoolU = en1264.WaermeverlustUnten(alphaFbk, rLambdaB, su, lambdaU, rAlphaDecke, rLambdaIns, rLambdaDecke, rLambdaPutz, qCool, this.AssociatedRoom.RoomCoolTemperature, this.PlannedRoomTemperatureBelowCool);
 				//                                                                           // Kühlverlust nach unten berechnen
 
 				// hydraulische Berechnung
