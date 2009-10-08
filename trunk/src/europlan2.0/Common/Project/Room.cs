@@ -22,7 +22,9 @@ namespace Europlan.Common {
 
 		private string id;
 		private string name;
-		private int roomTemperature;
+		private int roomHeatTemperature;
+		private int roomCoolTemperature;
+		private int roomRelativeHumidity;
 		private float area;
 		private int heatLoad;
 		private int coolLoad;
@@ -62,7 +64,9 @@ namespace Europlan.Common {
 			InitializeRoom();
 			string copyOf = resources.GetString("CopyOf", Thread.CurrentThread.CurrentUICulture);
 			this.Name = copyOf + " " + room.Name;
-			this.roomTemperature = room.RoomTemperature;
+			this.roomHeatTemperature = room.RoomHeatTemperature;
+			this.roomCoolTemperature = room.RoomCoolTemperature;
+			this.roomRelativeHumidity = room.RoomRelativeHumidity;
 			this.area = room.Area;
 			this.heatLoad = room.HeatLoad;
 			this.coolLoad = room.CoolLoad;
@@ -83,7 +87,9 @@ namespace Europlan.Common {
 		private void InitializeRoom() {
 			id = "";
 			name = "";
-			roomTemperature = 0;
+			roomHeatTemperature = 0;
+			roomCoolTemperature = Project.Instance.InsideTemperatureForCooling;
+			roomRelativeHumidity = Project.Instance.RelativeHumidity;
 			area = 0;
 			heatLoad = 0;
 			coolLoad = 0;
@@ -102,7 +108,9 @@ namespace Europlan.Common {
 
 		internal void Synchronize(Room room) {
 			this.Name = room.Name;
-			this.RoomTemperature = room.RoomTemperature;
+			this.RoomHeatTemperature = room.RoomHeatTemperature;
+			this.RoomCoolTemperature = room.RoomCoolTemperature;
+			this.RoomRelativeHumidity = room.RoomRelativeHumidity;
 			this.Area = room.Area;
 			this.HeatLoad = room.HeatLoad;
 			this.CoolLoad = room.CoolLoad;
@@ -167,9 +175,19 @@ namespace Europlan.Common {
 			set { this.QuickDimensioningRoomTypeId = value.Id;}
 		}
 
-		public int RoomTemperature {
-			get { return roomTemperature; }
-			set { roomTemperature = value; }
+		public int RoomHeatTemperature {
+			get { return roomHeatTemperature; }
+			set { roomHeatTemperature = value; }
+		}
+
+		public int RoomCoolTemperature {
+			get { return roomCoolTemperature; }
+			set { roomCoolTemperature = value; }
+		}
+
+		public int RoomRelativeHumidity {
+			get { return roomRelativeHumidity; }
+			set { roomRelativeHumidity = value; }
 		}
 
 		public float Area {
@@ -413,7 +431,7 @@ namespace Europlan.Common {
 					heatload = this.GetDefaultQuickDimensioningHeatLoad();
 				}
 				this.QuickDimensioningHeatLoad = heatLoad;
-				this.QuickDimensioningRoomTemperature = this.RoomTemperature;
+				this.QuickDimensioningRoomTemperature = this.RoomHeatTemperature;
 				this.quickDimensioningInitialized = true;
 			}
 		}

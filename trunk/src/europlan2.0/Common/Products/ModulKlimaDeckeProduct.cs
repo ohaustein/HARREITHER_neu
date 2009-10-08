@@ -186,7 +186,7 @@ namespace Europlan.Common {
 
 			EN1264 en1264 = EN1264.Instance;
 
-			double deltaThetaH = en1264.Heizmitteluebertemperatur(thetaV, thetaR, this.AssociatedRoom.RoomTemperature);
+			double deltaThetaH = en1264.Heizmitteluebertemperatur(thetaV, thetaR, this.AssociatedRoom.RoomHeatTemperature);
 
 			//en1264.WaermestromDichteFlaeche(
 		}

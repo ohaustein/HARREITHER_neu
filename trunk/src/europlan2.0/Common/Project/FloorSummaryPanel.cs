@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace Europlan.Common {
+
 	public partial class FloorSummaryPanel : UserControl, IEditorUserControl {
 		
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
@@ -17,6 +18,11 @@ namespace Europlan.Common {
 		
 		public FloorSummaryPanel() {
 			InitializeComponent();
+			//this.gridRooms.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+			this.gridRooms.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomCenter;
+			this.gridRooms.CellPainting += new DataGridViewCellPaintingEventHandler(gridRooms_CellPainting);
+			this.gridRooms.Paint += new PaintEventHandler(gridRooms_Paint);
+			this.gridRooms.ColumnWidthChanged += new DataGridViewColumnEventHandler(gridRooms_ColumnWidthChanged);
 		}
 
 		public void UpdateControl() {
@@ -59,6 +65,9 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			RoomCoolTemperature.Visible = Project.Instance.CalculateCoolLoad;
+			RoomRelativeHumidity.Visible = Project.Instance.CalculateCoolLoad;
+			CoolLoad.Visible = Project.Instance.CalculateCoolLoad;
 		}
 
 		public bool AllowLeave() {
@@ -169,6 +178,79 @@ namespace Europlan.Common {
 					}
 				}
 				form.Dispose();
+			}
+		}
+
+
+		void gridRooms_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e) {
+			if (e.Column.DisplayIndex >= 3 && e.Column.DisplayIndex <= 6) {
+				this.gridRooms.InvalidateCell(3, -1);
+				this.gridRooms.InvalidateCell(4, -1);
+				this.gridRooms.InvalidateCell(5, -1);
+				this.gridRooms.InvalidateCell(6, -1);
+			}
+			if (e.Column.DisplayIndex >= 7 && e.Column.DisplayIndex <= 9) {
+				this.gridRooms.InvalidateCell(7, -1);
+				this.gridRooms.InvalidateCell(8, -1);
+				this.gridRooms.InvalidateCell(9, -1);
+			}
+		}
+
+		void gridRooms_Paint(object sender, PaintEventArgs e) {
+			Rectangle r1 = this.gridRooms.GetCellDisplayRectangle(3, -1, true); //get the column header cell
+			Rectangle r2 = this.gridRooms.GetCellDisplayRectangle(4, -1, true); //get the column header cell
+			Rectangle r3 = this.gridRooms.GetCellDisplayRectangle(5, -1, true); //get the column header cell
+			Rectangle r4 = this.gridRooms.GetCellDisplayRectangle(6, -1, true); //get the column header cell
+
+			r1.X += 1;
+			r1.Y += 1;
+			r1.Width = r1.Width + r2.Width + r3.Width + r4.Width - 4;
+			r1.Height = r1.Height / 2 - 2;
+			//e.Graphics.FillRectangle(new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.BackColor), r1);
+			StringFormat format = new StringFormat();
+			format.Alignment = StringAlignment.Center;
+			format.LineAlignment = StringAlignment.Center;
+			e.Graphics.DrawString("Heizbetrieb",
+				this.gridRooms.ColumnHeadersDefaultCellStyle.Font,
+				new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.ForeColor),
+				r1,
+				format);
+			e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y + r1.Height - 5), new Point(r1.X + r1.Width, r1.Y + r1.Height - 5));
+			e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y), new Point(r1.X, r1.Y + (r1.Height * 2)));
+			e.Graphics.DrawLine(Pens.Black, new Point(r1.X + r1.Width, r1.Y), new Point(r1.X + r1.Width, r1.Y + (r1.Height * 2)));
+
+			r1 = this.gridRooms.GetCellDisplayRectangle(7, -1, true); //get the column header cell
+			r2 = this.gridRooms.GetCellDisplayRectangle(8, -1, true); //get the column header cell
+			r3 = this.gridRooms.GetCellDisplayRectangle(9, -1, true); //get the column header cell
+
+			r1.X += 1;
+			r1.Y += 1;
+			r1.Width = r1.Width + r2.Width + r3.Width - 4;
+			r1.Height = r1.Height / 2 - 2;
+			//e.Graphics.FillRectangle(new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.BackColor), r1);
+			format = new StringFormat();
+			format.Alignment = StringAlignment.Center;
+			format.LineAlignment = StringAlignment.Center;
+			e.Graphics.DrawString("Kühlbetrieb",
+				this.gridRooms.ColumnHeadersDefaultCellStyle.Font,
+				new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.ForeColor),
+				r1,
+				format);
+			e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y + r1.Height - 5), new Point(r1.X + r1.Width, r1.Y + r1.Height - 5));
+			e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y), new Point(r1.X, r1.Y + (r1.Height * 2)));
+			e.Graphics.DrawLine(Pens.Black, new Point(r1.X + r1.Width, r1.Y), new Point(r1.X + r1.Width, r1.Y + (r1.Height * 2)));
+
+		}
+
+		void gridRooms_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
+			if (e.RowIndex == -1 && e.ColumnIndex > -1) {
+				e.PaintBackground(e.CellBounds, false);
+
+				Rectangle r2 = e.CellBounds;
+				r2.Y += e.CellBounds.Height / 2;
+				r2.Height = e.CellBounds.Height / 2;
+				e.PaintContent(r2);
+				e.Handled = true;
 			}
 		}
 	}
