@@ -53,11 +53,13 @@ namespace Europlan.Common {
 		private double plannedQHeatResidence = 0;
 		private double plannedQHeatU = 0;
 		private double plannedDeltaRhoHeat = 0;
+		private double plannedSpreizungHeat = 0;
 		private double plannedQCool = 0;
 		private double plannedQCoolRim = 0;
 		private double plannedQCoolResidence = 0;
 		private double plannedQCoolU = 0;
 		private double plannedDeltaRhoCool = 0;
+		private double plannedSpreizungCool = 0;
 
 		private double plannedPipeLength = 0;
 
@@ -674,6 +676,11 @@ namespace Europlan.Common {
 		public double PlannedDeltaRhoHeat {
 			get { return this.plannedDeltaRhoHeat; }
 		}
+
+		[XmlIgnore]
+		public double PlannedSpreizungHeat {
+			get { return this.plannedSpreizungHeat; }
+		}
 		#endregion Heat Load
 
 		#region Cool Load
@@ -750,6 +757,11 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public double PlannedSpreizungCool {
+			get { return this.plannedSpreizungCool; }
+		}
+
+		[XmlIgnore]
 		public double PlannedFloorTemperatureHeatRim {
 			get { return this.plannedQHeatRim / alphaFbh + this.AssociatedRoom.RoomHeatTemperature; }
 		}
@@ -777,8 +789,8 @@ namespace Europlan.Common {
 		#endregion Auslegung calculated values
 
 		private void CalculateQForLayDistance(LayDistance distance, Nullable<RimType> distanceRim,
-				out double qHeatU, out double qHeat, out double qHeatRim, out double qHeatResidence, out double deltaRhoHeat,
-				out double qCoolU, out double qCool, out double qCoolRim, out double qCoolResidence, out double deltaRhoCool,
+				out double qHeatU, out double qHeat, out double qHeatRim, out double qHeatResidence, out double deltaRhoHeat, out double spreizungHeat,
+				out double qCoolU, out double qCool, out double qCoolRim, out double qCoolResidence, out double deltaRhoCool, out double spreizungCool,
 				out double pipeLength) {
 			if (this.plannedArea == 0) {
 				qHeatU = 0;
@@ -786,11 +798,13 @@ namespace Europlan.Common {
 				qHeatRim = 0;
 				qHeatResidence = 0;
 				deltaRhoHeat = 0;
+				spreizungHeat = 0;
 				qCoolU = 0;
 				qCool = 0;
 				qCoolRim = 0;
 				qCoolResidence = 0;
 				deltaRhoCool = 0;
+				spreizungCool = 0;
 				pipeLength = 0;
 				return;
 			}
@@ -835,6 +849,7 @@ namespace Europlan.Common {
 				this.GetHeatFlow(out thetaVrz, out thetaRaz);
 				double thetaRrz = thetaVrz;
 				double thetaVaz = thetaVrz;
+				spreizungHeat = thetaVrz - thetaRaz;
 
 				double dThetaRz = 0;
 
@@ -891,6 +906,7 @@ namespace Europlan.Common {
 				this.GetCoolFlow(out thetaVrz, out thetaRaz);
 				double thetaRrz = thetaVrz;
 				double thetaVaz = thetaVrz;
+				spreizungCool = thetaRaz - thetaVrz;
 
 				double dThetaRz = 0;
 
@@ -962,19 +978,21 @@ namespace Europlan.Common {
 			double qHeatRim = 0;
 			double qHeatResidence = 0;
 			double deltaRhoHeat = 0;
+			double spreizungHeat = 0;
 			double qCool = 0;
 			double qCoolU = 0;
 			double qCoolRim = 0;
 			double qCoolResidence = 0;
 			double deltaRhoCool = 0;
+			double spreizungCool = 0;
 			double pipeLength = 0;
 			Nullable<RimType> distanceRim = this.plannedRimLength > 0 ? (Nullable<RimType>)RimType.EV15_60 : (Nullable<RimType>)null;
 			while (!found && i < teilungen.Length) {
 				j = 0;
 				while (!found && j < randzonen.Length) {
 					this.CalculateQForLayDistance(teilungen[i], randzonen[j],
-						out qHeatU, out qHeat, out qHeatRim, out qHeatResidence, out deltaRhoHeat,
-						out qCoolU, out qCool, out qCoolRim, out qCoolResidence, out deltaRhoCool,
+						out qHeatU, out qHeat, out qHeatRim, out qHeatResidence, out deltaRhoHeat, out spreizungHeat,
+						out qCoolU, out qCool, out qCoolRim, out qCoolResidence, out deltaRhoCool, out spreizungCool,
 						out pipeLength);
 					if ((!calculateHeat || qHeat * this.PlannedFloorArea >= requestedHeatLoad) &&
 							(!calculateCool || -qCool * this.PlannedFloorArea >= requestedCoolLoad)) {
@@ -999,12 +1017,14 @@ namespace Europlan.Common {
 				this.plannedQHeatRim = qHeatRim;
 				this.plannedQHeatResidence = qHeatResidence;
 				this.plannedDeltaRhoHeat = deltaRhoHeat;
+				this.plannedSpreizungHeat = spreizungHeat;
 			} else {
 				this.plannedQHeat = 0;
 				this.plannedQHeatU = 0;
 				this.plannedQHeatRim = 0;
 				this.plannedQHeatResidence = 0;
 				this.plannedDeltaRhoHeat = 0;
+				this.plannedSpreizungHeat = 0;
 			}
 			if (requestedCoolLoad > 0) {
 				this.plannedQCool = -qCool;
@@ -1012,12 +1032,14 @@ namespace Europlan.Common {
 				this.plannedQCoolRim = -qCoolRim;
 				this.plannedQCoolResidence = -qCoolResidence;
 				this.plannedDeltaRhoCool = deltaRhoCool;
+				this.plannedSpreizungCool = spreizungCool;
 			} else {
 				this.plannedQCool = 0;
 				this.plannedQCoolU = 0;
 				this.plannedQCoolRim = 0;
 				this.plannedQCoolResidence = 0;
 				this.plannedDeltaRhoCool = 0;
+				this.plannedSpreizungCool = 0;
 			}
 			this.plannedPipeLength = pipeLength;
 		}
