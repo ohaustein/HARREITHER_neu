@@ -189,6 +189,7 @@
       <DependentUpon>PlannedEurovalProductPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\PlannedProduct.cs" />
+    <Compile Include="Project\ProductConnection.cs" />
     <Compile Include="Project\Project.cs" />
     <Compile Include="Project\ProjectSummaryPanel.cs">
       <SubType>UserControl</SubType>

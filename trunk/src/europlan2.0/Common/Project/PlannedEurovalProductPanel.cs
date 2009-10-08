@@ -57,6 +57,8 @@ namespace Europlan.Common {
 		public PlannedEurovalProductPanel() {
 			InitializeComponent();
 
+			this.tabs.TabPages.Remove(this.pageCircuit); // TODO remove (just disables the circuit page for the current release)
+
 			this.cmbLayDistance.Items.Clear();
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(null, "Automatisch"));
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.LayDistance.EV35, "EV35"));
@@ -442,10 +444,10 @@ namespace Europlan.Common {
 				this.lblSpreizungHeat.Text = "5";
 				this.lblSpreizungCool.Text = "0";
 
-				if (evProduct.PlannedConnectedDistributor == null) {
+				if (evProduct.PlannedConnectionVorlauf == null) {
 					this.txtDistributor.Text = "";
 				} else {
-					this.txtDistributor.Text = evProduct.PlannedConnectedDistributor.Name;
+					this.txtDistributor.Text = evProduct.PlannedConnectionVorlauf.ToString();
 				}
 
 				ignoreCoverHeatLoad--;
@@ -751,6 +753,21 @@ namespace Europlan.Common {
 			}
 			if (this.product.RequestedHeatLoad == 0 && this.product.RequestedCoolLoad > 0 && !this.rbCalculateCool.Checked) {
 				this.rbCalculateCool.Checked = true;
+			}
+		}
+
+		private void btnDistributor_Click(object sender, EventArgs e) {
+			SelectConnectionForProductForm form = new SelectConnectionForProductForm(Project.Instance.Floors[0]);
+			form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnectionVorlauf;
+			if (form.ShowDialog() == DialogResult.OK) {
+				(this.product.Product as EurovalProduct).PlannedConnectionVorlauf = form.SelectedConnection;
+				(this.product.Product as EurovalProduct).PlannedConnectionRuecklauf = form.SelectedConnection;
+			}
+			form.Dispose();
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool);
+			this.UpdateControl(FieldEnum.COOL_LOAD);
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
 			}
 		}
 	}

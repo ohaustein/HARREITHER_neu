@@ -19,20 +19,30 @@ namespace Europlan.Common {
 		private bool calculateHeat = false;
 		private bool calculateCool = false;
 
+		private string id;
+
 		internal PlannedProduct() {
+			this.id = Guid.NewGuid().ToString();
 			this.plannedProduct = null;
 			this.room = null;
 		}
 
 		public PlannedProduct(Product plannedProduct) {
+			this.id = Guid.NewGuid().ToString();
 			this.productNode = new TreeNode();
 			this.productNode.Tag = this;
 			this.Product = plannedProduct;
 		}
 
 		public PlannedProduct(Room room) {
+			this.id = Guid.NewGuid().ToString();
 			this.plannedProduct = null;
 			this.room = room;
+		}
+
+		public string Id {
+			get { return this.id; }
+			set { this.id = value; }
 		}
 
 		[XmlIgnore]

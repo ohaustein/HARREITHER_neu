@@ -23,54 +23,65 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.treeView1 = new System.Windows.Forms.TreeView();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
+			this.tvDistributors = new System.Windows.Forms.TreeView();
+			this.btnCancel = new System.Windows.Forms.Button();
+			this.btnOk = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
-			// treeView1
+			// tvDistributors
 			// 
-			this.treeView1.Location = new System.Drawing.Point(12, 12);
-			this.treeView1.Name = "treeView1";
-			this.treeView1.Size = new System.Drawing.Size(254, 370);
-			this.treeView1.TabIndex = 0;
+			this.tvDistributors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.tvDistributors.Location = new System.Drawing.Point(12, 12);
+			this.tvDistributors.Name = "tvDistributors";
+			this.tvDistributors.Size = new System.Drawing.Size(254, 370);
+			this.tvDistributors.TabIndex = 0;
+			this.tvDistributors.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvDistributors_AfterSelect);
 			// 
-			// button1
+			// btnCancel
 			// 
-			this.button1.Location = new System.Drawing.Point(637, 388);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 1;
-			this.button1.Text = "button1";
-			this.button1.UseVisualStyleBackColor = true;
+			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.Location = new System.Drawing.Point(191, 388);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(75, 23);
+			this.btnCancel.TabIndex = 1;
+			this.btnCancel.Text = "Cancel";
+			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
-			// button2
+			// btnOk
 			// 
-			this.button2.Location = new System.Drawing.Point(556, 388);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 2;
-			this.button2.Text = "button2";
-			this.button2.UseVisualStyleBackColor = true;
+			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.btnOk.Enabled = false;
+			this.btnOk.Location = new System.Drawing.Point(110, 388);
+			this.btnOk.Name = "btnOk";
+			this.btnOk.Size = new System.Drawing.Size(75, 23);
+			this.btnOk.TabIndex = 2;
+			this.btnOk.Text = "OK";
+			this.btnOk.UseVisualStyleBackColor = true;
 			// 
 			// SelectConnectionForProductForm
 			// 
+			this.AcceptButton = this.btnOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(724, 423);
-			this.Controls.Add(this.button2);
-			this.Controls.Add(this.button1);
-			this.Controls.Add(this.treeView1);
+			this.CancelButton = this.btnCancel;
+			this.ClientSize = new System.Drawing.Size(278, 423);
+			this.Controls.Add(this.btnOk);
+			this.Controls.Add(this.btnCancel);
+			this.Controls.Add(this.tvDistributors);
 			this.Name = "SelectConnectionForProductForm";
-			this.Text = "SelectConnectionForProductForm";
+			this.Text = "Verteileranschluﬂ";
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.TreeView treeView1;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.TreeView tvDistributors;
+		private System.Windows.Forms.Button btnCancel;
+		private System.Windows.Forms.Button btnOk;
 	}
 }
