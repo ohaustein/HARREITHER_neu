@@ -373,7 +373,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public abstract void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool);
+		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg);
 
 		internal virtual void FinalizeLoading() {
 			// nothing todo

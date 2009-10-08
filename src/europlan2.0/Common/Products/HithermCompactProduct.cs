@@ -60,8 +60,10 @@ namespace Europlan.Common {
 			get { return ProductType.WH; }
 		}
 
-		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool) {
+		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
 			// TODO
+			errorMsg = "Noch nicht implementiert";
+			return false;
 		}
 
 		public override float PlannedFloorArea {

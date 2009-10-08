@@ -156,6 +156,7 @@ namespace Europlan.Common {
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.lblError = new System.Windows.Forms.Label();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -949,6 +950,7 @@ namespace Europlan.Common {
 			// 
 			// pageConstruction
 			// 
+			this.pageConstruction.Controls.Add(this.groupBox8);
 			this.pageConstruction.Controls.Add(this.panel2);
 			this.pageConstruction.Location = new System.Drawing.Point(4, 22);
 			this.pageConstruction.Name = "pageConstruction";
@@ -962,7 +964,6 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
-			this.panel2.Controls.Add(this.groupBox8);
 			this.panel2.Controls.Add(this.grpResults);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(3, 3);
@@ -981,7 +982,7 @@ namespace Europlan.Common {
 			this.groupBox8.Controls.Add(this.cmbLayDistance);
 			this.groupBox8.Controls.Add(this.label14);
 			this.groupBox8.Controls.Add(this.label13);
-			this.groupBox8.Location = new System.Drawing.Point(0, 211);
+			this.groupBox8.Location = new System.Drawing.Point(3, 247);
 			this.groupBox8.MinimumSize = new System.Drawing.Size(750, 0);
 			this.groupBox8.Name = "groupBox8";
 			this.groupBox8.Size = new System.Drawing.Size(847, 91);
@@ -1084,6 +1085,7 @@ namespace Europlan.Common {
 			// 
 			this.grpResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.grpResults.Controls.Add(this.lblError);
 			this.grpResults.Controls.Add(this.lblSpreizungCool);
 			this.grpResults.Controls.Add(this.lblSpreizungHeat);
 			this.grpResults.Controls.Add(this.label41);
@@ -1155,7 +1157,7 @@ namespace Europlan.Common {
 			this.grpResults.Location = new System.Drawing.Point(0, 3);
 			this.grpResults.MinimumSize = new System.Drawing.Size(750, 0);
 			this.grpResults.Name = "grpResults";
-			this.grpResults.Size = new System.Drawing.Size(847, 202);
+			this.grpResults.Size = new System.Drawing.Size(847, 235);
 			this.grpResults.TabIndex = 0;
 			this.grpResults.TabStop = false;
 			this.grpResults.Text = "Berechnungsergebnisse";
@@ -1763,6 +1765,18 @@ namespace Europlan.Common {
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Heizen:";
 			// 
+			// lblError
+			// 
+			this.lblError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lblError.ForeColor = System.Drawing.Color.Red;
+			this.lblError.Location = new System.Drawing.Point(6, 199);
+			this.lblError.Name = "lblError";
+			this.lblError.Size = new System.Drawing.Size(835, 33);
+			this.lblError.TabIndex = 71;
+			this.lblError.Visible = false;
+			// 
 			// PlannedEurovalProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1926,5 +1940,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnDistributor;
 		private System.Windows.Forms.Label lblDistributor;
 		private System.Windows.Forms.TextBox txtDistributor;
+		private System.Windows.Forms.Label lblError;
 	}
 }
