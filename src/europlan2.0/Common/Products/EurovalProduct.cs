@@ -26,10 +26,10 @@ namespace Europlan.Common {
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
 		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
-		private static double defaultThetaVHeat = 35;
-		private static double defaultThetaRHeat = 30;
-		private static double defaultThetaVCool = 17;
-		private static double defaultThetaRCool = 20;
+		//private static double defaultThetaVHeat = 35;
+		//private static double defaultThetaRHeat = 30;
+		//private static double defaultThetaVCool = 17;
+		//private static double defaultThetaRCool = 20;
 		private static bool agActivated = true;
 
 		protected float plannedArea = 0;
@@ -206,7 +206,7 @@ namespace Europlan.Common {
 			set { EurovalProduct.v = value; }
 		}
 
-		[ProductParameter]
+		/*[ProductParameter]
 		public static double ConfigDefaultThetaVHeat {
 			get { return EurovalProduct.defaultThetaVHeat; }
 			set { EurovalProduct.defaultThetaVHeat = value; }
@@ -228,7 +228,7 @@ namespace Europlan.Common {
 		public static double ConfigDefaultThetaRCool {
 			get { return EurovalProduct.defaultThetaRCool; }
 			set { EurovalProduct.defaultThetaRCool = value; }
-		}
+		}*/
 
 		[ProductParameter(overrideableInPlanning=true)]
 		public static bool ConfigAgActivated {
@@ -826,12 +826,15 @@ namespace Europlan.Common {
 			double aAz = aFbh - aRz;                                                      // Fläche der Aufenthaltszone berechnen
 			double lRlAz = aAz * GetPipeLengthPerSqm(distance);                           // Rohlänge der Aufenthaltszone berechnen
 			double lRlGes = lRlRz + lRlAz;
+			double originalPipeLength = this.plannedPipeLength;
+			this.plannedPipeLength = lRlGes;
 
 			{ // Heizlastberechnung
-				double thetaVrz = defaultThetaVHeat;
-				double thetaRrz = defaultThetaVHeat;
-				double thetaVaz = defaultThetaVHeat;
-				double thetaRaz = defaultThetaRHeat;
+				double thetaVrz = 35;
+				double thetaRaz = 30;
+				this.GetHeatFlow(out thetaVrz, out thetaRaz);
+				double thetaRrz = thetaVrz;
+				double thetaVaz = thetaVrz;
 
 				double dThetaRz = 0;
 
@@ -883,10 +886,11 @@ namespace Europlan.Common {
 			}
 
 			{ // Kühllastberechnung
-				double thetaVrz = defaultThetaVCool;
-				double thetaRrz = defaultThetaVCool;
-				double thetaVaz = defaultThetaVCool;
-				double thetaRaz = defaultThetaRCool;
+				double thetaVrz = 17;
+				double thetaRaz = 20;
+				this.GetCoolFlow(out thetaVrz, out thetaRaz);
+				double thetaRrz = thetaVrz;
+				double thetaVaz = thetaVrz;
 
 				double dThetaRz = 0;
 
@@ -937,6 +941,7 @@ namespace Europlan.Common {
 				//                                                                           // gesamten Druckverlust berechnen
 			}
 			pipeLength = lRlGes;                                                          // gesamte Rohrlänge
+			this.plannedPipeLength = originalPipeLength;
 		}
 
 		public override void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool) {

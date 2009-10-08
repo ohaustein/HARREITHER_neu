@@ -30,8 +30,8 @@ namespace Europlan.Common {
 		protected bool canCool = false;
 		private Room associatedRoom = null;
 		private SerializableDictionary<string, int> quickDimensioningConnectedDistributors = new SerializableDictionary<string,int>();
-		private Distributor plannedConnectedDistributor = null;
-		private string plannedConnectedDistributorId = null;
+		private ProductConnection plannedConnectionVorlauf = null;
+		private ProductConnection plannedConnectionRuecklauf = null;
 
 		protected string comment = null;
 
@@ -233,44 +233,90 @@ namespace Europlan.Common {
 			get;
 		}
 
-		public string PlannedConnectedDistributorId {
-			get {
-				if (this.PlannedConnectedDistributor == null) {
-					return null;
-				}
-				return this.plannedConnectedDistributor.Id;
-			}
-			set { this.plannedConnectedDistributorId = value; }
+		public ProductConnection PlannedConnectionVorlauf {
+			get { return this.plannedConnectionVorlauf; }
+			set { this.plannedConnectionVorlauf = value; }
 		}
 
-		[XmlIgnore]
-		public Distributor PlannedConnectedDistributor {
-			get {
-				if (this.plannedConnectedDistributorId != null) {
-					// find correct distributor first
-					this.plannedConnectedDistributor = Project.Instance.GetDistributor(this.plannedConnectedDistributorId);
-					this.plannedConnectedDistributorId = null;
+		public ProductConnection PlannedConnectionRuecklauf {
+			get { return this.plannedConnectionRuecklauf; }
+			set { this.plannedConnectionRuecklauf = value; }
+		}
+
+		public void GetHeatFlow(out double vorlauf, out double ruecklauf) {
+			List<Product> vorlaufProducts = new List<Product>();
+			List<Product> ruecklaufProducts = new List<Product>();
+			Distributor distributor = null;
+			Product curP = this;
+			bool allEuroval = this is EurovalProduct; // TODO Temporary check if all products are euroval until we know how to calculate heatflow for different products
+			double eurovalPipeLengthBefore = 0; // Temporary sum of euroval pipe length
+			double eurovalPipeLengthAfter = 0; // Temporary sum of euroval pipe length
+			bool connected = true;
+			while (connected && curP != null) {
+				if (curP.PlannedConnectionVorlauf == null) {
+					connected = false;
+					continue;
 				}
-				return this.plannedConnectedDistributor;
+				switch (curP.PlannedConnectionVorlauf.ConnectionType) {
+					case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+						distributor = curP.PlannedConnectionVorlauf.Distributor;
+						curP = null;
+						break;
+					case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+						curP = curP.PlannedConnectionVorlauf.OtherProduct.Product;
+						vorlaufProducts.Insert(0, curP);
+						allEuroval = allEuroval & curP is EurovalProduct; // Temporary check if all products are euroval until we know how to calculate heatflow for different products
+						eurovalPipeLengthBefore += curP is EurovalProduct ? (curP as EurovalProduct).PlannedPipeLength : 0; // Temporary sum of euroval pipe length
+						break;
+					default:
+						connected = false;
+						break;
+				}
 			}
-			set {
-				if (this.plannedConnectedDistributor != null && this.plannedConnectedDistributor.PlannedConnectedProducts.Contains(this)) {
-					this.plannedConnectedDistributor.PlannedConnectedProducts.Remove(this);
-				}
-				this.plannedConnectedDistributor = value;
-				this.plannedConnectedDistributorId = null;
-				if (this.plannedConnectedDistributor != null && !this.plannedConnectedDistributor.PlannedConnectedProducts.Contains(this)) {
-					this.plannedConnectedDistributor.PlannedConnectedProducts.Add(this);
+			if (distributor == null) {
+				connected = false;
+			}
+			curP = this;
+			while (connected && curP != null) {
+				switch (curP.PlannedConnectionRuecklauf.ConnectionType) {
+					case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+						if (!distributor.Equals(curP.PlannedConnectionRuecklauf.Distributor)) {
+							connected = false;
+						}
+						distributor = curP.PlannedConnectionRuecklauf.Distributor;
+						curP = null;
+						break;
+					case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+						curP = curP.PlannedConnectionRuecklauf.OtherProduct.Product;
+						ruecklaufProducts.Insert(0, curP);
+						allEuroval = allEuroval & curP is EurovalProduct; // Temporary check if all products are euroval until we know how to calculate heatflow for different products
+						eurovalPipeLengthAfter += curP is EurovalProduct ? (curP as EurovalProduct).PlannedPipeLength : 0; // Temporary sum of euroval pipe length
+						break;
+					default:
+						connected = false;
+						break;
 				}
 			}
+
+			double verteilerVorlauf = connected ? distributor.RegulatorCircuit.HeatFlowTemperature : 35;
+			double gesamtSpreizung = EN1264.Instance.DefaultSpreizung(verteilerVorlauf);
+			vorlauf = verteilerVorlauf;
+			ruecklauf = verteilerVorlauf - gesamtSpreizung;
+			if (connected && allEuroval) {
+				vorlauf = verteilerVorlauf - gesamtSpreizung * eurovalPipeLengthBefore / (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength + eurovalPipeLengthAfter);
+				ruecklauf = verteilerVorlauf - gesamtSpreizung * (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength) / (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength + eurovalPipeLengthAfter);
+			}
+		}
+
+		public void GetCoolFlow(out double vorlauf, out double ruecklauf) {
+			vorlauf = 17;
+			ruecklauf = 20; // TODO
 		}
 
 		public abstract void ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool);
 
 		internal virtual void FinalizeLoading() {
-			if (this.plannedConnectedDistributorId != null) {
-				this.PlannedConnectedDistributor = Project.Instance.GetDistributor(this.plannedConnectedDistributorId);
-			}
+			// nothing todo
 		}
 	}
 }
