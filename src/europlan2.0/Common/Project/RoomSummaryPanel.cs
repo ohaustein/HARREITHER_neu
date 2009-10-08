@@ -64,19 +64,19 @@ namespace Europlan.Common {
 				}
 			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
-				this.txtTemperature.Text = room.RoomTemperature.ToString();
+				this.txtTemperature.Text = room.RoomHeatTemperature.ToString();
 			}
 		}
 
 		private void txtTemperature_TextChanged(object sender, EventArgs e) {
 			try {
-				this.room.RoomTemperature = (int)this.txtTemperature.Value;
+				this.room.RoomHeatTemperature = (int)this.txtTemperature.Value;
 				if (ProjectChanged != null) {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show("Fehler im Format der Eingabe");
-				this.txtTemperature.Text = room.RoomTemperature.ToString();
+				this.txtTemperature.Text = room.RoomHeatTemperature.ToString();
 			}
 		}
 
