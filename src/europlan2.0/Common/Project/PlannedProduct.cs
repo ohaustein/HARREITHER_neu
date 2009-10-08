@@ -332,6 +332,8 @@ namespace Europlan.Common {
 		public void ConfigureProductDefault() {
 			this.requestedCoolLoad = this.NecessaryCoolLoad;
 			this.requestedHeatLoad = this.NecessaryHeatLoad;
+			this.calculateHeat = this.requestedHeatLoad > 0;
+			this.calculateCool = this.requestedCoolLoad > 0;
 			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool);
 		}
 
