@@ -306,7 +306,7 @@ namespace Europlan.Common {
 			this.lblEuroval.Name = "lblEuroval";
 			this.lblEuroval.Size = new System.Drawing.Size(165, 17);
 			this.lblEuroval.TabIndex = 1;
-			this.lblEuroval.Text = "Euroval®";
+			this.lblEuroval.Text = "Euroval® Fußbodenheizung";
 			this.lblEuroval.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// cbEurovalHeat
@@ -443,7 +443,7 @@ namespace Europlan.Common {
 			this.lblHitherm.Name = "lblHitherm";
 			this.lblHitherm.Size = new System.Drawing.Size(165, 17);
 			this.lblHitherm.TabIndex = 6;
-			this.lblHitherm.Text = "Hitherm®";
+			this.lblHitherm.Text = "Hitherm® Klimawand";
 			this.lblHitherm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// lblBka
