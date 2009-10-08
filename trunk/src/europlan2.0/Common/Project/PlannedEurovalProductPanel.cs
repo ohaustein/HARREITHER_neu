@@ -443,8 +443,8 @@ namespace Europlan.Common {
 				this.lblMhCool.Text = "";
 				this.lblDeltaPHeat.Text = Math.Round(evProduct.PlannedDeltaRhoHeat, 1).ToString();
 				this.lblDeltaPCool.Text = Math.Round(evProduct.PlannedDeltaRhoCool, 1).ToString(); ;
-				this.lblSpreizungHeat.Text = "5";
-				this.lblSpreizungCool.Text = "0";
+				this.lblSpreizungHeat.Text = Math.Round(evProduct.PlannedSpreizungHeat, 1).ToString();
+				this.lblSpreizungCool.Text = Math.Round(evProduct.PlannedSpreizungCool, 1).ToString();
 
 				if (evProduct.PlannedConnectionVorlauf == null) {
 					this.txtDistributor.Text = "";
