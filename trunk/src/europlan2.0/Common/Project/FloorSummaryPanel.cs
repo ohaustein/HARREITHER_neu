@@ -211,8 +211,10 @@ namespace Europlan.Common {
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Center;
 			
-			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X, r1.Y + 2, r1.Width, r1.Height - 7));
-			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X, r1.Y + 2, r1.Width, r1.Height - 7));
+			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
+			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
+			//e.Graphics.DrawLine(new Pen(SystemColors.ControlDark), new Point(r1.X, r1.Y + 2), new Point(r1.X + r1.Width, r1.Y + 2));
+			//e.Graphics.DrawLine(new Pen(SystemColors.ControlDark), new Point(r1.X, r1.Y + r1.Height - 7), new Point(r1.X + r1.Width, r1.Y + r1.Height - 7));
 			e.Graphics.DrawString("Heizbetrieb",
 				this.gridRooms.ColumnHeadersDefaultCellStyle.Font,
 				new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.ForeColor),
@@ -234,8 +236,8 @@ namespace Europlan.Common {
 			format = new StringFormat();
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Center;
-			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X, r1.Y + 2, r1.Width, r1.Height - 7));
-			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X, r1.Y + 2, r1.Width, r1.Height - 7));
+			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
+			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
 			e.Graphics.DrawString("Kühlbetrieb",
 				this.gridRooms.ColumnHeadersDefaultCellStyle.Font,
 				new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.ForeColor),
