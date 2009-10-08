@@ -210,14 +210,17 @@ namespace Europlan.Common {
 			StringFormat format = new StringFormat();
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Center;
+			
+			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X, r1.Y + 2, r1.Width, r1.Height - 7));
+			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X, r1.Y + 2, r1.Width, r1.Height - 7));
 			e.Graphics.DrawString("Heizbetrieb",
 				this.gridRooms.ColumnHeadersDefaultCellStyle.Font,
 				new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.ForeColor),
 				r1,
 				format);
-			e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y + r1.Height - 5), new Point(r1.X + r1.Width, r1.Y + r1.Height - 5));
-			e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y), new Point(r1.X, r1.Y + (r1.Height * 2)));
-			e.Graphics.DrawLine(Pens.Black, new Point(r1.X + r1.Width, r1.Y), new Point(r1.X + r1.Width, r1.Y + (r1.Height * 2)));
+			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y + r1.Height - 5), new Point(r1.X + r1.Width, r1.Y + r1.Height - 5));
+			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y), new Point(r1.X, r1.Y + (r1.Height * 2)));
+			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X + r1.Width, r1.Y), new Point(r1.X + r1.Width, r1.Y + (r1.Height * 2)));
 
 			r1 = this.gridRooms.GetCellDisplayRectangle(7, -1, true); //get the column header cell
 			r2 = this.gridRooms.GetCellDisplayRectangle(8, -1, true); //get the column header cell
@@ -231,14 +234,16 @@ namespace Europlan.Common {
 			format = new StringFormat();
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Center;
+			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X, r1.Y + 2, r1.Width, r1.Height - 7));
+			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X, r1.Y + 2, r1.Width, r1.Height - 7));
 			e.Graphics.DrawString("Kühlbetrieb",
 				this.gridRooms.ColumnHeadersDefaultCellStyle.Font,
 				new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.ForeColor),
 				r1,
 				format);
-			e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y + r1.Height - 5), new Point(r1.X + r1.Width, r1.Y + r1.Height - 5));
-			e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y), new Point(r1.X, r1.Y + (r1.Height * 2)));
-			e.Graphics.DrawLine(Pens.Black, new Point(r1.X + r1.Width, r1.Y), new Point(r1.X + r1.Width, r1.Y + (r1.Height * 2)));
+			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y + r1.Height - 5), new Point(r1.X + r1.Width, r1.Y + r1.Height - 5));
+			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y), new Point(r1.X, r1.Y + (r1.Height * 2)));
+			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X + r1.Width, r1.Y), new Point(r1.X + r1.Width, r1.Y + (r1.Height * 2)));
 
 		}
 
