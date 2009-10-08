@@ -9,7 +9,7 @@ namespace Europlan.Common {
 	[ProductName("Euroval®")]
 	public class EurovalProduct : Product {
 
-		private static double su0 = 0.035; /* Mindestüberdeckung fix??? */
+		private static double su0 = 0.045; /* Mindestüberdeckung fix??? */
 		private static double alpha0 = 10.8; /* Fixwert für FBH fix??? */
 		private static double alphaFbk = 6.5; //6.5; /* für FBK fix??? */
 		private static double alphaFbh = 10.8; /* für FBH fix??? */
@@ -811,7 +811,7 @@ namespace Europlan.Common {
 
 			EN1264 en1264 = EN1264.Instance;
 
-			double su = 0.045; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+			double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
 			double lambdaU = 1.2; /* Estrich??? */
 			double rLambdaB = this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue;  //0.1; /* Annahme Parkett mit 0.1 m²K/W; durch echte Konstruktion ersetzen! */
 			double rLambdaIns = this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue;
