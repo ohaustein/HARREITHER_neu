@@ -29,21 +29,21 @@ namespace Europlan.Common {
 			this.chkSpreizung = new System.Windows.Forms.CheckBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.numNormOutsideTemperature = new Europlan.Common.NumericBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.chkCool = new System.Windows.Forms.CheckBox();
-			this.label6 = new System.Windows.Forms.Label();
-			this.label7 = new System.Windows.Forms.Label();
-			this.label8 = new System.Windows.Forms.Label();
-			this.label10 = new System.Windows.Forms.Label();
-			this.label11 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
 			this.numDewPoint = new System.Windows.Forms.TextBox();
+			this.label10 = new System.Windows.Forms.Label();
+			this.label11 = new System.Windows.Forms.Label();
 			this.numInsideTemperature = new Europlan.Common.NumericBox();
+			this.label8 = new System.Windows.Forms.Label();
 			this.numHumidity = new Europlan.Common.NumericBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
 			this.numOutsideTemperature = new Europlan.Common.NumericBox();
-			this.numNormOutsideTemperature = new Europlan.Common.NumericBox();
+			this.chkCool = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -105,12 +105,35 @@ namespace Europlan.Common {
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Controls.Add(this.chkSpreizung);
 			this.groupBox1.Controls.Add(this.numNormOutsideTemperature);
-			this.groupBox1.Location = new System.Drawing.Point(3, 54);
+			this.groupBox1.Location = new System.Drawing.Point(3, 39);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(713, 71);
 			this.groupBox1.TabIndex = 28;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Generell";
+			// 
+			// numNormOutsideTemperature
+			// 
+			this.numNormOutsideTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numNormOutsideTemperature.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numNormOutsideTemperature.Location = new System.Drawing.Point(145, 18);
+			this.numNormOutsideTemperature.MaxValue = null;
+			this.numNormOutsideTemperature.MinValue = null;
+			this.numNormOutsideTemperature.Name = "numNormOutsideTemperature";
+			this.numNormOutsideTemperature.Size = new System.Drawing.Size(53, 20);
+			this.numNormOutsideTemperature.TabIndex = 25;
+			this.numNormOutsideTemperature.Text = "0";
+			this.numNormOutsideTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numNormOutsideTemperature.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numNormOutsideTemperature.ValueChanged += new System.EventHandler(this.numNormOutsideTemperature_ValueChanged);
 			// 
 			// groupBox2
 			// 
@@ -129,68 +152,21 @@ namespace Europlan.Common {
 			this.groupBox2.Controls.Add(this.label7);
 			this.groupBox2.Controls.Add(this.numOutsideTemperature);
 			this.groupBox2.Controls.Add(this.chkCool);
-			this.groupBox2.Location = new System.Drawing.Point(3, 131);
+			this.groupBox2.Location = new System.Drawing.Point(3, 116);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(713, 141);
 			this.groupBox2.TabIndex = 29;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Kühlung";
 			// 
-			// chkCool
+			// label5
 			// 
-			this.chkCool.AutoSize = true;
-			this.chkCool.Location = new System.Drawing.Point(178, 20);
-			this.chkCool.Name = "chkCool";
-			this.chkCool.Size = new System.Drawing.Size(137, 17);
-			this.chkCool.TabIndex = 26;
-			this.chkCool.Text = "Kühlleistung berechnen";
-			this.chkCool.UseVisualStyleBackColor = true;
-			this.chkCool.CheckedChanged += new System.EventHandler(this.chkCool_CheckedChanged);
-			// 
-			// label6
-			// 
-			this.label6.Location = new System.Drawing.Point(6, 39);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(166, 23);
-			this.label6.TabIndex = 28;
-			this.label6.Text = "Außentemperatur für Kühlung:";
-			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// label7
-			// 
-			this.label7.Location = new System.Drawing.Point(236, 39);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(46, 23);
-			this.label7.TabIndex = 30;
-			this.label7.Text = "°C";
-			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// label8
-			// 
-			this.label8.Location = new System.Drawing.Point(6, 62);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(133, 23);
-			this.label8.TabIndex = 31;
-			this.label8.Text = "Relative Luftfeuchtigkeit:";
-			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// label10
-			// 
-			this.label10.Location = new System.Drawing.Point(6, 85);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(158, 23);
-			this.label10.TabIndex = 34;
-			this.label10.Text = "Innentemperatur für Kühlung:";
-			this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// label11
-			// 
-			this.label11.Location = new System.Drawing.Point(236, 85);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(46, 23);
-			this.label11.TabIndex = 36;
-			this.label11.Text = "°C";
-			this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.label5.Location = new System.Drawing.Point(236, 62);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(46, 23);
+			this.label5.TabIndex = 40;
+			this.label5.Text = " %";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// label12
 			// 
@@ -210,15 +186,6 @@ namespace Europlan.Common {
 			this.label13.Text = "°C";
 			this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// label5
-			// 
-			this.label5.Location = new System.Drawing.Point(236, 62);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(46, 23);
-			this.label5.TabIndex = 40;
-			this.label5.Text = " %";
-			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
 			// numDewPoint
 			// 
 			this.numDewPoint.Enabled = false;
@@ -228,6 +195,24 @@ namespace Europlan.Common {
 			this.numDewPoint.TabIndex = 38;
 			this.numDewPoint.Text = "0";
 			this.numDewPoint.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			// 
+			// label10
+			// 
+			this.label10.Location = new System.Drawing.Point(6, 85);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(158, 23);
+			this.label10.TabIndex = 34;
+			this.label10.Text = "Innentemperatur für Kühlung:";
+			this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label11
+			// 
+			this.label11.Location = new System.Drawing.Point(236, 85);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(46, 23);
+			this.label11.TabIndex = 36;
+			this.label11.Text = "°C";
+			this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// numInsideTemperature
 			// 
@@ -252,6 +237,15 @@ namespace Europlan.Common {
             0});
 			this.numInsideTemperature.ValueChanged += new System.EventHandler(this.numInsideTemperature_ValueChanged);
 			// 
+			// label8
+			// 
+			this.label8.Location = new System.Drawing.Point(6, 62);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(133, 23);
+			this.label8.TabIndex = 31;
+			this.label8.Text = "Relative Luftfeuchtigkeit:";
+			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// numHumidity
 			// 
 			this.numHumidity.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
@@ -274,6 +268,24 @@ namespace Europlan.Common {
             0,
             0});
 			this.numHumidity.ValueChanged += new System.EventHandler(this.numHumidity_ValueChanged);
+			// 
+			// label6
+			// 
+			this.label6.Location = new System.Drawing.Point(6, 39);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(166, 23);
+			this.label6.TabIndex = 28;
+			this.label6.Text = "Außentemperatur für Kühlung:";
+			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label7
+			// 
+			this.label7.Location = new System.Drawing.Point(236, 39);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(46, 23);
+			this.label7.TabIndex = 30;
+			this.label7.Text = "°C";
+			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// numOutsideTemperature
 			// 
@@ -298,28 +310,16 @@ namespace Europlan.Common {
             0});
 			this.numOutsideTemperature.ValueChanged += new System.EventHandler(this.numOutsideTemperature_ValueChanged);
 			// 
-			// numNormOutsideTemperature
+			// chkCool
 			// 
-			this.numNormOutsideTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numNormOutsideTemperature.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numNormOutsideTemperature.Location = new System.Drawing.Point(145, 18);
-			this.numNormOutsideTemperature.MaxValue = null;
-			this.numNormOutsideTemperature.MinValue = null;
-			this.numNormOutsideTemperature.Name = "numNormOutsideTemperature";
-			this.numNormOutsideTemperature.Size = new System.Drawing.Size(53, 20);
-			this.numNormOutsideTemperature.TabIndex = 25;
-			this.numNormOutsideTemperature.Text = "0";
-			this.numNormOutsideTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numNormOutsideTemperature.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numNormOutsideTemperature.ValueChanged += new System.EventHandler(this.numNormOutsideTemperature_ValueChanged);
+			this.chkCool.AutoSize = true;
+			this.chkCool.Location = new System.Drawing.Point(178, 20);
+			this.chkCool.Name = "chkCool";
+			this.chkCool.Size = new System.Drawing.Size(137, 17);
+			this.chkCool.TabIndex = 26;
+			this.chkCool.Text = "Kühlleistung berechnen";
+			this.chkCool.UseVisualStyleBackColor = true;
+			this.chkCool.CheckedChanged += new System.EventHandler(this.chkCool_CheckedChanged);
 			// 
 			// FacilityDetailsSummaryPanel
 			// 
