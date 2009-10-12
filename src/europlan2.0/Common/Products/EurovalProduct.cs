@@ -896,7 +896,7 @@ namespace Europlan.Common {
 				// hydraulische Berechnung
 				double qH2o = (qHeat + qHeatU) * aGes;                                        // gesamte aufgenommene Leistung berechnen
 				double deltaT = thetaVrz - thetaRaz;                                          // gesamte Spreizung
-				deltaRhoHeat = en1264.Druckverlust(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, lRlGes);
+				deltaRhoHeat = en1264.DruckverlustRohr(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, lRlGes);
 				//                                                                           // gesamten Druckverlust berechnen
 			}
 
@@ -953,7 +953,7 @@ namespace Europlan.Common {
 				// hydraulische Berechnung
 				double qH2o = (qCool + qCoolU) * aGes;                                        // gesamte aufgenommene Leistung berechnen
 				double deltaT = thetaVrz - thetaRaz;                                          // gesamte Spreizung
-				deltaRhoCool = en1264.Druckverlust(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, lRlGes);
+				deltaRhoCool = en1264.DruckverlustRohr(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, lRlGes);
 				//                                                                           // gesamten Druckverlust berechnen
 			}
 			pipeLength = lRlGes;                                                          // gesamte Rohrlänge
