@@ -28,14 +28,15 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridRegulatoryCircuits = new System.Windows.Forms.DataGridView();
-			this.regulatoryCircuitsSource = new System.Windows.Forms.BindingSource(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.heatFlowTemperatureDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.coolFlowTemperatureDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+			this.regulatoryCircuitsSource = new System.Windows.Forms.BindingSource(this.components);
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.label1 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).BeginInit();
 			this.SuspendLayout();
@@ -63,37 +64,13 @@ namespace Europlan.Common {
             this.coolFlowTemperatureDataGridViewTextBoxColumn});
 			this.gridRegulatoryCircuits.DataMember = "RegulatorCircuits";
 			this.gridRegulatoryCircuits.DataSource = this.regulatoryCircuitsSource;
-			this.gridRegulatoryCircuits.Location = new System.Drawing.Point(3, 3);
+			this.gridRegulatoryCircuits.Location = new System.Drawing.Point(3, 27);
 			this.gridRegulatoryCircuits.MultiSelect = false;
 			this.gridRegulatoryCircuits.Name = "gridRegulatoryCircuits";
-			this.gridRegulatoryCircuits.Size = new System.Drawing.Size(507, 255);
+			this.gridRegulatoryCircuits.Size = new System.Drawing.Size(507, 231);
 			this.gridRegulatoryCircuits.TabIndex = 0;
 			this.gridRegulatoryCircuits.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.regulatoryCircuitsGrid_CellValueChanged);
 			this.gridRegulatoryCircuits.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.regulatoryCircuitsGrid_UserDeletedRow);
-			// 
-			// regulatoryCircuitsSource
-			// 
-			this.regulatoryCircuitsSource.DataSource = typeof(Europlan.Common.Project);
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Nr.";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-			this.dataGridViewTextBoxColumn2.HeaderText = "Beschreibung";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.DataPropertyName = "FlowTemperature";
-			this.dataGridViewTextBoxColumn3.HeaderText = "TvHeiz °C";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.Width = 80;
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -140,16 +117,52 @@ namespace Europlan.Common {
 			this.coolFlowTemperatureDataGridViewTextBoxColumn.Visible = false;
 			this.coolFlowTemperatureDataGridViewTextBoxColumn.Width = 50;
 			// 
+			// regulatoryCircuitsSource
+			// 
+			this.regulatoryCircuitsSource.DataSource = typeof(Europlan.Common.Project);
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+			this.dataGridViewTextBoxColumn1.HeaderText = "Nr.";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+			this.dataGridViewTextBoxColumn2.HeaderText = "Beschreibung";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.DataPropertyName = "FlowTemperature";
+			this.dataGridViewTextBoxColumn3.HeaderText = "TvHeiz °C";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.Width = 80;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.Location = new System.Drawing.Point(3, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(121, 24);
+			this.label1.TabIndex = 3;
+			this.label1.Text = "Regelkreise";
+			// 
 			// RegulatorCircuitsSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.label1);
 			this.Controls.Add(this.gridRegulatoryCircuits);
 			this.Name = "RegulatorCircuitsSummaryPanel";
 			this.Size = new System.Drawing.Size(513, 261);
 			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -164,5 +177,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private NumericColumn heatFlowTemperatureDataGridViewTextBoxColumn;
 		private NumericColumn coolFlowTemperatureDataGridViewTextBoxColumn;
+		private System.Windows.Forms.Label label1;
 	}
 }
