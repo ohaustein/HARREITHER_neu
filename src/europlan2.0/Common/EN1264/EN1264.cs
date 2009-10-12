@@ -245,12 +245,24 @@ namespace Europlan.Common {
 			}
 		}
 
-		public double Druckverlust(double leistung, double c, double spreizung, double rohrInnenQuerschnitt, double dichte, double rohrInnenDurchmesser, double viskositaet, double k, double rohrLaenge) {
+		public double DruckverlustRohr(double leistung, double c, double spreizung, double rohrInnenQuerschnitt, double dichte, double rohrInnenDurchmesser, double viskositaet, double k, double rohrLaenge) {
 			double durchfluss = Durchfluss(leistung, c, spreizung);
 			double flussGeschwindigkeit = FlussGeschwindigkeit(durchfluss, rohrInnenQuerschnitt, dichte);
 			double reynoldsZahl = ReynoldsZahl(flussGeschwindigkeit, rohrInnenDurchmesser, viskositaet);
 			double lambda = WiderstandsBeiwert(reynoldsZahl, k, rohrInnenDurchmesser);
 			return (lambda * (rohrLaenge / rohrInnenDurchmesser) * dichte * (Math.Pow(flussGeschwindigkeit, 2) / 2)) / 100;
+		}
+
+		public double DruckverlustModul(int anzahl, double durchfluss) {
+			double[] x = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500 };
+			double[] y = { 0.2, 0.4, 0.7, 0.9, 1.3, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25 };
+			double[] c = null;
+			spline3.buildcubicspline(x, y, 30, 0, 0, 0, 0, ref c);
+			if (anzahl > 0 && anzahl <= 20) {
+				return spline3.splineinterpolation(ref c, durchfluss) * anzahl;
+			} else {
+				return 0;
+			}
 		}
 
 		public double DefaultSpreizung(double vorlaufTemperatur) {

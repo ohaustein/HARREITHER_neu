@@ -221,9 +221,17 @@ namespace Europlan.UnitTest {
 		}
 
 		[Test]
-		public void TestDruckverlust() {
-			double result = norm.Druckverlust(854.0, EN1264.c, 5, 0.000183783, EN1264.dichte, 0.0153, EN1264.viskositaet, EN1264.k, 80.0);
+		public void TestDruckverlustRohr() {
+			double result = norm.DruckverlustRohr(854.0, EN1264.c, 5, 0.000183783, EN1264.dichte, 0.0153, EN1264.viskositaet, EN1264.k, 80.0);
 			Assert.AreEqual(54.37, Math.Round(result, 2));
+		}
+
+		[Test]
+		public void TestDruckverlustModul() {
+			double result = norm.DruckverlustModul(1, 100);
+			Assert.AreEqual(3, Math.Round(result, 2));
+			result = norm.DruckverlustModul(15, 100);
+			Assert.AreEqual(45, Math.Round(result, 2));
 		}
 
 		[Test]
