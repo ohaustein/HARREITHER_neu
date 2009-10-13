@@ -34,7 +34,7 @@ namespace Europlan.Common {
 		private SerializableDictionary<string, SerializableDictionary<string, string>> productConfiguration = new SerializableDictionary<string, SerializableDictionary<string,string>>();
 
 
-		// if you add a product don't forget to call the Initialize() function in InitializeConfiguration()
+		// if you add a product don't forget to call the Initialize() function in setter of ProductConfiguration
 		private EurovalProduct eurovalProduct = new EurovalProduct();
 		private ConcreteActivationProduct concreteActivationProduct = new ConcreteActivationProduct();
 		private HithermProduct hithermProduct = new HithermProduct();
@@ -66,14 +66,6 @@ namespace Europlan.Common {
 			this.roomTypes = new List<RoomType>();
 
 			this.partnerLogo = "";
-
-			eurovalProduct.Initialize();
-			concreteActivationProduct.Initialize();
-			hithermProduct.Initialize();
-			hithermCompactProduct.Initialize();
-			hithermCompactRoofProduct.Initialize();
-			modulKlimaBodenProduct.Initialize();
-			modulKlimaDeckeProduct.Initialize();
 
 			StreamReader sr = null;
 			try {
@@ -114,53 +106,6 @@ namespace Europlan.Common {
 			} finally {
 				if (sr != null) {
 					sr.Close();
-				}
-			}
-
-			Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-			SerializableDictionary<string, string> current;
-			foreach (Type t in types) {
-				if (typeof(Product).IsAssignableFrom(t)) {
-					if (this.productConfiguration.ContainsKey(t.FullName)) {
-						current = this.productConfiguration[t.FullName];
-						foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty)) {
-							if (current.ContainsKey(info.Name)) {
-								if (info.PropertyType == typeof(int)) {
-									int value = 0;
-									if (int.TryParse(current[info.Name], out value)) {
-										info.SetValue(null, value, null);
-									} else {
-										log.Warn("Error when trying to set Product Configuration");
-									}
-								} else if (info.PropertyType == typeof(double)) {
-									double value = 0;
-									if (double.TryParse(current[info.Name], out value)) {
-										info.SetValue(null, value, null);
-									} else {
-										log.Warn("Error when trying to set Product Configuration");
-									}
-								} else if (info.PropertyType == typeof(float)) {
-									float value = 0;
-									if (float.TryParse(current[info.Name], out value)) {
-										info.SetValue(null, value, null);
-									} else {
-										log.Warn("Error when trying to set Product Configuration");
-									}
-								} else if (info.PropertyType == typeof(string)) {
-									info.SetValue(null, current[info.Name], null);
-								} else if (info.PropertyType == typeof(bool)) {
-									bool value = false;
-									if (bool.TryParse(current[info.Name], out value)) {
-										info.SetValue(null, value, null);
-									} else {
-										log.Warn("Error when trying to set Product Configuration");
-									}
-								} else {
-									log.Warn("Error when trying to set Product Configuration");
-								}
-							}
-						}
-					}
 				}
 			}
 		}
@@ -678,7 +623,62 @@ namespace Europlan.Common {
 
 		public SerializableDictionary<string, SerializableDictionary<string, string>> ProductConfiguration {
 			get { return this.productConfiguration; }
-			set { this.productConfiguration = value; }
+			set { 
+				this.productConfiguration = value;
+				eurovalProduct.Initialize();
+				concreteActivationProduct.Initialize();
+				hithermProduct.Initialize();
+				hithermCompactProduct.Initialize();
+				hithermCompactRoofProduct.Initialize();
+				modulKlimaBodenProduct.Initialize();
+				modulKlimaDeckeProduct.Initialize();
+				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+				SerializableDictionary<string, string> current;
+				foreach (Type t in types) {
+					if (typeof(Product).IsAssignableFrom(t)) {
+						if (this.productConfiguration.ContainsKey(t.FullName)) {
+							current = this.productConfiguration[t.FullName];
+							foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty)) {
+								if (current.ContainsKey(info.Name)) {
+									if (info.PropertyType == typeof(int)) {
+										int val = 0;
+										if (int.TryParse(current[info.Name], out val)) {
+											info.SetValue(null, val, null);
+										} else {
+											log.Warn("Error when trying to set Product Configuration");
+										}
+									} else if (info.PropertyType == typeof(double)) {
+										double val = 0;
+										if (double.TryParse(current[info.Name], out val)) {
+											info.SetValue(null, val, null);
+										} else {
+											log.Warn("Error when trying to set Product Configuration");
+										}
+									} else if (info.PropertyType == typeof(float)) {
+										float val = 0;
+										if (float.TryParse(current[info.Name], out val)) {
+											info.SetValue(null, val, null);
+										} else {
+											log.Warn("Error when trying to set Product Configuration");
+										}
+									} else if (info.PropertyType == typeof(string)) {
+										info.SetValue(null, current[info.Name], null);
+									} else if (info.PropertyType == typeof(bool)) {
+										bool val = false;
+										if (bool.TryParse(current[info.Name], out val)) {
+											info.SetValue(null, val, null);
+										} else {
+											log.Warn("Error when trying to set Product Configuration");
+										}
+									} else {
+										log.Warn("Error when trying to set Product Configuration");
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
 		public string GetProductParameter<T>(string parameterName) where T: Product {
