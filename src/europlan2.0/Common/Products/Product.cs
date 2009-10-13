@@ -60,6 +60,7 @@ namespace Europlan.Common {
 		}
 
 		public abstract void Initialize();
+		public abstract void StaticInitialize();
 		public abstract Product Clone(Room room);
 		public abstract int GetDefaultQuickDimensioningCircuits();
 		public abstract float GetDefaultQuickDimensioningPlannedArea();

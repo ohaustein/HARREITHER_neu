@@ -23,6 +23,10 @@ namespace Europlan.Common {
 			canCool = false;
 		}
 
+		public override void StaticInitialize() {
+
+		}
+
 		public override Product Clone(Room room) {
 			HithermProduct product = new HithermProduct(this);
 			product.AssociatedRoom = room;

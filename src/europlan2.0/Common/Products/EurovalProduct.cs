@@ -108,7 +108,9 @@ namespace Europlan.Common {
 			quickDimensioningCoolPowerPerSquareMeter = 50;
 			canHeat = true;
 			canCool = false;
+		}
 
+		public override void StaticInitialize() {
 			useHarreitherNorm = true;
 			maxCircuitLength = 100.0;
 			maxPressureLost = 15000;
