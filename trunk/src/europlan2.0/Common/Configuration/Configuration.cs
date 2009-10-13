@@ -31,7 +31,7 @@ namespace Europlan.Common {
 		private Dictionary<string, float> discounts;
 		private List<RoomType> roomTypes;
 
-		private SerializableDictionary<Type, SerializableDictionary<string, string>> productConfiguration = new SerializableDictionary<Type,SerializableDictionary<string,string>>();
+		private SerializableDictionary<string, SerializableDictionary<string, string>> productConfiguration = new SerializableDictionary<string, SerializableDictionary<string,string>>();
 
 
 		// if you add a product don't forget to call the Initialize() function in InitializeConfiguration()
@@ -121,8 +121,8 @@ namespace Europlan.Common {
 			SerializableDictionary<string, string> current;
 			foreach (Type t in types) {
 				if (typeof(Product).IsAssignableFrom(t)) {
-					if (this.productConfiguration.ContainsKey(t)) {
-						current = this.productConfiguration[t];
+					if (this.productConfiguration.ContainsKey(t.FullName)) {
+						current = this.productConfiguration[t.FullName];
 						foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty)) {
 							if (current.ContainsKey(info.Name)) {
 								if (info.PropertyType == typeof(int)) {
@@ -269,24 +269,24 @@ namespace Europlan.Common {
 				}
 			}
 
-			foreach (Type t in config1.productConfiguration.Keys) {
-				if (!config.productConfiguration.ContainsKey(t)) {
-					config.productConfiguration[t] = new SerializableDictionary<string, string>();
+			foreach (String typeName in config1.productConfiguration.Keys) {
+				if (!config.productConfiguration.ContainsKey(typeName)) {
+					config.productConfiguration[typeName] = new SerializableDictionary<string, string>();
 				}
-				foreach (string parameterName in config1.productConfiguration[t].Keys) {
-					if (!config.productConfiguration[t].ContainsKey(parameterName)) {
-						config.productConfiguration[t][parameterName] = config1.productConfiguration[t][parameterName];
+				foreach (string parameterName in config1.productConfiguration[typeName].Keys) {
+					if (!config.productConfiguration[typeName].ContainsKey(parameterName)) {
+						config.productConfiguration[typeName][parameterName] = config1.productConfiguration[typeName][parameterName];
 					}
 				}
 			}
 
-			foreach (Type t in config2.productConfiguration.Keys) {
-				if (!config.productConfiguration.ContainsKey(t)) {
-					config.productConfiguration[t] = new SerializableDictionary<string, string>();
+			foreach (String typeName in config2.productConfiguration.Keys) {
+				if (!config.productConfiguration.ContainsKey(typeName)) {
+					config.productConfiguration[typeName] = new SerializableDictionary<string, string>();
 				}
-				foreach (string parameterName in config2.productConfiguration[t].Keys) {
-					if (!config.productConfiguration[t].ContainsKey(parameterName)) {
-						config.productConfiguration[t][parameterName] = config2.productConfiguration[t][parameterName];
+				foreach (string parameterName in config2.productConfiguration[typeName].Keys) {
+					if (!config.productConfiguration[typeName].ContainsKey(parameterName)) {
+						config.productConfiguration[typeName][parameterName] = config2.productConfiguration[typeName][parameterName];
 					}
 				}
 			}
@@ -676,37 +676,37 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public SerializableDictionary<Type, SerializableDictionary<string, string>> ProductConfiguration {
+		public SerializableDictionary<string, SerializableDictionary<string, string>> ProductConfiguration {
 			get { return this.productConfiguration; }
 			set { this.productConfiguration = value; }
 		}
 
 		public string GetProductParameter<T>(string parameterName) where T: Product {
-			if (!this.productConfiguration.ContainsKey(typeof(T))) {
+			if (!this.productConfiguration.ContainsKey(typeof(T).FullName)) {
 				return null;
 			}
-			if (!this.productConfiguration[typeof(T)].ContainsKey(parameterName)) {
+			if (!this.productConfiguration[typeof(T).FullName].ContainsKey(parameterName)) {
 				return null;
 			}
-			return this.productConfiguration[typeof(T)][parameterName];
+			return this.productConfiguration[typeof(T).FullName][parameterName];
 		}
 
 		public void AddProductParameter<T>(string parameterName, string value) where T : Product {
-			if (!this.productConfiguration.ContainsKey(typeof(T))) {
-				this.productConfiguration[typeof(T)] = new SerializableDictionary<string, string>();
+			if (!this.productConfiguration.ContainsKey(typeof(T).FullName)) {
+				this.productConfiguration[typeof(T).FullName] = new SerializableDictionary<string, string>();
 			}
-			this.productConfiguration[typeof(T)][parameterName] = value;
+			this.productConfiguration[typeof(T).FullName][parameterName] = value;
 		}
 
 		public void RemoveProductParameter<T>(string parameterName) where T : Product {
-			if (!this.productConfiguration.ContainsKey(typeof(T))) {
+			if (!this.productConfiguration.ContainsKey(typeof(T).FullName)) {
 				return;
 			}
-			if (this.productConfiguration[typeof(T)].ContainsKey(parameterName)) {
-				this.productConfiguration[typeof(T)].Remove(parameterName);
+			if (this.productConfiguration[typeof(T).FullName].ContainsKey(parameterName)) {
+				this.productConfiguration[typeof(T).FullName].Remove(parameterName);
 			}
-			if (this.productConfiguration[typeof(T)].Count == 0) {
-				this.productConfiguration.Remove(typeof(T));
+			if (this.productConfiguration[typeof(T).FullName].Count == 0) {
+				this.productConfiguration.Remove(typeof(T).FullName);
 			}
 		}
 	}
