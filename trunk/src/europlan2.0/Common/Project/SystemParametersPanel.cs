@@ -64,7 +64,7 @@ namespace Europlan.Common {
 		}
 
 		private void numCircuitLength_ValueChanged(object sender, EventArgs e) {
-			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxCircuitLength", numCircuitLength.Value.ToString());
+			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxCircuitLength", numCircuitLength.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}

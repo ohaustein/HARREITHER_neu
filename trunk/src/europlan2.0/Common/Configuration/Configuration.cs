@@ -625,13 +625,13 @@ namespace Europlan.Common {
 			get { return this.productConfiguration; }
 			set { 
 				this.productConfiguration = value;
-				eurovalProduct.Initialize();
-				concreteActivationProduct.Initialize();
-				hithermProduct.Initialize();
-				hithermCompactProduct.Initialize();
-				hithermCompactRoofProduct.Initialize();
-				modulKlimaBodenProduct.Initialize();
-				modulKlimaDeckeProduct.Initialize();
+				eurovalProduct.StaticInitialize();
+				concreteActivationProduct.StaticInitialize();
+				hithermProduct.StaticInitialize();
+				hithermCompactProduct.StaticInitialize();
+				hithermCompactRoofProduct.StaticInitialize();
+				modulKlimaBodenProduct.StaticInitialize();
+				modulKlimaDeckeProduct.StaticInitialize();
 				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
 				SerializableDictionary<string, string> current;
 				foreach (Type t in types) {
@@ -650,7 +650,7 @@ namespace Europlan.Common {
 									} else if (info.PropertyType == typeof(double)) {
 										double val = 0;
 										if (double.TryParse(current[info.Name], out val)) {
-											info.SetValue(null, val, null);
+											info.SetValue(null, val, BindingFlags.Static | BindingFlags.Public, null, null, null);
 										} else {
 											log.Warn("Error when trying to set Product Configuration");
 										}

@@ -37,6 +37,10 @@ namespace Europlan.Common {
 			canCool = true;
 		}
 
+		public override void StaticInitialize() {
+
+		}
+
 		public override Product Clone(Room room) {
 			ModulKlimaDeckeProduct product = new ModulKlimaDeckeProduct(this);
 			product.AssociatedRoom = room;
