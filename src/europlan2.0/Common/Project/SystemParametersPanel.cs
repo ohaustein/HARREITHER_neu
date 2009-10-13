@@ -28,14 +28,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnEurovalStandard_Click(object sender, EventArgs e) {
-			EurovalProduct.ConfigUseHarreitherNorm = true;
-			EurovalProduct.ConfigMaxCircuitLength = 100;
-			EurovalProduct.ConfigMaxPressureLost = 15000;
-			EurovalProduct.ConfigMaxDurchfluss = 240;
-			EurovalProduct.ConfigSpreizungHeizMin = 4;
-			EurovalProduct.ConfigSpreizungHeizMax = 12;
-			EurovalProduct.ConfigSpreizungKühlMin = 2;
-			EurovalProduct.ConfigSpreizungKühlMax = 6;
+			Project.Instance.Config.EurovalProduct.StaticInitialize();
 			InitializeEurovalValues();
 		}
 
@@ -52,12 +45,14 @@ namespace Europlan.Common {
 		}
 
 		private void rbHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
+			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigUseHarreitherNorm", rbHarreitherNorm.Checked.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
 		private void rbEN1264_CheckedChanged(object sender, EventArgs e) {
+			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigUseHarreitherNorm", rbHarreitherNorm.Checked.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -71,6 +66,7 @@ namespace Europlan.Common {
 		}
 
 		private void numDurchfluss_ValueChanged(object sender, EventArgs e) {
+			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxDurchfluss", numDurchfluss.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -78,6 +74,7 @@ namespace Europlan.Common {
 
 		private void numPressurePa_ValueChanged(object sender, EventArgs e) {
 			numPressureMbar.Value = numPressurePa.Value / 100;
+			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxPressureLost", numPressurePa.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -85,30 +82,35 @@ namespace Europlan.Common {
 
 		private void numPressureMbar_ValueChanged(object sender, EventArgs e) {
 			numPressurePa.Value = numPressureMbar.Value * 100;
+			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxPressureLost", numPressurePa.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
 		private void numSpreizungHeizMin_ValueChanged(object sender, EventArgs e) {
+			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungHeizMin", numSpreizungHeizMin.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
 		private void numSpreizungHeizMax_ValueChanged(object sender, EventArgs e) {
+			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungHeizMax", numSpreizungHeizMax.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
 		private void numSpreizungKühlMin_ValueChanged(object sender, EventArgs e) {
+			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungKühlMin", numSpreizungKühlMin.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
 		private void numSpreizungKühlMax_ValueChanged(object sender, EventArgs e) {
+			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungKühlMax", numSpreizungKühlMax.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
