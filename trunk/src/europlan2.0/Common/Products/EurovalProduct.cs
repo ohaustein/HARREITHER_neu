@@ -32,6 +32,16 @@ namespace Europlan.Common {
 		//private static double defaultThetaRCool = 20;
 		private static bool agActivated = true;
 
+		//  !!!!!!!!!!! changes must be also applied in SystemParametersPanel.cs !!!!!!!!!!!
+		private static bool useHarreitherNorm = true;
+		private static double maxCircuitLength = 100.0;
+		private static int maxPressureLost = 15000;
+		private static int maxDurchfluss = 240;
+		private static double spreizungHeizMin = 4;
+		private static double spreizungHeizMax = 12;
+		private static double spreizungKühlMin = 2;
+		private static double spreizungKühlMax = 6;
+
 		protected float plannedArea = 0;
 		private float plannedAreaReduced = 0;
 		private float plannedAreaUnheated = 0;
@@ -98,6 +108,15 @@ namespace Europlan.Common {
 			quickDimensioningCoolPowerPerSquareMeter = 50;
 			canHeat = true;
 			canCool = false;
+
+			useHarreitherNorm = true;
+			maxCircuitLength = 100.0;
+			maxPressureLost = 15000;
+			maxDurchfluss = 240;
+			spreizungHeizMin = 4;
+			spreizungHeizMax = 12;
+			spreizungKühlMin = 2;
+			spreizungKühlMax = 6;
 		}
 
 		public override Product Clone(Room room) {
@@ -236,6 +255,54 @@ namespace Europlan.Common {
 		public static bool ConfigAgActivated {
 			get { return EurovalProduct.agActivated; }
 			set { EurovalProduct.agActivated = value; }
+		}
+
+		[ProductParameter]
+		public static bool ConfigUseHarreitherNorm {
+			get { return EurovalProduct.useHarreitherNorm; }
+			set { EurovalProduct.useHarreitherNorm = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigMaxCircuitLength {
+			get { return EurovalProduct.maxCircuitLength; }
+			set { EurovalProduct.maxCircuitLength = value; }
+		}
+
+		[ProductParameter]
+		public static int ConfigMaxPressureLost {
+			get { return EurovalProduct.maxPressureLost; }
+			set { EurovalProduct.maxPressureLost = value; }
+		}
+
+		[ProductParameter]
+		public static int ConfigMaxDurchfluss {
+			get { return EurovalProduct.maxDurchfluss; }
+			set { EurovalProduct.maxDurchfluss = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungHeizMin {
+			get { return EurovalProduct.spreizungHeizMin; }
+			set { EurovalProduct.spreizungHeizMin = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungHeizMax {
+			get { return EurovalProduct.spreizungHeizMax; }
+			set { EurovalProduct.spreizungHeizMax = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungKühlMin {
+			get { return EurovalProduct.spreizungKühlMin; }
+			set { EurovalProduct.spreizungKühlMin = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungKühlMax {
+			get { return EurovalProduct.spreizungKühlMax; }
+			set { EurovalProduct.spreizungKühlMax = value; }
 		}
 
 		/// <summary>
