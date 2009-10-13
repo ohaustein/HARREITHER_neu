@@ -29,6 +29,14 @@ namespace Europlan.Common {
 
 		private void btnEurovalStandard_Click(object sender, EventArgs e) {
 			Project.Instance.Config.EurovalProduct.StaticInitialize();
+			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigUseHarreitherNorm");
+			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxCircuitLength");
+			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxPressureLost");
+			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxDurchfluss");
+			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungHeizMin");
+			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungHeizMax");
+			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungKühlMin");
+			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungKühlMax");
 			InitializeEurovalValues();
 		}
 
