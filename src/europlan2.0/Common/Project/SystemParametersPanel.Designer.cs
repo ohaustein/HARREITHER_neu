@@ -159,6 +159,7 @@ namespace Europlan.Common {
 			this.rbHarreitherNorm.TabStop = true;
 			this.rbHarreitherNorm.Text = "27 °C (Harreither Werksempfehlung)";
 			this.rbHarreitherNorm.UseVisualStyleBackColor = true;
+			this.rbHarreitherNorm.CheckedChanged += new System.EventHandler(this.rbHarreitherNorm_CheckedChanged);
 			// 
 			// label2
 			// 
@@ -176,6 +177,7 @@ namespace Europlan.Common {
 			this.rbEN1264.TabIndex = 2;
 			this.rbEN1264.Text = "29 °C (EN 1264)";
 			this.rbEN1264.UseVisualStyleBackColor = true;
+			this.rbEN1264.CheckedChanged += new System.EventHandler(this.rbEN1264_CheckedChanged);
 			// 
 			// label3
 			// 

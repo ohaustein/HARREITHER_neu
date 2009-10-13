@@ -33,6 +33,8 @@ namespace Europlan.Common {
 
 		private SerializableDictionary<Type, SerializableDictionary<string, string>> productConfiguration = new SerializableDictionary<Type,SerializableDictionary<string,string>>();
 
+
+		// if you add a product don't forget to call the Initialize() function in InitializeConfiguration()
 		private EurovalProduct eurovalProduct = new EurovalProduct();
 		private ConcreteActivationProduct concreteActivationProduct = new ConcreteActivationProduct();
 		private HithermProduct hithermProduct = new HithermProduct();
@@ -64,6 +66,14 @@ namespace Europlan.Common {
 			this.roomTypes = new List<RoomType>();
 
 			this.partnerLogo = "";
+
+			eurovalProduct.Initialize();
+			concreteActivationProduct.Initialize();
+			hithermProduct.Initialize();
+			hithermCompactProduct.Initialize();
+			hithermCompactRoofProduct.Initialize();
+			modulKlimaBodenProduct.Initialize();
+			modulKlimaDeckeProduct.Initialize();
 
 			StreamReader sr = null;
 			try {
@@ -688,7 +698,7 @@ namespace Europlan.Common {
 			this.productConfiguration[typeof(T)][parameterName] = value;
 		}
 
-		public void RemoveParameter<T>(string parameterName) where T : Product {
+		public void RemoveProductParameter<T>(string parameterName) where T : Product {
 			if (!this.productConfiguration.ContainsKey(typeof(T))) {
 				return;
 			}

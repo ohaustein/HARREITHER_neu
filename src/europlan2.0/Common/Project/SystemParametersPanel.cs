@@ -20,7 +20,7 @@ namespace Europlan.Common {
 		}
 
 		public void UpdateControl() {
-		
+			InitializeEurovalValues();
 		}
 
 		public bool AllowLeave() {
@@ -28,21 +28,43 @@ namespace Europlan.Common {
 		}
 
 		private void btnEurovalStandard_Click(object sender, EventArgs e) {
+			EurovalProduct.ConfigUseHarreitherNorm = true;
+			EurovalProduct.ConfigMaxCircuitLength = 100;
+			EurovalProduct.ConfigMaxPressureLost = 15000;
+			EurovalProduct.ConfigMaxDurchfluss = 240;
+			EurovalProduct.ConfigSpreizungHeizMin = 4;
+			EurovalProduct.ConfigSpreizungHeizMax = 12;
+			EurovalProduct.ConfigSpreizungKühlMin = 2;
+			EurovalProduct.ConfigSpreizungKühlMax = 6;
 			InitializeEurovalValues();
 		}
 
 		private void InitializeEurovalValues() {
-			rbHarreitherNorm.Checked = true;
-			numCircuitLength.Value = 100;
-			numPressurePa.Value = 15000;
-			numDurchfluss.Value = 240;
-			numSpreizungHeizMin.Value = 4;
-			numSpreizungHeizMax.Value = 12;
-			numSpreizungKühlMin.Value = 2;
-			numSpreizungKühlMax.Value = 6;
+			rbHarreitherNorm.Checked = EurovalProduct.ConfigUseHarreitherNorm;
+			rbEN1264.Checked = !EurovalProduct.ConfigUseHarreitherNorm;
+			numCircuitLength.Value = (decimal)EurovalProduct.ConfigMaxCircuitLength;
+			numPressurePa.Value = EurovalProduct.ConfigMaxPressureLost / 100;
+			numDurchfluss.Value = EurovalProduct.ConfigMaxDurchfluss;
+			numSpreizungHeizMin.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMin;
+			numSpreizungHeizMax.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMax;
+			numSpreizungKühlMin.Value = (decimal)EurovalProduct.ConfigSpreizungKühlMin;
+			numSpreizungKühlMax.Value = (decimal)EurovalProduct.ConfigSpreizungKühlMax;
+		}
+
+		private void rbHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void rbEN1264_CheckedChanged(object sender, EventArgs e) {
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
 		}
 
 		private void numCircuitLength_ValueChanged(object sender, EventArgs e) {
+			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxCircuitLength", numCircuitLength.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
