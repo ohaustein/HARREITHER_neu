@@ -487,6 +487,10 @@ namespace Europlan.Common {
 				p.FinalizeLoading();
 			}
 		}
+
+		public override string ToString() {
+			return this.Id;
+		}
 	}
 
 }

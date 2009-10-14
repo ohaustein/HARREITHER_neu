@@ -8,16 +8,14 @@ namespace Europlan.Common {
 	[ProductName("Modul Klima-Decke")]
 	public class ModulKlimaDeckeProduct : Product {
 
-		private static double module_100_40_area = 0.9925 * 0.4;
+		//private static double module_100_40_area = 0.9925 * 0.4;
 		private static double module_100_30_area = 0.9925 * 0.295;
 		private static double module_120_30_area = 1.194 * 0.295;
 		private static double module_80_30_area = 0.791 * 0.295;
 
-		private List<KlimaFlaechenModul> modules_100_40L = new List<KlimaFlaechenModul>();
 		private List<KlimaFlaechenModul> modules_100_30L = new List<KlimaFlaechenModul>();
 		private List<KlimaFlaechenModul> modules_120_30L = new List<KlimaFlaechenModul>();
 		private List<KlimaFlaechenModul> modules_80_30L = new List<KlimaFlaechenModul>();
-		private List<KlimaFlaechenModul> modules_100_40R = new List<KlimaFlaechenModul>();
 		private List<KlimaFlaechenModul> modules_100_30R = new List<KlimaFlaechenModul>();
 		private List<KlimaFlaechenModul> modules_120_30R = new List<KlimaFlaechenModul>();
 		private List<KlimaFlaechenModul> modules_80_30R = new List<KlimaFlaechenModul>();
@@ -87,18 +85,6 @@ namespace Europlan.Common {
 			get { return ProductType.DH; }
 		}
 
-		public int ModuleCount_100_40L {
-			get { return this.modules_100_40L.Count; }
-			set {
-				while (value > this.modules_100_40L.Count) {
-					this.modules_100_40L.Add(new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT));
-				}
-				if (value < this.modules_100_40L.Count) {
-					this.modules_100_40L.RemoveRange(value, this.modules_100_40L.Count - value);
-				}
-			}
-		}
-
 		public int ModuleCount_100_30L {
 			get { return this.modules_100_30L.Count; }
 			set {
@@ -131,18 +117,6 @@ namespace Europlan.Common {
 				}
 				if (value < this.modules_100_30L.Count) {
 					this.modules_80_30L.RemoveRange(value, this.modules_80_30L.Count - value);
-				}
-			}
-		}
-
-		public int ModuleCount_100_40R {
-			get { return this.modules_100_40R.Count; }
-			set {
-				while (value > this.modules_100_40R.Count) {
-					this.modules_100_40R.Add(new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT));
-				}
-				if (value < this.modules_100_40R.Count) {
-					this.modules_100_40R.RemoveRange(value, this.modules_100_40R.Count - value);
 				}
 			}
 		}
@@ -210,7 +184,6 @@ namespace Europlan.Common {
 		public override float PlannedRoofArea {
 			get {
 				return (float)((this.modules_100_30L.Count + this.modules_100_30R.Count) * module_100_30_area + 
-					(this.modules_100_40L.Count + this.modules_100_40R.Count) * module_100_40_area + 
 					(this.modules_120_30L.Count + this.modules_120_30R.Count) * module_120_30_area + 
 					(this.modules_80_30L.Count + this.modules_80_30R.Count) * module_80_30_area);
 			}
@@ -223,6 +196,10 @@ namespace Europlan.Common {
 
 		public override double PlannedHeatLoad {
 			get { return 0; }
+		}
+
+		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
+			get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
 		}
 	}
 	

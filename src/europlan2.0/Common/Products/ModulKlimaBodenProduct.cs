@@ -99,6 +99,10 @@ namespace Europlan.Common {
 		public override double PlannedHeatLoad {
 			get { return 0; }
 		}
+
+		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
+			get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
+		}
 	}
 	
 }

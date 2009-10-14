@@ -21,14 +21,15 @@ namespace Europlan.Common {
 			PRICE = 10,
 			FLOW_TEMPERATURE = 11,
 			PERCENTAGE = 12,
-			POWER_WITH_SIGN = 13
+			POWER_WITH_SIGN = 13,
+			PIPE_LENGTH = 14
 		}
-		                                                                              //   DEF   RCTMP       AREA   TEMP             HPW             CPW  CONSTR_THICK        LAMBDA             R,   DENOMINATION        PRICE    FLOW_TEMP   PERC    PWR_SIGN
-		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] {  null,     0,          0,     0,              0,              0,            0,            0,            0,              0,           0,           0,      0,      null };
-		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] {  null,    99,       null,    99, Int32.MaxValue, Int32.MaxValue,         null,         null,         null, Int32.MaxValue,        null,        null,    100,      null };
-		private static readonly int[] decimalPlaces = new int[]                        {     0,     0,          1,     0,              0,              0,            2,            3,            3,              0,           2,           1,      1,         0 };
-		private static readonly string[] masks = new string[]                          {   "0",  "90", "999990.9",  "90",      "9999990",      "9999990",  "999990.99", "999990.999", "999990.999",       "999990", "999990.99", "999990.99", "990.9", "9999990"};
-		private static readonly bool[] sign = new bool[]                               { false, false,      false, false,          false,          false,        false,        false,        false,          false,       false,       false,   false,      true};
+		                                                                              //   DEF   RCTMP       AREA   TEMP             HPW             CPW  CONSTR_THICK        LAMBDA             R,   DENOMINATION        PRICE    FLOW_TEMP   PERC     PWR_SIGN     PIPE_L
+		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] {  null,     0,          0,     0,              0,              0,            0,            0,            0,              0,           0,           0,      0,       null,         0};
+		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] {  null,    99,       null,    99, Int32.MaxValue, Int32.MaxValue,         null,         null,         null, Int32.MaxValue,        null,        null,    100,       null,      null};
+		private static readonly int[] decimalPlaces = new int[]                        {     0,     0,          1,     0,              0,              0,            2,            3,            3,              0,           2,           1,      1,          0,         1};
+		private static readonly string[] masks = new string[]                          {   "0",  "90", "999990.9",  "90",      "9999990",      "9999990",  "999990.99", "999990.999", "999990.999",       "999990", "999990.99", "999990.99", "990.9", "9999990", "9999990"};
+		private static readonly bool[] sign = new bool[]                               { false, false,      false, false,          false,          false,        false,        false,        false,          false,       false,       false,   false,      true,     false};
 
 		private Nullable<decimal> realMaxValue = null;
 		private Nullable<decimal> realMinValue = null;
