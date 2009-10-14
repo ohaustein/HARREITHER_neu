@@ -156,12 +156,9 @@ namespace Europlan.Common {
 			this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_NONE);
 			this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_EUROVAL);
 			if (this.product != null && this.product.Product != null &&
-				this.product.Product.PlannedConnectionVorlauf != null &&
-				this.product.Product.PlannedConnectionRuecklauf != null) {
-				PlannedProduct vorlauf = this.product.Product.PlannedConnectionVorlauf.OtherProduct;
-				PlannedProduct ruecklauf = this.product.Product.PlannedConnectionRuecklauf.OtherProduct;
-				if ((vorlauf != null && vorlauf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) ||
-					(ruecklauf != null && ruecklauf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM)) {
+				this.product.Product.PlannedConnection != null) {
+				PlannedProduct connectedProduct = this.product.Product.PlannedConnection.OtherProduct;
+				if (connectedProduct != null && connectedProduct.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
 					this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_21MM);
 				}
 			}
@@ -527,10 +524,10 @@ namespace Europlan.Common {
 				this.lblSpreizungHeat.Text = Math.Round(evProduct.PlannedSpreizungHeat, 1).ToString();
 				this.lblSpreizungCool.Text = Math.Round(evProduct.PlannedSpreizungCool, 1).ToString();
 
-				if (evProduct.PlannedConnectionVorlauf == null) {
+				if (evProduct.PlannedConnection == null) {
 					this.txtDistributor.Text = "";
 				} else {
-					this.txtDistributor.Text = evProduct.PlannedConnectionVorlauf.ToString();
+					this.txtDistributor.Text = evProduct.PlannedConnection.ToString();
 				}
 
 				if (this.errorMsg != null) {
@@ -855,10 +852,9 @@ namespace Europlan.Common {
 
 		private void btnDistributor_Click(object sender, EventArgs e) {
 			SelectConnectionForProductForm form = new SelectConnectionForProductForm(Project.Instance.Floors[0]);
-			form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnectionVorlauf;
+			form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnection;
 			if (form.ShowDialog() == DialogResult.OK) {
-				(this.product.Product as EurovalProduct).PlannedConnectionVorlauf = form.SelectedConnection;
-				(this.product.Product as EurovalProduct).PlannedConnectionRuecklauf = form.SelectedConnection;
+				(this.product.Product as EurovalProduct).PlannedConnection = form.SelectedConnection;
 			}
 			form.Dispose();
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);

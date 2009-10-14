@@ -1034,7 +1034,7 @@ namespace Europlan.Common {
 		}
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
-			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || this.PlannedConnectionVorlauf == null || this.PlannedConnectionRuecklauf == null) {
+			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || this.PlannedConnection == null) {
 				errorMsg = "Fehlende Eingaben: ";
 				if (plannedFloorConstruction == null) {
 					errorMsg += "Fuﬂbodenkonstruktion, ";
@@ -1042,7 +1042,7 @@ namespace Europlan.Common {
 				if (plannedInsulationConstruction == null) {
 					errorMsg += "W‰rmed‰mmkonstruktion, ";
 				}
-				if (PlannedConnectionVorlauf == null || PlannedConnectionRuecklauf == null) {
+				if (PlannedConnection == null) {
 					errorMsg += "Heizkreisanschluﬂ, ";
 				}
 				errorMsg = errorMsg.Substring(0, errorMsg.Length - 2);
