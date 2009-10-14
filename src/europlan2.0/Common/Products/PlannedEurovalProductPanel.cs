@@ -513,10 +513,10 @@ namespace Europlan.Common {
 				this.lblConnectionQCool.Text = "";
 
 				// heizkreis
-				this.lblCircuitCountHeat.Text = "";
-				this.lblCircuitCountCool.Text = "";
-				this.lblPipeLengthHeat.Text = Math.Round(evProduct.PlannedPipeLength, 1).ToString();
-				this.lblPipeLengthCool.Text = Math.Round(evProduct.PlannedPipeLength, 1).ToString();
+				this.lblCircuitCountHeat.Text = evProduct.PlannedCircuits.ToString();
+				this.lblCircuitCountCool.Text = evProduct.PlannedCircuits.ToString();
+				this.lblPipeLengthHeat.Text = Math.Round(evProduct.PlannedPipeLengthPerCircuit, 1).ToString();
+				this.lblPipeLengthCool.Text = Math.Round(evProduct.PlannedPipeLengthPerCircuit, 1).ToString();
 				this.lblMhHeat.Text = "";
 				this.lblMhCool.Text = "";
 				this.lblDeltaPHeat.Text = Math.Round(evProduct.PlannedDeltaRhoHeat, 1).ToString();
