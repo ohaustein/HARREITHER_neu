@@ -121,8 +121,16 @@ namespace Europlan.Common {
             0,
             0});
 			this.numNormOutsideTemperature.Location = new System.Drawing.Point(145, 18);
-			this.numNormOutsideTemperature.MaxValue = null;
-			this.numNormOutsideTemperature.MinValue = null;
+			this.numNormOutsideTemperature.MaxValue = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+			this.numNormOutsideTemperature.MinValue = new decimal(new int[] {
+            40,
+            0,
+            0,
+            -2147483648});
 			this.numNormOutsideTemperature.Name = "numNormOutsideTemperature";
 			this.numNormOutsideTemperature.Size = new System.Drawing.Size(53, 20);
 			this.numNormOutsideTemperature.TabIndex = 25;
@@ -218,20 +226,28 @@ namespace Europlan.Common {
 			// 
 			this.numInsideTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.numInsideTemperature.InternalValue = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
 			this.numInsideTemperature.Location = new System.Drawing.Point(178, 87);
-			this.numInsideTemperature.MaxValue = null;
-			this.numInsideTemperature.MinValue = null;
+			this.numInsideTemperature.MaxValue = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+			this.numInsideTemperature.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.numInsideTemperature.Name = "numInsideTemperature";
 			this.numInsideTemperature.Size = new System.Drawing.Size(52, 20);
 			this.numInsideTemperature.TabIndex = 35;
 			this.numInsideTemperature.Text = "0";
 			this.numInsideTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numInsideTemperature.Value = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
@@ -250,20 +266,28 @@ namespace Europlan.Common {
 			// 
 			this.numHumidity.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.numHumidity.InternalValue = new decimal(new int[] {
-            0,
+            10,
             0,
             0,
             0});
 			this.numHumidity.Location = new System.Drawing.Point(178, 64);
-			this.numHumidity.MaxValue = null;
-			this.numHumidity.MinValue = null;
+			this.numHumidity.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numHumidity.MinValue = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
 			this.numHumidity.Name = "numHumidity";
 			this.numHumidity.Size = new System.Drawing.Size(52, 20);
 			this.numHumidity.TabIndex = 32;
 			this.numHumidity.Text = "0";
 			this.numHumidity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numHumidity.Value = new decimal(new int[] {
-            0,
+            10,
             0,
             0,
             0});
@@ -296,8 +320,16 @@ namespace Europlan.Common {
             0,
             0});
 			this.numOutsideTemperature.Location = new System.Drawing.Point(178, 41);
-			this.numOutsideTemperature.MaxValue = null;
-			this.numOutsideTemperature.MinValue = null;
+			this.numOutsideTemperature.MaxValue = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+			this.numOutsideTemperature.MinValue = new decimal(new int[] {
+            40,
+            0,
+            0,
+            -2147483648});
 			this.numOutsideTemperature.Name = "numOutsideTemperature";
 			this.numOutsideTemperature.Size = new System.Drawing.Size(52, 20);
 			this.numOutsideTemperature.TabIndex = 29;
