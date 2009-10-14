@@ -155,11 +155,15 @@ namespace Europlan.Common {
 			this.PipeType.Items.Clear();
 			this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_NONE);
 			this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_EUROVAL);
-			PlannedProduct vorlauf = this.product.Product.PlannedConnectionVorlauf.OtherProduct;
-			PlannedProduct ruecklauf = this.product.Product.PlannedConnectionRuecklauf.OtherProduct;
-			if ((vorlauf != null && vorlauf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) ||
-				(ruecklauf != null && ruecklauf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM)) {
-				this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_21MM);
+			if (this.product != null && this.product.Product != null &&
+				this.product.Product.PlannedConnectionVorlauf != null &&
+				this.product.Product.PlannedConnectionRuecklauf != null) {
+				PlannedProduct vorlauf = this.product.Product.PlannedConnectionVorlauf.OtherProduct;
+				PlannedProduct ruecklauf = this.product.Product.PlannedConnectionRuecklauf.OtherProduct;
+				if ((vorlauf != null && vorlauf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) ||
+					(ruecklauf != null && ruecklauf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM)) {
+					this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_21MM);
+				}
 			}
 
 			// verlegeart items
