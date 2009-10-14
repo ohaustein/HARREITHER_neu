@@ -28,10 +28,11 @@ namespace Europlan.Common {
 		protected float quickDimensioningPlannedArea = 0;
 		protected bool canHeat = false;
 		protected bool canCool = false;
-		private Room associatedRoom = null;
-		private SerializableDictionary<string, int> quickDimensioningConnectedDistributors = new SerializableDictionary<string,int>();
-		private ProductConnection plannedConnectionVorlauf = null;
-		private ProductConnection plannedConnectionRuecklauf = null;
+		protected Room associatedRoom = null;
+		protected SerializableDictionary<string, int> quickDimensioningConnectedDistributors = new SerializableDictionary<string, int>();
+		protected ProductConnection plannedConnectionVorlauf = null;
+		protected ProductConnection plannedConnectionRuecklauf = null;
+		protected List<ConnectionPipe> plannedConnectionPipes = new List<ConnectionPipe>();
 
 		protected string comment = null;
 
@@ -242,6 +243,16 @@ namespace Europlan.Common {
 		public ProductConnection PlannedConnectionRuecklauf {
 			get { return this.plannedConnectionRuecklauf; }
 			set { this.plannedConnectionRuecklauf = value; }
+		}
+
+		public List<ConnectionPipe> PlannedConnectionPipes {
+			get { return this.plannedConnectionPipes; }
+			set { this.plannedConnectionPipes = value; }
+		}
+
+		[XmlIgnore]
+		public abstract ConnectionPipe.PipeTypeEnum DefaultPipeType {
+			get;
 		}
 
 		public void GetHeatFlow(out double vorlauf, out double ruecklauf) {

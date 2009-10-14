@@ -104,13 +104,88 @@ namespace Europlan.Common {
 			CALCULATION_TYPE = 16384
 		}
 
+		/*private class ComboItem {
+			private string name;
+			private object value;
+
+			public ComboItem(string name, object value) {
+				this.name = name;
+				this.value = value;
+			}
+
+			public string Name {
+				get { return this.name; }
+				set { this.name = value; }
+			}
+
+			public object Value {
+				get { return this.value; }
+				set { this.value = value; }
+			}
+
+			public override string ToString() {
+				return this.name;
+			}
+
+			public override int GetHashCode() {
+				return this.value == null ? 0 : this.value.GetHashCode();
+			}
+
+			public override bool Equals(object obj) {
+				return this.value == null ? obj == null : this.value.Equals(obj);
+			}
+		}*/
+
 		private string errorMsg = null;
 
 		public void UpdateControl() {
 			this.product = this.Tag as PlannedProduct;
 			this.tabs.SelectedTab = this.pageInput;
+
+			// room items
+			this.roomDataGridViewTextBoxColumn.Items.Clear();
+			this.roomDataGridViewTextBoxColumn.Items.Add("");
+			foreach (Floor f in Project.Instance.Floors) {
+				foreach (Room r in f.Rooms) {
+					this.roomDataGridViewTextBoxColumn.Items.Add(r);
+				}
+			}
+
+			// pipe type items
+			this.PipeType.Items.Clear();
+			this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_NONE);
+			this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_EUROVAL);
+			PlannedProduct vorlauf = this.product.Product.PlannedConnectionVorlauf.OtherProduct;
+			PlannedProduct ruecklauf = this.product.Product.PlannedConnectionRuecklauf.OtherProduct;
+			if ((vorlauf != null && vorlauf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) ||
+				(ruecklauf != null && ruecklauf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM)) {
+				this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_21MM);
+			}
+
+			// verlegeart items
+			this.Verlegeart.Items.Clear();
+			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_NONE);
+			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH);
+			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV35);
+			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV30);
+			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV25);
+			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV20);
+			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV15);
+			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV10);
+			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV5);
+			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_A5);
+
+			// insulation items
+			this.Insulation.Items.Clear();
+			this.Insulation.Items.Add(ConnectionPipe.InsulationEnum.IN_NONE);
+			this.Insulation.Items.Add(ConnectionPipe.InsulationEnum.IN_VL);
+			this.Insulation.Items.Add(ConnectionPipe.InsulationEnum.IN_VL_RL);
+
 			if (this.product != null) {
+				this.connectionPipeBindingSource.DataSource = this.product.Product.PlannedConnectionPipes;
 				(this.product.Product as EurovalProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errorMsg);
+			} else {
+				this.connectionPipeBindingSource.DataSource = null;
 			}
 			this.UpdateControl(FieldEnum.NONE);
 		}

@@ -464,6 +464,10 @@ namespace Europlan.Common {
 			get { return ProductType.FBH; }
 		}
 
+		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
+			get { return ConnectionPipe.PipeTypeEnum.PT_EUROVAL; }
+		}
+
 		#region Auslegung
 		public override float PlannedFloorArea {
 			get { return this.plannedArea; }
