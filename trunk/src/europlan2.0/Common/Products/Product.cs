@@ -30,8 +30,10 @@ namespace Europlan.Common {
 		protected bool canCool = false;
 		protected Room associatedRoom = null;
 		protected SerializableDictionary<string, int> quickDimensioningConnectedDistributors = new SerializableDictionary<string, int>();
-		protected ProductConnection plannedConnectionVorlauf = null;
-		protected ProductConnection plannedConnectionRuecklauf = null;
+		//protected ProductConnection plannedConnectionVorlauf = null;
+		//protected ProductConnection plannedConnectionRuecklauf = null;
+		protected ProductConnection plannedConnection = null;
+		protected SerializableDictionary<int, PlannedProduct> plannedConnectedProducts = new SerializableDictionary<int, PlannedProduct>();
 		protected List<ConnectionPipe> plannedConnectionPipes = new List<ConnectionPipe>();
 
 		protected string comment = null;
@@ -235,7 +237,7 @@ namespace Europlan.Common {
 			get;
 		}
 
-		public ProductConnection PlannedConnectionVorlauf {
+		/*public ProductConnection PlannedConnectionVorlauf {
 			get { return this.plannedConnectionVorlauf; }
 			set { this.plannedConnectionVorlauf = value; }
 		}
@@ -243,7 +245,7 @@ namespace Europlan.Common {
 		public ProductConnection PlannedConnectionRuecklauf {
 			get { return this.plannedConnectionRuecklauf; }
 			set { this.plannedConnectionRuecklauf = value; }
-		}
+		}*/
 
 		public List<ConnectionPipe> PlannedConnectionPipes {
 			get { return this.plannedConnectionPipes; }
@@ -256,7 +258,7 @@ namespace Europlan.Common {
 		}
 
 		public void GetHeatFlow(out double vorlauf, out double ruecklauf) {
-			List<Product> vorlaufProducts = new List<Product>();
+			/*List<Product> vorlaufProducts = new List<Product>();
 			List<Product> ruecklaufProducts = new List<Product>();
 			Distributor distributor = null;
 			Product curP = this;
@@ -317,11 +319,13 @@ namespace Europlan.Common {
 			if (connected && allEuroval) {
 				vorlauf = verteilerVorlauf - gesamtSpreizung * eurovalPipeLengthBefore / (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength + eurovalPipeLengthAfter);
 				ruecklauf = verteilerVorlauf - gesamtSpreizung * (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength) / (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength + eurovalPipeLengthAfter);
-			}
+			}*/
+			vorlauf = 0;
+			ruecklauf = 0;
 		}
 
 		public void GetCoolFlow(out double vorlauf, out double ruecklauf) {
-			List<Product> vorlaufProducts = new List<Product>();
+			/*List<Product> vorlaufProducts = new List<Product>();
 			List<Product> ruecklaufProducts = new List<Product>();
 			Distributor distributor = null;
 			Product curP = this;
@@ -382,7 +386,24 @@ namespace Europlan.Common {
 			if (connected && allEuroval) {
 				vorlauf = verteilerVorlauf + gesamtSpreizung * eurovalPipeLengthBefore / (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength + eurovalPipeLengthAfter);
 				ruecklauf = verteilerVorlauf + gesamtSpreizung * (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength) / (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength + eurovalPipeLengthAfter);
-			}
+			}*/
+			vorlauf = 0;
+			ruecklauf = 0;
+		}
+
+		public ProductConnection PlannedConnection {
+			get { return this.plannedConnection; }
+			set { this.plannedConnection = value; }
+		}
+
+		public SerializableDictionary<int, string> PlannedConnectedProducts {
+			get { return null; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public SerializableDictionary<int, PlannedProduct> PlannedConnectedProductIds {
+			get { return this.plannedConnectedProducts; }
 		}
 
 		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg);
