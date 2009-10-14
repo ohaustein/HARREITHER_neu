@@ -124,5 +124,12 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void tabSystemParameters_Selected(object sender, TabControlEventArgs e) {
+			if (tabSystemParameters.SelectedTab != tabEuroval) {
+				MessageBox.Show("Die Konfiguration von Systemparameter ist derzeit nur für Euroval® möglich.");
+				tabSystemParameters.SelectedTab = tabEuroval;
+			}
+		}
+
 	}
 }
