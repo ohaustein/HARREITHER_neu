@@ -320,8 +320,19 @@ namespace Europlan.Common {
 				vorlauf = verteilerVorlauf - gesamtSpreizung * eurovalPipeLengthBefore / (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength + eurovalPipeLengthAfter);
 				ruecklauf = verteilerVorlauf - gesamtSpreizung * (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength) / (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength + eurovalPipeLengthAfter);
 			}*/
-			vorlauf = 0;
-			ruecklauf = 0;
+			if (this.plannedConnection == null) {
+				vorlauf = 0;
+				ruecklauf = 0;
+				return;
+			}
+			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				vorlauf = 0;
+				ruecklauf = 0;
+				// TODO
+				return;
+			}
+			vorlauf = this.plannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
+			ruecklauf = vorlauf - EN1264.Instance.DefaultSpreizung(vorlauf);
 		}
 
 		public void GetCoolFlow(out double vorlauf, out double ruecklauf) {
@@ -387,8 +398,20 @@ namespace Europlan.Common {
 				vorlauf = verteilerVorlauf + gesamtSpreizung * eurovalPipeLengthBefore / (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength + eurovalPipeLengthAfter);
 				ruecklauf = verteilerVorlauf + gesamtSpreizung * (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength) / (eurovalPipeLengthBefore + (this as EurovalProduct).PlannedPipeLength + eurovalPipeLengthAfter);
 			}*/
-			vorlauf = 0;
-			ruecklauf = 0;
+			if (this.plannedConnection == null) {
+				vorlauf = 0;
+				ruecklauf = 0;
+				return;
+			}
+			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				vorlauf = 0;
+				ruecklauf = 0;
+				// TODO
+				return;
+			}
+			vorlauf = 16;
+			ruecklauf = 22;
+			// TODO
 		}
 
 		public ProductConnection PlannedConnection {
@@ -397,8 +420,13 @@ namespace Europlan.Common {
 		}
 
 		public SerializableDictionary<int, string> PlannedConnectedProducts {
-			get { return null; }
-			set { }
+			get {
+				return null;
+				// TODO
+			}
+			set {
+				// TODO
+			}
 		}
 
 		[XmlIgnore]
