@@ -224,8 +224,9 @@ namespace Europlan.Common {
 				if (this.roomId != null) {
 					foreach (Floor f in Project.Instance.Floors) {
 						foreach (Room r in f.Rooms) {
-							if (r.Id == this.roomId) {
+							if (r.InternalId == this.roomId) {
 								this.room = r;
+								return this.room;
 							}
 						}
 					}
@@ -239,7 +240,7 @@ namespace Europlan.Common {
 		}
 
 		public string RoomId {
-			get { return this.room == null ? null : this.room.Id; }
+			get { return this.room == null ? null : this.room.InternalId; }
 			set {
 				if (value == null) {
 					this.room = null;

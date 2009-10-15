@@ -21,6 +21,7 @@ namespace Europlan.Common {
 		}
 
 		private string id;
+		private string internalId;
 		private string name;
 		private int roomHeatTemperature;
 		private int roomCoolTemperature;
@@ -86,6 +87,7 @@ namespace Europlan.Common {
 
 		private void InitializeRoom() {
 			id = "";
+			this.internalId = System.Guid.NewGuid().ToString();
 			name = "";
 			roomHeatTemperature = 0;
 			roomCoolTemperature = Project.Instance.InsideTemperatureForCooling;
@@ -104,7 +106,6 @@ namespace Europlan.Common {
 			this.quickDimensioningRoomController = RoomController.None;
 			this.quickDimensioningComments = "";
 		}
-
 
 		internal void Synchronize(Room room) {
 			this.Name = room.Name;
@@ -140,6 +141,11 @@ namespace Europlan.Common {
 					roomNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : id + ": " + name);
 				}		
 			}
+		}
+
+		public string InternalId {
+			get { return internalId; }
+			set { internalId = value; }
 		}
 		
 		public string Name {
