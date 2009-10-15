@@ -9,6 +9,7 @@ using System.Windows.Forms;
 namespace Europlan.Common {
 	public partial class PlannedEurovalProductPanel : UserControl, IEditorUserControl {
 		private PlannedProduct product = null;
+		private Button roomSelectionButton;
 
 		private class LayDistanceItem {
 			public Nullable<EurovalProduct.LayDistance> layDistance;
@@ -57,6 +58,14 @@ namespace Europlan.Common {
 		public PlannedEurovalProductPanel() {
 			InitializeComponent();
 
+			roomSelectionButton = new Button();
+			roomSelectionButton.Size = new Size(30, 20);
+			roomSelectionButton.Text = "...";
+             
+            dgvConnectionPipes.Controls.Add(roomSelectionButton);
+            roomSelectionButton.Hide();
+            roomSelectionButton.Click += new EventHandler(roomSelectionButton_Click);
+			
 			this.cmbLayDistance.Items.Clear();
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(null, "Automatisch"));
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.LayDistance.EV35, "EV35"));
@@ -141,30 +150,6 @@ namespace Europlan.Common {
 		public void UpdateControl() {
 			this.product = this.Tag as PlannedProduct;
 			this.tabs.SelectedTab = this.pageInput;
-
-			// room items
-			this.roomDataGridViewComboBoxColumn.Items.Clear();
-			this.roomDataGridViewComboBoxColumn.Items.Add("");
-			foreach (Floor f in Project.Instance.Floors) {
-				if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
-					foreach (Room r in f.Rooms) {
-						this.roomDataGridViewComboBoxColumn.Items.Add(r);
-					}
-				}
-			}
-
-			// product items
-			this.productDataGridViewComboBoxColumn.Items.Clear();
-			this.productDataGridViewComboBoxColumn.Items.Add("");
-			foreach (Floor f in Project.Instance.Floors) {
-				if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
-					foreach (Room r in f.Rooms) {
-						foreach (PlannedProduct p in r.PlannedProducts) {
-							this.productDataGridViewComboBoxColumn.Items.Add(p);
-						}
-					}
-				}
-			}
 
 			// pipe type items
 			this.PipeType.Items.Clear();
@@ -913,6 +898,75 @@ namespace Europlan.Common {
 
 		private void dgvConnectionPipes_DataError(object sender, DataGridViewDataErrorEventArgs e) {
 			string test = e.Exception.ToString();
+		}
+
+		private void dgvConnectionPipes_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+			//if (e.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex && e.RowIndex >= 0) {
+			//    this.product = this.Tag as PlannedProduct;
+			//    Room r = this.dgvConnectionPipes.Rows[e.RowIndex].Cells[e.ColumnIndex].Value as Room;
+			//    // product items
+			//    this.productDataGridViewComboBoxColumn.Items.Clear();
+			//    this.productDataGridViewComboBoxColumn.Items.Add("");
+			//    foreach (PlannedProduct p in r.PlannedProducts) {
+			//        this.productDataGridViewComboBoxColumn.Items.Add(p);
+			//    }
+			//}
+		}
+
+
+		void roomSelectionButton_Click(object sender, EventArgs e) {
+			if (dgvConnectionPipes.CurrentCell.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex) {
+				List<Room> rooms = new List<Room>();
+				foreach (Floor f in Project.Instance.Floors) {
+					if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
+						foreach (Room r in f.Rooms) {
+							if (!this.product.Product.AssociatedRoom.Equals(r)) {
+								rooms.Add(r);
+							}
+						}
+					}
+				}
+				SelectRoomForm form = new SelectRoomForm(rooms);
+				if (form.ShowDialog().Equals(DialogResult.OK)) {
+					Room room = form.SelectedRoom;
+					if (dgvConnectionPipes.CurrentCell.Value != room) {
+						dgvConnectionPipes.CurrentCell.Value = room;
+						this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[productDataGridViewComboBoxColumn.DisplayIndex].Value = null;
+					}
+				}
+				form.Dispose();
+			} else if (dgvConnectionPipes.CurrentCell.ColumnIndex == productDataGridViewComboBoxColumn.DisplayIndex) {
+				List<PlannedProduct> products = new List<PlannedProduct>();
+
+				Room r = this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[roomDataGridViewComboBoxColumn.DisplayIndex].Value as Room;
+				// product items
+				if (r != null) {
+					foreach (PlannedProduct p in r.PlannedProducts) {
+						products.Add(p);
+					}
+
+					SelectPlannedProduct form = new SelectPlannedProduct(products);
+					if (form.ShowDialog().Equals(DialogResult.OK)) {
+						PlannedProduct product = form.SelectedPlannedProduct;
+						dgvConnectionPipes.CurrentCell.Value = product;
+					}
+					form.Dispose();
+				}
+			}
+		}
+
+		private void dgvConnectionPipes_CellEnter(object sender, DataGridViewCellEventArgs e) {
+			if (((e.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex) || (e.ColumnIndex == productDataGridViewComboBoxColumn.DisplayIndex)) && e.RowIndex >= 0) {
+				Rectangle rect = dgvConnectionPipes.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                int width = dgvConnectionPipes.CurrentCell.Size.Width;
+                roomSelectionButton.Location = new Point(rect.X + width - roomSelectionButton.Width, rect.Y);
+				roomSelectionButton.Height = dgvConnectionPipes.Rows[e.RowIndex].Height;
+				roomSelectionButton.Show();
+			}
+		}
+
+		private void dgvConnectionPipes_CellLeave(object sender, DataGridViewCellEventArgs e) {
+			roomSelectionButton.Hide();
 		}
 
 	}

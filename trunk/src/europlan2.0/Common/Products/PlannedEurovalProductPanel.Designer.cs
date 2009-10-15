@@ -168,8 +168,8 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.vorlaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.ruecklaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.roomDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.productDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.roomDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.productDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.onlyFirstDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.printDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.PipeType = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -1842,8 +1842,11 @@ namespace Europlan.Common {
 			this.dgvConnectionPipes.Name = "dgvConnectionPipes";
 			this.dgvConnectionPipes.Size = new System.Drawing.Size(835, 318);
 			this.dgvConnectionPipes.TabIndex = 1;
+			this.dgvConnectionPipes.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellValueChanged);
+			this.dgvConnectionPipes.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellLeave);
 			this.dgvConnectionPipes.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvConnectionPipes_CellParsing);
 			this.dgvConnectionPipes.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvConnectionPipes_DataError);
+			this.dgvConnectionPipes.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellEnter);
 			// 
 			// connectionPipeBindingSource
 			// 
@@ -1895,18 +1898,18 @@ namespace Europlan.Common {
 			this.roomDataGridViewComboBoxColumn.FillWeight = 70F;
 			this.roomDataGridViewComboBoxColumn.HeaderText = "durch\nRaum\nNr.";
 			this.roomDataGridViewComboBoxColumn.Name = "roomDataGridViewComboBoxColumn";
+			this.roomDataGridViewComboBoxColumn.ReadOnly = true;
 			this.roomDataGridViewComboBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.roomDataGridViewComboBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.roomDataGridViewComboBoxColumn.Width = 120;
 			// 
 			// productDataGridViewComboBoxColumn
 			// 
-			this.productDataGridViewComboBoxColumn.DataPropertyName = "Product";
+			this.productDataGridViewComboBoxColumn.DataPropertyName = "PlannedProduct";
 			this.productDataGridViewComboBoxColumn.FillWeight = 70F;
 			this.productDataGridViewComboBoxColumn.HeaderText = "Teilsystem";
 			this.productDataGridViewComboBoxColumn.Name = "productDataGridViewComboBoxColumn";
+			this.productDataGridViewComboBoxColumn.ReadOnly = true;
 			this.productDataGridViewComboBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.productDataGridViewComboBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.productDataGridViewComboBoxColumn.Width = 120;
 			// 
 			// onlyFirstDataGridViewCheckBoxColumn
@@ -2130,8 +2133,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private NumericColumn vorlaufDataGridViewTextBoxColumn;
 		private NumericColumn ruecklaufDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewComboBoxColumn roomDataGridViewComboBoxColumn;
-		private System.Windows.Forms.DataGridViewComboBoxColumn productDataGridViewComboBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn roomDataGridViewComboBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn productDataGridViewComboBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn onlyFirstDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn printDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewComboBoxColumn PipeType;
