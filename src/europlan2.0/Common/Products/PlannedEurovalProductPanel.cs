@@ -184,6 +184,7 @@ namespace Europlan.Common {
 
 			if (this.product != null) {
 				this.connectionPipeBindingSource.DataSource = this.product.Product.PlannedConnectionPipes;
+				this.connectionPipeBindingSource.ResetBindings(false);
 				(this.product.Product as EurovalProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errorMsg);
 			} else {
 				this.connectionPipeBindingSource.DataSource = null;
@@ -901,16 +902,9 @@ namespace Europlan.Common {
 		}
 
 		private void dgvConnectionPipes_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-			//if (e.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex && e.RowIndex >= 0) {
-			//    this.product = this.Tag as PlannedProduct;
-			//    Room r = this.dgvConnectionPipes.Rows[e.RowIndex].Cells[e.ColumnIndex].Value as Room;
-			//    // product items
-			//    this.productDataGridViewComboBoxColumn.Items.Clear();
-			//    this.productDataGridViewComboBoxColumn.Items.Add("");
-			//    foreach (PlannedProduct p in r.PlannedProducts) {
-			//        this.productDataGridViewComboBoxColumn.Items.Add(p);
-			//    }
-			//}
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
 		}
 
 
@@ -967,6 +961,23 @@ namespace Europlan.Common {
 
 		private void dgvConnectionPipes_CellLeave(object sender, DataGridViewCellEventArgs e) {
 			roomSelectionButton.Hide();
+		}
+
+		private void dgvConnectionPipes_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
+			if (e.KeyCode == Keys.Delete && this.dgvConnectionPipes.SelectedCells.Count == 1 &&
+				this.dgvConnectionPipes.SelectedRows.Count == 0 && this.dgvConnectionPipes.SelectedCells[0].Value != null) {
+				DataGridViewCell cell = this.dgvConnectionPipes.SelectedCells[0];
+				cell.Value = null;
+				if (cell.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex) {
+					this.dgvConnectionPipes.Rows[cell.RowIndex].Cells[productDataGridViewComboBoxColumn.DisplayIndex].Value = null;
+				}
+			}
+		}
+
+		private void dgvConnectionPipes_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
 		}
 
 	}
