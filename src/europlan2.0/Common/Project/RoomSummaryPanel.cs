@@ -134,6 +134,7 @@ namespace Europlan.Common {
 				Type productType = form.SelectedProductType;
 				if (productType != null) {
 					Product p = productType.GetConstructor(new Type[0]).Invoke(new object[0]) as Product;
+					p.UsedForQuickDimensioning = false;
 					p.AssociatedRoom = this.room;
 					PlannedProduct pp = new PlannedProduct(p);
 					if (p.Type == Product.ProductType.FBH) {

@@ -28,6 +28,7 @@ namespace Europlan.Common {
 		protected float quickDimensioningPlannedArea = 0;
 		protected bool canHeat = false;
 		protected bool canCool = false;
+		protected bool usedForQuickDimensioning = true;
 		protected Room associatedRoom = null;
 		protected SerializableDictionary<string, int> quickDimensioningConnectedDistributors = new SerializableDictionary<string, int>();
 		//protected ProductConnection plannedConnectionVorlauf = null;
@@ -145,12 +146,17 @@ namespace Europlan.Common {
 			set { canCool = value; }
 		}
 
+		public bool UsedForQuickDimensioning {
+			get { return usedForQuickDimensioning; }
+			set { usedForQuickDimensioning = value; }
+		}
+
 		[XmlIgnore]
 		public Room AssociatedRoom {
 			get { return associatedRoom; }
 			set { 
 				associatedRoom = value;
-				if (associatedRoom != null && !associatedRoom.UsedProductsForQuickDimensioning.Contains(this)) {
+				if (this.usedForQuickDimensioning && associatedRoom != null && !associatedRoom.UsedProductsForQuickDimensioning.Contains(this)) {
 					associatedRoom.UsedProductsForQuickDimensioning.Add(this);
 				}			
 			}
