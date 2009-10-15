@@ -274,7 +274,25 @@ namespace Europlan.Common {
 						this.productNode = new TreeNode();
 						this.productNode.Tag = this;
 					}
-					this.productNode.Text = this.PlannedProductType.ToString() + ": " + this.System;
+					if (this.plannedProduct.AssociatedRoom != null) {
+						List<PlannedProduct> products = this.plannedProduct.AssociatedRoom.PlannedProducts;
+						Dictionary<Type, int> productCounter = new Dictionary<Type, int>();
+						foreach (PlannedProduct p in products) {
+							if (!productCounter.ContainsKey(p.Product.GetType())) {
+								productCounter.Add(p.Product.GetType(), 1);
+							} else {
+								productCounter[p.Product.GetType()] = productCounter[p.Product.GetType()] + 1;
+							}
+							p.productNode.Text = p.PlannedProductType.ToString() + productCounter[p.Product.GetType()] + ": " + p.System;
+						}
+						if (productCounter.ContainsKey(this.Product.GetType())) {
+							this.productNode.Text = this.PlannedProductType.ToString() + (productCounter[this.Product.GetType()] + 1) + ": " + this.System;
+						} else {
+							this.productNode.Text = this.PlannedProductType.ToString() + "1: " + this.System;
+						}
+					} else {
+						this.productNode.Text = this.PlannedProductType.ToString() + ": " + this.System;
+					}
 				} else {
 					this.productNode = null;
 				}
@@ -363,6 +381,17 @@ namespace Europlan.Common {
 			string errorMsg;
 			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg);
 			this.plannedProduct.FinalizeLoading();
+
+			List<PlannedProduct> products = this.plannedProduct.AssociatedRoom.PlannedProducts;
+			Dictionary<Type, int> productCounter = new Dictionary<Type, int>();
+			foreach (PlannedProduct p in products) {
+				if (!productCounter.ContainsKey(p.Product.GetType())) {
+					productCounter.Add(p.Product.GetType(), 1);
+				} else {
+					productCounter[p.Product.GetType()] = productCounter[p.Product.GetType()] + 1;
+				}
+				p.productNode.Text = this.PlannedProductType.ToString() + productCounter[p.Product.GetType()] + ": " + this.System;
+			}
 		}
 
 		public TreeNode FindNode(object element) {
