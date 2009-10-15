@@ -191,6 +191,8 @@ namespace Europlan.Common {
 		private double ruecklauf;
 		private Room room;
 		private string roomId = null;
+		private PlannedProduct product;
+		private string productId = null;
 		private bool print;
 		private bool onlyFirst;
 		private PipeTypeEnum pipeType;
@@ -201,6 +203,7 @@ namespace Europlan.Common {
 			this.vorlauf = 0;
 			this.ruecklauf = 0;
 			this.room = null;
+			this.product = null;
 			this.print = false;
 			this.onlyFirst = false;
 			this.pipeType = PipeTypeEnum.PT_NONE;
@@ -246,6 +249,39 @@ namespace Europlan.Common {
 					this.room = null;
 				}
 				this.roomId = value;
+			}
+		}
+
+		[XmlIgnore]
+		public PlannedProduct PlannedProduct {
+			get {
+				if (this.productId != null) {
+					foreach (Floor f in Project.Instance.Floors) {
+						foreach (Room r in f.Rooms) {
+							foreach (PlannedProduct p in r.PlannedProducts) {
+								if (p.Id == this.productId) {
+									this.product = p;
+									return this.product;
+								}
+							}
+						}
+					}
+				}
+				return this.product;
+			}
+			set {
+				this.productId = null;
+				this.product = value;
+			}
+		}
+
+		public string ProductId {
+			get { return this.product == null ? null : this.product.Id; }
+			set {
+				if (value == null) {
+					this.product = null;
+				}
+				this.productId = value;
 			}
 		}
 
