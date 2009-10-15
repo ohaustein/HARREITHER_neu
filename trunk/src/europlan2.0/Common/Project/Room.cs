@@ -489,7 +489,7 @@ namespace Europlan.Common {
 		}
 
 		public override string ToString() {
-			return this.Id;
+			return this.Id + ": " + this.Name;
 		}
 	}
 
