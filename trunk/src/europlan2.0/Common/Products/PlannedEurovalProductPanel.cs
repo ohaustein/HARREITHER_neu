@@ -143,11 +143,26 @@ namespace Europlan.Common {
 			this.tabs.SelectedTab = this.pageInput;
 
 			// room items
-			this.roomDataGridViewTextBoxColumn.Items.Clear();
-			this.roomDataGridViewTextBoxColumn.Items.Add("");
+			this.roomDataGridViewComboBoxColumn.Items.Clear();
+			this.roomDataGridViewComboBoxColumn.Items.Add("");
 			foreach (Floor f in Project.Instance.Floors) {
-				foreach (Room r in f.Rooms) {
-					this.roomDataGridViewTextBoxColumn.Items.Add(r);
+				if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
+					foreach (Room r in f.Rooms) {
+						this.roomDataGridViewComboBoxColumn.Items.Add(r);
+					}
+				}
+			}
+
+			// product items
+			this.productDataGridViewComboBoxColumn.Items.Clear();
+			this.productDataGridViewComboBoxColumn.Items.Add("");
+			foreach (Floor f in Project.Instance.Floors) {
+				if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
+					foreach (Room r in f.Rooms) {
+						foreach (PlannedProduct p in r.PlannedProducts) {
+							this.productDataGridViewComboBoxColumn.Items.Add(p);
+						}
+					}
 				}
 			}
 
@@ -863,5 +878,42 @@ namespace Europlan.Common {
 				this.ProjectChanged(this);
 			}
 		}
+
+		private void dgvConnectionPipes_CellParsing(object sender, DataGridViewCellParsingEventArgs e) {
+			if (e.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex) {
+				this.product = this.Tag as PlannedProduct;
+				foreach (Floor f in Project.Instance.Floors) {
+					if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
+						foreach (Room r in f.Rooms) {
+							if (r.ToString().Equals(e.Value)) {
+								e.Value = r;
+								e.ParsingApplied = true;
+								return;
+							}
+						}
+					}
+				}
+			} else if (e.ColumnIndex == productDataGridViewComboBoxColumn.DisplayIndex) {
+				this.product = this.Tag as PlannedProduct;
+				foreach (Floor f in Project.Instance.Floors) {
+					if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
+						foreach (Room r in f.Rooms) {
+							foreach (PlannedProduct p in r.PlannedProducts) {
+								if (p.ToString().Equals(e.Value)) {
+									e.Value = p;
+									e.ParsingApplied = true;
+									return;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		private void dgvConnectionPipes_DataError(object sender, DataGridViewDataErrorEventArgs e) {
+			string test = e.Exception.ToString();
+		}
+
 	}
 }
