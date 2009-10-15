@@ -45,6 +45,10 @@ namespace Europlan.Common {
 			set { this.id = value; }
 		}
 
+		public override string ToString() {
+			return this.productNode.Text;
+		}
+
 		[XmlIgnore]
 		public Product.ProductType PlannedProductType {
 			get {
