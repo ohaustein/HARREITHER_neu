@@ -130,6 +130,18 @@
     <Compile Include="Products\ProductNameAttribute.cs" />
     <Compile Include="Products\HithermCompactRoofProduct.cs" />
     <Compile Include="Products\ConnectionPipe.cs" />
+    <Compile Include="Project\SelectPlannedProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\SelectPlannedProductForm.Designer.cs">
+      <DependentUpon>SelectPlannedProductForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\SelectRoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\SelectRoomForm.Designer.cs">
+      <DependentUpon>SelectRoomForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\FacilityDetailsSummaryPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -297,6 +309,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConstructionEditor\ConstructionEditorGrid.resx">
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\SelectPlannedProductForm.resx">
+      <DependentUpon>SelectPlannedProductForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\SelectRoomForm.resx">
+      <DependentUpon>SelectRoomForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\FacilityDetailsSummaryPanel.resx">

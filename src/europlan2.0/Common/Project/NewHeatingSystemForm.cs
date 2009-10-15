@@ -52,7 +52,7 @@ namespace Europlan.Common {
 
 		private void NewHeatingSystemForm_FormClosing(object sender, FormClosingEventArgs e) {
 			if (this.lstHeatingSystems.SelectedItems.Count == 0 && this.DialogResult == DialogResult.OK) {
-				MessageBox.Show("Bitte wählen Sie ein Heizungssystem aus", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show("Bitte wählen Sie ein Heizungssystem aus.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				e.Cancel = true;
 			}
 		}
