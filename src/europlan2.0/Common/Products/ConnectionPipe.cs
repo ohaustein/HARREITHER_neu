@@ -565,7 +565,7 @@ namespace Europlan.Common {
 				double ruecklaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(ruecklaufWaermedurchgangsKoeffizient, ruecklaufHeizmitteluebertemperatur);
 				double ruecklaufHeatLoad = ruecklaufWaermestromDichte * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetLayDistance(this.verlegeart));
 
-				return vorlaufHeatLoad + ruecklaufHeatLoad;
+				return -vorlaufHeatLoad - ruecklaufHeatLoad;
 			}
 		}
 	}
