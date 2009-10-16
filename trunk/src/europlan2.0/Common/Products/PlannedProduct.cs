@@ -276,17 +276,17 @@ namespace Europlan.Common {
 					}
 					if (this.plannedProduct.AssociatedRoom != null) {
 						List<PlannedProduct> products = this.plannedProduct.AssociatedRoom.PlannedProducts;
-						Dictionary<Type, int> productCounter = new Dictionary<Type, int>();
+						Dictionary<Product.ProductType, int> productCounter = new Dictionary<Product.ProductType, int>();
 						foreach (PlannedProduct p in products) {
-							if (!productCounter.ContainsKey(p.Product.GetType())) {
-								productCounter.Add(p.Product.GetType(), 1);
+							if (!productCounter.ContainsKey(p.PlannedProductType)) {
+								productCounter.Add(p.PlannedProductType, 1);
 							} else {
-								productCounter[p.Product.GetType()] = productCounter[p.Product.GetType()] + 1;
+								productCounter[p.PlannedProductType] = productCounter[p.PlannedProductType] + 1;
 							}
-							p.productNode.Text = p.PlannedProductType.ToString() + productCounter[p.Product.GetType()] + ": " + p.System;
+							p.productNode.Text = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType] + ": " + p.System;
 						}
-						if (productCounter.ContainsKey(this.Product.GetType())) {
-							this.productNode.Text = this.PlannedProductType.ToString() + (productCounter[this.Product.GetType()] + 1) + ": " + this.System;
+						if (productCounter.ContainsKey(this.PlannedProductType)) {
+							this.productNode.Text = this.PlannedProductType.ToString() + (productCounter[this.PlannedProductType] + 1) + ": " + this.System;
 						} else {
 							this.productNode.Text = this.PlannedProductType.ToString() + "1: " + this.System;
 						}
@@ -383,14 +383,14 @@ namespace Europlan.Common {
 			this.plannedProduct.FinalizeLoading();
 
 			List<PlannedProduct> products = this.plannedProduct.AssociatedRoom.PlannedProducts;
-			Dictionary<Type, int> productCounter = new Dictionary<Type, int>();
+			Dictionary<Product.ProductType, int> productCounter = new Dictionary<Product.ProductType, int>();
 			foreach (PlannedProduct p in products) {
-				if (!productCounter.ContainsKey(p.Product.GetType())) {
-					productCounter.Add(p.Product.GetType(), 1);
+				if (!productCounter.ContainsKey(p.PlannedProductType)) {
+					productCounter.Add(p.PlannedProductType, 1);
 				} else {
-					productCounter[p.Product.GetType()] = productCounter[p.Product.GetType()] + 1;
+					productCounter[p.PlannedProductType] = productCounter[p.PlannedProductType] + 1;
 				}
-				p.productNode.Text = this.PlannedProductType.ToString() + productCounter[p.Product.GetType()] + ": " + this.System;
+				p.productNode.Text = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType] + ": " + p.System;
 			}
 		}
 

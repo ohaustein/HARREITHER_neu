@@ -30,11 +30,12 @@ namespace Europlan.Common {
 			// 
 			// tvDistributors
 			// 
-			this.tvDistributors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
+			this.tvDistributors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.tvDistributors.Location = new System.Drawing.Point(12, 12);
 			this.tvDistributors.Name = "tvDistributors";
-			this.tvDistributors.Size = new System.Drawing.Size(254, 370);
+			this.tvDistributors.Size = new System.Drawing.Size(367, 270);
 			this.tvDistributors.TabIndex = 0;
 			this.tvDistributors.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvDistributors_AfterSelect);
 			// 
@@ -42,7 +43,7 @@ namespace Europlan.Common {
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(188, 388);
+			this.btnCancel.Location = new System.Drawing.Point(301, 288);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 1;
@@ -54,7 +55,7 @@ namespace Europlan.Common {
 			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOk.Enabled = false;
-			this.btnOk.Location = new System.Drawing.Point(107, 388);
+			this.btnOk.Location = new System.Drawing.Point(220, 288);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
 			this.btnOk.TabIndex = 2;
@@ -67,7 +68,7 @@ namespace Europlan.Common {
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(275, 423);
+			this.ClientSize = new System.Drawing.Size(388, 323);
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.tvDistributors);
