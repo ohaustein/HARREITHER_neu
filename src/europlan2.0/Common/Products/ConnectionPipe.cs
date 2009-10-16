@@ -7,7 +7,6 @@ namespace Europlan.Common {
 	public class ConnectionPipe {
 
 		public class PipeTypeEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string none = "";
 			private static readonly string euroval = "Euroval FBH 24/17";
 			private static readonly string rundrohr = "21mm Rundrohr";
 
@@ -15,10 +14,8 @@ namespace Europlan.Common {
 			private Dictionary<PipeTypeEnum, string> mappingToString = new Dictionary<PipeTypeEnum, string>();
 
 			public PipeTypeEnumConverter() {
-				mappingFromString.Add(none, PipeTypeEnum.PT_NONE);
 				mappingFromString.Add(euroval, PipeTypeEnum.PT_EUROVAL);
 				mappingFromString.Add(rundrohr, PipeTypeEnum.PT_21MM);
-				mappingToString.Add(PipeTypeEnum.PT_NONE, none);
 				mappingToString.Add(PipeTypeEnum.PT_EUROVAL, euroval);
 				mappingToString.Add(PipeTypeEnum.PT_21MM, rundrohr);
 			}
@@ -52,13 +49,11 @@ namespace Europlan.Common {
 
 		[System.ComponentModel.TypeConverter(typeof(PipeTypeEnumConverter))]
 		public enum PipeTypeEnum {
-			PT_NONE,
 			PT_EUROVAL,
 			PT_21MM
 		}
 
 		public class VerlegeartEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string none = "";
 			private static readonly string unterEstrich = "unter Estrich";
 			private static readonly string ev35 = "EV35";
 			private static readonly string ev30 = "EV30";
@@ -73,7 +68,6 @@ namespace Europlan.Common {
 			private Dictionary<VerlegeartEnum, string> mappingToString = new Dictionary<VerlegeartEnum, string>();
 
 			public VerlegeartEnumConverter() {
-				mappingFromString.Add(none, VerlegeartEnum.VA_NONE);
 				mappingFromString.Add(unterEstrich, VerlegeartEnum.VA_UNTER_ESTRICH);
 				mappingFromString.Add(ev35, VerlegeartEnum.VA_EV35);
 				mappingFromString.Add(ev30, VerlegeartEnum.VA_EV30);
@@ -83,7 +77,6 @@ namespace Europlan.Common {
 				mappingFromString.Add(ev10, VerlegeartEnum.VA_EV10);
 				mappingFromString.Add(ev5, VerlegeartEnum.VA_EV5);
 				mappingFromString.Add(a5, VerlegeartEnum.VA_A5);
-				mappingToString.Add(VerlegeartEnum.VA_NONE, none);
 				mappingToString.Add(VerlegeartEnum.VA_UNTER_ESTRICH, unterEstrich);
 				mappingToString.Add(VerlegeartEnum.VA_EV35, ev35);
 				mappingToString.Add(VerlegeartEnum.VA_EV30, ev30);
@@ -124,7 +117,6 @@ namespace Europlan.Common {
 
 		[System.ComponentModel.TypeConverter(typeof(VerlegeartEnumConverter))]
 		public enum VerlegeartEnum {
-			VA_NONE,
 			VA_UNTER_ESTRICH,
 			VA_EV35,
 			VA_EV30,
@@ -206,8 +198,8 @@ namespace Europlan.Common {
 			this.product = null;
 			this.print = false;
 			this.onlyFirst = false;
-			this.pipeType = PipeTypeEnum.PT_NONE;
-			this.verlegeart = VerlegeartEnum.VA_NONE;
+			this.pipeType = PipeTypeEnum.PT_EUROVAL;
+			this.verlegeart = VerlegeartEnum.VA_EV5;
 			this.insulation = InsulationEnum.IN_NONE;
 		}
 
