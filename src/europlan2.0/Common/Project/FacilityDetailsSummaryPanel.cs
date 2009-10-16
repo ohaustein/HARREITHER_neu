@@ -30,7 +30,7 @@ namespace Europlan.Common {
 			numHumidity.Enabled = chkCool.Checked;
 			numInsideTemperature.Enabled = chkCool.Checked;
 			if (chkCool.Checked) {
-				numDewPoint.Text = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)numHumidity.Value) / 100, (double)numInsideTemperature.Value), 2).ToString();
+				numDewPoint.Text = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)numHumidity.Value) / 100, (double)numInsideTemperature.Value), 1).ToString();
 			} else {
 				numDewPoint.Text = "";
 			}
@@ -38,6 +38,15 @@ namespace Europlan.Common {
 		}
 
 		public bool AllowLeave() {
+			if (Project.Instance.CalculateCoolLoad) {
+				double dewPoint = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)Project.Instance.RelativeHumidity) / 100, (double)Project.Instance.InsideTemperatureForCooling), 1);
+				foreach (RegulatorCircuit circuit in Project.Instance.RegulatorCircuits) {
+					if (dewPoint > circuit.CoolFlowTemperature) {
+						DialogResult result = MessageBox.Show("Bei mindestens einem Regelkreis ist die Kühltemperatur niedriger als der Taupunkt gemäß den eingegebenen Projektdaten. Wollen Sie die Eingaben korrigieren?", "Eingabefehler", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+						return result.Equals(DialogResult.Yes) ? false : true;
+					}
+				}
+			}
 			return true;
 		}
 
@@ -61,7 +70,7 @@ namespace Europlan.Common {
 			numHumidity.Enabled = chkCool.Checked;
 			numInsideTemperature.Enabled = chkCool.Checked;
 			if (chkCool.Checked) {
-				numDewPoint.Text = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)numHumidity.Value) / 100, (double)numInsideTemperature.Value), 2).ToString();
+				numDewPoint.Text = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)numHumidity.Value) / 100, (double)numInsideTemperature.Value), 1).ToString();
 			} else {
 				numDewPoint.Text = "";
 			}
@@ -80,7 +89,7 @@ namespace Europlan.Common {
 		private void numHumidity_ValueChanged(object sender, EventArgs e) {
 			Project.Instance.RelativeHumidity = (int)numHumidity.Value;
 			if (chkCool.Checked) {
-				numDewPoint.Text = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)numHumidity.Value) / 100, (double)numInsideTemperature.Value), 2).ToString();
+				numDewPoint.Text = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)numHumidity.Value) / 100, (double)numInsideTemperature.Value), 1).ToString();
 			} else {
 				numDewPoint.Text = "";
 			}
@@ -92,7 +101,7 @@ namespace Europlan.Common {
 		private void numInsideTemperature_ValueChanged(object sender, EventArgs e) {
 			Project.Instance.InsideTemperatureForCooling = (int)numInsideTemperature.Value;
 			if (chkCool.Checked) {
-				numDewPoint.Text = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)numHumidity.Value) / 100, (double)numInsideTemperature.Value), 2).ToString();
+				numDewPoint.Text = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)numHumidity.Value) / 100, (double)numInsideTemperature.Value), 1).ToString();
 			} else {
 				numDewPoint.Text = "";
 			}
