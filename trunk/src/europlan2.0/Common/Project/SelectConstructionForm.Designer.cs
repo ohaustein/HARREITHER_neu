@@ -27,13 +27,13 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvConstructions = new System.Windows.Forms.DataGridView();
-			this.btnOk = new System.Windows.Forms.Button();
-			this.btnCancel = new System.Windows.Forms.Button();
-			this.constructionBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.rValueDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+			this.constructionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnOk = new System.Windows.Forms.Button();
+			this.btnCancel = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvConstructions)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.constructionBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -61,30 +61,6 @@ namespace Europlan.Common {
 			this.dgvConstructions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvConstructions.Size = new System.Drawing.Size(492, 240);
 			this.dgvConstructions.TabIndex = 1;
-			// 
-			// btnOk
-			// 
-			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOk.Location = new System.Drawing.Point(348, 258);
-			this.btnOk.Name = "btnOk";
-			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 2;
-			this.btnOk.Text = "OK";
-			this.btnOk.UseVisualStyleBackColor = true;
-			// 
-			// btnCancel
-			// 
-			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(429, 258);
-			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 3;
-			this.btnCancel.Text = "Abbrechen";
-			this.btnCancel.UseVisualStyleBackColor = true;
-			// 
-			// constructionBindingSource
-			// 
-			this.constructionBindingSource.DataSource = typeof(Europlan.Common.Construction);
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -115,7 +91,7 @@ namespace Europlan.Common {
 			// 
 			this.rValueDataGridViewTextBoxColumn.DataPropertyName = "RValue";
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F0";
+			dataGridViewCellStyle2.Format = "F3";
 			this.rValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
 			this.rValueDataGridViewTextBoxColumn.FillWeight = 50F;
 			this.rValueDataGridViewTextBoxColumn.HeaderText = "R";
@@ -125,6 +101,30 @@ namespace Europlan.Common {
 			this.rValueDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.rValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.rValueDataGridViewTextBoxColumn.Width = 50;
+			// 
+			// constructionBindingSource
+			// 
+			this.constructionBindingSource.DataSource = typeof(Europlan.Common.Construction);
+			// 
+			// btnOk
+			// 
+			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.btnOk.Location = new System.Drawing.Point(348, 258);
+			this.btnOk.Name = "btnOk";
+			this.btnOk.Size = new System.Drawing.Size(75, 23);
+			this.btnOk.TabIndex = 2;
+			this.btnOk.Text = "OK";
+			this.btnOk.UseVisualStyleBackColor = true;
+			// 
+			// btnCancel
+			// 
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.Location = new System.Drawing.Point(429, 258);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(75, 23);
+			this.btnCancel.TabIndex = 3;
+			this.btnCancel.Text = "Abbrechen";
+			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
 			// SelectConstructionForm
 			// 
@@ -138,6 +138,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.dgvConstructions);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "SelectConstructionForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Bitte wählen Sie die gewünschte Konstruktion";
 			this.Load += new System.EventHandler(this.SelectConstructionForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SelectConstructionForm_FormClosing);

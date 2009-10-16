@@ -84,7 +84,10 @@ namespace Europlan.Common {
 			this.Controls.Add(this.lstPlannedProducts);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "SelectPlannedProduct";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Bitte wählen Sie das gewünschte Teilsystem";
+			this.Load += new System.EventHandler(this.SelectPlannedProduct_Load);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SelectPlannedProduct_FormClosing);
 			this.ResumeLayout(false);
 
 		}

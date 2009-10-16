@@ -84,7 +84,9 @@ namespace Europlan.Common {
 			this.Controls.Add(this.lstRooms);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "SelectRoomForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Bitte wählen Sie den gewünschten Raum";
+			this.Load += new System.EventHandler(this.SelectRoomForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SelectRoomForm_FormClosing);
 			this.ResumeLayout(false);
 

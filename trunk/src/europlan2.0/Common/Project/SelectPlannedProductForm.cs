@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Star.SettingsXpress;
 
 namespace Europlan.Common {
 	public partial class SelectPlannedProduct : Form {
@@ -46,6 +47,15 @@ namespace Europlan.Common {
 				MessageBox.Show("Bitte wählen Sie eine Teilsystem aus.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				e.Cancel = true;
 			}
+			SettingsKey settings = SettingsFile.Settings["SelectPlannedProduct"];
+			settings.StorePoint("Location", this.Location);
+			SettingsFile.Update();
 		}
+
+		private void SelectPlannedProduct_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["SelectPlannedProduct"];
+			this.Location = settings.GetPoint("Location", this.Location);
+		}
+
 	}
 }

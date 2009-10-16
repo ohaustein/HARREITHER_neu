@@ -84,7 +84,9 @@ namespace Europlan.Common {
 			this.Controls.Add(this.lstHeatingSystems);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "NewHeatingSystemForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Bitte wählen Sie das gewünschte Heizungssystem";
+			this.Load += new System.EventHandler(this.NewHeatingSystemForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewHeatingSystemForm_FormClosing);
 			this.ResumeLayout(false);
 
