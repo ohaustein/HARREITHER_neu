@@ -182,6 +182,17 @@ namespace Europlan.Common {
 				}
 			}
 			this.deletedProduct = null;
+
+			List<PlannedProduct> products = this.room.PlannedProducts;
+			Dictionary<Product.ProductType, int> productCounter = new Dictionary<Product.ProductType, int>();
+			foreach (PlannedProduct p in products) {
+				if (!productCounter.ContainsKey(p.PlannedProductType)) {
+					productCounter.Add(p.PlannedProductType, 1);
+				} else {
+					productCounter[p.PlannedProductType] = productCounter[p.PlannedProductType] + 1;
+				}
+				p.Node.Text = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType] + ": " + p.System;
+			}
 		}
 
 		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e) {
