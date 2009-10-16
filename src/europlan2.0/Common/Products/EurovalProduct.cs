@@ -1176,7 +1176,7 @@ namespace Europlan.Common {
 
 				double QFbk = aRz * qRz + aAz * qAz;                                          // gesamte in den Raum abgegebene Wärme
 
-				this.plannedCoolLoad = QFbk + anbindungCoolLoad;
+				this.plannedCoolLoad = -QFbk + anbindungCoolLoad;
 				this.plannedCoolLoadAnbindung = anbindungCoolLoad;
 				this.plannedQCool = -QFbk / aGes;
 				this.plannedQCoolRim = -qRz;
