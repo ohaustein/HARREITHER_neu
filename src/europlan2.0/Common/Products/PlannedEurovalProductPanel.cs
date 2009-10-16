@@ -153,7 +153,6 @@ namespace Europlan.Common {
 
 			// pipe type items
 			this.PipeType.Items.Clear();
-			this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_NONE);
 			this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_EUROVAL);
 			if (this.product != null && this.product.Product != null &&
 				this.product.Product.PlannedConnection != null) {
@@ -165,7 +164,6 @@ namespace Europlan.Common {
 
 			// verlegeart items
 			this.Verlegeart.Items.Clear();
-			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_NONE);
 			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH);
 			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV35);
 			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV30);
