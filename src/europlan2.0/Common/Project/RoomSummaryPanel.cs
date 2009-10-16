@@ -218,6 +218,12 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void dgvProducts_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
 
 	}
 }
