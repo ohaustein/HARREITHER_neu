@@ -11,11 +11,13 @@ namespace Europlan.Common {
 	public partial class NewHeatingSystemForm : Form {
 		public NewHeatingSystemForm() {
 			InitializeComponent();
-			foreach (Type t in this.GetType().Assembly.GetTypes()) {
-				if (t.IsSubclassOf(typeof(Product))) {
-					this.lstHeatingSystems.Items.Add(new HeatingSystemItem(t));
-				}
-			}
+			// TODO: enable again
+			//foreach (Type t in this.GetType().Assembly.GetTypes()) {
+			//    if (t.IsSubclassOf(typeof(Product))) {
+			//        this.lstHeatingSystems.Items.Add(new HeatingSystemItem(t));
+			//    }
+			//}
+			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(EurovalProduct)));
 			if (this.lstHeatingSystems.Items.Count > 0) {
 				this.lstHeatingSystems.Items[0].Selected = true;
 			}
