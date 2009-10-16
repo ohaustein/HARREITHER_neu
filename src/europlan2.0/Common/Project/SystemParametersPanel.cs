@@ -44,7 +44,7 @@ namespace Europlan.Common {
 			rbHarreitherNorm.Checked = EurovalProduct.ConfigUseHarreitherNorm;
 			rbEN1264.Checked = !EurovalProduct.ConfigUseHarreitherNorm;
 			numCircuitLength.Value = (decimal)EurovalProduct.ConfigMaxCircuitLength;
-			numPressurePa.Value = EurovalProduct.ConfigMaxPressureLost / 100;
+			numPressurePa.Value = EurovalProduct.ConfigMaxPressureLost;
 			numDurchfluss.Value = EurovalProduct.ConfigMaxDurchfluss;
 			numSpreizungHeizMin.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMin;
 			numSpreizungHeizMax.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMax;
