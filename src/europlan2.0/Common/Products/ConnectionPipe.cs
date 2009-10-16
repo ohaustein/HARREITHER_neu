@@ -309,5 +309,43 @@ namespace Europlan.Common {
 			get { return this.insulation; }
 			set { this.insulation = value; }
 		}
+
+		[XmlIgnore]
+		public double Area {
+			get {
+				switch (verlegeart) {
+					case VerlegeartEnum.VA_NONE:
+					case VerlegeartEnum.VA_UNTER_ESTRICH:
+						return 0;
+
+					case VerlegeartEnum.VA_EV35:
+						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV35);
+
+					case VerlegeartEnum.VA_EV30:
+						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV30);
+
+					case VerlegeartEnum.VA_EV25:
+						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV25);
+
+					case VerlegeartEnum.VA_EV20:
+						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV20);
+
+					case VerlegeartEnum.VA_EV15:
+						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV15);
+
+					case VerlegeartEnum.VA_EV10:
+						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV10);
+
+					case VerlegeartEnum.VA_EV5:
+						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV5);
+
+					case VerlegeartEnum.VA_A5:
+						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.A5);
+
+					default:
+						return 0;
+				}
+			}
+		}
 	}
 }
