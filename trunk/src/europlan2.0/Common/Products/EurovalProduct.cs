@@ -1185,7 +1185,7 @@ namespace Europlan.Common {
 				//                                                                           // Kühlverlust nach unten berechnen
 
 				// hydraulische Berechnung
-				double qH2o = (this.plannedQCool + this.plannedQCoolU) * aGes;                                        // gesamte aufgenommene Leistung berechnen
+				double qH2o = (-this.plannedQCool - this.plannedQCoolU) * aGes;                                        // gesamte aufgenommene Leistung berechnen
 				double deltaT = thetaVrz - thetaRaz;                                          // gesamte Spreizung
 				this.plannedDeltaRhoCool = en1264.DruckverlustRohr(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, this.PlannedPipeLengthPerCircuit);
 				//                                                                            // gesamten Druckverlust berechnen
