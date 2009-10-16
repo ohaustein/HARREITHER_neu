@@ -7,7 +7,7 @@ using System.Collections;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Euroval®")]
+	[ProductName("Euroval® Fußbodenheizung")]
 	public class EurovalProduct : Product {
 
 		private static double su0 = 0.045; /* Mindestüberdeckung fix??? */
