@@ -87,6 +87,22 @@ namespace Europlan.Common {
 			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV5_40, "EV5/40"));
 			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV5_80, "EV5/80"));
 			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV5_120, "EV5/120"));
+
+			this.cmbCircuits.Items.Clear();
+			this.cmbCircuits.Items.Add("Automatisch");
+			this.cmbCircuits.Items.Add("1");
+			this.cmbCircuits.Items.Add("2");
+			this.cmbCircuits.Items.Add("3");
+			this.cmbCircuits.Items.Add("4");
+			this.cmbCircuits.Items.Add("5");
+			this.cmbCircuits.Items.Add("6");
+			this.cmbCircuits.Items.Add("7");
+			this.cmbCircuits.Items.Add("8");
+			this.cmbCircuits.Items.Add("9");
+			this.cmbCircuits.Items.Add("10");
+			this.cmbCircuits.Items.Add("11");
+			this.cmbCircuits.Items.Add("12");
+
 		}
 
 		#region IEditorUserControl Members
@@ -110,7 +126,8 @@ namespace Europlan.Common {
 			CORNERS = 2048,
 			LAY_DISTANCE = 4096,
 			RIM_TYPE = 8192,
-			CALCULATION_TYPE = 16384
+			CALCULATION_TYPE = 16384,
+			CIRCUIT_COUNT = 32768
 		}
 
 		/*private class ComboItem {
@@ -207,6 +224,7 @@ namespace Europlan.Common {
 		private int ignoreLayDistance = 0;
 		private int ignoreRimType = 0;
 		private int ignoreCalculationType = 0;
+		private int ignoreCircuits = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
@@ -225,8 +243,9 @@ namespace Europlan.Common {
 				ignoreRim++;
 				ignoreCorners++;
 				ignoreLayDistance++;
-				ignoreRim++;
+				ignoreRimType++;
 				ignoreCalculationType++;
+				ignoreCircuits++;
 
 				EurovalProduct evProduct = this.product.Product as EurovalProduct;
 
@@ -379,6 +398,13 @@ namespace Europlan.Common {
 				}
 				if ((skipFields & FieldEnum.RIM_TYPE) == FieldEnum.NONE) {
 					this.cmbRimType.SelectedItem = new RimTypeItem(evProduct.RequestedRimType, "");
+				}
+				if ((skipFields & FieldEnum.CIRCUIT_COUNT) == FieldEnum.NONE) {
+					if (evProduct.RequestedCircuits != null) {
+						this.cmbCircuits.SelectedIndex = evProduct.RequestedCircuits.Value;
+					} else {
+						this.cmbCircuits.SelectedIndex = 0;
+					}
 				}
 
 				if ((skipFields & FieldEnum.CALCULATION_TYPE) == FieldEnum.NONE) {
@@ -551,8 +577,9 @@ namespace Europlan.Common {
 				ignoreRim--;
 				ignoreCorners--;
 				ignoreLayDistance--;
-				ignoreRim--;
+				ignoreRimType--;
 				ignoreCalculationType--;
+				ignoreCircuits--;
 			}
 			// TODO
 		}
@@ -826,6 +853,21 @@ namespace Europlan.Common {
 				}
 			}
 
+		}
+
+		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
+			if (ignoreCircuits == 0) {
+				if (this.cmbCircuits.SelectedIndex > 0) {
+					(this.product.Product as EurovalProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex;
+				} else {
+					(this.product.Product as EurovalProduct).RequestedCircuits = null;
+				}
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.CIRCUIT_COUNT);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
 		}
 
 		private void rbCalculationType_CheckedChanged(object sender, EventArgs e) {

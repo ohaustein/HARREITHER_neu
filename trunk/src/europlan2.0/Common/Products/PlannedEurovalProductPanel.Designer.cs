@@ -175,6 +175,8 @@ namespace Europlan.Common {
 			this.label1 = new System.Windows.Forms.Label();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.cmbCircuits = new System.Windows.Forms.ComboBox();
+			this.label29 = new System.Windows.Forms.Label();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -1136,6 +1138,8 @@ namespace Europlan.Common {
 			// 
 			this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox8.Controls.Add(this.cmbCircuits);
+			this.groupBox8.Controls.Add(this.label29);
 			this.groupBox8.Controls.Add(this.rbCalculateBoth);
 			this.groupBox8.Controls.Add(this.rbCalculateCool);
 			this.groupBox8.Controls.Add(this.rbCalculateHeat);
@@ -1146,7 +1150,7 @@ namespace Europlan.Common {
 			this.groupBox8.Location = new System.Drawing.Point(3, 247);
 			this.groupBox8.MinimumSize = new System.Drawing.Size(750, 0);
 			this.groupBox8.Name = "groupBox8";
-			this.groupBox8.Size = new System.Drawing.Size(847, 91);
+			this.groupBox8.Size = new System.Drawing.Size(847, 108);
 			this.groupBox8.TabIndex = 1;
 			this.groupBox8.TabStop = false;
 			this.groupBox8.Text = "tatsächliche Auslegung";
@@ -1961,6 +1965,33 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2.HeaderText = "Verlegeart";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			// 
+			// cmbCircuits
+			// 
+			this.cmbCircuits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbCircuits.FormattingEnabled = true;
+			this.cmbCircuits.Items.AddRange(new object[] {
+            "Automatisch",
+            "EV35",
+            "EV30",
+            "EV25",
+            "EV20",
+            "EV15",
+            "EV10",
+            "EV5"});
+			this.cmbCircuits.Location = new System.Drawing.Point(368, 72);
+			this.cmbCircuits.Name = "cmbCircuits";
+			this.cmbCircuits.Size = new System.Drawing.Size(138, 21);
+			this.cmbCircuits.TabIndex = 62;
+			this.cmbCircuits.SelectedIndexChanged += new System.EventHandler(this.cmbCircuits_SelectedIndexChanged);
+			// 
+			// label29
+			// 
+			this.label29.Location = new System.Drawing.Point(210, 75);
+			this.label29.Name = "label29";
+			this.label29.Size = new System.Drawing.Size(152, 13);
+			this.label29.TabIndex = 61;
+			this.label29.Text = "Anzahl Heizkreise:";
+			// 
 			// PlannedEurovalProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2142,5 +2173,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewComboBoxColumn PipeType;
 		private System.Windows.Forms.DataGridViewComboBoxColumn Verlegeart;
 		private System.Windows.Forms.DataGridViewComboBoxColumn Insulation;
+		private System.Windows.Forms.ComboBox cmbCircuits;
+		private System.Windows.Forms.Label label29;
 	}
 }
