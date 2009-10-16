@@ -133,6 +133,7 @@ namespace Europlan.Common {
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "NewDistributorForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Verteiler anlegen";
 			this.Load += new System.EventHandler(this.NewDistributorForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewDistributor_FormClosing);
