@@ -306,7 +306,6 @@ namespace Europlan.Common {
 		public double Area {
 			get {
 				switch (verlegeart) {
-					case VerlegeartEnum.VA_NONE:
 					case VerlegeartEnum.VA_UNTER_ESTRICH:
 						return 0;
 
