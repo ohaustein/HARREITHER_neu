@@ -917,7 +917,7 @@ namespace Europlan.Common {
 		#endregion Cool Load
 
 		[XmlIgnore]
-		public double PlannedPipeLength {
+		public override double PlannedPipeLength {
 			get { return this.plannedPipeLength; }
 		}
 
@@ -1293,33 +1293,8 @@ namespace Europlan.Common {
 				}
 			}
 
-			/*LayDistance[] teilungen =
-				(this.requestedLayDistance == null ?
-				new LayDistance[] { LayDistance.EV35, LayDistance.EV30, LayDistance.EV25, LayDistance.EV20, LayDistance.EV15, LayDistance.EV10, LayDistance.EV5 } :
-				new LayDistance[] { this.requestedLayDistance.Value });
-			Nullable<RimType>[] randzonen =
-				(this.requestedRimType == null ?
-					(this.plannedRimLength > 0 ? new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 } :
-					new Nullable<RimType>[] { null }) :
-				new Nullable<RimType>[] { this.requestedRimType.Value });*/
-			//bool found = false;
-			//int i = 0;
 			Nullable<LayDistance> curLaydistance = null;
-			//int j = 0;
 			Nullable<RimType> curRimtype = null;
-			double qHeat = 0;
-			double qHeatU = 0;
-			double qHeatRim = 0;
-			double qHeatResidence = 0;
-			double deltaRhoHeat = 0;
-			double spreizungHeat = 0;
-			double qCool = 0;
-			double qCoolU = 0;
-			double qCoolRim = 0;
-			double qCoolResidence = 0;
-			double deltaRhoCool = 0;
-			double spreizungCool = 0;
-			double pipeLength = 0;
 			Nullable<RimType> distanceRim = this.plannedRimLength > 0 ? (Nullable<RimType>)RimType.EV15_60 : (Nullable<RimType>)null;
 			Dictionary<LayDistance, Nullable<RimType>[]>.KeyCollection.Enumerator ldEnumerator = teilungen.Keys.GetEnumerator();
 			Nullable<LayDistance> bestLaydistance = null;
@@ -1334,17 +1309,19 @@ namespace Europlan.Common {
 			double bestPressureLossCool = double.MaxValue;
 			double bestHeatLoad = 0;
 			double bestCoolLoad = 0;
-			while (/*!found && */ldEnumerator.MoveNext()) {
+			while (ldEnumerator.MoveNext()) {
 				curLaydistance = ldEnumerator.Current;
 				IEnumerator rtEnumerator = teilungen[curLaydistance.Value].GetEnumerator();
-				while (/*!found && */rtEnumerator.MoveNext()) {
+				while (rtEnumerator.MoveNext()) {
 					curRimtype = rtEnumerator.Current as Nullable<RimType>;
-					this.CalculateQForLayDistance(curLaydistance.Value, curRimtype, null);
-					// if pressure loss is to large increase circuits until pressure loss is within the valid range
-					while (this.plannedCircuits < 12 &&
-						(calculateHeat && this.PlannedDeltaRhoHeat > EurovalProduct.maxPressureLost / 100) ||
-						(calculateCool && this.PlannedDeltaRhoCool > EurovalProduct.maxPressureLost / 100)) {
-						this.CalculateQForLayDistance(curLaydistance.Value, curRimtype, this.plannedCircuits + 1);
+					this.CalculateQForLayDistance(curLaydistance.Value, curRimtype, this.requestedCircuits);
+					if (!this.requestedCircuits.HasValue) {
+						// if pressure loss is to large increase circuits until pressure loss is within the valid range
+						while (this.plannedCircuits < 12 &&
+								(calculateHeat && this.PlannedDeltaRhoHeat > EurovalProduct.maxPressureLost / 100) ||
+								(calculateCool && this.PlannedDeltaRhoCool > EurovalProduct.maxPressureLost / 100)) {
+							this.CalculateQForLayDistance(curLaydistance.Value, curRimtype, this.plannedCircuits + 1);
+						}
 					}
 					// check if new parameters are better than the old ones
 					if ((!bestLaydistance.HasValue && this.CheckHardParameters(this.PlannedFloorTemperatureHeatRim, this.PlannedFloorTemperatureHeatResidence, this.PlannedDeltaRhoHeat,
@@ -1371,10 +1348,6 @@ namespace Europlan.Common {
 						bestHeatLoad = this.PlannedHeatLoad;
 						bestCoolLoad = this.PlannedCoolLoad;
 					}
-					/*if ((!calculateHeat || this.PlannedHeatLoad >= requestedHeatLoad) &&
-						(!calculateCool || this.PlannedCoolLoad >= requestedCoolLoad)) {
-						found = true;
-					}*/
 				}
 			}
 			if (!bestLaydistance.HasValue) {
@@ -1416,62 +1389,6 @@ namespace Europlan.Common {
 				this.plannedDeltaRhoCool = 0;
 				this.plannedSpreizungCool = 0;
 			}
-
-			/*while (!found && i < teilungen.Length) {
-				j = 0;
-				while (!found && j < randzonen.Length) {
-					this.CalculateQForLayDistance(teilungen[i], randzonen[j],
-						out qHeatU, out qHeat, out qHeatRim, out qHeatResidence, out deltaRhoHeat, out spreizungHeat,
-						out qCoolU, out qCool, out qCoolRim, out qCoolResidence, out deltaRhoCool, out spreizungCool,
-						out pipeLength);
-					if ((!calculateHeat || qHeat * this.PlannedFloorArea >= requestedHeatLoad) &&
-							(!calculateCool || -qCool * this.PlannedFloorArea >= requestedCoolLoad)) {
-						found = true;
-					} else {
-						j++;
-					}
-				}
-				if (!found) {
-					i++;
-				}
-			}
-			if (!found) {
-				i--;
-				j--;
-			}
-			this.PlannedLayDistance = teilungen[i];
-			this.PlannedRimType = randzonen[j];
-			if (requestedHeatLoad > 0) {
-				this.plannedQHeat = qHeat;
-				this.plannedQHeatU = qHeatU;
-				this.plannedQHeatRim = qHeatRim;
-				this.plannedQHeatResidence = qHeatResidence;
-				this.plannedDeltaRhoHeat = deltaRhoHeat;
-				this.plannedSpreizungHeat = spreizungHeat;
-			} else {
-				this.plannedQHeat = 0;
-				this.plannedQHeatU = 0;
-				this.plannedQHeatRim = 0;
-				this.plannedQHeatResidence = 0;
-				this.plannedDeltaRhoHeat = 0;
-				this.plannedSpreizungHeat = 0;
-			}
-			if (requestedCoolLoad > 0) {
-				this.plannedQCool = -qCool;
-				this.plannedQCoolU = -qCoolU;
-				this.plannedQCoolRim = -qCoolRim;
-				this.plannedQCoolResidence = -qCoolResidence;
-				this.plannedDeltaRhoCool = deltaRhoCool;
-				this.plannedSpreizungCool = spreizungCool;
-			} else {
-				this.plannedQCool = 0;
-				this.plannedQCoolU = 0;
-				this.plannedQCoolRim = 0;
-				this.plannedQCoolResidence = 0;
-				this.plannedDeltaRhoCool = 0;
-				this.plannedSpreizungCool = 0;
-			}
-			this.plannedPipeLength = pipeLength;*/
 			errorMsg = null;
 			return true;
 		}

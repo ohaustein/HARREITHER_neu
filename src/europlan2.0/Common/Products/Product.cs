@@ -259,6 +259,11 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public abstract double PlannedPipeLength {
+			get;
+		}
+
+		[XmlIgnore]
 		public abstract ConnectionPipe.PipeTypeEnum DefaultPipeType {
 			get;
 		}

@@ -338,5 +338,88 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		[XmlIgnore]
+		public double HeatLoad {
+			get {
+				if (this.verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH) {
+					return 0;
+				}
+
+				PlannedProduct originalProduct = null;
+				foreach (Floor f in Project.Instance.Floors) {
+					foreach (Room r in f.Rooms) {
+						foreach (PlannedProduct pp in r.PlannedProducts) {
+							foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
+								if (cp == this) {
+									originalProduct = pp;
+									break;
+								}
+							}
+							if (originalProduct != null) {
+								break;
+							}
+						}
+						if (originalProduct != null) {
+							break;
+						}
+					}
+					if (originalProduct != null) {
+						break;
+					}
+				}
+
+				if (originalProduct.Product.PlannedConnection == null || originalProduct.Product.PlannedConnection.Distributor == null || originalProduct.Product.PlannedConnection.Distributor.RegulatorCircuit == null) {
+					// TODO
+					return 0;
+				}
+				double distributorTempOutHeat = originalProduct.Product.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
+				double distributorSpreizungHeat = EN1264.Instance.DefaultSpreizung(distributorTempOutHeat);
+				double distributorTempOutCool = originalProduct.Product.PlannedConnection.Distributor.RegulatorCircuit.CoolFlowTemperature;
+				double distributorSpreizungCool = 6;
+
+				double totalPipeLength = originalProduct.Product.PlannedPipeLength;
+				double pipeBeforeVorlauf = 0;
+				double pipeAfterVorlauf = totalPipeLength;
+				double pipeBeforeRuecklauf = totalPipeLength;
+				double pipeAfterRuecklauf = 0;
+				bool found = false;
+
+				foreach (ConnectionPipe cp in originalProduct.Product.PlannedConnectionPipes) {
+					if (cp == this) {
+						found = true;
+					} else {
+						if (!found) {
+							pipeBeforeVorlauf += cp.Vorlauf;
+							pipeAfterRuecklauf += cp.Ruecklauf;
+						}
+						pipeBeforeVorlauf += cp.Vorlauf;
+						pipeAfterVorlauf += cp.Ruecklauf;
+					}
+				}
+
+				double vorlaufTempInHeat = distributorTempOutHeat - (distributorSpreizungHeat * pipeBeforeVorlauf / totalPipeLength);
+				double vorlaufTempOutHeat = distributorTempOutHeat - distributorSpreizungHeat + (distributorSpreizungHeat * pipeAfterVorlauf / totalPipeLength);
+				double ruecklaufTempInHeat = distributorTempOutHeat - (distributorSpreizungHeat * pipeBeforeRuecklauf / totalPipeLength);
+				double ruecklaufTempOutHeat = distributorTempOutHeat - distributorSpreizungHeat + (distributorSpreizungHeat * pipeAfterRuecklauf / totalPipeLength);
+				double vorlaufTempInCool = distributorTempOutHeat - (distributorSpreizungHeat * pipeBeforeVorlauf / totalPipeLength);
+				double vorlaufTempOutCool = distributorTempOutHeat - distributorSpreizungHeat + (distributorSpreizungHeat * pipeAfterVorlauf / totalPipeLength);
+				double ruecklaufTempInCool = distributorTempOutHeat - (distributorSpreizungHeat * pipeBeforeRuecklauf / totalPipeLength);
+				double ruecklaufTempOutCool = distributorTempOutHeat - distributorSpreizungHeat + (distributorSpreizungHeat * pipeAfterRuecklauf / totalPipeLength);
+
+				return 0;
+
+			}
+		}
+
+		[XmlIgnore]
+		public double CoolLoad {
+			get {
+				if (this.verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH) {
+					return 0;
+				}
+				return 0;
+			}
+		}
 	}
 }
