@@ -24,6 +24,15 @@ namespace Europlan.Common {
 		}
 
 		public bool AllowLeave() {
+			if (Project.Instance.CalculateCoolLoad) {
+				double dewPoint = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)Project.Instance.RelativeHumidity) / 100, (double)Project.Instance.InsideTemperatureForCooling), 2);
+				foreach (RegulatorCircuit circuit in Project.Instance.RegulatorCircuits) {
+					if (dewPoint > circuit.CoolFlowTemperature) {
+						DialogResult result = MessageBox.Show("Bei mindestens einem Regelkreis ist die Kühltemperatur niedriger als der Taupunkt gemäß den eingegebenen Projektdaten. Wollen Sie die Eingaben korrigieren?", "Eingabefehler", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+						return result.Equals(DialogResult.Yes) ? false : true;
+					}
+				}
+			}
 			return true;
 		}
 
