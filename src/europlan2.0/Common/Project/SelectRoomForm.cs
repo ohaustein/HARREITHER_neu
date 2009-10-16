@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Star.SettingsXpress;
 
 namespace Europlan.Common {
 	public partial class SelectRoomForm : Form {
@@ -46,6 +47,14 @@ namespace Europlan.Common {
 				MessageBox.Show("Bitte wählen Sie einen Raum aus.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				e.Cancel = true;
 			}
+			SettingsKey settings = SettingsFile.Settings["SelectRoomForm"];
+			settings.StorePoint("Location", this.Location);
+			SettingsFile.Update();
+		}
+
+		private void SelectRoomForm_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["SelectRoomForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
 		}
 	}
 }
