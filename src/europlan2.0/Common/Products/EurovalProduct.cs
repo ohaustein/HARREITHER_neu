@@ -907,12 +907,12 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double PlannedFloorTemperatureCoolRim {
-			get { return EN1264.Instance.OberflaechenTemperatur(this.plannedQCoolRim, alphaFbk, this.AssociatedRoom.RoomCoolTemperature); }
+			get { return EN1264.Instance.OberflaechenTemperatur(-this.plannedQCoolRim, alphaFbk, this.AssociatedRoom.RoomCoolTemperature); }
 		}
 
 		[XmlIgnore]
 		public double PlannedFloorTemperatureCoolResidence {
-			get { return EN1264.Instance.OberflaechenTemperatur(this.plannedQCoolResidence, alphaFbk, this.AssociatedRoom.RoomCoolTemperature); }
+			get { return EN1264.Instance.OberflaechenTemperatur(-this.plannedQCoolResidence, alphaFbk, this.AssociatedRoom.RoomCoolTemperature); }
 		}
 		#endregion Cool Load
 
