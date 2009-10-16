@@ -53,8 +53,8 @@ namespace Europlan.Common {
 		private float plannedAreaUnheated = 0;
 		private float plannedRimLength = 0;
 		private int plannedRimCorners = 0;
-		private float plannedRoomTemperatureBelowHeat = 10;
-		private float plannedRoomTemperatureBelowCool = 30;
+		private float plannedRoomTemperatureBelowHeat = 18;
+		private float plannedRoomTemperatureBelowCool = 22;
 		private Construction plannedFloorConstruction = null;
 		private Construction plannedInsulationConstruction = null;
 
