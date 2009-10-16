@@ -60,9 +60,11 @@ namespace Europlan.Common {
 
 		private Nullable<LayDistance> requestedLayDistance = null;
 		private Nullable<RimType> requestedRimType = null;
+		private Nullable<int> requestedCircuits = null;
 
 		private Nullable<LayDistance> plannedLayDistance = null;
 		private Nullable<RimType> plannedRimType = null;
+		private int plannedCircuits = 1;
 
 		private double plannedQHeat = 0;
 		private double plannedQHeatRim = 0;
@@ -80,7 +82,6 @@ namespace Europlan.Common {
 		private double plannedMhCool = 0;
 
 		private double plannedPipeLength = 0;
-		private int plannedCircuits = 1;
 		private double plannedRemoveArea = 0;
 		private double plannedRemoveHeatLoad = 0;
 		private double plannedRemoveCoolLoad = 0;
@@ -541,6 +542,15 @@ namespace Europlan.Common {
 		public Nullable<RimType> RequestedRimType {
 			get { return this.requestedRimType; }
 			set { this.requestedRimType = value; }
+		}
+
+		/// <summary>
+		/// The number of circuits the user requested for this product in the planning.
+		/// If this property is null the optimal number of circuits will be calculated.
+		/// </summary>
+		public Nullable<int> RequestedCircuits {
+			get { return this.requestedCircuits; }
+			set { this.requestedCircuits = value; }
 		}
 
 		/// <summary>
