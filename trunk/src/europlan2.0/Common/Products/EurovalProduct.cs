@@ -73,6 +73,8 @@ namespace Europlan.Common {
 		private double plannedDeltaRhoHeat = 0;
 		private double plannedMhHeat = 0;
 		private double plannedSpreizungHeat = 0;
+		private double plannedHeatLoad = 0;
+		private double plannedHeatLoadAnbindung = 0;
 		private double plannedQCool = 0;
 		private double plannedQCoolRim = 0;
 		private double plannedQCoolResidence = 0;
@@ -80,6 +82,8 @@ namespace Europlan.Common {
 		private double plannedDeltaRhoCool = 0;
 		private double plannedSpreizungCool = 0;
 		private double plannedMhCool = 0;
+		private double plannedCoolLoad = 0;
+		private double plannedCoolLoadAnbindung = 0;
 
 		private double plannedPipeLength = 0;
 		private double plannedRemoveArea = 0;
@@ -774,7 +778,12 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public override double PlannedHeatLoad {
-			get { return Math.Round(plannedQHeat * (PlannedFloorArea - this.plannedRemoveArea), 1); }
+			get { return Math.Round(this.plannedHeatLoad, 1); }
+		}
+
+		[XmlIgnore]
+		public double PlannedHeatLoadAnbindung {
+			get { return Math.Round(this.plannedHeatLoadAnbindung, 1); }
 		}
 
 		/// <summary>
@@ -868,7 +877,12 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public override double PlannedCoolLoad {
-			get { return Math.Round(plannedQCool * PlannedFloorArea, 1); }
+			get { return Math.Round(this.plannedCoolLoad, 1); }
+		}
+
+		[XmlIgnore]
+		public double PlannedCoolLoadAnbindung {
+			get { return Math.Round(this.plannedCoolLoadAnbindung, 1); }
 		}
 
 		/// <summary>
@@ -995,11 +1009,28 @@ namespace Europlan.Common {
 			double ruecklaufTotal = 0;
 			double vorlaufNotIsolated = 0;
 			double ruecklaufNotIsolated = 0;
+			double anbindungHeatLoad = 0;
+			double anbindungCoolLoad = 0;
 			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
 				vorlaufNotIsolated += (pipe.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) ? pipe.Vorlauf : 0;
 				ruecklaufNotIsolated += (pipe.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) ? pipe.Ruecklauf : 0;
 				vorlaufTotal += pipe.Vorlauf;
 				ruecklaufTotal += pipe.Ruecklauf;
+				//anbindungHeatLoad += pipe.HeatLoad;
+				//anbindungCoolLoad += pipe.CoolLoad;
+			}
+
+			foreach (Floor f in Project.Instance.Floors) {
+				foreach (Room r in f.Rooms) {
+					foreach (PlannedProduct pp in r.PlannedProducts) {
+						foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
+							if (cp.PlannedProduct != null && cp.PlannedProduct.Product == this) {
+								anbindungHeatLoad += cp.HeatLoad;
+								anbindungCoolLoad += cp.CoolLoad;
+							}
+						}
+					}
+				}
 			}
 
 			double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
@@ -1085,6 +1116,8 @@ namespace Europlan.Common {
 
 				double QFbh = aRz * qRz + aAz * qAz;                                          // gesamte in den Raum abgegebene Wärme
 
+				this.plannedHeatLoad = QFbh + anbindungHeatLoad;
+				this.plannedHeatLoadAnbindung = anbindungHeatLoad;
 				this.plannedQHeat = QFbh / aGes;
 				this.plannedQHeatRim = qRz;
 				this.plannedQHeatResidence = qAz;
@@ -1143,6 +1176,8 @@ namespace Europlan.Common {
 
 				double QFbk = aRz * qRz + aAz * qAz;                                          // gesamte in den Raum abgegebene Wärme
 
+				this.plannedCoolLoad = QFbk + anbindungCoolLoad;
+				this.plannedCoolLoadAnbindung = anbindungCoolLoad;
 				this.plannedQCool = -QFbk / aGes;
 				this.plannedQCoolRim = -qRz;
 				this.plannedQCoolResidence = -qAz;
@@ -1353,6 +1388,8 @@ namespace Europlan.Common {
 			if (!bestLaydistance.HasValue) {
 				this.plannedLayDistance = null;
 				this.plannedRimType = null;
+				this.plannedHeatLoad = 0;
+				this.plannedHeatLoadAnbindung = 0;
 				this.plannedQHeat = 0;
 				this.plannedQHeatU = 0;
 				this.plannedQHeatRim = 0;
@@ -1360,6 +1397,8 @@ namespace Europlan.Common {
 				this.plannedDeltaRhoHeat = 0;
 				this.plannedSpreizungHeat = 0;
 				this.plannedMhHeat = 0;
+				this.plannedCoolLoad = 0;
+				this.plannedCoolLoadAnbindung = 0;
 				this.plannedQCool = 0;
 				this.plannedQCoolU = 0;
 				this.plannedQCoolRim = 0;
@@ -1374,6 +1413,8 @@ namespace Europlan.Common {
 			}
 			this.CalculateQForLayDistance(bestLaydistance.Value, bestRimType, bestCircuits);
 			if (requestedHeatLoad <= 0) {
+				this.plannedHeatLoad = 0;
+				this.plannedHeatLoadAnbindung = 0;
 				this.plannedQHeat = 0;
 				this.plannedQHeatU = 0;
 				this.plannedQHeatRim = 0;
@@ -1382,6 +1423,8 @@ namespace Europlan.Common {
 				this.plannedSpreizungHeat = 0;
 			}
 			if (requestedCoolLoad <= 0) {
+				this.plannedCoolLoad = 0;
+				this.plannedCoolLoadAnbindung = 0;
 				this.plannedQCool = 0;
 				this.plannedQCoolU = 0;
 				this.plannedQCoolRim = 0;

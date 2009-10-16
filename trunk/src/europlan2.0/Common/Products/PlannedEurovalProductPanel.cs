@@ -532,10 +532,10 @@ namespace Europlan.Common {
 				}
 
 				// anbindung
-				this.lblConnectionAHeat.Text = "";
-				this.lblConnectionACool.Text = "";
-				this.lblConnectionQHeat.Text = "";
-				this.lblConnectionQCool.Text = "";
+				this.lblConnectionAHeat.Text = evProduct.PlannedRemoveArea.ToString();
+				this.lblConnectionACool.Text = evProduct.PlannedRemoveArea.ToString();
+				this.lblConnectionQHeat.Text = evProduct.PlannedHeatLoadAnbindung.ToString();
+				this.lblConnectionQCool.Text = evProduct.PlannedCoolLoadAnbindung.ToString();
 
 				// heizkreis
 				this.lblCircuitCountHeat.Text = evProduct.PlannedCircuits.ToString();
