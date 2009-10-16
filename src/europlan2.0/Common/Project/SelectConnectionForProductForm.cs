@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Star.SettingsXpress;
 
 namespace Europlan.Common {
 	public partial class SelectConnectionForProductForm : Form {
@@ -22,6 +23,11 @@ namespace Europlan.Common {
 				distributorNodes[i] = new TreeNode(d.Id + ": " + d.Name);
 				distributorNodes[i].Tag = d;
 				this.nodes.Add(d, distributorNodes[i]);
+				//foreach (Product p in d.PlannedConnectedProducts) {
+				//    TreeNode node = new TreeNode(p.Name + " in Raum " + p.AssociatedRoom.Id);
+				//    node.Tag = p;
+				//    distributorNodes[i].Nodes.Add(node);
+				//}
 				i++;
 			}
 			rootNode = new TreeNode("Projekt", distributorNodes);
@@ -58,6 +64,17 @@ namespace Europlan.Common {
 					}
 				}
 			}
+		}
+
+		private void SelectConnectionForProductForm_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["SelectConnectionForProductForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
+		}
+
+		private void SelectConnectionForProductForm_FormClosing(object sender, FormClosingEventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["SelectConnectionForProductForm"];
+			settings.StorePoint("Location", this.Location);
+			SettingsFile.Update();
 		}
 	}
 }
