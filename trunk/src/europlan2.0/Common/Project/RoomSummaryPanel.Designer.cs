@@ -51,8 +51,8 @@ namespace Europlan.Common {
 			this.lblRoomData = new System.Windows.Forms.Label();
 			this.grpBoxSystems = new System.Windows.Forms.GroupBox();
 			this.dgvProducts = new System.Windows.Forms.DataGridView();
-			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.btnAdd = new System.Windows.Forms.Button();
+			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -317,13 +317,24 @@ namespace Europlan.Common {
 			this.dgvProducts.DataSource = this.plannedProductWrapperBindingSource;
 			this.dgvProducts.Location = new System.Drawing.Point(6, 48);
 			this.dgvProducts.Name = "dgvProducts";
-			this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.dgvProducts.Size = new System.Drawing.Size(565, 150);
 			this.dgvProducts.TabIndex = 2;
+			this.dgvProducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellValueChanged);
 			this.dgvProducts.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
 			this.dgvProducts.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserDeletedRow);
 			this.dgvProducts.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvProducts_CellPainting);
 			this.dgvProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(4, 19);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(75, 23);
+			this.btnAdd.TabIndex = 0;
+			this.btnAdd.Text = "hinzufügen";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
 			// colEdit
 			// 
@@ -336,16 +347,6 @@ namespace Europlan.Common {
 			this.colEdit.Text = "...";
 			this.colEdit.UseColumnTextForButtonValue = true;
 			this.colEdit.Width = 64;
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(4, 19);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(75, 23);
-			this.btnAdd.TabIndex = 0;
-			this.btnAdd.Text = "hinzufügen";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
 			// colType
 			// 
@@ -368,7 +369,7 @@ namespace Europlan.Common {
 			this.colComment.DataPropertyName = "Comment";
 			this.colComment.HeaderText = "Bemerkung";
 			this.colComment.Name = "colComment";
-			this.colComment.ReadOnly = true;
+			this.colComment.Width = 200;
 			// 
 			// colFloorArea
 			// 

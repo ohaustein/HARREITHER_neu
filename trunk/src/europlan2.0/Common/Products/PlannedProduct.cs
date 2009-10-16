@@ -80,6 +80,11 @@ namespace Europlan.Common {
 					return plannedProduct.Comment;
 				}
 			}
+			set {
+				if (plannedProduct != null) {
+					plannedProduct.Comment = value;
+				}
+			}
 		}
 
 		[XmlIgnore]
