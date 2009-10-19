@@ -258,6 +258,24 @@ namespace Europlan.Common {
 			set { this.plannedConnectionPipes = value; }
 		}
 
+		public List<ConnectionPipe> PlannedConnectionPipesThroughThisProduct {
+			get {
+				List<ConnectionPipe> cps = new List<ConnectionPipe>();
+				foreach (Floor f in Project.Instance.Floors) {
+					foreach (Room r in f.Rooms) {
+						foreach (PlannedProduct pp in r.PlannedProducts) {
+							foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
+								if (cp.PlannedProduct != null && cp.PlannedProduct.Product == this) {
+									cps.Add(cp);
+								}
+							}
+						}
+					}
+				}
+				return cps;
+			}
+		}
+
 		[XmlIgnore]
 		public abstract double PlannedPipeLength {
 			get;
