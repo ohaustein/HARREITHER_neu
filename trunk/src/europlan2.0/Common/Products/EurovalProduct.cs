@@ -27,11 +27,9 @@ namespace Europlan.Common {
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
 		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
-		//private static double defaultThetaVHeat = 35;
-		//private static double defaultThetaRHeat = 30;
-		//private static double defaultThetaVCool = 17;
-		//private static double defaultThetaRCool = 20;
 		private static bool agActivated = true;
+		private static double rLambdaDecke = 0.11; /* Fußbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
+		private static double rLambdaPutz = 0.02; /* Fußbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 
 		private static double maxResidenceTempHarreither = 27;
 		private static double maxRimTempHarreither = 33;
@@ -91,14 +89,14 @@ namespace Europlan.Common {
 		private double plannedRemoveCoolLoad = 0;
 
 		public enum LayDistance {
-			A5,
-			EV5,
-			EV10,
-			EV15,
-			EV20,
-			EV25,
-			EV30,
-			EV35
+			A5 = 0,
+			EV5 = 1,
+			EV10 = 2,
+			EV15 = 3,
+			EV20 = 4,
+			EV25 = 5,
+			EV30 = 6,
+			EV35 = 7
 		}
 
 		public enum RimType {
@@ -145,6 +143,7 @@ namespace Europlan.Common {
 			return product;
 		}
 
+		#region Product Parameters
 		[ProductParameter]
 		public static double ConfigSu0 {
 			get { return su0; }
@@ -247,34 +246,22 @@ namespace Europlan.Common {
 			set { EurovalProduct.v = value; }
 		}
 
-		/*[ProductParameter]
-		public static double ConfigDefaultThetaVHeat {
-			get { return EurovalProduct.defaultThetaVHeat; }
-			set { EurovalProduct.defaultThetaVHeat = value; }
-		}
-
 		[ProductParameter]
-		public static double ConfigDefaultThetaRHeat {
-			get { return EurovalProduct.defaultThetaRHeat; }
-			set { EurovalProduct.defaultThetaRHeat = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigDefaultThetaVCool {
-			get { return EurovalProduct.defaultThetaVCool; }
-			set { EurovalProduct.defaultThetaVCool = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigDefaultThetaRCool {
-			get { return EurovalProduct.defaultThetaRCool; }
-			set { EurovalProduct.defaultThetaRCool = value; }
-		}*/
-
-		[ProductParameter(overrideableInPlanning=true)]
 		public static bool ConfigAgActivated {
 			get { return EurovalProduct.agActivated; }
 			set { EurovalProduct.agActivated = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRLambdaDecke {
+			get { return EurovalProduct.rLambdaDecke; }
+			set { EurovalProduct.rLambdaDecke = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRLambdaPutz {
+			get { return EurovalProduct.rLambdaPutz; }
+			set { EurovalProduct.rLambdaPutz = value; }
 		}
 
 		[ProductParameter]
@@ -348,6 +335,7 @@ namespace Europlan.Common {
 			get { return EurovalProduct.spreizungKühlMax; }
 			set { EurovalProduct.spreizungKühlMax = value; }
 		}
+		#endregion Product Parameters
 
 		/// <summary>
 		/// Returns the default number of circuit for the planned area (for quick dimensioning)
@@ -937,7 +925,6 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public int PlannedCircuits {
-			//get { return this.plannedPipeLength <= 0 ? 1 : (int)Math.Ceiling(this.plannedPipeLength / maxCircuitLength); }
 			get { return this.plannedCircuits; }
 			set { this.plannedCircuits = value; }
 		}
@@ -1037,9 +1024,8 @@ namespace Europlan.Common {
 			double lambdaU = 1.2; /* Estrich??? */
 			double rLambdaB = this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue;  //0.1; /* Annahme Parkett mit 0.1 m²K/W; durch echte Konstruktion ersetzen! */
 			double rLambdaIns = this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue;
-			double rLambdaDecke = 0.11; /* Fußbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
-			double rLambdaPutz = 0.02; /* Fußbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
-			double rAlphaDecke = 0.17; /* Wärmeübergang Decke; fix??? */
+			double rAlphaDeckeFbh = 1 / alphaFbh; /* Wärmeübergang Decke bei Heizung */
+			double rAlphaDeckeFbk = 1 / alphaFbk; /* Wärmeübergang Decke bei Kühlung */
 
 			this.plannedLayDistance = distance;
 			this.plannedRimType = distanceRim;
@@ -1068,7 +1054,7 @@ namespace Europlan.Common {
 			lRlRz = lRlRz / this.PlannedCircuits;
 			lRlAz = lRlAz / this.PlannedCircuits;
 
-			this.plannedCircuits = circuits.HasValue ? circuits.Value : (this.plannedPipeLength <= 0 ? 1 : (int)Math.Ceiling(this.plannedPipeLength / maxCircuitLength));
+			this.plannedCircuits = circuits.HasValue ? circuits.Value : (this.plannedPipeLength <= 0 ? 1 : (int)Math.Ceiling(this.plannedPipeLength / (maxCircuitLength - vorlaufTotal - ruecklaufTotal)));
 
 			{ // Heizlastberechnung
 				double thetaVrz = 35;
@@ -1121,7 +1107,7 @@ namespace Europlan.Common {
 				this.plannedQHeat = QFbh / aGes;
 				this.plannedQHeatRim = qRz;
 				this.plannedQHeatResidence = qAz;
-				this.plannedQHeatU = en1264.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDecke, rLambdaIns, rLambdaDecke, rLambdaPutz, this.plannedQHeat, this.AssociatedRoom.RoomHeatTemperature, this.PlannedRoomTemperatureBelowHeat);
+				this.plannedQHeatU = en1264.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.rLambdaDecke, EurovalProduct.rLambdaPutz, this.plannedQHeat, this.AssociatedRoom.RoomHeatTemperature, this.PlannedRoomTemperatureBelowHeat);
 				//                                                                           // Wärmeverlust nach unten berechnen
 
 				// hydraulische Berechnung
@@ -1181,13 +1167,13 @@ namespace Europlan.Common {
 				this.plannedQCool = -QFbk / aGes;
 				this.plannedQCoolRim = -qRz;
 				this.plannedQCoolResidence = -qAz;
-				this.plannedQCoolU = -en1264.WaermeverlustUnten(alphaFbk, rLambdaB, su, lambdaU, rAlphaDecke, rLambdaIns, rLambdaDecke, rLambdaPutz, this.plannedQCool, this.AssociatedRoom.RoomCoolTemperature, this.PlannedRoomTemperatureBelowCool);
+				this.plannedQCoolU = -en1264.WaermeverlustUnten(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, EurovalProduct.rLambdaDecke, EurovalProduct.rLambdaPutz, this.plannedQCool, this.AssociatedRoom.RoomCoolTemperature, this.PlannedRoomTemperatureBelowCool);
 				//                                                                           // Kühlverlust nach unten berechnen
 
 				// hydraulische Berechnung
 				double qH2o = (-this.plannedQCool - this.plannedQCoolU) * aGes;                                        // gesamte aufgenommene Leistung berechnen
 				double deltaT = thetaVrz - thetaRaz;                                          // gesamte Spreizung
-				this.plannedDeltaRhoCool = en1264.DruckverlustRohr(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, this.PlannedPipeLengthPerCircuit);
+				this.plannedDeltaRhoCool = en1264.DruckverlustRohr(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, this.PlannedPipeLengthPerCircuit + vorlaufTotal + ruecklaufTotal);
 				//                                                                            // gesamten Druckverlust berechnen
 				this.plannedMhCool = en1264.Durchfluss(qH2o, EurovalProduct.c, deltaT);
 			}
