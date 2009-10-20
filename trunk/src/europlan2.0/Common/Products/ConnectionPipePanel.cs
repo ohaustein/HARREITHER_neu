@@ -14,7 +14,7 @@ namespace Europlan.Common {
 
 		private Button roomSelectionButton;
 		private PlannedProduct product;
-		private bool extendedView = false;
+		private bool showPipesThroughProduct = false;
 
 		public event GridContentChangedHandler GridContentChanged;
 
@@ -32,13 +32,18 @@ namespace Europlan.Common {
 		}
 
 		private void ConfigureColumnVisibility() {
-			
+			if (showPipesThroughProduct) {
+				Room.Visible = true;
+				Area.Visible = true;
+				HeatLoad.Visible = true;
+				CoolLoad.Visible = true;
+			}
 		}
 
-		public bool ExtendedView {
-			get { return extendedView; }
+		public bool ShowPipesThroughProduct {
+			get { return showPipesThroughProduct; }
 			set {
-				this.extendedView = value;
+				this.showPipesThroughProduct = value;
 				ConfigureColumnVisibility();
 			}
 		}
@@ -75,7 +80,11 @@ namespace Europlan.Common {
 			this.Insulation.Items.Add(ConnectionPipe.InsulationEnum.IN_VL_RL);
 
 			if (this.product != null) {
-				this.connectionPipeBindingSource.DataSource = this.product.Product.PlannedConnectionPipes;
+				if (showPipesThroughProduct) {
+					this.connectionPipeBindingSource.DataSource = this.product.Product.PlannedConnectionPipesThroughThisProduct;
+				} else {
+					this.connectionPipeBindingSource.DataSource = this.product.Product.PlannedConnectionPipes;
+				}
 				this.connectionPipeBindingSource.ResetBindings(false);
 			} else {
 				this.connectionPipeBindingSource.DataSource = null;
