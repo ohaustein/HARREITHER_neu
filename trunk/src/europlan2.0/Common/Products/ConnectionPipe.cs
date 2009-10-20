@@ -277,6 +277,16 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public int PlannedCircuits {
+			get {
+				if (this.PlannedProduct != null) {
+					return this.PlannedProduct.Product.PlannedCircuits;
+				}
+				return 0;
+			}
+		}
+
 		public bool Print {
 			get { return this.print; }
 			set { this.print = value; }

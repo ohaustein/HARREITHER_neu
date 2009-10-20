@@ -28,18 +28,19 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvConnectionPipes = new System.Windows.Forms.DataGridView();
+			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.vorlaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.ruecklaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.roomDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.productDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PlannedCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.onlyFirstDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.printDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.PipeType = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -70,6 +71,7 @@ namespace Europlan.Common {
             this.ruecklaufDataGridViewTextBoxColumn,
             this.roomDataGridViewComboBoxColumn,
             this.productDataGridViewComboBoxColumn,
+            this.PlannedCircuits,
             this.onlyFirstDataGridViewCheckBoxColumn,
             this.printDataGridViewCheckBoxColumn,
             this.PipeType,
@@ -92,6 +94,10 @@ namespace Europlan.Common {
 			this.dgvConnectionPipes.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvConnectionPipes_DataError);
 			this.dgvConnectionPipes.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellEnter);
 			// 
+			// connectionPipeBindingSource
+			// 
+			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
+			// 
 			// dataGridViewTextBoxColumn1
 			// 
 			this.dataGridViewTextBoxColumn1.DataPropertyName = "RoomId";
@@ -107,6 +113,7 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2.HeaderText = "Bezeichnung";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			this.dataGridViewTextBoxColumn2.ReadOnly = true;
+			this.dataGridViewTextBoxColumn2.Visible = false;
 			this.dataGridViewTextBoxColumn2.Width = 70;
 			// 
 			// dataGridViewTextBoxColumn3
@@ -145,10 +152,6 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn6.ReadOnly = true;
 			this.dataGridViewTextBoxColumn6.Visible = false;
 			this.dataGridViewTextBoxColumn6.Width = 50;
-			// 
-			// connectionPipeBindingSource
-			// 
-			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
 			// 
 			// Room
 			// 
@@ -206,6 +209,14 @@ namespace Europlan.Common {
 			this.productDataGridViewComboBoxColumn.ReadOnly = true;
 			this.productDataGridViewComboBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.productDataGridViewComboBoxColumn.Width = 120;
+			// 
+			// PlannedCircuits
+			// 
+			this.PlannedCircuits.DataPropertyName = "PlannedCircuits";
+			this.PlannedCircuits.HeaderText = "Anz.";
+			this.PlannedCircuits.Name = "PlannedCircuits";
+			this.PlannedCircuits.ReadOnly = true;
+			this.PlannedCircuits.Visible = false;
 			// 
 			// onlyFirstDataGridViewCheckBoxColumn
 			// 
@@ -298,11 +309,18 @@ namespace Europlan.Common {
 
 		private System.Windows.Forms.BindingSource connectionPipeBindingSource;
 		private System.Windows.Forms.DataGridView dgvConnectionPipes;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Room;
 		private NumericColumn vorlaufDataGridViewTextBoxColumn;
 		private NumericColumn ruecklaufDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn roomDataGridViewComboBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn productDataGridViewComboBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn PlannedCircuits;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn onlyFirstDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn printDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewComboBoxColumn PipeType;
@@ -311,12 +329,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn Area;
 		private System.Windows.Forms.DataGridViewTextBoxColumn HeatLoad;
 		private System.Windows.Forms.DataGridViewTextBoxColumn CoolLoad;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 
 	}
 }

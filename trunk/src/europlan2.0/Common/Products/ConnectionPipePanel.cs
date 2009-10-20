@@ -37,6 +37,7 @@ namespace Europlan.Common {
 				Area.Visible = true;
 				HeatLoad.Visible = true;
 				CoolLoad.Visible = true;
+				PlannedCircuits.Visible = true;
 			}
 		}
 
