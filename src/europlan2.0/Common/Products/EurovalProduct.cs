@@ -984,27 +984,12 @@ namespace Europlan.Common {
 			double ruecklaufTotal = 0;
 			double vorlaufNotIsolated = 0;
 			double ruecklaufNotIsolated = 0;
-			/*double anbindungHeatLoad = 0;
-			double anbindungCoolLoad = 0;*/
 			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
 				vorlaufNotIsolated += (pipe.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) ? pipe.Vorlauf : 0;
 				ruecklaufNotIsolated += (pipe.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) ? pipe.Ruecklauf : 0;
 				vorlaufTotal += pipe.Vorlauf;
 				ruecklaufTotal += pipe.Ruecklauf;
 			}
-
-			/*foreach (Floor f in Project.Instance.Floors) {
-				foreach (Room r in f.Rooms) {
-					foreach (PlannedProduct pp in r.PlannedProducts) {
-						foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
-							if (cp.PlannedProduct != null && cp.PlannedProduct.Product == this) {
-								anbindungHeatLoad += cp.HeatLoad;
-								anbindungCoolLoad += cp.CoolLoad;
-							}
-						}
-					}
-				}
-			}*/
 
 			double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
 			double lambdaU = 1.2; /* Estrich??? */
@@ -1267,6 +1252,8 @@ namespace Europlan.Common {
 			}
 
 			if (this.plannedProductIsConnection) {
+				this.plannedHeatLoad = this.plannedHeatLoadAnbindung;
+				this.plannedCoolLoad = this.plannedCoolLoadAnbindung;
 				errorMsg = null;
 				return true;
 			}

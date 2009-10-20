@@ -277,11 +277,30 @@ namespace Europlan.Common {
 			}
 		}
 
+		public PlannedProduct ConnectionOf {
+			get {
+				foreach (Floor f in Project.Instance.Floors) {
+					foreach (Room r in f.Rooms) {
+						foreach (PlannedProduct pp in r.PlannedProducts) {
+							foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
+								return pp;
+							}
+						}
+					}
+				}
+				return null;
+			}
+		}
+
 		[XmlIgnore]
 		public int PlannedCircuits {
 			get {
-				if (this.PlannedProduct != null) {
-					return this.PlannedProduct.Product.PlannedCircuits;
+				if (this.onlyFirst) {
+					return 1;
+				}
+				PlannedProduct connectionOf = this.ConnectionOf;
+				if (connectionOf != null) {
+					return connectionOf.Product.PlannedCircuits;
 				}
 				return 0;
 			}
@@ -315,37 +334,49 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double Area {
 			get {
+				double area = 0;
 				switch (verlegeart) {
 					case VerlegeartEnum.VA_UNTER_ESTRICH:
-						return 0;
+						area = 0;
+						break;
 
 					case VerlegeartEnum.VA_EV35:
-						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV35);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV35);
+						break;
 
 					case VerlegeartEnum.VA_EV30:
-						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV30);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV30);
+						break;
 
 					case VerlegeartEnum.VA_EV25:
-						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV25);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV25);
+						break;
 
 					case VerlegeartEnum.VA_EV20:
-						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV20);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV20);
+						break;
 
 					case VerlegeartEnum.VA_EV15:
-						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV15);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV15);
+						break;
 
 					case VerlegeartEnum.VA_EV10:
-						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV10);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV10);
+						break;
 
 					case VerlegeartEnum.VA_EV5:
-						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV5);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV5);
+						break;
 
 					case VerlegeartEnum.VA_A5:
-						return (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.A5);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.A5);
+						break;
 
 					default:
-						return 0;
+						area = 0;
+						break;
 				}
+				return area * this.PlannedCircuits;
 			}
 		}
 
@@ -473,7 +504,7 @@ namespace Europlan.Common {
 				double ruecklaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(ruecklaufWaermedurchgangsKoeffizient, ruecklaufHeizmitteluebertemperatur);
 				double ruecklaufHeatLoad = ruecklaufWaermestromDichte * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetLayDistance(this.verlegeart));
 
-				return vorlaufHeatLoad + ruecklaufHeatLoad;
+				return (vorlaufHeatLoad + ruecklaufHeatLoad) * this.PlannedCircuits;
 			}
 		}
 
@@ -575,7 +606,7 @@ namespace Europlan.Common {
 				double ruecklaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(ruecklaufWaermedurchgangsKoeffizient, ruecklaufHeizmitteluebertemperatur);
 				double ruecklaufHeatLoad = ruecklaufWaermestromDichte * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetLayDistance(this.verlegeart));
 
-				return -vorlaufHeatLoad - ruecklaufHeatLoad;
+				return (-vorlaufHeatLoad - ruecklaufHeatLoad) * this.PlannedCircuits;
 			}
 		}
 	}

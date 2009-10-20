@@ -119,7 +119,8 @@ namespace Europlan.Common {
 			LAY_DISTANCE = 4096,
 			RIM_TYPE = 8192,
 			CALCULATION_TYPE = 16384,
-			CIRCUIT_COUNT = 32768
+			CIRCUIT_COUNT = 32768,
+			SEPARATE_CIRCUIT = 65536
 		}
 
 		/*private class ComboItem {
@@ -184,6 +185,7 @@ namespace Europlan.Common {
 		private int ignoreRimType = 0;
 		private int ignoreCalculationType = 0;
 		private int ignoreCircuits = 0;
+		private int ignoreSeparateCircuit = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
@@ -205,6 +207,7 @@ namespace Europlan.Common {
 				ignoreRimType++;
 				ignoreCalculationType++;
 				ignoreCircuits++;
+				ignoreSeparateCircuit++;
 
 				EurovalProduct evProduct = this.product.Product as EurovalProduct;
 
@@ -370,6 +373,10 @@ namespace Europlan.Common {
 					this.rbCalculateHeat.Checked = this.product.CalculateHeat && !this.product.CalculateCool;
 					this.rbCalculateCool.Checked = this.product.CalculateCool && !this.product.CalculateHeat;
 					this.rbCalculateBoth.Checked = this.product.CalculateHeat && this.product.CalculateCool;
+				}
+
+				if ((skipFields & FieldEnum.SEPARATE_CIRCUIT) == FieldEnum.NONE) {
+					this.cbSeparateCircuit.Checked = !evProduct.PlannedProductIsConnection;
 				}
 
 				// General
@@ -539,6 +546,7 @@ namespace Europlan.Common {
 				ignoreRimType--;
 				ignoreCalculationType--;
 				ignoreCircuits--;
+				ignoreSeparateCircuit--;
 			}
 			// TODO
 		}
@@ -879,6 +887,17 @@ namespace Europlan.Common {
 				}
 			}
 			form.Dispose();
+		}
+
+		private void cbSeparateCircuit_CheckedChanged(object sender, EventArgs e) {
+			if (ignoreSeparateCircuit == 0) {
+				(this.product.Product as EurovalProduct).PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.SEPARATE_CIRCUIT);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
 		}
 
 	}
