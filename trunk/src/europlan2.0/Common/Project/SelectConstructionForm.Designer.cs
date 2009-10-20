@@ -27,13 +27,13 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvConstructions = new System.Windows.Forms.DataGridView();
+			this.constructionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnOk = new System.Windows.Forms.Button();
+			this.btnCancel = new System.Windows.Forms.Button();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.rValueDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.constructionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.btnOk = new System.Windows.Forms.Button();
-			this.btnCancel = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvConstructions)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.constructionBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -62,46 +62,6 @@ namespace Europlan.Common {
 			this.dgvConstructions.Size = new System.Drawing.Size(492, 240);
 			this.dgvConstructions.TabIndex = 1;
 			// 
-			// idDataGridViewTextBoxColumn
-			// 
-			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			this.idDataGridViewTextBoxColumn.FillWeight = 50F;
-			this.idDataGridViewTextBoxColumn.HeaderText = "Nr.";
-			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			this.idDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.idDataGridViewTextBoxColumn.Width = 50;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			this.nameDataGridViewTextBoxColumn.FillWeight = 170F;
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			this.nameDataGridViewTextBoxColumn.Width = 170;
-			// 
-			// typeDataGridViewTextBoxColumn
-			// 
-			this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-			this.typeDataGridViewTextBoxColumn.FillWeight = 150F;
-			this.typeDataGridViewTextBoxColumn.HeaderText = "Typ";
-			this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-			this.typeDataGridViewTextBoxColumn.Width = 150;
-			// 
-			// rValueDataGridViewTextBoxColumn
-			// 
-			this.rValueDataGridViewTextBoxColumn.DataPropertyName = "RValue";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F3";
-			this.rValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-			this.rValueDataGridViewTextBoxColumn.FillWeight = 50F;
-			this.rValueDataGridViewTextBoxColumn.HeaderText = "R";
-			this.rValueDataGridViewTextBoxColumn.Name = "rValueDataGridViewTextBoxColumn";
-			this.rValueDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
-			this.rValueDataGridViewTextBoxColumn.ReadOnly = true;
-			this.rValueDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.rValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.rValueDataGridViewTextBoxColumn.Width = 50;
-			// 
 			// constructionBindingSource
 			// 
 			this.constructionBindingSource.DataSource = typeof(Europlan.Common.Construction);
@@ -125,6 +85,49 @@ namespace Europlan.Common {
 			this.btnCancel.TabIndex = 3;
 			this.btnCancel.Text = "Abbrechen";
 			this.btnCancel.UseVisualStyleBackColor = true;
+			// 
+			// idDataGridViewTextBoxColumn
+			// 
+			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+			this.idDataGridViewTextBoxColumn.FillWeight = 50F;
+			this.idDataGridViewTextBoxColumn.HeaderText = "Nr.";
+			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.ReadOnly = true;
+			this.idDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.idDataGridViewTextBoxColumn.Width = 50;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.FillWeight = 170F;
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.nameDataGridViewTextBoxColumn.Width = 170;
+			// 
+			// typeDataGridViewTextBoxColumn
+			// 
+			this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+			this.typeDataGridViewTextBoxColumn.FillWeight = 150F;
+			this.typeDataGridViewTextBoxColumn.HeaderText = "Typ";
+			this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+			this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+			this.typeDataGridViewTextBoxColumn.Width = 150;
+			// 
+			// rValueDataGridViewTextBoxColumn
+			// 
+			this.rValueDataGridViewTextBoxColumn.DataPropertyName = "RValue";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle2.Format = "F0";
+			this.rValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+			this.rValueDataGridViewTextBoxColumn.FillWeight = 50F;
+			this.rValueDataGridViewTextBoxColumn.HeaderText = "R";
+			this.rValueDataGridViewTextBoxColumn.Name = "rValueDataGridViewTextBoxColumn";
+			this.rValueDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
+			this.rValueDataGridViewTextBoxColumn.ReadOnly = true;
+			this.rValueDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.rValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.rValueDataGridViewTextBoxColumn.Width = 50;
 			// 
 			// SelectConstructionForm
 			// 
