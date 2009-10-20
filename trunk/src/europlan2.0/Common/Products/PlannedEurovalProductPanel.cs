@@ -870,5 +870,9 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void btnConnectionPipes_Click(object sender, EventArgs e) {
+
+		}
+
 	}
 }
