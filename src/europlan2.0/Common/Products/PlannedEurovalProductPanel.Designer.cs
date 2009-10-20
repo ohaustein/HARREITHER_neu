@@ -934,7 +934,7 @@ namespace Europlan.Common {
 			// connectionPipePanel
 			// 
 			this.connectionPipePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.connectionPipePanel.ExtendedView = false;
+			this.connectionPipePanel.ShowPipesThroughProduct = false;
 			this.connectionPipePanel.Location = new System.Drawing.Point(3, 16);
 			this.connectionPipePanel.Name = "connectionPipePanel";
 			this.connectionPipePanel.Size = new System.Drawing.Size(841, 324);
