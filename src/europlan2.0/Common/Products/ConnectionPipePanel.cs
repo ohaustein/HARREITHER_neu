@@ -38,6 +38,13 @@ namespace Europlan.Common {
 				HeatLoad.Visible = true;
 				CoolLoad.Visible = true;
 				PlannedCircuits.Visible = true;
+			} else {
+				Room.Visible = false;
+				Room.HeaderText = "Schas";
+				Area.Visible = false;
+				HeatLoad.Visible = false;
+				CoolLoad.Visible = false;
+				PlannedCircuits.Visible = false;
 			}
 		}
 
