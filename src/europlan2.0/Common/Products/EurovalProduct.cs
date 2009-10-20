@@ -62,7 +62,6 @@ namespace Europlan.Common {
 
 		private Nullable<LayDistance> plannedLayDistance = null;
 		private Nullable<RimType> plannedRimType = null;
-		private int plannedCircuits = 1;
 
 		private double plannedQHeat = 0;
 		private double plannedQHeatRim = 0;
@@ -85,8 +84,8 @@ namespace Europlan.Common {
 
 		private double plannedPipeLength = 0;
 		private double plannedRemoveArea = 0;
-		private double plannedRemoveHeatLoad = 0;
-		private double plannedRemoveCoolLoad = 0;
+
+		private bool plannedProductIsConnection = false;
 
 		public enum LayDistance {
 			A5 = 0,
@@ -679,6 +678,11 @@ namespace Europlan.Common {
 			get { return (this.AvailableFloorArea <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AvailableFloorArea); }
 			set { this.PlannedFloorArea = (float)(this.AvailableFloorArea * value / 100); }
 		}
+
+		public bool PlannedProductIsConnection {
+			get { return this.plannedProductIsConnection; }
+			set { this.plannedProductIsConnection = value; }
+		}
 		#endregion Auslegung
 
 		#region Auslegung calculated values
@@ -924,24 +928,8 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public int PlannedCircuits {
-			get { return this.plannedCircuits; }
-			set { this.plannedCircuits = value; }
-		}
-
-		[XmlIgnore]
 		public double PlannedRemoveArea {
 			get { return this.plannedRemoveArea; }
-		}
-
-		[XmlIgnore]
-		public double PlannedRemoveHeatLoad {
-			get { return this.plannedRemoveHeatLoad; }
-		}
-
-		[XmlIgnore]
-		public double PlannedRemoveCoolLoad {
-			get { return this.plannedRemoveCoolLoad; }
 		}
 
 		[XmlIgnore]
@@ -996,18 +984,16 @@ namespace Europlan.Common {
 			double ruecklaufTotal = 0;
 			double vorlaufNotIsolated = 0;
 			double ruecklaufNotIsolated = 0;
-			double anbindungHeatLoad = 0;
-			double anbindungCoolLoad = 0;
+			/*double anbindungHeatLoad = 0;
+			double anbindungCoolLoad = 0;*/
 			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
 				vorlaufNotIsolated += (pipe.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) ? pipe.Vorlauf : 0;
 				ruecklaufNotIsolated += (pipe.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) ? pipe.Ruecklauf : 0;
 				vorlaufTotal += pipe.Vorlauf;
 				ruecklaufTotal += pipe.Ruecklauf;
-				//anbindungHeatLoad += pipe.HeatLoad;
-				//anbindungCoolLoad += pipe.CoolLoad;
 			}
 
-			foreach (Floor f in Project.Instance.Floors) {
+			/*foreach (Floor f in Project.Instance.Floors) {
 				foreach (Room r in f.Rooms) {
 					foreach (PlannedProduct pp in r.PlannedProducts) {
 						foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
@@ -1018,7 +1004,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
-			}
+			}*/
 
 			double su = 0.035; /* Estrich¸berdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
 			double lambdaU = 1.2; /* Estrich??? */
@@ -1102,8 +1088,7 @@ namespace Europlan.Common {
 
 				double QFbh = aRz * qRz + aAz * qAz;                                          // gesamte in den Raum abgegebene W‰rme
 
-				this.plannedHeatLoad = QFbh + anbindungHeatLoad;
-				this.plannedHeatLoadAnbindung = anbindungHeatLoad;
+				this.plannedHeatLoad = QFbh + this.plannedHeatLoadAnbindung;
 				this.plannedQHeat = QFbh / aGes;
 				this.plannedQHeatRim = qRz;
 				this.plannedQHeatResidence = qAz;
@@ -1162,8 +1147,7 @@ namespace Europlan.Common {
 
 				double QFbk = aRz * qRz + aAz * qAz;                                          // gesamte in den Raum abgegebene W‰rme
 
-				this.plannedCoolLoad = -QFbk + anbindungCoolLoad;
-				this.plannedCoolLoadAnbindung = anbindungCoolLoad;
+				this.plannedCoolLoad = -QFbk + this.plannedCoolLoadAnbindung;
 				this.plannedQCool = -QFbk / aGes;
 				this.plannedQCoolRim = -qRz;
 				this.plannedQCoolResidence = -qAz;
@@ -1181,19 +1165,19 @@ namespace Europlan.Common {
 
 		private bool CheckHardParameters(double floorTempHeatRim, double floorTempHeatRes, double pressureLossHeat,
 			double floorTempCoolRim, double floorTempCoolRes, double pressureLossCool, 
-			double circuitLength, bool checkHeat, bool checkCool) {
+			double circuitLength, bool checkHeat, bool checkCool, bool ignoreResidence, bool ignoreRim, bool ignoreCircuitLength) {
 
-			if (checkHeat && (useHarreitherNorm && (floorTempHeatRim > maxRimTempHarreither || floorTempHeatRes > maxResidenceTempHarreither))) {
+			if (checkHeat && (useHarreitherNorm && ((floorTempHeatRim > maxRimTempHarreither && !ignoreRim) || (floorTempHeatRes > maxResidenceTempHarreither && !ignoreResidence)))) {
 				return false;
 			}
-			if (checkHeat && (floorTempHeatRim > maxRimTempEn1264 || floorTempHeatRes > maxResidenceTempEn1264)) {
+			if (checkHeat && ((floorTempHeatRim > maxRimTempEn1264 && !ignoreRim) || (floorTempHeatRes > maxResidenceTempEn1264 && !ignoreResidence))) {
 				return false;
 			}
-			if (checkHeat && (pressureLossHeat > maxPressureLost)) {
+			if (checkHeat && (pressureLossHeat > maxPressureLost) && !ignoreCircuitLength) {
 				return false;
 			}
 			// TODO checkCool
-			if (circuitLength > maxCircuitLength) {
+			if (circuitLength > maxCircuitLength && !ignoreCircuitLength) {
 				return false;
 			}
 			return true;
@@ -1212,13 +1196,14 @@ namespace Europlan.Common {
 			double newFloorTempHeatRim, double newFloorTempHeatRes, double newHeatLoad, double newPressureLossHeat,
 			double newFloorTempCoolRim, double newFloorTempCoolRes, double newCoolLoad, double newPressureLossCool, 
 			double newCircuitLength,
-			double requestedHeatLoad, double requestedCoolLoad, bool checkHeat, bool checkCool) {
+			double requestedHeatLoad, double requestedCoolLoad, bool checkHeat, bool checkCool, bool ignoreResidence, bool ignoreRim, bool ignoreCircuits) {
 
 			bool oldOk = CheckHardParameters(oldFloorTempHeatRim, oldFloorTempHeatRes, oldPressureLossHeat, 
 				oldFloorTempCoolRim, oldFloorTempCoolRes, oldPressureLossHeat, 
-				oldCircuitLength, checkHeat, checkCool);
+				oldCircuitLength, checkHeat, checkCool, ignoreResidence, ignoreRim, ignoreCircuits);
 			bool newOk = CheckHardParameters(newFloorTempHeatRim, newFloorTempHeatRes, newPressureLossHeat, 
-				newFloorTempCoolRim, newFloorTempCoolRes, newPressureLossHeat, newCircuitLength, checkHeat, checkCool);
+				newFloorTempCoolRim, newFloorTempCoolRes, newPressureLossHeat,
+				newCircuitLength, checkHeat, checkCool, ignoreResidence, ignoreRim, ignoreCircuits);
 			if (oldOk != newOk) {
 				return newOk;
 			}
@@ -1247,7 +1232,7 @@ namespace Europlan.Common {
 		}
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
-			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || this.PlannedConnection == null) {
+			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
 				errorMsg = "Fehlende Eingaben: ";
 				if (plannedFloorConstruction == null) {
 					errorMsg += "Fuﬂbodenkonstruktion, ";
@@ -1263,8 +1248,8 @@ namespace Europlan.Common {
 			}
 
 			this.plannedRemoveArea = 0;
-			this.plannedRemoveHeatLoad = 0;
-			this.plannedRemoveCoolLoad = 0;
+			this.plannedHeatLoadAnbindung = 0;
+			this.plannedCoolLoadAnbindung = 0;
 			List<ConnectionPipe> connectionPipes = new List<ConnectionPipe>();
 			foreach (Floor f in Project.Instance.Floors) {
 				foreach (Room r in f.Rooms) {
@@ -1273,10 +1258,17 @@ namespace Europlan.Common {
 							if (cp != null && cp.PlannedProduct != null && cp.PlannedProduct.Product == this) {
 								connectionPipes.Add(cp);
 								this.plannedRemoveArea += cp.Area;
+								this.plannedHeatLoadAnbindung += cp.HeatLoad;
+								this.plannedCoolLoadAnbindung += cp.CoolLoad;
 							}
 						}
 					}
 				}
+			}
+
+			if (this.plannedProductIsConnection) {
+				errorMsg = null;
+				return true;
 			}
 
 			Dictionary<LayDistance, Nullable<RimType>[]> teilungen = new Dictionary<LayDistance, RimType?[]>();
@@ -1347,14 +1339,14 @@ namespace Europlan.Common {
 					// check if new parameters are better than the old ones
 					if ((!bestLaydistance.HasValue && this.CheckHardParameters(this.PlannedFloorTemperatureHeatRim, this.PlannedFloorTemperatureHeatResidence, this.PlannedDeltaRhoHeat,
 							this.PlannedFloorTemperatureCoolRim, this.PlannedFloorTemperatureCoolResidence, this.PlannedDeltaRhoCool,
-							this.PlannedPipeLengthPerCircuit, calculateHeat, calculateCool)) || 
+							this.PlannedPipeLengthPerCircuit, calculateHeat, calculateCool, this.requestedLayDistance.HasValue, this.requestedRimType.HasValue, this.requestedCircuits.HasValue)) || 
 							( bestLaydistance.HasValue &&
 							this.CompareParameters(bestFloorTempRimHeat, bestFloorTempResidenceHeat, bestHeatLoad, bestPressureLossHeat,
 							bestFloorTempRimCool, bestFloorTempResidenceCool, bestCoolLoad, bestPressureLossCool,
 							bestPipeLength,
 							this.PlannedFloorTemperatureHeatRim, this.PlannedFloorTemperatureHeatResidence, this.PlannedHeatLoad, this.PlannedDeltaRhoHeat,
 							this.PlannedFloorTemperatureCoolRim, this.PlannedFloorTemperatureCoolResidence, this.PlannedCoolLoad, this.PlannedDeltaRhoCool,
-							this.PlannedPipeLengthPerCircuit, requestedHeatLoad, requestedCoolLoad, calculateHeat, calculateCool))) {
+							this.PlannedPipeLengthPerCircuit, requestedHeatLoad, requestedCoolLoad, calculateHeat, calculateCool, this.requestedLayDistance.HasValue, this.requestedRimType.HasValue, this.requestedCircuits.HasValue))) {
 
 						bestLaydistance = this.PlannedLayDistance;
 						bestRimType = this.PlannedRimType;
