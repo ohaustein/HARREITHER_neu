@@ -37,6 +37,8 @@ namespace Europlan.Common {
 		protected SerializableDictionary<int, PlannedProduct> plannedConnectedProducts = new SerializableDictionary<int, PlannedProduct>();
 		protected List<ConnectionPipe> plannedConnectionPipes = new List<ConnectionPipe>();
 
+		protected int plannedCircuits = 1;
+
 		protected string comment = null;
 
 		public Product() {
@@ -279,6 +281,12 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public abstract double PlannedPipeLength {
 			get;
+		}
+
+		[XmlIgnore]
+		public int PlannedCircuits {
+			get { return this.plannedCircuits; }
+			set { this.plannedCircuits = value; }
 		}
 
 		[XmlIgnore]
