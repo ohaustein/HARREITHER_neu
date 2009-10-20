@@ -98,6 +98,7 @@ namespace Europlan.Common {
 			this.RoomId.HeaderText = "Raumnr.";
 			this.RoomId.Name = "RoomId";
 			this.RoomId.ReadOnly = true;
+			this.RoomId.Visible = false;
 			this.RoomId.Width = 50;
 			// 
 			// Room
@@ -209,6 +210,7 @@ namespace Europlan.Common {
 			this.Area.HeaderText = "Fläche";
 			this.Area.Name = "Area";
 			this.Area.ReadOnly = true;
+			this.Area.Visible = false;
 			this.Area.Width = 50;
 			// 
 			// HeatLoad
@@ -217,6 +219,7 @@ namespace Europlan.Common {
 			this.HeatLoad.HeaderText = "Heiz-\nleistung";
 			this.HeatLoad.Name = "HeatLoad";
 			this.HeatLoad.ReadOnly = true;
+			this.HeatLoad.Visible = false;
 			this.HeatLoad.Width = 50;
 			// 
 			// CoolLoad
@@ -225,6 +228,7 @@ namespace Europlan.Common {
 			this.CoolLoad.HeaderText = "Kühl-\nleistung";
 			this.CoolLoad.Name = "CoolLoad";
 			this.CoolLoad.ReadOnly = true;
+			this.CoolLoad.Visible = false;
 			this.CoolLoad.Width = 50;
 			// 
 			// ConnectionPipePanel
