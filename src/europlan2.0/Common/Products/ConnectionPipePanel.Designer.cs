@@ -27,6 +27,9 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvConnectionPipes = new System.Windows.Forms.DataGridView();
 			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -34,15 +37,15 @@ namespace Europlan.Common {
 			this.ruecklaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.roomDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.productDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.PlannedCircuits = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PlannedCircuits = new Europlan.Common.NumericColumn();
 			this.onlyFirstDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.printDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.PipeType = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.Verlegeart = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.Insulation = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.Area = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.HeatLoad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.CoolLoad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.HeatLoad = new Europlan.Common.NumericColumn();
+			this.CoolLoad = new Europlan.Common.NumericColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dgvConnectionPipes)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.connectionPipeBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -92,6 +95,7 @@ namespace Europlan.Common {
 			// connectionPipeBindingSource
 			// 
 			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
+			// 
 			// Room
 			// 
 			this.Room.DataPropertyName = "DestinationRoom";
@@ -153,9 +157,15 @@ namespace Europlan.Common {
 			// PlannedCircuits
 			// 
 			this.PlannedCircuits.DataPropertyName = "PlannedCircuits";
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle4.Format = "F0";
+			this.PlannedCircuits.DefaultCellStyle = dataGridViewCellStyle4;
 			this.PlannedCircuits.HeaderText = "Anz.";
 			this.PlannedCircuits.Name = "PlannedCircuits";
+			this.PlannedCircuits.NumEditType = Europlan.Common.NumericBox.NumericEditType.DENOMINATION;
 			this.PlannedCircuits.ReadOnly = true;
+			this.PlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.PlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.PlannedCircuits.Visible = false;
 			this.PlannedCircuits.Width = 40;
 			// 
@@ -217,18 +227,30 @@ namespace Europlan.Common {
 			// HeatLoad
 			// 
 			this.HeatLoad.DataPropertyName = "HeatLoadTotal";
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle5.Format = "F0";
+			this.HeatLoad.DefaultCellStyle = dataGridViewCellStyle5;
 			this.HeatLoad.HeaderText = "Heiz-\nleistung";
 			this.HeatLoad.Name = "HeatLoad";
+			this.HeatLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.HeatLoad.ReadOnly = true;
+			this.HeatLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.HeatLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.HeatLoad.Visible = false;
 			this.HeatLoad.Width = 50;
 			// 
 			// CoolLoad
 			// 
 			this.CoolLoad.DataPropertyName = "CoolLoadTotal";
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle6.Format = "F0";
+			this.CoolLoad.DefaultCellStyle = dataGridViewCellStyle6;
 			this.CoolLoad.HeaderText = "Kühl-\nleistung";
 			this.CoolLoad.Name = "CoolLoad";
+			this.CoolLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
 			this.CoolLoad.ReadOnly = true;
+			this.CoolLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.CoolLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.CoolLoad.Visible = false;
 			this.CoolLoad.Width = 50;
 			// 
@@ -254,15 +276,15 @@ namespace Europlan.Common {
 		private NumericColumn ruecklaufDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn roomDataGridViewComboBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn productDataGridViewComboBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn PlannedCircuits;
+		private NumericColumn PlannedCircuits;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn onlyFirstDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn printDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewComboBoxColumn PipeType;
 		private System.Windows.Forms.DataGridViewComboBoxColumn Verlegeart;
 		private System.Windows.Forms.DataGridViewComboBoxColumn Insulation;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Area;
-		private System.Windows.Forms.DataGridViewTextBoxColumn HeatLoad;
-		private System.Windows.Forms.DataGridViewTextBoxColumn CoolLoad;
+		private NumericColumn HeatLoad;
+		private NumericColumn CoolLoad;
 
 	}
 }

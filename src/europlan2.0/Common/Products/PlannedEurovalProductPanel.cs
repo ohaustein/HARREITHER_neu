@@ -881,7 +881,7 @@ namespace Europlan.Common {
 		private void btnConnectionPipes_Click(object sender, EventArgs e) {
 			ConnectionPipesForm form = new ConnectionPipesForm(this.product);
 			form.ShowDialog();
-			if (form.unsavedChanges) {
+			if (form.UnsavedChanges) {
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
 				}
