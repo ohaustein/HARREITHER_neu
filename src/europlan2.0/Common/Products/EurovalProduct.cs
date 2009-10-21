@@ -960,7 +960,8 @@ namespace Europlan.Common {
 		/// </summary>
 		/// <param name="distance"></param>
 		/// <param name="distanceRim"></param>
-		private void CalculateQForLayDistance(LayDistance distance, Nullable<RimType> distanceRim, Nullable<int> circuits/*,
+		private void CalculateQForLayDistance(LayDistance distance, Nullable<RimType> distanceRim, Nullable<int> circuits,
+				double vorlaufTotal, double ruecklaufTotal, double vorlaufNotIsolated, double ruecklaufNotIsolated/*,
 				out double qHeatU, out double qHeat, out double qHeatRim, out double qHeatResidence, out double deltaRhoHeat, out double spreizungHeat,
 				out double qCoolU, out double qCool, out double qCoolRim, out double qCoolResidence, out double deltaRhoCool, out double spreizungCool,
 				out double pipeLength*/) {
@@ -983,7 +984,7 @@ namespace Europlan.Common {
 
 			EN1264 en1264 = EN1264.Instance;
 
-			// Rohrlänge Anbindeleitungen
+			/*// Rohrlänge Anbindeleitungen
 			double vorlaufTotal = 0;
 			double ruecklaufTotal = 0;
 			double vorlaufNotIsolated = 0;
@@ -993,7 +994,7 @@ namespace Europlan.Common {
 				ruecklaufNotIsolated += (pipe.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) ? pipe.Ruecklauf : 0;
 				vorlaufTotal += pipe.Vorlauf;
 				ruecklaufTotal += pipe.Ruecklauf;
-			}
+			}*/
 
 			double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
 			double lambdaU = 1.2; /* Estrich??? */
@@ -1262,6 +1263,18 @@ namespace Europlan.Common {
 				return true;
 			}
 
+			// Rohrlänge Anbindeleitungen
+			double vorlaufTotal = 0;
+			double ruecklaufTotal = 0;
+			double vorlaufNotIsolated = 0;
+			double ruecklaufNotIsolated = 0;
+			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
+				vorlaufNotIsolated += (pipe.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) ? pipe.Vorlauf : 0;
+				ruecklaufNotIsolated += (pipe.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) ? pipe.Ruecklauf : 0;
+				vorlaufTotal += pipe.Vorlauf;
+				ruecklaufTotal += pipe.Ruecklauf;
+			}
+
 			Dictionary<LayDistance, Nullable<RimType>[]> teilungen = new Dictionary<LayDistance, RimType?[]>();
 			if (this.plannedRimLength > 0) {
 				teilungen.Add(LayDistance.EV35, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
@@ -1318,13 +1331,13 @@ namespace Europlan.Common {
 				IEnumerator rtEnumerator = teilungen[curLaydistance.Value].GetEnumerator();
 				while (rtEnumerator.MoveNext()) {
 					curRimtype = rtEnumerator.Current as Nullable<RimType>;
-					this.CalculateQForLayDistance(curLaydistance.Value, curRimtype, this.requestedCircuits);
+					this.CalculateQForLayDistance(curLaydistance.Value, curRimtype, this.requestedCircuits, vorlaufTotal, vorlaufNotIsolated, ruecklaufTotal, ruecklaufNotIsolated);
 					if (!this.requestedCircuits.HasValue) {
 						// if pressure loss is to large increase circuits until pressure loss is within the valid range
 						while (this.plannedCircuits < 12 &&
 								(calculateHeat && this.PlannedDeltaRhoHeat > EurovalProduct.maxPressureLost / 100) ||
 								(calculateCool && this.PlannedDeltaRhoCool > EurovalProduct.maxPressureLost / 100)) {
-							this.CalculateQForLayDistance(curLaydistance.Value, curRimtype, this.plannedCircuits + 1);
+							this.CalculateQForLayDistance(curLaydistance.Value, curRimtype, this.plannedCircuits + 1, vorlaufTotal, vorlaufNotIsolated, ruecklaufTotal, ruecklaufNotIsolated);
 						}
 					}
 					// check if new parameters are better than the old ones
@@ -1380,7 +1393,7 @@ namespace Europlan.Common {
 				errorMsg = "Keine Automatische Auslegung möglich";
 				return false;
 			}
-			this.CalculateQForLayDistance(bestLaydistance.Value, bestRimType, bestCircuits);
+			this.CalculateQForLayDistance(bestLaydistance.Value, bestRimType, bestCircuits, vorlaufTotal, vorlaufNotIsolated, ruecklaufTotal, ruecklaufNotIsolated);
 			if (requestedHeatLoad <= 0) {
 				this.plannedHeatLoad = 0;
 				this.plannedHeatLoadAnbindung = 0;
@@ -1401,7 +1414,16 @@ namespace Europlan.Common {
 				this.plannedDeltaRhoCool = 0;
 				this.plannedSpreizungCool = 0;
 			}
-			errorMsg = null;
+			errorMsg = "";
+			if (this.PlannedPipeLengthPerCircuit > EurovalProduct.ConfigMaxCircuitLength - vorlaufTotal - ruecklaufTotal) {
+				errorMsg += "Rohrlänge zu groß (" + Math.Round(this.PlannedPipeLengthPerCircuit, 1) + "m > " + Math.Round(EurovalProduct.ConfigMaxCircuitLength - vorlaufTotal - ruecklaufTotal, 1) + "m)\n";
+			}
+			if (Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264)) {
+				errorMsg += "Oberflächentemperatur in der Aufenthaltszone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264), 1) + "°C)";
+			}
+			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264)) {
+				errorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "°C)";
+			}
 			return true;
 		}
 	}

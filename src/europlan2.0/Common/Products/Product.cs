@@ -71,6 +71,7 @@ namespace Europlan.Common {
 		public abstract int GetDefaultQuickDimensioningCircuits();
 		public abstract float GetDefaultQuickDimensioningPlannedArea();
 
+		#region Quick Dimensioning
 		public int QuickDimensioningHeatPower {
 			get {
 				if (canHeat) {
@@ -152,6 +153,7 @@ namespace Europlan.Common {
 			get { return usedForQuickDimensioning; }
 			set { usedForQuickDimensioning = value; }
 		}
+		#endregion Quick Dimensioning
 
 		[XmlIgnore]
 		public Room AssociatedRoom {
@@ -248,16 +250,6 @@ namespace Europlan.Common {
 		public abstract double PlannedCoolLoad {
 			get;
 		}
-
-		/*public ProductConnection PlannedConnectionVorlauf {
-			get { return this.plannedConnectionVorlauf; }
-			set { this.plannedConnectionVorlauf = value; }
-		}
-
-		public ProductConnection PlannedConnectionRuecklauf {
-			get { return this.plannedConnectionRuecklauf; }
-			set { this.plannedConnectionRuecklauf = value; }
-		}*/
 
 		public List<ConnectionPipe> PlannedConnectionPipes {
 			get { return this.plannedConnectionPipes; }

@@ -262,6 +262,17 @@ namespace Europlan.Common {
 				this.numCorners.Enabled = evProduct.PlannedAreaRim > 0;
 				this.cmbRimType.Enabled = evProduct.PlannedAreaRim > 0;
 
+				// disable the following controls if the product is a connection
+				this.numRim.Enabled = this.numRim.Enabled && !evProduct.PlannedProductIsConnection;
+				this.numCorners.Enabled = this.numCorners.Enabled && !evProduct.PlannedProductIsConnection;
+				this.rbCalculateHeat.Enabled = this.rbCalculateHeat.Enabled && !evProduct.PlannedProductIsConnection;
+				this.rbCalculateCool.Enabled = this.rbCalculateCool.Enabled && !evProduct.PlannedProductIsConnection;
+				this.rbCalculateBoth.Enabled = this.rbCalculateBoth.Enabled && !evProduct.PlannedProductIsConnection;
+				this.btnDistributor.Enabled = this.btnDistributor.Enabled && !evProduct.PlannedProductIsConnection;
+				this.cmbLayDistance.Enabled = this.cmbLayDistance.Enabled && !evProduct.PlannedProductIsConnection;
+				this.cmbRimType.Enabled = this.cmbRimType.Enabled && !evProduct.PlannedProductIsConnection;
+				this.cmbCircuits.Enabled = this.cmbCircuits.Enabled && !evProduct.PlannedProductIsConnection;
+
 				this.numArea.MaxValue = (decimal)evProduct.AvailableFloorArea;
 				this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
 				this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
@@ -515,10 +526,14 @@ namespace Europlan.Common {
 				this.lblSpreizungHeat.Text = Math.Round(evProduct.PlannedSpreizungHeat, 1).ToString();
 				this.lblSpreizungCool.Text = Math.Round(evProduct.PlannedSpreizungCool, 1).ToString();
 
-				if (evProduct.PlannedConnection == null) {
-					this.txtDistributor.Text = "";
+				if (evProduct.PlannedProductIsConnection) {
+					this.txtDistributor.Text = "kein eigener Heizkreis";
 				} else {
-					this.txtDistributor.Text = evProduct.PlannedConnection.ToString();
+					if (evProduct.PlannedConnection == null) {
+						this.txtDistributor.Text = "";
+					} else {
+						this.txtDistributor.Text = evProduct.PlannedConnection.ToString();
+					}
 				}
 
 				if (this.errorMsg != null) {
@@ -873,6 +888,8 @@ namespace Europlan.Common {
 		}
 
 		private void connectionPipePanel1_GridContentChanged(object sender) {
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+			this.UpdateControl(FieldEnum.NONE);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
