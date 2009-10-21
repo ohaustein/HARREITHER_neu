@@ -199,6 +199,24 @@ namespace Europlan.Common {
 			return B * ab * atmt * au * heizmittelUebertemperatur;
 		}
 
+		public double WaermestromDichteRegister(double heizmittelTemperatur, double raumTemperatur, double[][] standardTabelle, double faktor) {
+			double[] x = { 30.0, 32.5, 35.0, 37.5, 40.0, 42.5, 45.0, 47.5, 50.0 };
+
+			int l = standardTabelle.Length;
+
+			double[] c = null;
+			double[] y = new double[l];
+
+			for (int i = 0; i < l; i++) {
+				spline3.buildcubicspline(x, standardTabelle[i], 9, 0, 0, 0, 0, ref c);
+				y[i] = spline3.splineinterpolation(ref c, heizmittelTemperatur);
+			}
+
+			double[] x2 = { 15, 18, 20, 22, 24 };
+			spline3.buildcubicspline(x2, y, 5, 0, 0, 0, 0, ref c);
+			return spline3.splineinterpolation(ref c, raumTemperatur) * faktor;
+		}
+
 		public double OberflaechenTemperatur(double waermestrom, double alpha, double raumTemperatur) {
 			return (waermestrom / alpha) + raumTemperatur;
 		}

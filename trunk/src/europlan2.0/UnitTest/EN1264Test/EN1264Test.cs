@@ -169,6 +169,21 @@ namespace Europlan.UnitTest {
 		}
 
 		[Test]
+		public void TestWaermestromDichteRegister() {
+			double[][] table = {new double[] {105,120,140,155,175,190,210,225,240},
+								new double[] { 85,100,120,135,155,170,185,205,220},
+								new double[] { 70, 85,105,120,140,155,175,190,210},
+								new double[] { 55, 70, 90,105,125,140,160,175,195},
+								new double[] { 45, 60, 80, 95,115,130,145,165,180}};
+			double result = norm.WaermestromDichteRegister(35.0, 18.0, table, 1.0);
+			Assert.AreEqual(120.0, result);
+			result = norm.WaermestromDichteRegister(35.0, 18.0, table, 1.1);
+			Assert.AreEqual(132.0, result);
+			result = norm.WaermestromDichteRegister(50.0, 19.0, table, 1.0);
+			Assert.AreEqual(215.0, Math.Round(result, 0));
+		}
+
+		[Test]
 		public void TestOberflaechenTemperatur() {
 			double result = norm.OberflaechenTemperatur(40.0, 10.8, 25);
 			Assert.AreEqual(28.7037, Math.Round(result, 4));
