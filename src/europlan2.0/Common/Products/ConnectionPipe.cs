@@ -249,10 +249,10 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public Room DestinationRoom {
 			get {
-				return this.destinationRoom;
-			}
-			set {
-				this.destinationRoom = value;
+				if (this.ConnectionOf != null) {
+					return this.ConnectionOf.Product.AssociatedRoom;
+				}
+				return null;
 			}
 		}
 
@@ -289,6 +289,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public PlannedProduct ConnectionOf {
 			get {
 				foreach (Floor f in Project.Instance.Floors) {

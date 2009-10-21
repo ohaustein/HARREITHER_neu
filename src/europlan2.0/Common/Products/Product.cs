@@ -269,7 +269,6 @@ namespace Europlan.Common {
 						foreach (PlannedProduct pp in r.PlannedProducts) {
 							foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
 								if (cp.PlannedProduct != null && cp.PlannedProduct.Product == this) {
-									cp.DestinationRoom = r;
 									cps.Add(cp);
 								}
 							}
