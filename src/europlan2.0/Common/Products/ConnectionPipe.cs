@@ -257,7 +257,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public PlannedProduct PlannedProduct {
+		public PlannedProduct ConnectionThrough {
 			get {
 				if (this.productId != null) {
 					foreach (Floor f in Project.Instance.Floors) {
@@ -345,7 +345,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double Area {
+		public double AreaTotal {
 			get {
 				double area = 0;
 				switch (verlegeart) {
@@ -417,25 +417,25 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double HeatLoad {
+		public double HeatLoadTotal {
 			get {
 				if (this.verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH) {
 					return 0;
 				}
-				if (this.room == null || this.PlannedProduct == null || this.PlannedProduct.Product == null) {
+				if (this.room == null || this.ConnectionThrough == null || this.ConnectionThrough.Product == null) {
 					return 0;
 				}
 
-				if (!(this.PlannedProduct.Product is EurovalProduct)) {
+				if (!(this.ConnectionThrough.Product is EurovalProduct)) {
 					return 0; // TODO
 				}
 
-				if ((this.PlannedProduct.Product as EurovalProduct).PlannedFloorConstruction == null ||
-					(this.PlannedProduct.Product as EurovalProduct).PlannedInsulationConstruction == null) {
+				if ((this.ConnectionThrough.Product as EurovalProduct).PlannedFloorConstruction == null ||
+					(this.ConnectionThrough.Product as EurovalProduct).PlannedInsulationConstruction == null) {
 					return 0; // TODO
 				}
 
-				if (this.PlannedProduct.RequestedHeatLoad <= 0) {
+				if (this.ConnectionThrough.RequestedHeatLoad <= 0) {
 					return 0;
 				}
 
@@ -493,8 +493,8 @@ namespace Europlan.Common {
 				totalPipeLength += this.ruecklauf;
 
 				double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
-				double rLambdaB = (this.PlannedProduct.Product as EurovalProduct).PlannedFloorConstruction == null ? 0 : (this.PlannedProduct.Product as EurovalProduct).PlannedFloorConstruction.RValue;
-				double rLambdaIns = (this.PlannedProduct.Product as EurovalProduct).PlannedInsulationConstruction == null ? 0 : (this.PlannedProduct.Product as EurovalProduct).PlannedInsulationConstruction.RValue;
+				double rLambdaB = (this.ConnectionThrough.Product as EurovalProduct).PlannedFloorConstruction == null ? 0 : (this.ConnectionThrough.Product as EurovalProduct).PlannedFloorConstruction.RValue;
+				double rLambdaIns = (this.ConnectionThrough.Product as EurovalProduct).PlannedInsulationConstruction == null ? 0 : (this.ConnectionThrough.Product as EurovalProduct).PlannedInsulationConstruction.RValue;
 
 				double vorlaufTempIn = distributorTempOut - (distributorSpreizung * pipeBeforeVorlauf / totalPipeLength);
 				double vorlaufTempOut = distributorTempOut - distributorSpreizung + (distributorSpreizung * pipeAfterVorlauf / totalPipeLength);
@@ -522,25 +522,25 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double CoolLoad {
+		public double CoolLoadTotal {
 			get {
 				if (this.verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH) {
 					return 0;
 				}
-				if (this.room == null || this.PlannedProduct == null || this.PlannedProduct.Product == null) {
+				if (this.room == null || this.ConnectionThrough == null || this.ConnectionThrough.Product == null) {
 					return 0;
 				}
 
-				if (!(this.PlannedProduct.Product is EurovalProduct)) {
+				if (!(this.ConnectionThrough.Product is EurovalProduct)) {
 					return 0; // TODO
 				}
 
-				if ((this.PlannedProduct.Product as EurovalProduct).PlannedFloorConstruction == null ||
-					(this.PlannedProduct.Product as EurovalProduct).PlannedInsulationConstruction == null) {
+				if ((this.ConnectionThrough.Product as EurovalProduct).PlannedFloorConstruction == null ||
+					(this.ConnectionThrough.Product as EurovalProduct).PlannedInsulationConstruction == null) {
 					return 0; // TODO
 				}
 
-				if (this.PlannedProduct.RequestedCoolLoad <= 0) {
+				if (this.ConnectionThrough.RequestedCoolLoad <= 0) {
 					return 0;
 				}
 
@@ -595,8 +595,8 @@ namespace Europlan.Common {
 				}
 
 				double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
-				double rLambdaB = (this.PlannedProduct.Product as EurovalProduct).PlannedFloorConstruction == null ? 0 : (this.PlannedProduct.Product as EurovalProduct).PlannedFloorConstruction.RValue;
-				double rLambdaIns = (this.PlannedProduct.Product as EurovalProduct).PlannedInsulationConstruction == null ? 0 : (this.PlannedProduct.Product as EurovalProduct).PlannedInsulationConstruction.RValue;
+				double rLambdaB = (this.ConnectionThrough.Product as EurovalProduct).PlannedFloorConstruction == null ? 0 : (this.ConnectionThrough.Product as EurovalProduct).PlannedFloorConstruction.RValue;
+				double rLambdaIns = (this.ConnectionThrough.Product as EurovalProduct).PlannedInsulationConstruction == null ? 0 : (this.ConnectionThrough.Product as EurovalProduct).PlannedInsulationConstruction.RValue;
 
 				double vorlaufTempIn = distributorTempOut + (distributorSpreizung * pipeBeforeVorlauf / totalPipeLength);
 				double vorlaufTempOut = distributorTempOut + distributorSpreizung + (distributorSpreizung * pipeAfterVorlauf / totalPipeLength);

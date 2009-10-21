@@ -110,7 +110,7 @@ namespace Europlan.Common {
 			// 
 			// dataGridViewTextBoxColumn2
 			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "PlannedProduct";
+			this.dataGridViewTextBoxColumn2.DataPropertyName = "ConnectionThrough";
 			this.dataGridViewTextBoxColumn2.FillWeight = 70F;
 			this.dataGridViewTextBoxColumn2.HeaderText = "Teilsystem";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -128,7 +128,7 @@ namespace Europlan.Common {
 			// 
 			// dataGridViewTextBoxColumn4
 			// 
-			this.dataGridViewTextBoxColumn4.DataPropertyName = "Area";
+			this.dataGridViewTextBoxColumn4.DataPropertyName = "AreaTotal";
 			this.dataGridViewTextBoxColumn4.HeaderText = "Fläche";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			this.dataGridViewTextBoxColumn4.ReadOnly = true;
@@ -137,7 +137,7 @@ namespace Europlan.Common {
 			// 
 			// dataGridViewTextBoxColumn5
 			// 
-			this.dataGridViewTextBoxColumn5.DataPropertyName = "HeatLoad";
+			this.dataGridViewTextBoxColumn5.DataPropertyName = "HeatLoadTotal";
 			this.dataGridViewTextBoxColumn5.HeaderText = "Heiz-\nleistung";
 			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
 			this.dataGridViewTextBoxColumn5.ReadOnly = true;
@@ -146,7 +146,7 @@ namespace Europlan.Common {
 			// 
 			// dataGridViewTextBoxColumn6
 			// 
-			this.dataGridViewTextBoxColumn6.DataPropertyName = "CoolLoad";
+			this.dataGridViewTextBoxColumn6.DataPropertyName = "CoolLoadTotal";
 			this.dataGridViewTextBoxColumn6.HeaderText = "Kühl-\nleistung";
 			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
 			this.dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -203,7 +203,7 @@ namespace Europlan.Common {
 			// 
 			// productDataGridViewComboBoxColumn
 			// 
-			this.productDataGridViewComboBoxColumn.DataPropertyName = "PlannedProduct";
+			this.productDataGridViewComboBoxColumn.DataPropertyName = "ConnectionThrough";
 			this.productDataGridViewComboBoxColumn.FillWeight = 70F;
 			this.productDataGridViewComboBoxColumn.HeaderText = "Teilsystem";
 			this.productDataGridViewComboBoxColumn.Name = "productDataGridViewComboBoxColumn";
@@ -268,7 +268,7 @@ namespace Europlan.Common {
 			// 
 			// Area
 			// 
-			this.Area.DataPropertyName = "Area";
+			this.Area.DataPropertyName = "AreaTotal";
 			this.Area.HeaderText = "Fläche";
 			this.Area.Name = "Area";
 			this.Area.ReadOnly = true;
@@ -277,7 +277,7 @@ namespace Europlan.Common {
 			// 
 			// HeatLoad
 			// 
-			this.HeatLoad.DataPropertyName = "HeatLoad";
+			this.HeatLoad.DataPropertyName = "HeatLoadTotal";
 			this.HeatLoad.HeaderText = "Heiz-\nleistung";
 			this.HeatLoad.Name = "HeatLoad";
 			this.HeatLoad.ReadOnly = true;
@@ -286,7 +286,7 @@ namespace Europlan.Common {
 			// 
 			// CoolLoad
 			// 
-			this.CoolLoad.DataPropertyName = "CoolLoad";
+			this.CoolLoad.DataPropertyName = "CoolLoadTotal";
 			this.CoolLoad.HeaderText = "Kühl-\nleistung";
 			this.CoolLoad.Name = "CoolLoad";
 			this.CoolLoad.ReadOnly = true;
