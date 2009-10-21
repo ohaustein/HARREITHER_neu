@@ -422,7 +422,7 @@ namespace Europlan.Common {
 				if (this.verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH) {
 					return 0;
 				}
-				if (this.room == null || this.ConnectionThrough == null || this.ConnectionThrough.Product == null) {
+				if (this.Room == null || this.ConnectionThrough == null || this.ConnectionThrough.Product == null) {
 					return 0;
 				}
 
