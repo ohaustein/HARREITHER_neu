@@ -1240,11 +1240,11 @@ namespace Europlan.Common {
 				foreach (Room r in f.Rooms) {
 					foreach (PlannedProduct pp in r.PlannedProducts) {
 						foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
-							if (cp != null && cp.PlannedProduct != null && cp.PlannedProduct.Product == this) {
+							if (cp != null && cp.ConnectionThrough != null && cp.ConnectionThrough.Product == this) {
 								connectionPipes.Add(cp);
-								this.plannedRemoveArea += cp.Area;
-								this.plannedHeatLoadAnbindung += cp.HeatLoad;
-								this.plannedCoolLoadAnbindung += cp.CoolLoad;
+								this.plannedRemoveArea += cp.AreaTotal;
+								this.plannedHeatLoadAnbindung += cp.HeatLoadTotal;
+								this.plannedCoolLoadAnbindung += cp.CoolLoadTotal;
 							}
 						}
 					}
