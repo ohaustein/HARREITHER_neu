@@ -218,6 +218,10 @@ namespace Europlan.Common {
 			}
 		}
 
+		public abstract float PlannedNetArea {
+			get;
+		}
+
 		public abstract float PlannedFloorArea {
 			get;
 			set;
