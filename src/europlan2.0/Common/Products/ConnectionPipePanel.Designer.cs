@@ -29,7 +29,12 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle onlyFirstCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle printCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvConnectionPipes = new System.Windows.Forms.DataGridView();
 			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,6 +46,7 @@ namespace Europlan.Common {
 			this.onlyFirstDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.printDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.PipeType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.PipeTypeText = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Verlegeart = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.Insulation = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.Area = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,6 +78,7 @@ namespace Europlan.Common {
             this.onlyFirstDataGridViewCheckBoxColumn,
             this.printDataGridViewCheckBoxColumn,
             this.PipeType,
+            this.PipeTypeText,
             this.Verlegeart,
             this.Insulation,
             this.Area,
@@ -99,6 +106,8 @@ namespace Europlan.Common {
 			// Room
 			// 
 			this.Room.DataPropertyName = "DestinationRoom";
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+			this.Room.DefaultCellStyle = dataGridViewCellStyle2;
 			this.Room.FillWeight = 70F;
 			this.Room.HeaderText = "Raum";
 			this.Room.Name = "Room";
@@ -109,9 +118,9 @@ namespace Europlan.Common {
 			// vorlaufDataGridViewTextBoxColumn
 			// 
 			this.vorlaufDataGridViewTextBoxColumn.DataPropertyName = "Vorlauf";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F0";
-			this.vorlaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle3.Format = "F0";
+			this.vorlaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.vorlaufDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.vorlaufDataGridViewTextBoxColumn.HeaderText = "Länge\nVorlauf\n(m)";
 			this.vorlaufDataGridViewTextBoxColumn.Name = "vorlaufDataGridViewTextBoxColumn";
@@ -123,9 +132,9 @@ namespace Europlan.Common {
 			// ruecklaufDataGridViewTextBoxColumn
 			// 
 			this.ruecklaufDataGridViewTextBoxColumn.DataPropertyName = "Ruecklauf";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
-			this.ruecklaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle4.Format = "F0";
+			this.ruecklaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
 			this.ruecklaufDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.ruecklaufDataGridViewTextBoxColumn.HeaderText = "Länge\nRücklauf\n(m)";
 			this.ruecklaufDataGridViewTextBoxColumn.Name = "ruecklaufDataGridViewTextBoxColumn";
@@ -157,9 +166,9 @@ namespace Europlan.Common {
 			// PlannedCircuits
 			// 
 			this.PlannedCircuits.DataPropertyName = "PlannedCircuits";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F0";
-			this.PlannedCircuits.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Format = "F0";
+			this.PlannedCircuits.DefaultCellStyle = dataGridViewCellStyle5;
 			this.PlannedCircuits.HeaderText = "Anz.";
 			this.PlannedCircuits.Name = "PlannedCircuits";
 			this.PlannedCircuits.NumEditType = Europlan.Common.NumericBox.NumericEditType.DENOMINATION;
@@ -172,6 +181,10 @@ namespace Europlan.Common {
 			// onlyFirstDataGridViewCheckBoxColumn
 			// 
 			this.onlyFirstDataGridViewCheckBoxColumn.DataPropertyName = "OnlyFirst";
+			onlyFirstCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			onlyFirstCellStyle.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			onlyFirstCellStyle.NullValue = false;
+			this.onlyFirstDataGridViewCheckBoxColumn.DefaultCellStyle = onlyFirstCellStyle;
 			this.onlyFirstDataGridViewCheckBoxColumn.FillWeight = 55F;
 			this.onlyFirstDataGridViewCheckBoxColumn.HeaderText = "nur\nerster\nHK";
 			this.onlyFirstDataGridViewCheckBoxColumn.Name = "onlyFirstDataGridViewCheckBoxColumn";
@@ -180,6 +193,10 @@ namespace Europlan.Common {
 			// printDataGridViewCheckBoxColumn
 			// 
 			this.printDataGridViewCheckBoxColumn.DataPropertyName = "Print";
+			printCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			printCellStyle.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			printCellStyle.NullValue = false;
+			this.printDataGridViewCheckBoxColumn.DefaultCellStyle = printCellStyle;
 			this.printDataGridViewCheckBoxColumn.FillWeight = 55F;
 			this.printDataGridViewCheckBoxColumn.HeaderText = "Verlege-\ndaten\ndrucken";
 			this.printDataGridViewCheckBoxColumn.Name = "printDataGridViewCheckBoxColumn";
@@ -194,6 +211,16 @@ namespace Europlan.Common {
 			this.PipeType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.PipeType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.PipeType.Width = 125;
+			// 
+			// PipeTypeText
+			// 
+			this.PipeTypeText.DataPropertyName = "PipeType";
+			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+			this.PipeTypeText.DefaultCellStyle = dataGridViewCellStyle8;
+			this.PipeTypeText.HeaderText = "Rohrsystem";
+			this.PipeTypeText.Name = "PipeTypeText";
+			this.PipeTypeText.ReadOnly = true;
+			this.PipeTypeText.Visible = false;
 			// 
 			// Verlegeart
 			// 
@@ -218,6 +245,8 @@ namespace Europlan.Common {
 			// Area
 			// 
 			this.Area.DataPropertyName = "AreaTotal";
+			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+			this.Area.DefaultCellStyle = dataGridViewCellStyle9;
 			this.Area.HeaderText = "Fläche";
 			this.Area.Name = "Area";
 			this.Area.ReadOnly = true;
@@ -227,9 +256,10 @@ namespace Europlan.Common {
 			// HeatLoad
 			// 
 			this.HeatLoad.DataPropertyName = "HeatLoadTotal";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle5.Format = "F0";
-			this.HeatLoad.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle10.Format = "F0";
+			this.HeatLoad.DefaultCellStyle = dataGridViewCellStyle10;
 			this.HeatLoad.HeaderText = "Heiz-\nleistung";
 			this.HeatLoad.Name = "HeatLoad";
 			this.HeatLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
@@ -242,9 +272,10 @@ namespace Europlan.Common {
 			// CoolLoad
 			// 
 			this.CoolLoad.DataPropertyName = "CoolLoadTotal";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle6.Format = "F0";
-			this.CoolLoad.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle11.Format = "F0";
+			this.CoolLoad.DefaultCellStyle = dataGridViewCellStyle11;
 			this.CoolLoad.HeaderText = "Kühl-\nleistung";
 			this.CoolLoad.Name = "CoolLoad";
 			this.CoolLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
@@ -280,6 +311,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewCheckBoxColumn onlyFirstDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn printDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewComboBoxColumn PipeType;
+		private System.Windows.Forms.DataGridViewTextBoxColumn PipeTypeText;
 		private System.Windows.Forms.DataGridViewComboBoxColumn Verlegeart;
 		private System.Windows.Forms.DataGridViewComboBoxColumn Insulation;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Area;

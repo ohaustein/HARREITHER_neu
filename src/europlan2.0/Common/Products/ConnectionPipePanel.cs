@@ -44,6 +44,14 @@ namespace Europlan.Common {
 				HeatLoad.Visible = true;
 				CoolLoad.Visible = true;
 				PlannedCircuits.Visible = true;
+				PipeType.Visible = false;
+				PipeTypeText.Visible = true;
+				productDataGridViewComboBoxColumn.DefaultCellStyle.BackColor = SystemColors.Control;
+				onlyFirstDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = SystemColors.Control;
+				onlyFirstDataGridViewCheckBoxColumn.ReadOnly = true;
+				printDataGridViewCheckBoxColumn.Visible = false;
+				roomDataGridViewComboBoxColumn.DefaultCellStyle.BackColor = SystemColors.Control;
+				dgvConnectionPipes.AllowUserToAddRows = false;
 			} else {
 				// TODO: this is just a quick workaround - room column could not be made invisible if it
 				//       was the first column
@@ -56,6 +64,14 @@ namespace Europlan.Common {
 				HeatLoad.Visible = false;
 				CoolLoad.Visible = false;
 				PlannedCircuits.Visible = false;
+				PipeType.Visible = true;
+				PipeTypeText.Visible = false;
+				productDataGridViewComboBoxColumn.DefaultCellStyle.BackColor = SystemColors.ControlLightLight;
+				onlyFirstDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = SystemColors.ControlLightLight;
+				onlyFirstDataGridViewCheckBoxColumn.ReadOnly = false;
+				printDataGridViewCheckBoxColumn.Visible = true;
+				roomDataGridViewComboBoxColumn.DefaultCellStyle.BackColor = SystemColors.ControlLightLight;
+				dgvConnectionPipes.AllowUserToAddRows = true;
 			}
 		}
 
@@ -111,12 +127,14 @@ namespace Europlan.Common {
 		}
 
 		private void dgvConnectionPipes_CellEnter(object sender, DataGridViewCellEventArgs e) {
-			if (((e.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex) || (e.ColumnIndex == productDataGridViewComboBoxColumn.DisplayIndex)) && e.RowIndex >= 0) {
-				Rectangle rect = dgvConnectionPipes.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
-				int width = dgvConnectionPipes.CurrentCell.Size.Width;
-				roomSelectionButton.Location = new Point(rect.X + width - roomSelectionButton.Width, rect.Y);
-				roomSelectionButton.Height = dgvConnectionPipes.Rows[e.RowIndex].Height;
-				roomSelectionButton.Show();
+			if (!showPipesThroughProduct) {
+				if (((e.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex) || (e.ColumnIndex == productDataGridViewComboBoxColumn.DisplayIndex)) && e.RowIndex >= 0) {
+					Rectangle rect = dgvConnectionPipes.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+					int width = dgvConnectionPipes.CurrentCell.Size.Width;
+					roomSelectionButton.Location = new Point(rect.X + width - roomSelectionButton.Width, rect.Y);
+					roomSelectionButton.Height = dgvConnectionPipes.Rows[e.RowIndex].Height;
+					roomSelectionButton.Show();
+				}
 			}
 		}
 

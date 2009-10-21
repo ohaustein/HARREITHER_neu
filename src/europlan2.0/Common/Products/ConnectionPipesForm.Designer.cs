@@ -23,10 +23,8 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.btnOk = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.lblConnectionPipe = new System.Windows.Forms.Label();
-			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
 			this.lblConnenctionPipeArea = new System.Windows.Forms.Label();
 			this.lblProductArea = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
@@ -35,18 +33,8 @@ namespace Europlan.Common {
 			this.label4 = new System.Windows.Forms.Label();
 			this.lblCoolLoad = new System.Windows.Forms.Label();
 			this.lblHeatLoad = new System.Windows.Forms.Label();
+			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
 			this.SuspendLayout();
-			// 
-			// btnOk
-			// 
-			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOk.Location = new System.Drawing.Point(715, 451);
-			this.btnOk.Name = "btnOk";
-			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 2;
-			this.btnOk.Text = "OK";
-			this.btnOk.UseVisualStyleBackColor = true;
 			// 
 			// button2
 			// 
@@ -56,7 +44,7 @@ namespace Europlan.Common {
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 23);
 			this.button2.TabIndex = 3;
-			this.button2.Text = "Abbrechen";
+			this.button2.Text = "Schlieﬂen";
 			this.button2.UseVisualStyleBackColor = true;
 			// 
 			// lblConnectionPipe
@@ -66,18 +54,6 @@ namespace Europlan.Common {
 			this.lblConnectionPipe.Name = "lblConnectionPipe";
 			this.lblConnectionPipe.Size = new System.Drawing.Size(0, 13);
 			this.lblConnectionPipe.TabIndex = 5;
-			// 
-			// connectionPipePanel
-			// 
-			this.connectionPipePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.connectionPipePanel.Location = new System.Drawing.Point(12, 39);
-			this.connectionPipePanel.Name = "connectionPipePanel";
-			this.connectionPipePanel.ShowPipesThroughProduct = true;
-			this.connectionPipePanel.Size = new System.Drawing.Size(859, 390);
-			this.connectionPipePanel.TabIndex = 4;
-			this.connectionPipePanel.GridContentChanged += new Europlan.Common.GridContentChangedHandler(this.connectionPipePanel_GridContentChanged);
 			// 
 			// lblConnenctionPipeArea
 			// 
@@ -163,9 +139,20 @@ namespace Europlan.Common {
 			this.lblHeatLoad.Text = "100W";
 			this.lblHeatLoad.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
+			// connectionPipePanel
+			// 
+			this.connectionPipePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.connectionPipePanel.Location = new System.Drawing.Point(12, 39);
+			this.connectionPipePanel.Name = "connectionPipePanel";
+			this.connectionPipePanel.ShowPipesThroughProduct = true;
+			this.connectionPipePanel.Size = new System.Drawing.Size(859, 390);
+			this.connectionPipePanel.TabIndex = 4;
+			this.connectionPipePanel.GridContentChanged += new Europlan.Common.GridContentChangedHandler(this.connectionPipePanel_GridContentChanged);
+			// 
 			// ConnectionPipesForm
 			// 
-			this.AcceptButton = this.btnOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.button2;
@@ -181,7 +168,6 @@ namespace Europlan.Common {
 			this.Controls.Add(this.lblConnectionPipe);
 			this.Controls.Add(this.connectionPipePanel);
 			this.Controls.Add(this.button2);
-			this.Controls.Add(this.btnOk);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
 			this.Name = "ConnectionPipesForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -195,7 +181,6 @@ namespace Europlan.Common {
 
 		#endregion
 
-		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.Button button2;
 		private ConnectionPipePanel connectionPipePanel;
 		private System.Windows.Forms.Label lblConnectionPipe;
