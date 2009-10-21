@@ -15,6 +15,7 @@ namespace Europlan.Common {
 		public ConnectionPipesForm(PlannedProduct product) {
 			InitializeComponent();
 			connectionPipePanel.Update(product);
+			lblConnectionPipe.Text = "Anbindeleitungen durch " + product.Node.Text + " in " + product.Product.AssociatedRoom.ToString();
 		}
 
 		private void ConnectionPipesForm_FormClosing(object sender, FormClosingEventArgs e) {

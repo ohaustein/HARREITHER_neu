@@ -39,6 +39,7 @@ namespace Europlan.Common {
 					dgvConnectionPipes.Columns.Insert(0, Room);
 				}
 				Room.Visible = true;
+				roomDataGridViewComboBoxColumn.Visible = false;
 				Area.Visible = true;
 				HeatLoad.Visible = true;
 				CoolLoad.Visible = true;
@@ -50,6 +51,7 @@ namespace Europlan.Common {
 					dgvConnectionPipes.Columns.Remove(Room);
 				}
 				Room.Visible = false;
+				roomDataGridViewComboBoxColumn.Visible = true;
 				Area.Visible = false;
 				HeatLoad.Visible = false;
 				CoolLoad.Visible = false;
