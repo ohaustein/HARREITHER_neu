@@ -25,7 +25,7 @@ namespace Europlan.Common {
 				this.lblId.Text = distributor.Id;
 				this.txtName.Text = distributor.Name;
 				this.numMaxCircuits.Value = distributor.MaxCircuits;
-				this.numFlanschkugelhaehne.Value = distributor.FlanschKugelHaehne;
+				this.chkFlansch.Checked = distributor.FlanschKugelHaehne;
 				this.chkEinbauschrank.Checked = distributor.EinbauSchrank;
 				Project project = Project.Instance;
 				this.cmbCircuit.Items.Clear();
@@ -85,7 +85,7 @@ namespace Europlan.Common {
 		}
 
 		private void numFlanschkugelhaehne_ValueChanged(object sender, EventArgs e) {
-			distributor.FlanschKugelHaehne = (int)this.numFlanschkugelhaehne.Value;
+			distributor.FlanschKugelHaehne = this.chkFlansch.Checked;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
