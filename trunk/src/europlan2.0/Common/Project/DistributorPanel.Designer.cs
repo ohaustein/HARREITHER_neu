@@ -34,12 +34,11 @@ namespace Europlan.Common {
 			this.numMaxCircuits = new System.Windows.Forms.NumericUpDown();
 			this.listFloors = new System.Windows.Forms.CheckedListBox();
 			this.label6 = new System.Windows.Forms.Label();
-			this.numFlanschkugelhaehne = new System.Windows.Forms.NumericUpDown();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.chkEinbauschrank = new System.Windows.Forms.CheckBox();
+			this.chkFlansch = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.numMaxCircuits)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numFlanschkugelhaehne)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -146,19 +145,6 @@ namespace Europlan.Common {
 			this.label6.Text = "Geschoße, die diesen Verteiler auch nutzen können:";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// numFlanschkugelhaehne
-			// 
-			this.numFlanschkugelhaehne.Location = new System.Drawing.Point(565, 129);
-			this.numFlanschkugelhaehne.Maximum = new decimal(new int[] {
-            12,
-            0,
-            0,
-            0});
-			this.numFlanschkugelhaehne.Name = "numFlanschkugelhaehne";
-			this.numFlanschkugelhaehne.Size = new System.Drawing.Size(51, 20);
-			this.numFlanschkugelhaehne.TabIndex = 31;
-			this.numFlanschkugelhaehne.ValueChanged += new System.EventHandler(this.numFlanschkugelhaehne_ValueChanged);
-			// 
 			// label7
 			// 
 			this.label7.Location = new System.Drawing.Point(427, 126);
@@ -180,20 +166,29 @@ namespace Europlan.Common {
 			// chkEinbauschrank
 			// 
 			this.chkEinbauschrank.AutoSize = true;
-			this.chkEinbauschrank.Location = new System.Drawing.Point(565, 156);
+			this.chkEinbauschrank.Location = new System.Drawing.Point(565, 157);
 			this.chkEinbauschrank.Name = "chkEinbauschrank";
 			this.chkEinbauschrank.Size = new System.Drawing.Size(15, 14);
 			this.chkEinbauschrank.TabIndex = 33;
 			this.chkEinbauschrank.UseVisualStyleBackColor = true;
 			this.chkEinbauschrank.CheckedChanged += new System.EventHandler(this.chkEinbauschrank_CheckedChanged);
 			// 
+			// chkFlansch
+			// 
+			this.chkFlansch.AutoSize = true;
+			this.chkFlansch.Location = new System.Drawing.Point(565, 132);
+			this.chkFlansch.Name = "chkFlansch";
+			this.chkFlansch.Size = new System.Drawing.Size(15, 14);
+			this.chkFlansch.TabIndex = 34;
+			this.chkFlansch.UseVisualStyleBackColor = true;
+			// 
 			// DistributorPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.chkFlansch);
 			this.Controls.Add(this.chkEinbauschrank);
 			this.Controls.Add(this.label8);
-			this.Controls.Add(this.numFlanschkugelhaehne);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.listFloors);
@@ -209,7 +204,6 @@ namespace Europlan.Common {
 			this.Name = "DistributorPanel";
 			this.Size = new System.Drawing.Size(780, 492);
 			((System.ComponentModel.ISupportInitialize)(this.numMaxCircuits)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numFlanschkugelhaehne)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -228,9 +222,9 @@ namespace Europlan.Common {
 		private System.Windows.Forms.NumericUpDown numMaxCircuits;
 		private System.Windows.Forms.CheckedListBox listFloors;
 		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.NumericUpDown numFlanschkugelhaehne;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.CheckBox chkEinbauschrank;
+		private System.Windows.Forms.CheckBox chkFlansch;
 	}
 }
