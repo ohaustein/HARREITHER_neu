@@ -517,6 +517,10 @@ namespace Europlan.Common {
 			set { }
 		}
 
+		public override float PlannedNetArea {
+			get { return this.PlannedFloorArea - this.PlannedAreaReduced / 2 - this.PlannedAreaUnheated; }
+		}
+
 		/// <summary>
 		/// The lay distance that the user requested for this product in the planning.
 		/// If this is property is null the optimal lay distance will be calculated.
