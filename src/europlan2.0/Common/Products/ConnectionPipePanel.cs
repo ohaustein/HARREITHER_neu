@@ -33,14 +33,23 @@ namespace Europlan.Common {
 
 		private void ConfigureColumnVisibility() {
 			if (showPipesThroughProduct) {
+				// TODO: this is just a quick workaround - room column could not be made invisible if it
+				//       was the first column
+				if (!dgvConnectionPipes.Columns.Contains(Room)) {
+					dgvConnectionPipes.Columns.Insert(0, Room);
+				}
 				Room.Visible = true;
 				Area.Visible = true;
 				HeatLoad.Visible = true;
 				CoolLoad.Visible = true;
 				PlannedCircuits.Visible = true;
 			} else {
+				// TODO: this is just a quick workaround - room column could not be made invisible if it
+				//       was the first column
+				if (dgvConnectionPipes.Columns.Contains(Room)) {
+					dgvConnectionPipes.Columns.Remove(Room);
+				}
 				Room.Visible = false;
-				Room.HeaderText = "Schas";
 				Area.Visible = false;
 				HeatLoad.Visible = false;
 				CoolLoad.Visible = false;

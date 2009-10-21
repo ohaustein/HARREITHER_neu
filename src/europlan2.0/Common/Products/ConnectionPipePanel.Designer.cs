@@ -29,6 +29,12 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvConnectionPipes = new System.Windows.Forms.DataGridView();
 			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.vorlaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.ruecklaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
@@ -77,6 +83,7 @@ namespace Europlan.Common {
 			this.dgvConnectionPipes.DataSource = this.connectionPipeBindingSource;
 			this.dgvConnectionPipes.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dgvConnectionPipes.Location = new System.Drawing.Point(0, 0);
+			this.dgvConnectionPipes.MultiSelect = false;
 			this.dgvConnectionPipes.Name = "dgvConnectionPipes";
 			this.dgvConnectionPipes.Size = new System.Drawing.Size(903, 375);
 			this.dgvConnectionPipes.TabIndex = 2;
@@ -92,9 +99,64 @@ namespace Europlan.Common {
 			// 
 			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
 			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "Room";
+			this.dataGridViewTextBoxColumn1.FillWeight = 70F;
+			this.dataGridViewTextBoxColumn1.HeaderText = "Raum";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.Width = 70;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.DataPropertyName = "PlannedProduct";
+			this.dataGridViewTextBoxColumn2.FillWeight = 70F;
+			this.dataGridViewTextBoxColumn2.HeaderText = "Teilsystem";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.ReadOnly = true;
+			this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn2.Width = 120;
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.DataPropertyName = "PlannedCircuits";
+			this.dataGridViewTextBoxColumn3.HeaderText = "Anz.";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.ReadOnly = true;
+			this.dataGridViewTextBoxColumn3.Visible = false;
+			// 
+			// dataGridViewTextBoxColumn4
+			// 
+			this.dataGridViewTextBoxColumn4.DataPropertyName = "Area";
+			this.dataGridViewTextBoxColumn4.HeaderText = "Fläche";
+			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			this.dataGridViewTextBoxColumn4.ReadOnly = true;
+			this.dataGridViewTextBoxColumn4.Visible = false;
+			this.dataGridViewTextBoxColumn4.Width = 50;
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this.dataGridViewTextBoxColumn5.DataPropertyName = "HeatLoad";
+			this.dataGridViewTextBoxColumn5.HeaderText = "Heiz-\nleistung";
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			this.dataGridViewTextBoxColumn5.ReadOnly = true;
+			this.dataGridViewTextBoxColumn5.Visible = false;
+			this.dataGridViewTextBoxColumn5.Width = 50;
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.DataPropertyName = "CoolLoad";
+			this.dataGridViewTextBoxColumn6.HeaderText = "Kühl-\nleistung";
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+			this.dataGridViewTextBoxColumn6.ReadOnly = true;
+			this.dataGridViewTextBoxColumn6.Visible = false;
+			this.dataGridViewTextBoxColumn6.Width = 50;
+			// 
 			// Room
 			// 
 			this.Room.DataPropertyName = "Room";
+			this.Room.FillWeight = 70F;
 			this.Room.HeaderText = "Raum";
 			this.Room.Name = "Room";
 			this.Room.ReadOnly = true;
@@ -262,6 +324,12 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn Area;
 		private System.Windows.Forms.DataGridViewTextBoxColumn HeatLoad;
 		private System.Windows.Forms.DataGridViewTextBoxColumn CoolLoad;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 
 	}
 }
