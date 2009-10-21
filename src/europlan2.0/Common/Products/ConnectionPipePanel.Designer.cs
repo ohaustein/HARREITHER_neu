@@ -161,7 +161,7 @@ namespace Europlan.Common {
 			this.Room.Name = "Room";
 			this.Room.ReadOnly = true;
 			this.Room.Visible = false;
-			this.Room.Width = 70;
+			this.Room.Width = 120;
 			// 
 			// vorlaufDataGridViewTextBoxColumn
 			// 
@@ -218,6 +218,7 @@ namespace Europlan.Common {
 			this.PlannedCircuits.Name = "PlannedCircuits";
 			this.PlannedCircuits.ReadOnly = true;
 			this.PlannedCircuits.Visible = false;
+			this.PlannedCircuits.Width = 40;
 			// 
 			// onlyFirstDataGridViewCheckBoxColumn
 			// 
@@ -225,7 +226,6 @@ namespace Europlan.Common {
 			this.onlyFirstDataGridViewCheckBoxColumn.FillWeight = 55F;
 			this.onlyFirstDataGridViewCheckBoxColumn.HeaderText = "nur\nerster\nHK";
 			this.onlyFirstDataGridViewCheckBoxColumn.Name = "onlyFirstDataGridViewCheckBoxColumn";
-			this.onlyFirstDataGridViewCheckBoxColumn.Visible = false;
 			this.onlyFirstDataGridViewCheckBoxColumn.Width = 55;
 			// 
 			// printDataGridViewCheckBoxColumn
