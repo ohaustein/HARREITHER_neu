@@ -155,7 +155,7 @@ namespace Europlan.Common {
 			// 
 			// Room
 			// 
-			this.Room.DataPropertyName = "Room";
+			this.Room.DataPropertyName = "DestinationRoom";
 			this.Room.FillWeight = 70F;
 			this.Room.HeaderText = "Raum";
 			this.Room.Name = "Room";
@@ -310,6 +310,12 @@ namespace Europlan.Common {
 
 		private System.Windows.Forms.BindingSource connectionPipeBindingSource;
 		private System.Windows.Forms.DataGridView dgvConnectionPipes;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Room;
 		private NumericColumn vorlaufDataGridViewTextBoxColumn;
 		private NumericColumn ruecklaufDataGridViewTextBoxColumn;
@@ -324,12 +330,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn Area;
 		private System.Windows.Forms.DataGridViewTextBoxColumn HeatLoad;
 		private System.Windows.Forms.DataGridViewTextBoxColumn CoolLoad;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 
 	}
 }

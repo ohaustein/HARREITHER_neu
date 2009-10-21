@@ -260,6 +260,7 @@ namespace Europlan.Common {
 			set { this.plannedConnectionPipes = value; }
 		}
 
+		[XmlIgnore]
 		public List<ConnectionPipe> PlannedConnectionPipesThroughThisProduct {
 			get {
 				List<ConnectionPipe> cps = new List<ConnectionPipe>();
@@ -268,6 +269,7 @@ namespace Europlan.Common {
 						foreach (PlannedProduct pp in r.PlannedProducts) {
 							foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
 								if (cp.PlannedProduct != null && cp.PlannedProduct.Product == this) {
+									cp.DestinationRoom = r;
 									cps.Add(cp);
 								}
 							}

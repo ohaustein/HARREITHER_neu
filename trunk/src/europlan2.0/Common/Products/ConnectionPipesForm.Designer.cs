@@ -26,6 +26,7 @@ namespace Europlan.Common {
 			this.btnOk = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
+			this.lblConnectionPipe = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// btnOk
@@ -62,6 +63,14 @@ namespace Europlan.Common {
 			this.connectionPipePanel.TabIndex = 4;
 			this.connectionPipePanel.GridContentChanged += new Europlan.Common.GridContentChangedHandler(this.connectionPipePanel_GridContentChanged);
 			// 
+			// lblConnectionPipe
+			// 
+			this.lblConnectionPipe.AutoSize = true;
+			this.lblConnectionPipe.Location = new System.Drawing.Point(13, 13);
+			this.lblConnectionPipe.Name = "lblConnectionPipe";
+			this.lblConnectionPipe.Size = new System.Drawing.Size(0, 13);
+			this.lblConnectionPipe.TabIndex = 5;
+			// 
 			// ConnectionPipesForm
 			// 
 			this.AcceptButton = this.btnOk;
@@ -69,6 +78,7 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.button2;
 			this.ClientSize = new System.Drawing.Size(883, 473);
+			this.Controls.Add(this.lblConnectionPipe);
 			this.Controls.Add(this.connectionPipePanel);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.btnOk);
@@ -79,6 +89,7 @@ namespace Europlan.Common {
 			this.Load += new System.EventHandler(this.ConnectionPipesForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConnectionPipesForm_FormClosing);
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -87,5 +98,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.Button button2;
 		private ConnectionPipePanel connectionPipePanel;
+		private System.Windows.Forms.Label lblConnectionPipe;
 	}
 }
