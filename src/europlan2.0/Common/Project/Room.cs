@@ -133,6 +133,20 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public Floor AssociatedFloor {
+			get {
+				foreach (Floor f in Project.Instance.Floors) {
+					foreach (Room room in f.Rooms) {
+						if (room == this) {
+							return f;
+						}
+					}
+				}
+				return null;
+			}			
+		}
+
 		public string Id {
 			get { return id; }
 			set { 
