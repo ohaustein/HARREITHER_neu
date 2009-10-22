@@ -63,7 +63,7 @@ namespace Europlan.Common {
 		public class AnschlussHollaenderEnumConverter : System.ComponentModel.TypeConverter {
 
 			private static readonly string kein = "Kein Holländer";
-			private static readonly string hollaender32 = "Anschlußholländer mit Anschlußstück 32mm";
+			private static readonly string hollaender32 = "Anschlußholländer mit Anschlußstück Ø 32mm";
 			private static readonly string hollaenderIG = "Anschlußholländer mit Anschlußstück 1\" IG";
 			private static readonly string hollaenderAG = "Anschlußholländer mit Anschlußstück 1\" AG";
 
