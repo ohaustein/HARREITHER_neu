@@ -65,6 +65,14 @@ namespace Europlan.Common {
 			this.discounts = new Dictionary<string, float>();
 			this.roomTypes = new List<RoomType>();
 
+			eurovalProduct.StaticInitialize();
+			concreteActivationProduct.StaticInitialize();
+			hithermProduct.StaticInitialize();
+			hithermCompactProduct.StaticInitialize();
+			hithermCompactRoofProduct.StaticInitialize();
+			modulKlimaBodenProduct.StaticInitialize();
+			modulKlimaDeckeProduct.StaticInitialize();
+
 			this.partnerLogo = "";
 
 			StreamReader sr = null;
@@ -625,13 +633,6 @@ namespace Europlan.Common {
 			get { return this.productConfiguration; }
 			set { 
 				this.productConfiguration = value;
-				eurovalProduct.StaticInitialize();
-				concreteActivationProduct.StaticInitialize();
-				hithermProduct.StaticInitialize();
-				hithermCompactProduct.StaticInitialize();
-				hithermCompactRoofProduct.StaticInitialize();
-				modulKlimaBodenProduct.StaticInitialize();
-				modulKlimaDeckeProduct.StaticInitialize();
 				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
 				SerializableDictionary<string, string> current;
 				foreach (Type t in types) {
