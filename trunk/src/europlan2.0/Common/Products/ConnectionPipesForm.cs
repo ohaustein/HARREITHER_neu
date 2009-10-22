@@ -60,5 +60,18 @@ namespace Europlan.Common {
 			unsavedChanges = true;
 		}
 
+		private void btnLengthAssistant_Click(object sender, EventArgs e) {
+			ConnectionPipe pipe = connectionPipePanel.SelectedConnectionPipe;
+			if (pipe != null) {
+				LengthAssistantForm form = new LengthAssistantForm(pipe);
+				if (form.ShowDialog() == DialogResult.OK) {
+
+				}
+				form.Dispose();
+			} else {
+				MessageBox.Show("Keine Anbindeleitung ausgewählt.", "Keine Anbindeleitung ausgewählt.");
+			}
+		}
+
 	}
 }

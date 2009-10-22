@@ -243,7 +243,15 @@ namespace Europlan.Common {
 			}
 		}
 
-
+		public ConnectionPipe SelectedConnectionPipe {
+			get {
+				if (dgvConnectionPipes.CurrentCell != null && dgvConnectionPipes.CurrentCell.RowIndex >= 0) {
+					DataGridViewRow row = dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex];
+					return row.DataBoundItem as ConnectionPipe;
+				}
+				return null;
+			}
+		}
 
 	}
 }
