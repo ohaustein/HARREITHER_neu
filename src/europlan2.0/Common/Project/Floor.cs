@@ -105,7 +105,7 @@ namespace Europlan.Common {
 			list.AddRange(this.distributors);
 			foreach (Floor f in Project.Instance.Floors) {
 				foreach (Distributor d in f.Distributors) {
-					if (d.AdditionalFloors.Contains(this)) {
+					if (d.AdditionalFloors.Contains(this) && !list.Contains(d)) {
 						list.Add(d);
 					}
 				}
