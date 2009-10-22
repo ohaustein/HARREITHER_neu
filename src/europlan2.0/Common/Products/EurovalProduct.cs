@@ -87,6 +87,9 @@ namespace Europlan.Common {
 
 		private bool plannedProductIsConnection = false;
 
+		private bool clipSchiene = false;
+		private bool anhydritEstrich = false;
+
 		public enum LayDistance {
 			A5 = 0,
 			EV5 = 1,
@@ -453,6 +456,16 @@ namespace Europlan.Common {
 				default:
 					throw new Exception("Unknwon RimType");
 			}
+		}
+
+		public bool UseClipSchiene {
+			get { return clipSchiene; }
+			set { clipSchiene = value; }
+		}
+
+		public bool UseAnhydritEstrich {
+			get { return anhydritEstrich; }
+			set { anhydritEstrich = value; }
 		}
 
 		#region QuickDimensioning
