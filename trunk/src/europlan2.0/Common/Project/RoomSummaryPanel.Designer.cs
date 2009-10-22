@@ -51,8 +51,6 @@ namespace Europlan.Common {
 			this.lblRoomData = new System.Windows.Forms.Label();
 			this.grpBoxSystems = new System.Windows.Forms.GroupBox();
 			this.dgvProducts = new System.Windows.Forms.DataGridView();
-			this.btnAdd = new System.Windows.Forms.Button();
-			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,7 +58,9 @@ namespace Europlan.Common {
 			this.colPlannedArea = new Europlan.Common.NumericColumn();
 			this.colPlannedHeatLoad = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colPlannedCoolLoad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.plannedProductWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnAdd = new System.Windows.Forms.Button();
 			this.txtNormCool = new Europlan.Common.NumericBox();
 			this.txtCool = new Europlan.Common.NumericBox();
 			this.txtNormHeat = new Europlan.Common.NumericBox();
@@ -317,7 +317,6 @@ namespace Europlan.Common {
 			this.dgvProducts.DataSource = this.plannedProductWrapperBindingSource;
 			this.dgvProducts.Location = new System.Drawing.Point(6, 48);
 			this.dgvProducts.Name = "dgvProducts";
-			this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.dgvProducts.Size = new System.Drawing.Size(565, 150);
 			this.dgvProducts.TabIndex = 2;
 			this.dgvProducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellValueChanged);
@@ -325,28 +324,6 @@ namespace Europlan.Common {
 			this.dgvProducts.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserDeletedRow);
 			this.dgvProducts.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvProducts_CellPainting);
 			this.dgvProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(4, 19);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(75, 23);
-			this.btnAdd.TabIndex = 0;
-			this.btnAdd.Text = "hinzufügen";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-			// 
-			// colEdit
-			// 
-			this.colEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.colEdit.FillWeight = 64F;
-			this.colEdit.HeaderText = "Bearbeiten";
-			this.colEdit.Name = "colEdit";
-			this.colEdit.ReadOnly = true;
-			this.colEdit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.colEdit.Text = "...";
-			this.colEdit.UseColumnTextForButtonValue = true;
-			this.colEdit.Width = 64;
 			// 
 			// colType
 			// 
@@ -425,9 +402,31 @@ namespace Europlan.Common {
 			this.colPlannedCoolLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colPlannedCoolLoad.Width = 50;
 			// 
+			// colEdit
+			// 
+			this.colEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.colEdit.FillWeight = 64F;
+			this.colEdit.HeaderText = "Bearbeiten";
+			this.colEdit.Name = "colEdit";
+			this.colEdit.ReadOnly = true;
+			this.colEdit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.colEdit.Text = "...";
+			this.colEdit.UseColumnTextForButtonValue = true;
+			this.colEdit.Width = 64;
+			// 
 			// plannedProductWrapperBindingSource
 			// 
 			this.plannedProductWrapperBindingSource.DataSource = typeof(Europlan.Common.PlannedProduct);
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(4, 19);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(75, 23);
+			this.btnAdd.TabIndex = 0;
+			this.btnAdd.Text = "hinzufügen";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
 			// txtNormCool
 			// 
