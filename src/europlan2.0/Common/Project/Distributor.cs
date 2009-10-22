@@ -18,7 +18,6 @@ namespace Europlan.Common {
 		private bool flanschKugelHaehne;
 		private bool einbauSchrank;
 		private List<string> additionalFloors;
-		private List<Product> plannedConnectedProducts = new List<Product>();
 
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Distributor));
@@ -163,8 +162,22 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public List<Product> PlannedConnectedProducts {
-			get { return this.plannedConnectedProducts; }
+		public List<PlannedProduct> PlannedConnectedProducts {
+			get {
+				List<PlannedProduct> products = new List<PlannedProduct>();
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						foreach (PlannedProduct product in room.PlannedProducts) {
+							if (product.Product.PlannedConnection != null && product.Product.PlannedConnection.Distributor != null) {
+								if (product.Product.PlannedConnection.Distributor == this) {
+									products.Add(product);
+								}
+							}
+						}
+					}
+				}
+				return products;
+			}
 		}
 	}
 
