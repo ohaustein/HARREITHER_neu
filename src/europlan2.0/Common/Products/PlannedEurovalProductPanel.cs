@@ -874,17 +874,18 @@ namespace Europlan.Common {
 		}
 
 		private void btnDistributor_Click(object sender, EventArgs e) {
-			SelectConnectionForProductForm form = new SelectConnectionForProductForm(Project.Instance.Floors[0]);
+			SelectConnectionForProductForm form = new SelectConnectionForProductForm(this.product, this.product.Product.AssociatedRoom.AssociatedFloor);
 			form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnection;
 			if (form.ShowDialog() == DialogResult.OK) {
 				(this.product.Product as EurovalProduct).PlannedConnection = form.SelectedConnection;
 			}
-			form.Dispose();
+
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 			this.UpdateControl(FieldEnum.COOL_LOAD);
-			if (this.ProjectChanged != null) {
+			if (form.DialogResult == DialogResult.OK && this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
+			form.Dispose();
 		}
 
 		private void connectionPipePanel1_GridContentChanged(object sender) {

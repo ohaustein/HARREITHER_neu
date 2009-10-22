@@ -12,10 +12,12 @@ namespace Europlan.Common {
 
 		private TreeNode rootNode;
 		private Dictionary<object, TreeNode> nodes = new Dictionary<object, TreeNode>();
+		private PlannedProduct product = null;
 
-		public SelectConnectionForProductForm(Floor floor) {
+		public SelectConnectionForProductForm(PlannedProduct product, Floor floor) {
 			InitializeComponent();
 			this.tvDistributors.Nodes.Clear();
+			this.product = product;
 			DistributorList distributors = floor.GetAllAvailableDistributors();
 			TreeNode[] distributorNodes = new TreeNode[distributors.Count];
 			int i = 0;
@@ -23,11 +25,11 @@ namespace Europlan.Common {
 				distributorNodes[i] = new TreeNode(d.Id + ": " + d.Name);
 				distributorNodes[i].Tag = d;
 				this.nodes.Add(d, distributorNodes[i]);
-				//foreach (Product p in d.PlannedConnectedProducts) {
-				//    TreeNode node = new TreeNode(p.Name + " in Raum " + p.AssociatedRoom.Id);
-				//    node.Tag = p;
-				//    distributorNodes[i].Nodes.Add(node);
-				//}
+				foreach (PlannedProduct p in d.PlannedConnectedProducts) {
+					TreeNode node = new TreeNode(p.Node.Text + " in Raum " + p.Product.AssociatedRoom.ToString());
+					node.Tag = p;
+					distributorNodes[i].Nodes.Add(node);
+				}
 				i++;
 			}
 			rootNode = new TreeNode("Projekt", distributorNodes);
