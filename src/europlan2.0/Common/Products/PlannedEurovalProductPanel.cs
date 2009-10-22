@@ -390,6 +390,9 @@ namespace Europlan.Common {
 					this.cbSeparateCircuit.Checked = !evProduct.PlannedProductIsConnection;
 				}
 
+				this.chkClip.Checked = evProduct.UseClipSchiene;
+				this.chkAnhydritEstrich.Checked = evProduct.UseAnhydritEstrich;
+
 				// General
 				this.lblQSollHeat.Text = Math.Round(this.product.RequestedHeatLoad, 2).ToString();
 				this.lblQSollCool.Text = Math.Round(this.product.RequestedCoolLoad, 2).ToString();
@@ -915,6 +918,20 @@ namespace Europlan.Common {
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
 				}
+			}
+		}
+
+		private void chkClip_CheckedChanged(object sender, EventArgs e) {
+			(this.product.Product as EurovalProduct).UseClipSchiene = chkClip.Checked;
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
+		private void chkAnhydritEstrich_CheckedChanged(object sender, EventArgs e) {
+			(this.product.Product as EurovalProduct).UseAnhydritEstrich = chkAnhydritEstrich.Checked;
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
 			}
 		}
 
