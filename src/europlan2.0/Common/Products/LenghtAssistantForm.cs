@@ -24,5 +24,21 @@ namespace Europlan.Common {
 			settings.StorePoint("Location", this.Location);
 			SettingsFile.Update();
 		}
+
+		private void btnAvailableAreaVorlauf_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnRestAreaVorlauf_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnAvailableAreaRuecklauf_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnRestAreaRuecklauf_Click(object sender, EventArgs e) {
+
+		}
 	}
 }
