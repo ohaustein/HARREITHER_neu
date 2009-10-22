@@ -28,7 +28,7 @@ namespace Europlan.Common {
 				foreach (PlannedProduct p in d.PlannedConnectedProducts) {
 					TreeNode node = new TreeNode(p.Node.Text + " in Raum " + p.Product.AssociatedRoom.ToString());
 					node.Tag = p;
-					distributorNodes[i].Nodes.Add(node);
+					//distributorNodes[i].Nodes.Add(node);
 				}
 				i++;
 			}
