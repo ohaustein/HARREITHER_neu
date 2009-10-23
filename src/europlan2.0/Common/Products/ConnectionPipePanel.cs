@@ -83,6 +83,10 @@ namespace Europlan.Common {
 			}
 		}
 
+		public void ReloadGrid() {
+			connectionPipeBindingSource.ResetBindings(false);
+		}
+
 		public void Update(PlannedProduct product) {
 			this.product = product;
 			// pipe type items

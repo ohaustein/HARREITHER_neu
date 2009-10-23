@@ -58,6 +58,7 @@ namespace Europlan.Common {
 
 		private void connectionPipePanel_GridContentChanged(object sender) {
 			unsavedChanges = true;
+			UpdateLabels();
 		}
 
 		private void btnLengthAssistant_Click(object sender, EventArgs e) {
@@ -65,7 +66,12 @@ namespace Europlan.Common {
 			if (pipe != null) {
 				LengthAssistantForm form = new LengthAssistantForm(pipe);
 				if (form.ShowDialog() == DialogResult.OK) {
-
+					pipe.Vorlauf = form.Vorlauf;
+					pipe.Ruecklauf = form.Ruecklauf;
+					pipe.Verlegeart = form.Verlegeart;
+					unsavedChanges = true;
+					UpdateLabels();
+					connectionPipePanel.ReloadGrid();
 				}
 				form.Dispose();
 			} else {
