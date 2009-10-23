@@ -50,6 +50,8 @@ namespace Europlan.Common {
 			this.numHeatLoad = new Europlan.Common.NumericBox();
 			this.lblHeatLoadTxt = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.chkAnhydritEstrich = new System.Windows.Forms.CheckBox();
+			this.chkClip = new System.Windows.Forms.CheckBox();
 			this.label27 = new System.Windows.Forms.Label();
 			this.numRoomTemperatureBelowCool = new Europlan.Common.NumericBox();
 			this.label28 = new System.Windows.Forms.Label();
@@ -165,8 +167,6 @@ namespace Europlan.Common {
 			this.label1 = new System.Windows.Forms.Label();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.chkClip = new System.Windows.Forms.CheckBox();
-			this.chkAnhydritEstrich = new System.Windows.Forms.CheckBox();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -634,6 +634,28 @@ namespace Europlan.Common {
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
 			// 
+			// chkAnhydritEstrich
+			// 
+			this.chkAnhydritEstrich.AutoSize = true;
+			this.chkAnhydritEstrich.Location = new System.Drawing.Point(477, 41);
+			this.chkAnhydritEstrich.Name = "chkAnhydritEstrich";
+			this.chkAnhydritEstrich.Size = new System.Drawing.Size(95, 17);
+			this.chkAnhydritEstrich.TabIndex = 32;
+			this.chkAnhydritEstrich.Text = "Anhydritestrich";
+			this.chkAnhydritEstrich.UseVisualStyleBackColor = true;
+			this.chkAnhydritEstrich.CheckedChanged += new System.EventHandler(this.chkAnhydritEstrich_CheckedChanged);
+			// 
+			// chkClip
+			// 
+			this.chkClip.AutoSize = true;
+			this.chkClip.Location = new System.Drawing.Point(477, 15);
+			this.chkClip.Name = "chkClip";
+			this.chkClip.Size = new System.Drawing.Size(150, 17);
+			this.chkClip.TabIndex = 31;
+			this.chkClip.Text = "Clipschiene mit Klebeband";
+			this.chkClip.UseVisualStyleBackColor = true;
+			this.chkClip.CheckedChanged += new System.EventHandler(this.chkClip_CheckedChanged);
+			// 
 			// label27
 			// 
 			this.label27.Location = new System.Drawing.Point(303, 94);
@@ -847,7 +869,7 @@ namespace Europlan.Common {
 			// 
 			// numCorners
 			// 
-			this.numCorners.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numCorners.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.numCorners.InternalValue = new decimal(new int[] {
             0,
             0,
@@ -855,11 +877,7 @@ namespace Europlan.Common {
             0});
 			this.numCorners.Location = new System.Drawing.Point(188, 68);
 			this.numCorners.MaxValue = null;
-			this.numCorners.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
+			this.numCorners.MinValue = null;
 			this.numCorners.Name = "numCorners";
 			this.numCorners.Size = new System.Drawing.Size(109, 20);
 			this.numCorners.TabIndex = 29;
@@ -1878,28 +1896,6 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2.DataPropertyName = "Verlegeart";
 			this.dataGridViewTextBoxColumn2.HeaderText = "Verlegeart";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			// 
-			// chkClip
-			// 
-			this.chkClip.AutoSize = true;
-			this.chkClip.Location = new System.Drawing.Point(477, 15);
-			this.chkClip.Name = "chkClip";
-			this.chkClip.Size = new System.Drawing.Size(150, 17);
-			this.chkClip.TabIndex = 31;
-			this.chkClip.Text = "Clipschiene mit Klebeband";
-			this.chkClip.UseVisualStyleBackColor = true;
-			this.chkClip.CheckedChanged += new System.EventHandler(this.chkClip_CheckedChanged);
-			// 
-			// chkAnhydritEstrich
-			// 
-			this.chkAnhydritEstrich.AutoSize = true;
-			this.chkAnhydritEstrich.Location = new System.Drawing.Point(477, 41);
-			this.chkAnhydritEstrich.Name = "chkAnhydritEstrich";
-			this.chkAnhydritEstrich.Size = new System.Drawing.Size(95, 17);
-			this.chkAnhydritEstrich.TabIndex = 32;
-			this.chkAnhydritEstrich.Text = "Anhydritestrich";
-			this.chkAnhydritEstrich.UseVisualStyleBackColor = true;
-			this.chkAnhydritEstrich.CheckedChanged += new System.EventHandler(this.chkAnhydritEstrich_CheckedChanged);
 			// 
 			// PlannedEurovalProductPanel
 			// 

@@ -259,19 +259,19 @@ namespace Europlan.Common {
 				this.rbCalculateHeat.Enabled = this.product.RequestedHeatLoad > 0;
 				this.rbCalculateCool.Enabled = this.product.RequestedCoolLoad > 0;
 				this.rbCalculateBoth.Enabled = this.product.RequestedHeatLoad > 0 && this.product.RequestedCoolLoad > 0;
-				this.numCorners.Enabled = evProduct.PlannedAreaRim > 0;
+				this.numCorners.Enabled = evProduct.PlannedRimLength > 0;
 				this.cmbRimType.Enabled = evProduct.PlannedAreaRim > 0;
 
 				// disable the following controls if the product is a connection
-				this.numRim.Enabled = this.numRim.Enabled && !evProduct.PlannedProductIsConnection;
+				this.numRim.Enabled = !evProduct.PlannedProductIsConnection;
 				this.numCorners.Enabled = this.numCorners.Enabled && !evProduct.PlannedProductIsConnection;
 				this.rbCalculateHeat.Enabled = this.rbCalculateHeat.Enabled && !evProduct.PlannedProductIsConnection;
 				this.rbCalculateCool.Enabled = this.rbCalculateCool.Enabled && !evProduct.PlannedProductIsConnection;
 				this.rbCalculateBoth.Enabled = this.rbCalculateBoth.Enabled && !evProduct.PlannedProductIsConnection;
-				this.btnDistributor.Enabled = this.btnDistributor.Enabled && !evProduct.PlannedProductIsConnection;
-				this.cmbLayDistance.Enabled = this.cmbLayDistance.Enabled && !evProduct.PlannedProductIsConnection;
+				this.btnDistributor.Enabled = !evProduct.PlannedProductIsConnection;
+				this.cmbLayDistance.Enabled = !evProduct.PlannedProductIsConnection;
 				this.cmbRimType.Enabled = this.cmbRimType.Enabled && !evProduct.PlannedProductIsConnection;
-				this.cmbCircuits.Enabled = this.cmbCircuits.Enabled && !evProduct.PlannedProductIsConnection;
+				this.cmbCircuits.Enabled = !evProduct.PlannedProductIsConnection;
 
 				this.numArea.MaxValue = (decimal)evProduct.AvailableFloorArea;
 				this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
@@ -445,8 +445,8 @@ namespace Europlan.Common {
 					this.lblRimBCool.Text = evProduct.PlannedRimWidth.ToString();
 					this.lblRimTfbHeat.Text = Math.Round(evProduct.PlannedFloorTemperatureHeatRim, 1).ToString();
 					this.lblRimTfbCool.Text = Math.Round(evProduct.PlannedFloorTemperatureCoolRim, 1).ToString();
-					this.lblRimQHeat.Text = evProduct.PlannedHeatLoadRim.ToString();
-					this.lblRimQCool.Text = evProduct.PlannedCoolLoadRim.ToString();
+					this.lblRimQHeat.Text = Math.Round(evProduct.PlannedHeatLoadRim, 0).ToString();
+					this.lblRimQCool.Text = Math.Round(evProduct.PlannedCoolLoadRim, 0).ToString();
 				} else {
 					this.lblRimVaHeat.Text = "";
 					this.lblRimVaCool.Text = "";
@@ -498,8 +498,8 @@ namespace Europlan.Common {
 					this.lblResidenceACool.Text = evProduct.PlannedAreaResidence.ToString();
 					this.lblResidenceTfbHeat.Text = Math.Round(evProduct.PlannedFloorTemperatureHeatResidence, 1).ToString();
 					this.lblResidenceTfbCool.Text = Math.Round(evProduct.PlannedFloorTemperatureCoolResidence, 1).ToString();
-					this.lblResidenceQHeat.Text = evProduct.PlannedHeatLoadResidence.ToString();
-					this.lblResidenceQCool.Text = evProduct.PlannedCoolLoadResidence.ToString();
+					this.lblResidenceQHeat.Text = Math.Round(evProduct.PlannedHeatLoadResidence, 0).ToString();
+					this.lblResidenceQCool.Text = Math.Round(evProduct.PlannedCoolLoadResidence, 0).ToString();
 				} else {
 					this.lblResidenceVaHeat.Text = "";
 					this.lblResidenceVaCool.Text = "";
@@ -514,8 +514,8 @@ namespace Europlan.Common {
 				// anbindung
 				this.lblConnectionAHeat.Text = evProduct.PlannedRemoveArea.ToString();
 				this.lblConnectionACool.Text = evProduct.PlannedRemoveArea.ToString();
-				this.lblConnectionQHeat.Text = evProduct.PlannedHeatLoadAnbindung.ToString();
-				this.lblConnectionQCool.Text = evProduct.PlannedCoolLoadAnbindung.ToString();
+				this.lblConnectionQHeat.Text = Math.Round(evProduct.PlannedHeatLoadAnbindung, 0).ToString();
+				this.lblConnectionQCool.Text = Math.Round(evProduct.PlannedCoolLoadAnbindung, 0).ToString();
 
 				// heizkreis
 				this.lblCircuitCountHeat.Text = evProduct.PlannedCircuits.ToString();

@@ -1,0 +1,334 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Xml.Serialization;
+
+namespace Europlan.Common {
+	public class EurovalCircuit : Circuit {
+		private EurovalProduct product;
+		public EurovalProduct EurovalProduct {
+			get { return this.product; }
+			set { this.product = value; }
+		}
+
+		[XmlIgnore]
+		public override Product Product {
+			get { return this.product; }
+		}
+
+		#region Area
+		private double areaTotal;
+		public double AreaTotal {
+			get { return this.areaTotal; }
+			set { this.areaTotal = value; }
+		}
+
+		private double areaUnheated;
+		public double AreaUnheated {
+			get { return this.areaUnheated; }
+			set { this.areaUnheated = value; }
+		}
+
+		private double areaReduced;
+		public double AreaReduced {
+			get { return this.areaReduced; }
+			set { this.areaReduced = value; }
+		}
+
+		private double areaRemovedDueConnection;
+		public double AreaRemovedDueConnection {
+			get { return this.areaRemovedDueConnection; }
+			set { this.areaRemovedDueConnection = value; }
+		}
+
+		public double AreaWithoutConnections {
+			get { return this.areaTotal - this.areaRemovedDueConnection; }
+		}
+
+		private double rimLength;
+		public double RimLength {
+			get { return this.rimLength; }
+			set { this.rimLength = value; }
+		}
+
+		private double rimCorners;
+		public double RimCorners {
+			get { return this.rimCorners; }
+			set { this.rimCorners = value; }
+		}
+		#endregion Area
+
+		#region Anbindung
+		private double vorlaufTotal;
+		public double VorlaufTotal {
+			get { return this.vorlaufTotal; }
+			set { this.vorlaufTotal = value; }
+		}
+
+		private double vorlaufNotIsolated;
+		public double VorlaufNotIsolated {
+			get { return this.vorlaufNotIsolated; }
+			set { this.vorlaufNotIsolated = value; }
+		}
+
+		private double ruecklaufTotal;
+		public double RuecklaufTotal {
+			get { return this.ruecklaufTotal; }
+			set { this.ruecklaufTotal = value; }
+		}
+
+		private double ruecklaufNotIsolated;
+		public double RuecklaufNotIsolated {
+			get { return this.ruecklaufNotIsolated; }
+			set { this.ruecklaufNotIsolated = value; }
+		}
+		#endregion Anbindung
+
+
+		private double c_areaAz;
+		private double c_areaRz;
+		private double c_pipeLengthAz;
+		private double c_pipeLengthRz;
+
+		private double c_qAzHeatPerSqm;
+		private double c_qRzHeatPerSqm;
+
+		private double c_qAzCoolPerSqm;
+		private double c_qRzCoolPerSqm;
+
+		private double c_floorTempAzHeat;
+		public double C_FloorTempAzHeat {
+			get { return this.c_floorTempAzHeat; }
+		}
+
+		private double c_floorTempRzHeat;
+		public double C_FloorTempRzHeat {
+			get { return this.c_floorTempRzHeat; }
+		}
+
+		private double c_floorTempAzCool;
+		public double C_FloorTempAzCool {
+			get { return this.c_floorTempAzCool; }
+		}
+
+		private double c_floorTempRzCool;
+		public double C_FloorTempRzCool {
+			get { return this.c_floorTempRzCool; }
+		}
+
+		private double c_druckverlustHeat;
+		public double C_DruckverlustHeat {
+			get { return this.c_druckverlustHeat; }
+		}
+
+		private double c_durchflussHeat;
+		public double C_DurchflussHeat {
+			get { return this.c_durchflussHeat; }
+		}
+
+		private double c_druckverlustCool;
+		public double C_DruckverlustCool {
+			get { return this.c_druckverlustCool; }
+		}
+
+		private double c_durchflussCool;
+		public double C_DurchflussCool {
+			get { return this.c_durchflussCool; }
+		}
+
+		private double c_thetaVRzHeat;
+		private double c_thetaRRzHeat;
+		private double c_thetaVAzHeat;
+		private double c_thetaRAzHeat;
+
+		private double c_thetaVRzCool;
+		private double c_thetaRRzCool;
+		private double c_thetaVAzCool;
+		private double c_thetaRAzCool;
+
+
+
+		public override double PipeLengthWithoutConnections {
+			get { return this.c_pipeLengthAz + this.c_pipeLengthRz; }
+		}
+
+		public override double PipeLengthWithAllConnections {
+			get { return this.PipeLengthWithoutConnections + this.vorlaufTotal + this.ruecklaufTotal; }
+		}
+
+		public override double PipeLengthWithUnisolatedConnections {
+			get { return this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated; }
+		}
+
+		public double QAzHeat {
+			get { return this.c_qAzHeatPerSqm * this.c_areaAz; }
+		}
+
+		public double QRzHeat {
+			get { return this.c_qRzHeatPerSqm * this.c_areaRz; }
+		}
+
+		public double QAzCool {
+			get { return -this.c_qAzCoolPerSqm * this.c_areaAz; }
+		}
+
+		public double QRzCool {
+			get { return -this.c_qRzCoolPerSqm * this.c_areaRz; }
+		}
+
+		public double QFbhTotalHeat {
+			get { return this.QAzHeat + this.QRzHeat; }
+		}
+
+		public double QFbhTotalCool {
+			get { return this.QAzCool + this.QRzCool; }
+		}
+
+		public double GetAreaRim(Nullable<Europlan.Common.EurovalProduct.RimType> rimType) {
+			if (!rimType.HasValue) {
+				return 0;
+			}
+
+			double bRz = ((float)EurovalProduct.GetRimWidth(rimType.Value)) / 100;
+			double lRz = this.rimLength - this.rimCorners * bRz;
+			lRz = lRz < 0 ? 0 : lRz;
+			
+			return lRz * bRz;
+		}
+
+		public void Calculate(Europlan.Common.EurovalProduct.LayDistance layDistance, Nullable<Europlan.Common.EurovalProduct.RimType> rimType) {
+			EN1264 en1264 = EN1264.Instance;
+
+			double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+			double lambdaU = 1.2; /* Estrich??? */
+			double rLambdaB = this.EurovalProduct.PlannedFloorConstruction == null ? 0 : this.EurovalProduct.PlannedFloorConstruction.RValue;
+			double rLambdaIns = this.EurovalProduct.PlannedInsulationConstruction == null ? 0 : this.EurovalProduct.PlannedInsulationConstruction.RValue;
+			double rAlphaDeckeFbh = 1 / EurovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Heizung */
+			double rAlphaDeckeFbk = 1 / EurovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Kühlung */
+
+			// Aufteilung RZ - AZ
+			double aFbh = this.areaTotal - this.areaReduced / 2- this.areaUnheated - this.areaRemovedDueConnection;	// wirksam beheizte Fläche
+
+			bool calculateWithRim = rimType.HasValue && (rimLength - this.rimCorners * EurovalProduct.GetRimWidth(rimType.Value) / 100 > 0);
+			this.c_areaRz = 0;
+			this.c_pipeLengthRz = 0;
+			if (calculateWithRim) {
+				this.c_areaRz = this.GetAreaRim(rimType);
+				this.c_pipeLengthRz = this.c_areaRz * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.GetRimLayDistance(rimType.Value));  // Rohrlänge der Randzone berechnen
+			}
+			this.c_areaAz = aFbh - this.c_areaRz;                                                      // Fläche der Aufenthaltszone berechnen
+			this.c_pipeLengthAz = this.c_areaAz * EurovalProduct.GetPipeLengthPerSqm(layDistance);                           // Rohlänge der Aufenthaltszone berechnen
+
+			{ // Heizlastberechnung
+				this.c_thetaVRzHeat = 35;
+				this.c_thetaRAzHeat = 30;
+				this.EurovalProduct.GetHeatFlow(out this.c_thetaVRzHeat, out this.c_thetaRAzHeat);
+				this.c_thetaVRzHeat = this.c_thetaVRzHeat - (this.c_thetaVRzHeat - this.c_thetaRAzHeat) * this.vorlaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
+				this.c_thetaRAzHeat = this.c_thetaRAzHeat + (this.c_thetaVRzHeat - this.c_thetaRAzHeat) * this.ruecklaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
+				this.c_thetaRRzHeat = this.c_thetaVRzHeat;
+				this.c_thetaVAzHeat = this.c_thetaVRzHeat;
+
+				double dThetaRz = 0;
+
+				if (calculateWithRim) {
+					this.c_thetaRRzHeat = this.c_thetaVRzHeat - (this.c_thetaVRzHeat - this.c_thetaRAzHeat) * this.c_pipeLengthRz / this.PipeLengthWithoutConnections;
+					this.c_thetaVAzHeat = this.c_thetaRRzHeat;
+					dThetaRz = en1264.Heizmitteluebertemperatur(this.c_thetaVRzHeat, this.c_thetaRRzHeat, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature);
+					//                                                                        // Heizmittelübertemperatur der Randzone berechnen
+				}
+				double dThetaAz = en1264.Heizmitteluebertemperatur(this.c_thetaVAzHeat, this.c_thetaRAzHeat, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature);
+				//                                                                            // Heizmittelübertemperatur der Aufenthaltszone berechnen
+
+				double tRz = 0;
+				double ppRz = 0;
+				double bgRz = 0;
+				double khRz = 0;
+				if (calculateWithRim) {
+					tRz = EurovalProduct.GetTeilung(EurovalProduct.GetRimLayDistance(rimType.Value));    // Teilung der Randzone
+					ppRz = en1264.PotenzProduktFussbodenGeometrie(EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, tRz, su, EurovalProduct.ConfigRohrAussenD, (EurovalProduct.ConfigAgActivated ? EurovalProduct.ConfigAg : 1));
+					//                                                                        // Potenzprodukt der Randzone berechnen
+					bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, tRz, su, EurovalProduct.ConfigRohrAussenD, (EurovalProduct.ConfigAgActivated ? EurovalProduct.ConfigAg : 1), EurovalProduct.ConfigSr, EurovalProduct.ConfigSr0, EurovalProduct.ConfigLambdaR, EurovalProduct.ConfigLambdaR0);
+					//                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
+					khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
+					this.c_qRzHeatPerSqm = en1264.WaermestromDichteRohr(khRz, dThetaRz);                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
+				}
+
+				double tAz = EurovalProduct.GetTeilung(layDistance);                             // Teilung der Aufenthaltszone
+				double ppAz = en1264.PotenzProduktFussbodenGeometrie(EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, tAz, su, EurovalProduct.ConfigRohrAussenD, (EurovalProduct.ConfigAgActivated ? EurovalProduct.ConfigAg : 1));
+				//                                                                            // Potenzprodukt der Aufenthaltszone berechnen
+				double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, tAz, su, EurovalProduct.ConfigRohrAussenD, (EurovalProduct.ConfigAgActivated ? EurovalProduct.ConfigAg : 1), EurovalProduct.ConfigSr, EurovalProduct.ConfigSr0, EurovalProduct.ConfigLambdaR, EurovalProduct.ConfigLambdaR0);
+				//                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
+				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
+				this.c_qAzHeatPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
+
+				double qAverage = this.QFbhTotalHeat / this.AreaWithoutConnections;
+				double qU = en1264.WaermeverlustUnten(EurovalProduct.ConfigAlphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowHeat);
+
+				// hydraulische Berechnung
+				double qH2o = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
+				double deltaT = this.c_thetaVRzHeat - this.c_thetaRAzHeat;                                          // gesamte Spreizung
+				this.c_durchflussHeat = en1264.Durchfluss(qH2o, EurovalProduct.ConfigC, deltaT);
+				this.c_druckverlustHeat = en1264.DruckverlustRohr(this.c_durchflussHeat, EurovalProduct.ConfigRohrInnenA, EurovalProduct.ConfigRho, EurovalProduct.ConfigRohrInnenD, EurovalProduct.ConfigV, 0.000004, this.PipeLengthWithAllConnections);
+				//                                                                           // gesamten Druckverlust berechnen
+
+				this.c_floorTempAzHeat = en1264.OberflaechenTemperatur(this.c_qAzHeatPerSqm, EurovalProduct.ConfigAlphaFbh, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature);
+				this.c_floorTempRzHeat = en1264.OberflaechenTemperatur(this.c_qRzHeatPerSqm, EurovalProduct.ConfigAlphaFbh, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature);
+			}
+			{ // Kühllastberechnung
+				this.c_thetaVRzCool = 35;
+				this.c_thetaRAzCool = 30;
+				this.EurovalProduct.GetCoolFlow(out this.c_thetaVRzCool, out this.c_thetaRAzCool);
+				this.c_thetaVRzCool = this.c_thetaVRzCool - (this.c_thetaVRzCool - this.c_thetaRAzCool) * this.vorlaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
+				this.c_thetaRAzCool = this.c_thetaRAzCool + (this.c_thetaVRzCool - this.c_thetaRAzCool) * this.ruecklaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
+				this.c_thetaRRzCool = this.c_thetaVRzCool;
+				this.c_thetaVAzCool = this.c_thetaVRzCool;
+
+				double dThetaRz = 0;
+
+				if (calculateWithRim) {
+					this.c_thetaRRzCool = this.c_thetaVRzCool - (this.c_thetaVRzCool - this.c_thetaRAzCool) * this.c_pipeLengthRz / this.PipeLengthWithoutConnections;
+					this.c_thetaVAzCool = this.c_thetaRRzCool;
+					dThetaRz = en1264.Heizmitteluebertemperatur(this.c_thetaVRzCool, this.c_thetaRRzCool, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature);
+					//                                                                        // Heizmittelübertemperatur der Randzone berechnen
+				}
+				double dThetaAz = en1264.Heizmitteluebertemperatur(this.c_thetaVAzCool, this.c_thetaRAzCool, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature);
+				//                                                                            // Heizmittelübertemperatur der Aufenthaltszone berechnen
+
+				double tRz = 0;
+				double ppRz = 0;
+				double bgRz = 0;
+				double khRz = 0;
+				if (calculateWithRim) {
+					tRz = EurovalProduct.GetTeilung(EurovalProduct.GetRimLayDistance(rimType.Value));    // Teilung der Randzone
+					ppRz = en1264.PotenzProduktFussbodenGeometrie(EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbk, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, tRz, su, EurovalProduct.ConfigRohrAussenD, (EurovalProduct.ConfigAgActivated ? EurovalProduct.ConfigAg : 1));
+					//                                                                        // Potenzprodukt der Randzone berechnen
+					bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbk, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, tRz, su, EurovalProduct.ConfigRohrAussenD, (EurovalProduct.ConfigAgActivated ? EurovalProduct.ConfigAg : 1), EurovalProduct.ConfigSr, EurovalProduct.ConfigSr0, EurovalProduct.ConfigLambdaR, EurovalProduct.ConfigLambdaR0);
+					//                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
+					khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
+					this.c_qRzCoolPerSqm = en1264.WaermestromDichteRohr(khRz, dThetaRz);                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
+				}
+
+				double tAz = EurovalProduct.GetTeilung(layDistance);                             // Teilung der Aufenthaltszone
+				double ppAz = en1264.PotenzProduktFussbodenGeometrie(EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbk, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, tAz, su, EurovalProduct.ConfigRohrAussenD, (EurovalProduct.ConfigAgActivated ? EurovalProduct.ConfigAg : 1));
+				//                                                                            // Potenzprodukt der Aufenthaltszone berechnen
+				double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbk, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, tAz, su, EurovalProduct.ConfigRohrAussenD, (EurovalProduct.ConfigAgActivated ? EurovalProduct.ConfigAg : 1), EurovalProduct.ConfigSr, EurovalProduct.ConfigSr0, EurovalProduct.ConfigLambdaR, EurovalProduct.ConfigLambdaR0);
+				//                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
+				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
+				this.c_qAzCoolPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
+
+				double qAverage = this.QFbhTotalCool / this.AreaWithoutConnections;
+				double qU = en1264.WaermeverlustUnten(EurovalProduct.ConfigAlphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowCool);
+
+				// hydraulische Berechnung
+				double qH2o = -(qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
+				double deltaT = this.c_thetaVRzCool - this.c_thetaRAzCool;                                          // gesamte Spreizung
+				this.c_durchflussCool = en1264.Durchfluss(qH2o, EurovalProduct.ConfigC, deltaT);
+				this.c_druckverlustCool = en1264.DruckverlustRohr(this.c_durchflussCool, EurovalProduct.ConfigRohrInnenA, EurovalProduct.ConfigRho, EurovalProduct.ConfigRohrInnenD, EurovalProduct.ConfigV, 0.000004, this.PipeLengthWithAllConnections);
+				//                                                                           // gesamten Druckverlust berechnen
+
+				this.c_floorTempAzCool = en1264.OberflaechenTemperatur(this.c_qAzCoolPerSqm, EurovalProduct.ConfigAlphaFbk, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature);
+				this.c_floorTempRzCool = en1264.OberflaechenTemperatur(this.c_qRzCoolPerSqm, EurovalProduct.ConfigAlphaFbk, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature);
+			}
+		}
+	}
+}

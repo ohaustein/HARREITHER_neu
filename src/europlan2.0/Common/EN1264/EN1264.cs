@@ -263,12 +263,16 @@ namespace Europlan.Common {
 			}
 		}
 
-		public double DruckverlustRohr(double leistung, double c, double spreizung, double rohrInnenQuerschnitt, double dichte, double rohrInnenDurchmesser, double viskositaet, double k, double rohrLaenge) {
-			double durchfluss = Durchfluss(leistung, c, spreizung);
+		public double DruckverlustRohr(double durchfluss, double rohrInnenQuerschnitt, double dichte, double rohrInnenDurchmesser, double viskositaet, double k, double rohrLaenge) {
 			double flussGeschwindigkeit = FlussGeschwindigkeit(durchfluss, rohrInnenQuerschnitt, dichte);
 			double reynoldsZahl = ReynoldsZahl(flussGeschwindigkeit, rohrInnenDurchmesser, viskositaet);
 			double lambda = WiderstandsBeiwert(reynoldsZahl, k, rohrInnenDurchmesser);
 			return (lambda * (rohrLaenge / rohrInnenDurchmesser) * dichte * (Math.Pow(flussGeschwindigkeit, 2) / 2)) / 100;
+		}
+
+		public double DruckverlustRohr(double leistung, double c, double spreizung, double rohrInnenQuerschnitt, double dichte, double rohrInnenDurchmesser, double viskositaet, double k, double rohrLaenge) {
+			double durchfluss = Durchfluss(leistung, c, spreizung);
+			return DruckverlustRohr(durchfluss, rohrInnenQuerschnitt, dichte, rohrInnenDurchmesser, viskositaet, k, rohrLaenge);
 		}
 
 		public double DruckverlustModul(int anzahl, double durchfluss) {

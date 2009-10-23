@@ -93,12 +93,16 @@ namespace Europlan.Common {
 			get { return 0; }
 		}
 
-		public override double PlannedPipeLength {
+		public override float PlannedNetArea {
 			get { return 0; }
 		}
 
-		public override float PlannedNetArea {
+		public override int PlannedCircuits {
 			get { return 0; }
+		}
+
+		public override Circuit GetCircuit(int index) {
+			return null;
 		}
 
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
