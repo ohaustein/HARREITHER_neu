@@ -63,29 +63,18 @@ namespace Europlan.Common {
 		private Nullable<LayDistance> plannedLayDistance = null;
 		private Nullable<RimType> plannedRimType = null;
 
-		private double plannedQHeat = 0;
-		private double plannedQHeatRim = 0;
-		private double plannedQHeatResidence = 0;
-		private double plannedQHeatU = 0;
-		private double plannedDeltaRhoHeat = 0;
-		private double plannedMhHeat = 0;
-		private double plannedSpreizungHeat = 0;
-		private double plannedHeatLoad = 0;
-		private double plannedHeatLoadAnbindung = 0;
-		private double plannedQCool = 0;
-		private double plannedQCoolRim = 0;
-		private double plannedQCoolResidence = 0;
-		private double plannedQCoolU = 0;
-		private double plannedDeltaRhoCool = 0;
-		private double plannedSpreizungCool = 0;
-		private double plannedMhCool = 0;
-		private double plannedCoolLoad = 0;
-		private double plannedCoolLoadAnbindung = 0;
-
-		private double plannedPipeLength = 0;
-		private double plannedRemoveArea = 0;
-
 		private bool plannedProductIsConnection = false;
+
+		private bool plannedCorrections = false;
+
+		private List<EurovalCircuit> circuits = new List<EurovalCircuit>();
+
+		public override Circuit GetCircuit(int index) {
+			if (index < this.circuits.Count) {
+				return this.circuits[index];
+			}
+			return null;
+		}
 
 		private bool clipSchiene = false;
 		private bool anhydritEstrich = false;
@@ -684,7 +673,13 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public float PlannedAreaResidence {
-			get { return this.PlannedFloorArea - this.PlannedAreaRim - (float)this.plannedRemoveArea; }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					value += (ec.AreaTotal - ec.GetAreaRim(this.plannedRimType) - ec.AreaRemovedDueConnection);
+				}
+				return (float)value;
+			}
 		}
 
 		/// <summary>
@@ -747,23 +742,9 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedHeatLoadPerSqM {
-			get { return this.plannedQHeat; }
-		}
-
-		/// <summary>
-		/// The heat load per m² that is emmited in the room, based on the current calculation.
-		/// </summary>
-		[XmlIgnore]
-		public double PlannedHeatLoadPerSqMBelow {
-			get { return this.plannedQHeatU; }
-		}
-
-		/// <summary>
-		/// The heat load per m² that is emmited outside of the room, based on the current calculation.
-		/// </summary>
-		[XmlIgnore]
-		public double PlannedHeatLoadPerSqMH20 {
-			get { return this.plannedQHeat + this.plannedQHeatU; }
+			get {
+				return this.plannedArea == 0 ? 0 : this.PlannedHeatLoad / this.plannedArea;
+			}
 		}
 
 		/// <summary>
@@ -771,7 +752,10 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedHeatLoadPerSqMRim {
-			get { return this.plannedQHeatRim; }
+			get {
+				double area = this.PlannedAreaRim;
+				return area == 0 ? 0 :this.PlannedHeatLoadRim / area;
+			}
 		}
 
 		/// <summary>
@@ -779,7 +763,10 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedHeatLoadPerSqMResidence {
-			get { return this.plannedQHeatResidence; }
+			get {
+				double area = this.PlannedAreaResidence;
+				return area == 0 ? 0 : this.PlannedHeatLoadResidence / area;
+			}
 		}
 
 		/// <summary>
@@ -787,12 +774,13 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public override double PlannedHeatLoad {
-			get { return Math.Round(this.plannedHeatLoad, 1); }
-		}
-
-		[XmlIgnore]
-		public double PlannedHeatLoadAnbindung {
-			get { return Math.Round(this.plannedHeatLoadAnbindung, 1); }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					value += ec.QFbhTotalHeat;
+				}
+				return value;
+			}
 		}
 
 		/// <summary>
@@ -800,7 +788,13 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedHeatLoadRim {
-			get { return Math.Round(this.PlannedAreaRim * this.plannedQHeatRim, 0); }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					value += ec.QRzHeat;
+				}
+				return value;
+			}
 		}
 
 		/// <summary>
@@ -808,7 +802,13 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedHeatLoadResidence {
-			get { return Math.Round(this.PlannedAreaResidence * this.plannedQHeatResidence, 0); }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					value += ec.QAzHeat;
+				}
+				return value;
+			}
 		}
 
 		/// <summary>
@@ -816,27 +816,61 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedDeltaRhoHeat {
-			get { return this.plannedDeltaRhoHeat; }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.C_DruckverlustHeat > value) {
+						value = ec.C_DruckverlustHeat;
+					}
+				}
+				return value;
+			}
 		}
 
 		[XmlIgnore]
 		public double PlannedMhHeat {
-			get { return this.plannedMhHeat; }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.C_DurchflussHeat > value) {
+						value = ec.C_DurchflussHeat;
+					}
+				}
+				return value;
+			}
 		}
 
 		[XmlIgnore]
 		public double PlannedSpreizungHeat {
-			get { return this.plannedSpreizungHeat; }
+			get {
+				return (this.PlannedConnection == null || this.PlannedConnection.Distributor == null || this.PlannedConnection.Distributor.RegulatorCircuit == null) ? 0 : EN1264.Instance.DefaultSpreizung(this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature);
+			}
 		}
 
 		[XmlIgnore]
 		public double PlannedFloorTemperatureHeatRim {
-			get { return EN1264.Instance.OberflaechenTemperatur(this.plannedQHeatRim, alphaFbh, this.AssociatedRoom.RoomHeatTemperature); }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.C_FloorTempRzHeat > value) {
+						value = ec.C_FloorTempRzHeat;
+					}
+				}
+				return value;
+			}
 		}
 
 		[XmlIgnore]
 		public double PlannedFloorTemperatureHeatResidence {
-			get { return EN1264.Instance.OberflaechenTemperatur(this.plannedQHeatResidence, alphaFbh, this.AssociatedRoom.RoomHeatTemperature); }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.C_FloorTempAzHeat > value) {
+						value = ec.C_FloorTempAzHeat;
+					}
+				}
+				return value;
+			}
 		}
 		#endregion Heat Load
 
@@ -846,23 +880,9 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedCoolLoadPerSqM {
-			get { return this.plannedQCool; }
-		}
-
-		/// <summary>
-		/// The heat load per m² that is emmited in the room, based on the current calculation.
-		/// </summary>
-		[XmlIgnore]
-		public double PlannedCoolLoadPerSqMBelow {
-			get { return this.plannedQCoolU; }
-		}
-
-		/// <summary>
-		/// The cool load per m² that is emmited outside of the room, based on the current calculation.
-		/// </summary>
-		[XmlIgnore]
-		public double PlannedCoolLoadPerSqMH20 {
-			get { return this.plannedQCool + this.plannedQCoolU; }
+			get { 
+				return this.plannedArea == 0 ? 0 : this.PlannedCoolLoad / this.plannedArea;
+			}
 		}
 
 		/// <summary>
@@ -870,7 +890,10 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedCoolLoadPerSqMRim {
-			get { return this.plannedQCoolRim; }
+			get {
+				double area = this.PlannedAreaRim;
+				return area == 0 ? 0 : this.PlannedCoolLoadRim / area;
+			}
 		}
 
 		/// <summary>
@@ -878,7 +901,10 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedCoolLoadPerSqMResidence {
-			get { return this.plannedQCoolResidence; }
+			get {
+				double area = this.PlannedAreaResidence;
+				return area == 0 ? 0 : this.PlannedCoolLoadResidence / area;
+			}
 		}
 
 		/// <summary>
@@ -886,12 +912,13 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public override double PlannedCoolLoad {
-			get { return Math.Round(this.plannedCoolLoad, 1); }
-		}
-
-		[XmlIgnore]
-		public double PlannedCoolLoadAnbindung {
-			get { return Math.Round(this.plannedCoolLoadAnbindung, 1); }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					value += ec.QFbhTotalCool;
+				}
+				return value;
+			}
 		}
 
 		/// <summary>
@@ -899,7 +926,13 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedCoolLoadRim {
-			get { return Math.Round(this.PlannedAreaRim * this.plannedQCoolRim, 0); }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					value += ec.QRzCool;
+				}
+				return value;
+			}
 		}
 
 		/// <summary>
@@ -907,7 +940,13 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedCoolLoadResidence {
-			get { return Math.Round(this.PlannedAreaResidence * this.plannedQCoolResidence, 0); }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					value += ec.QAzCool;
+				}
+				return value;
+			}
 		}
 
 		/// <summary>
@@ -915,43 +954,99 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double PlannedDeltaRhoCool {
-			get { return this.plannedDeltaRhoCool; }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.C_DruckverlustCool > value) {
+						value = ec.C_DruckverlustCool;
+					}
+				}
+				return value;
+			}
 		}
 
 		[XmlIgnore]
 		public double PlannedMhCool {
-			get { return this.plannedMhCool; }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.C_DurchflussCool > value) {
+						value = ec.C_DurchflussCool;
+					}
+				}
+				return value;
+			}
 		}
 
 		[XmlIgnore]
 		public double PlannedSpreizungCool {
-			get { return this.plannedSpreizungCool; }
+			get {
+				return 3; // TODO
+			}
 		}
 
 		[XmlIgnore]
 		public double PlannedFloorTemperatureCoolRim {
-			get { return EN1264.Instance.OberflaechenTemperatur(-this.plannedQCoolRim, alphaFbk, this.AssociatedRoom.RoomCoolTemperature); }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.C_FloorTempRzCool > value) {
+						value = ec.C_FloorTempRzCool;
+					}
+				}
+				return value;
+			}
 		}
 
 		[XmlIgnore]
 		public double PlannedFloorTemperatureCoolResidence {
-			get { return EN1264.Instance.OberflaechenTemperatur(-this.plannedQCoolResidence, alphaFbk, this.AssociatedRoom.RoomCoolTemperature); }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.C_FloorTempAzCool > value) {
+						value = ec.C_FloorTempAzCool;
+					}
+				}
+				return value;
+			}
 		}
 		#endregion Cool Load
 
 		[XmlIgnore]
-		public override double PlannedPipeLength {
-			get { return this.plannedPipeLength; }
-		}
-
-		[XmlIgnore]
 		public double PlannedRemoveArea {
-			get { return this.plannedRemoveArea; }
+			get {
+				double value = 0;
+				foreach (Floor f in Project.Instance.Floors) {
+					foreach (Room r in f.Rooms) {
+						foreach (PlannedProduct pp in r.PlannedProducts) {
+							foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
+								if (cp.ConnectionThrough.Product == this) {
+									value += cp.AreaTotal;
+								}
+							}
+						}
+					}
+				}
+				return value;
+			}
 		}
 
 		[XmlIgnore]
 		public double PlannedPipeLengthPerCircuit {
-			get { return this.plannedPipeLength / this.PlannedCircuits; }
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.PipeLengthWithoutConnections > value) {
+						value = ec.PipeLengthWithoutConnections;
+					}
+				}
+				return value;
+				//return this.plannedPipeLength / this.PlannedCircuits; 
+			}
+		}
+
+		public override int PlannedCircuits {
+			get { return this.circuits.Count; }
 		}
 		#endregion Auslegung calculated values
 
@@ -973,198 +1068,193 @@ namespace Europlan.Common {
 		/// </summary>
 		/// <param name="distance"></param>
 		/// <param name="distanceRim"></param>
-		private void CalculateQForLayDistance(LayDistance distance, Nullable<RimType> distanceRim, Nullable<int> circuits,
-				double vorlaufTotal, double ruecklaufTotal, double vorlaufNotIsolated, double ruecklaufNotIsolated/*,
-				out double qHeatU, out double qHeat, out double qHeatRim, out double qHeatResidence, out double deltaRhoHeat, out double spreizungHeat,
-				out double qCoolU, out double qCool, out double qCoolRim, out double qCoolResidence, out double deltaRhoCool, out double spreizungCool,
-				out double pipeLength*/) {
-			if (this.plannedArea == 0) {
-				/*qHeatU = 0;
-				qHeat = 0;
-				qHeatRim = 0;
-				qHeatResidence = 0;
-				deltaRhoHeat = 0;
-				spreizungHeat = 0;
-				qCoolU = 0;
-				qCool = 0;
-				qCoolRim = 0;
-				qCoolResidence = 0;
-				deltaRhoCool = 0;
-				spreizungCool = 0;
-				pipeLength = 0;*/
-				return;
-			}
+		//private void CalculateQForLayDistance(LayDistance distance, Nullable<RimType> distanceRim, Nullable<int> circuits,
+		//        double vorlaufTotal, double ruecklaufTotal, double vorlaufNotIsolated, double ruecklaufNotIsolated) {
+		//    if (this.plannedArea == 0) {
+		//        return;
+		//    }
 
-			EN1264 en1264 = EN1264.Instance;
+		//    EN1264 en1264 = EN1264.Instance;
 
-			/*// Rohrlänge Anbindeleitungen
-			double vorlaufTotal = 0;
-			double ruecklaufTotal = 0;
-			double vorlaufNotIsolated = 0;
-			double ruecklaufNotIsolated = 0;
-			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
-				vorlaufNotIsolated += (pipe.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) ? pipe.Vorlauf : 0;
-				ruecklaufNotIsolated += (pipe.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) ? pipe.Ruecklauf : 0;
-				vorlaufTotal += pipe.Vorlauf;
-				ruecklaufTotal += pipe.Ruecklauf;
-			}*/
+		//    /*// Rohrlänge Anbindeleitungen
+		//    double vorlaufTotal = 0;
+		//    double ruecklaufTotal = 0;
+		//    double vorlaufNotIsolated = 0;
+		//    double ruecklaufNotIsolated = 0;
+		//    foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
+		//        vorlaufNotIsolated += (pipe.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) ? pipe.Vorlauf : 0;
+		//        ruecklaufNotIsolated += (pipe.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) ? pipe.Ruecklauf : 0;
+		//        vorlaufTotal += pipe.Vorlauf;
+		//        ruecklaufTotal += pipe.Ruecklauf;
+		//    }*/
 
-			double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
-			double lambdaU = 1.2; /* Estrich??? */
-			double rLambdaB = this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue;  //0.1; /* Annahme Parkett mit 0.1 m²K/W; durch echte Konstruktion ersetzen! */
-			double rLambdaIns = this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue;
-			double rAlphaDeckeFbh = 1 / alphaFbh; /* Wärmeübergang Decke bei Heizung */
-			double rAlphaDeckeFbk = 1 / alphaFbk; /* Wärmeübergang Decke bei Kühlung */
+		//    double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+		//    double lambdaU = 1.2; /* Estrich??? */
+		//    double rLambdaB = this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue;  //0.1; /* Annahme Parkett mit 0.1 m²K/W; durch echte Konstruktion ersetzen! */
+		//    double rLambdaIns = this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue;
+		//    double rAlphaDeckeFbh = 1 / alphaFbh; /* Wärmeübergang Decke bei Heizung */
+		//    double rAlphaDeckeFbk = 1 / alphaFbk; /* Wärmeübergang Decke bei Kühlung */
 
-			this.plannedLayDistance = distance;
-			this.plannedRimType = distanceRim;
+		//    this.plannedLayDistance = distance;
+		//    this.plannedRimType = distanceRim;
 
-			// Aufteilung RZ - AZ
-			double aGes = this.PlannedFloorArea - this.plannedRemoveArea;	// gesamte Fläche
-			double aRed = this.PlannedAreaReduced;	// Fläche mit reduzierter Heizleistung
-			double aUnb = this.PlannedAreaUnheated;	// unbeheizte Fläche
-			double aFbh = aGes - aRed / 2 - aUnb;	// wirksam beheizte Fläche
+		//    // Aufteilung RZ - AZ
+		//    double aGes = this.PlannedFloorArea - this.plannedRemoveArea;	// gesamte Fläche
+		//    double aRed = this.PlannedAreaReduced;	// Fläche mit reduzierter Heizleistung
+		//    double aUnb = this.PlannedAreaUnheated;	// unbeheizte Fläche
+		//    double aFbh = aGes - aRed / 2 - aUnb;	// wirksam beheizte Fläche
 
-			bool calculateWithRim = distanceRim.HasValue && (this.plannedRimLength - this.plannedRimCorners * GetRimWidth(distanceRim.Value) / 100 > 0);
-			double lRz = 0;
-			double bRz = 0;
-			double aRz = 0;
-			double lRlRz = 0;
-			if (calculateWithRim) {
-				lRz = this.plannedRimLength - this.plannedRimCorners * bRz;			      // Tatsächliche länge der Randzone berechnen
-				bRz = ((float)GetRimWidth(distanceRim.Value)) / 100;
-				lRz = lRz < 0 ? 0 : lRz;
-				aRz = lRz * bRz;                                                          // Fläche der Randzone berechnen
-				lRlRz = aRz * GetPipeLengthPerSqm(GetRimLayDistance(distanceRim.Value));  // Rohrlänge der Randzone berechnen
-			}
-			double aAz = aFbh - aRz;                                                      // Fläche der Aufenthaltszone berechnen
-			double lRlAz = aAz * GetPipeLengthPerSqm(distance);                           // Rohlänge der Aufenthaltszone berechnen
-			this.plannedPipeLength = lRlRz + lRlAz;
-			lRlRz = lRlRz / this.PlannedCircuits;
-			lRlAz = lRlAz / this.PlannedCircuits;
+		//    bool calculateWithRim = distanceRim.HasValue && (this.plannedRimLength - this.plannedRimCorners * GetRimWidth(distanceRim.Value) / 100 > 0);
+		//    double lRz = 0;
+		//    double bRz = 0;
+		//    double aRz = 0;
+		//    double lRlRz = 0;
+		//    if (calculateWithRim) {
+		//        lRz = this.plannedRimLength - this.plannedRimCorners * bRz;			      // Tatsächliche länge der Randzone berechnen
+		//        bRz = ((float)GetRimWidth(distanceRim.Value)) / 100;
+		//        lRz = lRz < 0 ? 0 : lRz;
+		//        aRz = lRz * bRz;                                                          // Fläche der Randzone berechnen
+		//        lRlRz = aRz * GetPipeLengthPerSqm(GetRimLayDistance(distanceRim.Value));  // Rohrlänge der Randzone berechnen
+		//    }
+		//    double aAz = aFbh - aRz;                                                      // Fläche der Aufenthaltszone berechnen
+		//    double lRlAz = aAz * GetPipeLengthPerSqm(distance);                           // Rohlänge der Aufenthaltszone berechnen
+		//    this.plannedPipeLength = lRlRz + lRlAz;
+		//    lRlRz = lRlRz / this.PlannedCircuits;
+		//    lRlAz = lRlAz / this.PlannedCircuits;
 
-			this.plannedCircuits = circuits.HasValue ? circuits.Value : (this.plannedPipeLength <= 0 ? 1 : (int)Math.Ceiling(this.plannedPipeLength / (maxCircuitLength - vorlaufTotal - ruecklaufTotal)));
+		//    this.plannedCircuits = circuits.HasValue ? circuits.Value : (this.plannedPipeLength <= 0 ? 1 : (int)Math.Ceiling(this.plannedPipeLength / (maxCircuitLength - vorlaufTotal - ruecklaufTotal)));
 
-			{ // Heizlastberechnung
-				double thetaVrz = 35;
-				double thetaRaz = 30;
-				this.GetHeatFlow(out thetaVrz, out thetaRaz);
-				this.plannedSpreizungHeat = thetaVrz - thetaRaz;
-				thetaVrz = thetaVrz - (thetaVrz - thetaRaz) * vorlaufNotIsolated / (this.PlannedPipeLengthPerCircuit + vorlaufNotIsolated + ruecklaufNotIsolated);
-				thetaRaz = thetaRaz + (thetaVrz - thetaRaz) * ruecklaufNotIsolated / (this.PlannedPipeLengthPerCircuit + vorlaufNotIsolated + ruecklaufNotIsolated);
-				double thetaRrz = thetaVrz;
-				double thetaVaz = thetaVrz;
+		//    { // Heizlastberechnung
+		//        double QFbhFirst = 0;
+		//        { // 1. Heizkreis
+		//            double thetaVrz = 35;
+		//            double thetaRaz = 30;
+		//            this.GetHeatFlow(out thetaVrz, out thetaRaz);
+		//            this.plannedSpreizungHeat = thetaVrz - thetaRaz;
+		//            thetaVrz = thetaVrz - (thetaVrz - thetaRaz) * vorlaufNotIsolated / (this.PlannedPipeLengthPerCircuit + vorlaufNotIsolated + ruecklaufNotIsolated);
+		//            thetaRaz = thetaRaz + (thetaVrz - thetaRaz) * ruecklaufNotIsolated / (this.PlannedPipeLengthPerCircuit + vorlaufNotIsolated + ruecklaufNotIsolated);
+		//            double thetaRrz = thetaVrz;
+		//            double thetaVaz = thetaVrz;
 
-				double dThetaRz = 0;
+		//            double dThetaRz = 0;
 
-				if (calculateWithRim) {
-					thetaRrz = thetaVrz - (thetaVrz - thetaRaz) * lRlRz / this.PlannedPipeLengthPerCircuit;
-					thetaVaz = thetaRrz;
-					dThetaRz = en1264.Heizmitteluebertemperatur(thetaVrz, thetaRrz, this.AssociatedRoom.RoomHeatTemperature);
-					//                                                                        // Heizmittelübertemperatur der Randzone berechnen
-				}
-				double dThetaAz = en1264.Heizmitteluebertemperatur(thetaVaz, thetaRaz, this.AssociatedRoom.RoomHeatTemperature);
-				//                                                                            // Heizmittelübertemperatur der Aufenthaltszone berechnen
+		//            if (calculateWithRim) {
+		//                thetaRrz = thetaVrz - (thetaVrz - thetaRaz) * lRlRz / this.PlannedPipeLengthPerCircuit;
+		//                thetaVaz = thetaRrz;
+		//                dThetaRz = en1264.Heizmitteluebertemperatur(thetaVrz, thetaRrz, this.AssociatedRoom.RoomHeatTemperature);
+		//                //                                                                        // Heizmittelübertemperatur der Randzone berechnen
+		//            }
+		//            double dThetaAz = en1264.Heizmitteluebertemperatur(thetaVaz, thetaRaz, this.AssociatedRoom.RoomHeatTemperature);
+		//            //                                                                            // Heizmittelübertemperatur der Aufenthaltszone berechnen
 
-				double tRz = 0;
-				double ppRz = 0;
-				double bgRz = 0;
-				double khRz = 0;
-				double qRz = 0;
-				if (calculateWithRim) {
-					tRz = EurovalProduct.GetTeilung(GetRimLayDistance(distanceRim.Value));    // Teilung der Randzone
-					ppRz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, (agActivated ? ag : 1));
-					//                                                                        // Potenzprodukt der Randzone berechnen
-					bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, (agActivated ? ag : 1), sr, sr0, lambdaR, lambdaR0);
-					//                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
-					khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
-					qRz = en1264.WaermestromDichteRohr(khRz, dThetaRz);                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
-				}
+		//            double tRz = 0;
+		//            double ppRz = 0;
+		//            double bgRz = 0;
+		//            double khRz = 0;
+		//            double qRz = 0;
+		//            if (calculateWithRim) {
+		//                tRz = EurovalProduct.GetTeilung(GetRimLayDistance(distanceRim.Value));    // Teilung der Randzone
+		//                ppRz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, (agActivated ? ag : 1));
+		//                //                                                                        // Potenzprodukt der Randzone berechnen
+		//                bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, (agActivated ? ag : 1), sr, sr0, lambdaR, lambdaR0);
+		//                //                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
+		//                khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
+		//                qRz = en1264.WaermestromDichteRohr(khRz, dThetaRz);                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
+		//            }
 
-				double tAz = EurovalProduct.GetTeilung(distance);                             // Teilung der Aufenthaltszone
-				double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, (agActivated ? ag : 1));
-				//                                                                            // Potenzprodukt der Aufenthaltszone berechnen
-				double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, (agActivated ? ag : 1), sr, sr0, lambdaR, lambdaR0);
-				//                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
-				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
-				double qAz = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
+		//            double tAz = EurovalProduct.GetTeilung(distance);                             // Teilung der Aufenthaltszone
+		//            double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, (agActivated ? ag : 1));
+		//            //                                                                            // Potenzprodukt der Aufenthaltszone berechnen
+		//            double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, (agActivated ? ag : 1), sr, sr0, lambdaR, lambdaR0);
+		//            //                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
+		//            double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
+		//            double qAz = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
 
-				double QFbh = aRz * qRz + aAz * qAz;                                          // gesamte in den Raum abgegebene Wärme
+		//            QFbhFirst = (aRz * qRz + aAz * qAz) / this.PlannedCircuits;                   // gesamte in den Raum abgegebene Wärme
 
-				this.plannedHeatLoad = QFbh + this.plannedHeatLoadAnbindung;
-				this.plannedQHeat = QFbh / aGes;
-				this.plannedQHeatRim = qRz;
-				this.plannedQHeatResidence = qAz;
-				this.plannedQHeatU = en1264.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.rLambdaDecke, EurovalProduct.rLambdaPutz, this.plannedQHeat, this.AssociatedRoom.RoomHeatTemperature, this.PlannedRoomTemperatureBelowHeat);
-				//                                                                           // Wärmeverlust nach unten berechnen
+		//            double qFbhFirst = QFbhFirst / aGes * this.PlannedCircuits;
+		//            double qUFirst = en1264.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.rLambdaDecke, EurovalProduct.rLambdaPutz, qFbhFirst, this.AssociatedRoom.RoomHeatTemperature, this.PlannedRoomTemperatureBelowHeat);
+		//            //this.plannedHeatLoad = QFbh + this.plannedHeatLoadAnbindung;
+		//            //this.plannedQHeat = QFbh / aGes;
+		//            //this.plannedQHeatRim = qRz;
+		//            //this.plannedQHeatResidence = qAz;
+		//            //this.plannedQHeatU = en1264.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.rLambdaDecke, EurovalProduct.rLambdaPutz, this.plannedQHeat, this.AssociatedRoom.RoomHeatTemperature, this.PlannedRoomTemperatureBelowHeat);
+		//            //                                                                           // Wärmeverlust nach unten berechnen
 
-				// hydraulische Berechnung
-				double qH2o = (this.plannedQHeat + this.plannedQHeatU) * aGes / this.PlannedCircuits;// gesamte aufgenommene Leistung berechnen
-				double deltaT = thetaVrz - thetaRaz;                                          // gesamte Spreizung
-				this.plannedDeltaRhoHeat = en1264.DruckverlustRohr(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, this.PlannedPipeLengthPerCircuit + vorlaufTotal + ruecklaufTotal);
-				//                                                                           // gesamten Druckverlust berechnen
-				this.plannedMhHeat = en1264.Durchfluss(qH2o, EurovalProduct.c, deltaT);
-			}
+		//            // hydraulische Berechnung
+		//            double qH2o = (qFbhFirst + qUFirst) * aGes / this.PlannedCircuits;            // gesamte aufgenommene Leistung berechnen
+		//            // TODO a
+		//            double deltaT = thetaVrz - thetaRaz;                                          // gesamte Spreizung
+		//            this.plannedDeltaRhoHeat = en1264.DruckverlustRohr(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, this.PlannedPipeLengthPerCircuit + vorlaufTotal + ruecklaufTotal);
+		//            //                                                                           // gesamten Druckverlust berechnen
+		//            this.plannedMhHeat = en1264.Durchfluss(qH2o, EurovalProduct.c, deltaT);
+		//        }
+		//        //this.plannedHeatLoad = QFbh + this.plannedHeatLoadAnbindung;
+		//        //this.plannedQHeat = QFbh / aGes;
+		//        //this.plannedQHeatRim = qRz;
+		//        //this.plannedQHeatResidence = qAz;
+		//        //this.plannedQHeatU = en1264.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.rLambdaDecke, EurovalProduct.rLambdaPutz, this.plannedQHeat, this.AssociatedRoom.RoomHeatTemperature, this.PlannedRoomTemperatureBelowHeat);
+		//    }
 
-			{ // Kühllastberechnung
-				double thetaVrz = 16;
-				double thetaRaz = 22;
-				this.GetCoolFlow(out thetaVrz, out thetaRaz);
-				double thetaRrz = thetaVrz;
-				double thetaVaz = thetaVrz;
-				this.plannedSpreizungCool = thetaRaz - thetaVrz;
+		//    { // Kühllastberechnung
+		//        double thetaVrz = 16;
+		//        double thetaRaz = 22;
+		//        this.GetCoolFlow(out thetaVrz, out thetaRaz);
+		//        double thetaRrz = thetaVrz;
+		//        double thetaVaz = thetaVrz;
+		//        this.plannedSpreizungCool = thetaRaz - thetaVrz;
 
-				double dThetaRz = 0;
+		//        double dThetaRz = 0;
 
-				if (calculateWithRim) {
-					thetaRrz = thetaVrz - (thetaVrz - thetaRaz) * lRlRz / this.PlannedPipeLengthPerCircuit;
-					thetaVaz = thetaRrz;
-					dThetaRz = en1264.Heizmitteluebertemperatur(thetaVrz, thetaRrz, this.AssociatedRoom.RoomCoolTemperature);
-					//                                                                        // Heizmittelübertemperatur der Randzone berechnen
-				}
-				double dThetaAz = en1264.Heizmitteluebertemperatur(thetaVaz, thetaRaz, this.AssociatedRoom.RoomCoolTemperature);
-				//                                                                            // Heizmittelübertemperatur der Aufenthaltszone berechnen
+		//        if (calculateWithRim) {
+		//            thetaRrz = thetaVrz - (thetaVrz - thetaRaz) * lRlRz / this.PlannedPipeLengthPerCircuit;
+		//            thetaVaz = thetaRrz;
+		//            dThetaRz = en1264.Heizmitteluebertemperatur(thetaVrz, thetaRrz, this.AssociatedRoom.RoomCoolTemperature);
+		//            //                                                                        // Heizmittelübertemperatur der Randzone berechnen
+		//        }
+		//        double dThetaAz = en1264.Heizmitteluebertemperatur(thetaVaz, thetaRaz, this.AssociatedRoom.RoomCoolTemperature);
+		//        //                                                                            // Heizmittelübertemperatur der Aufenthaltszone berechnen
 
-				double tRz = 0;
-				double ppRz = 0;
-				double bgRz = 0;
-				double khRz = 0;
-				double qRz = 0;
-				if (calculateWithRim) {
-					tRz = EurovalProduct.GetTeilung(GetRimLayDistance(distanceRim.Value));    // Teilung der Randzone
-					ppRz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, (agActivated ? ag : 1));
-					//                                                                        // Potenzprodukt der Randzone berechnen
-					bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, (agActivated ? ag : 1), sr, sr0, lambdaR, lambdaR0);
-					//                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
-					khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
-					qRz = en1264.WaermestromDichteRohr(khRz, dThetaRz);                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
-				}
+		//        double tRz = 0;
+		//        double ppRz = 0;
+		//        double bgRz = 0;
+		//        double khRz = 0;
+		//        double qRz = 0;
+		//        if (calculateWithRim) {
+		//            tRz = EurovalProduct.GetTeilung(GetRimLayDistance(distanceRim.Value));    // Teilung der Randzone
+		//            ppRz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, (agActivated ? ag : 1));
+		//            //                                                                        // Potenzprodukt der Randzone berechnen
+		//            bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, (agActivated ? ag : 1), sr, sr0, lambdaR, lambdaR0);
+		//            //                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
+		//            khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
+		//            qRz = en1264.WaermestromDichteRohr(khRz, dThetaRz);                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
+		//        }
 
-				double tAz = EurovalProduct.GetTeilung(distance);                             // Teilung der Aufenthaltszone
-				double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, (agActivated ? ag : 1));
-				//                                                                            // Potenzprodukt der Aufenthaltszone berechnen
-				double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, (agActivated ? ag : 1), sr, sr0, lambdaR, lambdaR0);
-				//                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
-				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
-				double qAz = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
+		//        double tAz = EurovalProduct.GetTeilung(distance);                             // Teilung der Aufenthaltszone
+		//        double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, (agActivated ? ag : 1));
+		//        //                                                                            // Potenzprodukt der Aufenthaltszone berechnen
+		//        double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, (agActivated ? ag : 1), sr, sr0, lambdaR, lambdaR0);
+		//        //                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
+		//        double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
+		//        double qAz = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
 
-				double QFbk = aRz * qRz + aAz * qAz;                                          // gesamte in den Raum abgegebene Wärme
+		//        double QFbk = aRz * qRz + aAz * qAz;                                          // gesamte in den Raum abgegebene Wärme
 
-				this.plannedCoolLoad = -QFbk + this.plannedCoolLoadAnbindung;
-				this.plannedQCool = -QFbk / aGes;
-				this.plannedQCoolRim = -qRz;
-				this.plannedQCoolResidence = -qAz;
-				this.plannedQCoolU = -en1264.WaermeverlustUnten(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, EurovalProduct.rLambdaDecke, EurovalProduct.rLambdaPutz, this.plannedQCool, this.AssociatedRoom.RoomCoolTemperature, this.PlannedRoomTemperatureBelowCool);
-				//                                                                           // Kühlverlust nach unten berechnen
+		//        this.plannedCoolLoad = -QFbk + this.plannedCoolLoadAnbindung;
+		//        this.plannedQCool = -QFbk / aGes;
+		//        this.plannedQCoolRim = -qRz;
+		//        this.plannedQCoolResidence = -qAz;
+		//        this.plannedQCoolU = -en1264.WaermeverlustUnten(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, EurovalProduct.rLambdaDecke, EurovalProduct.rLambdaPutz, this.plannedQCool, this.AssociatedRoom.RoomCoolTemperature, this.PlannedRoomTemperatureBelowCool);
+		//        //                                                                           // Kühlverlust nach unten berechnen
 
-				// hydraulische Berechnung
-				double qH2o = (-this.plannedQCool - this.plannedQCoolU) * aGes;                                        // gesamte aufgenommene Leistung berechnen
-				double deltaT = thetaVrz - thetaRaz;                                          // gesamte Spreizung
-				this.plannedDeltaRhoCool = en1264.DruckverlustRohr(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, this.PlannedPipeLengthPerCircuit + vorlaufTotal + ruecklaufTotal);
-				//                                                                            // gesamten Druckverlust berechnen
-				this.plannedMhCool = en1264.Durchfluss(qH2o, EurovalProduct.c, deltaT);
-			}
-		}
+		//        // hydraulische Berechnung
+		//        double qH2o = (-this.plannedQCool - this.plannedQCoolU) * aGes;                                        // gesamte aufgenommene Leistung berechnen
+		//        double deltaT = thetaVrz - thetaRaz;                                          // gesamte Spreizung
+		//        this.plannedDeltaRhoCool = en1264.DruckverlustRohr(qH2o, c, deltaT, rohrInnenA, rho, rohrInnenD, v, 0.000004, this.PlannedPipeLengthPerCircuit + vorlaufTotal + ruecklaufTotal);
+		//        //                                                                            // gesamten Druckverlust berechnen
+		//        this.plannedMhCool = en1264.Durchfluss(qH2o, EurovalProduct.c, deltaT);
+		//    }
+		//}
 
 		private bool CheckHardParameters(double floorTempHeatRim, double floorTempHeatRes, double pressureLossHeat,
 			double floorTempCoolRim, double floorTempCoolRes, double pressureLossCool, 
@@ -1250,7 +1340,264 @@ namespace Europlan.Common {
 				return false;
 			}
 
-			this.plannedRemoveArea = 0;
+			if (this.plannedProductIsConnection) {
+				this.plannedLayDistance = null;
+				this.plannedRimType = null;
+				this.circuits.Clear();
+				errorMsg = null;
+				return true;
+			}
+
+			double areaRemovedDueConnection = 0;
+			double heatLoadRemovedDueConnection = 0;
+			double coolLoadRemovedDueConnection = 0;
+			List<ConnectionPipe> connectionPipes = new List<ConnectionPipe>();
+			foreach (Floor f in Project.Instance.Floors) {
+				foreach (Room r in f.Rooms) {
+					foreach (PlannedProduct pp in r.PlannedProducts) {
+						foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
+							if (cp != null && cp.ConnectionThrough != null && cp.ConnectionThrough.Product == this) {
+								connectionPipes.Add(cp);
+								areaRemovedDueConnection += cp.AreaTotal;
+								heatLoadRemovedDueConnection += cp.HeatLoadTotal;
+								coolLoadRemovedDueConnection += cp.CoolLoadTotal;
+							}
+						}
+					}
+				}
+			}
+
+			// determine laydistance/rimtype combinations to calculate
+			Dictionary<LayDistance, Nullable<RimType>[]> teilungen = new Dictionary<LayDistance, RimType?[]>();
+			if (this.plannedRimLength > 0) {
+				teilungen.Add(LayDistance.EV35, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
+				teilungen.Add(LayDistance.EV30, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
+				teilungen.Add(LayDistance.EV25, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
+				teilungen.Add(LayDistance.EV20, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
+				teilungen.Add(LayDistance.EV15, new Nullable<RimType>[] { RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
+				teilungen.Add(LayDistance.EV10, new Nullable<RimType>[] { RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
+				teilungen.Add(LayDistance.EV5, new Nullable<RimType>[] { RimType.EV5_40 });
+			} else {
+				teilungen.Add(LayDistance.EV35, new Nullable<RimType>[] { null });
+				teilungen.Add(LayDistance.EV30, new Nullable<RimType>[] { null });
+				teilungen.Add(LayDistance.EV25, new Nullable<RimType>[] { null });
+				teilungen.Add(LayDistance.EV20, new Nullable<RimType>[] { null });
+				teilungen.Add(LayDistance.EV15, new Nullable<RimType>[] { null });
+				teilungen.Add(LayDistance.EV10, new Nullable<RimType>[] { null });
+				teilungen.Add(LayDistance.EV5, new Nullable<RimType>[] { null });
+			}
+			if (this.requestedLayDistance != null) {
+				LayDistance[] distances = new LayDistance[teilungen.Keys.Count];
+				teilungen.Keys.CopyTo(distances, 0);
+				foreach (LayDistance distance in distances) {
+					if (distance != this.requestedLayDistance) {
+						teilungen.Remove(distance);
+					}
+				}
+			}
+			if (this.requestedRimType != null) {
+				LayDistance[] distances = new LayDistance[teilungen.Keys.Count];
+				teilungen.Keys.CopyTo(distances, 0);
+				foreach (LayDistance distance in distances) {
+					teilungen[distance] = new Nullable<RimType>[] { this.requestedRimType };
+				}
+			}
+
+			// Get Vorlauf and Ruecklauf of the defined connection pipes
+			double vorlaufTotalFirst = 0;
+			double vorlaufNotIsolatedFirst = 0;
+			double ruecklaufTotalFirst = 0;
+			double ruecklaufNotIsolatedFirst = 0;
+			double vorlaufTotalOthers = 0;
+			double vorlaufNotIsolatedOthers = 0;
+			double ruecklaufTotalOthers = 0;
+			double ruecklaufNotIsolatedOthers = 0;
+			foreach (ConnectionPipe cp in this.PlannedConnectionPipes) {
+				vorlaufTotalFirst += cp.Vorlauf;
+				ruecklaufTotalFirst += cp.Ruecklauf;
+				if (cp.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) {
+					vorlaufNotIsolatedFirst += cp.Vorlauf;
+				}
+				if (cp.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
+					ruecklaufNotIsolatedFirst += cp.Ruecklauf;
+				}
+				if (!cp.OnlyFirst) {
+					vorlaufTotalOthers += cp.Vorlauf;
+					ruecklaufTotalOthers += cp.Ruecklauf;
+					if (cp.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) {
+						vorlaufNotIsolatedOthers += cp.Vorlauf;
+					}
+					if (cp.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
+						ruecklaufNotIsolatedOthers += cp.Ruecklauf;
+					}
+				}
+			}
+
+			// add connected products to Vorlauf and Ruecklauf
+			double[] vorlaufTotal = new double[] { vorlaufTotalFirst, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers };
+			double[] vorlaufNotIsolated = new double[] { vorlaufNotIsolatedFirst, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers };
+			double[] ruecklaufTotal = new double[] { ruecklaufTotalFirst, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers };
+			double[] ruecklaufNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };
+
+			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
+				if (kvp.Value != null) {
+					if (kvp.Value.type == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
+						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithAllConnections;
+						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithUnisolatedConnections;
+					} else {
+						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithAllConnections;
+						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithUnisolatedConnections;
+					}
+				}
+			}
+
+			double longestVorlaufTotal = vorlaufTotal[0];
+			double longestRuecklaufTotal = ruecklaufTotal[0];
+			for (int i = 1; i < 12; i++) {
+				if (vorlaufTotal[i] > longestVorlaufTotal) {
+					longestVorlaufTotal = vorlaufTotal[i];
+				}
+				if (ruecklaufTotal[i] > longestRuecklaufTotal) {
+					longestRuecklaufTotal = ruecklaufTotal[i];
+				}
+			}
+
+			Nullable<LayDistance> bestLaydistance = null;
+			Nullable<RimType> bestRimType = null;
+			int bestCircuits = int.MaxValue;
+			double bestPipeLength = double.MaxValue;
+			double bestFloorTempRimHeat = double.MaxValue;
+			double bestFloorTempResidenceHeat = double.MaxValue;
+			double bestPressureLossHeat = double.MaxValue;
+			double bestFloorTempRimCool = double.MaxValue;
+			double bestFloorTempResidenceCool = double.MaxValue;
+			double bestPressureLossCool = double.MaxValue;
+			double bestHeatLoad = 0;
+			double bestCoolLoad = 0;
+
+			foreach (LayDistance ld in teilungen.Keys) {
+				foreach (Nullable<RimType> rt in teilungen[ld]) {
+					bool tryCalc = true;
+					int circuitCount = 1;
+					if (this.requestedCircuits.HasValue) {
+						circuitCount = this.requestedCircuits.Value;
+					} else {
+						circuitCount = (int)Math.Ceiling((this.plannedArea - this.plannedAreaReduced / 2 - this.plannedAreaUnheated - areaRemovedDueConnection) * EurovalProduct.GetPipeLengthPerSqm(ld) / (100 - longestVorlaufTotal - longestRuecklaufTotal));
+					}
+					circuitCount = circuitCount < 1 ? 1 : circuitCount;
+					while (tryCalc) {
+						if (this.circuits.Count > circuitCount) {
+							// TODO check if other products are connected to the circuits that are removed
+							this.circuits.RemoveRange(circuitCount, this.circuits.Count - circuitCount);
+						}
+						while (this.circuits.Count < circuitCount) {
+							this.circuits.Add(new EurovalCircuit());
+						}
+						int i = 0;
+						foreach (EurovalCircuit ec in this.circuits) {
+							ec.EurovalProduct = this;
+							ec.NrOfCircuit = i;
+							ec.AreaTotal = this.plannedArea / circuitCount;
+							ec.AreaReduced = this.plannedAreaReduced / circuitCount;
+							ec.AreaUnheated = this.plannedAreaUnheated / circuitCount;
+							ec.AreaRemovedDueConnection = areaRemovedDueConnection / circuitCount;
+							ec.RimLength = this.plannedRimLength / circuitCount;
+							ec.RimCorners = ((double)this.plannedRimCorners) / circuitCount;
+							ec.VorlaufTotal = vorlaufTotal[i];
+							ec.VorlaufNotIsolated = vorlaufNotIsolated[i];
+							ec.RuecklaufTotal = ruecklaufNotIsolated[i];
+							ec.RuecklaufNotIsolated = ruecklaufNotIsolated[i];
+							ec.Calculate(ld, rt);
+							i++;
+						}
+						tryCalc = false;
+						if (this.PlannedDeltaRhoHeat > EurovalProduct.ConfigMaxPressureLost) {
+							tryCalc = true;
+						}
+						if (this.PlannedDeltaRhoCool > EurovalProduct.ConfigMaxPressureLost) {
+							tryCalc = true;
+						}
+						if (this.PlannedMhHeat > EurovalProduct.ConfigMaxDurchfluss) {
+							tryCalc = true;
+						}
+						if (this.PlannedMhCool > EurovalProduct.ConfigMaxDurchfluss) {
+							tryCalc = true;
+						}
+						tryCalc = tryCalc && !this.requestedCircuits.HasValue;
+						tryCalc = tryCalc && circuitCount < 12;
+						if (tryCalc) {
+							circuitCount++;
+						}
+					}
+					bool useNew = !bestLaydistance.HasValue ||
+						this.CompareParameters(bestFloorTempRimHeat, bestFloorTempResidenceHeat, bestHeatLoad, bestPressureLossHeat,
+							bestFloorTempRimCool, bestFloorTempResidenceCool, bestCoolLoad, bestPressureLossCool,
+							bestPipeLength,
+							this.PlannedFloorTemperatureHeatRim, this.PlannedFloorTemperatureHeatResidence, this.PlannedHeatLoad, this.PlannedDeltaRhoHeat,
+							this.PlannedFloorTemperatureCoolRim, this.PlannedFloorTemperatureCoolResidence, this.PlannedCoolLoad, this.PlannedDeltaRhoCool,
+							this.PlannedPipeLengthPerCircuit,
+							requestedHeatLoad - this.PlannedHeatLoadAnbindung, requestedCoolLoad - this.PlannedCoolLoadAnbindung, calculateHeat, calculateCool, this.requestedLayDistance.HasValue, this.requestedRimType.HasValue, this.requestedCircuits.HasValue);
+					if (useNew) {
+						bestLaydistance = ld;
+						bestRimType = rt;
+						bestCircuits = circuitCount;
+						bestPipeLength = this.PlannedPipeLengthPerCircuit;
+						bestFloorTempRimHeat = this.PlannedFloorTemperatureHeatRim;
+						bestFloorTempResidenceHeat = this.PlannedFloorTemperatureHeatResidence;
+						bestHeatLoad = this.PlannedHeatLoad;
+						bestPressureLossHeat = this.PlannedDeltaRhoHeat;
+						bestFloorTempRimCool = this.PlannedFloorTemperatureCoolRim;
+						bestFloorTempResidenceCool = this.PlannedFloorTemperatureCoolResidence;
+						bestCoolLoad = this.PlannedCoolLoad;
+						bestPressureLossCool = this.PlannedDeltaRhoCool;
+					}
+				}
+			}
+
+			if (!bestLaydistance.HasValue) {
+				if (this.requestedCircuits.HasValue) {
+					// TODO reset circuits
+				} else {
+					this.circuits.Clear();
+				}
+				errorMsg = "Keine Automatische Auslegung möglich";
+				return false;
+			}
+
+			{ // calculate best choice again
+				this.plannedLayDistance = bestLaydistance;
+				this.plannedRimType = bestRimType;
+				if (this.circuits.Count > bestCircuits) {
+					// TODO check if other products are connected to the circuits that are removed
+					this.circuits.RemoveRange(bestCircuits, this.circuits.Count - bestCircuits);
+				}
+				while (this.circuits.Count < bestCircuits) {
+					this.circuits.Add(new EurovalCircuit());
+				}
+				int i = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					ec.EurovalProduct = this;
+					ec.NrOfCircuit = i;
+					ec.AreaTotal = this.plannedArea / bestCircuits;
+					ec.AreaReduced = this.plannedAreaReduced / bestCircuits;
+					ec.AreaUnheated = this.plannedAreaUnheated / bestCircuits;
+					ec.AreaRemovedDueConnection = areaRemovedDueConnection / bestCircuits;
+					ec.RimLength = this.plannedRimLength / bestCircuits;
+					ec.RimCorners = ((double)this.plannedRimCorners) / bestCircuits;
+					ec.VorlaufTotal = vorlaufTotal[i];
+					ec.VorlaufNotIsolated = vorlaufNotIsolated[i];
+					ec.RuecklaufTotal = ruecklaufNotIsolated[i];
+					ec.RuecklaufNotIsolated = ruecklaufNotIsolated[i];
+					ec.Calculate(bestLaydistance.Value, bestRimType);
+					i++;
+				}
+			}
+
+			errorMsg = null;
+			return true;
+
+
+			/*this.plannedRemoveArea = 0;
 			this.plannedHeatLoadAnbindung = 0;
 			this.plannedCoolLoadAnbindung = 0;
 			List<ConnectionPipe> connectionPipes = new List<ConnectionPipe>();
@@ -1437,7 +1784,7 @@ namespace Europlan.Common {
 			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264)) {
 				errorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "°C)";
 			}
-			return true;
+			return true;*/
 		}
 	}
 	

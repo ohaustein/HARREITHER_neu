@@ -126,12 +126,14 @@
     <Compile Include="Licensing\LicensedSystem.cs" />
     <Compile Include="Licensing\LicenseManager.cs" />
     <Compile Include="MapiMailMessage.cs" />
+    <Compile Include="Products\Circuit.cs" />
     <Compile Include="Products\ConnectionPipePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\EurovalCircuit.cs" />
     <Compile Include="Products\KlimaFlaechenModul.cs" />
     <Compile Include="Products\ProductNameAttribute.cs" />
     <Compile Include="Products\HithermCompactRoofProduct.cs" />

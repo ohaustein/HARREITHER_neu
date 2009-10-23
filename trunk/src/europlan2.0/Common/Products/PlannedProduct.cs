@@ -145,7 +145,7 @@ namespace Europlan.Common {
 					}
 					return Math.Round(-heatLoad, 0);
 				} else {
-					return Math.Round(plannedProduct.PlannedHeatLoad, 0);
+					return Math.Round(plannedProduct.PlannedHeatLoadIncludingConnectionsThrough, 0);
 				}
 			}
 		}
@@ -171,7 +171,7 @@ namespace Europlan.Common {
 					}
 					return Math.Round(-coolLoad, 0);
 				} else {
-					return Math.Round(plannedProduct.PlannedCoolLoad, 0);
+					return Math.Round(plannedProduct.PlannedCoolLoadIncludingConnectionsThrough, 0);
 				}
 			}
 		}
