@@ -296,7 +296,9 @@ namespace Europlan.Common {
 					foreach (Room r in f.Rooms) {
 						foreach (PlannedProduct pp in r.PlannedProducts) {
 							foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
-								return pp;
+								if (cp == this) {
+									return pp;
+								}
 							}
 						}
 					}
