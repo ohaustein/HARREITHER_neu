@@ -232,17 +232,17 @@ namespace Europlan.Common {
 		[System.Xml.Serialization.XmlIgnore]
 		public float RequestedHeatLoadPercentage {
 			get {
-				if (this.coverHeatLoad) {
-					return 100;
-				}
-				if (this.NecessaryHeatLoad == 0) {
+				if (this.Product.AssociatedRoom.HeatLoad == 0) {
 					return 0;
 				}
-				return (float)Math.Round(this.requestedHeatLoad * 100 / this.NecessaryHeatLoad, 1);
+				if (this.coverHeatLoad) {
+					return (float)this.NecessaryHeatLoad * 100 / this.Product.AssociatedRoom.HeatLoad;
+				}
+				return (float)Math.Round(this.requestedHeatLoad * 100 / this.Product.AssociatedRoom.HeatLoad, 1);
 			}
 			set {
-				if (this.NecessaryHeatLoad != 0) {
-					this.requestedHeatLoad = this.NecessaryHeatLoad * value / 100;
+				if (this.Product.AssociatedRoom.HeatLoad != 0) {
+					this.requestedHeatLoad = this.Product.AssociatedRoom.HeatLoad * value / 100;
 				}
 			}
 		}
@@ -250,13 +250,13 @@ namespace Europlan.Common {
 		[System.Xml.Serialization.XmlIgnore]
 		public float RequestedCoolLoadPercentage {
 			get {
-				if (this.coverCoolLoad) {
-					return 100;
-				}
-				if (this.NecessaryCoolLoad == 0) {
+				if (this.Product.AssociatedRoom.CoolLoad == 0) {
 					return 0;
 				}
-				return (float)(this.requestedCoolLoad * 100 / this.NecessaryCoolLoad);
+				if (this.coverCoolLoad) {
+					return (float)this.NecessaryCoolLoad * 100 / this.Product.AssociatedRoom.CoolLoad;
+				}
+				return (float)(this.requestedCoolLoad * 100 / this.Product.AssociatedRoom.CoolLoad);
 			}
 			set {
 				if (this.NecessaryCoolLoad != 0) {
@@ -344,6 +344,36 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double coolLoad = this.plannedProduct.AssociatedRoom.NormalizedCoolLoad;
+				bool selfFound = false;
+				foreach (PlannedProduct product in this.plannedProduct.AssociatedRoom.PlannedProducts) {
+					if (product != this) {
+						//heatLoad -= product.Product.PlannedHeatLoad;
+						if (product.CoverCoolLoad) {
+							if (!selfFound) {
+								coolLoad = 0;
+								break;
+							}
+						} else {
+							coolLoad -= product.RequestedCoolLoad;
+						}
+					} else {
+						//break;
+						selfFound = true;
+					}
+				}
+				if (coolLoad < 0) {
+					coolLoad = 0;
+				}
+				return coolLoad;
+			}
+		}
+
+		/*public double NecessaryCoolLoad {
+			get {
+				if (this.plannedProduct.AssociatedRoom == null) {
+					return 0;
+				}
+				double coolLoad = this.plannedProduct.AssociatedRoom.NormalizedCoolLoad;
 				foreach (PlannedProduct product in this.plannedProduct.AssociatedRoom.PlannedProducts) {
 					if (product != this) {
 						coolLoad -= product.Product.PlannedCoolLoad;
@@ -354,7 +384,7 @@ namespace Europlan.Common {
 				}
 				return coolLoad;
 			}
-		}
+		}*/
 
 		public void ConfigureProductDefault() {
 			this.requestedCoolLoad = this.NecessaryCoolLoad;

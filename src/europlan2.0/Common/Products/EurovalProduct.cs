@@ -687,8 +687,10 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public float PlannedFloorAreaPercentage {
-			get { return (this.AvailableFloorArea <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AvailableFloorArea); }
-			set { this.PlannedFloorArea = (float)(this.AvailableFloorArea * value / 100); }
+			/*get { return (this.AvailableFloorArea <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AvailableFloorArea); }
+			set { this.PlannedFloorArea = (float)(this.AvailableFloorArea * value / 100); }*/
+			get { return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AssociatedRoom.Area); }
+			set { this.PlannedFloorArea = (float)(this.AssociatedRoom.Area * value / 100); }
 		}
 
 		public bool PlannedProductIsConnection {
@@ -1373,10 +1375,10 @@ namespace Europlan.Common {
 				teilungen.Add(LayDistance.EV35, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
 				teilungen.Add(LayDistance.EV30, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
 				teilungen.Add(LayDistance.EV25, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
-				teilungen.Add(LayDistance.EV20, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
-				teilungen.Add(LayDistance.EV15, new Nullable<RimType>[] { RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
-				teilungen.Add(LayDistance.EV10, new Nullable<RimType>[] { RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
-				teilungen.Add(LayDistance.EV5, new Nullable<RimType>[] { RimType.EV5_40 });
+				teilungen.Add(LayDistance.EV20, new Nullable<RimType>[] { RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
+				teilungen.Add(LayDistance.EV15, new Nullable<RimType>[] { RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
+				teilungen.Add(LayDistance.EV10, new Nullable<RimType>[] { null });
+				teilungen.Add(LayDistance.EV5, new Nullable<RimType>[] { null });
 			} else {
 				teilungen.Add(LayDistance.EV35, new Nullable<RimType>[] { null });
 				teilungen.Add(LayDistance.EV30, new Nullable<RimType>[] { null });
