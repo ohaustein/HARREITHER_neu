@@ -212,9 +212,7 @@ namespace Europlan.Common {
 				foreach (Floor f in Project.Instance.Floors) {
 					if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
 						foreach (Room r in f.Rooms) {
-							if (!this.product.Product.AssociatedRoom.Equals(r)) {
-								rooms.Add(r);
-							}
+							rooms.Add(r);
 						}
 					}
 				}
@@ -234,7 +232,9 @@ namespace Europlan.Common {
 				// product items
 				if (r != null) {
 					foreach (PlannedProduct p in r.PlannedProducts) {
-						products.Add(p);
+						if (this.product != p) {
+							products.Add(p);
+						}
 					}
 
 					SelectPlannedProduct form = new SelectPlannedProduct(products);
