@@ -315,7 +315,7 @@ namespace Europlan.Common {
 				}
 				PlannedProduct connectionOf = this.ConnectionOf;
 				if (connectionOf != null) {
-					return connectionOf.Product.PlannedCircuits;
+					return connectionOf.Product.PlannedCircuitCount;
 				}
 				return 0;
 			}
@@ -475,7 +475,7 @@ namespace Europlan.Common {
 				double distributorSpreizung = distributorTempOut - distributorTempIn;
 
 				double value = 0;
-				for (int i = 0; i < originalProduct.Product.PlannedCircuits; i++) {
+				for (int i = 0; i < originalProduct.Product.PlannedCircuitCount; i++) {
 
 					double totalPipeLength = originalProduct.Product.GetCircuit(i).PipeLengthWithoutConnections;
 					double pipeBeforeVorlauf = 0;
@@ -629,7 +629,7 @@ namespace Europlan.Common {
 				double distributorSpreizung = distributorTempOut - distributorTempIn;
 
 				double value = 0;
-				for (int i = 0; i < originalProduct.Product.PlannedCircuits; i++) {
+				for (int i = 0; i < originalProduct.Product.PlannedCircuitCount; i++) {
 
 					double totalPipeLength = originalProduct.Product.GetCircuit(i).PipeLengthWithoutConnections;
 					double pipeBeforeVorlauf = 0;

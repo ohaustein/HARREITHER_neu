@@ -25,11 +25,24 @@ namespace Europlan.Common {
 				distributorNodes[i] = new TreeNode(d.Id + ": " + d.Name);
 				distributorNodes[i].Tag = d;
 				this.nodes.Add(d, distributorNodes[i]);
-				foreach (PlannedProduct p in d.PlannedConnectedProducts) {
-					TreeNode node = new TreeNode(p.Node.Text + " in Raum " + p.Product.AssociatedRoom.ToString());
-					node.Tag = p;
-					//distributorNodes[i].Nodes.Add(node);
-				}
+				/*foreach (PlannedProduct p in d.PlannedConnectedProducts) {
+					if (p.Product.PlannedCircuits == null) {
+						TreeNode node = new TreeNode(p.Node.Text + " in Raum " + p.Product.AssociatedRoom.ToString());
+						node.Tag = p;
+						distributorNodes[i].Nodes.Add(node);
+					} else {
+						int j = 0;
+						foreach (Circuit c in p.Product.PlannedCircuits) {
+							string label = p.Node.Text + "/" + j.ToString() + " in Raum " + p.Product.AssociatedRoom.ToString();
+							Circuit.CircuitConnection cc = p.Product.GetCircuitConnected(j);
+							if (cc != null) {
+								label += ", " + cc.otherCircuit.PlannedProduct.Node.Text + "/" + cc.otherCircuit.PlannedProduct.Product.GetIndexOfCircuit(cc.otherCircuit) + " in Raum " + cc.otherCircuit.PlannedProduct.Product.AssociatedRoom.ToString();
+							}
+							j++;
+							TreeNode node = new TreeNode(label);
+						}
+					}
+				}*/
 				i++;
 			}
 			rootNode = new TreeNode("Projekt", distributorNodes);

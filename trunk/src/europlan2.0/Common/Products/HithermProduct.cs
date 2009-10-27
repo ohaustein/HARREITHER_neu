@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 
@@ -97,13 +98,22 @@ namespace Europlan.Common {
 			get { return 0; }
 		}
 
-		public override int PlannedCircuits {
+		public override int PlannedCircuitCount {
 			get { return 0; }
+		}
+
+		[XmlIgnore]
+		public override List<Circuit> PlannedCircuits {
+			get { return null; }
 		}
 
 		public override Circuit GetCircuit(int index) {
 			return null;
 		}
+
+		/*public override int GetIndexOfCircuit(Circuit c) {
+			return -1;
+		}*/
 
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
 			get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
