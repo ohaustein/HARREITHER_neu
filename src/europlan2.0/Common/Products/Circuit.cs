@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml.Serialization;
 
 namespace Europlan.Common {
+	[XmlInclude(typeof(EurovalCircuit))]
 	public abstract class Circuit {
 
 		public enum CircuitConnectionTypeEnum {
@@ -23,9 +24,14 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public abstract Product Product {
+		public abstract PlannedProduct PlannedProduct {
 			get;
 		}
+
+		/*public abstract string PlannedProductId {
+			get;
+			set;
+		}*/
 
 		protected bool corrections = false;
 		public bool Corrections {
@@ -41,33 +47,37 @@ namespace Europlan.Common {
 		}
 
 
-
+		[XmlIgnore]
 		public abstract double PipeLengthWithAllConnections {
 			get;
 		}
 
+		[XmlIgnore]
 		public abstract double PipeLengthWithUnisolatedConnections {
 			get;
 		}
 
+		[XmlIgnore]
 		public abstract double PipeLengthWithoutConnections {
 			get;
 		}
 
+		[XmlIgnore]
 		public double PipeLengthVorlauf {
 			get {
 				double value = 0;
-				foreach (ConnectionPipe cp in this.Product.PlannedConnectionPipes) {
+				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 					value += cp.Vorlauf;
 				}
 				return value;
 			}
 		}
 
+		[XmlIgnore]
 		public double PipeLengthVorlaufNotIsolated {
 			get {
 				double value = 0;
-				foreach (ConnectionPipe cp in this.Product.PlannedConnectionPipes) {
+				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 					if (cp.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) {
 						value += cp.Vorlauf;
 					}
@@ -76,20 +86,22 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public double PipeLengthRuecklauf {
 			get {
 				double value = 0;
-				foreach (ConnectionPipe cp in this.Product.PlannedConnectionPipes) {
+				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 					value += cp.Ruecklauf;
 				}
 				return value;
 			}
 		}
 
+		[XmlIgnore]
 		public double PipeLengthRuecklaufNotIsolated {
 			get {
 				double value = 0;
-				foreach (ConnectionPipe cp in this.Product.PlannedConnectionPipes) {
+				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 					if (cp.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
 						value += cp.Ruecklauf;
 					}

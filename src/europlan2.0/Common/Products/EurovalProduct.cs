@@ -44,7 +44,7 @@ namespace Europlan.Common {
 		private static double spreizungHeizMin = 4;
 		private static double spreizungHeizMax = 12;
 		private static double spreizungKühlMin = 2;
-		private static double spreizungKühlMax = 6;
+		private static double spreizungKühlMax = 5;
 
 		protected float plannedArea = 0;
 		private float plannedAreaReduced = 0;
@@ -69,11 +69,38 @@ namespace Europlan.Common {
 
 		private List<EurovalCircuit> circuits = new List<EurovalCircuit>();
 
+		[XmlIgnore]
+		public override List<Circuit> PlannedCircuits {
+			get {
+				List<Circuit> rtn = new List<Circuit>();
+				foreach (EurovalCircuit ec in this.circuits) {
+					rtn.Add(ec);
+				}
+				return rtn;
+			}
+		}
+
 		public override Circuit GetCircuit(int index) {
 			if (index < this.circuits.Count) {
 				return this.circuits[index];
 			}
 			return null;
+		}
+
+		/*public override int GetIndexOfCircuit(Circuit c) {
+			int i = 0;
+			foreach (EurovalCircuit ec in this.circuits) {
+				if (ec == c) {
+					return i;
+				}
+				i++;
+			}
+			return -1;
+		}*/
+
+		public List<EurovalCircuit> PlannedEurovalCircuits {
+			get { return this.circuits; }
+			set { this.circuits = value; }
 		}
 
 		private bool clipSchiene = false;
@@ -125,7 +152,7 @@ namespace Europlan.Common {
 			spreizungHeizMin = 4;
 			spreizungHeizMax = 12;
 			spreizungKühlMin = 2;
-			spreizungKühlMax = 6;
+			spreizungKühlMax = 5;
 		}
 
 		public override Product Clone(Room room) {
@@ -1047,7 +1074,51 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override int PlannedCircuits {
+		[XmlIgnore]
+		public double LongestPipeLengthPerCircuitWithAllConnections {
+			get {
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.PipeLengthWithAllConnections > value) {
+						value = ec.PipeLengthWithAllConnections;
+					}
+				}
+				return value;
+			}
+		}
+
+		[XmlIgnore]
+		public double PipeLengthWithoutConnectionsOfLongestPipeWithConnections {
+			get {
+				double longest = 0;
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.PipeLengthWithAllConnections > longest) {
+						longest = ec.PipeLengthWithAllConnections;
+						value = ec.PipeLengthWithoutConnections;
+					}
+				}
+				return value;
+			}
+		}
+
+		[XmlIgnore]
+		public double ConnectionLengthOfLongestPipeWithConnections {
+			get {
+				double longest = 0;
+				double value = 0;
+				foreach (EurovalCircuit ec in this.circuits) {
+					if (ec.PipeLengthWithAllConnections > longest) {
+						longest = ec.PipeLengthWithAllConnections;
+						value = ec.PipeLengthWithAllConnections - ec.PipeLengthWithoutConnections;
+					}
+				}
+				return value;
+			}
+		}
+
+		[XmlIgnore]
+		public override int PlannedCircuitCount {
 			get { return this.circuits.Count; }
 		}
 		#endregion Auslegung calculated values
@@ -1595,7 +1666,38 @@ namespace Europlan.Common {
 				}
 			}
 
-			errorMsg = null;
+			errorMsg = "";
+			if (this.LongestPipeLengthPerCircuitWithAllConnections > EurovalProduct.ConfigMaxCircuitLength) {
+				errorMsg += "Rohrlänge zu groß (" + Math.Round(this.PipeLengthWithoutConnectionsOfLongestPipeWithConnections, 1) + "m > " + Math.Round(EurovalProduct.ConfigMaxCircuitLength - this.ConnectionLengthOfLongestPipeWithConnections, 1) + "m)\n";
+			}
+			if (Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264)) {
+				errorMsg += "Oberflächentemperatur in der Aufenthaltszone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264), 1) + "°C)\n";
+			}
+			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264)) {
+				errorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "°C)\n";
+			}
+			if (this.PlannedMhHeat >= this.PlannedMhCool) {
+				if (Math.Round(this.PlannedMhHeat, 1) > EurovalProduct.ConfigMaxDurchfluss) {
+					errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				}
+			} else {
+				if (Math.Round(this.PlannedMhCool, 1) > EurovalProduct.ConfigMaxDurchfluss) {
+					errorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				}
+			}
+			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
+				if (Math.Round(this.PlannedDeltaRhoHeat, 1) > EurovalProduct.ConfigMaxPressureLost) {
+					errorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 1).ToString() + "mbar > " + EurovalProduct.ConfigMaxPressureLost.ToString() + "mbar)\n";
+				}
+			} else {
+				if (Math.Round(this.PlannedDeltaRhoCool, 1) > EurovalProduct.ConfigMaxPressureLost) {
+					errorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + EurovalProduct.ConfigMaxPressureLost.ToString() + "mbar)\n";
+				}
+			}
+			if (errorMsg.Length == 0) {
+				errorMsg = null;
+			}
+
 			return true;
 
 

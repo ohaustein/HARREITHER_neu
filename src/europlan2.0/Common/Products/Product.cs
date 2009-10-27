@@ -331,7 +331,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public abstract int PlannedCircuits {
+		public abstract int PlannedCircuitCount {
 			get; /*{ return this.plannedCircuits; }*/
 			/*set { this.plannedCircuits = value; }*/
 		}
@@ -378,7 +378,7 @@ namespace Europlan.Common {
 			set { this.plannedConnection = value; }
 		}
 
-		public SerializableDictionary<int, string> PlannedConnectedProducts {
+		public SerializableDictionary<int, string> PlannedConnectedProductIds {
 			get {
 				return null;
 				// TODO
@@ -388,10 +388,17 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public abstract List<Circuit> PlannedCircuits {
+			get;
+		}
+
+		//public abstract int GetIndexOfCircuit(Circuit c);
+
 		public abstract Circuit GetCircuit(int index);
 
 		[XmlIgnore]
-		public SerializableDictionary<int, PlannedProduct> PlannedConnectedProductIds {
+		public SerializableDictionary<int, PlannedProduct> PlannedConnectedProducts {
 			get { return this.plannedConnectedProducts; }
 		}
 

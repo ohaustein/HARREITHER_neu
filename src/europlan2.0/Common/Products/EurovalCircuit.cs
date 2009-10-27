@@ -5,53 +5,73 @@ using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	public class EurovalCircuit : Circuit {
-		private EurovalProduct product;
+		[XmlIgnore]
 		public EurovalProduct EurovalProduct {
-			get { return this.product; }
-			set { this.product = value; }
+			get { return this.PlannedProduct.Product as EurovalProduct; }
+			set {
+				foreach (Floor f in Project.Instance.Floors) {
+					foreach (Room r in f.Rooms) {
+						foreach (PlannedProduct pp in r.PlannedProducts) {
+							if (pp.Product == value) {
+								this.plannedProduct = pp;
+							}
+						}
+					}
+				}
+			}
 		}
 
+		private PlannedProduct plannedProduct = null;
 		[XmlIgnore]
-		public override Product Product {
-			get { return this.product; }
+		public override PlannedProduct PlannedProduct {
+			get {
+				return this.plannedProduct;
+			}
 		}
 
 		#region Area
 		private double areaTotal;
+		[XmlIgnore]
 		public double AreaTotal {
 			get { return this.areaTotal; }
 			set { this.areaTotal = value; }
 		}
 
 		private double areaUnheated;
+		[XmlIgnore]
 		public double AreaUnheated {
 			get { return this.areaUnheated; }
 			set { this.areaUnheated = value; }
 		}
 
 		private double areaReduced;
+		[XmlIgnore]
 		public double AreaReduced {
 			get { return this.areaReduced; }
 			set { this.areaReduced = value; }
 		}
 
 		private double areaRemovedDueConnection;
+		[XmlIgnore]
 		public double AreaRemovedDueConnection {
 			get { return this.areaRemovedDueConnection; }
 			set { this.areaRemovedDueConnection = value; }
 		}
 
+		[XmlIgnore]
 		public double AreaWithoutConnections {
 			get { return this.areaTotal - this.areaRemovedDueConnection; }
 		}
 
 		private double rimLength;
+		[XmlIgnore]
 		public double RimLength {
 			get { return this.rimLength; }
 			set { this.rimLength = value; }
 		}
 
 		private double rimCorners;
+		[XmlIgnore]
 		public double RimCorners {
 			get { return this.rimCorners; }
 			set { this.rimCorners = value; }
@@ -60,24 +80,28 @@ namespace Europlan.Common {
 
 		#region Anbindung
 		private double vorlaufTotal;
+		[XmlIgnore]
 		public double VorlaufTotal {
 			get { return this.vorlaufTotal; }
 			set { this.vorlaufTotal = value; }
 		}
 
 		private double vorlaufNotIsolated;
+		[XmlIgnore]
 		public double VorlaufNotIsolated {
 			get { return this.vorlaufNotIsolated; }
 			set { this.vorlaufNotIsolated = value; }
 		}
 
 		private double ruecklaufTotal;
+		[XmlIgnore]
 		public double RuecklaufTotal {
 			get { return this.ruecklaufTotal; }
 			set { this.ruecklaufTotal = value; }
 		}
 
 		private double ruecklaufNotIsolated;
+		[XmlIgnore]
 		public double RuecklaufNotIsolated {
 			get { return this.ruecklaufNotIsolated; }
 			set { this.ruecklaufNotIsolated = value; }
@@ -97,41 +121,49 @@ namespace Europlan.Common {
 		private double c_qRzCoolPerSqm;
 
 		private double c_floorTempAzHeat;
+		[XmlIgnore]
 		public double C_FloorTempAzHeat {
 			get { return this.c_floorTempAzHeat; }
 		}
 
 		private double c_floorTempRzHeat;
+		[XmlIgnore]
 		public double C_FloorTempRzHeat {
 			get { return this.c_floorTempRzHeat; }
 		}
 
 		private double c_floorTempAzCool;
+		[XmlIgnore]
 		public double C_FloorTempAzCool {
 			get { return this.c_floorTempAzCool; }
 		}
 
 		private double c_floorTempRzCool;
+		[XmlIgnore]
 		public double C_FloorTempRzCool {
 			get { return this.c_floorTempRzCool; }
 		}
 
 		private double c_druckverlustHeat;
+		[XmlIgnore]
 		public double C_DruckverlustHeat {
 			get { return this.c_druckverlustHeat; }
 		}
 
 		private double c_durchflussHeat;
+		[XmlIgnore]
 		public double C_DurchflussHeat {
 			get { return this.c_durchflussHeat; }
 		}
 
 		private double c_druckverlustCool;
+		[XmlIgnore]
 		public double C_DruckverlustCool {
 			get { return this.c_druckverlustCool; }
 		}
 
 		private double c_durchflussCool;
+		[XmlIgnore]
 		public double C_DurchflussCool {
 			get { return this.c_durchflussCool; }
 		}
@@ -148,38 +180,47 @@ namespace Europlan.Common {
 
 
 
+		[XmlIgnore]
 		public override double PipeLengthWithoutConnections {
 			get { return this.c_pipeLengthAz + this.c_pipeLengthRz; }
 		}
 
+		[XmlIgnore]
 		public override double PipeLengthWithAllConnections {
 			get { return this.PipeLengthWithoutConnections + this.vorlaufTotal + this.ruecklaufTotal; }
 		}
 
+		[XmlIgnore]
 		public override double PipeLengthWithUnisolatedConnections {
 			get { return this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated; }
 		}
 
+		[XmlIgnore]
 		public double QAzHeat {
 			get { return this.c_qAzHeatPerSqm * this.c_areaAz; }
 		}
 
+		[XmlIgnore]
 		public double QRzHeat {
 			get { return this.c_qRzHeatPerSqm * this.c_areaRz; }
 		}
 
+		[XmlIgnore]
 		public double QAzCool {
 			get { return -this.c_qAzCoolPerSqm * this.c_areaAz; }
 		}
 
+		[XmlIgnore]
 		public double QRzCool {
 			get { return -this.c_qRzCoolPerSqm * this.c_areaRz; }
 		}
 
+		[XmlIgnore]
 		public double QFbhTotalHeat {
 			get { return this.QAzHeat + this.QRzHeat; }
 		}
 
+		[XmlIgnore]
 		public double QFbhTotalCool {
 			get { return this.QAzCool + this.QRzCool; }
 		}

@@ -334,8 +334,8 @@ namespace Europlan.Common {
 					this.chkCoverCoolLoad.Enabled = false;
 					this.chkCoverCoolLoad.Checked = false;
 				}
-				this.lblHeatLoadTotal.Text = "(" + Math.Round(this.product.NecessaryHeatLoad, 2) + " W)";
-				this.lblCoolLoadTotal.Text = "(" + Math.Round(this.product.NecessaryCoolLoad, 2) + " W)";
+				this.lblHeatLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.HeatLoad.ToString() + " W)";
+				this.lblCoolLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.CoolLoad.ToString() + " W)";
 				float plannedArea = (float)(this.product.PlannedArea.HasValue ? Math.Round(this.product.PlannedArea.Value, 2) : 0);
 				if ((skipFields & FieldEnum.AREA) == FieldEnum.NONE) {
 					this.numArea.Value = Math.Round((decimal)plannedArea, 2);
@@ -520,8 +520,8 @@ namespace Europlan.Common {
 				this.lblConnectionQCool.Text = Math.Round(evProduct.PlannedCoolLoadAnbindung, 0).ToString();
 
 				// heizkreis
-				this.lblCircuitCountHeat.Text = evProduct.PlannedCircuits.ToString();
-				this.lblCircuitCountCool.Text = evProduct.PlannedCircuits.ToString();
+				this.lblCircuitCountHeat.Text = evProduct.PlannedCircuitCount.ToString();
+				this.lblCircuitCountCool.Text = evProduct.PlannedCircuitCount.ToString();
 				this.lblPipeLengthHeat.Text = Math.Round(evProduct.PlannedPipeLengthPerCircuit, 1).ToString();
 				this.lblPipeLengthCool.Text = Math.Round(evProduct.PlannedPipeLengthPerCircuit, 1).ToString();
 				this.lblMhHeat.Text = Math.Round(evProduct.PlannedMhHeat, 1).ToString();
