@@ -29,35 +29,54 @@ namespace Europlan.Common {
 			this.btnEurovalStandard = new System.Windows.Forms.Button();
 			this.label14 = new System.Windows.Forms.Label();
 			this.label15 = new System.Windows.Forms.Label();
+			this.numSpreizungKühlMax = new Europlan.Common.NumericBox();
 			this.label16 = new System.Windows.Forms.Label();
+			this.numSpreizungKühlMin = new Europlan.Common.NumericBox();
 			this.label17 = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
+			this.numSpreizungHeizMax = new Europlan.Common.NumericBox();
 			this.label11 = new System.Windows.Forms.Label();
+			this.numSpreizungHeizMin = new Europlan.Common.NumericBox();
 			this.label12 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
+			this.numEurovalDurchfluss = new Europlan.Common.NumericBox();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
+			this.numEurovalPressureMbar = new Europlan.Common.NumericBox();
 			this.label5 = new System.Windows.Forms.Label();
+			this.numEurovalPressurePa = new Europlan.Common.NumericBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
+			this.numCircuitLength = new Europlan.Common.NumericBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.rbEN1264 = new System.Windows.Forms.RadioButton();
+			this.rbEurovalEN1264 = new System.Windows.Forms.RadioButton();
 			this.label2 = new System.Windows.Forms.Label();
-			this.rbHarreitherNorm = new System.Windows.Forms.RadioButton();
+			this.rbEurovalHarreitherNorm = new System.Windows.Forms.RadioButton();
 			this.tabHitherm = new System.Windows.Forms.TabPage();
 			this.tabModulBoden = new System.Windows.Forms.TabPage();
+			this.numModulBodenMaxModulesInCircuit = new Europlan.Common.NumericBox();
+			this.label26 = new System.Windows.Forms.Label();
+			this.numModulBodenMaxModulesInParallel = new Europlan.Common.NumericBox();
+			this.label25 = new System.Windows.Forms.Label();
+			this.numModulBodenMaxModuleInRow = new Europlan.Common.NumericBox();
+			this.label24 = new System.Windows.Forms.Label();
+			this.label19 = new System.Windows.Forms.Label();
+			this.numModulBodenDurchfluss = new Europlan.Common.NumericBox();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label21 = new System.Windows.Forms.Label();
+			this.numModulBodenPressureMbar = new Europlan.Common.NumericBox();
+			this.label22 = new System.Windows.Forms.Label();
+			this.numModulBodenPressurePa = new Europlan.Common.NumericBox();
+			this.label23 = new System.Windows.Forms.Label();
+			this.btnModulBodenStandard = new System.Windows.Forms.Button();
+			this.rbModulBodenEN1264 = new System.Windows.Forms.RadioButton();
+			this.label18 = new System.Windows.Forms.Label();
+			this.rbModulBodenHarreitherNorm = new System.Windows.Forms.RadioButton();
 			this.tabModulDecke = new System.Windows.Forms.TabPage();
-			this.numSpreizungKühlMax = new Europlan.Common.NumericBox();
-			this.numSpreizungKühlMin = new Europlan.Common.NumericBox();
-			this.numSpreizungHeizMax = new Europlan.Common.NumericBox();
-			this.numSpreizungHeizMin = new Europlan.Common.NumericBox();
-			this.numDurchfluss = new Europlan.Common.NumericBox();
-			this.numPressureMbar = new Europlan.Common.NumericBox();
-			this.numPressurePa = new Europlan.Common.NumericBox();
-			this.numCircuitLength = new Europlan.Common.NumericBox();
 			this.tabSystemParameters.SuspendLayout();
 			this.tabEuroval.SuspendLayout();
+			this.tabModulBoden.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -102,19 +121,19 @@ namespace Europlan.Common {
 			this.tabEuroval.Controls.Add(this.numSpreizungHeizMin);
 			this.tabEuroval.Controls.Add(this.label12);
 			this.tabEuroval.Controls.Add(this.label8);
-			this.tabEuroval.Controls.Add(this.numDurchfluss);
+			this.tabEuroval.Controls.Add(this.numEurovalDurchfluss);
 			this.tabEuroval.Controls.Add(this.label9);
 			this.tabEuroval.Controls.Add(this.label7);
-			this.tabEuroval.Controls.Add(this.numPressureMbar);
+			this.tabEuroval.Controls.Add(this.numEurovalPressureMbar);
 			this.tabEuroval.Controls.Add(this.label5);
-			this.tabEuroval.Controls.Add(this.numPressurePa);
+			this.tabEuroval.Controls.Add(this.numEurovalPressurePa);
 			this.tabEuroval.Controls.Add(this.label6);
 			this.tabEuroval.Controls.Add(this.label4);
 			this.tabEuroval.Controls.Add(this.numCircuitLength);
 			this.tabEuroval.Controls.Add(this.label3);
-			this.tabEuroval.Controls.Add(this.rbEN1264);
+			this.tabEuroval.Controls.Add(this.rbEurovalEN1264);
 			this.tabEuroval.Controls.Add(this.label2);
-			this.tabEuroval.Controls.Add(this.rbHarreitherNorm);
+			this.tabEuroval.Controls.Add(this.rbEurovalHarreitherNorm);
 			this.tabEuroval.Location = new System.Drawing.Point(4, 22);
 			this.tabEuroval.Name = "tabEuroval";
 			this.tabEuroval.Padding = new System.Windows.Forms.Padding(3);
@@ -149,167 +168,6 @@ namespace Europlan.Common {
 			this.label15.TabIndex = 24;
 			this.label15.Text = "K";
 			// 
-			// label16
-			// 
-			this.label16.Location = new System.Drawing.Point(276, 158);
-			this.label16.Name = "label16";
-			this.label16.Size = new System.Drawing.Size(48, 23);
-			this.label16.TabIndex = 22;
-			this.label16.Text = "K    max.";
-			// 
-			// label17
-			// 
-			this.label17.Location = new System.Drawing.Point(3, 158);
-			this.label17.Name = "label17";
-			this.label17.Size = new System.Drawing.Size(116, 23);
-			this.label17.TabIndex = 20;
-			this.label17.Text = "Spreizung Kühlbetrieb:";
-			// 
-			// label13
-			// 
-			this.label13.Location = new System.Drawing.Point(162, 135);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(26, 23);
-			this.label13.TabIndex = 19;
-			this.label13.Text = "min.";
-			// 
-			// label10
-			// 
-			this.label10.Location = new System.Drawing.Point(406, 135);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(76, 23);
-			this.label10.TabIndex = 18;
-			this.label10.Text = "K";
-			// 
-			// label11
-			// 
-			this.label11.Location = new System.Drawing.Point(276, 135);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(48, 23);
-			this.label11.TabIndex = 16;
-			this.label11.Text = "K    max.";
-			// 
-			// label12
-			// 
-			this.label12.Location = new System.Drawing.Point(3, 135);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(116, 23);
-			this.label12.TabIndex = 14;
-			this.label12.Text = "Spreizung Heizbetrieb:";
-			// 
-			// label8
-			// 
-			this.label8.Location = new System.Drawing.Point(276, 112);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(76, 23);
-			this.label8.TabIndex = 13;
-			this.label8.Text = "l/h";
-			// 
-			// label9
-			// 
-			this.label9.Location = new System.Drawing.Point(3, 112);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(181, 23);
-			this.label9.TabIndex = 11;
-			this.label9.Text = "Max. Durchflußmenge:";
-			// 
-			// label7
-			// 
-			this.label7.Location = new System.Drawing.Point(406, 89);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(76, 23);
-			this.label7.TabIndex = 10;
-			this.label7.Text = "mbar";
-			// 
-			// label5
-			// 
-			this.label5.Location = new System.Drawing.Point(276, 89);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(42, 23);
-			this.label5.TabIndex = 8;
-			this.label5.Text = "Pa    =";
-			// 
-			// label6
-			// 
-			this.label6.Location = new System.Drawing.Point(3, 89);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(181, 23);
-			this.label6.TabIndex = 6;
-			this.label6.Text = "Max. Druckverlust:";
-			// 
-			// label4
-			// 
-			this.label4.Location = new System.Drawing.Point(276, 63);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(76, 23);
-			this.label4.TabIndex = 5;
-			this.label4.Text = "m";
-			// 
-			// label3
-			// 
-			this.label3.Location = new System.Drawing.Point(3, 63);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(181, 23);
-			this.label3.TabIndex = 3;
-			this.label3.Text = "Max. Rohrlänge je Heizkreis:";
-			// 
-			// rbEN1264
-			// 
-			this.rbEN1264.Location = new System.Drawing.Point(194, 31);
-			this.rbEN1264.Name = "rbEN1264";
-			this.rbEN1264.Size = new System.Drawing.Size(195, 17);
-			this.rbEN1264.TabIndex = 2;
-			this.rbEN1264.Text = "29 °C (EN 1264)";
-			this.rbEN1264.UseVisualStyleBackColor = true;
-			this.rbEN1264.CheckedChanged += new System.EventHandler(this.rbEN1264_CheckedChanged);
-			// 
-			// label2
-			// 
-			this.label2.Location = new System.Drawing.Point(6, 7);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(181, 23);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "Maximale Oberflächentemperatur:";
-			// 
-			// rbHarreitherNorm
-			// 
-			this.rbHarreitherNorm.Checked = true;
-			this.rbHarreitherNorm.Location = new System.Drawing.Point(194, 1);
-			this.rbHarreitherNorm.Name = "rbHarreitherNorm";
-			this.rbHarreitherNorm.Size = new System.Drawing.Size(206, 24);
-			this.rbHarreitherNorm.TabIndex = 0;
-			this.rbHarreitherNorm.TabStop = true;
-			this.rbHarreitherNorm.Text = "27 °C (Harreither Werksempfehlung)";
-			this.rbHarreitherNorm.UseVisualStyleBackColor = true;
-			this.rbHarreitherNorm.CheckedChanged += new System.EventHandler(this.rbHarreitherNorm_CheckedChanged);
-			// 
-			// tabHitherm
-			// 
-			this.tabHitherm.Location = new System.Drawing.Point(4, 22);
-			this.tabHitherm.Name = "tabHitherm";
-			this.tabHitherm.Size = new System.Drawing.Size(711, 366);
-			this.tabHitherm.TabIndex = 1;
-			this.tabHitherm.Text = "Hitherm®";
-			this.tabHitherm.UseVisualStyleBackColor = true;
-			// 
-			// tabModulBoden
-			// 
-			this.tabModulBoden.Location = new System.Drawing.Point(4, 22);
-			this.tabModulBoden.Name = "tabModulBoden";
-			this.tabModulBoden.Size = new System.Drawing.Size(711, 366);
-			this.tabModulBoden.TabIndex = 2;
-			this.tabModulBoden.Text = "Modul Klima-Boden";
-			this.tabModulBoden.UseVisualStyleBackColor = true;
-			// 
-			// tabModulDecke
-			// 
-			this.tabModulDecke.Location = new System.Drawing.Point(4, 22);
-			this.tabModulDecke.Name = "tabModulDecke";
-			this.tabModulDecke.Size = new System.Drawing.Size(711, 366);
-			this.tabModulDecke.TabIndex = 3;
-			this.tabModulDecke.Text = "Modul Klima-Decke";
-			this.tabModulDecke.UseVisualStyleBackColor = true;
-			// 
 			// numSpreizungKühlMax
 			// 
 			this.numSpreizungKühlMax.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
@@ -340,6 +198,14 @@ namespace Europlan.Common {
             0,
             0});
 			this.numSpreizungKühlMax.ValueChanged += new System.EventHandler(this.numSpreizungKühlMax_ValueChanged);
+			// 
+			// label16
+			// 
+			this.label16.Location = new System.Drawing.Point(276, 158);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(48, 23);
+			this.label16.TabIndex = 22;
+			this.label16.Text = "K    max.";
 			// 
 			// numSpreizungKühlMin
 			// 
@@ -372,6 +238,30 @@ namespace Europlan.Common {
             0});
 			this.numSpreizungKühlMin.ValueChanged += new System.EventHandler(this.numSpreizungKühlMin_ValueChanged);
 			// 
+			// label17
+			// 
+			this.label17.Location = new System.Drawing.Point(3, 158);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(116, 23);
+			this.label17.TabIndex = 20;
+			this.label17.Text = "Spreizung Kühlbetrieb:";
+			// 
+			// label13
+			// 
+			this.label13.Location = new System.Drawing.Point(162, 135);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(26, 23);
+			this.label13.TabIndex = 19;
+			this.label13.Text = "min.";
+			// 
+			// label10
+			// 
+			this.label10.Location = new System.Drawing.Point(406, 135);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(76, 23);
+			this.label10.TabIndex = 18;
+			this.label10.Text = "K";
+			// 
 			// numSpreizungHeizMax
 			// 
 			this.numSpreizungHeizMax.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
@@ -402,6 +292,14 @@ namespace Europlan.Common {
             0,
             0});
 			this.numSpreizungHeizMax.ValueChanged += new System.EventHandler(this.numSpreizungHeizMax_ValueChanged);
+			// 
+			// label11
+			// 
+			this.label11.Location = new System.Drawing.Point(276, 135);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(48, 23);
+			this.label11.TabIndex = 16;
+			this.label11.Text = "K    max.";
 			// 
 			// numSpreizungHeizMin
 			// 
@@ -434,98 +332,154 @@ namespace Europlan.Common {
             0});
 			this.numSpreizungHeizMin.ValueChanged += new System.EventHandler(this.numSpreizungHeizMin_ValueChanged);
 			// 
-			// numDurchfluss
+			// label12
 			// 
-			this.numDurchfluss.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numDurchfluss.InternalValue = new decimal(new int[] {
+			this.label12.Location = new System.Drawing.Point(3, 135);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(116, 23);
+			this.label12.TabIndex = 14;
+			this.label12.Text = "Spreizung Heizbetrieb:";
+			// 
+			// label8
+			// 
+			this.label8.Location = new System.Drawing.Point(276, 112);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(76, 23);
+			this.label8.TabIndex = 13;
+			this.label8.Text = "l/h";
+			// 
+			// numEurovalDurchfluss
+			// 
+			this.numEurovalDurchfluss.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numEurovalDurchfluss.InternalValue = new decimal(new int[] {
             100,
             0,
             0,
             0});
-			this.numDurchfluss.Location = new System.Drawing.Point(194, 109);
-			this.numDurchfluss.MaxValue = new decimal(new int[] {
+			this.numEurovalDurchfluss.Location = new System.Drawing.Point(194, 109);
+			this.numEurovalDurchfluss.MaxValue = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-			this.numDurchfluss.MinValue = new decimal(new int[] {
+			this.numEurovalDurchfluss.MinValue = new decimal(new int[] {
             100,
             0,
             0,
             0});
-			this.numDurchfluss.Name = "numDurchfluss";
-			this.numDurchfluss.Size = new System.Drawing.Size(76, 20);
-			this.numDurchfluss.TabIndex = 12;
-			this.numDurchfluss.Text = "100";
-			this.numDurchfluss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numDurchfluss.Value = new decimal(new int[] {
+			this.numEurovalDurchfluss.Name = "numEurovalDurchfluss";
+			this.numEurovalDurchfluss.Size = new System.Drawing.Size(76, 20);
+			this.numEurovalDurchfluss.TabIndex = 12;
+			this.numEurovalDurchfluss.Text = "100";
+			this.numEurovalDurchfluss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEurovalDurchfluss.Value = new decimal(new int[] {
             100,
             0,
             0,
             0});
-			this.numDurchfluss.ValueChanged += new System.EventHandler(this.numDurchfluss_ValueChanged);
+			this.numEurovalDurchfluss.ValueChanged += new System.EventHandler(this.numEurovalDurchfluss_ValueChanged);
 			// 
-			// numPressureMbar
+			// label9
 			// 
-			this.numPressureMbar.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numPressureMbar.InternalValue = new decimal(new int[] {
+			this.label9.Location = new System.Drawing.Point(3, 112);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(181, 23);
+			this.label9.TabIndex = 11;
+			this.label9.Text = "Max. Durchflußmenge:";
+			// 
+			// label7
+			// 
+			this.label7.Location = new System.Drawing.Point(406, 89);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(76, 23);
+			this.label7.TabIndex = 10;
+			this.label7.Text = "mbar";
+			// 
+			// numEurovalPressureMbar
+			// 
+			this.numEurovalPressureMbar.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEurovalPressureMbar.InternalValue = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numPressureMbar.Location = new System.Drawing.Point(324, 86);
-			this.numPressureMbar.MaxValue = new decimal(new int[] {
+			this.numEurovalPressureMbar.Location = new System.Drawing.Point(324, 86);
+			this.numEurovalPressureMbar.MaxValue = new decimal(new int[] {
             250,
             0,
             0,
             0});
-			this.numPressureMbar.MinValue = new decimal(new int[] {
+			this.numEurovalPressureMbar.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numPressureMbar.Name = "numPressureMbar";
-			this.numPressureMbar.Size = new System.Drawing.Size(76, 20);
-			this.numPressureMbar.TabIndex = 9;
-			this.numPressureMbar.Text = "0,1";
-			this.numPressureMbar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numPressureMbar.Value = new decimal(new int[] {
+			this.numEurovalPressureMbar.Name = "numEurovalPressureMbar";
+			this.numEurovalPressureMbar.Size = new System.Drawing.Size(76, 20);
+			this.numEurovalPressureMbar.TabIndex = 9;
+			this.numEurovalPressureMbar.Text = "0,1";
+			this.numEurovalPressureMbar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEurovalPressureMbar.Value = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numPressureMbar.ValueChanged += new System.EventHandler(this.numPressureMbar_ValueChanged);
+			this.numEurovalPressureMbar.ValueChanged += new System.EventHandler(this.numEurovalPressureMbar_ValueChanged);
 			// 
-			// numPressurePa
+			// label5
 			// 
-			this.numPressurePa.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numPressurePa.InternalValue = new decimal(new int[] {
+			this.label5.Location = new System.Drawing.Point(276, 89);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(42, 23);
+			this.label5.TabIndex = 8;
+			this.label5.Text = "Pa    =";
+			// 
+			// numEurovalPressurePa
+			// 
+			this.numEurovalPressurePa.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEurovalPressurePa.InternalValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.numPressurePa.Location = new System.Drawing.Point(194, 86);
-			this.numPressurePa.MaxValue = new decimal(new int[] {
+			this.numEurovalPressurePa.Location = new System.Drawing.Point(194, 86);
+			this.numEurovalPressurePa.MaxValue = new decimal(new int[] {
             50000,
             0,
             0,
             0});
-			this.numPressurePa.MinValue = new decimal(new int[] {
+			this.numEurovalPressurePa.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.numPressurePa.Name = "numPressurePa";
-			this.numPressurePa.Size = new System.Drawing.Size(76, 20);
-			this.numPressurePa.TabIndex = 7;
-			this.numPressurePa.Text = "0";
-			this.numPressurePa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numPressurePa.Value = new decimal(new int[] {
+			this.numEurovalPressurePa.Name = "numEurovalPressurePa";
+			this.numEurovalPressurePa.Size = new System.Drawing.Size(76, 20);
+			this.numEurovalPressurePa.TabIndex = 7;
+			this.numEurovalPressurePa.Text = "0";
+			this.numEurovalPressurePa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEurovalPressurePa.Value = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.numPressurePa.ValueChanged += new System.EventHandler(this.numPressurePa_ValueChanged);
+			this.numEurovalPressurePa.ValueChanged += new System.EventHandler(this.numEurovalPressurePa_ValueChanged);
+			// 
+			// label6
+			// 
+			this.label6.Location = new System.Drawing.Point(3, 89);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(181, 23);
+			this.label6.TabIndex = 6;
+			this.label6.Text = "Max. Druckverlust:";
+			// 
+			// label4
+			// 
+			this.label4.Location = new System.Drawing.Point(276, 63);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(76, 23);
+			this.label4.TabIndex = 5;
+			this.label4.Text = "m";
 			// 
 			// numCircuitLength
 			// 
@@ -558,6 +512,379 @@ namespace Europlan.Common {
             65536});
 			this.numCircuitLength.ValueChanged += new System.EventHandler(this.numCircuitLength_ValueChanged);
 			// 
+			// label3
+			// 
+			this.label3.Location = new System.Drawing.Point(3, 63);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(181, 23);
+			this.label3.TabIndex = 3;
+			this.label3.Text = "Max. Rohrlänge je Heizkreis:";
+			// 
+			// rbEurovalEN1264
+			// 
+			this.rbEurovalEN1264.Location = new System.Drawing.Point(194, 33);
+			this.rbEurovalEN1264.Name = "rbEurovalEN1264";
+			this.rbEurovalEN1264.Size = new System.Drawing.Size(195, 17);
+			this.rbEurovalEN1264.TabIndex = 2;
+			this.rbEurovalEN1264.Text = "29 °C (EN 1264)";
+			this.rbEurovalEN1264.UseVisualStyleBackColor = true;
+			this.rbEurovalEN1264.CheckedChanged += new System.EventHandler(this.rbEurovalEN1264_CheckedChanged);
+			// 
+			// label2
+			// 
+			this.label2.Location = new System.Drawing.Point(3, 9);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(181, 23);
+			this.label2.TabIndex = 1;
+			this.label2.Text = "Maximale Oberflächentemperatur:";
+			// 
+			// rbEurovalHarreitherNorm
+			// 
+			this.rbEurovalHarreitherNorm.Checked = true;
+			this.rbEurovalHarreitherNorm.Location = new System.Drawing.Point(194, 3);
+			this.rbEurovalHarreitherNorm.Name = "rbEurovalHarreitherNorm";
+			this.rbEurovalHarreitherNorm.Size = new System.Drawing.Size(206, 24);
+			this.rbEurovalHarreitherNorm.TabIndex = 0;
+			this.rbEurovalHarreitherNorm.TabStop = true;
+			this.rbEurovalHarreitherNorm.Text = "27 °C (Harreither Werksempfehlung)";
+			this.rbEurovalHarreitherNorm.UseVisualStyleBackColor = true;
+			this.rbEurovalHarreitherNorm.CheckedChanged += new System.EventHandler(this.rbEurovalHarreitherNorm_CheckedChanged);
+			// 
+			// tabHitherm
+			// 
+			this.tabHitherm.Location = new System.Drawing.Point(4, 22);
+			this.tabHitherm.Name = "tabHitherm";
+			this.tabHitherm.Size = new System.Drawing.Size(711, 366);
+			this.tabHitherm.TabIndex = 1;
+			this.tabHitherm.Text = "Hitherm®";
+			this.tabHitherm.UseVisualStyleBackColor = true;
+			// 
+			// tabModulBoden
+			// 
+			this.tabModulBoden.Controls.Add(this.numModulBodenMaxModulesInCircuit);
+			this.tabModulBoden.Controls.Add(this.label26);
+			this.tabModulBoden.Controls.Add(this.numModulBodenMaxModulesInParallel);
+			this.tabModulBoden.Controls.Add(this.label25);
+			this.tabModulBoden.Controls.Add(this.numModulBodenMaxModuleInRow);
+			this.tabModulBoden.Controls.Add(this.label24);
+			this.tabModulBoden.Controls.Add(this.label19);
+			this.tabModulBoden.Controls.Add(this.numModulBodenDurchfluss);
+			this.tabModulBoden.Controls.Add(this.label20);
+			this.tabModulBoden.Controls.Add(this.label21);
+			this.tabModulBoden.Controls.Add(this.numModulBodenPressureMbar);
+			this.tabModulBoden.Controls.Add(this.label22);
+			this.tabModulBoden.Controls.Add(this.numModulBodenPressurePa);
+			this.tabModulBoden.Controls.Add(this.label23);
+			this.tabModulBoden.Controls.Add(this.btnModulBodenStandard);
+			this.tabModulBoden.Controls.Add(this.rbModulBodenEN1264);
+			this.tabModulBoden.Controls.Add(this.label18);
+			this.tabModulBoden.Controls.Add(this.rbModulBodenHarreitherNorm);
+			this.tabModulBoden.Location = new System.Drawing.Point(4, 22);
+			this.tabModulBoden.Name = "tabModulBoden";
+			this.tabModulBoden.Size = new System.Drawing.Size(711, 366);
+			this.tabModulBoden.TabIndex = 2;
+			this.tabModulBoden.Text = "Modul Klima-Boden";
+			this.tabModulBoden.UseVisualStyleBackColor = true;
+			// 
+			// numModulBodenMaxModulesInCircuit
+			// 
+			this.numModulBodenMaxModulesInCircuit.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numModulBodenMaxModulesInCircuit.InternalValue = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModulesInCircuit.Location = new System.Drawing.Point(194, 108);
+			this.numModulBodenMaxModulesInCircuit.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModulesInCircuit.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModulesInCircuit.Name = "numModulBodenMaxModulesInCircuit";
+			this.numModulBodenMaxModulesInCircuit.Size = new System.Drawing.Size(76, 20);
+			this.numModulBodenMaxModulesInCircuit.TabIndex = 41;
+			this.numModulBodenMaxModulesInCircuit.Text = "50";
+			this.numModulBodenMaxModulesInCircuit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulBodenMaxModulesInCircuit.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModulesInCircuit.ValueChanged += new System.EventHandler(this.numModulBodenMaxModulesInCircuit_ValueChanged);
+			// 
+			// label26
+			// 
+			this.label26.Location = new System.Drawing.Point(3, 111);
+			this.label26.Name = "label26";
+			this.label26.Size = new System.Drawing.Size(181, 23);
+			this.label26.TabIndex = 40;
+			this.label26.Text = "Max Modulanzahl pro Heizkreis:";
+			// 
+			// numModulBodenMaxModulesInParallel
+			// 
+			this.numModulBodenMaxModulesInParallel.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numModulBodenMaxModulesInParallel.InternalValue = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModulesInParallel.Location = new System.Drawing.Point(194, 82);
+			this.numModulBodenMaxModulesInParallel.MaxValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModulesInParallel.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModulesInParallel.Name = "numModulBodenMaxModulesInParallel";
+			this.numModulBodenMaxModulesInParallel.Size = new System.Drawing.Size(76, 20);
+			this.numModulBodenMaxModulesInParallel.TabIndex = 39;
+			this.numModulBodenMaxModulesInParallel.Text = "6";
+			this.numModulBodenMaxModulesInParallel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulBodenMaxModulesInParallel.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModulesInParallel.ValueChanged += new System.EventHandler(this.numModulBodenMaxModulesInParallel_ValueChanged);
+			// 
+			// label25
+			// 
+			this.label25.Location = new System.Drawing.Point(3, 85);
+			this.label25.Name = "label25";
+			this.label25.Size = new System.Drawing.Size(181, 23);
+			this.label25.TabIndex = 38;
+			this.label25.Text = "Max Modulreihen parallel:";
+			// 
+			// numModulBodenMaxModuleInRow
+			// 
+			this.numModulBodenMaxModuleInRow.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numModulBodenMaxModuleInRow.InternalValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModuleInRow.Location = new System.Drawing.Point(194, 56);
+			this.numModulBodenMaxModuleInRow.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModuleInRow.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModuleInRow.Name = "numModulBodenMaxModuleInRow";
+			this.numModulBodenMaxModuleInRow.Size = new System.Drawing.Size(76, 20);
+			this.numModulBodenMaxModuleInRow.TabIndex = 37;
+			this.numModulBodenMaxModuleInRow.Text = "20";
+			this.numModulBodenMaxModuleInRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulBodenMaxModuleInRow.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			this.numModulBodenMaxModuleInRow.ValueChanged += new System.EventHandler(this.numModulBodenMaxModuleInRow_ValueChanged);
+			// 
+			// label24
+			// 
+			this.label24.Location = new System.Drawing.Point(3, 59);
+			this.label24.Name = "label24";
+			this.label24.Size = new System.Drawing.Size(181, 23);
+			this.label24.TabIndex = 36;
+			this.label24.Text = "Max Modulanzahl in Serie:";
+			// 
+			// label19
+			// 
+			this.label19.Location = new System.Drawing.Point(276, 160);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(76, 23);
+			this.label19.TabIndex = 35;
+			this.label19.Text = "l/h";
+			// 
+			// numModulBodenDurchfluss
+			// 
+			this.numModulBodenDurchfluss.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numModulBodenDurchfluss.InternalValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numModulBodenDurchfluss.Location = new System.Drawing.Point(194, 157);
+			this.numModulBodenDurchfluss.MaxValue = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numModulBodenDurchfluss.MinValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numModulBodenDurchfluss.Name = "numModulBodenDurchfluss";
+			this.numModulBodenDurchfluss.Size = new System.Drawing.Size(76, 20);
+			this.numModulBodenDurchfluss.TabIndex = 34;
+			this.numModulBodenDurchfluss.Text = "100";
+			this.numModulBodenDurchfluss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulBodenDurchfluss.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numModulBodenDurchfluss.ValueChanged += new System.EventHandler(this.numModulBodenDurchfluss_ValueChanged);
+			// 
+			// label20
+			// 
+			this.label20.Location = new System.Drawing.Point(3, 160);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(181, 23);
+			this.label20.TabIndex = 33;
+			this.label20.Text = "Max. Durchflußmenge:";
+			// 
+			// label21
+			// 
+			this.label21.Location = new System.Drawing.Point(406, 137);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(76, 23);
+			this.label21.TabIndex = 32;
+			this.label21.Text = "mbar";
+			// 
+			// numModulBodenPressureMbar
+			// 
+			this.numModulBodenPressureMbar.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numModulBodenPressureMbar.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numModulBodenPressureMbar.Location = new System.Drawing.Point(324, 134);
+			this.numModulBodenPressureMbar.MaxValue = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+			this.numModulBodenPressureMbar.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numModulBodenPressureMbar.Name = "numModulBodenPressureMbar";
+			this.numModulBodenPressureMbar.Size = new System.Drawing.Size(76, 20);
+			this.numModulBodenPressureMbar.TabIndex = 31;
+			this.numModulBodenPressureMbar.Text = "0,1";
+			this.numModulBodenPressureMbar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulBodenPressureMbar.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numModulBodenPressureMbar.ValueChanged += new System.EventHandler(this.numModulBodenPressureMbar_ValueChanged);
+			// 
+			// label22
+			// 
+			this.label22.Location = new System.Drawing.Point(276, 137);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(42, 23);
+			this.label22.TabIndex = 30;
+			this.label22.Text = "Pa    =";
+			// 
+			// numModulBodenPressurePa
+			// 
+			this.numModulBodenPressurePa.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numModulBodenPressurePa.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numModulBodenPressurePa.Location = new System.Drawing.Point(194, 134);
+			this.numModulBodenPressurePa.MaxValue = new decimal(new int[] {
+            50000,
+            0,
+            0,
+            0});
+			this.numModulBodenPressurePa.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numModulBodenPressurePa.Name = "numModulBodenPressurePa";
+			this.numModulBodenPressurePa.Size = new System.Drawing.Size(76, 20);
+			this.numModulBodenPressurePa.TabIndex = 29;
+			this.numModulBodenPressurePa.Text = "0";
+			this.numModulBodenPressurePa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulBodenPressurePa.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numModulBodenPressurePa.ValueChanged += new System.EventHandler(this.numModulBodenPressurePa_ValueChanged);
+			// 
+			// label23
+			// 
+			this.label23.Location = new System.Drawing.Point(3, 137);
+			this.label23.Name = "label23";
+			this.label23.Size = new System.Drawing.Size(181, 23);
+			this.label23.TabIndex = 28;
+			this.label23.Text = "Max. Druckverlust:";
+			// 
+			// btnModulBodenStandard
+			// 
+			this.btnModulBodenStandard.Location = new System.Drawing.Point(324, 186);
+			this.btnModulBodenStandard.Name = "btnModulBodenStandard";
+			this.btnModulBodenStandard.Size = new System.Drawing.Size(110, 23);
+			this.btnModulBodenStandard.TabIndex = 27;
+			this.btnModulBodenStandard.Text = "Standardwerte";
+			this.btnModulBodenStandard.UseVisualStyleBackColor = true;
+			this.btnModulBodenStandard.Click += new System.EventHandler(this.btnModulBodenStandard_Click);
+			// 
+			// rbModulBodenEN1264
+			// 
+			this.rbModulBodenEN1264.Location = new System.Drawing.Point(194, 33);
+			this.rbModulBodenEN1264.Name = "rbModulBodenEN1264";
+			this.rbModulBodenEN1264.Size = new System.Drawing.Size(195, 17);
+			this.rbModulBodenEN1264.TabIndex = 5;
+			this.rbModulBodenEN1264.Text = "29 °C (EN 1264)";
+			this.rbModulBodenEN1264.UseVisualStyleBackColor = true;
+			this.rbModulBodenEN1264.CheckedChanged += new System.EventHandler(this.rbModulBodenEN1264_CheckedChanged);
+			// 
+			// label18
+			// 
+			this.label18.Location = new System.Drawing.Point(3, 9);
+			this.label18.Name = "label18";
+			this.label18.Size = new System.Drawing.Size(181, 23);
+			this.label18.TabIndex = 4;
+			this.label18.Text = "Maximale Oberflächentemperatur:";
+			// 
+			// rbModulBodenHarreitherNorm
+			// 
+			this.rbModulBodenHarreitherNorm.Checked = true;
+			this.rbModulBodenHarreitherNorm.Location = new System.Drawing.Point(194, 3);
+			this.rbModulBodenHarreitherNorm.Name = "rbModulBodenHarreitherNorm";
+			this.rbModulBodenHarreitherNorm.Size = new System.Drawing.Size(206, 24);
+			this.rbModulBodenHarreitherNorm.TabIndex = 3;
+			this.rbModulBodenHarreitherNorm.TabStop = true;
+			this.rbModulBodenHarreitherNorm.Text = "27 °C (Harreither Werksempfehlung)";
+			this.rbModulBodenHarreitherNorm.UseVisualStyleBackColor = true;
+			this.rbModulBodenHarreitherNorm.CheckedChanged += new System.EventHandler(this.rbModulBodenHarreitherNorm_CheckedChanged);
+			// 
+			// tabModulDecke
+			// 
+			this.tabModulDecke.Location = new System.Drawing.Point(4, 22);
+			this.tabModulDecke.Name = "tabModulDecke";
+			this.tabModulDecke.Size = new System.Drawing.Size(711, 366);
+			this.tabModulDecke.TabIndex = 3;
+			this.tabModulDecke.Text = "Modul Klima-Decke";
+			this.tabModulDecke.UseVisualStyleBackColor = true;
+			// 
 			// SystemParametersPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -569,6 +896,8 @@ namespace Europlan.Common {
 			this.tabSystemParameters.ResumeLayout(false);
 			this.tabEuroval.ResumeLayout(false);
 			this.tabEuroval.PerformLayout();
+			this.tabModulBoden.ResumeLayout(false);
+			this.tabModulBoden.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -585,16 +914,16 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label4;
 		private NumericBox numCircuitLength;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.RadioButton rbEN1264;
+		private System.Windows.Forms.RadioButton rbEurovalEN1264;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.RadioButton rbHarreitherNorm;
+		private System.Windows.Forms.RadioButton rbEurovalHarreitherNorm;
 		private System.Windows.Forms.Label label7;
-		private NumericBox numPressureMbar;
+		private NumericBox numEurovalPressureMbar;
 		private System.Windows.Forms.Label label5;
-		private NumericBox numPressurePa;
+		private NumericBox numEurovalPressurePa;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label8;
-		private NumericBox numDurchfluss;
+		private NumericBox numEurovalDurchfluss;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label14;
 		private System.Windows.Forms.Label label15;
@@ -609,5 +938,23 @@ namespace Europlan.Common {
 		private NumericBox numSpreizungHeizMin;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Button btnEurovalStandard;
+		private System.Windows.Forms.RadioButton rbModulBodenEN1264;
+		private System.Windows.Forms.Label label18;
+		private System.Windows.Forms.RadioButton rbModulBodenHarreitherNorm;
+		private System.Windows.Forms.Button btnModulBodenStandard;
+		private System.Windows.Forms.Label label19;
+		private NumericBox numModulBodenDurchfluss;
+		private System.Windows.Forms.Label label20;
+		private System.Windows.Forms.Label label21;
+		private NumericBox numModulBodenPressureMbar;
+		private System.Windows.Forms.Label label22;
+		private NumericBox numModulBodenPressurePa;
+		private System.Windows.Forms.Label label23;
+		private NumericBox numModulBodenMaxModuleInRow;
+		private System.Windows.Forms.Label label24;
+		private NumericBox numModulBodenMaxModulesInCircuit;
+		private System.Windows.Forms.Label label26;
+		private NumericBox numModulBodenMaxModulesInParallel;
+		private System.Windows.Forms.Label label25;
 	}
 }
