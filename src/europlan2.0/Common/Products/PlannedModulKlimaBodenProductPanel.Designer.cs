@@ -27,9 +27,6 @@ namespace Europlan.Common {
 			this.lblAreaUnheated = new System.Windows.Forms.Label();
 			this.numAreaUnheated = new Europlan.Common.NumericBox();
 			this.lblAreaUnheatedTxt = new System.Windows.Forms.Label();
-			this.lblAreaReducedUnit = new System.Windows.Forms.Label();
-			this.numAreaReduced = new Europlan.Common.NumericBox();
-			this.lblAreaReducedTxt = new System.Windows.Forms.Label();
 			this.lblAreaPercentage = new System.Windows.Forms.Label();
 			this.numAreaPercentage = new Europlan.Common.NumericBox();
 			this.lblAreaUnit = new System.Windows.Forms.Label();
@@ -65,14 +62,6 @@ namespace Europlan.Common {
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.pageInput = new System.Windows.Forms.TabPage();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.groupBox6 = new System.Windows.Forms.GroupBox();
-			this.cbSeparateCircuit = new System.Windows.Forms.CheckBox();
-			this.label12 = new System.Windows.Forms.Label();
-			this.numCorners = new Europlan.Common.NumericBox();
-			this.label11 = new System.Windows.Forms.Label();
-			this.label9 = new System.Windows.Forms.Label();
-			this.numRim = new Europlan.Common.NumericBox();
-			this.label10 = new System.Windows.Forms.Label();
 			this.pageCircuit = new System.Windows.Forms.TabPage();
 			this.groupBox10 = new System.Windows.Forms.GroupBox();
 			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
@@ -82,102 +71,34 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.groupBox8 = new System.Windows.Forms.GroupBox();
-			this.cmbCircuits = new System.Windows.Forms.ComboBox();
-			this.label29 = new System.Windows.Forms.Label();
-			this.rbCalculateBoth = new System.Windows.Forms.RadioButton();
-			this.rbCalculateCool = new System.Windows.Forms.RadioButton();
-			this.rbCalculateHeat = new System.Windows.Forms.RadioButton();
-			this.cmbRimType = new System.Windows.Forms.ComboBox();
-			this.cmbLayDistance = new System.Windows.Forms.ComboBox();
-			this.label14 = new System.Windows.Forms.Label();
+			this.numericBox7 = new Europlan.Common.NumericBox();
 			this.label13 = new System.Windows.Forms.Label();
-			this.grpResults = new System.Windows.Forms.GroupBox();
-			this.btnConnectionPipes = new System.Windows.Forms.Button();
-			this.lblError = new System.Windows.Forms.Label();
-			this.lblSpreizungCool = new System.Windows.Forms.Label();
-			this.lblSpreizungHeat = new System.Windows.Forms.Label();
-			this.label41 = new System.Windows.Forms.Label();
-			this.lblDeltaPCool = new System.Windows.Forms.Label();
-			this.lblDeltaPHeat = new System.Windows.Forms.Label();
-			this.lblMhCool = new System.Windows.Forms.Label();
-			this.lblMhHeat = new System.Windows.Forms.Label();
-			this.lblPipeLengthCool = new System.Windows.Forms.Label();
-			this.lblPipeLengthHeat = new System.Windows.Forms.Label();
-			this.lblCircuitCountCool = new System.Windows.Forms.Label();
-			this.lblCircuitCountHeat = new System.Windows.Forms.Label();
-			this.label33 = new System.Windows.Forms.Label();
-			this.groupBox7 = new System.Windows.Forms.GroupBox();
-			this.label34 = new System.Windows.Forms.Label();
-			this.label35 = new System.Windows.Forms.Label();
-			this.label36 = new System.Windows.Forms.Label();
-			this.label37 = new System.Windows.Forms.Label();
-			this.label38 = new System.Windows.Forms.Label();
-			this.lblConnectionQCool = new System.Windows.Forms.Label();
-			this.lblConnectionQHeat = new System.Windows.Forms.Label();
-			this.lblConnectionACool = new System.Windows.Forms.Label();
-			this.lblConnectionAHeat = new System.Windows.Forms.Label();
-			this.lblResidenceQCool = new System.Windows.Forms.Label();
-			this.lblResidenceQHeat = new System.Windows.Forms.Label();
-			this.lblResidenceTfbCool = new System.Windows.Forms.Label();
-			this.lblResidenceTfbHeat = new System.Windows.Forms.Label();
-			this.lblResidenceACool = new System.Windows.Forms.Label();
-			this.lblResidenceAHeat = new System.Windows.Forms.Label();
-			this.lblResidenceVaCool = new System.Windows.Forms.Label();
-			this.lblResidenceVaHeat = new System.Windows.Forms.Label();
-			this.lblRimQCool = new System.Windows.Forms.Label();
-			this.lblRimQHeat = new System.Windows.Forms.Label();
-			this.lblRimTfbCool = new System.Windows.Forms.Label();
-			this.lblRimTfbHeat = new System.Windows.Forms.Label();
-			this.lblRimBCool = new System.Windows.Forms.Label();
-			this.lblRimBHeat = new System.Windows.Forms.Label();
-			this.lblRimVaCool = new System.Windows.Forms.Label();
-			this.lblRimVaHeat = new System.Windows.Forms.Label();
-			this.label26 = new System.Windows.Forms.Label();
-			this.label25 = new System.Windows.Forms.Label();
-			this.label19 = new System.Windows.Forms.Label();
-			this.label20 = new System.Windows.Forms.Label();
-			this.label21 = new System.Windows.Forms.Label();
-			this.label22 = new System.Windows.Forms.Label();
-			this.label23 = new System.Windows.Forms.Label();
-			this.label24 = new System.Windows.Forms.Label();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.label15 = new System.Windows.Forms.Label();
-			this.label16 = new System.Windows.Forms.Label();
-			this.label17 = new System.Windows.Forms.Label();
-			this.label18 = new System.Windows.Forms.Label();
-			this.lblQRestCool = new System.Windows.Forms.Label();
-			this.lblQRestHeat = new System.Windows.Forms.Label();
-			this.lblQfbhCool = new System.Windows.Forms.Label();
-			this.lblQfbhHeat = new System.Windows.Forms.Label();
-			this.lblQkSollCool = new System.Windows.Forms.Label();
-			this.lblQkSollHeat = new System.Windows.Forms.Label();
-			this.lblQSollCool = new System.Windows.Forms.Label();
-			this.lblQSollHeat = new System.Windows.Forms.Label();
+			this.num6 = new Europlan.Common.NumericBox();
 			this.label6 = new System.Windows.Forms.Label();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.num5 = new Europlan.Common.NumericBox();
 			this.label5 = new System.Windows.Forms.Label();
+			this.num4 = new Europlan.Common.NumericBox();
 			this.label4 = new System.Windows.Forms.Label();
+			this.num3 = new Europlan.Common.NumericBox();
 			this.label3 = new System.Windows.Forms.Label();
+			this.num2 = new Europlan.Common.NumericBox();
 			this.label2 = new System.Windows.Forms.Label();
+			this.num1 = new Europlan.Common.NumericBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
 			this.pageInput.SuspendLayout();
 			this.panel1.SuspendLayout();
-			this.groupBox6.SuspendLayout();
 			this.pageCircuit.SuspendLayout();
 			this.groupBox10.SuspendLayout();
 			this.groupBox9.SuspendLayout();
 			this.pageConstruction.SuspendLayout();
 			this.panel2.SuspendLayout();
-			this.groupBox8.SuspendLayout();
-			this.grpResults.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// grpPowerArea
@@ -187,9 +108,6 @@ namespace Europlan.Common {
 			this.grpPowerArea.Controls.Add(this.lblAreaUnheated);
 			this.grpPowerArea.Controls.Add(this.numAreaUnheated);
 			this.grpPowerArea.Controls.Add(this.lblAreaUnheatedTxt);
-			this.grpPowerArea.Controls.Add(this.lblAreaReducedUnit);
-			this.grpPowerArea.Controls.Add(this.numAreaReduced);
-			this.grpPowerArea.Controls.Add(this.lblAreaReducedTxt);
 			this.grpPowerArea.Controls.Add(this.lblAreaPercentage);
 			this.grpPowerArea.Controls.Add(this.numAreaPercentage);
 			this.grpPowerArea.Controls.Add(this.lblAreaUnit);
@@ -212,13 +130,13 @@ namespace Europlan.Common {
 			this.grpPowerArea.Location = new System.Drawing.Point(0, 3);
 			this.grpPowerArea.MinimumSize = new System.Drawing.Size(640, 0);
 			this.grpPowerArea.Name = "grpPowerArea";
-			this.grpPowerArea.Size = new System.Drawing.Size(847, 146);
+			this.grpPowerArea.Size = new System.Drawing.Size(847, 122);
 			this.grpPowerArea.TabIndex = 0;
 			this.grpPowerArea.TabStop = false;
 			// 
 			// lblAreaUnheated
 			// 
-			this.lblAreaUnheated.Location = new System.Drawing.Point(303, 120);
+			this.lblAreaUnheated.Location = new System.Drawing.Point(303, 94);
 			this.lblAreaUnheated.Name = "lblAreaUnheated";
 			this.lblAreaUnheated.Size = new System.Drawing.Size(19, 13);
 			this.lblAreaUnheated.TabIndex = 24;
@@ -232,7 +150,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			this.numAreaUnheated.Location = new System.Drawing.Point(188, 117);
+			this.numAreaUnheated.Location = new System.Drawing.Point(188, 91);
 			this.numAreaUnheated.MaxValue = null;
 			this.numAreaUnheated.MinValue = new decimal(new int[] {
             0,
@@ -253,54 +171,11 @@ namespace Europlan.Common {
 			// 
 			// lblAreaUnheatedTxt
 			// 
-			this.lblAreaUnheatedTxt.Location = new System.Drawing.Point(6, 120);
+			this.lblAreaUnheatedTxt.Location = new System.Drawing.Point(6, 94);
 			this.lblAreaUnheatedTxt.Name = "lblAreaUnheatedTxt";
 			this.lblAreaUnheatedTxt.Size = new System.Drawing.Size(176, 13);
 			this.lblAreaUnheatedTxt.TabIndex = 22;
 			this.lblAreaUnheatedTxt.Text = "unbeheizte/ungekühlte Fläche:";
-			// 
-			// lblAreaReducedUnit
-			// 
-			this.lblAreaReducedUnit.Location = new System.Drawing.Point(303, 94);
-			this.lblAreaReducedUnit.Name = "lblAreaReducedUnit";
-			this.lblAreaReducedUnit.Size = new System.Drawing.Size(19, 13);
-			this.lblAreaReducedUnit.TabIndex = 21;
-			this.lblAreaReducedUnit.Text = "m²";
-			// 
-			// numAreaReduced
-			// 
-			this.numAreaReduced.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numAreaReduced.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numAreaReduced.Location = new System.Drawing.Point(188, 91);
-			this.numAreaReduced.MaxValue = null;
-			this.numAreaReduced.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numAreaReduced.Name = "numAreaReduced";
-			this.numAreaReduced.Size = new System.Drawing.Size(109, 20);
-			this.numAreaReduced.TabIndex = 20;
-			this.numAreaReduced.Text = "0";
-			this.numAreaReduced.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numAreaReduced.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numAreaReduced.ValueChanged += new System.EventHandler(this.numAreaReduced_ValueChanged);
-			// 
-			// lblAreaReducedTxt
-			// 
-			this.lblAreaReducedTxt.Location = new System.Drawing.Point(6, 94);
-			this.lblAreaReducedTxt.Name = "lblAreaReducedTxt";
-			this.lblAreaReducedTxt.Size = new System.Drawing.Size(176, 13);
-			this.lblAreaReducedTxt.TabIndex = 19;
-			this.lblAreaReducedTxt.Text = "Fläche mit red. Heiz-/Kühlleistung:";
 			// 
 			// lblAreaPercentage
 			// 
@@ -444,7 +319,6 @@ namespace Europlan.Common {
             0,
             0});
 			this.numCoolLoadPercentage.ValueChanged += new System.EventHandler(this.numCoolLoadPercentage_ValueChanged);
-			this.numCoolLoadPercentage.Leave += new System.EventHandler(this.numHeatLoad_Leave);
 			// 
 			// lblCoolLoadUnit
 			// 
@@ -485,7 +359,6 @@ namespace Europlan.Common {
             0,
             0});
 			this.numCoolLoad.ValueChanged += new System.EventHandler(this.numCoolLoad_ValueChanged);
-			this.numCoolLoad.Leave += new System.EventHandler(this.numHeatLoad_Leave);
 			// 
 			// lblCoolLoadTxt
 			// 
@@ -556,7 +429,6 @@ namespace Europlan.Common {
             0,
             0});
 			this.numHeatLoadPercentage.ValueChanged += new System.EventHandler(this.numHeatLoadPercentage_ValueChanged);
-			this.numHeatLoadPercentage.Leave += new System.EventHandler(this.numHeatLoad_Leave);
 			// 
 			// lblHeatLoadUnit
 			// 
@@ -597,7 +469,6 @@ namespace Europlan.Common {
             0,
             0});
 			this.numHeatLoad.ValueChanged += new System.EventHandler(this.numHeatLoad_ValueChanged);
-			this.numHeatLoad.Leave += new System.EventHandler(this.numHeatLoad_Leave);
 			// 
 			// lblHeatLoadTxt
 			// 
@@ -623,7 +494,7 @@ namespace Europlan.Common {
 			this.groupBox1.Controls.Add(this.btnFloorConstruction);
 			this.groupBox1.Controls.Add(this.lblFloorConstruction);
 			this.groupBox1.Controls.Add(this.txtFloorConstruction);
-			this.groupBox1.Location = new System.Drawing.Point(0, 155);
+			this.groupBox1.Location = new System.Drawing.Point(0, 131);
 			this.groupBox1.MinimumSize = new System.Drawing.Size(640, 0);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(847, 119);
@@ -796,124 +667,12 @@ namespace Europlan.Common {
 			this.panel1.AutoScroll = true;
 			this.panel1.AutoScrollMinSize = new System.Drawing.Size(650, 0);
 			this.panel1.Controls.Add(this.grpPowerArea);
-			this.panel1.Controls.Add(this.groupBox6);
 			this.panel1.Controls.Add(this.groupBox1);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(3, 3);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(850, 396);
 			this.panel1.TabIndex = 3;
-			// 
-			// groupBox6
-			// 
-			this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox6.Controls.Add(this.cbSeparateCircuit);
-			this.groupBox6.Controls.Add(this.label12);
-			this.groupBox6.Controls.Add(this.numCorners);
-			this.groupBox6.Controls.Add(this.label11);
-			this.groupBox6.Controls.Add(this.label9);
-			this.groupBox6.Controls.Add(this.numRim);
-			this.groupBox6.Controls.Add(this.label10);
-			this.groupBox6.Location = new System.Drawing.Point(0, 280);
-			this.groupBox6.MinimumSize = new System.Drawing.Size(640, 0);
-			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(847, 97);
-			this.groupBox6.TabIndex = 2;
-			this.groupBox6.TabStop = false;
-			// 
-			// cbSeparateCircuit
-			// 
-			this.cbSeparateCircuit.AutoSize = true;
-			this.cbSeparateCircuit.Location = new System.Drawing.Point(188, 19);
-			this.cbSeparateCircuit.Name = "cbSeparateCircuit";
-			this.cbSeparateCircuit.Size = new System.Drawing.Size(258, 17);
-			this.cbSeparateCircuit.TabIndex = 31;
-			this.cbSeparateCircuit.Text = "Eigener Heizkreis für dieses Fußbodenheizsystem";
-			this.cbSeparateCircuit.UseVisualStyleBackColor = true;
-			this.cbSeparateCircuit.CheckedChanged += new System.EventHandler(this.cbSeparateCircuit_CheckedChanged);
-			// 
-			// label12
-			// 
-			this.label12.Location = new System.Drawing.Point(303, 71);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(538, 13);
-			this.label12.TabIndex = 30;
-			this.label12.Text = "(positive Ecken vergößern, negative verringern die Randzonenfläche)";
-			// 
-			// numCorners
-			// 
-			this.numCorners.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numCorners.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numCorners.Location = new System.Drawing.Point(188, 68);
-			this.numCorners.MaxValue = null;
-			this.numCorners.MinValue = null;
-			this.numCorners.Name = "numCorners";
-			this.numCorners.Size = new System.Drawing.Size(109, 20);
-			this.numCorners.TabIndex = 29;
-			this.numCorners.Text = "0";
-			this.numCorners.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numCorners.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numCorners.ValueChanged += new System.EventHandler(this.numCorners_ValueChanged);
-			// 
-			// label11
-			// 
-			this.label11.Location = new System.Drawing.Point(6, 71);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(151, 13);
-			this.label11.TabIndex = 28;
-			this.label11.Text = "Anzahl der Ecken:";
-			// 
-			// label9
-			// 
-			this.label9.Location = new System.Drawing.Point(385, 45);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(19, 13);
-			this.label9.TabIndex = 27;
-			this.label9.Text = "m";
-			// 
-			// numRim
-			// 
-			this.numRim.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numRim.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRim.Location = new System.Drawing.Point(188, 42);
-			this.numRim.MaxValue = null;
-			this.numRim.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRim.Name = "numRim";
-			this.numRim.Size = new System.Drawing.Size(194, 20);
-			this.numRim.TabIndex = 26;
-			this.numRim.Text = "0";
-			this.numRim.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRim.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRim.ValueChanged += new System.EventHandler(this.numRim_ValueChanged);
-			// 
-			// label10
-			// 
-			this.label10.Location = new System.Drawing.Point(6, 45);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(151, 13);
-			this.label10.TabIndex = 25;
-			this.label10.Text = "Länge der Randzone:";
 			// 
 			// pageCircuit
 			// 
@@ -1004,872 +763,322 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
-			this.panel2.Controls.Add(this.groupBox8);
-			this.panel2.Controls.Add(this.grpResults);
+			this.panel2.Controls.Add(this.numericBox7);
+			this.panel2.Controls.Add(this.label13);
+			this.panel2.Controls.Add(this.num6);
+			this.panel2.Controls.Add(this.label6);
+			this.panel2.Controls.Add(this.num5);
+			this.panel2.Controls.Add(this.label5);
+			this.panel2.Controls.Add(this.num4);
+			this.panel2.Controls.Add(this.label4);
+			this.panel2.Controls.Add(this.num3);
+			this.panel2.Controls.Add(this.label3);
+			this.panel2.Controls.Add(this.num2);
+			this.panel2.Controls.Add(this.label2);
+			this.panel2.Controls.Add(this.num1);
+			this.panel2.Controls.Add(this.label1);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(3, 3);
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 396);
 			this.panel2.TabIndex = 1;
 			// 
-			// groupBox8
+			// numericBox7
 			// 
-			this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox8.Controls.Add(this.cmbCircuits);
-			this.groupBox8.Controls.Add(this.label29);
-			this.groupBox8.Controls.Add(this.rbCalculateBoth);
-			this.groupBox8.Controls.Add(this.rbCalculateCool);
-			this.groupBox8.Controls.Add(this.rbCalculateHeat);
-			this.groupBox8.Controls.Add(this.cmbRimType);
-			this.groupBox8.Controls.Add(this.cmbLayDistance);
-			this.groupBox8.Controls.Add(this.label14);
-			this.groupBox8.Controls.Add(this.label13);
-			this.groupBox8.Location = new System.Drawing.Point(0, 285);
-			this.groupBox8.MinimumSize = new System.Drawing.Size(750, 0);
-			this.groupBox8.Name = "groupBox8";
-			this.groupBox8.Size = new System.Drawing.Size(847, 108);
-			this.groupBox8.TabIndex = 1;
-			this.groupBox8.TabStop = false;
-			this.groupBox8.Text = "tatsächliche Auslegung";
-			// 
-			// cmbCircuits
-			// 
-			this.cmbCircuits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbCircuits.FormattingEnabled = true;
-			this.cmbCircuits.Items.AddRange(new object[] {
-            "Automatisch",
-            "EV35",
-            "EV30",
-            "EV25",
-            "EV20",
-            "EV15",
-            "EV10",
-            "EV5"});
-			this.cmbCircuits.Location = new System.Drawing.Point(368, 72);
-			this.cmbCircuits.Name = "cmbCircuits";
-			this.cmbCircuits.Size = new System.Drawing.Size(138, 21);
-			this.cmbCircuits.TabIndex = 62;
-			this.cmbCircuits.SelectedIndexChanged += new System.EventHandler(this.cmbCircuits_SelectedIndexChanged);
-			// 
-			// label29
-			// 
-			this.label29.Location = new System.Drawing.Point(210, 75);
-			this.label29.Name = "label29";
-			this.label29.Size = new System.Drawing.Size(152, 13);
-			this.label29.TabIndex = 61;
-			this.label29.Text = "Anzahl Heizkreise:";
-			// 
-			// rbCalculateBoth
-			// 
-			this.rbCalculateBoth.AutoSize = true;
-			this.rbCalculateBoth.Location = new System.Drawing.Point(9, 65);
-			this.rbCalculateBoth.Name = "rbCalculateBoth";
-			this.rbCalculateBoth.Size = new System.Drawing.Size(153, 17);
-			this.rbCalculateBoth.TabIndex = 60;
-			this.rbCalculateBoth.TabStop = true;
-			this.rbCalculateBoth.Text = "nach Heiz- und Kühlbetrieb";
-			this.rbCalculateBoth.UseVisualStyleBackColor = true;
-			this.rbCalculateBoth.CheckedChanged += new System.EventHandler(this.rbCalculationType_CheckedChanged);
-			// 
-			// rbCalculateCool
-			// 
-			this.rbCalculateCool.AutoSize = true;
-			this.rbCalculateCool.Location = new System.Drawing.Point(9, 42);
-			this.rbCalculateCool.Name = "rbCalculateCool";
-			this.rbCalculateCool.Size = new System.Drawing.Size(105, 17);
-			this.rbCalculateCool.TabIndex = 59;
-			this.rbCalculateCool.TabStop = true;
-			this.rbCalculateCool.Text = "nach Kühlbetrieb";
-			this.rbCalculateCool.UseVisualStyleBackColor = true;
-			this.rbCalculateCool.CheckedChanged += new System.EventHandler(this.rbCalculationType_CheckedChanged);
-			// 
-			// rbCalculateHeat
-			// 
-			this.rbCalculateHeat.AutoSize = true;
-			this.rbCalculateHeat.Checked = true;
-			this.rbCalculateHeat.Location = new System.Drawing.Point(9, 19);
-			this.rbCalculateHeat.Name = "rbCalculateHeat";
-			this.rbCalculateHeat.Size = new System.Drawing.Size(105, 17);
-			this.rbCalculateHeat.TabIndex = 58;
-			this.rbCalculateHeat.TabStop = true;
-			this.rbCalculateHeat.Text = "nach Heizbetrieb";
-			this.rbCalculateHeat.UseVisualStyleBackColor = true;
-			this.rbCalculateHeat.CheckedChanged += new System.EventHandler(this.rbCalculationType_CheckedChanged);
-			// 
-			// cmbRimType
-			// 
-			this.cmbRimType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbRimType.FormattingEnabled = true;
-			this.cmbRimType.Items.AddRange(new object[] {
-            "Automatisch",
-            "EV35",
-            "EV30",
-            "EV25",
-            "EV20",
-            "EV15",
-            "EV10",
-            "EV5"});
-			this.cmbRimType.Location = new System.Drawing.Point(368, 45);
-			this.cmbRimType.Name = "cmbRimType";
-			this.cmbRimType.Size = new System.Drawing.Size(138, 21);
-			this.cmbRimType.TabIndex = 57;
-			this.cmbRimType.SelectedIndexChanged += new System.EventHandler(this.cmbRimType_SelectedIndexChanged);
-			// 
-			// cmbLayDistance
-			// 
-			this.cmbLayDistance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbLayDistance.FormattingEnabled = true;
-			this.cmbLayDistance.Items.AddRange(new object[] {
-            "Automatisch",
-            "EV35",
-            "EV30",
-            "EV25",
-            "EV20",
-            "EV15",
-            "EV10",
-            "EV5"});
-			this.cmbLayDistance.Location = new System.Drawing.Point(368, 18);
-			this.cmbLayDistance.Name = "cmbLayDistance";
-			this.cmbLayDistance.Size = new System.Drawing.Size(138, 21);
-			this.cmbLayDistance.TabIndex = 56;
-			this.cmbLayDistance.SelectedIndexChanged += new System.EventHandler(this.cmbLayDistance_SelectedIndexChanged);
-			// 
-			// label14
-			// 
-			this.label14.Location = new System.Drawing.Point(210, 48);
-			this.label14.Name = "label14";
-			this.label14.Size = new System.Drawing.Size(152, 13);
-			this.label14.TabIndex = 55;
-			this.label14.Text = "Verlegeart Randzone:";
+			this.numericBox7.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numericBox7.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numericBox7.Location = new System.Drawing.Point(253, 12);
+			this.numericBox7.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numericBox7.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numericBox7.Name = "numericBox7";
+			this.numericBox7.Size = new System.Drawing.Size(58, 20);
+			this.numericBox7.TabIndex = 14;
+			this.numericBox7.Text = "0";
+			this.numericBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numericBox7.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			// 
 			// label13
 			// 
-			this.label13.Location = new System.Drawing.Point(210, 21);
+			this.label13.AutoSize = true;
+			this.label13.Location = new System.Drawing.Point(117, 15);
 			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(152, 13);
-			this.label13.TabIndex = 54;
-			this.label13.Text = "Verlegeart Aufenthaltszone:";
-			// 
-			// grpResults
-			// 
-			this.grpResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.grpResults.Controls.Add(this.btnConnectionPipes);
-			this.grpResults.Controls.Add(this.lblError);
-			this.grpResults.Controls.Add(this.lblSpreizungCool);
-			this.grpResults.Controls.Add(this.lblSpreizungHeat);
-			this.grpResults.Controls.Add(this.label41);
-			this.grpResults.Controls.Add(this.lblDeltaPCool);
-			this.grpResults.Controls.Add(this.lblDeltaPHeat);
-			this.grpResults.Controls.Add(this.lblMhCool);
-			this.grpResults.Controls.Add(this.lblMhHeat);
-			this.grpResults.Controls.Add(this.lblPipeLengthCool);
-			this.grpResults.Controls.Add(this.lblPipeLengthHeat);
-			this.grpResults.Controls.Add(this.lblCircuitCountCool);
-			this.grpResults.Controls.Add(this.lblCircuitCountHeat);
-			this.grpResults.Controls.Add(this.label33);
-			this.grpResults.Controls.Add(this.groupBox7);
-			this.grpResults.Controls.Add(this.label34);
-			this.grpResults.Controls.Add(this.label35);
-			this.grpResults.Controls.Add(this.label36);
-			this.grpResults.Controls.Add(this.label37);
-			this.grpResults.Controls.Add(this.label38);
-			this.grpResults.Controls.Add(this.lblConnectionQCool);
-			this.grpResults.Controls.Add(this.lblConnectionQHeat);
-			this.grpResults.Controls.Add(this.lblConnectionACool);
-			this.grpResults.Controls.Add(this.lblConnectionAHeat);
-			this.grpResults.Controls.Add(this.lblResidenceQCool);
-			this.grpResults.Controls.Add(this.lblResidenceQHeat);
-			this.grpResults.Controls.Add(this.lblResidenceTfbCool);
-			this.grpResults.Controls.Add(this.lblResidenceTfbHeat);
-			this.grpResults.Controls.Add(this.lblResidenceACool);
-			this.grpResults.Controls.Add(this.lblResidenceAHeat);
-			this.grpResults.Controls.Add(this.lblResidenceVaCool);
-			this.grpResults.Controls.Add(this.lblResidenceVaHeat);
-			this.grpResults.Controls.Add(this.lblRimQCool);
-			this.grpResults.Controls.Add(this.lblRimQHeat);
-			this.grpResults.Controls.Add(this.lblRimTfbCool);
-			this.grpResults.Controls.Add(this.lblRimTfbHeat);
-			this.grpResults.Controls.Add(this.lblRimBCool);
-			this.grpResults.Controls.Add(this.lblRimBHeat);
-			this.grpResults.Controls.Add(this.lblRimVaCool);
-			this.grpResults.Controls.Add(this.lblRimVaHeat);
-			this.grpResults.Controls.Add(this.label26);
-			this.grpResults.Controls.Add(this.label25);
-			this.grpResults.Controls.Add(this.label19);
-			this.grpResults.Controls.Add(this.label20);
-			this.grpResults.Controls.Add(this.label21);
-			this.grpResults.Controls.Add(this.label22);
-			this.grpResults.Controls.Add(this.label23);
-			this.grpResults.Controls.Add(this.label24);
-			this.grpResults.Controls.Add(this.groupBox5);
-			this.grpResults.Controls.Add(this.groupBox4);
-			this.grpResults.Controls.Add(this.label15);
-			this.grpResults.Controls.Add(this.label16);
-			this.grpResults.Controls.Add(this.label17);
-			this.grpResults.Controls.Add(this.label18);
-			this.grpResults.Controls.Add(this.lblQRestCool);
-			this.grpResults.Controls.Add(this.lblQRestHeat);
-			this.grpResults.Controls.Add(this.lblQfbhCool);
-			this.grpResults.Controls.Add(this.lblQfbhHeat);
-			this.grpResults.Controls.Add(this.lblQkSollCool);
-			this.grpResults.Controls.Add(this.lblQkSollHeat);
-			this.grpResults.Controls.Add(this.lblQSollCool);
-			this.grpResults.Controls.Add(this.lblQSollHeat);
-			this.grpResults.Controls.Add(this.label6);
-			this.grpResults.Controls.Add(this.groupBox2);
-			this.grpResults.Controls.Add(this.groupBox3);
-			this.grpResults.Controls.Add(this.label5);
-			this.grpResults.Controls.Add(this.label4);
-			this.grpResults.Controls.Add(this.label3);
-			this.grpResults.Controls.Add(this.label2);
-			this.grpResults.Controls.Add(this.label1);
-			this.grpResults.Location = new System.Drawing.Point(0, 3);
-			this.grpResults.MinimumSize = new System.Drawing.Size(750, 0);
-			this.grpResults.Name = "grpResults";
-			this.grpResults.Size = new System.Drawing.Size(847, 276);
-			this.grpResults.TabIndex = 0;
-			this.grpResults.TabStop = false;
-			this.grpResults.Text = "Berechnungsergebnisse";
-			// 
-			// btnConnectionPipes
-			// 
-			this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnConnectionPipes.Location = new System.Drawing.Point(674, 10);
-			this.btnConnectionPipes.Name = "btnConnectionPipes";
-			this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
-			this.btnConnectionPipes.TabIndex = 72;
-			this.btnConnectionPipes.Text = "Anbindeleitungen bearbeiten";
-			this.btnConnectionPipes.UseVisualStyleBackColor = true;
-			this.btnConnectionPipes.Click += new System.EventHandler(this.btnConnectionPipes_Click);
-			// 
-			// lblError
-			// 
-			this.lblError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.lblError.ForeColor = System.Drawing.Color.Red;
-			this.lblError.Location = new System.Drawing.Point(6, 240);
-			this.lblError.Name = "lblError";
-			this.lblError.Size = new System.Drawing.Size(835, 33);
-			this.lblError.TabIndex = 71;
-			this.lblError.Visible = false;
-			// 
-			// lblSpreizungCool
-			// 
-			this.lblSpreizungCool.Location = new System.Drawing.Point(256, 213);
-			this.lblSpreizungCool.Name = "lblSpreizungCool";
-			this.lblSpreizungCool.Size = new System.Drawing.Size(60, 13);
-			this.lblSpreizungCool.TabIndex = 70;
-			this.lblSpreizungCool.Text = "W";
-			this.lblSpreizungCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblSpreizungHeat
-			// 
-			this.lblSpreizungHeat.Location = new System.Drawing.Point(256, 195);
-			this.lblSpreizungHeat.Name = "lblSpreizungHeat";
-			this.lblSpreizungHeat.Size = new System.Drawing.Size(60, 13);
-			this.lblSpreizungHeat.TabIndex = 69;
-			this.lblSpreizungHeat.Text = "W";
-			this.lblSpreizungHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label41
-			// 
-			this.label41.Location = new System.Drawing.Point(256, 161);
-			this.label41.Name = "label41";
-			this.label41.Size = new System.Drawing.Size(60, 26);
-			this.label41.TabIndex = 68;
-			this.label41.Text = "Spreizung\nK";
-			this.label41.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblDeltaPCool
-			// 
-			this.lblDeltaPCool.Location = new System.Drawing.Point(210, 213);
-			this.lblDeltaPCool.Name = "lblDeltaPCool";
-			this.lblDeltaPCool.Size = new System.Drawing.Size(40, 13);
-			this.lblDeltaPCool.TabIndex = 67;
-			this.lblDeltaPCool.Text = "W";
-			this.lblDeltaPCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblDeltaPHeat
-			// 
-			this.lblDeltaPHeat.Location = new System.Drawing.Point(210, 195);
-			this.lblDeltaPHeat.Name = "lblDeltaPHeat";
-			this.lblDeltaPHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblDeltaPHeat.TabIndex = 66;
-			this.lblDeltaPHeat.Text = "W";
-			this.lblDeltaPHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblMhCool
-			// 
-			this.lblMhCool.Location = new System.Drawing.Point(164, 213);
-			this.lblMhCool.Name = "lblMhCool";
-			this.lblMhCool.Size = new System.Drawing.Size(40, 13);
-			this.lblMhCool.TabIndex = 65;
-			this.lblMhCool.Text = "W";
-			this.lblMhCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblMhHeat
-			// 
-			this.lblMhHeat.Location = new System.Drawing.Point(164, 195);
-			this.lblMhHeat.Name = "lblMhHeat";
-			this.lblMhHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblMhHeat.TabIndex = 64;
-			this.lblMhHeat.Text = "W";
-			this.lblMhHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblPipeLengthCool
-			// 
-			this.lblPipeLengthCool.Location = new System.Drawing.Point(118, 213);
-			this.lblPipeLengthCool.Name = "lblPipeLengthCool";
-			this.lblPipeLengthCool.Size = new System.Drawing.Size(40, 13);
-			this.lblPipeLengthCool.TabIndex = 63;
-			this.lblPipeLengthCool.Text = "W";
-			this.lblPipeLengthCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblPipeLengthHeat
-			// 
-			this.lblPipeLengthHeat.Location = new System.Drawing.Point(118, 195);
-			this.lblPipeLengthHeat.Name = "lblPipeLengthHeat";
-			this.lblPipeLengthHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblPipeLengthHeat.TabIndex = 62;
-			this.lblPipeLengthHeat.Text = "W";
-			this.lblPipeLengthHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblCircuitCountCool
-			// 
-			this.lblCircuitCountCool.Location = new System.Drawing.Point(72, 213);
-			this.lblCircuitCountCool.Name = "lblCircuitCountCool";
-			this.lblCircuitCountCool.Size = new System.Drawing.Size(40, 13);
-			this.lblCircuitCountCool.TabIndex = 61;
-			this.lblCircuitCountCool.Text = "W";
-			this.lblCircuitCountCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblCircuitCountHeat
-			// 
-			this.lblCircuitCountHeat.Location = new System.Drawing.Point(72, 195);
-			this.lblCircuitCountHeat.Name = "lblCircuitCountHeat";
-			this.lblCircuitCountHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblCircuitCountHeat.TabIndex = 60;
-			this.lblCircuitCountHeat.Text = "W";
-			this.lblCircuitCountHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label33
-			// 
-			this.label33.Location = new System.Drawing.Point(6, 213);
-			this.label33.Name = "label33";
-			this.label33.Size = new System.Drawing.Size(60, 13);
-			this.label33.TabIndex = 59;
-			this.label33.Text = "Kühlen:";
-			// 
-			// groupBox7
-			// 
-			this.groupBox7.Location = new System.Drawing.Point(9, 190);
-			this.groupBox7.Name = "groupBox7";
-			this.groupBox7.Size = new System.Drawing.Size(310, 2);
-			this.groupBox7.TabIndex = 58;
-			this.groupBox7.TabStop = false;
-			// 
-			// label34
-			// 
-			this.label34.Location = new System.Drawing.Point(210, 161);
-			this.label34.Name = "label34";
-			this.label34.Size = new System.Drawing.Size(40, 26);
-			this.label34.TabIndex = 57;
-			this.label34.Text = "DeltaP\nmbar";
-			this.label34.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label35
-			// 
-			this.label35.Location = new System.Drawing.Point(164, 161);
-			this.label35.Name = "label35";
-			this.label35.Size = new System.Drawing.Size(40, 26);
-			this.label35.TabIndex = 56;
-			this.label35.Text = "mh\nkg/h";
-			this.label35.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label36
-			// 
-			this.label36.Location = new System.Drawing.Point(118, 161);
-			this.label36.Name = "label36";
-			this.label36.Size = new System.Drawing.Size(40, 26);
-			this.label36.TabIndex = 55;
-			this.label36.Text = "Rorhl.\nm";
-			this.label36.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label37
-			// 
-			this.label37.Location = new System.Drawing.Point(72, 161);
-			this.label37.Name = "label37";
-			this.label37.Size = new System.Drawing.Size(40, 26);
-			this.label37.TabIndex = 54;
-			this.label37.Text = "Anzahl\nHK";
-			this.label37.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label38
-			// 
-			this.label38.Location = new System.Drawing.Point(6, 195);
-			this.label38.Name = "label38";
-			this.label38.Size = new System.Drawing.Size(60, 13);
-			this.label38.TabIndex = 53;
-			this.label38.Text = "Heizen:";
-			// 
-			// lblConnectionQCool
-			// 
-			this.lblConnectionQCool.Location = new System.Drawing.Point(692, 125);
-			this.lblConnectionQCool.Name = "lblConnectionQCool";
-			this.lblConnectionQCool.Size = new System.Drawing.Size(40, 13);
-			this.lblConnectionQCool.TabIndex = 52;
-			this.lblConnectionQCool.Text = "W";
-			this.lblConnectionQCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblConnectionQHeat
-			// 
-			this.lblConnectionQHeat.Location = new System.Drawing.Point(692, 107);
-			this.lblConnectionQHeat.Name = "lblConnectionQHeat";
-			this.lblConnectionQHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblConnectionQHeat.TabIndex = 51;
-			this.lblConnectionQHeat.Text = "W";
-			this.lblConnectionQHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblConnectionACool
-			// 
-			this.lblConnectionACool.Location = new System.Drawing.Point(646, 125);
-			this.lblConnectionACool.Name = "lblConnectionACool";
-			this.lblConnectionACool.Size = new System.Drawing.Size(40, 13);
-			this.lblConnectionACool.TabIndex = 50;
-			this.lblConnectionACool.Text = "W";
-			this.lblConnectionACool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblConnectionAHeat
-			// 
-			this.lblConnectionAHeat.Location = new System.Drawing.Point(646, 107);
-			this.lblConnectionAHeat.Name = "lblConnectionAHeat";
-			this.lblConnectionAHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblConnectionAHeat.TabIndex = 49;
-			this.lblConnectionAHeat.Text = "W";
-			this.lblConnectionAHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblResidenceQCool
-			// 
-			this.lblResidenceQCool.Location = new System.Drawing.Point(592, 125);
-			this.lblResidenceQCool.Name = "lblResidenceQCool";
-			this.lblResidenceQCool.Size = new System.Drawing.Size(40, 13);
-			this.lblResidenceQCool.TabIndex = 48;
-			this.lblResidenceQCool.Text = "W";
-			this.lblResidenceQCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblResidenceQHeat
-			// 
-			this.lblResidenceQHeat.Location = new System.Drawing.Point(592, 107);
-			this.lblResidenceQHeat.Name = "lblResidenceQHeat";
-			this.lblResidenceQHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblResidenceQHeat.TabIndex = 47;
-			this.lblResidenceQHeat.Text = "W";
-			this.lblResidenceQHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblResidenceTfbCool
-			// 
-			this.lblResidenceTfbCool.Location = new System.Drawing.Point(546, 125);
-			this.lblResidenceTfbCool.Name = "lblResidenceTfbCool";
-			this.lblResidenceTfbCool.Size = new System.Drawing.Size(40, 13);
-			this.lblResidenceTfbCool.TabIndex = 46;
-			this.lblResidenceTfbCool.Text = "W";
-			this.lblResidenceTfbCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblResidenceTfbHeat
-			// 
-			this.lblResidenceTfbHeat.Location = new System.Drawing.Point(546, 107);
-			this.lblResidenceTfbHeat.Name = "lblResidenceTfbHeat";
-			this.lblResidenceTfbHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblResidenceTfbHeat.TabIndex = 45;
-			this.lblResidenceTfbHeat.Text = "W";
-			this.lblResidenceTfbHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblResidenceACool
-			// 
-			this.lblResidenceACool.Location = new System.Drawing.Point(500, 125);
-			this.lblResidenceACool.Name = "lblResidenceACool";
-			this.lblResidenceACool.Size = new System.Drawing.Size(40, 13);
-			this.lblResidenceACool.TabIndex = 44;
-			this.lblResidenceACool.Text = "W";
-			this.lblResidenceACool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblResidenceAHeat
-			// 
-			this.lblResidenceAHeat.Location = new System.Drawing.Point(500, 107);
-			this.lblResidenceAHeat.Name = "lblResidenceAHeat";
-			this.lblResidenceAHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblResidenceAHeat.TabIndex = 43;
-			this.lblResidenceAHeat.Text = "W";
-			this.lblResidenceAHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblResidenceVaCool
-			// 
-			this.lblResidenceVaCool.Location = new System.Drawing.Point(454, 125);
-			this.lblResidenceVaCool.Name = "lblResidenceVaCool";
-			this.lblResidenceVaCool.Size = new System.Drawing.Size(40, 13);
-			this.lblResidenceVaCool.TabIndex = 42;
-			this.lblResidenceVaCool.Text = "W";
-			this.lblResidenceVaCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblResidenceVaHeat
-			// 
-			this.lblResidenceVaHeat.Location = new System.Drawing.Point(454, 107);
-			this.lblResidenceVaHeat.Name = "lblResidenceVaHeat";
-			this.lblResidenceVaHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblResidenceVaHeat.TabIndex = 41;
-			this.lblResidenceVaHeat.Text = "W";
-			this.lblResidenceVaHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblRimQCool
-			// 
-			this.lblRimQCool.Location = new System.Drawing.Point(400, 125);
-			this.lblRimQCool.Name = "lblRimQCool";
-			this.lblRimQCool.Size = new System.Drawing.Size(40, 13);
-			this.lblRimQCool.TabIndex = 40;
-			this.lblRimQCool.Text = "W";
-			this.lblRimQCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblRimQHeat
-			// 
-			this.lblRimQHeat.Location = new System.Drawing.Point(400, 107);
-			this.lblRimQHeat.Name = "lblRimQHeat";
-			this.lblRimQHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblRimQHeat.TabIndex = 39;
-			this.lblRimQHeat.Text = "W";
-			this.lblRimQHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblRimTfbCool
-			// 
-			this.lblRimTfbCool.Location = new System.Drawing.Point(354, 125);
-			this.lblRimTfbCool.Name = "lblRimTfbCool";
-			this.lblRimTfbCool.Size = new System.Drawing.Size(40, 13);
-			this.lblRimTfbCool.TabIndex = 38;
-			this.lblRimTfbCool.Text = "W";
-			this.lblRimTfbCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblRimTfbHeat
-			// 
-			this.lblRimTfbHeat.Location = new System.Drawing.Point(354, 107);
-			this.lblRimTfbHeat.Name = "lblRimTfbHeat";
-			this.lblRimTfbHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblRimTfbHeat.TabIndex = 37;
-			this.lblRimTfbHeat.Text = "W";
-			this.lblRimTfbHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblRimBCool
-			// 
-			this.lblRimBCool.Location = new System.Drawing.Point(308, 125);
-			this.lblRimBCool.Name = "lblRimBCool";
-			this.lblRimBCool.Size = new System.Drawing.Size(40, 13);
-			this.lblRimBCool.TabIndex = 36;
-			this.lblRimBCool.Text = "W";
-			this.lblRimBCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblRimBHeat
-			// 
-			this.lblRimBHeat.Location = new System.Drawing.Point(308, 107);
-			this.lblRimBHeat.Name = "lblRimBHeat";
-			this.lblRimBHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblRimBHeat.TabIndex = 35;
-			this.lblRimBHeat.Text = "W";
-			this.lblRimBHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblRimVaCool
-			// 
-			this.lblRimVaCool.Location = new System.Drawing.Point(262, 125);
-			this.lblRimVaCool.Name = "lblRimVaCool";
-			this.lblRimVaCool.Size = new System.Drawing.Size(40, 13);
-			this.lblRimVaCool.TabIndex = 34;
-			this.lblRimVaCool.Text = "W";
-			this.lblRimVaCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblRimVaHeat
-			// 
-			this.lblRimVaHeat.Location = new System.Drawing.Point(262, 107);
-			this.lblRimVaHeat.Name = "lblRimVaHeat";
-			this.lblRimVaHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblRimVaHeat.TabIndex = 33;
-			this.lblRimVaHeat.Text = "W";
-			this.lblRimVaHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label26
-			// 
-			this.label26.Location = new System.Drawing.Point(454, 57);
-			this.label26.Name = "label26";
-			this.label26.Size = new System.Drawing.Size(178, 13);
-			this.label26.TabIndex = 32;
-			this.label26.Text = "Aufenthaltszone";
-			this.label26.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label25
-			// 
-			this.label25.Location = new System.Drawing.Point(262, 57);
-			this.label25.Name = "label25";
-			this.label25.Size = new System.Drawing.Size(178, 13);
-			this.label25.TabIndex = 31;
-			this.label25.Text = "Randzone";
-			this.label25.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label19
-			// 
-			this.label19.Location = new System.Drawing.Point(592, 73);
-			this.label19.Name = "label19";
-			this.label19.Size = new System.Drawing.Size(40, 26);
-			this.label19.TabIndex = 30;
-			this.label19.Text = "Q\nW";
-			this.label19.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label20
-			// 
-			this.label20.Location = new System.Drawing.Point(546, 73);
-			this.label20.Name = "label20";
-			this.label20.Size = new System.Drawing.Size(40, 26);
-			this.label20.TabIndex = 29;
-			this.label20.Text = "tfb\n°C";
-			this.label20.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label21
-			// 
-			this.label21.Location = new System.Drawing.Point(500, 73);
-			this.label21.Name = "label21";
-			this.label21.Size = new System.Drawing.Size(40, 26);
-			this.label21.TabIndex = 28;
-			this.label21.Text = "A\nm²";
-			this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label22
-			// 
-			this.label22.Location = new System.Drawing.Point(454, 73);
-			this.label22.Name = "label22";
-			this.label22.Size = new System.Drawing.Size(40, 26);
-			this.label22.TabIndex = 27;
-			this.label22.Text = "VA";
-			this.label22.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label23
-			// 
-			this.label23.Location = new System.Drawing.Point(692, 73);
-			this.label23.Name = "label23";
-			this.label23.Size = new System.Drawing.Size(40, 26);
-			this.label23.TabIndex = 26;
-			this.label23.Text = "QAnb\nW";
-			this.label23.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label24
-			// 
-			this.label24.Location = new System.Drawing.Point(646, 73);
-			this.label24.Name = "label24";
-			this.label24.Size = new System.Drawing.Size(40, 26);
-			this.label24.TabIndex = 25;
-			this.label24.Text = "AAnb\nm²";
-			this.label24.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// groupBox5
-			// 
-			this.groupBox5.Location = new System.Drawing.Point(638, 53);
-			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(2, 90);
-			this.groupBox5.TabIndex = 20;
-			this.groupBox5.TabStop = false;
-			// 
-			// groupBox4
-			// 
-			this.groupBox4.Location = new System.Drawing.Point(446, 53);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(2, 90);
-			this.groupBox4.TabIndex = 6;
-			this.groupBox4.TabStop = false;
-			// 
-			// label15
-			// 
-			this.label15.Location = new System.Drawing.Point(400, 73);
-			this.label15.Name = "label15";
-			this.label15.Size = new System.Drawing.Size(40, 26);
-			this.label15.TabIndex = 19;
-			this.label15.Text = "Q\nW";
-			this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label16
-			// 
-			this.label16.Location = new System.Drawing.Point(354, 73);
-			this.label16.Name = "label16";
-			this.label16.Size = new System.Drawing.Size(40, 26);
-			this.label16.TabIndex = 18;
-			this.label16.Text = "tfb\n°C";
-			this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label17
-			// 
-			this.label17.Location = new System.Drawing.Point(308, 73);
-			this.label17.Name = "label17";
-			this.label17.Size = new System.Drawing.Size(40, 26);
-			this.label17.TabIndex = 17;
-			this.label17.Text = "B\ncm";
-			this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// label18
-			// 
-			this.label18.Location = new System.Drawing.Point(262, 73);
-			this.label18.Name = "label18";
-			this.label18.Size = new System.Drawing.Size(40, 26);
-			this.label18.TabIndex = 16;
-			this.label18.Text = "VA";
-			this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblQRestCool
-			// 
-			this.lblQRestCool.Location = new System.Drawing.Point(210, 125);
-			this.lblQRestCool.Name = "lblQRestCool";
-			this.lblQRestCool.Size = new System.Drawing.Size(40, 13);
-			this.lblQRestCool.TabIndex = 15;
-			this.lblQRestCool.Text = "W";
-			this.lblQRestCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblQRestHeat
-			// 
-			this.lblQRestHeat.Location = new System.Drawing.Point(210, 107);
-			this.lblQRestHeat.Name = "lblQRestHeat";
-			this.lblQRestHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblQRestHeat.TabIndex = 14;
-			this.lblQRestHeat.Text = "W";
-			this.lblQRestHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblQfbhCool
-			// 
-			this.lblQfbhCool.Location = new System.Drawing.Point(164, 125);
-			this.lblQfbhCool.Name = "lblQfbhCool";
-			this.lblQfbhCool.Size = new System.Drawing.Size(40, 13);
-			this.lblQfbhCool.TabIndex = 13;
-			this.lblQfbhCool.Text = "W";
-			this.lblQfbhCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblQfbhHeat
-			// 
-			this.lblQfbhHeat.Location = new System.Drawing.Point(164, 107);
-			this.lblQfbhHeat.Name = "lblQfbhHeat";
-			this.lblQfbhHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblQfbhHeat.TabIndex = 12;
-			this.lblQfbhHeat.Text = "W";
-			this.lblQfbhHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblQkSollCool
-			// 
-			this.lblQkSollCool.Location = new System.Drawing.Point(118, 125);
-			this.lblQkSollCool.Name = "lblQkSollCool";
-			this.lblQkSollCool.Size = new System.Drawing.Size(40, 13);
-			this.lblQkSollCool.TabIndex = 11;
-			this.lblQkSollCool.Text = "W";
-			this.lblQkSollCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblQkSollHeat
-			// 
-			this.lblQkSollHeat.Location = new System.Drawing.Point(118, 107);
-			this.lblQkSollHeat.Name = "lblQkSollHeat";
-			this.lblQkSollHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblQkSollHeat.TabIndex = 10;
-			this.lblQkSollHeat.Text = "W";
-			this.lblQkSollHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblQSollCool
-			// 
-			this.lblQSollCool.Location = new System.Drawing.Point(72, 125);
-			this.lblQSollCool.Name = "lblQSollCool";
-			this.lblQSollCool.Size = new System.Drawing.Size(40, 13);
-			this.lblQSollCool.TabIndex = 9;
-			this.lblQSollCool.Text = "W";
-			this.lblQSollCool.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// lblQSollHeat
-			// 
-			this.lblQSollHeat.Location = new System.Drawing.Point(72, 107);
-			this.lblQSollHeat.Name = "lblQSollHeat";
-			this.lblQSollHeat.Size = new System.Drawing.Size(40, 13);
-			this.lblQSollHeat.TabIndex = 8;
-			this.lblQSollHeat.Text = "W";
-			this.lblQSollHeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.label13.Size = new System.Drawing.Size(130, 13);
+			this.label13.TabIndex = 13;
+			this.label13.Text = "Summe Anbindeleitungen:";
+			// 
+			// num6
+			// 
+			this.num6.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.num6.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num6.Location = new System.Drawing.Point(74, 142);
+			this.num6.MaxValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			this.num6.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num6.Name = "num6";
+			this.num6.Size = new System.Drawing.Size(37, 20);
+			this.num6.TabIndex = 12;
+			this.num6.Text = "0";
+			this.num6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.num6.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			// 
 			// label6
 			// 
-			this.label6.Location = new System.Drawing.Point(6, 125);
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(21, 145);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(60, 13);
-			this.label6.TabIndex = 7;
-			this.label6.Text = "Kühlen:";
+			this.label6.Size = new System.Drawing.Size(47, 13);
+			this.label6.TabIndex = 11;
+			this.label6.Text = "Reihe 6:";
 			// 
-			// groupBox2
+			// num5
 			// 
-			this.groupBox2.Location = new System.Drawing.Point(256, 53);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(2, 90);
-			this.groupBox2.TabIndex = 5;
-			this.groupBox2.TabStop = false;
-			// 
-			// groupBox3
-			// 
-			this.groupBox3.Location = new System.Drawing.Point(9, 102);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(730, 2);
-			this.groupBox3.TabIndex = 6;
-			this.groupBox3.TabStop = false;
+			this.num5.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.num5.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num5.Location = new System.Drawing.Point(74, 116);
+			this.num5.MaxValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			this.num5.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num5.Name = "num5";
+			this.num5.Size = new System.Drawing.Size(37, 20);
+			this.num5.TabIndex = 10;
+			this.num5.Text = "0";
+			this.num5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.num5.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			// 
 			// label5
 			// 
-			this.label5.Location = new System.Drawing.Point(210, 73);
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(21, 119);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(40, 26);
-			this.label5.TabIndex = 4;
-			this.label5.Text = "QRest\nW";
-			this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.label5.Size = new System.Drawing.Size(47, 13);
+			this.label5.TabIndex = 9;
+			this.label5.Text = "Reihe 5:";
+			// 
+			// num4
+			// 
+			this.num4.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.num4.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num4.Location = new System.Drawing.Point(74, 90);
+			this.num4.MaxValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			this.num4.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num4.Name = "num4";
+			this.num4.Size = new System.Drawing.Size(37, 20);
+			this.num4.TabIndex = 8;
+			this.num4.Text = "0";
+			this.num4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.num4.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			// 
 			// label4
 			// 
-			this.label4.Location = new System.Drawing.Point(164, 73);
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(21, 93);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(40, 26);
-			this.label4.TabIndex = 3;
-			this.label4.Text = "QFBH\nW";
-			this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.label4.Size = new System.Drawing.Size(47, 13);
+			this.label4.TabIndex = 7;
+			this.label4.Text = "Reihe 4:";
+			// 
+			// num3
+			// 
+			this.num3.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.num3.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num3.Location = new System.Drawing.Point(74, 64);
+			this.num3.MaxValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			this.num3.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num3.Name = "num3";
+			this.num3.Size = new System.Drawing.Size(37, 20);
+			this.num3.TabIndex = 6;
+			this.num3.Text = "0";
+			this.num3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.num3.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			// 
 			// label3
 			// 
-			this.label3.Location = new System.Drawing.Point(118, 73);
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(21, 67);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(40, 26);
-			this.label3.TabIndex = 2;
-			this.label3.Text = "qSoll\nW/m²";
-			this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.label3.Size = new System.Drawing.Size(47, 13);
+			this.label3.TabIndex = 5;
+			this.label3.Text = "Reihe 3:";
+			// 
+			// num2
+			// 
+			this.num2.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.num2.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num2.Location = new System.Drawing.Point(74, 38);
+			this.num2.MaxValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			this.num2.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num2.Name = "num2";
+			this.num2.Size = new System.Drawing.Size(37, 20);
+			this.num2.TabIndex = 4;
+			this.num2.Text = "0";
+			this.num2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.num2.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			// 
 			// label2
 			// 
-			this.label2.Location = new System.Drawing.Point(72, 73);
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(21, 41);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(40, 26);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "QSoll\nW";
-			this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.label2.Size = new System.Drawing.Size(47, 13);
+			this.label2.TabIndex = 3;
+			this.label2.Text = "Reihe 2:";
+			// 
+			// num1
+			// 
+			this.num1.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.num1.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num1.Location = new System.Drawing.Point(74, 12);
+			this.num1.MaxValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			this.num1.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.num1.Name = "num1";
+			this.num1.Size = new System.Drawing.Size(37, 20);
+			this.num1.TabIndex = 2;
+			this.num1.Text = "0";
+			this.num1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.num1.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(6, 107);
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(21, 15);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(60, 13);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Heizen:";
+			this.label1.Size = new System.Drawing.Size(47, 13);
+			this.label1.TabIndex = 1;
+			this.label1.Text = "Reihe 1:";
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
 			this.dataGridViewTextBoxColumn1.DataPropertyName = "PipeType";
 			this.dataGridViewTextBoxColumn1.HeaderText = "PipeType";
 			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
 			// 
 			// dataGridViewTextBoxColumn2
 			// 
 			this.dataGridViewTextBoxColumn2.DataPropertyName = "Verlegeart";
 			this.dataGridViewTextBoxColumn2.HeaderText = "Verlegeart";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.HeaderText = "Column3";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn4
+			// 
+			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
+			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
@@ -1885,17 +1094,13 @@ namespace Europlan.Common {
 			this.tabs.ResumeLayout(false);
 			this.pageInput.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
-			this.groupBox6.ResumeLayout(false);
-			this.groupBox6.PerformLayout();
 			this.pageCircuit.ResumeLayout(false);
 			this.groupBox10.ResumeLayout(false);
 			this.groupBox9.ResumeLayout(false);
 			this.groupBox9.PerformLayout();
 			this.pageConstruction.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
-			this.groupBox8.ResumeLayout(false);
-			this.groupBox8.PerformLayout();
-			this.grpResults.ResumeLayout(false);
+			this.panel2.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -1927,122 +1132,46 @@ namespace Europlan.Common {
 		private System.Windows.Forms.TabControl tabs;
 		private System.Windows.Forms.TabPage pageInput;
 		private System.Windows.Forms.TabPage pageConstruction;
-		private System.Windows.Forms.GroupBox grpResults;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.GroupBox groupBox3;
-		private System.Windows.Forms.GroupBox groupBox2;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.GroupBox groupBox4;
-		private System.Windows.Forms.Label label15;
-		private System.Windows.Forms.Label label16;
-		private System.Windows.Forms.Label label17;
-		private System.Windows.Forms.Label label18;
-		private System.Windows.Forms.Label lblQRestCool;
-		private System.Windows.Forms.Label lblQRestHeat;
-		private System.Windows.Forms.Label lblQfbhCool;
-		private System.Windows.Forms.Label lblQfbhHeat;
-		private System.Windows.Forms.Label lblQkSollCool;
-		private System.Windows.Forms.Label lblQkSollHeat;
-		private System.Windows.Forms.Label lblQSollCool;
-		private System.Windows.Forms.Label lblQSollHeat;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label label23;
-		private System.Windows.Forms.Label label24;
-		private System.Windows.Forms.GroupBox groupBox5;
-		private System.Windows.Forms.Label lblConnectionQCool;
-		private System.Windows.Forms.Label lblConnectionQHeat;
-		private System.Windows.Forms.Label lblConnectionACool;
-		private System.Windows.Forms.Label lblConnectionAHeat;
-		private System.Windows.Forms.Label lblResidenceQCool;
-		private System.Windows.Forms.Label lblResidenceQHeat;
-		private System.Windows.Forms.Label lblResidenceTfbCool;
-		private System.Windows.Forms.Label lblResidenceTfbHeat;
-		private System.Windows.Forms.Label lblResidenceACool;
-		private System.Windows.Forms.Label lblResidenceAHeat;
-		private System.Windows.Forms.Label lblResidenceVaCool;
-		private System.Windows.Forms.Label lblResidenceVaHeat;
-		private System.Windows.Forms.Label lblRimQCool;
-		private System.Windows.Forms.Label lblRimQHeat;
-		private System.Windows.Forms.Label lblRimTfbCool;
-		private System.Windows.Forms.Label lblRimTfbHeat;
-		private System.Windows.Forms.Label lblRimBCool;
-		private System.Windows.Forms.Label lblRimBHeat;
-		private System.Windows.Forms.Label lblRimVaCool;
-		private System.Windows.Forms.Label lblRimVaHeat;
-		private System.Windows.Forms.Label label26;
-		private System.Windows.Forms.Label label25;
-		private System.Windows.Forms.Label label19;
-		private System.Windows.Forms.Label label20;
-		private System.Windows.Forms.Label label21;
-		private System.Windows.Forms.Label label22;
 		private System.Windows.Forms.Label label7;
 		private NumericBox numRoomTemperatureBelowHeat;
 		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.GroupBox groupBox6;
-		private System.Windows.Forms.Label label12;
-		private NumericBox numCorners;
-		private System.Windows.Forms.Label label11;
-		private System.Windows.Forms.Label label9;
-		private NumericBox numRim;
-		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.Label lblSpreizungCool;
-		private System.Windows.Forms.Label lblSpreizungHeat;
-		private System.Windows.Forms.Label label41;
-		private System.Windows.Forms.Label lblDeltaPCool;
-		private System.Windows.Forms.Label lblDeltaPHeat;
-		private System.Windows.Forms.Label lblMhCool;
-		private System.Windows.Forms.Label lblMhHeat;
-		private System.Windows.Forms.Label lblPipeLengthCool;
-		private System.Windows.Forms.Label lblPipeLengthHeat;
-		private System.Windows.Forms.Label lblCircuitCountCool;
-		private System.Windows.Forms.Label lblCircuitCountHeat;
-		private System.Windows.Forms.Label label33;
-		private System.Windows.Forms.GroupBox groupBox7;
-		private System.Windows.Forms.Label label34;
-		private System.Windows.Forms.Label label35;
-		private System.Windows.Forms.Label label36;
-		private System.Windows.Forms.Label label37;
-		private System.Windows.Forms.Label label38;
-		private System.Windows.Forms.GroupBox groupBox8;
-		private System.Windows.Forms.ComboBox cmbRimType;
-		private System.Windows.Forms.ComboBox cmbLayDistance;
-		private System.Windows.Forms.Label label14;
-		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.Label label27;
 		private NumericBox numRoomTemperatureBelowCool;
 		private System.Windows.Forms.Label label28;
-		private System.Windows.Forms.RadioButton rbCalculateBoth;
-		private System.Windows.Forms.RadioButton rbCalculateCool;
-		private System.Windows.Forms.RadioButton rbCalculateHeat;
 		private System.Windows.Forms.TabPage pageCircuit;
 		private System.Windows.Forms.GroupBox groupBox9;
 		private System.Windows.Forms.Button btnDistributor;
 		private System.Windows.Forms.Label lblDistributor;
 		private System.Windows.Forms.TextBox txtDistributor;
-		private System.Windows.Forms.Label lblError;
 		private System.Windows.Forms.GroupBox groupBox10;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-		private System.Windows.Forms.ComboBox cmbCircuits;
-		private System.Windows.Forms.Label label29;
 		private ConnectionPipePanel connectionPipePanel;
-		private System.Windows.Forms.Button btnConnectionPipes;
-		private System.Windows.Forms.CheckBox cbSeparateCircuit;
 		private System.Windows.Forms.Label lblAreaUnheated;
 		private NumericBox numAreaUnheated;
 		private System.Windows.Forms.Label lblAreaUnheatedTxt;
-		private System.Windows.Forms.Label lblAreaReducedUnit;
-		private NumericBox numAreaReduced;
-		private System.Windows.Forms.Label lblAreaReducedTxt;
 		private System.Windows.Forms.Label lblAreaPercentage;
 		private NumericBox numAreaPercentage;
 		private System.Windows.Forms.Label lblAreaUnit;
 		private NumericBox numArea;
 		private System.Windows.Forms.Label lblAreaTxt;
+		private System.Windows.Forms.Label label1;
+		private NumericBox num6;
+		private System.Windows.Forms.Label label6;
+		private NumericBox num5;
+		private System.Windows.Forms.Label label5;
+		private NumericBox num4;
+		private System.Windows.Forms.Label label4;
+		private NumericBox num3;
+		private System.Windows.Forms.Label label3;
+		private NumericBox num2;
+		private System.Windows.Forms.Label label2;
+		private NumericBox num1;
+		private NumericBox numericBox7;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
 	}
 }

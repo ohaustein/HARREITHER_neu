@@ -10,91 +10,8 @@ namespace Europlan.Common {
 	public partial class PlannedModulKlimaBodenProductPanel : UserControl, IEditorUserControl {
 		private PlannedProduct product = null;
 
-
-		private class LayDistanceItem {
-			public Nullable<EurovalProduct.LayDistance> layDistance;
-			public string name;
-
-			public LayDistanceItem(Nullable<EurovalProduct.LayDistance> layDistance, string name) {
-				this.layDistance = layDistance;
-				this.name = name;
-			}
-
-			public override string ToString() {
-				return this.name;
-			}
-
-			public override bool Equals(object obj) {
-				return obj is LayDistanceItem && (obj as LayDistanceItem).layDistance == this.layDistance;
-			}
-
-			public override int GetHashCode() {
-				return (this.layDistance == null ? 0 : this.layDistance.GetHashCode());
-			}
-		}
-
-		private class RimTypeItem {
-			public Nullable<EurovalProduct.RimType> rimType;
-			public string name;
-
-			public RimTypeItem(Nullable<EurovalProduct.RimType> layDistance, string name) {
-				this.rimType = layDistance;
-				this.name = name;
-			}
-
-			public override string ToString() {
-				return this.name;
-			}
-
-			public override bool Equals(object obj) {
-				return obj is RimTypeItem && (obj as RimTypeItem).rimType == this.rimType;
-			}
-
-			public override int GetHashCode() {
-				return (this.rimType == null ? 0 : this.rimType.GetHashCode());
-			}
-		}
-
 		public PlannedModulKlimaBodenProductPanel() {
 			InitializeComponent();
-
-			//this.cmbLayDistance.Items.Clear();
-			//this.cmbLayDistance.Items.Add(new LayDistanceItem(null, "Automatisch"));
-			//this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.LayDistance.EV35, "EV35"));
-			//this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.LayDistance.EV30, "EV30"));
-			//this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.LayDistance.EV25, "EV25"));
-			//this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.LayDistance.EV20, "EV20"));
-			//this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.LayDistance.EV15, "EV15"));
-			//this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.LayDistance.EV10, "EV10"));
-			//this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.LayDistance.EV5, "EV5"));
-
-			//this.cmbRimType.Items.Clear();
-			//this.cmbRimType.Items.Add(new RimTypeItem(null, "Automatisch"));
-			//this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV15_60, "EV15/60"));
-			//this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV15_120, "EV15/120"));
-			//this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV15_180, "EV15/180"));
-			//this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV10_55, "EV10/55"));
-			//this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV10_110, "EV10/110"));
-			//this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV10_165, "EV10/165"));
-			//this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV5_40, "EV5/40"));
-			//this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV5_80, "EV5/80"));
-			//this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.RimType.EV5_120, "EV5/120"));
-
-			//this.cmbCircuits.Items.Clear();
-			//this.cmbCircuits.Items.Add("Automatisch");
-			//this.cmbCircuits.Items.Add("1");
-			//this.cmbCircuits.Items.Add("2");
-			//this.cmbCircuits.Items.Add("3");
-			//this.cmbCircuits.Items.Add("4");
-			//this.cmbCircuits.Items.Add("5");
-			//this.cmbCircuits.Items.Add("6");
-			//this.cmbCircuits.Items.Add("7");
-			//this.cmbCircuits.Items.Add("8");
-			//this.cmbCircuits.Items.Add("9");
-			//this.cmbCircuits.Items.Add("10");
-			//this.cmbCircuits.Items.Add("11");
-			//this.cmbCircuits.Items.Add("12");
-
 		}
 
 		#region IEditorUserControl Members
@@ -682,7 +599,7 @@ namespace Europlan.Common {
 		private void numAreaPercentage_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaPercentage == 0) {
 				ignoreArea++;
-				(this.product.Product as EurovalProduct).PlannedFloorAreaPercentage = (float)this.numAreaPercentage.Value;
+				(this.product.Product as ModulKlimaBodenProduct).PlannedFloorAreaPercentage = (float)this.numAreaPercentage.Value;
 				this.numArea.Value = (decimal)this.product.PlannedArea;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.AREA_PERCENTAGE);
@@ -696,8 +613,8 @@ namespace Europlan.Common {
 		private void numArea_ValueChanged(object sender, EventArgs e) {
 			if (ignoreArea == 0) {
 				ignoreAreaPercentage++;
-				(this.product.Product as EurovalProduct).PlannedFloorArea = (float)this.numArea.Value;
-				this.numAreaPercentage.Value = (decimal)(this.product.Product as EurovalProduct).PlannedFloorAreaPercentage;
+				(this.product.Product as ModulKlimaBodenProduct).PlannedFloorArea = (float)this.numArea.Value;
+				this.numAreaPercentage.Value = (decimal)(this.product.Product as ModulKlimaBodenProduct).PlannedFloorAreaPercentage;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.AREA);
 				if (this.ProjectChanged != null) {
@@ -707,31 +624,11 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void numAreaReduced_ValueChanged(object sender, EventArgs e) {
-			if (ignoreAreaReduced == 0) {
-				ignoreAreaUnheated++;
-				EurovalProduct evProduct = this.product.Product as EurovalProduct;
-				evProduct.PlannedAreaReduced = (float)this.numAreaReduced.Value;
-				if (evProduct.PlannedAreaReduced + evProduct.PlannedAreaUnheated > evProduct.PlannedFloorArea) {
-					evProduct.PlannedAreaUnheated = evProduct.PlannedFloorArea - evProduct.PlannedAreaReduced;
-				}
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.AREA_REDUCED);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-				ignoreAreaUnheated--;
-			}
-		}
-
 		private void numAreaUnheated_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaUnheated == 0) {
 				ignoreAreaReduced++;
-				EurovalProduct evProduct = this.product.Product as EurovalProduct;
-				evProduct.PlannedAreaUnheated = (float)this.numAreaUnheated.Value;
-				if (evProduct.PlannedAreaReduced + evProduct.PlannedAreaUnheated > evProduct.PlannedFloorArea) {
-					evProduct.PlannedAreaReduced = evProduct.PlannedFloorArea - evProduct.PlannedAreaUnheated;
-				}
+				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
+				mbProduct.PlannedAreaUnheated = (float)this.numAreaUnheated.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.AREA_UNHEATED);
 				if (this.ProjectChanged != null) {
@@ -743,10 +640,10 @@ namespace Europlan.Common {
 
 		private void btnFloorConstruction_Click(object sender, EventArgs e) {
 			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.FloorConstruction);
-			form.SelectedConstruction = (this.product.Product as EurovalProduct).PlannedFloorConstruction;
+			form.SelectedConstruction = (this.product.Product as ModulKlimaBodenProduct).PlannedFloorConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
-					(this.product.Product as EurovalProduct).PlannedFloorConstruction = form.SelectedConstruction;
+					(this.product.Product as ModulKlimaBodenProduct).PlannedFloorConstruction = form.SelectedConstruction;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 					this.UpdateControl(FieldEnum.NONE);
 				}
@@ -759,10 +656,10 @@ namespace Europlan.Common {
 
 		private void btnInsulationConstruction_Click(object sender, EventArgs e) {
 			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.InsulationConstruction);
-			form.SelectedConstruction = (this.product.Product as EurovalProduct).PlannedInsulationConstruction;
+			form.SelectedConstruction = (this.product.Product as ModulKlimaBodenProduct).PlannedInsulationConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
-					(this.product.Product as EurovalProduct).PlannedInsulationConstruction = form.SelectedConstruction;
+					(this.product.Product as ModulKlimaBodenProduct).PlannedInsulationConstruction = form.SelectedConstruction;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 					this.UpdateControl(FieldEnum.NONE);
 				}
@@ -775,7 +672,7 @@ namespace Europlan.Common {
 
 		private void numRoomTemperatureBelowHeat_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRoomTemperatureBelowHeat == 0) {
-				(this.product.Product as EurovalProduct).PlannedRoomTemperatureBelowHeat = (float)this.numRoomTemperatureBelowHeat.Value;
+				(this.product.Product as ModulKlimaBodenProduct).PlannedRoomTemperatureBelowHeat = (float)this.numRoomTemperatureBelowHeat.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_HEAT);
 				if (this.ProjectChanged != null) {
@@ -786,7 +683,7 @@ namespace Europlan.Common {
 
 		private void numRoomTemperatureBelowCool_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRoomTemperatureBelowCool == 0) {
-				(this.product.Product as EurovalProduct).PlannedRoomTemperatureBelowCool = (float)this.numRoomTemperatureBelowCool.Value;
+				(this.product.Product as ModulKlimaBodenProduct).PlannedRoomTemperatureBelowCool = (float)this.numRoomTemperatureBelowCool.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_COOL);
 				if (this.ProjectChanged != null) {
@@ -795,92 +692,12 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void numRim_ValueChanged(object sender, EventArgs e) {
-			if (ignoreRim == 0) {
-				(this.product.Product as EurovalProduct).PlannedRimLength = (float)this.numRim.Value;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.RIM_LENGTH);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-		}
-
-		private void numCorners_ValueChanged(object sender, EventArgs e) {
-			if (ignoreCorners == 0) {
-				(this.product.Product as EurovalProduct).PlannedRimCorners = (int)this.numCorners.Value;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.CORNERS);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-		}
-
-		private void cmbLayDistance_SelectedIndexChanged(object sender, EventArgs e) {
-			if (ignoreLayDistance == 0) {
-				(this.product.Product as EurovalProduct).RequestedLayDistance = (this.cmbLayDistance.SelectedItem as LayDistanceItem).layDistance;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.LAY_DISTANCE);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-		}
-
-		private void cmbRimType_SelectedIndexChanged(object sender, EventArgs e) {
-			if (ignoreRimType == 0) {
-				(this.product.Product as EurovalProduct).RequestedRimType = (this.cmbRimType.SelectedItem as RimTypeItem).rimType;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.RIM_TYPE);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-
-		}
-
-		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
-			if (ignoreCircuits == 0) {
-				if (this.cmbCircuits.SelectedIndex > 0) {
-					(this.product.Product as EurovalProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex;
-				} else {
-					(this.product.Product as EurovalProduct).RequestedCircuits = null;
-				}
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.CIRCUIT_COUNT);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-		}
-
-		private void rbCalculationType_CheckedChanged(object sender, EventArgs e) {
-			if (ignoreCalculationType == 0) {
-				this.product.CalculateHeat = this.rbCalculateHeat.Checked || this.rbCalculateBoth.Checked;
-				this.product.CalculateCool = this.rbCalculateCool.Checked || this.rbCalculateBoth.Checked;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.CALCULATION_TYPE);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-		}
-
-		private void numHeatLoad_Leave(object sender, EventArgs e) {
-			if (this.product.RequestedCoolLoad == 0 && !this.rbCalculateHeat.Checked) {
-				this.rbCalculateHeat.Checked = true;
-			}
-			if (this.product.RequestedHeatLoad == 0 && this.product.RequestedCoolLoad > 0 && !this.rbCalculateCool.Checked) {
-				this.rbCalculateCool.Checked = true;
-			}
-		}
 
 		private void btnDistributor_Click(object sender, EventArgs e) {
 			SelectConnectionForProductForm form = new SelectConnectionForProductForm(this.product, this.product.Product.AssociatedRoom.AssociatedFloor);
-			form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnection;
+			form.SelectedConnection = (this.product.Product as ModulKlimaBodenProduct).PlannedConnection;
 			if (form.ShowDialog() == DialogResult.OK) {
-				(this.product.Product as EurovalProduct).PlannedConnection = form.SelectedConnection;
+				(this.product.Product as ModulKlimaBodenProduct).PlannedConnection = form.SelectedConnection;
 			}
 
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
@@ -910,16 +727,32 @@ namespace Europlan.Common {
 			form.Dispose();
 		}
 
-		private void cbSeparateCircuit_CheckedChanged(object sender, EventArgs e) {
-			if (ignoreSeparateCircuit == 0) {
-				(this.product.Product as EurovalProduct).PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.SEPARATE_CIRCUIT);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-		}
+
+		//private void dataGridView1_DragDrop(object sender, DragEventArgs e) {
+		//    dataGridView1.CurrentCell.Value = e.Data.ToString();
+		//}
+
+		//private void dataGridView1_DragEnter(object sender, DragEventArgs e) {
+		//    string test = e.ToString();
+		//}
+
+		//private void dataGridView1_DragLeave(object sender, EventArgs e) {
+		//    string test = e.ToString();
+		//}
+
+		//private void dataGridView1_DragOver(object sender, DragEventArgs e) {
+		//    Point clientPoint = dataGridView1.PointToClient(new Point(e.X, e.Y));
+		//    DataGridView.HitTestInfo hit = dataGridView1.HitTest(clientPoint.X, clientPoint.Y);
+		//    if (hit.ColumnIndex >= 0 && hit.RowIndex >= 0) {
+		//        dataGridView1.CurrentCell = dataGridView1[hit.ColumnIndex, hit.RowIndex];
+		//        if ((e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy) {
+		//            e.Effect = DragDropEffects.Copy;
+		//        }
+		//    } else {
+		//        e.Effect = DragDropEffects.None;
+		//    }
+		//    string test = e.ToString();
+		//}
 
 
 	}
