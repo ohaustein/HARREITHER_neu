@@ -51,6 +51,9 @@ namespace Europlan.Common {
 			this.lblRoomData = new System.Windows.Forms.Label();
 			this.grpBoxSystems = new System.Windows.Forms.GroupBox();
 			this.dgvProducts = new System.Windows.Forms.DataGridView();
+			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.btnAdd = new System.Windows.Forms.Button();
+			this.btnDelete = new System.Windows.Forms.Button();
 			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,9 +61,7 @@ namespace Europlan.Common {
 			this.colPlannedArea = new Europlan.Common.NumericColumn();
 			this.colPlannedHeatLoad = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colPlannedCoolLoad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.plannedProductWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.btnAdd = new System.Windows.Forms.Button();
 			this.txtNormCool = new Europlan.Common.NumericBox();
 			this.txtCool = new Europlan.Common.NumericBox();
 			this.txtNormHeat = new Europlan.Common.NumericBox();
@@ -281,6 +282,7 @@ namespace Europlan.Common {
 			this.grpBoxSystems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.grpBoxSystems.Controls.Add(this.btnDelete);
 			this.grpBoxSystems.Controls.Add(this.dgvProducts);
 			this.grpBoxSystems.Controls.Add(this.btnAdd);
 			this.grpBoxSystems.Location = new System.Drawing.Point(3, 94);
@@ -316,6 +318,7 @@ namespace Europlan.Common {
             this.colEdit});
 			this.dgvProducts.DataSource = this.plannedProductWrapperBindingSource;
 			this.dgvProducts.Location = new System.Drawing.Point(6, 48);
+			this.dgvProducts.MultiSelect = false;
 			this.dgvProducts.Name = "dgvProducts";
 			this.dgvProducts.Size = new System.Drawing.Size(565, 150);
 			this.dgvProducts.TabIndex = 2;
@@ -324,6 +327,39 @@ namespace Europlan.Common {
 			this.dgvProducts.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserDeletedRow);
 			this.dgvProducts.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvProducts_CellPainting);
 			this.dgvProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+			this.dgvProducts.SelectionChanged += new System.EventHandler(this.dgvProducts_SelectionChanged);
+			// 
+			// colEdit
+			// 
+			this.colEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.colEdit.FillWeight = 64F;
+			this.colEdit.HeaderText = "Bearbeiten";
+			this.colEdit.Name = "colEdit";
+			this.colEdit.ReadOnly = true;
+			this.colEdit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.colEdit.Text = "...";
+			this.colEdit.UseColumnTextForButtonValue = true;
+			this.colEdit.Width = 64;
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(4, 19);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(75, 23);
+			this.btnAdd.TabIndex = 0;
+			this.btnAdd.Text = "Hinzufügen";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			// 
+			// btnDelete
+			// 
+			this.btnDelete.Location = new System.Drawing.Point(85, 19);
+			this.btnDelete.Name = "btnDelete";
+			this.btnDelete.Size = new System.Drawing.Size(75, 23);
+			this.btnDelete.TabIndex = 3;
+			this.btnDelete.Text = "Löschen";
+			this.btnDelete.UseVisualStyleBackColor = true;
+			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
 			// 
 			// colType
 			// 
@@ -402,31 +438,9 @@ namespace Europlan.Common {
 			this.colPlannedCoolLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colPlannedCoolLoad.Width = 50;
 			// 
-			// colEdit
-			// 
-			this.colEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.colEdit.FillWeight = 64F;
-			this.colEdit.HeaderText = "Bearbeiten";
-			this.colEdit.Name = "colEdit";
-			this.colEdit.ReadOnly = true;
-			this.colEdit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.colEdit.Text = "...";
-			this.colEdit.UseColumnTextForButtonValue = true;
-			this.colEdit.Width = 64;
-			// 
 			// plannedProductWrapperBindingSource
 			// 
 			this.plannedProductWrapperBindingSource.DataSource = typeof(Europlan.Common.PlannedProduct);
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(4, 19);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(75, 23);
-			this.btnAdd.TabIndex = 0;
-			this.btnAdd.Text = "hinzufügen";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
 			// txtNormCool
 			// 
@@ -694,5 +708,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPlannedHeatLoad;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPlannedCoolLoad;
 		private System.Windows.Forms.DataGridViewButtonColumn colEdit;
+		private System.Windows.Forms.Button btnDelete;
 	}
 }

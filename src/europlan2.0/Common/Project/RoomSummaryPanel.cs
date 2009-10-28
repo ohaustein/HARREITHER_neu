@@ -162,6 +162,39 @@ namespace Europlan.Common {
 			form.Dispose();
 		}
 
+
+		private void btnDelete_Click(object sender, EventArgs e) {
+			int rowIndex = -1;
+			if (dgvProducts.CurrentCell != null) {
+				rowIndex = dgvProducts.CurrentCell.RowIndex;
+			}
+			if (rowIndex >= 0) {
+				DataGridViewRow row = dgvProducts.Rows[rowIndex];
+				PlannedProduct product = row.DataBoundItem as PlannedProduct;
+				if (product.Node != null) {
+					if (MessageBox.Show("Wollen Sie das System " + product.Node.Text + " wirklich löschen.", "Heizsystem löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+
+						this.room.PlannedProducts.Remove(product);
+						if (this.ProjectStructureChanged != null) {
+							this.ProjectStructureChanged(this);
+						}
+
+						List<PlannedProduct> products = this.room.PlannedProducts;
+						Dictionary<Product.ProductType, int> productCounter = new Dictionary<Product.ProductType, int>();
+						foreach (PlannedProduct p in products) {
+							if (!productCounter.ContainsKey(p.PlannedProductType)) {
+								productCounter.Add(p.PlannedProductType, 1);
+							} else {
+								productCounter[p.PlannedProductType] = productCounter[p.PlannedProductType] + 1;
+							}
+							p.Node.Text = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType] + ": " + p.System;
+						}
+					}
+					this.UpdateControl();
+				}
+			}
+		}
+
 		private PlannedProduct deletedProduct = null;
 
 		private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
@@ -224,6 +257,17 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void dgvProducts_SelectionChanged(object sender, EventArgs e) {
+			int rowIndex = -1;
+			if (dgvProducts.CurrentCell != null) {
+				rowIndex = dgvProducts.CurrentCell.RowIndex;
+			}
+			if (rowIndex >= 0) {
+				DataGridViewRow row = dgvProducts.Rows[rowIndex];
+				PlannedProduct product = row.DataBoundItem as PlannedProduct;
+				btnDelete.Enabled = product.Node != null ? true : false;
+			}
+		}
 
 	}
 }
