@@ -74,7 +74,7 @@ namespace Europlan.Common {
 		private int ignoreSeparateCircuit = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
-			//if (this.product != null) {
+			if (this.product != null) {
 			//    ignoreCoverHeatLoad++;
 			//    ignoreHeatLoad++;
 			//    ignoreHeatLoadPercentage++;
@@ -95,10 +95,10 @@ namespace Europlan.Common {
 			//    ignoreCircuits++;
 			//    ignoreSeparateCircuit++;
 
-			//    EurovalProduct evProduct = this.product.Product as EurovalProduct;
+				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
 
-			//    bool showHeat = this.product.RequestedHeatLoad > 0;
-			//    bool showCool = this.product.RequestedCoolLoad > 0;
+				bool showHeat = this.product.RequestedHeatLoad > 0;
+				bool showCool = this.product.RequestedCoolLoad > 0;
 			//    bool showRim = evProduct.PlannedAreaRim > 0;
 			//    bool showResidence = true;
 
@@ -159,92 +159,89 @@ namespace Europlan.Common {
 			//    this.cmbRimType.Enabled = this.cmbRimType.Enabled && !evProduct.PlannedProductIsConnection;
 			//    this.cmbCircuits.Enabled = !evProduct.PlannedProductIsConnection;
 
-			//    this.numArea.MaxValue = (decimal)evProduct.AvailableFloorArea;
+			    this.numArea.MaxValue = (decimal)mbProduct.AvailableFloorArea;
 			//    this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
-			//    this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
-			//    this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
-			//    if (this.product.NecessaryHeatLoad > 0) {
-			//        this.chkCoverHeatLoad.Enabled = true;
-			//        if ((skipFields & (FieldEnum.HEAT_LOAD | FieldEnum.HEAT_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
-			//            if (this.product.CoverHeatLoad) {
-			//                this.chkCoverHeatLoad.Checked = true;
-			//                this.numHeatLoad.Enabled = false;
-			//                this.numHeatLoadPercentage.Enabled = false;
-			//            } else {
-			//                this.chkCoverHeatLoad.Checked = false;
-			//                this.numHeatLoad.Enabled = true;
-			//                this.numHeatLoadPercentage.Enabled = true;
-			//            }
-			//        }
-			//        if ((skipFields & FieldEnum.HEAT_LOAD) == FieldEnum.NONE) {
-			//            this.numHeatLoad.Value = Math.Round((decimal)this.product.RequestedHeatLoad, 2);
-			//        }
-			//        if ((skipFields & FieldEnum.HEAT_LOAD_PERCENTAGE) == FieldEnum.NONE) {
-			//            this.numHeatLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedHeatLoad * 100 / this.product.NecessaryHeatLoad), 2);
-			//        }
-			//    } else {
-			//        this.numHeatLoad.Enabled = false;
-			//        this.numHeatLoad.Text = "";
-			//        this.numHeatLoadPercentage.Enabled = false;
-			//        this.numHeatLoadPercentage.Text = "";
-			//        this.chkCoverHeatLoad.Enabled = false;
-			//        this.chkCoverHeatLoad.Checked = false;
-			//    }
-			//    this.numCoolLoad.MaxValue = (decimal)this.product.NecessaryCoolLoad;
-			//    if (this.product.NecessaryCoolLoad > 0) {
-			//        this.chkCoverCoolLoad.Enabled = true;
-			//        if ((skipFields & (FieldEnum.COOL_LOAD | FieldEnum.COOL_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
-			//            if (this.product.CoverCoolLoad) {
-			//                this.chkCoverCoolLoad.Checked = true;
-			//                this.numCoolLoad.Enabled = false;
-			//                this.numCoolLoadPercentage.Enabled = false;
-			//            } else {
-			//                this.chkCoverCoolLoad.Checked = false;
-			//                this.numCoolLoad.Enabled = true;
-			//                this.numCoolLoadPercentage.Enabled = true;
-			//            }
-			//        }
-			//        if ((skipFields & FieldEnum.COOL_LOAD) == FieldEnum.NONE) {
-			//            this.numCoolLoad.Value = Math.Round((decimal)this.product.RequestedCoolLoad, 2);
-			//        }
-			//        if ((skipFields & FieldEnum.COOL_LOAD_PERCENTAGE) == FieldEnum.NONE) {
-			//            this.numCoolLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedCoolLoad * 100 / this.product.NecessaryCoolLoad), 2);
-			//        }
-			//    } else {
-			//        this.numCoolLoad.Enabled = false;
-			//        this.numCoolLoad.Text = "";
-			//        this.numCoolLoadPercentage.Enabled = false;
-			//        this.numCoolLoadPercentage.Text = "";
-			//        this.chkCoverCoolLoad.Enabled = false;
-			//        this.chkCoverCoolLoad.Checked = false;
-			//    }
-			//    this.lblHeatLoadTotal.Text = "(" + Math.Round(this.product.NecessaryHeatLoad, 2) + " W)";
-			//    this.lblCoolLoadTotal.Text = "(" + Math.Round(this.product.NecessaryCoolLoad, 2) + " W)";
-			//    float plannedArea = (float)(this.product.PlannedArea.HasValue ? Math.Round(this.product.PlannedArea.Value, 2) : 0);
-			//    if ((skipFields & FieldEnum.AREA) == FieldEnum.NONE) {
-			//        this.numArea.Value = Math.Round((decimal)plannedArea, 2);
-			//    }
-			//    if ((skipFields & FieldEnum.AREA_PERCENTAGE) == FieldEnum.NONE) {
-			//        if (evProduct.AvailableFloorArea <= 0) {
-			//            this.numAreaPercentage.Value = 100;
-			//        } else {
-			//            this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / evProduct.AvailableFloorArea), 2);
-			//        }
-			//    }
-			//    if ((skipFields & FieldEnum.AREA_REDUCED) == FieldEnum.NONE) {
-			//        this.numAreaReduced.Value = Math.Round((decimal)evProduct.PlannedAreaReduced, 2);
-			//    }
-			//    if ((skipFields & FieldEnum.AREA_UNHEATED) == FieldEnum.NONE) {
-			//        this.numAreaUnheated.Value = Math.Round((decimal)evProduct.PlannedAreaUnheated, 2);
-			//    }
-			//    this.txtFloorConstruction.Text = (evProduct.PlannedFloorConstruction == null ? "" : evProduct.PlannedFloorConstruction.Id + ": " + evProduct.PlannedFloorConstruction.Name);
-			//    this.txtInsulationConstruction.Text = (evProduct.PlannedInsulationConstruction == null ? "" : evProduct.PlannedInsulationConstruction.Id + ": " + evProduct.PlannedInsulationConstruction.Name);
-			//    if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
-			//        this.numRoomTemperatureBelowHeat.Value = Math.Round((decimal)evProduct.PlannedRoomTemperatureBelowHeat, 2);
-			//    }
-			//    if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_COOL) == FieldEnum.NONE) {
-			//        this.numRoomTemperatureBelowCool.Value = Math.Round((decimal)evProduct.PlannedRoomTemperatureBelowCool, 2);
-			//    }
+			    this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
+			    this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
+			    if (this.product.NecessaryHeatLoad > 0) {
+			        this.chkCoverHeatLoad.Enabled = true;
+			        if ((skipFields & (FieldEnum.HEAT_LOAD | FieldEnum.HEAT_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
+			            if (this.product.CoverHeatLoad) {
+			                this.chkCoverHeatLoad.Checked = true;
+			                this.numHeatLoad.Enabled = false;
+			                this.numHeatLoadPercentage.Enabled = false;
+			            } else {
+			                this.chkCoverHeatLoad.Checked = false;
+			                this.numHeatLoad.Enabled = true;
+			                this.numHeatLoadPercentage.Enabled = true;
+			            }
+			        }
+			        if ((skipFields & FieldEnum.HEAT_LOAD) == FieldEnum.NONE) {
+			            this.numHeatLoad.Value = Math.Round((decimal)this.product.RequestedHeatLoad, 2);
+			        }
+			        if ((skipFields & FieldEnum.HEAT_LOAD_PERCENTAGE) == FieldEnum.NONE) {
+			            this.numHeatLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedHeatLoad * 100 / this.product.NecessaryHeatLoad), 2);
+			        }
+			    } else {
+					this.numHeatLoad.Enabled = false;
+					this.numHeatLoad.Text = "";
+					this.numHeatLoadPercentage.Enabled = false;
+					this.numHeatLoadPercentage.Text = "";
+					this.chkCoverHeatLoad.Enabled = false;
+					this.chkCoverHeatLoad.Checked = false;
+				}
+				this.numCoolLoad.MaxValue = (decimal)this.product.NecessaryCoolLoad;
+				if (this.product.NecessaryCoolLoad > 0) {
+					this.chkCoverCoolLoad.Enabled = true;
+					if ((skipFields & (FieldEnum.COOL_LOAD | FieldEnum.COOL_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
+						if (this.product.CoverCoolLoad) {
+							this.chkCoverCoolLoad.Checked = true;
+							this.numCoolLoad.Enabled = false;
+							this.numCoolLoadPercentage.Enabled = false;
+						} else {
+							this.chkCoverCoolLoad.Checked = false;
+							this.numCoolLoad.Enabled = true;
+							this.numCoolLoadPercentage.Enabled = true;
+						}
+					}
+					if ((skipFields & FieldEnum.COOL_LOAD) == FieldEnum.NONE) {
+						this.numCoolLoad.Value = Math.Round((decimal)this.product.RequestedCoolLoad, 2);
+					}
+					if ((skipFields & FieldEnum.COOL_LOAD_PERCENTAGE) == FieldEnum.NONE) {
+						this.numCoolLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedCoolLoad * 100 / this.product.NecessaryCoolLoad), 2);
+					}
+				} else {
+					this.numCoolLoad.Enabled = false;
+					this.numCoolLoad.Text = "";
+					this.numCoolLoadPercentage.Enabled = false;
+					this.numCoolLoadPercentage.Text = "";
+					this.chkCoverCoolLoad.Enabled = false;
+					this.chkCoverCoolLoad.Checked = false;
+				}
+			    this.lblHeatLoadTotal.Text = "(" + Math.Round(this.product.NecessaryHeatLoad, 2) + " W)";
+			    this.lblCoolLoadTotal.Text = "(" + Math.Round(this.product.NecessaryCoolLoad, 2) + " W)";
+				float plannedArea = (float)(this.product.PlannedArea.HasValue ? Math.Round(this.product.PlannedArea.Value, 2) : 0);
+				if ((skipFields & FieldEnum.AREA) == FieldEnum.NONE) {
+					this.numArea.Value = Math.Round((decimal)plannedArea, 2);
+				}
+				if ((skipFields & FieldEnum.AREA_PERCENTAGE) == FieldEnum.NONE) {
+					if (mbProduct.AvailableFloorArea <= 0) {
+						this.numAreaPercentage.Value = 100;
+					} else {
+						this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / mbProduct.AvailableFloorArea), 2);
+					}
+				}
+				if ((skipFields & FieldEnum.AREA_UNHEATED) == FieldEnum.NONE) {
+					this.numAreaUnheated.Value = Math.Round((decimal)mbProduct.PlannedAreaUnheated, 2);
+				}
+				this.txtFloorConstruction.Text = (mbProduct.PlannedFloorConstruction == null ? "" : mbProduct.PlannedFloorConstruction.Id + ": " + mbProduct.PlannedFloorConstruction.Name);
+				this.txtInsulationConstruction.Text = (mbProduct.PlannedInsulationConstruction == null ? "" : mbProduct.PlannedInsulationConstruction.Id + ": " + mbProduct.PlannedInsulationConstruction.Name);
+				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
+					this.numRoomTemperatureBelowHeat.Value = Math.Round((decimal)mbProduct.PlannedRoomTemperatureBelowHeat, 2);
+				}
+				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_COOL) == FieldEnum.NONE) {
+					this.numRoomTemperatureBelowCool.Value = Math.Round((decimal)mbProduct.PlannedRoomTemperatureBelowCool, 2);
+				}
 			//    if ((skipFields & FieldEnum.RIM_LENGTH) == FieldEnum.NONE) {
 			//        this.numRim.Value = Math.Round((decimal)evProduct.PlannedRimLength, 2);
 			//    }
@@ -276,9 +273,6 @@ namespace Europlan.Common {
 			//        this.cbSeparateCircuit.Checked = !evProduct.PlannedProductIsConnection;
 			//    }
 
-			//    this.chkClip.Checked = evProduct.UseClipSchiene;
-			//    this.chkAnhydritEstrich.Checked = evProduct.UseAnhydritEstrich;
-
 			//    // General
 			//    this.lblQSollHeat.Text = Math.Round(this.product.RequestedHeatLoad, 2).ToString();
 			//    this.lblQSollCool.Text = Math.Round(this.product.RequestedCoolLoad, 2).ToString();
@@ -291,42 +285,7 @@ namespace Europlan.Common {
 			//    this.lblQRestHeat.Text = (qRestHeat > 0 ? "+" : "") + Math.Round(qRestHeat, 2).ToString();
 			//    this.lblQRestCool.Text = (qRestCool > 0 ? "+" : "") + Math.Round(qRestCool, 2).ToString();
 
-			//    // Randzone
-			//    if (evProduct.PlannedRimType.HasValue) {
-			//        switch (evProduct.PlannedRimLayDistance) {
-			//            case EurovalProduct.LayDistance.EV5:
-			//                this.lblRimVaHeat.Text = "EV5";
-			//                this.lblRimVaCool.Text = "EV5";
-			//                break;
-			//            case EurovalProduct.LayDistance.EV10:
-			//                this.lblRimVaHeat.Text = "EV10";
-			//                this.lblRimVaCool.Text = "EV10";
-			//                break;
-			//            case EurovalProduct.LayDistance.EV15:
-			//                this.lblRimVaHeat.Text = "EV15";
-			//                this.lblRimVaCool.Text = "EV15";
-			//                break;
-			//            case EurovalProduct.LayDistance.EV20:
-			//                this.lblRimVaHeat.Text = "EV20";
-			//                this.lblRimVaCool.Text = "EV20";
-			//                break;
-			//            case EurovalProduct.LayDistance.EV25:
-			//                this.lblRimVaHeat.Text = "EV25";
-			//                this.lblRimVaCool.Text = "EV25";
-			//                break;
-			//            case EurovalProduct.LayDistance.EV30:
-			//                this.lblRimVaHeat.Text = "EV30";
-			//                this.lblRimVaCool.Text = "EV30";
-			//                break;
-			//            case EurovalProduct.LayDistance.EV35:
-			//                this.lblRimVaHeat.Text = "EV35";
-			//                this.lblRimVaCool.Text = "EV35";
-			//                break;
-			//            default:
-			//                this.lblRimVaHeat.Text = "???";
-			//                this.lblRimVaCool.Text = "???";
-			//                break;
-			//        }
+
 			//        this.lblRimBHeat.Text = evProduct.PlannedRimWidth.ToString();
 			//        this.lblRimBCool.Text = evProduct.PlannedRimWidth.ToString();
 			//        this.lblRimTfbHeat.Text = Math.Round(evProduct.PlannedFloorTemperatureHeatRim, 1).ToString();
@@ -451,7 +410,7 @@ namespace Europlan.Common {
 			//    ignoreCalculationType--;
 			//    ignoreCircuits--;
 			//    ignoreSeparateCircuit--;
-			//}
+			}
 			// TODO
 		}
 
@@ -724,6 +683,10 @@ namespace Europlan.Common {
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
+		}
+
+		private void lstCircuits_SelectedIndexChanged(object sender, EventArgs e) {
+
 		}
 
 
