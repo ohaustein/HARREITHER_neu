@@ -889,10 +889,11 @@ namespace Europlan.Common {
 
 		private void btnDistributor_Click(object sender, EventArgs e) {
 			SelectConnectionForProductForm form = new SelectConnectionForProductForm(this.product, this.product.Product.AssociatedRoom.AssociatedFloor);
-			form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnection;
-			if (form.ShowDialog() == DialogResult.OK) {
-				(this.product.Product as EurovalProduct).PlannedConnection = form.SelectedConnection;
-			}
+			//form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnection;
+			//if (form.ShowDialog() == DialogResult.OK) {
+			//	(this.product.Product as EurovalProduct).PlannedConnection = form.SelectedConnection;
+			//}
+			form.ShowDialog();
 
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 			this.UpdateControl(FieldEnum.COOL_LOAD);

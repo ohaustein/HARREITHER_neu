@@ -41,7 +41,16 @@ namespace Europlan.Common {
 		protected string comment = null;
 
 		protected SerializableDictionary<int, Circuit.CircuitConnection> connectedCircuits = new SerializableDictionary<int, Circuit.CircuitConnection>();
-		protected Dictionary<int, Circuit.CircuitConnection> inverseConnectedCircuits = new Dictionary<int, Circuit.CircuitConnection>();
+		public SerializableDictionary<int, Circuit.CircuitConnection> ConnectedCircuits {
+			get { return this.connectedCircuits; }
+			set { this.connectedCircuits = value; }
+		}
+
+		protected SerializableDictionary<int, Circuit.CircuitConnection> inverseConnectedCircuits = new SerializableDictionary<int, Circuit.CircuitConnection>();
+		public SerializableDictionary<int, Circuit.CircuitConnection> InverseConnectedCircuits {
+			get { return this.inverseConnectedCircuits; }
+			set { this.inverseConnectedCircuits = value; }
+		}
 
 		public Circuit.CircuitConnection GetCircuitConnected(int thisCircuit) {
 			return null;
@@ -348,9 +357,7 @@ namespace Europlan.Common {
 				return;
 			}
 			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				vorlauf = 0;
-				ruecklauf = 0;
-				// TODO
+				this.plannedConnection.OtherProduct.Product.GetHeatFlow(out vorlauf, out ruecklauf);
 				return;
 			}
 			vorlauf = this.plannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
@@ -373,7 +380,7 @@ namespace Europlan.Common {
 			ruecklauf = vorlauf + 3;
 		}
 
-		public ProductConnection PlannedConnection {
+		public virtual ProductConnection PlannedConnection {
 			get { return this.plannedConnection; }
 			set { this.plannedConnection = value; }
 		}

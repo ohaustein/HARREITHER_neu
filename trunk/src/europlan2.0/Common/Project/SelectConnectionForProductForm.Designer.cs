@@ -26,6 +26,13 @@ namespace Europlan.Common {
 			this.tvDistributors = new System.Windows.Forms.TreeView();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
+			this.grpInfo = new System.Windows.Forms.GroupBox();
+			this.lblInfo = new System.Windows.Forms.Label();
+			this.grpConnection = new System.Windows.Forms.GroupBox();
+			this.rbVorlauf = new System.Windows.Forms.RadioButton();
+			this.rbRuecklauf = new System.Windows.Forms.RadioButton();
+			this.grpInfo.SuspendLayout();
+			this.grpConnection.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tvDistributors
@@ -61,6 +68,58 @@ namespace Europlan.Common {
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			// 
+			// grpInfo
+			// 
+			this.grpInfo.Controls.Add(this.lblInfo);
+			this.grpInfo.Location = new System.Drawing.Point(318, 12);
+			this.grpInfo.Name = "grpInfo";
+			this.grpInfo.Size = new System.Drawing.Size(372, 55);
+			this.grpInfo.TabIndex = 3;
+			this.grpInfo.TabStop = false;
+			this.grpInfo.Text = "Information";
+			// 
+			// lblInfo
+			// 
+			this.lblInfo.Location = new System.Drawing.Point(6, 19);
+			this.lblInfo.Name = "lblInfo";
+			this.lblInfo.Size = new System.Drawing.Size(360, 29);
+			this.lblInfo.TabIndex = 0;
+			this.lblInfo.Text = "label1";
+			// 
+			// grpConnection
+			// 
+			this.grpConnection.Controls.Add(this.rbRuecklauf);
+			this.grpConnection.Controls.Add(this.rbVorlauf);
+			this.grpConnection.Enabled = false;
+			this.grpConnection.Location = new System.Drawing.Point(318, 73);
+			this.grpConnection.Name = "grpConnection";
+			this.grpConnection.Size = new System.Drawing.Size(372, 72);
+			this.grpConnection.TabIndex = 4;
+			this.grpConnection.TabStop = false;
+			this.grpConnection.Text = "Heizkreisanschluﬂ (nur bei Anschluﬂ an anderen Heizkreis)";
+			// 
+			// rbVorlauf
+			// 
+			this.rbVorlauf.AutoSize = true;
+			this.rbVorlauf.Location = new System.Drawing.Point(9, 19);
+			this.rbVorlauf.Name = "rbVorlauf";
+			this.rbVorlauf.Size = new System.Drawing.Size(81, 17);
+			this.rbVorlauf.TabIndex = 0;
+			this.rbVorlauf.TabStop = true;
+			this.rbVorlauf.Text = "vorlaufseitig";
+			this.rbVorlauf.UseVisualStyleBackColor = true;
+			// 
+			// rbRuecklauf
+			// 
+			this.rbRuecklauf.AutoSize = true;
+			this.rbRuecklauf.Location = new System.Drawing.Point(9, 42);
+			this.rbRuecklauf.Name = "rbRuecklauf";
+			this.rbRuecklauf.Size = new System.Drawing.Size(93, 17);
+			this.rbRuecklauf.TabIndex = 1;
+			this.rbRuecklauf.TabStop = true;
+			this.rbRuecklauf.Text = "ruecklaufseitig";
+			this.rbRuecklauf.UseVisualStyleBackColor = true;
+			// 
 			// SelectConnectionForProductForm
 			// 
 			this.AcceptButton = this.btnOk;
@@ -68,6 +127,8 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(702, 475);
+			this.Controls.Add(this.grpConnection);
+			this.Controls.Add(this.grpInfo);
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.tvDistributors);
@@ -76,6 +137,9 @@ namespace Europlan.Common {
 			this.Text = "Verteileranschluﬂ";
 			this.Load += new System.EventHandler(this.SelectConnectionForProductForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SelectConnectionForProductForm_FormClosing);
+			this.grpInfo.ResumeLayout(false);
+			this.grpConnection.ResumeLayout(false);
+			this.grpConnection.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -85,5 +149,10 @@ namespace Europlan.Common {
 		private System.Windows.Forms.TreeView tvDistributors;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOk;
+		private System.Windows.Forms.GroupBox grpInfo;
+		private System.Windows.Forms.Label lblInfo;
+		private System.Windows.Forms.GroupBox grpConnection;
+		private System.Windows.Forms.RadioButton rbRuecklauf;
+		private System.Windows.Forms.RadioButton rbVorlauf;
 	}
 }

@@ -25,36 +25,68 @@ namespace Europlan.Common {
 				distributorNodes[i] = new TreeNode(d.Id + ": " + d.Name);
 				distributorNodes[i].Tag = d;
 				this.nodes.Add(d, distributorNodes[i]);
-				/*foreach (PlannedProduct p in d.PlannedConnectedProducts) {
+				foreach (PlannedProduct p in d.PlannedConnectedProducts) {
 					if (p.Product.PlannedCircuits == null) {
-						TreeNode node = new TreeNode(p.Node.Text + " in Raum " + p.Product.AssociatedRoom.ToString());
+						TreeNode node = new TreeNode(p.Node.Text + " in " + p.Product.AssociatedRoom.ToString());
 						node.Tag = p;
 						distributorNodes[i].Nodes.Add(node);
 					} else {
 						int j = 0;
 						foreach (Circuit c in p.Product.PlannedCircuits) {
-							string label = p.Node.Text + "/" + j.ToString() + " in Raum " + p.Product.AssociatedRoom.ToString();
 							Circuit.CircuitConnection cc = p.Product.GetCircuitConnected(j);
-							if (cc != null) {
-								label += ", " + cc.otherCircuit.PlannedProduct.Node.Text + "/" + cc.otherCircuit.PlannedProduct.Product.GetIndexOfCircuit(cc.otherCircuit) + " in Raum " + cc.otherCircuit.PlannedProduct.Product.AssociatedRoom.ToString();
-							}
 							j++;
+							string label = p.Node.Text + (p.Product.PlannedCircuits.Count > 1 ? " (HK" + j.ToString() + ")" : "") + " in " + p.Product.AssociatedRoom.ToString();
+							if (cc != null) {
+								label += ", " + cc.otherCircuit.PlannedProduct.Node.Text + (cc.otherCircuit.PlannedProduct.Product.PlannedCircuits.Count > 1 ? " (HK" + cc.otherCircuit.NrOfCircuit + ")" : "") + " in " + cc.otherCircuit.PlannedProduct.Product.AssociatedRoom.ToString();
+							}
 							TreeNode node = new TreeNode(label);
+							node.Tag = c;
+							distributorNodes[i].Nodes.Add(node);
+							node.Checked = true;
 						}
 					}
-				}*/
+				}
 				i++;
 			}
 			rootNode = new TreeNode("Projekt", distributorNodes);
 			this.tvDistributors.Nodes.Add(rootNode);
 			this.tvDistributors.ExpandAll();
+			// TODO select old
 		}
 
 		private void tvDistributors_AfterSelect(object sender, TreeViewEventArgs e) {
-			this.btnOk.Enabled = tvDistributors.SelectedNode != null && tvDistributors.SelectedNode.Tag != null;
+			lblInfo.Text = "";
+			bool ok = tvDistributors.SelectedNode != null && tvDistributors.SelectedNode.Tag != null;
+			if (ok) {
+				if (tvDistributors.SelectedNode.Tag is Distributor) {
+					lblInfo.Text = "Anschluß an " + (tvDistributors.SelectedNode.Tag as Distributor).Id + ": " + (tvDistributors.SelectedNode.Tag as Distributor).Name;
+					ok = true;
+				} else if (tvDistributors.SelectedNode.Tag is Circuit) {
+					Circuit selectedCircuit = tvDistributors.SelectedNode.Tag as Circuit;
+					Product selectedProduct = selectedCircuit.PlannedProduct.Product;
+					if (selectedProduct == this.product.Product) {
+						lblInfo.Text = "Anschluß nicht möglich. Das Heizsystem kann nicht an sich selbst angeschlossen werden.";
+						ok = false;
+					} else {
+						int free = 0;
+						foreach (Circuit c in selectedProduct.PlannedCircuits) {
+							if (selectedProduct.GetCircuitConnected(c.NrOfCircuit) == null) {
+								free++;
+							}
+						}
+						
+						ok = free >= this.product.Product.PlannedCircuits.Count;
+						lblInfo.Text = ok ? "Anschluß an " + selectedCircuit.PlannedProduct.Node.Text + " in " + product.Product.AssociatedRoom.ToString() : "Anschluß nicht möglich. Bei diesem Heizsystem sind nicht genug Heizkreise verfügbar";
+					}
+				} else {
+					lblInfo.Text = "Anschluß nicht möglich";
+					ok = false;
+				}
+			}
+			this.btnOk.Enabled = ok;
 		}
 
-		public ProductConnection SelectedConnection {
+		/*public ProductConnection SelectedConnection {
 			get {
 				if (tvDistributors.SelectedNode == null) {
 					return null;
@@ -79,7 +111,7 @@ namespace Europlan.Common {
 					}
 				}
 			}
-		}
+		}*/
 
 		private void SelectConnectionForProductForm_Load(object sender, EventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["SelectConnectionForProductForm"];
@@ -87,6 +119,25 @@ namespace Europlan.Common {
 		}
 
 		private void SelectConnectionForProductForm_FormClosing(object sender, FormClosingEventArgs e) {
+			if (this.DialogResult == DialogResult.OK) {
+				// TODO remove old connection if product was previously connected to another product
+				if (this.tvDistributors.SelectedNode.Tag is Distributor) {
+					Distributor dist = this.tvDistributors.SelectedNode.Tag as Distributor;
+					this.product.Product.PlannedConnection = new ProductConnection(dist);
+				} else if (this.tvDistributors.SelectedNode.Tag is Circuit) {
+					PlannedProduct pp = (this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct;
+					this.product.Product.PlannedConnection = new ProductConnection(pp);
+					int i = 0;
+					foreach (Circuit c in this.product.Product.PlannedCircuits) {
+						while (pp.Product.ConnectedCircuits.ContainsKey(i)) {
+							i++;
+						}
+						pp.Product.ConnectedCircuits[i] = new Circuit.CircuitConnection(Circuit.CircuitConnectionTypeEnum.VORLAUF, c);
+						this.product.Product.InverseConnectedCircuits[c.NrOfCircuit] = new Circuit.CircuitConnection(Circuit.CircuitConnectionTypeEnum.VORLAUF, this.tvDistributors.SelectedNode.Tag as Circuit);
+					}
+				}
+				// TODO
+			}
 			SettingsKey settings = SettingsFile.Settings["SelectConnectionForProductForm"];
 			settings.StorePoint("Location", this.Location);
 			SettingsFile.Update();

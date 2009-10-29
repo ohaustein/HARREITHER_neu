@@ -78,37 +78,6 @@ namespace Europlan.Common {
 		}
 		#endregion Area
 
-		#region Anbindung
-		private double vorlaufTotal;
-		[XmlIgnore]
-		public double VorlaufTotal {
-			get { return this.vorlaufTotal; }
-			set { this.vorlaufTotal = value; }
-		}
-
-		private double vorlaufNotIsolated;
-		[XmlIgnore]
-		public double VorlaufNotIsolated {
-			get { return this.vorlaufNotIsolated; }
-			set { this.vorlaufNotIsolated = value; }
-		}
-
-		private double ruecklaufTotal;
-		[XmlIgnore]
-		public double RuecklaufTotal {
-			get { return this.ruecklaufTotal; }
-			set { this.ruecklaufTotal = value; }
-		}
-
-		private double ruecklaufNotIsolated;
-		[XmlIgnore]
-		public double RuecklaufNotIsolated {
-			get { return this.ruecklaufNotIsolated; }
-			set { this.ruecklaufNotIsolated = value; }
-		}
-		#endregion Anbindung
-
-
 		private double c_areaAz;
 		private double c_areaRz;
 		private double c_pipeLengthAz;

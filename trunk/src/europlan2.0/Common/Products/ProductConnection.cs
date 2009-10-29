@@ -16,38 +16,38 @@ namespace Europlan.Common {
 		private string distributorId = null;
 		private string otherProductId = null;
 
-		private Distributor ruecklaufDistributor = null;
-		private PlannedProduct product = null;
-		private string ruecklaufDistributorId = null;
-		private string productId = null;
+		//private Distributor ruecklaufDistributor = null;
+		//private PlannedProduct product = null;
+		//private string ruecklaufDistributorId = null;
+		//private string productId = null;
 
 		public ProductConnection() {
 		}
 
-		public ProductConnection(Distributor vorlaufDistributor, Distributor ruecklaufDistributor) {
-			this.distributor = vorlaufDistributor;
-			this.ruecklaufDistributor = ruecklaufDistributor;
+		public ProductConnection(Distributor distributor/*, Distributor ruecklaufDistributor*/) {
+			this.distributor = distributor;
+			//this.ruecklaufDistributor = ruecklaufDistributor;
 		}
 
-		public ProductConnection(Distributor vorlaufDistributor, PlannedProduct ruecklaufOtherProduct) {
+		/*public ProductConnection(Distributor vorlaufDistributor, PlannedProduct ruecklaufOtherProduct) {
 			this.distributor = vorlaufDistributor;
 			this.product = ruecklaufOtherProduct;
+		}*/
+
+		public ProductConnection(PlannedProduct otherProduct/*, Distributor ruecklaufDistributor*/) {
+			this.otherProduct = otherProduct;
+			//this.ruecklaufDistributor = ruecklaufDistributor;
 		}
 
-		public ProductConnection(PlannedProduct vorlaufOtherProduct, Distributor ruecklaufDistributor) {
-			this.otherProduct = vorlaufOtherProduct;
-			this.ruecklaufDistributor = ruecklaufDistributor;
-		}
-
-		public ProductConnection(PlannedProduct vorlaufOtherProduct, PlannedProduct ruecklaufOtherProduct) {
+		/*public ProductConnection(PlannedProduct vorlaufOtherProduct, PlannedProduct ruecklaufOtherProduct) {
 			this.otherProduct = vorlaufOtherProduct;
 			this.product = ruecklaufOtherProduct;
-		}
+		}*/
 
 		#region Anbindung
 		[XmlIgnore]
 		public ConnectionTypeEnum ConnectionType {
-			get { return this.Distributor != null ? ConnectionTypeEnum.DISTRIBUTOR : (this.OtherProduct != null ? ConnectionTypeEnum.OTHER_PRODUCT : ConnectionTypeEnum.NONE); }
+			get { return (this.distributor != null || this.distributorId != null) ? ConnectionTypeEnum.DISTRIBUTOR : (this.otherProduct != null || this.otherProductId != null ? ConnectionTypeEnum.OTHER_PRODUCT : ConnectionTypeEnum.NONE); }
 		}
 
 		[XmlIgnore]
@@ -124,7 +124,7 @@ namespace Europlan.Common {
 		#endregion Anbindung
 
 		#region Produkt
-		[XmlIgnore]
+		/*[XmlIgnore]
 		public PlannedProduct Product {
 			get {
 				if (this.productId != null) {
@@ -150,7 +150,7 @@ namespace Europlan.Common {
 		public string ProductId {
 			get { return this.Product == null ? null : this.Product.Id; }
 			set { this.productId = value; }
-		}
+		}*/
 		#endregion Produkt
 
 		public override string ToString() {

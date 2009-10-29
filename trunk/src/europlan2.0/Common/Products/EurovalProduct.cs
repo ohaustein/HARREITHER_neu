@@ -1376,6 +1376,19 @@ namespace Europlan.Common {
 			return true;
 		}
 
+		public override ProductConnection PlannedConnection {
+			get { return this.plannedConnection; }
+			set {
+				if (value != null && value.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+					this.requestedCircuits = this.plannedCircuits > 0 ? this.plannedCircuits : 1;
+					this.requestedLayDistance = this.plannedLayDistance.HasValue ? this.plannedLayDistance.Value : LayDistance.EV35;
+					this.requestedRimType = this.plannedRimType.HasValue ? this.plannedRimType.Value : RimType.EV15_60;
+				}
+				this.plannedConnection = value;
+
+			}
+		}
+
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
 				errorMsg = "Fehlende Eingaben: ";
@@ -1490,15 +1503,35 @@ namespace Europlan.Common {
 			double[] vorlaufNotIsolated = new double[] { vorlaufNotIsolatedFirst, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers };
 			double[] ruecklaufTotal = new double[] { ruecklaufTotalFirst, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers };
 			double[] ruecklaufNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };
+			double[] vorlaufWithoutOtherProductTotal = new double[] { vorlaufTotalFirst, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers };
+			double[] vorlaufWithoutOtherProductNotIsolated = new double[] { vorlaufNotIsolatedFirst, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers };
+			double[] ruecklaufWithoutOtherProductTotal = new double[] { ruecklaufTotalFirst, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers };
+			double[] ruecklaufWithoutOtherProductNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };
 
 			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
 				if (kvp.Value != null) {
 					if (kvp.Value.type == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
-						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithAllConnections;
-						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithUnisolatedConnections;
+						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct;
+						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated;
 					} else {
-						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithAllConnections;
-						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithUnisolatedConnections;
+						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct;
+						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated;
+					}
+				}
+			}
+
+			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.inverseConnectedCircuits) {
+				if (kvp.Value != null) {
+					if (kvp.Value.type == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
+						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
+						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;
+						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
+						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;
+					} else {
+						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductTotal;
+						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
+						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductTotal;
+						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
 					}
 				}
 			}
@@ -1555,10 +1588,14 @@ namespace Europlan.Common {
 							ec.AreaRemovedDueConnection = areaRemovedDueConnection / circuitCount;
 							ec.RimLength = this.plannedRimLength / circuitCount;
 							ec.RimCorners = ((double)this.plannedRimCorners) / circuitCount;
-							ec.VorlaufTotal = vorlaufTotal[i];
-							ec.VorlaufNotIsolated = vorlaufNotIsolated[i];
-							ec.RuecklaufTotal = ruecklaufNotIsolated[i];
-							ec.RuecklaufNotIsolated = ruecklaufNotIsolated[i];
+							ec.PipeLengthVorlaufTotal = vorlaufTotal[i];
+							ec.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
+							ec.PipeLengthRuecklaufTotal = ruecklaufNotIsolated[i];
+							ec.PipeLengthRuecklaufNotIsolated = ruecklaufNotIsolated[i];
+							ec.PipeLengthVorlaufWithoutOtherProductTotal = vorlaufWithoutOtherProductTotal[i];
+							ec.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
+							ec.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
+							ec.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
 							ec.Calculate(ld, rt);
 							i++;
 						}
@@ -1636,10 +1673,10 @@ namespace Europlan.Common {
 					ec.AreaRemovedDueConnection = areaRemovedDueConnection / bestCircuits;
 					ec.RimLength = this.plannedRimLength / bestCircuits;
 					ec.RimCorners = ((double)this.plannedRimCorners) / bestCircuits;
-					ec.VorlaufTotal = vorlaufTotal[i];
-					ec.VorlaufNotIsolated = vorlaufNotIsolated[i];
-					ec.RuecklaufTotal = ruecklaufNotIsolated[i];
-					ec.RuecklaufNotIsolated = ruecklaufNotIsolated[i];
+					ec.PipeLengthVorlaufTotal = vorlaufTotal[i];
+					ec.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
+					ec.PipeLengthRuecklaufTotal = ruecklaufNotIsolated[i];
+					ec.PipeLengthRuecklaufNotIsolated = ruecklaufNotIsolated[i];
 					ec.Calculate(bestLaydistance.Value, bestRimType);
 					i++;
 				}
