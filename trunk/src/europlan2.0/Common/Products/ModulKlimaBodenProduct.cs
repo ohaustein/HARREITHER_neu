@@ -11,6 +11,7 @@ namespace Europlan.Common {
 
 		private static double module_100_40_area = 0.9925 * 0.4;
 
+		private float plannedArea = 0;
 		private float plannedAreaUnheated = 0;
 		private float plannedRoomTemperatureBelowHeat = 18;
 		private float plannedRoomTemperatureBelowCool = 22;
@@ -96,14 +97,47 @@ namespace Europlan.Common {
 		}
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
-			// TODO
-			errorMsg = "Noch nicht implementiert";
+			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null) {
+				errorMsg = "Fehlende Eingaben: ";
+				if (plannedFloorConstruction == null) {
+					errorMsg += "Fuﬂbodenkonstruktion, ";
+				}
+				if (plannedInsulationConstruction == null) {
+					errorMsg += "W‰rmed‰mmkonstruktion, ";
+				}
+				if (PlannedConnection == null) {
+					errorMsg += "Heizkreisanschluﬂ, ";
+				}
+				errorMsg = errorMsg.Substring(0, errorMsg.Length - 2);
+				return false;
+			}
+
+
+			double areaRemovedDueConnection = 0;
+			double heatLoadRemovedDueConnection = 0;
+			double coolLoadRemovedDueConnection = 0;
+			List<ConnectionPipe> connectionPipes = new List<ConnectionPipe>();
+			foreach (Floor f in Project.Instance.Floors) {
+				foreach (Room r in f.Rooms) {
+					foreach (PlannedProduct pp in r.PlannedProducts) {
+						foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
+							if (cp != null && cp.ConnectionThrough != null && cp.ConnectionThrough.Product == this) {
+								connectionPipes.Add(cp);
+								areaRemovedDueConnection += cp.AreaTotal;
+								heatLoadRemovedDueConnection += cp.HeatLoadTotal;
+								coolLoadRemovedDueConnection += cp.CoolLoadTotal;
+							}
+						}
+					}
+				}
+			}
+
 			return false;
 		}
 
 		public override float PlannedFloorArea {
-			get { return 0; }
-			set { }
+			get { return this.plannedArea; }
+			set { this.plannedArea = value; }
 		}
 
 		/// <summary>
@@ -145,11 +179,7 @@ namespace Europlan.Common {
 		}
 
 		public override float PlannedNetArea {
-			get { return 0; }
-		}
-
-		public override int PlannedCircuitCount {
-			get { return 0; }
+			get { return this.PlannedFloorArea - this.PlannedAreaUnheated; }
 		}
 
 		/// <summary>

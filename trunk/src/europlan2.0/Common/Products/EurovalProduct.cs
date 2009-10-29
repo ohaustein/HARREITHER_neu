@@ -1100,10 +1100,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		[XmlIgnore]
-		public override int PlannedCircuitCount {
-			get { return this.circuits.Count; }
-		}
 		#endregion Auslegung calculated values
 
 		/// <summary>

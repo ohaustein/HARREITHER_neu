@@ -332,9 +332,8 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public abstract int PlannedCircuitCount {
-			get; /*{ return this.plannedCircuits; }*/
-			/*set { this.plannedCircuits = value; }*/
+		public int PlannedCircuitCount {
+			get { return this.circuits.Count; }
 		}
 
 		[XmlIgnore]
