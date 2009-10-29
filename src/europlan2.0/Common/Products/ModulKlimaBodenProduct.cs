@@ -132,6 +132,7 @@ namespace Europlan.Common {
 				}
 			}
 
+			errorMsg = "";
 			return false;
 		}
 
