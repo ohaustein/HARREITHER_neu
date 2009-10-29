@@ -95,7 +95,7 @@ namespace Europlan.Common {
 			this.label9 = new System.Windows.Forms.Label();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnAdd = new System.Windows.Forms.Button();
-			this.listBox1 = new System.Windows.Forms.ListBox();
+			this.lstCircuits = new System.Windows.Forms.ListBox();
 			this.numericBox7 = new Europlan.Common.NumericBox();
 			this.label13 = new System.Windows.Forms.Label();
 			this.num6 = new Europlan.Common.NumericBox();
@@ -806,7 +806,7 @@ namespace Europlan.Common {
 			this.panel2.Controls.Add(this.label9);
 			this.panel2.Controls.Add(this.btnRemove);
 			this.panel2.Controls.Add(this.btnAdd);
-			this.panel2.Controls.Add(this.listBox1);
+			this.panel2.Controls.Add(this.lstCircuits);
 			this.panel2.Controls.Add(this.numericBox7);
 			this.panel2.Controls.Add(this.label13);
 			this.panel2.Controls.Add(this.num6);
@@ -1075,13 +1075,14 @@ namespace Europlan.Common {
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
-			// listBox1
+			// lstCircuits
 			// 
-			this.listBox1.FormattingEnabled = true;
-			this.listBox1.Location = new System.Drawing.Point(4, 30);
-			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(190, 238);
-			this.listBox1.TabIndex = 15;
+			this.lstCircuits.FormattingEnabled = true;
+			this.lstCircuits.Location = new System.Drawing.Point(4, 30);
+			this.lstCircuits.Name = "lstCircuits";
+			this.lstCircuits.Size = new System.Drawing.Size(190, 238);
+			this.lstCircuits.TabIndex = 15;
+			this.lstCircuits.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
 			// 
 			// numericBox7
 			// 
@@ -1494,7 +1495,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
 		private System.Windows.Forms.Button btnRemove;
 		private System.Windows.Forms.Button btnAdd;
-		private System.Windows.Forms.ListBox listBox1;
+		private System.Windows.Forms.ListBox lstCircuits;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.RadioButton rbRight1;
 		private System.Windows.Forms.RadioButton rbleft1;
