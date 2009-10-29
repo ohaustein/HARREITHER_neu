@@ -25,6 +25,7 @@ namespace Europlan.Common {
 		private static int maxModulesInParallel = 6;
 		private static int maxModulesInCircuit = 50;
 
+
 		public ModulKlimaBodenProduct() {
 
 		}
@@ -149,11 +150,6 @@ namespace Europlan.Common {
 
 		public override int PlannedCircuitCount {
 			get { return 0; }
-		}
-
-		[XmlIgnore]
-		public override List<Circuit> PlannedCircuits {
-			get { return null; }
 		}
 
 		/// <summary>

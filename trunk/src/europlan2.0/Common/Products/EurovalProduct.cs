@@ -67,19 +67,7 @@ namespace Europlan.Common {
 
 		private bool plannedCorrections = false;
 
-		private List<EurovalCircuit> circuits = new List<EurovalCircuit>();
-
-		[XmlIgnore]
-		public override List<Circuit> PlannedCircuits {
-			get {
-				List<Circuit> rtn = new List<Circuit>();
-				foreach (EurovalCircuit ec in this.circuits) {
-					rtn.Add(ec);
-				}
-				return rtn;
-			}
-		}
-
+		
 		public override Circuit GetCircuit(int index) {
 			if (index < this.circuits.Count) {
 				return this.circuits[index];
@@ -97,11 +85,6 @@ namespace Europlan.Common {
 			}
 			return -1;
 		}*/
-
-		public List<EurovalCircuit> PlannedEurovalCircuits {
-			get { return this.circuits; }
-			set { this.circuits = value; }
-		}
 
 		private bool clipSchiene = false;
 		private bool anhydritEstrich = false;
