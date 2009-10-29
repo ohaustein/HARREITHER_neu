@@ -40,37 +40,6 @@ namespace Europlan.Common {
 			SEPARATE_CIRCUIT = 65536
 		}
 
-		/*private class ComboItem {
-			private string name;
-			private object value;
-
-			public ComboItem(string name, object value) {
-				this.name = name;
-				this.value = value;
-			}
-
-			public string Name {
-				get { return this.name; }
-				set { this.name = value; }
-			}
-
-			public object Value {
-				get { return this.value; }
-				set { this.value = value; }
-			}
-
-			public override string ToString() {
-				return this.name;
-			}
-
-			public override int GetHashCode() {
-				return this.value == null ? 0 : this.value.GetHashCode();
-			}
-
-			public override bool Equals(object obj) {
-				return this.value == null ? obj == null : this.value.Equals(obj);
-			}
-		}*/
 
 		private string errorMsg = null;
 
@@ -727,32 +696,35 @@ namespace Europlan.Common {
 			form.Dispose();
 		}
 
+		private void rb_CheckedChanged(object sender, EventArgs e) {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
 
-		//private void dataGridView1_DragDrop(object sender, DragEventArgs e) {
-		//    dataGridView1.CurrentCell.Value = e.Data.ToString();
-		//}
+		private void numAnbindeLength_ValueChanged(object sender, EventArgs e) {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
 
-		//private void dataGridView1_DragEnter(object sender, DragEventArgs e) {
-		//    string test = e.ToString();
-		//}
+		private void numAnzahl_ValueChanged(object sender, EventArgs e) {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
 
-		//private void dataGridView1_DragLeave(object sender, EventArgs e) {
-		//    string test = e.ToString();
-		//}
+		private void btnAdd_Click(object sender, EventArgs e) {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
 
-		//private void dataGridView1_DragOver(object sender, DragEventArgs e) {
-		//    Point clientPoint = dataGridView1.PointToClient(new Point(e.X, e.Y));
-		//    DataGridView.HitTestInfo hit = dataGridView1.HitTest(clientPoint.X, clientPoint.Y);
-		//    if (hit.ColumnIndex >= 0 && hit.RowIndex >= 0) {
-		//        dataGridView1.CurrentCell = dataGridView1[hit.ColumnIndex, hit.RowIndex];
-		//        if ((e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy) {
-		//            e.Effect = DragDropEffects.Copy;
-		//        }
-		//    } else {
-		//        e.Effect = DragDropEffects.None;
-		//    }
-		//    string test = e.ToString();
-		//}
+		private void btnRemove_Click(object sender, EventArgs e) {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
 
 
 	}
