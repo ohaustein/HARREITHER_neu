@@ -30,14 +30,14 @@ namespace Europlan.Common {
 			AREA_REDUCED = 64,
 			AREA_UNHEATED = 128,
 			ROOM_TEMERATURE_BELOW_HEAT = 256,
-			ROOM_TEMERATURE_BELOW_COOL = 512,
-			RIM_LENGTH = 1024,
-			CORNERS = 2048,
-			LAY_DISTANCE = 4096,
-			RIM_TYPE = 8192,
-			CALCULATION_TYPE = 16384,
-			CIRCUIT_COUNT = 32768,
-			SEPARATE_CIRCUIT = 65536
+			ROOM_TEMERATURE_BELOW_COOL = 512
+			//RIM_LENGTH = 1024,
+			//CORNERS = 2048,
+			//LAY_DISTANCE = 4096,
+			//RIM_TYPE = 8192,
+			//CALCULATION_TYPE = 16384,
+			//CIRCUIT_COUNT = 32768,
+			//SEPARATE_CIRCUIT = 65536
 		}
 
 
@@ -48,7 +48,7 @@ namespace Europlan.Common {
 			this.tabs.SelectedTab = this.pageInput;
 			this.connectionPipePanel.Update(this.product);
 			if (this.product != null) {
-				//(this.product.Product as EurovalProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errorMsg);
+				(this.product.Product as ModulKlimaBodenProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errorMsg);
 			}
 			this.UpdateControl(FieldEnum.NONE);
 		}
@@ -65,35 +65,21 @@ namespace Europlan.Common {
 		private int ignoreAreaUnheated = 0;
 		private int ignoreRoomTemperatureBelowHeat = 0;
 		private int ignoreRoomTemperatureBelowCool = 0;
-		private int ignoreRim = 0;
-		private int ignoreCorners = 0;
-		private int ignoreLayDistance = 0;
-		private int ignoreRimType = 0;
-		private int ignoreCalculationType = 0;
-		private int ignoreCircuits = 0;
-		private int ignoreSeparateCircuit = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
-			//    ignoreCoverHeatLoad++;
-			//    ignoreHeatLoad++;
-			//    ignoreHeatLoadPercentage++;
-			//    ignoreCoverCoolLoad++;
-			//    ignoreCoolLoad++;
-			//    ignoreCoolLoadPercentage++;
-			//    ignoreArea++;
-			//    ignoreAreaPercentage++;
-			//    ignoreAreaReduced++;
-			//    ignoreAreaUnheated++;
-			//    ignoreRoomTemperatureBelowHeat++;
-			//    ignoreRoomTemperatureBelowCool++;
-			//    ignoreRim++;
-			//    ignoreCorners++;
-			//    ignoreLayDistance++;
-			//    ignoreRimType++;
-			//    ignoreCalculationType++;
-			//    ignoreCircuits++;
-			//    ignoreSeparateCircuit++;
+				ignoreCoverHeatLoad++;
+				ignoreHeatLoad++;
+				ignoreHeatLoadPercentage++;
+				ignoreCoverCoolLoad++;
+				ignoreCoolLoad++;
+				ignoreCoolLoadPercentage++;
+				ignoreArea++;
+				ignoreAreaPercentage++;
+				ignoreAreaReduced++;
+				ignoreAreaUnheated++;
+				ignoreRoomTemperatureBelowHeat++;
+				ignoreRoomTemperatureBelowCool++;
 
 				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
 
@@ -391,25 +377,19 @@ namespace Europlan.Common {
 			//        this.lblError.Visible = false;
 			//    }
 
-			//    ignoreCoverHeatLoad--;
-			//    ignoreHeatLoad--;
-			//    ignoreHeatLoadPercentage--;
-			//    ignoreCoverCoolLoad--;
-			//    ignoreCoolLoad--;
-			//    ignoreCoolLoadPercentage--;
-			//    ignoreArea--;
-			//    ignoreAreaPercentage--;
-			//    ignoreAreaReduced--;
-			//    ignoreAreaUnheated--;
-			//    ignoreRoomTemperatureBelowHeat--;
-			//    ignoreRoomTemperatureBelowCool--;
-			//    ignoreRim--;
-			//    ignoreCorners--;
-			//    ignoreLayDistance--;
-			//    ignoreRimType--;
-			//    ignoreCalculationType--;
-			//    ignoreCircuits--;
-			//    ignoreSeparateCircuit--;
+				ignoreCoverHeatLoad--;
+				ignoreHeatLoad--;
+				ignoreHeatLoadPercentage--;
+				ignoreCoverCoolLoad--;
+				ignoreCoolLoad--;
+				ignoreCoolLoadPercentage--;
+				ignoreArea--;
+				ignoreAreaPercentage--;
+				ignoreAreaReduced--;
+				ignoreAreaUnheated--;
+				ignoreRoomTemperatureBelowHeat--;
+				ignoreRoomTemperatureBelowCool--;
+
 			}
 			// TODO
 		}
