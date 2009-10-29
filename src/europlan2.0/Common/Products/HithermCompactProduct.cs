@@ -101,10 +101,6 @@ namespace Europlan.Common {
 			get { return 0; }
 		}
 
-		[XmlIgnore]
-		public override List<Circuit> PlannedCircuits {
-			get { return null; }
-		}
 
 		public override Circuit GetCircuit(int index) {
 			return null;

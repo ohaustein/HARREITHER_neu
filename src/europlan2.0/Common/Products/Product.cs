@@ -36,6 +36,7 @@ namespace Europlan.Common {
 		protected List<ConnectionPipe> plannedConnectionPipes = new List<ConnectionPipe>();
 
 		protected int plannedCircuits = 1;
+		protected List<Circuit> circuits = new List<Circuit>();
 
 		protected string comment = null;
 
@@ -388,9 +389,13 @@ namespace Europlan.Common {
 			}
 		}
 
-		[XmlIgnore]
-		public abstract List<Circuit> PlannedCircuits {
-			get;
+		public List<Circuit> PlannedCircuits {
+			get {
+				return this.circuits;
+			}
+			set {
+				this.circuits = value;
+			}
 		}
 
 		//public abstract int GetIndexOfCircuit(Circuit c);
