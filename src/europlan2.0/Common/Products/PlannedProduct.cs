@@ -415,9 +415,8 @@ namespace Europlan.Common {
 		#endregion
 
 		internal void FinalizeLoading() {
-			string errorMsg;
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg);
 			this.plannedProduct.FinalizeLoading();
+			string errorMsg;
 
 			List<PlannedProduct> products = this.plannedProduct.AssociatedRoom.PlannedProducts;
 			Dictionary<Product.ProductType, int> productCounter = new Dictionary<Product.ProductType, int>();
@@ -429,6 +428,9 @@ namespace Europlan.Common {
 				}
 				p.productNode.Text = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType] + ": " + p.System;
 			}
+
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg);
+
 		}
 
 		public TreeNode FindNode(object element) {

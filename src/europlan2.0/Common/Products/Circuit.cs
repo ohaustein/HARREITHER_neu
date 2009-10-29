@@ -15,6 +15,11 @@ namespace Europlan.Common {
 		public class CircuitConnection {
 			public CircuitConnectionTypeEnum type;
 			public Circuit otherCircuit;
+
+			public CircuitConnection(CircuitConnectionTypeEnum type, Circuit otherCircuit) {
+				this.type = type;
+				this.otherCircuit = otherCircuit;
+			}
 		}
 
 		protected string id;
@@ -63,6 +68,20 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public double PipeLengthWithoutOtherProduct {
+			get {
+				return this.PipeLengthWithoutConnections + this.PipeLengthVorlaufWithoutOtherProductTotal + this.PipeLengthRuecklaufWithoutOtherProductTotal;
+			}
+		}
+
+		[XmlIgnore]
+		public double PipeLengthWithoutOtherProductNotIsolated {
+			get {
+				return this.PipeLengthWithoutConnections + this.PipeLengthVorlaufWithoutOtherProductNotIsolated + this.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
+			}
+		}
+
+		/*[XmlIgnore]
 		public double PipeLengthVorlauf {
 			get {
 				double value = 0;
@@ -108,6 +127,66 @@ namespace Europlan.Common {
 				}
 				return value;
 			}
+		}*/
+
+		#region Anbindung
+		protected double vorlaufTotal;
+		[XmlIgnore]
+		public double PipeLengthVorlaufTotal {
+			get { return this.vorlaufTotal; }
+			set { this.vorlaufTotal = value; }
 		}
+
+		protected double vorlaufNotIsolated;
+		[XmlIgnore]
+		public double PipeLengthVorlaufNotIsolated {
+			get { return this.vorlaufNotIsolated; }
+			set { this.vorlaufNotIsolated = value; }
+		}
+
+		protected double ruecklaufTotal;
+		[XmlIgnore]
+		public double PipeLengthRuecklaufTotal {
+			get { return this.ruecklaufTotal; }
+			set { this.ruecklaufTotal = value; }
+		}
+
+		protected double ruecklaufNotIsolated;
+		[XmlIgnore]
+		public double PipeLengthRuecklaufNotIsolated {
+			get { return this.ruecklaufNotIsolated; }
+			set { this.ruecklaufNotIsolated = value; }
+		}
+
+		protected double vorlaufWithoutOtherProductTotal;
+		[XmlIgnore]
+		public double PipeLengthVorlaufWithoutOtherProductTotal {
+			get { return this.vorlaufWithoutOtherProductTotal; }
+			set { this.vorlaufWithoutOtherProductTotal = value; }
+		}
+
+		protected double vorlaufWithoutOtherProductNotIsolated;
+		[XmlIgnore]
+		public double PipeLengthVorlaufWithoutOtherProductNotIsolated {
+			get { return this.vorlaufWithoutOtherProductNotIsolated; }
+			set { this.vorlaufWithoutOtherProductNotIsolated = value; }
+		}
+
+		protected double ruecklaufWithoutOtherProductTotal;
+		[XmlIgnore]
+		public double PipeLengthRuecklaufWithoutOtherProductTotal {
+			get { return this.ruecklaufWithoutOtherProductTotal; }
+			set { this.ruecklaufWithoutOtherProductTotal = value; }
+		}
+
+		protected double ruecklaufWithoutOtherProductNotIsolated;
+		[XmlIgnore]
+		public double PipeLengthRuecklaufWithoutOtherProductNotIsolated {
+			get { return this.ruecklaufWithoutOtherProductNotIsolated; }
+			set { this.ruecklaufWithoutOtherProductNotIsolated = value; }
+		}
+
+
+		#endregion Anbindung
 	}
 }
