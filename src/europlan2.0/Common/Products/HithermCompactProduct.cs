@@ -97,11 +97,6 @@ namespace Europlan.Common {
 			get { return 0; }
 		}
 
-		public override int PlannedCircuitCount {
-			get { return 0; }
-		}
-
-
 		public override Circuit GetCircuit(int index) {
 			return null;
 		}
