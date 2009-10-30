@@ -12,60 +12,60 @@ namespace Europlan.Common {
 
 #region enums
 
-		public class DistributorTypeEnumConverter : System.ComponentModel.TypeConverter {
+		//public class DistributorTypeEnumConverter : System.ComponentModel.TypeConverter {
 	
-			private static readonly string durchflussmengenregler = "Harreither Systemverteiler mit Durchflußmengenregler";
-			private static readonly string ruecklaufventil = "Harreither Systemverteiler mit Rücklaufventil";
+		//    private static readonly string durchflussmengenregler = "Harreither Systemverteiler mit Durchflußmengenregler";
+		//    private static readonly string ruecklaufventil = "Harreither Systemverteiler mit Rücklaufventil";
 
-			private Dictionary<string, DistributorTypeEnum> mappingFromString = new Dictionary<string, DistributorTypeEnum>();
-			private Dictionary<DistributorTypeEnum, string> mappingToString = new Dictionary<DistributorTypeEnum, string>();
+		//    private Dictionary<string, DistributorTypeEnum> mappingFromString = new Dictionary<string, DistributorTypeEnum>();
+		//    private Dictionary<DistributorTypeEnum, string> mappingToString = new Dictionary<DistributorTypeEnum, string>();
 
-			public DistributorTypeEnumConverter() {
-				mappingFromString.Add(durchflussmengenregler, DistributorTypeEnum.Durchflussmengenregler);
-				mappingFromString.Add(ruecklaufventil, DistributorTypeEnum.Ruecklaufventil);
-				mappingToString.Add(DistributorTypeEnum.Durchflussmengenregler, durchflussmengenregler);
-				mappingToString.Add(DistributorTypeEnum.Ruecklaufventil, ruecklaufventil);
-			}
+		//    public DistributorTypeEnumConverter() {
+		//        mappingFromString.Add(durchflussmengenregler, DistributorTypeEnum.Durchflussmengenregler);
+		//        mappingFromString.Add(ruecklaufventil, DistributorTypeEnum.Ruecklaufventil);
+		//        mappingToString.Add(DistributorTypeEnum.Durchflussmengenregler, durchflussmengenregler);
+		//        mappingToString.Add(DistributorTypeEnum.Ruecklaufventil, ruecklaufventil);
+		//    }
 
-			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
-				return sourceType == typeof(string);
-			}
+		//    public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
+		//        return sourceType == typeof(string);
+		//    }
 
-			public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
-				return destinationType == typeof(string);
-			}
+		//    public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
+		//        return destinationType == typeof(string);
+		//    }
 
-			public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-				if (value is string) {
-					if (mappingFromString.ContainsKey((string)value)) {
-						return mappingFromString[(string)value];
-					}
-				}
-				return base.ConvertFrom(context, culture, value);
-			}
+		//    public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+		//        if (value is string) {
+		//            if (mappingFromString.ContainsKey((string)value)) {
+		//                return mappingFromString[(string)value];
+		//            }
+		//        }
+		//        return base.ConvertFrom(context, culture, value);
+		//    }
 
-			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-				if (value is DistributorTypeEnum && destinationType == typeof(string)) {
-					if (mappingToString.ContainsKey((DistributorTypeEnum)value)) {
-						return mappingToString[(DistributorTypeEnum)value];
-					}
-				}
-				return base.ConvertTo(context, culture, value, destinationType);
-			}
-		}
+		//    public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+		//        if (value is DistributorTypeEnum && destinationType == typeof(string)) {
+		//            if (mappingToString.ContainsKey((DistributorTypeEnum)value)) {
+		//                return mappingToString[(DistributorTypeEnum)value];
+		//            }
+		//        }
+		//        return base.ConvertTo(context, culture, value, destinationType);
+		//    }
+		//}
 
-		[System.ComponentModel.TypeConverter(typeof(DistributorTypeEnumConverter))]
-		public enum DistributorTypeEnum {
-			Durchflussmengenregler,
-			Ruecklaufventil
-		}
+		//[System.ComponentModel.TypeConverter(typeof(DistributorTypeEnumConverter))]
+		//public enum DistributorTypeEnum {
+		//    Durchflussmengenregler,
+		//    Ruecklaufventil
+		//}
 
 		public class AnschlussHollaenderEnumConverter : System.ComponentModel.TypeConverter {
 
 			private static readonly string kein = "Kein Holländer";
 			private static readonly string hollaender32 = "Anschlußholländer mit Anschlußstück Ø 32mm";
 			private static readonly string hollaenderIG = "Anschlußholländer mit Anschlußstück 1\" IG";
-			private static readonly string hollaenderAG = "Anschlußholländer mit Anschlußstück 1\" AG";
+			//private static readonly string hollaenderAG = "Anschlußholländer mit Anschlußstück 1\" AG";
 
 			private Dictionary<string,  AnschlussHollaenderEnum> mappingFromString = new Dictionary<string,  AnschlussHollaenderEnum>();
 			private Dictionary< AnschlussHollaenderEnum, string> mappingToString = new Dictionary< AnschlussHollaenderEnum, string>();
@@ -74,11 +74,11 @@ namespace Europlan.Common {
 				mappingFromString.Add(kein, AnschlussHollaenderEnum.Kein);
 				mappingFromString.Add(hollaender32, AnschlussHollaenderEnum.hollaender32);
 				mappingFromString.Add(hollaenderIG, AnschlussHollaenderEnum.hollaenderIG);
-				mappingFromString.Add(hollaenderAG, AnschlussHollaenderEnum.hollaenderAG);
+				//mappingFromString.Add(hollaenderAG, AnschlussHollaenderEnum.hollaenderAG);
 				mappingToString.Add(AnschlussHollaenderEnum.Kein, kein);
 				mappingToString.Add(AnschlussHollaenderEnum.hollaender32, hollaender32);
 				mappingToString.Add(AnschlussHollaenderEnum.hollaenderIG, hollaenderIG);
-				mappingToString.Add(AnschlussHollaenderEnum.hollaenderAG, hollaenderAG);
+				//mappingToString.Add(AnschlussHollaenderEnum.hollaenderAG, hollaenderAG);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -112,8 +112,8 @@ namespace Europlan.Common {
 		public enum AnschlussHollaenderEnum {
 			Kein,
 			hollaender32,
-			hollaenderIG,
-			hollaenderAG
+			hollaenderIG
+			//hollaenderAG
 		}
 
 #endregion
@@ -122,7 +122,7 @@ namespace Europlan.Common {
 		private string name;
 		private string regulatorCircuitId = null;
 		private RegulatorCircuit regulatorCircuit = null;
-		private DistributorTypeEnum distributorType;
+		//private DistributorTypeEnum distributorType;
 		private AnschlussHollaenderEnum anschlussHollaender;
 		private bool langeAnschlussboegen;
 		private int maxCircuits;
@@ -153,7 +153,7 @@ namespace Europlan.Common {
 			id = "";
 			name = "";
 			regulatorCircuitId = "";
-			distributorType = DistributorTypeEnum.Durchflussmengenregler;
+			//distributorType = DistributorTypeEnum.Durchflussmengenregler;
 			anschlussHollaender = AnschlussHollaenderEnum.Kein;
 			langeAnschlussboegen = false;
 			maxCircuits = 12;
@@ -188,10 +188,10 @@ namespace Europlan.Common {
 			}
 		}
 
-		public DistributorTypeEnum DistributorType {
-			get { return distributorType; }
-			set { distributorType = value; }
-		}
+		//public DistributorTypeEnum DistributorType {
+		//    get { return distributorType; }
+		//    set { distributorType = value; }
+		//}
 
 		public AnschlussHollaenderEnum AnschlussHollaender {
 			get { return anschlussHollaender; }

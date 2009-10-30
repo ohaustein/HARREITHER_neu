@@ -35,10 +35,10 @@ namespace Europlan.Common {
 				foreach (RegulatorCircuit circuit in project.RegulatorCircuits) {
 					this.cmbCircuit.Items.Add(circuit);
 				}
-				this.cmbDistributorType.Items.Clear();
-				foreach (Distributor.DistributorTypeEnum item in Enum.GetValues(typeof(Distributor.DistributorTypeEnum))) {
-					this.cmbDistributorType.Items.Add(item);
-				}
+				//this.cmbDistributorType.Items.Clear();
+				//foreach (Distributor.DistributorTypeEnum item in Enum.GetValues(typeof(Distributor.DistributorTypeEnum))) {
+				//    this.cmbDistributorType.Items.Add(item);
+				//}
 				this.cmbAnschlussHollaender.Items.Clear();
 				foreach (Distributor.AnschlussHollaenderEnum item in Enum.GetValues(typeof(Distributor.AnschlussHollaenderEnum))) {
 					this.cmbAnschlussHollaender.Items.Add(item);
@@ -54,7 +54,7 @@ namespace Europlan.Common {
 				this.lstSystems.Items.Add("Wand", distributor.UseForWall);
 				this.lstSystems.Items.Add("Decke", distributor.UseForCeiling);
 				this.cmbCircuit.SelectedItem = distributor.RegulatorCircuit;
-				this.cmbDistributorType.SelectedItem = distributor.DistributorType;
+				//this.cmbDistributorType.SelectedItem = distributor.DistributorType;
 				this.cmbAnschlussHollaender.SelectedItem = distributor.AnschlussHollaender;
 			}
 		}
@@ -117,12 +117,12 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void cmbDistributorType_SelectedIndexChanged(object sender, EventArgs e) {
-			distributor.DistributorType = (Distributor.DistributorTypeEnum)this.cmbDistributorType.SelectedItem;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
-			}
-		}
+		//private void cmbDistributorType_SelectedIndexChanged(object sender, EventArgs e) {
+		//    distributor.DistributorType = (Distributor.DistributorTypeEnum)this.cmbDistributorType.SelectedItem;
+		//    if (ProjectChanged != null) {
+		//        ProjectChanged(null);
+		//    }
+		//}
 
 		private void cmbAnschlussHollaender_SelectedIndexChanged(object sender, EventArgs e) {
 			distributor.AnschlussHollaender = (Distributor.AnschlussHollaenderEnum)this.cmbAnschlussHollaender.SelectedItem;

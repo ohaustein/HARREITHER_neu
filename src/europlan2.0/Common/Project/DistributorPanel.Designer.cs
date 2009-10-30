@@ -118,7 +118,7 @@ namespace Europlan.Common {
 			// 
 			// label5
 			// 
-			this.label5.Location = new System.Drawing.Point(3, 240);
+			this.label5.Location = new System.Drawing.Point(4, 213);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(100, 23);
 			this.label5.TabIndex = 26;
@@ -127,7 +127,7 @@ namespace Europlan.Common {
 			// 
 			// numMaxCircuits
 			// 
-			this.numMaxCircuits.Location = new System.Drawing.Point(141, 243);
+			this.numMaxCircuits.Location = new System.Drawing.Point(142, 216);
 			this.numMaxCircuits.Maximum = new decimal(new int[] {
             12,
             0,
@@ -142,7 +142,7 @@ namespace Europlan.Common {
 			// 
 			this.listFloors.CheckOnClick = true;
 			this.listFloors.FormattingEnabled = true;
-			this.listFloors.Location = new System.Drawing.Point(141, 295);
+			this.listFloors.Location = new System.Drawing.Point(142, 268);
 			this.listFloors.Name = "listFloors";
 			this.listFloors.Size = new System.Drawing.Size(268, 79);
 			this.listFloors.TabIndex = 28;
@@ -150,7 +150,7 @@ namespace Europlan.Common {
 			// 
 			// label6
 			// 
-			this.label6.Location = new System.Drawing.Point(2, 295);
+			this.label6.Location = new System.Drawing.Point(3, 268);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(132, 45);
 			this.label6.TabIndex = 29;
@@ -160,7 +160,7 @@ namespace Europlan.Common {
 			// chkEinbauschrank
 			// 
 			this.chkEinbauschrank.AutoSize = true;
-			this.chkEinbauschrank.Location = new System.Drawing.Point(312, 197);
+			this.chkEinbauschrank.Location = new System.Drawing.Point(313, 170);
 			this.chkEinbauschrank.Name = "chkEinbauschrank";
 			this.chkEinbauschrank.Size = new System.Drawing.Size(97, 17);
 			this.chkEinbauschrank.TabIndex = 33;
@@ -171,7 +171,7 @@ namespace Europlan.Common {
 			// chkFlansch
 			// 
 			this.chkFlansch.AutoSize = true;
-			this.chkFlansch.Location = new System.Drawing.Point(141, 197);
+			this.chkFlansch.Location = new System.Drawing.Point(142, 170);
 			this.chkFlansch.Name = "chkFlansch";
 			this.chkFlansch.Size = new System.Drawing.Size(119, 17);
 			this.chkFlansch.TabIndex = 34;
@@ -183,26 +183,27 @@ namespace Europlan.Common {
 			// 
 			this.cmbDistributorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbDistributorType.FormattingEnabled = true;
-			this.cmbDistributorType.Location = new System.Drawing.Point(141, 132);
+			this.cmbDistributorType.Location = new System.Drawing.Point(389, 49);
 			this.cmbDistributorType.Name = "cmbDistributorType";
-			this.cmbDistributorType.Size = new System.Drawing.Size(345, 21);
+			this.cmbDistributorType.Size = new System.Drawing.Size(51, 21);
 			this.cmbDistributorType.TabIndex = 36;
-			this.cmbDistributorType.SelectedIndexChanged += new System.EventHandler(this.cmbDistributorType_SelectedIndexChanged);
+			this.cmbDistributorType.Visible = false;
 			// 
 			// label9
 			// 
-			this.label9.Location = new System.Drawing.Point(2, 130);
+			this.label9.Location = new System.Drawing.Point(386, 23);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(100, 23);
 			this.label9.TabIndex = 35;
 			this.label9.Text = "Verteilertyp:";
 			this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.label9.Visible = false;
 			// 
 			// cmbAnschlussHollaender
 			// 
 			this.cmbAnschlussHollaender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbAnschlussHollaender.FormattingEnabled = true;
-			this.cmbAnschlussHollaender.Location = new System.Drawing.Point(141, 159);
+			this.cmbAnschlussHollaender.Location = new System.Drawing.Point(142, 132);
 			this.cmbAnschlussHollaender.Name = "cmbAnschlussHollaender";
 			this.cmbAnschlussHollaender.Size = new System.Drawing.Size(345, 21);
 			this.cmbAnschlussHollaender.TabIndex = 38;
@@ -210,7 +211,7 @@ namespace Europlan.Common {
 			// 
 			// label10
 			// 
-			this.label10.Location = new System.Drawing.Point(2, 157);
+			this.label10.Location = new System.Drawing.Point(3, 130);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(100, 23);
 			this.label10.TabIndex = 37;
@@ -219,7 +220,7 @@ namespace Europlan.Common {
 			// 
 			// label11
 			// 
-			this.label11.Location = new System.Drawing.Point(2, 193);
+			this.label11.Location = new System.Drawing.Point(3, 166);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(100, 23);
 			this.label11.TabIndex = 39;
@@ -229,7 +230,7 @@ namespace Europlan.Common {
 			// chkAnschluss
 			// 
 			this.chkAnschluss.AutoSize = true;
-			this.chkAnschluss.Location = new System.Drawing.Point(141, 220);
+			this.chkAnschluss.Location = new System.Drawing.Point(142, 193);
 			this.chkAnschluss.Name = "chkAnschluss";
 			this.chkAnschluss.Size = new System.Drawing.Size(137, 17);
 			this.chkAnschluss.TabIndex = 41;
@@ -239,7 +240,7 @@ namespace Europlan.Common {
 			// 
 			// numAdditionalCircuits
 			// 
-			this.numAdditionalCircuits.Location = new System.Drawing.Point(141, 269);
+			this.numAdditionalCircuits.Location = new System.Drawing.Point(142, 242);
 			this.numAdditionalCircuits.Maximum = new decimal(new int[] {
             12,
             0,
@@ -252,7 +253,7 @@ namespace Europlan.Common {
 			// 
 			// label7
 			// 
-			this.label7.Location = new System.Drawing.Point(3, 266);
+			this.label7.Location = new System.Drawing.Point(4, 239);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(100, 23);
 			this.label7.TabIndex = 42;
@@ -261,7 +262,7 @@ namespace Europlan.Common {
 			// 
 			// numZusStellantriebe
 			// 
-			this.numZusStellantriebe.Location = new System.Drawing.Point(358, 269);
+			this.numZusStellantriebe.Location = new System.Drawing.Point(359, 242);
 			this.numZusStellantriebe.Maximum = new decimal(new int[] {
             12,
             0,
@@ -274,7 +275,7 @@ namespace Europlan.Common {
 			// 
 			// label8
 			// 
-			this.label8.Location = new System.Drawing.Point(220, 266);
+			this.label8.Location = new System.Drawing.Point(221, 239);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(100, 23);
 			this.label8.TabIndex = 44;
@@ -285,7 +286,7 @@ namespace Europlan.Common {
 			// 
 			this.lstSystems.CheckOnClick = true;
 			this.lstSystems.FormattingEnabled = true;
-			this.lstSystems.Location = new System.Drawing.Point(141, 381);
+			this.lstSystems.Location = new System.Drawing.Point(142, 354);
 			this.lstSystems.Name = "lstSystems";
 			this.lstSystems.Size = new System.Drawing.Size(268, 79);
 			this.lstSystems.TabIndex = 46;
@@ -293,7 +294,7 @@ namespace Europlan.Common {
 			// 
 			// label12
 			// 
-			this.label12.Location = new System.Drawing.Point(3, 381);
+			this.label12.Location = new System.Drawing.Point(4, 354);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(133, 65);
 			this.label12.TabIndex = 47;
