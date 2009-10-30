@@ -9,8 +9,6 @@ namespace Europlan.Common {
 	[ProductName("Modul Klima-Boden")]
 	public class ModulKlimaBodenProduct : Product {
 
-		private static double module_100_40_area = 0.9925 * 0.4;
-
 		private float plannedArea = 0;
 		private float plannedAreaUnheated = 0;
 		private float plannedRoomTemperatureBelowHeat = 18;
@@ -129,6 +127,85 @@ namespace Europlan.Common {
 							}
 						}
 					}
+				}
+			}
+
+			// Get Vorlauf and Ruecklauf of the defined connection pipes
+			double vorlaufTotalFirst = 0;
+			double vorlaufNotIsolatedFirst = 0;
+			double ruecklaufTotalFirst = 0;
+			double ruecklaufNotIsolatedFirst = 0;
+			double vorlaufTotalOthers = 0;
+			double vorlaufNotIsolatedOthers = 0;
+			double ruecklaufTotalOthers = 0;
+			double ruecklaufNotIsolatedOthers = 0;
+			foreach (ConnectionPipe cp in this.PlannedConnectionPipes) {
+				vorlaufTotalFirst += cp.Vorlauf;
+				ruecklaufTotalFirst += cp.Ruecklauf;
+				if (cp.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) {
+					vorlaufNotIsolatedFirst += cp.Vorlauf;
+				}
+				if (cp.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
+					ruecklaufNotIsolatedFirst += cp.Ruecklauf;
+				}
+				if (!cp.OnlyFirst) {
+					vorlaufTotalOthers += cp.Vorlauf;
+					ruecklaufTotalOthers += cp.Ruecklauf;
+					if (cp.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) {
+						vorlaufNotIsolatedOthers += cp.Vorlauf;
+					}
+					if (cp.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
+						ruecklaufNotIsolatedOthers += cp.Ruecklauf;
+					}
+				}
+			}
+
+			// add connected products to Vorlauf and Ruecklauf
+			double[] vorlaufTotal = new double[] { vorlaufTotalFirst, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers };
+			double[] vorlaufNotIsolated = new double[] { vorlaufNotIsolatedFirst, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers };
+			double[] ruecklaufTotal = new double[] { ruecklaufTotalFirst, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers };
+			double[] ruecklaufNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };
+			double[] vorlaufWithoutOtherProductTotal = new double[] { vorlaufTotalFirst, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers };
+			double[] vorlaufWithoutOtherProductNotIsolated = new double[] { vorlaufNotIsolatedFirst, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers };
+			double[] ruecklaufWithoutOtherProductTotal = new double[] { ruecklaufTotalFirst, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers };
+			double[] ruecklaufWithoutOtherProductNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };
+
+			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
+				if (kvp.Value != null) {
+					if (kvp.Value.type == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
+						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct;
+						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated;
+					} else {
+						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct;
+						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated;
+					}
+				}
+			}
+
+			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.inverseConnectedCircuits) {
+				if (kvp.Value != null) {
+					if (kvp.Value.type == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
+						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
+						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;
+						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
+						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;
+					} else {
+						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductTotal;
+						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
+						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductTotal;
+						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
+					}
+				}
+			}
+
+			double longestVorlaufTotal = vorlaufTotal[0];
+			double longestRuecklaufTotal = ruecklaufTotal[0];
+			for (int i = 1; i < 12; i++) {
+				if (vorlaufTotal[i] > longestVorlaufTotal) {
+					longestVorlaufTotal = vorlaufTotal[i];
+				}
+				if (ruecklaufTotal[i] > longestRuecklaufTotal) {
+					longestRuecklaufTotal = ruecklaufTotal[i];
 				}
 			}
 
