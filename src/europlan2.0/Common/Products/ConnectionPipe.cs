@@ -475,7 +475,8 @@ namespace Europlan.Common {
 				double distributorSpreizung = distributorTempOut - distributorTempIn;
 
 				double value = 0;
-				for (int i = 0; i < originalProduct.Product.PlannedCircuitCount; i++) {
+				int iterations = this.onlyFirst ? 1 : originalProduct.Product.PlannedCircuitCount;
+				for (int i = 0; i < iterations; i++) {
 
 					double totalPipeLength = originalProduct.Product.GetCircuit(i).PipeLengthWithoutConnections;
 					double pipeBeforeVorlauf = 0;
@@ -520,25 +521,26 @@ namespace Europlan.Common {
 
 					Circuit.CircuitConnection connectedCircuit = originalProduct.Product.GetCircuitConnected(i);
 					if (connectedCircuit != null) {
-						pipeAfterVorlauf += connectedCircuit.otherCircuit.PipeLengthWithUnisolatedConnections;
-						pipeBeforeRuecklauf += connectedCircuit.otherCircuit.PipeLengthWithUnisolatedConnections;
+						pipeAfterVorlauf += connectedCircuit.OtherCircuit.PipeLengthWithUnisolatedConnections;
+						pipeBeforeRuecklauf += connectedCircuit.OtherCircuit.PipeLengthWithUnisolatedConnections;
 					}
 
 					connectedCircuit = originalProduct.Product.GetCircuitInverseConnected(i);
 					if (connectedCircuit != null) {
-						if (connectedCircuit.type == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
-							pipeAfterVorlauf += connectedCircuit.otherCircuit.PipeLengthWithoutConnections + connectedCircuit.otherCircuit.PipeLengthRuecklaufNotIsolated;
-							pipeAfterRuecklauf += connectedCircuit.otherCircuit.PipeLengthWithoutConnections + connectedCircuit.otherCircuit.PipeLengthRuecklaufNotIsolated;
-							pipeBeforeVorlauf += connectedCircuit.otherCircuit.PipeLengthVorlaufNotIsolated;
-							pipeBeforeRuecklauf += connectedCircuit.otherCircuit.PipeLengthVorlaufNotIsolated;
+						if (connectedCircuit.CircuitConnectionType == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
+							pipeAfterVorlauf += connectedCircuit.OtherCircuit.PipeLengthWithoutConnections + connectedCircuit.OtherCircuit.PipeLengthRuecklaufNotIsolated;
+							pipeAfterRuecklauf += connectedCircuit.OtherCircuit.PipeLengthWithoutConnections + connectedCircuit.OtherCircuit.PipeLengthRuecklaufNotIsolated;
+							pipeBeforeVorlauf += connectedCircuit.OtherCircuit.PipeLengthVorlaufNotIsolated;
+							pipeBeforeRuecklauf += connectedCircuit.OtherCircuit.PipeLengthVorlaufNotIsolated;
 						} else {
-							pipeBeforeVorlauf += connectedCircuit.otherCircuit.PipeLengthWithoutConnections + connectedCircuit.otherCircuit.PipeLengthVorlaufNotIsolated;
-							pipeBeforeRuecklauf += connectedCircuit.otherCircuit.PipeLengthWithoutConnections + connectedCircuit.otherCircuit.PipeLengthVorlaufNotIsolated;
-							pipeAfterVorlauf += connectedCircuit.otherCircuit.PipeLengthRuecklaufNotIsolated;
-							pipeAfterRuecklauf += connectedCircuit.otherCircuit.PipeLengthRuecklaufNotIsolated;
+							pipeBeforeVorlauf += connectedCircuit.OtherCircuit.PipeLengthWithoutConnections + connectedCircuit.OtherCircuit.PipeLengthVorlaufNotIsolated;
+							pipeBeforeRuecklauf += connectedCircuit.OtherCircuit.PipeLengthWithoutConnections + connectedCircuit.OtherCircuit.PipeLengthVorlaufNotIsolated;
+							pipeAfterVorlauf += connectedCircuit.OtherCircuit.PipeLengthRuecklaufNotIsolated;
+							pipeAfterRuecklauf += connectedCircuit.OtherCircuit.PipeLengthRuecklaufNotIsolated;
 						}
 					}
 
+					totalPipeLength += pipeBeforeVorlauf + pipeAfterVorlauf;
 					totalPipeLength += this.vorlauf;
 					totalPipeLength += this.ruecklauf;
 
@@ -674,22 +676,22 @@ namespace Europlan.Common {
 
 					Circuit.CircuitConnection connectedCircuit = originalProduct.Product.GetCircuitConnected(i);
 					if (connectedCircuit != null) {
-						pipeAfterVorlauf += connectedCircuit.otherCircuit.PipeLengthWithUnisolatedConnections;
-						pipeBeforeRuecklauf += connectedCircuit.otherCircuit.PipeLengthWithUnisolatedConnections;
+						pipeAfterVorlauf += connectedCircuit.OtherCircuit.PipeLengthWithUnisolatedConnections;
+						pipeBeforeRuecklauf += connectedCircuit.OtherCircuit.PipeLengthWithUnisolatedConnections;
 					}
 
 					connectedCircuit = originalProduct.Product.GetCircuitInverseConnected(i);
 					if (connectedCircuit != null) {
-						if (connectedCircuit.type == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
-							pipeAfterVorlauf += connectedCircuit.otherCircuit.PipeLengthWithoutConnections + connectedCircuit.otherCircuit.PipeLengthRuecklaufNotIsolated;
-							pipeAfterRuecklauf += connectedCircuit.otherCircuit.PipeLengthWithoutConnections + connectedCircuit.otherCircuit.PipeLengthRuecklaufNotIsolated;
-							pipeBeforeVorlauf += connectedCircuit.otherCircuit.PipeLengthVorlaufNotIsolated;
-							pipeBeforeRuecklauf += connectedCircuit.otherCircuit.PipeLengthVorlaufNotIsolated;
+						if (connectedCircuit.CircuitConnectionType == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
+							pipeAfterVorlauf += connectedCircuit.OtherCircuit.PipeLengthWithoutConnections + connectedCircuit.OtherCircuit.PipeLengthRuecklaufNotIsolated;
+							pipeAfterRuecklauf += connectedCircuit.OtherCircuit.PipeLengthWithoutConnections + connectedCircuit.OtherCircuit.PipeLengthRuecklaufNotIsolated;
+							pipeBeforeVorlauf += connectedCircuit.OtherCircuit.PipeLengthVorlaufNotIsolated;
+							pipeBeforeRuecklauf += connectedCircuit.OtherCircuit.PipeLengthVorlaufNotIsolated;
 						} else {
-							pipeBeforeVorlauf += connectedCircuit.otherCircuit.PipeLengthWithoutConnections + connectedCircuit.otherCircuit.PipeLengthVorlaufNotIsolated;
-							pipeBeforeRuecklauf += connectedCircuit.otherCircuit.PipeLengthWithoutConnections + connectedCircuit.otherCircuit.PipeLengthVorlaufNotIsolated;
-							pipeAfterVorlauf += connectedCircuit.otherCircuit.PipeLengthRuecklaufNotIsolated;
-							pipeAfterRuecklauf += connectedCircuit.otherCircuit.PipeLengthRuecklaufNotIsolated;
+							pipeBeforeVorlauf += connectedCircuit.OtherCircuit.PipeLengthWithoutConnections + connectedCircuit.OtherCircuit.PipeLengthVorlaufNotIsolated;
+							pipeBeforeRuecklauf += connectedCircuit.OtherCircuit.PipeLengthWithoutConnections + connectedCircuit.OtherCircuit.PipeLengthVorlaufNotIsolated;
+							pipeAfterVorlauf += connectedCircuit.OtherCircuit.PipeLengthRuecklaufNotIsolated;
+							pipeAfterRuecklauf += connectedCircuit.OtherCircuit.PipeLengthRuecklaufNotIsolated;
 						}
 					}
 

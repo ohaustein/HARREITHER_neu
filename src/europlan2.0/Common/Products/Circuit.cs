@@ -13,8 +13,22 @@ namespace Europlan.Common {
 		}
 
 		public class CircuitConnection {
-			public CircuitConnectionTypeEnum type;
-			public Circuit otherCircuit;
+			private CircuitConnectionTypeEnum type;
+
+			public CircuitConnectionTypeEnum CircuitConnectionType {
+				get { return type; }
+				set { type = value; }
+			}
+
+			private Circuit otherCircuit;
+
+			public Circuit OtherCircuit {
+				get { return otherCircuit; }
+				set { otherCircuit = value; }
+			}
+
+			public CircuitConnection() {
+			}
 
 			public CircuitConnection(CircuitConnectionTypeEnum type, Circuit otherCircuit) {
 				this.type = type;

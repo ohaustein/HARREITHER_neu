@@ -29,8 +29,8 @@ namespace Europlan.Common {
 			this.grpInfo = new System.Windows.Forms.GroupBox();
 			this.lblInfo = new System.Windows.Forms.Label();
 			this.grpConnection = new System.Windows.Forms.GroupBox();
-			this.rbVorlauf = new System.Windows.Forms.RadioButton();
 			this.rbRuecklauf = new System.Windows.Forms.RadioButton();
+			this.rbVorlauf = new System.Windows.Forms.RadioButton();
 			this.grpInfo.SuspendLayout();
 			this.grpConnection.SuspendLayout();
 			this.SuspendLayout();
@@ -98,17 +98,6 @@ namespace Europlan.Common {
 			this.grpConnection.TabStop = false;
 			this.grpConnection.Text = "Heizkreisanschluﬂ (nur bei Anschluﬂ an anderen Heizkreis)";
 			// 
-			// rbVorlauf
-			// 
-			this.rbVorlauf.AutoSize = true;
-			this.rbVorlauf.Location = new System.Drawing.Point(9, 19);
-			this.rbVorlauf.Name = "rbVorlauf";
-			this.rbVorlauf.Size = new System.Drawing.Size(81, 17);
-			this.rbVorlauf.TabIndex = 0;
-			this.rbVorlauf.TabStop = true;
-			this.rbVorlauf.Text = "vorlaufseitig";
-			this.rbVorlauf.UseVisualStyleBackColor = true;
-			// 
 			// rbRuecklauf
 			// 
 			this.rbRuecklauf.AutoSize = true;
@@ -116,9 +105,20 @@ namespace Europlan.Common {
 			this.rbRuecklauf.Name = "rbRuecklauf";
 			this.rbRuecklauf.Size = new System.Drawing.Size(93, 17);
 			this.rbRuecklauf.TabIndex = 1;
-			this.rbRuecklauf.TabStop = true;
 			this.rbRuecklauf.Text = "ruecklaufseitig";
 			this.rbRuecklauf.UseVisualStyleBackColor = true;
+			// 
+			// rbVorlauf
+			// 
+			this.rbVorlauf.AutoSize = true;
+			this.rbVorlauf.Checked = true;
+			this.rbVorlauf.Location = new System.Drawing.Point(9, 19);
+			this.rbVorlauf.Name = "rbVorlauf";
+			this.rbVorlauf.Size = new System.Drawing.Size(81, 17);
+			this.rbVorlauf.TabIndex = 0;
+			this.rbVorlauf.TabStop = true;
+			this.rbVorlauf.Text = "vorlaufseitig";
+			this.rbVorlauf.UseVisualStyleBackColor = true;
 			// 
 			// SelectConnectionForProductForm
 			// 

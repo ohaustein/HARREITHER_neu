@@ -557,7 +557,13 @@ namespace Europlan.Common {
 		/// </summary>
 		public Nullable<int> RequestedCircuits {
 			get { return this.requestedCircuits; }
-			set { this.requestedCircuits = value; }
+			set {
+				if (this.plannedConnection != null && this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+					this.requestedCircuits = value.HasValue ? value.Value : 1;
+				} else {
+					this.requestedCircuits = value;
+				}
+			}
 		}
 
 		/// <summary>
@@ -1380,7 +1386,7 @@ namespace Europlan.Common {
 			get { return this.plannedConnection; }
 			set {
 				if (value != null && value.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-					this.requestedCircuits = this.plannedCircuits > 0 ? this.plannedCircuits : 1;
+					this.requestedCircuits = this.PlannedCircuitCount > 0 ? this.PlannedCircuitCount : 1;
 					this.requestedLayDistance = this.plannedLayDistance.HasValue ? this.plannedLayDistance.Value : LayDistance.EV35;
 					this.requestedRimType = this.plannedRimType.HasValue ? this.plannedRimType.Value : RimType.EV15_60;
 				}
@@ -1388,6 +1394,8 @@ namespace Europlan.Common {
 
 			}
 		}
+
+		bool secondConfig = false;
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
@@ -1411,6 +1419,22 @@ namespace Europlan.Common {
 				this.circuits.Clear();
 				errorMsg = null;
 				return true;
+			}
+
+			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				// TODO connect all circuits
+
+				int c = this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count - this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Count;
+				foreach (Circuit.CircuitConnection cc in this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Values) {
+					if (cc.OtherCircuit.PlannedProduct.Product == this) {
+						c++;
+					}
+				}
+				if (!this.requestedCircuits.HasValue || c < this.requestedCircuits.Value) {
+					errorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					return false;
+				}
+				this.CorrectCircuits(this.requestedCircuits.Value);
 			}
 
 			double areaRemovedDueConnection = 0;
@@ -1510,28 +1534,28 @@ namespace Europlan.Common {
 
 			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
 				if (kvp.Value != null) {
-					if (kvp.Value.type == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
-						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct;
-						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated;
+					if (kvp.Value.CircuitConnectionType == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
+						vorlaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProduct;
+						vorlaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProductNotIsolated;
 					} else {
-						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct;
-						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated;
+						ruecklaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProduct;
+						ruecklaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProductNotIsolated;
 					}
 				}
 			}
 
 			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.inverseConnectedCircuits) {
 				if (kvp.Value != null) {
-					if (kvp.Value.type == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
-						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
-						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;
-						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
-						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;
+					if (kvp.Value.CircuitConnectionType == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
+						ruecklaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.OtherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
+						ruecklaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.OtherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;
+						vorlaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
+						vorlaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;
 					} else {
-						vorlaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductTotal;
-						vorlaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
-						ruecklaufTotal[kvp.Key] += kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductTotal;
-						ruecklaufNotIsolated[kvp.Key] += kvp.Value.otherCircuit.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
+						vorlaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.OtherCircuit.PipeLengthRuecklaufWithoutOtherProductTotal;
+						vorlaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.OtherCircuit.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
+						ruecklaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthRuecklaufWithoutOtherProductTotal;
+						ruecklaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
 					}
 				}
 			}
@@ -1571,12 +1595,9 @@ namespace Europlan.Common {
 					}
 					circuitCount = circuitCount < 1 ? 1 : circuitCount;
 					while (tryCalc) {
-						if (this.circuits.Count > circuitCount) {
-							// TODO check if other products are connected to the circuits that are removed
-							this.circuits.RemoveRange(circuitCount, this.circuits.Count - circuitCount);
-						}
-						while (this.circuits.Count < circuitCount) {
-							this.circuits.Add(new EurovalCircuit());
+						errorMsg = this.CorrectCircuits(circuitCount);
+						if (errorMsg != null) {
+							return false;
 						}
 						int i = 0;
 						foreach (EurovalCircuit ec in this.circuits) {
@@ -1656,13 +1677,14 @@ namespace Europlan.Common {
 			{ // calculate best choice again
 				this.plannedLayDistance = bestLaydistance;
 				this.plannedRimType = bestRimType;
-				if (this.circuits.Count > bestCircuits) {
+				this.CorrectCircuits(bestCircuits);
+				/*if (this.circuits.Count > bestCircuits) {
 					// TODO check if other products are connected to the circuits that are removed
 					this.circuits.RemoveRange(bestCircuits, this.circuits.Count - bestCircuits);
 				}
 				while (this.circuits.Count < bestCircuits) {
 					this.circuits.Add(new EurovalCircuit());
-				}
+				}*/
 				int i = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					ec.EurovalProduct = this;
@@ -1679,6 +1701,16 @@ namespace Europlan.Common {
 					ec.PipeLengthRuecklaufNotIsolated = ruecklaufNotIsolated[i];
 					ec.Calculate(bestLaydistance.Value, bestRimType);
 					i++;
+				}
+			}
+
+			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				if (!this.secondConfig) {
+					this.secondConfig = true;
+					this.plannedConnection.OtherProduct.ConfigureProductDefault();
+					bool ok = this.ConfigureProduct(requestedHeatLoad, requestedCoolLoad, canHeat, canCool, out errorMsg);
+					this.secondConfig = false;
+					return ok;
 				}
 			}
 
@@ -1905,6 +1937,82 @@ namespace Europlan.Common {
 				errorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "°C)";
 			}
 			return true;*/
+		}
+
+		private string CorrectCircuits(int circuitCount) {
+			if (this.circuits.Count > circuitCount) {
+				// TODO check if other products are connected to the circuits that are removed
+				this.circuits.RemoveRange(circuitCount, this.circuits.Count - circuitCount);
+			}
+			List<KeyValuePair<int, Circuit.CircuitConnection>> remove = new List<KeyValuePair<int, Circuit.CircuitConnection>>();
+			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
+				if (kvp.Key >= circuitCount) {
+					remove.Add(kvp);
+				}
+			}
+			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in remove) {
+				this.connectedCircuits.Remove(kvp.Key);
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> otherKvp in kvp.Value.OtherCircuit.PlannedProduct.Product.InverseConnectedCircuits) {
+					if (otherKvp.Value.OtherCircuit.NrOfCircuit == kvp.Key) {
+						kvp.Value.OtherCircuit.PlannedProduct.Product.InverseConnectedCircuits.Remove(otherKvp.Key);
+						break;
+					}
+				}
+			}
+			remove.Clear();
+			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.inverseConnectedCircuits) {
+				if (kvp.Key >= circuitCount) {
+					remove.Add(kvp);
+				}
+			}
+			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in remove) {
+				this.inverseConnectedCircuits.Remove(kvp.Key);
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> otherKvp in kvp.Value.OtherCircuit.PlannedProduct.Product.ConnectedCircuits) {
+					if (otherKvp.Value.OtherCircuit.PlannedProduct.Product == this && otherKvp.Value.OtherCircuit.NrOfCircuit == kvp.Key) {
+						kvp.Value.OtherCircuit.PlannedProduct.Product.ConnectedCircuits.Remove(otherKvp.Key);
+						break;
+					}
+				}
+			}
+			while (this.circuits.Count < circuitCount) {
+				EurovalCircuit ec = new EurovalCircuit();
+				ec.EurovalProduct = this;
+				ec.NrOfCircuit = this.circuits.Count;
+				if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+					int j = 0;
+					bool found = false;
+					while (!found && j < this.plannedConnection.OtherProduct.Product.PlannedCircuitCount) {
+						found = !this.plannedConnection.OtherProduct.Product.ConnectedCircuits.ContainsKey(j);
+						j++;
+					}
+					if (!found) {
+						return "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					}
+					j--;
+					this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, ec));
+					this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct.Product.PlannedCircuits[j]));
+				}
+				this.circuits.Add(ec);
+			}
+
+			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && this.inverseConnectedCircuits.Count < this.circuits.Count) {
+				for (int i = 0; i < this.circuits.Count; i++) {
+					if (!this.inverseConnectedCircuits.ContainsKey(i)) {
+						Circuit c = null;
+						foreach (Circuit oc in this.plannedConnection.OtherProduct.Product.PlannedCircuits) {
+							if (!this.plannedConnection.OtherProduct.Product.ConnectedCircuits.ContainsKey(oc.NrOfCircuit)) {
+								c = oc;
+								break;
+							}
+						}
+						if (c != null) {
+							this.inverseConnectedCircuits.Add(i, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, c));
+							this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(c.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.circuits[i]));
+						}
+					}
+				}
+			}
+			return null;
 		}
 	}
 	
