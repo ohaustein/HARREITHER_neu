@@ -37,7 +37,7 @@ namespace Europlan.Common {
 							j++;
 							string label = p.Node.Text + (p.Product.PlannedCircuits.Count > 1 ? " (HK" + j.ToString() + ")" : "") + " in " + p.Product.AssociatedRoom.ToString();
 							if (cc != null) {
-								label += ", " + cc.otherCircuit.PlannedProduct.Node.Text + (cc.otherCircuit.PlannedProduct.Product.PlannedCircuits.Count > 1 ? " (HK" + cc.otherCircuit.NrOfCircuit + ")" : "") + " in " + cc.otherCircuit.PlannedProduct.Product.AssociatedRoom.ToString();
+								label += ", " + cc.OtherCircuit.PlannedProduct.Node.Text + (cc.OtherCircuit.PlannedProduct.Product.PlannedCircuits.Count > 1 ? " (HK" + cc.OtherCircuit.NrOfCircuit + ")" : "") + " in " + cc.OtherCircuit.PlannedProduct.Product.AssociatedRoom.ToString();
 							}
 							TreeNode node = new TreeNode(label);
 							node.Tag = c;
@@ -57,32 +57,40 @@ namespace Europlan.Common {
 		private void tvDistributors_AfterSelect(object sender, TreeViewEventArgs e) {
 			lblInfo.Text = "";
 			bool ok = tvDistributors.SelectedNode != null && tvDistributors.SelectedNode.Tag != null;
+			bool enable = false;
 			if (ok) {
 				if (tvDistributors.SelectedNode.Tag is Distributor) {
 					lblInfo.Text = "Anschluß an " + (tvDistributors.SelectedNode.Tag as Distributor).Id + ": " + (tvDistributors.SelectedNode.Tag as Distributor).Name;
 					ok = true;
 				} else if (tvDistributors.SelectedNode.Tag is Circuit) {
-					Circuit selectedCircuit = tvDistributors.SelectedNode.Tag as Circuit;
-					Product selectedProduct = selectedCircuit.PlannedProduct.Product;
-					if (selectedProduct == this.product.Product) {
-						lblInfo.Text = "Anschluß nicht möglich. Das Heizsystem kann nicht an sich selbst angeschlossen werden.";
+					if (this.product.Product.ConnectedCircuits.Count > 0) {
+						lblInfo.Text = "Anschluß nicht möglich. An das Heizsystem ist mindestens ein anderes Teilsystem angeschloßen. Es kann daher nur an einen Verteiler angeschloßen werden.";
 						ok = false;
 					} else {
-						int free = 0;
-						foreach (Circuit c in selectedProduct.PlannedCircuits) {
-							if (selectedProduct.GetCircuitConnected(c.NrOfCircuit) == null) {
-								free++;
+						Circuit selectedCircuit = tvDistributors.SelectedNode.Tag as Circuit;
+						Product selectedProduct = selectedCircuit.PlannedProduct.Product;
+						if (selectedProduct == this.product.Product) {
+							lblInfo.Text = "Anschluß nicht möglich. Das Heizsystem kann nicht an sich selbst angeschlossen werden.";
+							ok = false;
+						} else {
+							int free = 0;
+							foreach (Circuit c in selectedProduct.PlannedCircuits) {
+								if (selectedProduct.GetCircuitConnected(c.NrOfCircuit) == null) {
+									free++;
+								}
 							}
+
+							ok = free >= this.product.Product.PlannedCircuits.Count;
+							lblInfo.Text = ok ? "Anschluß an " + selectedCircuit.PlannedProduct.Node.Text + " in " + selectedCircuit.PlannedProduct.Product.AssociatedRoom.ToString() : "Anschluß nicht möglich. Bei diesem Heizsystem sind nicht genug Heizkreise verfügbar";
+							enable = ok;
 						}
-						
-						ok = free >= this.product.Product.PlannedCircuits.Count;
-						lblInfo.Text = ok ? "Anschluß an " + selectedCircuit.PlannedProduct.Node.Text + " in " + product.Product.AssociatedRoom.ToString() : "Anschluß nicht möglich. Bei diesem Heizsystem sind nicht genug Heizkreise verfügbar";
 					}
 				} else {
 					lblInfo.Text = "Anschluß nicht möglich";
 					ok = false;
 				}
 			}
+			this.grpConnection.Enabled = enable;
 			this.btnOk.Enabled = ok;
 		}
 
@@ -120,21 +128,52 @@ namespace Europlan.Common {
 
 		private void SelectConnectionForProductForm_FormClosing(object sender, FormClosingEventArgs e) {
 			if (this.DialogResult == DialogResult.OK) {
-				// TODO remove old connection if product was previously connected to another product
+				List<PlannedProduct> wasConnectedTo = new List<PlannedProduct>();
+				if (this.product.Product.PlannedConnection != null && this.product.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+					// find out to which other product(s) this product was connected
+					foreach (Circuit.CircuitConnection cc in this.product.Product.InverseConnectedCircuits.Values) {
+						if (!wasConnectedTo.Contains(cc.OtherCircuit.PlannedProduct)) {
+							wasConnectedTo.Add(cc.OtherCircuit.PlannedProduct);
+						}
+					}
+
+					// remove the connection in the other product(s)
+					foreach (PlannedProduct pp in wasConnectedTo) {
+						List<int> delete = new List<int>();
+						foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in pp.Product.ConnectedCircuits) {
+							if (kvp.Value.OtherCircuit.PlannedProduct == this.product) {
+								delete.Add(kvp.Key);
+							}
+						}
+						foreach (int i in delete) {
+							pp.Product.ConnectedCircuits.Remove(i);
+						}
+					}
+
+					// remove the connection in this product
+					this.product.Product.InverseConnectedCircuits.Clear();
+				}
+
 				if (this.tvDistributors.SelectedNode.Tag is Distributor) {
 					Distributor dist = this.tvDistributors.SelectedNode.Tag as Distributor;
 					this.product.Product.PlannedConnection = new ProductConnection(dist);
+					foreach (PlannedProduct pp in wasConnectedTo) {
+						pp.ConfigureProductDefault();
+					}
 				} else if (this.tvDistributors.SelectedNode.Tag is Circuit) {
 					PlannedProduct pp = (this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct;
-					this.product.Product.PlannedConnection = new ProductConnection(pp);
+					this.product.Product.PlannedConnection = new ProductConnection(pp, this.rbRuecklauf.Checked ?  Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF);
 					int i = 0;
 					foreach (Circuit c in this.product.Product.PlannedCircuits) {
 						while (pp.Product.ConnectedCircuits.ContainsKey(i)) {
 							i++;
 						}
-						pp.Product.ConnectedCircuits[i] = new Circuit.CircuitConnection(Circuit.CircuitConnectionTypeEnum.VORLAUF, c);
-						this.product.Product.InverseConnectedCircuits[c.NrOfCircuit] = new Circuit.CircuitConnection(Circuit.CircuitConnectionTypeEnum.VORLAUF, this.tvDistributors.SelectedNode.Tag as Circuit);
+						pp.Product.ConnectedCircuits[i] = new Circuit.CircuitConnection((this.rbRuecklauf.Checked ?  Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), c);
+						this.product.Product.InverseConnectedCircuits[c.NrOfCircuit] = new Circuit.CircuitConnection((this.rbRuecklauf.Checked ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), this.tvDistributors.SelectedNode.Tag as Circuit);
 					}
+					string errMsg;
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errMsg);
+					pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out errMsg);
 				}
 				// TODO
 			}

@@ -15,6 +15,13 @@ namespace Europlan.Common {
 		private PlannedProduct otherProduct = null;
 		private string distributorId = null;
 		private string otherProductId = null;
+		private Circuit.CircuitConnectionTypeEnum circuitConnectionType = Circuit.CircuitConnectionTypeEnum.VORLAUF;
+
+		public Circuit.CircuitConnectionTypeEnum CircuitConnectionType {
+			get { return this.circuitConnectionType; }
+			set { this.circuitConnectionType = value; }
+		}
+
 
 		//private Distributor ruecklaufDistributor = null;
 		//private PlannedProduct product = null;
@@ -34,8 +41,9 @@ namespace Europlan.Common {
 			this.product = ruecklaufOtherProduct;
 		}*/
 
-		public ProductConnection(PlannedProduct otherProduct/*, Distributor ruecklaufDistributor*/) {
+		public ProductConnection(PlannedProduct otherProduct, Circuit.CircuitConnectionTypeEnum circuitConnectionType/*, Distributor ruecklaufDistributor*/) {
 			this.otherProduct = otherProduct;
+			this.circuitConnectionType = circuitConnectionType;
 			//this.ruecklaufDistributor = ruecklaufDistributor;
 		}
 
@@ -158,7 +166,7 @@ namespace Europlan.Common {
 				return this.Distributor.Id + ": " + this.Distributor.Name;
 			}
 			if (this.OtherProduct != null) {
-				return "Anschluﬂ an " + this.OtherProduct.System + " in <TODO: Add Floor>";
+				return "Anschluﬂ an " + this.OtherProduct.System + " in " + this.OtherProduct.Product.AssociatedRoom.Id + ": " + this.OtherProduct.Product.AssociatedRoom.Name;
 			}
 			return "";
 		}
