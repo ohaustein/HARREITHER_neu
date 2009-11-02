@@ -945,7 +945,7 @@ namespace Europlan.Common {
 				listLabelPreviewControl1 = new combit.ListLabel15.ListLabelPreviewControl();
 
 				this.listLabel1.AutoDestination = combit.ListLabel15.LlPrintMode.PreviewControl;
-				this.listLabel1.LicensingInfo = "5hKHEQ";
+				this.listLabel1.LicensingInfo = "BUaWEQ";
 				this.listLabel1.MaxRTFVersion = 65280;
 				this.listLabel1.NoParameterCheck = true;
 				this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
