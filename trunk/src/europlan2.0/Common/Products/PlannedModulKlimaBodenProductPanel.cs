@@ -655,6 +655,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e) {
+			this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}

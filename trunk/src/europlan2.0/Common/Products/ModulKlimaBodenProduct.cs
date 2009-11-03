@@ -9,6 +9,15 @@ namespace Europlan.Common {
 	[ProductName("Modul Klima-Boden")]
 	public class ModulKlimaBodenProduct : Product {
 
+		private static double lambdaE = 60.0;
+		private static double su = 0.002; /* Estrichüberdeckung bzw. Überdeckung Lastausgleich */
+		private static double alpha0 = 10.8; /* Fixwert für FBH fix??? */
+		private static double alphaFbk = 6.5; //6.5; /* für FBK fix??? */
+		private static double alphaFbh = 10.8; /* für FBH fix??? */
+		private static double rLambdaDecke = 0.11; /* Fußbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
+		private static double rLambdaPutz = 0.02; /* Fußbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
+		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
+
 		private float plannedArea = 0;
 		private float plannedAreaUnheated = 0;
 		private float plannedRoomTemperatureBelowHeat = 18;
@@ -373,6 +382,54 @@ namespace Europlan.Common {
 		public static int ConfigModulesInCircuit {
 			get { return ModulKlimaBodenProduct.maxModulesInCircuit; }
 			set { ModulKlimaBodenProduct.maxModulesInCircuit = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLambdaE {
+			get { return lambdaE; }
+			set { lambdaE = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSu {
+			get { return su; }
+			set { su = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlpha0 {
+			get { return alpha0; }
+			set { alpha0 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaFbk {
+			get { return alphaFbk; }
+			set { alphaFbk = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaFbh {
+			get { return alphaFbh; }
+			set { alphaFbh = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRLambdaDecke {
+			get { return rLambdaDecke; }
+			set { rLambdaDecke = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRLambdaPutz {
+			get { return rLambdaPutz; }
+			set { rLambdaPutz = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigC {
+			get { return c; }
+			set { c = value; }
 		}
 	}
 	
