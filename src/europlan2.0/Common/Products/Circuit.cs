@@ -14,17 +14,60 @@ namespace Europlan.Common {
 
 		public class CircuitConnection {
 			private CircuitConnectionTypeEnum type;
-
 			public CircuitConnectionTypeEnum CircuitConnectionType {
 				get { return type; }
 				set { type = value; }
 			}
 
-			private Circuit otherCircuit;
-
+			[XmlIgnore]
 			public Circuit OtherCircuit {
-				get { return otherCircuit; }
-				set { otherCircuit = value; }
+				get { return otherProduct == null ? null : otherProduct.Product.GetCircuit(otherCircuitId); }
+				set {
+					otherProduct = value.PlannedProduct;
+					otherCircuitId = value.NrOfCircuit;
+				}
+			}
+
+			private PlannedProduct otherProduct;
+			[XmlIgnore]
+			public Product OtherProduct {
+				get {
+					if (this.otherProductId != null) {
+						this.otherProduct = null;
+						foreach (Floor f in Project.Instance.Floors) {
+							foreach (Room r in f.Rooms) {
+								foreach (PlannedProduct pp in r.PlannedProducts) {
+									if (pp.Id == this.otherProductId) {
+										this.otherProduct = pp;
+										this.otherProductId = null;
+										break;
+									}
+								}
+								if (this.otherProductId == null) {
+									break;
+								}
+							}
+							if (this.otherProductId == null) {
+								break;
+							}
+						}
+						this.otherProductId = null;
+					}
+					return otherProduct.Product;
+				}
+				/*set { otherProduct = value; }*/
+			}
+
+			private string otherProductId;
+			public string OtherProductId {
+				get { return this.otherProductId != null ? this.otherProductId : (this.otherProduct == null ? null : this.otherProduct.Id); }
+				set { this.otherProductId = value; }
+			}
+			
+			private int otherCircuitId;
+			public int OtherCircuitId {
+				get { return otherCircuitId; }
+				set { otherCircuitId = value; }
 			}
 
 			public CircuitConnection() {
@@ -32,7 +75,7 @@ namespace Europlan.Common {
 
 			public CircuitConnection(CircuitConnectionTypeEnum type, Circuit otherCircuit) {
 				this.type = type;
-				this.otherCircuit = otherCircuit;
+				this.OtherCircuit = otherCircuit;
 			}
 		}
 
