@@ -849,8 +849,17 @@ namespace Europlan.Common {
 				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
-					if (ec.C_DruckverlustHeat > value) {
-						value = ec.C_DruckverlustHeat;
+					double druckverlust = ec.C_DruckverlustHeat;
+					Circuit.CircuitConnection cc = this.GetCircuitConnected(ec.NrOfCircuit);
+					if (cc != null) {
+						druckverlust += cc.OtherCircuit.C_DruckverlustHeat;
+					}
+					cc = this.GetCircuitInverseConnected(ec.NrOfCircuit);
+					if (cc != null) {
+						druckverlust += cc.OtherCircuit.C_DruckverlustHeat;
+					}
+					if (druckverlust > value) {
+						value = druckverlust;
 					}
 				}
 				return value;
@@ -1001,8 +1010,17 @@ namespace Europlan.Common {
 				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
-					if (ec.C_DruckverlustCool > value) {
-						value = ec.C_DruckverlustCool;
+					double druckverlust = ec.C_DruckverlustCool;
+					Circuit.CircuitConnection cc = this.GetCircuitConnected(ec.NrOfCircuit);
+					if (cc != null) {
+						druckverlust += cc.OtherCircuit.C_DruckverlustCool;
+					}
+					cc = this.GetCircuitInverseConnected(ec.NrOfCircuit);
+					if (cc != null) {
+						druckverlust += cc.OtherCircuit.C_DruckverlustCool;
+					}
+					if (druckverlust > value) {
+						value = druckverlust;
 					}
 				}
 				return value;
@@ -1540,84 +1558,16 @@ namespace Europlan.Common {
 				}
 			}
 
-			// Get Vorlauf and Ruecklauf of the defined connection pipes
-			double vorlaufTotalFirst = 0;
-			double vorlaufNotIsolatedFirst = 0;
-			double ruecklaufTotalFirst = 0;
-			double ruecklaufNotIsolatedFirst = 0;
-			double vorlaufTotalOthers = 0;
-			double vorlaufNotIsolatedOthers = 0;
-			double ruecklaufTotalOthers = 0;
-			double ruecklaufNotIsolatedOthers = 0;
-			foreach (ConnectionPipe cp in this.PlannedConnectionPipes) {
-				vorlaufTotalFirst += cp.Vorlauf;
-				ruecklaufTotalFirst += cp.Ruecklauf;
-				if (cp.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) {
-					vorlaufNotIsolatedFirst += cp.Vorlauf;
-				}
-				if (cp.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
-					ruecklaufNotIsolatedFirst += cp.Ruecklauf;
-				}
-				if (!cp.OnlyFirst) {
-					vorlaufTotalOthers += cp.Vorlauf;
-					ruecklaufTotalOthers += cp.Ruecklauf;
-					if (cp.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) {
-						vorlaufNotIsolatedOthers += cp.Vorlauf;
-					}
-					if (cp.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
-						ruecklaufNotIsolatedOthers += cp.Ruecklauf;
-					}
-				}
-			}
-
-			// add connected products to Vorlauf and Ruecklauf
-			double[] vorlaufTotal = new double[] { vorlaufTotalFirst, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers };
-			double[] vorlaufNotIsolated = new double[] { vorlaufNotIsolatedFirst, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers };
-			double[] ruecklaufTotal = new double[] { ruecklaufTotalFirst, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers };
-			double[] ruecklaufNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };
-			double[] vorlaufWithoutOtherProductTotal = new double[] { vorlaufTotalFirst, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers };
-			double[] vorlaufWithoutOtherProductNotIsolated = new double[] { vorlaufNotIsolatedFirst, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers };
-			double[] ruecklaufWithoutOtherProductTotal = new double[] { ruecklaufTotalFirst, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers };
-			double[] ruecklaufWithoutOtherProductNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };
-
-			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
-				if (kvp.Value != null) {
-					if (kvp.Value.CircuitConnectionType == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
-						vorlaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProduct;
-						vorlaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProductNotIsolated;
-					} else {
-						ruecklaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProduct;
-						ruecklaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProductNotIsolated;
-					}
-				}
-			}
-
-			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.inverseConnectedCircuits) {
-				if (kvp.Value != null) {
-					if (kvp.Value.CircuitConnectionType == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
-						ruecklaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.OtherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
-						ruecklaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.OtherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;
-						vorlaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
-						vorlaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;
-					} else {
-						vorlaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.OtherCircuit.PipeLengthRuecklaufWithoutOtherProductTotal;
-						vorlaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.OtherCircuit.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
-						ruecklaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthRuecklaufWithoutOtherProductTotal;
-						ruecklaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthRuecklaufWithoutOtherProductNotIsolated;
-					}
-				}
-			}
-
-			double longestVorlaufTotal = vorlaufTotal[0];
-			double longestRuecklaufTotal = ruecklaufTotal[0];
-			for (int i = 1; i < 12; i++) {
-				if (vorlaufTotal[i] > longestVorlaufTotal) {
-					longestVorlaufTotal = vorlaufTotal[i];
-				}
-				if (ruecklaufTotal[i] > longestRuecklaufTotal) {
-					longestRuecklaufTotal = ruecklaufTotal[i];
-				}
-			}
+			double[] vorlaufTotal;
+			double[] vorlaufNotIsolated;
+			double[] ruecklaufNotIsolated;
+			double[] vorlaufWithoutOtherProductTotal;
+			double[] vorlaufWithoutOtherProductNotIsolated;
+			double[] ruecklaufWithoutOtherProductTotal;
+			double[] ruecklaufWithoutOtherProductNotIsolated;
+			double longestVorlaufTotal;
+			double longestRuecklaufTotal;
+			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal);
 
 			Nullable<LayDistance> bestLaydistance = null;
 			Nullable<RimType> bestRimType = null;

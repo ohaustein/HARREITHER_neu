@@ -138,54 +138,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		/*[XmlIgnore]
-		public double PipeLengthVorlauf {
-			get {
-				double value = 0;
-				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
-					value += cp.Vorlauf;
-				}
-				return value;
-			}
-		}
-
-		[XmlIgnore]
-		public double PipeLengthVorlaufNotIsolated {
-			get {
-				double value = 0;
-				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
-					if (cp.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) {
-						value += cp.Vorlauf;
-					}
-				}
-				return value;
-			}
-		}
-
-		[XmlIgnore]
-		public double PipeLengthRuecklauf {
-			get {
-				double value = 0;
-				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
-					value += cp.Ruecklauf;
-				}
-				return value;
-			}
-		}
-
-		[XmlIgnore]
-		public double PipeLengthRuecklaufNotIsolated {
-			get {
-				double value = 0;
-				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
-					if (cp.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
-						value += cp.Ruecklauf;
-					}
-				}
-				return value;
-			}
-		}*/
-
 		#region Anbindung
 		protected double vorlaufTotal;
 		[XmlIgnore]
@@ -243,6 +195,43 @@ namespace Europlan.Common {
 			set { this.ruecklaufWithoutOtherProductNotIsolated = value; }
 		}
 
+		protected double c_Qh2oHeat;
+		[XmlIgnore]
+		public double C_Qh2oHeat {
+			get { return this.c_Qh2oHeat; }
+			set { this.c_Qh2oHeat = value; }
+		}
+
+		protected double c_Qh2oCool;
+		[XmlIgnore]
+		public double C_Qh2oCool {
+			get { return this.c_Qh2oCool; }
+			set { this.c_Qh2oCool = value; }
+		}
+
+		protected double c_druckverlustHeat;
+		[XmlIgnore]
+		public double C_DruckverlustHeat {
+			get { return this.c_druckverlustHeat; }
+		}
+
+		protected double c_durchflussHeat;
+		[XmlIgnore]
+		public double C_DurchflussHeat {
+			get { return this.c_durchflussHeat; }
+		}
+
+		protected double c_druckverlustCool;
+		[XmlIgnore]
+		public double C_DruckverlustCool {
+			get { return this.c_druckverlustCool; }
+		}
+
+		protected double c_durchflussCool;
+		[XmlIgnore]
+		public double C_DurchflussCool {
+			get { return this.c_durchflussCool; }
+		}
 
 		#endregion Anbindung
 	}
