@@ -243,9 +243,9 @@ namespace Europlan.UnitTest {
 
 		[Test]
 		public void TestDruckverlustModul() {
-			double result = norm.DruckverlustModul(1, 100);
+			double result = norm.DruckverlustModul_100_40(1, 100);
 			Assert.AreEqual(3, Math.Round(result, 2));
-			result = norm.DruckverlustModul(15, 100);
+			result = norm.DruckverlustModul_100_40(15, 100);
 			Assert.AreEqual(45, Math.Round(result, 2));
 		}
 
