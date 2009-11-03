@@ -179,7 +179,7 @@ namespace Europlan.Common {
 				double qH2o = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
 				double deltaT = this.c_thetaVHeat - this.c_thetaRHeat;                                          // gesamte Spreizung
 				this.c_durchflussHeat = en1264.Durchfluss(qH2o, ModulKlimaBodenProduct.ConfigC, deltaT);
-				this.c_druckverlustHeat = en1264.DruckverlustModul(modulCount, this.c_durchflussHeat);
+				this.c_druckverlustHeat = en1264.DruckverlustModul_100_40(modulCount, this.c_durchflussHeat);
 				//                                                                           // gesamten Druckverlust berechnen
 
 				this.c_floorTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, ModulKlimaBodenProduct.ConfigAlphaFbh, this.ModulKlimaBodenProduct.AssociatedRoom.RoomHeatTemperature);
@@ -205,7 +205,7 @@ namespace Europlan.Common {
 				double qH2o = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
 				double deltaT = this.c_thetaVCool - this.c_thetaRCool;                                          // gesamte Spreizung
 				this.c_durchflussCool = en1264.Durchfluss(qH2o, ModulKlimaBodenProduct.ConfigC, deltaT);
-				this.c_druckverlustCool = en1264.DruckverlustModul(modulCount, this.c_durchflussCool);
+				this.c_druckverlustCool = en1264.DruckverlustModul_100_40(modulCount, this.c_durchflussCool);
 				//                                                                           // gesamten Druckverlust berechnen
 
 				this.c_floorTempCool = en1264.OberflaechenTemperatur(this.c_qCoolPerSqm, ModulKlimaBodenProduct.ConfigAlphaFbk, this.ModulKlimaBodenProduct.AssociatedRoom.RoomCoolTemperature);
