@@ -1609,6 +1609,10 @@ namespace Europlan.Common {
 					ec.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
 					ec.PipeLengthRuecklaufTotal = ruecklaufNotIsolated[i];
 					ec.PipeLengthRuecklaufNotIsolated = ruecklaufNotIsolated[i];
+					ec.PipeLengthVorlaufWithoutOtherProductTotal = vorlaufWithoutOtherProductTotal[i];
+					ec.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
+					ec.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
+					ec.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
 					ec.Calculate(bestLaydistance.Value, bestRimType);
 					i++;
 				}
