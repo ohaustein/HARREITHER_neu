@@ -113,30 +113,6 @@ namespace Europlan.Common {
 			get { return this.c_floorTempRzCool; }
 		}
 
-		private double c_druckverlustHeat;
-		[XmlIgnore]
-		public double C_DruckverlustHeat {
-			get { return this.c_druckverlustHeat; }
-		}
-
-		private double c_durchflussHeat;
-		[XmlIgnore]
-		public double C_DurchflussHeat {
-			get { return this.c_durchflussHeat; }
-		}
-
-		private double c_druckverlustCool;
-		[XmlIgnore]
-		public double C_DruckverlustCool {
-			get { return this.c_druckverlustCool; }
-		}
-
-		private double c_durchflussCool;
-		[XmlIgnore]
-		public double C_DurchflussCool {
-			get { return this.c_durchflussCool; }
-		}
-
 		private double c_thetaVRzHeat;
 		private double c_thetaRRzHeat;
 		private double c_thetaVAzHeat;
@@ -213,8 +189,8 @@ namespace Europlan.Common {
 			double lambdaU = 1.2; /* Estrich??? */
 			double rLambdaB = this.EurovalProduct.PlannedFloorConstruction == null ? 0 : this.EurovalProduct.PlannedFloorConstruction.RValue;
 			double rLambdaIns = this.EurovalProduct.PlannedInsulationConstruction == null ? 0 : this.EurovalProduct.PlannedInsulationConstruction.RValue;
-			double rAlphaDeckeFbh = 1 / EurovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Heizung */
-			double rAlphaDeckeFbk = 1 / EurovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Kühlung */
+			double rAlphaDeckeFbh = 1 / EurovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
+			double rAlphaDeckeFbk = 1 / EurovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Kühlung */
 
 			// Aufteilung RZ - AZ
 			double aFbh = this.areaTotal - this.areaReduced / 2- this.areaUnheated - this.areaRemovedDueConnection;	// wirksam beheizte Fläche
@@ -230,9 +206,11 @@ namespace Europlan.Common {
 			this.c_pipeLengthAz = this.c_areaAz * EurovalProduct.GetPipeLengthPerSqm(layDistance);                           // Rohlänge der Aufenthaltszone berechnen
 
 			{ // Heizlastberechnung
-				this.c_thetaVRzHeat = 35;
-				this.c_thetaRAzHeat = 30;
-				this.EurovalProduct.GetHeatFlow(out this.c_thetaVRzHeat, out this.c_thetaRAzHeat);
+				double distributorVorlaufTemp;
+				double distributorRuecklaufTemp;
+				this.EurovalProduct.GetHeatFlow(out distributorVorlaufTemp, out distributorRuecklaufTemp);
+				this.c_thetaVRzHeat = distributorVorlaufTemp;
+				this.c_thetaRAzHeat = distributorRuecklaufTemp;
 				this.c_thetaVRzHeat = this.c_thetaVRzHeat - (this.c_thetaVRzHeat - this.c_thetaRAzHeat) * this.vorlaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
 				this.c_thetaRAzHeat = this.c_thetaRAzHeat + (this.c_thetaVRzHeat - this.c_thetaRAzHeat) * this.ruecklaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
 				this.c_thetaRRzHeat = this.c_thetaVRzHeat;
@@ -275,19 +253,43 @@ namespace Europlan.Common {
 				double qU = en1264.WaermeverlustUnten(EurovalProduct.ConfigAlphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowHeat);
 
 				// hydraulische Berechnung
-				double qH2o = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
-				double deltaT = this.c_thetaVRzHeat - this.c_thetaRAzHeat;              // gesamte Spreizung
-				this.c_durchflussHeat = en1264.Durchfluss(qH2o, EurovalProduct.ConfigC, deltaT);
-				this.c_druckverlustHeat = en1264.DruckverlustRohr(this.c_durchflussHeat, EurovalProduct.ConfigRohrInnenA, EurovalProduct.ConfigRho, EurovalProduct.ConfigRohrInnenD, EurovalProduct.ConfigV, 0.000004, this.PipeLengthWithAllConnections);
-				//                                                                           // gesamten Druckverlust berechnen
+				this.c_Qh2oHeat = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
+				foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes) {
+					if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
+						double heatLoad;
+						double qH2o;
+						cp.CalculateHeatLoad(out heatLoad, out qH2o);
+						this.c_Qh2oHeat += qH2o;
+					}
+				}
+				double totalQh2o = this.c_Qh2oHeat;
+				CircuitConnection cc = this.plannedProduct.Product.GetCircuitConnected(this.nrOfCircuit);
+				if (cc != null) {
+					totalQh2o += cc.OtherCircuit.C_Qh2oHeat;
+				}
+				cc = this.plannedProduct.Product.GetCircuitInverseConnected(this.nrOfCircuit);
+				if (cc != null) {
+					totalQh2o += cc.OtherCircuit.C_Qh2oHeat;
+				}
+
+				this.c_durchflussHeat = en1264.Durchfluss(totalQh2o, EurovalProduct.ConfigC, distributorVorlaufTemp - distributorRuecklaufTemp);
+
+				this.c_druckverlustHeat = en1264.DruckverlustRohr(this.c_durchflussHeat, EurovalProduct.ConfigRohrInnenA, EurovalProduct.ConfigRho, EurovalProduct.ConfigRohrInnenD, EurovalProduct.ConfigV, 0.000004, this.PipeLengthWithoutConnections);
+				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
+					if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
+						this.c_druckverlustHeat += cp.CalculateDruckverlust(this.c_durchflussHeat);
+					}
+				}
 
 				this.c_floorTempAzHeat = en1264.OberflaechenTemperatur(this.c_qAzHeatPerSqm, EurovalProduct.ConfigAlphaFbh, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature);
 				this.c_floorTempRzHeat = en1264.OberflaechenTemperatur(this.c_qRzHeatPerSqm, EurovalProduct.ConfigAlphaFbh, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature);
 			}
 			{ // Kühllastberechnung
-				this.c_thetaVRzCool = 35;
-				this.c_thetaRAzCool = 30;
-				this.EurovalProduct.GetCoolFlow(out this.c_thetaVRzCool, out this.c_thetaRAzCool);
+				double distributorVorlaufTemp;
+				double distributorRuecklaufTemp;
+				this.EurovalProduct.GetCoolFlow(out distributorVorlaufTemp, out distributorRuecklaufTemp);
+				this.c_thetaVRzCool = distributorVorlaufTemp;
+				this.c_thetaRAzCool = distributorRuecklaufTemp;
 				this.c_thetaVRzCool = this.c_thetaVRzCool - (this.c_thetaVRzCool - this.c_thetaRAzCool) * this.vorlaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
 				this.c_thetaRAzCool = this.c_thetaRAzCool + (this.c_thetaVRzCool - this.c_thetaRAzCool) * this.ruecklaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
 				this.c_thetaRRzCool = this.c_thetaVRzCool;
@@ -330,11 +332,42 @@ namespace Europlan.Common {
 				double qU = en1264.WaermeverlustUnten(EurovalProduct.ConfigAlphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowCool);
 
 				// hydraulische Berechnung
-				double qH2o = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
-				double deltaT = this.c_thetaVRzCool - this.c_thetaRAzCool;                                          // gesamte Spreizung
-				this.c_durchflussCool = en1264.Durchfluss(qH2o, EurovalProduct.ConfigC, deltaT);
-				this.c_druckverlustCool = en1264.DruckverlustRohr(this.c_durchflussCool, EurovalProduct.ConfigRohrInnenA, EurovalProduct.ConfigRho, EurovalProduct.ConfigRohrInnenD, EurovalProduct.ConfigV, 0.000004, this.PipeLengthWithAllConnections);
+				//this.c_Qh2oCool = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
+				/*double deltaT = this.c_thetaVRzCool - this.c_thetaRAzCool;                                          // gesamte Spreizung
+				this.c_durchflussCool = en1264.Durchfluss(this.c_Qh2oCool, EurovalProduct.ConfigC, deltaT);
+				this.c_druckverlustCool = en1264.DruckverlustRohr(this.c_durchflussCool, EurovalProduct.ConfigRohrInnenA, EurovalProduct.ConfigRho, EurovalProduct.ConfigRohrInnenD, EurovalProduct.ConfigV, 0.000004, this.PipeLengthWithAllConnections);*/
 				//                                                                           // gesamten Druckverlust berechnen
+
+
+				this.c_Qh2oCool = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
+				foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes) {
+					if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
+						double coolLoad;
+						double qH2o;
+						cp.CalculateCoolLoad(out coolLoad, out qH2o);
+						this.c_Qh2oCool -= qH2o;
+					}
+				}
+				double totalQh2o = this.c_Qh2oCool;
+				CircuitConnection cc = this.plannedProduct.Product.GetCircuitConnected(this.nrOfCircuit);
+				if (cc != null) {
+					totalQh2o += cc.OtherCircuit.C_Qh2oCool;
+				}
+				cc = this.plannedProduct.Product.GetCircuitInverseConnected(this.nrOfCircuit);
+				if (cc != null) {
+					totalQh2o += cc.OtherCircuit.C_Qh2oCool;
+				}
+
+				this.c_durchflussCool = en1264.Durchfluss(totalQh2o, EurovalProduct.ConfigC, distributorVorlaufTemp - distributorRuecklaufTemp);
+
+				this.c_druckverlustCool = en1264.DruckverlustRohr(this.c_durchflussCool, EurovalProduct.ConfigRohrInnenA, EurovalProduct.ConfigRho, EurovalProduct.ConfigRohrInnenD, EurovalProduct.ConfigV, 0.000004, this.PipeLengthWithoutConnections);
+				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
+					if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
+						this.c_druckverlustCool += cp.CalculateDruckverlust(this.c_durchflussCool);
+					}
+				}
+
+
 
 				this.c_floorTempAzCool = en1264.OberflaechenTemperatur(this.c_qAzCoolPerSqm, EurovalProduct.ConfigAlphaFbk, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature);
 				this.c_floorTempRzCool = en1264.OberflaechenTemperatur(this.c_qRzCoolPerSqm, EurovalProduct.ConfigAlphaFbk, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature);
