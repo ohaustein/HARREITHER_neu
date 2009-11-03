@@ -838,50 +838,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		/// <summary>
-		/// The pressure loss for heating, based on the current calculation.
-		/// </summary>
-		[XmlIgnore]
-		public double PlannedDeltaRhoHeat {
-			get {
-				if (this.incompleteCalculation) {
-					return 0;
-				}
-				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
-					double druckverlust = ec.C_DruckverlustHeat;
-					Circuit.CircuitConnection cc = this.GetCircuitConnected(ec.NrOfCircuit);
-					if (cc != null) {
-						druckverlust += cc.OtherCircuit.C_DruckverlustHeat;
-					}
-					cc = this.GetCircuitInverseConnected(ec.NrOfCircuit);
-					if (cc != null) {
-						druckverlust += cc.OtherCircuit.C_DruckverlustHeat;
-					}
-					if (druckverlust > value) {
-						value = druckverlust;
-					}
-				}
-				return value;
-			}
-		}
-
-		[XmlIgnore]
-		public double PlannedMhHeat {
-			get {
-				if (this.incompleteCalculation) {
-					return 0;
-				}
-				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
-					if (ec.C_DurchflussHeat > value) {
-						value = ec.C_DurchflussHeat;
-					}
-				}
-				return value;
-			}
-		}
-
 		[XmlIgnore]
 		public double PlannedFloorTemperatureHeatRim {
 			get {
@@ -994,50 +950,6 @@ namespace Europlan.Common {
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					value += ec.QAzCool;
-				}
-				return value;
-			}
-		}
-
-		/// <summary>
-		/// The pressure loss for cooling, based on the current calculation.
-		/// </summary>
-		[XmlIgnore]
-		public double PlannedDeltaRhoCool {
-			get {
-				if (this.incompleteCalculation) {
-					return 0;
-				}
-				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
-					double druckverlust = ec.C_DruckverlustCool;
-					Circuit.CircuitConnection cc = this.GetCircuitConnected(ec.NrOfCircuit);
-					if (cc != null) {
-						druckverlust += cc.OtherCircuit.C_DruckverlustCool;
-					}
-					cc = this.GetCircuitInverseConnected(ec.NrOfCircuit);
-					if (cc != null) {
-						druckverlust += cc.OtherCircuit.C_DruckverlustCool;
-					}
-					if (druckverlust > value) {
-						value = druckverlust;
-					}
-				}
-				return value;
-			}
-		}
-
-		[XmlIgnore]
-		public double PlannedMhCool {
-			get {
-				if (this.incompleteCalculation) {
-					return 0;
-				}
-				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
-					if (ec.C_DurchflussCool > value) {
-						value = ec.C_DurchflussCool;
-					}
 				}
 				return value;
 			}
