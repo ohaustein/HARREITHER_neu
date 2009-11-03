@@ -257,12 +257,38 @@ namespace Europlan.Common {
 			set { }
 		}
 
+		/// <summary>
+		/// The total cool load that is emmited in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
 		public override double PlannedCoolLoad {
-			get { return 0; }
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (ModulBodenCircuit mbc in this.circuits) {
+					value += mbc.QFbhTotalCool;
+				}
+				return value;
+			}
 		}
 
+		/// <summary>
+		/// The total heat load that is emmited in the room, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
 		public override double PlannedHeatLoad {
-			get { return 0; }
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (ModulBodenCircuit c in this.circuits) {
+					value += c.QFbhTotalHeat;
+				}
+				return value;
+			}
 		}
 
 		public override float PlannedNetArea {
