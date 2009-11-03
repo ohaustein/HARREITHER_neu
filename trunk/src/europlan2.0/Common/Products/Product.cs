@@ -35,6 +35,8 @@ namespace Europlan.Common {
 		protected SerializableDictionary<int, PlannedProduct> plannedConnectedProducts = new SerializableDictionary<int, PlannedProduct>();
 		protected List<ConnectionPipe> plannedConnectionPipes = new List<ConnectionPipe>();
 
+		protected bool incompleteCalculation = true;
+
 		//protected int plannedCircuits = 1;
 		protected List<Circuit> circuits = new List<Circuit>();
 
@@ -415,6 +417,33 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public SerializableDictionary<int, PlannedProduct> PlannedConnectedProducts {
 			get { return this.plannedConnectedProducts; }
+		}
+
+		[XmlIgnore]
+		public bool PlannedCalculationComplete {
+			get { return !this.incompleteCalculation; }
+		}
+
+		[XmlIgnore]
+		public double PlannedSpreizungHeat {
+			get {
+				if (this.PlannedConnection == null) {
+					return 0;
+				}
+				if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+					return this.PlannedConnection.Distributor.RegulatorCircuit == null ? 0 : EN1264.Instance.DefaultSpreizung(this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature);
+				} else if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+					return this.PlannedConnection.OtherProduct.Product.PlannedSpreizungHeat;
+				}
+				return (this.PlannedConnection == null || this.PlannedConnection.Distributor == null || this.PlannedConnection.Distributor.RegulatorCircuit == null) ? 0 : EN1264.Instance.DefaultSpreizung(this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature);
+			}
+		}
+
+		[XmlIgnore]
+		public double PlannedSpreizungCool {
+			get {
+				return 3; // TODO
+			}
 		}
 
 		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg);

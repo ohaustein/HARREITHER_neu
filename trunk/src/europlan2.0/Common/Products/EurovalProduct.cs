@@ -674,7 +674,7 @@ namespace Europlan.Common {
 			get {
 				if (this.plannedRimType.HasValue) {
 					float rimWidth = ((float)GetRimWidth(this.plannedRimType.Value)) / 100.0f;
-					float realRimLength = this.plannedRimLength - rimWidth * this.plannedRimCorners;
+					float realRimLength = this.plannedRimLength + rimWidth * this.plannedRimCorners;
 					return realRimLength * rimWidth;
 				} else {
 					return 0;
@@ -793,6 +793,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override double PlannedHeatLoad {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					value += ec.QFbhTotalHeat;
@@ -807,6 +810,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedHeatLoadRim {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					value += ec.QRzHeat;
@@ -821,6 +827,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedHeatLoadResidence {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					value += ec.QAzHeat;
@@ -835,6 +844,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedDeltaRhoHeat {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.C_DruckverlustHeat > value) {
@@ -848,6 +860,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedMhHeat {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.C_DurchflussHeat > value) {
@@ -859,15 +874,11 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double PlannedSpreizungHeat {
-			get {
-				return (this.PlannedConnection == null || this.PlannedConnection.Distributor == null || this.PlannedConnection.Distributor.RegulatorCircuit == null) ? 0 : EN1264.Instance.DefaultSpreizung(this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature);
-			}
-		}
-
-		[XmlIgnore]
 		public double PlannedFloorTemperatureHeatRim {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.C_FloorTempRzHeat > value) {
@@ -881,6 +892,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedFloorTemperatureHeatResidence {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.C_FloorTempAzHeat > value) {
@@ -931,6 +945,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override double PlannedCoolLoad {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					value += ec.QFbhTotalCool;
@@ -945,6 +962,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedCoolLoadRim {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					value += ec.QRzCool;
@@ -959,6 +979,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedCoolLoadResidence {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					value += ec.QAzCool;
@@ -973,6 +996,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedDeltaRhoCool {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.C_DruckverlustCool > value) {
@@ -986,6 +1012,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedMhCool {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.C_DurchflussCool > value) {
@@ -997,15 +1026,11 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double PlannedSpreizungCool {
-			get {
-				return 3; // TODO
-			}
-		}
-
-		[XmlIgnore]
 		public double PlannedFloorTemperatureCoolRim {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.C_FloorTempRzCool > value) {
@@ -1019,6 +1044,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedFloorTemperatureCoolResidence {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.C_FloorTempAzCool > value) {
@@ -1052,6 +1080,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedPipeLengthPerCircuit {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.PipeLengthWithoutConnections > value) {
@@ -1066,6 +1097,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double LongestPipeLengthPerCircuitWithAllConnections {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.PipeLengthWithAllConnections > value) {
@@ -1079,6 +1113,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PipeLengthWithoutConnectionsOfLongestPipeWithConnections {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double longest = 0;
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
@@ -1094,6 +1131,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double ConnectionLengthOfLongestPipeWithConnections {
 			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
 				double longest = 0;
 				double value = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
@@ -1398,6 +1438,7 @@ namespace Europlan.Common {
 		bool secondConfig = false;
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
+			this.incompleteCalculation = false;
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
 				errorMsg = "Fehlende Eingaben: ";
 				if (plannedFloorConstruction == null) {
@@ -1410,6 +1451,7 @@ namespace Europlan.Common {
 					errorMsg += "Heizkreisanschluß, ";
 				}
 				errorMsg = errorMsg.Substring(0, errorMsg.Length - 2);
+				this.incompleteCalculation = true;
 				return false;
 			}
 
@@ -1431,10 +1473,16 @@ namespace Europlan.Common {
 					}
 				}
 				if (!this.requestedCircuits.HasValue || c < this.requestedCircuits.Value) {
+					/*if (this.requestedCircuits.HasValue) {
+						// TODO reset circuits
+					} else {*/
+						//this.circuits.Clear();
+					/*}*/
 					errorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.incompleteCalculation = true;
 					return false;
 				}
-				this.CorrectCircuits(this.requestedCircuits.Value);
+				this.CorrectCircuits(this.requestedCircuits.Value, false);
 			}
 
 			double areaRemovedDueConnection = 0;
@@ -1595,8 +1643,14 @@ namespace Europlan.Common {
 					}
 					circuitCount = circuitCount < 1 ? 1 : circuitCount;
 					while (tryCalc) {
-						errorMsg = this.CorrectCircuits(circuitCount);
+						errorMsg = this.CorrectCircuits(circuitCount, false);
 						if (errorMsg != null) {
+							/*if (this.requestedCircuits.HasValue) {
+								// TODO reset circuits
+							} else {*/
+								//this.circuits.Clear();
+							/*}*/
+							this.incompleteCalculation = true;
 							return false;
 						}
 						int i = 0;
@@ -1665,26 +1719,20 @@ namespace Europlan.Common {
 			}
 
 			if (!bestLaydistance.HasValue) {
-				if (this.requestedCircuits.HasValue) {
+				/*if (this.requestedCircuits.HasValue) {
 					// TODO reset circuits
-				} else {
+				} else {*/
 					this.circuits.Clear();
-				}
+				/*}*/
 				errorMsg = "Keine Automatische Auslegung möglich";
+				this.incompleteCalculation = true;
 				return false;
 			}
 
 			{ // calculate best choice again
 				this.plannedLayDistance = bestLaydistance;
 				this.plannedRimType = bestRimType;
-				this.CorrectCircuits(bestCircuits);
-				/*if (this.circuits.Count > bestCircuits) {
-					// TODO check if other products are connected to the circuits that are removed
-					this.circuits.RemoveRange(bestCircuits, this.circuits.Count - bestCircuits);
-				}
-				while (this.circuits.Count < bestCircuits) {
-					this.circuits.Add(new EurovalCircuit());
-				}*/
+				this.CorrectCircuits(bestCircuits, true);
 				int i = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					ec.EurovalProduct = this;
@@ -1710,6 +1758,7 @@ namespace Europlan.Common {
 					this.plannedConnection.OtherProduct.ConfigureProductDefault();
 					bool ok = this.ConfigureProduct(requestedHeatLoad, requestedCoolLoad, canHeat, canCool, out errorMsg);
 					this.secondConfig = false;
+					this.incompleteCalculation = !ok;
 					return ok;
 				}
 			}
@@ -1747,215 +1796,27 @@ namespace Europlan.Common {
 			}
 
 			return true;
-
-
-			/*this.plannedRemoveArea = 0;
-			this.plannedHeatLoadAnbindung = 0;
-			this.plannedCoolLoadAnbindung = 0;
-			List<ConnectionPipe> connectionPipes = new List<ConnectionPipe>();
-			foreach (Floor f in Project.Instance.Floors) {
-				foreach (Room r in f.Rooms) {
-					foreach (PlannedProduct pp in r.PlannedProducts) {
-						foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
-							if (cp != null && cp.ConnectionThrough != null && cp.ConnectionThrough.Product == this) {
-								connectionPipes.Add(cp);
-								this.plannedRemoveArea += cp.AreaTotal;
-								this.plannedHeatLoadAnbindung += cp.HeatLoadTotal;
-								this.plannedCoolLoadAnbindung += cp.CoolLoadTotal;
-							}
-						}
-					}
-				}
-			}
-
-			if (this.plannedProductIsConnection) {
-				this.plannedHeatLoad = this.plannedHeatLoadAnbindung;
-				this.plannedCoolLoad = this.plannedCoolLoadAnbindung;
-				errorMsg = null;
-				return true;
-			}
-
-			// Rohrlänge Anbindeleitungen
-			double vorlaufTotal = 0;
-			double ruecklaufTotal = 0;
-			double vorlaufNotIsolated = 0;
-			double ruecklaufNotIsolated = 0;
-			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
-				vorlaufNotIsolated += (pipe.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) ? pipe.Vorlauf : 0;
-				ruecklaufNotIsolated += (pipe.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) ? pipe.Ruecklauf : 0;
-				vorlaufTotal += pipe.Vorlauf;
-				ruecklaufTotal += pipe.Ruecklauf;
-			}
-
-			Dictionary<LayDistance, Nullable<RimType>[]> teilungen = new Dictionary<LayDistance, RimType?[]>();
-			if (this.plannedRimLength > 0) {
-				teilungen.Add(LayDistance.EV35, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
-				teilungen.Add(LayDistance.EV30, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
-				teilungen.Add(LayDistance.EV25, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
-				teilungen.Add(LayDistance.EV20, new Nullable<RimType>[] { RimType.EV15_60, RimType.EV15_120, RimType.EV15_180, RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
-				teilungen.Add(LayDistance.EV15, new Nullable<RimType>[] { RimType.EV10_55, RimType.EV10_110, RimType.EV10_165, RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
-				teilungen.Add(LayDistance.EV10, new Nullable<RimType>[] { RimType.EV5_40, RimType.EV5_80, RimType.EV5_120 });
-				teilungen.Add(LayDistance.EV5, new Nullable<RimType>[] { RimType.EV5_40 });
-			} else {
-				teilungen.Add(LayDistance.EV35, new Nullable<RimType>[] { null });
-				teilungen.Add(LayDistance.EV30, new Nullable<RimType>[] { null });
-				teilungen.Add(LayDistance.EV25, new Nullable<RimType>[] { null });
-				teilungen.Add(LayDistance.EV20, new Nullable<RimType>[] { null });
-				teilungen.Add(LayDistance.EV15, new Nullable<RimType>[] { null });
-				teilungen.Add(LayDistance.EV10, new Nullable<RimType>[] { null });
-				teilungen.Add(LayDistance.EV5, new Nullable<RimType>[] { null });
-			}
-			if (this.requestedLayDistance != null) {
-				LayDistance[] distances = new LayDistance[teilungen.Keys.Count];
-				teilungen.Keys.CopyTo(distances, 0);
-				foreach (LayDistance distance in distances) {
-					if (distance != this.requestedLayDistance) {
-						teilungen.Remove(distance);
-					}
-				}
-			}
-			if (this.requestedRimType != null) {
-				LayDistance[] distances = new LayDistance[teilungen.Keys.Count];
-				teilungen.Keys.CopyTo(distances, 0);
-				foreach (LayDistance distance in distances) {
-					teilungen[distance] = new Nullable<RimType>[] { this.requestedRimType };
-				}
-			}
-
-			Nullable<LayDistance> curLaydistance = null;
-			Nullable<RimType> curRimtype = null;
-			Nullable<RimType> distanceRim = this.plannedRimLength > 0 ? (Nullable<RimType>)RimType.EV15_60 : (Nullable<RimType>)null;
-			Dictionary<LayDistance, Nullable<RimType>[]>.KeyCollection.Enumerator ldEnumerator = teilungen.Keys.GetEnumerator();
-			Nullable<LayDistance> bestLaydistance = null;
-			Nullable<RimType> bestRimType = null;
-			double bestPipeLength = double.MaxValue;
-			int bestCircuits = int.MaxValue;
-			double bestFloorTempRimHeat = double.MaxValue;
-			double bestFloorTempResidenceHeat = double.MaxValue;
-			double bestPressureLossHeat = double.MaxValue;
-			double bestFloorTempRimCool = double.MaxValue;
-			double bestFloorTempResidenceCool = double.MaxValue;
-			double bestPressureLossCool = double.MaxValue;
-			double bestHeatLoad = 0;
-			double bestCoolLoad = 0;
-			while (ldEnumerator.MoveNext()) {
-				curLaydistance = ldEnumerator.Current;
-				IEnumerator rtEnumerator = teilungen[curLaydistance.Value].GetEnumerator();
-				while (rtEnumerator.MoveNext()) {
-					curRimtype = rtEnumerator.Current as Nullable<RimType>;
-					this.CalculateQForLayDistance(curLaydistance.Value, curRimtype, this.requestedCircuits, vorlaufTotal, vorlaufNotIsolated, ruecklaufTotal, ruecklaufNotIsolated);
-					if (!this.requestedCircuits.HasValue) {
-						// if pressure loss is to large increase circuits until pressure loss is within the valid range
-						while (this.plannedCircuits < 12 &&
-								(calculateHeat && this.PlannedDeltaRhoHeat > EurovalProduct.maxPressureLost / 100) ||
-								(calculateCool && this.PlannedDeltaRhoCool > EurovalProduct.maxPressureLost / 100)) {
-							this.CalculateQForLayDistance(curLaydistance.Value, curRimtype, this.plannedCircuits + 1, vorlaufTotal, vorlaufNotIsolated, ruecklaufTotal, ruecklaufNotIsolated);
-						}
-					}
-					// check if new parameters are better than the old ones
-					if ((!bestLaydistance.HasValue && this.CheckHardParameters(this.PlannedFloorTemperatureHeatRim, this.PlannedFloorTemperatureHeatResidence, this.PlannedDeltaRhoHeat,
-							this.PlannedFloorTemperatureCoolRim, this.PlannedFloorTemperatureCoolResidence, this.PlannedDeltaRhoCool,
-							this.PlannedPipeLengthPerCircuit, calculateHeat, calculateCool, this.requestedLayDistance.HasValue, this.requestedRimType.HasValue, this.requestedCircuits.HasValue)) || 
-							( bestLaydistance.HasValue &&
-							this.CompareParameters(bestFloorTempRimHeat, bestFloorTempResidenceHeat, bestHeatLoad, bestPressureLossHeat,
-							bestFloorTempRimCool, bestFloorTempResidenceCool, bestCoolLoad, bestPressureLossCool,
-							bestPipeLength,
-							this.PlannedFloorTemperatureHeatRim, this.PlannedFloorTemperatureHeatResidence, this.PlannedHeatLoad, this.PlannedDeltaRhoHeat,
-							this.PlannedFloorTemperatureCoolRim, this.PlannedFloorTemperatureCoolResidence, this.PlannedCoolLoad, this.PlannedDeltaRhoCool,
-							this.PlannedPipeLengthPerCircuit, requestedHeatLoad, requestedCoolLoad, calculateHeat, calculateCool, this.requestedLayDistance.HasValue, this.requestedRimType.HasValue, this.requestedCircuits.HasValue))) {
-
-						bestLaydistance = this.PlannedLayDistance;
-						bestRimType = this.PlannedRimType;
-						bestPipeLength = this.PlannedPipeLengthPerCircuit;
-						bestCircuits = this.PlannedCircuits;
-						bestFloorTempRimHeat = this.PlannedFloorTemperatureHeatRim;
-						bestFloorTempResidenceHeat = this.PlannedFloorTemperatureHeatResidence;
-						bestPressureLossHeat = this.PlannedDeltaRhoHeat;
-						bestFloorTempRimCool = this.PlannedFloorTemperatureCoolRim;
-						bestFloorTempResidenceCool = this.PlannedFloorTemperatureCoolResidence;
-						bestPressureLossCool = this.PlannedDeltaRhoCool;
-						bestHeatLoad = this.PlannedHeatLoad;
-						bestCoolLoad = this.PlannedCoolLoad;
-					}
-				}
-			}
-			if (!bestLaydistance.HasValue) {
-				this.plannedLayDistance = null;
-				this.plannedRimType = null;
-				this.plannedHeatLoad = 0;
-				this.plannedHeatLoadAnbindung = 0;
-				this.plannedQHeat = 0;
-				this.plannedQHeatU = 0;
-				this.plannedQHeatRim = 0;
-				this.plannedQHeatResidence = 0;
-				this.plannedDeltaRhoHeat = 0;
-				this.plannedSpreizungHeat = 0;
-				this.plannedMhHeat = 0;
-				this.plannedCoolLoad = 0;
-				this.plannedCoolLoadAnbindung = 0;
-				this.plannedQCool = 0;
-				this.plannedQCoolU = 0;
-				this.plannedQCoolRim = 0;
-				this.plannedQCoolResidence = 0;
-				this.plannedDeltaRhoCool = 0;
-				this.plannedSpreizungCool = 0;
-				this.plannedMhCool = 0;
-				this.plannedPipeLength = 0;
-				this.plannedCircuits = 1;
-				errorMsg = "Keine Automatische Auslegung möglich";
-				return false;
-			}
-			this.CalculateQForLayDistance(bestLaydistance.Value, bestRimType, bestCircuits, vorlaufTotal, vorlaufNotIsolated, ruecklaufTotal, ruecklaufNotIsolated);
-			if (requestedHeatLoad <= 0) {
-				this.plannedHeatLoad = 0;
-				this.plannedHeatLoadAnbindung = 0;
-				this.plannedQHeat = 0;
-				this.plannedQHeatU = 0;
-				this.plannedQHeatRim = 0;
-				this.plannedQHeatResidence = 0;
-				this.plannedDeltaRhoHeat = 0;
-				this.plannedSpreizungHeat = 0;
-			}
-			if (requestedCoolLoad <= 0) {
-				this.plannedCoolLoad = 0;
-				this.plannedCoolLoadAnbindung = 0;
-				this.plannedQCool = 0;
-				this.plannedQCoolU = 0;
-				this.plannedQCoolRim = 0;
-				this.plannedQCoolResidence = 0;
-				this.plannedDeltaRhoCool = 0;
-				this.plannedSpreizungCool = 0;
-			}
-			errorMsg = "";
-			if (this.PlannedPipeLengthPerCircuit > EurovalProduct.ConfigMaxCircuitLength - vorlaufTotal - ruecklaufTotal) {
-				errorMsg += "Rohrlänge zu groß (" + Math.Round(this.PlannedPipeLengthPerCircuit, 1) + "m > " + Math.Round(EurovalProduct.ConfigMaxCircuitLength - vorlaufTotal - ruecklaufTotal, 1) + "m)\n";
-			}
-			if (Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264)) {
-				errorMsg += "Oberflächentemperatur in der Aufenthaltszone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264), 1) + "°C)";
-			}
-			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264)) {
-				errorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "°C)";
-			}
-			return true;*/
 		}
 
-		private string CorrectCircuits(int circuitCount) {
+		private string CorrectCircuits(int circuitCount, bool cleanupConnected) {
 			if (this.circuits.Count > circuitCount) {
 				// TODO check if other products are connected to the circuits that are removed
 				this.circuits.RemoveRange(circuitCount, this.circuits.Count - circuitCount);
 			}
 			List<KeyValuePair<int, Circuit.CircuitConnection>> remove = new List<KeyValuePair<int, Circuit.CircuitConnection>>();
-			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
-				if (kvp.Key >= circuitCount) {
-					remove.Add(kvp);
+			if (cleanupConnected) {
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
+					if (kvp.Key >= circuitCount) {
+						remove.Add(kvp);
+					}
 				}
-			}
-			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in remove) {
-				this.connectedCircuits.Remove(kvp.Key);
-				foreach (KeyValuePair<int, Circuit.CircuitConnection> otherKvp in kvp.Value.OtherCircuit.PlannedProduct.Product.InverseConnectedCircuits) {
-					if (otherKvp.Value.OtherCircuit.NrOfCircuit == kvp.Key) {
-						kvp.Value.OtherCircuit.PlannedProduct.Product.InverseConnectedCircuits.Remove(otherKvp.Key);
-						break;
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in remove) {
+					this.connectedCircuits.Remove(kvp.Key);
+					foreach (KeyValuePair<int, Circuit.CircuitConnection> otherKvp in kvp.Value.OtherProduct.InverseConnectedCircuits) {
+						if (otherKvp.Value.OtherCircuitId == kvp.Key) {
+							kvp.Value.OtherProduct.InverseConnectedCircuits.Remove(otherKvp.Key);
+							break;
+						}
 					}
 				}
 			}
@@ -1967,9 +1828,9 @@ namespace Europlan.Common {
 			}
 			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in remove) {
 				this.inverseConnectedCircuits.Remove(kvp.Key);
-				foreach (KeyValuePair<int, Circuit.CircuitConnection> otherKvp in kvp.Value.OtherCircuit.PlannedProduct.Product.ConnectedCircuits) {
-					if (otherKvp.Value.OtherCircuit.PlannedProduct.Product == this && otherKvp.Value.OtherCircuit.NrOfCircuit == kvp.Key) {
-						kvp.Value.OtherCircuit.PlannedProduct.Product.ConnectedCircuits.Remove(otherKvp.Key);
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> otherKvp in kvp.Value.OtherProduct.ConnectedCircuits) {
+					if (otherKvp.Value.OtherProduct == this && otherKvp.Value.OtherCircuitId == kvp.Key) {
+						kvp.Value.OtherProduct.ConnectedCircuits.Remove(otherKvp.Key);
 						break;
 					}
 				}

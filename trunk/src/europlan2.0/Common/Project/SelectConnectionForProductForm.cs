@@ -73,14 +73,15 @@ namespace Europlan.Common {
 							lblInfo.Text = "Anschluß nicht möglich. Das Heizsystem kann nicht an sich selbst angeschlossen werden.";
 							ok = false;
 						} else {
-							int free = 0;
+							/*int free = 0;
 							foreach (Circuit c in selectedProduct.PlannedCircuits) {
 								if (selectedProduct.GetCircuitConnected(c.NrOfCircuit) == null) {
 									free++;
 								}
 							}
 
-							ok = free >= this.product.Product.PlannedCircuits.Count;
+							ok = free >= this.product.Product.PlannedCircuits.Count;*/
+							ok = true;
 							lblInfo.Text = ok ? "Anschluß an " + selectedCircuit.PlannedProduct.Node.Text + " in " + selectedCircuit.PlannedProduct.Product.AssociatedRoom.ToString() : "Anschluß nicht möglich. Bei diesem Heizsystem sind nicht genug Heizkreise verfügbar";
 							enable = ok;
 						}

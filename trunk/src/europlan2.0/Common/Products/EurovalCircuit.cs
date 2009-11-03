@@ -200,7 +200,7 @@ namespace Europlan.Common {
 			}
 
 			double bRz = ((float)EurovalProduct.GetRimWidth(rimType.Value)) / 100;
-			double lRz = this.rimLength - this.rimCorners * bRz;
+			double lRz = this.rimLength + this.rimCorners * bRz;
 			lRz = lRz < 0 ? 0 : lRz;
 			
 			return lRz * bRz;
@@ -276,7 +276,7 @@ namespace Europlan.Common {
 
 				// hydraulische Berechnung
 				double qH2o = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
-				double deltaT = this.c_thetaVRzHeat - this.c_thetaRAzHeat;                                          // gesamte Spreizung
+				double deltaT = this.c_thetaVRzHeat - this.c_thetaRAzHeat;              // gesamte Spreizung
 				this.c_durchflussHeat = en1264.Durchfluss(qH2o, EurovalProduct.ConfigC, deltaT);
 				this.c_druckverlustHeat = en1264.DruckverlustRohr(this.c_durchflussHeat, EurovalProduct.ConfigRohrInnenA, EurovalProduct.ConfigRho, EurovalProduct.ConfigRohrInnenD, EurovalProduct.ConfigV, 0.000004, this.PipeLengthWithAllConnections);
 				//                                                                           // gesamten Druckverlust berechnen
@@ -326,11 +326,11 @@ namespace Europlan.Common {
 				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
 				this.c_qAzCoolPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
 
-				double qAverage = this.QFbhTotalCool / this.AreaWithoutConnections;
+				double qAverage = -this.QFbhTotalCool / this.AreaWithoutConnections;
 				double qU = en1264.WaermeverlustUnten(EurovalProduct.ConfigAlphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowCool);
 
 				// hydraulische Berechnung
-				double qH2o = -(qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
+				double qH2o = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
 				double deltaT = this.c_thetaVRzCool - this.c_thetaRAzCool;                                          // gesamte Spreizung
 				this.c_durchflussCool = en1264.Durchfluss(qH2o, EurovalProduct.ConfigC, deltaT);
 				this.c_druckverlustCool = en1264.DruckverlustRohr(this.c_durchflussCool, EurovalProduct.ConfigRohrInnenA, EurovalProduct.ConfigRho, EurovalProduct.ConfigRohrInnenD, EurovalProduct.ConfigV, 0.000004, this.PipeLengthWithAllConnections);
