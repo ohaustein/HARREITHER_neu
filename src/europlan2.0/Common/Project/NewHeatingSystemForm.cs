@@ -18,7 +18,7 @@ namespace Europlan.Common {
 			//    }
 			//}
 			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(EurovalProduct)));
-			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaBodenProduct)));
+			//this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaBodenProduct)));
 			if (this.lstHeatingSystems.Items.Count > 0) {
 				this.lstHeatingSystems.Items[0].Selected = true;
 			}
