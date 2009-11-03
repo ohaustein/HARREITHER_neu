@@ -275,9 +275,45 @@ namespace Europlan.Common {
 			return DruckverlustRohr(durchfluss, rohrInnenQuerschnitt, dichte, rohrInnenDurchmesser, viskositaet, k, rohrLaenge);
 		}
 
-		public double DruckverlustModul(int anzahl, double durchfluss) {
+		public double DruckverlustModul_100_40(int anzahl, double durchfluss) {
 			double[] x = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500 };
 			double[] y = { 0.2, 0.35, 0.65, 0.9, 1.25, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25 };
+			double[] c = null;
+			spline3.buildcubicspline(x, y, 30, 0, 0, 0, 0, ref c);
+			if (anzahl > 0 && anzahl <= 40) {
+				return spline3.splineinterpolation(ref c, durchfluss) * anzahl;
+			} else {
+				return 0;
+			}
+		}
+
+		public double DruckverlustModul_120_30(int anzahl, double durchfluss) {
+			double[] x = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500 };
+			double[] y = { 0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1 };
+			double[] c = null;
+			spline3.buildcubicspline(x, y, 30, 0, 0, 0, 0, ref c);
+			if (anzahl > 0 && anzahl <= 40) {
+				return spline3.splineinterpolation(ref c, durchfluss) * anzahl;
+			} else {
+				return 0;
+			}
+		}
+
+		public double DruckverlustModul_100_30(int anzahl, double durchfluss) {
+			double[] x = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500 };
+			double[] y = { 0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3 };
+			double[] c = null;
+			spline3.buildcubicspline(x, y, 30, 0, 0, 0, 0, ref c);
+			if (anzahl > 0 && anzahl <= 40) {
+				return spline3.splineinterpolation(ref c, durchfluss) * anzahl;
+			} else {
+				return 0;
+			}
+		}
+
+		public double DruckverlustModul_80_30(int anzahl, double durchfluss) {
+			double[] x = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500 };
+			double[] y = { 0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3 };
 			double[] c = null;
 			spline3.buildcubicspline(x, y, 30, 0, 0, 0, 0, ref c);
 			if (anzahl > 0 && anzahl <= 40) {
