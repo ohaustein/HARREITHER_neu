@@ -28,6 +28,11 @@ namespace Europlan.Common {
 
 		/*private Nullable<Point> origin = null;*/
 
+		public KlimaFlaechenModul() {
+			this.modulType = ModulTypeEnum.MODUL_100_40;
+			this.orientation = ModulOrientationEnum.ORIENTATION_LEFT;
+		}
+
 		public KlimaFlaechenModul(ModulTypeEnum modulType, ModulOrientationEnum orientation)  {
 			this.modulType = modulType;
 			this.orientation = orientation;
