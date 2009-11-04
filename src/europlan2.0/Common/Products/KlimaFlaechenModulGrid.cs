@@ -101,6 +101,7 @@ namespace Europlan.Common {
 					} else {
 						modul.Orientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
 					}
+					left != left;
 				}
 				ResetGrid();
 				if (GridContentChanged != null) {
