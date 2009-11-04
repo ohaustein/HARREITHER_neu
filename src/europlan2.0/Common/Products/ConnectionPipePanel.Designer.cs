@@ -29,14 +29,13 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle onlyFirstCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle printCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvConnectionPipes = new System.Windows.Forms.DataGridView();
-			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.vorlaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.ruecklaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
@@ -52,6 +51,7 @@ namespace Europlan.Common {
 			this.Area = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.HeatLoad = new Europlan.Common.NumericColumn();
 			this.CoolLoad = new Europlan.Common.NumericColumn();
+			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dgvConnectionPipes)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.connectionPipeBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -92,16 +92,13 @@ namespace Europlan.Common {
 			this.dgvConnectionPipes.Size = new System.Drawing.Size(903, 375);
 			this.dgvConnectionPipes.TabIndex = 2;
 			this.dgvConnectionPipes.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellValueChanged);
+			this.dgvConnectionPipes.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvConnectionPipes_UserDeletingRow);
 			this.dgvConnectionPipes.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellLeave);
 			this.dgvConnectionPipes.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dgvConnectionPipes_PreviewKeyDown);
 			this.dgvConnectionPipes.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvConnectionPipes_UserDeletedRow);
 			this.dgvConnectionPipes.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvConnectionPipes_CellParsing);
 			this.dgvConnectionPipes.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvConnectionPipes_DataError);
 			this.dgvConnectionPipes.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellEnter);
-			// 
-			// connectionPipeBindingSource
-			// 
-			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
 			// 
 			// Room
 			// 
@@ -119,7 +116,7 @@ namespace Europlan.Common {
 			// 
 			this.vorlaufDataGridViewTextBoxColumn.DataPropertyName = "Vorlauf";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
+			dataGridViewCellStyle3.Format = "F1";
 			this.vorlaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.vorlaufDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.vorlaufDataGridViewTextBoxColumn.HeaderText = "Länge\nVorlauf\n(m)";
@@ -133,7 +130,7 @@ namespace Europlan.Common {
 			// 
 			this.ruecklaufDataGridViewTextBoxColumn.DataPropertyName = "Ruecklauf";
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F0";
+			dataGridViewCellStyle4.Format = "F1";
 			this.ruecklaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
 			this.ruecklaufDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.ruecklaufDataGridViewTextBoxColumn.HeaderText = "Länge\nRücklauf\n(m)";
@@ -181,10 +178,10 @@ namespace Europlan.Common {
 			// onlyFirstDataGridViewCheckBoxColumn
 			// 
 			this.onlyFirstDataGridViewCheckBoxColumn.DataPropertyName = "OnlyFirst";
-			onlyFirstCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			onlyFirstCellStyle.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			onlyFirstCellStyle.NullValue = false;
-			this.onlyFirstDataGridViewCheckBoxColumn.DefaultCellStyle = onlyFirstCellStyle;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			dataGridViewCellStyle6.NullValue = false;
+			this.onlyFirstDataGridViewCheckBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
 			this.onlyFirstDataGridViewCheckBoxColumn.FillWeight = 55F;
 			this.onlyFirstDataGridViewCheckBoxColumn.HeaderText = "nur\nerster\nHK";
 			this.onlyFirstDataGridViewCheckBoxColumn.Name = "onlyFirstDataGridViewCheckBoxColumn";
@@ -193,10 +190,10 @@ namespace Europlan.Common {
 			// printDataGridViewCheckBoxColumn
 			// 
 			this.printDataGridViewCheckBoxColumn.DataPropertyName = "Print";
-			printCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			printCellStyle.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			printCellStyle.NullValue = false;
-			this.printDataGridViewCheckBoxColumn.DefaultCellStyle = printCellStyle;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			dataGridViewCellStyle7.NullValue = false;
+			this.printDataGridViewCheckBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
 			this.printDataGridViewCheckBoxColumn.FillWeight = 55F;
 			this.printDataGridViewCheckBoxColumn.HeaderText = "Verlege-\ndaten\ndrucken";
 			this.printDataGridViewCheckBoxColumn.Name = "printDataGridViewCheckBoxColumn";
@@ -284,6 +281,10 @@ namespace Europlan.Common {
 			this.CoolLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.CoolLoad.Visible = false;
 			this.CoolLoad.Width = 50;
+			// 
+			// connectionPipeBindingSource
+			// 
+			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
 			// 
 			// ConnectionPipePanel
 			// 
