@@ -1398,7 +1398,7 @@ namespace Europlan.Common {
 
 				int c = this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count - this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Count;
 				foreach (Circuit.CircuitConnection cc in this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Values) {
-					if (cc.OtherCircuit.PlannedProduct.Product == this) {
+					if (cc.OtherProduct == this) {
 						c++;
 					}
 				}

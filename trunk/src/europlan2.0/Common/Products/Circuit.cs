@@ -21,7 +21,7 @@ namespace Europlan.Common {
 
 			[XmlIgnore]
 			public Circuit OtherCircuit {
-				get { return otherProduct == null ? null : otherProduct.Product.GetCircuit(otherCircuitId); }
+				get { return OtherProduct == null ? null : OtherProduct.GetCircuit(otherCircuitId); }
 				set {
 					otherProduct = value.PlannedProduct;
 					otherCircuitId = value.NrOfCircuit;
