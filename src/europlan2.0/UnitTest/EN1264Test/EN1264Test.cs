@@ -4,7 +4,6 @@ using System.Text;
 using NUnit.Framework;
 using Europlan.Common;
 
-
 namespace Europlan.UnitTest {
 
 	[TestFixture] // telling NUnit that this class contains test functions 
