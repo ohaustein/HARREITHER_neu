@@ -25,13 +25,13 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			this.dgvModules = new System.Windows.Forms.DataGridView();
-			this.modulTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.orientationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.areaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.klimaFlaechenModulBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnAlign = new System.Windows.Forms.Button();
+			this.modulTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.orientationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.areaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dgvModules)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.klimaFlaechenModulBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -51,34 +51,8 @@ namespace Europlan.Common {
 			this.dgvModules.DataSource = this.klimaFlaechenModulBindingSource;
 			this.dgvModules.Location = new System.Drawing.Point(0, 0);
 			this.dgvModules.Name = "dgvModules";
-			this.dgvModules.Size = new System.Drawing.Size(347, 343);
+			this.dgvModules.Size = new System.Drawing.Size(263, 343);
 			this.dgvModules.TabIndex = 0;
-			// 
-			// modulTypeDataGridViewTextBoxColumn
-			// 
-			this.modulTypeDataGridViewTextBoxColumn.DataPropertyName = "ModulType";
-			this.modulTypeDataGridViewTextBoxColumn.HeaderText = "Modultyp";
-			this.modulTypeDataGridViewTextBoxColumn.Name = "modulTypeDataGridViewTextBoxColumn";
-			this.modulTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.modulTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.modulTypeDataGridViewTextBoxColumn.Width = 150;
-			// 
-			// orientationDataGridViewTextBoxColumn
-			// 
-			this.orientationDataGridViewTextBoxColumn.DataPropertyName = "Orientation";
-			this.orientationDataGridViewTextBoxColumn.HeaderText = "Ausrichtung";
-			this.orientationDataGridViewTextBoxColumn.Name = "orientationDataGridViewTextBoxColumn";
-			this.orientationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.orientationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.orientationDataGridViewTextBoxColumn.Width = 150;
-			// 
-			// areaDataGridViewTextBoxColumn
-			// 
-			this.areaDataGridViewTextBoxColumn.DataPropertyName = "Area";
-			this.areaDataGridViewTextBoxColumn.HeaderText = "Area";
-			this.areaDataGridViewTextBoxColumn.Name = "areaDataGridViewTextBoxColumn";
-			this.areaDataGridViewTextBoxColumn.ReadOnly = true;
-			this.areaDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// klimaFlaechenModulBindingSource
 			// 
@@ -86,7 +60,7 @@ namespace Europlan.Common {
 			// 
 			// btnAdd
 			// 
-			this.btnAdd.Location = new System.Drawing.Point(353, 3);
+			this.btnAdd.Location = new System.Drawing.Point(269, 3);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(30, 23);
 			this.btnAdd.TabIndex = 1;
@@ -96,7 +70,7 @@ namespace Europlan.Common {
 			// 
 			// btnRemove
 			// 
-			this.btnRemove.Location = new System.Drawing.Point(353, 32);
+			this.btnRemove.Location = new System.Drawing.Point(269, 32);
 			this.btnRemove.Name = "btnRemove";
 			this.btnRemove.Size = new System.Drawing.Size(32, 23);
 			this.btnRemove.TabIndex = 2;
@@ -106,13 +80,38 @@ namespace Europlan.Common {
 			// 
 			// btnAlign
 			// 
-			this.btnAlign.Location = new System.Drawing.Point(353, 61);
+			this.btnAlign.Location = new System.Drawing.Point(269, 61);
 			this.btnAlign.Name = "btnAlign";
 			this.btnAlign.Size = new System.Drawing.Size(88, 43);
 			this.btnAlign.TabIndex = 3;
 			this.btnAlign.Text = "Automatische Ausrichtung";
 			this.btnAlign.UseVisualStyleBackColor = true;
 			this.btnAlign.Click += new System.EventHandler(this.btnAlign_Click);
+			// 
+			// modulTypeDataGridViewTextBoxColumn
+			// 
+			this.modulTypeDataGridViewTextBoxColumn.DataPropertyName = "ModulType";
+			this.modulTypeDataGridViewTextBoxColumn.HeaderText = "Modultyp";
+			this.modulTypeDataGridViewTextBoxColumn.Name = "modulTypeDataGridViewTextBoxColumn";
+			this.modulTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.modulTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.modulTypeDataGridViewTextBoxColumn.Width = 120;
+			// 
+			// orientationDataGridViewTextBoxColumn
+			// 
+			this.orientationDataGridViewTextBoxColumn.DataPropertyName = "Orientation";
+			this.orientationDataGridViewTextBoxColumn.HeaderText = "Ausrichtung";
+			this.orientationDataGridViewTextBoxColumn.Name = "orientationDataGridViewTextBoxColumn";
+			this.orientationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.orientationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			// 
+			// areaDataGridViewTextBoxColumn
+			// 
+			this.areaDataGridViewTextBoxColumn.DataPropertyName = "Area";
+			this.areaDataGridViewTextBoxColumn.HeaderText = "Area";
+			this.areaDataGridViewTextBoxColumn.Name = "areaDataGridViewTextBoxColumn";
+			this.areaDataGridViewTextBoxColumn.ReadOnly = true;
+			this.areaDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// KlimaFlaechenModulGrid
 			// 
@@ -123,7 +122,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.dgvModules);
 			this.Name = "KlimaFlaechenModulGrid";
-			this.Size = new System.Drawing.Size(446, 343);
+			this.Size = new System.Drawing.Size(365, 343);
 			((System.ComponentModel.ISupportInitialize)(this.dgvModules)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.klimaFlaechenModulBindingSource)).EndInit();
 			this.ResumeLayout(false);
