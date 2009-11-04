@@ -39,7 +39,7 @@ namespace Europlan.Common {
 		}
 
 		protected ModulKlimaBodenProduct(ModulKlimaBodenProduct product) : base(product) {
-
+			this.PlannedCircuits.Add(new ModulBodenCircuit());
 		}
 
 		public override void Initialize() {
