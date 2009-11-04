@@ -200,6 +200,8 @@ namespace Europlan.Common {
 		}
 
 		private void dgvConnectionPipes_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
+			// the following line is part of the workaraound to make the UserDeletedRow event work in case the last remaining row is deleted
+			dgvConnectionPipes.AllowUserToAddRows = true;
 			if (this.GridContentChanged != null) {
 				this.GridContentChanged(this);
 			}
@@ -255,6 +257,11 @@ namespace Europlan.Common {
 				}
 				return null;
 			}
+		}
+
+		private void dgvConnectionPipes_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
+			// the following line is part of the workaraound to make the UserDeletedRow event work in case the last remaining row is deleted
+			dgvConnectionPipes.AllowUserToAddRows = false;
 		}
 
 	}
