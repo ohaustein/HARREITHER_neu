@@ -27,6 +27,7 @@ namespace Europlan.Common {
 			klimaFlaechenModulBindingSource.ResetBindings(false);
 			if (modules != null) {
 				btnRemove.Enabled = modules.Count > 0;
+				btnAlign.Enabled = modules.Count > 1;
 			}
 		}
 
