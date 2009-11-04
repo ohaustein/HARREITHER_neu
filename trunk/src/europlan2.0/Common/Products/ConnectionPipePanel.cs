@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Europlan.Common {
 
-	public delegate void GridContentChangedHandler(object sender);
+	public delegate void ConnectionPipePanelContentChangedHandler(object sender);
 
 	public partial class ConnectionPipePanel : UserControl {
 
@@ -16,7 +16,7 @@ namespace Europlan.Common {
 		private PlannedProduct product;
 		private bool showPipesThroughProduct = false;
 
-		public event GridContentChangedHandler GridContentChanged;
+		public event ConnectionPipePanelContentChangedHandler GridContentChanged;
 
 		public ConnectionPipePanel() {
 			InitializeComponent();

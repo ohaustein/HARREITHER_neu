@@ -133,6 +133,12 @@
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\KlimaFlaechenModulGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Products\KlimaFlaechenModulGrid.Designer.cs">
+      <DependentUpon>KlimaFlaechenModulGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\KlimaFleachenList.cs" />
     <Compile Include="Products\ModulBodenCircuit.cs" />
     <Compile Include="Products\PlannedModulKlimaBodenProductPanel.cs">
@@ -347,6 +353,10 @@
       <DependentUpon>ConnectionPipesForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Products\KlimaFlaechenModulGrid.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>KlimaFlaechenModulGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Products\PlannedModulKlimaBodenProductPanel.resx">
       <DependentUpon>PlannedModulKlimaBodenProductPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -454,6 +464,7 @@
     <None Include="Properties\DataSources\ConstructionLayer.datasource" />
     <None Include="Properties\DataSources\Distributor.datasource" />
     <None Include="Properties\DataSources\IQuickDimensioningSummary.datasource" />
+    <None Include="Properties\DataSources\KlimaFlaechenModul.datasource" />
     <None Include="Properties\DataSources\QuickDimensioningRoomDistributorsWrapper.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\DataSources\RoomType.datasource" />

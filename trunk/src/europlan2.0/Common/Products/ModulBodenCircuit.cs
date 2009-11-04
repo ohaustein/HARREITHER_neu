@@ -10,7 +10,7 @@ namespace Europlan.Common {
 		private List<KlimaFleachenList> rows = new List<KlimaFleachenList>();
 
 		public ModulBodenCircuit() {
-			this.rows.Add(new KlimaFleachenList());
+
 		}
 	
 		public List<KlimaFleachenList> Rows {
