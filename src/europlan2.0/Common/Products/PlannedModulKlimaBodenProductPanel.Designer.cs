@@ -71,45 +71,15 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.label12 = new System.Windows.Forms.Label();
-			this.label11 = new System.Windows.Forms.Label();
-			this.label10 = new System.Windows.Forms.Label();
-			this.panel8 = new System.Windows.Forms.Panel();
-			this.rbLeft6 = new System.Windows.Forms.RadioButton();
-			this.rbRight6 = new System.Windows.Forms.RadioButton();
-			this.panel7 = new System.Windows.Forms.Panel();
-			this.rbLeft5 = new System.Windows.Forms.RadioButton();
-			this.rbRight5 = new System.Windows.Forms.RadioButton();
-			this.panel6 = new System.Windows.Forms.Panel();
-			this.rbLeft4 = new System.Windows.Forms.RadioButton();
-			this.rbRight4 = new System.Windows.Forms.RadioButton();
-			this.panel5 = new System.Windows.Forms.Panel();
-			this.rbLeft3 = new System.Windows.Forms.RadioButton();
-			this.rbRight3 = new System.Windows.Forms.RadioButton();
-			this.panel4 = new System.Windows.Forms.Panel();
-			this.rbLeft2 = new System.Windows.Forms.RadioButton();
-			this.rbRight2 = new System.Windows.Forms.RadioButton();
-			this.panel3 = new System.Windows.Forms.Panel();
-			this.rbleft1 = new System.Windows.Forms.RadioButton();
-			this.rbRight1 = new System.Windows.Forms.RadioButton();
-			this.label9 = new System.Windows.Forms.Label();
-			this.btnRemove = new System.Windows.Forms.Button();
-			this.btnAdd = new System.Windows.Forms.Button();
-			this.lstCircuits = new System.Windows.Forms.ListBox();
-			this.numericBox7 = new Europlan.Common.NumericBox();
-			this.label13 = new System.Windows.Forms.Label();
-			this.num6 = new Europlan.Common.NumericBox();
-			this.label6 = new System.Windows.Forms.Label();
-			this.num5 = new Europlan.Common.NumericBox();
-			this.label5 = new System.Windows.Forms.Label();
-			this.num4 = new Europlan.Common.NumericBox();
-			this.label4 = new System.Windows.Forms.Label();
-			this.num3 = new Europlan.Common.NumericBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.num2 = new Europlan.Common.NumericBox();
-			this.label2 = new System.Windows.Forms.Label();
-			this.num1 = new Europlan.Common.NumericBox();
+			this.dgvModules = new Europlan.Common.KlimaFlaechenModulGrid();
 			this.label1 = new System.Windows.Forms.Label();
+			this.btnRemoveRow = new System.Windows.Forms.Button();
+			this.btnAddRow = new System.Windows.Forms.Button();
+			this.lstRows = new System.Windows.Forms.ListBox();
+			this.label12 = new System.Windows.Forms.Label();
+			this.btnRemoveHk = new System.Windows.Forms.Button();
+			this.btnAddHk = new System.Windows.Forms.Button();
+			this.lstCircuits = new System.Windows.Forms.ListBox();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -124,12 +94,6 @@ namespace Europlan.Common {
 			this.groupBox9.SuspendLayout();
 			this.pageConstruction.SuspendLayout();
 			this.panel2.SuspendLayout();
-			this.panel8.SuspendLayout();
-			this.panel7.SuspendLayout();
-			this.panel6.SuspendLayout();
-			this.panel5.SuspendLayout();
-			this.panel4.SuspendLayout();
-			this.panel3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// grpPowerArea
@@ -738,7 +702,7 @@ namespace Europlan.Common {
 			this.connectionPipePanel.ShowPipesThroughProduct = false;
 			this.connectionPipePanel.Size = new System.Drawing.Size(841, 324);
 			this.connectionPipePanel.TabIndex = 0;
-			this.connectionPipePanel.GridContentChanged += new Europlan.Common.GridContentChangedHandler(this.connectionPipePanel1_GridContentChanged);
+			this.connectionPipePanel.GridContentChanged += new Europlan.Common.ConnectionPipePanelContentChangedHandler(this.connectionPipePanel1_GridContentChanged);
 			// 
 			// groupBox9
 			// 
@@ -794,38 +758,68 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
-			this.panel2.Controls.Add(this.label12);
-			this.panel2.Controls.Add(this.label11);
-			this.panel2.Controls.Add(this.label10);
-			this.panel2.Controls.Add(this.panel8);
-			this.panel2.Controls.Add(this.panel7);
-			this.panel2.Controls.Add(this.panel6);
-			this.panel2.Controls.Add(this.panel5);
-			this.panel2.Controls.Add(this.panel4);
-			this.panel2.Controls.Add(this.panel3);
-			this.panel2.Controls.Add(this.label9);
-			this.panel2.Controls.Add(this.btnRemove);
-			this.panel2.Controls.Add(this.btnAdd);
-			this.panel2.Controls.Add(this.lstCircuits);
-			this.panel2.Controls.Add(this.numericBox7);
-			this.panel2.Controls.Add(this.label13);
-			this.panel2.Controls.Add(this.num6);
-			this.panel2.Controls.Add(this.label6);
-			this.panel2.Controls.Add(this.num5);
-			this.panel2.Controls.Add(this.label5);
-			this.panel2.Controls.Add(this.num4);
-			this.panel2.Controls.Add(this.label4);
-			this.panel2.Controls.Add(this.num3);
-			this.panel2.Controls.Add(this.label3);
-			this.panel2.Controls.Add(this.num2);
-			this.panel2.Controls.Add(this.label2);
-			this.panel2.Controls.Add(this.num1);
+			this.panel2.Controls.Add(this.dgvModules);
 			this.panel2.Controls.Add(this.label1);
+			this.panel2.Controls.Add(this.btnRemoveRow);
+			this.panel2.Controls.Add(this.btnAddRow);
+			this.panel2.Controls.Add(this.lstRows);
+			this.panel2.Controls.Add(this.label12);
+			this.panel2.Controls.Add(this.btnRemoveHk);
+			this.panel2.Controls.Add(this.btnAddHk);
+			this.panel2.Controls.Add(this.lstCircuits);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(3, 3);
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 396);
 			this.panel2.TabIndex = 1;
+			// 
+			// dgvModules
+			// 
+			this.dgvModules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.dgvModules.Boden = true;
+			this.dgvModules.Location = new System.Drawing.Point(205, 43);
+			this.dgvModules.Name = "dgvModules";
+			this.dgvModules.Size = new System.Drawing.Size(642, 212);
+			this.dgvModules.TabIndex = 34;
+			this.dgvModules.GridContentChanged += new Europlan.Common.KlimaFlaechenModulGridContentChangedHandler(this.dgvModules_GridContentChanged);
+			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(96, 14);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(86, 28);
+			this.label1.TabIndex = 33;
+			this.label1.Text = "Parallele Reihen im Heizkreis";
+			// 
+			// btnRemoveRow
+			// 
+			this.btnRemoveRow.Location = new System.Drawing.Point(152, 261);
+			this.btnRemoveRow.Name = "btnRemoveRow";
+			this.btnRemoveRow.Size = new System.Drawing.Size(30, 23);
+			this.btnRemoveRow.TabIndex = 32;
+			this.btnRemoveRow.Text = "-";
+			this.btnRemoveRow.UseVisualStyleBackColor = true;
+			this.btnRemoveRow.Click += new System.EventHandler(this.btnRemoveRow_Click);
+			// 
+			// btnAddRow
+			// 
+			this.btnAddRow.Location = new System.Drawing.Point(97, 261);
+			this.btnAddRow.Name = "btnAddRow";
+			this.btnAddRow.Size = new System.Drawing.Size(30, 23);
+			this.btnAddRow.TabIndex = 31;
+			this.btnAddRow.Text = "+";
+			this.btnAddRow.UseVisualStyleBackColor = true;
+			this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
+			// 
+			// lstRows
+			// 
+			this.lstRows.FormattingEnabled = true;
+			this.lstRows.Location = new System.Drawing.Point(97, 43);
+			this.lstRows.Name = "lstRows";
+			this.lstRows.Size = new System.Drawing.Size(85, 212);
+			this.lstRows.TabIndex = 30;
+			this.lstRows.SelectedIndexChanged += new System.EventHandler(this.lstRows_SelectedIndexChanged);
 			// 
 			// label12
 			// 
@@ -836,533 +830,34 @@ namespace Europlan.Common {
 			this.label12.TabIndex = 29;
 			this.label12.Text = "Heizkreise";
 			// 
-			// label11
+			// btnRemoveHk
 			// 
-			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(402, 225);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(15, 13);
-			this.label11.TabIndex = 28;
-			this.label11.Text = "m";
+			this.btnRemoveHk.Location = new System.Drawing.Point(41, 261);
+			this.btnRemoveHk.Name = "btnRemoveHk";
+			this.btnRemoveHk.Size = new System.Drawing.Size(30, 23);
+			this.btnRemoveHk.TabIndex = 17;
+			this.btnRemoveHk.Text = "-";
+			this.btnRemoveHk.UseVisualStyleBackColor = true;
+			this.btnRemoveHk.Click += new System.EventHandler(this.btnRemoveHk_Click);
 			// 
-			// label10
+			// btnAddHk
 			// 
-			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(254, 27);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(66, 13);
-			this.label10.TabIndex = 27;
-			this.label10.Text = "Anz. Module";
-			// 
-			// panel8
-			// 
-			this.panel8.AutoSize = true;
-			this.panel8.Controls.Add(this.rbLeft6);
-			this.panel8.Controls.Add(this.rbRight6);
-			this.panel8.Location = new System.Drawing.Point(338, 179);
-			this.panel8.Name = "panel8";
-			this.panel8.Size = new System.Drawing.Size(112, 23);
-			this.panel8.TabIndex = 26;
-			// 
-			// rbLeft6
-			// 
-			this.rbLeft6.AutoSize = true;
-			this.rbLeft6.Location = new System.Drawing.Point(3, 3);
-			this.rbLeft6.Name = "rbLeft6";
-			this.rbLeft6.Size = new System.Drawing.Size(46, 17);
-			this.rbLeft6.TabIndex = 18;
-			this.rbLeft6.Text = "links";
-			this.rbLeft6.UseVisualStyleBackColor = true;
-			this.rbLeft6.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// rbRight6
-			// 
-			this.rbRight6.AutoSize = true;
-			this.rbRight6.Location = new System.Drawing.Point(55, 3);
-			this.rbRight6.Name = "rbRight6";
-			this.rbRight6.Size = new System.Drawing.Size(54, 17);
-			this.rbRight6.TabIndex = 19;
-			this.rbRight6.Text = "rechts";
-			this.rbRight6.UseVisualStyleBackColor = true;
-			this.rbRight6.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// panel7
-			// 
-			this.panel7.AutoSize = true;
-			this.panel7.Controls.Add(this.rbLeft5);
-			this.panel7.Controls.Add(this.rbRight5);
-			this.panel7.Location = new System.Drawing.Point(338, 153);
-			this.panel7.Name = "panel7";
-			this.panel7.Size = new System.Drawing.Size(112, 23);
-			this.panel7.TabIndex = 25;
-			// 
-			// rbLeft5
-			// 
-			this.rbLeft5.AutoSize = true;
-			this.rbLeft5.Location = new System.Drawing.Point(3, 3);
-			this.rbLeft5.Name = "rbLeft5";
-			this.rbLeft5.Size = new System.Drawing.Size(46, 17);
-			this.rbLeft5.TabIndex = 18;
-			this.rbLeft5.Text = "links";
-			this.rbLeft5.UseVisualStyleBackColor = true;
-			this.rbLeft5.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// rbRight5
-			// 
-			this.rbRight5.AutoSize = true;
-			this.rbRight5.Location = new System.Drawing.Point(55, 3);
-			this.rbRight5.Name = "rbRight5";
-			this.rbRight5.Size = new System.Drawing.Size(54, 17);
-			this.rbRight5.TabIndex = 19;
-			this.rbRight5.Text = "rechts";
-			this.rbRight5.UseVisualStyleBackColor = true;
-			this.rbRight5.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// panel6
-			// 
-			this.panel6.AutoSize = true;
-			this.panel6.Controls.Add(this.rbLeft4);
-			this.panel6.Controls.Add(this.rbRight4);
-			this.panel6.Location = new System.Drawing.Point(338, 127);
-			this.panel6.Name = "panel6";
-			this.panel6.Size = new System.Drawing.Size(112, 23);
-			this.panel6.TabIndex = 24;
-			// 
-			// rbLeft4
-			// 
-			this.rbLeft4.AutoSize = true;
-			this.rbLeft4.Location = new System.Drawing.Point(3, 3);
-			this.rbLeft4.Name = "rbLeft4";
-			this.rbLeft4.Size = new System.Drawing.Size(46, 17);
-			this.rbLeft4.TabIndex = 18;
-			this.rbLeft4.Text = "links";
-			this.rbLeft4.UseVisualStyleBackColor = true;
-			this.rbLeft4.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// rbRight4
-			// 
-			this.rbRight4.AutoSize = true;
-			this.rbRight4.Location = new System.Drawing.Point(55, 3);
-			this.rbRight4.Name = "rbRight4";
-			this.rbRight4.Size = new System.Drawing.Size(54, 17);
-			this.rbRight4.TabIndex = 19;
-			this.rbRight4.Text = "rechts";
-			this.rbRight4.UseVisualStyleBackColor = true;
-			this.rbRight4.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// panel5
-			// 
-			this.panel5.AutoSize = true;
-			this.panel5.Controls.Add(this.rbLeft3);
-			this.panel5.Controls.Add(this.rbRight3);
-			this.panel5.Location = new System.Drawing.Point(338, 101);
-			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(112, 23);
-			this.panel5.TabIndex = 23;
-			// 
-			// rbLeft3
-			// 
-			this.rbLeft3.AutoSize = true;
-			this.rbLeft3.Location = new System.Drawing.Point(3, 3);
-			this.rbLeft3.Name = "rbLeft3";
-			this.rbLeft3.Size = new System.Drawing.Size(46, 17);
-			this.rbLeft3.TabIndex = 18;
-			this.rbLeft3.Text = "links";
-			this.rbLeft3.UseVisualStyleBackColor = true;
-			this.rbLeft3.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// rbRight3
-			// 
-			this.rbRight3.AutoSize = true;
-			this.rbRight3.Location = new System.Drawing.Point(55, 3);
-			this.rbRight3.Name = "rbRight3";
-			this.rbRight3.Size = new System.Drawing.Size(54, 17);
-			this.rbRight3.TabIndex = 19;
-			this.rbRight3.Text = "rechts";
-			this.rbRight3.UseVisualStyleBackColor = true;
-			this.rbRight3.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// panel4
-			// 
-			this.panel4.AutoSize = true;
-			this.panel4.Controls.Add(this.rbLeft2);
-			this.panel4.Controls.Add(this.rbRight2);
-			this.panel4.Location = new System.Drawing.Point(338, 75);
-			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(112, 23);
-			this.panel4.TabIndex = 22;
-			// 
-			// rbLeft2
-			// 
-			this.rbLeft2.AutoSize = true;
-			this.rbLeft2.Location = new System.Drawing.Point(3, 3);
-			this.rbLeft2.Name = "rbLeft2";
-			this.rbLeft2.Size = new System.Drawing.Size(46, 17);
-			this.rbLeft2.TabIndex = 18;
-			this.rbLeft2.Text = "links";
-			this.rbLeft2.UseVisualStyleBackColor = true;
-			this.rbLeft2.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// rbRight2
-			// 
-			this.rbRight2.AutoSize = true;
-			this.rbRight2.Location = new System.Drawing.Point(55, 3);
-			this.rbRight2.Name = "rbRight2";
-			this.rbRight2.Size = new System.Drawing.Size(54, 17);
-			this.rbRight2.TabIndex = 19;
-			this.rbRight2.Text = "rechts";
-			this.rbRight2.UseVisualStyleBackColor = true;
-			this.rbRight2.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// panel3
-			// 
-			this.panel3.AutoSize = true;
-			this.panel3.Controls.Add(this.rbleft1);
-			this.panel3.Controls.Add(this.rbRight1);
-			this.panel3.Location = new System.Drawing.Point(338, 49);
-			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(112, 23);
-			this.panel3.TabIndex = 21;
-			// 
-			// rbleft1
-			// 
-			this.rbleft1.AutoSize = true;
-			this.rbleft1.Location = new System.Drawing.Point(3, 3);
-			this.rbleft1.Name = "rbleft1";
-			this.rbleft1.Size = new System.Drawing.Size(46, 17);
-			this.rbleft1.TabIndex = 18;
-			this.rbleft1.Text = "links";
-			this.rbleft1.UseVisualStyleBackColor = true;
-			this.rbleft1.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// rbRight1
-			// 
-			this.rbRight1.AutoSize = true;
-			this.rbRight1.Location = new System.Drawing.Point(55, 3);
-			this.rbRight1.Name = "rbRight1";
-			this.rbRight1.Size = new System.Drawing.Size(54, 17);
-			this.rbRight1.TabIndex = 19;
-			this.rbRight1.Text = "rechts";
-			this.rbRight1.UseVisualStyleBackColor = true;
-			this.rbRight1.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// label9
-			// 
-			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(343, 27);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(107, 13);
-			this.label9.TabIndex = 20;
-			this.label9.Text = "Ausrichtung 1. Modul";
-			// 
-			// btnRemove
-			// 
-			this.btnRemove.Location = new System.Drawing.Point(164, 274);
-			this.btnRemove.Name = "btnRemove";
-			this.btnRemove.Size = new System.Drawing.Size(30, 23);
-			this.btnRemove.TabIndex = 17;
-			this.btnRemove.Text = "-";
-			this.btnRemove.UseVisualStyleBackColor = true;
-			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(128, 274);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(30, 23);
-			this.btnAdd.TabIndex = 16;
-			this.btnAdd.Text = "+";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			this.btnAddHk.Location = new System.Drawing.Point(6, 261);
+			this.btnAddHk.Name = "btnAddHk";
+			this.btnAddHk.Size = new System.Drawing.Size(30, 23);
+			this.btnAddHk.TabIndex = 16;
+			this.btnAddHk.Text = "+";
+			this.btnAddHk.UseVisualStyleBackColor = true;
+			this.btnAddHk.Click += new System.EventHandler(this.btnAddHk_Click);
 			// 
 			// lstCircuits
 			// 
 			this.lstCircuits.FormattingEnabled = true;
-			this.lstCircuits.Location = new System.Drawing.Point(4, 30);
+			this.lstCircuits.Location = new System.Drawing.Point(6, 43);
 			this.lstCircuits.Name = "lstCircuits";
-			this.lstCircuits.Size = new System.Drawing.Size(190, 238);
+			this.lstCircuits.Size = new System.Drawing.Size(65, 212);
 			this.lstCircuits.TabIndex = 15;
 			this.lstCircuits.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
-			// 
-			// numericBox7
-			// 
-			this.numericBox7.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numericBox7.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numericBox7.Location = new System.Drawing.Point(338, 222);
-			this.numericBox7.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-			this.numericBox7.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numericBox7.Name = "numericBox7";
-			this.numericBox7.Size = new System.Drawing.Size(58, 20);
-			this.numericBox7.TabIndex = 14;
-			this.numericBox7.Text = "0";
-			this.numericBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox7.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numericBox7.ValueChanged += new System.EventHandler(this.numAnbindeLength_ValueChanged);
-			// 
-			// label13
-			// 
-			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(200, 225);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(130, 13);
-			this.label13.TabIndex = 13;
-			this.label13.Text = "Summe Anbindeleitungen:";
-			// 
-			// num6
-			// 
-			this.num6.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.num6.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num6.Location = new System.Drawing.Point(253, 182);
-			this.num6.MaxValue = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-			this.num6.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num6.Name = "num6";
-			this.num6.Size = new System.Drawing.Size(67, 20);
-			this.num6.TabIndex = 12;
-			this.num6.Text = "0";
-			this.num6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.num6.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num6.ValueChanged += new System.EventHandler(this.numAnzahl_ValueChanged);
-			// 
-			// label6
-			// 
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(200, 185);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(47, 13);
-			this.label6.TabIndex = 11;
-			this.label6.Text = "Reihe 6:";
-			// 
-			// num5
-			// 
-			this.num5.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.num5.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num5.Location = new System.Drawing.Point(253, 156);
-			this.num5.MaxValue = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-			this.num5.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num5.Name = "num5";
-			this.num5.Size = new System.Drawing.Size(67, 20);
-			this.num5.TabIndex = 10;
-			this.num5.Text = "0";
-			this.num5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.num5.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num5.ValueChanged += new System.EventHandler(this.numAnzahl_ValueChanged);
-			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(200, 159);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(47, 13);
-			this.label5.TabIndex = 9;
-			this.label5.Text = "Reihe 5:";
-			// 
-			// num4
-			// 
-			this.num4.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.num4.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num4.Location = new System.Drawing.Point(253, 130);
-			this.num4.MaxValue = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-			this.num4.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num4.Name = "num4";
-			this.num4.Size = new System.Drawing.Size(67, 20);
-			this.num4.TabIndex = 8;
-			this.num4.Text = "0";
-			this.num4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.num4.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num4.ValueChanged += new System.EventHandler(this.numAnzahl_ValueChanged);
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(200, 133);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(47, 13);
-			this.label4.TabIndex = 7;
-			this.label4.Text = "Reihe 4:";
-			// 
-			// num3
-			// 
-			this.num3.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.num3.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num3.Location = new System.Drawing.Point(253, 104);
-			this.num3.MaxValue = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-			this.num3.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num3.Name = "num3";
-			this.num3.Size = new System.Drawing.Size(67, 20);
-			this.num3.TabIndex = 6;
-			this.num3.Text = "0";
-			this.num3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.num3.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num3.ValueChanged += new System.EventHandler(this.numAnzahl_ValueChanged);
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(200, 107);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(47, 13);
-			this.label3.TabIndex = 5;
-			this.label3.Text = "Reihe 3:";
-			// 
-			// num2
-			// 
-			this.num2.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.num2.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num2.Location = new System.Drawing.Point(253, 78);
-			this.num2.MaxValue = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-			this.num2.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num2.Name = "num2";
-			this.num2.Size = new System.Drawing.Size(67, 20);
-			this.num2.TabIndex = 4;
-			this.num2.Text = "0";
-			this.num2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.num2.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num2.ValueChanged += new System.EventHandler(this.numAnzahl_ValueChanged);
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(200, 81);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(47, 13);
-			this.label2.TabIndex = 3;
-			this.label2.Text = "Reihe 2:";
-			// 
-			// num1
-			// 
-			this.num1.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.num1.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num1.Location = new System.Drawing.Point(253, 52);
-			this.num1.MaxValue = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-			this.num1.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num1.Name = "num1";
-			this.num1.Size = new System.Drawing.Size(67, 20);
-			this.num1.TabIndex = 2;
-			this.num1.Text = "0";
-			this.num1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.num1.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.num1.ValueChanged += new System.EventHandler(this.numAnzahl_ValueChanged);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(200, 55);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(47, 13);
-			this.label1.TabIndex = 1;
-			this.label1.Text = "Reihe 1:";
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -1409,18 +904,6 @@ namespace Europlan.Common {
 			this.pageConstruction.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
-			this.panel8.ResumeLayout(false);
-			this.panel8.PerformLayout();
-			this.panel7.ResumeLayout(false);
-			this.panel7.PerformLayout();
-			this.panel6.ResumeLayout(false);
-			this.panel6.PerformLayout();
-			this.panel5.ResumeLayout(false);
-			this.panel5.PerformLayout();
-			this.panel4.ResumeLayout(false);
-			this.panel4.PerformLayout();
-			this.panel3.ResumeLayout(false);
-			this.panel3.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -1477,46 +960,16 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblAreaUnit;
 		private NumericBox numArea;
 		private System.Windows.Forms.Label lblAreaTxt;
-		private System.Windows.Forms.Label label1;
-		private NumericBox num6;
-		private System.Windows.Forms.Label label6;
-		private NumericBox num5;
-		private System.Windows.Forms.Label label5;
-		private NumericBox num4;
-		private System.Windows.Forms.Label label4;
-		private NumericBox num3;
-		private System.Windows.Forms.Label label3;
-		private NumericBox num2;
-		private System.Windows.Forms.Label label2;
-		private NumericBox num1;
-		private NumericBox numericBox7;
-		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-		private System.Windows.Forms.Button btnRemove;
-		private System.Windows.Forms.Button btnAdd;
+		private System.Windows.Forms.Button btnRemoveHk;
+		private System.Windows.Forms.Button btnAddHk;
 		private System.Windows.Forms.ListBox lstCircuits;
-		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.RadioButton rbRight1;
-		private System.Windows.Forms.RadioButton rbleft1;
-		private System.Windows.Forms.Panel panel8;
-		private System.Windows.Forms.RadioButton rbLeft6;
-		private System.Windows.Forms.RadioButton rbRight6;
-		private System.Windows.Forms.Panel panel7;
-		private System.Windows.Forms.RadioButton rbLeft5;
-		private System.Windows.Forms.RadioButton rbRight5;
-		private System.Windows.Forms.Panel panel6;
-		private System.Windows.Forms.RadioButton rbLeft4;
-		private System.Windows.Forms.RadioButton rbRight4;
-		private System.Windows.Forms.Panel panel5;
-		private System.Windows.Forms.RadioButton rbLeft3;
-		private System.Windows.Forms.RadioButton rbRight3;
-		private System.Windows.Forms.Panel panel4;
-		private System.Windows.Forms.RadioButton rbLeft2;
-		private System.Windows.Forms.RadioButton rbRight2;
-		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.Label label12;
-		private System.Windows.Forms.Label label11;
-		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button btnRemoveRow;
+		private System.Windows.Forms.Button btnAddRow;
+		private System.Windows.Forms.ListBox lstRows;
+		private KlimaFlaechenModulGrid dgvModules;
 	}
 }

@@ -30,14 +30,14 @@ namespace Europlan.Common {
 			AREA_REDUCED = 64,
 			AREA_UNHEATED = 128,
 			ROOM_TEMERATURE_BELOW_HEAT = 256,
-			ROOM_TEMERATURE_BELOW_COOL = 512
-			//RIM_LENGTH = 1024,
+			ROOM_TEMERATURE_BELOW_COOL = 512,
+			MODULES = 1024,
 			//CORNERS = 2048,
 			//LAY_DISTANCE = 4096,
 			//RIM_TYPE = 8192,
 			//CALCULATION_TYPE = 16384,
-			//CIRCUIT_COUNT = 32768,
-			//SEPARATE_CIRCUIT = 65536
+			CIRCUITS = 32768,
+			ROWS = 65536
 		}
 
 
@@ -65,6 +65,9 @@ namespace Europlan.Common {
 		private int ignoreAreaUnheated = 0;
 		private int ignoreRoomTemperatureBelowHeat = 0;
 		private int ignoreRoomTemperatureBelowCool = 0;
+		private int ignoreCircuits = 0;
+		private int ignoreRows = 0;
+		private int ignoreModules = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
@@ -80,6 +83,9 @@ namespace Europlan.Common {
 				ignoreAreaUnheated++;
 				ignoreRoomTemperatureBelowHeat++;
 				ignoreRoomTemperatureBelowCool++;
+				ignoreCircuits++;
+				ignoreRows++;
+				ignoreModules++;
 
 				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
 
@@ -241,13 +247,41 @@ namespace Europlan.Common {
 			//    if ((skipFields & FieldEnum.RIM_TYPE) == FieldEnum.NONE) {
 			//        this.cmbRimType.SelectedItem = new RimTypeItem(evProduct.RequestedRimType, "");
 			//    }
-			//    if ((skipFields & FieldEnum.CIRCUIT_COUNT) == FieldEnum.NONE) {
-			//        if (evProduct.RequestedCircuits != null) {
-			//            this.cmbCircuits.SelectedIndex = evProduct.RequestedCircuits.Value;
-			//        } else {
-			//            this.cmbCircuits.SelectedIndex = 0;
-			//        }
-			//    }
+			    if ((skipFields & FieldEnum.CIRCUITS) == FieldEnum.NONE) {
+					if (this.product.Product.PlannedCircuits.Count == 0) {
+						this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
+					}
+			        this.lstCircuits.Items.Clear();
+					int count = 1;
+					foreach (Circuit c in this.product.Product.PlannedCircuits) {
+						lstCircuits.Items.Add(count++);
+					}
+					if (lstCircuits.Items.Count > 0) {
+					    lstCircuits.SelectedIndex = 0;
+					}
+					btnRemoveHk.Enabled = lstCircuits.Items.Count > 1;
+			    }
+				if ((skipFields & FieldEnum.ROWS) == FieldEnum.NONE) {
+					this.lstRows.Items.Clear();
+					if (lstCircuits.SelectedIndex >= 0) {
+						int count = 1;
+						ModulBodenCircuit circuit = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit);
+						if (circuit.Rows.Count == 0) {
+							circuit.Rows.Add(new KlimaFleachenList());
+						}
+						foreach (KlimaFleachenList row in circuit.Rows) {
+						    lstRows.Items.Add(count++);
+						}
+						if (lstRows.Items.Count > 0) {
+							lstRows.SelectedIndex = 0;
+						}
+					}
+					btnAddRow.Enabled = lstCircuits.SelectedIndex >= 0;
+					btnRemoveRow.Enabled = lstRows.Items.Count > 1;
+				}
+				if ((skipFields & FieldEnum.MODULES) == FieldEnum.NONE) {
+					dgvModules.Row = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).Rows[lstRows.SelectedIndex];
+				}
 
 			//    if ((skipFields & FieldEnum.CALCULATION_TYPE) == FieldEnum.NONE) {
 			//        this.rbCalculateHeat.Checked = this.product.CalculateHeat && !this.product.CalculateCool;
@@ -389,7 +423,9 @@ namespace Europlan.Common {
 				ignoreAreaUnheated--;
 				ignoreRoomTemperatureBelowHeat--;
 				ignoreRoomTemperatureBelowCool--;
-
+				ignoreCircuits--;
+				ignoreRows--;
+				ignoreModules--;
 			}
 			// TODO
 		}
@@ -625,52 +661,63 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void btnConnectionPipes_Click(object sender, EventArgs e) {
-			ConnectionPipesForm form = new ConnectionPipesForm(this.product);
-			form.ShowDialog();
-			if (form.UnsavedChanges) {
+		private void btnAddHk_Click(object sender, EventArgs e) {
+			this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
+			this.UpdateControl(FieldEnum.NONE);
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
+		private void btnRemoveHk_Click(object sender, EventArgs e) {
+			if (lstCircuits.Items.Count > 1 && lstCircuits.SelectedIndex >= 0) {
+				this.product.Product.PlannedCircuits.RemoveAt(lstCircuits.SelectedIndex);
+				this.UpdateControl(FieldEnum.NONE);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
 				}
 			}
-			form.Dispose();
-		}
-
-		private void rb_CheckedChanged(object sender, EventArgs e) {
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
-			}
-		}
-
-		private void numAnbindeLength_ValueChanged(object sender, EventArgs e) {
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
-			}
-		}
-
-		private void numAnzahl_ValueChanged(object sender, EventArgs e) {
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
-			}
-		}
-
-		private void btnAdd_Click(object sender, EventArgs e) {
-			this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
-			}
-		}
-
-		private void btnRemove_Click(object sender, EventArgs e) {
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
-			}
 		}
 
 		private void lstCircuits_SelectedIndexChanged(object sender, EventArgs e) {
+			if (ignoreCircuits == 0) {
+				this.UpdateControl(FieldEnum.CIRCUITS);
+			}
 
 		}
 
+		private void btnAddRow_Click(object sender, EventArgs e) {
+			ModulBodenCircuit circuit = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit);
+			circuit.Rows.Add(new KlimaFleachenList());
+			this.UpdateControl(FieldEnum.CIRCUITS);
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
 
+		private void btnRemoveRow_Click(object sender, EventArgs e) {
+			if (lstRows.Items.Count > 1 && lstRows.SelectedIndex >= 0) {
+				ModulBodenCircuit circuit = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit);
+				circuit.Rows.RemoveAt(lstRows.SelectedIndex);
+				this.UpdateControl(FieldEnum.CIRCUITS);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}
+
+		private void lstRows_SelectedIndexChanged(object sender, EventArgs e) {
+			if (ignoreRows == 0) {
+				this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS);
+			}
+		}
+
+		private void dgvModules_GridContentChanged(object sender) {
+			this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS | FieldEnum.MODULES);
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+		
 	}
 }

@@ -974,7 +974,7 @@ namespace Europlan.Common {
 			this.connectionPipePanel.ShowPipesThroughProduct = false;
 			this.connectionPipePanel.Size = new System.Drawing.Size(841, 324);
 			this.connectionPipePanel.TabIndex = 0;
-			this.connectionPipePanel.GridContentChanged += new Europlan.Common.GridContentChangedHandler(this.connectionPipePanel1_GridContentChanged);
+			this.connectionPipePanel.GridContentChanged += new Europlan.Common.ConnectionPipePanelContentChangedHandler(this.connectionPipePanel1_GridContentChanged);
 			// 
 			// groupBox9
 			// 

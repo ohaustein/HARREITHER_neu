@@ -150,7 +150,7 @@ namespace Europlan.Common {
 			this.connectionPipePanel.ShowPipesThroughProduct = true;
 			this.connectionPipePanel.Size = new System.Drawing.Size(859, 390);
 			this.connectionPipePanel.TabIndex = 4;
-			this.connectionPipePanel.GridContentChanged += new Europlan.Common.GridContentChangedHandler(this.connectionPipePanel_GridContentChanged);
+			this.connectionPipePanel.GridContentChanged += new Europlan.Common.ConnectionPipePanelContentChangedHandler(this.connectionPipePanel_GridContentChanged);
 			// 
 			// btnLengthAssistant
 			// 
