@@ -92,8 +92,19 @@ namespace Europlan.Common {
 		}
 
 		private void btnAlign_Click(object sender, EventArgs e) {
-			if (GridContentChanged != null) {
-				this.GridContentChanged(this);
+			if (modules != null && modules.Count >= 1) {
+				bool left = modules[0].Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+				foreach (KlimaFlaechenModul modul in modules) {
+					if (left) {
+						modul.Orientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+					} else {
+						modul.Orientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+					}
+				}
+				ResetGrid();
+				if (GridContentChanged != null) {
+					this.GridContentChanged(this);
+				}
 			}
 		}
 	}
