@@ -254,7 +254,7 @@ namespace Europlan.Common {
 			        this.lstCircuits.Items.Clear();
 					int count = 1;
 					foreach (Circuit c in this.product.Product.PlannedCircuits) {
-						lstCircuits.Items.Add(count++);
+						lstCircuits.Items.Add("HK" + count++);
 					}
 					if (lstCircuits.Items.Count > 0) {
 					    lstCircuits.SelectedIndex = 0;
@@ -270,7 +270,7 @@ namespace Europlan.Common {
 							circuit.Rows.Add(new KlimaFleachenList());
 						}
 						foreach (KlimaFleachenList row in circuit.Rows) {
-						    lstRows.Items.Add(count++);
+						    lstRows.Items.Add("Reihe " + count++);
 						}
 						if (lstRows.Items.Count > 0) {
 							lstRows.SelectedIndex = 0;
