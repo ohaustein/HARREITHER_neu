@@ -13,9 +13,9 @@ namespace Europlan.Common {
 
 		public class ModulTypeEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string modul_100_40 = "Modul 100/40";
-			private static readonly string modul_100_30 = "Modul 100/40";
-			private static readonly string modul_120_30 = "Modul 100/40";
-			private static readonly string modul_80_30 = "Modul 100/40";
+			private static readonly string modul_100_30 = "Modul 100/30";
+			private static readonly string modul_120_30 = "Modul 120/30";
+			private static readonly string modul_80_30 = "Modul 80/30";
 			
 			private Dictionary<string, ModulTypeEnum> mappingFromString = new Dictionary<string, ModulTypeEnum>();
 			private Dictionary<ModulTypeEnum, string> mappingToString = new Dictionary<ModulTypeEnum, string>();
@@ -58,7 +58,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		[System.ComponentModel.TypeConverter(typeof(ModulTypeEnum))]
+		[System.ComponentModel.TypeConverter(typeof(ModulTypeEnumConverter))]
 		public enum ModulTypeEnum {
 			MODUL_100_40,
 			MODUL_100_30,
@@ -107,7 +107,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		[System.ComponentModel.TypeConverter(typeof(ModulOrientationEnum))]
+		[System.ComponentModel.TypeConverter(typeof(ModulOrientationEnumConverter))]
 		public enum ModulOrientationEnum {
 			ORIENTATION_LEFT,
 			ORIENTATION_RIGHT
