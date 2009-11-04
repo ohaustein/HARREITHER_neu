@@ -36,6 +36,7 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvConnectionPipes = new System.Windows.Forms.DataGridView();
+			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.vorlaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.ruecklaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
@@ -44,14 +45,13 @@ namespace Europlan.Common {
 			this.PlannedCircuits = new Europlan.Common.NumericColumn();
 			this.onlyFirstDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.printDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.PipeType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.PipeType = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.PipeTypeText = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Verlegeart = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.Insulation = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.Verlegeart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Insulation = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Area = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.HeatLoad = new Europlan.Common.NumericColumn();
 			this.CoolLoad = new Europlan.Common.NumericColumn();
-			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dgvConnectionPipes)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.connectionPipeBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -100,6 +100,10 @@ namespace Europlan.Common {
 			this.dgvConnectionPipes.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvConnectionPipes_DataError);
 			this.dgvConnectionPipes.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellEnter);
 			// 
+			// connectionPipeBindingSource
+			// 
+			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
+			// 
 			// Room
 			// 
 			this.Room.DataPropertyName = "DestinationRoom";
@@ -116,7 +120,7 @@ namespace Europlan.Common {
 			// 
 			this.vorlaufDataGridViewTextBoxColumn.DataPropertyName = "Vorlauf";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F1";
+			dataGridViewCellStyle3.Format = "F0";
 			this.vorlaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.vorlaufDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.vorlaufDataGridViewTextBoxColumn.HeaderText = "Länge\nVorlauf\n(m)";
@@ -130,7 +134,7 @@ namespace Europlan.Common {
 			// 
 			this.ruecklaufDataGridViewTextBoxColumn.DataPropertyName = "Ruecklauf";
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F1";
+			dataGridViewCellStyle4.Format = "F0";
 			this.ruecklaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
 			this.ruecklaufDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.ruecklaufDataGridViewTextBoxColumn.HeaderText = "Länge\nRücklauf\n(m)";
@@ -205,8 +209,8 @@ namespace Europlan.Common {
 			this.PipeType.FillWeight = 125F;
 			this.PipeType.HeaderText = "Rohr-\nsystem";
 			this.PipeType.Name = "PipeType";
+			this.PipeType.ReadOnly = true;
 			this.PipeType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.PipeType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.PipeType.Width = 125;
 			// 
 			// PipeTypeText
@@ -225,8 +229,8 @@ namespace Europlan.Common {
 			this.Verlegeart.FillWeight = 85F;
 			this.Verlegeart.HeaderText = "Verlege-\nart";
 			this.Verlegeart.Name = "Verlegeart";
+			this.Verlegeart.ReadOnly = true;
 			this.Verlegeart.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.Verlegeart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.Verlegeart.Width = 85;
 			// 
 			// Insulation
@@ -236,7 +240,6 @@ namespace Europlan.Common {
 			this.Insulation.HeaderText = "Dämmung";
 			this.Insulation.Name = "Insulation";
 			this.Insulation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.Insulation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.Insulation.Width = 60;
 			// 
 			// Area
@@ -282,10 +285,6 @@ namespace Europlan.Common {
 			this.CoolLoad.Visible = false;
 			this.CoolLoad.Width = 50;
 			// 
-			// connectionPipeBindingSource
-			// 
-			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
-			// 
 			// ConnectionPipePanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -311,10 +310,10 @@ namespace Europlan.Common {
 		private NumericColumn PlannedCircuits;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn onlyFirstDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn printDataGridViewCheckBoxColumn;
-		private System.Windows.Forms.DataGridViewComboBoxColumn PipeType;
+		private System.Windows.Forms.DataGridViewTextBoxColumn PipeType;
 		private System.Windows.Forms.DataGridViewTextBoxColumn PipeTypeText;
-		private System.Windows.Forms.DataGridViewComboBoxColumn Verlegeart;
-		private System.Windows.Forms.DataGridViewComboBoxColumn Insulation;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Verlegeart;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Insulation;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Area;
 		private NumericColumn HeatLoad;
 		private NumericColumn CoolLoad;
