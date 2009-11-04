@@ -182,7 +182,6 @@ namespace Europlan.Common {
 		private double vorlauf;
 		private double ruecklauf;
 		private Room room;
-		private Room destinationRoom;
 		private string roomId = null;
 		private PlannedProduct product;
 		private string productId = null;
@@ -196,7 +195,6 @@ namespace Europlan.Common {
 			this.vorlauf = 0;
 			this.ruecklauf = 0;
 			this.room = null;
-			this.destinationRoom = null;
 			this.product = null;
 			this.print = false;
 			this.onlyFirst = false;
@@ -269,6 +267,12 @@ namespace Europlan.Common {
 								}
 							}
 						}
+					}
+				} else {
+					if (this.room != null && this.room.PlannedProducts.Count > 0) {
+						this.product = this.room.PlannedProducts[0];
+					} else {
+						this.product = null;
 					}
 				}
 				return this.product;

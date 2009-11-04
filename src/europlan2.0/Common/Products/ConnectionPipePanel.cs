@@ -221,7 +221,6 @@ namespace Europlan.Common {
 					Room room = form.SelectedRoom;
 					if (dgvConnectionPipes.CurrentCell.Value != room) {
 						dgvConnectionPipes.CurrentCell.Value = room;
-						this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[productDataGridViewComboBoxColumn.DisplayIndex].Value = null;
 					}
 				}
 				form.Dispose();
@@ -245,6 +244,7 @@ namespace Europlan.Common {
 					form.Dispose();
 				}
 			}
+			ReloadGrid();
 		}
 
 		public ConnectionPipe SelectedConnectionPipe {
