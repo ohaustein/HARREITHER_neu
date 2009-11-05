@@ -97,6 +97,7 @@ namespace Europlan.Common {
 			//    bool showResidence = true;
 
 				lblQHeat.Visible = showHeat;
+				lblAnbHeat.Visible = showHeat;
 				lblQHeatDiff.Visible = showHeat;
 				lblQHeatRest.Visible = showHeat;
 				lblAvgqHeat.Visible = showHeat;
@@ -104,6 +105,7 @@ namespace Europlan.Common {
 				lblDruckverlustHeat.Visible = showHeat;
 				lblTempHeat.Visible = showHeat;
 				lblQCool.Visible = showCool;
+				lblAnbCool.Visible = showCool;
 				lblQCoolDiff.Visible = showCool;
 				lblQCoolRest.Visible = showCool;
 				lblAvgqCool.Visible = showCool;
@@ -322,6 +324,7 @@ namespace Europlan.Common {
 				lblHk.Text = "Heizkreis " + (lstCircuits.SelectedIndex + 1) + ":";
 				lblRest.Text = "Rest (" + this.product.Product.AssociatedRoom.ToString() + ")";
 				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 2).ToString();
+				lblAnbHeat.Text = Math.Round(this.product.Product.PlannedHeatLoadAnbindung, 0).ToString();
 				lblQHeatDiff.Text = Math.Round(qDiffHeat, 2).ToString();
 				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString();
 				lblAvgqHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QHeatPerSqm, 2).ToString();
@@ -329,6 +332,7 @@ namespace Europlan.Common {
 				lblDruckverlustHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustHeat, 2).ToString();
 				lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_FloorTempHeat, 2).ToString();
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
+				lblAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
 				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
 				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString();
 				lblAvgqCool.Text = (-1.0 * Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QCoolPerSqm, 2)).ToString();
