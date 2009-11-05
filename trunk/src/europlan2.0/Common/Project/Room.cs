@@ -223,9 +223,35 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public double OpenHeatLoad {
+			get {
+				double covered = 0;
+				foreach (PlannedProduct pp in this.plannedProducts) {
+					if (!pp.PlannedHeatLoad.Equals(double.NaN)) {
+						covered += pp.PlannedHeatLoad;
+					}
+				}
+				return covered - this.heatLoad;
+			}
+		}
+
 		public int CoolLoad {
 			get { return coolLoad; }
 			set { coolLoad = value; }
+		}
+
+		[XmlIgnore]
+		public double OpenCoolLoad {
+			get {
+				double covered = 0;
+				foreach (PlannedProduct pp in this.plannedProducts) {
+					if (!pp.PlannedCoolLoad.Equals(double.NaN)) {
+						covered += pp.PlannedCoolLoad;
+					}
+				}
+				return covered - this.coolLoad;
+			}
 		}
 
 		[XmlIgnore]
