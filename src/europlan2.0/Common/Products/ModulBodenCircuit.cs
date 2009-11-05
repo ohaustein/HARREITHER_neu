@@ -242,6 +242,9 @@ namespace Europlan.Common {
 				this.ModulKlimaBodenProduct.GetCoolFlow(out distributorVorlaufTemp, out distributorRuecklaufTemp);
 				this.c_thetaVCool = distributorVorlaufTemp;
 				this.c_thetaRCool = distributorRuecklaufTemp;
+				this.c_thetaVCool = this.c_thetaVCool - (this.c_thetaVCool - this.c_thetaRCool) * this.vorlaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
+				this.c_thetaRCool = this.c_thetaRCool + (this.c_thetaVCool - this.c_thetaRCool) * this.ruecklaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
+
 				double dTheta = en1264.Heizmitteluebertemperatur(this.c_thetaVCool, this.c_thetaRCool, this.ModulKlimaBodenProduct.AssociatedRoom.RoomCoolTemperature);
 
 				double au = en1264.auFlaeche(ModulKlimaBodenProduct.ConfigAlpha0, ModulKlimaBodenProduct.ConfigAlphaFbk, su0, lambdaU0, ModulKlimaBodenProduct.ConfigSu, lambdaE);
