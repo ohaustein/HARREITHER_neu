@@ -726,6 +726,7 @@ namespace Europlan.Common {
 			this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 			this.UpdateControl(FieldEnum.NONE);
+			lstCircuits.SelectedIndex = lstCircuits.Items.Count - 1;
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
@@ -755,6 +756,7 @@ namespace Europlan.Common {
 			circuit.Rows.Add(new KlimaFlaechenList());
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 			this.UpdateControl(FieldEnum.CIRCUITS);
+			lstRows.SelectedIndex = lstRows.Items.Count - 1;
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
