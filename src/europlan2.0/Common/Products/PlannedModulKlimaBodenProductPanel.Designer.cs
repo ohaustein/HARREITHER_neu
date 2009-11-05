@@ -71,6 +71,11 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.label37 = new System.Windows.Forms.Label();
+			this.label39 = new System.Windows.Forms.Label();
+			this.lblAnbCool = new System.Windows.Forms.Label();
+			this.lblAnbHeat = new System.Windows.Forms.Label();
+			this.label45 = new System.Windows.Forms.Label();
 			this.label36 = new System.Windows.Forms.Label();
 			this.lblAnb = new System.Windows.Forms.Label();
 			this.label38 = new System.Windows.Forms.Label();
@@ -146,11 +151,7 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.label37 = new System.Windows.Forms.Label();
-			this.label39 = new System.Windows.Forms.Label();
-			this.lblAnbCool = new System.Windows.Forms.Label();
-			this.lblAnbHeat = new System.Windows.Forms.Label();
-			this.label45 = new System.Windows.Forms.Label();
+			this.lblError = new System.Windows.Forms.Label();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -825,6 +826,7 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.lblError);
 			this.panel2.Controls.Add(this.label37);
 			this.panel2.Controls.Add(this.label39);
 			this.panel2.Controls.Add(this.lblAnbCool);
@@ -906,6 +908,49 @@ namespace Europlan.Common {
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
+			// 
+			// label37
+			// 
+			this.label37.Location = new System.Drawing.Point(355, 357);
+			this.label37.Name = "label37";
+			this.label37.Size = new System.Drawing.Size(35, 13);
+			this.label37.TabIndex = 137;
+			this.label37.Text = "W";
+			// 
+			// label39
+			// 
+			this.label39.Location = new System.Drawing.Point(243, 357);
+			this.label39.Name = "label39";
+			this.label39.Size = new System.Drawing.Size(35, 13);
+			this.label39.TabIndex = 136;
+			this.label39.Text = "W";
+			// 
+			// lblAnbCool
+			// 
+			this.lblAnbCool.Location = new System.Drawing.Point(290, 357);
+			this.lblAnbCool.Name = "lblAnbCool";
+			this.lblAnbCool.Size = new System.Drawing.Size(50, 13);
+			this.lblAnbCool.TabIndex = 135;
+			this.lblAnbCool.Text = "W";
+			this.lblAnbCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblAnbHeat
+			// 
+			this.lblAnbHeat.Location = new System.Drawing.Point(187, 357);
+			this.lblAnbHeat.Name = "lblAnbHeat";
+			this.lblAnbHeat.Size = new System.Drawing.Size(50, 13);
+			this.lblAnbHeat.TabIndex = 134;
+			this.lblAnbHeat.Text = "W";
+			this.lblAnbHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// label45
+			// 
+			this.label45.AutoSize = true;
+			this.label45.Location = new System.Drawing.Point(4, 357);
+			this.label45.Name = "label45";
+			this.label45.Size = new System.Drawing.Size(135, 13);
+			this.label45.TabIndex = 133;
+			this.label45.Text = "Leistung Anbindeleitungen:";
 			// 
 			// label36
 			// 
@@ -1576,48 +1621,17 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			// 
-			// label37
+			// lblError
 			// 
-			this.label37.Location = new System.Drawing.Point(355, 357);
-			this.label37.Name = "label37";
-			this.label37.Size = new System.Drawing.Size(35, 13);
-			this.label37.TabIndex = 137;
-			this.label37.Text = "W";
-			// 
-			// label39
-			// 
-			this.label39.Location = new System.Drawing.Point(243, 357);
-			this.label39.Name = "label39";
-			this.label39.Size = new System.Drawing.Size(35, 13);
-			this.label39.TabIndex = 136;
-			this.label39.Text = "W";
-			// 
-			// lblAnbCool
-			// 
-			this.lblAnbCool.Location = new System.Drawing.Point(290, 357);
-			this.lblAnbCool.Name = "lblAnbCool";
-			this.lblAnbCool.Size = new System.Drawing.Size(50, 13);
-			this.lblAnbCool.TabIndex = 135;
-			this.lblAnbCool.Text = "W";
-			this.lblAnbCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// lblAnbHeat
-			// 
-			this.lblAnbHeat.Location = new System.Drawing.Point(187, 357);
-			this.lblAnbHeat.Name = "lblAnbHeat";
-			this.lblAnbHeat.Size = new System.Drawing.Size(50, 13);
-			this.lblAnbHeat.TabIndex = 134;
-			this.lblAnbHeat.Text = "W";
-			this.lblAnbHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// label45
-			// 
-			this.label45.AutoSize = true;
-			this.label45.Location = new System.Drawing.Point(4, 357);
-			this.label45.Name = "label45";
-			this.label45.Size = new System.Drawing.Size(135, 13);
-			this.label45.TabIndex = 133;
-			this.label45.Text = "Leistung Anbindeleitungen:";
+			this.lblError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lblError.ForeColor = System.Drawing.Color.Red;
+			this.lblError.Location = new System.Drawing.Point(4, 538);
+			this.lblError.Name = "lblError";
+			this.lblError.Size = new System.Drawing.Size(835, 33);
+			this.lblError.TabIndex = 138;
+			this.lblError.Visible = false;
 			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
@@ -1774,5 +1788,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblAnbCool;
 		private System.Windows.Forms.Label lblAnbHeat;
 		private System.Windows.Forms.Label label45;
+		private System.Windows.Forms.Label lblError;
 	}
 }
