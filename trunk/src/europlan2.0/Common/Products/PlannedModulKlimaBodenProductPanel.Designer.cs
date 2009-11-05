@@ -71,6 +71,18 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.label33 = new System.Windows.Forms.Label();
+			this.label34 = new System.Windows.Forms.Label();
+			this.label35 = new System.Windows.Forms.Label();
+			this.lblRestArea = new System.Windows.Forms.Label();
+			this.lblCoveredArea = new System.Windows.Forms.Label();
+			this.lblAvailableArea = new System.Windows.Forms.Label();
+			this.label43 = new System.Windows.Forms.Label();
+			this.label42 = new System.Windows.Forms.Label();
+			this.label41 = new System.Windows.Forms.Label();
+			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.label32 = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.label23 = new System.Windows.Forms.Label();
 			this.label24 = new System.Windows.Forms.Label();
@@ -805,6 +817,18 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.label33);
+			this.panel2.Controls.Add(this.label34);
+			this.panel2.Controls.Add(this.label35);
+			this.panel2.Controls.Add(this.lblRestArea);
+			this.panel2.Controls.Add(this.lblCoveredArea);
+			this.panel2.Controls.Add(this.lblAvailableArea);
+			this.panel2.Controls.Add(this.label43);
+			this.panel2.Controls.Add(this.label42);
+			this.panel2.Controls.Add(this.label41);
+			this.panel2.Controls.Add(this.groupBox6);
+			this.panel2.Controls.Add(this.groupBox5);
+			this.panel2.Controls.Add(this.label32);
 			this.panel2.Controls.Add(this.groupBox4);
 			this.panel2.Controls.Add(this.label23);
 			this.panel2.Controls.Add(this.label24);
@@ -866,6 +890,110 @@ namespace Europlan.Common {
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
+			// 
+			// label33
+			// 
+			this.label33.Location = new System.Drawing.Point(642, 377);
+			this.label33.Name = "label33";
+			this.label33.Size = new System.Drawing.Size(35, 13);
+			this.label33.TabIndex = 129;
+			this.label33.Text = "m²";
+			// 
+			// label34
+			// 
+			this.label34.Location = new System.Drawing.Point(642, 357);
+			this.label34.Name = "label34";
+			this.label34.Size = new System.Drawing.Size(35, 13);
+			this.label34.TabIndex = 128;
+			this.label34.Text = "m²";
+			// 
+			// label35
+			// 
+			this.label35.Location = new System.Drawing.Point(642, 337);
+			this.label35.Name = "label35";
+			this.label35.Size = new System.Drawing.Size(35, 13);
+			this.label35.TabIndex = 127;
+			this.label35.Text = "m²";
+			// 
+			// lblRestArea
+			// 
+			this.lblRestArea.Location = new System.Drawing.Point(586, 377);
+			this.lblRestArea.Name = "lblRestArea";
+			this.lblRestArea.Size = new System.Drawing.Size(50, 13);
+			this.lblRestArea.TabIndex = 126;
+			this.lblRestArea.Text = "W";
+			this.lblRestArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblCoveredArea
+			// 
+			this.lblCoveredArea.Location = new System.Drawing.Point(586, 357);
+			this.lblCoveredArea.Name = "lblCoveredArea";
+			this.lblCoveredArea.Size = new System.Drawing.Size(50, 13);
+			this.lblCoveredArea.TabIndex = 125;
+			this.lblCoveredArea.Text = "W";
+			this.lblCoveredArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblAvailableArea
+			// 
+			this.lblAvailableArea.Location = new System.Drawing.Point(586, 337);
+			this.lblAvailableArea.Name = "lblAvailableArea";
+			this.lblAvailableArea.Size = new System.Drawing.Size(50, 13);
+			this.lblAvailableArea.TabIndex = 124;
+			this.lblAvailableArea.Text = "W";
+			this.lblAvailableArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// label43
+			// 
+			this.label43.AutoSize = true;
+			this.label43.Location = new System.Drawing.Point(457, 377);
+			this.label43.Name = "label43";
+			this.label43.Size = new System.Drawing.Size(76, 13);
+			this.label43.TabIndex = 123;
+			this.label43.Text = "Übrige Fläche:";
+			// 
+			// label42
+			// 
+			this.label42.AutoSize = true;
+			this.label42.Location = new System.Drawing.Point(457, 357);
+			this.label42.Name = "label42";
+			this.label42.Size = new System.Drawing.Size(81, 13);
+			this.label42.TabIndex = 122;
+			this.label42.Text = "Belegte Fläche:";
+			// 
+			// label41
+			// 
+			this.label41.AutoSize = true;
+			this.label41.Location = new System.Drawing.Point(457, 337);
+			this.label41.Name = "label41";
+			this.label41.Size = new System.Drawing.Size(97, 13);
+			this.label41.TabIndex = 121;
+			this.label41.Text = "Verfügbare Fläche:";
+			// 
+			// groupBox6
+			// 
+			this.groupBox6.Location = new System.Drawing.Point(580, 300);
+			this.groupBox6.Name = "groupBox6";
+			this.groupBox6.Size = new System.Drawing.Size(2, 100);
+			this.groupBox6.TabIndex = 83;
+			this.groupBox6.TabStop = false;
+			// 
+			// groupBox5
+			// 
+			this.groupBox5.Location = new System.Drawing.Point(450, 321);
+			this.groupBox5.Name = "groupBox5";
+			this.groupBox5.Size = new System.Drawing.Size(220, 2);
+			this.groupBox5.TabIndex = 82;
+			this.groupBox5.TabStop = false;
+			// 
+			// label32
+			// 
+			this.label32.AutoSize = true;
+			this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label32.Location = new System.Drawing.Point(457, 305);
+			this.label32.Name = "label32";
+			this.label32.Size = new System.Drawing.Size(117, 13);
+			this.label32.TabIndex = 120;
+			this.label32.Text = "Zus. Informationen:";
 			// 
 			// groupBox4
 			// 
@@ -1541,5 +1669,17 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label21;
 		private System.Windows.Forms.Label label22;
 		private System.Windows.Forms.GroupBox groupBox4;
+		private System.Windows.Forms.Label label33;
+		private System.Windows.Forms.Label label34;
+		private System.Windows.Forms.Label label35;
+		private System.Windows.Forms.Label lblRestArea;
+		private System.Windows.Forms.Label lblCoveredArea;
+		private System.Windows.Forms.Label lblAvailableArea;
+		private System.Windows.Forms.Label label43;
+		private System.Windows.Forms.Label label42;
+		private System.Windows.Forms.Label label41;
+		private System.Windows.Forms.GroupBox groupBox6;
+		private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.Label label32;
 	}
 }
