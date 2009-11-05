@@ -320,16 +320,17 @@ namespace Europlan.Common {
 			    double qDiffCool = this.product.PlannedCoolLoad - this.product.RequestedCoolLoad;
 
 				lblHk.Text = "Heizkreis " + (lstCircuits.SelectedIndex + 1) + ":";
+				lblRest.Text = "Rest (" + this.product.Product.AssociatedRoom.ToString() + ")";
 				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 2).ToString();
-				lblQHeatDiff.Text = (qDiffHeat > 0 ? "+" : "") + Math.Round(qDiffHeat, 2).ToString();
-				lblQHeatRest.Text = (qDiffHeat > 0 ? "+" : "") + Math.Round(qDiffHeat, 2).ToString();
+				lblQHeatDiff.Text = Math.Round(qDiffHeat, 2).ToString();
+				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString();
 				lblAvgqHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QHeatPerSqm, 2).ToString();
 				lblDurchflussHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DurchflussHeat, 2).ToString();
 				lblDruckverlustHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustHeat, 2).ToString();
 				lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_FloorTempHeat, 2).ToString();
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
 				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
-				lblQCoolRest.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
+				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString();
 				lblAvgqCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QCoolPerSqm, 2).ToString();
 				lblDurchflussCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DurchflussCool, 2).ToString();
 				lblDruckverlustCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustCool, 2).ToString();
