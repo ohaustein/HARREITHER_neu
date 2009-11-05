@@ -87,6 +87,7 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnConnectionPipes = new System.Windows.Forms.Button();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -761,6 +762,7 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.btnConnectionPipes);
 			this.panel2.Controls.Add(this.label3);
 			this.panel2.Controls.Add(this.numLength);
 			this.panel2.Controls.Add(this.label2);
@@ -934,6 +936,17 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			// 
+			// btnConnectionPipes
+			// 
+			this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnConnectionPipes.Location = new System.Drawing.Point(680, 4);
+			this.btnConnectionPipes.Name = "btnConnectionPipes";
+			this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
+			this.btnConnectionPipes.TabIndex = 73;
+			this.btnConnectionPipes.Text = "Anbindeleitungen bearbeiten";
+			this.btnConnectionPipes.UseVisualStyleBackColor = true;
+			this.btnConnectionPipes.Click += new System.EventHandler(this.btnConnectionPipes_Click);
+			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1025,5 +1038,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label3;
 		private NumericBox numLength;
 		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button btnConnectionPipes;
 	}
 }

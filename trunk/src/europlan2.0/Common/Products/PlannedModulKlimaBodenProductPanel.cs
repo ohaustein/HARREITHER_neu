@@ -671,6 +671,7 @@ namespace Europlan.Common {
 
 		private void btnAddHk_Click(object sender, EventArgs e) {
 			this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 			this.UpdateControl(FieldEnum.NONE);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
@@ -680,6 +681,7 @@ namespace Europlan.Common {
 		private void btnRemoveHk_Click(object sender, EventArgs e) {
 			if (lstCircuits.Items.Count > 1 && lstCircuits.SelectedIndex >= 0) {
 				this.product.Product.PlannedCircuits.RemoveAt(lstCircuits.SelectedIndex);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.NONE);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -689,6 +691,7 @@ namespace Europlan.Common {
 
 		private void lstCircuits_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreCircuits == 0) {
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.CIRCUITS);
 			}
 
@@ -697,6 +700,7 @@ namespace Europlan.Common {
 		private void btnAddRow_Click(object sender, EventArgs e) {
 			ModulBodenCircuit circuit = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit);
 			circuit.Rows.Add(new KlimaFlaechenList());
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 			this.UpdateControl(FieldEnum.CIRCUITS);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
@@ -707,6 +711,7 @@ namespace Europlan.Common {
 			if (lstRows.Items.Count > 1 && lstRows.SelectedIndex >= 0) {
 				ModulBodenCircuit circuit = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit);
 				circuit.Rows.RemoveAt(lstRows.SelectedIndex);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.CIRCUITS);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -716,11 +721,13 @@ namespace Europlan.Common {
 
 		private void lstRows_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreRows == 0) {
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS);
 			}
 		}
 
 		private void dgvModules_GridContentChanged(object sender) {
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 			this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS | FieldEnum.MODULES);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
@@ -730,11 +737,25 @@ namespace Europlan.Common {
 		private void numLength_ValueChanged(object sender, EventArgs e) {
 			if (ignoreLengthVerbindungen == 0) {
 				(this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).Rows[lstRows.SelectedIndex].LengthVerbindeleitungen = (double)this.numLength.Value;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS | FieldEnum.MODULES | FieldEnum.LENGTH_VERBINDUNGEN);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
 				}
 			}
+		}
+
+		private void btnConnectionPipes_Click(object sender, EventArgs e) {
+			ConnectionPipesForm form = new ConnectionPipesForm(this.product);
+			form.ShowDialog();
+			if (form.UnsavedChanges) {
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.NONE);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+			form.Dispose();
 		}
 		
 	}
