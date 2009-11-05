@@ -98,16 +98,32 @@ namespace Europlan.Common {
 			get { return 0; }
 		}
 
-		public override Circuit GetCircuit(int index) {
-			return null;
-		}
-
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			return -1;
 		}*/
 
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
 			get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
+		}
+
+		[XmlIgnore]
+		public override float PlannedInsideConstructionRValue {
+			get { return 0; /*TODO*/ }
+		}
+
+		[XmlIgnore]
+		public override bool HasInsideConstruction {
+			get { return false; }
+		}
+
+		[XmlIgnore]
+		public override float PlannedOutsideConstructionRValue {
+			get { return 0; /*TODO*/ }
+		}
+
+		[XmlIgnore]
+		public override bool HasOutsideConstruction {
+			get { return false; }
 		}
 	}
 	

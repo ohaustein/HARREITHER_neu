@@ -59,6 +59,11 @@ namespace Europlan.Common {
 			InitializeProject();
 		}
 
+		public string EuroplanVersion {
+			get { return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
+			set { /*nothing to do here; this shall only be serialized but not loaded;*/ }
+		}
+
 		/// <summary>
 		/// Gets the instance of the class (Singleton)
 		/// </summary>

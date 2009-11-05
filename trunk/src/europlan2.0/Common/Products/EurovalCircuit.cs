@@ -187,8 +187,8 @@ namespace Europlan.Common {
 
 			double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
 			double lambdaU = 1.2; /* Estrich??? */
-			double rLambdaB = this.EurovalProduct.PlannedFloorConstruction == null ? 0 : this.EurovalProduct.PlannedFloorConstruction.RValue;
-			double rLambdaIns = this.EurovalProduct.PlannedInsulationConstruction == null ? 0 : this.EurovalProduct.PlannedInsulationConstruction.RValue;
+			double rLambdaB = this.EurovalProduct.PlannedInsideConstructionRValue;
+			double rLambdaIns = this.EurovalProduct.PlannedOutsideConstructionRValue;
 			double rAlphaDeckeFbh = 1 / EurovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
 			double rAlphaDeckeFbk = 1 / EurovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Kühlung */
 

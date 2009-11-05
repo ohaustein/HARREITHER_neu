@@ -20,8 +20,6 @@ namespace Europlan.Common {
 
 		private float plannedArea = 0;
 		private float plannedAreaUnheated = 0;
-		private float plannedRoomTemperatureBelowHeat = 18;
-		private float plannedRoomTemperatureBelowCool = 22;
 		private Construction plannedFloorConstruction = null;
 		private Construction plannedInsulationConstruction = null;
 
@@ -244,22 +242,6 @@ namespace Europlan.Common {
 		}
 
 		/// <summary>
-		/// The temperature of the room below used for the heating calcuation
-		/// </summary>
-		public float PlannedRoomTemperatureBelowHeat {
-			get { return this.plannedRoomTemperatureBelowHeat; }
-			set { this.plannedRoomTemperatureBelowHeat = value; }
-		}
-
-		/// <summary>
-		/// The temperature of the room below used for the cooling calculation
-		/// </summary>
-		public float PlannedRoomTemperatureBelowCool {
-			get { return this.plannedRoomTemperatureBelowCool; }
-			set { this.plannedRoomTemperatureBelowCool = value; }
-		}
-
-		/// <summary>
 		/// The id of the planned floor construction for serialization
 		/// </summary>
 		public string PlannedFloorConstructionId {
@@ -308,15 +290,6 @@ namespace Europlan.Common {
 		public float PlannedInsulationConstructionRValue {
 			get { return (this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue); }
 		}
-
-
-		public override Circuit GetCircuit(int index) {
-			return null;
-		}
-
-		/*public override int GetIndexOfCircuit(Circuit c) {
-			return -1;
-		}*/
 
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
 			get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
@@ -404,6 +377,32 @@ namespace Europlan.Common {
 		public static double ConfigC {
 			get { return c; }
 			set { c = value; }
+		}
+
+		/// <summary>
+		/// The r-value of the planned floor construction
+		/// </summary>
+		[XmlIgnore]
+		public override float PlannedInsideConstructionRValue {
+			get { return (this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue); }
+		}
+
+		[XmlIgnore]
+		public override bool HasInsideConstruction {
+			get { return this.plannedFloorConstruction != null; }
+		}
+
+		/// <summary>
+		/// The r-value of the planned insulation construction
+		/// </summary>
+		[XmlIgnore]
+		public override float PlannedOutsideConstructionRValue {
+			get { return (this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue); }
+		}
+
+		[XmlIgnore]
+		public override bool HasOutsideConstruction {
+			get { return this.plannedInsulationConstruction != null; }
 		}
 	}
 	

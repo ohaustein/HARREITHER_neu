@@ -51,8 +51,6 @@ namespace Europlan.Common {
 		private float plannedAreaUnheated = 0;
 		private float plannedRimLength = 0;
 		private int plannedRimCorners = 0;
-		private float plannedRoomTemperatureBelowHeat = 18;
-		private float plannedRoomTemperatureBelowCool = 22;
 		private Construction plannedFloorConstruction = null;
 		private Construction plannedInsulationConstruction = null;
 
@@ -66,14 +64,6 @@ namespace Europlan.Common {
 		private bool plannedProductIsConnection = false;
 
 		private bool plannedCorrections = false;
-
-		
-		public override Circuit GetCircuit(int index) {
-			if (index < this.circuits.Count) {
-				return this.circuits[index];
-			}
-			return null;
-		}
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			int i = 0;
@@ -583,22 +573,6 @@ namespace Europlan.Common {
 		}
 
 		/// <summary>
-		/// The temperature of the room below used for the heating calcuation
-		/// </summary>
-		public float PlannedRoomTemperatureBelowHeat {
-			get { return this.plannedRoomTemperatureBelowHeat; }
-			set { this.plannedRoomTemperatureBelowHeat = value; }
-		}
-
-		/// <summary>
-		/// The temperature of the room below used for the cooling calculation
-		/// </summary>
-		public float PlannedRoomTemperatureBelowCool {
-			get { return this.plannedRoomTemperatureBelowCool; }
-			set { this.plannedRoomTemperatureBelowCool = value; }
-		}
-
-		/// <summary>
 		/// The id of the planned floor construction for serialization
 		/// </summary>
 		public string PlannedFloorConstructionId {
@@ -636,16 +610,26 @@ namespace Europlan.Common {
 		/// The r-value of the planned floor construction
 		/// </summary>
 		[XmlIgnore]
-		public float PlannedFloorConstructionRValue {
+		public override float PlannedInsideConstructionRValue {
 			get { return (this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue); }
+		}
+
+		[XmlIgnore]
+		public override bool HasInsideConstruction {
+			get { return this.plannedFloorConstruction != null; }
 		}
 
 		/// <summary>
 		/// The r-value of the planned insulation construction
 		/// </summary>
 		[XmlIgnore]
-		public float PlannedInsulationConstructionRValue {
+		public override float PlannedOutsideConstructionRValue {
 			get { return (this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue); }
+		}
+
+		[XmlIgnore]
+		public override bool HasOutsideConstruction {
+			get { return this.plannedInsulationConstruction != null; }
 		}
 
 		/// <summary>
