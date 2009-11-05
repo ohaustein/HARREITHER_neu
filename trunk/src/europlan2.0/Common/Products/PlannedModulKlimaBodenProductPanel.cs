@@ -464,6 +464,13 @@ namespace Europlan.Common {
 			//        this.lblError.Visible = false;
 			//    }
 
+				if (this.errorMsg != null) {
+					this.lblError.Text = this.errorMsg;
+					this.lblError.Visible = true;
+				} else {
+					this.lblError.Visible = false;
+				}
+
 				ignoreCoverHeatLoad--;
 				ignoreHeatLoad--;
 				ignoreHeatLoadPercentage--;
