@@ -39,6 +39,9 @@ namespace Europlan.Common {
 		protected SerializableDictionary<int, PlannedProduct> plannedConnectedProducts = new SerializableDictionary<int, PlannedProduct>();
 		protected List<ConnectionPipe> plannedConnectionPipes = new List<ConnectionPipe>();
 
+		protected float plannedRoomTemperatureBelowHeat = 18;
+		protected float plannedRoomTemperatureBelowCool = 22;
+
 		protected bool incompleteCalculation = true;
 
 		//protected int plannedCircuits = 1;
@@ -414,10 +417,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		//public abstract int GetIndexOfCircuit(Circuit c);
-
-		public abstract Circuit GetCircuit(int index);
-
 		[XmlIgnore]
 		public SerializableDictionary<int, PlannedProduct> PlannedConnectedProducts {
 			get { return this.plannedConnectedProducts; }
@@ -625,5 +624,53 @@ namespace Europlan.Common {
 			}
 		}
 
+		public Circuit GetCircuit(int index) {
+			if (index < this.circuits.Count) {
+				return this.circuits[index];
+			}
+			return null;
+		}
+
+		/// <summary>
+		/// The r-value of the planned construction to the inside of the room
+		/// </summary>
+		[XmlIgnore]
+		public abstract float PlannedInsideConstructionRValue {
+			get;
+		}
+
+		[XmlIgnore]
+		public abstract bool HasInsideConstruction {
+			get;
+		}
+
+		/// <summary>
+		/// The r-value of the planned construction to the outside of the room
+		/// </summary>
+		[XmlIgnore]
+		public abstract float PlannedOutsideConstructionRValue {
+			get;
+		}
+
+		[XmlIgnore]
+		public abstract bool HasOutsideConstruction {
+			get;
+		}
+
+		/// <summary>
+		/// The temperature of the room below used for the heating calcuation
+		/// </summary>
+		public float PlannedRoomTemperatureBelowHeat {
+			get { return this.plannedRoomTemperatureBelowHeat; }
+			set { this.plannedRoomTemperatureBelowHeat = value; }
+		}
+
+		/// <summary>
+		/// The temperature of the room below used for the cooling calculation
+		/// </summary>
+		public float PlannedRoomTemperatureBelowCool {
+			get { return this.plannedRoomTemperatureBelowCool; }
+			set { this.plannedRoomTemperatureBelowCool = value; }
+		}
 	}
 }

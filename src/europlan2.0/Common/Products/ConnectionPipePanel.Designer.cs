@@ -239,6 +239,7 @@ namespace Europlan.Common {
 			this.Insulation.FillWeight = 60F;
 			this.Insulation.HeaderText = "Dämmung";
 			this.Insulation.Name = "Insulation";
+			this.Insulation.ReadOnly = true;
 			this.Insulation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.Insulation.Width = 60;
 			// 
