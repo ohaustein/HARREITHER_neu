@@ -71,6 +71,20 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.label23 = new System.Windows.Forms.Label();
+			this.label24 = new System.Windows.Forms.Label();
+			this.label25 = new System.Windows.Forms.Label();
+			this.label26 = new System.Windows.Forms.Label();
+			this.label29 = new System.Windows.Forms.Label();
+			this.label30 = new System.Windows.Forms.Label();
+			this.label31 = new System.Windows.Forms.Label();
+			this.label14 = new System.Windows.Forms.Label();
+			this.label15 = new System.Windows.Forms.Label();
+			this.label18 = new System.Windows.Forms.Label();
+			this.label19 = new System.Windows.Forms.Label();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label21 = new System.Windows.Forms.Label();
+			this.label22 = new System.Windows.Forms.Label();
 			this.lblTempCool = new System.Windows.Forms.Label();
 			this.lblDruckverlustCool = new System.Windows.Forms.Label();
 			this.lblDurchflussCool = new System.Windows.Forms.Label();
@@ -116,20 +130,7 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.label14 = new System.Windows.Forms.Label();
-			this.label15 = new System.Windows.Forms.Label();
-			this.label18 = new System.Windows.Forms.Label();
-			this.label19 = new System.Windows.Forms.Label();
-			this.label20 = new System.Windows.Forms.Label();
-			this.label21 = new System.Windows.Forms.Label();
-			this.label22 = new System.Windows.Forms.Label();
-			this.label23 = new System.Windows.Forms.Label();
-			this.label24 = new System.Windows.Forms.Label();
-			this.label25 = new System.Windows.Forms.Label();
-			this.label26 = new System.Windows.Forms.Label();
-			this.label29 = new System.Windows.Forms.Label();
-			this.label30 = new System.Windows.Forms.Label();
-			this.label31 = new System.Windows.Forms.Label();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -804,6 +805,7 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.groupBox4);
 			this.panel2.Controls.Add(this.label23);
 			this.panel2.Controls.Add(this.label24);
 			this.panel2.Controls.Add(this.label25);
@@ -864,6 +866,118 @@ namespace Europlan.Common {
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
+			// 
+			// label23
+			// 
+			this.label23.Location = new System.Drawing.Point(355, 488);
+			this.label23.Name = "label23";
+			this.label23.Size = new System.Drawing.Size(35, 13);
+			this.label23.TabIndex = 119;
+			this.label23.Text = "°C";
+			// 
+			// label24
+			// 
+			this.label24.Location = new System.Drawing.Point(355, 468);
+			this.label24.Name = "label24";
+			this.label24.Size = new System.Drawing.Size(35, 13);
+			this.label24.TabIndex = 118;
+			this.label24.Text = "mbar";
+			// 
+			// label25
+			// 
+			this.label25.Location = new System.Drawing.Point(355, 448);
+			this.label25.Name = "label25";
+			this.label25.Size = new System.Drawing.Size(35, 13);
+			this.label25.TabIndex = 117;
+			this.label25.Text = "l/h";
+			// 
+			// label26
+			// 
+			this.label26.Location = new System.Drawing.Point(355, 428);
+			this.label26.Name = "label26";
+			this.label26.Size = new System.Drawing.Size(35, 13);
+			this.label26.TabIndex = 116;
+			this.label26.Text = "W/m²";
+			// 
+			// label29
+			// 
+			this.label29.Location = new System.Drawing.Point(355, 377);
+			this.label29.Name = "label29";
+			this.label29.Size = new System.Drawing.Size(35, 13);
+			this.label29.TabIndex = 115;
+			this.label29.Text = "W";
+			// 
+			// label30
+			// 
+			this.label30.Location = new System.Drawing.Point(355, 357);
+			this.label30.Name = "label30";
+			this.label30.Size = new System.Drawing.Size(35, 13);
+			this.label30.TabIndex = 114;
+			this.label30.Text = "W";
+			// 
+			// label31
+			// 
+			this.label31.Location = new System.Drawing.Point(355, 337);
+			this.label31.Name = "label31";
+			this.label31.Size = new System.Drawing.Size(35, 13);
+			this.label31.TabIndex = 113;
+			this.label31.Text = "W";
+			// 
+			// label14
+			// 
+			this.label14.Location = new System.Drawing.Point(243, 488);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(35, 13);
+			this.label14.TabIndex = 112;
+			this.label14.Text = "°C";
+			// 
+			// label15
+			// 
+			this.label15.Location = new System.Drawing.Point(243, 468);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(35, 13);
+			this.label15.TabIndex = 111;
+			this.label15.Text = "mbar";
+			// 
+			// label18
+			// 
+			this.label18.Location = new System.Drawing.Point(243, 448);
+			this.label18.Name = "label18";
+			this.label18.Size = new System.Drawing.Size(35, 13);
+			this.label18.TabIndex = 110;
+			this.label18.Text = "l/h";
+			// 
+			// label19
+			// 
+			this.label19.Location = new System.Drawing.Point(243, 428);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(35, 13);
+			this.label19.TabIndex = 109;
+			this.label19.Text = "W/m²";
+			// 
+			// label20
+			// 
+			this.label20.Location = new System.Drawing.Point(243, 377);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(35, 13);
+			this.label20.TabIndex = 108;
+			this.label20.Text = "W";
+			// 
+			// label21
+			// 
+			this.label21.Location = new System.Drawing.Point(243, 357);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(35, 13);
+			this.label21.TabIndex = 107;
+			this.label21.Text = "W";
+			// 
+			// label22
+			// 
+			this.label22.Location = new System.Drawing.Point(243, 337);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(35, 13);
+			this.label22.TabIndex = 106;
+			this.label22.Text = "W";
 			// 
 			// lblTempCool
 			// 
@@ -1284,117 +1398,13 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			// 
-			// label14
+			// groupBox4
 			// 
-			this.label14.Location = new System.Drawing.Point(243, 488);
-			this.label14.Name = "label14";
-			this.label14.Size = new System.Drawing.Size(35, 13);
-			this.label14.TabIndex = 112;
-			this.label14.Text = "°C";
-			// 
-			// label15
-			// 
-			this.label15.Location = new System.Drawing.Point(243, 468);
-			this.label15.Name = "label15";
-			this.label15.Size = new System.Drawing.Size(35, 13);
-			this.label15.TabIndex = 111;
-			this.label15.Text = "mbar";
-			// 
-			// label18
-			// 
-			this.label18.Location = new System.Drawing.Point(243, 448);
-			this.label18.Name = "label18";
-			this.label18.Size = new System.Drawing.Size(35, 13);
-			this.label18.TabIndex = 110;
-			this.label18.Text = "l/h";
-			// 
-			// label19
-			// 
-			this.label19.Location = new System.Drawing.Point(243, 428);
-			this.label19.Name = "label19";
-			this.label19.Size = new System.Drawing.Size(35, 13);
-			this.label19.TabIndex = 109;
-			this.label19.Text = "W/m²";
-			// 
-			// label20
-			// 
-			this.label20.Location = new System.Drawing.Point(243, 377);
-			this.label20.Name = "label20";
-			this.label20.Size = new System.Drawing.Size(35, 13);
-			this.label20.TabIndex = 108;
-			this.label20.Text = "W";
-			// 
-			// label21
-			// 
-			this.label21.Location = new System.Drawing.Point(243, 357);
-			this.label21.Name = "label21";
-			this.label21.Size = new System.Drawing.Size(35, 13);
-			this.label21.TabIndex = 107;
-			this.label21.Text = "W";
-			// 
-			// label22
-			// 
-			this.label22.Location = new System.Drawing.Point(243, 337);
-			this.label22.Name = "label22";
-			this.label22.Size = new System.Drawing.Size(35, 13);
-			this.label22.TabIndex = 106;
-			this.label22.Text = "W";
-			// 
-			// label23
-			// 
-			this.label23.Location = new System.Drawing.Point(355, 488);
-			this.label23.Name = "label23";
-			this.label23.Size = new System.Drawing.Size(35, 13);
-			this.label23.TabIndex = 119;
-			this.label23.Text = "°C";
-			// 
-			// label24
-			// 
-			this.label24.Location = new System.Drawing.Point(355, 468);
-			this.label24.Name = "label24";
-			this.label24.Size = new System.Drawing.Size(35, 13);
-			this.label24.TabIndex = 118;
-			this.label24.Text = "mbar";
-			// 
-			// label25
-			// 
-			this.label25.Location = new System.Drawing.Point(355, 448);
-			this.label25.Name = "label25";
-			this.label25.Size = new System.Drawing.Size(35, 13);
-			this.label25.TabIndex = 117;
-			this.label25.Text = "l/h";
-			// 
-			// label26
-			// 
-			this.label26.Location = new System.Drawing.Point(355, 428);
-			this.label26.Name = "label26";
-			this.label26.Size = new System.Drawing.Size(35, 13);
-			this.label26.TabIndex = 116;
-			this.label26.Text = "W/m²";
-			// 
-			// label29
-			// 
-			this.label29.Location = new System.Drawing.Point(355, 377);
-			this.label29.Name = "label29";
-			this.label29.Size = new System.Drawing.Size(35, 13);
-			this.label29.TabIndex = 115;
-			this.label29.Text = "W";
-			// 
-			// label30
-			// 
-			this.label30.Location = new System.Drawing.Point(355, 357);
-			this.label30.Name = "label30";
-			this.label30.Size = new System.Drawing.Size(35, 13);
-			this.label30.TabIndex = 114;
-			this.label30.Text = "W";
-			// 
-			// label31
-			// 
-			this.label31.Location = new System.Drawing.Point(355, 337);
-			this.label31.Name = "label31";
-			this.label31.Size = new System.Drawing.Size(35, 13);
-			this.label31.TabIndex = 113;
-			this.label31.Text = "W";
+			this.groupBox4.Location = new System.Drawing.Point(7, 416);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Size = new System.Drawing.Size(390, 2);
+			this.groupBox4.TabIndex = 82;
+			this.groupBox4.TabStop = false;
 			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
@@ -1530,5 +1540,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label20;
 		private System.Windows.Forms.Label label21;
 		private System.Windows.Forms.Label label22;
+		private System.Windows.Forms.GroupBox groupBox4;
 	}
 }
