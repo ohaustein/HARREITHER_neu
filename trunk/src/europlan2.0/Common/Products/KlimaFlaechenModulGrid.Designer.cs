@@ -32,6 +32,8 @@ namespace Europlan.Common {
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnAlign = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
+			this.lblCount = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.dgvModules)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.klimaFlaechenModulBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -113,19 +115,40 @@ namespace Europlan.Common {
 			this.btnAlign.UseVisualStyleBackColor = true;
 			this.btnAlign.Click += new System.EventHandler(this.btnAlign_Click);
 			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(305, 327);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(98, 13);
+			this.label1.TabIndex = 4;
+			this.label1.Text = "Anzahl der Module:";
+			// 
+			// lblCount
+			// 
+			this.lblCount.AutoSize = true;
+			this.lblCount.Location = new System.Drawing.Point(409, 327);
+			this.lblCount.Name = "lblCount";
+			this.lblCount.Size = new System.Drawing.Size(13, 13);
+			this.lblCount.TabIndex = 5;
+			this.lblCount.Text = "0";
+			// 
 			// KlimaFlaechenModulGrid
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.lblCount);
+			this.Controls.Add(this.label1);
 			this.Controls.Add(this.btnAlign);
 			this.Controls.Add(this.btnRemove);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.dgvModules);
 			this.Name = "KlimaFlaechenModulGrid";
-			this.Size = new System.Drawing.Size(398, 343);
+			this.Size = new System.Drawing.Size(528, 343);
 			((System.ComponentModel.ISupportInitialize)(this.dgvModules)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.klimaFlaechenModulBindingSource)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -139,5 +162,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewComboBoxColumn modulTypeDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewComboBoxColumn orientationDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn areaDataGridViewTextBoxColumn;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label lblCount;
 	}
 }
