@@ -71,6 +71,7 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.label23 = new System.Windows.Forms.Label();
 			this.label24 = new System.Windows.Forms.Label();
 			this.label25 = new System.Windows.Forms.Label();
@@ -130,7 +131,6 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -867,6 +867,14 @@ namespace Europlan.Common {
 			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
 			// 
+			// groupBox4
+			// 
+			this.groupBox4.Location = new System.Drawing.Point(7, 416);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Size = new System.Drawing.Size(390, 2);
+			this.groupBox4.TabIndex = 82;
+			this.groupBox4.TabStop = false;
+			// 
 			// label23
 			// 
 			this.label23.Location = new System.Drawing.Point(355, 488);
@@ -1397,14 +1405,6 @@ namespace Europlan.Common {
 			// 
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-			// 
-			// groupBox4
-			// 
-			this.groupBox4.Location = new System.Drawing.Point(7, 416);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(390, 2);
-			this.groupBox4.TabIndex = 82;
-			this.groupBox4.TabStop = false;
 			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
