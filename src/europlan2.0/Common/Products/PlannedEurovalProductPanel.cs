@@ -916,6 +916,8 @@ namespace Europlan.Common {
 			ConnectionPipesForm form = new ConnectionPipesForm(this.product);
 			form.ShowDialog();
 			if (form.UnsavedChanges) {
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.NONE);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
 				}
