@@ -71,6 +71,9 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.label3 = new System.Windows.Forms.Label();
+			this.numLength = new Europlan.Common.NumericBox();
+			this.label2 = new System.Windows.Forms.Label();
 			this.dgvModules = new Europlan.Common.KlimaFlaechenModulGrid();
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnRemoveRow = new System.Windows.Forms.Button();
@@ -758,6 +761,9 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.label3);
+			this.panel2.Controls.Add(this.numLength);
+			this.panel2.Controls.Add(this.label2);
 			this.panel2.Controls.Add(this.dgvModules);
 			this.panel2.Controls.Add(this.label1);
 			this.panel2.Controls.Add(this.btnRemoveRow);
@@ -772,6 +778,51 @@ namespace Europlan.Common {
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 396);
 			this.panel2.TabIndex = 1;
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(447, 266);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(15, 13);
+			this.label3.TabIndex = 37;
+			this.label3.Text = "m";
+			// 
+			// numLength
+			// 
+			this.numLength.EditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
+			this.numLength.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numLength.Location = new System.Drawing.Point(358, 263);
+			this.numLength.MaxValue = null;
+			this.numLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numLength.Name = "numLength";
+			this.numLength.Size = new System.Drawing.Size(83, 20);
+			this.numLength.TabIndex = 36;
+			this.numLength.Text = "0";
+			this.numLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numLength.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numLength.ValueChanged += new System.EventHandler(this.numLength_ValueChanged);
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(202, 266);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(150, 13);
+			this.label2.TabIndex = 35;
+			this.label2.Text = "Summe Verbindungsleitungen:";
 			// 
 			// dgvModules
 			// 
@@ -971,5 +1022,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnAddRow;
 		private System.Windows.Forms.ListBox lstRows;
 		private KlimaFlaechenModulGrid dgvModules;
+		private System.Windows.Forms.Label label3;
+		private NumericBox numLength;
+		private System.Windows.Forms.Label label2;
 	}
 }

@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Europlan.Common {
-	public class KlimaFleachenList : List<KlimaFlaechenModul> {
+	public class KlimaFlaechenList {
 
 		private double lengthVerbindeleitungen;
+		private List<KlimaFlaechenModul> list = new List<KlimaFlaechenModul>();
+
 		public double LengthVerbindeleitungen {
 			get { return lengthVerbindeleitungen; }
 			set { lengthVerbindeleitungen = value; }
 		}
 
+		public List<KlimaFlaechenModul> List {
+			get { return list; }
+			set { list = value; }
+		}
+
 		public double Druckverlust(double durchfluss) {
 			double druckverlust = 0;
-			foreach (KlimaFlaechenModul modul in this) {
+			foreach (KlimaFlaechenModul modul in this.list) {
 				druckverlust += modul.Druckverlust(durchfluss);
 			}
 			druckverlust += EN1264.Instance.DruckverlustRohr(durchfluss, Product.rundrohr21mmInnenA, EurovalProduct.ConfigRho, Product.rundrohr21mmInnenD, EurovalProduct.ConfigV, 0.000004, lengthVerbindeleitungen);
@@ -23,7 +30,7 @@ namespace Europlan.Common {
 		public double ModulArea {
 			get {
 				double area = 0;
-				foreach (KlimaFlaechenModul modul in this) {
+				foreach (KlimaFlaechenModul modul in this.list) {
 					area += modul.Area;
 				}
 				return area;

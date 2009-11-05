@@ -7,13 +7,13 @@ namespace Europlan.Common {
 
 	public class ModulBodenCircuit : Circuit {
 
-		private List<KlimaFleachenList> rows = new List<KlimaFleachenList>();
+		private List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
 
 		public ModulBodenCircuit() {
 
 		}
 	
-		public List<KlimaFleachenList> Rows {
+		public List<KlimaFlaechenList> Rows {
 			get { return rows; }
 			set { rows = value; }
 		}
@@ -51,7 +51,7 @@ namespace Europlan.Common {
 		public double ModulArea {
 			get {
 				double area = 0;
-				foreach (KlimaFleachenList row in rows) {
+				foreach (KlimaFlaechenList row in rows) {
 					area += row.ModulArea;
 				}
 				return area;
@@ -114,7 +114,7 @@ namespace Europlan.Common {
 		public override double PipeLengthWithoutConnections {
 			get {
 				double length = 0;
-				foreach (KlimaFleachenList row in rows) {
+				foreach (KlimaFlaechenList row in rows) {
 					double rowLength = row.EquivalentPipeLength;
 					if (rowLength > length) {
 						length = rowLength;
@@ -211,7 +211,7 @@ namespace Europlan.Common {
 				this.c_durchflussHeat = en1264.Durchfluss(totalQh2o, ModulKlimaBodenProduct.ConfigC, distributorVorlaufTemp - distributorRuecklaufTemp);
 
 				this.c_druckverlustHeat = 0;
-				foreach (KlimaFleachenList row in rows) {
+				foreach (KlimaFlaechenList row in rows) {
 					double rowDruckverlust = row.Druckverlust(this.c_durchflussHeat);
 					if (rowDruckverlust > this.c_druckverlustHeat) {
 						this.c_druckverlustHeat = rowDruckverlust;
@@ -265,7 +265,7 @@ namespace Europlan.Common {
 				this.c_durchflussCool = en1264.Durchfluss(totalQh2o, ModulKlimaBodenProduct.ConfigC, distributorVorlaufTemp - distributorRuecklaufTemp);
 
 				this.c_druckverlustCool = 0;
-				foreach (KlimaFleachenList row in rows) {
+				foreach (KlimaFlaechenList row in rows) {
 					double rowDruckverlust = row.Druckverlust(this.c_durchflussCool);
 					if (rowDruckverlust > this.c_druckverlustCool) {
 						this.c_druckverlustCool = rowDruckverlust;
