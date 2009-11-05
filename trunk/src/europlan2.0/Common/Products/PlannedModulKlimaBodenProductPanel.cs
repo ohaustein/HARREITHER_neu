@@ -32,7 +32,7 @@ namespace Europlan.Common {
 			ROOM_TEMERATURE_BELOW_HEAT = 256,
 			ROOM_TEMERATURE_BELOW_COOL = 512,
 			MODULES = 1024,
-			//CORNERS = 2048,
+			LENGTH_VERBINDUNGEN = 2048,
 			//LAY_DISTANCE = 4096,
 			//RIM_TYPE = 8192,
 			//CALCULATION_TYPE = 16384,
@@ -68,6 +68,7 @@ namespace Europlan.Common {
 		private int ignoreCircuits = 0;
 		private int ignoreRows = 0;
 		private int ignoreModules = 0;
+		private int ignoreLengthVerbindungen = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
@@ -86,6 +87,7 @@ namespace Europlan.Common {
 				ignoreCircuits++;
 				ignoreRows++;
 				ignoreModules++;
+				ignoreLengthVerbindungen++;
 
 				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
 
@@ -267,21 +269,26 @@ namespace Europlan.Common {
 						int count = 1;
 						ModulBodenCircuit circuit = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit);
 						if (circuit.Rows.Count == 0) {
-							circuit.Rows.Add(new KlimaFleachenList());
+							circuit.Rows.Add(new KlimaFlaechenList());
 						}
-						foreach (KlimaFleachenList row in circuit.Rows) {
+						foreach (KlimaFlaechenList row in circuit.Rows) {
 						    lstRows.Items.Add("Reihe " + count++);
 						}
 						if (lstRows.Items.Count > 0) {
 							lstRows.SelectedIndex = 0;
 						}
 					}
-					btnAddRow.Enabled = lstCircuits.SelectedIndex >= 0;
+					btnAddRow.Enabled = lstCircuits.SelectedIndex >= 0 && lstRows.Items.Count < ModulKlimaBodenProduct.ConfigMaxModulesInParallel;
 					btnRemoveRow.Enabled = lstRows.Items.Count > 1;
+					numLength.Enabled = lstRows.SelectedIndex >= 0;
 				}
 				if ((skipFields & FieldEnum.MODULES) == FieldEnum.NONE) {
-					dgvModules.Row = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).Rows[lstRows.SelectedIndex];
+					dgvModules.Row = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).Rows[lstRows.SelectedIndex].List;
 				}
+				if ((skipFields & FieldEnum.LENGTH_VERBINDUNGEN) == FieldEnum.NONE) {
+					this.numLength.Value = (decimal)(this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).Rows[lstRows.SelectedIndex].LengthVerbindeleitungen;
+				}
+
 
 			//    if ((skipFields & FieldEnum.CALCULATION_TYPE) == FieldEnum.NONE) {
 			//        this.rbCalculateHeat.Checked = this.product.CalculateHeat && !this.product.CalculateCool;
@@ -426,6 +433,7 @@ namespace Europlan.Common {
 				ignoreCircuits--;
 				ignoreRows--;
 				ignoreModules--;
+				ignoreLengthVerbindungen--;
 			}
 			// TODO
 		}
@@ -688,7 +696,7 @@ namespace Europlan.Common {
 
 		private void btnAddRow_Click(object sender, EventArgs e) {
 			ModulBodenCircuit circuit = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit);
-			circuit.Rows.Add(new KlimaFleachenList());
+			circuit.Rows.Add(new KlimaFlaechenList());
 			this.UpdateControl(FieldEnum.CIRCUITS);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
@@ -716,6 +724,16 @@ namespace Europlan.Common {
 			this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS | FieldEnum.MODULES);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
+			}
+		}
+
+		private void numLength_ValueChanged(object sender, EventArgs e) {
+			if (ignoreLengthVerbindungen == 0) {
+				(this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).Rows[lstRows.SelectedIndex].LengthVerbindeleitungen = (double)this.numLength.Value;
+				this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS | FieldEnum.MODULES | FieldEnum.LENGTH_VERBINDUNGEN);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
 		
