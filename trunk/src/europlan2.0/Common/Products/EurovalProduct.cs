@@ -973,25 +973,6 @@ namespace Europlan.Common {
 		#endregion Cool Load
 
 		[XmlIgnore]
-		public double PlannedRemoveArea {
-			get {
-				double value = 0;
-				foreach (Floor f in Project.Instance.Floors) {
-					foreach (Room r in f.Rooms) {
-						foreach (PlannedProduct pp in r.PlannedProducts) {
-							foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
-								if (cp.ConnectionThrough != null && cp.ConnectionThrough.Product != null && cp.ConnectionThrough.Product == this) {
-									value += cp.AreaTotal;
-								}
-							}
-						}
-					}
-				}
-				return value;
-			}
-		}
-
-		[XmlIgnore]
 		public double PlannedPipeLengthPerCircuit {
 			get {
 				if (this.incompleteCalculation) {

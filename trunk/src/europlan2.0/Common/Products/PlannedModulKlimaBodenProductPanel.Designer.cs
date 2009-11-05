@@ -143,6 +143,9 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.label36 = new System.Windows.Forms.Label();
+			this.lblAnb = new System.Windows.Forms.Label();
+			this.label38 = new System.Windows.Forms.Label();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -817,6 +820,9 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.label36);
+			this.panel2.Controls.Add(this.lblAnb);
+			this.panel2.Controls.Add(this.label38);
 			this.panel2.Controls.Add(this.label33);
 			this.panel2.Controls.Add(this.label34);
 			this.panel2.Controls.Add(this.label35);
@@ -893,7 +899,7 @@ namespace Europlan.Common {
 			// 
 			// label33
 			// 
-			this.label33.Location = new System.Drawing.Point(642, 377);
+			this.label33.Location = new System.Drawing.Point(652, 377);
 			this.label33.Name = "label33";
 			this.label33.Size = new System.Drawing.Size(35, 13);
 			this.label33.TabIndex = 129;
@@ -901,7 +907,7 @@ namespace Europlan.Common {
 			// 
 			// label34
 			// 
-			this.label34.Location = new System.Drawing.Point(642, 357);
+			this.label34.Location = new System.Drawing.Point(652, 357);
 			this.label34.Name = "label34";
 			this.label34.Size = new System.Drawing.Size(35, 13);
 			this.label34.TabIndex = 128;
@@ -909,7 +915,7 @@ namespace Europlan.Common {
 			// 
 			// label35
 			// 
-			this.label35.Location = new System.Drawing.Point(642, 337);
+			this.label35.Location = new System.Drawing.Point(652, 337);
 			this.label35.Name = "label35";
 			this.label35.Size = new System.Drawing.Size(35, 13);
 			this.label35.TabIndex = 127;
@@ -917,7 +923,7 @@ namespace Europlan.Common {
 			// 
 			// lblRestArea
 			// 
-			this.lblRestArea.Location = new System.Drawing.Point(586, 377);
+			this.lblRestArea.Location = new System.Drawing.Point(596, 397);
 			this.lblRestArea.Name = "lblRestArea";
 			this.lblRestArea.Size = new System.Drawing.Size(50, 13);
 			this.lblRestArea.TabIndex = 126;
@@ -926,7 +932,7 @@ namespace Europlan.Common {
 			// 
 			// lblCoveredArea
 			// 
-			this.lblCoveredArea.Location = new System.Drawing.Point(586, 357);
+			this.lblCoveredArea.Location = new System.Drawing.Point(596, 357);
 			this.lblCoveredArea.Name = "lblCoveredArea";
 			this.lblCoveredArea.Size = new System.Drawing.Size(50, 13);
 			this.lblCoveredArea.TabIndex = 125;
@@ -935,7 +941,7 @@ namespace Europlan.Common {
 			// 
 			// lblAvailableArea
 			// 
-			this.lblAvailableArea.Location = new System.Drawing.Point(586, 337);
+			this.lblAvailableArea.Location = new System.Drawing.Point(596, 337);
 			this.lblAvailableArea.Name = "lblAvailableArea";
 			this.lblAvailableArea.Size = new System.Drawing.Size(50, 13);
 			this.lblAvailableArea.TabIndex = 124;
@@ -947,9 +953,9 @@ namespace Europlan.Common {
 			this.label43.AutoSize = true;
 			this.label43.Location = new System.Drawing.Point(457, 377);
 			this.label43.Name = "label43";
-			this.label43.Size = new System.Drawing.Size(76, 13);
+			this.label43.Size = new System.Drawing.Size(127, 13);
 			this.label43.TabIndex = 123;
-			this.label43.Text = "Übrige Fläche:";
+			this.label43.Text = "Fläche Anbindeleitungen:";
 			// 
 			// label42
 			// 
@@ -971,9 +977,9 @@ namespace Europlan.Common {
 			// 
 			// groupBox6
 			// 
-			this.groupBox6.Location = new System.Drawing.Point(580, 300);
+			this.groupBox6.Location = new System.Drawing.Point(590, 300);
 			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(2, 100);
+			this.groupBox6.Size = new System.Drawing.Size(2, 120);
 			this.groupBox6.TabIndex = 83;
 			this.groupBox6.TabStop = false;
 			// 
@@ -981,7 +987,7 @@ namespace Europlan.Common {
 			// 
 			this.groupBox5.Location = new System.Drawing.Point(450, 321);
 			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(220, 2);
+			this.groupBox5.Size = new System.Drawing.Size(230, 2);
 			this.groupBox5.TabIndex = 82;
 			this.groupBox5.TabStop = false;
 			// 
@@ -1534,6 +1540,32 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			// 
+			// label36
+			// 
+			this.label36.Location = new System.Drawing.Point(652, 397);
+			this.label36.Name = "label36";
+			this.label36.Size = new System.Drawing.Size(35, 13);
+			this.label36.TabIndex = 132;
+			this.label36.Text = "m²";
+			// 
+			// lblAnb
+			// 
+			this.lblAnb.Location = new System.Drawing.Point(596, 377);
+			this.lblAnb.Name = "lblAnb";
+			this.lblAnb.Size = new System.Drawing.Size(50, 13);
+			this.lblAnb.TabIndex = 131;
+			this.lblAnb.Text = "W";
+			this.lblAnb.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// label38
+			// 
+			this.label38.AutoSize = true;
+			this.label38.Location = new System.Drawing.Point(457, 397);
+			this.label38.Name = "label38";
+			this.label38.Size = new System.Drawing.Size(76, 13);
+			this.label38.TabIndex = 130;
+			this.label38.Text = "Übrige Fläche:";
+			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1681,5 +1713,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.GroupBox groupBox6;
 		private System.Windows.Forms.GroupBox groupBox5;
 		private System.Windows.Forms.Label label32;
+		private System.Windows.Forms.Label label36;
+		private System.Windows.Forms.Label lblAnb;
+		private System.Windows.Forms.Label label38;
 	}
 }
