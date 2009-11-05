@@ -97,21 +97,37 @@ namespace Europlan.Common {
 			//    bool showResidence = true;
 
 				lblQHeat.Visible = showHeat;
-				lblAnbHeat.Visible = showHeat;
+				lblQHeatUnit.Visible = showHeat;
+				lblQAnbHeat.Visible = showHeat;
+				lblQAnbHeatUnit.Visible = showHeat;
 				lblQHeatDiff.Visible = showHeat;
+				lblQHeatDiffUnit.Visible = showHeat;
 				lblQHeatRest.Visible = showHeat;
+				lblQHeatRestUnit.Visible = showHeat;
 				lblAvgqHeat.Visible = showHeat;
+				lblAvgqHeatUnit.Visible = showHeat;
 				lblDurchflussHeat.Visible = showHeat;
+				lblDurchflussHeatUnit.Visible = showHeat;
 				lblDruckverlustHeat.Visible = showHeat;
+				lblDruckverlustHeatUnit.Visible = showHeat;
 				lblTempHeat.Visible = showHeat;
+				lblTempHeatUnit.Visible = showHeat;
 				lblQCool.Visible = showCool;
-				lblAnbCool.Visible = showCool;
+				lblQCoolUnit.Visible = showCool;
+				lblQAnbCool.Visible = showCool;
+				lblQAnbCoolUnit.Visible = showCool;
 				lblQCoolDiff.Visible = showCool;
+				lblQCoolDiffUnit.Visible = showCool;
 				lblQCoolRest.Visible = showCool;
+				lblQCoolRestUnit.Visible = showCool;
 				lblAvgqCool.Visible = showCool;
+				lblAvgqCoolUnit.Visible = showCool;
 				lblDurchflussCool.Visible = showCool;
+				lblDurchflussCoolUnit.Visible = showCool;
 				lblDruckverlustCool.Visible = showCool;
+				lblDruckverlustCoolUnit.Visible = showCool;
 				lblTempCool.Visible = showCool;
+				lblTempCoolUnit.Visible = showCool;
 
 			//    this.lblQSollHeat.Visible = showHeat;
 			//    this.lblQkSollHeat.Visible = showHeat;
@@ -324,7 +340,7 @@ namespace Europlan.Common {
 				lblHk.Text = "Heizkreis " + (lstCircuits.SelectedIndex + 1) + ":";
 				lblRest.Text = "Rest (" + this.product.Product.AssociatedRoom.ToString() + ")";
 				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 2).ToString();
-				lblAnbHeat.Text = Math.Round(this.product.Product.PlannedHeatLoadAnbindung, 0).ToString();
+				lblQAnbHeat.Text = Math.Round(this.product.Product.PlannedHeatLoadAnbindung, 0).ToString();
 				lblQHeatDiff.Text = Math.Round(qDiffHeat, 2).ToString();
 				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString();
 				lblAvgqHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QHeatPerSqm, 2).ToString();
@@ -332,7 +348,7 @@ namespace Europlan.Common {
 				lblDruckverlustHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustHeat, 2).ToString();
 				lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_FloorTempHeat, 2).ToString();
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
-				lblAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
+				lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
 				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
 				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString();
 				lblAvgqCool.Text = (-1.0 * Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QCoolPerSqm, 2)).ToString();
@@ -344,7 +360,7 @@ namespace Europlan.Common {
 				double anbArea = Math.Round((this.product.Product as ModulKlimaBodenProduct).PlannedRemoveArea, 2);
 				lblAvailableArea.Text = availableArea.ToString();
 				lblCoveredArea.Text = coveredArea.ToString();
-				lblAnb.Text = anbArea.ToString();
+				lblAnbArea.Text = anbArea.ToString();
 				lblRestArea.Text = Math.Round(availableArea - anbArea - coveredArea, 2).ToString();
 
 			//    this.lblQSollHeat.Text = Math.Round(this.product.RequestedHeatLoad, 2).ToString();
@@ -447,15 +463,11 @@ namespace Europlan.Common {
 			//    this.lblSpreizungHeat.Text = Math.Round(evProduct.PlannedSpreizungHeat, 1).ToString();
 			//    this.lblSpreizungCool.Text = Math.Round(evProduct.PlannedSpreizungCool, 1).ToString();
 
-			//    if (evProduct.PlannedProductIsConnection) {
-			//        this.txtDistributor.Text = "kein eigener Heizkreis";
-			//    } else {
-			//        if (evProduct.PlannedConnection == null) {
-			//            this.txtDistributor.Text = "";
-			//        } else {
-			//            this.txtDistributor.Text = evProduct.PlannedConnection.ToString();
-			//        }
-			//    }
+				if (mbProduct.PlannedConnection == null) {
+					this.txtDistributor.Text = "";
+				} else {
+					this.txtDistributor.Text = mbProduct.PlannedConnection.ToString();
+				}
 
 			//    if (this.errorMsg != null) {
 			//        this.lblError.Text = this.errorMsg;

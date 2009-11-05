@@ -50,6 +50,7 @@ namespace Europlan.Common {
 			SettingsKey settings = SettingsFile.Settings["ConnectionPipesForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
 			this.Size = settings.GetSize("Size", this.Size);
+
 		}
 
 		public bool UnsavedChanges {

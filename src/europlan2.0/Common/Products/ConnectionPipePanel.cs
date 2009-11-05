@@ -385,5 +385,17 @@ namespace Europlan.Common {
 			dgvConnectionPipes.AllowUserToAddRows = false;
 		}
 
+		private void dgvConnectionPipes_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e) {
+			if (this.product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+				e.Row.Cells[PipeType.DisplayIndex].Value = ConnectionPipe.PipeTypeEnum.PT_21MM;
+				e.Row.Cells[Verlegeart.DisplayIndex].Value = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
+				e.Row.Cells[Insulation.DisplayIndex].Value = ConnectionPipe.InsulationEnum.IN_VL_RL;
+			} else {
+				e.Row.Cells[PipeType.DisplayIndex].Value = ConnectionPipe.PipeTypeEnum.PT_EUROVAL;
+				e.Row.Cells[Verlegeart.DisplayIndex].Value = ConnectionPipe.VerlegeartEnum.VA_EV5;
+				e.Row.Cells[Insulation.DisplayIndex].Value = ConnectionPipe.InsulationEnum.IN_NONE;
+			}
+		}
+
 	}
 }
