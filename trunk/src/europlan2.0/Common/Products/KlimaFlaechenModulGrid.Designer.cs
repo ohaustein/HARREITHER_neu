@@ -25,13 +25,13 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			this.dgvModules = new System.Windows.Forms.DataGridView();
+			this.modulTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.orientationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.areaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.klimaFlaechenModulBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnAlign = new System.Windows.Forms.Button();
-			this.modulTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.orientationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.areaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dgvModules)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.klimaFlaechenModulBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -51,42 +51,8 @@ namespace Europlan.Common {
 			this.dgvModules.DataSource = this.klimaFlaechenModulBindingSource;
 			this.dgvModules.Location = new System.Drawing.Point(0, 0);
 			this.dgvModules.Name = "dgvModules";
-			this.dgvModules.Size = new System.Drawing.Size(263, 343);
+			this.dgvModules.Size = new System.Drawing.Size(299, 343);
 			this.dgvModules.TabIndex = 0;
-			// 
-			// klimaFlaechenModulBindingSource
-			// 
-			this.klimaFlaechenModulBindingSource.DataSource = typeof(Europlan.Common.KlimaFlaechenModul);
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(269, 3);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(30, 23);
-			this.btnAdd.TabIndex = 1;
-			this.btnAdd.Text = "+";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-			// 
-			// btnRemove
-			// 
-			this.btnRemove.Location = new System.Drawing.Point(269, 32);
-			this.btnRemove.Name = "btnRemove";
-			this.btnRemove.Size = new System.Drawing.Size(32, 23);
-			this.btnRemove.TabIndex = 2;
-			this.btnRemove.Text = "-";
-			this.btnRemove.UseVisualStyleBackColor = true;
-			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-			// 
-			// btnAlign
-			// 
-			this.btnAlign.Location = new System.Drawing.Point(269, 61);
-			this.btnAlign.Name = "btnAlign";
-			this.btnAlign.Size = new System.Drawing.Size(88, 43);
-			this.btnAlign.TabIndex = 3;
-			this.btnAlign.Text = "Automatische Ausrichtung";
-			this.btnAlign.UseVisualStyleBackColor = true;
-			this.btnAlign.Click += new System.EventHandler(this.btnAlign_Click);
 			// 
 			// modulTypeDataGridViewTextBoxColumn
 			// 
@@ -113,6 +79,40 @@ namespace Europlan.Common {
 			this.areaDataGridViewTextBoxColumn.ReadOnly = true;
 			this.areaDataGridViewTextBoxColumn.Visible = false;
 			// 
+			// klimaFlaechenModulBindingSource
+			// 
+			this.klimaFlaechenModulBindingSource.DataSource = typeof(Europlan.Common.KlimaFlaechenModul);
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(305, 3);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(30, 23);
+			this.btnAdd.TabIndex = 1;
+			this.btnAdd.Text = "+";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			// 
+			// btnRemove
+			// 
+			this.btnRemove.Location = new System.Drawing.Point(305, 32);
+			this.btnRemove.Name = "btnRemove";
+			this.btnRemove.Size = new System.Drawing.Size(32, 23);
+			this.btnRemove.TabIndex = 2;
+			this.btnRemove.Text = "-";
+			this.btnRemove.UseVisualStyleBackColor = true;
+			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+			// 
+			// btnAlign
+			// 
+			this.btnAlign.Location = new System.Drawing.Point(305, 61);
+			this.btnAlign.Name = "btnAlign";
+			this.btnAlign.Size = new System.Drawing.Size(88, 43);
+			this.btnAlign.TabIndex = 3;
+			this.btnAlign.Text = "Automatische Ausrichtung";
+			this.btnAlign.UseVisualStyleBackColor = true;
+			this.btnAlign.Click += new System.EventHandler(this.btnAlign_Click);
+			// 
 			// KlimaFlaechenModulGrid
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -122,7 +122,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.dgvModules);
 			this.Name = "KlimaFlaechenModulGrid";
-			this.Size = new System.Drawing.Size(365, 343);
+			this.Size = new System.Drawing.Size(398, 343);
 			((System.ComponentModel.ISupportInitialize)(this.dgvModules)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.klimaFlaechenModulBindingSource)).EndInit();
 			this.ResumeLayout(false);
