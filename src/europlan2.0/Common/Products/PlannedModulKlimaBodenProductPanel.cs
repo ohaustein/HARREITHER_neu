@@ -335,6 +335,11 @@ namespace Europlan.Common {
 				lblDurchflussCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DurchflussCool, 2).ToString();
 				lblDruckverlustCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustCool, 2).ToString();
 				lblTempCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_FloorTempCool, 2).ToString();
+				double availableArea = Math.Round(this.product.Product.PlannedNetArea, 2);
+				double coveredArea = Math.Round((this.product.Product as ModulKlimaBodenProduct).CoveredFloorArea, 2);
+				lblAvailableArea.Text = availableArea.ToString();
+				lblCoveredArea.Text = coveredArea.ToString();
+				lblRestArea.Text = Math.Round(availableArea - coveredArea, 2).ToString();
 
 
 			//    this.lblQSollHeat.Text = Math.Round(this.product.RequestedHeatLoad, 2).ToString();

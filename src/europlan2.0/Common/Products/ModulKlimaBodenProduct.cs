@@ -19,6 +19,7 @@ namespace Europlan.Common {
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
 
 		private float plannedArea = 0;
+		private float plannedFloorArea = 0;
 		private float plannedAreaUnheated = 0;
 		private Construction plannedFloorConstruction = null;
 		private Construction plannedInsulationConstruction = null;
@@ -173,6 +174,18 @@ namespace Europlan.Common {
 		public override float PlannedFloorArea {
 			get { return this.plannedArea; }
 			set { this.plannedArea = value; }
+		}
+
+		[XmlIgnore]
+		public double CoveredFloorArea {
+			get {
+				double area = 0;
+				foreach (ModulBodenCircuit mc in this.circuits) {
+					area += mc.ModulArea;
+				}
+				return area;
+			}
+
 		}
 
 		/// <summary>
