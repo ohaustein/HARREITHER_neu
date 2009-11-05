@@ -102,6 +102,7 @@ namespace Europlan.Common {
 		}
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
+			this.incompleteCalculation = false;
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null) {
 				errorMsg = "Fehlende Eingaben: ";
 				if (plannedFloorConstruction == null) {
@@ -114,6 +115,7 @@ namespace Europlan.Common {
 					errorMsg += "Heizkreisanschluﬂ, ";
 				}
 				errorMsg = errorMsg.Substring(0, errorMsg.Length - 2);
+				this.incompleteCalculation = true;
 				return false;
 			}
 
@@ -165,7 +167,7 @@ namespace Europlan.Common {
 			}
 
 			errorMsg = "";
-			return false;
+			return true;
 		}
 
 		public override float PlannedFloorArea {
@@ -214,7 +216,9 @@ namespace Europlan.Common {
 				}
 				double value = 0;
 				foreach (ModulBodenCircuit mbc in this.circuits) {
-					value += mbc.QFbhTotalCool;
+					if (!mbc.QFbhTotalCool.Equals(double.NaN)) {
+						value += mbc.QFbhTotalCool;
+					}
 				}
 				return value;
 			}
@@ -231,7 +235,9 @@ namespace Europlan.Common {
 				}
 				double value = 0;
 				foreach (ModulBodenCircuit c in this.circuits) {
-					value += c.QFbhTotalHeat;
+					if (!c.QFbhTotalHeat.Equals(double.NaN)) {
+						value += c.QFbhTotalHeat;
+					}
 				}
 				return value;
 			}
