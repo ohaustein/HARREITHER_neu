@@ -293,7 +293,7 @@ namespace Europlan.Common {
 							lstRows.SelectedIndex = 0;
 						}
 					}
-					btnAddRow.Enabled = lstCircuits.SelectedIndex >= 0 && lstRows.Items.Count < ModulKlimaBodenProduct.ConfigMaxModulesInParallel;
+					//btnAddRow.Enabled = lstCircuits.SelectedIndex >= 0 && lstRows.Items.Count < ModulKlimaBodenProduct.ConfigMaxModulesInParallel;
 					btnRemoveRow.Enabled = lstRows.Items.Count > 1;
 					numLength.Enabled = lstRows.SelectedIndex >= 0;
 				}
