@@ -25,7 +25,7 @@ namespace Europlan.Common {
 		public void ResetGrid() {
 			klimaFlaechenModulBindingSource.DataSource = this.modules;
 			klimaFlaechenModulBindingSource.ResetBindings(false);
-			lblCount.Text = modules.Count;
+			lblCount.Text = modules.Count.ToString();
 			if (modules != null) {
 				btnRemove.Enabled = modules.Count > 0;
 				btnAlign.Enabled = modules.Count > 1;
