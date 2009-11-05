@@ -96,6 +96,21 @@ namespace Europlan.Common {
 			//    bool showRim = evProduct.PlannedAreaRim > 0;
 			//    bool showResidence = true;
 
+				lblQHeat.Visible = showHeat;
+				lblQHeatDiff.Visible = showHeat;
+				lblQHeatRest.Visible = showHeat;
+				lblAvgqHeat.Visible = showHeat;
+				lblDurchflussHeat.Visible = showHeat;
+				lblDruckverlustHeat.Visible = showHeat;
+				lblTempHeat.Visible = showHeat;
+				lblQCool.Visible = showCool;
+				lblQCoolDiff.Visible = showCool;
+				lblQCoolRest.Visible = showCool;
+				lblAvgqCool.Visible = showCool;
+				lblDurchflussCool.Visible = showCool;
+				lblDruckverlustCool.Visible = showCool;
+				lblTempCool.Visible = showCool;
+
 			//    this.lblQSollHeat.Visible = showHeat;
 			//    this.lblQkSollHeat.Visible = showHeat;
 			//    this.lblQfbhHeat.Visible = showHeat;
@@ -301,6 +316,26 @@ namespace Europlan.Common {
 			//    }
 
 			//    // General
+			    double qDiffHeat = this.product.PlannedHeatLoad - this.product.RequestedHeatLoad;
+			    double qDiffCool = this.product.PlannedCoolLoad - this.product.RequestedCoolLoad;
+
+				lblHk.Text = "Heizkreis " + (lstCircuits.SelectedIndex + 1) + ":";
+				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 2).ToString();
+				lblQHeatDiff.Text = (qDiffHeat > 0 ? "+" : "") + Math.Round(qDiffHeat, 2).ToString();
+				lblQHeatRest.Text = (qDiffHeat > 0 ? "+" : "") + Math.Round(qDiffHeat, 2).ToString();
+				lblAvgqHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QHeatPerSqm, 2).ToString();
+				lblDurchflussHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DurchflussHeat, 2).ToString();
+				lblDruckverlustHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustHeat, 2).ToString();
+				lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_FloorTempHeat, 2).ToString();
+				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
+				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
+				lblQCoolRest.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
+				lblAvgqCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QCoolPerSqm, 2).ToString();
+				lblDurchflussCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DurchflussCool, 2).ToString();
+				lblDruckverlustCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustCool, 2).ToString();
+				lblTempCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_FloorTempCool, 2).ToString();
+
+
 			//    this.lblQSollHeat.Text = Math.Round(this.product.RequestedHeatLoad, 2).ToString();
 			//    this.lblQSollCool.Text = Math.Round(this.product.RequestedCoolLoad, 2).ToString();
 			//    this.lblQkSollHeat.Text = Math.Round(this.product.RequestedHeatLoadPerSqM, 2).ToString();

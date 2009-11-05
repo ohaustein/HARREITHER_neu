@@ -92,6 +92,16 @@ namespace Europlan.Common {
 		private double c_qHeatPerSqm;
 		private double c_qCoolPerSqm;
 
+		public double C_QHeatPerSqm {
+			get { return c_qHeatPerSqm; }
+			set { c_qHeatPerSqm = value; }
+		}
+
+		public double C_QCoolPerSqm {
+			get { return c_qCoolPerSqm; }
+			set { c_qCoolPerSqm = value; }
+		}
+
 		private double c_floorTempHeat;
 		[XmlIgnore]
 		public double C_FloorTempHeat {

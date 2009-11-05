@@ -71,6 +71,35 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.lblTempCool = new System.Windows.Forms.Label();
+			this.lblDruckverlustCool = new System.Windows.Forms.Label();
+			this.lblDurchflussCool = new System.Windows.Forms.Label();
+			this.lblAvgqCool = new System.Windows.Forms.Label();
+			this.lblQCoolRest = new System.Windows.Forms.Label();
+			this.lblQCoolDiff = new System.Windows.Forms.Label();
+			this.lblQCool = new System.Windows.Forms.Label();
+			this.lblTempHeat = new System.Windows.Forms.Label();
+			this.lblDruckverlustHeat = new System.Windows.Forms.Label();
+			this.lblDurchflussHeat = new System.Windows.Forms.Label();
+			this.lblAvgqHeat = new System.Windows.Forms.Label();
+			this.lblQHeatRest = new System.Windows.Forms.Label();
+			this.lblQHeatDiff = new System.Windows.Forms.Label();
+			this.lblQHeat = new System.Windows.Forms.Label();
+			this.lblRest = new System.Windows.Forms.Label();
+			this.label16 = new System.Windows.Forms.Label();
+			this.label17 = new System.Windows.Forms.Label();
+			this.label13 = new System.Windows.Forms.Label();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.groupBox7 = new System.Windows.Forms.GroupBox();
+			this.label11 = new System.Windows.Forms.Label();
+			this.label10 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label9 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.lblHk = new System.Windows.Forms.Label();
+			this.btnConnectionPipes = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
 			this.numLength = new Europlan.Common.NumericBox();
 			this.label2 = new System.Windows.Forms.Label();
@@ -87,7 +116,20 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.btnConnectionPipes = new System.Windows.Forms.Button();
+			this.label14 = new System.Windows.Forms.Label();
+			this.label15 = new System.Windows.Forms.Label();
+			this.label18 = new System.Windows.Forms.Label();
+			this.label19 = new System.Windows.Forms.Label();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label21 = new System.Windows.Forms.Label();
+			this.label22 = new System.Windows.Forms.Label();
+			this.label23 = new System.Windows.Forms.Label();
+			this.label24 = new System.Windows.Forms.Label();
+			this.label25 = new System.Windows.Forms.Label();
+			this.label26 = new System.Windows.Forms.Label();
+			this.label29 = new System.Windows.Forms.Label();
+			this.label30 = new System.Windows.Forms.Label();
+			this.label31 = new System.Windows.Forms.Label();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -647,7 +689,7 @@ namespace Europlan.Common {
 			this.tabs.Location = new System.Drawing.Point(0, 0);
 			this.tabs.Name = "tabs";
 			this.tabs.SelectedIndex = 0;
-			this.tabs.Size = new System.Drawing.Size(864, 428);
+			this.tabs.Size = new System.Drawing.Size(864, 640);
 			this.tabs.TabIndex = 2;
 			// 
 			// pageInput
@@ -656,7 +698,7 @@ namespace Europlan.Common {
 			this.pageInput.Location = new System.Drawing.Point(4, 22);
 			this.pageInput.Name = "pageInput";
 			this.pageInput.Padding = new System.Windows.Forms.Padding(3);
-			this.pageInput.Size = new System.Drawing.Size(856, 402);
+			this.pageInput.Size = new System.Drawing.Size(856, 614);
 			this.pageInput.TabIndex = 0;
 			this.pageInput.Text = "Eingabedaten";
 			this.pageInput.UseVisualStyleBackColor = true;
@@ -670,7 +712,7 @@ namespace Europlan.Common {
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(3, 3);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(850, 396);
+			this.panel1.Size = new System.Drawing.Size(850, 608);
 			this.panel1.TabIndex = 3;
 			// 
 			// pageCircuit
@@ -680,7 +722,7 @@ namespace Europlan.Common {
 			this.pageCircuit.Location = new System.Drawing.Point(4, 22);
 			this.pageCircuit.Name = "pageCircuit";
 			this.pageCircuit.Padding = new System.Windows.Forms.Padding(3);
-			this.pageCircuit.Size = new System.Drawing.Size(856, 402);
+			this.pageCircuit.Size = new System.Drawing.Size(856, 614);
 			this.pageCircuit.TabIndex = 2;
 			this.pageCircuit.Text = "Anbindeleitungen";
 			this.pageCircuit.UseVisualStyleBackColor = true;
@@ -753,7 +795,7 @@ namespace Europlan.Common {
 			this.pageConstruction.Location = new System.Drawing.Point(4, 22);
 			this.pageConstruction.Name = "pageConstruction";
 			this.pageConstruction.Padding = new System.Windows.Forms.Padding(3);
-			this.pageConstruction.Size = new System.Drawing.Size(856, 402);
+			this.pageConstruction.Size = new System.Drawing.Size(856, 614);
 			this.pageConstruction.TabIndex = 1;
 			this.pageConstruction.Text = "Auslegung";
 			this.pageConstruction.UseVisualStyleBackColor = true;
@@ -762,6 +804,48 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.label23);
+			this.panel2.Controls.Add(this.label24);
+			this.panel2.Controls.Add(this.label25);
+			this.panel2.Controls.Add(this.label26);
+			this.panel2.Controls.Add(this.label29);
+			this.panel2.Controls.Add(this.label30);
+			this.panel2.Controls.Add(this.label31);
+			this.panel2.Controls.Add(this.label14);
+			this.panel2.Controls.Add(this.label15);
+			this.panel2.Controls.Add(this.label18);
+			this.panel2.Controls.Add(this.label19);
+			this.panel2.Controls.Add(this.label20);
+			this.panel2.Controls.Add(this.label21);
+			this.panel2.Controls.Add(this.label22);
+			this.panel2.Controls.Add(this.lblTempCool);
+			this.panel2.Controls.Add(this.lblDruckverlustCool);
+			this.panel2.Controls.Add(this.lblDurchflussCool);
+			this.panel2.Controls.Add(this.lblAvgqCool);
+			this.panel2.Controls.Add(this.lblQCoolRest);
+			this.panel2.Controls.Add(this.lblQCoolDiff);
+			this.panel2.Controls.Add(this.lblQCool);
+			this.panel2.Controls.Add(this.lblTempHeat);
+			this.panel2.Controls.Add(this.lblDruckverlustHeat);
+			this.panel2.Controls.Add(this.lblDurchflussHeat);
+			this.panel2.Controls.Add(this.lblAvgqHeat);
+			this.panel2.Controls.Add(this.lblQHeatRest);
+			this.panel2.Controls.Add(this.lblQHeatDiff);
+			this.panel2.Controls.Add(this.lblQHeat);
+			this.panel2.Controls.Add(this.lblRest);
+			this.panel2.Controls.Add(this.label16);
+			this.panel2.Controls.Add(this.label17);
+			this.panel2.Controls.Add(this.label13);
+			this.panel2.Controls.Add(this.groupBox3);
+			this.panel2.Controls.Add(this.groupBox2);
+			this.panel2.Controls.Add(this.groupBox7);
+			this.panel2.Controls.Add(this.label11);
+			this.panel2.Controls.Add(this.label10);
+			this.panel2.Controls.Add(this.label4);
+			this.panel2.Controls.Add(this.label9);
+			this.panel2.Controls.Add(this.label6);
+			this.panel2.Controls.Add(this.label5);
+			this.panel2.Controls.Add(this.lblHk);
 			this.panel2.Controls.Add(this.btnConnectionPipes);
 			this.panel2.Controls.Add(this.label3);
 			this.panel2.Controls.Add(this.numLength);
@@ -778,8 +862,272 @@ namespace Europlan.Common {
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(3, 3);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(850, 396);
+			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
+			// 
+			// lblTempCool
+			// 
+			this.lblTempCool.Location = new System.Drawing.Point(290, 488);
+			this.lblTempCool.Name = "lblTempCool";
+			this.lblTempCool.Size = new System.Drawing.Size(50, 13);
+			this.lblTempCool.TabIndex = 105;
+			this.lblTempCool.Text = "W";
+			this.lblTempCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblDruckverlustCool
+			// 
+			this.lblDruckverlustCool.Location = new System.Drawing.Point(290, 468);
+			this.lblDruckverlustCool.Name = "lblDruckverlustCool";
+			this.lblDruckverlustCool.Size = new System.Drawing.Size(50, 13);
+			this.lblDruckverlustCool.TabIndex = 104;
+			this.lblDruckverlustCool.Text = "W";
+			this.lblDruckverlustCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblDurchflussCool
+			// 
+			this.lblDurchflussCool.Location = new System.Drawing.Point(290, 448);
+			this.lblDurchflussCool.Name = "lblDurchflussCool";
+			this.lblDurchflussCool.Size = new System.Drawing.Size(50, 13);
+			this.lblDurchflussCool.TabIndex = 103;
+			this.lblDurchflussCool.Text = "W";
+			this.lblDurchflussCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblAvgqCool
+			// 
+			this.lblAvgqCool.Location = new System.Drawing.Point(290, 428);
+			this.lblAvgqCool.Name = "lblAvgqCool";
+			this.lblAvgqCool.Size = new System.Drawing.Size(50, 13);
+			this.lblAvgqCool.TabIndex = 102;
+			this.lblAvgqCool.Text = "W";
+			this.lblAvgqCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblQCoolRest
+			// 
+			this.lblQCoolRest.Location = new System.Drawing.Point(290, 377);
+			this.lblQCoolRest.Name = "lblQCoolRest";
+			this.lblQCoolRest.Size = new System.Drawing.Size(50, 13);
+			this.lblQCoolRest.TabIndex = 101;
+			this.lblQCoolRest.Text = "W";
+			this.lblQCoolRest.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblQCoolDiff
+			// 
+			this.lblQCoolDiff.Location = new System.Drawing.Point(290, 357);
+			this.lblQCoolDiff.Name = "lblQCoolDiff";
+			this.lblQCoolDiff.Size = new System.Drawing.Size(50, 13);
+			this.lblQCoolDiff.TabIndex = 100;
+			this.lblQCoolDiff.Text = "W";
+			this.lblQCoolDiff.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblQCool
+			// 
+			this.lblQCool.Location = new System.Drawing.Point(290, 337);
+			this.lblQCool.Name = "lblQCool";
+			this.lblQCool.Size = new System.Drawing.Size(50, 13);
+			this.lblQCool.TabIndex = 99;
+			this.lblQCool.Text = "W";
+			this.lblQCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblTempHeat
+			// 
+			this.lblTempHeat.Location = new System.Drawing.Point(187, 488);
+			this.lblTempHeat.Name = "lblTempHeat";
+			this.lblTempHeat.Size = new System.Drawing.Size(50, 13);
+			this.lblTempHeat.TabIndex = 98;
+			this.lblTempHeat.Text = "W";
+			this.lblTempHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblDruckverlustHeat
+			// 
+			this.lblDruckverlustHeat.Location = new System.Drawing.Point(187, 468);
+			this.lblDruckverlustHeat.Name = "lblDruckverlustHeat";
+			this.lblDruckverlustHeat.Size = new System.Drawing.Size(50, 13);
+			this.lblDruckverlustHeat.TabIndex = 97;
+			this.lblDruckverlustHeat.Text = "W";
+			this.lblDruckverlustHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblDurchflussHeat
+			// 
+			this.lblDurchflussHeat.Location = new System.Drawing.Point(187, 448);
+			this.lblDurchflussHeat.Name = "lblDurchflussHeat";
+			this.lblDurchflussHeat.Size = new System.Drawing.Size(50, 13);
+			this.lblDurchflussHeat.TabIndex = 96;
+			this.lblDurchflussHeat.Text = "W";
+			this.lblDurchflussHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblAvgqHeat
+			// 
+			this.lblAvgqHeat.Location = new System.Drawing.Point(187, 428);
+			this.lblAvgqHeat.Name = "lblAvgqHeat";
+			this.lblAvgqHeat.Size = new System.Drawing.Size(50, 13);
+			this.lblAvgqHeat.TabIndex = 95;
+			this.lblAvgqHeat.Text = "W";
+			this.lblAvgqHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblQHeatRest
+			// 
+			this.lblQHeatRest.Location = new System.Drawing.Point(187, 377);
+			this.lblQHeatRest.Name = "lblQHeatRest";
+			this.lblQHeatRest.Size = new System.Drawing.Size(50, 13);
+			this.lblQHeatRest.TabIndex = 94;
+			this.lblQHeatRest.Text = "W";
+			this.lblQHeatRest.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblQHeatDiff
+			// 
+			this.lblQHeatDiff.Location = new System.Drawing.Point(187, 357);
+			this.lblQHeatDiff.Name = "lblQHeatDiff";
+			this.lblQHeatDiff.Size = new System.Drawing.Size(50, 13);
+			this.lblQHeatDiff.TabIndex = 93;
+			this.lblQHeatDiff.Text = "W";
+			this.lblQHeatDiff.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblQHeat
+			// 
+			this.lblQHeat.Location = new System.Drawing.Point(187, 337);
+			this.lblQHeat.Name = "lblQHeat";
+			this.lblQHeat.Size = new System.Drawing.Size(50, 13);
+			this.lblQHeat.TabIndex = 92;
+			this.lblQHeat.Text = "W";
+			this.lblQHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblRest
+			// 
+			this.lblRest.AutoSize = true;
+			this.lblRest.Location = new System.Drawing.Point(4, 377);
+			this.lblRest.Name = "lblRest";
+			this.lblRest.Size = new System.Drawing.Size(75, 13);
+			this.lblRest.TabIndex = 87;
+			this.lblRest.Text = "Rest (Raum 1)";
+			// 
+			// label16
+			// 
+			this.label16.AutoSize = true;
+			this.label16.Location = new System.Drawing.Point(4, 357);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(165, 13);
+			this.label16.TabIndex = 86;
+			this.label16.Text = "Differenz zur erwarteten Leistung:";
+			// 
+			// label17
+			// 
+			this.label17.AutoSize = true;
+			this.label17.Location = new System.Drawing.Point(4, 337);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(95, 13);
+			this.label17.TabIndex = 85;
+			this.label17.Text = "Erreichte Leistung:";
+			// 
+			// label13
+			// 
+			this.label13.AutoSize = true;
+			this.label13.Location = new System.Drawing.Point(4, 488);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(118, 13);
+			this.label13.TabIndex = 84;
+			this.label13.Text = "Oberflächentemperatur:";
+			// 
+			// groupBox3
+			// 
+			this.groupBox3.Location = new System.Drawing.Point(284, 300);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Size = new System.Drawing.Size(2, 210);
+			this.groupBox3.TabIndex = 83;
+			this.groupBox3.TabStop = false;
+			// 
+			// groupBox2
+			// 
+			this.groupBox2.Location = new System.Drawing.Point(181, 300);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(2, 210);
+			this.groupBox2.TabIndex = 82;
+			this.groupBox2.TabStop = false;
+			// 
+			// groupBox7
+			// 
+			this.groupBox7.Location = new System.Drawing.Point(3, 321);
+			this.groupBox7.Name = "groupBox7";
+			this.groupBox7.Size = new System.Drawing.Size(390, 2);
+			this.groupBox7.TabIndex = 81;
+			this.groupBox7.TabStop = false;
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label11.Location = new System.Drawing.Point(312, 305);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(71, 13);
+			this.label11.TabIndex = 80;
+			this.label11.Text = "Kühlbetrieb";
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label10.Location = new System.Drawing.Point(202, 305);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(71, 13);
+			this.label10.TabIndex = 79;
+			this.label10.Text = "Heizbetrieb";
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.Location = new System.Drawing.Point(4, 305);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(146, 13);
+			this.label4.TabIndex = 78;
+			this.label4.Text = "Berechnungsergebnisse:";
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(4, 468);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(70, 13);
+			this.label9.TabIndex = 77;
+			this.label9.Text = "Druckverlust:";
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(4, 448);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(78, 13);
+			this.label6.TabIndex = 76;
+			this.label6.Text = "Wassermenge:";
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(4, 428);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(156, 13);
+			this.label5.TabIndex = 75;
+			this.label5.Text = "Durchschn. Wärmestromdichte:";
+			// 
+			// lblHk
+			// 
+			this.lblHk.AutoSize = true;
+			this.lblHk.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblHk.Location = new System.Drawing.Point(4, 400);
+			this.lblHk.Name = "lblHk";
+			this.lblHk.Size = new System.Drawing.Size(74, 13);
+			this.lblHk.TabIndex = 74;
+			this.lblHk.Text = "Heizkreis 1:";
+			// 
+			// btnConnectionPipes
+			// 
+			this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnConnectionPipes.Location = new System.Drawing.Point(680, 4);
+			this.btnConnectionPipes.Name = "btnConnectionPipes";
+			this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
+			this.btnConnectionPipes.TabIndex = 73;
+			this.btnConnectionPipes.Text = "Anbindeleitungen bearbeiten";
+			this.btnConnectionPipes.UseVisualStyleBackColor = true;
+			this.btnConnectionPipes.Click += new System.EventHandler(this.btnConnectionPipes_Click);
 			// 
 			// label3
 			// 
@@ -936,16 +1284,117 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			// 
-			// btnConnectionPipes
+			// label14
 			// 
-			this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnConnectionPipes.Location = new System.Drawing.Point(680, 4);
-			this.btnConnectionPipes.Name = "btnConnectionPipes";
-			this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
-			this.btnConnectionPipes.TabIndex = 73;
-			this.btnConnectionPipes.Text = "Anbindeleitungen bearbeiten";
-			this.btnConnectionPipes.UseVisualStyleBackColor = true;
-			this.btnConnectionPipes.Click += new System.EventHandler(this.btnConnectionPipes_Click);
+			this.label14.Location = new System.Drawing.Point(243, 488);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(35, 13);
+			this.label14.TabIndex = 112;
+			this.label14.Text = "°C";
+			// 
+			// label15
+			// 
+			this.label15.Location = new System.Drawing.Point(243, 468);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(35, 13);
+			this.label15.TabIndex = 111;
+			this.label15.Text = "mbar";
+			// 
+			// label18
+			// 
+			this.label18.Location = new System.Drawing.Point(243, 448);
+			this.label18.Name = "label18";
+			this.label18.Size = new System.Drawing.Size(35, 13);
+			this.label18.TabIndex = 110;
+			this.label18.Text = "l/h";
+			// 
+			// label19
+			// 
+			this.label19.Location = new System.Drawing.Point(243, 428);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(35, 13);
+			this.label19.TabIndex = 109;
+			this.label19.Text = "W/m²";
+			// 
+			// label20
+			// 
+			this.label20.Location = new System.Drawing.Point(243, 377);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(35, 13);
+			this.label20.TabIndex = 108;
+			this.label20.Text = "W";
+			// 
+			// label21
+			// 
+			this.label21.Location = new System.Drawing.Point(243, 357);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(35, 13);
+			this.label21.TabIndex = 107;
+			this.label21.Text = "W";
+			// 
+			// label22
+			// 
+			this.label22.Location = new System.Drawing.Point(243, 337);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(35, 13);
+			this.label22.TabIndex = 106;
+			this.label22.Text = "W";
+			// 
+			// label23
+			// 
+			this.label23.Location = new System.Drawing.Point(355, 488);
+			this.label23.Name = "label23";
+			this.label23.Size = new System.Drawing.Size(35, 13);
+			this.label23.TabIndex = 119;
+			this.label23.Text = "°C";
+			// 
+			// label24
+			// 
+			this.label24.Location = new System.Drawing.Point(355, 468);
+			this.label24.Name = "label24";
+			this.label24.Size = new System.Drawing.Size(35, 13);
+			this.label24.TabIndex = 118;
+			this.label24.Text = "mbar";
+			// 
+			// label25
+			// 
+			this.label25.Location = new System.Drawing.Point(355, 448);
+			this.label25.Name = "label25";
+			this.label25.Size = new System.Drawing.Size(35, 13);
+			this.label25.TabIndex = 117;
+			this.label25.Text = "l/h";
+			// 
+			// label26
+			// 
+			this.label26.Location = new System.Drawing.Point(355, 428);
+			this.label26.Name = "label26";
+			this.label26.Size = new System.Drawing.Size(35, 13);
+			this.label26.TabIndex = 116;
+			this.label26.Text = "W/m²";
+			// 
+			// label29
+			// 
+			this.label29.Location = new System.Drawing.Point(355, 377);
+			this.label29.Name = "label29";
+			this.label29.Size = new System.Drawing.Size(35, 13);
+			this.label29.TabIndex = 115;
+			this.label29.Text = "W";
+			// 
+			// label30
+			// 
+			this.label30.Location = new System.Drawing.Point(355, 357);
+			this.label30.Name = "label30";
+			this.label30.Size = new System.Drawing.Size(35, 13);
+			this.label30.TabIndex = 114;
+			this.label30.Text = "W";
+			// 
+			// label31
+			// 
+			this.label31.Location = new System.Drawing.Point(355, 337);
+			this.label31.Name = "label31";
+			this.label31.Size = new System.Drawing.Size(35, 13);
+			this.label31.TabIndex = 113;
+			this.label31.Text = "W";
 			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
@@ -953,7 +1402,7 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tabs);
 			this.Name = "PlannedModulKlimaBodenProductPanel";
-			this.Size = new System.Drawing.Size(864, 428);
+			this.Size = new System.Drawing.Size(864, 640);
 			this.grpPowerArea.ResumeLayout(false);
 			this.grpPowerArea.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
@@ -1039,5 +1488,47 @@ namespace Europlan.Common {
 		private NumericBox numLength;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button btnConnectionPipes;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label lblHk;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.GroupBox groupBox7;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.Label lblRest;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.Label label17;
+		private System.Windows.Forms.Label lblQHeat;
+		private System.Windows.Forms.Label lblTempHeat;
+		private System.Windows.Forms.Label lblDruckverlustHeat;
+		private System.Windows.Forms.Label lblDurchflussHeat;
+		private System.Windows.Forms.Label lblAvgqHeat;
+		private System.Windows.Forms.Label lblQHeatRest;
+		private System.Windows.Forms.Label lblQHeatDiff;
+		private System.Windows.Forms.Label lblTempCool;
+		private System.Windows.Forms.Label lblDruckverlustCool;
+		private System.Windows.Forms.Label lblDurchflussCool;
+		private System.Windows.Forms.Label lblAvgqCool;
+		private System.Windows.Forms.Label lblQCoolRest;
+		private System.Windows.Forms.Label lblQCoolDiff;
+		private System.Windows.Forms.Label lblQCool;
+		private System.Windows.Forms.Label label23;
+		private System.Windows.Forms.Label label24;
+		private System.Windows.Forms.Label label25;
+		private System.Windows.Forms.Label label26;
+		private System.Windows.Forms.Label label29;
+		private System.Windows.Forms.Label label30;
+		private System.Windows.Forms.Label label31;
+		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.Label label18;
+		private System.Windows.Forms.Label label19;
+		private System.Windows.Forms.Label label20;
+		private System.Windows.Forms.Label label21;
+		private System.Windows.Forms.Label label22;
 	}
 }
