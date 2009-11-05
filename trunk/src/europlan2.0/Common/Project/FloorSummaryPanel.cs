@@ -100,10 +100,12 @@ namespace Europlan.Common {
 
 		private void gridRooms_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
 			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridRooms.Columns.Count &&
-					(this.gridRooms.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn) &&
 					e.RowIndex >= 0 && e.RowIndex < this.gridRooms.Rows.Count) {
-				if (ProjectStructureChanged != null) {
+				if (this.gridRooms.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn && ProjectStructureChanged != null) {
 					ProjectStructureChanged(this);
+				}
+				if (ProjectChanged != null) {
+					ProjectChanged(this);
 				}
 			}
 		}

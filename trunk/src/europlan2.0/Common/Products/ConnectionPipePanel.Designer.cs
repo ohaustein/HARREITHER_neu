@@ -36,7 +36,6 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvConnectionPipes = new System.Windows.Forms.DataGridView();
-			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.vorlaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.ruecklaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
@@ -52,6 +51,7 @@ namespace Europlan.Common {
 			this.Area = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.HeatLoad = new Europlan.Common.NumericColumn();
 			this.CoolLoad = new Europlan.Common.NumericColumn();
+			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dgvConnectionPipes)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.connectionPipeBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -97,12 +97,9 @@ namespace Europlan.Common {
 			this.dgvConnectionPipes.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dgvConnectionPipes_PreviewKeyDown);
 			this.dgvConnectionPipes.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvConnectionPipes_UserDeletedRow);
 			this.dgvConnectionPipes.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvConnectionPipes_CellParsing);
+			this.dgvConnectionPipes.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvConnectionPipes_DefaultValuesNeeded);
 			this.dgvConnectionPipes.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvConnectionPipes_DataError);
 			this.dgvConnectionPipes.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellEnter);
-			// 
-			// connectionPipeBindingSource
-			// 
-			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
 			// 
 			// Room
 			// 
@@ -120,7 +117,7 @@ namespace Europlan.Common {
 			// 
 			this.vorlaufDataGridViewTextBoxColumn.DataPropertyName = "Vorlauf";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
+			dataGridViewCellStyle3.Format = "F1";
 			this.vorlaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.vorlaufDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.vorlaufDataGridViewTextBoxColumn.HeaderText = "Länge\nVorlauf\n(m)";
@@ -134,7 +131,7 @@ namespace Europlan.Common {
 			// 
 			this.ruecklaufDataGridViewTextBoxColumn.DataPropertyName = "Ruecklauf";
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F0";
+			dataGridViewCellStyle4.Format = "F1";
 			this.ruecklaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
 			this.ruecklaufDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.ruecklaufDataGridViewTextBoxColumn.HeaderText = "Länge\nRücklauf\n(m)";
@@ -285,6 +282,10 @@ namespace Europlan.Common {
 			this.CoolLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.CoolLoad.Visible = false;
 			this.CoolLoad.Width = 50;
+			// 
+			// connectionPipeBindingSource
+			// 
+			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
 			// 
 			// ConnectionPipePanel
 			// 
