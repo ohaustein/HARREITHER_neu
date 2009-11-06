@@ -6,10 +6,10 @@ using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	public class KlimaFlaechenModul {
-		private static double module_100_40_area = 0.9925 * 0.4;
-		private static double module_100_30_area = 0.9925 * 0.295;
-		private static double module_120_30_area = 1.194 * 0.295;
-		private static double module_80_30_area = 0.791 * 0.295;
+		private static double module_100_40_area = 1.0 * 0.4;
+		private static double module_100_30_area = 1.0 * 0.3;
+		private static double module_120_30_area = 1.2 * 0.3;
+		private static double module_80_30_area = 0.8 * 0.3;
 
 		public class ModulTypeEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string modul_100_40 = "Modul 100/40";
