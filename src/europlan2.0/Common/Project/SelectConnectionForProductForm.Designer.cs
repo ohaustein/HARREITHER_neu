@@ -103,9 +103,9 @@ namespace Europlan.Common {
 			this.rbRuecklauf.AutoSize = true;
 			this.rbRuecklauf.Location = new System.Drawing.Point(9, 42);
 			this.rbRuecklauf.Name = "rbRuecklauf";
-			this.rbRuecklauf.Size = new System.Drawing.Size(93, 17);
+			this.rbRuecklauf.Size = new System.Drawing.Size(87, 17);
 			this.rbRuecklauf.TabIndex = 1;
-			this.rbRuecklauf.Text = "ruecklaufseitig";
+			this.rbRuecklauf.Text = "rücklaufseitig";
 			this.rbRuecklauf.UseVisualStyleBackColor = true;
 			// 
 			// rbVorlauf
