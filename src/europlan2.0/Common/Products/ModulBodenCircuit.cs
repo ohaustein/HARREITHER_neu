@@ -228,7 +228,7 @@ namespace Europlan.Common {
 
 					this.c_druckverlustHeat = 0;
 					foreach (KlimaFlaechenList row in rows) {
-						double rowDruckverlust = row.Druckverlust(this.c_durchflussHeat);
+						double rowDruckverlust = row.Druckverlust(this.c_durchflussHeat / rows.Count);
 						if (rowDruckverlust > this.c_druckverlustHeat) {
 							this.c_druckverlustHeat = rowDruckverlust;
 						}
@@ -291,7 +291,7 @@ namespace Europlan.Common {
 
 					this.c_druckverlustCool = 0;
 					foreach (KlimaFlaechenList row in rows) {
-						double rowDruckverlust = row.Druckverlust(this.c_durchflussCool);
+						double rowDruckverlust = row.Druckverlust(this.c_durchflussCool / rows.Count);
 						if (rowDruckverlust > this.c_druckverlustCool) {
 							this.c_druckverlustCool = rowDruckverlust;
 						}
