@@ -133,6 +133,8 @@
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\HithermRegister.cs" />
+    <Compile Include="Products\HithermCircuit.cs" />
     <Compile Include="Products\KlimaFlaechenModulGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
