@@ -318,6 +318,7 @@ namespace Europlan.Common {
 				}
 				if ((skipFields & FieldEnum.MODULES) == FieldEnum.NONE) {
 					dgvModules.Row = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).Rows[lstRows.SelectedIndex].List;
+					numLength.Enabled = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).Rows[lstRows.SelectedIndex].List.Count > 0;
 				}
 				if ((skipFields & FieldEnum.LENGTH_VERBINDUNGEN) == FieldEnum.NONE) {
 					this.numLength.Value = (decimal)(this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).Rows[lstRows.SelectedIndex].LengthVerbindeleitungen;
@@ -797,6 +798,7 @@ namespace Europlan.Common {
 		private void dgvModules_GridContentChanged(object sender) {
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 			this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS | FieldEnum.MODULES);
+			numLength.Enabled = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).Rows[lstRows.SelectedIndex].List.Count > 0;
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
