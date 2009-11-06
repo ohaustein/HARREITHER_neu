@@ -913,13 +913,11 @@ namespace Europlan.Common {
 			// 
 			// lblError
 			// 
-			this.lblError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lblError.AutoSize = true;
 			this.lblError.ForeColor = System.Drawing.Color.Red;
 			this.lblError.Location = new System.Drawing.Point(4, 538);
 			this.lblError.Name = "lblError";
-			this.lblError.Size = new System.Drawing.Size(835, 33);
+			this.lblError.Size = new System.Drawing.Size(0, 13);
 			this.lblError.TabIndex = 138;
 			this.lblError.Visible = false;
 			// 

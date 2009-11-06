@@ -174,22 +174,18 @@ namespace Europlan.Common {
 			foreach (ModulBodenCircuit c in this.circuits) {
 				if (c.Rows.Count > ModulKlimaBodenProduct.ConfigMaxModulesInParallel) {
 					//errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 6 parallele Modulreihen\n";
-					errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält zu viele parallele Modulreihen (" + c.Rows.Count.ToString() + " > " + ModulKlimaBodenProduct.ConfigMaxModulesInParallel.ToString() + ")\n";
+					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele parallele Modulreihen (" + c.Rows.Count.ToString() + " > " + ModulKlimaBodenProduct.ConfigMaxModulesInParallel.ToString() + ")\n";
 				}
 			}
 			foreach (ModulBodenCircuit c in this.circuits) {
 				int maxModuleCount = 0;
 				foreach (KlimaFlaechenList row in c.Rows) {
-					//if (row.List.Count > 20) {
-					//    errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 20 Module in Serie\n";
-					//    break;
-					//}
 					if (row.List.Count > maxModuleCount) {
 						maxModuleCount = row.List.Count;
 					}
 				}
 				if (maxModuleCount > ModulKlimaBodenProduct.ConfigMaxModulesInRow) {
-					errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält zu viele Module in Serien (" + maxModuleCount + " > " + ModulKlimaBodenProduct.ConfigMaxModulesInRow.ToString() + ")\n";
+					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module in Serien (" + maxModuleCount + " > " + ModulKlimaBodenProduct.ConfigMaxModulesInRow.ToString() + ")\n";
 				}
 			}
 			foreach (ModulBodenCircuit c in this.circuits) {
@@ -199,7 +195,7 @@ namespace Europlan.Common {
 				}
 				if (moduleCount > ModulKlimaBodenProduct.ConfigModulesInCircuit) {
 					//errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 50 Module\n";
-					errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält zu viele Module (" + moduleCount + " > " + ModulKlimaBodenProduct.ConfigModulesInCircuit.ToString() + ")\n";
+					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module (" + moduleCount + " > " + ModulKlimaBodenProduct.ConfigModulesInCircuit.ToString() + ")\n";
 				}
 			}
 			double maxTemp = double.MinValue;
