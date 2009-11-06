@@ -94,9 +94,9 @@ namespace Europlan.Common {
 			this.cmbLayDistance = new System.Windows.Forms.ComboBox();
 			this.label14 = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
+			this.lblError = new System.Windows.Forms.Label();
 			this.grpResults = new System.Windows.Forms.GroupBox();
 			this.btnConnectionPipes = new System.Windows.Forms.Button();
-			this.lblError = new System.Windows.Forms.Label();
 			this.lblSpreizungCool = new System.Windows.Forms.Label();
 			this.lblSpreizungHeat = new System.Windows.Forms.Label();
 			this.label41 = new System.Windows.Forms.Label();
@@ -803,7 +803,7 @@ namespace Europlan.Common {
 			this.tabs.Location = new System.Drawing.Point(0, 0);
 			this.tabs.Name = "tabs";
 			this.tabs.SelectedIndex = 0;
-			this.tabs.Size = new System.Drawing.Size(864, 428);
+			this.tabs.Size = new System.Drawing.Size(864, 528);
 			this.tabs.TabIndex = 2;
 			// 
 			// pageInput
@@ -812,7 +812,7 @@ namespace Europlan.Common {
 			this.pageInput.Location = new System.Drawing.Point(4, 22);
 			this.pageInput.Name = "pageInput";
 			this.pageInput.Padding = new System.Windows.Forms.Padding(3);
-			this.pageInput.Size = new System.Drawing.Size(856, 402);
+			this.pageInput.Size = new System.Drawing.Size(856, 502);
 			this.pageInput.TabIndex = 0;
 			this.pageInput.Text = "Eingabedaten";
 			this.pageInput.UseVisualStyleBackColor = true;
@@ -827,7 +827,7 @@ namespace Europlan.Common {
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(3, 3);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(850, 396);
+			this.panel1.Size = new System.Drawing.Size(850, 496);
 			this.panel1.TabIndex = 3;
 			// 
 			// groupBox6
@@ -948,7 +948,7 @@ namespace Europlan.Common {
 			this.pageCircuit.Location = new System.Drawing.Point(4, 22);
 			this.pageCircuit.Name = "pageCircuit";
 			this.pageCircuit.Padding = new System.Windows.Forms.Padding(3);
-			this.pageCircuit.Size = new System.Drawing.Size(856, 402);
+			this.pageCircuit.Size = new System.Drawing.Size(856, 502);
 			this.pageCircuit.TabIndex = 2;
 			this.pageCircuit.Text = "Anbindeleitungen";
 			this.pageCircuit.UseVisualStyleBackColor = true;
@@ -1021,7 +1021,7 @@ namespace Europlan.Common {
 			this.pageConstruction.Location = new System.Drawing.Point(4, 22);
 			this.pageConstruction.Name = "pageConstruction";
 			this.pageConstruction.Padding = new System.Windows.Forms.Padding(3);
-			this.pageConstruction.Size = new System.Drawing.Size(856, 402);
+			this.pageConstruction.Size = new System.Drawing.Size(856, 502);
 			this.pageConstruction.TabIndex = 1;
 			this.pageConstruction.Text = "Auslegung";
 			this.pageConstruction.UseVisualStyleBackColor = true;
@@ -1031,11 +1031,12 @@ namespace Europlan.Common {
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
 			this.panel2.Controls.Add(this.groupBox8);
+			this.panel2.Controls.Add(this.lblError);
 			this.panel2.Controls.Add(this.grpResults);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(3, 3);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(850, 396);
+			this.panel2.Size = new System.Drawing.Size(850, 496);
 			this.panel2.TabIndex = 1;
 			// 
 			// groupBox8
@@ -1051,7 +1052,7 @@ namespace Europlan.Common {
 			this.groupBox8.Controls.Add(this.cmbLayDistance);
 			this.groupBox8.Controls.Add(this.label14);
 			this.groupBox8.Controls.Add(this.label13);
-			this.groupBox8.Location = new System.Drawing.Point(0, 285);
+			this.groupBox8.Location = new System.Drawing.Point(0, 247);
 			this.groupBox8.MinimumSize = new System.Drawing.Size(750, 0);
 			this.groupBox8.Name = "groupBox8";
 			this.groupBox8.Size = new System.Drawing.Size(847, 108);
@@ -1177,12 +1178,21 @@ namespace Europlan.Common {
 			this.label13.TabIndex = 54;
 			this.label13.Text = "Verlegeart Aufenthaltszone:";
 			// 
+			// lblError
+			// 
+			this.lblError.AutoSize = true;
+			this.lblError.ForeColor = System.Drawing.Color.Red;
+			this.lblError.Location = new System.Drawing.Point(6, 363);
+			this.lblError.Name = "lblError";
+			this.lblError.Size = new System.Drawing.Size(0, 13);
+			this.lblError.TabIndex = 71;
+			this.lblError.Visible = false;
+			// 
 			// grpResults
 			// 
 			this.grpResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.grpResults.Controls.Add(this.btnConnectionPipes);
-			this.grpResults.Controls.Add(this.lblError);
 			this.grpResults.Controls.Add(this.lblSpreizungCool);
 			this.grpResults.Controls.Add(this.lblSpreizungHeat);
 			this.grpResults.Controls.Add(this.label41);
@@ -1254,7 +1264,7 @@ namespace Europlan.Common {
 			this.grpResults.Location = new System.Drawing.Point(0, 3);
 			this.grpResults.MinimumSize = new System.Drawing.Size(750, 0);
 			this.grpResults.Name = "grpResults";
-			this.grpResults.Size = new System.Drawing.Size(847, 276);
+			this.grpResults.Size = new System.Drawing.Size(847, 238);
 			this.grpResults.TabIndex = 0;
 			this.grpResults.TabStop = false;
 			this.grpResults.Text = "Berechnungsergebnisse";
@@ -1269,18 +1279,6 @@ namespace Europlan.Common {
 			this.btnConnectionPipes.Text = "Anbindeleitungen bearbeiten";
 			this.btnConnectionPipes.UseVisualStyleBackColor = true;
 			this.btnConnectionPipes.Click += new System.EventHandler(this.btnConnectionPipes_Click);
-			// 
-			// lblError
-			// 
-			this.lblError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.lblError.ForeColor = System.Drawing.Color.Red;
-			this.lblError.Location = new System.Drawing.Point(6, 240);
-			this.lblError.Name = "lblError";
-			this.lblError.Size = new System.Drawing.Size(835, 33);
-			this.lblError.TabIndex = 71;
-			this.lblError.Visible = false;
 			// 
 			// lblSpreizungCool
 			// 
@@ -1903,7 +1901,7 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tabs);
 			this.Name = "PlannedEurovalProductPanel";
-			this.Size = new System.Drawing.Size(864, 428);
+			this.Size = new System.Drawing.Size(864, 528);
 			this.grpPowerArea.ResumeLayout(false);
 			this.grpPowerArea.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
@@ -1919,6 +1917,7 @@ namespace Europlan.Common {
 			this.groupBox9.PerformLayout();
 			this.pageConstruction.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
+			this.panel2.PerformLayout();
 			this.groupBox8.ResumeLayout(false);
 			this.groupBox8.PerformLayout();
 			this.grpResults.ResumeLayout(false);
