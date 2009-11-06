@@ -152,6 +152,7 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.label14 = new System.Windows.Forms.Label();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -826,6 +827,7 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.label14);
 			this.panel2.Controls.Add(this.lblError);
 			this.panel2.Controls.Add(this.lblQAnbCoolUnit);
 			this.panel2.Controls.Add(this.lblQAnbHeatUnit);
@@ -1633,6 +1635,15 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			// 
+			// label14
+			// 
+			this.label14.AutoSize = true;
+			this.label14.Location = new System.Drawing.Point(468, 266);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(224, 13);
+			this.label14.TabIndex = 139;
+			this.label14.Text = "(Pro Winkel zusätzlich 1m Verbindungsleitung)";
+			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1789,5 +1800,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblQAnbHeat;
 		private System.Windows.Forms.Label label45;
 		private System.Windows.Forms.Label lblError;
+		private System.Windows.Forms.Label label14;
 	}
 }
