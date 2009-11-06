@@ -294,6 +294,7 @@ namespace Europlan.Common {
 					if (lstCircuits.Items.Count > 0) {
 					    lstCircuits.SelectedIndex = 0;
 					}
+					btnAddHk.Enabled = lstCircuits.Items.Count < 12;
 					btnRemoveHk.Enabled = lstCircuits.Items.Count > 1;
 			    }
 				if ((skipFields & FieldEnum.ROWS) == FieldEnum.NONE) {
