@@ -38,6 +38,8 @@ namespace Europlan.Application {
 
 		private IEditorUserControl currentEditorUserControl = null;
 
+		private bool updateCheckCompleted = false;
+
 		public MainForm() {
 			InitializeComponent();
 
@@ -270,7 +272,11 @@ namespace Europlan.Application {
 
 		private void updateToolStripMenuItem_Click(object sender, EventArgs e) {
 			try {
-				this.updateController.UpdateInteractive();
+				if (!this.updateCheckCompleted) {
+					MessageBox.Show("Es wird bereits auf eine Aktualisierung geprüft...");
+				} else {
+					this.updateController.UpdateInteractive();
+				}
 			} catch (Exception ex) {
 				// TODO
 				MessageBox.Show("Es wird bereits auf eine Aktualisierung geprüft...");
@@ -278,6 +284,7 @@ namespace Europlan.Application {
 		}
 
 		private void updateController_CheckForUpdateCompleted(object sender, Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs e) {
+			this.updateCheckCompleted = true;
 			if (e.Error == null  && e.Result) {
 				this.updateController.UpdateInteractive(this, Kjs.AppLife.Update.Controller.ErrorDisplayLevel.ShowExceptionMessage);
 			}
