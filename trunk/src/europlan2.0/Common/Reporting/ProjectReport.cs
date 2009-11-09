@@ -109,11 +109,23 @@ namespace Europlan.Common {
 		private void ProjectReport_Load(object sender, EventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["ProjectReport"];
 			this.Location = settings.GetPoint("Location", this.Location);
+			this.Size = settings.GetSize("Size", this.Size);
+			if (settings.GetSetting("Maximized", false)) {
+				this.WindowState = FormWindowState.Maximized;
+			} else {
+				this.WindowState = FormWindowState.Normal;
+			}
 		}
 
 		private void ProjectReport_FormClosing(object sender, FormClosingEventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["ProjectReport"];
-			settings.StorePoint("Location", this.Location);
+			if (this.WindowState == FormWindowState.Normal) {
+				settings.StorePoint("Location", this.Location);
+				settings.StoreSize("Size", this.Size);
+				settings.StoreSetting("Maximized", false);
+			} else if (this.WindowState == FormWindowState.Maximized) {
+				settings.StoreSetting("Maximized", true);
+			}
 			SettingsFile.Update();
 		}
 
