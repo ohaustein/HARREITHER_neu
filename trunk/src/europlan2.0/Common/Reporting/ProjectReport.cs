@@ -65,13 +65,30 @@ namespace Europlan.Common {
 
 			listLabel1.DataSource = reportData;
 
+			string projectName = "";
+			foreach (string line in Project.Instance.ProjectName) {
+				projectName += line + "\n";
+			}
+			string comments = "";
+			foreach (string line in Project.Instance.ProjectNotes) {
+				comments += line + "\n";
+			}
+			projectName = projectName.TrimEnd();
+			listLabel1.Variables.Add("@ProjectNumber", Project.Instance.ProjectNumber.TrimEnd());
+			listLabel1.Variables.Add("@ProjectName", projectName);
+			listLabel1.Variables.Add("@ProjectEditor", Project.Instance.ProjectEditor);
+			listLabel1.Variables.Add("@Comments", comments);
+			listLabel1.Variables.Add("@PartnerContact", Licensing.LicenseManager.Instance.License.Header.Replace("\r", ""));
+			listLabel1.Variables.Add("@ProgramVersion", project.EuroplanVersion);
 			string filename = Configuration.UserTemplate.PartnerLogo;
 			if (File.Exists(filename)) {
 				listLabel1.Variables.Add("@PartnerLogo", Image.FromFile(filename));
 			} else {
 				listLabel1.Variables.Add("@PartnerLogo", "(NULL)");
 			}
+
 			listLabel1.Variables.Add("@FileName", Path.GetFileName(project.ProjectFileName));
+
 
 #if DEBUG
 			if (MessageBox.Show("Designer?", "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
