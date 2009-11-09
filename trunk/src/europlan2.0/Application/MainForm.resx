@@ -330,14 +330,26 @@
   <data name="editToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Bearbeiten</value>
   </data>
+  <data name="viewReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="viewReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ansehen</value>
+  </data>
+  <data name="projektToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="projektToolStripMenuItem.Text" xml:space="preserve">
+    <value>Projekt</value>
+  </data>
   <data name="licenseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="licenseToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Lizenz</value>
   </data>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Einstellungen</value>
@@ -1063,6 +1075,18 @@
   </data>
   <data name="&gt;&gt;openGlobalConfDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;projektToolStripMenuItem.Name" xml:space="preserve">
+    <value>projektToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;projektToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;viewReportToolStripMenuItem.Name" xml:space="preserve">
+    <value>viewReportToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;viewReportToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
