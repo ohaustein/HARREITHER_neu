@@ -686,5 +686,15 @@ namespace Europlan.Application {
 				}
 			}
 		}
+
+		private void viewReportToolStripMenuItem_Click(object sender, EventArgs e) {
+			//ProjectReportOptions optionsForm = new ProjectReportOptions();
+			//if (optionsForm.ShowDialog() == DialogResult.OK) {
+				ProjectReport reportForm = new ProjectReport(this.currentProject);
+				reportForm.ShowDialog();
+				reportForm.Dispose();
+			//}
+			//optionsForm.Dispose();
+		}
 	}
 }

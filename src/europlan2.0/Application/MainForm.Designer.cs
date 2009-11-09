@@ -67,6 +67,8 @@ namespace Europlan.Application {
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.openGlobalConfDialog = new System.Windows.Forms.OpenFileDialog();
+			this.projektToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.mainMenu.SuspendLayout();
@@ -103,6 +105,7 @@ namespace Europlan.Application {
 			this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
+            this.projektToolStripMenuItem,
             this.optionsToolStripMenuItem,
             this.helpToolStripMenuItem});
 			resources.ApplyResources(this.mainMenu, "mainMenu");
@@ -369,6 +372,19 @@ namespace Europlan.Application {
 			// 
 			resources.ApplyResources(this.openGlobalConfDialog, "openGlobalConfDialog");
 			// 
+			// projektToolStripMenuItem
+			// 
+			this.projektToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewReportToolStripMenuItem});
+			this.projektToolStripMenuItem.Name = "projektToolStripMenuItem";
+			resources.ApplyResources(this.projektToolStripMenuItem, "projektToolStripMenuItem");
+			// 
+			// viewReportToolStripMenuItem
+			// 
+			this.viewReportToolStripMenuItem.Name = "viewReportToolStripMenuItem";
+			resources.ApplyResources(this.viewReportToolStripMenuItem, "viewReportToolStripMenuItem");
+			this.viewReportToolStripMenuItem.Click += new System.EventHandler(this.viewReportToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -436,6 +452,8 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+		private System.Windows.Forms.ToolStripMenuItem projektToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem viewReportToolStripMenuItem;
 
 	}
 }
