@@ -166,6 +166,8 @@
     <Compile Include="Products\LenghtAssistantForm.Designer.cs">
       <DependentUpon>LenghtAssistantForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\Wrapper\ProjectWarningWrapper.cs" />
+    <Compile Include="Project\Wrapper\ProjektBilanzWrapper.cs" />
     <Compile Include="Project\SelectPlannedProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -259,7 +261,7 @@
     <Compile Include="Project\QuickDimensioningDistributorsGrid.Designer.cs">
       <DependentUpon>QuickDimensioningDistributorsGrid.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\QuickDimensioningDistributorsReportWrapper.cs" />
+    <Compile Include="Project\Wrapper\QuickDimensioningDistributorsReportWrapper.cs" />
     <Compile Include="Project\QuickDimensioningDistributorsSummary.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -281,8 +283,8 @@
     </Compile>
     <Compile Include="Project\QuickDimensioningProjectSummary.cs" />
     <Compile Include="Project\IQuickDimensioningSummary.cs" />
-    <Compile Include="Project\QuickDimensioningReportWrapper.cs" />
-    <Compile Include="Project\QuickDimensioningRoomDistributorsWrapper.cs" />
+    <Compile Include="Project\Wrapper\QuickDimensioningReportWrapper.cs" />
+    <Compile Include="Project\Wrapper\QuickDimensioningRoomDistributorsWrapper.cs" />
     <Compile Include="Project\RegulatorCircuit.cs" />
     <Compile Include="Project\RegulatorCircuitsSummaryPanel.cs">
       <SubType>UserControl</SubType>

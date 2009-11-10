@@ -414,5 +414,88 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+
+		public List<ProjektBilanzWrapper> GetProkjektBilanzReport() {
+			//TODO
+			List<ProjektBilanzWrapper> wrapperList = new List<ProjektBilanzWrapper>();
+
+			ProjektBilanzWrapper wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Normwärmebedarf";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gesamter bereinigter Wärmebedarf";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Heizleistung (nach innen)";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gesamte aufgenommene Leistung";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Wassermenge";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Maximaler Druckverlust (inkl. Verteiler)";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gesamt-Wasserinhalt (ab Verteiler)";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Raumfläche";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Fußbodenheizungsfläche";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Wandheizungsfläche";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Deckenkühlungsfläche";
+			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
+
+		public List<ProjectWarningWrapper> GetProjectWarningReport() {
+			//TODO
+			//foreach (Floor floor in this.floors) {
+			//    foreach (Room room in floor.Rooms) {
+			//        foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+						
+			//        }
+			//    }
+			//}
+			List<ProjectWarningWrapper> wrapperList = new List<ProjectWarningWrapper>();
+
+			ProjectWarningWrapper wrapper = new ProjectWarningWrapper();
+			wrapper.FloorId = "KG1";
+			wrapper.FloorName = "Keller";
+			wrapper.Warning = "WARNUNG FBH in K06....";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjectWarningWrapper();
+			wrapper.FloorId = "KG1";
+			wrapper.FloorName = "Keller";
+			wrapper.Warning = "WARNUNG FBH in K08....";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjectWarningWrapper();
+			wrapper.FloorId = "EG1";
+			wrapper.FloorName = "Erdgeschoß";
+			wrapper.Warning = "FEHLER WH in E02....";
+			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
 	}
 }

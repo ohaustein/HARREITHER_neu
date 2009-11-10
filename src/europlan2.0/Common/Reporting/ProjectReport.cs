@@ -63,21 +63,42 @@ namespace Europlan.Common {
 
 			DataSet reportData = new DataSet();
 
+			List<ProjektBilanzWrapper> projektBilanzWrapper = project.GetProkjektBilanzReport();
+			List<ProjectWarningWrapper> projectWarningWrapper = project.GetProjectWarningReport();
+
+			DataTable projektBilanz = ReportHelper.ListToDataTable<ProjektBilanzWrapper>(projektBilanzWrapper);
+			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
+
+			projektBilanz.TableName = "ProjektBilanz";
+			projectWarnings.TableName = "ProjectWarnings";
+
+			reportData.Tables.Add(projektBilanz);
+			reportData.Tables.Add(projectWarnings);
+
 			listLabel1.DataSource = reportData;
 
 			string projectName = "";
-			foreach (string line in Project.Instance.ProjectName) {
+			foreach (string line in project.ProjectName) {
 				projectName += line + "\n";
 			}
 			string comments = "";
-			foreach (string line in Project.Instance.ProjectNotes) {
+			foreach (string line in project.ProjectNotes) {
 				comments += line + "\n";
 			}
+			string contact = "";
+			foreach (string line in project.ProjectContact) {
+				contact += line + "\n";
+			}
 			projectName = projectName.TrimEnd();
-			listLabel1.Variables.Add("@ProjectNumber", Project.Instance.ProjectNumber.TrimEnd());
+			listLabel1.Variables.Add("@ProjectNumber", project.ProjectNumber.TrimEnd());
 			listLabel1.Variables.Add("@ProjectName", projectName);
-			listLabel1.Variables.Add("@ProjectEditor", Project.Instance.ProjectEditor);
+			listLabel1.Variables.Add("@ProjectContact", contact);
 			listLabel1.Variables.Add("@Comments", comments);
+			listLabel1.Variables.Add("@ProjectCreated", project.ProjectCreated);
+			listLabel1.Variables.Add("@ProjectLastChanged", project.ProjectLastChanged);
+			listLabel1.Variables.Add("@ProjectEditor", project.ProjectEditor);
+			
+
 			listLabel1.Variables.Add("@PartnerContact", Licensing.LicenseManager.Instance.License.Header.Replace("\r", ""));
 			listLabel1.Variables.Add("@ProgramVersion", project.EuroplanVersion);
 			string filename = Configuration.UserTemplate.PartnerLogo;
