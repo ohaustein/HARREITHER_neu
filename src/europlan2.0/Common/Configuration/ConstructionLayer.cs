@@ -8,7 +8,7 @@ namespace Europlan.Common {
 		private string name;
 		private float lambdaValue;
 		private float thickness;
-		private string materialId = "";
+		private string materialId = null;
 		private Material layerMaterial = null;
 
 		public override bool Equals(object obj) {
@@ -17,7 +17,7 @@ namespace Europlan.Common {
 				if ((this.name == layer.name) &&
 					(this.lambdaValue == layer.lambdaValue) &&
 					(this.thickness == layer.thickness) &&
-					(this.materialId == layer.materialId)) {
+					(this.MaterialId == layer.MaterialId)) {
 					return true;
 				}
 			}
@@ -62,32 +62,32 @@ namespace Europlan.Common {
 		}
 
 		public string MaterialId {
-			get { return this.materialId; }
+			get { return this.materialId != null ? this.materialId : (this.layerMaterial == null ? null : this.layerMaterial.Id); }
 			set {
 				this.materialId = value;
-				foreach (Material material in Configuration.UserTemplate.Materials) {
+				/*foreach (Material material in Configuration.UserTemplate.Materials) {
 					if (material.Id == this.materialId) {
 						this.layerMaterial = material;
 					}
-				}
+				}*/
 			}
 		}
 
 		[XmlIgnore]
 		public Material LayerMaterial {
 			get {
-				if (layerMaterial == null && this.materialId != "") {
+				if (this.materialId != null) {
 					foreach (Material material in Configuration.UserTemplate.Materials) {
 						if (material.Id == this.materialId) {
 							this.layerMaterial = material;
 						}
 					}
+					this.materialId = null;
 				}
 				return layerMaterial; 
 			}
 			set { 
 				layerMaterial = value;
-				this.materialId = layerMaterial.Id;
 			}
 		}
 	}

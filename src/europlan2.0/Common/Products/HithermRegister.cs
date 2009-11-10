@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	public class HithermRegister {
+		#region Enums
 		public class RegisterTypeEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string hit_50_10 = "HIT 50/10";
 			private static readonly string hit_100_10 = "HIT 100/10";
@@ -141,9 +142,113 @@ namespace Europlan.Common {
 			ORIENTATION_VERTIKAL
 		}
 
+		public class RohrabstandEnumConverter : System.ComponentModel.TypeConverter {
+			private static readonly string horizontal = "10cm (Standardreg.)";
+			private static readonly string vertikal = "5cm (Hochleistungsreg.)";
+
+			private Dictionary<string, RohrabstandEnum> mappingFromString = new Dictionary<string, RohrabstandEnum>();
+			private Dictionary<RohrabstandEnum, string> mappingToString = new Dictionary<RohrabstandEnum, string>();
+
+			public RohrabstandEnumConverter() {
+				mappingFromString.Add(horizontal, RohrabstandEnum.RC_STANDARD);
+				mappingFromString.Add(vertikal, RohrabstandEnum.RC_HOCHLEISTUNG);
+				mappingToString.Add(RohrabstandEnum.RC_STANDARD, horizontal);
+				mappingToString.Add(RohrabstandEnum.RC_HOCHLEISTUNG, vertikal);
+			}
+
+			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
+				return sourceType == typeof(string);
+			}
+
+			public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
+				return destinationType == typeof(string);
+			}
+
+			public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+				if (value is string) {
+					if (mappingFromString.ContainsKey((string)value)) {
+						return mappingFromString[(string)value];
+					}
+				}
+				return base.ConvertFrom(context, culture, value);
+			}
+
+			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+				if (value is RohrabstandEnum && destinationType == typeof(string)) {
+					if (mappingToString.ContainsKey((RohrabstandEnum)value)) {
+						return mappingToString[(RohrabstandEnum)value];
+					}
+				}
+				return base.ConvertTo(context, culture, value, destinationType);
+			}
+		}
+
+		[System.ComponentModel.TypeConverter(typeof(RohrabstandEnumConverter))]
+		public enum RohrabstandEnum {
+			RC_STANDARD,
+			RC_HOCHLEISTUNG
+		}
+		#endregion Enums
+
+		#region Static Methods
+		public static RohrabstandEnum GetRohrabstandForRegisterType(RegisterTypeEnum registerType) {
+			switch (registerType) {
+				case RegisterTypeEnum.HIT_50_10:
+				case RegisterTypeEnum.HIT_100_10:
+				case RegisterTypeEnum.HIT_150_10:
+				case RegisterTypeEnum.HIT_200_10:
+				case RegisterTypeEnum.HIT_250_10:
+				case RegisterTypeEnum.HIT_300_10:
+					return RohrabstandEnum.RC_STANDARD;
+
+				case RegisterTypeEnum.HIT_50_5:
+				case RegisterTypeEnum.HIT_100_5:
+				case RegisterTypeEnum.HIT_150_5:
+				case RegisterTypeEnum.HIT_200_5:
+				case RegisterTypeEnum.HIT_250_5:
+				case RegisterTypeEnum.HIT_300_5:
+					return RohrabstandEnum.RC_HOCHLEISTUNG;
+
+				default:
+					throw new Exception("Unknown Register Type");
+			}
+		}
+
+		public static int GetRegisterHoehe(RegisterTypeEnum registerType) {
+			switch (registerType) {
+				case RegisterTypeEnum.HIT_50_10:
+				case RegisterTypeEnum.HIT_50_5:
+					return 50;
+
+				case RegisterTypeEnum.HIT_100_10:
+				case RegisterTypeEnum.HIT_100_5:
+					return 100;
+
+				case RegisterTypeEnum.HIT_150_10:
+				case RegisterTypeEnum.HIT_150_5:
+					return 150;
+
+				case RegisterTypeEnum.HIT_200_10:
+				case RegisterTypeEnum.HIT_200_5:
+					return 200;
+
+				case RegisterTypeEnum.HIT_250_10:
+				case RegisterTypeEnum.HIT_250_5:
+					return 250;
+
+				case RegisterTypeEnum.HIT_300_10:
+				case RegisterTypeEnum.HIT_300_5:
+					return 300;
+
+				default:
+					throw new Exception("Unknown Register Type");
+			}
+		}
+		#endregion Static Methods
+
 		private RegisterTypeEnum registerType;
 		private RegisterOrientationEnum orientation;
-		private int rohre;
+		private int rohre = 1;
 
 		/*private Nullable<Point> origin = null;*/
 
@@ -161,7 +266,20 @@ namespace Europlan.Common {
 
 		public RegisterTypeEnum RegisterType {
 			get { return this.registerType; }
-			set { this.registerType = value; }
+			set {
+				int oldBreite = this.RegisterBreite;
+				this.registerType = value;
+				this.RegisterBreite = oldBreite;
+			}
+		}
+
+		[XmlIgnore]
+		public RohrabstandEnum Rohrabstand {
+			get { return GetRohrabstandForRegisterType(this.registerType); }
+		}
+
+		public int RegisterHoehe {
+			get { return GetRegisterHoehe(this.registerType); }
 		}
 
 		public RegisterOrientationEnum Orientation {
@@ -171,12 +289,44 @@ namespace Europlan.Common {
 
 		public int Rohre {
 			get { return this.rohre; }
-			set { this.rohre = value; }
+			set {
+				this.rohre = value;
+				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
+					if (this.rohre > 27) {
+						this.rohre = 27;
+					}
+				} else {
+					if (this.rohre > 30) {
+						this.rohre = 30;
+					}
+				}
+				if (this.rohre < 1) {
+					this.rohre = 1;
+				}
+			}
+		}
+
+		[XmlIgnore]
+		public int NrOfRegisters {
+			get { return (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG ? (int)Math.Ceiling(((float)this.rohre) / 9.0) : (int)Math.Ceiling(((float)this.rohre) / 5.0)); }
 		}
 
 		[XmlIgnore]
 		public int RegisterBreite {
-			get { return 0; /* TODO */ }
+			get {
+				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
+					return (this.Rohre * 10 / 9) * 5;
+				} else {
+					return this.Rohre * 10;
+				}
+			}
+			set {
+				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
+					this.Rohre = 9 * value / 50;
+				} else {
+					this.Rohre = value / 10;
+				}
+			}
 		}
 
 		/*public Nullable<Point> Origin {
@@ -187,24 +337,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double Area {
 			get {
-				//switch (this.modulType) {
-				//    case ModulTypeEnum.MODUL_100_40:
-				//        return KlimaFlaechenModul.module_100_40_area;
-
-				//    case ModulTypeEnum.MODUL_80_30:
-				//        return KlimaFlaechenModul.module_80_30_area;
-
-				//    case ModulTypeEnum.MODUL_100_30:
-				//        return KlimaFlaechenModul.module_100_30_area;
-
-				//    case ModulTypeEnum.MODUL_120_30:
-				//        return KlimaFlaechenModul.module_120_30_area;
-
-				//    default:
-				//        return 0;
-				//}
-				// TODO
-				return 0;
+				return ((double)this.RegisterBreite / 100.0) * ((double)this.RegisterHoehe / 100.0);
 			}
 		}
 

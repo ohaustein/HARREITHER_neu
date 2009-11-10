@@ -12,6 +12,8 @@ namespace Europlan.Common {
 		public static readonly string CT_USER_ESTRICH = "UserEstrich";
 		public static readonly string CT_STD_DAEMM = "StdDaemm";
 		public static readonly string CT_USER_DAEMM = "UserDaemm";
+		public static readonly string CT_STD_DECKE = "StdDecke";
+		public static readonly string CT_USER_DECKE = "UserDecke";
 
 		public static ConstructionTypeManager Instance {
 			get {
@@ -35,6 +37,10 @@ namespace Europlan.Common {
 			type = new ConstructionType(CT_STD_DAEMM, "Standard Wärmedämmkonstruktion", ConstructionScopeEnum.InsulationConstruction, false);
 			this.constructionTypes.Add(type.Id, type);
 			type = new ConstructionType(CT_USER_DAEMM, "Benutzer Wärmedämmkonstruktion", ConstructionScopeEnum.InsulationConstruction, true);
+			this.constructionTypes.Add(type.Id, type);
+			type = new ConstructionType(CT_STD_DECKE, "Standard Deckenkonstruktion", ConstructionScopeEnum.CeilingConstruction, false);
+			this.constructionTypes.Add(type.Id, type);
+			type = new ConstructionType(CT_USER_DECKE, "Benutzer Deckenkonstruktion", ConstructionScopeEnum.CeilingConstruction, true);
 			this.constructionTypes.Add(type.Id, type);
 		}
 

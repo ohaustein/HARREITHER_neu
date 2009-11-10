@@ -7,6 +7,7 @@ namespace Europlan.Common {
 
 	[XmlInclude(typeof(FloorConstruction))]
 	[XmlInclude(typeof(InsulationConstruction ))]
+	[XmlInclude(typeof(CeilingConstruction))]
 	public class Construction {
 		private string id;
 		private int version;

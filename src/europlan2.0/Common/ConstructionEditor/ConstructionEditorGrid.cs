@@ -93,19 +93,29 @@ namespace Europlan.Common {
 				selected += ", WD";
 				i++;
 			}
+			if (this.tsmiCeilingConstruction.Checked) {
+				selected += ", DK";
+				i++;
+			}
 			if (i == 0) {
 				selected = "keine";
 				this.Filter = ConstructionScopeEnum.UnknownConstruction;
-			} else if (i == 2) {
+			} else if (i == 3) {
 				selected = "alle";
 				this.Filter = ConstructionScopeEnum.All;
 			} else {
 				selected = selected.Substring(2);
+				ConstructionScopeEnum filter = ConstructionScopeEnum.UnknownConstruction;
 				if (this.tsmiFloorConstruction.Checked) {
-					this.Filter = ConstructionScopeEnum.FloorConstruction;
-				} else {
-					this.Filter = ConstructionScopeEnum.InsulationConstruction;
+					filter = filter | ConstructionScopeEnum.FloorConstruction;
 				}
+				if (this.tsmiInsulationConstruction.Checked) {
+					filter = filter | ConstructionScopeEnum.InsulationConstruction;
+				}
+				if (this.tsmiCeilingConstruction.Checked) {
+					filter = filter | ConstructionScopeEnum.CeilingConstruction;
+				}
+				this.Filter = filter;
 			}
 			this.btnView.Text = "Angezeigte Konstruktionen (" + selected + ")";
 		}
@@ -118,6 +128,9 @@ namespace Europlan.Common {
 			} else if (sender == this.tsmiNewInsulationConstruction) {
 				c = new InsulationConstruction();
 				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_DAEMM);
+			} else if (sender == this.tsmiNewCeilingConstruction) {
+				c = new CeilingConstruction();
+				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_DECKE);
 			}
 			if (c != null) {
 				ConstructionEditorForm form = new ConstructionEditorForm(c);
@@ -137,6 +150,9 @@ namespace Europlan.Common {
 			} else if (sender == this.tsmiNewInsulationConstructionAdmin) {
 				c = new InsulationConstruction();
 				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_DAEMM);
+			} else if (sender == this.tsmiNewCeilingConstructionAdmin) {
+				c = new CeilingConstruction();
+				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_DECKE);
 			}
 			if (c != null) {
 				ConstructionEditorForm form = new ConstructionEditorForm(c);

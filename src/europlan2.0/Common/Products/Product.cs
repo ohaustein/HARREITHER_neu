@@ -25,13 +25,9 @@ namespace Europlan.Common {
 			REST
 		}
 
-		protected int quickDimensioningHeatPowerPerSquareMeter = 0;
-		protected int quickDimensioningCoolPowerPerSquareMeter = 0;
 		protected int quickDimensioningCircuits = 0;
 		protected string quickDimensioningCircuitsAsString = null;
 		protected float quickDimensioningPlannedArea = 0;
-		protected bool canHeat = false;
-		protected bool canCool = false;
 		protected bool usedForQuickDimensioning = true;
 		protected Room associatedRoom = null;
 		protected SerializableDictionary<string, int> quickDimensioningConnectedDistributors = new SerializableDictionary<string, int>();
@@ -88,12 +84,8 @@ namespace Europlan.Common {
 		}
 
 		public Product(Product product) {
-			this.quickDimensioningHeatPowerPerSquareMeter = product.quickDimensioningHeatPowerPerSquareMeter;
-			this.quickDimensioningCoolPowerPerSquareMeter = product.quickDimensioningCoolPowerPerSquareMeter;
 			this.quickDimensioningCircuits = product.quickDimensioningCircuits;
 			this.quickDimensioningCircuitsAsString = product.quickDimensioningCircuitsAsString;
-			this.canHeat = product.canHeat;
-			this.canCool = product.canCool;
 			this.quickDimensioningPlannedArea = 0;
 			this.associatedRoom = null;
 			this.quickDimensioningConnectedDistributors = new SerializableDictionary<string, int>();
@@ -106,10 +98,26 @@ namespace Europlan.Common {
 		public abstract float GetDefaultQuickDimensioningPlannedArea();
 
 		#region Quick Dimensioning
+		public abstract bool QuickDimensioningCanHeat {
+			get;
+		}
+
+		public abstract bool QuickDimensioningCanCool {
+			get;
+		}
+
+		public abstract int QuickDimensioningHeatPowerPerSquareMeter {
+			get;
+		}
+
+		public abstract int QuickDimensioningCoolPowerPerSquareMeter {
+			get;
+		}
+
 		public int QuickDimensioningHeatPower {
 			get {
-				if (canHeat) {
-					return (int)(QuickDimensioningPlannedArea * quickDimensioningHeatPowerPerSquareMeter);
+				if (QuickDimensioningCanHeat) {
+					return (int)(QuickDimensioningPlannedArea * QuickDimensioningHeatPowerPerSquareMeter);
 				}
 				return 0; 
 			}
@@ -117,22 +125,22 @@ namespace Europlan.Common {
 		
 		public int QuickDimensioningCoolPower {
 			get {
-				if (canCool) {
-					return (int)(QuickDimensioningPlannedArea * quickDimensioningCoolPowerPerSquareMeter);
+				if (QuickDimensioningCanCool) {
+					return (int)(QuickDimensioningPlannedArea * QuickDimensioningCoolPowerPerSquareMeter);
 				}
 				return 0; 
 			}
 		}
 
-		public int QuickDimensioningHeatPowerPerSquareMeter {
-			get { return quickDimensioningHeatPowerPerSquareMeter; }
-			set { quickDimensioningHeatPowerPerSquareMeter = value; }
-		}
+		//public int QuickDimensioningHeatPowerPerSquareMeter {
+		//    get { return quickDimensioningHeatPowerPerSquareMeter; }
+		//    set { quickDimensioningHeatPowerPerSquareMeter = value; }
+		//}
 
-		public int QuickDimensioningCoolPowerPerSquareMeter {
-			get { return quickDimensioningCoolPowerPerSquareMeter; }
-			set { quickDimensioningCoolPowerPerSquareMeter = value; }
-		}
+		//public int QuickDimensioningCoolPowerPerSquareMeter {
+		//    get { return quickDimensioningCoolPowerPerSquareMeter; }
+		//    set { quickDimensioningCoolPowerPerSquareMeter = value; }
+		//}
 
 		public float QuickDimensioningPlannedArea {
 			get {
@@ -173,15 +181,15 @@ namespace Europlan.Common {
 			}
 		}
 
-		public bool CanHeat {
-			get { return canHeat; }
-			set { canHeat = value; }
-		}
+		//public bool CanHeat {
+		//    get { return canHeat; }
+		//    set { canHeat = value; }
+		//}
 
-		public bool CanCool {
-			get { return canCool; }
-			set { canCool = value; }
-		}
+		//public bool CanCool {
+		//    get { return canCool; }
+		//    set { canCool = value; }
+		//}
 
 		public bool UsedForQuickDimensioning {
 			get { return usedForQuickDimensioning; }
@@ -254,6 +262,22 @@ namespace Europlan.Common {
 			}
 		}
 
+		public float AvailableCeilingArea {
+			get {
+				Room room = this.AssociatedRoom;
+				float area = room.Area;
+				foreach (PlannedProduct product in room.PlannedProducts) {
+					if (product.Product != this) {
+						area -= product.Product.PlannedCeilingArea;
+					}
+				}
+				if (area < 0) {
+					area = 0;
+				}
+				return area;
+			}
+		}
+
 		public abstract float PlannedNetArea {
 			get;
 		}
@@ -263,7 +287,7 @@ namespace Europlan.Common {
 			set;
 		}
 
-		public abstract float PlannedRoofArea {
+		public abstract float PlannedCeilingArea {
 			get;
 			set;
 		}
@@ -274,7 +298,7 @@ namespace Europlan.Common {
 		}
 
 		public float TotalPlannedArea {
-			get { return this.PlannedFloorArea + this.PlannedRoofArea + this.PlannedWallArea; }
+			get { return this.PlannedFloorArea + this.PlannedCeilingArea + this.PlannedWallArea; }
 		}
 
 		public abstract double PlannedHeatLoad {

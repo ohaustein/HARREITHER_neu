@@ -55,6 +55,7 @@ namespace Europlan.Common {
 			this.dgvModules.Name = "dgvModules";
 			this.dgvModules.Size = new System.Drawing.Size(299, 343);
 			this.dgvModules.TabIndex = 0;
+			this.dgvModules.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModules_CellValueChanged);
 			// 
 			// btnAdd
 			// 

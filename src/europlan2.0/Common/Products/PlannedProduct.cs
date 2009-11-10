@@ -114,7 +114,7 @@ namespace Europlan.Common {
 				if (plannedProduct == null) {
 					return null;
 				} else {
-					return plannedProduct.PlannedFloorArea;
+					return plannedProduct.PlannedFloorArea + plannedProduct.PlannedCeilingArea + plannedProduct.PlannedWallArea;
 				}
 			}
 		}
@@ -401,6 +401,8 @@ namespace Europlan.Common {
 			get {
 				if (this.plannedProduct is EurovalProduct) {
 					return typeof(PlannedEurovalProductPanel);
+				} else if (this.plannedProduct is ModulKlimaDeckeProduct) {
+					return typeof(PlannedModulKlimaDeckeProductPanel);
 				} else if (this.plannedProduct is ModulKlimaBodenProduct) {
 					return typeof(PlannedModulKlimaBodenProductPanel);
 				}

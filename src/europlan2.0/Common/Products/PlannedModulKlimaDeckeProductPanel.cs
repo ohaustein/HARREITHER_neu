@@ -7,10 +7,10 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace Europlan.Common {
-	public partial class PlannedModulKlimaBodenProductPanel : UserControl, IEditorUserControl {
+	public partial class PlannedModulKlimaDeckeProductPanel : UserControl, IEditorUserControl {
 		private PlannedProduct product = null;
 
-		public PlannedModulKlimaBodenProductPanel() {
+		public PlannedModulKlimaDeckeProductPanel() {
 			InitializeComponent();
 		}
 
@@ -32,10 +32,12 @@ namespace Europlan.Common {
 			ROOM_TEMERATURE_BELOW_HEAT = 256,
 			ROOM_TEMERATURE_BELOW_COOL = 512,
 			MODULES = 1024,
+			LENGTH_VERBINDUNGEN = 2048,
 			//LAY_DISTANCE = 4096,
 			//RIM_TYPE = 8192,
 			//CALCULATION_TYPE = 16384,
-			CIRCUITS = 32768
+			CIRCUITS = 32768,
+			ROWS = 65536
 		}
 
 
@@ -46,7 +48,7 @@ namespace Europlan.Common {
 			this.tabs.SelectedTab = this.pageInput;
 			this.connectionPipePanel.Update(this.product);
 			if (this.product != null) {
-				(this.product.Product as ModulKlimaBodenProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errorMsg);
+				(this.product.Product as ModulKlimaDeckeProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errorMsg);
 			}
 			this.UpdateControl(FieldEnum.NONE);
 		}
@@ -64,6 +66,8 @@ namespace Europlan.Common {
 		private int ignoreRoomTemperatureBelowHeat = 0;
 		private int ignoreRoomTemperatureBelowCool = 0;
 		private int ignoreCircuits = 0;
+		private int ignoreRows = 0;
+		private int ignoreModules = 0;
 		private int ignoreLengthVerbindungen = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
@@ -81,9 +85,11 @@ namespace Europlan.Common {
 				ignoreRoomTemperatureBelowHeat++;
 				ignoreRoomTemperatureBelowCool++;
 				ignoreCircuits++;
+				ignoreRows++;
+				ignoreModules++;
 				ignoreLengthVerbindungen++;
 
-				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
+				ModulKlimaDeckeProduct mdProduct = this.product.Product as ModulKlimaDeckeProduct;
 
 				bool showHeat = this.product.RequestedHeatLoad > 0;
 				bool showCool = this.product.RequestedCoolLoad > 0;
@@ -104,8 +110,8 @@ namespace Europlan.Common {
 				lblDurchflussHeatUnit.Visible = showHeat;
 				lblDruckverlustHeat.Visible = showHeat;
 				lblDruckverlustHeatUnit.Visible = showHeat;
-				lblTempHeat.Visible = showHeat;
-				lblTempHeatUnit.Visible = showHeat;
+				//lblTempHeat.Visible = showHeat;
+				//lblTempHeatUnit.Visible = showHeat;
 				lblQCool.Visible = showCool;
 				lblQCoolUnit.Visible = showCool;
 				lblQAnbCool.Visible = showCool;
@@ -120,8 +126,8 @@ namespace Europlan.Common {
 				lblDurchflussCoolUnit.Visible = showCool;
 				lblDruckverlustCool.Visible = showCool;
 				lblDruckverlustCoolUnit.Visible = showCool;
-				lblTempCool.Visible = showCool;
-				lblTempCoolUnit.Visible = showCool;
+				//lblTempCool.Visible = showCool;
+				//lblTempCoolUnit.Visible = showCool;
 
 			//    this.lblQSollHeat.Visible = showHeat;
 			//    this.lblQkSollHeat.Visible = showHeat;
@@ -180,11 +186,13 @@ namespace Europlan.Common {
 			//    this.cmbRimType.Enabled = this.cmbRimType.Enabled && !evProduct.PlannedProductIsConnection;
 			//    this.cmbCircuits.Enabled = !evProduct.PlannedProductIsConnection;
 
-			    this.numArea.MaxValue = (decimal)mbProduct.AvailableFloorArea;
-			//    this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
-			    this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
-			    this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
-			    if (this.product.NecessaryHeatLoad > 0) {
+				this.numArea.MaxValue = (decimal)mdProduct.AvailableCeilingArea;
+				this.numAreaPercentage.MaxValue = (decimal)(mdProduct.AvailableCeilingArea * 100 / mdProduct.AssociatedRoom.Area);
+				//this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
+				this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
+				this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
+				this.numHeatLoadPercentage.MaxValue = (decimal)(this.product.NecessaryHeatLoad * 100 / mdProduct.AssociatedRoom.NormalizedHeatLoad);
+				if (this.product.NecessaryHeatLoad > 0) {
 			        this.chkCoverHeatLoad.Enabled = true;
 			        if ((skipFields & (FieldEnum.HEAT_LOAD | FieldEnum.HEAT_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
 			            if (this.product.CoverHeatLoad) {
@@ -201,8 +209,8 @@ namespace Europlan.Common {
 			            this.numHeatLoad.Value = Math.Round((decimal)this.product.RequestedHeatLoad, 2);
 			        }
 			        if ((skipFields & FieldEnum.HEAT_LOAD_PERCENTAGE) == FieldEnum.NONE) {
-			            this.numHeatLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedHeatLoad * 100 / this.product.NecessaryHeatLoad), 2);
-			        }
+						this.numHeatLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedHeatLoadPercentage), 2);
+					}
 			    } else {
 					this.numHeatLoad.Enabled = false;
 					this.numHeatLoad.Text = "";
@@ -229,7 +237,7 @@ namespace Europlan.Common {
 						this.numCoolLoad.Value = Math.Round((decimal)this.product.RequestedCoolLoad, 2);
 					}
 					if ((skipFields & FieldEnum.COOL_LOAD_PERCENTAGE) == FieldEnum.NONE) {
-						this.numCoolLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedCoolLoad * 100 / this.product.NecessaryCoolLoad), 2);
+						this.numCoolLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedCoolLoadPercentage), 2);
 					}
 				} else {
 					this.numCoolLoad.Enabled = false;
@@ -246,22 +254,22 @@ namespace Europlan.Common {
 					this.numArea.Value = Math.Round((decimal)plannedArea, 2);
 				}
 				if ((skipFields & FieldEnum.AREA_PERCENTAGE) == FieldEnum.NONE) {
-					if (mbProduct.AvailableFloorArea <= 0) {
+					if (mdProduct.AvailableCeilingArea <= 0) {
 						this.numAreaPercentage.Value = 100;
 					} else {
-						this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / mbProduct.AvailableFloorArea), 2);
+						this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / mdProduct.AvailableCeilingArea), 2);
 					}
 				}
 				if ((skipFields & FieldEnum.AREA_UNHEATED) == FieldEnum.NONE) {
-					this.numAreaUnheated.Value = Math.Round((decimal)mbProduct.PlannedAreaUnheated, 2);
+					this.numAreaUnheated.Value = Math.Round((decimal)mdProduct.PlannedAreaUnheated, 2);
 				}
-				this.txtFloorConstruction.Text = (mbProduct.PlannedFloorConstruction == null ? "" : mbProduct.PlannedFloorConstruction.Id + ": " + mbProduct.PlannedFloorConstruction.Name);
-				this.txtInsulationConstruction.Text = (mbProduct.PlannedInsulationConstruction == null ? "" : mbProduct.PlannedInsulationConstruction.Id + ": " + mbProduct.PlannedInsulationConstruction.Name);
+				this.txtFloorConstruction.Text = (mdProduct.PlannedCeilingConstruction == null ? "" : mdProduct.PlannedCeilingConstruction.Id + ": " + mdProduct.PlannedCeilingConstruction.Name);
+				this.txtInsulationConstruction.Text = (mdProduct.PlannedInsulationConstruction == null ? "" : mdProduct.PlannedInsulationConstruction.Id + ": " + mdProduct.PlannedInsulationConstruction.Name);
 				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
-					this.numRoomTemperatureBelowHeat.Value = Math.Round((decimal)mbProduct.PlannedRoomTemperatureBelowHeat, 2);
+					this.numRoomTemperatureBelowHeat.Value = Math.Round((decimal)mdProduct.PlannedRoomTemperatureBelowHeat, 2);
 				}
 				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_COOL) == FieldEnum.NONE) {
-					this.numRoomTemperatureBelowCool.Value = Math.Round((decimal)mbProduct.PlannedRoomTemperatureBelowCool, 2);
+					this.numRoomTemperatureBelowCool.Value = Math.Round((decimal)mdProduct.PlannedRoomTemperatureBelowCool, 2);
 				}
 			//    if ((skipFields & FieldEnum.RIM_LENGTH) == FieldEnum.NONE) {
 			//        this.numRim.Value = Math.Round((decimal)evProduct.PlannedRimLength, 2);
@@ -278,7 +286,7 @@ namespace Europlan.Common {
 			//    }
 			    if ((skipFields & FieldEnum.CIRCUITS) == FieldEnum.NONE) {
 					if (this.product.Product.PlannedCircuits.Count == 0) {
-						this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
+						this.product.Product.PlannedCircuits.Add(new ModulDeckeCircuit());
 					}
 			        this.lstCircuits.Items.Clear();
 					int count = 1;
@@ -291,6 +299,33 @@ namespace Europlan.Common {
 					btnAddHk.Enabled = lstCircuits.Items.Count < 12;
 					btnRemoveHk.Enabled = lstCircuits.Items.Count > 1;
 			    }
+				if ((skipFields & FieldEnum.ROWS) == FieldEnum.NONE) {
+					this.lstRows.Items.Clear();
+					if (lstCircuits.SelectedIndex >= 0) {
+						int count = 1;
+						ModulDeckeCircuit circuit = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit);
+						if (circuit.Rows.Count == 0) {
+							circuit.Rows.Add(new KlimaFlaechenList());
+						}
+						foreach (KlimaFlaechenList row in circuit.Rows) {
+						    lstRows.Items.Add("Reihe " + count++);
+						}
+						if (lstRows.Items.Count > 0) {
+							lstRows.SelectedIndex = 0;
+						}
+					}
+					//btnAddRow.Enabled = lstCircuits.SelectedIndex >= 0 && lstRows.Items.Count < ModulKlimaDeckeProduct.ConfigMaxModulesInParallel;
+					btnRemoveRow.Enabled = lstRows.Items.Count > 1;
+					numLength.Enabled = lstRows.SelectedIndex >= 0;
+				}
+				if ((skipFields & FieldEnum.MODULES) == FieldEnum.NONE) {
+					dgvModules.Row = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).Rows[lstRows.SelectedIndex].List;
+					numLength.Enabled = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).Rows[lstRows.SelectedIndex].List.Count > 0;
+				}
+				if ((skipFields & FieldEnum.LENGTH_VERBINDUNGEN) == FieldEnum.NONE) {
+					this.numLength.Value = (decimal)(this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).Rows[lstRows.SelectedIndex].LengthVerbindeleitungen;
+				}
+
 
 			//    if ((skipFields & FieldEnum.CALCULATION_TYPE) == FieldEnum.NONE) {
 			//        this.rbCalculateHeat.Checked = this.product.CalculateHeat && !this.product.CalculateCool;
@@ -312,21 +347,21 @@ namespace Europlan.Common {
 				lblQAnbHeat.Text = Math.Round(this.product.Product.PlannedHeatLoadAnbindung, 0).ToString();
 				lblQHeatDiff.Text = Math.Round(qDiffHeat, 2).ToString();
 				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString();
-				lblAvgqHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QHeatPerSqm, 2).ToString();
-				lblDurchflussHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DurchflussHeat, 2).ToString();
-				lblDruckverlustHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustHeat, 2).ToString();
-				lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_FloorTempHeat, 2).ToString();
+				lblAvgqHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_QHeatPerSqm, 2).ToString();
+				lblDurchflussHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DurchflussHeat, 2).ToString();
+				lblDruckverlustHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DruckverlustHeat, 2).ToString();
+				//lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempHeat, 2).ToString();
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
 				lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
 				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
 				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString();
-				lblAvgqCool.Text = (-1.0 * Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QCoolPerSqm, 2)).ToString();
-				lblDurchflussCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DurchflussCool, 2).ToString();
-				lblDruckverlustCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustCool, 2).ToString();
-				lblTempCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_FloorTempCool, 2).ToString();
+				lblAvgqCool.Text = (-1.0 * Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_QCoolPerSqm, 2)).ToString();
+				lblDurchflussCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DurchflussCool, 2).ToString();
+				lblDruckverlustCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DruckverlustCool, 2).ToString();
+				//lblTempCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempCool, 2).ToString();
 				double availableArea = Math.Round(this.product.Product.PlannedNetArea, 2);
-				double coveredArea = Math.Round((this.product.Product as ModulKlimaBodenProduct).CoveredFloorArea, 2);
-				double anbArea = Math.Round((this.product.Product as ModulKlimaBodenProduct).PlannedRemoveArea, 2);
+				double coveredArea = Math.Round((this.product.Product as ModulKlimaDeckeProduct).CoveredCeilingArea, 2);
+				double anbArea = Math.Round((this.product.Product as ModulKlimaDeckeProduct).PlannedRemoveArea, 2);
 				lblAvailableArea.Text = availableArea.ToString();
 				lblCoveredArea.Text = coveredArea.ToString();
 				lblAnbArea.Text = anbArea.ToString();
@@ -432,10 +467,10 @@ namespace Europlan.Common {
 			//    this.lblSpreizungHeat.Text = Math.Round(evProduct.PlannedSpreizungHeat, 1).ToString();
 			//    this.lblSpreizungCool.Text = Math.Round(evProduct.PlannedSpreizungCool, 1).ToString();
 
-				if (mbProduct.PlannedConnection == null) {
+				if (mdProduct.PlannedConnection == null) {
 					this.txtDistributor.Text = "";
 				} else {
-					this.txtDistributor.Text = mbProduct.PlannedConnection.ToString();
+					this.txtDistributor.Text = mdProduct.PlannedConnection.ToString();
 				}
 
 			//    if (this.errorMsg != null) {
@@ -465,6 +500,8 @@ namespace Europlan.Common {
 				ignoreRoomTemperatureBelowHeat--;
 				ignoreRoomTemperatureBelowCool--;
 				ignoreCircuits--;
+				ignoreRows--;
+				ignoreModules--;
 				ignoreLengthVerbindungen--;
 			}
 			// TODO
@@ -583,7 +620,7 @@ namespace Europlan.Common {
 		private void numAreaPercentage_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaPercentage == 0) {
 				ignoreArea++;
-				(this.product.Product as ModulKlimaBodenProduct).PlannedFloorAreaPercentage = (float)this.numAreaPercentage.Value;
+				(this.product.Product as ModulKlimaDeckeProduct).PlannedCeilingAreaPercentage = (float)this.numAreaPercentage.Value;
 				this.numArea.Value = (decimal)this.product.PlannedArea;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.AREA_PERCENTAGE);
@@ -597,8 +634,8 @@ namespace Europlan.Common {
 		private void numArea_ValueChanged(object sender, EventArgs e) {
 			if (ignoreArea == 0) {
 				ignoreAreaPercentage++;
-				(this.product.Product as ModulKlimaBodenProduct).PlannedFloorArea = (float)this.numArea.Value;
-				this.numAreaPercentage.Value = (decimal)(this.product.Product as ModulKlimaBodenProduct).PlannedFloorAreaPercentage;
+				(this.product.Product as ModulKlimaDeckeProduct).PlannedCeilingArea = (float)this.numArea.Value;
+				this.numAreaPercentage.Value = (decimal)(this.product.Product as ModulKlimaDeckeProduct).PlannedCeilingAreaPercentage;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.AREA);
 				if (this.ProjectChanged != null) {
@@ -611,8 +648,8 @@ namespace Europlan.Common {
 		private void numAreaUnheated_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaUnheated == 0) {
 				ignoreAreaReduced++;
-				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
-				mbProduct.PlannedAreaUnheated = (float)this.numAreaUnheated.Value;
+				ModulKlimaDeckeProduct mdProduct = this.product.Product as ModulKlimaDeckeProduct;
+				mdProduct.PlannedAreaUnheated = (float)this.numAreaUnheated.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.AREA_UNHEATED);
 				if (this.ProjectChanged != null) {
@@ -623,11 +660,11 @@ namespace Europlan.Common {
 		}
 
 		private void btnFloorConstruction_Click(object sender, EventArgs e) {
-			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.FloorConstruction);
-			form.SelectedConstruction = (this.product.Product as ModulKlimaBodenProduct).PlannedFloorConstruction;
+			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.CeilingConstruction);
+			form.SelectedConstruction = (this.product.Product as ModulKlimaDeckeProduct).PlannedCeilingConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
-					(this.product.Product as ModulKlimaBodenProduct).PlannedFloorConstruction = form.SelectedConstruction;
+					(this.product.Product as ModulKlimaDeckeProduct).PlannedCeilingConstruction = form.SelectedConstruction;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 					this.UpdateControl(FieldEnum.NONE);
 				}
@@ -640,10 +677,10 @@ namespace Europlan.Common {
 
 		private void btnInsulationConstruction_Click(object sender, EventArgs e) {
 			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.InsulationConstruction);
-			form.SelectedConstruction = (this.product.Product as ModulKlimaBodenProduct).PlannedInsulationConstruction;
+			form.SelectedConstruction = (this.product.Product as ModulKlimaDeckeProduct).PlannedInsulationConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
-					(this.product.Product as ModulKlimaBodenProduct).PlannedInsulationConstruction = form.SelectedConstruction;
+					(this.product.Product as ModulKlimaDeckeProduct).PlannedInsulationConstruction = form.SelectedConstruction;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 					this.UpdateControl(FieldEnum.NONE);
 				}
@@ -656,7 +693,7 @@ namespace Europlan.Common {
 
 		private void numRoomTemperatureBelowHeat_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRoomTemperatureBelowHeat == 0) {
-				(this.product.Product as ModulKlimaBodenProduct).PlannedRoomTemperatureBelowHeat = (float)this.numRoomTemperatureBelowHeat.Value;
+				(this.product.Product as ModulKlimaDeckeProduct).PlannedRoomTemperatureBelowHeat = (float)this.numRoomTemperatureBelowHeat.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_HEAT);
 				if (this.ProjectChanged != null) {
@@ -667,7 +704,7 @@ namespace Europlan.Common {
 
 		private void numRoomTemperatureBelowCool_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRoomTemperatureBelowCool == 0) {
-				(this.product.Product as ModulKlimaBodenProduct).PlannedRoomTemperatureBelowCool = (float)this.numRoomTemperatureBelowCool.Value;
+				(this.product.Product as ModulKlimaDeckeProduct).PlannedRoomTemperatureBelowCool = (float)this.numRoomTemperatureBelowCool.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_COOL);
 				if (this.ProjectChanged != null) {
@@ -702,7 +739,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnAddHk_Click(object sender, EventArgs e) {
-			this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
+			this.product.Product.PlannedCircuits.Add(new ModulDeckeCircuit());
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 			this.UpdateControl(FieldEnum.NONE);
 			lstCircuits.SelectedIndex = lstCircuits.Items.Count - 1;
@@ -728,6 +765,56 @@ namespace Europlan.Common {
 				this.UpdateControl(FieldEnum.CIRCUITS);
 			}
 
+		}
+
+		private void btnAddRow_Click(object sender, EventArgs e) {
+			ModulDeckeCircuit circuit = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit);
+			circuit.Rows.Add(new KlimaFlaechenList());
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+			this.UpdateControl(FieldEnum.CIRCUITS);
+			lstRows.SelectedIndex = lstRows.Items.Count - 1;
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
+		private void btnRemoveRow_Click(object sender, EventArgs e) {
+			if (lstRows.Items.Count > 1 && lstRows.SelectedIndex >= 0) {
+				ModulDeckeCircuit circuit = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit);
+				circuit.Rows.RemoveAt(lstRows.SelectedIndex);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.CIRCUITS);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}
+
+		private void lstRows_SelectedIndexChanged(object sender, EventArgs e) {
+			if (ignoreRows == 0) {
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS);
+			}
+		}
+
+		private void dgvModules_GridContentChanged(object sender) {
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+			this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS | FieldEnum.MODULES);
+			numLength.Enabled = (this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).Rows[lstRows.SelectedIndex].List.Count > 0;
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
+		private void numLength_ValueChanged(object sender, EventArgs e) {
+			if (ignoreLengthVerbindungen == 0) {
+				(this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).Rows[lstRows.SelectedIndex].LengthVerbindeleitungen = (double)this.numLength.Value;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.ROWS | FieldEnum.MODULES | FieldEnum.LENGTH_VERBINDUNGEN);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
 		}
 
 		private void btnConnectionPipes_Click(object sender, EventArgs e) {

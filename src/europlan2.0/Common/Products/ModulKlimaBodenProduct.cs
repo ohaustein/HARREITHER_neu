@@ -9,6 +9,13 @@ namespace Europlan.Common {
 	[ProductName("Modul Klima-Boden")]
 	public class ModulKlimaBodenProduct : Product {
 
+		// quick dimensioning
+		private static int quickDimensioningHeatPowerPerSquareMeter = 50;
+		private static int quickDimensioningCoolPowerPerSquareMeter = 50;
+		private static bool canHeat = true;
+		private static bool canCool = false;
+
+		// planning
 		private static double lambdaE = 60.0;
 		private static double su = 0.002; /* Estrichüberdeckung bzw. Überdeckung Lastausgleich */
 		private static double alpha0 = 10.8; /* Fixwert für FBH fix??? */
@@ -44,13 +51,13 @@ namespace Europlan.Common {
 		}
 
 		public override void Initialize() {
+		}
+
+		public override void StaticInitialize() {
 			quickDimensioningHeatPowerPerSquareMeter = 50;
 			quickDimensioningCoolPowerPerSquareMeter = 50;
 			canHeat = true;
 			canCool = false;
-		}
-
-		public override void StaticInitialize() {
 			useHarreitherNorm = true;
 			maxPressureLost = 15000;
 			maxDurchfluss = 240;
@@ -64,6 +71,44 @@ namespace Europlan.Common {
 			product.AssociatedRoom = room;
 			return product;
 		}
+
+		#region Product Parameters
+		[ProductParameter]
+		public static bool ConfigQuickDimensioningCanHeat {
+			get { return canHeat; }
+			set { canHeat = value; }
+		}
+		public override bool QuickDimensioningCanHeat {
+			get { return canCool; }
+		}
+
+		[ProductParameter]
+		public static bool ConfigQuickDimensioningCanCool {
+			get { return canCool; }
+			set { canCool = value; }
+		}
+		public override bool QuickDimensioningCanCool {
+			get { return canCool; }
+		}
+
+		[ProductParameter]
+		public static int ConfigQuickDimensioningHeatPowerPerSquareMeter {
+			get { return quickDimensioningHeatPowerPerSquareMeter; }
+			set { quickDimensioningHeatPowerPerSquareMeter = value; }
+		}
+		public override int QuickDimensioningHeatPowerPerSquareMeter {
+			get { return quickDimensioningHeatPowerPerSquareMeter; }
+		}
+
+		[ProductParameter]
+		public static int ConfigQuickDimensioningCoolPowerPerSquareMeter {
+			get { return quickDimensioningCoolPowerPerSquareMeter; }
+			set { quickDimensioningCoolPowerPerSquareMeter = value; }
+		}
+		public override int QuickDimensioningCoolPowerPerSquareMeter {
+			get { return quickDimensioningCoolPowerPerSquareMeter; }
+		}
+		#endregion Product Parameters
 
 		public override int GetDefaultQuickDimensioningCircuits() {
 			return (int)Math.Ceiling(quickDimensioningPlannedArea / 18);
@@ -155,79 +200,81 @@ namespace Europlan.Common {
 			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal);
 
 			int i = 0;
-			foreach (ModulBodenCircuit mc in this.circuits) {
-				mc.NrOfCircuit = i;
-				mc.ModulKlimaBodenProduct = this;
-				mc.PipeLengthVorlaufTotal = vorlaufTotal[i];
-				mc.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
-				mc.PipeLengthRuecklaufTotal = ruecklaufTotal[i];
-				mc.PipeLengthRuecklaufNotIsolated = ruecklaufNotIsolated[i];
-				mc.PipeLengthVorlaufWithoutOtherProductTotal = vorlaufWithoutOtherProductTotal[i];
-				mc.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
-				mc.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
-				mc.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
-				mc.Calculate();
-				i++;
-			}
+			//foreach (ModulBodenCircuit mc in this.circuits) {
+			//    mc.NrOfCircuit = i;
+			//    mc.ModulKlimaBodenProduct = this;
+			//    mc.PipeLengthVorlaufTotal = vorlaufTotal[i];
+			//    mc.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
+			//    mc.PipeLengthRuecklaufTotal = ruecklaufTotal[i];
+			//    mc.PipeLengthRuecklaufNotIsolated = ruecklaufNotIsolated[i];
+			//    mc.PipeLengthVorlaufWithoutOtherProductTotal = vorlaufWithoutOtherProductTotal[i];
+			//    mc.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
+			//    mc.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
+			//    mc.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
+			//    mc.Calculate();
+			//    i++;
+			//}
 
-			errorMsg = "";
-			foreach (ModulBodenCircuit c in this.circuits) {
-				if (c.Rows.Count > ModulKlimaBodenProduct.ConfigMaxModulesInParallel) {
-					//errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 6 parallele Modulreihen\n";
-					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele parallele Modulreihen (" + c.Rows.Count.ToString() + " > " + ModulKlimaBodenProduct.ConfigMaxModulesInParallel.ToString() + ")\n";
-				}
-			}
-			foreach (ModulBodenCircuit c in this.circuits) {
-				int maxModuleCount = 0;
-				foreach (KlimaFlaechenList row in c.Rows) {
-					if (row.List.Count > maxModuleCount) {
-						maxModuleCount = row.List.Count;
-					}
-				}
-				if (maxModuleCount > ModulKlimaBodenProduct.ConfigMaxModulesInRow) {
-					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module in Serien (" + maxModuleCount + " > " + ModulKlimaBodenProduct.ConfigMaxModulesInRow.ToString() + ")\n";
-				}
-			}
-			foreach (ModulBodenCircuit c in this.circuits) {
-				int moduleCount = 0;
-				foreach (KlimaFlaechenList row in c.Rows) {
-					moduleCount += row.List.Count;
-				}
-				if (moduleCount > ModulKlimaBodenProduct.ConfigModulesInCircuit) {
-					//errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 50 Module\n";
-					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module (" + moduleCount + " > " + ModulKlimaBodenProduct.ConfigModulesInCircuit.ToString() + ")\n";
-				}
-			}
-			double maxTemp = double.MinValue;
-			foreach (ModulBodenCircuit c in this.circuits) {
-				if (c.C_FloorTempHeat > maxTemp) {
-					maxTemp = c.C_FloorTempHeat;
-				}
-			}
-			if (Math.Round(maxTemp, 1) > (ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264)) {
-				errorMsg += "Oberflächentemperatur zu groß (" + Math.Round(maxTemp, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1) + "°C)\n";
-			}
-			if (this.PlannedMhHeat >= this.PlannedMhCool) {
-				if (Math.Round(this.PlannedMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
-					errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
-				}
-			} else {
-				if (Math.Round(this.PlannedMhCool, 1) > ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
-					errorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
-				}
-			}
-			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
-				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
-					errorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
-				}
-			} else {
-				if (Math.Round(this.PlannedDeltaRhoCool, 2) > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
-					errorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
-				}
-			}
-			if (errorMsg.Length == 0) {
-				errorMsg = null;
-			}
+			//errorMsg = "";
+			//foreach (ModulBodenCircuit c in this.circuits) {
+			//    if (c.Rows.Count > ModulKlimaBodenProduct.ConfigMaxModulesInParallel) {
+			//        //errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 6 parallele Modulreihen\n";
+			//        errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele parallele Modulreihen (" + c.Rows.Count.ToString() + " > " + ModulKlimaBodenProduct.ConfigMaxModulesInParallel.ToString() + ")\n";
+			//    }
+			//}
+			//foreach (ModulBodenCircuit c in this.circuits) {
+			//    int maxModuleCount = 0;
+			//    foreach (KlimaFlaechenList row in c.Rows) {
+			//        if (row.List.Count > maxModuleCount) {
+			//            maxModuleCount = row.List.Count;
+			//        }
+			//    }
+			//    if (maxModuleCount > ModulKlimaBodenProduct.ConfigMaxModulesInRow) {
+			//        errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module in Serien (" + maxModuleCount + " > " + ModulKlimaBodenProduct.ConfigMaxModulesInRow.ToString() + ")\n";
+			//    }
+			//}
+			//foreach (ModulBodenCircuit c in this.circuits) {
+			//    int moduleCount = 0;
+			//    foreach (KlimaFlaechenList row in c.Rows) {
+			//        moduleCount += row.List.Count;
+			//    }
+			//    if (moduleCount > ModulKlimaBodenProduct.ConfigModulesInCircuit) {
+			//        //errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 50 Module\n";
+			//        errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module (" + moduleCount + " > " + ModulKlimaBodenProduct.ConfigModulesInCircuit.ToString() + ")\n";
+			//    }
+			//}
+			//double maxTemp = double.MinValue;
+			//foreach (ModulBodenCircuit c in this.circuits) {
+			//    if (c.C_FloorTempHeat > maxTemp) {
+			//        maxTemp = c.C_FloorTempHeat;
+			//    }
+			//}
+			//if (Math.Round(maxTemp, 1) > (ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264)) {
+			//    errorMsg += "Oberflächentemperatur zu groß (" + Math.Round(maxTemp, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1) + "°C)\n";
+			//}
+			//if (this.PlannedMhHeat >= this.PlannedMhCool) {
+			//    if (Math.Round(this.PlannedMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
+			//        errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+			//    }
+			//} else {
+			//    if (Math.Round(this.PlannedMhCool, 1) > ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
+			//        errorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+			//    }
+			//}
+			//if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
+			//    if (Math.Round(this.PlannedDeltaRhoHeat, 2) > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
+			//        errorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+			//    }
+			//} else {
+			//    if (Math.Round(this.PlannedDeltaRhoCool, 2) > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
+			//        errorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+			//    }
+			//}
+			//if (errorMsg.Length == 0) {
+			//    errorMsg = null;
+			//}
+
+			errorMsg = null;
 
 			return true;
 		}
@@ -274,7 +321,7 @@ namespace Europlan.Common {
 			set { }
 		}
 
-		public override float PlannedRoofArea {
+		public override float PlannedCeilingArea {
 			get { return 0; }
 			set { }
 		}

@@ -56,9 +56,9 @@ namespace Europlan.Common {
 				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
 			} else {
 				//modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
+				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
 				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30);
 				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30);
-				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
 			}
 		}
 
@@ -108,6 +108,12 @@ namespace Europlan.Common {
 				if (GridContentChanged != null) {
 					this.GridContentChanged(this);
 				}
+			}
+		}
+
+		private void dgvModules_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+			if (GridContentChanged != null) {
+				this.GridContentChanged(this);
 			}
 		}
 	}

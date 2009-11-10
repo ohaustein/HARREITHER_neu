@@ -9,6 +9,12 @@ namespace Europlan.Common {
 	[ProductName("Hitherm® Compact")]
 	public class HithermCompactProduct : Product {
 
+		// quick dimensioning
+		private static int quickDimensioningHeatPowerPerSquareMeter = 100;
+		private static int quickDimensioningCoolPowerPerSquareMeter = 100;
+		private static bool canHeat = true;
+		private static bool canCool = false;
+
 		public HithermCompactProduct() {
 
 		}
@@ -18,13 +24,13 @@ namespace Europlan.Common {
 		}
 
 		public override void Initialize() {
+		}
+
+		public override void StaticInitialize() {
 			quickDimensioningHeatPowerPerSquareMeter = 100;
 			quickDimensioningCoolPowerPerSquareMeter = 100;
 			canHeat = true;
 			canCool = false;
-		}
-
-		public override void StaticInitialize() { 
 		}
 
 		public override Product Clone(Room room) {
@@ -32,6 +38,44 @@ namespace Europlan.Common {
 			product.AssociatedRoom = room;
 			return product;
 		}
+
+		#region Product Parameters
+		[ProductParameter]
+		public static bool ConfigQuickDimensioningCanHeat {
+			get { return canHeat; }
+			set { canHeat = value; }
+		}
+		public override bool QuickDimensioningCanHeat {
+			get { return canCool; }
+		}
+
+		[ProductParameter]
+		public static bool ConfigQuickDimensioningCanCool {
+			get { return canCool; }
+			set { canCool = value; }
+		}
+		public override bool QuickDimensioningCanCool {
+			get { return canCool; }
+		}
+
+		[ProductParameter]
+		public static int ConfigQuickDimensioningHeatPowerPerSquareMeter {
+			get { return quickDimensioningHeatPowerPerSquareMeter; }
+			set { quickDimensioningHeatPowerPerSquareMeter = value; }
+		}
+		public override int QuickDimensioningHeatPowerPerSquareMeter {
+			get { return quickDimensioningHeatPowerPerSquareMeter; }
+		}
+
+		[ProductParameter]
+		public static int ConfigQuickDimensioningCoolPowerPerSquareMeter {
+			get { return quickDimensioningCoolPowerPerSquareMeter; }
+			set { quickDimensioningCoolPowerPerSquareMeter = value; }
+		}
+		public override int QuickDimensioningCoolPowerPerSquareMeter {
+			get { return quickDimensioningCoolPowerPerSquareMeter; }
+		}
+		#endregion Product Parameters
 
 		public override int GetDefaultQuickDimensioningCircuits() {
 			return (int)Math.Ceiling(quickDimensioningPlannedArea / 10);
@@ -80,7 +124,7 @@ namespace Europlan.Common {
 			set { }
 		}
 
-		public override float PlannedRoofArea {
+		public override float PlannedCeilingArea {
 			get { return 0; }
 			set { }
 		}

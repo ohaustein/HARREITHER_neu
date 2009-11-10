@@ -297,7 +297,7 @@ namespace Europlan.Common {
 						this.numHeatLoad.Value = Math.Round((decimal)this.product.RequestedHeatLoad, 2);
 					}
 					if ((skipFields & FieldEnum.HEAT_LOAD_PERCENTAGE) == FieldEnum.NONE) {
-						this.numHeatLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedHeatLoad * 100 / evProduct.AssociatedRoom.HeatLoad), 2);
+						this.numHeatLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedHeatLoadPercentage), 2);
 					}
 				} else {
 					this.numHeatLoad.Enabled = false;
@@ -325,7 +325,7 @@ namespace Europlan.Common {
 						this.numCoolLoad.Value = Math.Round((decimal)this.product.RequestedCoolLoad, 2);
 					}
 					if ((skipFields & FieldEnum.COOL_LOAD_PERCENTAGE) == FieldEnum.NONE) {
-						this.numCoolLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedCoolLoad * 100 / evProduct.AssociatedRoom.CoolLoad), 2);
+						this.numCoolLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedCoolLoadPercentage), 2);
 					}
 				} else {
 					this.numCoolLoad.Enabled = false;
