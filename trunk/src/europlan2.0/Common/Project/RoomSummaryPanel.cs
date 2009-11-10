@@ -138,19 +138,30 @@ namespace Europlan.Common {
 					p.AssociatedRoom = this.room;
 					PlannedProduct pp = new PlannedProduct(p);
 					if (p.Type == Product.ProductType.FBH) {
-						p.PlannedFloorArea = this.room.Area;
-						double necessaryHeatLoad = this.room.NormalizedHeatLoad;
+						double plannedFloorArea = this.room.Area;
+						//double necessaryHeatLoad = this.room.NormalizedHeatLoad;
 						foreach (PlannedProduct plannedP in this.room.PlannedProducts) {
-							if (plannedP.PlannedArea.HasValue) {
-								p.PlannedFloorArea -= plannedP.PlannedArea.Value;
-							}
-							necessaryHeatLoad -= plannedP.PlannedHeatLoad;
+							plannedFloorArea -= plannedP.Product.PlannedFloorArea;
+							//necessaryHeatLoad -= plannedP.PlannedHeatLoad;
 						}
-						if (p.PlannedFloorArea < 0) {
-							p.PlannedFloorArea = 0;
+						if (plannedFloorArea < 0) {
+							plannedFloorArea = 0;
 						}
+						p.PlannedFloorArea = (float)plannedFloorArea;
 						pp.ConfigureProductDefault();
 
+					} else if (p.Type == Product.ProductType.DH) {
+						double plannedCeilingArea = this.room.Area;
+						foreach (PlannedProduct plannedP in this.room.PlannedProducts) {
+							plannedCeilingArea -= plannedP.Product.PlannedCeilingArea;
+						}
+						if (plannedCeilingArea < 0) {
+							plannedCeilingArea = 0;
+						}
+						p.PlannedCeilingArea = (float)plannedCeilingArea;
+						pp.ConfigureProductDefault();
+					} else {
+						pp.ConfigureProductDefault();
 					}
 					this.room.PlannedProducts.Add(pp);
 					this.UpdateControl();

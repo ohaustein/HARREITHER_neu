@@ -10,6 +10,13 @@ namespace Europlan.Common {
 	[ProductName("Euroval® Fußbodenheizung")]
 	public class EurovalProduct : Product {
 
+		// quick dimensioning
+		private static int quickDimensioningHeatPowerPerSquareMeter = 50;
+		private static int quickDimensioningCoolPowerPerSquareMeter = 50;
+		private static bool canHeat = true;
+		private static bool canCool = false;
+
+		// planning
 		private static double su0 = 0.045; /* Mindestüberdeckung fix??? */
 		private static double alpha0 = 10.8; /* Fixwert für FBH fix??? */
 		private static double alphaFbk = 6.5; //6.5; /* für FBK fix??? */
@@ -111,13 +118,13 @@ namespace Europlan.Common {
 		}
 
 		public override void Initialize() {
+		}
+
+		public override void StaticInitialize() {
 			quickDimensioningHeatPowerPerSquareMeter = 50;
 			quickDimensioningCoolPowerPerSquareMeter = 50;
 			canHeat = true;
 			canCool = false;
-		}
-
-		public override void StaticInitialize() {
 			useHarreitherNorm = true;
 			maxCircuitLength = 100.0;
 			maxPressureLost = 15000;
@@ -135,6 +142,42 @@ namespace Europlan.Common {
 		}
 
 		#region Product Parameters
+		[ProductParameter]
+		public static bool ConfigQuickDimensioningCanHeat {
+			get { return canHeat; }
+			set { canHeat = value; }
+		}
+		public override bool QuickDimensioningCanHeat {
+			get { return canCool; }
+		}
+
+		[ProductParameter]
+		public static bool ConfigQuickDimensioningCanCool {
+			get { return canCool; }
+			set { canCool = value; }
+		}
+		public override bool QuickDimensioningCanCool {
+			get { return canCool; }
+		}
+
+		[ProductParameter]
+		public static int ConfigQuickDimensioningHeatPowerPerSquareMeter {
+			get { return quickDimensioningHeatPowerPerSquareMeter; }
+			set { quickDimensioningHeatPowerPerSquareMeter = value; }
+		}
+		public override int QuickDimensioningHeatPowerPerSquareMeter {
+			get { return quickDimensioningHeatPowerPerSquareMeter; }
+		}
+
+		[ProductParameter]
+		public static int ConfigQuickDimensioningCoolPowerPerSquareMeter {
+			get { return quickDimensioningCoolPowerPerSquareMeter; }
+			set { quickDimensioningCoolPowerPerSquareMeter = value; }
+		}
+		public override int QuickDimensioningCoolPowerPerSquareMeter {
+			get { return quickDimensioningCoolPowerPerSquareMeter; }
+		}
+
 		[ProductParameter]
 		public static double ConfigSu0 {
 			get { return su0; }
@@ -514,7 +557,7 @@ namespace Europlan.Common {
 			set { }
 		}
 
-		public override float PlannedRoofArea {
+		public override float PlannedCeilingArea {
 			get { return 0; }
 			set { }
 		}

@@ -1,5 +1,5 @@
 namespace Europlan.Common {
-	partial class PlannedModulKlimaBodenProductPanel {
+	partial class PlannedModulKlimaDeckeProductPanel {
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
@@ -57,7 +57,7 @@ namespace Europlan.Common {
 			this.lblInsulationConstruction = new System.Windows.Forms.Label();
 			this.txtInsulationConstruction = new System.Windows.Forms.TextBox();
 			this.btnFloorConstruction = new System.Windows.Forms.Button();
-			this.lblFloorConstruction = new System.Windows.Forms.Label();
+			this.lblCeilingConstruction = new System.Windows.Forms.Label();
 			this.txtFloorConstruction = new System.Windows.Forms.TextBox();
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.pageInput = new System.Windows.Forms.TabPage();
@@ -71,6 +71,7 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.label14 = new System.Windows.Forms.Label();
 			this.lblError = new System.Windows.Forms.Label();
 			this.lblQAnbCoolUnit = new System.Windows.Forms.Label();
 			this.lblQAnbHeatUnit = new System.Windows.Forms.Label();
@@ -93,28 +94,24 @@ namespace Europlan.Common {
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.label32 = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.lblTempCoolUnit = new System.Windows.Forms.Label();
 			this.lblDruckverlustCoolUnit = new System.Windows.Forms.Label();
 			this.lblDurchflussCoolUnit = new System.Windows.Forms.Label();
 			this.lblAvgqCoolUnit = new System.Windows.Forms.Label();
 			this.lblQCoolRestUnit = new System.Windows.Forms.Label();
 			this.lblQCoolDiffUnit = new System.Windows.Forms.Label();
 			this.lblQCoolUnit = new System.Windows.Forms.Label();
-			this.lblTempHeatUnit = new System.Windows.Forms.Label();
 			this.lblDruckverlustHeatUnit = new System.Windows.Forms.Label();
 			this.lblDurchflussHeatUnit = new System.Windows.Forms.Label();
 			this.lblAvgqHeatUnit = new System.Windows.Forms.Label();
 			this.lblQHeatRestUnit = new System.Windows.Forms.Label();
 			this.lblQHeatDiffUnit = new System.Windows.Forms.Label();
 			this.lblQHeatUnit = new System.Windows.Forms.Label();
-			this.lblTempCool = new System.Windows.Forms.Label();
 			this.lblDruckverlustCool = new System.Windows.Forms.Label();
 			this.lblDurchflussCool = new System.Windows.Forms.Label();
 			this.lblAvgqCool = new System.Windows.Forms.Label();
 			this.lblQCoolRest = new System.Windows.Forms.Label();
 			this.lblQCoolDiff = new System.Windows.Forms.Label();
 			this.lblQCool = new System.Windows.Forms.Label();
-			this.lblTempHeat = new System.Windows.Forms.Label();
 			this.lblDruckverlustHeat = new System.Windows.Forms.Label();
 			this.lblDurchflussHeat = new System.Windows.Forms.Label();
 			this.lblAvgqHeat = new System.Windows.Forms.Label();
@@ -124,7 +121,6 @@ namespace Europlan.Common {
 			this.lblRest = new System.Windows.Forms.Label();
 			this.label16 = new System.Windows.Forms.Label();
 			this.label17 = new System.Windows.Forms.Label();
-			this.label13 = new System.Windows.Forms.Label();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -136,6 +132,14 @@ namespace Europlan.Common {
 			this.label5 = new System.Windows.Forms.Label();
 			this.lblHk = new System.Windows.Forms.Label();
 			this.btnConnectionPipes = new System.Windows.Forms.Button();
+			this.label3 = new System.Windows.Forms.Label();
+			this.numLength = new Europlan.Common.NumericBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.dgvModules = new Europlan.Common.KlimaFlaechenModulGrid();
+			this.label1 = new System.Windows.Forms.Label();
+			this.btnRemoveRow = new System.Windows.Forms.Button();
+			this.btnAddRow = new System.Windows.Forms.Button();
+			this.lstRows = new System.Windows.Forms.ListBox();
 			this.label12 = new System.Windows.Forms.Label();
 			this.btnRemoveHk = new System.Windows.Forms.Button();
 			this.btnAddHk = new System.Windows.Forms.Button();
@@ -547,7 +551,7 @@ namespace Europlan.Common {
 			this.groupBox1.Controls.Add(this.lblInsulationConstruction);
 			this.groupBox1.Controls.Add(this.txtInsulationConstruction);
 			this.groupBox1.Controls.Add(this.btnFloorConstruction);
-			this.groupBox1.Controls.Add(this.lblFloorConstruction);
+			this.groupBox1.Controls.Add(this.lblCeilingConstruction);
 			this.groupBox1.Controls.Add(this.txtFloorConstruction);
 			this.groupBox1.Location = new System.Drawing.Point(0, 131);
 			this.groupBox1.MinimumSize = new System.Drawing.Size(640, 0);
@@ -597,7 +601,7 @@ namespace Europlan.Common {
 			this.label28.Name = "label28";
 			this.label28.Size = new System.Drawing.Size(181, 13);
 			this.label28.TabIndex = 28;
-			this.label28.Text = "Temperatur unterhalb (Kühlbetrieb):";
+			this.label28.Text = "Temperatur oberhalb (Kühlbetrieb):";
 			// 
 			// label7
 			// 
@@ -640,7 +644,7 @@ namespace Europlan.Common {
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(181, 13);
 			this.label8.TabIndex = 25;
-			this.label8.Text = "Temperatur unterhalb (Heizbetrieb):";
+			this.label8.Text = "Temperatur oberhalb (Heizbetrieb):";
 			// 
 			// btnInsulationConstruction
 			// 
@@ -678,13 +682,13 @@ namespace Europlan.Common {
 			this.btnFloorConstruction.UseVisualStyleBackColor = true;
 			this.btnFloorConstruction.Click += new System.EventHandler(this.btnFloorConstruction_Click);
 			// 
-			// lblFloorConstruction
+			// lblCeilingConstruction
 			// 
-			this.lblFloorConstruction.Location = new System.Drawing.Point(6, 16);
-			this.lblFloorConstruction.Name = "lblFloorConstruction";
-			this.lblFloorConstruction.Size = new System.Drawing.Size(151, 13);
-			this.lblFloorConstruction.TabIndex = 1;
-			this.lblFloorConstruction.Text = "Fußbodenkonstruktion:";
+			this.lblCeilingConstruction.Location = new System.Drawing.Point(6, 16);
+			this.lblCeilingConstruction.Name = "lblCeilingConstruction";
+			this.lblCeilingConstruction.Size = new System.Drawing.Size(151, 13);
+			this.lblCeilingConstruction.TabIndex = 1;
+			this.lblCeilingConstruction.Text = "Deckenkonstruktion:";
 			// 
 			// txtFloorConstruction
 			// 
@@ -818,6 +822,7 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.label14);
 			this.panel2.Controls.Add(this.lblError);
 			this.panel2.Controls.Add(this.lblQAnbCoolUnit);
 			this.panel2.Controls.Add(this.lblQAnbHeatUnit);
@@ -840,28 +845,24 @@ namespace Europlan.Common {
 			this.panel2.Controls.Add(this.groupBox5);
 			this.panel2.Controls.Add(this.label32);
 			this.panel2.Controls.Add(this.groupBox4);
-			this.panel2.Controls.Add(this.lblTempCoolUnit);
 			this.panel2.Controls.Add(this.lblDruckverlustCoolUnit);
 			this.panel2.Controls.Add(this.lblDurchflussCoolUnit);
 			this.panel2.Controls.Add(this.lblAvgqCoolUnit);
 			this.panel2.Controls.Add(this.lblQCoolRestUnit);
 			this.panel2.Controls.Add(this.lblQCoolDiffUnit);
 			this.panel2.Controls.Add(this.lblQCoolUnit);
-			this.panel2.Controls.Add(this.lblTempHeatUnit);
 			this.panel2.Controls.Add(this.lblDruckverlustHeatUnit);
 			this.panel2.Controls.Add(this.lblDurchflussHeatUnit);
 			this.panel2.Controls.Add(this.lblAvgqHeatUnit);
 			this.panel2.Controls.Add(this.lblQHeatRestUnit);
 			this.panel2.Controls.Add(this.lblQHeatDiffUnit);
 			this.panel2.Controls.Add(this.lblQHeatUnit);
-			this.panel2.Controls.Add(this.lblTempCool);
 			this.panel2.Controls.Add(this.lblDruckverlustCool);
 			this.panel2.Controls.Add(this.lblDurchflussCool);
 			this.panel2.Controls.Add(this.lblAvgqCool);
 			this.panel2.Controls.Add(this.lblQCoolRest);
 			this.panel2.Controls.Add(this.lblQCoolDiff);
 			this.panel2.Controls.Add(this.lblQCool);
-			this.panel2.Controls.Add(this.lblTempHeat);
 			this.panel2.Controls.Add(this.lblDruckverlustHeat);
 			this.panel2.Controls.Add(this.lblDurchflussHeat);
 			this.panel2.Controls.Add(this.lblAvgqHeat);
@@ -871,7 +872,6 @@ namespace Europlan.Common {
 			this.panel2.Controls.Add(this.lblRest);
 			this.panel2.Controls.Add(this.label16);
 			this.panel2.Controls.Add(this.label17);
-			this.panel2.Controls.Add(this.label13);
 			this.panel2.Controls.Add(this.groupBox3);
 			this.panel2.Controls.Add(this.groupBox2);
 			this.panel2.Controls.Add(this.groupBox7);
@@ -883,6 +883,14 @@ namespace Europlan.Common {
 			this.panel2.Controls.Add(this.label5);
 			this.panel2.Controls.Add(this.lblHk);
 			this.panel2.Controls.Add(this.btnConnectionPipes);
+			this.panel2.Controls.Add(this.label3);
+			this.panel2.Controls.Add(this.numLength);
+			this.panel2.Controls.Add(this.label2);
+			this.panel2.Controls.Add(this.dgvModules);
+			this.panel2.Controls.Add(this.label1);
+			this.panel2.Controls.Add(this.btnRemoveRow);
+			this.panel2.Controls.Add(this.btnAddRow);
+			this.panel2.Controls.Add(this.lstRows);
 			this.panel2.Controls.Add(this.label12);
 			this.panel2.Controls.Add(this.btnRemoveHk);
 			this.panel2.Controls.Add(this.btnAddHk);
@@ -893,11 +901,20 @@ namespace Europlan.Common {
 			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
 			// 
+			// label14
+			// 
+			this.label14.AutoSize = true;
+			this.label14.Location = new System.Drawing.Point(468, 266);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(224, 13);
+			this.label14.TabIndex = 139;
+			this.label14.Text = "(Pro Winkel zusätzlich 1m Verbindungsleitung)";
+			// 
 			// lblError
 			// 
 			this.lblError.AutoSize = true;
 			this.lblError.ForeColor = System.Drawing.Color.Red;
-			this.lblError.Location = new System.Drawing.Point(4, 538);
+			this.lblError.Location = new System.Drawing.Point(4, 523);
 			this.lblError.Name = "lblError";
 			this.lblError.Size = new System.Drawing.Size(0, 13);
 			this.lblError.TabIndex = 138;
@@ -1084,14 +1101,6 @@ namespace Europlan.Common {
 			this.groupBox4.TabIndex = 82;
 			this.groupBox4.TabStop = false;
 			// 
-			// lblTempCoolUnit
-			// 
-			this.lblTempCoolUnit.Location = new System.Drawing.Point(355, 515);
-			this.lblTempCoolUnit.Name = "lblTempCoolUnit";
-			this.lblTempCoolUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblTempCoolUnit.TabIndex = 119;
-			this.lblTempCoolUnit.Text = "°C";
-			// 
 			// lblDruckverlustCoolUnit
 			// 
 			this.lblDruckverlustCoolUnit.Location = new System.Drawing.Point(355, 495);
@@ -1140,14 +1149,6 @@ namespace Europlan.Common {
 			this.lblQCoolUnit.TabIndex = 113;
 			this.lblQCoolUnit.Text = "W";
 			// 
-			// lblTempHeatUnit
-			// 
-			this.lblTempHeatUnit.Location = new System.Drawing.Point(243, 515);
-			this.lblTempHeatUnit.Name = "lblTempHeatUnit";
-			this.lblTempHeatUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblTempHeatUnit.TabIndex = 112;
-			this.lblTempHeatUnit.Text = "°C";
-			// 
 			// lblDruckverlustHeatUnit
 			// 
 			this.lblDruckverlustHeatUnit.Location = new System.Drawing.Point(243, 495);
@@ -1195,15 +1196,6 @@ namespace Europlan.Common {
 			this.lblQHeatUnit.Size = new System.Drawing.Size(35, 13);
 			this.lblQHeatUnit.TabIndex = 106;
 			this.lblQHeatUnit.Text = "W";
-			// 
-			// lblTempCool
-			// 
-			this.lblTempCool.Location = new System.Drawing.Point(290, 515);
-			this.lblTempCool.Name = "lblTempCool";
-			this.lblTempCool.Size = new System.Drawing.Size(50, 13);
-			this.lblTempCool.TabIndex = 105;
-			this.lblTempCool.Text = "W";
-			this.lblTempCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblDruckverlustCool
 			// 
@@ -1258,15 +1250,6 @@ namespace Europlan.Common {
 			this.lblQCool.TabIndex = 99;
 			this.lblQCool.Text = "W";
 			this.lblQCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// lblTempHeat
-			// 
-			this.lblTempHeat.Location = new System.Drawing.Point(187, 515);
-			this.lblTempHeat.Name = "lblTempHeat";
-			this.lblTempHeat.Size = new System.Drawing.Size(50, 13);
-			this.lblTempHeat.TabIndex = 98;
-			this.lblTempHeat.Text = "W";
-			this.lblTempHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblDruckverlustHeat
 			// 
@@ -1349,20 +1332,11 @@ namespace Europlan.Common {
 			this.label17.TabIndex = 85;
 			this.label17.Text = "Erreichte Leistung:";
 			// 
-			// label13
-			// 
-			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(4, 515);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(118, 13);
-			this.label13.TabIndex = 84;
-			this.label13.Text = "Oberflächentemperatur:";
-			// 
 			// groupBox3
 			// 
 			this.groupBox3.Location = new System.Drawing.Point(283, 305);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(2, 230);
+			this.groupBox3.Size = new System.Drawing.Size(2, 207);
 			this.groupBox3.TabIndex = 83;
 			this.groupBox3.TabStop = false;
 			// 
@@ -1370,7 +1344,7 @@ namespace Europlan.Common {
 			// 
 			this.groupBox2.Location = new System.Drawing.Point(180, 305);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(2, 230);
+			this.groupBox2.Size = new System.Drawing.Size(2, 207);
 			this.groupBox2.TabIndex = 82;
 			this.groupBox2.TabStop = false;
 			// 
@@ -1460,6 +1434,99 @@ namespace Europlan.Common {
 			this.btnConnectionPipes.UseVisualStyleBackColor = true;
 			this.btnConnectionPipes.Click += new System.EventHandler(this.btnConnectionPipes_Click);
 			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(447, 266);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(15, 13);
+			this.label3.TabIndex = 37;
+			this.label3.Text = "m";
+			// 
+			// numLength
+			// 
+			this.numLength.EditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
+			this.numLength.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numLength.Location = new System.Drawing.Point(358, 263);
+			this.numLength.MaxValue = null;
+			this.numLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numLength.Name = "numLength";
+			this.numLength.Size = new System.Drawing.Size(83, 20);
+			this.numLength.TabIndex = 36;
+			this.numLength.Text = "0";
+			this.numLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numLength.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numLength.ValueChanged += new System.EventHandler(this.numLength_ValueChanged);
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(202, 266);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(150, 13);
+			this.label2.TabIndex = 35;
+			this.label2.Text = "Summe Verbindungsleitungen:";
+			// 
+			// dgvModules
+			// 
+			this.dgvModules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.dgvModules.Boden = false;
+			this.dgvModules.Location = new System.Drawing.Point(205, 43);
+			this.dgvModules.Name = "dgvModules";
+			this.dgvModules.Size = new System.Drawing.Size(642, 212);
+			this.dgvModules.TabIndex = 34;
+			this.dgvModules.GridContentChanged += new Europlan.Common.KlimaFlaechenModulGridContentChangedHandler(this.dgvModules_GridContentChanged);
+			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(96, 14);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(86, 28);
+			this.label1.TabIndex = 33;
+			this.label1.Text = "Parallele Reihen im Heizkreis";
+			// 
+			// btnRemoveRow
+			// 
+			this.btnRemoveRow.Location = new System.Drawing.Point(152, 261);
+			this.btnRemoveRow.Name = "btnRemoveRow";
+			this.btnRemoveRow.Size = new System.Drawing.Size(30, 23);
+			this.btnRemoveRow.TabIndex = 32;
+			this.btnRemoveRow.Text = "-";
+			this.btnRemoveRow.UseVisualStyleBackColor = true;
+			this.btnRemoveRow.Click += new System.EventHandler(this.btnRemoveRow_Click);
+			// 
+			// btnAddRow
+			// 
+			this.btnAddRow.Location = new System.Drawing.Point(97, 261);
+			this.btnAddRow.Name = "btnAddRow";
+			this.btnAddRow.Size = new System.Drawing.Size(30, 23);
+			this.btnAddRow.TabIndex = 31;
+			this.btnAddRow.Text = "+";
+			this.btnAddRow.UseVisualStyleBackColor = true;
+			this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
+			// 
+			// lstRows
+			// 
+			this.lstRows.FormattingEnabled = true;
+			this.lstRows.Location = new System.Drawing.Point(97, 43);
+			this.lstRows.Name = "lstRows";
+			this.lstRows.Size = new System.Drawing.Size(85, 212);
+			this.lstRows.TabIndex = 30;
+			this.lstRows.SelectedIndexChanged += new System.EventHandler(this.lstRows_SelectedIndexChanged);
+			// 
 			// label12
 			// 
 			this.label12.AutoSize = true;
@@ -1522,12 +1589,12 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			// 
-			// PlannedModulKlimaBodenProductPanel
+			// PlannedModulKlimaDeckeProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tabs);
-			this.Name = "PlannedModulKlimaBodenProductPanel";
+			this.Name = "PlannedModulKlimaDeckeProductPanel";
 			this.Size = new System.Drawing.Size(864, 640);
 			this.grpPowerArea.ResumeLayout(false);
 			this.grpPowerArea.PerformLayout();
@@ -1566,7 +1633,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblCoolLoadTxt;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Button btnFloorConstruction;
-		private System.Windows.Forms.Label lblFloorConstruction;
+		private System.Windows.Forms.Label lblCeilingConstruction;
 		private System.Windows.Forms.TextBox txtFloorConstruction;
 		private System.Windows.Forms.Button btnInsulationConstruction;
 		private System.Windows.Forms.Label lblInsulationConstruction;
@@ -1605,6 +1672,14 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnAddHk;
 		private System.Windows.Forms.ListBox lstCircuits;
 		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button btnRemoveRow;
+		private System.Windows.Forms.Button btnAddRow;
+		private System.Windows.Forms.ListBox lstRows;
+		private KlimaFlaechenModulGrid dgvModules;
+		private System.Windows.Forms.Label label3;
+		private NumericBox numLength;
+		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button btnConnectionPipes;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label6;
@@ -1614,34 +1689,29 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.GroupBox groupBox7;
-		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.GroupBox groupBox3;
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.Label lblRest;
 		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.Label label17;
 		private System.Windows.Forms.Label lblQHeat;
-		private System.Windows.Forms.Label lblTempHeat;
 		private System.Windows.Forms.Label lblDruckverlustHeat;
 		private System.Windows.Forms.Label lblDurchflussHeat;
 		private System.Windows.Forms.Label lblAvgqHeat;
 		private System.Windows.Forms.Label lblQHeatRest;
 		private System.Windows.Forms.Label lblQHeatDiff;
-		private System.Windows.Forms.Label lblTempCool;
 		private System.Windows.Forms.Label lblDruckverlustCool;
 		private System.Windows.Forms.Label lblDurchflussCool;
 		private System.Windows.Forms.Label lblAvgqCool;
 		private System.Windows.Forms.Label lblQCoolRest;
 		private System.Windows.Forms.Label lblQCoolDiff;
 		private System.Windows.Forms.Label lblQCool;
-		private System.Windows.Forms.Label lblTempCoolUnit;
 		private System.Windows.Forms.Label lblDruckverlustCoolUnit;
 		private System.Windows.Forms.Label lblDurchflussCoolUnit;
 		private System.Windows.Forms.Label lblAvgqCoolUnit;
 		private System.Windows.Forms.Label lblQCoolRestUnit;
 		private System.Windows.Forms.Label lblQCoolDiffUnit;
 		private System.Windows.Forms.Label lblQCoolUnit;
-		private System.Windows.Forms.Label lblTempHeatUnit;
 		private System.Windows.Forms.Label lblDruckverlustHeatUnit;
 		private System.Windows.Forms.Label lblDurchflussHeatUnit;
 		private System.Windows.Forms.Label lblAvgqHeatUnit;
@@ -1670,5 +1740,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblQAnbHeat;
 		private System.Windows.Forms.Label label45;
 		private System.Windows.Forms.Label lblError;
+		private System.Windows.Forms.Label label14;
 	}
 }

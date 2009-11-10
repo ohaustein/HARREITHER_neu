@@ -508,42 +508,49 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public EurovalProduct EurovalProduct {
 			get { return eurovalProduct; }
 			set { eurovalProduct = value; }
 		}
 
+		[XmlIgnore]
 		public ConcreteActivationProduct ConcreteActivationProduct {
 			get { return concreteActivationProduct; }
 			set { concreteActivationProduct = value; }
 		}
 
+		[XmlIgnore]
 		public HithermProduct HithermProduct {
 			get { return hithermProduct; }
 			set { hithermProduct = value; }
 		}
 
+		[XmlIgnore]
 		public HithermCompactProduct HithermCompactProduct {
 			get { return hithermCompactProduct; }
 			set { hithermCompactProduct = value; }
 		}
 
+		[XmlIgnore]
 		public HithermCompactRoofProduct HithermCompactRoofProduct {
 			get { return hithermCompactRoofProduct; }
 			set { hithermCompactRoofProduct = value; }
 		}
 
+		[XmlIgnore]
 		public ModulKlimaBodenProduct ModulKlimaBodenProduct {
 			get { return modulKlimaBodenProduct; }
 			set { modulKlimaBodenProduct = value; }
 		}
 
+		[XmlIgnore]
 		public ModulKlimaDeckeProduct ModulKlimaDeckeProduct {
 			get { return modulKlimaDeckeProduct; }
 			set { modulKlimaDeckeProduct = value; }
 		}
 
-		public P GetProduct<P>() where P: Product {
+		public P GetProduct<P>() where P : Product {
 			if (typeof(P) == typeof(EurovalProduct)) {
 				return this.EurovalProduct as P;
 			} else if (typeof(P) == typeof(ConcreteActivationProduct)) {
