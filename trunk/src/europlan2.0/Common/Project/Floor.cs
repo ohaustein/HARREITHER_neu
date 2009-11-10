@@ -49,7 +49,7 @@ namespace Europlan.Common {
 
 		private void InitializeFloor() {
 			name = "";
-			id = "";
+			id = System.Guid.NewGuid().ToString();
 			rooms = new RoomList();
 			distributors = new DistributorList();
 			this.floorNode.Tag = this;
