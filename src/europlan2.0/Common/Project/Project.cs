@@ -497,5 +497,89 @@ namespace Europlan.Common {
 
 			return wrapperList;
 		}
+
+		public List<FloorOverviewWrapper> GetFloorOverviewWrapper() {
+			List<FloorOverviewWrapper> wrapperListHeat = new List<FloorOverviewWrapper>();
+			List<FloorOverviewWrapper> wrapperListCool = new List<FloorOverviewWrapper>();
+			//TODO
+			foreach (Floor floor in this.floors) {
+			//    foreach (Room room in floor.Rooms) {
+			//        foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+				FloorOverviewWrapper wrapper = new FloorOverviewWrapper();
+				wrapper.HeatOrCool = "Heizbetrieb";
+				wrapper.FloorName = floor.Name;
+				wrapper.FloorArea = 242.3;
+				wrapper.QH2o = 3568;
+				wrapper.Q = 3401;
+				wrapper.TransmissionFloor = 10;
+				wrapper.TransmissionWall = 0;
+				wrapper.TransmissionCeiling = 68.7;
+				wrapperListHeat.Add(wrapper);
+
+				wrapper = new FloorOverviewWrapper();
+				wrapper.HeatOrCool = "Kühlbetrieb";
+				wrapper.FloorName = floor.Name;
+				wrapper.FloorArea = 42.3;
+				wrapper.QH2o = 3568;
+				wrapper.Q = 3401;
+				wrapper.TransmissionFloor = 10;
+				wrapper.TransmissionWall = 0;
+				wrapper.TransmissionCeiling = 68.7;
+				wrapperListCool.Add(wrapper);
+			//        }
+			//    }
+			}
+
+			wrapperListHeat.AddRange(wrapperListCool);
+			return wrapperListHeat;
+		}
+
+		public List<OpenLoadForRoomWrapper> GetOpenHeatLoadForRoomWrapper() {
+			List<OpenLoadForRoomWrapper> wrapperList = new List<OpenLoadForRoomWrapper>();
+
+			//TODO
+
+			OpenLoadForRoomWrapper wrapper = new OpenLoadForRoomWrapper();
+			wrapper.RoomId = "E01";
+			wrapper.RoomName = "Wohnzimmer";
+			wrapper.RequiredLoad = 1650.0;
+			wrapper.NetLoad = 1650.0;
+			wrapper.Power = 1400.0;
+			wrapperList.Add(wrapper);
+
+			wrapper = new OpenLoadForRoomWrapper();
+			wrapper.RoomId = "E03";
+			wrapper.RoomName = "Küche";
+			wrapper.RequiredLoad = 1230.9;
+			wrapper.NetLoad = 1150.0;
+			wrapper.Power = 1002.0;
+			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
+
+		public List<OpenLoadForRoomWrapper> GetOpenCoolLoadForRoomWrapper() {
+			List<OpenLoadForRoomWrapper> wrapperList = new List<OpenLoadForRoomWrapper>();
+
+			// TODO
+
+			OpenLoadForRoomWrapper wrapper = new OpenLoadForRoomWrapper();
+			wrapper.RoomId = "E01";
+			wrapper.RoomName = "Wohnzimmer";
+			wrapper.RequiredLoad = 1650.0;
+			wrapper.NetLoad = 1650.0;
+			wrapper.Power = 1400.0;
+			wrapperList.Add(wrapper);
+
+			wrapper = new OpenLoadForRoomWrapper();
+			wrapper.RoomId = "E03";
+			wrapper.RoomName = "Küche";
+			wrapper.RequiredLoad = 1230.9;
+			wrapper.NetLoad = 1150.0;
+			wrapper.Power = 1002.0;
+			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
 	}
 }

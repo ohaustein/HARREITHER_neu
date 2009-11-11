@@ -174,6 +174,8 @@
     <Compile Include="Products\LenghtAssistantForm.Designer.cs">
       <DependentUpon>LenghtAssistantForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\Wrapper\FloorOverviewWrapper.cs" />
+    <Compile Include="Project\Wrapper\OpenLoadForRoomWrapper.cs" />
     <Compile Include="Project\Wrapper\ProjectWarningWrapper.cs" />
     <Compile Include="Project\Wrapper\ProjektBilanzWrapper.cs" />
     <Compile Include="Project\SelectPlannedProductForm.cs">
