@@ -65,15 +65,27 @@ namespace Europlan.Common {
 
 			List<ProjektBilanzWrapper> projektBilanzWrapper = project.GetProkjektBilanzReport();
 			List<ProjectWarningWrapper> projectWarningWrapper = project.GetProjectWarningReport();
+			List<FloorOverviewWrapper> floorOverviewWrapper = project.GetFloorOverviewWrapper();
+			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = project.GetOpenHeatLoadForRoomWrapper();
+			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = project.GetOpenCoolLoadForRoomWrapper();
 
 			DataTable projektBilanz = ReportHelper.ListToDataTable<ProjektBilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
+			DataTable floorOverwiew = ReportHelper.ListToDataTable<FloorOverviewWrapper>(floorOverviewWrapper);
+			DataTable openHeatLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openHeatLoadWrapper);
+			DataTable openCoolLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openCoolLoadWrapper);
 
 			projektBilanz.TableName = "ProjektBilanz";
 			projectWarnings.TableName = "ProjectWarnings";
+			floorOverwiew.TableName = "FloorOverview";
+			openHeatLoad.TableName = "OpenHeatLoad";
+			openCoolLoad.TableName = "OpenCoolLoad";
 
 			reportData.Tables.Add(projektBilanz);
 			reportData.Tables.Add(projectWarnings);
+			reportData.Tables.Add(floorOverwiew);
+			reportData.Tables.Add(openHeatLoad);
+			reportData.Tables.Add(openCoolLoad);
 
 			listLabel1.DataSource = reportData;
 
