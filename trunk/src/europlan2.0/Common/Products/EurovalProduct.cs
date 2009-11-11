@@ -17,14 +17,16 @@ namespace Europlan.Common {
 		private static bool canCool = false;
 
 		// planning
-		private static double su0 = 0.045; /* Mindestüberdeckung fix??? */
-		private static double alpha0 = 10.8; /* Fixwert für FBH fix??? */
-		private static double alphaFbk = 6.5; //6.5; /* für FBK fix??? */
-		private static double alphaFbh = 10.8; /* für FBH fix??? */
-		private static double lambdaR0 = 0.35; /* fix ??? */
-		private static double lambdaR = 0.22; /* für PP Rohr laut Tabelle A.13 fix??? */
-		private static double lambdaU0 = 1; /* fix??? */
+		private static double su0 = 0.045; /* Mindestüberdeckung fix */
+		private static double alpha0 = 10.8; /* Fixwert für FBH fix */
+		private static double alphaFbk = 6.5; //6.5; /* für FBK fix */
+		private static double alphaFbh = 10.8; /* für FBH fix */
+		private static double lambdaR0 = 0.35; /* fix */
+		private static double lambdaR = 0.22; /* für PP Rohr laut Tabelle A.13 fix */
+		private static double lambdaU0 = 1; /* fix */
 		private static double lambdaE = 1.2; /* Estrichleitfähigkeit, fix */
+		private static double su = 0.035; /* Estrichüberdeckung; Annahme ECO30;  fix*/
+		private static double lambdaU = 1.2; /* Wärmeleitfähigkeit der Überdeckung */
 		private static double rohrAussenD = 0.0206505; /* Aussendurchmesser Euroval Rohr */
 		private static double rohrInnenD = 0.0153; /* Rohrinnendurchmesser */
 		private static double rohrInnenA = 0.000183783; /* Rohrinnenquerschnitt */
@@ -186,188 +188,200 @@ namespace Europlan.Common {
 
 		[ProductParameter]
 		public static double ConfigAlpha0 {
-			get { return EurovalProduct.alpha0; }
-			set { EurovalProduct.alpha0 = value; }
+			get { return alpha0; }
+			set { alpha0 = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigAlphaFbk {
-			get { return EurovalProduct.alphaFbk; }
-			set { EurovalProduct.alphaFbk = value; }
+			get { return alphaFbk; }
+			set { alphaFbk = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigAlphaFbh {
-			get { return EurovalProduct.alphaFbh; }
-			set { EurovalProduct.alphaFbh = value; }
+			get { return alphaFbh; }
+			set { alphaFbh = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigLambdaR0 {
-			get { return EurovalProduct.lambdaR0; }
-			set { EurovalProduct.lambdaR0 = value; }
+			get { return lambdaR0; }
+			set { lambdaR0 = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigLambdaR {
-			get { return EurovalProduct.lambdaR; }
-			set { EurovalProduct.lambdaR = value; }
+			get { return lambdaR; }
+			set { lambdaR = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigLambdaU0 {
-			get { return EurovalProduct.lambdaU0; }
-			set { EurovalProduct.lambdaU0 = value; }
+			get { return lambdaU0; }
+			set { lambdaU0 = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigLambdaE {
-			get { return EurovalProduct.lambdaE; }
-			set { EurovalProduct.lambdaE = value; }
+			get { return lambdaE; }
+			set { lambdaE = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSu {
+			get { return su; }
+			set { su = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLambdaU {
+			get { return lambdaU; }
+			set { lambdaU = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigRohrAussenD {
-			get { return EurovalProduct.rohrAussenD; }
-			set { EurovalProduct.rohrAussenD = value; }
+			get { return rohrAussenD; }
+			set { rohrAussenD = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigRohrInnenD {
-			get { return EurovalProduct.rohrInnenD; }
-			set { EurovalProduct.rohrInnenD = value; }
+			get { return rohrInnenD; }
+			set { rohrInnenD = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigRohrInnenA {
-			get { return EurovalProduct.rohrInnenA; }
-			set { EurovalProduct.rohrInnenA = value; }
+			get { return rohrInnenA; }
+			set { rohrInnenA = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigAg {
-			get { return EurovalProduct.ag; }
-			set { EurovalProduct.ag = value; }
+			get { return ag; }
+			set { ag = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigSr0 {
-			get { return EurovalProduct.sr0; }
-			set { EurovalProduct.sr0 = value; }
+			get { return sr0; }
+			set { sr0 = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigSr {
-			get { return EurovalProduct.sr; }
-			set { EurovalProduct.sr = value; }
+			get { return sr; }
+			set { sr = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigC {
-			get { return EurovalProduct.c; }
-			set { EurovalProduct.c = value; }
+			get { return c; }
+			set { c = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigRho {
-			get { return EurovalProduct.rho; }
-			set { EurovalProduct.rho = value; }
+			get { return rho; }
+			set { rho = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigV {
-			get { return EurovalProduct.v; }
-			set { EurovalProduct.v = value; }
+			get { return v; }
+			set { v = value; }
 		}
 
 		[ProductParameter]
 		public static bool ConfigAgActivated {
-			get { return EurovalProduct.agActivated; }
-			set { EurovalProduct.agActivated = value; }
+			get { return agActivated; }
+			set { agActivated = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigRLambdaDecke {
-			get { return EurovalProduct.rLambdaDecke; }
-			set { EurovalProduct.rLambdaDecke = value; }
+			get { return rLambdaDecke; }
+			set { rLambdaDecke = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigRLambdaPutz {
-			get { return EurovalProduct.rLambdaPutz; }
-			set { EurovalProduct.rLambdaPutz = value; }
+			get { return rLambdaPutz; }
+			set { rLambdaPutz = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigMaxResidenceTempHarreither {
-			get { return EurovalProduct.maxResidenceTempHarreither; }
-			set { EurovalProduct.maxResidenceTempHarreither = value; }
+			get { return maxResidenceTempHarreither; }
+			set { maxResidenceTempHarreither = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigMaxRimTempHarreither {
-			get { return EurovalProduct.maxRimTempHarreither; }
-			set { EurovalProduct.maxRimTempHarreither = value; }
+			get { return maxRimTempHarreither; }
+			set { maxRimTempHarreither = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigMaxResidenceTempEn1264 {
-			get { return EurovalProduct.maxResidenceTempEn1264; }
-			set { EurovalProduct.maxResidenceTempEn1264 = value; }
+			get { return maxResidenceTempEn1264; }
+			set { maxResidenceTempEn1264 = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigMaxRimTempEn1264 {
-			get { return EurovalProduct.maxRimTempEn1264; }
-			set { EurovalProduct.maxRimTempEn1264 = value; }
+			get { return maxRimTempEn1264; }
+			set { maxRimTempEn1264 = value; }
 		}
 
 		[ProductParameter]
 		public static bool ConfigUseHarreitherNorm {
-			get { return EurovalProduct.useHarreitherNorm; }
-			set { EurovalProduct.useHarreitherNorm = value; }
+			get { return useHarreitherNorm; }
+			set { useHarreitherNorm = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigMaxCircuitLength {
-			get { return EurovalProduct.maxCircuitLength; }
-			set { EurovalProduct.maxCircuitLength = value; }
+			get { return maxCircuitLength; }
+			set { maxCircuitLength = value; }
 		}
 
 		[ProductParameter]
 		public static int ConfigMaxPressureLost {
-			get { return EurovalProduct.maxPressureLost; }
-			set { EurovalProduct.maxPressureLost = value; }
+			get { return maxPressureLost; }
+			set { maxPressureLost = value; }
 		}
 
 		[ProductParameter]
 		public static int ConfigMaxDurchfluss {
-			get { return EurovalProduct.maxDurchfluss; }
-			set { EurovalProduct.maxDurchfluss = value; }
+			get { return maxDurchfluss; }
+			set { maxDurchfluss = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigSpreizungHeizMin {
-			get { return EurovalProduct.spreizungHeizMin; }
-			set { EurovalProduct.spreizungHeizMin = value; }
+			get { return spreizungHeizMin; }
+			set { spreizungHeizMin = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigSpreizungHeizMax {
-			get { return EurovalProduct.spreizungHeizMax; }
-			set { EurovalProduct.spreizungHeizMax = value; }
+			get { return spreizungHeizMax; }
+			set { spreizungHeizMax = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigSpreizungKühlMin {
-			get { return EurovalProduct.spreizungKühlMin; }
-			set { EurovalProduct.spreizungKühlMin = value; }
+			get { return spreizungKühlMin; }
+			set { spreizungKühlMin = value; }
 		}
 
 		[ProductParameter]
 		public static double ConfigSpreizungKühlMax {
-			get { return EurovalProduct.spreizungKühlMax; }
-			set { EurovalProduct.spreizungKühlMax = value; }
+			get { return spreizungKühlMax; }
+			set { spreizungKühlMax = value; }
 		}
 		#endregion Product Parameters
 

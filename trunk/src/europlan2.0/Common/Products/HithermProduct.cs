@@ -15,6 +15,16 @@ namespace Europlan.Common {
 		private static bool canHeat = true;
 		private static bool canCool = false;
 
+		// planning
+		private static double[][] hlRegHeizleistung = {
+			new double[] {105,120,140,155,175,190,210,225,240},
+			new double[] { 85,100,120,135,155,170,185,205,220},
+			new double[] { 70, 85,105,120,140,155,175,190,210},
+			new double[] { 55, 70, 90,105,125,140,160,175,195},
+			new double[] { 45, 60, 80, 95,115,130,145,165,180}
+		};
+
+
 		public HithermProduct() {
 
 		}

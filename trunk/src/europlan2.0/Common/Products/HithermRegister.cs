@@ -249,6 +249,8 @@ namespace Europlan.Common {
 		private RegisterTypeEnum registerType;
 		private RegisterOrientationEnum orientation;
 		private int rohre = 1;
+		private double pipeHorizontal;
+		private double pipeVertical;
 
 		/*private Nullable<Point> origin = null;*/
 
@@ -304,6 +306,21 @@ namespace Europlan.Common {
 					this.rohre = 1;
 				}
 			}
+		}
+
+		public double PipeHorizontal {
+			get { return this.pipeHorizontal; }
+			set { this.pipeHorizontal = value; }
+		}
+
+		public double PipeVertical {
+			get { return this.pipeVertical; }
+			set { this.pipeVertical = value; }
+		}
+
+		[XmlIgnore]
+		public double EquivalentPipeLength {
+			get { return this.Area * 10 + this.pipeVertical + this.pipeHorizontal; }
 		}
 
 		[XmlIgnore]
