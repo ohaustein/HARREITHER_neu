@@ -581,5 +581,85 @@ namespace Europlan.Common {
 
 			return wrapperList;
 		}
+
+		public List<RegulatorCircuitWrapper> GetRegulatorCircuitWrapper() {
+			// TODO
+			
+			List<RegulatorCircuitWrapper> wrapperHeatList = new List<RegulatorCircuitWrapper>();
+			List<RegulatorCircuitWrapper> wrapperCoolList = new List<RegulatorCircuitWrapper>();
+
+			RegulatorCircuitWrapper wrapper;
+
+			foreach (RegulatorCircuit rc in this.RegulatorCircuits) {
+				wrapper = new RegulatorCircuitWrapper();
+				wrapper.HeatOrCool = "Heizbetrieb";
+				wrapper.Id = rc.Id;
+				wrapper.Name = rc.Name;
+				wrapper.Medium = "Wasser";
+				wrapper.VorlaufTemp = rc.HeatFlowTemperature;
+				wrapper.RuecklaufTemp = rc.HeatFlowTemperature - 7;
+				wrapper.Durchfluss = 1068;
+				wrapper.Druckverlust = 105;
+				wrapper.Inhalt = 87;
+				wrapperHeatList.Add(wrapper);
+								wrapper = new RegulatorCircuitWrapper();
+				wrapper.HeatOrCool = "Kühlbetrieb";
+				wrapper.Id = rc.Id;
+				wrapper.Name = rc.Name;
+				wrapper.Medium = "Wasser";
+				wrapper.VorlaufTemp = rc.CoolFlowTemperature;
+				wrapper.RuecklaufTemp = rc.CoolFlowTemperature + 3;
+				wrapper.Durchfluss = 1068;
+				wrapper.Druckverlust = 105;
+				wrapper.Inhalt = 87;
+				wrapperCoolList.Add(wrapper);
+			}
+			
+			wrapperHeatList.AddRange(wrapperCoolList);
+
+			return wrapperHeatList;
+		}
+
+		public List<DistributorWrapper> GetDistributorWrapper() {
+			// TODO
+
+			List<DistributorWrapper> wrapperHeatList = new List<DistributorWrapper>();
+			List<DistributorWrapper> wrapperCoolList = new List<DistributorWrapper>();
+
+			DistributorWrapper wrapper;
+
+			foreach (Floor floor in this.Floors) {
+				foreach (Distributor distributor in floor.Distributors) {
+					wrapper = new DistributorWrapper();
+					wrapper.HeatOrCool = "Heizbetrieb";
+					wrapper.Id = distributor.Id;
+					wrapper.Name = distributor.Name;
+					wrapper.Groups = 11;
+					wrapper.RegulatorCircuit = distributor.RegulatorCircuitId;
+					wrapper.VorlaufTemp = distributor.RegulatorCircuit.HeatFlowTemperature;
+					wrapper.RuecklaufTemp = distributor.RegulatorCircuit.HeatFlowTemperature - 7;
+					wrapper.Durchfluss = 1068;
+					wrapper.Druckverlust = 105;
+					wrapper.Inhalt = 87;
+					wrapperHeatList.Add(wrapper);
+					wrapper = new DistributorWrapper();
+					wrapper.HeatOrCool = "Kühlbetrieb";
+					wrapper.Id = distributor.Id;
+					wrapper.Name = distributor.Name;
+					wrapper.Groups = 11;
+					wrapper.RegulatorCircuit = distributor.RegulatorCircuitId;
+					wrapper.VorlaufTemp = distributor.RegulatorCircuit.CoolFlowTemperature;
+					wrapper.RuecklaufTemp = distributor.RegulatorCircuit.CoolFlowTemperature + 3;
+					wrapper.Durchfluss = 1068;
+					wrapper.Druckverlust = 105;
+					wrapper.Inhalt = 87;
+					wrapperCoolList.Add(wrapper);
+				}
+			}
+
+			wrapperHeatList.AddRange(wrapperCoolList);
+
+			return wrapperHeatList;
+		}
 	}
 }

@@ -68,24 +68,32 @@ namespace Europlan.Common {
 			List<FloorOverviewWrapper> floorOverviewWrapper = project.GetFloorOverviewWrapper();
 			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = project.GetOpenHeatLoadForRoomWrapper();
 			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = project.GetOpenCoolLoadForRoomWrapper();
+			List<RegulatorCircuitWrapper> regulatorCircuitWrapper = project.GetRegulatorCircuitWrapper();
+			List<DistributorWrapper> distributorWrapper = project.GetDistributorWrapper();
 
 			DataTable projektBilanz = ReportHelper.ListToDataTable<ProjektBilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
 			DataTable floorOverwiew = ReportHelper.ListToDataTable<FloorOverviewWrapper>(floorOverviewWrapper);
 			DataTable openHeatLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openHeatLoadWrapper);
 			DataTable openCoolLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openCoolLoadWrapper);
+			DataTable regulatorCircuits = ReportHelper.ListToDataTable<RegulatorCircuitWrapper>(regulatorCircuitWrapper);
+			DataTable distributors = ReportHelper.ListToDataTable<DistributorWrapper>(distributorWrapper);
 
 			projektBilanz.TableName = "ProjektBilanz";
 			projectWarnings.TableName = "ProjectWarnings";
 			floorOverwiew.TableName = "FloorOverview";
 			openHeatLoad.TableName = "OpenHeatLoad";
 			openCoolLoad.TableName = "OpenCoolLoad";
+			regulatorCircuits.TableName = "RegulatorCircuits";
+			distributors.TableName = "Distributors";
 
 			reportData.Tables.Add(projektBilanz);
 			reportData.Tables.Add(projectWarnings);
 			reportData.Tables.Add(floorOverwiew);
 			reportData.Tables.Add(openHeatLoad);
 			reportData.Tables.Add(openCoolLoad);
+			reportData.Tables.Add(regulatorCircuits);
+			reportData.Tables.Add(distributors);
 
 			listLabel1.DataSource = reportData;
 
