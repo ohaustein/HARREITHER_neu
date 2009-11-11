@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 namespace Europlan.Common {
 	[XmlInclude(typeof(EurovalCircuit))]
 	[XmlInclude(typeof(ModulDeckeCircuit))]
+	[XmlInclude(typeof(ModulBodenCircuit))]
 	public abstract class Circuit {
 
 		public enum CircuitConnectionTypeEnum {
