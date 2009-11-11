@@ -121,6 +121,7 @@ namespace Europlan.Common {
 			listLabel1.Variables.Add("@ProjectCreated", project.ProjectCreated);
 			listLabel1.Variables.Add("@ProjectLastChanged", project.ProjectLastChanged);
 			listLabel1.Variables.Add("@ProjectEditor", project.ProjectEditor);
+			listLabel1.Variables.Add("@CoolingEnabled", project.CalculateCoolLoad);
 			
 
 			listLabel1.Variables.Add("@PartnerContact", Licensing.LicenseManager.Instance.License.Header.Replace("\r", ""));
