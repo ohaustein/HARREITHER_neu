@@ -16,14 +16,19 @@ namespace Europlan.Common {
 		private static bool canCool = false;
 
 		// planning
-		private static double lambdaE = 60.0;
+		private static double su0 = 0.045; /* Mindestüberdeckung fix */
+		private static double alpha0 = 10.8; /* Fixwert für FBH fix */
+		private static double alphaFbk = 6.5; /* für FBK fix */
+		private static double alphaFbh = 10.8; /* für FBH fix */
+		private static double lambdaU0 = 1; /* fix */
+		private static double lambdaE = 60.0; /* Estrichleitfähigkeit bzw Leitfähigkeit Lastausgleichsschicht, fix */
 		private static double su = 0.002; /* Estrichüberdeckung bzw. Überdeckung Lastausgleich */
-		private static double alpha0 = 10.8; /* Fixwert für FBH fix??? */
-		private static double alphaFbk = 6.5; //6.5; /* für FBK fix??? */
-		private static double alphaFbh = 10.8; /* für FBH fix??? */
+		private static double lambdaU = 60; /* Wärmeleitfähigkeit der Überdeckung */
 		private static double rLambdaDecke = 0.11; /* Fußbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 		private static double rLambdaPutz = 0.02; /* Fußbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
+		private static double atmt = 1.06; /* Fixwert laut Norm */
+		private static double b = 6.5; /* Fixwert laut Norm */
 
 		private float plannedArea = 0;
 		private float plannedFloorArea = 0;
@@ -107,6 +112,132 @@ namespace Europlan.Common {
 		}
 		public override int QuickDimensioningCoolPowerPerSquareMeter {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSu0 {
+			get { return su0; }
+			set { su0 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlpha0 {
+			get { return alpha0; }
+			set { alpha0 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaFbk {
+			get { return alphaFbk; }
+			set { alphaFbk = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaFbh {
+			get { return alphaFbh; }
+			set { alphaFbh = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLambdaU0 {
+			get { return lambdaU0; }
+			set { lambdaU0 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLambdaE {
+			get { return lambdaE; }
+			set { lambdaE = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSu {
+			get { return su; }
+			set { su = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLambdaU {
+			get { return lambdaU; }
+			set { lambdaU = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRLambdaDecke {
+			get { return rLambdaDecke; }
+			set { rLambdaDecke = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRLambdaPutz {
+			get { return rLambdaPutz; }
+			set { rLambdaPutz = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigC {
+			get { return c; }
+			set { c = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAtmt {
+			get { return atmt; }
+			set { atmt = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigB {
+			get { return b; }
+			set { b = value; }
+		}
+		
+		[ProductParameter]
+		public static bool ConfigUseHarreitherNorm {
+			get { return useHarreitherNorm; }
+			set { useHarreitherNorm = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigMaxFloorTempHarreither {
+			get { return maxFloorTempHarreither; }
+			set { maxFloorTempHarreither = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigMaxFloorTempEn1264 {
+			get { return maxFloorTempEn1264; }
+			set { maxFloorTempEn1264 = value; }
+		}
+
+		[ProductParameter]
+		public static int ConfigMaxPressureLost {
+			get { return maxPressureLost; }
+			set { maxPressureLost = value; }
+		}
+
+		[ProductParameter]
+		public static int ConfigMaxDurchfluss {
+			get { return maxDurchfluss; }
+			set { maxDurchfluss = value; }
+		}
+
+		[ProductParameter]
+		public static int ConfigMaxModulesInRow {
+			get { return maxModulesInRow; }
+			set { maxModulesInRow = value; }
+		}
+
+		[ProductParameter]
+		public static int ConfigMaxModulesInParallel {
+			get { return maxModulesInParallel; }
+			set { maxModulesInParallel = value; }
+		}
+
+		[ProductParameter]
+		public static int ConfigModulesInCircuit {
+			get { return maxModulesInCircuit; }
+			set { maxModulesInCircuit = value; }
 		}
 		#endregion Product Parameters
 
@@ -420,102 +551,6 @@ namespace Europlan.Common {
 
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
 			get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
-		}
-
-		[ProductParameter]
-		public static bool ConfigUseHarreitherNorm {
-			get { return ModulKlimaBodenProduct.useHarreitherNorm; }
-			set { ModulKlimaBodenProduct.useHarreitherNorm = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigMaxFloorTempHarreither {
-			get { return ModulKlimaBodenProduct.maxFloorTempHarreither; }
-			set { ModulKlimaBodenProduct.maxFloorTempHarreither = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigMaxFloorTempEn1264 {
-			get { return ModulKlimaBodenProduct.maxFloorTempEn1264; }
-			set { ModulKlimaBodenProduct.maxFloorTempEn1264 = value; }
-		}
-
-		[ProductParameter]
-		public static int ConfigMaxPressureLost {
-			get { return ModulKlimaBodenProduct.maxPressureLost; }
-			set { ModulKlimaBodenProduct.maxPressureLost = value; }
-		}
-
-		[ProductParameter]
-		public static int ConfigMaxDurchfluss {
-			get { return ModulKlimaBodenProduct.maxDurchfluss; }
-			set { ModulKlimaBodenProduct.maxDurchfluss = value; }
-		}
-
-		[ProductParameter]
-		public static int ConfigMaxModulesInRow {
-			get { return ModulKlimaBodenProduct.maxModulesInRow; }
-			set { ModulKlimaBodenProduct.maxModulesInRow = value; }
-		}
-
-		[ProductParameter]
-		public static int ConfigMaxModulesInParallel {
-			get { return ModulKlimaBodenProduct.maxModulesInParallel; }
-			set { ModulKlimaBodenProduct.maxModulesInParallel = value; }
-		}
-
-		[ProductParameter]
-		public static int ConfigModulesInCircuit {
-			get { return ModulKlimaBodenProduct.maxModulesInCircuit; }
-			set { ModulKlimaBodenProduct.maxModulesInCircuit = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigLambdaE {
-			get { return lambdaE; }
-			set { lambdaE = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigSu {
-			get { return su; }
-			set { su = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigAlpha0 {
-			get { return alpha0; }
-			set { alpha0 = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigAlphaFbk {
-			get { return alphaFbk; }
-			set { alphaFbk = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigAlphaFbh {
-			get { return alphaFbh; }
-			set { alphaFbh = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigRLambdaDecke {
-			get { return rLambdaDecke; }
-			set { rLambdaDecke = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigRLambdaPutz {
-			get { return rLambdaPutz; }
-			set { rLambdaPutz = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigC {
-			get { return c; }
-			set { c = value; }
 		}
 
 		/// <summary>

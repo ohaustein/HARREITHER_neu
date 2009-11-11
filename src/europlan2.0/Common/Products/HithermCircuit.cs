@@ -7,16 +7,16 @@ namespace Europlan.Common {
 
 	public class HithermCircuit : Circuit {
 
-		//private List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
+		private List<HithermRegister> registers = new List<HithermRegister>();
 
 		public HithermCircuit() {
 
 		}
 	
-		//public List<KlimaFlaechenList> Rows {
-		//	get { return rows; }
-		//	set { rows = value; }
-		//}
+		public List<HithermRegister> Registers {
+			get { return this.registers; }
+			set { this.registers = value; }
+		}
 
 		[XmlIgnore]
 		public HithermProduct HithermProduct {
@@ -51,10 +51,9 @@ namespace Europlan.Common {
 		public double RegisterArea {
 			get {
 				double area = 0;
-				//foreach (KlimaFlaechenList row in rows) {
-				//	area += row.ModulArea;
-				//}
-				// TODO
+				foreach (HithermRegister register in this.registers) {
+					area += register.Area;
+				}
 				return area;
 			}
 		}
