@@ -661,5 +661,33 @@ namespace Europlan.Common {
 
 			return wrapperHeatList;
 		}
+
+		public List<RoomOverviewWrapper> GetRoomOverviewWrapper() {
+			// TODO 
+
+			List<RoomOverviewWrapper> wrapperList = new List<RoomOverviewWrapper>();
+
+			RoomOverviewWrapper wrapper;
+
+			foreach (Floor floor in this.Floors) {
+				foreach (Room room in floor.Rooms) {
+					wrapper = new RoomOverviewWrapper();
+					wrapper.Id = room.Id;
+					wrapper.Name = room.Name;
+					wrapper.HeatTemperature = room.RoomHeatTemperature;
+					wrapper.HeatNetLoad = room.HeatLoad;
+					wrapper.HeatPower = room.HeatLoad;
+					wrapper.CoolTemperature = room.RoomCoolTemperature;
+					wrapper.CoolNetLoad = room.CoolLoad;
+					wrapper.CoolPower = room.CoolLoad;
+					wrapper.Area = room.Area;
+					wrapper.FloorId = floor.Id;
+					wrapper.FloorName = floor.Name;
+					wrapperList.Add(wrapper);
+				}
+			}
+
+			return wrapperList;
+		}
 	}
 }
