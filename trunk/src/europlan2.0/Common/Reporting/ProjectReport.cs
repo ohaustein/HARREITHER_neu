@@ -70,6 +70,7 @@ namespace Europlan.Common {
 			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = project.GetOpenCoolLoadForRoomWrapper();
 			List<RegulatorCircuitWrapper> regulatorCircuitWrapper = project.GetRegulatorCircuitWrapper();
 			List<DistributorWrapper> distributorWrapper = project.GetDistributorWrapper();
+			List<RoomOverviewWrapper> roomOverviewWrapper = project.GetRoomOverviewWrapper();
 
 			DataTable projektBilanz = ReportHelper.ListToDataTable<ProjektBilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
@@ -78,6 +79,7 @@ namespace Europlan.Common {
 			DataTable openCoolLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openCoolLoadWrapper);
 			DataTable regulatorCircuits = ReportHelper.ListToDataTable<RegulatorCircuitWrapper>(regulatorCircuitWrapper);
 			DataTable distributors = ReportHelper.ListToDataTable<DistributorWrapper>(distributorWrapper);
+			DataTable roomOverview = ReportHelper.ListToDataTable<RoomOverviewWrapper>(roomOverviewWrapper);
 
 			projektBilanz.TableName = "ProjektBilanz";
 			projectWarnings.TableName = "ProjectWarnings";
@@ -86,6 +88,7 @@ namespace Europlan.Common {
 			openCoolLoad.TableName = "OpenCoolLoad";
 			regulatorCircuits.TableName = "RegulatorCircuits";
 			distributors.TableName = "Distributors";
+			roomOverview.TableName = "RoomOverview";
 
 			reportData.Tables.Add(projektBilanz);
 			reportData.Tables.Add(projectWarnings);
@@ -94,6 +97,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(openCoolLoad);
 			reportData.Tables.Add(regulatorCircuits);
 			reportData.Tables.Add(distributors);
+			reportData.Tables.Add(roomOverview);
 
 			listLabel1.DataSource = reportData;
 

@@ -79,7 +79,11 @@ namespace Europlan.Common {
 
 		public string Id {
 			get { return id; }
-			set { id = value; }
+			set {
+				if (value != null && value != "") {
+					id = value;
+				}
+			}
 		}
 
 		public RoomList Rooms {
