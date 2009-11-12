@@ -175,8 +175,10 @@
       <DependentUpon>LenghtAssistantForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\Wrapper\DistributorWrapper.cs" />
+    <Compile Include="Project\Wrapper\Products\Euroval\EurovalAuslegungWrapper.cs" />
     <Compile Include="Project\Wrapper\FloorOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\OpenLoadForRoomWrapper.cs" />
+    <Compile Include="Project\Wrapper\Products\Euroval\EurovalOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\ProjectWarningWrapper.cs" />
     <Compile Include="Project\Wrapper\ProjektBilanzWrapper.cs" />
     <Compile Include="Project\SelectPlannedProductForm.cs">

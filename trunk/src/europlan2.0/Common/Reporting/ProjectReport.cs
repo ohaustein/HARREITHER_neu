@@ -66,38 +66,46 @@ namespace Europlan.Common {
 			List<ProjektBilanzWrapper> projektBilanzWrapper = this.GetProkjektBilanzReport();
 			List<ProjectWarningWrapper> projectWarningWrapper = this.GetProjectWarningReport();
 			List<FloorOverviewWrapper> floorOverviewWrapper = this.GetFloorOverviewWrapper();
+			List<EurovalOverviewWrapper> eurovalOverviewWrapper = GetEurovalOverviewWrapper();
 			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = this.GetOpenHeatLoadForRoomWrapper();
 			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = this.GetOpenCoolLoadForRoomWrapper();
 			List<RegulatorCircuitWrapper> regulatorCircuitWrapper = this.GetRegulatorCircuitWrapper();
 			List<DistributorWrapper> distributorWrapper = this.GetDistributorWrapper();
 			List<RoomOverviewWrapper> roomOverviewWrapper = this.GetRoomOverviewWrapper();
+			List<EurovalAuslegungWrapper> eurovalAuslegungWrapper = GetEurovalAuslegungWrapper();
 
 			DataTable projektBilanz = ReportHelper.ListToDataTable<ProjektBilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
 			DataTable floorOverwiew = ReportHelper.ListToDataTable<FloorOverviewWrapper>(floorOverviewWrapper);
+			DataTable eurovalOverview = ReportHelper.ListToDataTable<EurovalOverviewWrapper>(eurovalOverviewWrapper);
 			DataTable openHeatLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openHeatLoadWrapper);
 			DataTable openCoolLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openCoolLoadWrapper);
 			DataTable regulatorCircuits = ReportHelper.ListToDataTable<RegulatorCircuitWrapper>(regulatorCircuitWrapper);
 			DataTable distributors = ReportHelper.ListToDataTable<DistributorWrapper>(distributorWrapper);
 			DataTable roomOverview = ReportHelper.ListToDataTable<RoomOverviewWrapper>(roomOverviewWrapper);
+			DataTable eurovalAuslegung = ReportHelper.ListToDataTable<EurovalAuslegungWrapper>(eurovalAuslegungWrapper);
 
 			projektBilanz.TableName = "ProjektBilanz";
 			projectWarnings.TableName = "ProjectWarnings";
 			floorOverwiew.TableName = "FloorOverview";
+			eurovalOverview.TableName = "EurovalOverview";
 			openHeatLoad.TableName = "OpenHeatLoad";
 			openCoolLoad.TableName = "OpenCoolLoad";
 			regulatorCircuits.TableName = "RegulatorCircuits";
 			distributors.TableName = "Distributors";
 			roomOverview.TableName = "RoomOverview";
+			eurovalAuslegung.TableName = "EurovalAuslegung";
 
 			reportData.Tables.Add(projektBilanz);
 			reportData.Tables.Add(projectWarnings);
 			reportData.Tables.Add(floorOverwiew);
+			reportData.Tables.Add(eurovalOverview);
 			reportData.Tables.Add(openHeatLoad);
 			reportData.Tables.Add(openCoolLoad);
 			reportData.Tables.Add(regulatorCircuits);
 			reportData.Tables.Add(distributors);
 			reportData.Tables.Add(roomOverview);
+			reportData.Tables.Add(eurovalAuslegung);
 
 			listLabel1.DataSource = reportData;
 
@@ -468,6 +476,80 @@ namespace Europlan.Common {
 					wrapper.FloorName = floor.Name;
 					wrapperList.Add(wrapper);
 				}
+			}
+
+			return wrapperList;
+		}
+
+		public List<EurovalAuslegungWrapper> GetEurovalAuslegungWrapper() {
+			List<EurovalAuslegungWrapper> wrapperHeatList = new List<EurovalAuslegungWrapper>();
+			List<EurovalAuslegungWrapper> wrapperCoolList = new List<EurovalAuslegungWrapper>();
+
+			EurovalAuslegungWrapper wrapperHeat;
+			EurovalAuslegungWrapper wrapperCool;
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					wrapperHeat = null;
+					wrapperCool = null;
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						if (pp.Product is EurovalProduct) {
+							if (wrapperHeat == null) {
+								wrapperHeat = new EurovalAuslegungWrapper();
+								wrapperHeat.RoomId = room.Id;
+								wrapperHeat.RoomName = room.Name;
+								wrapperHeat.FloorId = floor.Id;
+								wrapperHeat.FloorName = floor.Name;
+								double v, r;
+								pp.Product.GetHeatFlow(out v, out r);
+								wrapperHeat.VorlaufTemp = v;
+								wrapperHeat.RuecklaufTemp = r;
+								wrapperHeat.Circuits = pp.Product.PlannedCircuitCount;
+								wrapperHeat.Wassermenge = pp.Product.PlannedMhHeat;
+								wrapperHeat.HeatOrCool = "Heizen";
+							}
+							if (project.CalculateCoolLoad && wrapperCool == null) {
+								wrapperCool = new EurovalAuslegungWrapper();
+								wrapperCool.RoomId = room.Id;
+								wrapperCool.RoomName = room.Name;
+								wrapperCool.FloorId = floor.Id;
+								wrapperCool.FloorName = floor.Name;
+								double v, r;
+								pp.Product.GetCoolFlow(out v, out r);
+								wrapperCool.VorlaufTemp = v;
+								wrapperCool.RuecklaufTemp = r;
+								wrapperCool.Circuits = pp.Product.PlannedCircuitCount;
+								wrapperCool.Wassermenge = pp.Product.PlannedMhCool;
+								wrapperCool.HeatOrCool = "Kühlen";
+							}
+						}
+					}
+					if (wrapperHeat != null) {
+						wrapperHeatList.Add(wrapperHeat);
+					}
+					if (wrapperCool != null) {
+						wrapperCoolList.Add(wrapperCool);
+					}
+				}
+			}
+
+			wrapperHeatList.AddRange(wrapperCoolList);
+
+			return wrapperHeatList;
+		}
+
+		public List<EurovalOverviewWrapper> GetEurovalOverviewWrapper() {
+			List<EurovalOverviewWrapper> wrapperList = new List<EurovalOverviewWrapper>();
+
+			EurovalOverviewWrapper wrapper;
+			Random random = new Random(DateTime.Now.Millisecond);
+			foreach (EurovalProduct.LayDistance distance in Enum.GetValues(typeof(EurovalProduct.LayDistance))) {
+				wrapper = new EurovalOverviewWrapper();
+				wrapper.LayDistance = distance.ToString();
+				wrapper.AzArea = random.Next(0, 10);
+				wrapper.RzArea = random.Next(0, 10);
+				wrapper.ConnectingArea = random.Next(0, 10);
+				wrapperList.Add(wrapper);
 			}
 
 			return wrapperList;
