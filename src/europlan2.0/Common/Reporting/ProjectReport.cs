@@ -63,14 +63,14 @@ namespace Europlan.Common {
 
 			DataSet reportData = new DataSet();
 
-			List<ProjektBilanzWrapper> projektBilanzWrapper = project.GetProkjektBilanzReport();
-			List<ProjectWarningWrapper> projectWarningWrapper = project.GetProjectWarningReport();
-			List<FloorOverviewWrapper> floorOverviewWrapper = project.GetFloorOverviewWrapper();
-			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = project.GetOpenHeatLoadForRoomWrapper();
-			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = project.GetOpenCoolLoadForRoomWrapper();
-			List<RegulatorCircuitWrapper> regulatorCircuitWrapper = project.GetRegulatorCircuitWrapper();
-			List<DistributorWrapper> distributorWrapper = project.GetDistributorWrapper();
-			List<RoomOverviewWrapper> roomOverviewWrapper = project.GetRoomOverviewWrapper();
+			List<ProjektBilanzWrapper> projektBilanzWrapper = this.GetProkjektBilanzReport();
+			List<ProjectWarningWrapper> projectWarningWrapper = this.GetProjectWarningReport();
+			List<FloorOverviewWrapper> floorOverviewWrapper = this.GetFloorOverviewWrapper();
+			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = this.GetOpenHeatLoadForRoomWrapper();
+			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = this.GetOpenCoolLoadForRoomWrapper();
+			List<RegulatorCircuitWrapper> regulatorCircuitWrapper = this.GetRegulatorCircuitWrapper();
+			List<DistributorWrapper> distributorWrapper = this.GetDistributorWrapper();
+			List<RoomOverviewWrapper> roomOverviewWrapper = this.GetRoomOverviewWrapper();
 
 			DataTable projektBilanz = ReportHelper.ListToDataTable<ProjektBilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
@@ -190,6 +190,287 @@ namespace Europlan.Common {
 				settings.StoreSetting("Maximized", true);
 			}
 			SettingsFile.Update();
+		}
+
+		public List<ProjektBilanzWrapper> GetProkjektBilanzReport() {
+			//TODO
+			List<ProjektBilanzWrapper> wrapperList = new List<ProjektBilanzWrapper>();
+
+			ProjektBilanzWrapper wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Normwärmebedarf";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gesamter bereinigter Wärmebedarf";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Heizleistung (nach innen)";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gesamte aufgenommene Leistung";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Wassermenge";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Maximaler Druckverlust (inkl. Verteiler)";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gesamt-Wasserinhalt (ab Verteiler)";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Raumfläche";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Fußbodenheizungsfläche";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Wandheizungsfläche";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjektBilanzWrapper();
+			wrapper.Description = "Gestamt-Deckenkühlungsfläche";
+			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
+
+		public List<ProjectWarningWrapper> GetProjectWarningReport() {
+			//TODO
+			//foreach (Floor floor in this.floors) {
+			//    foreach (Room room in floor.Rooms) {
+			//        foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+
+			//        }
+			//    }
+			//}
+			List<ProjectWarningWrapper> wrapperList = new List<ProjectWarningWrapper>();
+
+			ProjectWarningWrapper wrapper = new ProjectWarningWrapper();
+			wrapper.FloorId = "KG1";
+			wrapper.FloorName = "Keller";
+			wrapper.Warning = "WARNUNG FBH in K06....";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjectWarningWrapper();
+			wrapper.FloorId = "KG1";
+			wrapper.FloorName = "Keller";
+			wrapper.Warning = "WARNUNG FBH in K08....";
+			wrapperList.Add(wrapper);
+
+			wrapper = new ProjectWarningWrapper();
+			wrapper.FloorId = "EG1";
+			wrapper.FloorName = "Erdgeschoß";
+			wrapper.Warning = "FEHLER WH in E02....";
+			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
+
+		public List<FloorOverviewWrapper> GetFloorOverviewWrapper() {
+			List<FloorOverviewWrapper> wrapperListHeat = new List<FloorOverviewWrapper>();
+			List<FloorOverviewWrapper> wrapperListCool = new List<FloorOverviewWrapper>();
+			//TODO
+			foreach (Floor floor in project.Floors) {
+				//    foreach (Room room in floor.Rooms) {
+				//        foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+				FloorOverviewWrapper wrapper = new FloorOverviewWrapper();
+				wrapper.HeatOrCool = "Heizbetrieb";
+				wrapper.FloorName = floor.Name;
+				wrapper.FloorArea = 242.3;
+				wrapper.QH2o = 3568;
+				wrapper.Q = 3401;
+				wrapper.TransmissionFloor = 10;
+				wrapper.TransmissionWall = 0;
+				wrapper.TransmissionCeiling = 68.7;
+				wrapperListHeat.Add(wrapper);
+
+				if (project.CalculateCoolLoad) {
+					wrapper = new FloorOverviewWrapper();
+					wrapper.HeatOrCool = "Kühlbetrieb";
+					wrapper.FloorName = floor.Name;
+					wrapper.FloorArea = 42.3;
+					wrapper.QH2o = 3568;
+					wrapper.Q = 3401;
+					wrapper.TransmissionFloor = 10;
+					wrapper.TransmissionWall = 0;
+					wrapper.TransmissionCeiling = 68.7;
+					wrapperListCool.Add(wrapper);
+				}
+				//        }
+				//    }
+			}
+
+			wrapperListHeat.AddRange(wrapperListCool);
+			return wrapperListHeat;
+		}
+
+		public List<OpenLoadForRoomWrapper> GetOpenHeatLoadForRoomWrapper() {
+			List<OpenLoadForRoomWrapper> wrapperList = new List<OpenLoadForRoomWrapper>();
+
+			//TODO
+
+			OpenLoadForRoomWrapper wrapper = new OpenLoadForRoomWrapper();
+			wrapper.RoomId = "E01";
+			wrapper.RoomName = "Wohnzimmer";
+			wrapper.RequiredLoad = 1650.0;
+			wrapper.NetLoad = 1650.0;
+			wrapper.Power = 1400.0;
+			wrapperList.Add(wrapper);
+
+			wrapper = new OpenLoadForRoomWrapper();
+			wrapper.RoomId = "E03";
+			wrapper.RoomName = "Küche";
+			wrapper.RequiredLoad = 1230.9;
+			wrapper.NetLoad = 1150.0;
+			wrapper.Power = 1002.0;
+			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
+
+		public List<OpenLoadForRoomWrapper> GetOpenCoolLoadForRoomWrapper() {
+			List<OpenLoadForRoomWrapper> wrapperList = new List<OpenLoadForRoomWrapper>();
+
+			// TODO
+
+			OpenLoadForRoomWrapper wrapper = new OpenLoadForRoomWrapper();
+			wrapper.RoomId = "E01";
+			wrapper.RoomName = "Wohnzimmer";
+			wrapper.RequiredLoad = 1650.0;
+			wrapper.NetLoad = 1650.0;
+			wrapper.Power = 1400.0;
+			wrapperList.Add(wrapper);
+
+			wrapper = new OpenLoadForRoomWrapper();
+			wrapper.RoomId = "E03";
+			wrapper.RoomName = "Küche";
+			wrapper.RequiredLoad = 1230.9;
+			wrapper.NetLoad = 1150.0;
+			wrapper.Power = 1002.0;
+			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
+
+		public List<RegulatorCircuitWrapper> GetRegulatorCircuitWrapper() {
+			// TODO
+
+			List<RegulatorCircuitWrapper> wrapperHeatList = new List<RegulatorCircuitWrapper>();
+			List<RegulatorCircuitWrapper> wrapperCoolList = new List<RegulatorCircuitWrapper>();
+
+			RegulatorCircuitWrapper wrapper;
+
+			foreach (RegulatorCircuit rc in project.RegulatorCircuits) {
+				wrapper = new RegulatorCircuitWrapper();
+				wrapper.HeatOrCool = "Heizbetrieb";
+				wrapper.Id = rc.Id;
+				wrapper.Name = rc.Name;
+				wrapper.Medium = "Wasser";
+				wrapper.VorlaufTemp = rc.HeatFlowTemperature;
+				wrapper.RuecklaufTemp = rc.HeatFlowTemperature - 7;
+				wrapper.Durchfluss = 1068;
+				wrapper.Druckverlust = 105;
+				wrapper.Inhalt = 87;
+				wrapperHeatList.Add(wrapper);
+				if (project.CalculateCoolLoad) {
+					wrapper = new RegulatorCircuitWrapper();
+					wrapper.HeatOrCool = "Kühlbetrieb";
+					wrapper.Id = rc.Id;
+					wrapper.Name = rc.Name;
+					wrapper.Medium = "Wasser";
+					wrapper.VorlaufTemp = rc.CoolFlowTemperature;
+					wrapper.RuecklaufTemp = rc.CoolFlowTemperature + 3;
+					wrapper.Durchfluss = 1068;
+					wrapper.Druckverlust = 105;
+					wrapper.Inhalt = 87;
+					wrapperCoolList.Add(wrapper);
+				}
+			}
+
+			wrapperHeatList.AddRange(wrapperCoolList);
+
+			return wrapperHeatList;
+		}
+
+		public List<DistributorWrapper> GetDistributorWrapper() {
+			// TODO
+
+			List<DistributorWrapper> wrapperHeatList = new List<DistributorWrapper>();
+			List<DistributorWrapper> wrapperCoolList = new List<DistributorWrapper>();
+
+			DistributorWrapper wrapper;
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Distributor distributor in floor.Distributors) {
+					wrapper = new DistributorWrapper();
+					wrapper.HeatOrCool = "Heizbetrieb";
+					wrapper.Id = distributor.Id;
+					wrapper.Name = distributor.Name;
+					wrapper.Groups = 11;
+					wrapper.RegulatorCircuit = distributor.RegulatorCircuitId;
+					wrapper.VorlaufTemp = distributor.RegulatorCircuit.HeatFlowTemperature;
+					wrapper.RuecklaufTemp = distributor.RegulatorCircuit.HeatFlowTemperature - 7;
+					wrapper.Durchfluss = 1068;
+					wrapper.Druckverlust = 105;
+					wrapper.Inhalt = 87;
+					wrapperHeatList.Add(wrapper);
+					if (project.CalculateCoolLoad) {
+						wrapper = new DistributorWrapper();
+						wrapper.HeatOrCool = "Kühlbetrieb";
+						wrapper.Id = distributor.Id;
+						wrapper.Name = distributor.Name;
+						wrapper.Groups = 11;
+						wrapper.RegulatorCircuit = distributor.RegulatorCircuitId;
+						wrapper.VorlaufTemp = distributor.RegulatorCircuit.CoolFlowTemperature;
+						wrapper.RuecklaufTemp = distributor.RegulatorCircuit.CoolFlowTemperature + 3;
+						wrapper.Durchfluss = 1068;
+						wrapper.Druckverlust = 105;
+						wrapper.Inhalt = 87;
+						wrapperCoolList.Add(wrapper);
+					}
+				}
+			}
+
+			wrapperHeatList.AddRange(wrapperCoolList);
+
+			return wrapperHeatList;
+		}
+
+		public List<RoomOverviewWrapper> GetRoomOverviewWrapper() {
+			// TODO 
+
+			List<RoomOverviewWrapper> wrapperList = new List<RoomOverviewWrapper>();
+
+			RoomOverviewWrapper wrapper;
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					wrapper = new RoomOverviewWrapper();
+					wrapper.Id = room.Id;
+					wrapper.Name = room.Name;
+					wrapper.HeatTemperature = room.RoomHeatTemperature;
+					wrapper.HeatNetLoad = room.HeatLoad;
+					wrapper.HeatPower = room.HeatLoad;
+					wrapper.CoolTemperature = room.RoomCoolTemperature;
+					wrapper.CoolNetLoad = room.CoolLoad;
+					wrapper.CoolPower = room.CoolLoad;
+					wrapper.Area = room.Area;
+					wrapper.FloorId = floor.Id;
+					wrapper.FloorName = floor.Name;
+					wrapperList.Add(wrapper);
+				}
+			}
+
+			return wrapperList;
 		}
 
 	}
