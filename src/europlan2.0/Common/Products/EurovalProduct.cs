@@ -88,6 +88,67 @@ namespace Europlan.Common {
 		private bool clipSchiene = false;
 		private bool anhydritEstrich = false;
 
+		public class LayDistanceConverter : System.ComponentModel.TypeConverter {
+			private static readonly string A5 = "A5";
+			private static readonly string EV5 = "EV5";
+			private static readonly string EV10 = "EV10";
+			private static readonly string EV15 = "EV15";
+			private static readonly string EV20 = "EV20";
+			private static readonly string EV25 = "EV25";
+			private static readonly string EV30 = "EV30";
+			private static readonly string EV35 = "EV35";
+
+			private Dictionary<string, LayDistance> mappingFromString = new Dictionary<string, LayDistance>();
+			private Dictionary<LayDistance, string> mappingToString = new Dictionary<LayDistance, string>();
+
+			public LayDistanceConverter() {
+				mappingFromString.Add(A5, LayDistance.A5);
+				mappingFromString.Add(EV5, LayDistance.EV5);
+				mappingFromString.Add(EV10, LayDistance.EV10);
+				mappingFromString.Add(EV15, LayDistance.EV15);
+				mappingFromString.Add(EV20, LayDistance.EV20);
+				mappingFromString.Add(EV25, LayDistance.EV25);
+				mappingFromString.Add(EV30, LayDistance.EV30);
+				mappingFromString.Add(EV35, LayDistance.EV35);
+				mappingToString.Add(LayDistance.A5, A5);
+				mappingToString.Add(LayDistance.EV5, EV5);
+				mappingToString.Add(LayDistance.EV10, EV10);
+				mappingToString.Add(LayDistance.EV15, EV15);
+				mappingToString.Add(LayDistance.EV20, EV20);
+				mappingToString.Add(LayDistance.EV25, EV25);
+				mappingToString.Add(LayDistance.EV30, EV30);
+				mappingToString.Add(LayDistance.EV35, EV35);
+			}
+
+			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
+				return sourceType == typeof(string);
+			}
+
+			public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
+				return destinationType == typeof(string);
+			}
+
+			public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+				if (value is string) {
+					if (mappingFromString.ContainsKey((string)value)) {
+						return mappingFromString[(string)value];
+					}
+				}
+				return base.ConvertFrom(context, culture, value);
+			}
+
+			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+				if (value is LayDistance && destinationType == typeof(string)) {
+					if (mappingToString.ContainsKey((LayDistance)value)) {
+						return mappingToString[(LayDistance)value];
+					}
+				}
+				return base.ConvertTo(context, culture, value, destinationType);
+			}
+		}
+
+		[System.ComponentModel.TypeConverter(typeof(LayDistanceConverter))]
+
 		public enum LayDistance {
 			A5 = 0,
 			EV5 = 1,
