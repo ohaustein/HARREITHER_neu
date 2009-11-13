@@ -68,5 +68,11 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void btnNext_Click(object sender, EventArgs e) {
+			if (TreeSelectionRequested != null) {
+				TreeSelectionRequested(this, typeof(FacilityDetailsSummaryPanel));
+			}
+		}
+
 	}
 }

@@ -37,6 +37,7 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.label1 = new System.Windows.Forms.Label();
+			this.btnNext = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).BeginInit();
 			this.SuspendLayout();
@@ -67,7 +68,7 @@ namespace Europlan.Common {
 			this.gridRegulatoryCircuits.Location = new System.Drawing.Point(3, 27);
 			this.gridRegulatoryCircuits.MultiSelect = false;
 			this.gridRegulatoryCircuits.Name = "gridRegulatoryCircuits";
-			this.gridRegulatoryCircuits.Size = new System.Drawing.Size(507, 231);
+			this.gridRegulatoryCircuits.Size = new System.Drawing.Size(756, 453);
 			this.gridRegulatoryCircuits.TabIndex = 0;
 			this.gridRegulatoryCircuits.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.regulatoryCircuitsGrid_CellValueChanged);
 			this.gridRegulatoryCircuits.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.regulatoryCircuitsGrid_UserDeletedRow);
@@ -151,14 +152,26 @@ namespace Europlan.Common {
 			this.label1.TabIndex = 3;
 			this.label1.Text = "Regelkreise";
 			// 
+			// btnNext
+			// 
+			this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnNext.Location = new System.Drawing.Point(684, 486);
+			this.btnNext.Name = "btnNext";
+			this.btnNext.Size = new System.Drawing.Size(75, 23);
+			this.btnNext.TabIndex = 31;
+			this.btnNext.Text = "Weiter";
+			this.btnNext.UseVisualStyleBackColor = true;
+			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+			// 
 			// RegulatorCircuitsSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.btnNext);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.gridRegulatoryCircuits);
 			this.Name = "RegulatorCircuitsSummaryPanel";
-			this.Size = new System.Drawing.Size(513, 261);
+			this.Size = new System.Drawing.Size(762, 509);
 			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).EndInit();
 			this.ResumeLayout(false);
@@ -178,5 +191,6 @@ namespace Europlan.Common {
 		private NumericColumn heatFlowTemperatureDataGridViewTextBoxColumn;
 		private NumericColumn coolFlowTemperatureDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button btnNext;
 	}
 }

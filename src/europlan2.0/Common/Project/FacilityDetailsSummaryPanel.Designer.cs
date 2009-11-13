@@ -44,6 +44,7 @@ namespace Europlan.Common {
 			this.label7 = new System.Windows.Forms.Label();
 			this.numOutsideTemperature = new Europlan.Common.NumericBox();
 			this.chkCool = new System.Windows.Forms.CheckBox();
+			this.btnNext = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -244,7 +245,7 @@ namespace Europlan.Common {
 			this.numInsideTemperature.Name = "numInsideTemperature";
 			this.numInsideTemperature.Size = new System.Drawing.Size(52, 20);
 			this.numInsideTemperature.TabIndex = 35;
-			this.numInsideTemperature.Text = "0";
+			this.numInsideTemperature.Text = "1";
 			this.numInsideTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numInsideTemperature.Value = new decimal(new int[] {
             1,
@@ -284,7 +285,7 @@ namespace Europlan.Common {
 			this.numHumidity.Name = "numHumidity";
 			this.numHumidity.Size = new System.Drawing.Size(52, 20);
 			this.numHumidity.TabIndex = 32;
-			this.numHumidity.Text = "0";
+			this.numHumidity.Text = "10";
 			this.numHumidity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numHumidity.Value = new decimal(new int[] {
             10,
@@ -353,11 +354,23 @@ namespace Europlan.Common {
 			this.chkCool.UseVisualStyleBackColor = true;
 			this.chkCool.CheckedChanged += new System.EventHandler(this.chkCool_CheckedChanged);
 			// 
+			// btnNext
+			// 
+			this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnNext.Location = new System.Drawing.Point(638, 447);
+			this.btnNext.Name = "btnNext";
+			this.btnNext.Size = new System.Drawing.Size(75, 23);
+			this.btnNext.TabIndex = 30;
+			this.btnNext.Text = "Weiter";
+			this.btnNext.UseVisualStyleBackColor = true;
+			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+			// 
 			// FacilityDetailsSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
+			this.Controls.Add(this.btnNext);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.label1);
@@ -395,6 +408,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
 		private NumericBox numOutsideTemperature;
+		private System.Windows.Forms.Button btnNext;
 
 
 	}
