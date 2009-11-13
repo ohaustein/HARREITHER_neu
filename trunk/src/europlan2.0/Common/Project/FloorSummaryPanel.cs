@@ -262,5 +262,9 @@ namespace Europlan.Common {
 				e.Handled = true;
 			}
 		}
+
+		private void btnWhatIsNext_Click(object sender, EventArgs e) {
+			MessageBox.Show("Klicken Sie auf einen der Buttons in der Spalte\n'Bearbeiten' um den entsprechenden Raum zu öffnen, oder\n klicken Sie in der Projekthierarchie auf den gewünschten Raum.", "Wie geht's weiter?");
+		}
 	}
 }
