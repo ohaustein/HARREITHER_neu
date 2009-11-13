@@ -38,6 +38,7 @@ namespace Europlan.Common {
 			this.txtNumber = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
+			this.btnNext = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// lblProjectName
@@ -182,11 +183,23 @@ namespace Europlan.Common {
 			this.label2.TabIndex = 16;
 			this.label2.Text = "Projektdaten";
 			// 
+			// btnNext
+			// 
+			this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnNext.Location = new System.Drawing.Point(641, 447);
+			this.btnNext.Name = "btnNext";
+			this.btnNext.Size = new System.Drawing.Size(75, 23);
+			this.btnNext.TabIndex = 17;
+			this.btnNext.Text = "Weiter";
+			this.btnNext.UseVisualStyleBackColor = true;
+			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+			// 
 			// ProjectSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
+			this.Controls.Add(this.btnNext);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.txtNumber);
 			this.Controls.Add(this.label1);
@@ -226,6 +239,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.TextBox txtNumber;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button btnNext;
 
 	}
 }

@@ -393,6 +393,10 @@ namespace Europlan.Common {
 				return rootNode;
 			} else if (element == typeof(FloorListSummaryPanel)) {
 				return floorsNode;
+			} else if (element == typeof(FacilityDetailsSummaryPanel)) {
+				return facilityDetailsNode;
+			} else if (element == typeof(RegulatorCircuitsSummaryPanel)) {
+				return regulatorCircuitsNode;
 			} else {
 				foreach (Floor f in floors) {
 					TreeNode node = f.FindNode(element);
