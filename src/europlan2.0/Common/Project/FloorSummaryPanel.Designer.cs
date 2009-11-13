@@ -38,11 +38,6 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridRooms = new System.Windows.Forms.DataGridView();
-			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
-			this.btnAddDistributor = new System.Windows.Forms.Button();
-			this.label1 = new System.Windows.Forms.Label();
-			this.lblFloorName = new System.Windows.Forms.Label();
-			this.btnRemoveDistributor = new System.Windows.Forms.Button();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Area = new Europlan.Common.NumericColumn();
@@ -55,11 +50,17 @@ namespace Europlan.Common {
 			this.CoolLoad = new Europlan.Common.NumericColumn();
 			this.associatedPanelTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.associatedIconDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.floorRoomsSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnAddDistributor = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
+			this.lblFloorName = new System.Windows.Forms.Label();
+			this.btnRemoveDistributor = new System.Windows.Forms.Button();
 			this.numericColumn1 = new Europlan.Common.NumericColumn();
 			this.numericColumn2 = new Europlan.Common.NumericColumn();
 			this.numericColumn3 = new Europlan.Common.NumericColumn();
 			this.numericColumn4 = new Europlan.Common.NumericColumn();
+			this.btnWhatIsNext = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.gridRooms)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.floorRoomsSource)).BeginInit();
 			this.SuspendLayout();
@@ -99,62 +100,13 @@ namespace Europlan.Common {
 			this.gridRooms.Location = new System.Drawing.Point(3, 56);
 			this.gridRooms.MultiSelect = false;
 			this.gridRooms.Name = "gridRooms";
-			this.gridRooms.Size = new System.Drawing.Size(690, 320);
+			this.gridRooms.Size = new System.Drawing.Size(690, 291);
 			this.gridRooms.TabIndex = 16;
 			this.gridRooms.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRooms_CellValueChanged);
 			this.gridRooms.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridRooms_UserDeletingRow);
 			this.gridRooms.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.gridRooms_RowPrePaint);
 			this.gridRooms.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridRooms_UserDeletedRow);
 			this.gridRooms.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRooms_CellClick);
-			// 
-			// colView
-			// 
-			this.colView.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.colView.HeaderText = "Bearbeiten\n";
-			this.colView.Name = "colView";
-			this.colView.ReadOnly = true;
-			this.colView.Text = "...";
-			this.colView.UseColumnTextForButtonValue = true;
-			this.colView.Width = 64;
-			// 
-			// btnAddDistributor
-			// 
-			this.btnAddDistributor.Location = new System.Drawing.Point(3, 27);
-			this.btnAddDistributor.Name = "btnAddDistributor";
-			this.btnAddDistributor.Size = new System.Drawing.Size(118, 23);
-			this.btnAddDistributor.TabIndex = 17;
-			this.btnAddDistributor.Text = "Verteiler anlegen";
-			this.btnAddDistributor.UseVisualStyleBackColor = true;
-			this.btnAddDistributor.Click += new System.EventHandler(this.btnAddDistributor_Click);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(3, 0);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(152, 24);
-			this.label1.TabIndex = 18;
-			this.label1.Text = "Geschoßdaten:";
-			// 
-			// lblFloorName
-			// 
-			this.lblFloorName.AutoSize = true;
-			this.lblFloorName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblFloorName.Location = new System.Drawing.Point(161, 0);
-			this.lblFloorName.Name = "lblFloorName";
-			this.lblFloorName.Size = new System.Drawing.Size(0, 24);
-			this.lblFloorName.TabIndex = 19;
-			// 
-			// btnRemoveDistributor
-			// 
-			this.btnRemoveDistributor.Location = new System.Drawing.Point(127, 27);
-			this.btnRemoveDistributor.Name = "btnRemoveDistributor";
-			this.btnRemoveDistributor.Size = new System.Drawing.Size(118, 23);
-			this.btnRemoveDistributor.TabIndex = 20;
-			this.btnRemoveDistributor.Text = "Verteiler löschen";
-			this.btnRemoveDistributor.UseVisualStyleBackColor = true;
-			this.btnRemoveDistributor.Click += new System.EventHandler(this.btnRemoveDistributor_Click);
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -289,9 +241,58 @@ namespace Europlan.Common {
 			this.associatedIconDataGridViewImageColumn.ReadOnly = true;
 			this.associatedIconDataGridViewImageColumn.Visible = false;
 			// 
+			// colView
+			// 
+			this.colView.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.colView.HeaderText = "Bearbeiten\n";
+			this.colView.Name = "colView";
+			this.colView.ReadOnly = true;
+			this.colView.Text = "...";
+			this.colView.UseColumnTextForButtonValue = true;
+			this.colView.Width = 64;
+			// 
 			// floorRoomsSource
 			// 
 			this.floorRoomsSource.DataSource = typeof(Europlan.Common.Room);
+			// 
+			// btnAddDistributor
+			// 
+			this.btnAddDistributor.Location = new System.Drawing.Point(3, 27);
+			this.btnAddDistributor.Name = "btnAddDistributor";
+			this.btnAddDistributor.Size = new System.Drawing.Size(118, 23);
+			this.btnAddDistributor.TabIndex = 17;
+			this.btnAddDistributor.Text = "Verteiler anlegen";
+			this.btnAddDistributor.UseVisualStyleBackColor = true;
+			this.btnAddDistributor.Click += new System.EventHandler(this.btnAddDistributor_Click);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.Location = new System.Drawing.Point(3, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(152, 24);
+			this.label1.TabIndex = 18;
+			this.label1.Text = "Geschoßdaten:";
+			// 
+			// lblFloorName
+			// 
+			this.lblFloorName.AutoSize = true;
+			this.lblFloorName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblFloorName.Location = new System.Drawing.Point(161, 0);
+			this.lblFloorName.Name = "lblFloorName";
+			this.lblFloorName.Size = new System.Drawing.Size(0, 24);
+			this.lblFloorName.TabIndex = 19;
+			// 
+			// btnRemoveDistributor
+			// 
+			this.btnRemoveDistributor.Location = new System.Drawing.Point(127, 27);
+			this.btnRemoveDistributor.Name = "btnRemoveDistributor";
+			this.btnRemoveDistributor.Size = new System.Drawing.Size(118, 23);
+			this.btnRemoveDistributor.TabIndex = 20;
+			this.btnRemoveDistributor.Text = "Verteiler löschen";
+			this.btnRemoveDistributor.UseVisualStyleBackColor = true;
+			this.btnRemoveDistributor.Click += new System.EventHandler(this.btnRemoveDistributor_Click);
 			// 
 			// numericColumn1
 			// 
@@ -321,10 +322,22 @@ namespace Europlan.Common {
 			this.numericColumn4.DefaultCellStyle = dataGridViewCellStyle13;
 			this.numericColumn4.Name = "numericColumn4";
 			// 
+			// btnWhatIsNext
+			// 
+			this.btnWhatIsNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnWhatIsNext.Location = new System.Drawing.Point(584, 353);
+			this.btnWhatIsNext.Name = "btnWhatIsNext";
+			this.btnWhatIsNext.Size = new System.Drawing.Size(109, 23);
+			this.btnWhatIsNext.TabIndex = 21;
+			this.btnWhatIsNext.Text = "Wie geht\'s weiter?";
+			this.btnWhatIsNext.UseVisualStyleBackColor = true;
+			this.btnWhatIsNext.Click += new System.EventHandler(this.btnWhatIsNext_Click);
+			// 
 			// FloorSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.btnWhatIsNext);
 			this.Controls.Add(this.btnRemoveDistributor);
 			this.Controls.Add(this.lblFloorName);
 			this.Controls.Add(this.label1);
@@ -364,5 +377,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn associatedPanelTypeDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewImageColumn associatedIconDataGridViewImageColumn;
 		private System.Windows.Forms.DataGridViewButtonColumn colView;
+		private System.Windows.Forms.Button btnWhatIsNext;
 	}
 }

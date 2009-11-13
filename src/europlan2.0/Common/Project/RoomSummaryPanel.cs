@@ -280,5 +280,9 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void btnWhatIsNext_Click(object sender, EventArgs e) {
+			MessageBox.Show("Klicken Sie auf einen der Buttons in der Spalte\n'Bearbeiten' um das entsprechende Heizsystem zu öffnen, oder\n klicken Sie in der Projekthierarchie auf das gewünschte Heizsystem.", "Wie geht's weiter?");
+		}
+
 	}
 }
