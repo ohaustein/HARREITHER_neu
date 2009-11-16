@@ -12,6 +12,21 @@ namespace Europlan.Common {
 
 		public PlannedModulKlimaBodenProductPanel() {
 			InitializeComponent();
+
+			this.cmbCircuits.Items.Clear();
+			this.cmbCircuits.Items.Add("Automatisch");
+			this.cmbCircuits.Items.Add("1");
+			this.cmbCircuits.Items.Add("2");
+			this.cmbCircuits.Items.Add("3");
+			this.cmbCircuits.Items.Add("4");
+			this.cmbCircuits.Items.Add("5");
+			this.cmbCircuits.Items.Add("6");
+			this.cmbCircuits.Items.Add("7");
+			this.cmbCircuits.Items.Add("8");
+			this.cmbCircuits.Items.Add("9");
+			this.cmbCircuits.Items.Add("10");
+			this.cmbCircuits.Items.Add("11");
+			this.cmbCircuits.Items.Add("12");
 		}
 
 		#region IEditorUserControl Members
@@ -20,22 +35,26 @@ namespace Europlan.Common {
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 
 		private enum FieldEnum {
-			NONE = 0,
-			HEAT_LOAD = 1,
-			COOL_LOAD = 2,
-			HEAT_LOAD_PERCENTAGE = 4,
-			COOL_LOAD_PERCENTAGE = 8,
-			AREA = 16,
-			AREA_PERCENTAGE = 32,
-			AREA_REDUCED = 64,
-			AREA_UNHEATED = 128,
-			ROOM_TEMERATURE_BELOW_HEAT = 256,
-			ROOM_TEMERATURE_BELOW_COOL = 512,
-			MODULES = 1024,
-			//LAY_DISTANCE = 4096,
-			//RIM_TYPE = 8192,
-			//CALCULATION_TYPE = 16384,
-			CIRCUITS = 32768
+			NONE                       = 0,
+			HEAT_LOAD                  = 0x1,
+			COOL_LOAD                  = 0x2,
+			HEAT_LOAD_PERCENTAGE       = 0x4,
+			COOL_LOAD_PERCENTAGE       = 0x8,
+			AREA                       = 0x10,
+			AREA_PERCENTAGE            = 0x20,
+			AREA_REDUCED               = 0x40,
+			AREA_UNHEATED              = 0x80,
+			ROOM_TEMERATURE_BELOW_HEAT = 0x100,
+			ROOM_TEMERATURE_BELOW_COOL = 0x200,
+			//MODULES                  = 0x400,
+			//LAY_DISTANCE             = 0x800,
+			//RIM_TYPE                 = 0x1000,
+			//CALCULATION_TYPE         = 0x2000,
+			CIRCUITS                   = 0x4000,
+			MODULES_DICHT              = 0x8000,
+			MODULES_MODULIEREND        = 0x10000,
+			MODULES_SONTIGE            = 0x20000,
+			MODULES_VERBINDELEITUNG    = 0x40000
 		}
 
 
@@ -65,6 +84,10 @@ namespace Europlan.Common {
 		private int ignoreRoomTemperatureBelowCool = 0;
 		private int ignoreCircuits = 0;
 		private int ignoreLengthVerbindungen = 0;
+		private int ignoreModulesDicht = 0;
+		private int ignoreModulesModulierend = 0;
+		private int ignoreModulesSonstige = 0;
+		private int ignoreVerbindeleitungen = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
@@ -82,13 +105,15 @@ namespace Europlan.Common {
 				ignoreRoomTemperatureBelowCool++;
 				ignoreCircuits++;
 				ignoreLengthVerbindungen++;
+				ignoreModulesDicht++;
+				ignoreModulesModulierend++;
+				ignoreModulesSonstige++;
+				ignoreVerbindeleitungen++;
 
 				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
 
 				bool showHeat = this.product.RequestedHeatLoad > 0;
 				bool showCool = this.product.RequestedCoolLoad > 0;
-			//    bool showRim = evProduct.PlannedAreaRim > 0;
-			//    bool showResidence = true;
 
 				lblQHeat.Visible = showHeat;
 				lblQHeatUnit.Visible = showHeat;
@@ -123,65 +148,7 @@ namespace Europlan.Common {
 				lblTempCool.Visible = showCool;
 				lblTempCoolUnit.Visible = showCool;
 
-			//    this.lblQSollHeat.Visible = showHeat;
-			//    this.lblQkSollHeat.Visible = showHeat;
-			//    this.lblQfbhHeat.Visible = showHeat;
-			//    this.lblQRestHeat.Visible = showHeat;
-			//    this.lblRimVaHeat.Visible = showHeat && showRim;
-			//    this.lblRimBHeat.Visible = showHeat && showRim;
-			//    this.lblRimTfbHeat.Visible = showHeat && showRim;
-			//    this.lblRimQHeat.Visible = showHeat && showRim;
-			//    this.lblResidenceVaHeat.Visible = showHeat && showResidence;
-			//    this.lblResidenceAHeat.Visible = showHeat && showResidence;
-			//    this.lblResidenceTfbHeat.Visible = showHeat && showResidence;
-			//    this.lblResidenceQHeat.Visible = showHeat && showResidence;
-			//    this.lblConnectionAHeat.Visible = showHeat;
-			//    this.lblConnectionQHeat.Visible = showHeat;
-			//    this.lblCircuitCountHeat.Visible = showHeat;
-			//    this.lblPipeLengthHeat.Visible = showHeat;
-			//    this.lblMhHeat.Visible = showHeat;
-			//    this.lblDeltaPHeat.Visible = showHeat;
-			//    this.lblSpreizungHeat.Visible = showHeat;
-
-			//    this.lblQSollCool.Visible = showCool;
-			//    this.lblQkSollCool.Visible = showCool;
-			//    this.lblQfbhCool.Visible = showCool;
-			//    this.lblQRestCool.Visible = showCool;
-			//    this.lblRimVaCool.Visible = showCool && showRim;
-			//    this.lblRimBCool.Visible = showCool && showRim;
-			//    this.lblRimTfbCool.Visible = showCool && showRim;
-			//    this.lblRimQCool.Visible = showCool && showRim;
-			//    this.lblResidenceVaCool.Visible = showCool && showResidence;
-			//    this.lblResidenceACool.Visible = showCool && showResidence;
-			//    this.lblResidenceTfbCool.Visible = showCool && showResidence;
-			//    this.lblResidenceQCool.Visible = showCool && showResidence;
-			//    this.lblConnectionACool.Visible = showCool;
-			//    this.lblConnectionQCool.Visible = showCool;
-			//    this.lblCircuitCountCool.Visible = showCool;
-			//    this.lblPipeLengthCool.Visible = showCool;
-			//    this.lblMhCool.Visible = showCool;
-			//    this.lblDeltaPCool.Visible = showCool;
-			//    this.lblSpreizungCool.Visible = showCool;
-
-			//    this.rbCalculateHeat.Enabled = this.product.RequestedHeatLoad > 0;
-			//    this.rbCalculateCool.Enabled = this.product.RequestedCoolLoad > 0;
-			//    this.rbCalculateBoth.Enabled = this.product.RequestedHeatLoad > 0 && this.product.RequestedCoolLoad > 0;
-			//    this.numCorners.Enabled = evProduct.PlannedRimLength > 0;
-			//    this.cmbRimType.Enabled = evProduct.PlannedAreaRim > 0;
-
-			//    // disable the following controls if the product is a connection
-			//    this.numRim.Enabled = !evProduct.PlannedProductIsConnection;
-			//    this.numCorners.Enabled = this.numCorners.Enabled && !evProduct.PlannedProductIsConnection;
-			//    this.rbCalculateHeat.Enabled = this.rbCalculateHeat.Enabled && !evProduct.PlannedProductIsConnection;
-			//    this.rbCalculateCool.Enabled = this.rbCalculateCool.Enabled && !evProduct.PlannedProductIsConnection;
-			//    this.rbCalculateBoth.Enabled = this.rbCalculateBoth.Enabled && !evProduct.PlannedProductIsConnection;
-			//    this.btnDistributor.Enabled = !evProduct.PlannedProductIsConnection;
-			//    this.cmbLayDistance.Enabled = !evProduct.PlannedProductIsConnection;
-			//    this.cmbRimType.Enabled = this.cmbRimType.Enabled && !evProduct.PlannedProductIsConnection;
-			//    this.cmbCircuits.Enabled = !evProduct.PlannedProductIsConnection;
-
 			    this.numArea.MaxValue = (decimal)mbProduct.AvailableFloorArea;
-			//    this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
 			    this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
 			    this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
 			    if (this.product.NecessaryHeatLoad > 0) {
@@ -263,67 +230,33 @@ namespace Europlan.Common {
 				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_COOL) == FieldEnum.NONE) {
 					this.numRoomTemperatureBelowCool.Value = Math.Round((decimal)mbProduct.PlannedRoomTemperatureBelowCool, 2);
 				}
-			//    if ((skipFields & FieldEnum.RIM_LENGTH) == FieldEnum.NONE) {
-			//        this.numRim.Value = Math.Round((decimal)evProduct.PlannedRimLength, 2);
-			//    }
-			//    if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
-			//        this.numCorners.Value = (decimal)evProduct.PlannedRimCorners;
-			//    }
 
-			//    if ((skipFields & FieldEnum.LAY_DISTANCE) == FieldEnum.NONE) {
-			//        this.cmbLayDistance.SelectedItem = new LayDistanceItem(evProduct.RequestedLayDistance, "");
-			//    }
-			//    if ((skipFields & FieldEnum.RIM_TYPE) == FieldEnum.NONE) {
-			//        this.cmbRimType.SelectedItem = new RimTypeItem(evProduct.RequestedRimType, "");
-			//    }
-			    if ((skipFields & FieldEnum.CIRCUITS) == FieldEnum.NONE) {
-					if (this.product.Product.PlannedCircuits.Count == 0) {
-						this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
-					}
-			        this.lstCircuits.Items.Clear();
-					int count = 1;
-					foreach (Circuit c in this.product.Product.PlannedCircuits) {
-						lstCircuits.Items.Add("HK" + count++);
-					}
-					if (lstCircuits.Items.Count > 0) {
-					    lstCircuits.SelectedIndex = 0;
-					}
-					btnAddHk.Enabled = lstCircuits.Items.Count < 12;
-					btnRemoveHk.Enabled = lstCircuits.Items.Count > 1;
-			    }
+				if ((skipFields & FieldEnum.CIRCUITS) == FieldEnum.NONE) {
+					this.cmbCircuits.SelectedIndex = (mbProduct.RequestedCircuits.HasValue ? mbProduct.RequestedCircuits.Value : 0);
+				}
 
-			//    if ((skipFields & FieldEnum.CALCULATION_TYPE) == FieldEnum.NONE) {
-			//        this.rbCalculateHeat.Checked = this.product.CalculateHeat && !this.product.CalculateCool;
-			//        this.rbCalculateCool.Checked = this.product.CalculateCool && !this.product.CalculateHeat;
-			//        this.rbCalculateBoth.Checked = this.product.CalculateHeat && this.product.CalculateCool;
-			//    }
-
-			//    if ((skipFields & FieldEnum.SEPARATE_CIRCUIT) == FieldEnum.NONE) {
-			//        this.cbSeparateCircuit.Checked = !evProduct.PlannedProductIsConnection;
-			//    }
-
-			//    // General
+			    // General
 			    double qDiffHeat = this.product.PlannedHeatLoad - this.product.RequestedHeatLoad;
 			    double qDiffCool = this.product.PlannedCoolLoad - this.product.RequestedCoolLoad;
 
-				lblHk.Text = "Heizkreis " + (lstCircuits.SelectedIndex + 1) + ":";
+				//lblHk.Text = "Heizkreis " + (lstCircuits.SelectedIndex + 1) + ":";
 				lblRest.Text = "Rest (" + this.product.Product.AssociatedRoom.ToString() + ")";
 				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 2).ToString();
 				lblQAnbHeat.Text = Math.Round(this.product.Product.PlannedHeatLoadAnbindung, 0).ToString();
 				lblQHeatDiff.Text = Math.Round(qDiffHeat, 2).ToString();
 				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString();
-				lblAvgqHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QHeatPerSqm, 2).ToString();
-				lblDurchflussHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DurchflussHeat, 2).ToString();
-				lblDruckverlustHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustHeat, 2).ToString();
-				lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_FloorTempHeat, 2).ToString();
+				lblAvgqHeat.Text = Math.Round(mbProduct.PlannedHeatLoadPerSqM, 2).ToString();
+				lblDurchflussHeat.Text = Math.Round(mbProduct.PlannedMhHeat, 2).ToString();
+				lblDruckverlustHeat.Text = Math.Round(mbProduct.PlannedDeltaRhoHeat, 2).ToString();
+				lblTempHeat.Text = Math.Round(mbProduct.PlannedFloorTemperatureHeat, 2).ToString();
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
 				lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
 				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
 				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString();
-				lblAvgqCool.Text = (-1.0 * Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_QCoolPerSqm, 2)).ToString();
-				lblDurchflussCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DurchflussCool, 2).ToString();
-				lblDruckverlustCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_DruckverlustCool, 2).ToString();
-				lblTempCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulBodenCircuit).C_FloorTempCool, 2).ToString();
+				lblAvgqCool.Text = Math.Round(mbProduct.PlannedCoolLoadPerSqM, 2).ToString();
+				lblDurchflussCool.Text = Math.Round(mbProduct.PlannedMhCool, 2).ToString();
+				lblDruckverlustCool.Text = Math.Round(mbProduct.PlannedDeltaRhoCool, 2).ToString();
+				lblTempCool.Text = Math.Round(mbProduct.PlannedFloorTemperatureCool, 2).ToString();
 				double availableArea = Math.Round(this.product.Product.PlannedNetArea, 2);
 				double coveredArea = Math.Round((this.product.Product as ModulKlimaBodenProduct).CoveredFloorArea, 2);
 				double anbArea = Math.Round((this.product.Product as ModulKlimaBodenProduct).PlannedRemoveArea, 2);
@@ -331,6 +264,7 @@ namespace Europlan.Common {
 				lblCoveredArea.Text = coveredArea.ToString();
 				lblAnbArea.Text = anbArea.ToString();
 				lblRestArea.Text = Math.Round(availableArea - anbArea - coveredArea, 2).ToString();
+				lblCircuitCount.Text = mbProduct.PlannedCircuitCount.ToString();
 
 			//    this.lblQSollHeat.Text = Math.Round(this.product.RequestedHeatLoad, 2).ToString();
 			//    this.lblQSollCool.Text = Math.Round(this.product.RequestedCoolLoad, 2).ToString();
@@ -466,6 +400,10 @@ namespace Europlan.Common {
 				ignoreRoomTemperatureBelowCool--;
 				ignoreCircuits--;
 				ignoreLengthVerbindungen--;
+				ignoreModulesDicht--;
+				ignoreModulesModulierend--;
+				ignoreModulesSonstige--;
+				ignoreVerbindeleitungen--;
 			}
 			// TODO
 		}
@@ -701,35 +639,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void btnAddHk_Click(object sender, EventArgs e) {
-			this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
-			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-			this.UpdateControl(FieldEnum.NONE);
-			lstCircuits.SelectedIndex = lstCircuits.Items.Count - 1;
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
-			}
-		}
-
-		private void btnRemoveHk_Click(object sender, EventArgs e) {
-			if (lstCircuits.Items.Count > 1 && lstCircuits.SelectedIndex >= 0) {
-				this.product.Product.PlannedCircuits.RemoveAt(lstCircuits.SelectedIndex);
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.NONE);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-		}
-
-		private void lstCircuits_SelectedIndexChanged(object sender, EventArgs e) {
-			if (ignoreCircuits == 0) {
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.CIRCUITS);
-			}
-
-		}
-
 		private void btnConnectionPipes_Click(object sender, EventArgs e) {
 			ConnectionPipesForm form = new ConnectionPipesForm(this.product);
 			form.ShowDialog();
@@ -741,6 +650,51 @@ namespace Europlan.Common {
 				}
 			}
 			form.Dispose();
+		}
+
+		private void numDicht_ValueChanged(object sender, EventArgs e) {
+			if (this.ignoreModulesDicht == 0) {
+				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
+				mbProduct.RequestedModulesDicht = (int)this.numDicht.Value;
+				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.MODULES_DICHT);
+			}
+		}
+
+		private void numModulierend_ValueChanged(object sender, EventArgs e) {
+			if (this.ignoreModulesModulierend == 0) {
+				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
+				mbProduct.RequestedModulesModulierend = (int)this.numModulierend.Value;
+				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.MODULES_MODULIEREND);
+			}
+		}
+
+		private void numSonstige_ValueChanged(object sender, EventArgs e) {
+			if (this.ignoreModulesSonstige == 0) {
+				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
+				mbProduct.RequestedModulesSonstige = (int)this.numSonstige.Value;
+				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.MODULES_SONTIGE);
+			}
+		}
+
+		private void numVerbindeleitungen_ValueChanged(object sender, EventArgs e) {
+			if (this.ignoreVerbindeleitungen == 0) {
+				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
+				mbProduct.RequestedSonstigeVerbindeLeitung = (int)this.numVerbindeleitungen.Value;
+				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.MODULES_VERBINDELEITUNG);
+			}
+		}
+
+		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
+			if (this.ignoreCircuits == 0) {
+				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
+				mbProduct.RequestedCircuits = this.cmbCircuits.SelectedIndex == 0 ? (Nullable<int>)null : (Nullable<int>)this.cmbCircuits.SelectedIndex;
+				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.CIRCUITS);
+			}
 		}
 		
 	}

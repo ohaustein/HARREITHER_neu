@@ -70,8 +70,6 @@ namespace Europlan.Common {
 			rbModulBodenEN1264.Checked = !ModulKlimaBodenProduct.ConfigUseHarreitherNorm;
 			numModulBodenPressurePa.Value = ModulKlimaBodenProduct.ConfigMaxPressureLost;
 			numModulBodenDurchfluss.Value = ModulKlimaBodenProduct.ConfigMaxDurchfluss;
-			numModulBodenMaxModuleInRow.Value = ModulKlimaBodenProduct.ConfigMaxModulesInRow;
-			numModulBodenMaxModulesInParallel.Value = ModulKlimaBodenProduct.ConfigMaxModulesInParallel;
 			numModulBodenMaxModulesInCircuit.Value = ModulKlimaBodenProduct.ConfigModulesInCircuit;
 		}
 
@@ -206,22 +204,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void numModulBodenMaxModuleInRow_ValueChanged(object sender, EventArgs e) {
-			ModulKlimaBodenProduct.ConfigMaxModulesInRow = (int)numModulBodenMaxModuleInRow.Value;
-			Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigMaxModulesInRow", numModulBodenMaxModuleInRow.Value.ToString());
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
-			}
-		}
-
-		private void numModulBodenMaxModulesInParallel_ValueChanged(object sender, EventArgs e) {
-			ModulKlimaBodenProduct.ConfigMaxModulesInParallel = (int)numModulBodenMaxModulesInParallel.Value;
-			Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigMaxModulesInParallel", numModulBodenMaxModulesInParallel.Value.ToString());
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
-			}
-		}
-
 		private void numModulBodenMaxModulesInCircuit_ValueChanged(object sender, EventArgs e) {
 			ModulKlimaBodenProduct.ConfigModulesInCircuit = (int)numModulBodenMaxModulesInCircuit.Value;
 			Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigModulesInCircuit", numModulBodenMaxModulesInCircuit.Value.ToString());
@@ -229,8 +211,5 @@ namespace Europlan.Common {
 				ProjectChanged(null);
 			}
 		}
-
-
-
 	}
 }

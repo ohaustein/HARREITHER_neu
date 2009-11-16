@@ -9,6 +9,9 @@ namespace Europlan.Common {
 
 		private KlimaFlaechenList row = new KlimaFlaechenList();
 
+		private int langeFittinge;
+		private double sonstigeVerbindeleitung;
+
 		public ModulBodenCircuit() {
 
 		}
@@ -41,6 +44,16 @@ namespace Europlan.Common {
 			get {
 				return this.plannedProduct;
 			}
+		}
+
+		public int LangeFittinge {
+			get { return this.langeFittinge; }
+			set { this.langeFittinge = value; }
+		}
+
+		public double SonstigeVerbindeleitung {
+			get { return this.sonstigeVerbindeleitung; }
+			set { this.sonstigeVerbindeleitung = value; }
 		}
 
 		#region Area
@@ -170,6 +183,9 @@ namespace Europlan.Common {
 
 			double rLambdaB = this.ModulKlimaBodenProduct.PlannedFloorConstruction == null ? 0 : this.ModulKlimaBodenProduct.PlannedFloorConstruction.RValue;
 			double rLambdaIns = this.ModulKlimaBodenProduct.PlannedInsulationConstruction == null ? 0 : this.ModulKlimaBodenProduct.PlannedInsulationConstruction.RValue;
+
+			// TODO add lange fittinge
+			this.row.LengthVerbindeleitungen = this.sonstigeVerbindeleitung;
 
 			{ // Heizlastberechnung
 				double distributorVorlaufTemp;
