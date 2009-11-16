@@ -56,6 +56,8 @@ namespace Europlan.Common {
 				this.cmbCircuit.SelectedItem = distributor.RegulatorCircuit;
 				//this.cmbDistributorType.SelectedItem = distributor.DistributorType;
 				this.cmbAnschlussHollaender.SelectedItem = distributor.AnschlussHollaender;
+
+				UpdateCircuitsLabel();
 			}
 		}
 
@@ -80,6 +82,7 @@ namespace Europlan.Common {
 		private void numMaxCircuits_ValueChanged(object sender, EventArgs e) {
 			distributor.MaxCircuits = (int)this.numMaxCircuits.Value;
 			numAdditionalCircuits.Maximum = distributor.MaxCircuits;
+			UpdateCircuitsLabel();
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -88,8 +91,26 @@ namespace Europlan.Common {
 
 		private void numAdditionalCircuits_ValueChanged(object sender, EventArgs e) {
 			distributor.AdditionalCircuits = (int)this.numAdditionalCircuits.Value;
+			UpdateCircuitsLabel();
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
+			}
+		}
+
+		private void UpdateCircuitsLabel() {
+			int plannedCircuits = 0;
+			foreach (Floor floor in Project.Instance.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.DistributorId == this.distributor.Id) {
+							plannedCircuits += pp.Product.PlannedCircuitCount;
+						}
+					}
+				}
+			}
+			lblCircuits.Text = plannedCircuits + " (aktiv)";
+			if (numAdditionalCircuits.Value > 0) {
+				lblCircuits.Text += " + " + numAdditionalCircuits.Value + " (zus.) = " + (plannedCircuits + numAdditionalCircuits.Value);
 			}
 		}
 
