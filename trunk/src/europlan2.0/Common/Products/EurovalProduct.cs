@@ -1543,7 +1543,6 @@ namespace Europlan.Common {
 
 		private string CorrectCircuits(int circuitCount, bool cleanupConnected) {
 			if (this.circuits.Count > circuitCount) {
-				// TODO check if other products are connected to the circuits that are removed
 				this.circuits.RemoveRange(circuitCount, this.circuits.Count - circuitCount);
 			}
 			List<KeyValuePair<int, Circuit.CircuitConnection>> remove = new List<KeyValuePair<int, Circuit.CircuitConnection>>();

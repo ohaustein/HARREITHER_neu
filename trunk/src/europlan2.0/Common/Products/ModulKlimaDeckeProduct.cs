@@ -15,11 +15,6 @@ namespace Europlan.Common {
 		private static bool canHeat = true;
 		private static bool canCool = true;
 
-		//private static double module_100_40_area = 0.9925 * 0.4;
-		private static double module_100_30_area = 0.9925 * 0.295;
-		private static double module_120_30_area = 1.194 * 0.295;
-		private static double module_80_30_area = 0.791 * 0.295;
-
 		// planning
 		private static double su0 = 0.045; /* Mindestüberdeckung fix */
 		private static double alpha0 = 10.8; /* Fixwert für FBH fix */
@@ -334,23 +329,6 @@ namespace Europlan.Common {
 			}
 
 			errorMsg = "";
-			foreach (ModulDeckeCircuit c in this.circuits) {
-				if (c.Rows.Count > ModulKlimaBodenProduct.ConfigMaxModulesInParallel) {
-					//errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 6 parallele Modulreihen\n";
-					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele parallele Modulreihen (" + c.Rows.Count.ToString() + " > " + ModulKlimaBodenProduct.ConfigMaxModulesInParallel.ToString() + ")\n";
-				}
-			}
-			foreach (ModulDeckeCircuit c in this.circuits) {
-				int maxModuleCount = 0;
-				foreach (KlimaFlaechenList row in c.Rows) {
-					if (row.List.Count > maxModuleCount) {
-						maxModuleCount = row.List.Count;
-					}
-				}
-				if (maxModuleCount > ModulKlimaBodenProduct.ConfigMaxModulesInRow) {
-					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module in Serien (" + maxModuleCount + " > " + ModulKlimaBodenProduct.ConfigMaxModulesInRow.ToString() + ")\n";
-				}
-			}
 			foreach (ModulDeckeCircuit c in this.circuits) {
 				int moduleCount = 0;
 				foreach (KlimaFlaechenList row in c.Rows) {

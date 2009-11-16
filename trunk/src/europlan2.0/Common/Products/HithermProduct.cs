@@ -16,14 +16,31 @@ namespace Europlan.Common {
 		private static bool canCool = false;
 
 		// planning
+		// Hitherm(r) Hochleistungs-Klimawandregister (RA 5) Heizleistung qW in W/m²
 		private static double[][] hlRegHeizleistung = {
-			new double[] {105,120,140,155,175,190,210,225,240},
-			new double[] { 85,100,120,135,155,170,185,205,220},
-			new double[] { 70, 85,105,120,140,155,175,190,210},
-			new double[] { 55, 70, 90,105,125,140,160,175,195},
-			new double[] { 45, 60, 80, 95,115,130,145,165,180}
+			//  tHm (°C)  30.0  32.5  35.0  37.5  40.0  42.5  45.0  47.5  50.0
+			new double[] { 105,  120,  140,  155,  175,  190,  210,  225,  240}, // ti=15°C
+			new double[] {  85,  100,  120,  135,  155,  170,  185,  205,  220}, // ti=18°C
+			new double[] {  70,   85,  105,  120,  140,  155,  175,  190,  210}, // ti=20°C
+			new double[] {  55,   70,   90,  105,  125,  140,  160,  175,  195}, // ti=22°C
+			new double[] {  45,   60,   80,   95,  115,  130,  145,  165,  180}  // ti=24°C
 		};
 
+		// Hitherm(r) Standard-Klimawandregister (RA 10) Heizleistung qW in W/m²
+		private static double[][] stdRegHeizleistung = {
+			//  tHm (°C)  30.0  32.5  35.0  37.5  40.0  42.5  45.0  47.5  50.0
+			new double[] {  70,   85,   95,  110,  120,  130,  145,  155,  170}, // ti=15°C
+			new double[] {  55,   70,   80,   95,  105,  120,  130,  145,  155}, // ti=18°C
+			new double[] {  50,   60,   75,   85,  100,  110,  125,  135,  150}, // ti=20°C
+			new double[] {  40,   50,   65,   75,   90,  100,  115,  125,  140}, // ti=22°C
+			new double[] {  30,   40,   55,   65,   80,   90,  100,  115,  130}  // ti=24°C
+		};
+
+		private static double factorSpezialputz = 1.15;
+		private static double factorMaschinenputz = 1.0;
+		private static double factorLehmputz = 0.95;
+		private static double factorGkpHohlraum = 0.69;
+		private static double factorHolzHohlraum = 0.62;
 
 		public HithermProduct() {
 
@@ -84,6 +101,102 @@ namespace Europlan.Common {
 		}
 		public override int QuickDimensioningCoolPowerPerSquareMeter {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
+		}
+
+		private static double[][] ConvertStringToArray(string value) {
+			string str = value.Trim();
+			if (!str.StartsWith("{") || !str.EndsWith("}")) {
+				// log warning
+				return null;
+			}
+			str = str.Substring(1, str.Length - 2).Trim();
+			List<List<double>> list = new List<List<double>>();
+			while (str.Length > 0) {
+				int end = str.IndexOf('}');
+				if (str[0] != '{' || end < 0) {
+					// log warning
+					return null;
+				}
+				List<double> curList = new List<double>();
+				list.Add(curList);
+				string[] strValues = str.Substring(1, end - 1).Trim().Split(',');
+				foreach (string strValue in strValues) {
+					double doubleValue;
+					if (!double.TryParse(strValue.Trim(), out doubleValue)) {
+						// log warning
+						return null;
+					}
+					curList.Add(doubleValue);
+				}
+				str = str.Substring(end + 1).Trim();
+				if (str.Length != 0) {
+					if (str[0] != ',') {
+						// log warning
+						return null;
+					}
+					str = str.Substring(1);
+				}
+			}
+			double[][] array = new double[list.Count][];
+			int i = 0;
+			foreach (List<double> curList in list) {
+				array[i] = new double[curList.Count];
+				int j = 0;
+				foreach (double doubleValue in curList) {
+					array[i][j] = doubleValue;
+					j++;
+				}
+				i++;
+			}
+			return array;
+		}
+
+		public static string ConvertArrayToString(double[][] array) {
+			string rtn = "";
+			foreach (double[] row in array) {
+				string rowStr = "";
+				foreach (double val in row) {
+					rowStr += ", " + val.ToString(System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+				}
+				rowStr = rowStr.Substring(2);
+				rtn += " ,{" + rowStr + "}";
+			}
+			rtn = "{" + rtn.Substring(2) + "}";
+			return rtn;
+		}
+
+		[ProductParameter]
+		public static string ConfigHlRegHeizleistungString {
+			get {
+				return ConvertArrayToString(hlRegHeizleistung);
+			}
+			set {
+				double[][] array = ConvertStringToArray(value);
+				if (array != null) {
+					hlRegHeizleistung = array;
+				}
+			}
+		}
+		public static double[][] ConfigHlRegHeizleistung {
+			get { return hlRegHeizleistung; }
+			set { hlRegHeizleistung = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigStdRegHeizleistungString {
+			get {
+				return ConvertArrayToString(stdRegHeizleistung);
+			}
+			set {
+				double[][] array = ConvertStringToArray(value);
+				if (array != null) {
+					stdRegHeizleistung = array;
+				}
+			}
+		}
+		public static double[][] ConfigStdRegHeizleistung {
+			get { return stdRegHeizleistung; }
+			set { stdRegHeizleistung = value; }
 		}
 		#endregion Product Parameters
 

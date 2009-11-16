@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using System.IO;
 using log4net;
 using System.Reflection;
+using System.Globalization;
 
 namespace Europlan.Common {
 
@@ -637,7 +638,37 @@ namespace Europlan.Common {
 		}
 
 		public SerializableDictionary<string, SerializableDictionary<string, string>> ProductConfiguration {
-			get { return this.productConfiguration; }
+			get {
+				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+				foreach (Type t in types) {
+					if (typeof(Product).IsAssignableFrom(t)) {
+						foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.GetProperty)) {
+							object value = info.GetValue(null, null);
+							string valueStr = null;
+							if (value.GetType() == typeof(int)) {
+								int i = (int)value;
+								valueStr = i.ToString(CultureInfo.InvariantCulture.NumberFormat);
+							} else if (value.GetType() == typeof(double)) {
+								double d = (double)value;
+								valueStr = d.ToString(CultureInfo.InvariantCulture.NumberFormat);
+							} else if (value.GetType() == typeof(float)) {
+								float f = (float)value;
+								valueStr = f.ToString(CultureInfo.InvariantCulture.NumberFormat);
+							} else if (value.GetType() == typeof(string)) {
+								valueStr = (string)value;
+							} else if (value.GetType() == typeof(bool)) {
+								bool b = (bool)value;
+								valueStr = b.ToString(CultureInfo.InvariantCulture.NumberFormat);
+							} else {
+								log.Warn("Error when trying to get Product Configuration: Unknown type");
+								continue;
+							}
+							this.AddProductParameter(t, info.Name, valueStr);
+						}
+					}
+				}
+				return this.productConfiguration;
+			}
 			set { 
 				this.productConfiguration = value;
 				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
@@ -646,25 +677,25 @@ namespace Europlan.Common {
 					if (typeof(Product).IsAssignableFrom(t)) {
 						if (this.productConfiguration.ContainsKey(t.FullName)) {
 							current = this.productConfiguration[t.FullName];
-							foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty)) {
+							foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.GetProperty)) {
 								if (current.ContainsKey(info.Name)) {
 									if (info.PropertyType == typeof(int)) {
 										int val = 0;
-										if (int.TryParse(current[info.Name], out val)) {
+										if (int.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
 											info.SetValue(null, val, null);
 										} else {
 											log.Warn("Error when trying to set Product Configuration");
 										}
 									} else if (info.PropertyType == typeof(double)) {
 										double val = 0;
-										if (double.TryParse(current[info.Name], out val)) {
+										if (double.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
 											info.SetValue(null, val, BindingFlags.Static | BindingFlags.Public, null, null, null);
 										} else {
 											log.Warn("Error when trying to set Product Configuration");
 										}
 									} else if (info.PropertyType == typeof(float)) {
 										float val = 0;
-										if (float.TryParse(current[info.Name], out val)) {
+										if (float.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
 											info.SetValue(null, val, null);
 										} else {
 											log.Warn("Error when trying to set Product Configuration");
@@ -679,7 +710,7 @@ namespace Europlan.Common {
 											log.Warn("Error when trying to set Product Configuration");
 										}
 									} else {
-										log.Warn("Error when trying to set Product Configuration");
+										log.Warn("Error when trying to set Product Configuration: Unknown type");
 									}
 								}
 							}
@@ -699,11 +730,23 @@ namespace Europlan.Common {
 			return this.productConfiguration[typeof(T).FullName][parameterName];
 		}
 
+		private void AddProductParameter(Type t, string parameterName, string value) {
+			if (!(typeof(Product).IsAssignableFrom(t))) {
+				log.Warn("Cannot add parameters for non-Product types");
+				return;
+			}
+			if (!this.productConfiguration.ContainsKey(t.FullName)) {
+				this.productConfiguration[t.FullName] = new SerializableDictionary<string, string>();
+			}
+			this.productConfiguration[t.FullName][parameterName] = value;
+		}
+
 		public void AddProductParameter<T>(string parameterName, string value) where T : Product {
-			if (!this.productConfiguration.ContainsKey(typeof(T).FullName)) {
+			this.AddProductParameter(typeof(T), parameterName, value);
+			/*if (!this.productConfiguration.ContainsKey(typeof(T).FullName)) {
 				this.productConfiguration[typeof(T).FullName] = new SerializableDictionary<string, string>();
 			}
-			this.productConfiguration[typeof(T).FullName][parameterName] = value;
+			this.productConfiguration[typeof(T).FullName][parameterName] = value;*/
 		}
 
 		public void RemoveProductParameter<T>(string parameterName) where T : Product {
