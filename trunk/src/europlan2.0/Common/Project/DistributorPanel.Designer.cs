@@ -48,6 +48,8 @@ namespace Europlan.Common {
 			this.label8 = new System.Windows.Forms.Label();
 			this.lstSystems = new System.Windows.Forms.CheckedListBox();
 			this.label12 = new System.Windows.Forms.Label();
+			this.label13 = new System.Windows.Forms.Label();
+			this.lblCircuits = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.numMaxCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAdditionalCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numZusStellantriebe)).BeginInit();
@@ -302,10 +304,30 @@ namespace Europlan.Common {
 				"";
 			this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// label13
+			// 
+			this.label13.Location = new System.Drawing.Point(221, 213);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(130, 23);
+			this.label13.TabIndex = 48;
+			this.label13.Text = "zugewiesene Heizkreise: ";
+			this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// lblCircuits
+			// 
+			this.lblCircuits.Location = new System.Drawing.Point(357, 213);
+			this.lblCircuits.Name = "lblCircuits";
+			this.lblCircuits.Size = new System.Drawing.Size(197, 23);
+			this.lblCircuits.TabIndex = 49;
+			this.lblCircuits.Text = "7 (aktiv)";
+			this.lblCircuits.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// DistributorPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.lblCircuits);
+			this.Controls.Add(this.label13);
 			this.Controls.Add(this.label12);
 			this.Controls.Add(this.lstSystems);
 			this.Controls.Add(this.numZusStellantriebe);
@@ -368,5 +390,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.CheckedListBox lstSystems;
 		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.Label lblCircuits;
 	}
 }
