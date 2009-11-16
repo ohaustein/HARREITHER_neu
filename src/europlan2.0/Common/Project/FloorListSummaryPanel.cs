@@ -114,7 +114,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnWhatIsNext_Click(object sender, EventArgs e) {
-			MessageBox.Show("Klicken Sie auf einen der Buttons in der Spalte\n'Bearbeiten' um das entsprechende Geschoß zu öffnen, oder\n klicken Sie in der Projekthierarchie auf das gewünschte Geschoß.", "Wie geht's weiter?");
+			MessageBox.Show("Klicken Sie auf einen der Buttons in der Spalte 'Bearbeiten' um das entsprechende Geschoß zu öffnen, oder klicken Sie in der Projekthierarchie auf das gewünschte Geschoß.", "Wie geht's weiter?");
 		}
 
 	}
