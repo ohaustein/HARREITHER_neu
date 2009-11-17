@@ -494,19 +494,41 @@ namespace Europlan.Common {
 					wrapperCool = null;
 					foreach (PlannedProduct pp in room.PlannedProducts) {
 						if (pp.Product is EurovalProduct) {
+							EurovalProduct ep = pp.Product as EurovalProduct;
 							if (wrapperHeat == null) {
 								wrapperHeat = new EurovalAuslegungWrapper();
-								wrapperHeat.RoomId = room.Id;
-								wrapperHeat.RoomName = room.Name;
+								wrapperHeat.HeatOrCool = "Heizen";
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
+
+								wrapperHeat.RoomId = room.Id;
+								wrapperHeat.RoomName = room.Name;
+								wrapperHeat.TeilSystem = pp.InternalName;
+								//wrapperHeat.InsideConstruction = 
+								//wrapperHeat.InsideRValue =
+								//wrapperHeat.OutsideConstruction =
+								//wrapperHeat.OutsideRValue = 
+								wrapperHeat.Circuits = pp.Product.PlannedCircuitCount;
+								wrapperHeat.RzLayDistance = ep.PlannedRimLayDistance.ToString();
+								wrapperHeat.RzWidth = ep.PlannedRimWidth;
+								wrapperHeat.RzArea = ep.PlannedAreaRim;
+								wrapperHeat.AzLayDistance = ep.PlannedLayDistance.ToString();
+								wrapperHeat.AzArea = ep.PlannedAreaResidence;
+								wrapperHeat.ConnectionArea = ep.PlannedRemoveArea;
+								
 								double v, r;
 								pp.Product.GetHeatFlow(out v, out r);
+								wrapperHeat.RoomTemp = room.RoomHeatTemperature;
 								wrapperHeat.VorlaufTemp = v;
 								wrapperHeat.RuecklaufTemp = r;
-								wrapperHeat.Circuits = pp.Product.PlannedCircuitCount;
+								//wrapperHeat.QSoll = ;
+								//wrapperHeat.QFBH = ;
+								//wrapperHeat.qFBH = ;
+								//wrapperHeat.tFBRz = ;
+								//wrapperHeat.tFBRz = ;
+
 								wrapperHeat.Wassermenge = pp.Product.PlannedMhHeat;
-								wrapperHeat.HeatOrCool = "Heizen";
+								
 							}
 							if (project.CalculateCoolLoad && wrapperCool == null) {
 								wrapperCool = new EurovalAuslegungWrapper();

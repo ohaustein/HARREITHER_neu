@@ -6,11 +6,12 @@ namespace Europlan.Common {
 
 	public class EurovalAuslegungWrapper {
 
-		private string roomId;
-		private string roomName;
 		private string floorId;
 		private string floorName;
 		private string heatOrCool;
+
+		private string roomId;
+		private string roomName;
 		private string teilSystem;
 		private string insideConstruction;
 		private double insideRValue;
@@ -23,9 +24,25 @@ namespace Europlan.Common {
 		private string azLayDistance;
 		private double azArea;
 		private double connectionArea;
+
+		private double roomTemp;
 		private double vorlaufTemp;
 		private double ruecklaufTemp;
+		private double Q_Soll;
+		private double Q_FBH;
+		private double q_FBH;
+		private double t_FBRz;
+		private double t_FBAz;
+
+		private string circuitsAsString;
+		private double lengthRzAz;
+		private double lengthConnection;
+		private double lengthCircuitFbh;
+		private double lengthCircuitAll;
 		private double wassermenge;
+		private double druckverlustRohr;
+		private double druckverlustVerteiler;
+		private double v;
 
 		public string RoomId {
 			get { return roomId; }
@@ -111,6 +128,11 @@ namespace Europlan.Common {
 			set { connectionArea = value; }
 		}
 
+		public double RoomTemp {
+			get { return roomTemp; }
+			set { roomTemp = value; }
+		}
+
 		public double VorlaufTemp {
 			get { return vorlaufTemp; }
 			set { vorlaufTemp = value; }
@@ -121,9 +143,74 @@ namespace Europlan.Common {
 			set { ruecklaufTemp = value; }
 		}
 
+		public double QSoll {
+			get { return Q_Soll; }
+			set { Q_Soll = value; }
+		}
+
+		public double QFBH {
+		    get { return Q_FBH; }
+		    set { Q_FBH = value; }
+		}
+
+		public double qFBHSqm {
+		    get { return q_FBH; }
+		    set { q_FBH = value; }
+		}
+
+		public double tFBRz {
+		    get { return t_FBRz; }
+		    set { t_FBRz = value; }
+		}
+
+		public double tFBAz {
+		    get { return t_FBAz; }
+		    set { t_FBAz = value; }
+		}
+
+		public string CircuitsAsString {
+			get { return circuitsAsString; }
+			set { circuitsAsString = value; }
+		}
+		
+		public double LengthRzAz {
+			get { return lengthRzAz; }
+			set { lengthRzAz = value; }
+		}
+		
+		public double LengthConnection {
+			get { return lengthConnection; }
+			set { lengthConnection = value; }
+		}
+		
+		public double LengthCircuitFbh {
+			get { return lengthCircuitFbh; }
+			set { lengthCircuitFbh = value; }
+		}
+		
+		public double LengthCircuitAll {
+			get { return lengthCircuitAll; }
+			set { lengthCircuitAll = value; }
+		}
+
 		public double Wassermenge {
 			get { return wassermenge; }
 			set { wassermenge = value; }
+		}
+		
+		public double DruckverlustRohr {
+			get { return druckverlustRohr; }
+			set { druckverlustRohr = value; }
+		}
+				
+		public double DruckverlustVerteiler {
+			get { return druckverlustVerteiler; }
+			set { druckverlustVerteiler = value; }
+		}
+
+		public double V {
+			get { return v; }
+			set { v = value; }
 		}
 
 	}
