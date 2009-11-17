@@ -485,14 +485,14 @@ namespace Europlan.Common {
 			List<EurovalAuslegungWrapper> wrapperHeatList = new List<EurovalAuslegungWrapper>();
 			List<EurovalAuslegungWrapper> wrapperCoolList = new List<EurovalAuslegungWrapper>();
 
-			EurovalAuslegungWrapper wrapperHeat;
-			EurovalAuslegungWrapper wrapperCool;
+			EurovalAuslegungWrapper wrapperHeat = null;
+			EurovalAuslegungWrapper wrapperCool = null;
 
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
-					wrapperHeat = null;
-					wrapperCool = null;
 					foreach (PlannedProduct pp in room.PlannedProducts) {
+						wrapperHeat = null;
+						wrapperCool = null;
 						if (pp.Product is EurovalProduct) {
 							EurovalProduct ep = pp.Product as EurovalProduct;
 							if (wrapperHeat == null) {
@@ -545,12 +545,12 @@ namespace Europlan.Common {
 								wrapperCool.HeatOrCool = "Kühlen";
 							}
 						}
-					}
-					if (wrapperHeat != null) {
-						wrapperHeatList.Add(wrapperHeat);
-					}
-					if (wrapperCool != null) {
-						wrapperCoolList.Add(wrapperCool);
+						if (wrapperHeat != null) {
+							wrapperHeatList.Add(wrapperHeat);
+						}
+						if (wrapperCool != null) {
+							wrapperCoolList.Add(wrapperCool);
+						}
 					}
 				}
 			}
