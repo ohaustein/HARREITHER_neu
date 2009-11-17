@@ -18,6 +18,7 @@ namespace Europlan.Common {
 		private double requestedCoolLoad;
 		private bool calculateHeat = false;
 		private bool calculateCool = false;
+		private string internalName;
 
 		private string id;
 
@@ -43,6 +44,10 @@ namespace Europlan.Common {
 		public string Id {
 			get { return this.id; }
 			set { this.id = value; }
+		}
+
+		public string InternalName {
+			get { return this.internalName; }
 		}
 
 		public override string ToString() {
@@ -288,15 +293,19 @@ namespace Europlan.Common {
 							} else {
 								productCounter[p.PlannedProductType] = productCounter[p.PlannedProductType] + 1;
 							}
-							p.productNode.Text = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType] + ": " + p.System;
+							internalName = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType];
+							p.productNode.Text = internalName + ": " + p.System;
 						}
 						if (productCounter.ContainsKey(this.PlannedProductType)) {
-							this.productNode.Text = this.PlannedProductType.ToString() + (productCounter[this.PlannedProductType] + 1) + ": " + this.System;
+							internalName = this.PlannedProductType.ToString() + (productCounter[this.PlannedProductType] + 1);
+							this.productNode.Text = internalName + ": " + this.System;
 						} else {
-							this.productNode.Text = this.PlannedProductType.ToString() + "1: " + this.System;
+							internalName = this.PlannedProductType.ToString() + "1";
+							this.productNode.Text = internalName + ": " + this.System;
 						}
 					} else {
-						this.productNode.Text = this.PlannedProductType.ToString() + ": " + this.System;
+						internalName = this.PlannedProductType.ToString();
+						this.productNode.Text = internalName + ": " + this.System;
 					}
 				} else {
 					this.productNode = null;
@@ -428,7 +437,8 @@ namespace Europlan.Common {
 				} else {
 					productCounter[p.PlannedProductType] = productCounter[p.PlannedProductType] + 1;
 				}
-				p.productNode.Text = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType] + ": " + p.System;
+				internalName = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType];
+				p.productNode.Text = internalName + ": " + p.System;
 			}
 
 			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg);
