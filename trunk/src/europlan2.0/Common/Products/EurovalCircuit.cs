@@ -183,6 +183,52 @@ namespace Europlan.Common {
 		}
 
 		public void Calculate(Europlan.Common.EurovalProduct.LayDistance layDistance, Nullable<Europlan.Common.EurovalProduct.RimType> rimType) {
+
+			if (layDistance == EurovalProduct.LayDistance.NONE) {
+				c_Qh2oHeat = 0;
+
+				c_Qh2oCool = 0;
+
+				c_druckverlustHeat = 0;
+
+				c_durchflussHeat = 0;
+
+				c_druckverlustCool = 0;
+
+				c_durchflussCool = 0;
+
+				c_areaAz = 0;
+				c_areaRz = 0;
+				c_pipeLengthAz = 0;
+				c_pipeLengthRz = 0;
+
+				c_qAzHeatPerSqm = 0;
+				c_qRzHeatPerSqm = 0;
+
+				c_qAzCoolPerSqm = 0;
+				c_qRzCoolPerSqm = 0;
+
+				c_floorTempAzHeat = 0;
+
+				c_floorTempRzHeat = 0;
+
+				c_floorTempAzCool = 0;
+
+				c_floorTempRzCool = 0;
+
+				c_thetaVRzHeat = 0;
+				c_thetaRRzHeat = 0;
+				c_thetaVAzHeat = 0;
+				c_thetaRAzHeat = 0;
+
+				c_thetaVRzCool = 0;
+				c_thetaRRzCool = 0;
+				c_thetaVAzCool = 0;
+				c_thetaRAzCool = 0;
+
+				return;
+			}
+
 			EN1264 en1264 = EN1264.Instance;
 
 			double c = EurovalProduct.ConfigC;

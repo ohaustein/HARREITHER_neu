@@ -112,8 +112,8 @@ namespace Europlan.Common {
 
 				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
 
-				bool showHeat = this.product.RequestedHeatLoad > 0;
-				bool showCool = this.product.RequestedCoolLoad > 0;
+				bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0;
+				bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0;
 
 				lblQHeat.Visible = showHeat;
 				lblQHeatUnit.Visible = showHeat;
@@ -382,6 +382,12 @@ namespace Europlan.Common {
 			//    } else {
 			//        this.lblError.Visible = false;
 			//    }
+
+				if (mbProduct.PlannedModulArea > mbProduct.PlannedNetArea) {
+					this.lblAreaWarning.Text = "Die verplanten Module nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(mbProduct.PlannedModulArea, 1).ToString() + "m² > " + Math.Round(mbProduct.PlannedNetArea, 1).ToString() + "m²)\n";
+				} else {
+					this.lblAreaWarning.Text = "";
+				}
 
 				if (this.errorMsg != null) {
 					this.lblError.Text = this.errorMsg;
@@ -686,7 +692,7 @@ namespace Europlan.Common {
 		private void numVerbindeleitungen_ValueChanged(object sender, EventArgs e) {
 			if (this.ignoreVerbindeleitungen == 0) {
 				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
-				mbProduct.RequestedSonstigeVerbindeLeitung = (int)this.numVerbindeleitungen.Value;
+				mbProduct.RequestedSonstigeVerbindeLeitung = (double)this.numVerbindeleitungen.Value;
 				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
 				this.UpdateControl(FieldEnum.MODULES_VERBINDELEITUNG);
 			}
