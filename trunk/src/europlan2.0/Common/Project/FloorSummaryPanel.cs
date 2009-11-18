@@ -101,6 +101,32 @@ namespace Europlan.Common {
 		private void gridRooms_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
 			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridRooms.Columns.Count &&
 					e.RowIndex >= 0 && e.RowIndex < this.gridRooms.Rows.Count) {
+				if (this.gridRooms.Columns[e.ColumnIndex] == this.Area) {
+					Room r = this.gridRooms.Rows[e.RowIndex].DataBoundItem as Room;
+					if (r != null && oldArea.HasValue) {
+						double floorArea = 0;
+						double ceilingArea = 0;
+						foreach (PlannedProduct pp in r.PlannedProducts) {
+							floorArea += pp.Product.PlannedFloorArea;
+							ceilingArea += pp.Product.PlannedCeilingArea;
+						}
+						if (floorArea > r.Area || ceilingArea > r.Area) {
+							if (MessageBox.Show("In diesem Raum sind bereits Systeme verplant die eine Raumgröße von " + Math.Round((floorArea > ceilingArea ? floorArea : ceilingArea), 1).ToString() + "m² in Anspruch nehmen, die neue Raumgröße beträgt aber nur " + Math.Round(r.Area, 1).ToString() + "m². Wenn Sie die neue Raumgröße übernehmen werden die verplanten Flächen der Systeme verkleinert.", "Wollen Sie die neue Raumgröße übernehmen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+								foreach (PlannedProduct pp in r.PlannedProducts) {
+									if (floorArea > r.Area && pp.Product.PlannedFloorArea > 0) {
+										pp.Product.PlannedFloorArea = (float)(pp.Product.PlannedFloorArea * r.Area / floorArea);
+									}
+									if (ceilingArea > r.Area && pp.Product.PlannedCeilingArea > 0) {
+										pp.Product.PlannedCeilingArea = (float)(pp.Product.PlannedCeilingArea * r.Area / ceilingArea);
+									}
+								}
+							} else {
+								this.gridRooms.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = oldArea.Value;
+							}
+						}
+						oldArea = null;
+					}
+				}
 				if (this.gridRooms.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn && ProjectStructureChanged != null) {
 					ProjectStructureChanged(this);
 				}
@@ -266,5 +292,17 @@ namespace Europlan.Common {
 		private void btnWhatIsNext_Click(object sender, EventArgs e) {
 			MessageBox.Show("Klicken Sie auf einen der Buttons in der Spalte\n'Bearbeiten' um den entsprechenden Raum zu öffnen, oder\n klicken Sie in der Projekthierarchie auf den gewünschten Raum.", "Wie geht's weiter?");
 		}
+
+		Nullable<float> oldArea = null;
+		private void gridRooms_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e) {
+			this.oldArea = null;
+			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridRooms.Columns.Count &&
+					e.RowIndex >= 0 && e.RowIndex < this.gridRooms.Rows.Count) {
+				if (this.gridRooms.Columns[e.ColumnIndex] == this.Area) {
+					this.oldArea = (this.gridRooms.Rows[e.RowIndex].DataBoundItem as Room).Area;
+				}
+			}
+		}
+
 	}
 }

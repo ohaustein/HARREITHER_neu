@@ -458,7 +458,7 @@ namespace Europlan.Common {
 			// 
 			// numCoolLoad
 			// 
-			this.numCoolLoad.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+			this.numCoolLoad.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
 			this.numCoolLoad.Enabled = false;
 			this.numCoolLoad.InternalValue = new decimal(new int[] {
             0,
@@ -666,19 +666,23 @@ namespace Europlan.Common {
 			// 
 			// numRoomTemperatureBelowCool
 			// 
-			this.numRoomTemperatureBelowCool.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numRoomTemperatureBelowCool.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
 			this.numRoomTemperatureBelowCool.InternalValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
 			this.numRoomTemperatureBelowCool.Location = new System.Drawing.Point(188, 91);
-			this.numRoomTemperatureBelowCool.MaxValue = null;
-			this.numRoomTemperatureBelowCool.MinValue = new decimal(new int[] {
-            0,
+			this.numRoomTemperatureBelowCool.MaxValue = new decimal(new int[] {
+            999,
             0,
             0,
             0});
+			this.numRoomTemperatureBelowCool.MinValue = new decimal(new int[] {
+            273,
+            0,
+            0,
+            -2147483648});
 			this.numRoomTemperatureBelowCool.Name = "numRoomTemperatureBelowCool";
 			this.numRoomTemperatureBelowCool.Size = new System.Drawing.Size(109, 20);
 			this.numRoomTemperatureBelowCool.TabIndex = 29;
@@ -709,19 +713,23 @@ namespace Europlan.Common {
 			// 
 			// numRoomTemperatureBelowHeat
 			// 
-			this.numRoomTemperatureBelowHeat.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numRoomTemperatureBelowHeat.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
 			this.numRoomTemperatureBelowHeat.InternalValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
 			this.numRoomTemperatureBelowHeat.Location = new System.Drawing.Point(188, 65);
-			this.numRoomTemperatureBelowHeat.MaxValue = null;
-			this.numRoomTemperatureBelowHeat.MinValue = new decimal(new int[] {
-            0,
+			this.numRoomTemperatureBelowHeat.MaxValue = new decimal(new int[] {
+            999,
             0,
             0,
             0});
+			this.numRoomTemperatureBelowHeat.MinValue = new decimal(new int[] {
+            273,
+            0,
+            0,
+            -2147483648});
 			this.numRoomTemperatureBelowHeat.Name = "numRoomTemperatureBelowHeat";
 			this.numRoomTemperatureBelowHeat.Size = new System.Drawing.Size(109, 20);
 			this.numRoomTemperatureBelowHeat.TabIndex = 26;

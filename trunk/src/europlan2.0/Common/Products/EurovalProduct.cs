@@ -805,8 +805,6 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public float PlannedFloorAreaPercentage {
-			/*get { return (this.AvailableFloorArea <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AvailableFloorArea); }
-			set { this.PlannedFloorArea = (float)(this.AvailableFloorArea * value / 100); }*/
 			get { return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AssociatedRoom.Area); }
 			set { this.PlannedFloorArea = (float)(this.AssociatedRoom.Area * value / 100); }
 		}
