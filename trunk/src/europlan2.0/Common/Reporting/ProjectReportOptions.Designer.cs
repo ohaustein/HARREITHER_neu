@@ -27,11 +27,11 @@ namespace Europlan.Common {
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.chkProjectOverview = new System.Windows.Forms.CheckBox();
-			this.chkAreaOverview = new System.Windows.Forms.CheckBox();
+			this.chkVerlegedaten = new System.Windows.Forms.CheckBox();
 			this.chkAuslegungBilanz = new System.Windows.Forms.CheckBox();
 			this.chkAuslegung = new System.Windows.Forms.CheckBox();
-			this.chkVerlegedaten = new System.Windows.Forms.CheckBox();
+			this.chkAreaOverview = new System.Windows.Forms.CheckBox();
+			this.chkProjectOverview = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -60,19 +60,12 @@ namespace Europlan.Common {
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.TabStop = false;
 			// 
-			// chkProjectOverview
+			// chkVerlegedaten
 			// 
-			resources.ApplyResources(this.chkProjectOverview, "chkProjectOverview");
-			this.chkProjectOverview.Name = "chkProjectOverview";
-			this.chkProjectOverview.UseVisualStyleBackColor = true;
-			this.chkProjectOverview.CheckedChanged += new System.EventHandler(this.chkProjectOverview_CheckedChanged);
-			// 
-			// chkAreaOverview
-			// 
-			resources.ApplyResources(this.chkAreaOverview, "chkAreaOverview");
-			this.chkAreaOverview.Name = "chkAreaOverview";
-			this.chkAreaOverview.UseVisualStyleBackColor = true;
-			this.chkAreaOverview.CheckedChanged += new System.EventHandler(this.chkAreaOverview_CheckedChanged);
+			resources.ApplyResources(this.chkVerlegedaten, "chkVerlegedaten");
+			this.chkVerlegedaten.Name = "chkVerlegedaten";
+			this.chkVerlegedaten.UseVisualStyleBackColor = true;
+			this.chkVerlegedaten.CheckedChanged += new System.EventHandler(this.chkVerlegedaten_CheckedChanged);
 			// 
 			// chkAuslegungBilanz
 			// 
@@ -88,12 +81,19 @@ namespace Europlan.Common {
 			this.chkAuslegung.UseVisualStyleBackColor = true;
 			this.chkAuslegung.CheckedChanged += new System.EventHandler(this.chkAuslegung_CheckedChanged);
 			// 
-			// chkVerlegedaten
+			// chkAreaOverview
 			// 
-			resources.ApplyResources(this.chkVerlegedaten, "chkVerlegedaten");
-			this.chkVerlegedaten.Name = "chkVerlegedaten";
-			this.chkVerlegedaten.UseVisualStyleBackColor = true;
-			this.chkVerlegedaten.CheckedChanged += new System.EventHandler(this.chkVerlegedaten_CheckedChanged);
+			resources.ApplyResources(this.chkAreaOverview, "chkAreaOverview");
+			this.chkAreaOverview.Name = "chkAreaOverview";
+			this.chkAreaOverview.UseVisualStyleBackColor = true;
+			this.chkAreaOverview.CheckedChanged += new System.EventHandler(this.chkAreaOverview_CheckedChanged);
+			// 
+			// chkProjectOverview
+			// 
+			resources.ApplyResources(this.chkProjectOverview, "chkProjectOverview");
+			this.chkProjectOverview.Name = "chkProjectOverview";
+			this.chkProjectOverview.UseVisualStyleBackColor = true;
+			this.chkProjectOverview.CheckedChanged += new System.EventHandler(this.chkProjectOverview_CheckedChanged);
 			// 
 			// ProjectReportOptions
 			// 

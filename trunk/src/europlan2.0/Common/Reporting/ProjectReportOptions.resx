@@ -189,6 +189,9 @@
   <data name="chkVerlegedaten.Text" xml:space="preserve">
     <value>Verlegedaten</value>
   </data>
+  <data name="chkVerlegedaten.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;chkVerlegedaten.Name" xml:space="preserve">
     <value>chkVerlegedaten</value>
   </data>
