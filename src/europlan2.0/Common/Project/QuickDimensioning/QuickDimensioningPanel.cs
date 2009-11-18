@@ -981,6 +981,7 @@ namespace Europlan.Common {
 				this.listLabelPreviewControl1.ToolbarButtons.ZoomReset = combit.ListLabel15.LlButtonState.Default;
 				this.listLabelPreviewControl1.ToolbarButtons.ZoomRevert = combit.ListLabel15.LlButtonState.Default;
 				this.listLabelPreviewControl1.ToolbarButtons.ZoomTimes2 = combit.ListLabel15.LlButtonState.Default;
+				this.listLabelPreviewControl1.SaveAsFileName = Project.Instance.ProjectFileName.Replace(".e2p", "");
 				this.pageSummary.Controls.Add(this.listLabelPreviewControl1);
 
 				List<QuickDimensioningReportWrapper> reportWrapper = Project.Instance.QuickDimensioning.GetQuickDimensioningRoomReports();
