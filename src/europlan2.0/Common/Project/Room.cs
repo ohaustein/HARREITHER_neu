@@ -232,7 +232,7 @@ namespace Europlan.Common {
 						covered += pp.PlannedHeatLoad;
 					}
 				}
-				return covered - this.heatLoad;
+				return covered - this.NormalizedHeatLoad;
 			}
 		}
 
@@ -250,7 +250,7 @@ namespace Europlan.Common {
 						covered += pp.PlannedCoolLoad;
 					}
 				}
-				return covered - this.coolLoad;
+				return covered - this.NormalizedCoolLoad;
 			}
 		}
 
@@ -532,6 +532,17 @@ namespace Europlan.Common {
 				p.AssociatedRoom = this;
 				p.FinalizeLoading();
 			}
+		}
+
+		public Floor GetFloor() {
+			foreach (Floor f in Project.Instance.Floors) {
+				foreach (Room r in f.Rooms) {
+					if (r == this) {
+						return f;
+					}
+				}
+			}
+			return null;
 		}
 
 		public override string ToString() {

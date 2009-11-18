@@ -251,6 +251,17 @@ namespace Europlan.Common {
 				room.FinalizeLoading();
 			}
 		}
+
+		public PlannedProduct FindConnectedProduct(PlannedProduct origin) {
+			foreach (Room r in this.Rooms) {
+				foreach (PlannedProduct pp in r.PlannedProducts) {
+					if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && pp.Product.PlannedConnection.OtherProduct == origin) {
+						return pp;
+					}
+				}
+			}
+			return null;
+		}
 	}
 
 }

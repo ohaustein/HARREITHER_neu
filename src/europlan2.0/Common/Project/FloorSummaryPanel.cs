@@ -120,6 +120,25 @@ namespace Europlan.Common {
 										pp.Product.PlannedCeilingArea = (float)(pp.Product.PlannedCeilingArea * r.Area / ceilingArea);
 									}
 								}
+								foreach (PlannedProduct pp in r.PlannedProducts) {
+									string err;
+									PlannedProduct connectedProduct = this.floor.FindConnectedProduct(pp);
+									if (connectedProduct != null) {
+										connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err);
+									}
+									pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err);
+									if (connectedProduct != null) {
+										connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err);
+									}
+									PlannedProduct inverseConnectedProduct = null;
+									if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+										inverseConnectedProduct = pp.Product.PlannedConnection.OtherProduct;
+									}
+									if (inverseConnectedProduct != null) {
+										inverseConnectedProduct.Product.ConfigureProduct(inverseConnectedProduct.RequestedHeatLoad, inverseConnectedProduct.RequestedCoolLoad, inverseConnectedProduct.CalculateHeat, inverseConnectedProduct.CalculateCool, out err);
+										pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err);
+									}
+								}
 							} else {
 								this.gridRooms.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = oldArea.Value;
 							}
