@@ -73,6 +73,7 @@ namespace Europlan.Common {
 			List<DistributorWrapper> distributorWrapper = this.GetDistributorWrapper();
 			List<RoomOverviewWrapper> roomOverviewWrapper = this.GetRoomOverviewWrapper();
 			List<EurovalAuslegungWrapper> eurovalAuslegungWrapper = GetEurovalAuslegungWrapper();
+			List<BilanzWrapper> eurovalBilanzWrapper = GetEurovalBilanzWrapper();
 
 			DataTable projektBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
@@ -84,6 +85,7 @@ namespace Europlan.Common {
 			DataTable distributors = ReportHelper.ListToDataTable<DistributorWrapper>(distributorWrapper);
 			DataTable roomOverview = ReportHelper.ListToDataTable<RoomOverviewWrapper>(roomOverviewWrapper);
 			DataTable eurovalAuslegung = ReportHelper.ListToDataTable<EurovalAuslegungWrapper>(eurovalAuslegungWrapper);
+			DataTable eurovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(eurovalBilanzWrapper);
 
 			projektBilanz.TableName = "ProjektBilanz";
 			projectWarnings.TableName = "ProjectWarnings";
@@ -95,6 +97,7 @@ namespace Europlan.Common {
 			distributors.TableName = "Distributors";
 			roomOverview.TableName = "RoomOverview";
 			eurovalAuslegung.TableName = "EurovalAuslegung";
+			eurovalBilanz.TableName = "EurovalBilanz";
 
 			reportData.Tables.Add(projektBilanz);
 			reportData.Tables.Add(projectWarnings);
@@ -106,6 +109,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(distributors);
 			reportData.Tables.Add(roomOverview);
 			reportData.Tables.Add(eurovalAuslegung);
+			reportData.Tables.Add(eurovalBilanz);
 
 			listLabel1.DataSource = reportData;
 
@@ -595,6 +599,53 @@ namespace Europlan.Common {
 				wrapper.ConnectingArea = random.Next(0, 10);
 				wrapperList.Add(wrapper);
 			}
+
+			return wrapperList;
+		}
+
+		public List<BilanzWrapper> GetEurovalBilanzWrapper() {
+			//TODO
+			List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
+
+			BilanzWrapper wrapper = new BilanzWrapper();
+			wrapper.Description = "Gewünschter Wärmebedarf";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Bereinigter Wärmebedarf";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Erreichte Heizleistung nach innen";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gesamte zugeführte Heizleistung";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Wassermenge";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Maximaler Druckverlust (inkl. Verteiler)";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Wasserinhalt (ab Verteiler)";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gesamte Raumfläche (Räume mit Euroval® Fußbodenheizung)";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gestamte Estrichfläche";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gestamte Heizfläche";
+			wrapperList.Add(wrapper);
 
 			return wrapperList;
 		}
