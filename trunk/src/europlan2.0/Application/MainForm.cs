@@ -688,13 +688,13 @@ namespace Europlan.Application {
 		}
 
 		private void viewReportToolStripMenuItem_Click(object sender, EventArgs e) {
-			//ProjectReportOptions optionsForm = new ProjectReportOptions();
-			//if (optionsForm.ShowDialog() == DialogResult.OK) {
-				ProjectReport reportForm = new ProjectReport(this.currentProject);
+			ProjectReportOptions optionsForm = new ProjectReportOptions();
+			if (optionsForm.ShowDialog() == DialogResult.OK) {
+				ProjectReport reportForm = new ProjectReport(this.currentProject, optionsForm);
 				reportForm.ShowDialog();
 				reportForm.Dispose();
-			//}
-			//optionsForm.Dispose();
+			}
+			optionsForm.Dispose();
 		}
 	}
 }

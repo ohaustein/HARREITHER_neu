@@ -15,7 +15,7 @@ namespace Europlan.Common {
 		private combit.ListLabel15.ListLabelPreviewControl listLabelPreviewControl1;
 		private Project project;
 
-		public ProjectReport(Project project) {
+		public ProjectReport(Project project, ProjectReportOptions reportOptions) {
 			this.project = project;
 			InitializeComponent();
 
@@ -143,6 +143,11 @@ namespace Europlan.Common {
 
 			listLabel1.Variables.Add("@FileName", Path.GetFileName(project.ProjectFileName));
 
+			listLabel1.Variables.Add("@ProjectOverview", reportOptions.ProjectOverview);
+			listLabel1.Variables.Add("@AreaOverview", reportOptions.AreaOverview);
+			listLabel1.Variables.Add("@Auslegung", reportOptions.Auslegung);
+			listLabel1.Variables.Add("@AuslegungBilanz", reportOptions.AuslegungBilanz);
+			listLabel1.Variables.Add("@Verlegedaten", reportOptions.Verlegedaten);
 
 #if DEBUG
 			if (MessageBox.Show("Designer?", "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
