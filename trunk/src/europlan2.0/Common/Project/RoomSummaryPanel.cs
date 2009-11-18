@@ -185,6 +185,12 @@ namespace Europlan.Common {
 				if (product.Node != null) {
 					if (MessageBox.Show("Wollen Sie das System " + product.Node.Text + " wirklich löschen.", "Heizsystem löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 
+						PlannedProduct connectedProduct = this.room.GetFloor().FindConnectedProduct(product);
+						if (connectedProduct != null) {
+							connectedProduct.Product.PlannedConnection = null;
+							string err;
+							connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err);
+						}
 						this.room.PlannedProducts.Remove(product);
 						if (this.ProjectStructureChanged != null) {
 							this.ProjectStructureChanged(this);
@@ -221,6 +227,12 @@ namespace Europlan.Common {
 		private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
 			if (this.deletedProduct != null) {
 				this.room.PlannedProducts.Remove(this.deletedProduct);
+				PlannedProduct connectedProduct = this.room.GetFloor().FindConnectedProduct(this.deletedProduct);
+				if (connectedProduct != null) {
+					connectedProduct.Product.PlannedConnection = null;
+					string err;
+					connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err);
+				}
 				if (this.ProjectStructureChanged != null) {
 					this.ProjectStructureChanged(this);
 				}
