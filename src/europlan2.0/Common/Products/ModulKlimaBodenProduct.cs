@@ -431,8 +431,8 @@ namespace Europlan.Common {
 			//    }
 			//}
 
-			if (this.PlannedModulArea > this.plannedArea - this.plannedAreaUnheated) {
-				errorMsg += "Die verplanten Module nehmen mehr Fläche in Anspruch als für dieses System zu Verfügung steht (" + this.PlannedModulArea.ToString() + "m² > " + (this.plannedArea - this.plannedAreaUnheated).ToString() + "m²)\n";
+			if (this.PlannedModulArea > this.PlannedNetArea) {
+				errorMsg += "Die verplanten Module nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.PlannedModulArea, 1).ToString() + "m² > " + Math.Round(this.PlannedNetArea, 1).ToString() + "m²)\n";
 			}
 			if (Math.Round(this.PlannedFloorTemperatureHeat, 1) > (ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264)) {
 				errorMsg += "Oberflächentemperatur zu groß (" + Math.Round(this.PlannedFloorTemperatureHeat, 1) + "°C > " + Math.Round((ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1) + "°C)\n";

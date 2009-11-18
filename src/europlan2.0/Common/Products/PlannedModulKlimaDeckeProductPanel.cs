@@ -91,10 +91,10 @@ namespace Europlan.Common {
 
 				ModulKlimaDeckeProduct mdProduct = this.product.Product as ModulKlimaDeckeProduct;
 
-				bool showHeat = this.product.RequestedHeatLoad > 0;
-				bool showCool = this.product.RequestedCoolLoad > 0;
-			//    bool showRim = evProduct.PlannedAreaRim > 0;
-			//    bool showResidence = true;
+				bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0;
+				bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0;
+				//bool showRim = evProduct.PlannedAreaRim > 0;
+				//bool showResidence = true;
 
 				lblQHeat.Visible = showHeat;
 				lblQHeatUnit.Visible = showHeat;
