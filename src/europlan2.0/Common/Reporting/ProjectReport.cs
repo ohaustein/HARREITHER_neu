@@ -63,10 +63,10 @@ namespace Europlan.Common {
 
 			DataSet reportData = new DataSet();
 
-			List<ProjektBilanzWrapper> projektBilanzWrapper = this.GetProkjektBilanzReport();
+			List<BilanzWrapper> projektBilanzWrapper = this.GetProkjektBilanzReport();
 			List<ProjectWarningWrapper> projectWarningWrapper = this.GetProjectWarningReport();
 			List<FloorOverviewWrapper> floorOverviewWrapper = this.GetFloorOverviewWrapper();
-			List<EurovalOverviewWrapper> eurovalOverviewWrapper = GetEurovalOverviewWrapper();
+			List<EurovalAreaOverviewWrapper> eurovalOverviewWrapper = GetEurovalOverviewWrapper();
 			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = this.GetOpenHeatLoadForRoomWrapper();
 			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = this.GetOpenCoolLoadForRoomWrapper();
 			List<RegulatorCircuitWrapper> regulatorCircuitWrapper = this.GetRegulatorCircuitWrapper();
@@ -74,10 +74,10 @@ namespace Europlan.Common {
 			List<RoomOverviewWrapper> roomOverviewWrapper = this.GetRoomOverviewWrapper();
 			List<EurovalAuslegungWrapper> eurovalAuslegungWrapper = GetEurovalAuslegungWrapper();
 
-			DataTable projektBilanz = ReportHelper.ListToDataTable<ProjektBilanzWrapper>(projektBilanzWrapper);
+			DataTable projektBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
 			DataTable floorOverwiew = ReportHelper.ListToDataTable<FloorOverviewWrapper>(floorOverviewWrapper);
-			DataTable eurovalOverview = ReportHelper.ListToDataTable<EurovalOverviewWrapper>(eurovalOverviewWrapper);
+			DataTable eurovalOverview = ReportHelper.ListToDataTable<EurovalAreaOverviewWrapper>(eurovalOverviewWrapper);
 			DataTable openHeatLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openHeatLoadWrapper);
 			DataTable openCoolLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openCoolLoadWrapper);
 			DataTable regulatorCircuits = ReportHelper.ListToDataTable<RegulatorCircuitWrapper>(regulatorCircuitWrapper);
@@ -175,7 +175,6 @@ namespace Europlan.Common {
 					}
 				} else {
 					this.Close();
-					//this.tabQuickDimensioning.SelectedTab = this.pageSettings;
 				}
 			}
 
@@ -205,51 +204,51 @@ namespace Europlan.Common {
 			SettingsFile.Update();
 		}
 
-		public List<ProjektBilanzWrapper> GetProkjektBilanzReport() {
+		public List<BilanzWrapper> GetProkjektBilanzReport() {
 			//TODO
-			List<ProjektBilanzWrapper> wrapperList = new List<ProjektBilanzWrapper>();
+			List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
 
-			ProjektBilanzWrapper wrapper = new ProjektBilanzWrapper();
+			BilanzWrapper wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Normwärmebedarf";
 			wrapperList.Add(wrapper);
 
-			wrapper = new ProjektBilanzWrapper();
+			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamter bereinigter Wärmebedarf";
 			wrapperList.Add(wrapper);
 
-			wrapper = new ProjektBilanzWrapper();
+			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Heizleistung (nach innen)";
 			wrapperList.Add(wrapper);
 
-			wrapper = new ProjektBilanzWrapper();
+			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamte aufgenommene Leistung";
 			wrapperList.Add(wrapper);
 
-			wrapper = new ProjektBilanzWrapper();
+			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Wassermenge";
 			wrapperList.Add(wrapper);
 
-			wrapper = new ProjektBilanzWrapper();
+			wrapper = new BilanzWrapper();
 			wrapper.Description = "Maximaler Druckverlust (inkl. Verteiler)";
 			wrapperList.Add(wrapper);
 
-			wrapper = new ProjektBilanzWrapper();
+			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamt-Wasserinhalt (ab Verteiler)";
 			wrapperList.Add(wrapper);
 
-			wrapper = new ProjektBilanzWrapper();
+			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Raumfläche";
 			wrapperList.Add(wrapper);
 
-			wrapper = new ProjektBilanzWrapper();
+			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Fußbodenheizungsfläche";
 			wrapperList.Add(wrapper);
 
-			wrapper = new ProjektBilanzWrapper();
+			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Wandheizungsfläche";
 			wrapperList.Add(wrapper);
 
-			wrapper = new ProjektBilanzWrapper();
+			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Deckenkühlungsfläche";
 			wrapperList.Add(wrapper);
 
@@ -583,13 +582,13 @@ namespace Europlan.Common {
 			return wrapperHeatList;
 		}
 
-		public List<EurovalOverviewWrapper> GetEurovalOverviewWrapper() {
-			List<EurovalOverviewWrapper> wrapperList = new List<EurovalOverviewWrapper>();
+		public List<EurovalAreaOverviewWrapper> GetEurovalOverviewWrapper() {
+			List<EurovalAreaOverviewWrapper> wrapperList = new List<EurovalAreaOverviewWrapper>();
 
-			EurovalOverviewWrapper wrapper;
+			EurovalAreaOverviewWrapper wrapper;
 			Random random = new Random(DateTime.Now.Millisecond);
 			foreach (EurovalProduct.LayDistance distance in Enum.GetValues(typeof(EurovalProduct.LayDistance))) {
-				wrapper = new EurovalOverviewWrapper();
+				wrapper = new EurovalAreaOverviewWrapper();
 				wrapper.LayDistance = distance.ToString();
 				wrapper.AzArea = random.Next(0, 10);
 				wrapper.RzArea = random.Next(0, 10);

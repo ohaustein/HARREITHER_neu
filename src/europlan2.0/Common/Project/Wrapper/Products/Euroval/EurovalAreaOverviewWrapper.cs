@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Europlan.Common {
 
-	public class EurovalOverviewWrapper {
+	public class EurovalAreaOverviewWrapper {
 
 		private string layDistance;
 		private double azArea;

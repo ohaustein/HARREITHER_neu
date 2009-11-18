@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Europlan.Common {
 	
-	public class ProjektBilanzWrapper {
+	public class BilanzWrapper {
 
 		private string description;
 		private string heatValue;
