@@ -279,7 +279,7 @@ namespace Europlan.Common {
 				this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
 				this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
 				this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
-				this.numHeatLoadPercentage.MaxValue = (decimal)(this.product.NecessaryHeatLoad * 100 / evProduct.AssociatedRoom.NormalizedHeatLoad);
+				this.numHeatLoadPercentage.MaxValue = (decimal)(evProduct.AssociatedRoom.NormalizedHeatLoad <= 0 ? 0 : this.product.NecessaryHeatLoad * 100 / evProduct.AssociatedRoom.NormalizedHeatLoad);
 				if (this.product.NecessaryHeatLoad > 0) {
 					this.chkCoverHeatLoad.Enabled = true;
 					if ((skipFields & (FieldEnum.HEAT_LOAD | FieldEnum.HEAT_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
@@ -308,6 +308,7 @@ namespace Europlan.Common {
 					this.chkCoverHeatLoad.Checked = false;
 				}
 				this.numCoolLoad.MaxValue = (decimal)this.product.NecessaryCoolLoad;
+				this.numCoolLoadPercentage.MaxValue = (decimal)(evProduct.AssociatedRoom.NormalizedCoolLoad <= 0 ? 0 : this.product.NecessaryCoolLoad * 100 / evProduct.AssociatedRoom.NormalizedCoolLoad);
 				if (this.product.NecessaryCoolLoad > 0) {
 					this.chkCoverCoolLoad.Enabled = true;
 					if ((skipFields & (FieldEnum.COOL_LOAD | FieldEnum.COOL_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
@@ -335,8 +336,8 @@ namespace Europlan.Common {
 					this.chkCoverCoolLoad.Enabled = false;
 					this.chkCoverCoolLoad.Checked = false;
 				}
-				this.lblHeatLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.HeatLoad.ToString() + " W)";
-				this.lblCoolLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.CoolLoad.ToString() + " W)";
+				this.lblHeatLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedHeatLoad.ToString() + " W)";
+				this.lblCoolLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedCoolLoad.ToString() + " W)";
 				float plannedArea = (float)(this.product.PlannedArea.HasValue ? Math.Round(this.product.PlannedArea.Value, 2) : 0);
 				if ((skipFields & FieldEnum.AREA) == FieldEnum.NONE) {
 					this.numArea.Value = Math.Round((decimal)plannedArea, 2);
@@ -598,15 +599,6 @@ namespace Europlan.Common {
 
 		private void chkCoverHeatLoad_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreCoverHeatLoad == 0) {
-				/*if (this.chkCoverHeatLoad.Checked) {
-					this.numHeatLoad.Enabled = false;
-					this.numHeatLoadPercentage.Enabled = false;
-					this.numHeatLoadPercentage.Value = 100;
-				} else {
-					this.numHeatLoad.Enabled = true;
-					this.numHeatLoadPercentage.Enabled = true;
-					this.numHeatLoadPercentage.Value = 100;
-				}*/
 				ignoreHeatLoad++;
 				ignoreHeatLoadPercentage++;
 				this.product.CoverHeatLoad = this.chkCoverHeatLoad.Checked;
@@ -622,16 +614,16 @@ namespace Europlan.Common {
 
 		private void chkCoverCoolLoad_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreCoverCoolLoad == 0) {
-				if (this.chkCoverCoolLoad.Checked) {
-					this.numCoolLoad.Enabled = false;
-					this.numCoolLoadPercentage.Enabled = false;
-					this.numCoolLoadPercentage.Value = 100;
-				} else {
-					this.numCoolLoad.Enabled = true;
-					this.numCoolLoadPercentage.Enabled = true;
-					this.numCoolLoadPercentage.Value = 100;
-				}
+				ignoreCoolLoad++;
+				ignoreCoolLoadPercentage++;
 				this.product.CoverCoolLoad = this.chkCoverCoolLoad.Checked;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				this.UpdateControl(FieldEnum.NONE);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				ignoreCoolLoad--;
+				ignoreCoolLoadPercentage--;
 			}
 		}
 

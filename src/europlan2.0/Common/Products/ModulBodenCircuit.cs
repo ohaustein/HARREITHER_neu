@@ -184,8 +184,7 @@ namespace Europlan.Common {
 			double rLambdaB = this.ModulKlimaBodenProduct.PlannedFloorConstruction == null ? 0 : this.ModulKlimaBodenProduct.PlannedFloorConstruction.RValue;
 			double rLambdaIns = this.ModulKlimaBodenProduct.PlannedInsulationConstruction == null ? 0 : this.ModulKlimaBodenProduct.PlannedInsulationConstruction.RValue;
 
-			// TODO add lange fittinge
-			this.row.LengthVerbindeleitungen = this.sonstigeVerbindeleitung;
+			this.row.LengthVerbindeleitungen = this.sonstigeVerbindeleitung + this.langeFittinge * 0.1;
 
 			{ // Heizlastberechnung
 				double distributorVorlaufTemp;

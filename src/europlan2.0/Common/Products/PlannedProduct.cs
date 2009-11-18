@@ -241,9 +241,9 @@ namespace Europlan.Common {
 					return 0;
 				}
 				if (this.coverHeatLoad) {
-					return (float)this.NecessaryHeatLoad * 100 / this.Product.AssociatedRoom.HeatLoad;
+					return (float)this.NecessaryHeatLoad * 100 / this.Product.AssociatedRoom.NormalizedHeatLoad;
 				}
-				return (float)Math.Round(this.requestedHeatLoad * 100 / this.Product.AssociatedRoom.HeatLoad, 1);
+				return (float)Math.Round(this.requestedHeatLoad * 100 / this.Product.AssociatedRoom.NormalizedHeatLoad, 1);
 			}
 			set {
 				if (this.Product.AssociatedRoom.HeatLoad != 0) {
@@ -259,9 +259,9 @@ namespace Europlan.Common {
 					return 0;
 				}
 				if (this.coverCoolLoad) {
-					return (float)this.NecessaryCoolLoad * 100 / this.Product.AssociatedRoom.CoolLoad;
+					return (float)this.NecessaryCoolLoad * 100 / this.Product.AssociatedRoom.NormalizedCoolLoad;
 				}
-				return (float)(this.requestedCoolLoad * 100 / this.Product.AssociatedRoom.CoolLoad);
+				return (float)(this.requestedCoolLoad * 100 / this.Product.AssociatedRoom.NormalizedCoolLoad);
 			}
 			set {
 				if (this.NecessaryCoolLoad != 0) {
