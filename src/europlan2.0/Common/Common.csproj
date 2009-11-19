@@ -351,6 +351,7 @@
     </Compile>
     <Compile Include="Project\Wrapper\RegulatorCircuitWrapper.cs" />
     <Compile Include="Project\Wrapper\RoomOverviewWrapper.cs" />
+    <Compile Include="Project\Wrapper\VerlegedatenCircuitWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Licensing\HardwareId.cs" />
     <Compile Include="Reporting\ProjectReportOptions.cs">
