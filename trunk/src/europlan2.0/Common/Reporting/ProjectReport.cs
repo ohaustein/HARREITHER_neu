@@ -75,6 +75,7 @@ namespace Europlan.Common {
 			List<RoomOverviewWrapper> roomOverviewWrapper = this.GetRoomOverviewWrapper();
 			List<EurovalAuslegungWrapper> eurovalAuslegungWrapper = GetEurovalAuslegungWrapper();
 			List<BilanzWrapper> eurovalBilanzWrapper = GetEurovalBilanzWrapper();
+			List<VerlegedatenCircuitWrapper> verlegedatenCircuitWrapper = GetVerlegedatenCircuitWrapper();
 
 			DataTable projektBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
@@ -87,6 +88,7 @@ namespace Europlan.Common {
 			DataTable roomOverview = ReportHelper.ListToDataTable<RoomOverviewWrapper>(roomOverviewWrapper);
 			DataTable eurovalAuslegung = ReportHelper.ListToDataTable<EurovalAuslegungWrapper>(eurovalAuslegungWrapper);
 			DataTable eurovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(eurovalBilanzWrapper);
+			DataTable verlegedatenCircuit = ReportHelper.ListToDataTable<VerlegedatenCircuitWrapper>(verlegedatenCircuitWrapper);
 
 			projektBilanz.TableName = "ProjektBilanz";
 			projectWarnings.TableName = "ProjectWarnings";
@@ -99,6 +101,7 @@ namespace Europlan.Common {
 			roomOverview.TableName = "RoomOverview";
 			eurovalAuslegung.TableName = "EurovalAuslegung";
 			eurovalBilanz.TableName = "EurovalBilanz";
+			verlegedatenCircuit.TableName = "VerlegedatenCircuit";
 
 			reportData.Tables.Add(projektBilanz);
 			reportData.Tables.Add(projectWarnings);
@@ -111,6 +114,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(roomOverview);
 			reportData.Tables.Add(eurovalAuslegung);
 			reportData.Tables.Add(eurovalBilanz);
+			reportData.Tables.Add(verlegedatenCircuit);
 
 			listLabel1.DataSource = reportData;
 
@@ -647,6 +651,26 @@ namespace Europlan.Common {
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamte Heizfläche";
 			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
+
+		public List<VerlegedatenCircuitWrapper> GetVerlegedatenCircuitWrapper() {
+			//TODO
+
+			List<VerlegedatenCircuitWrapper> wrapperList = new List<VerlegedatenCircuitWrapper>();
+
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						ProductConnection connection = pp.Product.PlannedConnection;
+						foreach (Circuit c in pp.Product.PlannedCircuits) {
+							
+						}
+					}
+				}
+			}
 
 			return wrapperList;
 		}
