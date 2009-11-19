@@ -7,10 +7,10 @@ namespace Europlan.Common {
 	public class VerlegedatenCircuitWrapper {
 
 		private string distributor;
-		public int circuitNumber;
-		public string name;
-		public double durchfluss;
-		public double area;
+		private int circuitNumber;
+		private string name;
+		private double durchfluss;
+		private string area;
 
 		public string Distributor {
 			get { return distributor; }
@@ -32,7 +32,7 @@ namespace Europlan.Common {
 			set { durchfluss = value; }
 		}
 
-		public double Area {
+		public string Area {
 			get { return area; }
 			set { area = value; }
 		}
