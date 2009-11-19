@@ -221,6 +221,18 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public Floor AssociatedFloor {
+			get {
+				foreach (Floor floor in Project.Instance.Floors) {
+					if (floor.Distributors.Contains(this)) {
+						return floor;
+					}
+				}
+				return null;
+			}
+		}
+
 		public int MaxCircuits {
 			get { return maxCircuits; }
 			set { maxCircuits = value; }

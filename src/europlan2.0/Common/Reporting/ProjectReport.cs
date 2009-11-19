@@ -659,14 +659,28 @@ namespace Europlan.Common {
 			//TODO
 
 			List<VerlegedatenCircuitWrapper> wrapperList = new List<VerlegedatenCircuitWrapper>();
-
+			VerlegedatenCircuitWrapper wrapper = null;
 
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
 					foreach (PlannedProduct pp in room.PlannedProducts) {
 						ProductConnection connection = pp.Product.PlannedConnection;
 						foreach (Circuit c in pp.Product.PlannedCircuits) {
-							
+							if (connection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+								wrapper = new VerlegedatenCircuitWrapper();
+								wrapper.Distributor = connection.Distributor.Id + " " + connection.Distributor.Name + " " + connection.Distributor.AssociatedFloor.Name;
+								wrapper.Name = pp.Product.ToString() + " in ";
+								if (floor != connection.Distributor.AssociatedFloor) {
+									wrapper.Name += floor.Name + ", ";
+								}
+								wrapper.Name += room.Id + " (" + room.Name + ")";
+								if (pp.Product.PlannedCircuits.Count > 1) {
+									wrapper.Name += ", Heizkreis " + (c.NrOfCircuit + 1);
+								}
+								wrapper.Durchfluss = c.C_DurchflussHeat;
+								wrapper.Area = "1,0m²";
+								wrapperList.Add(wrapper);
+							}
 						}
 					}
 				}
