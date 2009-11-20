@@ -134,6 +134,7 @@
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\ModulDeckeSubArea.cs" />
     <Compile Include="Products\PlannedHithermProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

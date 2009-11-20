@@ -148,6 +148,10 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.label13 = new System.Windows.Forms.Label();
+			this.btnRemoveSubarea = new System.Windows.Forms.Button();
+			this.btnAddSubarea = new System.Windows.Forms.Button();
+			this.lstSubarea = new System.Windows.Forms.ListBox();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -830,6 +834,10 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.label13);
+			this.panel2.Controls.Add(this.btnRemoveSubarea);
+			this.panel2.Controls.Add(this.btnAddSubarea);
+			this.panel2.Controls.Add(this.lstSubarea);
 			this.panel2.Controls.Add(this.label14);
 			this.panel2.Controls.Add(this.lblError);
 			this.panel2.Controls.Add(this.lblQAnbCoolUnit);
@@ -912,7 +920,7 @@ namespace Europlan.Common {
 			// label14
 			// 
 			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(468, 266);
+			this.label14.Location = new System.Drawing.Point(576, 266);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(224, 13);
 			this.label14.TabIndex = 139;
@@ -1445,7 +1453,7 @@ namespace Europlan.Common {
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(447, 266);
+			this.label3.Location = new System.Drawing.Point(555, 266);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(15, 13);
 			this.label3.TabIndex = 37;
@@ -1459,7 +1467,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			this.numLength.Location = new System.Drawing.Point(358, 263);
+			this.numLength.Location = new System.Drawing.Point(466, 263);
 			this.numLength.MaxValue = null;
 			this.numLength.MinValue = new decimal(new int[] {
             0,
@@ -1481,7 +1489,7 @@ namespace Europlan.Common {
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(202, 266);
+			this.label2.Location = new System.Drawing.Point(310, 266);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(150, 13);
 			this.label2.TabIndex = 35;
@@ -1492,7 +1500,7 @@ namespace Europlan.Common {
 			this.dgvModules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.dgvModules.Boden = false;
-			this.dgvModules.Location = new System.Drawing.Point(205, 43);
+			this.dgvModules.Location = new System.Drawing.Point(313, 43);
 			this.dgvModules.Name = "dgvModules";
 			this.dgvModules.Size = new System.Drawing.Size(642, 212);
 			this.dgvModules.TabIndex = 34;
@@ -1500,7 +1508,7 @@ namespace Europlan.Common {
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(96, 14);
+			this.label1.Location = new System.Drawing.Point(204, 14);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(86, 28);
 			this.label1.TabIndex = 33;
@@ -1508,7 +1516,7 @@ namespace Europlan.Common {
 			// 
 			// btnRemoveRow
 			// 
-			this.btnRemoveRow.Location = new System.Drawing.Point(152, 261);
+			this.btnRemoveRow.Location = new System.Drawing.Point(260, 261);
 			this.btnRemoveRow.Name = "btnRemoveRow";
 			this.btnRemoveRow.Size = new System.Drawing.Size(30, 23);
 			this.btnRemoveRow.TabIndex = 32;
@@ -1518,7 +1526,7 @@ namespace Europlan.Common {
 			// 
 			// btnAddRow
 			// 
-			this.btnAddRow.Location = new System.Drawing.Point(97, 261);
+			this.btnAddRow.Location = new System.Drawing.Point(205, 261);
 			this.btnAddRow.Name = "btnAddRow";
 			this.btnAddRow.Size = new System.Drawing.Size(30, 23);
 			this.btnAddRow.TabIndex = 31;
@@ -1529,7 +1537,7 @@ namespace Europlan.Common {
 			// lstRows
 			// 
 			this.lstRows.FormattingEnabled = true;
-			this.lstRows.Location = new System.Drawing.Point(97, 43);
+			this.lstRows.Location = new System.Drawing.Point(205, 43);
 			this.lstRows.Name = "lstRows";
 			this.lstRows.Size = new System.Drawing.Size(85, 212);
 			this.lstRows.TabIndex = 30;
@@ -1596,6 +1604,43 @@ namespace Europlan.Common {
 			// 
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			// 
+			// label13
+			// 
+			this.label13.Location = new System.Drawing.Point(96, 14);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(86, 28);
+			this.label13.TabIndex = 143;
+			this.label13.Text = "Teilflächen";
+			// 
+			// btnRemoveSubarea
+			// 
+			this.btnRemoveSubarea.Location = new System.Drawing.Point(152, 261);
+			this.btnRemoveSubarea.Name = "btnRemoveSubarea";
+			this.btnRemoveSubarea.Size = new System.Drawing.Size(30, 23);
+			this.btnRemoveSubarea.TabIndex = 142;
+			this.btnRemoveSubarea.Text = "-";
+			this.btnRemoveSubarea.UseVisualStyleBackColor = true;
+			this.btnRemoveSubarea.Click += new System.EventHandler(this.btnRemoveSubarea_Click);
+			// 
+			// btnAddSubarea
+			// 
+			this.btnAddSubarea.Location = new System.Drawing.Point(97, 261);
+			this.btnAddSubarea.Name = "btnAddSubarea";
+			this.btnAddSubarea.Size = new System.Drawing.Size(30, 23);
+			this.btnAddSubarea.TabIndex = 141;
+			this.btnAddSubarea.Text = "+";
+			this.btnAddSubarea.UseVisualStyleBackColor = true;
+			this.btnAddSubarea.Click += new System.EventHandler(this.btnAddSubarea_Click);
+			// 
+			// lstSubarea
+			// 
+			this.lstSubarea.FormattingEnabled = true;
+			this.lstSubarea.Location = new System.Drawing.Point(97, 43);
+			this.lstSubarea.Name = "lstSubarea";
+			this.lstSubarea.Size = new System.Drawing.Size(85, 212);
+			this.lstSubarea.TabIndex = 140;
+			this.lstSubarea.SelectedIndexChanged += new System.EventHandler(this.lstSubarea_SelectedIndexChanged);
 			// 
 			// PlannedModulKlimaDeckeProductPanel
 			// 
@@ -1749,5 +1794,9 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label45;
 		private System.Windows.Forms.Label lblError;
 		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.Button btnRemoveSubarea;
+		private System.Windows.Forms.Button btnAddSubarea;
+		private System.Windows.Forms.ListBox lstSubarea;
 	}
 }
