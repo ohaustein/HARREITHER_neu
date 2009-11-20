@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Europlan.Common {
 
-	public class EurovalAuslegungWrapper {
+	public class EurovalWrapper {
 
 		private string floorId;
 		private string floorName;
@@ -43,6 +43,8 @@ namespace Europlan.Common {
 		private double druckverlustRohr;
 		private double druckverlustVerteiler;
 		private double v;
+
+		private double unusedArea;
 
 		public string RoomId {
 			get { return roomId; }
@@ -211,6 +213,12 @@ namespace Europlan.Common {
 		public double V {
 			get { return v; }
 			set { v = value; }
+		}
+
+
+		public double UnusedArea {
+			get { return unusedArea; }
+			set { unusedArea = value; }
 		}
 
 	}
