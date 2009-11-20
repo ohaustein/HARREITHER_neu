@@ -7,15 +7,21 @@ namespace Europlan.Common {
 
 	public class ModulDeckeCircuit : Circuit {
 
-		private List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
+		//private List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
+		private List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
 
 		public ModulDeckeCircuit() {
-
+			this.subAreas.Add(new ModulDeckeSubArea());
 		}
 	
-		public List<KlimaFlaechenList> Rows {
-			get { return rows; }
-			set { rows = value; }
+		//public List<KlimaFlaechenList> Rows {
+		//	get { return rows; }
+		//	set { rows = value; }
+		//}
+
+		public List<ModulDeckeSubArea> SubAreas {
+			get { return this.subAreas; }
+			set { this.subAreas = value; }
 		}
 
 		[XmlIgnore]
@@ -51,8 +57,8 @@ namespace Europlan.Common {
 		public double ModulArea {
 			get {
 				double area = 0;
-				foreach (KlimaFlaechenList row in rows) {
-					area += row.ModulArea;
+				foreach (ModulDeckeSubArea subArea in subAreas) {
+					area += subArea.ModulArea;
 				}
 				return area;
 			}
@@ -124,11 +130,8 @@ namespace Europlan.Common {
 		public override double PipeLengthWithoutConnections {
 			get {
 				double length = 0;
-				foreach (KlimaFlaechenList row in rows) {
-					double rowLength = row.EquivalentPipeLength;
-					if (rowLength > length) {
-						length = rowLength;
-					}
+				foreach (ModulDeckeSubArea subArea in this.subAreas) {
+					length += subArea.EquivalentPipeLength;
 				}
 				return length;
 			}
@@ -234,12 +237,15 @@ namespace Europlan.Common {
 					this.c_durchflussHeat = en1264.Durchfluss(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
 
 					this.c_druckverlustHeat = 0;
-					foreach (KlimaFlaechenList row in rows) {
+					foreach (ModulDeckeSubArea subArea in this.subAreas) {
+						this.c_druckverlustHeat += subArea.Druckverlust(this.c_durchflussHeat);
+					}
+					/*foreach (KlimaFlaechenList row in rows) {
 						double rowDruckverlust = row.Druckverlust(this.c_durchflussHeat / rows.Count);
 						if (rowDruckverlust > this.c_druckverlustHeat) {
 							this.c_druckverlustHeat = rowDruckverlust;
 						}
-					}
+					}*/
 					foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 						if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
 							this.c_druckverlustHeat += cp.CalculateDruckverlust(this.c_durchflussHeat);
@@ -297,12 +303,15 @@ namespace Europlan.Common {
 					this.c_durchflussCool = en1264.Durchfluss(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
 
 					this.c_druckverlustCool = 0;
-					foreach (KlimaFlaechenList row in rows) {
+					foreach (ModulDeckeSubArea subArea in this.subAreas) {
+						this.c_druckverlustHeat += subArea.Druckverlust(this.c_durchflussCool);
+					}
+					/*foreach (KlimaFlaechenList row in rows) {
 						double rowDruckverlust = row.Druckverlust(this.c_durchflussCool / rows.Count);
 						if (rowDruckverlust > this.c_druckverlustCool) {
 							this.c_druckverlustCool = rowDruckverlust;
 						}
-					}
+					}*/
 					foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 						if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
 							this.c_druckverlustCool += cp.CalculateDruckverlust(this.c_durchflussCool);

@@ -329,7 +329,8 @@ namespace Europlan.Common {
 			}
 
 			errorMsg = "";
-			foreach (ModulDeckeCircuit c in this.circuits) {
+			// TODO
+			/*foreach (ModulDeckeCircuit c in this.circuits) {
 				int moduleCount = 0;
 				foreach (KlimaFlaechenList row in c.Rows) {
 					moduleCount += row.List.Count;
@@ -338,7 +339,7 @@ namespace Europlan.Common {
 					//errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 50 Module\n";
 					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module (" + moduleCount + " > " + ModulKlimaBodenProduct.ConfigModulesInCircuit.ToString() + ")\n";
 				}
-			}
+			}*/
 			//double maxTemp = double.MinValue;
 			//foreach (ModulDeckeCircuit c in this.circuits) {
 			//    if (c.C_FloorTempHeat > maxTemp) {
