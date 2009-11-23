@@ -43,6 +43,10 @@ namespace Europlan.Common {
 		private static int maxModulesInRow = 20;
 		private static int maxModulesInParallel = 6;
 		private static int maxModulesInCircuit = 50;
+		private static double spreizungHeizMin = 4;
+		private static double spreizungHeizMax = 12;
+		private static double spreizungKühlMin = 2;
+		private static double spreizungKühlMax = 5;
 
 
 		public ModulKlimaDeckeProduct() {
@@ -68,6 +72,10 @@ namespace Europlan.Common {
 			maxModulesInParallel = 6;
 			maxModulesInCircuit = 50;
 			leistungsFaktor = 0.77;
+			spreizungHeizMin = 4;
+			spreizungHeizMax = 12;
+			spreizungKühlMin = 2;
+			spreizungKühlMax = 5;
 		}
 
 		public override Product Clone(Room room) {
@@ -207,6 +215,29 @@ namespace Europlan.Common {
 		public static int ConfigModulesInCircuit {
 			get { return ModulKlimaDeckeProduct.maxModulesInCircuit; }
 			set { ModulKlimaDeckeProduct.maxModulesInCircuit = value; }
+		}
+		[ProductParameter]
+		public static double ConfigSpreizungHeizMin {
+			get { return spreizungHeizMin; }
+			set { spreizungHeizMin = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungHeizMax {
+			get { return spreizungHeizMax; }
+			set { spreizungHeizMax = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungKühlMin {
+			get { return spreizungKühlMin; }
+			set { spreizungKühlMin = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungKühlMax {
+			get { return spreizungKühlMax; }
+			set { spreizungKühlMax = value; }
 		}
 		#endregion Product Parameters
 
