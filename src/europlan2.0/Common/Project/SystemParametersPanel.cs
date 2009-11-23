@@ -18,6 +18,7 @@ namespace Europlan.Common {
 			InitializeComponent();
 			InitializeEurovalValues();
 			InitializeModulBodenValues();
+			InitializeModulDeckeValues();
 		}
 
 		public void UpdateControl() {
@@ -30,31 +31,31 @@ namespace Europlan.Common {
 
 		private void btnEurovalStandard_Click(object sender, EventArgs e) {
 			Project.Instance.Config.EurovalProduct.StaticInitialize();
-			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigUseHarreitherNorm");
-			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxCircuitLength");
-			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxPressureLost");
-			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxDurchfluss");
-			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungHeizMin");
-			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungHeizMax");
-			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungKühlMin");
-			Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungKühlMax");
+			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigUseHarreitherNorm");
+			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxCircuitLength");
+			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxPressureLost");
+			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxDurchfluss");
+			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungHeizMin");
+			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungHeizMax");
+			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungKühlMin");
+			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungKühlMax");
 			InitializeEurovalValues();
 		}
 
 
 		private void btnModulBodenStandard_Click(object sender, EventArgs e) {
-			Project.Instance.Config.ModulKlimaBodenProduct.StaticInitialize();
-			Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm");
-			Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxPressureLost");
-			Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxDurchfluss");
-			Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxModulesInRow");
-			Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxModulesInParallel");
-			Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigModulesInCircuit");
+			//Project.Instance.Config.ModulKlimaBodenProduct.StaticInitialize();
+			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm");
+			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxPressureLost");
+			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxDurchfluss");
+			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxModulesInRow");
+			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxModulesInParallel");
+			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigModulesInCircuit");
 			InitializeModulBodenValues();
 		}
 
 		private void btnModulDeckeStandard_Click(object sender, EventArgs e) {
-
+			InitializeModulDeckeValues();
 		}
 
 		private void InitializeEurovalValues() {
@@ -75,6 +76,10 @@ namespace Europlan.Common {
 			numModulBodenPressurePa.Value = ModulKlimaBodenProduct.ConfigMaxPressureLost;
 			numModulBodenDurchfluss.Value = ModulKlimaBodenProduct.ConfigMaxDurchfluss;
 			numModulBodenMaxModulesInCircuit.Value = ModulKlimaBodenProduct.ConfigModulesInCircuit;
+			numModulBodenSpreizungHeizMin.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungHeizMin;
+			numModulBodenSpreizungHeizMax.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungHeizMax;
+			numModulBodenSpreizungKuehlMin.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungKühlMin;
+			numModulBodenSpreizungKuehlMax.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungKühlMax;
 		}
 
 		private void InitializeModulDeckeValues() {
@@ -84,6 +89,10 @@ namespace Europlan.Common {
 			numModulDeckeMaxRows.Value = ModulKlimaDeckeProduct.ConfigMaxModulesInParallel;
 			numModulDeckeMaxModulesInCircuit.Value = ModulKlimaDeckeProduct.ConfigModulesInCircuit;
 			numModulDeckeLeistungsfaktor.Value = (decimal)ModulKlimaDeckeProduct.ConfigLeistungsFaktor;
+			numModulDeckeSpreizungHeizMin.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungHeizMin;
+			numModulDeckeSpreizungHeizMax.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungHeizMax;
+			numModulDeckeSpreizungKuehlMin.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKühlMin;
+			numModulDeckeSpreizungKuehlMax.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKühlMax;
 		}
 
 		private void rbEurovalHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
@@ -273,6 +282,62 @@ namespace Europlan.Common {
 
 		private void numLeistungsfaktor_ValueChanged(object sender, EventArgs e) {
 			ModulKlimaDeckeProduct.ConfigLeistungsFaktor = (double)numModulDeckeLeistungsfaktor.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulBodenSpreizungHeizMin_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaBodenProduct.ConfigSpreizungHeizMin = (double)numModulBodenSpreizungHeizMin.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulBodenSpreizungHeizMax_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaBodenProduct.ConfigSpreizungHeizMax = (double)numModulBodenSpreizungHeizMax.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulBodenSpreizungKuehlMin_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaBodenProduct.ConfigSpreizungKühlMin = (double)numModulBodenSpreizungKuehlMin.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulBodenSpreizungKuehlMax_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaBodenProduct.ConfigSpreizungKühlMax = (double)numModulBodenSpreizungKuehlMax.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckeSpreizungHeizMin_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigSpreizungHeizMin = (double)numModulDeckeSpreizungHeizMin.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckeSpreizungHeizMax_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigSpreizungHeizMax = (double)numModulDeckeSpreizungHeizMax.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckeSpreizungKuehlMin_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigSpreizungKühlMin = (double)numModulDeckeSpreizungKuehlMin.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckeSpreizungKuehlMax_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigSpreizungKühlMax = (double)numModulDeckeSpreizungKuehlMax.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}

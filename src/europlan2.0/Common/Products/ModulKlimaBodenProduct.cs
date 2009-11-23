@@ -43,6 +43,10 @@ namespace Europlan.Common {
 		private static int maxPressureLost = 15000;
 		private static int maxDurchfluss = 240;
 		private static int maxModulesInCircuit = 40;
+		private static double spreizungHeizMin = 4;
+		private static double spreizungHeizMax = 12;
+		private static double spreizungKühlMin = 2;
+		private static double spreizungKühlMax = 5;
 
 		private Nullable<int> requestedCircuits = null;
 		private int requestedModulesDicht = 0;
@@ -70,6 +74,10 @@ namespace Europlan.Common {
 			maxPressureLost = 15000;
 			maxDurchfluss = 240;
 			maxModulesInCircuit = 40;
+			spreizungHeizMin = 4;
+			spreizungHeizMax = 12;
+			spreizungKühlMin = 2;
+			spreizungKühlMax = 5;
 		}
 
 		public override Product Clone(Room room) {
@@ -227,6 +235,30 @@ namespace Europlan.Common {
 		public static int ConfigModulesInCircuit {
 			get { return maxModulesInCircuit; }
 			set { maxModulesInCircuit = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungHeizMin {
+			get { return spreizungHeizMin; }
+			set { spreizungHeizMin = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungHeizMax {
+			get { return spreizungHeizMax; }
+			set { spreizungHeizMax = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungKühlMin {
+			get { return spreizungKühlMin; }
+			set { spreizungKühlMin = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungKühlMax {
+			get { return spreizungKühlMax; }
+			set { spreizungKühlMax = value; }
 		}
 		#endregion Product Parameters
 
