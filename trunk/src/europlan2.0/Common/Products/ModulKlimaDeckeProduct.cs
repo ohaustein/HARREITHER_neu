@@ -21,14 +21,12 @@ namespace Europlan.Common {
 		private static double alphaDh = 6.5; /* für FBK fix */
 		private static double alphaDk = 10.8; /* für FBH fix */
 		private static double lambdaU0 = 1; /* fix */
-		private static double lambdaE = 0.32; /* Estrichleitfähigkeit bzw Leitfähigkeit Lastausgleichsschicht, fix */
-		private static double su = 0.01; /* Überdeckung Beplankung */
-		private static double lambdaU = 0.32; /* Wärmeleitfähigkeit der Überdeckung */
 		private static double rLambdaDecke = 0.11; /* Deckenschicht 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 		private static double rLambdaDach = 0.0; /* Deckenschicht; durch echte Konstruktion ersetzen! */
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
 		private static double atmt = 1.06; /* Fixwert laut Norm */
 		private static double b = 6.5; /* Fixwert laut Norm */
+		private static double leistungsFaktor = 0.77;
 
 		private float plannedArea = 0;
 		//private float plannedFloorArea = 0;
@@ -69,6 +67,7 @@ namespace Europlan.Common {
 			maxModulesInRow = 20;
 			maxModulesInParallel = 6;
 			maxModulesInCircuit = 50;
+			leistungsFaktor = 0.77;
 		}
 
 		public override Product Clone(Room room) {
@@ -145,24 +144,6 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static double ConfigLambdaE {
-			get { return lambdaE; }
-			set { lambdaE = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigSu {
-			get { return su; }
-			set { su = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigLambdaU {
-			get { return lambdaU; }
-			set { lambdaU = value; }
-		}
-
-		[ProductParameter]
 		public static double ConfigRLambdaDecke {
 			get { return rLambdaDecke; }
 			set { rLambdaDecke = value; }
@@ -190,6 +171,12 @@ namespace Europlan.Common {
 		public static double ConfigB {
 			get { return b; }
 			set { b = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLeistungsFaktor {
+			get { return leistungsFaktor; }
+			set { leistungsFaktor = value; }
 		}
 
 		[ProductParameter]
@@ -349,6 +336,46 @@ namespace Europlan.Common {
 			//if (Math.Round(maxTemp, 1) > (ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264)) {
 			//    errorMsg += "Oberflächentemperatur zu groß (" + Math.Round(maxTemp, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1) + "°C)\n";
 			//}
+			foreach (ModulDeckeCircuit c in circuits) {
+				int saNr = 1;
+				int longestRow = 0;
+				int moduleCount = 0;
+				foreach (ModulDeckeSubArea sa in c.SubAreas) {
+					if (sa.Rows.Count > 0) {
+						if (sa.Rows.Count > ModulKlimaDeckeProduct.ConfigMaxModulesInParallel) {
+							errorMsg += "Die Teilfläche " + saNr.ToString() + " im Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele parallele Reihen (" + sa.Rows.Count.ToString() + " > " + ModulKlimaDeckeProduct.ConfigMaxModulesInParallel.ToString() + ")\n";
+						}
+						int maxModules = 0;
+						int maxRowNr = 0;
+						int minModules = Int32.MaxValue;
+						int minRowNr = 0;
+						int curRowNr = 1;
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							moduleCount += row.List.Count;
+							if (row.List.Count > maxModules) {
+								maxModules = row.List.Count;
+								maxRowNr = curRowNr;
+							}
+							if (row.List.Count < minModules) {
+								minModules = row.List.Count;
+								minRowNr = curRowNr;
+							}
+							curRowNr++;
+						}
+						if (maxModules > minModules + 1) {
+							errorMsg += "Die Reihe " + maxRowNr.ToString() + " in der Teilfläche " + saNr.ToString() + " im Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " ist um mehr als 1 Modul länger als die Reihe " + minRowNr.ToString() + " (" + maxModules.ToString() + ", " + minModules.ToString() + ")\n";
+						}
+						longestRow += maxModules;
+					}
+					saNr++;
+				}
+				if (longestRow > ModulKlimaDeckeProduct.ConfigMaxModulesInRow) {
+					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module in Serie (" + longestRow.ToString() + " > " + ModulKlimaDeckeProduct.ConfigMaxModulesInRow.ToString() + ")\n";
+				}
+				if (moduleCount > ModulKlimaDeckeProduct.ConfigModulesInCircuit) {
+					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module (" + moduleCount.ToString() + " > " + ModulKlimaDeckeProduct.ConfigModulesInCircuit.ToString() + ")\n";
+				}
+			}
 			if (this.PlannedMhHeat >= this.PlannedMhCool) {
 				if (Math.Round(this.PlannedMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
 					errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";

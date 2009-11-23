@@ -53,6 +53,10 @@ namespace Europlan.Common {
 			InitializeModulBodenValues();
 		}
 
+		private void btnModulDeckeStandard_Click(object sender, EventArgs e) {
+
+		}
+
 		private void InitializeEurovalValues() {
 			rbEurovalHarreitherNorm.Checked = EurovalProduct.ConfigUseHarreitherNorm;
 			rbEurovalEN1264.Checked = !EurovalProduct.ConfigUseHarreitherNorm;
@@ -73,6 +77,15 @@ namespace Europlan.Common {
 			numModulBodenMaxModulesInCircuit.Value = ModulKlimaBodenProduct.ConfigModulesInCircuit;
 		}
 
+		private void InitializeModulDeckeValues() {
+			numModulDeckePressurePa.Value = ModulKlimaDeckeProduct.ConfigMaxPressureLost;
+			numModulDeckeDurchfluss.Value = ModulKlimaDeckeProduct.ConfigMaxDurchfluss;
+			numModulDeckeMaxModulesInRow.Value = ModulKlimaDeckeProduct.ConfigMaxModulesInRow;
+			numModulDeckeMaxRows.Value = ModulKlimaDeckeProduct.ConfigMaxModulesInParallel;
+			numModulDeckeMaxModulesInCircuit.Value = ModulKlimaDeckeProduct.ConfigModulesInCircuit;
+			numModulDeckeLeistungsfaktor.Value = (decimal)ModulKlimaDeckeProduct.ConfigLeistungsFaktor;
+		}
+
 		private void rbEurovalHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
 			EurovalProduct.ConfigUseHarreitherNorm = rbEurovalHarreitherNorm.Checked;
 			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigUseHarreitherNorm", rbEurovalHarreitherNorm.Checked.ToString());
@@ -83,7 +96,7 @@ namespace Europlan.Common {
 
 		private void rbEurovalEN1264_CheckedChanged(object sender, EventArgs e) {
 			EurovalProduct.ConfigUseHarreitherNorm = rbEurovalHarreitherNorm.Checked;
-			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigUseHarreitherNorm", rbEurovalHarreitherNorm.Checked.ToString());
+			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigUseHarreitherNorm", rbEurovalHarreitherNorm.Checked.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -91,7 +104,7 @@ namespace Europlan.Common {
 
 		private void numCircuitLength_ValueChanged(object sender, EventArgs e) {
 			EurovalProduct.ConfigMaxCircuitLength = (double)numCircuitLength.Value;
-			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxCircuitLength", numCircuitLength.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxCircuitLength", numCircuitLength.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -99,7 +112,7 @@ namespace Europlan.Common {
 
 		private void numEurovalDurchfluss_ValueChanged(object sender, EventArgs e) {
 			EurovalProduct.ConfigMaxDurchfluss = (int)numEurovalDurchfluss.Value;
-			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxDurchfluss", numEurovalDurchfluss.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxDurchfluss", numEurovalDurchfluss.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -108,7 +121,7 @@ namespace Europlan.Common {
 		private void numEurovalPressurePa_ValueChanged(object sender, EventArgs e) {
 			numEurovalPressureMbar.Value = numEurovalPressurePa.Value / 100;
 			EurovalProduct.ConfigMaxPressureLost = (int)numEurovalPressurePa.Value;
-			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxPressureLost", numEurovalPressurePa.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxPressureLost", numEurovalPressurePa.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -117,7 +130,7 @@ namespace Europlan.Common {
 		private void numEurovalPressureMbar_ValueChanged(object sender, EventArgs e) {
 			numEurovalPressurePa.Value = numEurovalPressureMbar.Value * 100;
 			EurovalProduct.ConfigMaxPressureLost = (int)numEurovalPressurePa.Value;
-			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxPressureLost", numEurovalPressurePa.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxPressureLost", numEurovalPressurePa.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -125,7 +138,7 @@ namespace Europlan.Common {
 
 		private void numSpreizungHeizMin_ValueChanged(object sender, EventArgs e) {
 			EurovalProduct.ConfigSpreizungHeizMin = (double)numSpreizungHeizMin.Value;
-			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungHeizMin", numSpreizungHeizMin.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungHeizMin", numSpreizungHeizMin.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -133,7 +146,7 @@ namespace Europlan.Common {
 
 		private void numSpreizungHeizMax_ValueChanged(object sender, EventArgs e) {
 			EurovalProduct.ConfigSpreizungHeizMax = (double)numSpreizungHeizMax.Value;
-			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungHeizMax", numSpreizungHeizMax.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungHeizMax", numSpreizungHeizMax.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -141,7 +154,7 @@ namespace Europlan.Common {
 
 		private void numSpreizungKühlMin_ValueChanged(object sender, EventArgs e) {
 			EurovalProduct.ConfigSpreizungKühlMin = (double)numSpreizungKühlMin.Value;
-			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungKühlMin", numSpreizungKühlMin.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungKühlMin", numSpreizungKühlMin.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -149,14 +162,14 @@ namespace Europlan.Common {
 
 		private void numSpreizungKühlMax_ValueChanged(object sender, EventArgs e) {
 			EurovalProduct.ConfigSpreizungKühlMax = (double)numSpreizungKühlMax.Value;
-			Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungKühlMax", numSpreizungKühlMax.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungKühlMax", numSpreizungKühlMax.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
 		private void tabSystemParameters_Selected(object sender, TabControlEventArgs e) {
-			if (tabSystemParameters.SelectedTab != tabEuroval && tabSystemParameters.SelectedTab != tabModulBoden) {
+			if (tabSystemParameters.SelectedTab != tabEuroval && tabSystemParameters.SelectedTab != tabModulBoden && tabSystemParameters.SelectedTab != tabModulDecke) {
 				MessageBox.Show("Die Konfiguration von Systemparameter ist für dieses System derzeit nicht möglich.");
 				tabSystemParameters.SelectedTab = tabEuroval;
 			}
@@ -164,7 +177,7 @@ namespace Europlan.Common {
 
 		private void rbModulBodenHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
 			ModulKlimaBodenProduct.ConfigUseHarreitherNorm = rbModulBodenHarreitherNorm.Checked;
-			Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm", rbModulBodenHarreitherNorm.Checked.ToString());
+			//Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm", rbModulBodenHarreitherNorm.Checked.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -172,7 +185,7 @@ namespace Europlan.Common {
 
 		private void rbModulBodenEN1264_CheckedChanged(object sender, EventArgs e) {
 			ModulKlimaBodenProduct.ConfigUseHarreitherNorm = rbModulBodenHarreitherNorm.Checked;
-			Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm", rbModulBodenHarreitherNorm.Checked.ToString());
+			//Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm", rbModulBodenHarreitherNorm.Checked.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -180,7 +193,7 @@ namespace Europlan.Common {
 
 		private void numModulBodenDurchfluss_ValueChanged(object sender, EventArgs e) {
 			ModulKlimaBodenProduct.ConfigMaxDurchfluss = (int)numModulBodenDurchfluss.Value;
-			Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigMaxDurchfluss", numModulBodenDurchfluss.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigMaxDurchfluss", numModulBodenDurchfluss.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -189,7 +202,7 @@ namespace Europlan.Common {
 		private void numModulBodenPressurePa_ValueChanged(object sender, EventArgs e) {
 			numModulBodenPressureMbar.Value = numModulBodenPressurePa.Value / 100;
 			ModulKlimaBodenProduct.ConfigMaxPressureLost = (int)numModulBodenPressurePa.Value;
-			Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigMaxPressureLost", numModulBodenPressurePa.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigMaxPressureLost", numModulBodenPressurePa.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -198,7 +211,7 @@ namespace Europlan.Common {
 		private void numModulBodenPressureMbar_ValueChanged(object sender, EventArgs e) {
 			numModulBodenPressurePa.Value = numModulBodenPressureMbar.Value * 100;
 			ModulKlimaBodenProduct.ConfigMaxPressureLost = (int)numModulBodenPressurePa.Value;
-			Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigMaxPressureLost", numModulBodenPressurePa.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigMaxPressureLost", numModulBodenPressurePa.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -206,7 +219,60 @@ namespace Europlan.Common {
 
 		private void numModulBodenMaxModulesInCircuit_ValueChanged(object sender, EventArgs e) {
 			ModulKlimaBodenProduct.ConfigModulesInCircuit = (int)numModulBodenMaxModulesInCircuit.Value;
-			Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigModulesInCircuit", numModulBodenMaxModulesInCircuit.Value.ToString());
+			//Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigModulesInCircuit", numModulBodenMaxModulesInCircuit.Value.ToString());
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckeMaxModulesInRow_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigMaxModulesInRow = (int)numModulDeckeMaxModulesInRow.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckeMaxRows_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigMaxModulesInParallel = (int)numModulDeckeMaxRows.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckeMaxModulesInCircuit_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigModulesInCircuit = (int)numModulDeckeMaxModulesInCircuit.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckePressurePa_ValueChanged(object sender, EventArgs e) {
+			numModulDeckePressureMbar.Value = numModulDeckePressurePa.Value / 100;
+			ModulKlimaDeckeProduct.ConfigMaxPressureLost = (int)numModulDeckePressurePa.Value;
+			//Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigMaxPressureLost", numModulBodenPressurePa.Value.ToString());
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckePressureMbar_ValueChanged(object sender, EventArgs e) {
+			numModulDeckePressurePa.Value = numModulDeckePressureMbar.Value * 100;
+			ModulKlimaDeckeProduct.ConfigMaxPressureLost = (int)numModulDeckePressurePa.Value;
+			//Project.Instance.Config.AddProductParameter<ModulKlimaBodenProduct>("ConfigMaxPressureLost", numModulBodenPressurePa.Value.ToString());
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckeDurchfluss_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigMaxDurchfluss = (int)numModulDeckeDurchfluss.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numLeistungsfaktor_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigLeistungsFaktor = (double)numModulDeckeLeistungsfaktor.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}

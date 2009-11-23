@@ -69,7 +69,7 @@ namespace Europlan.Common {
 			useHarreitherNorm = true;
 			maxPressureLost = 15000;
 			maxDurchfluss = 240;
-			maxModulesInCircuit = 50;
+			maxModulesInCircuit = 40;
 		}
 
 		public override Product Clone(Room room) {
