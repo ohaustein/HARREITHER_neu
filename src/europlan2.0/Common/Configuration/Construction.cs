@@ -149,6 +149,13 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public float LambdaValue {
+			get {
+				return this.Thickness / 1000 / this.RValue;
+			}
+		}
+
 		public void UpdateVersions() {
 			Construction versioned = null;
 			if (versionedConstructions.Count > 0) {

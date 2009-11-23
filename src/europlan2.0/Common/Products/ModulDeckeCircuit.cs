@@ -177,17 +177,23 @@ namespace Europlan.Common {
 			double alphaDh = ModulKlimaDeckeProduct.ConfigAlphaDh;
 			double alphaDk = ModulKlimaDeckeProduct.ConfigAlphaDk;
 			double su0 = ModulKlimaDeckeProduct.ConfigSu0;
-			double su = ModulKlimaDeckeProduct.ConfigSu;
+			//double su = ModulKlimaDeckeProduct.ConfigSu;
 			double lambdaU0 = ModulKlimaDeckeProduct.ConfigLambdaU0;
-			double lambdaU = ModulKlimaDeckeProduct.ConfigLambdaU;
-			double lambdaE = ModulKlimaDeckeProduct.ConfigLambdaE;
+			//double lambdaU = ModulKlimaDeckeProduct.ConfigLambdaU;
+			//double lambdaE = ModulKlimaDeckeProduct.ConfigLambdaE;
 			double rLambdaDecke = ModulKlimaDeckeProduct.ConfigRLambdaDecke;
 			double rLambdaDach = ModulKlimaDeckeProduct.ConfigRLambdaDach;
 			double rAlphaDeckeDh = 1 / alphaDk; /* Wärmeübergang Decke bei Heizung */
 			double rAlphaDeckeDk = 1 / alphaDh; /* Wärmeübergang Decke bei Kühlung */
 
-			double rLambdaB = this.ModulKlimaDeckeProduct.PlannedCeilingConstruction == null ? 0 : this.ModulKlimaDeckeProduct.PlannedCeilingConstruction.RValue;
+			double leistungsFaktor = ModulKlimaDeckeProduct.ConfigLeistungsFaktor;
+
+			double rLambdaB = 0;
 			double rLambdaIns = this.ModulKlimaDeckeProduct.PlannedInsulationConstruction == null ? 0 : this.ModulKlimaDeckeProduct.PlannedInsulationConstruction.RValue;
+
+			double su = this.ModulKlimaDeckeProduct.PlannedCeilingConstruction == null ? 0 : this.ModulKlimaDeckeProduct.PlannedCeilingConstruction.Thickness / 1000;
+			double lambdaE = this.ModulKlimaDeckeProduct.PlannedCeilingConstruction == null ? 0 : this.ModulKlimaDeckeProduct.PlannedCeilingConstruction.LambdaValue;
+			double lambdaU = lambdaE;
 
 			{ // Heizlastberechnung
 				double distributorVorlaufTemp;
@@ -208,7 +214,7 @@ namespace Europlan.Common {
 
 					double au = en1264.auFlaeche(alpha0, alphaDh, su0, lambdaU0, su, lambdaE);
 					double ab = en1264.abFlaeche(b, au, atmt, rLambdaB);
-					this.c_qHeatPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta);
+					this.c_qHeatPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta) * leistungsFaktor;
 
 					double qU = en1264.WaermeverlustUnten(alphaDh, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qHeatPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
 
@@ -274,7 +280,7 @@ namespace Europlan.Common {
 
 					double au = en1264.auFlaeche(alpha0, alphaDk, su0, lambdaU0, su, lambdaE);
 					double ab = en1264.abFlaeche(b, au, atmt, rLambdaB);
-					this.c_qCoolPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta);
+					this.c_qCoolPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta) * leistungsFaktor;
 
 					double qU = en1264.WaermeverlustUnten(alphaDh, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qCoolPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
 

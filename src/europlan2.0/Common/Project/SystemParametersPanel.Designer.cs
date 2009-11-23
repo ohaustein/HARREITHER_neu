@@ -70,24 +70,23 @@ namespace Europlan.Common {
 			this.label18 = new System.Windows.Forms.Label();
 			this.rbModulBodenHarreitherNorm = new System.Windows.Forms.RadioButton();
 			this.tabModulDecke = new System.Windows.Forms.TabPage();
-			this.numericBox1 = new Europlan.Common.NumericBox();
+			this.numModulDeckeLeistungsfaktor = new Europlan.Common.NumericBox();
+			this.label24 = new System.Windows.Forms.Label();
+			this.numModulDeckeMaxModulesInCircuit = new Europlan.Common.NumericBox();
 			this.label27 = new System.Windows.Forms.Label();
-			this.numericBox2 = new Europlan.Common.NumericBox();
+			this.numModulDeckeMaxRows = new Europlan.Common.NumericBox();
 			this.label28 = new System.Windows.Forms.Label();
-			this.numericBox3 = new Europlan.Common.NumericBox();
+			this.numModulDeckeMaxModulesInRow = new Europlan.Common.NumericBox();
 			this.label29 = new System.Windows.Forms.Label();
 			this.label30 = new System.Windows.Forms.Label();
-			this.numericBox4 = new Europlan.Common.NumericBox();
+			this.numModulDeckeDurchfluss = new Europlan.Common.NumericBox();
 			this.label31 = new System.Windows.Forms.Label();
 			this.label32 = new System.Windows.Forms.Label();
-			this.numericBox5 = new Europlan.Common.NumericBox();
+			this.numModulDeckePressureMbar = new Europlan.Common.NumericBox();
 			this.label33 = new System.Windows.Forms.Label();
-			this.numericBox6 = new Europlan.Common.NumericBox();
+			this.numModulDeckePressurePa = new Europlan.Common.NumericBox();
 			this.label34 = new System.Windows.Forms.Label();
-			this.button1 = new System.Windows.Forms.Button();
-			this.radioButton1 = new System.Windows.Forms.RadioButton();
-			this.label35 = new System.Windows.Forms.Label();
-			this.radioButton2 = new System.Windows.Forms.RadioButton();
+			this.btnModulDeckeStandard = new System.Windows.Forms.Button();
 			this.tabSystemParameters.SuspendLayout();
 			this.tabEuroval.SuspendLayout();
 			this.tabModulBoden.SuspendLayout();
@@ -811,24 +810,23 @@ namespace Europlan.Common {
 			// 
 			// tabModulDecke
 			// 
-			this.tabModulDecke.Controls.Add(this.numericBox1);
+			this.tabModulDecke.Controls.Add(this.numModulDeckeLeistungsfaktor);
+			this.tabModulDecke.Controls.Add(this.label24);
+			this.tabModulDecke.Controls.Add(this.numModulDeckeMaxModulesInCircuit);
 			this.tabModulDecke.Controls.Add(this.label27);
-			this.tabModulDecke.Controls.Add(this.numericBox2);
+			this.tabModulDecke.Controls.Add(this.numModulDeckeMaxRows);
 			this.tabModulDecke.Controls.Add(this.label28);
-			this.tabModulDecke.Controls.Add(this.numericBox3);
+			this.tabModulDecke.Controls.Add(this.numModulDeckeMaxModulesInRow);
 			this.tabModulDecke.Controls.Add(this.label29);
 			this.tabModulDecke.Controls.Add(this.label30);
-			this.tabModulDecke.Controls.Add(this.numericBox4);
+			this.tabModulDecke.Controls.Add(this.numModulDeckeDurchfluss);
 			this.tabModulDecke.Controls.Add(this.label31);
 			this.tabModulDecke.Controls.Add(this.label32);
-			this.tabModulDecke.Controls.Add(this.numericBox5);
+			this.tabModulDecke.Controls.Add(this.numModulDeckePressureMbar);
 			this.tabModulDecke.Controls.Add(this.label33);
-			this.tabModulDecke.Controls.Add(this.numericBox6);
+			this.tabModulDecke.Controls.Add(this.numModulDeckePressurePa);
 			this.tabModulDecke.Controls.Add(this.label34);
-			this.tabModulDecke.Controls.Add(this.button1);
-			this.tabModulDecke.Controls.Add(this.radioButton1);
-			this.tabModulDecke.Controls.Add(this.label35);
-			this.tabModulDecke.Controls.Add(this.radioButton2);
+			this.tabModulDecke.Controls.Add(this.btnModulDeckeStandard);
 			this.tabModulDecke.Location = new System.Drawing.Point(4, 22);
 			this.tabModulDecke.Name = "tabModulDecke";
 			this.tabModulDecke.Size = new System.Drawing.Size(711, 366);
@@ -836,286 +834,306 @@ namespace Europlan.Common {
 			this.tabModulDecke.Text = "Modul Klima-Decke";
 			this.tabModulDecke.UseVisualStyleBackColor = true;
 			// 
-			// numericBox1
+			// numModulDeckeLeistungsfaktor
 			// 
-			this.numericBox1.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numericBox1.InternalValue = new decimal(new int[] {
+			this.numModulDeckeLeistungsfaktor.EditType = Europlan.Common.NumericBox.NumericEditType.LAMBDA_VALUE;
+			this.numModulDeckeLeistungsfaktor.InternalValue = new decimal(new int[] {
+            77,
+            0,
+            0,
+            131072});
+			this.numModulDeckeLeistungsfaktor.Location = new System.Drawing.Point(194, 138);
+			this.numModulDeckeLeistungsfaktor.MaxValue = null;
+			this.numModulDeckeLeistungsfaktor.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numModulDeckeLeistungsfaktor.Name = "numModulDeckeLeistungsfaktor";
+			this.numModulDeckeLeistungsfaktor.Size = new System.Drawing.Size(76, 20);
+			this.numModulDeckeLeistungsfaktor.TabIndex = 61;
+			this.numModulDeckeLeistungsfaktor.Text = "0,77";
+			this.numModulDeckeLeistungsfaktor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulDeckeLeistungsfaktor.Value = new decimal(new int[] {
+            77,
+            0,
+            0,
+            131072});
+			this.numModulDeckeLeistungsfaktor.ValueChanged += new System.EventHandler(this.numLeistungsfaktor_ValueChanged);
+			// 
+			// label24
+			// 
+			this.label24.AutoSize = true;
+			this.label24.Location = new System.Drawing.Point(3, 141);
+			this.label24.Name = "label24";
+			this.label24.Size = new System.Drawing.Size(82, 13);
+			this.label24.TabIndex = 60;
+			this.label24.Text = "Leistungsfaktor:";
+			// 
+			// numModulDeckeMaxModulesInCircuit
+			// 
+			this.numModulDeckeMaxModulesInCircuit.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numModulDeckeMaxModulesInCircuit.InternalValue = new decimal(new int[] {
             50,
             0,
             0,
             0});
-			this.numericBox1.Location = new System.Drawing.Point(194, 108);
-			this.numericBox1.MaxValue = new decimal(new int[] {
+			this.numModulDeckeMaxModulesInCircuit.Location = new System.Drawing.Point(194, 60);
+			this.numModulDeckeMaxModulesInCircuit.MaxValue = new decimal(new int[] {
             100,
             0,
             0,
             0});
-			this.numericBox1.MinValue = new decimal(new int[] {
+			this.numModulDeckeMaxModulesInCircuit.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.numericBox1.Name = "numericBox1";
-			this.numericBox1.Size = new System.Drawing.Size(76, 20);
-			this.numericBox1.TabIndex = 59;
-			this.numericBox1.Text = "50";
-			this.numericBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox1.Value = new decimal(new int[] {
+			this.numModulDeckeMaxModulesInCircuit.Name = "numModulDeckeMaxModulesInCircuit";
+			this.numModulDeckeMaxModulesInCircuit.Size = new System.Drawing.Size(76, 20);
+			this.numModulDeckeMaxModulesInCircuit.TabIndex = 59;
+			this.numModulDeckeMaxModulesInCircuit.Text = "50";
+			this.numModulDeckeMaxModulesInCircuit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulDeckeMaxModulesInCircuit.Value = new decimal(new int[] {
             50,
             0,
             0,
             0});
+			this.numModulDeckeMaxModulesInCircuit.ValueChanged += new System.EventHandler(this.numModulDeckeMaxModulesInCircuit_ValueChanged);
 			// 
 			// label27
 			// 
-			this.label27.Location = new System.Drawing.Point(3, 111);
+			this.label27.AutoSize = true;
+			this.label27.Location = new System.Drawing.Point(3, 63);
 			this.label27.Name = "label27";
-			this.label27.Size = new System.Drawing.Size(181, 23);
+			this.label27.Size = new System.Drawing.Size(157, 13);
 			this.label27.TabIndex = 58;
 			this.label27.Text = "Max Modulanzahl pro Heizkreis:";
 			// 
-			// numericBox2
+			// numModulDeckeMaxRows
 			// 
-			this.numericBox2.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numericBox2.InternalValue = new decimal(new int[] {
+			this.numModulDeckeMaxRows.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numModulDeckeMaxRows.InternalValue = new decimal(new int[] {
             6,
             0,
             0,
             0});
-			this.numericBox2.Location = new System.Drawing.Point(194, 82);
-			this.numericBox2.MaxValue = new decimal(new int[] {
+			this.numModulDeckeMaxRows.Location = new System.Drawing.Point(194, 34);
+			this.numModulDeckeMaxRows.MaxValue = new decimal(new int[] {
             20,
             0,
             0,
             0});
-			this.numericBox2.MinValue = new decimal(new int[] {
+			this.numModulDeckeMaxRows.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.numericBox2.Name = "numericBox2";
-			this.numericBox2.Size = new System.Drawing.Size(76, 20);
-			this.numericBox2.TabIndex = 57;
-			this.numericBox2.Text = "6";
-			this.numericBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox2.Value = new decimal(new int[] {
+			this.numModulDeckeMaxRows.Name = "numModulDeckeMaxRows";
+			this.numModulDeckeMaxRows.Size = new System.Drawing.Size(76, 20);
+			this.numModulDeckeMaxRows.TabIndex = 57;
+			this.numModulDeckeMaxRows.Text = "6";
+			this.numModulDeckeMaxRows.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulDeckeMaxRows.Value = new decimal(new int[] {
             6,
             0,
             0,
             0});
+			this.numModulDeckeMaxRows.ValueChanged += new System.EventHandler(this.numModulDeckeMaxRows_ValueChanged);
 			// 
 			// label28
 			// 
-			this.label28.Location = new System.Drawing.Point(3, 85);
+			this.label28.AutoSize = true;
+			this.label28.Location = new System.Drawing.Point(3, 37);
 			this.label28.Name = "label28";
-			this.label28.Size = new System.Drawing.Size(181, 23);
+			this.label28.Size = new System.Drawing.Size(127, 13);
 			this.label28.TabIndex = 56;
 			this.label28.Text = "Max Modulreihen parallel:";
 			// 
-			// numericBox3
+			// numModulDeckeMaxModulesInRow
 			// 
-			this.numericBox3.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numericBox3.InternalValue = new decimal(new int[] {
+			this.numModulDeckeMaxModulesInRow.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numModulDeckeMaxModulesInRow.InternalValue = new decimal(new int[] {
             20,
             0,
             0,
             0});
-			this.numericBox3.Location = new System.Drawing.Point(194, 56);
-			this.numericBox3.MaxValue = new decimal(new int[] {
+			this.numModulDeckeMaxModulesInRow.Location = new System.Drawing.Point(194, 8);
+			this.numModulDeckeMaxModulesInRow.MaxValue = new decimal(new int[] {
             100,
             0,
             0,
             0});
-			this.numericBox3.MinValue = new decimal(new int[] {
+			this.numModulDeckeMaxModulesInRow.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.numericBox3.Name = "numericBox3";
-			this.numericBox3.Size = new System.Drawing.Size(76, 20);
-			this.numericBox3.TabIndex = 55;
-			this.numericBox3.Text = "20";
-			this.numericBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox3.Value = new decimal(new int[] {
+			this.numModulDeckeMaxModulesInRow.Name = "numModulDeckeMaxModulesInRow";
+			this.numModulDeckeMaxModulesInRow.Size = new System.Drawing.Size(76, 20);
+			this.numModulDeckeMaxModulesInRow.TabIndex = 55;
+			this.numModulDeckeMaxModulesInRow.Text = "20";
+			this.numModulDeckeMaxModulesInRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulDeckeMaxModulesInRow.Value = new decimal(new int[] {
             20,
             0,
             0,
             0});
+			this.numModulDeckeMaxModulesInRow.ValueChanged += new System.EventHandler(this.numModulDeckeMaxModulesInRow_ValueChanged);
 			// 
 			// label29
 			// 
-			this.label29.Location = new System.Drawing.Point(3, 59);
+			this.label29.AutoSize = true;
+			this.label29.Location = new System.Drawing.Point(3, 11);
 			this.label29.Name = "label29";
-			this.label29.Size = new System.Drawing.Size(181, 23);
+			this.label29.Size = new System.Drawing.Size(131, 13);
 			this.label29.TabIndex = 54;
 			this.label29.Text = "Max Modulanzahl in Serie:";
 			// 
 			// label30
 			// 
-			this.label30.Location = new System.Drawing.Point(276, 160);
+			this.label30.Location = new System.Drawing.Point(276, 115);
 			this.label30.Name = "label30";
 			this.label30.Size = new System.Drawing.Size(76, 23);
 			this.label30.TabIndex = 53;
 			this.label30.Text = "l/h";
 			// 
-			// numericBox4
+			// numModulDeckeDurchfluss
 			// 
-			this.numericBox4.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numericBox4.InternalValue = new decimal(new int[] {
+			this.numModulDeckeDurchfluss.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numModulDeckeDurchfluss.InternalValue = new decimal(new int[] {
             100,
             0,
             0,
             0});
-			this.numericBox4.Location = new System.Drawing.Point(194, 157);
-			this.numericBox4.MaxValue = new decimal(new int[] {
+			this.numModulDeckeDurchfluss.Location = new System.Drawing.Point(194, 112);
+			this.numModulDeckeDurchfluss.MaxValue = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-			this.numericBox4.MinValue = new decimal(new int[] {
+			this.numModulDeckeDurchfluss.MinValue = new decimal(new int[] {
             100,
             0,
             0,
             0});
-			this.numericBox4.Name = "numericBox4";
-			this.numericBox4.Size = new System.Drawing.Size(76, 20);
-			this.numericBox4.TabIndex = 52;
-			this.numericBox4.Text = "100";
-			this.numericBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox4.Value = new decimal(new int[] {
+			this.numModulDeckeDurchfluss.Name = "numModulDeckeDurchfluss";
+			this.numModulDeckeDurchfluss.Size = new System.Drawing.Size(76, 20);
+			this.numModulDeckeDurchfluss.TabIndex = 52;
+			this.numModulDeckeDurchfluss.Text = "100";
+			this.numModulDeckeDurchfluss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulDeckeDurchfluss.Value = new decimal(new int[] {
             100,
             0,
             0,
             0});
+			this.numModulDeckeDurchfluss.ValueChanged += new System.EventHandler(this.numModulDeckeDurchfluss_ValueChanged);
 			// 
 			// label31
 			// 
-			this.label31.Location = new System.Drawing.Point(3, 160);
+			this.label31.AutoSize = true;
+			this.label31.Location = new System.Drawing.Point(3, 115);
 			this.label31.Name = "label31";
-			this.label31.Size = new System.Drawing.Size(181, 23);
+			this.label31.Size = new System.Drawing.Size(114, 13);
 			this.label31.TabIndex = 51;
 			this.label31.Text = "Max. Durchfluﬂmenge:";
 			// 
 			// label32
 			// 
-			this.label32.Location = new System.Drawing.Point(406, 137);
+			this.label32.Location = new System.Drawing.Point(406, 89);
 			this.label32.Name = "label32";
 			this.label32.Size = new System.Drawing.Size(76, 23);
 			this.label32.TabIndex = 50;
 			this.label32.Text = "mbar";
 			// 
-			// numericBox5
+			// numModulDeckePressureMbar
 			// 
-			this.numericBox5.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numericBox5.InternalValue = new decimal(new int[] {
+			this.numModulDeckePressureMbar.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numModulDeckePressureMbar.InternalValue = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numericBox5.Location = new System.Drawing.Point(324, 134);
-			this.numericBox5.MaxValue = new decimal(new int[] {
+			this.numModulDeckePressureMbar.Location = new System.Drawing.Point(324, 86);
+			this.numModulDeckePressureMbar.MaxValue = new decimal(new int[] {
             250,
             0,
             0,
             0});
-			this.numericBox5.MinValue = new decimal(new int[] {
+			this.numModulDeckePressureMbar.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numericBox5.Name = "numericBox5";
-			this.numericBox5.Size = new System.Drawing.Size(76, 20);
-			this.numericBox5.TabIndex = 49;
-			this.numericBox5.Text = "0,1";
-			this.numericBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox5.Value = new decimal(new int[] {
+			this.numModulDeckePressureMbar.Name = "numModulDeckePressureMbar";
+			this.numModulDeckePressureMbar.Size = new System.Drawing.Size(76, 20);
+			this.numModulDeckePressureMbar.TabIndex = 49;
+			this.numModulDeckePressureMbar.Text = "0,1";
+			this.numModulDeckePressureMbar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulDeckePressureMbar.Value = new decimal(new int[] {
             1,
             0,
             0,
             65536});
+			this.numModulDeckePressureMbar.ValueChanged += new System.EventHandler(this.numModulDeckePressureMbar_ValueChanged);
 			// 
 			// label33
 			// 
-			this.label33.Location = new System.Drawing.Point(276, 137);
+			this.label33.Location = new System.Drawing.Point(276, 89);
 			this.label33.Name = "label33";
 			this.label33.Size = new System.Drawing.Size(42, 23);
 			this.label33.TabIndex = 48;
 			this.label33.Text = "Pa    =";
 			// 
-			// numericBox6
+			// numModulDeckePressurePa
 			// 
-			this.numericBox6.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numericBox6.InternalValue = new decimal(new int[] {
+			this.numModulDeckePressurePa.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numModulDeckePressurePa.InternalValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.numericBox6.Location = new System.Drawing.Point(194, 134);
-			this.numericBox6.MaxValue = new decimal(new int[] {
+			this.numModulDeckePressurePa.Location = new System.Drawing.Point(194, 86);
+			this.numModulDeckePressurePa.MaxValue = new decimal(new int[] {
             50000,
             0,
             0,
             0});
-			this.numericBox6.MinValue = new decimal(new int[] {
+			this.numModulDeckePressurePa.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.numericBox6.Name = "numericBox6";
-			this.numericBox6.Size = new System.Drawing.Size(76, 20);
-			this.numericBox6.TabIndex = 47;
-			this.numericBox6.Text = "0";
-			this.numericBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox6.Value = new decimal(new int[] {
+			this.numModulDeckePressurePa.Name = "numModulDeckePressurePa";
+			this.numModulDeckePressurePa.Size = new System.Drawing.Size(76, 20);
+			this.numModulDeckePressurePa.TabIndex = 47;
+			this.numModulDeckePressurePa.Text = "0";
+			this.numModulDeckePressurePa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numModulDeckePressurePa.Value = new decimal(new int[] {
             0,
             0,
             0,
             0});
+			this.numModulDeckePressurePa.ValueChanged += new System.EventHandler(this.numModulDeckePressurePa_ValueChanged);
 			// 
 			// label34
 			// 
-			this.label34.Location = new System.Drawing.Point(3, 137);
+			this.label34.AutoSize = true;
+			this.label34.Location = new System.Drawing.Point(3, 89);
 			this.label34.Name = "label34";
-			this.label34.Size = new System.Drawing.Size(181, 23);
+			this.label34.Size = new System.Drawing.Size(96, 13);
 			this.label34.TabIndex = 46;
 			this.label34.Text = "Max. Druckverlust:";
 			// 
-			// button1
+			// btnModulDeckeStandard
 			// 
-			this.button1.Location = new System.Drawing.Point(324, 186);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(110, 23);
-			this.button1.TabIndex = 45;
-			this.button1.Text = "Standardwerte";
-			this.button1.UseVisualStyleBackColor = true;
-			// 
-			// radioButton1
-			// 
-			this.radioButton1.Location = new System.Drawing.Point(194, 33);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(195, 17);
-			this.radioButton1.TabIndex = 44;
-			this.radioButton1.Text = "29 ∞C (EN 1264)";
-			this.radioButton1.UseVisualStyleBackColor = true;
-			// 
-			// label35
-			// 
-			this.label35.Location = new System.Drawing.Point(3, 9);
-			this.label35.Name = "label35";
-			this.label35.Size = new System.Drawing.Size(181, 23);
-			this.label35.TabIndex = 43;
-			this.label35.Text = "Maximale Oberfl‰chentemperatur:";
-			// 
-			// radioButton2
-			// 
-			this.radioButton2.Checked = true;
-			this.radioButton2.Location = new System.Drawing.Point(194, 3);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(206, 24);
-			this.radioButton2.TabIndex = 42;
-			this.radioButton2.TabStop = true;
-			this.radioButton2.Text = "27 ∞C (Harreither Werksempfehlung)";
-			this.radioButton2.UseVisualStyleBackColor = true;
+			this.btnModulDeckeStandard.Location = new System.Drawing.Point(324, 168);
+			this.btnModulDeckeStandard.Name = "btnModulDeckeStandard";
+			this.btnModulDeckeStandard.Size = new System.Drawing.Size(110, 23);
+			this.btnModulDeckeStandard.TabIndex = 45;
+			this.btnModulDeckeStandard.Text = "Standardwerte";
+			this.btnModulDeckeStandard.UseVisualStyleBackColor = true;
+			this.btnModulDeckeStandard.Click += new System.EventHandler(this.btnModulDeckeStandard_Click);
 			// 
 			// SystemParametersPanel
 			// 
@@ -1186,23 +1204,22 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label23;
 		private NumericBox numModulBodenMaxModulesInCircuit;
 		private System.Windows.Forms.Label label26;
-		private NumericBox numericBox1;
+		private NumericBox numModulDeckeMaxModulesInCircuit;
 		private System.Windows.Forms.Label label27;
-		private NumericBox numericBox2;
+		private NumericBox numModulDeckeMaxRows;
 		private System.Windows.Forms.Label label28;
-		private NumericBox numericBox3;
+		private NumericBox numModulDeckeMaxModulesInRow;
 		private System.Windows.Forms.Label label29;
 		private System.Windows.Forms.Label label30;
-		private NumericBox numericBox4;
+		private NumericBox numModulDeckeDurchfluss;
 		private System.Windows.Forms.Label label31;
 		private System.Windows.Forms.Label label32;
-		private NumericBox numericBox5;
+		private NumericBox numModulDeckePressureMbar;
 		private System.Windows.Forms.Label label33;
-		private NumericBox numericBox6;
+		private NumericBox numModulDeckePressurePa;
 		private System.Windows.Forms.Label label34;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.RadioButton radioButton1;
-		private System.Windows.Forms.Label label35;
-		private System.Windows.Forms.RadioButton radioButton2;
+		private System.Windows.Forms.Button btnModulDeckeStandard;
+		private NumericBox numModulDeckeLeistungsfaktor;
+		private System.Windows.Forms.Label label24;
 	}
 }
