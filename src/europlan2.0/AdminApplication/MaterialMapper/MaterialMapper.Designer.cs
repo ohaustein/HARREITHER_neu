@@ -319,7 +319,7 @@ namespace Europlan.AdminApplication {
 			this.cmbRootCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbRootCategories.FormattingEnabled = true;
 			this.cmbRootCategories.Items.AddRange(new object[] {
-            "Boden",
+            "Fuﬂboden",
             "Wand",
             "Decke",
             "Verteiler",
