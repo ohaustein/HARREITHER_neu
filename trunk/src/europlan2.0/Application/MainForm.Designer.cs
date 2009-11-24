@@ -47,6 +47,8 @@ namespace Europlan.Application {
 			this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.projektToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,8 +69,7 @@ namespace Europlan.Application {
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.openGlobalConfDialog = new System.Windows.Forms.OpenFileDialog();
-			this.projektToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.viewReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.mainMenu.SuspendLayout();
@@ -96,6 +97,7 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.projectTree, "projectTree");
 			this.projectTree.FullRowSelect = true;
 			this.projectTree.HideSelection = false;
+			this.projectTree.ImageList = this.imageList;
 			this.projectTree.Name = "projectTree";
 			this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
 			this.projectTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.projectTree_BeforeSelect);
@@ -237,6 +239,19 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.pasteToolStripMenuItem, "pasteToolStripMenuItem");
 			this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
 			// 
+			// projektToolStripMenuItem
+			// 
+			this.projektToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewReportToolStripMenuItem});
+			this.projektToolStripMenuItem.Name = "projektToolStripMenuItem";
+			resources.ApplyResources(this.projektToolStripMenuItem, "projektToolStripMenuItem");
+			// 
+			// viewReportToolStripMenuItem
+			// 
+			this.viewReportToolStripMenuItem.Name = "viewReportToolStripMenuItem";
+			resources.ApplyResources(this.viewReportToolStripMenuItem, "viewReportToolStripMenuItem");
+			this.viewReportToolStripMenuItem.Click += new System.EventHandler(this.viewReportToolStripMenuItem_Click);
+			// 
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -372,18 +387,13 @@ namespace Europlan.Application {
 			// 
 			resources.ApplyResources(this.openGlobalConfDialog, "openGlobalConfDialog");
 			// 
-			// projektToolStripMenuItem
+			// imageList
 			// 
-			this.projektToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewReportToolStripMenuItem});
-			this.projektToolStripMenuItem.Name = "projektToolStripMenuItem";
-			resources.ApplyResources(this.projektToolStripMenuItem, "projektToolStripMenuItem");
-			// 
-			// viewReportToolStripMenuItem
-			// 
-			this.viewReportToolStripMenuItem.Name = "viewReportToolStripMenuItem";
-			resources.ApplyResources(this.viewReportToolStripMenuItem, "viewReportToolStripMenuItem");
-			this.viewReportToolStripMenuItem.Click += new System.EventHandler(this.viewReportToolStripMenuItem_Click);
+			this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+			this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.imageList.Images.SetKeyName(0, "default.png");
+			this.imageList.Images.SetKeyName(1, "kfm_home-alt.png");
+			this.imageList.Images.SetKeyName(2, "kontact_journal.png");
 			// 
 			// MainForm
 			// 
@@ -454,6 +464,7 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 		private System.Windows.Forms.ToolStripMenuItem projektToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewReportToolStripMenuItem;
+		private System.Windows.Forms.ImageList imageList;
 
 	}
 }
