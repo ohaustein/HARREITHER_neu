@@ -113,6 +113,8 @@ namespace Europlan.Common {
 			string localized = resources.GetString("Project", Thread.CurrentThread.CurrentUICulture);
 			rootNode = new TreeNode(localized == null ? "Projekt" : localized);
 			rootNode.Tag = this;
+			rootNode.ImageIndex = 1;
+			rootNode.SelectedImageIndex = 1;
 
 			// building (floors and rooms)
 			localized = resources.GetString("Floors", Thread.CurrentThread.CurrentUICulture);
@@ -122,6 +124,8 @@ namespace Europlan.Common {
 			localized = resources.GetString("FacilityDetails", Thread.CurrentThread.CurrentUICulture);
 			facilityDetailsNode = new TreeNode(localized == null ? "Anlagedaten" : localized);
 			facilityDetailsNode.Tag = typeof(FacilityDetailsSummaryPanel);
+			facilityDetailsNode.ImageIndex = 2;
+			facilityDetailsNode.SelectedImageIndex = 2;
 
 			localized = resources.GetString("RegulatorCircuits", Thread.CurrentThread.CurrentUICulture);
 			regulatorCircuitsNode = new TreeNode(localized == null ? "Regelkreise" : localized);
@@ -137,7 +141,7 @@ namespace Europlan.Common {
 
 			localized = resources.GetString("RequiredMaterial", Thread.CurrentThread.CurrentUICulture);
 			requiredMaterialNode = new TreeNode(localized == null ? "Materialbedarf" : localized);
-			requiredMaterialNode.Tag = typeof(RequiredMaterialPanel); ;
+			requiredMaterialNode.Tag = typeof(RequiredMaterialPanel);
 					
 
 		}

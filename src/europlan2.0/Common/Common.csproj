@@ -539,6 +539,11 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Icons\default.png" />
+    <Content Include="Icons\folder_home2.png" />
+    <Content Include="Icons\kfm_home-alt.png" />
+    <Content Include="Icons\kfm_home.png" />
+    <Content Include="Icons\kontact_journal.png" />
     <Content Include="Reporting\Harreither.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
