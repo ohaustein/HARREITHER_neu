@@ -17,6 +17,7 @@ namespace Europlan.Common {
 		
 		public RequiredMaterialPanel() {
 			InitializeComponent();
+			UpdateControl();
 		}
 		
 		public void UpdateControl() {
