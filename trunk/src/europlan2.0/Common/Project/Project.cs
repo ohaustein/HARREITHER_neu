@@ -42,6 +42,7 @@ namespace Europlan.Common {
 		private TreeNode regulatorCircuitsNode = null;
 		private TreeNode systemParametersNode = null;
 		private TreeNode quickDimensioningNode = null;
+		private TreeNode requiredMaterialNode = null;
 
 		public delegate void ProjectLoadedHandler(object sender);
 		public delegate void ProjectSavedHandler(object sender);
@@ -133,6 +134,11 @@ namespace Europlan.Common {
 			localized = resources.GetString("QuickDimensioning", Thread.CurrentThread.CurrentUICulture);
 			quickDimensioningNode = new TreeNode(localized == null ? "Flächenaufstellung" : localized);
 			quickDimensioningNode.Tag = quickDimensioning;
+
+			localized = resources.GetString("RequiredMaterial", Thread.CurrentThread.CurrentUICulture);
+			requiredMaterialNode = new TreeNode(localized == null ? "Materialbedarf" : localized);
+			requiredMaterialNode.Tag = typeof(RequiredMaterialPanel); ;
+					
 
 		}
 
@@ -355,10 +361,14 @@ namespace Europlan.Common {
 			if (this.rootNode.Nodes.Count == 4 || this.rootNode.Nodes[4] != this.quickDimensioningNode) {
 				this.rootNode.Nodes.Insert(4, this.quickDimensioningNode);
 			}
+			// insert required material node if missing
+			if (this.rootNode.Nodes.Count == 5 || this.rootNode.Nodes[5] != this.requiredMaterialNode) {
+				this.rootNode.Nodes.Insert(5, this.requiredMaterialNode);
+			}
 
 			// remove other nodes
-			while (this.rootNode.Nodes.Count > 5) {
-				this.rootNode.Nodes.RemoveAt(5);
+			while (this.rootNode.Nodes.Count > 6) {
+				this.rootNode.Nodes.RemoveAt(6);
 			}
 
 			// update floors
