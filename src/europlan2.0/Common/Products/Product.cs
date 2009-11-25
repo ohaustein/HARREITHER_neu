@@ -687,6 +687,11 @@ namespace Europlan.Common {
 			get;
 		}
 
+		[XmlIgnore]
+		public abstract Construction PlannedInsideConstruction {
+			get;
+		}
+
 		/// <summary>
 		/// The r-value of the planned construction to the outside of the room
 		/// </summary>
@@ -697,6 +702,11 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public abstract bool HasOutsideConstruction {
+			get;
+		}
+
+		[XmlIgnore]
+		public abstract Construction PlannedOutsideConstruction {
 			get;
 		}
 

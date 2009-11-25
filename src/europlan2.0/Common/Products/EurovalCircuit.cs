@@ -258,6 +258,8 @@ namespace Europlan.Common {
 			double rLambdaB = this.EurovalProduct.PlannedInsideConstructionRValue;
 			double rLambdaIns = this.EurovalProduct.PlannedOutsideConstructionRValue;
 
+			double factor = (this.EurovalProduct.PlannedFloorConstruction != null && (this.EurovalProduct.PlannedFloorConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TROCKEN) || this.EurovalProduct.PlannedFloorConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN))) ? 0.45 : 1;
+
 			// Aufteilung RZ - AZ
 			double aFbh = this.areaTotal - this.areaReduced / 2- this.areaUnheated - this.areaRemovedDueConnection;	// wirksam beheizte Fläche
 
@@ -313,7 +315,7 @@ namespace Europlan.Common {
 				double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
 				//                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
 				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
-				this.c_qAzHeatPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
+				this.c_qAzHeatPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz) * factor;                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
 
 				double qAverage = this.QFbhTotalHeat / this.AreaWithoutConnections;
 				double qU = en1264.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowHeat);
@@ -392,7 +394,7 @@ namespace Europlan.Common {
 				double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
 				//                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
 				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
-				this.c_qAzCoolPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz);                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
+				this.c_qAzCoolPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz) * factor;                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
 
 				double qAverage = -this.QFbhTotalCool / this.AreaWithoutConnections;
 				double qU = en1264.WaermeverlustUnten(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowCool);

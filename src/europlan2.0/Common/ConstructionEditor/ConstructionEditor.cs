@@ -60,8 +60,8 @@ namespace Europlan.Common {
 			switch (this.ConstructionScope) {
 				case ConstructionScopeEnum.FloorConstruction:
 					this.cbPeFoil.Visible = false;
-					this.lblThickness.Visible = true;
-					this.numThickness.Visible = true;
+					this.lblThickness.Visible = false;
+					this.numThickness.Visible = false;
 					break;
 
 				case ConstructionScopeEnum.InsulationConstruction:

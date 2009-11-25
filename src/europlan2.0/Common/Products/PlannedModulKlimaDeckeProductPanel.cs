@@ -693,7 +693,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnFloorConstruction_Click(object sender, EventArgs e) {
-			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.CeilingConstruction);
+			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.CeilingConstruction, null);
 			form.SelectedConstruction = (this.product.Product as ModulKlimaDeckeProduct).PlannedCeilingConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
@@ -709,7 +709,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnInsulationConstruction_Click(object sender, EventArgs e) {
-			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.InsulationConstruction);
+			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.InsulationConstruction, null);
 			form.SelectedConstruction = (this.product.Product as ModulKlimaDeckeProduct).PlannedInsulationConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {

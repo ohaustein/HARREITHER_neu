@@ -543,6 +543,7 @@
     <None Include="Properties\DataSources\Construction.datasource" />
     <None Include="Properties\DataSources\ConstructionLayer.datasource" />
     <None Include="Properties\DataSources\Distributor.datasource" />
+    <None Include="Properties\DataSources\HithermRegister.datasource" />
     <None Include="Properties\DataSources\IQuickDimensioningSummary.datasource" />
     <None Include="Properties\DataSources\KlimaFlaechenModul.datasource" />
     <None Include="Properties\DataSources\QuickDimensioningRoomDistributorsWrapper.datasource" />

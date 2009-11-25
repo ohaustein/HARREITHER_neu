@@ -24,13 +24,14 @@ namespace Europlan.Common {
 			POWER_WITH_SIGN = 13,
 			PIPE_LENGTH = 14,
 			MODULE_COUNT = 15,
+			HK_COUNT = 16,
 		}
-		                                                                              //   DEF   RCTMP       AREA   TEMP             HPW             CPW  CONSTR_THICK        LAMBDA             R,   DENOMINATION        PRICE    FLOW_TEMP   PERC     PWR_SIGN     PIPE_L    MODULE_COUNT
-		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] {  null,     0,          0,  -273,              0,              0,            0,            0,            0,              0,           0,           0,      0,       null,         0,              0};
-		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] {  null,    99,       null,   999, Int32.MaxValue, Int32.MaxValue,         null,         null,         null, Int32.MaxValue,        null,        null,    100,       null,      null, Int32.MaxValue};
-		private static readonly int[] decimalPlaces = new int[]                        {     0,     0,          1,     0,              0,              0,            2,            3,            3,              0,           2,           1,      1,          0,         1,              0};
-		private static readonly string[] masks = new string[]                          {   "0",  "90", "999990.9", "990",      "9999990",      "9999990",  "999990.99", "999990.999", "999990.999",       "999990", "999990.99", "999990.99", "990.9", "9999990", "9999990",      "9999990"};
-		private static readonly bool[] sign = new bool[]                               { false, false,      false, false,          false,          false,        false,        false,        false,          false,       false,       false,   false,      true,     false,          false};
+		                                                                              //   DEF   RCTMP       AREA   TEMP             HPW             CPW  CONSTR_THICK        LAMBDA             R,   DENOMINATION        PRICE    FLOW_TEMP   PERC     PWR_SIGN     PIPE_L    MODULE_COUNT HK_CNT
+		private static readonly Nullable<decimal>[] minValue = new Nullable<decimal>[] {  null,     0,          0,  -273,              0,              0,            0,            0,            0,              0,           0,           0,      0,       null,         0,              0,     1};
+		private static readonly Nullable<decimal>[] maxValue = new Nullable<decimal>[] {  null,    99,       null,   999, Int32.MaxValue, Int32.MaxValue,         null,         null,         null, Int32.MaxValue,        null,        null,    100,       null,      null, Int32.MaxValue,    12};
+		private static readonly int[] decimalPlaces = new int[]                        {     0,     0,          1,     0,              0,              0,            2,            3,            3,              0,           2,           1,      1,          0,         1,              0,     0};
+		private static readonly string[] masks = new string[]                          {   "0",  "90", "999990.9", "990",      "9999990",      "9999990",  "999990.99", "999990.999", "999990.999",       "999990", "999990.99", "999990.99", "990.9", "9999990", "9999990",      "9999990",  "90"};
+		private static readonly bool[] sign = new bool[]                               { false, false,      false, false,          false,          false,        false,        false,        false,          false,       false,       false,   false,      true,     false,          false, false};
 
 		private Nullable<decimal> realMaxValue = null;
 		private Nullable<decimal> realMinValue = null;

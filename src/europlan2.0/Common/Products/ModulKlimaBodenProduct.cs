@@ -21,9 +21,6 @@ namespace Europlan.Common {
 		private static double alphaFbk = 6.5; /* für FBK fix */
 		private static double alphaFbh = 10.8; /* für FBH fix */
 		private static double lambdaU0 = 1; /* fix */
-		private static double lambdaE = 60.0; /* Estrichleitfähigkeit bzw Leitfähigkeit Lastausgleichsschicht, fix */
-		private static double su = 0.002; /* Estrichüberdeckung bzw. Überdeckung Lastausgleich */
-		private static double lambdaU = 60; /* Wärmeleitfähigkeit der Überdeckung */
 		private static double rLambdaDecke = 0.11; /* Fußbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 		private static double rLambdaPutz = 0.02; /* Fußbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
@@ -151,24 +148,6 @@ namespace Europlan.Common {
 		public static double ConfigLambdaU0 {
 			get { return lambdaU0; }
 			set { lambdaU0 = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigLambdaE {
-			get { return lambdaE; }
-			set { lambdaE = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigSu {
-			get { return su; }
-			set { su = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigLambdaU {
-			get { return lambdaU; }
-			set { lambdaU = value; }
 		}
 
 		[ProductParameter]
@@ -739,6 +718,11 @@ namespace Europlan.Common {
 			get { return this.plannedFloorConstruction != null; }
 		}
 
+		[XmlIgnore]
+		public override Construction PlannedInsideConstruction {
+			get { return this.plannedFloorConstruction; }
+		}
+
 		/// <summary>
 		/// The r-value of the planned insulation construction
 		/// </summary>
@@ -750,6 +734,11 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override bool HasOutsideConstruction {
 			get { return this.plannedInsulationConstruction != null; }
+		}
+
+		[XmlIgnore]
+		public override Construction PlannedOutsideConstruction {
+			get { return this.plannedInsulationConstruction; }
 		}
 
 		[XmlIgnore]
