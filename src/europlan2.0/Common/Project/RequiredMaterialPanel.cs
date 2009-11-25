@@ -28,5 +28,11 @@ namespace Europlan.Common {
 			return true;
 		}
 
+		private void requiredMaterialGrid_GridContentChanged(object sender) {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
 	}
 }
