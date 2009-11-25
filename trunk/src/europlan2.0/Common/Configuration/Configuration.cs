@@ -84,7 +84,11 @@ namespace Europlan.Common {
 					if (line.StartsWith("A")) {
 						string[] positions = line.Split(';');
 						string id = positions[2].Trim();
-						string name = positions[4].Trim() + " " + positions[5].Trim();
+						string name = positions[4].Trim();
+						string name2 = positions[5].Trim();
+						if (name2 != "") {
+							name += " " + name2;
+						}
 						float price = Int32.Parse(positions[9]) / 100;
 						string discountGroup = positions[10].Trim();
 						int denomination = Int32.Parse(positions[6]);
