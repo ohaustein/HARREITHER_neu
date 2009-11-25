@@ -31,12 +31,12 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvRequiredMaterial = new System.Windows.Forms.DataGridView();
-			this.requiredMaterialWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.partNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.requiredAmountDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.calculatedAmountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.unitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.requiredMaterialWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dgvRequiredMaterial)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.requiredMaterialWrapperBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -73,10 +73,7 @@ namespace Europlan.Common {
 			this.dgvRequiredMaterial.Size = new System.Drawing.Size(695, 441);
 			this.dgvRequiredMaterial.TabIndex = 0;
 			this.dgvRequiredMaterial.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequiredMaterial_CellValueChanged);
-			// 
-			// requiredMaterialWrapperBindingSource
-			// 
-			this.requiredMaterialWrapperBindingSource.DataSource = typeof(Europlan.Common.RequiredMaterialWrapper);
+			this.dgvRequiredMaterial.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dgvRequiredMaterial_PreviewKeyDown);
 			// 
 			// partNumberDataGridViewTextBoxColumn
 			// 
@@ -131,6 +128,10 @@ namespace Europlan.Common {
 			this.unitDataGridViewTextBoxColumn.ReadOnly = true;
 			this.unitDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.unitDataGridViewTextBoxColumn.Width = 70;
+			// 
+			// requiredMaterialWrapperBindingSource
+			// 
+			this.requiredMaterialWrapperBindingSource.DataSource = typeof(Europlan.Common.RequiredMaterialWrapper);
 			// 
 			// RequiredMaterialGrid
 			// 
