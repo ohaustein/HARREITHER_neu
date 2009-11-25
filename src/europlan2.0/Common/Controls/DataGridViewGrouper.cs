@@ -374,7 +374,7 @@ namespace Europlan.Common {
 			using (SolidBrush b = new SolidBrush(info.BackColor))
 				e.Graphics.FillRectangle(b, r);
 			//line under the group row
-			//e.Graphics.DrawLine(Pens.SteelBlue, r.Left, r.Bottom, r.Right, r.Bottom);
+			e.Graphics.DrawLine(Pens.Gray, r.Left, r.Bottom, r.Right, r.Bottom);
 
 			//collapse/expand symbol               
 			//{
