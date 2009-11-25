@@ -386,20 +386,17 @@ namespace Europlan.Common {
 		}
 
 		private PlannedProduct product;
-		public PlannedProduct Product {
+		public PlannedProduct PlannedProduct {
 			get { return this.product; }
 			set { this.product = value; }
 		}
 
 		private int heizkreis = 0;
-		/// <summary>
-		/// This property must not be used to initialize the register!
-		/// </summary>
 		[XmlIgnore]
 		public int Heizkreis {
 			get { return this.heizkreis; }
 			set {
-				if (this.Product != null) {
+				if (this.product != null) {
 					HithermCircuit hc;
 					if (this.heizkreis > 0) {
 						hc = this.product.Product.GetCircuit(this.heizkreis - 1) as HithermCircuit;

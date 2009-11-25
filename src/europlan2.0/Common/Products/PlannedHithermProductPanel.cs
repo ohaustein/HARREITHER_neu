@@ -338,6 +338,11 @@ namespace Europlan.Common {
 			}
 			form.Dispose();
 		}
+
+		private void dgvRegisters_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e) {
+			e.Row.Cells[PlannedProduct.DisplayIndex].Value = this.product;
+			e.Row.Cells[heizkreisDataGridViewTextBoxColumn.DisplayIndex].Value = 1;
+		}
 		
 	}
 }
