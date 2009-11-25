@@ -29,6 +29,7 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvRequiredMaterial = new System.Windows.Forms.DataGridView();
 			this.requiredMaterialWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.partNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +48,14 @@ namespace Europlan.Common {
 			this.dgvRequiredMaterial.AllowUserToResizeColumns = false;
 			this.dgvRequiredMaterial.AllowUserToResizeRows = false;
 			this.dgvRequiredMaterial.AutoGenerateColumns = false;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dgvRequiredMaterial.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.dgvRequiredMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvRequiredMaterial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.partNumberDataGridViewTextBoxColumn,
@@ -58,6 +67,7 @@ namespace Europlan.Common {
 			this.dgvRequiredMaterial.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dgvRequiredMaterial.Location = new System.Drawing.Point(0, 0);
 			this.dgvRequiredMaterial.Name = "dgvRequiredMaterial";
+			this.dgvRequiredMaterial.RowHeadersVisible = false;
 			this.dgvRequiredMaterial.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.dgvRequiredMaterial.Size = new System.Drawing.Size(695, 441);
 			this.dgvRequiredMaterial.TabIndex = 0;
@@ -70,8 +80,8 @@ namespace Europlan.Common {
 			// partNumberDataGridViewTextBoxColumn
 			// 
 			this.partNumberDataGridViewTextBoxColumn.DataPropertyName = "PartNumber";
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			this.partNumberDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+			this.partNumberDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
 			this.partNumberDataGridViewTextBoxColumn.HeaderText = "Bestellnummer";
 			this.partNumberDataGridViewTextBoxColumn.Name = "partNumberDataGridViewTextBoxColumn";
 			this.partNumberDataGridViewTextBoxColumn.ReadOnly = true;
@@ -80,8 +90,8 @@ namespace Europlan.Common {
 			// 
 			this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-			this.nameDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+			this.nameDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
 			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
 			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
@@ -89,31 +99,36 @@ namespace Europlan.Common {
 			// requiredAmountDataGridViewTextBoxColumn
 			// 
 			this.requiredAmountDataGridViewTextBoxColumn.DataPropertyName = "RequiredAmount";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
-			this.requiredAmountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle4.Format = "F0";
+			this.requiredAmountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
 			this.requiredAmountDataGridViewTextBoxColumn.HeaderText = "Menge";
 			this.requiredAmountDataGridViewTextBoxColumn.Name = "requiredAmountDataGridViewTextBoxColumn";
-			this.requiredAmountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.requiredAmountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.requiredAmountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.requiredAmountDataGridViewTextBoxColumn.Width = 70;
 			// 
 			// calculatedAmountDataGridViewTextBoxColumn
 			// 
 			this.calculatedAmountDataGridViewTextBoxColumn.DataPropertyName = "CalculatedAmount";
-			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-			this.calculatedAmountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+			this.calculatedAmountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
 			this.calculatedAmountDataGridViewTextBoxColumn.HeaderText = "(berechnet)";
 			this.calculatedAmountDataGridViewTextBoxColumn.Name = "calculatedAmountDataGridViewTextBoxColumn";
 			this.calculatedAmountDataGridViewTextBoxColumn.ReadOnly = true;
+			this.calculatedAmountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.calculatedAmountDataGridViewTextBoxColumn.Width = 70;
 			// 
 			// unitDataGridViewTextBoxColumn
 			// 
 			this.unitDataGridViewTextBoxColumn.DataPropertyName = "Unit";
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-			this.unitDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+			this.unitDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
 			this.unitDataGridViewTextBoxColumn.HeaderText = "Einheit";
 			this.unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
 			this.unitDataGridViewTextBoxColumn.ReadOnly = true;
+			this.unitDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.unitDataGridViewTextBoxColumn.Width = 70;
 			// 
 			// RequiredMaterialGrid
 			// 
