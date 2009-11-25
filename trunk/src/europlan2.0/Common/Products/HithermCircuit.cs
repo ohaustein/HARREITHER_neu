@@ -52,7 +52,7 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (HithermRegister register in this.registers) {
-					area += register.Area;
+					//area += register.Area;
 				}
 				return area;
 			}

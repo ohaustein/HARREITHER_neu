@@ -742,6 +742,11 @@ namespace Europlan.Common {
 			get { return this.plannedFloorConstruction != null; }
 		}
 
+		[XmlIgnore]
+		public override Construction PlannedInsideConstruction {
+			get { return this.plannedFloorConstruction; }
+		}
+
 		/// <summary>
 		/// The r-value of the planned insulation construction
 		/// </summary>
@@ -753,6 +758,11 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override bool HasOutsideConstruction {
 			get { return this.plannedInsulationConstruction != null; }
+		}
+
+		[XmlIgnore]
+		public override Construction PlannedOutsideConstruction {
+			get { return this.plannedInsulationConstruction; }
 		}
 
 		/// <summary>

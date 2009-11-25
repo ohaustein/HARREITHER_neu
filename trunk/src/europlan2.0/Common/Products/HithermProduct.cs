@@ -283,6 +283,11 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public override Construction PlannedInsideConstruction {
+			get { return null; }
+		}
+
+		[XmlIgnore]
 		public override float PlannedOutsideConstructionRValue {
 			get { return 0; /*TODO*/ }
 		}
@@ -290,6 +295,11 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override bool HasOutsideConstruction {
 			get { return false; }
+		}
+
+		[XmlIgnore]
+		public override Construction PlannedOutsideConstruction {
+			get { return null; }
 		}
 	}
 	

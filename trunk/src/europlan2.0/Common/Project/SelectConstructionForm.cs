@@ -14,10 +14,11 @@ namespace Europlan.Common {
 		private Construction selectConstructionAfterLoad = null;
 		private ConstructionListWrapper constructions;
 
-		public SelectConstructionForm(ConstructionScopeEnum scope) {
+		public SelectConstructionForm(ConstructionScopeEnum scope, List<ConstructionType> constructionTypes) {
 			InitializeComponent();
 			this.constructions = new ConstructionListWrapper(Configuration.ConfigurationType.ProjectConfiguration);
 			this.constructions.ConstructionScopeFilter = scope;
+			this.constructions.ConstructionTypeFilter = constructionTypes;
 			this.constructionBindingSource.DataSource = this.constructions;
 			this.constructionBindingSource.ResetBindings(false);
 		}

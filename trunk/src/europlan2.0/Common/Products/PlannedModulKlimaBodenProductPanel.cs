@@ -571,7 +571,14 @@ namespace Europlan.Common {
 		}
 
 		private void btnFloorConstruction_Click(object sender, EventArgs e) {
-			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.FloorConstruction);
+			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.FloorConstruction,
+				new List<ConstructionType>(new ConstructionType[] {
+					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH),
+					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH),
+					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_STAHL),
+					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_STAHL),
+					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TRK_ESTRICH),
+					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TRK_ESTRICH) }));
 			form.SelectedConstruction = (this.product.Product as ModulKlimaBodenProduct).PlannedFloorConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
@@ -587,7 +594,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnInsulationConstruction_Click(object sender, EventArgs e) {
-			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.InsulationConstruction);
+			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.InsulationConstruction, null);
 			form.SelectedConstruction = (this.product.Product as ModulKlimaBodenProduct).PlannedInsulationConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {

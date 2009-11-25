@@ -9,6 +9,7 @@ namespace Europlan.Common {
 		private Configuration.ConfigurationType type;
 
 		private Nullable<ConstructionScopeEnum> filter = null;
+		private List<ConstructionType> ctFilter = null;
 
 		public ConstructionListWrapper(Configuration.ConfigurationType type) {
 			if (!(type == Configuration.ConfigurationType.UserConfiguration || type == Configuration.ConfigurationType.AdminConfiguration || type == Configuration.ConfigurationType.ProjectConfiguration)) {
@@ -23,13 +24,13 @@ namespace Europlan.Common {
 
 		#region IEnumerable<Construction> Members
 		public IEnumerator<Construction> GetEnumerator() {
-			return new ConstructionListEnumerator(this.type, (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value));
+			return new ConstructionListEnumerator(this.type, (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value), this.ctFilter);
 		}
 		#endregion
 
 		#region IEnumerable Members
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-			return new ConstructionListEnumerator(this.type, (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value));
+			return new ConstructionListEnumerator(this.type, (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value), this.ctFilter);
 		}
 		#endregion
 
@@ -112,12 +113,12 @@ namespace Europlan.Common {
 		private int GetNode(int index) {
 			int i = 0;
 			int current = 0;
-			while (current < this.Constructions.Count && ((this.filter != null && ((this.filter.Value & this.Constructions[current].Scope) == ConstructionScopeEnum.UnknownConstruction))) || this.Constructions[current].HasBeenDeleted) {
+			while (current < this.Constructions.Count && ((this.filter != null && ((this.filter.Value & this.Constructions[current].Scope) == ConstructionScopeEnum.UnknownConstruction))) || (this.ctFilter != null && !this.ctFilter.Contains(this.Constructions[current].Type)) || this.Constructions[current].HasBeenDeleted) {
 				current++;
 			}
 			while (i < index && current < this.Constructions.Count) {
 				current++;
-				while (current < this.Constructions.Count && ((this.filter != null && ((this.filter.Value & this.Constructions[current].Scope) == ConstructionScopeEnum.UnknownConstruction))) || this.Constructions[current].HasBeenDeleted) {
+				while (current < this.Constructions.Count && ((this.filter != null && ((this.filter.Value & this.Constructions[current].Scope) == ConstructionScopeEnum.UnknownConstruction))) || (this.ctFilter != null && !this.ctFilter.Contains(this.Constructions[current].Type)) || this.Constructions[current].HasBeenDeleted) {
 					current++;
 				}
 				i++;
@@ -292,25 +293,53 @@ namespace Europlan.Common {
 
 		public string Filter {
 			get {
-				return (this.filter == null ? null : ((int)this.filter.Value).ToString());
+				string str = "";
+				if (this.filter != null) {
+					str = ((int)this.filter.Value).ToString();
+				}
+				if (this.ctFilter != null) {
+					foreach (ConstructionType ct in this.ctFilter) {
+						str += ";" + ct.Id;
+					}
+				}
+				if (str.Length == 0) {
+					str = null;
+				}
+				return str;
 			}
 			set {
 				int i;
 				if (value == null) {
 					this.filter = null;
-				} else if (Int32.TryParse(value, out i)) {
-					this.filter = ConstructionScopeEnum.UnknownConstruction;
-					if ((i & ((int)ConstructionScopeEnum.FloorConstruction)) != 0) {
-						this.filter = this.filter | ConstructionScopeEnum.FloorConstruction;
+					this.ctFilter = null;
+				} else {
+					string[] split = value.Split(';');
+					if (split.Length > 0 && Int32.TryParse(split[0], out i)) {
+						this.filter = ConstructionScopeEnum.UnknownConstruction;
+						if ((i & ((int)ConstructionScopeEnum.FloorConstruction)) != 0) {
+							this.filter = this.filter | ConstructionScopeEnum.FloorConstruction;
+						}
+						if ((i & ((int)ConstructionScopeEnum.InsulationConstruction)) != 0) {
+							this.filter = this.filter | ConstructionScopeEnum.InsulationConstruction;
+						}
+						if ((i & ((int)ConstructionScopeEnum.WallConstruction)) != 0) {
+							this.filter = this.filter | ConstructionScopeEnum.WallConstruction;
+						}
+						if ((i & ((int)ConstructionScopeEnum.CeilingConstruction)) != 0) {
+							this.filter = this.filter | ConstructionScopeEnum.CeilingConstruction;
+						}
+					} else {
+						this.filter = null;
 					}
-					if ((i & ((int)ConstructionScopeEnum.InsulationConstruction)) != 0) {
-						this.filter = this.filter | ConstructionScopeEnum.InsulationConstruction;
+					this.ctFilter = new List<ConstructionType>();
+					for (int j = 1; j < split.Length; j++) {
+						ConstructionType ct = ConstructionTypeManager.Instance.GetConstructionTypeById(split[j]);
+						if (ct != null) {
+							this.ctFilter.Add(ct);
+						}
 					}
-					if ((i & ((int)ConstructionScopeEnum.WallConstruction)) != 0) {
-						this.filter = this.filter | ConstructionScopeEnum.WallConstruction;
-					}
-					if ((i & ((int)ConstructionScopeEnum.CeilingConstruction)) != 0) {
-						this.filter = this.filter | ConstructionScopeEnum.CeilingConstruction;
+					if (this.ctFilter.Count == 0) {
+						this.ctFilter = null;
 					}
 				}
 			}
@@ -318,6 +347,7 @@ namespace Europlan.Common {
 
 		public void RemoveFilter() {
 			this.filter = null;
+			this.ctFilter = null;
 		}
 
 		public ListSortDescriptionCollection SortDescriptions {
@@ -337,6 +367,11 @@ namespace Europlan.Common {
 			get { return (this.filter == null ? ConstructionScopeEnum.All : this.filter.Value); }
 			set { this.filter = (value == ConstructionScopeEnum.All ? (Nullable<ConstructionScopeEnum>)null : (Nullable<ConstructionScopeEnum>)value); }
 		}
+
+		public List<ConstructionType> ConstructionTypeFilter {
+			get { return this.ctFilter; }
+			set { this.ctFilter = value; }
+		}
 	}
 
 	public class ConstructionListEnumerator : IEnumerator<Construction> {
@@ -345,12 +380,14 @@ namespace Europlan.Common {
 		private int currentNode;
 		private bool finished;
 		private ConstructionScopeEnum filter;
+		private List<ConstructionType> constructionTypeFilter;
 
-		internal ConstructionListEnumerator(Configuration.ConfigurationType type, ConstructionScopeEnum filter) {
+		internal ConstructionListEnumerator(Configuration.ConfigurationType type, ConstructionScopeEnum filter, List<ConstructionType> constructionTypeFilter) {
 			if (!(type == Configuration.ConfigurationType.UserConfiguration || type == Configuration.ConfigurationType.AdminConfiguration || type == Configuration.ConfigurationType.ProjectConfiguration)) {
 				throw new Exception("type must be UserConfiguration or AdminConfiguration or ProjectConfiguration");
 			}
 			this.type = type;
+			this.constructionTypeFilter = constructionTypeFilter;
 			this.currentNode = -1;
 			this.finished = false;
 			this.filter = filter;
@@ -395,7 +432,7 @@ namespace Europlan.Common {
 				} else {
 					this.currentNode++;
 				}
-				while (this.currentNode < this.List.Count && (((this.List[this.currentNode].Scope & this.filter) == ConstructionScopeEnum.UnknownConstruction) || this.List[this.currentNode].HasBeenDeleted)) {
+				while (this.currentNode < this.List.Count && (((this.List[this.currentNode].Scope & this.filter) == ConstructionScopeEnum.UnknownConstruction) || (this.constructionTypeFilter != null && !this.constructionTypeFilter.Contains(this.List[this.currentNode].Type)) || this.List[this.currentNode].HasBeenDeleted)) {
 					this.currentNode++;
 				}
 				if (this.currentNode >= this.List.Count) {

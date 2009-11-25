@@ -10,6 +10,11 @@ namespace Europlan.Common {
 		public static readonly string CT_STD_ESTRICH = "StdEstrich";
 		public static readonly string CT_STD_TROCKEN = "StdTrocken";
 		public static readonly string CT_USER_ESTRICH = "UserEstrich";
+		public static readonly string CT_USER_TROCKEN = "UserTrocken";
+		public static readonly string CT_STD_STAHL = "StdStahl";
+		public static readonly string CT_USER_STAHL = "UserStahl";
+		public static readonly string CT_STD_TRK_ESTRICH = "StdTrkEstr";
+		public static readonly string CT_USER_TRK_ESTRICH = "UserTrkEstr";
 		public static readonly string CT_STD_DAEMM = "StdDaemm";
 		public static readonly string CT_USER_DAEMM = "UserDaemm";
 		public static readonly string CT_STD_DECKE = "StdDecke";
@@ -33,6 +38,16 @@ namespace Europlan.Common {
 			type = new ConstructionType(CT_STD_TROCKEN, "Standard Trockenkonstruktion", ConstructionScopeEnum.FloorConstruction, false);
 			this.constructionTypes.Add(type.Id, type);
 			type = new ConstructionType(CT_USER_ESTRICH, "Benutzer Estrichkonstruktion", ConstructionScopeEnum.FloorConstruction, true);
+			this.constructionTypes.Add(type.Id, type);
+			type = new ConstructionType(CT_USER_TROCKEN, "Benutzer Trockenkonstruktion", ConstructionScopeEnum.FloorConstruction, true);
+			this.constructionTypes.Add(type.Id, type);
+			type = new ConstructionType(CT_STD_STAHL, "Standard Stahlblechkonstruktion", ConstructionScopeEnum.FloorConstruction, false);
+			this.constructionTypes.Add(type.Id, type);
+			type = new ConstructionType(CT_USER_STAHL, "Benutzer Stahlblechkonstruktion", ConstructionScopeEnum.FloorConstruction, true);
+			this.constructionTypes.Add(type.Id, type);
+			type = new ConstructionType(CT_STD_TRK_ESTRICH, "Standard Trockenestrichkonstruktion", ConstructionScopeEnum.FloorConstruction, false);
+			this.constructionTypes.Add(type.Id, type);
+			type = new ConstructionType(CT_USER_TRK_ESTRICH, "Benutzer Trockenestrichkonstruktion", ConstructionScopeEnum.FloorConstruction, true);
 			this.constructionTypes.Add(type.Id, type);
 			type = new ConstructionType(CT_STD_DAEMM, "Standard Wärmedämmkonstruktion", ConstructionScopeEnum.InsulationConstruction, false);
 			this.constructionTypes.Add(type.Id, type);

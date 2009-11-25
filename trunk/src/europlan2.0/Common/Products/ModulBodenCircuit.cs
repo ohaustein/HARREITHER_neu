@@ -172,14 +172,38 @@ namespace Europlan.Common {
 			double alphaFbh = ModulKlimaBodenProduct.ConfigAlphaFbh;
 			double alphaFbk = ModulKlimaBodenProduct.ConfigAlphaFbk;
 			double su0 = ModulKlimaBodenProduct.ConfigSu0;
-			double su = ModulKlimaBodenProduct.ConfigSu;
 			double lambdaU0 = ModulKlimaBodenProduct.ConfigLambdaU0;
-			double lambdaU = ModulKlimaBodenProduct.ConfigLambdaU;
-			double lambdaE = ModulKlimaBodenProduct.ConfigLambdaE;
 			double rLambdaDecke = ModulKlimaBodenProduct.ConfigRLambdaDecke;
 			double rLambdaPutz = ModulKlimaBodenProduct.ConfigRLambdaPutz;
 			double rAlphaDeckeFbh = 1 / alphaFbk; /* Wärmeübergang Decke bei Heizung */
 			double rAlphaDeckeFbk = 1 / alphaFbh; /* Wärmeübergang Decke bei Kühlung */
+
+			double su = 0.002;
+			double lambdaE = 60;
+			if (this.ModulKlimaBodenProduct.PlannedFloorConstruction != null) {
+				ConstructionTypeManager ctm = ConstructionTypeManager.Instance;
+				ConstructionType ctEstrichS = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH);
+				ConstructionType ctEstrichU = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH);
+				ConstructionType ctStahlS = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_STD_STAHL);
+				ConstructionType ctStahlU = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_USER_STAHL);
+				ConstructionType ctTrkEstrS = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TRK_ESTRICH);
+				ConstructionType ctTrkEstrU = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TRK_ESTRICH);
+
+				ConstructionType ct = this.ModulKlimaBodenProduct.PlannedFloorConstruction.Type;
+				if (ct == ctEstrichS || ct == ctEstrichU) {
+					su = 0.03;
+					lambdaE = 1.2;
+				} else if (ct == ctTrkEstrS || ct == ctTrkEstrU) {
+					su = 0.02;
+					lambdaE = 0.33;
+				} else if (ct == ctStahlS || ct == ctStahlU) {
+					su = 0.002;
+					lambdaE = 60;
+				}
+
+			
+			}
+			double lambdaU = lambdaE;
 
 			double rLambdaB = this.ModulKlimaBodenProduct.PlannedFloorConstruction == null ? 0 : this.ModulKlimaBodenProduct.PlannedFloorConstruction.RValue;
 			double rLambdaIns = this.ModulKlimaBodenProduct.PlannedInsulationConstruction == null ? 0 : this.ModulKlimaBodenProduct.PlannedInsulationConstruction.RValue;

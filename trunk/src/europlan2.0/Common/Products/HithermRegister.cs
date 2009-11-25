@@ -31,12 +31,12 @@ namespace Europlan.Common {
 				mappingFromString.Add(hit_200_10, RegisterTypeEnum.HIT_200_10);
 				mappingFromString.Add(hit_250_10, RegisterTypeEnum.HIT_250_10);
 				mappingFromString.Add(hit_300_10, RegisterTypeEnum.HIT_300_10);
-				mappingFromString.Add(hit_50_10, RegisterTypeEnum.HIT_50_5);
-				mappingFromString.Add(hit_100_10, RegisterTypeEnum.HIT_100_5);
-				mappingFromString.Add(hit_150_10, RegisterTypeEnum.HIT_150_5);
-				mappingFromString.Add(hit_200_10, RegisterTypeEnum.HIT_200_5);
-				mappingFromString.Add(hit_250_10, RegisterTypeEnum.HIT_250_5);
-				mappingFromString.Add(hit_300_10, RegisterTypeEnum.HIT_300_5);
+				mappingFromString.Add(hit_50_5, RegisterTypeEnum.HIT_50_5);
+				mappingFromString.Add(hit_100_5, RegisterTypeEnum.HIT_100_5);
+				mappingFromString.Add(hit_150_5, RegisterTypeEnum.HIT_150_5);
+				mappingFromString.Add(hit_200_5, RegisterTypeEnum.HIT_200_5);
+				mappingFromString.Add(hit_250_5, RegisterTypeEnum.HIT_250_5);
+				mappingFromString.Add(hit_300_5, RegisterTypeEnum.HIT_300_5);
 
 				mappingToString.Add(RegisterTypeEnum.HIT_50_10, hit_50_10);
 				mappingToString.Add(RegisterTypeEnum.HIT_100_10, hit_100_10);
@@ -44,12 +44,12 @@ namespace Europlan.Common {
 				mappingToString.Add(RegisterTypeEnum.HIT_200_10, hit_200_10);
 				mappingToString.Add(RegisterTypeEnum.HIT_250_10, hit_250_10);
 				mappingToString.Add(RegisterTypeEnum.HIT_300_10, hit_300_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_50_10, hit_50_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_100_10, hit_100_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_150_10, hit_150_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_200_10, hit_200_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_250_10, hit_250_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_300_10, hit_300_10);
+				mappingToString.Add(RegisterTypeEnum.HIT_50_5, hit_50_5);
+				mappingToString.Add(RegisterTypeEnum.HIT_100_5, hit_100_5);
+				mappingToString.Add(RegisterTypeEnum.HIT_150_5, hit_150_5);
+				mappingToString.Add(RegisterTypeEnum.HIT_200_5, hit_200_5);
+				mappingToString.Add(RegisterTypeEnum.HIT_250_5, hit_250_5);
+				mappingToString.Add(RegisterTypeEnum.HIT_300_5, hit_300_5);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -279,16 +279,22 @@ namespace Europlan.Common {
 		public RohrabstandEnum Rohrabstand {
 			get { return GetRohrabstandForRegisterType(this.registerType); }
 		}
-
+		
 		public int RegisterHoehe {
 			get { return GetRegisterHoehe(this.registerType); }
 		}
-
+		
 		public RegisterOrientationEnum Orientation {
 			get { return this.orientation; }
 			set { this.orientation = value; }
 		}
 
+		[XmlIgnore]
+		public bool Horizontal {
+			get { return this.orientation == RegisterOrientationEnum.ORIENTATION_HORIZONTAL; }
+			set { this.orientation = value ? RegisterOrientationEnum.ORIENTATION_HORIZONTAL : RegisterOrientationEnum.ORIENTATION_VERTIKAL; }
+		}
+		
 		public int Rohre {
 			get { return this.rohre; }
 			set {
@@ -307,7 +313,7 @@ namespace Europlan.Common {
 				}
 			}
 		}
-
+		
 		public double PipeHorizontal {
 			get { return this.pipeHorizontal; }
 			set { this.pipeHorizontal = value; }
@@ -327,7 +333,7 @@ namespace Europlan.Common {
 		public int NrOfRegisters {
 			get { return (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG ? (int)Math.Ceiling(((float)this.rohre) / 9.0) : (int)Math.Ceiling(((float)this.rohre) / 5.0)); }
 		}
-
+		
 		[XmlIgnore]
 		public int RegisterBreite {
 			get {
@@ -346,18 +352,18 @@ namespace Europlan.Common {
 			}
 		}
 
-		/*public Nullable<Point> Origin {
-			get { return this.origin; }
-			set { this.origin = value; }
-		}*/
-
+		//public Nullable<Point> Origin {
+		//	get { return this.origin; }
+		//	set { this.origin = value; }
+		//}
+		
 		[XmlIgnore]
 		public double Area {
 			get {
 				return ((double)this.RegisterBreite / 100.0) * ((double)this.RegisterHoehe / 100.0);
 			}
 		}
-
+		
 		public double Druckverlust(double durchfluss) {
 			//switch (this.modulType) {
 			//    case ModulTypeEnum.MODUL_100_40:
@@ -377,6 +383,45 @@ namespace Europlan.Common {
 			//}
 			// TODO
 			return 0;
+		}
+
+		private PlannedProduct product;
+		public PlannedProduct Product {
+			get { return this.product; }
+			set { this.product = value; }
+		}
+
+		private int heizkreis = 0;
+		/// <summary>
+		/// This property must not be used to initialize the register!
+		/// </summary>
+		[XmlIgnore]
+		public int Heizkreis {
+			get { return this.heizkreis; }
+			set {
+				if (this.Product != null) {
+					HithermCircuit hc;
+					if (this.heizkreis > 0) {
+						hc = this.product.Product.GetCircuit(this.heizkreis - 1) as HithermCircuit;
+						if (hc != null) {
+							hc.Registers.Remove(this);
+						}
+						this.heizkreis = 0;
+					}
+					hc = this.product.Product.GetCircuit(value - 1) as HithermCircuit;
+					if (hc != null) {
+						hc.Registers.Add(this);
+						this.heizkreis = value;
+					}
+				}
+			}
+		}
+
+		[XmlIgnore]
+		public Construction Construction {
+			// TODO
+			get { return null; }
+			set { }
 		}
 	}
 }

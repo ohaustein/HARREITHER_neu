@@ -12,6 +12,19 @@ namespace Europlan.Common {
 
 		public PlannedHithermProductPanel() {
 			InitializeComponent();
+
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_50_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_100_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_150_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_200_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_250_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_50_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_100_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_150_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_200_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_250_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
 		}
 
 		#region IEditorUserControl Members
@@ -35,7 +48,8 @@ namespace Europlan.Common {
 			//LAY_DISTANCE = 4096,
 			//RIM_TYPE = 8192,
 			//CALCULATION_TYPE = 16384,
-			CIRCUITS = 32768
+			CIRCUITS = 32768,
+			REGISTER = 65536,
 		}
 
 
@@ -46,7 +60,7 @@ namespace Europlan.Common {
 			this.tabs.SelectedTab = this.pageInput;
 			this.connectionPipePanel.Update(this.product);
 			if (this.product != null) {
-				(this.product.Product as ModulKlimaBodenProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errorMsg);
+				(this.product.Product as HithermProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errorMsg);
 			}
 			this.UpdateControl(FieldEnum.NONE);
 		}
@@ -65,6 +79,7 @@ namespace Europlan.Common {
 		private int ignoreRoomTemperatureBelowCool = 0;
 		private int ignoreCircuits = 0;
 		private int ignoreLengthVerbindungen = 0;
+		private int ignoreRegisters = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
@@ -82,7 +97,19 @@ namespace Europlan.Common {
 				ignoreRoomTemperatureBelowCool++;
 				ignoreCircuits++;
 				ignoreLengthVerbindungen++;
+				ignoreRegisters++;
 
+				HithermProduct hp = this.product.Product as HithermProduct;
+
+				if ((skipFields & FieldEnum.REGISTER) == FieldEnum.NONE) {
+					List<HithermRegister> allRegisters = new List<HithermRegister>();
+					foreach (HithermCircuit c in hp.PlannedCircuits) {
+						foreach (HithermRegister r in c.Registers) {
+							allRegisters.Add(r);
+						}
+					}
+					this.hithermRegisterBindingSource.DataSource = allRegisters;
+				}
 
 				if (this.errorMsg != null) {
 					this.lblError.Text = this.errorMsg;
@@ -105,6 +132,7 @@ namespace Europlan.Common {
 				ignoreRoomTemperatureBelowCool--;
 				ignoreCircuits--;
 				ignoreLengthVerbindungen--;
+				ignoreRegisters--;
 			}
 			// TODO
 		}
@@ -220,7 +248,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnFloorConstruction_Click(object sender, EventArgs e) {
-			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.FloorConstruction);
+			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.FloorConstruction, null);
 			form.SelectedConstruction = (this.product.Product as ModulKlimaBodenProduct).PlannedFloorConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
@@ -236,7 +264,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnInsulationConstruction_Click(object sender, EventArgs e) {
-			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.InsulationConstruction);
+			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.InsulationConstruction, null);
 			form.SelectedConstruction = (this.product.Product as ModulKlimaBodenProduct).PlannedInsulationConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
@@ -296,35 +324,6 @@ namespace Europlan.Common {
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
-		}
-
-		private void btnAddHk_Click(object sender, EventArgs e) {
-			this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
-			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-			this.UpdateControl(FieldEnum.NONE);
-			lstCircuits.SelectedIndex = lstCircuits.Items.Count - 1;
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
-			}
-		}
-
-		private void btnRemoveHk_Click(object sender, EventArgs e) {
-			if (lstCircuits.Items.Count > 1 && lstCircuits.SelectedIndex >= 0) {
-				this.product.Product.PlannedCircuits.RemoveAt(lstCircuits.SelectedIndex);
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.NONE);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-		}
-
-		private void lstCircuits_SelectedIndexChanged(object sender, EventArgs e) {
-			if (ignoreCircuits == 0) {
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.CIRCUITS);
-			}
-
 		}
 
 		private void btnConnectionPipes_Click(object sender, EventArgs e) {

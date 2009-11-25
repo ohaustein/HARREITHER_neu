@@ -570,6 +570,7 @@ namespace Europlan.Common {
 				double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
 				double rLambdaB = this.ConnectionThrough.Product.PlannedInsideConstructionRValue;
 				double rLambdaIns = this.ConnectionThrough.Product.PlannedOutsideConstructionRValue;
+				double factor = (this.ConnectionThrough.Product.PlannedInsideConstruction != null && (this.ConnectionThrough.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TROCKEN) || this.ConnectionThrough.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN))) ? 0.45 : 1;
 				double lambdaU = 1.2; /* Estrich??? */
 				double rAlphaDeckeFbh = 1 / EurovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
 
@@ -584,7 +585,7 @@ namespace Europlan.Common {
 				double vorlaufPotenzProdukt = EN1264.Instance.PotenzProduktFussbodenGeometrie(EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor);
 				double vorlaufSystemabhaengigerKoeffizient = EN1264.Instance.SystemabhaengigerKoeffizientGeometrie(6.7, EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor, EurovalProduct.ConfigSr, EurovalProduct.ConfigSr0, EurovalProduct.ConfigLambdaR, EurovalProduct.ConfigLambdaR0);
 				double vorlaufWaermedurchgangsKoeffizient = EN1264.Instance.WaermedurchgangsKoeffizientRohr(vorlaufSystemabhaengigerKoeffizient, vorlaufPotenzProdukt);
-				double vorlaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(vorlaufWaermedurchgangsKoeffizient, vorlaufHeizmitteluebertemperatur);
+				double vorlaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(vorlaufWaermedurchgangsKoeffizient, vorlaufHeizmitteluebertemperatur) * factor;
 				double vorlaufHeatLoad = vorlaufWaermestromDichte * this.vorlauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetLayDistance(this.verlegeart));
 				double vorlaufQU = EN1264.Instance.WaermeverlustUnten(EurovalProduct.ConfigAlphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, vorlaufWaermestromDichte, this.room.RoomHeatTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowHeat) * this.vorlauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetLayDistance(this.verlegeart));
 
@@ -592,7 +593,7 @@ namespace Europlan.Common {
 				double ruecklaufPotenzProdukt = EN1264.Instance.PotenzProduktFussbodenGeometrie(EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor);
 				double ruecklaufSystemabhaengigerKoeffizient = EN1264.Instance.SystemabhaengigerKoeffizientGeometrie(6.7, EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor, EurovalProduct.ConfigSr, EurovalProduct.ConfigSr0, EurovalProduct.ConfigLambdaR, EurovalProduct.ConfigLambdaR0);
 				double ruecklaufWaermedurchgangsKoeffizient = EN1264.Instance.WaermedurchgangsKoeffizientRohr(ruecklaufSystemabhaengigerKoeffizient, ruecklaufPotenzProdukt);
-				double ruecklaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(ruecklaufWaermedurchgangsKoeffizient, ruecklaufHeizmitteluebertemperatur);
+				double ruecklaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(ruecklaufWaermedurchgangsKoeffizient, ruecklaufHeizmitteluebertemperatur) * factor;
 				double ruecklaufHeatLoad = ruecklaufWaermestromDichte * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetLayDistance(this.verlegeart));
 				double ruecklaufQU = EN1264.Instance.WaermeverlustUnten(EurovalProduct.ConfigAlphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, ruecklaufWaermestromDichte, this.room.RoomHeatTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowHeat) * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetLayDistance(this.verlegeart));
 
