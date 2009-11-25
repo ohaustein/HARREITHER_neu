@@ -69,6 +69,7 @@ namespace Europlan.Common {
 			this.dgvRequiredMaterial.Name = "dgvRequiredMaterial";
 			this.dgvRequiredMaterial.RowHeadersVisible = false;
 			this.dgvRequiredMaterial.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.dgvRequiredMaterial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.dgvRequiredMaterial.Size = new System.Drawing.Size(695, 441);
 			this.dgvRequiredMaterial.TabIndex = 0;
 			this.dgvRequiredMaterial.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequiredMaterial_CellValueChanged);
@@ -111,6 +112,7 @@ namespace Europlan.Common {
 			// calculatedAmountDataGridViewTextBoxColumn
 			// 
 			this.calculatedAmountDataGridViewTextBoxColumn.DataPropertyName = "CalculatedAmount";
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
 			this.calculatedAmountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
 			this.calculatedAmountDataGridViewTextBoxColumn.HeaderText = "(berechnet)";
