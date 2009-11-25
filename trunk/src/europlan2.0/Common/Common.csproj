@@ -84,6 +84,9 @@
     <Compile Include="ConstructionEditor\ConstructionEditorGrid.Designer.cs">
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataGridViewGrouper.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DataGridViewNumericUpDownCell.cs" />
     <Compile Include="Controls\DataGridViewNumericUpDownColumn.cs" />
     <Compile Include="Controls\DataGridViewNumericUpDownEditingControl.cs">
@@ -180,6 +183,12 @@
     </Compile>
     <Compile Include="Products\LenghtAssistantForm.Designer.cs">
       <DependentUpon>LenghtAssistantForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\RequiredMaterialGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\RequiredMaterialGrid.Designer.cs">
+      <DependentUpon>RequiredMaterialGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\RequiredMaterialPanel.cs">
       <SubType>UserControl</SubType>
@@ -357,6 +366,7 @@
       <DependentUpon>SystemParametersPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\Wrapper\RegulatorCircuitWrapper.cs" />
+    <Compile Include="Project\Wrapper\RequiredMaterialWrapper.cs" />
     <Compile Include="Project\Wrapper\RoomOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\VerlegedatenCircuitWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -418,6 +428,10 @@
     <EmbeddedResource Include="Products\LenghtAssistantForm.resx">
       <DependentUpon>LenghtAssistantForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\RequiredMaterialGrid.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RequiredMaterialGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\RequiredMaterialPanel.resx">
       <SubType>Designer</SubType>
@@ -532,6 +546,7 @@
     <None Include="Properties\DataSources\IQuickDimensioningSummary.datasource" />
     <None Include="Properties\DataSources\KlimaFlaechenModul.datasource" />
     <None Include="Properties\DataSources\QuickDimensioningRoomDistributorsWrapper.datasource" />
+    <None Include="Properties\DataSources\RequiredMaterialWrapper.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\DataSources\RoomType.datasource" />
   </ItemGroup>
