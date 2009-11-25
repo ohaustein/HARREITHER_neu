@@ -54,6 +54,7 @@ namespace Europlan.Common {
 		List<RegulatorCircuit> regulatorCircuits;
 		private Configuration configuration = null;
 		private QuickDimensioning quickDimensioning = null;
+		private SerializableDictionary<string, double> requiredMaterialOverrides;
 
 		protected Project() {
 			log.Debug("default constructor called");
@@ -105,6 +106,8 @@ namespace Europlan.Common {
 			floors = new FloorList();
 			regulatorCircuits = new List<RegulatorCircuit>();
 			quickDimensioning = new QuickDimensioning();
+
+			requiredMaterialOverrides = new SerializableDictionary<string, double>();
 
 			configuration = Configuration.AdminTemplate + Configuration.UserTemplate;
 			configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
@@ -235,6 +238,11 @@ namespace Europlan.Common {
 		public QuickDimensioning QuickDimensioning {
 			get { return quickDimensioning; }
 			set { quickDimensioning = value; }
+		}
+
+		public SerializableDictionary<string, double> RequiredMaterialOverrides {
+			get { return requiredMaterialOverrides; }
+			set { requiredMaterialOverrides = value; }
 		}
 
 		/*public void SetFloors(List<Floor> floors) {

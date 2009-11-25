@@ -24,9 +24,31 @@ namespace Europlan.Common {
 			get { return 0; }
 		}
 
-		public double RequiredAmount {
-			get { return 0; }
-			set { }
+		public Nullable<double> RequiredAmount {
+			get {
+				if (Project.Instance != null) {
+					if (Project.Instance.RequiredMaterialOverrides.ContainsKey(material.Id)) {
+						return Project.Instance.RequiredMaterialOverrides[material.Id];
+					}
+				}
+				return null; 
+			}
+			set {
+				if (Project.Instance != null) {
+					if (Project.Instance.RequiredMaterialOverrides.ContainsKey(material.Id)) {
+						if (value != null) {
+							Project.Instance.RequiredMaterialOverrides[material.Id] = (double)value;
+						} else {
+							Project.Instance.RequiredMaterialOverrides.Remove(material.Id);
+						}
+					} else {
+						if (value != null) {
+							Project.Instance.RequiredMaterialOverrides.Add(material.Id, (double)value);
+						}
+					}
+				}
+
+			}
 		}
 
 		public string Unit {
