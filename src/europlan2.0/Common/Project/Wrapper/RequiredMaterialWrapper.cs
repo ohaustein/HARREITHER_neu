@@ -21,7 +21,12 @@ namespace Europlan.Common {
 		}
 
 		public double CalculatedAmount {
-			get { return 0; }
+			get {
+				if (Project.Instance.RequiredMaterialCalculated.ContainsKey(material.Id)) {
+					return Project.Instance.RequiredMaterialCalculated[material.Id];
+				}
+				return 0; 
+			}
 		}
 
 		public Nullable<double> RequiredAmount {

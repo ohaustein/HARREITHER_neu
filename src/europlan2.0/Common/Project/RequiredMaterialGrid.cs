@@ -32,14 +32,19 @@ namespace Europlan.Common {
 				foreach (Category category in Project.Instance.Config.Categories) {
 					if (category.Type == this.type) {
 						foreach (Material material in category.Materials) {
-							//TODO: check calculated required amount, ...
 							wrapper = new RequiredMaterialWrapper(material);
 							wrapperList.Add(wrapper);
 						}
 					}
 				}
 			}
-			wrapperList.Sort(delegate (RequiredMaterialWrapper w1, RequiredMaterialWrapper w2) { return w1.Category.Order.CompareTo(w2.Category.Order); });
+			wrapperList.Sort(delegate (RequiredMaterialWrapper w1, RequiredMaterialWrapper w2) {
+				if (w1.Category.Order.CompareTo(w2.Category.Order) == 0) {
+					return w1.PartNumber.CompareTo(w2.PartNumber);
+				} else {
+					return w1.Category.Order.CompareTo(w2.Category.Order);
+				}
+			});
 			requiredMaterialWrapperBindingSource.DataSource = wrapperList;
 			requiredMaterialWrapperBindingSource.ResetBindings(false);
 			if (grouper == null) {

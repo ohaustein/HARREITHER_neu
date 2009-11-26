@@ -12,7 +12,7 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(ModulKlimaBodenProduct))]
 	[XmlInclude(typeof(ModulKlimaDeckeProduct))]
 	[Serializable()]
-	public abstract class Product {
+	public abstract class Product : IRequiredMaterial {
 
 		public static readonly double rundrohr21mmAussenD = 0.021;
 		public static readonly double rundrohr21mmInnenD = 0.0162;
@@ -725,5 +725,9 @@ namespace Europlan.Common {
 			get { return this.plannedRoomTemperatureBelowCool; }
 			set { this.plannedRoomTemperatureBelowCool = value; }
 		}
+
+
+		public abstract void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial);
+
 	}
 }

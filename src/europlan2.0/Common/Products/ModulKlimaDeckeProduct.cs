@@ -608,6 +608,10 @@ namespace Europlan.Common {
 		public override Construction PlannedOutsideConstruction {
 			get { return this.plannedInsulationConstruction; }
 		}
+
+		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			
+		}
 	}
 	
 }
