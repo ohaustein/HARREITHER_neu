@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace Europlan.Common {
 
 	[Serializable()]
-	public class Distributor : IGuiRepresentation {
+	public class Distributor : IGuiRepresentation, IRequiredMaterial {
 
 #region enums
 
@@ -356,6 +356,11 @@ namespace Europlan.Common {
 				return products;
 			}
 		}
+
+		public void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			
+		}
+
 	}
 
 }
