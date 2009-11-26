@@ -19,8 +19,9 @@ namespace Europlan.Common {
 			InitializeComponent();
 			UpdateControl();
 		}
-		
+
 		public void UpdateControl() {
+			Project.Instance.CalculateRequiredMaterial();
 			requiredMaterialGridFloor.UpdateControl();
 			requiredMaterialGridWall.UpdateControl();
 			requiredMaterialGridCeiling.UpdateControl();
