@@ -10,8 +10,11 @@ namespace Europlan.Common {
 
 	public delegate void RequiredMaterialGridContentChangedHandler(object sender);
 
-	public partial class RequiredMaterialGrid : UserControl {
+	public partial class RequiredMaterialGrid : UserControl, IEditorUserControl {
 
+		public event ProjectStructureChangedHandler ProjectStructureChanged;
+		public event ProjectChangedHandler ProjectChanged;
+		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 		public event RequiredMaterialGridContentChangedHandler GridContentChanged;
 
 		private CategoryType type;
@@ -21,7 +24,7 @@ namespace Europlan.Common {
 			UpdateControl();
 		}
 
-		private void UpdateControl() {
+		public void UpdateControl() {
 			List<RequiredMaterialWrapper> wrapperList = new List<RequiredMaterialWrapper>();
 			RequiredMaterialWrapper wrapper = null;
 			if (Project.Instance != null) {
@@ -43,6 +46,10 @@ namespace Europlan.Common {
 			if (wrapperList.Count > 0) {
 				dgvRequiredMaterial.CurrentCell = dgvRequiredMaterial[1, 1];
 			}
+		}
+
+		public bool AllowLeave() {
+			return true;
 		}
 		
 		public CategoryType CategoryType {
@@ -71,6 +78,7 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
 	}
 
 }
