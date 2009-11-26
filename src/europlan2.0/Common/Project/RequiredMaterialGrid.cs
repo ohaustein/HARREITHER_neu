@@ -18,6 +18,7 @@ namespace Europlan.Common {
 		public event RequiredMaterialGridContentChangedHandler GridContentChanged;
 
 		private CategoryType type;
+		private DataGridViewGrouper grouper = null;
 
 		public RequiredMaterialGrid() {
 			InitializeComponent();
@@ -38,11 +39,15 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			wrapperList.Sort(delegate (RequiredMaterialWrapper w1, RequiredMaterialWrapper w2) { return w1.Category.Order.CompareTo(w2.Category.Order); });
 			requiredMaterialWrapperBindingSource.DataSource = wrapperList;
 			requiredMaterialWrapperBindingSource.ResetBindings(false);
-			DataGridViewGrouper grouper = new DataGridViewGrouper(dgvRequiredMaterial);
-			grouper.SetGroupOn("Category");
-			grouper.ShowCount = false;
+			if (grouper == null) {
+				grouper = new DataGridViewGrouper(dgvRequiredMaterial);
+				grouper.SetGroupOn("Category");
+				grouper.ShowCount = false;
+				grouper.SortOrder = SortOrder.None;
+			}
 			if (wrapperList.Count > 0) {
 				dgvRequiredMaterial.CurrentCell = dgvRequiredMaterial[1, 1];
 			}
@@ -54,10 +59,7 @@ namespace Europlan.Common {
 		
 		public CategoryType CategoryType {
 			get { return type; }
-			set { 
-				type = value;
-				UpdateControl();
-			}
+			set { type = value;	}
 		}
 
 		private void dgvRequiredMaterial_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
