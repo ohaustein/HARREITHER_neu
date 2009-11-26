@@ -21,7 +21,12 @@ namespace Europlan.Common {
 		}
 		
 		public void UpdateControl() {
-			
+			requiredMaterialGridFloor.UpdateControl();
+			requiredMaterialGridWall.UpdateControl();
+			requiredMaterialGridCeiling.UpdateControl();
+			requiredMaterialGridDistributor.UpdateControl();
+			requiredMaterialGridInsulation.UpdateControl();
+			requiredMaterialGridGeneral.UpdateControl();
 		}
 
 		public bool AllowLeave() {
