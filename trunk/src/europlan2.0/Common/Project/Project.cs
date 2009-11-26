@@ -55,6 +55,7 @@ namespace Europlan.Common {
 		private Configuration configuration = null;
 		private QuickDimensioning quickDimensioning = null;
 		private SerializableDictionary<string, double> requiredMaterialOverrides;
+		private SerializableDictionary<string, double> requiredMaterialCalculated;
 
 		protected Project() {
 			log.Debug("default constructor called");
@@ -108,6 +109,7 @@ namespace Europlan.Common {
 			quickDimensioning = new QuickDimensioning();
 
 			requiredMaterialOverrides = new SerializableDictionary<string, double>();
+			requiredMaterialCalculated = new SerializableDictionary<string, double>();
 
 			configuration = Configuration.AdminTemplate + Configuration.UserTemplate;
 			configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
@@ -242,8 +244,13 @@ namespace Europlan.Common {
 
 		public SerializableDictionary<string, double> RequiredMaterialOverrides {
 			get { return requiredMaterialOverrides; }
-			set { requiredMaterialOverrides = value; }
 		}
+
+		[XmlIgnore]
+		public SerializableDictionary<string, double> RequiredMaterialCalculated {
+			get { return requiredMaterialCalculated; }
+			set { requiredMaterialCalculated = value; }
+		}		
 
 		/*public void SetFloors(List<Floor> floors) {
 			this.floors.Clear();
@@ -441,5 +448,21 @@ namespace Europlan.Common {
 			return null;
 		}
 
+
+		public void CalculateRequiredMaterial() {
+			requiredMaterialCalculated = new SerializableDictionary<string, double>();
+			foreach (Floor floor in this.floors) {
+				// distributors
+				foreach (Distributor distributor in floor.Distributors) {
+					distributor.
+				}
+				foreach (Room room in floor.Rooms) {
+					// products
+					foreach (PlannedProduct product in room.PlannedProducts) {
+
+					}
+				}
+			}
+		}
 	}
 }
