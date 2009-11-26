@@ -454,7 +454,7 @@ namespace Europlan.Common {
 			foreach (Floor floor in this.floors) {
 				// distributors
 				foreach (Distributor distributor in floor.Distributors) {
-					distributor.
+					//distributor.
 				}
 				foreach (Room room in floor.Rooms) {
 					// products

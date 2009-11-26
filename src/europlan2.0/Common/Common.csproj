@@ -115,6 +115,7 @@
     <Compile Include="Interfaces\IClipboard.cs" />
     <Compile Include="Interfaces\IEditorUserControl.cs" />
     <Compile Include="Interfaces\IGuiRepresentation.cs" />
+    <Compile Include="Interfaces\IRequiredMaterial.cs" />
     <Compile Include="Licensing\AbstractLicense.cs" />
     <Compile Include="Licensing\AbstractLicensedSystem.cs" />
     <Compile Include="Licensing\AbstractLicensedModule.cs" />
