@@ -782,6 +782,10 @@ namespace Europlan.Common {
 				return value;
 			}
 		}
+
+		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			
+		}
 	}
 	
 }

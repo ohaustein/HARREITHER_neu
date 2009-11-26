@@ -357,8 +357,34 @@ namespace Europlan.Common {
 			}
 		}
 
+		public int PlannedCircuits {
+			get {
+				int plannedCircuits = 0;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						foreach (PlannedProduct pp in room.PlannedProducts) {
+							if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.DistributorId == this.Id) {
+								plannedCircuits += pp.Product.PlannedCircuitCount;
+							}
+						}
+					}
+				}
+				return plannedCircuits;
+			}
+		}
+
 		public void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-			
+			string partNr = "VO";
+			int circuits = PlannedCircuits > 2 ? PlannedCircuits : 2;
+			partNr += String.Format("{0:00}", circuits);
+			Material material = Project.Instance.Config.Materials.Find(delegate(Material m) { return m.PartNumber == partNr; });
+			if (material != null) {
+				if (requiredMaterial.ContainsKey(material.Id)) {
+					requiredMaterial[material.Id]++;
+				} else {
+					requiredMaterial.Add(material.Id, 1);
+				}
+			}
 		}
 
 	}

@@ -98,16 +98,7 @@ namespace Europlan.Common {
 		}
 
 		private void UpdateCircuitsLabel() {
-			int plannedCircuits = 0;
-			foreach (Floor floor in Project.Instance.Floors) {
-				foreach (Room room in floor.Rooms) {
-					foreach (PlannedProduct pp in room.PlannedProducts) {
-						if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.DistributorId == this.distributor.Id) {
-							plannedCircuits += pp.Product.PlannedCircuitCount;
-						}
-					}
-				}
-			}
+			int plannedCircuits = this.distributor.PlannedCircuits;			
 			lblCircuits.Text = plannedCircuits + " (aktiv)";
 			if (numAdditionalCircuits.Value > 0) {
 				lblCircuits.Text += " + " + numAdditionalCircuits.Value + " (zus.) = " + (plannedCircuits + numAdditionalCircuits.Value);

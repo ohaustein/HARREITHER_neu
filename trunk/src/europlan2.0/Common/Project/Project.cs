@@ -244,6 +244,7 @@ namespace Europlan.Common {
 
 		public SerializableDictionary<string, double> RequiredMaterialOverrides {
 			get { return requiredMaterialOverrides; }
+			set { requiredMaterialOverrides = value; }
 		}
 
 		[XmlIgnore]
@@ -454,12 +455,12 @@ namespace Europlan.Common {
 			foreach (Floor floor in this.floors) {
 				// distributors
 				foreach (Distributor distributor in floor.Distributors) {
-					//distributor.
+					distributor.CalculateRequiredMaterial(requiredMaterialCalculated);
 				}
 				foreach (Room room in floor.Rooms) {
 					// products
 					foreach (PlannedProduct product in room.PlannedProducts) {
-
+						product.Product.CalculateRequiredMaterial(requiredMaterialCalculated);
 					}
 				}
 			}
