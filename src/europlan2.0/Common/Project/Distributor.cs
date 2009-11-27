@@ -377,14 +377,7 @@ namespace Europlan.Common {
 			string partNr = "VO";
 			int circuits = PlannedCircuits > 2 ? PlannedCircuits : 2;
 			partNr += String.Format("{0:00}", circuits);
-			Material material = Project.Instance.Config.Materials.Find(delegate(Material m) { return m.PartNumber == partNr; });
-			if (material != null) {
-				if (requiredMaterial.ContainsKey(material.Id)) {
-					requiredMaterial[material.Id]++;
-				} else {
-					requiredMaterial.Add(material.Id, 1);
-				}
-			}
+			Project.Instance.AddRequiredMaterial(requiredMaterial, partNr, 1);
 		}
 
 	}

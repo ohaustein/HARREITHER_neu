@@ -465,5 +465,16 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		public void AddRequiredMaterial(SerializableDictionary<string, double> requiredMaterial, string partNumber, double amount) {
+			Material material = this.Config.Materials.Find(delegate(Material m) { return m.PartNumber == partNumber; });
+			if (material != null) {
+				if (requiredMaterial.ContainsKey(material.Id)) {
+					requiredMaterial[material.Id] += amount;
+				} else {
+					requiredMaterial.Add(material.Id, amount);
+				}
+			}
+		}
 	}
 }

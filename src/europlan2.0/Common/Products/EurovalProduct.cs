@@ -85,7 +85,7 @@ namespace Europlan.Common {
 			return -1;
 		}*/
 
-		private bool clipSchiene = false;
+		private bool clipSchieneKlebeband = false;
 		private bool anhydritEstrich = false;
 
 		public class LayDistanceConverter : System.ComponentModel.TypeConverter {
@@ -494,6 +494,38 @@ namespace Europlan.Common {
 		}
 
 		/// <summary>
+		/// Returns the number of clipschiene in m per m² for the specified laydistance and estrich
+		/// </summary>
+		public static double GetClipschienePerSqm(LayDistance distance, bool anhydritEstrich) {
+			if (anhydritEstrich) {
+				return 2;
+			} else {
+				switch (distance) {
+					case LayDistance.A5:
+						return 2;
+					case LayDistance.EV5:
+						return 1.8;
+					case LayDistance.EV10:
+						return 1.6;
+					case LayDistance.EV15:
+						return 1.5;
+					case LayDistance.EV20:
+						return 1.4;
+					case LayDistance.EV25:
+						return 1.3;
+					case LayDistance.EV30:
+						return 1.2;
+					case LayDistance.EV35:
+						return 1.2;
+					case LayDistance.NONE:
+						return 0;
+					default:
+						throw new Exception("Unknown Laydistance");
+				}
+			}
+		}
+
+		/// <summary>
 		/// Returns distance between two pipes in m for specified laydistance 
 		/// </summary>
 		public static double GetTeilung(LayDistance distance) {
@@ -570,9 +602,9 @@ namespace Europlan.Common {
 			}
 		}
 
-		public bool UseClipSchiene {
-			get { return clipSchiene; }
-			set { clipSchiene = value; }
+		public bool UseClipSchieneKlebeband {
+			get { return clipSchieneKlebeband; }
+			set { clipSchieneKlebeband = value; }
 		}
 
 		public bool UseAnhydritEstrich {
@@ -1634,7 +1666,28 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			//double azLength = this.PlannedAreaResidence * GetPipeLengthPerSqm(this.PlannedLayDistance);
+			//double rzLength = 0;
+			//if (this.PlannedRimType != null) {
+			//    rzLength = this.PlannedAreaRim * GetPipeLengthPerSqm(GetRimLayDistance(this.PlannedRimType));
+			//}
+			double length = 0;
+			foreach (EurovalCircuit c in this.circuits) {
+				length += c.PipeLengthWithoutOtherProduct;
+			}
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", length);
 
+			double totalArea = this.PlannedAreaResidence + this.PlannedAreaRim;
+
+			string clipschiene = clipSchieneKlebeband ? "EV16" : "EV15";
+			double amount = 0;
+			if (this.PlannedLayDistance.HasValue) {
+				amount += this.PlannedAreaResidence * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
+			}
+			if (this.PlannedRimType.HasValue) {
+				amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
+			}
+			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
 		}
 	}
 }
