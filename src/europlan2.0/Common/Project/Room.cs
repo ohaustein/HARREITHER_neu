@@ -530,7 +530,7 @@ namespace Europlan.Common {
 			}
 			foreach (Product p in this.usedProductsForQuickDimensioning) {
 				p.AssociatedRoom = this;
-				p.FinalizeLoading();
+				p.FinalizeLoading(null);
 			}
 		}
 

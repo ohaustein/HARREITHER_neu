@@ -428,7 +428,7 @@ namespace Europlan.Common {
 		#endregion
 
 		internal void FinalizeLoading() {
-			this.plannedProduct.FinalizeLoading();
+			this.plannedProduct.FinalizeLoading(this);
 			string errorMsg;
 
 			List<PlannedProduct> products = this.plannedProduct.AssociatedRoom.PlannedProducts;

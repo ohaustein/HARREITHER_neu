@@ -276,6 +276,11 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public bool IsHochleistungsRegister {
+			get { return this.registerType == RegisterTypeEnum.HIT_50_5 || this.registerType == RegisterTypeEnum.HIT_100_5 || this.registerType == RegisterTypeEnum.HIT_150_5 || this.registerType == RegisterTypeEnum.HIT_200_5 || this.registerType == RegisterTypeEnum.HIT_250_5 || this.registerType == RegisterTypeEnum.HIT_300_5; }
+		}
+
+		[XmlIgnore]
 		public RohrabstandEnum Rohrabstand {
 			get { return GetRohrabstandForRegisterType(this.registerType); }
 		}
@@ -326,7 +331,15 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double EquivalentPipeLength {
-			get { return this.Area * 10 + this.pipeVertical + this.pipeHorizontal; }
+			get { return this.EquivalentPipeLengthUnisolated + this.pipeVertical + this.pipeHorizontal; }
+		}
+
+		[XmlIgnore]
+		public double EquivalentPipeLengthUnisolated {
+			get {
+				return this.Area * 10;
+				// TODO confirm
+			}
 		}
 
 		[XmlIgnore]
@@ -345,7 +358,7 @@ namespace Europlan.Common {
 			}
 			set {
 				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
-					this.Rohre = 9 * value / 50;
+					this.Rohre = 9 * (value + 5) / 50;
 				} else {
 					this.Rohre = value / 10;
 				}
@@ -363,40 +376,46 @@ namespace Europlan.Common {
 				return ((double)this.RegisterBreite / 100.0) * ((double)this.RegisterHoehe / 100.0);
 			}
 		}
-		
+
+		public double Heizleistung(double heizmittelTemp, double roomTemp, double faktor) {
+			return EN1264.Instance.WaermestromDichteRegister(heizmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegHeizleistung : HithermProduct.ConfigStdRegHeizleistung, faktor) * this.Area;
+		}
+
 		public double Druckverlust(double durchfluss) {
-			//switch (this.modulType) {
-			//    case ModulTypeEnum.MODUL_100_40:
-			//        return EN1264.Instance.DruckverlustModul_100_40(1, durchfluss);
-
-			//    case ModulTypeEnum.MODUL_80_30:
-			//        return EN1264.Instance.DruckverlustModul_80_30(1, durchfluss);
-
-			//    case ModulTypeEnum.MODUL_100_30:
-			//        return EN1264.Instance.DruckverlustModul_100_30(1, durchfluss);
-
-			//    case ModulTypeEnum.MODUL_120_30:
-			//        return EN1264.Instance.DruckverlustModul_120_30(1, durchfluss);
-
-			//    default:
-			//        return 0;
-			//}
-			// TODO
-			return 0;
+			return EN1264.Instance.DruckverlustRegister(this.registerType, this.RegisterBreite, durchfluss) +
+				EN1264.Instance.DruckverlustRohr(durchfluss, HithermProduct.ConfigVerbindeLeitungInnenquerschnitt, HithermProduct.ConfigRho, HithermProduct.ConfigVerbindeLeitungInnendurchmesser, HithermProduct.ConfigV, 0.000004, this.PipeVertical + this.PipeHorizontal);
 		}
 
 		private PlannedProduct product;
+		[XmlIgnore]
 		public PlannedProduct PlannedProduct {
 			get { return this.product; }
 			set { this.product = value; }
 		}
 
-		private int heizkreis = 0;
+		private int tmpHeizkreis = 0;
 		[XmlIgnore]
 		public int Heizkreis {
-			get { return this.heizkreis; }
+			get {
+				if (this.product != null && this.product.Product is HithermProduct) {
+					int rtn = (this.product.Product as HithermProduct).GetRegisterCircuitId(this);
+					if (rtn > 0) {
+						return rtn;
+					} else {
+						return tmpHeizkreis;
+					}
+				}
+				return tmpHeizkreis;
+			}
 			set {
-				if (this.product != null) {
+				if (this.product != null && this.product.Product is HithermProduct) {
+					if ((this.product.Product as HithermProduct).GetRegisterCircuitId(this) == 0) {
+						this.tmpHeizkreis = value;
+					} else {
+						(this.product.Product as HithermProduct).MoveRegisterToCircuit(this, value);
+					}
+				}
+				/*if (this.product != null) {
 					HithermCircuit hc;
 					if (this.heizkreis > 0) {
 						hc = this.product.Product.GetCircuit(this.heizkreis - 1) as HithermCircuit;
@@ -410,7 +429,7 @@ namespace Europlan.Common {
 						hc.Registers.Add(this);
 						this.heizkreis = value;
 					}
-				}
+				}*/
 			}
 		}
 
