@@ -76,6 +76,7 @@ namespace Europlan.Common {
 			List<EurovalWrapper> eurovalAuslegungWrapper = GetEurovalWrapper();
 			List<BilanzWrapper> eurovalBilanzWrapper = GetEurovalBilanzWrapper();
 			List<VerlegedatenCircuitWrapper> verlegedatenCircuitWrapper = GetVerlegedatenCircuitWrapper();
+			List<RequiredMaterialWrapper> requiredMaterialWrapper = GetRequiredMaterialWrapper();
 
 			DataTable projektBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
@@ -89,6 +90,7 @@ namespace Europlan.Common {
 			DataTable eurovalAuslegung = ReportHelper.ListToDataTable<EurovalWrapper>(eurovalAuslegungWrapper);
 			DataTable eurovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(eurovalBilanzWrapper);
 			DataTable verlegedatenCircuit = ReportHelper.ListToDataTable<VerlegedatenCircuitWrapper>(verlegedatenCircuitWrapper);
+			DataTable requiredMaterial = ReportHelper.ListToDataTable<RequiredMaterialWrapper>(requiredMaterialWrapper);
 
 			projektBilanz.TableName = "ProjektBilanz";
 			projectWarnings.TableName = "ProjectWarnings";
@@ -102,6 +104,7 @@ namespace Europlan.Common {
 			eurovalAuslegung.TableName = "EurovalAuslegung";
 			eurovalBilanz.TableName = "EurovalBilanz";
 			verlegedatenCircuit.TableName = "VerlegedatenCircuit";
+			requiredMaterial.TableName = "RequiredMaterial";
 
 			reportData.Tables.Add(projektBilanz);
 			reportData.Tables.Add(projectWarnings);
@@ -115,6 +118,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(eurovalAuslegung);
 			reportData.Tables.Add(eurovalBilanz);
 			reportData.Tables.Add(verlegedatenCircuit);
+			reportData.Tables.Add(requiredMaterial);
 
 			listLabel1.DataSource = reportData;
 
@@ -157,6 +161,8 @@ namespace Europlan.Common {
 			listLabel1.Variables.Add("@Auslegung", reportOptions.Auslegung);
 			listLabel1.Variables.Add("@AuslegungBilanz", reportOptions.AuslegungBilanz);
 			listLabel1.Variables.Add("@Verlegedaten", reportOptions.Verlegedaten);
+			listLabel1.Variables.Add("@RequiredMaterial", reportOptions.RequiredMaterial);
+			listLabel1.Variables.Add("@RecommendedMaterial", reportOptions.RecommendedMaterial);
 
 #if DEBUG
 			if (MessageBox.Show("Designer?", "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
@@ -690,6 +696,27 @@ namespace Europlan.Common {
 				}
 			}
 
+			return wrapperList;
+		}
+
+		public List<RequiredMaterialWrapper> GetRequiredMaterialWrapper() {
+			List<RequiredMaterialWrapper> wrapperList = new List<RequiredMaterialWrapper>();
+			RequiredMaterialWrapper wrapper = null;
+			foreach (Category category in Project.Instance.Config.Categories) {
+				foreach (Material material in category.Materials) {
+					wrapper = new RequiredMaterialWrapper(material);
+					if ((wrapper.RecommendedAmount.HasValue) && wrapper.RequiredAmount.HasValue) {
+						wrapperList.Add(wrapper);
+					}
+				}
+			}
+			wrapperList.Sort(delegate(RequiredMaterialWrapper w1, RequiredMaterialWrapper w2) {
+				if (w1.Category.Order.CompareTo(w2.Category.Order) == 0) {
+					return w1.PartNumber.CompareTo(w2.PartNumber);
+				} else {
+					return w1.Category.Order.CompareTo(w2.Category.Order);
+				}
+			});
 			return wrapperList;
 		}
 

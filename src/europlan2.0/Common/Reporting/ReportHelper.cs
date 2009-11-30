@@ -11,7 +11,13 @@ namespace Europlan.Common {
 			DataTable dt = new DataTable();
 
 			foreach (PropertyInfo info in typeof(T).GetProperties()) {
-				dt.Columns.Add(new DataColumn(info.Name, info.PropertyType));
+				Type colType = info.PropertyType;
+				if ((info.PropertyType.IsGenericType)/* && ((info.PropertyType) == typeof(Nullable<>))*/) {
+					colType = colType.GetGenericArguments()[0];
+				}
+				dt.Columns.Add(new DataColumn(info.Name, colType));
+
+				//dt.Columns.Add(new DataColumn(info.Name, info.PropertyType));
 			}
 			foreach (T t in list) {
 				DataRow row = dt.NewRow();
