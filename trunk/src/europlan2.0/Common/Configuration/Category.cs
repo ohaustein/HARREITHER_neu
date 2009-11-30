@@ -5,6 +5,46 @@ using System.Xml.Serialization;
 
 namespace Europlan.Common {
 
+	public class CategoryTypeEnumConverter : System.ComponentModel.TypeConverter {
+		//private static readonly string euroval = "Euroval FBH 24/17";
+		//private static readonly string rundrohr = "21mm Rundrohr";
+
+		private Dictionary<string, CategoryType> mappingFromString = new Dictionary<string, CategoryType>();
+		private Dictionary<CategoryType, string> mappingToString = new Dictionary<CategoryType, string>();
+
+		public CategoryTypeEnumConverter() {
+			//mappingFromString.Add(euroval, CategoryType.PT_EUROVAL);
+			//mappingToString.Add(CategoryType.PT_EUROVAL, euroval);
+		}
+
+		public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
+			return sourceType == typeof(string);
+		}
+
+		public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
+			return destinationType == typeof(string);
+		}
+
+		public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+			if (value is string) {
+				if (mappingFromString.ContainsKey((string)value)) {
+					return mappingFromString[(string)value];
+				}
+			}
+			return base.ConvertFrom(context, culture, value);
+		}
+
+		public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+			if (value is CategoryType && destinationType == typeof(string)) {
+				if (mappingToString.ContainsKey((CategoryType)value)) {
+					return mappingToString[(CategoryType)value];
+				}
+			}
+			return base.ConvertTo(context, culture, value, destinationType);
+		}
+	}
+
+	//[System.ComponentModel.TypeConverter(typeof(CategoryTypeEnumConverter))]
 	public enum CategoryType {
 		Floor,
 		Wall,

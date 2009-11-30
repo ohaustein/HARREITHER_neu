@@ -171,6 +171,66 @@
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="chkRecommendedMaterial.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkRecommendedMaterial.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkRecommendedMaterial.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 52</value>
+  </data>
+  <data name="chkRecommendedMaterial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 17</value>
+  </data>
+  <data name="chkRecommendedMaterial.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="chkRecommendedMaterial.Text" xml:space="preserve">
+    <value>Bestellvorschlag</value>
+  </data>
+  <data name="&gt;&gt;chkRecommendedMaterial.Name" xml:space="preserve">
+    <value>chkRecommendedMaterial</value>
+  </data>
+  <data name="&gt;&gt;chkRecommendedMaterial.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkRecommendedMaterial.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;chkRecommendedMaterial.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkRequiredMaterial.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkRequiredMaterial.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkRequiredMaterial.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 29</value>
+  </data>
+  <data name="chkRequiredMaterial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 17</value>
+  </data>
+  <data name="chkRequiredMaterial.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="chkRequiredMaterial.Text" xml:space="preserve">
+    <value>Materialbedarf</value>
+  </data>
+  <data name="&gt;&gt;chkRequiredMaterial.Name" xml:space="preserve">
+    <value>chkRequiredMaterial</value>
+  </data>
+  <data name="&gt;&gt;chkRequiredMaterial.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkRequiredMaterial.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;chkRequiredMaterial.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="chkVerlegedaten.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -199,7 +259,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;chkVerlegedaten.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="chkAuslegungBilanz.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -229,7 +289,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;chkAuslegungBilanz.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="chkAuslegung.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -259,7 +319,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;chkAuslegung.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="chkAreaOverview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -289,7 +349,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;chkAreaOverview.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="chkProjectOverview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -316,7 +376,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;chkProjectOverview.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>

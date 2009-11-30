@@ -15,6 +15,9 @@ namespace Europlan.Common {
 		private bool auslegung;
 		private bool auslegungBilanz;
 		private bool verlegedaten;
+		private bool requiredMaterial;
+		private bool recommendedMaterial;
+
 
 		public ProjectReportOptions() {
 			InitializeComponent();
@@ -28,6 +31,8 @@ namespace Europlan.Common {
 			this.auslegung = settings.GetSetting("Auslegung", true);
 			this.auslegungBilanz = settings.GetSetting("AuslegungBilanz", true);
 			this.verlegedaten = settings.GetSetting("Verlegedaten", true);
+			this.requiredMaterial = settings.GetSetting("RequiredMaterial", true);
+			this.recommendedMaterial = settings.GetSetting("RecommendedMaterial", true);
 
 			this.chkProjectOverview.Checked = this.projectOverview;
 			this.chkAreaOverview.Enabled = this.projectOverview;
@@ -36,6 +41,8 @@ namespace Europlan.Common {
 			this.chkAuslegungBilanz.Enabled = this.auslegung;
 			this.chkAuslegungBilanz.Checked = this.auslegungBilanz;
 			this.chkVerlegedaten.Checked = this.verlegedaten;
+			this.chkRequiredMaterial.Checked = this.requiredMaterial;
+			this.chkRecommendedMaterial.Checked = this.recommendedMaterial;
 		}
 
 		private void ProjectReportOptions_FormClosing(object sender, FormClosingEventArgs e) {
@@ -46,6 +53,8 @@ namespace Europlan.Common {
 			settings.StoreSetting("Auslegung", this.auslegung);
 			settings.StoreSetting("AuslegungBilanz", this.auslegungBilanz);
 			settings.StoreSetting("Verlegedaten", this.verlegedaten);
+			settings.StoreSetting("RequiredMaterial", this.requiredMaterial);
+			settings.StoreSetting("RecommendedMaterial", this.recommendedMaterial);
 			SettingsFile.Update();
 		}
 
@@ -72,6 +81,14 @@ namespace Europlan.Common {
 			this.verlegedaten = this.chkVerlegedaten.Checked;
 		}
 
+		private void chkRequiredMaterial_CheckedChanged(object sender, EventArgs e) {
+			this.requiredMaterial = this.chkRequiredMaterial.Checked;
+		}
+
+		private void chkRecommendedMaterial_CheckedChanged(object sender, EventArgs e) {
+			this.recommendedMaterial = this.chkRecommendedMaterial.Checked;
+		}
+
 		public bool ProjectOverview {
 			get { return projectOverview; }
 			set { projectOverview = value; }
@@ -96,6 +113,17 @@ namespace Europlan.Common {
 			get { return verlegedaten; }
 			set { verlegedaten = value; }
 		}
+		
+		public bool RequiredMaterial {
+			get { return requiredMaterial; }
+			set { requiredMaterial = value; }
+		}
+		
+		public bool RecommendedMaterial {
+			get { return recommendedMaterial; }
+			set { recommendedMaterial = value; }
+		}
+
 
 	}
 }
