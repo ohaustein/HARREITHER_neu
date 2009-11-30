@@ -6,15 +6,29 @@ using System.Xml.Serialization;
 namespace Europlan.Common {
 
 	public class CategoryTypeEnumConverter : System.ComponentModel.TypeConverter {
-		//private static readonly string euroval = "Euroval FBH 24/17";
-		//private static readonly string rundrohr = "21mm Rundrohr";
+		private static readonly string floor = "Fußbodenheizung";
+		private static readonly string wall = "Wandheizung";
+		private static readonly string ceiling = "Deckenkühlung";
+		private static readonly string distributor = "Verteiler";
+		private static readonly string insulation = "Dämmung";
+		private static readonly string general = "Allgemein";
 
 		private Dictionary<string, CategoryType> mappingFromString = new Dictionary<string, CategoryType>();
 		private Dictionary<CategoryType, string> mappingToString = new Dictionary<CategoryType, string>();
 
 		public CategoryTypeEnumConverter() {
-			//mappingFromString.Add(euroval, CategoryType.PT_EUROVAL);
-			//mappingToString.Add(CategoryType.PT_EUROVAL, euroval);
+			mappingFromString.Add(floor, CategoryType.Floor);
+			mappingFromString.Add(wall, CategoryType.Wall);
+			mappingFromString.Add(ceiling, CategoryType.Ceiling);
+			mappingFromString.Add(distributor, CategoryType.Distributor);
+			mappingFromString.Add(insulation, CategoryType.Insulation);
+			mappingFromString.Add(general, CategoryType.General);
+			mappingToString.Add(CategoryType.Floor, floor);
+			mappingToString.Add(CategoryType.Wall, wall);
+			mappingToString.Add(CategoryType.Ceiling, ceiling);
+			mappingToString.Add(CategoryType.Distributor, distributor);
+			mappingToString.Add(CategoryType.Insulation, insulation);
+			mappingToString.Add(CategoryType.General, general);
 		}
 
 		public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -44,7 +58,7 @@ namespace Europlan.Common {
 		}
 	}
 
-	//[System.ComponentModel.TypeConverter(typeof(CategoryTypeEnumConverter))]
+	[System.ComponentModel.TypeConverter(typeof(CategoryTypeEnumConverter))]
 	public enum CategoryType {
 		Floor,
 		Wall,

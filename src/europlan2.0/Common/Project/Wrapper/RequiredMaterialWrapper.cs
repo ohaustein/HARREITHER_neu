@@ -23,7 +23,7 @@ namespace Europlan.Common {
 		public double CalculatedAmount {
 			get {
 				if (Project.Instance.RequiredMaterialCalculated.ContainsKey(material.Id)) {
-					return Project.Instance.RequiredMaterialCalculated[material.Id];
+					return Math.Ceiling(Project.Instance.RequiredMaterialCalculated[material.Id]);
 				}
 				return 0; 
 			}
@@ -85,6 +85,12 @@ namespace Europlan.Common {
 		public CategoryType CategoryType {
 			get {
 				return material.Category.Type;
+			}
+		}
+
+		public string CategoryTypeName {
+			get {
+				return material.Category.Type.ToString();
 			}
 		}
 
