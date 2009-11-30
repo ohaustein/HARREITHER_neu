@@ -90,7 +90,8 @@ namespace Europlan.Common {
 
 		public string CategoryTypeName {
 			get {
-				return material.Category.Type.ToString();
+				return (string)new CategoryTypeEnumConverter().ConvertTo(material.Category.Type, typeof(string));
+				//return material.Category.Type.ToString();
 			}
 		}
 
