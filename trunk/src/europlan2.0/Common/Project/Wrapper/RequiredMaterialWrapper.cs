@@ -34,6 +34,8 @@ namespace Europlan.Common {
 				if (Project.Instance != null) {
 					if (Project.Instance.RequiredMaterialOverrides.ContainsKey(material.Id)) {
 						return Project.Instance.RequiredMaterialOverrides[material.Id];
+					} else {
+						return CalculatedAmount;
 					}
 				}
 				return null; 
@@ -56,6 +58,20 @@ namespace Europlan.Common {
 			}
 		}
 
+		public Nullable<double> RecommendedAmount {
+			get {
+				if (RequiredAmount.HasValue && RequiredAmount.Value > 0) {
+					if (material.Denomination.HasValue) {
+						return Math.Ceiling(RequiredAmount.Value / material.Denomination.Value) * material.Denomination.Value;
+					} else {
+						return RequiredAmount;
+					}
+				} else {
+					return null;
+				}
+			}
+		}
+
 		public string Unit {
 			get { return material.Unit; }
 		}
@@ -63,6 +79,12 @@ namespace Europlan.Common {
 		public Category Category {
 			get {
 				return material.Category;	
+			}
+		}
+
+		public CategoryType CategoryType {
+			get {
+				return material.Category.Type;
 			}
 		}
 
