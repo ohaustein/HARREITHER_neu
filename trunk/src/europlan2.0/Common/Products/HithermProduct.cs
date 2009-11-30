@@ -16,6 +16,12 @@ namespace Europlan.Common {
 		private static bool canCool = false;
 
 		// planning
+		private static double c = 4.19; /* kJ/(kg*K) ... spezifische W‰rmekapazit‰t des Mediums */
+		private static double verbindeLeitungInnenquerschnitt = 0.000179071;
+		private static double verbindeLeitungInnendurchmesser = 0.015099678;
+		private static double rho = 1000; /* kg/m≥ ... Dichte des Mediums */
+		private static double v = 0.00000101; /* m≤/s ... kinematische Viskosit‰t */
+
 		// Hitherm(r) Hochleistungs-Klimawandregister (RA 5) Heizleistung qW in W/m≤
 		private static double[][] hlRegHeizleistung = {
 			//  tHm (∞C)  30.0  32.5  35.0  37.5  40.0  42.5  45.0  47.5  50.0
@@ -41,6 +47,9 @@ namespace Europlan.Common {
 		private static double factorLehmputz = 0.95;
 		private static double factorGkpHohlraum = 0.69;
 		private static double factorHolzHohlraum = 0.62;
+
+		private Dictionary<HithermRegister, int> registerCircuits = new Dictionary<HithermRegister, int>();
+		private Dictionary<int, HithermCircuit> circuitIds = new Dictionary<int, HithermCircuit>();
 
 		public HithermProduct() {
 
@@ -103,6 +112,36 @@ namespace Europlan.Common {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
 		}
 
+		[ProductParameter]
+		public static double ConfigC {
+			get { return c; }
+			set { c = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigVerbindeLeitungInnendurchmesser {
+			get { return verbindeLeitungInnendurchmesser; }
+			set { verbindeLeitungInnendurchmesser = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigVerbindeLeitungInnenquerschnitt {
+			get { return verbindeLeitungInnenquerschnitt; }
+			set { verbindeLeitungInnenquerschnitt = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRho {
+			get { return rho; }
+			set { rho = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigV {
+			get { return v; }
+			set { v = value; }
+		}
+		
 		private static double[][] ConvertStringToArray(string value) {
 			string str = value.Trim();
 			if (!str.StartsWith("{") || !str.EndsWith("}")) {
@@ -233,8 +272,46 @@ namespace Europlan.Common {
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
 			// TODO
-			errorMsg = "Noch nicht implementiert";
-			return false;
+			this.incompleteCalculation = false;
+			if (this.PlannedConnection == null) {
+				errorMsg = "Fehlende Eingaben: ";
+				if (PlannedConnection == null) {
+					errorMsg += "Heizkreisanschluﬂ, ";
+				}
+				errorMsg = errorMsg.Substring(0, errorMsg.Length - 2);
+				this.incompleteCalculation = true;
+				return false;
+			}
+
+			double[] vorlaufTotal;
+			double[] vorlaufNotIsolated;
+			double[] ruecklaufTotal;
+			double[] ruecklaufNotIsolated;
+			double[] vorlaufWithoutOtherProductTotal;
+			double[] vorlaufWithoutOtherProductNotIsolated;
+			double[] ruecklaufWithoutOtherProductTotal;
+			double[] ruecklaufWithoutOtherProductNotIsolated;
+			double longestVorlaufTotal;
+			double longestRuecklaufTotal;
+			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal);
+
+			int i = 0;
+			foreach (HithermCircuit hc in this.circuits) {
+				hc.HithermProduct = this;
+				hc.NrOfCircuit = i;
+				hc.PipeLengthVorlaufTotal = vorlaufTotal[i];
+				hc.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
+				hc.PipeLengthRuecklaufTotal = ruecklaufTotal[i];
+				hc.PipeLengthRuecklaufNotIsolated = ruecklaufNotIsolated[i];
+				hc.PipeLengthVorlaufWithoutOtherProductTotal = vorlaufWithoutOtherProductTotal[i];
+				hc.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
+				hc.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
+				hc.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
+				hc.Calculate();
+			}
+			//errorMsg = "Noch nicht implementiert";
+			errorMsg = null;
+			return true;
 		}
 
 		public override float PlannedFloorArea {
@@ -257,7 +334,18 @@ namespace Europlan.Common {
 		}
 
 		public override double PlannedHeatLoad {
-			get { return 0; }
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (HithermCircuit c in this.circuits) {
+					if (!c.QFbhTotalHeat.Equals(double.NaN)) {
+						value += c.QFbhTotalHeat;
+					}
+				}
+				return value;
+			}
 		}
 
 		public override float PlannedNetArea {
@@ -300,6 +388,77 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override Construction PlannedOutsideConstruction {
 			get { return null; }
+		}
+
+		public HithermCircuit GetCircuitForRegister(HithermRegister register) {
+			if (!this.registerCircuits.ContainsKey(register)) {
+				return null;
+			}
+			if (!this.circuitIds.ContainsKey(this.registerCircuits[register])) {
+				return null;
+			}
+			return this.circuitIds[this.registerCircuits[register]];
+		}
+
+		internal void AddRegisterToCircuit(HithermRegister register, int circuitId) {
+			this.registerCircuits[register] = circuitId;
+			if (!this.circuitIds.ContainsKey(circuitId)) {
+				HithermCircuit hc = new HithermCircuit();
+				this.circuits.Add(hc);
+				this.circuitIds[circuitId] = hc;
+			}
+			this.circuitIds[circuitId].Registers.Add(register);
+		}
+
+		internal void MoveRegisterToCircuit(HithermRegister register, int circuitId) {
+			if (this.registerCircuits.ContainsKey(register)) {
+				HithermCircuit hc = this.circuitIds[this.registerCircuits[register]];
+				hc.Registers.Remove(register);
+				if (hc.Registers.Count == 0) {
+					this.circuits.Remove(hc);
+					this.circuitIds.Remove(this.registerCircuits[register]);
+				}
+				this.registerCircuits[register] = circuitId;
+				if (!this.circuitIds.ContainsKey(circuitId)) {
+					hc = new HithermCircuit();
+					this.circuits.Add(hc);
+					this.circuitIds[circuitId] = hc;
+				}
+				this.circuitIds[circuitId].Registers.Add(register);
+			}
+		}
+
+		internal void RemoveRegisterFromCircuit(HithermRegister register) {
+			if (this.registerCircuits.ContainsKey(register)) {
+				HithermCircuit hc = this.circuitIds[this.registerCircuits[register]];
+				if (hc.Registers.Count == 0) {
+					this.circuits.Remove(hc);
+					this.circuitIds.Remove(this.registerCircuits[register]);
+				}
+				this.registerCircuits.Remove(register);
+			}
+		}
+
+		internal int GetRegisterCircuitId(HithermRegister register) {
+			if (this.registerCircuits.ContainsKey(register)) {
+				return this.registerCircuits[register];
+			}
+			return 0;
+		}
+
+		internal override void FinalizeLoading(PlannedProduct pp) {
+			base.FinalizeLoading(pp);
+			if (pp != null) {
+				int i = 1;
+				foreach (HithermCircuit hc in this.circuits) {
+					this.circuitIds[i] = hc;
+					foreach (HithermRegister hr in hc.Registers) {
+						this.registerCircuits[hr] = i;
+						hr.PlannedProduct = pp;
+					}
+					i++;
+				}
+			}
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {

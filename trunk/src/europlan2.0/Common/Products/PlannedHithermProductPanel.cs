@@ -17,14 +17,14 @@ namespace Europlan.Common {
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_100_10);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_150_10);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_200_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_250_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_50_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_100_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_150_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_200_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_250_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
+			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_250_10);
+			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_50_5);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_100_5);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_150_5);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_200_5);
+			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_250_5);
+			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_5);
 		}
 
 		#region IEditorUserControl Members
@@ -101,6 +101,105 @@ namespace Europlan.Common {
 
 				HithermProduct hp = this.product.Product as HithermProduct;
 
+				int selectedCircuit = (this.dgvRegisters.SelectedCells.Count > 0 &&
+					this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem is HithermRegister) ?
+					(this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem as HithermRegister).Heizkreis : -1;
+
+				bool showHeat = true;
+				bool showHeatCircuit = selectedCircuit >= 0;
+				bool showCool = false;
+
+				lblQHeat.Visible = showHeat;
+				lblQHeatUnit.Visible = showHeat;
+				lblQAnbHeat.Visible = showHeat;
+				lblQAnbHeatUnit.Visible = showHeat;
+				lblQHeatDiff.Visible = showHeat;
+				lblQHeatDiffUnit.Visible = showHeat;
+				lblQHeatRest.Visible = showHeat;
+				lblQHeatRestUnit.Visible = showHeat;
+				lblAvgqHeat.Visible = showHeatCircuit;
+				lblAvgqHeatUnit.Visible = showHeatCircuit;
+				lblDurchflussHeat.Visible = showHeatCircuit;
+				lblDurchflussHeatUnit.Visible = showHeatCircuit;
+				lblDruckverlustHeat.Visible = showHeatCircuit;
+				lblDruckverlustHeatUnit.Visible = showHeatCircuit;
+				lblQCool.Visible = showCool;
+				lblQCoolUnit.Visible = showCool;
+				lblQAnbCool.Visible = showCool;
+				lblQAnbCoolUnit.Visible = showCool;
+				lblQCoolDiff.Visible = showCool;
+				lblQCoolDiffUnit.Visible = showCool;
+				lblQCoolRest.Visible = showCool;
+				lblQCoolRestUnit.Visible = showCool;
+				lblAvgqCool.Visible = showCool;
+				lblAvgqCoolUnit.Visible = showCool;
+				lblDurchflussCool.Visible = showCool;
+				lblDurchflussCoolUnit.Visible = showCool;
+				lblDruckverlustCool.Visible = showCool;
+				lblDruckverlustCoolUnit.Visible = showCool;
+
+				this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
+				this.numHeatLoadPercentage.MaxValue = (decimal)(hp.AssociatedRoom.NormalizedHeatLoad <= 0 ? 0 : this.product.NecessaryHeatLoad * 100 / hp.AssociatedRoom.NormalizedHeatLoad);
+
+				if (this.product.NecessaryHeatLoad > 0) {
+					this.chkCoverHeatLoad.Enabled = true;
+					if ((skipFields & (FieldEnum.HEAT_LOAD | FieldEnum.HEAT_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
+						if (this.product.CoverHeatLoad) {
+							this.chkCoverHeatLoad.Checked = true;
+							this.numHeatLoad.Enabled = false;
+							this.numHeatLoadPercentage.Enabled = false;
+						} else {
+							this.chkCoverHeatLoad.Checked = false;
+							this.numHeatLoad.Enabled = true;
+							this.numHeatLoadPercentage.Enabled = true;
+						}
+					}
+					if ((skipFields & FieldEnum.HEAT_LOAD) == FieldEnum.NONE) {
+						this.numHeatLoad.Value = Math.Round((decimal)this.product.RequestedHeatLoad, 2);
+					}
+					if ((skipFields & FieldEnum.HEAT_LOAD_PERCENTAGE) == FieldEnum.NONE) {
+						this.numHeatLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedHeatLoadPercentage), 2);
+					}
+				} else {
+					this.numHeatLoad.Enabled = false;
+					this.numHeatLoad.Text = "";
+					this.numHeatLoadPercentage.Enabled = false;
+					this.numHeatLoadPercentage.Text = "";
+					this.chkCoverHeatLoad.Enabled = false;
+					this.chkCoverHeatLoad.Checked = false;
+				}
+				this.numCoolLoad.MaxValue = (decimal)this.product.NecessaryCoolLoad;
+				this.numCoolLoadPercentage.MaxValue = (decimal)(hp.AssociatedRoom.NormalizedCoolLoad <= 0 ? 0 : this.product.NecessaryCoolLoad * 100 / hp.AssociatedRoom.NormalizedCoolLoad);
+				if (this.product.NecessaryCoolLoad > 0) {
+					this.chkCoverCoolLoad.Enabled = true;
+					if ((skipFields & (FieldEnum.COOL_LOAD | FieldEnum.COOL_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
+						if (this.product.CoverCoolLoad) {
+							this.chkCoverCoolLoad.Checked = true;
+							this.numCoolLoad.Enabled = false;
+							this.numCoolLoadPercentage.Enabled = false;
+						} else {
+							this.chkCoverCoolLoad.Checked = false;
+							this.numCoolLoad.Enabled = true;
+							this.numCoolLoadPercentage.Enabled = true;
+						}
+					}
+					if ((skipFields & FieldEnum.COOL_LOAD) == FieldEnum.NONE) {
+						this.numCoolLoad.Value = Math.Round((decimal)this.product.RequestedCoolLoad, 2);
+					}
+					if ((skipFields & FieldEnum.COOL_LOAD_PERCENTAGE) == FieldEnum.NONE) {
+						this.numCoolLoadPercentage.Value = Math.Round((decimal)(this.product.RequestedCoolLoadPercentage), 2);
+					}
+				} else {
+					this.numCoolLoad.Enabled = false;
+					this.numCoolLoad.Text = "";
+					this.numCoolLoadPercentage.Enabled = false;
+					this.numCoolLoadPercentage.Text = "";
+					this.chkCoverCoolLoad.Enabled = false;
+					this.chkCoverCoolLoad.Checked = false;
+				}
+				this.lblHeatLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedHeatLoad.ToString() + " W)";
+				this.lblCoolLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedCoolLoad.ToString() + " W)";
+
 				if ((skipFields & FieldEnum.REGISTER) == FieldEnum.NONE) {
 					List<HithermRegister> allRegisters = new List<HithermRegister>();
 					foreach (HithermCircuit c in hp.PlannedCircuits) {
@@ -109,6 +208,46 @@ namespace Europlan.Common {
 						}
 					}
 					this.hithermRegisterBindingSource.DataSource = allRegisters;
+				}
+
+				//    // General
+				double qDiffHeat = this.product.PlannedHeatLoad - this.product.RequestedHeatLoad;
+				double qDiffCool = this.product.PlannedCoolLoad - this.product.RequestedCoolLoad;
+
+				lblRest.Text = "Rest (" + this.product.Product.AssociatedRoom.ToString() + ")";
+				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 2).ToString();
+				lblQAnbHeat.Text = Math.Round(this.product.Product.PlannedHeatLoadAnbindung, 0).ToString();
+				lblQHeatDiff.Text = Math.Round(qDiffHeat, 2).ToString();
+				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString();
+				if (selectedCircuit >= 0) {
+					HithermCircuit hc = hp.GetCircuitForRegister(this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem as HithermRegister);
+					lblHk.Text = "Heizkreis " + selectedCircuit.ToString() + ":";
+					lblAvgqHeat.Text = Math.Round(hc.C_QHeatPerSqm, 2).ToString();
+					lblDurchflussHeat.Text = Math.Round(hc.C_DurchflussHeat, 2).ToString();
+					lblDruckverlustHeat.Text = Math.Round(hc.C_DruckverlustHeat, 2).ToString();
+					//lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempHeat, 2).ToString();
+					lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
+					lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
+					lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
+					lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString();
+					lblAvgqCool.Text = (-1.0 * Math.Round(hc.C_QCoolPerSqm, 2)).ToString();
+					lblDurchflussCool.Text = Math.Round(hc.C_DurchflussCool, 2).ToString();
+					lblDruckverlustCool.Text = Math.Round(hc.C_DruckverlustCool, 2).ToString();
+					//lblTempCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempCool, 2).ToString();
+					/*double availableArea = Math.Round(this.product.Product.PlannedNetArea, 2);
+					double coveredArea = Math.Round(hp.CoveredCeilingArea, 2);
+					double anbArea = Math.Round(hp.PlannedRemoveArea, 2);
+					lblAvailableArea.Text = availableArea.ToString();
+					lblCoveredArea.Text = coveredArea.ToString();
+					lblAnbArea.Text = anbArea.ToString();
+					lblRestArea.Text = Math.Round(availableArea - anbArea - coveredArea, 2).ToString();*/
+				} else {
+				}
+
+				if (hp.PlannedConnection == null) {
+					this.txtDistributor.Text = "";
+				} else {
+					this.txtDistributor.Text = hp.PlannedConnection.ToString();
 				}
 
 				if (this.errorMsg != null) {
@@ -279,29 +418,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void numRoomTemperatureBelowHeat_ValueChanged(object sender, EventArgs e) {
-			if (ignoreRoomTemperatureBelowHeat == 0) {
-				(this.product.Product as ModulKlimaBodenProduct).PlannedRoomTemperatureBelowHeat = (float)this.numRoomTemperatureBelowHeat.Value;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_HEAT);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-		}
-
-		private void numRoomTemperatureBelowCool_ValueChanged(object sender, EventArgs e) {
-			if (ignoreRoomTemperatureBelowCool == 0) {
-				(this.product.Product as ModulKlimaBodenProduct).PlannedRoomTemperatureBelowCool = (float)this.numRoomTemperatureBelowCool.Value;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
-				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_COOL);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
-				}
-			}
-		}
-
-
 		private void btnDistributor_Click(object sender, EventArgs e) {
 			SelectConnectionForProductForm form = new SelectConnectionForProductForm(this.product, this.product.Product.AssociatedRoom.AssociatedFloor);
 			//form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnection;
@@ -339,9 +455,52 @@ namespace Europlan.Common {
 			form.Dispose();
 		}
 
+		DataGridViewRow newRow = null;
 		private void dgvRegisters_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e) {
+			Console.WriteLine("default values");
+			this.newRow = e.Row;
 			e.Row.Cells[PlannedProduct.DisplayIndex].Value = this.product;
 			e.Row.Cells[heizkreisDataGridViewTextBoxColumn.DisplayIndex].Value = 1;
+		}
+
+		HithermRegister deletingRegister = null;
+		private void dgvRegisters_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
+			dgvRegisters.AllowUserToAddRows = false;
+			this.deletingRegister = e.Row.DataBoundItem as HithermRegister;
+		}
+
+		private void dgvRegisters_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
+			dgvRegisters.AllowUserToAddRows = true;
+			(this.product.Product as HithermProduct).RemoveRegisterFromCircuit(this.deletingRegister);
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+			if (ProjectChanged != null) {
+				ProjectChanged(this);
+			}
+		}
+
+		private void dgvRegisters_UserAddedRow(object sender, DataGridViewRowEventArgs e) {
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+			if (this.product != null && newRow != null && newRow.DataBoundItem is HithermRegister) {
+				(this.product.Product as HithermProduct).AddRegisterToCircuit(newRow.DataBoundItem as HithermRegister, (int)newRow.Cells[this.heizkreisDataGridViewTextBoxColumn.Index].Value);
+				newRow = null;
+			}
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
+		private void dgvRegisters_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+			if (this.product != null) {
+				this.UpdateControl(FieldEnum.REGISTER);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}
+
+		private void dgvRegisters_SelectionChanged(object sender, EventArgs e) {
+			this.UpdateControl(FieldEnum.REGISTER);
 		}
 		
 	}

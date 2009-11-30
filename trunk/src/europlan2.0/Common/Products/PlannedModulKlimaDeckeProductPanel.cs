@@ -100,8 +100,6 @@ namespace Europlan.Common {
 
 				bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0;
 				bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0;
-				//bool showRim = evProduct.PlannedAreaRim > 0;
-				//bool showResidence = true;
 
 				lblQHeat.Visible = showHeat;
 				lblQHeatUnit.Visible = showHeat;

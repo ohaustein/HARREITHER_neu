@@ -52,7 +52,7 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (HithermRegister register in this.registers) {
-					//area += register.Area;
+					area += register.Area;
 				}
 				return area;
 			}
@@ -124,20 +124,22 @@ namespace Europlan.Common {
 		public override double PipeLengthWithoutConnections {
 			get {
 				double length = 0;
-				//foreach (KlimaFlaechenList row in rows) {
-				//	double rowLength = row.EquivalentPipeLength;
-				//	if (rowLength > length) {
-				//		length = rowLength;
-				//	}
-				//}
-				// TODO
+				foreach (HithermRegister reg in this.registers) {
+					length += reg.EquivalentPipeLengthUnisolated;
+				}
 				return length;
 			}
 		}
 
 		[XmlIgnore]
 		public override double PipeLengthWithAllConnections {
-			get { return this.PipeLengthWithoutConnections + this.vorlaufTotal + this.ruecklaufTotal; }
+			get {
+				double length = 0;
+				foreach (HithermRegister reg in this.registers) {
+					length += reg.PipeVertical + reg.PipeHorizontal;
+				}
+				return this.PipeLengthWithoutConnections + this.vorlaufTotal + this.ruecklaufTotal + length;
+			}
 		}
 
 		[XmlIgnore]
@@ -166,7 +168,7 @@ namespace Europlan.Common {
 		}
 
 		public void Calculate() {
-			//EN1264 en1264 = EN1264.Instance;
+			EN1264 en1264 = EN1264.Instance;
 
 			//double su0 = 0.045; 
 			//double lambdaU0 = 1;
@@ -180,69 +182,74 @@ namespace Europlan.Common {
 			//double rAlphaDeckeFbh = 1 / EurovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
 			//double rAlphaDeckeFbk = 1 / EurovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Kühlung */
 
-			//{ // Heizlastberechnung
-			//    double distributorVorlaufTemp;
-			//    double distributorRuecklaufTemp;
-			//    this.ModulKlimaBodenProduct.GetHeatFlow(out distributorVorlaufTemp, out distributorRuecklaufTemp);
-			//    this.c_thetaVHeat = distributorVorlaufTemp;
-			//    this.c_thetaRHeat = distributorRuecklaufTemp;
-			//    this.c_thetaVHeat = this.c_thetaVHeat - (this.c_thetaVHeat - this.c_thetaRHeat) * this.vorlaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
-			//    this.c_thetaRHeat = this.c_thetaRHeat + (this.c_thetaVHeat - this.c_thetaRHeat) * this.ruecklaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
-			//    if (c_thetaVHeat.Equals(double.NaN) || c_thetaRHeat.Equals(double.NaN)) {
-			//        this.c_qHeatPerSqm = 0;
-			//        this.c_durchflussHeat = 0;
-			//        this.c_druckverlustHeat = 0;
-			//        this.c_floorTempHeat = 0;
-			//    } else {
+			{ // Heizlastberechnung
+			    double distributorVorlaufTemp;
+			    double distributorRuecklaufTemp;
+			    this.HithermProduct.GetHeatFlow(out distributorVorlaufTemp, out distributorRuecklaufTemp);
+			    this.c_thetaVHeat = distributorVorlaufTemp;
+			    this.c_thetaRHeat = distributorRuecklaufTemp;
+			    this.c_thetaVHeat = this.c_thetaVHeat - (this.c_thetaVHeat - this.c_thetaRHeat) * this.vorlaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
+			    this.c_thetaRHeat = this.c_thetaRHeat + (this.c_thetaVHeat - this.c_thetaRHeat) * this.ruecklaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
+			    if (c_thetaVHeat.Equals(double.NaN) || c_thetaRHeat.Equals(double.NaN)) {
+			        this.c_qHeatPerSqm = 0;
+			        this.c_durchflussHeat = 0;
+			        this.c_druckverlustHeat = 0;
+			        this.c_floorTempHeat = 0;
+			    } else {
 
 			//        double dTheta = en1264.Heizmitteluebertemperatur(this.c_thetaVHeat, this.c_thetaRHeat, this.ModulKlimaBodenProduct.AssociatedRoom.RoomHeatTemperature);
 
 			//        double au = en1264.auFlaeche(ModulKlimaBodenProduct.ConfigAlpha0, ModulKlimaBodenProduct.ConfigAlphaFbh, su0, lambdaU0, ModulKlimaBodenProduct.ConfigSu, lambdaE);
 			//        double ab = en1264.abFlaeche(B, au, atmt, rLambdaB);
 			//        this.c_qHeatPerSqm = en1264.WaermestromDichteFlaeche(B, ab, atmt, au, dTheta);
+					double heizmittelTemp = (this.c_thetaVHeat + this.c_thetaRHeat) / 2;
+					double faktor = 1; // TODO add faktor according to construction
+					double heatLoadRegisters = 0;
+					foreach (HithermRegister reg in this.registers) {
+						heatLoadRegisters += reg.Heizleistung(heizmittelTemp, this.HithermProduct.AssociatedRoom.RoomHeatTemperature, faktor);
+					}
+					this.c_qHeatPerSqm = heatLoadRegisters / this.RegisterArea;
 
 			//        double qU = en1264.WaermeverlustUnten(ModulKlimaBodenProduct.ConfigAlphaFbh, rLambdaB, ModulKlimaBodenProduct.ConfigSu, lambdaU, rAlphaDeckeFbh, rLambdaIns, ModulKlimaBodenProduct.ConfigRLambdaDecke, ModulKlimaBodenProduct.ConfigRLambdaPutz, this.c_qHeatPerSqm, this.ModulKlimaBodenProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaBodenProduct.PlannedRoomTemperatureBelowHeat);
+					double qU = 0; // TODO
 
-			//        // hydraulische Berechnung
-			//        this.c_Qh2oHeat = (this.c_qHeatPerSqm + qU) * this.ModulArea;            // gesamte aufgenommene Leistung berechnen
+			        // hydraulische Berechnung
+			        this.c_Qh2oHeat = (this.c_qHeatPerSqm + qU) * this.RegisterArea;            // gesamte aufgenommene Leistung berechnen
 			//        //                                                                           // gesamten Druckverlust berechnen
 
-			//        foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes) {
-			//            if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
-			//                double heatLoad;
-			//                double qH2o;
-			//                cp.CalculateHeatLoad(out heatLoad, out qH2o);
-			//                this.c_Qh2oHeat += qH2o;
-			//            }
-			//        }
-			//        double totalQh2o = this.c_Qh2oHeat;
-			//        CircuitConnection cc = this.plannedProduct.Product.GetCircuitConnected(this.nrOfCircuit);
-			//        if (cc != null) {
-			//            totalQh2o += cc.OtherCircuit.C_Qh2oHeat;
-			//        }
-			//        cc = this.plannedProduct.Product.GetCircuitInverseConnected(this.nrOfCircuit);
-			//        if (cc != null) {
-			//            totalQh2o += cc.OtherCircuit.C_Qh2oHeat;
-			//        }
+			        foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes) {
+			            if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
+			                double heatLoad;
+			                double qH2o;
+			                cp.CalculateHeatLoad(out heatLoad, out qH2o);
+			                this.c_Qh2oHeat += qH2o;
+			            }
+			        }
+			        double totalQh2o = this.c_Qh2oHeat;
+			        CircuitConnection cc = this.plannedProduct.Product.GetCircuitConnected(this.nrOfCircuit);
+			        if (cc != null) {
+			            totalQh2o += cc.OtherCircuit.C_Qh2oHeat;
+			        }
+			        cc = this.plannedProduct.Product.GetCircuitInverseConnected(this.nrOfCircuit);
+			        if (cc != null) {
+			            totalQh2o += cc.OtherCircuit.C_Qh2oHeat;
+			        }
 
-			//        this.c_durchflussHeat = en1264.Durchfluss(totalQh2o, ModulKlimaBodenProduct.ConfigC, distributorVorlaufTemp - distributorRuecklaufTemp);
+			        this.c_durchflussHeat = en1264.Durchfluss(totalQh2o, Europlan.Common.HithermProduct.ConfigC, distributorVorlaufTemp - distributorRuecklaufTemp);
 
-			//        this.c_druckverlustHeat = 0;
-			//        foreach (KlimaFlaechenList row in rows) {
-			//            double rowDruckverlust = row.Druckverlust(this.c_durchflussHeat / rows.Count);
-			//            if (rowDruckverlust > this.c_druckverlustHeat) {
-			//                this.c_druckverlustHeat = rowDruckverlust;
-			//            }
-			//        }
-			//        foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
-			//            if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
-			//                this.c_druckverlustHeat += cp.CalculateDruckverlust(this.c_durchflussHeat);
-			//            }
-			//        }
+			        this.c_druckverlustHeat = 0;
+					foreach (HithermRegister reg in this.registers) {
+						this.c_druckverlustHeat += reg.Druckverlust(this.c_durchflussHeat);
+					}
+			        foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
+			            if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
+			                this.c_druckverlustHeat += cp.CalculateDruckverlust(this.c_durchflussHeat);
+			            }
+			        }
 
-			//        this.c_floorTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, ModulKlimaBodenProduct.ConfigAlphaFbh, this.ModulKlimaBodenProduct.AssociatedRoom.RoomHeatTemperature);
-			//    }
-			//}
+			        //this.c_floorTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, Europlan.Common.HithermProduct.ConfigAlphaFbh, this.HithermProduct.AssociatedRoom.RoomHeatTemperature);
+			    }
+			}
 			//{ // Kühllastberechnung
 			//    double distributorVorlaufTemp;
 			//    double distributorRuecklaufTemp;
