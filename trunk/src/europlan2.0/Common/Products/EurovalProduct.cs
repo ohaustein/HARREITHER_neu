@@ -1688,6 +1688,10 @@ namespace Europlan.Common {
 				amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
+
+			if (!anhydritEstrich) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "EV34", totalArea * 0.2);
+			}
 		}
 	}
 }
