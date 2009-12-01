@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UpdateProject BuilderVersion="1.3.0.23" SchemaVersion="1.1" xmlns="http://www.kineticjump.com/AppLifeUpdate/ProjectSchema">
-	<Properties ApplicationID="1f24573e-033c-448d-8e15-9f396e67e44e" ApplicationName="Europlan 2.0" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vdBsdX09tG4aP1oLqHWHB3N6hHsEx+x0YbavsjRPuxhf1yLgkQFTN1Z26sVEkIKnfQxxvcfcWClR4P9Xurm2dyoeA2z80nexnKuyVQAW3K72Z0kkFKEj/OFeXoEWJi1rPrNXjwaQ3zVhn4WL1GKso8HiQlp34twvAJGx2A6JW7s=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;8b665HmN+DY5gAArY0crNGPDpm+hibcdoCWOz3UKec+mMR7fVVIjOYdWgR8CgR1WzBd5am6lZ7rxRAva6NoYrQ==&lt;/P&gt;&lt;Q&gt;yQHE8L+vEefup5hkda8kMVrEOh73orl/n/Lotw5lCqf+Sr9fYEs/Wfz+qN0sAECxgw5dQh1hmqC8cwtRK7hLBw==&lt;/Q&gt;&lt;DP&gt;PFm6PJmf+KxI1Iy2SDWXMqAJUv6hXEkLq1RU/7OfZuORAMhNRvaXdqAz105PiL4zUgY2OHzg7DF+U9eF0gXIjQ==&lt;/DP&gt;&lt;DQ&gt;i+uDX+LOxzQf2OIn7BPCqeh498xerRNbV8gLXoHSrBxM01Nr3OgEbWvDCWEMJBDkgEobeM5jBvQkuiCCnGBpOQ==&lt;/DQ&gt;&lt;InverseQ&gt;v9D25Q6G8fOZbeBu6Rbevp3KGfnUdITstY4fh15aDgjbZofAu0C6RfiHjeByQwNrsQUB1u7hpW5MMMlEk5GPDg==&lt;/InverseQ&gt;&lt;D&gt;IveHU2l7+YYi7bK/3QuxkUzTsB4ddlr34ZxO54w9d+D4nuA88FmHI/WYuI0YoWqAQkgNmAF+dPs/qyw+1BYsJ5wZZQmLLTbfaCKBwNEBbSWk1lIk33ZTKPXDs9ZLOr0LC0jW31XaVQZYhr8xSkSkP3y2ezux7HFHPccpoS7OMUk=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\de" UpdateLocation="" BuildLocation="updates-de Updates" PublishVersion="2.0.15.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions\v2.0.15.0\europlan20-de.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
+	<Properties ApplicationID="1f24573e-033c-448d-8e15-9f396e67e44e" ApplicationName="Europlan 2.0" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vdBsdX09tG4aP1oLqHWHB3N6hHsEx+x0YbavsjRPuxhf1yLgkQFTN1Z26sVEkIKnfQxxvcfcWClR4P9Xurm2dyoeA2z80nexnKuyVQAW3K72Z0kkFKEj/OFeXoEWJi1rPrNXjwaQ3zVhn4WL1GKso8HiQlp34twvAJGx2A6JW7s=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;8b665HmN+DY5gAArY0crNGPDpm+hibcdoCWOz3UKec+mMR7fVVIjOYdWgR8CgR1WzBd5am6lZ7rxRAva6NoYrQ==&lt;/P&gt;&lt;Q&gt;yQHE8L+vEefup5hkda8kMVrEOh73orl/n/Lotw5lCqf+Sr9fYEs/Wfz+qN0sAECxgw5dQh1hmqC8cwtRK7hLBw==&lt;/Q&gt;&lt;DP&gt;PFm6PJmf+KxI1Iy2SDWXMqAJUv6hXEkLq1RU/7OfZuORAMhNRvaXdqAz105PiL4zUgY2OHzg7DF+U9eF0gXIjQ==&lt;/DP&gt;&lt;DQ&gt;i+uDX+LOxzQf2OIn7BPCqeh498xerRNbV8gLXoHSrBxM01Nr3OgEbWvDCWEMJBDkgEobeM5jBvQkuiCCnGBpOQ==&lt;/DQ&gt;&lt;InverseQ&gt;v9D25Q6G8fOZbeBu6Rbevp3KGfnUdITstY4fh15aDgjbZofAu0C6RfiHjeByQwNrsQUB1u7hpW5MMMlEk5GPDg==&lt;/InverseQ&gt;&lt;D&gt;IveHU2l7+YYi7bK/3QuxkUzTsB4ddlr34ZxO54w9d+D4nuA88FmHI/WYuI0YoWqAQkgNmAF+dPs/qyw+1BYsJ5wZZQmLLTbfaCKBwNEBbSWk1lIk33ZTKPXDs9ZLOr0LC0jW31XaVQZYhr8xSkSkP3y2ezux7HFHPccpoS7OMUk=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\de" UpdateLocation="" BuildLocation="updates-de Updates" PublishVersion="2.0.16.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions\v2.0.16.0\europlan20-de.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
 	<CurrentSummary>Neu Eingabemaske Klimadecke&#xD;
 Bugfix Report</CurrentSummary>
 	<CurrentCustomData />
@@ -13,6 +13,14 @@ Bugfix Report</CurrentSummary>
 		<AppLifeUpdate BuilderVersion="1.3.0.23" type="full" xmlns="http://www.kineticjump.com/AppLifeUpdate/DirectorSchema">
 			<Application AppId="1f24573e-033c-448d-8e15-9f396e67e44e" NoUpdateDisplayText="">
 				<Versions>
+					<Version number="2.0.16.0" postdate="2009-12-01T13:52:02.3154266Z" signature="ValpHltJLoQfIPLypb20hdwTsdUtPS4JDVd2kvECgfT2NUxG7JTBypbtPpoTAljCjjfHmC7eSa7H9XJlB+qb3WIMhgmrepdS4uwm6gyPrhObJ7iLiZrikA5CDGGmARSuPKlzx3HQ837cfN35TwQTBr4PkdqkPWIrSnXrIbGWZMs=" fileSize="13174779">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Neu Eingabemaske Klimadecke&#xD;
+Bugfix Report</Summary>
+						<CustomData></CustomData>
+					</Version>
 					<Version number="2.0.15.0" postdate="2009-11-23T16:01:38.6176364Z" signature="VdXYHA09qEBjaKceHWh8wyci2wvoq/ehRNO0Ca912UT/paIpOUMYlQdDYU3AuFNd5EuKmOsaTbpR2nPgF76+FcqIUX3nIfu3FCLbnLkGdoM5a2/ltVJhz/t3kbVpg2vT62nJsg0YwhuedP6/qyMpiQsCqXTSxEM8ykjUj3BEz+0=" fileSize="13129516">
 						<Targets>
 							<Target number="0.0.0.0" includeAllGreater="false" />
