@@ -22,6 +22,9 @@ namespace Europlan.Common {
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
 		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
 
+		private static int maxPressureLost = 15000;
+		private static int maxDurchfluss = 240;
+
 		// Hitherm(r) Hochleistungs-Klimawandregister (RA 5) Heizleistung qW in W/m²
 		private static double[][] hlRegHeizleistung = {
 			//  tHm (°C)  30.0  32.5  35.0  37.5  40.0  42.5  45.0  47.5  50.0
@@ -67,6 +70,8 @@ namespace Europlan.Common {
 			quickDimensioningCoolPowerPerSquareMeter = 100;
 			canHeat = true;
 			canCool = false;
+			maxPressureLost = 15000;
+			maxDurchfluss = 240;
 		}
 
 		public override Product Clone(Room room) {
@@ -141,7 +146,19 @@ namespace Europlan.Common {
 			get { return v; }
 			set { v = value; }
 		}
-		
+
+		[ProductParameter]
+		public static int ConfigMaxPressureLost {
+			get { return maxPressureLost; }
+			set { maxPressureLost = value; }
+		}
+
+		[ProductParameter]
+		public static int ConfigMaxDurchfluss {
+			get { return maxDurchfluss; }
+			set { maxDurchfluss = value; }
+		}
+
 		private static double[][] ConvertStringToArray(string value) {
 			string str = value.Trim();
 			if (!str.StartsWith("{") || !str.EndsWith("}")) {
@@ -237,6 +254,36 @@ namespace Europlan.Common {
 			get { return stdRegHeizleistung; }
 			set { stdRegHeizleistung = value; }
 		}
+
+		[ProductParameter]
+		public static double ConfigFactorSpezialputz {
+			get { return factorSpezialputz; }
+			set { factorSpezialputz = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigFactorMaschinenputz {
+			get { return factorMaschinenputz; }
+			set { factorMaschinenputz = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigFactorLehmputz {
+			get { return factorLehmputz; }
+			set { factorLehmputz = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigFactorGkpHohlraum {
+			get { return factorGkpHohlraum; }
+			set { factorGkpHohlraum = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigFactorHolzHohlraum {
+			get { return factorHolzHohlraum; }
+			set { factorHolzHohlraum = value; }
+		}
 		#endregion Product Parameters
 
 		public override int GetDefaultQuickDimensioningCircuits() {
@@ -309,8 +356,32 @@ namespace Europlan.Common {
 				hc.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
 				hc.Calculate();
 			}
-			//errorMsg = "Noch nicht implementiert";
-			errorMsg = null;
+
+			errorMsg = "";
+			//if (this.PlannedMhHeat >= this.PlannedMhCool) {
+				if (Math.Round(this.PlannedMhHeat, 1) > HithermProduct.ConfigMaxDurchfluss) {
+					//errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+					errorMsg += "Durchfluß bei zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				}
+				/*} else {
+					if (Math.Round(this.PlannedMhCool, 1) > HithermProduct.ConfigMaxDurchfluss) {
+						errorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+					}
+				}*/
+				//if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
+				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > HithermProduct.ConfigMaxPressureLost / 100) {
+					//errorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+					errorMsg += "Druckverlust zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				}
+				/*} else {
+					if (Math.Round(this.PlannedDeltaRhoCool, 2) > HithermProduct.ConfigMaxPressureLost / 100) {
+						errorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+					}
+				}*/
+				if (errorMsg.Length == 0) {
+				errorMsg = null;
+			}
+
 			return true;
 		}
 

@@ -19,6 +19,7 @@ namespace Europlan.Common {
 			InitializeEurovalValues();
 			InitializeModulBodenValues();
 			InitializeModulDeckeValues();
+			InitializeHithermValues();
 		}
 
 		public void UpdateControl() {
@@ -44,7 +45,7 @@ namespace Europlan.Common {
 
 
 		private void btnModulBodenStandard_Click(object sender, EventArgs e) {
-			//Project.Instance.Config.ModulKlimaBodenProduct.StaticInitialize();
+			Project.Instance.Config.ModulKlimaBodenProduct.StaticInitialize();
 			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm");
 			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxPressureLost");
 			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxDurchfluss");
@@ -55,7 +56,13 @@ namespace Europlan.Common {
 		}
 
 		private void btnModulDeckeStandard_Click(object sender, EventArgs e) {
+			Project.Instance.Config.ModulKlimaDeckeProduct.StaticInitialize();
 			InitializeModulDeckeValues();
+		}
+
+		private void btnHithermStandard_Click(object sender, EventArgs e) {
+			Project.Instance.Config.HithermProduct.StaticInitialize();
+			InitializeHithermValues();
 		}
 
 		private void InitializeEurovalValues() {
@@ -93,6 +100,11 @@ namespace Europlan.Common {
 			numModulDeckeSpreizungHeizMax.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungHeizMax;
 			numModulDeckeSpreizungKuehlMin.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKühlMin;
 			numModulDeckeSpreizungKuehlMax.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKühlMax;
+		}
+
+		private void InitializeHithermValues() {
+			numHithermPressurePa.Value = HithermProduct.ConfigMaxPressureLost;
+			numHithermDurchfluss.Value = HithermProduct.ConfigMaxDurchfluss;
 		}
 
 		private void rbEurovalHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
@@ -178,10 +190,10 @@ namespace Europlan.Common {
 		}
 
 		private void tabSystemParameters_Selected(object sender, TabControlEventArgs e) {
-			if (tabSystemParameters.SelectedTab != tabEuroval && tabSystemParameters.SelectedTab != tabModulBoden && tabSystemParameters.SelectedTab != tabModulDecke) {
+			/*if (tabSystemParameters.SelectedTab != tabEuroval && tabSystemParameters.SelectedTab != tabModulBoden && tabSystemParameters.SelectedTab != tabModulDecke) {
 				MessageBox.Show("Die Konfiguration von Systemparameter ist für dieses System derzeit nicht möglich.");
 				tabSystemParameters.SelectedTab = tabEuroval;
-			}
+			}*/
 		}
 
 		private void rbModulBodenHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
@@ -338,6 +350,29 @@ namespace Europlan.Common {
 
 		private void numModulDeckeSpreizungKuehlMax_ValueChanged(object sender, EventArgs e) {
 			ModulKlimaDeckeProduct.ConfigSpreizungKühlMax = (double)numModulDeckeSpreizungKuehlMax.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numHithermPressurePa_ValueChanged(object sender, EventArgs e) {
+			numHithermPressureMbar.Value = numHithermPressurePa.Value / 100;
+			HithermProduct.ConfigMaxPressureLost = (int)numHithermPressurePa.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numHithermPressureMbar_ValueChanged(object sender, EventArgs e) {
+			numHithermPressurePa.Value = numHithermPressureMbar.Value * 100;
+			HithermProduct.ConfigMaxPressureLost = (int)numHithermPressurePa.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numHithermDurchfluss_ValueChanged(object sender, EventArgs e) {
+			HithermProduct.ConfigMaxDurchfluss = (int)numHithermDurchfluss.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
