@@ -196,7 +196,13 @@ namespace Europlan.Common {
 					verlegeartCombo.Items.Clear();
 					ConnectionPipe.VerlegeartEnumConverter conv = new ConnectionPipe.VerlegeartEnumConverter();
 					verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH));
-					if (ConnectionPipe.PipeTypeEnum.PT_EUROVAL.Equals(pipeTypeCell.Value)) {
+					bool verlegeart = false;
+					DataGridViewRow selectedRow = dgvConnectionPipes.Rows[e.RowIndex];
+					if ((this.showPipesThroughProduct && this.product != null && (this.product.Product is EurovalProduct || this.product.Product is ModulKlimaBodenProduct)) ||
+						(!this.showPipesThroughProduct && selectedRow.DataBoundItem != null && (selectedRow.DataBoundItem as ConnectionPipe).ConnectionThrough != null && (selectedRow.DataBoundItem as ConnectionPipe).ConnectionThrough.Product is EurovalProduct)) {
+						verlegeart = true;
+					}
+					if (ConnectionPipe.PipeTypeEnum.PT_EUROVAL.Equals(pipeTypeCell.Value) && verlegeart) {
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV35));
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV30));
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV25));
