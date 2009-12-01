@@ -80,7 +80,9 @@ namespace Europlan.Common {
 				if (!cell.ReadOnly) {
 					e.IsInputKey = false;
 					this.dgvRequiredMaterial.BeginEdit(true);
-					cell.Value = null;
+					if (!(dgvRequiredMaterial.Rows[cell.RowIndex].DataBoundItem is GroupingSource.GroupRow)) {
+						cell.Value = null;
+					}
 					this.dgvRequiredMaterial.EndEdit();
 				}
 			}
