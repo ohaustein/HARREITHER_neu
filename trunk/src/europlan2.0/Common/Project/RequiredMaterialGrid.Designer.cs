@@ -31,14 +31,14 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvRequiredMaterial = new System.Windows.Forms.DataGridView();
-			this.partNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.requiredMaterialWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.label1 = new System.Windows.Forms.Label();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.partNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.requiredAmountDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.calculatedAmountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.unitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.CanBeCalculated = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.requiredMaterialWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.label1 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.dgvRequiredMaterial)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.requiredMaterialWrapperBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -63,8 +63,8 @@ namespace Europlan.Common {
 			this.dgvRequiredMaterial.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.dgvRequiredMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvRequiredMaterial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.partNumberDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
+            this.partNumberDataGridViewTextBoxColumn,
             this.requiredAmountDataGridViewTextBoxColumn,
             this.calculatedAmountDataGridViewTextBoxColumn,
             this.unitDataGridViewTextBoxColumn,
@@ -81,24 +81,40 @@ namespace Europlan.Common {
 			this.dgvRequiredMaterial.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dgvRequiredMaterial_PreviewKeyDown);
 			this.dgvRequiredMaterial.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvRequiredMaterial_CellFormatting);
 			// 
-			// partNumberDataGridViewTextBoxColumn
+			// requiredMaterialWrapperBindingSource
 			// 
-			this.partNumberDataGridViewTextBoxColumn.DataPropertyName = "PartNumber";
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-			this.partNumberDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-			this.partNumberDataGridViewTextBoxColumn.HeaderText = "Bestellnummer";
-			this.partNumberDataGridViewTextBoxColumn.Name = "partNumberDataGridViewTextBoxColumn";
-			this.partNumberDataGridViewTextBoxColumn.ReadOnly = true;
+			this.requiredMaterialWrapperBindingSource.DataSource = typeof(Europlan.Common.RequiredMaterialWrapper);
+			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label1.AutoSize = true;
+			this.label1.ForeColor = System.Drawing.Color.Red;
+			this.label1.Location = new System.Drawing.Point(0, 427);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(648, 13);
+			this.label1.TabIndex = 1;
+			this.label1.Text = "Bitte unbedingt beachten: Rot markierte Materialpositionen müssen vom Planenden s" +
+				"elbst anhand der Planungsvorlage ermittelt werden!";
 			// 
 			// nameDataGridViewTextBoxColumn
 			// 
 			this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-			this.nameDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+			this.nameDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
 			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
 			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
 			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// partNumberDataGridViewTextBoxColumn
+			// 
+			this.partNumberDataGridViewTextBoxColumn.DataPropertyName = "PartNumber";
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+			this.partNumberDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+			this.partNumberDataGridViewTextBoxColumn.HeaderText = "Bestellnummer";
+			this.partNumberDataGridViewTextBoxColumn.Name = "partNumberDataGridViewTextBoxColumn";
+			this.partNumberDataGridViewTextBoxColumn.ReadOnly = true;
 			// 
 			// requiredAmountDataGridViewTextBoxColumn
 			// 
@@ -143,22 +159,6 @@ namespace Europlan.Common {
 			this.CanBeCalculated.ReadOnly = true;
 			this.CanBeCalculated.Visible = false;
 			// 
-			// requiredMaterialWrapperBindingSource
-			// 
-			this.requiredMaterialWrapperBindingSource.DataSource = typeof(Europlan.Common.RequiredMaterialWrapper);
-			// 
-			// label1
-			// 
-			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.label1.AutoSize = true;
-			this.label1.ForeColor = System.Drawing.Color.Red;
-			this.label1.Location = new System.Drawing.Point(0, 427);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(648, 13);
-			this.label1.TabIndex = 1;
-			this.label1.Text = "Bitte unbedingt beachten: Rot markierte Materialpositionen müssen vom Planenden s" +
-				"elbst anhand der Planungsvorlage ermittelt werden!";
-			// 
 			// RequiredMaterialGrid
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -178,12 +178,12 @@ namespace Europlan.Common {
 
 		private System.Windows.Forms.DataGridView dgvRequiredMaterial;
 		private System.Windows.Forms.BindingSource requiredMaterialWrapperBindingSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn partNumberDataGridViewTextBoxColumn;
+		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn partNumberDataGridViewTextBoxColumn;
 		private NumericColumn requiredAmountDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn calculatedAmountDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn unitDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn CanBeCalculated;
-		private System.Windows.Forms.Label label1;
 	}
 }
