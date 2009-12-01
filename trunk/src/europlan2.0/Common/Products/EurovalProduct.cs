@@ -1747,7 +1747,7 @@ namespace Europlan.Common {
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", amount);
 
 			//Verteileranschlußbögen
-			if (this.PlannedConnection.Distributor != null) {
+			if (this.PlannedConnection != null && this.PlannedConnection.Distributor != null) {
 				string verteilerAnschluß = this.PlannedConnection.Distributor.LangeAnschlussboegen ? "EV21" : "EV20";
 				
 				amount = 0;
