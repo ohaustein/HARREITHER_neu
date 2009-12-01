@@ -378,6 +378,26 @@ namespace Europlan.Common {
 			int circuits = PlannedCircuits > 2 ? PlannedCircuits : 2;
 			partNr += String.Format("{0:00}", circuits);
 			Project.Instance.AddRequiredMaterial(requiredMaterial, partNr, 1);
+
+			if (this.FlanschKugelHaehne) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "VT35", 2);
+			}
+			if (this.AnschlussHollaender == AnschlussHollaenderEnum.hollaender32) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "VT21", 2);
+			} else if (this.AnschlussHollaender == AnschlussHollaenderEnum.hollaenderIG) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "VT20", 2);
+			}
+			string einbauSchrank = "";
+			if (this.EinbauSchrank) {
+				if (this.PlannedCircuits + this.AdditionalCircuits <= 4) {
+					einbauSchrank = "VO60";
+				} else if (this.PlannedCircuits + this.AdditionalCircuits > 4 && this.PlannedCircuits + this.AdditionalCircuits <= 9) {
+					einbauSchrank = "VO61";
+				} else {
+					einbauSchrank = "VO62";
+				}
+				Project.Instance.AddRequiredMaterial(requiredMaterial, einbauSchrank, 1);
+			}
 		}
 
 	}
