@@ -374,8 +374,10 @@ namespace Europlan.Common {
 		}
 
 		public void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			int totalCircuits = PlannedCircuits + AdditionalCircuits;
+
 			string partNr = "VO";
-			int circuits = PlannedCircuits > 2 ? PlannedCircuits : 2;
+			int circuits = totalCircuits > 2 ? totalCircuits : 2;
 			partNr += String.Format("{0:00}", circuits);
 			Project.Instance.AddRequiredMaterial(requiredMaterial, partNr, 1);
 
@@ -389,9 +391,9 @@ namespace Europlan.Common {
 			}
 			string einbauSchrank = "";
 			if (this.EinbauSchrank) {
-				if (this.PlannedCircuits + this.AdditionalCircuits <= 4) {
+				if (totalCircuits <= 4) {
 					einbauSchrank = "VO60";
-				} else if (this.PlannedCircuits + this.AdditionalCircuits > 4 && this.PlannedCircuits + this.AdditionalCircuits <= 9) {
+				} else if (totalCircuits > 4 && totalCircuits <= 9) {
 					einbauSchrank = "VO61";
 				} else {
 					einbauSchrank = "VO62";
