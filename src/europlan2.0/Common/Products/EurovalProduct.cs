@@ -1764,6 +1764,10 @@ namespace Europlan.Common {
 			if (!anhydritEstrich) {
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "EV34", totalArea * 0.2);
 			}
+			// Randdämmstreifen
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV30", totalArea);
+			// PE Folie
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV31", totalArea * 1.1);
 
 			// unknown amount
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV11", -1);
