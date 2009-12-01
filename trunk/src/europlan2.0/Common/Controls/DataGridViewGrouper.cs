@@ -609,7 +609,7 @@ namespace Europlan.Common {
 				ResetGroup();
 			}
 		}
-		class GroupRow : IGroupRow {
+		public class GroupRow : IGroupRow {
 			private int index;
 
 			public int Index {

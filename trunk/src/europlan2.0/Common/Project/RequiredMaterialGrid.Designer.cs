@@ -31,14 +31,14 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvRequiredMaterial = new System.Windows.Forms.DataGridView();
-			this.requiredMaterialWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.CanBeCalculated = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.label1 = new System.Windows.Forms.Label();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.partNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.requiredAmountDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.calculatedAmountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.unitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.CanBeCalculated = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.requiredMaterialWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dgvRequiredMaterial)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.requiredMaterialWrapperBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -81,9 +81,13 @@ namespace Europlan.Common {
 			this.dgvRequiredMaterial.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dgvRequiredMaterial_PreviewKeyDown);
 			this.dgvRequiredMaterial.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvRequiredMaterial_CellFormatting);
 			// 
-			// requiredMaterialWrapperBindingSource
+			// CanBeCalculated
 			// 
-			this.requiredMaterialWrapperBindingSource.DataSource = typeof(Europlan.Common.RequiredMaterialWrapper);
+			this.CanBeCalculated.DataPropertyName = "CanBeCalculated";
+			this.CanBeCalculated.HeaderText = "CanBeCalculated";
+			this.CanBeCalculated.Name = "CanBeCalculated";
+			this.CanBeCalculated.ReadOnly = true;
+			this.CanBeCalculated.Visible = false;
 			// 
 			// label1
 			// 
@@ -151,13 +155,9 @@ namespace Europlan.Common {
 			this.unitDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.unitDataGridViewTextBoxColumn.Width = 70;
 			// 
-			// CanBeCalculated
+			// requiredMaterialWrapperBindingSource
 			// 
-			this.CanBeCalculated.DataPropertyName = "CanBeCalculated";
-			this.CanBeCalculated.HeaderText = "CanBeCalculated";
-			this.CanBeCalculated.Name = "CanBeCalculated";
-			this.CanBeCalculated.ReadOnly = true;
-			this.CanBeCalculated.Visible = false;
+			this.requiredMaterialWrapperBindingSource.DataSource = typeof(Europlan.Common.RequiredMaterialWrapper);
 			// 
 			// RequiredMaterialGrid
 			// 
