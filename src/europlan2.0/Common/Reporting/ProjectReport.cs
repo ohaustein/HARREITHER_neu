@@ -676,7 +676,7 @@ namespace Europlan.Common {
 					foreach (PlannedProduct pp in room.PlannedProducts) {
 						ProductConnection connection = pp.Product.PlannedConnection;
 						foreach (Circuit c in pp.Product.PlannedCircuits) {
-							if (connection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+							if (connection != null && connection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
 								wrapper = new VerlegedatenCircuitWrapper();
 								wrapper.Distributor = connection.Distributor.Id + " " + connection.Distributor.Name + " " + connection.Distributor.AssociatedFloor.Name;
 								wrapper.Name = pp.Product.ToString() + " in ";
