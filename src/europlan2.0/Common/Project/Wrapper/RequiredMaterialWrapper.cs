@@ -23,9 +23,24 @@ namespace Europlan.Common {
 		public double CalculatedAmount {
 			get {
 				if (Project.Instance.RequiredMaterialCalculated.ContainsKey(material.Id)) {
-					return Math.Ceiling(Project.Instance.RequiredMaterialCalculated[material.Id]);
+					if (Project.Instance.RequiredMaterialCalculated[material.Id] >= 0) {
+						return Math.Ceiling(Project.Instance.RequiredMaterialCalculated[material.Id]);
+					} else {
+						return 0;
+					}
 				}
 				return 0; 
+			}
+		}
+
+		public bool CanBeCalculated {
+			get {
+				if (Project.Instance.RequiredMaterialCalculated.ContainsKey(material.Id)) {
+					if (Project.Instance.RequiredMaterialCalculated[material.Id] < 0) {
+						return false;
+					}
+				}
+				return true;
 			}
 		}
 
