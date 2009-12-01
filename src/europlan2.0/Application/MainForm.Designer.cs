@@ -27,6 +27,7 @@ namespace Europlan.Application {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
 			this.projectTree = new System.Windows.Forms.TreeView();
+			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.mainMenu = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,6 @@ namespace Europlan.Application {
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.openGlobalConfDialog = new System.Windows.Forms.OpenFileDialog();
-			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.mainMenu.SuspendLayout();
@@ -97,10 +97,17 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.projectTree, "projectTree");
 			this.projectTree.FullRowSelect = true;
 			this.projectTree.HideSelection = false;
-			this.projectTree.ImageList = this.imageList;
 			this.projectTree.Name = "projectTree";
 			this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
 			this.projectTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.projectTree_BeforeSelect);
+			// 
+			// imageList
+			// 
+			this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+			this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.imageList.Images.SetKeyName(0, "default.png");
+			this.imageList.Images.SetKeyName(1, "kfm_home-alt.png");
+			this.imageList.Images.SetKeyName(2, "kontact_journal.png");
 			// 
 			// mainMenu
 			// 
@@ -386,14 +393,6 @@ namespace Europlan.Application {
 			// openGlobalConfDialog
 			// 
 			resources.ApplyResources(this.openGlobalConfDialog, "openGlobalConfDialog");
-			// 
-			// imageList
-			// 
-			this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-			this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.imageList.Images.SetKeyName(0, "default.png");
-			this.imageList.Images.SetKeyName(1, "kfm_home-alt.png");
-			this.imageList.Images.SetKeyName(2, "kontact_journal.png");
 			// 
 			// MainForm
 			// 
