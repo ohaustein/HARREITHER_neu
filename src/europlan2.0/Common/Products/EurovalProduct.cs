@@ -1716,14 +1716,20 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			
+			double connectionPipeArea = 0;
+			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
+				connectionPipeArea += pipe.AreaTotal;
+			}
+
+			double totalArea = this.PlannedAreaResidence + this.PlannedAreaRim + connectionPipeArea;
+			
 			// Euroval Rohr
 			double length = 0;
 			foreach (EurovalCircuit c in this.circuits) {
 				length += c.PipeLengthWithoutOtherProduct;
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", length);
-
-			double totalArea = this.PlannedAreaResidence + this.PlannedAreaRim;
 
 			// Clipschiene
 			string clipschiene = clipSchieneKlebeband ? "EV16" : "EV15";
@@ -1733,7 +1739,7 @@ namespace Europlan.Common {
 			}
 			if (this.PlannedRimType.HasValue) {
 				amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
-			}
+			}		
 			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
 
 			// Ovalmuffe
@@ -1749,16 +1755,16 @@ namespace Europlan.Common {
 			//Verteileranschluﬂbˆgen
 			if (this.PlannedConnection != null && this.PlannedConnection.Distributor != null) {
 				string verteilerAnschluﬂ = this.PlannedConnection.Distributor.LangeAnschlussboegen ? "EV21" : "EV20";
-				
-				amount = 0;
-				if (this.PlannedLayDistance.HasValue) {
-					amount += this.PlannedAreaResidence * GetVerteilerAnschlussPerSqm(this.PlannedLayDistance.Value);
-				}
-				if (this.PlannedRimType.HasValue) {
-					amount += this.PlannedAreaRim * GetVerteilerAnschlussPerSqm(GetRimLayDistance(this.PlannedRimType.Value));
-				}
-				Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, amount);
-				}
+				//amount = 0;
+				//if (this.PlannedLayDistance.HasValue) {
+				//    amount += this.PlannedAreaResidence * GetVerteilerAnschlussPerSqm(this.PlannedLayDistance.Value);
+				//}
+				//if (this.PlannedRimType.HasValue) {
+				//    amount += this.PlannedAreaRim * GetVerteilerAnschlussPerSqm(GetRimLayDistance(this.PlannedRimType.Value));
+				//}
+				//Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, amount);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, this.circuits.Count * 2);Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, this.circuits.Count * 2);
+			}
 
 			// Eco 30
 			if (!anhydritEstrich) {
