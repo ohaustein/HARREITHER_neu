@@ -525,6 +525,56 @@ namespace Europlan.Common {
 			}
 		}
 
+		private double GetOvalmuffePerSqm(LayDistance layDistance) {
+			switch (layDistance) {
+				case LayDistance.A5:
+					return 0.1;
+				case LayDistance.EV5:
+					return 0.07;
+				case LayDistance.EV10:
+					return 0.06;
+				case LayDistance.EV15:
+					return 0.05;
+				case LayDistance.EV20:
+					return 0.04;
+				case LayDistance.EV25:
+					return 0.03;
+				case LayDistance.EV30:
+					return 0.02;
+				case LayDistance.EV35:
+					return 0.02;
+				case LayDistance.NONE:
+					return 0;
+				default:
+					throw new Exception("Unknown Laydistance");
+			}
+		}
+
+		private double GetVerteilerAnschlussPerSqm(LayDistance layDistance) {
+			switch (layDistance) {
+				case LayDistance.A5:
+					return 0.5;
+				case LayDistance.EV5:
+					return 0.25;
+				case LayDistance.EV10:
+					return 0.2;
+				case LayDistance.EV15:
+					return 0.18;
+				case LayDistance.EV20:
+					return 0.14;
+				case LayDistance.EV25:
+					return 0.12;
+				case LayDistance.EV30:
+					return 0.10;
+				case LayDistance.EV35:
+					return 0.10;
+				case LayDistance.NONE:
+					return 0;
+				default:
+					throw new Exception("Unknown Laydistance");
+			}
+		}
+
 		/// <summary>
 		/// Returns distance between two pipes in m for specified laydistance 
 		/// </summary>
@@ -1666,11 +1716,7 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-			//double azLength = this.PlannedAreaResidence * GetPipeLengthPerSqm(this.PlannedLayDistance);
-			//double rzLength = 0;
-			//if (this.PlannedRimType != null) {
-			//    rzLength = this.PlannedAreaRim * GetPipeLengthPerSqm(GetRimLayDistance(this.PlannedRimType));
-			//}
+			// Euroval Rohr
 			double length = 0;
 			foreach (EurovalCircuit c in this.circuits) {
 				length += c.PipeLengthWithoutOtherProduct;
@@ -1679,6 +1725,7 @@ namespace Europlan.Common {
 
 			double totalArea = this.PlannedAreaResidence + this.PlannedAreaRim;
 
+			// Clipschiene
 			string clipschiene = clipSchieneKlebeband ? "EV16" : "EV15";
 			double amount = 0;
 			if (this.PlannedLayDistance.HasValue) {
@@ -1689,9 +1736,39 @@ namespace Europlan.Common {
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
 
+			// Ovalmuffe
+			amount = 0;
+			if (this.PlannedLayDistance.HasValue) {
+				amount += this.PlannedAreaResidence * GetOvalmuffePerSqm(this.PlannedLayDistance.Value);
+			}
+			if (this.PlannedRimType.HasValue) {
+				amount += this.PlannedAreaRim * GetOvalmuffePerSqm(GetRimLayDistance(this.PlannedRimType.Value));
+			}
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", amount);
+
+			//Verteileranschluﬂbˆgen
+			if (this.PlannedConnection.Distributor != null) {
+				string verteilerAnschluﬂ = this.PlannedConnection.Distributor.LangeAnschlussboegen ? "EV21" : "EV20";
+				
+				amount = 0;
+				if (this.PlannedLayDistance.HasValue) {
+					amount += this.PlannedAreaResidence * GetVerteilerAnschlussPerSqm(this.PlannedLayDistance.Value);
+				}
+				if (this.PlannedRimType.HasValue) {
+					amount += this.PlannedAreaRim * GetVerteilerAnschlussPerSqm(GetRimLayDistance(this.PlannedRimType.Value));
+				}
+				Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, amount);
+				}
+
+			// Eco 30
 			if (!anhydritEstrich) {
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "EV34", totalArea * 0.2);
 			}
+
+			// unknown amount
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV11", -1);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV12", -1);
 		}
+
 	}
 }

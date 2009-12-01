@@ -86,6 +86,19 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void dgvRequiredMaterial_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+			if ((e.RowIndex > 0) && 
+				((e.ColumnIndex == nameDataGridViewTextBoxColumn.Index) || 
+				(e.ColumnIndex == calculatedAmountDataGridViewTextBoxColumn.Index) ||
+				e.ColumnIndex == unitDataGridViewTextBoxColumn.Index ||
+				e.ColumnIndex == partNumberDataGridViewTextBoxColumn.Index)) {
+				DataGridViewRow row = dgvRequiredMaterial.Rows[e.RowIndex];
+				if ((row.Cells[CanBeCalculated.Index].Value != null) && ((bool)row.Cells[CanBeCalculated.Index].Value == false)) {
+					e.CellStyle.ForeColor = Color.Red;
+				}
+			}
+		}
+
 	}
 
 }
