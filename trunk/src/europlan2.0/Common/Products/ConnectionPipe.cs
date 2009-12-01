@@ -341,12 +341,22 @@ namespace Europlan.Common {
 		}
 
 		public VerlegeartEnum Verlegeart {
-			get { return this.verlegeart; }
+			get {
+				if (this.ConnectionThrough != null && !(this.ConnectionThrough.Product is EurovalProduct) && !(this.ConnectionThrough.Product is ModulKlimaBodenProduct)) {
+					return VerlegeartEnum.VA_UNTER_ESTRICH;
+				}
+				return this.verlegeart;
+			}
 			set { this.verlegeart = value; }
 		}
 
 		public InsulationEnum Insulation {
-			get { return this.insulation; }
+			get {
+				if (this.Verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH) {
+					return InsulationEnum.IN_VL_RL;
+				}
+				return this.insulation;
+			}
 			set { this.insulation = value; }
 		}
 

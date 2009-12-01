@@ -111,8 +111,6 @@ namespace Europlan.Common {
 
 				lblQHeat.Visible = showHeat;
 				lblQHeatUnit.Visible = showHeat;
-				lblQAnbHeat.Visible = showHeat;
-				lblQAnbHeatUnit.Visible = showHeat;
 				lblQHeatDiff.Visible = showHeat;
 				lblQHeatDiffUnit.Visible = showHeat;
 				lblQHeatRest.Visible = showHeat;
@@ -125,8 +123,6 @@ namespace Europlan.Common {
 				lblDruckverlustHeatUnit.Visible = showHeatCircuit;
 				lblQCool.Visible = showCool;
 				lblQCoolUnit.Visible = showCool;
-				lblQAnbCool.Visible = showCool;
-				lblQAnbCoolUnit.Visible = showCool;
 				lblQCoolDiff.Visible = showCool;
 				lblQCoolDiffUnit.Visible = showCool;
 				lblQCoolRest.Visible = showCool;
@@ -216,9 +212,14 @@ namespace Europlan.Common {
 
 				lblRest.Text = "Rest (" + this.product.Product.AssociatedRoom.ToString() + ")";
 				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 2).ToString();
-				lblQAnbHeat.Text = Math.Round(this.product.Product.PlannedHeatLoadAnbindung, 0).ToString();
 				lblQHeatDiff.Text = Math.Round(qDiffHeat, 2).ToString();
 				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString();
+				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
+				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
+				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString();
+				lblCoveredArea.Text = Math.Round(hp.PlannedWallArea, 2).ToString();
+				lblNecessaryWaermestromdichte.Text = (hp.PlannedWallArea > 0) ? Math.Round(this.product.RequestedHeatLoad / hp.PlannedWallArea, 2).ToString() : "--";
+				lblNecessaryArea.Text = (hp.PlannedHeatLoad > 0 && hp.PlannedWallArea > 0) ? Math.Round(this.product.RequestedHeatLoad / (hp.PlannedHeatLoad / hp.PlannedWallArea), 2).ToString() : "--";
 				if (selectedCircuit >= 0) {
 					HithermCircuit hc = hp.GetCircuitForRegister(this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem as HithermRegister);
 					lblHk.Text = "Heizkreis " + selectedCircuit.ToString() + ":";
@@ -226,10 +227,6 @@ namespace Europlan.Common {
 					lblDurchflussHeat.Text = Math.Round(hc.C_DurchflussHeat, 2).ToString();
 					lblDruckverlustHeat.Text = Math.Round(hc.C_DruckverlustHeat, 2).ToString();
 					//lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempHeat, 2).ToString();
-					lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
-					lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
-					lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
-					lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString();
 					lblAvgqCool.Text = (-1.0 * Math.Round(hc.C_QCoolPerSqm, 2)).ToString();
 					lblDurchflussCool.Text = Math.Round(hc.C_DurchflussCool, 2).ToString();
 					lblDruckverlustCool.Text = Math.Round(hc.C_DruckverlustCool, 2).ToString();

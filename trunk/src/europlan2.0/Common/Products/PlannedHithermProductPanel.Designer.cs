@@ -76,23 +76,9 @@ namespace Europlan.Common {
 			this.PlannedProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.hithermRegisterBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.lblError = new System.Windows.Forms.Label();
-			this.lblQAnbCoolUnit = new System.Windows.Forms.Label();
-			this.lblQAnbHeatUnit = new System.Windows.Forms.Label();
-			this.lblQAnbCool = new System.Windows.Forms.Label();
-			this.lblQAnbHeat = new System.Windows.Forms.Label();
-			this.label45 = new System.Windows.Forms.Label();
-			this.lblRestAreaUnit = new System.Windows.Forms.Label();
-			this.lblAnbArea = new System.Windows.Forms.Label();
-			this.label38 = new System.Windows.Forms.Label();
-			this.lblAnbAreaUnit = new System.Windows.Forms.Label();
 			this.lblCoveredAreaUnit = new System.Windows.Forms.Label();
-			this.lblAvailableAreaUnit = new System.Windows.Forms.Label();
-			this.lblRestArea = new System.Windows.Forms.Label();
 			this.lblCoveredArea = new System.Windows.Forms.Label();
-			this.lblAvailableArea = new System.Windows.Forms.Label();
-			this.label43 = new System.Windows.Forms.Label();
 			this.label42 = new System.Windows.Forms.Label();
-			this.label41 = new System.Windows.Forms.Label();
 			this.groupBox6 = new System.Windows.Forms.GroupBox();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.label32 = new System.Windows.Forms.Label();
@@ -139,6 +125,12 @@ namespace Europlan.Common {
 			this.Verlegeart = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.label1 = new System.Windows.Forms.Label();
+			this.lblNecessaryWaermestromdichte = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.lblNecessaryArea = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
 			this.grpPowerArea.SuspendLayout();
 			this.tabs.SuspendLayout();
 			this.pageInput.SuspendLayout();
@@ -537,25 +529,17 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.label2);
+			this.panel2.Controls.Add(this.lblNecessaryArea);
+			this.panel2.Controls.Add(this.label8);
+			this.panel2.Controls.Add(this.label1);
+			this.panel2.Controls.Add(this.lblNecessaryWaermestromdichte);
+			this.panel2.Controls.Add(this.label3);
 			this.panel2.Controls.Add(this.dgvRegisters);
 			this.panel2.Controls.Add(this.lblError);
-			this.panel2.Controls.Add(this.lblQAnbCoolUnit);
-			this.panel2.Controls.Add(this.lblQAnbHeatUnit);
-			this.panel2.Controls.Add(this.lblQAnbCool);
-			this.panel2.Controls.Add(this.lblQAnbHeat);
-			this.panel2.Controls.Add(this.label45);
-			this.panel2.Controls.Add(this.lblRestAreaUnit);
-			this.panel2.Controls.Add(this.lblAnbArea);
-			this.panel2.Controls.Add(this.label38);
-			this.panel2.Controls.Add(this.lblAnbAreaUnit);
 			this.panel2.Controls.Add(this.lblCoveredAreaUnit);
-			this.panel2.Controls.Add(this.lblAvailableAreaUnit);
-			this.panel2.Controls.Add(this.lblRestArea);
 			this.panel2.Controls.Add(this.lblCoveredArea);
-			this.panel2.Controls.Add(this.lblAvailableArea);
-			this.panel2.Controls.Add(this.label43);
 			this.panel2.Controls.Add(this.label42);
-			this.panel2.Controls.Add(this.label41);
 			this.panel2.Controls.Add(this.groupBox6);
 			this.panel2.Controls.Add(this.groupBox5);
 			this.panel2.Controls.Add(this.label32);
@@ -695,6 +679,8 @@ namespace Europlan.Common {
 			this.constructionDataGridViewTextBoxColumn.DataPropertyName = "Construction";
 			this.constructionDataGridViewTextBoxColumn.HeaderText = "Konstr.";
 			this.constructionDataGridViewTextBoxColumn.Name = "constructionDataGridViewTextBoxColumn";
+			this.constructionDataGridViewTextBoxColumn.ReadOnly = true;
+			this.constructionDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// heizkreisDataGridViewTextBoxColumn
 			// 
@@ -802,158 +788,37 @@ namespace Europlan.Common {
 			this.lblError.TabIndex = 138;
 			this.lblError.Visible = false;
 			// 
-			// lblQAnbCoolUnit
-			// 
-			this.lblQAnbCoolUnit.Location = new System.Drawing.Point(355, 357);
-			this.lblQAnbCoolUnit.Name = "lblQAnbCoolUnit";
-			this.lblQAnbCoolUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblQAnbCoolUnit.TabIndex = 137;
-			this.lblQAnbCoolUnit.Text = "W";
-			// 
-			// lblQAnbHeatUnit
-			// 
-			this.lblQAnbHeatUnit.Location = new System.Drawing.Point(243, 357);
-			this.lblQAnbHeatUnit.Name = "lblQAnbHeatUnit";
-			this.lblQAnbHeatUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblQAnbHeatUnit.TabIndex = 136;
-			this.lblQAnbHeatUnit.Text = "W";
-			// 
-			// lblQAnbCool
-			// 
-			this.lblQAnbCool.Location = new System.Drawing.Point(290, 357);
-			this.lblQAnbCool.Name = "lblQAnbCool";
-			this.lblQAnbCool.Size = new System.Drawing.Size(50, 13);
-			this.lblQAnbCool.TabIndex = 135;
-			this.lblQAnbCool.Text = "W";
-			this.lblQAnbCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// lblQAnbHeat
-			// 
-			this.lblQAnbHeat.Location = new System.Drawing.Point(187, 357);
-			this.lblQAnbHeat.Name = "lblQAnbHeat";
-			this.lblQAnbHeat.Size = new System.Drawing.Size(50, 13);
-			this.lblQAnbHeat.TabIndex = 134;
-			this.lblQAnbHeat.Text = "W";
-			this.lblQAnbHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// label45
-			// 
-			this.label45.AutoSize = true;
-			this.label45.Location = new System.Drawing.Point(4, 357);
-			this.label45.Name = "label45";
-			this.label45.Size = new System.Drawing.Size(135, 13);
-			this.label45.TabIndex = 133;
-			this.label45.Text = "Leistung Anbindeleitungen:";
-			// 
-			// lblRestAreaUnit
-			// 
-			this.lblRestAreaUnit.Location = new System.Drawing.Point(652, 397);
-			this.lblRestAreaUnit.Name = "lblRestAreaUnit";
-			this.lblRestAreaUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblRestAreaUnit.TabIndex = 132;
-			this.lblRestAreaUnit.Text = "m²";
-			// 
-			// lblAnbArea
-			// 
-			this.lblAnbArea.Location = new System.Drawing.Point(596, 377);
-			this.lblAnbArea.Name = "lblAnbArea";
-			this.lblAnbArea.Size = new System.Drawing.Size(50, 13);
-			this.lblAnbArea.TabIndex = 131;
-			this.lblAnbArea.Text = "W";
-			this.lblAnbArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// label38
-			// 
-			this.label38.AutoSize = true;
-			this.label38.Location = new System.Drawing.Point(457, 397);
-			this.label38.Name = "label38";
-			this.label38.Size = new System.Drawing.Size(76, 13);
-			this.label38.TabIndex = 130;
-			this.label38.Text = "Übrige Fläche:";
-			// 
-			// lblAnbAreaUnit
-			// 
-			this.lblAnbAreaUnit.Location = new System.Drawing.Point(652, 377);
-			this.lblAnbAreaUnit.Name = "lblAnbAreaUnit";
-			this.lblAnbAreaUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblAnbAreaUnit.TabIndex = 129;
-			this.lblAnbAreaUnit.Text = "m²";
-			// 
 			// lblCoveredAreaUnit
 			// 
-			this.lblCoveredAreaUnit.Location = new System.Drawing.Point(652, 357);
+			this.lblCoveredAreaUnit.Location = new System.Drawing.Point(652, 337);
 			this.lblCoveredAreaUnit.Name = "lblCoveredAreaUnit";
 			this.lblCoveredAreaUnit.Size = new System.Drawing.Size(35, 13);
 			this.lblCoveredAreaUnit.TabIndex = 128;
 			this.lblCoveredAreaUnit.Text = "m²";
 			// 
-			// lblAvailableAreaUnit
-			// 
-			this.lblAvailableAreaUnit.Location = new System.Drawing.Point(652, 337);
-			this.lblAvailableAreaUnit.Name = "lblAvailableAreaUnit";
-			this.lblAvailableAreaUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblAvailableAreaUnit.TabIndex = 127;
-			this.lblAvailableAreaUnit.Text = "m²";
-			// 
-			// lblRestArea
-			// 
-			this.lblRestArea.Location = new System.Drawing.Point(596, 397);
-			this.lblRestArea.Name = "lblRestArea";
-			this.lblRestArea.Size = new System.Drawing.Size(50, 13);
-			this.lblRestArea.TabIndex = 126;
-			this.lblRestArea.Text = "W";
-			this.lblRestArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
 			// lblCoveredArea
 			// 
-			this.lblCoveredArea.Location = new System.Drawing.Point(596, 357);
+			this.lblCoveredArea.Location = new System.Drawing.Point(596, 337);
 			this.lblCoveredArea.Name = "lblCoveredArea";
 			this.lblCoveredArea.Size = new System.Drawing.Size(50, 13);
 			this.lblCoveredArea.TabIndex = 125;
 			this.lblCoveredArea.Text = "W";
 			this.lblCoveredArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
-			// lblAvailableArea
-			// 
-			this.lblAvailableArea.Location = new System.Drawing.Point(596, 337);
-			this.lblAvailableArea.Name = "lblAvailableArea";
-			this.lblAvailableArea.Size = new System.Drawing.Size(50, 13);
-			this.lblAvailableArea.TabIndex = 124;
-			this.lblAvailableArea.Text = "W";
-			this.lblAvailableArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// label43
-			// 
-			this.label43.AutoSize = true;
-			this.label43.Location = new System.Drawing.Point(457, 377);
-			this.label43.Name = "label43";
-			this.label43.Size = new System.Drawing.Size(127, 13);
-			this.label43.TabIndex = 123;
-			this.label43.Text = "Fläche Anbindeleitungen:";
-			// 
 			// label42
 			// 
 			this.label42.AutoSize = true;
-			this.label42.Location = new System.Drawing.Point(457, 357);
+			this.label42.Location = new System.Drawing.Point(457, 337);
 			this.label42.Name = "label42";
 			this.label42.Size = new System.Drawing.Size(81, 13);
 			this.label42.TabIndex = 122;
 			this.label42.Text = "Belegte Fläche:";
 			// 
-			// label41
-			// 
-			this.label41.AutoSize = true;
-			this.label41.Location = new System.Drawing.Point(457, 337);
-			this.label41.Name = "label41";
-			this.label41.Size = new System.Drawing.Size(97, 13);
-			this.label41.TabIndex = 121;
-			this.label41.Text = "Verfügbare Fläche:";
-			// 
 			// groupBox6
 			// 
 			this.groupBox6.Location = new System.Drawing.Point(590, 300);
 			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(2, 120);
+			this.groupBox6.Size = new System.Drawing.Size(2, 100);
 			this.groupBox6.TabIndex = 83;
 			this.groupBox6.TabStop = false;
 			// 
@@ -1009,7 +874,7 @@ namespace Europlan.Common {
 			// 
 			// lblQCoolRestUnit
 			// 
-			this.lblQCoolRestUnit.Location = new System.Drawing.Point(355, 397);
+			this.lblQCoolRestUnit.Location = new System.Drawing.Point(355, 377);
 			this.lblQCoolRestUnit.Name = "lblQCoolRestUnit";
 			this.lblQCoolRestUnit.Size = new System.Drawing.Size(35, 13);
 			this.lblQCoolRestUnit.TabIndex = 115;
@@ -1017,7 +882,7 @@ namespace Europlan.Common {
 			// 
 			// lblQCoolDiffUnit
 			// 
-			this.lblQCoolDiffUnit.Location = new System.Drawing.Point(355, 377);
+			this.lblQCoolDiffUnit.Location = new System.Drawing.Point(355, 357);
 			this.lblQCoolDiffUnit.Name = "lblQCoolDiffUnit";
 			this.lblQCoolDiffUnit.Size = new System.Drawing.Size(35, 13);
 			this.lblQCoolDiffUnit.TabIndex = 114;
@@ -1057,7 +922,7 @@ namespace Europlan.Common {
 			// 
 			// lblQHeatRestUnit
 			// 
-			this.lblQHeatRestUnit.Location = new System.Drawing.Point(243, 397);
+			this.lblQHeatRestUnit.Location = new System.Drawing.Point(243, 377);
 			this.lblQHeatRestUnit.Name = "lblQHeatRestUnit";
 			this.lblQHeatRestUnit.Size = new System.Drawing.Size(35, 13);
 			this.lblQHeatRestUnit.TabIndex = 108;
@@ -1065,7 +930,7 @@ namespace Europlan.Common {
 			// 
 			// lblQHeatDiffUnit
 			// 
-			this.lblQHeatDiffUnit.Location = new System.Drawing.Point(243, 377);
+			this.lblQHeatDiffUnit.Location = new System.Drawing.Point(243, 357);
 			this.lblQHeatDiffUnit.Name = "lblQHeatDiffUnit";
 			this.lblQHeatDiffUnit.Size = new System.Drawing.Size(35, 13);
 			this.lblQHeatDiffUnit.TabIndex = 107;
@@ -1108,7 +973,7 @@ namespace Europlan.Common {
 			// 
 			// lblQCoolRest
 			// 
-			this.lblQCoolRest.Location = new System.Drawing.Point(290, 397);
+			this.lblQCoolRest.Location = new System.Drawing.Point(290, 377);
 			this.lblQCoolRest.Name = "lblQCoolRest";
 			this.lblQCoolRest.Size = new System.Drawing.Size(50, 13);
 			this.lblQCoolRest.TabIndex = 101;
@@ -1117,7 +982,7 @@ namespace Europlan.Common {
 			// 
 			// lblQCoolDiff
 			// 
-			this.lblQCoolDiff.Location = new System.Drawing.Point(290, 377);
+			this.lblQCoolDiff.Location = new System.Drawing.Point(290, 357);
 			this.lblQCoolDiff.Name = "lblQCoolDiff";
 			this.lblQCoolDiff.Size = new System.Drawing.Size(50, 13);
 			this.lblQCoolDiff.TabIndex = 100;
@@ -1162,7 +1027,7 @@ namespace Europlan.Common {
 			// 
 			// lblQHeatRest
 			// 
-			this.lblQHeatRest.Location = new System.Drawing.Point(187, 397);
+			this.lblQHeatRest.Location = new System.Drawing.Point(187, 377);
 			this.lblQHeatRest.Name = "lblQHeatRest";
 			this.lblQHeatRest.Size = new System.Drawing.Size(50, 13);
 			this.lblQHeatRest.TabIndex = 94;
@@ -1171,7 +1036,7 @@ namespace Europlan.Common {
 			// 
 			// lblQHeatDiff
 			// 
-			this.lblQHeatDiff.Location = new System.Drawing.Point(187, 377);
+			this.lblQHeatDiff.Location = new System.Drawing.Point(187, 357);
 			this.lblQHeatDiff.Name = "lblQHeatDiff";
 			this.lblQHeatDiff.Size = new System.Drawing.Size(50, 13);
 			this.lblQHeatDiff.TabIndex = 93;
@@ -1190,7 +1055,7 @@ namespace Europlan.Common {
 			// lblRest
 			// 
 			this.lblRest.AutoSize = true;
-			this.lblRest.Location = new System.Drawing.Point(4, 397);
+			this.lblRest.Location = new System.Drawing.Point(4, 377);
 			this.lblRest.Name = "lblRest";
 			this.lblRest.Size = new System.Drawing.Size(75, 13);
 			this.lblRest.TabIndex = 87;
@@ -1199,7 +1064,7 @@ namespace Europlan.Common {
 			// label16
 			// 
 			this.label16.AutoSize = true;
-			this.label16.Location = new System.Drawing.Point(4, 377);
+			this.label16.Location = new System.Drawing.Point(4, 357);
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(165, 13);
 			this.label16.TabIndex = 86;
@@ -1342,6 +1207,58 @@ namespace Europlan.Common {
 			this.Column4.HeaderText = "Column4";
 			this.Column4.Name = "Column4";
 			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(652, 357);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(35, 13);
+			this.label1.TabIndex = 142;
+			this.label1.Text = "W/m²";
+			// 
+			// lblNecessaryWaermestromdichte
+			// 
+			this.lblNecessaryWaermestromdichte.Location = new System.Drawing.Point(596, 357);
+			this.lblNecessaryWaermestromdichte.Name = "lblNecessaryWaermestromdichte";
+			this.lblNecessaryWaermestromdichte.Size = new System.Drawing.Size(50, 13);
+			this.lblNecessaryWaermestromdichte.TabIndex = 141;
+			this.lblNecessaryWaermestromdichte.Text = "W";
+			this.lblNecessaryWaermestromdichte.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(457, 357);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(125, 13);
+			this.label3.TabIndex = 140;
+			this.label3.Text = "benötigte Wärmestromd.:";
+			// 
+			// label2
+			// 
+			this.label2.Location = new System.Drawing.Point(652, 377);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(35, 13);
+			this.label2.TabIndex = 145;
+			this.label2.Text = "m²";
+			// 
+			// lblNecessaryArea
+			// 
+			this.lblNecessaryArea.Location = new System.Drawing.Point(596, 377);
+			this.lblNecessaryArea.Name = "lblNecessaryArea";
+			this.lblNecessaryArea.Size = new System.Drawing.Size(50, 13);
+			this.lblNecessaryArea.TabIndex = 144;
+			this.lblNecessaryArea.Text = "W";
+			this.lblNecessaryArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(457, 377);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(89, 13);
+			this.label8.TabIndex = 143;
+			this.label8.Text = "benötigte Fläche:";
+			// 
 			// PlannedHithermProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1439,26 +1356,12 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblQHeatDiffUnit;
 		private System.Windows.Forms.Label lblQHeatUnit;
 		private System.Windows.Forms.GroupBox groupBox4;
-		private System.Windows.Forms.Label lblAnbAreaUnit;
 		private System.Windows.Forms.Label lblCoveredAreaUnit;
-		private System.Windows.Forms.Label lblAvailableAreaUnit;
-		private System.Windows.Forms.Label lblRestArea;
 		private System.Windows.Forms.Label lblCoveredArea;
-		private System.Windows.Forms.Label lblAvailableArea;
-		private System.Windows.Forms.Label label43;
 		private System.Windows.Forms.Label label42;
-		private System.Windows.Forms.Label label41;
 		private System.Windows.Forms.GroupBox groupBox6;
 		private System.Windows.Forms.GroupBox groupBox5;
 		private System.Windows.Forms.Label label32;
-		private System.Windows.Forms.Label lblRestAreaUnit;
-		private System.Windows.Forms.Label lblAnbArea;
-		private System.Windows.Forms.Label label38;
-		private System.Windows.Forms.Label lblQAnbCoolUnit;
-		private System.Windows.Forms.Label lblQAnbHeatUnit;
-		private System.Windows.Forms.Label lblQAnbCool;
-		private System.Windows.Forms.Label lblQAnbHeat;
-		private System.Windows.Forms.Label label45;
 		private System.Windows.Forms.Label lblError;
 		private System.Windows.Forms.DataGridView dgvRegisters;
 		private System.Windows.Forms.BindingSource hithermRegisterBindingSource;
@@ -1478,5 +1381,11 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn nrOfRegistersDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn areaDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn PlannedProduct;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label lblNecessaryWaermestromdichte;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label lblNecessaryArea;
+		private System.Windows.Forms.Label label8;
 	}
 }

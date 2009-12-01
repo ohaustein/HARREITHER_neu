@@ -320,7 +320,7 @@ namespace Europlan.Common {
 		}
 
 		public override float PlannedWallArea {
-			get { return 0; }
+			get { return this.PlannedNetArea; }
 			set { }
 		}
 
@@ -349,7 +349,13 @@ namespace Europlan.Common {
 		}
 
 		public override float PlannedNetArea {
-			get { return 0; }
+			get {
+				double area = 0;
+				foreach (HithermCircuit hc in this.circuits) {
+					area += hc.RegisterArea;
+				}
+				return (float)area;
+			}
 		}
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
