@@ -605,14 +605,51 @@ namespace Europlan.Common {
 			List<EurovalAreaOverviewWrapper> wrapperList = new List<EurovalAreaOverviewWrapper>();
 
 			EurovalAreaOverviewWrapper wrapper;
-			Random random = new Random(DateTime.Now.Millisecond);
+			EurovalProduct p = null;
+			Dictionary<EurovalProduct.LayDistance, double> aZAreaPerLayDistance = new Dictionary<EurovalProduct.LayDistance, double>();
+			Dictionary<EurovalProduct.LayDistance, double> rZAreaPerLayDistance = new Dictionary<EurovalProduct.LayDistance, double>();
+			Dictionary<EurovalProduct.LayDistance, double> connectingAreaPerLayDistance = new Dictionary<EurovalProduct.LayDistance, double>();
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						if (pp.Product is EurovalProduct) {
+							p = pp.Product as EurovalProduct;
+							if (p.PlannedLayDistance.HasValue) {
+								if (aZAreaPerLayDistance.ContainsKey(p.PlannedLayDistance.Value)) {
+									aZAreaPerLayDistance[p.PlannedLayDistance.Value] += p.PlannedAreaResidence;
+								} else {
+									aZAreaPerLayDistance.Add(p.PlannedLayDistance.Value, p.PlannedAreaResidence);
+								}
+							}
+							if (p.PlannedRimLayDistance.HasValue) {
+								if (rZAreaPerLayDistance.ContainsKey(p.PlannedRimLayDistance.Value)) {
+									rZAreaPerLayDistance[p.PlannedRimLayDistance.Value] += p.PlannedAreaRim;
+								} else {
+									rZAreaPerLayDistance.Add(p.PlannedRimLayDistance.Value, p.PlannedAreaRim);
+								}
+							}
+							foreach (ConnectionPipe pipe in p.PlannedConnectionPipes) {
+								if (connectingAreaPerLayDistance.ContainsKey(ConnectionPipe.GetLayDistance(pipe.Verlegeart))) {
+									connectingAreaPerLayDistance[ConnectionPipe.GetLayDistance(pipe.Verlegeart)] += pipe.AreaTotal;
+								} else {
+									connectingAreaPerLayDistance.Add(ConnectionPipe.GetLayDistance(pipe.Verlegeart), pipe.AreaTotal);
+								}
+							}
+						}
+					}
+				}
+			}
+
+
 			foreach (EurovalProduct.LayDistance distance in Enum.GetValues(typeof(EurovalProduct.LayDistance))) {
-				wrapper = new EurovalAreaOverviewWrapper();
-				wrapper.LayDistance = distance.ToString();
-				wrapper.AzArea = random.Next(0, 10);
-				wrapper.RzArea = random.Next(0, 10);
-				wrapper.ConnectingArea = random.Next(0, 10);
-				wrapperList.Add(wrapper);
+				if (distance != EurovalProduct.LayDistance.NONE) {
+					wrapper = new EurovalAreaOverviewWrapper();
+					wrapper.LayDistance = distance.ToString();
+					wrapper.AzArea = aZAreaPerLayDistance.ContainsKey(distance) ? aZAreaPerLayDistance[distance] : 0;
+					wrapper.RzArea = rZAreaPerLayDistance.ContainsKey(distance) ? rZAreaPerLayDistance[distance] : 0;
+					wrapper.ConnectingArea = connectingAreaPerLayDistance.ContainsKey(distance) ? connectingAreaPerLayDistance[distance] : 0;
+					wrapperList.Add(wrapper);
+				}
 			}
 
 			return wrapperList;
