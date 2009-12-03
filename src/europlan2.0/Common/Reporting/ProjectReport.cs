@@ -64,19 +64,52 @@ namespace Europlan.Common {
 
 			DataSet reportData = new DataSet();
 
-			List<BilanzWrapper> projektBilanzWrapper = this.GetProkjektBilanzReport();
-			List<ProjectWarningWrapper> projectWarningWrapper = this.GetProjectWarningReport();
-			List<FloorOverviewWrapper> floorOverviewWrapper = this.GetFloorOverviewWrapper();
-			List<EurovalAreaOverviewWrapper> eurovalOverviewWrapper = GetEurovalOverviewWrapper();
-			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = this.GetOpenHeatLoadForRoomWrapper();
-			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = this.GetOpenCoolLoadForRoomWrapper();
-			List<RegulatorCircuitWrapper> regulatorCircuitWrapper = this.GetRegulatorCircuitWrapper();
-			List<DistributorWrapper> distributorWrapper = this.GetDistributorWrapper();
-			List<RoomOverviewWrapper> roomOverviewWrapper = this.GetRoomOverviewWrapper();
-			List<EurovalWrapper> eurovalAuslegungWrapper = GetEurovalWrapper();
-			List<BilanzWrapper> eurovalBilanzWrapper = GetEurovalBilanzWrapper();
-			List<VerlegedatenCircuitWrapper> verlegedatenCircuitWrapper = GetVerlegedatenCircuitWrapper();
-			List<RequiredMaterialWrapper> requiredMaterialWrapper = GetRequiredMaterialWrapper();
+			List<BilanzWrapper> projektBilanzWrapper = new List<BilanzWrapper>();
+			List<ProjectWarningWrapper> projectWarningWrapper = new List<ProjectWarningWrapper>();
+			List<FloorOverviewWrapper> floorOverviewWrapper = new List<FloorOverviewWrapper>();
+			List<EurovalAreaOverviewWrapper> eurovalOverviewWrapper = new List<EurovalAreaOverviewWrapper>();
+			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = new List<OpenLoadForRoomWrapper>();
+			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = new List<OpenLoadForRoomWrapper>();
+			List<RegulatorCircuitWrapper> regulatorCircuitWrapper = new List<RegulatorCircuitWrapper>();
+			List<DistributorWrapper> distributorWrapper = new List<DistributorWrapper>();
+			List<RoomOverviewWrapper> roomOverviewWrapper = new List<RoomOverviewWrapper>();
+			List<EurovalWrapper> eurovalAuslegungWrapper = new List<EurovalWrapper>();
+			List<BilanzWrapper> eurovalBilanzWrapper = new List<BilanzWrapper>();
+			List<VerlegedatenCircuitWrapper> verlegedatenCircuitWrapper = new List<VerlegedatenCircuitWrapper>();
+			List<RequiredMaterialWrapper> requiredMaterialWrapper = new List<RequiredMaterialWrapper>();
+
+			projectWarningWrapper = this.GetProjectWarningReport();
+
+			if (reportOptions.ProjectOverview) {
+				projektBilanzWrapper = this.GetProkjektBilanzReport();
+
+				if (reportOptions.AreaOverview) {
+					floorOverviewWrapper = this.GetFloorOverviewWrapper();
+					eurovalOverviewWrapper = GetEurovalOverviewWrapper();
+				}
+
+				openHeatLoadWrapper = this.GetOpenHeatLoadForRoomWrapper();
+				openCoolLoadWrapper = this.GetOpenCoolLoadForRoomWrapper();
+				regulatorCircuitWrapper = this.GetRegulatorCircuitWrapper();
+				distributorWrapper = this.GetDistributorWrapper();
+				roomOverviewWrapper = this.GetRoomOverviewWrapper();
+			}
+
+			if (reportOptions.Auslegung) {
+				eurovalAuslegungWrapper = GetEurovalWrapper();
+
+				if (reportOptions.AuslegungBilanz) {
+					eurovalBilanzWrapper = GetEurovalBilanzWrapper();
+				}
+			}
+
+			if (reportOptions.Verlegedaten) {
+				verlegedatenCircuitWrapper = GetVerlegedatenCircuitWrapper();
+			}
+			
+			if (reportOptions.RequiredMaterial || reportOptions.RecommendedMaterial) {
+				requiredMaterialWrapper = GetRequiredMaterialWrapper();
+			}
 
 			DataTable projektBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
