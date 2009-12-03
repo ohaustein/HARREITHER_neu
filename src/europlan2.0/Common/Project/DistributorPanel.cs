@@ -91,7 +91,15 @@ namespace Europlan.Common {
 
 		private void numAdditionalCircuits_ValueChanged(object sender, EventArgs e) {
 			distributor.AdditionalCircuits = (int)this.numAdditionalCircuits.Value;
+			this.numZusStellantriebe.Maximum = (int)this.numAdditionalCircuits.Value;
 			UpdateCircuitsLabel();
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numZusStellantriebe_ValueChanged(object sender, EventArgs e) {
+			distributor.ZusaetzlicheStellantriebe = (int)this.numZusStellantriebe.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -157,12 +165,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void numZusStellantriebe_ValueChanged(object sender, EventArgs e) {
-			distributor.ZusaetzlicheStellantriebe = (int)this.numZusStellantriebe.Value;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
-			}
-		}
 
 		private void lstSystems_ItemCheck(object sender, ItemCheckEventArgs e) {
 			switch (e.Index) {

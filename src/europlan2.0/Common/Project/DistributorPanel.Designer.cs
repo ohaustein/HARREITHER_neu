@@ -266,7 +266,7 @@ namespace Europlan.Common {
 			// 
 			this.numZusStellantriebe.Location = new System.Drawing.Point(359, 242);
 			this.numZusStellantriebe.Maximum = new decimal(new int[] {
-            12,
+            0,
             0,
             0,
             0});
