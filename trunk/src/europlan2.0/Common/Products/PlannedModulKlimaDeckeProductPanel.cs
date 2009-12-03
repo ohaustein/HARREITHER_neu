@@ -48,6 +48,7 @@ namespace Europlan.Common {
 			this.product = this.Tag as PlannedProduct;
 			this.tabs.SelectedTab = this.pageInput;
 			this.connectionPipePanel.Update(this.product);
+			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
 			if (this.product != null) {
 				(this.product.Product as ModulKlimaDeckeProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errorMsg);
 			}
@@ -884,6 +885,10 @@ namespace Europlan.Common {
 				}
 			}
 			form.Dispose();
+		}
+
+		private void chkStellAntriebe_CheckedChanged(object sender, EventArgs e) {
+			this.product.Product.StellMotore = this.chkStellAntriebe.Checked;
 		}
 		
 	}
