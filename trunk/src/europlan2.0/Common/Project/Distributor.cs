@@ -373,8 +373,27 @@ namespace Europlan.Common {
 			}
 		}
 
+		public int PlannedStellAntriebe {
+			get {
+				int plannedStellAntriebe = 0;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						foreach (PlannedProduct pp in room.PlannedProducts) {
+							if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.DistributorId == this.Id) {
+								if (pp.Product.StellMotore) {
+									plannedStellAntriebe += pp.Product.PlannedCircuitCount;
+								}
+							}
+						}
+					}
+				}
+				return plannedStellAntriebe;
+			}
+		}
+
 		public void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 			int totalCircuits = PlannedCircuits + AdditionalCircuits;
+			int totalStellantriebe = PlannedStellAntriebe + ZusaetzlicheStellantriebe;
 
 			string partNr = "VO";
 			int circuits = totalCircuits > 2 ? totalCircuits : 2;
@@ -399,6 +418,9 @@ namespace Europlan.Common {
 					einbauSchrank = "VO62";
 				}
 				Project.Instance.AddRequiredMaterial(requiredMaterial, einbauSchrank, 1);
+			}
+			if (totalStellantriebe > 0) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "VO44", totalStellantriebe);
 			}
 		}
 
