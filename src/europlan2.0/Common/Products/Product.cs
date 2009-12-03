@@ -43,6 +43,8 @@ namespace Europlan.Common {
 		//protected int plannedCircuits = 1;
 		protected List<Circuit> circuits = new List<Circuit>();
 
+		protected bool stellMotore = false;
+
 		protected string comment = null;
 
 		protected SerializableDictionary<int, Circuit.CircuitConnection> connectedCircuits = new SerializableDictionary<int, Circuit.CircuitConnection>();
@@ -672,6 +674,11 @@ namespace Europlan.Common {
 				return this.circuits[index];
 			}
 			return null;
+		}
+
+		public bool StellMotore {
+			get { return stellMotore; }
+			set { stellMotore = value; }
 		}
 
 		/// <summary>

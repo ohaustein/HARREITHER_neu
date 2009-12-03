@@ -71,6 +71,10 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.label13 = new System.Windows.Forms.Label();
+			this.btnRemoveSubarea = new System.Windows.Forms.Button();
+			this.btnAddSubarea = new System.Windows.Forms.Button();
+			this.lstSubarea = new System.Windows.Forms.ListBox();
 			this.label14 = new System.Windows.Forms.Label();
 			this.lblError = new System.Windows.Forms.Label();
 			this.lblQAnbCoolUnit = new System.Windows.Forms.Label();
@@ -148,10 +152,7 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.label13 = new System.Windows.Forms.Label();
-			this.btnRemoveSubarea = new System.Windows.Forms.Button();
-			this.btnAddSubarea = new System.Windows.Forms.Button();
-			this.lstSubarea = new System.Windows.Forms.ListBox();
+			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -784,6 +785,7 @@ namespace Europlan.Common {
 			// 
 			this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox9.Controls.Add(this.chkStellAntriebe);
 			this.groupBox9.Controls.Add(this.btnDistributor);
 			this.groupBox9.Controls.Add(this.lblDistributor);
 			this.groupBox9.Controls.Add(this.txtDistributor);
@@ -916,6 +918,43 @@ namespace Europlan.Common {
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
+			// 
+			// label13
+			// 
+			this.label13.Location = new System.Drawing.Point(96, 14);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(86, 28);
+			this.label13.TabIndex = 143;
+			this.label13.Text = "Teilflächen";
+			// 
+			// btnRemoveSubarea
+			// 
+			this.btnRemoveSubarea.Location = new System.Drawing.Point(152, 261);
+			this.btnRemoveSubarea.Name = "btnRemoveSubarea";
+			this.btnRemoveSubarea.Size = new System.Drawing.Size(30, 23);
+			this.btnRemoveSubarea.TabIndex = 142;
+			this.btnRemoveSubarea.Text = "-";
+			this.btnRemoveSubarea.UseVisualStyleBackColor = true;
+			this.btnRemoveSubarea.Click += new System.EventHandler(this.btnRemoveSubarea_Click);
+			// 
+			// btnAddSubarea
+			// 
+			this.btnAddSubarea.Location = new System.Drawing.Point(97, 261);
+			this.btnAddSubarea.Name = "btnAddSubarea";
+			this.btnAddSubarea.Size = new System.Drawing.Size(30, 23);
+			this.btnAddSubarea.TabIndex = 141;
+			this.btnAddSubarea.Text = "+";
+			this.btnAddSubarea.UseVisualStyleBackColor = true;
+			this.btnAddSubarea.Click += new System.EventHandler(this.btnAddSubarea_Click);
+			// 
+			// lstSubarea
+			// 
+			this.lstSubarea.FormattingEnabled = true;
+			this.lstSubarea.Location = new System.Drawing.Point(97, 43);
+			this.lstSubarea.Name = "lstSubarea";
+			this.lstSubarea.Size = new System.Drawing.Size(85, 212);
+			this.lstSubarea.TabIndex = 140;
+			this.lstSubarea.SelectedIndexChanged += new System.EventHandler(this.lstSubarea_SelectedIndexChanged);
 			// 
 			// label14
 			// 
@@ -1605,42 +1644,16 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			// 
-			// label13
+			// chkStellAntriebe
 			// 
-			this.label13.Location = new System.Drawing.Point(96, 14);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(86, 28);
-			this.label13.TabIndex = 143;
-			this.label13.Text = "Teilflächen";
-			// 
-			// btnRemoveSubarea
-			// 
-			this.btnRemoveSubarea.Location = new System.Drawing.Point(152, 261);
-			this.btnRemoveSubarea.Name = "btnRemoveSubarea";
-			this.btnRemoveSubarea.Size = new System.Drawing.Size(30, 23);
-			this.btnRemoveSubarea.TabIndex = 142;
-			this.btnRemoveSubarea.Text = "-";
-			this.btnRemoveSubarea.UseVisualStyleBackColor = true;
-			this.btnRemoveSubarea.Click += new System.EventHandler(this.btnRemoveSubarea_Click);
-			// 
-			// btnAddSubarea
-			// 
-			this.btnAddSubarea.Location = new System.Drawing.Point(97, 261);
-			this.btnAddSubarea.Name = "btnAddSubarea";
-			this.btnAddSubarea.Size = new System.Drawing.Size(30, 23);
-			this.btnAddSubarea.TabIndex = 141;
-			this.btnAddSubarea.Text = "+";
-			this.btnAddSubarea.UseVisualStyleBackColor = true;
-			this.btnAddSubarea.Click += new System.EventHandler(this.btnAddSubarea_Click);
-			// 
-			// lstSubarea
-			// 
-			this.lstSubarea.FormattingEnabled = true;
-			this.lstSubarea.Location = new System.Drawing.Point(97, 43);
-			this.lstSubarea.Name = "lstSubarea";
-			this.lstSubarea.Size = new System.Drawing.Size(85, 212);
-			this.lstSubarea.TabIndex = 140;
-			this.lstSubarea.SelectedIndexChanged += new System.EventHandler(this.lstSubarea_SelectedIndexChanged);
+			this.chkStellAntriebe.AutoSize = true;
+			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
+			this.chkStellAntriebe.Name = "chkStellAntriebe";
+			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
+			this.chkStellAntriebe.TabIndex = 7;
+			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
+			this.chkStellAntriebe.UseVisualStyleBackColor = true;
+			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
 			// 
 			// PlannedModulKlimaDeckeProductPanel
 			// 
@@ -1798,5 +1811,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnRemoveSubarea;
 		private System.Windows.Forms.Button btnAddSubarea;
 		private System.Windows.Forms.ListBox lstSubarea;
+		private System.Windows.Forms.CheckBox chkStellAntriebe;
 	}
 }

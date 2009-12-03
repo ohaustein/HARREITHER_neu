@@ -167,6 +167,7 @@ namespace Europlan.Common {
 			this.label1 = new System.Windows.Forms.Label();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -988,6 +989,7 @@ namespace Europlan.Common {
 			// 
 			this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox9.Controls.Add(this.chkStellAntriebe);
 			this.groupBox9.Controls.Add(this.btnDistributor);
 			this.groupBox9.Controls.Add(this.lblDistributor);
 			this.groupBox9.Controls.Add(this.txtDistributor);
@@ -1903,6 +1905,17 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2.HeaderText = "Verlegeart";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			// 
+			// chkStellAntriebe
+			// 
+			this.chkStellAntriebe.AutoSize = true;
+			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
+			this.chkStellAntriebe.Name = "chkStellAntriebe";
+			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
+			this.chkStellAntriebe.TabIndex = 6;
+			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
+			this.chkStellAntriebe.UseVisualStyleBackColor = true;
+			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
+			// 
 			// PlannedEurovalProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2079,5 +2092,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.CheckBox cbSeparateCircuit;
 		private System.Windows.Forms.CheckBox chkAnhydritEstrich;
 		private System.Windows.Forms.CheckBox chkClip;
+		private System.Windows.Forms.CheckBox chkStellAntriebe;
 	}
 }
