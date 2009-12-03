@@ -717,6 +717,9 @@ namespace Europlan.Common {
 
 		private void chkStellAntriebe_CheckedChanged(object sender, EventArgs e) {
 			this.product.Product.StellMotore = this.chkStellAntriebe.Checked;
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
 		}
 		
 	}
