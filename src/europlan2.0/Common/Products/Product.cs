@@ -717,6 +717,14 @@ namespace Europlan.Common {
 			get;
 		}
 
+		public virtual double HeatLoadBereinigt {
+			get { return 0; }
+		}
+
+		public virtual double CoolLoadBereinigt {
+			get { return 0; }
+		}
+
 		/// <summary>
 		/// The temperature of the room below used for the heating calcuation
 		/// </summary>
