@@ -257,6 +257,10 @@ namespace Europlan.Common {
 			List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
 
 			double normWaermeBedarf = 0;
+			double normKuehlBedarf = 0;
+			double normWaermeBedarfBereinigt = 0;
+			double normKuehlBedarfBereinigt = 0;
+
 			double roomArea = 0;
 			double plannedFloorArea = 0;
 			double plannedWallArea = 0;
@@ -265,8 +269,12 @@ namespace Europlan.Common {
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
 					normWaermeBedarf += room.NormalizedHeatLoad;
+					normKuehlBedarf += room.NormalizedCoolLoad;
 					roomArea += room.Area;
 					foreach (PlannedProduct pp in room.PlannedProducts) {
+						normWaermeBedarfBereinigt += pp.Product.HeatLoadBereinigt;
+						normKuehlBedarfBereinigt += pp.Product.CoolLoadBereinigt;
+
 						plannedFloorArea += pp.Product.PlannedFloorArea;
 						plannedWallArea += pp.Product.PlannedWallArea;
 						plannedCeilingArea += pp.Product.PlannedCeilingArea;
@@ -276,13 +284,17 @@ namespace Europlan.Common {
 
 			BilanzWrapper wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Normwärmebedarf";
+			wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
 			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
 			wrapper.CoolUnit = "W";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamter bereinigter Wärmebedarf";
+			wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
 			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
 			wrapper.CoolUnit = "W";
 			wrapperList.Add(wrapper);
 
