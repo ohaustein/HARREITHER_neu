@@ -256,48 +256,87 @@ namespace Europlan.Common {
 			//TODO
 			List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
 
+			double normWaermeBedarf = 0;
+			double roomArea = 0;
+			double plannedFloorArea = 0;
+			double plannedWallArea = 0;
+			double plannedCeilingArea = 0;
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					normWaermeBedarf += room.NormalizedHeatLoad
+					roomArea += room.Area;
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						plannedFloorArea += pp.Product.PlannedFloorArea;
+						plannedWallArea += pp.Product.PlannedWallArea;
+						plannedCeilingArea += pp.Product.PlannedCeilingArea;
+					}
+				}
+			}
+
 			BilanzWrapper wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Normwärmebedarf";
+			wrapper.HeatUnit = "W";
+			wrapper.CoolUnit = "W";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamter bereinigter Wärmebedarf";
+			wrapper.HeatUnit = "W";
+			wrapper.CoolUnit = "W";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Heizleistung (nach innen)";
+			wrapper.HeatUnit = "W";
+			wrapper.CoolUnit = "W";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamte aufgenommene Leistung";
+			wrapper.HeatUnit = "W";
+			wrapper.CoolUnit = "W";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Wassermenge";
+			wrapper.HeatUnit = "l/h";
+			wrapper.CoolUnit = "l/h";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Maximaler Druckverlust (inkl. Verteiler)";
+			wrapper.HeatUnit = "mbar";
+			wrapper.CoolUnit = "mbar";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamt-Wasserinhalt (ab Verteiler)";
+			wrapper.HeatUnit = "l";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Raumfläche";
+			wrapper.HeatValue = roomArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Fußbodenheizungsfläche";
+			wrapper.HeatValue = plannedFloorArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Wandheizungsfläche";
+			wrapper.HeatValue = plannedWallArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Deckenkühlungsfläche";
+			wrapper.HeatValue = plannedCeilingArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
 
 			return wrapperList;
