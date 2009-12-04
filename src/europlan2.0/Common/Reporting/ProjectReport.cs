@@ -264,7 +264,7 @@ namespace Europlan.Common {
 
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
-					normWaermeBedarf += room.NormalizedHeatLoad
+					normWaermeBedarf += room.NormalizedHeatLoad;
 					roomArea += room.Area;
 					foreach (PlannedProduct pp in room.PlannedProducts) {
 						plannedFloorArea += pp.Product.PlannedFloorArea;
