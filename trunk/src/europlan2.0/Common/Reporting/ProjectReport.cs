@@ -521,7 +521,7 @@ namespace Europlan.Common {
 				wrapper.RuecklaufTemp = rc.HeatFlowTemperature - 7;
 				wrapper.Durchfluss = 1068;
 				wrapper.Druckverlust = 105;
-				wrapper.Inhalt = 87;
+				wrapper.Inhalt = 0;
 				wrapperHeatList.Add(wrapper);
 				if (project.CalculateCoolLoad) {
 					wrapper = new RegulatorCircuitWrapper();
@@ -533,7 +533,7 @@ namespace Europlan.Common {
 					wrapper.RuecklaufTemp = rc.CoolFlowTemperature + 3;
 					wrapper.Durchfluss = 1068;
 					wrapper.Druckverlust = 105;
-					wrapper.Inhalt = 87;
+					wrapper.Inhalt = 0;
 					wrapperCoolList.Add(wrapper);
 				}
 			}
