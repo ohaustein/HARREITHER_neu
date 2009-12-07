@@ -1824,7 +1824,7 @@ namespace Europlan.Common {
 				//    amount += this.PlannedAreaRim * GetVerteilerAnschlussPerSqm(GetRimLayDistance(this.PlannedRimType.Value));
 				//}
 				//Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, amount);
-				Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, this.circuits.Count * 2);Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, this.circuits.Count * 2);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, this.circuits.Count * 2);
 			}
 
 			// Eco 30
