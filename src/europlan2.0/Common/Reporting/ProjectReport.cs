@@ -389,7 +389,6 @@ namespace Europlan.Common {
 		public List<FloorOverviewWrapper> GetFloorOverviewWrapper() {
 			List<FloorOverviewWrapper> wrapperListHeat = new List<FloorOverviewWrapper>();
 			List<FloorOverviewWrapper> wrapperListCool = new List<FloorOverviewWrapper>();
-			//TODO
 			foreach (Floor floor in project.Floors) {
 				double area = 0;
 				double transmissionFloorHeat = 0;
@@ -446,23 +445,30 @@ namespace Europlan.Common {
 		public List<OpenLoadForRoomWrapper> GetOpenHeatLoadForRoomWrapper() {
 			List<OpenLoadForRoomWrapper> wrapperList = new List<OpenLoadForRoomWrapper>();
 
-			//TODO
+			double normWaermeBedarf = 0;
+			double normWaermeBedarfBereinigt = 0;
+			double qHeat = 0;
 
-			OpenLoadForRoomWrapper wrapper = new OpenLoadForRoomWrapper();
-			wrapper.RoomId = "E01";
-			wrapper.RoomName = "Wohnzimmer";
-			wrapper.RequiredLoad = 1650.0;
-			wrapper.NetLoad = 1650.0;
-			wrapper.Power = 1400.0;
-			wrapperList.Add(wrapper);
 
-			wrapper = new OpenLoadForRoomWrapper();
-			wrapper.RoomId = "E03";
-			wrapper.RoomName = "Küche";
-			wrapper.RequiredLoad = 1230.9;
-			wrapper.NetLoad = 1150.0;
-			wrapper.Power = 1002.0;
-			wrapperList.Add(wrapper);
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					normWaermeBedarf = room.HeatLoad;
+					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+						normWaermeBedarfBereinigt += plannedProduct.Product.HeatLoadBereinigt;
+						qHeat += plannedProduct.PlannedHeatLoad;
+					}
+
+					if (qHeat < (normWaermeBedarf - normWaermeBedarfBereinigt)) {
+						OpenLoadForRoomWrapper wrapper = new OpenLoadForRoomWrapper();
+						wrapper.RoomId = room.Id;
+						wrapper.RoomName = room.Name;
+						wrapper.RequiredLoad = normWaermeBedarf;
+						wrapper.NetLoad = normWaermeBedarf - normWaermeBedarfBereinigt;
+						wrapper.Power = qHeat;
+						wrapperList.Add(wrapper);
+					}
+				}
+			}
 
 			return wrapperList;
 		}
@@ -470,23 +476,29 @@ namespace Europlan.Common {
 		public List<OpenLoadForRoomWrapper> GetOpenCoolLoadForRoomWrapper() {
 			List<OpenLoadForRoomWrapper> wrapperList = new List<OpenLoadForRoomWrapper>();
 
-			// TODO
+			double normKuehlBedarf = 0;
+			double normKuehlBedarfBereinigt = 0;
+			double qCool = 0;
 
-			OpenLoadForRoomWrapper wrapper = new OpenLoadForRoomWrapper();
-			wrapper.RoomId = "E01";
-			wrapper.RoomName = "Wohnzimmer";
-			wrapper.RequiredLoad = 1650.0;
-			wrapper.NetLoad = 1650.0;
-			wrapper.Power = 1400.0;
-			wrapperList.Add(wrapper);
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					normKuehlBedarf = room.CoolLoad;
+					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+						normKuehlBedarfBereinigt += plannedProduct.Product.CoolLoadBereinigt;
+						qCool += plannedProduct.PlannedCoolLoad;
+					}
 
-			wrapper = new OpenLoadForRoomWrapper();
-			wrapper.RoomId = "E03";
-			wrapper.RoomName = "Küche";
-			wrapper.RequiredLoad = 1230.9;
-			wrapper.NetLoad = 1150.0;
-			wrapper.Power = 1002.0;
-			wrapperList.Add(wrapper);
+					if (qCool < (normKuehlBedarf - normKuehlBedarfBereinigt)) {
+						OpenLoadForRoomWrapper wrapper = new OpenLoadForRoomWrapper();
+						wrapper.RoomId = room.Id;
+						wrapper.RoomName = room.Name;
+						wrapper.RequiredLoad = normKuehlBedarf;
+						wrapper.NetLoad = normKuehlBedarf - normKuehlBedarfBereinigt;
+						wrapper.Power = qCool;
+						wrapperList.Add(wrapper);
+					}
+				}
+			}
 
 			return wrapperList;
 		}
