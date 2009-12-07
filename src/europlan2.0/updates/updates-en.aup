@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UpdateProject BuilderVersion="1.3.0.23" SchemaVersion="1.1" xmlns="http://www.kineticjump.com/AppLifeUpdate/ProjectSchema">
-	<Properties ApplicationID="d38bcedd-464a-4fc9-8263-fbf6e43a4cae" ApplicationName="Europlan 2.0" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;zx6ZJaMzPDozUcY5l0oq4y40M8qAyQobnURZXiVmsWxT5TnYa55yoxiZn9nftDpsPc0duQTgwVUag1sj9uxzWp3ANn1bQtgohH0tsm1+j4fxA3Y91ba/v7zSfNfa6To1wnNOHNeyy1O40Pt4eXQXnbzmTocs322J+luWZPC3Fbc=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;+RAzJe80/QlRddrhjGx9bY//F4HSqCBDqN0VGgFKW3Jkrc26bQADCCD+5ZElfj7lm5teiCCM1vxZtweRPN39Cw==&lt;/P&gt;&lt;Q&gt;1ONXzfGpvlZkQG7RCOqGbNH2jzF6DRTNnB5VnxV0fx73a43c2206dkPp+FcVrleDIMIjGVWGU4amPhqefKU9hQ==&lt;/Q&gt;&lt;DP&gt;6YvlSncKSxRHzKnYwiKhYvGaFGLqNDk8+MWHGgGHxkR4X/oADGHsddzq6D242K8GA2ontKJBLv8m6VgxOtA2jQ==&lt;/DP&gt;&lt;DQ&gt;WgPy+Yqoimm/JBt3WbzIsDSre2qhP+y+77dH3udUhffTCHBIpaNu59jZkn9IFJq+QFi2PJ0UGjdCDdp1jyDTfQ==&lt;/DQ&gt;&lt;InverseQ&gt;dqLDQGQNUsl+QAmwLCg4XeHkVrEsH+4XA02bgtCvWupqRmaW7EFCiPa4MzF3RxVecZOh9sBkDO+3OSBrwUaj4Q==&lt;/InverseQ&gt;&lt;D&gt;Vc54ZhZhsI7wGe3EiEAK2omWyOoZRrCwVgwt9goKrHCTpUC8v4EqPxV+97Gcsx8NHuFucetqbc4jKM5GbRLyipW0VlCjavxd2QSfCqxzXbOus2sLGs2Ptc4iRPiIDoIHKvwStHBxwVvi4iP1UUfwaJPrGPAGNkOCjZSKik1vZ1k=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\en" UpdateLocation="" BuildLocation="updates-en Updates" PublishVersion="2.0.16.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions\v2.0.16.0\europlan20-en.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
-	<CurrentSummary>New user interface for Klimadecke&#xD;
-Bugfix report</CurrentSummary>
+	<Properties ApplicationID="d38bcedd-464a-4fc9-8263-fbf6e43a4cae" ApplicationName="Europlan 2.0" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;zx6ZJaMzPDozUcY5l0oq4y40M8qAyQobnURZXiVmsWxT5TnYa55yoxiZn9nftDpsPc0duQTgwVUag1sj9uxzWp3ANn1bQtgohH0tsm1+j4fxA3Y91ba/v7zSfNfa6To1wnNOHNeyy1O40Pt4eXQXnbzmTocs322J+luWZPC3Fbc=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;+RAzJe80/QlRddrhjGx9bY//F4HSqCBDqN0VGgFKW3Jkrc26bQADCCD+5ZElfj7lm5teiCCM1vxZtweRPN39Cw==&lt;/P&gt;&lt;Q&gt;1ONXzfGpvlZkQG7RCOqGbNH2jzF6DRTNnB5VnxV0fx73a43c2206dkPp+FcVrleDIMIjGVWGU4amPhqefKU9hQ==&lt;/Q&gt;&lt;DP&gt;6YvlSncKSxRHzKnYwiKhYvGaFGLqNDk8+MWHGgGHxkR4X/oADGHsddzq6D242K8GA2ontKJBLv8m6VgxOtA2jQ==&lt;/DP&gt;&lt;DQ&gt;WgPy+Yqoimm/JBt3WbzIsDSre2qhP+y+77dH3udUhffTCHBIpaNu59jZkn9IFJq+QFi2PJ0UGjdCDdp1jyDTfQ==&lt;/DQ&gt;&lt;InverseQ&gt;dqLDQGQNUsl+QAmwLCg4XeHkVrEsH+4XA02bgtCvWupqRmaW7EFCiPa4MzF3RxVecZOh9sBkDO+3OSBrwUaj4Q==&lt;/InverseQ&gt;&lt;D&gt;Vc54ZhZhsI7wGe3EiEAK2omWyOoZRrCwVgwt9goKrHCTpUC8v4EqPxV+97Gcsx8NHuFucetqbc4jKM5GbRLyipW0VlCjavxd2QSfCqxzXbOus2sLGs2Ptc4iRPiIDoIHKvwStHBxwVvi4iP1UUfwaJPrGPAGNkOCjZSKik1vZ1k=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\en" UpdateLocation="" BuildLocation="updates-en Updates" PublishVersion="2.0.17.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions\v2.0.17.0\europlan20-en.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
+	<CurrentSummary />
 	<CurrentCustomData />
 	<NoUpdateDisplayText />
 	<AssemblyReferences />
@@ -13,6 +12,13 @@ Bugfix report</CurrentSummary>
 		<AppLifeUpdate BuilderVersion="1.3.0.23" type="full" xmlns="http://www.kineticjump.com/AppLifeUpdate/DirectorSchema">
 			<Application AppId="d38bcedd-464a-4fc9-8263-fbf6e43a4cae" NoUpdateDisplayText="">
 				<Versions>
+					<Version number="2.0.17.0" postdate="2009-12-07T16:36:18.47049Z" signature="shEqLe6LK85gSdVDlo3ANsZ21ehTTqMSw733yRxW18DHbYf5AGZJUah2fsPp+5II48O0A/OAHSXMoTJSF6dP984qPy0F9Z1VLnr5TjuaddIuyVVlgeEqNgQY6uve+6EVbUTfenzjlcun79QoOxRC0ahDn3WKh8uGbobaM58x7Cg=" fileSize="13186758">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
 					<Version number="2.0.16.0" postdate="2009-12-01T13:52:52.1294075Z" signature="gfxMNEbte3UVzabcxdu9ubutZXcrsWvEy5yy1Jep3jjHUukv73avJBB8pjrushTVonjJ+SWb2Rlp9hORBU+XXUW73gz5EaMkVHjJjq14W0iS42nNm7LtYCt7/lbYo505PSKa5bNb8nS45sewsVnJgxv/R/EaSgebIYu2L1M+ZXg=" fileSize="13174339">
 						<Targets>
 							<Target number="0.0.0.0" includeAllGreater="false" />
