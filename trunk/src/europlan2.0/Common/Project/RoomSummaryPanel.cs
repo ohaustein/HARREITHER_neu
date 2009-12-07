@@ -189,7 +189,7 @@ namespace Europlan.Common {
 						if (connectedProduct != null) {
 							connectedProduct.Product.PlannedConnection = null;
 							string err;
-							connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err);
+							connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err, false);
 						}
 						this.room.PlannedProducts.Remove(product);
 						if (this.ProjectStructureChanged != null) {
@@ -231,7 +231,7 @@ namespace Europlan.Common {
 				if (connectedProduct != null) {
 					connectedProduct.Product.PlannedConnection = null;
 					string err;
-					connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err);
+					connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err, false);
 				}
 				if (this.ProjectStructureChanged != null) {
 					this.ProjectStructureChanged(this);

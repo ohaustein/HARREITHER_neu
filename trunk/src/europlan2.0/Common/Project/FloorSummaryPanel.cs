@@ -124,19 +124,19 @@ namespace Europlan.Common {
 									string err;
 									PlannedProduct connectedProduct = this.floor.FindConnectedProduct(pp);
 									if (connectedProduct != null) {
-										connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err);
+										connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err, false);
 									}
-									pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err);
+									pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err, false);
 									if (connectedProduct != null) {
-										connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err);
+										connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, out err, false);
 									}
 									PlannedProduct inverseConnectedProduct = null;
 									if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 										inverseConnectedProduct = pp.Product.PlannedConnection.OtherProduct;
 									}
 									if (inverseConnectedProduct != null) {
-										inverseConnectedProduct.Product.ConfigureProduct(inverseConnectedProduct.RequestedHeatLoad, inverseConnectedProduct.RequestedCoolLoad, inverseConnectedProduct.CalculateHeat, inverseConnectedProduct.CalculateCool, out err);
-										pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err);
+										inverseConnectedProduct.Product.ConfigureProduct(inverseConnectedProduct.RequestedHeatLoad, inverseConnectedProduct.RequestedCoolLoad, inverseConnectedProduct.CalculateHeat, inverseConnectedProduct.CalculateCool, out err, false);
+										pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err, false);
 									}
 								}
 							} else {

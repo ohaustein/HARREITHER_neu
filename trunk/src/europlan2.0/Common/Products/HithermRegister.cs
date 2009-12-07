@@ -246,17 +246,19 @@ namespace Europlan.Common {
 		}
 		#endregion Static Methods
 
-		private RegisterTypeEnum registerType;
-		private RegisterOrientationEnum orientation;
+		private RegisterTypeEnum registerType = RegisterTypeEnum.HIT_50_10;
+		private RegisterOrientationEnum orientation = RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 		private int rohre = 1;
-		private double pipeHorizontal;
-		private double pipeVertical;
+		private double pipeHorizontal = 0.25;
+		private double pipeVertical = 0.5;
 
 		/*private Nullable<Point> origin = null;*/
 
 		public HithermRegister() {
 			this.registerType = RegisterTypeEnum.HIT_50_10;
-			this.orientation = RegisterOrientationEnum.ORIENTATION_HORIZONTAL;
+			this.orientation = RegisterOrientationEnum.ORIENTATION_VERTIKAL;
+			this.pipeHorizontal = 0.25;
+			this.pipeVertical = 0.5;
 			this.rohre = 1;
 		}
 
@@ -269,9 +271,13 @@ namespace Europlan.Common {
 		public RegisterTypeEnum RegisterType {
 			get { return this.registerType; }
 			set {
+				bool setDefaultPipeVertical = this.pipeVertical == this.DefaultPipeVertical;
 				int oldBreite = this.RegisterBreite;
 				this.registerType = value;
 				this.RegisterBreite = oldBreite;
+				if (setDefaultPipeVertical) {
+					this.pipeVertical = this.DefaultPipeVertical;
+				}
 			}
 		}
 
@@ -291,18 +297,25 @@ namespace Europlan.Common {
 		
 		public RegisterOrientationEnum Orientation {
 			get { return this.orientation; }
-			set { this.orientation = value; }
+			set {
+				bool setDefaultPipeVertical = this.pipeVertical == this.DefaultPipeVertical;
+				this.orientation = value;
+				if (setDefaultPipeVertical) {
+					this.pipeVertical = this.DefaultPipeVertical;
+				}
+			}
 		}
 
 		[XmlIgnore]
 		public bool Horizontal {
 			get { return this.orientation == RegisterOrientationEnum.ORIENTATION_HORIZONTAL; }
-			set { this.orientation = value ? RegisterOrientationEnum.ORIENTATION_HORIZONTAL : RegisterOrientationEnum.ORIENTATION_VERTIKAL; }
+			set { this.Orientation = value ? RegisterOrientationEnum.ORIENTATION_HORIZONTAL : RegisterOrientationEnum.ORIENTATION_VERTIKAL; }
 		}
 		
 		public int Rohre {
 			get { return this.rohre; }
 			set {
+				bool setDefaultPipeVertical = this.pipeVertical == this.DefaultPipeVertical;
 				this.rohre = value;
 				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
 					if (this.rohre > 27) {
@@ -316,9 +329,44 @@ namespace Europlan.Common {
 				if (this.rohre < 1) {
 					this.rohre = 1;
 				}
+				if (setDefaultPipeVertical) {
+					this.pipeVertical = this.DefaultPipeVertical;
+				}
 			}
 		}
-		
+
+		[XmlIgnore]
+		public double DefaultPipeVertical {
+			get {
+				if (this.orientation == RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
+					switch (this.registerType) {
+						case RegisterTypeEnum.HIT_50_5:
+						case RegisterTypeEnum.HIT_50_10:
+							return 0.5;
+						case RegisterTypeEnum.HIT_100_5:
+						case RegisterTypeEnum.HIT_100_10:
+							return 1;
+						case RegisterTypeEnum.HIT_150_5:
+						case RegisterTypeEnum.HIT_150_10:
+							return 1.5;
+						case RegisterTypeEnum.HIT_200_5:
+						case RegisterTypeEnum.HIT_200_10:
+							return 2.0;
+						case RegisterTypeEnum.HIT_250_5:
+						case RegisterTypeEnum.HIT_250_10:
+							return 2.5;
+						case RegisterTypeEnum.HIT_300_5:
+						case RegisterTypeEnum.HIT_300_10:
+							return 3.0;
+						default:
+							return 0;
+					}
+				} else {
+					return ((double)this.RegisterBreite) / 100.0;
+				}
+			}
+		}
+
 		public double PipeHorizontal {
 			get { return this.pipeHorizontal; }
 			set { this.pipeHorizontal = value; }

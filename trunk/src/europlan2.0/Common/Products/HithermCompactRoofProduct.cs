@@ -74,10 +74,6 @@ namespace Europlan.Common {
 		}
 		#endregion Product Parameters
 
-		public override string Name {
-			get { return "Hitherm® Compact Dachschräge"; }
-		}
-
 		public override string QuickDimensioningName {
 			get { return "Hitherm®\nCompact\nDachschr.\n(m²)"; }
 		}

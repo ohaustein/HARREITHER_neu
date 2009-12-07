@@ -401,7 +401,7 @@ namespace Europlan.Common {
 			this.calculateHeat = this.requestedHeatLoad > 0;
 			this.calculateCool = this.requestedCoolLoad > 0;
 			string errorMsg;
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg);
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg, false);
 		}
 
 		#region IGuiRepresentation Members
@@ -443,7 +443,7 @@ namespace Europlan.Common {
 				p.productNode.Text = internalName + ": " + p.System;
 			}
 
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg);
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg, false);
 
 		}
 

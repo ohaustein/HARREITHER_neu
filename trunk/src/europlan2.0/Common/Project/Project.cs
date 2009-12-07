@@ -478,5 +478,18 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		public PlannedProduct GetPlannedProduct(Product product) {
+			foreach (Floor f in this.Floors) {
+				foreach (Room r in f.Rooms) {
+					foreach (PlannedProduct pp in r.PlannedProducts) {
+						if (pp.Product == product) {
+							return pp;
+						}
+					}
+				}
+			}
+			return null;
+		}
 	}
 }

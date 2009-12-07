@@ -7,7 +7,7 @@ using System.Collections;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Euroval® Fußbodenheizung")]
+	[ProductName("Euroval®", "Euroval® Fußbodenheizung")]
 	public class EurovalProduct : Product {
 
 		// quick dimensioning
@@ -684,20 +684,6 @@ namespace Europlan.Common {
 		#endregion QuickDimensioning
 
 		/// <summary>
-		/// The name of this product
-		/// </summary>
-		public override string Name {
-			get { return "Euroval®"; }
-		}
-
-		/// <summary>
-		/// The full name of this product
-		/// </summary>
-		public override string FullName {
-			get { return "Euroval® Fußbodenheizung"; }
-		}
-
-		/// <summary>
 		/// The type of this product
 		/// </summary>
 		public override ProductType Type {
@@ -1336,9 +1322,35 @@ namespace Europlan.Common {
 			}
 		}
 
+		public override void CalculateHeatAndCoolFlow() {
+			base.CalculateHeatAndCoolFlow();
+			double spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
+			double spreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
+			if (spreizungHeat > EurovalProduct.ConfigSpreizungHeizMax) {
+				spreizungHeat = EurovalProduct.ConfigSpreizungHeizMax;
+			}
+			if (spreizungHeat < EurovalProduct.ConfigSpreizungHeizMin) {
+				spreizungHeat = EurovalProduct.ConfigSpreizungHeizMin;
+			}
+			if (spreizungCool > EurovalProduct.ConfigSpreizungKühlMax) {
+				spreizungCool = EurovalProduct.ConfigSpreizungKühlMax;
+			}
+			if (spreizungCool < EurovalProduct.ConfigSpreizungKühlMin) {
+				spreizungCool = EurovalProduct.ConfigSpreizungKühlMin;
+			}
+			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
+			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
+			if (this.plannedRuecklaufTempHeat - this.associatedRoom.RoomHeatTemperature < 3) {
+				this.plannedRuecklaufTempHeat = this.associatedRoom.RoomHeatTemperature + 3;
+			}
+			if (this.associatedRoom.RoomCoolTemperature - this.plannedRuecklaufTempCool < 3) {
+				this.plannedRuecklaufTempCool = this.associatedRoom.RoomCoolTemperature - 3;
+			}
+		}
+
 		bool secondConfig = false;
 
-		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
+		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg, bool variableSpreizung) {
 			this.incompleteCalculation = false;
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
 				errorMsg = "Fehlende Eingaben: ";
@@ -1468,6 +1480,7 @@ namespace Europlan.Common {
 			double bestHeatLoad = 0;
 			double bestCoolLoad = 0;
 
+			this.CalculateHeatAndCoolFlow();
 			foreach (LayDistance ld in teilungen.Keys) {
 				foreach (Nullable<RimType> rt in teilungen[ld]) {
 					bool tryCalc = true;
@@ -1569,6 +1582,7 @@ namespace Europlan.Common {
 				this.plannedLayDistance = bestLaydistance;
 				this.plannedRimType = bestRimType;
 				this.CorrectCircuits(bestCircuits, true);
+
 				int i = 0;
 				foreach (EurovalCircuit ec in this.circuits) {
 					ec.EurovalProduct = this;
@@ -1590,13 +1604,60 @@ namespace Europlan.Common {
 					ec.Calculate(bestLaydistance.Value, bestRimType);
 					i++;
 				}
+
+				if (variableSpreizung && this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+					// Heizleistung veringern
+					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < EurovalProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad) {
+						this.plannedRuecklaufTempHeat -= 0.1;
+						foreach (EurovalCircuit ec in this.circuits) {
+							ec.Calculate(bestLaydistance.Value, bestRimType);
+						}
+					}
+					this.plannedRuecklaufTempHeat += 0.1;
+					// Heizleistung erhöhen
+					while (variableSpreizung && this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EurovalProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < EurovalProduct.ConfigMaxDurchfluss) {
+						this.plannedRuecklaufTempHeat += 0.1;
+						foreach (EurovalCircuit ec in this.circuits) {
+							ec.Calculate(bestLaydistance.Value, bestRimType);
+						}
+					}
+					// Kühlleistung verringern
+					while (variableSpreizung && this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < EurovalProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+						this.plannedRuecklaufTempCool += 0.1;
+						i = 0;
+						foreach (EurovalCircuit ec in this.circuits) {
+							ec.Calculate(bestLaydistance.Value, bestRimType);
+						}
+					}
+					this.plannedRuecklaufTempCool -= 0.1;
+					// Kühlleistung erhöhen
+					while (variableSpreizung && this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < EurovalProduct.ConfigMaxDurchfluss) {
+						this.plannedRuecklaufTempCool -= 0.1;
+						i = 0;
+						foreach (EurovalCircuit ec in this.circuits) {
+							ec.Calculate(bestLaydistance.Value, bestRimType);
+						}
+					}
+
+					// Calculate variable spreizung for connected products
+					foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
+						if (kvp.Value != null) {
+							kvp.Value.OtherProduct.CalculateHeatAndCoolFlow();
+							PlannedProduct pp = Project.Instance.GetPlannedProduct(kvp.Value.OtherProduct);
+							if (pp != null) {
+								string err;
+								pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err, true);
+							}
+						}
+					}
+				}
 			}
 
 			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 				if (!this.secondConfig) {
 					this.secondConfig = true;
 					this.plannedConnection.OtherProduct.ConfigureProductDefault();
-					bool ok = this.ConfigureProduct(requestedHeatLoad, requestedCoolLoad, canHeat, canCool, out errorMsg);
+					bool ok = this.ConfigureProduct(requestedHeatLoad, requestedCoolLoad, canHeat, canCool, out errorMsg, false);
 					this.secondConfig = false;
 					this.incompleteCalculation = !ok;
 					return ok;

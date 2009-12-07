@@ -261,31 +261,46 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override string Name {
-			get { return "Modul Klima-Decke"; }
-		}
-
 		public override string QuickDimensioningName {
 			get { return "Modul\nKlima\nDecke\n(m²)"; }
-		}
-
-		/// <summary>
-		/// The full name of this product
-		/// </summary>
-		public override string FullName {
-			get { return Name; }
 		}
 
 		public override ProductType Type {
 			get { return ProductType.DH; }
 		}
 
-		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
+		public override void CalculateHeatAndCoolFlow() {
+			base.CalculateHeatAndCoolFlow();
+			double spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
+			double spreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
+			if (spreizungHeat > ModulKlimaDeckeProduct.ConfigSpreizungHeizMax) {
+				spreizungHeat = ModulKlimaDeckeProduct.ConfigSpreizungHeizMax;
+			}
+			if (spreizungHeat < ModulKlimaDeckeProduct.ConfigSpreizungHeizMin) {
+				spreizungHeat = ModulKlimaDeckeProduct.ConfigSpreizungHeizMin;
+			}
+			if (spreizungCool > ModulKlimaDeckeProduct.ConfigSpreizungKühlMax) {
+				spreizungCool = ModulKlimaDeckeProduct.ConfigSpreizungKühlMax;
+			}
+			if (spreizungCool < ModulKlimaDeckeProduct.ConfigSpreizungKühlMin) {
+				spreizungCool = ModulKlimaDeckeProduct.ConfigSpreizungKühlMin;
+			}
+			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
+			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
+			if (this.plannedRuecklaufTempHeat - this.associatedRoom.RoomHeatTemperature < 3) {
+				this.plannedRuecklaufTempHeat = this.associatedRoom.RoomHeatTemperature + 3;
+			}
+			if (this.associatedRoom.RoomCoolTemperature - this.plannedRuecklaufTempCool < 3) {
+				this.plannedRuecklaufTempCool = this.associatedRoom.RoomCoolTemperature - 3;
+			}
+		}
+
+		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg, bool variableSpreizung) {
 			this.incompleteCalculation = false;
-			if (this.plannedCeilingConstruction == null || this.plannedInsulationConstruction == null) {
+			if (this.plannedCeilingConstruction == null || this.plannedInsulationConstruction == null || this.PlannedConnection == null) {
 				errorMsg = "Fehlende Eingaben: ";
 				if (plannedCeilingConstruction == null) {
-					errorMsg += "Fußbodenkonstruktion, ";
+					errorMsg += "Deckenkonstruktion, ";
 				}
 				if (plannedInsulationConstruction == null) {
 					errorMsg += "Wärmedämmkonstruktion, ";
@@ -330,6 +345,7 @@ namespace Europlan.Common {
 			double longestRuecklaufTotal;
 			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal);
 
+			this.CalculateHeatAndCoolFlow();
 			int i = 0;
 			foreach (ModulDeckeCircuit mc in this.circuits) {
 				mc.NrOfCircuit = i;

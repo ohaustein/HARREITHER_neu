@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Hitherm® Compact")]
+	[ProductName("Hitherm® Compact", "Hitherm® Compact Klimawand")]
 	public class HithermCompactProduct : Product {
 
 		// quick dimensioning
@@ -89,26 +89,15 @@ namespace Europlan.Common {
 			get { return Int32.MaxValue; }
 		}
 
-		public override string Name {
-			get { return "Hitherm® Compact"; }
-		}
-
 		public override string QuickDimensioningName {
 			get { return "Hitherm®\nCompact\n(m²)"; }
-		}
-
-		/// <summary>
-		/// The full name of this product
-		/// </summary>
-		public override string FullName {
-			get { return Name; }
 		}
 
 		public override ProductType Type {
 			get { return ProductType.WH; }
 		}
 
-		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
+		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg, bool variableSpreizung) {
 			// TODO
 			errorMsg = "Noch nicht implementiert";
 			return false;
