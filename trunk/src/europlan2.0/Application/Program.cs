@@ -84,6 +84,9 @@ namespace Europlan.Application {
 				}
 				mainForm.ProjectToLoad = projectFile.TrimEnd(); ;
 			}
+			// Preload the global configuration
+			Configuration config = Configuration.UserTemplate;
+
 			startingForm.Close();
 			startingForm.Dispose();
 			try {
