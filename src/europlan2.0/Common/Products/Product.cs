@@ -725,6 +725,80 @@ namespace Europlan.Common {
 			get { return 0; }
 		}
 
+		private double QH2OHeat {
+			get {
+				double qH2OHeat = 0;
+				foreach (Circuit c in this.circuits) {
+					qH2OHeat += Math.Abs(c.C_Qh2oHeat);
+				}
+				return qH2OHeat;
+			}
+		}
+
+		private double QH2OCool {
+			get {
+				double qH2OCool = 0;
+				foreach (Circuit c in this.circuits) {
+					qH2OCool += Math.Abs(c.C_Qh2oCool);
+				}
+				return qH2OCool;
+			}
+		}
+
+		public double TransmissionFloorHeat {
+			get {
+				if (this.Type == ProductType.FBH) {
+					return QH2OHeat - this.PlannedHeatLoad;
+				}
+				return 0; 
+			}
+		}
+
+		public double TransmissionWallHeat {
+			get {
+				if (this.Type == ProductType.WH) {
+					return QH2OHeat - this.PlannedHeatLoad;
+				}
+				return 0;
+			}
+		}
+
+		public double TransmissionCeilingHeat {
+			get {
+				if (this.Type == ProductType.DH) {
+					return QH2OHeat - this.PlannedHeatLoad;
+				}
+				return 0;
+			}
+		}
+
+		public double TransmissionFloorCool {
+			get {
+				if (this.Type == ProductType.FBH) {
+					return QH2OCool - this.PlannedCoolLoad;
+				}
+				return 0;
+			}
+		}
+
+		public double TransmissionWallCool {
+			get {
+				if (this.Type == ProductType.WH) {
+					return QH2OCool - this.PlannedCoolLoad;
+				}
+				return 0;
+			}
+		}
+
+		public double TransmissionCeilingCool {
+			get {
+				if (this.Type == ProductType.DH) {
+					return QH2OCool - this.PlannedCoolLoad;
+				}
+				return 0;
+			}
+		}
+
 		/// <summary>
 		/// The temperature of the room below used for the heating calcuation
 		/// </summary>

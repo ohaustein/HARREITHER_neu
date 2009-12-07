@@ -391,33 +391,52 @@ namespace Europlan.Common {
 			List<FloorOverviewWrapper> wrapperListCool = new List<FloorOverviewWrapper>();
 			//TODO
 			foreach (Floor floor in project.Floors) {
-				//    foreach (Room room in floor.Rooms) {
-				//        foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+				double area = 0;
+				double transmissionFloorHeat = 0;
+				double transmissionWallHeat = 0;
+				double transmissionCeilingHeat = 0;
+				double transmissionFloorCool = 0;
+				double transmissionWallCool = 0;
+				double transmissionCeilingCool = 0;
+				double qHeat = 0;
+				double qCool = 0;
+				
+				foreach (Room room in floor.Rooms) {
+				    foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+						area += plannedProduct.Product.PlannedFloorArea;
+						transmissionFloorHeat += plannedProduct.Product.TransmissionFloorHeat;
+						transmissionWallHeat += plannedProduct.Product.TransmissionWallHeat;
+						transmissionCeilingHeat += plannedProduct.Product.TransmissionCeilingHeat;
+						transmissionFloorCool += plannedProduct.Product.TransmissionFloorCool;
+						transmissionWallCool += plannedProduct.Product.TransmissionWallCool;
+						transmissionCeilingCool += plannedProduct.Product.TransmissionCeilingCool;
+						qHeat += plannedProduct.Product.PlannedHeatLoad;
+						qCool += plannedProduct.Product.PlannedCoolLoad;
+				    }
+				}
 				FloorOverviewWrapper wrapper = new FloorOverviewWrapper();
 				wrapper.HeatOrCool = "Heizbetrieb";
 				wrapper.FloorName = floor.Name;
-				wrapper.FloorArea = 242.3;
-				wrapper.QH2o = 3568;
-				wrapper.Q = 3401;
-				wrapper.TransmissionFloor = 10;
-				wrapper.TransmissionWall = 0;
-				wrapper.TransmissionCeiling = 68.7;
+				wrapper.FloorArea = area;
+				wrapper.QH2o = transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat;
+				wrapper.Q = qHeat;
+				wrapper.TransmissionFloor = transmissionFloorHeat;
+				wrapper.TransmissionWall = transmissionWallHeat;
+				wrapper.TransmissionCeiling = transmissionCeilingHeat;
 				wrapperListHeat.Add(wrapper);
 
 				if (project.CalculateCoolLoad) {
 					wrapper = new FloorOverviewWrapper();
 					wrapper.HeatOrCool = "Kühlbetrieb";
 					wrapper.FloorName = floor.Name;
-					wrapper.FloorArea = 42.3;
-					wrapper.QH2o = 3568;
-					wrapper.Q = 3401;
-					wrapper.TransmissionFloor = 10;
-					wrapper.TransmissionWall = 0;
-					wrapper.TransmissionCeiling = 68.7;
+					wrapper.FloorArea = area;
+					wrapper.QH2o = transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool;
+					wrapper.Q = qCool;
+					wrapper.TransmissionFloor = transmissionFloorCool;
+					wrapper.TransmissionWall = transmissionWallCool;
+					wrapper.TransmissionCeiling = transmissionCeilingCool;
 					wrapperListCool.Add(wrapper);
 				}
-				//        }
-				//    }
 			}
 
 			wrapperListHeat.AddRange(wrapperListCool);
