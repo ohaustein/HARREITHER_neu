@@ -35,7 +35,7 @@ namespace Europlan.Common {
 
 				this.Name = productType.FullName;
 				if (attributes.Length > 0) {
-					this.Text = (attributes[0] as ProductNameAttribute).Name;
+					this.Text = (attributes[0] as ProductNameAttribute).FullName;
 				} else {
 					this.Text = productType.Name;
 				}

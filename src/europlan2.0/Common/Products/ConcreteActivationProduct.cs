@@ -76,19 +76,8 @@ namespace Europlan.Common {
 		}
 		#endregion Product Parameters
 
-		public override string Name {
-			get { return "Betonkernaktivierung"; }
-		}
-
 		public override string QuickDimensioningName {
 			get { return "BKA\n(m²)"; }
-		}
-
-		/// <summary>
-		/// The full name of this product
-		/// </summary>
-		public override string FullName {
-			get { return Name; }
 		}
 
 		public override ProductType Type {

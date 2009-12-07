@@ -173,8 +173,8 @@ namespace Europlan.Common {
 						this.product.Product.InverseConnectedCircuits[c.NrOfCircuit] = new Circuit.CircuitConnection((this.rbRuecklauf.Checked ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), this.tvDistributors.SelectedNode.Tag as Circuit);
 					}
 					string errMsg;
-					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errMsg);
-					pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out errMsg);
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errMsg, false);
+					pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out errMsg, false);
 				}
 				// TODO
 			}

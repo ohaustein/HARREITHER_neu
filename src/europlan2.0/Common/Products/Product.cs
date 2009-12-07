@@ -36,8 +36,12 @@ namespace Europlan.Common {
 		protected List<ConnectionPipe> plannedConnectionPipes = new List<ConnectionPipe>();
 
 		protected float plannedRoomTemperatureBelowHeat = 18;
-		protected float plannedRoomTemperatureBelowCool = 22;
+		protected float plannedRoomTemperatureBelowCool = 28;
 
+		protected double plannedVorlaufTempHeat = double.MinValue;
+		protected double plannedRuecklaufTempHeat = double.MinValue;
+		protected double plannedVorlaufTempCool = double.MinValue;
+		protected double plannedRuecklaufTempCool = double.MinValue;
 		protected bool incompleteCalculation = true;
 
 		//protected int plannedCircuits = 1;
@@ -227,16 +231,32 @@ namespace Europlan.Common {
 			}
 		}
 
-		public abstract string Name {
-			get;
+		public string Name {
+			get {
+				object[] attributes = this.GetType().GetCustomAttributes(typeof(ProductNameAttribute), true);
+
+				if (attributes.Length > 0) {
+					return (attributes[0] as ProductNameAttribute).Name;
+				} else {
+					return this.GetType().Name;
+				}
+			}
 		}
 
 		public abstract string QuickDimensioningName {
 			get;
 		}
 
-		public abstract string FullName {
-			get;
+		public string FullName {
+			get {
+				object[] attributes = this.GetType().GetCustomAttributes(typeof(ProductNameAttribute), true);
+
+				if (attributes.Length > 0) {
+					return (attributes[0] as ProductNameAttribute).FullName;
+				} else {
+					return this.GetType().Name;
+				}
+			}
 		}
 
 		public abstract ProductType Type {
@@ -410,8 +430,54 @@ namespace Europlan.Common {
 			get;
 		}
 
-		public void GetHeatFlow(out double vorlauf, out double ruecklauf) {
+		[XmlIgnore]
+		public double PlannedVorlaufTempHeat {
+			get { return this.plannedVorlaufTempHeat; }
+		}
+
+		[XmlIgnore]
+		public double PlannedRuecklaufTempHeat {
+			get { return this.plannedRuecklaufTempHeat; }
+		}
+
+		[XmlIgnore]
+		public double PlannedVorlaufTempCool {
+			get { return this.plannedVorlaufTempCool; }
+		}
+
+		[XmlIgnore]
+		public double PlannedruecklaufTempCool {
+			get { return this.plannedRuecklaufTempCool; }
+		}
+
+		public virtual void CalculateHeatAndCoolFlow() {
 			if (this.plannedConnection == null) {
+				this.plannedVorlaufTempHeat = 0;
+				this.plannedRuecklaufTempHeat = 0;
+				this.plannedVorlaufTempCool = 0;
+				this.plannedRuecklaufTempCool = 0;
+				return;
+			}
+			double spreizungHeat = 0;
+			double spreizungCool = 0;
+			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				this.plannedConnection.OtherProduct.Product.CalculateHeatAndCoolFlow();
+				this.plannedConnection.OtherProduct.Product.GetHeatFlow(out this.plannedVorlaufTempHeat, out this.plannedRuecklaufTempHeat);
+				spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
+				this.plannedConnection.OtherProduct.Product.GetCoolFlow(out this.plannedVorlaufTempCool, out this.plannedRuecklaufTempCool);
+				spreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
+			} else {
+				this.plannedVorlaufTempHeat = this.plannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
+				spreizungHeat = EN1264.Instance.DefaultSpreizung(this.plannedVorlaufTempHeat);
+				this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
+				this.plannedVorlaufTempCool = this.plannedConnection.Distributor.RegulatorCircuit.CoolFlowTemperature;
+				spreizungCool = 3;
+				this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
+			}
+		}
+
+		public void GetHeatFlow(out double vorlauf, out double ruecklauf) {
+			/*if (this.plannedConnection == null) {
 				vorlauf = 0;
 				ruecklauf = 0;
 				return;
@@ -421,11 +487,13 @@ namespace Europlan.Common {
 				return;
 			}
 			vorlauf = this.plannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
-			ruecklauf = vorlauf - EN1264.Instance.DefaultSpreizung(vorlauf);
+			ruecklauf = vorlauf - EN1264.Instance.DefaultSpreizung(vorlauf);*/
+			vorlauf = this.plannedVorlaufTempHeat;
+			ruecklauf = this.plannedRuecklaufTempHeat;
 		}
 
 		public void GetCoolFlow(out double vorlauf, out double ruecklauf) {
-			if (this.plannedConnection == null) {
+			/*if (this.plannedConnection == null) {
 				vorlauf = 0;
 				ruecklauf = 0;
 				return;
@@ -435,7 +503,9 @@ namespace Europlan.Common {
 				return;
 			}
 			vorlauf = this.plannedConnection.Distributor.RegulatorCircuit.CoolFlowTemperature;
-			ruecklauf = vorlauf + 3;
+			ruecklauf = vorlauf + 3;*/
+			vorlauf = this.plannedVorlaufTempCool;
+			ruecklauf = this.plannedRuecklaufTempCool;
 		}
 
 		public virtual ProductConnection PlannedConnection {
@@ -475,7 +545,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedSpreizungHeat {
 			get {
-				if (this.PlannedConnection == null) {
+				/*if (this.PlannedConnection == null) {
 					return 0;
 				}
 				if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
@@ -483,14 +553,16 @@ namespace Europlan.Common {
 				} else if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 					return this.PlannedConnection.OtherProduct.Product.PlannedSpreizungHeat;
 				}
-				return (this.PlannedConnection == null || this.PlannedConnection.Distributor == null || this.PlannedConnection.Distributor.RegulatorCircuit == null) ? 0 : EN1264.Instance.DefaultSpreizung(this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature);
+				return (this.PlannedConnection == null || this.PlannedConnection.Distributor == null || this.PlannedConnection.Distributor.RegulatorCircuit == null) ? 0 : EN1264.Instance.DefaultSpreizung(this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature);*/
+				return this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
 			}
 		}
 
 		[XmlIgnore]
 		public double PlannedSpreizungCool {
 			get {
-				return 3; // TODO
+				//return 3; // TODO
+				return this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
 			}
 		}
 		
@@ -582,7 +654,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg);
+		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg, bool variableSpreizung);
 
 		internal virtual void FinalizeLoading(PlannedProduct pp) {
 			// nothing todo

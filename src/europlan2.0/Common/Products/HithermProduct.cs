@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Hitherm®")]
+	[ProductName("Hitherm®", "Hitherm® Klimawand")]
 	public class HithermProduct : Product {
 
 		// quick dimensioning
@@ -21,6 +21,11 @@ namespace Europlan.Common {
 		private static double verbindeLeitungInnendurchmesser = 0.015099678;
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
 		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
+
+		private static double spreizungHeizMin = 4;
+		private static double spreizungHeizMax = 12;
+		private static double spreizungKühlMin = 2;
+		private static double spreizungKühlMax = 5;
 
 		private static int maxPressureLost = 15000;
 		private static int maxDurchfluss = 240;
@@ -284,6 +289,30 @@ namespace Europlan.Common {
 			get { return factorHolzHohlraum; }
 			set { factorHolzHohlraum = value; }
 		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungHeizMin {
+			get { return spreizungHeizMin; }
+			set { spreizungHeizMin = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungHeizMax {
+			get { return spreizungHeizMax; }
+			set { spreizungHeizMax = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungKühlMin {
+			get { return spreizungKühlMin; }
+			set { spreizungKühlMin = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigSpreizungKühlMax {
+			get { return spreizungKühlMax; }
+			set { spreizungKühlMax = value; }
+		}
 		#endregion Product Parameters
 
 		public override int GetDefaultQuickDimensioningCircuits() {
@@ -298,26 +327,41 @@ namespace Europlan.Common {
 			get { return Int32.MaxValue; }
 		}
 
-		public override string Name {
-			get { return "Hitherm®"; }
-		}
-
 		public override string QuickDimensioningName {
 			get { return "Hitherm®\n(m²)"; }
-		}
-
-		/// <summary>
-		/// The full name of this product
-		/// </summary>
-		public override string FullName {
-			get { return "Hitherm® Klimawand"; }
 		}
 
 		public override ProductType Type {
 			get { return ProductType.WH; }
 		}
 
-		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg) {
+		public override void CalculateHeatAndCoolFlow() {
+			base.CalculateHeatAndCoolFlow();
+			double spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
+			double spreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
+			if (spreizungHeat > HithermProduct.ConfigSpreizungHeizMax) {
+				spreizungHeat = HithermProduct.ConfigSpreizungHeizMax;
+			}
+			if (spreizungHeat < HithermProduct.ConfigSpreizungHeizMin) {
+				spreizungHeat = HithermProduct.ConfigSpreizungHeizMin;
+			}
+			if (spreizungCool > HithermProduct.ConfigSpreizungKühlMax) {
+				spreizungCool = HithermProduct.ConfigSpreizungKühlMax;
+			}
+			if (spreizungCool < HithermProduct.ConfigSpreizungKühlMin) {
+				spreizungCool = HithermProduct.ConfigSpreizungKühlMin;
+			}
+			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
+			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
+			if (this.plannedRuecklaufTempHeat - this.associatedRoom.RoomHeatTemperature < 3) {
+				this.plannedRuecklaufTempHeat = this.associatedRoom.RoomHeatTemperature + 3;
+			}
+			if (this.associatedRoom.RoomCoolTemperature - this.plannedRuecklaufTempCool < 3) {
+				this.plannedRuecklaufTempCool = this.associatedRoom.RoomCoolTemperature - 3;
+			}
+		}
+
+		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg, bool variableSpreizung) {
 			// TODO
 			this.incompleteCalculation = false;
 			if (this.PlannedConnection == null) {
@@ -342,6 +386,7 @@ namespace Europlan.Common {
 			double longestRuecklaufTotal;
 			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal);
 
+			this.CalculateHeatAndCoolFlow();
 			int i = 0;
 			foreach (HithermCircuit hc in this.circuits) {
 				hc.HithermProduct = this;

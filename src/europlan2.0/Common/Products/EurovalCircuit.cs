@@ -306,7 +306,7 @@ namespace Europlan.Common {
 					bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag, sr,sr0, lambdaR, lambdaR0);
 					//                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
 					khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
-					this.c_qRzHeatPerSqm = en1264.WaermestromDichteRohr(khRz, dThetaRz);                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
+					this.c_qRzHeatPerSqm = en1264.WaermestromDichteRohr(khRz, dThetaRz) * factor;                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
 				}
 
 				double tAz = EurovalProduct.GetTeilung(layDistance);                             // Teilung der Aufenthaltszone
@@ -385,7 +385,7 @@ namespace Europlan.Common {
 					bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
 					//                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
 					khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
-					this.c_qRzCoolPerSqm = en1264.WaermestromDichteRohr(khRz, dThetaRz);                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
+					this.c_qRzCoolPerSqm = en1264.WaermestromDichteRohr(khRz, dThetaRz) * factor;                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
 				}
 
 				double tAz = EurovalProduct.GetTeilung(layDistance);                             // Teilung der Aufenthaltszone

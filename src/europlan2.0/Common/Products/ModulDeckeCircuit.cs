@@ -310,7 +310,7 @@ namespace Europlan.Common {
 
 					this.c_druckverlustCool = 0;
 					foreach (ModulDeckeSubArea subArea in this.subAreas) {
-						this.c_druckverlustHeat += subArea.Druckverlust(this.c_durchflussCool);
+						this.c_druckverlustCool += subArea.Druckverlust(this.c_durchflussCool);
 					}
 					/*foreach (KlimaFlaechenList row in rows) {
 						double rowDruckverlust = row.Druckverlust(this.c_durchflussCool / rows.Count);
