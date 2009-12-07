@@ -111,7 +111,8 @@ namespace Europlan.Common {
 			requiredMaterialOverrides = new SerializableDictionary<string, double>();
 			requiredMaterialCalculated = new SerializableDictionary<string, double>();
 
-			configuration = Configuration.AdminTemplate + Configuration.UserTemplate;
+			//configuration = Configuration.AdminTemplate + Configuration.UserTemplate;
+			configuration = Configuration.UserTemplate;
 			configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 
 			// root node
@@ -264,7 +265,8 @@ namespace Europlan.Common {
 				Stream r = new FileStream(filename, FileMode.Open);
 				instance = (Project)s.Deserialize(r);
 				r.Close();
-				instance.configuration = (Configuration.AdminTemplate + Configuration.UserTemplate) + instance.configuration;
+				//instance.configuration = (Configuration.AdminTemplate + Configuration.UserTemplate) + instance.configuration;
+				instance.configuration = Configuration.UserTemplate + instance.configuration;
 				instance.configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 				instance.configuration.RecalculateMaterialToCategoryMapping();
 				instance.RecalculateQuickDimensioningRoomToProjectMapping();
