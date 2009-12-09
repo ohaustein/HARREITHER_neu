@@ -404,6 +404,12 @@ namespace Europlan.Common {
 			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg, false);
 		}
 
+		public string ConfigureProduct(bool variableSpreizung) {
+			string errorMsg;
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg, variableSpreizung);
+			return errorMsg;
+		}
+
 		#region IGuiRepresentation Members
 
 		public Type AssociatedPanelType {

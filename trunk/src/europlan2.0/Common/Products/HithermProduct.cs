@@ -402,6 +402,51 @@ namespace Europlan.Common {
 				hc.Calculate();
 			}
 
+			if (variableSpreizung && this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+				// Heizleistung veringern
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < HithermProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad) {
+					this.plannedRuecklaufTempHeat -= 0.1;
+					foreach (HithermCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+				this.plannedRuecklaufTempHeat += 0.1;
+				// Heizleistung erhöhen
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > HithermProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < HithermProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < HithermProduct.ConfigMaxDurchfluss) {
+					this.plannedRuecklaufTempHeat += 0.1;
+					foreach (HithermCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+				// Kühlleistung verringern
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < HithermProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+					this.plannedRuecklaufTempCool += 0.1;
+					foreach (HithermCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+				this.plannedRuecklaufTempCool -= 0.1;
+				// Kühlleistung erhöhen
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > HithermProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < HithermProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < HithermProduct.ConfigMaxDurchfluss) {
+					this.plannedRuecklaufTempCool -= 0.1;
+					foreach (HithermCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+
+				// Calculate variable spreizung for connected products
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
+					if (kvp.Value != null) {
+						kvp.Value.OtherProduct.CalculateHeatAndCoolFlow();
+						PlannedProduct pp = Project.Instance.GetPlannedProduct(kvp.Value.OtherProduct);
+						if (pp != null) {
+							string err;
+							pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err, true);
+						}
+					}
+				}
+			}
+
 			errorMsg = "";
 			//if (this.PlannedMhHeat >= this.PlannedMhCool) {
 				if (Math.Round(this.PlannedMhHeat, 1) > HithermProduct.ConfigMaxDurchfluss) {

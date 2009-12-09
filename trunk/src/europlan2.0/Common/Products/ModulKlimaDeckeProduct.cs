@@ -362,6 +362,51 @@ namespace Europlan.Common {
 				i++;
 			}
 
+			if (variableSpreizung && this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+				// Heizleistung veringern
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < ModulKlimaDeckeProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad) {
+					this.plannedRuecklaufTempHeat -= 0.1;
+					foreach (ModulDeckeCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+				this.plannedRuecklaufTempHeat += 0.1;
+				// Heizleistung erhöhen
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaDeckeProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < ModulKlimaDeckeProduct.ConfigMaxDurchfluss) {
+					this.plannedRuecklaufTempHeat += 0.1;
+					foreach (ModulDeckeCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+				// Kühlleistung verringern
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < ModulKlimaDeckeProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+					this.plannedRuecklaufTempCool += 0.1;
+					foreach (ModulDeckeCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+				this.plannedRuecklaufTempCool -= 0.1;
+				// Kühlleistung erhöhen
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaDeckeProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < ModulKlimaDeckeProduct.ConfigMaxDurchfluss) {
+					this.plannedRuecklaufTempCool -= 0.1;
+					foreach (ModulDeckeCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+
+				// Calculate variable spreizung for connected products
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
+					if (kvp.Value != null) {
+						kvp.Value.OtherProduct.CalculateHeatAndCoolFlow();
+						PlannedProduct pp = Project.Instance.GetPlannedProduct(kvp.Value.OtherProduct);
+						if (pp != null) {
+							string err;
+							pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err, true);
+						}
+					}
+				}
+			}
+
 			errorMsg = "";
 			// TODO
 			/*foreach (ModulDeckeCircuit c in this.circuits) {
