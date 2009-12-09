@@ -448,7 +448,7 @@ namespace Europlan.Common {
 
 			if (variableSpreizung && this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
 				// Heizleistung veringern
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < EurovalProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad) {
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < ModulKlimaBodenProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad) {
 					this.plannedRuecklaufTempHeat -= 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
@@ -456,14 +456,14 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempHeat += 0.1;
 				// Heizleistung erhöhen
-				while (variableSpreizung && this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EurovalProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < EurovalProduct.ConfigMaxDurchfluss) {
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaBodenProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
 					this.plannedRuecklaufTempHeat += 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
 					}
 				}
 				// Kühlleistung verringern
-				while (variableSpreizung && this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < EurovalProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < ModulKlimaBodenProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
 					this.plannedRuecklaufTempCool += 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
@@ -471,7 +471,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (variableSpreizung && this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < EurovalProduct.ConfigMaxDurchfluss) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaBodenProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
