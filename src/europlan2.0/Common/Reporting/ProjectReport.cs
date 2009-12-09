@@ -14,6 +14,7 @@ namespace Europlan.Common {
 		private combit.ListLabel15.ListLabel listLabel1;
 		private combit.ListLabel15.ListLabelPreviewControl listLabelPreviewControl1;
 		private Project project;
+		private string errorMsg = "";
 
 		public ProjectReport(Project project, ProjectReportOptions reportOptions) {
 			this.project = project;
@@ -61,6 +62,17 @@ namespace Europlan.Common {
 			this.listLabelPreviewControl1.ToolbarButtons.ZoomTimes2 = combit.ListLabel15.LlButtonState.Default;
 			this.listLabelPreviewControl1.SaveAsFileName = this.project.ProjectFileName.Replace(".e2p", "");
 			this.Controls.Add(this.listLabelPreviewControl1);
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct p in room.PlannedProducts) {
+						string err = p.ConfigureProduct(project.VariableSpreizung);
+						if (err != null) {
+							errorMsg += err + "\n";
+						}
+					}
+				}
+			}
 
 			DataSet reportData = new DataSet();
 
@@ -241,6 +253,17 @@ namespace Europlan.Common {
 		}
 
 		private void ProjectReport_FormClosing(object sender, FormClosingEventArgs e) {
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct p in room.PlannedProducts) {
+						string err = p.ConfigureProduct(project.VariableSpreizung);
+						if (err != null) {
+							errorMsg += err + "\n";
+						}
+					}
+				}
+			}
+
 			SettingsKey settings = SettingsFile.Settings["ProjectReport"];
 			if (this.WindowState == FormWindowState.Normal) {
 				settings.StorePoint("Location", this.Location);
@@ -266,6 +289,21 @@ namespace Europlan.Common {
 			double plannedWallArea = 0;
 			double plannedCeilingArea = 0;
 
+			double transmissionFloorHeat = 0;
+			double transmissionWallHeat = 0;
+			double transmissionCeilingHeat = 0;
+			double transmissionFloorCool = 0;
+			double transmissionWallCool = 0;
+			double transmissionCeilingCool = 0;
+			double qHeat = 0;
+			double qCool = 0;
+
+			double mhHeat = 0;
+			double mhCool = 0;
+
+			double deltaRhoHeatMax = 0;
+			double deltaRhoCoolMax = 0;
+
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
 					normWaermeBedarf += room.NormalizedHeatLoad;
@@ -278,6 +316,21 @@ namespace Europlan.Common {
 						plannedFloorArea += pp.Product.PlannedFloorArea;
 						plannedWallArea += pp.Product.PlannedWallArea;
 						plannedCeilingArea += pp.Product.PlannedCeilingArea;
+
+						transmissionFloorHeat += pp.Product.TransmissionFloorHeat;
+						transmissionWallHeat += pp.Product.TransmissionWallHeat;
+						transmissionCeilingHeat += pp.Product.TransmissionCeilingHeat;
+						transmissionFloorCool += pp.Product.TransmissionFloorCool;
+						transmissionWallCool += pp.Product.TransmissionWallCool;
+						transmissionCeilingCool += pp.Product.TransmissionCeilingCool;
+						qHeat += pp.Product.PlannedHeatLoad;
+						qCool += pp.Product.PlannedCoolLoad;
+
+						mhHeat += pp.Product.PlannedMhHeat;
+						mhCool += pp.Product.PlannedMhCool;
+												
+						deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
+						deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
 					}
 				}
 			}
@@ -300,30 +353,39 @@ namespace Europlan.Common {
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Heizleistung (nach innen)";
+			wrapper.HeatValue = qHeat.ToString("0.##");
 			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = qCool.ToString("0.##");
 			wrapper.CoolUnit = "W";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamte aufgenommene Leistung";
+			wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
 			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
 			wrapper.CoolUnit = "W";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Wassermenge";
+			wrapper.HeatValue = mhHeat.ToString("0.##");
 			wrapper.HeatUnit = "l/h";
+			wrapper.CoolValue = mhCool.ToString("0.##");
 			wrapper.CoolUnit = "l/h";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Maximaler Druckverlust (inkl. Verteiler)";
+			wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
 			wrapper.HeatUnit = "mbar";
+			wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
 			wrapper.CoolUnit = "mbar";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamt-Wasserinhalt (ab Verteiler)";
+			wrapper.HeatValue = 0.ToString("0.##");
 			wrapper.HeatUnit = "l";
 			wrapperList.Add(wrapper);
 
