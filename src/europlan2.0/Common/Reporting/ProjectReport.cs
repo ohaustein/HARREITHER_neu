@@ -14,7 +14,6 @@ namespace Europlan.Common {
 		private combit.ListLabel15.ListLabel listLabel1;
 		private combit.ListLabel15.ListLabelPreviewControl listLabelPreviewControl1;
 		private Project project;
-		private string errorMsg = "";
 
 		public ProjectReport(Project project, ProjectReportOptions reportOptions) {
 			this.project = project;
@@ -66,10 +65,7 @@ namespace Europlan.Common {
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
 					foreach (PlannedProduct p in room.PlannedProducts) {
-						string err = p.ConfigureProduct(project.VariableSpreizung);
-						if (err != null) {
-							errorMsg += err + "\n";
-						}
+						p.ConfigureProduct(project.VariableSpreizung);
 					}
 				}
 			}
@@ -256,10 +252,7 @@ namespace Europlan.Common {
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
 					foreach (PlannedProduct p in room.PlannedProducts) {
-						string err = p.ConfigureProduct(project.VariableSpreizung);
-						if (err != null) {
-							errorMsg += err + "\n";
-						}
+						p.ConfigureProduct(false);
 					}
 				}
 			}
