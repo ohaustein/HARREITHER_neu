@@ -410,33 +410,22 @@ namespace Europlan.Common {
 		}
 
 		public List<ProjectWarningWrapper> GetProjectWarningReport() {
-			//TODO
-			//foreach (Floor floor in this.floors) {
-			//    foreach (Room room in floor.Rooms) {
-			//        foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
-
-			//        }
-			//    }
-			//}
 			List<ProjectWarningWrapper> wrapperList = new List<ProjectWarningWrapper>();
 
-			ProjectWarningWrapper wrapper = new ProjectWarningWrapper();
-			wrapper.FloorId = "KG1";
-			wrapper.FloorName = "Keller";
-			wrapper.Warning = "WARNUNG FBH in K06....";
-			wrapperList.Add(wrapper);
 
-			wrapper = new ProjectWarningWrapper();
-			wrapper.FloorId = "KG1";
-			wrapper.FloorName = "Keller";
-			wrapper.Warning = "WARNUNG FBH in K08....";
-			wrapperList.Add(wrapper);
-
-			wrapper = new ProjectWarningWrapper();
-			wrapper.FloorId = "EG1";
-			wrapper.FloorName = "Erdgeschoﬂ";
-			wrapper.Warning = "FEHLER WH in E02....";
-			wrapperList.Add(wrapper);
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+						if (plannedProduct.Product.LastErrorMessage != null) {
+							ProjectWarningWrapper wrapper = new ProjectWarningWrapper();
+							wrapper.FloorId = floor.Id;
+							wrapper.FloorName = floor.Name;
+							wrapper.Warning = "WARNUNG " + plannedProduct.InternalName + " in " + room.Id + "(" + room.Name + "): " + plannedProduct.Product.LastErrorMessage;
+							wrapperList.Add(wrapper);
+						}
+					}
+				}
+			}
 
 			return wrapperList;
 		}
