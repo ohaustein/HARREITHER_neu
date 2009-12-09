@@ -334,20 +334,20 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg, bool variableSpreizung) {
+		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
 			this.incompleteCalculation = false;
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || this.plannedConnection == null) {
-				errorMsg = "Fehlende Eingaben: ";
+				this.lastErrorMsg = "Fehlende Eingaben: ";
 				if (plannedFloorConstruction == null) {
-					errorMsg += "Fußbodenkonstruktion, ";
+					this.lastErrorMsg += "Fußbodenkonstruktion, ";
 				}
 				if (plannedInsulationConstruction == null) {
-					errorMsg += "Wärmedämmkonstruktion, ";
+					this.lastErrorMsg += "Wärmedämmkonstruktion, ";
 				}
 				if (PlannedConnection == null) {
-					errorMsg += "Heizkreisanschluß, ";
+					this.lastErrorMsg += "Heizkreisanschluß, ";
 				}
-				errorMsg = errorMsg.Substring(0, errorMsg.Length - 2);
+				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
 				return false;
 			}
@@ -484,14 +484,13 @@ namespace Europlan.Common {
 						kvp.Value.OtherProduct.CalculateHeatAndCoolFlow();
 						PlannedProduct pp = Project.Instance.GetPlannedProduct(kvp.Value.OtherProduct);
 						if (pp != null) {
-							string err;
-							pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err, true);
+							pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, true);
 						}
 					}
 				}
 			}
 
-			errorMsg = "";
+			this.lastErrorMsg = "";
 			//foreach (ModulBodenCircuit c in this.circuits) {
 			//    int moduleCount = 0;
 			//    foreach (KlimaFlaechenList row in c.Rows) {
@@ -504,31 +503,31 @@ namespace Europlan.Common {
 			//}
 
 			if (this.PlannedModulArea > this.PlannedNetArea) {
-				errorMsg += "Die verplanten Module nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.PlannedModulArea, 1).ToString() + "m² > " + Math.Round(this.PlannedNetArea, 1).ToString() + "m²)\n";
+				this.lastErrorMsg += "Die verplanten Module nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.PlannedModulArea, 1).ToString() + "m² > " + Math.Round(this.PlannedNetArea, 1).ToString() + "m²)\n";
 			}
 			if (Math.Round(this.PlannedFloorTemperatureHeat, 1) > (ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264)) {
-				errorMsg += "Oberflächentemperatur zu groß (" + Math.Round(this.PlannedFloorTemperatureHeat, 1) + "°C > " + Math.Round((ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1) + "°C)\n";
+				this.lastErrorMsg += "Oberflächentemperatur zu groß (" + Math.Round(this.PlannedFloorTemperatureHeat, 1) + "°C > " + Math.Round((ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1) + "°C)\n";
 			}
 			if (this.PlannedMhHeat >= this.PlannedMhCool) {
 			    if (Math.Round(this.PlannedMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
-			        errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 			    }
 			} else {
 			    if (Math.Round(this.PlannedMhCool, 1) > ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
-			        errorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 			    }
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
 			    if (Math.Round(this.PlannedDeltaRhoHeat, 2) > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
-			        errorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
 			    }
 			} else {
 			    if (Math.Round(this.PlannedDeltaRhoCool, 2) > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
-			        errorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
 			    }
 			}
-			if (errorMsg.Length == 0) {
-			    errorMsg = null;
+			if (this.lastErrorMsg.Length == 0) {
+				this.lastErrorMsg = null;
 			}
 
 			return true;

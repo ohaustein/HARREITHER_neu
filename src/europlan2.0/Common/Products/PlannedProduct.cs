@@ -400,14 +400,12 @@ namespace Europlan.Common {
 			this.requestedHeatLoad = this.NecessaryHeatLoad;
 			this.calculateHeat = this.requestedHeatLoad > 0;
 			this.calculateCool = this.requestedCoolLoad > 0;
-			string errorMsg;
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg, false);
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, false);
 		}
 
 		public string ConfigureProduct(bool variableSpreizung) {
-			string errorMsg;
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg, variableSpreizung);
-			return errorMsg;
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, variableSpreizung);
+			return this.plannedProduct.LastErrorMessage;
 		}
 
 		#region IGuiRepresentation Members
@@ -435,7 +433,6 @@ namespace Europlan.Common {
 
 		internal void FinalizeLoading() {
 			this.plannedProduct.FinalizeLoading(this);
-			string errorMsg;
 
 			List<PlannedProduct> products = this.plannedProduct.AssociatedRoom.PlannedProducts;
 			Dictionary<Product.ProductType, int> productCounter = new Dictionary<Product.ProductType, int>();
@@ -449,7 +446,7 @@ namespace Europlan.Common {
 				p.productNode.Text = internalName + ": " + p.System;
 			}
 
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, out errorMsg, false);
+			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, false);
 
 		}
 
