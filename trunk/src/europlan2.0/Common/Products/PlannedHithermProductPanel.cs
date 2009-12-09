@@ -61,7 +61,8 @@ namespace Europlan.Common {
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
 			if (this.product != null) {
-				(this.product.Product as HithermProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out errorMsg, false);
+				(this.product.Product as HithermProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
 			}
 			this.UpdateControl(FieldEnum.NONE);
 		}
@@ -289,8 +290,7 @@ namespace Europlan.Common {
 						reconfigure = true;
 					}
 					if (reconfigure || pp.CoverHeatLoad || pp.CoverCoolLoad) {
-						string errorMsg;
-						pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out errorMsg, false);
+						pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
 					}
 				}
 			}
@@ -333,7 +333,8 @@ namespace Europlan.Common {
 				ignoreHeatLoad++;
 				this.product.RequestedHeatLoadPercentage = (float)this.numHeatLoadPercentage.Value;
 				this.numHeatLoad.Value = (decimal)this.product.RequestedHeatLoad;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.HEAT_LOAD_PERCENTAGE);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -347,7 +348,8 @@ namespace Europlan.Common {
 				ignoreCoolLoad++;
 				this.product.RequestedCoolLoadPercentage = (float)this.numCoolLoadPercentage.Value;
 				this.numCoolLoad.Value = (decimal)this.product.RequestedCoolLoad;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.COOL_LOAD_PERCENTAGE);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -361,7 +363,8 @@ namespace Europlan.Common {
 				ignoreHeatLoadPercentage++;
 				this.product.RequestedHeatLoad = (double)this.numHeatLoad.Value;
 				this.numHeatLoadPercentage.Value = (decimal)this.product.RequestedHeatLoadPercentage;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.HEAT_LOAD);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -375,7 +378,8 @@ namespace Europlan.Common {
 				ignoreCoolLoadPercentage++;
 				this.product.RequestedCoolLoad = (double)this.numCoolLoad.Value;
 				this.numCoolLoadPercentage.Value = (decimal)this.product.RequestedCoolLoadPercentage;
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.COOL_LOAD);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -390,7 +394,8 @@ namespace Europlan.Common {
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
 					(this.product.Product as ModulKlimaBodenProduct).PlannedFloorConstruction = form.SelectedConstruction;
-					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.NONE);
 				}
 			}
@@ -406,7 +411,8 @@ namespace Europlan.Common {
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
 					(this.product.Product as ModulKlimaBodenProduct).PlannedInsulationConstruction = form.SelectedConstruction;
-					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.NONE);
 				}
 			}
@@ -424,7 +430,8 @@ namespace Europlan.Common {
 			//}
 			form.ShowDialog();
 
-			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+			this.errorMsg = this.product.Product.LastErrorMessage;
 			this.UpdateControl(FieldEnum.COOL_LOAD);
 			if (form.DialogResult == DialogResult.OK && this.ProjectChanged != null) {
 				this.ProjectChanged(this);
@@ -433,7 +440,8 @@ namespace Europlan.Common {
 		}
 
 		private void connectionPipePanel1_GridContentChanged(object sender) {
-			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+			this.errorMsg = this.product.Product.LastErrorMessage;
 			this.UpdateControl(FieldEnum.NONE);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
@@ -444,7 +452,8 @@ namespace Europlan.Common {
 			ConnectionPipesForm form = new ConnectionPipesForm(this.product);
 			form.ShowDialog();
 			if (form.UnsavedChanges) {
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.NONE);
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
@@ -470,14 +479,16 @@ namespace Europlan.Common {
 		private void dgvRegisters_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
 			dgvRegisters.AllowUserToAddRows = true;
 			(this.product.Product as HithermProduct).RemoveRegisterFromCircuit(this.deletingRegister);
-			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+			this.errorMsg = this.product.Product.LastErrorMessage;
 			if (ProjectChanged != null) {
 				ProjectChanged(this);
 			}
 		}
 
 		private void dgvRegisters_UserAddedRow(object sender, DataGridViewRowEventArgs e) {
-			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+			this.errorMsg = this.product.Product.LastErrorMessage;
 			if (this.product != null && newRow != null && newRow.DataBoundItem is HithermRegister) {
 				(this.product.Product as HithermProduct).AddRegisterToCircuit(newRow.DataBoundItem as HithermRegister, (int)newRow.Cells[this.heizkreisDataGridViewTextBoxColumn.Index].Value);
 				newRow = null;
@@ -490,7 +501,8 @@ namespace Europlan.Common {
 		private void dgvRegisters_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
 			if (this.product != null) {
 				this.UpdateControl(FieldEnum.REGISTER);
-				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, out this.errorMsg, false);
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
 				if (this.ProjectChanged != null) {
 					this.ProjectChanged(this);
 				}

@@ -278,8 +278,7 @@ namespace Europlan.Common {
 
 		private void CorrectPlanning() {
 			foreach (PlannedProduct pp in this.PlannedProducts) {
-				string errorMsg;
-				pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out errorMsg, false);
+				pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
 			}
 		}
 

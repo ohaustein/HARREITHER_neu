@@ -1350,20 +1350,20 @@ namespace Europlan.Common {
 
 		bool secondConfig = false;
 
-		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg, bool variableSpreizung) {
+		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
 			this.incompleteCalculation = false;
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
-				errorMsg = "Fehlende Eingaben: ";
+				this.lastErrorMsg = "Fehlende Eingaben: ";
 				if (plannedFloorConstruction == null) {
-					errorMsg += "Fuﬂbodenkonstruktion, ";
+					this.lastErrorMsg += "Fuﬂbodenkonstruktion, ";
 				}
 				if (plannedInsulationConstruction == null) {
-					errorMsg += "W‰rmed‰mmkonstruktion, ";
+					this.lastErrorMsg += "W‰rmed‰mmkonstruktion, ";
 				}
 				if (PlannedConnection == null) {
-					errorMsg += "Heizkreisanschluﬂ, ";
+					this.lastErrorMsg += "Heizkreisanschluﬂ, ";
 				}
-				errorMsg = errorMsg.Substring(0, errorMsg.Length - 2);
+				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
 				return false;
 			}
@@ -1372,7 +1372,7 @@ namespace Europlan.Common {
 				this.plannedLayDistance = null;
 				this.plannedRimType = null;
 				this.circuits.Clear();
-				errorMsg = null;
+				this.lastErrorMsg = null;
 				return true;
 			}
 
@@ -1391,7 +1391,7 @@ namespace Europlan.Common {
 					} else {*/
 						//this.circuits.Clear();
 					/*}*/
-					errorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -1492,8 +1492,8 @@ namespace Europlan.Common {
 					}
 					circuitCount = circuitCount < 1 ? 1 : circuitCount;
 					while (tryCalc) {
-						errorMsg = this.CorrectCircuits(circuitCount, false);
-						if (errorMsg != null) {
+						this.lastErrorMsg = this.CorrectCircuits(circuitCount, false);
+						if (this.lastErrorMsg != null) {
 							/*if (this.requestedCircuits.HasValue) {
 								// TODO reset circuits
 							} else {*/
@@ -1573,7 +1573,7 @@ namespace Europlan.Common {
 				} else {*/
 					this.circuits.Clear();
 				/*}*/
-				errorMsg = "Keine Automatische Auslegung mˆglich";
+					this.lastErrorMsg = "Keine Automatische Auslegung mˆglich";
 				this.incompleteCalculation = true;
 				return false;
 			}
@@ -1645,8 +1645,7 @@ namespace Europlan.Common {
 							kvp.Value.OtherProduct.CalculateHeatAndCoolFlow();
 							PlannedProduct pp = Project.Instance.GetPlannedProduct(kvp.Value.OtherProduct);
 							if (pp != null) {
-								string err;
-								pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, out err, true);
+								pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, true);
 							}
 						}
 					}
@@ -1657,43 +1656,43 @@ namespace Europlan.Common {
 				if (!this.secondConfig) {
 					this.secondConfig = true;
 					this.plannedConnection.OtherProduct.ConfigureProductDefault();
-					bool ok = this.ConfigureProduct(requestedHeatLoad, requestedCoolLoad, canHeat, canCool, out errorMsg, false);
+					bool ok = this.ConfigureProduct(requestedHeatLoad, requestedCoolLoad, canHeat, canCool, false);
 					this.secondConfig = false;
 					this.incompleteCalculation = !ok;
 					return ok;
 				}
 			}
 
-			errorMsg = "";
+			this.lastErrorMsg = "";
 			if (this.LongestPipeLengthPerCircuitWithAllConnections > EurovalProduct.ConfigMaxCircuitLength) {
-				errorMsg += "Rohrl‰nge zu groﬂ (" + Math.Round(this.PipeLengthWithoutConnectionsOfLongestPipeWithConnections, 1) + "m > " + Math.Round(EurovalProduct.ConfigMaxCircuitLength - this.ConnectionLengthOfLongestPipeWithConnections, 1) + "m)\n";
+				this.lastErrorMsg += "Rohrl‰nge zu groﬂ (" + Math.Round(this.PipeLengthWithoutConnectionsOfLongestPipeWithConnections, 1) + "m > " + Math.Round(EurovalProduct.ConfigMaxCircuitLength - this.ConnectionLengthOfLongestPipeWithConnections, 1) + "m)\n";
 			}
 			if (Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264)) {
-				errorMsg += "Oberfl‰chentemperatur in der Aufenthaltszone zu groﬂ (" + Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) + "∞C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264), 1) + "∞C)\n";
+				this.lastErrorMsg += "Oberfl‰chentemperatur in der Aufenthaltszone zu groﬂ (" + Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) + "∞C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264), 1) + "∞C)\n";
 			}
 			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264)) {
-				errorMsg += "Oberfl‰chentemperatur in der Randzone zu groﬂ (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "∞C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "∞C)\n";
+				this.lastErrorMsg += "Oberfl‰chentemperatur in der Randzone zu groﬂ (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "∞C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "∞C)\n";
 			}
 			if (this.PlannedMhHeat >= this.PlannedMhCool) {
 				if (Math.Round(this.PlannedMhHeat, 1) > EurovalProduct.ConfigMaxDurchfluss) {
-					errorMsg += "Durchfluﬂ bei Heizung zu groﬂ (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+					this.lastErrorMsg += "Durchfluﬂ bei Heizung zu groﬂ (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			} else {
 				if (Math.Round(this.PlannedMhCool, 1) > EurovalProduct.ConfigMaxDurchfluss) {
-					errorMsg += "Durchfluﬂ bei K¸hlung zu groﬂ (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+					this.lastErrorMsg += "Durchfluﬂ bei K¸hlung zu groﬂ (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
 				if (Math.Round(this.PlannedDeltaRhoHeat, 1) > EurovalProduct.ConfigMaxPressureLost) {
-					errorMsg += "Druckverlust bei Heizung zu groﬂ (" + Math.Round(this.PlannedDeltaRhoHeat, 1).ToString() + "mbar > " + EurovalProduct.ConfigMaxPressureLost.ToString() + "mbar)\n";
+					this.lastErrorMsg += "Druckverlust bei Heizung zu groﬂ (" + Math.Round(this.PlannedDeltaRhoHeat, 1).ToString() + "mbar > " + EurovalProduct.ConfigMaxPressureLost.ToString() + "mbar)\n";
 				}
 			} else {
 				if (Math.Round(this.PlannedDeltaRhoCool, 1) > EurovalProduct.ConfigMaxPressureLost) {
-					errorMsg += "Druckverlust bei K¸hlung zu groﬂ (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + EurovalProduct.ConfigMaxPressureLost.ToString() + "mbar)\n";
+					this.lastErrorMsg += "Druckverlust bei K¸hlung zu groﬂ (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + EurovalProduct.ConfigMaxPressureLost.ToString() + "mbar)\n";
 				}
 			}
-			if (errorMsg.Length == 0) {
-				errorMsg = null;
+			if (this.lastErrorMsg.Length == 0) {
+				this.lastErrorMsg = null;
 			}
 
 			return true;

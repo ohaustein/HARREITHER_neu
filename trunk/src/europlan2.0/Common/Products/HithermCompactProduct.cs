@@ -97,9 +97,9 @@ namespace Europlan.Common {
 			get { return ProductType.WH; }
 		}
 
-		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg, bool variableSpreizung) {
+		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
 			// TODO
-			errorMsg = "Noch nicht implementiert";
+			this.lastErrorMsg = "Noch nicht implementiert";
 			return false;
 		}
 

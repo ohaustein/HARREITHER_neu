@@ -44,6 +44,8 @@ namespace Europlan.Common {
 		protected double plannedRuecklaufTempCool = double.MinValue;
 		protected bool incompleteCalculation = true;
 
+		protected string lastErrorMsg = null;
+
 		//protected int plannedCircuits = 1;
 		protected List<Circuit> circuits = new List<Circuit>();
 
@@ -654,7 +656,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, out string errorMsg, bool variableSpreizung);
+		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung);
 
 		internal virtual void FinalizeLoading(PlannedProduct pp) {
 			// nothing todo
@@ -887,8 +889,10 @@ namespace Europlan.Common {
 			set { this.plannedRoomTemperatureBelowCool = value; }
 		}
 
-
 		public abstract void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial);
 
+		public string LastErrorMessage {
+			get { return this.lastErrorMsg; }
+		}
 	}
 }
