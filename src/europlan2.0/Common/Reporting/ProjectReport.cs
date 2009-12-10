@@ -409,6 +409,147 @@ namespace Europlan.Common {
 			return wrapperList;
 		}
 
+		public List<BilanzWrapper> GetEurovalBilanzWrapper() {
+			//TODO
+			List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
+
+			double normWaermeBedarf = 0;
+			double normKuehlBedarf = 0;
+			double normWaermeBedarfBereinigt = 0;
+			double normKuehlBedarfBereinigt = 0;
+
+			double roomArea = 0;
+			double estrichArea = 0;
+			double plannedArea = 0;
+
+			double transmissionFloorHeat = 0;
+			double transmissionWallHeat = 0;
+			double transmissionCeilingHeat = 0;
+			double transmissionFloorCool = 0;
+			double transmissionWallCool = 0;
+			double transmissionCeilingCool = 0;
+			double qHeat = 0;
+			double qCool = 0;
+
+			double mhHeat = 0;
+			double mhCool = 0;
+
+			double deltaRhoHeatMax = 0;
+			double deltaRhoCoolMax = 0;
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						if (pp.Product is EurovalProduct) {
+							normWaermeBedarf += pp.RequestedHeatLoad;
+							normKuehlBedarf += pp.RequestedCoolLoad;
+							roomArea += room.Area;
+							if (pp.Product.HasInsideConstruction) {
+								if (pp.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH) ||
+									pp.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH)) {
+									estrichArea += pp.Product.PlannedFloorArea;
+								}
+							}
+							plannedArea += pp.Product.PlannedFloorArea;
+
+							normWaermeBedarfBereinigt += pp.Product.HeatLoadBereinigt;
+							normKuehlBedarfBereinigt += pp.Product.CoolLoadBereinigt;
+
+							transmissionFloorHeat += pp.Product.TransmissionFloorHeat;
+							transmissionWallHeat += pp.Product.TransmissionWallHeat;
+							transmissionCeilingHeat += pp.Product.TransmissionCeilingHeat;
+							transmissionFloorCool += pp.Product.TransmissionFloorCool;
+							transmissionWallCool += pp.Product.TransmissionWallCool;
+							transmissionCeilingCool += pp.Product.TransmissionCeilingCool;
+							qHeat += pp.Product.PlannedHeatLoad;
+							qCool += pp.Product.PlannedCoolLoad;
+
+							mhHeat += pp.Product.PlannedMhHeat;
+							mhCool += pp.Product.PlannedMhCool;
+
+							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
+							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
+						}
+					}
+				}
+			}
+
+			BilanzWrapper wrapper = new BilanzWrapper();
+			wrapper.Description = "Gewünschter Wärmebedarf";
+			wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Bereinigter Wärmebedarf";
+			wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Erreichte Heizleistung nach innen";
+			wrapper.HeatValue = qHeat.ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = qCool.ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gesamte zugeführte Heizleistung";
+			wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Wassermenge";
+			wrapper.HeatValue = mhHeat.ToString("0.##");
+			wrapper.HeatUnit = "l/h";
+			wrapper.CoolValue = mhCool.ToString("0.##");
+			wrapper.CoolUnit = "l/h";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Maximaler Druckverlust (inkl. Verteiler)";
+			wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
+			wrapper.HeatUnit = "mbar";
+			wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
+			wrapper.CoolUnit = "mbar";
+			wrapperList.Add(wrapper);
+
+			// TODO
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Wasserinhalt (ab Verteiler)";
+			wrapper.HeatValue = 0.ToString("0.##");
+			wrapper.HeatUnit = "l";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gesamte Raumfläche (Räume mit Euroval® Fußbodenheizung)";
+			wrapper.HeatValue = roomArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gestamte Estrichfläche";
+			wrapper.HeatValue = estrichArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gestamte Heizfläche";
+			wrapper.HeatValue = plannedArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
+			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
+
 		public List<ProjectWarningWrapper> GetProjectWarningReport() {
 			List<ProjectWarningWrapper> wrapperList = new List<ProjectWarningWrapper>();
 
@@ -742,10 +883,14 @@ namespace Europlan.Common {
 								wrapperHeat.RoomId = room.Id;
 								wrapperHeat.RoomName = room.Name;
 								wrapperHeat.TeilSystem = pp.InternalName;
-								//wrapperHeat.InsideConstruction = 
-								//wrapperHeat.InsideRValue =
-								//wrapperHeat.OutsideConstruction =
-								//wrapperHeat.OutsideRValue = 
+								if (pp.Product.HasInsideConstruction) {
+									wrapperHeat.InsideConstruction = pp.Product.PlannedInsideConstruction.Id;
+									wrapperHeat.InsideRValue = pp.Product.PlannedInsideConstructionRValue;
+								}
+								if (pp.Product.HasOutsideConstruction) {
+									wrapperHeat.OutsideConstruction = pp.Product.PlannedOutsideConstruction.Id;
+									wrapperHeat.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
+								}
 								wrapperHeat.Circuits = pp.Product.PlannedCircuitCount;
 								wrapperHeat.RzLayDistance = ep.PlannedRimLayDistance.ToString();
 								wrapperHeat.RzWidth = ep.PlannedRimWidth;
@@ -759,15 +904,23 @@ namespace Europlan.Common {
 								wrapperHeat.RoomTemp = room.RoomHeatTemperature;
 								wrapperHeat.VorlaufTemp = v;
 								wrapperHeat.RuecklaufTemp = r;
-								//wrapperHeat.QSoll = ;
-								//wrapperHeat.QFBH = ;
-								//wrapperHeat.qFBH = ;
-								//wrapperHeat.tFBRz = ;
-								//wrapperHeat.tFBRz = ;
+								wrapperHeat.QSoll = pp.RequestedHeatLoad;
+								wrapperHeat.QFBH = pp.PlannedHeatLoad;
+								wrapperHeat.tFBAz = ep.PlannedFloorTemperatureHeatResidence;
+								wrapperHeat.tFBRz = ep.PlannedFloorTemperatureHeatRim;
+
 								wrapperHeat.Wassermenge = pp.Product.PlannedMhHeat;
 
 								//wrapperHeat.UnusedArea = 
-								
+
+								if (ep.PlannedConnection != null) {
+									if (ep.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+										wrapperHeat.SubSystem = true;
+									}
+								}
+								if (ep.IsOtherProductConnected) {
+									wrapperHeat.OtherSystemsConnected = true;
+								}								
 							}
 							if (project.CalculateCoolLoad && wrapperCool == null) {
 								wrapperCool = new EurovalWrapper();
@@ -778,10 +931,14 @@ namespace Europlan.Common {
 								wrapperCool.RoomId = room.Id;
 								wrapperCool.RoomName = room.Name;
 								wrapperCool.TeilSystem = pp.InternalName;
-								//wrapperCool.InsideConstruction = 
-								//wrapperCool.InsideRValue =
-								//wrapperCool.OutsideConstruction =
-								//wrapperCool.OutsideRValue = 
+								if (pp.Product.HasInsideConstruction) {
+									wrapperHeat.InsideConstruction = pp.Product.PlannedInsideConstruction.Id;
+									wrapperHeat.InsideRValue = pp.Product.PlannedInsideConstructionRValue;
+								}
+								if (pp.Product.HasOutsideConstruction) {
+									wrapperHeat.OutsideConstruction = pp.Product.PlannedOutsideConstruction.Id;
+									wrapperHeat.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
+								}
 								wrapperCool.Circuits = pp.Product.PlannedCircuitCount;
 								wrapperCool.RzLayDistance = ep.PlannedRimLayDistance.ToString();
 								wrapperCool.RzWidth = ep.PlannedRimWidth;
@@ -795,14 +952,24 @@ namespace Europlan.Common {
 								wrapperCool.RoomTemp = room.RoomCoolTemperature;
 								wrapperCool.VorlaufTemp = v;
 								wrapperCool.RuecklaufTemp = r;
-								//wrapperCool.QSoll = ;
-								//wrapperCool.QFBH = ;
-								//wrapperCool.qFBH = ;
-								//wrapperCool.tFBRz = ;
-								//wrapperCool.tFBRz = ;
+								wrapperCool.QSoll = pp.RequestedCoolLoad;
+								wrapperCool.QFBH = pp.PlannedCoolLoad;
+								wrapperCool.tFBAz = ep.PlannedFloorTemperatureCoolResidence;
+								wrapperCool.tFBRz = ep.PlannedFloorTemperatureCoolRim;
+
 								wrapperCool.Wassermenge = pp.Product.PlannedMhCool;
 
 								//wrapperCool.UnusedArea = 
+
+								if (ep.PlannedConnection != null) {
+									if (ep.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+										wrapperCool.SubSystem = true;
+									}
+								}
+
+								if (ep.IsOtherProductConnected) {
+									wrapperCool.OtherSystemsConnected = true;
+								}
 							}
 						}
 						if (wrapperHeat != null) {
@@ -874,53 +1041,6 @@ namespace Europlan.Common {
 			return wrapperList;
 		}
 
-		public List<BilanzWrapper> GetEurovalBilanzWrapper() {
-			//TODO
-			List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
-
-			BilanzWrapper wrapper = new BilanzWrapper();
-			wrapper.Description = "Gewünschter Wärmebedarf";
-			wrapperList.Add(wrapper);
-
-			wrapper = new BilanzWrapper();
-			wrapper.Description = "Bereinigter Wärmebedarf";
-			wrapperList.Add(wrapper);
-
-			wrapper = new BilanzWrapper();
-			wrapper.Description = "Erreichte Heizleistung nach innen";
-			wrapperList.Add(wrapper);
-
-			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gesamte zugeführte Heizleistung";
-			wrapperList.Add(wrapper);
-
-			wrapper = new BilanzWrapper();
-			wrapper.Description = "Wassermenge";
-			wrapperList.Add(wrapper);
-
-			wrapper = new BilanzWrapper();
-			wrapper.Description = "Maximaler Druckverlust (inkl. Verteiler)";
-			wrapperList.Add(wrapper);
-
-			wrapper = new BilanzWrapper();
-			wrapper.Description = "Wasserinhalt (ab Verteiler)";
-			wrapperList.Add(wrapper);
-
-			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gesamte Raumfläche (Räume mit Euroval® Fußbodenheizung)";
-			wrapperList.Add(wrapper);
-
-			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamte Estrichfläche";
-			wrapperList.Add(wrapper);
-
-			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamte Heizfläche";
-			wrapperList.Add(wrapper);
-
-			return wrapperList;
-		}
-
 		public List<VerlegedatenCircuitWrapper> GetVerlegedatenCircuitWrapper() {
 			//TODO
 
@@ -935,7 +1055,7 @@ namespace Europlan.Common {
 							if (connection != null && connection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
 								wrapper = new VerlegedatenCircuitWrapper();
 								wrapper.Distributor = connection.Distributor.Id + " " + connection.Distributor.Name + " " + connection.Distributor.AssociatedFloor.Name;
-								wrapper.Name = pp.Product.ToString() + " in ";
+								wrapper.Name = pp.Product.FullName + " in ";
 								if (floor != connection.Distributor.AssociatedFloor) {
 									wrapper.Name += floor.Name + ", ";
 								}

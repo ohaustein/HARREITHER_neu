@@ -26,6 +26,7 @@ namespace Europlan.Common {
 		// IMPORTANT!!!
 		private ConfigurationType type;
 		private List<Material> materials;
+		private static List<Material> allMaterials;
 		private List<Category> categories;
 		private List<Construction> constructions;
 		private SerializableDictionary<string, string> materialToCategoryMapping;
@@ -76,52 +77,68 @@ namespace Europlan.Common {
 
 			this.partnerLogo = "";
 
-			StreamReader sr = null;
-			try {
-				sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.001"), System.Text.Encoding.GetEncoding(850));
-				string line;
-				while ((line = sr.ReadLine()) != null) {
-					if (line.StartsWith("A")) {
+			if (allMaterials == null) {
+				allMaterials = new List<Material>();
+				StreamReader sr = null;
+				try {
+					sr = new StreamReader(Path.Combine(appDataPath, "BruttoPreise.csv"), System.Text.Encoding.Default);
+					string line;
+					// ignore the first line (only header)
+					line = sr.ReadLine();
+					while ((line = sr.ReadLine()) != null) {
 						string[] positions = line.Split(';');
-						string id = positions[2].Trim();
-						string name = positions[4].Trim();
-						string name2 = positions[5].Trim();
-						if (name2 != "") {
-							name += " " + name2;
+						if (positions[0].CompareTo("AG01") >= 0 && positions[0].CompareTo("YY76") <= 0) {
+							string id = positions[0].Trim();
+							string name = positions[1].Trim();
+							//string name2 = positions[5].Trim();
+							//if (name2 != "") {
+							//    name += " " + name2;
+							//}
+							float price = 0;
+							float.TryParse(positions[2], out price);
+							string discountGroup = "" /*positions[10].Trim()*/;
+							string unit = positions[9].Trim();
+							float denomination = 0;
+							if (float.TryParse(positions[4], out denomination)) {
+								allMaterials.Add(new Material(id, name, id, (int)denomination, unit, price, discountGroup, null, false));
+							} else {
+								allMaterials.Add(new Material(id, name, id, null, unit, price, discountGroup, null, false));
+							}
+
 						}
-						float price = Int32.Parse(positions[9]) / 100;
-						string discountGroup = positions[10].Trim();
-						int denomination = Int32.Parse(positions[6]);
-						string unit = positions[8].Trim(); ;
-						this.materials.Add(new Material(id, name, id, denomination, unit, price, discountGroup, null, false));
+					}
+				} catch (Exception ex) {
+					// TODO
+					// show messagebox to user
+					log.Error("Error while parsing BruttoPreise.csv file", ex);
+				} finally {
+					if (sr != null) {
+						sr.Close();
 					}
 				}
-			} catch (Exception ex) {
-				log.Error("Error while parsing DATANORM.001 file", ex);
-			} finally {
-				if (sr != null) {
-					sr.Close();
-				}
 			}
-			try {
-				sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.RAB"), System.Text.Encoding.GetEncoding(850));
-				string line;
-				while ((line = sr.ReadLine()) != null) {
-					if (line.StartsWith("R")) {
-						string[] positions = line.Split(';');
-						string discountGroup = positions[2].Trim();
-						float discount = Int32.Parse(positions[4]) / 100;
-						this.discounts.Add(discountGroup, discount);
-					}
-				}
-			} catch (Exception ex) {
-				log.Error("Error while parsing DATANORM.RAB file", ex);
-			} finally {
-				if (sr != null) {
-					sr.Close();
-				}
-			}
+
+			this.materials.AddRange(allMaterials);
+			//try {
+			//    sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.RAB"), System.Text.Encoding.GetEncoding(850));
+			//    string line;
+			//    while ((line = sr.ReadLine()) != null) {
+			//        if (line.StartsWith("R")) {
+			//            string[] positions = line.Split(';');
+			//            string discountGroup = positions[2].Trim();
+			//            float discount = Int32.Parse(positions[4]) / 100;
+			//            this.discounts.Add(discountGroup, discount);
+			//        }
+			//    }
+			//} catch (Exception ex) {
+			//    log.Error("Error while parsing DATANORM.RAB file", ex);
+			//} finally {
+			//    if (sr != null) {
+			//        sr.Close();
+			//    }
+			//}
 		}
+
 
 		public void RecalculateMaterialToCategoryMapping() {
 			List<Material> materialsToRemove = new List<Material>();
@@ -141,11 +158,11 @@ namespace Europlan.Common {
 					materialsToRemove.Add(material);
 				}
 			}
-			if (this.type == ConfigurationType.UserConfiguration || this.type == ConfigurationType.ProjectConfiguration) {
+			//if (this.type == ConfigurationType.UserConfiguration || this.type == ConfigurationType.ProjectConfiguration) {
 				foreach (Material material in materialsToRemove) {
 					materials.Remove(material);
 				}
-			}
+			//}
 		}
 
 		public static Configuration operator+(Configuration config1, Configuration config2) {
@@ -438,7 +455,7 @@ namespace Europlan.Common {
 			set {
 				if (type == ConfigurationType.InitializedConfiguration) {
 					this.materialToCategoryMapping = value;
-					RecalculateMaterialToCategoryMapping();
+					//RecalculateMaterialToCategoryMapping();
 				}
 			}
 		}

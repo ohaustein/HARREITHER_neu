@@ -31,6 +31,8 @@ namespace Europlan.Application {
 		private bool projectUnsaved = false;
 		private TreeNode selectedTreeNode = null;
 
+		private bool loadAfterRestart = false;
+
 		Queue<string> mruList = new Queue<string>();
 
 		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
@@ -144,6 +146,11 @@ namespace Europlan.Application {
 			Project.ProjectLoaded += new Project.ProjectLoadedHandler(myProject_ProjectLoaded);
 			Project.ProjectSaved += new Project.ProjectSavedHandler(myProject_ProjectSaved);
 
+			string loadProject = settings.GetSetting("LoadProject", "");
+			if (loadProject != "") {
+				projectFileName = loadProject;
+			}
+
 			if (projectFileName != null) {
 				LoadProject();
 			} else {
@@ -250,6 +257,15 @@ namespace Europlan.Application {
 				}
 
 				settings.StoreSetting("SplitterDistance", this.splitContainer.SplitterDistance);
+
+				if (loadAfterRestart) {
+					settings.StoreSetting("LoadProject", projectFileName);
+				} else {
+					try {
+						settings.DeleteSetting("LoadProject");
+					} catch { }
+				}
+
 				SettingsFile.Update();
 			} else {
 				e.Cancel = true;
@@ -654,16 +670,15 @@ namespace Europlan.Application {
 			if (this.CheckForUnsavedChanges()) {
 				OpenFileDialog dialog = new OpenFileDialog();
 				//FolderBrowserDialog dialog = new FolderBrowserDialog();
-				dialog.Filter = "Datanorm|DATANORM.001";
+				dialog.Filter = "Artikelstamm|BruttoPreise*.csv";
 				string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 				if (dialog.ShowDialog() == DialogResult.OK) {
 					string path = Path.GetDirectoryName(dialog.FileName);
 					if (!path.Equals(appDataPath)) {
-						if (File.Exists(Path.Combine(path, "DATANORM.001"))) {
-							File.Copy(Path.Combine(path, "DATANORM.001"), Path.Combine(appDataPath, "DATANORM.001"), true);
-						}
-						if (File.Exists(Path.Combine(path, "DATANORM.RAB"))) {
-							File.Copy(Path.Combine(path, "DATANORM.RAB"), Path.Combine(appDataPath, "DATANORM.RAB"), true);
+						// TODO 
+						// check if csv contains materials
+						if (File.Exists(dialog.FileName)) {
+							File.Copy(dialog.FileName, Path.Combine(appDataPath, "BruttoPreise.csv"), true);
 						}
 					}
 					if (projectFileName == null) {
@@ -681,7 +696,8 @@ namespace Europlan.Application {
 							currentEditorUserControl.UpdateControl();
 						}
 					} else {
-						LoadProject();
+						loadAfterRestart = true;
+						System.Windows.Forms.Application.Restart();
 					}
 				}
 			}

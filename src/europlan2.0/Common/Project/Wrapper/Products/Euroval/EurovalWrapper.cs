@@ -46,6 +46,9 @@ namespace Europlan.Common {
 
 		private double unusedArea;
 
+		private bool subSystem = false;
+		private bool otherSystemsConnected = false;
+
 		public string RoomId {
 			get { return roomId; }
 			set { roomId = value; }
@@ -156,8 +159,8 @@ namespace Europlan.Common {
 		}
 
 		public double qFBHSqm {
-		    get { return q_FBH; }
-		    set { q_FBH = value; }
+		    get { return Q_FBH / (RzArea + AzArea); }
+		    //set { q_FBH = value; }
 		}
 
 		public double tFBRz {
@@ -215,10 +218,19 @@ namespace Europlan.Common {
 			set { v = value; }
 		}
 
-
 		public double UnusedArea {
 			get { return unusedArea; }
 			set { unusedArea = value; }
+		}
+
+		public bool SubSystem {
+			get { return subSystem; }
+			set { subSystem = value; }
+		}
+
+		public bool OtherSystemsConnected {
+			get { return otherSystemsConnected; }
+			set { otherSystemsConnected = value; }
 		}
 
 	}
