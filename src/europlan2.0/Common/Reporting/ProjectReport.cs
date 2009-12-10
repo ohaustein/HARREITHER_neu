@@ -687,23 +687,28 @@ namespace Europlan.Common {
 		}
 
 		public List<RoomOverviewWrapper> GetRoomOverviewWrapper() {
-			// TODO 
-
 			List<RoomOverviewWrapper> wrapperList = new List<RoomOverviewWrapper>();
 
 			RoomOverviewWrapper wrapper;
 
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
+					double heatPower = 0;
+					double coolPower = 0;
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						heatPower += pp.PlannedHeatLoad;
+						coolPower += pp.PlannedCoolLoad;
+					}
+
 					wrapper = new RoomOverviewWrapper();
 					wrapper.Id = room.Id;
 					wrapper.Name = room.Name;
 					wrapper.HeatTemperature = room.RoomHeatTemperature;
 					wrapper.HeatNetLoad = room.HeatLoad;
-					wrapper.HeatPower = room.HeatLoad;
+					wrapper.HeatPower = heatPower;
 					wrapper.CoolTemperature = room.RoomCoolTemperature;
 					wrapper.CoolNetLoad = room.CoolLoad;
-					wrapper.CoolPower = room.CoolLoad;
+					wrapper.CoolPower = coolPower;
 					wrapper.Area = room.Area;
 					wrapper.FloorId = floor.Id;
 					wrapper.FloorName = floor.Name;
