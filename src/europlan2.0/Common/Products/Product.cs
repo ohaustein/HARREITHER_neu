@@ -891,8 +891,21 @@ namespace Europlan.Common {
 
 		public abstract void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial);
 
+		[XmlIgnore]
 		public string LastErrorMessage {
 			get { return this.lastErrorMsg; }
+		}
+
+		[XmlIgnore]
+		public bool IsOtherProductConnected {
+			get {
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
+					if (kvp.Value != null) {
+						return true;
+					}
+				}
+				return false;
+			}
 		}
 	}
 }
