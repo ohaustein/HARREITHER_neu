@@ -1826,14 +1826,20 @@ namespace Europlan.Common {
 				Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, this.circuits.Count * 2);
 			}
 
-			// Eco 30
-			if (!anhydritEstrich) {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "EV34", totalArea * 0.2);
+			// nur bei Estrichkonstruktion
+			if (this.HasInsideConstruction) {
+				if (this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH) ||
+					this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH)) {
+					// Eco 30
+					if (!anhydritEstrich) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "EV34", totalArea * 0.2);
+					}
+					// Randd‰mmstreifen
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "EV30", totalArea);
+					// PE Folie
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "EV31", totalArea * 1.1);
+				}
 			}
-			// Randd‰mmstreifen
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV30", totalArea);
-			// PE Folie
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV31", totalArea * 1.1);
 
 			// unknown amount
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV11", -1);
