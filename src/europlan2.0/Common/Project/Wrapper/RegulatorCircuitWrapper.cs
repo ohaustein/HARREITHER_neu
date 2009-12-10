@@ -10,8 +10,8 @@ namespace Europlan.Common {
 		private string id;
 		private string name;
 		private string medium;
-		private int vorlaufTemp;
-		private int ruecklaufTemp;
+		private double vorlaufTemp;
+		private double ruecklaufTemp;
 		private double durchfluss;
 		private double druckverlust;
 		private double inhalt;
@@ -36,12 +36,12 @@ namespace Europlan.Common {
 			set { medium = value; }
 		}
 
-		public int VorlaufTemp {
+		public double VorlaufTemp {
 			get { return vorlaufTemp; }
 			set { vorlaufTemp = value; }
 		}
 
-		public int RuecklaufTemp {
+		public double RuecklaufTemp {
 			get { return ruecklaufTemp; }
 			set { ruecklaufTemp = value; }
 		}

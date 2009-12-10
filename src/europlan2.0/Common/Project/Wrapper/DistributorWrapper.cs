@@ -11,8 +11,8 @@ namespace Europlan.Common {
 		private string name;
 		private int groups;
 		private string regulatorCircuit;
-		private int vorlaufTemp;
-		private int ruecklaufTemp;
+		private double vorlaufTemp;
+		private double ruecklaufTemp;
 		private double durchfluss;
 		private double druckverlust;
 		private double inhalt;
@@ -42,12 +42,12 @@ namespace Europlan.Common {
 			set { regulatorCircuit = value; }
 		}
 
-		public int VorlaufTemp {
+		public double VorlaufTemp {
 			get { return vorlaufTemp; }
 			set { vorlaufTemp = value; }
 		}
 
-		public int RuecklaufTemp {
+		public double RuecklaufTemp {
 			get { return ruecklaufTemp; }
 			set { ruecklaufTemp = value; }
 		}

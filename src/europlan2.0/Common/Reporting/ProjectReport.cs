@@ -269,7 +269,6 @@ namespace Europlan.Common {
 		}
 
 		public List<BilanzWrapper> GetProkjektBilanzReport() {
-			//TODO
 			List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
 
 			double normWaermeBedarf = 0;
@@ -376,6 +375,7 @@ namespace Europlan.Common {
 			wrapper.CoolUnit = "mbar";
 			wrapperList.Add(wrapper);
 
+			//TODO
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamt-Wasserinhalt (ab Verteiler)";
 			wrapper.HeatValue = 0.ToString("0.##");
@@ -556,15 +556,47 @@ namespace Europlan.Common {
 			RegulatorCircuitWrapper wrapper;
 
 			foreach (RegulatorCircuit rc in project.RegulatorCircuits) {
+
+				double vorlauf = 0;
+				double ruecklauf = 0;
+				double ruecklaufHeat = rc.HeatFlowTemperature;
+				double ruecklaufCool = rc.CoolFlowTemperature;
+				double durchflussHeat = 0;
+				double durchflussCool = 0;
+				double deltaRhoHeat = 0;
+				double deltaRhoCool = 0;
+
+				foreach (Floor floor in project.Floors) {
+					foreach (Distributor d in floor.Distributors) {
+						if (d.RegulatorCircuit == rc) {
+							foreach (PlannedProduct pp in d.PlannedConnectedProducts) {
+								pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
+								if (ruecklauf < ruecklaufHeat) {
+									ruecklaufHeat = ruecklauf;
+								}
+								pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
+								if (ruecklauf > ruecklaufCool) {
+									ruecklaufCool = ruecklauf;
+								}
+								durchflussHeat += pp.Product.PlannedMhHeat;
+								durchflussCool += pp.Product.PlannedMhCool;
+								deltaRhoHeat = deltaRhoHeat < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeat;
+								deltaRhoCool = deltaRhoCool < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCool;
+							}
+						}
+					}
+				}
+
 				wrapper = new RegulatorCircuitWrapper();
 				wrapper.HeatOrCool = "Heizbetrieb";
 				wrapper.Id = rc.Id;
 				wrapper.Name = rc.Name;
 				wrapper.Medium = "Wasser";
 				wrapper.VorlaufTemp = rc.HeatFlowTemperature;
-				wrapper.RuecklaufTemp = rc.HeatFlowTemperature - 7;
-				wrapper.Durchfluss = 1068;
-				wrapper.Druckverlust = 105;
+				wrapper.RuecklaufTemp = ruecklaufHeat;
+				wrapper.Durchfluss = durchflussHeat;
+				wrapper.Druckverlust = deltaRhoHeat;
+				// TODO
 				wrapper.Inhalt = 0;
 				wrapperHeatList.Add(wrapper);
 				if (project.CalculateCoolLoad) {
@@ -574,9 +606,10 @@ namespace Europlan.Common {
 					wrapper.Name = rc.Name;
 					wrapper.Medium = "Wasser";
 					wrapper.VorlaufTemp = rc.CoolFlowTemperature;
-					wrapper.RuecklaufTemp = rc.CoolFlowTemperature + 3;
-					wrapper.Durchfluss = 1068;
-					wrapper.Druckverlust = 105;
+					wrapper.RuecklaufTemp = ruecklaufCool;
+					wrapper.Durchfluss = durchflussCool;
+					wrapper.Druckverlust = deltaRhoCool;
+					// TODO
 					wrapper.Inhalt = 0;
 					wrapperCoolList.Add(wrapper);
 				}
@@ -588,39 +621,61 @@ namespace Europlan.Common {
 		}
 
 		public List<DistributorWrapper> GetDistributorWrapper() {
-			// TODO
-
 			List<DistributorWrapper> wrapperHeatList = new List<DistributorWrapper>();
 			List<DistributorWrapper> wrapperCoolList = new List<DistributorWrapper>();
 
 			DistributorWrapper wrapper;
-
 			foreach (Floor floor in project.Floors) {
 				foreach (Distributor distributor in floor.Distributors) {
+					double vorlauf = 0;
+					double ruecklauf = 0;
+					double ruecklaufHeat = distributor.RegulatorCircuit.HeatFlowTemperature;
+					double ruecklaufCool = distributor.RegulatorCircuit.CoolFlowTemperature;
+					double durchflussHeat = 0;
+					double durchflussCool = 0;
+					double deltaRhoHeat = 0;
+					double deltaRhoCool = 0;
+					foreach (PlannedProduct pp in distributor.PlannedConnectedProducts) {
+						pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
+						if (ruecklauf < ruecklaufHeat) {
+							ruecklaufHeat = ruecklauf;
+						}
+						pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
+						if (ruecklauf > ruecklaufCool) {
+							ruecklaufCool = ruecklauf;
+						}
+						durchflussHeat += pp.Product.PlannedMhHeat;
+						durchflussCool += pp.Product.PlannedMhCool;
+						deltaRhoHeat = deltaRhoHeat < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeat;
+						deltaRhoCool = deltaRhoCool < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCool;
+					}
+
 					wrapper = new DistributorWrapper();
 					wrapper.HeatOrCool = "Heizbetrieb";
 					wrapper.Id = distributor.Id;
 					wrapper.Name = distributor.Name;
-					wrapper.Groups = 11;
+					wrapper.Groups = distributor.PlannedCircuits + distributor.AdditionalCircuits;
 					wrapper.RegulatorCircuit = distributor.RegulatorCircuitId;
 					wrapper.VorlaufTemp = distributor.RegulatorCircuit.HeatFlowTemperature;
-					wrapper.RuecklaufTemp = distributor.RegulatorCircuit.HeatFlowTemperature - 7;
-					wrapper.Durchfluss = 1068;
-					wrapper.Druckverlust = 105;
-					wrapper.Inhalt = 87;
+					wrapper.RuecklaufTemp = ruecklaufHeat;
+					wrapper.Durchfluss = durchflussHeat;
+					wrapper.Druckverlust = deltaRhoHeat;
+					// TODO
+					wrapper.Inhalt = 0;
 					wrapperHeatList.Add(wrapper);
 					if (project.CalculateCoolLoad) {
 						wrapper = new DistributorWrapper();
 						wrapper.HeatOrCool = "Kühlbetrieb";
 						wrapper.Id = distributor.Id;
 						wrapper.Name = distributor.Name;
-						wrapper.Groups = 11;
+						wrapper.Groups = distributor.PlannedCircuits + distributor.AdditionalCircuits;
 						wrapper.RegulatorCircuit = distributor.RegulatorCircuitId;
 						wrapper.VorlaufTemp = distributor.RegulatorCircuit.CoolFlowTemperature;
-						wrapper.RuecklaufTemp = distributor.RegulatorCircuit.CoolFlowTemperature + 3;
-						wrapper.Durchfluss = 1068;
-						wrapper.Druckverlust = 105;
-						wrapper.Inhalt = 87;
+						wrapper.RuecklaufTemp = ruecklaufCool;
+						wrapper.Durchfluss = durchflussCool;
+						wrapper.Druckverlust = deltaRhoCool;
+						// TODO
+						wrapper.Inhalt = 0;
 						wrapperCoolList.Add(wrapper);
 					}
 				}
