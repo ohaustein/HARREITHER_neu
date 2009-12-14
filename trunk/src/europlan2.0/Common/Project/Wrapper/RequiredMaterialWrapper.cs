@@ -48,7 +48,7 @@ namespace Europlan.Common {
 			get {
 				if (Project.Instance != null) {
 					if (Project.Instance.RequiredMaterialOverrides.ContainsKey(material.Id)) {
-						return Project.Instance.RequiredMaterialOverrides[material.Id];
+						return CalculatedAmount + Project.Instance.RequiredMaterialOverrides[material.Id];
 					} else {
 						return CalculatedAmount;
 					}
@@ -59,13 +59,13 @@ namespace Europlan.Common {
 				if (Project.Instance != null) {
 					if (Project.Instance.RequiredMaterialOverrides.ContainsKey(material.Id)) {
 						if (value != null) {
-							Project.Instance.RequiredMaterialOverrides[material.Id] = (double)value;
+							Project.Instance.RequiredMaterialOverrides[material.Id] = (double)value - CalculatedAmount;
 						} else {
 							Project.Instance.RequiredMaterialOverrides.Remove(material.Id);
 						}
 					} else {
 						if (value != null) {
-							Project.Instance.RequiredMaterialOverrides.Add(material.Id, (double)value);
+							Project.Instance.RequiredMaterialOverrides.Add(material.Id, (double)value - CalculatedAmount);
 						}
 					}
 				}
