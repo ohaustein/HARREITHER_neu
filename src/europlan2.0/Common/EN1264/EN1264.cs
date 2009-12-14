@@ -217,6 +217,36 @@ namespace Europlan.Common {
 			return spline3.splineinterpolation(ref c, raumTemperatur) * faktor;
 		}
 
+		public double KaeltestromDichteRegister(double kuehlmittelTemperatur, double raumTemperatur, double[] standardTabelle, double faktor) {
+			/*double[] x = { 16.0, 18.0, 20.0, 22.0 };
+
+			int l = standardTabelle.Length;
+
+			double[] c = null;
+			double[] y = new double[l];
+
+			for (int i = 0; i < l; i++) {
+				spline3.buildcubicspline(x, standardTabelle[i], 4, 0, 0, 0, 0, ref c);
+				y[i] = spline3.splineinterpolation(ref c, kuehlmittelTemperatur);
+			}
+
+			double[] x2 = { 18, 20, 22, 25 };
+			spline3.buildcubicspline(x2, y, 4, 0, 0, 0, 0, ref c);
+			return spline3.splineinterpolation(ref c, raumTemperatur) * faktor;*/
+
+			if (kuehlmittelTemperatur >= raumTemperatur) {
+				return 0;
+			}
+			double[] x = { 0.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 9, 0 };
+			double[] c = null;
+			spline3.buildcubicspline(x, standardTabelle, 8, 0, 0, 0, 0, ref c);
+			double rtn = spline3.splineinterpolation(ref c, raumTemperatur - kuehlmittelTemperatur);
+			if (rtn < 0) {
+				rtn = 0;
+			}
+			return -rtn;
+		}
+
 		public double OberflaechenTemperatur(double waermestrom, double alpha, double raumTemperatur) {
 			return (waermestrom / alpha) + raumTemperatur;
 		}

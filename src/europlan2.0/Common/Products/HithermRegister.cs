@@ -429,6 +429,10 @@ namespace Europlan.Common {
 			return EN1264.Instance.WaermestromDichteRegister(heizmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegHeizleistung : HithermProduct.ConfigStdRegHeizleistung, faktor) * this.Area;
 		}
 
+		public double Kuehlleistung(double kuehlmittelTemp, double roomTemp, double faktor) {
+			return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegKuehlleistung : HithermProduct.ConfigStdRegKuehlleistung, faktor) * this.Area;
+		}
+
 		public double Druckverlust(double durchfluss) {
 			return EN1264.Instance.DruckverlustRegister(this.registerType, this.RegisterBreite, durchfluss) +
 				EN1264.Instance.DruckverlustRohr(durchfluss, HithermProduct.ConfigVerbindeLeitungInnenquerschnitt, HithermProduct.ConfigRho, HithermProduct.ConfigVerbindeLeitungInnendurchmesser, HithermProduct.ConfigV, 0.000004, this.PipeVertical + this.PipeHorizontal);

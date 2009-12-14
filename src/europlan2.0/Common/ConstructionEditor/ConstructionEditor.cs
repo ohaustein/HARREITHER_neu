@@ -62,12 +62,24 @@ namespace Europlan.Common {
 					this.cbPeFoil.Visible = false;
 					this.lblThickness.Visible = false;
 					this.numThickness.Visible = false;
+					this.lblFactor.Visible = false;
+					this.numFactor.Visible = false;
 					break;
 
 				case ConstructionScopeEnum.InsulationConstruction:
 					this.cbPeFoil.Visible = true;
 					this.lblThickness.Visible = false;
 					this.numThickness.Visible = false;
+					this.lblFactor.Visible = false;
+					this.numFactor.Visible = false;
+					break;
+
+				case ConstructionScopeEnum.WallConstruction:
+					this.cbPeFoil.Visible = false;
+					this.lblThickness.Visible = false;
+					this.numThickness.Visible = false;
+					this.lblFactor.Visible = true;
+					this.numFactor.Visible = true;
 					break;
 
 				case ConstructionScopeEnum.CeilingConstruction:
@@ -75,6 +87,8 @@ namespace Europlan.Common {
 					this.cbPeFoil.Visible = false;
 					this.lblThickness.Visible = false;
 					this.numThickness.Visible = false;
+					this.lblFactor.Visible = false;
+					this.numFactor.Visible = false;
 					break;
 			}
 		}
@@ -88,8 +102,13 @@ namespace Europlan.Common {
 					break;
 
 				case ConstructionScopeEnum.InsulationConstruction:
-					InsulationConstruction wc = this.construction as InsulationConstruction;
-					this.cbPeFoil.Checked = (wc != null ? wc.PeFoil : false);
+					InsulationConstruction ic = this.construction as InsulationConstruction;
+					this.cbPeFoil.Checked = (ic != null ? ic.PeFoil : false);
+					break;
+
+				case ConstructionScopeEnum.WallConstruction:
+					WallConstruction wc = this.construction as WallConstruction;
+					this.numFactor.Value = (wc != null ? (decimal)wc.Factor : (decimal)1);
 					break;
 
 				case ConstructionScopeEnum.CeilingConstruction:
@@ -120,6 +139,12 @@ namespace Europlan.Common {
 		private void numThickness_ValueChanged(object sender, EventArgs e) {
 			if (this.construction is FloorConstruction) {
 				(this.construction as FloorConstruction).FloorThickness = (float)this.numThickness.Value;
+			}
+		}
+
+		private void numFactor_ValueChanged(object sender, EventArgs e) {
+			if (this.construction is WallConstruction) {
+				(this.construction as WallConstruction).Factor = (double)this.numFactor.Value;
 			}
 		}
 
