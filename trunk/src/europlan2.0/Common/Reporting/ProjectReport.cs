@@ -898,6 +898,7 @@ namespace Europlan.Common {
 								wrapperHeat.AzLayDistance = ep.PlannedLayDistance.ToString();
 								wrapperHeat.AzArea = ep.PlannedAreaResidence;
 								wrapperHeat.ConnectionArea = ep.PlannedRemoveArea;
+
 								
 								double v, r;
 								pp.Product.GetHeatFlow(out v, out r);
@@ -911,7 +912,7 @@ namespace Europlan.Common {
 
 								wrapperHeat.Wassermenge = pp.Product.PlannedMhHeat;
 
-								//wrapperHeat.UnusedArea = 
+								wrapperHeat.UnusedArea = ep.PlannedAreaUnheated;
 
 								if (ep.PlannedConnection != null) {
 									if (ep.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
@@ -959,14 +960,13 @@ namespace Europlan.Common {
 
 								wrapperCool.Wassermenge = pp.Product.PlannedMhCool;
 
-								//wrapperCool.UnusedArea = 
+								wrapperCool.UnusedArea = ep.PlannedAreaUnheated;
 
 								if (ep.PlannedConnection != null) {
 									if (ep.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 										wrapperCool.SubSystem = true;
 									}
 								}
-
 								if (ep.IsOtherProductConnected) {
 									wrapperCool.OtherSystemsConnected = true;
 								}

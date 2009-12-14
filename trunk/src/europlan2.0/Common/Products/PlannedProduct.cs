@@ -442,8 +442,8 @@ namespace Europlan.Common {
 				} else {
 					productCounter[p.PlannedProductType] = productCounter[p.PlannedProductType] + 1;
 				}
-				internalName = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType];
-				p.productNode.Text = internalName + ": " + p.System;
+				p.internalName = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType];
+				p.productNode.Text = p.internalName + ": " + p.System;
 			}
 
 			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, false);
