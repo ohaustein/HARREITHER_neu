@@ -35,6 +35,9 @@ namespace Europlan.Common {
 			this.lblName = new System.Windows.Forms.Label();
 			this.lblThickness = new System.Windows.Forms.Label();
 			this.gridLayers = new System.Windows.Forms.DataGridView();
+			this.cbPeFoil = new System.Windows.Forms.CheckBox();
+			this.lblFactor = new System.Windows.Forms.Label();
+			this.numFactor = new Europlan.Common.NumericBox();
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colMaterial = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.colLambdaValue = new Europlan.Common.NumericColumn();
@@ -42,7 +45,6 @@ namespace Europlan.Common {
 			this.colRValue = new Europlan.Common.NumericColumn();
 			this.colMaterialId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.constructionLayerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.cbPeFoil = new System.Windows.Forms.CheckBox();
 			this.numThickness = new Europlan.Common.NumericBox();
 			this.numericColumn1 = new Europlan.Common.NumericColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridLayers)).BeginInit();
@@ -121,6 +123,58 @@ namespace Europlan.Common {
 			this.gridLayers.Size = new System.Drawing.Size(624, 268);
 			this.gridLayers.TabIndex = 6;
 			// 
+			// cbPeFoil
+			// 
+			this.cbPeFoil.AutoSize = true;
+			this.cbPeFoil.Location = new System.Drawing.Point(98, 57);
+			this.cbPeFoil.Name = "cbPeFoil";
+			this.cbPeFoil.Size = new System.Drawing.Size(65, 17);
+			this.cbPeFoil.TabIndex = 7;
+			this.cbPeFoil.Text = "PE Folie";
+			this.cbPeFoil.UseVisualStyleBackColor = true;
+			this.cbPeFoil.Visible = false;
+			// 
+			// lblFactor
+			// 
+			this.lblFactor.AutoSize = true;
+			this.lblFactor.Location = new System.Drawing.Point(3, 58);
+			this.lblFactor.Name = "lblFactor";
+			this.lblFactor.Size = new System.Drawing.Size(40, 13);
+			this.lblFactor.TabIndex = 9;
+			this.lblFactor.Text = "Faktor:";
+			this.lblFactor.Visible = false;
+			// 
+			// numFactor
+			// 
+			this.numFactor.EditType = Europlan.Common.NumericBox.NumericEditType.FACTOR;
+			this.numFactor.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numFactor.Location = new System.Drawing.Point(98, 55);
+			this.numFactor.MaxValue = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+			this.numFactor.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+			this.numFactor.Name = "numFactor";
+			this.numFactor.Size = new System.Drawing.Size(100, 20);
+			this.numFactor.TabIndex = 10;
+			this.numFactor.Text = "1";
+			this.numFactor.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numFactor.Visible = false;
+			this.numFactor.ValueChanged += new System.EventHandler(this.numFactor_ValueChanged);
+			// 
 			// colName
 			// 
 			this.colName.DataPropertyName = "Name";
@@ -192,17 +246,6 @@ namespace Europlan.Common {
 			// 
 			this.constructionLayerBindingSource.DataSource = typeof(Europlan.Common.ConstructionLayer);
 			// 
-			// cbPeFoil
-			// 
-			this.cbPeFoil.AutoSize = true;
-			this.cbPeFoil.Location = new System.Drawing.Point(98, 57);
-			this.cbPeFoil.Name = "cbPeFoil";
-			this.cbPeFoil.Size = new System.Drawing.Size(65, 17);
-			this.cbPeFoil.TabIndex = 7;
-			this.cbPeFoil.Text = "PE Folie";
-			this.cbPeFoil.UseVisualStyleBackColor = true;
-			this.cbPeFoil.Visible = false;
-			// 
 			// numThickness
 			// 
 			this.numThickness.EditType = Europlan.Common.NumericBox.NumericEditType.FLOOR_CONSTRUCTION_THICKNESS;
@@ -212,6 +255,12 @@ namespace Europlan.Common {
             0,
             0});
 			this.numThickness.Location = new System.Drawing.Point(98, 55);
+			this.numThickness.MaxValue = null;
+			this.numThickness.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			this.numThickness.Name = "numThickness";
 			this.numThickness.Size = new System.Drawing.Size(100, 20);
 			this.numThickness.TabIndex = 8;
@@ -240,6 +289,8 @@ namespace Europlan.Common {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.numFactor);
+			this.Controls.Add(this.lblFactor);
 			this.Controls.Add(this.cbPeFoil);
 			this.Controls.Add(this.gridLayers);
 			this.Controls.Add(this.lblThickness);
@@ -276,5 +327,7 @@ namespace Europlan.Common {
 		private NumericColumn colThickness;
 		private NumericColumn colRValue;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialId;
+		private System.Windows.Forms.Label lblFactor;
+		private NumericBox numFactor;
 	}
 }

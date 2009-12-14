@@ -50,6 +50,18 @@ namespace Europlan.Common {
 			new double[] {  30,   40,   55,   65,   80,   90,  100,  115,  130}  // ti=24°C
 		};
 
+		/*private static double[][] hlRegKuehlleistung = {
+			//  tHm (°C) 16.0 18.0 20.0 22.0 25.0
+			new double[] { 13,   0},               // ti=18°C
+			new double[] { 25,  13,   0},          // ti=20°C
+			new double[] { 40,  25,  13,   0},     // ti=22°C
+			new double[] { 60,  45,  33,  20,   0} // ti=25°C
+		};*/
+
+		//     Diffenz Raumtemp - Kuehlmitteltemp (K):  0   2   3   4   5   6   7   9
+		private static double[] hlRegKuehlleistung  = { 0, 13, 20, 25, 33, 40, 45, 60 };
+		private static double[] stdRegKuehlleistung = { 0,  9, 14, 18, 24, 29, 32, 43 };
+
 		private static double factorSpezialputz = 1.15;
 		private static double factorMaschinenputz = 1.0;
 		private static double factorLehmputz = 0.95;
@@ -164,7 +176,42 @@ namespace Europlan.Common {
 			set { maxDurchfluss = value; }
 		}
 
-		private static double[][] ConvertStringToArray(string value) {
+		private static double[] ConvertStringToArray(string value) {
+			string str = value.Trim();
+			if (!str.StartsWith("{") || !str.EndsWith("}")) {
+				// log warning
+				return null;
+			}
+			List<double> list = new List<double>();
+			string[] strValues = str.Substring(1, str.Length - 2).Trim().Split(',');
+			foreach (string strValue in strValues) {
+				double doubleValue;
+				if (!double.TryParse(strValue.Trim(), out doubleValue)) {
+					// log warning
+					return null;
+				}
+				list.Add(doubleValue);
+			}
+			double[] array = new double[list.Count];
+			int j = 0;
+			foreach (double doubleValue in list) {
+				array[j] = doubleValue;
+				j++;
+			}
+			return array;
+		}
+
+		public static string ConvertArrayToString(double[] array) {
+			string str = "";
+			foreach (double val in array) {
+				str += ", " + val.ToString(System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+			}
+			str = str.Substring(2);
+			string rtn = "{" + str + "}";
+			return rtn;
+		}
+
+		private static double[][] ConvertStringToArray2(string value) {
 			string str = value.Trim();
 			if (!str.StartsWith("{") || !str.EndsWith("}")) {
 				// log warning
@@ -212,7 +259,7 @@ namespace Europlan.Common {
 			return array;
 		}
 
-		public static string ConvertArrayToString(double[][] array) {
+		public static string ConvertArrayToString2(double[][] array) {
 			string rtn = "";
 			foreach (double[] row in array) {
 				string rowStr = "";
@@ -229,10 +276,10 @@ namespace Europlan.Common {
 		[ProductParameter]
 		public static string ConfigHlRegHeizleistungString {
 			get {
-				return ConvertArrayToString(hlRegHeizleistung);
+				return ConvertArrayToString2(hlRegHeizleistung);
 			}
 			set {
-				double[][] array = ConvertStringToArray(value);
+				double[][] array = ConvertStringToArray2(value);
 				if (array != null) {
 					hlRegHeizleistung = array;
 				}
@@ -246,10 +293,10 @@ namespace Europlan.Common {
 		[ProductParameter]
 		public static string ConfigStdRegHeizleistungString {
 			get {
-				return ConvertArrayToString(stdRegHeizleistung);
+				return ConvertArrayToString2(stdRegHeizleistung);
 			}
 			set {
-				double[][] array = ConvertStringToArray(value);
+				double[][] array = ConvertStringToArray2(value);
 				if (array != null) {
 					stdRegHeizleistung = array;
 				}
@@ -258,6 +305,40 @@ namespace Europlan.Common {
 		public static double[][] ConfigStdRegHeizleistung {
 			get { return stdRegHeizleistung; }
 			set { stdRegHeizleistung = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigHlRegKuehlleistungString {
+			get {
+				return ConvertArrayToString(hlRegKuehlleistung);
+			}
+			set {
+				double[] array = ConvertStringToArray(value);
+				if (array != null) {
+					hlRegKuehlleistung = array;
+				}
+			}
+		}
+		public static double[] ConfigHlRegKuehlleistung {
+			get { return hlRegKuehlleistung; }
+			set { hlRegKuehlleistung = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigStdRegKuehlleistungString {
+			get {
+				return ConvertArrayToString(stdRegKuehlleistung);
+			}
+			set {
+				double[] array = ConvertStringToArray(value);
+				if (array != null) {
+					stdRegKuehlleistung = array;
+				}
+			}
+		}
+		public static double[] ConfigStdRegKuehlleistung {
+			get { return stdRegKuehlleistung; }
+			set { stdRegKuehlleistung = value; }
 		}
 
 		[ProductParameter]
@@ -490,7 +571,18 @@ namespace Europlan.Common {
 		}
 
 		public override double PlannedCoolLoad {
-			get { return 0; }
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (HithermCircuit c in this.circuits) {
+					if (!c.QFbhTotalCool.Equals(double.NaN)) {
+						value += c.QFbhTotalCool;
+					}
+				}
+				return value;
+			}
 		}
 
 		public override double PlannedHeatLoad {
@@ -597,6 +689,7 @@ namespace Europlan.Common {
 		internal void RemoveRegisterFromCircuit(HithermRegister register) {
 			if (this.registerCircuits.ContainsKey(register)) {
 				HithermCircuit hc = this.circuitIds[this.registerCircuits[register]];
+				hc.Registers.Remove(register);
 				if (hc.Registers.Count == 0) {
 					this.circuits.Remove(hc);
 					this.circuitIds.Remove(this.registerCircuits[register]);

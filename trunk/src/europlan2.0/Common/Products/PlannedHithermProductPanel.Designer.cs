@@ -56,6 +56,7 @@ namespace Europlan.Common {
 			this.btnDistributor = new System.Windows.Forms.Button();
 			this.lblDistributor = new System.Windows.Forms.Label();
 			this.txtDistributor = new System.Windows.Forms.TextBox();
+			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.pageConstructions = new System.Windows.Forms.TabPage();
 			this.pageAuslegung = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
@@ -66,6 +67,20 @@ namespace Europlan.Common {
 			this.lblNecessaryWaermestromdichte = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.dgvRegisters = new System.Windows.Forms.DataGridView();
+			this.registerTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.RegisterBreite = new Europlan.Common.NumericColumn();
+			this.Horizontal = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.constructionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.heizkreisDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+			this.pipeHorizontalDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+			this.pipeVerticalDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+			this.rohrabstandDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.registerHoeheDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.rohreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.equivalentPipeLengthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.nrOfRegistersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.areaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PlannedProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.hithermRegisterBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.lblError = new System.Windows.Forms.Label();
 			this.lblCoveredAreaUnit = new System.Windows.Forms.Label();
@@ -117,21 +132,6 @@ namespace Europlan.Common {
 			this.Verlegeart = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
-			this.registerTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.RegisterBreite = new Europlan.Common.NumericColumn();
-			this.Horizontal = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.constructionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.heizkreisDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.pipeHorizontalDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.pipeVerticalDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.rohrabstandDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.registerHoeheDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.rohreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.equivalentPipeLengthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.nrOfRegistersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.areaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.PlannedProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.grpPowerArea.SuspendLayout();
 			this.tabs.SuspendLayout();
 			this.pageInput.SuspendLayout();
@@ -178,7 +178,6 @@ namespace Europlan.Common {
 			this.lblCoolLoadTotal.TabIndex = 13;
 			this.lblCoolLoadTotal.Text = "(0 W)";
 			this.lblCoolLoadTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.lblCoolLoadTotal.Visible = false;
 			// 
 			// chkCoverCoolLoad
 			// 
@@ -190,7 +189,6 @@ namespace Europlan.Common {
 			this.chkCoverCoolLoad.TabIndex = 12;
 			this.chkCoverCoolLoad.Text = "Kühllast decken";
 			this.chkCoverCoolLoad.UseVisualStyleBackColor = true;
-			this.chkCoverCoolLoad.Visible = false;
 			this.chkCoverCoolLoad.CheckedChanged += new System.EventHandler(this.chkCoverCoolLoad_CheckedChanged);
 			// 
 			// lblCoolLoadPercentage
@@ -200,7 +198,6 @@ namespace Europlan.Common {
 			this.lblCoolLoadPercentage.Size = new System.Drawing.Size(19, 13);
 			this.lblCoolLoadPercentage.TabIndex = 11;
 			this.lblCoolLoadPercentage.Text = "%";
-			this.lblCoolLoadPercentage.Visible = false;
 			// 
 			// numCoolLoadPercentage
 			// 
@@ -232,7 +229,6 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			this.numCoolLoadPercentage.Visible = false;
 			this.numCoolLoadPercentage.ValueChanged += new System.EventHandler(this.numCoolLoadPercentage_ValueChanged);
 			// 
 			// lblCoolLoadUnit
@@ -242,7 +238,6 @@ namespace Europlan.Common {
 			this.lblCoolLoadUnit.Size = new System.Drawing.Size(19, 13);
 			this.lblCoolLoadUnit.TabIndex = 9;
 			this.lblCoolLoadUnit.Text = "W";
-			this.lblCoolLoadUnit.Visible = false;
 			// 
 			// numCoolLoad
 			// 
@@ -274,7 +269,6 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			this.numCoolLoad.Visible = false;
 			this.numCoolLoad.ValueChanged += new System.EventHandler(this.numCoolLoad_ValueChanged);
 			// 
 			// lblCoolLoadTxt
@@ -284,7 +278,6 @@ namespace Europlan.Common {
 			this.lblCoolLoadTxt.Size = new System.Drawing.Size(151, 13);
 			this.lblCoolLoadTxt.TabIndex = 7;
 			this.lblCoolLoadTxt.Text = "gewünschte Kühlleistung:";
-			this.lblCoolLoadTxt.Visible = false;
 			// 
 			// lblHeatLoadTotal
 			// 
@@ -473,7 +466,7 @@ namespace Europlan.Common {
 			this.groupBox9.Controls.Add(this.btnDistributor);
 			this.groupBox9.Controls.Add(this.lblDistributor);
 			this.groupBox9.Controls.Add(this.txtDistributor);
-			this.groupBox9.Controls.Add(this.chkStellAntriebe); 
+			this.groupBox9.Controls.Add(this.chkStellAntriebe);
 			this.groupBox9.Location = new System.Drawing.Point(3, 6);
 			this.groupBox9.Name = "groupBox9";
 			this.groupBox9.Size = new System.Drawing.Size(847, 41);
@@ -505,6 +498,17 @@ namespace Europlan.Common {
 			this.txtDistributor.ReadOnly = true;
 			this.txtDistributor.Size = new System.Drawing.Size(194, 20);
 			this.txtDistributor.TabIndex = 3;
+			// 
+			// chkStellAntriebe
+			// 
+			this.chkStellAntriebe.AutoSize = true;
+			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
+			this.chkStellAntriebe.Name = "chkStellAntriebe";
+			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
+			this.chkStellAntriebe.TabIndex = 7;
+			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
+			this.chkStellAntriebe.UseVisualStyleBackColor = true;
+			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
 			// 
 			// pageConstructions
 			// 
@@ -697,6 +701,137 @@ namespace Europlan.Common {
 			this.dgvRegisters.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvRegisters_DefaultValuesNeeded);
 			this.dgvRegisters.SelectionChanged += new System.EventHandler(this.dgvRegisters_SelectionChanged);
 			// 
+			// registerTypeDataGridViewTextBoxColumn
+			// 
+			this.registerTypeDataGridViewTextBoxColumn.DataPropertyName = "RegisterType";
+			this.registerTypeDataGridViewTextBoxColumn.FillWeight = 120F;
+			this.registerTypeDataGridViewTextBoxColumn.HeaderText = "Register-\ntype";
+			this.registerTypeDataGridViewTextBoxColumn.Name = "registerTypeDataGridViewTextBoxColumn";
+			this.registerTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.registerTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.registerTypeDataGridViewTextBoxColumn.Width = 120;
+			// 
+			// RegisterBreite
+			// 
+			this.RegisterBreite.DataPropertyName = "RegisterBreite";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle2.Format = "F0";
+			this.RegisterBreite.DefaultCellStyle = dataGridViewCellStyle2;
+			this.RegisterBreite.FillWeight = 80F;
+			this.RegisterBreite.HeaderText = "Breite\n(cm)";
+			this.RegisterBreite.Name = "RegisterBreite";
+			this.RegisterBreite.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.RegisterBreite.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.RegisterBreite.Width = 80;
+			// 
+			// Horizontal
+			// 
+			this.Horizontal.DataPropertyName = "Horizontal";
+			this.Horizontal.FillWeight = 50F;
+			this.Horizontal.HeaderText = "waag-\nrecht";
+			this.Horizontal.Name = "Horizontal";
+			this.Horizontal.Width = 50;
+			// 
+			// constructionDataGridViewTextBoxColumn
+			// 
+			this.constructionDataGridViewTextBoxColumn.DataPropertyName = "Construction";
+			this.constructionDataGridViewTextBoxColumn.HeaderText = "Konstr.";
+			this.constructionDataGridViewTextBoxColumn.Name = "constructionDataGridViewTextBoxColumn";
+			this.constructionDataGridViewTextBoxColumn.ReadOnly = true;
+			this.constructionDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// heizkreisDataGridViewTextBoxColumn
+			// 
+			this.heizkreisDataGridViewTextBoxColumn.DataPropertyName = "Heizkreis";
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle3.Format = "F0";
+			this.heizkreisDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+			this.heizkreisDataGridViewTextBoxColumn.FillWeight = 50F;
+			this.heizkreisDataGridViewTextBoxColumn.HeaderText = "HK";
+			this.heizkreisDataGridViewTextBoxColumn.Name = "heizkreisDataGridViewTextBoxColumn";
+			this.heizkreisDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.HK_COUNT;
+			this.heizkreisDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.heizkreisDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.heizkreisDataGridViewTextBoxColumn.Width = 50;
+			// 
+			// pipeHorizontalDataGridViewTextBoxColumn
+			// 
+			this.pipeHorizontalDataGridViewTextBoxColumn.DataPropertyName = "PipeHorizontal";
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle4.Format = "F2";
+			this.pipeHorizontalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+			this.pipeHorizontalDataGridViewTextBoxColumn.HeaderText = "Leitung\nwaagr.\n(m)";
+			this.pipeHorizontalDataGridViewTextBoxColumn.Name = "pipeHorizontalDataGridViewTextBoxColumn";
+			this.pipeHorizontalDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
+			this.pipeHorizontalDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.pipeHorizontalDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			// 
+			// pipeVerticalDataGridViewTextBoxColumn
+			// 
+			this.pipeVerticalDataGridViewTextBoxColumn.DataPropertyName = "PipeVertical";
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle5.Format = "F2";
+			this.pipeVerticalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+			this.pipeVerticalDataGridViewTextBoxColumn.HeaderText = "Leitung\nsenkr.\n(m)";
+			this.pipeVerticalDataGridViewTextBoxColumn.Name = "pipeVerticalDataGridViewTextBoxColumn";
+			this.pipeVerticalDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
+			this.pipeVerticalDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.pipeVerticalDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			// 
+			// rohrabstandDataGridViewTextBoxColumn
+			// 
+			this.rohrabstandDataGridViewTextBoxColumn.DataPropertyName = "Rohrabstand";
+			this.rohrabstandDataGridViewTextBoxColumn.HeaderText = "Rohrabstand";
+			this.rohrabstandDataGridViewTextBoxColumn.Name = "rohrabstandDataGridViewTextBoxColumn";
+			this.rohrabstandDataGridViewTextBoxColumn.ReadOnly = true;
+			this.rohrabstandDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// registerHoeheDataGridViewTextBoxColumn
+			// 
+			this.registerHoeheDataGridViewTextBoxColumn.DataPropertyName = "RegisterHoehe";
+			this.registerHoeheDataGridViewTextBoxColumn.HeaderText = "RegisterHoehe";
+			this.registerHoeheDataGridViewTextBoxColumn.Name = "registerHoeheDataGridViewTextBoxColumn";
+			this.registerHoeheDataGridViewTextBoxColumn.ReadOnly = true;
+			this.registerHoeheDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// rohreDataGridViewTextBoxColumn
+			// 
+			this.rohreDataGridViewTextBoxColumn.DataPropertyName = "Rohre";
+			this.rohreDataGridViewTextBoxColumn.HeaderText = "Rohre";
+			this.rohreDataGridViewTextBoxColumn.Name = "rohreDataGridViewTextBoxColumn";
+			this.rohreDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// equivalentPipeLengthDataGridViewTextBoxColumn
+			// 
+			this.equivalentPipeLengthDataGridViewTextBoxColumn.DataPropertyName = "EquivalentPipeLength";
+			this.equivalentPipeLengthDataGridViewTextBoxColumn.HeaderText = "EquivalentPipeLength";
+			this.equivalentPipeLengthDataGridViewTextBoxColumn.Name = "equivalentPipeLengthDataGridViewTextBoxColumn";
+			this.equivalentPipeLengthDataGridViewTextBoxColumn.ReadOnly = true;
+			this.equivalentPipeLengthDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// nrOfRegistersDataGridViewTextBoxColumn
+			// 
+			this.nrOfRegistersDataGridViewTextBoxColumn.DataPropertyName = "NrOfRegisters";
+			this.nrOfRegistersDataGridViewTextBoxColumn.HeaderText = "NrOfRegisters";
+			this.nrOfRegistersDataGridViewTextBoxColumn.Name = "nrOfRegistersDataGridViewTextBoxColumn";
+			this.nrOfRegistersDataGridViewTextBoxColumn.ReadOnly = true;
+			this.nrOfRegistersDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// areaDataGridViewTextBoxColumn
+			// 
+			this.areaDataGridViewTextBoxColumn.DataPropertyName = "Area";
+			this.areaDataGridViewTextBoxColumn.HeaderText = "Area";
+			this.areaDataGridViewTextBoxColumn.Name = "areaDataGridViewTextBoxColumn";
+			this.areaDataGridViewTextBoxColumn.ReadOnly = true;
+			this.areaDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// PlannedProduct
+			// 
+			this.PlannedProduct.DataPropertyName = "PlannedProduct";
+			this.PlannedProduct.HeaderText = "PlannedProduct";
+			this.PlannedProduct.Name = "PlannedProduct";
+			this.PlannedProduct.Visible = false;
+			// 
 			// hithermRegisterBindingSource
 			// 
 			this.hithermRegisterBindingSource.DataSource = typeof(Europlan.Common.HithermRegister);
@@ -767,7 +902,7 @@ namespace Europlan.Common {
 			// 
 			this.groupBox4.Location = new System.Drawing.Point(7, 443);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(290, 2);
+			this.groupBox4.Size = new System.Drawing.Size(390, 2);
 			this.groupBox4.TabIndex = 82;
 			this.groupBox4.TabStop = false;
 			// 
@@ -1023,7 +1158,7 @@ namespace Europlan.Common {
 			// 
 			this.groupBox7.Location = new System.Drawing.Point(3, 321);
 			this.groupBox7.Name = "groupBox7";
-			this.groupBox7.Size = new System.Drawing.Size(290, 2);
+			this.groupBox7.Size = new System.Drawing.Size(390, 2);
 			this.groupBox7.TabIndex = 81;
 			this.groupBox7.TabStop = false;
 			// 
@@ -1129,148 +1264,6 @@ namespace Europlan.Common {
 			// 
 			this.Column4.HeaderText = "Column4";
 			this.Column4.Name = "Column4";
-			//
-			// chkStellAntriebe
-			// 
-			this.chkStellAntriebe.AutoSize = true;
-			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
-			this.chkStellAntriebe.Name = "chkStellAntriebe";
-			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
-			this.chkStellAntriebe.TabIndex = 7;
-			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
-			this.chkStellAntriebe.UseVisualStyleBackColor = true;
-			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
-			// 
-			// registerTypeDataGridViewTextBoxColumn
-			// 
-			this.registerTypeDataGridViewTextBoxColumn.DataPropertyName = "RegisterType";
-			this.registerTypeDataGridViewTextBoxColumn.FillWeight = 120F;
-			this.registerTypeDataGridViewTextBoxColumn.HeaderText = "Register-\ntype";
-			this.registerTypeDataGridViewTextBoxColumn.Name = "registerTypeDataGridViewTextBoxColumn";
-			this.registerTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.registerTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.registerTypeDataGridViewTextBoxColumn.Width = 120;
-			// 
-			// RegisterBreite
-			// 
-			this.RegisterBreite.DataPropertyName = "RegisterBreite";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F0";
-			this.RegisterBreite.DefaultCellStyle = dataGridViewCellStyle2;
-			this.RegisterBreite.FillWeight = 80F;
-			this.RegisterBreite.HeaderText = "Breite\n(cm)";
-			this.RegisterBreite.Name = "RegisterBreite";
-			this.RegisterBreite.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.RegisterBreite.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.RegisterBreite.Width = 80;
-			// 
-			// Horizontal
-			// 
-			this.Horizontal.DataPropertyName = "Horizontal";
-			this.Horizontal.FillWeight = 50F;
-			this.Horizontal.HeaderText = "waag-\nrecht";
-			this.Horizontal.Name = "Horizontal";
-			this.Horizontal.Width = 50;
-			// 
-			// constructionDataGridViewTextBoxColumn
-			// 
-			this.constructionDataGridViewTextBoxColumn.DataPropertyName = "Construction";
-			this.constructionDataGridViewTextBoxColumn.HeaderText = "Konstr.";
-			this.constructionDataGridViewTextBoxColumn.Name = "constructionDataGridViewTextBoxColumn";
-			this.constructionDataGridViewTextBoxColumn.ReadOnly = true;
-			this.constructionDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// heizkreisDataGridViewTextBoxColumn
-			// 
-			this.heizkreisDataGridViewTextBoxColumn.DataPropertyName = "Heizkreis";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
-			this.heizkreisDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
-			this.heizkreisDataGridViewTextBoxColumn.FillWeight = 50F;
-			this.heizkreisDataGridViewTextBoxColumn.HeaderText = "HK";
-			this.heizkreisDataGridViewTextBoxColumn.Name = "heizkreisDataGridViewTextBoxColumn";
-			this.heizkreisDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.HK_COUNT;
-			this.heizkreisDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.heizkreisDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.heizkreisDataGridViewTextBoxColumn.Width = 50;
-			// 
-			// pipeHorizontalDataGridViewTextBoxColumn
-			// 
-			this.pipeHorizontalDataGridViewTextBoxColumn.DataPropertyName = "PipeHorizontal";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F0";
-			this.pipeHorizontalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
-			this.pipeHorizontalDataGridViewTextBoxColumn.HeaderText = "Leitung\nwaagr.\n(m)";
-			this.pipeHorizontalDataGridViewTextBoxColumn.Name = "pipeHorizontalDataGridViewTextBoxColumn";
-			this.pipeHorizontalDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
-			this.pipeHorizontalDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.pipeHorizontalDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			// 
-			// pipeVerticalDataGridViewTextBoxColumn
-			// 
-			this.pipeVerticalDataGridViewTextBoxColumn.DataPropertyName = "PipeVertical";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle5.Format = "F0";
-			this.pipeVerticalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
-			this.pipeVerticalDataGridViewTextBoxColumn.HeaderText = "Leitung\nsenkr.\n(m)";
-			this.pipeVerticalDataGridViewTextBoxColumn.Name = "pipeVerticalDataGridViewTextBoxColumn";
-			this.pipeVerticalDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
-			this.pipeVerticalDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.pipeVerticalDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			// 
-			// rohrabstandDataGridViewTextBoxColumn
-			// 
-			this.rohrabstandDataGridViewTextBoxColumn.DataPropertyName = "Rohrabstand";
-			this.rohrabstandDataGridViewTextBoxColumn.HeaderText = "Rohrabstand";
-			this.rohrabstandDataGridViewTextBoxColumn.Name = "rohrabstandDataGridViewTextBoxColumn";
-			this.rohrabstandDataGridViewTextBoxColumn.ReadOnly = true;
-			this.rohrabstandDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// registerHoeheDataGridViewTextBoxColumn
-			// 
-			this.registerHoeheDataGridViewTextBoxColumn.DataPropertyName = "RegisterHoehe";
-			this.registerHoeheDataGridViewTextBoxColumn.HeaderText = "RegisterHoehe";
-			this.registerHoeheDataGridViewTextBoxColumn.Name = "registerHoeheDataGridViewTextBoxColumn";
-			this.registerHoeheDataGridViewTextBoxColumn.ReadOnly = true;
-			this.registerHoeheDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// rohreDataGridViewTextBoxColumn
-			// 
-			this.rohreDataGridViewTextBoxColumn.DataPropertyName = "Rohre";
-			this.rohreDataGridViewTextBoxColumn.HeaderText = "Rohre";
-			this.rohreDataGridViewTextBoxColumn.Name = "rohreDataGridViewTextBoxColumn";
-			this.rohreDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// equivalentPipeLengthDataGridViewTextBoxColumn
-			// 
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.DataPropertyName = "EquivalentPipeLength";
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.HeaderText = "EquivalentPipeLength";
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.Name = "equivalentPipeLengthDataGridViewTextBoxColumn";
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.ReadOnly = true;
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// nrOfRegistersDataGridViewTextBoxColumn
-			// 
-			this.nrOfRegistersDataGridViewTextBoxColumn.DataPropertyName = "NrOfRegisters";
-			this.nrOfRegistersDataGridViewTextBoxColumn.HeaderText = "NrOfRegisters";
-			this.nrOfRegistersDataGridViewTextBoxColumn.Name = "nrOfRegistersDataGridViewTextBoxColumn";
-			this.nrOfRegistersDataGridViewTextBoxColumn.ReadOnly = true;
-			this.nrOfRegistersDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// areaDataGridViewTextBoxColumn
-			// 
-			this.areaDataGridViewTextBoxColumn.DataPropertyName = "Area";
-			this.areaDataGridViewTextBoxColumn.HeaderText = "Area";
-			this.areaDataGridViewTextBoxColumn.Name = "areaDataGridViewTextBoxColumn";
-			this.areaDataGridViewTextBoxColumn.ReadOnly = true;
-			this.areaDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// PlannedProduct
-			// 
-			this.PlannedProduct.DataPropertyName = "PlannedProduct";
-			this.PlannedProduct.HeaderText = "PlannedProduct";
-			this.PlannedProduct.Name = "PlannedProduct";
-			this.PlannedProduct.Visible = false;
 			// 
 			// PlannedHithermProductPanel
 			// 
