@@ -32,6 +32,8 @@ namespace Europlan.Common {
 		public const double dichte = 1000.0;
 		public const double viskositaet = 0.00000101;
 
+		public const double KVSValue = 1.7;
+
 		protected EN1264() {
 			log.Debug("default constructor called");
 		}

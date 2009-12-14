@@ -48,6 +48,52 @@ namespace Europlan.Common {
 
 		private bool subSystem = false;
 		private bool otherSystemsConnected = false;
+		private bool usedAsCircuitWrapper = false;
+
+		public EurovalWrapper(EurovalWrapper ew) {
+			floorId = ew.floorId;
+			floorName = ew.floorName;
+			heatOrCool = ew.heatOrCool;
+			roomId = ew.roomId;
+			roomName = ew.roomName;
+			teilSystem = ew.teilSystem;
+			insideConstruction = ew.insideConstruction;
+			insideRValue = ew.insideRValue;
+			outsideConstruction = ew.outsideConstruction;
+			outsideRValue = ew.outsideRValue;
+			circuits = ew.circuits;
+			rzLayDistance = ew.rzLayDistance;
+			rzWidth = ew.rzWidth;
+			rzArea = ew.rzArea;
+			azLayDistance = ew.azLayDistance;
+			azArea = ew.azArea;
+			connectionArea = ew.connectionArea;
+
+			roomTemp = ew.roomTemp;
+			vorlaufTemp = ew.vorlaufTemp;
+			ruecklaufTemp = ew.ruecklaufTemp;
+			Q_Soll = ew.Q_Soll;
+			Q_FBH = ew.Q_FBH;
+			q_FBH = ew.q_FBH;
+			t_FBRz = ew.t_FBRz;
+			t_FBAz = ew.t_FBAz;
+
+			circuitsAsString = ew.circuitsAsString;
+			lengthRzAz = ew.lengthRzAz;
+			lengthConnection = ew.lengthConnection;
+			lengthCircuitFbh = ew.lengthCircuitFbh;
+			lengthCircuitAll = ew.lengthCircuitAll;
+			wassermenge = ew.wassermenge;
+			druckverlustRohr = ew.druckverlustRohr;
+			druckverlustVerteiler = ew.druckverlustVerteiler;
+			v = ew.v;
+
+			unusedArea = ew.unusedArea;
+
+			subSystem = ew.subSystem;
+			otherSystemsConnected = ew.otherSystemsConnected;
+			usedAsCircuitWrapper = ew.usedAsCircuitWrapper;
+		}
 
 		public string RoomId {
 			get { return roomId; }
@@ -231,6 +277,11 @@ namespace Europlan.Common {
 		public bool OtherSystemsConnected {
 			get { return otherSystemsConnected; }
 			set { otherSystemsConnected = value; }
+		}
+
+		public bool UsedAsCircuitWrapper {
+			get { return usedAsCircuitWrapper; }
+			set { usedAsCircuitWrapper = value; }
 		}
 
 	}

@@ -597,6 +597,26 @@ namespace Europlan.Common {
 		}
 
 		/// <summary>
+		/// The pressure loss for heating at the distributor, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedDeltaRhoDistributorHeat {
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (Circuit c in this.circuits) {
+					double druckverlust = c.C_DruckverlustDistributorHeat;
+					if (druckverlust > value) {
+						value = druckverlust;
+					}
+				}
+				return value;
+			}
+		}
+
+		/// <summary>
 		/// The pressure loss for cooling, based on the current calculation.
 		/// </summary>
 		[XmlIgnore]
@@ -616,6 +636,26 @@ namespace Europlan.Common {
 					if (cc != null) {
 						druckverlust += cc.OtherCircuit.C_DruckverlustCool;
 					}
+					if (druckverlust > value) {
+						value = druckverlust;
+					}
+				}
+				return value;
+			}
+		}
+
+		/// <summary>
+		/// The pressure loss for cooling at the distributor, based on the current calculation.
+		/// </summary>
+		[XmlIgnore]
+		public double PlannedDeltaRhoDistributorCool {
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (Circuit c in this.circuits) {
+					double druckverlust = c.C_DruckverlustDistributorCool;
 					if (druckverlust > value) {
 						value = druckverlust;
 					}
