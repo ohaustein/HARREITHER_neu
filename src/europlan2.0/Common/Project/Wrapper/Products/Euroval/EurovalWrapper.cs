@@ -50,6 +50,9 @@ namespace Europlan.Common {
 		private bool otherSystemsConnected = false;
 		private bool usedAsCircuitWrapper = false;
 
+		public EurovalWrapper() {
+		}
+
 		public EurovalWrapper(EurovalWrapper ew) {
 			floorId = ew.floorId;
 			floorName = ew.floorName;
