@@ -1113,8 +1113,18 @@ namespace Europlan.Common {
 						foreach (Circuit c in pp.Product.PlannedCircuits) {
 							if (connection != null && connection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
 								wrapper = new VerlegedatenCircuitWrapper();
+								wrapper.Name = "";
+								wrapper.Area = "";
+
 								wrapper.Distributor = connection.Distributor.Id + " " + connection.Distributor.Name + " " + connection.Distributor.AssociatedFloor.Name;
-								wrapper.Name = pp.Product.FullName + " in ";
+								
+								foreach (ConnectionPipe pipe in pp.Product.PlannedConnectionPipes) {
+									if (pipe.ConnectionThrough != null && pipe.ConnectionThrough.Product.PlannedProductIsConnection && (!pipe.OnlyFirst || c.NrOfCircuit == 0)) {
+										wrapper.Area += pipe.Vorlauf + "m\n";
+									}
+								}
+
+								wrapper.Name += pp.Product.FullName + " in ";
 								if (floor != connection.Distributor.AssociatedFloor) {
 									wrapper.Name += floor.Name + ", ";
 								}
@@ -1125,6 +1135,24 @@ namespace Europlan.Common {
 								wrapper.Durchfluss = c.C_DurchflussHeat / 60;
 								wrapper.Area = pp.PlannedArea + "m²";
 								wrapper.CircuitNumber = count++;
+								if (pp.Product.ConnectedCircuits.ContainsKey(c.NrOfCircuit)) {
+									Circuit.CircuitConnection con = pp.Product.ConnectedCircuits[c.NrOfCircuit];
+									Product otherProduct = con.OtherProduct;
+									wrapper.Name += "\n" + otherProduct.FullName + " in ";
+									if (otherProduct.AssociatedRoom.AssociatedFloor != connection.Distributor.AssociatedFloor) {
+										wrapper.Name += otherProduct.AssociatedRoom.AssociatedFloor.Name + ", ";
+									}
+									wrapper.Name += otherProduct.AssociatedRoom.Id + " (" + otherProduct.AssociatedRoom.Name + ")";
+									if (pp.Product.PlannedCircuits.Count > 1) {
+										wrapper.Name += ", Heizkreis " + (c.NrOfCircuit + 1);
+									}
+									wrapper.Area += "\n" + (otherProduct.PlannedFloorArea + otherProduct.PlannedWallArea + otherProduct.PlannedCeilingArea) + "m²";
+								}
+								foreach (ConnectionPipe pipe in pp.Product.PlannedConnectionPipes) {
+									if (pipe.ConnectionThrough != null && pipe.ConnectionThrough.Product.PlannedProductIsConnection && (!pipe.OnlyFirst || c.NrOfCircuit == 0)) {
+										wrapper.Area += "\n" + pipe.Ruecklauf + "m";
+									}
+								}
 								wrapperList.Add(wrapper);
 							}
 						}
