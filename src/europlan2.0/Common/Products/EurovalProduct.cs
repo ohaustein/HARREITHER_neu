@@ -40,6 +40,8 @@ namespace Europlan.Common {
 		private static double rLambdaDecke = 0.11; /* Fuﬂbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 		private static double rLambdaPutz = 0.02; /* Fuﬂbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 
+		private static double faktorTrockenkonstruktion = 0.45;
+
 		private static double maxResidenceTempHarreither = 27;
 		private static double maxRimTempHarreither = 33;
 		private static double maxResidenceTempEn1264 = 29;
@@ -69,8 +71,6 @@ namespace Europlan.Common {
 
 		private Nullable<LayDistance> plannedLayDistance = null;
 		private Nullable<RimType> plannedRimType = null;
-
-		private bool plannedProductIsConnection = false;
 
 		private bool plannedCorrections = false;
 
@@ -372,6 +372,12 @@ namespace Europlan.Common {
 		public static double ConfigRLambdaPutz {
 			get { return rLambdaPutz; }
 			set { rLambdaPutz = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigFaktorTrockenkonstruktion {
+			get { return faktorTrockenkonstruktion; }
+			set { faktorTrockenkonstruktion = value; }
 		}
 
 		[ProductParameter]
@@ -890,11 +896,6 @@ namespace Europlan.Common {
 		public float PlannedFloorAreaPercentage {
 			get { return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AssociatedRoom.Area); }
 			set { this.PlannedFloorArea = (float)(this.AssociatedRoom.Area * value / 100); }
-		}
-
-		public bool PlannedProductIsConnection {
-			get { return this.plannedProductIsConnection; }
-			set { this.plannedProductIsConnection = value; }
 		}
 		#endregion Auslegung
 

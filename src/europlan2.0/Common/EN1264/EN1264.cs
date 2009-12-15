@@ -249,6 +249,19 @@ namespace Europlan.Common {
 			return -rtn;
 		}
 
+		public double HithermBeplankungsFaktor(double[] rWerte, double[] faktoren, double rWert) {
+			double[] c = null;
+			spline3.buildcubicspline(rWerte, faktoren, rWerte.Length < faktoren.Length ? rWerte.Length : faktoren.Length, 0, 0, 0, 0, ref c);
+			double rtn = spline3.splineinterpolation(ref c, rWert);
+			if (rtn > 1) {
+				rtn = 1;
+			}
+			if (rtn < 0) {
+				rtn = 0;
+			}
+			return rtn;
+		}
+
 		public double OberflaechenTemperatur(double waermestrom, double alpha, double raumTemperatur) {
 			return (waermestrom / alpha) + raumTemperatur;
 		}

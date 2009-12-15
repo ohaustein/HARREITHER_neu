@@ -97,10 +97,14 @@ namespace Europlan.Common {
 				selected += ", DK";
 				i++;
 			}
+			if (this.tsmiWallConstruction.Checked) {
+				selected += ", WK";
+				i++;
+			}
 			if (i == 0) {
 				selected = "keine";
 				this.Filter = ConstructionScopeEnum.UnknownConstruction;
-			} else if (i == 3) {
+			} else if (i == 4) {
 				selected = "alle";
 				this.Filter = ConstructionScopeEnum.All;
 			} else {
@@ -114,6 +118,9 @@ namespace Europlan.Common {
 				}
 				if (this.tsmiCeilingConstruction.Checked) {
 					filter = filter | ConstructionScopeEnum.CeilingConstruction;
+				}
+				if (this.tsmiWallConstruction.Checked) {
+					filter = filter | ConstructionScopeEnum.WallConstruction;
 				}
 				this.Filter = filter;
 			}
@@ -140,6 +147,9 @@ namespace Europlan.Common {
 			} else if (sender == this.tsmiNewFloorConstructionTrockenEstrich) {
 				c = new FloorConstruction();
 				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(this.adminMode ? ConstructionTypeManager.CT_STD_TRK_ESTRICH : ConstructionTypeManager.CT_USER_TRK_ESTRICH);
+			} else if (sender == this.tsmiNewWallConstruction) {
+				c = new WallConstruction();
+				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(this.adminMode ? ConstructionTypeManager.CT_STD_WAND : ConstructionTypeManager.CT_USER_WAND);
 			}
 			if (c != null) {
 				ConstructionEditorForm form = new ConstructionEditorForm(c);
