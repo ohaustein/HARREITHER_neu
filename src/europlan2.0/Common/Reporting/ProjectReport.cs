@@ -1099,8 +1099,6 @@ namespace Europlan.Common {
 		}
 
 		public List<VerlegedatenCircuitWrapper> GetVerlegedatenCircuitWrapper() {
-			//TODO
-
 			List<VerlegedatenCircuitWrapper> wrapperList = new List<VerlegedatenCircuitWrapper>();
 			VerlegedatenCircuitWrapper wrapper = null;
 
@@ -1117,9 +1115,17 @@ namespace Europlan.Common {
 								wrapper.Area = "";
 
 								wrapper.Distributor = connection.Distributor.Id + " " + connection.Distributor.Name + " " + connection.Distributor.AssociatedFloor.Name;
+								wrapper.Durchfluss = c.C_DurchflussHeat / 60;
 								
 								foreach (ConnectionPipe pipe in pp.Product.PlannedConnectionPipes) {
 									if (pipe.ConnectionThrough != null && pipe.ConnectionThrough.Product.PlannedProductIsConnection && (!pipe.OnlyFirst || c.NrOfCircuit == 0)) {
+										wrapper.Name += "Anbindung durch Raum " + pipe.ConnectionThrough.Product.AssociatedRoom.Id + " (" + pipe.ConnectionThrough.Product.AssociatedRoom.Name + ")";
+										wrapper.Name += ", " + new ConnectionPipe.PipeTypeEnumConverter().ConvertToString(pipe.PipeType);
+										wrapper.Name += ", " + new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart);
+										if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH && pipe.Insulation != ConnectionPipe.InsulationEnum.IN_NONE) {
+											wrapper.Name += ", " + new ConnectionPipe.InsulationEnumConverter().ConvertToString(pipe.Insulation) + " gedämmt";
+										}
+										wrapper.Name += "\n";
 										wrapper.Area += pipe.Vorlauf + "m\n";
 									}
 								}
@@ -1132,8 +1138,8 @@ namespace Europlan.Common {
 								if (pp.Product.PlannedCircuits.Count > 1) {
 									wrapper.Name += ", Heizkreis " + (c.NrOfCircuit + 1);
 								}
-								wrapper.Durchfluss = c.C_DurchflussHeat / 60;
-								wrapper.Area = pp.PlannedArea + "m²";
+
+								wrapper.Area += pp.PlannedArea + "m²";
 								wrapper.CircuitNumber = count++;
 								if (pp.Product.ConnectedCircuits.ContainsKey(c.NrOfCircuit)) {
 									Circuit.CircuitConnection con = pp.Product.ConnectedCircuits[c.NrOfCircuit];
@@ -1150,6 +1156,13 @@ namespace Europlan.Common {
 								}
 								foreach (ConnectionPipe pipe in pp.Product.PlannedConnectionPipes) {
 									if (pipe.ConnectionThrough != null && pipe.ConnectionThrough.Product.PlannedProductIsConnection && (!pipe.OnlyFirst || c.NrOfCircuit == 0)) {
+										wrapper.Name += "\n";
+										wrapper.Name += "Anbindung durch Raum " + pipe.ConnectionThrough.Product.AssociatedRoom.Id + " (" + pipe.ConnectionThrough.Product.AssociatedRoom.Name + ")";
+										wrapper.Name += ", " + new ConnectionPipe.PipeTypeEnumConverter().ConvertToString(pipe.PipeType);
+										wrapper.Name += ", " + new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart);
+										if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH && pipe.Insulation != ConnectionPipe.InsulationEnum.IN_NONE) {
+											wrapper.Name += ", " + new ConnectionPipe.InsulationEnumConverter().ConvertToString(pipe.Insulation) + " gedämmt";
+										}
 										wrapper.Area += "\n" + pipe.Ruecklauf + "m";
 									}
 								}
