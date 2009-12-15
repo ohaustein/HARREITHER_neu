@@ -32,7 +32,7 @@ namespace Europlan.Common {
 		protected Room associatedRoom = null;
 		protected SerializableDictionary<string, int> quickDimensioningConnectedDistributors = new SerializableDictionary<string, int>();
 		protected ProductConnection plannedConnection = null;
-		protected SerializableDictionary<int, PlannedProduct> plannedConnectedProducts = new SerializableDictionary<int, PlannedProduct>();
+		//protected SerializableDictionary<int, PlannedProduct> plannedConnectedProducts = new SerializableDictionary<int, PlannedProduct>();
 		protected List<ConnectionPipe> plannedConnectionPipes = new List<ConnectionPipe>();
 
 		protected float plannedRoomTemperatureBelowHeat = 18;
@@ -535,8 +535,16 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public SerializableDictionary<int, PlannedProduct> PlannedConnectedProducts {
-			get { return this.plannedConnectedProducts; }
+		public List<Product> PlannedConnectedProducts {
+			get {
+				List<Product> pp = new List<Product>();
+				foreach (Circuit.CircuitConnection cc in this.connectedCircuits.Values) {
+					if (!pp.Contains(cc.OtherProduct)) {
+						pp.Add(cc.OtherProduct);
+					}
+				}
+				return pp;
+			}
 		}
 
 		[XmlIgnore]
