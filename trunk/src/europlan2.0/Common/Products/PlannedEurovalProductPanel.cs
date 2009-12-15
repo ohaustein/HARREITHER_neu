@@ -949,7 +949,7 @@ namespace Europlan.Common {
 
 		private void cbSeparateCircuit_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreSeparateCircuit == 0) {
-				(this.product.Product as EurovalProduct).PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
+				this.product.Product.PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.SEPARATE_CIRCUIT);
