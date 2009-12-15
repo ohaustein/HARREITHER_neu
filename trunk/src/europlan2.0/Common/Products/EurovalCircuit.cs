@@ -350,7 +350,11 @@ namespace Europlan.Common {
 				}
 
 				this.c_floorTempAzHeat = en1264.OberflaechenTemperatur(this.c_qAzHeatPerSqm, alphaFbh, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature);
-				this.c_floorTempRzHeat = en1264.OberflaechenTemperatur(this.c_qRzHeatPerSqm, alphaFbh, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature);
+				if (calculateWithRim) {
+					this.c_floorTempRzHeat = en1264.OberflaechenTemperatur(this.c_qRzHeatPerSqm, alphaFbh, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature);
+				} else {
+					this.c_floorTempRzHeat = 0;
+				}
 			}
 			{ // Kühllastberechnung
 				double distributorVorlaufTemp;
@@ -435,10 +439,12 @@ namespace Europlan.Common {
 					}
 				}
 
-
-
 				this.c_floorTempAzCool = en1264.OberflaechenTemperatur(this.c_qAzCoolPerSqm, alphaFbk, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature);
-				this.c_floorTempRzCool = en1264.OberflaechenTemperatur(this.c_qRzCoolPerSqm, alphaFbk, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature);
+				if (calculateWithRim) {
+					this.c_floorTempRzCool = en1264.OberflaechenTemperatur(this.c_qRzCoolPerSqm, alphaFbk, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature);
+				} else {
+					this.c_floorTempRzCool = 0;
+				}
 			}
 		}
 	}
