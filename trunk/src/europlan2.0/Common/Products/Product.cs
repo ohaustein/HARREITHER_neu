@@ -42,6 +42,9 @@ namespace Europlan.Common {
 		protected double plannedRuecklaufTempHeat = double.MinValue;
 		protected double plannedVorlaufTempCool = double.MinValue;
 		protected double plannedRuecklaufTempCool = double.MinValue;
+
+		protected bool plannedProductIsConnection = false;
+
 		protected bool incompleteCalculation = true;
 
 		protected string lastErrorMsg = null;
@@ -515,7 +518,7 @@ namespace Europlan.Common {
 			set { this.plannedConnection = value; }
 		}
 
-		public SerializableDictionary<int, string> PlannedConnectedProductIds {
+		/*public SerializableDictionary<int, string> PlannedConnectedProductIds {
 			get {
 				return null;
 				// TODO
@@ -523,7 +526,7 @@ namespace Europlan.Common {
 			set {
 				// TODO
 			}
-		}
+		}*/
 
 		public List<Circuit> PlannedCircuits {
 			get {
@@ -538,6 +541,11 @@ namespace Europlan.Common {
 		public List<Product> PlannedConnectedProducts {
 			get {
 				List<Product> pp = new List<Product>();
+				foreach (ConnectionPipe cp in this.plannedConnectionPipes) {
+					if (cp.ConnectionThrough != null && cp.ConnectionThrough.Product != null && cp.ConnectionThrough.Product.PlannedProductIsConnection && !pp.Contains(cp.ConnectionThrough.Product)) {
+						pp.Add(cp.ConnectionThrough.Product);
+					}
+				}
 				foreach (Circuit.CircuitConnection cc in this.connectedCircuits.Values) {
 					if (!pp.Contains(cc.OtherProduct)) {
 						pp.Add(cc.OtherProduct);
@@ -954,6 +962,11 @@ namespace Europlan.Common {
 				}
 				return false;
 			}
+		}
+
+		public bool PlannedProductIsConnection {
+			get { return this.plannedProductIsConnection; }
+			set { this.plannedProductIsConnection = value; }
 		}
 	}
 }
