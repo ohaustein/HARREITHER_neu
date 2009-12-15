@@ -237,6 +237,12 @@ namespace Europlan.Common {
 			get { return this.c_durchflussHeat; }
 		}
 
+		protected double c_flussGeschwindigkeitHeat;
+		[XmlIgnore]
+		public double C_FlussGeschwindigkeitHeat {
+			get { return this.c_flussGeschwindigkeitHeat; }
+		}
+
 		protected double c_druckverlustCool;
 		[XmlIgnore]
 		public double C_DruckverlustCool {
@@ -260,6 +266,12 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double C_DurchflussCool {
 			get { return this.c_durchflussCool; }
+		}
+
+		protected double c_flussGeschwindigkeitCool;
+		[XmlIgnore]
+		public double C_FlussGeschwindigkeitCool {
+			get { return this.c_flussGeschwindigkeitCool; }
 		}
 
 		#endregion Anbindung

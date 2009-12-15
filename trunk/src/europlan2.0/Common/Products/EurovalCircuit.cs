@@ -190,12 +190,14 @@ namespace Europlan.Common {
 				c_Qh2oCool = 0;
 
 				c_druckverlustHeat = 0;
+				c_flussGeschwindigkeitHeat = 0;
 
 				c_durchflussHeat = 0;
 
 				c_druckverlustCool = 0;
 
 				c_durchflussCool = 0;
+				c_flussGeschwindigkeitCool = 0;
 
 				c_areaAz = 0;
 				c_areaRz = 0;
@@ -343,6 +345,7 @@ namespace Europlan.Common {
 				this.c_durchflussHeat = en1264.Durchfluss(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
 
 				this.c_druckverlustHeat = en1264.DruckverlustRohr(this.c_durchflussHeat, rohrInnenA, rho,rohrInnenD, v, 0.000004, this.PipeLengthWithoutConnections);
+				this.c_flussGeschwindigkeitHeat = en1264.FlussGeschwindigkeit(c_durchflussHeat, rohrInnenA, rho);
 				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 					if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
 						this.c_druckverlustHeat += cp.CalculateDruckverlust(this.c_durchflussHeat);
@@ -433,6 +436,7 @@ namespace Europlan.Common {
 				this.c_durchflussCool = en1264.Durchfluss(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
 
 				this.c_druckverlustCool = en1264.DruckverlustRohr(this.c_durchflussCool, rohrInnenA, rho, rohrInnenD, v, 0.000004, this.PipeLengthWithoutConnections);
+				this.c_flussGeschwindigkeitCool = en1264.FlussGeschwindigkeit(c_durchflussCool, rohrInnenA, rho);
 				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 					if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
 						this.c_druckverlustCool += cp.CalculateDruckverlust(this.c_durchflussCool);
