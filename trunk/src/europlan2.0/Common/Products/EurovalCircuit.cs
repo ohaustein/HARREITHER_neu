@@ -260,7 +260,7 @@ namespace Europlan.Common {
 			double rLambdaB = this.EurovalProduct.PlannedInsideConstructionRValue;
 			double rLambdaIns = this.EurovalProduct.PlannedOutsideConstructionRValue;
 
-			double factor = (this.EurovalProduct.PlannedFloorConstruction != null && (this.EurovalProduct.PlannedFloorConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TROCKEN) || this.EurovalProduct.PlannedFloorConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN))) ? 0.45 : 1;
+			double factor = (this.EurovalProduct.PlannedFloorConstruction != null && (this.EurovalProduct.PlannedFloorConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TROCKEN) || this.EurovalProduct.PlannedFloorConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN))) ? EurovalProduct.ConfigFaktorTrockenkonstruktion : 1;
 
 			// Aufteilung RZ - AZ
 			double aFbh = this.areaTotal - this.areaReduced / 2- this.areaUnheated - this.areaRemovedDueConnection;	// wirksam beheizte Fläche

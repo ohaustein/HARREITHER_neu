@@ -62,11 +62,14 @@ namespace Europlan.Common {
 		private static double[] hlRegKuehlleistung  = { 0, 13, 20, 25, 33, 40, 45, 60 };
 		private static double[] stdRegKuehlleistung = { 0,  9, 14, 18, 24, 29, 32, 43 };
 
-		private static double factorSpezialputz = 1.15;
+		private static double[] beplankungRWerte = { 0, 0.01, 0.02, 0.1 };
+		private static double[] beplankungFaktoren = { 1, 0.95, 0.91, 0.66 };
+
+		/*private static double factorSpezialputz = 1.15;
 		private static double factorMaschinenputz = 1.0;
 		private static double factorLehmputz = 0.95;
 		private static double factorGkpHohlraum = 0.69;
-		private static double factorHolzHohlraum = 0.62;
+		private static double factorHolzHohlraum = 0.62;*/
 
 		private Dictionary<HithermRegister, int> registerCircuits = new Dictionary<HithermRegister, int>();
 		private Dictionary<int, HithermCircuit> circuitIds = new Dictionary<int, HithermCircuit>();
@@ -342,6 +345,40 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
+		public static string ConfigBeplankungRWerteString {
+			get {
+				return ConvertArrayToString(beplankungRWerte);
+			}
+			set {
+				double[] array = ConvertStringToArray(value);
+				if (array != null) {
+					beplankungRWerte = array;
+				}
+			}
+		}
+		public static double[] ConfigBeplankungRWerte {
+			get { return beplankungRWerte; }
+			set { beplankungRWerte = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigBeplankungFaktorenString {
+			get {
+				return ConvertArrayToString(beplankungFaktoren);
+			}
+			set {
+				double[] array = ConvertStringToArray(value);
+				if (array != null) {
+					beplankungFaktoren = array;
+				}
+			}
+		}
+		public static double[] ConfigBeplankungFaktoren {
+			get { return beplankungFaktoren; }
+			set { beplankungFaktoren = value; }
+		}
+
+		/*[ProductParameter]
 		public static double ConfigFactorSpezialputz {
 			get { return factorSpezialputz; }
 			set { factorSpezialputz = value; }
@@ -369,7 +406,7 @@ namespace Europlan.Common {
 		public static double ConfigFactorHolzHohlraum {
 			get { return factorHolzHohlraum; }
 			set { factorHolzHohlraum = value; }
-		}
+		}*/
 
 		[ProductParameter]
 		public static double ConfigSpreizungHeizMin {

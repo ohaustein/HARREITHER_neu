@@ -10,6 +10,8 @@ namespace Europlan.Common {
 	public partial class HithermWallGrid : UserControl {
 		public HithermWallGrid() {
 			InitializeComponent();
+
+			//Project.Instance.Config.Constructions;
 		}
 	}
 }
