@@ -158,11 +158,11 @@ namespace Europlan.Common {
 					materialsToRemove.Add(material);
 				}
 			}
-			//if (this.type == ConfigurationType.UserConfiguration || this.type == ConfigurationType.ProjectConfiguration) {
+			if (this.type == ConfigurationType.UserConfiguration || this.type == ConfigurationType.ProjectConfiguration) {
 				foreach (Material material in materialsToRemove) {
 					materials.Remove(material);
 				}
-			//}
+			}
 		}
 
 		public static Configuration operator+(Configuration config1, Configuration config2) {
