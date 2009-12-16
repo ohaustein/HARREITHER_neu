@@ -970,12 +970,12 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public virtual double PlannedHeizleistungBereinigung {
+		public virtual double PlannedHeizlastBereinigung {
 			get { return 0; }
 		}
 
 		[XmlIgnore]
-		public virtual double PlannedKuehlleistungBereinigung {
+		public virtual double PlannedKuehllastBereinigung {
 			get { return 0; }
 		}
 	}

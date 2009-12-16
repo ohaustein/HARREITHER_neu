@@ -147,6 +147,7 @@ namespace Europlan.Common {
 					double heatLoad = this.room.NormalizedHeatLoad;
 					foreach (PlannedProduct pp in this.room.PlannedProducts) {
 						heatLoad -= pp.PlannedHeatLoad;
+						heatLoad -= pp.Product.PlannedHeizlastBereinigung;
 					}
 					return Math.Round(-heatLoad, 0);
 				} else {
@@ -173,6 +174,7 @@ namespace Europlan.Common {
 					double coolLoad = this.room.NormalizedCoolLoad;
 					foreach (PlannedProduct pp in this.room.PlannedProducts) {
 						coolLoad -= pp.PlannedCoolLoad;
+						coolLoad -= pp.Product.PlannedKuehllastBereinigung;
 					}
 					return Math.Round(-coolLoad, 0);
 				} else {
