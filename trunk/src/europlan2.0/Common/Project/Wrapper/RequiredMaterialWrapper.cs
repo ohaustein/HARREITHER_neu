@@ -25,8 +25,10 @@ namespace Europlan.Common {
 				if (Project.Instance.RequiredMaterialCalculated.ContainsKey(material.Id)) {
 					if (Project.Instance.RequiredMaterialCalculated[material.Id] >= 0) {
 						return Math.Ceiling(Project.Instance.RequiredMaterialCalculated[material.Id]);
-					} else {
+					} else if (Project.Instance.RequiredMaterialCalculated[material.Id] == Double.NegativeInfinity) {
 						return 0;
+					} else {
+						return Math.Ceiling(Math.Abs(Project.Instance.RequiredMaterialCalculated[material.Id]));
 					}
 				}
 				return 0; 

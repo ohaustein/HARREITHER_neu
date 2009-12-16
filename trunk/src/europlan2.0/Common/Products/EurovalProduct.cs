@@ -1792,6 +1792,8 @@ namespace Europlan.Common {
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", length);
 
+			// TODO Clipschiene und Ovalmuffe für Anbindeleitungen???
+
 			// Clipschiene
 			string clipschiene = clipSchieneKlebeband ? "EV16" : "EV15";
 			double amount = 0;
@@ -1843,8 +1845,8 @@ namespace Europlan.Common {
 			}
 
 			// unknown amount
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV11", -1);
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV12", -1);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV11", Double.NegativeInfinity);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV12", Double.NegativeInfinity);
 		}
 
 	}

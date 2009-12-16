@@ -475,6 +475,8 @@ namespace Europlan.Common {
 					}
 				}
 			}
+
+			ModulKlimaBodenProduct.ReviseRequiredMaterial(requiredMaterialCalculated);
 		}
 
 		public void AddRequiredMaterial(SerializableDictionary<string, double> requiredMaterial, string partNumber, double amount) {

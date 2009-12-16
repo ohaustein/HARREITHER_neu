@@ -844,7 +844,116 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+
+			// Modul
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK01", this.RequestedModulesTotal);
+
+			// Euroval Anbindung
+			// 21mm Anbindung
+			double pipeEurovalLength = 0;
+			double pipe21mmLength = 0;
+			double circuit21mmOnlyFirstLength = 0;
+			double circuit21mmAllLength = 0;
+			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
+				if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+					if (pipe.OnlyFirst) {
+						pipe21mmLength += (pipe.Vorlauf + pipe.Ruecklauf);
+						circuit21mmOnlyFirstLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					} else {
+						pipe21mmLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+						circuit21mmAllLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					}					
+
+				} else {
+					if (pipe.OnlyFirst) {
+						pipeEurovalLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					} else {
+						pipeEurovalLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+					}
+				}
+			}
+			pipe21mmLength += this.RequestedSonstigeVerbindeLeitung;
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", pipeEurovalLength);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", pipe21mmLength);
+
+			// TODO Clipschiene und Ovalmuffe für Anbindeleitungen???
+
+			// Muffe
+			if (circuit21mmOnlyFirstLength > 0) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", (circuit21mmOnlyFirstLength + circuit21mmAllLength) * 0.3);
+				if (this.PlannedCircuitCount > 1) {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", circuit21mmAllLength * 0.3 * (this.PlannedCircuitCount - 1));
+				}
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", circuit21mmAllLength * 0.3 * this.PlannedCircuitCount);
+			}
+
+			// Winkel 90°
+			if (circuit21mmOnlyFirstLength > 0) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (circuit21mmOnlyFirstLength + circuit21mmAllLength) * 0.8);
+				if (this.PlannedCircuitCount > 1) {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", circuit21mmAllLength * 0.8 * (this.PlannedCircuitCount - 1));
+				}
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", circuit21mmAllLength * 0.8 * this.PlannedCircuitCount);
+			}
+
+			// Winkel 45°
+			if (circuit21mmOnlyFirstLength > 0) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", GetWinkel45PerLfm(circuit21mmOnlyFirstLength + circuit21mmAllLength));
+				if (this.PlannedCircuitCount > 1) {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", GetWinkel45PerLfm(circuit21mmAllLength) * (this.PlannedCircuitCount - 1));
+				}
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", GetWinkel45PerLfm(circuit21mmAllLength) * this.PlannedCircuitCount);
+			}
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", this.PlannedCircuitCount * 2);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", this.RequestedModulesSonstige * 2);
+
+			// Modulbögen
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK10", this.RequestedModulesDicht - 1);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK11", this.RequestedModulesModulierend - 1);
+
+			// Modulstreifen
+			double streifen = Math.Ceiling(this.RequestedModulesModulierend * 1.5);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK04", streifen);
+
+			// Rohrführungsplatte
+			if (this.RequestedSonstigeVerbindeLeitung > 0) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK05", Math.Ceiling(this.RequestedSonstigeVerbindeLeitung / 8));
+			}
+
+			// Modulniveauplatten
+			double area = this.PlannedFloorArea - this.PlannedModulArea - (streifen * (0.945 * 0.096));
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK03", Math.Ceiling(area * 2));
 			
+		}
+
+		private double GetWinkel45PerLfm(double lfm) {
+			if (lfm < 20) {
+				return 0;
+			} else {
+				return ((lfm / 10) - 1) * 2;
+			}
+		}
+
+		public static void ReviseRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+
+			// same amount left and right
+			if (requiredMaterial.ContainsKey("MK01")) {
+				int amount = (int)requiredMaterial["MK01"];
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK01", -1 * amount);
+				if (amount % 2 != 0) {
+					amount++;
+				}
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK01", amount / 2);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK02", amount / 2);
+			}
+
+			// Modul-Kappe/T-Stück (manuell)
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI58", -2);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", -2);
+
 		}
 	}
 	
