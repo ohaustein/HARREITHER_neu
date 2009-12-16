@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using Star.SettingsXpress;
+
+namespace Europlan.Common {
+	public partial class SelectHithermWallConstructionForm : Form {
+
+		private class WallConstructionItem : ListViewItem {
+			private WallConstruction construction;
+
+			public WallConstructionItem(WallConstruction construction) {
+				this.construction = construction;
+				this.Text = construction.Id + ": " + construction.Name;
+			}
+
+			public WallConstruction Construction {
+				get { return this.construction; }
+			}
+		}
+		
+		public SelectHithermWallConstructionForm() {
+			InitializeComponent();
+			ConstructionListWrapper clw = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
+			clw.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
+			foreach (WallConstruction wc in clw) {
+				this.lstConstructions.Items.Add(new WallConstructionItem(wc));
+			}
+			if (this.lstConstructions.Items.Count > 0) {
+				this.lstConstructions.Items[0].Selected = true;
+			}
+		}
+
+		public WallConstruction SelectedConstruction {
+			get {
+				if (this.lstConstructions.SelectedItems.Count > 0) {
+					return (this.lstConstructions.SelectedItems[0] as WallConstructionItem).Construction;
+				} else {
+					return null;
+				}
+			}
+		}
+
+		private void SelectHithermWallConstruction_FormClosing(object sender, FormClosingEventArgs e) {
+			if (this.lstConstructions.SelectedItems.Count == 0 && this.DialogResult == DialogResult.OK) {
+				MessageBox.Show("Bitte wählen Sie eine Basiskonstruktion aus.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				e.Cancel = true;
+			}
+			SettingsKey settings = SettingsFile.Settings["SelectHithermWallConstructionForm"];
+			settings.StorePoint("Location", this.Location);
+			SettingsFile.Update();
+		}
+
+		private void SelectHithermWallConstructionForm_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["SelectHithermWallConstructionForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
+		}
+	}
+}

@@ -50,6 +50,7 @@ namespace Europlan.Common {
 			//CALCULATION_TYPE = 16384,
 			CIRCUITS = 32768,
 			REGISTER = 65536,
+			WALLS = 131072,
 		}
 
 
@@ -248,6 +249,10 @@ namespace Europlan.Common {
 					this.txtDistributor.Text = "";
 				} else {
 					this.txtDistributor.Text = hp.PlannedConnection.ToString();
+				}
+
+				if ((skipFields & FieldEnum.WALLS) == FieldEnum.NONE) {
+					this.hithermWallGrid1.Walls = Project.Instance.HithermWalls;
 				}
 
 				if (this.errorMsg != null) {
