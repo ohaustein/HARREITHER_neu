@@ -761,6 +761,27 @@ namespace Europlan.Common {
 
 		}
 
+		[XmlIgnore]
+		public override double PlannedHeizleistungBereinigung {
+			get {
+				double bereinigung = 0;
+				foreach (HithermCircuit hc in this.circuits) {
+					bereinigung += hc.HeizleistungBereinigung;
+				}
+				return bereinigung;
+			}
+		}
+
+		[XmlIgnore]
+		public override double PlannedKuehlleistungBereinigung {
+			get {
+				double bereinigung = 0;
+				foreach (HithermCircuit hc in this.circuits) {
+					bereinigung += hc.KuehlleistungBereinigung;
+				}
+				return bereinigung;
+			}
+		}
 	}
 	
 }

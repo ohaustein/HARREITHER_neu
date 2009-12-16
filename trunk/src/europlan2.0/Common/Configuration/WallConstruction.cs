@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	public class WallConstruction : Construction {
 
 		private double factor = 1;
+		private HithermWall defaultWall = null;
 
 		public WallConstruction() : base() {
 		}
@@ -23,6 +25,16 @@ namespace Europlan.Common {
 		public double Factor {
 			get { return this.factor; }
 			set { this.factor = value; }
+		}
+
+		[XmlIgnore]
+		public HithermWall DefaultWall {
+			get {
+				if (defaultWall == null) {
+					defaultWall = new HithermWall(this.Id, this.Name, this, null, null, false, null, -16, 30, true);
+				}
+				return defaultWall;
+			}
 		}
 	}
 }

@@ -73,6 +73,7 @@ namespace Europlan.Common {
 			this.dgvWalls.DataSource = this.hithermWallBindingSource;
 			this.dgvWalls.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dgvWalls.Location = new System.Drawing.Point(0, 0);
+			this.dgvWalls.MultiSelect = false;
 			this.dgvWalls.Name = "dgvWalls";
 			this.dgvWalls.Size = new System.Drawing.Size(684, 408);
 			this.dgvWalls.TabIndex = 0;

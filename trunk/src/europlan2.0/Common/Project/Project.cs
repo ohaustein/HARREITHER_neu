@@ -58,6 +58,7 @@ namespace Europlan.Common {
 		private SerializableDictionary<string, double> requiredMaterialCalculated;
 
 		private List<HithermWall> hithermWalls = new List<HithermWall>();
+		//private List<HithermWall> defaultHithermWalls = new List<HithermWall>();
 
 		protected Project() {
 			log.Debug("default constructor called");
@@ -151,13 +152,11 @@ namespace Europlan.Common {
 			requiredMaterialNode = new TreeNode(localized == null ? "Materialbedarf" : localized);
 			requiredMaterialNode.Tag = typeof(RequiredMaterialPanel);
 
-			/*hithermWalls = new List<HithermWall>();
-
-			ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
+			/*ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
 			wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
 			foreach (WallConstruction wc in wrapper) {
 				HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
-				hithermWalls.Add(w);
+				defaultHithermWalls.Add(w);
 			}*/
 		}
 
@@ -511,8 +510,8 @@ namespace Europlan.Common {
 				ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
 				wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
 				foreach (WallConstruction wc in wrapper) {
-					HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
-					allWalls.Add(w);
+					//HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
+					allWalls.Add(wc.DefaultWall);
 				}
 
 				allWalls.AddRange(this.hithermWalls);
@@ -522,29 +521,8 @@ namespace Europlan.Common {
 		}
 
 		public List<HithermWall> SerializeableHithermWalls {
-			get {
-				/*List<HithermWall> serializableHithermWalls = new List<HithermWall>();
-				foreach (HithermWall hw in this.hithermWalls) {
-					if (!hw.DefaultWall) {
-						serializableHithermWalls.Add(hw);
-					}
-				}
-				return serializableHithermWalls;*/
-				return this.hithermWalls;
-			}
-			set {
-				this.hithermWalls = value;
-				/*this.hithermWalls = new List<HithermWall>();
-
-				ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
-				wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
-				foreach (WallConstruction wc in wrapper) {
-					HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
-					this.hithermWalls.Add(w);
-				}
-
-				this.hithermWalls.AddRange(value);*/
-			}
+			get { return this.hithermWalls; }
+			set { this.hithermWalls = value; }
 		}
 	}
 }
