@@ -226,22 +226,24 @@ namespace Europlan.Common {
 				lblNecessaryArea.Text = (hp.PlannedHeatLoad > 0 && hp.PlannedWallArea > 0) ? Math.Round(this.product.RequestedHeatLoad / (hp.PlannedHeatLoad / hp.PlannedWallArea), 2).ToString() : "--";
 				if (selectedCircuit >= 0) {
 					HithermCircuit hc = hp.GetCircuitForRegister(this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem as HithermRegister);
-					lblHk.Text = "Heizkreis " + selectedCircuit.ToString() + ":";
-					lblAvgqHeat.Text = Math.Round(hc.C_QHeatPerSqm, 2).ToString();
-					lblDurchflussHeat.Text = Math.Round(hc.C_DurchflussHeat, 2).ToString();
-					lblDruckverlustHeat.Text = Math.Round(hc.C_DruckverlustHeat, 2).ToString();
-					//lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempHeat, 2).ToString();
-					lblAvgqCool.Text = (-1.0 * Math.Round(hc.C_QCoolPerSqm, 2)).ToString();
-					lblDurchflussCool.Text = Math.Round(hc.C_DurchflussCool, 2).ToString();
-					lblDruckverlustCool.Text = Math.Round(hc.C_DruckverlustCool, 2).ToString();
-					//lblTempCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempCool, 2).ToString();
-					/*double availableArea = Math.Round(this.product.Product.PlannedNetArea, 2);
-					double coveredArea = Math.Round(hp.CoveredCeilingArea, 2);
-					double anbArea = Math.Round(hp.PlannedRemoveArea, 2);
-					lblAvailableArea.Text = availableArea.ToString();
-					lblCoveredArea.Text = coveredArea.ToString();
-					lblAnbArea.Text = anbArea.ToString();
-					lblRestArea.Text = Math.Round(availableArea - anbArea - coveredArea, 2).ToString();*/
+					if (hc != null) {
+						lblHk.Text = "Heizkreis " + selectedCircuit.ToString() + ":";
+						lblAvgqHeat.Text = Math.Round(hc.C_QHeatPerSqm, 2).ToString();
+						lblDurchflussHeat.Text = Math.Round(hc.C_DurchflussHeat, 2).ToString();
+						lblDruckverlustHeat.Text = Math.Round(hc.C_DruckverlustHeat, 2).ToString();
+						//lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempHeat, 2).ToString();
+						lblAvgqCool.Text = (-1.0 * Math.Round(hc.C_QCoolPerSqm, 2)).ToString();
+						lblDurchflussCool.Text = Math.Round(hc.C_DurchflussCool, 2).ToString();
+						lblDruckverlustCool.Text = Math.Round(hc.C_DruckverlustCool, 2).ToString();
+						//lblTempCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempCool, 2).ToString();
+						/*double availableArea = Math.Round(this.product.Product.PlannedNetArea, 2);
+						double coveredArea = Math.Round(hp.CoveredCeilingArea, 2);
+						double anbArea = Math.Round(hp.PlannedRemoveArea, 2);
+						lblAvailableArea.Text = availableArea.ToString();
+						lblCoveredArea.Text = coveredArea.ToString();
+						lblAnbArea.Text = anbArea.ToString();
+						lblRestArea.Text = Math.Round(availableArea - anbArea - coveredArea, 2).ToString();*/
+					}
 				} else {
 				}
 
@@ -474,6 +476,11 @@ namespace Europlan.Common {
 			this.newRow = e.Row;
 			e.Row.Cells[PlannedProduct.Index].Value = this.product;
 			e.Row.Cells[heizkreisDataGridViewTextBoxColumn.Index].Value = 1;
+			if (Project.Instance.SerializeableHithermWalls.Count > 0) {
+				e.Row.Cells[Wall.Index].Value = Project.Instance.SerializeableHithermWalls[0];
+			} else if (Project.Instance.HithermWalls.Count > 0) {
+				e.Row.Cells[Wall.Index].Value = Project.Instance.HithermWalls[0];
+			}
 		}
 
 		HithermRegister deletingRegister = null;
@@ -526,6 +533,38 @@ namespace Europlan.Common {
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
+		}
+
+		private void dgvRegisters_CellEnter(object sender, DataGridViewCellEventArgs e) {
+			if (e.ColumnIndex == Wall.Index && e.RowIndex >= 0) {
+				Rectangle rect = dgvRegisters.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+				btnSelectWall.Location = new Point(rect.X + rect.Width - btnSelectWall.Width - 1, rect.Y);
+				btnSelectWall.Height = rect.Height - 1;
+				btnSelectWall.Show();
+			}
+		}
+
+		private void dgvRegisters_CellLeave(object sender, DataGridViewCellEventArgs e) {
+			btnSelectWall.Hide();
+		}
+
+		private void btnSelectWall_Click(object sender, EventArgs e) {
+			SelectHithermWallForm form = new SelectHithermWallForm();
+			form.SelectedWall = dgvRegisters.CurrentCell.Value as HithermWall;
+			if (form.ShowDialog().Equals(DialogResult.OK)) {
+				HithermWall wall = form.SelectedWall;
+				DataGridViewCell cell = dgvRegisters.CurrentCell;
+				if (cell.Value != wall) {
+					cell.Value = wall;
+					int col = dgvRegisters.SelectedCells.Count > 0 ? dgvRegisters.SelectedCells[0].ColumnIndex : -1;
+					int row = dgvRegisters.SelectedCells.Count > 0 ? dgvRegisters.SelectedCells[0].RowIndex : -1;
+					hithermRegisterBindingSource.ResetBindings(false);
+					if (col > -1) {
+						dgvRegisters.Rows[row].Cells[col].Selected = true;
+					}
+				}
+			}
+			form.Dispose();
 		}
 	}
 }

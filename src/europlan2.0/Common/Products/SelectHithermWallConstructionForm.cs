@@ -43,6 +43,15 @@ namespace Europlan.Common {
 					return null;
 				}
 			}
+			set {
+				this.lstConstructions.SelectedItems.Clear();
+				foreach (WallConstructionItem wci in this.lstConstructions.Items) {
+					if (wci.Construction.Equals(value)) {
+						wci.Selected = true;
+						return;
+					}
+				}
+			}
 		}
 
 		private void SelectHithermWallConstruction_FormClosing(object sender, FormClosingEventArgs e) {
@@ -58,6 +67,11 @@ namespace Europlan.Common {
 		private void SelectHithermWallConstructionForm_Load(object sender, EventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["SelectHithermWallConstructionForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
+		}
+
+		private void lstConstructions_DoubleClick(object sender, EventArgs e) {
+			this.DialogResult = DialogResult.OK;
+			this.Close();
 		}
 	}
 }

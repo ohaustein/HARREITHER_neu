@@ -251,6 +251,7 @@ namespace Europlan.Common {
 		private int rohre = 1;
 		private double pipeHorizontal = 0.25;
 		private double pipeVertical = 0.5;
+		private HithermWall wall;
 
 		/*private Nullable<Point> origin = null;*/
 
@@ -425,12 +426,41 @@ namespace Europlan.Common {
 			}
 		}
 
-		public double Heizleistung(double heizmittelTemp, double roomTemp, double faktor) {
+		public double Heizleistung(double heizmittelTemp, double roomTemp) {
+			double faktor = 1;
+			if (this.wall != null) {
+				faktor = this.wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.wall.DeckschichtValue);
+			}
 			return EN1264.Instance.WaermestromDichteRegister(heizmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegHeizleistung : HithermProduct.ConfigStdRegHeizleistung, faktor) * this.Area;
 		}
 
-		public double Kuehlleistung(double kuehlmittelTemp, double roomTemp, double faktor) {
+		public double HeizleistungBereinigung() {
+			// TODO
+			return 0;
+		}
+
+		public double WaermeverlustHinten(double leistung, double roomTemp) {
+			//return EN1264.Instance.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowHeat);
+			// TODO
+			return 0;
+		}
+
+		public double Kuehlleistung(double kuehlmittelTemp, double roomTemp) {
+			double faktor = 1;
+			if (this.wall != null) {
+				faktor = this.wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.wall.DeckschichtValue);
+			}
 			return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegKuehlleistung : HithermProduct.ConfigStdRegKuehlleistung, faktor) * this.Area;
+		}
+
+		public double KuehlleistungBereinigung() {
+			// TODO
+			return 0;
+		}
+
+		public double KaelteverlustHinten(double leistung, double roomTemp) {
+			// TODO
+			return 0;
 		}
 
 		public double Druckverlust(double durchfluss) {
@@ -486,10 +516,9 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public Construction Construction {
-			// TODO
-			get { return null; }
-			set { }
+		public HithermWall Wall {
+			get { return this.wall; }
+			set { this.wall = value; }
 		}
 	}
 }

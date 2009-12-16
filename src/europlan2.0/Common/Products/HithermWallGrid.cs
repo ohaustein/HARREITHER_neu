@@ -51,7 +51,6 @@ namespace Europlan.Common {
 		private void dgvWalls_CellEnter(object sender, DataGridViewCellEventArgs e) {
 			if (e.ColumnIndex == constructionDataGridViewTextBoxColumn.Index && e.RowIndex >= 0 && !dgvWalls.Rows[e.RowIndex].ReadOnly) {
 				Rectangle rect = dgvWalls.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
-				//int width = dataGridView1.CurrentCell.Size.Width;
 				btnSelectConstruction.Location = new Point(rect.X + rect.Width - btnSelectConstruction.Width - 1, rect.Y);
 				btnSelectConstruction.Height = rect.Height - 1;
 				btnSelectConstruction.Show();
@@ -64,12 +63,18 @@ namespace Europlan.Common {
 
 		private void btnSelectConstruction_Click(object sender, EventArgs e) {
 			SelectHithermWallConstructionForm form = new SelectHithermWallConstructionForm();
+			DataGridViewCell cell = dgvWalls.Rows[dgvWalls.CurrentCell.RowIndex].Cells[this.Construction.Index];
+			form.SelectedConstruction = cell.Value as WallConstruction;
 			if (form.ShowDialog().Equals(DialogResult.OK)) {
 				WallConstruction construction = form.SelectedConstruction;
-				DataGridViewCell cell = dgvWalls.Rows[dgvWalls.CurrentCell.RowIndex].Cells[this.Construction.Index];
 				if (cell.Value != construction) {
 					cell.Value = construction;
+					int col = dgvWalls.SelectedCells.Count > 0 ? dgvWalls.SelectedCells[0].ColumnIndex : -1;
+					int row = dgvWalls.SelectedCells.Count > 0 ? dgvWalls.SelectedCells[0].RowIndex : -1;
 					hithermWallBindingSource.ResetBindings(false);
+					if (col > -1) {
+						dgvWalls.Rows[row].Cells[col].Selected = true;
+					}
 				}
 			}
 			form.Dispose();

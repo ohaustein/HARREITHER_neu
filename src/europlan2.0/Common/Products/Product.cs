@@ -968,5 +968,15 @@ namespace Europlan.Common {
 			get { return this.plannedProductIsConnection; }
 			set { this.plannedProductIsConnection = value; }
 		}
+
+		[XmlIgnore]
+		public virtual double PlannedHeizleistungBereinigung {
+			get { return 0; }
+		}
+
+		[XmlIgnore]
+		public virtual double PlannedKuehlleistungBereinigung {
+			get { return 0; }
+		}
 	}
 }

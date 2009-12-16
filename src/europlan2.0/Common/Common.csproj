@@ -139,6 +139,12 @@
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\SelectHithermWallForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\SelectHithermWallForm.Designer.cs">
+      <DependentUpon>SelectHithermWallForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\HithermWall.cs" />
     <Compile Include="Products\HithermWallGrid.cs">
       <SubType>UserControl</SubType>
@@ -422,6 +428,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Products\ConnectionPipesForm.resx">
       <DependentUpon>ConnectionPipesForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\SelectHithermWallForm.resx">
+      <DependentUpon>SelectHithermWallForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\HithermWallGrid.resx">
