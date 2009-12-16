@@ -57,6 +57,8 @@ namespace Europlan.Common {
 		private SerializableDictionary<string, double> requiredMaterialOverrides;
 		private SerializableDictionary<string, double> requiredMaterialCalculated;
 
+		private List<HithermWall> hithermWalls = new List<HithermWall>();
+
 		protected Project() {
 			log.Debug("default constructor called");
 			InitializeProject();
@@ -148,8 +150,15 @@ namespace Europlan.Common {
 			localized = resources.GetString("RequiredMaterial", Thread.CurrentThread.CurrentUICulture);
 			requiredMaterialNode = new TreeNode(localized == null ? "Materialbedarf" : localized);
 			requiredMaterialNode.Tag = typeof(RequiredMaterialPanel);
-					
 
+			/*hithermWalls = new List<HithermWall>();
+
+			ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
+			wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
+			foreach (WallConstruction wc in wrapper) {
+				HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
+				hithermWalls.Add(w);
+			}*/
 		}
 
 		public string[] ProjectName {
@@ -490,6 +499,50 @@ namespace Europlan.Common {
 				}
 			}
 			return null;
+		}
+
+		[XmlIgnore]
+		public List<HithermWall> HithermWalls {
+			get {
+				List<HithermWall> allWalls = new List<HithermWall>();
+
+				ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
+				wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
+				foreach (WallConstruction wc in wrapper) {
+					HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
+					allWalls.Add(w);
+				}
+
+				allWalls.AddRange(this.hithermWalls);
+
+				return allWalls; 
+			}
+		}
+
+		public List<HithermWall> SerializeableHithermWalls {
+			get {
+				/*List<HithermWall> serializableHithermWalls = new List<HithermWall>();
+				foreach (HithermWall hw in this.hithermWalls) {
+					if (!hw.DefaultWall) {
+						serializableHithermWalls.Add(hw);
+					}
+				}
+				return serializableHithermWalls;*/
+				return this.hithermWalls;
+			}
+			set {
+				this.hithermWalls = value;
+				/*this.hithermWalls = new List<HithermWall>();
+
+				ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
+				wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
+				foreach (WallConstruction wc in wrapper) {
+					HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
+					this.hithermWalls.Add(w);
+				}
+
+				this.hithermWalls.AddRange(value);*/
+			}
 		}
 	}
 }

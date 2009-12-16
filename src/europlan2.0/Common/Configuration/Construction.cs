@@ -8,6 +8,7 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(FloorConstruction))]
 	[XmlInclude(typeof(InsulationConstruction ))]
 	[XmlInclude(typeof(CeilingConstruction))]
+	[XmlInclude(typeof(WallConstruction))]
 	public class Construction {
 		private string id;
 		private int version;
@@ -183,5 +184,8 @@ namespace Europlan.Common {
 			throw new Exception("No implementation for Clone() in class Construction");
 		}
 
+		public override string ToString() {
+			return this.Id;
+		}
 	}
 }
