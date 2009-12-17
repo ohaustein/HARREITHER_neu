@@ -847,14 +847,6 @@ namespace Europlan.Common {
 			get;
 		}
 
-		public virtual double HeatLoadBereinigt {
-			get { return 0; }
-		}
-
-		public virtual double CoolLoadBereinigt {
-			get { return 0; }
-		}
-
 		private double QH2OHeat {
 			get {
 				double qH2OHeat = 0;

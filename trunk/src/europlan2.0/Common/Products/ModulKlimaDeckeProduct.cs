@@ -9,6 +9,57 @@ namespace Europlan.Common {
 	[ProductName("Modul Klima-Decke")]
 	public class ModulKlimaDeckeProduct : Product {
 
+		public class ModulCeilingConstructionEnumConverter : System.ComponentModel.TypeConverter {
+			private static readonly string kassettenDecke = "Kassettendecke";
+			private static readonly string c_profil = "C-Profil";
+			private static readonly string holzStaffel = "Holzstaffel";
+
+			private Dictionary<string, ModulCeilingConstructionEnum> mappingFromString = new Dictionary<string, ModulCeilingConstructionEnum>();
+			private Dictionary<ModulCeilingConstructionEnum, string> mappingToString = new Dictionary<ModulCeilingConstructionEnum, string>();
+
+			public ModulCeilingConstructionEnumConverter() {
+				mappingFromString.Add(kassettenDecke, ModulCeilingConstructionEnum.KASSETTENDECKE);
+				mappingFromString.Add(c_profil, ModulCeilingConstructionEnum.C_PROFIL);
+				mappingFromString.Add(holzStaffel, ModulCeilingConstructionEnum.HOLZSTAFFEL);
+				mappingToString.Add(ModulCeilingConstructionEnum.KASSETTENDECKE, kassettenDecke);
+				mappingToString.Add(ModulCeilingConstructionEnum.C_PROFIL, c_profil);
+				mappingToString.Add(ModulCeilingConstructionEnum.HOLZSTAFFEL, holzStaffel);
+			}
+
+			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
+				return sourceType == typeof(string);
+			}
+
+			public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
+				return destinationType == typeof(string);
+			}
+
+			public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+				if (value is string) {
+					if (mappingFromString.ContainsKey((string)value)) {
+						return mappingFromString[(string)value];
+					}
+				}
+				return base.ConvertFrom(context, culture, value);
+			}
+
+			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+				if (value is ModulCeilingConstructionEnum && destinationType == typeof(string)) {
+					if (mappingToString.ContainsKey((ModulCeilingConstructionEnum)value)) {
+						return mappingToString[(ModulCeilingConstructionEnum)value];
+					}
+				}
+				return base.ConvertTo(context, culture, value, destinationType);
+			}
+		}
+
+		[System.ComponentModel.TypeConverter(typeof(ModulCeilingConstructionEnumConverter))]
+		public enum ModulCeilingConstructionEnum {
+			KASSETTENDECKE,
+			C_PROFIL,
+			HOLZSTAFFEL
+		}
+
 		// quick dimensioning
 		private static int quickDimensioningHeatPowerPerSquareMeter = 80;
 		private static int quickDimensioningCoolPowerPerSquareMeter = 80;
@@ -47,7 +98,7 @@ namespace Europlan.Common {
 		private static double spreizungHeizMax = 12;
 		private static double spreizungKühlMin = 2;
 		private static double spreizungKühlMax = 5;
-
+		private static ModulCeilingConstructionEnum construction = ModulCeilingConstructionEnum.C_PROFIL;
 
 		public ModulKlimaDeckeProduct() {
 
@@ -76,6 +127,7 @@ namespace Europlan.Common {
 			spreizungHeizMax = 12;
 			spreizungKühlMin = 2;
 			spreizungKühlMax = 5;
+			construction = ModulCeilingConstructionEnum.C_PROFIL;
 		}
 
 		public override Product Clone(Room room) {
@@ -238,6 +290,12 @@ namespace Europlan.Common {
 		public static double ConfigSpreizungKühlMax {
 			get { return spreizungKühlMax; }
 			set { spreizungKühlMax = value; }
+		}
+
+		[ProductParameter]
+		public static int ConfigModulCeilingConstruction {
+			get { return (int)ModulKlimaDeckeProduct.construction; }
+			set { ModulKlimaDeckeProduct.construction = (ModulCeilingConstructionEnum)value; }
 		}
 		#endregion Product Parameters
 
@@ -670,7 +728,17 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-			
+			foreach (ModulDeckeCircuit c in this.circuits) {
+				foreach (ModulDeckeSubArea subArea in c.SubAreas) {
+					foreach (KlimaFlaechenList row in subArea.Rows) {
+						foreach (KlimaFlaechenModul modul in row.List) {
+
+							// Modul
+							Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
+						}
+					}
+				}
+			}
 		}
 	}
 	
