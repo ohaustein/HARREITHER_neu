@@ -304,8 +304,8 @@ namespace Europlan.Common {
 					normKuehlBedarf += room.NormalizedCoolLoad;
 					roomArea += room.Area;
 					foreach (PlannedProduct pp in room.PlannedProducts) {
-						normWaermeBedarfBereinigt += pp.Product.HeatLoadBereinigt;
-						normKuehlBedarfBereinigt += pp.Product.CoolLoadBereinigt;
+						normWaermeBedarfBereinigt += pp.Product.PlannedHeizlastBereinigung;
+						normKuehlBedarfBereinigt += pp.Product.PlannedKuehllastBereinigung;
 
 						plannedFloorArea += pp.Product.PlannedFloorArea;
 						plannedWallArea += pp.Product.PlannedWallArea;
@@ -454,8 +454,8 @@ namespace Europlan.Common {
 							}
 							plannedArea += pp.Product.PlannedFloorArea;
 
-							normWaermeBedarfBereinigt += pp.Product.HeatLoadBereinigt;
-							normKuehlBedarfBereinigt += pp.Product.CoolLoadBereinigt;
+							normWaermeBedarfBereinigt += pp.Product.PlannedHeizlastBereinigung;
+							normKuehlBedarfBereinigt += pp.Product.PlannedKuehllastBereinigung;
 
 							transmissionFloorHeat += pp.Product.TransmissionFloorHeat;
 							transmissionWallHeat += pp.Product.TransmissionWallHeat;
@@ -641,7 +641,7 @@ namespace Europlan.Common {
 				foreach (Room room in floor.Rooms) {
 					normWaermeBedarf = room.HeatLoad;
 					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
-						normWaermeBedarfBereinigt += plannedProduct.Product.HeatLoadBereinigt;
+						normWaermeBedarfBereinigt += plannedProduct.Product.PlannedHeizlastBereinigung;
 						qHeat += plannedProduct.PlannedHeatLoad;
 					}
 
@@ -671,7 +671,7 @@ namespace Europlan.Common {
 				foreach (Room room in floor.Rooms) {
 					normKuehlBedarf = room.CoolLoad;
 					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
-						normKuehlBedarfBereinigt += plannedProduct.Product.CoolLoadBereinigt;
+						normKuehlBedarfBereinigt += plannedProduct.Product.PlannedKuehllastBereinigung;
 						qCool += plannedProduct.PlannedCoolLoad;
 					}
 
