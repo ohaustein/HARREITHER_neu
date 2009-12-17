@@ -10,12 +10,14 @@ namespace Europlan.Common {
 		private static double module_100_30_area = 1.0 * 0.3;
 		private static double module_120_30_area = 1.2 * 0.3;
 		private static double module_80_30_area = 0.8 * 0.3;
+		private static double module_60_60_area = 0.6 * 0.6;
 
 		public class ModulTypeEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string modul_100_40 = "Modul 100/40";
 			private static readonly string modul_100_30 = "Modul 100/30";
 			private static readonly string modul_120_30 = "Modul 120/30";
 			private static readonly string modul_80_30 = "Modul 80/30";
+			private static readonly string modul_60_60 = "Modul 60/60";
 			
 			private Dictionary<string, ModulTypeEnum> mappingFromString = new Dictionary<string, ModulTypeEnum>();
 			private Dictionary<ModulTypeEnum, string> mappingToString = new Dictionary<ModulTypeEnum, string>();
@@ -25,10 +27,12 @@ namespace Europlan.Common {
 				mappingFromString.Add(modul_100_30, ModulTypeEnum.MODUL_100_30);
 				mappingFromString.Add(modul_120_30, ModulTypeEnum.MODUL_120_30);
 				mappingFromString.Add(modul_80_30, ModulTypeEnum.MODUL_80_30);
+				mappingFromString.Add(modul_60_60, ModulTypeEnum.MODUL_60_60);
 				mappingToString.Add(ModulTypeEnum.MODUL_100_40, modul_100_40);
 				mappingToString.Add(ModulTypeEnum.MODUL_100_30, modul_100_30);
 				mappingToString.Add(ModulTypeEnum.MODUL_120_30, modul_120_30);
 				mappingToString.Add(ModulTypeEnum.MODUL_80_30, modul_80_30);
+				mappingToString.Add(ModulTypeEnum.MODUL_60_60, modul_60_60);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -63,7 +67,8 @@ namespace Europlan.Common {
 			MODUL_100_40,
 			MODUL_100_30,
 			MODUL_120_30,
-			MODUL_80_30
+			MODUL_80_30,
+			MODUL_60_60
 		}
 
 		public class ModulOrientationEnumConverter : System.ComponentModel.TypeConverter {
@@ -138,6 +143,50 @@ namespace Europlan.Common {
 			set { this.orientation = value; }
 		}
 
+		public string PartNumber {
+			get {
+				switch (this.modulType) {
+					case ModulTypeEnum.MODUL_100_40:
+						if (orientation == ModulOrientationEnum.ORIENTATION_RIGHT) {
+							return "MK01";
+						} else {
+							return "MK02";
+						}
+
+					case ModulTypeEnum.MODUL_80_30:
+						if (orientation == ModulOrientationEnum.ORIENTATION_RIGHT) {
+							return "MK34";
+						} else {
+							return "MK35";
+						}
+
+					case ModulTypeEnum.MODUL_60_60:
+						if (orientation == ModulOrientationEnum.ORIENTATION_RIGHT) {
+							return "MK40";
+						} else {
+							return "MK40";
+						}
+
+					case ModulTypeEnum.MODUL_100_30:
+						if (orientation == ModulOrientationEnum.ORIENTATION_RIGHT) {
+							return "MK32";
+						} else {
+							return "MK33";
+						}
+
+					case ModulTypeEnum.MODUL_120_30:
+						if (orientation == ModulOrientationEnum.ORIENTATION_RIGHT) {
+							return "MK30";
+						} else {
+							return "MK31";
+						}
+
+					default:
+						return "";
+				}
+			}
+		}
+
 		/*public Nullable<Point> Origin {
 			get { return this.origin; }
 			set { this.origin = value; }
@@ -152,6 +201,9 @@ namespace Europlan.Common {
 
 					case ModulTypeEnum.MODUL_80_30:
 						return KlimaFlaechenModul.module_80_30_area;
+
+					case ModulTypeEnum.MODUL_60_60:
+						return KlimaFlaechenModul.module_60_60_area;
 
 					case ModulTypeEnum.MODUL_100_30:
 						return KlimaFlaechenModul.module_100_30_area;
@@ -177,6 +229,9 @@ namespace Europlan.Common {
 					return EN1264.Instance.DruckverlustModul_100_30(1, durchfluss);
 
 				case ModulTypeEnum.MODUL_120_30:
+					return EN1264.Instance.DruckverlustModul_120_30(1, durchfluss);
+
+				case ModulTypeEnum.MODUL_60_60:
 					return EN1264.Instance.DruckverlustModul_120_30(1, durchfluss);
 
 				default:

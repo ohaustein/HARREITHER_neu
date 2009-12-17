@@ -90,6 +90,10 @@ namespace Europlan.Common {
 		}
 
 		private void InitializeModulDeckeValues() {
+			cmbConstruction.Items.Clear();
+			foreach (ModulKlimaDeckeProduct.ModulCeilingConstructionEnum item in Enum.GetValues(typeof(ModulKlimaDeckeProduct.ModulCeilingConstructionEnum))) {
+				this.cmbConstruction.Items.Add(item);
+			}
 			numModulDeckePressurePa.Value = ModulKlimaDeckeProduct.ConfigMaxPressureLost;
 			numModulDeckeDurchfluss.Value = ModulKlimaDeckeProduct.ConfigMaxDurchfluss;
 			numModulDeckeMaxModulesInRow.Value = ModulKlimaDeckeProduct.ConfigMaxModulesInRow;
@@ -100,6 +104,7 @@ namespace Europlan.Common {
 			numModulDeckeSpreizungHeizMax.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungHeizMax;
 			numModulDeckeSpreizungKuehlMin.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKühlMin;
 			numModulDeckeSpreizungKuehlMax.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKühlMax;
+			cmbConstruction.SelectedItem = (ModulKlimaDeckeProduct.ModulCeilingConstructionEnum)ModulKlimaDeckeProduct.ConfigModulCeilingConstruction;
 		}
 
 		private void InitializeHithermValues() {
@@ -373,6 +378,13 @@ namespace Europlan.Common {
 
 		private void numHithermDurchfluss_ValueChanged(object sender, EventArgs e) {
 			HithermProduct.ConfigMaxDurchfluss = (int)numHithermDurchfluss.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void cmbConstruction_SelectedIndexChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigModulCeilingConstruction = (int)cmbConstruction.SelectedItem;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
