@@ -680,6 +680,8 @@ namespace Europlan.Common {
 							} else if (value.GetType() == typeof(bool)) {
 								bool b = (bool)value;
 								valueStr = b.ToString(CultureInfo.InvariantCulture.NumberFormat);
+							} else if (value.GetType().IsSubclassOf(typeof(Enum))) {
+								valueStr = Enum.GetName(value.GetType(), value);
 							} else {
 								log.Warn("Error when trying to get Product Configuration: Unknown type");
 								continue;
@@ -727,6 +729,12 @@ namespace Europlan.Common {
 										bool val = false;
 										if (bool.TryParse(current[info.Name], out val)) {
 											info.SetValue(null, val, null);
+										} else {
+											log.Warn("Error when trying to set Product Configuration");
+										}
+									} else if (info.PropertyType.IsSubclassOf(typeof(Enum))) {
+										if (Enum.IsDefined(info.PropertyType, current[info.Name])) {
+											info.SetValue(null, Enum.Parse(info.PropertyType, current[info.Name]), null);
 										} else {
 											log.Warn("Error when trying to set Product Configuration");
 										}

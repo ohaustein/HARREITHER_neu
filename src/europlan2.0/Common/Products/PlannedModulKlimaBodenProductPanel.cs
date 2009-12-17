@@ -219,7 +219,7 @@ namespace Europlan.Common {
 					this.numArea.Value = Math.Round((decimal)plannedArea, 2);
 				}
 				if ((skipFields & FieldEnum.AREA_PERCENTAGE) == FieldEnum.NONE) {
-					if (mbProduct.AvailableFloorArea <= 0) {
+					if (mbProduct.AssociatedRoom.Area <= 0) {
 						this.numAreaPercentage.Value = 100;
 					} else {
 						this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / mbProduct.AssociatedRoom.Area), 2);

@@ -92,14 +92,16 @@ namespace Europlan.Common {
 		private double c_qHeatPerSqm;
 		private double c_qCoolPerSqm;
 
+		[XmlIgnore]
 		public double C_QHeatPerSqm {
 			get { return c_qHeatPerSqm; }
-			set { c_qHeatPerSqm = value; }
+			//set { c_qHeatPerSqm = value; }
 		}
 
+		[XmlIgnore]
 		public double C_QCoolPerSqm {
 			get { return c_qCoolPerSqm; }
-			set { c_qCoolPerSqm = value; }
+			//set { c_qCoolPerSqm = value; }
 		}
 
 		private double c_floorTempHeat;
@@ -182,6 +184,25 @@ namespace Europlan.Common {
 			//double rAlphaDeckeFbh = 1 / EurovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
 			//double rAlphaDeckeFbk = 1 / EurovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Kühlung */
 
+			double alphaInnenHeat = 8;
+			double alphaAussenHeat = 8;
+			switch (this.HithermProduct.HithermType) {
+				case Product.ProductType.FBH:
+					alphaInnenHeat = HithermProduct.ConfigAlphaBoden;
+					alphaAussenHeat = HithermProduct.ConfigAlphaDecke;
+					break;
+
+				case Product.ProductType.DH:
+					alphaInnenHeat = HithermProduct.ConfigAlphaDecke;
+					alphaAussenHeat = HithermProduct.ConfigAlphaBoden;
+					break;
+
+				default:
+					alphaInnenHeat = HithermProduct.ConfigAlphaWand;
+					alphaAussenHeat = HithermProduct.ConfigAlphaWand;
+					break;
+			}
+
 			{ // Heizlastberechnung
 				double distributorVorlaufTemp;
 				double distributorRuecklaufTemp;
@@ -206,9 +227,9 @@ namespace Europlan.Common {
 					double heatLoadRegisters = 0;
 					double qU = 0; // TODO
 					foreach (HithermRegister reg in this.registers) {
-						double heatLoad = reg.Heizleistung(heizmittelTemp, this.HithermProduct.AssociatedRoom.RoomHeatTemperature);
+						double heatLoad = reg.Heizleistung(heizmittelTemp, this.HithermProduct.AssociatedRoom.RoomHeatTemperature, alphaInnenHeat);
 						heatLoadRegisters += heatLoad;
-						qU += reg.WaermeverlustHinten(heatLoad, this.HithermProduct.AssociatedRoom.RoomCoolTemperature);
+						qU += reg.WaermeverlustAussen(heatLoad, this.HithermProduct.AssociatedRoom.RoomCoolTemperature, alphaAussenHeat, alphaInnenHeat);
 					}
 					this.c_qHeatPerSqm = heatLoadRegisters / this.RegisterArea;
 					qU = qU / this.RegisterArea;
@@ -274,9 +295,9 @@ namespace Europlan.Common {
 					double coolLoadRegisters = 0;
 					double qU = 0;
 					foreach (HithermRegister reg in this.registers) {
-						double coolLoad = reg.Kuehlleistung(kuehlmittelTemp, this.HithermProduct.AssociatedRoom.RoomCoolTemperature);
+						double coolLoad = reg.Kuehlleistung(kuehlmittelTemp, this.HithermProduct.AssociatedRoom.RoomCoolTemperature, alphaAussenHeat);
 						coolLoadRegisters += coolLoad;
-						qU += reg.KaelteverlustHinten(coolLoad, this.HithermProduct.AssociatedRoom.RoomCoolTemperature);
+						qU += reg.KaelteverlustHinten(coolLoad, this.HithermProduct.AssociatedRoom.RoomCoolTemperature, alphaInnenHeat, alphaAussenHeat);
 					}
 					this.c_qCoolPerSqm = coolLoadRegisters / this.RegisterArea;
 					qU = qU / this.RegisterArea;
@@ -325,7 +346,7 @@ namespace Europlan.Common {
 			get {
 				double bereinigung = 0;
 				foreach (HithermRegister reg in this.registers) {
-					bereinigung += reg.HeizleistungBereinigung();
+					bereinigung += reg.HeizleistungBereinigung(this.HithermProduct.AssociatedRoom.RoomHeatTemperature);
 				}
 				return bereinigung;
 			}
@@ -336,7 +357,7 @@ namespace Europlan.Common {
 			get {
 				double bereinigung = 0;
 				foreach (HithermRegister reg in this.registers) {
-					bereinigung += reg.KuehlleistungBereinigung();
+					bereinigung += reg.KuehlleistungBereinigung(this.HithermProduct.AssociatedRoom.RoomCoolTemperature);
 				}
 				return bereinigung;
 			}

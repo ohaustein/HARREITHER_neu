@@ -252,6 +252,7 @@ namespace Europlan.Common {
 		private double pipeHorizontal = 0.25;
 		private double pipeVertical = 0.5;
 		private HithermWall wall;
+		private String wallId = null;
 
 		/*private Nullable<Point> origin = null;*/
 
@@ -426,41 +427,60 @@ namespace Europlan.Common {
 			}
 		}
 
-		public double Heizleistung(double heizmittelTemp, double roomTemp) {
+		public double Heizleistung(double heizmittelTemp, double roomTemp, double alpha) {
 			double faktor = 1;
-			if (this.wall != null) {
-				faktor = this.wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.wall.DeckschichtValue);
+			if (this.Wall != null) {
+				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
+			faktor = faktor * alpha / HithermProduct.ConfigAlphaWand;
 			return EN1264.Instance.WaermestromDichteRegister(heizmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegHeizleistung : HithermProduct.ConfigStdRegHeizleistung, faktor) * this.Area;
 		}
 
-		public double HeizleistungBereinigung() {
-			// TODO
-			return 0;
-		}
-
-		public double WaermeverlustHinten(double leistung, double roomTemp) {
-			//return EN1264.Instance.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowHeat);
-			// TODO
-			return 0;
-		}
-
-		public double Kuehlleistung(double kuehlmittelTemp, double roomTemp) {
-			double faktor = 1;
-			if (this.wall != null) {
-				faktor = this.wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.wall.DeckschichtValue);
+		public double HeizleistungBereinigung(double roomTemp) {
+			double leistung = 0;
+			if (this.Wall != null && this.Wall.Bereinigen) {
+				leistung = this.Wall.UValueValue * this.Area * (roomTemp - this.Wall.TempBehindHeat);
+				if (leistung < 0) {
+					leistung = 0;
+				}
 			}
+			return leistung;
+		}
+
+		public double WaermeverlustAussen(double leistung, double roomTemp, double alphaAussen, double alphaInnen) {
+			double verlust = 0;
+			if (this.Wall != null) {
+				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaInnen, roomTemp, this.Wall.TempBehindHeat);
+			}
+			return verlust;
+		}
+
+		public double Kuehlleistung(double kuehlmittelTemp, double roomTemp, double alpha) {
+			double faktor = 1;
+			if (this.Wall != null) {
+				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
+			}
+			faktor = faktor * alpha / HithermProduct.ConfigAlphaWand;
 			return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegKuehlleistung : HithermProduct.ConfigStdRegKuehlleistung, faktor) * this.Area;
 		}
 
-		public double KuehlleistungBereinigung() {
-			// TODO
-			return 0;
+		public double KuehlleistungBereinigung(double roomTemp) {
+			double leistung = 0;
+			if (this.Wall != null && this.Wall.Bereinigen) {
+				leistung = this.Wall.UValueValue * this.Area * (this.Wall.TempBehindCool - roomTemp);
+				if (leistung < 0) {
+					leistung = 0;
+				}
+			}
+			return leistung;
 		}
 
-		public double KaelteverlustHinten(double leistung, double roomTemp) {
-			// TODO
-			return 0;
+		public double KaelteverlustHinten(double leistung, double roomTemp, double alphaAussen, double alphaInnen) {
+			double verlust = 0;
+			if (this.Wall != null) {
+				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaInnen, roomTemp, this.Wall.TempBehindCool);
+			}
+			return verlust;
 		}
 
 		public double Druckverlust(double durchfluss) {
@@ -517,8 +537,26 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public HithermWall Wall {
-			get { return this.wall; }
-			set { this.wall = value; }
+			get {
+				if (this.wallId != null) {
+					foreach (HithermWall hw in Project.Instance.HithermWalls) {
+						if (hw.Id == this.wallId) {
+							this.wall = hw;
+						}
+					}
+					this.wallId = null;
+				}
+				return this.wall; 
+			}
+			set {
+				this.wallId = null;
+				this.wall = value; 
+			}
+		}
+
+		public string WallId {
+			get { return this.Wall != null ? this.Wall.Id : null; }
+			set { this.wallId = value; }
 		}
 	}
 }

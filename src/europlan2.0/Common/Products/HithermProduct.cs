@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using System.Globalization;
 
 namespace Europlan.Common {
 
@@ -65,6 +66,12 @@ namespace Europlan.Common {
 		private static double[] beplankungRWerte = { 0, 0.01, 0.02, 0.1 };
 		private static double[] beplankungFaktoren = { 1, 0.95, 0.91, 0.66 };
 
+		private static double alphaBoden = 10.8;
+		private static double alphaWand = 8;
+		private static double alphaDecke = 6.5;
+
+		private static double defaultDaemmung = 2.5;
+
 		/*private static double factorSpezialputz = 1.15;
 		private static double factorMaschinenputz = 1.0;
 		private static double factorLehmputz = 0.95;
@@ -73,6 +80,11 @@ namespace Europlan.Common {
 
 		private Dictionary<HithermRegister, int> registerCircuits = new Dictionary<HithermRegister, int>();
 		private Dictionary<int, HithermCircuit> circuitIds = new Dictionary<int, HithermCircuit>();
+
+		private ProductType hithermType = ProductType.WH;
+		private float plannedFloorArea = 0;
+		private float plannedCeilingArea = 0;
+		private float plannedFloorOrCeilingArea = 0;
 
 		public HithermProduct() {
 
@@ -189,7 +201,7 @@ namespace Europlan.Common {
 			string[] strValues = str.Substring(1, str.Length - 2).Trim().Split(',');
 			foreach (string strValue in strValues) {
 				double doubleValue;
-				if (!double.TryParse(strValue.Trim(), out doubleValue)) {
+				if (!double.TryParse(strValue.Trim(), NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out doubleValue)) {
 					// log warning
 					return null;
 				}
@@ -233,7 +245,7 @@ namespace Europlan.Common {
 				string[] strValues = str.Substring(1, end - 1).Trim().Split(',');
 				foreach (string strValue in strValues) {
 					double doubleValue;
-					if (!double.TryParse(strValue.Trim(), out doubleValue)) {
+					if (!double.TryParse(strValue.Trim(), NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out doubleValue)) {
 						// log warning
 						return null;
 					}
@@ -378,6 +390,30 @@ namespace Europlan.Common {
 			set { beplankungFaktoren = value; }
 		}
 
+		[ProductParameter]
+		public static double ConfigAlphaBoden {
+			get { return alphaBoden; }
+			set { alphaBoden = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaWand {
+			get { return alphaWand; }
+			set { alphaWand = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaDecke {
+			get { return alphaDecke; }
+			set { alphaDecke = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigDefaultDaemmung {
+			get { return defaultDaemmung; }
+			set { defaultDaemmung = value; }
+		}
+
 		/*[ProductParameter]
 		public static double ConfigFactorSpezialputz {
 			get { return factorSpezialputz; }
@@ -450,7 +486,12 @@ namespace Europlan.Common {
 		}
 
 		public override ProductType Type {
-			get { return ProductType.WH; }
+			get { return this.hithermType; }
+		}
+
+		public ProductType HithermType {
+			get { return this.hithermType; }
+			set { this.hithermType = value; }
 		}
 
 		public override void CalculateHeatAndCoolFlow() {
@@ -593,18 +634,57 @@ namespace Europlan.Common {
 		}
 
 		public override float PlannedFloorArea {
-			get { return 0; }
-			set { }
+			get {
+				if (this.hithermType == ProductType.FBH) {
+					return this.plannedFloorArea;
+				}
+				return 0;
+			}
+			set {
+				if (this.hithermType == ProductType.FBH) {
+					this.plannedFloorArea = value;
+				}
+			}
 		}
 
 		public override float PlannedWallArea {
-			get { return this.PlannedNetArea; }
+			get {
+				if (this.hithermType == ProductType.WH) {
+					return this.PlannedNetArea;
+				}
+				return 0;
+			}
 			set { }
 		}
 
 		public override float PlannedCeilingArea {
-			get { return 0; }
-			set { }
+			get {
+				if (this.hithermType == ProductType.DH) {
+					return this.plannedCeilingArea;
+				}
+				return 0;
+			}
+			set {
+				if (this.hithermType == ProductType.DH) {
+					this.plannedCeilingArea = value;
+				}
+			}
+		}
+
+		// Not to be used in code! This property is only intended to be used for (de)serializing
+		public float PlannedFloorOrCeilingArea {
+			get {
+				if (this.hithermType == ProductType.DH) {
+					return this.plannedCeilingArea;
+				}
+				if (this.hithermType == ProductType.FBH) {
+					return this.plannedFloorArea;
+				}
+				return 0;
+			}
+			set {
+				this.plannedFloorOrCeilingArea = value;
+			}
 		}
 
 		public override double PlannedCoolLoad {
@@ -744,6 +824,25 @@ namespace Europlan.Common {
 
 		internal override void FinalizeLoading(PlannedProduct pp) {
 			base.FinalizeLoading(pp);
+			switch (this.hithermType) {
+				case ProductType.FBH:
+					this.plannedFloorArea = this.plannedFloorOrCeilingArea;
+					this.plannedFloorOrCeilingArea = 0;
+					this.plannedCeilingArea = 0;
+					break;
+
+				case ProductType.DH:
+					this.plannedCeilingArea = this.plannedFloorOrCeilingArea;
+					this.plannedFloorOrCeilingArea = 0;
+					this.plannedFloorArea = 0;
+					break;
+
+				default:
+					this.plannedCeilingArea = 0;
+					this.plannedFloorOrCeilingArea = 0;
+					this.plannedFloorArea = 0;
+					break;
+			}
 			if (pp != null) {
 				int i = 1;
 				foreach (HithermCircuit hc in this.circuits) {
@@ -780,6 +879,42 @@ namespace Europlan.Common {
 					bereinigung += hc.KuehlleistungBereinigung;
 				}
 				return bereinigung;
+			}
+		}
+
+		/// <summary>
+		/// The percentage of the total room area that is occupied by the planned area.
+		/// </summary>
+		[XmlIgnore]
+		public float PlannedFloorAreaPercentage {
+			get {
+				if (this.hithermType != ProductType.FBH) {
+					return 0;
+				}
+				return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AssociatedRoom.Area);
+			}
+			set {
+				if (this.hithermType == ProductType.FBH) {
+					this.PlannedFloorArea = (float)(this.AssociatedRoom.Area * value / 100);
+				}
+			}
+		}
+
+		/// <summary>
+		/// The percentage of the total room area that is occupied by the planned area.
+		/// </summary>
+		[XmlIgnore]
+		public float PlannedCeilingAreaPercentage {
+			get {
+				if (this.hithermType != ProductType.DH) {
+					return 0;
+				}
+				return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedCeilingArea * 100 / this.AssociatedRoom.Area);
+			}
+			set {
+				if (this.hithermType == ProductType.DH) {
+					this.PlannedCeilingArea = (float)(this.AssociatedRoom.Area * value / 100);
+				}
 			}
 		}
 	}
