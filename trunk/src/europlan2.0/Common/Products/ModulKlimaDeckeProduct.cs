@@ -802,7 +802,7 @@ namespace Europlan.Common {
 
 				// Holzstaffel
 				if (modulArea > 0) {
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", modulArea * 3);
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", modulArea * 3);
 				}
 			} else {
 				// Winkel 90°
