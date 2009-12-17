@@ -320,7 +320,7 @@ namespace Europlan.Common {
 				this.c_qAzHeatPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz) * factor;                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
 
 				double qAverage = this.QFbhTotalHeat / this.AreaWithoutConnections;
-				double qU = en1264.WaermeverlustUnten(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowHeat);
+				double qU = en1264.WaermeverlustAussen(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomHeatTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowHeat);
 
 				// hydraulische Berechnung
 				this.c_Qh2oHeat = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
@@ -404,7 +404,7 @@ namespace Europlan.Common {
 				this.c_qAzCoolPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz) * factor;                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
 
 				double qAverage = -this.QFbhTotalCool / this.AreaWithoutConnections;
-				double qU = en1264.WaermeverlustUnten(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowCool);
+				double qU = en1264.WaermeverlustAussen(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.EurovalProduct.AssociatedRoom.RoomCoolTemperature, this.EurovalProduct.PlannedRoomTemperatureBelowCool);
 
 				// hydraulische Berechnung
 				//this.c_Qh2oCool = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen

@@ -25,6 +25,8 @@ namespace Europlan.Common {
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_200_5);
 			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_250_5);
 			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_5);
+			this.cmbType.Items.Add(Product.ProductType.WH);
+			this.cmbType.Items.Add(Product.ProductType.DH);
 		}
 
 		#region IEditorUserControl Members
@@ -51,6 +53,7 @@ namespace Europlan.Common {
 			CIRCUITS = 32768,
 			REGISTER = 65536,
 			WALLS = 131072,
+			TYPE = 262144,
 		}
 
 
@@ -83,6 +86,7 @@ namespace Europlan.Common {
 		private int ignoreCircuits = 0;
 		private int ignoreLengthVerbindungen = 0;
 		private int ignoreRegisters = 0;
+		private int ignoreType = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
@@ -101,6 +105,7 @@ namespace Europlan.Common {
 				ignoreCircuits++;
 				ignoreLengthVerbindungen++;
 				ignoreRegisters++;
+				ignoreType++;
 
 				HithermProduct hp = this.product.Product as HithermProduct;
 
@@ -138,8 +143,39 @@ namespace Europlan.Common {
 				lblDruckverlustCool.Visible = showCoolCircuit;
 				lblDruckverlustCoolUnit.Visible = showCoolCircuit;
 
+				if ((skipFields & FieldEnum.TYPE) == FieldEnum.NONE) {
+					this.cmbType.SelectedItem = hp.HithermType;
+				}
+
+				bool showArea = hp.HithermType == Product.ProductType.DH || hp.HithermType == Product.ProductType.FBH;
+				if (showArea) {
+					this.grpPowerArea.Height = 121;
+				} else {
+					this.grpPowerArea.Height = 98;
+				}
+				this.lblAreaTxt.Visible = showArea;
+				this.numArea.Visible = showArea;
+				this.lblAreaUnit.Visible = showArea;
+				this.numAreaPercentage.Visible = showArea;
+				this.lblAreaPercentage.Visible = showArea;
+
 				this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
 				this.numHeatLoadPercentage.MaxValue = (decimal)(hp.AssociatedRoom.NormalizedHeatLoad <= 0 ? 0 : this.product.NecessaryHeatLoad * 100 / hp.AssociatedRoom.NormalizedHeatLoad);
+
+				switch (hp.HithermType) {
+					case Product.ProductType.FBH:
+						this.numArea.MaxValue = (decimal)hp.AvailableFloorArea;
+						this.numAreaPercentage.MaxValue = (decimal)(hp.AvailableFloorArea * 100 / hp.AssociatedRoom.Area);
+						break;
+					case Product.ProductType.DH:
+						this.numArea.MaxValue = (decimal)hp.AvailableCeilingArea;
+						this.numAreaPercentage.MaxValue = (decimal)(hp.AvailableCeilingArea * 100 / hp.AssociatedRoom.Area);
+						break;
+					default:
+						//this.numArea.MaxValue = (decimal)0;
+						//this.numAreaPercentage.MaxValue = (decimal)0;
+						break;
+				}
 
 				if (this.product.NecessaryHeatLoad > 0) {
 					this.chkCoverHeatLoad.Enabled = true;
@@ -199,6 +235,29 @@ namespace Europlan.Common {
 				}
 				this.lblHeatLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedHeatLoad.ToString() + " W)";
 				this.lblCoolLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedCoolLoad.ToString() + " W)";
+				float plannedArea = (float)(this.product.PlannedArea.HasValue ? Math.Round(this.product.PlannedArea.Value, 2) : 0);
+				if ((skipFields & FieldEnum.AREA) == FieldEnum.NONE) {
+					if (hp.HithermType == Product.ProductType.FBH) {
+						this.numArea.Value = Math.Round((decimal)plannedArea, 2);
+					} else if (hp.HithermType == Product.ProductType.DH) {
+						this.numArea.Value = Math.Round((decimal)plannedArea, 2);
+					}
+				}
+				if ((skipFields & FieldEnum.AREA_PERCENTAGE) == FieldEnum.NONE) {
+					if (hp.HithermType == Product.ProductType.FBH) {
+						if (hp.AssociatedRoom.Area <= 0) {
+							this.numAreaPercentage.Value = 100;
+						} else {
+							this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / hp.AssociatedRoom.Area), 2);
+						}
+					} else if (hp.HithermType == Product.ProductType.DH) {
+						if (hp.AssociatedRoom.Area <= 0) {
+							this.numAreaPercentage.Value = 100;
+						} else {
+							this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / hp.AssociatedRoom.Area), 2);
+						}
+					}
+				}
 
 				if ((skipFields & FieldEnum.REGISTER) == FieldEnum.NONE) {
 					List<HithermRegister> allRegisters = new List<HithermRegister>();
@@ -215,12 +274,12 @@ namespace Europlan.Common {
 				double qDiffCool = this.product.PlannedCoolLoad - this.product.RequestedCoolLoad;
 
 				lblRest.Text = "Rest (" + this.product.Product.AssociatedRoom.ToString() + ")";
-				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 2).ToString();
-				lblQHeatDiff.Text = Math.Round(qDiffHeat, 2).ToString();
-				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString();
-				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
-				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 2).ToString();
-				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString();
+				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 0).ToString();
+				lblQHeatDiff.Text = Math.Round(qDiffHeat, 0).ToString();
+				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 0).ToString();
+				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 0).ToString();
+				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 0).ToString();
+				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 0).ToString();
 				lblCoveredArea.Text = Math.Round(hp.PlannedWallArea, 2).ToString();
 				lblNecessaryWaermestromdichte.Text = (hp.PlannedWallArea > 0) ? Math.Round(this.product.RequestedHeatLoad / hp.PlannedWallArea, 2).ToString() : "--";
 				lblNecessaryArea.Text = (hp.PlannedHeatLoad > 0 && hp.PlannedWallArea > 0) ? Math.Round(this.product.RequestedHeatLoad / (hp.PlannedHeatLoad / hp.PlannedWallArea), 2).ToString() : "--";
@@ -279,6 +338,7 @@ namespace Europlan.Common {
 				ignoreCircuits--;
 				ignoreLengthVerbindungen--;
 				ignoreRegisters--;
+				ignoreType--;
 			}
 			// TODO
 		}
@@ -525,7 +585,9 @@ namespace Europlan.Common {
 		}
 
 		private void dgvRegisters_SelectionChanged(object sender, EventArgs e) {
-			this.UpdateControl(FieldEnum.REGISTER);
+			if (this.ignoreRegisters == 0) {
+				this.UpdateControl(FieldEnum.REGISTER);
+			}
 		}
 
 		private void chkStellAntriebe_CheckedChanged(object sender, EventArgs e) {
@@ -565,6 +627,72 @@ namespace Europlan.Common {
 				}
 			}
 			form.Dispose();
+		}
+
+		private void numArea_ValueChanged(object sender, EventArgs e) {
+			if (ignoreArea == 0) {
+				ignoreAreaPercentage++;
+				if (this.product.Product.Type == Product.ProductType.FBH) {
+					(this.product.Product as HithermProduct).PlannedFloorArea = (float)this.numArea.Value;
+					this.numAreaPercentage.Value = (decimal)(this.product.Product as HithermProduct).PlannedFloorAreaPercentage;
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+					this.errorMsg = this.product.Product.LastErrorMessage;
+					this.UpdateControl(FieldEnum.AREA);
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
+					}
+				} else if (this.product.Product.Type == Product.ProductType.DH) {
+					(this.product.Product as HithermProduct).PlannedCeilingArea = (float)this.numArea.Value;
+					this.numAreaPercentage.Value = (decimal)(this.product.Product as HithermProduct).PlannedCeilingAreaPercentage;
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+					this.errorMsg = this.product.Product.LastErrorMessage;
+					this.UpdateControl(FieldEnum.AREA);
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
+					}
+				}
+				ignoreAreaPercentage--;
+			}
+		}
+
+		private void numAreaPercentage_ValueChanged(object sender, EventArgs e) {
+			if (ignoreAreaPercentage == 0) {
+				ignoreArea++;
+				if (this.product.Product.Type == Product.ProductType.FBH) {
+					(this.product.Product as HithermProduct).PlannedFloorAreaPercentage = (float)this.numAreaPercentage.Value;
+					this.numArea.Value = (decimal)this.product.PlannedArea;
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+					this.errorMsg = this.product.Product.LastErrorMessage;
+					this.UpdateControl(FieldEnum.AREA_PERCENTAGE);
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
+					}
+				} else if (this.product.Product.Type == Product.ProductType.DH) {
+					(this.product.Product as HithermProduct).PlannedCeilingAreaPercentage = (float)this.numAreaPercentage.Value;
+					this.numArea.Value = (decimal)this.product.PlannedArea;
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+					this.errorMsg = this.product.Product.LastErrorMessage;
+					this.UpdateControl(FieldEnum.AREA_PERCENTAGE);
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
+					}
+				}
+				ignoreArea--;
+			}
+		}
+
+		private void cmbType_SelectedValueChanged(object sender, EventArgs e) {
+			if (ignoreType == 0) {
+				if (this.cmbType.SelectedItem is Product.ProductType && this.product.Product.Type != (Product.ProductType)this.cmbType.SelectedItem) {
+					(this.product.Product as HithermProduct).HithermType = (Product.ProductType)this.cmbType.SelectedItem;
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+					this.errorMsg = this.product.Product.LastErrorMessage;
+					this.UpdateControl(FieldEnum.AREA_PERCENTAGE);
+					if (this.ProjectStructureChanged != null) {
+						this.ProjectStructureChanged(this);
+					}
+				}
+			}
 		}
 	}
 }

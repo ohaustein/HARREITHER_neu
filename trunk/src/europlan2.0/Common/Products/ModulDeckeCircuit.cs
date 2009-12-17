@@ -98,14 +98,16 @@ namespace Europlan.Common {
 		private double c_qHeatPerSqm;
 		private double c_qCoolPerSqm;
 
+		[XmlIgnore]
 		public double C_QHeatPerSqm {
 			get { return c_qHeatPerSqm; }
-			set { c_qHeatPerSqm = value; }
+			//set { c_qHeatPerSqm = value; }
 		}
 
+		[XmlIgnore]
 		public double C_QCoolPerSqm {
 			get { return c_qCoolPerSqm; }
-			set { c_qCoolPerSqm = value; }
+			//set { c_qCoolPerSqm = value; }
 		}
 
 		//private double c_floorTempHeat;
@@ -216,7 +218,7 @@ namespace Europlan.Common {
 					double ab = en1264.abFlaeche(b, au, atmt, rLambdaB);
 					this.c_qHeatPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta) * leistungsFaktor;
 
-					double qU = en1264.WaermeverlustUnten(alphaDh, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qHeatPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
+					double qU = en1264.WaermeverlustAussen(alphaDh, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qHeatPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
 
 					// hydraulische Berechnung
 					this.c_Qh2oHeat = (this.c_qHeatPerSqm + qU) * this.ModulArea;            // gesamte aufgenommene Leistung berechnen
@@ -282,7 +284,7 @@ namespace Europlan.Common {
 					double ab = en1264.abFlaeche(b, au, atmt, rLambdaB);
 					this.c_qCoolPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta) * leistungsFaktor;
 
-					double qU = en1264.WaermeverlustUnten(alphaDh, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qCoolPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
+					double qU = en1264.WaermeverlustAussen(alphaDh, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qCoolPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
 
 					// hydraulische Berechnung
 					this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.ModulArea;            // gesamte aufgenommene Leistung berechnen

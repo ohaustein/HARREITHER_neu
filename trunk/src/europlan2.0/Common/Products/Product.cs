@@ -18,6 +18,54 @@ namespace Europlan.Common {
 		public static readonly double rundrohr21mmInnenD = 0.0162;
 		public static readonly double rundrohr21mmInnenA = (rundrohr21mmInnenD / 2) * (rundrohr21mmInnenD / 2) * Math.PI;
 
+		public class ProductTypeEnumConverter : System.ComponentModel.TypeConverter {
+			private static readonly string dh = "Decke";
+			private static readonly string fbh = "Boden";
+			private static readonly string rest = "Rest";
+			private static readonly string wh = "Wand";
+
+			private Dictionary<string, ProductType> mappingFromString = new Dictionary<string, ProductType>();
+			private Dictionary<ProductType, string> mappingToString = new Dictionary<ProductType, string>();
+
+			public ProductTypeEnumConverter() {
+				mappingFromString.Add(dh, ProductType.DH);
+				mappingFromString.Add(fbh, ProductType.FBH);
+				mappingFromString.Add(rest, ProductType.REST);
+				mappingFromString.Add(wh, ProductType.WH);
+				mappingToString.Add(ProductType.DH, dh);
+				mappingToString.Add(ProductType.FBH, fbh);
+				mappingToString.Add(ProductType.REST, rest);
+				mappingToString.Add(ProductType.WH, wh);
+			}
+
+			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
+				return sourceType == typeof(string);
+			}
+
+			public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
+				return destinationType == typeof(string);
+			}
+
+			public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+				if (value is string) {
+					if (mappingFromString.ContainsKey((string)value)) {
+						return mappingFromString[(string)value];
+					}
+				}
+				return base.ConvertFrom(context, culture, value);
+			}
+
+			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+				if (value is ProductType && destinationType == typeof(string)) {
+					if (mappingToString.ContainsKey((ProductType)value)) {
+						return mappingToString[(ProductType)value];
+					}
+				}
+				return base.ConvertTo(context, culture, value, destinationType);
+			}
+		}
+
+		[System.ComponentModel.TypeConverter(typeof(ProductTypeEnumConverter))]
 		public enum ProductType {
 			FBH,
 			WH,

@@ -231,6 +231,7 @@ namespace Europlan.Common {
 					if (!pp.PlannedHeatLoad.Equals(double.NaN)) {
 						covered += pp.PlannedHeatLoad;
 					}
+					covered += pp.Product.PlannedHeizlastBereinigung;
 				}
 				return covered - this.NormalizedHeatLoad;
 			}
@@ -249,6 +250,7 @@ namespace Europlan.Common {
 					if (!pp.PlannedCoolLoad.Equals(double.NaN)) {
 						covered += pp.PlannedCoolLoad;
 					}
+					covered += pp.Product.PlannedKuehllastBereinigung;
 				}
 				return covered - this.NormalizedCoolLoad;
 			}

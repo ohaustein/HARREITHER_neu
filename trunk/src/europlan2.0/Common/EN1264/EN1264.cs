@@ -270,18 +270,29 @@ namespace Europlan.Common {
 			return (Math.Pow(luftFeuchte, 0.12468828) * (raumTemperatur + 109.8)) - 109.8;
 		}
 
-		public double WaermeverlustUnten(double alpha, double RlambdaB, double sU, double lambdaU, double RalphaDecke, double RlambdaIns, double RlambdaDecke, double RlambdaPutz, double q, double innenTemperatur, double untenTemperatur) {
+		public double WaermeverlustAussen(double alpha, double RlambdaB, double sU, double lambdaU, double RalphaDecke, double RlambdaIns, double RlambdaDecke, double RlambdaPutz, double q, double innenTemperatur, double untenTemperatur) {
 			//double Ro = (1.0 / alpha) + RlambdaB + (sU / lambdaU);
 			double Ru = RlambdaIns + RlambdaDecke + RlambdaPutz + RalphaDecke;
 			//double qu = (1.0 / Ru) * ((Ro * q) + innenTemperatur - untenTemperatur);
 			//return qu;
-			return WaermeverlustUnten(alpha, RlambdaB, sU, lambdaU, Ru, q, innenTemperatur, untenTemperatur);
+			return WaermeverlustAussen(alpha, RlambdaB, sU, lambdaU, Ru, q, innenTemperatur, untenTemperatur);
 		}
 
-		public double WaermeverlustUnten(double alpha, double RlambdaB, double sU, double lambdaU, double Ru, double q, double innenTemperatur, double untenTemperatur) {
+		public double WaermeverlustAussen(double alpha, double RlambdaB, double sU, double lambdaU, double Ru, double q, double innenTemperatur, double untenTemperatur) {
 			double Ro = (1.0 / alpha) + RlambdaB + (sU / lambdaU);
 			double qu = (1.0 / Ru) * ((Ro * q) + innenTemperatur - untenTemperatur);
 			return qu;
+		}
+
+		public double WaermeverlustAussen(double q, double rI, double rA, double innenTemperatur, double aussenTemperatur) {
+			double qA = (1.0 / rA) * ((rI * q) + innenTemperatur - aussenTemperatur);
+			return qA;
+		}
+
+		public double WaermeverlustAussen(double q, double alphaInnen, double rConstrInnen, double alphaAussen, double rDaemmungAussen, double temperaturInnen, double temperaturAussen) {
+			double rI = 1.0 / alphaInnen + rConstrInnen;
+			double rA = 1.0 / alphaAussen + rDaemmungAussen;
+			return WaermeverlustAussen(q, rI, rA, temperaturInnen, temperaturAussen);
 		}
 
 		public double Durchfluss(double leistung, double c, double spreizung) {
