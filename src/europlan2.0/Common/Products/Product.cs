@@ -763,7 +763,9 @@ namespace Europlan.Common {
 		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung);
 
 		internal virtual void FinalizeLoading(PlannedProduct pp) {
-			// nothing todo
+			foreach (Circuit c in this.circuits) {
+				c.FinalizeLoading();
+			}
 		}
 
 		protected void CalculateVorlaufRuecklauf(out double[] vorlaufTotal, out double[] vorlaufNotIsolated, out double[] ruecklaufTotal, out double[] ruecklaufNotIsolated, out double[] vorlaufWithoutOtherProductTotal, out double[] vorlaufWithoutOtherProductNotIsolated, out double[] ruecklaufWithoutOtherProductTotal, out double[] ruecklaufWithoutOtherProductNotIsolated, out double longestVorlaufTotal, out double longestRuecklaufTotal) {

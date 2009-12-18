@@ -687,11 +687,17 @@ namespace Europlan.Common {
 					(this.product.Product as HithermProduct).HithermType = (Product.ProductType)this.cmbType.SelectedItem;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
-					this.UpdateControl(FieldEnum.AREA_PERCENTAGE);
+					this.UpdateControl(FieldEnum.TYPE);
 					if (this.ProjectStructureChanged != null) {
 						this.ProjectStructureChanged(this);
 					}
 				}
+			}
+		}
+
+		private void hithermWallGrid1_WallChanged(object sender, HithermWallGrid.WallEventArgs e) {
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
 			}
 		}
 	}

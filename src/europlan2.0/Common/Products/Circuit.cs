@@ -275,5 +275,9 @@ namespace Europlan.Common {
 		}
 
 		#endregion Anbindung
+
+		internal virtual void FinalizeLoading() {
+			// nothing to do
+		}
 	}
 }
