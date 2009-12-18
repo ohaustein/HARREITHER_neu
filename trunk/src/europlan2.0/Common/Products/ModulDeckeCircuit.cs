@@ -11,6 +11,8 @@ namespace Europlan.Common {
 		private List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
 
 		public ModulDeckeCircuit() {
+			// A circuit needs to have at least one subarea so add this subarea by default,
+			// if this circuit is deserialized this subarea will be deleted again in FinalizeLoading
 			this.subAreas.Add(new ModulDeckeSubArea());
 		}
 	
@@ -328,6 +330,17 @@ namespace Europlan.Common {
 
 					//this.c_floorTempCool = en1264.OberflaechenTemperatur(this.c_qCoolPerSqm, ModulKlimaDeckeProduct.ConfigAlphaFbk, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomCoolTemperature);
 				}
+			}
+		}
+
+		internal override void FinalizeLoading() {
+			base.FinalizeLoading();
+			// If this circuit is deserialized remove the subarea that was added by default
+			if (this.SubAreas.Count > 0) {
+				this.SubAreas.RemoveAt(0);
+			}
+			foreach (ModulDeckeSubArea sa in this.SubAreas) {
+				sa.FinalizeLoading();
 			}
 		}
 	}

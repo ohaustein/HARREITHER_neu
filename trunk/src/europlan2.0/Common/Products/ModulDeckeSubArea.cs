@@ -8,6 +8,8 @@ namespace Europlan.Common {
 		private List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
 
 		public ModulDeckeSubArea() {
+			// A subarea needs to have at least one row so add this row by default,
+			// if this subarea is deserialized this row will be deleted again in FinalizeLoading
 			this.rows.Add(new KlimaFlaechenList());
 		}
 
@@ -47,6 +49,13 @@ namespace Europlan.Common {
 					}
 				}
 				return length;
+			}
+		}
+
+		internal void FinalizeLoading() {
+			// If this subarea is deserialized remove the row that was added by default
+			if (this.rows.Count > 0) {
+				this.rows.RemoveAt(0);
 			}
 		}
 	}

@@ -26,6 +26,16 @@ namespace Europlan.Common {
 			this.hithermWallBindingSource.DataSource = walls;*/
 		}
 
+		public class WallEventArgs : EventArgs {
+			public HithermWall wall;
+			public WallEventArgs(HithermWall wall) {
+				this.wall = wall;
+			}
+		}
+		public event EventHandler<WallEventArgs> WallChanged;
+		public event EventHandler<WallEventArgs> WallAdded;
+		public event EventHandler<WallEventArgs> WallRemoved;
+
 		public List<HithermWall> Walls {
 			get { return this.hithermWallBindingSource.DataSource as List<HithermWall>; }
 			set {
@@ -90,10 +100,12 @@ namespace Europlan.Common {
 			e.Row.Cells[this.nameDataGridViewTextBoxColumn.Index].Value = "Neue Wandkonstruktion";
 			int maxId = 0;
 			int newId;
-			foreach (HithermWall hw in this.hithermWallBindingSource.DataSource as List<HithermWall>) {
-				if (hw.Id != null && hw.Id.StartsWith("USW")) {
-					if (Int32.TryParse(hw.Id.Substring(3), out newId) && newId > maxId) {
-						maxId = newId;
+			if (this.hithermWallBindingSource.DataSource != null) {
+				foreach (HithermWall hw in this.hithermWallBindingSource.DataSource as List<HithermWall>) {
+					if (hw.Id != null && hw.Id.StartsWith("USW")) {
+						if (Int32.TryParse(hw.Id.Substring(3), out newId) && newId > maxId) {
+							maxId = newId;
+						}
 					}
 				}
 			}
@@ -101,6 +113,61 @@ namespace Europlan.Common {
 			e.Row.Cells[this.idDataGridViewTextBoxColumn.Index].Value = "USW" + maxId.ToString("00");
 			e.Row.Cells[this.tempBehindCoolDataGridViewTextBoxColumn.Index].Value = 30.0;
 			e.Row.Cells[this.tempBehindHeatDataGridViewTextBoxColumn.Index].Value = -16.0;
+		}
+
+		private void dgvWalls_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+			if (Project.Instance != null) {
+				foreach (Floor f in Project.Instance.Floors) {
+					foreach (Room r in f.Rooms) {
+						foreach (PlannedProduct pp in r.PlannedProducts) {
+							if (pp.Product is HithermProduct) {
+								HithermProduct hp = pp.Product as HithermProduct;
+								hp.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+							}
+						}
+					}
+				}
+			}
+			if (this.WallChanged != null) {
+				if (this.WallChanged != null) {
+					this.WallChanged(this, new WallEventArgs(this.dgvWalls.Rows[e.RowIndex].DataBoundItem as HithermWall));
+				}
+			}
+		}
+
+		private void dgvWalls_UserAddedRow(object sender, DataGridViewRowEventArgs e) {
+			if (this.WallAdded != null) {
+				this.WallAdded(this, new WallEventArgs(e.Row.DataBoundItem as HithermWall));
+			}
+		}
+
+		private void dgvWalls_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
+			if (Project.Instance != null) {
+				HithermWall newWall = null;
+				if (Project.Instance.HithermWalls.Count > 0) {
+					newWall = Project.Instance.HithermWalls[0];
+				}
+				foreach (Floor f in Project.Instance.Floors) {
+					foreach (Room r in f.Rooms) {
+						foreach (PlannedProduct pp in r.PlannedProducts) {
+							if (pp.Product is HithermProduct) {
+								HithermProduct hp = pp.Product as HithermProduct;
+								foreach (HithermCircuit hc in hp.PlannedCircuits) {
+									foreach (HithermRegister hr in hc.Registers) {
+										if (hr.Wall == e.Row.DataBoundItem) {
+											hr.Wall = newWall;
+										}
+									}
+								}
+								hp.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+							}
+						}
+					}
+				}
+			}
+			if (this.WallRemoved != null) {
+				this.WallRemoved(this, new WallEventArgs(e.Row.DataBoundItem as HithermWall));
+			}
 		}
 	}
 }

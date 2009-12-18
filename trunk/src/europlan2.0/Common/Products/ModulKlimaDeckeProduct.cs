@@ -814,8 +814,6 @@ namespace Europlan.Common {
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOf60Elements * 4);
 				}
 			}
-
-
 		}
 	}
 	
