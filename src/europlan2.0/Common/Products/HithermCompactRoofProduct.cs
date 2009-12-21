@@ -79,7 +79,7 @@ namespace Europlan.Common {
 		}
 
 		public override ProductType Type {
-			get { return ProductType.DH; }
+			get { return ProductType.DSH; }
 		}
 	}
 

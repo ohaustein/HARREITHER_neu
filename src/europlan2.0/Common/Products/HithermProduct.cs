@@ -193,103 +193,6 @@ namespace Europlan.Common {
 			set { maxDurchfluss = value; }
 		}
 
-		private static double[] ConvertStringToArray(string value) {
-			string str = value.Trim();
-			if (!str.StartsWith("{") || !str.EndsWith("}")) {
-				// log warning
-				return null;
-			}
-			List<double> list = new List<double>();
-			string[] strValues = str.Substring(1, str.Length - 2).Trim().Split(',');
-			foreach (string strValue in strValues) {
-				double doubleValue;
-				if (!double.TryParse(strValue.Trim(), NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out doubleValue)) {
-					// log warning
-					return null;
-				}
-				list.Add(doubleValue);
-			}
-			double[] array = new double[list.Count];
-			int j = 0;
-			foreach (double doubleValue in list) {
-				array[j] = doubleValue;
-				j++;
-			}
-			return array;
-		}
-
-		public static string ConvertArrayToString(double[] array) {
-			string str = "";
-			foreach (double val in array) {
-				str += ", " + val.ToString(System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
-			}
-			str = str.Substring(2);
-			string rtn = "{" + str + "}";
-			return rtn;
-		}
-
-		private static double[][] ConvertStringToArray2(string value) {
-			string str = value.Trim();
-			if (!str.StartsWith("{") || !str.EndsWith("}")) {
-				// log warning
-				return null;
-			}
-			str = str.Substring(1, str.Length - 2).Trim();
-			List<List<double>> list = new List<List<double>>();
-			while (str.Length > 0) {
-				int end = str.IndexOf('}');
-				if (str[0] != '{' || end < 0) {
-					// log warning
-					return null;
-				}
-				List<double> curList = new List<double>();
-				list.Add(curList);
-				string[] strValues = str.Substring(1, end - 1).Trim().Split(',');
-				foreach (string strValue in strValues) {
-					double doubleValue;
-					if (!double.TryParse(strValue.Trim(), NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out doubleValue)) {
-						// log warning
-						return null;
-					}
-					curList.Add(doubleValue);
-				}
-				str = str.Substring(end + 1).Trim();
-				if (str.Length != 0) {
-					if (str[0] != ',') {
-						// log warning
-						return null;
-					}
-					str = str.Substring(1);
-				}
-			}
-			double[][] array = new double[list.Count][];
-			int i = 0;
-			foreach (List<double> curList in list) {
-				array[i] = new double[curList.Count];
-				int j = 0;
-				foreach (double doubleValue in curList) {
-					array[i][j] = doubleValue;
-					j++;
-				}
-				i++;
-			}
-			return array;
-		}
-
-		public static string ConvertArrayToString2(double[][] array) {
-			string rtn = "";
-			foreach (double[] row in array) {
-				string rowStr = "";
-				foreach (double val in row) {
-					rowStr += ", " + val.ToString(System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
-				}
-				rowStr = rowStr.Substring(2);
-				rtn += " ,{" + rowStr + "}";
-			}
-			rtn = "{" + rtn.Substring(2) + "}";
-			return rtn;
-		}
-
 		[ProductParameter]
 		public static string ConfigHlRegHeizleistungString {
 			get {
@@ -677,6 +580,11 @@ namespace Europlan.Common {
 					this.plannedCeilingArea = value;
 				}
 			}
+		}
+
+		public override float PlannedRoofArea {
+			get { return 0; }
+			set { }
 		}
 
 		// Not to be used in code! This property is only intended to be used for (de)serializing

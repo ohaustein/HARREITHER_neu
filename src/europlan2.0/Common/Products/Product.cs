@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using System.Globalization;
 
 namespace Europlan.Common {
 
@@ -23,6 +24,7 @@ namespace Europlan.Common {
 			private static readonly string fbh = "Boden";
 			private static readonly string rest = "Rest";
 			private static readonly string wh = "Wand";
+			private static readonly string dsh = "Dachschräge";
 
 			private Dictionary<string, ProductType> mappingFromString = new Dictionary<string, ProductType>();
 			private Dictionary<ProductType, string> mappingToString = new Dictionary<ProductType, string>();
@@ -32,10 +34,12 @@ namespace Europlan.Common {
 				mappingFromString.Add(fbh, ProductType.FBH);
 				mappingFromString.Add(rest, ProductType.REST);
 				mappingFromString.Add(wh, ProductType.WH);
+				mappingFromString.Add(dsh, ProductType.DSH);
 				mappingToString.Add(ProductType.DH, dh);
 				mappingToString.Add(ProductType.FBH, fbh);
 				mappingToString.Add(ProductType.REST, rest);
 				mappingToString.Add(ProductType.WH, wh);
+				mappingToString.Add(ProductType.DSH, dsh);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -70,6 +74,7 @@ namespace Europlan.Common {
 			FBH,
 			WH,
 			DH,
+			DSH,
 			REST
 		}
 
@@ -372,8 +377,13 @@ namespace Europlan.Common {
 			set;
 		}
 
+		public abstract float PlannedRoofArea {
+			get;
+			set;
+		}
+
 		public float TotalPlannedArea {
-			get { return this.PlannedFloorArea + this.PlannedCeilingArea + this.PlannedWallArea; }
+			get { return this.PlannedFloorArea + this.PlannedCeilingArea + this.PlannedWallArea + this.PlannedRoofArea; }
 		}
 
 		public abstract double PlannedHeatLoad {
@@ -944,6 +954,15 @@ namespace Europlan.Common {
 			}
 		}
 
+		public double TransmissionRoofHeat {
+			get {
+				if (this.Type == ProductType.DSH) {
+					return QH2OHeat - this.PlannedHeatLoad;
+				}
+				return 0;
+			}
+		}
+
 		public double TransmissionFloorCool {
 			get {
 				if (this.Type == ProductType.FBH) {
@@ -965,6 +984,15 @@ namespace Europlan.Common {
 		public double TransmissionCeilingCool {
 			get {
 				if (this.Type == ProductType.DH) {
+					return QH2OCool - this.PlannedCoolLoad;
+				}
+				return 0;
+			}
+		}
+
+		public double TransmissionRoofCool {
+			get {
+				if (this.Type == ProductType.DSH) {
 					return QH2OCool - this.PlannedCoolLoad;
 				}
 				return 0;
@@ -1019,6 +1047,103 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public virtual double PlannedKuehllastBereinigung {
 			get { return 0; }
+		}
+
+		protected static double[] ConvertStringToArray(string value) {
+			string str = value.Trim();
+			if (!str.StartsWith("{") || !str.EndsWith("}")) {
+				// log warning
+				return null;
+			}
+			List<double> list = new List<double>();
+			string[] strValues = str.Substring(1, str.Length - 2).Trim().Split(',');
+			foreach (string strValue in strValues) {
+				double doubleValue;
+				if (!double.TryParse(strValue.Trim(), NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out doubleValue)) {
+					// log warning
+					return null;
+				}
+				list.Add(doubleValue);
+			}
+			double[] array = new double[list.Count];
+			int j = 0;
+			foreach (double doubleValue in list) {
+				array[j] = doubleValue;
+				j++;
+			}
+			return array;
+		}
+
+		protected static string ConvertArrayToString(double[] array) {
+			string str = "";
+			foreach (double val in array) {
+				str += ", " + val.ToString(System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+			}
+			str = str.Substring(2);
+			string rtn = "{" + str + "}";
+			return rtn;
+		}
+
+		protected static double[][] ConvertStringToArray2(string value) {
+			string str = value.Trim();
+			if (!str.StartsWith("{") || !str.EndsWith("}")) {
+				// log warning
+				return null;
+			}
+			str = str.Substring(1, str.Length - 2).Trim();
+			List<List<double>> list = new List<List<double>>();
+			while (str.Length > 0) {
+				int end = str.IndexOf('}');
+				if (str[0] != '{' || end < 0) {
+					// log warning
+					return null;
+				}
+				List<double> curList = new List<double>();
+				list.Add(curList);
+				string[] strValues = str.Substring(1, end - 1).Trim().Split(',');
+				foreach (string strValue in strValues) {
+					double doubleValue;
+					if (!double.TryParse(strValue.Trim(), NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out doubleValue)) {
+						// log warning
+						return null;
+					}
+					curList.Add(doubleValue);
+				}
+				str = str.Substring(end + 1).Trim();
+				if (str.Length != 0) {
+					if (str[0] != ',') {
+						// log warning
+						return null;
+					}
+					str = str.Substring(1);
+				}
+			}
+			double[][] array = new double[list.Count][];
+			int i = 0;
+			foreach (List<double> curList in list) {
+				array[i] = new double[curList.Count];
+				int j = 0;
+				foreach (double doubleValue in curList) {
+					array[i][j] = doubleValue;
+					j++;
+				}
+				i++;
+			}
+			return array;
+		}
+
+		protected static string ConvertArrayToString2(double[][] array) {
+			string rtn = "";
+			foreach (double[] row in array) {
+				string rowStr = "";
+				foreach (double val in row) {
+					rowStr += ", " + val.ToString(System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+				}
+				rowStr = rowStr.Substring(2);
+				rtn += " ,{" + rowStr + "}";
+			}
+			rtn = "{" + rtn.Substring(2) + "}";
+			return rtn;
 		}
 	}
 }

@@ -518,21 +518,6 @@ namespace Europlan.Common {
 						(this.product.Product as HithermProduct).MoveRegisterToCircuit(this, value);
 					}
 				}
-				/*if (this.product != null) {
-					HithermCircuit hc;
-					if (this.heizkreis > 0) {
-						hc = this.product.Product.GetCircuit(this.heizkreis - 1) as HithermCircuit;
-						if (hc != null) {
-							hc.Registers.Remove(this);
-						}
-						this.heizkreis = 0;
-					}
-					hc = this.product.Product.GetCircuit(value - 1) as HithermCircuit;
-					if (hc != null) {
-						hc.Registers.Add(this);
-						this.heizkreis = value;
-					}
-				}*/
 			}
 		}
 
