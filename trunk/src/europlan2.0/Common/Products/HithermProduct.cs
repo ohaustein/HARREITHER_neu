@@ -923,31 +923,119 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+
+			// Euroval Anbindung
+			// 21mm Anbindung
+			double pipeEurovalLength = 0;
+			double pipe21mmLength = 0;
+			double circuit21mmOnlyFirstLength = 0;
+			double circuit21mmAllLength = 0;
+			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
+				if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+					if (pipe.OnlyFirst) {
+						pipe21mmLength += (pipe.Vorlauf + pipe.Ruecklauf);
+						circuit21mmOnlyFirstLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					} else {
+						pipe21mmLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+						circuit21mmAllLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					}
+
+				} else {
+					if (pipe.OnlyFirst) {
+						pipeEurovalLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					} else {
+						pipeEurovalLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+					}
+				}
+			}
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", pipeEurovalLength);
+			if (ConfigUsePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR51", pipe21mmLength);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", pipe21mmLength);
+			}
+			
+			
+			double verbindeLength = 0;
+			int teilflaechen = 0;
+			double registerCount = 0;
 			foreach (HithermCircuit c in this.circuits) {
 				foreach (HithermRegister register in c.Registers) {
+					teilflaechen++;
+					registerCount += register.NrOfRegisters;
+
 					// Register
 					Project.Instance.AddRequiredMaterial(requiredMaterial, register.PartNumber, register.NrOfRegisters);
 
+					// Ovalschweißmuffen bei Hitherm+
+					if (ConfigUsePlus && register.NrOfRegisters > 1) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", 2 * (register.NrOfRegisters - 1));
+					}
+
 					// Ovalendkappen
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI65", 2);
+					if (ConfigUsePlus) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR65", 2);
+					} else {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI65", 2);
+					}
 
 					//Wandwinkel
 					int amount = 2;
 					if (register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL) {
 						amount = 4;
 					}
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", amount);
+					if (ConfigUsePlus) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", amount);
+					} else {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", amount);
+					}
+
+					verbindeLength += register.PipeHorizontal + register.PipeVertical;
 
 				}
 				// Bodenwinkel
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI68", 2);
+				if (ConfigUsePlus) {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HR68", 2);
+				} else {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI68", 2);
+				}
 
 			}
 
+			// Ovalmuffen
+			if (verbindeLength > 0) {
+				if (ConfigUsePlus) {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HR55", verbindeLength / 2);
+				} else {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", verbindeLength / 2);
+				}
+			}
+
+			// Ovalrohr
+			if (ConfigUsePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR60", verbindeLength);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI60", verbindeLength);
+			}
+
+			// Dübelhaken
+			if (ConfigUsePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR60", (registerCount * 2) + verbindeLength);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI40", (registerCount * 2) + verbindeLength);
+			}
+
 			// unknown amount
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI67", Double.NegativeInfinity);
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI70", Double.NegativeInfinity);
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI71", Double.NegativeInfinity);
+			if (ConfigUsePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR67", Double.NegativeInfinity);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR70", Double.NegativeInfinity);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR69", Double.NegativeInfinity);
+
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI67", Double.NegativeInfinity);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI70", Double.NegativeInfinity);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI71", Double.NegativeInfinity);
+			}
 		}
 
 	}
