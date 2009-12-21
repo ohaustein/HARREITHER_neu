@@ -934,7 +934,7 @@ namespace Europlan.Common {
 					//Wandwinkel
 					int amount = 2;
 					if (register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL) {
-						smount = 4;
+						amount = 4;
 					}
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", amount);
 
