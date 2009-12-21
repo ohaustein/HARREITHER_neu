@@ -80,6 +80,7 @@ namespace Europlan.Common {
 		}
 
 		[System.ComponentModel.TypeConverter(typeof(RegisterTypeEnumConverter))]
+		// if extended - consider also the part number getter
 		public enum RegisterTypeEnum {
 			HIT_50_10,
 			HIT_100_10,
@@ -557,6 +558,89 @@ namespace Europlan.Common {
 		public string WallId {
 			get { return this.Wall != null ? this.Wall.Id : null; }
 			set { this.wallId = value; }
+		}
+
+		[XmlIgnore]
+		public string PartNumber {
+			get {
+				switch (registerType) {
+					case RegisterTypeEnum.HIT_50_10:
+						if (HithermProduct.ConfigUsePlus) {
+							return "";
+						} else {
+							return "HI06";
+						}
+					case RegisterTypeEnum.HIT_50_5:
+						if (HithermProduct.ConfigUsePlus) {
+							return "HP05";
+						} else {
+							return "HI05";
+						}
+					case RegisterTypeEnum.HIT_100_10:
+						if (HithermProduct.ConfigUsePlus) {
+							return "";
+						} else {
+							return "HI11";
+						}
+					case RegisterTypeEnum.HIT_100_5:
+						if (HithermProduct.ConfigUsePlus) {
+							return "HP10";
+						} else {
+							return "HI10";
+						}
+					case RegisterTypeEnum.HIT_150_10:
+						if (HithermProduct.ConfigUsePlus) {
+							return "";
+						} else {
+							return "HI16";
+						}
+					case RegisterTypeEnum.HIT_150_5:
+						if (HithermProduct.ConfigUsePlus) {
+							return "HP15";
+						} else {
+							return "HI15";
+						}
+					case RegisterTypeEnum.HIT_200_10:
+						if (HithermProduct.ConfigUsePlus) {
+							return "";
+						} else {
+							return "HI21";
+						}
+					case RegisterTypeEnum.HIT_200_5:
+						if (HithermProduct.ConfigUsePlus) {
+							return "HP20";
+						} else {
+							return "HI20";
+						}
+					case RegisterTypeEnum.HIT_250_10:
+						if (HithermProduct.ConfigUsePlus) {
+							return "";
+						} else {
+							return "HI26";
+						}
+					case RegisterTypeEnum.HIT_250_5:
+						if (HithermProduct.ConfigUsePlus) {
+							return "HP25";
+						} else {
+							return "HI25";
+						}
+					case RegisterTypeEnum.HIT_300_10:
+						if (HithermProduct.ConfigUsePlus) {
+							return "";
+						} else {
+							return "HI31";
+						}
+					case RegisterTypeEnum.HIT_300_5:
+						if (HithermProduct.ConfigUsePlus) {
+							return "HP30";
+						} else {
+							return "HI30";
+						}
+
+					default:
+						throw new Exception("Unknown Register Type");
+				}
+			}
 		}
 	}
 }

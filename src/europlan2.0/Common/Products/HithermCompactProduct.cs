@@ -15,6 +15,8 @@ namespace Europlan.Common {
 		private static bool canHeat = true;
 		private static bool canCool = false;
 
+		private static bool usePlus = false;
+
 		public HithermCompactProduct() {
 
 		}
@@ -68,12 +70,20 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
+		
 		public static int ConfigQuickDimensioningCoolPowerPerSquareMeter {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
 			set { quickDimensioningCoolPowerPerSquareMeter = value; }
 		}
+		
 		public override int QuickDimensioningCoolPowerPerSquareMeter {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
+		}
+
+		[ProductParameter]
+		public static bool ConfigUsePlus {
+			get { return usePlus; }
+			set { usePlus = value; }
 		}
 		#endregion Product Parameters
 

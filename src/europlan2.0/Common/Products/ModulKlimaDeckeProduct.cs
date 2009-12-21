@@ -782,6 +782,8 @@ namespace Europlan.Common {
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", pipeEurovalLength);
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", pipe21mmLength);
 
+			// TODO Clipschiene und Ovalmuffe für Anbindeleitungen???
+
 			// Muffe
 			if (circuit21mmOnlyFirstLength > 0) {
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", (circuit21mmOnlyFirstLength + circuit21mmAllLength) / 2);
