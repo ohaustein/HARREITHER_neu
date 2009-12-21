@@ -139,6 +139,7 @@
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\HithermCompactCircuit.cs" />
     <Compile Include="Products\HithermCompactWall.cs" />
     <Compile Include="Products\HithermCompactRegister.cs" />
     <Compile Include="Products\SelectHithermWallForm.cs">
