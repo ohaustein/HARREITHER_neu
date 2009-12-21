@@ -314,9 +314,11 @@ namespace Europlan.Common {
 						transmissionFloorHeat += pp.Product.TransmissionFloorHeat;
 						transmissionWallHeat += pp.Product.TransmissionWallHeat;
 						transmissionCeilingHeat += pp.Product.TransmissionCeilingHeat;
+						transmissionCeilingHeat += pp.Product.TransmissionRoofHeat;
 						transmissionFloorCool += pp.Product.TransmissionFloorCool;
 						transmissionWallCool += pp.Product.TransmissionWallCool;
 						transmissionCeilingCool += pp.Product.TransmissionCeilingCool;
+						transmissionCeilingCool += pp.Product.TransmissionRoofCool;
 						qHeat += pp.Product.PlannedHeatLoad;
 						qCool += pp.Product.PlannedCoolLoad;
 
@@ -460,9 +462,11 @@ namespace Europlan.Common {
 							transmissionFloorHeat += pp.Product.TransmissionFloorHeat;
 							transmissionWallHeat += pp.Product.TransmissionWallHeat;
 							transmissionCeilingHeat += pp.Product.TransmissionCeilingHeat;
+							transmissionCeilingHeat += pp.Product.TransmissionRoofHeat;
 							transmissionFloorCool += pp.Product.TransmissionFloorCool;
 							transmissionWallCool += pp.Product.TransmissionWallCool;
 							transmissionCeilingCool += pp.Product.TransmissionCeilingCool;
+							transmissionCeilingHeat += pp.Product.TransmissionRoofCool;
 							qHeat += pp.Product.PlannedHeatLoad;
 							qCool += pp.Product.PlannedCoolLoad;
 
@@ -593,9 +597,11 @@ namespace Europlan.Common {
 						transmissionFloorHeat += plannedProduct.Product.TransmissionFloorHeat;
 						transmissionWallHeat += plannedProduct.Product.TransmissionWallHeat;
 						transmissionCeilingHeat += plannedProduct.Product.TransmissionCeilingHeat;
+						transmissionCeilingHeat += plannedProduct.Product.TransmissionRoofHeat;
 						transmissionFloorCool += plannedProduct.Product.TransmissionFloorCool;
 						transmissionWallCool += plannedProduct.Product.TransmissionWallCool;
 						transmissionCeilingCool += plannedProduct.Product.TransmissionCeilingCool;
+						transmissionCeilingHeat += plannedProduct.Product.TransmissionRoofCool;
 						qHeat += plannedProduct.Product.PlannedHeatLoad;
 						qCool += plannedProduct.Product.PlannedCoolLoad;
 				    }

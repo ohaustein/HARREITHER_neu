@@ -7,7 +7,10 @@ namespace Europlan.Common {
 	public class WallConstruction : Construction {
 
 		private double factor = 1;
+		private bool isHithermWall = false;
+		private bool isHithermCompactWall = false;
 		private HithermWall defaultWall = null;
+		private HithermCompactWall defaultCompactWall = null;
 
 		public WallConstruction() : base() {
 		}
@@ -27,13 +30,39 @@ namespace Europlan.Common {
 			set { this.factor = value; }
 		}
 
+		public bool IsHithermWall {
+			get { return this.isHithermWall; }
+			set { this.isHithermWall = value; }
+		}
+
+		public bool IsHithermCompactWall {
+			get { return this.isHithermCompactWall; }
+			set { this.isHithermCompactWall = value; }
+		}
+
 		[XmlIgnore]
 		public HithermWall DefaultWall {
 			get {
+				if (!isHithermWall) {
+					return null;
+				}
 				if (defaultWall == null) {
 					defaultWall = new HithermWall(this.Id, this.Name, this, null, null, false, null, -16, 30, true);
 				}
 				return defaultWall;
+			}
+		}
+
+		[XmlIgnore]
+		public HithermCompactWall DefaultCompactWall {
+			get {
+				if (!isHithermCompactWall) {
+					return null;
+				}
+				if (defaultCompactWall == null) {
+					defaultCompactWall = new HithermCompactWall(this.Id, this.Name, this, null, null, false, null, -16, 30, true);
+				}
+				return defaultCompactWall;
 			}
 		}
 	}

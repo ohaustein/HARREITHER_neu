@@ -24,11 +24,11 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.lblId = new System.Windows.Forms.Label();
 			this.txtId = new System.Windows.Forms.TextBox();
 			this.txtName = new System.Windows.Forms.TextBox();
@@ -47,6 +47,8 @@ namespace Europlan.Common {
 			this.numFactor = new Europlan.Common.NumericBox();
 			this.numThickness = new Europlan.Common.NumericBox();
 			this.numericColumn1 = new Europlan.Common.NumericColumn();
+			this.chkHitherm = new System.Windows.Forms.CheckBox();
+			this.chkHithermCompact = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.gridLayers)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.constructionLayerBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -100,14 +102,14 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.gridLayers.AutoGenerateColumns = false;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gridLayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridLayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
 			this.gridLayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridLayers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
@@ -144,9 +146,9 @@ namespace Europlan.Common {
 			// colLambdaValue
 			// 
 			this.colLambdaValue.DataPropertyName = "LambdaValue";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F3";
-			this.colLambdaValue.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle7.Format = "F3";
+			this.colLambdaValue.DefaultCellStyle = dataGridViewCellStyle7;
 			this.colLambdaValue.FillWeight = 70F;
 			this.colLambdaValue.HeaderText = "lambda (W/m K)";
 			this.colLambdaValue.Name = "colLambdaValue";
@@ -158,9 +160,9 @@ namespace Europlan.Common {
 			// colThickness
 			// 
 			this.colThickness.DataPropertyName = "Thickness";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F2";
-			this.colThickness.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle8.Format = "F2";
+			this.colThickness.DefaultCellStyle = dataGridViewCellStyle8;
 			this.colThickness.FillWeight = 70F;
 			this.colThickness.HeaderText = "d (mm)";
 			this.colThickness.Name = "colThickness";
@@ -172,9 +174,9 @@ namespace Europlan.Common {
 			// colRValue
 			// 
 			this.colRValue.DataPropertyName = "RValue";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F3";
-			this.colRValue.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle9.Format = "F3";
+			this.colRValue.DefaultCellStyle = dataGridViewCellStyle9;
 			this.colRValue.FillWeight = 70F;
 			this.colRValue.HeaderText = "R (m²K/W)";
 			this.colRValue.Name = "colRValue";
@@ -264,6 +266,7 @@ namespace Europlan.Common {
 			this.numThickness.Name = "numThickness";
 			this.numThickness.Size = new System.Drawing.Size(100, 20);
 			this.numThickness.TabIndex = 3;
+			this.numThickness.Text = "0";
 			this.numThickness.Value = new decimal(new int[] {
             0,
             0,
@@ -274,9 +277,9 @@ namespace Europlan.Common {
 			// numericColumn1
 			// 
 			this.numericColumn1.DataPropertyName = "LambdaValue";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle5.Format = "F0";
-			this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle10.Format = "F0";
+			this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle10;
 			this.numericColumn1.FillWeight = 70F;
 			this.numericColumn1.HeaderText = "lambda (W/mK)";
 			this.numericColumn1.Name = "numericColumn1";
@@ -284,10 +287,36 @@ namespace Europlan.Common {
 			this.numericColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.numericColumn1.Width = 70;
 			// 
+			// chkHitherm
+			// 
+			this.chkHitherm.AutoSize = true;
+			this.chkHitherm.Location = new System.Drawing.Point(220, 57);
+			this.chkHitherm.Name = "chkHitherm";
+			this.chkHitherm.Size = new System.Drawing.Size(70, 17);
+			this.chkHitherm.TabIndex = 10;
+			this.chkHitherm.Text = "Hitherm®";
+			this.chkHitherm.UseVisualStyleBackColor = true;
+			this.chkHitherm.Visible = false;
+			this.chkHitherm.CheckedChanged += new System.EventHandler(this.chkHitherm_CheckedChanged);
+			// 
+			// chkHithermCompact
+			// 
+			this.chkHithermCompact.AutoSize = true;
+			this.chkHithermCompact.Location = new System.Drawing.Point(296, 57);
+			this.chkHithermCompact.Name = "chkHithermCompact";
+			this.chkHithermCompact.Size = new System.Drawing.Size(115, 17);
+			this.chkHithermCompact.TabIndex = 11;
+			this.chkHithermCompact.Text = "Hitherm® Compact";
+			this.chkHithermCompact.UseVisualStyleBackColor = true;
+			this.chkHithermCompact.Visible = false;
+			this.chkHithermCompact.CheckedChanged += new System.EventHandler(this.chkHithermCompact_CheckedChanged);
+			// 
 			// ConstructionEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.chkHithermCompact);
+			this.Controls.Add(this.chkHitherm);
 			this.Controls.Add(this.numFactor);
 			this.Controls.Add(this.lblFactor);
 			this.Controls.Add(this.cbPeFoil);
@@ -328,5 +357,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialId;
 		private System.Windows.Forms.Label lblFactor;
 		private NumericBox numFactor;
+		private System.Windows.Forms.CheckBox chkHitherm;
+		private System.Windows.Forms.CheckBox chkHithermCompact;
 	}
 }

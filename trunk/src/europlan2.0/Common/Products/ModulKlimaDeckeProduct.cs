@@ -595,6 +595,11 @@ namespace Europlan.Common {
 			set { }
 		}
 
+		public override float PlannedRoofArea {
+			get { return 0; }
+			set { }
+		}
+
 		/// <summary>
 		/// The total cool load that is emmited in the room, based on the current calculation.
 		/// </summary>

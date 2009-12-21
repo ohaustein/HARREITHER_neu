@@ -64,6 +64,8 @@ namespace Europlan.Common {
 					this.numThickness.Visible = false;
 					this.lblFactor.Visible = false;
 					this.numFactor.Visible = false;
+					this.chkHitherm.Visible = false;
+					this.chkHithermCompact.Visible = false;
 					break;
 
 				case ConstructionScopeEnum.InsulationConstruction:
@@ -72,6 +74,8 @@ namespace Europlan.Common {
 					this.numThickness.Visible = false;
 					this.lblFactor.Visible = false;
 					this.numFactor.Visible = false;
+					this.chkHitherm.Visible = false;
+					this.chkHithermCompact.Visible = false;
 					break;
 
 				case ConstructionScopeEnum.WallConstruction:
@@ -80,6 +84,8 @@ namespace Europlan.Common {
 					this.numThickness.Visible = false;
 					this.lblFactor.Visible = true;
 					this.numFactor.Visible = true;
+					this.chkHitherm.Visible = true;
+					this.chkHithermCompact.Visible = true;
 					break;
 
 				case ConstructionScopeEnum.CeilingConstruction:
@@ -89,6 +95,8 @@ namespace Europlan.Common {
 					this.numThickness.Visible = false;
 					this.lblFactor.Visible = false;
 					this.numFactor.Visible = false;
+					this.chkHitherm.Visible = false;
+					this.chkHithermCompact.Visible = false;
 					break;
 			}
 		}
@@ -109,6 +117,8 @@ namespace Europlan.Common {
 				case ConstructionScopeEnum.WallConstruction:
 					WallConstruction wc = this.construction as WallConstruction;
 					this.numFactor.Value = (wc != null ? (decimal)wc.Factor : (decimal)1);
+					this.chkHitherm.Checked = (wc != null ? wc.IsHithermWall : false);
+					this.chkHithermCompact.Checked = (wc != null ? wc.IsHithermCompactWall : false);
 					break;
 
 				case ConstructionScopeEnum.CeilingConstruction:
@@ -148,6 +158,18 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void chkHitherm_CheckedChanged(object sender, EventArgs e) {
+			if (this.construction is WallConstruction) {
+				(this.construction as WallConstruction).IsHithermWall = this.chkHitherm.Checked;
+			}
+		}
+
+		private void chkHithermCompact_CheckedChanged(object sender, EventArgs e) {
+			if (this.construction is WallConstruction) {
+				(this.construction as WallConstruction).IsHithermCompactWall = this.chkHithermCompact.Checked;
+			}
+		}
+
 		private class MaterialItem {
 			private string name;
 			private Material material;
@@ -181,7 +203,6 @@ namespace Europlan.Common {
 				}
 			}
 		}
-
 
 		public bool ReadOnly {
 			set {

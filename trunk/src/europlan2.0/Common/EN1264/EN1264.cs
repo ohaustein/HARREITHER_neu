@@ -395,7 +395,7 @@ namespace Europlan.Common {
 						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.2 ,1.4 ,1.9 ,2.4 ,2.9 ,3.6 ,4.2 ,5.0 ,5.8 ,6.6 ,7.5 ,8.5 ,9.5 ,10.6 ,11.7 ,12.9 ,14.2},
 						new double[] {0.1 ,0.1 ,0.2 ,0.4 ,0.5 ,0.6 ,0.8 ,1.0 ,1.2 ,1.4 ,1.9 ,2.5 ,3.1 ,3.8 ,4.6 ,5.4 ,6.3 ,7.3 ,8.3 ,9.5 ,10.7 ,11.9 ,13.2 ,14.6 ,16.1},
 						new double[] {0.1 ,0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,2.1 ,2.8 ,3.6 ,4.4 ,5.4 ,6.5 ,7.7 ,8.9 ,10.3 ,11.8 ,13.3 ,15.0 ,16.7 ,18.6 ,20.5}};
-				break;
+					break;
 
 				case HithermRegister.RegisterTypeEnum.HIT_50_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
@@ -476,7 +476,7 @@ namespace Europlan.Common {
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
 					return 0;
 					break;
-					
+
 				case HithermRegister.RegisterTypeEnum.HIT_300_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
 					return 0;
@@ -508,6 +508,10 @@ namespace Europlan.Common {
 				rtn = 0.1;
 			}
 			return rtn;
+		}
+
+		public double DruckverlustRegister(HithermCompactRegister.RegisterTypeEnum type, int width, double durchfluss) {
+			return 0;
 		}
 
 		public double DefaultSpreizung(double vorlaufTemperatur) {

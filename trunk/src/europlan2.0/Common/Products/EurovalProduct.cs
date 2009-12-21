@@ -716,6 +716,11 @@ namespace Europlan.Common {
 			set { }
 		}
 
+		public override float PlannedRoofArea {
+			get { return 0; }
+			set { }
+		}
+
 		public override float PlannedNetArea {
 			get { return this.PlannedFloorArea - this.PlannedAreaReduced / 2 - this.PlannedAreaUnheated; }
 		}

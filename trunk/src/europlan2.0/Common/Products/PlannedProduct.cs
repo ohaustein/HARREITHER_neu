@@ -458,5 +458,19 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+
+		internal void UpdateTree() {
+			List<PlannedProduct> products = this.plannedProduct.AssociatedRoom.PlannedProducts;
+			Dictionary<Product.ProductType, int> productCounter = new Dictionary<Product.ProductType, int>();
+			foreach (PlannedProduct p in products) {
+				if (!productCounter.ContainsKey(p.PlannedProductType)) {
+					productCounter.Add(p.PlannedProductType, 1);
+				} else {
+					productCounter[p.PlannedProductType] = productCounter[p.PlannedProductType] + 1;
+				}
+				p.internalName = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType];
+				p.productNode.Text = p.internalName + ": " + p.System;
+			}
+		}
 	}
 }

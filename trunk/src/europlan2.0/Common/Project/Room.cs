@@ -515,6 +515,7 @@ namespace Europlan.Common {
 					}
 				}
 				i++;
+				product.UpdateTree();
 			}
 			while (this.Node.Nodes.Count > i) {
 				this.Node.Nodes.RemoveAt(i);
