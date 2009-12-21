@@ -72,6 +72,8 @@ namespace Europlan.Common {
 
 		private static double defaultDaemmung = 2.5;
 
+		private static bool usePlus = false;
+
 		/*private static double factorSpezialputz = 1.15;
 		private static double factorMaschinenputz = 1.0;
 		private static double factorLehmputz = 0.95;
@@ -412,6 +414,12 @@ namespace Europlan.Common {
 		public static double ConfigDefaultDaemmung {
 			get { return defaultDaemmung; }
 			set { defaultDaemmung = value; }
+		}
+
+		[ProductParameter]
+		public static bool ConfigUsePlus {
+			get { return usePlus; }
+			set { usePlus = value; }
 		}
 
 		/*[ProductParameter]
@@ -856,10 +864,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-
-		}
-
 		[XmlIgnore]
 		public override double PlannedHeizlastBereinigung {
 			get {
@@ -917,6 +921,35 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			foreach (HithermCircuit c in this.circuits) {
+				foreach (HithermRegister register in c.Registers) {
+					// Register
+					Project.Instance.AddRequiredMaterial(requiredMaterial, register.PartNumber, register.NrOfRegisters);
+
+					// Ovalendkappen
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI65", 2);
+
+					//Wandwinkel
+					int amount = 2;
+					if (register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL) {
+						smount = 4;
+					}
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", amount);
+
+				}
+				// Bodenwinkel
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI68", 2);
+
+			}
+
+			// unknown amount
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI67", Double.NegativeInfinity);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI70", Double.NegativeInfinity);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI71", Double.NegativeInfinity);
+		}
+
 	}
 	
 }
