@@ -394,7 +394,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public int NrOfRegisters {
+		public int RegisterCount {
 			get { return (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG ? (int)Math.Ceiling(((float)this.rohre) / 9.0) : (int)Math.Ceiling(((float)this.rohre) / 5.0)); }
 		}
 		

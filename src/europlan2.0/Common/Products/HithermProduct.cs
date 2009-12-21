@@ -870,14 +870,14 @@ namespace Europlan.Common {
 			foreach (HithermCircuit c in this.circuits) {
 				foreach (HithermRegister register in c.Registers) {
 					teilflaechen++;
-					registerCount += register.NrOfRegisters;
+					registerCount += register.RegisterCount;
 
 					// Register
-					Project.Instance.AddRequiredMaterial(requiredMaterial, register.PartNumber, register.NrOfRegisters);
+					Project.Instance.AddRequiredMaterial(requiredMaterial, register.PartNumber, register.RegisterCount);
 
 					// Ovalschweißmuffen bei Hitherm+
-					if (ConfigUsePlus && register.NrOfRegisters > 1) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", 2 * (register.NrOfRegisters - 1));
+					if (ConfigUsePlus && register.RegisterCount > 1) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", 2 * (register.RegisterCount - 1));
 					}
 
 					// Ovalendkappen

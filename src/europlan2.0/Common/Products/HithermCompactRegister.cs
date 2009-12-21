@@ -267,7 +267,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public int NrOfRegisters {
+		public int RegisterCount {
 			get { return this.registerCount; }
 			set { this.registerCount = value; }
 		}
