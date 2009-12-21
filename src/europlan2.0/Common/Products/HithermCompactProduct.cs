@@ -318,17 +318,17 @@ namespace Europlan.Common {
 			base.CalculateHeatAndCoolFlow();
 			double spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
 			double spreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
-			if (spreizungHeat > HithermProduct.ConfigSpreizungHeizMax) {
-				spreizungHeat = HithermProduct.ConfigSpreizungHeizMax;
+			if (spreizungHeat > HithermCompactProduct.ConfigSpreizungHeizMax) {
+				spreizungHeat = HithermCompactProduct.ConfigSpreizungHeizMax;
 			}
-			if (spreizungHeat < HithermProduct.ConfigSpreizungHeizMin) {
-				spreizungHeat = HithermProduct.ConfigSpreizungHeizMin;
+			if (spreizungHeat < HithermCompactProduct.ConfigSpreizungHeizMin) {
+				spreizungHeat = HithermCompactProduct.ConfigSpreizungHeizMin;
 			}
-			if (spreizungCool > HithermProduct.ConfigSpreizungKühlMax) {
-				spreizungCool = HithermProduct.ConfigSpreizungKühlMax;
+			if (spreizungCool > HithermCompactProduct.ConfigSpreizungKühlMax) {
+				spreizungCool = HithermCompactProduct.ConfigSpreizungKühlMax;
 			}
-			if (spreizungCool < HithermProduct.ConfigSpreizungKühlMin) {
-				spreizungCool = HithermProduct.ConfigSpreizungKühlMin;
+			if (spreizungCool < HithermCompactProduct.ConfigSpreizungKühlMin) {
+				spreizungCool = HithermCompactProduct.ConfigSpreizungKühlMin;
 			}
 			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
 			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
@@ -428,22 +428,22 @@ namespace Europlan.Common {
 			this.lastErrorMsg = "";
 			//if (this.PlannedMhHeat >= this.PlannedMhCool) {
 			if (Math.Round(this.PlannedMhHeat, 1) > HithermCompactProduct.ConfigMaxDurchfluss) {
-				//errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				//errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermCompactProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				this.lastErrorMsg += "Durchfluß bei zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermCompactProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 			}
 			/*} else {
-				if (Math.Round(this.PlannedMhCool, 1) > HithermProduct.ConfigMaxDurchfluss) {
-					errorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMhCool, 1) > HithermCompactProduct.ConfigMaxDurchfluss) {
+					errorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + HithermCompactProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			}*/
 			//if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
 			if (Math.Round(this.PlannedDeltaRhoHeat, 2) > HithermCompactProduct.ConfigMaxPressureLost / 100) {
-				//errorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				//errorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
 				this.lastErrorMsg += "Druckverlust zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
 			}
 			/*} else {
-				if (Math.Round(this.PlannedDeltaRhoCool, 2) > HithermProduct.ConfigMaxPressureLost / 100) {
-					errorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				if (Math.Round(this.PlannedDeltaRhoCool, 2) > HithermCompactProduct.ConfigMaxPressureLost / 100) {
+					errorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
 				}
 			}*/
 			if (this.lastErrorMsg.Length == 0) {
