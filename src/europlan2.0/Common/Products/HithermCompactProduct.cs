@@ -54,13 +54,14 @@ namespace Europlan.Common {
 
 		private static bool usePlus = false;
 
-		private Dictionary<HithermRegister, int> registerCircuits = new Dictionary<HithermRegister, int>();
-		private Dictionary<int, HithermCircuit> circuitIds = new Dictionary<int, HithermCircuit>();
+		private Dictionary<HithermCompactRegister, int> registerCircuits = new Dictionary<HithermCompactRegister, int>();
+		private Dictionary<int, HithermCompactCircuit> circuitIds = new Dictionary<int, HithermCompactCircuit>();
 
 		private ProductType hithermCompactType = ProductType.WH;
 		private float plannedFloorArea = 0;
 		private float plannedCeilingArea = 0;
-		private float plannedFloorOrCeilingArea = 0;
+		private float plannedRoofArea = 0;
+		private float plannedFloorCeilingRoofArea = 0;
 
 		public HithermCompactProduct() {
 		}
@@ -308,7 +309,7 @@ namespace Europlan.Common {
 			get { return this.hithermCompactType; }
 		}
 
-		public ProductType HithermType {
+		public ProductType HithermCompactType {
 			get { return this.hithermCompactType; }
 			set { this.hithermCompactType = value; }
 		}
@@ -341,40 +342,226 @@ namespace Europlan.Common {
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
 			// TODO
-			this.lastErrorMsg = "Noch nicht implementiert";
-			return false;
+			this.incompleteCalculation = false;
+			if (this.PlannedConnection == null) {
+				this.lastErrorMsg = "Fehlende Eingaben: ";
+				if (PlannedConnection == null) {
+					this.lastErrorMsg += "Heizkreisanschluß, ";
+				}
+				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
+				this.incompleteCalculation = true;
+				return false;
+			}
+
+			double[] vorlaufTotal;
+			double[] vorlaufNotIsolated;
+			double[] ruecklaufTotal;
+			double[] ruecklaufNotIsolated;
+			double[] vorlaufWithoutOtherProductTotal;
+			double[] vorlaufWithoutOtherProductNotIsolated;
+			double[] ruecklaufWithoutOtherProductTotal;
+			double[] ruecklaufWithoutOtherProductNotIsolated;
+			double longestVorlaufTotal;
+			double longestRuecklaufTotal;
+			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal);
+
+			this.CalculateHeatAndCoolFlow();
+			int i = 0;
+			foreach (HithermCompactCircuit hc in this.circuits) {
+				hc.HithermCompactProduct = this;
+				hc.NrOfCircuit = i;
+				hc.PipeLengthVorlaufTotal = vorlaufTotal[i];
+				hc.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
+				hc.PipeLengthRuecklaufTotal = ruecklaufTotal[i];
+				hc.PipeLengthRuecklaufNotIsolated = ruecklaufNotIsolated[i];
+				hc.PipeLengthVorlaufWithoutOtherProductTotal = vorlaufWithoutOtherProductTotal[i];
+				hc.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
+				hc.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
+				hc.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
+				hc.Calculate();
+			}
+
+			if (variableSpreizung && this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+				// Heizleistung veringern
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < HithermCompactProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad) {
+					this.plannedRuecklaufTempHeat -= 0.1;
+					foreach (HithermCompactCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+				this.plannedRuecklaufTempHeat += 0.1;
+				// Heizleistung erhöhen
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > HithermCompactProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < HithermCompactProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < HithermCompactProduct.ConfigMaxDurchfluss) {
+					this.plannedRuecklaufTempHeat += 0.1;
+					foreach (HithermCompactCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+				// Kühlleistung verringern
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < HithermCompactProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+					this.plannedRuecklaufTempCool += 0.1;
+					foreach (HithermCompactCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+				this.plannedRuecklaufTempCool -= 0.1;
+				// Kühlleistung erhöhen
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > HithermCompactProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < HithermCompactProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < HithermCompactProduct.ConfigMaxDurchfluss) {
+					this.plannedRuecklaufTempCool -= 0.1;
+					foreach (HithermCompactCircuit c in this.circuits) {
+						c.Calculate();
+					}
+				}
+
+				// Calculate variable spreizung for connected products
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
+					if (kvp.Value != null) {
+						kvp.Value.OtherProduct.CalculateHeatAndCoolFlow();
+						PlannedProduct pp = Project.Instance.GetPlannedProduct(kvp.Value.OtherProduct);
+						if (pp != null) {
+							pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, true);
+						}
+					}
+				}
+			}
+
+			this.lastErrorMsg = "";
+			//if (this.PlannedMhHeat >= this.PlannedMhCool) {
+			if (Math.Round(this.PlannedMhHeat, 1) > HithermCompactProduct.ConfigMaxDurchfluss) {
+				//errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				this.lastErrorMsg += "Durchfluß bei zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermCompactProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+			}
+			/*} else {
+				if (Math.Round(this.PlannedMhCool, 1) > HithermProduct.ConfigMaxDurchfluss) {
+					errorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				}
+			}*/
+			//if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
+			if (Math.Round(this.PlannedDeltaRhoHeat, 2) > HithermCompactProduct.ConfigMaxPressureLost / 100) {
+				//errorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				this.lastErrorMsg += "Druckverlust zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+			}
+			/*} else {
+				if (Math.Round(this.PlannedDeltaRhoCool, 2) > HithermProduct.ConfigMaxPressureLost / 100) {
+					errorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				}
+			}*/
+			if (this.lastErrorMsg.Length == 0) {
+				this.lastErrorMsg = null;
+			}
+
+			return true;
 		}
 
 		public override float PlannedFloorArea {
-			get { return 0; }
-			set { }
+			get {
+				if (this.hithermCompactType == ProductType.FBH) {
+					return this.plannedFloorArea;
+				}
+				return 0;
+			}
+			set {
+				if (this.hithermCompactType == ProductType.FBH) {
+					this.plannedFloorArea = value;
+				}
+			}
 		}
 
 		public override float PlannedWallArea {
-			get { return 0; }
+			get {
+				if (this.hithermCompactType == ProductType.WH) {
+					return this.PlannedNetArea;
+				}
+				return 0;
+			}
 			set { }
 		}
 
 		public override float PlannedCeilingArea {
-			get { return 0; }
-			set { }
+			get {
+				if (this.hithermCompactType == ProductType.DH) {
+					return this.plannedCeilingArea;
+				}
+				return 0;
+			}
+			set {
+				if (this.hithermCompactType == ProductType.DH) {
+					this.plannedCeilingArea = value;
+				}
+			}
 		}
 
 		public override float PlannedRoofArea {
-			get { return 0; }
-			set { }
+			get {
+				if (this.hithermCompactType == ProductType.DSH) {
+					return this.plannedRoofArea;
+				}
+				return 0;
+			}
+			set {
+				if (this.hithermCompactType == ProductType.DSH) {
+					this.plannedRoofArea = value;
+				}
+			}
+		}
+
+		// Not to be used in code! This property is only intended to be used for (de)serializing
+		public float PlannedFloorCeilingRoofArea {
+			get {
+				if (this.hithermCompactType == ProductType.DH) {
+					return this.plannedCeilingArea;
+				}
+				if (this.hithermCompactType == ProductType.FBH) {
+					return this.plannedFloorArea;
+				}
+				if (this.hithermCompactType == ProductType.DSH) {
+					return this.plannedRoofArea;
+				}
+				return 0;
+			}
+			set {
+				this.plannedFloorCeilingRoofArea = value;
+			}
 		}
 
 		public override double PlannedCoolLoad {
-			get { return 0; }
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (HithermCompactCircuit c in this.circuits) {
+					if (!c.QFbhTotalCool.Equals(double.NaN)) {
+						value += c.QFbhTotalCool;
+					}
+				}
+				return value;
+			}
 		}
 
 		public override double PlannedHeatLoad {
-			get { return 0; }
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (HithermCompactCircuit c in this.circuits) {
+					if (!c.QFbhTotalHeat.Equals(double.NaN)) {
+						value += c.QFbhTotalHeat;
+					}
+				}
+				return value;
+			}
 		}
 
 		public override float PlannedNetArea {
-			get { return 0; }
+			get {
+				double area = 0;
+				foreach (HithermCompactCircuit hc in this.circuits) {
+					area += hc.RegisterArea;
+				}
+				return (float)area;
+			}
 		}
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
@@ -419,32 +606,29 @@ namespace Europlan.Common {
 
 		}
 
-		public HithermCircuit GetCircuitForRegister(HithermCompactRegister register) {
-			/*if (!this.registerCircuits.ContainsKey(register)) {
+		public HithermCompactCircuit GetCircuitForRegister(HithermCompactRegister register) {
+			if (!this.registerCircuits.ContainsKey(register)) {
 				return null;
 			}
 			if (!this.circuitIds.ContainsKey(this.registerCircuits[register])) {
 				return null;
 			}
-			return this.circuitIds[this.registerCircuits[register]];*/
-			// TODO
-			return null;
+			return this.circuitIds[this.registerCircuits[register]];
 		}
 
 		internal void AddRegisterToCircuit(HithermCompactRegister register, int circuitId) {
-			/*this.registerCircuits[register] = circuitId;
+			this.registerCircuits[register] = circuitId;
 			if (!this.circuitIds.ContainsKey(circuitId)) {
-				HithermCircuit hc = new HithermCircuit();
+				HithermCompactCircuit hc = new HithermCompactCircuit();
 				this.circuits.Add(hc);
 				this.circuitIds[circuitId] = hc;
 			}
-			this.circuitIds[circuitId].Registers.Add(register);*/
-			// TODO
+			this.circuitIds[circuitId].Registers.Add(register);
 		}
 
 		internal void MoveRegisterToCircuit(HithermCompactRegister register, int circuitId) {
-			/*if (this.registerCircuits.ContainsKey(register)) {
-				HithermCircuit hc = this.circuitIds[this.registerCircuits[register]];
+			if (this.registerCircuits.ContainsKey(register)) {
+				HithermCompactCircuit hc = this.circuitIds[this.registerCircuits[register]];
 				hc.Registers.Remove(register);
 				if (hc.Registers.Count == 0) {
 					this.circuits.Remove(hc);
@@ -452,33 +636,30 @@ namespace Europlan.Common {
 				}
 				this.registerCircuits[register] = circuitId;
 				if (!this.circuitIds.ContainsKey(circuitId)) {
-					hc = new HithermCircuit();
+					hc = new HithermCompactCircuit();
 					this.circuits.Add(hc);
 					this.circuitIds[circuitId] = hc;
 				}
 				this.circuitIds[circuitId].Registers.Add(register);
-			}*/
-			// TODO
+			}
 		}
 
 		internal void RemoveRegisterFromCircuit(HithermCompactRegister register) {
-			/*if (this.registerCircuits.ContainsKey(register)) {
-				HithermCircuit hc = this.circuitIds[this.registerCircuits[register]];
+			if (this.registerCircuits.ContainsKey(register)) {
+				HithermCompactCircuit hc = this.circuitIds[this.registerCircuits[register]];
 				hc.Registers.Remove(register);
 				if (hc.Registers.Count == 0) {
 					this.circuits.Remove(hc);
 					this.circuitIds.Remove(this.registerCircuits[register]);
 				}
 				this.registerCircuits.Remove(register);
-			}*/
-			// TODO
+			}
 		}
 
 		internal int GetRegisterCircuitId(HithermCompactRegister register) {
-			/*if (this.registerCircuits.ContainsKey(register)) {
+			if (this.registerCircuits.ContainsKey(register)) {
 				return this.registerCircuits[register];
-			}*/
-			// TODO
+			}
 			return 0;
 		}
 
