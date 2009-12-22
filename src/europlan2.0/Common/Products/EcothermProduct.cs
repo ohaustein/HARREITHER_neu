@@ -27,16 +27,16 @@ namespace Europlan.Common {
 		private static double lambdaE = 1.2; /* Estrichleitfähigkeit, fix */
 		private static double su = 0.035; /* Estrichüberdeckung; Annahme ECO30;  fix*/
 		private static double lambdaU = 1.2; /* Wärmeleitfähigkeit der Überdeckung */
-		private static double rohrAussenD = 0.0206505; /* Aussendurchmesser Euroval Rohr */
-		private static double rohrInnenD = 0.0153; /* Rohrinnendurchmesser */
-		private static double rohrInnenA = 0.000183783; /* Rohrinnenquerschnitt */
+		private static double rohrAussenD = 0.017; /* Aussendurchmesser Ecotherm Rohr */
+		private static double rohrInnenD = 0.013; /* Rohrinnendurchmesser */
+		private static double rohrInnenA = (rohrInnenD / 2) * (rohrInnenD / 2) * Math.PI; /* Rohrinnenquerschnitt */
 		private static double ag = 1.1034; /* Ovalrohr Geometriefaktor für Euroval */
 		private static double sr0 = 0.002; /* fix ??? */
 		private static double sr = 0.00238; /* Aus Euroval Normprüfdaten */
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
 		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
-		private static bool agActivated = true;
+		private static bool agActivated = false;
 		private static double rLambdaDecke = 0.11; /* Fußbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 		private static double rLambdaPutz = 0.02; /* Fußbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 
