@@ -379,7 +379,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public double DruckverlustRegister(HithermRegister.RegisterTypeEnum type, int width, double durchfluss) {
+		public double DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum type, int width, double durchfluss) {
 			double[] x1;
 			double[] x2;
 			double[][] y;
@@ -387,7 +387,7 @@ namespace Europlan.Common {
 			x1 = new double[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400 };
 
 			switch (type) {
-				case HithermRegister.RegisterTypeEnum.HIT_50_5:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_50_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
 					y = new double[][] {new double[] {0.1 ,0.1 ,0.1 ,0.2 ,0.4 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,2.2 ,3.0 ,3.9 ,5.0 ,6.1 ,7.4 ,8.8 ,10.4 ,12.0 ,13.8 ,15.7 ,17.8 ,19.9 ,22.2 ,24.6},
 						new double[] {0.1 ,0.3 ,0.4 ,0.6 ,0.8 ,0.9 ,1.1 ,1.3 ,1.6 ,1.8 ,2.3 ,2.8 ,3.4 ,4.0 ,4.7 ,5.4 ,6.2 ,7.0 ,7.9 ,8.8 ,9.7 ,10.7 ,11.8 ,12.8 ,14.0},
@@ -397,7 +397,7 @@ namespace Europlan.Common {
 						new double[] {0.1 ,0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,2.1 ,2.8 ,3.6 ,4.4 ,5.4 ,6.5 ,7.7 ,8.9 ,10.3 ,11.8 ,13.3 ,15.0 ,16.7 ,18.6 ,20.5}};
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_50_10:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_50_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
 					y = new double[][] {new double[] {0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,1.8 ,2.4 ,3.1 ,3.8 ,4.7 ,5.6 ,6.6 ,7.7 ,8.9 ,10.1 ,11.5 ,12.9 ,14.4 ,16.0 ,17.7 ,19.4},
 						new double[] {0.1 ,0.3 ,0.4 ,0.5 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,1.7 ,2.2 ,2.7 ,3.2 ,3.8 ,4.5 ,5.2 ,5.9 ,6.7 ,7.5 ,8.4 ,9.3 ,10.2 ,11.2 ,12.3 ,13.4},
@@ -407,7 +407,7 @@ namespace Europlan.Common {
 						new double[] {0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.7 ,2.3 ,3.1 ,4.0 ,4.9 ,6.0 ,7.3 ,8.6 ,10.0 ,11.5 ,13.2 ,14.9 ,16.8 ,18.8 ,20.9 ,23.1}};
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_100_5:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_100_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
 					y = new double[][] {new double[] {0.3 ,0.7 ,1.1 ,1.5 ,2.0 ,2.5 ,3.0 ,3.6 ,4.2 ,4.9 ,6.2 ,7.7 ,9.4 ,11.2 ,13.1 ,15.1 ,17.3 ,19.7 ,22.1 ,24.7 ,27.4 ,30.3 ,33.3 ,36.4 ,39.7},
 						new double[] {0.2 ,0.4 ,0.7 ,0.9 ,1.2 ,1.4 ,1.7 ,2.0 ,2.3 ,2.7 ,3.3 ,4.1 ,4.9 ,5.7 ,6.6 ,7.5 ,8.5 ,9.5 ,10.6 ,11.7 ,12.9 ,14.2 ,15.5 ,16.8 ,18.2},
@@ -417,7 +417,7 @@ namespace Europlan.Common {
 						new double[] {0.2 ,0.5 ,0.7 ,1.0 ,1.3 ,1.6 ,1.9 ,2.3 ,2.7 ,3.1 ,3.9 ,4.8 ,5.9 ,7.0 ,8.1 ,9.4 ,10.7 ,12.1 ,13.6 ,15.2 ,16.8 ,18.6 ,20.4 ,22.3 ,24.2}};
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_100_10:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_100_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
 					y = new double[][] {new double[] {0.2 ,0.5 ,0.8 ,1.1 ,1.5 ,1.8 ,2.2 ,2.6 ,3.1 ,3.6 ,4.6 ,5.7 ,7.0 ,8.3 ,9.7 ,11.3 ,12.9 ,14.7 ,16.6 ,18.5 ,20.6 ,22.8 ,25.0 ,27.4 ,29.9},
 						new double[] {0.2 ,0.4 ,0.6 ,0.8 ,1.0 ,1.3 ,1.6 ,1.8 ,2.1 ,2.4 ,3.1 ,3.8 ,4.6 ,5.4 ,6.3 ,7.2 ,8.2 ,9.3 ,10.4 ,11.5 ,12.7 ,14.0 ,15.3 ,16.7 ,18.2},
@@ -427,7 +427,7 @@ namespace Europlan.Common {
 						new double[] {0.3 ,0.6 ,0.9 ,1.3 ,1.6 ,2.0 ,2.4 ,2.8 ,3.2 ,3.6 ,4.6 ,5.5 ,6.6 ,7.7 ,8.8 ,10.0 ,11.3 ,12.7 ,14.1 ,15.5 ,17.1 ,18.6 ,20.3 ,22.0 ,23.8}};
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_150_5:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_150_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
 					y = new double[][] {new double[] {0.4 ,0.8 ,1.2 ,1.7 ,2.3 ,2.8 ,3.5 ,4.1 ,4.8 ,5.6 ,7.2 ,9.0 ,11.0 ,13.1 ,15.4 ,17.9 ,20.5 ,23.3 ,26.3 ,29.4 ,32.8 ,36.2 ,39.9 ,43.7 ,47.7},
 						new double[] {0.1 ,0.3 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.7 ,2.0 ,2.3 ,3.0 ,3.9 ,4.7 ,5.7 ,6.8 ,7.9 ,9.2 ,10.5 ,11.9 ,13.4 ,15.0 ,16.7 ,18.4 ,20.3 ,22.2},
@@ -437,7 +437,7 @@ namespace Europlan.Common {
 						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,2.0 ,2.6 ,3.2 ,3.9 ,4.6 ,5.4 ,6.3 ,7.2 ,8.2 ,9.2 ,10.3 ,11.5 ,12.7 ,14.0 ,15.4}};
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_150_10:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_150_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
 					y = new double[][] {new double[] {0.2 ,0.4 ,0.7 ,1.0 ,1.3 ,1.7 ,2.1 ,2.6 ,3.1 ,3.6 ,4.8 ,6.2 ,7.7 ,9.4 ,11.3 ,13.3 ,15.4 ,17.7 ,20.2 ,22.9 ,25.7 ,28.6 ,31.8 ,35.0 ,38.5},
 						new double[] {0.2 ,0.3 ,0.5 ,0.7 ,1.0 ,1.2 ,1.5 ,1.7 ,2.0 ,2.4 ,3.0 ,3.8 ,4.6 ,5.5 ,6.5 ,7.5 ,8.6 ,9.8 ,11.0 ,12.4 ,13.8 ,15.2 ,16.8 ,18.4 ,20.0},
@@ -447,7 +447,7 @@ namespace Europlan.Common {
 						new double[] {0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.2 ,1.5 ,1.7 ,2.2 ,2.8 ,3.4 ,4.1 ,4.8 ,5.7 ,6.5 ,7.4 ,8.4 ,9.5 ,10.6 ,11.7 ,12.9 ,14.2 ,15.6}};
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_200_5:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_200_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
 					y = new double[][] {new double[] {0.2 ,0.5 ,0.9 ,1.3 ,1.8 ,2.3 ,2.8 ,3.4 ,4.1 ,4.8 ,6.5 ,8.3 ,10.3 ,12.6 ,15.1 ,17.8 ,20.7 ,23.8 ,27.1 ,30.7 ,34.4 ,38.4 ,42.6 ,47.0 ,51.6},
 						new double[] {0.2 ,0.4 ,0.7 ,0.9 ,1.2 ,1.5 ,1.9 ,2.2 ,2.6 ,3.0 ,3.8 ,4.8 ,5.8 ,6.9 ,8.1 ,9.3 ,10.7 ,12.1 ,13.7 ,15.3 ,17.0 ,18.7 ,20.6 ,22.6 ,24.6},
@@ -457,7 +457,7 @@ namespace Europlan.Common {
 						new double[] {0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.9 ,1.4 ,2.0 ,2.8 ,3.7 ,4.7 ,5.8 ,7.0 ,8.4 ,9.8 ,11.4 ,13.1 ,15.0 ,16.9 ,19.0 ,21.1}};
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_200_10:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_200_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
 					y = new double[][] {new double[] {0.1 ,0.3 ,0.5 ,0.7 ,1.0 ,1.3 ,1.7 ,2.2 ,2.6 ,3.2 ,4.4 ,5.7 ,7.3 ,9.0 ,10.9 ,13.1 ,15.3 ,17.8 ,20.5 ,23.3 ,26.4 ,29.6 ,33.0 ,36.6 ,40.3},
 						new double[] {0.2 ,0.4 ,0.7 ,1.0 ,1.2 ,1.5 ,1.9 ,2.2 ,2.6 ,3.0 ,3.8 ,4.7 ,5.7 ,6.7 ,7.8 ,9.0 ,10.3 ,11.7 ,13.1 ,14.6 ,16.2 ,17.9 ,19.6 ,21.4 ,23.3},
@@ -467,22 +467,22 @@ namespace Europlan.Common {
 						new double[] {0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.7 ,1.2 ,1.8 ,2.5 ,3.3 ,4.3 ,5.4 ,6.6 ,7.9 ,9.3 ,10.8 ,12.5 ,14.2 ,16.1 ,18.1 ,20.2}};
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_250_5:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_250_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
 					return 0;
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_250_10:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_250_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
 					return 0;
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_300_5:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_300_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
 					return 0;
 					break;
 
-				case HithermRegister.RegisterTypeEnum.HIT_300_10:
+				case HithermRegister.HithermRegisterTypeEnum.HIT_300_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
 					return 0;
 					break;
@@ -510,7 +510,7 @@ namespace Europlan.Common {
 			return rtn;
 		}
 
-		public double DruckverlustRegister(HithermCompactRegister.RegisterTypeEnum type, int width, double durchfluss) {
+		public double DruckverlustRegister(HithermCompactRegister.HithermCompactRegisterTypeEnum type, int width, double durchfluss) {
 			return 0;
 		}
 

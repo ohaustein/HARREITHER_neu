@@ -13,14 +13,14 @@ namespace Europlan.Common {
 		public PlannedHithermCompactProductPanel() {
 			InitializeComponent();
 
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.RegisterTypeEnum.HITC_620_Std);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.RegisterTypeEnum.HITC_1000_Std);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.RegisterTypeEnum.HITC_1500_Std);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.RegisterTypeEnum.HITC_2000_Std);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.RegisterTypeEnum.HITC_2500_Std);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.RegisterTypeEnum.HITC_1000_Par);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.RegisterTypeEnum.HITC_1500_Par);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.RegisterTypeEnum.HITC_2000_Par);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par);
 			this.cmbType.Items.Add(Product.ProductType.WH);
 			this.cmbType.Items.Add(Product.ProductType.DH);
 			this.cmbType.Items.Add(Product.ProductType.DSH);
