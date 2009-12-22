@@ -17,27 +17,27 @@ namespace Europlan.Common {
 			private static readonly string hitc_1500_par = "HIT 1500 Par";
 			private static readonly string hitc_2000_par = "HIT 2000 Par";
 
-			private Dictionary<string, RegisterTypeEnum> mappingFromString = new Dictionary<string, RegisterTypeEnum>();
-			private Dictionary<RegisterTypeEnum, string> mappingToString = new Dictionary<RegisterTypeEnum, string>();
+			private Dictionary<string, HithermCompactRegisterTypeEnum> mappingFromString = new Dictionary<string, HithermCompactRegisterTypeEnum>();
+			private Dictionary<HithermCompactRegisterTypeEnum, string> mappingToString = new Dictionary<HithermCompactRegisterTypeEnum, string>();
 
 			public RegisterTypeEnumConverter() {
-				mappingFromString.Add(hitc_620_std, RegisterTypeEnum.HITC_620_Std);
-				mappingFromString.Add(hitc_1000_std, RegisterTypeEnum.HITC_1000_Std);
-				mappingFromString.Add(hitc_1500_std, RegisterTypeEnum.HITC_1500_Std);
-				mappingFromString.Add(hitc_2000_std, RegisterTypeEnum.HITC_2000_Std);
-				mappingFromString.Add(hitc_2500_std, RegisterTypeEnum.HITC_2500_Std);
-				mappingFromString.Add(hitc_1000_par, RegisterTypeEnum.HITC_1000_Par);
-				mappingFromString.Add(hitc_1500_par, RegisterTypeEnum.HITC_1500_Par);
-				mappingFromString.Add(hitc_2000_par, RegisterTypeEnum.HITC_2000_Par);
+				mappingFromString.Add(hitc_620_std, HithermCompactRegisterTypeEnum.HITC_620_Std);
+				mappingFromString.Add(hitc_1000_std, HithermCompactRegisterTypeEnum.HITC_1000_Std);
+				mappingFromString.Add(hitc_1500_std, HithermCompactRegisterTypeEnum.HITC_1500_Std);
+				mappingFromString.Add(hitc_2000_std, HithermCompactRegisterTypeEnum.HITC_2000_Std);
+				mappingFromString.Add(hitc_2500_std, HithermCompactRegisterTypeEnum.HITC_2500_Std);
+				mappingFromString.Add(hitc_1000_par, HithermCompactRegisterTypeEnum.HITC_1000_Par);
+				mappingFromString.Add(hitc_1500_par, HithermCompactRegisterTypeEnum.HITC_1500_Par);
+				mappingFromString.Add(hitc_2000_par, HithermCompactRegisterTypeEnum.HITC_2000_Par);
 
-				mappingToString.Add(RegisterTypeEnum.HITC_620_Std, hitc_620_std);
-				mappingToString.Add(RegisterTypeEnum.HITC_1000_Std, hitc_1000_std);
-				mappingToString.Add(RegisterTypeEnum.HITC_1500_Std, hitc_1500_std);
-				mappingToString.Add(RegisterTypeEnum.HITC_2000_Std, hitc_2000_std);
-				mappingToString.Add(RegisterTypeEnum.HITC_2500_Std, hitc_2500_std);
-				mappingToString.Add(RegisterTypeEnum.HITC_1000_Par, hitc_1000_par);
-				mappingToString.Add(RegisterTypeEnum.HITC_1500_Par, hitc_1500_par);
-				mappingToString.Add(RegisterTypeEnum.HITC_2000_Par, hitc_2000_par);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_620_Std, hitc_620_std);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Std, hitc_1000_std);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1500_Std, hitc_1500_std);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_2000_Std, hitc_2000_std);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_2500_Std, hitc_2500_std);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Par, hitc_1000_par);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1500_Par, hitc_1500_par);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_2000_Par, hitc_2000_par);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -58,9 +58,9 @@ namespace Europlan.Common {
 			}
 
 			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-				if (value is RegisterTypeEnum && destinationType == typeof(string)) {
-					if (mappingToString.ContainsKey((RegisterTypeEnum)value)) {
-						return mappingToString[(RegisterTypeEnum)value];
+				if (value is HithermCompactRegisterTypeEnum && destinationType == typeof(string)) {
+					if (mappingToString.ContainsKey((HithermCompactRegisterTypeEnum)value)) {
+						return mappingToString[(HithermCompactRegisterTypeEnum)value];
 					}
 				}
 				return base.ConvertTo(context, culture, value, destinationType);
@@ -68,7 +68,7 @@ namespace Europlan.Common {
 		}
 
 		[System.ComponentModel.TypeConverter(typeof(RegisterTypeEnumConverter))]
-		public enum RegisterTypeEnum {
+		public enum HithermCompactRegisterTypeEnum {
 			HITC_620_Std,
 			HITC_1000_Std,
 			//HIT_1250_Std,
@@ -87,26 +87,26 @@ namespace Europlan.Common {
 
 		#region Static Methods
 		// Register Height in mm
-		public static int GetRegisterHoehe(RegisterTypeEnum registerType) {
+		public static int GetRegisterHoehe(HithermCompactRegisterTypeEnum registerType) {
 			switch (registerType) {
-				case RegisterTypeEnum.HITC_620_Std:
+				case HithermCompactRegisterTypeEnum.HITC_620_Std:
 					return 620;
 
-				case RegisterTypeEnum.HITC_1000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
 					return 1000;
 
-				case RegisterTypeEnum.HITC_1500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
 					return 1500;
 
-				case RegisterTypeEnum.HITC_2000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
 					return 2000;
 
-				case RegisterTypeEnum.HITC_2500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
 					return 2500;
 
-				case RegisterTypeEnum.HITC_1000_Par:
-				case RegisterTypeEnum.HITC_1500_Par:
-				case RegisterTypeEnum.HITC_2000_Par:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Par:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
 					return 625;
 
 				default:
@@ -115,22 +115,22 @@ namespace Europlan.Common {
 		}
 
 		// Register Width in mm
-		public static int GetRegisterBreite(RegisterTypeEnum registerType) {
+		public static int GetRegisterBreite(HithermCompactRegisterTypeEnum registerType) {
 			switch (registerType) {
-				case RegisterTypeEnum.HITC_620_Std:
-				case RegisterTypeEnum.HITC_1000_Std:
-				case RegisterTypeEnum.HITC_1500_Std:
-				case RegisterTypeEnum.HITC_2000_Std:
-				case RegisterTypeEnum.HITC_2500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_620_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
 					return 625;
 
-				case RegisterTypeEnum.HITC_1000_Par:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
 					return 1000;
 
-				case RegisterTypeEnum.HITC_1500_Par:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Par:
 					return 1500;
 
-				case RegisterTypeEnum.HITC_2000_Par:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
 					return 2000;
 
 				default:
@@ -138,24 +138,24 @@ namespace Europlan.Common {
 			}
 		}
 
-		public static double GetHeatArea(RegisterTypeEnum registerType) {
+		public static double GetHeatArea(HithermCompactRegisterTypeEnum registerType) {
 			switch (registerType) {
-				case RegisterTypeEnum.HITC_620_Std:
+				case HithermCompactRegisterTypeEnum.HITC_620_Std:
 					return 0.62 * 0.5;
 
-				case RegisterTypeEnum.HITC_1000_Std:
-				case RegisterTypeEnum.HITC_1000_Par:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
 					return 1.0 * 0.5;
 
-				case RegisterTypeEnum.HITC_1500_Std:
-				case RegisterTypeEnum.HITC_1500_Par:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Par:
 					return 1.5 * 0.5;
 
-				case RegisterTypeEnum.HITC_2000_Std:
-				case RegisterTypeEnum.HITC_2000_Par:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
 					return 2.0 * 0.5;
 
-				case RegisterTypeEnum.HITC_2500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
 					return 2.5 * 0.5;
 
 				default:
@@ -164,7 +164,7 @@ namespace Europlan.Common {
 		}
 		#endregion Static Methods
 
-		private RegisterTypeEnum registerType = RegisterTypeEnum.HITC_620_Std;
+		private HithermCompactRegisterTypeEnum registerType = HithermCompactRegisterTypeEnum.HITC_620_Std;
 		private int registerCount = 1;
 		private double pipeHorizontal = 0.25;
 		private double pipeVertical = 0.5;
@@ -174,18 +174,18 @@ namespace Europlan.Common {
 		/*private Nullable<Point> origin = null;*/
 
 		public HithermCompactRegister() {
-			this.registerType = RegisterTypeEnum.HITC_620_Std;
+			this.registerType = HithermCompactRegisterTypeEnum.HITC_620_Std;
 			this.pipeHorizontal = 0.25;
 			this.pipeVertical = 0.5;
 			this.registerCount = 1;
 		}
 
-		public HithermCompactRegister(RegisterTypeEnum registerType, int registerCount) {
+		public HithermCompactRegister(HithermCompactRegisterTypeEnum registerType, int registerCount) {
 			this.registerType = registerType;
 			this.registerCount = registerCount;
 		}
 
-		public RegisterTypeEnum RegisterType {
+		public HithermCompactRegisterTypeEnum RegisterType {
 			get { return this.registerType; }
 			set {
 				bool setDefaultPipeVertical = this.pipeVertical == this.DefaultPipeVertical;
@@ -198,7 +198,7 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public bool IsParapet {
-			get { return this.registerType == RegisterTypeEnum.HITC_1000_Par || this.registerType == RegisterTypeEnum.HITC_1500_Par || this.registerType == RegisterTypeEnum.HITC_2000_Par; }
+			get { return this.registerType == HithermCompactRegisterTypeEnum.HITC_1000_Par || this.registerType == HithermCompactRegisterTypeEnum.HITC_1500_Par || this.registerType == HithermCompactRegisterTypeEnum.HITC_2000_Par; }
 		}
 
 		[XmlIgnore]
@@ -410,7 +410,7 @@ namespace Europlan.Common {
 		public string PartNumber {
 			get {
 				switch (registerType) {
-					case RegisterTypeEnum.HITC_620_Std:
+					case HithermCompactRegisterTypeEnum.HITC_620_Std:
 						if (HithermProduct.ConfigUsePlus) {
 							return "";
 						} else {

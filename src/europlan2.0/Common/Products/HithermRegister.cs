@@ -21,35 +21,35 @@ namespace Europlan.Common {
 			private static readonly string hit_250_5 = "HIT 250/5";
 			private static readonly string hit_300_5 = "HIT 300/5";
 
-			private Dictionary<string, RegisterTypeEnum> mappingFromString = new Dictionary<string, RegisterTypeEnum>();
-			private Dictionary<RegisterTypeEnum, string> mappingToString = new Dictionary<RegisterTypeEnum, string>();
+			private Dictionary<string, HithermRegisterTypeEnum> mappingFromString = new Dictionary<string, HithermRegisterTypeEnum>();
+			private Dictionary<HithermRegisterTypeEnum, string> mappingToString = new Dictionary<HithermRegisterTypeEnum, string>();
 
 			public RegisterTypeEnumConverter() {
-				mappingFromString.Add(hit_50_10, RegisterTypeEnum.HIT_50_10);
-				mappingFromString.Add(hit_100_10, RegisterTypeEnum.HIT_100_10);
-				mappingFromString.Add(hit_150_10, RegisterTypeEnum.HIT_150_10);
-				mappingFromString.Add(hit_200_10, RegisterTypeEnum.HIT_200_10);
-				mappingFromString.Add(hit_250_10, RegisterTypeEnum.HIT_250_10);
-				mappingFromString.Add(hit_300_10, RegisterTypeEnum.HIT_300_10);
-				mappingFromString.Add(hit_50_5, RegisterTypeEnum.HIT_50_5);
-				mappingFromString.Add(hit_100_5, RegisterTypeEnum.HIT_100_5);
-				mappingFromString.Add(hit_150_5, RegisterTypeEnum.HIT_150_5);
-				mappingFromString.Add(hit_200_5, RegisterTypeEnum.HIT_200_5);
-				mappingFromString.Add(hit_250_5, RegisterTypeEnum.HIT_250_5);
-				mappingFromString.Add(hit_300_5, RegisterTypeEnum.HIT_300_5);
+				mappingFromString.Add(hit_50_10, HithermRegisterTypeEnum.HIT_50_10);
+				mappingFromString.Add(hit_100_10, HithermRegisterTypeEnum.HIT_100_10);
+				mappingFromString.Add(hit_150_10, HithermRegisterTypeEnum.HIT_150_10);
+				mappingFromString.Add(hit_200_10, HithermRegisterTypeEnum.HIT_200_10);
+				mappingFromString.Add(hit_250_10, HithermRegisterTypeEnum.HIT_250_10);
+				mappingFromString.Add(hit_300_10, HithermRegisterTypeEnum.HIT_300_10);
+				mappingFromString.Add(hit_50_5, HithermRegisterTypeEnum.HIT_50_5);
+				mappingFromString.Add(hit_100_5, HithermRegisterTypeEnum.HIT_100_5);
+				mappingFromString.Add(hit_150_5, HithermRegisterTypeEnum.HIT_150_5);
+				mappingFromString.Add(hit_200_5, HithermRegisterTypeEnum.HIT_200_5);
+				mappingFromString.Add(hit_250_5, HithermRegisterTypeEnum.HIT_250_5);
+				mappingFromString.Add(hit_300_5, HithermRegisterTypeEnum.HIT_300_5);
 
-				mappingToString.Add(RegisterTypeEnum.HIT_50_10, hit_50_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_100_10, hit_100_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_150_10, hit_150_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_200_10, hit_200_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_250_10, hit_250_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_300_10, hit_300_10);
-				mappingToString.Add(RegisterTypeEnum.HIT_50_5, hit_50_5);
-				mappingToString.Add(RegisterTypeEnum.HIT_100_5, hit_100_5);
-				mappingToString.Add(RegisterTypeEnum.HIT_150_5, hit_150_5);
-				mappingToString.Add(RegisterTypeEnum.HIT_200_5, hit_200_5);
-				mappingToString.Add(RegisterTypeEnum.HIT_250_5, hit_250_5);
-				mappingToString.Add(RegisterTypeEnum.HIT_300_5, hit_300_5);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_50_10, hit_50_10);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_100_10, hit_100_10);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_150_10, hit_150_10);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_200_10, hit_200_10);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_250_10, hit_250_10);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_300_10, hit_300_10);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_50_5, hit_50_5);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_100_5, hit_100_5);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_150_5, hit_150_5);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_200_5, hit_200_5);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_250_5, hit_250_5);
+				mappingToString.Add(HithermRegisterTypeEnum.HIT_300_5, hit_300_5);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -70,9 +70,9 @@ namespace Europlan.Common {
 			}
 
 			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-				if (value is RegisterTypeEnum && destinationType == typeof(string)) {
-					if (mappingToString.ContainsKey((RegisterTypeEnum)value)) {
-						return mappingToString[(RegisterTypeEnum)value];
+				if (value is HithermRegisterTypeEnum && destinationType == typeof(string)) {
+					if (mappingToString.ContainsKey((HithermRegisterTypeEnum)value)) {
+						return mappingToString[(HithermRegisterTypeEnum)value];
 					}
 				}
 				return base.ConvertTo(context, culture, value, destinationType);
@@ -81,7 +81,7 @@ namespace Europlan.Common {
 
 		[System.ComponentModel.TypeConverter(typeof(RegisterTypeEnumConverter))]
 		// if extended - consider also the part number getter
-		public enum RegisterTypeEnum {
+		public enum HithermRegisterTypeEnum {
 			HIT_50_10,
 			HIT_100_10,
 			HIT_150_10,
@@ -192,22 +192,22 @@ namespace Europlan.Common {
 		#endregion Enums
 
 		#region Static Methods
-		public static RohrabstandEnum GetRohrabstandForRegisterType(RegisterTypeEnum registerType) {
+		public static RohrabstandEnum GetRohrabstandForRegisterType(HithermRegisterTypeEnum registerType) {
 			switch (registerType) {
-				case RegisterTypeEnum.HIT_50_10:
-				case RegisterTypeEnum.HIT_100_10:
-				case RegisterTypeEnum.HIT_150_10:
-				case RegisterTypeEnum.HIT_200_10:
-				case RegisterTypeEnum.HIT_250_10:
-				case RegisterTypeEnum.HIT_300_10:
+				case HithermRegisterTypeEnum.HIT_50_10:
+				case HithermRegisterTypeEnum.HIT_100_10:
+				case HithermRegisterTypeEnum.HIT_150_10:
+				case HithermRegisterTypeEnum.HIT_200_10:
+				case HithermRegisterTypeEnum.HIT_250_10:
+				case HithermRegisterTypeEnum.HIT_300_10:
 					return RohrabstandEnum.RC_STANDARD;
 
-				case RegisterTypeEnum.HIT_50_5:
-				case RegisterTypeEnum.HIT_100_5:
-				case RegisterTypeEnum.HIT_150_5:
-				case RegisterTypeEnum.HIT_200_5:
-				case RegisterTypeEnum.HIT_250_5:
-				case RegisterTypeEnum.HIT_300_5:
+				case HithermRegisterTypeEnum.HIT_50_5:
+				case HithermRegisterTypeEnum.HIT_100_5:
+				case HithermRegisterTypeEnum.HIT_150_5:
+				case HithermRegisterTypeEnum.HIT_200_5:
+				case HithermRegisterTypeEnum.HIT_250_5:
+				case HithermRegisterTypeEnum.HIT_300_5:
 					return RohrabstandEnum.RC_HOCHLEISTUNG;
 
 				default:
@@ -215,30 +215,30 @@ namespace Europlan.Common {
 			}
 		}
 
-		public static int GetRegisterHoehe(RegisterTypeEnum registerType) {
+		public static int GetRegisterHoehe(HithermRegisterTypeEnum registerType) {
 			switch (registerType) {
-				case RegisterTypeEnum.HIT_50_10:
-				case RegisterTypeEnum.HIT_50_5:
+				case HithermRegisterTypeEnum.HIT_50_10:
+				case HithermRegisterTypeEnum.HIT_50_5:
 					return 50;
 
-				case RegisterTypeEnum.HIT_100_10:
-				case RegisterTypeEnum.HIT_100_5:
+				case HithermRegisterTypeEnum.HIT_100_10:
+				case HithermRegisterTypeEnum.HIT_100_5:
 					return 100;
 
-				case RegisterTypeEnum.HIT_150_10:
-				case RegisterTypeEnum.HIT_150_5:
+				case HithermRegisterTypeEnum.HIT_150_10:
+				case HithermRegisterTypeEnum.HIT_150_5:
 					return 150;
 
-				case RegisterTypeEnum.HIT_200_10:
-				case RegisterTypeEnum.HIT_200_5:
+				case HithermRegisterTypeEnum.HIT_200_10:
+				case HithermRegisterTypeEnum.HIT_200_5:
 					return 200;
 
-				case RegisterTypeEnum.HIT_250_10:
-				case RegisterTypeEnum.HIT_250_5:
+				case HithermRegisterTypeEnum.HIT_250_10:
+				case HithermRegisterTypeEnum.HIT_250_5:
 					return 250;
 
-				case RegisterTypeEnum.HIT_300_10:
-				case RegisterTypeEnum.HIT_300_5:
+				case HithermRegisterTypeEnum.HIT_300_10:
+				case HithermRegisterTypeEnum.HIT_300_5:
 					return 300;
 
 				default:
@@ -247,7 +247,7 @@ namespace Europlan.Common {
 		}
 		#endregion Static Methods
 
-		private RegisterTypeEnum registerType = RegisterTypeEnum.HIT_50_10;
+		private HithermRegisterTypeEnum registerType = HithermRegisterTypeEnum.HIT_50_10;
 		private RegisterOrientationEnum orientation = RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 		private int rohre = 1;
 		private double pipeHorizontal = 0.25;
@@ -258,20 +258,20 @@ namespace Europlan.Common {
 		/*private Nullable<Point> origin = null;*/
 
 		public HithermRegister() {
-			this.registerType = RegisterTypeEnum.HIT_50_10;
+			this.registerType = HithermRegisterTypeEnum.HIT_50_10;
 			this.orientation = RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 			this.pipeHorizontal = 0.25;
 			this.pipeVertical = 0.5;
 			this.rohre = 1;
 		}
 
-		public HithermRegister(RegisterTypeEnum registerType, RegisterOrientationEnum orientation, int rohre) {
+		public HithermRegister(HithermRegisterTypeEnum registerType, RegisterOrientationEnum orientation, int rohre) {
 			this.registerType = registerType;
 			this.orientation = orientation;
 			this.rohre = rohre;
 		}
 
-		public RegisterTypeEnum RegisterType {
+		public HithermRegisterTypeEnum RegisterType {
 			get { return this.registerType; }
 			set {
 				bool setDefaultPipeVertical = this.pipeVertical == this.DefaultPipeVertical;
@@ -286,7 +286,7 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public bool IsHochleistungsRegister {
-			get { return this.registerType == RegisterTypeEnum.HIT_50_5 || this.registerType == RegisterTypeEnum.HIT_100_5 || this.registerType == RegisterTypeEnum.HIT_150_5 || this.registerType == RegisterTypeEnum.HIT_200_5 || this.registerType == RegisterTypeEnum.HIT_250_5 || this.registerType == RegisterTypeEnum.HIT_300_5; }
+			get { return this.registerType == HithermRegisterTypeEnum.HIT_50_5 || this.registerType == HithermRegisterTypeEnum.HIT_100_5 || this.registerType == HithermRegisterTypeEnum.HIT_150_5 || this.registerType == HithermRegisterTypeEnum.HIT_200_5 || this.registerType == HithermRegisterTypeEnum.HIT_250_5 || this.registerType == HithermRegisterTypeEnum.HIT_300_5; }
 		}
 
 		[XmlIgnore]
@@ -343,23 +343,23 @@ namespace Europlan.Common {
 			get {
 				if (this.orientation == RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
 					switch (this.registerType) {
-						case RegisterTypeEnum.HIT_50_5:
-						case RegisterTypeEnum.HIT_50_10:
+						case HithermRegisterTypeEnum.HIT_50_5:
+						case HithermRegisterTypeEnum.HIT_50_10:
 							return 0.5;
-						case RegisterTypeEnum.HIT_100_5:
-						case RegisterTypeEnum.HIT_100_10:
+						case HithermRegisterTypeEnum.HIT_100_5:
+						case HithermRegisterTypeEnum.HIT_100_10:
 							return 1;
-						case RegisterTypeEnum.HIT_150_5:
-						case RegisterTypeEnum.HIT_150_10:
+						case HithermRegisterTypeEnum.HIT_150_5:
+						case HithermRegisterTypeEnum.HIT_150_10:
 							return 1.5;
-						case RegisterTypeEnum.HIT_200_5:
-						case RegisterTypeEnum.HIT_200_10:
+						case HithermRegisterTypeEnum.HIT_200_5:
+						case HithermRegisterTypeEnum.HIT_200_10:
 							return 2.0;
-						case RegisterTypeEnum.HIT_250_5:
-						case RegisterTypeEnum.HIT_250_10:
+						case HithermRegisterTypeEnum.HIT_250_5:
+						case HithermRegisterTypeEnum.HIT_250_10:
 							return 2.5;
-						case RegisterTypeEnum.HIT_300_5:
-						case RegisterTypeEnum.HIT_300_10:
+						case HithermRegisterTypeEnum.HIT_300_5:
+						case HithermRegisterTypeEnum.HIT_300_10:
 							return 3.0;
 						default:
 							return 0;
@@ -549,73 +549,73 @@ namespace Europlan.Common {
 		public string PartNumber {
 			get {
 				switch (registerType) {
-					case RegisterTypeEnum.HIT_50_10:
+					case HithermRegisterTypeEnum.HIT_50_10:
 						if (HithermProduct.ConfigUsePlus) {
 							return "";
 						} else {
 							return "HI06";
 						}
-					case RegisterTypeEnum.HIT_50_5:
+					case HithermRegisterTypeEnum.HIT_50_5:
 						if (HithermProduct.ConfigUsePlus) {
 							return "HP05";
 						} else {
 							return "HI05";
 						}
-					case RegisterTypeEnum.HIT_100_10:
+					case HithermRegisterTypeEnum.HIT_100_10:
 						if (HithermProduct.ConfigUsePlus) {
 							return "";
 						} else {
 							return "HI11";
 						}
-					case RegisterTypeEnum.HIT_100_5:
+					case HithermRegisterTypeEnum.HIT_100_5:
 						if (HithermProduct.ConfigUsePlus) {
 							return "HP10";
 						} else {
 							return "HI10";
 						}
-					case RegisterTypeEnum.HIT_150_10:
+					case HithermRegisterTypeEnum.HIT_150_10:
 						if (HithermProduct.ConfigUsePlus) {
 							return "";
 						} else {
 							return "HI16";
 						}
-					case RegisterTypeEnum.HIT_150_5:
+					case HithermRegisterTypeEnum.HIT_150_5:
 						if (HithermProduct.ConfigUsePlus) {
 							return "HP15";
 						} else {
 							return "HI15";
 						}
-					case RegisterTypeEnum.HIT_200_10:
+					case HithermRegisterTypeEnum.HIT_200_10:
 						if (HithermProduct.ConfigUsePlus) {
 							return "";
 						} else {
 							return "HI21";
 						}
-					case RegisterTypeEnum.HIT_200_5:
+					case HithermRegisterTypeEnum.HIT_200_5:
 						if (HithermProduct.ConfigUsePlus) {
 							return "HP20";
 						} else {
 							return "HI20";
 						}
-					case RegisterTypeEnum.HIT_250_10:
+					case HithermRegisterTypeEnum.HIT_250_10:
 						if (HithermProduct.ConfigUsePlus) {
 							return "";
 						} else {
 							return "HI26";
 						}
-					case RegisterTypeEnum.HIT_250_5:
+					case HithermRegisterTypeEnum.HIT_250_5:
 						if (HithermProduct.ConfigUsePlus) {
 							return "HP25";
 						} else {
 							return "HI25";
 						}
-					case RegisterTypeEnum.HIT_300_10:
+					case HithermRegisterTypeEnum.HIT_300_10:
 						if (HithermProduct.ConfigUsePlus) {
 							return "";
 						} else {
 							return "HI31";
 						}
-					case RegisterTypeEnum.HIT_300_5:
+					case HithermRegisterTypeEnum.HIT_300_5:
 						if (HithermProduct.ConfigUsePlus) {
 							return "HP30";
 						} else {
