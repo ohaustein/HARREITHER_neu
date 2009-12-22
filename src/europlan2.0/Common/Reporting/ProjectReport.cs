@@ -1055,9 +1055,9 @@ namespace Europlan.Common {
 
 			EurovalAreaOverviewWrapper wrapper;
 			EurovalProduct p = null;
-			Dictionary<EurovalProduct.LayDistance, double> aZAreaPerLayDistance = new Dictionary<EurovalProduct.LayDistance, double>();
-			Dictionary<EurovalProduct.LayDistance, double> rZAreaPerLayDistance = new Dictionary<EurovalProduct.LayDistance, double>();
-			Dictionary<EurovalProduct.LayDistance, double> connectingAreaPerLayDistance = new Dictionary<EurovalProduct.LayDistance, double>();
+			Dictionary<EurovalProduct.EurovalLayDistance, double> aZAreaPerLayDistance = new Dictionary<EurovalProduct.EurovalLayDistance, double>();
+			Dictionary<EurovalProduct.EurovalLayDistance, double> rZAreaPerLayDistance = new Dictionary<EurovalProduct.EurovalLayDistance, double>();
+			Dictionary<EurovalProduct.EurovalLayDistance, double> connectingAreaPerLayDistance = new Dictionary<EurovalProduct.EurovalLayDistance, double>();
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
 					foreach (PlannedProduct pp in room.PlannedProducts) {
@@ -1090,8 +1090,8 @@ namespace Europlan.Common {
 			}
 
 
-			foreach (EurovalProduct.LayDistance distance in Enum.GetValues(typeof(EurovalProduct.LayDistance))) {
-				if (distance != EurovalProduct.LayDistance.NONE) {
+			foreach (EurovalProduct.EurovalLayDistance distance in Enum.GetValues(typeof(EurovalProduct.EurovalLayDistance))) {
+				if (distance != EurovalProduct.EurovalLayDistance.NONE) {
 					wrapper = new EurovalAreaOverviewWrapper();
 					wrapper.LayDistance = distance.ToString();
 					wrapper.AzArea = aZAreaPerLayDistance.ContainsKey(distance) ? aZAreaPerLayDistance[distance] : 0;

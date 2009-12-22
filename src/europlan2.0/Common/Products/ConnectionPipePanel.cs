@@ -173,7 +173,11 @@ namespace Europlan.Common {
 					DataGridViewCell pipeTypeCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[PipeType.DisplayIndex];
 					pipeTypeCombo.Items.Clear();
 					ConnectionPipe.PipeTypeEnumConverter conv = new ConnectionPipe.PipeTypeEnumConverter();
-					pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_EUROVAL));
+					if (this.product != null && this.product.Product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_EUROVAL) {
+						pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_EUROVAL));
+					} else if (this.product != null && this.product.Product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_ECOTHERM) {
+						pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_ECOTHERM));
+					}
 					DataGridViewRow selectedRow = dgvConnectionPipes.Rows[e.RowIndex];
 					if ((this.showPipesThroughProduct && selectedRow.DataBoundItem != null && (selectedRow.DataBoundItem as ConnectionPipe).ConnectionOf != null && (selectedRow.DataBoundItem as ConnectionPipe).ConnectionOf.Product != null && (selectedRow.DataBoundItem as ConnectionPipe).ConnectionOf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) ||
 						(!this.showPipesThroughProduct && this.product != null && this.product.Product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM)) {
@@ -202,7 +206,8 @@ namespace Europlan.Common {
 						(!this.showPipesThroughProduct && selectedRow.DataBoundItem != null && (selectedRow.DataBoundItem as ConnectionPipe).ConnectionThrough != null && (selectedRow.DataBoundItem as ConnectionPipe).ConnectionThrough.Product is EurovalProduct)) {
 						verlegeart = true;
 					}
-					if (ConnectionPipe.PipeTypeEnum.PT_EUROVAL.Equals(pipeTypeCell.Value) && verlegeart) {
+					if ((ConnectionPipe.PipeTypeEnum.PT_EUROVAL.Equals(pipeTypeCell.Value) || 
+						ConnectionPipe.PipeTypeEnum.PT_ECOTHERM.Equals(pipeTypeCell.Value)) && verlegeart) {
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV35));
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV30));
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV25));
@@ -396,6 +401,10 @@ namespace Europlan.Common {
 				e.Row.Cells[PipeType.DisplayIndex].Value = ConnectionPipe.PipeTypeEnum.PT_21MM;
 				e.Row.Cells[Verlegeart.DisplayIndex].Value = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
 				e.Row.Cells[Insulation.DisplayIndex].Value = ConnectionPipe.InsulationEnum.IN_VL_RL;
+			} if (this.product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_ECOTHERM) {
+				e.Row.Cells[PipeType.DisplayIndex].Value = ConnectionPipe.PipeTypeEnum.PT_ECOTHERM;
+				e.Row.Cells[Verlegeart.DisplayIndex].Value = ConnectionPipe.VerlegeartEnum.VA_EV5;
+				e.Row.Cells[Insulation.DisplayIndex].Value = ConnectionPipe.InsulationEnum.IN_NONE;
 			} else {
 				e.Row.Cells[PipeType.DisplayIndex].Value = ConnectionPipe.PipeTypeEnum.PT_EUROVAL;
 				e.Row.Cells[Verlegeart.DisplayIndex].Value = ConnectionPipe.VerlegeartEnum.VA_EV5;

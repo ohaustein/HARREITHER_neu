@@ -9,6 +9,7 @@ namespace Europlan.Common {
 		public class PipeTypeEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string euroval = "Euroval FBH 24/17";
 			private static readonly string rundrohr = "21mm Rundrohr";
+			private static readonly string ecotherm = "Ecotherm FBH";
 
 			private Dictionary<string, PipeTypeEnum> mappingFromString = new Dictionary<string, PipeTypeEnum>();
 			private Dictionary<PipeTypeEnum, string> mappingToString = new Dictionary<PipeTypeEnum, string>();
@@ -16,8 +17,10 @@ namespace Europlan.Common {
 			public PipeTypeEnumConverter() {
 				mappingFromString.Add(euroval, PipeTypeEnum.PT_EUROVAL);
 				mappingFromString.Add(rundrohr, PipeTypeEnum.PT_21MM);
+				mappingFromString.Add(ecotherm, PipeTypeEnum.PT_ECOTHERM);
 				mappingToString.Add(PipeTypeEnum.PT_EUROVAL, euroval);
 				mappingToString.Add(PipeTypeEnum.PT_21MM, rundrohr);
+				mappingToString.Add(PipeTypeEnum.PT_ECOTHERM, ecotherm);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -50,7 +53,8 @@ namespace Europlan.Common {
 		[System.ComponentModel.TypeConverter(typeof(PipeTypeEnumConverter))]
 		public enum PipeTypeEnum {
 			PT_EUROVAL,
-			PT_21MM
+			PT_21MM,
+			PT_ECOTHERM
 		}
 
 		public class VerlegeartEnumConverter : System.ComponentModel.TypeConverter {
@@ -371,35 +375,35 @@ namespace Europlan.Common {
 						break;
 
 					case VerlegeartEnum.VA_EV35:
-						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV35);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV35);
 						break;
 
 					case VerlegeartEnum.VA_EV30:
-						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV30);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV30);
 						break;
 
 					case VerlegeartEnum.VA_EV25:
-						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV25);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV25);
 						break;
 
 					case VerlegeartEnum.VA_EV20:
-						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV20);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV20);
 						break;
 
 					case VerlegeartEnum.VA_EV15:
-						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV15);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV15);
 						break;
 
 					case VerlegeartEnum.VA_EV10:
-						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV10);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV10);
 						break;
 
 					case VerlegeartEnum.VA_EV5:
-						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV5);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV5);
 						break;
 
 					case VerlegeartEnum.VA_A5:
-						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.A5);
+						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.A5);
 						break;
 
 					default:
@@ -410,54 +414,76 @@ namespace Europlan.Common {
 			}
 		}
 
-		public static EurovalProduct.LayDistance GetLayDistance(VerlegeartEnum verlegeart) {
+		public static EurovalProduct.EurovalLayDistance GetLayDistance(VerlegeartEnum verlegeart) {
 			switch (verlegeart) {
 				case VerlegeartEnum.VA_EV35:
-					return EurovalProduct.LayDistance.EV35;
+					return EurovalProduct.EurovalLayDistance.EV35;
 				case VerlegeartEnum.VA_EV30:
-					return EurovalProduct.LayDistance.EV30;
+					return EurovalProduct.EurovalLayDistance.EV30;
 				case VerlegeartEnum.VA_EV25:
-					return EurovalProduct.LayDistance.EV25;
+					return EurovalProduct.EurovalLayDistance.EV25;
 				case VerlegeartEnum.VA_EV20:
-					return EurovalProduct.LayDistance.EV20;
+					return EurovalProduct.EurovalLayDistance.EV20;
 				case VerlegeartEnum.VA_EV15:
-					return EurovalProduct.LayDistance.EV15;
+					return EurovalProduct.EurovalLayDistance.EV15;
 				case VerlegeartEnum.VA_EV10:
-					return EurovalProduct.LayDistance.EV10;
+					return EurovalProduct.EurovalLayDistance.EV10;
 				case VerlegeartEnum.VA_EV5:
-					return EurovalProduct.LayDistance.EV5;
+					return EurovalProduct.EurovalLayDistance.EV5;
 				case VerlegeartEnum.VA_A5:
-					return EurovalProduct.LayDistance.A5;
+					return EurovalProduct.EurovalLayDistance.A5;
 				default:
-					return EurovalProduct.LayDistance.EV5; // TODO
+					return EurovalProduct.EurovalLayDistance.EV5; // TODO
 			}
 		}
 
 		[XmlIgnore]
 		private double RohrAussenD {
 			get {
-				return this.pipeType == PipeTypeEnum.PT_EUROVAL ? EurovalProduct.ConfigRohrAussenD : Product.rundrohr21mmAussenD;
+				if (this.pipeType == PipeTypeEnum.PT_EUROVAL) {
+					return EurovalProduct.ConfigRohrAussenD;
+				} else if (this.pipeType == PipeTypeEnum.PT_ECOTHERM) {
+					return EcothermProduct.ConfigRohrAussenD;
+				} else {
+					return Product.rundrohr21mmAussenD;
+				}
 			}
 		}
 
 		[XmlIgnore]
 		private double RohrInnenD {
 			get {
-				return this.pipeType == PipeTypeEnum.PT_EUROVAL ? EurovalProduct.ConfigRohrInnenD : Product.rundrohr21mmInnenD;
+				if (this.pipeType == PipeTypeEnum.PT_EUROVAL) {
+					return EurovalProduct.ConfigRohrInnenD;
+				} else if (this.pipeType == PipeTypeEnum.PT_ECOTHERM) {
+					return EcothermProduct.ConfigRohrInnenD;
+				} else {
+					return Product.rundrohr21mmInnenD;
+				}
 			}
 		}
 
 		[XmlIgnore]
 		private double RohrInnenA {
 			get {
-				return this.pipeType == PipeTypeEnum.PT_EUROVAL ? EurovalProduct.ConfigRohrInnenA : Product.rundrohr21mmInnenA;
+				if (this.pipeType == PipeTypeEnum.PT_EUROVAL) {
+					return EurovalProduct.ConfigRohrInnenA;
+				} else if (this.pipeType == PipeTypeEnum.PT_ECOTHERM) {
+					return EcothermProduct.ConfigRohrInnenA;
+				} else {
+					return Product.rundrohr21mmInnenA;
+				}
 			}
 		}
 
 		[XmlIgnore]
 		private double Geometriefaktor {
 			get {
-				return this.pipeType == PipeTypeEnum.PT_EUROVAL && EurovalProduct.ConfigAgActivated ? EurovalProduct.ConfigAg : 1;
+				if (this.pipeType == PipeTypeEnum.PT_EUROVAL && EurovalProduct.ConfigAgActivated) {
+					return EurovalProduct.ConfigAg;
+				} else {
+					return 1;
+				}
 			}
 		}
 

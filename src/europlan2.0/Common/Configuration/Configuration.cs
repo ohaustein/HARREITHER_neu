@@ -38,6 +38,7 @@ namespace Europlan.Common {
 
 		// if you add a product don't forget to call the Initialize() function in setter of ProductConfiguration
 		private EurovalProduct eurovalProduct = new EurovalProduct();
+		private EcothermProduct ecothermProduct = new EcothermProduct();
 		private ConcreteActivationProduct concreteActivationProduct = new ConcreteActivationProduct();
 		private HithermProduct hithermProduct = new HithermProduct();
 		private HithermCompactProduct hithermCompactProduct = new HithermCompactProduct();
@@ -68,6 +69,7 @@ namespace Europlan.Common {
 			this.roomTypes = new List<RoomType>();
 
 			eurovalProduct.StaticInitialize();
+			ecothermProduct.StaticInitialize();
 			concreteActivationProduct.StaticInitialize();
 			hithermProduct.StaticInitialize();
 			hithermCompactProduct.StaticInitialize();
@@ -537,6 +539,12 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public EcothermProduct EcothermProduct {
+			get { return ecothermProduct; }
+			set { ecothermProduct = value; }
+		}
+
+		[XmlIgnore]
 		public ConcreteActivationProduct ConcreteActivationProduct {
 			get { return concreteActivationProduct; }
 			set { concreteActivationProduct = value; }
@@ -575,6 +583,8 @@ namespace Europlan.Common {
 		public P GetProduct<P>() where P : Product {
 			if (typeof(P) == typeof(EurovalProduct)) {
 				return this.EurovalProduct as P;
+			} else if (typeof(P) == typeof(EcothermProduct)) {
+				return this.EcothermProduct as P;
 			} else if (typeof(P) == typeof(ConcreteActivationProduct)) {
 				return this.ConcreteActivationProduct as P;
 			} else if (typeof(P) == typeof(HithermProduct)) {

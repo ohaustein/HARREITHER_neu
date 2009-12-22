@@ -7,6 +7,7 @@ using System.Globalization;
 namespace Europlan.Common {
 
 	[XmlInclude(typeof(EurovalProduct))]
+	[XmlInclude(typeof(EcothermProduct))]
 	[XmlInclude(typeof(ConcreteActivationProduct))]
 	[XmlInclude(typeof(HithermProduct))]
 	[XmlInclude(typeof(HithermCompactProduct))]
