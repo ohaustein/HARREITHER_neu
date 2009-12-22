@@ -858,16 +858,16 @@ namespace Europlan.Common {
 			Project.Instance.QuickDimensioning.HeatFlowTemperature = (float)Int32.Parse((string)cmbHeatFlowTemperature.SelectedItem);
 			switch (cmbHeatFlowTemperature.SelectedIndex) {
 				case 0:
-					this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV5;
+					this.cmbDistance.SelectedIndex = (int)EurovalProduct.EurovalLayDistance.EV5;
 					break;
 				case 1:
-					this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV15;
+					this.cmbDistance.SelectedIndex = (int)EurovalProduct.EurovalLayDistance.EV15;
 					break;
 				case 2:
-					this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV20;
+					this.cmbDistance.SelectedIndex = (int)EurovalProduct.EurovalLayDistance.EV20;
 					break;
 				case 3:
-					this.cmbDistance.SelectedIndex = (int)EurovalProduct.LayDistance.EV25;
+					this.cmbDistance.SelectedIndex = (int)EurovalProduct.EurovalLayDistance.EV25;
 					break;
 			}
 			this.OnProjectChanged();
@@ -880,7 +880,7 @@ namespace Europlan.Common {
 		}
 
 		private void cmbDistance_SelectedIndexChanged(object sender, EventArgs e) {
-			Project.Instance.QuickDimensioning.LayDistance = (EurovalProduct.LayDistance)this.cmbDistance.SelectedIndex;
+			Project.Instance.QuickDimensioning.LayDistance = (EurovalProduct.EurovalLayDistance)this.cmbDistance.SelectedIndex;
 			this.OnProjectChanged();
 		}
 

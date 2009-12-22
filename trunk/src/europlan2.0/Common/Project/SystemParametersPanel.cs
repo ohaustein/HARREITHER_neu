@@ -68,7 +68,7 @@ namespace Europlan.Common {
 		private void InitializeEurovalValues() {
 			rbEurovalHarreitherNorm.Checked = EurovalProduct.ConfigUseHarreitherNorm;
 			rbEurovalEN1264.Checked = !EurovalProduct.ConfigUseHarreitherNorm;
-			numCircuitLength.Value = (decimal)EurovalProduct.ConfigMaxCircuitLength;
+			numEurovalCircuitLength.Value = (decimal)EurovalProduct.ConfigMaxCircuitLength;
 			numEurovalPressurePa.Value = EurovalProduct.ConfigMaxPressureLost;
 			numEurovalDurchfluss.Value = EurovalProduct.ConfigMaxDurchfluss;
 			numSpreizungHeizMin.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMin;
@@ -128,8 +128,8 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void numCircuitLength_ValueChanged(object sender, EventArgs e) {
-			EurovalProduct.ConfigMaxCircuitLength = (double)numCircuitLength.Value;
+		private void numEurovalCircuitLength_ValueChanged(object sender, EventArgs e) {
+			EurovalProduct.ConfigMaxCircuitLength = (double)numEurovalCircuitLength.Value;
 			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigMaxCircuitLength", numCircuitLength.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
@@ -389,5 +389,10 @@ namespace Europlan.Common {
 				ProjectChanged(null);
 			}
 		}
+
+		private void numCircuitLength_ValueChanged(object sender, EventArgs e) {
+
+		}
+
 	}
 }

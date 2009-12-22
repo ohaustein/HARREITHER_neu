@@ -7,15 +7,15 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace Europlan.Common {
-	public partial class PlannedEurovalProductPanel : UserControl, IEditorUserControl {
+	public partial class PlannedEcothermProductPanel : UserControl, IEditorUserControl {
 		private PlannedProduct product = null;
 
 
 		private class LayDistanceItem {
-			public Nullable<EurovalProduct.EurovalLayDistance> layDistance;
+			public Nullable<EcothermProduct.EcothermLayDistance> layDistance;
 			public string name;
 
-			public LayDistanceItem(Nullable<EurovalProduct.EurovalLayDistance> layDistance, string name) {
+			public LayDistanceItem(Nullable<EcothermProduct.EcothermLayDistance> layDistance, string name) {
 				this.layDistance = layDistance;
 				this.name = name;
 			}
@@ -34,10 +34,10 @@ namespace Europlan.Common {
 		}
 
 		private class RimTypeItem {
-			public Nullable<EurovalProduct.EurovalRimType> rimType;
+			public Nullable<EcothermProduct.EcothermRimType> rimType;
 			public string name;
 
-			public RimTypeItem(Nullable<EurovalProduct.EurovalRimType> layDistance, string name) {
+			public RimTypeItem(Nullable<EcothermProduct.EcothermRimType> layDistance, string name) {
 				this.rimType = layDistance;
 				this.name = name;
 			}
@@ -55,30 +55,30 @@ namespace Europlan.Common {
 			}
 		}
 
-		public PlannedEurovalProductPanel() {
+		public PlannedEcothermProductPanel() {
 			InitializeComponent();
 
 			this.cmbLayDistance.Items.Clear();
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(null, "Automatisch"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.EurovalLayDistance.EV35, "EV35"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.EurovalLayDistance.EV30, "EV30"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.EurovalLayDistance.EV25, "EV25"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.EurovalLayDistance.EV20, "EV20"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.EurovalLayDistance.EV15, "EV15"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.EurovalLayDistance.EV10, "EV10"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.EurovalLayDistance.EV5, "EV5"));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV35, "EV35"));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV30, "EV30"));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV25, "EV25"));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV20, "EV20"));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV15, "EV15"));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV10, "EV10"));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV5, "EV5"));
 
 			this.cmbRimType.Items.Clear();
 			this.cmbRimType.Items.Add(new RimTypeItem(null, "Automatisch"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.EurovalRimType.EV15_60, "EV15/60"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.EurovalRimType.EV15_120, "EV15/120"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.EurovalRimType.EV15_180, "EV15/180"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.EurovalRimType.EV10_55, "EV10/55"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.EurovalRimType.EV10_110, "EV10/110"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.EurovalRimType.EV10_165, "EV10/165"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.EurovalRimType.EV5_40, "EV5/40"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.EurovalRimType.EV5_80, "EV5/80"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EurovalProduct.EurovalRimType.EV5_120, "EV5/120"));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV15_60, "EV15/60"));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV15_120, "EV15/120"));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV15_180, "EV15/180"));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV10_55, "EV10/55"));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV10_110, "EV10/110"));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV10_165, "EV10/165"));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV5_40, "EV5/40"));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV5_80, "EV5/80"));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV5_120, "EV5/120"));
 
 			this.cmbCircuits.Items.Clear();
 			this.cmbCircuits.Items.Add("Automatisch");
@@ -163,7 +163,7 @@ namespace Europlan.Common {
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
 			if (this.product != null) {
-				(this.product.Product as EurovalProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				(this.product.Product as EcothermProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 			}
 			this.UpdateControl(FieldEnum.NONE);
@@ -211,10 +211,10 @@ namespace Europlan.Common {
 				ignoreCircuits++;
 				ignoreSeparateCircuit++;
 
-				EurovalProduct evProduct = this.product.Product as EurovalProduct;
+				EcothermProduct evProduct = this.product.Product as EcothermProduct;
 
-				bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0 && evProduct.PlannedLayDistance != EurovalProduct.EurovalLayDistance.NONE;
-				bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0 && evProduct.PlannedLayDistance != EurovalProduct.EurovalLayDistance.NONE;
+				bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0 && evProduct.PlannedLayDistance != EcothermProduct.EcothermLayDistance.NONE;
+				bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0 && evProduct.PlannedLayDistance != EcothermProduct.EcothermLayDistance.NONE;
 				bool showRim = evProduct.PlannedAreaRim > 0;
 				bool showResidence = true;
 				bool complete = this.product.Product.PlannedCalculationComplete;
@@ -414,31 +414,31 @@ namespace Europlan.Common {
 				// Randzone
 				if (evProduct.PlannedRimType.HasValue) {
 					switch (evProduct.PlannedRimLayDistance) {
-						case EurovalProduct.EurovalLayDistance.EV5:
+						case EcothermProduct.EcothermLayDistance.EV5:
 							this.lblRimVaHeat.Text = "EV5";
 							this.lblRimVaCool.Text = "EV5";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV10:
+						case EcothermProduct.EcothermLayDistance.EV10:
 							this.lblRimVaHeat.Text = "EV10";
 							this.lblRimVaCool.Text = "EV10";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV15:
+						case EcothermProduct.EcothermLayDistance.EV15:
 							this.lblRimVaHeat.Text = "EV15";
 							this.lblRimVaCool.Text = "EV15";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV20:
+						case EcothermProduct.EcothermLayDistance.EV20:
 							this.lblRimVaHeat.Text = "EV20";
 							this.lblRimVaCool.Text = "EV20";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV25:
+						case EcothermProduct.EcothermLayDistance.EV25:
 							this.lblRimVaHeat.Text = "EV25";
 							this.lblRimVaCool.Text = "EV25";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV30:
+						case EcothermProduct.EcothermLayDistance.EV30:
 							this.lblRimVaHeat.Text = "EV30";
 							this.lblRimVaCool.Text = "EV30";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV35:
+						case EcothermProduct.EcothermLayDistance.EV35:
 							this.lblRimVaHeat.Text = "EV35";
 							this.lblRimVaCool.Text = "EV35";
 							break;
@@ -467,31 +467,31 @@ namespace Europlan.Common {
 				// Aufenthaltszone
 				if (evProduct.PlannedLayDistance.HasValue) {
 					switch (evProduct.PlannedLayDistance) {
-						case EurovalProduct.EurovalLayDistance.EV5:
+						case EcothermProduct.EcothermLayDistance.EV5:
 							this.lblResidenceVaHeat.Text = "EV5";
 							this.lblResidenceVaCool.Text = "EV5";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV10:
+						case EcothermProduct.EcothermLayDistance.EV10:
 							this.lblResidenceVaHeat.Text = "EV10";
 							this.lblResidenceVaCool.Text = "EV10";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV15:
+						case EcothermProduct.EcothermLayDistance.EV15:
 							this.lblResidenceVaHeat.Text = "EV15";
 							this.lblResidenceVaCool.Text = "EV15";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV20:
+						case EcothermProduct.EcothermLayDistance.EV20:
 							this.lblResidenceVaHeat.Text = "EV20";
 							this.lblResidenceVaCool.Text = "EV20";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV25:
+						case EcothermProduct.EcothermLayDistance.EV25:
 							this.lblResidenceVaHeat.Text = "EV25";
 							this.lblResidenceVaCool.Text = "EV25";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV30:
+						case EcothermProduct.EcothermLayDistance.EV30:
 							this.lblResidenceVaHeat.Text = "EV30";
 							this.lblResidenceVaCool.Text = "EV30";
 							break;
-						case EurovalProduct.EurovalLayDistance.EV35:
+						case EcothermProduct.EcothermLayDistance.EV35:
 							this.lblResidenceVaHeat.Text = "EV35";
 							this.lblResidenceVaCool.Text = "EV35";
 							break;
@@ -694,7 +694,7 @@ namespace Europlan.Common {
 		private void numAreaPercentage_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaPercentage == 0) {
 				ignoreArea++;
-				(this.product.Product as EurovalProduct).PlannedFloorAreaPercentage = (float)this.numAreaPercentage.Value;
+				(this.product.Product as EcothermProduct).PlannedFloorAreaPercentage = (float)this.numAreaPercentage.Value;
 				this.numArea.Value = (decimal)this.product.PlannedArea;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
@@ -709,8 +709,8 @@ namespace Europlan.Common {
 		private void numArea_ValueChanged(object sender, EventArgs e) {
 			if (ignoreArea == 0) {
 				ignoreAreaPercentage++;
-				(this.product.Product as EurovalProduct).PlannedFloorArea = (float)this.numArea.Value;
-				this.numAreaPercentage.Value = (decimal)(this.product.Product as EurovalProduct).PlannedFloorAreaPercentage;
+				(this.product.Product as EcothermProduct).PlannedFloorArea = (float)this.numArea.Value;
+				this.numAreaPercentage.Value = (decimal)(this.product.Product as EcothermProduct).PlannedFloorAreaPercentage;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.AREA);
@@ -724,7 +724,7 @@ namespace Europlan.Common {
 		private void numAreaReduced_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaReduced == 0) {
 				ignoreAreaUnheated++;
-				EurovalProduct evProduct = this.product.Product as EurovalProduct;
+				EcothermProduct evProduct = this.product.Product as EcothermProduct;
 				evProduct.PlannedAreaReduced = (float)this.numAreaReduced.Value;
 				if (evProduct.PlannedAreaReduced + evProduct.PlannedAreaUnheated > evProduct.PlannedFloorArea) {
 					evProduct.PlannedAreaUnheated = evProduct.PlannedFloorArea - evProduct.PlannedAreaReduced;
@@ -742,7 +742,7 @@ namespace Europlan.Common {
 		private void numAreaUnheated_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaUnheated == 0) {
 				ignoreAreaReduced++;
-				EurovalProduct evProduct = this.product.Product as EurovalProduct;
+				EcothermProduct evProduct = this.product.Product as EcothermProduct;
 				evProduct.PlannedAreaUnheated = (float)this.numAreaUnheated.Value;
 				if (evProduct.PlannedAreaReduced + evProduct.PlannedAreaUnheated > evProduct.PlannedFloorArea) {
 					evProduct.PlannedAreaReduced = evProduct.PlannedFloorArea - evProduct.PlannedAreaUnheated;
@@ -764,10 +764,10 @@ namespace Europlan.Common {
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH),
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TROCKEN),
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN)}));
-			form.SelectedConstruction = (this.product.Product as EurovalProduct).PlannedFloorConstruction;
+			form.SelectedConstruction = (this.product.Product as EcothermProduct).PlannedFloorConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
-					(this.product.Product as EurovalProduct).PlannedFloorConstruction = form.SelectedConstruction;
+					(this.product.Product as EcothermProduct).PlannedFloorConstruction = form.SelectedConstruction;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.NONE);
@@ -781,10 +781,10 @@ namespace Europlan.Common {
 
 		private void btnInsulationConstruction_Click(object sender, EventArgs e) {
 			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.InsulationConstruction, null);
-			form.SelectedConstruction = (this.product.Product as EurovalProduct).PlannedInsulationConstruction;
+			form.SelectedConstruction = (this.product.Product as EcothermProduct).PlannedInsulationConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
-					(this.product.Product as EurovalProduct).PlannedInsulationConstruction = form.SelectedConstruction;
+					(this.product.Product as EcothermProduct).PlannedInsulationConstruction = form.SelectedConstruction;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.NONE);
@@ -798,7 +798,7 @@ namespace Europlan.Common {
 
 		private void numRoomTemperatureBelowHeat_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRoomTemperatureBelowHeat == 0) {
-				(this.product.Product as EurovalProduct).PlannedRoomTemperatureBelowHeat = (float)this.numRoomTemperatureBelowHeat.Value;
+				(this.product.Product as EcothermProduct).PlannedRoomTemperatureBelowHeat = (float)this.numRoomTemperatureBelowHeat.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_HEAT);
@@ -810,7 +810,7 @@ namespace Europlan.Common {
 
 		private void numRoomTemperatureBelowCool_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRoomTemperatureBelowCool == 0) {
-				(this.product.Product as EurovalProduct).PlannedRoomTemperatureBelowCool = (float)this.numRoomTemperatureBelowCool.Value;
+				(this.product.Product as EcothermProduct).PlannedRoomTemperatureBelowCool = (float)this.numRoomTemperatureBelowCool.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_COOL);
@@ -822,7 +822,7 @@ namespace Europlan.Common {
 
 		private void numRim_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRim == 0) {
-				(this.product.Product as EurovalProduct).PlannedRimLength = (float)this.numRim.Value;
+				(this.product.Product as EcothermProduct).PlannedRimLength = (float)this.numRim.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.RIM_LENGTH);
@@ -834,7 +834,7 @@ namespace Europlan.Common {
 
 		private void numCorners_ValueChanged(object sender, EventArgs e) {
 			if (ignoreCorners == 0) {
-				(this.product.Product as EurovalProduct).PlannedRimCorners = (int)this.numCorners.Value;
+				(this.product.Product as EcothermProduct).PlannedRimCorners = (int)this.numCorners.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.CORNERS);
@@ -846,7 +846,7 @@ namespace Europlan.Common {
 
 		private void cmbLayDistance_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreLayDistance == 0) {
-				(this.product.Product as EurovalProduct).RequestedLayDistance = (this.cmbLayDistance.SelectedItem as LayDistanceItem).layDistance;
+				(this.product.Product as EcothermProduct).RequestedLayDistance = (this.cmbLayDistance.SelectedItem as LayDistanceItem).layDistance;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.LAY_DISTANCE);
@@ -858,7 +858,7 @@ namespace Europlan.Common {
 
 		private void cmbRimType_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreRimType == 0) {
-				(this.product.Product as EurovalProduct).RequestedRimType = (this.cmbRimType.SelectedItem as RimTypeItem).rimType;
+				(this.product.Product as EcothermProduct).RequestedRimType = (this.cmbRimType.SelectedItem as RimTypeItem).rimType;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.RIM_TYPE);
@@ -872,9 +872,9 @@ namespace Europlan.Common {
 		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreCircuits == 0) {
 				if (this.cmbCircuits.SelectedIndex > 0) {
-					(this.product.Product as EurovalProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex;
+					(this.product.Product as EcothermProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex;
 				} else {
-					(this.product.Product as EurovalProduct).RequestedCircuits = null;
+					(this.product.Product as EcothermProduct).RequestedCircuits = null;
 				}
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
@@ -960,14 +960,14 @@ namespace Europlan.Common {
 		}
 
 		private void chkClip_CheckedChanged(object sender, EventArgs e) {
-			(this.product.Product as EurovalProduct).UseClipSchieneKlebeband = chkClip.Checked;
+			(this.product.Product as EcothermProduct).UseClipSchieneKlebeband = chkClip.Checked;
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
 		}
 
 		private void chkAnhydritEstrich_CheckedChanged(object sender, EventArgs e) {
-			(this.product.Product as EurovalProduct).UseAnhydritEstrich = chkAnhydritEstrich.Checked;
+			(this.product.Product as EcothermProduct).UseAnhydritEstrich = chkAnhydritEstrich.Checked;
 			if (chkAnhydritEstrich.Checked) {
 				chkClip.Checked = true;
 			}

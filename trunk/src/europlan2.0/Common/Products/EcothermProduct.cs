@@ -7,8 +7,8 @@ using System.Collections;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Euroval®", "Euroval® Fußbodenheizung")]
-	public class EurovalProduct : Product {
+	[ProductName("Ecotherm®", "Ecotherm® Fußbodenheizung")]
+	public class EcothermProduct : Product {
 
 		// quick dimensioning
 		private static int quickDimensioningHeatPowerPerSquareMeter = 50;
@@ -65,12 +65,12 @@ namespace Europlan.Common {
 		private Construction plannedFloorConstruction = null;
 		private Construction plannedInsulationConstruction = null;
 
-		private Nullable<EurovalLayDistance> requestedLayDistance = null;
-		private Nullable<EurovalRimType> requestedRimType = null;
+		private Nullable<EcothermLayDistance> requestedLayDistance = null;
+		private Nullable<EcothermRimType> requestedRimType = null;
 		private Nullable<int> requestedCircuits = null;
 
-		private Nullable<EurovalLayDistance> plannedLayDistance = null;
-		private Nullable<EurovalRimType> plannedRimType = null;
+		private Nullable<EcothermLayDistance> plannedLayDistance = null;
+		private Nullable<EcothermRimType> plannedRimType = null;
 
 		private bool plannedCorrections = false;
 
@@ -98,26 +98,26 @@ namespace Europlan.Common {
 			private static readonly string EV30 = "EV30";
 			private static readonly string EV35 = "EV35";
 
-			private Dictionary<string, EurovalLayDistance> mappingFromString = new Dictionary<string, EurovalLayDistance>();
-			private Dictionary<EurovalLayDistance, string> mappingToString = new Dictionary<EurovalLayDistance, string>();
+			private Dictionary<string, EcothermLayDistance> mappingFromString = new Dictionary<string, EcothermLayDistance>();
+			private Dictionary<EcothermLayDistance, string> mappingToString = new Dictionary<EcothermLayDistance, string>();
 
 			public LayDistanceConverter() {
-				mappingFromString.Add(A5, EurovalLayDistance.A5);
-				mappingFromString.Add(EV5, EurovalLayDistance.EV5);
-				mappingFromString.Add(EV10, EurovalLayDistance.EV10);
-				mappingFromString.Add(EV15, EurovalLayDistance.EV15);
-				mappingFromString.Add(EV20, EurovalLayDistance.EV20);
-				mappingFromString.Add(EV25, EurovalLayDistance.EV25);
-				mappingFromString.Add(EV30, EurovalLayDistance.EV30);
-				mappingFromString.Add(EV35, EurovalLayDistance.EV35);
-				mappingToString.Add(EurovalLayDistance.A5, A5);
-				mappingToString.Add(EurovalLayDistance.EV5, EV5);
-				mappingToString.Add(EurovalLayDistance.EV10, EV10);
-				mappingToString.Add(EurovalLayDistance.EV15, EV15);
-				mappingToString.Add(EurovalLayDistance.EV20, EV20);
-				mappingToString.Add(EurovalLayDistance.EV25, EV25);
-				mappingToString.Add(EurovalLayDistance.EV30, EV30);
-				mappingToString.Add(EurovalLayDistance.EV35, EV35);
+				mappingFromString.Add(A5, EcothermLayDistance.A5);
+				mappingFromString.Add(EV5, EcothermLayDistance.EV5);
+				mappingFromString.Add(EV10, EcothermLayDistance.EV10);
+				mappingFromString.Add(EV15, EcothermLayDistance.EV15);
+				mappingFromString.Add(EV20, EcothermLayDistance.EV20);
+				mappingFromString.Add(EV25, EcothermLayDistance.EV25);
+				mappingFromString.Add(EV30, EcothermLayDistance.EV30);
+				mappingFromString.Add(EV35, EcothermLayDistance.EV35);
+				mappingToString.Add(EcothermLayDistance.A5, A5);
+				mappingToString.Add(EcothermLayDistance.EV5, EV5);
+				mappingToString.Add(EcothermLayDistance.EV10, EV10);
+				mappingToString.Add(EcothermLayDistance.EV15, EV15);
+				mappingToString.Add(EcothermLayDistance.EV20, EV20);
+				mappingToString.Add(EcothermLayDistance.EV25, EV25);
+				mappingToString.Add(EcothermLayDistance.EV30, EV30);
+				mappingToString.Add(EcothermLayDistance.EV35, EV35);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -138,9 +138,9 @@ namespace Europlan.Common {
 			}
 
 			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-				if (value is EurovalLayDistance && destinationType == typeof(string)) {
-					if (mappingToString.ContainsKey((EurovalLayDistance)value)) {
-						return mappingToString[(EurovalLayDistance)value];
+				if (value is EcothermLayDistance && destinationType == typeof(string)) {
+					if (mappingToString.ContainsKey((EcothermLayDistance)value)) {
+						return mappingToString[(EcothermLayDistance)value];
 					}
 				}
 				return base.ConvertTo(context, culture, value, destinationType);
@@ -149,7 +149,7 @@ namespace Europlan.Common {
 
 		[System.ComponentModel.TypeConverter(typeof(LayDistanceConverter))]
 
-		public enum EurovalLayDistance {
+		public enum EcothermLayDistance {
 			A5 = 0,
 			EV5 = 1,
 			EV10 = 2,
@@ -161,7 +161,7 @@ namespace Europlan.Common {
 			NONE = -1
 		}
 
-		public enum EurovalRimType {
+		public enum EcothermRimType {
 			EV15_60,
 			EV15_120,
 			EV15_180,
@@ -173,11 +173,11 @@ namespace Europlan.Common {
 			EV5_120
 		}
 
-		public EurovalProduct(){
+		public EcothermProduct(){
 
 		}
 
-		protected EurovalProduct(EurovalProduct product) : base(product) {
+		protected EcothermProduct(EcothermProduct product) : base(product) {
 
 		}
 
@@ -200,7 +200,7 @@ namespace Europlan.Common {
 		}
 
 		public override Product Clone(Room room) {
-			EurovalProduct product = new EurovalProduct(this);
+			EcothermProduct product = new EcothermProduct(this);
 			product.AssociatedRoom = room;
 			return product;
 		}
@@ -457,7 +457,7 @@ namespace Europlan.Common {
 		/// Returns the default number of circuit for the planned area (for quick dimensioning)
 		/// </summary>
 		public override int GetDefaultQuickDimensioningCircuits() {
-			EurovalLayDistance distance = Project.Instance.QuickDimensioning.LayDistance;
+			EcothermLayDistance distance = (EcothermProduct.EcothermLayDistance)Project.Instance.QuickDimensioning.LayDistance;
 			return (int)Math.Ceiling(quickDimensioningPlannedArea / (100/GetPipeLengthPerSqm(distance)));
 		}
 
@@ -474,25 +474,25 @@ namespace Europlan.Common {
 		/// <summary>
 		/// Returns the pipe length in m per m² for the specified laydistance 
 		/// </summary>
-		public static double GetPipeLengthPerSqm(EurovalLayDistance distance) {
+		public static double GetPipeLengthPerSqm(EcothermLayDistance distance) {
 			switch (distance) {
-				case EurovalLayDistance.A5:
+				case EcothermLayDistance.A5:
 					return 20;
-				case EurovalLayDistance.EV5:
+				case EcothermLayDistance.EV5:
 					return 10;
-				case EurovalLayDistance.EV10:
+				case EcothermLayDistance.EV10:
 					return 7.5;
-				case EurovalLayDistance.EV15:
+				case EcothermLayDistance.EV15:
 					return 6.7;
-				case EurovalLayDistance.EV20:
+				case EcothermLayDistance.EV20:
 					return 5;
-				case EurovalLayDistance.EV25:
+				case EcothermLayDistance.EV25:
 					return 4;
-				case EurovalLayDistance.EV30:
+				case EcothermLayDistance.EV30:
 					return 3.5;
-				case EurovalLayDistance.EV35:
+				case EcothermLayDistance.EV35:
 					return 3;
-				case EurovalLayDistance.NONE:
+				case EcothermLayDistance.NONE:
 					return 0;
 				default:
 					throw new Exception("Unknown Laydistance");
@@ -502,28 +502,28 @@ namespace Europlan.Common {
 		/// <summary>
 		/// Returns the number of clipschiene in m per m² for the specified laydistance and estrich
 		/// </summary>
-		public static double GetClipschienePerSqm(EurovalLayDistance distance, bool anhydritEstrich) {
+		public static double GetClipschienePerSqm(EcothermLayDistance distance, bool anhydritEstrich) {
 			if (anhydritEstrich) {
 				return 2;
 			} else {
 				switch (distance) {
-					case EurovalLayDistance.A5:
+					case EcothermLayDistance.A5:
 						return 2;
-					case EurovalLayDistance.EV5:
+					case EcothermLayDistance.EV5:
 						return 1.8;
-					case EurovalLayDistance.EV10:
+					case EcothermLayDistance.EV10:
 						return 1.6;
-					case EurovalLayDistance.EV15:
+					case EcothermLayDistance.EV15:
 						return 1.5;
-					case EurovalLayDistance.EV20:
+					case EcothermLayDistance.EV20:
 						return 1.4;
-					case EurovalLayDistance.EV25:
+					case EcothermLayDistance.EV25:
 						return 1.3;
-					case EurovalLayDistance.EV30:
+					case EcothermLayDistance.EV30:
 						return 1.2;
-					case EurovalLayDistance.EV35:
+					case EcothermLayDistance.EV35:
 						return 1.2;
-					case EurovalLayDistance.NONE:
+					case EcothermLayDistance.NONE:
 						return 0;
 					default:
 						throw new Exception("Unknown Laydistance");
@@ -531,50 +531,50 @@ namespace Europlan.Common {
 			}
 		}
 
-		private double GetOvalmuffePerSqm(EurovalLayDistance layDistance) {
+		private double GetOvalmuffePerSqm(EcothermLayDistance layDistance) {
 			switch (layDistance) {
-				case EurovalLayDistance.A5:
+				case EcothermLayDistance.A5:
 					return 0.1;
-				case EurovalLayDistance.EV5:
+				case EcothermLayDistance.EV5:
 					return 0.07;
-				case EurovalLayDistance.EV10:
+				case EcothermLayDistance.EV10:
 					return 0.06;
-				case EurovalLayDistance.EV15:
+				case EcothermLayDistance.EV15:
 					return 0.05;
-				case EurovalLayDistance.EV20:
+				case EcothermLayDistance.EV20:
 					return 0.04;
-				case EurovalLayDistance.EV25:
+				case EcothermLayDistance.EV25:
 					return 0.03;
-				case EurovalLayDistance.EV30:
+				case EcothermLayDistance.EV30:
 					return 0.02;
-				case EurovalLayDistance.EV35:
+				case EcothermLayDistance.EV35:
 					return 0.02;
-				case EurovalLayDistance.NONE:
+				case EcothermLayDistance.NONE:
 					return 0;
 				default:
 					throw new Exception("Unknown Laydistance");
 			}
 		}
 
-		private double GetVerteilerAnschlussPerSqm(EurovalLayDistance layDistance) {
+		private double GetVerteilerAnschlussPerSqm(EcothermLayDistance layDistance) {
 			switch (layDistance) {
-				case EurovalLayDistance.A5:
+				case EcothermLayDistance.A5:
 					return 0.5;
-				case EurovalLayDistance.EV5:
+				case EcothermLayDistance.EV5:
 					return 0.25;
-				case EurovalLayDistance.EV10:
+				case EcothermLayDistance.EV10:
 					return 0.2;
-				case EurovalLayDistance.EV15:
+				case EcothermLayDistance.EV15:
 					return 0.18;
-				case EurovalLayDistance.EV20:
+				case EcothermLayDistance.EV20:
 					return 0.14;
-				case EurovalLayDistance.EV25:
+				case EcothermLayDistance.EV25:
 					return 0.12;
-				case EurovalLayDistance.EV30:
+				case EcothermLayDistance.EV30:
 					return 0.10;
-				case EurovalLayDistance.EV35:
+				case EcothermLayDistance.EV35:
 					return 0.10;
-				case EurovalLayDistance.NONE:
+				case EcothermLayDistance.NONE:
 					return 0;
 				default:
 					throw new Exception("Unknown Laydistance");
@@ -584,25 +584,25 @@ namespace Europlan.Common {
 		/// <summary>
 		/// Returns distance between two pipes in m for specified laydistance 
 		/// </summary>
-		public static double GetTeilung(EurovalLayDistance distance) {
+		public static double GetTeilung(EcothermLayDistance distance) {
 			switch (distance) {
-				case EurovalLayDistance.A5:
+				case EcothermLayDistance.A5:
 					return 0.05;
-				case EurovalLayDistance.EV5:
+				case EcothermLayDistance.EV5:
 					return 0.1;
-				case EurovalLayDistance.EV10:
+				case EcothermLayDistance.EV10:
 					return 0.125;
-				case EurovalLayDistance.EV15:
+				case EcothermLayDistance.EV15:
 					return 0.15;
-				case EurovalLayDistance.EV20:
+				case EcothermLayDistance.EV20:
 					return 0.2;
-				case EurovalLayDistance.EV25:
+				case EcothermLayDistance.EV25:
 					return 0.25;
-				case EurovalLayDistance.EV30:
+				case EcothermLayDistance.EV30:
 					return 0.3;
-				case EurovalLayDistance.EV35:
+				case EcothermLayDistance.EV35:
 					return 0.35;
-				case EurovalLayDistance.NONE:
+				case EcothermLayDistance.NONE:
 					return double.MaxValue;
 				default:
 					throw new Exception("Unknwon LayDistance");
@@ -612,20 +612,20 @@ namespace Europlan.Common {
 		/// <summary>
 		/// Returns the laydistance for the specified rimtype
 		/// </summary>
-		public static EurovalLayDistance GetRimLayDistance(EurovalRimType rimType) {
+		public static EcothermLayDistance GetRimLayDistance(EcothermRimType rimType) {
 			switch (rimType) {
-				case EurovalRimType.EV15_60:
-				case EurovalRimType.EV15_120:
-				case EurovalRimType.EV15_180:
-					return EurovalLayDistance.EV15;
-				case EurovalRimType.EV10_55:
-				case EurovalRimType.EV10_110:
-				case EurovalRimType.EV10_165:
-					return EurovalLayDistance.EV10;
-				case EurovalRimType.EV5_40:
-				case EurovalRimType.EV5_80:
-				case EurovalRimType.EV5_120:
-					return EurovalLayDistance.EV5;
+				case EcothermRimType.EV15_60:
+				case EcothermRimType.EV15_120:
+				case EcothermRimType.EV15_180:
+					return EcothermLayDistance.EV15;
+				case EcothermRimType.EV10_55:
+				case EcothermRimType.EV10_110:
+				case EcothermRimType.EV10_165:
+					return EcothermLayDistance.EV10;
+				case EcothermRimType.EV5_40:
+				case EcothermRimType.EV5_80:
+				case EcothermRimType.EV5_120:
+					return EcothermLayDistance.EV5;
 				default:
 					throw new Exception("Unknwon RimType");
 			}
@@ -634,24 +634,24 @@ namespace Europlan.Common {
 		/// <summary>
 		/// Returns the width of the rim in cm for the specified rimtype
 		/// </summary>
-		public static int GetRimWidth(EurovalRimType rimType) {
+		public static int GetRimWidth(EcothermRimType rimType) {
 			switch (rimType) {
-				case EurovalRimType.EV5_40:
+				case EcothermRimType.EV5_40:
 					return 40;
-				case EurovalRimType.EV10_55:
+				case EcothermRimType.EV10_55:
 					return 55;
-				case EurovalRimType.EV15_60:
+				case EcothermRimType.EV15_60:
 					return 60;
-				case EurovalRimType.EV5_80:
+				case EcothermRimType.EV5_80:
 					return 80;
-				case EurovalRimType.EV10_110:
+				case EcothermRimType.EV10_110:
 					return 110;
-				case EurovalRimType.EV15_120:
-				case EurovalRimType.EV5_120:
+				case EcothermRimType.EV15_120:
+				case EcothermRimType.EV5_120:
 					return 120;
-				case EurovalRimType.EV10_165:
+				case EcothermRimType.EV10_165:
 					return 165;
-				case EurovalRimType.EV15_180:
+				case EcothermRimType.EV15_180:
 					return 180;
 				default:
 					throw new Exception("Unknwon RimType");
@@ -685,7 +685,7 @@ namespace Europlan.Common {
 		/// The name of this product that is shown in quick dimensioning
 		/// </summary>
 		public override string QuickDimensioningName {
-			get { return "Euroval®\n(m²)"; }
+			get { return "Ecotherm®\n(m²)"; }
 		}
 		#endregion QuickDimensioning
 
@@ -697,7 +697,7 @@ namespace Europlan.Common {
 		}
 
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
-			get { return ConnectionPipe.PipeTypeEnum.PT_EUROVAL; }
+			get { return ConnectionPipe.PipeTypeEnum.PT_ECOTHERM; }
 		}
 
 		#region Auslegung
@@ -729,7 +729,7 @@ namespace Europlan.Common {
 		/// The lay distance that the user requested for this product in the planning.
 		/// If this is property is null the optimal lay distance will be calculated.
 		/// </summary>
-		public Nullable<EurovalLayDistance> RequestedLayDistance {
+		public Nullable<EcothermLayDistance> RequestedLayDistance {
 			get { return this.requestedLayDistance; }
 			set { this.requestedLayDistance = value; }
 		}
@@ -738,7 +738,7 @@ namespace Europlan.Common {
 		/// The rim type the user requested for this product in the planning.
 		/// If this property is null the optimal rim type will be calculated.
 		/// </summary>
-		public Nullable<EurovalRimType> RequestedRimType {
+		public Nullable<EcothermRimType> RequestedRimType {
 			get { return this.requestedRimType; }
 			set { this.requestedRimType = value; }
 		}
@@ -887,7 +887,7 @@ namespace Europlan.Common {
 		public float PlannedAreaResidence {
 			get {
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					value += (ec.AreaTotal - ec.GetAreaRim(this.plannedRimType) - ec.AreaRemovedDueConnection);
 				}
 				return (float)value;
@@ -911,7 +911,7 @@ namespace Europlan.Common {
 		/// calculated.
 		/// </summary>
 		[XmlIgnore]
-		public Nullable<EurovalLayDistance> PlannedLayDistance {
+		public Nullable<EcothermLayDistance> PlannedLayDistance {
 			get { return this.plannedLayDistance; }
 			set { this.plannedLayDistance = value; }
 		}
@@ -922,7 +922,7 @@ namespace Europlan.Common {
 		/// calculated.
 		/// </summary>
 		[XmlIgnore]
-		public Nullable<EurovalRimType> PlannedRimType {
+		public Nullable<EcothermRimType> PlannedRimType {
 			get { return this.plannedRimType; }
 			set { this.plannedRimType = value; }
 		}
@@ -931,8 +931,8 @@ namespace Europlan.Common {
 		/// The lay distance of the rim type used for calculation.
 		/// </summary>
 		[XmlIgnore]
-		public Nullable<EurovalLayDistance> PlannedRimLayDistance {
-			get { return this.plannedRimType == null ? (Nullable<EurovalLayDistance>)null : (Nullable<EurovalLayDistance>)GetRimLayDistance(this.plannedRimType.Value); }
+		public Nullable<EcothermLayDistance> PlannedRimLayDistance {
+			get { return this.plannedRimType == null ? (Nullable<EcothermLayDistance>)null : (Nullable<EcothermLayDistance>)GetRimLayDistance(this.plannedRimType.Value); }
 		}
 
 		/// <summary>
@@ -986,7 +986,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					value += ec.QFbhTotalHeat;
 				}
 				return value;
@@ -1003,7 +1003,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					value += ec.QRzHeat;
 				}
 				return value;
@@ -1020,7 +1020,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					value += ec.QAzHeat;
 				}
 				return value;
@@ -1034,7 +1034,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					if (ec.C_FloorTempRzHeat > value) {
 						value = ec.C_FloorTempRzHeat;
 					}
@@ -1050,7 +1050,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					if (ec.C_FloorTempAzHeat > value) {
 						value = ec.C_FloorTempAzHeat;
 					}
@@ -1103,7 +1103,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					value += ec.QFbhTotalCool;
 				}
 				return value;
@@ -1120,7 +1120,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					value += ec.QRzCool;
 				}
 				return value;
@@ -1137,7 +1137,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					value += ec.QAzCool;
 				}
 				return value;
@@ -1151,7 +1151,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					if (ec.C_FloorTempRzCool > value) {
 						value = ec.C_FloorTempRzCool;
 					}
@@ -1167,7 +1167,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					if (ec.C_FloorTempAzCool > value) {
 						value = ec.C_FloorTempAzCool;
 					}
@@ -1184,7 +1184,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					if (ec.PipeLengthWithoutConnections > value) {
 						value = ec.PipeLengthWithoutConnections;
 					}
@@ -1201,7 +1201,7 @@ namespace Europlan.Common {
 					return 0;
 				}
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					if (ec.PipeLengthWithAllConnections > value) {
 						value = ec.PipeLengthWithAllConnections;
 					}
@@ -1218,7 +1218,7 @@ namespace Europlan.Common {
 				}
 				double longest = 0;
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					if (ec.PipeLengthWithAllConnections > longest) {
 						longest = ec.PipeLengthWithAllConnections;
 						value = ec.PipeLengthWithoutConnections;
@@ -1236,7 +1236,7 @@ namespace Europlan.Common {
 				}
 				double longest = 0;
 				double value = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
+				foreach (EcothermCircuit ec in this.circuits) {
 					if (ec.PipeLengthWithAllConnections > longest) {
 						longest = ec.PipeLengthWithAllConnections;
 						value = ec.PipeLengthWithAllConnections - ec.PipeLengthWithoutConnections;
@@ -1320,8 +1320,8 @@ namespace Europlan.Common {
 			set {
 				if (value != null && value.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 					this.requestedCircuits = this.PlannedCircuitCount > 0 ? this.PlannedCircuitCount : 1;
-					this.requestedLayDistance = this.plannedLayDistance.HasValue ? this.plannedLayDistance.Value : EurovalLayDistance.EV35;
-					this.requestedRimType = this.plannedRimType.HasValue ? this.plannedRimType.Value : EurovalRimType.EV15_60;
+					this.requestedLayDistance = this.plannedLayDistance.HasValue ? this.plannedLayDistance.Value : EcothermLayDistance.EV35;
+					this.requestedRimType = this.plannedRimType.HasValue ? this.plannedRimType.Value : EcothermRimType.EV15_60;
 				}
 				this.plannedConnection = value;
 
@@ -1332,17 +1332,17 @@ namespace Europlan.Common {
 			base.CalculateHeatAndCoolFlow();
 			double spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
 			double spreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
-			if (spreizungHeat > EurovalProduct.ConfigSpreizungHeizMax) {
-				spreizungHeat = EurovalProduct.ConfigSpreizungHeizMax;
+			if (spreizungHeat > EcothermProduct.ConfigSpreizungHeizMax) {
+				spreizungHeat = EcothermProduct.ConfigSpreizungHeizMax;
 			}
-			if (spreizungHeat < EurovalProduct.ConfigSpreizungHeizMin) {
-				spreizungHeat = EurovalProduct.ConfigSpreizungHeizMin;
+			if (spreizungHeat < EcothermProduct.ConfigSpreizungHeizMin) {
+				spreizungHeat = EcothermProduct.ConfigSpreizungHeizMin;
 			}
-			if (spreizungCool > EurovalProduct.ConfigSpreizungKühlMax) {
-				spreizungCool = EurovalProduct.ConfigSpreizungKühlMax;
+			if (spreizungCool > EcothermProduct.ConfigSpreizungKühlMax) {
+				spreizungCool = EcothermProduct.ConfigSpreizungKühlMax;
 			}
-			if (spreizungCool < EurovalProduct.ConfigSpreizungKühlMin) {
-				spreizungCool = EurovalProduct.ConfigSpreizungKühlMin;
+			if (spreizungCool < EcothermProduct.ConfigSpreizungKühlMin) {
+				spreizungCool = EcothermProduct.ConfigSpreizungKühlMin;
 			}
 			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
 			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
@@ -1424,40 +1424,40 @@ namespace Europlan.Common {
 			}
 
 			// determine laydistance/rimtype combinations to calculate
-			Dictionary<EurovalLayDistance, Nullable<EurovalRimType>[]> teilungen = new Dictionary<EurovalLayDistance, EurovalRimType?[]>();
+			Dictionary<EcothermLayDistance, Nullable<EcothermRimType>[]> teilungen = new Dictionary<EcothermLayDistance, EcothermRimType?[]>();
 			if (this.plannedRimLength > 0) {
-				teilungen.Add(EurovalLayDistance.NONE, new Nullable<EurovalRimType>[] { null });
-				teilungen.Add(EurovalLayDistance.EV35, new Nullable<EurovalRimType>[] { EurovalRimType.EV15_60, EurovalRimType.EV15_120, EurovalRimType.EV15_180, EurovalRimType.EV10_55, EurovalRimType.EV10_110, EurovalRimType.EV10_165, EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
-				teilungen.Add(EurovalLayDistance.EV30, new Nullable<EurovalRimType>[] { EurovalRimType.EV15_60, EurovalRimType.EV15_120, EurovalRimType.EV15_180, EurovalRimType.EV10_55, EurovalRimType.EV10_110, EurovalRimType.EV10_165, EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
-				teilungen.Add(EurovalLayDistance.EV25, new Nullable<EurovalRimType>[] { EurovalRimType.EV15_60, EurovalRimType.EV15_120, EurovalRimType.EV15_180, EurovalRimType.EV10_55, EurovalRimType.EV10_110, EurovalRimType.EV10_165, EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
-				teilungen.Add(EurovalLayDistance.EV20, new Nullable<EurovalRimType>[] { EurovalRimType.EV10_55, EurovalRimType.EV10_110, EurovalRimType.EV10_165, EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
-				teilungen.Add(EurovalLayDistance.EV15, new Nullable<EurovalRimType>[] { EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
-				teilungen.Add(EurovalLayDistance.EV10, new Nullable<EurovalRimType>[] { null });
-				teilungen.Add(EurovalLayDistance.EV5, new Nullable<EurovalRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.NONE, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV35, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180, EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
+				teilungen.Add(EcothermLayDistance.EV30, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180, EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
+				teilungen.Add(EcothermLayDistance.EV25, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180, EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
+				teilungen.Add(EcothermLayDistance.EV20, new Nullable<EcothermRimType>[] { EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
+				teilungen.Add(EcothermLayDistance.EV15, new Nullable<EcothermRimType>[] { EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
+				teilungen.Add(EcothermLayDistance.EV10, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV5, new Nullable<EcothermRimType>[] { null });
 			} else {
-				teilungen.Add(EurovalLayDistance.NONE, new Nullable<EurovalRimType>[] { null });
-				teilungen.Add(EurovalLayDistance.EV35, new Nullable<EurovalRimType>[] { null });
-				teilungen.Add(EurovalLayDistance.EV30, new Nullable<EurovalRimType>[] { null });
-				teilungen.Add(EurovalLayDistance.EV25, new Nullable<EurovalRimType>[] { null });
-				teilungen.Add(EurovalLayDistance.EV20, new Nullable<EurovalRimType>[] { null });
-				teilungen.Add(EurovalLayDistance.EV15, new Nullable<EurovalRimType>[] { null });
-				teilungen.Add(EurovalLayDistance.EV10, new Nullable<EurovalRimType>[] { null });
-				teilungen.Add(EurovalLayDistance.EV5, new Nullable<EurovalRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.NONE, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV35, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV30, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV25, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV20, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV15, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV10, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV5, new Nullable<EcothermRimType>[] { null });
 			}
 			if (this.requestedLayDistance != null) {
-				EurovalLayDistance[] distances = new EurovalLayDistance[teilungen.Keys.Count];
+				EcothermLayDistance[] distances = new EcothermLayDistance[teilungen.Keys.Count];
 				teilungen.Keys.CopyTo(distances, 0);
-				foreach (EurovalLayDistance distance in distances) {
+				foreach (EcothermLayDistance distance in distances) {
 					if (distance != this.requestedLayDistance) {
 						teilungen.Remove(distance);
 					}
 				}
 			}
 			if (this.requestedRimType != null) {
-				EurovalLayDistance[] distances = new EurovalLayDistance[teilungen.Keys.Count];
+				EcothermLayDistance[] distances = new EcothermLayDistance[teilungen.Keys.Count];
 				teilungen.Keys.CopyTo(distances, 0);
-				foreach (EurovalLayDistance distance in distances) {
-					teilungen[distance] = new Nullable<EurovalRimType>[] { this.requestedRimType };
+				foreach (EcothermLayDistance distance in distances) {
+					teilungen[distance] = new Nullable<EcothermRimType>[] { this.requestedRimType };
 				}
 			}
 
@@ -1473,8 +1473,8 @@ namespace Europlan.Common {
 			double longestRuecklaufTotal;
 			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal);
 
-			Nullable<EurovalLayDistance> bestLaydistance = null;
-			Nullable<EurovalRimType> bestRimType = null;
+			Nullable<EcothermLayDistance> bestLaydistance = null;
+			Nullable<EcothermRimType> bestRimType = null;
 			int bestCircuits = int.MaxValue;
 			double bestPipeLength = double.MaxValue;
 			double bestFloorTempRimHeat = double.MaxValue;
@@ -1487,14 +1487,14 @@ namespace Europlan.Common {
 			double bestCoolLoad = 0;
 
 			this.CalculateHeatAndCoolFlow();
-			foreach (EurovalLayDistance ld in teilungen.Keys) {
-				foreach (Nullable<EurovalRimType> rt in teilungen[ld]) {
+			foreach (EcothermLayDistance ld in teilungen.Keys) {
+				foreach (Nullable<EcothermRimType> rt in teilungen[ld]) {
 					bool tryCalc = true;
 					int circuitCount = 1;
 					if (this.requestedCircuits.HasValue) {
 						circuitCount = this.requestedCircuits.Value;
 					} else {
-						circuitCount = (int)Math.Ceiling((this.plannedArea - this.plannedAreaReduced / 2 - this.plannedAreaUnheated - areaRemovedDueConnection) * EurovalProduct.GetPipeLengthPerSqm(ld) / (100 - longestVorlaufTotal - longestRuecklaufTotal));
+						circuitCount = (int)Math.Ceiling((this.plannedArea - this.plannedAreaReduced / 2 - this.plannedAreaUnheated - areaRemovedDueConnection) * EcothermProduct.GetPipeLengthPerSqm(ld) / (100 - longestVorlaufTotal - longestRuecklaufTotal));
 					}
 					circuitCount = circuitCount < 1 ? 1 : circuitCount;
 					while (tryCalc) {
@@ -1509,8 +1509,8 @@ namespace Europlan.Common {
 							return false;
 						}
 						int i = 0;
-						foreach (EurovalCircuit ec in this.circuits) {
-							ec.EurovalProduct = this;
+						foreach (EcothermCircuit ec in this.circuits) {
+							ec.EcothermProduct = this;
 							ec.NrOfCircuit = i;
 							ec.AreaTotal = this.plannedArea / circuitCount;
 							ec.AreaReduced = this.plannedAreaReduced / circuitCount;
@@ -1530,16 +1530,16 @@ namespace Europlan.Common {
 							i++;
 						}
 						tryCalc = false;
-						if (this.PlannedDeltaRhoHeat > EurovalProduct.ConfigMaxPressureLost) {
+						if (this.PlannedDeltaRhoHeat > EcothermProduct.ConfigMaxPressureLost) {
 							tryCalc = true;
 						}
-						if (this.PlannedDeltaRhoCool > EurovalProduct.ConfigMaxPressureLost) {
+						if (this.PlannedDeltaRhoCool > EcothermProduct.ConfigMaxPressureLost) {
 							tryCalc = true;
 						}
-						if (this.PlannedMhHeat > EurovalProduct.ConfigMaxDurchfluss) {
+						if (this.PlannedMhHeat > EcothermProduct.ConfigMaxDurchfluss) {
 							tryCalc = true;
 						}
-						if (this.PlannedMhCool > EurovalProduct.ConfigMaxDurchfluss) {
+						if (this.PlannedMhCool > EcothermProduct.ConfigMaxDurchfluss) {
 							tryCalc = true;
 						}
 						tryCalc = tryCalc && !this.requestedCircuits.HasValue;
@@ -1590,8 +1590,8 @@ namespace Europlan.Common {
 				this.CorrectCircuits(bestCircuits, true);
 
 				int i = 0;
-				foreach (EurovalCircuit ec in this.circuits) {
-					ec.EurovalProduct = this;
+				foreach (EcothermCircuit ec in this.circuits) {
+					ec.EcothermProduct = this;
 					ec.NrOfCircuit = i;
 					ec.AreaTotal = this.plannedArea / bestCircuits;
 					ec.AreaReduced = this.plannedAreaReduced / bestCircuits;
@@ -1613,34 +1613,34 @@ namespace Europlan.Common {
 
 				if (variableSpreizung && this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
 					// Heizleistung veringern
-					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < EurovalProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad) {
+					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < EcothermProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad) {
 						this.plannedRuecklaufTempHeat -= 0.1;
-						foreach (EurovalCircuit ec in this.circuits) {
+						foreach (EcothermCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
 						}
 					}
 					this.plannedRuecklaufTempHeat += 0.1;
 					// Heizleistung erhöhen
-					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EurovalProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < EurovalProduct.ConfigMaxDurchfluss) {
+					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EcothermProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < EcothermProduct.ConfigMaxDurchfluss) {
 						this.plannedRuecklaufTempHeat += 0.1;
-						foreach (EurovalCircuit ec in this.circuits) {
+						foreach (EcothermCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
 						}
 					}
 					// Kühlleistung verringern
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < EurovalProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < EcothermProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
 						this.plannedRuecklaufTempCool += 0.1;
 						i = 0;
-						foreach (EurovalCircuit ec in this.circuits) {
+						foreach (EcothermCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
 						}
 					}
 					this.plannedRuecklaufTempCool -= 0.1;
 					// Kühlleistung erhöhen
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < EurovalProduct.ConfigMaxDurchfluss) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EcothermProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < EcothermProduct.ConfigMaxDurchfluss) {
 						this.plannedRuecklaufTempCool -= 0.1;
 						i = 0;
-						foreach (EurovalCircuit ec in this.circuits) {
+						foreach (EcothermCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
 						}
 					}
@@ -1670,31 +1670,31 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
-			if (this.LongestPipeLengthPerCircuitWithAllConnections > EurovalProduct.ConfigMaxCircuitLength) {
-				this.lastErrorMsg += "Rohrlänge zu groß (" + Math.Round(this.PipeLengthWithoutConnectionsOfLongestPipeWithConnections, 1) + "m > " + Math.Round(EurovalProduct.ConfigMaxCircuitLength - this.ConnectionLengthOfLongestPipeWithConnections, 1) + "m)\n";
+			if (this.LongestPipeLengthPerCircuitWithAllConnections > EcothermProduct.ConfigMaxCircuitLength) {
+				this.lastErrorMsg += "Rohrlänge zu groß (" + Math.Round(this.PipeLengthWithoutConnectionsOfLongestPipeWithConnections, 1) + "m > " + Math.Round(EcothermProduct.ConfigMaxCircuitLength - this.ConnectionLengthOfLongestPipeWithConnections, 1) + "m)\n";
 			}
-			if (Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264)) {
-				this.lastErrorMsg += "Oberflächentemperatur in der Aufenthaltszone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264), 1) + "°C)\n";
+			if (Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) > (EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxResidenceTempHarreither : EcothermProduct.ConfigMaxResidenceTempEn1264)) {
+				this.lastErrorMsg += "Oberflächentemperatur in der Aufenthaltszone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) + "°C > " + Math.Round((EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxResidenceTempHarreither : EcothermProduct.ConfigMaxResidenceTempEn1264), 1) + "°C)\n";
 			}
-			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264)) {
-				this.lastErrorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "°C)\n";
+			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxRimTempHarreither : EcothermProduct.ConfigMaxRimTempEn1264)) {
+				this.lastErrorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxRimTempHarreither : EcothermProduct.ConfigMaxRimTempEn1264), 1) + "°C)\n";
 			}
 			if (this.PlannedMhHeat >= this.PlannedMhCool) {
-				if (Math.Round(this.PlannedMhHeat, 1) > EurovalProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMhHeat, 1) > EcothermProduct.ConfigMaxDurchfluss) {
+					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedMhCool, 1) > EurovalProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMhCool, 1) > EcothermProduct.ConfigMaxDurchfluss) {
+					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
-				if (Math.Round(this.PlannedDeltaRhoHeat, 1) > EurovalProduct.ConfigMaxPressureLost) {
-					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 1).ToString() + "mbar > " + EurovalProduct.ConfigMaxPressureLost.ToString() + "mbar)\n";
+				if (Math.Round(this.PlannedDeltaRhoHeat, 1) > EcothermProduct.ConfigMaxPressureLost) {
+					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 1).ToString() + "mbar > " + EcothermProduct.ConfigMaxPressureLost.ToString() + "mbar)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedDeltaRhoCool, 1) > EurovalProduct.ConfigMaxPressureLost) {
-					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + EurovalProduct.ConfigMaxPressureLost.ToString() + "mbar)\n";
+				if (Math.Round(this.PlannedDeltaRhoCool, 1) > EcothermProduct.ConfigMaxPressureLost) {
+					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + EcothermProduct.ConfigMaxPressureLost.ToString() + "mbar)\n";
 				}
 			}
 			if (this.lastErrorMsg.Length == 0) {
@@ -1741,8 +1741,8 @@ namespace Europlan.Common {
 				}
 			}
 			while (this.circuits.Count < circuitCount) {
-				EurovalCircuit ec = new EurovalCircuit();
-				ec.EurovalProduct = this;
+				EcothermCircuit ec = new EcothermCircuit();
+				ec.EcothermProduct = this;
 				ec.NrOfCircuit = this.circuits.Count;
 				if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 					int j = 0;
@@ -1792,7 +1792,7 @@ namespace Europlan.Common {
 			
 			// Euroval Rohr
 			double length = 0;
-			foreach (EurovalCircuit c in this.circuits) {
+			foreach (EcothermCircuit c in this.circuits) {
 				length += c.PipeLengthWithoutOtherProduct;
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", length);

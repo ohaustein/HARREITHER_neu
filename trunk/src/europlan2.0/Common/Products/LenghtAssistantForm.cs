@@ -141,35 +141,35 @@ namespace Europlan.Common {
 					length = 0;
 					break;
 				case ConnectionPipe.VerlegeartEnum.VA_EV35:
-					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV35);
+					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV35);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV30:
-					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV30);
+					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV30);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV25:
-					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV25);
+					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV25);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV20:
-					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV20);
+					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV20);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV15:
-					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV15);
+					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV15);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV10:
-					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV10);
+					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV10);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV5:
-					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV5);
+					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV5);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_A5:
-					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.A5);
+					length = area * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.A5);
 					break;
 				default:
 					length = 0;
@@ -187,35 +187,35 @@ namespace Europlan.Common {
 					area = 0;
 					break;
 				case ConnectionPipe.VerlegeartEnum.VA_EV35:
-					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV35);
+					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV35);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV30:
-					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV30);
+					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV30);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV25:
-					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV25);
+					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV25);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV20:
-					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV20);
+					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV20);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV15:
-					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV15);
+					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV15);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV10:
-					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV10);
+					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV10);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_EV5:
-					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.EV5);
+					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.EV5);
 					break;
 
 				case ConnectionPipe.VerlegeartEnum.VA_A5:
-					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.LayDistance.A5);
+					area = pipeLength / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.A5);
 					break;
 				default:
 					area = 0;
