@@ -139,8 +139,13 @@
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\PlannedHithermCompactProductPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Products\PlannedHithermCompactProductPanel.Designer.cs">
+      <DependentUpon>PlannedHithermCompactProductPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\HithermCompactCircuit.cs" />
-    <Compile Include="Products\HithermCompactWall.cs" />
     <Compile Include="Products\HithermCompactRegister.cs" />
     <Compile Include="Products\SelectHithermWallForm.cs">
       <SubType>Form</SubType>
@@ -433,6 +438,10 @@
       <DependentUpon>ConnectionPipesForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Products\PlannedHithermCompactProductPanel.resx">
+      <DependentUpon>PlannedHithermCompactProductPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Products\SelectHithermWallForm.resx">
       <DependentUpon>SelectHithermWallForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -579,6 +588,7 @@
     <None Include="Properties\DataSources\Construction.datasource" />
     <None Include="Properties\DataSources\ConstructionLayer.datasource" />
     <None Include="Properties\DataSources\Distributor.datasource" />
+    <None Include="Properties\DataSources\HithermCompactRegister.datasource" />
     <None Include="Properties\DataSources\HithermRegister.datasource" />
     <None Include="Properties\DataSources\HithermWall.datasource" />
     <None Include="Properties\DataSources\IQuickDimensioningSummary.datasource" />

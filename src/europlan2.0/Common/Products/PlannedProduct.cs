@@ -422,6 +422,8 @@ namespace Europlan.Common {
 					return typeof(PlannedModulKlimaBodenProductPanel);
 				} else if (this.plannedProduct is HithermProduct) {
 					return typeof(PlannedHithermProductPanel);
+				} else if (this.plannedProduct is HithermCompactProduct) {
+					return typeof(PlannedHithermCompactProductPanel);
 				}
 				return null;
 			}

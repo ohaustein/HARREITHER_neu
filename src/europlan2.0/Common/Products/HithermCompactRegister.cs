@@ -168,7 +168,7 @@ namespace Europlan.Common {
 		private int registerCount = 1;
 		private double pipeHorizontal = 0.25;
 		private double pipeVertical = 0.5;
-		private HithermCompactWall wall;
+		private HithermWall wall;
 		private String wallId = null;
 
 		/*private Nullable<Point> origin = null;*/
@@ -383,10 +383,10 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public HithermCompactWall Wall {
+		public HithermWall Wall {
 			get {
 				if (this.wallId != null) {
-					foreach (HithermCompactWall hw in Project.Instance.HithermCompactWalls) {
+					foreach (HithermWall hw in Project.Instance.HithermCompactWalls) {
 						if (hw.Id == this.wallId) {
 							this.wall = hw;
 						}
