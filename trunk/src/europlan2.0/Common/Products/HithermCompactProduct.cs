@@ -762,6 +762,97 @@ namespace Europlan.Common {
 			return 0;
 		}
 
+		internal override void FinalizeLoading(PlannedProduct pp) {
+			base.FinalizeLoading(pp);
+			switch (this.hithermCompactType) {
+				case ProductType.FBH:
+					this.plannedFloorArea = this.plannedFloorCeilingRoofArea;
+					this.plannedFloorCeilingRoofArea = 0;
+					this.plannedCeilingArea = 0;
+					break;
+
+				case ProductType.DH:
+					this.plannedCeilingArea = this.plannedFloorCeilingRoofArea;
+					this.plannedFloorCeilingRoofArea = 0;
+					this.plannedFloorArea = 0;
+					break;
+
+				default:
+					this.plannedCeilingArea = 0;
+					this.plannedFloorCeilingRoofArea = 0;
+					this.plannedFloorArea = 0;
+					break;
+			}
+			if (pp != null) {
+				int i = 1;
+				foreach (HithermCompactCircuit hc in this.circuits) {
+					this.circuitIds[i] = hc;
+					foreach (HithermCompactRegister hr in hc.Registers) {
+						this.registerCircuits[hr] = i;
+						hr.PlannedProduct = pp;
+					}
+					i++;
+				}
+			}
+		}
+
+		[XmlIgnore]
+		public override double PlannedHeizlastBereinigung {
+			get {
+				double bereinigung = 0;
+				foreach (HithermCompactCircuit hc in this.circuits) {
+					bereinigung += hc.HeizleistungBereinigung;
+				}
+				return bereinigung;
+			}
+		}
+
+		[XmlIgnore]
+		public override double PlannedKuehllastBereinigung {
+			get {
+				double bereinigung = 0;
+				foreach (HithermCompactCircuit hc in this.circuits) {
+					bereinigung += hc.KuehlleistungBereinigung;
+				}
+				return bereinigung;
+			}
+		}
+
+		/// <summary>
+		/// The percentage of the total room area that is occupied by the planned area.
+		/// </summary>
+		[XmlIgnore]
+		public float PlannedFloorAreaPercentage {
+			get {
+				if (this.hithermCompactType != ProductType.FBH) {
+					return 0;
+				}
+				return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AssociatedRoom.Area);
+			}
+			set {
+				if (this.hithermCompactType == ProductType.FBH) {
+					this.PlannedFloorArea = (float)(this.AssociatedRoom.Area * value / 100);
+				}
+			}
+		}
+
+		/// <summary>
+		/// The percentage of the total room area that is occupied by the planned area.
+		/// </summary>
+		[XmlIgnore]
+		public float PlannedCeilingAreaPercentage {
+			get {
+				if (this.hithermCompactType != ProductType.DH) {
+					return 0;
+				}
+				return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedCeilingArea * 100 / this.AssociatedRoom.Area);
+			}
+			set {
+				if (this.hithermCompactType == ProductType.DH) {
+					this.PlannedCeilingArea = (float)(this.AssociatedRoom.Area * value / 100);
+				}
+			}
+		}
 	}
 	
 }

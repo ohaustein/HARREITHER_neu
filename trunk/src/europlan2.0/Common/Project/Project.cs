@@ -58,7 +58,7 @@ namespace Europlan.Common {
 		private SerializableDictionary<string, double> requiredMaterialCalculated;
 
 		private List<HithermWall> hithermWalls = new List<HithermWall>();
-		private List<HithermCompactWall> hithermCompactWalls = new List<HithermCompactWall>();
+		private List<HithermWall> hithermCompactWalls = new List<HithermWall>();
 		//private List<HithermWall> defaultHithermWalls = new List<HithermWall>();
 
 		protected Project() {
@@ -530,16 +530,16 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public List<HithermCompactWall> HithermCompactWalls {
+		public List<HithermWall> HithermCompactWalls {
 			get {
-				List<HithermCompactWall> allWalls = new List<HithermCompactWall>();
+				List<HithermWall> allWalls = new List<HithermWall>();
 
 				ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
 				wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
 				foreach (WallConstruction wc in wrapper) {
 					//HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
 					if (wc.IsHithermCompactWall) {
-						allWalls.Add(wc.DefaultCompactWall);
+						allWalls.Add(wc.DefaultWall);
 					}
 				}
 
@@ -549,7 +549,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public List<HithermCompactWall> SerializeableHithermCompactWalls {
+		public List<HithermWall> SerializeableHithermCompactWalls {
 			get { return this.hithermCompactWalls; }
 			set { this.hithermCompactWalls = value; }
 		}

@@ -21,6 +21,7 @@ namespace Europlan.Common {
 			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaBodenProduct)));
 			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaDeckeProduct)));
 			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(HithermProduct)));
+			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(HithermCompactProduct)));
 			if (this.lstHeatingSystems.Items.Count > 0) {
 				this.lstHeatingSystems.Items[0].Selected = true;
 			}

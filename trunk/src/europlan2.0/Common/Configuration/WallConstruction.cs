@@ -10,7 +10,6 @@ namespace Europlan.Common {
 		private bool isHithermWall = false;
 		private bool isHithermCompactWall = false;
 		private HithermWall defaultWall = null;
-		private HithermCompactWall defaultCompactWall = null;
 
 		public WallConstruction() : base() {
 		}
@@ -50,19 +49,6 @@ namespace Europlan.Common {
 					defaultWall = new HithermWall(this.Id, this.Name, this, null, null, false, null, -16, 30, true);
 				}
 				return defaultWall;
-			}
-		}
-
-		[XmlIgnore]
-		public HithermCompactWall DefaultCompactWall {
-			get {
-				if (!isHithermCompactWall) {
-					return null;
-				}
-				if (defaultCompactWall == null) {
-					defaultCompactWall = new HithermCompactWall(this.Id, this.Name, this, null, null, false, null, -16, 30, true);
-				}
-				return defaultCompactWall;
 			}
 		}
 	}
