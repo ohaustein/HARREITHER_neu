@@ -79,6 +79,7 @@ namespace Europlan.Common {
 			this.groupBox10 = new System.Windows.Forms.GroupBox();
 			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
 			this.groupBox9 = new System.Windows.Forms.GroupBox();
+			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.btnDistributor = new System.Windows.Forms.Button();
 			this.lblDistributor = new System.Windows.Forms.Label();
 			this.txtDistributor = new System.Windows.Forms.TextBox();
@@ -167,7 +168,6 @@ namespace Europlan.Common {
 			this.label1 = new System.Windows.Forms.Label();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -644,6 +644,7 @@ namespace Europlan.Common {
 			this.chkAnhydritEstrich.TabIndex = 32;
 			this.chkAnhydritEstrich.Text = "Anhydritestrich";
 			this.chkAnhydritEstrich.UseVisualStyleBackColor = true;
+			this.chkAnhydritEstrich.Visible = false;
 			this.chkAnhydritEstrich.CheckedChanged += new System.EventHandler(this.chkAnhydritEstrich_CheckedChanged);
 			// 
 			// chkClip
@@ -655,6 +656,7 @@ namespace Europlan.Common {
 			this.chkClip.TabIndex = 31;
 			this.chkClip.Text = "Clipschiene mit Klebeband";
 			this.chkClip.UseVisualStyleBackColor = true;
+			this.chkClip.Visible = false;
 			this.chkClip.CheckedChanged += new System.EventHandler(this.chkClip_CheckedChanged);
 			// 
 			// label27
@@ -998,6 +1000,17 @@ namespace Europlan.Common {
 			this.groupBox9.Size = new System.Drawing.Size(847, 41);
 			this.groupBox9.TabIndex = 0;
 			this.groupBox9.TabStop = false;
+			// 
+			// chkStellAntriebe
+			// 
+			this.chkStellAntriebe.AutoSize = true;
+			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
+			this.chkStellAntriebe.Name = "chkStellAntriebe";
+			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
+			this.chkStellAntriebe.TabIndex = 6;
+			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
+			this.chkStellAntriebe.UseVisualStyleBackColor = true;
+			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
 			// 
 			// btnDistributor
 			// 
@@ -1905,23 +1918,12 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2.HeaderText = "Verlegeart";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			// 
-			// chkStellAntriebe
-			// 
-			this.chkStellAntriebe.AutoSize = true;
-			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
-			this.chkStellAntriebe.Name = "chkStellAntriebe";
-			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
-			this.chkStellAntriebe.TabIndex = 6;
-			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
-			this.chkStellAntriebe.UseVisualStyleBackColor = true;
-			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
-			// 
-			// PlannedEurovalProductPanel
+			// PlannedEcothermProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tabs);
-			this.Name = "PlannedEurovalProductPanel";
+			this.Name = "PlannedEcothermProductPanel";
 			this.Size = new System.Drawing.Size(864, 528);
 			this.grpPowerArea.ResumeLayout(false);
 			this.grpPowerArea.PerformLayout();

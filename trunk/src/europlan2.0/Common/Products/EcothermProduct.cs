@@ -1800,15 +1800,15 @@ namespace Europlan.Common {
 			//// TODO Clipschiene und Ovalmuffe f¸r Anbindeleitungen???
 
 			//// Clipschiene
-			//string clipschiene = clipSchieneKlebeband ? "EV16" : "EV15";
-			//double amount = 0;
+			string clipschiene = "EC02";
+			double amount = 0;
 			//if (this.PlannedLayDistance.HasValue) {
 			//    amount += this.PlannedAreaResidence * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
 			//}
 			//if (this.PlannedRimType.HasValue) {
 			//    amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
 			//}		
-			//Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
 
 			//// Ovalmuffe
 			//amount = 0;
@@ -1820,19 +1820,19 @@ namespace Europlan.Common {
 			//}
 			//Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", amount);
 
-			////Verteileranschluﬂbˆgen
-			//if (this.PlannedConnection != null && this.PlannedConnection.Distributor != null) {
-			//    string verteilerAnschluﬂ = this.PlannedConnection.Distributor.LangeAnschlussboegen ? "EV21" : "EV20";
-			//    //amount = 0;
-			//    //if (this.PlannedLayDistance.HasValue) {
-			//    //    amount += this.PlannedAreaResidence * GetVerteilerAnschlussPerSqm(this.PlannedLayDistance.Value);
-			//    //}
-			//    //if (this.PlannedRimType.HasValue) {
-			//    //    amount += this.PlannedAreaRim * GetVerteilerAnschlussPerSqm(GetRimLayDistance(this.PlannedRimType.Value));
-			//    //}
-			//    //Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, amount);
-			//    Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, this.circuits.Count * 2);
-			//}
+			//Verteileranschluﬂbˆgen
+			if (this.PlannedConnection != null && this.PlannedConnection.Distributor != null) {
+				string verteilerAnschluﬂ = this.PlannedConnection.Distributor.LangeAnschlussboegen ? "EC05" : "EC04";
+				//amount = 0;
+				//if (this.PlannedLayDistance.HasValue) {
+				//    amount += this.PlannedAreaResidence * GetVerteilerAnschlussPerSqm(this.PlannedLayDistance.Value);
+				//}
+				//if (this.PlannedRimType.HasValue) {
+				//    amount += this.PlannedAreaRim * GetVerteilerAnschlussPerSqm(GetRimLayDistance(this.PlannedRimType.Value));
+				//}
+				//Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, amount);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, this.circuits.Count * 2);
+			}
 
 			//// nur bei Estrichkonstruktion
 			//if (this.HasInsideConstruction) {
