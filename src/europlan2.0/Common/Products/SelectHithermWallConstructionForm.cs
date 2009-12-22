@@ -23,12 +23,14 @@ namespace Europlan.Common {
 			}
 		}
 		
-		public SelectHithermWallConstructionForm() {
+		public SelectHithermWallConstructionForm(bool showCompact) {
 			InitializeComponent();
 			ConstructionListWrapper clw = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
 			clw.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
 			foreach (WallConstruction wc in clw) {
-				this.lstConstructions.Items.Add(new WallConstructionItem(wc));
+				if ((!showCompact && wc.IsHithermWall) || (showCompact && wc.IsHithermCompactWall)) {
+					this.lstConstructions.Items.Add(new WallConstructionItem(wc));
+				}
 			}
 			if (this.lstConstructions.Items.Count > 0) {
 				this.lstConstructions.Items[0].Selected = true;

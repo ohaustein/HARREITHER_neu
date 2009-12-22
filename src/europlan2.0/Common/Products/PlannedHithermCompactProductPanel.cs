@@ -13,11 +13,11 @@ namespace Europlan.Common {
 		public PlannedHithermCompactProductPanel() {
 			InitializeComponent();
 
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std);
+			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std);
+			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par);
@@ -114,6 +114,7 @@ namespace Europlan.Common {
 				bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0;
 				bool showHeatCircuit = selectedCircuit >= 0 && showHeat;
 				bool showCoolCircuit = selectedCircuit >= 0 && showCool;
+				bool showRestArea = hcp.HithermCompactType == Product.ProductType.FBH || hcp.HithermCompactType == Product.ProductType.DH;
 
 				lblQHeat.Visible = showHeat;
 				lblQHeatUnit.Visible = showHeat;
@@ -139,6 +140,43 @@ namespace Europlan.Common {
 				lblDurchflussCoolUnit.Visible = showCoolCircuit;
 				lblDruckverlustCool.Visible = showCoolCircuit;
 				lblDruckverlustCoolUnit.Visible = showCoolCircuit;
+
+				int xDiff = this.lblNecessaryArea.Top - this.lblNecessaryWaermestromdichte.Top;
+				if (showRestArea) {
+					this.lblCoveredAreaTitle.Top = this.lblAvailableAreaUnit.Top + xDiff;
+					this.lblCoveredArea.Top = this.lblAvailableArea.Top + xDiff;
+					this.lblCoveredAreaUnit.Top = this.lblAvailableAreaUnit.Top + xDiff;
+					this.lblNecessaryWaermestromdichteTitle.Top = this.lblRestAreaTitle.Top + xDiff;
+					this.lblNecessaryWaermestromdichte.Top = this.lblRestArea.Top + xDiff;
+					this.lblNecessaryWaermestromdichteUnit.Top = this.lblRestAreaUnit.Top + xDiff;
+					this.lblNecessaryAreaTitle.Top = this.lblNecessaryWaermestromdichteTitle.Top + xDiff;
+					this.lblNecessaryArea.Top = this.lblNecessaryWaermestromdichte.Top + xDiff;
+					this.lblNecessaryAreaUnit.Top = this.lblNecessaryWaermestromdichteUnit.Top + xDiff;
+					this.lblAvailableAreaTitle.Visible = true;
+					this.lblAvailableArea.Visible = true;
+					this.lblAvailableAreaUnit.Visible = true;
+					this.lblRestAreaTitle.Visible = true;
+					this.lblRestArea.Visible = true;
+					this.lblRestAreaUnit.Visible = true;
+					this.lineInfo.Height = 135;
+				} else {
+					this.lblAvailableAreaTitle.Visible = false;
+					this.lblAvailableArea.Visible = false;
+					this.lblAvailableAreaUnit.Visible = false;
+					this.lblRestAreaTitle.Visible = false;
+					this.lblRestArea.Visible = false;
+					this.lblRestAreaUnit.Visible = false;
+					this.lblCoveredAreaTitle.Top = this.lblAvailableAreaUnit.Top;
+					this.lblCoveredArea.Top = this.lblAvailableArea.Top;
+					this.lblCoveredAreaUnit.Top = this.lblAvailableAreaUnit.Top;
+					this.lblNecessaryWaermestromdichteTitle.Top = this.lblCoveredAreaTitle.Top + xDiff;
+					this.lblNecessaryWaermestromdichte.Top = this.lblCoveredArea.Top + xDiff;
+					this.lblNecessaryWaermestromdichteUnit.Top = this.lblCoveredAreaUnit.Top + xDiff;
+					this.lblNecessaryAreaTitle.Top = this.lblNecessaryWaermestromdichteTitle.Top + xDiff;
+					this.lblNecessaryArea.Top = this.lblNecessaryWaermestromdichte.Top + xDiff;
+					this.lblNecessaryAreaUnit.Top = this.lblNecessaryWaermestromdichteUnit.Top + xDiff;
+					this.lineInfo.Height = 100;
+				}
 
 				if ((skipFields & FieldEnum.TYPE) == FieldEnum.NONE) {
 					this.cmbType.SelectedItem = hcp.HithermCompactType;
@@ -277,10 +315,13 @@ namespace Europlan.Common {
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 0).ToString();
 				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 0).ToString();
 				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 0).ToString();
-				lblCoveredArea.Text = Math.Round(hcp.PlannedWallArea, 2).ToString();
-				lblNecessaryWaermestromdichte.Text = (hcp.PlannedWallArea > 0) ? Math.Round(this.product.RequestedHeatLoad / hcp.PlannedWallArea, 2).ToString() : "--";
-				lblNecessaryArea.Text = (hcp.PlannedHeatLoad > 0 && hcp.PlannedWallArea > 0) ? Math.Round(this.product.RequestedHeatLoad / (hcp.PlannedHeatLoad / hcp.PlannedWallArea), 2).ToString() : "--";
-				if (selectedCircuit >= 0) {
+				double area = hcp.PlannedRegisterArea;
+				lblCoveredArea.Text = Math.Round(area, 2).ToString();
+				lblAvailableArea.Text = Math.Round(this.product.PlannedArea.HasValue ? this.product.PlannedArea.Value : 0, 2).ToString();
+				lblRestArea.Text = Math.Round((this.product.PlannedArea.HasValue ? this.product.PlannedArea.Value : 0) - area, 2).ToString();
+				lblNecessaryWaermestromdichte.Text = (area > 0) ? Math.Round(this.product.RequestedHeatLoad / area, 2).ToString() : "--";
+				lblNecessaryArea.Text = (hcp.PlannedHeatLoad > 0 && area > 0) ? Math.Round(this.product.RequestedHeatLoad / (hcp.PlannedHeatLoad / area), 2).ToString() : "--";
+				if (selectedCircuit >= 0 && this.dgvRegisters.SelectedCells.Count > 0) {
 					HithermCompactCircuit hc = hcp.GetCircuitForRegister(this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem as HithermCompactRegister);
 					if (hc != null) {
 						lblHk.Text = "Heizkreis " + selectedCircuit.ToString() + ":";
@@ -309,9 +350,9 @@ namespace Europlan.Common {
 					this.txtDistributor.Text = hcp.PlannedConnection.ToString();
 				}
 
-				if ((skipFields & FieldEnum.WALLS) == FieldEnum.NONE) {
+				/*if ((skipFields & FieldEnum.WALLS) == FieldEnum.NONE) {
 					this.hithermWallGrid1.Walls = Project.Instance.HithermCompactWalls;
-				}
+				}*/
 
 				if (this.errorMsg != null) {
 					this.lblError.Text = this.errorMsg;
@@ -531,6 +572,10 @@ namespace Europlan.Common {
 		private void dgvRegisters_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e) {
 			Console.WriteLine("default values");
 			this.newRow = e.Row;
+			//e.Row.Cells[registerAreaDataGridViewTextBoxColumn.Index].Value = HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std;
+			if (registerTypeDataGridViewTextBoxColumn.Items.Count > 0) {
+				e.Row.Cells[registerTypeDataGridViewTextBoxColumn.Index].Value = registerTypeDataGridViewTextBoxColumn.Items[0];
+			}
 			e.Row.Cells[plannedProductDataGridViewTextBoxColumn.Index].Value = this.product;
 			e.Row.Cells[heizkreisDataGridViewTextBoxColumn.Index].Value = 1;
 			if (Project.Instance.SerializeableHithermCompactWalls.Count > 0) {
@@ -608,7 +653,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnSelectWall_Click(object sender, EventArgs e) {
-			SelectHithermWallForm form = new SelectHithermWallForm();
+			SelectHithermWallForm form = new SelectHithermWallForm(true);
 			form.SelectedWall = dgvRegisters.CurrentCell.Value as HithermWall;
 			if (form.ShowDialog().Equals(DialogResult.OK)) {
 				HithermWall wall = form.SelectedWall;
@@ -682,6 +727,11 @@ namespace Europlan.Common {
 			if (ignoreType == 0) {
 				if (this.cmbType.SelectedItem is Product.ProductType && this.product.Product.Type != (Product.ProductType)this.cmbType.SelectedItem) {
 					(this.product.Product as HithermCompactProduct).HithermCompactType = (Product.ProductType)this.cmbType.SelectedItem;
+					if ((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.FBH) {
+						(this.product.Product as HithermCompactProduct).PlannedFloorArea = this.product.Product.AvailableFloorArea;
+					} else if ((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.DH) {
+						(this.product.Product as HithermCompactProduct).PlannedCeilingArea = this.product.Product.AvailableCeilingArea;
+					}
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.TYPE);

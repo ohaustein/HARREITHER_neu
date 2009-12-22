@@ -167,7 +167,7 @@ namespace Europlan.Common {
 		private HithermCompactRegisterTypeEnum registerType = HithermCompactRegisterTypeEnum.HITC_620_Std;
 		private int registerCount = 1;
 		private double pipeHorizontal = 0.25;
-		private double pipeVertical = 0.5;
+		private double pipeVertical = 0;
 		private HithermWall wall;
 		private String wallId = null;
 
@@ -280,22 +280,51 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double RegisterArea {
 			get {
-				return ((double)this.RegisterBreite / 1000.0) * ((double)this.RegisterHoehe / 1000.0);
+				return ((double)this.RegisterBreite / 1000.0) * ((double)this.RegisterHoehe / 1000.0) * this.registerCount;
 			}
 		}
 
 		[XmlIgnore]
 		public double HeatArea {
-			get { return GetHeatArea(this.registerType); }
+			get { return GetHeatArea(this.registerType) * this.registerCount; }
 		}
 
 		public double Heizleistung(double heizmittelTemp, double roomTemp, double alpha) {
 			double faktor = 1;
 			if (this.Wall != null) {
-				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
+				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermCompactProduct.ConfigBeplankungRWerte, HithermCompactProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
-			faktor = faktor * alpha / HithermProduct.ConfigAlphaWand;
-			return EN1264.Instance.WaermestromDichteRegister(heizmittelTemp, roomTemp, HithermProduct.ConfigHlRegHeizleistung, faktor) * this.HeatArea;
+			faktor = faktor * alpha / HithermCompactProduct.ConfigAlphaWand;
+			double[][] table;
+			switch (this.registerType) {
+				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
+					table = HithermCompactProduct.ConfigHlRegHeizleistung2500Std;
+					break;
+				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
+					table = HithermCompactProduct.ConfigHlRegHeizleistung2000Std;
+					break;
+				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
+					table = HithermCompactProduct.ConfigHlRegHeizleistung1500Std;
+					break;
+				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
+					table = HithermCompactProduct.ConfigHlRegHeizleistung1000Std;
+					break;
+				/*case HithermCompactRegisterTypeEnum.HITC_620_Std:
+					table = HithermCompactProduct.ConfigHlRegHeizleistung620Std;
+					break;*/
+				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
+					table = HithermCompactProduct.ConfigHlRegHeizleistung2000Par;
+					break;
+				case HithermCompactRegisterTypeEnum.HITC_1500_Par:
+					table = HithermCompactProduct.ConfigHlRegHeizleistung1500Par;
+					break;
+				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
+					table = HithermCompactProduct.ConfigHlRegHeizleistung1000Par;
+					break;
+				default:
+					return 0;
+			}
+			return EN1264.Instance.WaermestromDichteRegister(heizmittelTemp, roomTemp, table, faktor, true) * this.registerCount;
 		}
 
 		public double HeizleistungBereinigung(double roomTemp) {
@@ -312,7 +341,7 @@ namespace Europlan.Common {
 		public double WaermeverlustAussen(double leistung, double roomTemp, double alphaAussen, double alphaInnen) {
 			double verlust = 0;
 			if (this.Wall != null) {
-				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaInnen, roomTemp, this.Wall.TempBehindHeat);
+				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermCompactProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaInnen, roomTemp, this.Wall.TempBehindHeat);
 			}
 			return verlust;
 		}
@@ -320,10 +349,12 @@ namespace Europlan.Common {
 		public double Kuehlleistung(double kuehlmittelTemp, double roomTemp, double alpha) {
 			double faktor = 1;
 			if (this.Wall != null) {
-				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
+				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermCompactProduct.ConfigBeplankungRWerte, HithermCompactProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
-			faktor = faktor * alpha / HithermProduct.ConfigAlphaWand;
-			return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, HithermProduct.ConfigHlRegKuehlleistung, faktor) * this.HeatArea;
+			faktor = faktor * alpha / HithermCompactProduct.ConfigAlphaWand;
+			return 0;
+			// TODO
+			//return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, HithermCompactProduct.ConfigHlRegKuehlleistung, faktor) * this.registerCount;
 		}
 
 		public double KuehlleistungBereinigung(double roomTemp) {
@@ -340,14 +371,14 @@ namespace Europlan.Common {
 		public double KaelteverlustHinten(double leistung, double roomTemp, double alphaAussen, double alphaInnen) {
 			double verlust = 0;
 			if (this.Wall != null) {
-				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaInnen, roomTemp, this.Wall.TempBehindCool);
+				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermCompactProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaInnen, roomTemp, this.Wall.TempBehindCool);
 			}
 			return verlust;
 		}
 
 		public double Druckverlust(double durchfluss) {
-			return EN1264.Instance.DruckverlustRegister(this.registerType, this.RegisterBreite, durchfluss) +
-				EN1264.Instance.DruckverlustRohr(durchfluss, HithermProduct.ConfigVerbindeLeitungInnenquerschnitt, HithermProduct.ConfigRho, HithermProduct.ConfigVerbindeLeitungInnendurchmesser, HithermProduct.ConfigV, 0.000004, this.PipeVertical + this.PipeHorizontal);
+			return EN1264.Instance.DruckverlustRegister(this.registerType, durchfluss) * this.registerCount +
+				EN1264.Instance.DruckverlustRohr(durchfluss, HithermCompactProduct.ConfigVerbindeLeitungInnenquerschnitt, HithermCompactProduct.ConfigRho, HithermCompactProduct.ConfigVerbindeLeitungInnendurchmesser, HithermCompactProduct.ConfigV, 0.000004, this.PipeVertical + this.PipeHorizontal);
 		}
 
 		private PlannedProduct product;
@@ -411,7 +442,7 @@ namespace Europlan.Common {
 			get {
 				switch (registerType) {
 					case HithermCompactRegisterTypeEnum.HITC_620_Std:
-						if (HithermProduct.ConfigUsePlus) {
+						if (HithermCompactProduct.ConfigUsePlus) {
 							return "";
 						} else {
 							return "";

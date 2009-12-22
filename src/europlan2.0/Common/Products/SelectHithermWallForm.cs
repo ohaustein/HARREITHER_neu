@@ -23,9 +23,10 @@ namespace Europlan.Common {
 			}
 		}
 
-		public SelectHithermWallForm() {
+		public SelectHithermWallForm(bool showCompact) {
 			InitializeComponent();
-			foreach (HithermWall hw in Project.Instance.HithermWalls) {
+			List<HithermWall> allWalls = showCompact ? Project.Instance.HithermCompactWalls : Project.Instance.HithermWalls;
+			foreach (HithermWall hw in allWalls) {
 				this.lstWalls.Items.Add(new WallItem(hw));
 			}
 			if (this.lstWalls.Items.Count > 0) {

@@ -193,6 +193,7 @@ namespace Europlan.Common {
 					break;
 
 				case Product.ProductType.DH:
+				case Product.ProductType.DSH:
 					alphaInnenHeat = HithermProduct.ConfigAlphaDecke;
 					alphaAussenHeat = HithermProduct.ConfigAlphaBoden;
 					break;

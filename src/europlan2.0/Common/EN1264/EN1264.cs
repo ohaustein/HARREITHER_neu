@@ -201,8 +201,13 @@ namespace Europlan.Common {
 			return B * ab * atmt * au * heizmittelUebertemperatur;
 		}
 
-		public double WaermestromDichteRegister(double heizmittelTemperatur, double raumTemperatur, double[][] standardTabelle, double faktor) {
-			double[] x = { 30.0, 32.5, 35.0, 37.5, 40.0, 42.5, 45.0, 47.5, 50.0 };
+		public double WaermestromDichteRegister(double heizmittelTemperatur, double raumTemperatur, double[][] standardTabelle, double faktor, bool compact) {
+			double[] x;
+			if (compact) {
+				x = new double[] { 32.5, 35.0, 37.5, 40.0, 42.5, 45.0 };
+			} else {
+				x = new double[] { 30.0, 32.5, 35.0, 37.5, 40.0, 42.5, 45.0, 47.5, 50.0 };
+			}
 
 			int l = standardTabelle.Length;
 
@@ -210,7 +215,7 @@ namespace Europlan.Common {
 			double[] y = new double[l];
 
 			for (int i = 0; i < l; i++) {
-				spline3.buildcubicspline(x, standardTabelle[i], 9, 0, 0, 0, 0, ref c);
+				spline3.buildcubicspline(x, standardTabelle[i], x.Length, 0, 0, 0, 0, ref c);
 				y[i] = spline3.splineinterpolation(ref c, heizmittelTemperatur);
 			}
 
@@ -510,8 +515,47 @@ namespace Europlan.Common {
 			return rtn;
 		}
 
-		public double DruckverlustRegister(HithermCompactRegister.HithermCompactRegisterTypeEnum type, int width, double durchfluss) {
-			return 0;
+		public double DruckverlustRegister(HithermCompactRegister.HithermCompactRegisterTypeEnum type, double durchfluss) {
+			double[] x1;
+			double[] y;
+
+			x1 = new double[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400 };
+
+			switch (type) {
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std:
+					return 0;
+					break;
+
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std:
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par:
+					y = new double[] { 0.2, 0.4, 0.7, 0.9, 1.2, 1.4, 1.7, 2.0, 2.3, 2.7, 3.3, 4.1, 4.9, 5.7, 6.6, 7.5, 8.5, 9.5, 10.6, 11.7, 12.9, 14.2, 15.5, 16.8, 18.2 };
+					break;
+
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std:
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par:
+					y = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.7, 2.0, 2.3, 3.0, 3.9, 4.7, 5.7, 6.8, 7.9, 9.2, 10.5, 11.9, 13.4, 15.0, 16.7, 18.4, 20.3, 22.2 };
+					break;
+
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std:
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par:
+					y = new double[] { 0.2, 0.4, 0.7, 0.9, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.8, 5.8, 6.9, 8.1, 9.3, 10.7, 12.1, 13.7, 15.3, 17.0, 18.7, 20.6, 22.6, 24.6 };
+					break;
+
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std:
+					return 0;
+					break;
+
+				default:
+					return 0;
+			}
+
+			double[] c = null;
+			spline3.buildcubicspline(x1, y, x1.Length, 0, 0, 0, 0, ref c);
+			double rtn = spline3.splineinterpolation(ref c, durchfluss);
+			if (rtn < 0.1) {
+				rtn = 0.1;
+			}
+			return rtn;
 		}
 
 		public double DefaultSpreizung(double vorlaufTemperatur) {

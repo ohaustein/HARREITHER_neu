@@ -42,9 +42,6 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public HithermWall DefaultWall {
 			get {
-				if (!isHithermWall) {
-					return null;
-				}
 				if (defaultWall == null) {
 					defaultWall = new HithermWall(this.Id, this.Name, this, null, null, false, null, -16, 30, true);
 				}
