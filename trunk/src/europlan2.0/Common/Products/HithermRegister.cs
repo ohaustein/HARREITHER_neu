@@ -434,7 +434,7 @@ namespace Europlan.Common {
 				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
 			faktor = faktor * alpha / HithermProduct.ConfigAlphaWand;
-			return EN1264.Instance.WaermestromDichteRegister(heizmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegHeizleistung : HithermProduct.ConfigStdRegHeizleistung, faktor) * this.Area;
+			return EN1264.Instance.WaermestromDichteRegister(heizmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegHeizleistung : HithermProduct.ConfigStdRegHeizleistung, faktor, false) * this.Area;
 		}
 
 		public double HeizleistungBereinigung(double roomTemp) {

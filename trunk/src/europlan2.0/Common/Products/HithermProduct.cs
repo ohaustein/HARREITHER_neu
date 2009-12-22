@@ -517,26 +517,29 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
-			//if (this.PlannedMhHeat >= this.PlannedMhCool) {
+			if (this.PlannedMhHeat >= this.PlannedMhCool) {
 				if (Math.Round(this.PlannedMhHeat, 1) > HithermProduct.ConfigMaxDurchfluss) {
-					//errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
-					this.lastErrorMsg += "Durchfluß bei zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
-				/*} else {
-					if (Math.Round(this.PlannedMhCool, 1) > HithermProduct.ConfigMaxDurchfluss) {
-						errorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
-					}
-				}*/
-				//if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
+			} else {
+				if (Math.Round(this.PlannedMhCool, 1) > HithermProduct.ConfigMaxDurchfluss) {
+					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				}
+			}
+			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
 				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > HithermProduct.ConfigMaxPressureLost / 100) {
-					//errorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
-					this.lastErrorMsg += "Druckverlust zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
 				}
-				/*} else {
-					if (Math.Round(this.PlannedDeltaRhoCool, 2) > HithermProduct.ConfigMaxPressureLost / 100) {
-						errorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
-					}
-				}*/
+			} else {
+				if (Math.Round(this.PlannedDeltaRhoCool, 2) > HithermProduct.ConfigMaxPressureLost / 100) {
+					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (HithermProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				}
+			}
+			if (this.hithermType == Product.ProductType.FBH && this.PlannedRegisterArea > this.PlannedFloorArea) {
+				this.lastErrorMsg += "Die verplanten Register nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.PlannedRegisterArea, 1).ToString() + "m² > " + Math.Round(this.PlannedFloorArea, 1).ToString() + "m²)\n";
+			} else if (this.hithermType == Product.ProductType.DH && this.PlannedRegisterArea > this.PlannedCeilingArea) {
+				this.lastErrorMsg += "Die verplanten Register nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.PlannedRegisterArea, 1).ToString() + "m² > " + Math.Round(this.PlannedCeilingArea, 1).ToString() + "m²)\n";
+			}
 			if (this.lastErrorMsg.Length == 0) {
 				this.lastErrorMsg = null;
 			}
@@ -695,6 +698,7 @@ namespace Europlan.Common {
 			this.registerCircuits[register] = circuitId;
 			if (!this.circuitIds.ContainsKey(circuitId)) {
 				HithermCircuit hc = new HithermCircuit();
+				hc.HithermProduct = this;
 				this.circuits.Add(hc);
 				this.circuitIds[circuitId] = hc;
 			}
@@ -946,6 +950,15 @@ namespace Europlan.Common {
 			}
 		}
 
+		public double PlannedRegisterArea {
+			get {
+				double area = 0;
+				foreach (HithermCircuit hc in this.PlannedCircuits) {
+					area += hc.RegisterArea;
+				}
+				return area;
+			}
+		}
 	}
 	
 }

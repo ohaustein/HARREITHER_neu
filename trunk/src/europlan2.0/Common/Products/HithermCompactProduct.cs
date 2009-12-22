@@ -31,17 +31,89 @@ namespace Europlan.Common {
 		private static int maxDurchfluss = 240;
 
 		// Hitherm(r) Hochleistungs-Klimawandregister (RA 5) Heizleistung qW in W/m²
-		private static double[][] regHeizleistung = {
+		/*private static double[][] regHeizleistung = {
 			//  tHm (°C)  30.0  32.5  35.0  37.5  40.0  42.5  45.0  47.5  50.0
 			new double[] { 105,  120,  140,  155,  175,  190,  210,  225,  240}, // ti=15°C
 			new double[] {  85,  100,  120,  135,  155,  170,  185,  205,  220}, // ti=18°C
 			new double[] {  70,   85,  105,  120,  140,  155,  175,  190,  210}, // ti=20°C
 			new double[] {  55,   70,   90,  105,  125,  140,  160,  175,  195}, // ti=22°C
 			new double[] {  45,   60,   80,   95,  115,  130,  145,  165,  180}  // ti=24°C
-		};
+		};*/
 
 		//     Diffenz Raumtemp - Kuehlmitteltemp (K):  0   2   3   4   5   6   7   9
-		private static double[] regKuehlleistung = { 0, 13, 20, 25, 33, 40, 45, 60 };
+		//private static double[] regKuehlleistung = { 0, 13, 20, 25, 33, 40, 45, 60 };
+
+		private static double[][] regHeizleistung2500Std = {
+			//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
+			new double[] { 180,  205,  230,  260,  285,  310}, // ti=15°C
+			new double[] { 150,  175,  200,  225,  250,  280}, // ti=18°C
+			new double[] { 130,  155,  180,  205,  230,  260}, // ti=20°C
+			new double[] { 110,  135,  160,  185,  210,  235}, // ti=22°C
+			new double[] {  90,  115,  140,  165,  190,  215}  // ti=24°C
+		};
+
+		private static double[][] regHeizleistung2000Std = {
+			//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
+			new double[] { 145,  165,  185,  210,  230,  250}, // ti=15°C
+			new double[] { 120,  140,  160,  185,  205,  225}, // ti=18°C
+			new double[] { 105,  125,  145,  165,  185,  210}, // ti=20°C
+			new double[] {  85,  110,  130,  150,  170,  190}, // ti=22°C
+			new double[] {  75,   90,  110,  135,  155,  175}  // ti=24°C
+		};
+
+		private static double[][] regHeizleistung1500Std = {
+			//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
+			new double[] { 110,  130,  145,  160,  175,  190}, // ti=15°C
+			new double[] {  95,  110,  125,  140,  155,  175}, // ti=18°C
+			new double[] {  80,   95,  110,  130,  145,  160}, // ti=20°C
+			new double[] {  65,   85,  100,  115,  130,  145}, // ti=22°C
+			new double[] {  55,   70,   85,  100,  120,  135}  // ti=24°C
+		};
+
+		private static double[][] regHeizleistung1000Std = {
+			//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
+			new double[] {  75,   85,  100,  110,  120,  130}, // ti=15°C
+			new double[] {  65,   75,   85,   95,  105,  120}, // ti=18°C
+			new double[] {  55,   65,   75,   85,  100,  110}, // ti=20°C
+			new double[] {  45,   55,   65,   80,   90,  100}, // ti=22°C
+			new double[] {  35,   50,   60,   70,   80,   90}  // ti=24°C
+		};
+
+		/*private static double[][] regHeizleistung620Std = {
+			//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
+			new double[] {   0,    0,    0,    0,    0,    0}, // ti=15°C
+			new double[] {   0,    0,    0,    0,    0,    0}, // ti=18°C
+			new double[] {   0,    0,    0,    0,    0,    0}, // ti=20°C
+			new double[] {   0,    0,    0,    0,    0,    0}, // ti=22°C
+			new double[] {   0,    0,    0,    0,    0,    0}  // ti=24°C
+		};*/
+
+		private static double[][] regHeizleistung2000Par = {
+			//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
+			new double[] { 160,  180,  205,  225,  250,  275}, // ti=15°C
+			new double[] { 130,  155,  175,  200,  220,  245}, // ti=18°C
+			new double[] { 115,  135,  160,  180,  205,  225}, // ti=20°C
+			new double[] {  95,  120,  140,  165,  185,  210}, // ti=22°C
+			new double[] {  75,  100,  125,  145,  170,  190}  // ti=24°C
+		};
+
+		private static double[][] regHeizleistung1500Par = {
+			//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
+			new double[] { 120,  135,  155,  170,  190,  205}, // ti=15°C
+			new double[] { 100,  115,  135,  150,  170,  185}, // ti=18°C
+			new double[] {  85,  105,  120,  135,  155,  170}, // ti=20°C
+			new double[] {  70,   90,  105,  125,  140,  160}, // ti=22°C
+			new double[] {  60,   75,   90,  110,  125,  145}  // ti=24°C
+		};
+
+		private static double[][] regHeizleistung1000Par = {
+			//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
+			new double[] {  80,   90,  100,  115,  125,  135}, // ti=15°C
+			new double[] {  65,   75,   90,  100,  110,  125}, // ti=18°C
+			new double[] {  55,   70,   80,   90,  100,  115}, // ti=20°C
+			new double[] {  50,   60,   70,   80,   95,  105}, // ti=22°C
+			new double[] {  40,   50,   60,   75,   85,   95}  // ti=24°C
+		};
 
 		private static double[] beplankungRWerte = { 0, 0.01, 0.02, 0.1 };
 		private static double[] beplankungFaktoren = { 1, 0.95, 0.91, 0.66 };
@@ -167,23 +239,143 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static string ConfigHlRegHeizleistungString {
+		public static string ConfigHlRegHeizleistung2500StdString {
 			get {
-				return ConvertArrayToString2(regHeizleistung);
+				return ConvertArrayToString2(regHeizleistung2500Std);
 			}
 			set {
 				double[][] array = ConvertStringToArray2(value);
 				if (array != null) {
-					regHeizleistung = array;
+					regHeizleistung2500Std = array;
 				}
 			}
 		}
-		public static double[][] ConfigHlRegHeizleistung {
-			get { return regHeizleistung; }
-			set { regHeizleistung = value; }
+		public static double[][] ConfigHlRegHeizleistung2500Std {
+			get { return regHeizleistung2500Std; }
+			set { regHeizleistung2500Std = value; }
 		}
 
 		[ProductParameter]
+		public static string ConfigHlRegHeizleistung2000StdString {
+			get {
+				return ConvertArrayToString2(regHeizleistung2000Std);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					regHeizleistung2000Std = array;
+				}
+			}
+		}
+		public static double[][] ConfigHlRegHeizleistung2000Std {
+			get { return regHeizleistung2000Std; }
+			set { regHeizleistung2000Std = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigHlRegHeizleistung1500StdString {
+			get {
+				return ConvertArrayToString2(regHeizleistung1500Std);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					regHeizleistung1500Std = array;
+				}
+			}
+		}
+		public static double[][] ConfigHlRegHeizleistung1500Std {
+			get { return regHeizleistung1500Std; }
+			set { regHeizleistung1500Std = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigHlRegHeizleistung1000StdString {
+			get {
+				return ConvertArrayToString2(regHeizleistung1000Std);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					regHeizleistung1000Std = array;
+				}
+			}
+		}
+		public static double[][] ConfigHlRegHeizleistung1000Std {
+			get { return regHeizleistung1000Std; }
+			set { regHeizleistung1000Std = value; }
+		}
+
+		/*[ProductParameter]
+		public static string ConfigHlRegHeizleistung620StdString {
+			get {
+				return ConvertArrayToString2(regHeizleistung620Std);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					regHeizleistung620Std = array;
+				}
+			}
+		}
+		public static double[][] ConfigHlRegHeizleistung620Std {
+			get { return regHeizleistung620Std; }
+			set { regHeizleistung620Std = value; }
+		}*/
+
+		[ProductParameter]
+		public static string ConfigHlRegHeizleistung2000ParString {
+			get {
+				return ConvertArrayToString2(regHeizleistung2000Par);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					regHeizleistung2000Par = array;
+				}
+			}
+		}
+		public static double[][] ConfigHlRegHeizleistung2000Par {
+			get { return regHeizleistung2000Par; }
+			set { regHeizleistung2000Par = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigHlRegHeizleistung1500ParString {
+			get {
+				return ConvertArrayToString2(regHeizleistung1500Par);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					regHeizleistung1500Par = array;
+				}
+			}
+		}
+		public static double[][] ConfigHlRegHeizleistung1500Par {
+			get { return regHeizleistung1500Par; }
+			set { regHeizleistung1500Par = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigHlRegHeizleistung1000ParString {
+			get {
+				return ConvertArrayToString2(regHeizleistung1000Par);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					regHeizleistung1000Par = array;
+				}
+			}
+		}
+		public static double[][] ConfigHlRegHeizleistung1000Par {
+			get { return regHeizleistung1000Par; }
+			set { regHeizleistung1000Par = value; }
+		}
+
+
+		/*[ProductParameter]
 		public static string ConfigHlRegKuehlleistungString {
 			get {
 				return ConvertArrayToString(regKuehlleistung);
@@ -198,7 +390,7 @@ namespace Europlan.Common {
 		public static double[] ConfigHlRegKuehlleistung {
 			get { return regKuehlleistung; }
 			set { regKuehlleistung = value; }
-		}
+		}*/
 
 		[ProductParameter]
 		public static string ConfigBeplankungRWerteString {
@@ -426,26 +618,29 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
-			//if (this.PlannedMhHeat >= this.PlannedMhCool) {
-			if (Math.Round(this.PlannedMhHeat, 1) > HithermCompactProduct.ConfigMaxDurchfluss) {
-				//errorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermCompactProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
-				this.lastErrorMsg += "Durchfluß bei zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermCompactProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
-			}
-			/*} else {
+			if (this.PlannedMhHeat >= this.PlannedMhCool) {
+				if (Math.Round(this.PlannedMhHeat, 1) > HithermCompactProduct.ConfigMaxDurchfluss) {
+					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermCompactProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				}
+			} else {
 				if (Math.Round(this.PlannedMhCool, 1) > HithermCompactProduct.ConfigMaxDurchfluss) {
-					errorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + HithermCompactProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + HithermCompactProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
-			}*/
-			//if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
-			if (Math.Round(this.PlannedDeltaRhoHeat, 2) > HithermCompactProduct.ConfigMaxPressureLost / 100) {
-				//errorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
-				this.lastErrorMsg += "Druckverlust zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
 			}
-			/*} else {
-				if (Math.Round(this.PlannedDeltaRhoCool, 2) > HithermCompactProduct.ConfigMaxPressureLost / 100) {
-					errorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
+				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > HithermCompactProduct.ConfigMaxPressureLost / 100) {
+					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
 				}
-			}*/
+			} else {
+				if (Math.Round(this.PlannedDeltaRhoCool, 2) > HithermCompactProduct.ConfigMaxPressureLost / 100) {
+					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				}
+			}
+			if (this.hithermCompactType == Product.ProductType.FBH && this.PlannedRegisterArea > this.PlannedFloorArea) {
+				this.lastErrorMsg += "Die verplanten Register nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.PlannedRegisterArea, 1).ToString() + "m² > " + Math.Round(this.PlannedFloorArea, 1).ToString() + "m²)\n";
+			} else if (this.hithermCompactType == Product.ProductType.DH && this.PlannedRegisterArea > this.PlannedCeilingArea) {
+				this.lastErrorMsg += "Die verplanten Register nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.PlannedRegisterArea, 1).ToString() + "m² > " + Math.Round(this.PlannedCeilingArea, 1).ToString() + "m²)\n";
+			}
 			if (this.lastErrorMsg.Length == 0) {
 				this.lastErrorMsg = null;
 			}
@@ -719,6 +914,7 @@ namespace Europlan.Common {
 			this.registerCircuits[register] = circuitId;
 			if (!this.circuitIds.ContainsKey(circuitId)) {
 				HithermCompactCircuit hc = new HithermCompactCircuit();
+				hc.HithermCompactProduct = this;
 				this.circuits.Add(hc);
 				this.circuitIds[circuitId] = hc;
 			}
@@ -851,6 +1047,16 @@ namespace Europlan.Common {
 				if (this.hithermCompactType == ProductType.DH) {
 					this.PlannedCeilingArea = (float)(this.AssociatedRoom.Area * value / 100);
 				}
+			}
+		}
+
+		public double PlannedRegisterArea {
+			get {
+				double area = 0;
+				foreach (HithermCompactCircuit hcc in this.PlannedCircuits) {
+					area += hcc.RegisterArea;
+				}
+				return area;
 			}
 		}
 	}

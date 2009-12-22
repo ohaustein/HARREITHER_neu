@@ -72,5 +72,10 @@ namespace Europlan.Common {
 			SettingsKey settings = SettingsFile.Settings["NewHeatingSystemForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
 		}
+
+		private void lstHeatingSystems_DoubleClick(object sender, EventArgs e) {
+			this.DialogResult = DialogResult.OK;
+			this.Close();
+		}
 	}
 }

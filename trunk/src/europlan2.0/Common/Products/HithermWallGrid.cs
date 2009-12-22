@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace Europlan.Common {
 	public partial class HithermWallGrid : UserControl {
+
+		private bool showCompact = false;
+
 		public HithermWallGrid() {
 			InitializeComponent();
 
@@ -21,9 +24,15 @@ namespace Europlan.Common {
 				walls.Add(w);
 			}
 
-			this.tempBehindCoolDataGridViewTextBoxColumn.Visible = Project.Instance.CalculateCoolLoad;
 
 			this.hithermWallBindingSource.DataSource = walls;*/
+
+			if (Project.Instance != null) {
+				this.tempBehindCoolDataGridViewTextBoxColumn.Visible = Project.Instance.CalculateCoolLoad;
+
+				this.hithermWallBindingSource.DataSource = Project.Instance.HithermWalls;
+				this.hithermWallBindingSource.ResetBindings(false);
+			}
 		}
 
 		public class WallEventArgs : EventArgs {
@@ -36,11 +45,24 @@ namespace Europlan.Common {
 		public event EventHandler<WallEventArgs> WallAdded;
 		public event EventHandler<WallEventArgs> WallRemoved;
 
-		public List<HithermWall> Walls {
+		/*public List<HithermWall> Walls {
 			get { return this.hithermWallBindingSource.DataSource as List<HithermWall>; }
 			set {
 				this.hithermWallBindingSource.DataSource = value;
 				this.hithermWallBindingSource.ResetBindings(false);
+			}
+		}*/
+
+		public bool ShowCompact {
+			get { return this.showCompact; }
+			set {
+				if (value != showCompact) {
+					this.showCompact = value;
+					if (Project.Instance != null) {
+						this.hithermWallBindingSource.DataSource = (showCompact ? Project.Instance.HithermCompactWalls : Project.Instance.HithermWalls);
+						this.hithermWallBindingSource.ResetBindings(false);
+					}
+				}
 			}
 		}
 
@@ -72,7 +94,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnSelectConstruction_Click(object sender, EventArgs e) {
-			SelectHithermWallConstructionForm form = new SelectHithermWallConstructionForm();
+			SelectHithermWallConstructionForm form = new SelectHithermWallConstructionForm(this.showCompact);
 			DataGridViewCell cell = dgvWalls.Rows[dgvWalls.CurrentCell.RowIndex].Cells[this.Construction.Index];
 			form.SelectedConstruction = cell.Value as WallConstruction;
 			if (form.ShowDialog().Equals(DialogResult.OK)) {
@@ -94,15 +116,35 @@ namespace Europlan.Common {
 			e.Row.Cells[this.additionalInsulationDataGridViewTextBoxColumn.Index].Value = 0.0;
 			ConstructionListWrapper clw = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
 			clw.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
-			e.Row.Cells[this.Construction.Index].Value = clw.Count > 0 ? clw[0] : null;
+			WallConstruction newConstruction = null;
+			foreach (WallConstruction wc in clw) {
+				if (!this.showCompact && wc.IsHithermWall) {
+					newConstruction = wc;
+					break;
+				} else if (this.showCompact && wc.IsHithermCompactWall) {
+					newConstruction = wc;
+					break;
+				}
+			}
+			e.Row.Cells[this.Construction.Index].Value = newConstruction;
 			e.Row.Cells[this.Deckschicht.Index].Value = 0.0;
 			e.Row.Cells[this.kValueDataGridViewTextBoxColumn.Index].Value = 0.0;
 			e.Row.Cells[this.nameDataGridViewTextBoxColumn.Index].Value = "Neue Wandkonstruktion";
 			int maxId = 0;
 			int newId;
-			if (this.hithermWallBindingSource.DataSource != null) {
-				foreach (HithermWall hw in this.hithermWallBindingSource.DataSource as List<HithermWall>) {
-					if (hw.Id != null && hw.Id.StartsWith("USW")) {
+			string prefix = this.showCompact ? "UCW" : "USW";
+			if (Project.Instance != null) {
+			//if (this.hithermWallBindingSource.DataSource is List<HithermWall>) {
+				//foreach (HithermWall hw in this.hithermWallBindingSource.DataSource as List<HithermWall>) {
+				foreach (HithermWall hw in Project.Instance.HithermWalls) {
+					if (hw.Id != null && hw.Id.StartsWith(prefix)) {
+						if (Int32.TryParse(hw.Id.Substring(3), out newId) && newId > maxId) {
+							maxId = newId;
+						}
+					}
+				}
+				foreach (HithermWall hw in Project.Instance.HithermCompactWalls) {
+					if (hw.Id != null && hw.Id.StartsWith(prefix)) {
 						if (Int32.TryParse(hw.Id.Substring(3), out newId) && newId > maxId) {
 							maxId = newId;
 						}
@@ -110,7 +152,7 @@ namespace Europlan.Common {
 				}
 			}
 			maxId++;
-			e.Row.Cells[this.idDataGridViewTextBoxColumn.Index].Value = "USW" + maxId.ToString("00");
+			e.Row.Cells[this.idDataGridViewTextBoxColumn.Index].Value = prefix + maxId.ToString("00");
 			e.Row.Cells[this.tempBehindCoolDataGridViewTextBoxColumn.Index].Value = 30.0;
 			e.Row.Cells[this.tempBehindHeatDataGridViewTextBoxColumn.Index].Value = -16.0;
 		}
@@ -120,8 +162,11 @@ namespace Europlan.Common {
 				foreach (Floor f in Project.Instance.Floors) {
 					foreach (Room r in f.Rooms) {
 						foreach (PlannedProduct pp in r.PlannedProducts) {
-							if (pp.Product is HithermProduct) {
+							if (!this.showCompact && pp.Product is HithermProduct) {
 								HithermProduct hp = pp.Product as HithermProduct;
+								hp.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+							} else if (this.showCompact && pp.Product is HithermCompactProduct) {
+								HithermCompactProduct hp = pp.Product as HithermCompactProduct;
 								hp.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
 							}
 						}
@@ -144,13 +189,14 @@ namespace Europlan.Common {
 		private void dgvWalls_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
 			if (Project.Instance != null) {
 				HithermWall newWall = null;
-				if (Project.Instance.HithermWalls.Count > 0) {
-					newWall = Project.Instance.HithermWalls[0];
+				List<HithermWall> allWalls = this.showCompact ? Project.Instance.HithermCompactWalls : Project.Instance.HithermWalls;
+				if (allWalls.Count > 0) {
+					newWall = allWalls[0];
 				}
 				foreach (Floor f in Project.Instance.Floors) {
 					foreach (Room r in f.Rooms) {
 						foreach (PlannedProduct pp in r.PlannedProducts) {
-							if (pp.Product is HithermProduct) {
+							if (!showCompact && pp.Product is HithermProduct) {
 								HithermProduct hp = pp.Product as HithermProduct;
 								foreach (HithermCircuit hc in hp.PlannedCircuits) {
 									foreach (HithermRegister hr in hc.Registers) {
@@ -160,6 +206,16 @@ namespace Europlan.Common {
 									}
 								}
 								hp.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+							} else if (showCompact && pp.Product is HithermCompactProduct) {
+								HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
+								foreach (HithermCompactCircuit hcc in hcp.PlannedCircuits) {
+									foreach (HithermCompactRegister hcr in hcc.Registers) {
+										if (hcr.Wall == e.Row.DataBoundItem) {
+											hcr.Wall = newWall;
+										}
+									}
+								}
+								hcp.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
 							}
 						}
 					}

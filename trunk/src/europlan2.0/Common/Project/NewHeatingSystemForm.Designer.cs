@@ -44,6 +44,7 @@ namespace Europlan.Common {
 			this.lstHeatingSystems.TabIndex = 0;
 			this.lstHeatingSystems.UseCompatibleStateImageBehavior = false;
 			this.lstHeatingSystems.View = System.Windows.Forms.View.List;
+			this.lstHeatingSystems.DoubleClick += new System.EventHandler(this.lstHeatingSystems_DoubleClick);
 			// 
 			// colName
 			// 
