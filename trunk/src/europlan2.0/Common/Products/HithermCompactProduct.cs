@@ -604,7 +604,106 @@ namespace Europlan.Common {
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 
+			// Euroval Anbindung
+			// 21mm Anbindung
+			double pipeEurovalLength = 0;
+			double pipe21mmLength = 0;
+			double circuit21mmOnlyFirstLength = 0;
+			double circuit21mmAllLength = 0;
+			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
+				if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+					if (pipe.OnlyFirst) {
+						pipe21mmLength += (pipe.Vorlauf + pipe.Ruecklauf);
+						circuit21mmOnlyFirstLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					} else {
+						pipe21mmLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+						circuit21mmAllLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					}
+
+				} else {
+					if (pipe.OnlyFirst) {
+						pipeEurovalLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					} else {
+						pipeEurovalLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+					}
+				}
+			}
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", pipeEurovalLength);
+			if (ConfigUsePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR51", pipe21mmLength);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", pipe21mmLength);
+			}
+
+
+			double verbindeLength = 0;
+			int teilflaechen = 0;
+			double registerCount = 0;
+			foreach (HithermCompactCircuit c in this.circuits) {
+				foreach (HithermCompactRegister register in c.Registers) {
+					teilflaechen++;
+					registerCount += register.RegisterCount;
+
+					// Register
+					Project.Instance.AddRequiredMaterial(requiredMaterial, register.PartNumber, register.RegisterCount);
+
+
+					//Wandwinkel
+					if (ConfigUsePlus) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", 1);
+					} else {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", 1);
+					}
+
+					// Bodenwinkel
+					if (ConfigUsePlus) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR68", 2);
+					} else {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI68", 2);
+					}
+
+					verbindeLength += register.PipeHorizontal + register.PipeVertical;
+
+				}
+
+			}
+
+			
+			// Ovalmuffen
+			double amount = teilflaechen;
+			if (verbindeLength > 0) {
+				amount += verbindeLength / 2;
+			}
+			if (ConfigUsePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR55", amount);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", amount);
+			}
+
+			// Ovalrohr
+			if (ConfigUsePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR60", verbindeLength);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI60", verbindeLength);
+			}
+
+			// Kleber
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HC41", PlannedNetArea / 15);
+			
+			// Schrauben
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HC42", PlannedNetArea * 13);
+
 		}
+
+		public static void ReviseRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			if (requiredMaterial.ContainsKey("HC42")) {
+				double amount = requiredMaterial["HC42"];
+				if (amount > 1000) {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HC42", (-1) * (amount - (amount % 1000)));
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HC43", amount - (amount % 1000));
+				}
+			}
+		} 
 
 		public HithermCompactCircuit GetCircuitForRegister(HithermCompactRegister register) {
 			if (!this.registerCircuits.ContainsKey(register)) {

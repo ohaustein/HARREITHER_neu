@@ -405,5 +405,21 @@ namespace Europlan.Common {
 			get { return this.Wall != null ? this.Wall.Id : null; }
 			set { this.wallId = value; }
 		}
+
+		[XmlIgnore]
+		public string PartNumber {
+			get {
+				switch (registerType) {
+					case RegisterTypeEnum.HITC_620_Std:
+						if (HithermProduct.ConfigUsePlus) {
+							return "";
+						} else {
+							return "";
+						}
+					default:
+						throw new Exception("Unknown Register Type");
+				}
+			}
+		}
 	}
 }
