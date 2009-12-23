@@ -57,8 +57,10 @@ namespace Europlan.Common {
 		private SerializableDictionary<string, double> requiredMaterialOverrides;
 		private SerializableDictionary<string, double> requiredMaterialCalculated;
 
-		private List<HithermWall> hithermWalls = new List<HithermWall>();
-		private List<HithermWall> hithermCompactWalls = new List<HithermWall>();
+		private List<HithermWall> hithermWalls = null;
+		private List<HithermWall> serializableHithermWalls = new List<HithermWall>();
+		private List<HithermWall> hithermCompactWalls = null;
+		private List<HithermWall> serializableHithermCompactWalls = new List<HithermWall>();
 		//private List<HithermWall> defaultHithermWalls = new List<HithermWall>();
 
 		protected Project() {
@@ -507,51 +509,77 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public List<HithermWall> HithermWalls {
 			get {
-				List<HithermWall> allWalls = new List<HithermWall>();
+				if (this.hithermWalls == null) {
+					this.hithermWalls = new List<HithermWall>();
 
-				ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
-				wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
-				foreach (WallConstruction wc in wrapper) {
-					//HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
-					if (wc.IsHithermWall) {
-						allWalls.Add(wc.DefaultWall);
+					ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
+					wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
+					foreach (WallConstruction wc in wrapper) {
+						if (wc.IsHithermWall) {
+							hithermWalls.Add(wc.DefaultWall);
+						}
 					}
+
+					hithermWalls.AddRange(this.serializableHithermWalls);
 				}
 
-				allWalls.AddRange(this.hithermWalls);
-
-				return allWalls;
+				return hithermWalls;
 			}
 		}
 
 		public List<HithermWall> SerializeableHithermWalls {
-			get { return this.hithermWalls; }
-			set { this.hithermWalls = value; }
+			get {
+				if (this.hithermWalls == null) {
+					return this.serializableHithermWalls;
+				} else {
+					List<HithermWall> walls = new List<HithermWall>();
+					foreach (HithermWall w in this.hithermWalls) {
+						if (!w.DefaultWall) {
+							walls.Add(w);
+						}
+					}
+					return walls;
+				}
+			}
+			set { this.serializableHithermWalls = value; }
 		}
 
 		[XmlIgnore]
 		public List<HithermWall> HithermCompactWalls {
 			get {
-				List<HithermWall> allWalls = new List<HithermWall>();
+				if (this.hithermWalls == null) {
+					this.hithermWalls = new List<HithermWall>();
 
-				ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
-				wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
-				foreach (WallConstruction wc in wrapper) {
-					//HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
-					if (wc.IsHithermCompactWall) {
-						allWalls.Add(wc.DefaultWall);
+					ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
+					wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
+					foreach (WallConstruction wc in wrapper) {
+						if (wc.IsHithermCompactWall) {
+							this.hithermWalls.Add(wc.DefaultWall);
+						}
 					}
+
+					this.hithermWalls.AddRange(this.serializableHithermCompactWalls);
 				}
 
-				allWalls.AddRange(this.hithermCompactWalls);
-
-				return allWalls;
+				return this.hithermWalls;
 			}
 		}
 
 		public List<HithermWall> SerializeableHithermCompactWalls {
-			get { return this.hithermCompactWalls; }
-			set { this.hithermCompactWalls = value; }
+			get {
+				if (this.hithermWalls == null) {
+					return this.serializableHithermCompactWalls;
+				} else {
+					List<HithermWall> walls = new List<HithermWall>();
+					foreach (HithermWall w in this.hithermCompactWalls) {
+						if (!w.DefaultWall) {
+							walls.Add(w);
+						}
+					}
+					return walls;
+				}
+			}
+			set { this.serializableHithermCompactWalls = value; }
 		}
 	}
 }

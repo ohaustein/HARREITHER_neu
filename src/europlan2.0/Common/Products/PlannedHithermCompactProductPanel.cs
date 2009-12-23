@@ -13,17 +13,25 @@ namespace Europlan.Common {
 		public PlannedHithermCompactProductPanel() {
 			InitializeComponent();
 
+			this.UpdateRegisterItems(false);
+
+			this.cmbType.Items.Add(Product.ProductType.WH);
+			this.cmbType.Items.Add(Product.ProductType.DH);
+			this.cmbType.Items.Add(Product.ProductType.DSH);
+		}
+
+		private void UpdateRegisterItems(bool dachschraege) {
+			this.registerTypeDataGridViewTextBoxColumn.Items.Clear();
 			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std);
 			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par);
-			this.cmbType.Items.Add(Product.ProductType.WH);
-			this.cmbType.Items.Add(Product.ProductType.DH);
-			this.cmbType.Items.Add(Product.ProductType.DSH);
+			if (!dachschraege) {
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par);
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par);
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par);
+			}
 		}
 
 		#region IEditorUserControl Members
@@ -62,6 +70,7 @@ namespace Europlan.Common {
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
 			if (this.product != null) {
+				this.UpdateRegisterItems((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.DSH);
 				(this.product.Product as HithermCompactProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 			}
@@ -726,12 +735,30 @@ namespace Europlan.Common {
 		private void cmbType_SelectedValueChanged(object sender, EventArgs e) {
 			if (ignoreType == 0) {
 				if (this.cmbType.SelectedItem is Product.ProductType && this.product.Product.Type != (Product.ProductType)this.cmbType.SelectedItem) {
+					if ((Product.ProductType)this.cmbType.SelectedItem == Product.ProductType.DSH) {
+						if (MessageBox.Show("Wenn Sie den Typ auf Dachschräge ändern, werden alle Register in Parapetauslegung gelöscht", "Bestätigen", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK) {
+							this.cmbType.SelectedItem = (this.product.Product as HithermCompactProduct).HithermCompactType;
+							return ;
+						}
+						List<HithermCompactRegister> removeRegisters = new List<HithermCompactRegister>();
+						foreach (HithermCompactCircuit hcc in (this.product.Product as HithermCompactProduct).PlannedCircuits) {
+							foreach (HithermCompactRegister hcr in hcc.Registers){
+								if (hcr.IsParapet) {
+									removeRegisters.Add(hcr);
+								}
+							}
+						}
+						foreach (HithermCompactRegister hcr in removeRegisters) {
+							(this.product.Product as HithermCompactProduct).RemoveRegisterFromCircuit(hcr);
+						}
+					}
 					(this.product.Product as HithermCompactProduct).HithermCompactType = (Product.ProductType)this.cmbType.SelectedItem;
 					if ((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.FBH) {
 						(this.product.Product as HithermCompactProduct).PlannedFloorArea = this.product.Product.AvailableFloorArea;
 					} else if ((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.DH) {
 						(this.product.Product as HithermCompactProduct).PlannedCeilingArea = this.product.Product.AvailableCeilingArea;
 					}
+					this.UpdateRegisterItems((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.DSH);
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.TYPE);
