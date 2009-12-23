@@ -706,9 +706,9 @@ namespace Europlan.Application {
 		private void viewReportToolStripMenuItem_Click(object sender, EventArgs e) {
 			ProjectReportOptions optionsForm = new ProjectReportOptions();
 			if (optionsForm.ShowDialog() == DialogResult.OK) {
-#if !DEBUG
-				MessageBox.Show("Hinweis: Die Druckvorschau enthält großteils noch keine Echtdaten. Sie ist derzeit nur als Diskussionsgrundlage für das Layout zu verstehen.", "Hinweis");
-#endif
+//#if !DEBUG
+//				MessageBox.Show("Hinweis: Die Druckvorschau enthält großteils noch keine Echtdaten. Sie ist derzeit nur als Diskussionsgrundlage für das Layout zu verstehen.", "Hinweis");
+//#endif
 				ProjectReport reportForm = new ProjectReport(this.currentProject, optionsForm);
 				reportForm.ShowDialog();
 				reportForm.Dispose();
