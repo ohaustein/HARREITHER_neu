@@ -112,7 +112,12 @@ namespace Europlan.Common {
 			return this.Id;
 		}
 
-		public string GetPartNumber(HithermCompactRegister.HithermCompactRegisterTypeEnum type, bool usePlus) {
+		public string GetPartNumber(HithermCompactRegister.HithermCompactRegisterTypeEnum type, bool dachschraege, bool usePlus) {
+			if (this.construction != null && this.construction.HithermCompactRegisterMaterialIds != null) {
+				if (this.construction.HithermCompactRegisterMaterialIds.ContainsKey(new WallConstruction.RegisterTypeKey(type, dachschraege, usePlus))) {
+					return construction.HithermCompactRegisterMaterialIds[new WallConstruction.RegisterTypeKey(type, dachschraege, usePlus)];
+				}
+			}
 			return "";
 		}
 	}
