@@ -440,7 +440,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public string PartNumber {
 			get {
-				return this.wall.GetPartNumber(registerType, HithermCompactProduct.ConfigUsePlus);
+				return this.wall.GetPartNumber(registerType, this.product.Product.Type == Product.ProductType.DSH, HithermCompactProduct.ConfigUsePlus);
 			}
 		}
 	}
