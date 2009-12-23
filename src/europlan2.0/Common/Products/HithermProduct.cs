@@ -931,11 +931,7 @@ namespace Europlan.Common {
 			}
 
 			// Dübelhaken
-			if (ConfigUsePlus) {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR60", (registerCount * 2) + verbindeLength);
-			} else {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI40", (registerCount * 2) + verbindeLength);
-			}
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI40", (registerCount * 2) + verbindeLength);
 
 			// unknown amount
 			if (ConfigUsePlus) {
