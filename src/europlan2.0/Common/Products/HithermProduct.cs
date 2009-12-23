@@ -105,6 +105,7 @@ namespace Europlan.Common {
 			quickDimensioningCoolPowerPerSquareMeter = 100;
 			canHeat = true;
 			canCool = false;
+			usePlus = false;
 			maxPressureLost = 15000;
 			maxDurchfluss = 240;
 		}

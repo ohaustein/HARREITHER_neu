@@ -82,6 +82,9 @@ namespace Europlan.Common {
 			this.label141 = new System.Windows.Forms.Label();
 			this.rbEcothermHarreitherNorm = new System.Windows.Forms.RadioButton();
 			this.tabHitherm = new System.Windows.Forms.TabPage();
+			this.rbHithermPlus = new System.Windows.Forms.RadioButton();
+			this.label143 = new System.Windows.Forms.Label();
+			this.rbHitherm = new System.Windows.Forms.RadioButton();
 			this.btnHithermStandard = new System.Windows.Forms.Button();
 			this.label50 = new System.Windows.Forms.Label();
 			this.label51 = new System.Windows.Forms.Label();
@@ -91,6 +94,19 @@ namespace Europlan.Common {
 			this.numHithermDurchfluss = new Europlan.Common.NumericBox();
 			this.numHithermPressureMbar = new Europlan.Common.NumericBox();
 			this.numHithermPressurePa = new Europlan.Common.NumericBox();
+			this.tabHithermCompact = new System.Windows.Forms.TabPage();
+			this.rbHithermCompactPlus = new System.Windows.Forms.RadioButton();
+			this.label142 = new System.Windows.Forms.Label();
+			this.rbHithermCompact = new System.Windows.Forms.RadioButton();
+			this.btnHithermCompactStandard = new System.Windows.Forms.Button();
+			this.label144 = new System.Windows.Forms.Label();
+			this.label145 = new System.Windows.Forms.Label();
+			this.label146 = new System.Windows.Forms.Label();
+			this.label147 = new System.Windows.Forms.Label();
+			this.label148 = new System.Windows.Forms.Label();
+			this.numHithermCompactDurchfluss = new Europlan.Common.NumericBox();
+			this.numHithermCompactPressureMbar = new Europlan.Common.NumericBox();
+			this.numHithermCompactPressurePa = new Europlan.Common.NumericBox();
 			this.tabModulBoden = new System.Windows.Forms.TabPage();
 			this.label25 = new System.Windows.Forms.Label();
 			this.label35 = new System.Windows.Forms.Label();
@@ -278,6 +294,7 @@ namespace Europlan.Common {
 			this.tabEuroval.SuspendLayout();
 			this.tabEcotherm.SuspendLayout();
 			this.tabHitherm.SuspendLayout();
+			this.tabHithermCompact.SuspendLayout();
 			this.tabModulBoden.SuspendLayout();
 			this.tabModulDecke.SuspendLayout();
 			this.tabPage1.SuspendLayout();
@@ -304,6 +321,7 @@ namespace Europlan.Common {
 			this.tabSystemParameters.Controls.Add(this.tabEuroval);
 			this.tabSystemParameters.Controls.Add(this.tabEcotherm);
 			this.tabSystemParameters.Controls.Add(this.tabHitherm);
+			this.tabSystemParameters.Controls.Add(this.tabHithermCompact);
 			this.tabSystemParameters.Controls.Add(this.tabModulBoden);
 			this.tabSystemParameters.Controls.Add(this.tabModulDecke);
 			this.tabSystemParameters.Location = new System.Drawing.Point(0, 27);
@@ -1204,6 +1222,9 @@ namespace Europlan.Common {
 			// 
 			// tabHitherm
 			// 
+			this.tabHitherm.Controls.Add(this.rbHithermPlus);
+			this.tabHitherm.Controls.Add(this.label143);
+			this.tabHitherm.Controls.Add(this.rbHitherm);
 			this.tabHitherm.Controls.Add(this.btnHithermStandard);
 			this.tabHitherm.Controls.Add(this.label50);
 			this.tabHitherm.Controls.Add(this.label51);
@@ -1220,9 +1241,39 @@ namespace Europlan.Common {
 			this.tabHitherm.Text = "Hitherm®";
 			this.tabHitherm.UseVisualStyleBackColor = true;
 			// 
+			// rbHithermPlus
+			// 
+			this.rbHithermPlus.Location = new System.Drawing.Point(197, 39);
+			this.rbHithermPlus.Name = "rbHithermPlus";
+			this.rbHithermPlus.Size = new System.Drawing.Size(195, 17);
+			this.rbHithermPlus.TabIndex = 67;
+			this.rbHithermPlus.Text = "Hitherm®+";
+			this.rbHithermPlus.UseVisualStyleBackColor = true;
+			this.rbHithermPlus.CheckedChanged += new System.EventHandler(this.rbHitherm_CheckedChanged);
+			// 
+			// label143
+			// 
+			this.label143.Location = new System.Drawing.Point(6, 15);
+			this.label143.Name = "label143";
+			this.label143.Size = new System.Drawing.Size(181, 23);
+			this.label143.TabIndex = 66;
+			this.label143.Text = "System:";
+			// 
+			// rbHitherm
+			// 
+			this.rbHitherm.Checked = true;
+			this.rbHitherm.Location = new System.Drawing.Point(197, 9);
+			this.rbHitherm.Name = "rbHitherm";
+			this.rbHitherm.Size = new System.Drawing.Size(206, 24);
+			this.rbHitherm.TabIndex = 65;
+			this.rbHitherm.TabStop = true;
+			this.rbHitherm.Text = "Hitherm®";
+			this.rbHitherm.UseVisualStyleBackColor = true;
+			this.rbHitherm.CheckedChanged += new System.EventHandler(this.rbHitherm_CheckedChanged);
+			// 
 			// btnHithermStandard
 			// 
-			this.btnHithermStandard.Location = new System.Drawing.Point(324, 65);
+			this.btnHithermStandard.Location = new System.Drawing.Point(327, 117);
 			this.btnHithermStandard.Name = "btnHithermStandard";
 			this.btnHithermStandard.Size = new System.Drawing.Size(110, 23);
 			this.btnHithermStandard.TabIndex = 62;
@@ -1232,7 +1283,7 @@ namespace Europlan.Common {
 			// 
 			// label50
 			// 
-			this.label50.Location = new System.Drawing.Point(276, 39);
+			this.label50.Location = new System.Drawing.Point(279, 91);
 			this.label50.Name = "label50";
 			this.label50.Size = new System.Drawing.Size(76, 23);
 			this.label50.TabIndex = 61;
@@ -1241,7 +1292,7 @@ namespace Europlan.Common {
 			// label51
 			// 
 			this.label51.AutoSize = true;
-			this.label51.Location = new System.Drawing.Point(3, 39);
+			this.label51.Location = new System.Drawing.Point(6, 91);
 			this.label51.Name = "label51";
 			this.label51.Size = new System.Drawing.Size(114, 13);
 			this.label51.TabIndex = 59;
@@ -1249,7 +1300,7 @@ namespace Europlan.Common {
 			// 
 			// label52
 			// 
-			this.label52.Location = new System.Drawing.Point(406, 13);
+			this.label52.Location = new System.Drawing.Point(409, 65);
 			this.label52.Name = "label52";
 			this.label52.Size = new System.Drawing.Size(76, 23);
 			this.label52.TabIndex = 58;
@@ -1257,7 +1308,7 @@ namespace Europlan.Common {
 			// 
 			// label53
 			// 
-			this.label53.Location = new System.Drawing.Point(276, 13);
+			this.label53.Location = new System.Drawing.Point(279, 65);
 			this.label53.Name = "label53";
 			this.label53.Size = new System.Drawing.Size(42, 23);
 			this.label53.TabIndex = 56;
@@ -1266,7 +1317,7 @@ namespace Europlan.Common {
 			// label54
 			// 
 			this.label54.AutoSize = true;
-			this.label54.Location = new System.Drawing.Point(3, 13);
+			this.label54.Location = new System.Drawing.Point(6, 65);
 			this.label54.Name = "label54";
 			this.label54.Size = new System.Drawing.Size(96, 13);
 			this.label54.TabIndex = 54;
@@ -1280,7 +1331,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			this.numHithermDurchfluss.Location = new System.Drawing.Point(194, 36);
+			this.numHithermDurchfluss.Location = new System.Drawing.Point(197, 88);
 			this.numHithermDurchfluss.MaxValue = new decimal(new int[] {
             1000,
             0,
@@ -1311,7 +1362,7 @@ namespace Europlan.Common {
             0,
             0,
             65536});
-			this.numHithermPressureMbar.Location = new System.Drawing.Point(324, 10);
+			this.numHithermPressureMbar.Location = new System.Drawing.Point(327, 62);
 			this.numHithermPressureMbar.MaxValue = new decimal(new int[] {
             250,
             0,
@@ -1342,7 +1393,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			this.numHithermPressurePa.Location = new System.Drawing.Point(194, 10);
+			this.numHithermPressurePa.Location = new System.Drawing.Point(197, 62);
 			this.numHithermPressurePa.MaxValue = new decimal(new int[] {
             50000,
             0,
@@ -1364,6 +1415,203 @@ namespace Europlan.Common {
             0,
             0});
 			this.numHithermPressurePa.ValueChanged += new System.EventHandler(this.numHithermPressurePa_ValueChanged);
+			// 
+			// tabHithermCompact
+			// 
+			this.tabHithermCompact.Controls.Add(this.rbHithermCompactPlus);
+			this.tabHithermCompact.Controls.Add(this.label142);
+			this.tabHithermCompact.Controls.Add(this.rbHithermCompact);
+			this.tabHithermCompact.Controls.Add(this.btnHithermCompactStandard);
+			this.tabHithermCompact.Controls.Add(this.label144);
+			this.tabHithermCompact.Controls.Add(this.label145);
+			this.tabHithermCompact.Controls.Add(this.label146);
+			this.tabHithermCompact.Controls.Add(this.label147);
+			this.tabHithermCompact.Controls.Add(this.label148);
+			this.tabHithermCompact.Controls.Add(this.numHithermCompactDurchfluss);
+			this.tabHithermCompact.Controls.Add(this.numHithermCompactPressureMbar);
+			this.tabHithermCompact.Controls.Add(this.numHithermCompactPressurePa);
+			this.tabHithermCompact.Location = new System.Drawing.Point(4, 22);
+			this.tabHithermCompact.Name = "tabHithermCompact";
+			this.tabHithermCompact.Padding = new System.Windows.Forms.Padding(3);
+			this.tabHithermCompact.Size = new System.Drawing.Size(711, 366);
+			this.tabHithermCompact.TabIndex = 5;
+			this.tabHithermCompact.Text = "Hitherm® Compact";
+			this.tabHithermCompact.UseVisualStyleBackColor = true;
+			// 
+			// rbHithermCompactPlus
+			// 
+			this.rbHithermCompactPlus.Location = new System.Drawing.Point(197, 39);
+			this.rbHithermCompactPlus.Name = "rbHithermCompactPlus";
+			this.rbHithermCompactPlus.Size = new System.Drawing.Size(195, 17);
+			this.rbHithermCompactPlus.TabIndex = 79;
+			this.rbHithermCompactPlus.Text = "Hitherm®+ Compact";
+			this.rbHithermCompactPlus.UseVisualStyleBackColor = true;
+			this.rbHithermCompactPlus.CheckedChanged += new System.EventHandler(this.rbHithermCompact_CheckedChanged);
+			// 
+			// label142
+			// 
+			this.label142.Location = new System.Drawing.Point(6, 15);
+			this.label142.Name = "label142";
+			this.label142.Size = new System.Drawing.Size(181, 23);
+			this.label142.TabIndex = 78;
+			this.label142.Text = "System:";
+			// 
+			// rbHithermCompact
+			// 
+			this.rbHithermCompact.Checked = true;
+			this.rbHithermCompact.Location = new System.Drawing.Point(197, 9);
+			this.rbHithermCompact.Name = "rbHithermCompact";
+			this.rbHithermCompact.Size = new System.Drawing.Size(206, 24);
+			this.rbHithermCompact.TabIndex = 77;
+			this.rbHithermCompact.TabStop = true;
+			this.rbHithermCompact.Text = "Hitherm® Compact";
+			this.rbHithermCompact.UseVisualStyleBackColor = true;
+			this.rbHithermCompact.CheckedChanged += new System.EventHandler(this.rbHithermCompact_CheckedChanged);
+			// 
+			// btnHithermCompactStandard
+			// 
+			this.btnHithermCompactStandard.Location = new System.Drawing.Point(327, 117);
+			this.btnHithermCompactStandard.Name = "btnHithermCompactStandard";
+			this.btnHithermCompactStandard.Size = new System.Drawing.Size(110, 23);
+			this.btnHithermCompactStandard.TabIndex = 76;
+			this.btnHithermCompactStandard.Text = "Standardwerte";
+			this.btnHithermCompactStandard.UseVisualStyleBackColor = true;
+			this.btnHithermCompactStandard.Click += new System.EventHandler(this.btnHithermCompactStandard_Click);
+			// 
+			// label144
+			// 
+			this.label144.Location = new System.Drawing.Point(279, 91);
+			this.label144.Name = "label144";
+			this.label144.Size = new System.Drawing.Size(76, 23);
+			this.label144.TabIndex = 75;
+			this.label144.Text = "l/h";
+			// 
+			// label145
+			// 
+			this.label145.AutoSize = true;
+			this.label145.Location = new System.Drawing.Point(6, 91);
+			this.label145.Name = "label145";
+			this.label145.Size = new System.Drawing.Size(114, 13);
+			this.label145.TabIndex = 73;
+			this.label145.Text = "Max. Durchflußmenge:";
+			// 
+			// label146
+			// 
+			this.label146.Location = new System.Drawing.Point(409, 65);
+			this.label146.Name = "label146";
+			this.label146.Size = new System.Drawing.Size(76, 23);
+			this.label146.TabIndex = 72;
+			this.label146.Text = "mbar";
+			// 
+			// label147
+			// 
+			this.label147.Location = new System.Drawing.Point(279, 65);
+			this.label147.Name = "label147";
+			this.label147.Size = new System.Drawing.Size(42, 23);
+			this.label147.TabIndex = 70;
+			this.label147.Text = "Pa    =";
+			// 
+			// label148
+			// 
+			this.label148.AutoSize = true;
+			this.label148.Location = new System.Drawing.Point(6, 65);
+			this.label148.Name = "label148";
+			this.label148.Size = new System.Drawing.Size(96, 13);
+			this.label148.TabIndex = 68;
+			this.label148.Text = "Max. Druckverlust:";
+			// 
+			// numHithermCompactDurchfluss
+			// 
+			this.numHithermCompactDurchfluss.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numHithermCompactDurchfluss.InternalValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numHithermCompactDurchfluss.Location = new System.Drawing.Point(197, 88);
+			this.numHithermCompactDurchfluss.MaxValue = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numHithermCompactDurchfluss.MinValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numHithermCompactDurchfluss.Name = "numHithermCompactDurchfluss";
+			this.numHithermCompactDurchfluss.Size = new System.Drawing.Size(76, 20);
+			this.numHithermCompactDurchfluss.TabIndex = 74;
+			this.numHithermCompactDurchfluss.Text = "100";
+			this.numHithermCompactDurchfluss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numHithermCompactDurchfluss.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numHithermCompactDurchfluss.ValueChanged += new System.EventHandler(this.numHithermCompactDurchfluss_ValueChanged);
+			// 
+			// numHithermCompactPressureMbar
+			// 
+			this.numHithermCompactPressureMbar.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numHithermCompactPressureMbar.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numHithermCompactPressureMbar.Location = new System.Drawing.Point(327, 62);
+			this.numHithermCompactPressureMbar.MaxValue = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+			this.numHithermCompactPressureMbar.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numHithermCompactPressureMbar.Name = "numHithermCompactPressureMbar";
+			this.numHithermCompactPressureMbar.Size = new System.Drawing.Size(76, 20);
+			this.numHithermCompactPressureMbar.TabIndex = 71;
+			this.numHithermCompactPressureMbar.Text = "0,1";
+			this.numHithermCompactPressureMbar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numHithermCompactPressureMbar.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numHithermCompactPressureMbar.ValueChanged += new System.EventHandler(this.numHithermCompactPressureMbar_ValueChanged);
+			// 
+			// numHithermCompactPressurePa
+			// 
+			this.numHithermCompactPressurePa.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numHithermCompactPressurePa.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numHithermCompactPressurePa.Location = new System.Drawing.Point(197, 62);
+			this.numHithermCompactPressurePa.MaxValue = new decimal(new int[] {
+            50000,
+            0,
+            0,
+            0});
+			this.numHithermCompactPressurePa.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numHithermCompactPressurePa.Name = "numHithermCompactPressurePa";
+			this.numHithermCompactPressurePa.Size = new System.Drawing.Size(76, 20);
+			this.numHithermCompactPressurePa.TabIndex = 69;
+			this.numHithermCompactPressurePa.Text = "0";
+			this.numHithermCompactPressurePa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numHithermCompactPressurePa.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numHithermCompactPressurePa.ValueChanged += new System.EventHandler(this.numHithermCompactPressurePa_ValueChanged);
 			// 
 			// tabModulBoden
 			// 
@@ -4310,6 +4558,8 @@ namespace Europlan.Common {
 			this.tabEcotherm.PerformLayout();
 			this.tabHitherm.ResumeLayout(false);
 			this.tabHitherm.PerformLayout();
+			this.tabHithermCompact.ResumeLayout(false);
+			this.tabHithermCompact.PerformLayout();
 			this.tabModulBoden.ResumeLayout(false);
 			this.tabModulBoden.PerformLayout();
 			this.tabModulDecke.ResumeLayout(false);
@@ -4580,5 +4830,21 @@ namespace Europlan.Common {
 		private System.Windows.Forms.RadioButton radioButton5;
 		private System.Windows.Forms.Label label125;
 		private System.Windows.Forms.RadioButton radioButton6;
+		private System.Windows.Forms.RadioButton rbHithermPlus;
+		private System.Windows.Forms.Label label143;
+		private System.Windows.Forms.RadioButton rbHitherm;
+		private System.Windows.Forms.TabPage tabHithermCompact;
+		private System.Windows.Forms.RadioButton rbHithermCompactPlus;
+		private System.Windows.Forms.Label label142;
+		private System.Windows.Forms.RadioButton rbHithermCompact;
+		private System.Windows.Forms.Button btnHithermCompactStandard;
+		private System.Windows.Forms.Label label144;
+		private System.Windows.Forms.Label label145;
+		private System.Windows.Forms.Label label146;
+		private System.Windows.Forms.Label label147;
+		private System.Windows.Forms.Label label148;
+		private NumericBox numHithermCompactDurchfluss;
+		private NumericBox numHithermCompactPressureMbar;
+		private NumericBox numHithermCompactPressurePa;
 	}
 }
