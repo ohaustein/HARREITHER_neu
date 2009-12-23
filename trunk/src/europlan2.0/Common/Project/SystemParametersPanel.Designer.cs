@@ -29,15 +29,15 @@ namespace Europlan.Common {
 			this.btnEurovalStandard = new System.Windows.Forms.Button();
 			this.label14 = new System.Windows.Forms.Label();
 			this.label15 = new System.Windows.Forms.Label();
-			this.numSpreizungKühlMax = new Europlan.Common.NumericBox();
+			this.numEurovalSpreizungKühlMax = new Europlan.Common.NumericBox();
 			this.label16 = new System.Windows.Forms.Label();
-			this.numSpreizungKühlMin = new Europlan.Common.NumericBox();
+			this.numEurovalSpreizungKühlMin = new Europlan.Common.NumericBox();
 			this.label17 = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
-			this.numSpreizungHeizMax = new Europlan.Common.NumericBox();
+			this.numEurovalSpreizungHeizMax = new Europlan.Common.NumericBox();
 			this.label11 = new System.Windows.Forms.Label();
-			this.numSpreizungHeizMin = new Europlan.Common.NumericBox();
+			this.numEurovalSpreizungHeizMin = new Europlan.Common.NumericBox();
 			this.label12 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.numEurovalDurchfluss = new Europlan.Common.NumericBox();
@@ -53,6 +53,34 @@ namespace Europlan.Common {
 			this.rbEurovalEN1264 = new System.Windows.Forms.RadioButton();
 			this.label2 = new System.Windows.Forms.Label();
 			this.rbEurovalHarreitherNorm = new System.Windows.Forms.RadioButton();
+			this.tabEcotherm = new System.Windows.Forms.TabPage();
+			this.btnEcothermStandard = new System.Windows.Forms.Button();
+			this.label126 = new System.Windows.Forms.Label();
+			this.label127 = new System.Windows.Forms.Label();
+			this.numEcothermSpreizungKühlMax = new Europlan.Common.NumericBox();
+			this.label128 = new System.Windows.Forms.Label();
+			this.numEcothermSpreizungKühlMin = new Europlan.Common.NumericBox();
+			this.label129 = new System.Windows.Forms.Label();
+			this.label130 = new System.Windows.Forms.Label();
+			this.label131 = new System.Windows.Forms.Label();
+			this.numEcothermSpreizungHeizMax = new Europlan.Common.NumericBox();
+			this.label132 = new System.Windows.Forms.Label();
+			this.numEcothermSpreizungHeizMin = new Europlan.Common.NumericBox();
+			this.label133 = new System.Windows.Forms.Label();
+			this.label134 = new System.Windows.Forms.Label();
+			this.numEcothermDurchfluss = new Europlan.Common.NumericBox();
+			this.label135 = new System.Windows.Forms.Label();
+			this.label136 = new System.Windows.Forms.Label();
+			this.numEcothermPressureMbar = new Europlan.Common.NumericBox();
+			this.label137 = new System.Windows.Forms.Label();
+			this.numEcothermPressurePa = new Europlan.Common.NumericBox();
+			this.label138 = new System.Windows.Forms.Label();
+			this.label139 = new System.Windows.Forms.Label();
+			this.numEcothermCircuitLength = new Europlan.Common.NumericBox();
+			this.label140 = new System.Windows.Forms.Label();
+			this.rbEcothermEN1264 = new System.Windows.Forms.RadioButton();
+			this.label141 = new System.Windows.Forms.Label();
+			this.rbEcothermHarreitherNorm = new System.Windows.Forms.RadioButton();
 			this.tabHitherm = new System.Windows.Forms.TabPage();
 			this.btnHithermStandard = new System.Windows.Forms.Button();
 			this.label50 = new System.Windows.Forms.Label();
@@ -219,7 +247,6 @@ namespace Europlan.Common {
 			this.numericBox30 = new Europlan.Common.NumericBox();
 			this.label109 = new System.Windows.Forms.Label();
 			this.button4 = new System.Windows.Forms.Button();
-			this.tabEcotherm = new System.Windows.Forms.TabPage();
 			this.button5 = new System.Windows.Forms.Button();
 			this.label110 = new System.Windows.Forms.Label();
 			this.label111 = new System.Windows.Forms.Label();
@@ -247,35 +274,9 @@ namespace Europlan.Common {
 			this.radioButton5 = new System.Windows.Forms.RadioButton();
 			this.label125 = new System.Windows.Forms.Label();
 			this.radioButton6 = new System.Windows.Forms.RadioButton();
-			this.button6 = new System.Windows.Forms.Button();
-			this.label126 = new System.Windows.Forms.Label();
-			this.label127 = new System.Windows.Forms.Label();
-			this.numericBox39 = new Europlan.Common.NumericBox();
-			this.label128 = new System.Windows.Forms.Label();
-			this.numericBox40 = new Europlan.Common.NumericBox();
-			this.label129 = new System.Windows.Forms.Label();
-			this.label130 = new System.Windows.Forms.Label();
-			this.label131 = new System.Windows.Forms.Label();
-			this.numericBox41 = new Europlan.Common.NumericBox();
-			this.label132 = new System.Windows.Forms.Label();
-			this.numericBox42 = new Europlan.Common.NumericBox();
-			this.label133 = new System.Windows.Forms.Label();
-			this.label134 = new System.Windows.Forms.Label();
-			this.numericBox43 = new Europlan.Common.NumericBox();
-			this.label135 = new System.Windows.Forms.Label();
-			this.label136 = new System.Windows.Forms.Label();
-			this.numericBox44 = new Europlan.Common.NumericBox();
-			this.label137 = new System.Windows.Forms.Label();
-			this.numericBox45 = new Europlan.Common.NumericBox();
-			this.label138 = new System.Windows.Forms.Label();
-			this.label139 = new System.Windows.Forms.Label();
-			this.numericBox46 = new Europlan.Common.NumericBox();
-			this.label140 = new System.Windows.Forms.Label();
-			this.rbEcothermEN1264 = new System.Windows.Forms.RadioButton();
-			this.label141 = new System.Windows.Forms.Label();
-			this.rbEcothermHarreitherNorm = new System.Windows.Forms.RadioButton();
 			this.tabSystemParameters.SuspendLayout();
 			this.tabEuroval.SuspendLayout();
+			this.tabEcotherm.SuspendLayout();
 			this.tabHitherm.SuspendLayout();
 			this.tabModulBoden.SuspendLayout();
 			this.tabModulDecke.SuspendLayout();
@@ -283,7 +284,6 @@ namespace Europlan.Common {
 			this.tabPage2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
 			this.tabPage4.SuspendLayout();
-			this.tabEcotherm.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -318,15 +318,15 @@ namespace Europlan.Common {
 			this.tabEuroval.Controls.Add(this.btnEurovalStandard);
 			this.tabEuroval.Controls.Add(this.label14);
 			this.tabEuroval.Controls.Add(this.label15);
-			this.tabEuroval.Controls.Add(this.numSpreizungKühlMax);
+			this.tabEuroval.Controls.Add(this.numEurovalSpreizungKühlMax);
 			this.tabEuroval.Controls.Add(this.label16);
-			this.tabEuroval.Controls.Add(this.numSpreizungKühlMin);
+			this.tabEuroval.Controls.Add(this.numEurovalSpreizungKühlMin);
 			this.tabEuroval.Controls.Add(this.label17);
 			this.tabEuroval.Controls.Add(this.label13);
 			this.tabEuroval.Controls.Add(this.label10);
-			this.tabEuroval.Controls.Add(this.numSpreizungHeizMax);
+			this.tabEuroval.Controls.Add(this.numEurovalSpreizungHeizMax);
 			this.tabEuroval.Controls.Add(this.label11);
-			this.tabEuroval.Controls.Add(this.numSpreizungHeizMin);
+			this.tabEuroval.Controls.Add(this.numEurovalSpreizungHeizMin);
 			this.tabEuroval.Controls.Add(this.label12);
 			this.tabEuroval.Controls.Add(this.label8);
 			this.tabEuroval.Controls.Add(this.numEurovalDurchfluss);
@@ -376,36 +376,36 @@ namespace Europlan.Common {
 			this.label15.TabIndex = 24;
 			this.label15.Text = "K";
 			// 
-			// numSpreizungKühlMax
+			// numEurovalSpreizungKühlMax
 			// 
-			this.numSpreizungKühlMax.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numSpreizungKühlMax.InternalValue = new decimal(new int[] {
+			this.numEurovalSpreizungKühlMax.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEurovalSpreizungKühlMax.InternalValue = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungKühlMax.Location = new System.Drawing.Point(324, 155);
-			this.numSpreizungKühlMax.MaxValue = new decimal(new int[] {
+			this.numEurovalSpreizungKühlMax.Location = new System.Drawing.Point(324, 155);
+			this.numEurovalSpreizungKühlMax.MaxValue = new decimal(new int[] {
             15,
             0,
             0,
             0});
-			this.numSpreizungKühlMax.MinValue = new decimal(new int[] {
+			this.numEurovalSpreizungKühlMax.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungKühlMax.Name = "numSpreizungKühlMax";
-			this.numSpreizungKühlMax.Size = new System.Drawing.Size(76, 20);
-			this.numSpreizungKühlMax.TabIndex = 23;
-			this.numSpreizungKühlMax.Text = "1";
-			this.numSpreizungKühlMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSpreizungKühlMax.Value = new decimal(new int[] {
+			this.numEurovalSpreizungKühlMax.Name = "numEurovalSpreizungKühlMax";
+			this.numEurovalSpreizungKühlMax.Size = new System.Drawing.Size(76, 20);
+			this.numEurovalSpreizungKühlMax.TabIndex = 23;
+			this.numEurovalSpreizungKühlMax.Text = "1";
+			this.numEurovalSpreizungKühlMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEurovalSpreizungKühlMax.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungKühlMax.ValueChanged += new System.EventHandler(this.numSpreizungKühlMax_ValueChanged);
+			this.numEurovalSpreizungKühlMax.ValueChanged += new System.EventHandler(this.numEurovalSpreizungKühlMax_ValueChanged);
 			// 
 			// label16
 			// 
@@ -415,36 +415,36 @@ namespace Europlan.Common {
 			this.label16.TabIndex = 22;
 			this.label16.Text = "K    max.";
 			// 
-			// numSpreizungKühlMin
+			// numEurovalSpreizungKühlMin
 			// 
-			this.numSpreizungKühlMin.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numSpreizungKühlMin.InternalValue = new decimal(new int[] {
+			this.numEurovalSpreizungKühlMin.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEurovalSpreizungKühlMin.InternalValue = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungKühlMin.Location = new System.Drawing.Point(194, 155);
-			this.numSpreizungKühlMin.MaxValue = new decimal(new int[] {
+			this.numEurovalSpreizungKühlMin.Location = new System.Drawing.Point(194, 155);
+			this.numEurovalSpreizungKühlMin.MaxValue = new decimal(new int[] {
             15,
             0,
             0,
             0});
-			this.numSpreizungKühlMin.MinValue = new decimal(new int[] {
+			this.numEurovalSpreizungKühlMin.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungKühlMin.Name = "numSpreizungKühlMin";
-			this.numSpreizungKühlMin.Size = new System.Drawing.Size(76, 20);
-			this.numSpreizungKühlMin.TabIndex = 21;
-			this.numSpreizungKühlMin.Text = "1";
-			this.numSpreizungKühlMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSpreizungKühlMin.Value = new decimal(new int[] {
+			this.numEurovalSpreizungKühlMin.Name = "numEurovalSpreizungKühlMin";
+			this.numEurovalSpreizungKühlMin.Size = new System.Drawing.Size(76, 20);
+			this.numEurovalSpreizungKühlMin.TabIndex = 21;
+			this.numEurovalSpreizungKühlMin.Text = "1";
+			this.numEurovalSpreizungKühlMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEurovalSpreizungKühlMin.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungKühlMin.ValueChanged += new System.EventHandler(this.numSpreizungKühlMin_ValueChanged);
+			this.numEurovalSpreizungKühlMin.ValueChanged += new System.EventHandler(this.numEurovalSpreizungKühlMin_ValueChanged);
 			// 
 			// label17
 			// 
@@ -470,36 +470,36 @@ namespace Europlan.Common {
 			this.label10.TabIndex = 18;
 			this.label10.Text = "K";
 			// 
-			// numSpreizungHeizMax
+			// numEurovalSpreizungHeizMax
 			// 
-			this.numSpreizungHeizMax.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numSpreizungHeizMax.InternalValue = new decimal(new int[] {
+			this.numEurovalSpreizungHeizMax.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEurovalSpreizungHeizMax.InternalValue = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungHeizMax.Location = new System.Drawing.Point(324, 132);
-			this.numSpreizungHeizMax.MaxValue = new decimal(new int[] {
+			this.numEurovalSpreizungHeizMax.Location = new System.Drawing.Point(324, 132);
+			this.numEurovalSpreizungHeizMax.MaxValue = new decimal(new int[] {
             15,
             0,
             0,
             0});
-			this.numSpreizungHeizMax.MinValue = new decimal(new int[] {
+			this.numEurovalSpreizungHeizMax.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungHeizMax.Name = "numSpreizungHeizMax";
-			this.numSpreizungHeizMax.Size = new System.Drawing.Size(76, 20);
-			this.numSpreizungHeizMax.TabIndex = 17;
-			this.numSpreizungHeizMax.Text = "1";
-			this.numSpreizungHeizMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSpreizungHeizMax.Value = new decimal(new int[] {
+			this.numEurovalSpreizungHeizMax.Name = "numEurovalSpreizungHeizMax";
+			this.numEurovalSpreizungHeizMax.Size = new System.Drawing.Size(76, 20);
+			this.numEurovalSpreizungHeizMax.TabIndex = 17;
+			this.numEurovalSpreizungHeizMax.Text = "1";
+			this.numEurovalSpreizungHeizMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEurovalSpreizungHeizMax.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungHeizMax.ValueChanged += new System.EventHandler(this.numSpreizungHeizMax_ValueChanged);
+			this.numEurovalSpreizungHeizMax.ValueChanged += new System.EventHandler(this.numEurovalSpreizungHeizMax_ValueChanged);
 			// 
 			// label11
 			// 
@@ -509,36 +509,36 @@ namespace Europlan.Common {
 			this.label11.TabIndex = 16;
 			this.label11.Text = "K    max.";
 			// 
-			// numSpreizungHeizMin
+			// numEurovalSpreizungHeizMin
 			// 
-			this.numSpreizungHeizMin.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numSpreizungHeizMin.InternalValue = new decimal(new int[] {
+			this.numEurovalSpreizungHeizMin.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEurovalSpreizungHeizMin.InternalValue = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungHeizMin.Location = new System.Drawing.Point(194, 132);
-			this.numSpreizungHeizMin.MaxValue = new decimal(new int[] {
+			this.numEurovalSpreizungHeizMin.Location = new System.Drawing.Point(194, 132);
+			this.numEurovalSpreizungHeizMin.MaxValue = new decimal(new int[] {
             15,
             0,
             0,
             0});
-			this.numSpreizungHeizMin.MinValue = new decimal(new int[] {
+			this.numEurovalSpreizungHeizMin.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungHeizMin.Name = "numSpreizungHeizMin";
-			this.numSpreizungHeizMin.Size = new System.Drawing.Size(76, 20);
-			this.numSpreizungHeizMin.TabIndex = 15;
-			this.numSpreizungHeizMin.Text = "1";
-			this.numSpreizungHeizMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSpreizungHeizMin.Value = new decimal(new int[] {
+			this.numEurovalSpreizungHeizMin.Name = "numEurovalSpreizungHeizMin";
+			this.numEurovalSpreizungHeizMin.Size = new System.Drawing.Size(76, 20);
+			this.numEurovalSpreizungHeizMin.TabIndex = 15;
+			this.numEurovalSpreizungHeizMin.Text = "1";
+			this.numEurovalSpreizungHeizMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEurovalSpreizungHeizMin.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-			this.numSpreizungHeizMin.ValueChanged += new System.EventHandler(this.numSpreizungHeizMin_ValueChanged);
+			this.numEurovalSpreizungHeizMin.ValueChanged += new System.EventHandler(this.numEurovalSpreizungHeizMin_ValueChanged);
 			// 
 			// label12
 			// 
@@ -718,7 +718,7 @@ namespace Europlan.Common {
             0,
             0,
             65536});
-			this.numEurovalCircuitLength.ValueChanged += new System.EventHandler(this.numCircuitLength_ValueChanged);
+			this.numEurovalCircuitLength.ValueChanged += new System.EventHandler(this.numEurovalCircuitLength_ValueChanged);
 			// 
 			// label3
 			// 
@@ -757,6 +757,450 @@ namespace Europlan.Common {
 			this.rbEurovalHarreitherNorm.Text = "27 °C (Harreither Werksempfehlung)";
 			this.rbEurovalHarreitherNorm.UseVisualStyleBackColor = true;
 			this.rbEurovalHarreitherNorm.CheckedChanged += new System.EventHandler(this.rbEurovalHarreitherNorm_CheckedChanged);
+			// 
+			// tabEcotherm
+			// 
+			this.tabEcotherm.Controls.Add(this.btnEcothermStandard);
+			this.tabEcotherm.Controls.Add(this.label126);
+			this.tabEcotherm.Controls.Add(this.label127);
+			this.tabEcotherm.Controls.Add(this.numEcothermSpreizungKühlMax);
+			this.tabEcotherm.Controls.Add(this.label128);
+			this.tabEcotherm.Controls.Add(this.numEcothermSpreizungKühlMin);
+			this.tabEcotherm.Controls.Add(this.label129);
+			this.tabEcotherm.Controls.Add(this.label130);
+			this.tabEcotherm.Controls.Add(this.label131);
+			this.tabEcotherm.Controls.Add(this.numEcothermSpreizungHeizMax);
+			this.tabEcotherm.Controls.Add(this.label132);
+			this.tabEcotherm.Controls.Add(this.numEcothermSpreizungHeizMin);
+			this.tabEcotherm.Controls.Add(this.label133);
+			this.tabEcotherm.Controls.Add(this.label134);
+			this.tabEcotherm.Controls.Add(this.numEcothermDurchfluss);
+			this.tabEcotherm.Controls.Add(this.label135);
+			this.tabEcotherm.Controls.Add(this.label136);
+			this.tabEcotherm.Controls.Add(this.numEcothermPressureMbar);
+			this.tabEcotherm.Controls.Add(this.label137);
+			this.tabEcotherm.Controls.Add(this.numEcothermPressurePa);
+			this.tabEcotherm.Controls.Add(this.label138);
+			this.tabEcotherm.Controls.Add(this.label139);
+			this.tabEcotherm.Controls.Add(this.numEcothermCircuitLength);
+			this.tabEcotherm.Controls.Add(this.label140);
+			this.tabEcotherm.Controls.Add(this.rbEcothermEN1264);
+			this.tabEcotherm.Controls.Add(this.label141);
+			this.tabEcotherm.Controls.Add(this.rbEcothermHarreitherNorm);
+			this.tabEcotherm.Location = new System.Drawing.Point(4, 22);
+			this.tabEcotherm.Name = "tabEcotherm";
+			this.tabEcotherm.Size = new System.Drawing.Size(711, 366);
+			this.tabEcotherm.TabIndex = 4;
+			this.tabEcotherm.Text = "Ecotherm®";
+			this.tabEcotherm.UseVisualStyleBackColor = true;
+			// 
+			// btnEcothermStandard
+			// 
+			this.btnEcothermStandard.Location = new System.Drawing.Point(324, 180);
+			this.btnEcothermStandard.Name = "btnEcothermStandard";
+			this.btnEcothermStandard.Size = new System.Drawing.Size(110, 23);
+			this.btnEcothermStandard.TabIndex = 53;
+			this.btnEcothermStandard.Text = "Standardwerte";
+			this.btnEcothermStandard.UseVisualStyleBackColor = true;
+			this.btnEcothermStandard.Click += new System.EventHandler(this.btnEcothermStandard_Click);
+			// 
+			// label126
+			// 
+			this.label126.Location = new System.Drawing.Point(162, 157);
+			this.label126.Name = "label126";
+			this.label126.Size = new System.Drawing.Size(26, 23);
+			this.label126.TabIndex = 52;
+			this.label126.Text = "min.";
+			// 
+			// label127
+			// 
+			this.label127.Location = new System.Drawing.Point(406, 157);
+			this.label127.Name = "label127";
+			this.label127.Size = new System.Drawing.Size(76, 23);
+			this.label127.TabIndex = 51;
+			this.label127.Text = "K";
+			// 
+			// numEcothermSpreizungKühlMax
+			// 
+			this.numEcothermSpreizungKühlMax.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEcothermSpreizungKühlMax.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungKühlMax.Location = new System.Drawing.Point(324, 154);
+			this.numEcothermSpreizungKühlMax.MaxValue = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungKühlMax.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungKühlMax.Name = "numEcothermSpreizungKühlMax";
+			this.numEcothermSpreizungKühlMax.Size = new System.Drawing.Size(76, 20);
+			this.numEcothermSpreizungKühlMax.TabIndex = 50;
+			this.numEcothermSpreizungKühlMax.Text = "1";
+			this.numEcothermSpreizungKühlMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEcothermSpreizungKühlMax.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungKühlMax.ValueChanged += new System.EventHandler(this.numEcothermSpreizungKühlMax_ValueChanged);
+			// 
+			// label128
+			// 
+			this.label128.Location = new System.Drawing.Point(276, 157);
+			this.label128.Name = "label128";
+			this.label128.Size = new System.Drawing.Size(48, 23);
+			this.label128.TabIndex = 49;
+			this.label128.Text = "K    max.";
+			// 
+			// numEcothermSpreizungKühlMin
+			// 
+			this.numEcothermSpreizungKühlMin.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEcothermSpreizungKühlMin.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungKühlMin.Location = new System.Drawing.Point(194, 154);
+			this.numEcothermSpreizungKühlMin.MaxValue = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungKühlMin.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungKühlMin.Name = "numEcothermSpreizungKühlMin";
+			this.numEcothermSpreizungKühlMin.Size = new System.Drawing.Size(76, 20);
+			this.numEcothermSpreizungKühlMin.TabIndex = 48;
+			this.numEcothermSpreizungKühlMin.Text = "1";
+			this.numEcothermSpreizungKühlMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEcothermSpreizungKühlMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungKühlMin.ValueChanged += new System.EventHandler(this.numEcothermSpreizungKühlMin_ValueChanged);
+			// 
+			// label129
+			// 
+			this.label129.Location = new System.Drawing.Point(3, 157);
+			this.label129.Name = "label129";
+			this.label129.Size = new System.Drawing.Size(116, 23);
+			this.label129.TabIndex = 47;
+			this.label129.Text = "Spreizung Kühlbetrieb:";
+			// 
+			// label130
+			// 
+			this.label130.Location = new System.Drawing.Point(162, 134);
+			this.label130.Name = "label130";
+			this.label130.Size = new System.Drawing.Size(26, 23);
+			this.label130.TabIndex = 46;
+			this.label130.Text = "min.";
+			// 
+			// label131
+			// 
+			this.label131.Location = new System.Drawing.Point(406, 134);
+			this.label131.Name = "label131";
+			this.label131.Size = new System.Drawing.Size(76, 23);
+			this.label131.TabIndex = 45;
+			this.label131.Text = "K";
+			// 
+			// numEcothermSpreizungHeizMax
+			// 
+			this.numEcothermSpreizungHeizMax.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEcothermSpreizungHeizMax.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungHeizMax.Location = new System.Drawing.Point(324, 131);
+			this.numEcothermSpreizungHeizMax.MaxValue = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungHeizMax.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungHeizMax.Name = "numEcothermSpreizungHeizMax";
+			this.numEcothermSpreizungHeizMax.Size = new System.Drawing.Size(76, 20);
+			this.numEcothermSpreizungHeizMax.TabIndex = 44;
+			this.numEcothermSpreizungHeizMax.Text = "1";
+			this.numEcothermSpreizungHeizMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEcothermSpreizungHeizMax.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungHeizMax.ValueChanged += new System.EventHandler(this.numEcothermSpreizungHeizMax_ValueChanged);
+			// 
+			// label132
+			// 
+			this.label132.Location = new System.Drawing.Point(276, 134);
+			this.label132.Name = "label132";
+			this.label132.Size = new System.Drawing.Size(48, 23);
+			this.label132.TabIndex = 43;
+			this.label132.Text = "K    max.";
+			// 
+			// numEcothermSpreizungHeizMin
+			// 
+			this.numEcothermSpreizungHeizMin.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEcothermSpreizungHeizMin.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungHeizMin.Location = new System.Drawing.Point(194, 131);
+			this.numEcothermSpreizungHeizMin.MaxValue = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungHeizMin.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungHeizMin.Name = "numEcothermSpreizungHeizMin";
+			this.numEcothermSpreizungHeizMin.Size = new System.Drawing.Size(76, 20);
+			this.numEcothermSpreizungHeizMin.TabIndex = 42;
+			this.numEcothermSpreizungHeizMin.Text = "1";
+			this.numEcothermSpreizungHeizMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEcothermSpreizungHeizMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numEcothermSpreizungHeizMin.ValueChanged += new System.EventHandler(this.numEcothermSpreizungHeizMin_ValueChanged);
+			// 
+			// label133
+			// 
+			this.label133.Location = new System.Drawing.Point(3, 134);
+			this.label133.Name = "label133";
+			this.label133.Size = new System.Drawing.Size(116, 23);
+			this.label133.TabIndex = 41;
+			this.label133.Text = "Spreizung Heizbetrieb:";
+			// 
+			// label134
+			// 
+			this.label134.Location = new System.Drawing.Point(276, 111);
+			this.label134.Name = "label134";
+			this.label134.Size = new System.Drawing.Size(76, 23);
+			this.label134.TabIndex = 40;
+			this.label134.Text = "l/h";
+			// 
+			// numEcothermDurchfluss
+			// 
+			this.numEcothermDurchfluss.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numEcothermDurchfluss.InternalValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numEcothermDurchfluss.Location = new System.Drawing.Point(194, 108);
+			this.numEcothermDurchfluss.MaxValue = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numEcothermDurchfluss.MinValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numEcothermDurchfluss.Name = "numEcothermDurchfluss";
+			this.numEcothermDurchfluss.Size = new System.Drawing.Size(76, 20);
+			this.numEcothermDurchfluss.TabIndex = 39;
+			this.numEcothermDurchfluss.Text = "100";
+			this.numEcothermDurchfluss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEcothermDurchfluss.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numEcothermDurchfluss.ValueChanged += new System.EventHandler(this.numEcothermDurchfluss_ValueChanged);
+			// 
+			// label135
+			// 
+			this.label135.Location = new System.Drawing.Point(3, 111);
+			this.label135.Name = "label135";
+			this.label135.Size = new System.Drawing.Size(181, 23);
+			this.label135.TabIndex = 38;
+			this.label135.Text = "Max. Durchflußmenge:";
+			// 
+			// label136
+			// 
+			this.label136.Location = new System.Drawing.Point(406, 88);
+			this.label136.Name = "label136";
+			this.label136.Size = new System.Drawing.Size(76, 23);
+			this.label136.TabIndex = 37;
+			this.label136.Text = "mbar";
+			// 
+			// numEcothermPressureMbar
+			// 
+			this.numEcothermPressureMbar.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEcothermPressureMbar.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numEcothermPressureMbar.Location = new System.Drawing.Point(324, 85);
+			this.numEcothermPressureMbar.MaxValue = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+			this.numEcothermPressureMbar.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numEcothermPressureMbar.Name = "numEcothermPressureMbar";
+			this.numEcothermPressureMbar.Size = new System.Drawing.Size(76, 20);
+			this.numEcothermPressureMbar.TabIndex = 36;
+			this.numEcothermPressureMbar.Text = "0,1";
+			this.numEcothermPressureMbar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEcothermPressureMbar.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numEcothermPressureMbar.ValueChanged += new System.EventHandler(this.numEcothermPressureMbar_ValueChanged);
+			// 
+			// label137
+			// 
+			this.label137.Location = new System.Drawing.Point(276, 88);
+			this.label137.Name = "label137";
+			this.label137.Size = new System.Drawing.Size(42, 23);
+			this.label137.TabIndex = 35;
+			this.label137.Text = "Pa    =";
+			// 
+			// numEcothermPressurePa
+			// 
+			this.numEcothermPressurePa.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEcothermPressurePa.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numEcothermPressurePa.Location = new System.Drawing.Point(194, 85);
+			this.numEcothermPressurePa.MaxValue = new decimal(new int[] {
+            50000,
+            0,
+            0,
+            0});
+			this.numEcothermPressurePa.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numEcothermPressurePa.Name = "numEcothermPressurePa";
+			this.numEcothermPressurePa.Size = new System.Drawing.Size(76, 20);
+			this.numEcothermPressurePa.TabIndex = 34;
+			this.numEcothermPressurePa.Text = "0";
+			this.numEcothermPressurePa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEcothermPressurePa.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numEcothermPressurePa.ValueChanged += new System.EventHandler(this.numEcothermPressurePa_ValueChanged);
+			// 
+			// label138
+			// 
+			this.label138.Location = new System.Drawing.Point(3, 88);
+			this.label138.Name = "label138";
+			this.label138.Size = new System.Drawing.Size(181, 23);
+			this.label138.TabIndex = 33;
+			this.label138.Text = "Max. Druckverlust:";
+			// 
+			// label139
+			// 
+			this.label139.Location = new System.Drawing.Point(276, 62);
+			this.label139.Name = "label139";
+			this.label139.Size = new System.Drawing.Size(76, 23);
+			this.label139.TabIndex = 32;
+			this.label139.Text = "m";
+			// 
+			// numEcothermCircuitLength
+			// 
+			this.numEcothermCircuitLength.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numEcothermCircuitLength.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numEcothermCircuitLength.Location = new System.Drawing.Point(194, 59);
+			this.numEcothermCircuitLength.MaxValue = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+			this.numEcothermCircuitLength.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numEcothermCircuitLength.Name = "numEcothermCircuitLength";
+			this.numEcothermCircuitLength.Size = new System.Drawing.Size(76, 20);
+			this.numEcothermCircuitLength.TabIndex = 31;
+			this.numEcothermCircuitLength.Text = "0,1";
+			this.numEcothermCircuitLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEcothermCircuitLength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numEcothermCircuitLength.ValueChanged += new System.EventHandler(this.numEcothermCircuitLength_ValueChanged);
+			// 
+			// label140
+			// 
+			this.label140.Location = new System.Drawing.Point(3, 62);
+			this.label140.Name = "label140";
+			this.label140.Size = new System.Drawing.Size(181, 23);
+			this.label140.TabIndex = 30;
+			this.label140.Text = "Max. Rohrlänge je Heizkreis:";
+			// 
+			// rbEcothermEN1264
+			// 
+			this.rbEcothermEN1264.Location = new System.Drawing.Point(194, 32);
+			this.rbEcothermEN1264.Name = "rbEcothermEN1264";
+			this.rbEcothermEN1264.Size = new System.Drawing.Size(195, 17);
+			this.rbEcothermEN1264.TabIndex = 29;
+			this.rbEcothermEN1264.Text = "29 °C (EN 1264)";
+			this.rbEcothermEN1264.UseVisualStyleBackColor = true;
+			this.rbEcothermEN1264.CheckedChanged += new System.EventHandler(this.rbEcothermEN1264_CheckedChanged);
+			// 
+			// label141
+			// 
+			this.label141.Location = new System.Drawing.Point(3, 8);
+			this.label141.Name = "label141";
+			this.label141.Size = new System.Drawing.Size(181, 23);
+			this.label141.TabIndex = 28;
+			this.label141.Text = "Maximale Oberflächentemperatur:";
+			// 
+			// rbEcothermHarreitherNorm
+			// 
+			this.rbEcothermHarreitherNorm.Checked = true;
+			this.rbEcothermHarreitherNorm.Location = new System.Drawing.Point(194, 2);
+			this.rbEcothermHarreitherNorm.Name = "rbEcothermHarreitherNorm";
+			this.rbEcothermHarreitherNorm.Size = new System.Drawing.Size(206, 24);
+			this.rbEcothermHarreitherNorm.TabIndex = 27;
+			this.rbEcothermHarreitherNorm.TabStop = true;
+			this.rbEcothermHarreitherNorm.Text = "27 °C (Harreither Werksempfehlung)";
+			this.rbEcothermHarreitherNorm.UseVisualStyleBackColor = true;
+			this.rbEcothermHarreitherNorm.CheckedChanged += new System.EventHandler(this.rbEcothermHarreitherNorm_CheckedChanged);
 			// 
 			// tabHitherm
 			// 
@@ -3454,42 +3898,6 @@ namespace Europlan.Common {
 			this.button4.Text = "Standardwerte";
 			this.button4.UseVisualStyleBackColor = true;
 			// 
-			// tabEcotherm
-			// 
-			this.tabEcotherm.Controls.Add(this.button6);
-			this.tabEcotherm.Controls.Add(this.label126);
-			this.tabEcotherm.Controls.Add(this.label127);
-			this.tabEcotherm.Controls.Add(this.numericBox39);
-			this.tabEcotherm.Controls.Add(this.label128);
-			this.tabEcotherm.Controls.Add(this.numericBox40);
-			this.tabEcotherm.Controls.Add(this.label129);
-			this.tabEcotherm.Controls.Add(this.label130);
-			this.tabEcotherm.Controls.Add(this.label131);
-			this.tabEcotherm.Controls.Add(this.numericBox41);
-			this.tabEcotherm.Controls.Add(this.label132);
-			this.tabEcotherm.Controls.Add(this.numericBox42);
-			this.tabEcotherm.Controls.Add(this.label133);
-			this.tabEcotherm.Controls.Add(this.label134);
-			this.tabEcotherm.Controls.Add(this.numericBox43);
-			this.tabEcotherm.Controls.Add(this.label135);
-			this.tabEcotherm.Controls.Add(this.label136);
-			this.tabEcotherm.Controls.Add(this.numericBox44);
-			this.tabEcotherm.Controls.Add(this.label137);
-			this.tabEcotherm.Controls.Add(this.numericBox45);
-			this.tabEcotherm.Controls.Add(this.label138);
-			this.tabEcotherm.Controls.Add(this.label139);
-			this.tabEcotherm.Controls.Add(this.numericBox46);
-			this.tabEcotherm.Controls.Add(this.label140);
-			this.tabEcotherm.Controls.Add(this.rbEcothermEN1264);
-			this.tabEcotherm.Controls.Add(this.label141);
-			this.tabEcotherm.Controls.Add(this.rbEcothermHarreitherNorm);
-			this.tabEcotherm.Location = new System.Drawing.Point(4, 22);
-			this.tabEcotherm.Name = "tabEcotherm";
-			this.tabEcotherm.Size = new System.Drawing.Size(711, 366);
-			this.tabEcotherm.TabIndex = 4;
-			this.tabEcotherm.Text = "Ecotherm®";
-			this.tabEcotherm.UseVisualStyleBackColor = true;
-			// 
 			// button5
 			// 
 			this.button5.Location = new System.Drawing.Point(324, 181);
@@ -3887,403 +4295,6 @@ namespace Europlan.Common {
 			this.radioButton6.Text = "27 °C (Harreither Werksempfehlung)";
 			this.radioButton6.UseVisualStyleBackColor = true;
 			// 
-			// button6
-			// 
-			this.button6.Location = new System.Drawing.Point(324, 180);
-			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(110, 23);
-			this.button6.TabIndex = 53;
-			this.button6.Text = "Standardwerte";
-			this.button6.UseVisualStyleBackColor = true;
-			// 
-			// label126
-			// 
-			this.label126.Location = new System.Drawing.Point(162, 157);
-			this.label126.Name = "label126";
-			this.label126.Size = new System.Drawing.Size(26, 23);
-			this.label126.TabIndex = 52;
-			this.label126.Text = "min.";
-			// 
-			// label127
-			// 
-			this.label127.Location = new System.Drawing.Point(406, 157);
-			this.label127.Name = "label127";
-			this.label127.Size = new System.Drawing.Size(76, 23);
-			this.label127.TabIndex = 51;
-			this.label127.Text = "K";
-			// 
-			// numericBox39
-			// 
-			this.numericBox39.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numericBox39.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numericBox39.Location = new System.Drawing.Point(324, 154);
-			this.numericBox39.MaxValue = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-			this.numericBox39.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numericBox39.Name = "numericBox39";
-			this.numericBox39.Size = new System.Drawing.Size(76, 20);
-			this.numericBox39.TabIndex = 50;
-			this.numericBox39.Text = "1";
-			this.numericBox39.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox39.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			// 
-			// label128
-			// 
-			this.label128.Location = new System.Drawing.Point(276, 157);
-			this.label128.Name = "label128";
-			this.label128.Size = new System.Drawing.Size(48, 23);
-			this.label128.TabIndex = 49;
-			this.label128.Text = "K    max.";
-			// 
-			// numericBox40
-			// 
-			this.numericBox40.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numericBox40.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numericBox40.Location = new System.Drawing.Point(194, 154);
-			this.numericBox40.MaxValue = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-			this.numericBox40.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numericBox40.Name = "numericBox40";
-			this.numericBox40.Size = new System.Drawing.Size(76, 20);
-			this.numericBox40.TabIndex = 48;
-			this.numericBox40.Text = "1";
-			this.numericBox40.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox40.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			// 
-			// label129
-			// 
-			this.label129.Location = new System.Drawing.Point(3, 157);
-			this.label129.Name = "label129";
-			this.label129.Size = new System.Drawing.Size(116, 23);
-			this.label129.TabIndex = 47;
-			this.label129.Text = "Spreizung Kühlbetrieb:";
-			// 
-			// label130
-			// 
-			this.label130.Location = new System.Drawing.Point(162, 134);
-			this.label130.Name = "label130";
-			this.label130.Size = new System.Drawing.Size(26, 23);
-			this.label130.TabIndex = 46;
-			this.label130.Text = "min.";
-			// 
-			// label131
-			// 
-			this.label131.Location = new System.Drawing.Point(406, 134);
-			this.label131.Name = "label131";
-			this.label131.Size = new System.Drawing.Size(76, 23);
-			this.label131.TabIndex = 45;
-			this.label131.Text = "K";
-			// 
-			// numericBox41
-			// 
-			this.numericBox41.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numericBox41.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numericBox41.Location = new System.Drawing.Point(324, 131);
-			this.numericBox41.MaxValue = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-			this.numericBox41.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numericBox41.Name = "numericBox41";
-			this.numericBox41.Size = new System.Drawing.Size(76, 20);
-			this.numericBox41.TabIndex = 44;
-			this.numericBox41.Text = "1";
-			this.numericBox41.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox41.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			// 
-			// label132
-			// 
-			this.label132.Location = new System.Drawing.Point(276, 134);
-			this.label132.Name = "label132";
-			this.label132.Size = new System.Drawing.Size(48, 23);
-			this.label132.TabIndex = 43;
-			this.label132.Text = "K    max.";
-			// 
-			// numericBox42
-			// 
-			this.numericBox42.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numericBox42.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numericBox42.Location = new System.Drawing.Point(194, 131);
-			this.numericBox42.MaxValue = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-			this.numericBox42.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numericBox42.Name = "numericBox42";
-			this.numericBox42.Size = new System.Drawing.Size(76, 20);
-			this.numericBox42.TabIndex = 42;
-			this.numericBox42.Text = "1";
-			this.numericBox42.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox42.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			// 
-			// label133
-			// 
-			this.label133.Location = new System.Drawing.Point(3, 134);
-			this.label133.Name = "label133";
-			this.label133.Size = new System.Drawing.Size(116, 23);
-			this.label133.TabIndex = 41;
-			this.label133.Text = "Spreizung Heizbetrieb:";
-			// 
-			// label134
-			// 
-			this.label134.Location = new System.Drawing.Point(276, 111);
-			this.label134.Name = "label134";
-			this.label134.Size = new System.Drawing.Size(76, 23);
-			this.label134.TabIndex = 40;
-			this.label134.Text = "l/h";
-			// 
-			// numericBox43
-			// 
-			this.numericBox43.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numericBox43.InternalValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-			this.numericBox43.Location = new System.Drawing.Point(194, 108);
-			this.numericBox43.MaxValue = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-			this.numericBox43.MinValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-			this.numericBox43.Name = "numericBox43";
-			this.numericBox43.Size = new System.Drawing.Size(76, 20);
-			this.numericBox43.TabIndex = 39;
-			this.numericBox43.Text = "100";
-			this.numericBox43.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox43.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-			// 
-			// label135
-			// 
-			this.label135.Location = new System.Drawing.Point(3, 111);
-			this.label135.Name = "label135";
-			this.label135.Size = new System.Drawing.Size(181, 23);
-			this.label135.TabIndex = 38;
-			this.label135.Text = "Max. Durchflußmenge:";
-			// 
-			// label136
-			// 
-			this.label136.Location = new System.Drawing.Point(406, 88);
-			this.label136.Name = "label136";
-			this.label136.Size = new System.Drawing.Size(76, 23);
-			this.label136.TabIndex = 37;
-			this.label136.Text = "mbar";
-			// 
-			// numericBox44
-			// 
-			this.numericBox44.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numericBox44.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-			this.numericBox44.Location = new System.Drawing.Point(324, 85);
-			this.numericBox44.MaxValue = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
-			this.numericBox44.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-			this.numericBox44.Name = "numericBox44";
-			this.numericBox44.Size = new System.Drawing.Size(76, 20);
-			this.numericBox44.TabIndex = 36;
-			this.numericBox44.Text = "0,1";
-			this.numericBox44.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox44.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-			// 
-			// label137
-			// 
-			this.label137.Location = new System.Drawing.Point(276, 88);
-			this.label137.Name = "label137";
-			this.label137.Size = new System.Drawing.Size(42, 23);
-			this.label137.TabIndex = 35;
-			this.label137.Text = "Pa    =";
-			// 
-			// numericBox45
-			// 
-			this.numericBox45.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numericBox45.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numericBox45.Location = new System.Drawing.Point(194, 85);
-			this.numericBox45.MaxValue = new decimal(new int[] {
-            50000,
-            0,
-            0,
-            0});
-			this.numericBox45.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numericBox45.Name = "numericBox45";
-			this.numericBox45.Size = new System.Drawing.Size(76, 20);
-			this.numericBox45.TabIndex = 34;
-			this.numericBox45.Text = "0";
-			this.numericBox45.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox45.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			// 
-			// label138
-			// 
-			this.label138.Location = new System.Drawing.Point(3, 88);
-			this.label138.Name = "label138";
-			this.label138.Size = new System.Drawing.Size(181, 23);
-			this.label138.TabIndex = 33;
-			this.label138.Text = "Max. Druckverlust:";
-			// 
-			// label139
-			// 
-			this.label139.Location = new System.Drawing.Point(276, 62);
-			this.label139.Name = "label139";
-			this.label139.Size = new System.Drawing.Size(76, 23);
-			this.label139.TabIndex = 32;
-			this.label139.Text = "m";
-			// 
-			// numericBox46
-			// 
-			this.numericBox46.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numericBox46.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-			this.numericBox46.Location = new System.Drawing.Point(194, 59);
-			this.numericBox46.MaxValue = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
-			this.numericBox46.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-			this.numericBox46.Name = "numericBox46";
-			this.numericBox46.Size = new System.Drawing.Size(76, 20);
-			this.numericBox46.TabIndex = 31;
-			this.numericBox46.Text = "0,1";
-			this.numericBox46.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numericBox46.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-			// 
-			// label140
-			// 
-			this.label140.Location = new System.Drawing.Point(3, 62);
-			this.label140.Name = "label140";
-			this.label140.Size = new System.Drawing.Size(181, 23);
-			this.label140.TabIndex = 30;
-			this.label140.Text = "Max. Rohrlänge je Heizkreis:";
-			// 
-			// rbEcothermEN1264
-			// 
-			this.rbEcothermEN1264.Location = new System.Drawing.Point(194, 32);
-			this.rbEcothermEN1264.Name = "rbEcothermEN1264";
-			this.rbEcothermEN1264.Size = new System.Drawing.Size(195, 17);
-			this.rbEcothermEN1264.TabIndex = 29;
-			this.rbEcothermEN1264.Text = "29 °C (EN 1264)";
-			this.rbEcothermEN1264.UseVisualStyleBackColor = true;
-			// 
-			// label141
-			// 
-			this.label141.Location = new System.Drawing.Point(3, 8);
-			this.label141.Name = "label141";
-			this.label141.Size = new System.Drawing.Size(181, 23);
-			this.label141.TabIndex = 28;
-			this.label141.Text = "Maximale Oberflächentemperatur:";
-			// 
-			// rbEcothermHarreitherNorm
-			// 
-			this.rbEcothermHarreitherNorm.Checked = true;
-			this.rbEcothermHarreitherNorm.Location = new System.Drawing.Point(194, 2);
-			this.rbEcothermHarreitherNorm.Name = "rbEcothermHarreitherNorm";
-			this.rbEcothermHarreitherNorm.Size = new System.Drawing.Size(206, 24);
-			this.rbEcothermHarreitherNorm.TabIndex = 27;
-			this.rbEcothermHarreitherNorm.TabStop = true;
-			this.rbEcothermHarreitherNorm.Text = "27 °C (Harreither Werksempfehlung)";
-			this.rbEcothermHarreitherNorm.UseVisualStyleBackColor = true;
-			// 
 			// SystemParametersPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4295,6 +4306,8 @@ namespace Europlan.Common {
 			this.tabSystemParameters.ResumeLayout(false);
 			this.tabEuroval.ResumeLayout(false);
 			this.tabEuroval.PerformLayout();
+			this.tabEcotherm.ResumeLayout(false);
+			this.tabEcotherm.PerformLayout();
 			this.tabHitherm.ResumeLayout(false);
 			this.tabHitherm.PerformLayout();
 			this.tabModulBoden.ResumeLayout(false);
@@ -4309,8 +4322,6 @@ namespace Europlan.Common {
 			this.tabPage3.PerformLayout();
 			this.tabPage4.ResumeLayout(false);
 			this.tabPage4.PerformLayout();
-			this.tabEcotherm.ResumeLayout(false);
-			this.tabEcotherm.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -4340,15 +4351,15 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label14;
 		private System.Windows.Forms.Label label15;
-		private NumericBox numSpreizungKühlMax;
+		private NumericBox numEurovalSpreizungKühlMax;
 		private System.Windows.Forms.Label label16;
-		private NumericBox numSpreizungKühlMin;
+		private NumericBox numEurovalSpreizungKühlMin;
 		private System.Windows.Forms.Label label17;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.Label label10;
-		private NumericBox numSpreizungHeizMax;
+		private NumericBox numEurovalSpreizungHeizMax;
 		private System.Windows.Forms.Label label11;
-		private NumericBox numSpreizungHeizMin;
+		private NumericBox numEurovalSpreizungHeizMin;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Button btnEurovalStandard;
 		private System.Windows.Forms.RadioButton rbModulBodenEN1264;
@@ -4515,29 +4526,29 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label109;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.TabPage tabEcotherm;
-		private System.Windows.Forms.Button button6;
+		private System.Windows.Forms.Button btnEcothermStandard;
 		private System.Windows.Forms.Label label126;
 		private System.Windows.Forms.Label label127;
-		private NumericBox numericBox39;
+		private NumericBox numEcothermSpreizungKühlMax;
 		private System.Windows.Forms.Label label128;
-		private NumericBox numericBox40;
+		private NumericBox numEcothermSpreizungKühlMin;
 		private System.Windows.Forms.Label label129;
 		private System.Windows.Forms.Label label130;
 		private System.Windows.Forms.Label label131;
-		private NumericBox numericBox41;
+		private NumericBox numEcothermSpreizungHeizMax;
 		private System.Windows.Forms.Label label132;
-		private NumericBox numericBox42;
+		private NumericBox numEcothermSpreizungHeizMin;
 		private System.Windows.Forms.Label label133;
 		private System.Windows.Forms.Label label134;
-		private NumericBox numericBox43;
+		private NumericBox numEcothermDurchfluss;
 		private System.Windows.Forms.Label label135;
 		private System.Windows.Forms.Label label136;
-		private NumericBox numericBox44;
+		private NumericBox numEcothermPressureMbar;
 		private System.Windows.Forms.Label label137;
-		private NumericBox numericBox45;
+		private NumericBox numEcothermPressurePa;
 		private System.Windows.Forms.Label label138;
 		private System.Windows.Forms.Label label139;
-		private NumericBox numericBox46;
+		private NumericBox numEcothermCircuitLength;
 		private System.Windows.Forms.Label label140;
 		private System.Windows.Forms.RadioButton rbEcothermEN1264;
 		private System.Windows.Forms.Label label141;

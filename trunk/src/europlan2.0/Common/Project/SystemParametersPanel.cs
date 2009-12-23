@@ -17,6 +17,7 @@ namespace Europlan.Common {
 		public SystemParametersPanel() {
 			InitializeComponent();
 			InitializeEurovalValues();
+			InitializeEcothermValues();
 			InitializeModulBodenValues();
 			InitializeModulDeckeValues();
 			InitializeHithermValues();
@@ -43,6 +44,9 @@ namespace Europlan.Common {
 			InitializeEurovalValues();
 		}
 
+		private void btnEcothermStandard_Click(object sender, EventArgs e) {
+			InitializeEcothermValues();
+		}
 
 		private void btnModulBodenStandard_Click(object sender, EventArgs e) {
 			Project.Instance.Config.ModulKlimaBodenProduct.StaticInitialize();
@@ -71,10 +75,22 @@ namespace Europlan.Common {
 			numEurovalCircuitLength.Value = (decimal)EurovalProduct.ConfigMaxCircuitLength;
 			numEurovalPressurePa.Value = EurovalProduct.ConfigMaxPressureLost;
 			numEurovalDurchfluss.Value = EurovalProduct.ConfigMaxDurchfluss;
-			numSpreizungHeizMin.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMin;
-			numSpreizungHeizMax.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMax;
-			numSpreizungKühlMin.Value = (decimal)EurovalProduct.ConfigSpreizungKühlMin;
-			numSpreizungKühlMax.Value = (decimal)EurovalProduct.ConfigSpreizungKühlMax;
+			numEurovalSpreizungHeizMin.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMin;
+			numEurovalSpreizungHeizMax.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMax;
+			numEurovalSpreizungKühlMin.Value = (decimal)EurovalProduct.ConfigSpreizungKühlMin;
+			numEurovalSpreizungKühlMax.Value = (decimal)EurovalProduct.ConfigSpreizungKühlMax;
+		}
+
+		private void InitializeEcothermValues() {
+			rbEcothermHarreitherNorm.Checked = EcothermProduct.ConfigUseHarreitherNorm;
+			rbEcothermEN1264.Checked = !EcothermProduct.ConfigUseHarreitherNorm;
+			numEcothermCircuitLength.Value = (decimal)EcothermProduct.ConfigMaxCircuitLength;
+			numEcothermPressurePa.Value = EcothermProduct.ConfigMaxPressureLost;
+			numEcothermDurchfluss.Value = EcothermProduct.ConfigMaxDurchfluss;
+			numEcothermSpreizungHeizMin.Value = (decimal)EcothermProduct.ConfigSpreizungHeizMin;
+			numEcothermSpreizungHeizMax.Value = (decimal)EcothermProduct.ConfigSpreizungHeizMax;
+			numEcothermSpreizungKühlMin.Value = (decimal)EcothermProduct.ConfigSpreizungKühlMin;
+			numEcothermSpreizungKühlMax.Value = (decimal)EcothermProduct.ConfigSpreizungKühlMax;
 		}
 
 		private void InitializeModulBodenValues() {
@@ -162,32 +178,32 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void numSpreizungHeizMin_ValueChanged(object sender, EventArgs e) {
-			EurovalProduct.ConfigSpreizungHeizMin = (double)numSpreizungHeizMin.Value;
+		private void numEurovalSpreizungHeizMin_ValueChanged(object sender, EventArgs e) {
+			EurovalProduct.ConfigSpreizungHeizMin = (double)numEurovalSpreizungHeizMin.Value;
 			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungHeizMin", numSpreizungHeizMin.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
-		private void numSpreizungHeizMax_ValueChanged(object sender, EventArgs e) {
-			EurovalProduct.ConfigSpreizungHeizMax = (double)numSpreizungHeizMax.Value;
+		private void numEurovalSpreizungHeizMax_ValueChanged(object sender, EventArgs e) {
+			EurovalProduct.ConfigSpreizungHeizMax = (double)numEurovalSpreizungHeizMax.Value;
 			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungHeizMax", numSpreizungHeizMax.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
-		private void numSpreizungKühlMin_ValueChanged(object sender, EventArgs e) {
-			EurovalProduct.ConfigSpreizungKühlMin = (double)numSpreizungKühlMin.Value;
+		private void numEurovalSpreizungKühlMin_ValueChanged(object sender, EventArgs e) {
+			EurovalProduct.ConfigSpreizungKühlMin = (double)numEurovalSpreizungKühlMin.Value;
 			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungKühlMin", numSpreizungKühlMin.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
-		private void numSpreizungKühlMax_ValueChanged(object sender, EventArgs e) {
-			EurovalProduct.ConfigSpreizungKühlMax = (double)numSpreizungKühlMax.Value;
+		private void numEurovalSpreizungKühlMax_ValueChanged(object sender, EventArgs e) {
+			EurovalProduct.ConfigSpreizungKühlMax = (double)numEurovalSpreizungKühlMax.Value;
 			//Project.Instance.Config.AddProductParameter<EurovalProduct>("ConfigSpreizungKühlMax", numSpreizungKühlMax.Value.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
@@ -390,9 +406,80 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void numCircuitLength_ValueChanged(object sender, EventArgs e) {
-
+		private void rbEcothermHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
+			EcothermProduct.ConfigUseHarreitherNorm = rbEcothermHarreitherNorm.Checked;
+			Project.Instance.Config.AddProductParameter<EcothermProduct>("ConfigUseHarreitherNorm", rbEcothermHarreitherNorm.Checked.ToString());
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
 		}
+
+		private void rbEcothermEN1264_CheckedChanged(object sender, EventArgs e) {
+			EcothermProduct.ConfigUseHarreitherNorm = rbEcothermHarreitherNorm.Checked;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numEcothermCircuitLength_ValueChanged(object sender, EventArgs e) {
+			EcothermProduct.ConfigMaxCircuitLength = (double)numEcothermCircuitLength.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numEcothermPressurePa_ValueChanged(object sender, EventArgs e) {
+			numEcothermPressureMbar.Value = numEcothermPressurePa.Value / 100;
+			EcothermProduct.ConfigMaxPressureLost = (int)numEcothermPressurePa.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numEcothermPressureMbar_ValueChanged(object sender, EventArgs e) {
+			numEcothermPressurePa.Value = numEcothermPressureMbar.Value * 100;
+			EcothermProduct.ConfigMaxPressureLost = (int)numEcothermPressurePa.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numEcothermDurchfluss_ValueChanged(object sender, EventArgs e) {
+			EcothermProduct.ConfigMaxDurchfluss = (int)numEcothermDurchfluss.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numEcothermSpreizungHeizMin_ValueChanged(object sender, EventArgs e) {
+			EcothermProduct.ConfigSpreizungHeizMin = (double)numEcothermSpreizungHeizMin.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numEcothermSpreizungHeizMax_ValueChanged(object sender, EventArgs e) {
+			EcothermProduct.ConfigSpreizungHeizMax = (double)numEcothermSpreizungHeizMax.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numEcothermSpreizungKühlMin_ValueChanged(object sender, EventArgs e) {
+			EcothermProduct.ConfigSpreizungKühlMin = (double)numEcothermSpreizungKühlMin.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numEcothermSpreizungKühlMax_ValueChanged(object sender, EventArgs e) {
+			EcothermProduct.ConfigSpreizungKühlMax = (double)numEcothermSpreizungKühlMax.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+
 
 	}
 }
