@@ -63,7 +63,11 @@ namespace Europlan.Common {
 			}
 
 			public override bool Equals(object obj) {
-				return base.Equals(obj);
+				if (obj is RegisterTypeKey) {
+					RegisterTypeKey other = obj as RegisterTypeKey;
+					return this.registerType == other.registerType && this.usePlus == other.usePlus && this.dachschraege == other.dachschraege;
+				}
+				return false;
 			}
 
 			public override int GetHashCode() {
