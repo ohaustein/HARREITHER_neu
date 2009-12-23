@@ -111,5 +111,9 @@ namespace Europlan.Common {
 		public override string ToString() {
 			return this.Id;
 		}
+
+		public string GetPartNumber(HithermCompactRegister.HithermCompactRegisterTypeEnum type, bool usePlus) {
+			return "";
+		}
 	}
 }
