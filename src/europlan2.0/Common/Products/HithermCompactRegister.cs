@@ -440,16 +440,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public string PartNumber {
 			get {
-				switch (registerType) {
-					case HithermCompactRegisterTypeEnum.HITC_620_Std:
-						if (HithermCompactProduct.ConfigUsePlus) {
-							return "";
-						} else {
-							return "";
-						}
-					default:
-						throw new Exception("Unknown Register Type");
-				}
+				return this.wall.GetPartNumber(registerType, HithermCompactProduct.ConfigUsePlus);
 			}
 		}
 	}
