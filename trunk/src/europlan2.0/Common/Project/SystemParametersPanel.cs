@@ -21,6 +21,7 @@ namespace Europlan.Common {
 			InitializeModulBodenValues();
 			InitializeModulDeckeValues();
 			InitializeHithermValues();
+			InitializeHithermCompactValues();
 		}
 
 		public void UpdateControl() {
@@ -67,6 +68,11 @@ namespace Europlan.Common {
 		private void btnHithermStandard_Click(object sender, EventArgs e) {
 			Project.Instance.Config.HithermProduct.StaticInitialize();
 			InitializeHithermValues();
+		}
+
+		private void btnHithermCompactStandard_Click(object sender, EventArgs e) {
+			Project.Instance.Config.HithermCompactProduct.StaticInitialize();
+			InitializeHithermCompactValues();
 		}
 
 		private void InitializeEurovalValues() {
@@ -124,8 +130,17 @@ namespace Europlan.Common {
 		}
 
 		private void InitializeHithermValues() {
+			rbHitherm.Checked = !HithermProduct.ConfigUsePlus;
+			rbHithermPlus.Checked = HithermProduct.ConfigUsePlus;
 			numHithermPressurePa.Value = HithermProduct.ConfigMaxPressureLost;
 			numHithermDurchfluss.Value = HithermProduct.ConfigMaxDurchfluss;
+		}
+
+		private void InitializeHithermCompactValues() {
+			rbHithermCompact.Checked = !HithermCompactProduct.ConfigUsePlus;
+			rbHithermCompactPlus.Checked = HithermCompactProduct.ConfigUsePlus;
+			numHithermCompactPressurePa.Value = HithermCompactProduct.ConfigMaxPressureLost;
+			numHithermCompactDurchfluss.Value = HithermCompactProduct.ConfigMaxDurchfluss;
 		}
 
 		private void rbEurovalHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
@@ -376,6 +391,14 @@ namespace Europlan.Common {
 			}
 		}
 
+
+		private void rbHitherm_CheckedChanged(object sender, EventArgs e) {
+			HithermProduct.ConfigUsePlus = this.rbHithermPlus.Checked;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
 		private void numHithermPressurePa_ValueChanged(object sender, EventArgs e) {
 			numHithermPressureMbar.Value = numHithermPressurePa.Value / 100;
 			HithermProduct.ConfigMaxPressureLost = (int)numHithermPressurePa.Value;
@@ -394,6 +417,38 @@ namespace Europlan.Common {
 
 		private void numHithermDurchfluss_ValueChanged(object sender, EventArgs e) {
 			HithermProduct.ConfigMaxDurchfluss = (int)numHithermDurchfluss.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+
+		private void rbHithermCompact_CheckedChanged(object sender, EventArgs e) {
+			HithermCompactProduct.ConfigUsePlus = this.rbHithermCompactPlus.Checked;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+
+		}
+
+		private void numHithermCompactPressurePa_ValueChanged(object sender, EventArgs e) {
+			numHithermCompactPressureMbar.Value = numHithermCompactPressurePa.Value / 100;
+			HithermCompactProduct.ConfigMaxPressureLost = (int)numHithermCompactPressurePa.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numHithermCompactPressureMbar_ValueChanged(object sender, EventArgs e) {
+			numHithermCompactPressurePa.Value = numHithermCompactPressureMbar.Value * 100;
+			HithermCompactProduct.ConfigMaxPressureLost = (int)numHithermCompactPressurePa.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numHithermCompactDurchfluss_ValueChanged(object sender, EventArgs e) {
+			HithermCompactProduct.ConfigMaxDurchfluss = (int)numHithermCompactDurchfluss.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -478,8 +533,5 @@ namespace Europlan.Common {
 				ProjectChanged(null);
 			}
 		}
-
-
-
 	}
 }
