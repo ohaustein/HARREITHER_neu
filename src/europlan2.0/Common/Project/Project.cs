@@ -547,27 +547,27 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public List<HithermWall> HithermCompactWalls {
 			get {
-				if (this.hithermWalls == null) {
-					this.hithermWalls = new List<HithermWall>();
+				if (this.hithermCompactWalls == null) {
+					this.hithermCompactWalls = new List<HithermWall>();
 
 					ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
 					wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
 					foreach (WallConstruction wc in wrapper) {
 						if (wc.IsHithermCompactWall) {
-							this.hithermWalls.Add(wc.DefaultWall);
+							this.hithermCompactWalls.Add(wc.DefaultWall);
 						}
 					}
 
-					this.hithermWalls.AddRange(this.serializableHithermCompactWalls);
+					this.hithermCompactWalls.AddRange(this.serializableHithermCompactWalls);
 				}
 
-				return this.hithermWalls;
+				return this.hithermCompactWalls;
 			}
 		}
 
 		public List<HithermWall> SerializeableHithermCompactWalls {
 			get {
-				if (this.hithermWalls == null) {
+				if (this.hithermCompactWalls == null) {
 					return this.serializableHithermCompactWalls;
 				} else {
 					List<HithermWall> walls = new List<HithermWall>();
