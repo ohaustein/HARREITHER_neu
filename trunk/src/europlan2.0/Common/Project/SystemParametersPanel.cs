@@ -26,6 +26,11 @@ namespace Europlan.Common {
 
 		public void UpdateControl() {
 			InitializeEurovalValues();
+			InitializeEcothermValues();
+			InitializeModulBodenValues();
+			InitializeModulDeckeValues();
+			InitializeHithermValues();
+			InitializeHithermCompactValues();
 		}
 
 		public bool AllowLeave() {
@@ -393,9 +398,11 @@ namespace Europlan.Common {
 
 
 		private void rbHitherm_CheckedChanged(object sender, EventArgs e) {
-			HithermProduct.ConfigUsePlus = this.rbHithermPlus.Checked;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (rbHitherm.Checked != rbHithermPlus.Checked) {
+				HithermProduct.ConfigUsePlus = this.rbHithermPlus.Checked;
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
+				}
 			}
 		}
 
@@ -424,11 +431,12 @@ namespace Europlan.Common {
 
 
 		private void rbHithermCompact_CheckedChanged(object sender, EventArgs e) {
-			HithermCompactProduct.ConfigUsePlus = this.rbHithermCompactPlus.Checked;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (rbHithermCompact.Checked != rbHithermCompactPlus.Checked) {
+				HithermCompactProduct.ConfigUsePlus = this.rbHithermCompactPlus.Checked;
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
+				}
 			}
-
 		}
 
 		private void numHithermCompactPressurePa_ValueChanged(object sender, EventArgs e) {
@@ -463,7 +471,7 @@ namespace Europlan.Common {
 
 		private void rbEcothermHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
 			EcothermProduct.ConfigUseHarreitherNorm = rbEcothermHarreitherNorm.Checked;
-			Project.Instance.Config.AddProductParameter<EcothermProduct>("ConfigUseHarreitherNorm", rbEcothermHarreitherNorm.Checked.ToString());
+			//Project.Instance.Config.AddProductParameter<EcothermProduct>("ConfigUseHarreitherNorm", rbEcothermHarreitherNorm.Checked.ToString());
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}

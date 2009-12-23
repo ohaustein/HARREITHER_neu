@@ -68,15 +68,6 @@ namespace Europlan.Common {
 			this.discounts = new Dictionary<string, float>();
 			this.roomTypes = new List<RoomType>();
 
-			eurovalProduct.StaticInitialize();
-			ecothermProduct.StaticInitialize();
-			concreteActivationProduct.StaticInitialize();
-			hithermProduct.StaticInitialize();
-			hithermCompactProduct.StaticInitialize();
-			hithermCompactRoofProduct.StaticInitialize();
-			modulKlimaBodenProduct.StaticInitialize();
-			modulKlimaDeckeProduct.StaticInitialize();
-
 			this.partnerLogo = "";
 
 			if (allMaterials == null) {
@@ -294,6 +285,16 @@ namespace Europlan.Common {
 					}
 					adminTemplate.type = ConfigurationType.AdminConfiguration;
 					adminTemplate.RecalculateMaterialToCategoryMapping();
+
+					adminTemplate.eurovalProduct.StaticInitialize();
+					adminTemplate.ecothermProduct.StaticInitialize();
+					adminTemplate.concreteActivationProduct.StaticInitialize();
+					adminTemplate.hithermProduct.StaticInitialize();
+					adminTemplate.hithermCompactProduct.StaticInitialize();
+					adminTemplate.hithermCompactRoofProduct.StaticInitialize();
+					adminTemplate.modulKlimaBodenProduct.StaticInitialize();
+					adminTemplate.modulKlimaDeckeProduct.StaticInitialize();
+
 				}
 				return adminTemplate;
 			}
