@@ -359,9 +359,9 @@ namespace Europlan.Common {
 					this.txtDistributor.Text = hcp.PlannedConnection.ToString();
 				}
 
-				/*if ((skipFields & FieldEnum.WALLS) == FieldEnum.NONE) {
-					this.hithermWallGrid1.Walls = Project.Instance.HithermCompactWalls;
-				}*/
+				if ((skipFields & FieldEnum.WALLS) == FieldEnum.NONE) {
+					this.hithermWallGrid1.UpdateGrid();
+				}
 
 				if (this.errorMsg != null) {
 					this.lblError.Text = this.errorMsg;

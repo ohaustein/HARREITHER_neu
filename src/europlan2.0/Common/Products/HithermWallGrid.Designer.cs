@@ -31,7 +31,6 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvWalls = new System.Windows.Forms.DataGridView();
-			this.btnSelectConstruction = new System.Windows.Forms.Button();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Construction = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.constructionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +42,7 @@ namespace Europlan.Common {
 			this.tempBehindHeatDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.tempBehindCoolDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.hithermWallBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnSelectConstruction = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvWalls)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.hithermWallBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -78,23 +78,13 @@ namespace Europlan.Common {
 			this.dgvWalls.Size = new System.Drawing.Size(684, 408);
 			this.dgvWalls.TabIndex = 0;
 			this.dgvWalls.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWalls_CellValueChanged);
+			this.dgvWalls.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvWalls_UserDeletingRow);
 			this.dgvWalls.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWalls_CellLeave);
 			this.dgvWalls.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvWalls_UserAddedRow);
 			this.dgvWalls.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvWalls_UserDeletedRow);
 			this.dgvWalls.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvWalls_RowsAdded);
 			this.dgvWalls.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvWalls_DefaultValuesNeeded);
 			this.dgvWalls.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWalls_CellEnter);
-			// 
-			// btnSelectConstruction
-			// 
-			this.btnSelectConstruction.Location = new System.Drawing.Point(372, 202);
-			this.btnSelectConstruction.Name = "btnSelectConstruction";
-			this.btnSelectConstruction.Size = new System.Drawing.Size(24, 23);
-			this.btnSelectConstruction.TabIndex = 1;
-			this.btnSelectConstruction.Text = "...";
-			this.btnSelectConstruction.UseVisualStyleBackColor = true;
-			this.btnSelectConstruction.Visible = false;
-			this.btnSelectConstruction.Click += new System.EventHandler(this.btnSelectConstruction_Click);
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -209,6 +199,17 @@ namespace Europlan.Common {
 			// hithermWallBindingSource
 			// 
 			this.hithermWallBindingSource.DataSource = typeof(Europlan.Common.HithermWall);
+			// 
+			// btnSelectConstruction
+			// 
+			this.btnSelectConstruction.Location = new System.Drawing.Point(372, 202);
+			this.btnSelectConstruction.Name = "btnSelectConstruction";
+			this.btnSelectConstruction.Size = new System.Drawing.Size(24, 23);
+			this.btnSelectConstruction.TabIndex = 1;
+			this.btnSelectConstruction.Text = "...";
+			this.btnSelectConstruction.UseVisualStyleBackColor = true;
+			this.btnSelectConstruction.Visible = false;
+			this.btnSelectConstruction.Click += new System.EventHandler(this.btnSelectConstruction_Click);
 			// 
 			// HithermWallGrid
 			// 
