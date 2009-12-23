@@ -840,9 +840,14 @@ namespace Europlan.Common {
 					registerCount += register.RegisterCount;
 
 					// Register
-					Project.Instance.AddRequiredMaterial(requiredMaterial, register.PartNumber, register.RegisterCount);
-
-
+					if (register.PartNumber != "") {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, register.PartNumber, register.RegisterCount);
+					}
+#if DEBUG
+					else {
+						MessageBox.Show("Hitherm Compact Product not found.");
+					}
+#endif
 					//Wandwinkel
 					if (ConfigUsePlus) {
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", 1);

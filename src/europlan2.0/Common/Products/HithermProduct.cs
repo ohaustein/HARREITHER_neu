@@ -877,7 +877,14 @@ namespace Europlan.Common {
 					registerCount += register.RegisterCount;
 
 					// Register
-					Project.Instance.AddRequiredMaterial(requiredMaterial, register.PartNumber, register.RegisterCount);
+					if (register.PartNumber != "") {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, register.PartNumber, register.RegisterCount);
+					}
+#if DEBUG
+					else {
+						MessageBox.Show("Hitherm Product not found.");
+					}
+#endif
 
 					// Ovalschweißmuffen bei Hitherm+
 					if (ConfigUsePlus && register.RegisterCount > 1) {
