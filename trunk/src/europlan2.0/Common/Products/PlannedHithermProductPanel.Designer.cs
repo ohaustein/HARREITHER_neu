@@ -657,8 +657,7 @@ namespace Europlan.Common {
 			this.hithermWallGrid1.Size = new System.Drawing.Size(844, 450);
 			this.hithermWallGrid1.TabIndex = 0;
 			this.hithermWallGrid1.WallChanged += new System.EventHandler<Europlan.Common.HithermWallGrid.WallEventArgs>(this.hithermWallGrid1_WallChanged);
-			this.hithermWallGrid1.WallAdded += new System.EventHandler<Europlan.Common.HithermWallGrid.WallEventArgs>(this.hithermWallGrid1_WallChanged);
-			this.hithermWallGrid1.WallRemoved += new System.EventHandler<Europlan.Common.HithermWallGrid.WallEventArgs>(this.hithermWallGrid1_WallChanged);
+			this.hithermWallGrid1.WallRemoved += new System.EventHandler<Europlan.Common.HithermWallGrid.WallEventArgs>(this.hithermWallGrid1_WallRemoved);
 			// 
 			// pageAuslegung
 			// 

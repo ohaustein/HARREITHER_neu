@@ -66,6 +66,13 @@ namespace Europlan.Common {
 			}
 		}
 
+		public void UpdateGrid() {
+			if (Project.Instance != null) {
+				this.hithermWallBindingSource.DataSource = (showCompact ? Project.Instance.HithermCompactWalls : Project.Instance.HithermWalls);
+				this.hithermWallBindingSource.ResetBindings(false);
+			}
+		}
+
 		private void dgvWalls_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
 			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
 				DataGridViewRow row = this.dgvWalls.Rows[i];
@@ -174,9 +181,7 @@ namespace Europlan.Common {
 				}
 			}
 			if (this.WallChanged != null) {
-				if (this.WallChanged != null) {
-					this.WallChanged(this, new WallEventArgs(this.dgvWalls.Rows[e.RowIndex].DataBoundItem as HithermWall));
-				}
+				this.WallChanged(this, new WallEventArgs(this.dgvWalls.Rows[e.RowIndex].DataBoundItem as HithermWall));
 			}
 		}
 
@@ -185,6 +190,8 @@ namespace Europlan.Common {
 				this.WallAdded(this, new WallEventArgs(e.Row.DataBoundItem as HithermWall));
 			}
 		}
+
+		private HithermWall deletingWall = null;
 
 		private void dgvWalls_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
 			if (Project.Instance != null) {
@@ -200,7 +207,7 @@ namespace Europlan.Common {
 								HithermProduct hp = pp.Product as HithermProduct;
 								foreach (HithermCircuit hc in hp.PlannedCircuits) {
 									foreach (HithermRegister hr in hc.Registers) {
-										if (hr.Wall == e.Row.DataBoundItem) {
+										if (hr.Wall == deletingWall) {
 											hr.Wall = newWall;
 										}
 									}
@@ -210,7 +217,7 @@ namespace Europlan.Common {
 								HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
 								foreach (HithermCompactCircuit hcc in hcp.PlannedCircuits) {
 									foreach (HithermCompactRegister hcr in hcc.Registers) {
-										if (hcr.Wall == e.Row.DataBoundItem) {
+										if (hcr.Wall == deletingWall) {
 											hcr.Wall = newWall;
 										}
 									}
@@ -221,9 +228,14 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			deletingWall = null;
 			if (this.WallRemoved != null) {
 				this.WallRemoved(this, new WallEventArgs(e.Row.DataBoundItem as HithermWall));
 			}
+		}
+
+		private void dgvWalls_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
+			deletingWall = e.Row.DataBoundItem as HithermWall;
 		}
 	}
 }

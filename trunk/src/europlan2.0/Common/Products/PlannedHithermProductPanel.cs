@@ -353,9 +353,9 @@ namespace Europlan.Common {
 					this.txtDistributor.Text = hp.PlannedConnection.ToString();
 				}
 
-				/*if ((skipFields & FieldEnum.WALLS) == FieldEnum.NONE) {
-					this.hithermWallGrid1.Walls = Project.Instance.HithermWalls;
-				}*/
+				if ((skipFields & FieldEnum.WALLS) == FieldEnum.NONE) {
+					this.hithermWallGrid1.UpdateGrid();
+				}
 
 				if (this.errorMsg != null) {
 					this.lblError.Text = this.errorMsg;
@@ -742,6 +742,45 @@ namespace Europlan.Common {
 		}
 
 		private void hithermWallGrid1_WallChanged(object sender, HithermWallGrid.WallEventArgs e) {
+			/*foreach (Floor f in Project.Instance.Floors) {
+				foreach (Room r in f.Rooms) {
+					foreach (PlannedProduct pp in r.PlannedProducts) {
+						if (pp.Product is HithermProduct) {
+							pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+						}
+					}
+				}
+			}*/
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
+		private void hithermWallGrid1_WallRemoved(object sender, HithermWallGrid.WallEventArgs e) {
+			/*foreach (Floor f in Project.Instance.Floors) {
+				foreach (Room r in f.Rooms) {
+					foreach (PlannedProduct pp in r.PlannedProducts) {
+						if (pp.Product is HithermProduct) {
+							HithermProduct hp = pp.Product as HithermProduct;
+							foreach (HithermCircuit hc in hp.PlannedCircuits) {
+								foreach (HithermRegister hr in hc.Registers) {
+									if (hr.Wall == e.wall) {
+										if (Project.Instance.SerializeableHithermWalls.Count > 0) {
+											hr.Wall = Project.Instance.SerializeableHithermWalls[0];
+										} else if (Project.Instance.HithermWalls.Count > 0) {
+											hr.Wall = Project.Instance.HithermWalls[0];
+										} else {
+											hr.Wall = null;
+										}
+										pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+									}
+								}
+							}
+						}
+					}
+				}
+			}*/
+			this.hithermRegisterBindingSource.ResetBindings(false);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
