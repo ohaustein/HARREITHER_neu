@@ -225,8 +225,8 @@ namespace Europlan.Common {
 			get {
 				if (c_durchflussHeat > 0) {
 					double druckverlust = Math.Pow((c_durchflussHeat / 1000) / EN1264.KVSValue, 2) * 1000;
-					//druckverlust = druckverlust < 1.2 ? 1.2 : druckverlust;
-					//druckverlust = druckverlust > 20 ? 20 : druckverlust;
+					druckverlust = druckverlust < 1.2 ? 1.2 : druckverlust;
+					druckverlust = druckverlust > 20 ? 20 : druckverlust;
 					return druckverlust;
 				}
 				return 0;
