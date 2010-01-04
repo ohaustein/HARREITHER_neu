@@ -556,31 +556,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		private double GetVerteilerAnschlussPerSqm(EurovalLayDistance layDistance) {
-			switch (layDistance) {
-				case EurovalLayDistance.A5:
-					return 0.5;
-				case EurovalLayDistance.EV5:
-					return 0.25;
-				case EurovalLayDistance.EV10:
-					return 0.2;
-				case EurovalLayDistance.EV15:
-					return 0.18;
-				case EurovalLayDistance.EV20:
-					return 0.14;
-				case EurovalLayDistance.EV25:
-					return 0.12;
-				case EurovalLayDistance.EV30:
-					return 0.10;
-				case EurovalLayDistance.EV35:
-					return 0.10;
-				case EurovalLayDistance.NONE:
-					return 0;
-				default:
-					throw new Exception("Unknown Laydistance");
-			}
-		}
-
 		/// <summary>
 		/// Returns distance between two pipes in m for specified laydistance 
 		/// </summary>
@@ -1823,14 +1798,7 @@ namespace Europlan.Common {
 			//Verteileranschluﬂbˆgen
 			if (this.PlannedConnection != null && this.PlannedConnection.Distributor != null) {
 				string verteilerAnschluﬂ = this.PlannedConnection.Distributor.LangeAnschlussboegen ? "EV21" : "EV20";
-				//amount = 0;
-				//if (this.PlannedLayDistance.HasValue) {
-				//    amount += this.PlannedAreaResidence * GetVerteilerAnschlussPerSqm(this.PlannedLayDistance.Value);
-				//}
-				//if (this.PlannedRimType.HasValue) {
-				//    amount += this.PlannedAreaRim * GetVerteilerAnschlussPerSqm(GetRimLayDistance(this.PlannedRimType.Value));
-				//}
-				//Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, amount);
+
 				Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluﬂ, this.circuits.Count * 2);
 			}
 

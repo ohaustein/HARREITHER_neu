@@ -502,36 +502,32 @@ namespace Europlan.Common {
 		/// <summary>
 		/// Returns the number of clipschiene in m per m² for the specified laydistance and estrich
 		/// </summary>
-		public static double GetClipschienePerSqm(EcothermLayDistance distance, bool anhydritEstrich) {
-			if (anhydritEstrich) {
-				return 2;
-			} else {
-				switch (distance) {
-					case EcothermLayDistance.A5:
-						return 2;
-					case EcothermLayDistance.EV5:
-						return 1.8;
-					case EcothermLayDistance.EV10:
-						return 1.6;
-					case EcothermLayDistance.EV15:
-						return 1.5;
-					case EcothermLayDistance.EV20:
-						return 1.4;
-					case EcothermLayDistance.EV25:
-						return 1.3;
-					case EcothermLayDistance.EV30:
-						return 1.2;
-					case EcothermLayDistance.EV35:
-						return 1.2;
-					case EcothermLayDistance.NONE:
-						return 0;
-					default:
-						throw new Exception("Unknown Laydistance");
-				}
+		public static double GetClipschienePerSqm(EcothermLayDistance distance) {
+			switch (distance) {
+				case EcothermLayDistance.A5:
+					return 2.5;
+				case EcothermLayDistance.EV5:
+					return 2;
+				case EcothermLayDistance.EV10:
+					return 1.8;
+				case EcothermLayDistance.EV15:
+					return 1.7;
+				case EcothermLayDistance.EV20:
+					return 1.6;
+				case EcothermLayDistance.EV25:
+					return 1.5;
+				case EcothermLayDistance.EV30:
+					return 1.4;
+				case EcothermLayDistance.EV35:
+					return 1.4;
+				case EcothermLayDistance.NONE:
+					return 0;
+				default:
+					throw new Exception("Unknown Laydistance");
 			}
 		}
 
-		private double GetOvalmuffePerSqm(EcothermLayDistance layDistance) {
+		private double GetMuffePerSqm(EcothermLayDistance layDistance) {
 			switch (layDistance) {
 				case EcothermLayDistance.A5:
 					return 0.1;
@@ -549,31 +545,6 @@ namespace Europlan.Common {
 					return 0.02;
 				case EcothermLayDistance.EV35:
 					return 0.02;
-				case EcothermLayDistance.NONE:
-					return 0;
-				default:
-					throw new Exception("Unknown Laydistance");
-			}
-		}
-
-		private double GetVerteilerAnschlussPerSqm(EcothermLayDistance layDistance) {
-			switch (layDistance) {
-				case EcothermLayDistance.A5:
-					return 0.5;
-				case EcothermLayDistance.EV5:
-					return 0.25;
-				case EcothermLayDistance.EV10:
-					return 0.2;
-				case EcothermLayDistance.EV15:
-					return 0.18;
-				case EcothermLayDistance.EV20:
-					return 0.14;
-				case EcothermLayDistance.EV25:
-					return 0.12;
-				case EcothermLayDistance.EV30:
-					return 0.10;
-				case EcothermLayDistance.EV35:
-					return 0.10;
 				case EcothermLayDistance.NONE:
 					return 0;
 				default:
@@ -1790,7 +1761,7 @@ namespace Europlan.Common {
 
 			double totalArea = this.PlannedAreaResidence + this.PlannedAreaRim + connectionPipeArea;
 			
-			// Euroval Rohr
+			// Ecotherm Rohr
 			double length = 0;
 			foreach (EcothermCircuit c in this.circuits) {
 				length += c.PipeLengthWithoutOtherProduct;
@@ -1799,59 +1770,43 @@ namespace Europlan.Common {
 
 			//// TODO Clipschiene und Ovalmuffe für Anbindeleitungen???
 
-			//// Clipschiene
+			// Clipschiene
 			string clipschiene = "EC02";
 			double amount = 0;
-			//if (this.PlannedLayDistance.HasValue) {
-			//    amount += this.PlannedAreaResidence * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
-			//}
-			//if (this.PlannedRimType.HasValue) {
-			//    amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
-			//}		
+			if (this.PlannedLayDistance.HasValue) {
+			    amount += this.PlannedAreaResidence * GetClipschienePerSqm(this.PlannedLayDistance.Value);
+			}
+			if (this.PlannedRimType.HasValue) {
+			    amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value));
+			}		
 			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
 
-			//// Ovalmuffe
-			//amount = 0;
-			//if (this.PlannedLayDistance.HasValue) {
-			//    amount += this.PlannedAreaResidence * GetOvalmuffePerSqm(this.PlannedLayDistance.Value);
-			//}
-			//if (this.PlannedRimType.HasValue) {
-			//    amount += this.PlannedAreaRim * GetOvalmuffePerSqm(GetRimLayDistance(this.PlannedRimType.Value));
-			//}
-			//Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", amount);
+			// Muffe
+			amount = 0;
+			if (this.PlannedLayDistance.HasValue) {
+				amount += this.PlannedAreaResidence * GetMuffePerSqm(this.PlannedLayDistance.Value);
+			}
+			if (this.PlannedRimType.HasValue) {
+				amount += this.PlannedAreaRim * GetMuffePerSqm(GetRimLayDistance(this.PlannedRimType.Value));
+			}
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EC06", amount);
 
 			//Verteileranschlußbögen
 			if (this.PlannedConnection != null && this.PlannedConnection.Distributor != null) {
 				string verteilerAnschluß = this.PlannedConnection.Distributor.LangeAnschlussboegen ? "EC05" : "EC04";
-				//amount = 0;
-				//if (this.PlannedLayDistance.HasValue) {
-				//    amount += this.PlannedAreaResidence * GetVerteilerAnschlussPerSqm(this.PlannedLayDistance.Value);
-				//}
-				//if (this.PlannedRimType.HasValue) {
-				//    amount += this.PlannedAreaRim * GetVerteilerAnschlussPerSqm(GetRimLayDistance(this.PlannedRimType.Value));
-				//}
-				//Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluß, amount);
+
 				Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluß, this.circuits.Count * 2);
 			}
 
-			//// nur bei Estrichkonstruktion
-			//if (this.HasInsideConstruction) {
-			//    if (this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH) ||
-			//        this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH)) {
-			//        // Eco 30
-			//        if (!anhydritEstrich) {
-			//            Project.Instance.AddRequiredMaterial(requiredMaterial, "EV34", totalArea * 0.2);
-			//        }
-			//        // Randdämmstreifen
-			//        Project.Instance.AddRequiredMaterial(requiredMaterial, "EV30", totalArea);
-			//        // PE Folie
-			//        Project.Instance.AddRequiredMaterial(requiredMaterial, "EV31", totalArea * 1.1);
-			//    }
-			//}
+			// nur bei Estrichkonstruktion
+			if (this.HasInsideConstruction) {
+				if (this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH) ||
+					this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH)) {
+					// EZ 70
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "EC08", totalArea * 0.2);
+				}
+			}
 
-			//// unknown amount
-			//Project.Instance.AddRequiredMaterial(requiredMaterial, "EV11", Double.NegativeInfinity);
-			//Project.Instance.AddRequiredMaterial(requiredMaterial, "EV12", Double.NegativeInfinity);
 		}
 
 	}
