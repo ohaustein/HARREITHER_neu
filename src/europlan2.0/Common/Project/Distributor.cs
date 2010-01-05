@@ -391,6 +391,73 @@ namespace Europlan.Common {
 			}
 		}
 
+		public double GetDruckverlust(double durchfluss) {
+			double ratio = 0;
+			switch (PlannedCircuits) {
+				case 1:
+				case 2:
+					ratio = 200.0 / 700.0;
+					break;
+				case 3:
+					ratio = 200.0 / 1000.0;
+					break;
+				case 4:
+					ratio = 200.0 / 1300.0;
+					break;
+				case 5:
+					ratio = 200.0 / 1600.0;
+					break;
+				case 6:
+					ratio = 200.0 / 1900.0;
+					break;
+				case 7:
+					ratio = 180.0 / 2000.0;
+					break;
+				case 8:
+					ratio = 160.0 / 2000.0;
+					break;
+				case 9:
+					ratio = 140.0 / 2000.0;
+					break;
+				case 10:
+					ratio = 120.0 / 2000.0;
+					break;
+				case 11:
+					ratio = 100.0 / 2000.0;
+					break;
+				case 12:
+					ratio = 80.0 / 2000.0;
+					break;
+			}
+
+			return durchfluss * ratio;
+		}
+
+		public double MaxDruckverlustVerteilerHeat {
+			get {
+				double maxDruckverlustInCircuit = 0;
+				double durchfluss = 0;
+				foreach (PlannedProduct pp in PlannedConnectedProducts) {
+					maxDruckverlustInCircuit = maxDruckverlustInCircuit < pp.Product.PlannedDeltaRhoDistributorHeat ? pp.Product.PlannedDeltaRhoDistributorHeat : maxDruckverlustInCircuit;
+					durchfluss += pp.Product.PlannedMhHeat;
+				}
+				return maxDruckverlustInCircuit + GetDruckverlust(durchfluss);
+			}
+		}
+
+		public double MaxDruckverlustVerteilerCool {
+			get {
+				double maxDruckverlustInCircuit = 0;
+				double durchfluss = 0;
+				foreach (PlannedProduct pp in PlannedConnectedProducts) {
+					maxDruckverlustInCircuit = maxDruckverlustInCircuit < pp.Product.PlannedDeltaRhoDistributorCool ? pp.Product.PlannedDeltaRhoDistributorCool : maxDruckverlustInCircuit;
+					durchfluss += pp.Product.PlannedMhCool;
+				}
+				return maxDruckverlustInCircuit + GetDruckverlust(durchfluss);
+			}
+		}
+
+
 		public void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 			int totalCircuits = PlannedCircuits + AdditionalCircuits;
 			int totalStellantriebe = PlannedStellAntriebe + ZusaetzlicheStellantriebe;
