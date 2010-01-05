@@ -322,8 +322,8 @@ namespace Europlan.Common {
 						qHeat += pp.Product.PlannedHeatLoad;
 						qCool += pp.Product.PlannedCoolLoad;
 
-						mhHeat += pp.Product.PlannedMhHeat;
-						mhCool += pp.Product.PlannedMhCool;
+						mhHeat += pp.Product.PlannedMaxMhHeat;
+						mhCool += pp.Product.PlannedMaxMhCool;
 												
 						deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
 						deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
@@ -470,8 +470,8 @@ namespace Europlan.Common {
 							qHeat += pp.Product.PlannedHeatLoad;
 							qCool += pp.Product.PlannedCoolLoad;
 
-							mhHeat += pp.Product.PlannedMhHeat;
-							mhCool += pp.Product.PlannedMhCool;
+							mhHeat += pp.Product.PlannedMaxMhHeat;
+							mhCool += pp.Product.PlannedMaxMhCool;
 
 							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
 							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
@@ -727,8 +727,8 @@ namespace Europlan.Common {
 								if (ruecklauf > ruecklaufCool) {
 									ruecklaufCool = ruecklauf;
 								}
-								durchflussHeat += pp.Product.PlannedMhHeat;
-								durchflussCool += pp.Product.PlannedMhCool;
+								durchflussHeat += pp.Product.PlannedMaxMhHeat;
+								durchflussCool += pp.Product.PlannedMaxMhCool;
 								deltaRhoHeat = deltaRhoHeat < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeat;
 								deltaRhoCool = deltaRhoCool < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCool;
 							}
@@ -793,8 +793,8 @@ namespace Europlan.Common {
 						if (ruecklauf > ruecklaufCool) {
 							ruecklaufCool = ruecklauf;
 						}
-						durchflussHeat += pp.Product.PlannedMhHeat;
-						durchflussCool += pp.Product.PlannedMhCool;
+						durchflussHeat += pp.Product.PlannedMaxMhHeat;
+						durchflussCool += pp.Product.PlannedMaxMhCool;
 						deltaRhoHeat = deltaRhoHeat < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeat;
 						deltaRhoCool = deltaRhoCool < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCool;
 					}
@@ -917,7 +917,7 @@ namespace Europlan.Common {
 								wrapperHeat.tFBAz = ep.PlannedFloorTemperatureHeatResidence;
 								wrapperHeat.tFBRz = ep.PlannedFloorTemperatureHeatRim;
 
-								wrapperHeat.Wassermenge = pp.Product.PlannedMhHeat;
+								wrapperHeat.Wassermenge = pp.Product.PlannedMaxMhHeat;
 								wrapperHeat.DruckverlustRohr = pp.Product.PlannedDeltaRhoHeat;
 								wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
 
@@ -969,7 +969,7 @@ namespace Europlan.Common {
 								wrapperCool.tFBAz = ep.PlannedFloorTemperatureCoolResidence;
 								wrapperCool.tFBRz = ep.PlannedFloorTemperatureCoolRim;
 
-								wrapperCool.Wassermenge = pp.Product.PlannedMhCool;
+								wrapperCool.Wassermenge = pp.Product.PlannedMaxMhCool;
 								wrapperCool.DruckverlustRohr = pp.Product.PlannedDeltaRhoCool;
 								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorCool;
 								

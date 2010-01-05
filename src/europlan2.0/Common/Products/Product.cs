@@ -747,6 +747,34 @@ namespace Europlan.Common {
 				}
 				double value = 0;
 				foreach (Circuit c in this.circuits) {
+					value += c.C_DurchflussHeat;
+				}
+				return value;
+			}
+		}
+
+		[XmlIgnore]
+		public double PlannedMhCool {
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (Circuit c in this.circuits) {
+					value += c.C_DurchflussCool;
+				}
+				return value;
+			}
+		}
+
+		[XmlIgnore]
+		public double PlannedMaxMhHeat {
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (Circuit c in this.circuits) {
 					if (c.C_DurchflussHeat > value) {
 						value = c.C_DurchflussHeat;
 					}
@@ -756,7 +784,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double PlannedMhCool {
+		public double PlannedMaxMhCool {
 			get {
 				if (this.incompleteCalculation) {
 					return 0;
