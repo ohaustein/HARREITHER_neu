@@ -141,7 +141,7 @@ namespace Europlan.Common {
 		public static double GetHeatArea(HithermCompactRegisterTypeEnum registerType) {
 			switch (registerType) {
 				case HithermCompactRegisterTypeEnum.HITC_620_Std:
-					return 0.62 * 0.5;
+					return 0.5 * 0.5;
 
 				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
 				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
@@ -309,9 +309,9 @@ namespace Europlan.Common {
 				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
 					table = HithermCompactProduct.ConfigHlRegHeizleistung1000Std;
 					break;
-				/*case HithermCompactRegisterTypeEnum.HITC_620_Std:
+				case HithermCompactRegisterTypeEnum.HITC_620_Std:
 					table = HithermCompactProduct.ConfigHlRegHeizleistung620Std;
-					break;*/
+					break;
 				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
 					table = HithermCompactProduct.ConfigHlRegHeizleistung2000Par;
 					break;
@@ -352,7 +352,7 @@ namespace Europlan.Common {
 				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermCompactProduct.ConfigBeplankungRWerte, HithermCompactProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
 			faktor = faktor * alpha / HithermCompactProduct.ConfigAlphaWand;
-			return 0;
+			return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, HithermCompactProduct.ConfigHlRegKuehlleistungProQm, faktor) * this.HeatArea;
 			// TODO
 			//return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, HithermCompactProduct.ConfigHlRegKuehlleistung, faktor) * this.registerCount;
 		}

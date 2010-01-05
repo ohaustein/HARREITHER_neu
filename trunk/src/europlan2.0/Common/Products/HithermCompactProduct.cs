@@ -31,16 +31,6 @@ namespace Europlan.Common {
 		private static int maxPressureLost = 15000;
 		private static int maxDurchfluss = 240;
 
-		// Hitherm(r) Hochleistungs-Klimawandregister (RA 5) Heizleistung qW in W/m²
-		/*private static double[][] regHeizleistung = {
-			//  tHm (°C)  30.0  32.5  35.0  37.5  40.0  42.5  45.0  47.5  50.0
-			new double[] { 105,  120,  140,  155,  175,  190,  210,  225,  240}, // ti=15°C
-			new double[] {  85,  100,  120,  135,  155,  170,  185,  205,  220}, // ti=18°C
-			new double[] {  70,   85,  105,  120,  140,  155,  175,  190,  210}, // ti=20°C
-			new double[] {  55,   70,   90,  105,  125,  140,  160,  175,  195}, // ti=22°C
-			new double[] {  45,   60,   80,   95,  115,  130,  145,  165,  180}  // ti=24°C
-		};*/
-
 		//     Diffenz Raumtemp - Kuehlmitteltemp (K):  0   2   3   4   5   6   7   9
 		//private static double[] regKuehlleistung = { 0, 13, 20, 25, 33, 40, 45, 60 };
 
@@ -80,14 +70,14 @@ namespace Europlan.Common {
 			new double[] {  35,   50,   60,   70,   80,   90}  // ti=24°C
 		};
 
-		/*private static double[][] regHeizleistung620Std = {
+		private static double[][] regHeizleistung620Std = {
 			//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
-			new double[] {   0,    0,    0,    0,    0,    0}, // ti=15°C
-			new double[] {   0,    0,    0,    0,    0,    0}, // ti=18°C
-			new double[] {   0,    0,    0,    0,    0,    0}, // ti=20°C
-			new double[] {   0,    0,    0,    0,    0,    0}, // ti=22°C
-			new double[] {   0,    0,    0,    0,    0,    0}  // ti=24°C
-		};*/
+			new double[] {37.5, 42.5,   50,   55,   60,   65}, // ti=15°C
+			new double[] {32.5, 37.5, 42.5, 47.5, 52.5,   60}, // ti=18°C
+			new double[] {27.5, 32.5, 37.5, 42.5,   50,   55}, // ti=20°C
+			new double[] {22.5, 27.5, 32.5,   40,   45,   50}, // ti=22°C
+			new double[] {17.5,   25,   30,   35,   40,   45}  // ti=24°C
+		};
 
 		private static double[][] regHeizleistung2000Par = {
 			//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
@@ -114,6 +104,14 @@ namespace Europlan.Common {
 			new double[] {  55,   70,   80,   90,  100,  115}, // ti=20°C
 			new double[] {  50,   60,   70,   80,   95,  105}, // ti=22°C
 			new double[] {  40,   50,   60,   75,   85,   95}  // ti=24°C
+		};
+
+		private static double[][] regKuehlleistungProQm = {
+			//  tKm (°C)  16.0  18.0  20.0  22.0
+			new double[] {12.5,  0.0            }, // ti=18°C
+			new double[] {24.0, 12.5,  0.0      }, // ti=20°C
+			new double[] {39.0, 25.0, 12.5,  0.0}, // ti=22°C
+			new double[] {58.0, 44.0, 32.0, 19.5}  // ti=25°C
 		};
 
 		private static double[] beplankungRWerte = { 0, 0.01, 0.02, 0.1 };
@@ -310,7 +308,7 @@ namespace Europlan.Common {
 			set { regHeizleistung1000Std = value; }
 		}
 
-		/*[ProductParameter]
+		[ProductParameter]
 		public static string ConfigHlRegHeizleistung620StdString {
 			get {
 				return ConvertArrayToString2(regHeizleistung620Std);
@@ -325,7 +323,7 @@ namespace Europlan.Common {
 		public static double[][] ConfigHlRegHeizleistung620Std {
 			get { return regHeizleistung620Std; }
 			set { regHeizleistung620Std = value; }
-		}*/
+		}
 
 		[ProductParameter]
 		public static string ConfigHlRegHeizleistung2000ParString {
@@ -379,22 +377,22 @@ namespace Europlan.Common {
 		}
 
 
-		/*[ProductParameter]
-		public static string ConfigHlRegKuehlleistungString {
+		[ProductParameter]
+		public static string ConfigHlRegKuehlleistungProQmString {
 			get {
-				return ConvertArrayToString(regKuehlleistung);
+				return ConvertArrayToString2(regKuehlleistungProQm);
 			}
 			set {
-				double[] array = ConvertStringToArray(value);
+				double[][] array = ConvertStringToArray2(value);
 				if (array != null) {
-					regKuehlleistung = array;
+					regKuehlleistungProQm = array;
 				}
 			}
 		}
-		public static double[] ConfigHlRegKuehlleistung {
-			get { return regKuehlleistung; }
-			set { regKuehlleistung = value; }
-		}*/
+		public static double[][] ConfigHlRegKuehlleistungProQm {
+			get { return regKuehlleistungProQm; }
+			set { regKuehlleistungProQm = value; }
+		}
 
 		[ProductParameter]
 		public static string ConfigBeplankungRWerteString {

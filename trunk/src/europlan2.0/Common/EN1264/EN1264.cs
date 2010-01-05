@@ -254,6 +254,31 @@ namespace Europlan.Common {
 			return -rtn;
 		}
 
+		public double KaeltestromDichteRegister(double kuehlmittelTemperatur, double raumTemperatur, double[][] standardTabelle, double faktor) {
+			if (kuehlmittelTemperatur >= raumTemperatur) {
+				return 0;
+			}
+
+			double[] x = { 16.0, 18.0, 20.0, 22.0 };
+
+			double[] c = null;
+			double[] y = new double[4];
+
+			for (int i = 0; i < 4; i++) {
+				spline3.buildcubicspline(x, standardTabelle[i], standardTabelle[i].Length, 0, 0, 0, 0, ref c);
+				y[i] = spline3.splineinterpolation(ref c, kuehlmittelTemperatur);
+			}
+
+			double[] x2 = { 18, 20, 22, 25 };
+			spline3.buildcubicspline(x2, y, 4, 0, 0, 0, 0, ref c);
+			double rtn = spline3.splineinterpolation(ref c, raumTemperatur) * faktor;
+			if (rtn < 0) {
+				rtn = 0;
+			}
+
+			return -rtn;
+		}
+
 		public double HithermBeplankungsFaktor(double[] rWerte, double[] faktoren, double rWert) {
 			double[] c = null;
 			spline3.buildcubicspline(rWerte, faktoren, rWerte.Length < faktoren.Length ? rWerte.Length : faktoren.Length, 0, 0, 0, 0, ref c);
@@ -474,12 +499,22 @@ namespace Europlan.Common {
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_250_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
-					return 0;
+					y = new double[][] {new double[] {0.2, 0.5, 0.9, 1.3, 1.8, 2.3, 2.8, 3.4, 4.1, 4.8, 6.5, 8.3, 10.3, 12.6, 15.1, 17.8, 20.7, 23.8, 27.1, 30.7, 34.4, 38.4, 42.6, 47.0, 51.6},
+						new double[] {0.2, 0.4, 0.7, 0.9, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.8, 5.8, 6.9, 8.1, 9.3, 10.7, 12.1, 13.7, 15.3, 17.0, 18.7, 20.6, 22.6, 24.6},
+						new double[] {0.1, 0.3, 0.5, 0.7, 1.0, 1.2, 1.5, 1.8, 2.1, 2.4, 3.2, 4.0, 4.9, 5.9, 7.0, 8.2, 9.4, 10.8, 12.2, 13.7, 15.3, 17.0, 18.8, 20.6, 22.5},
+						new double[] {0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1.0, 1.3, 1.5, 1.8, 2.5, 3.2, 4.1, 5.0, 6.1, 7.2, 8.5, 9.8, 11.3, 12.8, 14.4, 16.2, 18.0, 19.9, 21.9},
+						new double[] {0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.9, 2.6, 3.4, 4.3, 5.4, 6.5, 7.7, 9.0, 10.5, 12.0, 13.7, 15.4, 17.3, 19.2, 21.3},
+						new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.6, 0.9, 1.4, 2.0, 2.8, 3.7, 4.7, 5.8, 7.0, 8.4, 9.8, 11.4, 13.1, 15.0, 16.9, 19.0, 21.1}};
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_250_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
-					return 0;
+					y = new double[][] {new double[] {0.1, 0.3, 0.5, 0.7, 1.0, 1.3, 1.7, 2.2, 2.6, 3.2, 4.4, 5.7, 7.3, 9.0, 10.9, 13.1, 15.3, 17.8, 20.5, 23.3, 26.4, 29.6, 33.0, 36.6, 40.3},
+						new double[] {0.2, 0.4, 0.7, 1.0, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.7, 5.7, 6.7, 7.8, 9.0, 10.3, 11.7, 13.1, 14.6, 16.2, 17.9, 19.6, 21.4, 23.3},
+						new double[] {0.1, 0.3, 0.4, 0.6, 0.8, 1.1, 1.3, 1.6, 1.9, 2.2, 2.9, 3.7, 4.6, 5.6, 6.6, 7.7, 9.0, 10.3, 11.7, 13.2, 14.7, 16.4, 18.2, 20.0, 21.9},
+						new double[] {0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.4, 1.6, 2.2, 3.0, 3.8, 4.7, 5.7, 6.8, 8.0, 9.3, 10.7, 12.2, 13.8, 15.4, 17.2, 19.1, 21.1},
+						new double[] {0.1, 0.1, 0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.7, 2.3, 3.1, 3.9, 4.9, 6.0, 7.2, 8.4, 9.8, 11.3, 12.9, 14.6, 16.5, 18.4, 20.4},
+						new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 1.2, 1.8, 2.5, 3.3, 4.3, 5.4, 6.6, 7.9, 9.3, 10.8, 12.5, 14.2, 16.1, 18.1, 20.2}}; 
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_300_5:
@@ -523,7 +558,7 @@ namespace Europlan.Common {
 
 			switch (type) {
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std:
-					return 0;
+					y = new double[] { 0.1, 0.3, 0.4, 0.6, 0.8, 0.9, 1.1, 1.3, 1.6, 1.8, 2.3, 2.8, 3.4, 4.0, 4.7, 5.4, 6.2, 7.0, 7.9, 8.8, 9.7, 10.7, 11.8, 12.8, 14.0 };
 					break;
 
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std:
@@ -542,7 +577,7 @@ namespace Europlan.Common {
 					break;
 
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std:
-					return 0;
+					y = new double[] { 0.25, 0.5, 0.875, 1.125, 1.5, 1.875, 2.375, 2.75, 3.25, 3.75, 4.75, 6.0, 7.25, 8.625, 10.125, 11.625, 13.375, 15.125, 17.125, 19.125, 21.25, 23.375, 25.75, 28.25, 30.75 };
 					break;
 
 				default:
