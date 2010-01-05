@@ -484,7 +484,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempHeat += 0.1;
 				// Heizleistung erhöhen
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > HithermProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < HithermProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < HithermProduct.ConfigMaxDurchfluss) {
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > HithermProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < HithermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < HithermProduct.ConfigMaxDurchfluss) {
 					this.plannedRuecklaufTempHeat += 0.1;
 					foreach (HithermCircuit c in this.circuits) {
 						c.Calculate();
@@ -499,7 +499,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > HithermProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < HithermProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < HithermProduct.ConfigMaxDurchfluss) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > HithermProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < HithermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < HithermProduct.ConfigMaxDurchfluss) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (HithermCircuit c in this.circuits) {
 						c.Calculate();
@@ -519,13 +519,13 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
-			if (this.PlannedMhHeat >= this.PlannedMhCool) {
-				if (Math.Round(this.PlannedMhHeat, 1) > HithermProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
+				if (Math.Round(this.PlannedMaxMhHeat, 1) > HithermProduct.ConfigMaxDurchfluss) {
+					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedMhCool, 1) > HithermProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMaxMhCool, 1) > HithermProduct.ConfigMaxDurchfluss) {
+					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {

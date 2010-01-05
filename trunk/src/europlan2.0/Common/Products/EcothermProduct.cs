@@ -1507,10 +1507,10 @@ namespace Europlan.Common {
 						if (this.PlannedDeltaRhoCool > EcothermProduct.ConfigMaxPressureLost) {
 							tryCalc = true;
 						}
-						if (this.PlannedMhHeat > EcothermProduct.ConfigMaxDurchfluss) {
+						if (this.PlannedMaxMhHeat > EcothermProduct.ConfigMaxDurchfluss) {
 							tryCalc = true;
 						}
-						if (this.PlannedMhCool > EcothermProduct.ConfigMaxDurchfluss) {
+						if (this.PlannedMaxMhCool > EcothermProduct.ConfigMaxDurchfluss) {
 							tryCalc = true;
 						}
 						tryCalc = tryCalc && !this.requestedCircuits.HasValue;
@@ -1592,7 +1592,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempHeat += 0.1;
 					// Heizleistung erhöhen
-					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EcothermProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < EcothermProduct.ConfigMaxDurchfluss) {
+					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EcothermProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < EcothermProduct.ConfigMaxDurchfluss) {
 						this.plannedRuecklaufTempHeat += 0.1;
 						foreach (EcothermCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
@@ -1608,7 +1608,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempCool -= 0.1;
 					// Kühlleistung erhöhen
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EcothermProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < EcothermProduct.ConfigMaxDurchfluss) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EcothermProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EcothermProduct.ConfigMaxDurchfluss) {
 						this.plannedRuecklaufTempCool -= 0.1;
 						i = 0;
 						foreach (EcothermCircuit ec in this.circuits) {
@@ -1650,13 +1650,13 @@ namespace Europlan.Common {
 			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxRimTempHarreither : EcothermProduct.ConfigMaxRimTempEn1264)) {
 				this.lastErrorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxRimTempHarreither : EcothermProduct.ConfigMaxRimTempEn1264), 1) + "°C)\n";
 			}
-			if (this.PlannedMhHeat >= this.PlannedMhCool) {
-				if (Math.Round(this.PlannedMhHeat, 1) > EcothermProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
+				if (Math.Round(this.PlannedMaxMhHeat, 1) > EcothermProduct.ConfigMaxDurchfluss) {
+					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedMhCool, 1) > EcothermProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMaxMhCool, 1) > EcothermProduct.ConfigMaxDurchfluss) {
+					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {

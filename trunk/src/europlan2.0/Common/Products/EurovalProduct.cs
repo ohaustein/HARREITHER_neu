@@ -1511,10 +1511,10 @@ namespace Europlan.Common {
 						if (this.PlannedDeltaRhoCool > EurovalProduct.ConfigMaxPressureLost) {
 							tryCalc = true;
 						}
-						if (this.PlannedMhHeat > EurovalProduct.ConfigMaxDurchfluss) {
+						if (this.PlannedMaxMhHeat > EurovalProduct.ConfigMaxDurchfluss) {
 							tryCalc = true;
 						}
-						if (this.PlannedMhCool > EurovalProduct.ConfigMaxDurchfluss) {
+						if (this.PlannedMaxMhCool > EurovalProduct.ConfigMaxDurchfluss) {
 							tryCalc = true;
 						}
 						tryCalc = tryCalc && !this.requestedCircuits.HasValue;
@@ -1596,7 +1596,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempHeat += 0.1;
 					// Heizleistung erhöhen
-					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EurovalProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMhHeat < EurovalProduct.ConfigMaxDurchfluss) {
+					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EurovalProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < EurovalProduct.ConfigMaxDurchfluss) {
 						this.plannedRuecklaufTempHeat += 0.1;
 						foreach (EurovalCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
@@ -1612,7 +1612,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempCool -= 0.1;
 					// Kühlleistung erhöhen
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMhCool < EurovalProduct.ConfigMaxDurchfluss) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EurovalProduct.ConfigMaxDurchfluss) {
 						this.plannedRuecklaufTempCool -= 0.1;
 						i = 0;
 						foreach (EurovalCircuit ec in this.circuits) {
@@ -1654,13 +1654,13 @@ namespace Europlan.Common {
 			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264)) {
 				this.lastErrorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "°C)\n";
 			}
-			if (this.PlannedMhHeat >= this.PlannedMhCool) {
-				if (Math.Round(this.PlannedMhHeat, 1) > EurovalProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMhHeat, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
+				if (Math.Round(this.PlannedMaxMhHeat, 1) > EurovalProduct.ConfigMaxDurchfluss) {
+					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedMhCool, 1) > EurovalProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMhCool, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMaxMhCool, 1) > EurovalProduct.ConfigMaxDurchfluss) {
+					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
