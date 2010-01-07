@@ -1772,8 +1772,6 @@ namespace Europlan.Common {
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", length);
 
-			// TODO Clipschiene und Ovalmuffe für Anbindeleitungen???
-
 			// Clipschiene
 			string clipschiene = clipSchieneKlebeband ? "EV16" : "EV15";
 			double amount = 0;
@@ -1782,7 +1780,12 @@ namespace Europlan.Common {
 			}
 			if (this.PlannedRimType.HasValue) {
 				amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
-			}		
+			}
+			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
+				if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH) {
+					amount += pipe.AreaTotal * GetClipschienePerSqm(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart), anhydritEstrich);
+				}
+			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
 
 			// Ovalmuffe
@@ -1792,6 +1795,11 @@ namespace Europlan.Common {
 			}
 			if (this.PlannedRimType.HasValue) {
 				amount += this.PlannedAreaRim * GetOvalmuffePerSqm(GetRimLayDistance(this.PlannedRimType.Value));
+			}
+			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
+				if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH) {
+					amount += pipe.AreaTotal * GetOvalmuffePerSqm(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart));
+				}
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", amount);
 
