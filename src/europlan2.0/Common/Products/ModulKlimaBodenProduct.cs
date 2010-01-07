@@ -923,6 +923,16 @@ namespace Europlan.Common {
 			double streifen = Math.Ceiling(this.RequestedModulesModulierend * 1.5);
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK04", streifen);
 
+			// nur bei Estrichkonstruktion
+			if (this.HasInsideConstruction) {
+				if (this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_STAHL) ||
+					this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_STAHL)) {
+					// Stahlbleche
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK21", Double.NegativeInfinity);
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK22", Double.NegativeInfinity);
+				}
+			}
+
 			// Rohrführungsplatte
 			if (this.RequestedSonstigeVerbindeLeitung > 0) {
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK05", Math.Ceiling(this.RequestedSonstigeVerbindeLeitung / 8));
