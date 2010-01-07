@@ -535,7 +535,7 @@ namespace Europlan.Common {
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Wasserinhalt (ab Verteiler)";
 			wrapper.HeatValue = wasserInhalt.ToString("0.##");
-			wrapper.HeatUnit = wasserInhalt.ToString("0.##");
+			wrapper.HeatUnit = "l";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();

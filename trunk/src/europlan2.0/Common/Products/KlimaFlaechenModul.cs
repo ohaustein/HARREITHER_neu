@@ -187,6 +187,29 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public double WasserInhalt {
+			get {
+				switch (this.modulType) {
+					case ModulTypeEnum.MODUL_100_40:
+						return 1.0;
+
+					case ModulTypeEnum.MODUL_80_30:
+						return 0.6;
+
+					case ModulTypeEnum.MODUL_120_30:
+					case ModulTypeEnum.MODUL_60_60:
+						return 0.9;
+
+					case ModulTypeEnum.MODUL_100_30:
+						return 0.75;
+
+					default:
+						throw new Exception("Unknown Register Type");
+				}
+			}
+		}
+
 		/*public Nullable<Point> Origin {
 			get { return this.origin; }
 			set { this.origin = value; }

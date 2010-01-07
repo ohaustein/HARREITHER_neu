@@ -443,5 +443,28 @@ namespace Europlan.Common {
 				return this.wall.GetPartNumber(registerType, this.product.Product.Type == Product.ProductType.DSH, HithermCompactProduct.ConfigUsePlus);
 			}
 		}
+
+		[XmlIgnore]
+		public double WasserInhalt {
+			get {
+				switch (this.registerType) {
+					case HithermCompactRegisterTypeEnum.HITC_2500_Std:
+						return 1.04;
+					case HithermCompactRegisterTypeEnum.HITC_2000_Std:
+					case HithermCompactRegisterTypeEnum.HITC_2000_Par:
+						return 0.86;
+					case HithermCompactRegisterTypeEnum.HITC_1500_Std:
+					case HithermCompactRegisterTypeEnum.HITC_1500_Par:
+						return 0.69;
+					case HithermCompactRegisterTypeEnum.HITC_1000_Std:
+					case HithermCompactRegisterTypeEnum.HITC_1000_Par: 
+						return 0.52;
+					case HithermCompactRegisterTypeEnum.HITC_620_Std:
+						return 0.34;
+					default:
+						throw new Exception("Unknown Register Type");
+				}
+			}
+		}
 	}
 }

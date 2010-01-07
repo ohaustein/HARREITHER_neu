@@ -29,7 +29,7 @@ namespace Europlan.Common {
 		private static double lambdaU = 1.2; /* Wärmeleitfähigkeit der Überdeckung */
 		private static double rohrAussenD = 0.0206505; /* Aussendurchmesser Euroval Rohr */
 		private static double rohrInnenD = 0.0153; /* Rohrinnendurchmesser */
-		private static double rohrInnenA = 0.000183783; /* Rohrinnenquerschnitt */
+		public static double rohrInnenA = 0.000183783; /* Rohrinnenquerschnitt */
 		private static double ag = 1.1034; /* Ovalrohr Geometriefaktor für Euroval */
 		private static double sr0 = 0.002; /* fix ??? */
 		private static double sr = 0.00238; /* Aus Euroval Normprüfdaten */
@@ -1758,8 +1758,12 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public override double WasserInhalt {
-			get { 
-				return 0;
+			get {
+				double length = 0;
+				foreach (EurovalCircuit c in this.circuits) {
+					length += c.PipeLengthWithoutOtherProduct;
+				}
+				return rohrInnenA * length * 1000;
 			}
 		}
 

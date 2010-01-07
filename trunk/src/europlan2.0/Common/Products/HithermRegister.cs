@@ -627,5 +627,39 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		[XmlIgnore]
+		public double WasserInhalt {
+			get {
+				switch (registerType) {
+					case HithermRegisterTypeEnum.HIT_50_10:
+							return 0.25;
+					case HithermRegisterTypeEnum.HIT_50_5:
+							return 0.34;
+					case HithermRegisterTypeEnum.HIT_100_10:
+							return 0.35;
+					case HithermRegisterTypeEnum.HIT_100_5:
+							return 0.52;
+					case HithermRegisterTypeEnum.HIT_150_10:
+							return 0.45;
+					case HithermRegisterTypeEnum.HIT_150_5:
+							return 0.69;
+					case HithermRegisterTypeEnum.HIT_200_10:
+							return 0.55;
+					case HithermRegisterTypeEnum.HIT_200_5:
+							return 0.86;
+					case HithermRegisterTypeEnum.HIT_250_10:
+							return 0.65;
+					case HithermRegisterTypeEnum.HIT_250_5:
+							return 1.04;
+					case HithermRegisterTypeEnum.HIT_300_10:
+							return 0.75;
+					case HithermRegisterTypeEnum.HIT_300_5:
+							return 1.21;
+					default:
+						throw new Exception("Unknown Register Type");
+				}
+			}
+		}
 	}
 }
