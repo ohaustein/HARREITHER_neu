@@ -42,7 +42,7 @@ namespace Europlan.Application {
 				this.lstModule.Items.Clear();
 				foreach (LicensedModule module in LicenseManager.Instance.License.Modules) {
 					if (module.Enabled) {
-						this.lstModule.Items.Add(new ListViewItem(module.Name));
+						this.lstModule.Items.Add(new ListViewItem(module.DisplayName));
 					}
 				}
 				if (!LicenseManager.Instance.License.IsSignatureValid) {

@@ -17,12 +17,25 @@ namespace Europlan.Common {
 			//        this.lstHeatingSystems.Items.Add(new HeatingSystemItem(t));
 			//    }
 			//}
-			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(EurovalProduct)));
-			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(EcothermProduct)));
-			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(HithermProduct)));
-			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(HithermCompactProduct)));
-			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaBodenProduct)));
-			this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaDeckeProduct)));
+			Licensing.License license = Licensing.LicenseManager.Instance.License;
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
+				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(EurovalProduct)));
+			}
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
+				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(EcothermProduct)));
+			}
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
+				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(HithermProduct)));
+			}
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHithermCompact)) {
+				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(HithermCompactProduct)));
+			}
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden)) {
+				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaBodenProduct)));
+			}
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke)) {
+				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaDeckeProduct)));
+			}
 			if (this.lstHeatingSystems.Items.Count > 0) {
 				this.lstHeatingSystems.Items[0].Selected = true;
 			}

@@ -12,7 +12,7 @@ namespace Europlan.AdminApplication {
 
 		private LicenseTemplate license = null;
 
-		public static readonly string[] availableModules = { "Produkt 1", "Produkt 2", "Produkt 3", "Produkt 4" };
+		//public static readonly string[] availableModules = { "Interne Lizenz", "Adminmodus", "Euroval", "Ecotherm", "Hitherm", "Hitherm Compact", "Modul Klimaboden", "Modul Klimadecke" };
 
 		public LicenseEditor() {
 			InitializeComponent();

@@ -16,6 +16,25 @@ namespace Europlan.Common {
 		
 		public SystemParametersPanel() {
 			InitializeComponent();
+			Licensing.License license = Licensing.LicenseManager.Instance.License;
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
+				this.tabSystemParameters.TabPages.Remove(this.tabEuroval);
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
+				this.tabSystemParameters.TabPages.Remove(this.tabEcotherm);
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden)) {
+				this.tabSystemParameters.TabPages.Remove(this.tabModulBoden);
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke)) {
+				this.tabSystemParameters.TabPages.Remove(this.tabModulDecke);
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
+				this.tabSystemParameters.TabPages.Remove(this.tabHitherm);
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHithermCompact)) {
+				this.tabSystemParameters.TabPages.Remove(this.tabHithermCompact);
+			}
 			InitializeEurovalValues();
 			InitializeEcothermValues();
 			InitializeModulBodenValues();
@@ -38,15 +57,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnEurovalStandard_Click(object sender, EventArgs e) {
-			Project.Instance.Config.EurovalProduct.StaticInitialize();
-			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigUseHarreitherNorm");
-			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxCircuitLength");
-			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxPressureLost");
-			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigMaxDurchfluss");
-			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungHeizMin");
-			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungHeizMax");
-			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungKühlMin");
-			//Project.Instance.Config.RemoveProductParameter<EurovalProduct>("ConfigSpreizungKühlMax");
+			EurovalProduct.StaticInitialize();
 			InitializeEurovalValues();
 		}
 
@@ -55,28 +66,22 @@ namespace Europlan.Common {
 		}
 
 		private void btnModulBodenStandard_Click(object sender, EventArgs e) {
-			Project.Instance.Config.ModulKlimaBodenProduct.StaticInitialize();
-			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm");
-			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxPressureLost");
-			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxDurchfluss");
-			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxModulesInRow");
-			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigMaxModulesInParallel");
-			//Project.Instance.Config.RemoveProductParameter<ModulKlimaBodenProduct>("ConfigModulesInCircuit");
+			ModulKlimaBodenProduct.StaticInitialize();
 			InitializeModulBodenValues();
 		}
 
 		private void btnModulDeckeStandard_Click(object sender, EventArgs e) {
-			Project.Instance.Config.ModulKlimaDeckeProduct.StaticInitialize();
+			ModulKlimaDeckeProduct.StaticInitialize();
 			InitializeModulDeckeValues();
 		}
 
 		private void btnHithermStandard_Click(object sender, EventArgs e) {
-			Project.Instance.Config.HithermProduct.StaticInitialize();
+			HithermProduct.StaticInitialize();
 			InitializeHithermValues();
 		}
 
 		private void btnHithermCompactStandard_Click(object sender, EventArgs e) {
-			Project.Instance.Config.HithermCompactProduct.StaticInitialize();
+			HithermCompactProduct.StaticInitialize();
 			InitializeHithermCompactValues();
 		}
 

@@ -184,7 +184,7 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public override void StaticInitialize() {
+		public static void StaticInitialize() {
 			quickDimensioningHeatPowerPerSquareMeter = 50;
 			quickDimensioningCoolPowerPerSquareMeter = 50;
 			canHeat = true;
@@ -656,6 +656,10 @@ namespace Europlan.Common {
 		/// The name of this product that is shown in quick dimensioning
 		/// </summary>
 		public override string QuickDimensioningName {
+			get { return QuickDimensioningNameStatic; }
+		}
+
+		public static string QuickDimensioningNameStatic {
 			get { return "Ecotherm®\n(m²)"; }
 		}
 		#endregion QuickDimensioning

@@ -11,7 +11,7 @@ namespace Europlan.AdminApplication {
 
 		public ModuleItem(LicensedModuleTemplate module) {
 			this.module = module;
-			this.Text = this.module.Name;
+			this.Text = this.module.DisplayName;
 			this.Checked = this.module.Enabled;
 		}
 

@@ -197,9 +197,27 @@ namespace Europlan.Application {
 					AddRecentProject(projectFileName);
 				}
 			} catch (Exception ex) {
-				log.Error("Problem loading project:", ex);
+				if (ex is ProductNotLicensedException || ex.InnerException is ProductNotLicensedException) {
+					ProductNotLicensedException pnle;
+					if (ex is ProductNotLicensedException) {
+						pnle = ex as ProductNotLicensedException;
+					} else {
+						pnle = ex.InnerException as ProductNotLicensedException;
+					}
+					object[] names = pnle.ProductType.GetCustomAttributes(typeof(ProductNameAttribute), true);
+					string name;
+					if (names.Length > 0) {
+						name = (names[0] as ProductNameAttribute).FullName;
+					} else {
+						name = pnle.ProductType.Name;
+					}
+					MessageBox.Show("Das Projekt konnte nicht geladen werden, da im Projekt ein nicht lizensiertes Produkt (" + name + ") verplant wurde", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				} else {
+					log.Error("Problem loading project:", ex);
+				}
 				currentProject = null;
 				projectFileName = null;
+				this.NewProject();
 			}
 		}
 

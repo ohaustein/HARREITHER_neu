@@ -22,8 +22,9 @@ namespace Europlan.AdminApplication {
 		private void btnNewLicense_Click(object sender, EventArgs e) {
 			LicenseTemplate newLicense = new LicenseTemplate();
 			newLicense.ValidUntil = DateTime.Now.AddYears(1);
-			foreach (string module in LicenseEditor.availableModules) {
-				newLicense.SetModuleEnabled(module, false);
+			foreach (string module in AbstractLicensedModule.DefaultModules.Keys) {
+			//foreach (string module in LicenseEditor.availableModules) {
+				newLicense.SetModuleEnabled(module, AbstractLicensedModule.DefaultEnabledModules.Contains(module));
 			}
 			LicenseItem newItem = new LicenseItem(newLicense);
 			this.lstLicenses.Items.Add(newItem);

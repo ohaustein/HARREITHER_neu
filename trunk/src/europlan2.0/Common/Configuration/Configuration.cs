@@ -37,14 +37,14 @@ namespace Europlan.Common {
 
 
 		// if you add a product don't forget to call the Initialize() function in setter of ProductConfiguration
-		private EurovalProduct eurovalProduct = new EurovalProduct();
+		/*private EurovalProduct eurovalProduct = new EurovalProduct();
 		private EcothermProduct ecothermProduct = new EcothermProduct();
 		private ConcreteActivationProduct concreteActivationProduct = new ConcreteActivationProduct();
 		private HithermProduct hithermProduct = new HithermProduct();
 		private HithermCompactProduct hithermCompactProduct = new HithermCompactProduct();
 		private HithermCompactRoofProduct hithermCompactRoofProduct = new HithermCompactRoofProduct();
 		private ModulKlimaBodenProduct modulKlimaBodenProduct = new ModulKlimaBodenProduct();
-		private ModulKlimaDeckeProduct modulKlimaDeckeProduct = new ModulKlimaDeckeProduct();
+		private ModulKlimaDeckeProduct modulKlimaDeckeProduct = new ModulKlimaDeckeProduct();*/
 
 		private string partnerLogo;
 
@@ -286,14 +286,14 @@ namespace Europlan.Common {
 					adminTemplate.type = ConfigurationType.AdminConfiguration;
 					adminTemplate.RecalculateMaterialToCategoryMapping();
 
-					adminTemplate.eurovalProduct.StaticInitialize();
-					adminTemplate.ecothermProduct.StaticInitialize();
-					adminTemplate.concreteActivationProduct.StaticInitialize();
-					adminTemplate.hithermProduct.StaticInitialize();
-					adminTemplate.hithermCompactProduct.StaticInitialize();
-					adminTemplate.hithermCompactRoofProduct.StaticInitialize();
-					adminTemplate.modulKlimaBodenProduct.StaticInitialize();
-					adminTemplate.modulKlimaDeckeProduct.StaticInitialize();
+					EurovalProduct.StaticInitialize();
+					EcothermProduct.StaticInitialize();
+					ConcreteActivationProduct.StaticInitialize();
+					HithermProduct.StaticInitialize();
+					HithermCompactProduct.StaticInitialize();
+					HithermCompactRoofProduct.StaticInitialize();
+					ModulKlimaBodenProduct.StaticInitialize();
+					ModulKlimaDeckeProduct.StaticInitialize();
 
 				}
 				return adminTemplate;
@@ -533,7 +533,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		[XmlIgnore]
+		/*[XmlIgnore]
 		public EurovalProduct EurovalProduct {
 			get { return eurovalProduct; }
 			set { eurovalProduct = value; }
@@ -579,25 +579,33 @@ namespace Europlan.Common {
 		public ModulKlimaDeckeProduct ModulKlimaDeckeProduct {
 			get { return modulKlimaDeckeProduct; }
 			set { modulKlimaDeckeProduct = value; }
-		}
+		}*/
 
 		public P GetProduct<P>() where P : Product {
 			if (typeof(P) == typeof(EurovalProduct)) {
-				return this.EurovalProduct as P;
+				return new EurovalProduct() as P;
+				//return this.EurovalProduct as P;
 			} else if (typeof(P) == typeof(EcothermProduct)) {
-				return this.EcothermProduct as P;
+				return new EcothermProduct() as P;
+				//return this.EcothermProduct as P;
 			} else if (typeof(P) == typeof(ConcreteActivationProduct)) {
-				return this.ConcreteActivationProduct as P;
+				return new ConcreteActivationProduct() as P;
+				//return this.ConcreteActivationProduct as P;
 			} else if (typeof(P) == typeof(HithermProduct)) {
-				return this.HithermProduct as P;
+				return new HithermProduct() as P;
+				//return this.HithermProduct as P;
 			} else if (typeof(P) == typeof(HithermCompactProduct)) {
-				return this.HithermCompactProduct as P;
+				return new HithermCompactProduct() as P;
+				//return this.HithermCompactProduct as P;
 			} else if (typeof(P) == typeof(HithermCompactRoofProduct)) {
-				return this.HithermCompactRoofProduct as P;
+				return new HithermCompactRoofProduct() as P;
+				//return this.HithermCompactRoofProduct as P;
 			} else if (typeof(P) == typeof(ModulKlimaBodenProduct)) {
-				return this.ModulKlimaBodenProduct as P;
+				return new ModulKlimaBodenProduct() as P;
+				//return this.ModulKlimaBodenProduct as P;
 			} else if (typeof(P) == typeof(ModulKlimaDeckeProduct)) {
-				return this.ModulKlimaDeckeProduct as P;
+				return new ModulKlimaDeckeProduct() as P;
+				//return this.ModulKlimaDeckeProduct as P;
 			} else {
 				log.Warn("unknown product");
 			}
@@ -675,29 +683,31 @@ namespace Europlan.Common {
 				foreach (Type t in types) {
 					if (typeof(Product).IsAssignableFrom(t)) {
 						foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.GetProperty)) {
-							object value = info.GetValue(null, null);
-							string valueStr = null;
-							if (value.GetType() == typeof(int)) {
-								int i = (int)value;
-								valueStr = i.ToString(CultureInfo.InvariantCulture.NumberFormat);
-							} else if (value.GetType() == typeof(double)) {
-								double d = (double)value;
-								valueStr = d.ToString(CultureInfo.InvariantCulture.NumberFormat);
-							} else if (value.GetType() == typeof(float)) {
-								float f = (float)value;
-								valueStr = f.ToString(CultureInfo.InvariantCulture.NumberFormat);
-							} else if (value.GetType() == typeof(string)) {
-								valueStr = (string)value;
-							} else if (value.GetType() == typeof(bool)) {
-								bool b = (bool)value;
-								valueStr = b.ToString(CultureInfo.InvariantCulture.NumberFormat);
-							} else if (value.GetType().IsSubclassOf(typeof(Enum))) {
-								valueStr = Enum.GetName(value.GetType(), value);
-							} else {
-								log.Warn("Error when trying to get Product Configuration: Unknown type");
-								continue;
+							if (info.GetCustomAttributes(typeof(ProductParameterAttribute), false).Length > 0) {
+								object value = info.GetValue(null, null);
+								string valueStr = null;
+								if (value.GetType() == typeof(int)) {
+									int i = (int)value;
+									valueStr = i.ToString(CultureInfo.InvariantCulture.NumberFormat);
+								} else if (value.GetType() == typeof(double)) {
+									double d = (double)value;
+									valueStr = d.ToString(CultureInfo.InvariantCulture.NumberFormat);
+								} else if (value.GetType() == typeof(float)) {
+									float f = (float)value;
+									valueStr = f.ToString(CultureInfo.InvariantCulture.NumberFormat);
+								} else if (value.GetType() == typeof(string)) {
+									valueStr = (string)value;
+								} else if (value.GetType() == typeof(bool)) {
+									bool b = (bool)value;
+									valueStr = b.ToString(CultureInfo.InvariantCulture.NumberFormat);
+								} else if (value.GetType().IsSubclassOf(typeof(Enum))) {
+									valueStr = Enum.GetName(value.GetType(), value);
+								} else {
+									log.Warn("Error when trying to get Product Configuration: Unknown type");
+									continue;
+								}
+								this.AddProductParameter(t, info.Name, valueStr);
 							}
-							this.AddProductParameter(t, info.Name, valueStr);
 						}
 					}
 				}

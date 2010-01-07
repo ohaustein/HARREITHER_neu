@@ -14,9 +14,13 @@ namespace Europlan.Licensing {
 		public LicensedModuleTemplate(string name, bool enabled) : base(name, enabled) {
 		}
 
+		public LicensedModuleTemplate(string name, string displayName, bool enabled) : base(name, displayName, enabled) {
+		}
+
 		public LicensedModule CreateModule() {
 			LicensedModule module = new LicensedModule();
-			module.Name = this.name; ;
+			module.Name = this.name;
+			module.DisplayName = this.displayName;
 			module.Enabled = this.enabled;
 			return module;
 		}
