@@ -869,7 +869,6 @@ namespace Europlan.Common {
 				}
 
 			}
-
 			
 			// Ovalmuffen
 			double amount = teilflaechen;
