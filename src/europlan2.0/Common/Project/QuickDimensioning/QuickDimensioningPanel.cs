@@ -26,6 +26,43 @@ namespace Europlan.Common {
 
 		public QuickDimensioningPanel() {
 			InitializeComponent();
+			Licensing.License license = Licensing.LicenseManager.Instance.License;
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
+				this.tableLayoutPanel1.Controls.Remove(this.lblEuroval);
+				this.tableLayoutPanel1.Controls.Remove(this.cbEurovalCool);
+				this.tableLayoutPanel1.Controls.Remove(this.cbEurovalHeat);
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
+				// ecotherm will be added to quickdimensioning when requested
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
+				this.tableLayoutPanel1.Controls.Remove(this.lblHitherm);
+				this.tableLayoutPanel1.Controls.Remove(this.cbHithermCool);
+				this.tableLayoutPanel1.Controls.Remove(this.cbHithermHeat);
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHithermCompact)) {
+				this.tableLayoutPanel1.Controls.Remove(this.lblHithermCompact);
+				this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactCool);
+				this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactHeat);
+				this.tableLayoutPanel1.Controls.Remove(this.lblHithermCompactRoof);
+				this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactRoofCool);
+				this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactRoofHeat);
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden)) {
+				this.tableLayoutPanel1.Controls.Remove(this.lblModulKlimaBoden);
+				this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaBodenCool);
+				this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaBodenHeat);
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke)) {
+				this.tableLayoutPanel1.Controls.Remove(this.lblModulKlimaDecke);
+				this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaDeckeCool);
+				this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaDeckeHeat);
+			}
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdConcreteActivation)) {
+				this.tableLayoutPanel1.Controls.Remove(this.lblBka);
+				this.tableLayoutPanel1.Controls.Remove(this.cbBkaCool);
+				this.tableLayoutPanel1.Controls.Remove(this.cbBkaHeat);
+			}
 		}
 
 		public void UpdateControl() {

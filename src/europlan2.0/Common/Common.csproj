@@ -131,6 +131,7 @@
     <Compile Include="Licensing\LicensedModule.cs" />
     <Compile Include="Licensing\LicensedSystem.cs" />
     <Compile Include="Licensing\LicenseManager.cs" />
+    <Compile Include="Licensing\ProductNotLicensedException.cs" />
     <Compile Include="MapiMailMessage.cs" />
     <Compile Include="Products\Circuit.cs" />
     <Compile Include="Products\ConnectionPipePanel.cs">
@@ -446,11 +447,11 @@
       <DependentUpon>ConnectionPipesForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-   <EmbeddedResource Include="Products\PlannedEcothermProductPanel.resx">
+    <EmbeddedResource Include="Products\PlannedEcothermProductPanel.resx">
       <DependentUpon>PlannedEcothermProductPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-   <EmbeddedResource Include="Products\PlannedHithermCompactProductPanel.resx">
+    <EmbeddedResource Include="Products\PlannedHithermCompactProductPanel.resx">
       <DependentUpon>PlannedHithermCompactProductPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

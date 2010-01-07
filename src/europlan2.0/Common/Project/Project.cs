@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Drawing;
 using System.ComponentModel;
+using Europlan.Licensing;
 
 namespace Europlan.Common {
 
@@ -274,8 +275,11 @@ namespace Europlan.Common {
 			lock (padlock) {
 				XmlSerializer s = new XmlSerializer(typeof(Project));
 				Stream r = new FileStream(filename, FileMode.Open);
-				instance = (Project)s.Deserialize(r);
-				r.Close();
+				try {
+					instance = (Project)s.Deserialize(r);
+				} finally {
+					r.Close();
+				}
 				//instance.configuration = (Configuration.AdminTemplate + Configuration.UserTemplate) + instance.configuration;
 				instance.configuration = Configuration.UserTemplate + instance.configuration;
 				instance.configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;

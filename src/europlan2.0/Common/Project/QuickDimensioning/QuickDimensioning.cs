@@ -150,25 +150,25 @@ namespace Europlan.Common {
 		public List<string> GetPlannedProducts() {
 			List<string> productOrder = new List<string>();
 			if (eurovalCheckState != ProductCheckState.None) {
-				productOrder.Add(Project.Instance.Config.EurovalProduct.QuickDimensioningName);
+				productOrder.Add(EurovalProduct.QuickDimensioningNameStatic);
 			}
 			if (concreteActivationCheckState != ProductCheckState.None) {
-				productOrder.Add(Project.Instance.Config.ConcreteActivationProduct.QuickDimensioningName);
+				productOrder.Add(ConcreteActivationProduct.QuickDimensioningNameStatic);
 			}
 			if (hithermCheckState != ProductCheckState.None) {
-				productOrder.Add(Project.Instance.Config.HithermProduct.QuickDimensioningName);
+				productOrder.Add(HithermProduct.QuickDimensioningNameStatic);
 			}
 			if (hithermCompactCheckState != ProductCheckState.None) {
-				productOrder.Add(Project.Instance.Config.HithermCompactProduct.QuickDimensioningName);
+				productOrder.Add(HithermCompactProduct.QuickDimensioningNameStatic);
 			}
 			if (hithermCompactRoofCheckState != ProductCheckState.None) {
-				productOrder.Add(Project.Instance.Config.HithermCompactRoofProduct.QuickDimensioningName);
+				productOrder.Add(HithermCompactRoofProduct.QuickDimensioningNameStatic);
 			}
 			if (modulBodenCheckState != ProductCheckState.None) {
-				productOrder.Add(Project.Instance.Config.ModulKlimaBodenProduct.QuickDimensioningName);
+				productOrder.Add(ModulKlimaBodenProduct.QuickDimensioningNameStatic);
 			}
 			if (modulDeckeCheckState != ProductCheckState.None) {
-				productOrder.Add(Project.Instance.Config.ModulKlimaDeckeProduct.QuickDimensioningName);
+				productOrder.Add(ModulKlimaDeckeProduct.QuickDimensioningNameStatic);
 			}
 			return productOrder;
 		}

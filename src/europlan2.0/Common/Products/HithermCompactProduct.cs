@@ -143,7 +143,7 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public override void StaticInitialize() {
+		public static void StaticInitialize() {
 			quickDimensioningHeatPowerPerSquareMeter = 100;
 			quickDimensioningCoolPowerPerSquareMeter = 100;
 			canHeat = true;
@@ -496,6 +496,10 @@ namespace Europlan.Common {
 		}
 
 		public override string QuickDimensioningName {
+			get { return QuickDimensioningNameStatic; }
+		}
+
+		public static string QuickDimensioningNameStatic {
 			get { return "Hitherm®\nCompact\n(m²)"; }
 		}
 

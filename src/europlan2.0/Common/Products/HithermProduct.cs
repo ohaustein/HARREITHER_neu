@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Globalization;
 using System.Windows.Forms;
+using Europlan.Licensing;
 
 namespace Europlan.Common {
 
@@ -90,7 +91,9 @@ namespace Europlan.Common {
 		private float plannedFloorOrCeilingArea = 0;
 
 		public HithermProduct() {
-
+			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
+				throw new ProductNotLicensedException(this.GetType());
+			}
 		}
 
 		protected HithermProduct(HithermProduct product) : base(product) {
@@ -100,7 +103,7 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public override void StaticInitialize() {
+		public static void StaticInitialize() {
 			quickDimensioningHeatPowerPerSquareMeter = 100;
 			quickDimensioningCoolPowerPerSquareMeter = 100;
 			canHeat = true;
@@ -395,6 +398,10 @@ namespace Europlan.Common {
 		}
 
 		public override string QuickDimensioningName {
+			get { return QuickDimensioningNameStatic; }
+		}
+
+		public static string QuickDimensioningNameStatic {
 			get { return "Hitherm®\n(m²)"; }
 		}
 

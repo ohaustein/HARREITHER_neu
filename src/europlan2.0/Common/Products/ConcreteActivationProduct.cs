@@ -24,8 +24,8 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public override void StaticInitialize() {
-			base.StaticInitialize();
+		public new static void StaticInitialize() {
+			//base.StaticInitialize();
 			quickDimensioningHeatPowerPerSquareMeter = 80;
 			quickDimensioningCoolPowerPerSquareMeter = 80;
 			canHeat = true;
@@ -77,6 +77,10 @@ namespace Europlan.Common {
 		#endregion Product Parameters
 
 		public override string QuickDimensioningName {
+			get { return QuickDimensioningNameStatic; }
+		}
+
+		public static string QuickDimensioningNameStatic {
 			get { return "BKA\n(m²)"; }
 		}
 
