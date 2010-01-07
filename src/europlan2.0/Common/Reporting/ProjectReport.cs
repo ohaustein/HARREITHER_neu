@@ -1078,10 +1078,10 @@ namespace Europlan.Common {
 								}
 							}
 							foreach (ConnectionPipe pipe in p.PlannedConnectionPipes) {
-								if (connectingAreaPerLayDistance.ContainsKey(ConnectionPipe.GetLayDistance(pipe.Verlegeart))) {
-									connectingAreaPerLayDistance[ConnectionPipe.GetLayDistance(pipe.Verlegeart)] += pipe.AreaTotal;
+								if (connectingAreaPerLayDistance.ContainsKey(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart))) {
+									connectingAreaPerLayDistance[ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart)] += pipe.AreaTotal;
 								} else {
-									connectingAreaPerLayDistance.Add(ConnectionPipe.GetLayDistance(pipe.Verlegeart), pipe.AreaTotal);
+									connectingAreaPerLayDistance.Add(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart), pipe.AreaTotal);
 								}
 							}
 						}
