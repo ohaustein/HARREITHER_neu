@@ -932,6 +932,11 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public abstract double WasserInhalt {
+			get;
+		}
+
+		[XmlIgnore]
 		public abstract Construction PlannedOutsideConstruction {
 			get;
 		}

@@ -964,6 +964,13 @@ namespace Europlan.Common {
 				return area;
 			}
 		}
+
+		[XmlIgnore]
+		public override double WasserInhalt {
+			get {
+				return 0;
+			}
+		}
 	}
 	
 }

@@ -848,6 +848,13 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public override double WasserInhalt {
+			get {
+				return 0;
+			}
+		}
+
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 
 			// Modul
