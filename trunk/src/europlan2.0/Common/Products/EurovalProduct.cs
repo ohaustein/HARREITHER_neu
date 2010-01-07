@@ -1756,6 +1756,13 @@ namespace Europlan.Common {
 			return null;
 		}
 
+		[XmlIgnore]
+		public override double WasserInhalt {
+			get { 
+				return 0;
+			}
+		}
+
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 			
 			double connectionPipeArea = 0;

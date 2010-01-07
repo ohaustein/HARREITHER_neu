@@ -732,6 +732,13 @@ namespace Europlan.Common {
 			get { return this.plannedInsulationConstruction; }
 		}
 
+		[XmlIgnore]
+		public override double WasserInhalt {
+			get {
+				return 0;
+			}
+		}
+
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 
 			// Euroval Anbindung
