@@ -1069,7 +1069,34 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override double WasserInhalt {
 			get {
-				return 0;
+				// Euroval Anbindung
+				// 21mm Anbindung
+				double pipeEurovalLength = 0;
+				double pipe21mmLength = 0;
+				foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
+					if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+						if (pipe.OnlyFirst) {
+							pipe21mmLength += (pipe.Vorlauf + pipe.Ruecklauf);
+						} else {
+							pipe21mmLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+						}
+					} else {
+						if (pipe.OnlyFirst) {
+							pipeEurovalLength += (pipe.Vorlauf + pipe.Ruecklauf);
+						} else {
+							pipeEurovalLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+						}
+					}
+				}
+
+				double wasserInhalt = 0;
+				foreach (HithermCompactCircuit c in this.circuits) {
+					foreach (HithermCompactRegister register in c.Registers) {
+						wasserInhalt += register.WasserInhalt;
+					}
+				}
+
+				return wasserInhalt + (pipeEurovalLength * EurovalProduct.rohrInnenA * 1000) + (pipe21mmLength * Product.rundrohr21mmInnenA * 1000);
 			}
 		}
 	}

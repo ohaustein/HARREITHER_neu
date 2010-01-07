@@ -1755,7 +1755,11 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override double WasserInhalt {
 			get {
-				return 0;
+				double length = 0;
+				foreach (EcothermCircuit c in this.circuits) {
+					length += c.PipeLengthWithoutOtherProduct;
+				}
+				return rohrInnenA * length * 1000;
 			}
 		}
 
