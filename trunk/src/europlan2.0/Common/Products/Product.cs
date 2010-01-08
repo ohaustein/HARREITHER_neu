@@ -20,6 +20,30 @@ namespace Europlan.Common {
 		public static readonly double rundrohr21mmInnenD = 0.0162;
 		public static readonly double rundrohr21mmInnenA = (rundrohr21mmInnenD / 2) * (rundrohr21mmInnenD / 2) * Math.PI;
 
+		private static double alphaDecke = 6.5;
+		private static double alphaBoden = 10.8;
+		private static double alphaWand = 8.0;
+
+		#region Product Parameters
+		[ProductParameter]
+		public static double ConfigAlphaDecke {
+			get { return alphaDecke; }
+			set { alphaDecke = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaBoden {
+			get { return alphaBoden; }
+			set { alphaBoden = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaWand {
+			get { return alphaWand; }
+			set { alphaWand = value; }
+		}
+		#endregion Product Parameters
+
 		public class ProductTypeEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string dh = "Decke";
 			private static readonly string fbh = "Boden";
