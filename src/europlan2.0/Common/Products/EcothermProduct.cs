@@ -197,6 +197,8 @@ namespace Europlan.Common {
 			spreizungHeizMax = 12;
 			spreizungKühlMin = 2;
 			spreizungKühlMax = 5;
+			su0 = 0.045;
+			su = 0.035;
 		}
 
 		public override Product Clone(Room room) {

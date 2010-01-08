@@ -27,42 +27,87 @@ namespace Europlan.Common {
 		public QuickDimensioningPanel() {
 			InitializeComponent();
 			Licensing.License license = Licensing.LicenseManager.Instance.License;
-			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
-				this.tableLayoutPanel1.Controls.Remove(this.lblEuroval);
-				this.tableLayoutPanel1.Controls.Remove(this.cbEurovalCool);
-				this.tableLayoutPanel1.Controls.Remove(this.cbEurovalHeat);
+			/*this.tableLayoutPanel1.Controls.Remove(this.lblEuroval);
+			this.tableLayoutPanel1.Controls.Remove(this.cbEurovalCool);
+			this.tableLayoutPanel1.Controls.Remove(this.cbEurovalHeat);
+			this.tableLayoutPanel1.Controls.Remove(this.lblHitherm);
+			this.tableLayoutPanel1.Controls.Remove(this.cbHithermCool);
+			this.tableLayoutPanel1.Controls.Remove(this.cbHithermHeat);
+			this.tableLayoutPanel1.Controls.Remove(this.lblHithermCompact);
+			this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactCool);
+			this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactHeat);
+			this.tableLayoutPanel1.Controls.Remove(this.lblHithermCompactRoof);
+			this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactRoofCool);
+			this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactRoofHeat);
+			this.tableLayoutPanel1.Controls.Remove(this.lblModulKlimaBoden);
+			this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaBodenCool);
+			this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaBodenHeat);
+			this.tableLayoutPanel1.Controls.Remove(this.lblModulKlimaDecke);
+			this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaDeckeCool);
+			this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaDeckeHeat);
+			this.tableLayoutPanel1.Controls.Remove(this.lblBka);
+			this.tableLayoutPanel1.Controls.Remove(this.cbBkaCool);
+			this.tableLayoutPanel1.Controls.Remove(this.cbBkaHeat);*/
+			this.tableLayoutPanel1.Controls.Clear();
+
+			this.tableLayoutPanel1.Controls.Add(this.lblHeat, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.lblCool, 2, 0);
+
+			int i = 1;
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
+				this.tableLayoutPanel1.Controls.Add(this.lblEuroval, 0, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbEurovalHeat, 1, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbEurovalCool, 2, i);
+				this.tableLayoutPanel1.Controls.Add(this.lblDistance, 3, i);
+				this.tableLayoutPanel1.Controls.Add(this.cmbDistance, 4, i);
+				i++;
 			}
-			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdConcreteActivation)) {
+				this.tableLayoutPanel1.Controls.Add(this.lblBka, 0, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbBkaHeat, 1, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbBkaCool, 2, i);
+				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
+					this.tableLayoutPanel1.Controls.Add(this.lblDistance, 3, i);
+					this.tableLayoutPanel1.Controls.Add(this.cmbDistance, 4, i);
+				}
+				i++;
+			}
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
 				// ecotherm will be added to quickdimensioning when requested
 			}
-			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
-				this.tableLayoutPanel1.Controls.Remove(this.lblHitherm);
-				this.tableLayoutPanel1.Controls.Remove(this.cbHithermCool);
-				this.tableLayoutPanel1.Controls.Remove(this.cbHithermHeat);
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
+				this.tableLayoutPanel1.Controls.Add(this.lblHitherm, 0, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbHithermHeat, 1, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbHithermCool, 2, i);
+				i++;
 			}
-			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHithermCompact)) {
-				this.tableLayoutPanel1.Controls.Remove(this.lblHithermCompact);
-				this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactCool);
-				this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactHeat);
-				this.tableLayoutPanel1.Controls.Remove(this.lblHithermCompactRoof);
-				this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactRoofCool);
-				this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactRoofHeat);
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHithermCompact)) {
+				this.tableLayoutPanel1.Controls.Add(this.lblHithermCompact, 0, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbHithermCompactHeat, 1, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbHithermCompactCool, 2, i);
+				i++;
+				this.tableLayoutPanel1.Controls.Add(this.lblHithermCompactRoof, 0, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbHithermCompactRoofHeat, 1, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbHithermCompactRoofCool, 2, i);
+				i++;
 			}
-			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden)) {
-				this.tableLayoutPanel1.Controls.Remove(this.lblModulKlimaBoden);
-				this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaBodenCool);
-				this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaBodenHeat);
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden)) {
+				this.tableLayoutPanel1.Controls.Add(this.lblModulKlimaBoden, 0, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbModulKlimaBodenHeat, 1, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbModulKlimaBodenCool, 2, i);
+				i++;
 			}
-			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke)) {
-				this.tableLayoutPanel1.Controls.Remove(this.lblModulKlimaDecke);
-				this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaDeckeCool);
-				this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaDeckeHeat);
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke)) {
+				this.tableLayoutPanel1.Controls.Add(this.lblModulKlimaDecke, 0, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbModulKlimaDeckeHeat, 1, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbModulKlimaDeckeCool, 2, i);
+				this.tableLayoutPanel1.Controls.Add(this.lblAllocation, 3, i);
+				this.tableLayoutPanel1.Controls.Add(this.txtAllocation, 4, i);
+				this.tableLayoutPanel1.Controls.Add(this.lblAllocation2, 5, i);
+				i++;
 			}
-			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdConcreteActivation)) {
-				this.tableLayoutPanel1.Controls.Remove(this.lblBka);
-				this.tableLayoutPanel1.Controls.Remove(this.cbBkaCool);
-				this.tableLayoutPanel1.Controls.Remove(this.cbBkaHeat);
-			}
+			i++;
+			this.tableLayoutPanel1.Controls.Add(this.btnRevert, 0, i);
 		}
 
 		public void UpdateControl() {
@@ -318,8 +363,8 @@ namespace Europlan.Common {
 			this.lblTemp1.Visible = this.Heating;
 			this.cmbHeatFlowTemperature.Visible = this.Heating;
 			this.lblTemp2.Visible = this.Heating;
-			this.cmbDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
-			this.lblDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
+			this.cmbDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating  || this.ConcreteActivationCooling;
+			this.lblDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
 			Project.Instance.QuickDimensioning.EurovalCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
 		}
@@ -363,6 +408,8 @@ namespace Europlan.Common {
 			this.lblTemp3.Visible = this.Cooling;
 			this.lblTemp4.Visible = this.Cooling;
 			this.txtCoolTemperature.Visible = this.Cooling;
+			this.cmbDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
+			this.lblDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
 			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.EurovalCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
@@ -406,8 +453,8 @@ namespace Europlan.Common {
 			this.lblTemp1.Visible = this.Heating;
 			this.cmbHeatFlowTemperature.Visible = this.Heating;
 			this.lblTemp2.Visible = this.Heating;
-			this.cmbDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
-			this.lblDistance.Visible = this.EurovalHeating || this.ConcreteActivationHeating;
+			this.cmbDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
+			this.lblDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
 			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.ConcreteActivationHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ConcreteActivationCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
@@ -451,6 +498,8 @@ namespace Europlan.Common {
 			this.lblTemp3.Visible = this.Cooling;
 			this.lblTemp4.Visible = this.Cooling;
 			this.txtCoolTemperature.Visible = this.Cooling;
+			this.cmbDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
+			this.lblDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
 			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.ConcreteActivationHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ConcreteActivationCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
@@ -1158,6 +1207,10 @@ namespace Europlan.Common {
 
 		private void quickDimensioningDistributorsSummary_ProjectChanged(object sender) {
 			this.OnProjectChanged();
+		}
+
+		private void lblDistance_Click(object sender, EventArgs e) {
+
 		}
 
 	}

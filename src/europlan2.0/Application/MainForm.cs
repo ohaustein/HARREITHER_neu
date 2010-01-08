@@ -159,12 +159,22 @@ namespace Europlan.Application {
 
 			Project.Instance.InitializeTreeView(this.projectTree);
 
+			bool restart = false;
 			if (!LicenseManager.Instance.LicenseFoundAndValid) {
 				LicenseForm license = new LicenseForm();
 				license.ShowDialog();
+				restart = license.RestartRequired;
+				if (restart) {
+					string message = resources.GetString("RestartMessage", Thread.CurrentThread.CurrentUICulture);
+					string caption = resources.GetString("RestartCaption", Thread.CurrentThread.CurrentUICulture);
+					MessageBox.Show(message, caption, MessageBoxButtons.OK);
+					System.Windows.Forms.Application.Restart();
+				}
 				license.Dispose();
 			}
-			this.updateController.CheckForUpdateAsync();
+			if (!restart) {
+				this.updateController.CheckForUpdateAsync();
+			}
 		}
 
 		private void AddRecentProject(string fileName) {
@@ -413,6 +423,12 @@ namespace Europlan.Application {
 		private void licenseToolStripMenuItem_Click(object sender, EventArgs e) {
 			LicenseForm license = new LicenseForm();
 			license.ShowDialog();
+			if (license.RestartRequired) {
+				string message = resources.GetString("RestartMessage", Thread.CurrentThread.CurrentUICulture);
+				string caption = resources.GetString("RestartCaption", Thread.CurrentThread.CurrentUICulture);
+				MessageBox.Show(message, caption, MessageBoxButtons.OK);
+				System.Windows.Forms.Application.Restart();
+			}
 			license.Dispose();
 		}
 

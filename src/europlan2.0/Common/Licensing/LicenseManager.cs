@@ -71,8 +71,8 @@ namespace Europlan.Licensing {
 		public ImportLicenseResultEnum ImportLicense(string filename) {
 			if (File.Exists(filename)) {
 				bool copied = false;
+				License newLicense;
 				try {
-					License newLicense;
 					using (Stream s = new FileStream(filename, FileMode.Open)) {
 						newLicense = License.LoadLicense(s);
 					}
@@ -87,7 +87,6 @@ namespace Europlan.Licensing {
 							return ImportLicenseResultEnum.LICENSE_NOT_VALID;
 						}
 					}
-					this.license = newLicense;
 					try {
 						File.Copy(filename, Path.Combine(this.dataDirPath, licenseFileName), true);
 						copied = true;
@@ -98,8 +97,9 @@ namespace Europlan.Licensing {
 					log.Error("Cannot read license file", e);
 					return ImportLicenseResultEnum.LICENSE_NOT_READABLE;
 				}
-				this.OnLicenseChanged();
 				if (copied) {
+					this.license = newLicense;
+					this.OnLicenseChanged();
 					return ImportLicenseResultEnum.LICENSE_IMPORTED;
 				} else {
 					return ImportLicenseResultEnum.LICENSE_TEMPORARY_IMPORTED;

@@ -16,10 +16,17 @@ namespace Europlan.Application {
 		private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LicenseForm));
 
 		private int fullHeight;
+		private bool restartRequired = false;
 
 		public LicenseForm() {
 			InitializeComponent();
 			this.fullHeight = this.Height;
+		}
+
+		public bool RestartRequired {
+			get {
+				return restartRequired;
+			}
 		}
 
 		private void LicenseForm_Load(object sender, EventArgs e) {
@@ -89,6 +96,7 @@ namespace Europlan.Application {
 				ImportLicenseResultEnum importResult = LicenseManager.Instance.ImportLicense(dialog.FileName);
 				if (importResult == ImportLicenseResultEnum.LICENSE_IMPORTED) {
 					MessageBox.Show(resources.GetString("LicenseImportedMessage", Thread.CurrentThread.CurrentUICulture), resources.GetString("LicenseImportOkTitle", Thread.CurrentThread.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Information);
+					this.restartRequired = true;
 					this.Close();
 					//this.UpdateLicenseInfo();
 				} else if (importResult == ImportLicenseResultEnum.LICENSE_TEMPORARY_IMPORTED) {
