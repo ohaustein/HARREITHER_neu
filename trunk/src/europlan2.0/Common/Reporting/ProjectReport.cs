@@ -994,6 +994,7 @@ namespace Europlan.Common {
 								} else {
 									wrapperHeatList.Add(wrapperHeat);
 
+									EurovalWrapper prevWrapper = null;
 									foreach (EurovalCircuit ec in ep.PlannedCircuits) {
 										EurovalWrapper wrapper = new EurovalWrapper(wrapperHeat);
 										wrapper.UsedAsCircuitWrapper = true;
@@ -1011,7 +1012,27 @@ namespace Europlan.Common {
 										wrapper.DruckverlustVerteiler = ec.C_DruckverlustDistributorHeat;
 										wrapper.V = ec.C_FlussGeschwindigkeitHeat;
 
-										wrapperHeatList.Add(wrapper);
+										if (prevWrapper == null) {
+											prevWrapper = wrapper;
+											wrapperHeatList.Add(wrapper);
+										} else {
+											bool ok = true;
+											ok = ok && prevWrapper.LengthRzAz == wrapper.LengthRzAz;
+											ok = ok && prevWrapper.LengthConnection == wrapper.LengthConnection;
+											ok = ok && prevWrapper.LengthCircuitFbh == wrapper.LengthCircuitFbh;
+											ok = ok && prevWrapper.LengthCircuitAll == wrapper.LengthCircuitAll;
+											ok = ok && prevWrapper.Wassermenge == wrapper.Wassermenge;
+											ok = ok && prevWrapper.DruckverlustRohr == wrapper.DruckverlustRohr;
+											ok = ok && prevWrapper.DruckverlustVerteiler == wrapper.DruckverlustVerteiler;
+											ok = ok && prevWrapper.V == wrapper.V;
+
+											if (ok) {
+												prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
+											} else {
+												prevWrapper = wrapper;
+												wrapperHeatList.Add(wrapper);
+											}
+										}
 									}
 								}
 							}
@@ -1021,6 +1042,7 @@ namespace Europlan.Common {
 								} else {
 									wrapperCoolList.Add(wrapperCool);
 
+									EurovalWrapper prevWrapper = null;
 									foreach (EurovalCircuit ec in ep.PlannedCircuits) {
 										EurovalWrapper wrapper = new EurovalWrapper(wrapperCool);
 										wrapper.UsedAsCircuitWrapper = true;
@@ -1038,7 +1060,28 @@ namespace Europlan.Common {
 										wrapper.DruckverlustVerteiler = ec.C_DruckverlustDistributorCool;
 										wrapper.V = ec.C_FlussGeschwindigkeitCool;
 
-										wrapperCoolList.Add(wrapper);
+										if (prevWrapper == null) {
+											prevWrapper = wrapper;
+											wrapperCoolList.Add(wrapper);
+										} else {
+											bool ok = true;
+											ok = ok && prevWrapper.LengthRzAz == wrapper.LengthRzAz;
+											ok = ok && prevWrapper.LengthConnection == wrapper.LengthConnection;
+											ok = ok && prevWrapper.LengthCircuitFbh == wrapper.LengthCircuitFbh;
+											ok = ok && prevWrapper.LengthCircuitAll == wrapper.LengthCircuitAll;
+											ok = ok && prevWrapper.Wassermenge == wrapper.Wassermenge;
+											ok = ok && prevWrapper.DruckverlustRohr == wrapper.DruckverlustRohr;
+											ok = ok && prevWrapper.DruckverlustVerteiler == wrapper.DruckverlustVerteiler;
+											ok = ok && prevWrapper.V == wrapper.V;
+
+											if (ok) {
+												prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
+											} else {
+												prevWrapper = wrapper;
+												wrapperCoolList.Add(wrapper);
+											}
+										}
+
 									}
 								}
 							}
