@@ -1152,6 +1152,7 @@ namespace Europlan.Common {
 		public List<VerlegedatenCircuitWrapper> GetVerlegedatenCircuitWrapper() {
 			List<VerlegedatenCircuitWrapper> wrapperList = new List<VerlegedatenCircuitWrapper>();
 			VerlegedatenCircuitWrapper wrapper = null;
+			Dictionary<string, int> circuitCount = new Dictionary<string, int>();
 
 			int count = 1;
 
@@ -1191,7 +1192,10 @@ namespace Europlan.Common {
 								}
 
 								wrapper.Area += pp.PlannedArea + "m²";
-								wrapper.CircuitNumber = count++;
+								if (!circuitCount.ContainsKey(connection.Distributor.Id)) {
+									circuitCount.Add(connection.Distributor.Id, 1);							
+								} 
+								wrapper.CircuitNumber = circuitCount[connection.Distributor.Id]++;	
 								if (pp.Product.ConnectedCircuits.ContainsKey(c.NrOfCircuit)) {
 									Circuit.CircuitConnection con = pp.Product.ConnectedCircuits[c.NrOfCircuit];
 									Product otherProduct = con.OtherProduct;
