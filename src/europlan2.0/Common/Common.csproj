@@ -239,6 +239,7 @@
     <Compile Include="Project\Wrapper\FloorOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\OpenLoadForRoomWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\Euroval\EurovalAreaOverviewWrapper.cs" />
+    <Compile Include="Project\Wrapper\Products\HithermCompact\HithermCompactOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\Hitherm\HithermOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\ProjectWarningWrapper.cs" />
     <Compile Include="Project\Wrapper\BilanzWrapper.cs" />
@@ -630,9 +631,6 @@
     <Content Include="Reporting\QuickDimensioning.lst">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Project\Wrapper\Products\HithermCompact\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
