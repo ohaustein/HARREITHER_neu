@@ -25,11 +25,11 @@ namespace Europlan.Common {
 		}
 
 		public new static void StaticInitialize() {
-			//base.StaticInitialize();
-			quickDimensioningHeatPowerPerSquareMeter = 80;
-			quickDimensioningCoolPowerPerSquareMeter = 80;
-			canHeat = true;
-			canCool = true;
+			Configuration userConfig = Configuration.UserTemplate;
+			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<ConcreteActivationProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 80);
+			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<ConcreteActivationProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 80);
+			canHeat = userConfig.GetProductParameterAsBool<ConcreteActivationProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = userConfig.GetProductParameterAsBool<ConcreteActivationProduct>("ConfigQuickDimensioningCanCool", true);
 		}
 
 		public override Product Clone(Room room) {

@@ -42,8 +42,8 @@ namespace Europlan.Common {
 		private static int maxModulesInCircuit = 40;
 		private static double spreizungHeizMin = 4;
 		private static double spreizungHeizMax = 12;
-		private static double spreizungKühlMin = 2;
-		private static double spreizungKühlMax = 5;
+		private static double spreizungKuehlMin = 2;
+		private static double spreizungKuehlMax = 5;
 
 		private Nullable<int> requestedCircuits = null;
 		private int requestedModulesDicht = 0;
@@ -62,19 +62,20 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public static void StaticInitialize() {
-			quickDimensioningHeatPowerPerSquareMeter = 50;
-			quickDimensioningCoolPowerPerSquareMeter = 50;
-			canHeat = true;
-			canCool = false;
-			useHarreitherNorm = true;
-			maxPressureLost = 15000;
-			maxDurchfluss = 240;
-			maxModulesInCircuit = 40;
-			spreizungHeizMin = 4;
-			spreizungHeizMax = 12;
-			spreizungKühlMin = 2;
-			spreizungKühlMax = 5;
+		public new static void StaticInitialize() {
+			Configuration userConfig = Configuration.UserTemplate;
+			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
+			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
+			canHeat = userConfig.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = userConfig.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigQuickDimensioningCanCool", false);
+			useHarreitherNorm = userConfig.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm", true);
+			maxPressureLost = userConfig.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = userConfig.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigMaxDurchfluss", 240);
+			maxModulesInCircuit = userConfig.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigModulesInCircuit", 40);
+			spreizungHeizMin = userConfig.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungHeizMin", 4);
+			spreizungHeizMax = userConfig.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungHeizMax", 12);
+			spreizungKuehlMin = userConfig.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungKuehlMin", 2);
+			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungKuehlMax", 5);
 		}
 
 		public override Product Clone(Room room) {
@@ -229,15 +230,15 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMin {
-			get { return spreizungKühlMin; }
-			set { spreizungKühlMin = value; }
+		public static double ConfigSpreizungKuehlMin {
+			get { return spreizungKuehlMin; }
+			set { spreizungKuehlMin = value; }
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMax {
-			get { return spreizungKühlMax; }
-			set { spreizungKühlMax = value; }
+		public static double ConfigSpreizungKuehlMax {
+			get { return spreizungKuehlMax; }
+			set { spreizungKuehlMax = value; }
 		}
 		#endregion Product Parameters
 
@@ -322,11 +323,11 @@ namespace Europlan.Common {
 			if (spreizungHeat < ModulKlimaBodenProduct.ConfigSpreizungHeizMin) {
 				spreizungHeat = ModulKlimaBodenProduct.ConfigSpreizungHeizMin;
 			}
-			if (spreizungCool > ModulKlimaBodenProduct.ConfigSpreizungKühlMax) {
-				spreizungCool = ModulKlimaBodenProduct.ConfigSpreizungKühlMax;
+			if (spreizungCool > ModulKlimaBodenProduct.ConfigSpreizungKuehlMax) {
+				spreizungCool = ModulKlimaBodenProduct.ConfigSpreizungKuehlMax;
 			}
-			if (spreizungCool < ModulKlimaBodenProduct.ConfigSpreizungKühlMin) {
-				spreizungCool = ModulKlimaBodenProduct.ConfigSpreizungKühlMin;
+			if (spreizungCool < ModulKlimaBodenProduct.ConfigSpreizungKuehlMin) {
+				spreizungCool = ModulKlimaBodenProduct.ConfigSpreizungKuehlMin;
 			}
 			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
 			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
@@ -467,7 +468,7 @@ namespace Europlan.Common {
 					}
 				}
 				// Kühlleistung verringern
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < ModulKlimaBodenProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < ModulKlimaBodenProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad) {
 					this.plannedRuecklaufTempCool += 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
@@ -475,7 +476,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaBodenProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaBodenProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();

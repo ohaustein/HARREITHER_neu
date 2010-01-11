@@ -103,14 +103,15 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public static void StaticInitialize() {
-			quickDimensioningHeatPowerPerSquareMeter = 100;
-			quickDimensioningCoolPowerPerSquareMeter = 100;
-			canHeat = true;
-			canCool = false;
-			usePlus = false;
-			maxPressureLost = 15000;
-			maxDurchfluss = 240;
+		public new static void StaticInitialize() {
+			Configuration userConfig = Configuration.UserTemplate;
+			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
+			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
+			canHeat = userConfig.GetProductParameterAsBool<HithermProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = userConfig.GetProductParameterAsBool<HithermProduct>("ConfigQuickDimensioningCanCool", false);
+			usePlus = userConfig.GetProductParameterAsBool<HithermProduct>("ConfigUsePlus", false);
+			maxPressureLost = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigMaxDurchfluss", 240);
 		}
 
 		public override Product Clone(Room room) {
