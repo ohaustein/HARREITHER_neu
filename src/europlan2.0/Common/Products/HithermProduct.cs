@@ -999,7 +999,7 @@ namespace Europlan.Common {
 				double wasserInhalt = 0;
 				foreach (HithermCircuit c in this.circuits) {
 					foreach (HithermRegister register in c.Registers) {
-						wasserInhalt += register.WasserInhalt;
+						wasserInhalt += register.WasserInhalt * register.RegisterCount;
 					}
 				}
 
