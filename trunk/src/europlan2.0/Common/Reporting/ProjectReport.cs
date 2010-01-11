@@ -76,6 +76,7 @@ namespace Europlan.Common {
 			List<ProjectWarningWrapper> projectWarningWrapper = new List<ProjectWarningWrapper>();
 			List<FloorOverviewWrapper> floorOverviewWrapper = new List<FloorOverviewWrapper>();
 			List<EurovalAreaOverviewWrapper> eurovalOverviewWrapper = new List<EurovalAreaOverviewWrapper>();
+			List<HithermOverviewWrapper> hithermOverviewWrapper = new List<HithermOverviewWrapper>();
 			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = new List<OpenLoadForRoomWrapper>();
 			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = new List<OpenLoadForRoomWrapper>();
 			List<RegulatorCircuitWrapper> regulatorCircuitWrapper = new List<RegulatorCircuitWrapper>();
@@ -94,6 +95,7 @@ namespace Europlan.Common {
 				if (reportOptions.AreaOverview) {
 					floorOverviewWrapper = this.GetFloorOverviewWrapper();
 					eurovalOverviewWrapper = GetEurovalOverviewWrapper();
+					hithermOverviewWrapper = GetHithermOverviewWrapper();
 				}
 
 				openHeatLoadWrapper = this.GetOpenHeatLoadForRoomWrapper();
@@ -125,6 +127,7 @@ namespace Europlan.Common {
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
 			DataTable floorOverwiew = ReportHelper.ListToDataTable<FloorOverviewWrapper>(floorOverviewWrapper);
 			DataTable eurovalOverview = ReportHelper.ListToDataTable<EurovalAreaOverviewWrapper>(eurovalOverviewWrapper);
+			DataTable hithermOverview = ReportHelper.ListToDataTable<HithermOverviewWrapper>(hithermOverviewWrapper);
 			DataTable openHeatLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openHeatLoadWrapper);
 			DataTable openCoolLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openCoolLoadWrapper);
 			DataTable regulatorCircuits = ReportHelper.ListToDataTable<RegulatorCircuitWrapper>(regulatorCircuitWrapper);
@@ -139,6 +142,7 @@ namespace Europlan.Common {
 			projectWarnings.TableName = "ProjectWarnings";
 			floorOverwiew.TableName = "FloorOverview";
 			eurovalOverview.TableName = "EurovalOverview";
+			hithermOverview.TableName = "HithermOverview";
 			openHeatLoad.TableName = "OpenHeatLoad";
 			openCoolLoad.TableName = "OpenCoolLoad";
 			regulatorCircuits.TableName = "RegulatorCircuits";
@@ -153,6 +157,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(projectWarnings);
 			reportData.Tables.Add(floorOverwiew);
 			reportData.Tables.Add(eurovalOverview);
+			reportData.Tables.Add(hithermOverview);
 			reportData.Tables.Add(openHeatLoad);
 			reportData.Tables.Add(openCoolLoad);
 			reportData.Tables.Add(regulatorCircuits);
@@ -1145,6 +1150,63 @@ namespace Europlan.Common {
 					wrapperList.Add(wrapper);
 				}
 			}
+
+			return wrapperList;
+		}
+
+		public List<HithermOverviewWrapper> GetHithermOverviewWrapper() {
+			List<HithermOverviewWrapper> wrapperList = new List<HithermOverviewWrapper>();
+
+			HithermProduct p = null;
+			double ra5Area = 0;
+			double ra10Area = 0;
+			double rohr21Length = 0;
+			double rohr2417Length = 0;
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						if (pp.Product is HithermProduct) {
+							p = pp.Product as HithermProduct;
+							foreach (HithermCircuit c in p.PlannedCircuits) {
+								foreach (HithermRegister register in c.Registers) {
+									if (register.IsHochleistungsRegister) {
+										ra5Area += register.Area;
+									} else {
+										ra10Area += register.Area;
+									}
+									rohr2417Length = register.PipeHorizontal + register.PipeVertical;
+								}
+								rohr21Length += c.PipeLengthVorlaufWithoutOtherProductTotal + c.PipeLengthRuecklaufWithoutOtherProductTotal;
+							}
+						}
+					}
+				}
+			}
+
+			HithermOverviewWrapper wrapper = new HithermOverviewWrapper();
+			wrapper.Text = "Fläche mit Rohrabstand RA5";
+			wrapper.Amount = ra5Area;
+			wrapper.Unit = "m²";
+			wrapperList.Add(wrapper);
+
+			wrapper = new HithermOverviewWrapper();
+			wrapper.Text = "Fläche mit Rohrabstand RA10";
+			wrapper.Amount = ra10Area;
+			wrapper.Unit = "m²";
+			wrapperList.Add(wrapper);
+
+			wrapper = new HithermOverviewWrapper();
+			wrapper.Text = "Rundrohr 21";
+			wrapper.Amount = rohr21Length;
+			wrapper.Unit = "m";
+			wrapperList.Add(wrapper);
+
+			wrapper = new HithermOverviewWrapper();
+			wrapper.Text = "Hitherm Klimawand 24/17";
+			wrapper.Amount = rohr2417Length;
+			wrapper.Unit = "m";
+			wrapperList.Add(wrapper);
 
 			return wrapperList;
 		}
