@@ -96,8 +96,8 @@ namespace Europlan.Common {
 		private static int maxModulesInCircuit = 50;
 		private static double spreizungHeizMin = 4;
 		private static double spreizungHeizMax = 12;
-		private static double spreizungKühlMin = 2;
-		private static double spreizungKühlMax = 5;
+		private static double spreizungKuehlMin = 2;
+		private static double spreizungKuehlMax = 5;
 		private static ModulCeilingConstructionEnum construction = ModulCeilingConstructionEnum.C_PROFIL;
 
 		public ModulKlimaDeckeProduct() {
@@ -111,23 +111,24 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public static void StaticInitialize() {
-			quickDimensioningHeatPowerPerSquareMeter = 80;
-			quickDimensioningCoolPowerPerSquareMeter = 80;
-			canHeat = true;
-			canCool = true;
+		public new static void StaticInitialize() {
+			Configuration userConfig = Configuration.UserTemplate;
+			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 80);
+			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 80);
+			canHeat = userConfig.GetProductParameterAsBool<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = userConfig.GetProductParameterAsBool<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCanCool", true);
 			//useHarreitherNorm = true;
-			maxPressureLost = 15000;
-			maxDurchfluss = 240;
-			maxModulesInRow = 20;
-			maxModulesInParallel = 6;
-			maxModulesInCircuit = 50;
-			leistungsFaktor = 0.77;
-			spreizungHeizMin = 4;
-			spreizungHeizMax = 12;
-			spreizungKühlMin = 2;
-			spreizungKühlMax = 5;
-			construction = ModulCeilingConstructionEnum.C_PROFIL;
+			maxPressureLost = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxDurchfluss", 240);
+			maxModulesInRow = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxModulesInRow", 20);
+			maxModulesInParallel = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxModulesInParallel", 6);
+			maxModulesInCircuit = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigModulesInCircuit", 50);
+			leistungsFaktor = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktor", 0.77);
+			spreizungHeizMin = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungHeizMin", 4);
+			spreizungHeizMax = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungHeizMax", 12);
+			spreizungKuehlMin = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMin", 2);
+			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMax", 5);
+			construction = userConfig.GetProductParameterAsEnum<ModulKlimaDeckeProduct, ModulCeilingConstructionEnum>("ConfigModulCeilingConstruction", ModulCeilingConstructionEnum.C_PROFIL);
 		}
 
 		public override Product Clone(Room room) {
@@ -281,15 +282,15 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMin {
-			get { return spreizungKühlMin; }
-			set { spreizungKühlMin = value; }
+		public static double ConfigSpreizungKuehlMin {
+			get { return spreizungKuehlMin; }
+			set { spreizungKuehlMin = value; }
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMax {
-			get { return spreizungKühlMax; }
-			set { spreizungKühlMax = value; }
+		public static double ConfigSpreizungKuehlMax {
+			get { return spreizungKuehlMax; }
+			set { spreizungKuehlMax = value; }
 		}
 
 		[ProductParameter]
@@ -341,11 +342,11 @@ namespace Europlan.Common {
 			if (spreizungHeat < ModulKlimaDeckeProduct.ConfigSpreizungHeizMin) {
 				spreizungHeat = ModulKlimaDeckeProduct.ConfigSpreizungHeizMin;
 			}
-			if (spreizungCool > ModulKlimaDeckeProduct.ConfigSpreizungKühlMax) {
-				spreizungCool = ModulKlimaDeckeProduct.ConfigSpreizungKühlMax;
+			if (spreizungCool > ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax) {
+				spreizungCool = ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax;
 			}
-			if (spreizungCool < ModulKlimaDeckeProduct.ConfigSpreizungKühlMin) {
-				spreizungCool = ModulKlimaDeckeProduct.ConfigSpreizungKühlMin;
+			if (spreizungCool < ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin) {
+				spreizungCool = ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin;
 			}
 			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
 			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
@@ -441,7 +442,7 @@ namespace Europlan.Common {
 					}
 				}
 				// Kühlleistung verringern
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < ModulKlimaDeckeProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad) {
 					this.plannedRuecklaufTempCool += 0.1;
 					foreach (ModulDeckeCircuit c in this.circuits) {
 						c.Calculate();
@@ -449,7 +450,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaDeckeProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < ModulKlimaDeckeProduct.ConfigMaxDurchfluss) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < ModulKlimaDeckeProduct.ConfigMaxDurchfluss) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (ModulDeckeCircuit c in this.circuits) {
 						c.Calculate();

@@ -54,8 +54,8 @@ namespace Europlan.Common {
 		private static int maxDurchfluss = 240;
 		private static double spreizungHeizMin = 4;
 		private static double spreizungHeizMax = 12;
-		private static double spreizungKühlMin = 2;
-		private static double spreizungKühlMax = 5;
+		private static double spreizungKuehlMin = 2;
+		private static double spreizungKuehlMax = 5;
 
 		protected float plannedArea = 0;
 		private float plannedAreaReduced = 0;
@@ -184,23 +184,24 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public static void StaticInitialize() {
-			quickDimensioningHeatPowerPerSquareMeter = 50;
-			quickDimensioningCoolPowerPerSquareMeter = 50;
-			canHeat = true;
-			canCool = false;
-			useHarreitherNorm = true;
-			maxCircuitLength = 100.0;
-			maxPressureLost = 15000;
-			maxDurchfluss = 240;
-			spreizungHeizMin = 4;
-			spreizungHeizMax = 12;
-			spreizungKühlMin = 2;
-			spreizungKühlMax = 5;
-			su0 = 0.045;
-			su = 0.035;
-			ag = 1.1034;
-			agActivated = true;
+		public new static void StaticInitialize() {
+			Configuration userConfig = Configuration.UserTemplate;
+			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<EurovalProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
+			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<EurovalProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
+			canHeat = userConfig.GetProductParameterAsBool<EurovalProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = userConfig.GetProductParameterAsBool<EurovalProduct>("ConfigQuickDimensioningCanCool", false);
+			useHarreitherNorm = userConfig.GetProductParameterAsBool<EurovalProduct>("ConfigUseHarreitherNorm", true);
+			maxCircuitLength = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigMaxCircuitLength", 100.0);
+			maxPressureLost = userConfig.GetProductParameterAsInt<EurovalProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = userConfig.GetProductParameterAsInt<EurovalProduct>("ConfigMaxDurchfluss", 240);
+			spreizungHeizMin = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungHeizMin", 4);
+			spreizungHeizMax = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungHeizMax", 12);
+			spreizungKuehlMin = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungKuehlMin", 2);
+			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungKuehlMax", 5);
+			su0 = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSu0", 0.045);
+			su = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSu", 0.035);
+			ag = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigAg", 1.1034);
+			agActivated = userConfig.GetProductParameterAsBool<EurovalProduct>("ConfigAgActivated", true);
 		}
 
 		public override Product Clone(Room room) {
@@ -445,15 +446,15 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMin {
-			get { return spreizungKühlMin; }
-			set { spreizungKühlMin = value; }
+		public static double ConfigSpreizungKuehlMin {
+			get { return spreizungKuehlMin; }
+			set { spreizungKuehlMin = value; }
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMax {
-			get { return spreizungKühlMax; }
-			set { spreizungKühlMax = value; }
+		public static double ConfigSpreizungKuehlMax {
+			get { return spreizungKuehlMax; }
+			set { spreizungKuehlMax = value; }
 		}
 		#endregion Product Parameters
 
@@ -1321,11 +1322,11 @@ namespace Europlan.Common {
 			if (spreizungHeat < EurovalProduct.ConfigSpreizungHeizMin) {
 				spreizungHeat = EurovalProduct.ConfigSpreizungHeizMin;
 			}
-			if (spreizungCool > EurovalProduct.ConfigSpreizungKühlMax) {
-				spreizungCool = EurovalProduct.ConfigSpreizungKühlMax;
+			if (spreizungCool > EurovalProduct.ConfigSpreizungKuehlMax) {
+				spreizungCool = EurovalProduct.ConfigSpreizungKuehlMax;
 			}
-			if (spreizungCool < EurovalProduct.ConfigSpreizungKühlMin) {
-				spreizungCool = EurovalProduct.ConfigSpreizungKühlMin;
+			if (spreizungCool < EurovalProduct.ConfigSpreizungKuehlMin) {
+				spreizungCool = EurovalProduct.ConfigSpreizungKuehlMin;
 			}
 			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
 			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
@@ -1611,7 +1612,7 @@ namespace Europlan.Common {
 						}
 					}
 					// Kühlleistung verringern
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < EurovalProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < EurovalProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad) {
 						this.plannedRuecklaufTempCool += 0.1;
 						i = 0;
 						foreach (EurovalCircuit ec in this.circuits) {
@@ -1620,7 +1621,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempCool -= 0.1;
 					// Kühlleistung erhöhen
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EurovalProduct.ConfigMaxDurchfluss) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EurovalProduct.ConfigMaxDurchfluss) {
 						this.plannedRuecklaufTempCool -= 0.1;
 						i = 0;
 						foreach (EurovalCircuit ec in this.circuits) {

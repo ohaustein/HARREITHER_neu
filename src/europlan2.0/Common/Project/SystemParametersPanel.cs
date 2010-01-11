@@ -31,6 +31,7 @@ namespace Europlan.Common {
 			InitializeModulDeckeValues();
 			InitializeHithermValues();
 			InitializeHithermCompactValues();
+			InitializeGeneralValues();
 		}
 
 		public void UpdateControl() {
@@ -73,6 +74,11 @@ namespace Europlan.Common {
 		private void btnHithermCompactStandard_Click(object sender, EventArgs e) {
 			HithermCompactProduct.StaticInitialize();
 			InitializeHithermCompactValues();
+		}
+
+		private void btnGeneralStandard_Click(object sender, EventArgs e) {
+			Product.StaticInitialize();
+			InitializeGeneralValues();
 		}
 
 		private void InitializeEurovalPanel() {
@@ -169,8 +175,8 @@ namespace Europlan.Common {
 			numEurovalDurchfluss.Value = EurovalProduct.ConfigMaxDurchfluss;
 			numEurovalSpreizungHeizMin.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMin;
 			numEurovalSpreizungHeizMax.Value = (decimal)EurovalProduct.ConfigSpreizungHeizMax;
-			numEurovalSpreizungKuehlMin.Value = (decimal)EurovalProduct.ConfigSpreizungKühlMin;
-			numEurovalSpreizungKuehlMax.Value = (decimal)EurovalProduct.ConfigSpreizungKühlMax;
+			numEurovalSpreizungKuehlMin.Value = (decimal)EurovalProduct.ConfigSpreizungKuehlMin;
+			numEurovalSpreizungKuehlMax.Value = (decimal)EurovalProduct.ConfigSpreizungKuehlMax;
 			numEurovalGeometrie.Value = (decimal)EurovalProduct.ConfigAg;
 			cbEurovalGeometrieAktiviert.Checked = EurovalProduct.ConfigAgActivated;
 			numEurovalMindestueberdeckung.Value = (decimal)EurovalProduct.ConfigSu0;
@@ -185,8 +191,8 @@ namespace Europlan.Common {
 			numEcothermDurchfluss.Value = EcothermProduct.ConfigMaxDurchfluss;
 			numEcothermSpreizungHeizMin.Value = (decimal)EcothermProduct.ConfigSpreizungHeizMin;
 			numEcothermSpreizungHeizMax.Value = (decimal)EcothermProduct.ConfigSpreizungHeizMax;
-			numEcothermSpreizungKuehlMin.Value = (decimal)EcothermProduct.ConfigSpreizungKühlMin;
-			numEcothermSpreizungKuehlMax.Value = (decimal)EcothermProduct.ConfigSpreizungKühlMax;
+			numEcothermSpreizungKuehlMin.Value = (decimal)EcothermProduct.ConfigSpreizungKuehlMin;
+			numEcothermSpreizungKuehlMax.Value = (decimal)EcothermProduct.ConfigSpreizungKuehlMax;
 			numEcothermMindestueberdeckung.Value = (decimal)EcothermProduct.ConfigSu0;
 			numEcothermEstrichueberdeckung.Value = (decimal)EcothermProduct.ConfigSu;
 		}
@@ -199,8 +205,8 @@ namespace Europlan.Common {
 			numModulBodenMaxModulesInCircuit.Value = ModulKlimaBodenProduct.ConfigModulesInCircuit;
 			numModulBodenSpreizungHeizMin.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungHeizMin;
 			numModulBodenSpreizungHeizMax.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungHeizMax;
-			numModulBodenSpreizungKuehlMin.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungKühlMin;
-			numModulBodenSpreizungKuehlMax.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungKühlMax;
+			numModulBodenSpreizungKuehlMin.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungKuehlMin;
+			numModulBodenSpreizungKuehlMax.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungKuehlMax;
 		}
 
 		private void InitializeModulDeckeValues() {
@@ -216,8 +222,8 @@ namespace Europlan.Common {
 			numModulDeckeLeistungsfaktor.Value = (decimal)ModulKlimaDeckeProduct.ConfigLeistungsFaktor;
 			numModulDeckeSpreizungHeizMin.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungHeizMin;
 			numModulDeckeSpreizungHeizMax.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungHeizMax;
-			numModulDeckeSpreizungKuehlMin.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKühlMin;
-			numModulDeckeSpreizungKuehlMax.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKühlMax;
+			numModulDeckeSpreizungKuehlMin.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin;
+			numModulDeckeSpreizungKuehlMax.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax;
 			cmbModulDeckeConstruction.SelectedItem = (ModulKlimaDeckeProduct.ModulCeilingConstructionEnum)ModulKlimaDeckeProduct.ConfigModulCeilingConstruction;
 		}
 
@@ -233,6 +239,12 @@ namespace Europlan.Common {
 			rbHithermCompactPlus.Checked = HithermCompactProduct.ConfigUsePlus;
 			numHithermCompactPressurePa.Value = HithermCompactProduct.ConfigMaxPressureLost;
 			numHithermCompactDurchfluss.Value = HithermCompactProduct.ConfigMaxDurchfluss;
+		}
+
+		private void InitializeGeneralValues() {
+			numGeneralAlphaBoden.Value = (decimal)Product.ConfigAlphaBoden;
+			numGeneralAlphaDecke.Value = (decimal)Product.ConfigAlphaDecke;
+			numGeneralAlphaWand.Value = (decimal)Product.ConfigAlphaWand;
 		}
 
 		private void rbEurovalHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
@@ -295,14 +307,14 @@ namespace Europlan.Common {
 		}
 
 		private void numEurovalSpreizungKühlMin_ValueChanged(object sender, EventArgs e) {
-			EurovalProduct.ConfigSpreizungKühlMin = (double)numEurovalSpreizungKuehlMin.Value;
+			EurovalProduct.ConfigSpreizungKuehlMin = (double)numEurovalSpreizungKuehlMin.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
 		private void numEurovalSpreizungKühlMax_ValueChanged(object sender, EventArgs e) {
-			EurovalProduct.ConfigSpreizungKühlMax = (double)numEurovalSpreizungKuehlMax.Value;
+			EurovalProduct.ConfigSpreizungKuehlMax = (double)numEurovalSpreizungKuehlMax.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -446,14 +458,14 @@ namespace Europlan.Common {
 		}
 
 		private void numModulBodenSpreizungKuehlMin_ValueChanged(object sender, EventArgs e) {
-			ModulKlimaBodenProduct.ConfigSpreizungKühlMin = (double)numModulBodenSpreizungKuehlMin.Value;
+			ModulKlimaBodenProduct.ConfigSpreizungKuehlMin = (double)numModulBodenSpreizungKuehlMin.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
 		private void numModulBodenSpreizungKuehlMax_ValueChanged(object sender, EventArgs e) {
-			ModulKlimaBodenProduct.ConfigSpreizungKühlMax = (double)numModulBodenSpreizungKuehlMax.Value;
+			ModulKlimaBodenProduct.ConfigSpreizungKuehlMax = (double)numModulBodenSpreizungKuehlMax.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -474,14 +486,14 @@ namespace Europlan.Common {
 		}
 
 		private void numModulDeckeSpreizungKuehlMin_ValueChanged(object sender, EventArgs e) {
-			ModulKlimaDeckeProduct.ConfigSpreizungKühlMin = (double)numModulDeckeSpreizungKuehlMin.Value;
+			ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin = (double)numModulDeckeSpreizungKuehlMin.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
 		private void numModulDeckeSpreizungKuehlMax_ValueChanged(object sender, EventArgs e) {
-			ModulKlimaDeckeProduct.ConfigSpreizungKühlMax = (double)numModulDeckeSpreizungKuehlMax.Value;
+			ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax = (double)numModulDeckeSpreizungKuehlMax.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -620,14 +632,14 @@ namespace Europlan.Common {
 		}
 
 		private void numEcothermSpreizungKühlMin_ValueChanged(object sender, EventArgs e) {
-			EcothermProduct.ConfigSpreizungKühlMin = (double)numEcothermSpreizungKuehlMin.Value;
+			EcothermProduct.ConfigSpreizungKuehlMin = (double)numEcothermSpreizungKuehlMin.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
 		}
 
 		private void numEcothermSpreizungKühlMax_ValueChanged(object sender, EventArgs e) {
-			EcothermProduct.ConfigSpreizungKühlMax = (double)numEcothermSpreizungKuehlMax.Value;
+			EcothermProduct.ConfigSpreizungKuehlMax = (double)numEcothermSpreizungKuehlMax.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}

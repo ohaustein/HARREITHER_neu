@@ -160,6 +160,13 @@ namespace Europlan.Common {
 			return null;
 		}
 
+		public static void StaticInitialize() {
+			Configuration userConfig = Configuration.UserTemplate;
+			Product.alphaBoden = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaBoden", 10.8);
+			Product.alphaDecke = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaDecke", 6.5);
+			Product.alphaWand = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaWand", 8.0);
+		}
+
 		public Product() {
 			Initialize();
 		}

@@ -54,8 +54,8 @@ namespace Europlan.Common {
 		private static int maxDurchfluss = 240;
 		private static double spreizungHeizMin = 4;
 		private static double spreizungHeizMax = 12;
-		private static double spreizungKühlMin = 2;
-		private static double spreizungKühlMax = 5;
+		private static double spreizungKuehlMin = 2;
+		private static double spreizungKuehlMax = 5;
 
 		protected float plannedArea = 0;
 		private float plannedAreaReduced = 0;
@@ -184,21 +184,22 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public static void StaticInitialize() {
-			quickDimensioningHeatPowerPerSquareMeter = 50;
-			quickDimensioningCoolPowerPerSquareMeter = 50;
-			canHeat = true;
-			canCool = false;
-			useHarreitherNorm = true;
-			maxCircuitLength = 100.0;
-			maxPressureLost = 15000;
-			maxDurchfluss = 240;
-			spreizungHeizMin = 4;
-			spreizungHeizMax = 12;
-			spreizungKühlMin = 2;
-			spreizungKühlMax = 5;
-			su0 = 0.045;
-			su = 0.035;
+		public new static void StaticInitialize() {
+			Configuration userConfig = Configuration.UserTemplate;
+			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
+			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
+			canHeat = userConfig.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = userConfig.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanCool", false);
+			useHarreitherNorm = userConfig.GetProductParameterAsBool<EcothermProduct>("ConfigUseHarreitherNorm", true);
+			maxCircuitLength = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigMaxCircuitLength", 100.0);
+			maxPressureLost = userConfig.GetProductParameterAsInt<EcothermProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = userConfig.GetProductParameterAsInt<EcothermProduct>("ConfigMaxDurchfluss", 240);
+			spreizungHeizMin = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMin", 4);
+			spreizungHeizMax = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMax", 12);
+			spreizungKuehlMin = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMin", 2);
+			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMax", 5);
+			su0 = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu0", 0.045);
+			su = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
 		}
 
 		public override Product Clone(Room room) {
@@ -443,15 +444,15 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMin {
-			get { return spreizungKühlMin; }
-			set { spreizungKühlMin = value; }
+		public static double ConfigSpreizungKuehlMin {
+			get { return spreizungKuehlMin; }
+			set { spreizungKuehlMin = value; }
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMax {
-			get { return spreizungKühlMax; }
-			set { spreizungKühlMax = value; }
+		public static double ConfigSpreizungKuehlMax {
+			get { return spreizungKuehlMax; }
+			set { spreizungKuehlMax = value; }
 		}
 		#endregion Product Parameters
 
@@ -1315,11 +1316,11 @@ namespace Europlan.Common {
 			if (spreizungHeat < EcothermProduct.ConfigSpreizungHeizMin) {
 				spreizungHeat = EcothermProduct.ConfigSpreizungHeizMin;
 			}
-			if (spreizungCool > EcothermProduct.ConfigSpreizungKühlMax) {
-				spreizungCool = EcothermProduct.ConfigSpreizungKühlMax;
+			if (spreizungCool > EcothermProduct.ConfigSpreizungKuehlMax) {
+				spreizungCool = EcothermProduct.ConfigSpreizungKuehlMax;
 			}
-			if (spreizungCool < EcothermProduct.ConfigSpreizungKühlMin) {
-				spreizungCool = EcothermProduct.ConfigSpreizungKühlMin;
+			if (spreizungCool < EcothermProduct.ConfigSpreizungKuehlMin) {
+				spreizungCool = EcothermProduct.ConfigSpreizungKuehlMin;
 			}
 			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
 			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
@@ -1605,7 +1606,7 @@ namespace Europlan.Common {
 						}
 					}
 					// Kühlleistung verringern
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < EcothermProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < EcothermProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad) {
 						this.plannedRuecklaufTempCool += 0.1;
 						i = 0;
 						foreach (EcothermCircuit ec in this.circuits) {
@@ -1614,7 +1615,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempCool -= 0.1;
 					// Kühlleistung erhöhen
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EcothermProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EcothermProduct.ConfigMaxDurchfluss) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EcothermProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EcothermProduct.ConfigMaxDurchfluss) {
 						this.plannedRuecklaufTempCool -= 0.1;
 						i = 0;
 						foreach (EcothermCircuit ec in this.circuits) {

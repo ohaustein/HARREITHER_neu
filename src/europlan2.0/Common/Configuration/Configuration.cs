@@ -770,14 +770,97 @@ namespace Europlan.Common {
 			}
 		}
 
-		public string GetProductParameter<T>(string parameterName) where T: Product {
-			if (!this.productConfiguration.ContainsKey(typeof(T).FullName)) {
+		public string GetProductParameter<ProductType>(string parameterName) where ProductType : Product {
+			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
 				return null;
 			}
-			if (!this.productConfiguration[typeof(T).FullName].ContainsKey(parameterName)) {
+			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
 				return null;
 			}
-			return this.productConfiguration[typeof(T).FullName][parameterName];
+			return this.productConfiguration[typeof(ProductType).FullName][parameterName];
+		}
+
+		public int GetProductParameterAsInt<ProductType>(string parameterName, int defaultValue) where ProductType : Product {
+			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
+				return defaultValue;
+			}
+			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
+				return defaultValue;
+			}
+			int value;
+			if (!int.TryParse(this.productConfiguration[typeof(ProductType).FullName][parameterName], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out value)) {
+				value = defaultValue;
+			}
+			return value;
+		}
+
+		public double GetProductParameterAsDouble<ProductType>(string parameterName, double defaultValue) where ProductType : Product {
+			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
+				return defaultValue;
+			}
+			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
+				return defaultValue;
+			}
+			double value;
+			if (!double.TryParse(this.productConfiguration[typeof(ProductType).FullName][parameterName], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out value)) {
+				value = defaultValue;
+			}
+			return value;
+		}
+
+		public float GetProductParameterAsFloat<ProductType>(string parameterName, float defaultValue) where ProductType : Product {
+			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
+				return defaultValue;
+			}
+			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
+				return defaultValue;
+			}
+			float value;
+			if (!float.TryParse(this.productConfiguration[typeof(ProductType).FullName][parameterName], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out value)) {
+				value = defaultValue;
+			}
+			return value;
+		}
+
+		public string GetProductParameterAsString<ProductType>(string parameterName, string defaultValue) where ProductType : Product {
+			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
+				return defaultValue;
+			}
+			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
+				return defaultValue;
+			}
+			return this.productConfiguration[typeof(ProductType).FullName][parameterName];
+		}
+
+		public bool GetProductParameterAsBool<ProductType>(string parameterName, bool defaultValue) where ProductType : Product {
+			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
+				return defaultValue;
+			}
+			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
+				return defaultValue;
+			}
+			bool value;
+			if (!bool.TryParse(this.productConfiguration[typeof(ProductType).FullName][parameterName], out value)) {
+				value = defaultValue;
+			}
+			return value;
+		}
+
+		public EnumType GetProductParameterAsEnum<ProductType, EnumType>(string parameterName, EnumType defaultValue)
+															where ProductType : Product {
+			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
+				return defaultValue;
+			}
+			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
+				return defaultValue;
+			}
+			EnumType value;
+			if (Enum.IsDefined(typeof(EnumType), this.productConfiguration[typeof(ProductType).FullName][parameterName])) {
+				value = (EnumType)Enum.Parse(typeof(EnumType), this.productConfiguration[typeof(ProductType).FullName][parameterName]);
+			} else {
+				value = defaultValue;
+			}
+			return value;
 		}
 
 		private void AddProductParameter(Type t, string parameterName, string value) {

@@ -25,8 +25,8 @@ namespace Europlan.Common {
 
 		private static double spreizungHeizMin = 4;
 		private static double spreizungHeizMax = 12;
-		private static double spreizungKühlMin = 2;
-		private static double spreizungKühlMax = 5;
+		private static double spreizungKuehlMin = 2;
+		private static double spreizungKuehlMax = 5;
 
 		private static int maxPressureLost = 15000;
 		private static int maxDurchfluss = 240;
@@ -143,14 +143,15 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public static void StaticInitialize() {
-			quickDimensioningHeatPowerPerSquareMeter = 100;
-			quickDimensioningCoolPowerPerSquareMeter = 100;
-			canHeat = true;
-			canCool = false;
-			usePlus = false;
-			maxPressureLost = 15000;
-			maxDurchfluss = 240;
+		public new static void StaticInitialize() {
+			Configuration userConfig = Configuration.UserTemplate;
+			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<HithermCompactProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
+			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<HithermCompactProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
+			canHeat = userConfig.GetProductParameterAsBool<HithermCompactProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = userConfig.GetProductParameterAsBool<HithermCompactProduct>("ConfigQuickDimensioningCanCool", false);
+			usePlus = userConfig.GetProductParameterAsBool<HithermCompactProduct>("ConfigUsePlus", false);
+			maxPressureLost = userConfig.GetProductParameterAsInt<HithermCompactProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = userConfig.GetProductParameterAsInt<HithermCompactProduct>("ConfigMaxDurchfluss", 240);
 		}
 
 		public override Product Clone(Room room) {
@@ -471,15 +472,15 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMin {
-			get { return spreizungKühlMin; }
-			set { spreizungKühlMin = value; }
+		public static double ConfigSpreizungKuehlMin {
+			get { return spreizungKuehlMin; }
+			set { spreizungKuehlMin = value; }
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMax {
-			get { return spreizungKühlMax; }
-			set { spreizungKühlMax = value; }
+		public static double ConfigSpreizungKuehlMax {
+			get { return spreizungKuehlMax; }
+			set { spreizungKuehlMax = value; }
 		}
 		#endregion Product Parameters
 
@@ -522,11 +523,11 @@ namespace Europlan.Common {
 			if (spreizungHeat < HithermCompactProduct.ConfigSpreizungHeizMin) {
 				spreizungHeat = HithermCompactProduct.ConfigSpreizungHeizMin;
 			}
-			if (spreizungCool > HithermCompactProduct.ConfigSpreizungKühlMax) {
-				spreizungCool = HithermCompactProduct.ConfigSpreizungKühlMax;
+			if (spreizungCool > HithermCompactProduct.ConfigSpreizungKuehlMax) {
+				spreizungCool = HithermCompactProduct.ConfigSpreizungKuehlMax;
 			}
-			if (spreizungCool < HithermCompactProduct.ConfigSpreizungKühlMin) {
-				spreizungCool = HithermCompactProduct.ConfigSpreizungKühlMin;
+			if (spreizungCool < HithermCompactProduct.ConfigSpreizungKuehlMin) {
+				spreizungCool = HithermCompactProduct.ConfigSpreizungKuehlMin;
 			}
 			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
 			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
@@ -596,7 +597,7 @@ namespace Europlan.Common {
 					}
 				}
 				// Kühlleistung verringern
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < HithermCompactProduct.ConfigSpreizungKühlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < HithermCompactProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad) {
 					this.plannedRuecklaufTempCool += 0.1;
 					foreach (HithermCompactCircuit c in this.circuits) {
 						c.Calculate();
@@ -604,7 +605,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > HithermCompactProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < HithermCompactProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < HithermCompactProduct.ConfigMaxDurchfluss) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > HithermCompactProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < HithermCompactProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < HithermCompactProduct.ConfigMaxDurchfluss) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (HithermCompactCircuit c in this.circuits) {
 						c.Calculate();
