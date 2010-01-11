@@ -1097,7 +1097,7 @@ namespace Europlan.Common {
 				double wasserInhalt = 0;
 				foreach (HithermCompactCircuit c in this.circuits) {
 					foreach (HithermCompactRegister register in c.Registers) {
-						wasserInhalt += register.WasserInhalt;
+						wasserInhalt += register.WasserInhalt * register.RegisterCount;
 					}
 				}
 
