@@ -312,8 +312,8 @@ namespace Europlan.Common {
 			double qHeat = 0;
 			double qCool = 0;
 
-			double mhHeat = 0;
-			double mhCool = 0;
+			double durchflussHeat = 0;
+			double durchflussCool = 0;
 
 			double deltaRhoHeatMax = 0;
 			double deltaRhoCoolMax = 0;
@@ -343,8 +343,8 @@ namespace Europlan.Common {
 						qHeat += pp.Product.PlannedHeatLoad;
 						qCool += pp.Product.PlannedCoolLoad;
 
-						mhHeat += pp.Product.PlannedMhHeat;
-						mhCool += pp.Product.PlannedMhCool;
+						durchflussHeat += pp.Product.PlannedDurchflussHeat;
+						durchflussCool += pp.Product.PlannedDurchflussCool;
 												
 						deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
 						deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
@@ -387,9 +387,9 @@ namespace Europlan.Common {
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gestamt-Wassermenge";
-			wrapper.HeatValue = mhHeat.ToString("0.##");
+			wrapper.HeatValue = durchflussHeat.ToString("0.##");
 			wrapper.HeatUnit = "l/h";
-			wrapper.CoolValue = mhCool.ToString("0.##");
+			wrapper.CoolValue = durchflussCool.ToString("0.##");
 			wrapper.CoolUnit = "l/h";
 			wrapperList.Add(wrapper);
 
@@ -456,8 +456,8 @@ namespace Europlan.Common {
 			double qHeat = 0;
 			double qCool = 0;
 
-			double mhHeat = 0;
-			double mhCool = 0;
+			double durchflussHeat = 0;
+			double durchflussCool = 0;
 
 			double deltaRhoHeatMax = 0;
 			double deltaRhoCoolMax = 0;
@@ -492,8 +492,8 @@ namespace Europlan.Common {
 							qHeat += pp.Product.PlannedHeatLoad;
 							qCool += pp.Product.PlannedCoolLoad;
 
-							mhHeat += pp.Product.PlannedMhHeat;
-							mhCool += pp.Product.PlannedMhCool;
+							durchflussHeat += pp.Product.PlannedDurchflussHeat;
+							durchflussCool += pp.Product.PlannedDurchflussCool;
 
 							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
 							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
@@ -538,9 +538,9 @@ namespace Europlan.Common {
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Wassermenge";
-			wrapper.HeatValue = mhHeat.ToString("0.##");
+			wrapper.HeatValue = durchflussHeat.ToString("0.##");
 			wrapper.HeatUnit = "l/h";
-			wrapper.CoolValue = mhCool.ToString("0.##");
+			wrapper.CoolValue = durchflussCool.ToString("0.##");
 			wrapper.CoolUnit = "l/h";
 			wrapperList.Add(wrapper);
 
@@ -599,8 +599,8 @@ namespace Europlan.Common {
 			double qHeat = 0;
 			double qCool = 0;
 
-			double mhHeat = 0;
-			double mhCool = 0;
+			double durchflussHeat = 0;
+			double durchflussCool = 0;
 
 			double deltaRhoHeatMax = 0;
 			double deltaRhoCoolMax = 0;
@@ -628,8 +628,8 @@ namespace Europlan.Common {
 							qHeat += pp.Product.PlannedHeatLoad;
 							qCool += pp.Product.PlannedCoolLoad;
 
-							mhHeat += pp.Product.PlannedMhHeat;
-							mhCool += pp.Product.PlannedMhCool;
+							durchflussHeat += pp.Product.PlannedDurchflussHeat;
+							durchflussCool += pp.Product.PlannedDurchflussCool;
 
 							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
 							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
@@ -674,9 +674,9 @@ namespace Europlan.Common {
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Wassermenge";
-			wrapper.HeatValue = mhHeat.ToString("0.##");
+			wrapper.HeatValue = durchflussHeat.ToString("0.##");
 			wrapper.HeatUnit = "l/h";
-			wrapper.CoolValue = mhCool.ToString("0.##");
+			wrapper.CoolValue = durchflussCool.ToString("0.##");
 			wrapper.CoolUnit = "l/h";
 			wrapperList.Add(wrapper);
 
@@ -723,8 +723,8 @@ namespace Europlan.Common {
 			double qHeat = 0;
 			double qCool = 0;
 
-			double mhHeat = 0;
-			double mhCool = 0;
+			double durchflussHeat = 0;
+			double durchflussCool = 0;
 
 			double deltaRhoHeatMax = 0;
 			double deltaRhoCoolMax = 0;
@@ -752,8 +752,8 @@ namespace Europlan.Common {
 							qHeat += pp.Product.PlannedHeatLoad;
 							qCool += pp.Product.PlannedCoolLoad;
 
-							mhHeat += pp.Product.PlannedMhHeat;
-							mhCool += pp.Product.PlannedMhCool;
+							durchflussHeat += pp.Product.PlannedDurchflussHeat;
+							durchflussCool += pp.Product.PlannedDurchflussCool;
 
 							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
 							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
@@ -798,9 +798,9 @@ namespace Europlan.Common {
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Wassermenge";
-			wrapper.HeatValue = mhHeat.ToString("0.##");
+			wrapper.HeatValue = durchflussHeat.ToString("0.##");
 			wrapper.HeatUnit = "l/h";
-			wrapper.CoolValue = mhCool.ToString("0.##");
+			wrapper.CoolValue = durchflussCool.ToString("0.##");
 			wrapper.CoolUnit = "l/h";
 			wrapperList.Add(wrapper);
 
@@ -998,8 +998,8 @@ namespace Europlan.Common {
 								if (ruecklauf > ruecklaufCool) {
 									ruecklaufCool = ruecklauf;
 								}
-								durchflussHeat += pp.Product.PlannedMhHeat;
-								durchflussCool += pp.Product.PlannedMhCool;
+								durchflussHeat += pp.Product.PlannedDurchflussHeat;
+								durchflussCool += pp.Product.PlannedDurchflussCool;
 								deltaRhoHeat = deltaRhoHeat < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeat;
 								deltaRhoCool = deltaRhoCool < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCool;
 								wasserInhalt += pp.Product.WasserInhalt;
@@ -1064,8 +1064,8 @@ namespace Europlan.Common {
 						if (ruecklauf > ruecklaufCool) {
 							ruecklaufCool = ruecklauf;
 						}
-						durchflussHeat += pp.Product.PlannedMhHeat;
-						durchflussCool += pp.Product.PlannedMhCool;
+						durchflussHeat += pp.Product.PlannedDurchflussHeat;
+						durchflussCool += pp.Product.PlannedDurchflussCool;
 						deltaRhoHeat = deltaRhoHeat < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeat;
 						deltaRhoCool = deltaRhoCool < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCool;
 						wasserInhalt += pp.Product.WasserInhalt;
@@ -1187,7 +1187,7 @@ namespace Europlan.Common {
 								wrapperHeat.tFBAz = ep.PlannedFloorTemperatureHeatResidence;
 								wrapperHeat.tFBRz = ep.PlannedFloorTemperatureHeatRim;
 
-								wrapperHeat.Wassermenge = pp.Product.PlannedMhHeat;
+								wrapperHeat.Wassermenge = pp.Product.PlannedDurchflussHeat;
 								wrapperHeat.DruckverlustRohr = pp.Product.PlannedDeltaRhoHeat;
 								wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
 
@@ -1239,7 +1239,7 @@ namespace Europlan.Common {
 								wrapperCool.tFBAz = ep.PlannedFloorTemperatureCoolResidence;
 								wrapperCool.tFBRz = ep.PlannedFloorTemperatureCoolRim;
 
-								wrapperCool.Wassermenge = pp.Product.PlannedMhCool;
+								wrapperCool.Wassermenge = pp.Product.PlannedDurchflussCool;
 								wrapperCool.DruckverlustRohr = pp.Product.PlannedDeltaRhoCool;
 								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorCool;
 								

@@ -96,7 +96,16 @@ namespace Europlan.Common {
 				this.layoutEuroval.Controls.Remove(this.lblEurovalEstrichueberdeckung);
 				this.layoutEuroval.Controls.Remove(this.numEurovalEstrichueberdeckung);
 				this.layoutEuroval.Controls.Remove(this.lblEurovalEstrichueberdeckungUnit);
-				this.layoutEuroval.SetRow(this.btnEurovalStandard, this.layoutEuroval.GetRow(this.btnEurovalStandard) - 3);
+				this.layoutEuroval.Controls.Remove(this.lblEurovalDichte);
+				this.layoutEuroval.Controls.Remove(this.numEurovalDichte);
+				this.layoutEuroval.Controls.Remove(this.lblEurovalDichteUnit);
+				this.layoutEuroval.Controls.Remove(this.lblEurovalWaermekapazitaet);
+				this.layoutEuroval.Controls.Remove(this.numEurovalWaermekapazitaet);
+				this.layoutEuroval.Controls.Remove(this.lblEurovalWaermekapazitaetUnit);
+				this.layoutEuroval.Controls.Remove(this.lblEurovalViskositaet);
+				this.layoutEuroval.Controls.Remove(this.numEurovalViskositaet);
+				this.layoutEuroval.Controls.Remove(this.lblEurovalViskositaetUnit);
+				this.layoutEuroval.SetRow(this.btnEurovalStandard, this.layoutEuroval.GetRow(this.btnEurovalStandard) - 6);
 			}
 		}
 
@@ -181,6 +190,9 @@ namespace Europlan.Common {
 			cbEurovalGeometrieAktiviert.Checked = EurovalProduct.ConfigAgActivated;
 			numEurovalMindestueberdeckung.Value = (decimal)EurovalProduct.ConfigSu0;
 			numEurovalEstrichueberdeckung.Value = (decimal)EurovalProduct.ConfigSu;
+			numEurovalDichte.Value = (decimal)EurovalProduct.ConfigRho;
+			numEurovalWaermekapazitaet.Value = (decimal)EurovalProduct.ConfigC;
+			numEurovalViskositaet.Value = (decimal)EurovalProduct.ConfigV;
 		}
 
 		private void InitializeEcothermValues() {

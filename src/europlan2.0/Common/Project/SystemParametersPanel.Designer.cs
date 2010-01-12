@@ -337,6 +337,15 @@ namespace Europlan.Common {
 			this.numericBox36 = new Europlan.Common.NumericBox();
 			this.numericBox37 = new Europlan.Common.NumericBox();
 			this.numericBox38 = new Europlan.Common.NumericBox();
+			this.lblEurovalDichte = new System.Windows.Forms.Label();
+			this.lblEurovalWaermekapazitaet = new System.Windows.Forms.Label();
+			this.lblEurovalViskositaet = new System.Windows.Forms.Label();
+			this.numEurovalDichte = new Europlan.Common.NumericBox();
+			this.numEurovalWaermekapazitaet = new Europlan.Common.NumericBox();
+			this.numEurovalViskositaet = new Europlan.Common.NumericBox();
+			this.lblEurovalDichteUnit = new System.Windows.Forms.Label();
+			this.lblEurovalWaermekapazitaetUnit = new System.Windows.Forms.Label();
+			this.lblEurovalViskositaetUnit = new System.Windows.Forms.Label();
 			this.tabSystemParameters.SuspendLayout();
 			this.tabEuroval.SuspendLayout();
 			this.layoutEuroval.SuspendLayout();
@@ -407,6 +416,15 @@ namespace Europlan.Common {
 			this.layoutEuroval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
 			this.layoutEuroval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
 			this.layoutEuroval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+			this.layoutEuroval.Controls.Add(this.lblEurovalViskositaetUnit, 3, 12);
+			this.layoutEuroval.Controls.Add(this.lblEurovalWaermekapazitaetUnit, 3, 11);
+			this.layoutEuroval.Controls.Add(this.lblEurovalDichteUnit, 3, 10);
+			this.layoutEuroval.Controls.Add(this.numEurovalViskositaet, 2, 12);
+			this.layoutEuroval.Controls.Add(this.numEurovalWaermekapazitaet, 2, 11);
+			this.layoutEuroval.Controls.Add(this.numEurovalDichte, 2, 10);
+			this.layoutEuroval.Controls.Add(this.lblEurovalViskositaet, 0, 12);
+			this.layoutEuroval.Controls.Add(this.lblEurovalWaermekapazitaet, 0, 11);
+			this.layoutEuroval.Controls.Add(this.lblEurovalDichte, 0, 10);
 			this.layoutEuroval.Controls.Add(this.lblEurovalEstrichueberdeckungUnit, 3, 9);
 			this.layoutEuroval.Controls.Add(this.numEurovalEstrichueberdeckung, 2, 9);
 			this.layoutEuroval.Controls.Add(this.lblEurovalEstrichueberdeckung, 0, 9);
@@ -444,11 +462,11 @@ namespace Europlan.Common {
 			this.layoutEuroval.Controls.Add(this.numEurovalDurchfluss, 2, 4);
 			this.layoutEuroval.Controls.Add(this.numEurovalPressurePa, 2, 3);
 			this.layoutEuroval.Controls.Add(this.numEurovalSpreizungHeizMin, 2, 5);
-			this.layoutEuroval.Controls.Add(this.btnEurovalStandard, 5, 11);
+			this.layoutEuroval.Controls.Add(this.btnEurovalStandard, 5, 14);
 			this.layoutEuroval.Controls.Add(this.cbEurovalGeometrieAktiviert, 5, 7);
 			this.layoutEuroval.Location = new System.Drawing.Point(3, 5);
 			this.layoutEuroval.Name = "layoutEuroval";
-			this.layoutEuroval.RowCount = 12;
+			this.layoutEuroval.RowCount = 15;
 			this.layoutEuroval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
 			this.layoutEuroval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
 			this.layoutEuroval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
@@ -461,7 +479,10 @@ namespace Europlan.Common {
 			this.layoutEuroval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
 			this.layoutEuroval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
 			this.layoutEuroval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-			this.layoutEuroval.Size = new System.Drawing.Size(445, 276);
+			this.layoutEuroval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+			this.layoutEuroval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+			this.layoutEuroval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+			this.layoutEuroval.Size = new System.Drawing.Size(445, 345);
 			this.layoutEuroval.TabIndex = 27;
 			// 
 			// lblEurovalEstrichueberdeckungUnit
@@ -1104,7 +1125,7 @@ namespace Europlan.Common {
 			// 
 			this.layoutEuroval.SetColumnSpan(this.btnEurovalStandard, 2);
 			this.btnEurovalStandard.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnEurovalStandard.Location = new System.Drawing.Point(325, 253);
+			this.btnEurovalStandard.Location = new System.Drawing.Point(325, 322);
 			this.btnEurovalStandard.Margin = new System.Windows.Forms.Padding(0);
 			this.btnEurovalStandard.Name = "btnEurovalStandard";
 			this.btnEurovalStandard.Size = new System.Drawing.Size(120, 23);
@@ -5722,6 +5743,144 @@ namespace Europlan.Common {
             0,
             65536});
 			// 
+			// lblEurovalDichte
+			// 
+			this.layoutEuroval.SetColumnSpan(this.lblEurovalDichte, 2);
+			this.lblEurovalDichte.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblEurovalDichte.Location = new System.Drawing.Point(3, 230);
+			this.lblEurovalDichte.Name = "lblEurovalDichte";
+			this.lblEurovalDichte.Size = new System.Drawing.Size(174, 23);
+			this.lblEurovalDichte.TabIndex = 47;
+			this.lblEurovalDichte.Text = "Dichte des Mediums:";
+			this.lblEurovalDichte.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// lblEurovalWaermekapazitaet
+			// 
+			this.layoutEuroval.SetColumnSpan(this.lblEurovalWaermekapazitaet, 2);
+			this.lblEurovalWaermekapazitaet.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblEurovalWaermekapazitaet.Location = new System.Drawing.Point(3, 253);
+			this.lblEurovalWaermekapazitaet.Name = "lblEurovalWaermekapazitaet";
+			this.lblEurovalWaermekapazitaet.Size = new System.Drawing.Size(174, 23);
+			this.lblEurovalWaermekapazitaet.TabIndex = 48;
+			this.lblEurovalWaermekapazitaet.Text = "spezifische Wärmekapazität:";
+			this.lblEurovalWaermekapazitaet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// lblEurovalViskositaet
+			// 
+			this.layoutEuroval.SetColumnSpan(this.lblEurovalViskositaet, 2);
+			this.lblEurovalViskositaet.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblEurovalViskositaet.Location = new System.Drawing.Point(3, 276);
+			this.lblEurovalViskositaet.Name = "lblEurovalViskositaet";
+			this.lblEurovalViskositaet.Size = new System.Drawing.Size(174, 23);
+			this.lblEurovalViskositaet.TabIndex = 49;
+			this.lblEurovalViskositaet.Text = "kinematische Viskosität:";
+			this.lblEurovalViskositaet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// numEurovalDichte
+			// 
+			this.numEurovalDichte.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.numEurovalDichte.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numEurovalDichte.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numEurovalDichte.Location = new System.Drawing.Point(183, 232);
+			this.numEurovalDichte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+			this.numEurovalDichte.MaxValue = null;
+			this.numEurovalDichte.MinValue = null;
+			this.numEurovalDichte.Name = "numEurovalDichte";
+			this.numEurovalDichte.Size = new System.Drawing.Size(74, 20);
+			this.numEurovalDichte.TabIndex = 50;
+			this.numEurovalDichte.Text = "0";
+			this.numEurovalDichte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEurovalDichte.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			// 
+			// numEurovalWaermekapazitaet
+			// 
+			this.numEurovalWaermekapazitaet.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.numEurovalWaermekapazitaet.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numEurovalWaermekapazitaet.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numEurovalWaermekapazitaet.Location = new System.Drawing.Point(183, 255);
+			this.numEurovalWaermekapazitaet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+			this.numEurovalWaermekapazitaet.MaxValue = null;
+			this.numEurovalWaermekapazitaet.MinValue = null;
+			this.numEurovalWaermekapazitaet.Name = "numEurovalWaermekapazitaet";
+			this.numEurovalWaermekapazitaet.Size = new System.Drawing.Size(74, 20);
+			this.numEurovalWaermekapazitaet.TabIndex = 51;
+			this.numEurovalWaermekapazitaet.Text = "0";
+			this.numEurovalWaermekapazitaet.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEurovalWaermekapazitaet.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			// 
+			// numEurovalViskositaet
+			// 
+			this.numEurovalViskositaet.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.numEurovalViskositaet.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numEurovalViskositaet.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numEurovalViskositaet.Location = new System.Drawing.Point(183, 278);
+			this.numEurovalViskositaet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+			this.numEurovalViskositaet.MaxValue = null;
+			this.numEurovalViskositaet.MinValue = null;
+			this.numEurovalViskositaet.Name = "numEurovalViskositaet";
+			this.numEurovalViskositaet.Size = new System.Drawing.Size(74, 20);
+			this.numEurovalViskositaet.TabIndex = 52;
+			this.numEurovalViskositaet.Text = "0";
+			this.numEurovalViskositaet.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numEurovalViskositaet.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			// 
+			// lblEurovalDichteUnit
+			// 
+			this.layoutEuroval.SetColumnSpan(this.lblEurovalDichteUnit, 2);
+			this.lblEurovalDichteUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblEurovalDichteUnit.Location = new System.Drawing.Point(263, 230);
+			this.lblEurovalDichteUnit.Name = "lblEurovalDichteUnit";
+			this.lblEurovalDichteUnit.Size = new System.Drawing.Size(59, 23);
+			this.lblEurovalDichteUnit.TabIndex = 53;
+			this.lblEurovalDichteUnit.Text = "kg/m³";
+			this.lblEurovalDichteUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// lblEurovalWaermekapazitaetUnit
+			// 
+			this.layoutEuroval.SetColumnSpan(this.lblEurovalWaermekapazitaetUnit, 2);
+			this.lblEurovalWaermekapazitaetUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblEurovalWaermekapazitaetUnit.Location = new System.Drawing.Point(263, 253);
+			this.lblEurovalWaermekapazitaetUnit.Name = "lblEurovalWaermekapazitaetUnit";
+			this.lblEurovalWaermekapazitaetUnit.Size = new System.Drawing.Size(59, 23);
+			this.lblEurovalWaermekapazitaetUnit.TabIndex = 54;
+			this.lblEurovalWaermekapazitaetUnit.Text = "kJ/(kg*K)";
+			this.lblEurovalWaermekapazitaetUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// lblEurovalViskositaetUnit
+			// 
+			this.layoutEuroval.SetColumnSpan(this.lblEurovalViskositaetUnit, 2);
+			this.lblEurovalViskositaetUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblEurovalViskositaetUnit.Location = new System.Drawing.Point(263, 276);
+			this.lblEurovalViskositaetUnit.Name = "lblEurovalViskositaetUnit";
+			this.lblEurovalViskositaetUnit.Size = new System.Drawing.Size(59, 23);
+			this.lblEurovalViskositaetUnit.TabIndex = 55;
+			this.lblEurovalViskositaetUnit.Text = "m²/s";
+			this.lblEurovalViskositaetUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// SystemParametersPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6081,5 +6240,14 @@ namespace Europlan.Common {
 		private NumericBox numGeneralAlphaDecke;
 		private NumericBox numGeneralAlphaBoden;
 		private System.Windows.Forms.Button btnGeneralStandard;
+		private NumericBox numEurovalDichte;
+		private System.Windows.Forms.Label lblEurovalViskositaet;
+		private System.Windows.Forms.Label lblEurovalWaermekapazitaet;
+		private System.Windows.Forms.Label lblEurovalDichte;
+		private System.Windows.Forms.Label lblEurovalViskositaetUnit;
+		private System.Windows.Forms.Label lblEurovalWaermekapazitaetUnit;
+		private System.Windows.Forms.Label lblEurovalDichteUnit;
+		private NumericBox numEurovalViskositaet;
+		private NumericBox numEurovalWaermekapazitaet;
 	}
 }

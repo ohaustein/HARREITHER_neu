@@ -325,12 +325,12 @@ namespace Europlan.Common {
 			return WaermeverlustAussen(q, rI, rA, temperaturInnen, temperaturAussen);
 		}
 
-		public double Durchfluss(double leistung, double c, double spreizung) {
+		public double Massenstrom(double leistung, double c, double spreizung) {
 			return leistung / (c * (1000.0 / 3600.0) * spreizung);
 		}
 
-		public double FlussGeschwindigkeit(double durchfluss, double rohrInnenQuerschnitt, double dichte) {
-			return durchfluss / (rohrInnenQuerschnitt * (dichte * 3600.0));
+		public double FlussGeschwindigkeit(double massenstrom, double rohrInnenQuerschnitt, double dichte) {
+			return massenstrom / (rohrInnenQuerschnitt * (dichte * 3600.0));
 		}
 
 		public double ReynoldsZahl(double flussGeschwindigkeit, double rohrInnenDurchmesser, double viskositaet) {
@@ -357,7 +357,7 @@ namespace Europlan.Common {
 		}
 
 		public double DruckverlustRohr(double leistung, double c, double spreizung, double rohrInnenQuerschnitt, double dichte, double rohrInnenDurchmesser, double viskositaet, double k, double rohrLaenge) {
-			double durchfluss = Durchfluss(leistung, c, spreizung);
+			double durchfluss = Massenstrom(leistung, c, spreizung);
 			return DruckverlustRohr(durchfluss, rohrInnenQuerschnitt, dichte, rohrInnenDurchmesser, viskositaet, k, rohrLaenge);
 		}
 

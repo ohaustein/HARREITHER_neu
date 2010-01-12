@@ -251,6 +251,9 @@ namespace Europlan.Common {
 			get { return ModulKlimaDeckeProduct.maxDurchfluss; }
 			set { ModulKlimaDeckeProduct.maxDurchfluss = value; }
 		}
+		public static double ConfigMaxMassenstrom {
+			get { return maxDurchfluss; }
+		}
 
 		[ProductParameter]
 		public static int ConfigMaxModulesInRow {
@@ -435,7 +438,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempHeat += 0.1;
 				// Heizleistung erhöhen
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaDeckeProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < ModulKlimaDeckeProduct.ConfigMaxDurchfluss) {
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaDeckeProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < ModulKlimaDeckeProduct.ConfigMaxMassenstrom) {
 					this.plannedRuecklaufTempHeat += 0.1;
 					foreach (ModulDeckeCircuit c in this.circuits) {
 						c.Calculate();
@@ -450,7 +453,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < ModulKlimaDeckeProduct.ConfigMaxDurchfluss) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < ModulKlimaDeckeProduct.ConfigMaxMassenstrom) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (ModulDeckeCircuit c in this.circuits) {
 						c.Calculate();
@@ -531,12 +534,12 @@ namespace Europlan.Common {
 				}
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
-				if (Math.Round(this.PlannedMaxMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMaxMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedMaxMhCool, 1) > ModulKlimaBodenProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMaxMhCool, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
@@ -862,6 +865,10 @@ namespace Europlan.Common {
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOf60Elements * 4);
 				}
 			}
+		}
+
+		public override double Rho {
+			get { return 1000; }
 		}
 	}
 	

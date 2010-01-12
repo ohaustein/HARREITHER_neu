@@ -207,7 +207,7 @@ namespace Europlan.UnitTest {
 
 		[Test]
 		public void TestDurchfluss() {
-			double result = norm.Durchfluss(854.0, EN1264.c, 5.0);
+			double result = norm.Massenstrom(854.0, EN1264.c, 5.0);
 			Assert.AreEqual(146.7, Math.Round(result, 1));
 		}
 
