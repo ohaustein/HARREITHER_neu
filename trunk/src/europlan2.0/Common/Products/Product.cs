@@ -390,6 +390,10 @@ namespace Europlan.Common {
 			}
 		}
 
+		public abstract double Rho {
+			get;
+		}
+
 		public abstract float PlannedNetArea {
 			get;
 		}
@@ -778,10 +782,13 @@ namespace Europlan.Common {
 				}
 				double value = 0;
 				foreach (Circuit c in this.circuits) {
-					value += c.C_DurchflussHeat;
+					value += c.C_MassenstromHeat;
 				}
 				return value;
 			}
+		}
+		public double PlannedDurchflussHeat {
+			get { return PlannedMaxMhHeat * 1000 / Rho; }
 		}
 
 		[XmlIgnore]
@@ -792,10 +799,13 @@ namespace Europlan.Common {
 				}
 				double value = 0;
 				foreach (Circuit c in this.circuits) {
-					value += c.C_DurchflussCool;
+					value += c.C_MassenstromCool;
 				}
 				return value;
 			}
+		}
+		public double PlannedDurchflussCool {
+			get { return PlannedMhCool * 1000 / Rho; }
 		}
 
 		[XmlIgnore]
@@ -806,12 +816,15 @@ namespace Europlan.Common {
 				}
 				double value = 0;
 				foreach (Circuit c in this.circuits) {
-					if (c.C_DurchflussHeat > value) {
-						value = c.C_DurchflussHeat;
+					if (c.C_MassenstromHeat > value) {
+						value = c.C_MassenstromHeat;
 					}
 				}
 				return value;
 			}
+		}
+		public double PlannedMaxDurchflussHeat {
+			get { return PlannedMaxMhHeat * 1000 / Rho; }
 		}
 
 		[XmlIgnore]
@@ -822,12 +835,15 @@ namespace Europlan.Common {
 				}
 				double value = 0;
 				foreach (Circuit c in this.circuits) {
-					if (c.C_DurchflussCool > value) {
-						value = c.C_DurchflussCool;
+					if (c.C_MassenstromCool > value) {
+						value = c.C_MassenstromCool;
 					}
 				}
 				return value;
 			}
+		}
+		public double PlannedMaxDurchflussCool {
+			get { return PlannedMaxMhCool * 1000 / Rho; }
 		}
 
 		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung);

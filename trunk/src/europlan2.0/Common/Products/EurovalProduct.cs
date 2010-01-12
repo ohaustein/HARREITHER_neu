@@ -202,6 +202,9 @@ namespace Europlan.Common {
 			su = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSu", 0.035);
 			ag = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigAg", 1.1034);
 			agActivated = userConfig.GetProductParameterAsBool<EurovalProduct>("ConfigAgActivated", true);
+			c = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigC", 4.19);
+			rho = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigRho", 1000);
+			v = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigV", 0.00000101);
 		}
 
 		public override Product Clone(Room room) {
@@ -431,6 +434,9 @@ namespace Europlan.Common {
 		public static int ConfigMaxDurchfluss {
 			get { return maxDurchfluss; }
 			set { maxDurchfluss = value; }
+		}
+		public static double ConfigMaxMassenstrom {
+			get { return maxDurchfluss * rho / 1000; }
 		}
 
 		[ProductParameter]
@@ -1520,10 +1526,10 @@ namespace Europlan.Common {
 						if (this.PlannedDeltaRhoCool > EurovalProduct.ConfigMaxPressureLost) {
 							tryCalc = true;
 						}
-						if (this.PlannedMaxMhHeat > EurovalProduct.ConfigMaxDurchfluss) {
+						if (this.PlannedMaxMhHeat > EurovalProduct.ConfigMaxMassenstrom) {
 							tryCalc = true;
 						}
-						if (this.PlannedMaxMhCool > EurovalProduct.ConfigMaxDurchfluss) {
+						if (this.PlannedMaxMhCool > EurovalProduct.ConfigMaxMassenstrom) {
 							tryCalc = true;
 						}
 						tryCalc = tryCalc && !this.requestedCircuits.HasValue;
@@ -1605,7 +1611,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempHeat += 0.1;
 					// Heizleistung erhöhen
-					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EurovalProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < EurovalProduct.ConfigMaxDurchfluss) {
+					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EurovalProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < EurovalProduct.ConfigMaxMassenstrom) {
 						this.plannedRuecklaufTempHeat += 0.1;
 						foreach (EurovalCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
@@ -1621,7 +1627,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempCool -= 0.1;
 					// Kühlleistung erhöhen
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EurovalProduct.ConfigMaxDurchfluss) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EurovalProduct.ConfigMaxMassenstrom) {
 						this.plannedRuecklaufTempCool -= 0.1;
 						i = 0;
 						foreach (EurovalCircuit ec in this.circuits) {
@@ -1664,12 +1670,12 @@ namespace Europlan.Common {
 				this.lastErrorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "°C)\n";
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
-				if (Math.Round(this.PlannedMaxMhHeat, 1) > EurovalProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMaxMhHeat, 1) > EurovalProduct.ConfigMaxMassenstrom) {
+					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedMaxMhCool, 1) > EurovalProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMaxMhCool, 1) > EurovalProduct.ConfigMaxMassenstrom) {
+					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
@@ -1850,5 +1856,8 @@ namespace Europlan.Common {
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV12", Double.NegativeInfinity);
 		}
 
+		public override double Rho {
+			get { return EurovalProduct.ConfigRho; }
+		}
 	}
 }

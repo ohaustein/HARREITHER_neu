@@ -430,6 +430,9 @@ namespace Europlan.Common {
 			get { return maxDurchfluss; }
 			set { maxDurchfluss = value; }
 		}
+		public static double ConfigMaxMassenstrom {
+			get { return maxDurchfluss * rho / 1000; }
+		}
 
 		[ProductParameter]
 		public static double ConfigSpreizungHeizMin {
@@ -1514,10 +1517,10 @@ namespace Europlan.Common {
 						if (this.PlannedDeltaRhoCool > EcothermProduct.ConfigMaxPressureLost) {
 							tryCalc = true;
 						}
-						if (this.PlannedMaxMhHeat > EcothermProduct.ConfigMaxDurchfluss) {
+						if (this.PlannedMaxMhHeat > EcothermProduct.ConfigMaxMassenstrom) {
 							tryCalc = true;
 						}
-						if (this.PlannedMaxMhCool > EcothermProduct.ConfigMaxDurchfluss) {
+						if (this.PlannedMaxMhCool > EcothermProduct.ConfigMaxMassenstrom) {
 							tryCalc = true;
 						}
 						tryCalc = tryCalc && !this.requestedCircuits.HasValue;
@@ -1599,7 +1602,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempHeat += 0.1;
 					// Heizleistung erhöhen
-					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EcothermProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < EcothermProduct.ConfigMaxDurchfluss) {
+					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EcothermProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < EcothermProduct.ConfigMaxMassenstrom) {
 						this.plannedRuecklaufTempHeat += 0.1;
 						foreach (EcothermCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
@@ -1615,7 +1618,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempCool -= 0.1;
 					// Kühlleistung erhöhen
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EcothermProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EcothermProduct.ConfigMaxDurchfluss) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EcothermProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EcothermProduct.ConfigMaxMassenstrom) {
 						this.plannedRuecklaufTempCool -= 0.1;
 						i = 0;
 						foreach (EcothermCircuit ec in this.circuits) {
@@ -1658,12 +1661,12 @@ namespace Europlan.Common {
 				this.lastErrorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxRimTempHarreither : EcothermProduct.ConfigMaxRimTempEn1264), 1) + "°C)\n";
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
-				if (Math.Round(this.PlannedMaxMhHeat, 1) > EcothermProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMaxMhHeat, 1) > EcothermProduct.ConfigMaxMassenstrom) {
+					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedMaxMhCool, 1) > EcothermProduct.ConfigMaxDurchfluss) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxDurchfluss.ToString() + "kg/h)\n";
+				if (Math.Round(this.PlannedMaxMhCool, 1) > EcothermProduct.ConfigMaxMassenstrom) {
+					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
@@ -1835,5 +1838,8 @@ namespace Europlan.Common {
 
 		}
 
+		public override double Rho {
+			get { return EcothermProduct.ConfigRho; }
+		}
 	}
 }

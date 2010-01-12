@@ -222,7 +222,7 @@ namespace Europlan.Common {
 				this.c_thetaRHeat = this.c_thetaRHeat + (this.c_thetaVHeat - this.c_thetaRHeat) * this.ruecklaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
 				if (c_thetaVHeat.Equals(double.NaN) || c_thetaRHeat.Equals(double.NaN)) {
 					this.c_qHeatPerSqm = 0;
-					this.c_durchflussHeat = 0;
+					this.c_massenstromHeat = 0;
 					this.c_druckverlustHeat = 0;
 					this.c_floorTempHeat = 0;
 				} else {
@@ -257,12 +257,12 @@ namespace Europlan.Common {
 						totalQh2o += cc.OtherCircuit.C_Qh2oHeat;
 					}
 
-					this.c_durchflussHeat = en1264.Durchfluss(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
+					this.c_massenstromHeat = en1264.Massenstrom(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
 
-					this.c_druckverlustHeat = row.Druckverlust(this.c_durchflussHeat);
+					this.c_druckverlustHeat = row.Druckverlust(this.c_massenstromHeat);
 					foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 						if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
-							this.c_druckverlustHeat += cp.CalculateDruckverlust(this.c_durchflussHeat);
+							this.c_druckverlustHeat += cp.CalculateDruckverlust(this.c_massenstromHeat);
 						}
 					}
 
@@ -279,7 +279,7 @@ namespace Europlan.Common {
 				this.c_thetaRCool = this.c_thetaRCool + (this.c_thetaVCool - this.c_thetaRCool) * this.ruecklaufNotIsolated / (this.PipeLengthWithoutConnections + this.vorlaufNotIsolated + this.ruecklaufNotIsolated);
 				if (c_thetaVCool.Equals(double.NaN) || c_thetaRCool.Equals(double.NaN)) {
 					this.c_qCoolPerSqm = 0;
-					this.c_durchflussCool = 0;
+					this.c_massenstromCool = 0;
 					this.c_druckverlustCool = 0;
 					this.c_floorTempCool = 0;
 				} else {
@@ -314,12 +314,12 @@ namespace Europlan.Common {
 						totalQh2o += cc.OtherCircuit.C_Qh2oCool;
 					}
 
-					this.c_durchflussCool = en1264.Durchfluss(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
+					this.c_massenstromCool = en1264.Massenstrom(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
 
-					this.c_druckverlustCool = row.Druckverlust(this.c_durchflussCool);
+					this.c_druckverlustCool = row.Druckverlust(this.c_massenstromCool);
 					foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 						if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
-							this.c_druckverlustCool += cp.CalculateDruckverlust(this.c_durchflussCool);
+							this.c_druckverlustCool += cp.CalculateDruckverlust(this.c_massenstromCool);
 						}
 					}
 

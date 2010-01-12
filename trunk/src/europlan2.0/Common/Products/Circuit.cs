@@ -223,8 +223,8 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double C_DruckverlustDistributorHeat {
 			get {
-				if (c_durchflussHeat > 0) {
-					double druckverlust = Math.Pow((c_durchflussHeat / 1000) / EN1264.KVSValue, 2) * 1000;
+				if (c_massenstromHeat > 0) {
+					double druckverlust = Math.Pow((c_massenstromHeat / 1000) / EN1264.KVSValue, 2) * 1000;
 					druckverlust = druckverlust < 1.2 ? 1.2 : druckverlust;
 					druckverlust = druckverlust > 20 ? 20 : druckverlust;
 					return druckverlust;
@@ -233,10 +233,13 @@ namespace Europlan.Common {
 			}
 		}
 
-		protected double c_durchflussHeat;
+		protected double c_massenstromHeat;
 		[XmlIgnore]
+		public double C_MassenstromHeat {
+			get { return this.c_massenstromHeat; }
+		}
 		public double C_DurchflussHeat {
-			get { return this.c_durchflussHeat; }
+			get { return this.C_MassenstromHeat * 1000 / this.PlannedProduct.Product.Rho; }
 		}
 
 		protected double c_flussGeschwindigkeitHeat;
@@ -254,8 +257,8 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double C_DruckverlustDistributorCool {
 			get {
-				if (c_durchflussCool > 0) {
-					double druckverlust = Math.Pow((c_durchflussCool / 1000) / EN1264.KVSValue, 2) * 1000;
+				if (c_massenstromCool > 0) {
+					double druckverlust = Math.Pow((c_massenstromCool / 1000) / EN1264.KVSValue, 2) * 1000;
 					druckverlust = druckverlust < 1.2 ? 1.2 : druckverlust;
 					druckverlust = druckverlust > 20 ? 20 : druckverlust;
 					return druckverlust;
@@ -264,10 +267,13 @@ namespace Europlan.Common {
 			}
 		}
 
-		protected double c_durchflussCool;
+		protected double c_massenstromCool;
 		[XmlIgnore]
+		public double C_MassenstromCool {
+			get { return this.c_massenstromCool; }
+		}
 		public double C_DurchflussCool {
-			get { return this.c_durchflussCool; }
+			get { return this.C_MassenstromCool * 1000 / this.PlannedProduct.Product.Rho; }
 		}
 
 		protected double c_flussGeschwindigkeitCool;
