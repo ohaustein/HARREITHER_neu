@@ -19,8 +19,8 @@ namespace Europlan.Common {
 		// planning
 		private static double su0 = 0.045; /* Mindestüberdeckung fix */
 		private static double alpha0 = 10.8; /* Fixwert für FBH fix */
-		private static double alphaFbk = 6.5; //6.5; /* für FBK fix */
-		private static double alphaFbh = 10.8; /* für FBH fix */
+		private static double alphaFbkDecke = 6.5; //6.5; /* für FBK fix */
+		private static double alphaFbhBoden = 10.8; /* für FBH fix */
 		private static double lambdaR0 = 0.35; /* fix */
 		private static double lambdaR = 0.22; /* für PP Rohr laut Tabelle A.13 fix */
 		private static double lambdaU0 = 1; /* fix */
@@ -262,16 +262,12 @@ namespace Europlan.Common {
 			set { alpha0 = value; }
 		}
 
-		[ProductParameter]
 		public static double ConfigAlphaFbk {
-			get { return alphaFbk; }
-			set { alphaFbk = value; }
+			get { return Product.ConfigAlphaDecke; }
 		}
 
-		[ProductParameter]
 		public static double ConfigAlphaFbh {
-			get { return alphaFbh; }
-			set { alphaFbh = value; }
+			get { return Product.ConfigAlphaBoden; }
 		}
 
 		[ProductParameter]
@@ -1856,8 +1852,16 @@ namespace Europlan.Common {
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV12", Double.NegativeInfinity);
 		}
 
-		public override double Rho {
+		public override double Dichte {
 			get { return EurovalProduct.ConfigRho; }
+		}
+
+		public override double Waermekapazitaet {
+			get { return EurovalProduct.ConfigC; }
+		}
+
+		public override double Viskositaet {
+			get { return EurovalProduct.ConfigV; }
 		}
 	}
 }

@@ -65,12 +65,98 @@ namespace Europlan.Common {
 		private static double[] hlRegKuehlleistung  = { 0, 13, 20, 25, 33, 40, 45, 60 };
 		private static double[] stdRegKuehlleistung = { 0,  9, 14, 18, 24, 29, 32, 43 };
 
+		private static double[][] druckverlustHIT_50_5 = {
+			new double[] {0.1 ,0.1 ,0.1 ,0.2 ,0.4 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,2.2 ,3.0 ,3.9 ,5.0 ,6.1 ,7.4 ,8.8 ,10.4 ,12.0 ,13.8 ,15.7 ,17.8 ,19.9 ,22.2 ,24.6},
+			new double[] {0.1 ,0.3 ,0.4 ,0.6 ,0.8 ,0.9 ,1.1 ,1.3 ,1.6 ,1.8 ,2.3 ,2.8 ,3.4 ,4.0 ,4.7 ,5.4 ,6.2 ,7.0 ,7.9 ,8.8 ,9.7 ,10.7 ,11.8 ,12.8 ,14.0},
+			new double[] {0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.8 ,0.9 ,1.1 ,1.3 ,1.5 ,1.9 ,2.4 ,2.9 ,3.5 ,4.1 ,4.8 ,5.5 ,6.3 ,7.1 ,8.0 ,8.9 ,9.8 ,10.8 ,11.9 ,12.9},
+			new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.2 ,1.4 ,1.9 ,2.4 ,2.9 ,3.6 ,4.2 ,5.0 ,5.8 ,6.6 ,7.5 ,8.5 ,9.5 ,10.6 ,11.7 ,12.9 ,14.2},
+			new double[] {0.1 ,0.1 ,0.2 ,0.4 ,0.5 ,0.6 ,0.8 ,1.0 ,1.2 ,1.4 ,1.9 ,2.5 ,3.1 ,3.8 ,4.6 ,5.4 ,6.3 ,7.3 ,8.3 ,9.5 ,10.7 ,11.9 ,13.2 ,14.6 ,16.1},
+			new double[] {0.1 ,0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,2.1 ,2.8 ,3.6 ,4.4 ,5.4 ,6.5 ,7.7 ,8.9 ,10.3 ,11.8 ,13.3 ,15.0 ,16.7 ,18.6 ,20.5}
+		};
+
+		private static double[][] druckverlustHIT_50_10 = {
+			new double[] {0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,1.8 ,2.4 ,3.1 ,3.8 ,4.7 ,5.6 ,6.6 ,7.7 ,8.9 ,10.1 ,11.5 ,12.9 ,14.4 ,16.0 ,17.7 ,19.4},
+			new double[] {0.1 ,0.3 ,0.4 ,0.5 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,1.7 ,2.2 ,2.7 ,3.2 ,3.8 ,4.5 ,5.2 ,5.9 ,6.7 ,7.5 ,8.4 ,9.3 ,10.2 ,11.2 ,12.3 ,13.4},
+			new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.7 ,0.9 ,1.1 ,1.2 ,1.4 ,1.9 ,2.3 ,2.9 ,3.4 ,4.1 ,4.7 ,5.4 ,6.2 ,7.0 ,7.8 ,8.7 ,9.7 ,10.7 ,11.7 ,12.8},
+			new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.2 ,1.4 ,1.9 ,2.4 ,3.0 ,3.6 ,4.3 ,5.0 ,5.8 ,6.7 ,7.6 ,8.6 ,9.6 ,10.7 ,11.9 ,13.1 ,14.4},
+			new double[] {0.1 ,0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.3 ,1.5 ,2.0 ,2.7 ,3.3 ,4.1 ,5.0 ,5.9 ,6.9 ,8.0 ,9.2 ,10.4 ,11.7 ,13.1 ,14.6 ,16.1 ,17.8},
+			new double[] {0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.7 ,2.3 ,3.1 ,4.0 ,4.9 ,6.0 ,7.3 ,8.6 ,10.0 ,11.5 ,13.2 ,14.9 ,16.8 ,18.8 ,20.9 ,23.1}
+		};
+
+		private static double[][] druckverlustHIT_100_5 = {
+			new double[] {0.3 ,0.7 ,1.1 ,1.5 ,2.0 ,2.5 ,3.0 ,3.6 ,4.2 ,4.9 ,6.2 ,7.7 ,9.4 ,11.2 ,13.1 ,15.1 ,17.3 ,19.7 ,22.1 ,24.7 ,27.4 ,30.3 ,33.3 ,36.4 ,39.7},
+			new double[] {0.2 ,0.4 ,0.7 ,0.9 ,1.2 ,1.4 ,1.7 ,2.0 ,2.3 ,2.7 ,3.3 ,4.1 ,4.9 ,5.7 ,6.6 ,7.5 ,8.5 ,9.5 ,10.6 ,11.7 ,12.9 ,14.2 ,15.5 ,16.8 ,18.2},
+			new double[] {0.2 ,0.4 ,0.6 ,0.9 ,1.1 ,1.4 ,1.7 ,1.9 ,2.2 ,2.6 ,3.2 ,4.0 ,4.7 ,5.6 ,6.5 ,7.4 ,8.4 ,9.4 ,10.5 ,11.7 ,12.9 ,14.1 ,15.4 ,16.8 ,18.2},
+			new double[] {0.2 ,0.4 ,0.6 ,0.8 ,1.1 ,1.3 ,1.6 ,1.9 ,2.2 ,2.5 ,3.3 ,4.1 ,4.9 ,5.8 ,6.8 ,7.9 ,9.0 ,10.2 ,11.5 ,12.8 ,14.2 ,15.7 ,17.2 ,18.8 ,20.5},
+			new double[] {0.2 ,0.4 ,0.6 ,0.9 ,1.2 ,1.4 ,1.8 ,2.1 ,2.4 ,2.8 ,3.6 ,4.4 ,5.3 ,6.3 ,7.4 ,8.5 ,9.8 ,11.1 ,12.4 ,13.9 ,15.4 ,17.0 ,18.6 ,20.4 ,22.2},
+			new double[] {0.2 ,0.5 ,0.7 ,1.0 ,1.3 ,1.6 ,1.9 ,2.3 ,2.7 ,3.1 ,3.9 ,4.8 ,5.9 ,7.0 ,8.1 ,9.4 ,10.7 ,12.1 ,13.6 ,15.2 ,16.8 ,18.6 ,20.4 ,22.3 ,24.2}
+		};
+
+		private static double[][] druckverlustHIT_100_10 = {
+			new double[] {0.2 ,0.5 ,0.8 ,1.1 ,1.5 ,1.8 ,2.2 ,2.6 ,3.1 ,3.6 ,4.6 ,5.7 ,7.0 ,8.3 ,9.7 ,11.3 ,12.9 ,14.7 ,16.6 ,18.5 ,20.6 ,22.8 ,25.0 ,27.4 ,29.9},
+			new double[] {0.2 ,0.4 ,0.6 ,0.8 ,1.0 ,1.3 ,1.6 ,1.8 ,2.1 ,2.4 ,3.1 ,3.8 ,4.6 ,5.4 ,6.3 ,7.2 ,8.2 ,9.3 ,10.4 ,11.5 ,12.7 ,14.0 ,15.3 ,16.7 ,18.2},
+			new double[] {0.2 ,0.5 ,0.7 ,1.0 ,1.2 ,1.5 ,1.8 ,2.1 ,2.4 ,2.8 ,3.5 ,4.2 ,5.0 ,5.9 ,6.8 ,7.7 ,8.7 ,9.7 ,10.8 ,12.0 ,13.2 ,14.4 ,15.7 ,17.1 ,18.4},
+			new double[] {0.2 ,0.4 ,0.6 ,0.9 ,1.1 ,1.4 ,1.7 ,2.0 ,2.4 ,2.7 ,3.4 ,4.3 ,5.1 ,6.1 ,7.1 ,8.1 ,9.3 ,10.5 ,11.8 ,13.1 ,14.5 ,16.0 ,17.5 ,19.1 ,20.8},
+			new double[] {0.2 ,0.5 ,0.7 ,1.0 ,1.3 ,1.6 ,1.9 ,2.3 ,2.6 ,3.0 ,3.8 ,4.7 ,5.7 ,6.7 ,7.8 ,8.9 ,10.2 ,11.5 ,12.8 ,14.3 ,15.8 ,17.4 ,19.0 ,20.8 ,22.5},
+			new double[] {0.3 ,0.6 ,0.9 ,1.3 ,1.6 ,2.0 ,2.4 ,2.8 ,3.2 ,3.6 ,4.6 ,5.5 ,6.6 ,7.7 ,8.8 ,10.0 ,11.3 ,12.7 ,14.1 ,15.5 ,17.1 ,18.6 ,20.3 ,22.0 ,23.8}
+		};
+
+		private static double[][] druckverlustHIT_150_5 = {
+			new double[] {0.4 ,0.8 ,1.2 ,1.7 ,2.3 ,2.8 ,3.5 ,4.1 ,4.8 ,5.6 ,7.2 ,9.0 ,11.0 ,13.1 ,15.4 ,17.9 ,20.5 ,23.3 ,26.3 ,29.4 ,32.8 ,36.2 ,39.9 ,43.7 ,47.7},
+			new double[] {0.1 ,0.3 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.7 ,2.0 ,2.3 ,3.0 ,3.9 ,4.7 ,5.7 ,6.8 ,7.9 ,9.2 ,10.5 ,11.9 ,13.4 ,15.0 ,16.7 ,18.4 ,20.3 ,22.2},
+			new double[] {0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.6 ,1.9 ,2.4 ,3.1 ,3.8 ,4.5 ,5.4 ,6.3 ,7.2 ,8.3 ,9.4 ,10.5 ,11.7 ,13.0 ,14.4 ,15.8 ,17.3},
+			new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,2.0 ,2.5 ,3.1 ,3.8 ,4.5 ,5.3 ,6.2 ,7.1 ,8.0 ,9.0 ,10.1 ,11.3 ,12.5 ,13.8 ,15.1},
+			new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.5 ,0.7 ,0.9 ,1.0 ,1.2 ,1.4 ,1.9 ,2.4 ,3.0 ,3.6 ,4.3 ,5.0 ,5.9 ,6.7 ,7.6 ,8.6 ,9.6 ,10.7 ,11.9 ,13.1 ,14.3},
+			new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,2.0 ,2.6 ,3.2 ,3.9 ,4.6 ,5.4 ,6.3 ,7.2 ,8.2 ,9.2 ,10.3 ,11.5 ,12.7 ,14.0 ,15.4}
+		};
+
+		private static double[][] druckverlustHIT_150_10 = {
+			new double[] {0.2 ,0.4 ,0.7 ,1.0 ,1.3 ,1.7 ,2.1 ,2.6 ,3.1 ,3.6 ,4.8 ,6.2 ,7.7 ,9.4 ,11.3 ,13.3 ,15.4 ,17.7 ,20.2 ,22.9 ,25.7 ,28.6 ,31.8 ,35.0 ,38.5},
+			new double[] {0.2 ,0.3 ,0.5 ,0.7 ,1.0 ,1.2 ,1.5 ,1.7 ,2.0 ,2.4 ,3.0 ,3.8 ,4.6 ,5.5 ,6.5 ,7.5 ,8.6 ,9.8 ,11.0 ,12.4 ,13.8 ,15.2 ,16.8 ,18.4 ,20.0},
+			new double[] {0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.8 ,1.0 ,1.2 ,1.4 ,1.6 ,2.2 ,2.7 ,3.4 ,4.1 ,4.8 ,5.7 ,6.6 ,7.5 ,8.5 ,9.6 ,10.7 ,11.9 ,13.2 ,14.5 ,15.9},
+			new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,1.9 ,2.5 ,3.0 ,3.7 ,4.3 ,5.1 ,5.9 ,6.7 ,7.6 ,8.6 ,9.6 ,10.6 ,11.7 ,12.9 ,14.1},
+			new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.8 ,0.9 ,1.1 ,1.3 ,1.5 ,2.0 ,2.5 ,3.1 ,3.7 ,4.4 ,5.2 ,5.9 ,6.8 ,7.7 ,8.7 ,9.7 ,10.7 ,11.9 ,13.0 ,14.3},
+			new double[] {0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.2 ,1.5 ,1.7 ,2.2 ,2.8 ,3.4 ,4.1 ,4.8 ,5.7 ,6.5 ,7.4 ,8.4 ,9.5 ,10.6 ,11.7 ,12.9 ,14.2 ,15.6}
+		};
+
+		private static double[][] druckverlustHIT_200_5 = {
+			new double[] {0.2 ,0.5 ,0.9 ,1.3 ,1.8 ,2.3 ,2.8 ,3.4 ,4.1 ,4.8 ,6.5 ,8.3 ,10.3 ,12.6 ,15.1 ,17.8 ,20.7 ,23.8 ,27.1 ,30.7 ,34.4 ,38.4 ,42.6 ,47.0 ,51.6},
+			new double[] {0.2 ,0.4 ,0.7 ,0.9 ,1.2 ,1.5 ,1.9 ,2.2 ,2.6 ,3.0 ,3.8 ,4.8 ,5.8 ,6.9 ,8.1 ,9.3 ,10.7 ,12.1 ,13.7 ,15.3 ,17.0 ,18.7 ,20.6 ,22.6 ,24.6},
+			new double[] {0.1 ,0.3 ,0.5 ,0.7 ,1.0 ,1.2 ,1.5 ,1.8 ,2.1 ,2.4 ,3.2 ,4.0 ,4.9 ,5.9 ,7.0 ,8.2 ,9.4 ,10.8 ,12.2 ,13.7 ,15.3 ,17.0 ,18.8 ,20.6 ,22.5},
+			new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.8 ,1.0 ,1.3 ,1.5 ,1.8 ,2.5 ,3.2 ,4.1 ,5.0 ,6.1 ,7.2 ,8.5 ,9.8 ,11.3 ,12.8 ,14.4 ,16.2 ,18.0 ,19.9 ,21.9},
+			new double[] {0.1 ,0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.9 ,2.6 ,3.4 ,4.3 ,5.4 ,6.5 ,7.7 ,9.0 ,10.5 ,12.0 ,13.7 ,15.4 ,17.3 ,19.2 ,21.3},
+			new double[] {0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.9 ,1.4 ,2.0 ,2.8 ,3.7 ,4.7 ,5.8 ,7.0 ,8.4 ,9.8 ,11.4 ,13.1 ,15.0 ,16.9 ,19.0 ,21.1}
+		};
+
+		private static double[][] druckverlustHIT_200_10 = {
+			new double[] {0.1 ,0.3 ,0.5 ,0.7 ,1.0 ,1.3 ,1.7 ,2.2 ,2.6 ,3.2 ,4.4 ,5.7 ,7.3 ,9.0 ,10.9 ,13.1 ,15.3 ,17.8 ,20.5 ,23.3 ,26.4 ,29.6 ,33.0 ,36.6 ,40.3},
+			new double[] {0.2 ,0.4 ,0.7 ,1.0 ,1.2 ,1.5 ,1.9 ,2.2 ,2.6 ,3.0 ,3.8 ,4.7 ,5.7 ,6.7 ,7.8 ,9.0 ,10.3 ,11.7 ,13.1 ,14.6 ,16.2 ,17.9 ,19.6 ,21.4 ,23.3},
+			new double[] {0.1 ,0.3 ,0.4 ,0.6 ,0.8 ,1.1 ,1.3 ,1.6 ,1.9 ,2.2 ,2.9 ,3.7 ,4.6 ,5.6 ,6.6 ,7.7 ,9.0 ,10.3 ,11.7 ,13.2 ,14.7 ,16.4 ,18.2 ,20.0 ,21.9},
+			new double[] {0.1 ,0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.6 ,2.2 ,3.0 ,3.8 ,4.7 ,5.7 ,6.8 ,8.0 ,9.3 ,10.7 ,12.2 ,13.8 ,15.4 ,17.2 ,19.1 ,21.1},
+			new double[] {0.1 ,0.1 ,0.1 ,0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.9 ,1.1 ,1.7 ,2.3 ,3.1 ,3.9 ,4.9 ,6.0 ,7.2 ,8.4 ,9.8 ,11.3 ,12.9 ,14.6 ,16.5 ,18.4 ,20.4},
+			new double[] {0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.7 ,1.2 ,1.8 ,2.5 ,3.3 ,4.3 ,5.4 ,6.6 ,7.9 ,9.3 ,10.8 ,12.5 ,14.2 ,16.1 ,18.1 ,20.2}
+		};
+
+		private static double[][] druckverlustHIT_250_5 = {
+			new double[] {0.2, 0.5, 0.9, 1.3, 1.8, 2.3, 2.8, 3.4, 4.1, 4.8, 6.5, 8.3, 10.3, 12.6, 15.1, 17.8, 20.7, 23.8, 27.1, 30.7, 34.4, 38.4, 42.6, 47.0, 51.6},
+			new double[] {0.2, 0.4, 0.7, 0.9, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.8, 5.8, 6.9, 8.1, 9.3, 10.7, 12.1, 13.7, 15.3, 17.0, 18.7, 20.6, 22.6, 24.6},
+			new double[] {0.1, 0.3, 0.5, 0.7, 1.0, 1.2, 1.5, 1.8, 2.1, 2.4, 3.2, 4.0, 4.9, 5.9, 7.0, 8.2, 9.4, 10.8, 12.2, 13.7, 15.3, 17.0, 18.8, 20.6, 22.5},
+			new double[] {0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1.0, 1.3, 1.5, 1.8, 2.5, 3.2, 4.1, 5.0, 6.1, 7.2, 8.5, 9.8, 11.3, 12.8, 14.4, 16.2, 18.0, 19.9, 21.9},
+			new double[] {0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.9, 2.6, 3.4, 4.3, 5.4, 6.5, 7.7, 9.0, 10.5, 12.0, 13.7, 15.4, 17.3, 19.2, 21.3},
+			new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.6, 0.9, 1.4, 2.0, 2.8, 3.7, 4.7, 5.8, 7.0, 8.4, 9.8, 11.4, 13.1, 15.0, 16.9, 19.0, 21.1}
+		};
+
+		private static double[][] druckverlustHIT_250_10 = {
+			new double[] {0.1, 0.3, 0.5, 0.7, 1.0, 1.3, 1.7, 2.2, 2.6, 3.2, 4.4, 5.7, 7.3, 9.0, 10.9, 13.1, 15.3, 17.8, 20.5, 23.3, 26.4, 29.6, 33.0, 36.6, 40.3},
+			new double[] {0.2, 0.4, 0.7, 1.0, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.7, 5.7, 6.7, 7.8, 9.0, 10.3, 11.7, 13.1, 14.6, 16.2, 17.9, 19.6, 21.4, 23.3},
+			new double[] {0.1, 0.3, 0.4, 0.6, 0.8, 1.1, 1.3, 1.6, 1.9, 2.2, 2.9, 3.7, 4.6, 5.6, 6.6, 7.7, 9.0, 10.3, 11.7, 13.2, 14.7, 16.4, 18.2, 20.0, 21.9},
+			new double[] {0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.4, 1.6, 2.2, 3.0, 3.8, 4.7, 5.7, 6.8, 8.0, 9.3, 10.7, 12.2, 13.8, 15.4, 17.2, 19.1, 21.1},
+			new double[] {0.1, 0.1, 0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.7, 2.3, 3.1, 3.9, 4.9, 6.0, 7.2, 8.4, 9.8, 11.3, 12.9, 14.6, 16.5, 18.4, 20.4},
+			new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 1.2, 1.8, 2.5, 3.3, 4.3, 5.4, 6.6, 7.9, 9.3, 10.8, 12.5, 14.2, 16.1, 18.1, 20.2}
+		};
+
 		private static double[] beplankungRWerte = { 0, 0.01, 0.02, 0.1 };
 		private static double[] beplankungFaktoren = { 1, 0.95, 0.91, 0.66 };
-
-		private static double alphaBoden = 10.8;
-		private static double alphaWand = 8;
-		private static double alphaDecke = 6.5;
 
 		private static double defaultDaemmung = 2.5;
 
@@ -305,24 +391,6 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static double ConfigAlphaBoden {
-			get { return alphaBoden; }
-			set { alphaBoden = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigAlphaWand {
-			get { return alphaWand; }
-			set { alphaWand = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigAlphaDecke {
-			get { return alphaDecke; }
-			set { alphaDecke = value; }
-		}
-
-		[ProductParameter]
 		public static double ConfigDefaultDaemmung {
 			get { return defaultDaemmung; }
 			set { defaultDaemmung = value; }
@@ -333,36 +401,6 @@ namespace Europlan.Common {
 			get { return usePlus; }
 			set { usePlus = value; }
 		}
-
-		/*[ProductParameter]
-		public static double ConfigFactorSpezialputz {
-			get { return factorSpezialputz; }
-			set { factorSpezialputz = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigFactorMaschinenputz {
-			get { return factorMaschinenputz; }
-			set { factorMaschinenputz = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigFactorLehmputz {
-			get { return factorLehmputz; }
-			set { factorLehmputz = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigFactorGkpHohlraum {
-			get { return factorGkpHohlraum; }
-			set { factorGkpHohlraum = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigFactorHolzHohlraum {
-			get { return factorHolzHohlraum; }
-			set { factorHolzHohlraum = value; }
-		}*/
 
 		[ProductParameter]
 		public static double ConfigSpreizungHeizMin {
@@ -386,6 +424,176 @@ namespace Europlan.Common {
 		public static double ConfigSpreizungKühlMax {
 			get { return spreizungKühlMax; }
 			set { spreizungKühlMax = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustHIT_50_5String {
+			get {
+				return ConvertArrayToString2(druckverlustHIT_50_5);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					druckverlustHIT_50_5 = array;
+				}
+			}
+		}
+		public static double[][] ConfigDruckverlustHIT_50_5 {
+			get { return druckverlustHIT_50_5; }
+			set { druckverlustHIT_50_5 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustHIT_50_10String {
+			get {
+				return ConvertArrayToString2(druckverlustHIT_50_10);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					druckverlustHIT_50_10 = array;
+				}
+			}
+		}
+		public static double[][] ConfigDruckverlustHIT_50_10 {
+			get { return druckverlustHIT_50_10; }
+			set { druckverlustHIT_50_10 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustHIT_100_5String {
+			get {
+				return ConvertArrayToString2(druckverlustHIT_100_5);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					druckverlustHIT_100_5 = array;
+				}
+			}
+		}
+		public static double[][] ConfigDruckverlustHIT_100_5 {
+			get { return druckverlustHIT_100_5; }
+			set { druckverlustHIT_100_5 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustHIT_100_10String {
+			get {
+				return ConvertArrayToString2(druckverlustHIT_100_10);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					druckverlustHIT_100_10 = array;
+				}
+			}
+		}
+		public static double[][] ConfigDruckverlustHIT_100_10 {
+			get { return druckverlustHIT_100_10; }
+			set { druckverlustHIT_100_10 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustHIT_150_5String {
+			get {
+				return ConvertArrayToString2(druckverlustHIT_150_5);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					druckverlustHIT_150_5 = array;
+				}
+			}
+		}
+		public static double[][] ConfigDruckverlustHIT_150_5 {
+			get { return druckverlustHIT_150_5; }
+			set { druckverlustHIT_150_5 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustHIT_150_10String {
+			get {
+				return ConvertArrayToString2(druckverlustHIT_150_10);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					druckverlustHIT_150_10 = array;
+				}
+			}
+		}
+		public static double[][] ConfigDruckverlustHIT_150_10 {
+			get { return druckverlustHIT_150_10; }
+			set { druckverlustHIT_150_10 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustHIT_200_5String {
+			get {
+				return ConvertArrayToString2(druckverlustHIT_200_5);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					druckverlustHIT_200_5 = array;
+				}
+			}
+		}
+		public static double[][] ConfigDruckverlustHIT_200_5 {
+			get { return druckverlustHIT_200_5; }
+			set { druckverlustHIT_200_5 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustHIT_200_10String {
+			get {
+				return ConvertArrayToString2(druckverlustHIT_200_10);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					druckverlustHIT_200_10 = array;
+				}
+			}
+		}
+		public static double[][] ConfigDruckverlustHIT_200_10 {
+			get { return druckverlustHIT_200_10; }
+			set { druckverlustHIT_200_10 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustHIT_250_5String {
+			get {
+				return ConvertArrayToString2(druckverlustHIT_250_5);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					druckverlustHIT_250_5 = array;
+				}
+			}
+		}
+		public static double[][] ConfigDruckverlustHIT_250_5 {
+			get { return druckverlustHIT_250_5; }
+			set { druckverlustHIT_250_5 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustHIT_250_10String {
+			get {
+				return ConvertArrayToString2(druckverlustHIT_250_10);
+			}
+			set {
+				double[][] array = ConvertStringToArray2(value);
+				if (array != null) {
+					druckverlustHIT_250_10 = array;
+				}
+			}
+		}
+		public static double[][] ConfigDruckverlustHIT_250_10 {
+			get { return druckverlustHIT_250_10; }
+			set { druckverlustHIT_250_10 = value; }
 		}
 		#endregion Product Parameters
 
@@ -1010,8 +1218,16 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override double Rho {
+		public override double Dichte {
 			get { return HithermProduct.ConfigRho; }
+		}
+
+		public override double Waermekapazitaet {
+			get { return HithermProduct.ConfigC; }
+		}
+
+		public override double Viskositaet {
+			get { return HithermProduct.ConfigV; }
 		}
 	}
 	
