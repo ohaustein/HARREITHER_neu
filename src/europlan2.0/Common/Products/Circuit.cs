@@ -239,7 +239,7 @@ namespace Europlan.Common {
 			get { return this.c_massenstromHeat; }
 		}
 		public double C_DurchflussHeat {
-			get { return this.C_MassenstromHeat * 1000 / this.PlannedProduct.Product.Rho; }
+			get { return this.C_MassenstromHeat * 1000 / this.PlannedProduct.Product.Dichte; }
 		}
 
 		protected double c_flussGeschwindigkeitHeat;
@@ -273,7 +273,7 @@ namespace Europlan.Common {
 			get { return this.c_massenstromCool; }
 		}
 		public double C_DurchflussCool {
-			get { return this.C_MassenstromCool * 1000 / this.PlannedProduct.Product.Rho; }
+			get { return this.C_MassenstromCool * 1000 / this.PlannedProduct.Product.Dichte; }
 		}
 
 		protected double c_flussGeschwindigkeitCool;

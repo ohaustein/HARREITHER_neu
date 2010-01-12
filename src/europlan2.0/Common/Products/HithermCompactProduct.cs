@@ -114,12 +114,14 @@ namespace Europlan.Common {
 			new double[] {58.0, 44.0, 32.0, 19.5}  // ti=25°C
 		};
 
+		/*private static double[] druckverlustHITC_620 = { 0.1, 0.3, 0.4, 0.6, 0.8, 0.9, 1.1, 1.3, 1.6, 1.8, 2.3, 2.8, 3.4, 4.0, 4.7, 5.4, 6.2, 7.0, 7.9, 8.8, 9.7, 10.7, 11.8, 12.8, 14.0 };
+		private static double[] druckverlustHITC_1000 = { 0.2, 0.4, 0.7, 0.9, 1.2, 1.4, 1.7, 2.0, 2.3, 2.7, 3.3, 4.1, 4.9, 5.7, 6.6, 7.5, 8.5, 9.5, 10.6, 11.7, 12.9, 14.2, 15.5, 16.8, 18.2 };
+		private static double[] druckverlustHITC_1500 = { 0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.7, 2.0, 2.3, 3.0, 3.9, 4.7, 5.7, 6.8, 7.9, 9.2, 10.5, 11.9, 13.4, 15.0, 16.7, 18.4, 20.3, 22.2 };
+		private static double[] druckverlustHITC_2000 = { 0.2, 0.4, 0.7, 0.9, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.8, 5.8, 6.9, 8.1, 9.3, 10.7, 12.1, 13.7, 15.3, 17.0, 18.7, 20.6, 22.6, 24.6 };
+		private static double[] druckverlustHITC_2500 = { 0.25, 0.5, 0.875, 1.125, 1.5, 1.875, 2.375, 2.75, 3.25, 3.75, 4.75, 6.0, 7.25, 8.625, 10.125, 11.625, 13.375, 15.125, 17.125, 19.125, 21.25, 23.375, 25.75, 28.25, 30.75 };*/
+
 		private static double[] beplankungRWerte = { 0, 0.01, 0.02, 0.1 };
 		private static double[] beplankungFaktoren = { 1, 0.95, 0.91, 0.66 };
-
-		private static double alphaBoden = 10.8;
-		private static double alphaWand = 8;
-		private static double alphaDecke = 6.5;
 
 		private static double defaultDaemmung = 2.5;
 
@@ -430,24 +432,6 @@ namespace Europlan.Common {
 		public static double[] ConfigBeplankungFaktoren {
 			get { return beplankungFaktoren; }
 			set { beplankungFaktoren = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigAlphaBoden {
-			get { return alphaBoden; }
-			set { alphaBoden = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigAlphaWand {
-			get { return alphaWand; }
-			set { alphaWand = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigAlphaDecke {
-			get { return alphaDecke; }
-			set { alphaDecke = value; }
 		}
 
 		[ProductParameter]
@@ -1108,8 +1092,16 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override double Rho {
+		public override double Dichte {
 			get { return HithermCompactProduct.ConfigRho; }
+		}
+
+		public override double Waermekapazitaet {
+			get { return HithermCompactProduct.ConfigC; }
+		}
+
+		public override double Viskositaet {
+			get { return HithermCompactProduct.ConfigV; }
 		}
 	}
 	

@@ -349,67 +349,75 @@ namespace Europlan.Common {
 			}
 		}
 
-		public double DruckverlustRohr(double durchfluss, double rohrInnenQuerschnitt, double dichte, double rohrInnenDurchmesser, double viskositaet, double k, double rohrLaenge) {
-			double flussGeschwindigkeit = FlussGeschwindigkeit(durchfluss, rohrInnenQuerschnitt, dichte);
+		public double DruckverlustRohr(double massenstrom, double rohrInnenQuerschnitt, double dichte, double rohrInnenDurchmesser, double viskositaet, double k, double rohrLaenge) {
+			double flussGeschwindigkeit = FlussGeschwindigkeit(massenstrom, rohrInnenQuerschnitt, dichte);
 			double reynoldsZahl = ReynoldsZahl(flussGeschwindigkeit, rohrInnenDurchmesser, viskositaet);
 			double lambda = WiderstandsBeiwert(reynoldsZahl, k, rohrInnenDurchmesser);
 			return (lambda * (rohrLaenge / rohrInnenDurchmesser) * dichte * (Math.Pow(flussGeschwindigkeit, 2) / 2)) / 100;
 		}
 
 		public double DruckverlustRohr(double leistung, double c, double spreizung, double rohrInnenQuerschnitt, double dichte, double rohrInnenDurchmesser, double viskositaet, double k, double rohrLaenge) {
-			double durchfluss = Massenstrom(leistung, c, spreizung);
-			return DruckverlustRohr(durchfluss, rohrInnenQuerschnitt, dichte, rohrInnenDurchmesser, viskositaet, k, rohrLaenge);
+			double massenstrom = Massenstrom(leistung, c, spreizung);
+			return DruckverlustRohr(massenstrom, rohrInnenQuerschnitt, dichte, rohrInnenDurchmesser, viskositaet, k, rohrLaenge);
 		}
 
-		public double DruckverlustModul_100_40(int anzahl, double durchfluss) {
+		public double DruckverlustModul_100_40(int anzahl, double massenstrom) {
 			double[] x = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500 };
-			double[] y = { 0.2, 0.35, 0.65, 0.9, 1.25, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25 };
+			//double[] y = { 0.2, 0.35, 0.65, 0.9, 1.25, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25 };
+			double[] y = ModulKlimaBodenProduct.ConfigDruckverlustModul_100_40;
 			double[] c = null;
 			spline3.buildcubicspline(x, y, 30, 0, 0, 0, 0, ref c);
 			if (anzahl > 0 && anzahl <= 40) {
-				return spline3.splineinterpolation(ref c, durchfluss) * anzahl;
+				return spline3.splineinterpolation(ref c, massenstrom) * anzahl;
 			} else {
 				return 0;
 			}
 		}
 
-		public double DruckverlustModul_120_30(int anzahl, double durchfluss) {
+		public double DruckverlustModul_120_30(int anzahl, double massenstrom) {
 			double[] x = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500 };
-			double[] y = { 0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1 };
+			//double[] y = { 0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1 };
+			double[] y = ModulKlimaDeckeProduct.ConfigDruckverlustModul_120_30;
 			double[] c = null;
 			spline3.buildcubicspline(x, y, 30, 0, 0, 0, 0, ref c);
 			if (anzahl > 0 && anzahl <= 40) {
-				return spline3.splineinterpolation(ref c, durchfluss) * anzahl;
+				return spline3.splineinterpolation(ref c, massenstrom) * anzahl;
 			} else {
 				return 0;
 			}
 		}
 
-		public double DruckverlustModul_100_30(int anzahl, double durchfluss) {
+		public double DruckverlustModul_100_30(int anzahl, double massenstrom) {
 			double[] x = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500 };
-			double[] y = { 0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3 };
+			//double[] y = { 0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3 };
+			double[] y = ModulKlimaDeckeProduct.ConfigDruckverlustModul_100_30;
 			double[] c = null;
 			spline3.buildcubicspline(x, y, 30, 0, 0, 0, 0, ref c);
 			if (anzahl > 0 && anzahl <= 40) {
-				return spline3.splineinterpolation(ref c, durchfluss) * anzahl;
+				return spline3.splineinterpolation(ref c, massenstrom) * anzahl;
 			} else {
 				return 0;
 			}
 		}
 
-		public double DruckverlustModul_80_30(int anzahl, double durchfluss) {
+		public double DruckverlustModul_80_30(int anzahl, double massenstrom) {
 			double[] x = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500 };
-			double[] y = { 0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3 };
+			//double[] y = { 0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3 };
+			double[] y = ModulKlimaDeckeProduct.ConfigDruckverlustModul_80_30;
 			double[] c = null;
 			spline3.buildcubicspline(x, y, 30, 0, 0, 0, 0, ref c);
 			if (anzahl > 0 && anzahl <= 40) {
-				return spline3.splineinterpolation(ref c, durchfluss) * anzahl;
+				return spline3.splineinterpolation(ref c, massenstrom) * anzahl;
 			} else {
 				return 0;
 			}
 		}
 
-		public double DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum type, int width, double durchfluss) {
+		/// <summary>
+		/// Berechnet den Druckversult eines Hitherm Registers. Der Durchfluss/Massenstrom muss dieser Methode in kg/h
+		/// uebergeben werden und nicht in l/h wie in der Tabelle im Hitherm Produktkatalog!
+		/// </summary>
+		public double DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum type, int width, double massenstrom) {
 			double[] x1;
 			double[] x2;
 			double[][] y;
@@ -419,102 +427,112 @@ namespace Europlan.Common {
 			switch (type) {
 				case HithermRegister.HithermRegisterTypeEnum.HIT_50_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
-					y = new double[][] {new double[] {0.1 ,0.1 ,0.1 ,0.2 ,0.4 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,2.2 ,3.0 ,3.9 ,5.0 ,6.1 ,7.4 ,8.8 ,10.4 ,12.0 ,13.8 ,15.7 ,17.8 ,19.9 ,22.2 ,24.6},
+					/*y = new double[][] {new double[] {0.1 ,0.1 ,0.1 ,0.2 ,0.4 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,2.2 ,3.0 ,3.9 ,5.0 ,6.1 ,7.4 ,8.8 ,10.4 ,12.0 ,13.8 ,15.7 ,17.8 ,19.9 ,22.2 ,24.6},
 						new double[] {0.1 ,0.3 ,0.4 ,0.6 ,0.8 ,0.9 ,1.1 ,1.3 ,1.6 ,1.8 ,2.3 ,2.8 ,3.4 ,4.0 ,4.7 ,5.4 ,6.2 ,7.0 ,7.9 ,8.8 ,9.7 ,10.7 ,11.8 ,12.8 ,14.0},
 						new double[] {0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.8 ,0.9 ,1.1 ,1.3 ,1.5 ,1.9 ,2.4 ,2.9 ,3.5 ,4.1 ,4.8 ,5.5 ,6.3 ,7.1 ,8.0 ,8.9 ,9.8 ,10.8 ,11.9 ,12.9},
 						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.2 ,1.4 ,1.9 ,2.4 ,2.9 ,3.6 ,4.2 ,5.0 ,5.8 ,6.6 ,7.5 ,8.5 ,9.5 ,10.6 ,11.7 ,12.9 ,14.2},
 						new double[] {0.1 ,0.1 ,0.2 ,0.4 ,0.5 ,0.6 ,0.8 ,1.0 ,1.2 ,1.4 ,1.9 ,2.5 ,3.1 ,3.8 ,4.6 ,5.4 ,6.3 ,7.3 ,8.3 ,9.5 ,10.7 ,11.9 ,13.2 ,14.6 ,16.1},
-						new double[] {0.1 ,0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,2.1 ,2.8 ,3.6 ,4.4 ,5.4 ,6.5 ,7.7 ,8.9 ,10.3 ,11.8 ,13.3 ,15.0 ,16.7 ,18.6 ,20.5}};
+						new double[] {0.1 ,0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,2.1 ,2.8 ,3.6 ,4.4 ,5.4 ,6.5 ,7.7 ,8.9 ,10.3 ,11.8 ,13.3 ,15.0 ,16.7 ,18.6 ,20.5}};*/
+					y = HithermProduct.ConfigDruckverlustHIT_50_5;
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_50_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
-					y = new double[][] {new double[] {0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,1.8 ,2.4 ,3.1 ,3.8 ,4.7 ,5.6 ,6.6 ,7.7 ,8.9 ,10.1 ,11.5 ,12.9 ,14.4 ,16.0 ,17.7 ,19.4},
+					/*y = new double[][] {new double[] {0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.8 ,1.0 ,1.2 ,1.5 ,1.8 ,2.4 ,3.1 ,3.8 ,4.7 ,5.6 ,6.6 ,7.7 ,8.9 ,10.1 ,11.5 ,12.9 ,14.4 ,16.0 ,17.7 ,19.4},
 						new double[] {0.1 ,0.3 ,0.4 ,0.5 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,1.7 ,2.2 ,2.7 ,3.2 ,3.8 ,4.5 ,5.2 ,5.9 ,6.7 ,7.5 ,8.4 ,9.3 ,10.2 ,11.2 ,12.3 ,13.4},
 						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.7 ,0.9 ,1.1 ,1.2 ,1.4 ,1.9 ,2.3 ,2.9 ,3.4 ,4.1 ,4.7 ,5.4 ,6.2 ,7.0 ,7.8 ,8.7 ,9.7 ,10.7 ,11.7 ,12.8},
 						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.2 ,1.4 ,1.9 ,2.4 ,3.0 ,3.6 ,4.3 ,5.0 ,5.8 ,6.7 ,7.6 ,8.6 ,9.6 ,10.7 ,11.9 ,13.1 ,14.4},
 						new double[] {0.1 ,0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.3 ,1.5 ,2.0 ,2.7 ,3.3 ,4.1 ,5.0 ,5.9 ,6.9 ,8.0 ,9.2 ,10.4 ,11.7 ,13.1 ,14.6 ,16.1 ,17.8},
-						new double[] {0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.7 ,2.3 ,3.1 ,4.0 ,4.9 ,6.0 ,7.3 ,8.6 ,10.0 ,11.5 ,13.2 ,14.9 ,16.8 ,18.8 ,20.9 ,23.1}};
+						new double[] {0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.7 ,2.3 ,3.1 ,4.0 ,4.9 ,6.0 ,7.3 ,8.6 ,10.0 ,11.5 ,13.2 ,14.9 ,16.8 ,18.8 ,20.9 ,23.1}};*/
+					y = HithermProduct.ConfigDruckverlustHIT_50_10;
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_100_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
-					y = new double[][] {new double[] {0.3 ,0.7 ,1.1 ,1.5 ,2.0 ,2.5 ,3.0 ,3.6 ,4.2 ,4.9 ,6.2 ,7.7 ,9.4 ,11.2 ,13.1 ,15.1 ,17.3 ,19.7 ,22.1 ,24.7 ,27.4 ,30.3 ,33.3 ,36.4 ,39.7},
+					/*y = new double[][] {new double[] {0.3 ,0.7 ,1.1 ,1.5 ,2.0 ,2.5 ,3.0 ,3.6 ,4.2 ,4.9 ,6.2 ,7.7 ,9.4 ,11.2 ,13.1 ,15.1 ,17.3 ,19.7 ,22.1 ,24.7 ,27.4 ,30.3 ,33.3 ,36.4 ,39.7},
 						new double[] {0.2 ,0.4 ,0.7 ,0.9 ,1.2 ,1.4 ,1.7 ,2.0 ,2.3 ,2.7 ,3.3 ,4.1 ,4.9 ,5.7 ,6.6 ,7.5 ,8.5 ,9.5 ,10.6 ,11.7 ,12.9 ,14.2 ,15.5 ,16.8 ,18.2},
 						new double[] {0.2 ,0.4 ,0.6 ,0.9 ,1.1 ,1.4 ,1.7 ,1.9 ,2.2 ,2.6 ,3.2 ,4.0 ,4.7 ,5.6 ,6.5 ,7.4 ,8.4 ,9.4 ,10.5 ,11.7 ,12.9 ,14.1 ,15.4 ,16.8 ,18.2},
 						new double[] {0.2 ,0.4 ,0.6 ,0.8 ,1.1 ,1.3 ,1.6 ,1.9 ,2.2 ,2.5 ,3.3 ,4.1 ,4.9 ,5.8 ,6.8 ,7.9 ,9.0 ,10.2 ,11.5 ,12.8 ,14.2 ,15.7 ,17.2 ,18.8 ,20.5},
 						new double[] {0.2 ,0.4 ,0.6 ,0.9 ,1.2 ,1.4 ,1.8 ,2.1 ,2.4 ,2.8 ,3.6 ,4.4 ,5.3 ,6.3 ,7.4 ,8.5 ,9.8 ,11.1 ,12.4 ,13.9 ,15.4 ,17.0 ,18.6 ,20.4 ,22.2},
-						new double[] {0.2 ,0.5 ,0.7 ,1.0 ,1.3 ,1.6 ,1.9 ,2.3 ,2.7 ,3.1 ,3.9 ,4.8 ,5.9 ,7.0 ,8.1 ,9.4 ,10.7 ,12.1 ,13.6 ,15.2 ,16.8 ,18.6 ,20.4 ,22.3 ,24.2}};
+						new double[] {0.2 ,0.5 ,0.7 ,1.0 ,1.3 ,1.6 ,1.9 ,2.3 ,2.7 ,3.1 ,3.9 ,4.8 ,5.9 ,7.0 ,8.1 ,9.4 ,10.7 ,12.1 ,13.6 ,15.2 ,16.8 ,18.6 ,20.4 ,22.3 ,24.2}};*/
+					y = HithermProduct.ConfigDruckverlustHIT_100_5;
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_100_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
-					y = new double[][] {new double[] {0.2 ,0.5 ,0.8 ,1.1 ,1.5 ,1.8 ,2.2 ,2.6 ,3.1 ,3.6 ,4.6 ,5.7 ,7.0 ,8.3 ,9.7 ,11.3 ,12.9 ,14.7 ,16.6 ,18.5 ,20.6 ,22.8 ,25.0 ,27.4 ,29.9},
+					/*y = new double[][] {new double[] {0.2 ,0.5 ,0.8 ,1.1 ,1.5 ,1.8 ,2.2 ,2.6 ,3.1 ,3.6 ,4.6 ,5.7 ,7.0 ,8.3 ,9.7 ,11.3 ,12.9 ,14.7 ,16.6 ,18.5 ,20.6 ,22.8 ,25.0 ,27.4 ,29.9},
 						new double[] {0.2 ,0.4 ,0.6 ,0.8 ,1.0 ,1.3 ,1.6 ,1.8 ,2.1 ,2.4 ,3.1 ,3.8 ,4.6 ,5.4 ,6.3 ,7.2 ,8.2 ,9.3 ,10.4 ,11.5 ,12.7 ,14.0 ,15.3 ,16.7 ,18.2},
 						new double[] {0.2 ,0.5 ,0.7 ,1.0 ,1.2 ,1.5 ,1.8 ,2.1 ,2.4 ,2.8 ,3.5 ,4.2 ,5.0 ,5.9 ,6.8 ,7.7 ,8.7 ,9.7 ,10.8 ,12.0 ,13.2 ,14.4 ,15.7 ,17.1 ,18.4},
 						new double[] {0.2 ,0.4 ,0.6 ,0.9 ,1.1 ,1.4 ,1.7 ,2.0 ,2.4 ,2.7 ,3.4 ,4.3 ,5.1 ,6.1 ,7.1 ,8.1 ,9.3 ,10.5 ,11.8 ,13.1 ,14.5 ,16.0 ,17.5 ,19.1 ,20.8},
 						new double[] {0.2 ,0.5 ,0.7 ,1.0 ,1.3 ,1.6 ,1.9 ,2.3 ,2.6 ,3.0 ,3.8 ,4.7 ,5.7 ,6.7 ,7.8 ,8.9 ,10.2 ,11.5 ,12.8 ,14.3 ,15.8 ,17.4 ,19.0 ,20.8 ,22.5},
-						new double[] {0.3 ,0.6 ,0.9 ,1.3 ,1.6 ,2.0 ,2.4 ,2.8 ,3.2 ,3.6 ,4.6 ,5.5 ,6.6 ,7.7 ,8.8 ,10.0 ,11.3 ,12.7 ,14.1 ,15.5 ,17.1 ,18.6 ,20.3 ,22.0 ,23.8}};
+						new double[] {0.3 ,0.6 ,0.9 ,1.3 ,1.6 ,2.0 ,2.4 ,2.8 ,3.2 ,3.6 ,4.6 ,5.5 ,6.6 ,7.7 ,8.8 ,10.0 ,11.3 ,12.7 ,14.1 ,15.5 ,17.1 ,18.6 ,20.3 ,22.0 ,23.8}};*/
+					y = HithermProduct.ConfigDruckverlustHIT_100_10;
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_150_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
-					y = new double[][] {new double[] {0.4 ,0.8 ,1.2 ,1.7 ,2.3 ,2.8 ,3.5 ,4.1 ,4.8 ,5.6 ,7.2 ,9.0 ,11.0 ,13.1 ,15.4 ,17.9 ,20.5 ,23.3 ,26.3 ,29.4 ,32.8 ,36.2 ,39.9 ,43.7 ,47.7},
+					/*y = new double[][] {new double[] {0.4 ,0.8 ,1.2 ,1.7 ,2.3 ,2.8 ,3.5 ,4.1 ,4.8 ,5.6 ,7.2 ,9.0 ,11.0 ,13.1 ,15.4 ,17.9 ,20.5 ,23.3 ,26.3 ,29.4 ,32.8 ,36.2 ,39.9 ,43.7 ,47.7},
 						new double[] {0.1 ,0.3 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.7 ,2.0 ,2.3 ,3.0 ,3.9 ,4.7 ,5.7 ,6.8 ,7.9 ,9.2 ,10.5 ,11.9 ,13.4 ,15.0 ,16.7 ,18.4 ,20.3 ,22.2},
 						new double[] {0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.6 ,1.9 ,2.4 ,3.1 ,3.8 ,4.5 ,5.4 ,6.3 ,7.2 ,8.3 ,9.4 ,10.5 ,11.7 ,13.0 ,14.4 ,15.8 ,17.3},
 						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,2.0 ,2.5 ,3.1 ,3.8 ,4.5 ,5.3 ,6.2 ,7.1 ,8.0 ,9.0 ,10.1 ,11.3 ,12.5 ,13.8 ,15.1},
 						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.5 ,0.7 ,0.9 ,1.0 ,1.2 ,1.4 ,1.9 ,2.4 ,3.0 ,3.6 ,4.3 ,5.0 ,5.9 ,6.7 ,7.6 ,8.6 ,9.6 ,10.7 ,11.9 ,13.1 ,14.3},
-						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,2.0 ,2.6 ,3.2 ,3.9 ,4.6 ,5.4 ,6.3 ,7.2 ,8.2 ,9.2 ,10.3 ,11.5 ,12.7 ,14.0 ,15.4}};
+						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,2.0 ,2.6 ,3.2 ,3.9 ,4.6 ,5.4 ,6.3 ,7.2 ,8.2 ,9.2 ,10.3 ,11.5 ,12.7 ,14.0 ,15.4}};*/
+					y = HithermProduct.ConfigDruckverlustHIT_150_5;
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_150_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
-					y = new double[][] {new double[] {0.2 ,0.4 ,0.7 ,1.0 ,1.3 ,1.7 ,2.1 ,2.6 ,3.1 ,3.6 ,4.8 ,6.2 ,7.7 ,9.4 ,11.3 ,13.3 ,15.4 ,17.7 ,20.2 ,22.9 ,25.7 ,28.6 ,31.8 ,35.0 ,38.5},
+					/*y = new double[][] {new double[] {0.2 ,0.4 ,0.7 ,1.0 ,1.3 ,1.7 ,2.1 ,2.6 ,3.1 ,3.6 ,4.8 ,6.2 ,7.7 ,9.4 ,11.3 ,13.3 ,15.4 ,17.7 ,20.2 ,22.9 ,25.7 ,28.6 ,31.8 ,35.0 ,38.5},
 						new double[] {0.2 ,0.3 ,0.5 ,0.7 ,1.0 ,1.2 ,1.5 ,1.7 ,2.0 ,2.4 ,3.0 ,3.8 ,4.6 ,5.5 ,6.5 ,7.5 ,8.6 ,9.8 ,11.0 ,12.4 ,13.8 ,15.2 ,16.8 ,18.4 ,20.0},
 						new double[] {0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.8 ,1.0 ,1.2 ,1.4 ,1.6 ,2.2 ,2.7 ,3.4 ,4.1 ,4.8 ,5.7 ,6.6 ,7.5 ,8.5 ,9.6 ,10.7 ,11.9 ,13.2 ,14.5 ,15.9},
 						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.7 ,0.9 ,1.1 ,1.3 ,1.5 ,1.9 ,2.5 ,3.0 ,3.7 ,4.3 ,5.1 ,5.9 ,6.7 ,7.6 ,8.6 ,9.6 ,10.6 ,11.7 ,12.9 ,14.1},
 						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.8 ,0.9 ,1.1 ,1.3 ,1.5 ,2.0 ,2.5 ,3.1 ,3.7 ,4.4 ,5.2 ,5.9 ,6.8 ,7.7 ,8.7 ,9.7 ,10.7 ,11.9 ,13.0 ,14.3},
-						new double[] {0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.2 ,1.5 ,1.7 ,2.2 ,2.8 ,3.4 ,4.1 ,4.8 ,5.7 ,6.5 ,7.4 ,8.4 ,9.5 ,10.6 ,11.7 ,12.9 ,14.2 ,15.6}};
+						new double[] {0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.8 ,1.0 ,1.2 ,1.5 ,1.7 ,2.2 ,2.8 ,3.4 ,4.1 ,4.8 ,5.7 ,6.5 ,7.4 ,8.4 ,9.5 ,10.6 ,11.7 ,12.9 ,14.2 ,15.6}};*/
+					y = HithermProduct.ConfigDruckverlustHIT_150_10;
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_200_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
-					y = new double[][] {new double[] {0.2 ,0.5 ,0.9 ,1.3 ,1.8 ,2.3 ,2.8 ,3.4 ,4.1 ,4.8 ,6.5 ,8.3 ,10.3 ,12.6 ,15.1 ,17.8 ,20.7 ,23.8 ,27.1 ,30.7 ,34.4 ,38.4 ,42.6 ,47.0 ,51.6},
+					/*y = new double[][] {new double[] {0.2 ,0.5 ,0.9 ,1.3 ,1.8 ,2.3 ,2.8 ,3.4 ,4.1 ,4.8 ,6.5 ,8.3 ,10.3 ,12.6 ,15.1 ,17.8 ,20.7 ,23.8 ,27.1 ,30.7 ,34.4 ,38.4 ,42.6 ,47.0 ,51.6},
 						new double[] {0.2 ,0.4 ,0.7 ,0.9 ,1.2 ,1.5 ,1.9 ,2.2 ,2.6 ,3.0 ,3.8 ,4.8 ,5.8 ,6.9 ,8.1 ,9.3 ,10.7 ,12.1 ,13.7 ,15.3 ,17.0 ,18.7 ,20.6 ,22.6 ,24.6},
 						new double[] {0.1 ,0.3 ,0.5 ,0.7 ,1.0 ,1.2 ,1.5 ,1.8 ,2.1 ,2.4 ,3.2 ,4.0 ,4.9 ,5.9 ,7.0 ,8.2 ,9.4 ,10.8 ,12.2 ,13.7 ,15.3 ,17.0 ,18.8 ,20.6 ,22.5},
 						new double[] {0.1 ,0.2 ,0.3 ,0.4 ,0.6 ,0.8 ,1.0 ,1.3 ,1.5 ,1.8 ,2.5 ,3.2 ,4.1 ,5.0 ,6.1 ,7.2 ,8.5 ,9.8 ,11.3 ,12.8 ,14.4 ,16.2 ,18.0 ,19.9 ,21.9},
 						new double[] {0.1 ,0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.9 ,2.6 ,3.4 ,4.3 ,5.4 ,6.5 ,7.7 ,9.0 ,10.5 ,12.0 ,13.7 ,15.4 ,17.3 ,19.2 ,21.3},
-						new double[] {0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.9 ,1.4 ,2.0 ,2.8 ,3.7 ,4.7 ,5.8 ,7.0 ,8.4 ,9.8 ,11.4 ,13.1 ,15.0 ,16.9 ,19.0 ,21.1}};
+						new double[] {0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.6 ,0.9 ,1.4 ,2.0 ,2.8 ,3.7 ,4.7 ,5.8 ,7.0 ,8.4 ,9.8 ,11.4 ,13.1 ,15.0 ,16.9 ,19.0 ,21.1}};*/
+					y = HithermProduct.ConfigDruckverlustHIT_200_5;
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_200_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
-					y = new double[][] {new double[] {0.1 ,0.3 ,0.5 ,0.7 ,1.0 ,1.3 ,1.7 ,2.2 ,2.6 ,3.2 ,4.4 ,5.7 ,7.3 ,9.0 ,10.9 ,13.1 ,15.3 ,17.8 ,20.5 ,23.3 ,26.4 ,29.6 ,33.0 ,36.6 ,40.3},
+					/*y = new double[][] {new double[] {0.1 ,0.3 ,0.5 ,0.7 ,1.0 ,1.3 ,1.7 ,2.2 ,2.6 ,3.2 ,4.4 ,5.7 ,7.3 ,9.0 ,10.9 ,13.1 ,15.3 ,17.8 ,20.5 ,23.3 ,26.4 ,29.6 ,33.0 ,36.6 ,40.3},
 						new double[] {0.2 ,0.4 ,0.7 ,1.0 ,1.2 ,1.5 ,1.9 ,2.2 ,2.6 ,3.0 ,3.8 ,4.7 ,5.7 ,6.7 ,7.8 ,9.0 ,10.3 ,11.7 ,13.1 ,14.6 ,16.2 ,17.9 ,19.6 ,21.4 ,23.3},
 						new double[] {0.1 ,0.3 ,0.4 ,0.6 ,0.8 ,1.1 ,1.3 ,1.6 ,1.9 ,2.2 ,2.9 ,3.7 ,4.6 ,5.6 ,6.6 ,7.7 ,9.0 ,10.3 ,11.7 ,13.2 ,14.7 ,16.4 ,18.2 ,20.0 ,21.9},
 						new double[] {0.1 ,0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.9 ,1.1 ,1.4 ,1.6 ,2.2 ,3.0 ,3.8 ,4.7 ,5.7 ,6.8 ,8.0 ,9.3 ,10.7 ,12.2 ,13.8 ,15.4 ,17.2 ,19.1 ,21.1},
 						new double[] {0.1 ,0.1 ,0.1 ,0.1 ,0.2 ,0.4 ,0.5 ,0.7 ,0.9 ,1.1 ,1.7 ,2.3 ,3.1 ,3.9 ,4.9 ,6.0 ,7.2 ,8.4 ,9.8 ,11.3 ,12.9 ,14.6 ,16.5 ,18.4 ,20.4},
-						new double[] {0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.7 ,1.2 ,1.8 ,2.5 ,3.3 ,4.3 ,5.4 ,6.6 ,7.9 ,9.3 ,10.8 ,12.5 ,14.2 ,16.1 ,18.1 ,20.2}};
+						new double[] {0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.1 ,0.2 ,0.3 ,0.5 ,0.7 ,1.2 ,1.8 ,2.5 ,3.3 ,4.3 ,5.4 ,6.6 ,7.9 ,9.3 ,10.8 ,12.5 ,14.2 ,16.1 ,18.1 ,20.2}};*/
+					y = HithermProduct.ConfigDruckverlustHIT_200_10;
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_250_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
-					y = new double[][] {new double[] {0.2, 0.5, 0.9, 1.3, 1.8, 2.3, 2.8, 3.4, 4.1, 4.8, 6.5, 8.3, 10.3, 12.6, 15.1, 17.8, 20.7, 23.8, 27.1, 30.7, 34.4, 38.4, 42.6, 47.0, 51.6},
+					/*y = new double[][] {new double[] {0.2, 0.5, 0.9, 1.3, 1.8, 2.3, 2.8, 3.4, 4.1, 4.8, 6.5, 8.3, 10.3, 12.6, 15.1, 17.8, 20.7, 23.8, 27.1, 30.7, 34.4, 38.4, 42.6, 47.0, 51.6},
 						new double[] {0.2, 0.4, 0.7, 0.9, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.8, 5.8, 6.9, 8.1, 9.3, 10.7, 12.1, 13.7, 15.3, 17.0, 18.7, 20.6, 22.6, 24.6},
 						new double[] {0.1, 0.3, 0.5, 0.7, 1.0, 1.2, 1.5, 1.8, 2.1, 2.4, 3.2, 4.0, 4.9, 5.9, 7.0, 8.2, 9.4, 10.8, 12.2, 13.7, 15.3, 17.0, 18.8, 20.6, 22.5},
 						new double[] {0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1.0, 1.3, 1.5, 1.8, 2.5, 3.2, 4.1, 5.0, 6.1, 7.2, 8.5, 9.8, 11.3, 12.8, 14.4, 16.2, 18.0, 19.9, 21.9},
 						new double[] {0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.9, 2.6, 3.4, 4.3, 5.4, 6.5, 7.7, 9.0, 10.5, 12.0, 13.7, 15.4, 17.3, 19.2, 21.3},
-						new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.6, 0.9, 1.4, 2.0, 2.8, 3.7, 4.7, 5.8, 7.0, 8.4, 9.8, 11.4, 13.1, 15.0, 16.9, 19.0, 21.1}};
+						new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.6, 0.9, 1.4, 2.0, 2.8, 3.7, 4.7, 5.8, 7.0, 8.4, 9.8, 11.4, 13.1, 15.0, 16.9, 19.0, 21.1}};*/
+					y = HithermProduct.ConfigDruckverlustHIT_250_5;
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_250_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
-					y = new double[][] {new double[] {0.1, 0.3, 0.5, 0.7, 1.0, 1.3, 1.7, 2.2, 2.6, 3.2, 4.4, 5.7, 7.3, 9.0, 10.9, 13.1, 15.3, 17.8, 20.5, 23.3, 26.4, 29.6, 33.0, 36.6, 40.3},
+					/*y = new double[][] {new double[] {0.1, 0.3, 0.5, 0.7, 1.0, 1.3, 1.7, 2.2, 2.6, 3.2, 4.4, 5.7, 7.3, 9.0, 10.9, 13.1, 15.3, 17.8, 20.5, 23.3, 26.4, 29.6, 33.0, 36.6, 40.3},
 						new double[] {0.2, 0.4, 0.7, 1.0, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.7, 5.7, 6.7, 7.8, 9.0, 10.3, 11.7, 13.1, 14.6, 16.2, 17.9, 19.6, 21.4, 23.3},
 						new double[] {0.1, 0.3, 0.4, 0.6, 0.8, 1.1, 1.3, 1.6, 1.9, 2.2, 2.9, 3.7, 4.6, 5.6, 6.6, 7.7, 9.0, 10.3, 11.7, 13.2, 14.7, 16.4, 18.2, 20.0, 21.9},
 						new double[] {0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.4, 1.6, 2.2, 3.0, 3.8, 4.7, 5.7, 6.8, 8.0, 9.3, 10.7, 12.2, 13.8, 15.4, 17.2, 19.1, 21.1},
 						new double[] {0.1, 0.1, 0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.7, 2.3, 3.1, 3.9, 4.9, 6.0, 7.2, 8.4, 9.8, 11.3, 12.9, 14.6, 16.5, 18.4, 20.4},
-						new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 1.2, 1.8, 2.5, 3.3, 4.3, 5.4, 6.6, 7.9, 9.3, 10.8, 12.5, 14.2, 16.1, 18.1, 20.2}}; 
+						new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 1.2, 1.8, 2.5, 3.3, 4.3, 5.4, 6.6, 7.9, 9.3, 10.8, 12.5, 14.2, 16.1, 18.1, 20.2}}; */
+					y = HithermProduct.ConfigDruckverlustHIT_250_10;
 					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_300_5:
@@ -535,7 +553,7 @@ namespace Europlan.Common {
 			for (int i = 0; i < y.Length; i++) {
 				double[] ct = null;
 				spline3.buildcubicspline(x1, y[i], x1.Length, 0, 0, 0, 0, ref ct);
-				y2[i] = spline3.splineinterpolation(ref ct, durchfluss);
+				y2[i] = spline3.splineinterpolation(ref ct, massenstrom);
 				if (y2[i] < 0) {
 					y2[i] = 0;
 				}
@@ -550,47 +568,56 @@ namespace Europlan.Common {
 			return rtn;
 		}
 
-		public double DruckverlustRegister(HithermCompactRegister.HithermCompactRegisterTypeEnum type, double durchfluss) {
-			double[] x1;
+		/// <summary>
+		/// Berechnet den Druckversult eines Hitherm Registers. Der Durchfluss/Massenstrom muss dieser Methode in kg/h
+		/// uebergeben werden und nicht in l/h wie in der Tabelle im Hitherm Produktkatalog!
+		/// </summary>
+		public double DruckverlustRegister(HithermCompactRegister.HithermCompactRegisterTypeEnum type, double massenstrom) {
+			/*double[] x1;
 			double[] y;
 
-			x1 = new double[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400 };
+			x1 = new double[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400 };*/
 
 			switch (type) {
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std:
-					y = new double[] { 0.1, 0.3, 0.4, 0.6, 0.8, 0.9, 1.1, 1.3, 1.6, 1.8, 2.3, 2.8, 3.4, 4.0, 4.7, 5.4, 6.2, 7.0, 7.9, 8.8, 9.7, 10.7, 11.8, 12.8, 14.0 };
-					break;
+					return this.DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum.HIT_50_5, 50, massenstrom);
+					/*y = new double[] { 0.1, 0.3, 0.4, 0.6, 0.8, 0.9, 1.1, 1.3, 1.6, 1.8, 2.3, 2.8, 3.4, 4.0, 4.7, 5.4, 6.2, 7.0, 7.9, 8.8, 9.7, 10.7, 11.8, 12.8, 14.0 };
+					break;*/
 
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std:
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par:
-					y = new double[] { 0.2, 0.4, 0.7, 0.9, 1.2, 1.4, 1.7, 2.0, 2.3, 2.7, 3.3, 4.1, 4.9, 5.7, 6.6, 7.5, 8.5, 9.5, 10.6, 11.7, 12.9, 14.2, 15.5, 16.8, 18.2 };
-					break;
+					return this.DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum.HIT_100_5, 50, massenstrom);
+					/*y = new double[] { 0.2, 0.4, 0.7, 0.9, 1.2, 1.4, 1.7, 2.0, 2.3, 2.7, 3.3, 4.1, 4.9, 5.7, 6.6, 7.5, 8.5, 9.5, 10.6, 11.7, 12.9, 14.2, 15.5, 16.8, 18.2 };
+					break;*/
 
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std:
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par:
-					y = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.7, 2.0, 2.3, 3.0, 3.9, 4.7, 5.7, 6.8, 7.9, 9.2, 10.5, 11.9, 13.4, 15.0, 16.7, 18.4, 20.3, 22.2 };
-					break;
+					return this.DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum.HIT_150_5, 50, massenstrom);
+					/*y = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.7, 2.0, 2.3, 3.0, 3.9, 4.7, 5.7, 6.8, 7.9, 9.2, 10.5, 11.9, 13.4, 15.0, 16.7, 18.4, 20.3, 22.2 };
+					break;*/
 
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std:
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par:
-					y = new double[] { 0.2, 0.4, 0.7, 0.9, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.8, 5.8, 6.9, 8.1, 9.3, 10.7, 12.1, 13.7, 15.3, 17.0, 18.7, 20.6, 22.6, 24.6 };
-					break;
+					return this.DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum.HIT_200_5, 50, massenstrom);
+					/*y = new double[] { 0.2, 0.4, 0.7, 0.9, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.8, 5.8, 6.9, 8.1, 9.3, 10.7, 12.1, 13.7, 15.3, 17.0, 18.7, 20.6, 22.6, 24.6 };
+					break;*/
 
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std:
-					y = new double[] { 0.25, 0.5, 0.875, 1.125, 1.5, 1.875, 2.375, 2.75, 3.25, 3.75, 4.75, 6.0, 7.25, 8.625, 10.125, 11.625, 13.375, 15.125, 17.125, 19.125, 21.25, 23.375, 25.75, 28.25, 30.75 };
-					break;
+					return this.DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum.HIT_250_5, 50, massenstrom);
+					/*y = new double[] { 0.25, 0.5, 0.875, 1.125, 1.5, 1.875, 2.375, 2.75, 3.25, 3.75, 4.75, 6.0, 7.25, 8.625, 10.125, 11.625, 13.375, 15.125, 17.125, 19.125, 21.25, 23.375, 25.75, 28.25, 30.75 };
+					break;*/
 
 				default:
 					return 0;
 			}
 
-			double[] c = null;
+			/*double[] c = null;
 			spline3.buildcubicspline(x1, y, x1.Length, 0, 0, 0, 0, ref c);
-			double rtn = spline3.splineinterpolation(ref c, durchfluss);
+			double rtn = spline3.splineinterpolation(ref c, massenstrom);
 			if (rtn < 0.1) {
 				rtn = 0.1;
 			}
-			return rtn;
+			return rtn;*/
 		}
 
 		public double DefaultSpreizung(double vorlaufTemperatur) {

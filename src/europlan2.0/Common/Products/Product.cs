@@ -390,7 +390,15 @@ namespace Europlan.Common {
 			}
 		}
 
-		public abstract double Rho {
+		public abstract double Dichte {
+			get;
+		}
+
+		public abstract double Waermekapazitaet {
+			get;
+		}
+
+		public abstract double Viskositaet {
 			get;
 		}
 
@@ -788,7 +796,7 @@ namespace Europlan.Common {
 			}
 		}
 		public double PlannedDurchflussHeat {
-			get { return PlannedMaxMhHeat * 1000 / Rho; }
+			get { return PlannedMaxMhHeat * 1000 / Dichte; }
 		}
 
 		[XmlIgnore]
@@ -805,7 +813,7 @@ namespace Europlan.Common {
 			}
 		}
 		public double PlannedDurchflussCool {
-			get { return PlannedMhCool * 1000 / Rho; }
+			get { return PlannedMhCool * 1000 / Dichte; }
 		}
 
 		[XmlIgnore]
@@ -824,7 +832,7 @@ namespace Europlan.Common {
 			}
 		}
 		public double PlannedMaxDurchflussHeat {
-			get { return PlannedMaxMhHeat * 1000 / Rho; }
+			get { return PlannedMaxMhHeat * 1000 / Dichte; }
 		}
 
 		[XmlIgnore]
@@ -843,7 +851,7 @@ namespace Europlan.Common {
 			}
 		}
 		public double PlannedMaxDurchflussCool {
-			get { return PlannedMaxMhCool * 1000 / Rho; }
+			get { return PlannedMaxMhCool * 1000 / Dichte; }
 		}
 
 		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung);

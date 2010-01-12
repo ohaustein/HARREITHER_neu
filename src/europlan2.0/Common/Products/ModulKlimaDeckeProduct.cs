@@ -69,15 +69,20 @@ namespace Europlan.Common {
 		// planning
 		private static double su0 = 0.045; /* Mindestüberdeckung fix */
 		private static double alpha0 = 10.8; /* Fixwert für FBH fix */
-		private static double alphaDh = 6.5; /* für FBK fix */
-		private static double alphaDk = 10.8; /* für FBH fix */
 		private static double lambdaU0 = 1; /* fix */
 		private static double rLambdaDecke = 0.11; /* Deckenschicht 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 		private static double rLambdaDach = 0.0; /* Deckenschicht; durch echte Konstruktion ersetzen! */
-		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
 		private static double atmt = 1.06; /* Fixwert laut Norm */
 		private static double b = 6.5; /* Fixwert laut Norm */
 		private static double leistungsFaktor = 0.77;
+
+		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
+		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
+		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
+
+		private static double[] druckverlustModul_120_30 = { 0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1 };
+		private static double[] druckverlustModul_100_30 = { 0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3 };
+		private static double[] druckverlustModul_80_30 = { 0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3 };
 
 		private float plannedArea = 0;
 		//private float plannedFloorArea = 0;
@@ -186,16 +191,12 @@ namespace Europlan.Common {
 			set { alpha0 = value; }
 		}
 
-		[ProductParameter]
 		public static double ConfigAlphaDk {
-			get { return alphaDk; }
-			set { alphaDk = value; }
+			get { return Product.ConfigAlphaBoden; }
 		}
 
-		[ProductParameter]
 		public static double ConfigAlphaDh {
-			get { return alphaDh; }
-			set { alphaDh = value; }
+			get { return Product.ConfigAlphaDecke; }
 		}
 
 		[ProductParameter]
@@ -214,12 +215,6 @@ namespace Europlan.Common {
 		public static double ConfigRLambdaDach {
 			get { return rLambdaDach; }
 			set { rLambdaDach = value; }
-		}
-
-		[ProductParameter]
-		public static double ConfigC {
-			get { return c; }
-			set { c = value; }
 		}
 
 		[ProductParameter]
@@ -300,6 +295,75 @@ namespace Europlan.Common {
 		public static int ConfigModulCeilingConstruction {
 			get { return (int)ModulKlimaDeckeProduct.construction; }
 			set { ModulKlimaDeckeProduct.construction = (ModulCeilingConstructionEnum)value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigRho {
+			get { return rho; }
+			set { rho = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigC {
+			get { return c; }
+			set { c = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigV {
+			get { return v; }
+			set { v = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustModul_120_30String {
+			get {
+				return ConvertArrayToString(druckverlustModul_120_30);
+			}
+			set {
+				double[] array = ConvertStringToArray(value);
+				if (array != null) {
+					druckverlustModul_120_30 = array;
+				}
+			}
+		}
+		public static double[] ConfigDruckverlustModul_120_30 {
+			get { return druckverlustModul_120_30; }
+			set { druckverlustModul_120_30 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustModul_100_30String {
+			get {
+				return ConvertArrayToString(druckverlustModul_100_30);
+			}
+			set {
+				double[] array = ConvertStringToArray(value);
+				if (array != null) {
+					druckverlustModul_100_30 = array;
+				}
+			}
+		}
+		public static double[] ConfigDruckverlustModul_100_30 {
+			get { return druckverlustModul_100_30; }
+			set { druckverlustModul_100_30 = value; }
+		}
+
+		[ProductParameter]
+		public static string ConfigDruckverlustModul_80_30String {
+			get {
+				return ConvertArrayToString(druckverlustModul_80_30);
+			}
+			set {
+				double[] array = ConvertStringToArray(value);
+				if (array != null) {
+					druckverlustModul_80_30 = array;
+				}
+			}
+		}
+		public static double[] ConfigDruckverlustModul_80_30 {
+			get { return druckverlustModul_80_30; }
+			set { druckverlustModul_80_30 = value; }
 		}
 		#endregion Product Parameters
 
@@ -867,8 +931,16 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override double Rho {
-			get { return 1000; }
+		public override double Dichte {
+			get { return ModulKlimaDeckeProduct.ConfigRho; }
+		}
+
+		public override double Waermekapazitaet {
+			get { return ModulKlimaDeckeProduct.ConfigC; }
+		}
+
+		public override double Viskositaet {
+			get { return ModulKlimaDeckeProduct.ConfigV; }
 		}
 	}
 	

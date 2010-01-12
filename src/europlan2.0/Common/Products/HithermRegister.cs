@@ -484,9 +484,9 @@ namespace Europlan.Common {
 			return verlust;
 		}
 
-		public double Druckverlust(double durchfluss) {
-			return EN1264.Instance.DruckverlustRegister(this.registerType, this.RegisterBreite, durchfluss) +
-				EN1264.Instance.DruckverlustRohr(durchfluss, HithermProduct.ConfigVerbindeLeitungInnenquerschnitt, HithermProduct.ConfigRho, HithermProduct.ConfigVerbindeLeitungInnendurchmesser, HithermProduct.ConfigV, 0.000004, this.PipeVertical + this.PipeHorizontal);
+		public double Druckverlust(double massenstrom) {
+			return EN1264.Instance.DruckverlustRegister(this.registerType, this.RegisterBreite, massenstrom) +
+				EN1264.Instance.DruckverlustRohr(massenstrom, HithermProduct.ConfigVerbindeLeitungInnenquerschnitt, HithermProduct.ConfigRho, HithermProduct.ConfigVerbindeLeitungInnendurchmesser, HithermProduct.ConfigV, 0.000004, this.PipeVertical + this.PipeHorizontal);
 		}
 
 		private PlannedProduct product;

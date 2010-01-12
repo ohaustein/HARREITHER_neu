@@ -847,7 +847,10 @@ namespace Europlan.Common {
 		}
 
 		public double CalculateDruckverlust(double durchfluss) {
-			return EN1264.Instance.DruckverlustRohr(durchfluss, this.RohrInnenA, EurovalProduct.ConfigRho, this.RohrInnenD, EurovalProduct.ConfigV, 0.000004, this.Vorlauf + this.Ruecklauf);
+			if (this.ConnectionOf == null) {
+				return 0;
+			}
+			return EN1264.Instance.DruckverlustRohr(durchfluss, this.RohrInnenA, this.ConnectionOf.Product.Dichte, this.RohrInnenD, this.ConnectionOf.Product.Viskositaet, 0.000004, this.Vorlauf + this.Ruecklauf);
 		}
 	}
 }

@@ -360,6 +360,27 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void numEurovalDichte_ValueChanged(object sender, EventArgs e) {
+			EurovalProduct.ConfigRho = (double)numEurovalDichte.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numEurovalWaermekapazitaet_ValueChanged(object sender, EventArgs e) {
+			EurovalProduct.ConfigC = (double)numEurovalWaermekapazitaet.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numEurovalViskositaet_ValueChanged(object sender, EventArgs e) {
+			EurovalProduct.ConfigV = (double)numEurovalViskositaet.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
 		private void rbModulBodenHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
 			ModulKlimaBodenProduct.ConfigUseHarreitherNorm = rbModulBodenHarreitherNorm.Checked;
 			if (ProjectChanged != null) {

@@ -240,22 +240,22 @@ namespace Europlan.Common {
 			}
 		}
 
-		public double Druckverlust(double durchfluss) {
+		public double Druckverlust(double massenstrom) {
 			switch (this.modulType) {
 				case ModulTypeEnum.MODUL_100_40:
-					return EN1264.Instance.DruckverlustModul_100_40(1, durchfluss);
+					return EN1264.Instance.DruckverlustModul_100_40(1, massenstrom);
 
 				case ModulTypeEnum.MODUL_80_30:
-					return EN1264.Instance.DruckverlustModul_80_30(1, durchfluss);
+					return EN1264.Instance.DruckverlustModul_80_30(1, massenstrom);
 
 				case ModulTypeEnum.MODUL_100_30:
-					return EN1264.Instance.DruckverlustModul_100_30(1, durchfluss);
+					return EN1264.Instance.DruckverlustModul_100_30(1, massenstrom);
 
 				case ModulTypeEnum.MODUL_120_30:
-					return EN1264.Instance.DruckverlustModul_120_30(1, durchfluss);
+					return EN1264.Instance.DruckverlustModul_120_30(1, massenstrom);
 
 				case ModulTypeEnum.MODUL_60_60:
-					return EN1264.Instance.DruckverlustModul_120_30(1, durchfluss);
+					return EN1264.Instance.DruckverlustModul_120_30(1, massenstrom);
 
 				default:
 					return 0;

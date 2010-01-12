@@ -18,12 +18,12 @@ namespace Europlan.Common {
 			set { list = value; }
 		}
 
-		public double Druckverlust(double durchfluss) {
+		public double Druckverlust(double massenstrom) {
 			double druckverlust = 0;
 			foreach (KlimaFlaechenModul modul in this.list) {
-				druckverlust += modul.Druckverlust(durchfluss);
+				druckverlust += modul.Druckverlust(massenstrom);
 			}
-			druckverlust += EN1264.Instance.DruckverlustRohr(durchfluss, Product.rundrohr21mmInnenA, EurovalProduct.ConfigRho, Product.rundrohr21mmInnenD, EurovalProduct.ConfigV, 0.000004, lengthVerbindeleitungen);
+			druckverlust += EN1264.Instance.DruckverlustRohr(massenstrom, Product.rundrohr21mmInnenA, EurovalProduct.ConfigRho, Product.rundrohr21mmInnenD, EurovalProduct.ConfigV, 0.000004, lengthVerbindeleitungen);
 			return druckverlust;
 		}
 
