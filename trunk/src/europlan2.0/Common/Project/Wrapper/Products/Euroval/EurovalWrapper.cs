@@ -147,6 +147,7 @@ namespace Europlan.Common {
 			get { return outsideRValue; }
 			set { outsideRValue = value; }
 		}
+
 		public int Circuits {
 			get { return circuits; }
 			set { circuits = value; }
