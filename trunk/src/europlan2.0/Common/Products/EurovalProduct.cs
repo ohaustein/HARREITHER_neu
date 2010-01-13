@@ -207,6 +207,80 @@ namespace Europlan.Common {
 			v = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigV", 0.00000101);
 		}
 
+		public static string NotificationMessage {
+			get {
+				string message = null;
+				Configuration userConfig = Configuration.UserTemplate;
+
+				double defaultAg = userConfig.GetProductParameterAsBool<EurovalProduct>("ConfigAgActivated", true) ? userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigAg", 1.1034) : 1.0;
+				double actualAg = agActivated ? ag : 1.0;
+				if (actualAg != defaultAg) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  - Geometriefaktor: " + Math.Round(actualAg, 4).ToString() + " (Standardwert: " + Math.Round(defaultAg, 4).ToString() + ")";
+				}
+
+				double defaultSu0 = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSu0", 0.045);
+				if (su0 != defaultSu0) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  - Mindestüberdeckung: " + Math.Round(su0, 3).ToString() + " (Standardwert: " + Math.Round(defaultSu0, 3).ToString() + ")";
+				}
+
+				double defaultSu = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSu", 0.035);
+				if (su != defaultSu) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  - Estrichüberdeckung: " + Math.Round(su, 3).ToString() + " (Standardwert: " + Math.Round(defaultSu, 3).ToString() + ")";
+				}
+
+				double defaultC = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigC", 4.19);
+				if (c != defaultC) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  - Spezifische Wärmekapazität des Heizmittels: " + Math.Round(c, 2).ToString() + " (Standardwert: " + Math.Round(defaultC, 2).ToString() + ")";
+				}
+
+				double defaultRho = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigRho", 1000);
+				if (rho != defaultRho) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  - Dichte des Heizmittels: " + Math.Round(rho, 2).ToString() + " (Standardwert: " + Math.Round(defaultRho, 2).ToString() + ")";
+				}
+
+				double defaultV = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigV", 0.00000101);
+				if (v != defaultV) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  - Viskosität des Heizmittels: " + Math.Round(v, 10).ToString() + " (Standardwert: " + Math.Round(defaultV, 10).ToString() + ")";
+				}
+
+				if (message != null) {
+					message = "Euroval-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" + message;
+				}
+
+				return message;
+			}
+		}
+
 		public override Product Clone(Room room) {
 			EurovalProduct product = new EurovalProduct(this);
 			product.AssociatedRoom = room;

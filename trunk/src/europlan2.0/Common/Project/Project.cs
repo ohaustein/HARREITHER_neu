@@ -585,5 +585,85 @@ namespace Europlan.Common {
 			}
 			set { this.serializableHithermCompactWalls = value; }
 		}
+
+		public string NotificationMessage {
+			get {
+				bool ecotherm = false;
+				bool euroval = false;
+				bool hitherm = false;
+				bool hithermCompact = false;
+				bool modulBoden = false;
+				bool modulDecke = false;
+				foreach (Floor f in this.floors) {
+					foreach (Room r in f.Rooms) {
+						foreach (PlannedProduct pp in r.PlannedProducts) {
+							if (pp.Product is EcothermProduct) {
+								ecotherm = true;
+							}
+							if (pp.Product is EurovalProduct) {
+								euroval = true;
+							}
+							if (pp.Product is HithermProduct) {
+								hitherm = true;
+							}
+							if (pp.Product is HithermCompactProduct) {
+								hithermCompact = true;
+							}
+							if (pp.Product is ModulKlimaBodenProduct) {
+								modulBoden = true;
+							}
+							if (pp.Product is ModulKlimaDeckeProduct) {
+								modulDecke = true;
+							}
+						}
+					}
+				}
+				string message = "";
+				string add;
+				if (ecotherm) {
+					add = EcothermProduct.NotificationMessage;
+					if (add != null) {
+						message += "\n" + add;
+					}
+				}
+				if (euroval) {
+					add = EurovalProduct.NotificationMessage;
+					if (add != null) {
+						message += "\n" + add;
+					}
+				}
+				if (hitherm) {
+					add = HithermProduct.NotificationMessage;
+					if (add != null) {
+						message += "\n" + add;
+					}
+				}
+				if (hithermCompact) {
+					add = HithermCompactProduct.NotificationMessage;
+					if (add != null) {
+						message += "\n" + add;
+					}
+				}
+				if (modulBoden) {
+					add = ModulKlimaBodenProduct.NotificationMessage;
+					if (add != null) {
+						message += "\n" + add;
+					}
+				}
+				if (modulDecke) {
+					add = ModulKlimaDeckeProduct.NotificationMessage;
+					if (add != null) {
+						message += "\n" + add;
+					}
+				}
+				if (message.Length > 0) {
+					message = message.Substring(1);
+				}
+				if (message.Length == 0) {
+					message = null;
+				}
+				return message;
+			}
+		}
 	}
 }

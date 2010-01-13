@@ -200,6 +200,39 @@ namespace Europlan.Common {
 			su = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
 		}
 
+		public static string NotificationMessage {
+			get {
+				string message = null;
+				Configuration userConfig = Configuration.UserTemplate;
+
+				double defaultSu0 = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu0", 0.045);
+				if (su0 != defaultSu0) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  Mindestüberdeckung: " + Math.Round(su0, 3).ToString() + " (Standardwert: " + Math.Round(defaultSu0, 3).ToString() + ")";
+				}
+
+				double defaultSu = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
+				if (su != defaultSu) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  Estrichüberdeckung: " + Math.Round(su, 3).ToString() + " (Standardwert: " + Math.Round(defaultSu, 3).ToString() + ")";
+				}
+
+				if (message != null) {
+					message = "Ecotherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" + message;
+				}
+
+				return message;
+			}
+		}
+
 		public override Product Clone(Room room) {
 			EcothermProduct product = new EcothermProduct(this);
 			product.AssociatedRoom = room;

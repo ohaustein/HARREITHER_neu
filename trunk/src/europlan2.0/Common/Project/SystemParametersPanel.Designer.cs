@@ -761,7 +761,7 @@ namespace Europlan.Common {
 			// numEurovalGeometrie
 			// 
 			this.numEurovalGeometrie.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.numEurovalGeometrie.EditType = Europlan.Common.NumericBox.NumericEditType.FACTOR;
+			this.numEurovalGeometrie.EditType = Europlan.Common.NumericBox.NumericEditType.GEOMETRIEFAKTOR;
 			this.numEurovalGeometrie.InternalValue = new decimal(new int[] {
             1,
             0,
@@ -770,15 +770,15 @@ namespace Europlan.Common {
 			this.numEurovalGeometrie.Location = new System.Drawing.Point(183, 163);
 			this.numEurovalGeometrie.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
 			this.numEurovalGeometrie.MaxValue = new decimal(new int[] {
-            15,
+            9999999,
             0,
             0,
-            0});
+            327680});
 			this.numEurovalGeometrie.MinValue = new decimal(new int[] {
             1,
             0,
             0,
-            0});
+            327680});
 			this.numEurovalGeometrie.Name = "numEurovalGeometrie";
 			this.numEurovalGeometrie.Size = new System.Drawing.Size(79, 20);
 			this.numEurovalGeometrie.TabIndex = 39;

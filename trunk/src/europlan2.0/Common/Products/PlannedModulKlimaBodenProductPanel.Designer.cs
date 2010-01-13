@@ -67,11 +67,14 @@ namespace Europlan.Common {
 			this.groupBox10 = new System.Windows.Forms.GroupBox();
 			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
 			this.groupBox9 = new System.Windows.Forms.GroupBox();
+			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.btnDistributor = new System.Windows.Forms.Button();
 			this.lblDistributor = new System.Windows.Forms.Label();
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.lstError = new System.Windows.Forms.ListView();
+			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
 			this.lblCircuitCountDescr = new System.Windows.Forms.Label();
 			this.lblCircuitCount = new System.Windows.Forms.Label();
 			this.lblVerbindeleitungenUnit = new System.Windows.Forms.Label();
@@ -84,7 +87,6 @@ namespace Europlan.Common {
 			this.lblVerbindeleitung = new System.Windows.Forms.Label();
 			this.lblSonstige = new System.Windows.Forms.Label();
 			this.lblModulierend = new System.Windows.Forms.Label();
-			this.lblError = new System.Windows.Forms.Label();
 			this.lblQAnbCoolUnit = new System.Windows.Forms.Label();
 			this.lblQAnbHeatUnit = new System.Windows.Forms.Label();
 			this.lblQAnbCool = new System.Windows.Forms.Label();
@@ -153,7 +155,6 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -805,6 +806,17 @@ namespace Europlan.Common {
 			this.groupBox9.TabIndex = 0;
 			this.groupBox9.TabStop = false;
 			// 
+			// chkStellAntriebe
+			// 
+			this.chkStellAntriebe.AutoSize = true;
+			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
+			this.chkStellAntriebe.Name = "chkStellAntriebe";
+			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
+			this.chkStellAntriebe.TabIndex = 7;
+			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
+			this.chkStellAntriebe.UseVisualStyleBackColor = true;
+			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
+			// 
 			// btnDistributor
 			// 
 			this.btnDistributor.Location = new System.Drawing.Point(388, 13);
@@ -846,6 +858,7 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.lstError);
 			this.panel2.Controls.Add(this.lblCircuitCountDescr);
 			this.panel2.Controls.Add(this.lblCircuitCount);
 			this.panel2.Controls.Add(this.lblVerbindeleitungenUnit);
@@ -858,7 +871,6 @@ namespace Europlan.Common {
 			this.panel2.Controls.Add(this.lblVerbindeleitung);
 			this.panel2.Controls.Add(this.lblSonstige);
 			this.panel2.Controls.Add(this.lblModulierend);
-			this.panel2.Controls.Add(this.lblError);
 			this.panel2.Controls.Add(this.lblQAnbCoolUnit);
 			this.panel2.Controls.Add(this.lblQAnbHeatUnit);
 			this.panel2.Controls.Add(this.lblQAnbCool);
@@ -928,6 +940,27 @@ namespace Europlan.Common {
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
+			// 
+			// lstError
+			// 
+			this.lstError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lstError.BackColor = System.Drawing.SystemColors.Window;
+			this.lstError.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.lstError.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.defaultColumn});
+			this.lstError.FullRowSelect = true;
+			this.lstError.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.lstError.LabelWrap = false;
+			this.lstError.Location = new System.Drawing.Point(3, 374);
+			this.lstError.Name = "lstError";
+			this.lstError.ShowGroups = false;
+			this.lstError.Size = new System.Drawing.Size(844, 30);
+			this.lstError.TabIndex = 168;
+			this.lstError.UseCompatibleStateImageBehavior = false;
+			this.lstError.View = System.Windows.Forms.View.Details;
+			this.lstError.Visible = false;
+			this.lstError.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lstError_ItemSelectionChanged);
 			// 
 			// lblCircuitCountDescr
 			// 
@@ -1130,16 +1163,6 @@ namespace Europlan.Common {
 			this.lblModulierend.Size = new System.Drawing.Size(173, 13);
 			this.lblModulierend.TabIndex = 140;
 			this.lblModulierend.Text = "Module in modulierender Belegung:";
-			// 
-			// lblError
-			// 
-			this.lblError.AutoSize = true;
-			this.lblError.ForeColor = System.Drawing.Color.Red;
-			this.lblError.Location = new System.Drawing.Point(4, 384);
-			this.lblError.Name = "lblError";
-			this.lblError.Size = new System.Drawing.Size(0, 13);
-			this.lblError.TabIndex = 138;
-			this.lblError.Visible = false;
 			// 
 			// lblQAnbCoolUnit
 			// 
@@ -1721,17 +1744,6 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			// 
-			// chkStellAntriebe
-			// 
-			this.chkStellAntriebe.AutoSize = true;
-			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
-			this.chkStellAntriebe.Name = "chkStellAntriebe";
-			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
-			this.chkStellAntriebe.TabIndex = 7;
-			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
-			this.chkStellAntriebe.UseVisualStyleBackColor = true;
-			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
-			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1875,7 +1887,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblQAnbCool;
 		private System.Windows.Forms.Label lblQAnbHeat;
 		private System.Windows.Forms.Label label45;
-		private System.Windows.Forms.Label lblError;
 		private System.Windows.Forms.Label lblVerbindeleitung;
 		private System.Windows.Forms.Label lblSonstige;
 		private System.Windows.Forms.Label lblModulierend;
@@ -1890,5 +1901,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblCircuitCount;
 		private System.Windows.Forms.Label lblAreaWarning;
 		private System.Windows.Forms.CheckBox chkStellAntriebe;
+		private System.Windows.Forms.ListView lstError;
+		private System.Windows.Forms.ColumnHeader defaultColumn;
 	}
 }

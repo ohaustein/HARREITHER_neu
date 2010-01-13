@@ -68,6 +68,8 @@ namespace Europlan.Common {
 			this.hithermWallGrid1 = new Europlan.Common.HithermWallGrid();
 			this.pageAuslegung = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.lstError = new System.Windows.Forms.ListView();
+			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
 			this.lblRestAreaUnit = new System.Windows.Forms.Label();
 			this.lblRestAreaTitle = new System.Windows.Forms.Label();
 			this.lblAvailableAreaUnit = new System.Windows.Forms.Label();
@@ -96,7 +98,6 @@ namespace Europlan.Common {
 			this.PlannedProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnSelectWall = new System.Windows.Forms.Button();
 			this.hithermRegisterBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.lblError = new System.Windows.Forms.Label();
 			this.lblCoveredAreaUnit = new System.Windows.Forms.Label();
 			this.lblCoveredArea = new System.Windows.Forms.Label();
 			this.lblCoveredAreaTitle = new System.Windows.Forms.Label();
@@ -674,6 +675,7 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.lstError);
 			this.panel2.Controls.Add(this.lblRestAreaUnit);
 			this.panel2.Controls.Add(this.lblRestAreaTitle);
 			this.panel2.Controls.Add(this.lblAvailableAreaUnit);
@@ -687,7 +689,6 @@ namespace Europlan.Common {
 			this.panel2.Controls.Add(this.lblNecessaryWaermestromdichte);
 			this.panel2.Controls.Add(this.lblNecessaryWaermestromdichteTitle);
 			this.panel2.Controls.Add(this.dgvRegisters);
-			this.panel2.Controls.Add(this.lblError);
 			this.panel2.Controls.Add(this.lblCoveredAreaUnit);
 			this.panel2.Controls.Add(this.lblCoveredArea);
 			this.panel2.Controls.Add(this.lblCoveredAreaTitle);
@@ -738,6 +739,27 @@ namespace Europlan.Common {
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
+			// 
+			// lstError
+			// 
+			this.lstError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lstError.BackColor = System.Drawing.SystemColors.Window;
+			this.lstError.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.lstError.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.defaultColumn});
+			this.lstError.FullRowSelect = true;
+			this.lstError.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.lstError.LabelWrap = false;
+			this.lstError.Location = new System.Drawing.Point(3, 521);
+			this.lstError.Name = "lstError";
+			this.lstError.ShowGroups = false;
+			this.lstError.Size = new System.Drawing.Size(844, 30);
+			this.lstError.TabIndex = 168;
+			this.lstError.UseCompatibleStateImageBehavior = false;
+			this.lstError.View = System.Windows.Forms.View.Details;
+			this.lstError.Visible = false;
+			this.lstError.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lstError_ItemSelectionChanged);
 			// 
 			// lblRestAreaUnit
 			// 
@@ -1039,16 +1061,6 @@ namespace Europlan.Common {
 			// hithermRegisterBindingSource
 			// 
 			this.hithermRegisterBindingSource.DataSource = typeof(Europlan.Common.HithermRegister);
-			// 
-			// lblError
-			// 
-			this.lblError.AutoSize = true;
-			this.lblError.ForeColor = System.Drawing.Color.Red;
-			this.lblError.Location = new System.Drawing.Point(4, 538);
-			this.lblError.Name = "lblError";
-			this.lblError.Size = new System.Drawing.Size(0, 13);
-			this.lblError.TabIndex = 138;
-			this.lblError.Visible = false;
 			// 
 			// lblCoveredAreaUnit
 			// 
@@ -1574,7 +1586,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.GroupBox lineInfo;
 		private System.Windows.Forms.GroupBox groupBox5;
 		private System.Windows.Forms.Label label32;
-		private System.Windows.Forms.Label lblError;
 		private System.Windows.Forms.DataGridView dgvRegisters;
 		private System.Windows.Forms.BindingSource hithermRegisterBindingSource;
 		private System.Windows.Forms.DataGridViewTextBoxColumn registerBreiteDataGridViewTextBoxColumn;
@@ -1616,5 +1627,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblRestArea;
 		private System.Windows.Forms.Label lblAvailableArea;
 		private System.Windows.Forms.Label lblAvailableAreaTitle;
+		private System.Windows.Forms.ListView lstError;
+		private System.Windows.Forms.ColumnHeader defaultColumn;
 	}
 }

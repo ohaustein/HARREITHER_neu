@@ -156,6 +156,12 @@ namespace Europlan.Common {
 			maxDurchfluss = userConfig.GetProductParameterAsInt<HithermCompactProduct>("ConfigMaxDurchfluss", 240);
 		}
 
+		public static string NotificationMessage {
+			get {
+				return null;
+			}
+		}
+
 		public override Product Clone(Room room) {
 			HithermCompactProduct product = new HithermCompactProduct(this);
 			product.AssociatedRoom = room;

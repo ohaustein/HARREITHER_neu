@@ -128,12 +128,35 @@ namespace Europlan.Common {
 			maxModulesInRow = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxModulesInRow", 20);
 			maxModulesInParallel = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxModulesInParallel", 6);
 			maxModulesInCircuit = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigModulesInCircuit", 50);
-			leistungsFaktor = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktor", 0.77);
 			spreizungHeizMin = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungHeizMin", 4);
 			spreizungHeizMax = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungHeizMax", 12);
 			spreizungKuehlMin = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMin", 2);
 			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMax", 5);
 			construction = userConfig.GetProductParameterAsEnum<ModulKlimaDeckeProduct, ModulCeilingConstructionEnum>("ConfigModulCeilingConstruction", ModulCeilingConstructionEnum.C_PROFIL);
+			leistungsFaktor = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktor", 0.77);
+		}
+
+		public static string NotificationMessage {
+			get {
+				string message = null;
+				Configuration userConfig = Configuration.UserTemplate;
+
+				double defaultLeistungsFaktor = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktor", 0.77);
+				if (leistungsFaktor != defaultLeistungsFaktor) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  Leistungsfaktor: " + Math.Round(leistungsFaktor, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktor, 3).ToString() + ")";
+				}
+
+				if (message != null) {
+					message = "Modul Klimadecken-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" + message;
+				}
+
+				return message;
+			}
 		}
 
 		public override Product Clone(Room room) {

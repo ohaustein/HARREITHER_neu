@@ -260,7 +260,7 @@ namespace Europlan.Common {
 			}
 
 			double[] x = { 16.0, 18.0, 20.0, 22.0 };
-
+			
 			double[] c = null;
 			double[] y = new double[4];
 
