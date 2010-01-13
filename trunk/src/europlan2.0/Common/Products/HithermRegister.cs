@@ -82,18 +82,18 @@ namespace Europlan.Common {
 		[System.ComponentModel.TypeConverter(typeof(RegisterTypeEnumConverter))]
 		// if extended - consider also the part number getter
 		public enum HithermRegisterTypeEnum {
-			HIT_50_10,
-			HIT_100_10,
-			HIT_150_10,
-			HIT_200_10,
-			HIT_250_10,
-			HIT_300_10,
 			HIT_50_5,
 			HIT_100_5,
 			HIT_150_5,
 			HIT_200_5,
 			HIT_250_5,
-			HIT_300_5
+			HIT_300_5,
+			HIT_50_10,
+			HIT_100_10,
+			HIT_150_10,
+			HIT_200_10,
+			HIT_250_10,
+			HIT_300_10
 		}
 
 		public class RegisterOrientationEnumConverter : System.ComponentModel.TypeConverter {
