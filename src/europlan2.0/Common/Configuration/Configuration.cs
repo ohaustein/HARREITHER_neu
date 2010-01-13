@@ -722,46 +722,54 @@ namespace Europlan.Common {
 						if (this.productConfiguration.ContainsKey(t.FullName)) {
 							current = this.productConfiguration[t.FullName];
 							foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.GetProperty)) {
-								if (current.ContainsKey(info.Name)) {
-									if (info.PropertyType == typeof(int)) {
-										int val = 0;
-										if (int.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
-											info.SetValue(null, val, null);
+								try {
+									if (current.ContainsKey(info.Name) && info.CanWrite) {
+										if (info.PropertyType == typeof(int)) {
+											int val = 0;
+											if (int.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
+												info.SetValue(null, val, null);
+											} else {
+												log.Warn("Error when trying to set Product Configuration");
+											}
+										} else if (info.PropertyType == typeof(double)) {
+											double val = 0;
+											if (double.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
+												info.SetValue(null, val, BindingFlags.Static | BindingFlags.Public, null, null, null);
+											} else {
+												log.Warn("Error when trying to set Product Configuration");
+											}
+										} else if (info.PropertyType == typeof(float)) {
+											float val = 0;
+											if (float.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
+												info.SetValue(null, val, null);
+											} else {
+												log.Warn("Error when trying to set Product Configuration");
+											}
+										} else if (info.PropertyType == typeof(string)) {
+											info.SetValue(null, current[info.Name], null);
+										} else if (info.PropertyType == typeof(bool)) {
+											bool val = false;
+											if (bool.TryParse(current[info.Name], out val)) {
+												info.SetValue(null, val, null);
+											} else {
+												log.Warn("Error when trying to set Product Configuration");
+											}
+										} else if (info.PropertyType.IsSubclassOf(typeof(Enum))) {
+											if (Enum.IsDefined(info.PropertyType, current[info.Name])) {
+												info.SetValue(null, Enum.Parse(info.PropertyType, current[info.Name]), null);
+											} else {
+												log.Warn("Error when trying to set Product Configuration");
+											}
 										} else {
-											log.Warn("Error when trying to set Product Configuration");
-										}
-									} else if (info.PropertyType == typeof(double)) {
-										double val = 0;
-										if (double.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
-											info.SetValue(null, val, BindingFlags.Static | BindingFlags.Public, null, null, null);
-										} else {
-											log.Warn("Error when trying to set Product Configuration");
-										}
-									} else if (info.PropertyType == typeof(float)) {
-										float val = 0;
-										if (float.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
-											info.SetValue(null, val, null);
-										} else {
-											log.Warn("Error when trying to set Product Configuration");
-										}
-									} else if (info.PropertyType == typeof(string)) {
-										info.SetValue(null, current[info.Name], null);
-									} else if (info.PropertyType == typeof(bool)) {
-										bool val = false;
-										if (bool.TryParse(current[info.Name], out val)) {
-											info.SetValue(null, val, null);
-										} else {
-											log.Warn("Error when trying to set Product Configuration");
-										}
-									} else if (info.PropertyType.IsSubclassOf(typeof(Enum))) {
-										if (Enum.IsDefined(info.PropertyType, current[info.Name])) {
-											info.SetValue(null, Enum.Parse(info.PropertyType, current[info.Name]), null);
-										} else {
-											log.Warn("Error when trying to set Product Configuration");
+											log.Warn("Error when trying to set Product Configuration: Unknown type");
 										}
 									} else {
-										log.Warn("Error when trying to set Product Configuration: Unknown type");
+										if (!info.CanWrite) {
+											log.Debug("Error product config property " + info.Name + " in product " + t.Name + " cannot be set");
+										}
 									}
+								} catch (Exception ex) {
+									throw ex;
 								}
 							}
 						}
