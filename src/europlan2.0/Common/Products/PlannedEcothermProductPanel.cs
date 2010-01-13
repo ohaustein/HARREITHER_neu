@@ -545,11 +545,37 @@ namespace Europlan.Common {
 					}
 				}
 
+				this.lstError.Items.Clear();
+				string[] messages;
 				if (this.errorMsg != null) {
-					this.lblError.Text = this.errorMsg;
-					this.lblError.Visible = true;
+					messages = this.errorMsg.Split('\n');
+					foreach (string message in messages) {
+						if (!string.IsNullOrEmpty(message)) {
+							ListViewItem item = new ListViewItem(message);
+							item.ForeColor = Color.Red;
+							//item.Font = new Font(item.Font, FontStyle.Bold);
+							this.lstError.Items.Add(item);
+						}
+					}
+				}
+				string notifications = EcothermProduct.NotificationMessage;
+				if (notifications != null) {
+					messages = notifications.Split('\n');
+					foreach (string message in messages) {
+						if (!string.IsNullOrEmpty(message)) {
+							ListViewItem item = new ListViewItem(message);
+							item.ForeColor = Color.Orange;
+							this.lstError.Items.Add(item);
+						}
+					}
+				}
+				if (lstError.Items.Count > 0) {
+					this.lstError.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+					int height = this.lstError.Items[this.lstError.Items.Count - 1].Position.Y + this.lstError.Items[this.lstError.Items.Count - 1].Bounds.Height + 5;
+					this.lstError.Height = height;
+					this.lstError.Visible = true;
 				} else {
-					this.lblError.Visible = false;
+					this.lstError.Visible = false;
 				}
 
 				ignoreCoverHeatLoad--;
@@ -981,6 +1007,11 @@ namespace Europlan.Common {
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
+		}
+
+		private void lstError_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e) {
+			e.Item.Focused = false;
+			e.Item.Selected = false;
 		}
 
 	}

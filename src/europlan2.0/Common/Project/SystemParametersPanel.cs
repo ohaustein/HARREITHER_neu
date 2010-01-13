@@ -188,6 +188,7 @@ namespace Europlan.Common {
 			numEurovalSpreizungKuehlMax.Value = (decimal)EurovalProduct.ConfigSpreizungKuehlMax;
 			numEurovalGeometrie.Value = (decimal)EurovalProduct.ConfigAg;
 			cbEurovalGeometrieAktiviert.Checked = EurovalProduct.ConfigAgActivated;
+			numEurovalGeometrie.Enabled = EurovalProduct.ConfigAgActivated;
 			numEurovalMindestueberdeckung.Value = (decimal)EurovalProduct.ConfigSu0;
 			numEurovalEstrichueberdeckung.Value = (decimal)EurovalProduct.ConfigSu;
 			numEurovalDichte.Value = (decimal)EurovalProduct.ConfigRho;
@@ -341,6 +342,7 @@ namespace Europlan.Common {
 
 		private void cbEurovalGeometrieAktiviert_CheckedChanged(object sender, EventArgs e) {
 			EurovalProduct.ConfigAgActivated = cbEurovalGeometrieAktiviert.Checked;
+			numEurovalGeometrie.Enabled = EurovalProduct.ConfigAgActivated;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}

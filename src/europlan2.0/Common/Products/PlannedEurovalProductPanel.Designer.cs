@@ -79,11 +79,14 @@ namespace Europlan.Common {
 			this.groupBox10 = new System.Windows.Forms.GroupBox();
 			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
 			this.groupBox9 = new System.Windows.Forms.GroupBox();
+			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.btnDistributor = new System.Windows.Forms.Button();
 			this.lblDistributor = new System.Windows.Forms.Label();
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.lstError = new System.Windows.Forms.ListView();
+			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
 			this.groupBox8 = new System.Windows.Forms.GroupBox();
 			this.cmbCircuits = new System.Windows.Forms.ComboBox();
 			this.label29 = new System.Windows.Forms.Label();
@@ -94,7 +97,6 @@ namespace Europlan.Common {
 			this.cmbLayDistance = new System.Windows.Forms.ComboBox();
 			this.label14 = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
-			this.lblError = new System.Windows.Forms.Label();
 			this.grpResults = new System.Windows.Forms.GroupBox();
 			this.btnConnectionPipes = new System.Windows.Forms.Button();
 			this.lblSpreizungCool = new System.Windows.Forms.Label();
@@ -167,7 +169,6 @@ namespace Europlan.Common {
 			this.label1 = new System.Windows.Forms.Label();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -999,6 +1000,17 @@ namespace Europlan.Common {
 			this.groupBox9.TabIndex = 0;
 			this.groupBox9.TabStop = false;
 			// 
+			// chkStellAntriebe
+			// 
+			this.chkStellAntriebe.AutoSize = true;
+			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
+			this.chkStellAntriebe.Name = "chkStellAntriebe";
+			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
+			this.chkStellAntriebe.TabIndex = 6;
+			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
+			this.chkStellAntriebe.UseVisualStyleBackColor = true;
+			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
+			// 
 			// btnDistributor
 			// 
 			this.btnDistributor.Location = new System.Drawing.Point(388, 13);
@@ -1040,14 +1052,35 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.lstError);
 			this.panel2.Controls.Add(this.groupBox8);
-			this.panel2.Controls.Add(this.lblError);
 			this.panel2.Controls.Add(this.grpResults);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(3, 3);
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 496);
 			this.panel2.TabIndex = 1;
+			// 
+			// lstError
+			// 
+			this.lstError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lstError.BackColor = System.Drawing.SystemColors.Window;
+			this.lstError.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.lstError.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.defaultColumn});
+			this.lstError.FullRowSelect = true;
+			this.lstError.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.lstError.LabelWrap = false;
+			this.lstError.Location = new System.Drawing.Point(3, 361);
+			this.lstError.Name = "lstError";
+			this.lstError.ShowGroups = false;
+			this.lstError.Size = new System.Drawing.Size(844, 30);
+			this.lstError.TabIndex = 73;
+			this.lstError.UseCompatibleStateImageBehavior = false;
+			this.lstError.View = System.Windows.Forms.View.Details;
+			this.lstError.Visible = false;
+			this.lstError.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lstError_ItemSelectionChanged);
 			// 
 			// groupBox8
 			// 
@@ -1187,16 +1220,6 @@ namespace Europlan.Common {
 			this.label13.Size = new System.Drawing.Size(152, 13);
 			this.label13.TabIndex = 54;
 			this.label13.Text = "Verlegeart Aufenthaltszone:";
-			// 
-			// lblError
-			// 
-			this.lblError.AutoSize = true;
-			this.lblError.ForeColor = System.Drawing.Color.Red;
-			this.lblError.Location = new System.Drawing.Point(6, 363);
-			this.lblError.Name = "lblError";
-			this.lblError.Size = new System.Drawing.Size(0, 13);
-			this.lblError.TabIndex = 71;
-			this.lblError.Visible = false;
 			// 
 			// grpResults
 			// 
@@ -1905,17 +1928,6 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2.HeaderText = "Verlegeart";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			// 
-			// chkStellAntriebe
-			// 
-			this.chkStellAntriebe.AutoSize = true;
-			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
-			this.chkStellAntriebe.Name = "chkStellAntriebe";
-			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
-			this.chkStellAntriebe.TabIndex = 6;
-			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
-			this.chkStellAntriebe.UseVisualStyleBackColor = true;
-			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
-			// 
 			// PlannedEurovalProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1938,7 +1950,6 @@ namespace Europlan.Common {
 			this.groupBox9.PerformLayout();
 			this.pageConstruction.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
-			this.panel2.PerformLayout();
 			this.groupBox8.ResumeLayout(false);
 			this.groupBox8.PerformLayout();
 			this.grpResults.ResumeLayout(false);
@@ -2081,7 +2092,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnDistributor;
 		private System.Windows.Forms.Label lblDistributor;
 		private System.Windows.Forms.TextBox txtDistributor;
-		private System.Windows.Forms.Label lblError;
 		private System.Windows.Forms.GroupBox groupBox10;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -2093,5 +2103,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.CheckBox chkAnhydritEstrich;
 		private System.Windows.Forms.CheckBox chkClip;
 		private System.Windows.Forms.CheckBox chkStellAntriebe;
+		private System.Windows.Forms.ListView lstError;
+		private System.Windows.Forms.ColumnHeader defaultColumn;
 	}
 }

@@ -68,6 +68,23 @@ namespace Europlan.Common {
 			this.hithermWallGrid1 = new Europlan.Common.HithermWallGrid();
 			this.pageAuslegung = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.lstError = new System.Windows.Forms.ListView();
+			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
+			this.lblRestAreaUnit = new System.Windows.Forms.Label();
+			this.lblRestAreaTitle = new System.Windows.Forms.Label();
+			this.lblAvailableAreaUnit = new System.Windows.Forms.Label();
+			this.lblRestArea = new System.Windows.Forms.Label();
+			this.lblAvailableArea = new System.Windows.Forms.Label();
+			this.lblAvailableAreaTitle = new System.Windows.Forms.Label();
+			this.lblNecessaryAreaUnit = new System.Windows.Forms.Label();
+			this.lblNecessaryArea = new System.Windows.Forms.Label();
+			this.lblNecessaryAreaTitle = new System.Windows.Forms.Label();
+			this.lblNecessaryWaermestromdichteUnit = new System.Windows.Forms.Label();
+			this.lblNecessaryWaermestromdichte = new System.Windows.Forms.Label();
+			this.lblNecessaryWaermestromdichteTitle = new System.Windows.Forms.Label();
+			this.lblCoveredAreaUnit = new System.Windows.Forms.Label();
+			this.lblCoveredArea = new System.Windows.Forms.Label();
+			this.lblCoveredAreaTitle = new System.Windows.Forms.Label();
 			this.dgvRegisters = new System.Windows.Forms.DataGridView();
 			this.registerTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.registerCountDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
@@ -88,7 +105,6 @@ namespace Europlan.Common {
 			this.partNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnSelectWall = new System.Windows.Forms.Button();
 			this.hithermCompactRegisterBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.lblError = new System.Windows.Forms.Label();
 			this.lineInfo = new System.Windows.Forms.GroupBox();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.label32 = new System.Windows.Forms.Label();
@@ -135,21 +151,6 @@ namespace Europlan.Common {
 			this.Verlegeart = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.lblRestAreaUnit = new System.Windows.Forms.Label();
-			this.lblRestAreaTitle = new System.Windows.Forms.Label();
-			this.lblAvailableAreaUnit = new System.Windows.Forms.Label();
-			this.lblRestArea = new System.Windows.Forms.Label();
-			this.lblAvailableArea = new System.Windows.Forms.Label();
-			this.lblAvailableAreaTitle = new System.Windows.Forms.Label();
-			this.lblNecessaryAreaUnit = new System.Windows.Forms.Label();
-			this.lblNecessaryArea = new System.Windows.Forms.Label();
-			this.lblNecessaryAreaTitle = new System.Windows.Forms.Label();
-			this.lblNecessaryWaermestromdichteUnit = new System.Windows.Forms.Label();
-			this.lblNecessaryWaermestromdichte = new System.Windows.Forms.Label();
-			this.lblNecessaryWaermestromdichteTitle = new System.Windows.Forms.Label();
-			this.lblCoveredAreaUnit = new System.Windows.Forms.Label();
-			this.lblCoveredArea = new System.Windows.Forms.Label();
-			this.lblCoveredAreaTitle = new System.Windows.Forms.Label();
 			this.grpPowerArea.SuspendLayout();
 			this.tabs.SuspendLayout();
 			this.pageInput.SuspendLayout();
@@ -679,6 +680,7 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.Controls.Add(this.lstError);
 			this.panel2.Controls.Add(this.lblRestAreaUnit);
 			this.panel2.Controls.Add(this.lblRestAreaTitle);
 			this.panel2.Controls.Add(this.lblAvailableAreaUnit);
@@ -695,7 +697,6 @@ namespace Europlan.Common {
 			this.panel2.Controls.Add(this.lblCoveredArea);
 			this.panel2.Controls.Add(this.lblCoveredAreaTitle);
 			this.panel2.Controls.Add(this.dgvRegisters);
-			this.panel2.Controls.Add(this.lblError);
 			this.panel2.Controls.Add(this.lineInfo);
 			this.panel2.Controls.Add(this.groupBox5);
 			this.panel2.Controls.Add(this.label32);
@@ -743,6 +744,157 @@ namespace Europlan.Common {
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
+			// 
+			// lstError
+			// 
+			this.lstError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lstError.BackColor = System.Drawing.SystemColors.Window;
+			this.lstError.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.lstError.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.defaultColumn});
+			this.lstError.FullRowSelect = true;
+			this.lstError.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.lstError.LabelWrap = false;
+			this.lstError.Location = new System.Drawing.Point(3, 521);
+			this.lstError.Name = "lstError";
+			this.lstError.ShowGroups = false;
+			this.lstError.Size = new System.Drawing.Size(844, 30);
+			this.lstError.TabIndex = 167;
+			this.lstError.UseCompatibleStateImageBehavior = false;
+			this.lstError.View = System.Windows.Forms.View.Details;
+			this.lstError.Visible = false;
+			this.lstError.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lstError_ItemSelectionChanged);
+			// 
+			// lblRestAreaUnit
+			// 
+			this.lblRestAreaUnit.Location = new System.Drawing.Point(652, 377);
+			this.lblRestAreaUnit.Name = "lblRestAreaUnit";
+			this.lblRestAreaUnit.Size = new System.Drawing.Size(35, 13);
+			this.lblRestAreaUnit.TabIndex = 166;
+			this.lblRestAreaUnit.Text = "m²";
+			// 
+			// lblRestAreaTitle
+			// 
+			this.lblRestAreaTitle.AutoSize = true;
+			this.lblRestAreaTitle.Location = new System.Drawing.Point(457, 377);
+			this.lblRestAreaTitle.Name = "lblRestAreaTitle";
+			this.lblRestAreaTitle.Size = new System.Drawing.Size(76, 13);
+			this.lblRestAreaTitle.TabIndex = 165;
+			this.lblRestAreaTitle.Text = "Übrige Fläche:";
+			// 
+			// lblAvailableAreaUnit
+			// 
+			this.lblAvailableAreaUnit.Location = new System.Drawing.Point(652, 337);
+			this.lblAvailableAreaUnit.Name = "lblAvailableAreaUnit";
+			this.lblAvailableAreaUnit.Size = new System.Drawing.Size(35, 13);
+			this.lblAvailableAreaUnit.TabIndex = 164;
+			this.lblAvailableAreaUnit.Text = "m²";
+			// 
+			// lblRestArea
+			// 
+			this.lblRestArea.Location = new System.Drawing.Point(596, 377);
+			this.lblRestArea.Name = "lblRestArea";
+			this.lblRestArea.Size = new System.Drawing.Size(50, 13);
+			this.lblRestArea.TabIndex = 163;
+			this.lblRestArea.Text = "W";
+			this.lblRestArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblAvailableArea
+			// 
+			this.lblAvailableArea.Location = new System.Drawing.Point(596, 337);
+			this.lblAvailableArea.Name = "lblAvailableArea";
+			this.lblAvailableArea.Size = new System.Drawing.Size(50, 13);
+			this.lblAvailableArea.TabIndex = 162;
+			this.lblAvailableArea.Text = "W";
+			this.lblAvailableArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblAvailableAreaTitle
+			// 
+			this.lblAvailableAreaTitle.AutoSize = true;
+			this.lblAvailableAreaTitle.Location = new System.Drawing.Point(457, 337);
+			this.lblAvailableAreaTitle.Name = "lblAvailableAreaTitle";
+			this.lblAvailableAreaTitle.Size = new System.Drawing.Size(97, 13);
+			this.lblAvailableAreaTitle.TabIndex = 161;
+			this.lblAvailableAreaTitle.Text = "Verfügbare Fläche:";
+			// 
+			// lblNecessaryAreaUnit
+			// 
+			this.lblNecessaryAreaUnit.Location = new System.Drawing.Point(652, 417);
+			this.lblNecessaryAreaUnit.Name = "lblNecessaryAreaUnit";
+			this.lblNecessaryAreaUnit.Size = new System.Drawing.Size(35, 13);
+			this.lblNecessaryAreaUnit.TabIndex = 160;
+			this.lblNecessaryAreaUnit.Text = "m²";
+			// 
+			// lblNecessaryArea
+			// 
+			this.lblNecessaryArea.Location = new System.Drawing.Point(596, 417);
+			this.lblNecessaryArea.Name = "lblNecessaryArea";
+			this.lblNecessaryArea.Size = new System.Drawing.Size(50, 13);
+			this.lblNecessaryArea.TabIndex = 159;
+			this.lblNecessaryArea.Text = "W";
+			this.lblNecessaryArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblNecessaryAreaTitle
+			// 
+			this.lblNecessaryAreaTitle.AutoSize = true;
+			this.lblNecessaryAreaTitle.Location = new System.Drawing.Point(457, 417);
+			this.lblNecessaryAreaTitle.Name = "lblNecessaryAreaTitle";
+			this.lblNecessaryAreaTitle.Size = new System.Drawing.Size(89, 13);
+			this.lblNecessaryAreaTitle.TabIndex = 158;
+			this.lblNecessaryAreaTitle.Text = "benötigte Fläche:";
+			// 
+			// lblNecessaryWaermestromdichteUnit
+			// 
+			this.lblNecessaryWaermestromdichteUnit.Location = new System.Drawing.Point(652, 397);
+			this.lblNecessaryWaermestromdichteUnit.Name = "lblNecessaryWaermestromdichteUnit";
+			this.lblNecessaryWaermestromdichteUnit.Size = new System.Drawing.Size(35, 13);
+			this.lblNecessaryWaermestromdichteUnit.TabIndex = 157;
+			this.lblNecessaryWaermestromdichteUnit.Text = "W/m²";
+			// 
+			// lblNecessaryWaermestromdichte
+			// 
+			this.lblNecessaryWaermestromdichte.Location = new System.Drawing.Point(596, 397);
+			this.lblNecessaryWaermestromdichte.Name = "lblNecessaryWaermestromdichte";
+			this.lblNecessaryWaermestromdichte.Size = new System.Drawing.Size(50, 13);
+			this.lblNecessaryWaermestromdichte.TabIndex = 156;
+			this.lblNecessaryWaermestromdichte.Text = "W";
+			this.lblNecessaryWaermestromdichte.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblNecessaryWaermestromdichteTitle
+			// 
+			this.lblNecessaryWaermestromdichteTitle.AutoSize = true;
+			this.lblNecessaryWaermestromdichteTitle.Location = new System.Drawing.Point(457, 397);
+			this.lblNecessaryWaermestromdichteTitle.Name = "lblNecessaryWaermestromdichteTitle";
+			this.lblNecessaryWaermestromdichteTitle.Size = new System.Drawing.Size(125, 13);
+			this.lblNecessaryWaermestromdichteTitle.TabIndex = 155;
+			this.lblNecessaryWaermestromdichteTitle.Text = "benötigte Wärmestromd.:";
+			// 
+			// lblCoveredAreaUnit
+			// 
+			this.lblCoveredAreaUnit.Location = new System.Drawing.Point(652, 357);
+			this.lblCoveredAreaUnit.Name = "lblCoveredAreaUnit";
+			this.lblCoveredAreaUnit.Size = new System.Drawing.Size(35, 13);
+			this.lblCoveredAreaUnit.TabIndex = 154;
+			this.lblCoveredAreaUnit.Text = "m²";
+			// 
+			// lblCoveredArea
+			// 
+			this.lblCoveredArea.Location = new System.Drawing.Point(596, 357);
+			this.lblCoveredArea.Name = "lblCoveredArea";
+			this.lblCoveredArea.Size = new System.Drawing.Size(50, 13);
+			this.lblCoveredArea.TabIndex = 153;
+			this.lblCoveredArea.Text = "W";
+			this.lblCoveredArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// lblCoveredAreaTitle
+			// 
+			this.lblCoveredAreaTitle.AutoSize = true;
+			this.lblCoveredAreaTitle.Location = new System.Drawing.Point(457, 357);
+			this.lblCoveredAreaTitle.Name = "lblCoveredAreaTitle";
+			this.lblCoveredAreaTitle.Size = new System.Drawing.Size(81, 13);
+			this.lblCoveredAreaTitle.TabIndex = 152;
+			this.lblCoveredAreaTitle.Text = "Belegte Fläche:";
 			// 
 			// dgvRegisters
 			// 
@@ -978,16 +1130,6 @@ namespace Europlan.Common {
 			// hithermCompactRegisterBindingSource
 			// 
 			this.hithermCompactRegisterBindingSource.DataSource = typeof(Europlan.Common.HithermCompactRegister);
-			// 
-			// lblError
-			// 
-			this.lblError.AutoSize = true;
-			this.lblError.ForeColor = System.Drawing.Color.Red;
-			this.lblError.Location = new System.Drawing.Point(4, 538);
-			this.lblError.Name = "lblError";
-			this.lblError.Size = new System.Drawing.Size(0, 13);
-			this.lblError.TabIndex = 138;
-			this.lblError.Visible = false;
 			// 
 			// lineInfo
 			// 
@@ -1382,136 +1524,6 @@ namespace Europlan.Common {
 			this.Column4.HeaderText = "Column4";
 			this.Column4.Name = "Column4";
 			// 
-			// lblRestAreaUnit
-			// 
-			this.lblRestAreaUnit.Location = new System.Drawing.Point(652, 377);
-			this.lblRestAreaUnit.Name = "lblRestAreaUnit";
-			this.lblRestAreaUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblRestAreaUnit.TabIndex = 166;
-			this.lblRestAreaUnit.Text = "m²";
-			// 
-			// lblRestAreaTitle
-			// 
-			this.lblRestAreaTitle.AutoSize = true;
-			this.lblRestAreaTitle.Location = new System.Drawing.Point(457, 377);
-			this.lblRestAreaTitle.Name = "lblRestAreaTitle";
-			this.lblRestAreaTitle.Size = new System.Drawing.Size(76, 13);
-			this.lblRestAreaTitle.TabIndex = 165;
-			this.lblRestAreaTitle.Text = "Übrige Fläche:";
-			// 
-			// lblAvailableAreaUnit
-			// 
-			this.lblAvailableAreaUnit.Location = new System.Drawing.Point(652, 337);
-			this.lblAvailableAreaUnit.Name = "lblAvailableAreaUnit";
-			this.lblAvailableAreaUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblAvailableAreaUnit.TabIndex = 164;
-			this.lblAvailableAreaUnit.Text = "m²";
-			// 
-			// lblRestArea
-			// 
-			this.lblRestArea.Location = new System.Drawing.Point(596, 377);
-			this.lblRestArea.Name = "lblRestArea";
-			this.lblRestArea.Size = new System.Drawing.Size(50, 13);
-			this.lblRestArea.TabIndex = 163;
-			this.lblRestArea.Text = "W";
-			this.lblRestArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// lblAvailableArea
-			// 
-			this.lblAvailableArea.Location = new System.Drawing.Point(596, 337);
-			this.lblAvailableArea.Name = "lblAvailableArea";
-			this.lblAvailableArea.Size = new System.Drawing.Size(50, 13);
-			this.lblAvailableArea.TabIndex = 162;
-			this.lblAvailableArea.Text = "W";
-			this.lblAvailableArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// lblAvailableAreaTitle
-			// 
-			this.lblAvailableAreaTitle.AutoSize = true;
-			this.lblAvailableAreaTitle.Location = new System.Drawing.Point(457, 337);
-			this.lblAvailableAreaTitle.Name = "lblAvailableAreaTitle";
-			this.lblAvailableAreaTitle.Size = new System.Drawing.Size(97, 13);
-			this.lblAvailableAreaTitle.TabIndex = 161;
-			this.lblAvailableAreaTitle.Text = "Verfügbare Fläche:";
-			// 
-			// lblNecessaryAreaUnit
-			// 
-			this.lblNecessaryAreaUnit.Location = new System.Drawing.Point(652, 417);
-			this.lblNecessaryAreaUnit.Name = "lblNecessaryAreaUnit";
-			this.lblNecessaryAreaUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblNecessaryAreaUnit.TabIndex = 160;
-			this.lblNecessaryAreaUnit.Text = "m²";
-			// 
-			// lblNecessaryArea
-			// 
-			this.lblNecessaryArea.Location = new System.Drawing.Point(596, 417);
-			this.lblNecessaryArea.Name = "lblNecessaryArea";
-			this.lblNecessaryArea.Size = new System.Drawing.Size(50, 13);
-			this.lblNecessaryArea.TabIndex = 159;
-			this.lblNecessaryArea.Text = "W";
-			this.lblNecessaryArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// lblNecessaryAreaTitle
-			// 
-			this.lblNecessaryAreaTitle.AutoSize = true;
-			this.lblNecessaryAreaTitle.Location = new System.Drawing.Point(457, 417);
-			this.lblNecessaryAreaTitle.Name = "lblNecessaryAreaTitle";
-			this.lblNecessaryAreaTitle.Size = new System.Drawing.Size(89, 13);
-			this.lblNecessaryAreaTitle.TabIndex = 158;
-			this.lblNecessaryAreaTitle.Text = "benötigte Fläche:";
-			// 
-			// lblNecessaryWaermestromdichteUnit
-			// 
-			this.lblNecessaryWaermestromdichteUnit.Location = new System.Drawing.Point(652, 397);
-			this.lblNecessaryWaermestromdichteUnit.Name = "lblNecessaryWaermestromdichteUnit";
-			this.lblNecessaryWaermestromdichteUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblNecessaryWaermestromdichteUnit.TabIndex = 157;
-			this.lblNecessaryWaermestromdichteUnit.Text = "W/m²";
-			// 
-			// lblNecessaryWaermestromdichte
-			// 
-			this.lblNecessaryWaermestromdichte.Location = new System.Drawing.Point(596, 397);
-			this.lblNecessaryWaermestromdichte.Name = "lblNecessaryWaermestromdichte";
-			this.lblNecessaryWaermestromdichte.Size = new System.Drawing.Size(50, 13);
-			this.lblNecessaryWaermestromdichte.TabIndex = 156;
-			this.lblNecessaryWaermestromdichte.Text = "W";
-			this.lblNecessaryWaermestromdichte.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// lblNecessaryWaermestromdichteTitle
-			// 
-			this.lblNecessaryWaermestromdichteTitle.AutoSize = true;
-			this.lblNecessaryWaermestromdichteTitle.Location = new System.Drawing.Point(457, 397);
-			this.lblNecessaryWaermestromdichteTitle.Name = "lblNecessaryWaermestromdichteTitle";
-			this.lblNecessaryWaermestromdichteTitle.Size = new System.Drawing.Size(125, 13);
-			this.lblNecessaryWaermestromdichteTitle.TabIndex = 155;
-			this.lblNecessaryWaermestromdichteTitle.Text = "benötigte Wärmestromd.:";
-			// 
-			// lblCoveredAreaUnit
-			// 
-			this.lblCoveredAreaUnit.Location = new System.Drawing.Point(652, 357);
-			this.lblCoveredAreaUnit.Name = "lblCoveredAreaUnit";
-			this.lblCoveredAreaUnit.Size = new System.Drawing.Size(35, 13);
-			this.lblCoveredAreaUnit.TabIndex = 154;
-			this.lblCoveredAreaUnit.Text = "m²";
-			// 
-			// lblCoveredArea
-			// 
-			this.lblCoveredArea.Location = new System.Drawing.Point(596, 357);
-			this.lblCoveredArea.Name = "lblCoveredArea";
-			this.lblCoveredArea.Size = new System.Drawing.Size(50, 13);
-			this.lblCoveredArea.TabIndex = 153;
-			this.lblCoveredArea.Text = "W";
-			this.lblCoveredArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			// 
-			// lblCoveredAreaTitle
-			// 
-			this.lblCoveredAreaTitle.AutoSize = true;
-			this.lblCoveredAreaTitle.Location = new System.Drawing.Point(457, 357);
-			this.lblCoveredAreaTitle.Name = "lblCoveredAreaTitle";
-			this.lblCoveredAreaTitle.Size = new System.Drawing.Size(81, 13);
-			this.lblCoveredAreaTitle.TabIndex = 152;
-			this.lblCoveredAreaTitle.Text = "Belegte Fläche:";
-			// 
 			// PlannedHithermCompactProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1614,7 +1626,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.GroupBox lineInfo;
 		private System.Windows.Forms.GroupBox groupBox5;
 		private System.Windows.Forms.Label label32;
-		private System.Windows.Forms.Label lblError;
 		private System.Windows.Forms.DataGridView dgvRegisters;
 		private System.Windows.Forms.DataGridViewTextBoxColumn registerBreiteDataGridViewTextBoxColumn;
 		private System.Windows.Forms.TabPage pageConstructions;
@@ -1663,5 +1674,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblCoveredAreaUnit;
 		private System.Windows.Forms.Label lblCoveredArea;
 		private System.Windows.Forms.Label lblCoveredAreaTitle;
+		private System.Windows.Forms.ListView lstError;
+		private System.Windows.Forms.ColumnHeader defaultColumn;
 	}
 }
