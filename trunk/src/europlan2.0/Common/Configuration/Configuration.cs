@@ -93,9 +93,9 @@ namespace Europlan.Common {
 							string unit = positions[9].Trim();
 							float denomination = 0;
 							if (float.TryParse(positions[4], out denomination)) {
-								allMaterials.Add(new Material(id, name, id, (int)denomination, unit, price, discountGroup, null, false));
+								allMaterials.Add(new Material(id, name, id, (int)denomination, unit, price, discountGroup, null, false, false));
 							} else {
-								allMaterials.Add(new Material(id, name, id, null, unit, price, discountGroup, null, false));
+								allMaterials.Add(new Material(id, name, id, null, unit, price, discountGroup, null, false, false));
 							}
 
 						}
@@ -465,15 +465,25 @@ namespace Europlan.Common {
 
 		public List<Material> SerializableMaterials {
 			get {
-				List<Material> materialList = new List<Material>();
+				List<Material> materialList;
 				if (type == ConfigurationType.ProjectConfiguration || type == ConfigurationType.UserConfiguration) {
+					materialList = new List<Material>();
 					foreach (Material material in this.materials) {
 						if (material.UserDefined) {
 							materialList.Add(material);
 						}
 					}
+				} else if (type == ConfigurationType.AdminConfiguration || type == ConfigurationType.UserConfiguration) {
+					materialList = new List<Material>();
+					foreach (Material material in this.materials) {
+						if (material.Additional) {
+							materialList.Add(material);
+						}
+					}
 				} else if (type == ConfigurationType.InitializedConfiguration) {
 					materialList = this.materials;
+				} else {
+					materialList = new List<Material>();
 				}
 				return materialList;
 			}

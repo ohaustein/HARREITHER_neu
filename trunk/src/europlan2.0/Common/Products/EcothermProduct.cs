@@ -200,7 +200,7 @@ namespace Europlan.Common {
 			su = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
 		}
 
-		public static string NotificationMessage {
+		public static string GlobalNotificationMessage {
 			get {
 				string message = null;
 				Configuration userConfig = Configuration.UserTemplate;

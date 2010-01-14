@@ -200,7 +200,7 @@ namespace Europlan.Common {
 			maxDurchfluss = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigMaxDurchfluss", 240);
 		}
 
-		public static string NotificationMessage {
+		public static string GlobalNotificationMessage {
 			get {
 				return null;
 			}

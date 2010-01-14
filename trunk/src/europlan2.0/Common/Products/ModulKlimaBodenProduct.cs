@@ -81,7 +81,7 @@ namespace Europlan.Common {
 			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungKuehlMax", 5);
 		}
 
-		public static string NotificationMessage {
+		public static string GlobalNotificationMessage {
 			get {
 				return null;
 			}

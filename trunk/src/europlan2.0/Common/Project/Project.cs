@@ -486,8 +486,8 @@ namespace Europlan.Common {
 			HithermCompactProduct.ReviseRequiredMaterial(requiredMaterialCalculated);
 		}
 
-		public void AddRequiredMaterial(SerializableDictionary<string, double> requiredMaterial, string partNumber, double amount) {
-			Material material = this.Config.Materials.Find(delegate(Material m) { return m.PartNumber == partNumber; });
+		public void AddRequiredMaterial(SerializableDictionary<string, double> requiredMaterial, string materialId, double amount) {
+			Material material = this.Config.Materials.Find(delegate(Material m) { return m.Id == materialId; });
 			if (material != null) {
 				if (requiredMaterial.ContainsKey(material.Id)) {
 					requiredMaterial[material.Id] += amount;
@@ -621,37 +621,37 @@ namespace Europlan.Common {
 				string message = "";
 				string add;
 				if (ecotherm) {
-					add = EcothermProduct.NotificationMessage;
+					add = EcothermProduct.GlobalNotificationMessage;
 					if (add != null) {
 						message += "\n" + add;
 					}
 				}
 				if (euroval) {
-					add = EurovalProduct.NotificationMessage;
+					add = EurovalProduct.GlobalNotificationMessage;
 					if (add != null) {
 						message += "\n" + add;
 					}
 				}
 				if (hitherm) {
-					add = HithermProduct.NotificationMessage;
+					add = HithermProduct.GlobalNotificationMessage;
 					if (add != null) {
 						message += "\n" + add;
 					}
 				}
 				if (hithermCompact) {
-					add = HithermCompactProduct.NotificationMessage;
+					add = HithermCompactProduct.GlobalNotificationMessage;
 					if (add != null) {
 						message += "\n" + add;
 					}
 				}
 				if (modulBoden) {
-					add = ModulKlimaBodenProduct.NotificationMessage;
+					add = ModulKlimaBodenProduct.GlobalNotificationMessage;
 					if (add != null) {
 						message += "\n" + add;
 					}
 				}
 				if (modulDecke) {
-					add = ModulKlimaDeckeProduct.NotificationMessage;
+					add = ModulKlimaDeckeProduct.GlobalNotificationMessage;
 					if (add != null) {
 						message += "\n" + add;
 					}

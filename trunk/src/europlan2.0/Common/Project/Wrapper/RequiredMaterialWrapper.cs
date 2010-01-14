@@ -16,6 +16,10 @@ namespace Europlan.Common {
 			get { return material.PartNumber; }
 		}
 
+		public string Id {
+			get { return material.Id; }
+		}
+
 		public string Name {
 			get { return material.Name; }
 		}

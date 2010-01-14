@@ -1234,5 +1234,15 @@ namespace Europlan.Common {
 			rtn = "{" + rtn.Substring(2) + "}";
 			return rtn;
 		}
+
+		public virtual string NotificationMessage {
+			get {
+				double coolLoad = Math.Round(this.PlannedCoolLoad / this.PlannedNetArea, 1);
+				if (coolLoad > 75) {
+					return "Für dieses System wird eine Entfeuchtung empfohlen, da die Kühlleistung 75W/m2 übersteigt";
+				}
+				return null;
+			}
+		}
 	}
 }
