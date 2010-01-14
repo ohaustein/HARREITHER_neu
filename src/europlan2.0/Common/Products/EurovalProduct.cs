@@ -207,7 +207,7 @@ namespace Europlan.Common {
 			v = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigV", 0.00000101);
 		}
 
-		public static string NotificationMessage {
+		public static string GlobalNotificationMessage {
 			get {
 				string message = null;
 				Configuration userConfig = Configuration.UserTemplate;
@@ -1918,6 +1918,15 @@ namespace Europlan.Common {
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "EV30", totalArea);
 					// PE Folie
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "EV31", totalArea * 1.1);
+				}
+			}
+
+			// Dämmung
+			if (this.HasOutsideConstruction) {
+				foreach (ConstructionLayer layer in this.PlannedOutsideConstruction.Layers) {
+					if (layer.LayerMaterial != null) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, layer.LayerMaterial.Id, this.PlannedFloorArea);
+					}
 				}
 			}
 

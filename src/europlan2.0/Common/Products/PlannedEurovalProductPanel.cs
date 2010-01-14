@@ -558,7 +558,18 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				string notifications = EurovalProduct.NotificationMessage;
+				string notifications = this.product.Product.NotificationMessage;
+				if (notifications != null) {
+					messages = notifications.Split('\n');
+					foreach (string message in messages) {
+						if (!string.IsNullOrEmpty(message)) {
+							ListViewItem item = new ListViewItem(message);
+							item.ForeColor = Color.Orange;
+							this.lstError.Items.Add(item);
+						}
+					}
+				}
+				notifications = EurovalProduct.GlobalNotificationMessage;
 				if (notifications != null) {
 					messages = notifications.Split('\n');
 					foreach (string message in messages) {

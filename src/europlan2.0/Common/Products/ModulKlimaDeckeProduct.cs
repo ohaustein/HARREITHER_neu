@@ -136,7 +136,7 @@ namespace Europlan.Common {
 			leistungsFaktor = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktor", 0.77);
 		}
 
-		public static string NotificationMessage {
+		public static string GlobalNotificationMessage {
 			get {
 				string message = null;
 				Configuration userConfig = Configuration.UserTemplate;

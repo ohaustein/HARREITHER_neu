@@ -40,7 +40,11 @@ namespace Europlan.Common {
 			}
 			wrapperList.Sort(delegate (RequiredMaterialWrapper w1, RequiredMaterialWrapper w2) {
 				if (w1.Category.Order.CompareTo(w2.Category.Order) == 0) {
-					return w1.PartNumber.CompareTo(w2.PartNumber);
+					if (w1.PartNumber.CompareTo(w2.PartNumber) == 0) {
+						return w1.Name.CompareTo(w2.Name);
+					} else {
+						return w1.PartNumber.CompareTo(w2.PartNumber);
+					}
 				} else {
 					return w1.Category.Order.CompareTo(w2.Category.Order);
 				}

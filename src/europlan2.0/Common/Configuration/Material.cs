@@ -15,6 +15,7 @@ namespace Europlan.Common {
 		private float price;
 		private string discountGroup;
 		private bool userDefined;
+		private bool additional;
 		private Category category;
 		private bool isNew = false;
 
@@ -27,10 +28,11 @@ namespace Europlan.Common {
 			this.price = 0;
 			this.discountGroup = "";
 			this.userDefined = false;
+			this.additional = false;
 			this.category = null;
 		}
 
-		public Material(string id, string name, string partNumber, Nullable<int> denomination, string unit, float price, string discountGroup, Category category, bool userDefined) {
+		public Material(string id, string name, string partNumber, Nullable<int> denomination, string unit, float price, string discountGroup, Category category, bool userDefined, bool additional) {
 			this.id = id;
 			this.name = name;
 			this.partNumber = partNumber;
@@ -39,6 +41,7 @@ namespace Europlan.Common {
 			this.price = price;
 			this.discountGroup = discountGroup;
 			this.userDefined = userDefined;
+			this.additional = additional;
 			this.category = category;
 		}
 
@@ -94,6 +97,11 @@ namespace Europlan.Common {
 		public bool UserDefined {
 			get { return this.userDefined; }
 			set { this.userDefined = value; }
+		}
+
+		public bool Additional {
+			get { return this.additional; }
+			set { this.additional = value; }
 		}
 
 		[XmlIgnore]
