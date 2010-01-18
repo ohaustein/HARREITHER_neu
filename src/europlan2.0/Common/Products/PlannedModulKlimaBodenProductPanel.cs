@@ -241,6 +241,11 @@ namespace Europlan.Common {
 					this.cmbCircuits.SelectedIndex = (mbProduct.RequestedCircuits.HasValue ? mbProduct.RequestedCircuits.Value : 0);
 				}
 
+				this.numDicht.Value = mbProduct.RequestedModulesDicht;
+				this.numModulierend.Value = mbProduct.RequestedModulesModulierend;
+				this.numSonstige.Value = mbProduct.RequestedModulesSonstige;
+				this.numVerbindeleitungen.Value = (decimal)mbProduct.RequestedSonstigeVerbindeLeitung;
+
 			    // General
 			    double qDiffHeat = this.product.PlannedHeatLoad - this.product.RequestedHeatLoad;
 			    double qDiffCool = this.product.PlannedCoolLoad - this.product.RequestedCoolLoad;
