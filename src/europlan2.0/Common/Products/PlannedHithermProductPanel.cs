@@ -13,18 +13,18 @@ namespace Europlan.Common {
 		public PlannedHithermProductPanel() {
 			InitializeComponent();
 
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_50_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_100_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_150_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_200_10);
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_250_10);
-			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_50_5);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_100_5);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_150_5);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_200_5);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_250_5);
 			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_5);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_50_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_100_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_150_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_200_10);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_250_10);
+			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
 			this.cmbType.Items.Add(Product.ProductType.WH);
 			this.cmbType.Items.Add(Product.ProductType.DH);
 		}
@@ -119,6 +119,7 @@ namespace Europlan.Common {
 				bool showCoolCircuit = selectedCircuit >= 0 && showCool;
 				bool showRestArea = hp.HithermType == Product.ProductType.FBH || hp.HithermType == Product.ProductType.DH;
 
+				lblHeat.Visible = showHeat;
 				lblQHeat.Visible = showHeat;
 				lblQHeatUnit.Visible = showHeat;
 				lblQHeatDiff.Visible = showHeat;
@@ -131,6 +132,7 @@ namespace Europlan.Common {
 				lblDurchflussHeatUnit.Visible = showHeatCircuit;
 				lblDruckverlustHeat.Visible = showHeatCircuit;
 				lblDruckverlustHeatUnit.Visible = showHeatCircuit;
+				lblCool.Visible = showCool;
 				lblQCool.Visible = showCool;
 				lblQCoolUnit.Visible = showCool;
 				lblQCoolDiff.Visible = showCool;
@@ -614,11 +616,22 @@ namespace Europlan.Common {
 			this.newRow = e.Row;
 			e.Row.Cells[PlannedProduct.Index].Value = this.product;
 			e.Row.Cells[heizkreisDataGridViewTextBoxColumn.Index].Value = 1;
-			if (Project.Instance.SerializeableHithermWalls.Count > 0) {
+			bool found = false;
+			foreach (HithermWall hw in Project.Instance.HithermWalls) {
+				if (hw.Id == "STW02") {
+					found = true;
+					e.Row.Cells[Wall.Index].Value = hw;
+					break;
+				}
+			}
+			if (!found && Project.Instance.HithermWalls.Count > 0) {
+				e.Row.Cells[Wall.Index].Value = Project.Instance.HithermWalls[0];
+			}
+			/*if (Project.Instance.SerializeableHithermWalls.Count > 0) {
 				e.Row.Cells[Wall.Index].Value = Project.Instance.SerializeableHithermWalls[0];
 			} else if (Project.Instance.HithermWalls.Count > 0) {
 				e.Row.Cells[Wall.Index].Value = Project.Instance.HithermWalls[0];
-			}
+			}`*/
 		}
 
 		HithermRegister deletingRegister = null;

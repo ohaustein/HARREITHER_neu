@@ -125,6 +125,7 @@ namespace Europlan.Common {
 				bool showCoolCircuit = selectedCircuit >= 0 && showCool;
 				bool showRestArea = hcp.HithermCompactType == Product.ProductType.FBH || hcp.HithermCompactType == Product.ProductType.DH;
 
+				lblHeat.Visible = showHeat;
 				lblQHeat.Visible = showHeat;
 				lblQHeatUnit.Visible = showHeat;
 				lblQHeatDiff.Visible = showHeat;
@@ -137,6 +138,7 @@ namespace Europlan.Common {
 				lblDurchflussHeatUnit.Visible = showHeatCircuit;
 				lblDruckverlustHeat.Visible = showHeatCircuit;
 				lblDruckverlustHeatUnit.Visible = showHeatCircuit;
+				lblCool.Visible = showCool;
 				lblQCool.Visible = showCool;
 				lblQCoolUnit.Visible = showCool;
 				lblQCoolDiff.Visible = showCool;

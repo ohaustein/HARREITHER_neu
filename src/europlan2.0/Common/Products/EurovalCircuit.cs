@@ -273,7 +273,7 @@ namespace Europlan.Common {
 				this.c_pipeLengthRz = this.c_areaRz * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.GetRimLayDistance(rimType.Value));  // Rohrlänge der Randzone berechnen
 			}
 			this.c_areaAz = aFbh - this.c_areaRz;                                                      // Fläche der Aufenthaltszone berechnen
-			this.c_pipeLengthAz = this.c_areaAz * EurovalProduct.GetPipeLengthPerSqm(layDistance);                           // Rohlänge der Aufenthaltszone berechnen
+			this.c_pipeLengthAz = (this.c_areaAz + this.areaReduced / 2) * EurovalProduct.GetPipeLengthPerSqm(layDistance);                           // Rohlänge der Aufenthaltszone berechnen
 
 			{ // Heizlastberechnung
 				double distributorVorlaufTemp;
