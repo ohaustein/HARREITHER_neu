@@ -15,10 +15,12 @@ namespace Europlan.Common {
 		private string teilSystem;
 
 		private int circuit;
-		private double totalArea;
+		private double ra5Area;
+		private double ra10Area;
 		private double pipeHorizontal;
 		private double pipeVertical;
 		public Dictionary<HithermCompactRegister.HithermCompactRegisterTypeEnum, int> Registers = new Dictionary<HithermCompactRegister.HithermCompactRegisterTypeEnum,int>();
+		public List<HithermCompactRegister> RegisterList = new List<HithermCompactRegister>();
 
 		private double roomTemp;
 		private double vorlaufTemp;
@@ -28,7 +30,8 @@ namespace Europlan.Common {
 		private double q_WH;
 		private double q_WHSqm;
 
-		private double lengthConnection;
+		private double lengthConnectionVorlauf;
+		private double lengthConnectionRuecklauf;
 		//private double lengthWall;
 		//private double lengthCircuitAll;
 
@@ -36,6 +39,8 @@ namespace Europlan.Common {
 		private double druckverlustRohr;
 		private double druckverlustVerteiler;
 		private double v;
+
+		private string wallConstruction;
 
 		private bool subSystem = false;
 		private bool otherSystemsConnected = false;
@@ -78,9 +83,18 @@ namespace Europlan.Common {
 			set { circuit = value; }
 		}
 
+		public double Ra5Area {
+			get { return ra5Area; }
+			set { ra5Area = value; }
+		}
+
+		public double Ra10Area {
+			get { return ra10Area; }
+			set { ra10Area = value; }
+		}
+
 		public double TotalArea {
-			get { return totalArea; }
-			set { totalArea = value; }
+			get { return ra5Area + ra10Area; }
 		}
 
 		public string RegistersAsString {
@@ -143,9 +157,18 @@ namespace Europlan.Common {
 			set { q_WHSqm = value; }
 		}
 
+		public double LengthConnectionVorlauf {
+			get { return lengthConnectionVorlauf; }
+			set { lengthConnectionVorlauf = value; }
+		}
+
+		public double LengthConnectionRuecklauf {
+			get { return lengthConnectionRuecklauf; }
+			set { lengthConnectionRuecklauf = value; }
+		}
+
 		public double LengthConnection {
-			get { return lengthConnection; }
-			set { lengthConnection = value; }
+			get { return LengthConnectionVorlauf + LengthConnectionRuecklauf; }
 		}
 
 		public double LengthWall {
@@ -154,6 +177,11 @@ namespace Europlan.Common {
 
 		public double LengthCircuitAll {
 			get { return LengthConnection + LengthWall; }
+		}
+
+		public string WallConstruction {
+			get { return wallConstruction; }
+			set { wallConstruction = value; }
 		}
 
 		public double Wassermenge {
@@ -184,6 +212,26 @@ namespace Europlan.Common {
 		public bool OtherSystemsConnected {
 			get { return otherSystemsConnected; }
 			set { otherSystemsConnected = value; }
+		}
+
+		public string VerlegedatenRegisterType {
+			get {
+				string registerType = "";
+				foreach (HithermCompactRegister register in RegisterList) {
+					registerType += new HithermCompactRegister.RegisterTypeEnumConverter().ConvertToString(register.RegisterType) + '\n';
+				}
+				return registerType.Trim();
+			}
+		}
+
+		public string VerlegedatenRegisterAnzahl {
+			get {
+				string registerBreite = "";
+				foreach (HithermCompactRegister register in RegisterList) {
+					registerBreite += register.RegisterCount.ToString() + '\n';
+				}
+				return registerBreite.Trim();
+			}
 		}
 
 	}
