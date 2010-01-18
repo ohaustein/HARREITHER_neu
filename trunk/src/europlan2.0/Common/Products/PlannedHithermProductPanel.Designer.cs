@@ -135,8 +135,8 @@ namespace Europlan.Common {
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.groupBox7 = new System.Windows.Forms.GroupBox();
-			this.label11 = new System.Windows.Forms.Label();
-			this.label10 = new System.Windows.Forms.Label();
+			this.lblCool = new System.Windows.Forms.Label();
+			this.lblHeat = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
@@ -674,7 +674,7 @@ namespace Europlan.Common {
 			// panel2
 			// 
 			this.panel2.AutoScroll = true;
-			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
+			this.panel2.AutoScrollMinSize = new System.Drawing.Size(850, 0);
 			this.panel2.Controls.Add(this.lstError);
 			this.panel2.Controls.Add(this.lblRestAreaUnit);
 			this.panel2.Controls.Add(this.lblRestAreaTitle);
@@ -726,8 +726,8 @@ namespace Europlan.Common {
 			this.panel2.Controls.Add(this.groupBox3);
 			this.panel2.Controls.Add(this.groupBox2);
 			this.panel2.Controls.Add(this.groupBox7);
-			this.panel2.Controls.Add(this.label11);
-			this.panel2.Controls.Add(this.label10);
+			this.panel2.Controls.Add(this.lblCool);
+			this.panel2.Controls.Add(this.lblHeat);
 			this.panel2.Controls.Add(this.label4);
 			this.panel2.Controls.Add(this.label9);
 			this.panel2.Controls.Add(this.label6);
@@ -1378,26 +1378,26 @@ namespace Europlan.Common {
 			this.groupBox7.TabIndex = 81;
 			this.groupBox7.TabStop = false;
 			// 
-			// label11
+			// lblCool
 			// 
-			this.label11.AutoSize = true;
-			this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label11.Location = new System.Drawing.Point(312, 305);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(71, 13);
-			this.label11.TabIndex = 80;
-			this.label11.Text = "Kühlbetrieb";
-			this.label11.Visible = false;
+			this.lblCool.AutoSize = true;
+			this.lblCool.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblCool.Location = new System.Drawing.Point(312, 305);
+			this.lblCool.Name = "lblCool";
+			this.lblCool.Size = new System.Drawing.Size(71, 13);
+			this.lblCool.TabIndex = 80;
+			this.lblCool.Text = "Kühlbetrieb";
+			this.lblCool.Visible = false;
 			// 
-			// label10
+			// lblHeat
 			// 
-			this.label10.AutoSize = true;
-			this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label10.Location = new System.Drawing.Point(202, 305);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(71, 13);
-			this.label10.TabIndex = 79;
-			this.label10.Text = "Heizbetrieb";
+			this.lblHeat.AutoSize = true;
+			this.lblHeat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblHeat.Location = new System.Drawing.Point(202, 305);
+			this.lblHeat.Name = "lblHeat";
+			this.lblHeat.Size = new System.Drawing.Size(71, 13);
+			this.lblHeat.TabIndex = 79;
+			this.lblHeat.Text = "Heizbetrieb";
 			// 
 			// label4
 			// 
@@ -1546,8 +1546,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label lblHk;
-		private System.Windows.Forms.Label label11;
-		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.Label lblCool;
+		private System.Windows.Forms.Label lblHeat;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.GroupBox groupBox7;
 		private System.Windows.Forms.GroupBox groupBox3;
