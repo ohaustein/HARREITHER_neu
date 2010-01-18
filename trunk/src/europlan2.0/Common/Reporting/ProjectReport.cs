@@ -1398,8 +1398,9 @@ namespace Europlan.Common {
 								wrapperHeat.TeilSystem = pp.InternalName;
 
 								wrapperHeat.Circuit = c.NrOfCircuit + 1;
-								wrapperHeat.TotalArea = c.RegisterArea;
+								
 								foreach (HithermRegister register in c.Registers) {
+									wrapperHeat.RegisterList.Add(register);
 									if (wrapperHeat.Registers.ContainsKey(register.RegisterType)) {
 										wrapperHeat.Registers[register.RegisterType] += register.RegisterCount;
 									} else {
@@ -1407,6 +1408,12 @@ namespace Europlan.Common {
 									}
 									wrapperHeat.PipeHorizontal += register.PipeHorizontal;
 									wrapperHeat.PipeVertical += register.PipeVertical;
+									if (register.IsHochleistungsRegister) {
+										wrapperHeat.Ra5Area += register.Area;
+									} else {
+										wrapperHeat.Ra10Area += register.Area;
+									}
+									wrapperHeat.WallConstruction = register.Wall.Id;
 								}
 
 								double v, r;
@@ -1419,7 +1426,8 @@ namespace Europlan.Common {
 								wrapperHeat.QWH = pp.PlannedHeatLoad;
 								wrapperHeat.QWHSqm = pp.PlannedHeatLoad / pp.PlannedArea.Value;
 
-								wrapperHeat.LengthConnection = c.PipeLengthVorlaufWithoutOtherProductTotal + c.PipeLengthRuecklaufWithoutOtherProductTotal;
+								wrapperHeat.LengthConnectionVorlauf = c.PipeLengthVorlaufWithoutOtherProductTotal;
+								wrapperHeat.LengthConnectionRuecklauf = c.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 								wrapperHeat.Wassermenge = c.C_DurchflussHeat;
 								wrapperHeat.DruckverlustRohr = c.C_DruckverlustHeat;
@@ -1448,8 +1456,9 @@ namespace Europlan.Common {
 									wrapperCool.TeilSystem = pp.InternalName;
 
 									wrapperCool.Circuit = c.NrOfCircuit + 1;
-									wrapperCool.TotalArea = c.RegisterArea;
+									
 									foreach (HithermRegister register in c.Registers) {
+										wrapperCool.RegisterList.Add(register);
 										if (wrapperCool.Registers.ContainsKey(register.RegisterType)) {
 											wrapperCool.Registers[register.RegisterType] += register.RegisterCount;
 										} else {
@@ -1457,6 +1466,12 @@ namespace Europlan.Common {
 										}
 										wrapperCool.PipeHorizontal += register.PipeHorizontal;
 										wrapperCool.PipeVertical += register.PipeVertical;
+										if (register.IsHochleistungsRegister) {
+											wrapperCool.Ra5Area += register.Area;
+										} else {
+											wrapperCool.Ra10Area += register.Area;
+										}
+										wrapperCool.WallConstruction = register.Wall.Id;
 									}
 
 									//double v, r;
@@ -1468,6 +1483,9 @@ namespace Europlan.Common {
 									wrapperCool.QSoll = pp.RequestedCoolLoad - hp.PlannedKuehllastBereinigung;
 									wrapperCool.QWH = pp.PlannedCoolLoad;
 									wrapperCool.QWHSqm = pp.PlannedCoolLoad / pp.PlannedArea.Value;
+
+									wrapperCool.LengthConnectionVorlauf = c.PipeLengthVorlaufWithoutOtherProductTotal;
+									wrapperCool.LengthConnectionRuecklauf = c.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 									wrapperCool.Wassermenge = c.C_DurchflussCool;
 									wrapperCool.DruckverlustRohr = c.C_DruckverlustCool;
@@ -1524,8 +1542,9 @@ namespace Europlan.Common {
 								wrapperHeat.TeilSystem = pp.InternalName;
 
 								wrapperHeat.Circuit = c.NrOfCircuit + 1;
-								wrapperHeat.TotalArea = c.RegisterArea;
+
 								foreach (HithermCompactRegister register in c.Registers) {
+									wrapperHeat.RegisterList.Add(register);
 									if (wrapperHeat.Registers.ContainsKey(register.RegisterType)) {
 										wrapperHeat.Registers[register.RegisterType] += register.RegisterCount;
 									} else {
@@ -1533,6 +1552,9 @@ namespace Europlan.Common {
 									}
 									wrapperHeat.PipeHorizontal += register.PipeHorizontal;
 									wrapperHeat.PipeVertical += register.PipeVertical;
+									
+									wrapperHeat.Ra5Area += register.RegisterArea;
+									wrapperHeat.WallConstruction = register.Wall.Id;
 								}
 
 								double v, r;
@@ -1545,7 +1567,8 @@ namespace Europlan.Common {
 								wrapperHeat.QWH = pp.PlannedHeatLoad;
 								wrapperHeat.QWHSqm = pp.PlannedHeatLoad / pp.PlannedArea.Value;
 
-								wrapperHeat.LengthConnection = c.PipeLengthVorlaufWithoutOtherProductTotal + c.PipeLengthRuecklaufWithoutOtherProductTotal;
+								wrapperHeat.LengthConnectionVorlauf = c.PipeLengthVorlaufWithoutOtherProductTotal;
+								wrapperHeat.LengthConnectionRuecklauf = c.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 								wrapperHeat.Wassermenge = c.C_DurchflussHeat;
 								wrapperHeat.DruckverlustRohr = c.C_DruckverlustHeat;
@@ -1574,8 +1597,9 @@ namespace Europlan.Common {
 									wrapperCool.TeilSystem = pp.InternalName;
 
 									wrapperCool.Circuit = c.NrOfCircuit + 1;
-									wrapperCool.TotalArea = c.RegisterArea;
+
 									foreach (HithermCompactRegister register in c.Registers) {
+										wrapperCool.RegisterList.Add(register);
 										if (wrapperCool.Registers.ContainsKey(register.RegisterType)) {
 											wrapperCool.Registers[register.RegisterType] += register.RegisterCount;
 										} else {
@@ -1583,6 +1607,9 @@ namespace Europlan.Common {
 										}
 										wrapperCool.PipeHorizontal += register.PipeHorizontal;
 										wrapperCool.PipeVertical += register.PipeVertical;
+
+										wrapperCool.Ra5Area += register.RegisterArea;
+										wrapperCool.WallConstruction = register.Wall.Id;
 									}
 
 									//double v, r;
@@ -1594,6 +1621,9 @@ namespace Europlan.Common {
 									wrapperCool.QSoll = pp.RequestedCoolLoad - hp.PlannedKuehllastBereinigung;
 									wrapperCool.QWH = pp.PlannedCoolLoad;
 									wrapperCool.QWHSqm = pp.PlannedCoolLoad / pp.PlannedArea.Value;
+
+									wrapperCool.LengthConnectionVorlauf = c.PipeLengthVorlaufWithoutOtherProductTotal;
+									wrapperCool.LengthConnectionRuecklauf = c.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 									wrapperCool.Wassermenge = c.C_DurchflussCool;
 									wrapperCool.DruckverlustRohr = c.C_DruckverlustCool;
