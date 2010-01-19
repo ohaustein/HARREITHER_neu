@@ -76,6 +76,7 @@ namespace Europlan.Common {
 			List<ProjectWarningWrapper> projectWarningWrapper = new List<ProjectWarningWrapper>();
 			List<FloorOverviewWrapper> floorOverviewWrapper = new List<FloorOverviewWrapper>();
 			List<EurovalAreaOverviewWrapper> eurovalOverviewWrapper = new List<EurovalAreaOverviewWrapper>();
+			List<EcothermAreaOverviewWrapper> ecothermOverviewWrapper = new List<EcothermAreaOverviewWrapper>();
 			List<HithermOverviewWrapper> hithermOverviewWrapper = new List<HithermOverviewWrapper>();
 			List<HithermCompactOverviewWrapper> hithermCompactOverviewWrapper = new List<HithermCompactOverviewWrapper>();
 			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = new List<OpenLoadForRoomWrapper>();
@@ -87,6 +88,7 @@ namespace Europlan.Common {
 			List<HithermWrapper> hithermAuslegungWrapper = new List<HithermWrapper>();
 			List<HithermCompactWrapper> hithermCompactAuslegungWrapper = new List<HithermCompactWrapper>();
 			List<BilanzWrapper> eurovalBilanzWrapper = new List<BilanzWrapper>();
+			List<BilanzWrapper> ecothermBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> hithermBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> hithermCompactBilanzWrapper = new List<BilanzWrapper>();
 			List<VerlegedatenCircuitWrapper> verlegedatenCircuitWrapper = new List<VerlegedatenCircuitWrapper>();
@@ -100,6 +102,7 @@ namespace Europlan.Common {
 				if (reportOptions.AreaOverview) {
 					floorOverviewWrapper = this.GetFloorOverviewWrapper();
 					eurovalOverviewWrapper = GetEurovalOverviewWrapper();
+					ecothermOverviewWrapper = GetEcothermOverviewWrapper();
 					hithermOverviewWrapper = GetHithermOverviewWrapper();
 					hithermCompactOverviewWrapper = GetHithermCompactOverviewWrapper();
 				}
@@ -121,6 +124,7 @@ namespace Europlan.Common {
 
 			if (reportOptions.Auslegung && reportOptions.AuslegungBilanz) {
 				eurovalBilanzWrapper = GetEurovalBilanzWrapper();
+				ecothermBilanzWrapper = GetEcothermBilanzWrapper();
 				hithermBilanzWrapper = GetHithermBilanzWrapper();
 				hithermCompactBilanzWrapper = GetHithermCompactBilanzWrapper();
 			}
@@ -137,6 +141,7 @@ namespace Europlan.Common {
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
 			DataTable floorOverwiew = ReportHelper.ListToDataTable<FloorOverviewWrapper>(floorOverviewWrapper);
 			DataTable eurovalOverview = ReportHelper.ListToDataTable<EurovalAreaOverviewWrapper>(eurovalOverviewWrapper);
+			DataTable ecothermOverview = ReportHelper.ListToDataTable<EcothermAreaOverviewWrapper>(ecothermOverviewWrapper);
 			DataTable hithermOverview = ReportHelper.ListToDataTable<HithermOverviewWrapper>(hithermOverviewWrapper);
 			DataTable hithermCompactOverview = ReportHelper.ListToDataTable<HithermCompactOverviewWrapper>(hithermCompactOverviewWrapper);
 			DataTable openHeatLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openHeatLoadWrapper);
@@ -148,6 +153,7 @@ namespace Europlan.Common {
 			DataTable hithermAuslegung = ReportHelper.ListToDataTable<HithermWrapper>(hithermAuslegungWrapper);
 			DataTable hithermCompactAuslegung = ReportHelper.ListToDataTable<HithermCompactWrapper>(hithermCompactAuslegungWrapper);
 			DataTable eurovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(eurovalBilanzWrapper);
+			DataTable ecothermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(ecothermBilanzWrapper);
 			DataTable hithermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(hithermBilanzWrapper);
 			DataTable hithermCompactBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(hithermCompactBilanzWrapper);
 			DataTable verlegedatenCircuit = ReportHelper.ListToDataTable<VerlegedatenCircuitWrapper>(verlegedatenCircuitWrapper);
@@ -157,6 +163,7 @@ namespace Europlan.Common {
 			projectWarnings.TableName = "ProjectWarnings";
 			floorOverwiew.TableName = "FloorOverview";
 			eurovalOverview.TableName = "EurovalOverview";
+			ecothermOverview.TableName = "EcothermOverview";
 			hithermOverview.TableName = "HithermOverview";
 			hithermCompactOverview.TableName = "HithermCompactOverview";
 			openHeatLoad.TableName = "OpenHeatLoad";
@@ -168,6 +175,7 @@ namespace Europlan.Common {
 			hithermAuslegung.TableName = "HithermAuslegung";
 			hithermCompactAuslegung.TableName = "HithermCompactAuslegung";
 			eurovalBilanz.TableName = "EurovalBilanz";
+			ecothermBilanz.TableName = "EcothermBilanz";
 			hithermBilanz.TableName = "HithermBilanz";
 			hithermCompactBilanz.TableName = "HithermCompactBilanz";
 			verlegedatenCircuit.TableName = "VerlegedatenCircuit";
@@ -177,6 +185,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(projectWarnings);
 			reportData.Tables.Add(floorOverwiew);
 			reportData.Tables.Add(eurovalOverview);
+			reportData.Tables.Add(ecothermOverview);
 			reportData.Tables.Add(hithermOverview);
 			reportData.Tables.Add(hithermCompactOverview);
 			reportData.Tables.Add(openHeatLoad);
@@ -188,6 +197,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(hithermAuslegung);
 			reportData.Tables.Add(hithermCompactAuslegung);
 			reportData.Tables.Add(eurovalBilanz);
+			reportData.Tables.Add(ecothermBilanz);
 			reportData.Tables.Add(hithermBilanz);
 			reportData.Tables.Add(hithermCompactBilanz);
 			reportData.Tables.Add(verlegedatenCircuit);
@@ -570,6 +580,151 @@ namespace Europlan.Common {
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = "Gesamte Raumfläche (Räume mit Euroval® Fußbodenheizung)";
+			wrapper.HeatValue = roomArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gestamte Estrichfläche";
+			wrapper.HeatValue = estrichArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gestamte Heizfläche";
+			wrapper.HeatValue = plannedArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
+			wrapperList.Add(wrapper);
+
+			return wrapperList;
+		}
+
+		public List<BilanzWrapper> GetEcothermBilanzWrapper() {
+
+			List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
+
+			double normWaermeBedarf = 0;
+			double normKuehlBedarf = 0;
+			double normWaermeBedarfBereinigt = 0;
+			double normKuehlBedarfBereinigt = 0;
+
+			double roomArea = 0;
+			double estrichArea = 0;
+			double plannedArea = 0;
+
+			double transmissionFloorHeat = 0;
+			double transmissionWallHeat = 0;
+			double transmissionCeilingHeat = 0;
+			double transmissionFloorCool = 0;
+			double transmissionWallCool = 0;
+			double transmissionCeilingCool = 0;
+			double qHeat = 0;
+			double qCool = 0;
+
+			double durchflussHeat = 0;
+			double durchflussCool = 0;
+
+			double deltaRhoHeatMax = 0;
+			double deltaRhoCoolMax = 0;
+			double wasserInhalt = 0;
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						if (pp.Product is EcothermProduct) {
+							normWaermeBedarf += pp.RequestedHeatLoad;
+							normKuehlBedarf += pp.RequestedCoolLoad;
+							roomArea += room.Area;
+							if (pp.Product.HasInsideConstruction) {
+								if (pp.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH) ||
+									pp.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH)) {
+									estrichArea += pp.Product.PlannedFloorArea;
+								}
+							}
+							plannedArea += pp.Product.PlannedFloorArea;
+
+							normWaermeBedarfBereinigt += pp.Product.PlannedHeizlastBereinigung;
+							normKuehlBedarfBereinigt += pp.Product.PlannedKuehllastBereinigung;
+
+							transmissionFloorHeat += pp.Product.TransmissionFloorHeat;
+							transmissionWallHeat += pp.Product.TransmissionWallHeat;
+							transmissionCeilingHeat += pp.Product.TransmissionCeilingHeat;
+							transmissionCeilingHeat += pp.Product.TransmissionRoofHeat;
+							transmissionFloorCool += pp.Product.TransmissionFloorCool;
+							transmissionWallCool += pp.Product.TransmissionWallCool;
+							transmissionCeilingCool += pp.Product.TransmissionCeilingCool;
+							transmissionCeilingHeat += pp.Product.TransmissionRoofCool;
+							qHeat += pp.Product.PlannedHeatLoad;
+							qCool += pp.Product.PlannedCoolLoad;
+
+							durchflussHeat += pp.Product.PlannedDurchflussHeat;
+							durchflussCool += pp.Product.PlannedDurchflussCool;
+
+							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
+							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
+
+							wasserInhalt += pp.Product.WasserInhalt;
+						}
+					}
+				}
+			}
+
+			BilanzWrapper wrapper = new BilanzWrapper();
+			wrapper.Description = "Gewünschter Wärmebedarf";
+			wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Bereinigter Wärmebedarf";
+			wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Erreichte Heizleistung nach innen";
+			wrapper.HeatValue = qHeat.ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = qCool.ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gesamte zugeführte Heizleistung";
+			wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Wassermenge";
+			wrapper.HeatValue = durchflussHeat.ToString("0.##");
+			wrapper.HeatUnit = "l/h";
+			wrapper.CoolValue = durchflussCool.ToString("0.##");
+			wrapper.CoolUnit = "l/h";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Maximaler Druckverlust (inkl. Verteiler)";
+			wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
+			wrapper.HeatUnit = "mbar";
+			wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
+			wrapper.CoolUnit = "mbar";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Wasserinhalt (ab Verteiler)";
+			wrapper.HeatValue = wasserInhalt.ToString("0.##");
+			wrapper.HeatUnit = "l";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gesamte Raumfläche (Räume mit Ecotherm® Fußbodenheizung)";
 			wrapper.HeatValue = roomArea.ToString("0.##");
 			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
@@ -1699,6 +1854,60 @@ namespace Europlan.Common {
 			foreach (EurovalProduct.EurovalLayDistance distance in Enum.GetValues(typeof(EurovalProduct.EurovalLayDistance))) {
 				if (distance != EurovalProduct.EurovalLayDistance.NONE) {
 					wrapper = new EurovalAreaOverviewWrapper();
+					wrapper.LayDistance = distance.ToString();
+					wrapper.AzArea = aZAreaPerLayDistance.ContainsKey(distance) ? aZAreaPerLayDistance[distance] : 0;
+					wrapper.RzArea = rZAreaPerLayDistance.ContainsKey(distance) ? rZAreaPerLayDistance[distance] : 0;
+					wrapper.ConnectingArea = connectingAreaPerLayDistance.ContainsKey(distance) ? connectingAreaPerLayDistance[distance] : 0;
+					wrapperList.Add(wrapper);
+				}
+			}
+
+			return wrapperList;
+		}
+
+		public List<EcothermAreaOverviewWrapper> GetEcothermOverviewWrapper() {
+			List<EcothermAreaOverviewWrapper> wrapperList = new List<EcothermAreaOverviewWrapper>();
+
+			EcothermAreaOverviewWrapper wrapper;
+			EcothermProduct p = null;
+			Dictionary<EcothermProduct.EcothermLayDistance, double> aZAreaPerLayDistance = new Dictionary<EcothermProduct.EcothermLayDistance, double>();
+			Dictionary<EcothermProduct.EcothermLayDistance, double> rZAreaPerLayDistance = new Dictionary<EcothermProduct.EcothermLayDistance, double>();
+			Dictionary<EcothermProduct.EcothermLayDistance, double> connectingAreaPerLayDistance = new Dictionary<EcothermProduct.EcothermLayDistance, double>();
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						if (pp.Product is EcothermProduct) {
+							p = pp.Product as EcothermProduct;
+							if (p.PlannedLayDistance.HasValue) {
+								if (aZAreaPerLayDistance.ContainsKey(p.PlannedLayDistance.Value)) {
+									aZAreaPerLayDistance[p.PlannedLayDistance.Value] += p.PlannedAreaResidence;
+								} else {
+									aZAreaPerLayDistance.Add(p.PlannedLayDistance.Value, p.PlannedAreaResidence);
+								}
+							}
+							if (p.PlannedRimLayDistance.HasValue) {
+								if (rZAreaPerLayDistance.ContainsKey(p.PlannedRimLayDistance.Value)) {
+									rZAreaPerLayDistance[p.PlannedRimLayDistance.Value] += p.PlannedAreaRim;
+								} else {
+									rZAreaPerLayDistance.Add(p.PlannedRimLayDistance.Value, p.PlannedAreaRim);
+								}
+							}
+							foreach (ConnectionPipe pipe in p.PlannedConnectionPipes) {
+								if (connectingAreaPerLayDistance.ContainsKey(ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart))) {
+									connectingAreaPerLayDistance[ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart)] += pipe.AreaTotal;
+								} else {
+									connectingAreaPerLayDistance.Add(ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart), pipe.AreaTotal);
+								}
+							}
+						}
+					}
+				}
+			}
+
+
+			foreach (EcothermProduct.EcothermLayDistance distance in Enum.GetValues(typeof(EcothermProduct.EcothermLayDistance))) {
+				if (distance != EcothermProduct.EcothermLayDistance.NONE) {
+					wrapper = new EcothermAreaOverviewWrapper();
 					wrapper.LayDistance = distance.ToString();
 					wrapper.AzArea = aZAreaPerLayDistance.ContainsKey(distance) ? aZAreaPerLayDistance[distance] : 0;
 					wrapper.RzArea = rZAreaPerLayDistance.ContainsKey(distance) ? rZAreaPerLayDistance[distance] : 0;
