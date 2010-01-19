@@ -1239,7 +1239,7 @@ namespace Europlan.Common {
 			get {
 				double coolLoad = Math.Round(this.PlannedCoolLoad / this.PlannedNetArea, 1);
 				if (coolLoad > 75) {
-					return "Für dieses System wird eine Entfeuchtung empfohlen, da die Kühlleistung 75W/m2 übersteigt";
+					return "Bei der aktuell berechneten Betriebsweise wird eine Entfeuchtung empfohlen, da die Kühlleistung 75W/m² übersteigt.";
 				}
 				return null;
 			}

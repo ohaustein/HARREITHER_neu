@@ -560,6 +560,9 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
+			if (Math.Round(this.CoveredCeilingArea, 1) > Math.Round(this.PlannedCeilingArea, 1)) {
+				this.lastErrorMsg += "Die Gesamtfläche der Module ist größer als die zur Verfügung stehende Fläche (" + Math.Round(this.CoveredCeilingArea, 1).ToString() + " > " + Math.Round(this.PlannedCeilingArea, 1).ToString() + ")\n";
+			}
 			// TODO
 			/*foreach (ModulDeckeCircuit c in this.circuits) {
 				int moduleCount = 0;
@@ -964,6 +967,21 @@ namespace Europlan.Common {
 
 		public override double Viskositaet {
 			get { return ModulKlimaDeckeProduct.ConfigV; }
+		}
+
+		public override string NotificationMessage {
+			get {
+				string notification = base.NotificationMessage;
+				if (Math.Round(this.CoveredCeilingArea, 1) > Math.Round(this.PlannedCeilingArea * 3 / 4, 1) && Math.Round(this.CoveredCeilingArea, 1) <= Math.Round(this.PlannedCeilingArea, 1)) {
+					string newNotification = "Es sind mehr als 75% der Gesamtfläche mit Modulen belegt (" + Math.Round(this.CoveredCeilingArea, 1).ToString() + " > " + Math.Round(this.PlannedCeilingArea * 3 / 4, 1).ToString() + ")";
+					if (notification == null) {
+						notification = newNotification;
+					} else {
+						notification = notification + "\n" + newNotification;
+					}
+				}
+				return notification;
+			}
 		}
 	}
 	

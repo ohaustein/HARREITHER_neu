@@ -152,7 +152,7 @@ namespace Europlan.Common {
 
 				this.numArea.MaxValue = (decimal)mbProduct.AvailableFloorArea;
 				this.numAreaPercentage.MaxValue = (decimal)(mbProduct.AvailableFloorArea * 100 / mbProduct.AssociatedRoom.Area);
-				//this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
+				this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
 				this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
 				this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
 				this.numHeatLoadPercentage.MaxValue = (decimal)(mbProduct.AssociatedRoom.NormalizedHeatLoad <= 0 ? 0 : this.product.NecessaryHeatLoad * 100 / mbProduct.AssociatedRoom.NormalizedHeatLoad);
@@ -225,6 +225,9 @@ namespace Europlan.Common {
 						this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / mbProduct.AssociatedRoom.Area), 2);
 					}
 				}
+				if ((skipFields & FieldEnum.AREA_REDUCED) == FieldEnum.NONE) {
+					this.numAreaReduced.Value = Math.Round((decimal)mbProduct.PlannedAreaReduced, 2);
+				}
 				if ((skipFields & FieldEnum.AREA_UNHEATED) == FieldEnum.NONE) {
 					this.numAreaUnheated.Value = Math.Round((decimal)mbProduct.PlannedAreaUnheated, 2);
 				}
@@ -270,9 +273,11 @@ namespace Europlan.Common {
 				lblTempCool.Text = Math.Round(mbProduct.PlannedFloorTemperatureCool, 2).ToString();
 				double availableArea = Math.Round(this.product.Product.PlannedNetArea, 2);
 				double coveredArea = Math.Round((this.product.Product as ModulKlimaBodenProduct).CoveredFloorArea, 2);
+				double heatArea = Math.Round((this.product.Product as ModulKlimaBodenProduct).PlannedModulArea, 2);
 				double anbArea = Math.Round((this.product.Product as ModulKlimaBodenProduct).PlannedRemoveArea, 2);
 				lblAvailableArea.Text = availableArea.ToString();
 				lblCoveredArea.Text = coveredArea.ToString();
+				lblHeatArea.Text = heatArea.ToString();
 				lblAnbArea.Text = anbArea.ToString();
 				lblRestArea.Text = Math.Round(availableArea - anbArea - coveredArea, 2).ToString();
 				lblCircuitCount.Text = mbProduct.PlannedCircuitCount.ToString();
@@ -601,11 +606,32 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void numAreaReduced_ValueChanged(object sender, EventArgs e) {
+			if (ignoreAreaReduced == 0) {
+				ignoreAreaUnheated++;
+				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
+				mbProduct.PlannedAreaReduced = (float)this.numAreaReduced.Value;
+				if (mbProduct.PlannedAreaReduced + mbProduct.PlannedAreaUnheated > mbProduct.PlannedFloorArea) {
+					mbProduct.PlannedAreaUnheated = mbProduct.PlannedFloorArea - mbProduct.PlannedAreaReduced;
+				}
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				this.UpdateControl(FieldEnum.AREA_REDUCED);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				ignoreAreaUnheated--;
+			}
+		}
+
 		private void numAreaUnheated_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaUnheated == 0) {
 				ignoreAreaReduced++;
 				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
 				mbProduct.PlannedAreaUnheated = (float)this.numAreaUnheated.Value;
+				if (mbProduct.PlannedAreaReduced + mbProduct.PlannedAreaUnheated > mbProduct.PlannedFloorArea) {
+					mbProduct.PlannedAreaReduced = mbProduct.PlannedFloorArea - mbProduct.PlannedAreaUnheated;
+				}
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.AREA_UNHEATED);
@@ -783,6 +809,6 @@ namespace Europlan.Common {
 			e.Item.Focused = false;
 			e.Item.Selected = false;
 		}
-		
+
 	}
 }

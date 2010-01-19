@@ -247,7 +247,7 @@ namespace Europlan.Common {
 		}
 		#endregion Static Methods
 
-		private HithermRegisterTypeEnum registerType = HithermRegisterTypeEnum.HIT_50_10;
+		private HithermRegisterTypeEnum registerType = HithermRegisterTypeEnum.HIT_50_5;
 		private RegisterOrientationEnum orientation = RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 		private int rohre = 1;
 		private double pipeHorizontal = 0.25;
@@ -258,7 +258,7 @@ namespace Europlan.Common {
 		/*private Nullable<Point> origin = null;*/
 
 		public HithermRegister() {
-			this.registerType = HithermRegisterTypeEnum.HIT_50_10;
+			this.registerType = HithermRegisterTypeEnum.HIT_50_5;
 			this.orientation = RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 			this.pipeHorizontal = 0.25;
 			this.pipeVertical = 0.5;
