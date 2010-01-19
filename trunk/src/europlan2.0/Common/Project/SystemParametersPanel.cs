@@ -537,9 +537,40 @@ namespace Europlan.Common {
 
 		private void rbHitherm_CheckedChanged(object sender, EventArgs e) {
 			if (rbHitherm.Checked != rbHithermPlus.Checked) {
-				HithermProduct.ConfigUsePlus = this.rbHithermPlus.Checked;
-				if (ProjectChanged != null) {
-					ProjectChanged(null);
+				bool canceled = false;
+				if (rbHithermPlus.Checked) {
+					if (MessageBox.Show("Da es bei Hitherm+ nur Hochleistungsregister gibt werden alle bereits verplanten Lesitungregister aus dem Projekt gelöscht. Wollen Sie fortfahren?", "Bestätigen", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes) {
+						foreach (Floor f in Project.Instance.Floors) {
+							foreach (Room r in f.Rooms) {
+								foreach (PlannedProduct pp in r.PlannedProducts) {
+									if (pp.Product is HithermProduct) {
+										HithermProduct hp = pp.Product as HithermProduct;
+										List<HithermRegister> removeRegisters = new List<HithermRegister>();
+										foreach (HithermCircuit hc in hp.PlannedCircuits) {
+											foreach (HithermRegister hr in hc.Registers) {
+												if (!hr.IsHochleistungsRegister) {
+													removeRegisters.Add(hr);
+												}
+											}
+										}
+										foreach (HithermRegister hr in removeRegisters) {
+											hp.RemoveRegisterFromCircuit(hr);
+										}
+									}
+								}
+							}
+						}
+					} else {
+						canceled = true;
+					}
+				}
+				if (canceled) {
+					this.InitializeHithermValues();
+				} else {
+					HithermProduct.ConfigUsePlus = this.rbHithermPlus.Checked;
+					if (ProjectChanged != null) {
+						ProjectChanged(null);
+					}
 				}
 			}
 		}

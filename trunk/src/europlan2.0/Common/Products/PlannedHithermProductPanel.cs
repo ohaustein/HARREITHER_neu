@@ -13,7 +13,7 @@ namespace Europlan.Common {
 		public PlannedHithermProductPanel() {
 			InitializeComponent();
 
-			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_50_5);
+			/*this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_50_5);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_100_5);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_150_5);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_200_5);
@@ -24,7 +24,7 @@ namespace Europlan.Common {
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_150_10);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_200_10);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_250_10);
-			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
+			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);*/
 			this.cmbType.Items.Add(Product.ProductType.WH);
 			this.cmbType.Items.Add(Product.ProductType.DH);
 		}
@@ -60,6 +60,21 @@ namespace Europlan.Common {
 		private string errorMsg = null;
 
 		public void UpdateControl() {
+			this.registerTypeDataGridViewTextBoxColumn.Items.Clear();
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_50_5);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_100_5);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_150_5);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_200_5);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_250_5);
+			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_5);
+			if (!HithermProduct.ConfigUsePlus) {
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_50_10);
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_100_10);
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_150_10);
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_200_10);
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_250_10);
+				//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
+			}
 			this.product = this.Tag as PlannedProduct;
 			this.tabs.SelectedTab = this.pageInput;
 			this.connectionPipePanel.Update(this.product);

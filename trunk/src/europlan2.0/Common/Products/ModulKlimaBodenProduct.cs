@@ -30,6 +30,7 @@ namespace Europlan.Common {
 
 		private float plannedArea = 0;
 		private float plannedFloorArea = 0;
+		private float plannedAreaReduced = 0;
 		private float plannedAreaUnheated = 0;
 		private Construction plannedFloorConstruction = null;
 		private Construction plannedInsulationConstruction = null;
@@ -463,6 +464,7 @@ namespace Europlan.Common {
 					c.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[curCNr];
 					c.LangeFittinge = langeFittingePerCircuit + (cCount - curCNr - 1 < additionalLangeFittinge ? 1 : 0);
 					c.SonstigeVerbindeleitung = this.requestedSonstigeVerbindeLeitung / cCount;
+					c.ReducedArea = this.PlannedAreaReduced / cCount;
 					c.Calculate();
 					curCNr++;
 				}
@@ -662,7 +664,7 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (ModulBodenCircuit mc in this.circuits) {
-					area += mc.ModulArea;
+					area += mc.CoveredArea;
 				}
 				return area;
 			}
@@ -685,6 +687,15 @@ namespace Europlan.Common {
 		public float PlannedAreaUnheated {
 			get { return this.plannedAreaUnheated; }
 			set { this.plannedAreaUnheated = value; }
+		}
+
+		/// <summary>
+		/// The area which is planned reduced (50%).
+		/// Half of this area is subtracted from the planned area for calculation.
+		/// </summary>
+		public float PlannedAreaReduced {
+			get { return this.plannedAreaReduced; }
+			set { this.plannedAreaReduced = value; }
 		}
 
 		public override float PlannedWallArea {
@@ -752,7 +763,7 @@ namespace Europlan.Common {
 				}
 				double value = 0;
 				foreach (ModulBodenCircuit c in this.circuits) {
-					value += c.ModulArea;
+					value += c.HeatArea;
 				}
 				return value;
 			}

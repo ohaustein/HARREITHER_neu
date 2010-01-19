@@ -176,7 +176,7 @@ namespace Europlan.Common {
 					this.SelectionStart = 1;
 				}
 			} else if (e.KeyChar == '-') {
-				if (this.MinValue.HasValue && this.MinValue.Value >= 0) {
+				if (this.MinValue.HasValue && this.MinValue.Value > 0) {
 					e.Handled = true;
 				} else {
 					if (this.Text.StartsWith("-")) {

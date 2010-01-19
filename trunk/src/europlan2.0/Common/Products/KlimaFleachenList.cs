@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	public class KlimaFlaechenList {
@@ -27,7 +28,8 @@ namespace Europlan.Common {
 			return druckverlust;
 		}
 
-		public double ModulArea {
+		[XmlIgnore]
+		public double HeatArea {
 			get {
 				double area = 0;
 				foreach (KlimaFlaechenModul modul in this.list) {
@@ -37,9 +39,10 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public double EquivalentPipeLength {
 			get {
-				return ModulArea * 10 + lengthVerbindeleitungen;
+				return HeatArea * 10 + lengthVerbindeleitungen;
 			}
 		}
 	}
