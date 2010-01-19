@@ -379,7 +379,7 @@ namespace Europlan.Common {
 			}
 
 			BilanzWrapper wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamt-Normwärmebedarf";
+			wrapper.Description = "Gesamt-Normwärmebedarf";
 			wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
 			wrapper.HeatUnit = "W";
 			wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
@@ -395,7 +395,7 @@ namespace Europlan.Common {
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamt-Heizleistung (nach innen)";
+			wrapper.Description = "Gesamt-Heizleistung (nach innen)";
 			wrapper.HeatValue = qHeat.ToString("0.##");
 			wrapper.HeatUnit = "W";
 			wrapper.CoolValue = qCool.ToString("0.##");
@@ -411,7 +411,7 @@ namespace Europlan.Common {
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamt-Wassermenge";
+			wrapper.Description = "Gesamt-Wassermenge";
 			wrapper.HeatValue = durchflussHeat.ToString("0.##");
 			wrapper.HeatUnit = "l/h";
 			wrapper.CoolValue = durchflussCool.ToString("0.##");
@@ -433,25 +433,25 @@ namespace Europlan.Common {
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamt-Raumfläche";
+			wrapper.Description = "Gesamt-Raumfläche";
 			wrapper.HeatValue = roomArea.ToString("0.##");
 			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamt-Fußbodenheizungsfläche";
+			wrapper.Description = "Gesamt-Fußbodenheizungsfläche";
 			wrapper.HeatValue = plannedFloorArea.ToString("0.##");
 			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamt-Wandheizungsfläche";
+			wrapper.Description = "Gesamt-Wandheizungsfläche";
 			wrapper.HeatValue = plannedWallArea.ToString("0.##");
 			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamt-Deckenkühlungsfläche";
+			wrapper.Description = "Gesamt-Deckenkühlungsfläche";
 			wrapper.HeatValue = plannedCeilingArea.ToString("0.##");
 			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
@@ -590,13 +590,13 @@ namespace Europlan.Common {
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamte Estrichfläche";
+			wrapper.Description = "Gesamte Estrichfläche";
 			wrapper.HeatValue = estrichArea.ToString("0.##");
 			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamte Heizfläche";
+			wrapper.Description = "Gesamte Heizfläche";
 			wrapper.HeatValue = plannedArea.ToString("0.##");
 			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
@@ -735,13 +735,13 @@ namespace Europlan.Common {
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamte Estrichfläche";
+			wrapper.Description = "Gesamte Estrichfläche";
 			wrapper.HeatValue = estrichArea.ToString("0.##");
 			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = "Gestamte Heizfläche";
+			wrapper.Description = "Gesamte Heizfläche";
 			wrapper.HeatValue = plannedArea.ToString("0.##");
 			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
