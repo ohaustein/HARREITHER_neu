@@ -152,7 +152,7 @@ namespace Europlan.Common {
 			DataTable distributors = ReportHelper.ListToDataTable<DistributorWrapper>(distributorWrapper);
 			DataTable roomOverview = ReportHelper.ListToDataTable<RoomOverviewWrapper>(roomOverviewWrapper);
 			DataTable eurovalAuslegung = ReportHelper.ListToDataTable<EurovalWrapper>(eurovalAuslegungWrapper);
-			DataTable ecothermAuslegung = ReportHelper.ListToDataTable<EurovalWrapper>(ecothermAuslegungWrapper);
+			DataTable ecothermAuslegung = ReportHelper.ListToDataTable<EcothermWrapper>(ecothermAuslegungWrapper);
 			DataTable hithermAuslegung = ReportHelper.ListToDataTable<HithermWrapper>(hithermAuslegungWrapper);
 			DataTable hithermCompactAuslegung = ReportHelper.ListToDataTable<HithermCompactWrapper>(hithermCompactAuslegungWrapper);
 			DataTable eurovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(eurovalBilanzWrapper);
