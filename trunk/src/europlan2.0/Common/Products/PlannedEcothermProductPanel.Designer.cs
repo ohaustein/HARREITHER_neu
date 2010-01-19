@@ -639,19 +639,18 @@ namespace Europlan.Common {
 			// chkAnhydritEstrich
 			// 
 			this.chkAnhydritEstrich.AutoSize = true;
-			this.chkAnhydritEstrich.Location = new System.Drawing.Point(477, 41);
+			this.chkAnhydritEstrich.Location = new System.Drawing.Point(476, 15);
 			this.chkAnhydritEstrich.Name = "chkAnhydritEstrich";
 			this.chkAnhydritEstrich.Size = new System.Drawing.Size(95, 17);
 			this.chkAnhydritEstrich.TabIndex = 32;
 			this.chkAnhydritEstrich.Text = "Anhydritestrich";
 			this.chkAnhydritEstrich.UseVisualStyleBackColor = true;
-			this.chkAnhydritEstrich.Visible = false;
 			this.chkAnhydritEstrich.CheckedChanged += new System.EventHandler(this.chkAnhydritEstrich_CheckedChanged);
 			// 
 			// chkClip
 			// 
 			this.chkClip.AutoSize = true;
-			this.chkClip.Location = new System.Drawing.Point(477, 15);
+			this.chkClip.Location = new System.Drawing.Point(476, 42);
 			this.chkClip.Name = "chkClip";
 			this.chkClip.Size = new System.Drawing.Size(150, 17);
 			this.chkClip.TabIndex = 31;

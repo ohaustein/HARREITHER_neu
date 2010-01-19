@@ -535,28 +535,32 @@ namespace Europlan.Common {
 		/// <summary>
 		/// Returns the number of clipschiene in m per m² for the specified laydistance and estrich
 		/// </summary>
-		public static double GetClipschienePerSqm(EcothermLayDistance distance) {
-			switch (distance) {
-				case EcothermLayDistance.A5:
-					return 2.5;
-				case EcothermLayDistance.EV5:
-					return 2;
-				case EcothermLayDistance.EV10:
-					return 1.8;
-				case EcothermLayDistance.EV15:
-					return 1.7;
-				case EcothermLayDistance.EV20:
-					return 1.6;
-				case EcothermLayDistance.EV25:
-					return 1.5;
-				case EcothermLayDistance.EV30:
-					return 1.4;
-				case EcothermLayDistance.EV35:
-					return 1.4;
-				case EcothermLayDistance.NONE:
-					return 0;
-				default:
-					throw new Exception("Unknown Laydistance");
+		public static double GetClipschienePerSqm(EcothermLayDistance distance, bool anhydritEstrich) {
+			if (anhydritEstrich) {
+				return 2;
+			} else {
+				switch (distance) {
+					case EcothermLayDistance.A5:
+						return 2.5;
+					case EcothermLayDistance.EV5:
+						return 2;
+					case EcothermLayDistance.EV10:
+						return 1.8;
+					case EcothermLayDistance.EV15:
+						return 1.7;
+					case EcothermLayDistance.EV20:
+						return 1.6;
+					case EcothermLayDistance.EV25:
+						return 1.5;
+					case EcothermLayDistance.EV30:
+						return 1.4;
+					case EcothermLayDistance.EV35:
+						return 1.4;
+					case EcothermLayDistance.NONE:
+						return 0;
+					default:
+						throw new Exception("Unknown Laydistance");
+				}
 			}
 		}
 
@@ -1820,14 +1824,14 @@ namespace Europlan.Common {
 			string clipschiene = "EC02";
 			double amount = 0;
 			if (this.PlannedLayDistance.HasValue) {
-			    amount += this.PlannedAreaResidence * GetClipschienePerSqm(this.PlannedLayDistance.Value);
+			    amount += this.PlannedAreaResidence * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
 			}
 			if (this.PlannedRimType.HasValue) {
-			    amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value));
+			    amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
 			}
 			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
 				if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH) {
-					amount += pipe.AreaTotal * GetClipschienePerSqm(ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart));
+					amount += pipe.AreaTotal * GetClipschienePerSqm(ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart), anhydritEstrich);
 				}
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
@@ -1858,8 +1862,11 @@ namespace Europlan.Common {
 			if (this.HasInsideConstruction) {
 				if (this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH) ||
 					this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH)) {
+
 					// EZ 70
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "EC08", totalArea * 0.2);
+					if (!anhydritEstrich) {					
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "EC08", totalArea * 0.2);
+					}
 				}
 			}
 
