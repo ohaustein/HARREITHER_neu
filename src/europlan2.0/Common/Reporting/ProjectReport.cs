@@ -1533,7 +1533,7 @@ namespace Europlan.Common {
 			return wrapperHeatList;
 		}
 
-		public List<EcothermWrapper> GetEurovalWrapper() {
+		public List<EcothermWrapper> GetEcothermWrapper() {
 			List<EcothermWrapper> wrapperHeatList = new List<EcothermWrapper>();
 			List<EcothermWrapper> wrapperCoolList = new List<EcothermWrapper>();
 
