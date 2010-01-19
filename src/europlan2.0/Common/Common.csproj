@@ -235,6 +235,8 @@
       <DependentUpon>RequiredMaterialPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\Wrapper\DistributorWrapper.cs" />
+    <Compile Include="Project\Wrapper\Products\Ecotherm\EcothermAreaOverviewWrapper.cs" />
+    <Compile Include="Project\Wrapper\Products\Ecotherm\EcothermWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\Euroval\EurovalWrapper.cs" />
     <Compile Include="Project\Wrapper\FloorOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\OpenLoadForRoomWrapper.cs" />
