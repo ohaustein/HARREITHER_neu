@@ -491,8 +491,10 @@ namespace Europlan.Common {
 			}
 
 			if (variableSpreizung && this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+				double defSpreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
+				double defSpreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
 				// Heizleistung veringern
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < ModulKlimaBodenProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad) {
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < ModulKlimaBodenProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad && this.PlannedSpreizungHeat < 1.2 * defSpreizungHeat) {
 					this.plannedRuecklaufTempHeat -= 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
@@ -500,14 +502,14 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempHeat += 0.1;
 				// Heizleistung erhöhen
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaBodenProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaBodenProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < ModulKlimaBodenProduct.ConfigMaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
 					this.plannedRuecklaufTempHeat += 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
 					}
 				}
 				// Kühlleistung verringern
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < ModulKlimaBodenProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < ModulKlimaBodenProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad && this.PlannedSpreizungCool < 1.2 * defSpreizungCool) {
 					this.plannedRuecklaufTempCool += 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
@@ -515,7 +517,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaBodenProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaBodenProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < ModulKlimaBodenProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
