@@ -1030,7 +1030,7 @@ namespace Europlan.Common {
 
 			if (Project.Instance.NotificationMessage != null) {
 				wrapper = new ProjectWarningWrapper();
-				wrapper.Warning = "PROJEKTHINWEISE: " + Project.Instance.NotificationMessage;
+				wrapper.Warning = Project.Instance.NotificationMessage;
 				wrapperList.Add(wrapper);
 			}
 
@@ -1041,7 +1041,7 @@ namespace Europlan.Common {
 							wrapper = new ProjectWarningWrapper();
 							wrapper.FloorId = floor.Id;
 							wrapper.FloorName = floor.Name;
-							wrapper.Warning = "HINWEIS " + plannedProduct.InternalName + " in " + room.Id + "(" + room.Name + "): " + plannedProduct.Product.NotificationMessage;
+							wrapper.Warning = plannedProduct.InternalName + " in " + room.Id + "(" + room.Name + "): " + plannedProduct.Product.NotificationMessage;
 							wrapperList.Add(wrapper);
 						}
 					}
