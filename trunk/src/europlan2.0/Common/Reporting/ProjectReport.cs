@@ -1160,13 +1160,15 @@ namespace Europlan.Common {
 					foreach (Distributor d in floor.Distributors) {
 						if (d.RegulatorCircuit == rc) {
 							foreach (PlannedProduct pp in d.PlannedConnectedProducts) {
-								pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
-								if (ruecklauf < ruecklaufHeat) {
-									ruecklaufHeat = ruecklauf;
-								}
-								pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
-								if (ruecklauf > ruecklaufCool) {
-									ruecklaufCool = ruecklauf;
+								if (!pp.Product.PlannedProductIsConnection) {
+									pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
+									if (ruecklauf < ruecklaufHeat) {
+										ruecklaufHeat = ruecklauf;
+									}
+									pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
+									if (ruecklauf > ruecklaufCool) {
+										ruecklaufCool = ruecklauf;
+									}
 								}
 								durchflussHeat += pp.Product.PlannedDurchflussHeat;
 								durchflussCool += pp.Product.PlannedDurchflussCool;
@@ -1226,13 +1228,15 @@ namespace Europlan.Common {
 					double deltaRhoCool = 0;
 					double wasserInhalt = 0;
 					foreach (PlannedProduct pp in distributor.PlannedConnectedProducts) {
-						pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
-						if (ruecklauf < ruecklaufHeat) {
-							ruecklaufHeat = ruecklauf;
-						}
-						pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
-						if (ruecklauf > ruecklaufCool) {
-							ruecklaufCool = ruecklauf;
+						if (!pp.Product.PlannedProductIsConnection) {
+							pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
+							if (ruecklauf < ruecklaufHeat) {
+								ruecklaufHeat = ruecklauf;
+							}
+							pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
+							if (ruecklauf > ruecklaufCool) {
+								ruecklaufCool = ruecklauf;
+							}
 						}
 						durchflussHeat += pp.Product.PlannedDurchflussHeat;
 						durchflussCool += pp.Product.PlannedDurchflussCool;
