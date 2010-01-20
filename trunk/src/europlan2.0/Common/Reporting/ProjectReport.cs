@@ -74,6 +74,7 @@ namespace Europlan.Common {
 
 			List<BilanzWrapper> projektBilanzWrapper = new List<BilanzWrapper>();
 			List<ProjectWarningWrapper> projectWarningWrapper = new List<ProjectWarningWrapper>();
+			List<ProjectWarningWrapper> projectNotificationWrapper = new List<ProjectWarningWrapper>();
 			List<FloorOverviewWrapper> floorOverviewWrapper = new List<FloorOverviewWrapper>();
 			List<EurovalAreaOverviewWrapper> eurovalOverviewWrapper = new List<EurovalAreaOverviewWrapper>();
 			List<EcothermAreaOverviewWrapper> ecothermOverviewWrapper = new List<EcothermAreaOverviewWrapper>();
@@ -95,7 +96,8 @@ namespace Europlan.Common {
 			List<VerlegedatenCircuitWrapper> verlegedatenCircuitWrapper = new List<VerlegedatenCircuitWrapper>();
 			List<RequiredMaterialWrapper> requiredMaterialWrapper = new List<RequiredMaterialWrapper>();
 
-			projectWarningWrapper = this.GetProjectWarningReport();
+			projectWarningWrapper = this.GetProjectWarnings();
+			projectNotificationWrapper = this.GetProjectNotifications();
 
 			if (reportOptions.ProjectOverview) {
 				projektBilanzWrapper = this.GetProkjektBilanzReport();
@@ -141,6 +143,7 @@ namespace Europlan.Common {
 
 			DataTable projektBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(projektBilanzWrapper);
 			DataTable projectWarnings = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectWarningWrapper);
+			DataTable projectNotification = ReportHelper.ListToDataTable<ProjectWarningWrapper>(projectNotificationWrapper);
 			DataTable floorOverwiew = ReportHelper.ListToDataTable<FloorOverviewWrapper>(floorOverviewWrapper);
 			DataTable eurovalOverview = ReportHelper.ListToDataTable<EurovalAreaOverviewWrapper>(eurovalOverviewWrapper);
 			DataTable ecothermOverview = ReportHelper.ListToDataTable<EcothermAreaOverviewWrapper>(ecothermOverviewWrapper);
@@ -164,6 +167,7 @@ namespace Europlan.Common {
 
 			projektBilanz.TableName = "ProjektBilanz";
 			projectWarnings.TableName = "ProjectWarnings";
+			projectNotification.TableName = "ProjectNotifications";
 			floorOverwiew.TableName = "FloorOverview";
 			eurovalOverview.TableName = "EurovalOverview";
 			ecothermOverview.TableName = "EcothermOverview";
@@ -187,6 +191,7 @@ namespace Europlan.Common {
 
 			reportData.Tables.Add(projektBilanz);
 			reportData.Tables.Add(projectWarnings);
+			reportData.Tables.Add(projectNotification);
 			reportData.Tables.Add(floorOverwiew);
 			reportData.Tables.Add(eurovalOverview);
 			reportData.Tables.Add(ecothermOverview);
@@ -997,7 +1002,7 @@ namespace Europlan.Common {
 			return wrapperList;
 		}
 
-		public List<ProjectWarningWrapper> GetProjectWarningReport() {
+		public List<ProjectWarningWrapper> GetProjectWarnings() {
 			List<ProjectWarningWrapper> wrapperList = new List<ProjectWarningWrapper>();
 
 
@@ -1009,6 +1014,34 @@ namespace Europlan.Common {
 							wrapper.FloorId = floor.Id;
 							wrapper.FloorName = floor.Name;
 							wrapper.Warning = "WARNUNG " + plannedProduct.InternalName + " in " + room.Id + "(" + room.Name + "): " + plannedProduct.Product.LastErrorMessage;
+							wrapperList.Add(wrapper);
+						}
+					}
+				}
+			}
+
+			return wrapperList;
+		}
+
+		public List<ProjectWarningWrapper> GetProjectNotifications() {
+			List<ProjectWarningWrapper> wrapperList = new List<ProjectWarningWrapper>();
+
+			ProjectWarningWrapper wrapper;
+
+			if (Project.Instance.NotificationMessage != null) {
+				wrapper = new ProjectWarningWrapper();
+				wrapper.Warning = "PROJEKTHINWEISE: " + Project.Instance.NotificationMessage;
+				wrapperList.Add(wrapper);
+			}
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+						if (plannedProduct.Product.NotificationMessage != null) {
+							wrapper = new ProjectWarningWrapper();
+							wrapper.FloorId = floor.Id;
+							wrapper.FloorName = floor.Name;
+							wrapper.Warning = "HINWEIS " + plannedProduct.InternalName + " in " + room.Id + "(" + room.Name + "): " + plannedProduct.Product.NotificationMessage;
 							wrapperList.Add(wrapper);
 						}
 					}
