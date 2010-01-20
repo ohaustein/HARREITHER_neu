@@ -1624,8 +1624,10 @@ namespace Europlan.Common {
 				}
 
 				if (variableSpreizung && this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+					double defSpreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
+					double defSpreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
 					// Heizleistung veringern
-					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < EcothermProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad) {
+					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < EcothermProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad && this.PlannedSpreizungHeat < 1.2 * defSpreizungHeat) {
 						this.plannedRuecklaufTempHeat -= 0.1;
 						foreach (EcothermCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
@@ -1633,14 +1635,14 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempHeat += 0.1;
 					// Heizleistung erhöhen
-					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EcothermProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < EcothermProduct.ConfigMaxMassenstrom) {
+					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EcothermProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < EcothermProduct.ConfigMaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
 						this.plannedRuecklaufTempHeat += 0.1;
 						foreach (EcothermCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
 						}
 					}
 					// Kühlleistung verringern
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < EcothermProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < EcothermProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad && this.PlannedSpreizungCool < 1.2 * defSpreizungCool) {
 						this.plannedRuecklaufTempCool += 0.1;
 						i = 0;
 						foreach (EcothermCircuit ec in this.circuits) {
@@ -1649,7 +1651,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempCool -= 0.1;
 					// Kühlleistung erhöhen
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EcothermProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EcothermProduct.ConfigMaxMassenstrom) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EcothermProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EcothermProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < EcothermProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
 						this.plannedRuecklaufTempCool -= 0.1;
 						i = 0;
 						foreach (EcothermCircuit ec in this.circuits) {
