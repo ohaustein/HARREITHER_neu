@@ -321,16 +321,22 @@ namespace Europlan.Common {
 				bool setDefaultPipeVertical = this.pipeVertical == this.DefaultPipeVertical;
 				this.rohre = value;
 				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
-					if (this.rohre > 27) {
-						this.rohre = 27;
+					if (HithermProduct.ConfigUsePlus) {
+						if (this.rohre > 28) {
+							this.rohre = 28;
+						}
+					} else {
+						if (this.rohre > 27) {
+							this.rohre = 27;
+						}
 					}
 				} else {
 					if (this.rohre > 30) {
 						this.rohre = 30;
 					}
 				}
-				if (this.rohre < 1) {
-					this.rohre = 1;
+				if (this.rohre < 3) {
+					this.rohre = 3;
 				}
 				if (setDefaultPipeVertical) {
 					this.pipeVertical = this.DefaultPipeVertical;
@@ -387,22 +393,29 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double EquivalentPipeLengthUnisolated {
-			get {
-				return this.Area * 10;
-				// TODO confirm
-			}
+			get { return this.Area * 10; }
 		}
 
 		[XmlIgnore]
 		public int RegisterCount {
-			get { return (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG ? (int)Math.Ceiling(((float)this.rohre) / 9.0) : (int)Math.Ceiling(((float)this.rohre) / 5.0)); }
+			get {
+				if (HithermProduct.ConfigUsePlus) {
+					return (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG ? (int)Math.Ceiling(((float)this.rohre) / 14.0) : (int)Math.Ceiling(((float)this.rohre) / 10.0));
+				} else {
+					return (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG ? (int)Math.Ceiling(((float)this.rohre) / 9.0) : (int)Math.Ceiling(((float)this.rohre) / 5.0));
+				}
+			}
 		}
 		
 		[XmlIgnore]
 		public int RegisterBreite {
 			get {
 				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
-					return (this.Rohre * 10 / 9) * 5;
+					if (HithermProduct.ConfigUsePlus) {
+						return (this.Rohre * 15 / 14) * 5;
+					} else {
+						return (this.Rohre * 10 / 9) * 5;
+					}
 				} else {
 					return this.Rohre * 10;
 				}

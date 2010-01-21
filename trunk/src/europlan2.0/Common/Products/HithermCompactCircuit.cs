@@ -58,6 +58,17 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public double HeatArea {
+			get {
+				double area = 0;
+				foreach (HithermCompactRegister register in this.registers) {
+					area += register.HeatArea;
+				}
+				return area;
+			}
+		}
+
 		//private double areaTotal;
 		//[XmlIgnore]
 		//public double AreaTotal {
