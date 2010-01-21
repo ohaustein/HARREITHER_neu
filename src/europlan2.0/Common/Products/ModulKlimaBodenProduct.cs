@@ -470,10 +470,10 @@ namespace Europlan.Common {
 				}
 
 				found = true;
-				if (this.PlannedDeltaRhoHeat > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
+				if (this.PlannedDeltaRhoHeat > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0) {
 					found = false;
 				}
-				if (this.PlannedDeltaRhoCool > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
+				if (this.PlannedDeltaRhoCool > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0) {
 					found = false;
 				}
 				if (this.PlannedMaxMhHeat > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
@@ -502,7 +502,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempHeat += 0.1;
 				// Heizleistung erhöhen
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaBodenProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < ModulKlimaBodenProduct.ConfigMaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaBodenProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhHeat < ModulKlimaBodenProduct.ConfigMaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
 					this.plannedRuecklaufTempHeat += 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
@@ -517,7 +517,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaBodenProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < ModulKlimaBodenProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaBodenProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < ModulKlimaBodenProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
@@ -564,12 +564,12 @@ namespace Europlan.Common {
 			    }
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
-			    if (Math.Round(this.PlannedDeltaRhoHeat, 2) > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
-					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+			    if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2)) {
+					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
 			    }
 			} else {
-			    if (Math.Round(this.PlannedDeltaRhoCool, 2) > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
-					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+			    if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2)) {
+					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 2).ToString() + "mbar > " + Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
 			    }
 			}
 			if (this.lastErrorMsg.Length == 0) {
