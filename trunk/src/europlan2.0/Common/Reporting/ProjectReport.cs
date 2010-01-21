@@ -2297,8 +2297,10 @@ namespace Europlan.Common {
 			int count = 1;
 
 			foreach (Floor floor in project.Floors) {
-				foreach (Room room in floor.Rooms) {
-					foreach (PlannedProduct pp in room.PlannedProducts) {
+				foreach (Distributor d in floor.Distributors) {
+					foreach (PlannedProduct pp in d.PlannedConnectedProducts) {
+				//foreach (Room room in floor.Rooms) {
+				//    foreach (PlannedProduct pp in room.PlannedProducts) {
 						ProductConnection connection = pp.Product.PlannedConnection;
 						foreach (Circuit c in pp.Product.PlannedCircuits) {
 							if (connection != null && connection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
@@ -2326,7 +2328,7 @@ namespace Europlan.Common {
 								if (floor != connection.Distributor.AssociatedFloor) {
 									wrapper.Name += floor.Name + ", ";
 								}
-								wrapper.Name += room.Id + " (" + room.Name + ")";
+								wrapper.Name += pp.Product.AssociatedRoom.Id + " (" + pp.Product.AssociatedRoom.Name + ")";
 								if (pp.Product.PlannedCircuits.Count > 1) {
 									wrapper.Name += ", Heizkreis " + (c.NrOfCircuit + 1);
 								}
