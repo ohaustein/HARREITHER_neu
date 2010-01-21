@@ -329,7 +329,11 @@ namespace Europlan.Common {
 			return leistung / (c * (1000.0 / 3600.0) * spreizung);
 		}
 
-		public double FlussGeschwindigkeit(double massenstrom, double rohrInnenQuerschnitt, double dichte) {
+		public double FlussGeschwindigkeit(double durchfluss, double rohrInnenQuerschnitt) {
+			return FlussGeschwindigkeit(durchfluss, rohrInnenQuerschnitt, 1);
+		}
+
+		private double FlussGeschwindigkeit(double massenstrom, double rohrInnenQuerschnitt, double dichte) {
 			return massenstrom / (rohrInnenQuerschnitt * (dichte * 3600.0));
 		}
 
