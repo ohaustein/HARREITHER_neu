@@ -537,7 +537,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempHeat += 0.1;
 				// Heizleistung erhöhen
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaDeckeProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < ModulKlimaDeckeProduct.ConfigMaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaDeckeProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhHeat < ModulKlimaDeckeProduct.ConfigMaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
 					this.plannedRuecklaufTempHeat += 0.1;
 					foreach (ModulDeckeCircuit c in this.circuits) {
 						c.Calculate();
@@ -552,7 +552,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < ModulKlimaDeckeProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < ModulKlimaDeckeProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (ModulDeckeCircuit c in this.circuits) {
 						c.Calculate();
@@ -636,21 +636,21 @@ namespace Europlan.Common {
 				}
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
-				if (Math.Round(this.PlannedMaxMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+				if (Math.Round(this.PlannedMaxMhHeat, 1) > ModulKlimaDeckeProduct.ConfigMaxMassenstrom) {
 					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedMaxMhCool, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+				if (Math.Round(this.PlannedMaxMhCool, 1) > ModulKlimaDeckeProduct.ConfigMaxMassenstrom) {
 					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
-				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
-					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2)) {
+					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedDeltaRhoCool, 2) > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100) {
-					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (ModulKlimaBodenProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2)) {
+					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 2).ToString() + "mbar > " + Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
 				}
 			}
 			if (this.lastErrorMsg.Length == 0) {

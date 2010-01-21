@@ -595,7 +595,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempHeat += 0.1;
 				// Heizleistung erhöhen
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > HithermCompactProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < HithermCompactProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhHeat < HithermCompactProduct.ConfigMaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > HithermCompactProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < HithermCompactProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhHeat < HithermCompactProduct.ConfigMaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
 					this.plannedRuecklaufTempHeat += 0.1;
 					foreach (HithermCompactCircuit c in this.circuits) {
 						c.Calculate();
@@ -610,7 +610,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > HithermCompactProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < HithermCompactProduct.ConfigMaxPressureLost / 100 && this.PlannedMaxMhCool < HithermCompactProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > HithermCompactProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < HithermCompactProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < HithermCompactProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (HithermCompactCircuit c in this.circuits) {
 						c.Calculate();
@@ -645,12 +645,12 @@ namespace Europlan.Common {
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
-				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > HithermCompactProduct.ConfigMaxPressureLost / 100) {
-					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(HithermCompactProduct.ConfigMaxPressureLost / 100.0, 2)) {
+					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + Math.Round(HithermCompactProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
 				}
 			} else {
-				if (Math.Round(this.PlannedDeltaRhoCool, 2) > HithermCompactProduct.ConfigMaxPressureLost / 100) {
-					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + (HithermCompactProduct.ConfigMaxPressureLost / 100).ToString() + "mbar)\n";
+				if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(HithermCompactProduct.ConfigMaxPressureLost / 100.0, 2)) {
+					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 2).ToString() + "mbar > " + Math.Round(HithermCompactProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
 				}
 			}
 			if (this.hithermCompactType == Product.ProductType.FBH && this.PlannedRegisterArea > this.PlannedFloorArea) {
