@@ -344,8 +344,8 @@ namespace Europlan.Common {
 
 				this.c_massenstromHeat = en1264.Massenstrom(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
 
-				this.c_druckverlustHeat = en1264.DruckverlustRohr(this.c_massenstromHeat, rohrInnenA, rho,rohrInnenD, v, 0.000004, this.PipeLengthWithoutConnections);
-				this.c_flussGeschwindigkeitHeat = en1264.FlussGeschwindigkeit(c_massenstromHeat, rohrInnenA, rho);
+				this.c_druckverlustHeat = en1264.DruckverlustRohr(this.c_massenstromHeat, rohrInnenA, rho, rohrInnenD, v, 0.000004, this.PipeLengthWithoutConnections);
+				this.c_flussGeschwindigkeitHeat = en1264.FlussGeschwindigkeit(C_DurchflussHeat, rohrInnenA);
 				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 					if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
 						this.c_druckverlustHeat += cp.CalculateDruckverlust(this.c_massenstromHeat);
@@ -436,7 +436,7 @@ namespace Europlan.Common {
 				this.c_massenstromCool = en1264.Massenstrom(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
 
 				this.c_druckverlustCool = en1264.DruckverlustRohr(this.c_massenstromCool, rohrInnenA, rho, rohrInnenD, v, 0.000004, this.PipeLengthWithoutConnections);
-				this.c_flussGeschwindigkeitCool = en1264.FlussGeschwindigkeit(c_massenstromCool, rohrInnenA, rho);
+				this.c_flussGeschwindigkeitCool = en1264.FlussGeschwindigkeit(C_DurchflussCool, rohrInnenA);
 				foreach (ConnectionPipe cp in this.PlannedProduct.Product.PlannedConnectionPipes) {
 					if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
 						this.c_druckverlustCool += cp.CalculateDruckverlust(this.c_massenstromCool);
