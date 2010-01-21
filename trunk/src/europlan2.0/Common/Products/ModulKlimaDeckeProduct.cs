@@ -105,6 +105,11 @@ namespace Europlan.Common {
 		private static double spreizungKuehlMax = 5;
 		private static ModulCeilingConstructionEnum construction = ModulCeilingConstructionEnum.C_PROFIL;
 
+		private ProductType modulType = ProductType.DH;
+		private float plannedFloorArea = 0;
+		private float plannedCeilingArea = 0;
+		private float plannedFloorOrCeilingArea = 0;
+
 		public ModulKlimaDeckeProduct() {
 
 		}
@@ -419,7 +424,12 @@ namespace Europlan.Common {
 		}
 
 		public override ProductType Type {
-			get { return ProductType.DH; }
+			get { return this.modulType; }
+		}
+
+		public ProductType ModulType {
+			get { return this.modulType; }
+			set { this.modulType = value; }
 		}
 
 		public override void CalculateHeatAndCoolFlow() {
@@ -562,8 +572,8 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
-			if (Math.Round(this.CoveredCeilingArea, 1) > Math.Round(this.PlannedCeilingArea, 1)) {
-				this.lastErrorMsg += "Die Gesamtfläche der Module ist größer als die zur Verfügung stehende Fläche (" + Math.Round(this.CoveredCeilingArea, 1).ToString() + " > " + Math.Round(this.PlannedCeilingArea, 1).ToString() + ")\n";
+			if (this.ModulType == ProductType.DH && Math.Round(this.CoveredArea, 1) > Math.Round(this.PlannedCeilingArea, 1)) {
+				this.lastErrorMsg += "Die Gesamtfläche der Module ist größer als die zur Verfügung stehende Fläche (" + Math.Round(this.CoveredArea, 1).ToString() + " > " + Math.Round(this.PlannedCeilingArea, 1).ToString() + ")\n";
 			}
 			// TODO
 			/*foreach (ModulDeckeCircuit c in this.circuits) {
@@ -650,13 +660,13 @@ namespace Europlan.Common {
 			return true;
 		}
 
-		public override float PlannedCeilingArea {
+		/*public override float PlannedCeilingArea {
 			get { return this.plannedArea; }
 			set { this.plannedArea = value; }
-		}
+		}*/
 
 		[XmlIgnore]
-		public double CoveredCeilingArea {
+		public double CoveredArea {
 			get {
 				double area = 0;
 				foreach (ModulDeckeCircuit mc in this.circuits) {
@@ -685,20 +695,65 @@ namespace Europlan.Common {
 			set { this.plannedAreaUnheated = value; }
 		}
 
+		public override float PlannedFloorArea {
+			get {
+				if (this.modulType == ProductType.FBH) {
+					return this.plannedFloorArea;
+				}
+				return 0;
+			}
+			set {
+				if (this.modulType == ProductType.FBH) {
+					this.plannedFloorArea = value;
+				}
+			}
+		}
+
 		public override float PlannedWallArea {
-			get { return 0; }
+			get {
+				if (this.modulType == ProductType.WH) {
+					return this.PlannedNetArea;
+				}
+				return 0;
+			}
 			set { }
 		}
 
-		public override float PlannedFloorArea {
-			get { return 0; }
-			set { }
+		public override float PlannedCeilingArea {
+			get {
+				if (this.modulType == ProductType.DH) {
+					return this.plannedCeilingArea;
+				}
+				return 0;
+			}
+			set {
+				if (this.modulType == ProductType.DH) {
+					this.plannedCeilingArea = value;
+				}
+			}
 		}
 
 		public override float PlannedRoofArea {
 			get { return 0; }
 			set { }
 		}
+
+		// Not to be used in code! This property is only intended to be used for (de)serializing
+		public float PlannedFloorOrCeilingArea {
+			get {
+				if (this.modulType == ProductType.DH) {
+					return this.plannedCeilingArea;
+				}
+				if (this.modulType == ProductType.FBH) {
+					return this.plannedFloorArea;
+				}
+				return 0;
+			}
+			set {
+				this.plannedFloorOrCeilingArea = value;
+			}
+		}
+
 
 		/// <summary>
 		/// The total cool load that is emmited in the room, based on the current calculation.
@@ -739,7 +794,23 @@ namespace Europlan.Common {
 		}
 
 		public override float PlannedNetArea {
-			get { return this.PlannedCeilingArea - this.PlannedAreaUnheated; }
+			get {
+				double area = 0;
+				foreach (ModulDeckeCircuit hc in this.circuits) {
+					area += hc.ModulArea;
+				}
+				return (float)area;
+				/*switch (this.ModulType) {
+					case ProductType.DH:
+						return this.PlannedCeilingArea - this.PlannedAreaUnheated;
+					case ProductType.WH:
+						return this.PlannedWallArea;
+					case ProductType.FBH:
+						return this.PlannedFloorArea;
+					default:
+						return 0;
+				}*/
+			}
 		}
 
 		/// <summary>
@@ -980,8 +1051,8 @@ namespace Europlan.Common {
 		public override string NotificationMessage {
 			get {
 				string notification = base.NotificationMessage;
-				if (Math.Round(this.CoveredCeilingArea, 1) > Math.Round(this.PlannedCeilingArea * 3 / 4, 1) && Math.Round(this.CoveredCeilingArea, 1) <= Math.Round(this.PlannedCeilingArea, 1)) {
-					string newNotification = "Es sind mehr als 75% der Gesamtfläche mit Modulen belegt (" + Math.Round(this.CoveredCeilingArea, 1).ToString() + " > " + Math.Round(this.PlannedCeilingArea * 3 / 4, 1).ToString() + ")";
+				if (this.ModulType == ProductType.DH && Math.Round(this.CoveredArea, 1) > Math.Round(this.PlannedCeilingArea * 3 / 4, 1) && Math.Round(this.CoveredArea, 1) <= Math.Round(this.PlannedCeilingArea, 1)) {
+					string newNotification = "Es sind mehr als 75% der Gesamtfläche mit Modulen belegt (" + Math.Round(this.CoveredArea, 1).ToString() + " > " + Math.Round(this.PlannedCeilingArea * 3 / 4, 1).ToString() + ")";
 					if (notification == null) {
 						notification = newNotification;
 					} else {
@@ -989,6 +1060,29 @@ namespace Europlan.Common {
 					}
 				}
 				return notification;
+			}
+		}
+
+		internal override void FinalizeLoading(PlannedProduct pp) {
+			base.FinalizeLoading(pp);
+			switch (this.modulType) {
+				case ProductType.FBH:
+					this.plannedFloorArea = this.plannedFloorOrCeilingArea;
+					this.plannedFloorOrCeilingArea = 0;
+					this.plannedCeilingArea = 0;
+					break;
+
+				case ProductType.DH:
+					this.plannedCeilingArea = this.plannedFloorOrCeilingArea;
+					this.plannedFloorOrCeilingArea = 0;
+					this.plannedFloorArea = 0;
+					break;
+
+				default:
+					this.plannedCeilingArea = 0;
+					this.plannedFloorOrCeilingArea = 0;
+					this.plannedFloorArea = 0;
+					break;
 			}
 		}
 	}

@@ -1554,9 +1554,10 @@ namespace Europlan.Common {
 					if (this.requestedCircuits.HasValue) {
 						circuitCount = this.requestedCircuits.Value;
 					} else {
-						circuitCount = (int)Math.Ceiling((this.plannedArea - this.plannedAreaReduced / 2 - this.plannedAreaUnheated - areaRemovedDueConnection) * EurovalProduct.GetPipeLengthPerSqm(ld) / (100 - longestVorlaufTotal - longestRuecklaufTotal));
+						circuitCount = (int)Math.Ceiling((this.plannedArea - this.plannedAreaUnheated - areaRemovedDueConnection) * EurovalProduct.GetPipeLengthPerSqm(ld) / (100 - longestVorlaufTotal - longestRuecklaufTotal));
 					}
 					circuitCount = circuitCount < 1 ? 1 : circuitCount;
+					circuitCount = circuitCount > 12 ? 12 : circuitCount;
 					while (tryCalc) {
 						this.lastErrorMsg = this.CorrectCircuits(circuitCount, false);
 						if (this.lastErrorMsg != null) {
@@ -1608,7 +1609,7 @@ namespace Europlan.Common {
 							circuitCount++;
 						}
 					}
-					bool useNew = !bestLaydistance.HasValue ||
+					bool useNew = !bestLaydistance.HasValue || bestLaydistance.Value == EurovalLayDistance.NONE ||
 						this.CompareParameters(bestFloorTempRimHeat, bestFloorTempResidenceHeat, bestHeatLoad, bestPressureLossHeat,
 							bestFloorTempRimCool, bestFloorTempResidenceCool, bestCoolLoad, bestPressureLossCool,
 							bestPipeLength,
