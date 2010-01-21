@@ -629,33 +629,33 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double WasserInhalt {
+		public double WasserInhaltProRohr {
 			get {
 				switch (registerType) {
 					case HithermRegisterTypeEnum.HIT_50_10:
-							return 0.25;
+							return 0.25 / 5;
 					case HithermRegisterTypeEnum.HIT_50_5:
-							return 0.34;
+							return 0.34 / 9;
 					case HithermRegisterTypeEnum.HIT_100_10:
-							return 0.35;
+							return 0.35 / 5;
 					case HithermRegisterTypeEnum.HIT_100_5:
-							return 0.52;
+							return 0.52 / 9;
 					case HithermRegisterTypeEnum.HIT_150_10:
-							return 0.45;
+							return 0.45 / 5;
 					case HithermRegisterTypeEnum.HIT_150_5:
-							return 0.69;
+							return 0.69 / 9;
 					case HithermRegisterTypeEnum.HIT_200_10:
-							return 0.55;
+							return 0.55 / 5;
 					case HithermRegisterTypeEnum.HIT_200_5:
-							return 0.86;
+							return 0.86 / 9;
 					case HithermRegisterTypeEnum.HIT_250_10:
-							return 0.65;
+							return 0.65 / 5;
 					case HithermRegisterTypeEnum.HIT_250_5:
-							return 1.04;
+							return 1.04 / 9;
 					case HithermRegisterTypeEnum.HIT_300_10:
-							return 0.75;
+							return 0.75 / 5;
 					case HithermRegisterTypeEnum.HIT_300_5:
-							return 1.21;
+							return 1.21 / 9;
 					default:
 						throw new Exception("Unknown Register Type");
 				}
