@@ -898,7 +898,7 @@ namespace Europlan.Common {
 			}
 
 			int nrOfElements = 0;
-			int nrOf60Elements = 0;
+			int nrOfOtherElements = 0;
 			int rows = 0;
 			int subAreas = 0;
 			double modulArea = 0;
@@ -914,8 +914,8 @@ namespace Europlan.Common {
 							Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
 							nrOfElements++;
 							modulArea += modul.Area;
-							if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60) {
-								nrOf60Elements++;
+							if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) {
+								nrOfOtherElements++;
 							}
 						}
 					}
@@ -952,9 +952,9 @@ namespace Europlan.Common {
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (rows + 1) * 2);
 
 				// Einhängebügel
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOf60Elements) * 4);
-				if (nrOf60Elements > 0) {
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOf60Elements * 4);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
+				if (nrOfOtherElements > 0) {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
 				}
 			}
 		}
