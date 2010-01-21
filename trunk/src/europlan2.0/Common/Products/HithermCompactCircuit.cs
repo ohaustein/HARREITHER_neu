@@ -269,6 +269,7 @@ namespace Europlan.Common {
 					}
 
 					this.c_massenstromHeat = en1264.Massenstrom(totalQh2o, Europlan.Common.HithermProduct.ConfigC, distributorVorlaufTemp - distributorRuecklaufTemp);
+					this.c_flussGeschwindigkeitHeat = en1264.FlussGeschwindigkeit(C_DurchflussHeat, Product.rundrohr21mmInnenA);
 
 					this.c_druckverlustHeat = 0;
 					foreach (HithermCompactRegister reg in this.registers) {
@@ -337,6 +338,7 @@ namespace Europlan.Common {
 					}
 
 					this.c_massenstromCool = en1264.Massenstrom(totalQh2o, Europlan.Common.HithermProduct.ConfigC, distributorVorlaufTemp - distributorRuecklaufTemp);
+					this.c_flussGeschwindigkeitCool = en1264.FlussGeschwindigkeit(C_DurchflussCool, Product.rundrohr21mmInnenA);
 
 					this.c_druckverlustCool = 0;
 					foreach (HithermCompactRegister reg in this.registers) {

@@ -245,6 +245,7 @@ namespace Europlan.Common {
 					}
 
 					this.c_massenstromHeat = en1264.Massenstrom(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
+					this.c_flussGeschwindigkeitHeat = en1264.FlussGeschwindigkeit(C_DurchflussHeat, Product.rundrohr21mmInnenA);
 
 					this.c_druckverlustHeat = 0;
 					foreach (ModulDeckeSubArea subArea in this.subAreas) {
@@ -311,6 +312,7 @@ namespace Europlan.Common {
 					}
 
 					this.c_massenstromCool = en1264.Massenstrom(totalQh2o, c, distributorVorlaufTemp - distributorRuecklaufTemp);
+					this.c_flussGeschwindigkeitCool = en1264.FlussGeschwindigkeit(C_DurchflussCool, Product.rundrohr21mmInnenA);
 
 					this.c_druckverlustCool = 0;
 					foreach (ModulDeckeSubArea subArea in this.subAreas) {
