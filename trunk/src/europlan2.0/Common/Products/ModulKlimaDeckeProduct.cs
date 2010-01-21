@@ -957,6 +957,12 @@ namespace Europlan.Common {
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
 				}
 			}
+
+			// Winkel 45° in Wand
+			if (this.Type == ProductType.WH) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
+			}
+			
 		}
 
 		public override double Dichte {
