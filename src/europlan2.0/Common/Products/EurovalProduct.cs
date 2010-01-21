@@ -1554,7 +1554,14 @@ namespace Europlan.Common {
 					if (this.requestedCircuits.HasValue) {
 						circuitCount = this.requestedCircuits.Value;
 					} else {
-						circuitCount = (int)Math.Ceiling((this.plannedArea - this.plannedAreaUnheated - areaRemovedDueConnection) * EurovalProduct.GetPipeLengthPerSqm(ld) / (100 - longestVorlaufTotal - longestRuecklaufTotal));
+						double pl = (this.plannedArea - this.plannedAreaUnheated - areaRemovedDueConnection - this.PlannedAreaRim) * EurovalProduct.GetPipeLengthPerSqm(ld);
+						if (rt.HasValue) {
+							pl += this.PlannedAreaRim * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.GetRimLayDistance(rt.Value));
+						} else {
+							pl += this.PlannedAreaRim * EurovalProduct.GetPipeLengthPerSqm(ld);
+						}
+						circuitCount = (int)Math.Ceiling(pl / (100 - longestVorlaufTotal - longestRuecklaufTotal));
+						circuitCount = (int)Math.Ceiling((this.plannedArea - this.plannedAreaUnheated - areaRemovedDueConnection - this.PlannedAreaRim) * EurovalProduct.GetPipeLengthPerSqm(ld) / (100 - longestVorlaufTotal - longestRuecklaufTotal));
 					}
 					circuitCount = circuitCount < 1 ? 1 : circuitCount;
 					circuitCount = circuitCount > 12 ? 12 : circuitCount;
