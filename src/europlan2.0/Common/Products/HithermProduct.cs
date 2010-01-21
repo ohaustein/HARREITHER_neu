@@ -30,6 +30,8 @@ namespace Europlan.Common {
 		private static double spreizungKühlMin = 2;
 		private static double spreizungKühlMax = 5;
 
+		private static double maxRegisterArea = 10.0;
+
 		private static int maxPressureLost = 15000;
 		private static int maxDurchfluss = 240;
 
@@ -198,6 +200,7 @@ namespace Europlan.Common {
 			usePlus = userConfig.GetProductParameterAsBool<HithermProduct>("ConfigUsePlus", false);
 			maxPressureLost = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigMaxPressureLost", 15000);
 			maxDurchfluss = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigMaxDurchfluss", 240);
+			maxRegisterArea = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigMaxRegisterArea", 10.0);
 		}
 
 		public static string GlobalNotificationMessage {
@@ -292,6 +295,12 @@ namespace Europlan.Common {
 		}
 		public static double ConfigMaxMassenstrom {
 			get { return maxDurchfluss * rho / 1000; }
+		}
+
+		[ProductParameter]
+		public static double ConfigMaxRegisterArea {
+			get { return maxRegisterArea; }
+			set { maxRegisterArea = value; }
 		}
 
 		[ProductParameter]
@@ -747,6 +756,11 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
+			foreach (HithermCircuit hc in this.circuits) {
+				if (Math.Round(hc.RegisterArea, 1) > Math.Round(ConfigMaxRegisterArea, 1)) {
+					this.lastErrorMsg += "Die Registerfläche im Heizkreis " + (hc.NrOfCircuit + 1).ToString() + " ist zu groß (" + Math.Round(hc.RegisterArea, 1).ToString() + "m² > " + Math.Round(ConfigMaxRegisterArea, 1).ToString() + "m²)\n";
+				}
+			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
 				if (Math.Round(this.PlannedMaxMhHeat, 1) > HithermProduct.ConfigMaxMassenstrom) {
 					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
