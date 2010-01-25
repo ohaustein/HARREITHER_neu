@@ -279,7 +279,13 @@ namespace Europlan.Common {
 			get { return this.c_massenstromCool; }
 		}
 		public double C_DurchflussCool {
-			get { return this.C_MassenstromCool * 1000 / this.PlannedProduct.Product.Dichte; }
+			get {
+				if (C_MassenstromCool > 0) {
+					return this.C_MassenstromCool * 1000 / this.PlannedProduct.Product.Dichte;
+				} else {
+					return 0;
+				}
+			}
 		}
 
 		protected double c_flussGeschwindigkeitCool;
