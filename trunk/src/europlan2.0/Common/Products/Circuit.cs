@@ -239,7 +239,13 @@ namespace Europlan.Common {
 			get { return this.c_massenstromHeat; }
 		}
 		public double C_DurchflussHeat {
-			get { return this.C_MassenstromHeat * 1000 / this.PlannedProduct.Product.Dichte; }
+			get {
+				if (this.C_MassenstromHeat > 0) {
+					return this.C_MassenstromHeat * 1000 / this.PlannedProduct.Product.Dichte;
+				} else {
+					return 0;
+				}
+			}
 		}
 
 		protected double c_flussGeschwindigkeitHeat;
