@@ -222,7 +222,7 @@ namespace Europlan.Common {
 			set { canHeat = value; }
 		}
 		public override bool QuickDimensioningCanHeat {
-			get { return canCool; }
+			get { return canHeat; }
 		}
 
 		[ProductParameter]
