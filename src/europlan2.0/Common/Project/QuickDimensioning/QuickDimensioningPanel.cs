@@ -24,6 +24,8 @@ namespace Europlan.Common {
 		private Dictionary<Floor, QuickDimensioningFloorGrid> grids = new Dictionary<Floor, QuickDimensioningFloorGrid>();
 		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
 
+		private bool updateControlOngoing = false;
+
 		public QuickDimensioningPanel() {
 			InitializeComponent();
 			Licensing.License license = Licensing.LicenseManager.Instance.License;
@@ -113,6 +115,8 @@ namespace Europlan.Common {
 		public void UpdateControl() {
 			//Project.Instance.Config.
 
+			updateControlOngoing = true;
+
 			this.cbEurovalHeat.Checked = ((Project.Instance.QuickDimensioning.EurovalCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
 			this.cbEurovalCool.Checked = ((Project.Instance.QuickDimensioning.EurovalCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbBkaHeat.Checked = ((Project.Instance.QuickDimensioning.ConcreteActivationCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
@@ -135,9 +139,9 @@ namespace Europlan.Common {
 			this.lblDistance.Visible = this.EurovalHeating;
 			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 
-			this.lblTemp3.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
-			this.lblTemp4.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
-			this.txtCoolTemperature.Visible = this.ConcreteActivationCooling || this.ModulKlimaDeckeCooling;
+			this.lblTemp3.Visible = this.Cooling;
+			this.lblTemp4.Visible = this.Cooling;
+			this.txtCoolTemperature.Visible = this.Cooling;
 
 			this.lblAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
@@ -220,6 +224,8 @@ namespace Europlan.Common {
 
 			this.tabQuickDimensioning.TabPages.Add(pageDistributors);
 			this.tabQuickDimensioning.TabPages.Add(pageSummary);
+
+			updateControlOngoing = false;
 		}
 
 		private void grid_ProjectChanged(object sender) {
@@ -366,7 +372,8 @@ namespace Europlan.Common {
 			this.cmbDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating  || this.ConcreteActivationCooling;
 			this.lblDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.EurovalCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.EurovalCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.EurovalCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbEurovalCool_CheckedChanged(object sender, EventArgs e) {
@@ -411,7 +418,8 @@ namespace Europlan.Common {
 			this.cmbDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.EurovalCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.EurovalCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.EurovalCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbBkaHeat_CheckedChanged(object sender, EventArgs e) {
@@ -456,7 +464,8 @@ namespace Europlan.Common {
 			this.cmbDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.ConcreteActivationHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ConcreteActivationCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.ConcreteActivationHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ConcreteActivationCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbBkaCool_CheckedChanged(object sender, EventArgs e) {
@@ -501,7 +510,8 @@ namespace Europlan.Common {
 			this.cmbDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.ConcreteActivationHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ConcreteActivationCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.ConcreteActivationCheckState = (this.ConcreteActivationHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ConcreteActivationCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbHithermHeat_CheckedChanged(object sender, EventArgs e) {
@@ -544,7 +554,8 @@ namespace Europlan.Common {
 			this.cmbHeatFlowTemperature.Visible = this.Heating;
 			this.lblTemp2.Visible = this.Heating;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.HithermCheckState = (this.HithermHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.HithermCheckState = (this.HithermHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbHithermCool_CheckedChanged(object sender, EventArgs e) {
@@ -587,7 +598,8 @@ namespace Europlan.Common {
 			this.lblTemp4.Visible = this.Cooling;
 			this.txtCoolTemperature.Visible = this.Cooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.HithermCheckState = (this.HithermHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.HithermCheckState = (this.HithermHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbHithermCompactHeat_CheckedChanged(object sender, EventArgs e) {
@@ -630,7 +642,8 @@ namespace Europlan.Common {
 			this.cmbHeatFlowTemperature.Visible = this.Heating;
 			this.lblTemp2.Visible = this.Heating;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.HithermCompactCheckState = (this.HithermCompactHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.HithermCompactCheckState = (this.HithermCompactHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbHithermCompactCool_CheckedChanged(object sender, EventArgs e) {
@@ -673,7 +686,8 @@ namespace Europlan.Common {
 			this.lblTemp4.Visible = this.Cooling;
 			this.txtCoolTemperature.Visible = this.Cooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.HithermCompactCheckState = (this.HithermCompactHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.HithermCompactCheckState = (this.HithermCompactHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 
@@ -717,7 +731,8 @@ namespace Europlan.Common {
 			this.cmbHeatFlowTemperature.Visible = this.Heating;
 			this.lblTemp2.Visible = this.Heating;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.HithermCompactRoofCheckState = (this.HithermCompactRoofHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactRoofCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.HithermCompactRoofCheckState = (this.HithermCompactRoofHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactRoofCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbHithermCompactRoofCool_CheckedChanged(object sender, EventArgs e) {
@@ -760,7 +775,8 @@ namespace Europlan.Common {
 			this.lblTemp4.Visible = this.Cooling;
 			this.txtCoolTemperature.Visible = this.Cooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.HithermCompactRoofCheckState = (this.HithermCompactRoofHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactRoofCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.HithermCompactRoofCheckState = (this.HithermCompactRoofHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.HithermCompactRoofCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbModulKlimaBodenHeat_CheckedChanged(object sender, EventArgs e) {
@@ -803,7 +819,8 @@ namespace Europlan.Common {
 			this.cmbHeatFlowTemperature.Visible = this.Heating;
 			this.lblTemp2.Visible = this.Heating;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.ModulBodenCheckState = (this.ModulKlimaBodenHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaBodenCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.ModulBodenCheckState = (this.ModulKlimaBodenHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaBodenCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbModulKlimaBodenCool_CheckedChanged(object sender, EventArgs e) {
@@ -846,7 +863,8 @@ namespace Europlan.Common {
 			this.lblTemp4.Visible = this.Cooling;
 			this.txtCoolTemperature.Visible = this.Cooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.ModulBodenCheckState = (this.ModulKlimaBodenHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaBodenCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.ModulBodenCheckState = (this.ModulKlimaBodenHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaBodenCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbModulKlimaDeckeHeat_CheckedChanged(object sender, EventArgs e) {
@@ -892,7 +910,8 @@ namespace Europlan.Common {
 			this.lblAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.lblAllocation2.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 			this.txtAllocation.Visible = this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
-			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cbModulKlimaDeckeCool_CheckedChanged(object sender, EventArgs e) {
@@ -937,7 +956,8 @@ namespace Europlan.Common {
 			this.lblTemp4.Visible = this.Cooling;
 			this.txtCoolTemperature.Visible = this.Cooling;
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
-			Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.ModulDeckeCheckState = (this.ModulKlimaDeckeHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.ModulKlimaDeckeCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
 		}
 
 		private void cmbHeatFlowTemperature_SelectedIndexChanged(object sender, EventArgs e) {
