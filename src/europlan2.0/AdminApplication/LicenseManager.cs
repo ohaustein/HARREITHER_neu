@@ -35,6 +35,20 @@ namespace Europlan.AdminApplication {
 		public static LicenseManager LoadLicenseManager(Stream stream) {
 			XmlSerializer serializer = new XmlSerializer(typeof(LicenseManager));
 			instance = (LicenseManager)serializer.Deserialize(stream);
+			foreach (LicenseTemplate lt in instance.Licenses) {
+				List<LicensedModuleTemplate> removeModules = new List<LicensedModuleTemplate>();
+				foreach (LicensedModuleTemplate lmt in lt.Modules) {
+					if (!AbstractLicensedModule.DefaultModules.ContainsKey(lmt.Name)) {
+						removeModules.Add(lmt);
+					}
+				}
+				foreach (LicensedModuleTemplate remove in removeModules) {
+					lt.Modules.Remove(remove);
+				}
+				foreach (string m in AbstractLicensedModule.DefaultModules.Keys) {
+					lt.SetModuleEnabled(m, lt.IsModuleEnabled(m));
+				}
+			}
 			return instance;
 		}
 
