@@ -96,6 +96,7 @@ namespace Europlan.Common {
 			List<BilanzWrapper> hithermBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> hithermCompactBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> modulBodenBilanzWrapper = new List<BilanzWrapper>();
+			List<BilanzWrapper> modulDeckeBilanzWrapper = new List<BilanzWrapper>();
 			List<VerlegedatenCircuitWrapper> verlegedatenCircuitWrapper = new List<VerlegedatenCircuitWrapper>();
 			List<RequiredMaterialWrapper> requiredMaterialWrapper = new List<RequiredMaterialWrapper>();
 
@@ -137,6 +138,7 @@ namespace Europlan.Common {
 				hithermBilanzWrapper = GetHithermBilanzWrapper();
 				hithermCompactBilanzWrapper = GetHithermCompactBilanzWrapper();
 				modulBodenBilanzWrapper = GetModulBodenBilanzWrapper();
+				modulDeckeBilanzWrapper = GetModulDeckeBilanzWrapper();
 			}
 
 			if (reportOptions.Verlegedaten) {
@@ -171,6 +173,7 @@ namespace Europlan.Common {
 			DataTable hithermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(hithermBilanzWrapper);
 			DataTable hithermCompactBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(hithermCompactBilanzWrapper);
 			DataTable modulBodenBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(modulBodenBilanzWrapper);
+			DataTable modulDeckeBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(modulDeckeBilanzWrapper);
 			DataTable verlegedatenCircuit = ReportHelper.ListToDataTable<VerlegedatenCircuitWrapper>(verlegedatenCircuitWrapper);
 			DataTable requiredMaterial = ReportHelper.ListToDataTable<RequiredMaterialWrapper>(requiredMaterialWrapper);
 
@@ -198,6 +201,7 @@ namespace Europlan.Common {
 			hithermBilanz.TableName = "HithermBilanz";
 			hithermCompactBilanz.TableName = "HithermCompactBilanz";
 			modulBodenBilanz.TableName = "ModulBodenBilanz";
+			modulDeckeBilanz.TableName = "ModulDeckeBilanz";
 			verlegedatenCircuit.TableName = "VerlegedatenCircuit";
 			requiredMaterial.TableName = "RequiredMaterial";
 
@@ -225,6 +229,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(hithermBilanz);
 			reportData.Tables.Add(hithermCompactBilanz);
 			reportData.Tables.Add(modulBodenBilanz);
+			reportData.Tables.Add(modulDeckeBilanz);
 			reportData.Tables.Add(verlegedatenCircuit);
 			reportData.Tables.Add(requiredMaterial);
 
@@ -1155,6 +1160,139 @@ namespace Europlan.Common {
 			wrapper.HeatUnit = "m²";
 			wrapperList.Add(wrapper);
 			
+			return wrapperList;
+		}
+
+		public List<BilanzWrapper> GetModulDeckeBilanzWrapper() {
+
+			List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
+
+			double normWaermeBedarf = 0;
+			double normKuehlBedarf = 0;
+			double normWaermeBedarfBereinigt = 0;
+			double normKuehlBedarfBereinigt = 0;
+
+			double roomArea = 0;
+			double totalArea = 0;
+
+			double transmissionFloorHeat = 0;
+			double transmissionWallHeat = 0;
+			double transmissionCeilingHeat = 0;
+			double transmissionFloorCool = 0;
+			double transmissionWallCool = 0;
+			double transmissionCeilingCool = 0;
+			double qHeat = 0;
+			double qCool = 0;
+
+			double durchflussHeat = 0;
+			double durchflussCool = 0;
+
+			double deltaRhoHeatMax = 0;
+			double deltaRhoCoolMax = 0;
+			double wasserInhalt = 0;
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						if (pp.Product is ModulKlimaDeckeProduct) {
+							normWaermeBedarf += pp.RequestedHeatLoad;
+							normKuehlBedarf += pp.RequestedCoolLoad;
+
+							roomArea += room.Area;
+							totalArea += ((ModulKlimaDeckeProduct)pp.Product).TotalPlannedArea;
+
+							normWaermeBedarfBereinigt += pp.Product.PlannedHeizlastBereinigung;
+							normKuehlBedarfBereinigt += pp.Product.PlannedKuehllastBereinigung;
+
+							transmissionFloorHeat += pp.Product.TransmissionFloorHeat;
+							transmissionWallHeat += pp.Product.TransmissionWallHeat;
+							transmissionCeilingHeat += pp.Product.TransmissionCeilingHeat;
+							transmissionCeilingHeat += pp.Product.TransmissionRoofHeat;
+							transmissionFloorCool += pp.Product.TransmissionFloorCool;
+							transmissionWallCool += pp.Product.TransmissionWallCool;
+							transmissionCeilingCool += pp.Product.TransmissionCeilingCool;
+							transmissionCeilingHeat += pp.Product.TransmissionRoofCool;
+							qHeat += pp.Product.PlannedHeatLoad;
+							qCool += pp.Product.PlannedCoolLoad;
+
+							durchflussHeat += pp.Product.PlannedDurchflussHeat;
+							durchflussCool += pp.Product.PlannedDurchflussCool;
+
+							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
+							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
+
+							wasserInhalt += pp.Product.WasserInhalt;
+						}
+					}
+				}
+			}
+
+			BilanzWrapper wrapper = new BilanzWrapper();
+			wrapper.Description = "Gewünschter Wärmebedarf";
+			wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Bereinigter Wärmebedarf";
+			wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Erreichte Heizleistung nach innen";
+			wrapper.HeatValue = qHeat.ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = qCool.ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gesamte zugeführte Heizleistung";
+			wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
+			wrapper.HeatUnit = "W";
+			wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
+			wrapper.CoolUnit = "W";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Wassermenge";
+			wrapper.HeatValue = durchflussHeat.ToString("0.##");
+			wrapper.HeatUnit = "l/h";
+			wrapper.CoolValue = durchflussCool.ToString("0.##");
+			wrapper.CoolUnit = "l/h";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Maximaler Druckverlust (inkl. Verteiler)";
+			wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
+			wrapper.HeatUnit = "mbar";
+			wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
+			wrapper.CoolUnit = "mbar";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Wasserinhalt (ab Verteiler)";
+			wrapper.HeatValue = wasserInhalt.ToString("0.##");
+			wrapper.HeatUnit = "l";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gesamte Raumfläche (Räume mit Modul Klimadecke)";
+			wrapper.HeatValue = roomArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
+			wrapperList.Add(wrapper);
+
+			wrapper = new BilanzWrapper();
+			wrapper.Description = "Gesamte belegte Fläche";
+			wrapper.HeatValue = totalArea.ToString("0.##");
+			wrapper.HeatUnit = "m²";
+			wrapperList.Add(wrapper);
+
 			return wrapperList;
 		}
 
