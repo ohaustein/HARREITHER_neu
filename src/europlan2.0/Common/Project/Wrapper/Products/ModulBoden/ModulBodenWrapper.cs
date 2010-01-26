@@ -48,6 +48,47 @@ namespace Europlan.Common {
 		public ModulBodenWrapper() {
 		}
 
+		public ModulBodenWrapper(ModulBodenWrapper mw) {
+			floorId = mw.floorId;
+			floorName = mw.floorName;
+			heatOrCool = mw.heatOrCool;
+
+			roomId = mw.roomId;
+			roomName = mw.roomName;
+			teilSystem = mw.teilSystem;
+			insideConstruction = mw.insideConstruction;
+			insideRValue = mw.insideRValue;
+			outsideConstruction = mw.outsideConstruction;
+			outsideRValue = mw.outsideRValue;
+			circuits = mw.circuits;
+			dichtArea = mw.dichtArea;
+			modulierendArea = mw.modulierendArea;
+			sonstigeArea = mw.sonstigeArea;
+			connectionArea = mw.connectionArea;
+
+			roomTemp = mw.roomTemp;
+			vorlaufTemp = mw.vorlaufTemp;
+			ruecklaufTemp = mw.ruecklaufTemp;
+			Q_Soll = mw.Q_Soll;
+			Q_FBH = mw.Q_FBH;
+			q_FBH = mw.q_FBH;
+			t_FB = mw.t_FB;
+
+			circuitsAsString = mw.circuitsAsString;
+			totalModules = mw.totalModules;
+			lengthConnection = mw.lengthConnection;
+			wassermenge = mw.wassermenge;
+			druckverlustHeizkreis = mw.druckverlustHeizkreis;
+			druckverlustVerteiler = mw.druckverlustVerteiler;
+			v = mw.v;
+
+			unusedArea = mw.unusedArea;
+
+			subSystem = mw.subSystem;
+			otherSystemsConnected = mw.otherSystemsConnected;
+			usedAsCircuitWrapper = mw.usedAsCircuitWrapper;
+		}
+
 		public string RoomId {
 			get { return roomId; }
 			set { roomId = value; }
