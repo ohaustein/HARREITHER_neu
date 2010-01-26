@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Europlan.Common;
 
-namespace Europlan.ContructionEditor {
+namespace Europlan.Common {
 	public partial class MaterialEditorGrid : UserControl {
 
 		public class MaterialCategoryGridItem {

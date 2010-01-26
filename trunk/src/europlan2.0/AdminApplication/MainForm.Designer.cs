@@ -33,7 +33,7 @@ namespace Europlan.AdminApplication {
 			this.btnSaveLicense = new System.Windows.Forms.Button();
 			this.tabPageArticles = new System.Windows.Forms.TabPage();
 			this.tabPageAdditionalArticles = new System.Windows.Forms.TabPage();
-			this.materialEditorGrid1 = new Europlan.ContructionEditor.MaterialEditorGrid();
+			this.materialEditorGrid1 = new Europlan.Common.MaterialEditorGrid();
 			this.tabPageConstructions = new System.Windows.Forms.TabPage();
 			this.constructionEditorPage = new Europlan.Common.ConstructionEditorGrid();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -341,7 +341,7 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem datanormDateiToolStripMenuItem;
 		private System.Windows.Forms.TabPage tabPageAdditionalArticles;
-		private Europlan.ContructionEditor.MaterialEditorGrid materialEditorGrid1;
+		private Europlan.Common.MaterialEditorGrid materialEditorGrid1;
 	}
 }
 

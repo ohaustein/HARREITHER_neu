@@ -1,4 +1,4 @@
-namespace Europlan.ContructionEditor {
+namespace Europlan.Common {
 	partial class MaterialEditorGrid {
 		/// <summary> 
 		/// Required designer variable.
@@ -61,7 +61,7 @@ namespace Europlan.ContructionEditor {
 			// 
 			// materialCategoryGridItemBindingSource
 			// 
-			this.materialCategoryGridItemBindingSource.DataSource = typeof(Europlan.ContructionEditor.MaterialEditorGrid.MaterialCategoryGridItem);
+			this.materialCategoryGridItemBindingSource.DataSource = typeof(Europlan.Common.MaterialEditorGrid.MaterialCategoryGridItem);
 			// 
 			// gridMaterials
 			// 
