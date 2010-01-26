@@ -32,11 +32,13 @@ namespace Europlan.Common {
 		}
 
 		public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
-			return sourceType == typeof(string);
+			return true;
+			//return sourceType == typeof(string);
 		}
 
 		public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
-			return destinationType == typeof(string);
+			return true;
+			//return destinationType == typeof(string);
 		}
 
 		public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
@@ -69,7 +71,6 @@ namespace Europlan.Common {
 	}
 
 	public class Category : IComparable {
-
 		private string id;
 		private string name;
 		private CategoryType type;

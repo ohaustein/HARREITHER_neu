@@ -133,6 +133,12 @@
     <Compile Include="Licensing\LicenseManager.cs" />
     <Compile Include="Licensing\ProductNotLicensedException.cs" />
     <Compile Include="MapiMailMessage.cs" />
+    <Compile Include="MaterialEditor\MaterialEditorGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MaterialEditor\MaterialEditorGrid.Designer.cs">
+      <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Circuit.cs" />
     <Compile Include="Products\ConnectionPipePanel.cs">
       <SubType>UserControl</SubType>
@@ -448,6 +454,10 @@
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="MaterialEditor\MaterialEditorGrid.resx">
+      <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Products\ConnectionPipePanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
@@ -610,6 +620,7 @@
     <None Include="Properties\DataSources\Construction.datasource" />
     <None Include="Properties\DataSources\ConstructionLayer.datasource" />
     <None Include="Properties\DataSources\Distributor.datasource" />
+    <None Include="Properties\DataSources\Europlan.ContructionEditor.MaterialEditorGrid+MaterialCategoryGridItem.datasource" />
     <None Include="Properties\DataSources\HithermCompactRegister.datasource" />
     <None Include="Properties\DataSources\HithermRegister.datasource" />
     <None Include="Properties\DataSources\HithermWall.datasource" />

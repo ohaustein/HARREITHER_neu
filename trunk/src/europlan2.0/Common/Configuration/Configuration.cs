@@ -59,6 +59,55 @@ namespace Europlan.Common {
 			InitializeConfiguration();
 		}
 
+		public Configuration(Configuration config) {
+			InitializeConfiguration();
+			if (config.partnerLogo != "") {
+				this.partnerLogo = config.partnerLogo;
+			}
+			foreach (Material material in config.Materials) {
+				if (!this.Materials.Contains(material)) {
+					this.Materials.Add(material);
+				}
+			}
+
+			foreach (Construction construction in config.Constructions) {
+				if (!this.Constructions.Contains(construction)) {
+					this.Constructions.Add(construction);
+				}
+			}
+
+			foreach (Category category in config.Categories) {
+				if (!this.Categories.Contains(category)) {
+					this.Categories.Add(category);
+				}
+			}
+
+			foreach (string materialId in config.materialToCategoryMapping.Keys) {
+				if (!this.materialToCategoryMapping.ContainsKey(materialId)) {
+					this.materialToCategoryMapping.Add(materialId, config.materialToCategoryMapping[materialId]);
+				}
+			}
+
+			foreach (RoomType roomType in config.RoomTypes) {
+				if (!this.RoomTypes.Contains(roomType)) {
+					this.RoomTypes.Add(roomType);
+				}
+			}
+
+			foreach (String typeName in config.productConfiguration.Keys) {
+				if (!this.productConfiguration.ContainsKey(typeName)) {
+					this.productConfiguration[typeName] = new SerializableDictionary<string, string>();
+				}
+				foreach (string parameterName in config.productConfiguration[typeName].Keys) {
+					if (!this.productConfiguration[typeName].ContainsKey(parameterName)) {
+						this.productConfiguration[typeName][parameterName] = config.productConfiguration[typeName][parameterName];
+					}
+				}
+			}
+
+			this.type = config.type;			 
+		}
+
 		private void InitializeConfiguration() {
 			this.type = ConfigurationType.InitializedConfiguration;
 			this.materials = new List<Material>();
@@ -178,83 +227,83 @@ namespace Europlan.Common {
 			if (second.partnerLogo != "") {
 				config.partnerLogo = second.partnerLogo;
 			}
-			foreach (Material material in config1.Materials) {
+			foreach (Material material in first.Materials) {
 				if (!config.Materials.Contains(material)) {
 					config.Materials.Add(material);
 				}
 			}
-			foreach (Material material in config2.Materials) {
+			foreach (Material material in second.Materials) {
 				if (!config.Materials.Contains(material)) {
 					config.Materials.Add(material);
 				}
 			}
 
-			foreach (Construction construction in config1.Constructions) {
+			foreach (Construction construction in first.Constructions) {
 				if (!config.Constructions.Contains(construction)) {
 					config.Constructions.Add(construction);
 				}
 			}
 
-			foreach (Construction construction in config2.Constructions) {
+			foreach (Construction construction in second.Constructions) {
 				if (!config.Constructions.Contains(construction)) {
 					config.Constructions.Add(construction);
 				}
 			}
 
-			foreach (Category category in config1.Categories) {
+			foreach (Category category in first.Categories) {
 				if (!config.Categories.Contains(category)) {
 					config.Categories.Add(category);
 				}
 			}
 
-			foreach (Category category in config2.Categories) {
+			foreach (Category category in second.Categories) {
 				if (!config.Categories.Contains(category)) {
 					config.Categories.Add(category);
 				}
 			}
 
-			foreach (string materialId in config1.materialToCategoryMapping.Keys) {
+			foreach (string materialId in first.materialToCategoryMapping.Keys) {
 				if (!config.materialToCategoryMapping.ContainsKey(materialId)) {
-					config.materialToCategoryMapping.Add(materialId, config1.materialToCategoryMapping[materialId]);
+					config.materialToCategoryMapping.Add(materialId, first.materialToCategoryMapping[materialId]);
 				}
 			}
 
-			foreach (string materialId in config2.materialToCategoryMapping.Keys) {
+			foreach (string materialId in second.materialToCategoryMapping.Keys) {
 				if (!config.materialToCategoryMapping.ContainsKey(materialId)) {
-					config.materialToCategoryMapping.Add(materialId, config2.materialToCategoryMapping[materialId]);
+					config.materialToCategoryMapping.Add(materialId, second.materialToCategoryMapping[materialId]);
 				}
 			}
 
-			foreach (RoomType roomType in config1.RoomTypes) {
+			foreach (RoomType roomType in first.RoomTypes) {
 				if (!config.RoomTypes.Contains(roomType)) {
 					config.RoomTypes.Add(roomType);
 				}
 			}
 
-			foreach (RoomType roomType in config2.RoomTypes) {
+			foreach (RoomType roomType in second.RoomTypes) {
 				if (!config.RoomTypes.Contains(roomType)) {
 					config.RoomTypes.Add(roomType);
 				}
 			}
 
-			foreach (String typeName in config1.productConfiguration.Keys) {
+			foreach (String typeName in first.productConfiguration.Keys) {
 				if (!config.productConfiguration.ContainsKey(typeName)) {
 					config.productConfiguration[typeName] = new SerializableDictionary<string, string>();
 				}
-				foreach (string parameterName in config1.productConfiguration[typeName].Keys) {
+				foreach (string parameterName in first.productConfiguration[typeName].Keys) {
 					if (!config.productConfiguration[typeName].ContainsKey(parameterName)) {
 						config.productConfiguration[typeName][parameterName] = config1.productConfiguration[typeName][parameterName];
 					}
 				}
 			}
 
-			foreach (String typeName in config2.productConfiguration.Keys) {
+			foreach (String typeName in second.productConfiguration.Keys) {
 				if (!config.productConfiguration.ContainsKey(typeName)) {
 					config.productConfiguration[typeName] = new SerializableDictionary<string, string>();
 				}
-				foreach (string parameterName in config2.productConfiguration[typeName].Keys) {
+				foreach (string parameterName in second.productConfiguration[typeName].Keys) {
 					if (!config.productConfiguration[typeName].ContainsKey(parameterName)) {
-						config.productConfiguration[typeName][parameterName] = config2.productConfiguration[typeName][parameterName];
+						config.productConfiguration[typeName][parameterName] = second.productConfiguration[typeName][parameterName];
 					}
 				}
 			}
@@ -689,6 +738,9 @@ namespace Europlan.Common {
 
 		public SerializableDictionary<string, SerializableDictionary<string, string>> ProductConfiguration {
 			get {
+				if (this.type == ConfigurationType.UserConfiguration) {
+					return new SerializableDictionary<string, SerializableDictionary<string, string>>();
+				}
 				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
 				foreach (Type t in types) {
 					if (typeof(Product).IsAssignableFrom(t)) {

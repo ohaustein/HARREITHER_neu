@@ -8,7 +8,9 @@ namespace Europlan.Common {
 
 		private Configuration.ConfigurationType type;
 
-		private Nullable<CategoryType> filter = null;
+		private Nullable<CategoryType> categoryFilter = null;
+		private bool onlyAdditional = false;
+		private bool admin = false;
 
 		public MaterialListWrapper(Configuration.ConfigurationType type) {
 			if (!(type == Configuration.ConfigurationType.UserConfiguration || type == Configuration.ConfigurationType.AdminConfiguration)) {
@@ -17,19 +19,24 @@ namespace Europlan.Common {
 			this.type = type;
 		}
 
+		public bool Admin {
+			get { return this.admin; }
+			set { this.admin = value; }
+		}
+
 		private List<Material> Materials {
 			get { return (this.type == Configuration.ConfigurationType.AdminConfiguration ? Configuration.AdminTemplate.Materials : Configuration.UserTemplate.Materials); }
 		}
 
 		#region IEnumerable<Construction> Members
 		public IEnumerator<Material> GetEnumerator() {
-			return new MaterialListEnumerator(this.type, this.filter);
+			return new MaterialListEnumerator(this.type, this.categoryFilter, this.onlyAdditional);
 		}
 		#endregion
 
 		#region IEnumerable Members
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-			return new MaterialListEnumerator(this.type, this.filter);
+			return new MaterialListEnumerator(this.type, this.categoryFilter, this.onlyAdditional);
 		}
 		#endregion
 
@@ -110,14 +117,49 @@ namespace Europlan.Common {
 		}
 
 		private int GetNode(int index) {
+			// TODO
 			int i = 0;
 			int current = 0;
-			while (current < this.Materials.Count && (this.filter != null && (this.Materials[current].Category == null || this.filter.Value != this.Materials[current].Category.Type))) {
+
+			while
+				(
+					current < this.Materials.Count && (
+						(
+							this.categoryFilter != null && (
+								this.Materials[current].Category == null ||
+								this.Materials[current].Category.Type != this.categoryFilter.Value
+							)
+						) || (
+							this.onlyAdditional &&
+							!this.Materials[current].Additional
+						)
+					)
+				) {
 				current++;
 			}
+
+			/*while (current < this.Materials.Count && (this.categoryFilter != null && (this.Materials[current].Category == null || this.categoryFilter.Value != this.Materials[current].Category.Type))) {
+				current++;
+			}*/
 			while (i < index && current < this.Materials.Count) {
 				current++;
-				while (current < this.Materials.Count && (this.filter != null && (this.Materials[current].Category == null || this.filter.Value != this.Materials[current].Category.Type))) {
+				/*while (current < this.Materials.Count && (this.categoryFilter != null && (this.Materials[current].Category == null || this.categoryFilter.Value != this.Materials[current].Category.Type))) {
+					current++;
+				}*/
+				while
+					(
+						current < this.Materials.Count && (
+							(
+								this.categoryFilter != null && (
+									this.Materials[current].Category == null ||
+									this.Materials[current].Category.Type != this.categoryFilter.Value
+								)
+							) || (
+								this.onlyAdditional &&
+								!this.Materials[current].Additional
+							)
+						)
+					) {
 					current++;
 				}
 				i++;
@@ -209,17 +251,48 @@ namespace Europlan.Common {
 				}
 			}
 			set {
+				int node = this.GetNode(index);
+				if (node < 0) {
+					throw new ArgumentOutOfRangeException();
+				} else {
+					this.Materials[node] = (Material)value;
+				}
+			}
+
+			/*get {
+				int node = this.GetNode(index);
+				if (node < 0) {
+					throw new ArgumentOutOfRangeException();
+				} else {
+					IEnumerator<Material> it = this.GetEnumerator();
+					it.MoveNext();
+					for (int i = 0; i < index; i++ ) {
+						it.MoveNext();
+					}
+					return it.Current;
+					//return this.Materials[node];
+				}
+			}
+			set {
 				if (value is Material) {
 					int node = this.GetNode(index);
 					if (node < 0) {
 						throw new ArgumentOutOfRangeException();
 					} else {
-						this.Materials[node] = (Material)value;
+						IEnumerator<Material> it = this.GetEnumerator();
+						it.MoveNext();
+						for (int i = 0; i < index; i++) {
+							it.MoveNext();
+						}
+						//return it.Current;
+						int t = this.Materials.IndexOf(it.Current);
+						this.Materials[t] = (Material)value;
+						//this.Materials[node] = (Material)value;
 					}
 				} else {
 					throw new ArgumentException("Object to set is not a material");
 				}
-			}
+			}*/
 		}
 		#endregion
 
@@ -228,12 +301,15 @@ namespace Europlan.Common {
 		}
 
 		public object AddNew() {
-			if (this.filter == null) {
+			/*if (this.categoryFilter == null) {
 				throw new NotSupportedException("The method or operation is not implemented");
-			}
+			}*/
 			Material m = new Material();
-			m.Category = Configuration.UserTemplate.GetUserDefinedCategoryForCategoryType(this.filter.Value);
-			m.UserDefined = true;
+			if (this.categoryFilter != null) {
+				m.Category = Configuration.UserTemplate.GetUserDefinedCategoryForCategoryType(this.categoryFilter.Value);
+			}
+			m.UserDefined = !this.admin;
+			m.Additional = true;
 			m.IsNew = true;
 			this.Materials.Add(m);
 			return m;
@@ -244,7 +320,8 @@ namespace Europlan.Common {
 		}
 
 		public bool AllowNew {
-			get { return this.filter == CategoryType.General || this.filter == CategoryType.Insulation; }
+			//get { return this.categoryFilter == CategoryType.General || this.categoryFilter == CategoryType.Insulation; }
+			get { return true; }
 		}
 
 		public bool AllowRemove {
@@ -300,34 +377,76 @@ namespace Europlan.Common {
 
 		public string Filter {
 			get {
-				return (this.filter == null ? null : ((int)this.filter.Value).ToString());
+				string filter = (this.categoryFilter == null ? "" : ((int)this.categoryFilter.Value).ToString()) +
+					";" + (this.onlyAdditional ? "1" : "");
+				if (filter.EndsWith(";")) {
+					filter = filter.Substring(0, filter.Length - 1);
+				}
+				if (filter.Length == 0) {
+					filter = null;
+				}
+				return filter;
+				//return (this.categoryFilter == null ? null : ((int)this.categoryFilter.Value).ToString());
 			}
 			set {
 				int i;
-				if (value == null) {
-					this.filter = null;
-				} else if (Int32.TryParse(value, out i)) {
-					if (i == ((int)CategoryType.General)) {
-						this.filter = CategoryType.General;
-					} else if (i == ((int)CategoryType.Floor)) {
-						this.filter = CategoryType.Floor;
-					} else if (i == ((int)CategoryType.Wall)) {
-						this.filter = CategoryType.Wall;
-					} else if (i == ((int)CategoryType.Ceiling)) {
-						this.filter = CategoryType.Ceiling;
-					} else if (i == ((int)CategoryType.Distributor)) {
-						this.filter = CategoryType.Distributor;
-					} else if (i == ((int)CategoryType.Insulation)) {
-						this.filter = CategoryType.Insulation;
+				string cat;
+				string add;
+				this.categoryFilter = null;
+				this.onlyAdditional = false;
+				if (value != null) {
+					if (value.Contains(";")) {
+						cat = value.Substring(0, value.IndexOf(';'));
+						add = value.Substring(value.IndexOf(';') + 1);
 					} else {
-						this.filter = null;
+						cat = value;
+						add = null;
+					}
+					if (Int32.TryParse(cat, out i)) {
+						if (i == ((int)CategoryType.General)) {
+							this.categoryFilter = CategoryType.General;
+						} else if (i == ((int)CategoryType.Floor)) {
+							this.categoryFilter = CategoryType.Floor;
+						} else if (i == ((int)CategoryType.Wall)) {
+							this.categoryFilter = CategoryType.Wall;
+						} else if (i == ((int)CategoryType.Ceiling)) {
+							this.categoryFilter = CategoryType.Ceiling;
+						} else if (i == ((int)CategoryType.Distributor)) {
+							this.categoryFilter = CategoryType.Distributor;
+						} else if (i == ((int)CategoryType.Insulation)) {
+							this.categoryFilter = CategoryType.Insulation;
+						} else {
+							this.categoryFilter = null;
+						}
+					}
+					if (Int32.TryParse(add, out i)) {
+						if (i == 1) {
+							this.onlyAdditional = true;
+						}
 					}
 				}
+				/*} else if (Int32.TryParse(value, out i)) {
+					if (i == ((int)CategoryType.General)) {
+						this.categoryFilter = CategoryType.General;
+					} else if (i == ((int)CategoryType.Floor)) {
+						this.categoryFilter = CategoryType.Floor;
+					} else if (i == ((int)CategoryType.Wall)) {
+						this.categoryFilter = CategoryType.Wall;
+					} else if (i == ((int)CategoryType.Ceiling)) {
+						this.categoryFilter = CategoryType.Ceiling;
+					} else if (i == ((int)CategoryType.Distributor)) {
+						this.categoryFilter = CategoryType.Distributor;
+					} else if (i == ((int)CategoryType.Insulation)) {
+						this.categoryFilter = CategoryType.Insulation;
+					} else {
+						this.categoryFilter = null;
+					}
+				}*/
 			}
 		}
 
 		public void RemoveFilter() {
-			this.filter = null;
+			this.categoryFilter = null;
 		}
 
 		public ListSortDescriptionCollection SortDescriptions {
@@ -344,8 +463,13 @@ namespace Europlan.Common {
 		#endregion
 
 		public Nullable<CategoryType> FilterCategory {
-			get { return this.filter; }
-			set { this.filter = value; }
+			get { return this.categoryFilter; }
+			set { this.categoryFilter = value; }
+		}
+
+		public bool ShowOnlyAdditional {
+			get { return this.onlyAdditional; }
+			set { this.onlyAdditional = value; }
 		}
 	}
 
@@ -354,13 +478,15 @@ namespace Europlan.Common {
 		private Configuration.ConfigurationType type;
 		private int currentNode;
 		private bool finished;
-		private Nullable<CategoryType> filter;
+		private Nullable<CategoryType> categoryFilter;
+		private bool showOnlyAdditional = false;
 
-		internal MaterialListEnumerator(Configuration.ConfigurationType type, Nullable<CategoryType> filter) {
+		internal MaterialListEnumerator(Configuration.ConfigurationType type, Nullable<CategoryType> filter, bool showOnlyAdditional) {
 			this.type = type;
 			this.currentNode = -1;
 			this.finished = false;
-			this.filter = filter;
+			this.categoryFilter = filter;
+			this.showOnlyAdditional = showOnlyAdditional;
 		}
 
 		private List<Material> List {
@@ -402,7 +528,20 @@ namespace Europlan.Common {
 				} else {
 					this.currentNode++;
 				}
-				while (this.currentNode < this.List.Count && (this.filter != null && (this.List[currentNode].Category == null || this.List[this.currentNode].Category.Type != this.filter.Value))) {
+				while 
+					(
+						this.currentNode < this.List.Count && (
+							(
+								this.categoryFilter != null && (
+									this.List[currentNode].Category == null ||
+									this.List[this.currentNode].Category.Type != this.categoryFilter.Value
+								)
+							) || (
+								this.showOnlyAdditional &&
+								!this.List[this.currentNode].Additional
+							)
+						)
+					) {
 					this.currentNode++;
 				}
 				if (this.currentNode >= this.List.Count) {

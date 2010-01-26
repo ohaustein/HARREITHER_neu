@@ -27,7 +27,7 @@ namespace Europlan.AdminApplication {
 			listUncategorizedMaterials.Items.Clear();
 			Configuration config = Configuration.AdminTemplate;
 			foreach (Material material in config.Materials) {
-				if (material.Category == null) {
+				if (material.Category == null && !material.Additional) {
 					//string[] mat = new string[] { material.Name, material.PartNumber, material.Denomination.Value.ToString(), material.Unit, material.Price.ToString("0.00") };
 					string[] mat = new string[] { material.PartNumber, material.Name};
 					ListViewItem item = new ListViewItem(mat);
@@ -46,10 +46,12 @@ namespace Europlan.AdminApplication {
 			listCategorizedMaterials.Items.Clear();
 			if (selectedCategory != null) {
 				foreach (Material material in selectedCategory.Materials) {
-					string[] mat = new string[] { material.PartNumber, material.Name };
-			        ListViewItem item = new ListViewItem(mat);
-			        item.Tag = material;
-			        listCategorizedMaterials.Items.Add(item);
+					if (!material.Additional) {
+						string[] mat = new string[] { material.PartNumber, material.Name };
+						ListViewItem item = new ListViewItem(mat);
+						item.Tag = material;
+						listCategorizedMaterials.Items.Add(item);
+					}
 				}
 			}
 			listCategorizedMaterials.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);

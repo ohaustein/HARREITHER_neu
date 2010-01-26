@@ -31,24 +31,27 @@ namespace Europlan.AdminApplication {
 			this.colLicensedTo = new System.Windows.Forms.ColumnHeader();
 			this.colValidUntil = new System.Windows.Forms.ColumnHeader();
 			this.btnSaveLicense = new System.Windows.Forms.Button();
-			this.licenseEditor1 = new Europlan.AdminApplication.LicenseEditor();
 			this.tabPageArticles = new System.Windows.Forms.TabPage();
-			this.materialMapper1 = new Europlan.AdminApplication.MaterialMapper();
+			this.tabPageAdditionalArticles = new System.Windows.Forms.TabPage();
+			this.materialEditorGrid1 = new Europlan.ContructionEditor.MaterialEditorGrid();
 			this.tabPageConstructions = new System.Windows.Forms.TabPage();
 			this.constructionEditorPage = new Europlan.Common.ConstructionEditorGrid();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.datanormDateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.artikelUndKostruktionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.datanormDateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.licenseEditor1 = new Europlan.AdminApplication.LicenseEditor();
+			this.materialMapper1 = new Europlan.AdminApplication.MaterialMapper();
 			this.mainTabControl.SuspendLayout();
 			this.tabPageLicenses.SuspendLayout();
 			this.splitContainerLicenses.Panel1.SuspendLayout();
 			this.splitContainerLicenses.Panel2.SuspendLayout();
 			this.splitContainerLicenses.SuspendLayout();
 			this.tabPageArticles.SuspendLayout();
+			this.tabPageAdditionalArticles.SuspendLayout();
 			this.tabPageConstructions.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -57,6 +60,7 @@ namespace Europlan.AdminApplication {
 			// 
 			this.mainTabControl.Controls.Add(this.tabPageLicenses);
 			this.mainTabControl.Controls.Add(this.tabPageArticles);
+			this.mainTabControl.Controls.Add(this.tabPageAdditionalArticles);
 			this.mainTabControl.Controls.Add(this.tabPageConstructions);
 			this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.mainTabControl.Location = new System.Drawing.Point(0, 24);
@@ -153,19 +157,6 @@ namespace Europlan.AdminApplication {
 			this.btnSaveLicense.UseVisualStyleBackColor = true;
 			this.btnSaveLicense.Click += new System.EventHandler(this.btnSaveLicense_Click);
 			// 
-			// licenseEditor1
-			// 
-			this.licenseEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.licenseEditor1.AutoScroll = true;
-			this.licenseEditor1.AutoScrollMinSize = new System.Drawing.Size(400, 0);
-			this.licenseEditor1.Enabled = false;
-			this.licenseEditor1.Location = new System.Drawing.Point(3, 3);
-			this.licenseEditor1.Name = "licenseEditor1";
-			this.licenseEditor1.Size = new System.Drawing.Size(552, 418);
-			this.licenseEditor1.TabIndex = 0;
-			// 
 			// tabPageArticles
 			// 
 			this.tabPageArticles.Controls.Add(this.materialMapper1);
@@ -177,13 +168,27 @@ namespace Europlan.AdminApplication {
 			this.tabPageArticles.Text = "Artikelstamm";
 			this.tabPageArticles.UseVisualStyleBackColor = true;
 			// 
-			// materialMapper1
+			// tabPageAdditionalArticles
 			// 
-			this.materialMapper1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.materialMapper1.Location = new System.Drawing.Point(3, 3);
-			this.materialMapper1.Name = "materialMapper1";
-			this.materialMapper1.Size = new System.Drawing.Size(773, 457);
-			this.materialMapper1.TabIndex = 0;
+			this.tabPageAdditionalArticles.Controls.Add(this.materialEditorGrid1);
+			this.tabPageAdditionalArticles.Location = new System.Drawing.Point(4, 22);
+			this.tabPageAdditionalArticles.Name = "tabPageAdditionalArticles";
+			this.tabPageAdditionalArticles.Size = new System.Drawing.Size(779, 463);
+			this.tabPageAdditionalArticles.TabIndex = 4;
+			this.tabPageAdditionalArticles.Text = "Zusätzliche Artikel";
+			this.tabPageAdditionalArticles.UseVisualStyleBackColor = true;
+			// 
+			// materialEditorGrid1
+			// 
+			this.materialEditorGrid1.Admin = true;
+			this.materialEditorGrid1.AllowToAdd = true;
+			this.materialEditorGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.materialEditorGrid1.Filter = null;
+			this.materialEditorGrid1.Location = new System.Drawing.Point(0, 0);
+			this.materialEditorGrid1.Name = "materialEditorGrid1";
+			this.materialEditorGrid1.ShowOnlyAdditional = true;
+			this.materialEditorGrid1.Size = new System.Drawing.Size(779, 463);
+			this.materialEditorGrid1.TabIndex = 0;
 			// 
 			// tabPageConstructions
 			// 
@@ -228,6 +233,21 @@ namespace Europlan.AdminApplication {
 			this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
 			this.dateiToolStripMenuItem.Text = "&Datei";
 			// 
+			// importToolStripMenuItem
+			// 
+			this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.datanormDateiToolStripMenuItem});
+			this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+			this.importToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+			this.importToolStripMenuItem.Text = "Importieren";
+			// 
+			// datanormDateiToolStripMenuItem
+			// 
+			this.datanormDateiToolStripMenuItem.Name = "datanormDateiToolStripMenuItem";
+			this.datanormDateiToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+			this.datanormDateiToolStripMenuItem.Text = "Datanorm...";
+			this.datanormDateiToolStripMenuItem.Click += new System.EventHandler(this.datanormDateiToolStripMenuItem_Click);
+			// 
 			// exportToolStripMenuItem
 			// 
 			this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -251,20 +271,26 @@ namespace Europlan.AdminApplication {
 			this.beendenToolStripMenuItem.Text = "&Beenden";
 			this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
 			// 
-			// importToolStripMenuItem
+			// licenseEditor1
 			// 
-			this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.datanormDateiToolStripMenuItem});
-			this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-			this.importToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-			this.importToolStripMenuItem.Text = "Importieren";
+			this.licenseEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.licenseEditor1.AutoScroll = true;
+			this.licenseEditor1.AutoScrollMinSize = new System.Drawing.Size(400, 0);
+			this.licenseEditor1.Enabled = false;
+			this.licenseEditor1.Location = new System.Drawing.Point(3, 3);
+			this.licenseEditor1.Name = "licenseEditor1";
+			this.licenseEditor1.Size = new System.Drawing.Size(552, 418);
+			this.licenseEditor1.TabIndex = 0;
 			// 
-			// datanormDateiToolStripMenuItem
+			// materialMapper1
 			// 
-			this.datanormDateiToolStripMenuItem.Name = "datanormDateiToolStripMenuItem";
-			this.datanormDateiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.datanormDateiToolStripMenuItem.Text = "Datanorm...";
-			this.datanormDateiToolStripMenuItem.Click += new System.EventHandler(this.datanormDateiToolStripMenuItem_Click);
+			this.materialMapper1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.materialMapper1.Location = new System.Drawing.Point(3, 3);
+			this.materialMapper1.Name = "materialMapper1";
+			this.materialMapper1.Size = new System.Drawing.Size(773, 457);
+			this.materialMapper1.TabIndex = 0;
 			// 
 			// MainForm
 			// 
@@ -283,6 +309,7 @@ namespace Europlan.AdminApplication {
 			this.splitContainerLicenses.Panel2.ResumeLayout(false);
 			this.splitContainerLicenses.ResumeLayout(false);
 			this.tabPageArticles.ResumeLayout(false);
+			this.tabPageAdditionalArticles.ResumeLayout(false);
 			this.tabPageConstructions.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
@@ -313,6 +340,8 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.ToolStripMenuItem artikelUndKostruktionenToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem datanormDateiToolStripMenuItem;
+		private System.Windows.Forms.TabPage tabPageAdditionalArticles;
+		private Europlan.ContructionEditor.MaterialEditorGrid materialEditorGrid1;
 	}
 }
 
