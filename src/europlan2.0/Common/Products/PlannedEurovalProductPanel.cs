@@ -368,7 +368,7 @@ namespace Europlan.Common {
 				if ((skipFields & FieldEnum.RIM_LENGTH) == FieldEnum.NONE) {
 					this.numRim.Value = Math.Round((decimal)evProduct.PlannedRimLength, 2);
 				}
-				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
+				if ((skipFields & FieldEnum.CORNERS) == FieldEnum.NONE) {
 					this.numCorners.Value = (decimal)evProduct.PlannedRimCorners;
 				}
 

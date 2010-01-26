@@ -79,7 +79,7 @@ namespace Europlan.Common {
 		public decimal Value {
 			get {
 				decimal val;
-				if (this.Text.Length == 0) {
+				if (this.Text.Length == 0 || this.Text == "-") {
 					val = 0;
 				} else {
 					string text = this.Text;
