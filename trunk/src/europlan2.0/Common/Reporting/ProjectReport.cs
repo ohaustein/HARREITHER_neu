@@ -91,6 +91,7 @@ namespace Europlan.Common {
 			List<EcothermWrapper> ecothermAuslegungWrapper = new List<EcothermWrapper>();
 			List<HithermWrapper> hithermAuslegungWrapper = new List<HithermWrapper>();
 			List<HithermCompactWrapper> hithermCompactAuslegungWrapper = new List<HithermCompactWrapper>();
+			List<ModulBodenWrapper> modulBodenAuslegungWrapper = new List<ModulBodenWrapper>();
 			List<BilanzWrapper> eurovalBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> ecothermBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> hithermBilanzWrapper = new List<BilanzWrapper>();
@@ -130,6 +131,7 @@ namespace Europlan.Common {
 				ecothermAuslegungWrapper = GetEcothermWrapper();
 				hithermAuslegungWrapper = GetHithermWrapper();
 				hithermCompactAuslegungWrapper = GetHithermCompactWrapper();
+				modulBodenAuslegungWrapper = GetModulBodenWrapper();
 			}
 
 			if (reportOptions.Auslegung && reportOptions.AuslegungBilanz) {
@@ -168,6 +170,7 @@ namespace Europlan.Common {
 			DataTable ecothermAuslegung = ReportHelper.ListToDataTable<EcothermWrapper>(ecothermAuslegungWrapper);
 			DataTable hithermAuslegung = ReportHelper.ListToDataTable<HithermWrapper>(hithermAuslegungWrapper);
 			DataTable hithermCompactAuslegung = ReportHelper.ListToDataTable<HithermCompactWrapper>(hithermCompactAuslegungWrapper);
+			DataTable modulBodenAuslegung = ReportHelper.ListToDataTable<ModulBodenWrapper>(modulBodenAuslegungWrapper);
 			DataTable eurovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(eurovalBilanzWrapper);
 			DataTable ecothermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(ecothermBilanzWrapper);
 			DataTable hithermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(hithermBilanzWrapper);
@@ -196,6 +199,7 @@ namespace Europlan.Common {
 			ecothermAuslegung.TableName = "EcothermAuslegung";
 			hithermAuslegung.TableName = "HithermAuslegung";
 			hithermCompactAuslegung.TableName = "HithermCompactAuslegung";
+			modulBodenAuslegung.TableName = "ModulBodenAuslegung";
 			eurovalBilanz.TableName = "EurovalBilanz";
 			ecothermBilanz.TableName = "EcothermBilanz";
 			hithermBilanz.TableName = "HithermBilanz";
@@ -224,6 +228,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(ecothermAuslegung);
 			reportData.Tables.Add(hithermAuslegung);
 			reportData.Tables.Add(hithermCompactAuslegung);
+			reportData.Tables.Add(modulBodenAuslegung);
 			reportData.Tables.Add(eurovalBilanz);
 			reportData.Tables.Add(ecothermBilanz);
 			reportData.Tables.Add(hithermBilanz);
@@ -2358,8 +2363,6 @@ namespace Europlan.Common {
 									}
 									wrapperCoolList.Add(wrapperCool);
 								}
-
-
 							}
 						}
 					}
@@ -2371,6 +2374,214 @@ namespace Europlan.Common {
 			return wrapperHeatList;
 		}
 
+		public List<ModulBodenWrapper> GetModulBodenWrapper() {
+			List<ModulBodenWrapper> wrapperHeatList = new List<ModulBodenWrapper>();
+			List<ModulBodenWrapper> wrapperCoolList = new List<ModulBodenWrapper>();
+
+			ModulBodenWrapper wrapperHeat = null;
+			ModulBodenWrapper wrapperCool = null;
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						wrapperHeat = null;
+						wrapperCool = null;
+						if (pp.Product is ModulKlimaBodenProduct) {
+							ModulKlimaBodenProduct mp = pp.Product as ModulKlimaBodenProduct;
+							if (wrapperHeat == null) {
+								wrapperHeat = new ModulBodenWrapper();
+								wrapperHeat.HeatOrCool = "Heizen";
+								wrapperHeat.FloorId = floor.Id;
+								wrapperHeat.FloorName = floor.Name;
+
+								wrapperHeat.RoomId = room.Id;
+								wrapperHeat.RoomName = room.Name;
+								wrapperHeat.TeilSystem = pp.InternalName;
+								if (pp.Product.HasInsideConstruction) {
+									wrapperHeat.InsideConstruction = pp.Product.PlannedInsideConstruction.Id;
+									wrapperHeat.InsideRValue = pp.Product.PlannedInsideConstructionRValue;
+								}
+								if (pp.Product.HasOutsideConstruction) {
+									wrapperHeat.OutsideConstruction = pp.Product.PlannedOutsideConstruction.Id;
+									wrapperHeat.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
+								}
+								wrapperHeat.Circuits = pp.Product.PlannedCircuitCount;
+								wrapperHeat.DichtArea = mp.RequestedModulesDichtArea;
+								wrapperHeat.ModulierendArea = mp.RequestedModulesModulierendArea;
+								wrapperHeat.SonstigeArea = mp.RequestedModulesSonstigeArea;
+								wrapperHeat.ConnectionArea = mp.PlannedRemoveArea;
+
+								double v, r;
+								pp.Product.GetHeatFlow(out v, out r);
+								wrapperHeat.RoomTemp = room.RoomHeatTemperature;
+								wrapperHeat.VorlaufTemp = v;
+								wrapperHeat.RuecklaufTemp = r;
+								wrapperHeat.QSoll = pp.RequestedHeatLoad;
+								wrapperHeat.QFBH = pp.PlannedHeatLoad;
+								wrapperHeat.tFB = mp.PlannedFloorTemperatureHeat;
+
+								wrapperHeat.Wassermenge = pp.Product.PlannedDurchflussHeat;
+								wrapperHeat.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoHeat;
+								wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
+
+								wrapperHeat.UnusedArea = mp.PlannedAreaUnheated;
+
+								if (mp.PlannedConnection != null) {
+									if (mp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+										wrapperHeat.SubSystem = true;
+										wrapperHeat.VorlaufTemp = -1;
+										wrapperHeat.RuecklaufTemp = -1;
+									}
+								}
+								if (mp.IsOtherProductConnected) {
+									wrapperHeat.OtherSystemsConnected = true;
+								}
+							}
+							if (project.CalculateCoolLoad && wrapperCool == null) {
+								wrapperCool = new ModulBodenWrapper();
+								wrapperCool.HeatOrCool = "Kühlen";
+								wrapperCool.FloorId = floor.Id;
+								wrapperCool.FloorName = floor.Name;
+
+								wrapperCool.RoomId = room.Id;
+								wrapperCool.RoomName = room.Name;
+								wrapperCool.TeilSystem = pp.InternalName;
+								if (pp.Product.HasInsideConstruction) {
+									wrapperHeat.InsideConstruction = pp.Product.PlannedInsideConstruction.Id;
+									wrapperHeat.InsideRValue = pp.Product.PlannedInsideConstructionRValue;
+								}
+								if (pp.Product.HasOutsideConstruction) {
+									wrapperHeat.OutsideConstruction = pp.Product.PlannedOutsideConstruction.Id;
+									wrapperHeat.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
+								}
+								wrapperCool.Circuits = pp.Product.PlannedCircuitCount;
+								wrapperCool.DichtArea = mp.RequestedModulesDichtArea;
+								wrapperCool.ModulierendArea = mp.RequestedModulesModulierendArea;
+								wrapperCool.SonstigeArea = mp.RequestedModulesSonstigeArea;
+								wrapperCool.ConnectionArea = mp.PlannedRemoveArea;
+
+								double v, r;
+								pp.Product.GetCoolFlow(out v, out r);
+								wrapperCool.RoomTemp = room.RoomCoolTemperature;
+								wrapperCool.VorlaufTemp = v;
+								wrapperCool.RuecklaufTemp = r;
+								wrapperCool.QSoll = pp.RequestedCoolLoad;
+								wrapperCool.QFBH = pp.PlannedCoolLoad;
+								wrapperCool.tFB = mp.PlannedFloorTemperatureCool;
+
+								wrapperCool.Wassermenge = pp.Product.PlannedDurchflussCool;
+								wrapperCool.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoCool;
+								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorCool;
+
+								wrapperCool.UnusedArea = mp.PlannedAreaUnheated;
+
+								if (mp.PlannedConnection != null) {
+									if (mp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+										wrapperCool.SubSystem = true;
+										wrapperCool.VorlaufTemp = -1;
+										wrapperCool.RuecklaufTemp = -1;
+									}
+								}
+								if (mp.IsOtherProductConnected) {
+									wrapperCool.OtherSystemsConnected = true;
+								}
+							}
+							if (wrapperHeat != null) {
+								if (mp.PlannedCircuitCount == 0) {
+									wrapperHeatList.Add(wrapperHeat);
+								} else {
+									wrapperHeatList.Add(wrapperHeat);
+
+									ModulBodenWrapper prevWrapper = null;
+									foreach (ModulBodenCircuit mc in mp.PlannedCircuits) {
+										ModulBodenWrapper wrapper = new ModulBodenWrapper(wrapperHeat);
+										wrapper.UsedAsCircuitWrapper = true;
+
+										wrapper.Circuits = mc.NrOfCircuit + 1;
+										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
+										wrapper.TotalModules = mp.RequestedModulesTotal;
+										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
+
+										wrapper.Wassermenge = mc.C_DurchflussHeat;
+										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustHeat;
+										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorHeat;
+										wrapper.V = mc.C_FlussGeschwindigkeitHeat;
+
+										if (prevWrapper == null) {
+											prevWrapper = wrapper;
+											wrapperHeatList.Add(wrapper);
+										} else {
+											bool ok = true;
+											ok = ok && prevWrapper.TotalModules == wrapper.TotalModules;
+											ok = ok && prevWrapper.LengthConnection == wrapper.LengthConnection;
+											ok = ok && prevWrapper.Wassermenge == wrapper.Wassermenge;
+											ok = ok && prevWrapper.DruckverlustHeizkreis == wrapper.DruckverlustHeizkreis;
+											ok = ok && prevWrapper.DruckverlustVerteiler == wrapper.DruckverlustVerteiler;
+											ok = ok && prevWrapper.V == wrapper.V;
+
+											if (ok) {
+												prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
+											} else {
+												prevWrapper = wrapper;
+												wrapperHeatList.Add(wrapper);
+											}
+										}
+									}
+								}
+							}
+							if (wrapperCool != null) {
+								if (mp.PlannedCircuitCount == 0) {
+									wrapperCoolList.Add(wrapperCool);
+								} else {
+									wrapperCoolList.Add(wrapperCool);
+
+									ModulBodenWrapper prevWrapper = null;
+									foreach (ModulBodenCircuit mc in mp.PlannedCircuits) {
+										ModulBodenWrapper wrapper = new ModulBodenWrapper(wrapperCool);
+										wrapper.UsedAsCircuitWrapper = true;
+
+										wrapper.Circuits = mc.NrOfCircuit + 1;
+										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
+										wrapper.TotalModules = mp.RequestedModulesTotal;
+										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
+
+										wrapper.Wassermenge = mc.C_DurchflussCool;
+										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustCool;
+										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorCool;
+										wrapper.V = mc.C_FlussGeschwindigkeitCool;
+
+										if (prevWrapper == null) {
+											prevWrapper = wrapper;
+											wrapperCoolList.Add(wrapper);
+										} else {
+											bool ok = true;
+											ok = ok && prevWrapper.TotalModules == wrapper.TotalModules;
+											ok = ok && prevWrapper.LengthConnection == wrapper.LengthConnection;
+											ok = ok && prevWrapper.Wassermenge == wrapper.Wassermenge;
+											ok = ok && prevWrapper.DruckverlustHeizkreis == wrapper.DruckverlustHeizkreis;
+											ok = ok && prevWrapper.DruckverlustVerteiler == wrapper.DruckverlustVerteiler;
+											ok = ok && prevWrapper.V == wrapper.V;
+
+											if (ok) {
+												prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
+											} else {
+												prevWrapper = wrapper;
+												wrapperCoolList.Add(wrapper);
+											}
+										}
+
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			wrapperHeatList.AddRange(wrapperCoolList);
+
+			return wrapperHeatList;
+		}
 
 		public List<EurovalAreaOverviewWrapper> GetEurovalOverviewWrapper() {
 			List<EurovalAreaOverviewWrapper> wrapperList = new List<EurovalAreaOverviewWrapper>();

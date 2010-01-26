@@ -332,14 +332,27 @@ namespace Europlan.Common {
 			set { this.requestedModulesDicht = value; }
 		}
 
+		public double RequestedModulesDichtArea {
+			get { return this.requestedModulesDicht * 0.4; }
+		}
+
 		public int RequestedModulesModulierend {
 			get { return this.requestedModulesModulierend; }
 			set { this.requestedModulesModulierend = value; }
 		}
 
+		public double RequestedModulesModulierendArea {
+			get { return this.requestedModulesModulierend * 0.55; }
+		}
+
 		public int RequestedModulesSonstige {
 			get { return this.requestedModulesSonstige; }
 			set { this.requestedModulesSonstige = value; }
+		}
+
+		// TODO
+		public double RequestedModulesSonstigeArea {
+			get { return this.requestedModulesSonstige * 0.4; }
 		}
 
 		public double RequestedSonstigeVerbindeLeitung {
