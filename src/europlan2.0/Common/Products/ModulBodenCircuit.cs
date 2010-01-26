@@ -68,7 +68,7 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double HeatArea {
-			get { return row.HeatArea; }
+			get { return row.HeatArea + 0.02 * this.sonstigeVerbindeleitung; }
 		}
 
 		[XmlIgnore]
@@ -77,13 +77,13 @@ namespace Europlan.Common {
 				if (this.reducedArea > this.HeatArea) {
 					return this.HeatArea / 2;
 				}
-				return row.HeatArea - this.reducedArea / 2;
+				return this.HeatArea - this.reducedArea / 2;
 			}
 		}
 
 		[XmlIgnore]
 		public double CoveredArea {
-			get { return row.HeatArea + this.langeFittinge * 0.15; }
+			get { return row.HeatArea + this.langeFittinge * 0.15 + 0.055 * this.sonstigeVerbindeleitung; }
 		}
 
 		//private double areaTotal;

@@ -352,7 +352,7 @@ namespace Europlan.Common {
 
 		// TODO
 		public double RequestedModulesSonstigeArea {
-			get { return this.requestedModulesSonstige * 0.4; }
+			get { return this.requestedModulesSonstige * 0.4 + this.requestedSonstigeVerbindeLeitung * 0.055; }
 		}
 
 		public double RequestedSonstigeVerbindeLeitung {
