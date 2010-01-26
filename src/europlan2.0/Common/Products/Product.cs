@@ -224,7 +224,7 @@ namespace Europlan.Common {
 				if (QuickDimensioningCanCool) {
 					return (int)(QuickDimensioningPlannedArea * QuickDimensioningCoolPowerPerSquareMeter);
 				}
-				return 0; 
+				return 0;
 			}
 		}
 

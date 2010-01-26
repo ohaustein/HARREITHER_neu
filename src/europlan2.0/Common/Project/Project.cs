@@ -119,7 +119,7 @@ namespace Europlan.Common {
 			requiredMaterialCalculated = new SerializableDictionary<string, double>();
 
 			//configuration = Configuration.AdminTemplate + Configuration.UserTemplate;
-			configuration = Configuration.UserTemplate;
+			configuration = new Configuration(Configuration.UserTemplate);
 			configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 
 			// root node

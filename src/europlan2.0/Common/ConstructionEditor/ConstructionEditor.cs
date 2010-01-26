@@ -45,7 +45,7 @@ namespace Europlan.Common {
 		}
 
 		private void UpdateConstructionScopeOfGui() {
-			MaterialListWrapper insulations = new MaterialListWrapper(Configuration.ConfigurationType.AdminConfiguration);
+			MaterialListWrapper insulations = new MaterialListWrapper(Configuration.ConfigurationType.UserConfiguration);
 			insulations.FilterCategory = CategoryType.Insulation;
 			//this.colMaterial.DataSource = insulations;
 			this.colMaterial.ValueMember = "Material";
