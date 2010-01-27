@@ -11,6 +11,7 @@ namespace Europlan.Common {
 
 		private int langeFittinge;
 		private double sonstigeVerbindeleitung;
+		private int sonstigeModule;
 		private double reducedArea = 0;
 
 		public ModulBodenCircuit() {
@@ -351,16 +352,21 @@ namespace Europlan.Common {
 			}
 		}
 
+		public int ModuleTotal {
+			get { return this.row.List.Count; }
+		}
+
 		public int DichteModule {
-			get { return 0; }
+			get { return this.ModuleTotal - this.ModulierendeModule - this.SonstigeModule; }
 		}
 
 		public int ModulierendeModule {
-			get { return 0; }
+			get { return this.langeFittinge; }
 		}
 
 		public int SonstigeModule {
-			get { return 0; }
+			get { return this.sonstigeModule; }
+			set { this.sonstigeModule = value; }
 		}
 	}
 }

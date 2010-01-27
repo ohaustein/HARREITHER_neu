@@ -456,6 +456,9 @@ namespace Europlan.Common {
 				int langeFittingePerCircuit = this.requestedModulesModulierend / cCount;
 				int additionalLangeFittinge = this.requestedModulesModulierend - langeFittingePerCircuit * cCount;
 
+				int sonstigeModulePerCircuit = this.RequestedModulesSonstige / cCount;
+				int additionalSonstigeModule = this.RequestedModulesSonstige - sonstigeModulePerCircuit * cCount;
+
 				this.CorrectCircuits(cCount, false);
 
 				int curCNr = 0;
@@ -476,6 +479,7 @@ namespace Europlan.Common {
 					c.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[curCNr];
 					c.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[curCNr];
 					c.LangeFittinge = langeFittingePerCircuit + (cCount - curCNr - 1 < additionalLangeFittinge ? 1 : 0);
+					c.SonstigeModule = sonstigeModulePerCircuit + (cCount - curCNr - 1 < additionalSonstigeModule ? 1 : 0);
 					c.SonstigeVerbindeleitung = this.requestedSonstigeVerbindeLeitung / cCount;
 					c.ReducedArea = this.PlannedAreaReduced / cCount;
 					c.Calculate();
