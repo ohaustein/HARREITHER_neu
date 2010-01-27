@@ -179,7 +179,12 @@ namespace Europlan.Common {
 				if (this.MinValue.HasValue && this.MinValue.Value > 0) {
 					e.Handled = true;
 				} else {
-					if (this.Text.StartsWith("-")) {
+					if (this.SelectionStart == 0 && this.SelectionLength == this.Text.Length) {
+						this.Text = "-";
+						this.SelectionStart = 1;
+						this.SelectionLength = 0;
+						e.Handled = true;
+					} else if (this.Text.StartsWith("-")) {
 						e.Handled = true;
 					} else {
 						int selStart = this.SelectionStart;
