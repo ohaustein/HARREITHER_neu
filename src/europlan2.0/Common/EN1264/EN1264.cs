@@ -389,7 +389,7 @@ namespace Europlan.Common {
 				x = raumTemperatur;
 				q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
 			}
-			return q < 0 ? 0 : q;
+			return q < 0 ? 0 : q * faktor;
 		}
 
 		public double KaeltestromDichteRegister(double kuehlmittelTemperatur, double raumTemperatur, double[] standardTabelle, double faktor) {
@@ -453,7 +453,7 @@ namespace Europlan.Common {
 				q = 0;
 			}
 
-			return -q;
+			return -q * faktor;
 		}
 
 		public double KaeltestromDichteRegister(double kuehlmittelTemperatur, double raumTemperatur, double[][] standardTabelle, double faktor) {
@@ -527,8 +527,7 @@ namespace Europlan.Common {
 			y1 = y[x1i];
 			x = raumTemperatur;
 			q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
-			return q < 0 ? 0 : q;
-
+			return q < 0 ? 0 : q * faktor;
 		}
 
 		public double HithermBeplankungsFaktor(double[] rWerte, double[] faktoren, double rWert) {
