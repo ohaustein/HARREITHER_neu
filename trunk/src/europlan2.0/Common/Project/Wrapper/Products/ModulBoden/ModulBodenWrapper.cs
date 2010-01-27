@@ -23,6 +23,11 @@ namespace Europlan.Common {
 		private double sonstigeArea;
 		private double connectionArea;
 
+		private int dichteModule;
+		private int modulierendeModule;
+		private int sonstigeModule;
+		private double sonstigeVerbindeleitung;
+
 		private double roomTemp;
 		private double vorlaufTemp;
 		private double ruecklaufTemp;
@@ -65,6 +70,11 @@ namespace Europlan.Common {
 			modulierendArea = mw.modulierendArea;
 			sonstigeArea = mw.sonstigeArea;
 			connectionArea = mw.connectionArea;
+
+			dichteModule = mw.dichteModule;
+			modulierendeModule = mw.modulierendeModule;
+			sonstigeModule = mw.sonstigeModule;
+			sonstigeVerbindeleitung = mw.sonstigeVerbindeleitung;
 
 			roomTemp = mw.roomTemp;
 			vorlaufTemp = mw.vorlaufTemp;
@@ -253,6 +263,27 @@ namespace Europlan.Common {
 			set { usedAsCircuitWrapper = value; }
 		}
 
+		public int DichteModule {
+			get { return dichteModule; }
+			set { dichteModule = value; }
+		}
+
+		public int ModulierendeModule {
+			get { return modulierendeModule; }
+			set { modulierendeModule = value; }
+		}
+
+		public int SonstigeModule {
+			get { return sonstigeModule; }
+			set { sonstigeModule = value; }
+		}
+
+		public double SonstigeVerbindeleitung {
+			get { return sonstigeVerbindeleitung; }
+			set { sonstigeVerbindeleitung = value; }
+		}
+
+	
 	}
 
 }

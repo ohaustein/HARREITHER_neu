@@ -1791,14 +1791,14 @@ namespace Europlan.Common {
 											wrapperHeatList.Add(wrapper);
 										} else {
 											bool ok = true;
-											ok = ok && prevWrapper.LengthRzAz == wrapper.LengthRzAz;
-											ok = ok && prevWrapper.LengthConnection == wrapper.LengthConnection;
-											ok = ok && prevWrapper.LengthCircuitFbh == wrapper.LengthCircuitFbh;
-											ok = ok && prevWrapper.LengthCircuitAll == wrapper.LengthCircuitAll;
-											ok = ok && prevWrapper.Wassermenge == wrapper.Wassermenge;
-											ok = ok && prevWrapper.DruckverlustRohr == wrapper.DruckverlustRohr;
-											ok = ok && prevWrapper.DruckverlustVerteiler == wrapper.DruckverlustVerteiler;
-											ok = ok && prevWrapper.V == wrapper.V;
+											ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
+											ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
+											ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);
+											ok = ok && Math.Round(prevWrapper.LengthCircuitAll, 3) == Math.Round(wrapper.LengthCircuitAll, 3);
+											ok = ok && Math.Round(prevWrapper.Wassermenge, 3) == Math.Round(wrapper.Wassermenge, 3);
+											ok = ok && Math.Round(prevWrapper.DruckverlustRohr, 3) == Math.Round(wrapper.DruckverlustRohr, 3);
+											ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 3) == Math.Round(wrapper.DruckverlustVerteiler, 3);
+											ok = ok && Math.Round(prevWrapper.V, 3) == Math.Round(wrapper.V, 3);
 
 											if (ok) {
 												prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
@@ -1839,14 +1839,14 @@ namespace Europlan.Common {
 											wrapperCoolList.Add(wrapper);
 										} else {
 											bool ok = true;
-											ok = ok && prevWrapper.LengthRzAz == wrapper.LengthRzAz;
-											ok = ok && prevWrapper.LengthConnection == wrapper.LengthConnection;
-											ok = ok && prevWrapper.LengthCircuitFbh == wrapper.LengthCircuitFbh;
-											ok = ok && prevWrapper.LengthCircuitAll == wrapper.LengthCircuitAll;
-											ok = ok && prevWrapper.Wassermenge == wrapper.Wassermenge;
-											ok = ok && prevWrapper.DruckverlustRohr == wrapper.DruckverlustRohr;
-											ok = ok && prevWrapper.DruckverlustVerteiler == wrapper.DruckverlustVerteiler;
-											ok = ok && prevWrapper.V == wrapper.V;
+											ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
+											ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
+											ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);
+											ok = ok && Math.Round(prevWrapper.LengthCircuitAll, 3) == Math.Round(wrapper.LengthCircuitAll, 3);
+											ok = ok && Math.Round(prevWrapper.Wassermenge, 3) == Math.Round(wrapper.Wassermenge, 3);
+											ok = ok && Math.Round(prevWrapper.DruckverlustRohr, 3) == Math.Round(wrapper.DruckverlustRohr, 3);
+											ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 3) == Math.Round(wrapper.DruckverlustVerteiler, 3);
+											ok = ok && Math.Round(prevWrapper.V, 3) == Math.Round(wrapper.V, 3);
 
 											if (ok) {
 												prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
@@ -2016,14 +2016,14 @@ namespace Europlan.Common {
 											wrapperHeatList.Add(wrapper);
 										} else {
 											bool ok = true;
-											ok = ok && prevWrapper.LengthRzAz == wrapper.LengthRzAz;
-											ok = ok && prevWrapper.LengthConnection == wrapper.LengthConnection;
-											ok = ok && prevWrapper.LengthCircuitFbh == wrapper.LengthCircuitFbh;
-											ok = ok && prevWrapper.LengthCircuitAll == wrapper.LengthCircuitAll;
-											ok = ok && prevWrapper.Wassermenge == wrapper.Wassermenge;
-											ok = ok && prevWrapper.DruckverlustRohr == wrapper.DruckverlustRohr;
-											ok = ok && prevWrapper.DruckverlustVerteiler == wrapper.DruckverlustVerteiler;
-											ok = ok && prevWrapper.V == wrapper.V;
+											ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
+											ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
+											ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);
+											ok = ok && Math.Round(prevWrapper.LengthCircuitAll, 3) == Math.Round(wrapper.LengthCircuitAll, 3);
+											ok = ok && Math.Round(prevWrapper.Wassermenge, 3) == Math.Round(wrapper.Wassermenge, 3);
+											ok = ok && Math.Round(prevWrapper.DruckverlustRohr, 3) == Math.Round(wrapper.DruckverlustRohr, 3);
+											ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 3) == Math.Round(wrapper.DruckverlustVerteiler, 3);
+											ok = ok && Math.Round(prevWrapper.V, 3) == Math.Round(wrapper.V, 3);
 
 											if (ok) {
 												prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
@@ -2064,14 +2064,14 @@ namespace Europlan.Common {
 											wrapperCoolList.Add(wrapper);
 										} else {
 											bool ok = true;
-											ok = ok && prevWrapper.LengthRzAz == wrapper.LengthRzAz;
-											ok = ok && prevWrapper.LengthConnection == wrapper.LengthConnection;
-											ok = ok && prevWrapper.LengthCircuitFbh == wrapper.LengthCircuitFbh;
-											ok = ok && prevWrapper.LengthCircuitAll == wrapper.LengthCircuitAll;
-											ok = ok && prevWrapper.Wassermenge == wrapper.Wassermenge;
-											ok = ok && prevWrapper.DruckverlustRohr == wrapper.DruckverlustRohr;
-											ok = ok && prevWrapper.DruckverlustVerteiler == wrapper.DruckverlustVerteiler;
-											ok = ok && prevWrapper.V == wrapper.V;
+											ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
+											ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
+											ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);
+											ok = ok && Math.Round(prevWrapper.LengthCircuitAll, 3) == Math.Round(wrapper.LengthCircuitAll, 3);
+											ok = ok && Math.Round(prevWrapper.Wassermenge, 3) == Math.Round(wrapper.Wassermenge, 3);
+											ok = ok && Math.Round(prevWrapper.DruckverlustRohr, 3) == Math.Round(wrapper.DruckverlustRohr, 3);
+											ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 3) == Math.Round(wrapper.DruckverlustVerteiler, 3);
+											ok = ok && Math.Round(prevWrapper.V, 3) == Math.Round(wrapper.V, 3);
 
 											if (ok) {
 												prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
@@ -2499,8 +2499,13 @@ namespace Europlan.Common {
 
 										wrapper.Circuits = mc.NrOfCircuit + 1;
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
-										wrapper.TotalModules = mp.RequestedModulesTotal;
+										wrapper.TotalModules = mc.Row.List.Count;
 										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
+
+										wrapper.DichteModule = mc.DichteModule;
+										wrapper.ModulierendeModule = mc.ModulierendeModule;
+										wrapper.SonstigeModule = mc.SonstigeModule;
+										wrapper.SonstigeVerbindeleitung = mc.SonstigeVerbindeleitung;
 
 										wrapper.Wassermenge = mc.C_DurchflussHeat;
 										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustHeat;
@@ -2513,11 +2518,15 @@ namespace Europlan.Common {
 										} else {
 											bool ok = true;
 											ok = ok && prevWrapper.TotalModules == wrapper.TotalModules;
-											ok = ok && prevWrapper.LengthConnection == wrapper.LengthConnection;
-											ok = ok && prevWrapper.Wassermenge == wrapper.Wassermenge;
-											ok = ok && prevWrapper.DruckverlustHeizkreis == wrapper.DruckverlustHeizkreis;
-											ok = ok && prevWrapper.DruckverlustVerteiler == wrapper.DruckverlustVerteiler;
-											ok = ok && prevWrapper.V == wrapper.V;
+											ok = ok && prevWrapper.DichteModule == wrapper.DichteModule;
+											ok = ok && prevWrapper.ModulierendeModule == wrapper.ModulierendeModule;
+											ok = ok && prevWrapper.SonstigeModule == wrapper.SonstigeModule;
+											ok = ok && prevWrapper.SonstigeVerbindeleitung == wrapper.SonstigeVerbindeleitung;
+											ok = ok && Math.Round(prevWrapper.LengthConnection, 1) == Math.Round(wrapper.LengthConnection, 1);
+											ok = ok && Math.Round(prevWrapper.Wassermenge, 1) == Math.Round(wrapper.Wassermenge, 1);
+											ok = ok && Math.Round(prevWrapper.DruckverlustHeizkreis, 1) == Math.Round(wrapper.DruckverlustHeizkreis, 1);
+											ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 1) == Math.Round(wrapper.DruckverlustVerteiler, 1);
+											ok = ok && Math.Round(prevWrapper.V, 1) == Math.Round(wrapper.V, 1);
 
 											if (ok) {
 												prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
@@ -2542,8 +2551,13 @@ namespace Europlan.Common {
 
 										wrapper.Circuits = mc.NrOfCircuit + 1;
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
-										wrapper.TotalModules = mp.RequestedModulesTotal;
+										wrapper.TotalModules = mc.Row.List.Count;
 										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
+										
+										wrapper.DichteModule = mc.DichteModule;
+										wrapper.ModulierendeModule = mc.ModulierendeModule;
+										wrapper.SonstigeModule = mc.SonstigeModule;
+										wrapper.SonstigeVerbindeleitung = mc.SonstigeVerbindeleitung;
 
 										wrapper.Wassermenge = mc.C_DurchflussCool;
 										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustCool;
@@ -2556,11 +2570,15 @@ namespace Europlan.Common {
 										} else {
 											bool ok = true;
 											ok = ok && prevWrapper.TotalModules == wrapper.TotalModules;
-											ok = ok && prevWrapper.LengthConnection == wrapper.LengthConnection;
-											ok = ok && prevWrapper.Wassermenge == wrapper.Wassermenge;
-											ok = ok && prevWrapper.DruckverlustHeizkreis == wrapper.DruckverlustHeizkreis;
-											ok = ok && prevWrapper.DruckverlustVerteiler == wrapper.DruckverlustVerteiler;
-											ok = ok && prevWrapper.V == wrapper.V;
+											ok = ok && prevWrapper.DichteModule == wrapper.DichteModule;
+											ok = ok && prevWrapper.ModulierendeModule == wrapper.ModulierendeModule;
+											ok = ok && prevWrapper.SonstigeModule == wrapper.SonstigeModule;
+											ok = ok && prevWrapper.SonstigeVerbindeleitung == wrapper.SonstigeVerbindeleitung;
+											ok = ok && Math.Round(prevWrapper.LengthConnection, 1) == Math.Round(wrapper.LengthConnection, 1);
+											ok = ok && Math.Round(prevWrapper.Wassermenge, 1) == Math.Round(wrapper.Wassermenge, 1);
+											ok = ok && Math.Round(prevWrapper.DruckverlustHeizkreis, 1) == Math.Round(wrapper.DruckverlustHeizkreis, 1);
+											ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 1) == Math.Round(wrapper.DruckverlustVerteiler, 1);
+											ok = ok && Math.Round(prevWrapper.V, 1) == Math.Round(wrapper.V, 1);
 
 											if (ok) {
 												prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
