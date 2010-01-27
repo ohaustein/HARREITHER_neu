@@ -209,7 +209,7 @@ namespace Europlan.Common {
 			double rAlphaDeckeDh = 1 / alphaAussenHeat; /* Wärmeübergang Decke bei Heizung */
 			double rAlphaDeckeDk = 1 / alphaInnenHeat; /* Wärmeübergang Decke bei Kühlung */
 
-			double leistungsFaktor = ModulKlimaDeckeProduct.ConfigLeistungsFaktor;
+			double leistungsFaktor = ModulKlimaDeckeProduct.ConfigLeistungsFaktorHeizen;
 
 			double rLambdaB = 0;
 			double rLambdaIns = this.ModulKlimaDeckeProduct.PlannedInsulationConstruction == null ? 0 : this.ModulKlimaDeckeProduct.PlannedInsulationConstruction.RValue;

@@ -294,7 +294,7 @@ namespace Europlan.Common {
 			if (this.Wall != null) {
 				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermCompactProduct.ConfigBeplankungRWerte, HithermCompactProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
-			faktor = faktor * alpha / HithermCompactProduct.ConfigAlphaWand;
+			faktor = faktor * alpha / HithermCompactProduct.ConfigAlphaWand * HithermCompactProduct.ConfigLeistungsFaktorHeizen;
 			double[][] table;
 			switch (this.registerType) {
 				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
@@ -351,7 +351,7 @@ namespace Europlan.Common {
 			if (this.Wall != null) {
 				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermCompactProduct.ConfigBeplankungRWerte, HithermCompactProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
-			faktor = faktor * alpha / HithermCompactProduct.ConfigAlphaWand;
+			faktor = faktor * alpha / HithermCompactProduct.ConfigAlphaWand * HithermCompactProduct.ConfigLeistungsFaktorKuehlen;
 			return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, HithermCompactProduct.ConfigHlRegKuehlleistungProQm, faktor) * this.HeatArea;
 			// TODO
 			//return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, HithermCompactProduct.ConfigHlRegKuehlleistung, faktor) * this.registerCount;

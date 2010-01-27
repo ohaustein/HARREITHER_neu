@@ -129,6 +129,9 @@ namespace Europlan.Common {
 
 		private static bool usePlus = false;
 
+		private static double leistungsFaktorKuehlen = 1.0;
+		private static double leistungsFaktorHeizen = 1.0;
+
 		private Dictionary<HithermCompactRegister, int> registerCircuits = new Dictionary<HithermCompactRegister, int>();
 		private Dictionary<int, HithermCompactCircuit> circuitIds = new Dictionary<int, HithermCompactCircuit>();
 
@@ -157,11 +160,40 @@ namespace Europlan.Common {
 			maxPressureLost = userConfig.GetProductParameterAsInt<HithermCompactProduct>("ConfigMaxPressureLost", 15000);
 			maxDurchfluss = userConfig.GetProductParameterAsInt<HithermCompactProduct>("ConfigMaxDurchfluss", 240);
 			maxRegisterArea = userConfig.GetProductParameterAsDouble<HithermCompactProduct>("ConfigMaxRegisterArea", 10.0);
+			leistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<HithermCompactProduct>("ConfigLeistungsFaktorHeizen", 1.0);
+			leistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<HithermCompactProduct>("ConfigLeistungsFaktorKuehlen", 1.0);
 		}
 
 		public static string GlobalNotificationMessage {
 			get {
-				return null;
+				string message = null;
+				Configuration userConfig = Configuration.UserTemplate;
+
+				double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.77);
+				if (leistungsFaktorHeizen != defaultLeistungsFaktorHeizen) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  Leistungsfaktor Heizen: " + Math.Round(leistungsFaktorHeizen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorHeizen, 3).ToString() + ")";
+				}
+
+				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.77);
+				if (leistungsFaktorKuehlen != defaultLeistungsFaktorKuehlen) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  Leistungsfaktor Kühlen: " + Math.Round(leistungsFaktorKuehlen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorKuehlen, 3).ToString() + ")";
+				}
+
+				if (message != null) {
+					message = "Hitherm Compact-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" + message;
+				}
+
+				return message;
 			}
 		}
 
@@ -483,6 +515,18 @@ namespace Europlan.Common {
 		public static double ConfigSpreizungKuehlMax {
 			get { return spreizungKuehlMax; }
 			set { spreizungKuehlMax = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLeistungsFaktorKuehlen {
+			get { return leistungsFaktorKuehlen; }
+			set { leistungsFaktorKuehlen = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLeistungsFaktorHeizen {
+			get { return leistungsFaktorHeizen; }
+			set { leistungsFaktorHeizen = value; }
 		}
 		#endregion Product Parameters
 

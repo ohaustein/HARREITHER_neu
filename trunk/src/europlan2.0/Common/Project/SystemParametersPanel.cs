@@ -131,7 +131,11 @@ namespace Europlan.Common {
 				this.tabSystemParameters.TabPages.Remove(this.tabHitherm);
 			}
 			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin)) {
-				// nothing to do
+				this.layoutHitherm.Controls.Remove(this.lblHithermLeistungsfaktorHeat);
+				this.layoutHitherm.Controls.Remove(this.numHithermLeistungsfaktorHeat);
+				this.layoutHitherm.Controls.Remove(this.lblHithermLeistungsfaktorCool);
+				this.layoutHitherm.Controls.Remove(this.numHithermLeistungsfaktorCool);
+				this.layoutHitherm.SetRow(this.btnHithermStandard, this.layoutHitherm.GetRow(this.btnHithermStandard) - 2);
 			}
 		}
 
@@ -141,7 +145,11 @@ namespace Europlan.Common {
 				this.tabSystemParameters.TabPages.Remove(this.tabHithermCompact);
 			}
 			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin)) {
-				// nothing to do
+				this.layoutHithermCompact.Controls.Remove(this.lblHithermCompactLeistungsfaktorHeat);
+				this.layoutHithermCompact.Controls.Remove(this.numHithermCompactLeistungsfaktorHeat);
+				this.layoutHithermCompact.Controls.Remove(this.lblHithermCompactLeistungsfaktorCool);
+				this.layoutHithermCompact.Controls.Remove(this.numHithermCompactLeistungsfaktorCool);
+				this.layoutHithermCompact.SetRow(this.btnHithermCompactStandard, this.layoutHithermCompact.GetRow(this.btnHithermCompactStandard) - 2);
 			}
 		}
 
@@ -162,9 +170,11 @@ namespace Europlan.Common {
 			}
 			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin)) {
 				if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin)) {
-					this.layoutModulDecke.Controls.Remove(this.lblModulDeckeLeistungsfaktor);
-					this.layoutModulDecke.Controls.Remove(this.numModulDeckeLeistungsfaktor);
-					this.layoutModulDecke.SetRow(this.btnModulDeckeStandard, this.layoutModulDecke.GetRow(this.btnModulDeckeStandard) - 1);
+					this.layoutModulDecke.Controls.Remove(this.lblModulDeckeLeistungsfaktorHeat);
+					this.layoutModulDecke.Controls.Remove(this.numModulDeckeLeistungsfaktorHeat);
+					this.layoutModulDecke.Controls.Remove(this.lblModulDeckeLeistungsfaktorCool);
+					this.layoutModulDecke.Controls.Remove(this.numModulDeckeLeistungsfaktorCool);
+					this.layoutModulDecke.SetRow(this.btnModulDeckeStandard, this.layoutModulDecke.GetRow(this.btnModulDeckeStandard) - 2);
 				}
 			}
 		}
@@ -232,7 +242,8 @@ namespace Europlan.Common {
 			numModulDeckeMaxModulesInRow.Value = ModulKlimaDeckeProduct.ConfigMaxModulesInRow;
 			numModulDeckeMaxRows.Value = ModulKlimaDeckeProduct.ConfigMaxModulesInParallel;
 			numModulDeckeMaxModulesInCircuit.Value = ModulKlimaDeckeProduct.ConfigModulesInCircuit;
-			numModulDeckeLeistungsfaktor.Value = (decimal)ModulKlimaDeckeProduct.ConfigLeistungsFaktor;
+			numModulDeckeLeistungsfaktorHeat.Value = (decimal)ModulKlimaDeckeProduct.ConfigLeistungsFaktorHeizen;
+			numModulDeckeLeistungsfaktorCool.Value = (decimal)ModulKlimaDeckeProduct.ConfigLeistungsFaktorKuehlen;
 			numModulDeckeSpreizungHeizMin.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungHeizMin;
 			numModulDeckeSpreizungHeizMax.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungHeizMax;
 			numModulDeckeSpreizungKuehlMin.Value = (decimal)ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin;
@@ -246,6 +257,8 @@ namespace Europlan.Common {
 			rbHithermPlus.Checked = HithermProduct.ConfigUsePlus;
 			numHithermPressurePa.Value = HithermProduct.ConfigMaxPressureLost;
 			numHithermDurchfluss.Value = HithermProduct.ConfigMaxDurchfluss;
+			numHithermLeistungsfaktorHeat.Value = (decimal)HithermProduct.ConfigLeistungsFaktorHeizen;
+			numHithermLeistungsfaktorCool.Value = (decimal)HithermProduct.ConfigLeistungsFaktorKuehlen;
 		}
 
 		private void InitializeHithermCompactValues() {
@@ -254,6 +267,8 @@ namespace Europlan.Common {
 			rbHithermCompactPlus.Checked = HithermCompactProduct.ConfigUsePlus;
 			numHithermCompactPressurePa.Value = HithermCompactProduct.ConfigMaxPressureLost;
 			numHithermCompactDurchfluss.Value = HithermCompactProduct.ConfigMaxDurchfluss;
+			numHithermCompactLeistungsfaktorHeat.Value = (decimal)HithermCompactProduct.ConfigLeistungsFaktorHeizen;
+			numHithermCompactLeistungsfaktorCool.Value = (decimal)HithermCompactProduct.ConfigLeistungsFaktorKuehlen;
 		}
 
 		private void InitializeGeneralValues() {
@@ -473,8 +488,15 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void numLeistungsfaktor_ValueChanged(object sender, EventArgs e) {
-			ModulKlimaDeckeProduct.ConfigLeistungsFaktor = (double)numModulDeckeLeistungsfaktor.Value;
+		private void numModulDeckeLeistungsfaktorHeat_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigLeistungsFaktorHeizen = (double)numModulDeckeLeistungsfaktorHeat.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numModulDeckeLeistungsfaktorCool_ValueChanged(object sender, EventArgs e) {
+			ModulKlimaDeckeProduct.ConfigLeistungsFaktorKuehlen = (double)numModulDeckeLeistungsfaktorCool.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -536,7 +558,6 @@ namespace Europlan.Common {
 			}
 		}
 
-
 		private void rbHitherm_CheckedChanged(object sender, EventArgs e) {
 			if (rbHitherm.Checked != rbHithermPlus.Checked) {
 				bool canceled = false;
@@ -576,7 +597,6 @@ namespace Europlan.Common {
 				}
 			}
 		}
-
 
 		private void numHithermRegisterArea_ValueChanged(object sender, EventArgs e) {
 			HithermProduct.ConfigMaxRegisterArea = (double)numHithermRegisterArea.Value;
@@ -618,6 +638,19 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void numHithermLeistungsfaktorHeat_ValueChanged(object sender, EventArgs e) {
+			HithermProduct.ConfigLeistungsFaktorHeizen = (double)numHithermLeistungsfaktorHeat.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numHithermLeistungsfaktorCool_ValueChanged(object sender, EventArgs e) {
+			HithermProduct.ConfigLeistungsFaktorKuehlen = (double)numHithermLeistungsfaktorCool.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
 
 		private void numHithermCompactRegisterArea_ValueChanged(object sender, EventArgs e) {
 			HithermCompactProduct.ConfigMaxRegisterArea = (double)numHithermCompactRegisterArea.Value;
@@ -644,6 +677,20 @@ namespace Europlan.Common {
 
 		private void numHithermCompactDurchfluss_ValueChanged(object sender, EventArgs e) {
 			HithermCompactProduct.ConfigMaxDurchfluss = (int)numHithermCompactDurchfluss.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numHithermCompactLeistungsfaktorHeat_ValueChanged(object sender, EventArgs e) {
+			HithermCompactProduct.ConfigLeistungsFaktorHeizen = (double)numHithermCompactLeistungsfaktorHeat.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numHithermCompactLeistungsfaktorCool_ValueChanged(object sender, EventArgs e) {
+			HithermCompactProduct.ConfigLeistungsFaktorKuehlen = (double)numHithermCompactLeistungsfaktorCool.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
