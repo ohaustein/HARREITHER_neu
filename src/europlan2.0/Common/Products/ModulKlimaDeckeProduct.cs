@@ -74,7 +74,8 @@ namespace Europlan.Common {
 		private static double rLambdaDach = 0.0; /* Deckenschicht; durch echte Konstruktion ersetzen! */
 		private static double atmt = 1.06; /* Fixwert laut Norm */
 		private static double b = 6.5; /* Fixwert laut Norm */
-		private static double leistungsFaktor = 0.77;
+		private static double leistungsFaktorHeizen = 0.77;
+		private static double leistungsFaktorKuehlen = 0.77;
 
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
@@ -138,7 +139,8 @@ namespace Europlan.Common {
 			spreizungKuehlMin = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMin", 2);
 			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMax", 5);
 			construction = userConfig.GetProductParameterAsEnum<ModulKlimaDeckeProduct, ModulCeilingConstructionEnum>("ConfigModulCeilingConstruction", ModulCeilingConstructionEnum.C_PROFIL);
-			leistungsFaktor = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktor", 0.77);
+			leistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.77);
+			leistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.77);
 		}
 
 		public static string GlobalNotificationMessage {
@@ -146,14 +148,24 @@ namespace Europlan.Common {
 				string message = null;
 				Configuration userConfig = Configuration.UserTemplate;
 
-				double defaultLeistungsFaktor = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktor", 0.77);
-				if (leistungsFaktor != defaultLeistungsFaktor) {
+				double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.77);
+				if (leistungsFaktorHeizen != defaultLeistungsFaktorHeizen) {
 					if (message == null) {
 						message = "";
 					} else {
 						message += "\n";
 					}
-					message += "  Leistungsfaktor: " + Math.Round(leistungsFaktor, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktor, 3).ToString() + ")";
+					message += "  Leistungsfaktor Heizen: " + Math.Round(leistungsFaktorHeizen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorHeizen, 3).ToString() + ")";
+				}
+
+				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.77);
+				if (leistungsFaktorKuehlen != defaultLeistungsFaktorKuehlen) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  Leistungsfaktor Kühlen: " + Math.Round(leistungsFaktorKuehlen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorKuehlen, 3).ToString() + ")";
 				}
 
 				if (message != null) {
@@ -258,9 +270,15 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static double ConfigLeistungsFaktor {
-			get { return leistungsFaktor; }
-			set { leistungsFaktor = value; }
+		public static double ConfigLeistungsFaktorHeizen {
+			get { return leistungsFaktorHeizen; }
+			set { leistungsFaktorHeizen = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLeistungsFaktorKuehlen {
+			get { return leistungsFaktorKuehlen; }
+			set { leistungsFaktorKuehlen = value; }
 		}
 
 		[ProductParameter]

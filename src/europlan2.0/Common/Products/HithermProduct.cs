@@ -27,7 +27,7 @@ namespace Europlan.Common {
 
 		private static double spreizungHeizMin = 4;
 		private static double spreizungHeizMax = 12;
-		private static double spreizungKühlMin = 2;
+		private static double spreizungKuehlMin = 2;
 		private static double spreizungKühlMax = 5;
 
 		private static double maxRegisterArea = 10.0;
@@ -164,6 +164,9 @@ namespace Europlan.Common {
 
 		private static bool usePlus = false;
 
+		private static double leistungsFaktorKuehlen = 1.0;
+		private static double leistungsFaktorHeizen = 1.0;
+
 		/*private static double factorSpezialputz = 1.15;
 		private static double factorMaschinenputz = 1.0;
 		private static double factorLehmputz = 0.95;
@@ -201,11 +204,40 @@ namespace Europlan.Common {
 			maxPressureLost = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigMaxPressureLost", 15000);
 			maxDurchfluss = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigMaxDurchfluss", 240);
 			maxRegisterArea = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigMaxRegisterArea", 10.0);
+			leistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorHeizen", 1.0);
+			leistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorKuehlen", 1.0);
 		}
 
 		public static string GlobalNotificationMessage {
 			get {
-				return null;
+				string message = null;
+				Configuration userConfig = Configuration.UserTemplate;
+
+				double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.77);
+				if (leistungsFaktorHeizen != defaultLeistungsFaktorHeizen) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  Leistungsfaktor Heizen: " + Math.Round(leistungsFaktorHeizen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorHeizen, 3).ToString() + ")";
+				}
+
+				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.77);
+				if (leistungsFaktorKuehlen != defaultLeistungsFaktorKuehlen) {
+					if (message == null) {
+						message = "";
+					} else {
+						message += "\n";
+					}
+					message += "  Leistungsfaktor Kühlen: " + Math.Round(leistungsFaktorKuehlen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorKuehlen, 3).ToString() + ")";
+				}
+
+				if (message != null) {
+					message = "Hitherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" + message;
+				}
+
+				return message;
 			}
 		}
 
@@ -430,9 +462,9 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static double ConfigSpreizungKühlMin {
-			get { return spreizungKühlMin; }
-			set { spreizungKühlMin = value; }
+		public static double ConfigSpreizungKuehlMin {
+			get { return spreizungKuehlMin; }
+			set { spreizungKuehlMin = value; }
 		}
 
 		[ProductParameter]
@@ -610,6 +642,18 @@ namespace Europlan.Common {
 			get { return druckverlustHIT_250_10; }
 			set { druckverlustHIT_250_10 = value; }
 		}
+
+		[ProductParameter]
+		public static double ConfigLeistungsFaktorKuehlen {
+			get { return leistungsFaktorKuehlen; }
+			set { leistungsFaktorKuehlen = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigLeistungsFaktorHeizen {
+			get { return leistungsFaktorHeizen; }
+			set { leistungsFaktorHeizen = value; }
+		}
 		#endregion Product Parameters
 
 		public override int GetDefaultQuickDimensioningCircuits() {
@@ -654,8 +698,8 @@ namespace Europlan.Common {
 			if (spreizungCool > HithermProduct.ConfigSpreizungKühlMax) {
 				spreizungCool = HithermProduct.ConfigSpreizungKühlMax;
 			}
-			if (spreizungCool < HithermProduct.ConfigSpreizungKühlMin) {
-				spreizungCool = HithermProduct.ConfigSpreizungKühlMin;
+			if (spreizungCool < HithermProduct.ConfigSpreizungKuehlMin) {
+				spreizungCool = HithermProduct.ConfigSpreizungKuehlMin;
 			}
 			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
 			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
@@ -736,7 +780,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > HithermProduct.ConfigSpreizungKühlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < HithermProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < HithermProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > HithermProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < HithermProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < HithermProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (HithermCircuit c in this.circuits) {
 						c.Calculate();
