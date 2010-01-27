@@ -292,7 +292,7 @@ namespace Europlan.Common {
 				}
 				foreach (string parameterName in first.productConfiguration[typeName].Keys) {
 					if (!config.productConfiguration[typeName].ContainsKey(parameterName)) {
-						config.productConfiguration[typeName][parameterName] = config1.productConfiguration[typeName][parameterName];
+						config.productConfiguration[typeName][parameterName] = first.productConfiguration[typeName][parameterName];
 					}
 				}
 			}
