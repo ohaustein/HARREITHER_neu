@@ -231,13 +231,13 @@ namespace Europlan.Common {
 			set { alpha0 = value; }
 		}
 
-		public static double ConfigAlphaDk {
-			get { return Product.ConfigAlphaBoden; }
-		}
+		//public static double ConfigAlphaDk {
+		//    get { return Product.ConfigAlphaBoden; }
+		//}
 
-		public static double ConfigAlphaDh {
-			get { return Product.ConfigAlphaDecke; }
-		}
+		//public static double ConfigAlphaDh {
+		//    get { return Product.ConfigAlphaDecke; }
+		//}
 
 		[ProductParameter]
 		public static double ConfigLambdaU0 {

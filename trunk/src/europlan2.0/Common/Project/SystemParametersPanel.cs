@@ -272,9 +272,12 @@ namespace Europlan.Common {
 		}
 
 		private void InitializeGeneralValues() {
-			numGeneralAlphaBoden.Value = (decimal)Product.ConfigAlphaBoden;
-			numGeneralAlphaDecke.Value = (decimal)Product.ConfigAlphaDecke;
-			numGeneralAlphaWand.Value = (decimal)Product.ConfigAlphaWand;
+			numGeneralAlphaBodenHeat.Value = (decimal)Product.ConfigAlphaBodenHeat;
+			numGeneralAlphaDeckeHeat.Value = (decimal)Product.ConfigAlphaDeckeHeat;
+			numGeneralAlphaWandHeat.Value = (decimal)Product.ConfigAlphaWandHeat;
+			numGeneralAlphaBodenCool.Value = (decimal)Product.ConfigAlphaBodenCool;
+			numGeneralAlphaDeckeCool.Value = (decimal)Product.ConfigAlphaDeckeCool;
+			numGeneralAlphaWandCool.Value = (decimal)Product.ConfigAlphaWandCool;
 		}
 
 		private void rbEurovalHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
@@ -785,6 +788,48 @@ namespace Europlan.Common {
 
 		private void numEcothermEstrichueberdeckung_ValueChanged(object sender, EventArgs e) {
 			EcothermProduct.ConfigSu = (double)numEcothermEstrichueberdeckung.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numGeneralAlphaBodenHeat_ValueChanged(object sender, EventArgs e) {
+			Product.ConfigAlphaBodenHeat = (double)numGeneralAlphaBodenHeat.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numGeneralAlphaDeckeHeat_ValueChanged(object sender, EventArgs e) {
+			Product.ConfigAlphaDeckeHeat = (double)numGeneralAlphaDeckeHeat.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numGeneralAlphaWandHeat_ValueChanged(object sender, EventArgs e) {
+			Product.ConfigAlphaWandHeat = (double)numGeneralAlphaWandHeat.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numGeneralAlphaBodenCool_ValueChanged(object sender, EventArgs e) {
+			Product.ConfigAlphaBodenCool = (double)numGeneralAlphaBodenCool.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numGeneralAlphaDeckeCool_ValueChanged(object sender, EventArgs e) {
+			Product.ConfigAlphaDeckeCool = (double)numGeneralAlphaDeckeCool.Value;
+			if (ProjectChanged != null) {
+				ProjectChanged(null);
+			}
+		}
+
+		private void numGeneralAlphaWandCool_ValueChanged(object sender, EventArgs e) {
+			Product.ConfigAlphaWandCool = (double)numGeneralAlphaWandCool.Value;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}

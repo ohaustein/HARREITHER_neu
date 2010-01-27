@@ -144,11 +144,11 @@ namespace Europlan.Common {
 		}
 
 		public static double ConfigAlphaFbk {
-			get { return Product.ConfigAlphaDecke; }
+			get { return Product.ConfigAlphaBodenCool; }
 		}
 
 		public static double ConfigAlphaFbh {
-			get { return Product.ConfigAlphaBoden; }
+			get { return Product.ConfigAlphaBodenHeat; }
 		}
 
 		[ProductParameter]

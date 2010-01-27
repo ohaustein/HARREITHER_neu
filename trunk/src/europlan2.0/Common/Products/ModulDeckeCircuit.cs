@@ -176,20 +176,28 @@ namespace Europlan.Common {
 
 			double alphaInnenHeat = 8;
 			double alphaAussenHeat = 8;
+			double alphaInnenCool = 8;
+			double alphaAussenCool = 8;
 			switch (this.ModulKlimaDeckeProduct.ModulType) {
 				case Product.ProductType.FBH:
-					alphaInnenHeat = ModulKlimaDeckeProduct.ConfigAlphaBoden;
-					alphaAussenHeat = ModulKlimaDeckeProduct.ConfigAlphaDecke;
+					alphaInnenHeat = Product.ConfigAlphaBodenHeat;
+					alphaAussenHeat = Product.ConfigAlphaBodenCool;
+					alphaInnenCool = Product.ConfigAlphaBodenCool;
+					alphaAussenCool = Product.ConfigAlphaBodenHeat;
 					break;
 
 				case Product.ProductType.DH:
-					alphaInnenHeat = ModulKlimaDeckeProduct.ConfigAlphaDecke;
-					alphaAussenHeat = ModulKlimaDeckeProduct.ConfigAlphaBoden;
+					alphaInnenHeat = Product.ConfigAlphaDeckeHeat;
+					alphaAussenHeat = Product.ConfigAlphaDeckeCool;
+					alphaInnenCool = Product.ConfigAlphaDeckeCool;
+					alphaAussenCool = Product.ConfigAlphaDeckeHeat;
 					break;
 
 				default:
-					alphaInnenHeat = ModulKlimaDeckeProduct.ConfigAlphaWand;
-					alphaAussenHeat = ModulKlimaDeckeProduct.ConfigAlphaWand;
+					alphaInnenHeat = Product.ConfigAlphaWandHeat;
+					alphaAussenHeat = Product.ConfigAlphaWandCool;
+					alphaInnenCool = Product.ConfigAlphaWandCool;
+					alphaAussenCool = Product.ConfigAlphaWandHeat;
 					break;
 			}
 
@@ -207,7 +215,7 @@ namespace Europlan.Common {
 			double rLambdaDecke = ModulKlimaDeckeProduct.ConfigRLambdaDecke;
 			double rLambdaDach = ModulKlimaDeckeProduct.ConfigRLambdaDach;
 			double rAlphaDeckeDh = 1 / alphaAussenHeat; /* Wärmeübergang Decke bei Heizung */
-			double rAlphaDeckeDk = 1 / alphaInnenHeat; /* Wärmeübergang Decke bei Kühlung */
+			double rAlphaDeckeDk = 1 / alphaAussenCool; /* Wärmeübergang Decke bei Kühlung */
 
 			double leistungsFaktor = ModulKlimaDeckeProduct.ConfigLeistungsFaktorHeizen;
 
@@ -302,11 +310,11 @@ namespace Europlan.Common {
 
 					double dTheta = en1264.Heizmitteluebertemperatur(this.c_thetaVCool, this.c_thetaRCool, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomCoolTemperature);
 
-					double au = en1264.auFlaeche(alpha0, alphaAussenHeat, su0, lambdaU0, su, lambdaE);
+					double au = en1264.auFlaeche(alpha0, alphaInnenCool, su0, lambdaU0, su, lambdaE);
 					double ab = en1264.abFlaeche(b, au, atmt, rLambdaB);
 					this.c_qCoolPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta) * leistungsFaktor;
 
-					double qU = en1264.WaermeverlustAussen(alphaAussenHeat, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qCoolPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
+					double qU = en1264.WaermeverlustAussen(alphaInnenCool, rLambdaB, su, lambdaU, rAlphaDeckeDk, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qCoolPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
 
 					// hydraulische Berechnung
 					this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.ModulArea;            // gesamte aufgenommene Leistung berechnen
