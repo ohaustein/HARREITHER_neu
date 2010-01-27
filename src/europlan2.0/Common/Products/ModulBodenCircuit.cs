@@ -350,5 +350,17 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		public int DichteModule {
+			get { return 0; }
+		}
+
+		public int ModulierendeModule {
+			get { return 0; }
+		}
+
+		public int SonstigeModule {
+			get { return 0; }
+		}
 	}
 }

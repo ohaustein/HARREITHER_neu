@@ -755,6 +755,9 @@ namespace Europlan.Common {
 				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.MODULES_DICHT);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
 
@@ -765,6 +768,9 @@ namespace Europlan.Common {
 				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.MODULES_MODULIEREND);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
 
@@ -775,6 +781,9 @@ namespace Europlan.Common {
 				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.MODULES_SONTIGE);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
 
@@ -785,6 +794,9 @@ namespace Europlan.Common {
 				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.MODULES_VERBINDELEITUNG);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
 
@@ -795,6 +807,9 @@ namespace Europlan.Common {
 				mbProduct.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.CIRCUITS);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
 
