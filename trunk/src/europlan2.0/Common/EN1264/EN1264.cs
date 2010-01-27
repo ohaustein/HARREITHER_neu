@@ -202,81 +202,333 @@ namespace Europlan.Common {
 		}
 
 		public double WaermestromDichteRegister(double heizmittelTemperatur, double raumTemperatur, double[][] standardTabelle, double faktor, bool compact) {
-			double[] x;
+			double q;
 			if (compact) {
-				x = new double[] { 32.5, 35.0, 37.5, 40.0, 42.5, 45.0 };
+				double[] y = new double[5];
+				double x0;
+				double x1;
+				int x0i;
+				int x1i;
+				if (heizmittelTemperatur < 32.5) {
+					x0 = raumTemperatur;
+					x1 = 32.5;
+					x0i = -1;
+					x1i = 0;
+				} else if (heizmittelTemperatur < 35.0) {
+					x0 = 32.5;
+					x1 = 35.0;
+					x0i = 0;
+					x1i = 1;
+				} else if (heizmittelTemperatur < 37.5) {
+					x0 = 35.0;
+					x1 = 37.5;
+					x0i = 1;
+					x1i = 2;
+				} else if (heizmittelTemperatur < 40.0) {
+					x0 = 37.5;
+					x1 = 40.0;
+					x0i = 2;
+					x1i = 3;
+				} else if (heizmittelTemperatur < 42.5) {
+					x0 = 40.0;
+					x1 = 42.5;
+					x0i = 3;
+					x1i = 4;
+				} else if (heizmittelTemperatur < 45.0) {
+					x0 = 42.5;
+					x1 = 45.0;
+					x0i = 4;
+					x1i = 5;
+				} else {
+					x0 = raumTemperatur;
+					x1 = 45.0;
+					x0i = -1;
+					x1i = 5;
+				}
+				double y0;
+				double y1;
+				double x = heizmittelTemperatur;
+				for (int i = 0; i < 5; i++) {
+					y0 = x0i < 0 ? 0 : standardTabelle[i][x0i];
+					y1 = standardTabelle[i][x1i];
+					y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
+				if (raumTemperatur < 15.0) {
+					x0 = 15;
+					x1 = heizmittelTemperatur;
+					x0i = 0;
+					x1i = -1;
+				} else if (raumTemperatur < 18.0) {
+					x0 = 15;
+					x1 = 18;
+					x0i = 0;
+					x1i = 1;
+				} else if (raumTemperatur < 20.0) {
+					x0 = 18;
+					x1 = 20;
+					x0i = 1;
+					x1i = 2;
+				} else if (raumTemperatur < 22.0) {
+					x0 = 20;
+					x1 = 22;
+					x0i = 2;
+					x1i = 3;
+				} else if (raumTemperatur < 24.0) {
+					x0 = 22;
+					x1 = 24;
+					x0i = 3;
+					x1i = 4;
+				} else {
+					x0 = 24;
+					x1 = heizmittelTemperatur;
+					x0i = 4;
+					x1i = -1;
+				}
+				y0 = x0i < 0 ? 0 : y[x0i];
+				y1 = y[x1i];
+				x = raumTemperatur;
+				q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
 			} else {
-				x = new double[] { 30.0, 32.5, 35.0, 37.5, 40.0, 42.5, 45.0, 47.5, 50.0 };
+				double[] y = new double[5];
+				double x0;
+				double x1;
+				int x0i;
+				int x1i;
+				if (heizmittelTemperatur < 30.0) {
+					x0 = raumTemperatur;
+					x1 = 30.0;
+					x0i = -1;
+					x1i = 0;
+				} else if (heizmittelTemperatur < 32.5) {
+					x0 = 30.0;
+					x1 = 32.5;
+					x0i = 0;
+					x1i = 1;
+				} else if (heizmittelTemperatur < 35.0) {
+					x0 = 32.5;
+					x1 = 35.0;
+					x0i = 1;
+					x1i = 2;
+				} else if (heizmittelTemperatur < 37.5) {
+					x0 = 35.0;
+					x1 = 37.5;
+					x0i = 2;
+					x1i = 3;
+				} else if (heizmittelTemperatur < 40.0) {
+					x0 = 37.5;
+					x1 = 40.0;
+					x0i = 3;
+					x1i = 4;
+				} else if (heizmittelTemperatur < 42.5) {
+					x0 = 40.0;
+					x1 = 42.5;
+					x0i = 4;
+					x1i = 5;
+				} else if (heizmittelTemperatur < 45.0) {
+					x0 = 42.5;
+					x1 = 45.0;
+					x0i = 5;
+					x1i = 6;
+				} else if (heizmittelTemperatur < 47.5) {
+					x0 = 45.0;
+					x1 = 47.5;
+					x0i = 6;
+					x1i = 7;
+				} else if (heizmittelTemperatur < 50.0) {
+					x0 = 47.5;
+					x1 = 50.0;
+					x0i = 7;
+					x1i = 8;
+				} else {
+					x0 = raumTemperatur;
+					x1 = 50.0;
+					x0i = -1;
+					x1i = 8;
+				}
+				double y0;
+				double y1;
+				double x = heizmittelTemperatur;
+				for (int i = 0; i < 5; i++) {
+					y0 = x0i < 0 ? 0 : standardTabelle[i][x0i];
+					y1 = x1i < 0 ? 0 : standardTabelle[i][x1i];
+					y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
+				if (raumTemperatur < 15.0) {
+					x0 = 15;
+					x1 = heizmittelTemperatur;
+					x0i = 0;
+					x1i = -1;
+				} else if (raumTemperatur < 18.0) {
+					x0 = 15;
+					x1 = 18;
+					x0i = 0;
+					x1i = 1;
+				} else if (raumTemperatur < 20.0) {
+					x0 = 18;
+					x1 = 20;
+					x0i = 1;
+					x1i = 2;
+				} else if (raumTemperatur < 22.0) {
+					x0 = 20;
+					x1 = 22;
+					x0i = 2;
+					x1i = 3;
+				} else if (raumTemperatur < 24.0) {
+					x0 = 22;
+					x1 = 24;
+					x0i = 3;
+					x1i = 4;
+				} else {
+					x0 = 24;
+					x1 = heizmittelTemperatur;
+					x0i = 4;
+					x1i = -1;
+				}
+				y0 = x0i < 0 ? 0 : y[x0i];
+				y1 = x1i < 0 ? 0 : y[x1i];
+				x = raumTemperatur;
+				q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
 			}
-
-			int l = standardTabelle.Length;
-
-			double[] c = null;
-			double[] y = new double[l];
-
-			for (int i = 0; i < l; i++) {
-				spline3.buildcubicspline(x, standardTabelle[i], x.Length, 0, 0, 0, 0, ref c);
-				y[i] = spline3.splineinterpolation(ref c, heizmittelTemperatur);
-			}
-
-			double[] x2 = { 15, 18, 20, 22, 24 };
-			spline3.buildcubicspline(x2, y, 5, 0, 0, 0, 0, ref c);
-			return spline3.splineinterpolation(ref c, raumTemperatur) * faktor;
+			return q < 0 ? 0 : q;
 		}
 
 		public double KaeltestromDichteRegister(double kuehlmittelTemperatur, double raumTemperatur, double[] standardTabelle, double faktor) {
-			/*double[] x = { 16.0, 18.0, 20.0, 22.0 };
-
-			int l = standardTabelle.Length;
-
-			double[] c = null;
-			double[] y = new double[l];
-
-			for (int i = 0; i < l; i++) {
-				spline3.buildcubicspline(x, standardTabelle[i], 4, 0, 0, 0, 0, ref c);
-				y[i] = spline3.splineinterpolation(ref c, kuehlmittelTemperatur);
-			}
-
-			double[] x2 = { 18, 20, 22, 25 };
-			spline3.buildcubicspline(x2, y, 4, 0, 0, 0, 0, ref c);
-			return spline3.splineinterpolation(ref c, raumTemperatur) * faktor;*/
-
 			if (kuehlmittelTemperatur >= raumTemperatur) {
 				return 0;
 			}
-			double[] x = { 0.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 9, 0 };
-			double[] c = null;
-			spline3.buildcubicspline(x, standardTabelle, 8, 0, 0, 0, 0, ref c);
-			double rtn = spline3.splineinterpolation(ref c, raumTemperatur - kuehlmittelTemperatur);
-			if (rtn < 0) {
-				rtn = 0;
+
+			double d = raumTemperatur - kuehlmittelTemperatur;
+
+			double x0;
+			double x1;
+			int x0i;
+			int x1i;
+			if (d < 2.0) {
+				x0 = 0.0;
+				x1 = 2.0;
+				x0i = 0;
+				x1i = 1;
+			} else if (d < 3.0) {
+				x0 = 2.0;
+				x1 = 3.0;
+				x0i = 1;
+				x1i = 2;
+			} else if (d < 4.0) {
+				x0 = 3.0;
+				x1 = 4.0;
+				x0i = 2;
+				x1i = 3;
+			} else if (d < 5.0) {
+				x0 = 4.0;
+				x1 = 5.0;
+				x0i = 3;
+				x1i = 4;
+			} else if (d < 6.0) {
+				x0 = 5.0;
+				x1 = 6.0;
+				x0i = 4;
+				x1i = 5;
+			} else if (d < 7.0) {
+				x0 = 6.0;
+				x1 = 7.0;
+				x0i = 5;
+				x1i = 6;
+			} else if (d < 9.0) {
+				x0 = 7.0;
+				x1 = 9.0;
+				x0i = 6;
+				x1i = 7;
+			} else {
+				x0 = 0.0;
+				x1 = 9.0;
+				x0i = 0;
+				x1i = 7;
 			}
-			return -rtn;
+			double y0 = x0i < 0 ? 0 : standardTabelle[x0i];
+			double y1 = x1i < 0 ? 0 : standardTabelle[x1i];
+			double x = d;
+			double q = y0 + (y1 - y0) / (x1 - x0) * (d - x0);
+
+			if (q < 0) {
+				q = 0;
+			}
+
+			return -q;
 		}
 
 		public double KaeltestromDichteRegister(double kuehlmittelTemperatur, double raumTemperatur, double[][] standardTabelle, double faktor) {
-			if (kuehlmittelTemperatur >= raumTemperatur) {
-				return 0;
-			}
-
-			double[] x = { 16.0, 18.0, 20.0, 22.0 };
-			
-			double[] c = null;
+			double q;
 			double[] y = new double[4];
-
+			double x0;
+			double x1;
+			int x0i;
+			int x1i;
+			if (kuehlmittelTemperatur < 16.0) {
+				x0 = 16.0;
+				x1 = raumTemperatur;
+				x0i = 0;
+				x1i = -1;
+			} else if (kuehlmittelTemperatur < 18.0) {
+				x0 = 16.0;
+				x1 = 18.0;
+				x0i = 0;
+				x1i = 1;
+			} else if (kuehlmittelTemperatur < 20.0) {
+				x0 = 18.0;
+				x1 = 20.0;
+				x0i = 1;
+				x1i = 2;
+			} else if (kuehlmittelTemperatur < 22.0) {
+				x0 = 20.0;
+				x1 = 22.0;
+				x0i = 2;
+				x1i = 3;
+			} else {
+				x0 = 22.0;
+				x1 = raumTemperatur;
+				x0i = 3;
+				x1i = -1;
+			}
+			double y0;
+			double y1;
+			double x = kuehlmittelTemperatur;
 			for (int i = 0; i < 4; i++) {
-				spline3.buildcubicspline(x, standardTabelle[i], standardTabelle[i].Length, 0, 0, 0, 0, ref c);
-				y[i] = spline3.splineinterpolation(ref c, kuehlmittelTemperatur);
+				y0 = x0i < 0 ? 0 : standardTabelle[i][x0i];
+				y1 = x1i < 0 ? 0 : standardTabelle[i][x1i];
+				y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
 			}
-
-			double[] x2 = { 18, 20, 22, 25 };
-			spline3.buildcubicspline(x2, y, 4, 0, 0, 0, 0, ref c);
-			double rtn = spline3.splineinterpolation(ref c, raumTemperatur) * faktor;
-			if (rtn < 0) {
-				rtn = 0;
+			if (raumTemperatur < 18.0) {
+				x0 = kuehlmittelTemperatur;
+				x1 = 18;
+				x0i = -1;
+				x1i = 0;
+			} else if (raumTemperatur < 20.0) {
+				x0 = 18;
+				x1 = 20;
+				x0i = 0;
+				x1i = 1;
+			} else if (raumTemperatur < 22.0) {
+				x0 = 20;
+				x1 = 22;
+				x0i = 1;
+				x1i = 2;
+			} else if (raumTemperatur < 25.0) {
+				x0 = 22;
+				x1 = 25;
+				x0i = 2;
+				x1i = 3;
+			} else {
+				x0 = kuehlmittelTemperatur;
+				x1 = 25;
+				x0i = -1;
+				x1i = 3;
 			}
+			y0 = x0i < 0 ? 0 : y[x0i];
+			y1 = y[x1i];
+			x = raumTemperatur;
+			q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+			return q < 0 ? 0 : q;
 
-			return -rtn;
 		}
 
 		public double HithermBeplankungsFaktor(double[] rWerte, double[] faktoren, double rWert) {
@@ -625,10 +877,6 @@ namespace Europlan.Common {
 		}
 
 		public double DefaultSpreizung(double vorlaufTemperatur) {
-			double[] x = { 30.0, 32.5, 35.0, 38.0, 41.0, 44.0, 46.5, 50.0, 52.5, 55.0};
-			double[] y = {  5.0,  5.0,  5.0,  6.0,  7.0,  8.0,  8.0, 10.0, 10.0, 10.0};
-			double[] c = null;
-			spline3.buildcubicspline(x, y, 10, 0, 0, 0, 0, ref c);
 			if (vorlaufTemperatur < 35.0) {
 				return 5.0;
 			} else if (vorlaufTemperatur > 35.0 && vorlaufTemperatur <= 38.0) {
@@ -641,10 +889,8 @@ namespace Europlan.Common {
 				return 8.0;
 			} else if (vorlaufTemperatur > 46.5 && vorlaufTemperatur <= 50) {
 				return 8 * (vorlaufTemperatur - 50.0) / (46.5 - 50.0) + 10.0 * (vorlaufTemperatur - 46.5) / (50.0 - 46.5);
-			} else if (vorlaufTemperatur > 50.0) {
+			} else /*if (vorlaufTemperatur > 50.0)*/ {
 				return 10.0;
-			} else {
-				return spline3.splineinterpolation(ref c, vorlaufTemperatur);
 			}
 		}
 	}
