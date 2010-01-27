@@ -877,19 +877,19 @@ namespace Europlan.Common {
 		}
 
 		public double DefaultSpreizung(double vorlaufTemperatur) {
-			if (vorlaufTemperatur < 35.0) {
+			if (vorlaufTemperatur <= 35.0) {
 				return 5.0;
-			} else if (vorlaufTemperatur > 35.0 && vorlaufTemperatur <= 38.0) {
+			} else if (vorlaufTemperatur <= 38.0) {
 				return 5.0 * (vorlaufTemperatur - 38.0) / (35.0 - 38.0) + 6.0 * (vorlaufTemperatur - 35.0) / (38.0 - 35.0);
-			} else if (vorlaufTemperatur > 38.0 && vorlaufTemperatur <= 41.0) {
+			} else if (vorlaufTemperatur <= 41.0) {
 				return 6.0 * (vorlaufTemperatur - 41.0) / (38.0 - 41.0) + 7.0 * (vorlaufTemperatur - 38.0) / (41.0 - 38.0);
-			} else if (vorlaufTemperatur > 41.0 && vorlaufTemperatur <= 44.0) {
+			} else if (vorlaufTemperatur <= 44.0) {
 				return 7.0 * (vorlaufTemperatur - 44.0) / (41.0 - 44.0) + 8.0 * (vorlaufTemperatur - 41.0) / (44.0 - 41.0);
-			} else if (vorlaufTemperatur > 44.0 && vorlaufTemperatur <= 46.5) {
+			} else if (vorlaufTemperatur <= 46.5) {
 				return 8.0;
-			} else if (vorlaufTemperatur > 46.5 && vorlaufTemperatur <= 50) {
+			} else if (vorlaufTemperatur <= 50) {
 				return 8 * (vorlaufTemperatur - 50.0) / (46.5 - 50.0) + 10.0 * (vorlaufTemperatur - 46.5) / (50.0 - 46.5);
-			} else /*if (vorlaufTemperatur > 50.0)*/ {
+			} else {
 				return 10.0;
 			}
 		}
