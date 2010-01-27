@@ -234,9 +234,9 @@ namespace Europlan.Common {
 			this.lblGeneralAlphaDeckeUnit = new System.Windows.Forms.Label();
 			this.lblGeneralAlphaWandUnit = new System.Windows.Forms.Label();
 			this.lblGeneralAlphaBodenUnit = new System.Windows.Forms.Label();
-			this.numGeneralAlphaWand = new Europlan.Common.NumericBox();
-			this.numGeneralAlphaDecke = new Europlan.Common.NumericBox();
-			this.numGeneralAlphaBoden = new Europlan.Common.NumericBox();
+			this.numGeneralAlphaWandHeat = new Europlan.Common.NumericBox();
+			this.numGeneralAlphaDeckeHeat = new Europlan.Common.NumericBox();
+			this.numGeneralAlphaBodenHeat = new Europlan.Common.NumericBox();
 			this.btnGeneralStandard = new System.Windows.Forms.Button();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.button1 = new System.Windows.Forms.Button();
@@ -362,6 +362,17 @@ namespace Europlan.Common {
 			this.numericBox36 = new Europlan.Common.NumericBox();
 			this.numericBox37 = new Europlan.Common.NumericBox();
 			this.numericBox38 = new Europlan.Common.NumericBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label9 = new System.Windows.Forms.Label();
+			this.numGeneralAlphaBodenCool = new Europlan.Common.NumericBox();
+			this.numGeneralAlphaDeckeCool = new Europlan.Common.NumericBox();
+			this.numGeneralAlphaWandCool = new Europlan.Common.NumericBox();
 			this.tabSystemParameters.SuspendLayout();
 			this.tabEuroval.SuspendLayout();
 			this.layoutEuroval.SuspendLayout();
@@ -4187,32 +4198,46 @@ namespace Europlan.Common {
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaBoden, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaWand, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaDecke, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaDeckeUnit, 3, 1);
-			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaWandUnit, 3, 2);
-			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaBodenUnit, 3, 0);
-			this.tableLayoutPanel1.Controls.Add(this.numGeneralAlphaWand, 2, 2);
-			this.tableLayoutPanel1.Controls.Add(this.numGeneralAlphaDecke, 2, 1);
-			this.tableLayoutPanel1.Controls.Add(this.numGeneralAlphaBoden, 2, 0);
-			this.tableLayoutPanel1.Controls.Add(this.btnGeneralStandard, 5, 4);
+			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaWand, 0, 3);
+			this.tableLayoutPanel1.Controls.Add(this.numGeneralAlphaWandHeat, 2, 3);
+			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaDecke, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaBoden, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.numGeneralAlphaDeckeHeat, 2, 2);
+			this.tableLayoutPanel1.Controls.Add(this.numGeneralAlphaBodenHeat, 2, 1);
+			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaWandUnit, 3, 3);
+			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaDeckeUnit, 3, 2);
+			this.tableLayoutPanel1.Controls.Add(this.lblGeneralAlphaBodenUnit, 3, 1);
+			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
+			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
+			this.tableLayoutPanel1.Controls.Add(this.label5, 0, 6);
+			this.tableLayoutPanel1.Controls.Add(this.btnGeneralStandard, 5, 8);
+			this.tableLayoutPanel1.Controls.Add(this.label6, 0, 7);
+			this.tableLayoutPanel1.Controls.Add(this.label7, 3, 5);
+			this.tableLayoutPanel1.Controls.Add(this.label8, 3, 6);
+			this.tableLayoutPanel1.Controls.Add(this.label9, 3, 7);
+			this.tableLayoutPanel1.Controls.Add(this.numGeneralAlphaBodenCool, 2, 5);
+			this.tableLayoutPanel1.Controls.Add(this.numGeneralAlphaDeckeCool, 2, 6);
+			this.tableLayoutPanel1.Controls.Add(this.numGeneralAlphaWandCool, 2, 7);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 5);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 5;
+			this.tableLayoutPanel1.RowCount = 9;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(450, 115);
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(450, 207);
 			this.tableLayoutPanel1.TabIndex = 28;
 			// 
 			// lblGeneralAlphaBoden
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.lblGeneralAlphaBoden, 2);
-			this.lblGeneralAlphaBoden.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lblGeneralAlphaBoden.Location = new System.Drawing.Point(3, 0);
+			this.lblGeneralAlphaBoden.Location = new System.Drawing.Point(3, 23);
 			this.lblGeneralAlphaBoden.Name = "lblGeneralAlphaBoden";
 			this.lblGeneralAlphaBoden.Size = new System.Drawing.Size(174, 23);
 			this.lblGeneralAlphaBoden.TabIndex = 1;
@@ -4222,8 +4247,7 @@ namespace Europlan.Common {
 			// lblGeneralAlphaWand
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.lblGeneralAlphaWand, 2);
-			this.lblGeneralAlphaWand.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lblGeneralAlphaWand.Location = new System.Drawing.Point(3, 46);
+			this.lblGeneralAlphaWand.Location = new System.Drawing.Point(3, 69);
 			this.lblGeneralAlphaWand.Name = "lblGeneralAlphaWand";
 			this.lblGeneralAlphaWand.Size = new System.Drawing.Size(174, 23);
 			this.lblGeneralAlphaWand.TabIndex = 3;
@@ -4233,8 +4257,7 @@ namespace Europlan.Common {
 			// lblGeneralAlphaDecke
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.lblGeneralAlphaDecke, 2);
-			this.lblGeneralAlphaDecke.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lblGeneralAlphaDecke.Location = new System.Drawing.Point(3, 23);
+			this.lblGeneralAlphaDecke.Location = new System.Drawing.Point(3, 46);
 			this.lblGeneralAlphaDecke.Name = "lblGeneralAlphaDecke";
 			this.lblGeneralAlphaDecke.Size = new System.Drawing.Size(174, 23);
 			this.lblGeneralAlphaDecke.TabIndex = 6;
@@ -4244,8 +4267,7 @@ namespace Europlan.Common {
 			// lblGeneralAlphaDeckeUnit
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.lblGeneralAlphaDeckeUnit, 2);
-			this.lblGeneralAlphaDeckeUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lblGeneralAlphaDeckeUnit.Location = new System.Drawing.Point(268, 23);
+			this.lblGeneralAlphaDeckeUnit.Location = new System.Drawing.Point(268, 46);
 			this.lblGeneralAlphaDeckeUnit.Name = "lblGeneralAlphaDeckeUnit";
 			this.lblGeneralAlphaDeckeUnit.Size = new System.Drawing.Size(59, 23);
 			this.lblGeneralAlphaDeckeUnit.TabIndex = 13;
@@ -4255,8 +4277,7 @@ namespace Europlan.Common {
 			// lblGeneralAlphaWandUnit
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.lblGeneralAlphaWandUnit, 2);
-			this.lblGeneralAlphaWandUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lblGeneralAlphaWandUnit.Location = new System.Drawing.Point(268, 46);
+			this.lblGeneralAlphaWandUnit.Location = new System.Drawing.Point(268, 69);
 			this.lblGeneralAlphaWandUnit.Name = "lblGeneralAlphaWandUnit";
 			this.lblGeneralAlphaWandUnit.Size = new System.Drawing.Size(59, 23);
 			this.lblGeneralAlphaWandUnit.TabIndex = 5;
@@ -4266,115 +4287,113 @@ namespace Europlan.Common {
 			// lblGeneralAlphaBodenUnit
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.lblGeneralAlphaBodenUnit, 2);
-			this.lblGeneralAlphaBodenUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lblGeneralAlphaBodenUnit.Location = new System.Drawing.Point(268, 0);
+			this.lblGeneralAlphaBodenUnit.Location = new System.Drawing.Point(268, 23);
 			this.lblGeneralAlphaBodenUnit.Name = "lblGeneralAlphaBodenUnit";
 			this.lblGeneralAlphaBodenUnit.Size = new System.Drawing.Size(59, 23);
 			this.lblGeneralAlphaBodenUnit.TabIndex = 8;
 			this.lblGeneralAlphaBodenUnit.Text = "W/(m²K)";
 			this.lblGeneralAlphaBodenUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// numGeneralAlphaWand
+			// numGeneralAlphaWandHeat
 			// 
-			this.numGeneralAlphaWand.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.numGeneralAlphaWand.EditType = Europlan.Common.NumericBox.NumericEditType.ALPHA;
-			this.numGeneralAlphaWand.InternalValue = new decimal(new int[] {
+			this.numGeneralAlphaWandHeat.EditType = Europlan.Common.NumericBox.NumericEditType.ALPHA;
+			this.numGeneralAlphaWandHeat.InternalValue = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numGeneralAlphaWand.Location = new System.Drawing.Point(183, 48);
-			this.numGeneralAlphaWand.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
-			this.numGeneralAlphaWand.MaxValue = new decimal(new int[] {
+			this.numGeneralAlphaWandHeat.Location = new System.Drawing.Point(183, 71);
+			this.numGeneralAlphaWandHeat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+			this.numGeneralAlphaWandHeat.MaxValue = new decimal(new int[] {
             99,
             0,
             0,
             0});
-			this.numGeneralAlphaWand.MinValue = new decimal(new int[] {
+			this.numGeneralAlphaWandHeat.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numGeneralAlphaWand.Name = "numGeneralAlphaWand";
-			this.numGeneralAlphaWand.Size = new System.Drawing.Size(79, 20);
-			this.numGeneralAlphaWand.TabIndex = 4;
-			this.numGeneralAlphaWand.Text = "0,1";
-			this.numGeneralAlphaWand.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numGeneralAlphaWand.Value = new decimal(new int[] {
+			this.numGeneralAlphaWandHeat.Name = "numGeneralAlphaWandHeat";
+			this.numGeneralAlphaWandHeat.Size = new System.Drawing.Size(79, 20);
+			this.numGeneralAlphaWandHeat.TabIndex = 4;
+			this.numGeneralAlphaWandHeat.Text = "0,1";
+			this.numGeneralAlphaWandHeat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numGeneralAlphaWandHeat.Value = new decimal(new int[] {
             1,
             0,
             0,
             65536});
+			this.numGeneralAlphaWandHeat.ValueChanged += new System.EventHandler(this.numGeneralAlphaWandHeat_ValueChanged);
 			// 
-			// numGeneralAlphaDecke
+			// numGeneralAlphaDeckeHeat
 			// 
-			this.numGeneralAlphaDecke.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.numGeneralAlphaDecke.EditType = Europlan.Common.NumericBox.NumericEditType.ALPHA;
-			this.numGeneralAlphaDecke.InternalValue = new decimal(new int[] {
+			this.numGeneralAlphaDeckeHeat.EditType = Europlan.Common.NumericBox.NumericEditType.ALPHA;
+			this.numGeneralAlphaDeckeHeat.InternalValue = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numGeneralAlphaDecke.Location = new System.Drawing.Point(183, 25);
-			this.numGeneralAlphaDecke.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
-			this.numGeneralAlphaDecke.MaxValue = new decimal(new int[] {
+			this.numGeneralAlphaDeckeHeat.Location = new System.Drawing.Point(183, 48);
+			this.numGeneralAlphaDeckeHeat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+			this.numGeneralAlphaDeckeHeat.MaxValue = new decimal(new int[] {
             99,
             0,
             0,
             0});
-			this.numGeneralAlphaDecke.MinValue = new decimal(new int[] {
+			this.numGeneralAlphaDeckeHeat.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numGeneralAlphaDecke.Name = "numGeneralAlphaDecke";
-			this.numGeneralAlphaDecke.Size = new System.Drawing.Size(79, 20);
-			this.numGeneralAlphaDecke.TabIndex = 12;
-			this.numGeneralAlphaDecke.Text = "0,1";
-			this.numGeneralAlphaDecke.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numGeneralAlphaDecke.Value = new decimal(new int[] {
+			this.numGeneralAlphaDeckeHeat.Name = "numGeneralAlphaDeckeHeat";
+			this.numGeneralAlphaDeckeHeat.Size = new System.Drawing.Size(79, 20);
+			this.numGeneralAlphaDeckeHeat.TabIndex = 12;
+			this.numGeneralAlphaDeckeHeat.Text = "0,1";
+			this.numGeneralAlphaDeckeHeat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numGeneralAlphaDeckeHeat.Value = new decimal(new int[] {
             1,
             0,
             0,
             65536});
+			this.numGeneralAlphaDeckeHeat.ValueChanged += new System.EventHandler(this.numGeneralAlphaDeckeHeat_ValueChanged);
 			// 
-			// numGeneralAlphaBoden
+			// numGeneralAlphaBodenHeat
 			// 
-			this.numGeneralAlphaBoden.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.numGeneralAlphaBoden.EditType = Europlan.Common.NumericBox.NumericEditType.ALPHA;
-			this.numGeneralAlphaBoden.InternalValue = new decimal(new int[] {
+			this.numGeneralAlphaBodenHeat.EditType = Europlan.Common.NumericBox.NumericEditType.ALPHA;
+			this.numGeneralAlphaBodenHeat.InternalValue = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numGeneralAlphaBoden.Location = new System.Drawing.Point(183, 2);
-			this.numGeneralAlphaBoden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
-			this.numGeneralAlphaBoden.MaxValue = new decimal(new int[] {
+			this.numGeneralAlphaBodenHeat.Location = new System.Drawing.Point(183, 25);
+			this.numGeneralAlphaBodenHeat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+			this.numGeneralAlphaBodenHeat.MaxValue = new decimal(new int[] {
             99,
             0,
             0,
             0});
-			this.numGeneralAlphaBoden.MinValue = new decimal(new int[] {
+			this.numGeneralAlphaBodenHeat.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-			this.numGeneralAlphaBoden.Name = "numGeneralAlphaBoden";
-			this.numGeneralAlphaBoden.Size = new System.Drawing.Size(79, 20);
-			this.numGeneralAlphaBoden.TabIndex = 7;
-			this.numGeneralAlphaBoden.Text = "0,1";
-			this.numGeneralAlphaBoden.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numGeneralAlphaBoden.Value = new decimal(new int[] {
+			this.numGeneralAlphaBodenHeat.Name = "numGeneralAlphaBodenHeat";
+			this.numGeneralAlphaBodenHeat.Size = new System.Drawing.Size(79, 20);
+			this.numGeneralAlphaBodenHeat.TabIndex = 7;
+			this.numGeneralAlphaBodenHeat.Text = "0,1";
+			this.numGeneralAlphaBodenHeat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numGeneralAlphaBodenHeat.Value = new decimal(new int[] {
             1,
             0,
             0,
             65536});
+			this.numGeneralAlphaBodenHeat.ValueChanged += new System.EventHandler(this.numGeneralAlphaBodenHeat_ValueChanged);
 			// 
 			// btnGeneralStandard
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.btnGeneralStandard, 2);
-			this.btnGeneralStandard.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnGeneralStandard.Location = new System.Drawing.Point(330, 92);
+			this.btnGeneralStandard.Location = new System.Drawing.Point(330, 184);
 			this.btnGeneralStandard.Margin = new System.Windows.Forms.Padding(0);
 			this.btnGeneralStandard.Name = "btnGeneralStandard";
 			this.btnGeneralStandard.Size = new System.Drawing.Size(120, 23);
@@ -6331,6 +6350,184 @@ namespace Europlan.Common {
             0,
             65536});
 			// 
+			// label2
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
+			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label2.Location = new System.Drawing.Point(3, 0);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(174, 23);
+			this.label2.TabIndex = 27;
+			this.label2.Text = "Heizen";
+			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label3
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.label3, 2);
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(3, 92);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(174, 23);
+			this.label3.TabIndex = 28;
+			this.label3.Text = "Kühlen";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label4
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.label4, 2);
+			this.label4.Location = new System.Drawing.Point(3, 115);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(174, 23);
+			this.label4.TabIndex = 29;
+			this.label4.Text = "Alpha Boden:";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label5
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.label5, 2);
+			this.label5.Location = new System.Drawing.Point(3, 138);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(174, 23);
+			this.label5.TabIndex = 30;
+			this.label5.Text = "Alpha Decke:";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label6
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.label6, 2);
+			this.label6.Location = new System.Drawing.Point(3, 161);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(174, 23);
+			this.label6.TabIndex = 31;
+			this.label6.Text = "Alpha Wand:";
+			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label7
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.label7, 2);
+			this.label7.Location = new System.Drawing.Point(268, 115);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(59, 23);
+			this.label7.TabIndex = 32;
+			this.label7.Text = "W/(m²K)";
+			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label8
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.label8, 2);
+			this.label8.Location = new System.Drawing.Point(268, 138);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(59, 23);
+			this.label8.TabIndex = 33;
+			this.label8.Text = "W/(m²K)";
+			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// label9
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.label9, 2);
+			this.label9.Location = new System.Drawing.Point(268, 161);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(59, 23);
+			this.label9.TabIndex = 34;
+			this.label9.Text = "W/(m²K)";
+			this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// numGeneralAlphaBodenCool
+			// 
+			this.numGeneralAlphaBodenCool.EditType = Europlan.Common.NumericBox.NumericEditType.ALPHA;
+			this.numGeneralAlphaBodenCool.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numGeneralAlphaBodenCool.Location = new System.Drawing.Point(183, 117);
+			this.numGeneralAlphaBodenCool.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+			this.numGeneralAlphaBodenCool.MaxValue = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+			this.numGeneralAlphaBodenCool.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numGeneralAlphaBodenCool.Name = "numGeneralAlphaBodenCool";
+			this.numGeneralAlphaBodenCool.Size = new System.Drawing.Size(79, 20);
+			this.numGeneralAlphaBodenCool.TabIndex = 35;
+			this.numGeneralAlphaBodenCool.Text = "0,1";
+			this.numGeneralAlphaBodenCool.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numGeneralAlphaBodenCool.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numGeneralAlphaBodenCool.ValueChanged += new System.EventHandler(this.numGeneralAlphaBodenCool_ValueChanged);
+			// 
+			// numGeneralAlphaDeckeCool
+			// 
+			this.numGeneralAlphaDeckeCool.EditType = Europlan.Common.NumericBox.NumericEditType.ALPHA;
+			this.numGeneralAlphaDeckeCool.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numGeneralAlphaDeckeCool.Location = new System.Drawing.Point(183, 140);
+			this.numGeneralAlphaDeckeCool.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+			this.numGeneralAlphaDeckeCool.MaxValue = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+			this.numGeneralAlphaDeckeCool.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numGeneralAlphaDeckeCool.Name = "numGeneralAlphaDeckeCool";
+			this.numGeneralAlphaDeckeCool.Size = new System.Drawing.Size(79, 20);
+			this.numGeneralAlphaDeckeCool.TabIndex = 36;
+			this.numGeneralAlphaDeckeCool.Text = "0,1";
+			this.numGeneralAlphaDeckeCool.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numGeneralAlphaDeckeCool.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numGeneralAlphaDeckeCool.ValueChanged += new System.EventHandler(this.numGeneralAlphaDeckeCool_ValueChanged);
+			// 
+			// numGeneralAlphaWandCool
+			// 
+			this.numGeneralAlphaWandCool.EditType = Europlan.Common.NumericBox.NumericEditType.ALPHA;
+			this.numGeneralAlphaWandCool.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numGeneralAlphaWandCool.Location = new System.Drawing.Point(183, 163);
+			this.numGeneralAlphaWandCool.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+			this.numGeneralAlphaWandCool.MaxValue = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+			this.numGeneralAlphaWandCool.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numGeneralAlphaWandCool.Name = "numGeneralAlphaWandCool";
+			this.numGeneralAlphaWandCool.Size = new System.Drawing.Size(79, 20);
+			this.numGeneralAlphaWandCool.TabIndex = 37;
+			this.numGeneralAlphaWandCool.Text = "0,1";
+			this.numGeneralAlphaWandCool.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numGeneralAlphaWandCool.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numGeneralAlphaWandCool.ValueChanged += new System.EventHandler(this.numGeneralAlphaWandCool_ValueChanged);
+			// 
 			// SystemParametersPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6686,9 +6883,9 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblGeneralAlphaDeckeUnit;
 		private System.Windows.Forms.Label lblGeneralAlphaWandUnit;
 		private System.Windows.Forms.Label lblGeneralAlphaBodenUnit;
-		private NumericBox numGeneralAlphaWand;
-		private NumericBox numGeneralAlphaDecke;
-		private NumericBox numGeneralAlphaBoden;
+		private NumericBox numGeneralAlphaWandHeat;
+		private NumericBox numGeneralAlphaDeckeHeat;
+		private NumericBox numGeneralAlphaBodenHeat;
 		private System.Windows.Forms.Button btnGeneralStandard;
 		private NumericBox numEurovalDichte;
 		private System.Windows.Forms.Label lblEurovalViskositaet;
@@ -6715,5 +6912,16 @@ namespace Europlan.Common {
 		private NumericBox numHithermCompactLeistungsfaktorCool;
 		private System.Windows.Forms.Label lblHithermCompactLeistungsfaktorHeat;
 		private NumericBox numHithermCompactLeistungsfaktorHeat;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label label9;
+		private NumericBox numGeneralAlphaBodenCool;
+		private NumericBox numGeneralAlphaDeckeCool;
+		private NumericBox numGeneralAlphaWandCool;
 	}
 }

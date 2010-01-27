@@ -20,27 +20,48 @@ namespace Europlan.Common {
 		public static readonly double rundrohr21mmInnenD = 0.0162;
 		public static readonly double rundrohr21mmInnenA = (rundrohr21mmInnenD / 2) * (rundrohr21mmInnenD / 2) * Math.PI;
 
-		private static double alphaDecke = 6.5;
-		private static double alphaBoden = 10.8;
-		private static double alphaWand = 8.0;
+		private static double alphaDeckeHeat = 6.5;
+		private static double alphaBodenHeat = 10.8;
+		private static double alphaWandHeat = 8.0;
+		private static double alphaDeckeCool = 10.8;
+		private static double alphaBodenCool = 6.5;
+		private static double alphaWandCool = 8.0;
 
 		#region Product Parameters
 		[ProductParameter]
-		public static double ConfigAlphaDecke {
-			get { return alphaDecke; }
-			set { alphaDecke = value; }
+		public static double ConfigAlphaDeckeHeat {
+			get { return alphaDeckeHeat; }
+			set { alphaDeckeHeat = value; }
 		}
 
 		[ProductParameter]
-		public static double ConfigAlphaBoden {
-			get { return alphaBoden; }
-			set { alphaBoden = value; }
+		public static double ConfigAlphaBodenHeat {
+			get { return alphaBodenHeat; }
+			set { alphaBodenHeat = value; }
 		}
 
 		[ProductParameter]
-		public static double ConfigAlphaWand {
-			get { return alphaWand; }
-			set { alphaWand = value; }
+		public static double ConfigAlphaWandHeat {
+			get { return alphaWandHeat; }
+			set { alphaWandHeat = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaDeckeCool {
+			get { return alphaDeckeCool; }
+			set { alphaDeckeCool = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaBodenCool {
+			get { return alphaBodenCool; }
+			set { alphaBodenCool = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigAlphaWandCool {
+			get { return alphaWandCool; }
+			set { alphaWandCool = value; }
 		}
 		#endregion Product Parameters
 
@@ -162,9 +183,12 @@ namespace Europlan.Common {
 
 		public static void StaticInitialize() {
 			Configuration userConfig = Configuration.UserTemplate;
-			Product.alphaBoden = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaBoden", 10.8);
-			Product.alphaDecke = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaDecke", 6.5);
-			Product.alphaWand = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaWand", 8.0);
+			Product.alphaBodenHeat = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaBodenHeat", 10.8);
+			Product.alphaDeckeHeat = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaDeckeHeat", 6.5);
+			Product.alphaWandHeat = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaWandHeat", 8.0);
+			Product.alphaBodenCool = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaBodenCool", 6.5);
+			Product.alphaDeckeCool = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaDeckeCool", 10.8);
+			Product.alphaWandCool = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaWandCool", 8.0);
 		}
 
 		public Product() {
