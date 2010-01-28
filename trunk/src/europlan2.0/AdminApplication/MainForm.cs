@@ -141,17 +141,19 @@ namespace Europlan.AdminApplication {
 
 		private void datanormDateiToolStripMenuItem_Click(object sender, EventArgs e) {
 			OpenFileDialog dialog = new OpenFileDialog();
-			dialog.Filter = "Datanorm|DATANORM.001";
+			dialog.CheckFileExists = true;
+			dialog.CheckPathExists = true;
+			dialog.DefaultExt = "csv";
+			dialog.Filter = "Artikelliste (*.csv)|*.csv";
 			string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 			if (dialog.ShowDialog() == DialogResult.OK) {
 				string path = Path.GetDirectoryName(dialog.FileName);
 				if (!path.Equals(appDataPath)) {
-					if (File.Exists(Path.Combine(path, "DATANORM.001"))) {
-						File.Copy(Path.Combine(path, "DATANORM.001"), Path.Combine(appDataPath, "DATANORM.001"), true);
-					}
-					if (File.Exists(Path.Combine(path, "DATANORM.RAB"))) {
-						File.Copy(Path.Combine(path, "DATANORM.RAB"), Path.Combine(appDataPath, "DATANORM.RAB"), true);
-					}
+					//if (File.Exists(Path.Combine(path, "BruttoPreise.csv"))) {
+						File.Copy(dialog.FileName, Path.Combine(appDataPath, "BruttoPreise.csv"), true);
+						MessageBox.Show("Die Anwendung muss nun neu gestartet werden, damit die neu importierte Artikelliste geladen werden kann.");
+						Application.Restart();
+					//}
 				}
 			}
 		}

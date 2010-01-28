@@ -31,7 +31,9 @@ namespace Europlan.AdminApplication {
 			this.colLicensedTo = new System.Windows.Forms.ColumnHeader();
 			this.colValidUntil = new System.Windows.Forms.ColumnHeader();
 			this.btnSaveLicense = new System.Windows.Forms.Button();
+			this.licenseEditor1 = new Europlan.AdminApplication.LicenseEditor();
 			this.tabPageArticles = new System.Windows.Forms.TabPage();
+			this.materialMapper1 = new Europlan.AdminApplication.MaterialMapper();
 			this.tabPageAdditionalArticles = new System.Windows.Forms.TabPage();
 			this.materialEditorGrid1 = new Europlan.Common.MaterialEditorGrid();
 			this.tabPageConstructions = new System.Windows.Forms.TabPage();
@@ -43,8 +45,6 @@ namespace Europlan.AdminApplication {
 			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.artikelUndKostruktionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.licenseEditor1 = new Europlan.AdminApplication.LicenseEditor();
-			this.materialMapper1 = new Europlan.AdminApplication.MaterialMapper();
 			this.mainTabControl.SuspendLayout();
 			this.tabPageLicenses.SuspendLayout();
 			this.splitContainerLicenses.Panel1.SuspendLayout();
@@ -157,6 +157,19 @@ namespace Europlan.AdminApplication {
 			this.btnSaveLicense.UseVisualStyleBackColor = true;
 			this.btnSaveLicense.Click += new System.EventHandler(this.btnSaveLicense_Click);
 			// 
+			// licenseEditor1
+			// 
+			this.licenseEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.licenseEditor1.AutoScroll = true;
+			this.licenseEditor1.AutoScrollMinSize = new System.Drawing.Size(400, 0);
+			this.licenseEditor1.Enabled = false;
+			this.licenseEditor1.Location = new System.Drawing.Point(3, 3);
+			this.licenseEditor1.Name = "licenseEditor1";
+			this.licenseEditor1.Size = new System.Drawing.Size(552, 418);
+			this.licenseEditor1.TabIndex = 0;
+			// 
 			// tabPageArticles
 			// 
 			this.tabPageArticles.Controls.Add(this.materialMapper1);
@@ -167,6 +180,14 @@ namespace Europlan.AdminApplication {
 			this.tabPageArticles.TabIndex = 2;
 			this.tabPageArticles.Text = "Artikelstamm";
 			this.tabPageArticles.UseVisualStyleBackColor = true;
+			// 
+			// materialMapper1
+			// 
+			this.materialMapper1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.materialMapper1.Location = new System.Drawing.Point(3, 3);
+			this.materialMapper1.Name = "materialMapper1";
+			this.materialMapper1.Size = new System.Drawing.Size(773, 457);
+			this.materialMapper1.TabIndex = 0;
 			// 
 			// tabPageAdditionalArticles
 			// 
@@ -244,8 +265,8 @@ namespace Europlan.AdminApplication {
 			// datanormDateiToolStripMenuItem
 			// 
 			this.datanormDateiToolStripMenuItem.Name = "datanormDateiToolStripMenuItem";
-			this.datanormDateiToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-			this.datanormDateiToolStripMenuItem.Text = "Datanorm...";
+			this.datanormDateiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.datanormDateiToolStripMenuItem.Text = "Artikelliste...";
 			this.datanormDateiToolStripMenuItem.Click += new System.EventHandler(this.datanormDateiToolStripMenuItem_Click);
 			// 
 			// exportToolStripMenuItem
@@ -270,27 +291,6 @@ namespace Europlan.AdminApplication {
 			this.beendenToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
 			this.beendenToolStripMenuItem.Text = "&Beenden";
 			this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
-			// 
-			// licenseEditor1
-			// 
-			this.licenseEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.licenseEditor1.AutoScroll = true;
-			this.licenseEditor1.AutoScrollMinSize = new System.Drawing.Size(400, 0);
-			this.licenseEditor1.Enabled = false;
-			this.licenseEditor1.Location = new System.Drawing.Point(3, 3);
-			this.licenseEditor1.Name = "licenseEditor1";
-			this.licenseEditor1.Size = new System.Drawing.Size(552, 418);
-			this.licenseEditor1.TabIndex = 0;
-			// 
-			// materialMapper1
-			// 
-			this.materialMapper1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.materialMapper1.Location = new System.Drawing.Point(3, 3);
-			this.materialMapper1.Name = "materialMapper1";
-			this.materialMapper1.Size = new System.Drawing.Size(773, 457);
-			this.materialMapper1.TabIndex = 0;
 			// 
 			// MainForm
 			// 
