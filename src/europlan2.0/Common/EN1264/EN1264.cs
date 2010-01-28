@@ -248,9 +248,16 @@ namespace Europlan.Common {
 				double y0;
 				double y1;
 				double x = heizmittelTemperatur;
+				double[] tmp = { 15.0, 18.0, 20.0, 22.0, 24.0 };
 				for (int i = 0; i < 5; i++) {
+					if (x0i < 0) {
+						x0 = tmp[i];
+					}
+					if (x1i < 0) {
+						x1 = tmp[i];
+					}
 					y0 = x0i < 0 ? 0 : standardTabelle[i][x0i];
-					y1 = standardTabelle[i][x1i];
+					y1 = x1i < 0 ? 0 : standardTabelle[i][x1i];
 					y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
 				}
 				if (raumTemperatur < 15.0) {
@@ -348,7 +355,14 @@ namespace Europlan.Common {
 				double y0;
 				double y1;
 				double x = heizmittelTemperatur;
+				double[] tmp = { 15.0, 18.0, 20.0, 22.0, 24.0 };
 				for (int i = 0; i < 5; i++) {
+					if (x0i < 0) {
+						x0 = tmp[i];
+					}
+					if (x1i < 0) {
+						x1 = tmp[i];
+					}
 					y0 = x0i < 0 ? 0 : standardTabelle[i][x0i];
 					y1 = x1i < 0 ? 0 : standardTabelle[i][x1i];
 					y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
@@ -457,77 +471,340 @@ namespace Europlan.Common {
 		}
 
 		public double KaeltestromDichteRegister(double kuehlmittelTemperatur, double raumTemperatur, double[][] standardTabelle, double faktor) {
-			double q;
-			double[] y = new double[4];
+			if (raumTemperatur <= kuehlmittelTemperatur) {
+				return 0;
+			}
+
 			double x0;
 			double x1;
-			int x0i;
-			int x1i;
-			if (kuehlmittelTemperatur < 16.0) {
-				x0 = 16.0;
-				x1 = raumTemperatur;
-				x0i = 0;
-				x1i = -1;
-			} else if (kuehlmittelTemperatur < 18.0) {
-				x0 = 16.0;
-				x1 = 18.0;
-				x0i = 0;
-				x1i = 1;
-			} else if (kuehlmittelTemperatur < 20.0) {
-				x0 = 18.0;
-				x1 = 20.0;
-				x0i = 1;
-				x1i = 2;
-			} else if (kuehlmittelTemperatur < 22.0) {
-				x0 = 20.0;
-				x1 = 22.0;
-				x0i = 2;
-				x1i = 3;
-			} else {
-				x0 = 22.0;
-				x1 = raumTemperatur;
-				x0i = 3;
-				x1i = -1;
-			}
 			double y0;
 			double y1;
-			double x = kuehlmittelTemperatur;
-			for (int i = 0; i < 4; i++) {
-				y0 = x0i < 0 ? 0 : standardTabelle[i][x0i];
-				y1 = x1i < 0 ? 0 : standardTabelle[i][x1i];
-				y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
-			}
-			if (raumTemperatur < 18.0) {
-				x0 = kuehlmittelTemperatur;
-				x1 = 18;
-				x0i = -1;
-				x1i = 0;
-			} else if (raumTemperatur < 20.0) {
-				x0 = 18;
-				x1 = 20;
-				x0i = 0;
-				x1i = 1;
-			} else if (raumTemperatur < 22.0) {
-				x0 = 20;
-				x1 = 22;
-				x0i = 1;
-				x1i = 2;
-			} else if (raumTemperatur < 25.0) {
-				x0 = 22;
-				x1 = 25;
-				x0i = 2;
-				x1i = 3;
+			double x;
+			double[] y = new double[4];
+			double q;
+			double[] tmp = { 16.0, 18.0, 20.0, 22.0 };
+			if (kuehlmittelTemperatur < 16.0) {
+				for (int i = 0; i < 4; i++) {
+					// Berechnung mit 16° und maximaler Kühlmitteltemperatur
+					x = kuehlmittelTemperatur;
+					x0 = tmp[0];
+					x1 = tmp[standardTabelle[i].Length - 1];
+					y0 = standardTabelle[i][0];
+					y1 = standardTabelle[i][standardTabelle[i].Length - 1];
+					y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
+				if (raumTemperatur < 18.0) {
+					x = raumTemperatur;
+					x0 = kuehlmittelTemperatur;
+					x1 = 25;
+					y0 = 0;
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else if (raumTemperatur < 20.0) {
+					x = raumTemperatur;
+					x0 = 18.0;
+					x1 = 20.0;
+					y0 = y[0];
+					y1 = y[1];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else if (raumTemperatur < 22.0) {
+					x = raumTemperatur;
+					x0 = 20.0;
+					x1 = 22.0;
+					y0 = y[1];
+					y1 = y[2];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else if (raumTemperatur < 25.0) {
+					x = raumTemperatur;
+					x0 = 22.0;
+					x1 = 25.0;
+					y0 = y[2];
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else {
+					x = raumTemperatur;
+					x0 = kuehlmittelTemperatur;
+					x1 = 25.0;
+					y0 = 0;
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
+			} else if (kuehlmittelTemperatur < 18.0) {
+				for (int i = 0; i < 4; i++) {
+					x = kuehlmittelTemperatur;
+					x0 = tmp[0];
+					x1 = tmp[1];
+					y0 = standardTabelle[i][0];
+					y1 = standardTabelle[i][1];
+					y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
+				if (raumTemperatur < 18.0) {
+					x = raumTemperatur;
+					x0 = kuehlmittelTemperatur;
+					x1 = 18;
+					y0 = 0;
+					y1 = y[0];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else if (raumTemperatur < 20.0) {
+					x = raumTemperatur;
+					x0 = 18.0;
+					x1 = 20.0;
+					y0 = y[0];
+					y1 = y[1];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else if (raumTemperatur < 22.0) {
+					x = raumTemperatur;
+					x0 = 20.0;
+					x1 = 22.0;
+					y0 = y[1];
+					y1 = y[2];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else if (raumTemperatur < 25.0) {
+					x = raumTemperatur;
+					x0 = 22.0;
+					x1 = 25.0;
+					y0 = y[2];
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else {
+					x = raumTemperatur;
+					x0 = kuehlmittelTemperatur;
+					x1 = 25.0;
+					y0 = 0;
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
+			} else if (kuehlmittelTemperatur < 20.0) {
+				for (int i = 1; i < 4; i++) {
+					x = kuehlmittelTemperatur;
+					x0 = tmp[1];
+					x1 = tmp[2];
+					y0 = standardTabelle[i][1];
+					y1 = standardTabelle[i][2];
+					y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
+				if (raumTemperatur < 20.0) {
+					x = raumTemperatur;
+					x0 = kuehlmittelTemperatur;
+					x1 = 20;
+					y0 = 0;
+					y1 = y[1];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else if (raumTemperatur < 22.0) {
+					x = raumTemperatur;
+					x0 = 20.0;
+					x1 = 22.0;
+					y0 = y[1];
+					y1 = y[2];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else if (raumTemperatur < 25.0) {
+					x = raumTemperatur;
+					x0 = 22.0;
+					x1 = 25.0;
+					y0 = y[2];
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else {
+					x = raumTemperatur;
+					x0 = kuehlmittelTemperatur;
+					x1 = 25.0;
+					y0 = 0;
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
+			} else if (kuehlmittelTemperatur < 22.0) {
+				for (int i = 2; i < 4; i++) {
+					x = kuehlmittelTemperatur;
+					x0 = tmp[2];
+					x1 = tmp[3];
+					y0 = standardTabelle[i][2];
+					y1 = standardTabelle[i][3];
+					y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
+				if (raumTemperatur < 22.0) {
+					x = raumTemperatur;
+					x0 = kuehlmittelTemperatur;
+					x1 = 22;
+					y0 = 0;
+					y1 = y[2];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else if (raumTemperatur < 25.0) {
+					x = raumTemperatur;
+					x0 = 22.0;
+					x1 = 25.0;
+					y0 = y[2];
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else {
+					x = raumTemperatur;
+					x0 = kuehlmittelTemperatur;
+					x1 = 25.0;
+					y0 = 0;
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
 			} else {
-				x0 = kuehlmittelTemperatur;
-				x1 = 25;
-				x0i = -1;
-				x1i = 3;
+				for (int i = 3; i < 4; i++) {
+					x = kuehlmittelTemperatur;
+					x0 = tmp[3];
+					x1 = 25.0; //tmp[standardTabelle[i].Length - 1];
+					y0 = standardTabelle[i][3];
+					y1 = 0; //standardTabelle[i][standardTabelle[i].Length - 1];
+					y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
+				if (raumTemperatur < 25.0) {
+					x = raumTemperatur;
+					x0 = kuehlmittelTemperatur;
+					x1 = 25;
+					y0 = 0;
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				} else {
+					x = raumTemperatur;
+					x0 = kuehlmittelTemperatur;
+					x1 = 25.0;
+					y0 = 0;
+					y1 = y[3];
+					q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+				}
 			}
-			y0 = x0i < 0 ? 0 : y[x0i];
-			y1 = x1i < 0 ? 0 : y[x1i];
-			x = raumTemperatur;
-			q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
-			return q < 0 ? 0 : q * faktor;
+
+			if (q < 0) {
+				q = 0;
+			}
+			return -q * faktor;
+
+
+
+
+			///*double q;
+			//double[] y;
+			//double x0;
+			//double x1;*/
+			//int x0i;
+			//int x1i;
+			//if (kuehlmittelTemperatur < 16.0) {
+			//    x0 = raumTemperatur;
+			//    x1 = 16.0;
+			//    x0i = -1;
+			//    x1i = 0;
+			//} else if (kuehlmittelTemperatur < 18.0) {
+			//    x0 = 16.0;
+			//    x1 = 18.0;
+			//    x0i = 0;
+			//    x1i = 1;
+			//} else if (kuehlmittelTemperatur < 20.0) {
+			//    x0 = 18.0;
+			//    x1 = 20.0;
+			//    x0i = 1;
+			//    x1i = 2;
+			//} else if (kuehlmittelTemperatur < 22.0) {
+			//    x0 = 20.0;
+			//    x1 = 22.0;
+			//    x0i = 2;
+			//    x1i = 3;
+			//} else {
+			//    x0 = raumTemperatur;
+			//    x1 = 22.0;
+			//    x0i = -1;
+			//    x1i = 3;
+			//}
+			///*double y0;
+			//double y1;
+			//double*/ x = kuehlmittelTemperatur;
+			//int xc;
+			//double xt0 = 0;
+			//double xt1 = 0;
+			//double xt2 = 0;
+			//double xt3 = 0;
+			//if (kuehlmittelTemperatur < 18.0) {
+			//    y = new double[4];
+			//    xt0 = 18.0;
+			//    xt1 = 20.0;
+			//    xt2 = 22.0;
+			//    xt3 = 25.0;
+			//    xc = 4;
+			//    for (int i = 0; i < 4; i++) {
+			//        y0 = x0i < 0 ? 0 : standardTabelle[i][x0i];
+			//        y1 = x1i < 0 ? 0 : standardTabelle[i][x1i];
+			//        y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+			//    }
+			//} else if (kuehlmittelTemperatur < 20.0) {
+			//    y = new double[4];
+			//    y[0] = 0;
+			//    xt0 = kuehlmittelTemperatur;
+			//    xt1 = 20.0;
+			//    xt2 = 22.0;
+			//    xt3 = 25.0;
+			//    xc = 4;
+			//    for (int i = 1; i < 4; i++) {
+			//        y0 = x0i < 0 ? 0 : standardTabelle[i][x0i];
+			//        y1 = x1i < 0 ? 0 : standardTabelle[i][x1i];
+			//        y[i] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+			//    }
+			//} else if (kuehlmittelTemperatur < 22.0) {
+			//    y = new double[3];
+			//    y[0] = 0;
+			//    xt0 = kuehlmittelTemperatur;
+			//    xt1 = 22.0;
+			//    xt2 = 25.0;
+			//    xc = 3;
+			//    for (int i = 2; i < 4; i++) {
+			//        y0 = x0i < 0 ? 0 : standardTabelle[i][x0i];
+			//        y1 = x1i < 0 ? 0 : standardTabelle[i][x1i];
+			//        y[i - 1] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+			//    }
+			//} else {
+			//    y = new double[2];
+			//    y[0] = 0;
+			//    xt0 = kuehlmittelTemperatur;
+			//    xt1 = 25.0;
+			//    xc = 2;
+			//    for (int i = 3; i < 4; i++) {
+			//        y0 = x0i < 0 ? 0 : standardTabelle[i][x0i];
+			//        y1 = x1i < 0 ? 0 : standardTabelle[i][x1i];
+			//        y[i - 2] = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+			//    }
+			//}
+
+
+			//if (xc > 0 && raumTemperatur < xt0) {
+			//    x0 = kuehlmittelTemperatur;
+			//    x1 = xt0;
+			//    x0i = -1;
+			//    x1i = 0;
+			//} else if (xc > 1 && raumTemperatur < xt1) {
+			//    x0 = xt0;
+			//    x1 = xt1;
+			//    x0i = 0;
+			//    x1i = 1;
+			//} else if (xc > 2 && raumTemperatur < xt2) {
+			//    x0 = xt1;
+			//    x1 = xt2;
+			//    x0i = 1;
+			//    x1i = 2;
+			//} else if (xc > 3 && raumTemperatur < xt3) {
+			//    x0 = xt2;
+			//    x1 = xt3;
+			//    x0i = 2;
+			//    x1i = 3;
+			//} else if (xc < 2) {
+			//    return 0;
+			//} else {
+			//    x0 = kuehlmittelTemperatur;
+			//    x1 = (xc == 2 ? xt1 : (xc == 3 ? xt2 : xt3));
+			//    x0i = -1;
+			//    x1i = xc - 1;
+			//}
+			//y0 = x0i < 0 ? 0 : y[x0i];
+			//y1 = x1i < 0 ? 0 : y[x1i];
+			//x = raumTemperatur;
+			//q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
+
+			//if (q < 0) {
+			//    q = 0;
+			//}
+			//return -q * faktor;
 		}
 
 		public double HithermBeplankungsFaktor(double[] rWerte, double[] faktoren, double rWert) {

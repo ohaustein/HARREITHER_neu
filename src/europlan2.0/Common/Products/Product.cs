@@ -602,7 +602,7 @@ namespace Europlan.Common {
 				spreizungHeat = EN1264.Instance.DefaultSpreizung(this.plannedVorlaufTempHeat);
 				this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
 				this.plannedVorlaufTempCool = this.plannedConnection.Distributor.RegulatorCircuit.CoolFlowTemperature;
-				spreizungCool = 3;
+				spreizungCool = 4;
 				this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
 			}
 		}
