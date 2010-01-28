@@ -285,7 +285,7 @@ namespace Europlan.Common {
 					x1i = -1;
 				}
 				y0 = x0i < 0 ? 0 : y[x0i];
-				y1 = y[x1i];
+				y1 = x1i < 0 ? 0 : y[x1i];
 				x = raumTemperatur;
 				q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
 			} else {
@@ -524,7 +524,7 @@ namespace Europlan.Common {
 				x1i = 3;
 			}
 			y0 = x0i < 0 ? 0 : y[x0i];
-			y1 = y[x1i];
+			y1 = x1i < 0 ? 0 : y[x1i];
 			x = raumTemperatur;
 			q = y0 + (y1 - y0) / (x1 - x0) * (x - x0);
 			return q < 0 ? 0 : q * faktor;
