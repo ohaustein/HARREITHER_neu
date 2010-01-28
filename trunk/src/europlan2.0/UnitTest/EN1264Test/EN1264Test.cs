@@ -169,21 +169,6 @@ namespace Europlan.UnitTest {
 		}
 
 		[Test]
-		public void TestWaermestromDichteRegister() {
-			double[][] table = {new double[] {105,120,140,155,175,190,210,225,240},
-								new double[] { 85,100,120,135,155,170,185,205,220},
-								new double[] { 70, 85,105,120,140,155,175,190,210},
-								new double[] { 55, 70, 90,105,125,140,160,175,195},
-								new double[] { 45, 60, 80, 95,115,130,145,165,180}};
-			double result = norm.WaermestromDichteRegister(35.0, 18.0, table, 1.0, false);
-			Assert.AreEqual(120.0, result);
-			result = norm.WaermestromDichteRegister(35.0, 18.0, table, 1.1, false);
-			Assert.AreEqual(132.0, result);
-			result = norm.WaermestromDichteRegister(50.0, 19.0, table, 1.0, false);
-			Assert.AreEqual(215.0, Math.Round(result, 0));
-		}
-
-		[Test]
 		public void TestOberflaechenTemperatur() {
 			double result = norm.OberflaechenTemperatur(40.0, 10.8, 25);
 			Assert.AreEqual(28.7037, Math.Round(result, 4));
@@ -266,6 +251,213 @@ namespace Europlan.UnitTest {
 			Assert.AreEqual(10.0, norm.DefaultSpreizung(55.0));
 			Assert.AreEqual(10.0, norm.DefaultSpreizung(59.7));
 		}
-		
+
+		[Test]
+		public void TestWaermestromDichteRegister() {
+			double[][] table = {new double[] {105,120,140,155,175,190,210,225,240},
+								new double[] { 85,100,120,135,155,170,185,205,220},
+								new double[] { 70, 85,105,120,140,155,175,190,210},
+								new double[] { 55, 70, 90,105,125,140,160,175,195},
+								new double[] { 45, 60, 80, 95,115,130,145,165,180}};
+			double result = norm.WaermestromDichteRegister(35.0, 18.0, table, 1.0, false);
+			Assert.AreEqual(120.0, result);
+			result = norm.WaermestromDichteRegister(35.0, 18.0, table, 1.1, false);
+			Assert.AreEqual(132.0, result);
+			result = norm.WaermestromDichteRegister(50.0, 19.0, table, 1.0, false);
+			Assert.AreEqual(215.0, Math.Round(result, 0));
+		}
+
+		[Test]
+		public void TestWaermestromdichteRegisterStetig() {
+			double[][] table = {new double[] {105,120,140,155,175,190,210,225,240},
+								new double[] { 85,100,120,135,155,170,185,205,220},
+								new double[] { 70, 85,105,120,140,155,175,190,210},
+								new double[] { 55, 70, 90,105,125,140,160,175,195},
+								new double[] { 45, 60, 80, 95,115,130,145,165,180}};
+
+			for (double ti = 5.0; ti < 30.0; ti += 0.2) {
+				bool first = true;
+				double oldVal = 0;
+				for (double thm = ti; thm < 60.0; thm += 0.2) {
+					double value = norm.WaermestromDichteRegister(thm, ti, table, 1, false);
+					if (first) {
+						first = false;
+					} else {
+						Assert.IsTrue(oldVal < value, "Heizleistung bei ti=" + ti.ToString() + "°C, tHm1=" + (thm - 0.2).ToString() + "°C, tHm2=" + thm.ToString() + "°C nicht stetig steigend");
+					}
+					oldVal = value;
+				}
+			}
+		}
+
+		[Test]
+		public void TestWaermestromdichteCompactRegisterStetig() {
+			double[][] regHeizleistung2000Par = {
+				//  tHm (°C)  32.5  35.0  37.5  40.0  42.5  45.0
+				new double[] { 160,  180,  205,  225,  250,  275}, // ti=15°C
+				new double[] { 130,  155,  175,  200,  220,  245}, // ti=18°C
+				new double[] { 115,  135,  160,  180,  205,  225}, // ti=20°C
+				new double[] {  95,  120,  140,  165,  185,  210}, // ti=22°C
+				new double[] {  75,  100,  125,  145,  170,  190}  // ti=24°C
+			};
+
+			for (double ti = 5.0; ti < 30.0; ti += 0.2) {
+				bool first = true;
+				double oldVal = 0;
+				for (double thm = ti; thm < 60.0; thm += 0.2) {
+					double value = norm.WaermestromDichteRegister(thm, ti, regHeizleistung2000Par, 1, true);
+					if (first) {
+						first = false;
+					} else {
+						Assert.IsTrue(oldVal < value, "Heizleistung bei ti=" + ti.ToString() + "°C, tHm1=" + (thm - 0.2).ToString() + "°C, tHm2=" + thm.ToString() + "°C nicht stetig steigend");
+					}
+					oldVal = value;
+				}
+			}
+		}
+
+		[Test]
+		public void TestKaeltestromdichteCompactRegister() {
+			double[][] regKuehlleistungProQm = {
+				//  tKm (°C)  16.0  18.0  20.0  22.0
+				new double[] {12.5,  0.0            }, // ti=18°C
+				new double[] {24.0, 12.5,  0.0      }, // ti=20°C
+				new double[] {39.0, 25.0, 12.5,  0.0}, // ti=22°C
+				new double[] {58.0, 44.0, 32.0, 19.5}  // ti=25°C
+			};
+
+
+			Assert.AreEqual(0.0, norm.KaeltestromDichteRegister(16.0, 16.0, regKuehlleistungProQm, 1));
+			Assert.AreEqual(-12.5 / 2.0, norm.KaeltestromDichteRegister(16.0, 17.0, regKuehlleistungProQm, 1));
+			Assert.AreEqual(-25.0, norm.KaeltestromDichteRegister(16.0, 18.0, regKuehlleistungProQm, 2));
+			Assert.AreEqual(0.0, norm.KaeltestromDichteRegister(20.0, 19.0, regKuehlleistungProQm, 1));
+			Assert.AreEqual(-38.4, norm.KaeltestromDichteRegister(20.0, 26.0, regKuehlleistungProQm, 1));
+			Assert.AreEqual(-19.5, norm.KaeltestromDichteRegister(22.0, 25.0, regKuehlleistungProQm, 1));
+			Assert.AreEqual(-116.0, norm.KaeltestromDichteRegister(16.0, 34.0, regKuehlleistungProQm, 1));
+			Assert.AreEqual(-36.0, norm.KaeltestromDichteRegister(14.0, 20.0, regKuehlleistungProQm, 1));
+			Assert.AreEqual(-25.125, norm.KaeltestromDichteRegister(17.0, 21.0, regKuehlleistungProQm, 1));
+		}
+
+		[Test]
+		public void TestKaeltestromdichteCompactRegister0GradDiff() {
+			double[][] regKuehlleistungProQm = {
+				//  tKm (°C)  16.0  18.0  20.0  22.0
+				new double[] {12.5,  0.0            }, // ti=18°C
+				new double[] {24.0, 12.5,  0.0      }, // ti=20°C
+				new double[] {39.0, 25.0, 12.5,  0.0}, // ti=22°C
+				new double[] {58.0, 44.0, 32.0, 19.5}  // ti=25°C
+			};
+
+			for (double i = 5.0; i < 30.0; i += 0.2) {
+				double value = norm.KaeltestromDichteRegister(i, i, regKuehlleistungProQm, 1);
+				Assert.AreEqual(0.0, value, "Kühlleistung für tKm=" + i.ToString() + "°C, ti=" + (i + 2.0).ToString() + "°C ist nicht 0 (" + (-value).ToString() + "W/m²)");
+			}
+		}
+
+		[Test]
+		public void TestKaeltestromdichteCompactRegister2GradDiff() {
+			double[][] regKuehlleistungProQm = {
+				//  tKm (°C)  16.0  18.0  20.0  22.0
+				new double[] {12.5,  0.0            }, // ti=18°C
+				new double[] {24.0, 12.5,  0.0      }, // ti=20°C
+				new double[] {39.0, 25.0, 12.5,  0.0}, // ti=22°C
+				new double[] {58.0, 44.0, 32.0, 19.5}  // ti=25°C
+			};
+
+			for (double i = 5.0; i < 30.0; i += 0.2) {
+				double value = norm.KaeltestromDichteRegister(i, i + 2.0, regKuehlleistungProQm, 1);
+				Assert.IsTrue(value > -13.1, "Kühlleistung für tKm=" + i.ToString() + "°C, ti=" + (i + 2.0).ToString() + "°C zu groß (" + (-value).ToString() + "W/m² > 13.1W/m²)");
+				Assert.IsTrue(value < -12.0, "Kühlleistung für tKm=" + i.ToString() + "°C, ti=" + (i + 2.0).ToString() + "°C zu klein (" + (-value).ToString() + "W/m² < 12.0W/m²)");
+			}
+		}
+
+		[Test]
+		public void TestKaeltestromdichteCompactRegister5GradDiff() {
+			double[][] regKuehlleistungProQm = {
+				//  tKm (°C)  16.0  18.0  20.0  22.0
+				new double[] {12.5,  0.0            }, // ti=18°C
+				new double[] {24.0, 12.5,  0.0      }, // ti=20°C
+				new double[] {39.0, 25.0, 12.5,  0.0}, // ti=22°C
+				new double[] {58.0, 44.0, 32.0, 19.5}  // ti=25°C
+			};
+
+			for (double i = 5.0; i < 30.0; i += 0.2) {
+				double value = norm.KaeltestromDichteRegister(i, i + 5.0, regKuehlleistungProQm, 1);
+				Assert.IsTrue(value > -33.5, "Kühlleistung für tKm=" + i.ToString() + "°C, ti=" + (i + 5.0).ToString() + "°C zu groß (" + (-value).ToString() + "W/m² > 33.5W/m²)");
+				Assert.IsTrue(value < -30.0, "Kühlleistung für tKm=" + i.ToString() + "°C, ti=" + (i + 5.0).ToString() + "°C zu klein (" + (-value).ToString() + "W/m² < 30.0W/m²)");
+			}
+		}
+
+		[Test]
+		public void TestKaeltestromdichteCompactRegisterStetig() {
+			double[][] regKuehlleistungProQm = {
+				//  tKm (°C)  16.0  18.0  20.0  22.0
+				new double[] {12.5,  0.0            }, // ti=18°C
+				new double[] {24.0, 12.5,  0.0      }, // ti=20°C
+				new double[] {39.0, 25.0, 12.5,  0.0}, // ti=22°C
+				new double[] {58.0, 44.0, 32.0, 19.5}  // ti=25°C
+			};
+
+			for (double ti = 5.0; ti < 30.0; ti += 0.2) {
+				bool first = true;
+				double oldVal = 0;
+				for (double tkm = 5.0; tkm < ti; tkm += 0.2) {
+					double value = norm.KaeltestromDichteRegister(tkm, ti, regKuehlleistungProQm, 1);
+					if (first) {
+						first = false;
+					} else {
+						Assert.IsTrue(oldVal < value, "Kühlleistung bei ti=" + ti.ToString() + "°C, tKm1=" + (tkm - 0.2).ToString() + "°C, tKm2=" + tkm.ToString() + "°C nicht stetig fallend");
+					}
+					oldVal = value;
+				}
+			}
+		}
+
+		[Test]
+		public void TestKaeltestromdichteStdRegister() {
+			double[] stdRegKuehlleistung = { 0, 9, 14, 18, 24, 29, 32, 43 };
+
+			Assert.AreEqual(-86.0, norm.KaeltestromDichteRegister(5.0, 23.0 , stdRegKuehlleistung, 1));
+			Assert.AreEqual(0.0, norm.KaeltestromDichteRegister(18.0, 18.0, stdRegKuehlleistung, 1));
+			Assert.AreEqual(-43.5, norm.KaeltestromDichteRegister(16.0, 22.0, stdRegKuehlleistung, 1.5));
+		}
+
+		[Test]
+		public void TestKaeltestromdichteStdRegisterStetig() {
+			double[] stdRegKuehlleistung = { 0, 9, 14, 18, 24, 29, 32, 43 };
+
+			for (double ti = 5.0; ti < 30.0; ti += 0.2) {
+				bool first = true;
+				double oldVal = 0;
+				for (double tkm = 5.0; tkm < ti; tkm += 0.2) {
+					double value = norm.KaeltestromDichteRegister(tkm, ti, stdRegKuehlleistung, 1);
+					if (first) {
+						first = false;
+					} else {
+						Assert.IsTrue(oldVal < value, "Kühlleistung bei ti=" + ti.ToString() + "°C, tKm1=" + (tkm - 0.2).ToString() + "°C, tKm2=" + tkm.ToString() + "°C nicht stetig fallend");
+					}
+					oldVal = value;
+				}
+			}
+		}
+
+		[Test]
+		public void TestKaeltestromdichteHlRegisterStetig() {
+			double[] hlRegKuehlleistung = { 0, 13, 20, 25, 33, 40, 45, 60 };
+
+			for (double ti = 5.0; ti < 30.0; ti += 0.2) {
+				bool first = true;
+				double oldVal = 0;
+				for (double tkm = 5.0; tkm < ti; tkm += 0.2) {
+					double value = norm.KaeltestromDichteRegister(tkm, ti, hlRegKuehlleistung, 1);
+					if (first) {
+						first = false;
+					} else {
+						Assert.IsTrue(oldVal < value, "Kühlleistung bei ti=" + ti.ToString() + "°C, tKm1=" + (tkm - 0.2).ToString() + "°C, tKm2=" + tkm.ToString() + "°C nicht stetig fallend");
+					}
+					oldVal = value;
+				}
+			}
+		}
 	}
 }
