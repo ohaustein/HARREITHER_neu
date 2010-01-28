@@ -118,6 +118,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Config\BruttoPreise.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\global.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\DataSources\Europlan.Common.Construction.datasource" />
     <None Include="Properties\DataSources\Europlan.Common.ConstructionListWrapper.datasource" />
     <None Include="Properties\DataSources\Europlan.Common.MaterialListWrapper.datasource" />

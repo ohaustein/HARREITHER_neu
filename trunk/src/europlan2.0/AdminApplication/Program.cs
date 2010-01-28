@@ -17,10 +17,10 @@ namespace Europlan.AdminApplication {
 
 			string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 			if (!File.Exists(Path.Combine(appDataPath, "BruttoPreise.csv"))) {
-				File.Copy(Path.Combine(Path.Combine(System.Windows.Forms.Application.ExecutablePath, "DefaultConfig"), "BruttoPreise.csv"), Path.Combine(appDataPath, "BruttoPreise.csv"));
+				File.Copy(Path.Combine(Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath), "DefaultConfig"), "BruttoPreise.csv"), Path.Combine(appDataPath, "BruttoPreise.csv"));
 			}
 			if (!File.Exists(Path.Combine(appDataPath, "global.conf"))) {
-				File.Copy(Path.Combine(Path.Combine(System.Windows.Forms.Application.ExecutablePath, "DefaultConfig"), "global.conf"), Path.Combine(appDataPath, "global.conf"));
+				File.Copy(Path.Combine(Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath), "DefaultConfig"), "global.conf"), Path.Combine(appDataPath, "global.conf"));
 			}
 
 			System.Windows.Forms.Application.Run(new MainForm());
