@@ -128,8 +128,10 @@ namespace Europlan.Common {
 					this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem is HithermRegister) ?
 					(this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem as HithermRegister).Heizkreis : -1;
 
-				bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0 || this.product.Product.AssociatedRoom.CoolLoad <= 0;
-				bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0;
+				//bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0 || this.product.Product.AssociatedRoom.CoolLoad <= 0;
+				//bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0;
+				bool showHeat = this.product.RequestedHeatLoad > 0;
+				bool showCool = this.product.RequestedCoolLoad > 0;
 				bool showHeatCircuit = selectedCircuit >= 0 && showHeat;
 				bool showCoolCircuit = selectedCircuit >= 0 && showCool;
 				bool showRestArea = hp.HithermType == Product.ProductType.FBH || hp.HithermType == Product.ProductType.DH;

@@ -156,6 +156,8 @@ namespace Europlan.Common {
 			}
 		}
 
+
+
 		[XmlIgnore]
 		public string PlannedHeatLoadString {
 			get {

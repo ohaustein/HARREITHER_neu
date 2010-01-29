@@ -213,8 +213,10 @@ namespace Europlan.Common {
 
 				EurovalProduct evProduct = this.product.Product as EurovalProduct;
 
-				bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0 && evProduct.PlannedLayDistance != EurovalProduct.EurovalLayDistance.NONE;
-				bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0 && evProduct.PlannedLayDistance != EurovalProduct.EurovalLayDistance.NONE;
+				//bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0 && evProduct.PlannedLayDistance != EurovalProduct.EurovalLayDistance.NONE;
+				//bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0 && evProduct.PlannedLayDistance != EurovalProduct.EurovalLayDistance.NONE;
+				bool showHeat = this.product.RequestedHeatLoad > 0 && evProduct.PlannedLayDistance != EurovalProduct.EurovalLayDistance.NONE;
+				bool showCool = this.product.RequestedCoolLoad > 0 && evProduct.PlannedLayDistance != EurovalProduct.EurovalLayDistance.NONE;
 				bool showRim = evProduct.PlannedAreaRim > 0;
 				bool showResidence = true;
 				bool complete = this.product.Product.PlannedCalculationComplete;

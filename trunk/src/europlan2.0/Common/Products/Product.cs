@@ -27,6 +27,9 @@ namespace Europlan.Common {
 		private static double alphaBodenCool = 6.5;
 		private static double alphaWandCool = 8.0;
 
+		protected double requestedHeatLoad = 0;
+		protected double requestedCoolLoad = 0;
+
 		#region Product Parameters
 		[ProductParameter]
 		public static double ConfigAlphaDeckeHeat {

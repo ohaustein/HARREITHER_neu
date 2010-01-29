@@ -1042,7 +1042,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override double PlannedHeatLoad {
 			get {
-				if (this.incompleteCalculation) {
+				if (this.incompleteCalculation || this.requestedHeatLoad == 0) {
 					return 0;
 				}
 				double value = 0;
@@ -1159,7 +1159,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override double PlannedCoolLoad {
 			get {
-				if (this.incompleteCalculation) {
+				if (this.incompleteCalculation || this.requestedCoolLoad == 0) {
 					return 0;
 				}
 				double value = 0;
@@ -1417,6 +1417,8 @@ namespace Europlan.Common {
 		bool secondConfig = false;
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
+			this.requestedHeatLoad = requestedHeatLoad;
+			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
 				this.lastErrorMsg = "Fehlende Eingaben: ";
