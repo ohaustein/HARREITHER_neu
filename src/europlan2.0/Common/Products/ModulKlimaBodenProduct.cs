@@ -391,6 +391,8 @@ namespace Europlan.Common {
 		}
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
+			this.requestedHeatLoad = requestedHeatLoad;
+			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || this.plannedConnection == null) {
 				this.lastErrorMsg = "Fehlende Eingaben: ";
@@ -565,8 +567,8 @@ namespace Europlan.Common {
 			//    }
 			//}
 
-			if (this.PlannedModulArea > this.PlannedNetArea) {
-				this.lastErrorMsg += "Die verplanten Module nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.PlannedModulArea, 1).ToString() + "m² > " + Math.Round(this.PlannedNetArea, 1).ToString() + "m²)\n";
+			if (this.CoveredFloorArea > this.PlannedNetArea) {
+				this.lastErrorMsg += "Die verplanten Module nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.CoveredFloorArea, 1).ToString() + "m² > " + Math.Round(this.PlannedNetArea, 1).ToString() + "m²)\n";
 			}
 			if (Math.Round(this.PlannedFloorTemperatureHeat, 1) > (ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264)) {
 				this.lastErrorMsg += "Oberflächentemperatur zu groß (" + Math.Round(this.PlannedFloorTemperatureHeat, 1) + "°C > " + Math.Round((ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1) + "°C)\n";
@@ -738,7 +740,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override double PlannedCoolLoad {
 			get {
-				if (this.incompleteCalculation) {
+				if (this.incompleteCalculation || this.requestedCoolLoad == 0) {
 					return 0;
 				}
 				double value = 0;
@@ -757,7 +759,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override double PlannedHeatLoad {
 			get {
-				if (this.incompleteCalculation) {
+				if (this.incompleteCalculation || this.requestedHeatLoad == 0) {
 					return 0;
 				}
 				double value = 0;
