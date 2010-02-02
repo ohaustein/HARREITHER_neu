@@ -73,6 +73,8 @@ namespace Europlan.Common {
 		private Nullable<EurovalRimType> plannedRimType = null;
 
 		private bool plannedCorrections = false;
+		private List<ExtendedCorrections> plannedCorrectionList;
+
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			int i = 0;
@@ -1662,12 +1664,21 @@ namespace Europlan.Common {
 				foreach (EurovalCircuit ec in this.circuits) {
 					ec.EurovalProduct = this;
 					ec.NrOfCircuit = i;
-					ec.AreaTotal = this.plannedArea / bestCircuits;
-					ec.AreaReduced = this.plannedAreaReduced / bestCircuits;
-					ec.AreaUnheated = this.plannedAreaUnheated / bestCircuits;
-					ec.AreaRemovedDueConnection = areaRemovedDueConnection / bestCircuits;
-					ec.RimLength = this.plannedRimLength / bestCircuits;
-					ec.RimCorners = ((double)this.plannedRimCorners) / bestCircuits;
+					if (this.plannedCorrections) {
+						ec.AreaTotal = this.plannedCorrectionList[i].AreaValue;
+						ec.AreaReduced = this.plannedCorrectionList[i].AreaReducedValue;
+						ec.AreaUnheated = this.plannedCorrectionList[i].AreaUnheatedValue;
+						ec.AreaRemovedDueConnection = this.plannedCorrectionList[i].ConnectionsValue;
+						ec.RimLength = this.plannedCorrectionList[i].RimLengthValue;
+						ec.RimCorners = this.plannedCorrectionList[i].RimCornersValue;
+					} else {
+						ec.AreaTotal = this.plannedArea / bestCircuits;
+						ec.AreaReduced = this.plannedAreaReduced / bestCircuits;
+						ec.AreaUnheated = this.plannedAreaUnheated / bestCircuits;
+						ec.AreaRemovedDueConnection = areaRemovedDueConnection / bestCircuits;
+						ec.RimLength = this.plannedRimLength / bestCircuits;
+						ec.RimCorners = ((double)this.plannedRimCorners) / bestCircuits;
+					}
 					ec.PipeLengthVorlaufTotal = vorlaufTotal[i];
 					ec.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
 					ec.PipeLengthRuecklaufTotal = ruecklaufTotal[i];
@@ -1956,6 +1967,14 @@ namespace Europlan.Common {
 
 		public override double Viskositaet {
 			get { return EurovalProduct.ConfigV; }
+		}
+
+		public List<ExtendedCorrections> PlannedCorrectionList {
+			get { return this.plannedCorrections ? this.plannedCorrectionList : null; }
+			set {
+				this.plannedCorrections = (value != null && value.Count > 0);
+				this.plannedCorrectionList = (value == null || value.Count == 0) ? null : value;
+			}
 		}
 	}
 }

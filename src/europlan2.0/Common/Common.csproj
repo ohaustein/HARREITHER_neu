@@ -146,6 +146,7 @@
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\ExtendedCorrections.cs" />
     <Compile Include="Products\PlannedEcothermProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -622,6 +623,7 @@
     <None Include="Properties\DataSources\ConstructionLayer.datasource" />
     <None Include="Properties\DataSources\Distributor.datasource" />
     <None Include="Properties\DataSources\Europlan.ContructionEditor.MaterialEditorGrid+MaterialCategoryGridItem.datasource" />
+    <None Include="Properties\DataSources\ExtendedCorrections.datasource" />
     <None Include="Properties\DataSources\HithermCompactRegister.datasource" />
     <None Include="Properties\DataSources\HithermRegister.datasource" />
     <None Include="Properties\DataSources\HithermWall.datasource" />

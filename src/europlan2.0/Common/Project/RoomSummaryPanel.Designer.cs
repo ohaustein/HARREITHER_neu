@@ -52,14 +52,6 @@ namespace Europlan.Common {
 			this.grpBoxSystems = new System.Windows.Forms.GroupBox();
 			this.btnDelete = new System.Windows.Forms.Button();
 			this.dgvProducts = new System.Windows.Forms.DataGridView();
-			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colFloorArea = new Europlan.Common.NumericColumn();
-			this.colPlannedArea = new Europlan.Common.NumericColumn();
-			this.colPlannedHeatLoad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colPlannedCoolLoad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.plannedProductWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.txtNormCool = new Europlan.Common.NumericBox();
@@ -69,6 +61,14 @@ namespace Europlan.Common {
 			this.txtTemperature = new Europlan.Common.NumericBox();
 			this.txtArea = new Europlan.Common.NumericBox();
 			this.btnWhatIsNext = new System.Windows.Forms.Button();
+			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colFloorArea = new Europlan.Common.NumericColumn();
+			this.colPlannedArea = new Europlan.Common.NumericColumn();
+			this.colPlannedHeatLoad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colPlannedCoolLoad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.grpBoxSummary.SuspendLayout();
 			this.grpBoxSystems.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
@@ -340,95 +340,6 @@ namespace Europlan.Common {
 			this.dgvProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
 			this.dgvProducts.SelectionChanged += new System.EventHandler(this.dgvProducts_SelectionChanged);
 			// 
-			// colType
-			// 
-			this.colType.DataPropertyName = "PlannedProductType";
-			this.colType.FillWeight = 50F;
-			this.colType.HeaderText = "Type";
-			this.colType.Name = "colType";
-			this.colType.ReadOnly = true;
-			this.colType.Width = 50;
-			// 
-			// colSystem
-			// 
-			this.colSystem.DataPropertyName = "System";
-			this.colSystem.HeaderText = "System";
-			this.colSystem.Name = "colSystem";
-			this.colSystem.ReadOnly = true;
-			// 
-			// colComment
-			// 
-			this.colComment.DataPropertyName = "Comment";
-			this.colComment.HeaderText = "Bemerkung";
-			this.colComment.Name = "colComment";
-			this.colComment.Width = 200;
-			// 
-			// colFloorArea
-			// 
-			this.colFloorArea.DataPropertyName = "FloorArea";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F1";
-			this.colFloorArea.DefaultCellStyle = dataGridViewCellStyle2;
-			this.colFloorArea.FillWeight = 50F;
-			this.colFloorArea.HeaderText = "FBH-\nFläche\n(m²)";
-			this.colFloorArea.Name = "colFloorArea";
-			this.colFloorArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.colFloorArea.ReadOnly = true;
-			this.colFloorArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colFloorArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colFloorArea.Width = 50;
-			// 
-			// colPlannedArea
-			// 
-			this.colPlannedArea.DataPropertyName = "PlannedArea";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F1";
-			this.colPlannedArea.DefaultCellStyle = dataGridViewCellStyle3;
-			this.colPlannedArea.FillWeight = 50F;
-			this.colPlannedArea.HeaderText = "Heiz-\nfläche\n(m²)";
-			this.colPlannedArea.Name = "colPlannedArea";
-			this.colPlannedArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.colPlannedArea.ReadOnly = true;
-			this.colPlannedArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colPlannedArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.colPlannedArea.Width = 50;
-			// 
-			// colPlannedHeatLoad
-			// 
-			this.colPlannedHeatLoad.DataPropertyName = "PlannedHeatLoadString";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.colPlannedHeatLoad.DefaultCellStyle = dataGridViewCellStyle4;
-			this.colPlannedHeatLoad.FillWeight = 50F;
-			this.colPlannedHeatLoad.HeaderText = "PHeiz\n(W)";
-			this.colPlannedHeatLoad.Name = "colPlannedHeatLoad";
-			this.colPlannedHeatLoad.ReadOnly = true;
-			this.colPlannedHeatLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colPlannedHeatLoad.Width = 50;
-			// 
-			// colPlannedCoolLoad
-			// 
-			this.colPlannedCoolLoad.DataPropertyName = "PlannedCoolLoadString";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.colPlannedCoolLoad.DefaultCellStyle = dataGridViewCellStyle5;
-			this.colPlannedCoolLoad.FillWeight = 50F;
-			this.colPlannedCoolLoad.HeaderText = "PKühl\n(W)";
-			this.colPlannedCoolLoad.Name = "colPlannedCoolLoad";
-			this.colPlannedCoolLoad.ReadOnly = true;
-			this.colPlannedCoolLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colPlannedCoolLoad.Width = 50;
-			// 
-			// colEdit
-			// 
-			this.colEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.colEdit.FillWeight = 64F;
-			this.colEdit.HeaderText = "Bearbeiten";
-			this.colEdit.Name = "colEdit";
-			this.colEdit.ReadOnly = true;
-			this.colEdit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.colEdit.Text = "...";
-			this.colEdit.UseColumnTextForButtonValue = true;
-			this.colEdit.Width = 64;
-			// 
 			// plannedProductWrapperBindingSource
 			// 
 			this.plannedProductWrapperBindingSource.DataSource = typeof(Europlan.Common.PlannedProduct);
@@ -644,6 +555,98 @@ namespace Europlan.Common {
 			this.btnWhatIsNext.UseVisualStyleBackColor = true;
 			this.btnWhatIsNext.Click += new System.EventHandler(this.btnWhatIsNext_Click);
 			// 
+			// colType
+			// 
+			this.colType.DataPropertyName = "PlannedProductType";
+			this.colType.FillWeight = 50F;
+			this.colType.HeaderText = "Type";
+			this.colType.Name = "colType";
+			this.colType.ReadOnly = true;
+			this.colType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colType.Width = 50;
+			// 
+			// colSystem
+			// 
+			this.colSystem.DataPropertyName = "System";
+			this.colSystem.HeaderText = "System";
+			this.colSystem.Name = "colSystem";
+			this.colSystem.ReadOnly = true;
+			this.colSystem.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			// 
+			// colComment
+			// 
+			this.colComment.DataPropertyName = "Comment";
+			this.colComment.HeaderText = "Bemerkung";
+			this.colComment.Name = "colComment";
+			this.colComment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colComment.Width = 200;
+			// 
+			// colFloorArea
+			// 
+			this.colFloorArea.DataPropertyName = "FloorArea";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle2.Format = "F0";
+			this.colFloorArea.DefaultCellStyle = dataGridViewCellStyle2;
+			this.colFloorArea.FillWeight = 50F;
+			this.colFloorArea.HeaderText = "FBH-\nFläche\n(m²)";
+			this.colFloorArea.Name = "colFloorArea";
+			this.colFloorArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.colFloorArea.ReadOnly = true;
+			this.colFloorArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colFloorArea.Width = 50;
+			// 
+			// colPlannedArea
+			// 
+			this.colPlannedArea.DataPropertyName = "PlannedArea";
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle3.Format = "F0";
+			this.colPlannedArea.DefaultCellStyle = dataGridViewCellStyle3;
+			this.colPlannedArea.FillWeight = 50F;
+			this.colPlannedArea.HeaderText = "Heiz-\nfläche\n(m²)";
+			this.colPlannedArea.Name = "colPlannedArea";
+			this.colPlannedArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.colPlannedArea.ReadOnly = true;
+			this.colPlannedArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colPlannedArea.Width = 50;
+			// 
+			// colPlannedHeatLoad
+			// 
+			this.colPlannedHeatLoad.DataPropertyName = "PlannedHeatLoadString";
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.colPlannedHeatLoad.DefaultCellStyle = dataGridViewCellStyle4;
+			this.colPlannedHeatLoad.FillWeight = 50F;
+			this.colPlannedHeatLoad.HeaderText = "PHeiz\n(W)";
+			this.colPlannedHeatLoad.Name = "colPlannedHeatLoad";
+			this.colPlannedHeatLoad.ReadOnly = true;
+			this.colPlannedHeatLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colPlannedHeatLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colPlannedHeatLoad.Width = 50;
+			// 
+			// colPlannedCoolLoad
+			// 
+			this.colPlannedCoolLoad.DataPropertyName = "PlannedCoolLoadString";
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.colPlannedCoolLoad.DefaultCellStyle = dataGridViewCellStyle5;
+			this.colPlannedCoolLoad.FillWeight = 50F;
+			this.colPlannedCoolLoad.HeaderText = "PKühl\n(W)";
+			this.colPlannedCoolLoad.Name = "colPlannedCoolLoad";
+			this.colPlannedCoolLoad.ReadOnly = true;
+			this.colPlannedCoolLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colPlannedCoolLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colPlannedCoolLoad.Width = 50;
+			// 
+			// colEdit
+			// 
+			this.colEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.colEdit.FillWeight = 64F;
+			this.colEdit.HeaderText = "Bearbeiten";
+			this.colEdit.Name = "colEdit";
+			this.colEdit.ReadOnly = true;
+			this.colEdit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.colEdit.Text = "...";
+			this.colEdit.UseColumnTextForButtonValue = true;
+			this.colEdit.Width = 64;
+			// 
 			// RoomSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -713,6 +716,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.DataGridView dgvProducts;
 		private System.Windows.Forms.BindingSource plannedProductWrapperBindingSource;
+		private System.Windows.Forms.Button btnDelete;
+		private System.Windows.Forms.Button btnWhatIsNext;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colType;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colSystem;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
@@ -721,7 +726,5 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPlannedHeatLoad;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPlannedCoolLoad;
 		private System.Windows.Forms.DataGridViewButtonColumn colEdit;
-		private System.Windows.Forms.Button btnDelete;
-		private System.Windows.Forms.Button btnWhatIsNext;
 	}
 }

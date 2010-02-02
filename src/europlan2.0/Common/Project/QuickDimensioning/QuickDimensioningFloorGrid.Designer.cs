@@ -39,6 +39,8 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.quickDimensioningGrid = new System.Windows.Forms.DataGridView();
+			this.roomBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.panel1 = new System.Windows.Forms.Panel();
 			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRoomTemperature = new Europlan.Common.NumericColumn();
@@ -64,8 +66,6 @@ namespace Europlan.Common {
 			this.colNrOfServos = new Europlan.Common.NumericColumn();
 			this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRevert = new System.Windows.Forms.DataGridViewButtonColumn();
-			this.roomBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.panel1 = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.roomBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -126,6 +126,19 @@ namespace Europlan.Common {
 			this.quickDimensioningGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.quickDimensioningGrid_CellClick);
 			this.quickDimensioningGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.quickDimensioningGrid_EditingControlShowing);
 			// 
+			// roomBindingSource
+			// 
+			this.roomBindingSource.DataSource = typeof(Europlan.Common.Room);
+			// 
+			// panel1
+			// 
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panel1.Location = new System.Drawing.Point(0, 265);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(753, 26);
+			this.panel1.TabIndex = 1;
+			this.panel1.Visible = false;
+			// 
 			// colId
 			// 
 			this.colId.DataPropertyName = "Id";
@@ -133,6 +146,7 @@ namespace Europlan.Common {
 			this.colId.HeaderText = "Nr.";
 			this.colId.Name = "colId";
 			this.colId.ReadOnly = true;
+			this.colId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colId.Width = 40;
 			// 
 			// colName
@@ -141,6 +155,7 @@ namespace Europlan.Common {
 			this.colName.HeaderText = "Bezeichnung";
 			this.colName.Name = "colName";
 			this.colName.ReadOnly = true;
+			this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// colRoomTemperature
 			// 
@@ -153,14 +168,13 @@ namespace Europlan.Common {
 			this.colRoomTemperature.Name = "colRoomTemperature";
 			this.colRoomTemperature.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
 			this.colRoomTemperature.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colRoomTemperature.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colRoomTemperature.Width = 50;
 			// 
 			// colArea
 			// 
 			this.colArea.DataPropertyName = "Area";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F1";
+			dataGridViewCellStyle3.Format = "F0";
 			this.colArea.DefaultCellStyle = dataGridViewCellStyle3;
 			this.colArea.FillWeight = 50F;
 			this.colArea.HeaderText = "Raumfl.\n(m²)";
@@ -168,7 +182,6 @@ namespace Europlan.Common {
 			this.colArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colArea.ReadOnly = true;
 			this.colArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colArea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colArea.Width = 50;
 			// 
 			// colRoomType
@@ -178,7 +191,6 @@ namespace Europlan.Common {
 			this.colRoomType.HeaderText = "Raumtyp";
 			this.colRoomType.Name = "colRoomType";
 			this.colRoomType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colRoomType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colRoomType.Width = 80;
 			// 
 			// colHeatLoad
@@ -192,7 +204,6 @@ namespace Europlan.Common {
 			this.colHeatLoad.Name = "colHeatLoad";
 			this.colHeatLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.colHeatLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colHeatLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colHeatLoad.Width = 50;
 			// 
 			// colCoolLoad
@@ -206,14 +217,13 @@ namespace Europlan.Common {
 			this.colCoolLoad.Name = "colCoolLoad";
 			this.colCoolLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
 			this.colCoolLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colCoolLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colCoolLoad.Visible = false;
 			this.colCoolLoad.Width = 50;
 			// 
 			// colEuroval
 			// 
 			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle6.Format = "F1";
+			dataGridViewCellStyle6.Format = "F0";
 			this.colEuroval.DefaultCellStyle = dataGridViewCellStyle6;
 			this.colEuroval.FillWeight = 70F;
 			this.colEuroval.HeaderText = "Euroval®\n(m²)";
@@ -237,7 +247,7 @@ namespace Europlan.Common {
 			// colConcreteActivation
 			// 
 			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle8.Format = "F1";
+			dataGridViewCellStyle8.Format = "F0";
 			this.colConcreteActivation.DefaultCellStyle = dataGridViewCellStyle8;
 			this.colConcreteActivation.FillWeight = 70F;
 			this.colConcreteActivation.HeaderText = "BKA\n(m²)";
@@ -259,14 +269,13 @@ namespace Europlan.Common {
 			// colHitherm
 			// 
 			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle9.Format = "F1";
+			dataGridViewCellStyle9.Format = "F0";
 			this.colHitherm.DefaultCellStyle = dataGridViewCellStyle9;
 			this.colHitherm.FillWeight = 70F;
 			this.colHitherm.HeaderText = "Hitherm®\n(m²)";
 			this.colHitherm.Name = "colHitherm";
 			this.colHitherm.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colHitherm.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colHitherm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colHitherm.Visible = false;
 			this.colHitherm.Width = 70;
 			// 
@@ -283,7 +292,7 @@ namespace Europlan.Common {
 			// colHithermCompact
 			// 
 			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle10.Format = "F1";
+			dataGridViewCellStyle10.Format = "F0";
 			this.colHithermCompact.DefaultCellStyle = dataGridViewCellStyle10;
 			this.colHithermCompact.FillWeight = 75F;
 			this.colHithermCompact.HeaderText = "Hitherm® Co\n(m²)";
@@ -305,7 +314,7 @@ namespace Europlan.Common {
 			// colHithermCompactRoof
 			// 
 			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle11.Format = "F1";
+			dataGridViewCellStyle11.Format = "F0";
 			this.colHithermCompactRoof.DefaultCellStyle = dataGridViewCellStyle11;
 			this.colHithermCompactRoof.FillWeight = 75F;
 			this.colHithermCompactRoof.HeaderText = "Hitherm® Co\nDach (m²)";
@@ -327,7 +336,7 @@ namespace Europlan.Common {
 			// colModulKlimaBoden
 			// 
 			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle12.Format = "F1";
+			dataGridViewCellStyle12.Format = "F0";
 			this.colModulKlimaBoden.DefaultCellStyle = dataGridViewCellStyle12;
 			this.colModulKlimaBoden.FillWeight = 75F;
 			this.colModulKlimaBoden.HeaderText = "Klima-Boden\n(m²)";
@@ -349,7 +358,7 @@ namespace Europlan.Common {
 			// colModulKlimaDecke
 			// 
 			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle13.Format = "F1";
+			dataGridViewCellStyle13.Format = "F0";
 			this.colModulKlimaDecke.DefaultCellStyle = dataGridViewCellStyle13;
 			this.colModulKlimaDecke.FillWeight = 75F;
 			this.colModulKlimaDecke.HeaderText = "Klima-Decke\n(m²)";
@@ -386,7 +395,6 @@ namespace Europlan.Common {
 			this.colNrOfServos.HeaderText = "Stell-\nmotore";
 			this.colNrOfServos.Name = "colNrOfServos";
 			this.colNrOfServos.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colNrOfServos.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colNrOfServos.Width = 50;
 			// 
 			// colComments
@@ -394,6 +402,7 @@ namespace Europlan.Common {
 			this.colComments.DataPropertyName = "QuickDimensioningComments";
 			this.colComments.HeaderText = "Bemerkung";
 			this.colComments.Name = "colComments";
+			this.colComments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// colRevert
 			// 
@@ -404,19 +413,6 @@ namespace Europlan.Common {
 			this.colRevert.Text = "Rücksetzen";
 			this.colRevert.UseColumnTextForButtonValue = true;
 			this.colRevert.Width = 70;
-			// 
-			// roomBindingSource
-			// 
-			this.roomBindingSource.DataSource = typeof(Europlan.Common.Room);
-			// 
-			// panel1
-			// 
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel1.Location = new System.Drawing.Point(0, 265);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(753, 26);
-			this.panel1.TabIndex = 1;
-			this.panel1.Visible = false;
 			// 
 			// QuickDimensioningFloorGrid
 			// 

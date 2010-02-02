@@ -24,12 +24,13 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridDistributors = new System.Windows.Forms.DataGridView();
+			this.distributorBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.distributorBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridDistributors)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.distributorBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -40,6 +41,14 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.gridDistributors.AutoGenerateColumns = false;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridDistributors.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.gridDistributors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridDistributors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
@@ -50,6 +59,10 @@ namespace Europlan.Common {
 			this.gridDistributors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridDistributors.Size = new System.Drawing.Size(446, 201);
 			this.gridDistributors.TabIndex = 0;
+			// 
+			// distributorBindingSource
+			// 
+			this.distributorBindingSource.DataSource = typeof(Europlan.Common.Distributor);
 			// 
 			// btnCancel
 			// 
@@ -78,6 +91,7 @@ namespace Europlan.Common {
 			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
 			this.idDataGridViewTextBoxColumn.HeaderText = "Id";
 			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// nameDataGridViewTextBoxColumn
 			// 
@@ -85,10 +99,7 @@ namespace Europlan.Common {
 			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
 			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
 			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			// 
-			// distributorBindingSource
-			// 
-			this.distributorBindingSource.DataSource = typeof(Europlan.Common.Distributor);
+			this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// SelectDistributorForm
 			// 
@@ -114,10 +125,10 @@ namespace Europlan.Common {
 
 		private System.Windows.Forms.DataGridView gridDistributors;
 		private System.Windows.Forms.BindingSource distributorBindingSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOk;
+		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 
 	}
 }

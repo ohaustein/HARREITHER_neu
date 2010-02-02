@@ -23,6 +23,8 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.grpPowerArea = new System.Windows.Forms.GroupBox();
 			this.lblAreaUnheated = new System.Windows.Forms.Label();
 			this.lblAreaUnheatedTxt = new System.Windows.Forms.Label();
@@ -154,6 +156,10 @@ namespace Europlan.Common {
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.pageCorrections = new System.Windows.Forms.TabPage();
+			this.gridExtendedCorrections = new System.Windows.Forms.DataGridView();
+			this.rbExtendedCorrections = new System.Windows.Forms.RadioButton();
+			this.rbStandardCorrections = new System.Windows.Forms.RadioButton();
 			this.numAreaUnheated = new Europlan.Common.NumericBox();
 			this.numAreaReduced = new Europlan.Common.NumericBox();
 			this.numAreaPercentage = new Europlan.Common.NumericBox();
@@ -167,8 +173,22 @@ namespace Europlan.Common {
 			this.numRoomTemperatureBelowCool = new Europlan.Common.NumericBox();
 			this.numRoomTemperatureBelowHeat = new Europlan.Common.NumericBox();
 			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
+			this.extendedCorrectionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.CircuitNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.correctAreaDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.areaValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.areaPercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.areaReducedValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.areaUnheatedValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.correctRimDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.rimLengthValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.rimPercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.rimCornersValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.correctConnectionsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.connectionsPercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.connectionsValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -182,6 +202,9 @@ namespace Europlan.Common {
 			this.panel2.SuspendLayout();
 			this.groupBox8.SuspendLayout();
 			this.grpResults.SuspendLayout();
+			this.pageCorrections.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridExtendedCorrections)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.extendedCorrectionsBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// grpPowerArea
@@ -503,6 +526,7 @@ namespace Europlan.Common {
 			this.tabs.Controls.Add(this.pageInput);
 			this.tabs.Controls.Add(this.pageCircuit);
 			this.tabs.Controls.Add(this.pageConstruction);
+			this.tabs.Controls.Add(this.pageCorrections);
 			this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabs.Location = new System.Drawing.Point(0, 0);
 			this.tabs.Name = "tabs";
@@ -1550,6 +1574,76 @@ namespace Europlan.Common {
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Heizen:";
 			// 
+			// pageCorrections
+			// 
+			this.pageCorrections.Controls.Add(this.gridExtendedCorrections);
+			this.pageCorrections.Controls.Add(this.rbExtendedCorrections);
+			this.pageCorrections.Controls.Add(this.rbStandardCorrections);
+			this.pageCorrections.Location = new System.Drawing.Point(4, 22);
+			this.pageCorrections.Name = "pageCorrections";
+			this.pageCorrections.Size = new System.Drawing.Size(856, 502);
+			this.pageCorrections.TabIndex = 3;
+			this.pageCorrections.Text = "erweiterte Korrekturen";
+			this.pageCorrections.UseVisualStyleBackColor = true;
+			// 
+			// gridExtendedCorrections
+			// 
+			this.gridExtendedCorrections.AllowUserToResizeRows = false;
+			this.gridExtendedCorrections.AutoGenerateColumns = false;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this.gridExtendedCorrections.ColumnHeadersHeight = 55;
+			this.gridExtendedCorrections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.gridExtendedCorrections.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CircuitNr,
+            this.correctAreaDataGridViewCheckBoxColumn,
+            this.areaValueDataGridViewTextBoxColumn,
+            this.areaPercentageDataGridViewTextBoxColumn,
+            this.areaReducedValueDataGridViewTextBoxColumn,
+            this.areaUnheatedValueDataGridViewTextBoxColumn,
+            this.correctRimDataGridViewCheckBoxColumn,
+            this.rimLengthValueDataGridViewTextBoxColumn,
+            this.rimPercentageDataGridViewTextBoxColumn,
+            this.rimCornersValueDataGridViewTextBoxColumn,
+            this.correctConnectionsDataGridViewCheckBoxColumn,
+            this.connectionsPercentageDataGridViewTextBoxColumn,
+            this.connectionsValueDataGridViewTextBoxColumn});
+			this.gridExtendedCorrections.DataSource = this.extendedCorrectionsBindingSource;
+			this.gridExtendedCorrections.Location = new System.Drawing.Point(16, 137);
+			this.gridExtendedCorrections.MultiSelect = false;
+			this.gridExtendedCorrections.Name = "gridExtendedCorrections";
+			this.gridExtendedCorrections.Size = new System.Drawing.Size(786, 185);
+			this.gridExtendedCorrections.TabIndex = 2;
+			this.gridExtendedCorrections.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.gridExtendedCorrections_RowPrePaint);
+			// 
+			// rbExtendedCorrections
+			// 
+			this.rbExtendedCorrections.AutoSize = true;
+			this.rbExtendedCorrections.Location = new System.Drawing.Point(16, 41);
+			this.rbExtendedCorrections.Name = "rbExtendedCorrections";
+			this.rbExtendedCorrections.Size = new System.Drawing.Size(178, 17);
+			this.rbExtendedCorrections.TabIndex = 1;
+			this.rbExtendedCorrections.Text = "erweiterte Korrekturen aktivieren";
+			this.rbExtendedCorrections.UseVisualStyleBackColor = true;
+			// 
+			// rbStandardCorrections
+			// 
+			this.rbStandardCorrections.AutoSize = true;
+			this.rbStandardCorrections.Checked = true;
+			this.rbStandardCorrections.Location = new System.Drawing.Point(16, 18);
+			this.rbStandardCorrections.Name = "rbStandardCorrections";
+			this.rbStandardCorrections.Size = new System.Drawing.Size(344, 17);
+			this.rbStandardCorrections.TabIndex = 0;
+			this.rbStandardCorrections.TabStop = true;
+			this.rbStandardCorrections.Text = "nur Standardkorrekturen verwenden (keine erweiterten Korrekturen)";
+			this.rbStandardCorrections.UseVisualStyleBackColor = true;
+			// 
 			// numAreaUnheated
 			// 
 			this.numAreaUnheated.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
@@ -1916,17 +2010,139 @@ namespace Europlan.Common {
 			this.connectionPipePanel.TabIndex = 0;
 			this.connectionPipePanel.GridContentChanged += new Europlan.Common.ConnectionPipePanelContentChangedHandler(this.connectionPipePanel1_GridContentChanged);
 			// 
+			// extendedCorrectionsBindingSource
+			// 
+			this.extendedCorrectionsBindingSource.DataSource = typeof(Europlan.Common.ExtendedCorrections);
+			// 
 			// dataGridViewTextBoxColumn1
 			// 
 			this.dataGridViewTextBoxColumn1.DataPropertyName = "PipeType";
+			this.dataGridViewTextBoxColumn1.FillWeight = 40F;
 			this.dataGridViewTextBoxColumn1.HeaderText = "PipeType";
 			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.Width = 40;
 			// 
 			// dataGridViewTextBoxColumn2
 			// 
 			this.dataGridViewTextBoxColumn2.DataPropertyName = "Verlegeart";
 			this.dataGridViewTextBoxColumn2.HeaderText = "Verlegeart";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			// 
+			// CircuitNr
+			// 
+			this.CircuitNr.DataPropertyName = "CircuitNr";
+			this.CircuitNr.FillWeight = 40F;
+			this.CircuitNr.HeaderText = "Heiz-\nkreis\nNr.";
+			this.CircuitNr.Name = "CircuitNr";
+			this.CircuitNr.ReadOnly = true;
+			this.CircuitNr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.CircuitNr.Width = 40;
+			// 
+			// correctAreaDataGridViewCheckBoxColumn
+			// 
+			this.correctAreaDataGridViewCheckBoxColumn.DataPropertyName = "CorrectArea";
+			this.correctAreaDataGridViewCheckBoxColumn.FillWeight = 45F;
+			this.correctAreaDataGridViewCheckBoxColumn.HeaderText = "Vor-\ngabe";
+			this.correctAreaDataGridViewCheckBoxColumn.Name = "correctAreaDataGridViewCheckBoxColumn";
+			this.correctAreaDataGridViewCheckBoxColumn.Width = 45;
+			// 
+			// areaValueDataGridViewTextBoxColumn
+			// 
+			this.areaValueDataGridViewTextBoxColumn.DataPropertyName = "AreaValue";
+			this.areaValueDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.areaValueDataGridViewTextBoxColumn.HeaderText = "m²\n";
+			this.areaValueDataGridViewTextBoxColumn.Name = "areaValueDataGridViewTextBoxColumn";
+			this.areaValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.areaValueDataGridViewTextBoxColumn.Width = 55;
+			// 
+			// areaPercentageDataGridViewTextBoxColumn
+			// 
+			this.areaPercentageDataGridViewTextBoxColumn.DataPropertyName = "AreaPercentage";
+			this.areaPercentageDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.areaPercentageDataGridViewTextBoxColumn.HeaderText = "%\n";
+			this.areaPercentageDataGridViewTextBoxColumn.Name = "areaPercentageDataGridViewTextBoxColumn";
+			this.areaPercentageDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.areaPercentageDataGridViewTextBoxColumn.Width = 55;
+			// 
+			// areaReducedValueDataGridViewTextBoxColumn
+			// 
+			this.areaReducedValueDataGridViewTextBoxColumn.DataPropertyName = "AreaReducedValue";
+			this.areaReducedValueDataGridViewTextBoxColumn.HeaderText = "AreaReducedValue";
+			this.areaReducedValueDataGridViewTextBoxColumn.Name = "areaReducedValueDataGridViewTextBoxColumn";
+			this.areaReducedValueDataGridViewTextBoxColumn.ReadOnly = true;
+			this.areaReducedValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.areaReducedValueDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// areaUnheatedValueDataGridViewTextBoxColumn
+			// 
+			this.areaUnheatedValueDataGridViewTextBoxColumn.DataPropertyName = "AreaUnheatedValue";
+			this.areaUnheatedValueDataGridViewTextBoxColumn.HeaderText = "AreaUnheatedValue";
+			this.areaUnheatedValueDataGridViewTextBoxColumn.Name = "areaUnheatedValueDataGridViewTextBoxColumn";
+			this.areaUnheatedValueDataGridViewTextBoxColumn.ReadOnly = true;
+			this.areaUnheatedValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.areaUnheatedValueDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// correctRimDataGridViewCheckBoxColumn
+			// 
+			this.correctRimDataGridViewCheckBoxColumn.DataPropertyName = "CorrectRim";
+			this.correctRimDataGridViewCheckBoxColumn.FillWeight = 45F;
+			this.correctRimDataGridViewCheckBoxColumn.HeaderText = "Vor-\ngabe";
+			this.correctRimDataGridViewCheckBoxColumn.Name = "correctRimDataGridViewCheckBoxColumn";
+			this.correctRimDataGridViewCheckBoxColumn.Width = 45;
+			// 
+			// rimLengthValueDataGridViewTextBoxColumn
+			// 
+			this.rimLengthValueDataGridViewTextBoxColumn.DataPropertyName = "RimLengthValue";
+			this.rimLengthValueDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.rimLengthValueDataGridViewTextBoxColumn.HeaderText = "m\n";
+			this.rimLengthValueDataGridViewTextBoxColumn.Name = "rimLengthValueDataGridViewTextBoxColumn";
+			this.rimLengthValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.rimLengthValueDataGridViewTextBoxColumn.Width = 55;
+			// 
+			// rimPercentageDataGridViewTextBoxColumn
+			// 
+			this.rimPercentageDataGridViewTextBoxColumn.DataPropertyName = "RimPercentage";
+			this.rimPercentageDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.rimPercentageDataGridViewTextBoxColumn.HeaderText = "%\n";
+			this.rimPercentageDataGridViewTextBoxColumn.Name = "rimPercentageDataGridViewTextBoxColumn";
+			this.rimPercentageDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.rimPercentageDataGridViewTextBoxColumn.Width = 55;
+			// 
+			// rimCornersValueDataGridViewTextBoxColumn
+			// 
+			this.rimCornersValueDataGridViewTextBoxColumn.DataPropertyName = "RimCornersValue";
+			this.rimCornersValueDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.rimCornersValueDataGridViewTextBoxColumn.HeaderText = "Anzahl\nEcken";
+			this.rimCornersValueDataGridViewTextBoxColumn.Name = "rimCornersValueDataGridViewTextBoxColumn";
+			this.rimCornersValueDataGridViewTextBoxColumn.ReadOnly = true;
+			this.rimCornersValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.rimCornersValueDataGridViewTextBoxColumn.Width = 55;
+			// 
+			// correctConnectionsDataGridViewCheckBoxColumn
+			// 
+			this.correctConnectionsDataGridViewCheckBoxColumn.DataPropertyName = "CorrectConnections";
+			this.correctConnectionsDataGridViewCheckBoxColumn.FillWeight = 45F;
+			this.correctConnectionsDataGridViewCheckBoxColumn.HeaderText = "Vor-\ngabe";
+			this.correctConnectionsDataGridViewCheckBoxColumn.Name = "correctConnectionsDataGridViewCheckBoxColumn";
+			this.correctConnectionsDataGridViewCheckBoxColumn.Width = 45;
+			// 
+			// connectionsPercentageDataGridViewTextBoxColumn
+			// 
+			this.connectionsPercentageDataGridViewTextBoxColumn.DataPropertyName = "ConnectionsPercentage";
+			this.connectionsPercentageDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.connectionsPercentageDataGridViewTextBoxColumn.HeaderText = "Fläche\n%";
+			this.connectionsPercentageDataGridViewTextBoxColumn.Name = "connectionsPercentageDataGridViewTextBoxColumn";
+			this.connectionsPercentageDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.connectionsPercentageDataGridViewTextBoxColumn.Width = 55;
+			// 
+			// connectionsValueDataGridViewTextBoxColumn
+			// 
+			this.connectionsValueDataGridViewTextBoxColumn.DataPropertyName = "ConnectionsValue";
+			this.connectionsValueDataGridViewTextBoxColumn.HeaderText = "ConnectionsValue";
+			this.connectionsValueDataGridViewTextBoxColumn.Name = "connectionsValueDataGridViewTextBoxColumn";
+			this.connectionsValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.connectionsValueDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// PlannedEurovalProductPanel
 			// 
@@ -1953,6 +2169,10 @@ namespace Europlan.Common {
 			this.groupBox8.ResumeLayout(false);
 			this.groupBox8.PerformLayout();
 			this.grpResults.ResumeLayout(false);
+			this.pageCorrections.ResumeLayout(false);
+			this.pageCorrections.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridExtendedCorrections)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.extendedCorrectionsBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -2105,5 +2325,23 @@ namespace Europlan.Common {
 		private System.Windows.Forms.CheckBox chkStellAntriebe;
 		private System.Windows.Forms.ListView lstError;
 		private System.Windows.Forms.ColumnHeader defaultColumn;
+		private System.Windows.Forms.TabPage pageCorrections;
+		private System.Windows.Forms.RadioButton rbStandardCorrections;
+		private System.Windows.Forms.RadioButton rbExtendedCorrections;
+		private System.Windows.Forms.DataGridView gridExtendedCorrections;
+		private System.Windows.Forms.BindingSource extendedCorrectionsBindingSource;
+		private System.Windows.Forms.DataGridViewTextBoxColumn CircuitNr;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn correctAreaDataGridViewCheckBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn areaValueDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn areaPercentageDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn areaReducedValueDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn areaUnheatedValueDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn correctRimDataGridViewCheckBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn rimLengthValueDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn rimPercentageDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn rimCornersValueDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn correctConnectionsDataGridViewCheckBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn connectionsPercentageDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn connectionsValueDataGridViewTextBoxColumn;
 	}
 }

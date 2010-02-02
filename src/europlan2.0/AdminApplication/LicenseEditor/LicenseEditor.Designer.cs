@@ -24,8 +24,9 @@ namespace Europlan.AdminApplication {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.lblSystem = new System.Windows.Forms.Label();
 			this.lstModules = new System.Windows.Forms.ListView();
 			this.lblModules = new System.Windows.Forms.Label();
@@ -183,6 +184,14 @@ namespace Europlan.AdminApplication {
 			this.dataGridView1.AllowUserToResizeRows = false;
 			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.matchesCurrentSystemDataGridViewCheckBoxColumn,
@@ -213,8 +222,8 @@ namespace Europlan.AdminApplication {
 			// dataGridViewHardwareIdColumn1
 			// 
 			this.dataGridViewHardwareIdColumn1.DataPropertyName = "Id";
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.dataGridViewHardwareIdColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.dataGridViewHardwareIdColumn1.DefaultCellStyle = dataGridViewCellStyle3;
 			this.dataGridViewHardwareIdColumn1.HeaderText = "Hardware ID";
 			this.dataGridViewHardwareIdColumn1.Name = "dataGridViewHardwareIdColumn1";
 			this.dataGridViewHardwareIdColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -246,18 +255,16 @@ namespace Europlan.AdminApplication {
 			this.addedDateDataGridViewTextBoxColumn.HeaderText = "Hinzugefügt am";
 			this.addedDateDataGridViewTextBoxColumn.Name = "addedDateDataGridViewTextBoxColumn";
 			this.addedDateDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.addedDateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.addedDateDataGridViewTextBoxColumn.Width = 120;
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
 			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.idDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.idDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
 			this.idDataGridViewTextBoxColumn.HeaderText = "Hardware ID";
 			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
 			this.idDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.idDataGridViewTextBoxColumn.Width = 170;
 			// 
 			// annotationDataGridViewTextBoxColumn
@@ -265,6 +272,7 @@ namespace Europlan.AdminApplication {
 			this.annotationDataGridViewTextBoxColumn.DataPropertyName = "Annotation";
 			this.annotationDataGridViewTextBoxColumn.HeaderText = "Anmerkung";
 			this.annotationDataGridViewTextBoxColumn.Name = "annotationDataGridViewTextBoxColumn";
+			this.annotationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.annotationDataGridViewTextBoxColumn.Width = 200;
 			// 
 			// LicenseEditor

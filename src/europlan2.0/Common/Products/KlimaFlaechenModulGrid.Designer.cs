@@ -24,7 +24,9 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvModules = new System.Windows.Forms.DataGridView();
+			this.klimaFlaechenModulBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnAlign = new System.Windows.Forms.Button();
@@ -33,7 +35,6 @@ namespace Europlan.Common {
 			this.modulTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.orientationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.areaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.klimaFlaechenModulBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dgvModules)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.klimaFlaechenModulBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -45,6 +46,14 @@ namespace Europlan.Common {
 			this.dgvModules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
 			this.dgvModules.AutoGenerateColumns = false;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvModules.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.dgvModules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvModules.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.modulTypeDataGridViewTextBoxColumn,
@@ -56,6 +65,10 @@ namespace Europlan.Common {
 			this.dgvModules.Size = new System.Drawing.Size(299, 343);
 			this.dgvModules.TabIndex = 0;
 			this.dgvModules.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModules_CellValueChanged);
+			// 
+			// klimaFlaechenModulBindingSource
+			// 
+			this.klimaFlaechenModulBindingSource.DataSource = typeof(Europlan.Common.KlimaFlaechenModul);
 			// 
 			// btnAdd
 			// 
@@ -113,7 +126,6 @@ namespace Europlan.Common {
 			this.modulTypeDataGridViewTextBoxColumn.HeaderText = "Modultyp";
 			this.modulTypeDataGridViewTextBoxColumn.Name = "modulTypeDataGridViewTextBoxColumn";
 			this.modulTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.modulTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.modulTypeDataGridViewTextBoxColumn.Width = 120;
 			// 
 			// orientationDataGridViewTextBoxColumn
@@ -122,7 +134,6 @@ namespace Europlan.Common {
 			this.orientationDataGridViewTextBoxColumn.HeaderText = "Ausrichtung";
 			this.orientationDataGridViewTextBoxColumn.Name = "orientationDataGridViewTextBoxColumn";
 			this.orientationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.orientationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			// 
 			// areaDataGridViewTextBoxColumn
 			// 
@@ -130,11 +141,8 @@ namespace Europlan.Common {
 			this.areaDataGridViewTextBoxColumn.HeaderText = "Area";
 			this.areaDataGridViewTextBoxColumn.Name = "areaDataGridViewTextBoxColumn";
 			this.areaDataGridViewTextBoxColumn.ReadOnly = true;
+			this.areaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.areaDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// klimaFlaechenModulBindingSource
-			// 
-			this.klimaFlaechenModulBindingSource.DataSource = typeof(Europlan.Common.KlimaFlaechenModul);
 			// 
 			// KlimaFlaechenModulGrid
 			// 
@@ -162,10 +170,10 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.Button btnRemove;
 		private System.Windows.Forms.Button btnAlign;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label lblCount;
 		private System.Windows.Forms.DataGridViewComboBoxColumn modulTypeDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewComboBoxColumn orientationDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn areaDataGridViewTextBoxColumn;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label lblCount;
 	}
 }

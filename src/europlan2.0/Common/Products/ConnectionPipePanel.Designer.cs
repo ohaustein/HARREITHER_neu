@@ -36,6 +36,7 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvConnectionPipes = new System.Windows.Forms.DataGridView();
+			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.vorlaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.ruecklaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
@@ -51,7 +52,6 @@ namespace Europlan.Common {
 			this.Area = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.HeatLoad = new Europlan.Common.NumericColumn();
 			this.CoolLoad = new Europlan.Common.NumericColumn();
-			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dgvConnectionPipes)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.connectionPipeBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -101,6 +101,10 @@ namespace Europlan.Common {
 			this.dgvConnectionPipes.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvConnectionPipes_DataError);
 			this.dgvConnectionPipes.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellEnter);
 			// 
+			// connectionPipeBindingSource
+			// 
+			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
+			// 
 			// Room
 			// 
 			this.Room.DataPropertyName = "DestinationRoom";
@@ -110,6 +114,7 @@ namespace Europlan.Common {
 			this.Room.HeaderText = "Raum";
 			this.Room.Name = "Room";
 			this.Room.ReadOnly = true;
+			this.Room.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.Room.Visible = false;
 			this.Room.Width = 120;
 			// 
@@ -117,28 +122,26 @@ namespace Europlan.Common {
 			// 
 			this.vorlaufDataGridViewTextBoxColumn.DataPropertyName = "Vorlauf";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F1";
+			dataGridViewCellStyle3.Format = "F0";
 			this.vorlaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.vorlaufDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.vorlaufDataGridViewTextBoxColumn.HeaderText = "Länge\nVorlauf\n(m)";
 			this.vorlaufDataGridViewTextBoxColumn.Name = "vorlaufDataGridViewTextBoxColumn";
 			this.vorlaufDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
 			this.vorlaufDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.vorlaufDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.vorlaufDataGridViewTextBoxColumn.Width = 70;
 			// 
 			// ruecklaufDataGridViewTextBoxColumn
 			// 
 			this.ruecklaufDataGridViewTextBoxColumn.DataPropertyName = "Ruecklauf";
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F1";
+			dataGridViewCellStyle4.Format = "F0";
 			this.ruecklaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
 			this.ruecklaufDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.ruecklaufDataGridViewTextBoxColumn.HeaderText = "Länge\nRücklauf\n(m)";
 			this.ruecklaufDataGridViewTextBoxColumn.Name = "ruecklaufDataGridViewTextBoxColumn";
 			this.ruecklaufDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
 			this.ruecklaufDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.ruecklaufDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.ruecklaufDataGridViewTextBoxColumn.Width = 70;
 			// 
 			// roomDataGridViewComboBoxColumn
@@ -149,6 +152,7 @@ namespace Europlan.Common {
 			this.roomDataGridViewComboBoxColumn.Name = "roomDataGridViewComboBoxColumn";
 			this.roomDataGridViewComboBoxColumn.ReadOnly = true;
 			this.roomDataGridViewComboBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.roomDataGridViewComboBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.roomDataGridViewComboBoxColumn.Width = 120;
 			// 
 			// productDataGridViewComboBoxColumn
@@ -159,6 +163,7 @@ namespace Europlan.Common {
 			this.productDataGridViewComboBoxColumn.Name = "productDataGridViewComboBoxColumn";
 			this.productDataGridViewComboBoxColumn.ReadOnly = true;
 			this.productDataGridViewComboBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.productDataGridViewComboBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.productDataGridViewComboBoxColumn.Width = 120;
 			// 
 			// PlannedCircuits
@@ -172,7 +177,6 @@ namespace Europlan.Common {
 			this.PlannedCircuits.NumEditType = Europlan.Common.NumericBox.NumericEditType.DENOMINATION;
 			this.PlannedCircuits.ReadOnly = true;
 			this.PlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.PlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.PlannedCircuits.Visible = false;
 			this.PlannedCircuits.Width = 40;
 			// 
@@ -208,6 +212,7 @@ namespace Europlan.Common {
 			this.PipeType.Name = "PipeType";
 			this.PipeType.ReadOnly = true;
 			this.PipeType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.PipeType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.PipeType.Width = 125;
 			// 
 			// PipeTypeText
@@ -218,6 +223,7 @@ namespace Europlan.Common {
 			this.PipeTypeText.HeaderText = "Rohrsystem";
 			this.PipeTypeText.Name = "PipeTypeText";
 			this.PipeTypeText.ReadOnly = true;
+			this.PipeTypeText.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.PipeTypeText.Visible = false;
 			// 
 			// Verlegeart
@@ -228,6 +234,7 @@ namespace Europlan.Common {
 			this.Verlegeart.Name = "Verlegeart";
 			this.Verlegeart.ReadOnly = true;
 			this.Verlegeart.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.Verlegeart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.Verlegeart.Width = 85;
 			// 
 			// Insulation
@@ -238,6 +245,7 @@ namespace Europlan.Common {
 			this.Insulation.Name = "Insulation";
 			this.Insulation.ReadOnly = true;
 			this.Insulation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.Insulation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.Insulation.Width = 60;
 			// 
 			// Area
@@ -248,6 +256,7 @@ namespace Europlan.Common {
 			this.Area.HeaderText = "Fläche";
 			this.Area.Name = "Area";
 			this.Area.ReadOnly = true;
+			this.Area.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.Area.Visible = false;
 			this.Area.Width = 50;
 			// 
@@ -263,7 +272,6 @@ namespace Europlan.Common {
 			this.HeatLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
 			this.HeatLoad.ReadOnly = true;
 			this.HeatLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.HeatLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.HeatLoad.Visible = false;
 			this.HeatLoad.Width = 50;
 			// 
@@ -279,13 +287,8 @@ namespace Europlan.Common {
 			this.CoolLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
 			this.CoolLoad.ReadOnly = true;
 			this.CoolLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.CoolLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.CoolLoad.Visible = false;
 			this.CoolLoad.Width = 50;
-			// 
-			// connectionPipeBindingSource
-			// 
-			this.connectionPipeBindingSource.DataSource = typeof(Europlan.Common.ConnectionPipe);
 			// 
 			// ConnectionPipePanel
 			// 

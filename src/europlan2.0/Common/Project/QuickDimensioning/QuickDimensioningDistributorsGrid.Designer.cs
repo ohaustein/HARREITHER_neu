@@ -115,6 +115,7 @@ namespace Europlan.Common {
 			this.colRoomId.HeaderText = "Raum-\nnr.";
 			this.colRoomId.Name = "colRoomId";
 			this.colRoomId.ReadOnly = true;
+			this.colRoomId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colRoomId.Width = 45;
 			// 
 			// colRoomName
@@ -123,6 +124,7 @@ namespace Europlan.Common {
 			this.colRoomName.HeaderText = "Raumname";
 			this.colRoomName.Name = "colRoomName";
 			this.colRoomName.ReadOnly = true;
+			this.colRoomName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// colFloorName
 			// 
@@ -130,6 +132,7 @@ namespace Europlan.Common {
 			this.colFloorName.HeaderText = "Geschoß";
 			this.colFloorName.Name = "colFloorName";
 			this.colFloorName.ReadOnly = true;
+			this.colFloorName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// colEurovalOpenCircuits
 			// 
@@ -140,6 +143,7 @@ namespace Europlan.Common {
 			this.colEurovalOpenCircuits.HeaderText = "Euroval®\noffene\nHeizkreise";
 			this.colEurovalOpenCircuits.Name = "colEurovalOpenCircuits";
 			this.colEurovalOpenCircuits.ReadOnly = true;
+			this.colEurovalOpenCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colEurovalOpenCircuits.Width = 70;
 			// 
 			// colEurovalPlannedCircuits
@@ -151,7 +155,6 @@ namespace Europlan.Common {
 			this.colEurovalPlannedCircuits.HeaderText = "Euroval®\nangeschl.\nHeizkreise";
 			this.colEurovalPlannedCircuits.Name = "colEurovalPlannedCircuits";
 			this.colEurovalPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colEurovalPlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colEurovalPlannedCircuits.Width = 70;
 			// 
 			// colConcreteActivationOpenCircuits
@@ -163,6 +166,7 @@ namespace Europlan.Common {
 			this.colConcreteActivationOpenCircuits.HeaderText = "BKA\noffene\nHeizkreise";
 			this.colConcreteActivationOpenCircuits.Name = "colConcreteActivationOpenCircuits";
 			this.colConcreteActivationOpenCircuits.ReadOnly = true;
+			this.colConcreteActivationOpenCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colConcreteActivationOpenCircuits.Width = 70;
 			// 
 			// colConcreteActivationPlannedCircuits
@@ -175,7 +179,6 @@ namespace Europlan.Common {
 			this.colConcreteActivationPlannedCircuits.Name = "colConcreteActivationPlannedCircuits";
 			this.colConcreteActivationPlannedCircuits.ReadOnly = true;
 			this.colConcreteActivationPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colConcreteActivationPlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colConcreteActivationPlannedCircuits.Width = 70;
 			// 
 			// colHithermOpenCircuits
@@ -187,6 +190,7 @@ namespace Europlan.Common {
 			this.colHithermOpenCircuits.HeaderText = "Hitherm®\noffene\nHeizkreise";
 			this.colHithermOpenCircuits.Name = "colHithermOpenCircuits";
 			this.colHithermOpenCircuits.ReadOnly = true;
+			this.colHithermOpenCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colHithermOpenCircuits.Width = 70;
 			// 
 			// colHithermPlannedCircuits
@@ -199,7 +203,6 @@ namespace Europlan.Common {
 			this.colHithermPlannedCircuits.Name = "colHithermPlannedCircuits";
 			this.colHithermPlannedCircuits.ReadOnly = true;
 			this.colHithermPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colHithermPlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colHithermPlannedCircuits.Width = 70;
 			// 
 			// colHithermCompactOpenCircuits
@@ -211,6 +214,7 @@ namespace Europlan.Common {
 			this.colHithermCompactOpenCircuits.HeaderText = "Hitherm® Co\noffene\nHeizkreise";
 			this.colHithermCompactOpenCircuits.Name = "colHithermCompactOpenCircuits";
 			this.colHithermCompactOpenCircuits.ReadOnly = true;
+			this.colHithermCompactOpenCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colHithermCompactOpenCircuits.Width = 75;
 			// 
 			// colHithermCompactPlannedCircuits
@@ -223,7 +227,6 @@ namespace Europlan.Common {
 			this.colHithermCompactPlannedCircuits.Name = "colHithermCompactPlannedCircuits";
 			this.colHithermCompactPlannedCircuits.ReadOnly = true;
 			this.colHithermCompactPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colHithermCompactPlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colHithermCompactPlannedCircuits.Width = 75;
 			// 
 			// colHithermCompactRoofOpenCircuits
@@ -235,6 +238,7 @@ namespace Europlan.Common {
 			this.colHithermCompactRoofOpenCircuits.HeaderText = "Hitherm® Co\nDach offene\nHeizkreise";
 			this.colHithermCompactRoofOpenCircuits.Name = "colHithermCompactRoofOpenCircuits";
 			this.colHithermCompactRoofOpenCircuits.ReadOnly = true;
+			this.colHithermCompactRoofOpenCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colHithermCompactRoofOpenCircuits.Width = 80;
 			// 
 			// colHithermCompactRoofPlannedCircuits
@@ -247,7 +251,6 @@ namespace Europlan.Common {
 			this.colHithermCompactRoofPlannedCircuits.Name = "colHithermCompactRoofPlannedCircuits";
 			this.colHithermCompactRoofPlannedCircuits.ReadOnly = true;
 			this.colHithermCompactRoofPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colHithermCompactRoofPlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colHithermCompactRoofPlannedCircuits.Width = 110;
 			// 
 			// colModulKlimaBodenOpenCircuits
@@ -259,6 +262,7 @@ namespace Europlan.Common {
 			this.colModulKlimaBodenOpenCircuits.HeaderText = "Klima-Boden\noffene\nHeizkreise";
 			this.colModulKlimaBodenOpenCircuits.Name = "colModulKlimaBodenOpenCircuits";
 			this.colModulKlimaBodenOpenCircuits.ReadOnly = true;
+			this.colModulKlimaBodenOpenCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colModulKlimaBodenOpenCircuits.Width = 75;
 			// 
 			// colModulKlimaBodenPlannedCircuits
@@ -271,7 +275,6 @@ namespace Europlan.Common {
 			this.colModulKlimaBodenPlannedCircuits.Name = "colModulKlimaBodenPlannedCircuits";
 			this.colModulKlimaBodenPlannedCircuits.ReadOnly = true;
 			this.colModulKlimaBodenPlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colModulKlimaBodenPlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colModulKlimaBodenPlannedCircuits.Width = 75;
 			// 
 			// colModulKlimaDeckeOpenCircuits
@@ -283,6 +286,7 @@ namespace Europlan.Common {
 			this.colModulKlimaDeckeOpenCircuits.HeaderText = "Klima-Decke\noffene\nHeizkreise";
 			this.colModulKlimaDeckeOpenCircuits.Name = "colModulKlimaDeckeOpenCircuits";
 			this.colModulKlimaDeckeOpenCircuits.ReadOnly = true;
+			this.colModulKlimaDeckeOpenCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colModulKlimaDeckeOpenCircuits.Width = 75;
 			// 
 			// colModulKlimaDeckePlannedCircuits
@@ -295,7 +299,6 @@ namespace Europlan.Common {
 			this.colModulKlimaDeckePlannedCircuits.Name = "colModulKlimaDeckePlannedCircuits";
 			this.colModulKlimaDeckePlannedCircuits.ReadOnly = true;
 			this.colModulKlimaDeckePlannedCircuits.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colModulKlimaDeckePlannedCircuits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.colModulKlimaDeckePlannedCircuits.Width = 75;
 			// 
 			// QuickDimensioningDistributorsGrid
