@@ -18,14 +18,10 @@ namespace Europlan.Common {
 		private string outsideConstruction;
 		private double outsideRValue;
 		private int circuits;
-		private double dichtArea;
-		private double modulierendArea;
-		private double sonstigeArea;
+		private double totalArea;
 		private double connectionArea;
 
-		private int dichteModule;
-		private int modulierendeModule;
-		private int sonstigeModule;
+		public Dictionary<KlimaFlaechenModul.ModulTypeEnum, int> Modules = new Dictionary<KlimaFlaechenModul.ModulTypeEnum, int>();
 		private double sonstigeVerbindeleitung;
 
 		private double roomTemp;
@@ -66,14 +62,10 @@ namespace Europlan.Common {
 			outsideConstruction = mw.outsideConstruction;
 			outsideRValue = mw.outsideRValue;
 			circuits = mw.circuits;
-			dichtArea = mw.dichtArea;
-			modulierendArea = mw.modulierendArea;
-			sonstigeArea = mw.sonstigeArea;
+			totalArea = mw.totalArea;
 			connectionArea = mw.connectionArea;
 
-			dichteModule = mw.dichteModule;
-			modulierendeModule = mw.modulierendeModule;
-			sonstigeModule = mw.sonstigeModule;
+			Modules = new Dictionary<KlimaFlaechenModul.ModulTypeEnum, int>(mw.Modules);
 			sonstigeVerbindeleitung = mw.sonstigeVerbindeleitung;
 
 			roomTemp = mw.roomTemp;
@@ -154,24 +146,29 @@ namespace Europlan.Common {
 			set { circuits = value; }
 		}
 
-		public double DichtArea {
-			get { return dichtArea; }
-			set { dichtArea = value; }
-		}
-
-		public double ModulierendArea {
-			get { return modulierendArea; }
-			set { modulierendArea = value; }
-		}
-
-		public double SonstigeArea {
-			get { return sonstigeArea; }
-			set { sonstigeArea = value; }
+		public double TotalArea {
+			get { return totalArea; }
+			set { totalArea = value; }
 		}
 
 		public double ConnectionArea {
 			get { return connectionArea; }
 			set { connectionArea = value; }
+		}
+
+		public string ModulesAsString {
+			get {
+				string temp = "";
+				foreach (KlimaFlaechenModul.ModulTypeEnum item in Enum.GetValues(typeof(KlimaFlaechenModul.ModulTypeEnum))) {
+					if (Modules.ContainsKey(item)) {
+						temp += new KlimaFlaechenModul.ModulTypeEnumConverter().ConvertToString(item) + " (" + Modules[item] + "), ";
+					}
+				}
+				temp = temp.Trim();
+				temp = temp.TrimEnd(',');
+				temp = temp.Replace("Modul ", "");
+				return temp;
+			}
 		}
 
 		public double RoomTemp {
@@ -200,7 +197,7 @@ namespace Europlan.Common {
 		}
 
 		public double qFBHSqm {
-		    get { return Q_FBH / (DichtArea + ModulierendArea + SonstigeArea + UnusedArea); }
+		    get { return Q_FBH / (TotalArea + UnusedArea); }
 		}
 
 		public double tFB {
@@ -261,21 +258,6 @@ namespace Europlan.Common {
 		public bool UsedAsCircuitWrapper {
 			get { return usedAsCircuitWrapper; }
 			set { usedAsCircuitWrapper = value; }
-		}
-
-		public int DichteModule {
-			get { return dichteModule; }
-			set { dichteModule = value; }
-		}
-
-		public int ModulierendeModule {
-			get { return modulierendeModule; }
-			set { modulierendeModule = value; }
-		}
-
-		public int SonstigeModule {
-			get { return sonstigeModule; }
-			set { sonstigeModule = value; }
 		}
 
 		public double SonstigeVerbindeleitung {
