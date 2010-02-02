@@ -2638,9 +2638,23 @@ namespace Europlan.Common {
 									wrapperHeat.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
 								}
 								wrapperHeat.Circuits = pp.Product.PlannedCircuitCount;
-								//wrapperHeat.DichtArea = mp.RequestedModulesDichtArea;
-								//wrapperHeat.ModulierendArea = mp.RequestedModulesModulierendArea;
-								//wrapperHeat.SonstigeArea = mp.RequestedModulesSonstigeArea;
+
+								foreach (ModulDeckeCircuit mc in mp.PlannedCircuits) {
+									foreach (ModulDeckeSubArea sa in mc.SubAreas) {
+										foreach (KlimaFlaechenList ml in sa.Rows) {
+											foreach (KlimaFlaechenModul modul in ml.List) {
+												if (!wrapperHeat.Modules.ContainsKey(modul.ModulType)) {
+													wrapperHeat.Modules.Add(modul.ModulType, 1);
+												} else {
+													wrapperHeat.Modules[modul.ModulType]++;
+												}
+											}
+											wrapperHeat.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
+										}
+									}
+								}
+
+								wrapperHeat.TotalArea = mp.TotalPlannedArea;
 								wrapperHeat.ConnectionArea = mp.PlannedRemoveArea;
 
 								double v, r;
@@ -2687,9 +2701,23 @@ namespace Europlan.Common {
 									wrapperHeat.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
 								}
 								wrapperCool.Circuits = pp.Product.PlannedCircuitCount;
-								//wrapperCool.DichtArea = mp.RequestedModulesDichtArea;
-								//wrapperCool.ModulierendArea = mp.RequestedModulesModulierendArea;
-								//wrapperCool.SonstigeArea = mp.RequestedModulesSonstigeArea;
+
+								foreach (ModulDeckeCircuit mc in mp.PlannedCircuits) {
+									foreach (ModulDeckeSubArea sa in mc.SubAreas) {
+										foreach (KlimaFlaechenList ml in sa.Rows) {
+											foreach (KlimaFlaechenModul modul in ml.List) {
+												if (!wrapperCool.Modules.ContainsKey(modul.ModulType)) {
+													wrapperCool.Modules.Add(modul.ModulType, 1);
+												} else {
+													wrapperCool.Modules[modul.ModulType]++;
+												}
+											}
+											wrapperCool.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
+										}
+									}
+								}
+
+								wrapperCool.TotalArea = mp.TotalPlannedArea;
 								wrapperCool.ConnectionArea = mp.PlannedRemoveArea;
 
 								double v, r;
@@ -2731,14 +2759,22 @@ namespace Europlan.Common {
 
 										wrapper.Circuits = mc.NrOfCircuit + 1;
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
-										//wrapper.TotalModules = mc.Row.List.Count;
+
+										foreach (ModulDeckeSubArea sa in mc.SubAreas) {
+											foreach (KlimaFlaechenList ml in sa.Rows) {
+												foreach (KlimaFlaechenModul modul in ml.List) {
+													if (!wrapper.Modules.ContainsKey(modul.ModulType)) {
+														wrapper.Modules.Add(modul.ModulType, 1);
+													} else {
+														wrapper.Modules[modul.ModulType]++;
+													}
+												}
+												wrapper.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
+											}
+										}
+
 										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
-
-										//wrapper.DichteModule = mc.DichteModule;
-										//wrapper.ModulierendeModule = mc.ModulierendeModule;
-										//wrapper.SonstigeModule = mc.SonstigeModule;
-										//wrapper.SonstigeVerbindeleitung = mc.SonstigeVerbindeleitung;
-
+										
 										wrapper.Wassermenge = mc.C_DurchflussHeat;
 										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustHeat;
 										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorHeat;
@@ -2750,9 +2786,16 @@ namespace Europlan.Common {
 										} else {
 											bool ok = true;
 											ok = ok && prevWrapper.TotalModules == wrapper.TotalModules;
-											ok = ok && prevWrapper.DichteModule == wrapper.DichteModule;
-											ok = ok && prevWrapper.ModulierendeModule == wrapper.ModulierendeModule;
-											ok = ok && prevWrapper.SonstigeModule == wrapper.SonstigeModule;
+											foreach (KlimaFlaechenModul.ModulTypeEnum item in wrapper.Modules.Keys) {
+												if (!(prevWrapper.Modules.ContainsKey(item) && prevWrapper.Modules[item] == wrapper.Modules[item])) {
+													ok = false;
+												}
+											}
+											foreach (KlimaFlaechenModul.ModulTypeEnum item in prevWrapper.Modules.Keys) {
+												if (!(wrapper.Modules.ContainsKey(item) && prevWrapper.Modules[item] == wrapper.Modules[item])) {
+													ok = false;
+												}
+											}
 											ok = ok && prevWrapper.SonstigeVerbindeleitung == wrapper.SonstigeVerbindeleitung;
 											ok = ok && Math.Round(prevWrapper.LengthConnection, 1) == Math.Round(wrapper.LengthConnection, 1);
 											ok = ok && Math.Round(prevWrapper.Wassermenge, 1) == Math.Round(wrapper.Wassermenge, 1);
@@ -2783,13 +2826,21 @@ namespace Europlan.Common {
 
 										wrapper.Circuits = mc.NrOfCircuit + 1;
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
-										//wrapper.TotalModules = mc.Row.List.Count;
-										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
 
-										//wrapper.DichteModule = mc.DichteModule;
-										//wrapper.ModulierendeModule = mc.ModulierendeModule;
-										//wrapper.SonstigeModule = mc.SonstigeModule;
-										//wrapper.SonstigeVerbindeleitung = mc.SonstigeVerbindeleitung;
+										foreach (ModulDeckeSubArea sa in mc.SubAreas) {
+											foreach (KlimaFlaechenList ml in sa.Rows) {
+												foreach (KlimaFlaechenModul modul in ml.List) {
+													if (!wrapper.Modules.ContainsKey(modul.ModulType)) {
+														wrapper.Modules.Add(modul.ModulType, 1);
+													} else {
+														wrapper.Modules[modul.ModulType]++;
+													}
+												}
+												wrapper.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
+											}
+										}
+
+										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 										wrapper.Wassermenge = mc.C_DurchflussCool;
 										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustCool;
@@ -2802,9 +2853,16 @@ namespace Europlan.Common {
 										} else {
 											bool ok = true;
 											ok = ok && prevWrapper.TotalModules == wrapper.TotalModules;
-											ok = ok && prevWrapper.DichteModule == wrapper.DichteModule;
-											ok = ok && prevWrapper.ModulierendeModule == wrapper.ModulierendeModule;
-											ok = ok && prevWrapper.SonstigeModule == wrapper.SonstigeModule;
+											foreach (KlimaFlaechenModul.ModulTypeEnum item in wrapper.Modules.Keys) {
+												if (!(prevWrapper.Modules.ContainsKey(item) && prevWrapper.Modules[item] == wrapper.Modules[item])) {
+													ok = false;
+												}
+											}
+											foreach (KlimaFlaechenModul.ModulTypeEnum item in prevWrapper.Modules.Keys) {
+												if (!(wrapper.Modules.ContainsKey(item) && prevWrapper.Modules[item] == wrapper.Modules[item])) {
+													ok = false;
+												}
+											}
 											ok = ok && prevWrapper.SonstigeVerbindeleitung == wrapper.SonstigeVerbindeleitung;
 											ok = ok && Math.Round(prevWrapper.LengthConnection, 1) == Math.Round(wrapper.LengthConnection, 1);
 											ok = ok && Math.Round(prevWrapper.Wassermenge, 1) == Math.Round(wrapper.Wassermenge, 1);
