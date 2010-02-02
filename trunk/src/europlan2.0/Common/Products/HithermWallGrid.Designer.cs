@@ -31,6 +31,8 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvWalls = new System.Windows.Forms.DataGridView();
+			this.btnSelectConstruction = new System.Windows.Forms.Button();
+			this.hithermWallBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Construction = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.constructionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,8 +43,6 @@ namespace Europlan.Common {
 			this.additionalInsulationDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.tempBehindHeatDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.tempBehindCoolDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.hithermWallBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.btnSelectConstruction = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvWalls)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.hithermWallBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -86,12 +86,28 @@ namespace Europlan.Common {
 			this.dgvWalls.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvWalls_DefaultValuesNeeded);
 			this.dgvWalls.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWalls_CellEnter);
 			// 
+			// btnSelectConstruction
+			// 
+			this.btnSelectConstruction.Location = new System.Drawing.Point(372, 202);
+			this.btnSelectConstruction.Name = "btnSelectConstruction";
+			this.btnSelectConstruction.Size = new System.Drawing.Size(24, 23);
+			this.btnSelectConstruction.TabIndex = 1;
+			this.btnSelectConstruction.Text = "...";
+			this.btnSelectConstruction.UseVisualStyleBackColor = true;
+			this.btnSelectConstruction.Visible = false;
+			this.btnSelectConstruction.Click += new System.EventHandler(this.btnSelectConstruction_Click);
+			// 
+			// hithermWallBindingSource
+			// 
+			this.hithermWallBindingSource.DataSource = typeof(Europlan.Common.HithermWall);
+			// 
 			// idDataGridViewTextBoxColumn
 			// 
 			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
 			this.idDataGridViewTextBoxColumn.FillWeight = 60F;
 			this.idDataGridViewTextBoxColumn.HeaderText = "Nummer";
 			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.idDataGridViewTextBoxColumn.Width = 60;
 			// 
 			// Construction
@@ -99,6 +115,7 @@ namespace Europlan.Common {
 			this.Construction.DataPropertyName = "Construction";
 			this.Construction.HeaderText = "Construction";
 			this.Construction.Name = "Construction";
+			this.Construction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.Construction.Visible = false;
 			// 
 			// constructionDataGridViewTextBoxColumn
@@ -108,6 +125,7 @@ namespace Europlan.Common {
 			this.constructionDataGridViewTextBoxColumn.HeaderText = "Basis-\nKonstr.";
 			this.constructionDataGridViewTextBoxColumn.Name = "constructionDataGridViewTextBoxColumn";
 			this.constructionDataGridViewTextBoxColumn.ReadOnly = true;
+			this.constructionDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.constructionDataGridViewTextBoxColumn.Width = 70;
 			// 
 			// nameDataGridViewTextBoxColumn
@@ -116,34 +134,33 @@ namespace Europlan.Common {
 			this.nameDataGridViewTextBoxColumn.FillWeight = 120F;
 			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
 			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.nameDataGridViewTextBoxColumn.Width = 120;
 			// 
 			// Deckschicht
 			// 
 			this.Deckschicht.DataPropertyName = "Deckschicht";
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F3";
+			dataGridViewCellStyle2.Format = "F0";
 			this.Deckschicht.DefaultCellStyle = dataGridViewCellStyle2;
 			this.Deckschicht.FillWeight = 60F;
 			this.Deckschicht.HeaderText = "Decksch.\nR\n(m²K/W)";
 			this.Deckschicht.Name = "Deckschicht";
 			this.Deckschicht.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
 			this.Deckschicht.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.Deckschicht.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.Deckschicht.Width = 60;
 			// 
 			// kValueDataGridViewTextBoxColumn
 			// 
 			this.kValueDataGridViewTextBoxColumn.DataPropertyName = "UValue";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F3";
+			dataGridViewCellStyle3.Format = "F0";
 			this.kValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.kValueDataGridViewTextBoxColumn.FillWeight = 60F;
 			this.kValueDataGridViewTextBoxColumn.HeaderText = "U-Wert\n(W/m²K)";
 			this.kValueDataGridViewTextBoxColumn.Name = "kValueDataGridViewTextBoxColumn";
 			this.kValueDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
 			this.kValueDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.kValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.kValueDataGridViewTextBoxColumn.Width = 60;
 			// 
 			// bereinigenDataGridViewCheckBoxColumn
@@ -158,14 +175,13 @@ namespace Europlan.Common {
 			// 
 			this.additionalInsulationDataGridViewTextBoxColumn.DataPropertyName = "AdditionalInsulation";
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F3";
+			dataGridViewCellStyle4.Format = "F0";
 			this.additionalInsulationDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
 			this.additionalInsulationDataGridViewTextBoxColumn.FillWeight = 80F;
 			this.additionalInsulationDataGridViewTextBoxColumn.HeaderText = "zus. Dämmg\nR\n(m²K/W)";
 			this.additionalInsulationDataGridViewTextBoxColumn.Name = "additionalInsulationDataGridViewTextBoxColumn";
 			this.additionalInsulationDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
 			this.additionalInsulationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.additionalInsulationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.additionalInsulationDataGridViewTextBoxColumn.Width = 80;
 			// 
 			// tempBehindHeatDataGridViewTextBoxColumn
@@ -179,7 +195,6 @@ namespace Europlan.Common {
 			this.tempBehindHeatDataGridViewTextBoxColumn.Name = "tempBehindHeatDataGridViewTextBoxColumn";
 			this.tempBehindHeatDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
 			this.tempBehindHeatDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.tempBehindHeatDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.tempBehindHeatDataGridViewTextBoxColumn.Width = 60;
 			// 
 			// tempBehindCoolDataGridViewTextBoxColumn
@@ -193,23 +208,7 @@ namespace Europlan.Common {
 			this.tempBehindCoolDataGridViewTextBoxColumn.Name = "tempBehindCoolDataGridViewTextBoxColumn";
 			this.tempBehindCoolDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
 			this.tempBehindCoolDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.tempBehindCoolDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.tempBehindCoolDataGridViewTextBoxColumn.Width = 60;
-			// 
-			// hithermWallBindingSource
-			// 
-			this.hithermWallBindingSource.DataSource = typeof(Europlan.Common.HithermWall);
-			// 
-			// btnSelectConstruction
-			// 
-			this.btnSelectConstruction.Location = new System.Drawing.Point(372, 202);
-			this.btnSelectConstruction.Name = "btnSelectConstruction";
-			this.btnSelectConstruction.Size = new System.Drawing.Size(24, 23);
-			this.btnSelectConstruction.TabIndex = 1;
-			this.btnSelectConstruction.Text = "...";
-			this.btnSelectConstruction.UseVisualStyleBackColor = true;
-			this.btnSelectConstruction.Visible = false;
-			this.btnSelectConstruction.Click += new System.EventHandler(this.btnSelectConstruction_Click);
 			// 
 			// HithermWallGrid
 			// 

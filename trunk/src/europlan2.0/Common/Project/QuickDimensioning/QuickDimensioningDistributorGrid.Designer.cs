@@ -24,10 +24,11 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridDistributors = new System.Windows.Forms.DataGridView();
+			this.quickDimensioningDistributorBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.quickDimensioningDistributorBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridDistributors)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningDistributorBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -35,6 +36,14 @@ namespace Europlan.Common {
 			// gridDistributors
 			// 
 			this.gridDistributors.AutoGenerateColumns = false;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridDistributors.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.gridDistributors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridDistributors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
@@ -48,11 +57,16 @@ namespace Europlan.Common {
 			this.gridDistributors.TabIndex = 0;
 			this.gridDistributors.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridDistributors_UserDeletingRow);
 			// 
+			// quickDimensioningDistributorBindingSource
+			// 
+			this.quickDimensioningDistributorBindingSource.DataSource = typeof(Europlan.Common.Distributor);
+			// 
 			// idDataGridViewTextBoxColumn
 			// 
 			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
 			this.idDataGridViewTextBoxColumn.HeaderText = "Id";
 			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.idDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// nameDataGridViewTextBoxColumn
@@ -61,10 +75,7 @@ namespace Europlan.Common {
 			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
 			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
 			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			// 
-			// quickDimensioningDistributorBindingSource
-			// 
-			this.quickDimensioningDistributorBindingSource.DataSource = typeof(Europlan.Common.Distributor);
+			this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// QuickDimensioningDistributorGrid
 			// 
@@ -82,8 +93,8 @@ namespace Europlan.Common {
 		#endregion
 
 		private System.Windows.Forms.DataGridView gridDistributors;
+		private System.Windows.Forms.BindingSource quickDimensioningDistributorBindingSource;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.BindingSource quickDimensioningDistributorBindingSource;
 	}
 }

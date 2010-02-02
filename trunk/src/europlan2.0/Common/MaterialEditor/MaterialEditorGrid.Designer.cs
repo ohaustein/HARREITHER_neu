@@ -163,6 +163,7 @@ namespace Europlan.Common {
 			this.idDataGridViewTextBoxColumn.FillWeight = 50F;
 			this.idDataGridViewTextBoxColumn.HeaderText = "Nr.";
 			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.idDataGridViewTextBoxColumn.Visible = false;
 			this.idDataGridViewTextBoxColumn.Width = 50;
 			// 
@@ -172,6 +173,7 @@ namespace Europlan.Common {
 			this.partNumberDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.partNumberDataGridViewTextBoxColumn.HeaderText = "Bestellnr.";
 			this.partNumberDataGridViewTextBoxColumn.Name = "partNumberDataGridViewTextBoxColumn";
+			this.partNumberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.partNumberDataGridViewTextBoxColumn.Width = 70;
 			// 
 			// nameDataGridViewTextBoxColumn
@@ -180,6 +182,7 @@ namespace Europlan.Common {
 			this.nameDataGridViewTextBoxColumn.FillWeight = 250F;
 			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
 			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.nameDataGridViewTextBoxColumn.Width = 250;
 			// 
 			// unitDataGridViewTextBoxColumn
@@ -188,6 +191,7 @@ namespace Europlan.Common {
 			this.unitDataGridViewTextBoxColumn.FillWeight = 50F;
 			this.unitDataGridViewTextBoxColumn.HeaderText = "Einheit";
 			this.unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
+			this.unitDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.unitDataGridViewTextBoxColumn.Width = 50;
 			// 
 			// denominationDataGridViewTextBoxColumn
@@ -201,7 +205,6 @@ namespace Europlan.Common {
 			this.denominationDataGridViewTextBoxColumn.Name = "denominationDataGridViewTextBoxColumn";
 			this.denominationDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.DENOMINATION;
 			this.denominationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.denominationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.denominationDataGridViewTextBoxColumn.Width = 75;
 			// 
 			// priceDataGridViewTextBoxColumn
@@ -215,7 +218,6 @@ namespace Europlan.Common {
 			this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
 			this.priceDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PRICE;
 			this.priceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.priceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.priceDataGridViewTextBoxColumn.Width = 60;
 			// 
 			// Category
@@ -261,8 +263,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn partNumberDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn unitDataGridViewTextBoxColumn;
-		private Europlan.Common.NumericColumn denominationDataGridViewTextBoxColumn;
-		private Europlan.Common.NumericColumn priceDataGridViewTextBoxColumn;
+		private NumericColumn denominationDataGridViewTextBoxColumn;
+		private NumericColumn priceDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewComboBoxColumn Category;
 
 	}

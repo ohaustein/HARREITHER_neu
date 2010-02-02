@@ -58,6 +58,11 @@ namespace Europlan.Common {
 		public PlannedEurovalProductPanel() {
 			InitializeComponent();
 
+			this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomCenter;
+			this.gridExtendedCorrections.CellPainting += new DataGridViewCellPaintingEventHandler(gridExtendedCorrections_CellPainting);
+			this.gridExtendedCorrections.Paint += new PaintEventHandler(gridExtendedCorrections_Paint);
+			this.gridExtendedCorrections.ColumnWidthChanged += new DataGridViewColumnEventHandler(gridExtendedCorrections_ColumnWidthChanged);
+
 			this.cmbLayDistance.Items.Clear();
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(null, "Automatisch"));
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.EurovalLayDistance.EV35, "EV35"));
@@ -156,6 +161,11 @@ namespace Europlan.Common {
 		}*/
 
 		private string errorMsg = null;
+
+		private bool cmbLayDistanceContainsAutomatic = true;
+		private bool cmbRimTypeContainsAutomatic = true;
+		private bool cmbRimTypeContainsNone = false;
+		private bool cmbCircuitsContainsAutomatic = true;
 
 		public void UpdateControl() {
 			this.product = this.Tag as PlannedProduct;
@@ -265,7 +275,7 @@ namespace Europlan.Common {
 				this.rbCalculateCool.Enabled = this.product.RequestedCoolLoad > 0;
 				this.rbCalculateBoth.Enabled = this.product.RequestedHeatLoad > 0 && this.product.RequestedCoolLoad > 0;
 				this.numCorners.Enabled = evProduct.PlannedRimLength > 0;
-				this.cmbRimType.Enabled = evProduct.PlannedAreaRim > 0;
+				this.cmbRimType.Enabled = evProduct.PlannedRimLength > 0;
 
 				// disable the following controls if the product is a connection
 				this.numRim.Enabled = !evProduct.PlannedProductIsConnection;
@@ -277,6 +287,52 @@ namespace Europlan.Common {
 				this.cmbLayDistance.Enabled = !evProduct.PlannedProductIsConnection;
 				this.cmbRimType.Enabled = this.cmbRimType.Enabled && !evProduct.PlannedProductIsConnection;
 				this.cmbCircuits.Enabled = !evProduct.PlannedProductIsConnection;
+
+				bool newCmbCircuitsContainsAutomatic = evProduct.PlannedConnection.ConnectionType != ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT;
+				bool newCmbLayDistanceContainsAutomatic = evProduct.PlannedConnection.ConnectionType != ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT;
+				bool newCmbRimTypeContainsAutomatic = evProduct.PlannedConnection.ConnectionType != ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && cmbRimType.Enabled;
+				bool newCmbRimTypeContainsNone = !this.cmbRimType.Enabled;
+
+				if (this.cmbCircuitsContainsAutomatic != newCmbCircuitsContainsAutomatic) {
+					this.cmbCircuitsContainsAutomatic = newCmbCircuitsContainsAutomatic;
+					if (this.cmbCircuitsContainsAutomatic) {
+						this.cmbCircuits.Items.Insert(0, "Automatisch");
+					} else {
+						this.cmbCircuits.Items.RemoveAt(0);
+					}
+				}
+
+				if (this.cmbLayDistanceContainsAutomatic != newCmbLayDistanceContainsAutomatic) {
+					this.cmbLayDistanceContainsAutomatic = newCmbLayDistanceContainsAutomatic;
+					if (this.cmbLayDistanceContainsAutomatic) {
+						this.cmbLayDistance.Items.Insert(0, new LayDistanceItem(null, "Automatisch"));
+					} else {
+						this.cmbLayDistance.Items.RemoveAt(0);
+					}
+				}
+
+				if (this.cmbRimTypeContainsAutomatic != newCmbRimTypeContainsAutomatic) {
+					this.cmbRimTypeContainsAutomatic = newCmbRimTypeContainsAutomatic;
+					if (this.cmbRimTypeContainsAutomatic) {
+						if (this.cmbRimTypeContainsNone) {
+							this.cmbRimTypeContainsNone = false;
+							newCmbRimTypeContainsNone = false;
+							this.cmbRimType.Items.RemoveAt(0);
+						}
+						this.cmbRimType.Items.Insert(0, new RimTypeItem(null, "Automatisch"));
+					} else {
+						this.cmbRimType.Items.RemoveAt(0);
+						this.cmbRimTypeContainsNone = false;
+					}
+				}
+				if (this.cmbRimTypeContainsNone != newCmbRimTypeContainsNone) {
+					this.cmbRimTypeContainsNone = newCmbRimTypeContainsNone;
+					if (this.cmbRimTypeContainsNone) {
+						this.cmbRimType.Items.Insert(0, new RimTypeItem(null, ""));
+					} else {
+						this.cmbRimType.Items.RemoveAt(0);
+					}
+				}
 
 				this.numArea.MaxValue = (decimal)evProduct.AvailableFloorArea;
 				this.numAreaPercentage.MaxValue = (decimal)(evProduct.AvailableFloorArea * 100 / evProduct.AssociatedRoom.Area);
@@ -375,14 +431,20 @@ namespace Europlan.Common {
 				}
 
 				if ((skipFields & FieldEnum.LAY_DISTANCE) == FieldEnum.NONE) {
+					if (evProduct.RequestedLayDistance == null && !this.cmbLayDistanceContainsAutomatic) {
+						evProduct.RequestedLayDistance = EurovalProduct.EurovalLayDistance.EV35;
+					}
 					this.cmbLayDistance.SelectedItem = new LayDistanceItem(evProduct.RequestedLayDistance, "");
 				}
 				if ((skipFields & FieldEnum.RIM_TYPE) == FieldEnum.NONE) {
-					this.cmbRimType.SelectedItem = new RimTypeItem(evProduct.RequestedRimType, "");
+					if (evProduct.RequestedRimType == null && !this.cmbRimTypeContainsAutomatic && !this.cmbRimTypeContainsNone) {
+						evProduct.RequestedRimType = EurovalProduct.EurovalRimType.EV15_60;
+					}
+					this.cmbRimType.SelectedItem = new RimTypeItem(this.cmbRimType.Enabled ? evProduct.RequestedRimType : null, "");
 				}
 				if ((skipFields & FieldEnum.CIRCUIT_COUNT) == FieldEnum.NONE) {
 					if (evProduct.RequestedCircuits != null) {
-						this.cmbCircuits.SelectedIndex = evProduct.RequestedCircuits.Value;
+						this.cmbCircuits.SelectedIndex = evProduct.RequestedCircuits.Value - 1 + (this.cmbCircuitsContainsAutomatic ? 1 : 0);
 					} else {
 						this.cmbCircuits.SelectedIndex = 0;
 					}
@@ -910,8 +972,8 @@ namespace Europlan.Common {
 
 		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreCircuits == 0) {
-				if (this.cmbCircuits.SelectedIndex > 0) {
-					(this.product.Product as EurovalProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex;
+				if (this.cmbCircuits.SelectedIndex >= (this.cmbCircuitsContainsAutomatic ? 1 : 0)) {
+					(this.product.Product as EurovalProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex + (this.cmbCircuitsContainsAutomatic ? 0 : 1);
 				} else {
 					(this.product.Product as EurovalProduct).RequestedCircuits = null;
 				}
@@ -1025,6 +1087,111 @@ namespace Europlan.Common {
 		private void lstError_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e) {
 			e.Item.Focused = false;
 			e.Item.Selected = false;
+		}
+
+		private void gridExtendedCorrections_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e) {
+			if (e.RowIndex >= 0 && e.RowIndex < this.gridExtendedCorrections.Rows.Count && this.gridExtendedCorrections.Rows[e.RowIndex].DataBoundItem == null) {
+				e.PaintCells(e.ClipBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border | DataGridViewPaintParts.ErrorIcon | DataGridViewPaintParts.Focus | DataGridViewPaintParts.SelectionBackground);
+				e.PaintHeader(DataGridViewPaintParts.All);
+				e.Handled = true;
+			}
+
+		}
+
+		private void gridExtendedCorrections_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
+			if (e.RowIndex == -1 && e.ColumnIndex > -1) {
+				e.PaintBackground(e.CellBounds, false);
+
+				Rectangle r2 = e.CellBounds;
+				r2.Y += e.CellBounds.Height / 2;
+				r2.Height = e.CellBounds.Height / 2;
+				e.PaintContent(r2);
+				e.Handled = true;
+			}
+		}
+
+		private void gridExtendedCorrections_Paint(object sender, PaintEventArgs e) {
+			Rectangle r1 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.correctAreaDataGridViewCheckBoxColumn.Index, -1, true); //get the column header cell
+			Rectangle r2 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.areaValueDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
+			Rectangle r3 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.areaPercentageDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
+
+			r1.X += 1;
+			r1.Y += 1;
+			r1.Width = r1.Width + r2.Width + r3.Width - 4;
+			r1.Height = r1.Height / 2 - 2;
+			StringFormat format = new StringFormat();
+			format.Alignment = StringAlignment.Center;
+			format.LineAlignment = StringAlignment.Center;
+
+			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
+			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
+			e.Graphics.DrawString("Anteil Gesamtfläche",
+				this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Font,
+				new SolidBrush(this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.ForeColor),
+				r1,
+				format);
+
+			r1 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.correctRimDataGridViewCheckBoxColumn.Index, -1, true); //get the column header cell
+			r2 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.rimLengthValueDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
+			r3 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.rimPercentageDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
+			Rectangle r4 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.rimCornersValueDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
+
+			r1.X += 1;
+			r1.Y += 1;
+			r1.Width = r1.Width + r2.Width + r3.Width + r4.Width - 4;
+			r1.Height = r1.Height / 2 - 2;
+			format = new StringFormat();
+			format.Alignment = StringAlignment.Center;
+			format.LineAlignment = StringAlignment.Center;
+			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
+			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
+			e.Graphics.DrawString("Anteil Randzone",
+				this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Font,
+				new SolidBrush(this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.ForeColor),
+				r1,
+				format);
+
+			r1 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.correctConnectionsDataGridViewCheckBoxColumn.Index, -1, true); //get the column header cell
+			r2 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.connectionsPercentageDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
+
+			r1.X += 1;
+			r1.Y += 1;
+			r1.Width = r1.Width + r2.Width - 4;
+			r1.Height = r1.Height / 2 - 2;
+			format = new StringFormat();
+			format.Alignment = StringAlignment.Center;
+			format.LineAlignment = StringAlignment.Center;
+			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
+			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
+			e.Graphics.DrawString("Anbindeleitungen",
+				this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Font,
+				new SolidBrush(this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.ForeColor),
+				r1,
+				format);
+		}
+
+		private void gridExtendedCorrections_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e) {
+			if (e.Column.Index == this.correctAreaDataGridViewCheckBoxColumn.Index ||
+				e.Column.Index == this.areaValueDataGridViewTextBoxColumn.Index ||
+				e.Column.Index == this.areaPercentageDataGridViewTextBoxColumn.Index) {
+				this.gridExtendedCorrections.InvalidateCell(this.correctAreaDataGridViewCheckBoxColumn.Index, -1);
+				this.gridExtendedCorrections.InvalidateCell(this.areaValueDataGridViewTextBoxColumn.Index, -1);
+				this.gridExtendedCorrections.InvalidateCell(this.areaValueDataGridViewTextBoxColumn.Index, -1);
+			}
+			if (e.Column.Index == this.correctRimDataGridViewCheckBoxColumn.Index ||
+				e.Column.Index == this.rimLengthValueDataGridViewTextBoxColumn.Index ||
+				e.Column.Index == this.rimPercentageDataGridViewTextBoxColumn.Index ||
+				e.Column.Index == this.rimCornersValueDataGridViewTextBoxColumn.Index) {
+				this.gridExtendedCorrections.InvalidateCell(this.correctRimDataGridViewCheckBoxColumn.Index, -1);
+				this.gridExtendedCorrections.InvalidateCell(this.rimLengthValueDataGridViewTextBoxColumn.Index, -1);
+				this.gridExtendedCorrections.InvalidateCell(this.rimPercentageDataGridViewTextBoxColumn.Index, -1);
+				this.gridExtendedCorrections.InvalidateCell(this.rimCornersValueDataGridViewTextBoxColumn.Index, -1);
+			}
+			if (e.Column.Index == this.correctConnectionsDataGridViewCheckBoxColumn.Index ||
+				e.Column.Index == this.connectionsPercentageDataGridViewTextBoxColumn.Index) {
+				this.gridExtendedCorrections.InvalidateCell(this.correctConnectionsDataGridViewCheckBoxColumn.Index, -1);
+				this.gridExtendedCorrections.InvalidateCell(this.connectionsPercentageDataGridViewTextBoxColumn.Index, -1);
+			}
 		}
 
 	}
