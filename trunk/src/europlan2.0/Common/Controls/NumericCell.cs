@@ -9,6 +9,8 @@ namespace Europlan.Common {
 	public class NumericCell : DataGridViewTextBoxCell {
 
 		private NumericBox.NumericEditType numEditType = NumericBox.NumericEditType.DEFAULT;
+		private Nullable<decimal> maxValue = null;
+		private Nullable<decimal> minValue = null;
 
 		public NumericCell() {
 		}
@@ -25,6 +27,8 @@ namespace Europlan.Common {
 			base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
 			NumericEditingControl ctl = (NumericEditingControl)DataGridView.EditingControl;
 			ctl.EditType = this.numEditType;
+			ctl.MaxValue = this.maxValue;
+			ctl.MinValue = this.minValue;
 			ctl.BorderStyle = BorderStyle.None;
 			if (!initialFormattedValue.Equals(String.Empty)) {
 				ctl.Value = Convert.ToDecimal(initialFormattedValue);
@@ -50,10 +54,40 @@ namespace Europlan.Common {
 			}
 		}
 
+		public Nullable<decimal> MaxValue {
+			get { return this.maxValue; }
+			set {
+				this.maxValue = value;
+				OnCommonChange();
+			}
+		}
+
+		public Nullable<decimal> MinValue {
+			get { return this.minValue; }
+			set {
+				this.minValue = value;
+				OnCommonChange();
+			}
+		}
+
 		internal void SetNumEditType(int rowIndex, NumericBox.NumericEditType numEditType) {
 			this.numEditType = numEditType;
 			if (OwnsEditingControl(rowIndex)) {
 				this.EditingNumericBox.EditType = numEditType;
+			}
+		}
+
+		internal void SetMaxValue(int rowIndex, Nullable<decimal> maxValue) {
+			this.maxValue = maxValue;
+			if (OwnsEditingControl(rowIndex)) {
+				this.EditingNumericBox.MaxValue = maxValue;
+			}
+		}
+
+		internal void SetMinValue(int rowIndex, Nullable<decimal> minValue) {
+			this.minValue = minValue;
+			if (OwnsEditingControl(rowIndex)) {
+				this.EditingNumericBox.MinValue = minValue;
 			}
 		}
 
@@ -83,6 +117,8 @@ namespace Europlan.Common {
 			NumericCell cell = base.Clone() as NumericCell;
 			if (cell != null) {
 				cell.NumEditType = this.numEditType;
+				cell.MaxValue = this.maxValue;
+				cell.MinValue = this.minValue;
 			}
 			return cell;
 		}
