@@ -98,6 +98,10 @@ namespace Europlan.Application {
 				} else if (result == DialogResult.No) {
 					return true;
 				} else if (result == DialogResult.Yes) {
+					IEditorUserControl oldControl = splitContainer.Panel2.Controls[0] as IEditorUserControl;
+					if (oldControl != null && !oldControl.AllowLeave()) {
+						return false;
+					}
 					string tempFileName = projectFileName;
 					if (projectFileName == null) {
 						SaveFileDialog dialog = new SaveFileDialog();
@@ -200,6 +204,7 @@ namespace Europlan.Application {
 		}
 
 		private void LoadProject() {
+			this.splitContainer.Panel2.Controls.Clear();
 			try {
 				if (projectFileName != null) {
 					Project.Load(projectFileName);
@@ -232,6 +237,10 @@ namespace Europlan.Application {
 		}
 
 		private void SaveProject() {
+			IEditorUserControl oldControl = splitContainer.Panel2.Controls[0] as IEditorUserControl;
+			if (oldControl != null && !oldControl.AllowLeave()) {
+				return;
+			}
 			try {
 				if (currentProject != null && projectFileName != null) {
 					Project.Save(projectFileName);
@@ -244,6 +253,7 @@ namespace Europlan.Application {
 
 		private void NewProject() {
 			if (CheckForUnsavedChanges()) {
+				this.splitContainer.Panel2.Controls.Clear();
 				if (currentProject == null) {
 					currentProject = Project.New();
 				} else {
@@ -393,6 +403,10 @@ namespace Europlan.Application {
 		}
 
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+			IEditorUserControl oldControl = splitContainer.Panel2.Controls[0] as IEditorUserControl;
+			if (oldControl != null && !oldControl.AllowLeave()) {
+				return;
+			}
 			if (projectFileName == null) {
 				SaveFileDialog dialog = new SaveFileDialog();
 				dialog.CheckPathExists = true;
@@ -409,6 +423,10 @@ namespace Europlan.Application {
 		}
 
 		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
+			IEditorUserControl oldControl = splitContainer.Panel2.Controls[0] as IEditorUserControl;
+			if (oldControl != null && !oldControl.AllowLeave()) {
+				return;
+			}
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.CheckPathExists = true;
 			dialog.DefaultExt = "e2p";

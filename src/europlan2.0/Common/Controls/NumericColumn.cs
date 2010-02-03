@@ -38,6 +38,46 @@ namespace Europlan.Common {
 			}
 		}
 
+		[Category("Appearance"), DefaultValue(null), Description("The maximum value the cell accepts")]
+		public Nullable<decimal> MaxValue {
+			get { return this.NumericCellTemplate.MaxValue; }
+			set {
+				this.NumericCellTemplate.MaxValue = value;
+				if (this.DataGridView != null) {
+					// Update all existing cells in the column
+					DataGridViewRowCollection rows = this.DataGridView.Rows;
+					int rowCount = rows.Count;
+					for (int i = 0; i < rowCount; i++) {
+						DataGridViewRow row = rows.SharedRow(i);
+						NumericCell cell = row.Cells[this.Index] as NumericCell;
+						if (cell != null) {
+							cell.SetMaxValue(i, value);
+						}
+					}
+				}
+			}
+		}
+
+		[Category("Appearance"), DefaultValue(null), Description("The minimum value the cell accepts")]
+		public Nullable<decimal> MinValue {
+			get { return this.NumericCellTemplate.MinValue; }
+			set {
+				this.NumericCellTemplate.MinValue = value;
+				if (this.DataGridView != null) {
+					// Update all existing cells in the column
+					DataGridViewRowCollection rows = this.DataGridView.Rows;
+					int rowCount = rows.Count;
+					for (int i = 0; i < rowCount; i++) {
+						DataGridViewRow row = rows.SharedRow(i);
+						NumericCell cell = row.Cells[this.Index] as NumericCell;
+						if (cell != null) {
+							cell.SetMinValue(i, value);
+						}
+					}
+				}
+			}
+		}
+
 		private NumericCell NumericCellTemplate {
 			get {
 				NumericCell cell = this.CellTemplate as NumericCell;

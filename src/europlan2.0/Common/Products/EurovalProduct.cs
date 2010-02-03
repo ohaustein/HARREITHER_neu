@@ -72,8 +72,8 @@ namespace Europlan.Common {
 		private Nullable<EurovalLayDistance> plannedLayDistance = null;
 		private Nullable<EurovalRimType> plannedRimType = null;
 
-		private bool plannedCorrections = false;
-		private List<ExtendedCorrections> plannedCorrectionList;
+		//private bool plannedCorrections = false;
+		private List<ExtendedCorrections> plannedCorrectionList = new List<ExtendedCorrections>();
 
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
@@ -812,8 +812,18 @@ namespace Europlan.Common {
 		public Nullable<int> RequestedCircuits {
 			get { return this.requestedCircuits; }
 			set {
-				if (this.plannedConnection != null && this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				if ((this.plannedConnection != null && this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) ||
+					this.PlannedCorrections) {
 					this.requestedCircuits = value.HasValue ? value.Value : 1;
+					if (PlannedCorrections) {
+						while (this.plannedCorrectionList.Count < this.requestedCircuits.Value) {
+							this.plannedCorrectionList.Add(new ExtendedCorrections(this.plannedCorrectionList.Count + 1, this));
+						}
+						if (this.plannedCorrectionList.Count > this.requestedCircuits.Value) {
+							this.plannedCorrectionList.RemoveRange(this.requestedCircuits.Value, this.plannedCorrectionList.Count - this.requestedCircuits.Value);
+						}
+
+					}
 				} else {
 					this.requestedCircuits = value;
 				}
@@ -1664,7 +1674,7 @@ namespace Europlan.Common {
 				foreach (EurovalCircuit ec in this.circuits) {
 					ec.EurovalProduct = this;
 					ec.NrOfCircuit = i;
-					if (this.plannedCorrections) {
+					if (this.PlannedCorrections) {
 						ec.AreaTotal = this.plannedCorrectionList[i].AreaValue;
 						ec.AreaReduced = this.plannedCorrectionList[i].AreaReducedValue;
 						ec.AreaUnheated = this.plannedCorrectionList[i].AreaUnheatedValue;
@@ -1969,11 +1979,57 @@ namespace Europlan.Common {
 			get { return EurovalProduct.ConfigV; }
 		}
 
-		public List<ExtendedCorrections> PlannedCorrectionList {
-			get { return this.plannedCorrections ? this.plannedCorrectionList : null; }
+		[XmlIgnore]
+		public bool PlannedCorrections {
+			get{ return this.plannedCorrectionList.Count > 0; }
 			set {
-				this.plannedCorrections = (value != null && value.Count > 0);
-				this.plannedCorrectionList = (value == null || value.Count == 0) ? null : value;
+				if (this.PlannedCorrections != value) {
+					this.plannedCorrectionList.Clear();
+					if (value && this.requestedCircuits != null && this.requestedLayDistance != null && (this.plannedRimLength == 0 || this.requestedRimType != null)) {
+						for (int i = 0; i < this.requestedCircuits.Value; i++ ) {
+							this.plannedCorrectionList.Add(new ExtendedCorrections(i + 1, this));
+						}
+					}
+				}
+			}
+		}
+/*		public bool PlannedCorrections {
+			get { return this.plannedCorrections; }
+			set {
+				if (this.plannedCorrections != value) {
+					this.plannedCorrections = value;
+					if (this.plannedCorrections) {
+						if (this.requestedCircuits == null || this.requestedLayDistance == null || (this.requestedRimType == null && this.plannedRimLength > 0)) {
+							this.PlannedCorrections = false;
+						} else {
+							this.plannedCorrectionList = new List<ExtendedCorrections>();
+							for (int i = 0; i < this.requestedCircuits.Value; i++ ) {
+								this.plannedCorrectionList.Add(new ExtendedCorrections(i + 1, this));
+							}
+						}
+					} else {
+						this.plannedCorrectionList = null;
+					}
+				}
+			}
+		}*/
+
+		public List<ExtendedCorrections> PlannedCorrectionList {
+			get { return this.plannedCorrectionList; }
+			set {
+				//this.plannedCorrections = (value != null && value.Count > 0);
+				this.plannedCorrectionList = (value == null) ? new List<ExtendedCorrections>() : value;
+			}
+		}
+
+		internal override void FinalizeLoading(PlannedProduct pp) {
+			base.FinalizeLoading(pp);
+			if (this.PlannedCorrections) {
+				int i = 1;
+				foreach (ExtendedCorrections ec in this.PlannedCorrectionList) {
+					ec.EurovalProduct = this;
+					ec.CircuitNr = i++;
+				}
 			}
 		}
 	}

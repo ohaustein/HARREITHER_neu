@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	public class ExtendedCorrections {
@@ -13,14 +14,28 @@ namespace Europlan.Common {
 		private bool correctConnections = false;
 		private double connectionsPercentage = -1.0;
 
-		private EurovalProduct evProduct;
+		private bool sum = false;
 
-		public ExtendedCorrections() {
+		private EurovalProduct evProduct;
+		private EcothermProduct ecProduct;
+
+		private ExtendedCorrections() {
 			this.circuitNr = 0;
 		}
 
-		public ExtendedCorrections(int circuitNr) {
+		public ExtendedCorrections(EurovalProduct product) {
+			this.sum = true;
+			this.evProduct = product;
+		}
+
+		public ExtendedCorrections(EcothermProduct product) {
+			this.sum = true;
+			this.ecProduct = product;
+		}
+
+		public ExtendedCorrections(int circuitNr, EurovalProduct product) {
 			this.circuitNr = circuitNr;
+			this.evProduct = product;
 		}
 
 		public ExtendedCorrections(int ciruitNr, Nullable<double> area, Nullable<double> rimLength, Nullable<int> rimCorners, Nullable<double> connections, EurovalProduct product) {
@@ -43,145 +58,225 @@ namespace Europlan.Common {
 
 		public bool CorrectArea {
 			get { return this.correctArea; }
-			set { this.correctArea = value; }
+			set {
+				if (this.evProduct != null && !this.correctArea && value) {
+					this.AreaPercentage = this.AreaPercentage;
+				}
+				this.correctArea = value;
+			}
 		}
 
 		public double AreaPercentage {
 			get {
+				if (sum) {
+					double perc = 0.0;
+					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+						perc += ec.AreaPercentage;
+					}
+					return perc;
+				}
 				if (this.correctArea) {
 					return this.areaPercentage;
 				} else {
-					return this.AreaValue * 100 / this.evProduct.PlannedFloorArea;
+					double perc = 100.0;
+					double circuits = 0;
+					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+						if (ec.CorrectArea) {
+							perc -= ec.AreaPercentage;
+						} else {
+							circuits++;
+						}
+					}
+					if (perc < 0) {
+						perc = 0;
+					}
+					return perc / circuits;
 				}
 			}
 			set { this.areaPercentage = value; }
 		}
 
+		[XmlIgnore]
 		public double AreaValue {
-			get {
-				if (this.correctArea) {
-					return this.evProduct.PlannedFloorArea * this.areaPercentage / 100;
-				} else {
-					double area = this.evProduct.PlannedFloorArea;
-					double circuits = 0;
-					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
-						if (ec.CorrectArea) {
-							area -= ec.AreaValue;
-						} else {
-							circuits++;
-						}
-					}
-					if (area < 0) {
-						area = 0;
-					}
-					return area / circuits;
-				}
-			}
-			set {
-				this.areaPercentage = value * 100 / this.evProduct.PlannedFloorArea;
-			}
+			get { return this.evProduct.PlannedFloorArea * this.AreaPercentage / 100; }
+			set { this.areaPercentage = value * 100 / this.evProduct.PlannedFloorArea; }
 		}
 
+		[XmlIgnore]
 		public double AreaReducedValue {
 			get { return this.evProduct.PlannedAreaReduced * this.AreaPercentage / 100; }
 		}
 
+		[XmlIgnore]
 		public double AreaUnheatedValue {
 			get { return this.evProduct.PlannedAreaUnheated * this.AreaPercentage / 100; }
 		}
 
 		public bool CorrectRim {
 			get { return this.correctRim; }
-			set { this.correctRim = value; }
+			set {
+				if (this.evProduct != null && !this.correctRim && value) {
+					this.RimPercentage = this.RimPercentage;
+					this.RimCornersValue = this.RimCornersValue;
+				}
+				this.correctRim = value;
+			}
 		}
 
 		public double RimPercentage {
-			get { return this.rimLengthPercentage; }
-			set { this.rimLengthPercentage = value; }
-		}
-
-		public double RimLengthValue {
 			get {
+				if (sum) {
+					double perc = 0.0;
+					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+						perc += ec.RimPercentage;
+					}
+					return perc;
+				}
 				if (this.correctRim) {
-					return this.evProduct.PlannedRimLength * this.rimLengthPercentage / 100;
+					return this.rimLengthPercentage;
 				} else {
-					double rim = this.evProduct.PlannedRimLength;
+					double perc = 100.0;
 					double circuits = 0;
 					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
 						if (ec.CorrectRim) {
-							rim -= ec.RimLengthValue;
+							perc -= ec.RimPercentage;
 						} else {
 							circuits++;
 						}
 					}
-					if (rim < 0) {
-						rim = 0;
+					if (perc < 0) {
+						perc = 0;
 					}
-					return rim / circuits;
+					return perc / circuits;
 				}
 			}
-			set {
-				this.rimLengthPercentage = value * 100 / this.evProduct.PlannedRimLength;
-			}
+			set { this.rimLengthPercentage = value; }
+		}
+
+		[XmlIgnore]
+		public double RimLengthValue {
+			get { return this.evProduct.PlannedRimLength * this.RimPercentage / 100; }
+			set { this.rimLengthPercentage = value * 100 / this.evProduct.PlannedRimLength; }
 		}
 
 		public int RimCornersValue {
 			get {
+				if (sum) {
+					int corners = 0;
+					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+						corners += ec.RimCornersValue;
+					}
+					return corners;
+				}
 				if (this.correctRim) {
 					return this.rimCornersValue;
 				} else {
 					int corners = this.evProduct.PlannedRimCorners;
 					int circuits = 0;
+					int circuitsBefore = 0;
 					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
 						if (ec.CorrectRim) {
 							corners -= ec.RimCornersValue;
 						} else {
+							if (ec.CircuitNr < this.circuitNr) {
+								circuitsBefore++;
+							}
 							circuits++;
 						}
 					}
-					return corners / circuits;
+					if (corners >= 0) {
+						return corners / circuits + (corners % circuits > circuitsBefore ? 1 : 0);
+					} else {
+						corners = -corners;
+						return -(corners / circuits + (corners % circuits > circuitsBefore ? 1 : 0));
+					}
+				}
+			}
+			set { this.rimCornersValue = value; }
+		}
+
+		[XmlIgnore]
+		public string RimCornersString {
+			get {
+				if (sum) {
+					return RimCornersValue.ToString() + " (" + this.evProduct.PlannedRimCorners.ToString() + ")";
+				} else {
+					return RimCornersValue.ToString();
+				}
+			}
+			set {
+				int val;
+				if (Int32.TryParse(value, out val)) {
+					this.RimCornersValue = val;
 				}
 			}
 		}
 
 		public bool CorrectConnections {
 			get { return this.correctConnections; }
-			set { this.correctConnections = value; }
+			set {
+				if (this.evProduct != null && !this.correctConnections && value) {
+					this.ConnectionsPercentage = this.ConnectionsPercentage;
+				}
+				this.correctConnections = value; 
+			}
 		}
 
 		public double ConnectionsPercentage {
-			get { return this.connectionsPercentage; }
-			set { this.connectionsPercentage = value; }
-		}
-
-		public double ConnectionsValue {
 			get {
+				if (sum) {
+					double perc = 0.0;
+					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+						perc += ec.ConnectionsPercentage;
+					}
+					return perc;
+				}
 				if (this.correctConnections) {
-					return this.evProduct.PlannedRemoveArea * this.connectionsPercentage / 100;
+					return this.connectionsPercentage;
 				} else {
-					double connections = this.evProduct.PlannedRemoveArea;
+					double perc = 100.0;
 					double circuits = 0;
 					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
 						if (ec.CorrectConnections) {
-							connections -= ec.ConnectionsValue;
+							perc -= ec.ConnectionsPercentage;
 						} else {
 							circuits++;
 						}
 					}
-					if (connections < 0) {
-						connections = 0;
+					if (perc < 0) {
+						perc = 0;
 					}
-					return connections / circuits;
+					return perc / circuits;
 				}
 			}
-			set {
-				this.connectionsPercentage = value * 100 / this.evProduct.PlannedRemoveArea;
-			}
+			set { this.connectionsPercentage = value; }
 		}
 
+		[XmlIgnore]
+		public double ConnectionsValue {
+			get { return this.evProduct.PlannedRemoveArea * this.ConnectionsPercentage / 100; }
+			set { this.connectionsPercentage = value * 100 / this.evProduct.PlannedRemoveArea; }
+		}
+
+		[XmlIgnore]
 		public int CircuitNr {
 			get { return this.circuitNr; }
 			set { this.circuitNr = value; }
+		}
+
+		[XmlIgnore]
+		public EurovalProduct EurovalProduct {
+			set { this.evProduct = value; }
+		}
+
+		[XmlIgnore]
+		public EcothermProduct EcothermProduct {
+			set { this.ecProduct = value; }
+		}
+
+		[XmlIgnore]
+		public bool Sum {
+			get { return sum; }
 		}
 	}
 }

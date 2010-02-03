@@ -58,11 +58,6 @@ namespace Europlan.Common {
 		public PlannedEurovalProductPanel() {
 			InitializeComponent();
 
-			this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomCenter;
-			this.gridExtendedCorrections.CellPainting += new DataGridViewCellPaintingEventHandler(gridExtendedCorrections_CellPainting);
-			this.gridExtendedCorrections.Paint += new PaintEventHandler(gridExtendedCorrections_Paint);
-			this.gridExtendedCorrections.ColumnWidthChanged += new DataGridViewColumnEventHandler(gridExtendedCorrections_ColumnWidthChanged);
-
 			this.cmbLayDistance.Items.Clear();
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(null, "Automatisch"));
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(EurovalProduct.EurovalLayDistance.EV35, "EV35"));
@@ -125,7 +120,9 @@ namespace Europlan.Common {
 			RIM_TYPE = 8192,
 			CALCULATION_TYPE = 16384,
 			CIRCUIT_COUNT = 32768,
-			SEPARATE_CIRCUIT = 65536
+			SEPARATE_CIRCUIT = 65536,
+			CORRECTIONS = 131072,
+			//CORRECTIONS_LIST = 262144,
 		}
 
 		/*private class ComboItem {
@@ -169,6 +166,7 @@ namespace Europlan.Common {
 
 		public void UpdateControl() {
 			this.product = this.Tag as PlannedProduct;
+			this.extendedCorrectionsGrid.Product = this.product.Product;
 			this.tabs.SelectedTab = this.pageInput;
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
@@ -198,6 +196,7 @@ namespace Europlan.Common {
 		private int ignoreCalculationType = 0;
 		private int ignoreCircuits = 0;
 		private int ignoreSeparateCircuit = 0;
+		private int ignoreCorrections = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
@@ -220,6 +219,7 @@ namespace Europlan.Common {
 				ignoreCalculationType++;
 				ignoreCircuits++;
 				ignoreSeparateCircuit++;
+				ignoreCorrections++;
 
 				EurovalProduct evProduct = this.product.Product as EurovalProduct;
 
@@ -653,6 +653,27 @@ namespace Europlan.Common {
 					this.lstError.Visible = false;
 				}
 
+				if ((skipFields & FieldEnum.CORRECTIONS) == FieldEnum.NONE) {
+					this.extendedCorrectionsGrid.UpdateControl(true, true);
+				}
+				/*if ((skipFields & FieldEnum.CORRECTIONS) == FieldEnum.NONE) {
+					if (evProduct.PlannedCorrections) {
+						this.rbExtendedCorrections.Checked = true;
+					} else {
+						this.rbStandardCorrections.Checked = true;
+					}
+				}*/
+
+				/*if ((skipFields & FieldEnum.CORRECTIONS_LIST) == FieldEnum.NONE) {
+					if (evProduct.PlannedCorrections) {
+						this.extendedCorrectionsBindingSource.DataSource = (this.product.Product as EurovalProduct).PlannedCorrectionList;
+					} else {
+						this.extendedCorrectionsBindingSource.DataSource = new List<ExtendedCorrections>();
+					}
+					this.extendedCorrectionsBindingSource.ResetBindings(false);
+					this.gridExtendedCorrections.Enabled = evProduct.PlannedCorrections;
+				}*/
+
 				ignoreCoverHeatLoad--;
 				ignoreHeatLoad--;
 				ignoreHeatLoadPercentage--;
@@ -672,11 +693,16 @@ namespace Europlan.Common {
 				ignoreCalculationType--;
 				ignoreCircuits--;
 				ignoreSeparateCircuit--;
+				ignoreCorrections--;
 			}
 			// TODO
 		}
 
 		public bool AllowLeave() {
+			bool allow =  this.extendedCorrectionsGrid.AllowLeave();
+			if (!allow) {
+				return false;
+			}
 			List<PlannedProduct> plannedProducts = this.product.Product.AssociatedRoom.PlannedProducts;
 			for (int i = plannedProducts.Count - 1; i >= 0; i-- ) {
 				PlannedProduct pp = plannedProducts[i];
@@ -1089,110 +1115,47 @@ namespace Europlan.Common {
 			e.Item.Selected = false;
 		}
 
-		private void gridExtendedCorrections_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e) {
-			if (e.RowIndex >= 0 && e.RowIndex < this.gridExtendedCorrections.Rows.Count && this.gridExtendedCorrections.Rows[e.RowIndex].DataBoundItem == null) {
-				e.PaintCells(e.ClipBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border | DataGridViewPaintParts.ErrorIcon | DataGridViewPaintParts.Focus | DataGridViewPaintParts.SelectionBackground);
-				e.PaintHeader(DataGridViewPaintParts.All);
-				e.Handled = true;
-			}
-
-		}
-
-		private void gridExtendedCorrections_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
-			if (e.RowIndex == -1 && e.ColumnIndex > -1) {
-				e.PaintBackground(e.CellBounds, false);
-
-				Rectangle r2 = e.CellBounds;
-				r2.Y += e.CellBounds.Height / 2;
-				r2.Height = e.CellBounds.Height / 2;
-				e.PaintContent(r2);
-				e.Handled = true;
+		private void extendedCorrectionsGrid_CorrectionsChanged(object sender, EventArgs e) {
+			if (this.ignoreCorrections == 0) {
+				this.product.Product.PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				this.UpdateControl(FieldEnum.CORRECTIONS);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
 
-		private void gridExtendedCorrections_Paint(object sender, PaintEventArgs e) {
-			Rectangle r1 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.correctAreaDataGridViewCheckBoxColumn.Index, -1, true); //get the column header cell
-			Rectangle r2 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.areaValueDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
-			Rectangle r3 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.areaPercentageDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
-
-			r1.X += 1;
-			r1.Y += 1;
-			r1.Width = r1.Width + r2.Width + r3.Width - 4;
-			r1.Height = r1.Height / 2 - 2;
-			StringFormat format = new StringFormat();
-			format.Alignment = StringAlignment.Center;
-			format.LineAlignment = StringAlignment.Center;
-
-			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			e.Graphics.DrawString("Anteil Gesamtfläche",
-				this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Font,
-				new SolidBrush(this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.ForeColor),
-				r1,
-				format);
-
-			r1 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.correctRimDataGridViewCheckBoxColumn.Index, -1, true); //get the column header cell
-			r2 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.rimLengthValueDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
-			r3 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.rimPercentageDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
-			Rectangle r4 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.rimCornersValueDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
-
-			r1.X += 1;
-			r1.Y += 1;
-			r1.Width = r1.Width + r2.Width + r3.Width + r4.Width - 4;
-			r1.Height = r1.Height / 2 - 2;
-			format = new StringFormat();
-			format.Alignment = StringAlignment.Center;
-			format.LineAlignment = StringAlignment.Center;
-			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			e.Graphics.DrawString("Anteil Randzone",
-				this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Font,
-				new SolidBrush(this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.ForeColor),
-				r1,
-				format);
-
-			r1 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.correctConnectionsDataGridViewCheckBoxColumn.Index, -1, true); //get the column header cell
-			r2 = this.gridExtendedCorrections.GetCellDisplayRectangle(this.connectionsPercentageDataGridViewTextBoxColumn.Index, -1, true); //get the column header cell
-
-			r1.X += 1;
-			r1.Y += 1;
-			r1.Width = r1.Width + r2.Width - 4;
-			r1.Height = r1.Height / 2 - 2;
-			format = new StringFormat();
-			format.Alignment = StringAlignment.Center;
-			format.LineAlignment = StringAlignment.Center;
-			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			e.Graphics.DrawString("Anbindeleitungen",
-				this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Font,
-				new SolidBrush(this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.ForeColor),
-				r1,
-				format);
-		}
-
-		private void gridExtendedCorrections_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e) {
-			if (e.Column.Index == this.correctAreaDataGridViewCheckBoxColumn.Index ||
-				e.Column.Index == this.areaValueDataGridViewTextBoxColumn.Index ||
-				e.Column.Index == this.areaPercentageDataGridViewTextBoxColumn.Index) {
-				this.gridExtendedCorrections.InvalidateCell(this.correctAreaDataGridViewCheckBoxColumn.Index, -1);
-				this.gridExtendedCorrections.InvalidateCell(this.areaValueDataGridViewTextBoxColumn.Index, -1);
-				this.gridExtendedCorrections.InvalidateCell(this.areaValueDataGridViewTextBoxColumn.Index, -1);
-			}
-			if (e.Column.Index == this.correctRimDataGridViewCheckBoxColumn.Index ||
-				e.Column.Index == this.rimLengthValueDataGridViewTextBoxColumn.Index ||
-				e.Column.Index == this.rimPercentageDataGridViewTextBoxColumn.Index ||
-				e.Column.Index == this.rimCornersValueDataGridViewTextBoxColumn.Index) {
-				this.gridExtendedCorrections.InvalidateCell(this.correctRimDataGridViewCheckBoxColumn.Index, -1);
-				this.gridExtendedCorrections.InvalidateCell(this.rimLengthValueDataGridViewTextBoxColumn.Index, -1);
-				this.gridExtendedCorrections.InvalidateCell(this.rimPercentageDataGridViewTextBoxColumn.Index, -1);
-				this.gridExtendedCorrections.InvalidateCell(this.rimCornersValueDataGridViewTextBoxColumn.Index, -1);
-			}
-			if (e.Column.Index == this.correctConnectionsDataGridViewCheckBoxColumn.Index ||
-				e.Column.Index == this.connectionsPercentageDataGridViewTextBoxColumn.Index) {
-				this.gridExtendedCorrections.InvalidateCell(this.correctConnectionsDataGridViewCheckBoxColumn.Index, -1);
-				this.gridExtendedCorrections.InvalidateCell(this.connectionsPercentageDataGridViewTextBoxColumn.Index, -1);
+		private void extendedCorrectionsGrid_CorrectionsEnabledChanged(object sender, EventArgs e) {
+			if (this.ignoreCorrections == 0) {
+				this.product.Product.PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				this.UpdateControl(FieldEnum.CORRECTIONS);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
+
+		private void tabs_Deselecting(object sender, TabControlCancelEventArgs e) {
+			if (e.TabPage == this.pageCorrections) {
+				e.Cancel = !this.extendedCorrectionsGrid.AllowLeave();
+			}
+		}
+
+		/*private void rbExtendedCorrections_CheckedChanged(object sender, EventArgs e) {
+			if (this.ignoreCorrections == 0) {
+				(this.product.Product as EurovalProduct).PlannedCorrections = rbExtendedCorrections.Checked;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				this.UpdateControl(FieldEnum.CORRECTIONS);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}*/
 
 	}
 }
