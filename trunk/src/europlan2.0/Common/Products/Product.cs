@@ -605,7 +605,7 @@ namespace Europlan.Common {
 				spreizungHeat = EN1264.Instance.DefaultSpreizung(this.plannedVorlaufTempHeat);
 				this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
 				this.plannedVorlaufTempCool = this.plannedConnection.Distributor.RegulatorCircuit.CoolFlowTemperature;
-				spreizungCool = 4;
+				spreizungCool = 3;
 				this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
 			}
 		}
@@ -1270,6 +1270,10 @@ namespace Europlan.Common {
 				}
 				return null;
 			}
+		}
+
+		public virtual bool ManualMode {
+			get { return true; }
 		}
 	}
 }

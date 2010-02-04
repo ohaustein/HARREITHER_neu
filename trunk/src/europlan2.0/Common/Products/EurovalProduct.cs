@@ -1985,6 +1985,9 @@ namespace Europlan.Common {
 			set {
 				if (this.PlannedCorrections != value) {
 					this.plannedCorrectionList.Clear();
+					this.requestedCircuits = this.PlannedCircuitCount;
+					this.requestedLayDistance = this.PlannedLayDistance;
+					this.requestedRimType = this.PlannedRimType;
 					if (value && this.requestedCircuits != null && this.requestedLayDistance != null && (this.plannedRimLength == 0 || this.requestedRimType != null)) {
 						for (int i = 0; i < this.requestedCircuits.Value; i++ ) {
 							this.plannedCorrectionList.Add(new ExtendedCorrections(i + 1, this));
@@ -2030,6 +2033,13 @@ namespace Europlan.Common {
 					ec.EurovalProduct = this;
 					ec.CircuitNr = i++;
 				}
+			}
+		}
+
+		public override bool ManualMode {
+			get {
+				return (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) ||
+					this.PlannedCorrections;
 			}
 		}
 	}
