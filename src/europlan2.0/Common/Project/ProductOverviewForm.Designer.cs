@@ -39,13 +39,17 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvProductOverview = new System.Windows.Forms.DataGridView();
-			this.editColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.productOverviewWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.roomIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.roomNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.teilSystemDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.systemNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nrOfCircuitsDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+			this.RimType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.LayDistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pipeLengthDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.totalAreaDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.druckverlustHeatDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
@@ -55,7 +59,7 @@ namespace Europlan.Common {
 			this.coolNetLoadDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.coolRestDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.okDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.productOverviewWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.editColumn = new System.Windows.Forms.DataGridViewButtonColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dgvProductOverview)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.productOverviewWrapperBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -82,6 +86,8 @@ namespace Europlan.Common {
             this.teilSystemDataGridViewTextBoxColumn,
             this.systemNameDataGridViewTextBoxColumn,
             this.nrOfCircuitsDataGridViewTextBoxColumn,
+            this.RimType,
+            this.LayDistance,
             this.pipeLengthDataGridViewTextBoxColumn,
             this.totalAreaDataGridViewTextBoxColumn,
             this.druckverlustHeatDataGridViewTextBoxColumn,
@@ -107,14 +113,9 @@ namespace Europlan.Common {
 			this.dgvProductOverview.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvProductOverview_CellPainting);
 			this.dgvProductOverview.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductOverview_CellClick);
 			// 
-			// editColumn
+			// productOverviewWrapperBindingSource
 			// 
-			this.editColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.editColumn.HeaderText = "Bearbeiten";
-			this.editColumn.Name = "editColumn";
-			this.editColumn.Text = "...";
-			this.editColumn.UseColumnTextForButtonValue = true;
-			this.editColumn.Width = 64;
+			this.productOverviewWrapperBindingSource.DataSource = typeof(Europlan.Common.ProductOverviewWrapper);
 			// 
 			// roomIdDataGridViewTextBoxColumn
 			// 
@@ -177,14 +178,32 @@ namespace Europlan.Common {
 			this.nrOfCircuitsDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.nrOfCircuitsDataGridViewTextBoxColumn.Width = 47;
 			// 
+			// RimType
+			// 
+			this.RimType.DataPropertyName = "RimType";
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.RimType.DefaultCellStyle = dataGridViewCellStyle7;
+			this.RimType.HeaderText = "Verlegeabstand\nRZ";
+			this.RimType.Name = "RimType";
+			this.RimType.ReadOnly = true;
+			// 
+			// LayDistance
+			// 
+			this.LayDistance.DataPropertyName = "LayDistance";
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.LayDistance.DefaultCellStyle = dataGridViewCellStyle8;
+			this.LayDistance.HeaderText = "Verlegeabstand\nAZ";
+			this.LayDistance.Name = "LayDistance";
+			this.LayDistance.ReadOnly = true;
+			// 
 			// pipeLengthDataGridViewTextBoxColumn
 			// 
 			this.pipeLengthDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.pipeLengthDataGridViewTextBoxColumn.DataPropertyName = "PipeLength";
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle7.Format = "F1";
-			this.pipeLengthDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle9.Format = "F0";
+			this.pipeLengthDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
 			this.pipeLengthDataGridViewTextBoxColumn.HeaderText = "Rohrlänge\nm";
 			this.pipeLengthDataGridViewTextBoxColumn.Name = "pipeLengthDataGridViewTextBoxColumn";
 			this.pipeLengthDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
@@ -196,10 +215,10 @@ namespace Europlan.Common {
 			// 
 			this.totalAreaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.totalAreaDataGridViewTextBoxColumn.DataPropertyName = "TotalArea";
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle8.Format = "F1";
-			this.totalAreaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle10.Format = "F0";
+			this.totalAreaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
 			this.totalAreaDataGridViewTextBoxColumn.HeaderText = "Fläche\nm²";
 			this.totalAreaDataGridViewTextBoxColumn.Name = "totalAreaDataGridViewTextBoxColumn";
 			this.totalAreaDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
@@ -211,10 +230,10 @@ namespace Europlan.Common {
 			// 
 			this.druckverlustHeatDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.druckverlustHeatDataGridViewTextBoxColumn.DataPropertyName = "DruckverlustHeat";
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle9.Format = "F1";
-			this.druckverlustHeatDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle11.Format = "F0";
+			this.druckverlustHeatDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
 			this.druckverlustHeatDataGridViewTextBoxColumn.HeaderText = "Druckverlust\nmbar";
 			this.druckverlustHeatDataGridViewTextBoxColumn.Name = "druckverlustHeatDataGridViewTextBoxColumn";
 			this.druckverlustHeatDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
@@ -226,10 +245,10 @@ namespace Europlan.Common {
 			// 
 			this.heatNetLoadDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.heatNetLoadDataGridViewTextBoxColumn.DataPropertyName = "HeatNetLoad";
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle10.Format = "F0";
-			this.heatNetLoadDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle12.Format = "F0";
+			this.heatNetLoadDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
 			this.heatNetLoadDataGridViewTextBoxColumn.HeaderText = "Normwärme\nW";
 			this.heatNetLoadDataGridViewTextBoxColumn.Name = "heatNetLoadDataGridViewTextBoxColumn";
 			this.heatNetLoadDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
@@ -241,10 +260,10 @@ namespace Europlan.Common {
 			// 
 			this.heatRestDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.heatRestDataGridViewTextBoxColumn.DataPropertyName = "HeatRest";
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle11.Format = "F0";
-			this.heatRestDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle13.Format = "F0";
+			this.heatRestDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle13;
 			this.heatRestDataGridViewTextBoxColumn.HeaderText = "Restwärme\nW";
 			this.heatRestDataGridViewTextBoxColumn.Name = "heatRestDataGridViewTextBoxColumn";
 			this.heatRestDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
@@ -256,10 +275,10 @@ namespace Europlan.Common {
 			// 
 			this.druckverlustCoolDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.druckverlustCoolDataGridViewTextBoxColumn.DataPropertyName = "DruckverlustCool";
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle12.Format = "F1";
-			this.druckverlustCoolDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle14.Format = "F0";
+			this.druckverlustCoolDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle14;
 			this.druckverlustCoolDataGridViewTextBoxColumn.HeaderText = "Druckverlust\nmbar";
 			this.druckverlustCoolDataGridViewTextBoxColumn.Name = "druckverlustCoolDataGridViewTextBoxColumn";
 			this.druckverlustCoolDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
@@ -271,10 +290,10 @@ namespace Europlan.Common {
 			// 
 			this.coolNetLoadDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.coolNetLoadDataGridViewTextBoxColumn.DataPropertyName = "CoolNetLoad";
-			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle13.Format = "F0";
-			this.coolNetLoadDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle13;
+			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle15.Format = "F0";
+			this.coolNetLoadDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle15;
 			this.coolNetLoadDataGridViewTextBoxColumn.HeaderText = "Kühllast\nW";
 			this.coolNetLoadDataGridViewTextBoxColumn.Name = "coolNetLoadDataGridViewTextBoxColumn";
 			this.coolNetLoadDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
@@ -286,10 +305,10 @@ namespace Europlan.Common {
 			// 
 			this.coolRestDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.coolRestDataGridViewTextBoxColumn.DataPropertyName = "CoolRest";
-			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle14.Format = "F0";
-			this.coolRestDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle14;
+			dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle16.Format = "F0";
+			this.coolRestDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle16;
 			this.coolRestDataGridViewTextBoxColumn.HeaderText = "Rest\nW";
 			this.coolRestDataGridViewTextBoxColumn.Name = "coolRestDataGridViewTextBoxColumn";
 			this.coolRestDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
@@ -301,19 +320,24 @@ namespace Europlan.Common {
 			// 
 			this.okDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.okDataGridViewCheckBoxColumn.DataPropertyName = "Ok";
-			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle15.NullValue = false;
-			this.okDataGridViewCheckBoxColumn.DefaultCellStyle = dataGridViewCellStyle15;
+			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle17.NullValue = false;
+			this.okDataGridViewCheckBoxColumn.DefaultCellStyle = dataGridViewCellStyle17;
 			this.okDataGridViewCheckBoxColumn.HeaderText = "Ok";
 			this.okDataGridViewCheckBoxColumn.Name = "okDataGridViewCheckBoxColumn";
 			this.okDataGridViewCheckBoxColumn.ReadOnly = true;
 			this.okDataGridViewCheckBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.okDataGridViewCheckBoxColumn.Width = 27;
 			// 
-			// productOverviewWrapperBindingSource
+			// editColumn
 			// 
-			this.productOverviewWrapperBindingSource.DataSource = typeof(Europlan.Common.ProductOverviewWrapper);
+			this.editColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.editColumn.HeaderText = "Bearbeiten";
+			this.editColumn.Name = "editColumn";
+			this.editColumn.Text = "...";
+			this.editColumn.UseColumnTextForButtonValue = true;
+			this.editColumn.Width = 64;
 			// 
 			// ProductOverviewForm
 			// 
@@ -341,6 +365,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn teilSystemDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn systemNameDataGridViewTextBoxColumn;
 		private NumericColumn nrOfCircuitsDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn RimType;
+		private System.Windows.Forms.DataGridViewTextBoxColumn LayDistance;
 		private NumericColumn pipeLengthDataGridViewTextBoxColumn;
 		private NumericColumn totalAreaDataGridViewTextBoxColumn;
 		private NumericColumn druckverlustHeatDataGridViewTextBoxColumn;
