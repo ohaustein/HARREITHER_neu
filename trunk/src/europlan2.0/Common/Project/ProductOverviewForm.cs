@@ -55,7 +55,7 @@ namespace Europlan.Common {
 			if (layDistanceCombo.SelectedItem != null) {
 				layDistance = (layDistanceCombo.SelectedItem as ProductOverviewWrapper.LayDistanceItem).layDistance;
 			}
-			this.dgvProductOverview.Rows[dgvProductOverview.CurrentCell.RowIndex].Cells[LayDistance.DisplayIndex].Value = layDistance;
+			this.dgvProductOverview.Rows[dgvProductOverview.CurrentCell.RowIndex].Cells[LayDistance.Index].Value = layDistance;
 			ReloadGrid();
 		}
 
@@ -64,17 +64,17 @@ namespace Europlan.Common {
 			if (rimTypeCombo.SelectedItem != null) {
 				rimType = (rimTypeCombo.SelectedItem as ProductOverviewWrapper.RimTypeItem).rimType;
 			}
-			this.dgvProductOverview.Rows[dgvProductOverview.CurrentCell.RowIndex].Cells[RimType.DisplayIndex].Value = rimType;
+			this.dgvProductOverview.Rows[dgvProductOverview.CurrentCell.RowIndex].Cells[RimType.Index].Value = rimType;
 			ReloadGrid();
 		}
 
 		private void dgvProductOverview_CellEnter(object sender, DataGridViewCellEventArgs e) {
-			if (e.ColumnIndex == LayDistance.DisplayIndex && e.RowIndex >= 0) {
+			if (e.ColumnIndex == LayDistance.Index && e.RowIndex >= 0) {
 				if ((this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper).LayDistanceEditable) {
 
 					this.layDistanceCombo.SelectedValueChanged -= new EventHandler(layDistanceCombo_SelectedValueChanged);
 
-					DataGridViewCell layDistanceCell = dgvProductOverview.Rows[e.RowIndex].Cells[LayDistance.DisplayIndex];
+					DataGridViewCell layDistanceCell = dgvProductOverview.Rows[e.RowIndex].Cells[LayDistance.Index];
 					layDistanceCombo.Items.Clear();
 					ProductOverviewWrapper.LayDistanceEnumConverter conv = new ProductOverviewWrapper.LayDistanceEnumConverter();
 
@@ -100,12 +100,12 @@ namespace Europlan.Common {
 					layDistanceCombo.Size = new Size(rect.Width, rect.Height);
 					layDistanceCombo.Show();
 				}
-			} else if (e.ColumnIndex == RimType.DisplayIndex && e.RowIndex >= 0) {
+			} else if (e.ColumnIndex == RimType.Index && e.RowIndex >= 0) {
 				if ((this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper).RimTypeEditable) {
 
 					this.rimTypeCombo.SelectedValueChanged -= new EventHandler(rimTypeCombo_SelectedValueChanged);
 
-					DataGridViewCell rimTypeCell = dgvProductOverview.Rows[e.RowIndex].Cells[RimType.DisplayIndex];
+					DataGridViewCell rimTypeCell = dgvProductOverview.Rows[e.RowIndex].Cells[RimType.Index];
 					rimTypeCombo.Items.Clear();
 					ProductOverviewWrapper.RimTypeEnumConverter conv = new ProductOverviewWrapper.RimTypeEnumConverter();
 
