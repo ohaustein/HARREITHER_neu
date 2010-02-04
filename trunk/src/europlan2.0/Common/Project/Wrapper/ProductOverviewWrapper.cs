@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Europlan.Common {
 
@@ -434,11 +435,31 @@ namespace Europlan.Common {
 			}
 			set {
 				if (plannedProduct.Product is EurovalProduct) {
-					(plannedProduct.Product as EurovalProduct).RequestedCircuits = value;
-					plannedProduct.ConfigureProduct(false);
+					if ((plannedProduct.Product as EurovalProduct).PlannedCorrections) {
+						if (MessageBox.Show("Wenn Sie die Anzahl der Heizkreise ändern, werden die erweiterten Korrekturen zurückgesetzt. Wollen sie das wirklich machen?", "Bestätigen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+							return;
+						} else {
+							(plannedProduct.Product as EurovalProduct).PlannedCorrections = false;
+							(plannedProduct.Product as EurovalProduct).RequestedCircuits = value;
+							plannedProduct.ConfigureProduct(false);
+						}
+					} else {
+						(plannedProduct.Product as EurovalProduct).RequestedCircuits = value;
+						plannedProduct.ConfigureProduct(false);
+					}
 				} else if (plannedProduct.Product is EcothermProduct) {
-					(plannedProduct.Product as EcothermProduct).RequestedCircuits = value;
-					plannedProduct.ConfigureProduct(false);
+					if ((plannedProduct.Product as EcothermProduct).PlannedCorrections) {
+						if (MessageBox.Show("Wenn Sie die Anzahl der Heizkreise ändern, werden die erweiterten Korrekturen zurückgesetzt. Wollen sie das wirklich machen?", "Bestätigen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+							return;
+						} else {
+							(plannedProduct.Product as EcothermProduct).PlannedCorrections = false;
+							(plannedProduct.Product as EcothermProduct).RequestedCircuits = value;
+							plannedProduct.ConfigureProduct(false);
+						}
+					} else {
+						(plannedProduct.Product as EcothermProduct).RequestedCircuits = value;
+						plannedProduct.ConfigureProduct(false);
+					}
 				} else if (plannedProduct.Product is ModulKlimaBodenProduct) {
 					(plannedProduct.Product as ModulKlimaBodenProduct).RequestedCircuits = value;
 					plannedProduct.ConfigureProduct(false);
