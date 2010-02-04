@@ -767,5 +767,42 @@ namespace Europlan.Application {
 			}
 			optionsForm.Dispose();
 		}
+
+		private void projectOverviewHeatToolStripButton_Click(object sender, EventArgs e) {
+			ProductOverviewForm form = new ProductOverviewForm(true);
+			form.ShowDialog();
+			if (form.UnsavedChanges) {
+				projectUnsaved = true;
+				UpdateTitle();
+			}
+			if (form.ProductToEdit != null) {
+				TreeNode node = Project.Instance.FindNode(form.ProductToEdit);
+				this.projectTree.SelectedNode = node;
+			} else {
+				if (currentEditorUserControl != null) {
+					currentEditorUserControl.UpdateControl();
+				}
+			}
+			form.Dispose();
+		}
+
+		private void projectOverviewCoolToolStripButton_Click(object sender, EventArgs e) {
+			ProductOverviewForm form = new ProductOverviewForm(false);
+			form.ShowDialog();
+			if (form.UnsavedChanges) {
+				projectUnsaved = true;
+				UpdateTitle();
+			}
+			if (form.ProductToEdit != null) {
+				TreeNode node = Project.Instance.FindNode(form.ProductToEdit);
+				this.projectTree.SelectedNode = node;
+			} else {
+				if (currentEditorUserControl != null) {
+					currentEditorUserControl.UpdateControl();
+				}
+			}
+			form.Dispose();
+		}
+
 	}
 }

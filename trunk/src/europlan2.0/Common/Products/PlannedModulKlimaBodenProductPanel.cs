@@ -61,8 +61,11 @@ namespace Europlan.Common {
 		private string errorMsg = null;
 
 		public void UpdateControl() {
+			if (this.product != this.Tag as PlannedProduct) {
+				this.tabs.SelectedTab = this.pageInput;
+			}
+
 			this.product = this.Tag as PlannedProduct;
-			this.tabs.SelectedTab = this.pageInput;
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
 			if (this.product != null) {

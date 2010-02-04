@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Europlan.Common {
 	public partial class PlannedEurovalProductPanel : UserControl, IEditorUserControl {
+		
 		private PlannedProduct product = null;
-
-
+		
 		private class LayDistanceItem {
 			public Nullable<EurovalProduct.EurovalLayDistance> layDistance;
 			public string name;
@@ -165,9 +165,12 @@ namespace Europlan.Common {
 		private bool cmbCircuitsContainsAutomatic = true;
 
 		public void UpdateControl() {
+			if (this.product != this.Tag as PlannedProduct) {
+				this.tabs.SelectedTab = this.pageInput;
+			}
+			
 			this.product = this.Tag as PlannedProduct;
 			this.extendedCorrectionsGrid.Product = this.product.Product;
-			this.tabs.SelectedTab = this.pageInput;
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
 			if (this.product != null) {

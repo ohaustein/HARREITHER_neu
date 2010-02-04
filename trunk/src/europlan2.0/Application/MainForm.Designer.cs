@@ -67,6 +67,9 @@ namespace Europlan.Application {
 			this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.projectOverviewHeatToolStripButton = new System.Windows.Forms.ToolStripButton();
+			this.projectOverviewCoolToolStripButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.openGlobalConfDialog = new System.Windows.Forms.OpenFileDialog();
@@ -320,6 +323,9 @@ namespace Europlan.Application {
             this.copyToolStripButton,
             this.pasteToolStripButton,
             this.toolStripSeparator1,
+            this.projectOverviewHeatToolStripButton,
+            this.projectOverviewCoolToolStripButton,
+            this.toolStripSeparator6,
             this.helpToolStripButton});
 			resources.ApplyResources(this.toolStrip1, "toolStrip1");
 			this.toolStrip1.Name = "toolStrip1";
@@ -378,6 +384,25 @@ namespace Europlan.Application {
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+			// 
+			// projectOverviewHeatToolStripButton
+			// 
+			this.projectOverviewHeatToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			resources.ApplyResources(this.projectOverviewHeatToolStripButton, "projectOverviewHeatToolStripButton");
+			this.projectOverviewHeatToolStripButton.Name = "projectOverviewHeatToolStripButton";
+			this.projectOverviewHeatToolStripButton.Click += new System.EventHandler(this.projectOverviewHeatToolStripButton_Click);
+			// 
+			// projectOverviewCoolToolStripButton
+			// 
+			this.projectOverviewCoolToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			resources.ApplyResources(this.projectOverviewCoolToolStripButton, "projectOverviewCoolToolStripButton");
+			this.projectOverviewCoolToolStripButton.Name = "projectOverviewCoolToolStripButton";
+			this.projectOverviewCoolToolStripButton.Click += new System.EventHandler(this.projectOverviewCoolToolStripButton_Click);
+			// 
+			// toolStripSeparator6
+			// 
+			this.toolStripSeparator6.Name = "toolStripSeparator6";
+			resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
 			// 
 			// helpToolStripButton
 			// 
@@ -464,6 +489,9 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripMenuItem projektToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewReportToolStripMenuItem;
 		private System.Windows.Forms.ImageList imageList;
+		private System.Windows.Forms.ToolStripButton projectOverviewHeatToolStripButton;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+		private System.Windows.Forms.ToolStripButton projectOverviewCoolToolStripButton;
 
 	}
 }

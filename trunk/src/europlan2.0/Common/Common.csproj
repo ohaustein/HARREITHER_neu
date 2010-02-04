@@ -235,6 +235,12 @@
     <Compile Include="Products\SelectHithermWallConstructionForm.Designer.cs">
       <DependentUpon>SelectHithermWallConstructionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\ProductOverviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\ProductOverviewForm.Designer.cs">
+      <DependentUpon>ProductOverviewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\RequiredMaterialGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -247,6 +253,7 @@
     <Compile Include="Project\RequiredMaterialPanel.Designer.cs">
       <DependentUpon>RequiredMaterialPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\Wrapper\ProductOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\DistributorWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulBoden\ModulBodenWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulDecke\ModulDeckeWrapper.cs" />
@@ -518,6 +525,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>SelectHithermWallConstructionForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\ProductOverviewForm.resx">
+      <DependentUpon>ProductOverviewForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\RequiredMaterialGrid.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RequiredMaterialGrid.cs</DependentUpon>
@@ -639,6 +650,7 @@
     <None Include="Properties\DataSources\HithermWall.datasource" />
     <None Include="Properties\DataSources\IQuickDimensioningSummary.datasource" />
     <None Include="Properties\DataSources\KlimaFlaechenModul.datasource" />
+    <None Include="Properties\DataSources\ProductOverviewWrapper.datasource" />
     <None Include="Properties\DataSources\QuickDimensioningRoomDistributorsWrapper.datasource" />
     <None Include="Properties\DataSources\RequiredMaterialWrapper.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
