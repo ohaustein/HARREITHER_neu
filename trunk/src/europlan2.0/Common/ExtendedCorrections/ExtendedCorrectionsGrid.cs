@@ -93,7 +93,7 @@ namespace Europlan.Common {
 			ignoreRadio++;
 			ignoreList++;
 
-			if (this.CorrectionsEnabled) {
+			//if (this.CorrectionsEnabled) {
 				if (this.evProduct != null) {
 					this.areaValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.evProduct.PlannedFloorArea;
 					this.rimLengthValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.evProduct.PlannedRimLength;
@@ -143,7 +143,7 @@ namespace Europlan.Common {
 					this.connectionsPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly;
 					this.connectionsPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
 				}
-			}
+			//}
 
 			if (updateRadio) {
 				if (this.CorrectionsEnabled) {
