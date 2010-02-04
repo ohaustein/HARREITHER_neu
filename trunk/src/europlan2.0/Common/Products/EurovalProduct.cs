@@ -2035,8 +2035,8 @@ namespace Europlan.Common {
 
 		public override bool ManualMode {
 			get {
-				return (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) ||
-					this.PlannedCorrections;
+				return (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT); // ||
+					//this.PlannedCorrections;
 			}
 		}
 	}
