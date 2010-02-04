@@ -9,12 +9,33 @@ namespace Europlan.Common {
 
 		//private NumericCell cellTemplate;
 
+		private bool readOnly = false;
+
 		public NumericColumn() {
 			//this.cellTemplate = new NumericCell();
 			NumericCell cell = new NumericCell();
 			base.CellTemplate = cell;
 			base.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 			base.DefaultCellStyle.Format = this.NumericCellTemplate.FormatString;
+		}
+
+		public override bool ReadOnly {
+			get { return this.readOnly; }
+			set {
+				this.readOnly = value;
+				if (this.DataGridView != null) {
+					// Update all existing cells in the column
+					DataGridViewRowCollection rows = this.DataGridView.Rows;
+					int rowCount = rows.Count;
+					for (int i = 0; i < rowCount; i++) {
+						DataGridViewRow row = rows.SharedRow(i);
+						NumericCell cell = row.Cells[this.Index] as NumericCell;
+						if (cell != null) {
+							cell.ReadOnly = value;
+						}
+					}
+				}
+			}
 		}
 
 		[Category("Appearance"), DefaultValue(NumericBox.NumericEditType.DEFAULT), Description("The type of the cell")]

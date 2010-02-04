@@ -15,6 +15,19 @@ namespace Europlan.Common {
 		public NumericCell() {
 		}
 
+		public override bool ReadOnly {
+			get {
+				return base.ReadOnly;
+			}
+			set {
+				try {
+					base.ReadOnly = value;
+				} catch (Exception e) {
+					Console.WriteLine("blub");
+				}
+			}
+		}
+
 		public override Type EditType {
 			get { return typeof(NumericEditingControl); }
 		}
