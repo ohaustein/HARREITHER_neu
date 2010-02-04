@@ -103,6 +103,23 @@ namespace Europlan.Common {
 					row.Cells[nrOfCircuitsDataGridViewTextBoxColumn.Index].Style.BackColor = row.DefaultCellStyle.BackColor;
 					row.Cells[nrOfCircuitsDataGridViewTextBoxColumn.Index].ReadOnly = false;
 				}
+
+				if (!(row.DataBoundItem as ProductOverviewWrapper).RimTypeEditable) {
+					row.Cells[RimType.Index].Style.BackColor = SystemColors.Control;
+					row.Cells[RimType.Index].ReadOnly = true;
+				} else {
+					row.Cells[RimType.Index].Style.BackColor = row.DefaultCellStyle.BackColor;
+					row.Cells[RimType.Index].ReadOnly = true;
+				}
+
+				if (!(row.DataBoundItem as ProductOverviewWrapper).LayDistanceEditable) {
+					row.Cells[LayDistance.Index].Style.BackColor = SystemColors.Control;
+					row.Cells[LayDistance.Index].ReadOnly = true;
+				} else {
+					row.Cells[LayDistance.Index].Style.BackColor = row.DefaultCellStyle.BackColor;
+					row.Cells[LayDistance.Index].ReadOnly = true;
+				}
+
 			}
 		}
 
@@ -126,6 +143,24 @@ namespace Europlan.Common {
 				  e.RowIndex >= 0 && e.RowIndex < this.dgvProductOverview.Rows.Count) {
 				ProductOverviewWrapper wrapper = (this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper);
 				if (wrapper.NrOfCircuitsModified) {
+					e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+					e.Graphics.FillEllipse(Brushes.Red, e.CellBounds.X + 6, e.CellBounds.Y + (e.CellBounds.Height / 2) - 4, (float)7, (float)7);
+					e.Handled = true;
+				}
+			} else if (e.ColumnIndex >= 0 && e.ColumnIndex < this.dgvProductOverview.Columns.Count &&
+				  this.dgvProductOverview.Columns[e.ColumnIndex] == this.LayDistance &&
+				  e.RowIndex >= 0 && e.RowIndex < this.dgvProductOverview.Rows.Count) {
+				ProductOverviewWrapper wrapper = (this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper);
+				if (wrapper.LayDistanceModified) {
+					e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+					e.Graphics.FillEllipse(Brushes.Red, e.CellBounds.X + 6, e.CellBounds.Y + (e.CellBounds.Height / 2) - 4, (float)7, (float)7);
+					e.Handled = true;
+				}
+			} else if (e.ColumnIndex >= 0 && e.ColumnIndex < this.dgvProductOverview.Columns.Count &&
+				  this.dgvProductOverview.Columns[e.ColumnIndex] == this.RimType &&
+				  e.RowIndex >= 0 && e.RowIndex < this.dgvProductOverview.Rows.Count) {
+				ProductOverviewWrapper wrapper = (this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper);
+				if (wrapper.RimTypeModified) {
 					e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 					e.Graphics.FillEllipse(Brushes.Red, e.CellBounds.X + 6, e.CellBounds.Y + (e.CellBounds.Height / 2) - 4, (float)7, (float)7);
 					e.Handled = true;
