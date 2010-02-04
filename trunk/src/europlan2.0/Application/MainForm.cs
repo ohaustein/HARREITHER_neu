@@ -265,7 +265,7 @@ namespace Europlan.Application {
 				Project.Instance.InitializeTreeView(this.projectTree);
 				projectTree.SelectedNode = projectTree.Nodes[0];
 				if (currentEditorUserControl != null) {
-					currentEditorUserControl.UpdateControl();
+					currentEditorUserControl.UpdateControl(true);
 				}
 			}
 		}
@@ -513,9 +513,12 @@ namespace Europlan.Application {
 							currentEditorUserControl = control as IEditorUserControl;
 						}
 					}
+					if (oldControl != null) {
+						oldControl.Tag = null;
+					}
 					//if (oldControl == null || control.Tag != oldControl.Tag) {
 					if (tagChanged) {
-						(control as IEditorUserControl).UpdateControl();
+						(control as IEditorUserControl).UpdateControl(true);
 					}
 					guiUpdateInProgress = false;
 				}
@@ -672,7 +675,7 @@ namespace Europlan.Application {
 			}
 			if (splitContainer.Panel2.Controls.Count > 0) {
 				if (splitContainer.Panel2.Controls[0] is IEditorUserControl) {
-					(splitContainer.Panel2.Controls[0] as IEditorUserControl).UpdateControl();
+					(splitContainer.Panel2.Controls[0] as IEditorUserControl).UpdateControl(true);
 				}
 			}
 		}
@@ -684,7 +687,7 @@ namespace Europlan.Application {
 				projectUnsaved = true;
 				UpdateTitle();
 				if (currentEditorUserControl != null) {
-					currentEditorUserControl.UpdateControl();
+					currentEditorUserControl.UpdateControl(true);
 				}
 			}
 		}
@@ -709,7 +712,7 @@ namespace Europlan.Application {
 						UpdateTitle();
 						Project.Instance.InitializeTreeView(this.projectTree);
 						if (currentEditorUserControl != null) {
-							currentEditorUserControl.UpdateControl();
+							currentEditorUserControl.UpdateControl(true);
 						}
 					} else {
 						LoadProject();
@@ -745,7 +748,7 @@ namespace Europlan.Application {
 						UpdateTitle();
 						Project.Instance.InitializeTreeView(this.projectTree);
 						if (currentEditorUserControl != null) {
-							currentEditorUserControl.UpdateControl();
+							currentEditorUserControl.UpdateControl(true);
 						}
 					} else {
 						loadAfterRestart = true;
@@ -780,7 +783,7 @@ namespace Europlan.Application {
 				this.projectTree.SelectedNode = node;
 			} else {
 				if (currentEditorUserControl != null) {
-					currentEditorUserControl.UpdateControl();
+					currentEditorUserControl.UpdateControl(false);
 				}
 			}
 			form.Dispose();
@@ -798,7 +801,7 @@ namespace Europlan.Application {
 				this.projectTree.SelectedNode = node;
 			} else {
 				if (currentEditorUserControl != null) {
-					currentEditorUserControl.UpdateControl();
+					currentEditorUserControl.UpdateControl(false);
 				}
 			}
 			form.Dispose();

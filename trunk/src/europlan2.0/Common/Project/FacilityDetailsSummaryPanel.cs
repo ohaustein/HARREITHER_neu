@@ -15,10 +15,10 @@ namespace Europlan.Common {
 
 		public FacilityDetailsSummaryPanel() {
 			InitializeComponent();
-			UpdateControl();
+			UpdateControl(true);
 		}
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			Project project = Project.Instance;
 			numNormOutsideTemperature.Value = project.NormOutsideTemperature;
 			chkSpreizung.Checked = project.VariableSpreizung;

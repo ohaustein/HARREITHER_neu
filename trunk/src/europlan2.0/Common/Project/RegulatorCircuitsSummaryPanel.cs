@@ -17,7 +17,7 @@ namespace Europlan.Common {
 			InitializeComponent();
 		}
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			regulatoryCircuitsSource.DataSource = Project.Instance.RegulatorCircuits;
 			regulatoryCircuitsSource.ResetBindings(false);
 			coolFlowTemperatureDataGridViewTextBoxColumn.Visible = Project.Instance.CalculateCoolLoad;

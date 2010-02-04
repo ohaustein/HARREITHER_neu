@@ -34,7 +34,7 @@ namespace Europlan.Common {
 			InitializeGeneralValues();
 		}
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			InitializeEurovalValues();
 			InitializeEcothermValues();
 			InitializeModulBodenValues();

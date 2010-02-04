@@ -25,7 +25,7 @@ namespace Europlan.Common {
 			this.gridRooms.ColumnWidthChanged += new DataGridViewColumnEventHandler(gridRooms_ColumnWidthChanged);
 		}
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			if (this.Tag != null) {
 				this.floor = this.Tag as Floor;
 				this.floorRoomsSource.DataSource = this.floor.Rooms;

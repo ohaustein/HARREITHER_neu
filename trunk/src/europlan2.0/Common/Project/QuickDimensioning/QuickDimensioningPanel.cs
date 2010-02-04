@@ -112,7 +112,7 @@ namespace Europlan.Common {
 			this.tableLayoutPanel1.Controls.Add(this.btnRevert, 0, i);
 		}
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			//Project.Instance.Config.
 
 			updateControlOngoing = true;
@@ -1221,7 +1221,7 @@ namespace Europlan.Common {
 				qd.ModulDeckeCheckState = QuickDimensioning.ProductCheckState.None;
 				// TODO revert parameters
 
-				this.UpdateControl();
+				this.UpdateControl(true);
 			}
 		}
 

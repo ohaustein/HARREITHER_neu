@@ -159,17 +159,17 @@ namespace Europlan.Common {
 
 		private string errorMsg = null;
 
+
 		private bool cmbLayDistanceContainsAutomatic = true;
 		private bool cmbRimTypeContainsAutomatic = true;
 		private bool cmbRimTypeContainsNone = false;
 		private bool cmbCircuitsContainsAutomatic = true;
 
-		public void UpdateControl() {
-			if (this.product != this.Tag as PlannedProduct) {
+		public void UpdateControl(bool resetUserInterface) {
+			this.product = this.Tag as PlannedProduct;
+			if (resetUserInterface) {
 				this.tabs.SelectedTab = this.pageInput;
 			}
-
-			this.product = this.Tag as PlannedProduct;
 			this.extendedCorrectionsGrid.Product = this.product.Product;
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;

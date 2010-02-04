@@ -17,17 +17,17 @@ namespace Europlan.Common {
 		
 		public RequiredMaterialPanel() {
 			InitializeComponent();
-			UpdateControl();
+			UpdateControl(true);
 		}
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			Project.Instance.CalculateRequiredMaterial();
-			requiredMaterialGridFloor.UpdateControl();
-			requiredMaterialGridWall.UpdateControl();
-			requiredMaterialGridCeiling.UpdateControl();
-			requiredMaterialGridDistributor.UpdateControl();
-			requiredMaterialGridInsulation.UpdateControl();
-			requiredMaterialGridGeneral.UpdateControl();
+			requiredMaterialGridFloor.UpdateControl(true);
+			requiredMaterialGridWall.UpdateControl(true);
+			requiredMaterialGridCeiling.UpdateControl(true);
+			requiredMaterialGridDistributor.UpdateControl(true);
+			requiredMaterialGridInsulation.UpdateControl(true);
+			requiredMaterialGridGeneral.UpdateControl(true);
 		}
 
 		public bool AllowLeave() {

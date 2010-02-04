@@ -14,7 +14,7 @@ namespace Europlan.Common {
 		event ProjectChangedHandler ProjectChanged;
 		event TreeSelectionRequestedHandler TreeSelectionRequested;
 
-		void UpdateControl();
+		void UpdateControl(bool resetUserInterface);
 		bool AllowLeave();
 	}
 }
