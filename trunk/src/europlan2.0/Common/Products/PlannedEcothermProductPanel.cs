@@ -1001,6 +1001,14 @@ namespace Europlan.Common {
 
 		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreCircuits == 0) {
+				if ((this.product.Product as EcothermProduct).PlannedCorrections) {
+					if (MessageBox.Show("Wenn Sie die Anzahl der Heizkreise ändern, werden die erweiterten Korrekturen zurückgesetzt. Wollen sie das wirklich machen?", "Bestätigen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+						this.UpdateControl(FieldEnum.NONE);
+						return;
+					} else {
+						(this.product.Product as EcothermProduct).PlannedCorrections = false;
+					}
+				}
 				if (this.cmbCircuits.SelectedIndex >= (this.cmbCircuitsContainsAutomatic ? 1 : 0)) {
 					(this.product.Product as EcothermProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex + (this.cmbCircuitsContainsAutomatic ? 0 : 1);
 				} else {
