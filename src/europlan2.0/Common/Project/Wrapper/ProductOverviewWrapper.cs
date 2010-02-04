@@ -350,6 +350,50 @@ namespace Europlan.Common {
 			}
 		}
 
+		public class LayDistanceItem {
+			public Nullable<LayDistanceEnum> layDistance;
+			public string name;
+
+			public LayDistanceItem(Nullable<LayDistanceEnum> layDistance, string name) {
+				this.layDistance = layDistance;
+				this.name = name;
+			}
+
+			public override string ToString() {
+				return this.name;
+			}
+
+			public override bool Equals(object obj) {
+				return obj is LayDistanceItem && (obj as LayDistanceItem).layDistance == this.layDistance;
+			}
+
+			public override int GetHashCode() {
+				return (this.layDistance == null ? 0 : this.layDistance.GetHashCode());
+			}
+		}
+
+		public class RimTypeItem {
+			public Nullable<RimTypeEnum> rimType;
+			public string name;
+
+			public RimTypeItem(Nullable<RimTypeEnum> layDistance, string name) {
+				this.rimType = layDistance;
+				this.name = name;
+			}
+
+			public override string ToString() {
+				return this.name;
+			}
+
+			public override bool Equals(object obj) {
+				return obj is RimTypeItem && (obj as RimTypeItem).rimType == this.rimType;
+			}
+
+			public override int GetHashCode() {
+				return (this.rimType == null ? 0 : this.rimType.GetHashCode());
+			}
+		}
+
 		private PlannedProduct plannedProduct;
 		
 		public ProductOverviewWrapper(PlannedProduct pp) {
@@ -358,6 +402,10 @@ namespace Europlan.Common {
 
 		public PlannedProduct PlannedProduct {
 			get { return plannedProduct; }
+		}
+
+		public bool ManualMode {
+			get { return plannedProduct.Product.ManualMode; }
 		}
 		
 		public string RoomId {
