@@ -75,8 +75,12 @@ namespace Europlan.Common {
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_250_10);
 				//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
 			}
+
+			if (this.product != this.Tag as PlannedProduct) {
+				this.tabs.SelectedTab = this.pageInput;
+			}
+
 			this.product = this.Tag as PlannedProduct;
-			this.tabs.SelectedTab = this.pageInput;
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
 			if (this.product != null) {

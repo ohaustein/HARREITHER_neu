@@ -30,7 +30,7 @@ namespace Europlan.Common {
 			gridRoomTypes.Cleanup();
 			this.selectedRoomType = gridRoomTypes.SelectedRoomType;
 
-			SettingsKey settings = SettingsFile.Settings["NewDistributorForm"];
+			SettingsKey settings = SettingsFile.Settings["NewRoomTypeForm"];
 			settings.StorePoint("Location", this.Location);
 			settings.StoreSize("Size", this.Size);
 			SettingsFile.Update();
@@ -38,7 +38,7 @@ namespace Europlan.Common {
 		}
 
 		private void NewRoomTypeForm_Load(object sender, EventArgs e) {
-			SettingsKey settings = SettingsFile.Settings["NewDistributorForm"];
+			SettingsKey settings = SettingsFile.Settings["NewRoomTypeForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
 			this.Size = settings.GetSize("Size", this.Size);
 		}
