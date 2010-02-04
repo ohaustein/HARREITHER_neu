@@ -291,9 +291,9 @@ namespace Europlan.Common {
 				this.cmbRimType.Enabled = this.cmbRimType.Enabled && !evProduct.PlannedProductIsConnection;
 				this.cmbCircuits.Enabled = !evProduct.PlannedProductIsConnection;
 
-				bool newCmbCircuitsContainsAutomatic = evProduct.PlannedConnection.ConnectionType != ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT;
-				bool newCmbLayDistanceContainsAutomatic = evProduct.PlannedConnection.ConnectionType != ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT;
-				bool newCmbRimTypeContainsAutomatic = evProduct.PlannedConnection.ConnectionType != ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && cmbRimType.Enabled;
+				bool newCmbCircuitsContainsAutomatic = !evProduct.ManualMode;
+				bool newCmbLayDistanceContainsAutomatic = !evProduct.ManualMode;
+				bool newCmbRimTypeContainsAutomatic = !evProduct.ManualMode && cmbRimType.Enabled;
 				bool newCmbRimTypeContainsNone = !this.cmbRimType.Enabled;
 
 				if (this.cmbCircuitsContainsAutomatic != newCmbCircuitsContainsAutomatic) {
