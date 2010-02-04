@@ -59,7 +59,7 @@ namespace Europlan.Common {
 
 		private string errorMsg = null;
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			this.registerTypeDataGridViewTextBoxColumn.Items.Clear();
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_50_5);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_100_5);
@@ -76,11 +76,10 @@ namespace Europlan.Common {
 				//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
 			}
 
-			if (this.product != this.Tag as PlannedProduct) {
+			this.product = this.Tag as PlannedProduct;
+			if (resetUserInterface) {
 				this.tabs.SelectedTab = this.pageInput;
 			}
-
-			this.product = this.Tag as PlannedProduct;
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
 			if (this.product != null) {

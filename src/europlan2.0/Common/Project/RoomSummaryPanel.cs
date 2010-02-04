@@ -21,7 +21,7 @@ namespace Europlan.Common {
 		}
 
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			if (this.Tag != null) {
 				this.room = this.Tag as Room;
 				this.lblRoomName.Text = this.room.Id + " - " + this.room.Name;
@@ -164,7 +164,7 @@ namespace Europlan.Common {
 						pp.ConfigureProductDefault();
 					}
 					this.room.PlannedProducts.Add(pp);
-					this.UpdateControl();
+					this.UpdateControl(true);
 					if (this.ProjectStructureChanged != null) {
 						this.ProjectStructureChanged(this);
 					}
@@ -206,7 +206,7 @@ namespace Europlan.Common {
 							p.Node.Text = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType] + ": " + p.System;
 						}
 					}
-					this.UpdateControl();
+					this.UpdateControl(true);
 				}
 			}
 		}

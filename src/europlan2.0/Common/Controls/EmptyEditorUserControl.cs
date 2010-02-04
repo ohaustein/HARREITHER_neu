@@ -20,7 +20,7 @@ namespace Europlan.Common {
 
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 		}
 
 		public bool AllowLeave() {

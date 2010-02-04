@@ -22,10 +22,10 @@ namespace Europlan.Common {
 
 		public RequiredMaterialGrid() {
 			InitializeComponent();
-			UpdateControl();
+			UpdateControl(true);
 		}
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			List<RequiredMaterialWrapper> wrapperList = new List<RequiredMaterialWrapper>();
 			RequiredMaterialWrapper wrapper = null;
 			if (Project.Instance != null) {

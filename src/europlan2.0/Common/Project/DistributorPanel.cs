@@ -19,7 +19,7 @@ namespace Europlan.Common {
 			InitializeComponent();
 		}
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			if (this.Tag != null) {
 				this.distributor = this.Tag as Distributor;
 				this.lblId.Text = distributor.Id;

@@ -29,7 +29,7 @@ namespace Europlan.Common {
 		//    projectFloorsSource.ResetBindings(false);
 		//}
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			List<DataGridViewColumn> selectedCols = null;
 			Floor selectedFloor = null;
 			if (this.gridFloors.SelectedRows.Count > 0) {

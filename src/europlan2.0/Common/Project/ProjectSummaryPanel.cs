@@ -15,10 +15,10 @@ namespace Europlan.Common {
 
 		public ProjectSummaryPanel() {
 			InitializeComponent();
-			UpdateControl();
+			UpdateControl(true);
 		}
 
-		public void UpdateControl() {
+		public void UpdateControl(bool resetUserInterface) {
 			Project project = Project.Instance;
 			txtNumber.Text = project.ProjectNumber;
 			txtProjectName.Lines = project.ProjectName;
