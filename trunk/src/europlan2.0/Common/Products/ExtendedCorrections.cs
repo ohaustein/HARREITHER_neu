@@ -38,6 +38,11 @@ namespace Europlan.Common {
 			this.evProduct = product;
 		}
 
+		public ExtendedCorrections(int circuitNr, EcothermProduct product) {
+			this.circuitNr = circuitNr;
+			this.ecProduct = product;
+		}
+
 		public ExtendedCorrections(int ciruitNr, Nullable<double> area, Nullable<double> rimLength, Nullable<int> rimCorners, Nullable<double> connections, EurovalProduct product) {
 			circuitNr = 0;
 			correctArea = area.HasValue;
@@ -56,10 +61,28 @@ namespace Europlan.Common {
 			this.evProduct = product;
 		}
 
+		public ExtendedCorrections(int ciruitNr, Nullable<double> area, Nullable<double> rimLength, Nullable<int> rimCorners, Nullable<double> connections, EcothermProduct product) {
+			circuitNr = 0;
+			correctArea = area.HasValue;
+			if (correctArea) {
+				this.areaPercentage = area.Value;
+			}
+			correctRim = rimLength.HasValue;
+			if (correctRim) {
+				this.rimLengthPercentage = rimLength.Value;
+				this.rimCornersValue = rimCorners.HasValue ? rimCorners.Value : 0;
+			}
+			correctConnections = connections.HasValue;
+			if (correctConnections) {
+				this.connectionsPercentage = connections.Value;
+			}
+			this.ecProduct = product;
+		}
+
 		public bool CorrectArea {
 			get { return this.correctArea; }
 			set {
-				if (this.evProduct != null && !this.correctArea && value) {
+				if ((this.evProduct != null || this.ecProduct != null) && !this.correctArea && value) {
 					this.AreaPercentage = this.AreaPercentage;
 				}
 				this.correctArea = value;
@@ -70,8 +93,14 @@ namespace Europlan.Common {
 			get {
 				if (sum) {
 					double perc = 0.0;
-					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
-						perc += ec.AreaPercentage;
+					if (this.evProduct != null) {
+						foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+							perc += ec.AreaPercentage;
+						}
+					} else if (this.ecProduct != null) {
+						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							perc += ec.AreaPercentage;
+						}
 					}
 					return perc;
 				}
@@ -80,12 +109,25 @@ namespace Europlan.Common {
 				} else {
 					double perc = 100.0;
 					double circuits = 0;
-					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
-						if (ec.CorrectArea) {
-							perc -= ec.AreaPercentage;
-						} else {
-							circuits++;
+					if (this.evProduct != null) {
+						foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+							if (ec.CorrectArea) {
+								perc -= ec.AreaPercentage;
+							} else {
+								circuits++;
+							}
 						}
+					} else if (this.ecProduct != null) {
+						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							if (ec.CorrectArea) {
+								perc -= ec.AreaPercentage;
+							} else {
+								circuits++;
+							}
+						}
+					}
+					if (circuits < 1) {
+						circuits = 1;
 					}
 					if (perc < 0) {
 						perc = 0;
@@ -98,24 +140,54 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double AreaValue {
-			get { return this.evProduct.PlannedFloorArea * this.AreaPercentage / 100; }
-			set { this.areaPercentage = value * 100 / this.evProduct.PlannedFloorArea; }
+			get {
+				if (this.evProduct != null) {
+					return this.evProduct.PlannedFloorArea * this.AreaPercentage / 100;
+				} else if (this.ecProduct != null) {
+					return this.ecProduct.PlannedFloorArea * this.AreaPercentage / 100;
+				} else {
+					return 0;
+				}
+			}
+			set {
+				if (this.evProduct != null) {
+					this.areaPercentage = value * 100 / this.evProduct.PlannedFloorArea;
+				} else if (this.ecProduct != null) {
+					this.areaPercentage = value * 100 / this.ecProduct.PlannedFloorArea;
+				}
+			}
 		}
 
 		[XmlIgnore]
 		public double AreaReducedValue {
-			get { return this.evProduct.PlannedAreaReduced * this.AreaPercentage / 100; }
+			get {
+				if (this.evProduct != null) {
+					return this.evProduct.PlannedAreaReduced * this.AreaPercentage / 100;
+				} else if (this.ecProduct != null) {
+					return this.ecProduct.PlannedAreaReduced * this.AreaPercentage / 100;
+				} else {
+					return 0;
+				}
+			}
 		}
 
 		[XmlIgnore]
 		public double AreaUnheatedValue {
-			get { return this.evProduct.PlannedAreaUnheated * this.AreaPercentage / 100; }
+			get {
+				if (this.evProduct != null) {
+					return this.evProduct.PlannedAreaUnheated * this.AreaPercentage / 100;
+				} else if (this.ecProduct != null) {
+					return this.ecProduct.PlannedAreaUnheated * this.AreaPercentage / 100;
+				} else {
+					return 0;
+				}
+			}
 		}
 
 		public bool CorrectRim {
 			get { return this.correctRim; }
 			set {
-				if (this.evProduct != null && !this.correctRim && value) {
+				if ((this.evProduct != null || this.ecProduct != null) && !this.correctRim && value) {
 					this.RimPercentage = this.RimPercentage;
 					this.RimCornersValue = this.RimCornersValue;
 				}
@@ -127,9 +199,15 @@ namespace Europlan.Common {
 			get {
 				if (sum) {
 					double perc = 0.0;
-					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
-						perc += ec.RimPercentage;
-					}
+					if (this.evProduct != null) {
+						foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+							perc += ec.RimPercentage;
+						}
+					} else if (this.ecProduct != null) {
+						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							perc += ec.RimPercentage;
+						}
+					} 
 					return perc;
 				}
 				if (this.correctRim) {
@@ -137,15 +215,28 @@ namespace Europlan.Common {
 				} else {
 					double perc = 100.0;
 					double circuits = 0;
-					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
-						if (ec.CorrectRim) {
-							perc -= ec.RimPercentage;
-						} else {
-							circuits++;
+					if (this.evProduct != null) {
+						foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+							if (ec.CorrectRim) {
+								perc -= ec.RimPercentage;
+							} else {
+								circuits++;
+							}
+						}
+					} else if (this.ecProduct != null) {
+						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							if (ec.CorrectRim) {
+								perc -= ec.RimPercentage;
+							} else {
+								circuits++;
+							}
 						}
 					}
 					if (perc < 0) {
 						perc = 0;
+					}
+					if (circuits < 1) {
+						circuits = 1;
 					}
 					return perc / circuits;
 				}
@@ -155,34 +246,75 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double RimLengthValue {
-			get { return this.evProduct.PlannedRimLength * this.RimPercentage / 100; }
-			set { this.rimLengthPercentage = value * 100 / this.evProduct.PlannedRimLength; }
+			get {
+				if (this.evProduct != null) {
+					return this.evProduct.PlannedRimLength * this.RimPercentage / 100;
+				} else if (this.ecProduct != null) {
+					return this.ecProduct.PlannedRimLength * this.RimPercentage / 100;
+				} else {
+					return 0;
+				}
+			}
+			set {
+				if (this.evProduct != null) {
+					this.rimLengthPercentage = value * 100 / this.evProduct.PlannedRimLength;
+				} else if (this.ecProduct != null) {
+					this.rimLengthPercentage = value * 100 / this.ecProduct.PlannedRimLength;
+				}
+			}
 		}
 
 		public int RimCornersValue {
 			get {
 				if (sum) {
 					int corners = 0;
-					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
-						corners += ec.RimCornersValue;
+					if (this.evProduct != null) {
+						foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+							corners += ec.RimCornersValue;
+						}
+					} else if (this.ecProduct != null) {
+						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							corners += ec.RimCornersValue;
+						}
 					}
 					return corners;
 				}
 				if (this.correctRim) {
 					return this.rimCornersValue;
 				} else {
-					int corners = this.evProduct.PlannedRimCorners;
+					int corners = 0;
+					if (this.evProduct != null) {
+						corners = this.evProduct.PlannedRimCorners;
+					} else if (this.ecProduct != null) {
+						corners = this.ecProduct.PlannedRimCorners;
+					}
 					int circuits = 0;
 					int circuitsBefore = 0;
-					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
-						if (ec.CorrectRim) {
-							corners -= ec.RimCornersValue;
-						} else {
-							if (ec.CircuitNr < this.circuitNr) {
-								circuitsBefore++;
+					if (this.evProduct != null) {
+						foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+							if (ec.CorrectRim) {
+								corners -= ec.RimCornersValue;
+							} else {
+								if (ec.CircuitNr < this.circuitNr) {
+									circuitsBefore++;
+								}
+								circuits++;
 							}
-							circuits++;
 						}
+					} else if (this.ecProduct != null) {
+						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							if (ec.CorrectRim) {
+								corners -= ec.RimCornersValue;
+							} else {
+								if (ec.CircuitNr < this.circuitNr) {
+									circuitsBefore++;
+								}
+								circuits++;
+							}
+						}
+					}
+					if (circuits < 1) {
+						circuits = 1;
 					}
 					if (corners >= 0) {
 						return corners / circuits + (corners % circuits > circuitsBefore ? 1 : 0);
@@ -199,7 +331,13 @@ namespace Europlan.Common {
 		public string RimCornersString {
 			get {
 				if (sum) {
-					return RimCornersValue.ToString() + " (" + this.evProduct.PlannedRimCorners.ToString() + ")";
+					if (this.evProduct != null) {
+						return RimCornersValue.ToString() + " (" + this.evProduct.PlannedRimCorners.ToString() + ")";
+					} else if (this.ecProduct != null) {
+						return RimCornersValue.ToString() + " (" + this.ecProduct.PlannedRimCorners.ToString() + ")";
+					} else {
+						return RimCornersValue.ToString() + " (0)";
+					}
 				} else {
 					return RimCornersValue.ToString();
 				}
@@ -215,7 +353,7 @@ namespace Europlan.Common {
 		public bool CorrectConnections {
 			get { return this.correctConnections; }
 			set {
-				if (this.evProduct != null && !this.correctConnections && value) {
+				if ((this.evProduct != null || this.ecProduct != null) && !this.correctConnections && value) {
 					this.ConnectionsPercentage = this.ConnectionsPercentage;
 				}
 				this.correctConnections = value; 
@@ -226,8 +364,14 @@ namespace Europlan.Common {
 			get {
 				if (sum) {
 					double perc = 0.0;
-					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
-						perc += ec.ConnectionsPercentage;
+					if (this.evProduct != null) {
+						foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+							perc += ec.ConnectionsPercentage;
+						}
+					} else if (this.ecProduct != null) {
+						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							perc += ec.ConnectionsPercentage;
+						}
 					}
 					return perc;
 				}
@@ -236,15 +380,28 @@ namespace Europlan.Common {
 				} else {
 					double perc = 100.0;
 					double circuits = 0;
-					foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
-						if (ec.CorrectConnections) {
-							perc -= ec.ConnectionsPercentage;
-						} else {
-							circuits++;
+					if (this.evProduct != null) {
+						foreach (ExtendedCorrections ec in this.evProduct.PlannedCorrectionList) {
+							if (ec.CorrectConnections) {
+								perc -= ec.ConnectionsPercentage;
+							} else {
+								circuits++;
+							}
+						}
+					} else if (this.ecProduct != null) {
+						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							if (ec.CorrectConnections) {
+								perc -= ec.ConnectionsPercentage;
+							} else {
+								circuits++;
+							}
 						}
 					}
 					if (perc < 0) {
 						perc = 0;
+					}
+					if (circuits < 1) {
+						circuits = 1;
 					}
 					return perc / circuits;
 				}
@@ -254,8 +411,22 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double ConnectionsValue {
-			get { return this.evProduct.PlannedRemoveArea * this.ConnectionsPercentage / 100; }
-			set { this.connectionsPercentage = value * 100 / this.evProduct.PlannedRemoveArea; }
+			get {
+				if (this.evProduct != null) {
+					return this.evProduct.PlannedRemoveArea * this.ConnectionsPercentage / 100;
+				} else if (this.ecProduct != null) {
+					return this.ecProduct.PlannedRemoveArea * this.ConnectionsPercentage / 100;
+				} else {
+					return 0;
+				}
+			}
+			set {
+				if (this.evProduct != null) {
+					this.connectionsPercentage = value * 100 / this.evProduct.PlannedRemoveArea;
+				} else if (this.ecProduct != null) {
+					this.connectionsPercentage = value * 100 / this.ecProduct.PlannedRemoveArea;
+				}
+			}
 		}
 
 		[XmlIgnore]

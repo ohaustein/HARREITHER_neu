@@ -120,7 +120,9 @@ namespace Europlan.Common {
 			RIM_TYPE = 8192,
 			CALCULATION_TYPE = 16384,
 			CIRCUIT_COUNT = 32768,
-			SEPARATE_CIRCUIT = 65536
+			SEPARATE_CIRCUIT = 65536,
+			CORRECTIONS = 131072,
+			//CORRECTIONS_LIST = 262144,
 		}
 
 		/*private class ComboItem {
@@ -157,12 +159,18 @@ namespace Europlan.Common {
 
 		private string errorMsg = null;
 
+		private bool cmbLayDistanceContainsAutomatic = true;
+		private bool cmbRimTypeContainsAutomatic = true;
+		private bool cmbRimTypeContainsNone = false;
+		private bool cmbCircuitsContainsAutomatic = true;
+
 		public void UpdateControl() {
 			if (this.product != this.Tag as PlannedProduct) {
 				this.tabs.SelectedTab = this.pageInput;
 			}
 
 			this.product = this.Tag as PlannedProduct;
+			this.extendedCorrectionsGrid.Product = this.product.Product;
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
 			if (this.product != null) {
@@ -191,6 +199,7 @@ namespace Europlan.Common {
 		private int ignoreCalculationType = 0;
 		private int ignoreCircuits = 0;
 		private int ignoreSeparateCircuit = 0;
+		private int ignoreCorrections = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
@@ -213,6 +222,7 @@ namespace Europlan.Common {
 				ignoreCalculationType++;
 				ignoreCircuits++;
 				ignoreSeparateCircuit++;
+				ignoreCorrections++;
 
 				EcothermProduct evProduct = this.product.Product as EcothermProduct;
 
@@ -268,7 +278,7 @@ namespace Europlan.Common {
 				this.rbCalculateCool.Enabled = this.product.RequestedCoolLoad > 0;
 				this.rbCalculateBoth.Enabled = this.product.RequestedHeatLoad > 0 && this.product.RequestedCoolLoad > 0;
 				this.numCorners.Enabled = evProduct.PlannedRimLength > 0;
-				this.cmbRimType.Enabled = evProduct.PlannedAreaRim > 0;
+				this.cmbRimType.Enabled = evProduct.PlannedRimLength > 0;
 
 				// disable the following controls if the product is a connection
 				this.numRim.Enabled = !evProduct.PlannedProductIsConnection;
@@ -280,6 +290,52 @@ namespace Europlan.Common {
 				this.cmbLayDistance.Enabled = !evProduct.PlannedProductIsConnection;
 				this.cmbRimType.Enabled = this.cmbRimType.Enabled && !evProduct.PlannedProductIsConnection;
 				this.cmbCircuits.Enabled = !evProduct.PlannedProductIsConnection;
+
+				bool newCmbCircuitsContainsAutomatic = !evProduct.ManualMode;
+				bool newCmbLayDistanceContainsAutomatic = !evProduct.ManualMode;
+				bool newCmbRimTypeContainsAutomatic = !evProduct.ManualMode && cmbRimType.Enabled;
+				bool newCmbRimTypeContainsNone = !this.cmbRimType.Enabled;
+
+				if (this.cmbCircuitsContainsAutomatic != newCmbCircuitsContainsAutomatic) {
+					this.cmbCircuitsContainsAutomatic = newCmbCircuitsContainsAutomatic;
+					if (this.cmbCircuitsContainsAutomatic) {
+						this.cmbCircuits.Items.Insert(0, "Automatisch");
+					} else {
+						this.cmbCircuits.Items.RemoveAt(0);
+					}
+				}
+
+				if (this.cmbLayDistanceContainsAutomatic != newCmbLayDistanceContainsAutomatic) {
+					this.cmbLayDistanceContainsAutomatic = newCmbLayDistanceContainsAutomatic;
+					if (this.cmbLayDistanceContainsAutomatic) {
+						this.cmbLayDistance.Items.Insert(0, new LayDistanceItem(null, "Automatisch"));
+					} else {
+						this.cmbLayDistance.Items.RemoveAt(0);
+					}
+				}
+
+				if (this.cmbRimTypeContainsAutomatic != newCmbRimTypeContainsAutomatic) {
+					this.cmbRimTypeContainsAutomatic = newCmbRimTypeContainsAutomatic;
+					if (this.cmbRimTypeContainsAutomatic) {
+						if (this.cmbRimTypeContainsNone) {
+							this.cmbRimTypeContainsNone = false;
+							newCmbRimTypeContainsNone = false;
+							this.cmbRimType.Items.RemoveAt(0);
+						}
+						this.cmbRimType.Items.Insert(0, new RimTypeItem(null, "Automatisch"));
+					} else {
+						this.cmbRimType.Items.RemoveAt(0);
+						this.cmbRimTypeContainsNone = false;
+					}
+				}
+				if (this.cmbRimTypeContainsNone != newCmbRimTypeContainsNone) {
+					this.cmbRimTypeContainsNone = newCmbRimTypeContainsNone;
+					if (this.cmbRimTypeContainsNone) {
+						this.cmbRimType.Items.Insert(0, new RimTypeItem(null, ""));
+					} else {
+						this.cmbRimType.Items.RemoveAt(0);
+					}
+				}
 
 				this.numArea.MaxValue = (decimal)evProduct.AvailableFloorArea;
 				this.numAreaPercentage.MaxValue = (decimal)(evProduct.AvailableFloorArea * 100 / evProduct.AssociatedRoom.Area);
@@ -378,14 +434,20 @@ namespace Europlan.Common {
 				}
 
 				if ((skipFields & FieldEnum.LAY_DISTANCE) == FieldEnum.NONE) {
+					if (evProduct.RequestedLayDistance == null && !this.cmbLayDistanceContainsAutomatic) {
+						evProduct.RequestedLayDistance = EcothermProduct.EcothermLayDistance.EV35;
+					}
 					this.cmbLayDistance.SelectedItem = new LayDistanceItem(evProduct.RequestedLayDistance, "");
 				}
 				if ((skipFields & FieldEnum.RIM_TYPE) == FieldEnum.NONE) {
-					this.cmbRimType.SelectedItem = new RimTypeItem(evProduct.RequestedRimType, "");
+					if (evProduct.RequestedRimType == null && !this.cmbRimTypeContainsAutomatic && !this.cmbRimTypeContainsNone) {
+						evProduct.RequestedRimType = EcothermProduct.EcothermRimType.EV15_60;
+					}
+					this.cmbRimType.SelectedItem = new RimTypeItem(this.cmbRimType.Enabled ? evProduct.RequestedRimType : null, "");
 				}
 				if ((skipFields & FieldEnum.CIRCUIT_COUNT) == FieldEnum.NONE) {
 					if (evProduct.RequestedCircuits != null) {
-						this.cmbCircuits.SelectedIndex = evProduct.RequestedCircuits.Value;
+						this.cmbCircuits.SelectedIndex = evProduct.RequestedCircuits.Value - 1 + (this.cmbCircuitsContainsAutomatic ? 1 : 0);
 					} else {
 						this.cmbCircuits.SelectedIndex = 0;
 					}
@@ -594,6 +656,27 @@ namespace Europlan.Common {
 					this.lstError.Visible = false;
 				}
 
+				if ((skipFields & FieldEnum.CORRECTIONS) == FieldEnum.NONE) {
+					this.extendedCorrectionsGrid.UpdateControl(true, true);
+				}
+				/*if ((skipFields & FieldEnum.CORRECTIONS) == FieldEnum.NONE) {
+					if (evProduct.PlannedCorrections) {
+						this.rbExtendedCorrections.Checked = true;
+					} else {
+						this.rbStandardCorrections.Checked = true;
+					}
+				}*/
+
+				/*if ((skipFields & FieldEnum.CORRECTIONS_LIST) == FieldEnum.NONE) {
+					if (evProduct.PlannedCorrections) {
+						this.extendedCorrectionsBindingSource.DataSource = (this.product.Product as EcothermProduct).PlannedCorrectionList;
+					} else {
+						this.extendedCorrectionsBindingSource.DataSource = new List<ExtendedCorrections>();
+					}
+					this.extendedCorrectionsBindingSource.ResetBindings(false);
+					this.gridExtendedCorrections.Enabled = evProduct.PlannedCorrections;
+				}*/
+
 				ignoreCoverHeatLoad--;
 				ignoreHeatLoad--;
 				ignoreHeatLoadPercentage--;
@@ -613,11 +696,16 @@ namespace Europlan.Common {
 				ignoreCalculationType--;
 				ignoreCircuits--;
 				ignoreSeparateCircuit--;
+				ignoreCorrections--;
 			}
 			// TODO
 		}
 
 		public bool AllowLeave() {
+			bool allow =  this.extendedCorrectionsGrid.AllowLeave();
+			if (!allow) {
+				return false;
+			}
 			List<PlannedProduct> plannedProducts = this.product.Product.AssociatedRoom.PlannedProducts;
 			for (int i = plannedProducts.Count - 1; i >= 0; i-- ) {
 				PlannedProduct pp = plannedProducts[i];
@@ -913,8 +1001,8 @@ namespace Europlan.Common {
 
 		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreCircuits == 0) {
-				if (this.cmbCircuits.SelectedIndex > 0) {
-					(this.product.Product as EcothermProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex;
+				if (this.cmbCircuits.SelectedIndex >= (this.cmbCircuitsContainsAutomatic ? 1 : 0)) {
+					(this.product.Product as EcothermProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex + (this.cmbCircuitsContainsAutomatic ? 0 : 1);
 				} else {
 					(this.product.Product as EcothermProduct).RequestedCircuits = null;
 				}
@@ -951,9 +1039,9 @@ namespace Europlan.Common {
 
 		private void btnDistributor_Click(object sender, EventArgs e) {
 			SelectConnectionForProductForm form = new SelectConnectionForProductForm(this.product, this.product.Product.AssociatedRoom.AssociatedFloor);
-			//form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnection;
+			//form.SelectedConnection = (this.product.Product as EcothermProduct).PlannedConnection;
 			//if (form.ShowDialog() == DialogResult.OK) {
-			//	(this.product.Product as EurovalProduct).PlannedConnection = form.SelectedConnection;
+			//	(this.product.Product as EcothermProduct).PlannedConnection = form.SelectedConnection;
 			//}
 			form.ShowDialog();
 
@@ -1029,6 +1117,48 @@ namespace Europlan.Common {
 			e.Item.Focused = false;
 			e.Item.Selected = false;
 		}
+
+		private void extendedCorrectionsGrid_CorrectionsChanged(object sender, EventArgs e) {
+			if (this.ignoreCorrections == 0) {
+				this.product.Product.PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				this.UpdateControl(FieldEnum.CORRECTIONS);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}
+
+		private void extendedCorrectionsGrid_CorrectionsEnabledChanged(object sender, EventArgs e) {
+			if (this.ignoreCorrections == 0) {
+				this.product.Product.PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				this.UpdateControl(FieldEnum.CORRECTIONS);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}
+
+		private void tabs_Deselecting(object sender, TabControlCancelEventArgs e) {
+			if (e.TabPage == this.pageCorrections) {
+				e.Cancel = !this.extendedCorrectionsGrid.AllowLeave();
+			}
+		}
+
+		/*private void rbExtendedCorrections_CheckedChanged(object sender, EventArgs e) {
+			if (this.ignoreCorrections == 0) {
+				(this.product.Product as EcothermProduct).PlannedCorrections = rbExtendedCorrections.Checked;
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				this.UpdateControl(FieldEnum.CORRECTIONS);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}*/
 
 	}
 }

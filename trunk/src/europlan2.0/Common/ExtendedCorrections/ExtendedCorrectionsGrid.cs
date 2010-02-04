@@ -27,7 +27,15 @@ namespace Europlan.Common {
 		}
 
 		public Product Product {
-			get { return this.evProduct != null ? (Product)this.evProduct : (Product)this.ecProduct; }
+			get {
+				if (this.evProduct != null) {
+					return this.evProduct;
+				} else if (this.ecProduct != null) {
+					return this.ecProduct;
+				} else {
+					return null;
+				}
+			}
 			set {
 				this.evProduct = value as EurovalProduct;
 				this.ecProduct = value as EcothermProduct;
@@ -44,18 +52,17 @@ namespace Europlan.Common {
 			get {
 				if (this.evProduct != null) {
 					return evProduct.PlannedCorrections;
+				} else if (this.ecProduct != null) {
+					return this.ecProduct.PlannedCorrections;
+				} else {
+					return false;
 				}
-				if (this.ecProduct != null) {
-					// TODO
-				}
-				return false;
 			}
 			set {
 				if (this.evProduct != null) {
 					this.evProduct.PlannedCorrections = value;
-				}
-				if (this.ecProduct != null) {
-					// TODO
+				} else if (this.ecProduct != null) {
+					this.ecProduct.PlannedCorrections = value;
 				}
 			}
 		}
@@ -68,9 +75,12 @@ namespace Europlan.Common {
 						list.Add(this.sumRow);
 						return list;
 					}
-				}
-				if (this.ecProduct != null) {
-					// TODO
+				} else if (this.ecProduct != null) {
+					if (this.ecProduct.PlannedCorrections) {
+						List<ExtendedCorrections> list = new List<ExtendedCorrections>(this.ecProduct.PlannedCorrectionList);
+						list.Add(this.sumRow);
+						return list;
+					}
 				}
 				return new List<ExtendedCorrections>();
 			}
@@ -83,39 +93,56 @@ namespace Europlan.Common {
 			ignoreRadio++;
 			ignoreList++;
 
-			if (this.evProduct != null) {
-				this.areaValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.evProduct.PlannedFloorArea;
-				this.rimLengthValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.evProduct.PlannedRimLength;
+			if (this.CorrectionsEnabled) {
+				if (this.evProduct != null) {
+					this.areaValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.evProduct.PlannedFloorArea;
+					this.rimLengthValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.evProduct.PlannedRimLength;
 
-				this.correctAreaDataGridViewCheckBoxColumn.ReadOnly = this.evProduct.PlannedFloorArea == 0;
-				this.correctAreaDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
-				this.areaValueDataGridViewTextBoxColumn.ReadOnly = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly;
-				this.areaValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
-				this.areaPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly;
-				this.areaPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.correctAreaDataGridViewCheckBoxColumn.ReadOnly = this.evProduct.PlannedFloorArea == 0;
+					this.correctAreaDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.areaValueDataGridViewTextBoxColumn.ReadOnly = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly;
+					this.areaValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.areaPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly;
+					this.areaPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
 
-				this.correctRimDataGridViewCheckBoxColumn.ReadOnly = this.evProduct.PlannedRimLength == 0;
-				this.correctRimDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
-				this.rimLengthValueDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
-				this.rimLengthValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
-				this.rimPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
-				this.rimPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
-				this.rimCornersValueDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
-				this.rimCornersValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.correctRimDataGridViewCheckBoxColumn.ReadOnly = this.evProduct.PlannedRimLength == 0;
+					this.correctRimDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.rimLengthValueDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
+					this.rimLengthValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.rimPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
+					this.rimPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.rimCornersValueDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
+					this.rimCornersValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
 
-				this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly = this.evProduct.PlannedRemoveArea == 0;
-				this.correctConnectionsDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
-				this.connectionsPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly;
-				this.connectionsPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
-			} else if (this.ecProduct != null) {
-				this.areaValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.ecProduct.PlannedFloorArea;
-				this.rimLengthValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.ecProduct.PlannedRimLength;
-				this.correctAreaDataGridViewCheckBoxColumn.ReadOnly = this.ecProduct.PlannedFloorArea == 0;
-				this.correctAreaDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
-				this.correctRimDataGridViewCheckBoxColumn.ReadOnly = this.ecProduct.PlannedRimLength == 0;
-				this.correctRimDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
-				this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly = this.ecProduct.PlannedRemoveArea == 0;
-				this.correctConnectionsDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly = this.evProduct.PlannedRemoveArea == 0;
+					this.correctConnectionsDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.connectionsPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly;
+					this.connectionsPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+				} else if (this.ecProduct != null) {
+					this.areaValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.ecProduct.PlannedFloorArea;
+					this.rimLengthValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.ecProduct.PlannedRimLength;
+
+					this.correctAreaDataGridViewCheckBoxColumn.ReadOnly = this.ecProduct.PlannedFloorArea == 0;
+					this.correctAreaDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.areaValueDataGridViewTextBoxColumn.ReadOnly = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly;
+					this.areaValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.areaPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly;
+					this.areaPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+
+					this.correctRimDataGridViewCheckBoxColumn.ReadOnly = this.ecProduct.PlannedRimLength == 0;
+					this.correctRimDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.rimLengthValueDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
+					this.rimLengthValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.rimPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
+					this.rimPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.rimCornersValueDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
+					this.rimCornersValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+
+					this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly = this.ecProduct.PlannedRemoveArea == 0;
+					this.correctConnectionsDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+					this.connectionsPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly;
+					this.connectionsPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+				}
 			}
 
 			if (updateRadio) {
@@ -146,6 +173,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		#region Grid Headers
 		private void gridExtendedCorrections_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
 			if (e.RowIndex == -1 && e.ColumnIndex > -1) {
 				e.PaintBackground(e.CellBounds, false);
@@ -241,6 +269,7 @@ namespace Europlan.Common {
 				this.gridExtendedCorrections.InvalidateCell(this.connectionsPercentageDataGridViewTextBoxColumn.Index, -1);
 			}
 		}
+		#endregion Grid Headers
 
 		private void gridExtendedCorrections_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
 			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
@@ -370,7 +399,7 @@ namespace Europlan.Common {
 		}
 
 		public bool AllowLeave() {
-			if (this.sumRow != null && this.rbExtendedCorrections.Checked) {
+			if (this.sumRow != null && this.CorrectionsEnabled) {
 				if (Math.Round(this.sumRow.AreaPercentage, 1) != 100.0) {
 					MessageBox.Show("Die Summe der Anteile an der Gesamtfläche muss 100% der Gesamtfläche ergeben", "Bitte korrigieren Sie die Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
@@ -379,7 +408,8 @@ namespace Europlan.Common {
 					MessageBox.Show("Die Summe der Anteile an der Gesamtfläche muss 100% der Gesamtfläche ergeben", "Bitte korrigieren Sie die Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
 				}
-				if (this.sumRow.RimCornersValue != this.evProduct.PlannedRimCorners) {
+				if ((this.evProduct != null && this.sumRow.RimCornersValue != this.evProduct.PlannedRimCorners) ||
+					(this.ecProduct != null && this.sumRow.RimCornersValue != this.ecProduct.PlannedRimCorners)) {
 					MessageBox.Show("Die Summe der Ecken der Randzone an der Gesamtfläche muss 100% die gesamte Anzahl an vorgegebenen Ecken ergeben", "Bitte korrigieren Sie die Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
 				}
