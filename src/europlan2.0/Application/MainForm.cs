@@ -513,9 +513,6 @@ namespace Europlan.Application {
 							currentEditorUserControl = control as IEditorUserControl;
 						}
 					}
-					if (oldControl != null) {
-						oldControl.Tag = null;
-					}
 					//if (oldControl == null || control.Tag != oldControl.Tag) {
 					if (tagChanged) {
 						(control as IEditorUserControl).UpdateControl(true);
