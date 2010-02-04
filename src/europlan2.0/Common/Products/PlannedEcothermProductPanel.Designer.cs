@@ -167,6 +167,8 @@ namespace Europlan.Common {
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.pageCorrections = new System.Windows.Forms.TabPage();
+			this.extendedCorrectionsGrid = new Europlan.Common.ExtendedCorrectionsGrid();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.grpPowerArea.SuspendLayout();
@@ -182,6 +184,7 @@ namespace Europlan.Common {
 			this.panel2.SuspendLayout();
 			this.groupBox8.SuspendLayout();
 			this.grpResults.SuspendLayout();
+			this.pageCorrections.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// grpPowerArea
@@ -639,7 +642,7 @@ namespace Europlan.Common {
 			// chkAnhydritEstrich
 			// 
 			this.chkAnhydritEstrich.AutoSize = true;
-			this.chkAnhydritEstrich.Location = new System.Drawing.Point(476, 15);
+			this.chkAnhydritEstrich.Location = new System.Drawing.Point(477, 15);
 			this.chkAnhydritEstrich.Name = "chkAnhydritEstrich";
 			this.chkAnhydritEstrich.Size = new System.Drawing.Size(95, 17);
 			this.chkAnhydritEstrich.TabIndex = 32;
@@ -650,7 +653,7 @@ namespace Europlan.Common {
 			// chkClip
 			// 
 			this.chkClip.AutoSize = true;
-			this.chkClip.Location = new System.Drawing.Point(476, 42);
+			this.chkClip.Location = new System.Drawing.Point(477, 42);
 			this.chkClip.Name = "chkClip";
 			this.chkClip.Size = new System.Drawing.Size(150, 17);
 			this.chkClip.TabIndex = 31;
@@ -810,12 +813,14 @@ namespace Europlan.Common {
 			this.tabs.Controls.Add(this.pageInput);
 			this.tabs.Controls.Add(this.pageCircuit);
 			this.tabs.Controls.Add(this.pageConstruction);
+			this.tabs.Controls.Add(this.pageCorrections);
 			this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabs.Location = new System.Drawing.Point(0, 0);
 			this.tabs.Name = "tabs";
 			this.tabs.SelectedIndex = 0;
 			this.tabs.Size = new System.Drawing.Size(864, 528);
 			this.tabs.TabIndex = 2;
+			this.tabs.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabs_Deselecting);
 			// 
 			// pageInput
 			// 
@@ -1077,7 +1082,7 @@ namespace Europlan.Common {
 			this.lstError.Name = "lstError";
 			this.lstError.ShowGroups = false;
 			this.lstError.Size = new System.Drawing.Size(844, 30);
-			this.lstError.TabIndex = 74;
+			this.lstError.TabIndex = 73;
 			this.lstError.UseCompatibleStateImageBehavior = false;
 			this.lstError.View = System.Windows.Forms.View.Details;
 			this.lstError.Visible = false;
@@ -1917,11 +1922,38 @@ namespace Europlan.Common {
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Heizen:";
 			// 
+			// pageCorrections
+			// 
+			this.pageCorrections.Controls.Add(this.extendedCorrectionsGrid);
+			this.pageCorrections.Location = new System.Drawing.Point(4, 22);
+			this.pageCorrections.Name = "pageCorrections";
+			this.pageCorrections.Size = new System.Drawing.Size(856, 502);
+			this.pageCorrections.TabIndex = 3;
+			this.pageCorrections.Text = "erweiterte Korrekturen";
+			this.pageCorrections.UseVisualStyleBackColor = true;
+			// 
+			// extendedCorrectionsGrid
+			// 
+			this.extendedCorrectionsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.extendedCorrectionsGrid.Location = new System.Drawing.Point(3, 3);
+			this.extendedCorrectionsGrid.Name = "extendedCorrectionsGrid";
+			this.extendedCorrectionsGrid.Product = null;
+			this.extendedCorrectionsGrid.Size = new System.Drawing.Size(850, 496);
+			this.extendedCorrectionsGrid.TabIndex = 0;
+			this.extendedCorrectionsGrid.CorrectionsChanged += new System.EventHandler(this.extendedCorrectionsGrid_CorrectionsChanged);
+			this.extendedCorrectionsGrid.CorrectionsEnabledChanged += new System.EventHandler(this.extendedCorrectionsGrid_CorrectionsEnabledChanged);
+			// 
 			// dataGridViewTextBoxColumn1
 			// 
 			this.dataGridViewTextBoxColumn1.DataPropertyName = "PipeType";
+			this.dataGridViewTextBoxColumn1.FillWeight = 40F;
 			this.dataGridViewTextBoxColumn1.HeaderText = "PipeType";
 			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn1.Width = 40;
 			// 
 			// dataGridViewTextBoxColumn2
 			// 
@@ -1954,6 +1986,7 @@ namespace Europlan.Common {
 			this.groupBox8.ResumeLayout(false);
 			this.groupBox8.PerformLayout();
 			this.grpResults.ResumeLayout(false);
+			this.pageCorrections.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -2106,5 +2139,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.CheckBox chkStellAntriebe;
 		private System.Windows.Forms.ListView lstError;
 		private System.Windows.Forms.ColumnHeader defaultColumn;
+		private System.Windows.Forms.TabPage pageCorrections;
+		private ExtendedCorrectionsGrid extendedCorrectionsGrid;
 	}
 }

@@ -19,8 +19,6 @@ namespace Europlan.Common {
 		// planning
 		private static double su0 = 0.045; /* Mindestüberdeckung fix */
 		private static double alpha0 = 10.8; /* Fixwert für FBH fix */
-		private static double alphaFbkDecke = 6.5; //6.5; /* für FBK fix */
-		private static double alphaFbhBoden = 10.8; /* für FBH fix */
 		private static double lambdaR0 = 0.35; /* fix */
 		private static double lambdaR = 0.22; /* für PP Rohr laut Tabelle A.13 fix */
 		private static double lambdaU0 = 1; /* fix */
@@ -72,9 +70,7 @@ namespace Europlan.Common {
 		private Nullable<EurovalLayDistance> plannedLayDistance = null;
 		private Nullable<EurovalRimType> plannedRimType = null;
 
-		//private bool plannedCorrections = false;
 		private List<ExtendedCorrections> plannedCorrectionList = new List<ExtendedCorrections>();
-
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			int i = 0;
@@ -822,7 +818,6 @@ namespace Europlan.Common {
 						if (this.plannedCorrectionList.Count > this.requestedCircuits.Value) {
 							this.plannedCorrectionList.RemoveRange(this.requestedCircuits.Value, this.plannedCorrectionList.Count - this.requestedCircuits.Value);
 						}
-
 					}
 				} else {
 					this.requestedCircuits = value;
@@ -1985,9 +1980,11 @@ namespace Europlan.Common {
 			set {
 				if (this.PlannedCorrections != value) {
 					this.plannedCorrectionList.Clear();
-					this.requestedCircuits = this.PlannedCircuitCount;
-					this.requestedLayDistance = this.PlannedLayDistance;
-					this.requestedRimType = this.PlannedRimType;
+					if (value) {
+						this.requestedCircuits = this.PlannedCircuitCount;
+						this.requestedLayDistance = this.PlannedLayDistance;
+						this.requestedRimType = this.PlannedRimType;
+					}
 					if (value && this.requestedCircuits != null && this.requestedLayDistance != null && (this.plannedRimLength == 0 || this.requestedRimType != null)) {
 						for (int i = 0; i < this.requestedCircuits.Value; i++ ) {
 							this.plannedCorrectionList.Add(new ExtendedCorrections(i + 1, this));

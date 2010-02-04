@@ -70,7 +70,7 @@ namespace Europlan.Common {
 		private Nullable<EcothermLayDistance> plannedLayDistance = null;
 		private Nullable<EcothermRimType> plannedRimType = null;
 
-		private bool plannedCorrections = false;
+		private List<ExtendedCorrections> plannedCorrectionList = new List<ExtendedCorrections>();
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			int i = 0;
@@ -762,8 +762,17 @@ namespace Europlan.Common {
 		public Nullable<int> RequestedCircuits {
 			get { return this.requestedCircuits; }
 			set {
-				if (this.plannedConnection != null && this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				if ((this.plannedConnection != null && this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) ||
+					this.PlannedCorrections) {
 					this.requestedCircuits = value.HasValue ? value.Value : 1;
+					if (PlannedCorrections) {
+						while (this.plannedCorrectionList.Count < this.requestedCircuits.Value) {
+							this.plannedCorrectionList.Add(new ExtendedCorrections(this.plannedCorrectionList.Count + 1, this));
+						}
+						if (this.plannedCorrectionList.Count > this.requestedCircuits.Value) {
+							this.plannedCorrectionList.RemoveRange(this.requestedCircuits.Value, this.plannedCorrectionList.Count - this.requestedCircuits.Value);
+						}
+					}
 				} else {
 					this.requestedCircuits = value;
 				}
@@ -1508,9 +1517,16 @@ namespace Europlan.Common {
 					if (this.requestedCircuits.HasValue) {
 						circuitCount = this.requestedCircuits.Value;
 					} else {
-						circuitCount = (int)Math.Ceiling((this.plannedArea - this.plannedAreaReduced / 2 - this.plannedAreaUnheated - areaRemovedDueConnection) * EcothermProduct.GetPipeLengthPerSqm(ld) / (100 - longestVorlaufTotal - longestRuecklaufTotal));
+						double pl = (this.plannedArea - this.plannedAreaUnheated - areaRemovedDueConnection - this.PlannedAreaRim) * EcothermProduct.GetPipeLengthPerSqm(ld);
+						if (rt.HasValue) {
+							pl += this.PlannedAreaRim * EcothermProduct.GetPipeLengthPerSqm(EcothermProduct.GetRimLayDistance(rt.Value));
+						} else {
+							pl += this.PlannedAreaRim * EcothermProduct.GetPipeLengthPerSqm(ld);
+						}
+						circuitCount = (int)Math.Ceiling(pl / (100 - longestVorlaufTotal - longestRuecklaufTotal));
 					}
 					circuitCount = circuitCount < 1 ? 1 : circuitCount;
+					circuitCount = circuitCount > 12 ? 12 : circuitCount;
 					while (tryCalc) {
 						this.lastErrorMsg = this.CorrectCircuits(circuitCount, false);
 						if (this.lastErrorMsg != null) {
@@ -1562,7 +1578,7 @@ namespace Europlan.Common {
 							circuitCount++;
 						}
 					}
-					bool useNew = !bestLaydistance.HasValue ||
+					bool useNew = !bestLaydistance.HasValue || bestLaydistance.Value == EcothermLayDistance.NONE ||
 						this.CompareParameters(bestFloorTempRimHeat, bestFloorTempResidenceHeat, bestHeatLoad, bestPressureLossHeat,
 							bestFloorTempRimCool, bestFloorTempResidenceCool, bestCoolLoad, bestPressureLossCool,
 							bestPipeLength,
@@ -1607,12 +1623,21 @@ namespace Europlan.Common {
 				foreach (EcothermCircuit ec in this.circuits) {
 					ec.EcothermProduct = this;
 					ec.NrOfCircuit = i;
-					ec.AreaTotal = this.plannedArea / bestCircuits;
-					ec.AreaReduced = this.plannedAreaReduced / bestCircuits;
-					ec.AreaUnheated = this.plannedAreaUnheated / bestCircuits;
-					ec.AreaRemovedDueConnection = areaRemovedDueConnection / bestCircuits;
-					ec.RimLength = this.plannedRimLength / bestCircuits;
-					ec.RimCorners = ((double)this.plannedRimCorners) / bestCircuits;
+					if (this.PlannedCorrections) {
+						ec.AreaTotal = this.plannedCorrectionList[i].AreaValue;
+						ec.AreaReduced = this.plannedCorrectionList[i].AreaReducedValue;
+						ec.AreaUnheated = this.plannedCorrectionList[i].AreaUnheatedValue;
+						ec.AreaRemovedDueConnection = this.plannedCorrectionList[i].ConnectionsValue;
+						ec.RimLength = this.plannedCorrectionList[i].RimLengthValue;
+						ec.RimCorners = this.plannedCorrectionList[i].RimCornersValue;
+					} else {
+						ec.AreaTotal = this.plannedArea / bestCircuits;
+						ec.AreaReduced = this.plannedAreaReduced / bestCircuits;
+						ec.AreaUnheated = this.plannedAreaUnheated / bestCircuits;
+						ec.AreaRemovedDueConnection = areaRemovedDueConnection / bestCircuits;
+						ec.RimLength = this.plannedRimLength / bestCircuits;
+						ec.RimCorners = ((double)this.plannedRimCorners) / bestCircuits;
+					}
 					ec.PipeLengthVorlaufTotal = vorlaufTotal[i];
 					ec.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
 					ec.PipeLengthRuecklaufTotal = ruecklaufTotal[i];
@@ -1886,6 +1911,72 @@ namespace Europlan.Common {
 
 		public override double Viskositaet {
 			get { return EcothermProduct.ConfigV; }
+		}
+
+		[XmlIgnore]
+		public bool PlannedCorrections {
+			get{ return this.plannedCorrectionList.Count > 0; }
+			set {
+				if (this.PlannedCorrections != value) {
+					this.plannedCorrectionList.Clear();
+					if (value) {
+						this.requestedCircuits = this.PlannedCircuitCount;
+						this.requestedLayDistance = this.PlannedLayDistance;
+						this.requestedRimType = this.PlannedRimType;
+					}
+					if (value && this.requestedCircuits != null && this.requestedLayDistance != null && (this.plannedRimLength == 0 || this.requestedRimType != null)) {
+						for (int i = 0; i < this.requestedCircuits.Value; i++ ) {
+							this.plannedCorrectionList.Add(new ExtendedCorrections(i + 1, this));
+						}
+					}
+				}
+			}
+		}
+/*		public bool PlannedCorrections {
+			get { return this.plannedCorrections; }
+			set {
+				if (this.plannedCorrections != value) {
+					this.plannedCorrections = value;
+					if (this.plannedCorrections) {
+						if (this.requestedCircuits == null || this.requestedLayDistance == null || (this.requestedRimType == null && this.plannedRimLength > 0)) {
+							this.PlannedCorrections = false;
+						} else {
+							this.plannedCorrectionList = new List<ExtendedCorrections>();
+							for (int i = 0; i < this.requestedCircuits.Value; i++ ) {
+								this.plannedCorrectionList.Add(new ExtendedCorrections(i + 1, this));
+							}
+						}
+					} else {
+						this.plannedCorrectionList = null;
+					}
+				}
+			}
+		}*/
+
+		public List<ExtendedCorrections> PlannedCorrectionList {
+			get { return this.plannedCorrectionList; }
+			set {
+				//this.plannedCorrections = (value != null && value.Count > 0);
+				this.plannedCorrectionList = (value == null) ? new List<ExtendedCorrections>() : value;
+			}
+		}
+
+		internal override void FinalizeLoading(PlannedProduct pp) {
+			base.FinalizeLoading(pp);
+			if (this.PlannedCorrections) {
+				int i = 1;
+				foreach (ExtendedCorrections ec in this.PlannedCorrectionList) {
+					ec.EcothermProduct = this;
+					ec.CircuitNr = i++;
+				}
+			}
+		}
+
+		public override bool ManualMode {
+			get {
+				return (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) ||
+					this.PlannedCorrections;
+			}
 		}
 	}
 }
