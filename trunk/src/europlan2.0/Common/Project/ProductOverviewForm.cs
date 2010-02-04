@@ -14,14 +14,133 @@ namespace Europlan.Common {
 		private bool showHeat = true;
 		private bool updateOngoing = false;
 		private PlannedProduct productToEdit = null;
+
+		private ComboBox layDistanceCombo;
+		private ComboBox rimTypeCombo;
 		
 		public ProductOverviewForm(bool heat) {
 			updateOngoing = true;
 			InitializeComponent();
+
+			layDistanceCombo = new ComboBox();
+			layDistanceCombo.Size = new Size(30, 20);
+			layDistanceCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+			dgvProductOverview.Controls.Add(layDistanceCombo);
+			layDistanceCombo.Hide();
+			layDistanceCombo.SelectedValueChanged += new EventHandler(layDistanceCombo_SelectedValueChanged);
+
+			rimTypeCombo = new ComboBox();
+			rimTypeCombo.Size = new Size(30, 20);
+			rimTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+			dgvProductOverview.Controls.Add(rimTypeCombo);
+			rimTypeCombo.Hide();
+			rimTypeCombo.SelectedValueChanged += new EventHandler(rimTypeCombo_SelectedValueChanged);
+
 			showHeat = heat;
 			UpdateControl();
 			updateOngoing = false;
 		}
+
+		public void ReloadGrid() {
+			int col = dgvProductOverview.SelectedCells.Count > 0 ? dgvProductOverview.SelectedCells[0].ColumnIndex : -1;
+			int row = dgvProductOverview.SelectedCells.Count > 0 ? dgvProductOverview.SelectedCells[0].RowIndex : -1;
+			productOverviewWrapperBindingSource.ResetBindings(false);
+			if (col > -1) {
+				dgvProductOverview.Rows[row].Cells[col].Selected = true;
+			}
+		}
+
+		private void layDistanceCombo_SelectedValueChanged(object sender, EventArgs e) {
+			Nullable<ProductOverviewWrapper.LayDistanceEnum> layDistance = null;
+			if (layDistanceCombo.SelectedItem != null) {
+				layDistance = (layDistanceCombo.SelectedItem as ProductOverviewWrapper.LayDistanceItem).layDistance;
+			}
+			this.dgvProductOverview.Rows[dgvProductOverview.CurrentCell.RowIndex].Cells[LayDistance.DisplayIndex].Value = layDistance;
+			ReloadGrid();
+		}
+
+		private void rimTypeCombo_SelectedValueChanged(object sender, EventArgs e) {
+			Nullable<ProductOverviewWrapper.RimTypeEnum> rimType = null;
+			if (rimTypeCombo.SelectedItem != null) {
+				rimType = (rimTypeCombo.SelectedItem as ProductOverviewWrapper.RimTypeItem).rimType;
+			}
+			this.dgvProductOverview.Rows[dgvProductOverview.CurrentCell.RowIndex].Cells[RimType.DisplayIndex].Value = rimType;
+			ReloadGrid();
+		}
+
+		private void dgvProductOverview_CellEnter(object sender, DataGridViewCellEventArgs e) {
+			if (e.ColumnIndex == LayDistance.DisplayIndex && e.RowIndex >= 0) {
+				if ((this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper).LayDistanceEditable) {
+
+					this.layDistanceCombo.SelectedValueChanged -= new EventHandler(layDistanceCombo_SelectedValueChanged);
+
+					DataGridViewCell layDistanceCell = dgvProductOverview.Rows[e.RowIndex].Cells[LayDistance.DisplayIndex];
+					layDistanceCombo.Items.Clear();
+					ProductOverviewWrapper.LayDistanceEnumConverter conv = new ProductOverviewWrapper.LayDistanceEnumConverter();
+
+					if (!(this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper).ManualMode) {
+						layDistanceCombo.Items.Add(new ProductOverviewWrapper.LayDistanceItem(null, "Automatisch"));
+					}
+
+					DataGridViewRow selectedRow = dgvProductOverview.Rows[e.RowIndex];
+
+					layDistanceCombo.Items.Add(new ProductOverviewWrapper.LayDistanceItem(ProductOverviewWrapper.LayDistanceEnum.EV35, conv.ConvertToString(ProductOverviewWrapper.LayDistanceEnum.EV35)));
+					layDistanceCombo.Items.Add(new ProductOverviewWrapper.LayDistanceItem(ProductOverviewWrapper.LayDistanceEnum.EV30, conv.ConvertToString(ProductOverviewWrapper.LayDistanceEnum.EV30)));
+					layDistanceCombo.Items.Add(new ProductOverviewWrapper.LayDistanceItem(ProductOverviewWrapper.LayDistanceEnum.EV25, conv.ConvertToString(ProductOverviewWrapper.LayDistanceEnum.EV25)));
+					layDistanceCombo.Items.Add(new ProductOverviewWrapper.LayDistanceItem(ProductOverviewWrapper.LayDistanceEnum.EV20, conv.ConvertToString(ProductOverviewWrapper.LayDistanceEnum.EV20)));
+					layDistanceCombo.Items.Add(new ProductOverviewWrapper.LayDistanceItem(ProductOverviewWrapper.LayDistanceEnum.EV15, conv.ConvertToString(ProductOverviewWrapper.LayDistanceEnum.EV15)));
+					layDistanceCombo.Items.Add(new ProductOverviewWrapper.LayDistanceItem(ProductOverviewWrapper.LayDistanceEnum.EV10, conv.ConvertToString(ProductOverviewWrapper.LayDistanceEnum.EV10)));
+					layDistanceCombo.Items.Add(new ProductOverviewWrapper.LayDistanceItem(ProductOverviewWrapper.LayDistanceEnum.EV5, conv.ConvertToString(ProductOverviewWrapper.LayDistanceEnum.EV5)));
+
+					layDistanceCombo.SelectedItem = new ProductOverviewWrapper.LayDistanceItem((Nullable<ProductOverviewWrapper.LayDistanceEnum>)layDistanceCell.Value, "");
+					this.layDistanceCombo.SelectedValueChanged += new EventHandler(layDistanceCombo_SelectedValueChanged);
+
+					Rectangle rect = dgvProductOverview.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+					layDistanceCombo.Location = new Point(rect.X, rect.Y);
+					layDistanceCombo.Size = new Size(rect.Width, rect.Height);
+					layDistanceCombo.Show();
+				}
+			} else if (e.ColumnIndex == RimType.DisplayIndex && e.RowIndex >= 0) {
+				if ((this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper).RimTypeEditable) {
+
+					this.rimTypeCombo.SelectedValueChanged -= new EventHandler(rimTypeCombo_SelectedValueChanged);
+
+					DataGridViewCell rimTypeCell = dgvProductOverview.Rows[e.RowIndex].Cells[RimType.DisplayIndex];
+					rimTypeCombo.Items.Clear();
+					ProductOverviewWrapper.RimTypeEnumConverter conv = new ProductOverviewWrapper.RimTypeEnumConverter();
+
+					if (!(this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper).ManualMode) {
+						rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(null, "Automatisch"));
+					}
+
+					DataGridViewRow selectedRow = dgvProductOverview.Rows[e.RowIndex];
+
+					rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(ProductOverviewWrapper.RimTypeEnum.EV15_60, conv.ConvertToString(ProductOverviewWrapper.RimTypeEnum.EV15_60)));
+					rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(ProductOverviewWrapper.RimTypeEnum.EV15_120, conv.ConvertToString(ProductOverviewWrapper.RimTypeEnum.EV15_120)));
+					rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(ProductOverviewWrapper.RimTypeEnum.EV15_180, conv.ConvertToString(ProductOverviewWrapper.RimTypeEnum.EV15_180)));
+					rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(ProductOverviewWrapper.RimTypeEnum.EV10_55, conv.ConvertToString(ProductOverviewWrapper.RimTypeEnum.EV10_55)));
+					rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(ProductOverviewWrapper.RimTypeEnum.EV10_110, conv.ConvertToString(ProductOverviewWrapper.RimTypeEnum.EV10_110)));
+					rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(ProductOverviewWrapper.RimTypeEnum.EV10_165, conv.ConvertToString(ProductOverviewWrapper.RimTypeEnum.EV10_165)));
+					rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(ProductOverviewWrapper.RimTypeEnum.EV5_40, conv.ConvertToString(ProductOverviewWrapper.RimTypeEnum.EV5_40)));
+					rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(ProductOverviewWrapper.RimTypeEnum.EV5_80, conv.ConvertToString(ProductOverviewWrapper.RimTypeEnum.EV5_80)));
+					rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(ProductOverviewWrapper.RimTypeEnum.EV5_120, conv.ConvertToString(ProductOverviewWrapper.RimTypeEnum.EV5_120)));
+
+					rimTypeCombo.SelectedItem = new ProductOverviewWrapper.RimTypeItem((Nullable<ProductOverviewWrapper.RimTypeEnum>)rimTypeCell.Value, "");
+					this.rimTypeCombo.SelectedValueChanged += new EventHandler(rimTypeCombo_SelectedValueChanged);
+
+					Rectangle rect = dgvProductOverview.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+					rimTypeCombo.Location = new Point(rect.X, rect.Y);
+					rimTypeCombo.Size = new Size(rect.Width, rect.Height);
+					rimTypeCombo.Show();
+				}
+			}
+		}
+
+		private void dgvProductOverview_CellLeave(object sender, DataGridViewCellEventArgs e) {
+			layDistanceCombo.Hide();
+			rimTypeCombo.Hide();
+		}
+
 
 		private void UpdateControl() {
 			updateOngoing = true;
@@ -129,9 +248,11 @@ namespace Europlan.Common {
 				DataGridViewCell cell = this.dgvProductOverview.SelectedCells[0];
 				DataGridViewColumn col = cell.OwningColumn;
 
-				if (col == this.nrOfCircuitsDataGridViewTextBoxColumn) {
-					e.IsInputKey = false;
-					cell.Value = null;
+				if (!(cell.OwningRow.DataBoundItem as ProductOverviewWrapper).ManualMode) {
+					if (col == this.nrOfCircuitsDataGridViewTextBoxColumn) {
+						e.IsInputKey = false;
+						cell.Value = null;
+					}
 				}
 
 			}
@@ -167,5 +288,6 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
 	}
 }
