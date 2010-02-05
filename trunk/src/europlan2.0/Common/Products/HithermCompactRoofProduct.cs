@@ -23,12 +23,11 @@ namespace Europlan.Common {
 
 		}
 
-		public new static void StaticInitialize() {
-			Configuration userConfig = Configuration.UserTemplate;
-			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<HithermCompactRoofProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
-			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<HithermCompactRoofProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
-			canHeat = userConfig.GetProductParameterAsBool<HithermCompactRoofProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = userConfig.GetProductParameterAsBool<HithermCompactRoofProduct>("ConfigQuickDimensioningCanCool", false);
+		public new static void StaticInitialize(Configuration config) {
+			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<HithermCompactRoofProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
+			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<HithermCompactRoofProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
+			canHeat = config.GetProductParameterAsBool<HithermCompactRoofProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = config.GetProductParameterAsBool<HithermCompactRoofProduct>("ConfigQuickDimensioningCanCool", false);
 		}
 
 		public override Product Clone(Room room) {

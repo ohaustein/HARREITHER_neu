@@ -122,25 +122,24 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public new static void StaticInitialize() {
-			Configuration userConfig = Configuration.UserTemplate;
-			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 80);
-			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 80);
-			canHeat = userConfig.GetProductParameterAsBool<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = userConfig.GetProductParameterAsBool<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCanCool", true);
+		public new static void StaticInitialize(Configuration config) {
+			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 80);
+			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 80);
+			canHeat = config.GetProductParameterAsBool<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = config.GetProductParameterAsBool<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCanCool", true);
 			//useHarreitherNorm = true;
-			maxPressureLost = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxPressureLost", 15000);
-			maxDurchfluss = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxDurchfluss", 240);
-			maxModulesInRow = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxModulesInRow", 20);
-			maxModulesInParallel = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxModulesInParallel", 6);
-			maxModulesInCircuit = userConfig.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigModulesInCircuit", 50);
-			spreizungHeizMin = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungHeizMin", 4);
-			spreizungHeizMax = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungHeizMax", 12);
-			spreizungKuehlMin = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMin", 2);
-			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMax", 5);
-			construction = userConfig.GetProductParameterAsEnum<ModulKlimaDeckeProduct, ModulCeilingConstructionEnum>("ConfigModulCeilingConstruction", ModulCeilingConstructionEnum.C_PROFIL);
-			leistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.77);
-			leistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.77);
+			maxPressureLost = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxDurchfluss", 240);
+			maxModulesInRow = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxModulesInRow", 20);
+			maxModulesInParallel = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxModulesInParallel", 6);
+			maxModulesInCircuit = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigModulesInCircuit", 50);
+			spreizungHeizMin = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungHeizMin", 4);
+			spreizungHeizMax = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungHeizMax", 12);
+			spreizungKuehlMin = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMin", 2);
+			spreizungKuehlMax = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMax", 5);
+			construction = config.GetProductParameterAsEnum<ModulKlimaDeckeProduct, ModulCeilingConstructionEnum>("ConfigModulCeilingConstruction", ModulCeilingConstructionEnum.C_PROFIL);
+			leistungsFaktorHeizen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.77);
+			leistungsFaktorKuehlen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.77);
 		}
 
 		public static string GlobalNotificationMessage {

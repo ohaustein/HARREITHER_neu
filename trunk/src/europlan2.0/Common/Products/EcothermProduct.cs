@@ -182,22 +182,21 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public new static void StaticInitialize() {
-			Configuration userConfig = Configuration.UserTemplate;
-			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
-			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
-			canHeat = userConfig.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = userConfig.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanCool", false);
-			useHarreitherNorm = userConfig.GetProductParameterAsBool<EcothermProduct>("ConfigUseHarreitherNorm", true);
-			maxCircuitLength = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigMaxCircuitLength", 100.0);
-			maxPressureLost = userConfig.GetProductParameterAsInt<EcothermProduct>("ConfigMaxPressureLost", 15000);
-			maxDurchfluss = userConfig.GetProductParameterAsInt<EcothermProduct>("ConfigMaxDurchfluss", 240);
-			spreizungHeizMin = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMin", 4);
-			spreizungHeizMax = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMax", 12);
-			spreizungKuehlMin = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMin", 2);
-			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMax", 5);
-			su0 = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu0", 0.045);
-			su = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
+		public new static void StaticInitialize(Configuration config) {
+			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
+			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
+			canHeat = config.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = config.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanCool", false);
+			useHarreitherNorm = config.GetProductParameterAsBool<EcothermProduct>("ConfigUseHarreitherNorm", true);
+			maxCircuitLength = config.GetProductParameterAsDouble<EcothermProduct>("ConfigMaxCircuitLength", 100.0);
+			maxPressureLost = config.GetProductParameterAsInt<EcothermProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = config.GetProductParameterAsInt<EcothermProduct>("ConfigMaxDurchfluss", 240);
+			spreizungHeizMin = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMin", 4);
+			spreizungHeizMax = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMax", 12);
+			spreizungKuehlMin = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMin", 2);
+			spreizungKuehlMax = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMax", 5);
+			su0 = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu0", 0.045);
+			su = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
 		}
 
 		public static string GlobalNotificationMessage {
@@ -1978,5 +1977,6 @@ namespace Europlan.Common {
 					//this.PlannedCorrections;
 			}
 		}
+
 	}
 }

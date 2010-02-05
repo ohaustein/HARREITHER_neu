@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using System.Collections;
+using log4net;
 
 namespace Europlan.Common {
 
 	[Serializable()]
 	[ProductName("Euroval®", "Euroval® Fußbodenheizung")]
 	public class EurovalProduct : Product {
+
+		private static readonly ILog log = LogManager.GetLogger(typeof(EurovalProduct));
 
 		// quick dimensioning
 		private static int quickDimensioningHeatPowerPerSquareMeter = 50;
@@ -182,27 +185,26 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public new static void StaticInitialize() {
-			Configuration userConfig = Configuration.UserTemplate;
-			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<EurovalProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
-			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<EurovalProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
-			canHeat = userConfig.GetProductParameterAsBool<EurovalProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = userConfig.GetProductParameterAsBool<EurovalProduct>("ConfigQuickDimensioningCanCool", false);
-			useHarreitherNorm = userConfig.GetProductParameterAsBool<EurovalProduct>("ConfigUseHarreitherNorm", true);
-			maxCircuitLength = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigMaxCircuitLength", 100.0);
-			maxPressureLost = userConfig.GetProductParameterAsInt<EurovalProduct>("ConfigMaxPressureLost", 15000);
-			maxDurchfluss = userConfig.GetProductParameterAsInt<EurovalProduct>("ConfigMaxDurchfluss", 240);
-			spreizungHeizMin = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungHeizMin", 4);
-			spreizungHeizMax = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungHeizMax", 12);
-			spreizungKuehlMin = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungKuehlMin", 2);
-			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungKuehlMax", 5);
-			su0 = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSu0", 0.045);
-			su = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSu", 0.035);
-			ag = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigAg", 1.1034);
-			agActivated = userConfig.GetProductParameterAsBool<EurovalProduct>("ConfigAgActivated", true);
-			c = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigC", 4.19);
-			rho = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigRho", 1000);
-			v = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigV", 0.00000101);
+		public new static void StaticInitialize(Configuration config) {
+			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<EurovalProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
+			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<EurovalProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
+			canHeat = config.GetProductParameterAsBool<EurovalProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = config.GetProductParameterAsBool<EurovalProduct>("ConfigQuickDimensioningCanCool", false);
+			useHarreitherNorm = config.GetProductParameterAsBool<EurovalProduct>("ConfigUseHarreitherNorm", true);
+			maxCircuitLength = config.GetProductParameterAsDouble<EurovalProduct>("ConfigMaxCircuitLength", 100.0);
+			maxPressureLost = config.GetProductParameterAsInt<EurovalProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = config.GetProductParameterAsInt<EurovalProduct>("ConfigMaxDurchfluss", 240);
+			spreizungHeizMin = config.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungHeizMin", 4);
+			spreizungHeizMax = config.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungHeizMax", 12);
+			spreizungKuehlMin = config.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungKuehlMin", 2);
+			spreizungKuehlMax = config.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungKuehlMax", 5);
+			su0 = config.GetProductParameterAsDouble<EurovalProduct>("ConfigSu0", 0.045);
+			su = config.GetProductParameterAsDouble<EurovalProduct>("ConfigSu", 0.035);
+			ag = config.GetProductParameterAsDouble<EurovalProduct>("ConfigAg", 1.1034);
+			agActivated = config.GetProductParameterAsBool<EurovalProduct>("ConfigAgActivated", true);
+			c = config.GetProductParameterAsDouble<EurovalProduct>("ConfigC", 4.19);
+			rho = config.GetProductParameterAsDouble<EurovalProduct>("ConfigRho", 1000);
+			v = config.GetProductParameterAsDouble<EurovalProduct>("ConfigV", 0.00000101);
 		}
 
 		public static string GlobalNotificationMessage {
