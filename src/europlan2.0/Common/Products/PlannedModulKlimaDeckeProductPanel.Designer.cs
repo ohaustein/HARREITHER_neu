@@ -266,7 +266,7 @@ namespace Europlan.Common {
 			// 
 			// lblAreaPercentage
 			// 
-			this.lblAreaPercentage.Location = new System.Drawing.Point(388, 113);
+			this.lblAreaPercentage.Location = new System.Drawing.Point(388, 95);
 			this.lblAreaPercentage.Name = "lblAreaPercentage";
 			this.lblAreaPercentage.Size = new System.Drawing.Size(19, 13);
 			this.lblAreaPercentage.TabIndex = 18;
