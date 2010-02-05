@@ -10,6 +10,8 @@ namespace Europlan.Common {
 	public partial class PlannedModulKlimaDeckeProductPanel : UserControl, IEditorUserControl {
 		private PlannedProduct product = null;
 
+		private bool gridContentChanged = false;
+
 		public PlannedModulKlimaDeckeProductPanel() {
 			InitializeComponent();
 			this.cmbType.Items.Add(Product.ProductType.WH);
@@ -477,6 +479,11 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			if (gridContentChanged) {
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				gridContentChanged = false;
+			}
 			return true;
 		}
 		#endregion
@@ -860,6 +867,15 @@ namespace Europlan.Common {
 						this.ProjectStructureChanged(this);
 					}
 				}
+			}
+		}
+
+		private void tabs_Deselecting(object sender, TabControlCancelEventArgs e) {
+			if (e.TabPage == this.pageCircuit && gridContentChanged) {
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				this.UpdateControl(FieldEnum.NONE);
+				gridContentChanged = false;
 			}
 		}
 		

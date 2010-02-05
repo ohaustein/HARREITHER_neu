@@ -10,6 +10,8 @@ namespace Europlan.Common {
 	public partial class PlannedHithermProductPanel : UserControl, IEditorUserControl {
 		private PlannedProduct product = null;
 
+		private bool gridContentChanged = false;
+
 		public PlannedHithermProductPanel() {
 			InitializeComponent();
 
@@ -462,6 +464,11 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			if (gridContentChanged) {
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				gridContentChanged = false;
+			}
 			return true;
 		}
 		#endregion
@@ -608,9 +615,7 @@ namespace Europlan.Common {
 		}
 
 		private void connectionPipePanel1_GridContentChanged(object sender) {
-			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
-			this.errorMsg = this.product.Product.LastErrorMessage;
-			this.UpdateControl(FieldEnum.NONE);
+			gridContentChanged = true;
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
@@ -859,6 +864,15 @@ namespace Europlan.Common {
 		private void lstError_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e) {
 			e.Item.Focused = false;
 			e.Item.Selected = false;
+		}
+
+		private void tabs_Deselecting(object sender, TabControlCancelEventArgs e) {
+			if (e.TabPage == this.pageCircuit && gridContentChanged) {
+				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+				this.errorMsg = this.product.Product.LastErrorMessage;
+				this.UpdateControl(FieldEnum.NONE);
+				gridContentChanged = false;
+			}
 		}
 	}
 }
