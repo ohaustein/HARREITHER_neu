@@ -442,7 +442,12 @@ namespace Europlan.Common {
 			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal);
 
 			int cCount = this.RequestedCircuits.HasValue ? this.RequestedCircuits.Value : this.RequestedModulesTotal / 40;
-			if (cCount > 12) {
+
+			if (this.connectedCircuits.Count > cCount) {
+				cCount = this.connectedCircuits.Count;
+			}
+			
+			if (v > 12) {
 				cCount = 12;
 			}
 			if (cCount <= 0) {
@@ -501,7 +506,7 @@ namespace Europlan.Common {
 					found = false;
 				}
 
-				found = this.RequestedCircuits.HasValue || cCount >= 12 || found;
+				found = this.RequestedCircuits.HasValue || cCount >= 12 || this.PlannedConnectedProducts.Count > 0 || found;
 
 				if (!found) {
 					cCount++;
