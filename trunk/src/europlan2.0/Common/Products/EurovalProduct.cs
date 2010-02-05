@@ -1572,6 +1572,9 @@ namespace Europlan.Common {
 							pl += this.PlannedAreaRim * EurovalProduct.GetPipeLengthPerSqm(ld);
 						}
 						circuitCount = (int)Math.Ceiling(pl / (100 - longestVorlaufTotal - longestRuecklaufTotal));
+						if (this.connectedCircuits.Count > circuitCount) {
+							circuitCount = this.connectedCircuits.Count;
+						}
 					}
 					circuitCount = circuitCount < 1 ? 1 : circuitCount;
 					circuitCount = circuitCount > 12 ? 12 : circuitCount;
@@ -1622,6 +1625,7 @@ namespace Europlan.Common {
 						}
 						tryCalc = tryCalc && !this.requestedCircuits.HasValue;
 						tryCalc = tryCalc && circuitCount < 12;
+						tryCalc = tryCalc && this.PlannedConnectedProducts.Count == 0;
 						if (tryCalc) {
 							circuitCount++;
 						}
