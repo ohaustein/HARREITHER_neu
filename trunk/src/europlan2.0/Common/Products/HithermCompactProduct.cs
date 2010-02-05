@@ -168,7 +168,7 @@ namespace Europlan.Common {
 				string message = null;
 				Configuration userConfig = Configuration.UserTemplate;
 
-				double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorHeizen", 0.77);
+				double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<HithermCompactProduct>("ConfigLeistungsFaktorHeizen", 1.0);
 				if (leistungsFaktorHeizen != defaultLeistungsFaktorHeizen) {
 					if (message == null) {
 						message = "";
@@ -178,7 +178,7 @@ namespace Europlan.Common {
 					message += "  Leistungsfaktor Heizen: " + Math.Round(leistungsFaktorHeizen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorHeizen, 3).ToString() + ")";
 				}
 
-				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorKuehlen", 0.77);
+				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<HithermCompactProduct>("ConfigLeistungsFaktorKuehlen", 1.0);
 				if (leistungsFaktorKuehlen != defaultLeistungsFaktorKuehlen) {
 					if (message == null) {
 						message = "";
