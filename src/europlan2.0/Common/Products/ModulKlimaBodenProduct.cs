@@ -66,20 +66,19 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public new static void StaticInitialize() {
-			Configuration userConfig = Configuration.UserTemplate;
-			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
-			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
-			canHeat = userConfig.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = userConfig.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigQuickDimensioningCanCool", false);
-			useHarreitherNorm = userConfig.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm", true);
-			maxPressureLost = userConfig.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigMaxPressureLost", 15000);
-			maxDurchfluss = userConfig.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigMaxDurchfluss", 240);
-			maxModulesInCircuit = userConfig.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigModulesInCircuit", 40);
-			spreizungHeizMin = userConfig.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungHeizMin", 4);
-			spreizungHeizMax = userConfig.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungHeizMax", 12);
-			spreizungKuehlMin = userConfig.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungKuehlMin", 2);
-			spreizungKuehlMax = userConfig.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungKuehlMax", 5);
+		public new static void StaticInitialize(Configuration config) {
+			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
+			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
+			canHeat = config.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = config.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigQuickDimensioningCanCool", false);
+			useHarreitherNorm = config.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm", true);
+			maxPressureLost = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigMaxDurchfluss", 240);
+			maxModulesInCircuit = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigModulesInCircuit", 40);
+			spreizungHeizMin = config.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungHeizMin", 4);
+			spreizungHeizMax = config.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungHeizMax", 12);
+			spreizungKuehlMin = config.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungKuehlMin", 2);
+			spreizungKuehlMax = config.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungKuehlMax", 5);
 		}
 
 		public static string GlobalNotificationMessage {

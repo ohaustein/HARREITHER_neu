@@ -335,14 +335,14 @@ namespace Europlan.Common {
 					adminTemplate.type = ConfigurationType.AdminConfiguration;
 					adminTemplate.RecalculateMaterialToCategoryMapping();
 
-					EurovalProduct.StaticInitialize();
-					EcothermProduct.StaticInitialize();
-					ConcreteActivationProduct.StaticInitialize();
-					HithermProduct.StaticInitialize();
-					HithermCompactProduct.StaticInitialize();
-					HithermCompactRoofProduct.StaticInitialize();
-					ModulKlimaBodenProduct.StaticInitialize();
-					ModulKlimaDeckeProduct.StaticInitialize();
+					EurovalProduct.StaticInitialize(adminTemplate);
+					EcothermProduct.StaticInitialize(adminTemplate);
+					ConcreteActivationProduct.StaticInitialize(adminTemplate);
+					HithermProduct.StaticInitialize(adminTemplate);
+					HithermCompactProduct.StaticInitialize(adminTemplate);
+					HithermCompactRoofProduct.StaticInitialize(adminTemplate);
+					ModulKlimaBodenProduct.StaticInitialize(adminTemplate);
+					ModulKlimaDeckeProduct.StaticInitialize(adminTemplate);
 
 				}
 				return adminTemplate;
@@ -382,6 +382,15 @@ namespace Europlan.Common {
 					}
 					userTemplate.type = ConfigurationType.UserConfiguration;
 					userTemplate.RecalculateMaterialToCategoryMapping();
+
+					EurovalProduct.StaticInitialize(userTemplate);
+					EcothermProduct.StaticInitialize(userTemplate);
+					ConcreteActivationProduct.StaticInitialize(userTemplate);
+					HithermProduct.StaticInitialize(userTemplate);
+					HithermCompactProduct.StaticInitialize(userTemplate);
+					HithermCompactRoofProduct.StaticInitialize(userTemplate);
+					ModulKlimaBodenProduct.StaticInitialize(userTemplate);
+					ModulKlimaDeckeProduct.StaticInitialize(userTemplate);
 				}
 				return userTemplate;
 			}

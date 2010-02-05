@@ -2,9 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using log4net;
 
 namespace Europlan.Common {
 	public class EurovalCircuit : Circuit {
+
+		private static readonly ILog log = LogManager.GetLogger(typeof(EurovalCircuit));
+
 		[XmlIgnore]
 		public EurovalProduct EurovalProduct {
 			get { return this.PlannedProduct.Product as EurovalProduct; }
@@ -183,7 +187,6 @@ namespace Europlan.Common {
 		}
 
 		public void Calculate(Europlan.Common.EurovalProduct.EurovalLayDistance layDistance, Nullable<Europlan.Common.EurovalProduct.EurovalRimType> rimType) {
-
 			if (layDistance == EurovalProduct.EurovalLayDistance.NONE) {
 				c_Qh2oHeat = 0;
 

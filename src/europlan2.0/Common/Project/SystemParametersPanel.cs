@@ -48,36 +48,37 @@ namespace Europlan.Common {
 		}
 
 		private void btnEurovalStandard_Click(object sender, EventArgs e) {
-			EurovalProduct.StaticInitialize();
+			EurovalProduct.StaticInitialize(Configuration.UserTemplate);
 			InitializeEurovalValues();
 		}
 
 		private void btnEcothermStandard_Click(object sender, EventArgs e) {
+			EcothermProduct.StaticInitialize(Configuration.UserTemplate);
 			InitializeEcothermValues();
 		}
 
 		private void btnModulBodenStandard_Click(object sender, EventArgs e) {
-			ModulKlimaBodenProduct.StaticInitialize();
+			ModulKlimaBodenProduct.StaticInitialize(Configuration.UserTemplate);
 			InitializeModulBodenValues();
 		}
 
 		private void btnModulDeckeStandard_Click(object sender, EventArgs e) {
-			ModulKlimaDeckeProduct.StaticInitialize();
+			ModulKlimaDeckeProduct.StaticInitialize(Configuration.UserTemplate);
 			InitializeModulDeckeValues();
 		}
 
 		private void btnHithermStandard_Click(object sender, EventArgs e) {
-			HithermProduct.StaticInitialize();
+			HithermProduct.StaticInitialize(Configuration.UserTemplate);
 			InitializeHithermValues();
 		}
 
 		private void btnHithermCompactStandard_Click(object sender, EventArgs e) {
-			HithermCompactProduct.StaticInitialize();
+			HithermCompactProduct.StaticInitialize(Configuration.UserTemplate);
 			InitializeHithermCompactValues();
 		}
 
 		private void btnGeneralStandard_Click(object sender, EventArgs e) {
-			Product.StaticInitialize();
+			Product.StaticInitialize(Configuration.UserTemplate);
 			InitializeGeneralValues();
 		}
 

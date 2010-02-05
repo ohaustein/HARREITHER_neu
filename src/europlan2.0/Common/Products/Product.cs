@@ -184,14 +184,13 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public static void StaticInitialize() {
-			Configuration userConfig = Configuration.UserTemplate;
-			Product.alphaBodenHeat = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaBodenHeat", 10.8);
-			Product.alphaDeckeHeat = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaDeckeHeat", 6.5);
-			Product.alphaWandHeat = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaWandHeat", 8.0);
-			Product.alphaBodenCool = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaBodenCool", 6.5);
-			Product.alphaDeckeCool = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaDeckeCool", 10.8);
-			Product.alphaWandCool = userConfig.GetProductParameterAsDouble<Product>("ConfigAlphaWandCool", 8.0);
+		public static void StaticInitialize(Configuration config) {
+			Product.alphaBodenHeat = config.GetProductParameterAsDouble<Product>("ConfigAlphaBodenHeat", 10.8);
+			Product.alphaDeckeHeat = config.GetProductParameterAsDouble<Product>("ConfigAlphaDeckeHeat", 6.5);
+			Product.alphaWandHeat = config.GetProductParameterAsDouble<Product>("ConfigAlphaWandHeat", 8.0);
+			Product.alphaBodenCool = config.GetProductParameterAsDouble<Product>("ConfigAlphaBodenCool", 6.5);
+			Product.alphaDeckeCool = config.GetProductParameterAsDouble<Product>("ConfigAlphaDeckeCool", 10.8);
+			Product.alphaWandCool = config.GetProductParameterAsDouble<Product>("ConfigAlphaWandCool", 8.0);
 		}
 
 		public Product() {

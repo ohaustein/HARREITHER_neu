@@ -194,18 +194,17 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
-		public new static void StaticInitialize() {
-			Configuration userConfig = Configuration.UserTemplate;
-			quickDimensioningHeatPowerPerSquareMeter = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
-			quickDimensioningCoolPowerPerSquareMeter = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
-			canHeat = userConfig.GetProductParameterAsBool<HithermProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = userConfig.GetProductParameterAsBool<HithermProduct>("ConfigQuickDimensioningCanCool", false);
-			usePlus = userConfig.GetProductParameterAsBool<HithermProduct>("ConfigUsePlus", false);
-			maxPressureLost = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigMaxPressureLost", 15000);
-			maxDurchfluss = userConfig.GetProductParameterAsInt<HithermProduct>("ConfigMaxDurchfluss", 240);
-			maxRegisterArea = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigMaxRegisterArea", 10.0);
-			leistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorHeizen", 1.0);
-			leistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorKuehlen", 1.0);
+		public new static void StaticInitialize(Configuration config) {
+			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
+			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
+			canHeat = config.GetProductParameterAsBool<HithermProduct>("ConfigQuickDimensioningCanHeat", true);
+			canCool = config.GetProductParameterAsBool<HithermProduct>("ConfigQuickDimensioningCanCool", false);
+			usePlus = config.GetProductParameterAsBool<HithermProduct>("ConfigUsePlus", false);
+			maxPressureLost = config.GetProductParameterAsInt<HithermProduct>("ConfigMaxPressureLost", 15000);
+			maxDurchfluss = config.GetProductParameterAsInt<HithermProduct>("ConfigMaxDurchfluss", 240);
+			maxRegisterArea = config.GetProductParameterAsDouble<HithermProduct>("ConfigMaxRegisterArea", 10.0);
+			leistungsFaktorHeizen = config.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorHeizen", 1.0);
+			leistungsFaktorKuehlen = config.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorKuehlen", 1.0);
 		}
 
 		public static string GlobalNotificationMessage {
