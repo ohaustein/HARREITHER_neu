@@ -73,6 +73,7 @@ namespace Europlan.Application {
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.openGlobalConfDialog = new System.Windows.Forms.OpenFileDialog();
+			this.auslegeAssistentButton = new System.Windows.Forms.ToolStripButton();
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.mainMenu.SuspendLayout();
@@ -325,6 +326,7 @@ namespace Europlan.Application {
             this.toolStripSeparator1,
             this.projectOverviewHeatToolStripButton,
             this.projectOverviewCoolToolStripButton,
+            this.auslegeAssistentButton,
             this.toolStripSeparator6,
             this.helpToolStripButton});
 			resources.ApplyResources(this.toolStrip1, "toolStrip1");
@@ -419,6 +421,13 @@ namespace Europlan.Application {
 			// 
 			resources.ApplyResources(this.openGlobalConfDialog, "openGlobalConfDialog");
 			// 
+			// auslegeAssistentButton
+			// 
+			this.auslegeAssistentButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			resources.ApplyResources(this.auslegeAssistentButton, "auslegeAssistentButton");
+			this.auslegeAssistentButton.Name = "auslegeAssistentButton";
+			this.auslegeAssistentButton.Click += new System.EventHandler(this.auslegeAssistentButton_Click);
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -492,6 +501,7 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripButton projectOverviewHeatToolStripButton;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
 		private System.Windows.Forms.ToolStripButton projectOverviewCoolToolStripButton;
+		private System.Windows.Forms.ToolStripButton auslegeAssistentButton;
 
 	}
 }

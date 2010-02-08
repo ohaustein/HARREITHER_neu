@@ -804,5 +804,13 @@ namespace Europlan.Application {
 			form.Dispose();
 		}
 
+		private void auslegeAssistentButton_Click(object sender, EventArgs e) {
+			AuslegeAssistentForm form = new AuslegeAssistentForm();
+
+			form.ShowDialog();
+
+			form.Dispose();
+		}
+
 	}
 }
