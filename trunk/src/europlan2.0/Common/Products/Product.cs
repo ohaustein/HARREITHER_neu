@@ -1274,5 +1274,41 @@ namespace Europlan.Common {
 		public virtual bool ManualMode {
 			get { return true; }
 		}
+
+		public string[] ErrorMessageArray {
+			get {
+				string errorMsg = this.LastErrorMessage;
+				List<String> errors = new List<string>();
+				if (errorMsg != null) {
+					string[] messages = errorMsg.Split('\n');
+					foreach (string message in messages) {
+						if (!string.IsNullOrEmpty(message)) {
+							errors.Add(message);
+						}
+					}
+				}
+				String[] rtn = new String[errors.Count];
+				errors.CopyTo(rtn);
+				return rtn;
+			}
+		}
+
+		public string[] NotificationMessageArray {
+			get {
+				string notificationMsg = this.NotificationMessage;
+				List<String> notifications = new List<string>();
+				if (notificationMsg != null) {
+					string[] messages = notificationMsg.Split('\n');
+					foreach (string message in messages) {
+						if (!string.IsNullOrEmpty(message)) {
+							notifications.Add(message);
+						}
+					}
+				}
+				String[] rtn = new String[notifications.Count];
+				notifications.CopyTo(rtn);
+				return rtn;
+			}
+		}
 	}
 }
