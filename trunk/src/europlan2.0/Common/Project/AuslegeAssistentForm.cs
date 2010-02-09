@@ -300,7 +300,29 @@ namespace Europlan.Common {
 		}
 
 		private void chk_CheckStateChanged(object sender, EventArgs e) {
+			foreach (TreeNode dNode in rootNode.Nodes) {
+				foreach (AuslegeNode node in dNode.Nodes) {
+					if (node.PlannedProduct.Product is EurovalProduct) {
+						if (!chkEuroval.Checked) {
+							node.ForeColor = SystemColors.GrayText;
+						} else {
+							node.ForeColor = SystemColors.WindowText;
+						}
+					}
+					if (node.PlannedProduct.Product is EcothermProduct) {
+						if (!chkEcotherm.Checked) {
+							node.ForeColor = SystemColors.GrayText;
+						} else {
+							node.ForeColor = SystemColors.WindowText;
+						}
+					}
+				}
+			}
 			graphicsPanel.Invalidate();
+		}
+
+		private void treeProducts_BeforeSelect(object sender, TreeViewCancelEventArgs e) {
+			e.Cancel = (e.Node.ForeColor == SystemColors.GrayText);
 		}
 
 
