@@ -665,5 +665,23 @@ namespace Europlan.Common {
 				return message;
 			}
 		}
+
+		public string[] NotificationMessageArray {
+			get {
+				string notificationMsg = this.NotificationMessage;
+				List<String> notifications = new List<string>();
+				if (notificationMsg != null) {
+					string[] messages = notificationMsg.Split('\n');
+					foreach (string message in messages) {
+						if (!string.IsNullOrEmpty(message)) {
+							notifications.Add(message);
+						}
+					}
+				}
+				String[] rtn = new String[notifications.Count];
+				notifications.CopyTo(rtn);
+				return rtn;
+			}
+		}
 	}
 }
