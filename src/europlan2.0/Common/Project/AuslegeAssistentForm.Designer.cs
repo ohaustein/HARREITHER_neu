@@ -27,6 +27,8 @@ namespace Europlan.Common {
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.treeProducts = new System.Windows.Forms.TreeView();
 			this.graphicsPanel = new System.Windows.Forms.Panel();
+			this.chkEuroval = new System.Windows.Forms.CheckBox();
+			this.chkEcotherm = new System.Windows.Forms.CheckBox();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -47,7 +49,7 @@ namespace Europlan.Common {
 			this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.splitContainer1.Location = new System.Drawing.Point(12, 41);
+			this.splitContainer1.Location = new System.Drawing.Point(12, 84);
 			this.splitContainer1.Name = "splitContainer1";
 			// 
 			// splitContainer1.Panel1
@@ -57,7 +59,7 @@ namespace Europlan.Common {
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.graphicsPanel);
-			this.splitContainer1.Size = new System.Drawing.Size(722, 462);
+			this.splitContainer1.Size = new System.Drawing.Size(722, 419);
 			this.splitContainer1.SplitterDistance = 240;
 			this.splitContainer1.TabIndex = 1;
 			// 
@@ -68,7 +70,7 @@ namespace Europlan.Common {
 			this.treeProducts.HideSelection = false;
 			this.treeProducts.Location = new System.Drawing.Point(0, 0);
 			this.treeProducts.Name = "treeProducts";
-			this.treeProducts.Size = new System.Drawing.Size(240, 462);
+			this.treeProducts.Size = new System.Drawing.Size(240, 419);
 			this.treeProducts.TabIndex = 0;
 			this.treeProducts.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeProducts_AfterCheck);
 			this.treeProducts.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeProducts_AfterSelect);
@@ -79,15 +81,43 @@ namespace Europlan.Common {
 			this.graphicsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.graphicsPanel.Location = new System.Drawing.Point(0, 0);
 			this.graphicsPanel.Name = "graphicsPanel";
-			this.graphicsPanel.Size = new System.Drawing.Size(478, 462);
+			this.graphicsPanel.Size = new System.Drawing.Size(478, 419);
 			this.graphicsPanel.TabIndex = 0;
 			this.graphicsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel_Paint);
+			// 
+			// chkEuroval
+			// 
+			this.chkEuroval.AutoSize = true;
+			this.chkEuroval.Checked = true;
+			this.chkEuroval.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkEuroval.Location = new System.Drawing.Point(29, 38);
+			this.chkEuroval.Name = "chkEuroval";
+			this.chkEuroval.Size = new System.Drawing.Size(62, 17);
+			this.chkEuroval.TabIndex = 2;
+			this.chkEuroval.Text = "Euroval";
+			this.chkEuroval.UseVisualStyleBackColor = true;
+			this.chkEuroval.CheckStateChanged += new System.EventHandler(this.chk_CheckStateChanged);
+			// 
+			// chkEcotherm
+			// 
+			this.chkEcotherm.AutoSize = true;
+			this.chkEcotherm.Checked = true;
+			this.chkEcotherm.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkEcotherm.Location = new System.Drawing.Point(29, 61);
+			this.chkEcotherm.Name = "chkEcotherm";
+			this.chkEcotherm.Size = new System.Drawing.Size(71, 17);
+			this.chkEcotherm.TabIndex = 3;
+			this.chkEcotherm.Text = "Ecotherm";
+			this.chkEcotherm.UseVisualStyleBackColor = true;
+			this.chkEcotherm.CheckStateChanged += new System.EventHandler(this.chk_CheckStateChanged);
 			// 
 			// AuslegeAssistentForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(746, 515);
+			this.Controls.Add(this.chkEcotherm);
+			this.Controls.Add(this.chkEuroval);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.label1);
 			this.Name = "AuslegeAssistentForm";
@@ -110,5 +140,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.TreeView treeProducts;
 		private System.Windows.Forms.Panel graphicsPanel;
+		private System.Windows.Forms.CheckBox chkEuroval;
+		private System.Windows.Forms.CheckBox chkEcotherm;
 	}
 }
