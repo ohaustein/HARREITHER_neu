@@ -74,6 +74,7 @@ namespace Europlan.Application {
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.openGlobalConfDialog = new System.Windows.Forms.OpenFileDialog();
+			this.warningsAndErrorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.mainMenu.SuspendLayout();
@@ -253,6 +254,7 @@ namespace Europlan.Application {
 			// projektToolStripMenuItem
 			// 
 			this.projektToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.warningsAndErrorsToolStripMenuItem,
             this.viewReportToolStripMenuItem});
 			this.projektToolStripMenuItem.Name = "projektToolStripMenuItem";
 			resources.ApplyResources(this.projektToolStripMenuItem, "projektToolStripMenuItem");
@@ -428,6 +430,12 @@ namespace Europlan.Application {
 			// 
 			resources.ApplyResources(this.openGlobalConfDialog, "openGlobalConfDialog");
 			// 
+			// warningsAndErrorsToolStripMenuItem
+			// 
+			this.warningsAndErrorsToolStripMenuItem.Name = "warningsAndErrorsToolStripMenuItem";
+			resources.ApplyResources(this.warningsAndErrorsToolStripMenuItem, "warningsAndErrorsToolStripMenuItem");
+			this.warningsAndErrorsToolStripMenuItem.Click += new System.EventHandler(this.warningsAndErrorsToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -502,6 +510,7 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
 		private System.Windows.Forms.ToolStripButton projectOverviewCoolToolStripButton;
 		private System.Windows.Forms.ToolStripButton auslegeAssistentButton;
+		private System.Windows.Forms.ToolStripMenuItem warningsAndErrorsToolStripMenuItem;
 
 	}
 }
