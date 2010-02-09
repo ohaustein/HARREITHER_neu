@@ -23,7 +23,11 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("fsdafasdfdas");
+			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("fdas");
 			this.btnClose = new System.Windows.Forms.Button();
+			this.lstErrors = new System.Windows.Forms.ListView();
+			this.columnText = new System.Windows.Forms.ColumnHeader();
 			this.SuspendLayout();
 			// 
 			// btnClose
@@ -37,12 +41,39 @@ namespace Europlan.Common {
 			this.btnClose.Text = "&Schlieﬂen";
 			this.btnClose.UseVisualStyleBackColor = true;
 			// 
+			// lstErrors
+			// 
+			this.lstErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lstErrors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnText});
+			this.lstErrors.FullRowSelect = true;
+			this.lstErrors.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.lstErrors.HideSelection = false;
+			this.lstErrors.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2});
+			this.lstErrors.Location = new System.Drawing.Point(12, 12);
+			this.lstErrors.MultiSelect = false;
+			this.lstErrors.Name = "lstErrors";
+			this.lstErrors.ShowGroups = false;
+			this.lstErrors.Size = new System.Drawing.Size(683, 341);
+			this.lstErrors.TabIndex = 1;
+			this.lstErrors.UseCompatibleStateImageBehavior = false;
+			this.lstErrors.View = System.Windows.Forms.View.Details;
+			// 
+			// columnText
+			// 
+			this.columnText.Text = "";
+			// 
 			// WarningsAndErrorsForm
 			// 
 			this.AcceptButton = this.btnClose;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(707, 394);
+			this.Controls.Add(this.lstErrors);
 			this.Controls.Add(this.btnClose);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -57,5 +88,7 @@ namespace Europlan.Common {
 		#endregion
 
 		private System.Windows.Forms.Button btnClose;
+		private System.Windows.Forms.ListView lstErrors;
+		private System.Windows.Forms.ColumnHeader columnText;
 	}
 }

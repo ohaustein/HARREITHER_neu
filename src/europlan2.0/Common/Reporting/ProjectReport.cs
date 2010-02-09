@@ -1313,13 +1313,14 @@ namespace Europlan.Common {
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
 					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
-						if (plannedProduct.Product.LastErrorMessage != null) {
+						foreach (string warning in plannedProduct.Product.ErrorMessageArray) {
 							ProjectWarningWrapper wrapper = new ProjectWarningWrapper();
 							wrapper.FloorId = floor.Id;
 							wrapper.FloorName = floor.Name;
-							wrapper.Warning = "WARNUNG " + plannedProduct.InternalName + " in " + room.Id + "(" + room.Name + "): " + plannedProduct.Product.LastErrorMessage;
+							wrapper.Warning = "WARNUNG " + plannedProduct.InternalName + " in " + room.Id + " (" + room.Name + "): " + warning;
 							wrapperList.Add(wrapper);
 						}
+
 					}
 				}
 			}
@@ -1332,20 +1333,20 @@ namespace Europlan.Common {
 
 			ProjectWarningWrapper wrapper;
 
-			if (Project.Instance.NotificationMessage != null) {
+			foreach (string notification in Project.Instance.NotificationMessageArray) {
 				wrapper = new ProjectWarningWrapper();
-				wrapper.Warning = Project.Instance.NotificationMessage;
+				wrapper.Warning = notification;
 				wrapperList.Add(wrapper);
 			}
 
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
 					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
-						if (plannedProduct.Product.NotificationMessage != null) {
+						foreach (string notification in plannedProduct.Product.NotificationMessageArray) {
 							wrapper = new ProjectWarningWrapper();
 							wrapper.FloorId = floor.Id;
 							wrapper.FloorName = floor.Name;
-							wrapper.Warning = plannedProduct.InternalName + " in " + room.Id + "(" + room.Name + "): " + plannedProduct.Product.NotificationMessage;
+							wrapper.Warning = plannedProduct.InternalName + " in " + room.Id + " (" + room.Name + "): " + notification;
 							wrapperList.Add(wrapper);
 						}
 					}
