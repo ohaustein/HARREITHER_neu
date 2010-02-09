@@ -11,10 +11,27 @@ namespace Europlan.Common {
 	public partial class AuslegeAssistentForm : Form {
 
 		private bool resizing = false;
+		private bool checkStateUpdating = false;
 		private TreeNode rootNode = null;
+		private Licensing.License license = Licensing.LicenseManager.Instance.License;
 
 		public AuslegeAssistentForm() {
 			InitializeComponent();
+
+			
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
+				chkEuroval.Text = new EurovalProduct().FullName;
+			} else {
+				chkEuroval.Checked = false;
+				chkEuroval.Enabled = false;
+			}
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
+				chkEcotherm.Text = new EcothermProduct().FullName;
+			} else {
+				chkEcotherm.Checked = false;
+				chkEcotherm.Enabled = false;
+			}
+			
 			ConfigureTree();
 		}
 
@@ -31,9 +48,12 @@ namespace Europlan.Common {
 					TreeNode distributorNode = new TreeNode(d.Id + ": " + d.Name);
 					rootNode.Nodes.Add(distributorNode);
 					foreach (PlannedProduct pp in d.PlannedConnectedProducts) {
-						if (pp.Product is EurovalProduct || pp.Product is EcothermProduct) {
+						if ((pp.Product is EurovalProduct && license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval) || 
+							(pp.Product is EcothermProduct&& license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)))) {
 							AuslegeNode node = new AuslegeNode(pp.InternalName + " in " + pp.Product.AssociatedRoom.Id + " (" + pp.Product.AssociatedRoom.Name + ")");
 							distributorNode.Nodes.Add(node);
+
+							// TODO - calculation...
 							int[] azValues = new int[21];
 							int[] rzValues = new int[21];
 							for (int i = 0; i < azValues.Length; i++ ) {
@@ -144,7 +164,7 @@ namespace Europlan.Common {
 			if (!resizing) {
 				Pen smallPen = new Pen(Brushes.Red);
 				Pen boldPen = new Pen(Brushes.Red);
-				boldPen.Width = (float)2.5;
+				boldPen.Width = (float)2;
 
 				int x0 = rectangle.X + 5;
 				int y0Rz = rectangle.Y + 5;
@@ -159,53 +179,58 @@ namespace Europlan.Common {
 
 				foreach (TreeNode tn in rootNode.Nodes) {
 					Pen defaultPen;
+					bool distributorSelected = false;
 					if (treeProducts.SelectedNode == tn) {
 						defaultPen = boldPen;
+						distributorSelected = true;
 					} else {
 						defaultPen = smallPen;
 					}
 					foreach (AuslegeNode an in tn.Nodes) {
 						Pen pen;
-						if (an.Checked) {
-							if (treeProducts.SelectedNode == an) {
-								pen = boldPen;
-							} else {
-								pen = smallPen;
-							}
-							
-							// Randzone
-							if (an.RzValues != null) {
-								PointF prevPoint = PointF.Empty;
-								for (int i = 0; i < an.RzValues.Length; i++) {
-									PointF p = new PointF(x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight / 2 * an.RzValues[i]);
-									// draw circle
-									g.DrawEllipse(pen, p.X - radius, p.Y - radius , 2 * radius, 2 * radius);
-									// draw line
-									if (!prevPoint.IsEmpty) {
-										g.DrawLine(pen, prevPoint, p);
+						if ((an.PlannedProduct.Product is EurovalProduct && chkEuroval.Checked) ||
+							(an.PlannedProduct.Product is EcothermProduct && chkEcotherm.Checked)) {
+							if (an.Checked || distributorSelected || treeProducts.SelectedNode == an) {
+								if (treeProducts.SelectedNode == an) {
+									pen = boldPen;
+								} else {
+									pen = defaultPen;
+								}
+
+								// Randzone
+								if (an.RzValues != null) {
+									PointF prevPoint = PointF.Empty;
+									for (int i = 0; i < an.RzValues.Length; i++) {
+										PointF p = new PointF(x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight / 2 * an.RzValues[i]);
+										// draw circle
+										g.DrawEllipse(pen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
+										// draw line
+										if (!prevPoint.IsEmpty) {
+											g.DrawLine(pen, prevPoint, p);
+										}
+										prevPoint = p;
 									}
-									prevPoint = p;
+								}
+
+								// Aufenthaltszone
+								int y0Az = y0Rz + 5 + rectangle.Height / 3;
+								int azGridHeight = (rectangle.Height / 3) * 2 - topOffset - bottomOffset;
+
+								if (an.AzValues != null) {
+									PointF prevPoint = PointF.Empty;
+									for (int i = 0; i < an.AzValues.Length; i++) {
+										PointF p = new PointF(x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight / 6 * an.AzValues[i]);
+										// draw circle
+										g.DrawEllipse(pen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
+										// draw line
+										if (!prevPoint.IsEmpty) {
+											g.DrawLine(pen, prevPoint, p);
+										}
+										prevPoint = p;
+									}
 								}
 							}
-
-							// Aufenthaltszone
-							int y0Az = y0Rz + 5 + rectangle.Height / 3;
-						    int azGridHeight = (rectangle.Height / 3) * 2 - topOffset - bottomOffset;
-
-							if (an.AzValues != null) {
-								PointF prevPoint = PointF.Empty;
-								for (int i = 0; i < an.AzValues.Length; i++) {
-									PointF p = new PointF(x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight / 6 * an.AzValues[i]);
-									// draw circle
-									g.DrawEllipse(pen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
-									// draw line
-									if (!prevPoint.IsEmpty) {
-										g.DrawLine(pen, prevPoint, p);
-									}
-									prevPoint = p;
-								}
-							}
-						} 
+						}
 					}
 				}
 
@@ -296,10 +321,32 @@ namespace Europlan.Common {
 		}
 
 		private void treeProducts_AfterCheck(object sender, TreeViewEventArgs e) {
-			graphicsPanel.Invalidate();
+			if (e.Node is AuslegeNode) {
+				if (!checkStateUpdating) {
+					graphicsPanel.Invalidate();
+				}
+			} else {
+				if (!checkStateUpdating) {
+					checkStateUpdating = true;
+					foreach (TreeNode node in e.Node.Nodes) {
+						node.Checked = e.Node.Checked;
+						if (node.Nodes.Count > 0) {
+							foreach (TreeNode n in node.Nodes) {
+								n.Checked = e.Node.Checked;
+							}
+						}
+					}
+					checkStateUpdating = false;
+					graphicsPanel.Invalidate();
+				}
+			}
 		}
 
 		private void treeProducts_AfterSelect(object sender, TreeViewEventArgs e) {
+			graphicsPanel.Invalidate();
+		}
+
+		private void chk_CheckStateChanged(object sender, EventArgs e) {
 			graphicsPanel.Invalidate();
 		}
 
