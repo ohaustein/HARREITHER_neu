@@ -120,6 +120,8 @@ namespace Europlan.Common {
 			this.Controls.Add(this.chkEuroval);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.label1);
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "AuslegeAssistentForm";
 			this.Text = "Auslegehilfe";
 			this.Load += new System.EventHandler(this.AuslegeAssistentForm_Load);
