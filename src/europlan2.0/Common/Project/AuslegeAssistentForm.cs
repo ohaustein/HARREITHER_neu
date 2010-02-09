@@ -87,20 +87,20 @@ namespace Europlan.Common {
 				stringFormat.Alignment = StringAlignment.Center;
 
 				//Randzone
-				int x0 = rectangle.X + 5;
-				int y0Rz = rectangle.Y + 5;
-				int leftOffset = 45;
-				int rightOffset = 45;
-				int topOffset = 30;
-				int bottomOffset = 35;
-				int rzGridHeight = (rectangle.Height / 3) - topOffset - bottomOffset;
-				int gridWidth = rectangle.Width - leftOffset - rightOffset;
+				float x0 = rectangle.X + 5;
+				float y0Rz = rectangle.Y + 5;
+				float leftOffset = 45;
+				float rightOffset = 45;
+				float topOffset = 30;
+				float bottomOffset = 35;
+				float rzGridHeight = (rectangle.Height / 3) - topOffset - bottomOffset;
+				float gridWidth = rectangle.Width - leftOffset - rightOffset;
 				g.DrawString("Randzone", graphicsPanel.Font, Brushes.Black, x0, y0Rz);
 
 				int count = 2;
 				int layDistance = 5;
 				for (int i = 0; i <= count; i++) {
-					g.DrawLine(Pens.Black, x0 + leftOffset - 2, y0Rz + topOffset + (i * rzGridHeight / count), x0 + leftOffset + gridWidth + 2, y0Rz + topOffset + +(i * rzGridHeight / count));
+					g.DrawLine(Pens.Black, (float)(x0 + leftOffset - 2), (float)(y0Rz + topOffset + (i * rzGridHeight / count)), (float)(x0 + leftOffset + gridWidth + 2), (float)(y0Rz + topOffset + (i * rzGridHeight / count)));
 					g.DrawString("EV" + layDistance.ToString(), graphicsPanel.Font, Brushes.Black, x0 + 5, y0Rz + topOffset + (i * rzGridHeight / count) - graphicsPanel.Font.SizeInPoints / 2);
 					layDistance += 5;
 				}
@@ -118,9 +118,9 @@ namespace Europlan.Common {
 					}
 					if (i > 0 && i < 20) {
 						if (i % 2 == 0) {
-							g.DrawLine(dashPen, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset - 2, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight + 2);
+							g.DrawLine(dashPen, (float)x0 + leftOffset + (i * gridWidth / 20), (float)y0Rz + topOffset - 2, (float)x0 + leftOffset + (i * gridWidth / 20), (float)y0Rz + topOffset + rzGridHeight + 2);
 						} else {
-							g.DrawLine(Pens.Black, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight - 2, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight + 2);
+							g.DrawLine(Pens.Black, (float)x0 + leftOffset + (i * gridWidth / 20), (float)y0Rz + topOffset + rzGridHeight - 2, (float)x0 + leftOffset + (i * gridWidth / 20), (float)y0Rz + topOffset + rzGridHeight + 2);
 						}
 					}
 					temperature++;
@@ -128,14 +128,14 @@ namespace Europlan.Common {
 
 
 				//Aufenthaltszone
-				int y0Az = y0Rz + 5 + rectangle.Height / 3;
-				int azGridHeight = (rectangle.Height / 3) * 2 - topOffset - bottomOffset;
+				float y0Az = y0Rz + 5 + rectangle.Height / 3;
+				float azGridHeight = (rectangle.Height / 3) * 2 - topOffset - bottomOffset;
 				g.DrawString("Aufenthaltszone", graphicsPanel.Font, Brushes.Black, x0, y0Az);
 
 				count = 6;
 				layDistance = 5;
 				for (int i = 0; i <= count; i++) {
-					g.DrawLine(Pens.Black, x0 + leftOffset - 2, y0Az + topOffset + (i * azGridHeight / count), x0 + leftOffset + gridWidth + 2, y0Az + topOffset + +(i * azGridHeight / count));
+					g.DrawLine(Pens.Black, (float)(x0 + leftOffset - 2), (float)(y0Az + topOffset + (i * azGridHeight / count)), (float)(x0 + leftOffset + gridWidth + 2), (float)(y0Az + topOffset + +(i * azGridHeight / count)));
 					g.DrawString("EV" + layDistance.ToString(), graphicsPanel.Font, Brushes.Black, x0 + 5, y0Az + topOffset + (i * azGridHeight / count) - graphicsPanel.Font.SizeInPoints / 2);
 					layDistance += 5;
 				}
@@ -153,9 +153,9 @@ namespace Europlan.Common {
 					}
 					if (i > 0 && i < 20) {
 						if (i % 2 == 0) {
-							g.DrawLine(dashPen, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset - 2, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight + 2);
+							g.DrawLine(dashPen, (float)(x0 + leftOffset + (i * gridWidth / 20)), (float)y0Az + topOffset - 2, (float)x0 + leftOffset + (i * gridWidth / 20), (float)y0Az + topOffset + azGridHeight + 2);
 						} else {
-							g.DrawLine(Pens.Black, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight - 2, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight + 2);
+							g.DrawLine(Pens.Black, (float)(x0 + leftOffset + (i * gridWidth / 20)), (float)y0Az + topOffset + azGridHeight - 2, (float)x0 + leftOffset + (i * gridWidth / 20), (float)y0Az + topOffset + azGridHeight + 2);
 						}
 					}
 					temperature++;
@@ -170,14 +170,14 @@ namespace Europlan.Common {
 				Pen boldPen = new Pen(Brushes.Red);
 				boldPen.Width = (float)2.5;
 
-				int x0 = rectangle.X + 5;
-				int y0Rz = rectangle.Y + 5;
-				int leftOffset = 45;
-				int rightOffset = 45;
-				int topOffset = 30;
-				int bottomOffset = 35;
-				int rzGridHeight = (rectangle.Height / 3) - topOffset - bottomOffset;
-				int gridWidth = rectangle.Width - leftOffset - rightOffset;
+				float x0 = rectangle.X + 5;
+				float y0Rz = rectangle.Y + 5;
+				float leftOffset = 45;
+				float rightOffset = 45;
+				float topOffset = 30;
+				float bottomOffset = 35;
+				float rzGridHeight = (rectangle.Height / 3) - topOffset - bottomOffset;
+				float gridWidth = rectangle.Width - leftOffset - rightOffset;
 
 				float radius = (float)2.5;
 
@@ -217,8 +217,8 @@ namespace Europlan.Common {
 								}
 
 								// Aufenthaltszone
-								int y0Az = y0Rz + 5 + rectangle.Height / 3;
-								int azGridHeight = (rectangle.Height / 3) * 2 - topOffset - bottomOffset;
+								float y0Az = y0Rz + 5 + rectangle.Height / 3;
+								float azGridHeight = (rectangle.Height / 3) * 2 - topOffset - bottomOffset;
 
 								if (an.AzValues != null) {
 									PointF prevPoint = PointF.Empty;
