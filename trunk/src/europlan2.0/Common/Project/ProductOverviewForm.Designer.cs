@@ -44,7 +44,6 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvProductOverview = new System.Windows.Forms.DataGridView();
-			this.editColumn = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.roomIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.roomNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.teilSystemDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +60,7 @@ namespace Europlan.Common {
 			this.coolNetLoadDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.coolRestDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.okDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.editColumn = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.productOverviewWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -118,15 +118,6 @@ namespace Europlan.Common {
 			this.dgvProductOverview.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvProductOverview_CellPainting);
 			this.dgvProductOverview.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductOverview_CellClick);
 			this.dgvProductOverview.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductOverview_CellEnter);
-			// 
-			// editColumn
-			// 
-			this.editColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.editColumn.HeaderText = "Bearbeiten";
-			this.editColumn.Name = "editColumn";
-			this.editColumn.Text = "...";
-			this.editColumn.UseColumnTextForButtonValue = true;
-			this.editColumn.Width = 64;
 			// 
 			// roomIdDataGridViewTextBoxColumn
 			// 
@@ -341,6 +332,15 @@ namespace Europlan.Common {
 			this.okDataGridViewCheckBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.okDataGridViewCheckBoxColumn.Width = 27;
 			// 
+			// editColumn
+			// 
+			this.editColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.editColumn.HeaderText = "Bearbeiten";
+			this.editColumn.Name = "editColumn";
+			this.editColumn.Text = "...";
+			this.editColumn.UseColumnTextForButtonValue = true;
+			this.editColumn.Width = 64;
+			// 
 			// productOverviewWrapperBindingSource
 			// 
 			this.productOverviewWrapperBindingSource.DataSource = typeof(Europlan.Common.ProductOverviewWrapper);
@@ -369,6 +369,7 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(710, 341);
 			this.Controls.Add(this.dgvProductOverview);
+			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ProductOverviewForm";
 			this.Text = "Übersicht";
