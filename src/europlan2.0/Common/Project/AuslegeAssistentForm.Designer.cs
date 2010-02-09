@@ -74,7 +74,6 @@ namespace Europlan.Common {
 			this.treeProducts.TabIndex = 0;
 			this.treeProducts.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeProducts_AfterCheck);
 			this.treeProducts.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeProducts_AfterSelect);
-			this.treeProducts.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeProducts_BeforeSelect);
 			// 
 			// graphicsPanel
 			// 

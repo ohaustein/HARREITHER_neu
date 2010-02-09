@@ -321,11 +321,5 @@ namespace Europlan.Common {
 			graphicsPanel.Invalidate();
 		}
 
-		private void treeProducts_BeforeSelect(object sender, TreeViewCancelEventArgs e) {
-			e.Cancel = (e.Node.ForeColor == SystemColors.GrayText);
-		}
-
-
-
 	}
 }
