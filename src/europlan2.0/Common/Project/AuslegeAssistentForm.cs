@@ -67,7 +67,7 @@ namespace Europlan.Common {
 					}
 				}
 			}
-			
+			rootNode.Checked = true;
 			treeProducts.ExpandAll();
 		}
 
@@ -90,7 +90,7 @@ namespace Europlan.Common {
 				int x0 = rectangle.X + 5;
 				int y0Rz = rectangle.Y + 5;
 				int leftOffset = 45;
-				int rightOffset = 40;
+				int rightOffset = 45;
 				int topOffset = 30;
 				int bottomOffset = 35;
 				int rzGridHeight = (rectangle.Height / 3) - topOffset - bottomOffset;
@@ -109,10 +109,12 @@ namespace Europlan.Common {
 				// 50°C
 				g.DrawLine(Pens.Black, x0 + leftOffset + gridWidth, y0Rz + topOffset - 2, x0 + leftOffset + gridWidth, y0Rz + topOffset + rzGridHeight + 2);
 
+				g.DrawString("Tv\n°C", graphicsPanel.Font, Brushes.Black, x0 + leftOffset + gridWidth + 10, y0Rz + topOffset + rzGridHeight - 10);
+
 				temperature = 30;
 				for (int i = 0; i <= 20; i++) {
 					if (i % 2 == 0) {
-						g.DrawString(temperature.ToString(), graphicsPanel.Font, Brushes.Black, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight + 5, stringFormat);
+						g.DrawString(temperature.ToString(), graphicsPanel.Font, Brushes.Black, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight + 10, stringFormat);
 					}
 					if (i > 0 && i < 20) {
 						if (i % 2 == 0) {
@@ -142,10 +144,12 @@ namespace Europlan.Common {
 				// 50°C
 				g.DrawLine(Pens.Black, x0 + leftOffset + gridWidth, y0Az + topOffset - 2, x0 + leftOffset + gridWidth, y0Az + topOffset + azGridHeight + 2);
 
+				g.DrawString("Tv\n°C", graphicsPanel.Font, Brushes.Black, x0 + leftOffset + gridWidth + 10, y0Az + topOffset + azGridHeight - 10);
+
 				temperature = 30;
 				for (int i = 0; i <= 20; i++) {
 					if (i % 2 == 0) {
-						g.DrawString(temperature.ToString(), graphicsPanel.Font, Brushes.Black, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight + 5, stringFormat);
+						g.DrawString(temperature.ToString(), graphicsPanel.Font, Brushes.Black, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight + 10, stringFormat);
 					}
 					if (i > 0 && i < 20) {
 						if (i % 2 == 0) {
@@ -164,12 +168,12 @@ namespace Europlan.Common {
 			if (!resizing) {
 				Pen smallPen = new Pen(Brushes.Red);
 				Pen boldPen = new Pen(Brushes.Red);
-				boldPen.Width = (float)2;
+				boldPen.Width = (float)2.5;
 
 				int x0 = rectangle.X + 5;
 				int y0Rz = rectangle.Y + 5;
 				int leftOffset = 45;
-				int rightOffset = 40;
+				int rightOffset = 45;
 				int topOffset = 30;
 				int bottomOffset = 35;
 				int rzGridHeight = (rectangle.Height / 3) - topOffset - bottomOffset;
