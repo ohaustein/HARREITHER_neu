@@ -812,5 +812,11 @@ namespace Europlan.Application {
 			form.Dispose();
 		}
 
+		private void warningsAndErrorsToolStripMenuItem_Click(object sender, EventArgs e) {
+			WarningsAndErrorsForm form = new WarningsAndErrorsForm();
+			form.ShowDialog();
+			form.Dispose();
+		}
+
 	}
 }

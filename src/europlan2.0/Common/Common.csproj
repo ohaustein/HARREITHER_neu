@@ -260,6 +260,12 @@
     <Compile Include="Project\RequiredMaterialPanel.Designer.cs">
       <DependentUpon>RequiredMaterialPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\WarningsAndErrorsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\WarningsAndErrorsForm.Designer.cs">
+      <DependentUpon>WarningsAndErrorsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\Wrapper\ProductOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\DistributorWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulBoden\ModulBodenWrapper.cs" />
@@ -639,6 +645,10 @@
     <EmbeddedResource Include="Project\SystemParametersPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SystemParametersPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\WarningsAndErrorsForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>WarningsAndErrorsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\ProjectReportOptions.resx">
       <DependentUpon>ProjectReportOptions.cs</DependentUpon>
