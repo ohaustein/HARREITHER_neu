@@ -233,66 +233,6 @@ namespace Europlan.Common {
 						}
 					}
 				}
-
-
-				//    for (int i = 0; i <= count; i++) {
-				//        g.DrawLine(Pens.Black, x0 + leftOffset - 2, y0Rz + topOffset + (i * rzGridHeight / count), x0 + leftOffset + gridWidth + 2, y0Rz + topOffset + +(i * rzGridHeight / count));
-				//        g.DrawString("EV" + layDistance.ToString(), graphicsPanel.Font, Brushes.Black, x0 + 5, y0Rz + topOffset + (i * rzGridHeight / count) - graphicsPanel.Font.SizeInPoints / 2);
-				//        layDistance += 5;
-				//    }
-				//    // 30°C
-				//    g.DrawLine(Pens.Black, x0 + leftOffset, y0Rz + topOffset - 2, x0 + leftOffset, y0Rz + topOffset + rzGridHeight + 2);
-				//    // 50°C
-				//    g.DrawLine(Pens.Black, x0 + leftOffset + gridWidth, y0Rz + topOffset - 2, x0 + leftOffset + gridWidth, y0Rz + topOffset + rzGridHeight + 2);
-
-				//    temperature = 30;
-				//    for (int i = 0; i <= 20; i++) {
-				//        if (i % 2 == 0) {
-				//            g.DrawString(temperature.ToString(), graphicsPanel.Font, Brushes.Black, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight + 5, stringFormat);
-				//        }
-				//        if (i > 0 && i < 20) {
-				//            if (i % 2 == 0) {
-				//                g.DrawLine(dashPen, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset - 2, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight + 2);
-				//            } else {
-				//                g.DrawLine(Pens.Black, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight - 2, x0 + leftOffset + (i * gridWidth / 20), y0Rz + topOffset + rzGridHeight + 2);
-				//            }
-				//        }
-				//        temperature++;
-				//    }
-
-
-				//    // Aufenthaltszone
-				//    int y0Az = y0Rz + 5 + rectangle.Height / 3;
-				//    int azGridHeight = (rectangle.Height / 3) * 2 - topOffset - bottomOffset;
-				//    g.DrawString("Aufenthaltszone", graphicsPanel.Font, Brushes.Black, x0, y0Az);
-
-				//    count = 6;
-				//    layDistance = 5;
-				//    for (int i = 0; i <= count; i++) {
-				//        g.DrawLine(Pens.Black, x0 + leftOffset - 2, y0Az + topOffset + (i * azGridHeight / count), x0 + leftOffset + gridWidth + 2, y0Az + topOffset + +(i * azGridHeight / count));
-				//        g.DrawString("EV" + layDistance.ToString(), graphicsPanel.Font, Brushes.Black, x0 + 5, y0Az + topOffset + (i * azGridHeight / count) - graphicsPanel.Font.SizeInPoints / 2);
-				//        layDistance += 5;
-				//    }
-				//    // 30°C
-				//    g.DrawLine(Pens.Black, x0 + leftOffset, y0Az + topOffset - 2, x0 + leftOffset, y0Az + topOffset + azGridHeight + 2);
-				//    // 50°C
-				//    g.DrawLine(Pens.Black, x0 + leftOffset + gridWidth, y0Az + topOffset - 2, x0 + leftOffset + gridWidth, y0Az + topOffset + azGridHeight + 2);
-
-				//    temperature = 30;
-				//    for (int i = 0; i <= 20; i++) {
-				//        if (i % 2 == 0) {
-				//            g.DrawString(temperature.ToString(), graphicsPanel.Font, Brushes.Black, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight + 5, stringFormat);
-				//        }
-				//        if (i > 0 && i < 20) {
-				//            if (i % 2 == 0) {
-				//                g.DrawLine(dashPen, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset - 2, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight + 2);
-				//            } else {
-				//                g.DrawLine(Pens.Black, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight - 2, x0 + leftOffset + (i * gridWidth / 20), y0Az + topOffset + azGridHeight + 2);
-				//            }
-				//        }
-				//        temperature++;
-				//    }
-				//}
 			}
 		}
 
