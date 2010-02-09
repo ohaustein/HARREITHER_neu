@@ -267,11 +267,20 @@ namespace Europlan.Common {
 		private void treeProducts_AfterCheck(object sender, TreeViewEventArgs e) {
 			if (e.Node is AuslegeNode) {
 				if (!checkStateUpdating) {
+					if (!e.Node.Checked) {
+						checkStateUpdating = true;
+						e.Node.Parent.Checked = false;
+						e.Node.Parent.Parent.Checked = false;
+						checkStateUpdating = false;
+					}
 					graphicsPanel.Invalidate();
 				}
 			} else {
 				if (!checkStateUpdating) {
 					checkStateUpdating = true;
+					if (!e.Node.Checked && e.Node.Parent != null) {
+						e.Node.Parent.Checked = false;
+					}
 					foreach (TreeNode node in e.Node.Nodes) {
 						node.Checked = e.Node.Checked;
 						if (node.Nodes.Count > 0) {
