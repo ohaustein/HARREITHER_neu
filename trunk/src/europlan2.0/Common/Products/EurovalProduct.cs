@@ -1945,12 +1945,12 @@ namespace Europlan.Common {
 					this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH)) {
 					// Eco 30
 					if (!anhydritEstrich) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "EV34", totalArea * 0.2);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "EV34", (totalArea + this.PlannedAreaUnheated) * 0.2);
 					}
 					// Randdämmstreifen
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "EV30", totalArea);
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "EV30", (totalArea + this.PlannedAreaUnheated));
 					// PE Folie
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "EV31", totalArea * 1.1);
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "EV31", (totalArea + this.PlannedAreaUnheated) * 1.1);
 				}
 			}
 
@@ -1958,7 +1958,7 @@ namespace Europlan.Common {
 			if (this.HasOutsideConstruction) {
 				foreach (ConstructionLayer layer in this.PlannedOutsideConstruction.Layers) {
 					if (layer.LayerMaterial != null) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, layer.LayerMaterial.Id, this.PlannedFloorArea);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, layer.LayerMaterial.Id, this.PlannedFloorArea + this.PlannedAreaUnheated);
 					}
 				}
 			}
