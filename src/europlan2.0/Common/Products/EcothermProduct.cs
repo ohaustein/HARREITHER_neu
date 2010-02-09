@@ -1896,8 +1896,17 @@ namespace Europlan.Common {
 					this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH)) {
 
 					// EZ 70
-					if (!anhydritEstrich) {					
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "EC08", totalArea * 0.2);
+					if (!anhydritEstrich) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "EC08", (totalArea + this.PlannedAreaUnheated) * 0.2);
+					}
+				}
+			}
+
+			// Dämmung
+			if (this.HasOutsideConstruction) {
+				foreach (ConstructionLayer layer in this.PlannedOutsideConstruction.Layers) {
+					if (layer.LayerMaterial != null) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, layer.LayerMaterial.Id, this.PlannedFloorArea + this.PlannedAreaUnheated);
 					}
 				}
 			}
