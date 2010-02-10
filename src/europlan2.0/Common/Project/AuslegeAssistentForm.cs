@@ -17,22 +17,20 @@ namespace Europlan.Common {
 
 		public AuslegeAssistentForm() {
 			InitializeComponent();
+		
+			ConfigureTree();
 
-			
-			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
-				chkEuroval.Text = new EurovalProduct().FullName;
-			} else {
+			chkEuroval.Text = new EurovalProduct().FullName;
+			chkEcotherm.Text = new EcothermProduct().FullName;
+
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
 				chkEuroval.Checked = false;
 				chkEuroval.Enabled = false;
 			}
-			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
-				chkEcotherm.Text = new EcothermProduct().FullName;
-			} else {
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
 				chkEcotherm.Checked = false;
 				chkEcotherm.Enabled = false;
 			}
-			
-			ConfigureTree();
 		}
 
 		private void ConfigureTree() {
