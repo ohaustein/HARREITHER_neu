@@ -16,6 +16,7 @@ namespace Europlan.Common {
 		private string distributorId = null;
 		private string otherProductId = null;
 		private Circuit.CircuitConnectionTypeEnum circuitConnectionType = Circuit.CircuitConnectionTypeEnum.VORLAUF;
+		private bool userDefined = false;
 
 		public Circuit.CircuitConnectionTypeEnum CircuitConnectionType {
 			get { return this.circuitConnectionType; }
@@ -169,6 +170,11 @@ namespace Europlan.Common {
 				return "Anschluﬂ an " + this.OtherProduct.System + " in " + this.OtherProduct.Product.AssociatedRoom.Id + ": " + this.OtherProduct.Product.AssociatedRoom.Name;
 			}
 			return "";
+		}
+
+		public bool UserDefined {
+			get { return this.userDefined; }
+			set { this.userDefined = value; }
 		}
 
 	}

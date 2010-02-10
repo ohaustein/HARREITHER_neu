@@ -1423,7 +1423,18 @@ namespace Europlan.Common {
 					this.incompleteCalculation = true;
 					return false;
 				}
+				bool userDefinedOk = true;
+				foreach (Circuit.CircuitConnection cc in this.inverseConnectedCircuits.Values) {
+					if (cc.OtherCircuit == null) {
+						userDefinedOk = false;
+					}
+				}
 				this.CorrectCircuits(this.requestedCircuits.Value, false);
+				if (!userDefinedOk) {
+					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.incompleteCalculation = true;
+					return false;
+				}
 			}
 
 			double areaRemovedDueConnection = 0;
@@ -1755,7 +1766,7 @@ namespace Europlan.Common {
 			List<KeyValuePair<int, Circuit.CircuitConnection>> remove = new List<KeyValuePair<int, Circuit.CircuitConnection>>();
 			if (cleanupConnected) {
 				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
-					if (kvp.Key >= circuitCount) {
+					if (kvp.Key >= circuitCount && !kvp.Value.UserDefined) {
 						remove.Add(kvp);
 					}
 				}
@@ -1771,7 +1782,7 @@ namespace Europlan.Common {
 			}
 			remove.Clear();
 			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.inverseConnectedCircuits) {
-				if (kvp.Key >= circuitCount) {
+				if (kvp.Key >= circuitCount && !kvp.Value.UserDefined) {
 					remove.Add(kvp);
 				}
 			}
@@ -1799,8 +1810,8 @@ namespace Europlan.Common {
 						return "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
 					}
 					j--;
-					this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, ec));
-					this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct.Product.PlannedCircuits[j]));
+					this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, ec, false));
+					this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct.Product.PlannedCircuits[j], false));
 				}
 				this.circuits.Add(ec);
 			}
@@ -1816,8 +1827,8 @@ namespace Europlan.Common {
 							}
 						}
 						if (c != null) {
-							this.inverseConnectedCircuits.Add(i, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, c));
-							this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(c.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.circuits[i]));
+							this.inverseConnectedCircuits.Add(i, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, c, false));
+							this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(c.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.circuits[i], false));
 						}
 					}
 				}
@@ -1980,6 +1991,9 @@ namespace Europlan.Common {
 				foreach (ExtendedCorrections ec in this.PlannedCorrectionList) {
 					ec.EcothermProduct = this;
 					ec.CircuitNr = i++;
+				}
+				foreach (EcothermCircuit ec in this.circuits) {
+					ec.EcothermProduct = this;
 				}
 			}
 		}

@@ -18,6 +18,12 @@ namespace Europlan.Common {
 		}
 
 		public class CircuitConnection {
+			private bool userDefined = false;
+			public bool UserDefined {
+				get { return this.userDefined; }
+				set { this.userDefined = value; }
+			}
+
 			private CircuitConnectionTypeEnum type;
 			public CircuitConnectionTypeEnum CircuitConnectionType {
 				get { return type; }
@@ -36,6 +42,14 @@ namespace Europlan.Common {
 			private PlannedProduct otherProduct;
 			[XmlIgnore]
 			public Product OtherProduct {
+				get {
+					return OtherPlannedProduct.Product;
+				}
+				/*set { otherProduct = value; }*/
+			}
+
+			[XmlIgnore]
+			public PlannedProduct OtherPlannedProduct {
 				get {
 					if (this.otherProductId != null) {
 						this.otherProduct = null;
@@ -58,9 +72,8 @@ namespace Europlan.Common {
 						}
 						this.otherProductId = null;
 					}
-					return otherProduct.Product;
+					return this.otherProduct;
 				}
-				/*set { otherProduct = value; }*/
 			}
 
 			private string otherProductId;
@@ -78,9 +91,20 @@ namespace Europlan.Common {
 			public CircuitConnection() {
 			}
 
-			public CircuitConnection(CircuitConnectionTypeEnum type, Circuit otherCircuit) {
+			public CircuitConnection(CircuitConnectionTypeEnum type, Circuit otherCircuit, bool userDefined) {
 				this.type = type;
 				this.OtherCircuit = otherCircuit;
+			}
+
+			public CircuitConnection(CircuitConnectionTypeEnum type, PlannedProduct otherProduct, int otherCircuitId, bool userDefined) {
+				this.type = type;
+				if (otherProduct.Product.PlannedCircuits.Count > otherCircuitId) {
+					this.OtherCircuit = otherProduct.Product.PlannedCircuits[otherCircuitId];
+				} else {
+					this.otherProductId = otherProduct.Id;
+					this.otherCircuitId = otherCircuitId;
+				}
+				this.userDefined = userDefined;
 			}
 		}
 
