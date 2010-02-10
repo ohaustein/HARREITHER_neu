@@ -883,6 +883,15 @@ namespace Europlan.Common {
 		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung);
 
 		internal virtual void FinalizeLoading(PlannedProduct pp) {
+			/*if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.inverseConnectedCircuits) {
+					kvp.Value.OtherProductId = this.PlannedConnection.OtherProductId;
+					Circuit.CircuitConnection cc = kvp.Value.OtherProduct.ConnectedCircuits[kvp.Value.OtherCircuitId];
+					if (cc != null) {
+						cc.OtherProductId = pp.Id;
+					}
+				}
+			}*/
 			foreach (Circuit c in this.circuits) {
 				c.FinalizeLoading();
 			}
@@ -930,7 +939,7 @@ namespace Europlan.Common {
 			ruecklaufWithoutOtherProductNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };
 
 			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
-				if (kvp.Value != null) {
+				if (kvp.Value != null && kvp.Value.OtherCircuit != null) {
 					if (kvp.Value.CircuitConnectionType == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
 						vorlaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProduct;
 						vorlaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProductNotIsolated;
@@ -942,7 +951,7 @@ namespace Europlan.Common {
 			}
 
 			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.inverseConnectedCircuits) {
-				if (kvp.Value != null) {
+				if (kvp.Value != null && kvp.Value.OtherCircuit != null) {
 					if (kvp.Value.CircuitConnectionType == Circuit.CircuitConnectionTypeEnum.VORLAUF) {
 						ruecklaufTotal[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProduct - kvp.Value.OtherCircuit.PipeLengthVorlaufWithoutOtherProductTotal;
 						ruecklaufNotIsolated[kvp.Key] += kvp.Value.OtherCircuit.PipeLengthWithoutOtherProductNotIsolated - kvp.Value.OtherCircuit.PipeLengthVorlaufWithoutOtherProductNotIsolated;

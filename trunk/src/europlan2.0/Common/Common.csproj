@@ -676,6 +676,7 @@
     <None Include="Properties\DataSources\RequiredMaterialWrapper.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\DataSources\RoomType.datasource" />
+    <None Include="Properties\DataSources\SelectConnectionForProductForm.UserDefinedConnection.datasource" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />

@@ -1462,6 +1462,7 @@ namespace Europlan.Common {
 						c++;
 					}
 				}
+				this.CorrectCircuits(this.requestedCircuits.Value, false);
 				if (!this.requestedCircuits.HasValue || c < this.requestedCircuits.Value) {
 					/*if (this.requestedCircuits.HasValue) {
 						// TODO reset circuits
@@ -1472,7 +1473,17 @@ namespace Europlan.Common {
 					this.incompleteCalculation = true;
 					return false;
 				}
-				this.CorrectCircuits(this.requestedCircuits.Value, false);
+				bool userDefinedOk = true;
+				foreach (Circuit.CircuitConnection cc in this.inverseConnectedCircuits.Values) {
+					if (cc.OtherCircuit == null) {
+						userDefinedOk = false;
+					}
+				}
+				if (!userDefinedOk) {
+					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.incompleteCalculation = true;
+					return false;
+				}
 			}
 
 			double areaRemovedDueConnection = 0;
@@ -1798,13 +1809,14 @@ namespace Europlan.Common {
 		}
 
 		private string CorrectCircuits(int circuitCount, bool cleanupConnected) {
+			string error = null;
 			if (this.circuits.Count > circuitCount) {
 				this.circuits.RemoveRange(circuitCount, this.circuits.Count - circuitCount);
 			}
 			List<KeyValuePair<int, Circuit.CircuitConnection>> remove = new List<KeyValuePair<int, Circuit.CircuitConnection>>();
 			if (cleanupConnected) {
 				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
-					if (kvp.Key >= circuitCount) {
+					if (kvp.Key >= circuitCount && !kvp.Value.UserDefined) {
 						remove.Add(kvp);
 					}
 				}
@@ -1845,11 +1857,16 @@ namespace Europlan.Common {
 						j++;
 					}
 					if (!found) {
-						return "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+						error = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					} else {
+						j--;
 					}
-					j--;
-					this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, ec));
-					this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct.Product.PlannedCircuits[j]));
+					this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, ec, false));
+					if (this.plannedConnection.OtherProduct.Product.PlannedCircuits.Count > j) {
+						this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct.Product.PlannedCircuits[j], this.plannedConnection.UserDefined));
+					} else {
+						this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct, j, this.plannedConnection.UserDefined));
+					}
 				}
 				this.circuits.Add(ec);
 			}
@@ -1865,13 +1882,13 @@ namespace Europlan.Common {
 							}
 						}
 						if (c != null) {
-							this.inverseConnectedCircuits.Add(i, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, c));
-							this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(c.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.circuits[i]));
+							this.inverseConnectedCircuits.Add(i, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, c, false));
+							this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(c.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.circuits[i], false));
 						}
 					}
 				}
 			}
-			return null;
+			return error;
 		}
 
 		[XmlIgnore]
@@ -2035,6 +2052,9 @@ namespace Europlan.Common {
 				foreach (ExtendedCorrections ec in this.PlannedCorrectionList) {
 					ec.EurovalProduct = this;
 					ec.CircuitNr = i++;
+				}
+				foreach (EurovalCircuit ec in this.circuits) {
+					ec.EurovalProduct = this;
 				}
 			}
 		}

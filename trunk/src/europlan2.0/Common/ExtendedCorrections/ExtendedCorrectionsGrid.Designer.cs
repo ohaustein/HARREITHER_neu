@@ -33,9 +33,9 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridExtendedCorrections = new System.Windows.Forms.DataGridView();
-			this.extendedCorrectionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.rbExtendedCorrections = new System.Windows.Forms.RadioButton();
 			this.rbStandardCorrections = new System.Windows.Forms.RadioButton();
+			this.extendedCorrectionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.CircuitNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.correctAreaDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -57,6 +57,8 @@ namespace Europlan.Common {
 			// gridExtendedCorrections
 			// 
 			this.gridExtendedCorrections.AllowUserToAddRows = false;
+			this.gridExtendedCorrections.AllowUserToDeleteRows = false;
+			this.gridExtendedCorrections.AllowUserToResizeColumns = false;
 			this.gridExtendedCorrections.AllowUserToResizeRows = false;
 			this.gridExtendedCorrections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
@@ -91,16 +93,13 @@ namespace Europlan.Common {
 			this.gridExtendedCorrections.Location = new System.Drawing.Point(0, 49);
 			this.gridExtendedCorrections.MultiSelect = false;
 			this.gridExtendedCorrections.Name = "gridExtendedCorrections";
+			this.gridExtendedCorrections.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.gridExtendedCorrections.Size = new System.Drawing.Size(845, 407);
 			this.gridExtendedCorrections.TabIndex = 5;
 			this.gridExtendedCorrections.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridExtendedCorrections_CellValueChanged);
 			this.gridExtendedCorrections.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridExtendedCorrections_RowsAdded);
 			this.gridExtendedCorrections.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.gridExtendedCorrections_CellPainting_1);
 			this.gridExtendedCorrections.CurrentCellDirtyStateChanged += new System.EventHandler(this.gridExtendedCorrections_CurrentCellDirtyStateChanged);
-			// 
-			// extendedCorrectionsBindingSource
-			// 
-			this.extendedCorrectionsBindingSource.DataSource = typeof(Europlan.Common.ExtendedCorrections);
 			// 
 			// rbExtendedCorrections
 			// 
@@ -125,6 +124,10 @@ namespace Europlan.Common {
 			this.rbStandardCorrections.Text = "nur Standardkorrekturen verwenden (keine erweiterten Korrekturen)";
 			this.rbStandardCorrections.UseVisualStyleBackColor = true;
 			// 
+			// extendedCorrectionsBindingSource
+			// 
+			this.extendedCorrectionsBindingSource.DataSource = typeof(Europlan.Common.ExtendedCorrections);
+			// 
 			// dataGridViewTextBoxColumn1
 			// 
 			this.dataGridViewTextBoxColumn1.DataPropertyName = "CircuitNr";
@@ -138,6 +141,7 @@ namespace Europlan.Common {
 			// CircuitNr
 			// 
 			this.CircuitNr.DataPropertyName = "CircuitNr";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
 			this.CircuitNr.DefaultCellStyle = dataGridViewCellStyle2;
 			this.CircuitNr.FillWeight = 40F;
@@ -242,7 +246,6 @@ namespace Europlan.Common {
 			this.rimCornersValueDataGridViewTextBoxColumn.FillWeight = 55F;
 			this.rimCornersValueDataGridViewTextBoxColumn.HeaderText = "Anzahl\nEcken";
 			this.rimCornersValueDataGridViewTextBoxColumn.Name = "rimCornersValueDataGridViewTextBoxColumn";
-			this.rimCornersValueDataGridViewTextBoxColumn.ReadOnly = true;
 			this.rimCornersValueDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.rimCornersValueDataGridViewTextBoxColumn.Width = 55;
 			// 

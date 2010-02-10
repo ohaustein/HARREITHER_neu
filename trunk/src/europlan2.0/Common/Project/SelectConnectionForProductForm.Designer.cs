@@ -23,6 +23,10 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tvDistributors = new System.Windows.Forms.TreeView();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
@@ -31,14 +35,26 @@ namespace Europlan.Common {
 			this.grpConnection = new System.Windows.Forms.GroupBox();
 			this.rbRuecklauf = new System.Windows.Forms.RadioButton();
 			this.rbVorlauf = new System.Windows.Forms.RadioButton();
+			this.grpUserDefinedConnection = new System.Windows.Forms.GroupBox();
+			this.gridUserDefinedConnection = new System.Windows.Forms.DataGridView();
+			this.hk1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.hk2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.userDefinedConnectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.cbActivateUserDefinedConnection = new System.Windows.Forms.CheckBox();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.grpInfo.SuspendLayout();
 			this.grpConnection.SuspendLayout();
+			this.grpUserDefinedConnection.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridUserDefinedConnection)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.userDefinedConnectionBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tvDistributors
 			// 
 			this.tvDistributors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.tvDistributors.HideSelection = false;
 			this.tvDistributors.Location = new System.Drawing.Point(12, 12);
 			this.tvDistributors.Name = "tvDistributors";
 			this.tvDistributors.Size = new System.Drawing.Size(300, 422);
@@ -120,6 +136,103 @@ namespace Europlan.Common {
 			this.rbVorlauf.Text = "vorlaufseitig";
 			this.rbVorlauf.UseVisualStyleBackColor = true;
 			// 
+			// grpUserDefinedConnection
+			// 
+			this.grpUserDefinedConnection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.grpUserDefinedConnection.Controls.Add(this.gridUserDefinedConnection);
+			this.grpUserDefinedConnection.Controls.Add(this.cbActivateUserDefinedConnection);
+			this.grpUserDefinedConnection.Enabled = false;
+			this.grpUserDefinedConnection.Location = new System.Drawing.Point(318, 151);
+			this.grpUserDefinedConnection.Name = "grpUserDefinedConnection";
+			this.grpUserDefinedConnection.Size = new System.Drawing.Size(372, 283);
+			this.grpUserDefinedConnection.TabIndex = 5;
+			this.grpUserDefinedConnection.TabStop = false;
+			this.grpUserDefinedConnection.Text = "Benuzerdefinierte Zuordnung (nur bei Anschluﬂ an anderen Heizkreis)";
+			// 
+			// gridUserDefinedConnection
+			// 
+			this.gridUserDefinedConnection.AllowUserToAddRows = false;
+			this.gridUserDefinedConnection.AllowUserToDeleteRows = false;
+			this.gridUserDefinedConnection.AllowUserToResizeRows = false;
+			this.gridUserDefinedConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.gridUserDefinedConnection.AutoGenerateColumns = false;
+			this.gridUserDefinedConnection.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridUserDefinedConnection.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this.gridUserDefinedConnection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridUserDefinedConnection.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.hk1DataGridViewTextBoxColumn,
+            this.hk2DataGridViewTextBoxColumn});
+			this.gridUserDefinedConnection.DataSource = this.userDefinedConnectionBindingSource;
+			this.gridUserDefinedConnection.Location = new System.Drawing.Point(6, 49);
+			this.gridUserDefinedConnection.Name = "gridUserDefinedConnection";
+			this.gridUserDefinedConnection.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.gridUserDefinedConnection.Size = new System.Drawing.Size(360, 228);
+			this.gridUserDefinedConnection.TabIndex = 1;
+			this.gridUserDefinedConnection.Visible = false;
+			this.gridUserDefinedConnection.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridUserDefinedConnection_CellValueChanged);
+			this.gridUserDefinedConnection.CurrentCellDirtyStateChanged += new System.EventHandler(this.gridUserDefinedConnection_CurrentCellDirtyStateChanged);
+			// 
+			// hk1DataGridViewTextBoxColumn
+			// 
+			this.hk1DataGridViewTextBoxColumn.DataPropertyName = "Hk1";
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+			this.hk1DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+			this.hk1DataGridViewTextBoxColumn.HeaderText = "Heizkreis in";
+			this.hk1DataGridViewTextBoxColumn.Name = "hk1DataGridViewTextBoxColumn";
+			this.hk1DataGridViewTextBoxColumn.ReadOnly = true;
+			this.hk1DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			// 
+			// hk2DataGridViewTextBoxColumn
+			// 
+			this.hk2DataGridViewTextBoxColumn.DataPropertyName = "Hk2";
+			this.hk2DataGridViewTextBoxColumn.HeaderText = "Heizkreis in";
+			this.hk2DataGridViewTextBoxColumn.Name = "hk2DataGridViewTextBoxColumn";
+			this.hk2DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			// 
+			// userDefinedConnectionBindingSource
+			// 
+			this.userDefinedConnectionBindingSource.DataSource = typeof(Europlan.Common.SelectConnectionForProductForm.UserDefinedConnection);
+			// 
+			// cbActivateUserDefinedConnection
+			// 
+			this.cbActivateUserDefinedConnection.AutoSize = true;
+			this.cbActivateUserDefinedConnection.Location = new System.Drawing.Point(9, 26);
+			this.cbActivateUserDefinedConnection.Name = "cbActivateUserDefinedConnection";
+			this.cbActivateUserDefinedConnection.Size = new System.Drawing.Size(255, 17);
+			this.cbActivateUserDefinedConnection.TabIndex = 0;
+			this.cbActivateUserDefinedConnection.Text = "benutzerdefinierte Heizkreiszuordnung aktivieren";
+			this.cbActivateUserDefinedConnection.UseVisualStyleBackColor = true;
+			this.cbActivateUserDefinedConnection.CheckedChanged += new System.EventHandler(this.cbActivateUserDefinedConnection_CheckedChanged);
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "Hk1";
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+			this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
+			this.dataGridViewTextBoxColumn1.HeaderText = "Heizkreis in";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn1.Width = 159;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.DataPropertyName = "Hk2";
+			this.dataGridViewTextBoxColumn2.HeaderText = "Heizkreis in";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn2.Width = 158;
+			// 
 			// SelectConnectionForProductForm
 			// 
 			this.AcceptButton = this.btnOk;
@@ -127,6 +240,7 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(702, 475);
+			this.Controls.Add(this.grpUserDefinedConnection);
 			this.Controls.Add(this.grpConnection);
 			this.Controls.Add(this.grpInfo);
 			this.Controls.Add(this.btnOk);
@@ -140,6 +254,10 @@ namespace Europlan.Common {
 			this.grpInfo.ResumeLayout(false);
 			this.grpConnection.ResumeLayout(false);
 			this.grpConnection.PerformLayout();
+			this.grpUserDefinedConnection.ResumeLayout(false);
+			this.grpUserDefinedConnection.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridUserDefinedConnection)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.userDefinedConnectionBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -154,5 +272,13 @@ namespace Europlan.Common {
 		private System.Windows.Forms.GroupBox grpConnection;
 		private System.Windows.Forms.RadioButton rbRuecklauf;
 		private System.Windows.Forms.RadioButton rbVorlauf;
+		private System.Windows.Forms.GroupBox grpUserDefinedConnection;
+		private System.Windows.Forms.DataGridView gridUserDefinedConnection;
+		private System.Windows.Forms.CheckBox cbActivateUserDefinedConnection;
+		private System.Windows.Forms.BindingSource userDefinedConnectionBindingSource;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn hk1DataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewComboBoxColumn hk2DataGridViewTextBoxColumn;
 	}
 }
