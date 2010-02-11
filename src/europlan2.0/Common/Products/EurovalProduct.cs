@@ -1360,7 +1360,7 @@ namespace Europlan.Common {
 			if (oldOk != newOk) {
 				return newOk;
 			}
-			if (oldOk) {
+			//if (oldOk) {
 				bool oldCovers = CoversLoads(oldHeatLoad, oldCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
 				bool newCovers = CoversLoads(newHeatLoad, newCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
 				if (oldCovers != newCovers) {
@@ -1368,19 +1368,19 @@ namespace Europlan.Common {
 				}
 				if (oldCovers) {
 					// TODO implement better decisison which parameters should be used
-					if (checkCool) {
+					/*if (checkCool) {
 						return newFloorTempCoolRes >= oldFloorTempCoolRes;
-					}
+					}*/
 					return newFloorTempHeatRes <= oldFloorTempHeatRes;
 				} else {
-					if (checkCool) {
+					/*if (checkCool) {
 						return newCoolLoad > oldCoolLoad;
-					}
+					}*/
 					return newHeatLoad > oldHeatLoad;
 				}
-			} else {
+			/*} else {
 
-			}
+			}*/
 			return true;
 		}
 
