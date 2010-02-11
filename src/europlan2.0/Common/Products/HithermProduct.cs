@@ -724,6 +724,38 @@ namespace Europlan.Common {
 				return false;
 			}
 
+			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				// TODO connect all circuits
+
+				int c = this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count - this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Count;
+				foreach (Circuit.CircuitConnection cc in this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Values) {
+					if (cc.OtherProduct == this) {
+						c++;
+					}
+				}
+				if (c < this.circuits.Count) {
+					/*if (this.requestedCircuits.HasValue) {
+						// TODO reset circuits
+					} else {*/
+					//this.circuits.Clear();
+					/*}*/
+					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.incompleteCalculation = true;
+					return false;
+				}
+				bool userDefinedOk = true;
+				foreach (Circuit.CircuitConnection cc in this.inverseConnectedCircuits.Values) {
+					if (cc.OtherCircuit == null) {
+						userDefinedOk = false;
+					}
+				}
+				if (!userDefinedOk) {
+					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.incompleteCalculation = true;
+					return false;
+				}
+			}
+
 			double[] vorlaufTotal;
 			double[] vorlaufNotIsolated;
 			double[] ruecklaufTotal;
