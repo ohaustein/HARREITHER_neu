@@ -39,28 +39,77 @@ namespace Europlan.Common {
 			rootNode = new TreeNode("Projekt");
 			treeProducts.Nodes.Add(rootNode);
 
-			Random r = new Random(DateTime.Now.Millisecond);
-
 			foreach (Floor f in Project.Instance.Floors) {
 				foreach (Distributor d in f.Distributors) {
 					TreeNode distributorNode = new TreeNode(d.Id + ": " + d.Name);
 					rootNode.Nodes.Add(distributorNode);
+					int vorlaufTemp = d.RegulatorCircuit.HeatFlowTemperature;
+					
 					foreach (PlannedProduct pp in d.PlannedConnectedProducts) {
 						if ((pp.Product is EurovalProduct && license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval) || 
-							(pp.Product is EcothermProduct&& license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)))) {
-							AuslegeNode node = new AuslegeNode(pp.InternalName + " in " + pp.Product.AssociatedRoom.Id + " (" + pp.Product.AssociatedRoom.Name + ")");
-							distributorNode.Nodes.Add(node);
+							(pp.Product is EcothermProduct && license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)))) {
+							if (pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+								if (!pp.Product.PlannedProductIsConnection) {
+									int[] azValues = new int[21];
+									int[] rzValues = new int[21];
+									Nullable<EurovalProduct.EurovalLayDistance> evLayDistance;
+									Nullable<EurovalProduct.EurovalRimType> evRimType;
+									Nullable<EcothermProduct.EcothermLayDistance> ecLayDistance;
+									Nullable<EcothermProduct.EcothermRimType> ecRimType;
+									bool addRzValues = true;
+									for (int i = 0; i < azValues.Length; i++) {
+										d.RegulatorCircuit.HeatFlowTemperature = 30 + i;
+										if (pp.Product is EurovalProduct) {
+											EurovalProduct ep = pp.Product as EurovalProduct;
+											if (ep.PlannedRimLength == 0) {
+												addRzValues = false;
+											}
+											evLayDistance = ep.RequestedLayDistance;
+											evRimType = ep.RequestedRimType;
+											ep.RequestedLayDistance = null;
+											ep.RequestedRimType = null;
+											ep.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+											azValues[i] = ConvertLayDistance(ep.PlannedLayDistance);
+											rzValues[i] = ConvertRimType(ep.PlannedRimType);
+											ep.RequestedLayDistance = evLayDistance;
+											ep.RequestedRimType = evRimType;
+										} else if (pp.Product is EcothermProduct) {
+											EcothermProduct ep = pp.Product as EcothermProduct;
+											if (ep.PlannedRimLength == 0) {
+												addRzValues = false;
+											}
+											ecLayDistance = ep.RequestedLayDistance;
+											ecRimType = ep.RequestedRimType;
+											ep.RequestedLayDistance = null;
+											ep.RequestedRimType = null;
+											ep.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+											azValues[i] = ConvertLayDistance(ep.PlannedLayDistance);
+											rzValues[i] = ConvertRimType(ep.PlannedRimType);
+											ep.RequestedLayDistance = ecLayDistance;
+											ep.RequestedRimType = ecRimType;
+										}
+									}
 
-							// TODO - calculation...
-							int[] azValues = new int[21];
-							int[] rzValues = new int[21];
-							for (int i = 0; i < azValues.Length; i++ ) {
-								azValues[i] = r.Next(0, 7);
-								rzValues[i] = r.Next(0, 3);
+									d.RegulatorCircuit.HeatFlowTemperature = vorlaufTemp;
+									if (pp.Product is EurovalProduct) {
+										EurovalProduct ep = pp.Product as EurovalProduct;
+										ep.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+									} else if (pp.Product is EcothermProduct) {
+										EcothermProduct ep = pp.Product as EcothermProduct;
+										ep.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+									}
+
+									AuslegeNode node = new AuslegeNode(pp.InternalName + " in " + pp.Product.AssociatedRoom.Id + " (" + pp.Product.AssociatedRoom.Name + ")");
+									distributorNode.Nodes.Add(node);
+									node.PlannedProduct = pp;
+									node.AzValues = azValues;
+									if (addRzValues) {
+										node.RzValues = rzValues;
+									} else {
+										node.RzValues = null;
+									}
+								}
 							}
-							node.PlannedProduct = pp;
-							node.AzValues = azValues;
-							node.RzValues = rzValues;
 						}
 					}
 				}
@@ -69,6 +118,85 @@ namespace Europlan.Common {
 			treeProducts.ExpandAll();
 		}
 
+		private int ConvertLayDistance(Nullable<EurovalProduct.EurovalLayDistance> layDistance) {
+			switch (layDistance) {
+				case EurovalProduct.EurovalLayDistance.EV5:
+					return 0;
+				case EurovalProduct.EurovalLayDistance.EV10:
+					return 1;
+				case EurovalProduct.EurovalLayDistance.EV15:
+					return 2;
+				case EurovalProduct.EurovalLayDistance.EV20:
+					return 3;
+				case EurovalProduct.EurovalLayDistance.EV25:
+					return 4;
+				case EurovalProduct.EurovalLayDistance.EV30:
+					return 5;
+				case EurovalProduct.EurovalLayDistance.EV35:
+					return 6;
+				default:
+					return 0;
+			}
+		}
+
+		private int ConvertLayDistance(Nullable<EcothermProduct.EcothermLayDistance> layDistance) {
+			switch (layDistance) {
+				case EcothermProduct.EcothermLayDistance.EV5:
+					return 0;
+				case EcothermProduct.EcothermLayDistance.EV10:
+					return 1;
+				case EcothermProduct.EcothermLayDistance.EV15:
+					return 2;
+				case EcothermProduct.EcothermLayDistance.EV20:
+					return 3;
+				case EcothermProduct.EcothermLayDistance.EV25:
+					return 4;
+				case EcothermProduct.EcothermLayDistance.EV30:
+					return 5;
+				case EcothermProduct.EcothermLayDistance.EV35:
+					return 6;
+				default:
+					return 0;
+			}
+		}
+
+		private int ConvertRimType(Nullable<EurovalProduct.EurovalRimType> rimType) {
+			switch (rimType) {
+				case EurovalProduct.EurovalRimType.EV5_40:
+				case EurovalProduct.EurovalRimType.EV5_80:
+				case EurovalProduct.EurovalRimType.EV5_120:
+					return 0;
+				case EurovalProduct.EurovalRimType.EV10_55:
+				case EurovalProduct.EurovalRimType.EV10_110:
+				case EurovalProduct.EurovalRimType.EV10_165:
+					return 1;
+				case EurovalProduct.EurovalRimType.EV15_60:
+				case EurovalProduct.EurovalRimType.EV15_120:
+				case EurovalProduct.EurovalRimType.EV15_180:
+					return 2;
+				default:
+					return 0;
+			}
+		}
+
+		private int ConvertRimType(Nullable<EcothermProduct.EcothermRimType> rimType) {
+			switch (rimType) {
+				case EcothermProduct.EcothermRimType.EV5_40:
+				case EcothermProduct.EcothermRimType.EV5_80:
+				case EcothermProduct.EcothermRimType.EV5_120:
+					return 0;
+				case EcothermProduct.EcothermRimType.EV10_55:
+				case EcothermProduct.EcothermRimType.EV10_110:
+				case EcothermProduct.EcothermRimType.EV10_165:
+					return 1;
+				case EcothermProduct.EcothermRimType.EV15_60:
+				case EcothermProduct.EcothermRimType.EV15_120:
+				case EcothermProduct.EcothermRimType.EV15_180:
+					return 2;
+				default:
+					return 0;
+			}
+		}
 
 		private void graphicsPanel_Paint(object sender, PaintEventArgs e) {
 			e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
