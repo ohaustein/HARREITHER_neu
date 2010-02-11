@@ -1311,7 +1311,7 @@ namespace Europlan.Common {
 			if (oldOk != newOk) {
 				return newOk;
 			}
-			if (oldOk) {
+			//if (oldOk) {
 				bool oldCovers = CoversLoads(oldHeatLoad, oldCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
 				bool newCovers = CoversLoads(newHeatLoad, newCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
 				if (oldCovers != newCovers) {
@@ -1319,19 +1319,19 @@ namespace Europlan.Common {
 				}
 				if (oldCovers) {
 					// TODO implement better decisison which parameters should be used
-					if (checkCool) {
+					/*if (checkCool) {
 						return newFloorTempCoolRes >= oldFloorTempCoolRes;
-					}
+					}*/
 					return newFloorTempHeatRes <= oldFloorTempHeatRes;
 				} else {
-					if (checkCool) {
+					/*if (checkCool) {
 						return newCoolLoad > oldCoolLoad;
-					}
+					}*/
 					return newHeatLoad > oldHeatLoad;
 				}
-			} else {
+			/*} else {
 
-			}
+			}*/
 			return true;
 		}
 
@@ -1413,6 +1413,7 @@ namespace Europlan.Common {
 						c++;
 					}
 				}
+				this.CorrectCircuits(this.requestedCircuits.Value, false);
 				if (!this.requestedCircuits.HasValue || c < this.requestedCircuits.Value) {
 					/*if (this.requestedCircuits.HasValue) {
 						// TODO reset circuits
@@ -1429,7 +1430,6 @@ namespace Europlan.Common {
 						userDefinedOk = false;
 					}
 				}
-				this.CorrectCircuits(this.requestedCircuits.Value, false);
 				if (!userDefinedOk) {
 					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
@@ -1760,6 +1760,7 @@ namespace Europlan.Common {
 		}
 
 		private string CorrectCircuits(int circuitCount, bool cleanupConnected) {
+			string error = null;
 			if (this.circuits.Count > circuitCount) {
 				this.circuits.RemoveRange(circuitCount, this.circuits.Count - circuitCount);
 			}
@@ -1782,7 +1783,7 @@ namespace Europlan.Common {
 			}
 			remove.Clear();
 			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.inverseConnectedCircuits) {
-				if (kvp.Key >= circuitCount && !kvp.Value.UserDefined) {
+				if (kvp.Key >= circuitCount) {
 					remove.Add(kvp);
 				}
 			}
@@ -1807,11 +1808,16 @@ namespace Europlan.Common {
 						j++;
 					}
 					if (!found) {
-						return "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+						error = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					} else {
+						j--;
 					}
-					j--;
 					this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, ec, false));
-					this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct.Product.PlannedCircuits[j], false));
+					if (this.plannedConnection.OtherProduct.Product.PlannedCircuits.Count > j) {
+						this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct.Product.PlannedCircuits[j], this.plannedConnection.UserDefined));
+					} else {
+						this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct, j, this.plannedConnection.UserDefined));
+					}
 				}
 				this.circuits.Add(ec);
 			}
@@ -1833,7 +1839,7 @@ namespace Europlan.Common {
 					}
 				}
 			}
-			return null;
+			return error;
 		}
 
 		[XmlIgnore]
