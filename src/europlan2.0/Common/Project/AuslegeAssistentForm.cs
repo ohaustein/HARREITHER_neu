@@ -302,14 +302,14 @@ namespace Europlan.Common {
 				foreach (AuslegeNode node in dNode.Nodes) {
 					if (node.PlannedProduct.Product is EurovalProduct) {
 						if (!chkEuroval.Checked) {
-							node.ForeColor = SystemColors.GrayText;
+							node.ForeColor = SystemColors.InactiveCaptionText;
 						} else {
 							node.ForeColor = SystemColors.WindowText;
 						}
 					}
 					if (node.PlannedProduct.Product is EcothermProduct) {
 						if (!chkEcotherm.Checked) {
-							node.ForeColor = SystemColors.GrayText;
+							node.ForeColor = SystemColors.InactiveCaptionText;
 						} else {
 							node.ForeColor = SystemColors.WindowText;
 						}
