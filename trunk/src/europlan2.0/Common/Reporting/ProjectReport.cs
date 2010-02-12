@@ -266,12 +266,13 @@ namespace Europlan.Common {
 			listLabel1.Variables.Add("@ProjectLastChanged", project.ProjectLastChanged);
 			listLabel1.Variables.Add("@ProjectEditor", project.ProjectEditor);
 			listLabel1.Variables.Add("@CoolingEnabled", project.CalculateCoolLoad);
-			
 
-			listLabel1.Variables.Add("@PartnerContact", Licensing.LicenseManager.Instance.License.Header.Replace("\r", ""));
+			Licensing.License license = Licensing.LicenseManager.Instance.License;
+
+			listLabel1.Variables.Add("@PartnerContact", license.Header.Replace("\r", ""));
 			listLabel1.Variables.Add("@ProgramVersion", project.EuroplanVersion);
 			string filename = Configuration.UserTemplate.PartnerLogo;
-			if (File.Exists(filename)) {
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatInternal) && File.Exists(filename)) {
 				listLabel1.Variables.Add("@PartnerLogo", Image.FromFile(filename));
 			} else {
 				listLabel1.Variables.Add("@PartnerLogo", "(NULL)");
@@ -286,6 +287,14 @@ namespace Europlan.Common {
 			listLabel1.Variables.Add("@Verlegedaten", reportOptions.Verlegedaten);
 			listLabel1.Variables.Add("@RequiredMaterial", reportOptions.RequiredMaterial);
 			listLabel1.Variables.Add("@RecommendedMaterial", reportOptions.RecommendedMaterial);
+
+			
+			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatInternal)) {
+				listLabel1.Variables.Add("@InternalLicense", false);
+			} else {
+				listLabel1.Variables.Add("@InternalLicense", true);
+			}
+
 
 #if DEBUG
 			if (MessageBox.Show("Designer?", "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
