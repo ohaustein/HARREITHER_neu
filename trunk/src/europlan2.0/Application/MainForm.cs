@@ -226,7 +226,7 @@ namespace Europlan.Application {
 					} else {
 						name = pnle.ProductType.Name;
 					}
-					MessageBox.Show("Das Projekt konnte nicht geladen werden, da im Projekt ein nicht lizensiertes Produkt (" + name + ") verplant wurde", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("Das Projekt konnte nicht geladen werden, da im Projekt ein nicht lizensiertes Produkt (" + name + ") verplant wurde.", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				} else {
 					log.Error("Problem loading project:", ex);
 				}
