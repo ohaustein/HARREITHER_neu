@@ -40,8 +40,6 @@ namespace Europlan.Common {
 		private double druckverlustVerteiler;
 		private double v;
 
-		private string wallConstruction;
-
 		private bool subSystem = false;
 		private bool otherSystemsConnected = false;
 
