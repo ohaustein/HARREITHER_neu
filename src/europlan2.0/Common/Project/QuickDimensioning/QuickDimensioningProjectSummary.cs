@@ -6,7 +6,7 @@ namespace Europlan.Common {
 	public class QuickDimensioningProjectSummary : IQuickDimensioningSummary {
 		#region IQuickDimensioningSummary Members
 		public string Name {
-			get { return "Gesamt"; }
+			get { return EuroplanRes.QuickDimensioningProjectSummary_Gesamt; }
 		}
 
 		public float Area {

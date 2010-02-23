@@ -5,12 +5,15 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Europlan.Common {
 	public partial class PlannedEcothermProductPanel : UserControl, IEditorUserControl {
 		private PlannedProduct product = null;
 
 		private bool gridContentChanged = false;
+
+		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		private class LayDistanceItem {
 			public Nullable<EcothermProduct.EcothermLayDistance> layDistance;
@@ -59,31 +62,115 @@ namespace Europlan.Common {
 		public PlannedEcothermProductPanel() {
 			InitializeComponent();
 
+			this.SetLanguage();
+		}
+
+		private void SetLanguage() {
 			this.cmbLayDistance.Items.Clear();
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(null, "Automatisch"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV35, "EV35"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV30, "EV30"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV25, "EV25"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV20, "EV20"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV15, "EV15"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV10, "EV10"));
-			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV5, "EV5"));
-
 			this.cmbRimType.Items.Clear();
-			this.cmbRimType.Items.Add(new RimTypeItem(null, "Automatisch"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV15_60, "EV15/60"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV15_120, "EV15/120"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV15_180, "EV15/180"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV10_55, "EV10/55"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV10_110, "EV10/110"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV10_165, "EV10/165"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV5_40, "EV5/40"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV5_80, "EV5/80"));
-			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV5_120, "EV5/120"));
-
 			this.cmbCircuits.Items.Clear();
-			this.cmbCircuits.Items.Add("Automatisch");
-			this.cmbCircuits.Items.Add("1");
+
+			this.lblAreaUnheated.Text = EuroplanRes.General_Quadratmeter; //"m²";
+			this.lblAreaReducedUnit.Text = EuroplanRes.General_Quadratmeter; //"m²";
+			this.lblAreaUnit.Text = EuroplanRes.General_Quadratmeter; //"m²";
+			this.lblAreaPercentage.Text = EuroplanRes.General_Prozent; //"%";
+			this.lblCoolLoadPercentage.Text = EuroplanRes.General_Prozent; //"%";
+			this.lblHeatLoadPercentage.Text = EuroplanRes.General_Prozent; //"%";
+			this.lblCoolLoadUnit.Text = EuroplanRes.General_Watt; //"W";
+			this.lblHeatLoadUnit.Text = EuroplanRes.General_Watt; //"W";
+			this.label27.Text = EuroplanRes.General_GradCelsius; //"°C";
+			this.label7.Text = EuroplanRes.General_GradCelsius; //"°C";
+			this.label9.Text = EuroplanRes.General_Meter; //"m";
+
+			string wattUnit = EuroplanRes.General_Watt;
+			this.lblCoolLoadTotal.Text = "(0 " + wattUnit + ")";
+			this.lblHeatLoadTotal.Text = "(0 " + wattUnit + ")";
+
+			this.pageInput.Text = EuroplanRes.PlannedProductPanel_EingabedatenSeite; //"Eingabedaten";
+			this.chkCoverCoolLoad.Text = EuroplanRes.PlannedProductPanel_KuehllastDecken; //"Kühllast decken";
+			this.lblCoolLoadTxt.Text = EuroplanRes.PlannedProductPanel_GewuenschteKuehlleistung; //"gewünschte Kühlleistung:";
+			this.chkCoverHeatLoad.Text = EuroplanRes.PlannedProductPanel_WaermebedarfDecken; //"Wärmebedarf decken";
+			this.lblHeatLoadTxt.Text = EuroplanRes.PlannedProductPanel_GewuenschteHeizleistung; //"gewünschte Heizleistung:";
+			this.label28.Text = EuroplanRes.PlannedProductPanel_TemperaturUnterhalbKuehl; //"Temperatur unterhalb (Kühlbetrieb):";
+			this.label8.Text = EuroplanRes.PlannedProductPanel_TemperaturUnterhalbHeiz; //"Temperatur unterhalb (Heizbetrieb):";
+			this.lblFloorConstruction.Text = EuroplanRes.PlannedProductPanel_Fussbodenkonstruktion; //"Fußbodenkonstruktion:";
+			this.lblInsulationConstruction.Text = EuroplanRes.PlannedProductPanel_Daemmkonstruktion; //"Wärmedämmkonstruktion:";
+			this.lblDistributor.Text = EuroplanRes.PlannedProductPanel_Verteileranschluss; //"Verteileranschluß:";
+			this.pageCircuit.Text = EuroplanRes.PlannedProductPanel_AnbindeleitungenSeite; //"Anbindeleitungen";
+			this.groupBox10.Text = EuroplanRes.PlannedProductPanel_AnbindeleitugenGruppe; //"Anbindeleitungen";
+			this.chkStellAntriebe.Text = EuroplanRes.PlannedProductPanel_Stellantriebe; //"Stellantrieb(e) verwenden";
+			this.pageConstruction.Text = EuroplanRes.PlannedProductPanel_AuslegungSeite; //"Auslegung";
+			this.lblAreaTxt.Text = EuroplanRes.PlannedProductPanel_GesamteFlaeche; //"gesamte Fläche:";
+
+			this.lblAreaUnheatedTxt.Text = EuroplanRes.PlannedEurovalProductPanel_UnbeheizteFlaeche; //"unbeheizte/ungekühlte Fläche:";
+			this.lblAreaReducedTxt.Text = EuroplanRes.PlannedEurovalProductPanel_ReduzierteFlaeche; //"Fläche mit red. Heiz-/Kühlleistung:";
+			this.chkAnhydritEstrich.Text = EuroplanRes.PlannedEurovalProductPanel_Anhydritestrich; //"Anhydritestrich";
+			this.chkClip.Text = EuroplanRes.PlannedEurovalProductPanel_Clipschiene; //"Clipschiene mit Klebeband";
+			this.cbSeparateCircuit.Text = EuroplanRes.PlannedEurovalProductPanel_EigenerHeizkreis; //"Eigener Heizkreis für dieses Fußbodenheizsystem";
+			this.label12.Text = EuroplanRes.PlannedEurovalProductPanel_EckenErklaerung; //"(positive Ecken vergößern, negative verringern die Randzonenfläche)";
+			this.label11.Text = EuroplanRes.PlannedEurovalProductPanel_AnzahlEcken; //"Anzahl der Ecken:";
+			this.label10.Text = EuroplanRes.PlannedEurovalProductPanel_LaengeRandzone; //"Länge der Randzone:";
+			this.groupBox8.Text = EuroplanRes.PlannedEurovalProductPanel_TatsaechlicheAuslegung; //"tatsächliche Auslegung";
+			this.label29.Text = EuroplanRes.PlannedEurovalProductPanel_AnzahlHeizkreise; //"Anzahl Heizkreise:";
+			this.rbCalculateBoth.Text = EuroplanRes.PlannedEurovalProductPanel_NachHeizUndKuehlbetrieb; //"nach Heiz- und Kühlbetrieb";
+			this.rbCalculateCool.Text = EuroplanRes.PlannedEurovalProductPanel_NachKuehlbetrieb; //"nach Kühlbetrieb";
+			this.rbCalculateHeat.Text = EuroplanRes.PlannedEurovalProductPanel_NachHeizbetrieb; //"nach Heizbetrieb";
+			this.label14.Text = EuroplanRes.PlannedEurovalProductPanel_VerlegeartRZ; //"Verlegeart Randzone:";
+			this.label13.Text = EuroplanRes.PlannedEurovalProductPanel_VerlegeartAZ; //"Verlegeart Aufenthaltszone:";
+			this.grpResults.Text = EuroplanRes.PlannedEurovalProductPanel_Berechnungsergebnisse; //"Berechnungsergebnisse";
+			this.btnConnectionPipes.Text = EuroplanRes.PlannedProductPanel_AnbindeleitungenBearbeiten; //"Anbindeleitungen bearbeiten";
+			this.label41.Text = EuroplanRes.PlannedEurovalProductPanel_Spreizung; //"Spreizung\nK";
+			this.label33.Text = EuroplanRes.PlannedEurovalProductPanel_Kuehlen; //"Kühlen:";
+			this.label34.Text = EuroplanRes.PlannedEurovalProductPanel_DeltaP; //"DeltaP\nmbar";
+			this.label35.Text = EuroplanRes.PlannedEurovalProductPanel_Mg; //"mh\nkg/h";
+			this.label36.Text = EuroplanRes.PlannedEurovalProductPanel_Rohrlaenge; //"Rorhl.\nm";
+			this.label37.Text = EuroplanRes.PlannedEurovalProductPanel_AnzahlHK; //"Anzahl\nHK";
+			this.label38.Text = EuroplanRes.PlannedEurovalProductPanel_Heizen; //"Heizen:";
+			this.label26.Text = EuroplanRes.PlannedEurovalProductPanel_Aufenthaltszone; //"Aufenthaltszone";
+			this.label25.Text = EuroplanRes.PlannedEurovalProductPanel_Randzone; //"Randzone";
+			this.label19.Text = EuroplanRes.PlannedEurovalProductPanel_Q; //"Q\nW";
+			this.label20.Text = EuroplanRes.PlannedEurovalProductPanel_Tfb; //"tfb\n°C";
+			this.label21.Text = EuroplanRes.PlannedEurovalProductPanel_A; //"A\nm²";
+			this.label22.Text = EuroplanRes.PlannedEurovalProductPanel_VA; //"VA";
+			this.label23.Text = EuroplanRes.PlannedEurovalProductPanel_QAnb; //"QAnb\nW";
+			this.label24.Text = EuroplanRes.PlannedEurovalProductPanel_AAnb; //"AAnb\nm²";
+			this.label15.Text = EuroplanRes.PlannedEurovalProductPanel_Q; //"Q\nW";
+			this.label16.Text = EuroplanRes.PlannedEurovalProductPanel_Tfb; //"tfb\n°C";
+			this.label17.Text = EuroplanRes.PlannedEurovalProductPanel_B; //"B\ncm";
+			this.label18.Text = EuroplanRes.PlannedEurovalProductPanel_VA; //"VA";
+			this.label6.Text = EuroplanRes.PlannedEurovalProductPanel_Kuehlen; //"Kühlen:";
+			this.label5.Text = EuroplanRes.PlannedEurovalProductPanel_QRest; //"QRest\nW";
+			this.label4.Text = EuroplanRes.PlannedEurovalProductPanel_QFbh; //"QFBH\nW";
+			this.label3.Text = EuroplanRes.PlannedEurovalProductPanel_QSollProQuadratmeter; //"qSoll\nW/m²";
+			this.label2.Text = EuroplanRes.PlannedEurovalProductPanel_QSoll; //"QSoll\nW";
+			this.label1.Text = EuroplanRes.PlannedEurovalProductPanel_Heizen; //"Heizen:";
+			this.pageCorrections.Text = EuroplanRes.PlannedEurovalProductPanel_ErweiterteKorrekturenSeite; //"erweiterte Korrekturen";
+
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(null, EuroplanRes.EcothermProduct_Automatisch/*"Automatisch"*/));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV35, EuroplanRes.EcothermProduct_EV35/*"EV35"*/));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV30, EuroplanRes.EcothermProduct_EV30/*"EV30"*/));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV25, EuroplanRes.EcothermProduct_EV25/*"EV25"*/));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV20, EuroplanRes.EcothermProduct_EV20/*"EV20"*/));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV15, EuroplanRes.EcothermProduct_EV15/*"EV15"*/));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV10, EuroplanRes.EcothermProduct_EV10/*"EV10"*/));
+			this.cmbLayDistance.Items.Add(new LayDistanceItem(EcothermProduct.EcothermLayDistance.EV5, EuroplanRes.EcothermProduct_EV5/*"EV5"*/));
+
+			this.cmbRimType.Items.Add(new RimTypeItem(null, EuroplanRes.EcothermProduct_Automatisch/*"Automatisch"*/));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV15_60, EuroplanRes.EcothermProduct_EV15_60/*"EV15/60"*/));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV15_120, EuroplanRes.EcothermProduct_EV15_120/*"EV15/120"*/));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV15_180, EuroplanRes.EcothermProduct_EV15_180/*"EV15/180"*/));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV10_55, EuroplanRes.EcothermProduct_EV10_55/*"EV10/55"*/));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV10_110, EuroplanRes.EcothermProduct_EV10_110/*"EV10/110"*/));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV10_165, EuroplanRes.EcothermProduct_EV10_165/*"EV10/165"*/));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV5_40, EuroplanRes.EcothermProduct_EV5_40/*"EV5/40"*/));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV5_80, EuroplanRes.EcothermProduct_EV5_80/*"EV5/80"*/));
+			this.cmbRimType.Items.Add(new RimTypeItem(EcothermProduct.EcothermRimType.EV5_120, EuroplanRes.EcothermProduct_EV5_120/*"EV5/120"*/));
+
+			this.cmbCircuits.Items.Add(EuroplanRes.EcothermProduct_Automatisch/*"Automatisch"*/);
+			for (int i = 1; i <= 12; i++) {
+				this.cmbCircuits.Items.Add(i.ToString());
+			}
+			/*this.cmbCircuits.Items.Add("1");
 			this.cmbCircuits.Items.Add("2");
 			this.cmbCircuits.Items.Add("3");
 			this.cmbCircuits.Items.Add("4");
@@ -94,8 +181,7 @@ namespace Europlan.Common {
 			this.cmbCircuits.Items.Add("9");
 			this.cmbCircuits.Items.Add("10");
 			this.cmbCircuits.Items.Add("11");
-			this.cmbCircuits.Items.Add("12");
-
+			this.cmbCircuits.Items.Add("12");*/
 		}
 
 		#region IEditorUserControl Members
@@ -309,7 +395,7 @@ namespace Europlan.Common {
 				if (this.cmbLayDistanceContainsAutomatic != newCmbLayDistanceContainsAutomatic) {
 					this.cmbLayDistanceContainsAutomatic = newCmbLayDistanceContainsAutomatic;
 					if (this.cmbLayDistanceContainsAutomatic) {
-						this.cmbLayDistance.Items.Insert(0, new LayDistanceItem(null, "Automatisch"));
+						this.cmbLayDistance.Items.Insert(0, new LayDistanceItem(null, EuroplanRes.EcothermProduct_Automatisch/*"Automatisch"*/));
 					} else {
 						this.cmbLayDistance.Items.RemoveAt(0);
 					}
@@ -323,7 +409,7 @@ namespace Europlan.Common {
 							newCmbRimTypeContainsNone = false;
 							this.cmbRimType.Items.RemoveAt(0);
 						}
-						this.cmbRimType.Items.Insert(0, new RimTypeItem(null, "Automatisch"));
+						this.cmbRimType.Items.Insert(0, new RimTypeItem(null, EuroplanRes.EcothermProduct_Automatisch/*"Automatisch"*/));
 					} else {
 						this.cmbRimType.Items.RemoveAt(0);
 						this.cmbRimTypeContainsNone = false;
@@ -400,8 +486,8 @@ namespace Europlan.Common {
 					this.chkCoverCoolLoad.Enabled = false;
 					this.chkCoverCoolLoad.Checked = false;
 				}
-				this.lblHeatLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedHeatLoad.ToString() + " W)";
-				this.lblCoolLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedCoolLoad.ToString() + " W)";
+				this.lblHeatLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedHeatLoad.ToString() + " " + EuroplanRes.General_Watt + ")";
+				this.lblCoolLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedCoolLoad.ToString() + " " + EuroplanRes.General_Watt + ")";
 				float plannedArea = (float)(this.product.PlannedArea.HasValue ? Math.Round(this.product.PlannedArea.Value, 2) : 0);
 				if ((skipFields & FieldEnum.AREA) == FieldEnum.NONE) {
 					this.numArea.Value = Math.Round((decimal)plannedArea, 2);
@@ -483,32 +569,32 @@ namespace Europlan.Common {
 				if (evProduct.PlannedRimType.HasValue) {
 					switch (evProduct.PlannedRimLayDistance) {
 						case EcothermProduct.EcothermLayDistance.EV5:
-							this.lblRimVaHeat.Text = "EV5";
-							this.lblRimVaCool.Text = "EV5";
+							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
+							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV10:
-							this.lblRimVaHeat.Text = "EV10";
-							this.lblRimVaCool.Text = "EV10";
+							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV10; //"EV10";
+							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV10; //"EV10";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV15:
-							this.lblRimVaHeat.Text = "EV15";
-							this.lblRimVaCool.Text = "EV15";
+							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV15; //"EV15";
+							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV15; //"EV15";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV20:
-							this.lblRimVaHeat.Text = "EV20";
-							this.lblRimVaCool.Text = "EV20";
+							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV20; //"EV20";
+							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV20; //"EV20";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV25:
-							this.lblRimVaHeat.Text = "EV25";
-							this.lblRimVaCool.Text = "EV25";
+							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV25; //"EV25";
+							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV25; //"EV25";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV30:
-							this.lblRimVaHeat.Text = "EV30";
-							this.lblRimVaCool.Text = "EV30";
+							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV30; //"EV30";
+							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV30; //"EV30";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV35:
-							this.lblRimVaHeat.Text = "EV35";
-							this.lblRimVaCool.Text = "EV35";
+							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV35; //"EV35";
+							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV35; //"EV35";
 							break;
 						default:
 							this.lblRimVaHeat.Text = "???";
@@ -536,32 +622,32 @@ namespace Europlan.Common {
 				if (evProduct.PlannedLayDistance.HasValue) {
 					switch (evProduct.PlannedLayDistance) {
 						case EcothermProduct.EcothermLayDistance.EV5:
-							this.lblResidenceVaHeat.Text = "EV5";
-							this.lblResidenceVaCool.Text = "EV5";
+							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
+							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV10:
-							this.lblResidenceVaHeat.Text = "EV10";
-							this.lblResidenceVaCool.Text = "EV10";
+							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV10; //"EV10";
+							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV10; //"EV10";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV15:
-							this.lblResidenceVaHeat.Text = "EV15";
-							this.lblResidenceVaCool.Text = "EV15";
+							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV15; //"EV15";
+							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV15; //"EV15";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV20:
-							this.lblResidenceVaHeat.Text = "EV20";
-							this.lblResidenceVaCool.Text = "EV20";
+							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV20; //"EV20";
+							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV20; //"EV20";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV25:
-							this.lblResidenceVaHeat.Text = "EV25";
-							this.lblResidenceVaCool.Text = "EV25";
+							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV25; //"EV25";
+							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV25; //"EV25";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV30:
-							this.lblResidenceVaHeat.Text = "EV30";
-							this.lblResidenceVaCool.Text = "EV30";
+							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV30; //"EV30";
+							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV30; //"EV30";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV35:
-							this.lblResidenceVaHeat.Text = "EV35";
-							this.lblResidenceVaCool.Text = "EV35";
+							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV35; //"EV35";
+							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV35; //"EV35";
 							break;
 						default:
 							this.lblResidenceVaHeat.Text = "???";
@@ -604,7 +690,7 @@ namespace Europlan.Common {
 				this.lblSpreizungCool.Text = Math.Round(evProduct.PlannedSpreizungCool, 1).ToString();
 
 				if (evProduct.PlannedProductIsConnection) {
-					this.txtDistributor.Text = "kein eigener Heizkreis";
+					this.txtDistributor.Text = EuroplanRes.PlannedEurovalProductPanel_KeinEigenerHK; //"kein eigener Heizkreis";
 				} else {
 					if (evProduct.PlannedConnection == null) {
 						this.txtDistributor.Text = "";
@@ -1008,7 +1094,7 @@ namespace Europlan.Common {
 		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreCircuits == 0) {
 				if ((this.product.Product as EcothermProduct).PlannedCorrections) {
-					if (MessageBox.Show("Wenn Sie die Anzahl der Heizkreise ändern, werden die erweiterten Korrekturen zurückgesetzt. Wollen sie das wirklich machen?", "Bestätigen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+					if (MessageBox.Show(EuroplanRes.PlannedEurovalProductPanel_HKAnzahlAendernText/*"Wenn Sie die Anzahl der Heizkreise ändern, werden die erweiterten Korrekturen zurückgesetzt. Wollen sie das wirklich machen?"*/, EuroplanRes.PlannedEurovalProductPanel_HKAnzahlAendernTitel/*"Bestätigen"*/, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
 						this.UpdateControl(FieldEnum.NONE);
 						return;
 					} else {

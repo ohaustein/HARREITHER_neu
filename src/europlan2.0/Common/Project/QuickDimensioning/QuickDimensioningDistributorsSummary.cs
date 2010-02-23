@@ -12,12 +12,18 @@ namespace Europlan.Common {
 
 		public event ProjectChangedHandler ProjectChanged;
 
-		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
-
 		public QuickDimensioningDistributorsSummary() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			UpdateControl();
 			this.distributorGrid.ProjectChanged += new ProjectChangedHandler(distributorGrid_ProjectChanged);
+		}
+
+		private void SetLanguage() {
+			this.label1.Text = EuroplanRes.QuickDimensioningDistributorsSummary_Verteiler;
+			this.lblRemainingLabel.Text = EuroplanRes.QuickDimensioningDistributorsSummary_VerplanteAnschluesse;
 		}
 
 		void distributorGrid_ProjectChanged(object sender) {
@@ -45,9 +51,9 @@ namespace Europlan.Common {
 				if (count < 12) {
 					lblPlanned.Text = "" + count;
 				} else if (count == 12) {
-					lblPlanned.Text = "Alle Anschlüße des Verteilers sind verplant.";
+					lblPlanned.Text = EuroplanRes.QuickDimensioningDistributorsSummary_AlleAnschluesseVerplant;
 				} else  {
-					lblPlanned.Text = "Dem Verteiler sind zu viele Heizkreise zugeordnet!!!";
+					lblPlanned.Text = EuroplanRes.QuickDimensioningDistributorsSummary_ZuVieleHeizkreise;
 				}
 			} else {
 				lblRemainingLabel.Visible = false;
@@ -62,7 +68,7 @@ namespace Europlan.Common {
 				List<Distributor> distributors = Project.Instance.QuickDimensioning.Distributors;
 				//if (distributors.Count == 0) {
 				//    QuickDimensioningDistributor distributor = new QuickDimensioningDistributor();
-				//    string localized = resources.GetString("Distributor1", Thread.CurrentThread.CurrentUICulture);
+				//    string localized = EuroplanRes.Distributor1;
 				//    distributor.Name = localized;
 				//    distributors.Add(distributor);
 				//}

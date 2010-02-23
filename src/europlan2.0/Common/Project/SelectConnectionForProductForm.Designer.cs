@@ -41,8 +41,6 @@ namespace Europlan.Common {
 			this.hk2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.userDefinedConnectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.cbActivateUserDefinedConnection = new System.Windows.Forms.CheckBox();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.grpInfo.SuspendLayout();
 			this.grpConnection.SuspendLayout();
 			this.grpUserDefinedConnection.SuspendLayout();
@@ -100,7 +98,7 @@ namespace Europlan.Common {
 			this.lblInfo.Name = "lblInfo";
 			this.lblInfo.Size = new System.Drawing.Size(360, 29);
 			this.lblInfo.TabIndex = 0;
-			this.lblInfo.Text = "label1";
+			this.lblInfo.Text = "";
 			// 
 			// grpConnection
 			// 
@@ -187,7 +185,7 @@ namespace Europlan.Common {
 			this.hk1DataGridViewTextBoxColumn.DataPropertyName = "Hk1";
 			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
 			this.hk1DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-			this.hk1DataGridViewTextBoxColumn.HeaderText = "Heizkreis in";
+			this.hk1DataGridViewTextBoxColumn.HeaderText = "";
 			this.hk1DataGridViewTextBoxColumn.Name = "hk1DataGridViewTextBoxColumn";
 			this.hk1DataGridViewTextBoxColumn.ReadOnly = true;
 			this.hk1DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -195,7 +193,7 @@ namespace Europlan.Common {
 			// hk2DataGridViewTextBoxColumn
 			// 
 			this.hk2DataGridViewTextBoxColumn.DataPropertyName = "Hk2";
-			this.hk2DataGridViewTextBoxColumn.HeaderText = "Heizkreis in";
+			this.hk2DataGridViewTextBoxColumn.HeaderText = "";
 			this.hk2DataGridViewTextBoxColumn.Name = "hk2DataGridViewTextBoxColumn";
 			this.hk2DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			// 
@@ -213,25 +211,6 @@ namespace Europlan.Common {
 			this.cbActivateUserDefinedConnection.Text = "benutzerdefinierte Heizkreiszuordnung aktivieren";
 			this.cbActivateUserDefinedConnection.UseVisualStyleBackColor = true;
 			this.cbActivateUserDefinedConnection.CheckedChanged += new System.EventHandler(this.cbActivateUserDefinedConnection_CheckedChanged);
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "Hk1";
-			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-			this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
-			this.dataGridViewTextBoxColumn1.HeaderText = "Heizkreis in";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.dataGridViewTextBoxColumn1.Width = 159;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "Hk2";
-			this.dataGridViewTextBoxColumn2.HeaderText = "Heizkreis in";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.dataGridViewTextBoxColumn2.Width = 158;
 			// 
 			// SelectConnectionForProductForm
 			// 
@@ -276,8 +255,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridView gridUserDefinedConnection;
 		private System.Windows.Forms.CheckBox cbActivateUserDefinedConnection;
 		private System.Windows.Forms.BindingSource userDefinedConnectionBindingSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn hk1DataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewComboBoxColumn hk2DataGridViewTextBoxColumn;
 	}

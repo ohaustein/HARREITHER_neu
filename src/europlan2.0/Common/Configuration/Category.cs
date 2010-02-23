@@ -2,16 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using System.Threading;
 
 namespace Europlan.Common {
 
 	public class CategoryTypeEnumConverter : System.ComponentModel.TypeConverter {
-		private static readonly string floor = "Fußbodenheizung";
-		private static readonly string wall = "Wandheizung";
-		private static readonly string ceiling = "Deckenkühlung";
-		private static readonly string distributor = "Verteiler";
-		private static readonly string insulation = "Dämmung";
-		private static readonly string general = "Allgemein";
+		private static readonly string floor = EuroplanRes.Category_Fussbodenheizung; //"Fußbodenheizung";
+		private static readonly string wall = EuroplanRes.Category_Wandheizung; //"Wandheizung";
+		private static readonly string ceiling = EuroplanRes.Category_Deckenkuehlung; //"Deckenkühlung";
+		private static readonly string distributor = EuroplanRes.Category_Verteiler; //"Verteiler";
+		private static readonly string insulation = EuroplanRes.Category_Daemmung; //"Dämmung";
+		private static readonly string general = EuroplanRes.Category_Allgemein; //"Allgemein";
 
 		private Dictionary<string, CategoryType> mappingFromString = new Dictionary<string, CategoryType>();
 		private Dictionary<CategoryType, string> mappingToString = new Dictionary<CategoryType, string>();

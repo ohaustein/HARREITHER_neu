@@ -14,7 +14,7 @@ namespace Europlan.Common {
 		private static BuildingDataImportManager instance = null;
 		private static readonly object padlock = new object();
 		private static readonly ILog log = LogManager.GetLogger(typeof(BuildingDataImportManager));
-		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
+		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		private IList<IBuildingDataImporter> importers;
 
@@ -75,8 +75,8 @@ namespace Europlan.Common {
 					if (importer.FileExtension.Equals(Path.GetExtension(dialog.FileName), StringComparison.InvariantCultureIgnoreCase)) {
 						FloorList floors = importer.ImportBuildingDataFromFile(dialog.FileName);
 						if (Project.Instance.Floors.Count != 0) {
-							string message = resources.GetString("SyncMessage", Thread.CurrentThread.CurrentUICulture);
-							string caption = resources.GetString("SyncCaption", Thread.CurrentThread.CurrentUICulture);
+							string message = EuroplanRes.DataImportManager_SyncMessage;
+							string caption = EuroplanRes.DataImportManager_SyncCaption;
 							result = MessageBox.Show(message, caption, MessageBoxButtons.YesNoCancel);
 							if (result == DialogResult.Yes) {
 								foreach (Floor floor in floors) {

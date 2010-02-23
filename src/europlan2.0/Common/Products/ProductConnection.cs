@@ -167,7 +167,11 @@ namespace Europlan.Common {
 				return this.Distributor.Id + ": " + this.Distributor.Name;
 			}
 			if (this.OtherProduct != null) {
-				return "Anschluﬂ an " + this.OtherProduct.System + " in " + this.OtherProduct.Product.AssociatedRoom.Id + ": " + this.OtherProduct.Product.AssociatedRoom.Name;
+				string connTo = EuroplanRes.ProductConnection_AnschlussAn;
+				connTo = connTo.Replace("%SYSTEM%", this.OtherProduct.System);
+				connTo = connTo.Replace("%RAUMID%", this.OtherProduct.Product.AssociatedRoom.Id);
+				connTo = connTo.Replace("%RAUMNAME%", this.OtherProduct.Product.AssociatedRoom.Name);
+				return connTo;
 			}
 			return "";
 		}

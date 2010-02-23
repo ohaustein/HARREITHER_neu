@@ -19,24 +19,56 @@ namespace Europlan.Common {
 
 		public QuickDimensioningFloorGrid() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			this.colRoomType.ValueMember = "Value";
 			this.colRoomType.DisplayMember = "Name";
 			foreach (RoomType roomType in Project.Instance.Config.RoomTypes) {
 				this.colRoomType.Items.Add(new RoomTypeItem(roomType));
 			}
 			this.newRoomType = new RoomType();
-			this.newRoomType.Name = "<Neu/Bearbeiten>";
+			this.newRoomType.Name = EuroplanRes.QuickDimensioningFloorGrid_NeuBearbeiten; //"<Neu/Bearbeiten>";
 			this.newRoomType.Id = "<NEW>";
 			this.newRoomType.UserDefined = true;
 			this.colRoomType.Items.Add(new RoomTypeItem(this.newRoomType));
 			this.colRoomController.ValueMember = "Controller";
 			this.colRoomController.DisplayMember = "Name";
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.None, ""));
-			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RC, "RC"));
-			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RCF, "RCF"));
-			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RCRadio, "RC-Funk"));
-			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RF, "RF"));
+			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RC, EuroplanRes.QuickDimensioningFloorGrid_RC/*"RC"*/));
+			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RCF, EuroplanRes.QuickDimensioningFloorGrid_RCF/*"RCF"*/));
+			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RCRadio, EuroplanRes.QuickDimensioningFloorGrid_RCFunk/*"RC-Funk"*/));
+			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RF, EuroplanRes.QuickDimensioningFloorGrid_RF/*"RF"*/));
 			//this.colRoomType.
+		}
+
+		private void SetLanguage() {
+			this.colId.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Nr; //"Nr.";
+			this.colName.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Bezeichnung; //"Bezeichnung";
+			this.colRoomTemperature.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Temperatur; //"Temp.\n(°C)";
+			this.colArea.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Raumflaeche; //"Raumfl.\n(m²)";
+			this.colRoomType.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Raumtyp; //"Raumtyp";
+			this.colHeatLoad.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Heizlast; //"Heizlast\n(W)";
+			this.colCoolLoad.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Kuehllast; //"Kühllast\n(W)";
+			this.colEuroval.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_EurovalFlaeche; //"Euroval®\n(m²)";
+			this.colEurovalCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_EurovalHeizkreise; //"Euroval®\nHeizkreise";
+			this.colConcreteActivation.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_BkaFlaeche; //"BKA\n(m²)";
+			this.colConcreteActivationCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_BkaHeizkreise; //"BKA\nHeizkreise";
+			this.colHitherm.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermFlaeche; //"Hitherm®\n(m²)";
+			this.colHithermCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermHeizkreise; //"Hitherm®\nHeizkreise";
+			this.colHithermCompact.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactFlaeche; //"Hitherm® Co\n(m²)";
+			this.colHithermCompactCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactHeizkreise; //"Hitherm® Co\nHeizkreise";
+			this.colHithermCompactRoof.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactDachFlaeche; //"Hitherm® Co\nDach (m²)";
+			this.colHithermCompactRoofCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactDachHeizkreise; //"Hitherm® Co\nDach Hkr.";
+			this.colModulKlimaBoden.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaBodenFlaeche; //"Klima-Boden\n(m²)";
+			this.colModulKlimaBodenCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaBodenHeizkreise; //"Klima-Boden\nHeizkreise";
+			this.colModulKlimaDecke.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaDeckeFlaeche; //"Klima-Decke\n(m²)";
+			this.colModulKlimaDeckeCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaDeckeHeizkreise; //"Klima-Decke\nHeizkreise";
+			this.colRoomController.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_RaumController; //"Raum-\ncontroller";
+			this.colNrOfServos.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Stellmotore; //"Stell-\nmotore";
+			this.colComments.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Bemerkung; //"Bemerkung";
+			this.colRevert.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Ruecksetzen; //"Rücksetzen";
+			this.colRevert.Text = EuroplanRes.QuickDimensioningFloorGrid_Ruecksetzen; //"Rücksetzen";
 		}
 
 		private class RoomControllerItem {
@@ -311,7 +343,7 @@ namespace Europlan.Common {
 			if (product == null || product.QuickDimensioningPlannedArea <= product.QuickDimensioningMaximumArea) {
 				row.Cells[colProductArea.Index].ErrorText = null;
 			} else {
-				row.Cells[colProductArea.Index].ErrorText = "Die geplante Fläche ist größer als die maximal verfügbare Fläche";
+				row.Cells[colProductArea.Index].ErrorText = EuroplanRes.QuickDimensioningFloorGridFlaecheFehler; //"Die geplante Fläche ist größer als die maximal verfügbare Fläche";
 			}
 		}
 
@@ -339,11 +371,11 @@ namespace Europlan.Common {
 				row.ErrorText = null;
 			} else {
 				if (!room.QuickDimensioningHeatLoadCovered && (!room.QuickDimensioningCoolLoadCovered && this.Cooling)) {
-					row.ErrorText = "Heiz- und Kühllast nicht abgedeckt";
+					row.ErrorText = EuroplanRes.QuickDimensioningFloorGrid_HeizUndKuehllastFehler; //"Heiz- und Kühllast nicht abgedeckt";
 				} else if (!room.QuickDimensioningCoolLoadCovered && this.Cooling) {
-					row.ErrorText = "Kühllast nicht abgedeckt";
+					row.ErrorText = EuroplanRes.QuickDimensioningFloorGrid_HeizlastFehler; //"Kühllast nicht abgedeckt";
 				} else {
-					row.ErrorText = "Heizlast nicht abgedeckt";
+					row.ErrorText = EuroplanRes.QuickDimensioningFloorGrid_KuehllastFehler; //"Heizlast nicht abgedeckt";
 				}
 			}
 		}

@@ -17,7 +17,9 @@ namespace Europlan.Common {
 
 		public AuslegeAssistentForm() {
 			InitializeComponent();
-		
+
+			this.SetLanguage();
+
 			ConfigureTree();
 
 			chkEuroval.Text = new EurovalProduct().FullName;
@@ -33,10 +35,17 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void SetLanguage() {
+			this.label1.Text = EuroplanRes.AuslegeAssistentForm_Beschreibung; //"Die beiden Diagramme stellen die notwendigen Verlegearten für eine Variation der Vorlauftemperatur dar.";
+			this.chkEuroval.Text = EuroplanRes.AuslegeAssistentForm_Euroval; //"Euroval";
+			this.chkEcotherm.Text = EuroplanRes.AuslegeAssistentForm_Ecotherm; //"Ecotherm";
+			this.Text = EuroplanRes.AuslegeAssistentForm_Auslegehilfe; //"Auslegehilfe";
+		}
+
 		private void ConfigureTree() {
 			treeProducts.Nodes.Clear();
 
-			rootNode = new TreeNode("Projekt");
+			rootNode = new TreeNode(EuroplanRes.General_Projekt);
 			treeProducts.Nodes.Add(rootNode);
 
 			foreach (Floor f in Project.Instance.Floors) {
@@ -99,7 +108,11 @@ namespace Europlan.Common {
 										ep.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
 									}
 
-									AuslegeNode node = new AuslegeNode(pp.InternalName + " in " + pp.Product.AssociatedRoom.Id + " (" + pp.Product.AssociatedRoom.Name + ")");
+									string produkt = EuroplanRes.AuslegeAssistentForm_SystemInRaum;
+									produkt = produkt.Replace("%SYSTEM%", pp.InternalName);
+									produkt = produkt.Replace("%RAUMID%", pp.Product.AssociatedRoom.Id);
+									produkt = produkt.Replace("%RAUMNAME%", pp.Product.AssociatedRoom.Name);
+									AuslegeNode node = new AuslegeNode(produkt);
 									distributorNode.Nodes.Add(node);
 									node.PlannedProduct = pp;
 									node.AzValues = azValues;
@@ -221,13 +234,14 @@ namespace Europlan.Common {
 				float bottomOffset = 35;
 				float rzGridHeight = (rectangle.Height / 3) - topOffset - bottomOffset;
 				float gridWidth = rectangle.Width - leftOffset - rightOffset;
-				g.DrawString("Randzone", graphicsPanel.Font, Brushes.Black, x0, y0Rz);
+				g.DrawString(EuroplanRes.AuslegeAssistentForm_Randzone, graphicsPanel.Font, Brushes.Black, x0, y0Rz);
 
 				int count = 2;
 				int layDistance = 5;
 				for (int i = 0; i <= count; i++) {
 					g.DrawLine(Pens.Black, (float)(x0 + leftOffset - 2), (float)(y0Rz + topOffset + (i * rzGridHeight / count)), (float)(x0 + leftOffset + gridWidth + 2), (float)(y0Rz + topOffset + (i * rzGridHeight / count)));
-					g.DrawString("EV" + layDistance.ToString(), graphicsPanel.Font, Brushes.Black, x0 + 5, y0Rz + topOffset + (i * rzGridHeight / count) - graphicsPanel.Font.SizeInPoints / 2);
+					// TODO Localization
+					g.DrawString(EuroplanRes.AuslegeAssistentForm_Ev + layDistance.ToString(), graphicsPanel.Font, Brushes.Black, x0 + 5, y0Rz + topOffset + (i * rzGridHeight / count) - graphicsPanel.Font.SizeInPoints / 2);
 					layDistance += 5;
 				}
 				// 30°C
@@ -235,7 +249,7 @@ namespace Europlan.Common {
 				// 50°C
 				g.DrawLine(Pens.Black, x0 + leftOffset + gridWidth, y0Rz + topOffset - 2, x0 + leftOffset + gridWidth, y0Rz + topOffset + rzGridHeight + 2);
 
-				g.DrawString("Tv\n°C", graphicsPanel.Font, Brushes.Black, x0 + leftOffset + gridWidth + 10, y0Rz + topOffset + rzGridHeight - 10);
+				g.DrawString(EuroplanRes.AuslegeAssistentForm_Tv, graphicsPanel.Font, Brushes.Black, x0 + leftOffset + gridWidth + 10, y0Rz + topOffset + rzGridHeight - 10);
 
 				temperature = 30;
 				for (int i = 0; i <= 20; i++) {
@@ -256,13 +270,13 @@ namespace Europlan.Common {
 				//Aufenthaltszone
 				float y0Az = y0Rz + 5 + rectangle.Height / 3;
 				float azGridHeight = (rectangle.Height / 3) * 2 - topOffset - bottomOffset;
-				g.DrawString("Aufenthaltszone", graphicsPanel.Font, Brushes.Black, x0, y0Az);
+				g.DrawString(EuroplanRes.AuslegeAssistentForm_Aufenthaltszone, graphicsPanel.Font, Brushes.Black, x0, y0Az);
 
 				count = 6;
 				layDistance = 5;
 				for (int i = 0; i <= count; i++) {
 					g.DrawLine(Pens.Black, (float)(x0 + leftOffset - 2), (float)(y0Az + topOffset + (i * azGridHeight / count)), (float)(x0 + leftOffset + gridWidth + 2), (float)(y0Az + topOffset + +(i * azGridHeight / count)));
-					g.DrawString("EV" + layDistance.ToString(), graphicsPanel.Font, Brushes.Black, x0 + 5, y0Az + topOffset + (i * azGridHeight / count) - graphicsPanel.Font.SizeInPoints / 2);
+					g.DrawString(EuroplanRes.AuslegeAssistentForm_Ev + layDistance.ToString(), graphicsPanel.Font, Brushes.Black, x0 + 5, y0Az + topOffset + (i * azGridHeight / count) - graphicsPanel.Font.SizeInPoints / 2);
 					layDistance += 5;
 				}
 				// 30°C
@@ -270,7 +284,7 @@ namespace Europlan.Common {
 				// 50°C
 				g.DrawLine(Pens.Black, x0 + leftOffset + gridWidth, y0Az + topOffset - 2, x0 + leftOffset + gridWidth, y0Az + topOffset + azGridHeight + 2);
 
-				g.DrawString("Tv\n°C", graphicsPanel.Font, Brushes.Black, x0 + leftOffset + gridWidth + 10, y0Az + topOffset + azGridHeight - 10);
+				g.DrawString(EuroplanRes.AuslegeAssistentForm_Tv, graphicsPanel.Font, Brushes.Black, x0 + leftOffset + gridWidth + 10, y0Az + topOffset + azGridHeight - 10);
 
 				temperature = 30;
 				for (int i = 0; i <= 20; i++) {

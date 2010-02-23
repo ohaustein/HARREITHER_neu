@@ -18,7 +18,6 @@ namespace Europlan.Common {
 		private static Project instance = null;
 		private static readonly object padlock = new object();
 		private static readonly ILog log = LogManager.GetLogger(typeof(Project));
-		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
 
 		private string projectNumber;
 		private string[] projectName;
@@ -123,36 +122,36 @@ namespace Europlan.Common {
 			configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 
 			// root node
-			string localized = resources.GetString("Project", Thread.CurrentThread.CurrentUICulture);
+			string localized = EuroplanRes.General_Projekt;
 			rootNode = new TreeNode(localized == null ? "Projekt" : localized);
 			rootNode.Tag = this;
 			rootNode.ImageIndex = 1;
 			rootNode.SelectedImageIndex = 1;
 
 			// building (floors and rooms)
-			localized = resources.GetString("Floors", Thread.CurrentThread.CurrentUICulture);
+			localized = EuroplanRes.General_Geschosse;
 			floorsNode = new TreeNode(localized == null ? "Geschoﬂe" : localized);
 			floorsNode.Tag = floors;
 
-			localized = resources.GetString("FacilityDetails", Thread.CurrentThread.CurrentUICulture);
+			localized = EuroplanRes.General_Anlagedaten;
 			facilityDetailsNode = new TreeNode(localized == null ? "Anlagedaten" : localized);
 			facilityDetailsNode.Tag = typeof(FacilityDetailsSummaryPanel);
 			facilityDetailsNode.ImageIndex = 2;
 			facilityDetailsNode.SelectedImageIndex = 2;
 
-			localized = resources.GetString("RegulatorCircuits", Thread.CurrentThread.CurrentUICulture);
+			localized = EuroplanRes.General_Regelkreise;
 			regulatorCircuitsNode = new TreeNode(localized == null ? "Regelkreise" : localized);
 			regulatorCircuitsNode.Tag = typeof(RegulatorCircuitsSummaryPanel);
-			
-			localized = resources.GetString("SystemParameters", Thread.CurrentThread.CurrentUICulture);
+
+			localized = EuroplanRes.General_Systemparameter;
 			systemParametersNode = new TreeNode(localized == null ? "Systemparameter" : localized);
 			systemParametersNode.Tag = typeof(SystemParametersPanel);
 
-			localized = resources.GetString("QuickDimensioning", Thread.CurrentThread.CurrentUICulture);
+			localized = EuroplanRes.General_Flaechenausfstellung;
 			quickDimensioningNode = new TreeNode(localized == null ? "Fl‰chenaufstellung" : localized);
 			quickDimensioningNode.Tag = quickDimensioning;
 
-			localized = resources.GetString("RequiredMaterial", Thread.CurrentThread.CurrentUICulture);
+			localized = EuroplanRes.General_Materialbedarf;
 			requiredMaterialNode = new TreeNode(localized == null ? "Materialbedarf" : localized);
 			requiredMaterialNode.Tag = typeof(RequiredMaterialPanel);
 
@@ -327,7 +326,7 @@ namespace Europlan.Common {
 		public static Project New() {
 			lock (padlock) {
 				Instance.InitializeProject();
-				string localized = ResourcesManager.resources.GetString("DefaultRegulatorCircuits", Thread.CurrentThread.CurrentUICulture);
+				string localized = EuroplanRes.General_Standardregelkreis;
 				Instance.RegulatorCircuits.Add(new RegulatorCircuit(localized));
 				return Instance;
 			}			

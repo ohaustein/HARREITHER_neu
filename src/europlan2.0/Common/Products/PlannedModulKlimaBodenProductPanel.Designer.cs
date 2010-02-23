@@ -157,10 +157,6 @@ namespace Europlan.Common {
 			this.label5 = new System.Windows.Forms.Label();
 			this.btnConnectionPipes = new System.Windows.Forms.Button();
 			this.lblDicht = new System.Windows.Forms.Label();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -1011,7 +1007,7 @@ namespace Europlan.Common {
 			this.lblHeatArea.Name = "lblHeatArea";
 			this.lblHeatArea.Size = new System.Drawing.Size(50, 13);
 			this.lblHeatArea.TabIndex = 170;
-			this.lblHeatArea.Text = "W";
+			this.lblHeatArea.Text = "0";
 			this.lblHeatArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// label3
@@ -1059,7 +1055,7 @@ namespace Europlan.Common {
 			this.lblCircuitCount.Name = "lblCircuitCount";
 			this.lblCircuitCount.Size = new System.Drawing.Size(50, 13);
 			this.lblCircuitCount.TabIndex = 152;
-			this.lblCircuitCount.Text = "W";
+			this.lblCircuitCount.Text = "0";
 			this.lblCircuitCount.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblVerbindeleitungenUnit
@@ -1268,7 +1264,7 @@ namespace Europlan.Common {
 			this.lblQAnbCool.Name = "lblQAnbCool";
 			this.lblQAnbCool.Size = new System.Drawing.Size(50, 13);
 			this.lblQAnbCool.TabIndex = 135;
-			this.lblQAnbCool.Text = "W";
+			this.lblQAnbCool.Text = "0";
 			this.lblQAnbCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblQAnbHeat
@@ -1277,7 +1273,7 @@ namespace Europlan.Common {
 			this.lblQAnbHeat.Name = "lblQAnbHeat";
 			this.lblQAnbHeat.Size = new System.Drawing.Size(50, 13);
 			this.lblQAnbHeat.TabIndex = 134;
-			this.lblQAnbHeat.Text = "W";
+			this.lblQAnbHeat.Text = "0";
 			this.lblQAnbHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// label45
@@ -1303,7 +1299,7 @@ namespace Europlan.Common {
 			this.lblAnbArea.Name = "lblAnbArea";
 			this.lblAnbArea.Size = new System.Drawing.Size(50, 13);
 			this.lblAnbArea.TabIndex = 131;
-			this.lblAnbArea.Text = "W";
+			this.lblAnbArea.Text = "0";
 			this.lblAnbArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// label38
@@ -1345,7 +1341,7 @@ namespace Europlan.Common {
 			this.lblRestArea.Name = "lblRestArea";
 			this.lblRestArea.Size = new System.Drawing.Size(50, 13);
 			this.lblRestArea.TabIndex = 126;
-			this.lblRestArea.Text = "W";
+			this.lblRestArea.Text = "0";
 			this.lblRestArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblCoveredArea
@@ -1354,7 +1350,7 @@ namespace Europlan.Common {
 			this.lblCoveredArea.Name = "lblCoveredArea";
 			this.lblCoveredArea.Size = new System.Drawing.Size(50, 13);
 			this.lblCoveredArea.TabIndex = 125;
-			this.lblCoveredArea.Text = "W";
+			this.lblCoveredArea.Text = "0";
 			this.lblCoveredArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblAvailableArea
@@ -1363,7 +1359,7 @@ namespace Europlan.Common {
 			this.lblAvailableArea.Name = "lblAvailableArea";
 			this.lblAvailableArea.Size = new System.Drawing.Size(50, 13);
 			this.lblAvailableArea.TabIndex = 124;
-			this.lblAvailableArea.Text = "W";
+			this.lblAvailableArea.Text = "0";
 			this.lblAvailableArea.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// label43
@@ -1545,7 +1541,7 @@ namespace Europlan.Common {
 			this.lblTempCool.Name = "lblTempCool";
 			this.lblTempCool.Size = new System.Drawing.Size(50, 13);
 			this.lblTempCool.TabIndex = 105;
-			this.lblTempCool.Text = "W";
+			this.lblTempCool.Text = "0";
 			this.lblTempCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblDruckverlustCool
@@ -1554,7 +1550,7 @@ namespace Europlan.Common {
 			this.lblDruckverlustCool.Name = "lblDruckverlustCool";
 			this.lblDruckverlustCool.Size = new System.Drawing.Size(50, 13);
 			this.lblDruckverlustCool.TabIndex = 104;
-			this.lblDruckverlustCool.Text = "W";
+			this.lblDruckverlustCool.Text = "0";
 			this.lblDruckverlustCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblDurchflussCool
@@ -1563,7 +1559,7 @@ namespace Europlan.Common {
 			this.lblDurchflussCool.Name = "lblDurchflussCool";
 			this.lblDurchflussCool.Size = new System.Drawing.Size(50, 13);
 			this.lblDurchflussCool.TabIndex = 103;
-			this.lblDurchflussCool.Text = "W";
+			this.lblDurchflussCool.Text = "0";
 			this.lblDurchflussCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblAvgqCool
@@ -1572,7 +1568,7 @@ namespace Europlan.Common {
 			this.lblAvgqCool.Name = "lblAvgqCool";
 			this.lblAvgqCool.Size = new System.Drawing.Size(50, 13);
 			this.lblAvgqCool.TabIndex = 102;
-			this.lblAvgqCool.Text = "W";
+			this.lblAvgqCool.Text = "0";
 			this.lblAvgqCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblQCoolRest
@@ -1581,7 +1577,7 @@ namespace Europlan.Common {
 			this.lblQCoolRest.Name = "lblQCoolRest";
 			this.lblQCoolRest.Size = new System.Drawing.Size(50, 13);
 			this.lblQCoolRest.TabIndex = 101;
-			this.lblQCoolRest.Text = "W";
+			this.lblQCoolRest.Text = "0";
 			this.lblQCoolRest.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblQCoolDiff
@@ -1590,7 +1586,7 @@ namespace Europlan.Common {
 			this.lblQCoolDiff.Name = "lblQCoolDiff";
 			this.lblQCoolDiff.Size = new System.Drawing.Size(50, 13);
 			this.lblQCoolDiff.TabIndex = 100;
-			this.lblQCoolDiff.Text = "W";
+			this.lblQCoolDiff.Text = "0";
 			this.lblQCoolDiff.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblQCool
@@ -1599,7 +1595,7 @@ namespace Europlan.Common {
 			this.lblQCool.Name = "lblQCool";
 			this.lblQCool.Size = new System.Drawing.Size(50, 13);
 			this.lblQCool.TabIndex = 99;
-			this.lblQCool.Text = "W";
+			this.lblQCool.Text = "0";
 			this.lblQCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblTempHeat
@@ -1608,7 +1604,7 @@ namespace Europlan.Common {
 			this.lblTempHeat.Name = "lblTempHeat";
 			this.lblTempHeat.Size = new System.Drawing.Size(50, 13);
 			this.lblTempHeat.TabIndex = 98;
-			this.lblTempHeat.Text = "W";
+			this.lblTempHeat.Text = "0";
 			this.lblTempHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblDruckverlustHeat
@@ -1617,7 +1613,7 @@ namespace Europlan.Common {
 			this.lblDruckverlustHeat.Name = "lblDruckverlustHeat";
 			this.lblDruckverlustHeat.Size = new System.Drawing.Size(50, 13);
 			this.lblDruckverlustHeat.TabIndex = 97;
-			this.lblDruckverlustHeat.Text = "W";
+			this.lblDruckverlustHeat.Text = "0";
 			this.lblDruckverlustHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblDurchflussHeat
@@ -1626,7 +1622,7 @@ namespace Europlan.Common {
 			this.lblDurchflussHeat.Name = "lblDurchflussHeat";
 			this.lblDurchflussHeat.Size = new System.Drawing.Size(50, 13);
 			this.lblDurchflussHeat.TabIndex = 96;
-			this.lblDurchflussHeat.Text = "W";
+			this.lblDurchflussHeat.Text = "0";
 			this.lblDurchflussHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblAvgqHeat
@@ -1635,7 +1631,7 @@ namespace Europlan.Common {
 			this.lblAvgqHeat.Name = "lblAvgqHeat";
 			this.lblAvgqHeat.Size = new System.Drawing.Size(50, 13);
 			this.lblAvgqHeat.TabIndex = 95;
-			this.lblAvgqHeat.Text = "W";
+			this.lblAvgqHeat.Text = "0";
 			this.lblAvgqHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblQHeatRest
@@ -1644,7 +1640,7 @@ namespace Europlan.Common {
 			this.lblQHeatRest.Name = "lblQHeatRest";
 			this.lblQHeatRest.Size = new System.Drawing.Size(50, 13);
 			this.lblQHeatRest.TabIndex = 94;
-			this.lblQHeatRest.Text = "W";
+			this.lblQHeatRest.Text = "0";
 			this.lblQHeatRest.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblQHeatDiff
@@ -1653,7 +1649,7 @@ namespace Europlan.Common {
 			this.lblQHeatDiff.Name = "lblQHeatDiff";
 			this.lblQHeatDiff.Size = new System.Drawing.Size(50, 13);
 			this.lblQHeatDiff.TabIndex = 93;
-			this.lblQHeatDiff.Text = "W";
+			this.lblQHeatDiff.Text = "0";
 			this.lblQHeatDiff.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblQHeat
@@ -1662,7 +1658,7 @@ namespace Europlan.Common {
 			this.lblQHeat.Name = "lblQHeat";
 			this.lblQHeat.Size = new System.Drawing.Size(50, 13);
 			this.lblQHeat.TabIndex = 92;
-			this.lblQHeat.Text = "W";
+			this.lblQHeat.Text = "0";
 			this.lblQHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblRest
@@ -1802,30 +1798,6 @@ namespace Europlan.Common {
 			this.lblDicht.TabIndex = 29;
 			this.lblDicht.Text = "Module in dichter Belegung:";
 			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "PipeType";
-			this.dataGridViewTextBoxColumn1.HeaderText = "PipeType";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "Verlegeart";
-			this.dataGridViewTextBoxColumn2.HeaderText = "Verlegeart";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.HeaderText = "Column3";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn4
-			// 
-			this.dataGridViewTextBoxColumn4.HeaderText = "Column4";
-			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1892,8 +1864,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblDistributor;
 		private System.Windows.Forms.TextBox txtDistributor;
 		private System.Windows.Forms.GroupBox groupBox10;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private ConnectionPipePanel connectionPipePanel;
 		private System.Windows.Forms.Label lblAreaUnheated;
 		private NumericBox numAreaUnheated;
@@ -1903,8 +1873,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblAreaUnit;
 		private NumericBox numArea;
 		private System.Windows.Forms.Label lblAreaTxt;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
 		private System.Windows.Forms.Label lblDicht;
 		private System.Windows.Forms.Button btnConnectionPipes;
 		private System.Windows.Forms.Label label9;

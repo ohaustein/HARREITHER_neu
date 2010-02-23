@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using System.Xml.Serialization;
 using System.Diagnostics;
+using System.Threading;
+using Europlan.Common;
 
 namespace Europlan.Licensing {
 	public abstract class AbstractLicense<ModuleType, SystemType> where ModuleType : AbstractLicensedModule where SystemType : AbstractLicensedSystem {
@@ -13,6 +15,8 @@ namespace Europlan.Licensing {
 		protected DateTime validUntil = DateTime.Now;
 		protected List<ModuleType> modules;
 		protected List<SystemType> systems;
+
+		private System.Resources.ResourceManager resources = Europlan.Common.EuroplanRes.ResourceManager;
 
 		public AbstractLicense() {
 			this.modules = new List<ModuleType>();
@@ -34,7 +38,7 @@ namespace Europlan.Licensing {
 
 		public string DisplayName {
 			get {
-				string result = (string.IsNullOrEmpty(this.licensedTo)) ? "neue Lizenz" : this.licensedTo;
+				string result = (string.IsNullOrEmpty(this.licensedTo)) ? EuroplanRes.AbstractLicense_NeueLizenz /*"neue Lizenz"*/ : this.licensedTo;
 				//result += " (" + this.validUntil.ToShortDateString() + ")";
 				return result; // TODO
 			}

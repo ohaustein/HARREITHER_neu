@@ -29,8 +29,6 @@ namespace Europlan.Application {
 			System.Windows.Forms.Application.EnableVisualStyles();
 			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
-			ResourcesManager.resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-
 			StartingForm startingForm = new StartingForm();
 			startingForm.Show();
 			startingForm.Update();
@@ -68,8 +66,8 @@ namespace Europlan.Application {
 			Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
 
 			if (IsApplicationAlreadyRunning()) {
-				string message = ResourcesManager.resources.GetString("AlreadyRunningMessage", Thread.CurrentThread.CurrentUICulture);
-				string caption = ResourcesManager.resources.GetString("AlreadyRunningCaption", Thread.CurrentThread.CurrentUICulture);
+				string message = EuroplanRes.General_LaeuftBereitsText;
+				string caption = EuroplanRes.General_LaeuftBereitsTitel;
 				MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}

@@ -36,7 +36,6 @@ namespace Europlan.Common {
 			this.rbExtendedCorrections = new System.Windows.Forms.RadioButton();
 			this.rbStandardCorrections = new System.Windows.Forms.RadioButton();
 			this.extendedCorrectionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.CircuitNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.correctAreaDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.areaValueDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
@@ -127,16 +126,6 @@ namespace Europlan.Common {
 			// extendedCorrectionsBindingSource
 			// 
 			this.extendedCorrectionsBindingSource.DataSource = typeof(Europlan.Common.ExtendedCorrections);
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "CircuitNr";
-			this.dataGridViewTextBoxColumn1.FillWeight = 40F;
-			this.dataGridViewTextBoxColumn1.HeaderText = "Heiz-\nkreis\nNr.";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.dataGridViewTextBoxColumn1.Width = 40;
 			// 
 			// CircuitNr
 			// 
@@ -300,7 +289,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.BindingSource extendedCorrectionsBindingSource;
 		private System.Windows.Forms.RadioButton rbExtendedCorrections;
 		private System.Windows.Forms.RadioButton rbStandardCorrections;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn CircuitNr;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn correctAreaDataGridViewCheckBoxColumn;
 		private NumericColumn areaValueDataGridViewTextBoxColumn;

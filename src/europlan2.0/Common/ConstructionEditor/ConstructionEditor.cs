@@ -6,16 +6,34 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using Europlan.Common;
+using System.Threading;
 
 namespace Europlan.Common {
 	public partial class ConstructionEditor : UserControl {
 
 		private ConstructionScopeEnum defaultConstructionScope = ConstructionScopeEnum.FloorConstruction;
 		private Construction construction = null;
+		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		public ConstructionEditor() {
 			InitializeComponent();
+			this.SetLanguage();
 			this.UpdateConstructionScopeOfGui();
+		}
+
+		public void SetLanguage() {
+			this.lblId.Text = EuroplanRes.General_Nummer; //"Nummer:";
+			this.lblName.Text = EuroplanRes.General_Bezeichnung; //"Bezeichnung:";
+			this.lblThickness.Text = EuroplanRes.ConstructionEditor_Estrichdicke; //"Estrichdicke:";
+			this.cbPeFoil.Text = EuroplanRes.ConstructionEditor_PeFolie; //"PE Folie";
+			this.lblFactor.Text = EuroplanRes.ConstructionEditor_Faktor; //"Faktor:";
+			this.chkHitherm.Text = EuroplanRes.ConstructionEditor_Hitherm; //"Hitherm®";
+			this.chkHithermCompact.Text = EuroplanRes.ConstructionEditor_HithermCompact; //"Hitherm® Compact";
+			this.colName.HeaderText = EuroplanRes.General_BezeichnungCol; //"Bezeichnung";
+			this.colMaterial.HeaderText = EuroplanRes.ConstructionEditor_MaterialCol; //"Material";
+			this.colLambdaValue.HeaderText = EuroplanRes.ConstructionEditor_LambdaCol; //"lambda (W/m K)";
+			this.colThickness.HeaderText = EuroplanRes.ConstructionEditor_DickeCol; //"d (mm)";
+			this.colRValue.HeaderText = EuroplanRes.ConstructionEditor_RWertCol; //"R (m²K/W)";
 		}
 
 		public ConstructionScopeEnum ConstructionScope {

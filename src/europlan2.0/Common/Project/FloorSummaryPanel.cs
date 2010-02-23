@@ -18,11 +18,43 @@ namespace Europlan.Common {
 		
 		public FloorSummaryPanel() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			//this.gridRooms.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
 			this.gridRooms.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomCenter;
 			this.gridRooms.CellPainting += new DataGridViewCellPaintingEventHandler(gridRooms_CellPainting);
 			this.gridRooms.Paint += new PaintEventHandler(gridRooms_Paint);
 			this.gridRooms.ColumnWidthChanged += new DataGridViewColumnEventHandler(gridRooms_ColumnWidthChanged);
+		}
+
+		private void SetLanguage() {
+			this.btnWhatIsNext.Text = EuroplanRes.General_WieGehtsWeiter; //"Wie geht\'s weiter?";
+
+			this.btnAddDistributor.Text = EuroplanRes.FloorSummaryPanel_VerteilerAnlegen; //"Verteiler anlegen";
+			this.label1.Text = EuroplanRes.FloorSummaryPanel_Geschossdaten; //"Geschoßdaten:";
+			this.btnRemoveDistributor.Text = EuroplanRes.FloorSummaryPanel_VerteilerLoeschen; //"Verteiler löschen";
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.FloorSummaryPanel_Nummer; //"Nr.\n";
+			this.idDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.FloorSummaryPanel_NummerLang; //"eindeutige Raumnummer";
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.FloorSummaryPanel_Bezeichnung; //"Bezeichnung\n";
+			this.nameDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.FloorSummaryPanel_BezeichnungLang; //"Bezeichnung des Raumes";
+			this.Area.HeaderText = EuroplanRes.FloorSummaryPanel_Flaeche; //"A\n(m²)";
+			this.Area.ToolTipText = EuroplanRes.FloorSummaryPanel_FlaecheLang; //"Raumfläche";
+			this.RoomTemperature.HeaderText = EuroplanRes.FloorSummaryPanel_RaumtemperaturHeiz; //"Ti\n(°C)";
+			this.RoomTemperature.ToolTipText = EuroplanRes.FloorSummaryPanel_RaumtemperaturHeizLang; //"Norminnentemperatur laut Wärmebedarfsberechnung";
+			this.HeatLoad.HeaderText = EuroplanRes.FloorSummaryPanel_Waermebedarf; //"QN\n(W)";
+			this.HeatLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_WaermebedarfLang; //"Normwärmebedarf laut Wärmebedarfsrechnung";
+			this.FloorHeatingLoss.HeaderText = EuroplanRes.FloorSummaryPanel_Fussbodentransmissionen; //"QFB\n(W)";
+			this.FloorHeatingLoss.ToolTipText = EuroplanRes.FloorSummaryPanel_FussbodentransmissionenLang; //"Im Wärmebedarf enthaltene Fußbodentransmissionen";
+			this.AdditionalHeatLoad.HeaderText = EuroplanRes.FloorSummaryPanel_Fremdwaermeleistung; //"QFr\n(W)";
+			this.AdditionalHeatLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_FremdwaermeleistungLang; //"Zusätzliche Fremdwärmeleistung";
+			this.RoomCoolTemperature.HeaderText = EuroplanRes.FloorSummaryPanel_RaumtemperaturKuehl; //"Ti\n(°C)";
+			this.RoomCoolTemperature.ToolTipText = EuroplanRes.FloorSummaryPanel_RaumtemperaturKuehlLang; //"Gewünschte Rauminnentemperatur bei Kühlung";
+			this.RoomRelativeHumidity.HeaderText = EuroplanRes.FloorSummaryPanel_Luftfeuchtigkeit; //"RF\n(%)";
+			this.RoomRelativeHumidity.ToolTipText = EuroplanRes.FloorSummaryPanel_LuftfeuchtigkeitLang; //"Relative Luftfeuchtigkeit für Kühlung";
+			this.CoolLoad.HeaderText = EuroplanRes.FloorSummaryPanel_Kuehlleistung; //"QKühl\n(W)";
+			this.CoolLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_KuehlleistungLang; //"Erforderliche Külleistung laut Kühllastberechnung";
+			this.colView.HeaderText = EuroplanRes.FloorSummaryPanel_Bearbeiten; //"Bearbeiten\n";
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -111,7 +143,10 @@ namespace Europlan.Common {
 							ceilingArea += pp.Product.PlannedCeilingArea;
 						}
 						if (floorArea > r.Area || ceilingArea > r.Area) {
-							if (MessageBox.Show("In diesem Raum sind bereits Systeme verplant die eine Raumgröße von " + Math.Round((floorArea > ceilingArea ? floorArea : ceilingArea), 1).ToString() + "m² in Anspruch nehmen, die neue Raumgröße beträgt aber nur " + Math.Round(r.Area, 1).ToString() + "m². Wenn Sie die neue Raumgröße übernehmen werden die verplanten Flächen der Systeme verkleinert.", "Wollen Sie die neue Raumgröße übernehmen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+							string message = EuroplanRes.FloorSummaryPanel_RaumflaecheZuKleinText;
+							message = message.Replace("%SYSTEME%", Math.Round((floorArea > ceilingArea ? floorArea : ceilingArea), 1).ToString());
+							message = message.Replace("%RAUM%", Math.Round(r.Area, 1).ToString());
+							if (MessageBox.Show(message, EuroplanRes.FloorSummaryPanel_RaumflaecheZuKleinTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 								foreach (PlannedProduct pp in r.PlannedProducts) {
 									if (floorArea > r.Area && pp.Product.PlannedFloorArea > 0) {
 										pp.Product.PlannedFloorArea = (float)(pp.Product.PlannedFloorArea * r.Area / floorArea);
@@ -179,7 +214,7 @@ namespace Europlan.Common {
 				}
 				form.Dispose();
 			} else {
-				MessageBox.Show("Ein Verteiler benötigt einen Regelkreis, an den er angeschlossen werden kann. Bitte legen Sie unter 'Regelkreise' zumindest einen Regelkreis an", "Kein Regelkreis vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show(EuroplanRes.FloorSummaryPanel_KeinRegelkreisText, EuroplanRes.FloorSummaryPanel_KeinRegelkreisTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
 		}
 
@@ -200,7 +235,7 @@ namespace Europlan.Common {
 							}
 						}
 						if (usedForQuickDimensioning) {
-							if (MessageBox.Show("Die Zuordnung von Heizkreisen and diesen Verteiler geht in der Flächenaufstellung verloren, wenn der Verteiler gelöscht wird. Trotzdem löschen?", "Verteiler löschen?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+							if (MessageBox.Show(EuroplanRes.FloorSummaryPanel_VerteilerLoeschenText, EuroplanRes.FloorSummaryPanel_VerteilerLoeschenTitel, MessageBoxButtons.YesNo) == DialogResult.Yes) {
 								foreach (Floor f in Project.Instance.Floors) {
 									foreach (Room r in f.Rooms) {
 										foreach (Product p in r.UsedProductsForQuickDimensioning) {
@@ -261,7 +296,7 @@ namespace Europlan.Common {
 			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
 			//e.Graphics.DrawLine(new Pen(SystemColors.ControlDark), new Point(r1.X, r1.Y + 2), new Point(r1.X + r1.Width, r1.Y + 2));
 			//e.Graphics.DrawLine(new Pen(SystemColors.ControlDark), new Point(r1.X, r1.Y + r1.Height - 7), new Point(r1.X + r1.Width, r1.Y + r1.Height - 7));
-			e.Graphics.DrawString("Heizbetrieb",
+			e.Graphics.DrawString(EuroplanRes.FloorSummaryPanel_Heizbetrieb,
 				this.gridRooms.ColumnHeadersDefaultCellStyle.Font,
 				new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.ForeColor),
 				r1,
@@ -284,7 +319,7 @@ namespace Europlan.Common {
 			format.LineAlignment = StringAlignment.Center;
 			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
 			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			e.Graphics.DrawString("Kühlbetrieb",
+			e.Graphics.DrawString(EuroplanRes.FloorSummaryPanel_Kuehlbetrieb,
 				this.gridRooms.ColumnHeadersDefaultCellStyle.Font,
 				new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.ForeColor),
 				r1,
@@ -308,7 +343,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnWhatIsNext_Click(object sender, EventArgs e) {
-			MessageBox.Show("Klicken Sie auf einen der Buttons in der Spalte\n'Bearbeiten' um den entsprechenden Raum zu öffnen, oder\n klicken Sie in der Projekthierarchie auf den gewünschten Raum.", "Wie geht's weiter?");
+			MessageBox.Show(EuroplanRes.FloorSummaryPanel_WieGehtsWeiterText, EuroplanRes.FloorSummaryPanel_WieGehtsWeiterTitel);
 		}
 
 		Nullable<float> oldArea = null;

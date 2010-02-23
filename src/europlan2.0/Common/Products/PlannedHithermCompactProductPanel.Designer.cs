@@ -147,10 +147,6 @@ namespace Europlan.Common {
 			this.label5 = new System.Windows.Forms.Label();
 			this.lblHk = new System.Windows.Forms.Label();
 			this.btnConnectionPipes = new System.Windows.Forms.Button();
-			this.PipeType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Verlegeart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.grpPowerArea.SuspendLayout();
 			this.tabs.SuspendLayout();
 			this.pageInput.SuspendLayout();
@@ -1507,30 +1503,6 @@ namespace Europlan.Common {
 			this.btnConnectionPipes.UseVisualStyleBackColor = true;
 			this.btnConnectionPipes.Click += new System.EventHandler(this.btnConnectionPipes_Click);
 			// 
-			// PipeType
-			// 
-			this.PipeType.DataPropertyName = "PipeType";
-			this.PipeType.HeaderText = "PipeType";
-			this.PipeType.Name = "PipeType";
-			this.PipeType.ReadOnly = true;
-			// 
-			// Verlegeart
-			// 
-			this.Verlegeart.DataPropertyName = "Verlegeart";
-			this.Verlegeart.HeaderText = "Verlegeart";
-			this.Verlegeart.Name = "Verlegeart";
-			// 
-			// Column3
-			// 
-			this.Column3.HeaderText = "Column3";
-			this.Column3.Name = "Column3";
-			this.Column3.ReadOnly = true;
-			// 
-			// Column4
-			// 
-			this.Column4.HeaderText = "Column4";
-			this.Column4.Name = "Column4";
-			// 
 			// PlannedHithermCompactProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1586,11 +1558,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblDistributor;
 		private System.Windows.Forms.TextBox txtDistributor;
 		private System.Windows.Forms.GroupBox groupBox10;
-		private System.Windows.Forms.DataGridViewTextBoxColumn PipeType;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Verlegeart;
 		private ConnectionPipePanel connectionPipePanel;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
 		private System.Windows.Forms.Button btnConnectionPipes;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label6;

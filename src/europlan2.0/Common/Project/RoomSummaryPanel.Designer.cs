@@ -559,7 +559,7 @@ namespace Europlan.Common {
 			// 
 			this.colType.DataPropertyName = "PlannedProductType";
 			this.colType.FillWeight = 50F;
-			this.colType.HeaderText = "Type";
+			this.colType.HeaderText = "Typ";
 			this.colType.Name = "colType";
 			this.colType.ReadOnly = true;
 			this.colType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Xml.Serialization;
+using System.Threading;
 
 namespace Europlan.Common {
 	public class HithermCompactRegister {
 		#region Enums
 		public class RegisterTypeEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string hitc_620_std = "HIT 620 Std";
-			private static readonly string hitc_1000_std = "HIT 1000 Std";
-			private static readonly string hitc_1500_std = "HIT 1500 Std";
-			private static readonly string hitc_2000_std = "HIT 2000 Std";
-			private static readonly string hitc_2500_std = "HIT 2500 Std";
-			private static readonly string hitc_1000_par = "HIT 1000 Par";
-			private static readonly string hitc_1500_par = "HIT 1500 Par";
-			private static readonly string hitc_2000_par = "HIT 2000 Par";
+			private static readonly string hitc_620_std = EuroplanRes.HithermCompactRegister_Hit620Std; //"HIT 620 Std";
+			private static readonly string hitc_1000_std = EuroplanRes.HithermCompactRegister_Hit1000Std; //"HIT 1000 Std";
+			private static readonly string hitc_1500_std = EuroplanRes.HithermCompactRegister_Hit1500Std; //"HIT 1500 Std";
+			private static readonly string hitc_2000_std = EuroplanRes.HithermCompactRegister_Hit2000Std; //"HIT 2000 Std";
+			private static readonly string hitc_2500_std = EuroplanRes.HithermCompactRegister_Hit2500Std; //"HIT 2500 Std";
+			private static readonly string hitc_1000_par = EuroplanRes.HithermCompactRegister_Hit1000Par; //"HIT 1000 Par";
+			private static readonly string hitc_1500_par = EuroplanRes.HithermCompactRegister_Hit1500Par; //"HIT 1500 Par";
+			private static readonly string hitc_2000_par = EuroplanRes.HithermCompactRegister_Hit2000Par; //"HIT 2000 Par";
 
 			private Dictionary<string, HithermCompactRegisterTypeEnum> mappingFromString = new Dictionary<string, HithermCompactRegisterTypeEnum>();
 			private Dictionary<HithermCompactRegisterTypeEnum, string> mappingToString = new Dictionary<HithermCompactRegisterTypeEnum, string>();

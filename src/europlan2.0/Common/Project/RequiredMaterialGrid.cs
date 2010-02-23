@@ -22,7 +22,19 @@ namespace Europlan.Common {
 
 		public RequiredMaterialGrid() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			UpdateControl(true);
+		}
+
+		private void SetLanguage() {
+			this.label1.Text = EuroplanRes.RequiredMaterialGrid_Hinweis; //"Bitte unbedingt beachten: Rot markierte Materialpositionen müssen vom Planenden selbst anhand der Planungsvorlage ermittelt werden!";
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Bezeichnung; //"Bezeichnung";
+			this.partNumberDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Bestellnummer; //"Bestellnummer";
+			this.requiredAmountDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Menge; //"Menge";
+			this.calculatedAmountDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Berechnet; //"(berechnet)";
+			this.unitDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Einheit; //"Einheit";
 		}
 
 		public void UpdateControl(bool resetUserInterface) {

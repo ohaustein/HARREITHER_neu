@@ -15,7 +15,32 @@ namespace Europlan.Common {
 
 		public FacilityDetailsSummaryPanel() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			UpdateControl(true);
+		}
+
+		private void SetLanguage() {
+			this.label4.Text = EuroplanRes.General_GradCelsius;
+			this.label5.Text = EuroplanRes.General_Prozent;
+			this.label13.Text = EuroplanRes.General_GradCelsius;
+			this.label11.Text = EuroplanRes.General_GradCelsius;
+			this.label7.Text = EuroplanRes.General_GradCelsius;
+			this.btnNext.Text = EuroplanRes.General_Weiter;
+
+			this.label1.Text = EuroplanRes.FacilityDetailsSummaryPanel_Anlagedaten; //"Anlagedaten";
+			this.label3.Text = EuroplanRes.FacilityDetailsSummaryPanel_Normaussentemperatur; //"Normaußentemperatur:";
+			this.label2.Text = EuroplanRes.FacilityDetailsSummaryPanel_Spreizung; //"Spreizung:";
+			this.chkSpreizung.Text = EuroplanRes.FacilityDetailsSummaryPanel_VariableSpreizungVerwenden; //"variable Spreizung für endgültige Berechnung verwenden";
+			this.groupBox1.Text = EuroplanRes.FacilityDetailsSummaryPanel_Allgemein; //"Generell";
+			this.groupBox2.Text = EuroplanRes.FacilityDetailsSummaryPanel_Kuehlung; //"Kühlung";
+			this.label12.Text = EuroplanRes.FacilityDetailsSummaryPanel_Taupunkttemperatur; //"Taupunkttemperatur:";
+			this.label10.Text = EuroplanRes.FacilityDetailsSummaryPanel_InnentemperaturKuehlung; //"Innentemperatur für Kühlung:";
+			this.label8.Text = EuroplanRes.FacilityDetailsSummaryPanel_Luftfeuchtigkeit; //"Relative Luftfeuchtigkeit:";
+			this.label6.Text = EuroplanRes.FacilityDetailsSummaryPanel_AussentemperaturKuehlung; //"Außentemperatur für Kühlung:";
+			this.chkCool.Text = EuroplanRes.FacilityDetailsSummaryPanel_KuehlleistungBerechnen; //"Kühlleistung berechnen";
+
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -42,7 +67,7 @@ namespace Europlan.Common {
 				double dewPoint = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)Project.Instance.RelativeHumidity) / 100, (double)Project.Instance.InsideTemperatureForCooling), 1);
 				foreach (RegulatorCircuit circuit in Project.Instance.RegulatorCircuits) {
 					if (dewPoint > circuit.CoolFlowTemperature) {
-						DialogResult result = MessageBox.Show("Bei mindestens einem Regelkreis ist die Kühltemperatur niedriger als der Taupunkt gemäß den eingegebenen Projektdaten. Wollen Sie die Eingaben korrigieren?", "Eingabefehler", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+						DialogResult result = MessageBox.Show(EuroplanRes.FacilityDetailsSummaryPanel_KuehltemperaturZuNiedrigText, EuroplanRes.FacilityDetailsSummaryPanel_KuehltemperaturZuNiedrigTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 						return result.Equals(DialogResult.Yes) ? false : true;
 					}
 				}

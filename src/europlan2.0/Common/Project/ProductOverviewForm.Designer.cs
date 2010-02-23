@@ -62,8 +62,6 @@ namespace Europlan.Common {
 			this.okDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.editColumn = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.productOverviewWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dgvProductOverview)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.productOverviewWrapperBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -345,24 +343,6 @@ namespace Europlan.Common {
 			// 
 			this.productOverviewWrapperBindingSource.DataSource = typeof(Europlan.Common.ProductOverviewWrapper);
 			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "RimType";
-			dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle18;
-			this.dataGridViewTextBoxColumn1.HeaderText = "Verlegeabstand\nRZ";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "LayDistance";
-			dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle19;
-			this.dataGridViewTextBoxColumn2.HeaderText = "Verlegeabstand\nAZ";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.ReadOnly = true;
-			// 
 			// ProductOverviewForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -402,8 +382,6 @@ namespace Europlan.Common {
 		private NumericColumn coolRestDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn okDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewButtonColumn editColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 
 
 	}

@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using Europlan.Common;
+using System.Threading;
 
 namespace Europlan.Common {
 	public partial class MaterialEditorGrid : UserControl {
@@ -32,11 +33,14 @@ namespace Europlan.Common {
 			}
 		}
 
+		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
+
 		private MaterialListWrapper wrapper;
 		private bool admin = false;
 
 		public MaterialEditorGrid() {
 			InitializeComponent();
+			this.SetLanguage();
 			this.wrapper = new MaterialListWrapper(Configuration.ConfigurationType.UserConfiguration); // TODO anpassen, falls MaterialEditorGrid auch für admin verwendet werden soll!
 			this.materialsWrapperBindingSource.DataSource = this.wrapper;
 			this.materialsWrapperBindingSource.ResetBindings(false);
@@ -51,6 +55,16 @@ namespace Europlan.Common {
 				categories.Add(new MaterialCategoryGridItem(category));
 			}
 			materialCategoryGridItemBindingSource.DataSource = categories;
+		}
+
+		private void SetLanguage() {
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_Nummer; // "Nr.";
+			this.partNumberDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_BestellnummerCol; //"Bestellnr.";
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_BezeichnungCol; //"Bezeichnung";
+			this.unitDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_EinheitCol; //"Einheit";
+			this.denominationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_VerpackungseinheitCol; //"Verpackungs-\neinheit";
+			this.priceDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_PreisCol; //"Preis pro Einheit";
+			this.Category.HeaderText = EuroplanRes.MaterialEditorGrid_KategorieCol; //"Kategorie";
 		}
 
 		public bool Admin {

@@ -17,7 +17,40 @@ namespace Europlan.Common {
 		
 		public RoomSummaryPanel() {
 			InitializeComponent();
+
+			this.SetLanguage();
 			room = null;
+		}
+
+		private void SetLanguage() {
+			this.label1.Text = EuroplanRes.General_Quadratmeter; //"m²";
+			this.label2.Text = EuroplanRes.General_GradCelsius; //"°C";
+			this.label3.Text = EuroplanRes.General_Watt; //"W";
+			this.label4.Text = EuroplanRes.General_Watt; //"W";
+			this.label5.Text = EuroplanRes.General_Watt; //"W";
+			this.label6.Text = EuroplanRes.General_Watt; //"W";
+
+			this.btnWhatIsNext.Text = EuroplanRes.General_WieGehtsWeiter; //"Wie geht\'s weiter?";
+			this.colEdit.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten";
+
+			this.lblName.Text = EuroplanRes.RoomSummaryPanel_Name; //"Name:";
+			this.lblArea.Text = EuroplanRes.RoomSummaryPanel_Flaeche; //"Fläche:";
+			this.lblTemperature.Text = EuroplanRes.RoomSummaryPanel_Raumtemperatur; //"Norminnentemperatur:";
+			this.lblHeat.Text = EuroplanRes.RoomSummaryPanel_Heizlast; //"Heizlast:";
+			this.lblNormHeat.Text = EuroplanRes.RoomSummaryPanel_HeizlastBereinigt; //"Heizlast (bereinigt):";
+			this.lblCool.Text = EuroplanRes.RoomSummaryPanel_Kuehllast; //"Kühllast:";
+			this.lblNormCool.Text = EuroplanRes.RoomSummaryPanel_KuehllastBereinigt; //"Kühllast (bereinigt):";
+			this.lblRoomData.Text = EuroplanRes.RoomSummaryPanel_Raumdaten; //"Raumdaten:";
+			this.grpBoxSystems.Text = EuroplanRes.RoomSummaryPanel_Heizsysteme; //"Heizsysteme";
+			this.btnDelete.Text = EuroplanRes.RoomSummaryPanel_Loeschen; //"Löschen";
+			this.btnAdd.Text = EuroplanRes.RoomSummaryPanel_Hinzufuegen; //"Hinzufügen";
+			this.colType.HeaderText = EuroplanRes.RoomSummaryPanel_Typ; //"Typ";
+			this.colSystem.HeaderText = EuroplanRes.RoomSummaryPanel_System; //"System";
+			this.colComment.HeaderText = EuroplanRes.RoomSummaryPanel_Bemerkung; //"Bemerkung";
+			this.colFloorArea.HeaderText = EuroplanRes.RoomSummaryPanel_FbhFlaeche; //"FBH-\nFläche\n(m²)";
+			this.colPlannedArea.HeaderText = EuroplanRes.RoomSummaryPanel_Heizflaeche; //"Heiz-\nfläche\n(m²)";
+			this.colPlannedHeatLoad.HeaderText = EuroplanRes.RoomSummaryPanel_Heizleistung; //"PHeiz\n(W)";
+			this.colPlannedCoolLoad.HeaderText = EuroplanRes.RoomSummaryPanel_Kuehlleistung; //"PKühl\n(W)";
 		}
 
 
@@ -25,9 +58,9 @@ namespace Europlan.Common {
 			if (this.Tag != null) {
 				this.room = this.Tag as Room;
 				this.lblRoomName.Text = this.room.Id + " - " + this.room.Name;
-				this.lblAreaValue.Text = this.room.Area.ToString("0.0") + " m²";
-				this.lblHeatLoadValue.Text = this.room.NormalizedHeatLoad.ToString("0") + " W (bereinigt)";
-				this.lblCoolLoadValue.Text = this.room.NormalizedCoolLoad.ToString("0") + " W (bereinigt)";
+				this.lblAreaValue.Text = this.room.Area.ToString("0.0") + EuroplanRes.General_Quadratmeter;
+				this.lblHeatLoadValue.Text = this.room.NormalizedHeatLoad.ToString("0") + EuroplanRes.General_Watt + " " + EuroplanRes.RoomSummaryPanel_Bereinigt;
+				this.lblCoolLoadValue.Text = this.room.NormalizedCoolLoad.ToString("0") + EuroplanRes.General_Watt + " " + EuroplanRes.RoomSummaryPanel_Bereinigt;
 				List<PlannedProduct> plannedProducts = new List<PlannedProduct>();
 				foreach (PlannedProduct plannedProduct in this.room.PlannedProducts) {
 					plannedProducts.Add(plannedProduct);
@@ -63,7 +96,7 @@ namespace Europlan.Common {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
-				MessageBox.Show("Fehler im Format der Eingabe");
+				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				this.txtTemperature.Text = room.RoomHeatTemperature.ToString();
 			}
 		}
@@ -75,7 +108,7 @@ namespace Europlan.Common {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
-				MessageBox.Show("Fehler im Format der Eingabe");
+				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				this.txtTemperature.Text = room.RoomHeatTemperature.ToString();
 			}
 		}
@@ -87,7 +120,7 @@ namespace Europlan.Common {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
-				MessageBox.Show("Fehler im Format der Eingabe");
+				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				this.txtHeat.Text = room.HeatLoad.ToString();
 			}
 		}
@@ -99,7 +132,7 @@ namespace Europlan.Common {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
-				MessageBox.Show("Fehler im Format der Eingabe");
+				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				this.txtNormHeat.Text = room.NormalizedHeatLoad.ToString();
 			}
 		}
@@ -111,7 +144,7 @@ namespace Europlan.Common {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
-				MessageBox.Show("Fehler im Format der Eingabe");
+				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				this.txtCool.Text = room.CoolLoad.ToString();
 			}
 		}
@@ -123,7 +156,7 @@ namespace Europlan.Common {
 					ProjectChanged(null);
 				}
 			} catch (Exception) {
-				MessageBox.Show("Fehler im Format der Eingabe");
+				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				this.txtNormCool.Text = room.NormalizedCoolLoad.ToString();
 			}
 		}
@@ -183,7 +216,9 @@ namespace Europlan.Common {
 				DataGridViewRow row = dgvProducts.Rows[rowIndex];
 				PlannedProduct product = row.DataBoundItem as PlannedProduct;
 				if (product.Node != null) {
-					if (MessageBox.Show("Wollen Sie das System " + product.Node.Text + " wirklich löschen.", "Heizsystem löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					string message = EuroplanRes.RoomSummaryPanel_LoeschenBestaetigenText;
+					message = message.Replace("%SYSTEM%", product.Node.Text);
+					if (MessageBox.Show(message, EuroplanRes.RoomSummaryPanel_LoeschenBestaetigenTitel, MessageBoxButtons.YesNo) == DialogResult.Yes) {
 
 						PlannedProduct connectedProduct = this.room.GetFloor().FindConnectedProduct(product);
 						if (connectedProduct != null) {
@@ -291,7 +326,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnWhatIsNext_Click(object sender, EventArgs e) {
-			MessageBox.Show("Klicken Sie auf einen der Buttons in der Spalte\n'Bearbeiten' um das entsprechende Heizsystem zu öffnen, oder\n klicken Sie in der Projekthierarchie auf das gewünschte Heizsystem.", "Wie geht's weiter?");
+			MessageBox.Show(EuroplanRes.RoomSummaryPanel_WieGehtsWeiterText, EuroplanRes.RoomSummaryPanel_WieGehtsWeiterTitel);
 		}
 
 	}

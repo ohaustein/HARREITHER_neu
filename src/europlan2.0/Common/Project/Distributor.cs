@@ -62,9 +62,9 @@ namespace Europlan.Common {
 
 		public class AnschlussHollaenderEnumConverter : System.ComponentModel.TypeConverter {
 
-			private static readonly string kein = "Kein Holländer";
-			private static readonly string hollaender32 = "Anschlußholländer mit Anschlußstück Ø 32mm";
-			private static readonly string hollaenderIG = "Anschlußholländer mit Anschlußstück 1\" IG";
+			private static readonly string kein = EuroplanRes.Distributor_KeinHollaender;
+			private static readonly string hollaender32 = EuroplanRes.Distributor_Hollaender32mm;
+			private static readonly string hollaenderIG = EuroplanRes.Distributor_HollaenderIg;
 			//private static readonly string hollaenderAG = "Anschlußholländer mit Anschlußstück 1\" AG";
 
 			private Dictionary<string,  AnschlussHollaenderEnum> mappingFromString = new Dictionary<string,  AnschlussHollaenderEnum>();
@@ -173,7 +173,7 @@ namespace Europlan.Common {
 			set {
 				id = value;
 				if (distributorNode != null) {
-					distributorNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : id + ": " + name);
+					distributorNode.Text = (String.IsNullOrEmpty(name) ? EuroplanRes.Distributor_Unbenannt : id + ": " + name);
 				}
 			}
 		}
@@ -183,7 +183,7 @@ namespace Europlan.Common {
 			set {
 				name = value;
 				if (distributorNode != null) {
-					distributorNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : id + ": " + name);
+					distributorNode.Text = (String.IsNullOrEmpty(name) ? EuroplanRes.Distributor_Unbenannt : id + ": " + name);
 				}
 			}
 		}

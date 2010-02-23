@@ -48,9 +48,6 @@ namespace Europlan.Common {
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Room));
 
-		[NonSerialized]
-		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
-
 		public Room() {
 			InitializeRoom();
 			this.Name = "";
@@ -63,7 +60,7 @@ namespace Europlan.Common {
 
 		public Room(Room room) {
 			InitializeRoom();
-			string copyOf = resources.GetString("CopyOf", Thread.CurrentThread.CurrentUICulture);
+			string copyOf = EuroplanRes.General_KopieVon;
 			this.Name = copyOf + " " + room.Name;
 			this.roomHeatTemperature = room.RoomHeatTemperature;
 			this.roomCoolTemperature = room.RoomCoolTemperature;
@@ -152,7 +149,7 @@ namespace Europlan.Common {
 			set { 
 				id = value;
 				if (roomNode != null) {
-					roomNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : id + ": " + name);
+					roomNode.Text = (String.IsNullOrEmpty(name) ? EuroplanRes.Room_Unbenannt : id + ": " + name);
 				}		
 			}
 		}
@@ -167,7 +164,7 @@ namespace Europlan.Common {
 			set { 
 				name = value;
 				if (roomNode != null) {
-					roomNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : id + ": " + name);
+					roomNode.Text = (String.IsNullOrEmpty(name) ? EuroplanRes.Room_Unbenannt : id + ": " + name);
 				}
 			}
 		}

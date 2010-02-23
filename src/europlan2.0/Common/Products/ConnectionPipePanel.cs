@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Europlan.Common {
 
@@ -21,8 +22,11 @@ namespace Europlan.Common {
 
 		public event ConnectionPipePanelContentChangedHandler GridContentChanged;
 
+		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
+
 		public ConnectionPipePanel() {
 			InitializeComponent();
+			this.SetLanguage();
 
 			roomSelectionButton = new Button();
 			roomSelectionButton.Size = new Size(30, 20);
@@ -53,6 +57,24 @@ namespace Europlan.Common {
 			insulationCombo.SelectedValueChanged += new EventHandler(insulationCombo_SelectedValueChanged);
 
 			ConfigureColumnVisibility();
+		}
+
+		private void SetLanguage() {
+			this.Room.HeaderText = EuroplanRes.ConnectionPipePanel_RaumCol; //"Raum";
+			this.vorlaufDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_VorlaufCol; //"Länge\nVorlauf\n(m)";
+			this.ruecklaufDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_RuecklaufCol; //"Länge\nRücklauf\n(m)";
+			this.roomDataGridViewComboBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_DurchRaumCol; //"durch\nRaum\nNr.";
+			this.productDataGridViewComboBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_TeilsystemCol; //"Teilsystem";
+			this.PlannedCircuits.HeaderText = EuroplanRes.ConnectionPipePanel_HkAnzahlCol; //"Anz.";
+			this.onlyFirstDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_NurErsterHkCol; //"nur\nerster\nHK";
+			this.printDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_VerlegedatenDruckenCol; //"Verlege-\ndaten\ndrucken";
+			this.PipeType.HeaderText = EuroplanRes.ConnectionPipePanel_RohrsystemCol; //"Rohr-\nsystem";
+			this.PipeTypeText.HeaderText = EuroplanRes.ConnectionPipePanel_RohrsystemCol; //"Rohr-\nsystem";
+			this.Verlegeart.HeaderText = EuroplanRes.ConnectionPipePanel_VerlegeartCol; //"Verlege-\nart";
+			this.Insulation.HeaderText = EuroplanRes.ConnectionPipePanel_DaemmungCol; //"Dämmung";
+			this.Area.HeaderText = EuroplanRes.ConnectionPipePanel_FlaecheCol; //"Fläche";
+			this.HeatLoad.HeaderText = EuroplanRes.ConnectionPipePanel_HeizleistungCol; //"Heiz-\nleistung";
+			this.CoolLoad.HeaderText = EuroplanRes.ConnectionPipePanel_KuehlleistungCol; //"Kühl-\nleistung";
 		}
 
 		private void ConfigureColumnVisibility() {

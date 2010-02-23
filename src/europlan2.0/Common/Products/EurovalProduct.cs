@@ -4,6 +4,8 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Collections;
 using log4net;
+using System.Threading;
+using Europlan.Licensing;
 
 namespace Europlan.Common {
 
@@ -90,14 +92,14 @@ namespace Europlan.Common {
 		private bool anhydritEstrich = false;
 
 		public class LayDistanceConverter : System.ComponentModel.TypeConverter {
-			private static readonly string A5 = "A5";
-			private static readonly string EV5 = "EV5";
-			private static readonly string EV10 = "EV10";
-			private static readonly string EV15 = "EV15";
-			private static readonly string EV20 = "EV20";
-			private static readonly string EV25 = "EV25";
-			private static readonly string EV30 = "EV30";
-			private static readonly string EV35 = "EV35";
+			private static readonly string A5 = EuroplanRes.EurovalProduct_A5; //"A5";
+			private static readonly string EV5 = EuroplanRes.EurovalProduct_EV5; //"EV5";
+			private static readonly string EV10 = EuroplanRes.EurovalProduct_EV10; //"EV10";
+			private static readonly string EV15 = EuroplanRes.EurovalProduct_EV15; //"EV15";
+			private static readonly string EV20 = EuroplanRes.EurovalProduct_EV20; //"EV20";
+			private static readonly string EV25 = EuroplanRes.EurovalProduct_EV25; //"EV25";
+			private static readonly string EV30 = EuroplanRes.EurovalProduct_EV30; //"EV30";
+			private static readonly string EV35 = EuroplanRes.EurovalProduct_EV35; //"EV35";
 
 			private Dictionary<string, EurovalLayDistance> mappingFromString = new Dictionary<string, EurovalLayDistance>();
 			private Dictionary<EurovalLayDistance, string> mappingToString = new Dictionary<EurovalLayDistance, string>();
@@ -175,7 +177,9 @@ namespace Europlan.Common {
 		}
 
 		public EurovalProduct(){
-
+			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
+				throw new ProductNotLicensedException(this.GetType());
+			}
 		}
 
 		protected EurovalProduct(EurovalProduct product) : base(product) {
@@ -220,7 +224,10 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  - Geometriefaktor: " + Math.Round(actualAg, 4).ToString() + " (Standardwert: " + Math.Round(defaultAg, 4).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_Geometriefaktor;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(actualAg, 4).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultAg, 4).ToString());
+					message += newMsg;
 				}
 
 				double defaultSu0 = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSu0", 0.045);
@@ -230,7 +237,10 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  - Mindestüberdeckung: " + Math.Round(su0, 3).ToString() + " (Standardwert: " + Math.Round(defaultSu0, 3).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_Mindestueberdeckung;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(su0, 3).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultSu0, 3).ToString());
+					message += newMsg;
 				}
 
 				double defaultSu = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigSu", 0.035);
@@ -240,7 +250,10 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  - Estrichüberdeckung: " + Math.Round(su, 3).ToString() + " (Standardwert: " + Math.Round(defaultSu, 3).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_Estrichueberdeckung;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(su, 3).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultSu, 3).ToString());
+					message += newMsg;
 				}
 
 				double defaultC = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigC", 4.19);
@@ -250,7 +263,10 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  - Spezifische Wärmekapazität des Heizmittels: " + Math.Round(c, 2).ToString() + " (Standardwert: " + Math.Round(defaultC, 2).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_Waermekapazitaet;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(c, 2).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultC, 2).ToString());
+					message += newMsg;
 				}
 
 				double defaultRho = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigRho", 1000);
@@ -260,7 +276,10 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  - Dichte des Heizmittels: " + Math.Round(rho, 2).ToString() + " (Standardwert: " + Math.Round(defaultRho, 2).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_Dichte;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(rho, 2).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultRho, 2).ToString());
+					message += newMsg;
 				}
 
 				double defaultV = userConfig.GetProductParameterAsDouble<EurovalProduct>("ConfigV", 0.00000101);
@@ -270,11 +289,15 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  - Viskosität des Heizmittels: " + Math.Round(v, 10).ToString() + " (Standardwert: " + Math.Round(defaultV, 10).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_Viskositaet;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(v, 10).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultV, 10).ToString());
+					message += newMsg;
 				}
 
 				if (message != null) {
-					message = "Euroval-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" + message;
+					message = EuroplanRes.EurovalProduct_NotificationParameter + /*"Ecotherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" */
+						"\n" + message;
 				}
 
 				return message;
@@ -1430,15 +1453,15 @@ namespace Europlan.Common {
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
-				this.lastErrorMsg = "Fehlende Eingaben: ";
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
 				if (plannedFloorConstruction == null) {
-					this.lastErrorMsg += "Fußbodenkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fußbodenkonstruktion, ";
 				}
 				if (plannedInsulationConstruction == null) {
-					this.lastErrorMsg += "Wärmedämmkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"Wärmedämmkonstruktion, ";
 				}
 				if (PlannedConnection == null) {
-					this.lastErrorMsg += "Heizkreisanschluß, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluß, ";
 				}
 				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
@@ -1469,7 +1492,7 @@ namespace Europlan.Common {
 					} else {*/
 						//this.circuits.Clear();
 					/*}*/
-					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -1480,7 +1503,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (!userDefinedOk) {
-					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -1672,7 +1695,7 @@ namespace Europlan.Common {
 				} else {*/
 					this.circuits.Clear();
 				/*}*/
-					this.lastErrorMsg = "Keine Automatische Auslegung möglich";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_KeineAutomatischeAuslegung; //"Keine Automatische Auslegung möglich";
 				this.incompleteCalculation = true;
 				return false;
 			}
@@ -1774,31 +1797,53 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
+			string newMsg;
 			if (this.LongestPipeLengthPerCircuitWithAllConnections > EurovalProduct.ConfigMaxCircuitLength) {
-				this.lastErrorMsg += "Rohrlänge zu groß (" + Math.Round(this.PipeLengthWithoutConnectionsOfLongestPipeWithConnections, 1) + "m > " + Math.Round(EurovalProduct.ConfigMaxCircuitLength - this.ConnectionLengthOfLongestPipeWithConnections, 1) + "m)\n";
+				newMsg = EuroplanRes.ErrorMessage_Rohrlaenge;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PipeLengthWithoutConnectionsOfLongestPipeWithConnections, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(EurovalProduct.ConfigMaxCircuitLength - this.ConnectionLengthOfLongestPipeWithConnections, 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264)) {
-				this.lastErrorMsg += "Oberflächentemperatur in der Aufenthaltszone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264), 1) + "°C)\n";
+				newMsg = EuroplanRes.ErrorMessage_TemperaturAz;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedFloorTemperatureHeatResidence, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxResidenceTempHarreither : EurovalProduct.ConfigMaxResidenceTempEn1264), 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264)) {
-				this.lastErrorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1) + "°C)\n";
+				newMsg = EuroplanRes.ErrorMessage_TemperaturRz;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedFloorTemperatureHeatRim, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? EurovalProduct.ConfigMaxRimTempHarreither : EurovalProduct.ConfigMaxRimTempEn1264), 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
 				if (Math.Round(this.PlannedMaxMhHeat, 1) > EurovalProduct.ConfigMaxMassenstrom) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
+					newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", EurovalProduct.ConfigMaxMassenstrom.ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			} else {
 				if (Math.Round(this.PlannedMaxMhCool, 1) > EurovalProduct.ConfigMaxMassenstrom) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + EurovalProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
+					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", EurovalProduct.ConfigMaxMassenstrom.ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
 				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(EurovalProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + Math.Round(EurovalProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
+					newMsg = EuroplanRes.ErrorMessage_DruckverlustHeiz;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoHeat, 2).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(EurovalProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			} else {
 				if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(EurovalProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 2).ToString() + "mbar > " + Math.Round(EurovalProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
+					newMsg = EuroplanRes.ErrorMessage_DruckverlustKuehl;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoCool, 2).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(EurovalProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
 			if (this.lastErrorMsg.Length == 0) {
@@ -1857,7 +1902,7 @@ namespace Europlan.Common {
 						j++;
 					}
 					if (!found) {
-						error = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+						error = EuroplanRes.ErrorMessage_HkAnschluss; // "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					} else {
 						j--;
 					}

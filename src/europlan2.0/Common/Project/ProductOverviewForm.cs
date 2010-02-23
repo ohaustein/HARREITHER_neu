@@ -22,6 +22,8 @@ namespace Europlan.Common {
 			updateOngoing = true;
 			InitializeComponent();
 
+			this.SetLanguage();
+
 			layDistanceCombo = new ComboBox();
 			layDistanceCombo.Size = new Size(30, 20);
 			layDistanceCombo.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -39,6 +41,28 @@ namespace Europlan.Common {
 			showHeat = heat;
 			UpdateControl();
 			updateOngoing = false;
+		}
+
+		private void SetLanguage() {
+			this.roomIdDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Raumnr; //"Raumnr.";
+			this.roomNameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Raumname; //"Raumname";
+			this.teilSystemDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Teilsystem; //"Teil-\nsystem";
+			this.systemNameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_System; //"System";
+			this.nrOfCircuitsDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Heizkreise; //"Heiz-\nkreis(e)";
+			this.RimType.HeaderText = EuroplanRes.ProductOverviewForm_VerlegeabstandRz; //"Verlegeabstand\nRZ";
+			this.LayDistance.HeaderText = EuroplanRes.ProductOverviewForm_VerlegeabstandAz; //"Verlegeabstand\nAZ";
+			this.pipeLengthDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Rohrlaenge; //"Rohrlänge\nm";
+			this.totalAreaDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Flaeche; //"Fläche\nm²";
+			this.druckverlustHeatDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_DruckverlustHeiz; //"Druckverlust\nmbar";
+			this.heatNetLoadDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Normwaerme; //"Normwärme\nW";
+			this.heatRestDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Restwaerme; //"Restwärme\nW";
+			this.druckverlustCoolDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_DruckverlustKuehl; //"Druckverlust\nmbar";
+			this.coolNetLoadDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Kuehllast; //"Kühllast\nW";
+			this.coolRestDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Restkuellast; //"Rest\nW";
+			this.okDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Ok; //"Ok";
+			this.editColumn.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten";
+			this.Text = EuroplanRes.ProductOverviewForm_Titel; //"Übersicht";
+
 		}
 
 		public void ReloadGrid() {
@@ -79,7 +103,7 @@ namespace Europlan.Common {
 					ProductOverviewWrapper.LayDistanceEnumConverter conv = new ProductOverviewWrapper.LayDistanceEnumConverter();
 
 					if (!(this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper).ManualMode) {
-						layDistanceCombo.Items.Add(new ProductOverviewWrapper.LayDistanceItem(null, "Automatisch"));
+						layDistanceCombo.Items.Add(new ProductOverviewWrapper.LayDistanceItem(null, EuroplanRes.EurovalProduct_Automatisch /*"Automatisch"*/));
 					}
 
 					DataGridViewRow selectedRow = dgvProductOverview.Rows[e.RowIndex];
@@ -110,7 +134,7 @@ namespace Europlan.Common {
 					ProductOverviewWrapper.RimTypeEnumConverter conv = new ProductOverviewWrapper.RimTypeEnumConverter();
 
 					if (!(this.dgvProductOverview.Rows[e.RowIndex].DataBoundItem as ProductOverviewWrapper).ManualMode) {
-						rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(null, "Automatisch"));
+						rimTypeCombo.Items.Add(new ProductOverviewWrapper.RimTypeItem(null, EuroplanRes.EurovalProduct_Automatisch /*"Automatisch"*/));
 					}
 
 					DataGridViewRow selectedRow = dgvProductOverview.Rows[e.RowIndex];

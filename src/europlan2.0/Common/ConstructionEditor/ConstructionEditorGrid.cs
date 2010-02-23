@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using Europlan.Common;
+using System.Threading;
 
 namespace Europlan.Common {
 	public partial class ConstructionEditorGrid : UserControl {
@@ -14,11 +15,39 @@ namespace Europlan.Common {
 		private ConstructionListWrapper wrapper;
 		private bool adminMode = false;
 
+		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
+
 		public ConstructionEditorGrid() {
 			InitializeComponent();
 			this.wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration); // TODO
 			this.constructionsWrapperBindingSource.DataSource = this.wrapper;
 			this.constructionsWrapperBindingSource.ResetBindings(false);
+			this.SetLanguage();
+		}
+
+		private void SetLanguage() {
+			this.btnView.Text = EuroplanRes.ConstructionEditorGrid_AngezeigteKonstruktionen + " (" + EuroplanRes.ConstructionEditorGrid_Alle + ")"; //"Angezeigte Konstruktionen (Alle)";
+			this.btnNew.Text = EuroplanRes.ConstructionEditorGrid_NeueKonstruktion; //"Neue Konstruktion";
+			this.tsmiFloorConstruction.Text = EuroplanRes.ConstructionEditorForm_Fussboden; //"Fuﬂbodenkonstruktionen";
+			this.tsmiInsulationConstruction.Text = EuroplanRes.ConstructionEditorForm_Daemm; //"W‰rmed‰mmkonstruktionen";
+			this.tsmiCeilingConstruction.Text = EuroplanRes.ConstructionEditorForm_Decke; //"Deckenkonstruktion";
+			this.tsmiWallConstruction.Text = EuroplanRes.ConstructionEditorForm_Wand; //"Wandkonstruktion";
+			this.tsmiNewFloorConstructionEstrich.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Estrich + ")"; //"Fuﬂbodenkonstruktion (Estrich)";
+			this.tsmiNewFloorConstructionTrocken.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Trocken + ")"; //"Fuﬂbodenkonstruktion (Trocken)";
+			this.tsmiNewFloorConstructionStahl.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Stahlblech + ")"; //"Fuﬂbodenkonstruktion (Stahlblech)";
+			this.tsmiNewFloorConstructionTrockenEstrich.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Trockenestrich + ")"; //"Fuﬂbodenkonstruktion (Trockenestrich)";
+			this.tsmiNewInsulationConstruction.Text = EuroplanRes.ConstructionEditorForm_Daemm; //"W‰rmed‰mmkonstruktion";
+			this.tsmiNewCeilingConstruction.Text = EuroplanRes.ConstructionEditorForm_Decke; //"Deckenkonstruktion";
+			this.tsmiNewWallConstruction.Text = EuroplanRes.ConstructionEditorForm_Wand; //"Wandkonstruktion";
+			this.tsmiNewFloorConstructionScreedAdmin.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Estrich + ")"; //"Fuﬂbodenkonstruktion (Estrich)";
+			this.tsmiNewFloorConstructionDryAdmin.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Trocken + ")"; //"Fuﬂbodenkonstruktion (Trocken)";
+			this.tsmiNewInsulationConstructionAdmin.Text = EuroplanRes.ConstructionEditorForm_Daemm; //"W‰rmed‰mmkonstruktion";
+			this.tsmiNewCeilingConstructionAdmin.Text = EuroplanRes.ConstructionEditorForm_Decke; //"Deckenkonstruktion";
+			this.colId.HeaderText = EuroplanRes.General_NummerCol; //"Nr.";
+			this.colName.HeaderText = EuroplanRes.General_BezeichnungCol; //"Bezeichnung";
+			this.colType.HeaderText = EuroplanRes.ConstructionEditorGrid_TypeCol; //"Type";
+			this.colRValue.HeaderText = EuroplanRes.ConstructionEditorGrid_RWertCol; //"R (m≤K/W)";
+			this.colEdit.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten";
 		}
 
 		public Configuration.ConfigurationType Type {
@@ -86,26 +115,26 @@ namespace Europlan.Common {
 			int i = 0;
 			string selected = "";
 			if (this.tsmiFloorConstruction.Checked) {
-				selected += ", FB";
+				selected += ", " + EuroplanRes.ConstructionEditorGrid_FussbodenKurz;//"FB";
 				i++;
 			}
 			if (this.tsmiInsulationConstruction.Checked) {
-				selected += ", WD";
+				selected += ", " + EuroplanRes.ConstructionEditorGrid_DaemmKurz;//"WD";
 				i++;
 			}
 			if (this.tsmiCeilingConstruction.Checked) {
-				selected += ", DK";
+				selected += ", " + EuroplanRes.ConstructionEditorGrid_DeckeKurz;//"DK";
 				i++;
 			}
 			if (this.tsmiWallConstruction.Checked) {
-				selected += ", WK";
+				selected += ", " + EuroplanRes.ConstructionEditorGrid_WandKurz;//"WK";
 				i++;
 			}
 			if (i == 0) {
-				selected = "keine";
+				selected = EuroplanRes.ConstructionEditorGrid_Keine;//"keine";
 				this.Filter = ConstructionScopeEnum.UnknownConstruction;
 			} else if (i == 4) {
-				selected = "alle";
+				selected = EuroplanRes.ConstructionEditorGrid_Alle;//"alle";
 				this.Filter = ConstructionScopeEnum.All;
 			} else {
 				selected = selected.Substring(2);
@@ -124,7 +153,7 @@ namespace Europlan.Common {
 				}
 				this.Filter = filter;
 			}
-			this.btnView.Text = "Angezeigte Konstruktionen (" + selected + ")";
+			this.btnView.Text = EuroplanRes.ConstructionEditorGrid_AngezeigteKonstruktionen + " (" + selected + ")";//"Angezeigte Konstruktionen (" + selected + ")";
 		}
 
 		private void tsmiNewConstruction_Click(object sender, EventArgs e) {

@@ -80,7 +80,7 @@ namespace Europlan.Common {
 		public string Comment {
 			get {
 				if (plannedProduct == null) {
-					return "Restposition";
+					return EuroplanRes.PlannedProduct_Restposition;
 				} else {
 					return plannedProduct.Comment;
 				}

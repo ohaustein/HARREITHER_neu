@@ -22,9 +22,6 @@ namespace Europlan.Common {
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Floor));
 
-		[NonSerialized]
-		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
-
 		public Floor() {
 			InitializeFloor();
 		}
@@ -36,7 +33,7 @@ namespace Europlan.Common {
 
 		public Floor(Floor floor) {
 			InitializeFloor();
-			string copyOf = resources.GetString("CopyOf", Thread.CurrentThread.CurrentUICulture);
+			string copyOf = EuroplanRes.General_KopieVon;
 			this.Name = copyOf + " " + floor.Name;
 			foreach (Room room in floor.rooms) {
 				this.rooms.Add(new Room(room));
@@ -72,7 +69,7 @@ namespace Europlan.Common {
 			set { 
 				name = value;
 				if (floorNode != null) {
-					floorNode.Text = (String.IsNullOrEmpty(name) ? "unbenannt" : name);
+					floorNode.Text = (String.IsNullOrEmpty(name) ? EuroplanRes.Floor_Unbenannt : name);
 				}
 			}
 		}

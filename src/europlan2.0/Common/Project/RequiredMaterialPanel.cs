@@ -17,7 +17,20 @@ namespace Europlan.Common {
 		
 		public RequiredMaterialPanel() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			UpdateControl(true);
+		}
+
+		private void SetLanguage() {
+			this.label1.Text = EuroplanRes.RequiredMaterialPanel_Materialbedarf; //"Materialbedarf";
+			this.tabFloor.Text = EuroplanRes.RequiredMaterialPanel_Fussboden; //"Fuﬂboden";
+			this.tabWall.Text = EuroplanRes.RequiredMaterialPanel_Wand; //"Wand";
+			this.tabCeiling.Text = EuroplanRes.RequiredMaterialPanel_Decke; //"Decke";
+			this.tabDistributor.Text = EuroplanRes.RequiredMaterialPanel_Verteiler; //"Verteiler";
+			this.tabInsulation.Text = EuroplanRes.RequiredMaterialPanel_Daemmung; //"D‰mmung";
+			this.tabGeneral.Text = EuroplanRes.RequiredMaterialPanel_Allgemein; //"Allgemein";
 		}
 
 		public void UpdateControl(bool resetUserInterface) {

@@ -22,12 +22,14 @@ namespace Europlan.Common {
 		DataSet reportingData;
 
 		private Dictionary<Floor, QuickDimensioningFloorGrid> grids = new Dictionary<Floor, QuickDimensioningFloorGrid>();
-		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
 
 		private bool updateControlOngoing = false;
 
 		public QuickDimensioningPanel() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			Licensing.License license = Licensing.LicenseManager.Instance.License;
 			/*this.tableLayoutPanel1.Controls.Remove(this.lblEuroval);
 			this.tableLayoutPanel1.Controls.Remove(this.cbEurovalCool);
@@ -110,6 +112,44 @@ namespace Europlan.Common {
 			}
 			i++;
 			this.tableLayoutPanel1.Controls.Add(this.btnRevert, 0, i);
+		}
+
+		private void SetLanguage() {
+			this.pageSummary.Text = EuroplanRes.QuickDimensioningPanel_Flaechenaufstellung;//"Ergebnis Flächenaufstellung";
+			this.pageSettings.Text = EuroplanRes.QuickDimensioningPanel_Einstellungen;//"Einstellungen";
+			this.lblTemp4.Text = EuroplanRes.QuickDimensioningPanel_Tv;//"°C (Tv)";
+			this.lblTemp3.Text = EuroplanRes.QuickDimensioningPanel_VorlauftemperaturKuehlen;//"Vorlauftemperatur\r\n(Kühlen)";
+			this.lblTemp2.Text = EuroplanRes.QuickDimensioningPanel_Tv;//"°C (Tv)";
+			this.label2.Text = EuroplanRes.QuickDimensioningPanel_ProdukteWaehlen;//"Bitte wählen Sie jene Harreither-Produkte aus, welche in der Flächenaufstellung zur Verfügung stehen sollen:";
+			this.lblTemp1.Text = EuroplanRes.QuickDimensioningPanel_VorlauftemperaturHeizen;//"Vorlauftemperatur\r\n(Heizen)";
+			this.lblEuroval.Text = EuroplanRes.QuickDimensioningPanel_Euroval;//"Euroval® Fußbodenheizung";
+			this.btnRevert.Text = EuroplanRes.QuickDimensioningPanel_Zuruecksetzen;//"Flächenaufstellung zurücksetzen";
+			this.lblAllocation2.Text = EuroplanRes.General_Prozent;//"%";
+			this.lblAllocation.Text = EuroplanRes.QuickDimensioningPanel_Belegefaktor;//"Belegefaktor";
+			this.lblHeat.Text = EuroplanRes.QuickDimensioningPanel_Heizen;//"Heizen";
+			this.lblCool.Text = EuroplanRes.QuickDimensioningPanel_Kuehlen;//"Kühlen";
+			this.lblHithermCompact.Text = EuroplanRes.QuickDimensioningPanel_HithermCompact;//"Hitherm® Compact";
+			this.lblHitherm.Text = EuroplanRes.QuickDimensioningPanel_Hitherm;//"Hitherm® Klimawand";
+			this.lblBka.Text = EuroplanRes.QuickDimensioningPanel_Bka;//"Betonkernaktivierung";
+			this.lblModulKlimaDecke.Text = EuroplanRes.QuickDimensioningPanel_KlimaDecke;//"Modul Klima-Decke";
+			this.lblModulKlimaBoden.Text = EuroplanRes.QuickDimensioningPanel_KlimaBoden;//"Modul Klima-Boden";
+			this.lblHithermCompactRoof.Text = EuroplanRes.QuickDimensioningPanel_HithermCompactDach;//"Hitherm® Compact Dachschräge";
+			this.lblDistance.Text = EuroplanRes.QuickDimensioningPanel_Verlegeabstand;//"Verlegeabstand";
+			this.lblAssumptions.Text = EuroplanRes.QuickDimensioningPanel_Annahmen;//"Annahmen";
+			this.pageDistributors.Text = EuroplanRes.QuickDimensioningPanel_Verteiler;//"Verteiler";
+			this.label3.Text = EuroplanRes.QuickDimensioningPanel_Flaechenaufstellung;//"Flächenaufstellung";
+
+			this.cmbDistance.Items.Clear();
+			this.cmbDistance.Items.AddRange(new object[] {
+            EuroplanRes.EurovalProduct_EV5,//"EV 5",
+            EuroplanRes.EurovalProduct_EV10,//"EV10",
+            EuroplanRes.EurovalProduct_EV15,//"EV15",
+            EuroplanRes.EurovalProduct_EV20,//"EV20",
+            EuroplanRes.EurovalProduct_EV25,//"EV25",
+            EuroplanRes.EurovalProduct_EV30,//"EV30",
+            EuroplanRes.EurovalProduct_EV35,//"EV35"
+			});
+
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -342,7 +382,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?", "Euroval entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_EurovalEntfernenText, EuroplanRes.QuickDimensioningPanel_EurovalEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -388,7 +428,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?", "Euroval entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_EurovalEntfernenText, EuroplanRes.QuickDimensioningPanel_EurovalEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -434,7 +474,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Betonkernaktivierung wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_BkaEntfernenText, EuroplanRes.QuickDimensioningPanel_BkaEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -480,7 +520,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Betonkernaktivierung wirklich aus der Flächenaufstellung entfernen?", "Betonkernaktivierung entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_BkaEntfernenText, EuroplanRes.QuickDimensioningPanel_BkaEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -526,7 +566,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?", "Hitherm entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_HithermEntfernenText, EuroplanRes.QuickDimensioningPanel_HithermEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -570,7 +610,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?", "Hitherm entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_HithermEntfernenText, EuroplanRes.QuickDimensioningPanel_HithermEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -614,7 +654,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?", "Hitherm Compact entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_HithermCompactEntfernenText, EuroplanRes.QuickDimensioningPanel_HithermCompactEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -658,7 +698,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?", "Hitherm Compact entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_HithermCompactEntfernenText, EuroplanRes.QuickDimensioningPanel_HithermCompactEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -703,7 +743,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact Dachschräge wirklich aus der Flächenaufstellung entfernen?", "Hitherm Compact Dachschräge entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_HithermCompactDachEntfernenText, EuroplanRes.QuickDimensioningPanel_HithermCompactDachEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -747,7 +787,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Hitherm Compact Dachschräge wirklich aus der Flächenaufstellung entfernen?", "Hitherm Compact Dachschräge entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_HithermCompactDachEntfernenText, EuroplanRes.QuickDimensioningPanel_HithermCompactDachEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -791,7 +831,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?", "Modul Klimaboden entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_KlimaBodenEntfernenText, EuroplanRes.QuickDimensioningPanel_KlimaBodenEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -835,7 +875,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?", "Modul Klimaboden entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_KlimaBodenEntfernenText, EuroplanRes.QuickDimensioningPanel_KlimaBodenEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -879,7 +919,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Modul Klimadecke wirklich aus der Flächenaufstellung entfernen?", "Modul Klimadecke entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_KlimaDeckeEntfernenText, EuroplanRes.QuickDimensioningPanel_KlimaDeckeEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -926,7 +966,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productFound) {
-					result = MessageBox.Show("Wollen sie das Produkt Modul Klimadecke wirklich aus der Flächenaufstellung entfernen?", "Modul Klimadecke entfernen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_KlimaDeckeEntfernenText, EuroplanRes.QuickDimensioningPanel_KlimaDeckeEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				}
 			}
 			if (result == DialogResult.No) {
@@ -998,7 +1038,7 @@ namespace Europlan.Common {
 					listLabel1.Print(combit.ListLabel15.LlProject.List, filename, false, combit.ListLabel15.LlPrintMode.PreviewControl, combit.ListLabel15.LlBoxType.None, "", false, Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath));
 					GC.Collect();
 				} catch (Exception ex) {
-					DialogResult result = MessageBox.Show("Die Anwendung konnte keinen installierten Drucker finden. Drücken Sie OK, um einen Standarddrucker einzurichten, mit dem die Vorschau und der Export in eine Datei ermöglicht wird oder Abbrechen, um manuell einen Drucker einzurichten.", "Kein Drucker vorhanden...", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+					DialogResult result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_DruckerFehlerText, EuroplanRes.QuickDimensioningPanel_DruckerFehlerTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 					if (result == DialogResult.OK) {
 						try {
 							System.Diagnostics.Process p = new System.Diagnostics.Process();
@@ -1008,7 +1048,7 @@ namespace Europlan.Common {
 							p.WaitForExit();
 							listLabel1.Print(combit.ListLabel15.LlProject.List, filename, false, combit.ListLabel15.LlPrintMode.PreviewControl, combit.ListLabel15.LlBoxType.None, "", false, null);
 						} catch (Exception) {
-							MessageBox.Show("Fehler bei der automatischen Einrichtung eines Druckers. Richten Sie bitte manuell einen beliebigen Drucker ein.");
+							MessageBox.Show(EuroplanRes.QuickDimensioningPanel_DruckerEinrichtungFehlerText, EuroplanRes.QuickDimensioningPanel_DruckerEinrichtungFehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 							this.tabQuickDimensioning.SelectedTab = this.pageSettings;
 						}
 					} else {
@@ -1143,7 +1183,7 @@ namespace Europlan.Common {
 				foreach (RoomType roomType in Project.Instance.Config.RoomTypes) {
 					foreach (QuickDimensioningReportWrapper wrapper in reportWrapper) {
 						if (wrapper.RoomType == roomType.Name) {
-							usedRoomTypes += roomType.Name + ": " + roomType.HeatLoadPerSquareMeter + "W/m² - " + roomType.CoolLoadPerSquareMeter + "W/m²\n";
+							usedRoomTypes += roomType.Name + ": " + roomType.HeatLoadPerSquareMeter + EuroplanRes.General_WattProQm + " - " + roomType.CoolLoadPerSquareMeter + EuroplanRes.General_WattProQm + "\n";
 							break;
 						}
 					}
@@ -1205,7 +1245,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnRevert_Click(object sender, EventArgs e) {
-			if (MessageBox.Show("Wollen Sie die Flächenaufstellung wirklich zurücksetzen? Alle Daten, die Sie in der Flächenaufstellung bereits eingegeben haben, gehen dadurch verloren.", "Wirklich Zurücksetzen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+			if (MessageBox.Show(EuroplanRes.QuickDimensioningPanel_ZuruecksetzenBestaetigungText, EuroplanRes.QuickDimensioningPanel_ZuruecksetzenBestaetigungTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 				foreach (Floor floor in Project.Instance.Floors) {
 					foreach (Room room in floor.Rooms) {
 						room.RevertQuickDimensioning();

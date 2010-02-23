@@ -25,6 +25,9 @@ namespace Europlan.Common {
 
 		public SelectHithermWallForm(bool showCompact) {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			List<HithermWall> allWalls = showCompact ? Project.Instance.HithermCompactWalls : Project.Instance.HithermWalls;
 			foreach (HithermWall hw in allWalls) {
 				this.lstWalls.Items.Add(new WallItem(hw));
@@ -32,6 +35,12 @@ namespace Europlan.Common {
 			if (this.lstWalls.Items.Count > 0) {
 				this.lstWalls.Items[0].Selected = true;
 			}
+		}
+
+		private void SetLanguage() {
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen;
+			this.btnOk.Text = EuroplanRes.General_Ok;
+			this.Text = EuroplanRes.SelectHithermWallForm_KonstruktionWaehlen;//"Bitte wählen Sie die Konstruktion!";
 		}
 
 		public HithermWall SelectedWall {
@@ -55,7 +64,7 @@ namespace Europlan.Common {
 
 		private void SelectHithermWallConstruction_FormClosing(object sender, FormClosingEventArgs e) {
 			if (this.lstWalls.SelectedItems.Count == 0 && this.DialogResult == DialogResult.OK) {
-				MessageBox.Show("Bitte wählen Sie eine Konstruktion aus.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show(EuroplanRes.SelectHithermWallForm_KeineKonstruktionGewaehltText, EuroplanRes.SelectHithermWallForm_KeineKonstruktionGewaehltTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				e.Cancel = true;
 			}
 			SettingsKey settings = SettingsFile.Settings["SelectHithermWallForm"];
