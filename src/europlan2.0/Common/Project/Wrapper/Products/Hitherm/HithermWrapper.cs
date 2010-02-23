@@ -180,8 +180,13 @@ namespace Europlan.Common {
 		}
 
 		public string WallConstruction {
-			get { return wallConstruction; }
-			set { wallConstruction = value; }
+			get {
+				string wallConstruction = "";
+				foreach (HithermRegister register in RegisterList) {
+					wallConstruction += register.WallId + '\n';
+				}
+				return wallConstruction.Trim();
+			}
 		}
 
 		public double Wassermenge {

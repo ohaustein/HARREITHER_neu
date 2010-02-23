@@ -148,6 +148,10 @@ namespace Europlan.Common {
 			if (reportOptions.Verlegedaten) {
 				verlegedatenCircuitWrapper = GetVerlegedatenCircuitWrapper();
 			}
+
+			if (reportOptions.Konstruktionen) {
+
+			}
 			
 			if (reportOptions.RequiredMaterial || reportOptions.RecommendedMaterial) {
 				requiredMaterialWrapper = GetRequiredMaterialWrapper();
@@ -285,6 +289,7 @@ namespace Europlan.Common {
 			listLabel1.Variables.Add("@Auslegung", reportOptions.Auslegung);
 			listLabel1.Variables.Add("@AuslegungBilanz", reportOptions.AuslegungBilanz);
 			listLabel1.Variables.Add("@Verlegedaten", reportOptions.Verlegedaten);
+			listLabel1.Variables.Add("@Konstruktionen", reportOptions.Konstruktionen);
 			listLabel1.Variables.Add("@RequiredMaterial", reportOptions.RequiredMaterial);
 			listLabel1.Variables.Add("@RecommendedMaterial", reportOptions.RecommendedMaterial);
 
@@ -2191,7 +2196,6 @@ namespace Europlan.Common {
 									} else {
 										wrapperHeat.Ra10Area += register.Area;
 									}
-									wrapperHeat.WallConstruction = register.Wall.Id;
 								}
 
 								double v, r;
@@ -2249,7 +2253,6 @@ namespace Europlan.Common {
 										} else {
 											wrapperCool.Ra10Area += register.Area;
 										}
-										wrapperCool.WallConstruction = register.Wall.Id;
 									}
 
 									//double v, r;
@@ -2332,7 +2335,6 @@ namespace Europlan.Common {
 									wrapperHeat.PipeVertical += register.PipeVertical;
 									
 									wrapperHeat.Ra5Area += register.RegisterArea;
-									wrapperHeat.WallConstruction = register.Wall.Id;
 								}
 
 								double v, r;
@@ -2387,7 +2389,6 @@ namespace Europlan.Common {
 										wrapperCool.PipeVertical += register.PipeVertical;
 
 										wrapperCool.Ra5Area += register.RegisterArea;
-										wrapperCool.WallConstruction = register.Wall.Id;
 									}
 
 									//double v, r;
