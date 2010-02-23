@@ -27,16 +27,9 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.materialCategoryGridItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.gridMaterials = new System.Windows.Forms.DataGridView();
 			this.materialsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.userDefinedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.partNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,15 +42,6 @@ namespace Europlan.Common {
 			((System.ComponentModel.ISupportInitialize)(this.gridMaterials)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.materialsWrapperBindingSource)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// dataGridViewComboBoxColumn1
-			// 
-			this.dataGridViewComboBoxColumn1.DataPropertyName = "Category";
-			this.dataGridViewComboBoxColumn1.FillWeight = 200F;
-			this.dataGridViewComboBoxColumn1.HeaderText = "Kategorie";
-			this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
-			this.dataGridViewComboBoxColumn1.Visible = false;
-			this.dataGridViewComboBoxColumn1.Width = 200;
 			// 
 			// materialCategoryGridItemBindingSource
 			// 
@@ -99,55 +83,6 @@ namespace Europlan.Common {
 			// 
 			this.materialsWrapperBindingSource.DataSource = typeof(Europlan.Common.MaterialListWrapper);
 			this.materialsWrapperBindingSource.Filter = "";
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-			this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-			this.dataGridViewTextBoxColumn1.HeaderText = "Nr.";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.Visible = false;
-			this.dataGridViewTextBoxColumn1.Width = 50;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-			this.dataGridViewTextBoxColumn2.FillWeight = 150F;
-			this.dataGridViewTextBoxColumn2.HeaderText = "Bezeichnung";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.Width = 150;
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.DataPropertyName = "PartNumber";
-			this.dataGridViewTextBoxColumn3.FillWeight = 70F;
-			this.dataGridViewTextBoxColumn3.HeaderText = "Bestellnr.";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.Width = 70;
-			// 
-			// dataGridViewTextBoxColumn4
-			// 
-			this.dataGridViewTextBoxColumn4.DataPropertyName = "Denomination";
-			this.dataGridViewTextBoxColumn4.FillWeight = 75F;
-			this.dataGridViewTextBoxColumn4.HeaderText = "Verpackungs- einheit";
-			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-			this.dataGridViewTextBoxColumn4.Width = 75;
-			// 
-			// dataGridViewTextBoxColumn5
-			// 
-			this.dataGridViewTextBoxColumn5.DataPropertyName = "Unit";
-			this.dataGridViewTextBoxColumn5.FillWeight = 50F;
-			this.dataGridViewTextBoxColumn5.HeaderText = "Einheit";
-			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-			this.dataGridViewTextBoxColumn5.Width = 50;
-			// 
-			// dataGridViewTextBoxColumn6
-			// 
-			this.dataGridViewTextBoxColumn6.DataPropertyName = "Price";
-			this.dataGridViewTextBoxColumn6.FillWeight = 60F;
-			this.dataGridViewTextBoxColumn6.HeaderText = "Preis pro Einheit";
-			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-			this.dataGridViewTextBoxColumn6.Width = 60;
 			// 
 			// userDefinedDataGridViewCheckBoxColumn
 			// 
@@ -201,7 +136,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle2.Format = "F0";
 			this.denominationDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
 			this.denominationDataGridViewTextBoxColumn.FillWeight = 75F;
-			this.denominationDataGridViewTextBoxColumn.HeaderText = "Verpackungs- einheit";
+			this.denominationDataGridViewTextBoxColumn.HeaderText = "Verpackungs-\neinheit";
 			this.denominationDataGridViewTextBoxColumn.Name = "denominationDataGridViewTextBoxColumn";
 			this.denominationDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.DENOMINATION;
 			this.denominationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -250,13 +185,6 @@ namespace Europlan.Common {
 
 		private System.Windows.Forms.BindingSource materialsWrapperBindingSource;
 		private System.Windows.Forms.DataGridView gridMaterials;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-		private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
 		private System.Windows.Forms.BindingSource materialCategoryGridItemBindingSource;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn userDefinedDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;

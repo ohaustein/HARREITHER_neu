@@ -16,8 +16,21 @@ namespace Europlan.Common {
 
 		public SelectDistributorForm(List<Distributor> distributors) {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			this.distributors = distributors;
 			gridDistributors.DataSource = distributors;
+		}
+
+		private void SetLanguage() {
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Abbrechen";
+			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
+
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectDistributorForm_Nummer; //"Id";
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectDistributorForm_Bezeichnung; //"Name";
+			this.Text = EuroplanRes.SelectDistributorForm_Titel; //"SelectDistributorForm";
+
 		}
 
 		private void SelectDistributorForm_Load(object sender, EventArgs e) {

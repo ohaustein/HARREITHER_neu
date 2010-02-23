@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using System.Threading;
+using Europlan.Licensing;
 
 namespace Europlan.Common {
 
@@ -56,7 +58,9 @@ namespace Europlan.Common {
 		private double requestedSonstigeVerbindeLeitung = 0;
 
 		public ModulKlimaBodenProduct() {
-
+			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden)) {
+				throw new ProductNotLicensedException(this.GetType());
+			}
 		}
 
 		protected ModulKlimaBodenProduct(ModulKlimaBodenProduct product) : base(product) {
@@ -394,15 +398,15 @@ namespace Europlan.Common {
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || this.plannedConnection == null) {
-				this.lastErrorMsg = "Fehlende Eingaben: ";
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
 				if (plannedFloorConstruction == null) {
-					this.lastErrorMsg += "Fuﬂbodenkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fuﬂbodenkonstruktion, ";
 				}
 				if (plannedInsulationConstruction == null) {
-					this.lastErrorMsg += "W‰rmed‰mmkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"W‰rmed‰mmkonstruktion, ";
 				}
 				if (PlannedConnection == null) {
-					this.lastErrorMsg += "Heizkreisanschluﬂ, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluﬂ, ";
 				}
 				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
@@ -424,7 +428,7 @@ namespace Europlan.Common {
 					} else {*/
 					//this.circuits.Clear();
 					/*}*/
-					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -435,7 +439,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (!userDefinedOk) {
-					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -591,6 +595,7 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
+			string newMsg;
 			//foreach (ModulBodenCircuit c in this.circuits) {
 			//    int moduleCount = 0;
 			//    foreach (KlimaFlaechenList row in c.Rows) {
@@ -603,28 +608,46 @@ namespace Europlan.Common {
 			//}
 
 			if (this.CoveredFloorArea > this.PlannedNetArea) {
-				this.lastErrorMsg += "Die verplanten Module nehmen mehr Fl‰che in Anspruch als f¸r dieses System zur Verf¸gung steht (" + Math.Round(this.CoveredFloorArea, 1).ToString() + "m≤ > " + Math.Round(this.PlannedNetArea, 1).ToString() + "m≤)\n";
+				newMsg = EuroplanRes.ErrorMessage_Modulflaeche;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.CoveredFloorArea, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedNetArea, 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (Math.Round(this.PlannedFloorTemperatureHeat, 1) > (ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264)) {
-				this.lastErrorMsg += "Oberfl‰chentemperatur zu groﬂ (" + Math.Round(this.PlannedFloorTemperatureHeat, 1) + "∞C > " + Math.Round((ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1) + "∞C)\n";
+				newMsg = EuroplanRes.ErrorMessage_Oberflaechentemperatur;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedFloorTemperatureHeat, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round((ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
-			    if (Math.Round(this.PlannedMaxMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
-					this.lastErrorMsg += "Durchfluﬂ bei Heizung zu groﬂ (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
-			    }
+				if (Math.Round(this.PlannedMaxMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+					newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString());
+					this.lastErrorMsg += newMsg + "\n";
+				}
 			} else {
-			    if (Math.Round(this.PlannedMaxMhCool, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
-					this.lastErrorMsg += "Durchfluﬂ bei K¸hlung zu groﬂ (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
-			    }
+				if (Math.Round(this.PlannedMaxMhCool, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString());
+					this.lastErrorMsg += newMsg + "\n";
+				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
-			    if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					this.lastErrorMsg += "Druckverlust bei Heizung zu groﬂ (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
-			    }
+				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2)) {
+					newMsg = EuroplanRes.ErrorMessage_DruckverlustHeiz;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoHeat, 2).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+					this.lastErrorMsg += newMsg + "\n";
+				}
 			} else {
-			    if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					this.lastErrorMsg += "Druckverlust bei K¸hlung zu groﬂ (" + Math.Round(this.PlannedDeltaRhoCool, 2).ToString() + "mbar > " + Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
-			    }
+				if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2)) {
+					newMsg = EuroplanRes.ErrorMessage_DruckverlustKuehl;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoCool, 2).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+					this.lastErrorMsg += newMsg + "\n";
+				}
 			}
 			if (this.lastErrorMsg.Length == 0) {
 				this.lastErrorMsg = null;
@@ -681,7 +704,7 @@ namespace Europlan.Common {
 						j++;
 					}
 					if (!found) {
-						return "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+						return EuroplanRes.ErrorMessage_HkAnschluss; // "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
 					}
 					j--;
 					this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, ec, false));

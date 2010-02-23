@@ -8,13 +8,13 @@ namespace Europlan.Common {
 	public class ProductOverviewWrapper {
 
 		public class LayDistanceEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string EV5 = "EV5";
-			private static readonly string EV10 = "EV10";
-			private static readonly string EV15 = "EV15";
-			private static readonly string EV20 = "EV20";
-			private static readonly string EV25 = "EV25";
-			private static readonly string EV30 = "EV30";
-			private static readonly string EV35 = "EV35";
+			private static readonly string EV5 = EuroplanRes.EurovalProduct_EV5;
+			private static readonly string EV10 = EuroplanRes.EurovalProduct_EV10;
+			private static readonly string EV15 = EuroplanRes.EurovalProduct_EV15;
+			private static readonly string EV20 = EuroplanRes.EurovalProduct_EV20;
+			private static readonly string EV25 = EuroplanRes.EurovalProduct_EV25;
+			private static readonly string EV30 = EuroplanRes.EurovalProduct_EV30;
+			private static readonly string EV35 = EuroplanRes.EurovalProduct_EV35;
 
 			private Dictionary<string, LayDistanceEnum> mappingFromString = new Dictionary<string, LayDistanceEnum>();
 			private Dictionary<LayDistanceEnum, string> mappingToString = new Dictionary<LayDistanceEnum, string>();
@@ -76,15 +76,15 @@ namespace Europlan.Common {
 		}
 
 		public class RimTypeEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string EV15_60 = "EV15/60";
-			private static readonly string EV15_120 = "EV15/120";
-			private static readonly string EV15_180 = "EV15/180";
-			private static readonly string EV10_55 = "EV10/55";
-			private static readonly string EV10_110 = "EV10/110";
-			private static readonly string EV10_165 = "EV10/165";
-			private static readonly string EV5_40 = "EV5/40";
-			private static readonly string EV5_80 = "EV5/80";
-			private static readonly string EV5_120 = "EV5/120";
+			private static readonly string EV15_60 = EuroplanRes.EurovalProduct_EV15_60;
+			private static readonly string EV15_120 = EuroplanRes.EurovalProduct_EV15_120;
+			private static readonly string EV15_180 = EuroplanRes.EurovalProduct_EV15_180;
+			private static readonly string EV10_55 = EuroplanRes.EurovalProduct_EV10_55;
+			private static readonly string EV10_110 = EuroplanRes.EurovalProduct_EV10_110;
+			private static readonly string EV10_165 = EuroplanRes.EurovalProduct_EV10_165;
+			private static readonly string EV5_40 = EuroplanRes.EurovalProduct_EV5_40;
+			private static readonly string EV5_80 = EuroplanRes.EurovalProduct_EV5_80;
+			private static readonly string EV5_120 = EuroplanRes.EurovalProduct_EV5_120;
 
 			private Dictionary<string, RimTypeEnum> mappingFromString = new Dictionary<string, RimTypeEnum>();
 			private Dictionary<RimTypeEnum, string> mappingToString = new Dictionary<RimTypeEnum, string>();
@@ -436,7 +436,7 @@ namespace Europlan.Common {
 			set {
 				if (plannedProduct.Product is EurovalProduct) {
 					if ((plannedProduct.Product as EurovalProduct).PlannedCorrections) {
-						if (MessageBox.Show("Wenn Sie die Anzahl der Heizkreise ändern, werden die erweiterten Korrekturen zurückgesetzt. Wollen sie das wirklich machen?", "Bestätigen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+						if (MessageBox.Show(EuroplanRes.PlannedEurovalProductPanel_HKAnzahlAendernText, EuroplanRes.PlannedEurovalProductPanel_HKAnzahlAendernTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
 							return;
 						} else {
 							(plannedProduct.Product as EurovalProduct).PlannedCorrections = false;
@@ -449,7 +449,7 @@ namespace Europlan.Common {
 					}
 				} else if (plannedProduct.Product is EcothermProduct) {
 					if ((plannedProduct.Product as EcothermProduct).PlannedCorrections) {
-						if (MessageBox.Show("Wenn Sie die Anzahl der Heizkreise ändern, werden die erweiterten Korrekturen zurückgesetzt. Wollen sie das wirklich machen?", "Bestätigen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+						if (MessageBox.Show(EuroplanRes.PlannedEurovalProductPanel_HKAnzahlAendernText, EuroplanRes.PlannedEurovalProductPanel_HKAnzahlAendernTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
 							return;
 						} else {
 							(plannedProduct.Product as EcothermProduct).PlannedCorrections = false;

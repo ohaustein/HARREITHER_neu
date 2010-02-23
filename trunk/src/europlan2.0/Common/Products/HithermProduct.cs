@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using System.Globalization;
 using System.Windows.Forms;
 using Europlan.Licensing;
+using System.Threading;
 
 namespace Europlan.Common {
 
@@ -219,7 +220,10 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  Leistungsfaktor Heizen: " + Math.Round(leistungsFaktorHeizen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorHeizen, 3).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_LeistungsfaktorHeizen;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(leistungsFaktorHeizen, 3).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultLeistungsFaktorHeizen, 3).ToString());
+					message += newMsg;
 				}
 
 				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorKuehlen", 1.0);
@@ -229,11 +233,15 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  Leistungsfaktor Kühlen: " + Math.Round(leistungsFaktorKuehlen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorKuehlen, 3).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_LeistungsfaktorKuehlen;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(leistungsFaktorKuehlen, 3).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultLeistungsFaktorKuehlen, 3).ToString());
+					message += newMsg;
 				}
 
 				if (message != null) {
-					message = "Hitherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" + message;
+					message = EuroplanRes.HithermProduct_NotificationParameter + /*"Hitherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" */
+						"\n" + message;
 				}
 
 				return message;
@@ -715,9 +723,9 @@ namespace Europlan.Common {
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.PlannedConnection == null) {
-				this.lastErrorMsg = "Fehlende Eingaben: ";
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
 				if (PlannedConnection == null) {
-					this.lastErrorMsg += "Heizkreisanschluß, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluß, ";
 				}
 				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
@@ -739,7 +747,7 @@ namespace Europlan.Common {
 					} else {*/
 					//this.circuits.Clear();
 					/*}*/
-					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -750,7 +758,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (!userDefinedOk) {
-					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -832,33 +840,56 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
+			string newMsg;
 			foreach (HithermCircuit hc in this.circuits) {
 				if (Math.Round(hc.RegisterArea, 1) > Math.Round(ConfigMaxRegisterArea, 1)) {
-					this.lastErrorMsg += "Die Registerfläche im Heizkreis " + (hc.NrOfCircuit + 1).ToString() + " ist zu groß (" + Math.Round(hc.RegisterArea, 1).ToString() + "m² > " + Math.Round(ConfigMaxRegisterArea, 1).ToString() + "m²)\n";
+					newMsg = EuroplanRes.ErrorMessage_Registerflaeche;
+					newMsg = newMsg.Replace("%HK%", (hc.NrOfCircuit + 1).ToString());
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(hc.RegisterArea, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ConfigMaxRegisterArea, 1).ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
 				if (Math.Round(this.PlannedMaxMhHeat, 1) > HithermProduct.ConfigMaxMassenstrom) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
+					newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", HithermProduct.ConfigMaxMassenstrom.ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			} else {
 				if (Math.Round(this.PlannedMaxMhCool, 1) > HithermProduct.ConfigMaxMassenstrom) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + HithermProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
+					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", HithermProduct.ConfigMaxMassenstrom.ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
 				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(HithermProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + Math.Round(HithermProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
+					newMsg = EuroplanRes.ErrorMessage_DruckverlustHeiz;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoHeat, 2).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(HithermProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			} else {
 				if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(HithermProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 1).ToString() + "mbar > " + Math.Round(HithermProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
+					newMsg = EuroplanRes.ErrorMessage_DruckverlustKuehl;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoCool, 2).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(HithermProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
 			if (this.hithermType == Product.ProductType.FBH && this.PlannedRegisterArea > this.PlannedFloorArea) {
-				this.lastErrorMsg += "Die verplanten Register nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.PlannedRegisterArea, 1).ToString() + "m² > " + Math.Round(this.PlannedFloorArea, 1).ToString() + "m²)\n";
+				newMsg = EuroplanRes.ErrorMessage_Registerflaeche2;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedRegisterArea, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedFloorArea, 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			} else if (this.hithermType == Product.ProductType.DH && this.PlannedRegisterArea > this.PlannedCeilingArea) {
-				this.lastErrorMsg += "Die verplanten Register nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (" + Math.Round(this.PlannedRegisterArea, 1).ToString() + "m² > " + Math.Round(this.PlannedCeilingArea, 1).ToString() + "m²)\n";
+				newMsg = EuroplanRes.ErrorMessage_Registerflaeche2;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedRegisterArea, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedCeilingArea, 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (this.lastErrorMsg.Length == 0) {
 				this.lastErrorMsg = null;

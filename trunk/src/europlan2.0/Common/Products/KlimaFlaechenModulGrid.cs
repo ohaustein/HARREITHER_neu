@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Europlan.Common {
 
@@ -16,10 +17,21 @@ namespace Europlan.Common {
 
 		private List<KlimaFlaechenModul> modules;
 		private bool boden = true;
+		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		public KlimaFlaechenModulGrid() {
 			InitializeComponent();
+			this.SetLanguage();
 			UpdateComboboxValues();
+		}
+
+		private void SetLanguage() {
+			this.btnAdd.Text = EuroplanRes.General_Plus; //"+";
+			this.btnRemove.Text = EuroplanRes.General_Minus; //"-";
+			this.btnAlign.Text = EuroplanRes.KlimaFlaechenModulGrid_AutomatischeAusrichtung; //"Automatische Ausrichtung";
+			this.label1.Text = EuroplanRes.KlimaFlaechenModulGrid_AnzahlModule; //"Anzahl der Module:";
+			this.modulTypeDataGridViewTextBoxColumn.HeaderText = EuroplanRes.KlimaFlaechenModulGrid_Modultype; //"Modultyp";
+			this.orientationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.KlimaFlaechenModulGrid_Ausrichtung; //"Ausrichtung";
 		}
 
 		public void ResetGrid() {

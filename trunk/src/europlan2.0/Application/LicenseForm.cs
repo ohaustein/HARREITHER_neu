@@ -9,6 +9,7 @@ using System.IO;
 using System.Globalization;
 using Europlan.Licensing;
 using System.Threading;
+using Europlan.Common;
 
 namespace Europlan.Application {
 	public partial class LicenseForm : Form {
@@ -20,7 +21,26 @@ namespace Europlan.Application {
 
 		public LicenseForm() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			this.fullHeight = this.Height;
+		}
+
+		private void SetLanguage() {
+			this.Text = EuroplanRes.LicenseForm_Titel; //"Lizenz";
+			this.btnImport.Text = EuroplanRes.LicenseForm_Importieren; //"&Lizenz importieren";
+			this.btnOk.Text = EuroplanRes.General_Schliessen; //"&Schließen";
+			this.label1.Text = EuroplanRes.LicenseForm_LizensiertFuer; //"Lizenziert für:";
+			this.lblHardwareId.Text = EuroplanRes.LicenseForm_HardwareId; //"Hardware ID:";
+			this.lblHeader.Text = EuroplanRes.LicenseForm_Seitenkopf; //"Seitenkopf:";
+			this.lblLicenseDateInvalid.Text = EuroplanRes.LicenseForm_GueltigkeitAbgelaufen; //"Die Gültigkeit der Lizenz ist abgelaufen. Bitte kontaktieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine neue Lizenz anzufordern.";
+			this.lblLicenseInvalidUnknown.Text = EuroplanRes.LicenseForm_NichtGueltig; //"Die Lizenz ist nicht gültig. Falls Sie bereits eine gültige Lizenz besitzen importieren Sie diese bitte über die Schaltfläche 'Lizenz importieren'. Falls Sie noch keine gültige Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben.";
+			this.lblLicenseMissing.Text = EuroplanRes.LicenseForm_KeineLizenzGefunden; //"Es wurde keine Lizenz gefunden. Falls Sie bereits eine Lizenz besitzen importieren Sie diese bitte über die Schaltfläche 'Lizenz importieren'. Falls Sie noch keine Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben.";
+			this.lblLicenseSignatureInvalid.Text = EuroplanRes.LicenseForm_LizenzModifiziert; //"Die Lizenz ist ungültig da sie von nicht authorisierter Stelle modifiziert wurde. Bitte verwenden Sie Ihre original Lizenz oder kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine neue Lizenz anzufordern.";
+			this.lblLicenseSystemInvalid.Text = EuroplanRes.LicenseForm_RechnerNichtGueltig; //"Die Lizenz ist auf dem aktuellen Rechner nicht gültig. Bitte kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz für diesen Rechner anzufordern. Zum Anfordern einer Lizenz. müssen Sie die hier angegebene Hardware ID bekannt geben.";
+			this.lblModules.Text = EuroplanRes.LicenseForm_InsallierteLizenzen; //"Installierte Lizenzen:";
+			this.lblValidUntil.Text = EuroplanRes.LicenseForm_GueltigBis; //"Gültig bis:";
 		}
 
 		public bool RestartRequired {
@@ -89,31 +109,33 @@ namespace Europlan.Application {
 			dialog.CheckFileExists = true;
 			dialog.CheckPathExists = true;
 			dialog.DefaultExt = "epl";
-			dialog.Filter = resources.GetString("LicenseFileDescription", Thread.CurrentThread.CurrentUICulture) + " (*.epl)|*.epl";
+			dialog.Filter = EuroplanRes.License_Datei + " (*.epl)|*.epl";
 			dialog.Multiselect = false;
 			DialogResult result = dialog.ShowDialog();
 			if (result == DialogResult.OK) {
 				ImportLicenseResultEnum importResult = LicenseManager.Instance.ImportLicense(dialog.FileName);
 				if (importResult == ImportLicenseResultEnum.LICENSE_IMPORTED) {
-					MessageBox.Show(resources.GetString("LicenseImportedMessage", Thread.CurrentThread.CurrentUICulture), resources.GetString("LicenseImportOkTitle", Thread.CurrentThread.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show(EuroplanRes.License_ImportiertText, EuroplanRes.License_ImportiertTitel, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					this.restartRequired = true;
 					this.Close();
 					//this.UpdateLicenseInfo();
 				} else if (importResult == ImportLicenseResultEnum.LICENSE_TEMPORARY_IMPORTED) {
-					MessageBox.Show(string.Format(resources.GetString("LicenseTemporaryImportedMessage", Thread.CurrentThread.CurrentUICulture), LicenseManager.Instance.LincensePath), resources.GetString("LicenseImportOkTitle", Thread.CurrentThread.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Information);
+					string message = EuroplanRes.License_TemporaerImportiertText;
+					message = message.Replace("%LICENSEPATH%", LicenseManager.Instance.LincensePath);
+					MessageBox.Show(message, EuroplanRes.License_TemporaerImportiertTitel, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					this.Close();
 				} else if (importResult == ImportLicenseResultEnum.LICENSE_NOT_FOUND) {
-					MessageBox.Show(resources.GetString("LicenseNotFoundMessage", Thread.CurrentThread.CurrentUICulture), resources.GetString("LicenseImportFailedTitle", Thread.CurrentThread.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.License_NichtGefundenText, EuroplanRes.License_NichtGefundenTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				} else if (importResult == ImportLicenseResultEnum.LICENSE_NOT_READABLE) {
-					MessageBox.Show(resources.GetString("LicenseNotReadableMessage", Thread.CurrentThread.CurrentUICulture), resources.GetString("LicenseImportFailedTitle", Thread.CurrentThread.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.License_NichtLesbarText, EuroplanRes.License_NichtLesbarTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				} else if (importResult == ImportLicenseResultEnum.LICENSE_SIGNATURE_NOT_VALID) {
-					MessageBox.Show(resources.GetString("LicenseSignatureNotValidMessage", Thread.CurrentThread.CurrentUICulture), resources.GetString("LicenseImportFailedTitle", Thread.CurrentThread.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.License_SignaturNichtGueltigText, EuroplanRes.License_SignaturNichtGueltigTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				} else if (importResult == ImportLicenseResultEnum.LICENSE_SYSTEM_NOT_VALID) {
-					MessageBox.Show(resources.GetString("LicenseSystemNotValidMessage", Thread.CurrentThread.CurrentUICulture), resources.GetString("LicenseImportFailedTitle", Thread.CurrentThread.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.License_RechnerNichtGueltigText, EuroplanRes.License_RechnerNichtGueltigTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				} else if (importResult == ImportLicenseResultEnum.LICENSE_DATE_NOT_VALID) {
-					MessageBox.Show(resources.GetString("LicenseDateNotValidMessage", Thread.CurrentThread.CurrentUICulture), resources.GetString("LicenseImportFailedTitle", Thread.CurrentThread.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.License_BereitsAbgelaufenText, EuroplanRes.License_BereitsAbgelaufenTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				} else {
-					MessageBox.Show(resources.GetString("LicenseNotValidMessage", Thread.CurrentThread.CurrentUICulture), resources.GetString("LicenseImportFailedTitle", Thread.CurrentThread.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.License_NichtGueltigText, EuroplanRes.License_NichtGueltigTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}

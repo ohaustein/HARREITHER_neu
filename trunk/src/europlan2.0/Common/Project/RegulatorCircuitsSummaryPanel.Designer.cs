@@ -33,9 +33,6 @@ namespace Europlan.Common {
 			this.heatFlowTemperatureDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.coolFlowTemperatureDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.regulatoryCircuitsSource = new System.Windows.Forms.BindingSource(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnNext = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).BeginInit();
@@ -122,26 +119,6 @@ namespace Europlan.Common {
 			// 
 			this.regulatoryCircuitsSource.DataSource = typeof(Europlan.Common.Project);
 			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Nr.";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-			this.dataGridViewTextBoxColumn2.HeaderText = "Beschreibung";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.DataPropertyName = "FlowTemperature";
-			this.dataGridViewTextBoxColumn3.HeaderText = "TvHeiz °C";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.Width = 80;
-			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
@@ -183,9 +160,6 @@ namespace Europlan.Common {
 
 		private System.Windows.Forms.DataGridView gridRegulatoryCircuits;
 		private System.Windows.Forms.BindingSource regulatoryCircuitsSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private NumericColumn heatFlowTemperatureDataGridViewTextBoxColumn;

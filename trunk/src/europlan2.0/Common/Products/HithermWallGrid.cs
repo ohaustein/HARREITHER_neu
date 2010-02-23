@@ -5,15 +5,19 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Europlan.Common {
 	public partial class HithermWallGrid : UserControl {
 
 		private bool showCompact = false;
 
+		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
+
 		public HithermWallGrid() {
 			InitializeComponent();
 
+			this.SetLanguage();
 			/*List<HithermWall> walls = new List<HithermWall>();
 
 			ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
@@ -33,6 +37,18 @@ namespace Europlan.Common {
 				this.hithermWallBindingSource.DataSource = Project.Instance.HithermWalls;
 				this.hithermWallBindingSource.ResetBindings(false);
 			}
+		}
+
+		private void SetLanguage() {
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_NummerCol; //"Nummer";
+			this.constructionDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_Basiskonstruktion; //"Basis-\nKonstr.";
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_BezeichnungCol; //"Bezeichnung";
+			this.Deckschicht.HeaderText = EuroplanRes.HithermWallGrid_Deckschicht; //"Decksch.\nR\n(m²K/W)";
+			this.kValueDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_UWert; //"U-Wert\n(W/m²K)";
+			this.bereinigenDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_WaermebedarfBereinigen; //"Wärme\nBedarf\nberein.";
+			this.additionalInsulationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_ZusaetzlicheDaemmung; //"zus. Dämmg\nR\n(m²K/W)";
+			this.tempBehindHeatDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_TemperaturHeiz; //"Temp.\nHeiz\n(°C)";
+			this.tempBehindCoolDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_TemperaturKuehl; //"Temp.\nKühl\n(°C)";
 		}
 
 		public class WallEventArgs : EventArgs {
@@ -136,7 +152,7 @@ namespace Europlan.Common {
 			e.Row.Cells[this.Construction.Index].Value = newConstruction;
 			e.Row.Cells[this.Deckschicht.Index].Value = 0.0;
 			e.Row.Cells[this.kValueDataGridViewTextBoxColumn.Index].Value = 0.0;
-			e.Row.Cells[this.nameDataGridViewTextBoxColumn.Index].Value = "Neue Wandkonstruktion";
+			e.Row.Cells[this.nameDataGridViewTextBoxColumn.Index].Value = EuroplanRes.HithermWallGrid_NeueWandkonstruktion; //"Neue Wandkonstruktion";
 			int maxId = 0;
 			int newId;
 			string prefix = this.showCompact ? "UCW" : "USW";

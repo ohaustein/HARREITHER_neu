@@ -77,7 +77,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.panelTop);
 			this.Controls.Add(this.panelBottom);
 			this.Name = "ConstructionEditorForm";
-			this.Text = "ConstructionEditorForm";
+			this.Text = "Konstruktion";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConstructionEditorForm_FormClosing_1);
 			this.panelTop.ResumeLayout(false);
 			this.panelTop.PerformLayout();

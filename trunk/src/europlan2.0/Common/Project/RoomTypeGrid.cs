@@ -14,6 +14,15 @@ namespace Europlan.Common {
 
 		public RoomTypeGrid() {
 			InitializeComponent();
+
+			this.SetLanguage();
+		}
+
+		private void SetLanguage() {
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RoomTypeGrid_Bezeichnung; //"Name";
+			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RoomTypeGrid_Heizlast; //"Heizlast (W/m²)";
+			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RoomTypeGrid_Kuehllast; //"Kühllast (W/m²)";
+
 		}
 
 		public Configuration Config {

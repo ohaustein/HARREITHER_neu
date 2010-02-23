@@ -17,6 +17,28 @@ namespace Europlan.Application {
 
 		public OptionsForm() {
 			InitializeComponent();
+
+			this.SetLanguague();
+
+		}
+
+		private void SetLanguague() {
+			this.Text = EuroplanRes.OptionsForm_Titel; //"Einstellungen";
+			btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
+			btnOk.Text = EuroplanRes.General_Ok; //"&OK";
+			button1.Text = EuroplanRes.OptionsForm_Aendern; //"Ändern";
+			button2.Text = EuroplanRes.OptionsForm_Loeschen; //"Löschen";
+			label1.Text = EuroplanRes.OptionsForm_Logo; //"Logo für Ausdrucke:";
+			lblLanguage.Text = EuroplanRes.OptionsForm_Sprache; //"Sprache:";
+			tabConstructions.Text = EuroplanRes.OptionsForm_Konstruktionen; //"Konstruktionen";
+			tabGeneral.Text = EuroplanRes.OptionsForm_Allgemein; //"Allgemein";
+			tabMaterials.Text = EuroplanRes.OptionsForm_Artikelstamm; //"Artikelstamm";
+			tabPageCeiling.Text = EuroplanRes.OptionsForm_Decke; //"Decke";
+			tabPageDistributor.Text = EuroplanRes.OptionsForm_Verteiler; //"Verteiler";
+			tabPageFloor.Text = EuroplanRes.OptionsForm_Fussboden; //"Fußboden";
+			tabPageGeneral.Text = EuroplanRes.OptionsForm_Allgmein; //"Allgemein";
+			tabPageInsulation.Text = EuroplanRes.OptionsForm_Daemmung; //"Dämmung";
+			tabPageWall.Text = EuroplanRes.OptionsForm_Wand; //"Wand";
 		}
 
 		public bool RestartRequired {
@@ -69,8 +91,8 @@ namespace Europlan.Application {
 			OpenFileDialog dialog = new OpenFileDialog();
 			dialog.CheckFileExists = true;
 			dialog.CheckPathExists = true;
-			dialog.DefaultExt = "e2p";
-			dialog.Filter = "Logo (*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG";
+			dialog.DefaultExt = "jpg";
+			dialog.Filter = EuroplanRes.OptionsForm_LogoFilter + "|*.BMP;*.JPG;*.PNG";
 			dialog.Multiselect = false;
 			DialogResult result = dialog.ShowDialog();
 			if (result == DialogResult.OK) {

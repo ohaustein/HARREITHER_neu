@@ -166,6 +166,7 @@ namespace Europlan.Common {
 				}
 				temp = temp.Trim();
 				temp = temp.TrimEnd(',');
+				// TODO Localization
 				temp = temp.Replace("Modul ", "");
 				return temp;
 			}

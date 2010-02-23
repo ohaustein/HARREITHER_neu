@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using System.Collections;
+using System.Threading;
+using Europlan.Licensing;
 
 namespace Europlan.Common {
 
@@ -87,14 +89,14 @@ namespace Europlan.Common {
 		private bool anhydritEstrich = false;
 
 		public class LayDistanceConverter : System.ComponentModel.TypeConverter {
-			private static readonly string A5 = "A5";
-			private static readonly string EV5 = "EV5";
-			private static readonly string EV10 = "EV10";
-			private static readonly string EV15 = "EV15";
-			private static readonly string EV20 = "EV20";
-			private static readonly string EV25 = "EV25";
-			private static readonly string EV30 = "EV30";
-			private static readonly string EV35 = "EV35";
+			private static readonly string A5 = EuroplanRes.EcothermProduct_A5; //"A5";
+			private static readonly string EV5 = EuroplanRes.EcothermProduct_EV5; //"EV5";
+			private static readonly string EV10 = EuroplanRes.EcothermProduct_EV10; //"EV10";
+			private static readonly string EV15 = EuroplanRes.EcothermProduct_EV15; //"EV15";
+			private static readonly string EV20 = EuroplanRes.EcothermProduct_EV20; //"EV20";
+			private static readonly string EV25 = EuroplanRes.EcothermProduct_EV25; //"EV25";
+			private static readonly string EV30 = EuroplanRes.EcothermProduct_EV30; //"EV30";
+			private static readonly string EV35 = EuroplanRes.EcothermProduct_EV35; //"EV35";
 
 			private Dictionary<string, EcothermLayDistance> mappingFromString = new Dictionary<string, EcothermLayDistance>();
 			private Dictionary<EcothermLayDistance, string> mappingToString = new Dictionary<EcothermLayDistance, string>();
@@ -172,7 +174,9 @@ namespace Europlan.Common {
 		}
 
 		public EcothermProduct(){
-
+			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
+				throw new ProductNotLicensedException(this.GetType());
+			}
 		}
 
 		protected EcothermProduct(EcothermProduct product) : base(product) {
@@ -211,7 +215,10 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  Mindestüberdeckung: " + Math.Round(su0, 3).ToString() + " (Standardwert: " + Math.Round(defaultSu0, 3).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_Mindestueberdeckung;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(su0, 3).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultSu0, 3).ToString());
+					message += newMsg;
 				}
 
 				double defaultSu = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
@@ -221,11 +228,15 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  Estrichüberdeckung: " + Math.Round(su, 3).ToString() + " (Standardwert: " + Math.Round(defaultSu, 3).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_Estrichueberdeckung;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(su, 3).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultSu, 3).ToString());
+					message += newMsg;
 				}
 
 				if (message != null) {
-					message = "Ecotherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" + message;
+					message = EuroplanRes.EcothermProduct_NotificationParameter + /*"Ecotherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" */
+						"\n" + message;
 				}
 
 				return message;
@@ -1381,15 +1392,15 @@ namespace Europlan.Common {
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
-				this.lastErrorMsg = "Fehlende Eingaben: ";
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
 				if (plannedFloorConstruction == null) {
-					this.lastErrorMsg += "Fußbodenkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fußbodenkonstruktion, ";
 				}
 				if (plannedInsulationConstruction == null) {
-					this.lastErrorMsg += "Wärmedämmkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"Wärmedämmkonstruktion, ";
 				}
 				if (PlannedConnection == null) {
-					this.lastErrorMsg += "Heizkreisanschluß, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluß, ";
 				}
 				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
@@ -1420,7 +1431,7 @@ namespace Europlan.Common {
 					} else {*/
 						//this.circuits.Clear();
 					/*}*/
-					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -1431,7 +1442,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (!userDefinedOk) {
-					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -1623,7 +1634,7 @@ namespace Europlan.Common {
 				} else {*/
 					this.circuits.Clear();
 				/*}*/
-					this.lastErrorMsg = "Keine Automatische Auslegung möglich";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_KeineAutomatischeAuslegung; //"Keine Automatische Auslegung möglich";
 				this.incompleteCalculation = true;
 				return false;
 			}
@@ -1725,31 +1736,53 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
+			string newMsg;
 			if (this.LongestPipeLengthPerCircuitWithAllConnections > EcothermProduct.ConfigMaxCircuitLength) {
-				this.lastErrorMsg += "Rohrlänge zu groß (" + Math.Round(this.PipeLengthWithoutConnectionsOfLongestPipeWithConnections, 1) + "m > " + Math.Round(EcothermProduct.ConfigMaxCircuitLength - this.ConnectionLengthOfLongestPipeWithConnections, 1) + "m)\n";
+				newMsg = EuroplanRes.ErrorMessage_Rohrlaenge;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PipeLengthWithoutConnectionsOfLongestPipeWithConnections, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(EcothermProduct.ConfigMaxCircuitLength - this.ConnectionLengthOfLongestPipeWithConnections, 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) > (EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxResidenceTempHarreither : EcothermProduct.ConfigMaxResidenceTempEn1264)) {
-				this.lastErrorMsg += "Oberflächentemperatur in der Aufenthaltszone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) + "°C > " + Math.Round((EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxResidenceTempHarreither : EcothermProduct.ConfigMaxResidenceTempEn1264), 1) + "°C)\n";
+				newMsg = EuroplanRes.ErrorMessage_TemperaturAz;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedFloorTemperatureHeatResidence, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round((EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxResidenceTempHarreither : EcothermProduct.ConfigMaxResidenceTempEn1264), 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxRimTempHarreither : EcothermProduct.ConfigMaxRimTempEn1264)) {
-				this.lastErrorMsg += "Oberflächentemperatur in der Randzone zu groß (" + Math.Round(this.PlannedFloorTemperatureHeatRim, 1) + "°C > " + Math.Round((EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxRimTempHarreither : EcothermProduct.ConfigMaxRimTempEn1264), 1) + "°C)\n";
+				newMsg = EuroplanRes.ErrorMessage_TemperaturRz;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedFloorTemperatureHeatRim, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round((EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxRimTempHarreither : EcothermProduct.ConfigMaxRimTempEn1264), 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
 				if (Math.Round(this.PlannedMaxMhHeat, 1) > EcothermProduct.ConfigMaxMassenstrom) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
+					newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", EcothermProduct.ConfigMaxMassenstrom.ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			} else {
 				if (Math.Round(this.PlannedMaxMhCool, 1) > EcothermProduct.ConfigMaxMassenstrom) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + EcothermProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
+					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", EcothermProduct.ConfigMaxMassenstrom.ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
 				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(EcothermProduct.ConfigMaxPressureLost/ 100.0, 2)) {
-					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + Math.Round(EcothermProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
+					newMsg = EuroplanRes.ErrorMessage_DruckverlustHeiz;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoHeat, 2).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(EcothermProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			} else {
 				if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(EcothermProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 2).ToString() + "mbar > " + Math.Round(EcothermProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
+					newMsg = EuroplanRes.ErrorMessage_DruckverlustKuehl;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoCool, 2).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(EcothermProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
 			if (this.lastErrorMsg.Length == 0) {
@@ -1808,7 +1841,7 @@ namespace Europlan.Common {
 						j++;
 					}
 					if (!found) {
-						error = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+						error = EuroplanRes.ErrorMessage_HkAnschluss; // "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					} else {
 						j--;
 					}

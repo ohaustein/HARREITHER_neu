@@ -35,7 +35,6 @@ namespace Europlan.Application {
 
 		Queue<string> mruList = new Queue<string>();
 
-		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
 		private static readonly ILog log = LogManager.GetLogger(typeof(MainForm));
 
 		private IEditorUserControl currentEditorUserControl = null;
@@ -45,6 +44,8 @@ namespace Europlan.Application {
 		public MainForm() {
 			InitializeComponent();
 
+			this.SetLanguage();
+
 			this.updateController.ApplicationId = Program.updateGuid;
 			this.updateController.UpdateLocation = Program.updateLocation;
 			this.updateController.PublicKeyToken = Program.updatePublicKey;
@@ -52,6 +53,46 @@ namespace Europlan.Application {
 			LicenseManager.Instance.LicenseChanged += new EventHandler(licenseManager_LicenseChanged);
 
 			this.UpdateAvailableFeatures();
+		}
+
+		private void SetLanguage() {
+			this.Text = EuroplanRes.MainForm_Titel; //"Europlan";
+			auslegeAssistentButton.Text = EuroplanRes.MainForm_Auslegungshilfe; //"FBH-Auslegungshilfe";
+			copyToolStripButton.Text = EuroplanRes.General_Kopieren; //"&Kopieren";
+			copyToolStripMenuItem.Text = EuroplanRes.General_Kopieren; //"Kopieren";
+			cutToolStripButton.Text = EuroplanRes.General_Ausschneiden; //"&Ausschneiden";
+			cutToolStripMenuItem.Text = EuroplanRes.General_Ausschneiden; //"Ausschneiden";
+			datanormToolStripMenuItem.Text = EuroplanRes.MainForm_Artikelstamm; //"Artikelstamm";
+			demandedHeatToolStripMenuItem.Text = EuroplanRes.MainForm_WaermeUndKuehlbedarf; //"&Wärme-/Kühlbedarf";
+			editToolStripMenuItem.Text = EuroplanRes.MainForm_Bearbeiten; //"&Bearbeiten";
+			exitToolStripMenuItem.Text = EuroplanRes.MainForm_Beenden; //"B&eenden";
+			fileToolStripMenuItem.Text = EuroplanRes.MainForm_Datei; //"&Datei";
+			helpToolStripButton.Text = EuroplanRes.MainForm_Hilfe; //"&Hilfe";
+			helpToolStripMenuItem.Text = EuroplanRes.MainForm_Hilfe; //"&Hilfe";
+			importGlobalConfToolStripMenuItem.Text = EuroplanRes.MainForm_ArtikelUndKonstruktionen; //"Artikel und Konstruktionen";
+			importToolStripMenuItem.Text = EuroplanRes.MainForm_Importieren; //"&Importieren";
+			infoToolStripMenuItem.Text = EuroplanRes.MainForm_Info; //"Info";
+			licenseToolStripMenuItem.Text = EuroplanRes.MainForm_Lizenz; //"&Lizenz";
+			newToolStripButton.Text = EuroplanRes.MainForm_Neu; //"&Neu";
+			newToolStripMenuItem.Text = EuroplanRes.MainForm_Neu; //"&Neu";
+			openGlobalConfDialog.Filter = EuroplanRes.MainForm_ArtikelUndKonstruktionenFilter + "|global.conf"; //"Artikel und Konstruktionen|global.conf";
+			openToolStripButton.Text = EuroplanRes.MainForm_Oeffnen; //"Ö&ffnen";
+			openToolStripMenuItem.Text = EuroplanRes.MainForm_Oeffnen; //"Ö&ffnen";
+			optionsToolStripMenuItem.Text = EuroplanRes.MainForm_Optionen; //"&Optionen";
+			pasteToolStripButton.Text = EuroplanRes.MainForm_Einfuegen; //"&Einfügen";
+			pasteToolStripMenuItem.Text = EuroplanRes.MainForm_Einfuegen; //"Einfügen";
+			printToolStripButton.Text = EuroplanRes.MainForm_Drucken; //"&Drucken";
+			projectOverviewCoolToolStripButton.Text = EuroplanRes.MainForm_UebersichtKuehlen; //"Übersicht Kühlen";
+			projectOverviewHeatToolStripButton.Text = EuroplanRes.MainForm_UebersichtHeizen; //"Übersicht Heizen";
+			projektToolStripMenuItem.Text = EuroplanRes.MainForm_Projekt; //"Projekt";
+			recentProjectsToolStripMenuItem.Text = EuroplanRes.MainForm_LetzteProjekte; //"Letzte Projekte";
+			saveAsToolStripMenuItem.Text = EuroplanRes.MainForm_SpeichernUnter; //"Speichern &unter...";
+			saveToolStripButton.Text = EuroplanRes.MainForm_Speichern; //"Speic&hern";
+			saveToolStripMenuItem.Text = EuroplanRes.MainForm_Speichern; //"Speic&hern";
+			settingsToolStripMenuItem.Text = EuroplanRes.MainForm_Einstellungen; //"&Einstellungen";
+			updateToolStripMenuItem.Text = EuroplanRes.MainForm_Aktualisieren; //"Auf Aktualisierungen prüfen...";
+			viewReportToolStripMenuItem.Text = EuroplanRes.MainForm_Ansehen; //"Ansehen";
+			warningsAndErrorsToolStripMenuItem.Text = EuroplanRes.MainForm_Warnungen; //"Warnungen und Fehler";
 		}
 
 		private void licenseManager_LicenseChanged(object sender, EventArgs e) {
@@ -68,7 +109,7 @@ namespace Europlan.Application {
 				this.saveToolStripButton.Enabled = false;
 				this.saveAsToolStripMenuItem.Enabled = false;
 				this.printToolStripButton.Enabled = false;
-				this.title = MainForm.defaultTitle + " (" + resources.GetString("NotLicensed", Thread.CurrentThread.CurrentUICulture) + ")";
+				this.title = MainForm.defaultTitle + " (" + EuroplanRes.General_NichtLizenziert + ")";
 				this.UpdateTitle();
 			} else {
 				this.newToolStripMenuItem.Enabled = true;
@@ -90,8 +131,8 @@ namespace Europlan.Application {
 
 		private bool CheckForUnsavedChanges() {
 			if (projectUnsaved) {
-				string messageText = resources.GetString("UnsavedMessage", Thread.CurrentThread.CurrentUICulture);
-				string caption = resources.GetString("UnsavedCaption", Thread.CurrentThread.CurrentUICulture);
+				string messageText = EuroplanRes.General_AenderungenSpeichernText;
+				string caption = EuroplanRes.General_AenderungenSpeichernTitel;
 				DialogResult result = MessageBox.Show(messageText, caption, MessageBoxButtons.YesNoCancel);
 				if (result == DialogResult.Cancel) {
 					return false;
@@ -107,7 +148,7 @@ namespace Europlan.Application {
 						SaveFileDialog dialog = new SaveFileDialog();
 						dialog.CheckPathExists = true;
 						dialog.DefaultExt = "e2p";
-						dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
+						dialog.Filter = EuroplanRes.MainForm_E2pFilter + "|*.e2p";
 						result = dialog.ShowDialog();
 						if (result == DialogResult.OK) {
 							projectFileName = dialog.FileName;
@@ -169,8 +210,8 @@ namespace Europlan.Application {
 				license.ShowDialog();
 				restart = license.RestartRequired;
 				if (restart) {
-					string message = resources.GetString("RestartMessage", Thread.CurrentThread.CurrentUICulture);
-					string caption = resources.GetString("RestartCaption", Thread.CurrentThread.CurrentUICulture);
+					string message = EuroplanRes.General_NeustartErforderlichText;
+					string caption = EuroplanRes.General_NeustartErforderlichTitel;
 					MessageBox.Show(message, caption, MessageBoxButtons.OK);
 					System.Windows.Forms.Application.Restart();
 				}
@@ -226,7 +267,9 @@ namespace Europlan.Application {
 					} else {
 						name = pnle.ProductType.Name;
 					}
-					MessageBox.Show("Das Projekt konnte nicht geladen werden, da im Projekt ein nicht lizensiertes Produkt (" + name + ") verplant wurde.", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					string message = EuroplanRes.MainForm_NichtLizensiertesProduktImProjektText;
+					message = message.Replace("%PRODUKT%", name);
+					MessageBox.Show(message, EuroplanRes.MainForm_NichtLizensiertesProduktImProjektTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				} else {
 					log.Error("Problem loading project:", ex);
 				}
@@ -314,8 +357,8 @@ namespace Europlan.Application {
 			OptionsForm options = new OptionsForm();
 			DialogResult result = options.ShowDialog();
 			if (result == DialogResult.OK && options.RestartRequired) {
-				string message = resources.GetString("RestartMessage", Thread.CurrentThread.CurrentUICulture);
-				string caption = resources.GetString("RestartCaption", Thread.CurrentThread.CurrentUICulture);
+				string message = EuroplanRes.General_NeustartErforderlichText;
+				string caption = EuroplanRes.General_NeustartErforderlichTitel;
 				result = MessageBox.Show(message, caption, MessageBoxButtons.OKCancel);
 				if (result == DialogResult.OK) {
 					System.Windows.Forms.Application.Restart();
@@ -327,13 +370,13 @@ namespace Europlan.Application {
 		private void updateToolStripMenuItem_Click(object sender, EventArgs e) {
 			try {
 				if (!this.updateCheckCompleted) {
-					MessageBox.Show("Es wird bereits auf eine Aktualisierung geprüft...");
+					MessageBox.Show(EuroplanRes.MainForm_AktualisierungWirdGeprueft);
 				} else {
 					this.updateController.UpdateInteractive();
 				}
 			} catch (Exception ex) {
 				// TODO
-				MessageBox.Show("Es wird bereits auf eine Aktualisierung geprüft...");
+				MessageBox.Show(EuroplanRes.MainForm_AktualisierungWirdGeprueft);
 			}
 		}
 
@@ -358,7 +401,7 @@ namespace Europlan.Application {
 				if (projectFileName != null) {
 					title += projectFileName;
 				} else {
-					title += resources.GetString("NewProjectTitle", Thread.CurrentThread.CurrentUICulture);
+					title += EuroplanRes.General_NeuerProjektName;
 				}
 				if (projectUnsaved) {
 					title += "*";
@@ -388,7 +431,7 @@ namespace Europlan.Application {
 				dialog.CheckFileExists = true;
 				dialog.CheckPathExists = true;
 				dialog.DefaultExt = "e2p";
-				dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
+				dialog.Filter = EuroplanRes.MainForm_E2pFilter + "|*.e2p";
 				dialog.Multiselect = false;
 				DialogResult result = dialog.ShowDialog();
 				if (result == DialogResult.OK) {
@@ -411,7 +454,7 @@ namespace Europlan.Application {
 				SaveFileDialog dialog = new SaveFileDialog();
 				dialog.CheckPathExists = true;
 				dialog.DefaultExt = "e2p";
-				dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
+				dialog.Filter = EuroplanRes.MainForm_E2pFilter + "|*.e2p";
 				DialogResult result = dialog.ShowDialog();
 				if (result == DialogResult.OK) {
 					projectFileName = dialog.FileName;
@@ -430,7 +473,7 @@ namespace Europlan.Application {
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.CheckPathExists = true;
 			dialog.DefaultExt = "e2p";
-			dialog.Filter = "Europlan 2.0 (*.e2p)|*.e2p";
+			dialog.Filter = EuroplanRes.MainForm_E2pFilter + "|*.e2p";
 			DialogResult result = dialog.ShowDialog();
 			if (result == DialogResult.OK) {
 				projectFileName = dialog.FileName;
@@ -442,8 +485,8 @@ namespace Europlan.Application {
 			LicenseForm license = new LicenseForm();
 			license.ShowDialog();
 			if (license.RestartRequired) {
-				string message = resources.GetString("RestartMessage", Thread.CurrentThread.CurrentUICulture);
-				string caption = resources.GetString("RestartCaption", Thread.CurrentThread.CurrentUICulture);
+				string message = EuroplanRes.General_NeustartErforderlichText;
+				string caption = EuroplanRes.General_NeustartErforderlichTitel;
 				MessageBox.Show(message, caption, MessageBoxButtons.OK);
 				System.Windows.Forms.Application.Restart();
 			}
@@ -722,7 +765,7 @@ namespace Europlan.Application {
 			if (this.CheckForUnsavedChanges()) {
 				OpenFileDialog dialog = new OpenFileDialog();
 				//FolderBrowserDialog dialog = new FolderBrowserDialog();
-				dialog.Filter = "Artikelstamm|BruttoPreise*.csv";
+				dialog.Filter = EuroplanRes.MainForm_BruttoPreiseFilter + "|BruttoPreise*.csv";
 				string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 				if (dialog.ShowDialog() == DialogResult.OK) {
 					string path = Path.GetDirectoryName(dialog.FileName);

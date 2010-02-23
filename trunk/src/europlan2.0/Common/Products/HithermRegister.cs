@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Xml.Serialization;
+using System.Threading;
 
 namespace Europlan.Common {
 	public class HithermRegister {
 		#region Enums
 		public class RegisterTypeEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string hit_50_10 = "HIT 50/10";
-			private static readonly string hit_100_10 = "HIT 100/10";
-			private static readonly string hit_150_10 = "HIT 150/10";
-			private static readonly string hit_200_10 = "HIT 200/10";
-			private static readonly string hit_250_10 = "HIT 250/10";
-			private static readonly string hit_300_10 = "HIT 300/10";
-			private static readonly string hit_50_5 = "HIT 50/5";
-			private static readonly string hit_100_5 = "HIT 100/5";
-			private static readonly string hit_150_5 = "HIT 150/5";
-			private static readonly string hit_200_5 = "HIT 200/5";
-			private static readonly string hit_250_5 = "HIT 250/5";
-			private static readonly string hit_300_5 = "HIT 300/5";
+			private static readonly string hit_50_10 = EuroplanRes.HithermRegister_Hit50L; //"HIT 50/10";
+			private static readonly string hit_100_10 = EuroplanRes.HithermRegister_Hit100L; //"HIT 100/10";
+			private static readonly string hit_150_10 = EuroplanRes.HithermRegister_Hit150L; //"HIT 150/10";
+			private static readonly string hit_200_10 = EuroplanRes.HithermRegister_Hit200L; //"HIT 200/10";
+			private static readonly string hit_250_10 = EuroplanRes.HithermRegister_Hit250L; //"HIT 250/10";
+			private static readonly string hit_300_10 = EuroplanRes.HithermRegister_Hit300L; //"HIT 300/10";
+			private static readonly string hit_50_5 = EuroplanRes.HithermRegister_Hit50HL; //"HIT 50/5";
+			private static readonly string hit_100_5 = EuroplanRes.HithermRegister_Hit100HL; //"HIT 100/5";
+			private static readonly string hit_150_5 = EuroplanRes.HithermRegister_Hit150HL; //"HIT 150/5";
+			private static readonly string hit_200_5 = EuroplanRes.HithermRegister_Hit200HL; //"HIT 200/5";
+			private static readonly string hit_250_5 = EuroplanRes.HithermRegister_Hit250HL; //"HIT 250/5";
+			private static readonly string hit_300_5 = EuroplanRes.HithermRegister_Hit300HL; //"HIT 300/5";
 
 			private Dictionary<string, HithermRegisterTypeEnum> mappingFromString = new Dictionary<string, HithermRegisterTypeEnum>();
 			private Dictionary<HithermRegisterTypeEnum, string> mappingToString = new Dictionary<HithermRegisterTypeEnum, string>();
@@ -97,8 +98,8 @@ namespace Europlan.Common {
 		}
 
 		public class RegisterOrientationEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string horizontal = "Horizontal";
-			private static readonly string vertikal = "Vertikal";
+			private static readonly string horizontal = EuroplanRes.HithermRegister_Horizontal; //"Horizontal";
+			private static readonly string vertikal = EuroplanRes.HithermRegister_Vertikal; //"Vertikal";
 
 			private Dictionary<string, RegisterOrientationEnum> mappingFromString = new Dictionary<string, RegisterOrientationEnum>();
 			private Dictionary<RegisterOrientationEnum, string> mappingToString = new Dictionary<RegisterOrientationEnum, string>();
@@ -144,8 +145,8 @@ namespace Europlan.Common {
 		}
 
 		public class RohrabstandEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string horizontal = "10cm (Standardreg.)";
-			private static readonly string vertikal = "5cm (Hochleistungsreg.)";
+			private static readonly string horizontal = EuroplanRes.HithermRegister_Leistungsregister; //"10cm (Standardreg.)";
+			private static readonly string vertikal = EuroplanRes.HithermRegister_Hochleistungsregister; //"5cm (Hochleistungsreg.)";
 
 			private Dictionary<string, RohrabstandEnum> mappingFromString = new Dictionary<string, RohrabstandEnum>();
 			private Dictionary<RohrabstandEnum, string> mappingToString = new Dictionary<RohrabstandEnum, string>();

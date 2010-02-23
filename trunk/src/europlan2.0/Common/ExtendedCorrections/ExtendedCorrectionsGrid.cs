@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Europlan.Common {
 	public partial class ExtendedCorrectionsGrid : UserControl {
@@ -14,16 +15,34 @@ namespace Europlan.Common {
 
 		private ExtendedCorrections sumRow = null;
 
+		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
+
 		public event EventHandler CorrectionsEnabledChanged;
 		public event EventHandler CorrectionsChanged;
 
 		public ExtendedCorrectionsGrid() {
 			InitializeComponent();
 
+			this.SetLanguage();
 			this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomCenter;
 			this.gridExtendedCorrections.CellPainting += new DataGridViewCellPaintingEventHandler(gridExtendedCorrections_CellPainting);
 			this.gridExtendedCorrections.Paint += new PaintEventHandler(gridExtendedCorrections_Paint);
 			this.gridExtendedCorrections.ColumnWidthChanged += new DataGridViewColumnEventHandler(gridExtendedCorrections_ColumnWidthChanged);
+		}
+
+		private void SetLanguage() {
+			this.rbExtendedCorrections.Text = EuroplanRes.ExtendedCorrectionsGrid_Aktivieren; //"erweiterte Korrekturen aktivieren";
+			this.rbStandardCorrections.Text = EuroplanRes.ExtendedCorrectionsGrid_Deaktivieren; //"nur Standardkorrekturen verwenden (keine erweiterten Korrekturen)";
+			this.CircuitNr.HeaderText = EuroplanRes.ExtendedCorrectionsGrid_HeizkreisCol; //"Heiz-\nkreis\nNr.";
+			this.correctAreaDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ExtendedCorrectionsGrid_FlaecheAktivieren; //"Vor-\ngabe";
+			this.areaValueDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ExtendedCorrectionsGrid_FlaecheWert; //"m²\n";
+			this.areaPercentageDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ExtendedCorrectionsGrid_FlaecheProzent; //"%\n";
+			this.correctRimDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ExtendedCorrectionsGrid_RandzoneAktivieren; //"Vor-\ngabe";
+			this.rimLengthValueDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ExtendedCorrectionsGrid_RandzoneWert; //"m\n";
+			this.rimPercentageDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ExtendedCorrectionsGrid_RandzoneProzent; //"%\n";
+			this.rimCornersValueDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ExtendedCorrectionsGrid_RandzoneEcken; //"Anzahl\nEcken";
+			this.correctConnectionsDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ExtendedCorrectionsGrid_AnbindungAktivieren; //"Vor-\ngabe";
+			this.connectionsPercentageDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ExtendedCorrectionsGrid_AnbindungProzent; //"Fläche\n%";
 		}
 
 		public Product Product {
@@ -201,7 +220,7 @@ namespace Europlan.Common {
 
 			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
 			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			e.Graphics.DrawString("Anteil Gesamtfläche",
+			e.Graphics.DrawString(EuroplanRes.ExtendedCorrectionsGrid_Flaeche /*"Anteil Gesamtfläche"*/,
 				this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Font,
 				new SolidBrush(this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.ForeColor),
 				r1,
@@ -221,7 +240,7 @@ namespace Europlan.Common {
 			format.LineAlignment = StringAlignment.Center;
 			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
 			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			e.Graphics.DrawString("Anteil Randzone",
+			e.Graphics.DrawString(EuroplanRes.ExtendedCorrectionsGrid_Randzone /*"Anteil Randzone"*/,
 				this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Font,
 				new SolidBrush(this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.ForeColor),
 				r1,
@@ -239,7 +258,7 @@ namespace Europlan.Common {
 			format.LineAlignment = StringAlignment.Center;
 			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
 			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			e.Graphics.DrawString("Anbindeleitungen",
+			e.Graphics.DrawString(EuroplanRes.ExtendedCorrectionsGrid_Anbindung /*""Anbindeleitungen"*/,
 				this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.Font,
 				new SolidBrush(this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle.ForeColor),
 				r1,
@@ -401,20 +420,28 @@ namespace Europlan.Common {
 		public bool AllowLeave() {
 			if (this.sumRow != null && this.CorrectionsEnabled) {
 				if (Math.Round(this.sumRow.AreaPercentage, 1) != 100.0) {
-					MessageBox.Show("Die Summe der Anteile an der Gesamtfläche muss 100% der Gesamtfläche ergeben", "Bitte korrigieren Sie die Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.ExtendedCorrectionsGrid_FehlerFlaeche /*"Die Summe der Anteile an der Gesamtfläche muss 100% der Gesamtfläche ergeben"*/, 
+						EuroplanRes.ExtendedCorrectionsGrid_Fehler /*"Bitte korrigieren Sie die Eingabe"*/,
+						MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
 				}
 				if (Math.Round(this.sumRow.RimPercentage, 1) != 100.0) {
-					MessageBox.Show("Die Summe der Anteile an der Gesamtfläche muss 100% der Gesamtfläche ergeben", "Bitte korrigieren Sie die Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.ExtendedCorrectionsGrid_FehlerRandzone /*"Die Summe der Anteile an der Randzone muss 100% der Gesamtfläche ergeben"*/,
+						EuroplanRes.ExtendedCorrectionsGrid_Fehler /*"Bitte korrigieren Sie die Eingabe"*/,
+						MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
 				}
 				if ((this.evProduct != null && this.sumRow.RimCornersValue != this.evProduct.PlannedRimCorners) ||
 					(this.ecProduct != null && this.sumRow.RimCornersValue != this.ecProduct.PlannedRimCorners)) {
-					MessageBox.Show("Die Summe der Ecken der Randzone an der Gesamtfläche muss 100% die gesamte Anzahl an vorgegebenen Ecken ergeben", "Bitte korrigieren Sie die Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.ExtendedCorrectionsGrid_FehlerEcken /*"Die Summe der Ecken der Randzone an der Gesamtfläche muss 100% die gesamte Anzahl an vorgegebenen Ecken ergeben"*/,
+						EuroplanRes.ExtendedCorrectionsGrid_Fehler /*"Bitte korrigieren Sie die Eingabe"*/,
+						MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
 				}
 				if (Math.Round(this.sumRow.ConnectionsPercentage, 1) != 100.0) {
-					MessageBox.Show("Die Summe der Anteile an der Fläche der Anbindeleitung muss 100% der gesamten Fläche der Anbindeleitung ergeben", "Bitte korrigieren Sie die Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.ExtendedCorrectionsGrid_FehlerAnbindung /*"Die Summe der Anteile an der Fläche der Anbindeleitung muss 100% der gesamten Fläche der Anbindeleitung ergeben"*/,
+						EuroplanRes.ExtendedCorrectionsGrid_Fehler /*"Bitte korrigieren Sie die Eingabe"*/,
+						MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
 				}
 			}

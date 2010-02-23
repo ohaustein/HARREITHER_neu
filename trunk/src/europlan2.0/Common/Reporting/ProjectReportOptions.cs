@@ -22,6 +22,24 @@ namespace Europlan.Common {
 
 		public ProjectReportOptions() {
 			InitializeComponent();
+
+			this.SetLanguage();
+		}
+
+		private void SetLanguage() {
+			this.btnOK.Text = EuroplanRes.General_Ok;
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen;
+
+			this.groupBox1.Text = EuroplanRes.ProjectReportOptions_DruckbereicheWaehlen; //"Bitte wählen Sie die gewünschten Druckbereiche";
+			this.chkProjectOverview.Text = EuroplanRes.ProjectReportOptions_Projektuebersicht; //"Projektübersicht";
+			this.chkAreaOverview.Text = EuroplanRes.ProjectReportOptions_Flaechenuebersicht; //"Flächenübersicht";
+			this.chkAuslegung.Text = EuroplanRes.ProjectReportOptions_Auslegung; //"Auslegung";
+			this.chkAuslegungBilanz.Text = EuroplanRes.ProjectReportOptions_Bilanz; //"Bilanz";
+			this.chkVerlegedaten.Text = EuroplanRes.ProjectReportOptions_Verlegedaten; //"Verlegedaten";
+			this.chkRequiredMaterial.Text = EuroplanRes.ProjectReportOptions_Materialbedarf; //"Materialbedarf";
+			this.chkRecommendedMaterial.Text = EuroplanRes.ProjectReportOptions_Bestellvorschlag; //"Bestellvorschlag";
+			this.chkKonstruktionen.Text = EuroplanRes.ProjectReportOptions_Konstruktionen; //"Konstruktionen";
+			this.Text = EuroplanRes.ProjectReportOptions_Titel; //"Druckbereich";
 		}
 
 		private void ProjectReportOptions_Load(object sender, EventArgs e) {

@@ -10,7 +10,6 @@ namespace Europlan.Common {
 		private static EN1264 instance = null;
 		private static readonly object padlock = new object();
 		private static readonly ILog log = LogManager.GetLogger(typeof(EN1264));
-		private System.ComponentModel.ComponentResourceManager resources = ResourcesManager.resources;
 
 		public const double alpha0 = 10.8;
 		public const double alphaHeizen = 10.8;

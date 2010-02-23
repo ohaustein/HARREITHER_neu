@@ -15,6 +15,22 @@ namespace Europlan.Common {
 		
 		public RegulatorCircuitsSummaryPanel() {
 			InitializeComponent();
+
+			this.SetLanguage();
+		}
+
+		private void SetLanguage() {
+			this.btnNext.Text = EuroplanRes.General_Weiter; //"Weiter";
+
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_Nummer; //"Nr.";
+			this.idDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_NummerLang; //"Eindeutige Regelkreisnummer";
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_Bezeichnung; //"Bezeichnung";
+			this.nameDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_BezeichnungLang; //"Bezeichnung des Regelkreises";
+			this.heatFlowTemperatureDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturHeiz; //"TvHeiz (°C)";
+			this.heatFlowTemperatureDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturHeizLang; //"Vorlauftemperatur im Heizbetrieb";
+			this.coolFlowTemperatureDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturKuehl; //"TvKühl (°C)";
+			this.coolFlowTemperatureDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturKuehlLang; //"Vorlauftemperatur im Kühlbetrieb";
+			this.label1.Text = EuroplanRes.RegulatoryCircuitSummaryPanel_Regelkreise; //"Regelkreise";
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -28,7 +44,7 @@ namespace Europlan.Common {
 				double dewPoint = Math.Round(EN1264.Instance.TaupunktTemperatur(((double)Project.Instance.RelativeHumidity) / 100, (double)Project.Instance.InsideTemperatureForCooling), 2);
 				foreach (RegulatorCircuit circuit in Project.Instance.RegulatorCircuits) {
 					if (dewPoint > circuit.CoolFlowTemperature) {
-						DialogResult result = MessageBox.Show("Bei mindestens einem Regelkreis ist die Kühltemperatur niedriger als der Taupunkt gemäß den eingegebenen Projektdaten. Wollen Sie die Eingaben korrigieren?", "Eingabefehler", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+						DialogResult result = MessageBox.Show(EuroplanRes.FacilityDetailsSummaryPanel_KuehltemperaturZuNiedrigText, EuroplanRes.FacilityDetailsSummaryPanel_KuehltemperaturZuNiedrigTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 						return result.Equals(DialogResult.Yes) ? false : true;
 					}
 				}

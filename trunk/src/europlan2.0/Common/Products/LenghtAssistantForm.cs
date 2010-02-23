@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Star.SettingsXpress;
+using System.Threading;
 
 namespace Europlan.Common {
 	public partial class LengthAssistantForm : Form {
@@ -13,9 +14,11 @@ namespace Europlan.Common {
 		private ConnectionPipe pipe;
 		private bool updateOngoing = false;
 		private double availableArea;
+		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		public LengthAssistantForm(ConnectionPipe pipe) {
 			InitializeComponent();
+			this.SetLanguage();
 			this.pipe = pipe;
 
 			this.cmbLayDistance.Items.Clear();
@@ -23,7 +26,11 @@ namespace Europlan.Common {
 				this.cmbLayDistance.Items.Add(item);
 			}
 
-			this.lblDescription.Text = "Anbindeleitung von " + pipe.ConnectionOf + " in " + pipe.ConnectionOf.Product.AssociatedRoom + ", " + pipe.PlannedCircuits + " Heizkreis(e)";
+			string connOf = EuroplanRes.LengthAssistent_AnbindeleitungVon;
+			connOf = connOf.Replace("%SYSTEM%", pipe.ConnectionOf.ToString());
+			connOf = connOf.Replace("%RAUM%", pipe.ConnectionOf.Product.AssociatedRoom.ToString());
+			connOf = connOf.Replace("%ANZHK%", pipe.PlannedCircuits.ToString());
+			this.lblDescription.Text = "Anbindeleitung von %SYSTEM% in %RAUM%, %ANZHK% Heizkreis(e)";
 			this.cmbLayDistance.SelectedItem = pipe.Verlegeart;
 			this.numVorlauf.Value = (decimal)pipe.Vorlauf;
 			this.numVorlaufArea.Value = (decimal)GetAreaForPipeLength((double)this.numVorlauf.Value);
@@ -35,9 +42,30 @@ namespace Europlan.Common {
 				if (p != pipe)
 					usedArea += p.AreaTotal;
 			}
-			this.lblHeatArea.Text = pipe.ConnectionThrough.Product.PlannedNetArea + "m²";
+			this.lblHeatArea.Text = pipe.ConnectionThrough.Product.PlannedNetArea + EuroplanRes.General_Quadratmeter;
 			availableArea = pipe.ConnectionThrough.Product.PlannedNetArea - usedArea;
-			this.lblAvailableArea.Text = availableArea + "m²";
+			this.lblAvailableArea.Text = availableArea + EuroplanRes.General_Quadratmeter;
+		}
+
+		private void SetLanguage() {
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Cancel";
+			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
+			this.label12.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaecheOhneAnb; //"Verfügbare Fläche ohne andere Anbindeleitungen:";
+			this.label11.Text = EuroplanRes.LengthAssistent_FlaecheFbh; //"Fläche der Fußbodenheizung ohne unbeheizte Flächen:";
+			this.btnRestAreaRuecklauf.Text = EuroplanRes.LengthAssistent_RestlicheFlaeche; //"Restliche Fläche";
+			this.btnAvailableAreaRuecklauf.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaeche; //"Verfügbare Fläche";
+			this.label7.Text = EuroplanRes.General_Quadratmeter; //"m²";
+			this.label8.Text = EuroplanRes.LengthAssistent_Flaeche; //"Fläche";
+			this.label9.Text = EuroplanRes.General_Meter; //"m";
+			this.label10.Text = EuroplanRes.LengthAssistent_LaengeVorlauf; //"Rohrlänge Vorlauf:";
+			this.btnRestAreaVorlauf.Text = EuroplanRes.LengthAssistent_RestlicheFlaeche; //"Restliche Fläche";
+			this.btnAvailableAreaVorlauf.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaeche; //"Verfügbare Fläche";
+			this.label6.Text = EuroplanRes.General_Quadratmeter; //"m²";
+			this.label5.Text = EuroplanRes.LengthAssistent_Flaeche; //"Fläche";
+			this.label4.Text = EuroplanRes.General_Meter; //"m";
+			this.label3.Text = EuroplanRes.LengthAssistent_LaengeVorlauf; //"Rohrlänge Vorlauf:";
+			this.label2.Text = EuroplanRes.LengthAssistent_Verlegeart; //"Verlegeart:";
+			this.Text = EuroplanRes.LengthAssistent_Laengenassistent; //"Längenassistent";
 		}
 
 		private void LengthAssistantForm_Load(object sender, EventArgs e) {
@@ -47,7 +75,7 @@ namespace Europlan.Common {
 
 		private void LengthAssistantForm_FormClosing(object sender, FormClosingEventArgs e) {
 			if (this.DialogResult == DialogResult.OK && numVorlaufArea.Value + numRuecklaufArea.Value > (decimal)availableArea) {
-				DialogResult result = MessageBox.Show("Die gewählte Anbindefläche ist größer als die verfügbare Fläche.\nWollen Sie trotzdem fortfahren?", "Eingabefehler", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+				DialogResult result = MessageBox.Show(EuroplanRes.LengthAssistentForm_FlaecheZuGrossText, EuroplanRes.LengthAssistentForm_FlaecheZuGrossTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 				if (result == DialogResult.No) {
 					e.Cancel = true;
 					return;

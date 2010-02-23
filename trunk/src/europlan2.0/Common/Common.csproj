@@ -113,6 +113,11 @@
     <Compile Include="EN1264\ap.cs" />
     <Compile Include="EN1264\EN1264.cs" />
     <Compile Include="EN1264\spline3.cs" />
+    <Compile Include="EuroplanRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuroplanRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="ExtendedCorrections\ExtendedCorrectionsGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -481,6 +486,11 @@
     <EmbeddedResource Include="ConstructionEditor\ConstructionEditorGrid.resx">
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EuroplanRes.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EuroplanRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ExtendedCorrections\ExtendedCorrectionsGrid.resx">
       <SubType>Designer</SubType>

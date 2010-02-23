@@ -11,6 +11,12 @@ namespace Europlan.Common {
 
 		public QuickDimensioningDistributorGrid() {
 			InitializeComponent();
+
+			this.SetLanguage();
+		}
+
+		private void SetLanguage() {
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.QuickDimensioningDistributorGrid_Name;
 		}
 
 		public List<Distributor> Distributors {
@@ -22,7 +28,7 @@ namespace Europlan.Common {
 
 		private void gridDistributors_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
 			if (this.quickDimensioningDistributorBindingSource.Count <= 1) {
-				MessageBox.Show("Der Verteiler kann nicht gelöscht werden, da für die Flächenaufstellung mindestens ein Verteiler vorhanden sein muss.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(EuroplanRes.QuickDimensioningDistributorGrid_LetzterVerteilerFehlerText, EuroplanRes.QuickDimensioningDistributorGrid_LetzterVerteilerFehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				e.Cancel = true;
 			} else {
 				Distributor distributor = e.Row.DataBoundItem as Distributor;

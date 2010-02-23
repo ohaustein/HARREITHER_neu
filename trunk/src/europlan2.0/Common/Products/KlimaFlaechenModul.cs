@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Xml.Serialization;
+using System.Threading;
 
 namespace Europlan.Common {
 	public class KlimaFlaechenModul {
@@ -13,11 +14,11 @@ namespace Europlan.Common {
 		private static double module_60_60_area = 0.6 * 0.6;
 
 		public class ModulTypeEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string modul_100_40 = "Modul 100/40";
-			private static readonly string modul_100_30 = "Modul 100/30";
-			private static readonly string modul_120_30 = "Modul 120/30";
-			private static readonly string modul_80_30 = "Modul 80/30";
-			private static readonly string modul_60_60 = "Modul 60/60";
+			private static readonly string modul_100_40 = EuroplanRes.KlimaFlaechenModul_100_40; //"Modul 100/40";
+			private static readonly string modul_100_30 = EuroplanRes.KlimaFlaechenModul_100_30; //"Modul 100/30";
+			private static readonly string modul_120_30 = EuroplanRes.KlimaFlaechenModul_120_30; //"Modul 120/30";
+			private static readonly string modul_80_30 = EuroplanRes.KlimaFlaechenModul_80_30; //"Modul 80/30";
+			private static readonly string modul_60_60 = EuroplanRes.KlimaFlaechenModul_60_60; //"Modul 60/60";
 			
 			private Dictionary<string, ModulTypeEnum> mappingFromString = new Dictionary<string, ModulTypeEnum>();
 			private Dictionary<ModulTypeEnum, string> mappingToString = new Dictionary<ModulTypeEnum, string>();
@@ -72,8 +73,8 @@ namespace Europlan.Common {
 		}
 
 		public class ModulOrientationEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string left = "Links";
-			private static readonly string right = "Rechts";
+			private static readonly string left = EuroplanRes.KlimaFlaechenModul_AusrichtungLinks; //"Links";
+			private static readonly string right = EuroplanRes.KlimaFlaechenModul_AusrichtungRechts; //"Rechts";
 			
 			private Dictionary<string, ModulOrientationEnum> mappingFromString = new Dictionary<string, ModulOrientationEnum>();
 			private Dictionary<ModulOrientationEnum, string> mappingToString = new Dictionary<ModulOrientationEnum, string>();

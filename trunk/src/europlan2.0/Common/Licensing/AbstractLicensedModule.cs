@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using Europlan.Common;
+using System.Threading;
 
 namespace Europlan.Licensing {
 	public abstract class AbstractLicensedModule {
@@ -23,16 +25,17 @@ namespace Europlan.Licensing {
 		public static Dictionary<string, string> DefaultModules {
 			get {
 				if (defaultModules == null) {
+					System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 					defaultModules = new Dictionary<string,string>();
-					defaultModules.Add(FeatInternal, "Interne Lizenz");
-					defaultModules.Add(FeatAdmin, "Adminmodus");
-					defaultModules.Add(ProdEuroval, "Euroval® Fußbodenheizung");
-					defaultModules.Add(ProdEcotherm, "Ecotherm® Fußbodenheizung");
-					defaultModules.Add(ProdHitherm, "Hitherm® Klimawand");
-					defaultModules.Add(ProdHithermCompact, "Hitherm® Compact Klimawand");
-					defaultModules.Add(ProdModulKlimaBoden, "Modul Klima-Boden");
-					defaultModules.Add(ProdModulKlimaDecke, "Modul Klima-Decke");
-					defaultModules.Add(ProdConcreteActivation, "Betonkernaktivierung");
+					defaultModules.Add(FeatInternal, EuroplanRes.AbstractLicensedModule_InterneLizenz /*"Interne Lizenz"*/);
+					defaultModules.Add(FeatAdmin, EuroplanRes.AbstractLicensedModule_Adminmodus /*"Adminmodus"*/);
+					defaultModules.Add(ProdEuroval, EuroplanRes.AbstractLicensedModule_Euroval /*"Euroval® Fußbodenheizung"*/);
+					defaultModules.Add(ProdEcotherm, EuroplanRes.AbstractLicensedModule_Ecotherm /*"Ecotherm® Fußbodenheizung"*/);
+					defaultModules.Add(ProdHitherm, EuroplanRes.AbstractLicensedModule_Hitherm /*"Hitherm® Klimawand"*/);
+					defaultModules.Add(ProdHithermCompact, EuroplanRes.AbstractLicensedModule_HithermCompact /*"Hitherm® Compact Klimawand"*/);
+					defaultModules.Add(ProdModulKlimaBoden, EuroplanRes.AbstractLicensedModule_ModulBoden /*"Modul Klima-Boden"*/);
+					defaultModules.Add(ProdModulKlimaDecke, EuroplanRes.AbstractLicensedModule_ModulDecke /*"Modul Klima-Decke"*/);
+					defaultModules.Add(ProdConcreteActivation, EuroplanRes.AbstractLicensedModule_BKA /*"Betonkernaktivierung"*/);
 				}
 				return defaultModules;
 			}

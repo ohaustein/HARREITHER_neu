@@ -40,7 +40,6 @@ namespace Europlan.Common {
 			this.lblFactor = new System.Windows.Forms.Label();
 			this.numFactor = new Europlan.Common.NumericBox();
 			this.numThickness = new Europlan.Common.NumericBox();
-			this.numericColumn1 = new Europlan.Common.NumericColumn();
 			this.chkHitherm = new System.Windows.Forms.CheckBox();
 			this.chkHithermCompact = new System.Windows.Forms.CheckBox();
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -207,19 +206,6 @@ namespace Europlan.Common {
             0});
 			this.numThickness.ValueChanged += new System.EventHandler(this.numThickness_ValueChanged);
 			// 
-			// numericColumn1
-			// 
-			this.numericColumn1.DataPropertyName = "LambdaValue";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle5.Format = "F0";
-			this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle5;
-			this.numericColumn1.FillWeight = 70F;
-			this.numericColumn1.HeaderText = "lambda (W/mK)";
-			this.numericColumn1.Name = "numericColumn1";
-			this.numericColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.numericColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.numericColumn1.Width = 70;
-			// 
 			// chkHitherm
 			// 
 			this.chkHitherm.AutoSize = true;
@@ -344,7 +330,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridView gridLayers;
 		private System.Windows.Forms.CheckBox cbPeFoil;
 		private Europlan.Common.NumericBox numThickness;
-		private Europlan.Common.NumericColumn numericColumn1;
 		private System.Windows.Forms.BindingSource constructionLayerBindingSource;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Label lblFactor;

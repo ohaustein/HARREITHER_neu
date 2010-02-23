@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Europlan.Licensing;
 
 namespace Europlan.Common {
 
@@ -15,7 +16,9 @@ namespace Europlan.Common {
 		private static bool canCool = true;
 
 		public ConcreteActivationProduct(){
-
+			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdConcreteActivation)) {
+				throw new ProductNotLicensedException(this.GetType());
+			}
 		}
 
 		protected ConcreteActivationProduct(ConcreteActivationProduct product) : base(product) {

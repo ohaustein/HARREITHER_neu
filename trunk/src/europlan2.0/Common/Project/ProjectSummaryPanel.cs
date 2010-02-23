@@ -15,7 +15,23 @@ namespace Europlan.Common {
 
 		public ProjectSummaryPanel() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			UpdateControl(true);
+		}
+
+		private void SetLanguage() {
+			this.btnNext.Text = EuroplanRes.General_Weiter; //"Weiter";
+
+			this.lblProjectName.Text = EuroplanRes.ProjectSummaryPanel_Bauvorhaben; //"Bauvorhaben:";
+			this.lblContact.Text = EuroplanRes.ProjectSummaryPanel_Kontaktadresse; //"Kontaktadresse:";
+			this.lblNotes.Text = EuroplanRes.ProjectSummaryPanel_Bemerkungen; //"Bemerkung:";
+			this.lblCreated.Text = EuroplanRes.ProjectSummaryPanel_Erstellungsdatum; //"Erstellungsdatum:";
+			this.lblChanged.Text = EuroplanRes.ProjectSummaryPanel_LetzteAenderung; //"Letzte Änderung:";
+			this.lblEditor.Text = EuroplanRes.ProjectSummaryPanel_Sachbearbeiter; //"Sachbearbeiter:";
+			this.label1.Text = EuroplanRes.ProjectSummaryPanel_Projektnummer; //"Projektnummer:";
+			this.label2.Text = EuroplanRes.ProjectSummaryPanel_Projektdaten; //"Projektdaten";
 		}
 
 		public void UpdateControl(bool resetUserInterface) {

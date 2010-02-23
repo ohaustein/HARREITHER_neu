@@ -16,11 +16,25 @@ namespace Europlan.Common {
 
 		public SelectConstructionForm(ConstructionScopeEnum scope, List<ConstructionType> constructionTypes) {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			this.constructions = new ConstructionListWrapper(Configuration.ConfigurationType.ProjectConfiguration);
 			this.constructions.ConstructionScopeFilter = scope;
 			this.constructions.ConstructionTypeFilter = constructionTypes;
 			this.constructionBindingSource.DataSource = this.constructions;
 			this.constructionBindingSource.ResetBindings(false);
+		}
+
+		private void SetLanguage() {
+			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Abbrechen";
+
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_Nummer; //"Nr.";
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_Bezeichnung; //"Bezeichnung";
+			this.typeDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_Typ; //"Typ";
+			this.rValueDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_RWert; //"R";
+			this.Text = EuroplanRes.SelectConstructionForm_Titel; //"Bitte wählen Sie die gewünschte Konstruktion";
 		}
 
 		public Construction SelectedConstruction {
@@ -56,7 +70,7 @@ namespace Europlan.Common {
 			settings.StorePoint("Location", this.Location);
 			SettingsFile.Update();
 			if (this.dgvConstructions.SelectedRows.Count == 0 && this.DialogResult == DialogResult.OK) {
-				MessageBox.Show("Bitte wählen Sie eine Konstruktion aus", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show(EuroplanRes.SelectConstructionForm_KeineKonstruktionText, EuroplanRes.SelectConstructionForm_KeineKonstruktionTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				e.Cancel = true;
 			}
 		}

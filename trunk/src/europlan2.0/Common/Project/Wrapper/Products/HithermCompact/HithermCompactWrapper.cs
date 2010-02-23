@@ -105,6 +105,7 @@ namespace Europlan.Common {
 				}
 				temp = temp.Trim();
 				temp = temp.TrimEnd(',');
+				// TODO Localization
 				temp = temp.Replace("HIT ", "");
 				return temp;
 			}

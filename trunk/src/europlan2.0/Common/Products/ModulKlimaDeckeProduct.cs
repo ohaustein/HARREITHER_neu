@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using System.Threading;
+using Europlan.Licensing;
 
 namespace Europlan.Common {
 
@@ -10,9 +12,9 @@ namespace Europlan.Common {
 	public class ModulKlimaDeckeProduct : Product {
 
 		public class ModulCeilingConstructionEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string kassettenDecke = "Kassettendecke";
-			private static readonly string c_profil = "C-Profil";
-			private static readonly string holzStaffel = "Holzstaffel";
+			private static readonly string kassettenDecke = EuroplanRes.ModulKlimaDeckeProduct_Kassettendecke; //"Kassettendecke";
+			private static readonly string c_profil = EuroplanRes.ModulKlimaDeckeProduct_CProfil; //"C-Profil";
+			private static readonly string holzStaffel = EuroplanRes.ModulKlimaDeckeProduct_Holzstaffel; //"Holzstaffel";
 
 			private Dictionary<string, ModulCeilingConstructionEnum> mappingFromString = new Dictionary<string, ModulCeilingConstructionEnum>();
 			private Dictionary<ModulCeilingConstructionEnum, string> mappingToString = new Dictionary<ModulCeilingConstructionEnum, string>();
@@ -112,7 +114,9 @@ namespace Europlan.Common {
 		private float plannedFloorOrCeilingArea = 0;
 
 		public ModulKlimaDeckeProduct() {
-
+			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke)) {
+				throw new ProductNotLicensedException(this.GetType());
+			}
 		}
 
 		protected ModulKlimaDeckeProduct(ModulKlimaDeckeProduct product) : base(product) {
@@ -154,7 +158,10 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  Leistungsfaktor Heizen: " + Math.Round(leistungsFaktorHeizen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorHeizen, 3).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_LeistungsfaktorHeizen;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(leistungsFaktorHeizen, 3).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultLeistungsFaktorHeizen, 3).ToString());
+					message += newMsg;
 				}
 
 				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.77);
@@ -164,11 +171,15 @@ namespace Europlan.Common {
 					} else {
 						message += "\n";
 					}
-					message += "  Leistungsfaktor Kühlen: " + Math.Round(leistungsFaktorKuehlen, 3).ToString() + " (Standardwert: " + Math.Round(defaultLeistungsFaktorKuehlen, 3).ToString() + ")";
+					string newMsg = EuroplanRes.NotificationMessage_LeistungsfaktorKuehlen;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(leistungsFaktorKuehlen, 3).ToString());
+					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultLeistungsFaktorKuehlen, 3).ToString());
+					message += newMsg;
 				}
 
 				if (message != null) {
-					message = "Modul Klimadecken-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" + message;
+					message = EuroplanRes.ModulKlimaDeckeProduct_NotificationParameter + /*"Hitherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" */
+						"\n" + message;
 				}
 
 				return message;
@@ -480,15 +491,15 @@ namespace Europlan.Common {
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.plannedCeilingConstruction == null || this.plannedInsulationConstruction == null || this.PlannedConnection == null) {
-				this.lastErrorMsg = "Fehlende Eingaben: ";
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
 				if (plannedCeilingConstruction == null) {
-					this.lastErrorMsg += "Deckenkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDecke + ", "; //"Fußbodenkonstruktion, ";
 				}
 				if (plannedInsulationConstruction == null) {
-					this.lastErrorMsg += "Wärmedämmkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"Wärmedämmkonstruktion, ";
 				}
 				if (PlannedConnection == null) {
-					this.lastErrorMsg += "Heizkreisanschluß, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluß, ";
 				}
 				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
@@ -510,7 +521,7 @@ namespace Europlan.Common {
 					} else {*/
 					//this.circuits.Clear();
 					/*}*/
-					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -521,7 +532,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (!userDefinedOk) {
-					this.lastErrorMsg = "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -622,8 +633,12 @@ namespace Europlan.Common {
 			}
 
 			this.lastErrorMsg = "";
+			string newMsg;
 			if (this.ModulType == ProductType.DH && Math.Round(this.CoveredArea, 1) > Math.Round(this.PlannedCeilingArea, 1)) {
-				this.lastErrorMsg += "Die Gesamtfläche der Module ist größer als die zur Verfügung stehende Fläche (" + Math.Round(this.CoveredArea, 1).ToString() + " > " + Math.Round(this.PlannedCeilingArea, 1).ToString() + ")\n";
+				newMsg = EuroplanRes.ErrorMessage_Modulflaeche;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.CoveredArea, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedCeilingArea, 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			// TODO
 			/*foreach (ModulDeckeCircuit c in this.circuits) {
@@ -652,7 +667,12 @@ namespace Europlan.Common {
 				foreach (ModulDeckeSubArea sa in c.SubAreas) {
 					if (sa.Rows.Count > 0) {
 						if (sa.Rows.Count > ModulKlimaDeckeProduct.ConfigMaxModulesInParallel) {
-							this.lastErrorMsg += "Die Teilfläche " + saNr.ToString() + " im Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele parallele Reihen (" + sa.Rows.Count.ToString() + " > " + ModulKlimaDeckeProduct.ConfigMaxModulesInParallel.ToString() + ")\n";
+							newMsg = EuroplanRes.ErrorMessage_ModulReihen;
+							newMsg = newMsg.Replace("%TEILFL%", saNr.ToString());
+							newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+							newMsg = newMsg.Replace("%VALUE%", sa.Rows.Count.ToString());
+							newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigMaxModulesInParallel.ToString());
+							this.lastErrorMsg += newMsg + "\n";
 						}
 						int maxModules = 0;
 						int maxRowNr = 0;
@@ -672,35 +692,61 @@ namespace Europlan.Common {
 							curRowNr++;
 						}
 						if (maxModules > minModules + 1) {
-							this.lastErrorMsg += "Die Reihe " + maxRowNr.ToString() + " in der Teilfläche " + saNr.ToString() + " im Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " ist um mehr als 1 Modul länger als die Reihe " + minRowNr.ToString() + " (" + maxModules.ToString() + ", " + minModules.ToString() + ")\n";
+							newMsg = EuroplanRes.ErrorMessage_ModulReiheUnterschied;
+							newMsg = newMsg.Replace("%REIHELANG%", maxRowNr.ToString());
+							newMsg = newMsg.Replace("%REIHEKURZ%", maxRowNr.ToString());
+							newMsg = newMsg.Replace("%TEILFL%", saNr.ToString());
+							newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+							newMsg = newMsg.Replace("%VALUELANG%", sa.Rows.Count.ToString());
+							newMsg = newMsg.Replace("%VALUEKURZ%", ModulKlimaDeckeProduct.ConfigMaxModulesInParallel.ToString());
+							this.lastErrorMsg += newMsg + "\n";
 						}
 						longestRow += maxModules;
 					}
 					saNr++;
 				}
 				if (longestRow > ModulKlimaDeckeProduct.ConfigMaxModulesInRow) {
-					this.lastErrorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module in Serie (" + longestRow.ToString() + " > " + ModulKlimaDeckeProduct.ConfigMaxModulesInRow.ToString() + ")\n";
+					newMsg = EuroplanRes.ErrorMessage_ModulReiheLaenge;
+					newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+					newMsg = newMsg.Replace("%VALUE%", longestRow.ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigMaxModulesInRow.ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 				if (moduleCount > ModulKlimaDeckeProduct.ConfigModulesInCircuit) {
-					this.lastErrorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module (" + moduleCount.ToString() + " > " + ModulKlimaDeckeProduct.ConfigModulesInCircuit.ToString() + ")\n";
+					newMsg = EuroplanRes.ErrorMessage_ModulAnzahl;
+					newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+					newMsg = newMsg.Replace("%VALUE%", moduleCount.ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigModulesInCircuit.ToString());
 				}
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
 				if (Math.Round(this.PlannedMaxMhHeat, 1) > ModulKlimaDeckeProduct.ConfigMaxMassenstrom) {
-					this.lastErrorMsg += "Durchfluß bei Heizung zu groß (" + Math.Round(this.PlannedMaxMhHeat, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
+					newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigMaxMassenstrom.ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			} else {
 				if (Math.Round(this.PlannedMaxMhCool, 1) > ModulKlimaDeckeProduct.ConfigMaxMassenstrom) {
-					this.lastErrorMsg += "Durchfluß bei Kühlung zu groß (" + Math.Round(this.PlannedMaxMhCool, 1).ToString() + "kg/h > " + ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString() + "kg/h)\n";
+					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigMaxMassenstrom.ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
 			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
 				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					this.lastErrorMsg += "Druckverlust bei Heizung zu groß (" + Math.Round(this.PlannedDeltaRhoHeat, 2).ToString() + "mbar > " + Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
+					newMsg = EuroplanRes.ErrorMessage_DruckverlustHeiz;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoHeat, 2).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			} else {
 				if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					this.lastErrorMsg += "Druckverlust bei Kühlung zu groß (" + Math.Round(this.PlannedDeltaRhoCool, 2).ToString() + "mbar > " + Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString() + "mbar)\n";
+					newMsg = EuroplanRes.ErrorMessage_DruckverlustKuehl;
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoCool, 2).ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
 			if (this.lastErrorMsg.Length == 0) {
@@ -1102,9 +1148,12 @@ namespace Europlan.Common {
 			get {
 				string notification = base.NotificationMessage;
 				if (this.ModulType == ProductType.DH && Math.Round(this.CoveredArea, 1) > Math.Round(this.PlannedCeilingArea * 3 / 4, 1) && Math.Round(this.CoveredArea, 1) <= Math.Round(this.PlannedCeilingArea, 1)) {
-					string newNotification = "Es sind mehr als 75% der Gesamtfläche mit Modulen belegt (" + Math.Round(this.CoveredArea, 1).ToString() + " > " + Math.Round(this.PlannedCeilingArea * 3 / 4, 1).ToString() + ")";
+					string newNotification = EuroplanRes.ErrorMessage_ModulBelegung;
+					newNotification = newNotification.Replace("%VALUE%", Math.Round(this.CoveredArea, 1).ToString());
+					newNotification = newNotification.Replace("%MAXIMUM%", Math.Round(this.PlannedCeilingArea * 3 / 4, 1).ToString());
 					if (notification == null) {
 						notification = newNotification;
+
 					} else {
 						notification = notification + "\n" + newNotification;
 					}

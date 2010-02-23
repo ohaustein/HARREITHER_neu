@@ -11,6 +11,9 @@ namespace Europlan.Common {
 	public partial class NewHeatingSystemForm : Form {
 		public NewHeatingSystemForm() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			// TODO: enable again
 			//foreach (Type t in this.GetType().Assembly.GetTypes()) {
 			//    if (t.IsSubclassOf(typeof(Product))) {
@@ -39,6 +42,13 @@ namespace Europlan.Common {
 			if (this.lstHeatingSystems.Items.Count > 0) {
 				this.lstHeatingSystems.Items[0].Selected = true;
 			}
+		}
+
+		private void SetLanguage() {
+			this.btnOk.Text = EuroplanRes.General_Ok;
+			this.button2.Text = EuroplanRes.General_Abbrechen;
+
+			this.Text = EuroplanRes.NewHeatingSystemForm_Titel; //"Bitte wählen Sie das gewünschte Heizungssystem";
 		}
 
 		private class HeatingSystemItem : ListViewItem {
@@ -73,7 +83,7 @@ namespace Europlan.Common {
 
 		private void NewHeatingSystemForm_FormClosing(object sender, FormClosingEventArgs e) {
 			if (this.lstHeatingSystems.SelectedItems.Count == 0 && this.DialogResult == DialogResult.OK) {
-				MessageBox.Show("Bitte wählen Sie ein Heizungssystem aus.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show(EuroplanRes.NewHeatingSystemForm_KeinSystemText, EuroplanRes.NewHeatingSystemForm_KeinSystemTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				e.Cancel = true;
 			}
 			SettingsKey settings = SettingsFile.Settings["NewHeatingSystemForm"];

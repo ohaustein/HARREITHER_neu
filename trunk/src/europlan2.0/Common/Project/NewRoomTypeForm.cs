@@ -14,7 +14,14 @@ namespace Europlan.Common {
 
 		public NewRoomTypeForm(Configuration config) {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			gridRoomTypes.Config = config;
+		}
+
+		private void SetLanguage() {
+			this.Text = EuroplanRes.NewRoomTypeForm_Titel; //"Raumtypen";
 		}
 
 		public RoomType SelectedRoomType {

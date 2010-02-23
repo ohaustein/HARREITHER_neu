@@ -12,7 +12,15 @@ namespace Europlan.Common {
 
 		public WarningsAndErrorsForm() {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			FillListView();
+		}
+
+		private void SetLanguage() {
+			this.btnClose.Text = EuroplanRes.General_Schliessen; //"&Schlieﬂen";
+			this.Text = EuroplanRes.WarningsAndErrorsForm_Titel; //"Warnungen und Fehler";
 		}
 
 		private void FillListView() {
@@ -22,8 +30,12 @@ namespace Europlan.Common {
 				foreach (Room room in floor.Rooms) {
 					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
 						foreach (string warning in plannedProduct.Product.ErrorMessageArray) {
-							text = plannedProduct.InternalName + " in " + room.Id + " (" + room.Name + "): " + warning;
-							lstErrors.Items.Add(text);
+							string message = EuroplanRes.WarningsAndErrorsForm_Warnung;
+							message = message.Replace("%SYSTEM%", plannedProduct.InternalName);
+							message = message.Replace("%RAUMID%", room.Id);
+							message = message.Replace("%RAUMNAME%", room.Name);
+							message = message.Replace("%WARNUNG%", warning);
+							lstErrors.Items.Add(message);
 						}
 
 					}
@@ -36,8 +48,12 @@ namespace Europlan.Common {
 				foreach (Room room in floor.Rooms) {
 					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
 						foreach (string notification in plannedProduct.Product.NotificationMessageArray) {
-							text = plannedProduct.InternalName + " in " + room.Id + " (" + room.Name + "): " + notification;
-							lstErrors.Items.Add(text);
+							string message = EuroplanRes.WarningsAndErrorsForm_Warnung;
+							message = message.Replace("%SYSTEM%", plannedProduct.InternalName);
+							message = message.Replace("%RAUMID%", room.Id);
+							message = message.Replace("%RAUMNAME%", room.Name);
+							message = message.Replace("%HINWEIS%", notification);
+							lstErrors.Items.Add(message);
 						}
 					}
 				}

@@ -50,12 +50,6 @@ namespace Europlan.Common {
 			this.tsmiNewFloorConstructionDryAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiNewInsulationConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiNewCeilingConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -288,59 +282,6 @@ namespace Europlan.Common {
 			this.tsmiNewCeilingConstructionAdmin.Text = "Deckenkonstruktion";
 			this.tsmiNewCeilingConstructionAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
 			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-			this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-			this.dataGridViewTextBoxColumn1.HeaderText = "Nr.";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			this.dataGridViewTextBoxColumn1.Visible = false;
-			this.dataGridViewTextBoxColumn1.Width = 50;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-			this.dataGridViewTextBoxColumn2.FillWeight = 150F;
-			this.dataGridViewTextBoxColumn2.HeaderText = "Bezeichnung";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.ReadOnly = true;
-			this.dataGridViewTextBoxColumn2.Width = 150;
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.DataPropertyName = "Type";
-			this.dataGridViewTextBoxColumn3.FillWeight = 150F;
-			this.dataGridViewTextBoxColumn3.HeaderText = "Type";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.ReadOnly = true;
-			this.dataGridViewTextBoxColumn3.Width = 150;
-			// 
-			// dataGridViewTextBoxColumn4
-			// 
-			this.dataGridViewTextBoxColumn4.DataPropertyName = "Thickness";
-			this.dataGridViewTextBoxColumn4.HeaderText = "Thickness";
-			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-			this.dataGridViewTextBoxColumn4.ReadOnly = true;
-			this.dataGridViewTextBoxColumn4.Visible = false;
-			// 
-			// dataGridViewTextBoxColumn5
-			// 
-			this.dataGridViewTextBoxColumn5.DataPropertyName = "RValue";
-			this.dataGridViewTextBoxColumn5.FillWeight = 50F;
-			this.dataGridViewTextBoxColumn5.HeaderText = "R (m²K/W)";
-			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-			this.dataGridViewTextBoxColumn5.ReadOnly = true;
-			this.dataGridViewTextBoxColumn5.Width = 50;
-			// 
-			// dataGridViewTextBoxColumn6
-			// 
-			this.dataGridViewTextBoxColumn6.DataPropertyName = "Scope";
-			this.dataGridViewTextBoxColumn6.HeaderText = "Scope";
-			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-			this.dataGridViewTextBoxColumn6.ReadOnly = true;
-			this.dataGridViewTextBoxColumn6.Visible = false;
-			// 
 			// colId
 			// 
 			this.colId.DataPropertyName = "Id";
@@ -437,16 +378,10 @@ namespace Europlan.Common {
 
 		#endregion
 
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
 		private System.Windows.Forms.BindingSource constructionsWrapperBindingSource;
 		private System.Windows.Forms.Panel panBottom;
 		private System.Windows.Forms.Button btnView;
 		private System.Windows.Forms.Button btnNew;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 		private System.Windows.Forms.DataGridView gridConstructions;
 		private System.Windows.Forms.ContextMenuStrip cmsView;
 		private System.Windows.Forms.ToolStripMenuItem tsmiFloorConstruction;

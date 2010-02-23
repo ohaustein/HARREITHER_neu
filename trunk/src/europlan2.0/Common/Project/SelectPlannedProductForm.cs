@@ -11,12 +11,22 @@ namespace Europlan.Common {
 	public partial class SelectPlannedProduct : Form {
 		public SelectPlannedProduct(List<PlannedProduct> products) {
 			InitializeComponent();
+
+			this.SetLanguage();
+
 			foreach (PlannedProduct product in products) {
 				this.lstPlannedProducts.Items.Add(new PlannedProductItem(product));
 			}
 			if (this.lstPlannedProducts.Items.Count > 0) {
 				this.lstPlannedProducts.Items[0].Selected = true;
 			}
+		}
+
+		private void SetLanguage() {
+			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
+			this.button2.Text = EuroplanRes.General_Abbrechen; //"Abbrechen";
+
+			this.Text = EuroplanRes.SelectPlannedProductForm_Titel; //"Bitte wählen Sie das gewünschte Teilsystem";
 		}
 
 		private class PlannedProductItem : ListViewItem {
@@ -44,7 +54,7 @@ namespace Europlan.Common {
 
 		private void SelectPlannedProduct_FormClosing(object sender, FormClosingEventArgs e) {
 			if (this.lstPlannedProducts.SelectedItems.Count == 0 && this.DialogResult == DialogResult.OK) {
-				MessageBox.Show("Bitte wählen Sie eine Teilsystem aus.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show(EuroplanRes.SelectPlannedProductForm_KeinSystemText, EuroplanRes.SelectPlannedProductForm_KeinSystemTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				e.Cancel = true;
 			}
 			SettingsKey settings = SettingsFile.Settings["SelectPlannedProduct"];

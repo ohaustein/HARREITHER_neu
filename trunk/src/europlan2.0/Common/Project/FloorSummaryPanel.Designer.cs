@@ -25,10 +25,6 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -43,10 +39,6 @@ namespace Europlan.Common {
 			this.label1 = new System.Windows.Forms.Label();
 			this.lblFloorName = new System.Windows.Forms.Label();
 			this.btnRemoveDistributor = new System.Windows.Forms.Button();
-			this.numericColumn1 = new Europlan.Common.NumericColumn();
-			this.numericColumn2 = new Europlan.Common.NumericColumn();
-			this.numericColumn3 = new Europlan.Common.NumericColumn();
-			this.numericColumn4 = new Europlan.Common.NumericColumn();
 			this.btnWhatIsNext = new System.Windows.Forms.Button();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -151,34 +143,6 @@ namespace Europlan.Common {
 			this.btnRemoveDistributor.Text = "Verteiler löschen";
 			this.btnRemoveDistributor.UseVisualStyleBackColor = true;
 			this.btnRemoveDistributor.Click += new System.EventHandler(this.btnRemoveDistributor_Click);
-			// 
-			// numericColumn1
-			// 
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle10.Format = "F0";
-			this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle10;
-			this.numericColumn1.Name = "numericColumn1";
-			// 
-			// numericColumn2
-			// 
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle11.Format = "F0";
-			this.numericColumn2.DefaultCellStyle = dataGridViewCellStyle11;
-			this.numericColumn2.Name = "numericColumn2";
-			// 
-			// numericColumn3
-			// 
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle12.Format = "F0";
-			this.numericColumn3.DefaultCellStyle = dataGridViewCellStyle12;
-			this.numericColumn3.Name = "numericColumn3";
-			// 
-			// numericColumn4
-			// 
-			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle13.Format = "F0";
-			this.numericColumn4.DefaultCellStyle = dataGridViewCellStyle13;
-			this.numericColumn4.Name = "numericColumn4";
 			// 
 			// btnWhatIsNext
 			// 
@@ -358,10 +322,6 @@ namespace Europlan.Common {
 
 		private System.Windows.Forms.DataGridView gridRooms;
 		private System.Windows.Forms.BindingSource floorRoomsSource;
-		private Europlan.Common.NumericColumn numericColumn1;
-		private Europlan.Common.NumericColumn numericColumn2;
-		private Europlan.Common.NumericColumn numericColumn3;
-		private Europlan.Common.NumericColumn numericColumn4;
 		private System.Windows.Forms.Button btnAddDistributor;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label lblFloorName;
