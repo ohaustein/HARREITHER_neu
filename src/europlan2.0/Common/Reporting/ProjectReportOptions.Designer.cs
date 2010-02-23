@@ -27,13 +27,14 @@ namespace Europlan.Common {
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.chkRecommendedMaterial = new System.Windows.Forms.CheckBox();
+			this.chkRequiredMaterial = new System.Windows.Forms.CheckBox();
 			this.chkVerlegedaten = new System.Windows.Forms.CheckBox();
 			this.chkAuslegungBilanz = new System.Windows.Forms.CheckBox();
 			this.chkAuslegung = new System.Windows.Forms.CheckBox();
 			this.chkAreaOverview = new System.Windows.Forms.CheckBox();
 			this.chkProjectOverview = new System.Windows.Forms.CheckBox();
-			this.chkRecommendedMaterial = new System.Windows.Forms.CheckBox();
-			this.chkRequiredMaterial = new System.Windows.Forms.CheckBox();
+			this.chkKonstruktionen = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -54,6 +55,7 @@ namespace Europlan.Common {
 			// groupBox1
 			// 
 			resources.ApplyResources(this.groupBox1, "groupBox1");
+			this.groupBox1.Controls.Add(this.chkKonstruktionen);
 			this.groupBox1.Controls.Add(this.chkRecommendedMaterial);
 			this.groupBox1.Controls.Add(this.chkRequiredMaterial);
 			this.groupBox1.Controls.Add(this.chkVerlegedaten);
@@ -63,6 +65,20 @@ namespace Europlan.Common {
 			this.groupBox1.Controls.Add(this.chkProjectOverview);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.TabStop = false;
+			// 
+			// chkRecommendedMaterial
+			// 
+			resources.ApplyResources(this.chkRecommendedMaterial, "chkRecommendedMaterial");
+			this.chkRecommendedMaterial.Name = "chkRecommendedMaterial";
+			this.chkRecommendedMaterial.UseVisualStyleBackColor = true;
+			this.chkRecommendedMaterial.CheckedChanged += new System.EventHandler(this.chkRecommendedMaterial_CheckedChanged);
+			// 
+			// chkRequiredMaterial
+			// 
+			resources.ApplyResources(this.chkRequiredMaterial, "chkRequiredMaterial");
+			this.chkRequiredMaterial.Name = "chkRequiredMaterial";
+			this.chkRequiredMaterial.UseVisualStyleBackColor = true;
+			this.chkRequiredMaterial.CheckedChanged += new System.EventHandler(this.chkRequiredMaterial_CheckedChanged);
 			// 
 			// chkVerlegedaten
 			// 
@@ -99,19 +115,12 @@ namespace Europlan.Common {
 			this.chkProjectOverview.UseVisualStyleBackColor = true;
 			this.chkProjectOverview.CheckedChanged += new System.EventHandler(this.chkProjectOverview_CheckedChanged);
 			// 
-			// chkRecommendedMaterial
+			// chkKonstruktionen
 			// 
-			resources.ApplyResources(this.chkRecommendedMaterial, "chkRecommendedMaterial");
-			this.chkRecommendedMaterial.Name = "chkRecommendedMaterial";
-			this.chkRecommendedMaterial.UseVisualStyleBackColor = true;
-			this.chkRecommendedMaterial.CheckedChanged += new System.EventHandler(this.chkRecommendedMaterial_CheckedChanged);
-			// 
-			// chkRequiredMaterial
-			// 
-			resources.ApplyResources(this.chkRequiredMaterial, "chkRequiredMaterial");
-			this.chkRequiredMaterial.Name = "chkRequiredMaterial";
-			this.chkRequiredMaterial.UseVisualStyleBackColor = true;
-			this.chkRequiredMaterial.CheckedChanged += new System.EventHandler(this.chkRequiredMaterial_CheckedChanged);
+			resources.ApplyResources(this.chkKonstruktionen, "chkKonstruktionen");
+			this.chkKonstruktionen.Name = "chkKonstruktionen";
+			this.chkKonstruktionen.UseVisualStyleBackColor = true;
+			this.chkKonstruktionen.CheckedChanged += new System.EventHandler(this.chkKonstruktionen_CheckedChanged);
 			// 
 			// ProjectReportOptions
 			// 
@@ -143,5 +152,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.CheckBox chkVerlegedaten;
 		private System.Windows.Forms.CheckBox chkRecommendedMaterial;
 		private System.Windows.Forms.CheckBox chkRequiredMaterial;
+		private System.Windows.Forms.CheckBox chkKonstruktionen;
 	}
 }
