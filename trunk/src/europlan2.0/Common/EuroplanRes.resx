@@ -172,7 +172,8 @@
     <value>%SYSTEM in %RAUMID% (%RAUMNAME%)</value>
   </data>
   <data name="AuslegeAssistentForm_Tv" xml:space="preserve">
-    <value>Tv\n°C</value>
+    <value>Tv
+°C</value>
   </data>
   <data name="Category_Allgemein" xml:space="preserve">
     <value>Allgemein</value>
@@ -217,43 +218,57 @@
     <value>Dämmung</value>
   </data>
   <data name="ConnectionPipePanel_DurchRaumCol" xml:space="preserve">
-    <value>durch\nRaum\nNr.</value>
+    <value>durch
+Raum
+Nr.</value>
   </data>
   <data name="ConnectionPipePanel_FlaecheCol" xml:space="preserve">
     <value>Fläche</value>
   </data>
   <data name="ConnectionPipePanel_HeizleistungCol" xml:space="preserve">
-    <value>Heiz-\nleistung</value>
+    <value>Heiz-
+leistung</value>
   </data>
   <data name="ConnectionPipePanel_HkAnzahlCol" xml:space="preserve">
     <value>Anz.</value>
   </data>
   <data name="ConnectionPipePanel_KuehlleistungCol" xml:space="preserve">
-    <value>Kühl-\nleistung</value>
+    <value>Kühl-
+leistung</value>
   </data>
   <data name="ConnectionPipePanel_NurErsterHkCol" xml:space="preserve">
-    <value>nur\nerster\nHK</value>
+    <value>nur
+erster
+HK</value>
   </data>
   <data name="ConnectionPipePanel_RaumCol" xml:space="preserve">
     <value>Raum</value>
   </data>
   <data name="ConnectionPipePanel_RohrsystemCol" xml:space="preserve">
-    <value>Rohr-\nsystem</value>
+    <value>Rohr-
+system</value>
   </data>
   <data name="ConnectionPipePanel_RuecklaufCol" xml:space="preserve">
-    <value>Länge\nRücklauf\n(m)</value>
+    <value>Länge
+Rücklauf
+(m)</value>
   </data>
   <data name="ConnectionPipePanel_TeilsystemCol" xml:space="preserve">
     <value>Teilsystem</value>
   </data>
   <data name="ConnectionPipePanel_VerlegeartCol" xml:space="preserve">
-    <value>Verlege-\nart</value>
+    <value>Verlege-
+art</value>
   </data>
   <data name="ConnectionPipePanel_VerlegedatenDruckenCol" xml:space="preserve">
-    <value>Verlege-\ndaten\ndrucken</value>
+    <value>Verlege-
+daten
+drucken</value>
   </data>
   <data name="ConnectionPipePanel_VorlaufCol" xml:space="preserve">
-    <value>Länge\nVorlauf\n(m)</value>
+    <value>Länge
+Vorlauf
+(m)</value>
   </data>
   <data name="ConnectionPipesForm_Anbindeflaeche" xml:space="preserve">
     <value>Durch Anbindeleitungen belegte Fläche:</value>
@@ -421,7 +436,7 @@
     <value>Anschlußholländer mit Anschlußstück Ø 32mm</value>
   </data>
   <data name="Distributor_HollaenderIg" xml:space="preserve">
-    <value>Anschlußholländer mit Anschlußstück 1\" IG</value>
+    <value>Anschlußholländer mit Anschlußstück 1" IG</value>
   </data>
   <data name="Distributor_KeinHollaender" xml:space="preserve">
     <value>Kein Holländer</value>
@@ -682,10 +697,12 @@
     <value>Anbindeleitungen</value>
   </data>
   <data name="ExtendedCorrectionsGrid_AnbindungAktivieren" xml:space="preserve">
-    <value>Vor-\ngabe</value>
+    <value>Vor-
+gabe</value>
   </data>
   <data name="ExtendedCorrectionsGrid_AnbindungProzent" xml:space="preserve">
-    <value>Fläche\n%</value>
+    <value>Fläche
+%</value>
   </data>
   <data name="ExtendedCorrectionsGrid_Deaktivieren" xml:space="preserve">
     <value>nur Standardkorrekturen verwenden (keine erweiterten Korrekturen)</value>
@@ -709,31 +726,40 @@
     <value>Anteil Gesamtfläche</value>
   </data>
   <data name="ExtendedCorrectionsGrid_FlaecheAktivieren" xml:space="preserve">
-    <value>Vor-\ngabe</value>
+    <value>Vor-
+gabe</value>
   </data>
   <data name="ExtendedCorrectionsGrid_FlaecheProzent" xml:space="preserve">
-    <value>%\n</value>
+    <value>%
+</value>
   </data>
   <data name="ExtendedCorrectionsGrid_FlaecheWert" xml:space="preserve">
-    <value>m²\n</value>
+    <value>m²
+</value>
   </data>
   <data name="ExtendedCorrectionsGrid_HeizkreisCol" xml:space="preserve">
-    <value>Heiz-\nkreis\nNr.</value>
+    <value>Heiz-
+kreis
+Nr.</value>
   </data>
   <data name="ExtendedCorrectionsGrid_Randzone" xml:space="preserve">
     <value>Anteil Randzone</value>
   </data>
   <data name="ExtendedCorrectionsGrid_RandzoneAktivieren" xml:space="preserve">
-    <value>Vor-\ngabe</value>
+    <value>Vor-
+gabe</value>
   </data>
   <data name="ExtendedCorrectionsGrid_RandzoneEcken" xml:space="preserve">
-    <value>Anzahl\nEcken</value>
+    <value>Anzahl
+Ecken</value>
   </data>
   <data name="ExtendedCorrectionsGrid_RandzoneProzent" xml:space="preserve">
-    <value>%\n</value>
+    <value>%
+</value>
   </data>
   <data name="ExtendedCorrectionsGrid_RandzoneWert" xml:space="preserve">
-    <value>m\n</value>
+    <value>m
+</value>
   </data>
   <data name="FacilityDetailsSummaryPanel_Allgemein" xml:space="preserve">
     <value>Allgmein</value>
@@ -793,28 +819,33 @@
     <value>Wie geht's weiter?</value>
   </data>
   <data name="FloorSummaryPanel_Bearbeiten" xml:space="preserve">
-    <value>Bearbeiten\n</value>
+    <value>Bearbeiten
+</value>
   </data>
   <data name="FloorSummaryPanel_Bezeichnung" xml:space="preserve">
-    <value>Bezeichnung\n</value>
+    <value>Bezeichnung
+</value>
   </data>
   <data name="FloorSummaryPanel_BezeichnungLang" xml:space="preserve">
     <value>Bezeichnung des Raumes</value>
   </data>
   <data name="FloorSummaryPanel_Flaeche" xml:space="preserve">
-    <value>A\n(m²)</value>
+    <value>A
+(m²)</value>
   </data>
   <data name="FloorSummaryPanel_FlaecheLang" xml:space="preserve">
     <value>Raumfläche</value>
   </data>
   <data name="FloorSummaryPanel_Fremdwaermeleistung" xml:space="preserve">
-    <value>QFr\n(W)</value>
+    <value>QFr
+(W)</value>
   </data>
   <data name="FloorSummaryPanel_FremdwaermeleistungLang" xml:space="preserve">
     <value>Zusätzliche Fremdwärmeleistung</value>
   </data>
   <data name="FloorSummaryPanel_Fussbodentransmissionen" xml:space="preserve">
-    <value>QFB\n(W)</value>
+    <value>QFB
+(W)</value>
   </data>
   <data name="FloorSummaryPanel_FussbodentransmissionenLang" xml:space="preserve">
     <value>Im Wärmebedarf enthaltene Fußbodentransmissionen</value>
@@ -835,19 +866,22 @@
     <value>Kühlbetrieb</value>
   </data>
   <data name="FloorSummaryPanel_Kuehlleistung" xml:space="preserve">
-    <value>QKühl\n(W)</value>
+    <value>QKühl
+(W)</value>
   </data>
   <data name="FloorSummaryPanel_KuehlleistungLang" xml:space="preserve">
     <value>Erforderliche Külleistung laut Kühllastberechnung</value>
   </data>
   <data name="FloorSummaryPanel_Luftfeuchtigkeit" xml:space="preserve">
-    <value>RF\n(%)</value>
+    <value>RF
+(%)</value>
   </data>
   <data name="FloorSummaryPanel_LuftfeuchtigkeitLang" xml:space="preserve">
     <value>Relative Luftfeuchtigkeit für Kühlung</value>
   </data>
   <data name="FloorSummaryPanel_Nummer" xml:space="preserve">
-    <value>Nr.\n</value>
+    <value>Nr.
+</value>
   </data>
   <data name="FloorSummaryPanel_NummerLang" xml:space="preserve">
     <value>eindeutige Raumnummer</value>
@@ -859,13 +893,15 @@
     <value>Wollen Sie die neue Raumgröße übernehmen?</value>
   </data>
   <data name="FloorSummaryPanel_RaumtemperaturHeiz" xml:space="preserve">
-    <value>Ti\n(°C)</value>
+    <value>Ti
+(°C)</value>
   </data>
   <data name="FloorSummaryPanel_RaumtemperaturHeizLang" xml:space="preserve">
     <value>Norminnentemperatur laut Wärmebedarfsberechnung</value>
   </data>
   <data name="FloorSummaryPanel_RaumtemperaturKuehl" xml:space="preserve">
-    <value>Ti\n(°C)</value>
+    <value>Ti
+(°C)</value>
   </data>
   <data name="FloorSummaryPanel_RaumtemperaturKuehlLang" xml:space="preserve">
     <value>Gewünschte Rauminnentemperatur bei Kühlung</value>
@@ -883,13 +919,16 @@
     <value>Verteiler löschen?</value>
   </data>
   <data name="FloorSummaryPanel_Waermebedarf" xml:space="preserve">
-    <value>QN\n(W)</value>
+    <value>QN
+(W)</value>
   </data>
   <data name="FloorSummaryPanel_WaermebedarfLang" xml:space="preserve">
     <value>Normwärmebedarf laut Wärmebedarfsrechnung</value>
   </data>
   <data name="FloorSummaryPanel_WieGehtsWeiterText" xml:space="preserve">
-    <value>Klicken Sie auf einen der Buttons in der Spalte\n'Bearbeiten' um den entsprechenden Raum zu öffnen, oder\n klicken Sie in der Projekthierarchie auf den gewünschten Raum.</value>
+    <value>Klicken Sie auf einen der Buttons in der Spalte
+'Bearbeiten' um den entsprechenden Raum zu öffnen, oder
+klicken Sie in der Projekthierarchie auf den gewünschten Raum.</value>
   </data>
   <data name="FloorSummaryPanel_WieGehtsWeiterTitel" xml:space="preserve">
     <value>Wie geht's weiter?</value>
@@ -970,7 +1009,8 @@
     <value>unbekannt</value>
   </data>
   <data name="General_NeustartErforderlichText" xml:space="preserve">
-    <value>Durch die Änderungen an den Einstellungen ist ein Neustart erforderlich.\nDrücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
+    <value>Durch die Änderungen an den Einstellungen ist ein Neustart erforderlich.
+Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
   </data>
   <data name="General_NeustartErforderlichTitel" xml:space="preserve">
     <value>Neustart erforderlich...</value>
@@ -1030,7 +1070,7 @@
     <value>Weiter</value>
   </data>
   <data name="General_WieGehtsWeiter" xml:space="preserve">
-    <value>Wie geht\'s weiter?</value>
+    <value>Wie geht's weiter?</value>
   </data>
   <data name="HithermCompactProduct_NotificationParameter" xml:space="preserve">
     <value>Hitherm Compact-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
@@ -1111,28 +1151,40 @@
     <value>Vertikal</value>
   </data>
   <data name="HithermWallGrid_Basiskonstruktion" xml:space="preserve">
-    <value>Basis-\nKonstr.</value>
+    <value>Basis-
+Konstr.</value>
   </data>
   <data name="HithermWallGrid_Deckschicht" xml:space="preserve">
-    <value>Decksch.\nR\n(m²K/W)</value>
+    <value>Decksch.
+R
+(m²K/W)</value>
   </data>
   <data name="HithermWallGrid_NeueWandkonstruktion" xml:space="preserve">
     <value>Neue Wandkonstruktion</value>
   </data>
   <data name="HithermWallGrid_TemperaturHeiz" xml:space="preserve">
-    <value>Temp.\nHeiz\n(°C)</value>
+    <value>Temp.
+Heiz
+(°C)</value>
   </data>
   <data name="HithermWallGrid_TemperaturKuehl" xml:space="preserve">
-    <value>Temp.\nKühl\n(°C)</value>
+    <value>Temp.
+Kühl
+(°C)</value>
   </data>
   <data name="HithermWallGrid_UWert" xml:space="preserve">
-    <value>U-Wert\n(W/m²K)</value>
+    <value>U-Wert
+(W/m²K)</value>
   </data>
   <data name="HithermWallGrid_WaermebedarfBereinigen" xml:space="preserve">
-    <value>Wärme\nBedarf\nberein.</value>
+    <value>Wärme
+Bedarf
+berein.</value>
   </data>
   <data name="HithermWallGrid_ZusaetzlicheDaemmung" xml:space="preserve">
-    <value>zus. Dämmg\nR\n(m²K/W)</value>
+    <value>zus. Dämmg
+R
+(m²K/W)</value>
   </data>
   <data name="KlimaFlaechenModul_100_30" xml:space="preserve">
     <value>Modul 100/30</value>
@@ -1195,7 +1247,8 @@
     <value>Verlegeart:</value>
   </data>
   <data name="LengthAssistentForm_FlaecheZuGrossText" xml:space="preserve">
-    <value>Die gewählte Anbindefläche ist größer als die verfügbare Fläche.\nWollen Sie trotzdem fortfahren?</value>
+    <value>Die gewählte Anbindefläche ist größer als die verfügbare Fläche.
+Wollen Sie trotzdem fortfahren?</value>
   </data>
   <data name="LengthAssistentForm_FlaecheZuGrossTitel" xml:space="preserve">
     <value>Eingabefehler</value>
@@ -1399,7 +1452,8 @@
     <value>Preis pro Einheit</value>
   </data>
   <data name="MaterialEditorGrid_VerpackungseinheitCol" xml:space="preserve">
-    <value>Verpackungs-\neinheit</value>
+    <value>Verpackungs-
+einheit</value>
   </data>
   <data name="ModulKlimaDeckeProduct_CProfil" xml:space="preserve">
     <value>C-Profil</value>
@@ -1522,10 +1576,12 @@
     <value>Wand</value>
   </data>
   <data name="PlannedEurovalProductPanel_A" xml:space="preserve">
-    <value>A\nm²</value>
+    <value>A
+m²</value>
   </data>
   <data name="PlannedEurovalProductPanel_AAnb" xml:space="preserve">
-    <value>AAnb\nm²</value>
+    <value>AAnb
+m²</value>
   </data>
   <data name="PlannedEurovalProductPanel_Anhydritestrich" xml:space="preserve">
     <value>Anhydritestrich</value>
@@ -1537,13 +1593,15 @@
     <value>Anzahl Heizkreise:</value>
   </data>
   <data name="PlannedEurovalProductPanel_AnzahlHK" xml:space="preserve">
-    <value>Anzahl\nHK</value>
+    <value>Anzahl
+HK</value>
   </data>
   <data name="PlannedEurovalProductPanel_Aufenthaltszone" xml:space="preserve">
     <value>Aufenthaltszone</value>
   </data>
   <data name="PlannedEurovalProductPanel_B" xml:space="preserve">
-    <value>B\ncm</value>
+    <value>B
+cm</value>
   </data>
   <data name="PlannedEurovalProductPanel_Berechnungsergebnisse" xml:space="preserve">
     <value>Berechnungsergebnisse</value>
@@ -1552,10 +1610,11 @@
     <value>Clipschiene mit Klebeband</value>
   </data>
   <data name="PlannedEurovalProductPanel_DeltaP" xml:space="preserve">
-    <value>DeltaP\nmbar</value>
+    <value>DeltaP
+mbar</value>
   </data>
   <data name="PlannedEurovalProductPanel_EckenErklaerung" xml:space="preserve">
-    <value>//"(positive Ecken vergößern, negative verringern die Randzonenfläche)</value>
+    <value>(positive Ecken vergößern, negative verringern die Randzonenfläche)</value>
   </data>
   <data name="PlannedEurovalProductPanel_EigenerHeizkreis" xml:space="preserve">
     <value>Eigener Heizkreis für dieses Fußbodenheizsystem</value>
@@ -1582,7 +1641,8 @@
     <value>Länge der Randzone:</value>
   </data>
   <data name="PlannedEurovalProductPanel_Mg" xml:space="preserve">
-    <value>mh\nkg/h</value>
+    <value>mh
+kg/h</value>
   </data>
   <data name="PlannedEurovalProductPanel_NachHeizbetrieb" xml:space="preserve">
     <value>nach Heizbetrieb</value>
@@ -1594,22 +1654,28 @@
     <value>nach Kühlbetrieb</value>
   </data>
   <data name="PlannedEurovalProductPanel_Q" xml:space="preserve">
-    <value>Q\nW</value>
+    <value>Q
+W</value>
   </data>
   <data name="PlannedEurovalProductPanel_QAnb" xml:space="preserve">
-    <value>QAnb\nW</value>
+    <value>QAnb
+W</value>
   </data>
   <data name="PlannedEurovalProductPanel_QFbh" xml:space="preserve">
-    <value>QFBH\nW</value>
+    <value>QFBH
+W</value>
   </data>
   <data name="PlannedEurovalProductPanel_QRest" xml:space="preserve">
-    <value>QRest\nW</value>
+    <value>QRest
+W</value>
   </data>
   <data name="PlannedEurovalProductPanel_QSoll" xml:space="preserve">
-    <value>QSoll\nW</value>
+    <value>QSoll
+W</value>
   </data>
   <data name="PlannedEurovalProductPanel_QSollProQuadratmeter" xml:space="preserve">
-    <value>qSoll\nW/m²</value>
+    <value>qSoll
+W/m²</value>
   </data>
   <data name="PlannedEurovalProductPanel_Randzone" xml:space="preserve">
     <value>Randzone</value>
@@ -1618,16 +1684,19 @@
     <value>Fläche mit red. Heiz-/Kühlleistung:</value>
   </data>
   <data name="PlannedEurovalProductPanel_Rohrlaenge" xml:space="preserve">
-    <value>Rorhl.\nm</value>
+    <value>Rorhl.
+m</value>
   </data>
   <data name="PlannedEurovalProductPanel_Spreizung" xml:space="preserve">
-    <value>Spreizung\nK</value>
+    <value>Spreizung
+K</value>
   </data>
   <data name="PlannedEurovalProductPanel_TatsaechlicheAuslegung" xml:space="preserve">
     <value>tatsächliche Auslegung</value>
   </data>
   <data name="PlannedEurovalProductPanel_Tfb" xml:space="preserve">
-    <value>tfb\n°C</value>
+    <value>tfb
+°C</value>
   </data>
   <data name="PlannedEurovalProductPanel_UnbeheizteFlaeche" xml:space="preserve">
     <value>unbeheizte/ungekühlte Fläche:</value>
@@ -1642,7 +1711,8 @@
     <value>Verlegeart Randzone:</value>
   </data>
   <data name="PlannedHithermCompactProductPanel_AnzahlRegister" xml:space="preserve">
-    <value>Anzahl\nReg.</value>
+    <value>Anzahl
+Reg.</value>
   </data>
   <data name="PlannedHithermCompactProductPanel_TypAendernText" xml:space="preserve">
     <value>Wenn Sie den Typ auf Dachschräge ändern, werden alle Register in Parapetauslegung gelöscht</value>
@@ -1663,7 +1733,8 @@
     <value>Berechnungsergebnisse:</value>
   </data>
   <data name="PlannedHithermProductPanel_Breite" xml:space="preserve">
-    <value>Breite\n(cm)</value>
+    <value>Breite
+(cm)</value>
   </data>
   <data name="PlannedHithermProductPanel_DifferenzLeistung" xml:space="preserve">
     <value>Differenz zur erwarteten Leistung:</value>
@@ -1696,13 +1767,18 @@
     <value>Kühlbetrieb</value>
   </data>
   <data name="PlannedHithermProductPanel_LeitungSenkrecht" xml:space="preserve">
-    <value>Leitung\nsenkr.\n(m)</value>
+    <value>Leitung
+senkr.
+(m)</value>
   </data>
   <data name="PlannedHithermProductPanel_LeitungWaagrecht" xml:space="preserve">
-    <value>Leitung\nwaagr.\n(m)</value>
+    <value>Leitung
+waagr.
+(m)</value>
   </data>
   <data name="PlannedHithermProductPanel_RegisterTyp" xml:space="preserve">
-    <value>Register-\ntyp</value>
+    <value>Register-
+typ</value>
   </data>
   <data name="PlannedHithermProductPanel_Rest" xml:space="preserve">
     <value>Rest</value>
@@ -1717,7 +1793,8 @@
     <value>Verfügbare Fläche:</value>
   </data>
   <data name="PlannedHithermProductPanel_Waagrecht" xml:space="preserve">
-    <value>waag-\nrecht</value>
+    <value>waag-
+recht</value>
   </data>
   <data name="PlannedHithermProductPanel_Wassermenge" xml:space="preserve">
     <value>Wassermenge:</value>
@@ -1897,22 +1974,28 @@
     <value>Anschluß an %SYSTEM% in %RAUMID%: %RAUMNAME%"</value>
   </data>
   <data name="ProductOverviewForm_DruckverlustHeiz" xml:space="preserve">
-    <value>Druckverlust\nmbar</value>
+    <value>Druckverlust
+mbar</value>
   </data>
   <data name="ProductOverviewForm_DruckverlustKuehl" xml:space="preserve">
-    <value>Druckverlust\nmbar</value>
+    <value>Druckverlust
+mbar</value>
   </data>
   <data name="ProductOverviewForm_Flaeche" xml:space="preserve">
-    <value>Fläche\nm²</value>
+    <value>Fläche
+m²</value>
   </data>
   <data name="ProductOverviewForm_Heizkreise" xml:space="preserve">
-    <value>Heiz-\nkreis(e)</value>
+    <value>Heiz-
+kreis(e)</value>
   </data>
   <data name="ProductOverviewForm_Kuehllast" xml:space="preserve">
-    <value>Kühllast\nW</value>
+    <value>Kühllast
+W</value>
   </data>
   <data name="ProductOverviewForm_Normwaerme" xml:space="preserve">
-    <value>Normwärme\nW</value>
+    <value>Normwärme
+W</value>
   </data>
   <data name="ProductOverviewForm_Ok" xml:space="preserve">
     <value>Ok</value>
@@ -1924,28 +2007,34 @@
     <value>Raumnr.</value>
   </data>
   <data name="ProductOverviewForm_Restkuellast" xml:space="preserve">
-    <value>Rest\nW</value>
+    <value>Rest
+W</value>
   </data>
   <data name="ProductOverviewForm_Restwaerme" xml:space="preserve">
-    <value>Restwärme\nW</value>
+    <value>Restwärme
+W</value>
   </data>
   <data name="ProductOverviewForm_Rohrlaenge" xml:space="preserve">
-    <value>Rohrlänge\nm</value>
+    <value>Rohrlänge
+m</value>
   </data>
   <data name="ProductOverviewForm_System" xml:space="preserve">
     <value>System</value>
   </data>
   <data name="ProductOverviewForm_Teilsystem" xml:space="preserve">
-    <value>Teil-\nsystem</value>
+    <value>Teil-
+system</value>
   </data>
   <data name="ProductOverviewForm_Titel" xml:space="preserve">
     <value>Übersicht</value>
   </data>
   <data name="ProductOverviewForm_VerlegeabstandAz" xml:space="preserve">
-    <value>Verlegeabstand\nAZ</value>
+    <value>Verlegeabstand
+AZ</value>
   </data>
   <data name="ProductOverviewForm_VerlegeabstandRz" xml:space="preserve">
-    <value>Verlegeabstand\nRZ</value>
+    <value>Verlegeabstand
+RZ</value>
   </data>
   <data name="ProjectReport_AnbindungDurchRaum" xml:space="preserve">
     <value>Anbindung durch Raum %RAUMID% (%RAUMNAME%), %ROHRTYP%, %VERLEGEART%</value>
@@ -2149,55 +2238,84 @@
     <value>Name</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_BkaAngeschlossen" xml:space="preserve">
-    <value>BKA\nangeschl.\nHeizkreise</value>
+    <value>BKA
+angeschl.
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_BkaOffen" xml:space="preserve">
-    <value>KA\noffene\nHeizkreise</value>
+    <value>BKA
+offene
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_EurovalAngeschlossen" xml:space="preserve">
-    <value>Euroval®\nangeschl.\nHeizkreise</value>
+    <value>Euroval®
+angeschl.
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_EurovalOffen" xml:space="preserve">
-    <value>Euroval®\noffene\nHeizkreise</value>
+    <value>Euroval®
+offene
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_Geschoss" xml:space="preserve">
     <value>Geschoß</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_HithermAngschlossen" xml:space="preserve">
-    <value>Hitherm®\nangeschl.\nHeizkreise</value>
+    <value>Hitherm®
+angeschl.
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_HithermCompactAngeschlossen" xml:space="preserve">
-    <value>Hitherm® Co\nangeschl.\nHeizkreise</value>
+    <value>Hitherm® Co
+angeschl.
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_HithermCompactDachAngeschlossen" xml:space="preserve">
-    <value>Hitherm® Co\nDach angeschl.\nHeizkreise</value>
+    <value>Hitherm® Co
+Dach angeschl.
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_HithermCompactDachOffen" xml:space="preserve">
-    <value>Hitherm® Co\nDach offene\nHeizkreise</value>
+    <value>Hitherm® Co
+Dach offene
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_HithermCompactOffen" xml:space="preserve">
-    <value>Hitherm® Co\noffene\nHeizkreise</value>
+    <value>Hitherm® Co
+offene
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_HithermOffen" xml:space="preserve">
-    <value>Hitherm®\noffene\nHeizkreise</value>
+    <value>Hitherm®
+offene
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_KlimaBodenAngschlossen" xml:space="preserve">
-    <value>Klima-Boden\nangeschl.\nHeizkreise</value>
+    <value>Klima-Boden
+angeschl.
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_KlimaBodenOffen" xml:space="preserve">
-    <value>Klima-Boden\noffene\nHeizkreise</value>
+    <value>Klima-Boden
+offene
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_KlimaDeckeAngeschlossen" xml:space="preserve">
-    <value>Klima-Decke\nangeschl.\nHeizkreise</value>
+    <value>Klima-Decke
+angeschl.
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_KlimaDeckeOffen" xml:space="preserve">
-    <value>Klima-Decke\noffene\nHeizkreise</value>
+    <value>Klima-Decke
+offene
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_Raumname" xml:space="preserve">
     <value>Raumname</value>
   </data>
   <data name="QuickDimensioningDistributorsGrid_RaumNr" xml:space="preserve">
-    <value>Raum-\nnr.</value>
+    <value>Raum-
+nr.</value>
   </data>
   <data name="QuickDimensioningDistributorsSummary_AlleAnschluesseVerplant" xml:space="preserve">
     <value>Alle Anschlüße des Verteilers sind verplant.</value>
@@ -2218,19 +2336,24 @@
     <value>Bezeichnung</value>
   </data>
   <data name="QuickDimensioningFloorGrid_BkaFlaeche" xml:space="preserve">
-    <value>BKA\n(m²)</value>
+    <value>BKA
+(m²)</value>
   </data>
   <data name="QuickDimensioningFloorGrid_BkaHeizkreise" xml:space="preserve">
-    <value>BKA\nHeizkreise</value>
+    <value>BKA
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningFloorGrid_EurovalFlaeche" xml:space="preserve">
-    <value>Euroval®\n(m²)</value>
+    <value>Euroval®
+(m²)</value>
   </data>
   <data name="QuickDimensioningFloorGrid_EurovalHeizkreise" xml:space="preserve">
-    <value>Euroval®\nHeizkreise</value>
+    <value>Euroval®
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningFloorGrid_Heizlast" xml:space="preserve">
-    <value>Heizlast\n(W)</value>
+    <value>Heizlast
+(W)</value>
   </data>
   <data name="QuickDimensioningFloorGrid_HeizlastFehler" xml:space="preserve">
     <value>Kühllast nicht abgedeckt</value>
@@ -2239,37 +2362,48 @@
     <value>Heiz- und Kühllast nicht abgedeckt</value>
   </data>
   <data name="QuickDimensioningFloorGrid_HithermCompactDachFlaeche" xml:space="preserve">
-    <value>Hitherm® Co\nDach (m²)</value>
+    <value>Hitherm® Co
+Dach (m²)</value>
   </data>
   <data name="QuickDimensioningFloorGrid_HithermCompactDachHeizkreise" xml:space="preserve">
-    <value>Hitherm® Co\nDach Hkr.</value>
+    <value>Hitherm® Co
+Dach Hkr.</value>
   </data>
   <data name="QuickDimensioningFloorGrid_HithermCompactFlaeche" xml:space="preserve">
-    <value>Hitherm® Co\n(m²)</value>
+    <value>Hitherm® Co
+(m²)</value>
   </data>
   <data name="QuickDimensioningFloorGrid_HithermCompactHeizkreise" xml:space="preserve">
-    <value>Hitherm® Co\nHeizkreise</value>
+    <value>Hitherm® Co
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningFloorGrid_HithermFlaeche" xml:space="preserve">
-    <value>Hitherm®\n(m²)</value>
+    <value>Hitherm®
+(m²)</value>
   </data>
   <data name="QuickDimensioningFloorGrid_HithermHeizkreise" xml:space="preserve">
-    <value>Hitherm®\nHeizkreise</value>
+    <value>Hitherm®
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningFloorGrid_KlimaBodenFlaeche" xml:space="preserve">
-    <value>Klima-Boden\n(m²)</value>
+    <value>Klima-Boden
+(m²)</value>
   </data>
   <data name="QuickDimensioningFloorGrid_KlimaBodenHeizkreise" xml:space="preserve">
-    <value>Klima-Boden\nHeizkreise</value>
+    <value>Klima-Boden
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningFloorGrid_KlimaDeckeFlaeche" xml:space="preserve">
-    <value>Klima-Decke\n(m²)</value>
+    <value>Klima-Decke
+(m²)</value>
   </data>
   <data name="QuickDimensioningFloorGrid_KlimaDeckeHeizkreise" xml:space="preserve">
-    <value>Klima-Decke\nHeizkreise</value>
+    <value>Klima-Decke
+Heizkreise</value>
   </data>
   <data name="QuickDimensioningFloorGrid_Kuehllast" xml:space="preserve">
-    <value>Kühllast\n(W)</value>
+    <value>Kühllast
+(W)</value>
   </data>
   <data name="QuickDimensioningFloorGrid_KuehllastFehler" xml:space="preserve">
     <value>Heizlast nicht abgedeckt</value>
@@ -2281,10 +2415,12 @@
     <value>Nr.</value>
   </data>
   <data name="QuickDimensioningFloorGrid_RaumController" xml:space="preserve">
-    <value>Raum-\ncontroller</value>
+    <value>Raum-
+controller</value>
   </data>
   <data name="QuickDimensioningFloorGrid_Raumflaeche" xml:space="preserve">
-    <value>Raumfl.\n(m²)</value>
+    <value>Raumfl.
+(m²)</value>
   </data>
   <data name="QuickDimensioningFloorGrid_Raumtyp" xml:space="preserve">
     <value>Raumtyp</value>
@@ -2305,10 +2441,12 @@
     <value>Rücksetzen</value>
   </data>
   <data name="QuickDimensioningFloorGrid_Stellmotore" xml:space="preserve">
-    <value>Stell-\nmotore</value>
+    <value>Stell-
+motore</value>
   </data>
   <data name="QuickDimensioningFloorGrid_Temperatur" xml:space="preserve">
-    <value>Temp.\n(°C)</value>
+    <value>Temp.
+(°C)</value>
   </data>
   <data name="QuickDimensioningFloorGridFlaecheFehler" xml:space="preserve">
     <value>Die geplante Fläche ist größer als die maximal verfügbare Fläche</value>
@@ -2422,10 +2560,12 @@
     <value>Verteiler</value>
   </data>
   <data name="QuickDimensioningPanel_VorlauftemperaturHeizen" xml:space="preserve">
-    <value>Vorlauftemperatur\r\n(Heizen)</value>
+    <value>Vorlauftemperatur
+(Heizen)</value>
   </data>
   <data name="QuickDimensioningPanel_VorlauftemperaturKuehlen" xml:space="preserve">
-    <value>Vorlauftemperatur\r\n(Kühlen)</value>
+    <value>Vorlauftemperatur
+(Kühlen)</value>
   </data>
   <data name="QuickDimensioningPanel_Zuruecksetzen" xml:space="preserve">
     <value>Flächenaufstellung zurücksetzen</value>
@@ -2521,13 +2661,17 @@
     <value>Fehler</value>
   </data>
   <data name="RoomSummaryPanel_FbhFlaeche" xml:space="preserve">
-    <value>FBH-\nFläche\n(m²)</value>
+    <value>FBH-
+Fläche
+(m²)</value>
   </data>
   <data name="RoomSummaryPanel_Flaeche" xml:space="preserve">
     <value>Fläche:</value>
   </data>
   <data name="RoomSummaryPanel_Heizflaeche" xml:space="preserve">
-    <value>Heiz-\nfläche\n(m²)</value>
+    <value>Heiz-
+fläche
+(m²)</value>
   </data>
   <data name="RoomSummaryPanel_Heizlast" xml:space="preserve">
     <value>Heizlast:</value>
@@ -2536,7 +2680,8 @@
     <value>Heizlast (bereinigt):</value>
   </data>
   <data name="RoomSummaryPanel_Heizleistung" xml:space="preserve">
-    <value>PHeiz\n(W)</value>
+    <value>PHeiz
+(W)</value>
   </data>
   <data name="RoomSummaryPanel_Heizsysteme" xml:space="preserve">
     <value>Heizsysteme</value>
@@ -2551,7 +2696,8 @@
     <value>Kühllast (bereinigt):</value>
   </data>
   <data name="RoomSummaryPanel_Kuehlleistung" xml:space="preserve">
-    <value>PKühl\n(W)</value>
+    <value>PKühl
+(W)</value>
   </data>
   <data name="RoomSummaryPanel_Loeschen" xml:space="preserve">
     <value>Löschen</value>
@@ -2578,7 +2724,9 @@
     <value>Typ</value>
   </data>
   <data name="RoomSummaryPanel_WieGehtsWeiterText" xml:space="preserve">
-    <value>Klicken Sie auf einen der Buttons in der Spalte\n'Bearbeiten' um das entsprechende Heizsystem zu öffnen, oder\n klicken Sie in der Projekthierarchie auf das gewünschte Heizsystem.</value>
+    <value>Klicken Sie auf einen der Buttons in der Spalte
+'Bearbeiten' um das entsprechende Heizsystem zu öffnen, oder
+ klicken Sie in der Projekthierarchie auf das gewünschte Heizsystem.</value>
   </data>
   <data name="RoomSummaryPanel_WieGehtsWeiterTitel" xml:space="preserve">
     <value>Wie geht's weiter?</value>
