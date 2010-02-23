@@ -15,6 +15,7 @@ namespace Europlan.Common {
 		private bool auslegung;
 		private bool auslegungBilanz;
 		private bool verlegedaten;
+		private bool konstruktionen;
 		private bool requiredMaterial;
 		private bool recommendedMaterial;
 
@@ -31,6 +32,7 @@ namespace Europlan.Common {
 			this.auslegung = settings.GetSetting("Auslegung", true);
 			this.auslegungBilanz = settings.GetSetting("AuslegungBilanz", true);
 			this.verlegedaten = settings.GetSetting("Verlegedaten", true);
+			this.konstruktionen = settings.GetSetting("Konstruktionen", true);
 			this.requiredMaterial = settings.GetSetting("RequiredMaterial", true);
 			this.recommendedMaterial = settings.GetSetting("RecommendedMaterial", true);
 
@@ -41,6 +43,7 @@ namespace Europlan.Common {
 			this.chkAuslegungBilanz.Enabled = this.auslegung;
 			this.chkAuslegungBilanz.Checked = this.auslegungBilanz;
 			this.chkVerlegedaten.Checked = this.verlegedaten;
+			this.chkKonstruktionen.Checked = this.konstruktionen;
 			this.chkRequiredMaterial.Checked = this.requiredMaterial;
 			this.chkRecommendedMaterial.Checked = this.recommendedMaterial;
 		}
@@ -53,6 +56,7 @@ namespace Europlan.Common {
 			settings.StoreSetting("Auslegung", this.auslegung);
 			settings.StoreSetting("AuslegungBilanz", this.auslegungBilanz);
 			settings.StoreSetting("Verlegedaten", this.verlegedaten);
+			settings.StoreSetting("Konstruktionen", this.konstruktionen);
 			settings.StoreSetting("RequiredMaterial", this.requiredMaterial);
 			settings.StoreSetting("RecommendedMaterial", this.recommendedMaterial);
 			SettingsFile.Update();
@@ -76,9 +80,12 @@ namespace Europlan.Common {
 			this.auslegungBilanz = chkAuslegungBilanz.Checked;
 		}
 
-
 		private void chkVerlegedaten_CheckedChanged(object sender, EventArgs e) {
 			this.verlegedaten = this.chkVerlegedaten.Checked;
+		}
+
+		private void chkKonstruktionen_CheckedChanged(object sender, EventArgs e) {
+			this.konstruktionen = this.chkKonstruktionen.Checked;
 		}
 
 		private void chkRequiredMaterial_CheckedChanged(object sender, EventArgs e) {
@@ -91,38 +98,37 @@ namespace Europlan.Common {
 
 		public bool ProjectOverview {
 			get { return projectOverview; }
-			set { projectOverview = value; }
 		}
 
 		public bool AreaOverview {
 			get { return areaOverview; }
-			set { areaOverview = value; }
 		}
 
 		public bool Auslegung {
 			get { return auslegung; }
-			set { auslegung = value; }
 		}
 
 		public bool AuslegungBilanz {
 			get { return auslegungBilanz; }
-			set { auslegungBilanz = value; }
 		}
 
 		public bool Verlegedaten {
 			get { return verlegedaten; }
-			set { verlegedaten = value; }
+		}
+
+		public bool Konstruktionen {
+			get { return konstruktionen; }
 		}
 		
 		public bool RequiredMaterial {
 			get { return requiredMaterial; }
-			set { requiredMaterial = value; }
 		}
 		
 		public bool RecommendedMaterial {
 			get { return recommendedMaterial; }
-			set { recommendedMaterial = value; }
 		}
+
+
 
 
 	}
