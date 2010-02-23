@@ -35,8 +35,6 @@ namespace Europlan.Common {
 		//private double lengthWall;
 		//private double lengthCircuitAll;
 
-		private string wallConstruction;
-
 		private double wassermenge;
 		private double druckverlustRohr;
 		private double druckverlustVerteiler;
