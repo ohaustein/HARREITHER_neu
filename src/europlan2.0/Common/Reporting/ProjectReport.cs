@@ -3466,24 +3466,39 @@ namespace Europlan.Common {
 							HithermProduct hp = pp.Product as HithermProduct;
 							foreach (HithermCircuit c in hp.PlannedCircuits) {
 								foreach (HithermRegister register in c.Registers) {
-									konstruktion = register.Wall.Id + " " + register.Wall.Name;
-									AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
+									if (register.Wall != null) {
+										konstruktion = register.Wall.Id + " " + register.Wall.Name;
+										AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
+									}
 								}
 							}
 						} else if (pp.Product is HithermCompactProduct) {
 							HithermCompactProduct hp = pp.Product as HithermCompactProduct;
 							foreach (HithermCompactCircuit c in hp.PlannedCircuits) {
 								foreach (HithermCompactRegister register in c.Registers) {
-									konstruktion = register.Wall.Id + " " + register.Wall.Name;
-									AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
+									if (register.Wall != null) {
+										konstruktion = register.Wall.Id + " " + register.Wall.Name;
+										AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
+									}
 								}
 							}
 						} else {
-							konstruktion = pp.Product.PlannedInsideConstruction.Id + " " +
-								pp.Product.PlannedInsideConstruction.Name + " + " +
-								pp.Product.PlannedOutsideConstruction.Id + " " +
-								pp.Product.PlannedOutsideConstruction.Name;
-							AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
+							if (pp.Product.PlannedInsideConstruction != null) {
+								konstruktion = pp.Product.PlannedInsideConstruction.Id + " " +
+									pp.Product.PlannedInsideConstruction.Name;
+								if (pp.Product.PlannedOutsideConstruction != null) {
+									konstruktion += " + " +
+										pp.Product.PlannedOutsideConstruction.Id + " " +
+										pp.Product.PlannedOutsideConstruction.Name;
+								}
+								AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
+							} else {
+								if (pp.Product.PlannedOutsideConstruction != null) {
+									konstruktion += pp.Product.PlannedOutsideConstruction.Id + " " +
+										pp.Product.PlannedOutsideConstruction.Name;
+									AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
+								}
+							}
 						}
 					}
 				}
