@@ -1263,7 +1263,7 @@ namespace Europlan.Common {
 							normKuehlBedarf += pp.RequestedCoolLoad;
 
 							roomArea += room.Area;
-							totalArea += ((ModulKlimaDeckeProduct)pp.Product).TotalPlannedArea;
+							totalArea += ((ModulKlimaDeckeProduct)pp.Product).CoveredArea;
 
 							normWaermeBedarfBereinigt += pp.Product.PlannedHeizlastBereinigung;
 							normKuehlBedarfBereinigt += pp.Product.PlannedKuehllastBereinigung;
@@ -2719,7 +2719,7 @@ namespace Europlan.Common {
 									}
 								}
 
-								wrapperHeat.TotalArea = mp.TotalPlannedArea;
+								wrapperHeat.TotalArea = mp.CoveredArea;
 								wrapperHeat.ConnectionArea = mp.PlannedRemoveArea;
 
 								double v, r;
@@ -2782,7 +2782,7 @@ namespace Europlan.Common {
 									}
 								}
 
-								wrapperCool.TotalArea = mp.TotalPlannedArea;
+								wrapperCool.TotalArea = mp.CoveredArea;
 								wrapperCool.ConnectionArea = mp.PlannedRemoveArea;
 
 								double v, r;
