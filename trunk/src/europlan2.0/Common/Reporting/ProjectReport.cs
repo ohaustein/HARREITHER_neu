@@ -100,6 +100,7 @@ namespace Europlan.Common {
 			List<BilanzWrapper> modulBodenBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> modulDeckeBilanzWrapper = new List<BilanzWrapper>();
 			List<VerlegedatenCircuitWrapper> verlegedatenCircuitWrapper = new List<VerlegedatenCircuitWrapper>();
+			List<KonstruktionenWrapper> konstruktionenWrapper = new List<KonstruktionenWrapper>();
 			List<RequiredMaterialWrapper> requiredMaterialWrapper = new List<RequiredMaterialWrapper>();
 
 			projectWarningWrapper = this.GetProjectWarnings();
@@ -125,8 +126,6 @@ namespace Europlan.Common {
 				roomOverviewWrapper = this.GetRoomOverviewWrapper();
 			}
 
-
-
 			if (reportOptions.Auslegung || reportOptions.Verlegedaten) {
 				eurovalAuslegungWrapper = GetEurovalWrapper();
 				ecothermAuslegungWrapper = GetEcothermWrapper();
@@ -150,7 +149,7 @@ namespace Europlan.Common {
 			}
 
 			if (reportOptions.Konstruktionen) {
-
+				konstruktionenWrapper = GetKonstruktionenWrapper();
 			}
 			
 			if (reportOptions.RequiredMaterial || reportOptions.RecommendedMaterial) {
@@ -185,6 +184,7 @@ namespace Europlan.Common {
 			DataTable modulBodenBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(modulBodenBilanzWrapper);
 			DataTable modulDeckeBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(modulDeckeBilanzWrapper);
 			DataTable verlegedatenCircuit = ReportHelper.ListToDataTable<VerlegedatenCircuitWrapper>(verlegedatenCircuitWrapper);
+			DataTable konstruktionen = ReportHelper.ListToDataTable<KonstruktionenWrapper>(konstruktionenWrapper);
 			DataTable requiredMaterial = ReportHelper.ListToDataTable<RequiredMaterialWrapper>(requiredMaterialWrapper);
 
 			projektBilanz.TableName = "ProjektBilanz";
@@ -215,6 +215,7 @@ namespace Europlan.Common {
 			modulBodenBilanz.TableName = "ModulBodenBilanz";
 			modulDeckeBilanz.TableName = "ModulDeckeBilanz";
 			verlegedatenCircuit.TableName = "VerlegedatenCircuit";
+			konstruktionen.TableName = "Konstruktionen";
 			requiredMaterial.TableName = "RequiredMaterial";
 
 			reportData.Tables.Add(projektBilanz);
@@ -245,6 +246,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(modulBodenBilanz);
 			reportData.Tables.Add(modulDeckeBilanz);
 			reportData.Tables.Add(verlegedatenCircuit);
+			reportData.Tables.Add(konstruktionen);
 			reportData.Tables.Add(requiredMaterial);
 
 			listLabel1.DataSource = reportData;
@@ -3449,6 +3451,63 @@ namespace Europlan.Common {
 			}
 
 			return wrapperList;
+		}
+
+		public List<KonstruktionenWrapper> GetKonstruktionenWrapper() {
+			List<KonstruktionenWrapper> wrapperList = new List<KonstruktionenWrapper>();
+
+			string konstruktion = "";
+			Dictionary<string, List<PlannedProduct>> konstruktionen = new Dictionary<string, List<PlannedProduct>>();
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						if (pp.Product is HithermProduct) {
+							HithermProduct hp = pp.Product as HithermProduct;
+							foreach (HithermCircuit c in hp.PlannedCircuits) {
+								foreach (HithermRegister register in c.Registers) {
+									konstruktion = register.Wall.Id + " " + register.Wall.Name;
+									AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
+								}
+							}
+						} else if (pp.Product is HithermCompactProduct) {
+							HithermCompactProduct hp = pp.Product as HithermCompactProduct;
+							foreach (HithermCompactCircuit c in hp.PlannedCircuits) {
+								foreach (HithermCompactRegister register in c.Registers) {
+									konstruktion = register.Wall.Id + " " + register.Wall.Name;
+									AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
+								}
+							}
+						} else {
+							konstruktion = pp.Product.PlannedInsideConstruction.Id + " " +
+								pp.Product.PlannedInsideConstruction.Name + " + " +
+								pp.Product.PlannedOutsideConstruction.Id + " " +
+								pp.Product.PlannedOutsideConstruction.Name;
+							AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
+						}
+					}
+				}
+			}
+
+			KonstruktionenWrapper wrapper;
+			foreach (string k in konstruktionen.Keys) {
+				wrapper = new KonstruktionenWrapper(k, konstruktionen[k]);
+				wrapperList.Add(wrapper);
+			}
+
+			return wrapperList;
+		}
+
+		private void AddKeyValueToDictionary(string konstruktion, PlannedProduct pp, Dictionary<string, List<PlannedProduct>> konstruktionen) {
+			if (konstruktionen.ContainsKey(konstruktion)) {
+				if (!konstruktionen[konstruktion].Contains(pp)) {
+					konstruktionen[konstruktion].Add(pp);
+				}
+			} else {
+				List<PlannedProduct> products = new List<PlannedProduct>();
+				products.Add(pp);
+				konstruktionen.Add(konstruktion, products);
+			}
 		}
 
 		public List<RequiredMaterialWrapper> GetRequiredMaterialWrapper() {

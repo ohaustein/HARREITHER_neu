@@ -271,6 +271,7 @@
     <Compile Include="Project\WarningsAndErrorsForm.Designer.cs">
       <DependentUpon>WarningsAndErrorsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\Wrapper\KonstruktionenWrapper.cs" />
     <Compile Include="Project\Wrapper\ProductOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\DistributorWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulBoden\ModulBodenWrapper.cs" />
