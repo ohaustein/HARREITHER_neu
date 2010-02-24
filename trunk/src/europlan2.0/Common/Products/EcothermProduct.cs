@@ -1181,9 +1181,9 @@ namespace Europlan.Common {
 				if (this.incompleteCalculation) {
 					return 0;
 				}
-				double value = 0;
+				double value = double.MaxValue;
 				foreach (EcothermCircuit ec in this.circuits) {
-					if (ec.C_FloorTempRzCool > value) {
+					if (ec.C_FloorTempRzCool < value) {
 						value = ec.C_FloorTempRzCool;
 					}
 				}
@@ -1197,9 +1197,9 @@ namespace Europlan.Common {
 				if (this.incompleteCalculation) {
 					return 0;
 				}
-				double value = 0;
+				double value = double.MaxValue;
 				foreach (EcothermCircuit ec in this.circuits) {
-					if (ec.C_FloorTempAzCool > value) {
+					if (ec.C_FloorTempAzCool < value) {
 						value = ec.C_FloorTempAzCool;
 					}
 				}

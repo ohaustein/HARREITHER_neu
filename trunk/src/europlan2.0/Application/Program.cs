@@ -10,6 +10,7 @@ using Europlan.Licensing;
 using System.IO;
 using Microsoft.Win32;
 using Europlan.Common;
+using System.Reflection;
 
 namespace Europlan.Application {
 	
@@ -34,6 +35,8 @@ namespace Europlan.Application {
 			startingForm.Update();
 			log4net.Config.XmlConfigurator.Configure();
 			log.Debug("Starting Application");
+
+			Assembly.LoadFrom("D:\\projects\\europlan\\trunk\\src\\europlan2.0\\Resources\\de\\Common.resources.dll");
 
 			RegistryKey key = Registry.LocalMachine.OpenSubKey("Software\\bluesource\\Europlan2.0");
 			if (key != null) {
