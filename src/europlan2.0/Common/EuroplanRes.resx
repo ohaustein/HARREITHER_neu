@@ -564,6 +564,9 @@ Vorlauf
   <data name="EcothermProduct_NotificationParameter" xml:space="preserve">
     <value>Ecotherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
   </data>
+  <data name="ErrorMessage_DeckentemperaturKuehl" xml:space="preserve">
+    <value>Oberflächentemperatur zu kline (%VALUE%°C &lt; %MINIMUM%°C)</value>
+  </data>
   <data name="ErrorMessage_DruckverlustHeiz" xml:space="preserve">
     <value>Druckverlust bei Heizung zu groß (%VALUE%mbar &gt; %MAXIMUM%mbar)</value>
   </data>

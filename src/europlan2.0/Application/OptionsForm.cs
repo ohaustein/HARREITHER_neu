@@ -53,12 +53,23 @@ namespace Europlan.Application {
 
 			string executablePath = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
 			string[] directories = Directory.GetDirectories(executablePath);
+			bool germanFound = false;
 			foreach (string s in directories) {
 				try {
 					DirectoryInfo langDirectory = new DirectoryInfo(s);
-					cmbLanguage.Items.Add(CultureInfo.GetCultureInfo(langDirectory.Name));
+					FileInfo fi = new FileInfo(Path.Combine(s, "Common.resources.dll"));
+					if (fi.Exists) {
+						if (langDirectory.Name.Equals("de", StringComparison.InvariantCultureIgnoreCase)) {
+							germanFound = true;
+						}
+						cmbLanguage.Items.Add(CultureInfo.GetCultureInfo(langDirectory.Name));
+					}
 				} catch (Exception) {
 				}
+			}
+			if (!germanFound) {
+				cmbLanguage.Items.Add(CultureInfo.GetCultureInfo("de"));
+				
 			}
 			string partnerLogo = Configuration.UserTemplate.PartnerLogo;
 			if (partnerLogo != "" && File.Exists(partnerLogo)) {

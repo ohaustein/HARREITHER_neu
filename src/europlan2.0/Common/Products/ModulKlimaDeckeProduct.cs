@@ -108,6 +108,8 @@ namespace Europlan.Common {
 		private static double spreizungKuehlMax = 5;
 		private static ModulCeilingConstructionEnum construction = ModulCeilingConstructionEnum.C_PROFIL;
 
+		private static double minCeilingTempCool = 27.0;
+
 		private ProductType modulType = ProductType.DH;
 		private float plannedFloorArea = 0;
 		private float plannedCeilingArea = 0;
@@ -420,6 +422,12 @@ namespace Europlan.Common {
 		public static double[] ConfigDruckverlustModul_80_30 {
 			get { return druckverlustModul_80_30; }
 			set { druckverlustModul_80_30 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigMinCeilingTempCool {
+			get { return minCeilingTempCool; }
+			set { minCeilingTempCool = value; }
 		}
 		#endregion Product Parameters
 
@@ -748,6 +756,12 @@ namespace Europlan.Common {
 					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
+			}
+			if (Math.Round(this.PlannedCeilingTemperatureCool, 1) < Math.Round(ModulKlimaDeckeProduct.ConfigMinCeilingTempCool, 1)) {
+				newMsg = EuroplanRes.ErrorMessage_DeckentemperaturKuehl;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedCeilingTemperatureCool, 1).ToString());
+				newMsg = newMsg.Replace("%MINIMUM%%", Math.Round(ModulKlimaDeckeProduct.ConfigMinCeilingTempCool, 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (this.lastErrorMsg.Length == 0) {
 				this.lastErrorMsg = null;
@@ -1182,6 +1196,38 @@ namespace Europlan.Common {
 					this.plannedFloorOrCeilingArea = 0;
 					this.plannedFloorArea = 0;
 					break;
+			}
+		}
+
+		[XmlIgnore]
+		public double PlannedCeilingTemperatureHeat {
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = 0;
+				foreach (ModulDeckeCircuit mc in this.circuits) {
+					if (mc.C_CeilingTempHeat > value) {
+						value = mc.C_CeilingTempHeat;
+					}
+				}
+				return value;
+			}
+		}
+
+		[XmlIgnore]
+		public double PlannedCeilingTemperatureCool {
+			get {
+				if (this.incompleteCalculation) {
+					return 0;
+				}
+				double value = Double.MaxValue;
+				foreach (ModulDeckeCircuit mc in this.circuits) {
+					if (mc.C_CeilingTempCool < value) {
+						value = mc.C_CeilingTempCool;
+					}
+				}
+				return value;
 			}
 		}
 	}

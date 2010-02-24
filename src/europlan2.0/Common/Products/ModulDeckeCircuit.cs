@@ -112,6 +112,18 @@ namespace Europlan.Common {
 			//set { c_qCoolPerSqm = value; }
 		}
 
+		private double c_ceilingTempHeat;
+		[XmlIgnore]
+		public double C_CeilingTempHeat {
+			get { return this.c_ceilingTempHeat; }
+		}
+
+		private double c_ceilingTempCool;
+		[XmlIgnore]
+		public double C_CeilingTempCool {
+			get { return this.c_ceilingTempCool; }
+		}
+
 		//private double c_floorTempHeat;
 		//[XmlIgnore]
 		//public double C_FloorTempHeat {
@@ -290,6 +302,8 @@ namespace Europlan.Common {
 						}
 					}
 
+					this.c_ceilingTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, alphaInnenHeat, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomCoolTemperature);
+
 					//this.c_floorTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, ModulKlimaDeckeProduct.ConfigAlphaFbh, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature);
 				}
 			}
@@ -356,6 +370,8 @@ namespace Europlan.Common {
 							this.c_druckverlustCool += cp.CalculateDruckverlust(this.c_massenstromCool);
 						}
 					}
+
+					this.c_ceilingTempCool = en1264.OberflaechenTemperatur(this.c_qCoolPerSqm, alphaInnenCool, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomCoolTemperature);
 
 					//this.c_floorTempCool = en1264.OberflaechenTemperatur(this.c_qCoolPerSqm, ModulKlimaDeckeProduct.ConfigAlphaFbk, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomCoolTemperature);
 				}
