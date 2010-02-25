@@ -1012,6 +1012,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An den Verteiler sind zu viele Heizkreise angeschlossen (%VALUE% &gt; %MAXIMUM%).
+        /// </summary>
+        internal static string Distributor_ZuVieleHeizkreise {
+            get {
+                return ResourceManager.GetString("Distributor_ZuVieleHeizkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An den Verteiler sind zu viele Heizkreise angeschlossen (%VALUE% + %VALUEZUS% &gt; %MAXIMUM%).
+        /// </summary>
+        internal static string Distributor_ZuVieleHeizkreiseZus {
+            get {
+                return ResourceManager.GetString("Distributor_ZuVieleHeizkreiseZus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to %VALUE% (aktiv).
         /// </summary>
         internal static string DistributorPanel_Aktiv {
@@ -1372,11 +1390,11 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Oberflächentemperatur zu kline (%VALUE%°C &lt; %MINIMUM%°C).
+        ///   Looks up a localized string similar to Oberflächentemperatur zu groß (%VALUE%°C &gt; %MAXIMUM%°C).
         /// </summary>
-        internal static string ErrorMessage_DeckentemperaturKuehl {
+        internal static string ErrorMessage_DeckentemperaturHeat {
             get {
-                return ResourceManager.GetString("ErrorMessage_DeckentemperaturKuehl", resourceCulture);
+                return ResourceManager.GetString("ErrorMessage_DeckentemperaturHeat", resourceCulture);
             }
         }
         
@@ -6018,6 +6036,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to WARNUNG %VERTEILERID% (%VERTEILERNAME%): %WARNUNG%.
+        /// </summary>
+        internal static string ProjectReport_VerteilerWarnung {
+            get {
+                return ResourceManager.GetString("ProjectReport_VerteilerWarnung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WARNUNG %SYSTEM% in %RAUMID% (%RAUMNAME%): %WARNUNG%.
         /// </summary>
         internal static string ProjectReport_Warnung {
@@ -8413,6 +8440,15 @@ namespace Europlan.Common {
         internal static string WarningsAndErrorsForm_Titel {
             get {
                 return ResourceManager.GetString("WarningsAndErrorsForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to %VERTEILERID% (%VERTEILERNAME%) in %GESCHOSS%: %WARNUNG%.
+        /// </summary>
+        internal static string WarningsAndErrorsForm_VerteilerWarnung {
+            get {
+                return ResourceManager.GetString("WarningsAndErrorsForm_VerteilerWarnung", resourceCulture);
             }
         }
         

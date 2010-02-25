@@ -444,6 +444,12 @@ Vorlauf
   <data name="Distributor_Unbenannt" xml:space="preserve">
     <value>unbenannt</value>
   </data>
+  <data name="Distributor_ZuVieleHeizkreise" xml:space="preserve">
+    <value>An den Verteiler sind zu viele Heizkreise angeschlossen (%VALUE% &gt; %MAXIMUM%)</value>
+  </data>
+  <data name="Distributor_ZuVieleHeizkreiseZus" xml:space="preserve">
+    <value>An den Verteiler sind zu viele Heizkreise angeschlossen (%VALUE% + %VALUEZUS% &gt; %MAXIMUM%)</value>
+  </data>
   <data name="DistributorPanel_Aktiv" xml:space="preserve">
     <value>%VALUE% (aktiv)</value>
   </data>
@@ -564,8 +570,8 @@ Vorlauf
   <data name="EcothermProduct_NotificationParameter" xml:space="preserve">
     <value>Ecotherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
   </data>
-  <data name="ErrorMessage_DeckentemperaturKuehl" xml:space="preserve">
-    <value>Oberflächentemperatur zu kline (%VALUE%°C &lt; %MINIMUM%°C)</value>
+  <data name="ErrorMessage_DeckentemperaturHeat" xml:space="preserve">
+    <value>Oberflächentemperatur zu groß (%VALUE%°C &gt; %MAXIMUM%°C)</value>
   </data>
   <data name="ErrorMessage_DruckverlustHeiz" xml:space="preserve">
     <value>Druckverlust bei Heizung zu groß (%VALUE%mbar &gt; %MAXIMUM%mbar)</value>
@@ -2162,6 +2168,9 @@ RZ</value>
   <data name="ProjectReport_SystemHeizkreisGeschoss" xml:space="preserve">
     <value>%SYSTEM% in %GESCHOSS%, %RAUMID% (%RAUMNAME%), Heizkreis %HK%</value>
   </data>
+  <data name="ProjectReport_VerteilerWarnung" xml:space="preserve">
+    <value>WARNUNG %VERTEILERID% (%VERTEILERNAME%): %WARNUNG%</value>
+  </data>
   <data name="ProjectReport_Warnung" xml:space="preserve">
     <value>WARNUNG %SYSTEM% in %RAUMID% (%RAUMNAME%): %WARNUNG%</value>
   </data>
@@ -3000,6 +3009,9 @@ fläche
   </data>
   <data name="WarningsAndErrorsForm_Titel" xml:space="preserve">
     <value>Warnungen und Fehler</value>
+  </data>
+  <data name="WarningsAndErrorsForm_VerteilerWarnung" xml:space="preserve">
+    <value>%VERTEILERID% (%VERTEILERNAME%) in %GESCHOSS%: %WARNUNG%</value>
   </data>
   <data name="WarningsAndErrorsForm_Warnung" xml:space="preserve">
     <value>%SYSTEM% in %RAUMID% (%RAUMNAME%): %WARNUNG%</value>

@@ -80,6 +80,29 @@ namespace Europlan.Common {
 				this.cmbAnschlussHollaender.SelectedItem = distributor.AnschlussHollaender;
 
 				UpdateCircuitsLabel();
+
+				this.UpdateErrorMessages();
+			}
+		}
+
+		private void UpdateErrorMessages() {
+			this.lstError.Items.Clear();
+			string[] messages = this.distributor.ErrorMessageArray;
+			foreach (string message in messages) {
+				if (!string.IsNullOrEmpty(message)) {
+					ListViewItem item = new ListViewItem(message);
+					item.ForeColor = Color.Red;
+					//item.Font = new Font(item.Font, FontStyle.Bold);
+					this.lstError.Items.Add(item);
+				}
+			}
+			if (lstError.Items.Count > 0) {
+				this.lstError.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+				int height = this.lstError.Items[this.lstError.Items.Count - 1].Position.Y + this.lstError.Items[this.lstError.Items.Count - 1].Bounds.Height + 5;
+				this.lstError.Height = height;
+				this.lstError.Visible = true;
+			} else {
+				this.lstError.Visible = false;
 			}
 		}
 
@@ -105,6 +128,7 @@ namespace Europlan.Common {
 			distributor.MaxCircuits = (int)this.numMaxCircuits.Value;
 			numAdditionalCircuits.Maximum = distributor.MaxCircuits;
 			UpdateCircuitsLabel();
+			this.UpdateErrorMessages();
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}
@@ -115,6 +139,8 @@ namespace Europlan.Common {
 			distributor.AdditionalCircuits = (int)this.numAdditionalCircuits.Value;
 			this.numZusStellantriebe.Maximum = (int)this.numAdditionalCircuits.Value;
 			UpdateCircuitsLabel();
+			this.UpdateErrorMessages();
+			this.UpdateCircuitsLabel();
 			if (ProjectChanged != null) {
 				ProjectChanged(null);
 			}

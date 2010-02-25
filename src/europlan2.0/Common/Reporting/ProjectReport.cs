@@ -1367,6 +1367,21 @@ namespace Europlan.Common {
 		public List<ProjectWarningWrapper> GetProjectWarnings() {
 			List<ProjectWarningWrapper> wrapperList = new List<ProjectWarningWrapper>();
 
+			foreach (Floor floor in Project.Instance.Floors) {
+				foreach (Distributor dist in floor.Distributors) {
+					foreach (string error in dist.ErrorMessageArray) {
+						ProjectWarningWrapper wrapper = new ProjectWarningWrapper();
+						wrapper.FloorId = floor.Id;
+						wrapper.FloorName = floor.Name;
+						string message = EuroplanRes.ProjectReport_VerteilerWarnung;
+						message = message.Replace("%VERTEILERID%", dist.Id);
+						message = message.Replace("%VERTEILERNAME%", dist.Name);
+						message = message.Replace("%WARNUNG%", error);
+						wrapper.Warning = message;
+						wrapperList.Add(wrapper);
+					}
+				}
+			}
 
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {

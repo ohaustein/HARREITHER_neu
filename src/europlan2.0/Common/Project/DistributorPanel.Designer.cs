@@ -50,6 +50,8 @@ namespace Europlan.Common {
 			this.label12 = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
 			this.lblCircuits = new System.Windows.Forms.Label();
+			this.lstError = new System.Windows.Forms.ListView();
+			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
 			((System.ComponentModel.ISupportInitialize)(this.numMaxCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAdditionalCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numZusStellantriebe)).BeginInit();
@@ -322,10 +324,31 @@ namespace Europlan.Common {
 			this.lblCircuits.Text = "7 (aktiv)";
 			this.lblCircuits.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// lstError
+			// 
+			this.lstError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lstError.BackColor = System.Drawing.SystemColors.Control;
+			this.lstError.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.lstError.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.defaultColumn});
+			this.lstError.FullRowSelect = true;
+			this.lstError.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.lstError.LabelWrap = false;
+			this.lstError.Location = new System.Drawing.Point(7, 439);
+			this.lstError.Name = "lstError";
+			this.lstError.ShowGroups = false;
+			this.lstError.Size = new System.Drawing.Size(770, 50);
+			this.lstError.TabIndex = 74;
+			this.lstError.UseCompatibleStateImageBehavior = false;
+			this.lstError.View = System.Windows.Forms.View.Details;
+			this.lstError.Visible = false;
+			// 
 			// DistributorPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.lstError);
 			this.Controls.Add(this.lblCircuits);
 			this.Controls.Add(this.label13);
 			this.Controls.Add(this.label12);
@@ -392,5 +415,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.Label lblCircuits;
+		private System.Windows.Forms.ListView lstError;
+		private System.Windows.Forms.ColumnHeader defaultColumn;
 	}
 }

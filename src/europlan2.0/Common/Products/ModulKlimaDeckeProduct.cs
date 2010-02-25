@@ -108,7 +108,7 @@ namespace Europlan.Common {
 		private static double spreizungKuehlMax = 5;
 		private static ModulCeilingConstructionEnum construction = ModulCeilingConstructionEnum.C_PROFIL;
 
-		private static double minCeilingTempCool = 27.0;
+		private static double minCeilingTempHeat = 27.0;
 
 		private ProductType modulType = ProductType.DH;
 		private float plannedFloorArea = 0;
@@ -425,9 +425,9 @@ namespace Europlan.Common {
 		}
 
 		[ProductParameter]
-		public static double ConfigMinCeilingTempCool {
-			get { return minCeilingTempCool; }
-			set { minCeilingTempCool = value; }
+		public static double ConfigMinCeilingTempHeat {
+			get { return minCeilingTempHeat; }
+			set { minCeilingTempHeat = value; }
 		}
 		#endregion Product Parameters
 
@@ -757,10 +757,10 @@ namespace Europlan.Common {
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
-			if (Math.Round(this.PlannedCeilingTemperatureCool, 1) < Math.Round(ModulKlimaDeckeProduct.ConfigMinCeilingTempCool, 1)) {
-				newMsg = EuroplanRes.ErrorMessage_DeckentemperaturKuehl;
+			if (Math.Round(this.PlannedCeilingTemperatureHeat, 1) > Math.Round(ModulKlimaDeckeProduct.ConfigMinCeilingTempHeat, 1)) {
+				newMsg = EuroplanRes.ErrorMessage_DeckentemperaturHeat;
 				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedCeilingTemperatureCool, 1).ToString());
-				newMsg = newMsg.Replace("%MINIMUM%%", Math.Round(ModulKlimaDeckeProduct.ConfigMinCeilingTempCool, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaDeckeProduct.ConfigMinCeilingTempHeat, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (this.lastErrorMsg.Length == 0) {
