@@ -45,6 +45,19 @@ namespace Europlan.Common {
 				lstErrors.Items.Add(notification);
 			}
 			foreach (Floor floor in Project.Instance.Floors) {
+				foreach (Distributor dist in floor.Distributors) {
+					foreach (string error in dist.ErrorMessageArray) {
+						string message = EuroplanRes.WarningsAndErrorsForm_VerteilerWarnung;
+						message = message.Replace("%VERTEILERID%", dist.Id);
+						message = message.Replace("%VERTEILERNAME%", dist.Name);
+						message = message.Replace("%GESCHOSS%", floor.Name);
+						message = message.Replace("%WARNUNG%", error);
+						lstErrors.Items.Add(message);
+						//lstErrors.Items.Add(error);
+					}
+				}
+			}
+			foreach (Floor floor in Project.Instance.Floors) {
 				foreach (Room room in floor.Rooms) {
 					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
 						foreach (string notification in plannedProduct.Product.NotificationMessageArray) {

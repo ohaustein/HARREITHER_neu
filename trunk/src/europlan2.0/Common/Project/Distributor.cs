@@ -491,6 +491,40 @@ namespace Europlan.Common {
 			}
 		}
 
+		public string ErrorMessage {
+			get {
+				string message = null;
+				foreach (string err in this.ErrorMessageArray) {
+					if (message != null) {
+						message += "\n" + err;
+					} else {
+						message = err;
+					}
+				}
+				return message;
+			}
+		}
+
+		public string[] ErrorMessageArray {
+			get {
+				List<string> errors = new List<string>();
+				if (this.MaxCircuits - this.AdditionalCircuits < this.PlannedCircuits) {
+					string err = this.AdditionalCircuits > 0 ? EuroplanRes.Distributor_ZuVieleHeizkreiseZus : EuroplanRes.Distributor_ZuVieleHeizkreise;
+					/*err = err.Replace("%VERTEILER%", this.Name);
+					err = err.Replace("%GESCHOSS%", this.AssociatedFloor.Name);*/
+					err = err.Replace("%VALUE%", this.PlannedCircuits.ToString());
+					err = err.Replace("%VALUEZUS%", this.AdditionalCircuits.ToString());
+					err = err.Replace("%MAXIMUM%", MaxCircuits.ToString());
+					//An den Verteiler %VERTEILER% (%GESCHOSS%) sind zu viele Heizkreise angeschlossen (%VALUE% + %VALUEZUS% > %MAXIMUM%)
+					//An den Verteiler %VERTEILER% (%GESCHOSS%) sind zu viele Heizkreise angeschlossen (%VALUE% > %MAXIMUM%)
+					errors.Add(err);
+				}
+				string[] errs = new string[errors.Count];
+				errors.CopyTo(errs);
+				return errs;
+			}
+		}
+
 	}
 
 }
