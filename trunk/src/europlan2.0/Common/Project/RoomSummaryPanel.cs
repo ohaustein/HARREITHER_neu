@@ -181,8 +181,6 @@ namespace Europlan.Common {
 							plannedFloorArea = 0;
 						}
 						p.PlannedFloorArea = (float)plannedFloorArea;
-						pp.ConfigureProductDefault();
-
 					} else if (p.Type == Product.ProductType.DH) {
 						double plannedCeilingArea = this.room.Area;
 						foreach (PlannedProduct plannedP in this.room.PlannedProducts) {
@@ -192,10 +190,36 @@ namespace Europlan.Common {
 							plannedCeilingArea = 0;
 						}
 						p.PlannedCeilingArea = (float)plannedCeilingArea;
-						pp.ConfigureProductDefault();
-					} else {
-						pp.ConfigureProductDefault();
 					}
+
+					foreach (Distributor dist in this.room.AssociatedFloor.Distributors) {
+						if (((dist.UseForFloor && p.Type == Product.ProductType.FBH) ||
+							(dist.UseForWall && p.Type == Product.ProductType.WH) ||
+							(dist.UseForCeiling && (p.Type == Product.ProductType.DH || p.Type == Product.ProductType.DSH))) && 
+							dist.MaxCircuits - dist.PlannedCircuits - dist.AdditionalCircuits > 0) {
+							p.PlannedConnection = new ProductConnection(dist);
+							break;
+						}
+					}
+					if (p.PlannedConnection == null) {
+						foreach (Floor f in Project.Instance.Floors) {
+							foreach (Distributor dist in f.Distributors) {
+								if (((dist.UseForFloor && p.Type == Product.ProductType.FBH) ||
+									(dist.UseForWall && p.Type == Product.ProductType.WH) ||
+									(dist.UseForCeiling && (p.Type == Product.ProductType.DH || p.Type == Product.ProductType.DSH))) &&
+									dist.AdditionalFloors.Contains(p.AssociatedRoom.AssociatedFloor) &&
+									dist.MaxCircuits - dist.PlannedCircuits - dist.AdditionalCircuits > 0) {
+									p.PlannedConnection = new ProductConnection(dist);
+									break;
+								}
+							}
+							if (p.PlannedConnection != null) {
+								break;
+							}
+						}
+					}
+					
+					pp.ConfigureProductDefault();
 					this.room.PlannedProducts.Add(pp);
 					this.UpdateControl(true);
 					if (this.ProjectStructureChanged != null) {

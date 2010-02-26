@@ -1531,13 +1531,21 @@ namespace Europlan.Common {
 			// determine laydistance/rimtype combinations to calculate
 			Dictionary<EurovalLayDistance, Nullable<EurovalRimType>[]> teilungen = new Dictionary<EurovalLayDistance, EurovalRimType?[]>();
 			if (this.plannedRimLength > 0) {
-				teilungen.Add(EurovalLayDistance.NONE, new Nullable<EurovalRimType>[] { null });
+				/*teilungen.Add(EurovalLayDistance.NONE, new Nullable<EurovalRimType>[] { null });
 				teilungen.Add(EurovalLayDistance.EV35, new Nullable<EurovalRimType>[] { EurovalRimType.EV15_60, EurovalRimType.EV15_120, EurovalRimType.EV15_180, EurovalRimType.EV10_55, EurovalRimType.EV10_110, EurovalRimType.EV10_165, EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
 				teilungen.Add(EurovalLayDistance.EV30, new Nullable<EurovalRimType>[] { EurovalRimType.EV15_60, EurovalRimType.EV15_120, EurovalRimType.EV15_180, EurovalRimType.EV10_55, EurovalRimType.EV10_110, EurovalRimType.EV10_165, EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
 				teilungen.Add(EurovalLayDistance.EV25, new Nullable<EurovalRimType>[] { EurovalRimType.EV15_60, EurovalRimType.EV15_120, EurovalRimType.EV15_180, EurovalRimType.EV10_55, EurovalRimType.EV10_110, EurovalRimType.EV10_165, EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
 				teilungen.Add(EurovalLayDistance.EV20, new Nullable<EurovalRimType>[] { EurovalRimType.EV10_55, EurovalRimType.EV10_110, EurovalRimType.EV10_165, EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
 				teilungen.Add(EurovalLayDistance.EV15, new Nullable<EurovalRimType>[] { EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
 				teilungen.Add(EurovalLayDistance.EV10, new Nullable<EurovalRimType>[] { null });
+				teilungen.Add(EurovalLayDistance.EV5, new Nullable<EurovalRimType>[] { null });*/
+				teilungen.Add(EurovalLayDistance.NONE, new Nullable<EurovalRimType>[] { null });
+				teilungen.Add(EurovalLayDistance.EV35, new Nullable<EurovalRimType>[] { EurovalRimType.EV15_60, EurovalRimType.EV15_120, EurovalRimType.EV15_180 });
+				teilungen.Add(EurovalLayDistance.EV30, new Nullable<EurovalRimType>[] { EurovalRimType.EV15_60, EurovalRimType.EV15_120, EurovalRimType.EV15_180 });
+				teilungen.Add(EurovalLayDistance.EV25, new Nullable<EurovalRimType>[] { EurovalRimType.EV15_60, EurovalRimType.EV15_120, EurovalRimType.EV15_180 });
+				teilungen.Add(EurovalLayDistance.EV20, new Nullable<EurovalRimType>[] { EurovalRimType.EV10_55, EurovalRimType.EV10_110, EurovalRimType.EV10_165 });
+				teilungen.Add(EurovalLayDistance.EV15, new Nullable<EurovalRimType>[] { EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
+				teilungen.Add(EurovalLayDistance.EV10, new Nullable<EurovalRimType>[] { EurovalRimType.EV5_40, EurovalRimType.EV5_80, EurovalRimType.EV5_120 });
 				teilungen.Add(EurovalLayDistance.EV5, new Nullable<EurovalRimType>[] { null });
 			} else {
 				teilungen.Add(EurovalLayDistance.NONE, new Nullable<EurovalRimType>[] { null });

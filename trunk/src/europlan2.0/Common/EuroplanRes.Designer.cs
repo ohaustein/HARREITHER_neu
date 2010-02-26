@@ -214,7 +214,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to %SYSTEM in %RAUMID% (%RAUMNAME%).
+        ///   Looks up a localized string similar to %SYSTEM% in %RAUMID% (%RAUMNAME%).
         /// </summary>
         internal static string AuslegeAssistentForm_SystemInRaum {
             get {
