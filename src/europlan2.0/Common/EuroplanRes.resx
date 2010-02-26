@@ -169,7 +169,7 @@
     <value>Randzone</value>
   </data>
   <data name="AuslegeAssistentForm_SystemInRaum" xml:space="preserve">
-    <value>%SYSTEM in %RAUMID% (%RAUMNAME%)</value>
+    <value>%SYSTEM% in %RAUMID% (%RAUMNAME%)</value>
   </data>
   <data name="AuslegeAssistentForm_Tv" xml:space="preserve">
     <value>Tv

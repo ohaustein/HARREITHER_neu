@@ -1470,13 +1470,21 @@ namespace Europlan.Common {
 			// determine laydistance/rimtype combinations to calculate
 			Dictionary<EcothermLayDistance, Nullable<EcothermRimType>[]> teilungen = new Dictionary<EcothermLayDistance, EcothermRimType?[]>();
 			if (this.plannedRimLength > 0) {
-				teilungen.Add(EcothermLayDistance.NONE, new Nullable<EcothermRimType>[] { null });
+				/*teilungen.Add(EcothermLayDistance.NONE, new Nullable<EcothermRimType>[] { null });
 				teilungen.Add(EcothermLayDistance.EV35, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180, EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
 				teilungen.Add(EcothermLayDistance.EV30, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180, EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
 				teilungen.Add(EcothermLayDistance.EV25, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180, EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
 				teilungen.Add(EcothermLayDistance.EV20, new Nullable<EcothermRimType>[] { EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
 				teilungen.Add(EcothermLayDistance.EV15, new Nullable<EcothermRimType>[] { EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
 				teilungen.Add(EcothermLayDistance.EV10, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV5, new Nullable<EcothermRimType>[] { null });*/
+				teilungen.Add(EcothermLayDistance.NONE, new Nullable<EcothermRimType>[] { null });
+				teilungen.Add(EcothermLayDistance.EV35, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180 });
+				teilungen.Add(EcothermLayDistance.EV30, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180 });
+				teilungen.Add(EcothermLayDistance.EV25, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180 });
+				teilungen.Add(EcothermLayDistance.EV20, new Nullable<EcothermRimType>[] { EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165 });
+				teilungen.Add(EcothermLayDistance.EV15, new Nullable<EcothermRimType>[] { EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
+				teilungen.Add(EcothermLayDistance.EV10, new Nullable<EcothermRimType>[] { EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
 				teilungen.Add(EcothermLayDistance.EV5, new Nullable<EcothermRimType>[] { null });
 			} else {
 				teilungen.Add(EcothermLayDistance.NONE, new Nullable<EcothermRimType>[] { null });

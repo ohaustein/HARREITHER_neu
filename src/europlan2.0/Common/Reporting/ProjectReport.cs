@@ -1378,6 +1378,7 @@ namespace Europlan.Common {
 						message = message.Replace("%VERTEILERNAME%", dist.Name);
 						message = message.Replace("%WARNUNG%", error);
 						wrapper.Warning = message;
+
 						wrapperList.Add(wrapper);
 					}
 				}
