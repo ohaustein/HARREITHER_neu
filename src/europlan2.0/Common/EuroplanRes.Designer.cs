@@ -2548,42 +2548,6 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to °C.
-        /// </summary>
-        internal static string General_GradCelsius {
-            get {
-                return ResourceManager.GetString("General_GradCelsius", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to K.
-        /// </summary>
-        internal static string General_Kelvin {
-            get {
-                return ResourceManager.GetString("General_Kelvin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to kg/m³.
-        /// </summary>
-        internal static string General_KgProKubikmeter {
-            get {
-                return ResourceManager.GetString("General_KgProKubikmeter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to kJ/(kg*K).
-        /// </summary>
-        internal static string General_KjProKgKelvin {
-            get {
-                return ResourceManager.GetString("General_KjProKgKelvin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Kopieren.
         /// </summary>
         internal static string General_Kopieren {
@@ -2620,47 +2584,11 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to l.
-        /// </summary>
-        internal static string General_Liter {
-            get {
-                return ResourceManager.GetString("General_Liter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to l/h.
-        /// </summary>
-        internal static string General_LiterProStunde {
-            get {
-                return ResourceManager.GetString("General_LiterProStunde", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Materialbedarf.
         /// </summary>
         internal static string General_Materialbedarf {
             get {
                 return ResourceManager.GetString("General_Materialbedarf", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to mbar.
-        /// </summary>
-        internal static string General_Mbar {
-            get {
-                return ResourceManager.GetString("General_Mbar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to m.
-        /// </summary>
-        internal static string General_Meter {
-            get {
-                return ResourceManager.GetString("General_Meter", resourceCulture);
             }
         }
         
@@ -2765,33 +2693,6 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to %.
-        /// </summary>
-        internal static string General_Prozent {
-            get {
-                return ResourceManager.GetString("General_Prozent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to m²/s.
-        /// </summary>
-        internal static string General_QmProSek {
-            get {
-                return ResourceManager.GetString("General_QmProSek", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to m².
-        /// </summary>
-        internal static string General_Quadratmeter {
-            get {
-                return ResourceManager.GetString("General_Quadratmeter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Regelkreise.
         /// </summary>
         internal static string General_Regelkreise {
@@ -2824,33 +2725,6 @@ namespace Europlan.Common {
         internal static string General_Systemparameter {
             get {
                 return ResourceManager.GetString("General_Systemparameter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to W.
-        /// </summary>
-        internal static string General_Watt {
-            get {
-                return ResourceManager.GetString("General_Watt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to W/m².
-        /// </summary>
-        internal static string General_WattProQm {
-            get {
-                return ResourceManager.GetString("General_WattProQm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to W/(m²K).
-        /// </summary>
-        internal static string General_WattProQmKelvin {
-            get {
-                return ResourceManager.GetString("General_WattProQmKelvin", resourceCulture);
             }
         }
         
@@ -3647,6 +3521,312 @@ namespace Europlan.Common {
         internal static string LicenseForm_Titel {
             get {
                 return ResourceManager.GetString("LicenseForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Annahmen:.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Annahmen {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Annahmen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anschlüsse.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Anschluesse {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Anschluesse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bauvorhaben.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Bauvorhaben {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Bauvorhaben", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bearbeiter: %BEARBEITER%.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Bearbeiter {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Bearbeiter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Belegefaktor Decke =.
+        /// </summary>
+        internal static string LL_QuickDimensioning_BelegefaktorDecke {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_BelegefaktorDecke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bemerkungen.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Bemerkungen {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Bemerkungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bemerkungen:.
+        /// </summary>
+        internal static string LL_QuickDimensioning_BemerkungenProjekt {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_BemerkungenProjekt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gesamt.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Gesamt {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Gesamt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HKr..
+        /// </summary>
+        internal static string LL_QuickDimensioning_Heizkreise {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Heizkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizlast (W).
+        /// </summary>
+        internal static string LL_QuickDimensioning_Heizlast {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Heizlast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kühllast (W).
+        /// </summary>
+        internal static string LL_QuickDimensioning_Kuehllast {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Kuehllast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nr.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Nr {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Nr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Produkt.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Produkt {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Produkt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Raum {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Raum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raumcontr..
+        /// </summary>
+        internal static string LL_QuickDimensioning_Raumcontroller {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Raumcontroller", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to %ANZAHL% * RC.
+        /// </summary>
+        internal static string LL_QuickDimensioning_RaumcontrollerRc {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_RaumcontrollerRc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to %ANZAHL% * RCF.
+        /// </summary>
+        internal static string LL_QuickDimensioning_RaumcontrollerRcf {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_RaumcontrollerRcf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RC-Funk.
+        /// </summary>
+        internal static string LL_QuickDimensioning_RaumControllerRCFunk {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_RaumControllerRCFunk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to %ANZAHL% * RC-Funk.
+        /// </summary>
+        internal static string LL_QuickDimensioning_RaumcontrollerRcRadio {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_RaumcontrollerRcRadio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to %ANZAHL% * RF.
+        /// </summary>
+        internal static string LL_QuickDimensioning_RaumcontrollerRf {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_RaumcontrollerRf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raumfl. (m²).
+        /// </summary>
+        internal static string LL_QuickDimensioning_Raumflaeche {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Raumflaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raumnr..
+        /// </summary>
+        internal static string LL_QuickDimensioning_Raumnr {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Raumnr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to T (°C).
+        /// </summary>
+        internal static string LL_QuickDimensioning_Raumtemperatur {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Raumtemperatur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raumtyp.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Raumtyp {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Raumtyp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raumtyp: Heizlast - Kühhlast.
+        /// </summary>
+        internal static string LL_QuickDimensioning_RaumtypHeizlastKuehllast {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_RaumtypHeizlastKuehllast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seite %SEITE%.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Seite {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Seite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stellm..
+        /// </summary>
+        internal static string LL_QuickDimensioning_Stellmotore {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Stellmotore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summe.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Summe {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Summe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summe %GESCHOSS%.
+        /// </summary>
+        internal static string LL_QuickDimensioning_SummeGeschoss {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_SummeGeschoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flächenaufstellung %PROJEKTNR%.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Titel {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verteileranschlussdaten %PROJEKTNR%.
+        /// </summary>
+        internal static string LL_QuickDimensioning_Verteileranschlussdaten {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_Verteileranschlussdaten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vorlauftemp. Heizen =.
+        /// </summary>
+        internal static string LL_QuickDimensioning_VorlauftempHeizen {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_VorlauftempHeizen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vorlauftemp. Kühlen =.
+        /// </summary>
+        internal static string LL_QuickDimensioning_VorlauftempKuehlen {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_VorlauftempKuehlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dem Verteiler sind zuviele Heizkreise zugeordnet.
+        /// </summary>
+        internal static string LL_QuickDimensioning_ZuVieleHeizkreise {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_ZuVieleHeizkreise", resourceCulture);
             }
         }
         
@@ -8422,6 +8602,132 @@ namespace Europlan.Common {
         internal static string SystemParametersPanel_Waermekapazitaet {
             get {
                 return ResourceManager.GetString("SystemParametersPanel_Waermekapazitaet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to °C.
+        /// </summary>
+        internal static string Unit_GradCelsius {
+            get {
+                return ResourceManager.GetString("Unit_GradCelsius", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to K.
+        /// </summary>
+        internal static string Unit_Kelvin {
+            get {
+                return ResourceManager.GetString("Unit_Kelvin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kg/m³.
+        /// </summary>
+        internal static string Unit_KgProKubikmeter {
+            get {
+                return ResourceManager.GetString("Unit_KgProKubikmeter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kJ/(kg*K).
+        /// </summary>
+        internal static string Unit_KjProKgKelvin {
+            get {
+                return ResourceManager.GetString("Unit_KjProKgKelvin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to l.
+        /// </summary>
+        internal static string Unit_Liter {
+            get {
+                return ResourceManager.GetString("Unit_Liter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to l/h.
+        /// </summary>
+        internal static string Unit_LiterProStunde {
+            get {
+                return ResourceManager.GetString("Unit_LiterProStunde", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mbar.
+        /// </summary>
+        internal static string Unit_Mbar {
+            get {
+                return ResourceManager.GetString("Unit_Mbar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to m.
+        /// </summary>
+        internal static string Unit_Meter {
+            get {
+                return ResourceManager.GetString("Unit_Meter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to %.
+        /// </summary>
+        internal static string Unit_Prozent {
+            get {
+                return ResourceManager.GetString("Unit_Prozent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to m²/s.
+        /// </summary>
+        internal static string Unit_QmProSek {
+            get {
+                return ResourceManager.GetString("Unit_QmProSek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to m².
+        /// </summary>
+        internal static string Unit_Quadratmeter {
+            get {
+                return ResourceManager.GetString("Unit_Quadratmeter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W.
+        /// </summary>
+        internal static string Unit_Watt {
+            get {
+                return ResourceManager.GetString("Unit_Watt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W/m².
+        /// </summary>
+        internal static string Unit_WattProQm {
+            get {
+                return ResourceManager.GetString("Unit_WattProQm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W/(m²K).
+        /// </summary>
+        internal static string Unit_WattProQmKelvin {
+            get {
+                return ResourceManager.GetString("Unit_WattProQmKelvin", resourceCulture);
             }
         }
         

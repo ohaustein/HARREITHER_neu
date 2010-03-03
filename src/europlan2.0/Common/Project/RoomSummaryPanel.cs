@@ -23,12 +23,12 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.label1.Text = EuroplanRes.General_Quadratmeter; //"m²";
-			this.label2.Text = EuroplanRes.General_GradCelsius; //"°C";
-			this.label3.Text = EuroplanRes.General_Watt; //"W";
-			this.label4.Text = EuroplanRes.General_Watt; //"W";
-			this.label5.Text = EuroplanRes.General_Watt; //"W";
-			this.label6.Text = EuroplanRes.General_Watt; //"W";
+			this.label1.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
+			this.label2.Text = EuroplanRes.Unit_GradCelsius; //"°C";
+			this.label3.Text = EuroplanRes.Unit_Watt; //"W";
+			this.label4.Text = EuroplanRes.Unit_Watt; //"W";
+			this.label5.Text = EuroplanRes.Unit_Watt; //"W";
+			this.label6.Text = EuroplanRes.Unit_Watt; //"W";
 
 			this.btnWhatIsNext.Text = EuroplanRes.General_WieGehtsWeiter; //"Wie geht\'s weiter?";
 			this.colEdit.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten";
@@ -58,9 +58,9 @@ namespace Europlan.Common {
 			if (this.Tag != null) {
 				this.room = this.Tag as Room;
 				this.lblRoomName.Text = this.room.Id + " - " + this.room.Name;
-				this.lblAreaValue.Text = this.room.Area.ToString("0.0") + EuroplanRes.General_Quadratmeter;
-				this.lblHeatLoadValue.Text = this.room.NormalizedHeatLoad.ToString("0") + EuroplanRes.General_Watt + " " + EuroplanRes.RoomSummaryPanel_Bereinigt;
-				this.lblCoolLoadValue.Text = this.room.NormalizedCoolLoad.ToString("0") + EuroplanRes.General_Watt + " " + EuroplanRes.RoomSummaryPanel_Bereinigt;
+				this.lblAreaValue.Text = this.room.Area.ToString("0.0") + EuroplanRes.Unit_Quadratmeter;
+				this.lblHeatLoadValue.Text = this.room.NormalizedHeatLoad.ToString("0") + EuroplanRes.Unit_Watt + " " + EuroplanRes.RoomSummaryPanel_Bereinigt;
+				this.lblCoolLoadValue.Text = this.room.NormalizedCoolLoad.ToString("0") + EuroplanRes.Unit_Watt + " " + EuroplanRes.RoomSummaryPanel_Bereinigt;
 				List<PlannedProduct> plannedProducts = new List<PlannedProduct>();
 				foreach (PlannedProduct plannedProduct in this.room.PlannedProducts) {
 					plannedProducts.Add(plannedProduct);

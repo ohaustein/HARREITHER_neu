@@ -972,18 +972,6 @@ klicken Sie in der Projekthierarchie auf den gewünschten Raum.</value>
   <data name="General_Geschosse" xml:space="preserve">
     <value>Geschoße</value>
   </data>
-  <data name="General_GradCelsius" xml:space="preserve">
-    <value>°C</value>
-  </data>
-  <data name="General_Kelvin" xml:space="preserve">
-    <value>K</value>
-  </data>
-  <data name="General_KgProKubikmeter" xml:space="preserve">
-    <value>kg/m³</value>
-  </data>
-  <data name="General_KjProKgKelvin" xml:space="preserve">
-    <value>kJ/(kg*K)</value>
-  </data>
   <data name="General_Kopieren" xml:space="preserve">
     <value>&amp;Kopieren</value>
   </data>
@@ -996,20 +984,8 @@ klicken Sie in der Projekthierarchie auf den gewünschten Raum.</value>
   <data name="General_LaeuftBereitsTitel" xml:space="preserve">
     <value>Europlan 2.0 läuft bereits auf diesem Rechner</value>
   </data>
-  <data name="General_Liter" xml:space="preserve">
-    <value>l</value>
-  </data>
-  <data name="General_LiterProStunde" xml:space="preserve">
-    <value>l/h</value>
-  </data>
   <data name="General_Materialbedarf" xml:space="preserve">
     <value>Materialbedarf</value>
-  </data>
-  <data name="General_Mbar" xml:space="preserve">
-    <value>mbar</value>
-  </data>
-  <data name="General_Meter" xml:space="preserve">
-    <value>m</value>
   </data>
   <data name="General_Minus" xml:space="preserve">
     <value>-</value>
@@ -1045,15 +1021,6 @@ Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
   <data name="General_Projekt" xml:space="preserve">
     <value>Projekt</value>
   </data>
-  <data name="General_Prozent" xml:space="preserve">
-    <value>%</value>
-  </data>
-  <data name="General_QmProSek" xml:space="preserve">
-    <value>m²/s</value>
-  </data>
-  <data name="General_Quadratmeter" xml:space="preserve">
-    <value>m²</value>
-  </data>
   <data name="General_Regelkreise" xml:space="preserve">
     <value>Regelkreise</value>
   </data>
@@ -1065,15 +1032,6 @@ Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
   </data>
   <data name="General_Systemparameter" xml:space="preserve">
     <value>Systemparameter</value>
-  </data>
-  <data name="General_Watt" xml:space="preserve">
-    <value>W</value>
-  </data>
-  <data name="General_WattProQm" xml:space="preserve">
-    <value>W/m²</value>
-  </data>
-  <data name="General_WattProQmKelvin" xml:space="preserve">
-    <value>W/(m²K)</value>
   </data>
   <data name="General_Weiter" xml:space="preserve">
     <value>Weiter</value>
@@ -1348,6 +1306,112 @@ Wollen Sie trotzdem fortfahren?</value>
   </data>
   <data name="LicenseForm_Titel" xml:space="preserve">
     <value>Lizenz</value>
+  </data>
+  <data name="LL_QuickDimensioning_Annahmen" xml:space="preserve">
+    <value>Annahmen:</value>
+  </data>
+  <data name="LL_QuickDimensioning_Anschluesse" xml:space="preserve">
+    <value>Anschlüsse</value>
+  </data>
+  <data name="LL_QuickDimensioning_Bauvorhaben" xml:space="preserve">
+    <value>Bauvorhaben</value>
+  </data>
+  <data name="LL_QuickDimensioning_Bearbeiter" xml:space="preserve">
+    <value>Bearbeiter: %BEARBEITER%</value>
+    <comment>StrSubst$("LL_QuickDimensioning_Bearbeiter", "%BEARBEITER%", @ProjectEditor)</comment>
+  </data>
+  <data name="LL_QuickDimensioning_BelegefaktorDecke" xml:space="preserve">
+    <value>Belegefaktor Decke =</value>
+  </data>
+  <data name="LL_QuickDimensioning_Bemerkungen" xml:space="preserve">
+    <value>Bemerkungen</value>
+  </data>
+  <data name="LL_QuickDimensioning_BemerkungenProjekt" xml:space="preserve">
+    <value>Bemerkungen:</value>
+  </data>
+  <data name="LL_QuickDimensioning_Gesamt" xml:space="preserve">
+    <value>Gesamt</value>
+  </data>
+  <data name="LL_QuickDimensioning_Heizkreise" xml:space="preserve">
+    <value>HKr.</value>
+  </data>
+  <data name="LL_QuickDimensioning_Heizlast" xml:space="preserve">
+    <value>Heizlast (W)</value>
+  </data>
+  <data name="LL_QuickDimensioning_Kuehllast" xml:space="preserve">
+    <value>Kühllast (W)</value>
+  </data>
+  <data name="LL_QuickDimensioning_Nr" xml:space="preserve">
+    <value>Nr</value>
+  </data>
+  <data name="LL_QuickDimensioning_Produkt" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="LL_QuickDimensioning_Raum" xml:space="preserve">
+    <value>Raum</value>
+  </data>
+  <data name="LL_QuickDimensioning_Raumcontroller" xml:space="preserve">
+    <value>Raumcontr.</value>
+  </data>
+  <data name="LL_QuickDimensioning_RaumcontrollerRc" xml:space="preserve">
+    <value>%ANZAHL% * RC</value>
+  </data>
+  <data name="LL_QuickDimensioning_RaumcontrollerRcf" xml:space="preserve">
+    <value>%ANZAHL% * RCF</value>
+  </data>
+  <data name="LL_QuickDimensioning_RaumControllerRCFunk" xml:space="preserve">
+    <value>RC-Funk</value>
+  </data>
+  <data name="LL_QuickDimensioning_RaumcontrollerRcRadio" xml:space="preserve">
+    <value>%ANZAHL% * RC-Funk</value>
+  </data>
+  <data name="LL_QuickDimensioning_RaumcontrollerRf" xml:space="preserve">
+    <value>%ANZAHL% * RF</value>
+  </data>
+  <data name="LL_QuickDimensioning_Raumflaeche" xml:space="preserve">
+    <value>Raumfl. (m²)</value>
+  </data>
+  <data name="LL_QuickDimensioning_Raumnr" xml:space="preserve">
+    <value>Raumnr.</value>
+  </data>
+  <data name="LL_QuickDimensioning_Raumtemperatur" xml:space="preserve">
+    <value>T (°C)</value>
+  </data>
+  <data name="LL_QuickDimensioning_Raumtyp" xml:space="preserve">
+    <value>Raumtyp</value>
+  </data>
+  <data name="LL_QuickDimensioning_RaumtypHeizlastKuehllast" xml:space="preserve">
+    <value>Raumtyp: Heizlast - Kühhlast</value>
+  </data>
+  <data name="LL_QuickDimensioning_Seite" xml:space="preserve">
+    <value>Seite %SEITE%</value>
+    <comment>StrSubst$("LL_QuickDimensioning_Seite", "%SEITE%", Page$())</comment>
+  </data>
+  <data name="LL_QuickDimensioning_Stellmotore" xml:space="preserve">
+    <value>Stellm.</value>
+  </data>
+  <data name="LL_QuickDimensioning_Summe" xml:space="preserve">
+    <value>Summe</value>
+  </data>
+  <data name="LL_QuickDimensioning_SummeGeschoss" xml:space="preserve">
+    <value>Summe %GESCHOSS%</value>
+    <comment>StrSubst$("LL_QuickDimensioning_SummeGeschoss", "%GESCHOSS%", QuickDimensioningReportWrapper.FloorName)</comment>
+  </data>
+  <data name="LL_QuickDimensioning_Titel" xml:space="preserve">
+    <value>Flächenaufstellung %PROJEKTNR%</value>
+  </data>
+  <data name="LL_QuickDimensioning_Verteileranschlussdaten" xml:space="preserve">
+    <value>Verteileranschlussdaten %PROJEKTNR%</value>
+    <comment>StrSubst$("LL_QuickDimensioning_Verteileranschlussdaten", "%PROJEKTNR%", @ProjectNumber)</comment>
+  </data>
+  <data name="LL_QuickDimensioning_VorlauftempHeizen" xml:space="preserve">
+    <value>Vorlauftemp. Heizen =</value>
+  </data>
+  <data name="LL_QuickDimensioning_VorlauftempKuehlen" xml:space="preserve">
+    <value>Vorlauftemp. Kühlen =</value>
+  </data>
+  <data name="LL_QuickDimensioning_ZuVieleHeizkreise" xml:space="preserve">
+    <value>Dem Verteiler sind zuviele Heizkreise zugeordnet</value>
   </data>
   <data name="MainForm_Aktualisieren" xml:space="preserve">
     <value>Auf Aktualisierungen prüfen...</value>
@@ -3003,6 +3067,48 @@ fläche
   </data>
   <data name="SystemParametersPanel_Waermekapazitaet" xml:space="preserve">
     <value>spezifische Wärmekapazität:</value>
+  </data>
+  <data name="Unit_GradCelsius" xml:space="preserve">
+    <value>°C</value>
+  </data>
+  <data name="Unit_Kelvin" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="Unit_KgProKubikmeter" xml:space="preserve">
+    <value>kg/m³</value>
+  </data>
+  <data name="Unit_KjProKgKelvin" xml:space="preserve">
+    <value>kJ/(kg*K)</value>
+  </data>
+  <data name="Unit_Liter" xml:space="preserve">
+    <value>l</value>
+  </data>
+  <data name="Unit_LiterProStunde" xml:space="preserve">
+    <value>l/h</value>
+  </data>
+  <data name="Unit_Mbar" xml:space="preserve">
+    <value>mbar</value>
+  </data>
+  <data name="Unit_Meter" xml:space="preserve">
+    <value>m</value>
+  </data>
+  <data name="Unit_Prozent" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="Unit_QmProSek" xml:space="preserve">
+    <value>m²/s</value>
+  </data>
+  <data name="Unit_Quadratmeter" xml:space="preserve">
+    <value>m²</value>
+  </data>
+  <data name="Unit_Watt" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="Unit_WattProQm" xml:space="preserve">
+    <value>W/m²</value>
+  </data>
+  <data name="Unit_WattProQmKelvin" xml:space="preserve">
+    <value>W/(m²K)</value>
   </data>
   <data name="WarningsAndErrorsForm_Hinweis" xml:space="preserve">
     <value>%SYSTEM% in %RAUMID% (%RAUMNAME%): %HINWEIS%</value>

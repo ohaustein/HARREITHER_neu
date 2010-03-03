@@ -48,10 +48,10 @@ namespace Europlan.Common {
 					heatLoadTotal += pipe.HeatLoadTotal;
 					coolLoadTotal += pipe.CoolLoadTotal;
 				}
-				lblConnenctionPipeArea.Text = Math.Round(areaTotal, 2) + EuroplanRes.General_Quadratmeter; //"m²";
-				lblProductArea.Text = product.Product.PlannedNetArea + EuroplanRes.General_Quadratmeter; //"m²";
-				lblHeatLoad.Text = Math.Round(heatLoadTotal, 0) + EuroplanRes.General_Watt; //"W";
-				lblCoolLoad.Text = Math.Round(coolLoadTotal, 0) + EuroplanRes.General_Watt; //"W";
+				lblConnenctionPipeArea.Text = Math.Round(areaTotal, 2) + EuroplanRes.Unit_Quadratmeter; //"m²";
+				lblProductArea.Text = product.Product.PlannedNetArea + EuroplanRes.Unit_Quadratmeter; //"m²";
+				lblHeatLoad.Text = Math.Round(heatLoadTotal, 0) + EuroplanRes.Unit_Watt; //"W";
+				lblCoolLoad.Text = Math.Round(coolLoadTotal, 0) + EuroplanRes.Unit_Watt; //"W";
 			}
 		}
 
