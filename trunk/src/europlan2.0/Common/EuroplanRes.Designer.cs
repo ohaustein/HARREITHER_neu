@@ -3615,6 +3615,25 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Die Flächenaufstellung ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.
+        ///Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben..
+        /// </summary>
+        internal static string LL_QuickDimensioning_HinweisText {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_HinweisText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hinweis.
+        /// </summary>
+        internal static string LL_QuickDimensioning_HinweisTitel {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_HinweisTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kühllast (W).
         /// </summary>
         internal static string LL_QuickDimensioning_Kuehllast {
@@ -3678,20 +3697,11 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RC-Funk.
-        /// </summary>
-        internal static string LL_QuickDimensioning_RaumControllerRCFunk {
-            get {
-                return ResourceManager.GetString("LL_QuickDimensioning_RaumControllerRCFunk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to %ANZAHL% * RC-Funk.
         /// </summary>
-        internal static string LL_QuickDimensioning_RaumcontrollerRcRadio {
+        internal static string LL_QuickDimensioning_RaumcontrollerRcFunk {
             get {
-                return ResourceManager.GetString("LL_QuickDimensioning_RaumcontrollerRcRadio", resourceCulture);
+                return ResourceManager.GetString("LL_QuickDimensioning_RaumcontrollerRcFunk", resourceCulture);
             }
         }
         
@@ -3746,6 +3756,15 @@ namespace Europlan.Common {
         internal static string LL_QuickDimensioning_RaumtypHeizlastKuehllast {
             get {
                 return ResourceManager.GetString("LL_QuickDimensioning_RaumtypHeizlastKuehllast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RC-Funk.
+        /// </summary>
+        internal static string LL_QuickDimensioning_RcFunk {
+            get {
+                return ResourceManager.GetString("LL_QuickDimensioning_RcFunk", resourceCulture);
             }
         }
         

@@ -1338,6 +1338,13 @@ Wollen Sie trotzdem fortfahren?</value>
   <data name="LL_QuickDimensioning_Heizlast" xml:space="preserve">
     <value>Heizlast (W)</value>
   </data>
+  <data name="LL_QuickDimensioning_HinweisText" xml:space="preserve">
+    <value>Die Flächenaufstellung ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.
+Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</value>
+  </data>
+  <data name="LL_QuickDimensioning_HinweisTitel" xml:space="preserve">
+    <value>Hinweis</value>
+  </data>
   <data name="LL_QuickDimensioning_Kuehllast" xml:space="preserve">
     <value>Kühllast (W)</value>
   </data>
@@ -1359,10 +1366,7 @@ Wollen Sie trotzdem fortfahren?</value>
   <data name="LL_QuickDimensioning_RaumcontrollerRcf" xml:space="preserve">
     <value>%ANZAHL% * RCF</value>
   </data>
-  <data name="LL_QuickDimensioning_RaumControllerRCFunk" xml:space="preserve">
-    <value>RC-Funk</value>
-  </data>
-  <data name="LL_QuickDimensioning_RaumcontrollerRcRadio" xml:space="preserve">
+  <data name="LL_QuickDimensioning_RaumcontrollerRcFunk" xml:space="preserve">
     <value>%ANZAHL% * RC-Funk</value>
   </data>
   <data name="LL_QuickDimensioning_RaumcontrollerRf" xml:space="preserve">
@@ -1382,6 +1386,9 @@ Wollen Sie trotzdem fortfahren?</value>
   </data>
   <data name="LL_QuickDimensioning_RaumtypHeizlastKuehllast" xml:space="preserve">
     <value>Raumtyp: Heizlast - Kühhlast</value>
+  </data>
+  <data name="LL_QuickDimensioning_RcFunk" xml:space="preserve">
+    <value>RC-Funk</value>
   </data>
   <data name="LL_QuickDimensioning_Seite" xml:space="preserve">
     <value>Seite %SEITE%</value>
