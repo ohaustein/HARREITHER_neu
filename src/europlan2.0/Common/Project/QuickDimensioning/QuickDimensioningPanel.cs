@@ -9,6 +9,8 @@ using System.Globalization;
 using System.Reflection;
 using System.Threading;
 using System.IO;
+using System.Resources;
+using System.Collections;
 
 namespace Europlan.Common {
 	public partial class QuickDimensioningPanel : UserControl, IEditorUserControl {
@@ -1197,6 +1199,20 @@ namespace Europlan.Common {
 				}
 
 				listLabel1.Variables.Add("@FileName", Path.GetFileName(Project.Instance.ProjectFileName));
+
+				listLabel1.Dictionary.Clear();
+				ResourceSet resourceSet = EuroplanRes.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentCulture, false, true);
+				if (resourceSet != null) {
+					IDictionaryEnumerator enumerator = resourceSet.GetEnumerator();
+					while (enumerator.MoveNext()) {
+						if (enumerator.Key is string) {
+							string key = enumerator.Key as string;
+							if (key.StartsWith("LL_") || key.StartsWith("Unit_")) {
+								listLabel1.Dictionary.Fields.Add(key, (string)enumerator.Value);
+							}
+						}
+					}
+				}
 
 				// ---------------------------------------------------------------------------------------------------
 				// RoomControllers are now aggregated in the report itself

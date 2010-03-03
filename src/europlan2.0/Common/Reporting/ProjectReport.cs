@@ -7,6 +7,10 @@ using System.Text;
 using System.Windows.Forms;
 using Star.SettingsXpress;
 using System.IO;
+using System.Resources;
+using System.Reflection;
+using System.Threading;
+using System.Collections;
 
 namespace Europlan.Common {
 	public partial class ProjectReport : Form {
@@ -307,6 +311,21 @@ namespace Europlan.Common {
 				listLabel1.Variables.Add("@InternalLicense", true);
 			}
 
+
+
+			listLabel1.Dictionary.Clear();
+			ResourceSet resourceSet = EuroplanRes.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentCulture, false, true);
+			if (resourceSet != null) {
+			IDictionaryEnumerator enumerator = resourceSet.GetEnumerator();
+				while (enumerator.MoveNext()) {
+					if (enumerator.Key is string) {
+						string key = enumerator.Key as string;
+						if (key.StartsWith("LL_") || key.StartsWith("Unit_")) {
+							listLabel1.Dictionary.Fields.Add(key, (string)enumerator.Value);
+						}
+					}
+				}
+			}
 
 #if DEBUG
 			if (MessageBox.Show("Designer?", "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
