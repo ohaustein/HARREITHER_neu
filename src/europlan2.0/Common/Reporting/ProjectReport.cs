@@ -93,6 +93,7 @@ namespace Europlan.Common {
 			List<HithermCompactWrapper> hithermCompactAuslegungWrapper = new List<HithermCompactWrapper>();
 			List<ModulBodenWrapper> modulBodenAuslegungWrapper = new List<ModulBodenWrapper>();
 			List<ModulDeckeWrapper> modulDeckeAuslegungWrapper = new List<ModulDeckeWrapper>();
+			List<ModulDeckeVerlegeDatenWrapper> modulDeckeVerlegeDatenWrapper = new List<ModulDeckeVerlegeDatenWrapper>();
 			List<BilanzWrapper> eurovalBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> ecothermBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> hithermBilanzWrapper = new List<BilanzWrapper>();
@@ -146,6 +147,7 @@ namespace Europlan.Common {
 
 			if (reportOptions.Verlegedaten) {
 				verlegedatenCircuitWrapper = GetVerlegedatenCircuitWrapper();
+				modulDeckeVerlegeDatenWrapper = GetModulDeckeVerlegeDatenWrapper();
 			}
 
 			if (reportOptions.Konstruktionen) {
@@ -177,6 +179,7 @@ namespace Europlan.Common {
 			DataTable hithermCompactAuslegung = ReportHelper.ListToDataTable<HithermCompactWrapper>(hithermCompactAuslegungWrapper);
 			DataTable modulBodenAuslegung = ReportHelper.ListToDataTable<ModulBodenWrapper>(modulBodenAuslegungWrapper);
 			DataTable modulDeckeAuslegung = ReportHelper.ListToDataTable<ModulDeckeWrapper>(modulDeckeAuslegungWrapper);
+			DataTable modulDeckeVerlegeDaten = ReportHelper.ListToDataTable<ModulDeckeVerlegeDatenWrapper>(modulDeckeVerlegeDatenWrapper);
 			DataTable eurovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(eurovalBilanzWrapper);
 			DataTable ecothermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(ecothermBilanzWrapper);
 			DataTable hithermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(hithermBilanzWrapper);
@@ -208,6 +211,7 @@ namespace Europlan.Common {
 			hithermCompactAuslegung.TableName = "HithermCompactAuslegung";
 			modulBodenAuslegung.TableName = "ModulBodenAuslegung";
 			modulDeckeAuslegung.TableName = "ModulDeckeAuslegung";
+			modulDeckeVerlegeDaten.TableName = "ModulDeckeVerlegeDaten";
 			eurovalBilanz.TableName = "EurovalBilanz";
 			ecothermBilanz.TableName = "EcothermBilanz";
 			hithermBilanz.TableName = "HithermBilanz";
@@ -239,6 +243,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(hithermCompactAuslegung);
 			reportData.Tables.Add(modulBodenAuslegung);
 			reportData.Tables.Add(modulDeckeAuslegung);
+			reportData.Tables.Add(modulDeckeVerlegeDaten);
 			reportData.Tables.Add(eurovalBilanz);
 			reportData.Tables.Add(ecothermBilanz);
 			reportData.Tables.Add(hithermBilanz);
@@ -3460,6 +3465,77 @@ namespace Europlan.Common {
 									}
 								}
 								wrapperList.Add(wrapper);
+							}
+						}
+					}
+				}
+			}
+
+			return wrapperList;
+		}
+
+		public List<ModulDeckeVerlegeDatenWrapper> GetModulDeckeVerlegeDatenWrapper() {
+			List<ModulDeckeVerlegeDatenWrapper> wrapperList = new List<ModulDeckeVerlegeDatenWrapper>();
+
+			ModulKlimaDeckeProduct p = null;
+			bool isProductPlanned = false;
+			int prevCircuit;
+			int prevTeilFlaeche;
+			ModulDeckeVerlegeDatenWrapper wrapper;
+			int subAreaCount;
+			int rowCount;
+
+			foreach (Floor floor in project.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						if (pp.Product is ModulKlimaDeckeProduct) {
+							p = pp.Product as ModulKlimaDeckeProduct;
+							prevCircuit = 0;
+							foreach (ModulDeckeCircuit c in p.PlannedCircuits) {
+								subAreaCount = 0;
+								prevTeilFlaeche = 0;
+								foreach (ModulDeckeSubArea a in c.SubAreas) {
+									subAreaCount++;
+									rowCount = 0;
+									foreach (KlimaFlaechenList l in a.Rows) {
+										rowCount++;
+										wrapper = new ModulDeckeVerlegeDatenWrapper();
+										wrapper.FloorId = floor.Id;
+										wrapper.FloorName = floor.Name;
+										if (prevCircuit == 0 && prevTeilFlaeche == 0) {
+											wrapper.RoomId = room.Id;
+											wrapper.RoomName = room.Name;
+											wrapper.TeilSystem = pp.InternalName;
+											wrapper.Circuit = c.NrOfCircuit + 1;
+											prevCircuit = wrapper.Circuit;
+											wrapper.TeilFlaeche = subAreaCount;
+											prevTeilFlaeche = wrapper.TeilFlaeche;
+										} else {
+											wrapper.RoomId = "";
+											wrapper.RoomName = "";
+											wrapper.TeilSystem = "";
+											if (prevCircuit != c.NrOfCircuit + 1) {
+												wrapper.Circuit = c.NrOfCircuit + 1;
+												prevCircuit = wrapper.Circuit;
+											} else {
+												wrapper.Circuit = 0;
+											}
+											if (prevTeilFlaeche != subAreaCount) {
+												wrapper.TeilFlaeche = subAreaCount;
+												prevTeilFlaeche = wrapper.TeilFlaeche;
+											} else {
+												wrapper.TeilFlaeche = 0;
+											}
+										}
+										wrapper.Reihe = rowCount;
+
+										foreach (KlimaFlaechenModul register in l.List) {
+											wrapper.Modules.Add(register);
+										}
+
+										wrapperList.Add(wrapper);
+									}
+								}
 							}
 						}
 					}
