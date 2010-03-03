@@ -42,9 +42,9 @@ namespace Europlan.Common {
 				if (p != pipe)
 					usedArea += p.AreaTotal;
 			}
-			this.lblHeatArea.Text = pipe.ConnectionThrough.Product.PlannedNetArea + EuroplanRes.General_Quadratmeter;
+			this.lblHeatArea.Text = pipe.ConnectionThrough.Product.PlannedNetArea + EuroplanRes.Unit_Quadratmeter;
 			availableArea = pipe.ConnectionThrough.Product.PlannedNetArea - usedArea;
-			this.lblAvailableArea.Text = availableArea + EuroplanRes.General_Quadratmeter;
+			this.lblAvailableArea.Text = availableArea + EuroplanRes.Unit_Quadratmeter;
 		}
 
 		private void SetLanguage() {
@@ -54,15 +54,15 @@ namespace Europlan.Common {
 			this.label11.Text = EuroplanRes.LengthAssistent_FlaecheFbh; //"Fläche der Fußbodenheizung ohne unbeheizte Flächen:";
 			this.btnRestAreaRuecklauf.Text = EuroplanRes.LengthAssistent_RestlicheFlaeche; //"Restliche Fläche";
 			this.btnAvailableAreaRuecklauf.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaeche; //"Verfügbare Fläche";
-			this.label7.Text = EuroplanRes.General_Quadratmeter; //"m²";
+			this.label7.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
 			this.label8.Text = EuroplanRes.LengthAssistent_Flaeche; //"Fläche";
-			this.label9.Text = EuroplanRes.General_Meter; //"m";
+			this.label9.Text = EuroplanRes.Unit_Meter; //"m";
 			this.label10.Text = EuroplanRes.LengthAssistent_LaengeVorlauf; //"Rohrlänge Vorlauf:";
 			this.btnRestAreaVorlauf.Text = EuroplanRes.LengthAssistent_RestlicheFlaeche; //"Restliche Fläche";
 			this.btnAvailableAreaVorlauf.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaeche; //"Verfügbare Fläche";
-			this.label6.Text = EuroplanRes.General_Quadratmeter; //"m²";
+			this.label6.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
 			this.label5.Text = EuroplanRes.LengthAssistent_Flaeche; //"Fläche";
-			this.label4.Text = EuroplanRes.General_Meter; //"m";
+			this.label4.Text = EuroplanRes.Unit_Meter; //"m";
 			this.label3.Text = EuroplanRes.LengthAssistent_LaengeVorlauf; //"Rohrlänge Vorlauf:";
 			this.label2.Text = EuroplanRes.LengthAssistent_Verlegeart; //"Verlegeart:";
 			this.Text = EuroplanRes.LengthAssistent_Laengenassistent; //"Längenassistent";

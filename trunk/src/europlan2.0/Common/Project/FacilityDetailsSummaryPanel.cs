@@ -22,11 +22,11 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.label4.Text = EuroplanRes.General_GradCelsius;
-			this.label5.Text = EuroplanRes.General_Prozent;
-			this.label13.Text = EuroplanRes.General_GradCelsius;
-			this.label11.Text = EuroplanRes.General_GradCelsius;
-			this.label7.Text = EuroplanRes.General_GradCelsius;
+			this.label4.Text = EuroplanRes.Unit_GradCelsius;
+			this.label5.Text = EuroplanRes.Unit_Prozent;
+			this.label13.Text = EuroplanRes.Unit_GradCelsius;
+			this.label11.Text = EuroplanRes.Unit_GradCelsius;
+			this.label7.Text = EuroplanRes.Unit_GradCelsius;
 			this.btnNext.Text = EuroplanRes.General_Weiter;
 
 			this.label1.Text = EuroplanRes.FacilityDetailsSummaryPanel_Anlagedaten; //"Anlagedaten";

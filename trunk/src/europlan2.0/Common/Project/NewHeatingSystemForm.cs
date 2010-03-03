@@ -14,12 +14,6 @@ namespace Europlan.Common {
 
 			this.SetLanguage();
 
-			// TODO: enable again
-			//foreach (Type t in this.GetType().Assembly.GetTypes()) {
-			//    if (t.IsSubclassOf(typeof(Product))) {
-			//        this.lstHeatingSystems.Items.Add(new HeatingSystemItem(t));
-			//    }
-			//}
 			Licensing.License license = Licensing.LicenseManager.Instance.License;
 			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
 				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(EurovalProduct)));

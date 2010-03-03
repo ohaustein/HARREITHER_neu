@@ -70,19 +70,19 @@ namespace Europlan.Common {
 			this.cmbRimType.Items.Clear();
 			this.cmbCircuits.Items.Clear();
 
-			this.lblAreaUnheated.Text = EuroplanRes.General_Quadratmeter; //"m²";
-			this.lblAreaReducedUnit.Text = EuroplanRes.General_Quadratmeter; //"m²";
-			this.lblAreaUnit.Text = EuroplanRes.General_Quadratmeter; //"m²";
-			this.lblAreaPercentage.Text = EuroplanRes.General_Prozent; //"%";
-			this.lblCoolLoadPercentage.Text = EuroplanRes.General_Prozent; //"%";
-			this.lblHeatLoadPercentage.Text = EuroplanRes.General_Prozent; //"%";
-			this.lblCoolLoadUnit.Text = EuroplanRes.General_Watt; //"W";
-			this.lblHeatLoadUnit.Text = EuroplanRes.General_Watt; //"W";
-			this.label27.Text = EuroplanRes.General_GradCelsius; //"°C";
-			this.label7.Text = EuroplanRes.General_GradCelsius; //"°C";
-			this.label9.Text = EuroplanRes.General_Meter; //"m";
+			this.lblAreaUnheated.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
+			this.lblAreaReducedUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
+			this.lblAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
+			this.lblAreaPercentage.Text = EuroplanRes.Unit_Prozent; //"%";
+			this.lblCoolLoadPercentage.Text = EuroplanRes.Unit_Prozent; //"%";
+			this.lblHeatLoadPercentage.Text = EuroplanRes.Unit_Prozent; //"%";
+			this.lblCoolLoadUnit.Text = EuroplanRes.Unit_Watt; //"W";
+			this.lblHeatLoadUnit.Text = EuroplanRes.Unit_Watt; //"W";
+			this.label27.Text = EuroplanRes.Unit_GradCelsius; //"°C";
+			this.label7.Text = EuroplanRes.Unit_GradCelsius; //"°C";
+			this.label9.Text = EuroplanRes.Unit_Meter; //"m";
 
-			string wattUnit = EuroplanRes.General_Watt;
+			string wattUnit = EuroplanRes.Unit_Watt;
 			this.lblCoolLoadTotal.Text = "(0 " + wattUnit + ")";
 			this.lblHeatLoadTotal.Text = "(0 " + wattUnit + ")";
 
@@ -485,8 +485,8 @@ namespace Europlan.Common {
 					this.chkCoverCoolLoad.Enabled = false;
 					this.chkCoverCoolLoad.Checked = false;
 				}
-				this.lblHeatLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedHeatLoad.ToString() + " " + EuroplanRes.General_Watt + ")";
-				this.lblCoolLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedCoolLoad.ToString() + " " + EuroplanRes.General_Watt + ")";
+				this.lblHeatLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedHeatLoad.ToString() + " " + EuroplanRes.Unit_Watt + ")";
+				this.lblCoolLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedCoolLoad.ToString() + " " + EuroplanRes.Unit_Watt + ")";
 				float plannedArea = (float)(this.product.PlannedArea.HasValue ? Math.Round(this.product.PlannedArea.Value, 2) : 0);
 				if ((skipFields & FieldEnum.AREA) == FieldEnum.NONE) {
 					this.numArea.Value = Math.Round((decimal)plannedArea, 2);
