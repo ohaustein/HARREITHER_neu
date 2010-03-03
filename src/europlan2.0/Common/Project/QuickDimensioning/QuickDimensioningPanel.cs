@@ -126,7 +126,7 @@ namespace Europlan.Common {
 			this.lblTemp1.Text = EuroplanRes.QuickDimensioningPanel_VorlauftemperaturHeizen;//"Vorlauftemperatur\r\n(Heizen)";
 			this.lblEuroval.Text = EuroplanRes.QuickDimensioningPanel_Euroval;//"Euroval® Fußbodenheizung";
 			this.btnRevert.Text = EuroplanRes.QuickDimensioningPanel_Zuruecksetzen;//"Flächenaufstellung zurücksetzen";
-			this.lblAllocation2.Text = EuroplanRes.General_Prozent;//"%";
+			this.lblAllocation2.Text = EuroplanRes.Unit_Prozent;//"%";
 			this.lblAllocation.Text = EuroplanRes.QuickDimensioningPanel_Belegefaktor;//"Belegefaktor";
 			this.lblHeat.Text = EuroplanRes.QuickDimensioningPanel_Heizen;//"Heizen";
 			this.lblCool.Text = EuroplanRes.QuickDimensioningPanel_Kuehlen;//"Kühlen";
@@ -1185,7 +1185,7 @@ namespace Europlan.Common {
 				foreach (RoomType roomType in Project.Instance.Config.RoomTypes) {
 					foreach (QuickDimensioningReportWrapper wrapper in reportWrapper) {
 						if (wrapper.RoomType == roomType.Name) {
-							usedRoomTypes += roomType.Name + ": " + roomType.HeatLoadPerSquareMeter + EuroplanRes.General_WattProQm + " - " + roomType.CoolLoadPerSquareMeter + EuroplanRes.General_WattProQm + "\n";
+							usedRoomTypes += roomType.Name + ": " + roomType.HeatLoadPerSquareMeter + EuroplanRes.Unit_WattProQm + " - " + roomType.CoolLoadPerSquareMeter + EuroplanRes.Unit_WattProQm + "\n";
 							break;
 						}
 					}
@@ -1208,7 +1208,7 @@ namespace Europlan.Common {
 						if (enumerator.Key is string) {
 							string key = enumerator.Key as string;
 							if (key.StartsWith("LL_") || key.StartsWith("Unit_")) {
-								listLabel1.Dictionary.Fields.Add(key, (string)enumerator.Value);
+								listLabel1.Variables.Add(key, (string)enumerator.Value);
 							}
 						}
 					}
