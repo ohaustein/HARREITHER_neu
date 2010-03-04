@@ -18,13 +18,11 @@ namespace Europlan.Common {
 		}
 
 		public string Name {
-			get { return this.name; }
-			set { this.name = value; }
+			get { return EuroplanRes.ResourceManager.GetString(this.name); }
 		}
 
 		public string FullName {
-			get { return this.fullName; }
-			set { this.fullName = value; }
+			get { return EuroplanRes.ResourceManager.GetString(this.fullName); }
 		}
 	}
 }
