@@ -1438,17 +1438,20 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   <data name="LL_Report_AufgenommeneLeistung" xml:space="preserve">
     <value>Aufgenommene Leistung</value>
   </data>
-  <data name="LL_Report_AuslegungFussboden" xml:space="preserve">
-    <value>Auslegung Fußbodenheizung</value>
-  </data>
-  <data name="LL_Report_AuslegungFussbodenGeschoss" xml:space="preserve">
+  <data name="LL_Report_AuslegungEcothermGeschoss" xml:space="preserve">
     <value>Auslegung Euroval® Fußbodenheizung - %GESCHOSS%</value>
   </data>
-  <data name="LL_Report_AuslegungFussbodenGeschossHeiz" xml:space="preserve">
+  <data name="LL_Report_AuslegungEurovalGeschoss" xml:space="preserve">
+    <value>Auslegung Euroval® Fußbodenheizung - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_AuslegungEurovalGeschossHeiz" xml:space="preserve">
     <value>Auslegung Euroval® Fußbodenheizung - %GESCHOSS% (Heizbetrieb)</value>
   </data>
-  <data name="LL_Report_AuslegungFussbodenGeschossKuehl" xml:space="preserve">
+  <data name="LL_Report_AuslegungEurovalGeschossKuehl" xml:space="preserve">
     <value>Auslegung Euroval® Fußbodenheizung - %GESCHOSS% (Kühlbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungFussboden" xml:space="preserve">
+    <value>Auslegung Fußbodenheizung</value>
   </data>
   <data name="LL_Report_Bauvorhaben" xml:space="preserve">
     <value>Bauvorhaben</value>
@@ -1464,6 +1467,9 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   </data>
   <data name="LL_Report_Bezeichnung" xml:space="preserve">
     <value>Bezeichnung</value>
+  </data>
+  <data name="LL_Report_BilanzEcotherm" xml:space="preserve">
+    <value>Bilanz Ecotherm® Fußbodenheizung</value>
   </data>
   <data name="LL_Report_BilanzEuroval" xml:space="preserve">
     <value>Bilanz Euroval® Fußbodenheizung</value>
@@ -2432,6 +2438,12 @@ recht</value>
   </data>
   <data name="Product_HithermCompactName" xml:space="preserve">
     <value>Hitherm® Compact</value>
+  </data>
+  <data name="Product_HithermCompactRoofFullName" xml:space="preserve">
+    <value>Hitherm® Compact Dachschräge</value>
+  </data>
+  <data name="Product_HithermCompactRoofName" xml:space="preserve">
+    <value>Hitherm® Compact Dachschräge</value>
   </data>
   <data name="Product_HithermFullName" xml:space="preserve">
     <value>Hitherm® Klimawand</value>
