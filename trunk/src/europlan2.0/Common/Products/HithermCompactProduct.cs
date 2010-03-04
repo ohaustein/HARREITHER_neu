@@ -9,7 +9,7 @@ using Europlan.Licensing;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Hitherm® Compact", "Hitherm® Compact Klimawand")]
+	[ProductName("Product_HithermCompactName", "Product_HithermCompactFullName")]
 	public class HithermCompactProduct : Product {
 
 		// quick dimensioning

@@ -8,7 +8,7 @@ using Europlan.Licensing;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Modul Klima-Decke")]
+	[ProductName("Product_ModulKlimDeckeName", "Product_ModulKlimDeckeFullName")]
 	public class ModulKlimaDeckeProduct : Product {
 
 		public class ModulCeilingConstructionEnumConverter : System.ComponentModel.TypeConverter {

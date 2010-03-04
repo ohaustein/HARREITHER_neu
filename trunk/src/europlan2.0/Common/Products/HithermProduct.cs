@@ -10,7 +10,7 @@ using System.Threading;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Hitherm®", "Hitherm® Klimawand")]
+	[ProductName("Product_HithermName", "Product_HithermFullName")]
 	public class HithermProduct : Product {
 
 		// quick dimensioning

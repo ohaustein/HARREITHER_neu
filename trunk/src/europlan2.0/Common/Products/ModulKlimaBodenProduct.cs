@@ -8,7 +8,7 @@ using Europlan.Licensing;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Modul Klima-Boden")]
+	[ProductName("Product_ModulKlimBodenName", "Product_ModulKlimBodenFullName")]
 	public class ModulKlimaBodenProduct : Product {
 
 		// quick dimensioning
