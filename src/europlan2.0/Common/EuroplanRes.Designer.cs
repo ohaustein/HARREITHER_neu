@@ -3904,38 +3904,47 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Auslegung Fußbodenheizung.
+        ///   Looks up a localized string similar to Auslegung Euroval® Fußbodenheizung - %GESCHOSS%.
         /// </summary>
-        internal static string LL_Report_AuslegungFussboden {
+        internal static string LL_Report_AuslegungEcothermGeschoss {
             get {
-                return ResourceManager.GetString("LL_Report_AuslegungFussboden", resourceCulture);
+                return ResourceManager.GetString("LL_Report_AuslegungEcothermGeschoss", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Auslegung Euroval® Fußbodenheizung - %GESCHOSS%.
         /// </summary>
-        internal static string LL_Report_AuslegungFussbodenGeschoss {
+        internal static string LL_Report_AuslegungEurovalGeschoss {
             get {
-                return ResourceManager.GetString("LL_Report_AuslegungFussbodenGeschoss", resourceCulture);
+                return ResourceManager.GetString("LL_Report_AuslegungEurovalGeschoss", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Auslegung Euroval® Fußbodenheizung - %GESCHOSS% (Heizbetrieb).
         /// </summary>
-        internal static string LL_Report_AuslegungFussbodenGeschossHeiz {
+        internal static string LL_Report_AuslegungEurovalGeschossHeiz {
             get {
-                return ResourceManager.GetString("LL_Report_AuslegungFussbodenGeschossHeiz", resourceCulture);
+                return ResourceManager.GetString("LL_Report_AuslegungEurovalGeschossHeiz", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Auslegung Euroval® Fußbodenheizung - %GESCHOSS% (Kühlbetrieb).
         /// </summary>
-        internal static string LL_Report_AuslegungFussbodenGeschossKuehl {
+        internal static string LL_Report_AuslegungEurovalGeschossKuehl {
             get {
-                return ResourceManager.GetString("LL_Report_AuslegungFussbodenGeschossKuehl", resourceCulture);
+                return ResourceManager.GetString("LL_Report_AuslegungEurovalGeschossKuehl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Fußbodenheizung.
+        /// </summary>
+        internal static string LL_Report_AuslegungFussboden {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungFussboden", resourceCulture);
             }
         }
         
@@ -3981,6 +3990,15 @@ namespace Europlan.Common {
         internal static string LL_Report_Bezeichnung {
             get {
                 return ResourceManager.GetString("LL_Report_Bezeichnung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilanz Ecotherm® Fußbodenheizung.
+        /// </summary>
+        internal static string LL_Report_BilanzEcotherm {
+            get {
+                return ResourceManager.GetString("LL_Report_BilanzEcotherm", resourceCulture);
             }
         }
         
@@ -6831,6 +6849,24 @@ namespace Europlan.Common {
         internal static string Product_HithermCompactName {
             get {
                 return ResourceManager.GetString("Product_HithermCompactName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitherm® Compact Dachschräge.
+        /// </summary>
+        internal static string Product_HithermCompactRoofFullName {
+            get {
+                return ResourceManager.GetString("Product_HithermCompactRoofFullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitherm® Compact Dachschräge.
+        /// </summary>
+        internal static string Product_HithermCompactRoofName {
+            get {
+                return ResourceManager.GetString("Product_HithermCompactRoofName", resourceCulture);
             }
         }
         
