@@ -9,7 +9,7 @@ using Europlan.Licensing;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Ecotherm®", "Ecotherm® Fußbodenheizung")]
+	[ProductName("Product_EcothermName", "Product_EcothermFullName")]
 	public class EcothermProduct : Product {
 
 		// quick dimensioning

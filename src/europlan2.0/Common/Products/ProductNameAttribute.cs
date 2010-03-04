@@ -7,11 +7,6 @@ namespace Europlan.Common {
 		public string name;
 		public string fullName;
 
-		public ProductNameAttribute(string name) {
-			this.name = name;
-			this.fullName = name;
-		}
-
 		public ProductNameAttribute(string name, string fullName) {
 			this.name = name;
 			this.fullName = fullName;

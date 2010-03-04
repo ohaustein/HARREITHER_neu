@@ -10,7 +10,7 @@ using Europlan.Licensing;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Euroval®", "Euroval® Fußbodenheizung")]
+	[ProductName("Product_EurovalName", "Product_EurovalFullName")]
 	public class EurovalProduct : Product {
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(EurovalProduct));

@@ -6,7 +6,7 @@ using Europlan.Licensing;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Betonkernaktivierung")]
+	[ProductName("Product_ConcreteActivationName", "Product_ConcreteActivationFullName")]
 	public class ConcreteActivationProduct : EurovalProduct {
 
 		// quick dimensioning

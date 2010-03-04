@@ -6,7 +6,7 @@ using Europlan.Licensing;
 namespace Europlan.Common {
 
 	[Serializable()]
-	[ProductName("Hitherm® Compact Dachschräge")]
+	[ProductName("Product_HithermCompactRoofName", "Product_HithermCompactRoofFullName")]
 	public class HithermCompactRoofProduct : HithermCompactProduct {
 
 		// quick dimensioning
