@@ -19,11 +19,29 @@ namespace Europlan.Common {
 			private static readonly string modul_120_30 = EuroplanRes.KlimaFlaechenModul_120_30; //"Modul 120/30";
 			private static readonly string modul_80_30 = EuroplanRes.KlimaFlaechenModul_80_30; //"Modul 80/30";
 			private static readonly string modul_60_60 = EuroplanRes.KlimaFlaechenModul_60_60; //"Modul 60/60";
-			
+			private static readonly string modul_100_40_short = EuroplanRes.KlimaFlaechenModul_100_40_Short; //"100/40";
+			private static readonly string modul_100_30_short = EuroplanRes.KlimaFlaechenModul_100_30_Short; //"100/30";
+			private static readonly string modul_120_30_short = EuroplanRes.KlimaFlaechenModul_120_30_Short; //"120/30";
+			private static readonly string modul_80_30_short = EuroplanRes.KlimaFlaechenModul_80_30_Short; //"80/30";
+			private static readonly string modul_60_60_short = EuroplanRes.KlimaFlaechenModul_60_60_Short; //"60/60";
+
 			private Dictionary<string, ModulTypeEnum> mappingFromString = new Dictionary<string, ModulTypeEnum>();
 			private Dictionary<ModulTypeEnum, string> mappingToString = new Dictionary<ModulTypeEnum, string>();
+			private Dictionary<string, ModulTypeEnum> mappingFromShortString = new Dictionary<string, ModulTypeEnum>();
+			private Dictionary<ModulTypeEnum, string> mappingToShortString = new Dictionary<ModulTypeEnum, string>();
+
+			private bool shortNames = false;
 
 			public ModulTypeEnumConverter() {
+				this.Initialize();
+			}
+
+			public ModulTypeEnumConverter(bool shortNames) {
+				this.shortNames = shortNames;
+				this.Initialize();
+			}
+
+			private void Initialize() {
 				mappingFromString.Add(modul_100_40, ModulTypeEnum.MODUL_100_40);
 				mappingFromString.Add(modul_100_30, ModulTypeEnum.MODUL_100_30);
 				mappingFromString.Add(modul_120_30, ModulTypeEnum.MODUL_120_30);
@@ -34,6 +52,21 @@ namespace Europlan.Common {
 				mappingToString.Add(ModulTypeEnum.MODUL_120_30, modul_120_30);
 				mappingToString.Add(ModulTypeEnum.MODUL_80_30, modul_80_30);
 				mappingToString.Add(ModulTypeEnum.MODUL_60_60, modul_60_60);
+				mappingFromShortString.Add(modul_100_40_short, ModulTypeEnum.MODUL_100_40);
+				mappingFromShortString.Add(modul_100_30_short, ModulTypeEnum.MODUL_100_30);
+				mappingFromShortString.Add(modul_120_30_short, ModulTypeEnum.MODUL_120_30);
+				mappingFromShortString.Add(modul_80_30_short, ModulTypeEnum.MODUL_80_30);
+				mappingFromShortString.Add(modul_60_60_short, ModulTypeEnum.MODUL_60_60);
+				mappingToShortString.Add(ModulTypeEnum.MODUL_100_40, modul_100_40_short);
+				mappingToShortString.Add(ModulTypeEnum.MODUL_100_30, modul_100_30_short);
+				mappingToShortString.Add(ModulTypeEnum.MODUL_120_30, modul_120_30_short);
+				mappingToShortString.Add(ModulTypeEnum.MODUL_80_30, modul_80_30_short);
+				mappingToShortString.Add(ModulTypeEnum.MODUL_60_60, modul_60_60_short);
+			}
+
+			public bool ShortNames {
+				get { return this.shortNames; }
+				set { this.shortNames = value; }
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -49,14 +82,23 @@ namespace Europlan.Common {
 					if (mappingFromString.ContainsKey((string)value)) {
 						return mappingFromString[(string)value];
 					}
+					if (mappingFromShortString.ContainsKey((string)value)) {
+						return mappingFromShortString[(string)value];
+					}
 				}
 				return base.ConvertFrom(context, culture, value);
 			}
 
 			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
 				if (value is ModulTypeEnum && destinationType == typeof(string)) {
-					if (mappingToString.ContainsKey((ModulTypeEnum)value)) {
-						return mappingToString[(ModulTypeEnum)value];
+					if (this.shortNames) {
+						if (mappingToShortString.ContainsKey((ModulTypeEnum)value)) {
+							return mappingToShortString[(ModulTypeEnum)value];
+						}
+					} else {
+						if (mappingToString.ContainsKey((ModulTypeEnum)value)) {
+							return mappingToString[(ModulTypeEnum)value];
+						}
 					}
 				}
 				return base.ConvertTo(context, culture, value, destinationType);
