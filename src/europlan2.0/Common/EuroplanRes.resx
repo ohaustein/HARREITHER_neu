@@ -1395,7 +1395,7 @@ Wollen Sie trotzdem fortfahren?</value>
     <value>Bearbeiter: %BEARBEITER%</value>
   </data>
   <data name="LL_QuickDimensioning_BelegefaktorDecke" xml:space="preserve">
-    <value>Belegefaktor Decke =</value>
+    <value>Belegefaktor Decke = </value>
   </data>
   <data name="LL_QuickDimensioning_Bemerkungen" xml:space="preserve">
     <value>Bemerkungen</value>
