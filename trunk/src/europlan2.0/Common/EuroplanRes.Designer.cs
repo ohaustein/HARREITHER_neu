@@ -3786,7 +3786,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Belegefaktor Decke =.
+        ///   Looks up a localized string similar to Belegefaktor Decke = .
         /// </summary>
         internal static string LL_QuickDimensioning_BelegefaktorDecke {
             get {
