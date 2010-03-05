@@ -1045,26 +1045,50 @@ Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
   <data name="HithermCompactRegister_Hit1000Par" xml:space="preserve">
     <value>HIT 1000 Par</value>
   </data>
+  <data name="HithermCompactRegister_Hit1000Par_Short" xml:space="preserve">
+    <value>1000 Par</value>
+  </data>
   <data name="HithermCompactRegister_Hit1000Std" xml:space="preserve">
     <value>HIT 1000 Std</value>
+  </data>
+  <data name="HithermCompactRegister_Hit1000Std_Short" xml:space="preserve">
+    <value>1000 Std</value>
   </data>
   <data name="HithermCompactRegister_Hit1500Par" xml:space="preserve">
     <value>HIT 1500 Par</value>
   </data>
+  <data name="HithermCompactRegister_Hit1500Par_Short" xml:space="preserve">
+    <value>1500 Par</value>
+  </data>
   <data name="HithermCompactRegister_Hit1500Std" xml:space="preserve">
     <value>HIT 1500 Std</value>
+  </data>
+  <data name="HithermCompactRegister_Hit1500Std_Short" xml:space="preserve">
+    <value>1500 Std</value>
   </data>
   <data name="HithermCompactRegister_Hit2000Par" xml:space="preserve">
     <value>HIT 2000 Par</value>
   </data>
+  <data name="HithermCompactRegister_Hit2000Par_Short" xml:space="preserve">
+    <value>2000 Par</value>
+  </data>
   <data name="HithermCompactRegister_Hit2000Std" xml:space="preserve">
     <value>HIT 2000 Std</value>
+  </data>
+  <data name="HithermCompactRegister_Hit2000Std_Short" xml:space="preserve">
+    <value>2000 Std</value>
   </data>
   <data name="HithermCompactRegister_Hit2500Std" xml:space="preserve">
     <value>HIT 2500 Std</value>
   </data>
+  <data name="HithermCompactRegister_Hit2500Std_Short" xml:space="preserve">
+    <value>2500 Std</value>
+  </data>
   <data name="HithermCompactRegister_Hit620Std" xml:space="preserve">
     <value>HIT 620 Std</value>
+  </data>
+  <data name="HithermCompactRegister_Hit620Std_Short" xml:space="preserve">
+    <value>620 Std</value>
   </data>
   <data name="HithermProduct_NotificationParameter" xml:space="preserve">
     <value>Hitherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
@@ -1072,38 +1096,74 @@ Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
   <data name="HithermRegister_Hit100HL" xml:space="preserve">
     <value>HIT 100/5</value>
   </data>
+  <data name="HithermRegister_Hit100HL_Short" xml:space="preserve">
+    <value>100/5</value>
+  </data>
   <data name="HithermRegister_Hit100L" xml:space="preserve">
     <value>HIT 100/10</value>
+  </data>
+  <data name="HithermRegister_Hit100L_Short" xml:space="preserve">
+    <value>100/10</value>
   </data>
   <data name="HithermRegister_Hit150HL" xml:space="preserve">
     <value>HIT 150/5</value>
   </data>
+  <data name="HithermRegister_Hit150HL_Short" xml:space="preserve">
+    <value>150/5</value>
+  </data>
   <data name="HithermRegister_Hit150L" xml:space="preserve">
     <value>HIT 150/10</value>
+  </data>
+  <data name="HithermRegister_Hit150L_Short" xml:space="preserve">
+    <value>150/10</value>
   </data>
   <data name="HithermRegister_Hit200HL" xml:space="preserve">
     <value>HIT 200/5</value>
   </data>
+  <data name="HithermRegister_Hit200HL_Short" xml:space="preserve">
+    <value>200/5</value>
+  </data>
   <data name="HithermRegister_Hit200L" xml:space="preserve">
     <value>HIT 200/10</value>
+  </data>
+  <data name="HithermRegister_Hit200L_Short" xml:space="preserve">
+    <value>200/10</value>
   </data>
   <data name="HithermRegister_Hit250HL" xml:space="preserve">
     <value>HIT 250/5</value>
   </data>
+  <data name="HithermRegister_Hit250HL_Short" xml:space="preserve">
+    <value>250/5</value>
+  </data>
   <data name="HithermRegister_Hit250L" xml:space="preserve">
     <value>HIT 250/10</value>
+  </data>
+  <data name="HithermRegister_Hit250L_Short" xml:space="preserve">
+    <value>250/10</value>
   </data>
   <data name="HithermRegister_Hit300HL" xml:space="preserve">
     <value>HIT 300/5</value>
   </data>
+  <data name="HithermRegister_Hit300HL_Short" xml:space="preserve">
+    <value>300/5</value>
+  </data>
   <data name="HithermRegister_Hit300L" xml:space="preserve">
     <value>HIT 300/10</value>
+  </data>
+  <data name="HithermRegister_Hit300L_Short" xml:space="preserve">
+    <value>300/10</value>
   </data>
   <data name="HithermRegister_Hit50HL" xml:space="preserve">
     <value>HIT 50/5</value>
   </data>
+  <data name="HithermRegister_Hit50HL_Short" xml:space="preserve">
+    <value>50/5</value>
+  </data>
   <data name="HithermRegister_Hit50L" xml:space="preserve">
     <value>HIT 50/10</value>
+  </data>
+  <data name="HithermRegister_Hit50L_Short" xml:space="preserve">
+    <value>50/10</value>
   </data>
   <data name="HithermRegister_Hochleistungsregister" xml:space="preserve">
     <value>5cm (Hochleistungsreg.)</value>
@@ -1156,17 +1216,32 @@ R
   <data name="KlimaFlaechenModul_100_30" xml:space="preserve">
     <value>Modul 100/30</value>
   </data>
+  <data name="KlimaFlaechenModul_100_30_Short" xml:space="preserve">
+    <value>100/30</value>
+  </data>
   <data name="KlimaFlaechenModul_100_40" xml:space="preserve">
     <value>Modul 100/40</value>
+  </data>
+  <data name="KlimaFlaechenModul_100_40_Short" xml:space="preserve">
+    <value>100/40</value>
   </data>
   <data name="KlimaFlaechenModul_120_30" xml:space="preserve">
     <value>Modul 120/30</value>
   </data>
+  <data name="KlimaFlaechenModul_120_30_Short" xml:space="preserve">
+    <value>120/30</value>
+  </data>
   <data name="KlimaFlaechenModul_60_60" xml:space="preserve">
     <value>Modul 60/60</value>
   </data>
+  <data name="KlimaFlaechenModul_60_60_Short" xml:space="preserve">
+    <value>60/60</value>
+  </data>
   <data name="KlimaFlaechenModul_80_30" xml:space="preserve">
     <value>Modul 80/30</value>
+  </data>
+  <data name="KlimaFlaechenModul_80_30_Short" xml:space="preserve">
+    <value>80/30</value>
   </data>
   <data name="KlimaFlaechenModul_AusrichtungLinks" xml:space="preserve">
     <value>Links</value>
@@ -1318,7 +1393,6 @@ Wollen Sie trotzdem fortfahren?</value>
   </data>
   <data name="LL_QuickDimensioning_Bearbeiter" xml:space="preserve">
     <value>Bearbeiter: %BEARBEITER%</value>
-    <comment>StrSubst$("LL_QuickDimensioning_Bearbeiter", "%BEARBEITER%", @ProjectEditor)</comment>
   </data>
   <data name="LL_QuickDimensioning_BelegefaktorDecke" xml:space="preserve">
     <value>Belegefaktor Decke =</value>
@@ -1339,8 +1413,7 @@ Wollen Sie trotzdem fortfahren?</value>
     <value>Heizlast (W)</value>
   </data>
   <data name="LL_QuickDimensioning_HinweisText" xml:space="preserve">
-    <value>Die Flächenaufstellung ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.
-Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</value>
+    <value>Die Flächenaufstellung ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.¶Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</value>
   </data>
   <data name="LL_QuickDimensioning_HinweisTitel" xml:space="preserve">
     <value>Hinweis</value>
@@ -1392,7 +1465,6 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   </data>
   <data name="LL_QuickDimensioning_Seite" xml:space="preserve">
     <value>Seite %SEITE%</value>
-    <comment>StrSubst$("LL_QuickDimensioning_Seite", "%SEITE%", Page$())</comment>
   </data>
   <data name="LL_QuickDimensioning_Stellmotore" xml:space="preserve">
     <value>Stellm.</value>
@@ -1402,14 +1474,12 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   </data>
   <data name="LL_QuickDimensioning_SummeGeschoss" xml:space="preserve">
     <value>Summe %GESCHOSS%</value>
-    <comment>StrSubst$("LL_QuickDimensioning_SummeGeschoss", "%GESCHOSS%", QuickDimensioningReportWrapper.FloorName)</comment>
   </data>
   <data name="LL_QuickDimensioning_Titel" xml:space="preserve">
     <value>Flächenaufstellung %PROJEKTNR%</value>
   </data>
   <data name="LL_QuickDimensioning_Verteileranschlussdaten" xml:space="preserve">
     <value>Verteileranschlussdaten %PROJEKTNR%</value>
-    <comment>StrSubst$("LL_QuickDimensioning_Verteileranschlussdaten", "%PROJEKTNR%", @ProjectNumber)</comment>
   </data>
   <data name="LL_QuickDimensioning_VorlauftempHeizen" xml:space="preserve">
     <value>Vorlauftemp. Heizen =</value>
@@ -1441,6 +1511,12 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   <data name="LL_Report_AuslegungEcothermGeschoss" xml:space="preserve">
     <value>Auslegung Euroval® Fußbodenheizung - %GESCHOSS%</value>
   </data>
+  <data name="LL_Report_AuslegungEcothermGeschossHeiz" xml:space="preserve">
+    <value>Auslegung Ecotherm® Fußbodenheizung - %GESCHOSS% (Heizbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungEcothermGeschossKuehl" xml:space="preserve">
+    <value>Auslegung Ecotherm® Fußbodenheizung - %GESCHOSS% (Kühlbetrieb)</value>
+  </data>
   <data name="LL_Report_AuslegungEurovalGeschoss" xml:space="preserve">
     <value>Auslegung Euroval® Fußbodenheizung - %GESCHOSS%</value>
   </data>
@@ -1452,6 +1528,51 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   </data>
   <data name="LL_Report_AuslegungFussboden" xml:space="preserve">
     <value>Auslegung Fußbodenheizung</value>
+  </data>
+  <data name="LL_Report_AuslegungHithermCompactGeschoss" xml:space="preserve">
+    <value>Auslegung Hitherm Compact Klimawand - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_AuslegungHithermCompactGeschossHeiz" xml:space="preserve">
+    <value>Auslegung Hitherm Compact Klimawand - %GESCHOSS% (Heizbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungHithermCompactGeschossKuehl" xml:space="preserve">
+    <value>Auslegung Hitherm Compact Klimawand - %GESCHOSS% (Kühlbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungHithermGeschoss" xml:space="preserve">
+    <value>Auslegung Hitherm Klimawand - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_AuslegungHithermGeschossHeiz" xml:space="preserve">
+    <value>Auslegung Hitherm Klimawand - %GESCHOSS% (Heizbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungHithermGeschossKuehl" xml:space="preserve">
+    <value>Auslegung Hitherm Klimawand - %GESCHOSS% (Kühlbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimaboden" xml:space="preserve">
+    <value>Auslegung Modul Klimaboden</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimabodenGeschoss" xml:space="preserve">
+    <value>Auslegung Modul Klimaboden - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimabodenGeschossHeiz" xml:space="preserve">
+    <value>Auslegung Modul Klimaboden - %GESCHOSS% (Heizbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimabodenGeschossKuehl" xml:space="preserve">
+    <value>Auslegung Modul Klimaboden - %GESCHOSS% (Kühlbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimadecke" xml:space="preserve">
+    <value>Auslegung Modul Klimadecke</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimadeckeGeschoss" xml:space="preserve">
+    <value>Auslegung Modul Klimadecke - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimadeckeGeschossHeiz" xml:space="preserve">
+    <value>Auslegung Modul Klimadecke - %GESCHOSS% (Heizbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimadeckeGeschossKuehl" xml:space="preserve">
+    <value>Auslegung Modul Klimadecke - %GESCHOSS% (Kühlbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungWand" xml:space="preserve">
+    <value>Auslegung Wandheizung</value>
   </data>
   <data name="LL_Report_Bauvorhaben" xml:space="preserve">
     <value>Bauvorhaben</value>
@@ -1465,6 +1586,24 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   <data name="LL_Report_BereingterBedarfKuehl" xml:space="preserve">
     <value>Ber.¶Bedarf</value>
   </data>
+  <data name="LL_Report_Bestellvorschlag" xml:space="preserve">
+    <value>Bestellvorschlag</value>
+  </data>
+  <data name="LL_Report_BestellvorschlagArtikel" xml:space="preserve">
+    <value>Artikel</value>
+  </data>
+  <data name="LL_Report_BestellvorschlagBestellnummer" xml:space="preserve">
+    <value>Bestellnr.</value>
+  </data>
+  <data name="LL_Report_BestellvorschlagHinweis" xml:space="preserve">
+    <value>Diese Artikel können vom Programm nicht exakt berechnet werden und müssen vom Planenden ermittelt werden!</value>
+  </data>
+  <data name="LL_Report_BestellvorschlagKategorie" xml:space="preserve">
+    <value>Materialbedarf %KATEGORIE%</value>
+  </data>
+  <data name="LL_Report_BestellvorschlagMenge" xml:space="preserve">
+    <value>Menge</value>
+  </data>
   <data name="LL_Report_Bezeichnung" xml:space="preserve">
     <value>Bezeichnung</value>
   </data>
@@ -1473,6 +1612,18 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   </data>
   <data name="LL_Report_BilanzEuroval" xml:space="preserve">
     <value>Bilanz Euroval® Fußbodenheizung</value>
+  </data>
+  <data name="LL_Report_BilanzHitherm" xml:space="preserve">
+    <value>Bilanz Hitherm Klimawand</value>
+  </data>
+  <data name="LL_Report_BilanzHithermCompact" xml:space="preserve">
+    <value>Bilanz Hitherm Compact Klimawand</value>
+  </data>
+  <data name="LL_Report_BilanzKlimaboden" xml:space="preserve">
+    <value>Bilanz Modul Klimaboden</value>
+  </data>
+  <data name="LL_Report_BilanzKlimadecke" xml:space="preserve">
+    <value>Bilanz Modul Klimadecke</value>
   </data>
   <data name="LL_Report_Erstellungsdatum" xml:space="preserve">
     <value>Erstellungsdatum</value>
@@ -1642,6 +1793,162 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   <data name="LL_Report_Hinweise" xml:space="preserve">
     <value>Hinweise</value>
   </data>
+  <data name="LL_Report_KlimabodenAnbindeleitung" xml:space="preserve">
+    <value>Anbindeltg.¶m</value>
+  </data>
+  <data name="LL_Report_KlimabodenAnzahlModule" xml:space="preserve">
+    <value>Anzahl¶Module</value>
+  </data>
+  <data name="LL_Report_KlimabodenDruckverlust" xml:space="preserve">
+    <value>Druckverlust</value>
+  </data>
+  <data name="LL_Report_KlimabodenDruckverlustHeizkreis" xml:space="preserve">
+    <value>HK¶mbar</value>
+  </data>
+  <data name="LL_Report_KlimabodenDruckverlustVerteiler" xml:space="preserve">
+    <value>Verteiler¶mbar</value>
+  </data>
+  <data name="LL_Report_KlimabodenFbKonstruktion" xml:space="preserve">
+    <value>FB-Konstr.¶RL,B¶m²K/W</value>
+  </data>
+  <data name="LL_Report_KlimabodenFlaecheAnbindung" xml:space="preserve">
+    <value>Anb.¶m²</value>
+  </data>
+  <data name="LL_Report_KlimabodenFlaecheDicht" xml:space="preserve">
+    <value>Dicht¶m²</value>
+  </data>
+  <data name="LL_Report_KlimabodenFlaecheModulierend" xml:space="preserve">
+    <value>Modulierend¶m²</value>
+  </data>
+  <data name="LL_Report_KlimabodenFlaecheSonstige" xml:space="preserve">
+    <value>Sonstige¶m²</value>
+  </data>
+  <data name="LL_Report_KlimabodenFlussgeschwindigkeit" xml:space="preserve">
+    <value>v</value>
+  </data>
+  <data name="LL_Report_KlimabodenHeizkreise" xml:space="preserve">
+    <value>Heiz-¶kreise</value>
+  </data>
+  <data name="LL_Report_KlimabodenHeizkreise2" xml:space="preserve">
+    <value>Heiz-¶kreis(e)</value>
+  </data>
+  <data name="LL_Report_KlimabodenHinweisHintereinandergeschaltet" xml:space="preserve">
+    <value>Angegeben sind die Vor- und Rücklauftemperaturen am Verteiler, da mehrere Systeme hintereinandergeschaltet sind.</value>
+  </data>
+  <data name="LL_Report_KlimabodenHinweisHydraulisch" xml:space="preserve">
+    <value>Angegeben sind die hydraulischen Daten für den gesamten Heizkreis, da mehrere Systeme hintereinandergeschaltet sind.</value>
+  </data>
+  <data name="LL_Report_KlimabodenLeistung" xml:space="preserve">
+    <value>QFBH¶W</value>
+  </data>
+  <data name="LL_Report_KlimabodenLeistungProQm" xml:space="preserve">
+    <value>qFBH¶W/m²</value>
+  </data>
+  <data name="LL_Report_KlimabodenOberflaechenTemp" xml:space="preserve">
+    <value>tFB¶°C</value>
+  </data>
+  <data name="LL_Report_KlimabodenRaumName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LL_Report_KlimabodenRaumNr" xml:space="preserve">
+    <value>Raum¶Nr.</value>
+  </data>
+  <data name="LL_Report_KlimabodenRaumtemperatur" xml:space="preserve">
+    <value>ti¶°C</value>
+  </data>
+  <data name="LL_Report_KlimabodenRuecklauftemperaur" xml:space="preserve">
+    <value>tr¶°C</value>
+  </data>
+  <data name="LL_Report_KlimabodenSollLeistung" xml:space="preserve">
+    <value>QSoll¶(ber) W</value>
+  </data>
+  <data name="LL_Report_KlimabodenSystemkomponenten" xml:space="preserve">
+    <value>Systemkomponenten</value>
+  </data>
+  <data name="LL_Report_KlimabodenTeilsystem" xml:space="preserve">
+    <value>Teil-¶system</value>
+  </data>
+  <data name="LL_Report_KlimabodenVorlauftemperaur" xml:space="preserve">
+    <value>tv¶°C</value>
+  </data>
+  <data name="LL_Report_KlimabodenWassermenge" xml:space="preserve">
+    <value>Wasser-¶menge</value>
+  </data>
+  <data name="LL_Report_KlimabodenWdKonstruktion" xml:space="preserve">
+    <value>WD-Konstr.¶Ru¶m²K/W</value>
+  </data>
+  <data name="LL_Report_KlimadeckeAnbindeleitung" xml:space="preserve">
+    <value>Anbindeltg.¶m</value>
+  </data>
+  <data name="LL_Report_KlimadeckeAnzahlModule" xml:space="preserve">
+    <value>Anzahl Module (Stk.)</value>
+  </data>
+  <data name="LL_Report_KlimadeckeDeckenKonstruktion" xml:space="preserve">
+    <value>Decken-Konstr.¶RL,B¶m²K/W</value>
+  </data>
+  <data name="LL_Report_KlimadeckeDruckverlust" xml:space="preserve">
+    <value>Druckverlust</value>
+  </data>
+  <data name="LL_Report_KlimadeckeDruckverlustHeizkreis" xml:space="preserve">
+    <value>HK¶mbar</value>
+  </data>
+  <data name="LL_Report_KlimadeckeDruckverlustVerteiler" xml:space="preserve">
+    <value>Verteiler¶mbar</value>
+  </data>
+  <data name="LL_Report_KlimadeckeFlaecheAnbindung" xml:space="preserve">
+    <value>Anb.¶m²</value>
+  </data>
+  <data name="LL_Report_KlimadeckeFlaecheModule" xml:space="preserve">
+    <value>Modulfläche¶m²</value>
+  </data>
+  <data name="LL_Report_KlimadeckeFlussgeschwindigkeit" xml:space="preserve">
+    <value>v</value>
+  </data>
+  <data name="LL_Report_KlimadeckeHeizkreise" xml:space="preserve">
+    <value>Heiz-¶kreise</value>
+  </data>
+  <data name="LL_Report_KlimadeckeHeizkreise2" xml:space="preserve">
+    <value>Heiz-¶kreis(e)</value>
+  </data>
+  <data name="LL_Report_KlimadeckeHinweisHintereinandergeschaltet" xml:space="preserve">
+    <value>Angegeben sind die Vor- und Rücklauftemperaturen am Verteiler, da mehrere Systeme hintereinandergeschaltet sind.</value>
+  </data>
+  <data name="LL_Report_KlimadeckeLeistung" xml:space="preserve">
+    <value>QDH¶W</value>
+  </data>
+  <data name="LL_Report_KlimadeckeLeistungProQm" xml:space="preserve">
+    <value>qDH¶W/m²</value>
+  </data>
+  <data name="LL_Report_KlimadeckeRaumName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LL_Report_KlimadeckeRaumNr" xml:space="preserve">
+    <value>Raum¶Nr.</value>
+  </data>
+  <data name="LL_Report_KlimadeckeRaumtemperatur" xml:space="preserve">
+    <value>ti¶°C</value>
+  </data>
+  <data name="LL_Report_KlimadeckeRuecklauftemperaur" xml:space="preserve">
+    <value>tr¶°C</value>
+  </data>
+  <data name="LL_Report_KlimadeckeSollLeistung" xml:space="preserve">
+    <value>QSoll¶(ber) W</value>
+  </data>
+  <data name="LL_Report_KlimadeckeSystemkomponenten" xml:space="preserve">
+    <value>Systemkomponenten</value>
+  </data>
+  <data name="LL_Report_KlimadeckeTeilsystem" xml:space="preserve">
+    <value>Teil-¶system</value>
+  </data>
+  <data name="LL_Report_KlimadeckeVorlauftemperaur" xml:space="preserve">
+    <value>tv¶°C</value>
+  </data>
+  <data name="LL_Report_KlimadeckeWassermenge" xml:space="preserve">
+    <value>Wasser-¶menge</value>
+  </data>
+  <data name="LL_Report_KlimadeckeWdKonstruktion" xml:space="preserve">
+    <value>WD-Konstr.¶Ru¶m²K/W</value>
+  </data>
   <data name="LL_Report_Kontaktadresse" xml:space="preserve">
     <value>Kontaktadresse</value>
   </data>
@@ -1656,6 +1963,24 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   </data>
   <data name="LL_Report_LeistungNachInnen" xml:space="preserve">
     <value>Leistung nach innen</value>
+  </data>
+  <data name="LL_Report_Materialbedarf" xml:space="preserve">
+    <value>Materialbedarf</value>
+  </data>
+  <data name="LL_Report_MaterialbedarfArtikel" xml:space="preserve">
+    <value>Artikel</value>
+  </data>
+  <data name="LL_Report_MaterialbedarfBestellnummer" xml:space="preserve">
+    <value>Bestellnr.</value>
+  </data>
+  <data name="LL_Report_MaterialbedarfHinweis" xml:space="preserve">
+    <value>Diese Artikel können vom Programm nicht exakt berechnet werden und müssen vom Planenden ermittelt werden!</value>
+  </data>
+  <data name="LL_Report_MaterialbedarfKategorie" xml:space="preserve">
+    <value>Materialbedarf %KATEGORIE%</value>
+  </data>
+  <data name="LL_Report_MaterialbedarfMenge" xml:space="preserve">
+    <value>Menge</value>
   </data>
   <data name="LL_Report_Projektbilanz" xml:space="preserve">
     <value>Projektbilanz</value>
@@ -1680,11 +2005,9 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   </data>
   <data name="LL_Report_RaumName" xml:space="preserve">
     <value>Name</value>
-    <comment>TODO</comment>
   </data>
   <data name="LL_Report_RaumNr" xml:space="preserve">
     <value>Raum¶Nr.</value>
-    <comment>TODO</comment>
   </data>
   <data name="LL_Report_RegelkreisDruckverlust" xml:space="preserve">
     <value>dP, max</value>
@@ -1749,6 +2072,396 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   <data name="LL_Report_Verlegeart" xml:space="preserve">
     <value>Verlegeart %VERLEGEART%</value>
   </data>
+  <data name="LL_Report_Verlegedaten" xml:space="preserve">
+    <value>Verlegedaten</value>
+  </data>
+  <data name="LL_Report_VerlegedatenBezeichung" xml:space="preserve">
+    <value>Bezeichnung</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcotherm" xml:space="preserve">
+    <value>Verlegedaten Ecotherm® Fußbodenheizung - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermAufenthaltszone" xml:space="preserve">
+    <value>Aufenthaltsz.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermDurchflussProHkZeile1" xml:space="preserve">
+    <value>mh/</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermDurchflussProHkZeile2" xml:space="preserve">
+    <value>HK¶l/h</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermFlaecheProHk" xml:space="preserve">
+    <value>Fläche/¶HK</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile1" xml:space="preserve">
+    <value>AUnb.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile2" xml:space="preserve">
+    <value>m²</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermHeizkreiseZeile1" xml:space="preserve">
+    <value>Heiz-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermHeizkreiseZeile2" xml:space="preserve">
+    <value>kreis(e)</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermLaengeProHk" xml:space="preserve">
+    <value>Länge/¶HK</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermRandzone" xml:space="preserve">
+    <value>Randzone</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermRaumNameZeile1" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermRaumNameZeile2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermRaumNrZeile1" xml:space="preserve">
+    <value>Raum</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermRaumNrZeile2" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile1" xml:space="preserve">
+    <value>lRohr/</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile2" xml:space="preserve">
+    <value>HK¶m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermTeilsystemZeile1" xml:space="preserve">
+    <value>Teil-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermTeilsystemZeile2" xml:space="preserve">
+    <value>system</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermVerlegeart" xml:space="preserve">
+    <value>VA</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermWdKonstruktionZeile1" xml:space="preserve">
+    <value>WD-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermWdKonstruktionZeile2" xml:space="preserve">
+    <value>Konstr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEuroval" xml:space="preserve">
+    <value>Verlegedaten Euroval® Fußbodenheizung - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalAufenthaltszone" xml:space="preserve">
+    <value>Aufenthaltsz.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalDurchflussProHkZeile1" xml:space="preserve">
+    <value>mh/</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalDurchflussProHkZeile2" xml:space="preserve">
+    <value>HK¶l/h</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalFlaecheProHk" xml:space="preserve">
+    <value>Fläche/¶HK</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalFlaecheUnbeheiztZeile1" xml:space="preserve">
+    <value>AUnb.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalFlaecheUnbeheiztZeile2" xml:space="preserve">
+    <value>m²</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalHeizkreiseZeile1" xml:space="preserve">
+    <value>Heiz-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalHeizkreiseZeile2" xml:space="preserve">
+    <value>kreis(e)</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalLaengeProHk" xml:space="preserve">
+    <value>Länge/¶HK</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalRandzone" xml:space="preserve">
+    <value>Randzone</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalRaumNameZeile1" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalRaumNameZeile2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalRaumNrZeile1" xml:space="preserve">
+    <value>Raum</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalRaumNrZeile2" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalRohrlaengeProHkZeile1" xml:space="preserve">
+    <value>lRohr/</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalRohrlaengeProHkZeile2" xml:space="preserve">
+    <value>HK¶m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalTeilsystemZeile1" xml:space="preserve">
+    <value>Teil-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalTeilsystemZeile2" xml:space="preserve">
+    <value>system</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalVerlegeart" xml:space="preserve">
+    <value>VA</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalWdKonstruktionZeile1" xml:space="preserve">
+    <value>WD-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalWdKonstruktionZeile2" xml:space="preserve">
+    <value>Konstr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenFussbodenheizung" xml:space="preserve">
+    <value>Verlegedaten Fußbodenheizung</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHeizkreis" xml:space="preserve">
+    <value>Heizkr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHitherm" xml:space="preserve">
+    <value>Verlegedaten Hitherm Klimawand - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermAnbindeleitung" xml:space="preserve">
+    <value>Anbindeleitung</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompact" xml:space="preserve">
+    <value>Verlegedaten Hitherm Compact Klimawand - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactAnbindeleitung" xml:space="preserve">
+    <value>Anbindeleitung</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile1" xml:space="preserve">
+    <value>Gesamt-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile2" xml:space="preserve">
+    <value>fläche¶m²</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactHeizkreisZeile1" xml:space="preserve">
+    <value>Heiz-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactHeizkreisZeile2" xml:space="preserve">
+    <value>kreis</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactLaengeRuecklauf" xml:space="preserve">
+    <value>RL¶m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactLaengeVorlauf" xml:space="preserve">
+    <value>VL¶m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactLaengeWand" xml:space="preserve">
+    <value>Wand¶m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactRaumNameZeile1" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactRaumNameZeile2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactRaumNrZeile1" xml:space="preserve">
+    <value>Raum</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactRaumNrZeile2" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactRegisterAnzahl" xml:space="preserve">
+    <value>Anzahl¶Reg.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactRegisterflaechen" xml:space="preserve">
+    <value>Registerflächen</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactRegisterTyp" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactTeilsystemZeile1" xml:space="preserve">
+    <value>Teil-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactTeilsystemZeile2" xml:space="preserve">
+    <value>system</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactWandkonstruktionZeile1" xml:space="preserve">
+    <value>Wand-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactWandkonstruktionZeile2" xml:space="preserve">
+    <value>konstr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermFlaecheRa10" xml:space="preserve">
+    <value>RA10 ¶m²</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermFlaecheRa5" xml:space="preserve">
+    <value>RA 5¶m²</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermGesamtflaeche" xml:space="preserve">
+    <value>Gesamtfläche</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermHeizkreisZeile1" xml:space="preserve">
+    <value>Heiz-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermHeizkreisZeile2" xml:space="preserve">
+    <value>kreis</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermLaengeRuecklauf" xml:space="preserve">
+    <value>RL¶m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermLaengeVorlauf" xml:space="preserve">
+    <value>VL¶m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermLaengeWand" xml:space="preserve">
+    <value>Wand¶m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermRaumNameZeile1" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermRaumNameZeile2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LL_Report_VerlegedatenHithermRaumNrZeile1" xml:space="preserve">
+    <value>Raum</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermRaumNrZeile2" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermRegisterBreite" xml:space="preserve">
+    <value>Breite¶cm</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermRegisterflaechen" xml:space="preserve">
+    <value>Registerflächen</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermRegisterRohre" xml:space="preserve">
+    <value>Rohre</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermRegisterTyp" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermTeilsystemZeile1" xml:space="preserve">
+    <value>Teil-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermTeilsystemZeile2" xml:space="preserve">
+    <value>system</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermWandkonstruktionZeile1" xml:space="preserve">
+    <value>Wand-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermWandkonstruktionZeile2" xml:space="preserve">
+    <value>konstr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimaboden" xml:space="preserve">
+    <value>Verlegedaten Modul Klimaboden</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimaboden2" xml:space="preserve">
+    <value>Verlegedaten Modul Klimaboden - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenAnzahlModule" xml:space="preserve">
+    <value>Anzahl Module</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile1" xml:space="preserve">
+    <value>mh/</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2" xml:space="preserve">
+    <value>HK¶l/h</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenFlaecheUnbeheiztZeile1" xml:space="preserve">
+    <value>AUnb.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenFlaecheUnbeheiztZeile2" xml:space="preserve">
+    <value>m²</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenHeizkreiseZeile1" xml:space="preserve">
+    <value>Heiz-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenHeizkreiseZeile2" xml:space="preserve">
+    <value>kreis(e)</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenModuleDicht" xml:space="preserve">
+    <value>Dicht</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenModuleModulierend" xml:space="preserve">
+    <value>Modulierend</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenModuleSonstige" xml:space="preserve">
+    <value>Sonstige</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenRaumNameZeile1" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenRaumNameZeile2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenRaumNrZeile1" xml:space="preserve">
+    <value>Raum</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenRaumNrZeile2" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenTeilsystemZeile1" xml:space="preserve">
+    <value>Teil-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenTeilsystemZeile2" xml:space="preserve">
+    <value>system</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile1" xml:space="preserve">
+    <value>Sonstige</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile2" xml:space="preserve">
+    <value>Verb.-¶ltg. m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenWdKonstruktionZeile1" xml:space="preserve">
+    <value>WD-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenWdKonstruktionZeile2" xml:space="preserve">
+    <value>Konstr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadecke" xml:space="preserve">
+    <value>Verlegedaten Modul Klimadecke</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadecke2" xml:space="preserve">
+    <value>Verlegedaten Modul Klimadecke - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeDeckenKonstruktion" xml:space="preserve">
+    <value>Decken-¶Konstr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeDurchflussProHk" xml:space="preserve">
+    <value>mh/HK¶l/h</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeFlaecheUnbeheizt" xml:space="preserve">
+    <value>AUnb.¶m²</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeHeizkreise" xml:space="preserve">
+    <value>Heiz-¶kreis(e)</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeKonstruktion" xml:space="preserve">
+    <value>Konstruktion: %KONSTRUKTION%</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeKonstruktionen" xml:space="preserve">
+    <value>Konstruktionen</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeModule" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeModulflaeche" xml:space="preserve">
+    <value>Modul-¶fläche m²</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeRaumName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeRaumNr" xml:space="preserve">
+    <value>Raum¶Nr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeReihe" xml:space="preserve">
+    <value>Reihe</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeTeilsystem" xml:space="preserve">
+    <value>Teil-¶system</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeVerbindeleitung" xml:space="preserve">
+    <value>Sonstige Verb.-¶ltg. m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenMenge" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="LL_Report_VerlegedatenVerteiler" xml:space="preserve">
+    <value>Verlegedaten für Verteiler %VERTEILER%</value>
+  </data>
+  <data name="LL_Report_VerlegedatenWandheizung" xml:space="preserve">
+    <value>Verlegedaten Wandheizung</value>
+  </data>
   <data name="LL_Report_VerteilerAnzahlGruppen" xml:space="preserve">
     <value>Grp.</value>
   </data>
@@ -1781,6 +2494,108 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   </data>
   <data name="LL_Report_Waermebedarf" xml:space="preserve">
     <value>Wärme-¶bedarf</value>
+  </data>
+  <data name="LL_Report_WandAnbindeleitung" xml:space="preserve">
+    <value>Anbindeleitung</value>
+  </data>
+  <data name="LL_Report_WandAnbindeleitungSenkrecht" xml:space="preserve">
+    <value>senkr.¶m</value>
+  </data>
+  <data name="LL_Report_WandAnbindeleitungWaagrecht" xml:space="preserve">
+    <value>waagr.¶m</value>
+  </data>
+  <data name="LL_Report_WandAnzahlRegister" xml:space="preserve">
+    <value>Anzahl Wärmeregister (Stk.)</value>
+  </data>
+  <data name="LL_Report_WandBereinigungLeistung" xml:space="preserve">
+    <value>QDelta¶W</value>
+  </data>
+  <data name="LL_Report_WandDruckverlust" xml:space="preserve">
+    <value>Druckverlust</value>
+  </data>
+  <data name="LL_Report_WandDruckverlustRohr" xml:space="preserve">
+    <value>Rohr¶mbar</value>
+  </data>
+  <data name="LL_Report_WandDruckverlustVerteiler" xml:space="preserve">
+    <value>Verteiler¶mbar</value>
+  </data>
+  <data name="LL_Report_WandFlaecheZeile1" xml:space="preserve">
+    <value>AWh</value>
+  </data>
+  <data name="LL_Report_WandFlaecheZeile2" xml:space="preserve">
+    <value>m²</value>
+  </data>
+  <data name="LL_Report_WandFlussgeschwindigkeit" xml:space="preserve">
+    <value>v</value>
+  </data>
+  <data name="LL_Report_WandHeizkreise" xml:space="preserve">
+    <value>Heiz-¶kreis(e)</value>
+  </data>
+  <data name="LL_Report_WandHeizkreisZeile1" xml:space="preserve">
+    <value>Heiz-</value>
+  </data>
+  <data name="LL_Report_WandHeizkreisZeile2" xml:space="preserve">
+    <value>kreis</value>
+  </data>
+  <data name="LL_Report_WandHinweisHintereinandergeschaltet" xml:space="preserve">
+    <value>Angegeben sind die Vor- und Rücklauftemperaturen am Verteiler, da mehrere Systeme hintereinandergeschaltet sind.</value>
+  </data>
+  <data name="LL_Report_WandLeistung" xml:space="preserve">
+    <value>QWH¶W</value>
+  </data>
+  <data name="LL_Report_WandLeistungProQm" xml:space="preserve">
+    <value>qWH¶W/m²</value>
+  </data>
+  <data name="LL_Report_WandRaumNameZeile1" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LL_Report_WandRaumNameZeile2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LL_Report_WandRaumNr" xml:space="preserve">
+    <value>Raum¶Nr.</value>
+  </data>
+  <data name="LL_Report_WandRaumNrZeile1" xml:space="preserve">
+    <value>Raum</value>
+  </data>
+  <data name="LL_Report_WandRaumNrZeile2" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="LL_Report_WandRaumtemperatur" xml:space="preserve">
+    <value>ti¶°C</value>
+  </data>
+  <data name="LL_Report_WandRohrlaenge" xml:space="preserve">
+    <value>Rohrlänge</value>
+  </data>
+  <data name="LL_Report_WandRohrlaengeAnbindung" xml:space="preserve">
+    <value>Anbinde-¶ltg. m</value>
+  </data>
+  <data name="LL_Report_WandRohrlaengeHeizkreisGesamt" xml:space="preserve">
+    <value>Heizkr.¶(ges) m</value>
+  </data>
+  <data name="LL_Report_WandRohrlaengeInWand" xml:space="preserve">
+    <value>In Wand¶m</value>
+  </data>
+  <data name="LL_Report_WandRuecklauftemperaur" xml:space="preserve">
+    <value>tr¶°C</value>
+  </data>
+  <data name="LL_Report_WandSollLeistung" xml:space="preserve">
+    <value>QSoll¶(ber) W</value>
+  </data>
+  <data name="LL_Report_WandTeilsystem" xml:space="preserve">
+    <value>Teil-¶system</value>
+  </data>
+  <data name="LL_Report_WandTeilsystemZeile1" xml:space="preserve">
+    <value>Teil-</value>
+  </data>
+  <data name="LL_Report_WandTeilsystemZeile2" xml:space="preserve">
+    <value>system</value>
+  </data>
+  <data name="LL_Report_WandVorlauftemperaur" xml:space="preserve">
+    <value>tv¶°C</value>
+  </data>
+  <data name="LL_Report_WandWassermenge" xml:space="preserve">
+    <value>Wasser-¶menge</value>
   </data>
   <data name="LL_Report_WarnungenUndFehler" xml:space="preserve">
     <value>Warnungen und Fehler</value>
@@ -3502,6 +4317,9 @@ fläche
   </data>
   <data name="Unit_Liter" xml:space="preserve">
     <value>l</value>
+  </data>
+  <data name="Unit_LiterProMinute" xml:space="preserve">
+    <value>l/min</value>
   </data>
   <data name="Unit_LiterProStunde" xml:space="preserve">
     <value>l/h</value>

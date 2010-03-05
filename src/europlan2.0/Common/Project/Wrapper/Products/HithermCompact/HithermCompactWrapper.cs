@@ -100,13 +100,11 @@ namespace Europlan.Common {
 				string temp = "";
 				foreach (HithermCompactRegister.HithermCompactRegisterTypeEnum item in Enum.GetValues(typeof(HithermCompactRegister.HithermCompactRegisterTypeEnum))) {
 					if (Registers.ContainsKey(item)) {
-						temp += new HithermCompactRegister.RegisterTypeEnumConverter().ConvertToString(item) + " (" + Registers[item] + "), ";
+						temp += new HithermCompactRegister.RegisterTypeEnumConverter(true).ConvertToString(item) + " (" + Registers[item] + "), ";
 					}
 				}
 				temp = temp.Trim();
 				temp = temp.TrimEnd(',');
-				// TODO Localization
-				temp = temp.Replace("HIT ", "");
 				return temp;
 			}
 		}

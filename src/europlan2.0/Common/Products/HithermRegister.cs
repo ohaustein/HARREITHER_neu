@@ -22,10 +22,42 @@ namespace Europlan.Common {
 			private static readonly string hit_250_5 = EuroplanRes.HithermRegister_Hit250HL; //"HIT 250/5";
 			private static readonly string hit_300_5 = EuroplanRes.HithermRegister_Hit300HL; //"HIT 300/5";
 
+			private static readonly string hit_50_10_Short = EuroplanRes.HithermRegister_Hit50L_Short; //"50/10";
+			private static readonly string hit_100_10_Short = EuroplanRes.HithermRegister_Hit100L_Short; //"100/10";
+			private static readonly string hit_150_10_Short = EuroplanRes.HithermRegister_Hit150L_Short; //"150/10";
+			private static readonly string hit_200_10_Short = EuroplanRes.HithermRegister_Hit200L_Short; //"200/10";
+			private static readonly string hit_250_10_Short = EuroplanRes.HithermRegister_Hit250L_Short; //"250/10";
+			private static readonly string hit_300_10_Short = EuroplanRes.HithermRegister_Hit300L_Short; //"300/10";
+			private static readonly string hit_50_5_Short = EuroplanRes.HithermRegister_Hit50HL_Short; //"50/5";
+			private static readonly string hit_100_5_Short = EuroplanRes.HithermRegister_Hit100HL_Short; //"100/5";
+			private static readonly string hit_150_5_Short = EuroplanRes.HithermRegister_Hit150HL_Short; //"150/5";
+			private static readonly string hit_200_5_Short = EuroplanRes.HithermRegister_Hit200HL_Short; //"200/5";
+			private static readonly string hit_250_5_Short = EuroplanRes.HithermRegister_Hit250HL_Short; //"250/5";
+			private static readonly string hit_300_5_Short = EuroplanRes.HithermRegister_Hit300HL_Short; //"300/5";
+
 			private Dictionary<string, HithermRegisterTypeEnum> mappingFromString = new Dictionary<string, HithermRegisterTypeEnum>();
 			private Dictionary<HithermRegisterTypeEnum, string> mappingToString = new Dictionary<HithermRegisterTypeEnum, string>();
 
+			private Dictionary<string, HithermRegisterTypeEnum> mappingFromShortString = new Dictionary<string, HithermRegisterTypeEnum>();
+			private Dictionary<HithermRegisterTypeEnum, string> mappingToShortString = new Dictionary<HithermRegisterTypeEnum, string>();
+
+			private bool shortNames = false;
+
 			public RegisterTypeEnumConverter() {
+				this.Initialize();
+			}
+
+			public RegisterTypeEnumConverter(bool shortNames) {
+				this.shortNames = shortNames;
+				this.Initialize();
+			}
+
+			public bool ShortNames {
+				get { return this.shortNames; }
+				set { this.shortNames = value; }
+			}
+
+			private void Initialize() {
 				mappingFromString.Add(hit_50_10, HithermRegisterTypeEnum.HIT_50_10);
 				mappingFromString.Add(hit_100_10, HithermRegisterTypeEnum.HIT_100_10);
 				mappingFromString.Add(hit_150_10, HithermRegisterTypeEnum.HIT_150_10);
@@ -51,6 +83,32 @@ namespace Europlan.Common {
 				mappingToString.Add(HithermRegisterTypeEnum.HIT_200_5, hit_200_5);
 				mappingToString.Add(HithermRegisterTypeEnum.HIT_250_5, hit_250_5);
 				mappingToString.Add(HithermRegisterTypeEnum.HIT_300_5, hit_300_5);
+
+				mappingFromShortString.Add(hit_50_10_Short, HithermRegisterTypeEnum.HIT_50_10);
+				mappingFromShortString.Add(hit_100_10_Short, HithermRegisterTypeEnum.HIT_100_10);
+				mappingFromShortString.Add(hit_150_10_Short, HithermRegisterTypeEnum.HIT_150_10);
+				mappingFromShortString.Add(hit_200_10_Short, HithermRegisterTypeEnum.HIT_200_10);
+				mappingFromShortString.Add(hit_250_10_Short, HithermRegisterTypeEnum.HIT_250_10);
+				mappingFromShortString.Add(hit_300_10_Short, HithermRegisterTypeEnum.HIT_300_10);
+				mappingFromShortString.Add(hit_50_5_Short, HithermRegisterTypeEnum.HIT_50_5);
+				mappingFromShortString.Add(hit_100_5_Short, HithermRegisterTypeEnum.HIT_100_5);
+				mappingFromShortString.Add(hit_150_5_Short, HithermRegisterTypeEnum.HIT_150_5);
+				mappingFromShortString.Add(hit_200_5_Short, HithermRegisterTypeEnum.HIT_200_5);
+				mappingFromShortString.Add(hit_250_5_Short, HithermRegisterTypeEnum.HIT_250_5);
+				mappingFromShortString.Add(hit_300_5_Short, HithermRegisterTypeEnum.HIT_300_5);
+
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_50_10, hit_50_10_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_100_10, hit_100_10_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_150_10, hit_150_10_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_200_10, hit_200_10_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_250_10, hit_250_10_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_300_10, hit_300_10_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_50_5, hit_50_5_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_100_5, hit_100_5_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_150_5, hit_150_5_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_200_5, hit_200_5_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_250_5, hit_250_5_Short);
+				mappingToShortString.Add(HithermRegisterTypeEnum.HIT_300_5, hit_300_5_Short);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -66,14 +124,23 @@ namespace Europlan.Common {
 					if (mappingFromString.ContainsKey((string)value)) {
 						return mappingFromString[(string)value];
 					}
+					if (mappingFromShortString.ContainsKey((string)value)) {
+						return mappingFromString[(string)value];
+					}
 				}
 				return base.ConvertFrom(context, culture, value);
 			}
 
 			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
 				if (value is HithermRegisterTypeEnum && destinationType == typeof(string)) {
-					if (mappingToString.ContainsKey((HithermRegisterTypeEnum)value)) {
-						return mappingToString[(HithermRegisterTypeEnum)value];
+					if (this.shortNames) {
+						if (mappingToShortString.ContainsKey((HithermRegisterTypeEnum)value)) {
+							return mappingToShortString[(HithermRegisterTypeEnum)value];
+						}
+					} else {
+						if (mappingToString.ContainsKey((HithermRegisterTypeEnum)value)) {
+							return mappingToString[(HithermRegisterTypeEnum)value];
+						}
 					}
 				}
 				return base.ConvertTo(context, culture, value, destinationType);

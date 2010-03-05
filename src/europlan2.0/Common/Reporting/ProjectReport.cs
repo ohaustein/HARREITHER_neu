@@ -321,7 +321,7 @@ namespace Europlan.Common {
 					if (enumerator.Key is string) {
 						string key = enumerator.Key as string;
 						if (key.StartsWith("LL_") || key.StartsWith("Unit_")) {
-							listLabel1.Variables.Add(key, (string)enumerator.Value);
+							listLabel1.Variables.Add("@" + key, (string)enumerator.Value);
 						}
 					}
 				}
@@ -1494,7 +1494,7 @@ namespace Europlan.Common {
 				    }
 				}
 				FloorOverviewWrapper wrapper = new FloorOverviewWrapper();
-				wrapper.HeatOrCool = EuroplanRes.ProjectReport_Heizbetrieb; //"Heizbetrieb";
+				wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb";
 				wrapper.FloorName = floor.Name;
 				wrapper.FloorArea = area;
 				wrapper.QH2o = transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat;
@@ -1506,7 +1506,7 @@ namespace Europlan.Common {
 
 				if (project.CalculateCoolLoad) {
 					wrapper = new FloorOverviewWrapper();
-					wrapper.HeatOrCool = EuroplanRes.ProjectReport_Kuehlbetrieb; //"Kühlbetrieb";
+					wrapper.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlbetrieb";
 					wrapper.FloorName = floor.Name;
 					wrapper.FloorArea = area;
 					wrapper.QH2o = transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool;
@@ -1627,7 +1627,7 @@ namespace Europlan.Common {
 				}
 
 				wrapper = new RegulatorCircuitWrapper();
-				wrapper.HeatOrCool = EuroplanRes.ProjectReport_Heizbetrieb; //"Heizbetrieb";
+				wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb";
 				wrapper.Id = rc.Id;
 				wrapper.Name = rc.Name;
 				wrapper.Medium = EuroplanRes.ProjectReport_Wasser; //"Wasser";
@@ -1639,7 +1639,7 @@ namespace Europlan.Common {
 				wrapperHeatList.Add(wrapper);
 				if (project.CalculateCoolLoad) {
 					wrapper = new RegulatorCircuitWrapper();
-					wrapper.HeatOrCool = EuroplanRes.ProjectReport_Kuehlbetrieb; //"Kühlbetrieb";
+					wrapper.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlbetrieb";
 					wrapper.Id = rc.Id;
 					wrapper.Name = rc.Name;
 					wrapper.Medium = EuroplanRes.ProjectReport_Wasser; //"Wasser";
@@ -1692,7 +1692,7 @@ namespace Europlan.Common {
 					}
 
 					wrapper = new DistributorWrapper();
-					wrapper.HeatOrCool = EuroplanRes.ProjectReport_Heizbetrieb; //"Heizbetrieb";
+					wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb";
 					wrapper.Id = distributor.Id;
 					wrapper.Name = distributor.Name;
 					wrapper.Groups = distributor.PlannedCircuits + distributor.AdditionalCircuits;
@@ -1705,7 +1705,7 @@ namespace Europlan.Common {
 					wrapperHeatList.Add(wrapper);
 					if (project.CalculateCoolLoad) {
 						wrapper = new DistributorWrapper();
-						wrapper.HeatOrCool = EuroplanRes.ProjectReport_Kuehlbetrieb; //"Kühlbetrieb";
+						wrapper.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlbetrieb";
 						wrapper.Id = distributor.Id;
 						wrapper.Name = distributor.Name;
 						wrapper.Groups = distributor.PlannedCircuits + distributor.AdditionalCircuits;
@@ -1774,7 +1774,7 @@ namespace Europlan.Common {
 							EurovalProduct ep = pp.Product as EurovalProduct;
 							if (wrapperHeat == null) {
 								wrapperHeat = new EurovalWrapper();
-								wrapperHeat.HeatOrCool = EuroplanRes.ProjectReport_Heizen; //"Heizen";
+								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
 
@@ -1826,7 +1826,7 @@ namespace Europlan.Common {
 							}
 							if (project.CalculateCoolLoad && wrapperCool == null) {
 								wrapperCool = new EurovalWrapper();
-								wrapperCool.HeatOrCool = EuroplanRes.ProjectReport_Kuehlen; //"Kühlen";
+								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
 								wrapperCool.FloorId = floor.Id;
 								wrapperCool.FloorName = floor.Name;
 
@@ -1999,7 +1999,7 @@ namespace Europlan.Common {
 							EcothermProduct ep = pp.Product as EcothermProduct;
 							if (wrapperHeat == null) {
 								wrapperHeat = new EcothermWrapper();
-								wrapperHeat.HeatOrCool = EuroplanRes.ProjectReport_Heizen; //"Heizen";
+								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
 
@@ -2051,7 +2051,7 @@ namespace Europlan.Common {
 							}
 							if (project.CalculateCoolLoad && wrapperCool == null) {
 								wrapperCool = new EcothermWrapper();
-								wrapperCool.HeatOrCool = EuroplanRes.ProjectReport_Kuehlen; //"Kühlen";
+								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
 								wrapperCool.FloorId = floor.Id;
 								wrapperCool.FloorName = floor.Name;
 
@@ -2225,7 +2225,7 @@ namespace Europlan.Common {
 							foreach (HithermCircuit c in hp.PlannedCircuits) {
 
 								wrapperHeat = new HithermWrapper();
-								wrapperHeat.HeatOrCool = EuroplanRes.ProjectReport_Heizen; //"Heizen";
+								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
 								wrapperHeat.RoomId = room.Id;
@@ -2282,7 +2282,7 @@ namespace Europlan.Common {
 
 								if (project.CalculateCoolLoad) {
 									wrapperCool = new HithermWrapper();
-									wrapperCool.HeatOrCool = EuroplanRes.ProjectReport_Kuehlen; //"Kühlen";
+									wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
 									wrapperCool.FloorId = floor.Id;
 									wrapperCool.FloorName = floor.Name;
 									wrapperCool.RoomId = room.Id;
@@ -2367,7 +2367,7 @@ namespace Europlan.Common {
 							foreach (HithermCompactCircuit c in hp.PlannedCircuits) {
 
 								wrapperHeat = new HithermCompactWrapper();
-								wrapperHeat.HeatOrCool = EuroplanRes.ProjectReport_Heizen; //"Heizen";
+								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
 								wrapperHeat.RoomId = room.Id;
@@ -2421,7 +2421,7 @@ namespace Europlan.Common {
 
 								if (project.CalculateCoolLoad) {
 									wrapperCool = new HithermCompactWrapper();
-									wrapperCool.HeatOrCool = EuroplanRes.ProjectReport_Kuehlen; //"Kühlen";
+									wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
 									wrapperCool.FloorId = floor.Id;
 									wrapperCool.FloorName = floor.Name;
 									wrapperCool.RoomId = room.Id;
@@ -2500,7 +2500,7 @@ namespace Europlan.Common {
 							ModulKlimaBodenProduct mp = pp.Product as ModulKlimaBodenProduct;
 							if (wrapperHeat == null) {
 								wrapperHeat = new ModulBodenWrapper();
-								wrapperHeat.HeatOrCool = EuroplanRes.ProjectReport_Heizen; //"Heizen";
+								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
 
@@ -2549,7 +2549,7 @@ namespace Europlan.Common {
 							}
 							if (project.CalculateCoolLoad && wrapperCool == null) {
 								wrapperCool = new ModulBodenWrapper();
-								wrapperCool.HeatOrCool = EuroplanRes.ProjectReport_Kuehlen; //"Kühlen";
+								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
 								wrapperCool.FloorId = floor.Id;
 								wrapperCool.FloorName = floor.Name;
 
@@ -2727,7 +2727,7 @@ namespace Europlan.Common {
 							ModulKlimaDeckeProduct mp = pp.Product as ModulKlimaDeckeProduct;
 							if (wrapperHeat == null) {
 								wrapperHeat = new ModulDeckeWrapper();
-								wrapperHeat.HeatOrCool = EuroplanRes.ProjectReport_Heizen; //"Heizen";
+								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
 
@@ -2790,7 +2790,7 @@ namespace Europlan.Common {
 							}
 							if (project.CalculateCoolLoad && wrapperCool == null) {
 								wrapperCool = new ModulDeckeWrapper();
-								wrapperCool.HeatOrCool = EuroplanRes.ProjectReport_Kuehlen; //"Kühlen";
+								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
 								wrapperCool.FloorId = floor.Id;
 								wrapperCool.FloorName = floor.Name;
 

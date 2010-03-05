@@ -2765,11 +2765,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1000 Par.
+        /// </summary>
+        internal static string HithermCompactRegister_Hit1000Par_Short {
+            get {
+                return ResourceManager.GetString("HithermCompactRegister_Hit1000Par_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HIT 1000 Std.
         /// </summary>
         internal static string HithermCompactRegister_Hit1000Std {
             get {
                 return ResourceManager.GetString("HithermCompactRegister_Hit1000Std", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1000 Std.
+        /// </summary>
+        internal static string HithermCompactRegister_Hit1000Std_Short {
+            get {
+                return ResourceManager.GetString("HithermCompactRegister_Hit1000Std_Short", resourceCulture);
             }
         }
         
@@ -2783,11 +2801,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1500 Par.
+        /// </summary>
+        internal static string HithermCompactRegister_Hit1500Par_Short {
+            get {
+                return ResourceManager.GetString("HithermCompactRegister_Hit1500Par_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HIT 1500 Std.
         /// </summary>
         internal static string HithermCompactRegister_Hit1500Std {
             get {
                 return ResourceManager.GetString("HithermCompactRegister_Hit1500Std", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1500 Std.
+        /// </summary>
+        internal static string HithermCompactRegister_Hit1500Std_Short {
+            get {
+                return ResourceManager.GetString("HithermCompactRegister_Hit1500Std_Short", resourceCulture);
             }
         }
         
@@ -2801,11 +2837,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 2000 Par.
+        /// </summary>
+        internal static string HithermCompactRegister_Hit2000Par_Short {
+            get {
+                return ResourceManager.GetString("HithermCompactRegister_Hit2000Par_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HIT 2000 Std.
         /// </summary>
         internal static string HithermCompactRegister_Hit2000Std {
             get {
                 return ResourceManager.GetString("HithermCompactRegister_Hit2000Std", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2000 Std.
+        /// </summary>
+        internal static string HithermCompactRegister_Hit2000Std_Short {
+            get {
+                return ResourceManager.GetString("HithermCompactRegister_Hit2000Std_Short", resourceCulture);
             }
         }
         
@@ -2819,11 +2873,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 2500 Std.
+        /// </summary>
+        internal static string HithermCompactRegister_Hit2500Std_Short {
+            get {
+                return ResourceManager.GetString("HithermCompactRegister_Hit2500Std_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HIT 620 Std.
         /// </summary>
         internal static string HithermCompactRegister_Hit620Std {
             get {
                 return ResourceManager.GetString("HithermCompactRegister_Hit620Std", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 620 Std.
+        /// </summary>
+        internal static string HithermCompactRegister_Hit620Std_Short {
+            get {
+                return ResourceManager.GetString("HithermCompactRegister_Hit620Std_Short", resourceCulture);
             }
         }
         
@@ -2846,11 +2918,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 100/5.
+        /// </summary>
+        internal static string HithermRegister_Hit100HL_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit100HL_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HIT 100/10.
         /// </summary>
         internal static string HithermRegister_Hit100L {
             get {
                 return ResourceManager.GetString("HithermRegister_Hit100L", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 100/10.
+        /// </summary>
+        internal static string HithermRegister_Hit100L_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit100L_Short", resourceCulture);
             }
         }
         
@@ -2864,11 +2954,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 150/5.
+        /// </summary>
+        internal static string HithermRegister_Hit150HL_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit150HL_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HIT 150/10.
         /// </summary>
         internal static string HithermRegister_Hit150L {
             get {
                 return ResourceManager.GetString("HithermRegister_Hit150L", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 150/10.
+        /// </summary>
+        internal static string HithermRegister_Hit150L_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit150L_Short", resourceCulture);
             }
         }
         
@@ -2882,11 +2990,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 200/5.
+        /// </summary>
+        internal static string HithermRegister_Hit200HL_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit200HL_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HIT 200/10.
         /// </summary>
         internal static string HithermRegister_Hit200L {
             get {
                 return ResourceManager.GetString("HithermRegister_Hit200L", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 200/10.
+        /// </summary>
+        internal static string HithermRegister_Hit200L_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit200L_Short", resourceCulture);
             }
         }
         
@@ -2900,11 +3026,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 250/5.
+        /// </summary>
+        internal static string HithermRegister_Hit250HL_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit250HL_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HIT 250/10.
         /// </summary>
         internal static string HithermRegister_Hit250L {
             get {
                 return ResourceManager.GetString("HithermRegister_Hit250L", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 250/10.
+        /// </summary>
+        internal static string HithermRegister_Hit250L_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit250L_Short", resourceCulture);
             }
         }
         
@@ -2918,11 +3062,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 300/5.
+        /// </summary>
+        internal static string HithermRegister_Hit300HL_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit300HL_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HIT 300/10.
         /// </summary>
         internal static string HithermRegister_Hit300L {
             get {
                 return ResourceManager.GetString("HithermRegister_Hit300L", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 300/10.
+        /// </summary>
+        internal static string HithermRegister_Hit300L_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit300L_Short", resourceCulture);
             }
         }
         
@@ -2936,11 +3098,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 50/5.
+        /// </summary>
+        internal static string HithermRegister_Hit50HL_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit50HL_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HIT 50/10.
         /// </summary>
         internal static string HithermRegister_Hit50L {
             get {
                 return ResourceManager.GetString("HithermRegister_Hit50L", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 50/10.
+        /// </summary>
+        internal static string HithermRegister_Hit50L_Short {
+            get {
+                return ResourceManager.GetString("HithermRegister_Hit50L_Short", resourceCulture);
             }
         }
         
@@ -3074,11 +3254,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 100/30.
+        /// </summary>
+        internal static string KlimaFlaechenModul_100_30_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_100_30_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modul 100/40.
         /// </summary>
         internal static string KlimaFlaechenModul_100_40 {
             get {
                 return ResourceManager.GetString("KlimaFlaechenModul_100_40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 100/40.
+        /// </summary>
+        internal static string KlimaFlaechenModul_100_40_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_100_40_Short", resourceCulture);
             }
         }
         
@@ -3092,6 +3290,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 120/30.
+        /// </summary>
+        internal static string KlimaFlaechenModul_120_30_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_120_30_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modul 60/60.
         /// </summary>
         internal static string KlimaFlaechenModul_60_60 {
@@ -3101,11 +3308,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 60/60.
+        /// </summary>
+        internal static string KlimaFlaechenModul_60_60_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_60_60_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modul 80/30.
         /// </summary>
         internal static string KlimaFlaechenModul_80_30 {
             get {
                 return ResourceManager.GetString("KlimaFlaechenModul_80_30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 80/30.
+        /// </summary>
+        internal static string KlimaFlaechenModul_80_30_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_80_30_Short", resourceCulture);
             }
         }
         
@@ -3615,8 +3840,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Flächenaufstellung ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.
-        ///Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben..
+        ///   Looks up a localized string similar to Die Flächenaufstellung ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.¶Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben..
         /// </summary>
         internal static string LL_QuickDimensioning_HinweisText {
             get {
@@ -3913,6 +4137,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auslegung Ecotherm® Fußbodenheizung - %GESCHOSS% (Heizbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungEcothermGeschossHeiz {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungEcothermGeschossHeiz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Ecotherm® Fußbodenheizung - %GESCHOSS% (Kühlbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungEcothermGeschossKuehl {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungEcothermGeschossKuehl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auslegung Euroval® Fußbodenheizung - %GESCHOSS%.
         /// </summary>
         internal static string LL_Report_AuslegungEurovalGeschoss {
@@ -3945,6 +4187,141 @@ namespace Europlan.Common {
         internal static string LL_Report_AuslegungFussboden {
             get {
                 return ResourceManager.GetString("LL_Report_AuslegungFussboden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Hitherm Compact Klimawand - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_AuslegungHithermCompactGeschoss {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungHithermCompactGeschoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Hitherm Compact Klimawand - %GESCHOSS% (Heizbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungHithermCompactGeschossHeiz {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungHithermCompactGeschossHeiz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Hitherm Compact Klimawand - %GESCHOSS% (Kühlbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungHithermCompactGeschossKuehl {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungHithermCompactGeschossKuehl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Hitherm Klimawand - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_AuslegungHithermGeschoss {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungHithermGeschoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Hitherm Klimawand - %GESCHOSS% (Heizbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungHithermGeschossHeiz {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungHithermGeschossHeiz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Hitherm Klimawand - %GESCHOSS% (Kühlbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungHithermGeschossKuehl {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungHithermGeschossKuehl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden.
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimaboden {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimaboden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimabodenGeschoss {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimabodenGeschoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden - %GESCHOSS% (Heizbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimabodenGeschossHeiz {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimabodenGeschossHeiz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden - %GESCHOSS% (Kühlbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimabodenGeschossKuehl {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimabodenGeschossKuehl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimadecke.
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimadecke {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimadecke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimadecke - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimadeckeGeschoss {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimadeckeGeschoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimadecke - %GESCHOSS% (Heizbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimadeckeGeschossHeiz {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimadeckeGeschossHeiz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimadecke - %GESCHOSS% (Kühlbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimadeckeGeschossKuehl {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimadeckeGeschossKuehl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Wandheizung.
+        /// </summary>
+        internal static string LL_Report_AuslegungWand {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungWand", resourceCulture);
             }
         }
         
@@ -3985,6 +4362,60 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bestellvorschlag.
+        /// </summary>
+        internal static string LL_Report_Bestellvorschlag {
+            get {
+                return ResourceManager.GetString("LL_Report_Bestellvorschlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artikel.
+        /// </summary>
+        internal static string LL_Report_BestellvorschlagArtikel {
+            get {
+                return ResourceManager.GetString("LL_Report_BestellvorschlagArtikel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bestellnr..
+        /// </summary>
+        internal static string LL_Report_BestellvorschlagBestellnummer {
+            get {
+                return ResourceManager.GetString("LL_Report_BestellvorschlagBestellnummer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diese Artikel können vom Programm nicht exakt berechnet werden und müssen vom Planenden ermittelt werden!.
+        /// </summary>
+        internal static string LL_Report_BestellvorschlagHinweis {
+            get {
+                return ResourceManager.GetString("LL_Report_BestellvorschlagHinweis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Materialbedarf %KATEGORIE%.
+        /// </summary>
+        internal static string LL_Report_BestellvorschlagKategorie {
+            get {
+                return ResourceManager.GetString("LL_Report_BestellvorschlagKategorie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menge.
+        /// </summary>
+        internal static string LL_Report_BestellvorschlagMenge {
+            get {
+                return ResourceManager.GetString("LL_Report_BestellvorschlagMenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bezeichnung.
         /// </summary>
         internal static string LL_Report_Bezeichnung {
@@ -4008,6 +4439,42 @@ namespace Europlan.Common {
         internal static string LL_Report_BilanzEuroval {
             get {
                 return ResourceManager.GetString("LL_Report_BilanzEuroval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilanz Hitherm Klimawand.
+        /// </summary>
+        internal static string LL_Report_BilanzHitherm {
+            get {
+                return ResourceManager.GetString("LL_Report_BilanzHitherm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilanz Hitherm Compact Klimawand.
+        /// </summary>
+        internal static string LL_Report_BilanzHithermCompact {
+            get {
+                return ResourceManager.GetString("LL_Report_BilanzHithermCompact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilanz Modul Klimaboden.
+        /// </summary>
+        internal static string LL_Report_BilanzKlimaboden {
+            get {
+                return ResourceManager.GetString("LL_Report_BilanzKlimaboden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilanz Modul Klimadecke.
+        /// </summary>
+        internal static string LL_Report_BilanzKlimadecke {
+            get {
+                return ResourceManager.GetString("LL_Report_BilanzKlimadecke", resourceCulture);
             }
         }
         
@@ -4516,6 +4983,474 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anbindeltg.¶m.
+        /// </summary>
+        internal static string LL_Report_KlimabodenAnbindeleitung {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenAnbindeleitung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anzahl¶Module.
+        /// </summary>
+        internal static string LL_Report_KlimabodenAnzahlModule {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenAnzahlModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Druckverlust.
+        /// </summary>
+        internal static string LL_Report_KlimabodenDruckverlust {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenDruckverlust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HK¶mbar.
+        /// </summary>
+        internal static string LL_Report_KlimabodenDruckverlustHeizkreis {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenDruckverlustHeizkreis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verteiler¶mbar.
+        /// </summary>
+        internal static string LL_Report_KlimabodenDruckverlustVerteiler {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenDruckverlustVerteiler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FB-Konstr.¶RL,B¶m²K/W.
+        /// </summary>
+        internal static string LL_Report_KlimabodenFbKonstruktion {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenFbKonstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anb.¶m².
+        /// </summary>
+        internal static string LL_Report_KlimabodenFlaecheAnbindung {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenFlaecheAnbindung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dicht¶m².
+        /// </summary>
+        internal static string LL_Report_KlimabodenFlaecheDicht {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenFlaecheDicht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modulierend¶m².
+        /// </summary>
+        internal static string LL_Report_KlimabodenFlaecheModulierend {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenFlaecheModulierend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstige¶m².
+        /// </summary>
+        internal static string LL_Report_KlimabodenFlaecheSonstige {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenFlaecheSonstige", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to v.
+        /// </summary>
+        internal static string LL_Report_KlimabodenFlussgeschwindigkeit {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenFlussgeschwindigkeit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-¶kreise.
+        /// </summary>
+        internal static string LL_Report_KlimabodenHeizkreise {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenHeizkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-¶kreis(e).
+        /// </summary>
+        internal static string LL_Report_KlimabodenHeizkreise2 {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenHeizkreise2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Angegeben sind die Vor- und Rücklauftemperaturen am Verteiler, da mehrere Systeme hintereinandergeschaltet sind..
+        /// </summary>
+        internal static string LL_Report_KlimabodenHinweisHintereinandergeschaltet {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenHinweisHintereinandergeschaltet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Angegeben sind die hydraulischen Daten für den gesamten Heizkreis, da mehrere Systeme hintereinandergeschaltet sind..
+        /// </summary>
+        internal static string LL_Report_KlimabodenHinweisHydraulisch {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenHinweisHydraulisch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QFBH¶W.
+        /// </summary>
+        internal static string LL_Report_KlimabodenLeistung {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to qFBH¶W/m².
+        /// </summary>
+        internal static string LL_Report_KlimabodenLeistungProQm {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenLeistungProQm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tFB¶°C.
+        /// </summary>
+        internal static string LL_Report_KlimabodenOberflaechenTemp {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenOberflaechenTemp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LL_Report_KlimabodenRaumName {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenRaumName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum¶Nr..
+        /// </summary>
+        internal static string LL_Report_KlimabodenRaumNr {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenRaumNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ti¶°C.
+        /// </summary>
+        internal static string LL_Report_KlimabodenRaumtemperatur {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenRaumtemperatur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tr¶°C.
+        /// </summary>
+        internal static string LL_Report_KlimabodenRuecklauftemperaur {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenRuecklauftemperaur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QSoll¶(ber) W.
+        /// </summary>
+        internal static string LL_Report_KlimabodenSollLeistung {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenSollLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Systemkomponenten.
+        /// </summary>
+        internal static string LL_Report_KlimabodenSystemkomponenten {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenSystemkomponenten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-¶system.
+        /// </summary>
+        internal static string LL_Report_KlimabodenTeilsystem {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenTeilsystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tv¶°C.
+        /// </summary>
+        internal static string LL_Report_KlimabodenVorlauftemperaur {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenVorlauftemperaur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wasser-¶menge.
+        /// </summary>
+        internal static string LL_Report_KlimabodenWassermenge {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenWassermenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WD-Konstr.¶Ru¶m²K/W.
+        /// </summary>
+        internal static string LL_Report_KlimabodenWdKonstruktion {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenWdKonstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeltg.¶m.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeAnbindeleitung {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeAnbindeleitung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anzahl Module (Stk.).
+        /// </summary>
+        internal static string LL_Report_KlimadeckeAnzahlModule {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeAnzahlModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decken-Konstr.¶RL,B¶m²K/W.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeDeckenKonstruktion {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeDeckenKonstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Druckverlust.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeDruckverlust {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeDruckverlust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HK¶mbar.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeDruckverlustHeizkreis {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeDruckverlustHeizkreis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verteiler¶mbar.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeDruckverlustVerteiler {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeDruckverlustVerteiler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anb.¶m².
+        /// </summary>
+        internal static string LL_Report_KlimadeckeFlaecheAnbindung {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeFlaecheAnbindung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modulfläche¶m².
+        /// </summary>
+        internal static string LL_Report_KlimadeckeFlaecheModule {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeFlaecheModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to v.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeFlussgeschwindigkeit {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeFlussgeschwindigkeit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-¶kreise.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeHeizkreise {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeHeizkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-¶kreis(e).
+        /// </summary>
+        internal static string LL_Report_KlimadeckeHeizkreise2 {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeHeizkreise2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Angegeben sind die Vor- und Rücklauftemperaturen am Verteiler, da mehrere Systeme hintereinandergeschaltet sind..
+        /// </summary>
+        internal static string LL_Report_KlimadeckeHinweisHintereinandergeschaltet {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeHinweisHintereinandergeschaltet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QDH¶W.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeLeistung {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to qDH¶W/m².
+        /// </summary>
+        internal static string LL_Report_KlimadeckeLeistungProQm {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeLeistungProQm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeRaumName {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeRaumName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum¶Nr..
+        /// </summary>
+        internal static string LL_Report_KlimadeckeRaumNr {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeRaumNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ti¶°C.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeRaumtemperatur {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeRaumtemperatur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tr¶°C.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeRuecklauftemperaur {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeRuecklauftemperaur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QSoll¶(ber) W.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeSollLeistung {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeSollLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Systemkomponenten.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeSystemkomponenten {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeSystemkomponenten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-¶system.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeTeilsystem {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeTeilsystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tv¶°C.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeVorlauftemperaur {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeVorlauftemperaur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wasser-¶menge.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeWassermenge {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeWassermenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WD-Konstr.¶Ru¶m²K/W.
+        /// </summary>
+        internal static string LL_Report_KlimadeckeWdKonstruktion {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimadeckeWdKonstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kontaktadresse.
         /// </summary>
         internal static string LL_Report_Kontaktadresse {
@@ -4557,6 +5492,60 @@ namespace Europlan.Common {
         internal static string LL_Report_LeistungNachInnen {
             get {
                 return ResourceManager.GetString("LL_Report_LeistungNachInnen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Materialbedarf.
+        /// </summary>
+        internal static string LL_Report_Materialbedarf {
+            get {
+                return ResourceManager.GetString("LL_Report_Materialbedarf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artikel.
+        /// </summary>
+        internal static string LL_Report_MaterialbedarfArtikel {
+            get {
+                return ResourceManager.GetString("LL_Report_MaterialbedarfArtikel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bestellnr..
+        /// </summary>
+        internal static string LL_Report_MaterialbedarfBestellnummer {
+            get {
+                return ResourceManager.GetString("LL_Report_MaterialbedarfBestellnummer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diese Artikel können vom Programm nicht exakt berechnet werden und müssen vom Planenden ermittelt werden!.
+        /// </summary>
+        internal static string LL_Report_MaterialbedarfHinweis {
+            get {
+                return ResourceManager.GetString("LL_Report_MaterialbedarfHinweis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Materialbedarf %KATEGORIE%.
+        /// </summary>
+        internal static string LL_Report_MaterialbedarfKategorie {
+            get {
+                return ResourceManager.GetString("LL_Report_MaterialbedarfKategorie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menge.
+        /// </summary>
+        internal static string LL_Report_MaterialbedarfMenge {
+            get {
+                return ResourceManager.GetString("LL_Report_MaterialbedarfMenge", resourceCulture);
             }
         }
         
@@ -4831,6 +5820,1176 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten.
+        /// </summary>
+        internal static string LL_Report_Verlegedaten {
+            get {
+                return ResourceManager.GetString("LL_Report_Verlegedaten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bezeichnung.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenBezeichung {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenBezeichung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Ecotherm® Fußbodenheizung - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcotherm {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcotherm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aufenthaltsz..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermAufenthaltszone {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermAufenthaltszone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mh/.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermDurchflussProHkZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermDurchflussProHkZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HK¶l/h.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermDurchflussProHkZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermDurchflussProHkZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fläche/¶HK.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermFlaecheProHk {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermFlaecheProHk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AUnb..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to m².
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermHeizkreiseZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermHeizkreiseZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kreis(e).
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermHeizkreiseZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermHeizkreiseZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge/¶HK.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermLaengeProHk {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermLaengeProHk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randzone.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermRandzone {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermRandzone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermRaumNameZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermRaumNameZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermRaumNameZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermRaumNameZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermRaumNrZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermRaumNrZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermRaumNrZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermRaumNrZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lRohr/.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HK¶m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermTeilsystemZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermTeilsystemZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to system.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermTeilsystemZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermTeilsystemZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VA.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermVerlegeart {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermVerlegeart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WD-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermWdKonstruktionZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermWdKonstruktionZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermWdKonstruktionZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermWdKonstruktionZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Euroval® Fußbodenheizung - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEuroval {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEuroval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aufenthaltsz..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalAufenthaltszone {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalAufenthaltszone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mh/.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalDurchflussProHkZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalDurchflussProHkZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HK¶l/h.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalDurchflussProHkZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalDurchflussProHkZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fläche/¶HK.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalFlaecheProHk {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalFlaecheProHk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AUnb..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalFlaecheUnbeheiztZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalFlaecheUnbeheiztZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to m².
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalFlaecheUnbeheiztZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalFlaecheUnbeheiztZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalHeizkreiseZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalHeizkreiseZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kreis(e).
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalHeizkreiseZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalHeizkreiseZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge/¶HK.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalLaengeProHk {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalLaengeProHk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randzone.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalRandzone {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalRandzone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalRaumNameZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalRaumNameZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalRaumNameZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalRaumNameZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalRaumNrZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalRaumNrZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalRaumNrZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalRaumNrZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lRohr/.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalRohrlaengeProHkZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalRohrlaengeProHkZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HK¶m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalRohrlaengeProHkZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalRohrlaengeProHkZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalTeilsystemZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalTeilsystemZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to system.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalTeilsystemZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalTeilsystemZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VA.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalVerlegeart {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalVerlegeart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WD-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalWdKonstruktionZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalWdKonstruktionZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalWdKonstruktionZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalWdKonstruktionZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Fußbodenheizung.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenFussbodenheizung {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenFussbodenheizung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizkr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHeizkreis {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHeizkreis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Hitherm Klimawand - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHitherm {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHitherm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitung.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermAnbindeleitung {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermAnbindeleitung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Hitherm Compact Klimawand - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompact {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitung.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactAnbindeleitung {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactAnbindeleitung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gesamt-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fläche¶m².
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactHeizkreisZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactHeizkreisZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kreis.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactHeizkreisZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactHeizkreisZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RL¶m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactLaengeRuecklauf {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactLaengeRuecklauf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VL¶m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactLaengeVorlauf {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactLaengeVorlauf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand¶m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactLaengeWand {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactLaengeWand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactRaumNameZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactRaumNameZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactRaumNameZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactRaumNameZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactRaumNrZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactRaumNrZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactRaumNrZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactRaumNrZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anzahl¶Reg..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactRegisterAnzahl {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactRegisterAnzahl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registerflächen.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactRegisterflaechen {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactRegisterflaechen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactRegisterTyp {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactRegisterTyp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactTeilsystemZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactTeilsystemZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to system.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactTeilsystemZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactTeilsystemZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactWandkonstruktionZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactWandkonstruktionZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to konstr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactWandkonstruktionZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactWandkonstruktionZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RA10 ¶m².
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermFlaecheRa10 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermFlaecheRa10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RA 5¶m².
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermFlaecheRa5 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermFlaecheRa5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gesamtfläche.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermGesamtflaeche {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermGesamtflaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermHeizkreisZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermHeizkreisZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kreis.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermHeizkreisZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermHeizkreisZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RL¶m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermLaengeRuecklauf {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermLaengeRuecklauf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VL¶m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermLaengeVorlauf {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermLaengeVorlauf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand¶m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermLaengeWand {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermLaengeWand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermRaumNameZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermRaumNameZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermRaumNameZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermRaumNameZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermRaumNrZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermRaumNrZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermRaumNrZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermRaumNrZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breite¶cm.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermRegisterBreite {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermRegisterBreite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registerflächen.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermRegisterflaechen {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermRegisterflaechen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rohre.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermRegisterRohre {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermRegisterRohre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermRegisterTyp {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermRegisterTyp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermTeilsystemZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermTeilsystemZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to system.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermTeilsystemZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermTeilsystemZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermWandkonstruktionZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermWandkonstruktionZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to konstr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermWandkonstruktionZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermWandkonstruktionZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimaboden {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimaboden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimaboden2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimaboden2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anzahl Module.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenAnzahlModule {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenAnzahlModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mh/.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HK¶l/h.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AUnb..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenFlaecheUnbeheiztZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenFlaecheUnbeheiztZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to m².
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenFlaecheUnbeheiztZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenFlaecheUnbeheiztZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenHeizkreiseZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenHeizkreiseZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kreis(e).
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenHeizkreiseZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenHeizkreiseZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dicht.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenModuleDicht {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenModuleDicht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modulierend.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenModuleModulierend {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenModuleModulierend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstige.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenModuleSonstige {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenModuleSonstige", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenRaumNameZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenRaumNameZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenRaumNameZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenRaumNameZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenRaumNrZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenRaumNrZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenRaumNrZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenRaumNrZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenTeilsystemZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenTeilsystemZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to system.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenTeilsystemZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenTeilsystemZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstige.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verb.-¶ltg. m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WD-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenWdKonstruktionZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenWdKonstruktionZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenWdKonstruktionZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenWdKonstruktionZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimadecke.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadecke {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadecke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimadecke - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadecke2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadecke2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decken-¶Konstr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeDeckenKonstruktion {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeDeckenKonstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mh/HK¶l/h.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeDurchflussProHk {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeDurchflussProHk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AUnb.¶m².
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeFlaecheUnbeheizt {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeFlaecheUnbeheizt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-¶kreis(e).
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeHeizkreise {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeHeizkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktion: %KONSTRUKTION%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeKonstruktion {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeKonstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktionen.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeKonstruktionen {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeKonstruktionen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeModule {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modul-¶fläche m².
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeModulflaeche {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeModulflaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeRaumName {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeRaumName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum¶Nr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeRaumNr {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeRaumNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reihe.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeReihe {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeReihe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-¶system.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeTeilsystem {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeTeilsystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstige Verb.-¶ltg. m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeVerbindeleitung {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeVerbindeleitung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menge.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenMenge {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenMenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten für Verteiler %VERTEILER%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenVerteiler {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenVerteiler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Wandheizung.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenWandheizung {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenWandheizung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Grp..
         /// </summary>
         internal static string LL_Report_VerteilerAnzahlGruppen {
@@ -4926,6 +7085,312 @@ namespace Europlan.Common {
         internal static string LL_Report_Waermebedarf {
             get {
                 return ResourceManager.GetString("LL_Report_Waermebedarf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitung.
+        /// </summary>
+        internal static string LL_Report_WandAnbindeleitung {
+            get {
+                return ResourceManager.GetString("LL_Report_WandAnbindeleitung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to senkr.¶m.
+        /// </summary>
+        internal static string LL_Report_WandAnbindeleitungSenkrecht {
+            get {
+                return ResourceManager.GetString("LL_Report_WandAnbindeleitungSenkrecht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to waagr.¶m.
+        /// </summary>
+        internal static string LL_Report_WandAnbindeleitungWaagrecht {
+            get {
+                return ResourceManager.GetString("LL_Report_WandAnbindeleitungWaagrecht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anzahl Wärmeregister (Stk.).
+        /// </summary>
+        internal static string LL_Report_WandAnzahlRegister {
+            get {
+                return ResourceManager.GetString("LL_Report_WandAnzahlRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QDelta¶W.
+        /// </summary>
+        internal static string LL_Report_WandBereinigungLeistung {
+            get {
+                return ResourceManager.GetString("LL_Report_WandBereinigungLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Druckverlust.
+        /// </summary>
+        internal static string LL_Report_WandDruckverlust {
+            get {
+                return ResourceManager.GetString("LL_Report_WandDruckverlust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rohr¶mbar.
+        /// </summary>
+        internal static string LL_Report_WandDruckverlustRohr {
+            get {
+                return ResourceManager.GetString("LL_Report_WandDruckverlustRohr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verteiler¶mbar.
+        /// </summary>
+        internal static string LL_Report_WandDruckverlustVerteiler {
+            get {
+                return ResourceManager.GetString("LL_Report_WandDruckverlustVerteiler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AWh.
+        /// </summary>
+        internal static string LL_Report_WandFlaecheZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_WandFlaecheZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to m².
+        /// </summary>
+        internal static string LL_Report_WandFlaecheZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_WandFlaecheZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to v.
+        /// </summary>
+        internal static string LL_Report_WandFlussgeschwindigkeit {
+            get {
+                return ResourceManager.GetString("LL_Report_WandFlussgeschwindigkeit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-¶kreis(e).
+        /// </summary>
+        internal static string LL_Report_WandHeizkreise {
+            get {
+                return ResourceManager.GetString("LL_Report_WandHeizkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-.
+        /// </summary>
+        internal static string LL_Report_WandHeizkreisZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_WandHeizkreisZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kreis.
+        /// </summary>
+        internal static string LL_Report_WandHeizkreisZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_WandHeizkreisZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Angegeben sind die Vor- und Rücklauftemperaturen am Verteiler, da mehrere Systeme hintereinandergeschaltet sind..
+        /// </summary>
+        internal static string LL_Report_WandHinweisHintereinandergeschaltet {
+            get {
+                return ResourceManager.GetString("LL_Report_WandHinweisHintereinandergeschaltet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QWH¶W.
+        /// </summary>
+        internal static string LL_Report_WandLeistung {
+            get {
+                return ResourceManager.GetString("LL_Report_WandLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to qWH¶W/m².
+        /// </summary>
+        internal static string LL_Report_WandLeistungProQm {
+            get {
+                return ResourceManager.GetString("LL_Report_WandLeistungProQm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LL_Report_WandRaumNameZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRaumNameZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string LL_Report_WandRaumNameZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRaumNameZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum¶Nr..
+        /// </summary>
+        internal static string LL_Report_WandRaumNr {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRaumNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum.
+        /// </summary>
+        internal static string LL_Report_WandRaumNrZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRaumNrZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nr..
+        /// </summary>
+        internal static string LL_Report_WandRaumNrZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRaumNrZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ti¶°C.
+        /// </summary>
+        internal static string LL_Report_WandRaumtemperatur {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRaumtemperatur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rohrlänge.
+        /// </summary>
+        internal static string LL_Report_WandRohrlaenge {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRohrlaenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbinde-¶ltg. m.
+        /// </summary>
+        internal static string LL_Report_WandRohrlaengeAnbindung {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRohrlaengeAnbindung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizkr.¶(ges) m.
+        /// </summary>
+        internal static string LL_Report_WandRohrlaengeHeizkreisGesamt {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRohrlaengeHeizkreisGesamt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In Wand¶m.
+        /// </summary>
+        internal static string LL_Report_WandRohrlaengeInWand {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRohrlaengeInWand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tr¶°C.
+        /// </summary>
+        internal static string LL_Report_WandRuecklauftemperaur {
+            get {
+                return ResourceManager.GetString("LL_Report_WandRuecklauftemperaur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QSoll¶(ber) W.
+        /// </summary>
+        internal static string LL_Report_WandSollLeistung {
+            get {
+                return ResourceManager.GetString("LL_Report_WandSollLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-¶system.
+        /// </summary>
+        internal static string LL_Report_WandTeilsystem {
+            get {
+                return ResourceManager.GetString("LL_Report_WandTeilsystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-.
+        /// </summary>
+        internal static string LL_Report_WandTeilsystemZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_WandTeilsystemZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to system.
+        /// </summary>
+        internal static string LL_Report_WandTeilsystemZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_WandTeilsystemZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tv¶°C.
+        /// </summary>
+        internal static string LL_Report_WandVorlauftemperaur {
+            get {
+                return ResourceManager.GetString("LL_Report_WandVorlauftemperaur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wasser-¶menge.
+        /// </summary>
+        internal static string LL_Report_WandWassermenge {
+            get {
+                return ResourceManager.GetString("LL_Report_WandWassermenge", resourceCulture);
             }
         }
         
@@ -9899,6 +12364,15 @@ namespace Europlan.Common {
         internal static string Unit_Liter {
             get {
                 return ResourceManager.GetString("Unit_Liter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to l/min.
+        /// </summary>
+        internal static string Unit_LiterProMinute {
+            get {
+                return ResourceManager.GetString("Unit_LiterProMinute", resourceCulture);
             }
         }
         

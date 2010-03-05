@@ -18,10 +18,38 @@ namespace Europlan.Common {
 			private static readonly string hitc_1500_par = EuroplanRes.HithermCompactRegister_Hit1500Par; //"HIT 1500 Par";
 			private static readonly string hitc_2000_par = EuroplanRes.HithermCompactRegister_Hit2000Par; //"HIT 2000 Par";
 
+			private static readonly string hitc_620_std_Short = EuroplanRes.HithermCompactRegister_Hit620Std_Short; //"620 Std";
+			private static readonly string hitc_1000_std_Short = EuroplanRes.HithermCompactRegister_Hit1000Std_Short; //"1000 Std";
+			private static readonly string hitc_1500_std_Short = EuroplanRes.HithermCompactRegister_Hit1500Std_Short; //"1500 Std";
+			private static readonly string hitc_2000_std_Short = EuroplanRes.HithermCompactRegister_Hit2000Std_Short; //"2000 Std";
+			private static readonly string hitc_2500_std_Short = EuroplanRes.HithermCompactRegister_Hit2500Std_Short; //"2500 Std";
+			private static readonly string hitc_1000_par_Short = EuroplanRes.HithermCompactRegister_Hit1000Par_Short; //"1000 Par";
+			private static readonly string hitc_1500_par_Short = EuroplanRes.HithermCompactRegister_Hit1500Par_Short; //"1500 Par";
+			private static readonly string hitc_2000_par_Short = EuroplanRes.HithermCompactRegister_Hit2000Par_Short; //"2000 Par";
+
 			private Dictionary<string, HithermCompactRegisterTypeEnum> mappingFromString = new Dictionary<string, HithermCompactRegisterTypeEnum>();
 			private Dictionary<HithermCompactRegisterTypeEnum, string> mappingToString = new Dictionary<HithermCompactRegisterTypeEnum, string>();
 
+			private Dictionary<string, HithermCompactRegisterTypeEnum> mappingFromShortString = new Dictionary<string, HithermCompactRegisterTypeEnum>();
+			private Dictionary<HithermCompactRegisterTypeEnum, string> mappingToShortString = new Dictionary<HithermCompactRegisterTypeEnum, string>();
+
+			public bool shortNames = false;
+
 			public RegisterTypeEnumConverter() {
+				this.Initialize();
+			}
+
+			public RegisterTypeEnumConverter(bool shortNames) {
+				this.shortNames = shortNames;
+				this.Initialize();
+			}
+
+			public bool ShortNames {
+				get { return this.shortNames; }
+				set { this.shortNames = value; }
+			}
+
+			private void Initialize() {
 				mappingFromString.Add(hitc_620_std, HithermCompactRegisterTypeEnum.HITC_620_Std);
 				mappingFromString.Add(hitc_1000_std, HithermCompactRegisterTypeEnum.HITC_1000_Std);
 				mappingFromString.Add(hitc_1500_std, HithermCompactRegisterTypeEnum.HITC_1500_Std);
@@ -39,6 +67,24 @@ namespace Europlan.Common {
 				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Par, hitc_1000_par);
 				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1500_Par, hitc_1500_par);
 				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_2000_Par, hitc_2000_par);
+
+				mappingFromShortString.Add(hitc_620_std_Short, HithermCompactRegisterTypeEnum.HITC_620_Std);
+				mappingFromShortString.Add(hitc_1000_std_Short, HithermCompactRegisterTypeEnum.HITC_1000_Std);
+				mappingFromShortString.Add(hitc_1500_std_Short, HithermCompactRegisterTypeEnum.HITC_1500_Std);
+				mappingFromShortString.Add(hitc_2000_std_Short, HithermCompactRegisterTypeEnum.HITC_2000_Std);
+				mappingFromShortString.Add(hitc_2500_std_Short, HithermCompactRegisterTypeEnum.HITC_2500_Std);
+				mappingFromShortString.Add(hitc_1000_par_Short, HithermCompactRegisterTypeEnum.HITC_1000_Par);
+				mappingFromShortString.Add(hitc_1500_par_Short, HithermCompactRegisterTypeEnum.HITC_1500_Par);
+				mappingFromShortString.Add(hitc_2000_par_Short, HithermCompactRegisterTypeEnum.HITC_2000_Par);
+
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_620_Std, hitc_620_std_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Std, hitc_1000_std_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_1500_Std, hitc_1500_std_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_2000_Std, hitc_2000_std_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_2500_Std, hitc_2500_std_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Par, hitc_1000_par_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_1500_Par, hitc_1500_par_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_2000_Par, hitc_2000_par_Short);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -54,14 +100,23 @@ namespace Europlan.Common {
 					if (mappingFromString.ContainsKey((string)value)) {
 						return mappingFromString[(string)value];
 					}
+					if (mappingFromShortString.ContainsKey((string)value)) {
+						return mappingFromString[(string)value];
+					}
 				}
 				return base.ConvertFrom(context, culture, value);
 			}
 
 			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
 				if (value is HithermCompactRegisterTypeEnum && destinationType == typeof(string)) {
-					if (mappingToString.ContainsKey((HithermCompactRegisterTypeEnum)value)) {
-						return mappingToString[(HithermCompactRegisterTypeEnum)value];
+					if (this.shortNames) {
+						if (mappingToShortString.ContainsKey((HithermCompactRegisterTypeEnum)value)) {
+							return mappingToShortString[(HithermCompactRegisterTypeEnum)value];
+						}
+					} else {
+						if (mappingToString.ContainsKey((HithermCompactRegisterTypeEnum)value)) {
+							return mappingToString[(HithermCompactRegisterTypeEnum)value];
+						}
 					}
 				}
 				return base.ConvertTo(context, culture, value, destinationType);

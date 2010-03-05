@@ -75,18 +75,16 @@ namespace Europlan.Common {
 						moduleCount++;
 						first = false;
 					} else {
-						temp += moduleCount.ToString() + "x " + new KlimaFlaechenModul.ModulTypeEnumConverter().ConvertToString(prevModuleType) + ", ";
+						temp += moduleCount.ToString() + "x " + new KlimaFlaechenModul.ModulTypeEnumConverter(true).ConvertToString(prevModuleType) + ", ";
 						moduleCount = 1;
 					}
 					prevModuleType = modul.ModulType;
 				}
 
-				temp += moduleCount.ToString() + "x " + new KlimaFlaechenModul.ModulTypeEnumConverter().ConvertToString(prevModuleType) + ", ";
+				temp += moduleCount.ToString() + "x " + new KlimaFlaechenModul.ModulTypeEnumConverter(true).ConvertToString(prevModuleType) + ", ";
 
 				temp = temp.Trim();
 				temp = temp.TrimEnd(',');
-				// TODO Localization
-				temp = temp.Replace("Modul ", "");
 				return temp;
 			}
 		}
