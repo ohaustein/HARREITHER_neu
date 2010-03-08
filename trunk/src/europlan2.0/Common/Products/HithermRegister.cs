@@ -490,7 +490,11 @@ namespace Europlan.Common {
 			}
 			set {
 				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
-					this.Rohre = 9 * (value + 5) / 50;
+					if (HithermProduct.ConfigUsePlus) {
+						this.Rohre = 14 * (value + 5) / 5 / 15;
+					} else {
+						this.Rohre = 9 * (value + 5) / 50;
+					}
 				} else {
 					this.Rohre = value / 10;
 				}
