@@ -985,7 +985,7 @@ namespace Europlan.Common {
 
 					// Bodenwinkel
 					if (ConfigUsePlus) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR68", 2);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR69", 2);
 					} else {
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI68", 2);
 					}

@@ -1265,7 +1265,7 @@ namespace Europlan.Common {
 				}
 				// Bodenwinkel
 				if (ConfigUsePlus) {
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HR68", 2);
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HR69", 2);
 				} else {
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI68", 2);
 				}
@@ -1295,7 +1295,7 @@ namespace Europlan.Common {
 			if (ConfigUsePlus) {
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR67", Double.NegativeInfinity);
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR70", Double.NegativeInfinity);
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR69", Double.NegativeInfinity);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR68", Double.NegativeInfinity);
 
 			} else {
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI67", Double.NegativeInfinity);
