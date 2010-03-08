@@ -13,8 +13,6 @@ namespace Europlan.Common {
 
 		private bool gridContentChanged = false;
 
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
-
 		private class LayDistanceItem {
 			public Nullable<EcothermProduct.EcothermLayDistance> layDistance;
 			public string name;

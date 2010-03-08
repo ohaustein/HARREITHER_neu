@@ -14,7 +14,6 @@ namespace Europlan.Common {
 		private ConnectionPipe pipe;
 		private bool updateOngoing = false;
 		private double availableArea;
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		public LengthAssistantForm(ConnectionPipe pipe) {
 			InitializeComponent();

@@ -15,8 +15,6 @@ namespace Europlan.Common {
 		private ConstructionListWrapper wrapper;
 		private bool adminMode = false;
 
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
-
 		public ConstructionEditorGrid() {
 			InitializeComponent();
 			this.wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration); // TODO

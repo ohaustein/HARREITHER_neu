@@ -25,7 +25,6 @@ namespace Europlan.Licensing {
 		public static Dictionary<string, string> DefaultModules {
 			get {
 				if (defaultModules == null) {
-					System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 					defaultModules = new Dictionary<string,string>();
 					defaultModules.Add(FeatInternal, EuroplanRes.AbstractLicensedModule_InterneLizenz /*"Interne Lizenz"*/);
 					defaultModules.Add(FeatAdmin, EuroplanRes.AbstractLicensedModule_Adminmodus /*"Adminmodus"*/);

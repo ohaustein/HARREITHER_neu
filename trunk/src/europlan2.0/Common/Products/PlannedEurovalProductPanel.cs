@@ -13,8 +13,6 @@ namespace Europlan.Common {
 		private PlannedProduct product = null;
 		private bool gridContentChanged = false;
 
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
-
 		private class LayDistanceItem {
 			public Nullable<EurovalProduct.EurovalLayDistance> layDistance;
 			public string name;

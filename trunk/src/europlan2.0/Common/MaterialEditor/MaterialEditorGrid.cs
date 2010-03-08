@@ -33,8 +33,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
-
 		private MaterialListWrapper wrapper;
 		private bool admin = false;
 

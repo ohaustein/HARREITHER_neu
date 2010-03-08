@@ -10,7 +10,6 @@ using System.Threading;
 
 namespace Europlan.Common {
 	public partial class ConstructionEditorForm : Form {
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		public ConstructionEditorForm(Construction construction) {
 			InitializeComponent();

@@ -16,8 +16,6 @@ namespace Europlan.Common {
 	[Serializable()]
 	public abstract class Product : IRequiredMaterial {
 
-		protected System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
-
 		public static readonly double rundrohr21mmAussenD = 0.021;
 		public static readonly double rundrohr21mmInnenD = 0.0162;
 		public static readonly double rundrohr21mmInnenA = (rundrohr21mmInnenD / 2) * (rundrohr21mmInnenD / 2) * Math.PI;
