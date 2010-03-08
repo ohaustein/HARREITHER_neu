@@ -13,7 +13,6 @@ namespace Europlan.Common {
 
 		private bool unsavedChanges = false;
 		private PlannedProduct product;
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		public ConnectionPipesForm(PlannedProduct product) {
 			this.product = product;

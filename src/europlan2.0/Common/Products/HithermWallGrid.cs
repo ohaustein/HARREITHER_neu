@@ -12,8 +12,6 @@ namespace Europlan.Common {
 
 		private bool showCompact = false;
 
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
-
 		public HithermWallGrid() {
 			InitializeComponent();
 

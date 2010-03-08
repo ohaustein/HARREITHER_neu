@@ -22,8 +22,6 @@ namespace Europlan.Common {
 
 		public event ConnectionPipePanelContentChangedHandler GridContentChanged;
 
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
-
 		public ConnectionPipePanel() {
 			InitializeComponent();
 			this.SetLanguage();

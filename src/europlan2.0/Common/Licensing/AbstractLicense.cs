@@ -16,8 +16,6 @@ namespace Europlan.Licensing {
 		protected List<ModuleType> modules;
 		protected List<SystemType> systems;
 
-		private System.Resources.ResourceManager resources = Europlan.Common.EuroplanRes.ResourceManager;
-
 		public AbstractLicense() {
 			this.modules = new List<ModuleType>();
 			this.systems = new List<SystemType>();

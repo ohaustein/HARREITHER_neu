@@ -13,7 +13,6 @@ namespace Europlan.Common {
 
 		private ConstructionScopeEnum defaultConstructionScope = ConstructionScopeEnum.FloorConstruction;
 		private Construction construction = null;
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		public ConstructionEditor() {
 			InitializeComponent();

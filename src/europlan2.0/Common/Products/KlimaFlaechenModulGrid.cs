@@ -17,7 +17,6 @@ namespace Europlan.Common {
 
 		private List<KlimaFlaechenModul> modules;
 		private bool boden = true;
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		public KlimaFlaechenModulGrid() {
 			InitializeComponent();

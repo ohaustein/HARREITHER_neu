@@ -13,8 +13,6 @@ namespace Europlan.Common {
 
 		private bool gridContentChanged = false;
 
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
-
 		public PlannedHithermProductPanel() {
 			InitializeComponent();
 

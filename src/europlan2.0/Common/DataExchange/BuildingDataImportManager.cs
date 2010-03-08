@@ -14,7 +14,6 @@ namespace Europlan.Common {
 		private static BuildingDataImportManager instance = null;
 		private static readonly object padlock = new object();
 		private static readonly ILog log = LogManager.GetLogger(typeof(BuildingDataImportManager));
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
 
 		private IList<IBuildingDataImporter> importers;
 

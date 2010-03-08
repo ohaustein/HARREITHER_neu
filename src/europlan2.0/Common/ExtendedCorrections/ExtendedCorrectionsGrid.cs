@@ -15,8 +15,6 @@ namespace Europlan.Common {
 
 		private ExtendedCorrections sumRow = null;
 
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
-
 		public event EventHandler CorrectionsEnabledChanged;
 		public event EventHandler CorrectionsChanged;
 

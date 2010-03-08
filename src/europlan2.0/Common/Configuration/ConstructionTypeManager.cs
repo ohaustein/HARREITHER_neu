@@ -23,8 +23,6 @@ namespace Europlan.Common {
 		public static readonly string CT_STD_WAND = "StdWand";
 		public static readonly string CT_USER_WAND = "UserWand";
 
-		private System.Resources.ResourceManager resources = EuroplanRes.ResourceManager;
-
 		public static ConstructionTypeManager Instance {
 			get {
 				if (instance == null) {
