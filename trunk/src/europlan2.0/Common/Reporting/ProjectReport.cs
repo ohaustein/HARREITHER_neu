@@ -321,7 +321,7 @@ namespace Europlan.Common {
 					if (enumerator.Key is string) {
 						string key = enumerator.Key as string;
 						if (key.StartsWith("LL_") || key.StartsWith("Unit_")) {
-							listLabel1.Variables.Add("@" + key, ((string)enumerator.Value).Replace('\n', '¶'));
+							listLabel1.Variables.Add("@" + key, ((string)enumerator.Value).Replace("\r", ""));
 						}
 					}
 				}
