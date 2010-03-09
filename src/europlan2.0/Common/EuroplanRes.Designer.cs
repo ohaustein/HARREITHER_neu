@@ -7676,6 +7676,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inhalt.
+        /// </summary>
+        internal static string MainForm_HilfeInhalt {
+            get {
+                return ResourceManager.GetString("MainForm_HilfeInhalt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tutorial.
+        /// </summary>
+        internal static string MainForm_HilfeTutorial {
+            get {
+                return ResourceManager.GetString("MainForm_HilfeTutorial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Importieren.
         /// </summary>
         internal static string MainForm_Importieren {

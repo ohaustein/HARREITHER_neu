@@ -2776,6 +2776,12 @@ menge</value>
   <data name="MainForm_Hilfe" xml:space="preserve">
     <value>&amp;Hilfe</value>
   </data>
+  <data name="MainForm_HilfeInhalt" xml:space="preserve">
+    <value>Inhalt</value>
+  </data>
+  <data name="MainForm_HilfeTutorial" xml:space="preserve">
+    <value>Tutorial</value>
+  </data>
   <data name="MainForm_Importieren" xml:space="preserve">
     <value>&amp;Importieren</value>
   </data>

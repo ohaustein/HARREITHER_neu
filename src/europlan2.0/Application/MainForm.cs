@@ -71,6 +71,8 @@ namespace Europlan.Application {
 			helpToolStripMenuItem.Text = EuroplanRes.MainForm_Hilfe; //"&Hilfe";
 			importGlobalConfToolStripMenuItem.Text = EuroplanRes.MainForm_ArtikelUndKonstruktionen; //"Artikel und Konstruktionen";
 			importToolStripMenuItem.Text = EuroplanRes.MainForm_Importieren; //"&Importieren";
+			inhaltToolStripMenuItem.Text = EuroplanRes.MainForm_HilfeInhalt;
+			tutorialToolStripMenuItem.Text = EuroplanRes.MainForm_HilfeTutorial;
 			infoToolStripMenuItem.Text = EuroplanRes.MainForm_Info; //"Info";
 			licenseToolStripMenuItem.Text = EuroplanRes.MainForm_Lizenz; //"&Lizenz";
 			newToolStripButton.Text = EuroplanRes.MainForm_Neu; //"&Neu";
@@ -859,6 +861,14 @@ namespace Europlan.Application {
 			WarningsAndErrorsForm form = new WarningsAndErrorsForm();
 			form.ShowDialog();
 			form.Dispose();
+		}
+
+		private void inhaltToolStripMenuItem_Click(object sender, EventArgs e) {
+			Help.ShowHelp(this, "europlan.chm");
+		}
+
+		private void tutorialToolStripMenuItem_Click(object sender, EventArgs e) {
+			Help.ShowHelp(this, "tutorial.chm");
 		}
 
 	}
