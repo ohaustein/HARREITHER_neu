@@ -30,6 +30,7 @@ namespace Europlan.Common {
 		private int heatLoad;
 		private int coolLoad;
 		private int floorHeatingLoss;
+		private bool nassraum = false;
 		private int quickDimensioningRoomTemperature;
 		private int quickDimensioningHeatLoad;
 		private int quickDimensioningCoolLoad;
@@ -218,6 +219,11 @@ namespace Europlan.Common {
 				heatLoad = value;
 				this.CorrectPlanning();
 			}
+		}
+
+		public bool IsNassraum {
+			get { return nassraum; }
+			set { nassraum = value; }
 		}
 
 		[XmlIgnore]

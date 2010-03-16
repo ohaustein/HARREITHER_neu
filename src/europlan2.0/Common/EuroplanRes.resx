@@ -570,6 +570,9 @@ Vorlauf
   <data name="EcothermProduct_NotificationParameter" xml:space="preserve">
     <value>Ecotherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
   </data>
+  <data name="ErrorMessage_BelegteFlaeche" xml:space="preserve">
+    <value>Die belegte Fläche im Heizkreis %HK% ist zu groß (%VALUE%m² &gt; %MAXIMUM%m²)</value>
+  </data>
   <data name="ErrorMessage_DeckentemperaturHeat" xml:space="preserve">
     <value>Oberflächentemperatur zu groß (%VALUE%°C &gt; %MAXIMUM%°C)</value>
   </data>
@@ -610,7 +613,7 @@ Vorlauf
     <value>Der Heizkreis HK%HK% enthält zu viele Module (%VALUE% &gt; %MAXIMUM%)</value>
   </data>
   <data name="ErrorMessage_ModulBelegung" xml:space="preserve">
-    <value>Es sind mehr als 75% der Gesamtfläche mit Modulen belegt (%VALUE% &gt; %MAXIMUM)</value>
+    <value>Es sind mehr als 75% der Gesamtfläche mit Modulen belegt (%VALUE% &gt; %MAXIMUM%)</value>
   </data>
   <data name="ErrorMessage_Modulflaeche" xml:space="preserve">
     <value>Die verplanten Module nehmen mehr Fläche in Anspruch als für dieses System zur Verfügung steht (%VALUE%m² &gt; %MAXIMUM%m²)</value>
@@ -887,6 +890,10 @@ Ecken</value>
   </data>
   <data name="FloorSummaryPanel_LuftfeuchtigkeitLang" xml:space="preserve">
     <value>Relative Luftfeuchtigkeit für Kühlung</value>
+  </data>
+  <data name="FloorSummaryPanel_Nassraum" xml:space="preserve">
+    <value>Nass-
+raum</value>
   </data>
   <data name="FloorSummaryPanel_Nummer" xml:space="preserve">
     <value>Nr.
@@ -2902,6 +2909,9 @@ einheit</value>
   </data>
   <data name="NotificationMessage_Dichte" xml:space="preserve">
     <value>  Dichte des Heizmittels: %VALUE% (Standardwert: %DEFAULT%)</value>
+  </data>
+  <data name="NotificationMessage_Entfeuchtung" xml:space="preserve">
+    <value>Auf Grund der erhöhten Kühllast (%VALUE% &gt; %MAXIMUM%W/m²) ist eine Entfeuchtung vorzusehen.</value>
   </data>
   <data name="NotificationMessage_Estrichueberdeckung" xml:space="preserve">
     <value>  Estrichüberdeckung: %VALUE% (Standardwert: %DEFAULT%)</value>

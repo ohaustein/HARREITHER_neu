@@ -27,6 +27,8 @@ namespace Europlan.Common {
 		private static double alphaBodenCool = 6.5;
 		private static double alphaWandCool = 8.0;
 
+		private static double maxCoolLoadPerSqm = 70.0;
+
 		protected double requestedHeatLoad = 0;
 		protected double requestedCoolLoad = 0;
 
@@ -65,6 +67,12 @@ namespace Europlan.Common {
 		public static double ConfigAlphaWandCool {
 			get { return alphaWandCool; }
 			set { alphaWandCool = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigMaxCoolLoadPerSqm {
+			get { return maxCoolLoadPerSqm ; }
+			set { maxCoolLoadPerSqm = value; }
 		}
 		#endregion Product Parameters
 
@@ -1272,9 +1280,14 @@ namespace Europlan.Common {
 
 		public virtual string NotificationMessage {
 			get {
-				double coolLoad = Math.Round(this.PlannedCoolLoad / this.PlannedNetArea, 1);
-				if (coolLoad > 75) {
-					return "Bei der aktuell berechneten Betriebsweise wird eine Entfeuchtung empfohlen, da die Kühlleistung 75W/m² übersteigt.";
+				//double coolLoad = Math.Round(this.PlannedCoolLoad / this.PlannedNetArea, 1);
+				double coolLoad = this.AssociatedRoom.Area == 0 ? 0.0 : Math.Round(this.AssociatedRoom.CoolLoad / this.AssociatedRoom.Area, 1);
+				if (coolLoad > ConfigMaxCoolLoadPerSqm && this.requestedCoolLoad > 0) {
+					string msg = EuroplanRes.NotificationMessage_Entfeuchtung;
+					msg = msg.Replace("%VALUE%", coolLoad.ToString());
+					msg = msg.Replace("%MAXIMUM%", ConfigMaxCoolLoadPerSqm.ToString());
+
+					return msg;
 				}
 				return null;
 			}

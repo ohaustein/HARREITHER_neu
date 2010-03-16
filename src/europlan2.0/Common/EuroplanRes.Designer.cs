@@ -1390,6 +1390,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Die belegte Fläche im Heizkreis %HK% ist zu groß (%VALUE%m² &gt; %MAXIMUM%m²).
+        /// </summary>
+        internal static string ErrorMessage_BelegteFlaeche {
+            get {
+                return ResourceManager.GetString("ErrorMessage_BelegteFlaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Oberflächentemperatur zu groß (%VALUE%°C &gt; %MAXIMUM%°C).
         /// </summary>
         internal static string ErrorMessage_DeckentemperaturHeat {
@@ -1507,7 +1516,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Es sind mehr als 75% der Gesamtfläche mit Modulen belegt (%VALUE% &gt; %MAXIMUM).
+        ///   Looks up a localized string similar to Es sind mehr als 75% der Gesamtfläche mit Modulen belegt (%VALUE% &gt; %MAXIMUM%).
         /// </summary>
         internal static string ErrorMessage_ModulBelegung {
             get {
@@ -2308,6 +2317,16 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nass-
+        ///raum.
+        /// </summary>
+        internal static string FloorSummaryPanel_Nassraum {
+            get {
+                return ResourceManager.GetString("FloorSummaryPanel_Nassraum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nr.
         ///.
         /// </summary>
@@ -2383,7 +2402,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Geschoßdaten.
+        ///   Looks up a localized string similar to Verteiler anlegen.
         /// </summary>
         internal static string FloorSummaryPanel_VerteilerAnlegen {
             get {
@@ -8051,6 +8070,15 @@ namespace Europlan.Common {
         internal static string NotificationMessage_Dichte {
             get {
                 return ResourceManager.GetString("NotificationMessage_Dichte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auf Grund der erhöhten Kühllast (%VALUE% &gt; %MAXIMUM%W/m²) ist eine Entfeuchtung vorzusehen..
+        /// </summary>
+        internal static string NotificationMessage_Entfeuchtung {
+            get {
+                return ResourceManager.GetString("NotificationMessage_Entfeuchtung", resourceCulture);
             }
         }
         

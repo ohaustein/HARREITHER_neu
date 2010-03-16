@@ -720,10 +720,10 @@ namespace Europlan.Common {
 			this.lastErrorMsg = "";
 			string newMsg;
 			foreach (HithermCompactCircuit hc in this.circuits) {
-				if (Math.Round(hc.HeatArea, 1) > Math.Round(ConfigMaxRegisterArea, 1)) {
-					newMsg = EuroplanRes.ErrorMessage_Registerflaeche;
+				if (Math.Round(hc.RegisterArea, 1) > Math.Round(ConfigMaxRegisterArea, 1)) {
+					newMsg = EuroplanRes.ErrorMessage_BelegteFlaeche;
 					newMsg = newMsg.Replace("%HK%", (hc.NrOfCircuit + 1).ToString());
-					newMsg = newMsg.Replace("%VALUE%", Math.Round(hc.HeatArea, 1).ToString());
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(hc.RegisterArea, 1).ToString());
 					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ConfigMaxRegisterArea, 1).ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}

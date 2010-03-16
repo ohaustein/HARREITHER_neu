@@ -46,6 +46,7 @@ namespace Europlan.Common {
 		private static double maxRimTempHarreither = 33;
 		private static double maxResidenceTempEn1264 = 29;
 		private static double maxRimTempEn1264 = 35;
+		private static double maxNassraumTemp = 33;
 
 		//  !!!!!!!!!!! changes must be also applied in SystemParametersPanel.cs !!!!!!!!!!!
 		private static bool useHarreitherNorm = true;
@@ -442,6 +443,12 @@ namespace Europlan.Common {
 		public static double ConfigMaxRimTempEn1264 {
 			get { return maxRimTempEn1264; }
 			set { maxRimTempEn1264 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigMaxNassraumTemp {
+			get { return maxNassraumTemp; }
+			set { maxNassraumTemp = value; }
 		}
 
 		[ProductParameter]
@@ -1751,16 +1758,16 @@ namespace Europlan.Common {
 				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(EcothermProduct.ConfigMaxCircuitLength - this.ConnectionLengthOfLongestPipeWithConnections, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
-			if (Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) > (EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxResidenceTempHarreither : EcothermProduct.ConfigMaxResidenceTempEn1264)) {
+			if (Math.Round(this.PlannedFloorTemperatureHeatResidence, 1) > this.MaxResidenceTemp) {
 				newMsg = EuroplanRes.ErrorMessage_TemperaturAz;
 				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedFloorTemperatureHeatResidence, 1).ToString());
-				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round((EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxResidenceTempHarreither : EcothermProduct.ConfigMaxResidenceTempEn1264), 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.MaxResidenceTemp, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
-			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > (EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxRimTempHarreither : EcothermProduct.ConfigMaxRimTempEn1264)) {
+			if (Math.Round(this.PlannedFloorTemperatureHeatRim, 1) > this.MaxRimTemp) {
 				newMsg = EuroplanRes.ErrorMessage_TemperaturRz;
 				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedFloorTemperatureHeatRim, 1).ToString());
-				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round((EcothermProduct.ConfigUseHarreitherNorm ? EcothermProduct.ConfigMaxRimTempHarreither : EcothermProduct.ConfigMaxRimTempEn1264), 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.MaxRimTemp, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
@@ -1881,6 +1888,20 @@ namespace Europlan.Common {
 				}
 			}
 			return error;
+		}
+
+		private double MaxRimTemp {
+			get {
+				double maxTemp = ConfigUseHarreitherNorm ? ConfigMaxRimTempHarreither : ConfigMaxRimTempEn1264;
+				return AssociatedRoom.IsNassraum ? Math.Max(maxTemp, ConfigMaxNassraumTemp) : maxTemp;
+			}
+		}
+
+		private double MaxResidenceTemp {
+			get {
+				double maxTemp = ConfigUseHarreitherNorm ? ConfigMaxResidenceTempHarreither : ConfigMaxResidenceTempEn1264;
+				return AssociatedRoom.IsNassraum ? Math.Max(maxTemp, ConfigMaxNassraumTemp) : maxTemp;
+			}
 		}
 
 		[XmlIgnore]
