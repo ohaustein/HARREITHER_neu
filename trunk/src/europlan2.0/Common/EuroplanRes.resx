@@ -916,7 +916,7 @@ Ecken</value>
     <value>Gewünschte Rauminnentemperatur bei Kühlung</value>
   </data>
   <data name="FloorSummaryPanel_VerteilerAnlegen" xml:space="preserve">
-    <value>Geschoßdaten</value>
+    <value>Verteiler anlegen</value>
   </data>
   <data name="FloorSummaryPanel_VerteilerLoeschen" xml:space="preserve">
     <value>Verteiler löschen</value>
