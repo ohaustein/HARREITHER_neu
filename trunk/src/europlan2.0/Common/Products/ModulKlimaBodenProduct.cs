@@ -41,6 +41,8 @@ namespace Europlan.Common {
 		private static bool useHarreitherNorm = true;
 		private static double maxFloorTempHarreither = 27;
 		private static double maxFloorTempEn1264 = 29;
+		private static double maxNassraumTemp = 33;
+
 		private static int maxPressureLost = 15000;
 		private static int maxDurchfluss = 240;
 		private static int maxModulesInCircuit = 40;
@@ -200,6 +202,12 @@ namespace Europlan.Common {
 		public static double ConfigMaxFloorTempEn1264 {
 			get { return maxFloorTempEn1264; }
 			set { maxFloorTempEn1264 = value; }
+		}
+
+		[ProductParameter]
+		public static double ConfigMaxNassraumTemp {
+			get { return maxNassraumTemp; }
+			set { maxNassraumTemp = value; }
 		}
 
 		[ProductParameter]
@@ -613,10 +621,10 @@ namespace Europlan.Common {
 				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedNetArea, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
-			if (Math.Round(this.PlannedFloorTemperatureHeat, 1) > (ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264)) {
+			if (Math.Round(this.PlannedFloorTemperatureHeat, 1) > this.MaxFloorTemp) {
 				newMsg = EuroplanRes.ErrorMessage_Oberflaechentemperatur;
 				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedFloorTemperatureHeat, 1).ToString());
-				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round((ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.MaxFloorTemp, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
@@ -977,6 +985,13 @@ namespace Europlan.Common {
 					}
 				}
 				return value;
+			}
+		}
+
+		private double MaxFloorTemp {
+			get {
+				double maxTemp = ConfigUseHarreitherNorm ? ConfigMaxFloorTempHarreither : ConfigMaxFloorTempEn1264;
+				return AssociatedRoom.IsNassraum ? Math.Max(maxTemp, ConfigMaxNassraumTemp) : maxTemp;
 			}
 		}
 

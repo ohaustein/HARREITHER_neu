@@ -229,8 +229,6 @@ namespace Europlan.Common {
 			double rAlphaDeckeDh = 1 / alphaAussenHeat; /* Wärmeübergang Decke bei Heizung */
 			double rAlphaDeckeDk = 1 / alphaAussenCool; /* Wärmeübergang Decke bei Kühlung */
 
-			double leistungsFaktor = ModulKlimaDeckeProduct.ConfigLeistungsFaktorHeizen;
-
 			double rLambdaB = 0;
 			double rLambdaIns = this.ModulKlimaDeckeProduct.PlannedInsulationConstruction == null ? 0 : this.ModulKlimaDeckeProduct.PlannedInsulationConstruction.RValue;
 
@@ -239,6 +237,7 @@ namespace Europlan.Common {
 			double lambdaU = lambdaE;
 
 			{ // Heizlastberechnung
+				double leistungsFaktor = ModulKlimaDeckeProduct.ConfigLeistungsFaktorHeizen;
 				double distributorVorlaufTemp;
 				double distributorRuecklaufTemp;
 				this.ModulKlimaDeckeProduct.GetHeatFlow(out distributorVorlaufTemp, out distributorRuecklaufTemp);
@@ -302,12 +301,13 @@ namespace Europlan.Common {
 						}
 					}
 
-					this.c_ceilingTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, alphaInnenHeat, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomCoolTemperature);
+					this.c_ceilingTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, alphaInnenHeat, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature);
 
 					//this.c_floorTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, ModulKlimaDeckeProduct.ConfigAlphaFbh, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature);
 				}
 			}
 			{ // Kühllastberechnung
+				double leistungsFaktor = ModulKlimaDeckeProduct.ConfigLeistungsFaktorKuehlen;
 				double distributorVorlaufTemp;
 				double distributorRuecklaufTemp;
 				this.ModulKlimaDeckeProduct.GetCoolFlow(out distributorVorlaufTemp, out distributorRuecklaufTemp);

@@ -55,6 +55,7 @@ namespace Europlan.Common {
 			this.CoolLoad.HeaderText = EuroplanRes.FloorSummaryPanel_Kuehlleistung; //"QKühl\n(W)";
 			this.CoolLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_KuehlleistungLang; //"Erforderliche Külleistung laut Kühllastberechnung";
 			this.colView.HeaderText = EuroplanRes.FloorSummaryPanel_Bearbeiten; //"Bearbeiten\n";
+			this.IsNassraum.HeaderText = EuroplanRes.FloorSummaryPanel_Nassraum;
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
