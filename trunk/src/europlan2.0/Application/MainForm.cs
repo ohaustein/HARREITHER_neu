@@ -858,6 +858,13 @@ namespace Europlan.Application {
 		}
 
 		private void warningsAndErrorsToolStripMenuItem_Click(object sender, EventArgs e) {
+			foreach (Floor floor in Project.Instance.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct p in room.PlannedProducts) {
+						p.ConfigureProduct(false);
+					}
+				}
+			}
 			WarningsAndErrorsForm form = new WarningsAndErrorsForm();
 			form.ShowDialog();
 			form.Dispose();
