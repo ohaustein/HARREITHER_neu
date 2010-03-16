@@ -152,6 +152,7 @@ namespace Europlan.Common {
 			this.btnRemoveHk = new System.Windows.Forms.Button();
 			this.btnAddHk = new System.Windows.Forms.Button();
 			this.lstCircuits = new System.Windows.Forms.ListBox();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -770,9 +771,12 @@ namespace Europlan.Common {
 			// 
 			this.pageCircuit.Controls.Add(this.groupBox10);
 			this.pageCircuit.Controls.Add(this.groupBox9);
+			this.helpProvider.SetHelpKeyword(this.pageCircuit, "html\\euro8m7u.htm");
+			this.helpProvider.SetHelpNavigator(this.pageCircuit, System.Windows.Forms.HelpNavigator.Topic);
 			this.pageCircuit.Location = new System.Drawing.Point(4, 22);
 			this.pageCircuit.Name = "pageCircuit";
 			this.pageCircuit.Padding = new System.Windows.Forms.Padding(3);
+			this.helpProvider.SetShowHelp(this.pageCircuit, true);
 			this.pageCircuit.Size = new System.Drawing.Size(856, 614);
 			this.pageCircuit.TabIndex = 2;
 			this.pageCircuit.Text = "Anbindeleitungen";
@@ -1662,6 +1666,10 @@ namespace Europlan.Common {
 			this.lstCircuits.TabIndex = 15;
 			this.lstCircuits.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// PlannedModulKlimaDeckeProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1818,5 +1826,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ColumnHeader defaultColumn;
 		private System.Windows.Forms.Label label15;
 		private System.Windows.Forms.ComboBox cmbType;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

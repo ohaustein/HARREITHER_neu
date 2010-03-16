@@ -157,6 +157,7 @@ namespace Europlan.Common {
 			this.label5 = new System.Windows.Forms.Label();
 			this.btnConnectionPipes = new System.Windows.Forms.Button();
 			this.lblDicht = new System.Windows.Forms.Label();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -810,9 +811,12 @@ namespace Europlan.Common {
 			// 
 			this.pageCircuit.Controls.Add(this.groupBox10);
 			this.pageCircuit.Controls.Add(this.groupBox9);
+			this.helpProvider.SetHelpKeyword(this.pageCircuit, "html\\euro8m7u.htm");
+			this.helpProvider.SetHelpNavigator(this.pageCircuit, System.Windows.Forms.HelpNavigator.Topic);
 			this.pageCircuit.Location = new System.Drawing.Point(4, 22);
 			this.pageCircuit.Name = "pageCircuit";
 			this.pageCircuit.Padding = new System.Windows.Forms.Padding(3);
+			this.helpProvider.SetShowHelp(this.pageCircuit, true);
 			this.pageCircuit.Size = new System.Drawing.Size(856, 614);
 			this.pageCircuit.TabIndex = 2;
 			this.pageCircuit.Text = "Anbindeleitungen";
@@ -1798,6 +1802,10 @@ namespace Europlan.Common {
 			this.lblDicht.TabIndex = 29;
 			this.lblDicht.Text = "Module in dichter Belegung:";
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1959,5 +1967,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblAreaReducedUnit;
 		private NumericBox numAreaReduced;
 		private System.Windows.Forms.Label lblAreaReducedText;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

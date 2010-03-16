@@ -42,6 +42,7 @@ namespace Europlan.Application {
 			this.lblLicenseSignatureInvalid = new System.Windows.Forms.Label();
 			this.lblLicenseMissing = new System.Windows.Forms.Label();
 			this.lblLicenseInvalidUnknown = new System.Windows.Forms.Label();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.panModules.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -163,6 +164,10 @@ namespace Europlan.Application {
 			this.lblLicenseInvalidUnknown.ForeColor = System.Drawing.Color.Red;
 			this.lblLicenseInvalidUnknown.Name = "lblLicenseInvalidUnknown";
 			// 
+			// helpProvider
+			// 
+			resources.ApplyResources(this.helpProvider, "helpProvider");
+			// 
 			// LicenseForm
 			// 
 			this.AcceptButton = this.btnOk;
@@ -187,9 +192,12 @@ namespace Europlan.Application {
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.btnOk);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.helpProvider.SetHelpKeyword(this, resources.GetString("$this.HelpKeyword"));
+			this.helpProvider.SetHelpNavigator(this, ((System.Windows.Forms.HelpNavigator)(resources.GetObject("$this.HelpNavigator"))));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "LicenseForm";
+			this.helpProvider.SetShowHelp(this, ((bool)(resources.GetObject("$this.ShowHelp"))));
 			this.TopMost = true;
 			this.Load += new System.EventHandler(this.LicenseForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LicenseForm_FormClosing);
@@ -219,5 +227,6 @@ namespace Europlan.Application {
 		private System.Windows.Forms.Label lblLicenseSignatureInvalid;
 		private System.Windows.Forms.Label lblLicenseMissing;
 		private System.Windows.Forms.Label lblLicenseInvalidUnknown;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

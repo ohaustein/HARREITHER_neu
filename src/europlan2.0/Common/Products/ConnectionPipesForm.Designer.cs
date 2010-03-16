@@ -35,6 +35,7 @@ namespace Europlan.Common {
 			this.lblHeatLoad = new System.Windows.Forms.Label();
 			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
 			this.btnLengthAssistant = new System.Windows.Forms.Button();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.SuspendLayout();
 			// 
 			// button2
@@ -163,6 +164,10 @@ namespace Europlan.Common {
 			this.btnLengthAssistant.UseVisualStyleBackColor = true;
 			this.btnLengthAssistant.Click += new System.EventHandler(this.btnLengthAssistant_Click);
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// ConnectionPipesForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -182,7 +187,10 @@ namespace Europlan.Common {
 			this.Controls.Add(this.connectionPipePanel);
 			this.Controls.Add(this.button2);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+			this.helpProvider.SetHelpKeyword(this, "html\\euro4er0.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.Name = "ConnectionPipesForm";
+			this.helpProvider.SetShowHelp(this, true);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Anbindeleitungen";
 			this.Load += new System.EventHandler(this.ConnectionPipesForm_Load);
@@ -206,5 +214,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblCoolLoad;
 		private System.Windows.Forms.Label lblHeatLoad;
 		private System.Windows.Forms.Button btnLengthAssistant;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

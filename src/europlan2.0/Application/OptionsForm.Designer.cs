@@ -51,6 +51,7 @@ namespace Europlan.Application {
 			this.megGeneral = new Europlan.Common.MaterialEditorGrid();
 			this.tabConstructions = new System.Windows.Forms.TabPage();
 			this.constructionEditorGrid1 = new Europlan.Common.ConstructionEditorGrid();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.panel1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabGeneral.SuspendLayout();
@@ -108,8 +109,11 @@ namespace Europlan.Application {
 			this.tabControl1.Controls.Add(this.tabMaterials);
 			this.tabControl1.Controls.Add(this.tabConstructions);
 			resources.ApplyResources(this.tabControl1, "tabControl1");
+			this.helpProvider.SetHelpKeyword(this.tabControl1, resources.GetString("tabControl1.HelpKeyword"));
+			this.helpProvider.SetHelpNavigator(this.tabControl1, ((System.Windows.Forms.HelpNavigator)(resources.GetObject("tabControl1.HelpNavigator"))));
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
+			this.helpProvider.SetShowHelp(this.tabControl1, ((bool)(resources.GetObject("tabControl1.ShowHelp"))));
 			// 
 			// tabGeneral
 			// 
@@ -177,10 +181,11 @@ namespace Europlan.Application {
 			// 
 			// megFloor
 			// 
+			this.megFloor.Admin = false;
 			this.megFloor.AllowToAdd = false;
 			resources.ApplyResources(this.megFloor, "megFloor");
-			this.megFloor.Filter = Europlan.Common.CategoryType.Floor;
 			this.megFloor.Name = "megFloor";
+			this.megFloor.ShowOnlyAdditional = false;
 			// 
 			// tabPageWall
 			// 
@@ -191,10 +196,11 @@ namespace Europlan.Application {
 			// 
 			// megWall
 			// 
+			this.megWall.Admin = false;
 			this.megWall.AllowToAdd = false;
 			resources.ApplyResources(this.megWall, "megWall");
-			this.megWall.Filter = Europlan.Common.CategoryType.Wall;
 			this.megWall.Name = "megWall";
+			this.megWall.ShowOnlyAdditional = false;
 			// 
 			// tabPageCeiling
 			// 
@@ -205,10 +211,11 @@ namespace Europlan.Application {
 			// 
 			// megCeiling
 			// 
+			this.megCeiling.Admin = false;
 			this.megCeiling.AllowToAdd = false;
 			resources.ApplyResources(this.megCeiling, "megCeiling");
-			this.megCeiling.Filter = Europlan.Common.CategoryType.Ceiling;
 			this.megCeiling.Name = "megCeiling";
+			this.megCeiling.ShowOnlyAdditional = false;
 			// 
 			// tabPageDistributor
 			// 
@@ -219,10 +226,11 @@ namespace Europlan.Application {
 			// 
 			// megDistributor
 			// 
+			this.megDistributor.Admin = false;
 			this.megDistributor.AllowToAdd = false;
 			resources.ApplyResources(this.megDistributor, "megDistributor");
-			this.megDistributor.Filter = Europlan.Common.CategoryType.Distributor;
 			this.megDistributor.Name = "megDistributor";
+			this.megDistributor.ShowOnlyAdditional = false;
 			// 
 			// tabPageInsulation
 			// 
@@ -233,10 +241,11 @@ namespace Europlan.Application {
 			// 
 			// megInsulation
 			// 
+			this.megInsulation.Admin = false;
 			this.megInsulation.AllowToAdd = true;
 			resources.ApplyResources(this.megInsulation, "megInsulation");
-			this.megInsulation.Filter = Europlan.Common.CategoryType.Insulation;
 			this.megInsulation.Name = "megInsulation";
+			this.megInsulation.ShowOnlyAdditional = false;
 			// 
 			// tabPageGeneral
 			// 
@@ -247,10 +256,11 @@ namespace Europlan.Application {
 			// 
 			// megGeneral
 			// 
+			this.megGeneral.Admin = false;
 			this.megGeneral.AllowToAdd = true;
 			resources.ApplyResources(this.megGeneral, "megGeneral");
-			this.megGeneral.Filter = Europlan.Common.CategoryType.General;
 			this.megGeneral.Name = "megGeneral";
+			this.megGeneral.ShowOnlyAdditional = false;
 			// 
 			// tabConstructions
 			// 
@@ -265,6 +275,10 @@ namespace Europlan.Application {
 			this.constructionEditorGrid1.Filter = Europlan.Common.ConstructionScopeEnum.All;
 			this.constructionEditorGrid1.Name = "constructionEditorGrid1";
 			this.constructionEditorGrid1.Type = Europlan.Common.Configuration.ConfigurationType.UserConfiguration;
+			// 
+			// helpProvider
+			// 
+			resources.ApplyResources(this.helpProvider, "helpProvider");
 			// 
 			// OptionsForm
 			// 
@@ -327,5 +341,6 @@ namespace Europlan.Application {
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

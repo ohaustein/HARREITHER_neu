@@ -55,6 +55,8 @@ namespace Europlan.Application {
 			this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.inhaltToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.updateController = new Kjs.AppLife.Update.Controller.UpdateController(this.components);
@@ -76,8 +78,6 @@ namespace Europlan.Application {
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.openGlobalConfDialog = new System.Windows.Forms.OpenFileDialog();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
-			this.inhaltToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			this.mainMenu.SuspendLayout();
@@ -104,8 +104,11 @@ namespace Europlan.Application {
 			this.projectTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			resources.ApplyResources(this.projectTree, "projectTree");
 			this.projectTree.FullRowSelect = true;
+			this.helpProvider.SetHelpKeyword(this.projectTree, resources.GetString("projectTree.HelpKeyword"));
+			this.helpProvider.SetHelpNavigator(this.projectTree, ((System.Windows.Forms.HelpNavigator)(resources.GetObject("projectTree.HelpNavigator"))));
 			this.projectTree.HideSelection = false;
 			this.projectTree.Name = "projectTree";
+			this.helpProvider.SetShowHelp(this.projectTree, ((bool)(resources.GetObject("projectTree.ShowHelp"))));
 			this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
 			this.projectTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.projectTree_BeforeSelect);
 			// 
@@ -304,6 +307,18 @@ namespace Europlan.Application {
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
 			// 
+			// inhaltToolStripMenuItem
+			// 
+			this.inhaltToolStripMenuItem.Name = "inhaltToolStripMenuItem";
+			resources.ApplyResources(this.inhaltToolStripMenuItem, "inhaltToolStripMenuItem");
+			this.inhaltToolStripMenuItem.Click += new System.EventHandler(this.inhaltToolStripMenuItem_Click);
+			// 
+			// tutorialToolStripMenuItem
+			// 
+			this.tutorialToolStripMenuItem.Name = "tutorialToolStripMenuItem";
+			resources.ApplyResources(this.tutorialToolStripMenuItem, "tutorialToolStripMenuItem");
+			this.tutorialToolStripMenuItem.Click += new System.EventHandler(this.tutorialToolStripMenuItem_Click);
+			// 
 			// infoToolStripMenuItem
 			// 
 			this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
@@ -445,18 +460,6 @@ namespace Europlan.Application {
 			// helpProvider
 			// 
 			resources.ApplyResources(this.helpProvider, "helpProvider");
-			// 
-			// inhaltToolStripMenuItem
-			// 
-			this.inhaltToolStripMenuItem.Name = "inhaltToolStripMenuItem";
-			resources.ApplyResources(this.inhaltToolStripMenuItem, "inhaltToolStripMenuItem");
-			this.inhaltToolStripMenuItem.Click += new System.EventHandler(this.inhaltToolStripMenuItem_Click);
-			// 
-			// tutorialToolStripMenuItem
-			// 
-			this.tutorialToolStripMenuItem.Name = "tutorialToolStripMenuItem";
-			resources.ApplyResources(this.tutorialToolStripMenuItem, "tutorialToolStripMenuItem");
-			this.tutorialToolStripMenuItem.Click += new System.EventHandler(this.tutorialToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

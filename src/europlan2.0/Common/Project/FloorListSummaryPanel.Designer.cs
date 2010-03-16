@@ -34,6 +34,7 @@ namespace Europlan.Common {
 			this.projectFloorsSource = new System.Windows.Forms.BindingSource(this.components);
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnWhatIsNext = new System.Windows.Forms.Button();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			((System.ComponentModel.ISupportInitialize)(this.gridFloors)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.projectFloorsSource)).BeginInit();
 			this.SuspendLayout();
@@ -77,7 +78,7 @@ namespace Europlan.Common {
 			// 
 			this.associatedIconDataGridViewImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
 			this.associatedIconDataGridViewImageColumn.DataPropertyName = "AssociatedIcon";
-			this.associatedIconDataGridViewImageColumn.HeaderText = "";
+			this.associatedIconDataGridViewImageColumn.HeaderText = global::Europlan.Common.EuroplanRes.LL_Report_VerlegedatenEurovalRaumNameZeile2;
 			this.associatedIconDataGridViewImageColumn.Name = "associatedIconDataGridViewImageColumn";
 			this.associatedIconDataGridViewImageColumn.ReadOnly = true;
 			this.associatedIconDataGridViewImageColumn.Visible = false;
@@ -144,6 +145,10 @@ namespace Europlan.Common {
 			this.btnWhatIsNext.UseVisualStyleBackColor = true;
 			this.btnWhatIsNext.Click += new System.EventHandler(this.btnWhatIsNext_Click);
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// FloorListSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,7 +156,10 @@ namespace Europlan.Common {
 			this.Controls.Add(this.btnWhatIsNext);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.gridFloors);
+			this.helpProvider.SetHelpKeyword(this, "html\\euro6ed3.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.Name = "FloorListSummaryPanel";
+			this.helpProvider.SetShowHelp(this, true);
 			this.Size = new System.Drawing.Size(678, 340);
 			((System.ComponentModel.ISupportInitialize)(this.gridFloors)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.projectFloorsSource)).EndInit();
@@ -171,5 +179,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn associatedPanelTypeDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnWhatIsNext;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

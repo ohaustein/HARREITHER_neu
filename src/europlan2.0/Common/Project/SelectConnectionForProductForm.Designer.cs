@@ -24,9 +24,8 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tvDistributors = new System.Windows.Forms.TreeView();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
@@ -41,6 +40,7 @@ namespace Europlan.Common {
 			this.hk2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.userDefinedConnectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.cbActivateUserDefinedConnection = new System.Windows.Forms.CheckBox();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.grpInfo.SuspendLayout();
 			this.grpConnection.SuspendLayout();
 			this.grpUserDefinedConnection.SuspendLayout();
@@ -98,7 +98,6 @@ namespace Europlan.Common {
 			this.lblInfo.Name = "lblInfo";
 			this.lblInfo.Size = new System.Drawing.Size(360, 29);
 			this.lblInfo.TabIndex = 0;
-			this.lblInfo.Text = "";
 			// 
 			// grpConnection
 			// 
@@ -158,14 +157,14 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.gridUserDefinedConnection.AutoGenerateColumns = false;
 			this.gridUserDefinedConnection.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gridUserDefinedConnection.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridUserDefinedConnection.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this.gridUserDefinedConnection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridUserDefinedConnection.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.hk1DataGridViewTextBoxColumn,
@@ -183,9 +182,9 @@ namespace Europlan.Common {
 			// hk1DataGridViewTextBoxColumn
 			// 
 			this.hk1DataGridViewTextBoxColumn.DataPropertyName = "Hk1";
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-			this.hk1DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-			this.hk1DataGridViewTextBoxColumn.HeaderText = "";
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+			this.hk1DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+			this.hk1DataGridViewTextBoxColumn.HeaderText = global::Europlan.Common.EuroplanRes.LL_Report_VerlegedatenEurovalRaumNameZeile2;
 			this.hk1DataGridViewTextBoxColumn.Name = "hk1DataGridViewTextBoxColumn";
 			this.hk1DataGridViewTextBoxColumn.ReadOnly = true;
 			this.hk1DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -193,7 +192,7 @@ namespace Europlan.Common {
 			// hk2DataGridViewTextBoxColumn
 			// 
 			this.hk2DataGridViewTextBoxColumn.DataPropertyName = "Hk2";
-			this.hk2DataGridViewTextBoxColumn.HeaderText = "";
+			this.hk2DataGridViewTextBoxColumn.HeaderText = global::Europlan.Common.EuroplanRes.LL_Report_VerlegedatenEurovalRaumNameZeile2;
 			this.hk2DataGridViewTextBoxColumn.Name = "hk2DataGridViewTextBoxColumn";
 			this.hk2DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			// 
@@ -212,6 +211,10 @@ namespace Europlan.Common {
 			this.cbActivateUserDefinedConnection.UseVisualStyleBackColor = true;
 			this.cbActivateUserDefinedConnection.CheckedChanged += new System.EventHandler(this.cbActivateUserDefinedConnection_CheckedChanged);
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// SelectConnectionForProductForm
 			// 
 			this.AcceptButton = this.btnOk;
@@ -225,7 +228,10 @@ namespace Europlan.Common {
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.tvDistributors);
+			this.helpProvider.SetHelpKeyword(this, "html\\euro9qk7.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.Name = "SelectConnectionForProductForm";
+			this.helpProvider.SetShowHelp(this, true);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Verteileranschluﬂ";
 			this.Load += new System.EventHandler(this.SelectConnectionForProductForm_Load);
@@ -257,5 +263,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.BindingSource userDefinedConnectionBindingSource;
 		private System.Windows.Forms.DataGridViewTextBoxColumn hk1DataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewComboBoxColumn hk2DataGridViewTextBoxColumn;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

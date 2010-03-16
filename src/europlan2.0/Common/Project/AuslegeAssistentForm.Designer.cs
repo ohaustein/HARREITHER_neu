@@ -29,6 +29,7 @@ namespace Europlan.Common {
 			this.graphicsPanel = new System.Windows.Forms.Panel();
 			this.chkEuroval = new System.Windows.Forms.CheckBox();
 			this.chkEcotherm = new System.Windows.Forms.CheckBox();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -111,6 +112,10 @@ namespace Europlan.Common {
 			this.chkEcotherm.UseVisualStyleBackColor = true;
 			this.chkEcotherm.CheckStateChanged += new System.EventHandler(this.chk_CheckStateChanged);
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// AuslegeAssistentForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,9 +125,12 @@ namespace Europlan.Common {
 			this.Controls.Add(this.chkEuroval);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.label1);
+			this.helpProvider.SetHelpKeyword(this, "html\\euro99fd.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "AuslegeAssistentForm";
+			this.helpProvider.SetShowHelp(this, true);
 			this.Text = "Auslegehilfe";
 			this.Load += new System.EventHandler(this.AuslegeAssistentForm_Load);
 			this.ResizeBegin += new System.EventHandler(this.AuslegeAssistentForm_ResizeBegin);
@@ -144,5 +152,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Panel graphicsPanel;
 		private System.Windows.Forms.CheckBox chkEuroval;
 		private System.Windows.Forms.CheckBox chkEcotherm;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

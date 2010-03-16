@@ -37,6 +37,7 @@ namespace Europlan.Common {
 			this.requiredMaterialGridInsulation = new Europlan.Common.RequiredMaterialGrid();
 			this.tabGeneral = new System.Windows.Forms.TabPage();
 			this.requiredMaterialGridGeneral = new Europlan.Common.RequiredMaterialGrid();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.tabSystemParameters.SuspendLayout();
 			this.tabFloor.SuspendLayout();
 			this.tabWall.SuspendLayout();
@@ -67,9 +68,12 @@ namespace Europlan.Common {
 			this.tabSystemParameters.Controls.Add(this.tabDistributor);
 			this.tabSystemParameters.Controls.Add(this.tabInsulation);
 			this.tabSystemParameters.Controls.Add(this.tabGeneral);
+			this.helpProvider.SetHelpKeyword(this.tabSystemParameters, "html\\euro0pgj.htm");
+			this.helpProvider.SetHelpNavigator(this.tabSystemParameters, System.Windows.Forms.HelpNavigator.Topic);
 			this.tabSystemParameters.Location = new System.Drawing.Point(0, 27);
 			this.tabSystemParameters.Name = "tabSystemParameters";
 			this.tabSystemParameters.SelectedIndex = 0;
+			this.helpProvider.SetShowHelp(this.tabSystemParameters, true);
 			this.tabSystemParameters.Size = new System.Drawing.Size(815, 489);
 			this.tabSystemParameters.TabIndex = 5;
 			// 
@@ -85,7 +89,6 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridFloor
 			// 
-			this.requiredMaterialGridFloor.CategoryType = Europlan.Common.CategoryType.Floor;
 			this.requiredMaterialGridFloor.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridFloor.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridFloor.Name = "requiredMaterialGridFloor";
@@ -105,7 +108,6 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridWall
 			// 
-			this.requiredMaterialGridWall.CategoryType = Europlan.Common.CategoryType.Wall;
 			this.requiredMaterialGridWall.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridWall.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridWall.Name = "requiredMaterialGridWall";
@@ -125,7 +127,6 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridCeiling
 			// 
-			this.requiredMaterialGridCeiling.CategoryType = Europlan.Common.CategoryType.Ceiling;
 			this.requiredMaterialGridCeiling.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridCeiling.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridCeiling.Name = "requiredMaterialGridCeiling";
@@ -145,7 +146,6 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridDistributor
 			// 
-			this.requiredMaterialGridDistributor.CategoryType = Europlan.Common.CategoryType.Distributor;
 			this.requiredMaterialGridDistributor.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridDistributor.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridDistributor.Name = "requiredMaterialGridDistributor";
@@ -165,7 +165,6 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridInsulation
 			// 
-			this.requiredMaterialGridInsulation.CategoryType = Europlan.Common.CategoryType.Insulation;
 			this.requiredMaterialGridInsulation.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridInsulation.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridInsulation.Name = "requiredMaterialGridInsulation";
@@ -185,13 +184,16 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridGeneral
 			// 
-			this.requiredMaterialGridGeneral.CategoryType = Europlan.Common.CategoryType.General;
 			this.requiredMaterialGridGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridGeneral.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridGeneral.Name = "requiredMaterialGridGeneral";
 			this.requiredMaterialGridGeneral.Size = new System.Drawing.Size(807, 463);
 			this.requiredMaterialGridGeneral.TabIndex = 1;
 			this.requiredMaterialGridGeneral.GridContentChanged += new Europlan.Common.RequiredMaterialGridContentChangedHandler(this.requiredMaterialGrid_GridContentChanged);
+			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
 			// 
 			// RequiredMaterialPanel
 			// 
@@ -229,5 +231,6 @@ namespace Europlan.Common {
 		private RequiredMaterialGrid requiredMaterialGridDistributor;
 		private RequiredMaterialGrid requiredMaterialGridInsulation;
 		private RequiredMaterialGrid requiredMaterialGridGeneral;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

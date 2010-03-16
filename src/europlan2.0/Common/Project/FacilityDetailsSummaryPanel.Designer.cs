@@ -45,6 +45,7 @@ namespace Europlan.Common {
 			this.numOutsideTemperature = new Europlan.Common.NumericBox();
 			this.chkCool = new System.Windows.Forms.CheckBox();
 			this.btnNext = new System.Windows.Forms.Button();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -365,6 +366,10 @@ namespace Europlan.Common {
 			this.btnNext.UseVisualStyleBackColor = true;
 			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// FacilityDetailsSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -374,7 +379,10 @@ namespace Europlan.Common {
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.label1);
+			this.helpProvider.SetHelpKeyword(this, "html\\euro3lgj.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.Name = "FacilityDetailsSummaryPanel";
+			this.helpProvider.SetShowHelp(this, true);
 			this.Size = new System.Drawing.Size(716, 473);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
@@ -409,6 +417,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label7;
 		private NumericBox numOutsideTemperature;
 		private System.Windows.Forms.Button btnNext;
+		private System.Windows.Forms.HelpProvider helpProvider;
 
 
 	}

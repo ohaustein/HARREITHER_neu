@@ -39,6 +39,7 @@ namespace Europlan.Common {
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.btnNext = new System.Windows.Forms.Button();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.SuspendLayout();
 			// 
 			// lblProjectName
@@ -194,6 +195,10 @@ namespace Europlan.Common {
 			this.btnNext.UseVisualStyleBackColor = true;
 			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// ProjectSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,7 +220,10 @@ namespace Europlan.Common {
 			this.Controls.Add(this.lblNotes);
 			this.Controls.Add(this.lblContact);
 			this.Controls.Add(this.lblProjectName);
+			this.helpProvider.SetHelpKeyword(this, "html\\euro8p4l.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.Name = "ProjectSummaryPanel";
+			this.helpProvider.SetShowHelp(this, true);
 			this.Size = new System.Drawing.Size(716, 473);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -240,6 +248,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button btnNext;
+		private System.Windows.Forms.HelpProvider helpProvider;
 
 	}
 }

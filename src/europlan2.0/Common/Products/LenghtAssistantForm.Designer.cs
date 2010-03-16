@@ -49,6 +49,7 @@ namespace Europlan.Common {
 			this.cmbLayDistance = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.lblDescription = new System.Windows.Forms.Label();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -390,6 +391,10 @@ namespace Europlan.Common {
 			this.lblDescription.TabIndex = 4;
 			this.lblDescription.Text = "Anbindeleitung für";
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// LengthAssistantForm
 			// 
 			this.AcceptButton = this.btnOk;
@@ -402,7 +407,10 @@ namespace Europlan.Common {
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.btnCancel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.helpProvider.SetHelpKeyword(this, "html\\euro5623.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.Name = "LengthAssistantForm";
+			this.helpProvider.SetShowHelp(this, true);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Längenassistent";
 			this.Load += new System.EventHandler(this.LengthAssistantForm_Load);
@@ -442,5 +450,6 @@ namespace Europlan.Common {
 		private NumericBox numRuecklauf;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Button btnRestAreaVorlauf;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }
