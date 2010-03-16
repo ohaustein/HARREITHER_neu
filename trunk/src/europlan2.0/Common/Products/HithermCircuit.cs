@@ -191,23 +191,23 @@ namespace Europlan.Common {
 			switch (this.HithermProduct.HithermType) {
 				case Product.ProductType.FBH:
 					alphaInnenHeat = Product.ConfigAlphaBodenHeat;
-					alphaAussenHeat = Product.ConfigAlphaBodenCool;
+					alphaAussenHeat = Product.ConfigAlphaDeckeHeat;
 					alphaInnenCool = Product.ConfigAlphaBodenCool;
-					alphaAussenCool = Product.ConfigAlphaBodenHeat;
+					alphaAussenCool = Product.ConfigAlphaDeckeCool;
 					break;
 
 				case Product.ProductType.DH:
 					alphaInnenHeat = Product.ConfigAlphaDeckeHeat;
-					alphaAussenHeat = Product.ConfigAlphaDeckeCool;
+					alphaAussenHeat = Product.ConfigAlphaBodenHeat;
 					alphaInnenCool = Product.ConfigAlphaDeckeCool;
-					alphaAussenCool = Product.ConfigAlphaDeckeHeat;
+					alphaAussenCool = Product.ConfigAlphaBodenCool;
 					break;
 
 				default:
 					alphaInnenHeat = Product.ConfigAlphaWandHeat;
-					alphaAussenHeat = Product.ConfigAlphaWandCool;
+					alphaAussenHeat = Product.ConfigAlphaWandHeat;
 					alphaInnenCool = Product.ConfigAlphaWandCool;
-					alphaAussenCool = Product.ConfigAlphaWandHeat;
+					alphaAussenCool = Product.ConfigAlphaWandCool;
 					break;
 			}
 
