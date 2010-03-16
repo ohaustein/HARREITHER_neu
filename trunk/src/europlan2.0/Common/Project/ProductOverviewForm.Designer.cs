@@ -41,8 +41,6 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvProductOverview = new System.Windows.Forms.DataGridView();
 			this.roomIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.roomNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +60,7 @@ namespace Europlan.Common {
 			this.okDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.editColumn = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.productOverviewWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			((System.ComponentModel.ISupportInitialize)(this.dgvProductOverview)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.productOverviewWrapperBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -343,15 +342,22 @@ namespace Europlan.Common {
 			// 
 			this.productOverviewWrapperBindingSource.DataSource = typeof(Europlan.Common.ProductOverviewWrapper);
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// ProductOverviewForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(710, 341);
 			this.Controls.Add(this.dgvProductOverview);
+			this.helpProvider.SetHelpKeyword(this, "html\\euro3q9d.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ProductOverviewForm";
+			this.helpProvider.SetShowHelp(this, true);
 			this.Text = "Übersicht";
 			this.Load += new System.EventHandler(this.ProductOverviewForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProductOverviewForm_FormClosing);
@@ -382,6 +388,7 @@ namespace Europlan.Common {
 		private NumericColumn coolRestDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn okDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewButtonColumn editColumn;
+		private System.Windows.Forms.HelpProvider helpProvider;
 
 
 	}

@@ -35,6 +35,7 @@ namespace Europlan.Common {
 			this.regulatoryCircuitsSource = new System.Windows.Forms.BindingSource(this.components);
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnNext = new System.Windows.Forms.Button();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).BeginInit();
 			this.SuspendLayout();
@@ -140,6 +141,10 @@ namespace Europlan.Common {
 			this.btnNext.UseVisualStyleBackColor = true;
 			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// RegulatorCircuitsSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,7 +152,10 @@ namespace Europlan.Common {
 			this.Controls.Add(this.btnNext);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.gridRegulatoryCircuits);
+			this.helpProvider.SetHelpKeyword(this, "html\\euro0sku.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.Name = "RegulatorCircuitsSummaryPanel";
+			this.helpProvider.SetShowHelp(this, true);
 			this.Size = new System.Drawing.Size(762, 509);
 			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).EndInit();
@@ -166,5 +174,6 @@ namespace Europlan.Common {
 		private NumericColumn coolFlowTemperatureDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnNext;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

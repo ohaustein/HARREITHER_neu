@@ -32,6 +32,7 @@ namespace Europlan.Common {
 			this.txtId = new System.Windows.Forms.TextBox();
 			this.txtName = new System.Windows.Forms.TextBox();
 			this.cmbCircuit = new System.Windows.Forms.ComboBox();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -113,6 +114,10 @@ namespace Europlan.Common {
 			this.cmbCircuit.Size = new System.Drawing.Size(268, 21);
 			this.cmbCircuit.TabIndex = 8;
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// NewDistributorForm
 			// 
 			this.AcceptButton = this.btnOk;
@@ -130,9 +135,12 @@ namespace Europlan.Common {
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.helpProvider.SetHelpKeyword(this, "html\\euro8ud1.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "NewDistributorForm";
+			this.helpProvider.SetShowHelp(this, true);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Verteiler anlegen";
 			this.Load += new System.EventHandler(this.NewDistributorForm_Load);
@@ -153,5 +161,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.TextBox txtId;
 		private System.Windows.Forms.TextBox txtName;
 		private System.Windows.Forms.ComboBox cmbCircuit;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }

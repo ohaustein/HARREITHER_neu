@@ -52,6 +52,7 @@ namespace Europlan.Common {
 			this.lblCircuits = new System.Windows.Forms.Label();
 			this.lstError = new System.Windows.Forms.ListView();
 			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			((System.ComponentModel.ISupportInitialize)(this.numMaxCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAdditionalCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numZusStellantriebe)).BeginInit();
@@ -344,6 +345,10 @@ namespace Europlan.Common {
 			this.lstError.View = System.Windows.Forms.View.Details;
 			this.lstError.Visible = false;
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// DistributorPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -376,7 +381,10 @@ namespace Europlan.Common {
 			this.Controls.Add(this.lblId);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
+			this.helpProvider.SetHelpKeyword(this, "html\\euro38of.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.Name = "DistributorPanel";
+			this.helpProvider.SetShowHelp(this, true);
 			this.Size = new System.Drawing.Size(780, 492);
 			((System.ComponentModel.ISupportInitialize)(this.numMaxCircuits)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAdditionalCircuits)).EndInit();
@@ -417,5 +425,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblCircuits;
 		private System.Windows.Forms.ListView lstError;
 		private System.Windows.Forms.ColumnHeader defaultColumn;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }
