@@ -44,8 +44,8 @@ namespace Europlan.Common {
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Area = new Europlan.Common.NumericColumn();
-			this.RoomTemperature = new Europlan.Common.NumericColumn();
 			this.IsNassraum = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.RoomTemperature = new Europlan.Common.NumericColumn();
 			this.HeatLoad = new Europlan.Common.NumericColumn();
 			this.FloorHeatingLoss = new Europlan.Common.NumericColumn();
 			this.AdditionalHeatLoad = new Europlan.Common.NumericColumn();
@@ -80,8 +80,8 @@ namespace Europlan.Common {
             this.idDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.Area,
-            this.RoomTemperature,
             this.IsNassraum,
+            this.RoomTemperature,
             this.HeatLoad,
             this.FloorHeatingLoss,
             this.AdditionalHeatLoad,
@@ -192,6 +192,13 @@ namespace Europlan.Common {
 			this.Area.ToolTipText = "Raumfläche";
 			this.Area.Width = 50;
 			// 
+			// IsNassraum
+			// 
+			this.IsNassraum.DataPropertyName = "IsNassraum";
+			this.IsNassraum.HeaderText = "Nassraum";
+			this.IsNassraum.Name = "IsNassraum";
+			this.IsNassraum.Width = 40;
+			// 
 			// RoomTemperature
 			// 
 			this.RoomTemperature.DataPropertyName = "RoomHeatTemperature";
@@ -203,13 +210,6 @@ namespace Europlan.Common {
 			this.RoomTemperature.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
 			this.RoomTemperature.ToolTipText = "Norminnentemperatur laut Wärmebedarfsberechnung";
 			this.RoomTemperature.Width = 40;
-			// 
-			// IsNassraum
-			// 
-			this.IsNassraum.DataPropertyName = "IsNassraum";
-			this.IsNassraum.HeaderText = "Nassraum";
-			this.IsNassraum.Name = "IsNassraum";
-			this.IsNassraum.Width = 40;
 			// 
 			// HeatLoad
 			// 
@@ -348,8 +348,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private NumericColumn Area;
-		private NumericColumn RoomTemperature;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn IsNassraum;
+		private NumericColumn RoomTemperature;
 		private NumericColumn HeatLoad;
 		private NumericColumn FloorHeatingLoss;
 		private NumericColumn AdditionalHeatLoad;

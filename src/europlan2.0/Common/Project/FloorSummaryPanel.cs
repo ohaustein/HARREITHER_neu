@@ -279,10 +279,10 @@ namespace Europlan.Common {
 		}
 
 		void gridRooms_Paint(object sender, PaintEventArgs e) {
-			Rectangle r1 = this.gridRooms.GetCellDisplayRectangle(3, -1, true); //get the column header cell
-			Rectangle r2 = this.gridRooms.GetCellDisplayRectangle(4, -1, true); //get the column header cell
-			Rectangle r3 = this.gridRooms.GetCellDisplayRectangle(5, -1, true); //get the column header cell
-			Rectangle r4 = this.gridRooms.GetCellDisplayRectangle(6, -1, true); //get the column header cell
+			Rectangle r1 = this.gridRooms.GetCellDisplayRectangle(4, -1, true); //get the column header cell
+			Rectangle r2 = this.gridRooms.GetCellDisplayRectangle(5, -1, true); //get the column header cell
+			Rectangle r3 = this.gridRooms.GetCellDisplayRectangle(6, -1, true); //get the column header cell
+			Rectangle r4 = this.gridRooms.GetCellDisplayRectangle(7, -1, true); //get the column header cell
 
 			r1.X += 1;
 			r1.Y += 1;
@@ -306,9 +306,9 @@ namespace Europlan.Common {
 			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y), new Point(r1.X, r1.Y + (r1.Height * 2)));
 			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X + r1.Width, r1.Y), new Point(r1.X + r1.Width, r1.Y + (r1.Height * 2)));
 
-			r1 = this.gridRooms.GetCellDisplayRectangle(7, -1, true); //get the column header cell
-			r2 = this.gridRooms.GetCellDisplayRectangle(8, -1, true); //get the column header cell
-			r3 = this.gridRooms.GetCellDisplayRectangle(9, -1, true); //get the column header cell
+			r1 = this.gridRooms.GetCellDisplayRectangle(8, -1, true); //get the column header cell
+			r2 = this.gridRooms.GetCellDisplayRectangle(9, -1, true); //get the column header cell
+			r3 = this.gridRooms.GetCellDisplayRectangle(10, -1, true); //get the column header cell
 
 			r1.X += 1;
 			r1.Y += 1;
