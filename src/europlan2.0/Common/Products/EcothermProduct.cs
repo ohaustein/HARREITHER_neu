@@ -30,7 +30,7 @@ namespace Europlan.Common {
 		private static double rohrAussenD = 0.017; /* Aussendurchmesser Ecotherm Rohr */
 		private static double rohrInnenD = 0.013; /* Rohrinnendurchmesser */
 		private static double rohrInnenA = (rohrInnenD / 2) * (rohrInnenD / 2) * Math.PI; /* Rohrinnenquerschnitt */
-		private static double ag = 1.1034; /* Ovalrohr Geometriefaktor für Euroval */
+		private static double ag = 1.0; /* Ovalrohr Geometriefaktor für Euroval */
 		private static double sr0 = 0.002; /* fix ??? */
 		private static double sr = 0.00238; /* Aus Euroval Normprüfdaten */
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */

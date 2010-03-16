@@ -33,7 +33,7 @@ namespace Europlan.Common {
 		private static double rohrAussenD = 0.0206505; /* Aussendurchmesser Euroval Rohr */
 		private static double rohrInnenD = 0.0153; /* Rohrinnendurchmesser */
 		public static double rohrInnenA = 0.000183783; /* Rohrinnenquerschnitt */
-		private static double ag = 1.1034; /* Ovalrohr Geometriefaktor für Euroval */
+		private static double ag = 1.2125; /* Ovalrohr Geometriefaktor für Euroval */
 		private static double sr0 = 0.002; /* fix ??? */
 		private static double sr = 0.00238; /* Aus Euroval Normprüfdaten */
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
@@ -204,7 +204,7 @@ namespace Europlan.Common {
 			spreizungKuehlMax = config.GetProductParameterAsDouble<EurovalProduct>("ConfigSpreizungKuehlMax", 5);
 			su0 = config.GetProductParameterAsDouble<EurovalProduct>("ConfigSu0", 0.045);
 			su = config.GetProductParameterAsDouble<EurovalProduct>("ConfigSu", 0.035);
-			ag = config.GetProductParameterAsDouble<EurovalProduct>("ConfigAg", 1.1034);
+			ag = config.GetProductParameterAsDouble<EurovalProduct>("ConfigAg", 1.2125);
 			agActivated = config.GetProductParameterAsBool<EurovalProduct>("ConfigAgActivated", true);
 			c = config.GetProductParameterAsDouble<EurovalProduct>("ConfigC", 4.19);
 			rho = config.GetProductParameterAsDouble<EurovalProduct>("ConfigRho", 1000);

@@ -76,8 +76,8 @@ namespace Europlan.Common {
 		private static double rLambdaDach = 0.0; /* Deckenschicht; durch echte Konstruktion ersetzen! */
 		private static double atmt = 1.06; /* Fixwert laut Norm */
 		private static double b = 6.5; /* Fixwert laut Norm */
-		private static double leistungsFaktorHeizen = 0.77;
-		private static double leistungsFaktorKuehlen = 0.77;
+		private static double leistungsFaktorHeizen = 0.95;
+		private static double leistungsFaktorKuehlen = 0.95;
 
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
@@ -144,8 +144,8 @@ namespace Europlan.Common {
 			spreizungKuehlMin = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMin", 2);
 			spreizungKuehlMax = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMax", 5);
 			construction = config.GetProductParameterAsEnum<ModulKlimaDeckeProduct, ModulCeilingConstructionEnum>("ConfigModulCeilingConstruction", ModulCeilingConstructionEnum.C_PROFIL);
-			leistungsFaktorHeizen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.77);
-			leistungsFaktorKuehlen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.77);
+			leistungsFaktorHeizen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.95);
+			leistungsFaktorKuehlen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.95);
 		}
 
 		public static string GlobalNotificationMessage {
