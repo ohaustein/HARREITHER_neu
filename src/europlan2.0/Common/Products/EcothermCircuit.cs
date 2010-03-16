@@ -251,8 +251,8 @@ namespace Europlan.Common {
 			double lambdaE = EcothermProduct.ConfigLambdaE;
 			double rLambdaDecke = EcothermProduct.ConfigRLambdaDecke;
 			double rLambdaPutz = EcothermProduct.ConfigRLambdaPutz;
-			double rAlphaDeckeFbh = 1 / alphaFbk; /* Wärmeübergang Decke bei Heizung */
-			double rAlphaDeckeFbk = 1 / alphaFbh; /* Wärmeübergang Decke bei Kühlung */
+			double rAlphaDeckeFbh = 1 / Product.ConfigAlphaDeckeHeat; /* Wärmeübergang Decke bei Heizung */
+			double rAlphaDeckeFbk = 1 / Product.ConfigAlphaDeckeCool; /* Wärmeübergang Decke bei Kühlung */
 			double rohrAussenD = EcothermProduct.ConfigRohrAussenD;
 			double rohrInnenD = EcothermProduct.ConfigRohrInnenD;
 			double rohrInnenA = EcothermProduct.ConfigRohrInnenA;
