@@ -89,6 +89,7 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridFloor
 			// 
+			this.requiredMaterialGridFloor.CategoryType = Europlan.Common.CategoryType.Floor;
 			this.requiredMaterialGridFloor.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridFloor.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridFloor.Name = "requiredMaterialGridFloor";
@@ -108,6 +109,7 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridWall
 			// 
+			this.requiredMaterialGridWall.CategoryType = Europlan.Common.CategoryType.Wall;
 			this.requiredMaterialGridWall.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridWall.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridWall.Name = "requiredMaterialGridWall";
@@ -127,6 +129,7 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridCeiling
 			// 
+			this.requiredMaterialGridCeiling.CategoryType = Europlan.Common.CategoryType.Ceiling;
 			this.requiredMaterialGridCeiling.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridCeiling.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridCeiling.Name = "requiredMaterialGridCeiling";
@@ -146,6 +149,7 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridDistributor
 			// 
+			this.requiredMaterialGridDistributor.CategoryType = Europlan.Common.CategoryType.Distributor;
 			this.requiredMaterialGridDistributor.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridDistributor.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridDistributor.Name = "requiredMaterialGridDistributor";
@@ -165,6 +169,7 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridInsulation
 			// 
+			this.requiredMaterialGridInsulation.CategoryType = Europlan.Common.CategoryType.Insulation;
 			this.requiredMaterialGridInsulation.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridInsulation.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridInsulation.Name = "requiredMaterialGridInsulation";
@@ -184,6 +189,7 @@ namespace Europlan.Common {
 			// 
 			// requiredMaterialGridGeneral
 			// 
+			this.requiredMaterialGridGeneral.CategoryType = Europlan.Common.CategoryType.General;
 			this.requiredMaterialGridGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.requiredMaterialGridGeneral.Location = new System.Drawing.Point(0, 0);
 			this.requiredMaterialGridGeneral.Name = "requiredMaterialGridGeneral";
