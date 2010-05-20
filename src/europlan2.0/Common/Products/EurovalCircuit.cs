@@ -454,5 +454,9 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		public override double CircuitArea {
+			get { return this.AreaTotal; }
+		}
 	}
 }

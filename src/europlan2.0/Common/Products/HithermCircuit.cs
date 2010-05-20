@@ -371,5 +371,9 @@ namespace Europlan.Common {
 				return bereinigung;
 			}
 		}
+
+		public override double CircuitArea {
+			get { return this.RegisterArea; }
+		} 
 	}
 }

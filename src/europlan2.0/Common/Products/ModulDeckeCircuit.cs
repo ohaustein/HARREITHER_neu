@@ -388,5 +388,9 @@ namespace Europlan.Common {
 				sa.FinalizeLoading();
 			}
 		}
+
+		public override double CircuitArea {
+			get { return this.ModulArea; }
+		}
 	}
 }

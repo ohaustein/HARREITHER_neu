@@ -120,10 +120,8 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double CircuitArea {
-			get	{
-				return 0;
-			}
+		public abstract double CircuitArea {
+			get;
 		}
 
 		/*public abstract string PlannedProductId {
