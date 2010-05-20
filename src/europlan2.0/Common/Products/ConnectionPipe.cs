@@ -273,12 +273,21 @@ namespace Europlan.Common {
 							}
 						}
 					}
-				} else {
-					if (this.room != null && this.room.PlannedProducts.Count > 0) {
-						this.product = this.room.PlannedProducts[0];
-					} else {
-						this.product = null;
+				} else if (this.product == null) {
+					bool found = false;
+					if (this.room != null) {
+						int i = 0;
+						while (!found && i < this.room.PlannedProducts.Count) {
+							if (this.room.PlannedProducts[i] != this.ConnectionOf) {
+								this.product = this.room.PlannedProducts[i];
+								found = true;
+							}
+							i++;
+						}
 					}
+					/*if (!found) {
+						this.product = null;
+					}*/
 				}
 				return this.product;
 			}
