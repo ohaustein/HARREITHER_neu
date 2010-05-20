@@ -564,39 +564,47 @@ namespace Europlan.Common {
 				this.lblQRestCool.Text = (qRestCool > 0 ? "+" : "") + Math.Round(qRestCool, 2).ToString();
 
 				// Randzone
-				if (evProduct.PlannedRimType.HasValue) {
+				if (complete && evProduct.PlannedRimType.HasValue) {
 					switch (evProduct.PlannedRimLayDistance) {
 						case EcothermProduct.EcothermLayDistance.EV5:
 							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
 							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
+                            this.lblRimVa.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV10:
 							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV10; //"EV10";
 							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV10; //"EV10";
+                            this.lblRimVa.Text = EuroplanRes.EcothermProduct_EV10; //"EV10";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV15:
 							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV15; //"EV15";
 							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV15; //"EV15";
+                            this.lblRimVa.Text = EuroplanRes.EcothermProduct_EV15; //"EV15";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV20:
 							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV20; //"EV20";
 							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV20; //"EV20";
+                            this.lblRimVa.Text = EuroplanRes.EcothermProduct_EV20; //"EV20";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV25:
 							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV25; //"EV25";
 							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV25; //"EV25";
+                            this.lblRimVa.Text = EuroplanRes.EcothermProduct_EV25; //"EV25";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV30:
 							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV30; //"EV30";
 							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV30; //"EV30";
+                            this.lblRimVa.Text = EuroplanRes.EcothermProduct_EV30; //"EV30";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV35:
 							this.lblRimVaHeat.Text = EuroplanRes.EcothermProduct_EV35; //"EV35";
 							this.lblRimVaCool.Text = EuroplanRes.EcothermProduct_EV35; //"EV35";
+                            this.lblRimVa.Text = EuroplanRes.EcothermProduct_EV35; //"EV35";
 							break;
 						default:
-							this.lblRimVaHeat.Text = "???";
-							this.lblRimVaCool.Text = "???";
+							this.lblRimVaHeat.Text = "--";
+							this.lblRimVaCool.Text = "--";
+                            this.lblRimVa.Text = "--";
 							break;
 					}
 					this.lblRimBHeat.Text = evProduct.PlannedRimWidth.ToString();
@@ -608,6 +616,7 @@ namespace Europlan.Common {
 				} else {
 					this.lblRimVaHeat.Text = "";
 					this.lblRimVaCool.Text = "";
+                    this.lblRimVa.Text = "--";
 					this.lblRimBHeat.Text = "";
 					this.lblRimBCool.Text = "";
 					this.lblRimTfbHeat.Text = "";
@@ -622,34 +631,42 @@ namespace Europlan.Common {
 						case EcothermProduct.EcothermLayDistance.EV5:
 							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
 							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
+                            this.lblResidenceVa.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV10:
 							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV10; //"EV10";
 							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV10; //"EV10";
+                            this.lblResidenceVa.Text = EuroplanRes.EcothermProduct_EV10; //"EV10";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV15:
 							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV15; //"EV15";
 							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV15; //"EV15";
+                            this.lblResidenceVa.Text = EuroplanRes.EcothermProduct_EV15; //"EV15";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV20:
 							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV20; //"EV20";
 							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV20; //"EV20";
+                            this.lblResidenceVa.Text = EuroplanRes.EcothermProduct_EV20; //"EV20";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV25:
 							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV25; //"EV25";
 							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV25; //"EV25";
+                            this.lblResidenceVa.Text = EuroplanRes.EcothermProduct_EV25; //"EV25";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV30:
 							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV30; //"EV30";
 							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV30; //"EV30";
+                            this.lblResidenceVa.Text = EuroplanRes.EcothermProduct_EV30; //"EV30";
 							break;
 						case EcothermProduct.EcothermLayDistance.EV35:
 							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV35; //"EV35";
 							this.lblResidenceVaCool.Text = EuroplanRes.EcothermProduct_EV35; //"EV35";
+                            this.lblResidenceVa.Text = EuroplanRes.EcothermProduct_EV35; //"EV35";
 							break;
 						default:
-							this.lblResidenceVaHeat.Text = "???";
-							this.lblResidenceVaCool.Text = "???";
+							this.lblResidenceVaHeat.Text = "--";
+							this.lblResidenceVaCool.Text = "--";
+                            this.lblResidenceVa.Text = "--";
 							break;
 					}
 					this.lblResidenceAHeat.Text = evProduct.PlannedAreaResidence.ToString();
@@ -661,6 +678,7 @@ namespace Europlan.Common {
 				} else {
 					this.lblResidenceVaHeat.Text = "";
 					this.lblResidenceVaCool.Text = "";
+                    this.lblResidenceVa.Text = "--";
 					this.lblResidenceAHeat.Text = "";
 					this.lblResidenceACool.Text = "";
 					this.lblResidenceTfbHeat.Text = "";
@@ -678,6 +696,7 @@ namespace Europlan.Common {
 				// heizkreis
 				this.lblCircuitCountHeat.Text = evProduct.PlannedCircuitCount.ToString();
 				this.lblCircuitCountCool.Text = evProduct.PlannedCircuitCount.ToString();
+                this.lblCircuitCount.Text = (complete ? evProduct.PlannedCircuitCount.ToString() : "--");
 				this.lblPipeLengthHeat.Text = Math.Round(evProduct.PlannedPipeLengthPerCircuit, 1).ToString();
 				this.lblPipeLengthCool.Text = Math.Round(evProduct.PlannedPipeLengthPerCircuit, 1).ToString();
 				this.lblMhHeat.Text = Math.Round(evProduct.PlannedMaxMhHeat, 1).ToString();

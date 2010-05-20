@@ -368,5 +368,9 @@ namespace Europlan.Common {
 			get { return this.sonstigeModule; }
 			set { this.sonstigeModule = value; }
 		}
+
+		public override double CircuitArea {
+			get { return this.HeatArea; }
+		}
 	}
 }

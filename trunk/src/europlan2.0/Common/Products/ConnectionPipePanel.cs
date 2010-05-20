@@ -181,16 +181,16 @@ namespace Europlan.Common {
 		}
 
 		private void dgvConnectionPipes_CellEnter(object sender, DataGridViewCellEventArgs e) {
-			if (!showPipesThroughProduct) {
-				if (((e.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex) || (e.ColumnIndex == productDataGridViewComboBoxColumn.DisplayIndex)) && e.RowIndex >= 0) {
+			//if (!showPipesThroughProduct) {
+				if (((e.ColumnIndex == roomDataGridViewComboBoxColumn.Index) || (e.ColumnIndex == productDataGridViewComboBoxColumn.Index)) && e.RowIndex >= 0) {
 					Rectangle rect = dgvConnectionPipes.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
 					int width = dgvConnectionPipes.CurrentCell.Size.Width;
 					roomSelectionButton.Location = new Point(rect.X + width - roomSelectionButton.Width, rect.Y);
 					roomSelectionButton.Height = dgvConnectionPipes.Rows[e.RowIndex].Height;
 					roomSelectionButton.Show();
-				} else if (e.ColumnIndex == PipeType.DisplayIndex && e.RowIndex >= 0) {
+				} else if (e.ColumnIndex == PipeType.Index && e.RowIndex >= 0) {
 					this.pipeTypeCombo.SelectedValueChanged -= new EventHandler(pipeTypeCombo_SelectedValueChanged);
-					DataGridViewCell pipeTypeCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[PipeType.DisplayIndex];
+					DataGridViewCell pipeTypeCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[PipeType.Index];
 					pipeTypeCombo.Items.Clear();
 					ConnectionPipe.PipeTypeEnumConverter conv = new ConnectionPipe.PipeTypeEnumConverter();
 					if (this.product != null && this.product.Product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_EUROVAL) {
@@ -213,10 +213,10 @@ namespace Europlan.Common {
 					//pipeTypeCombo.Height = dgvConnectionPipes.Rows[e.RowIndex].Height;
 					//pipeTypeCombo.Width = dgvConnectionPipes.CurrentCell.Size.Width;
 					pipeTypeCombo.Show();
-				} else if (e.ColumnIndex == Verlegeart.DisplayIndex && e.RowIndex >= 0) {
+				} else if (e.ColumnIndex == Verlegeart.Index && e.RowIndex >= 0) {
 					this.verlegeartCombo.SelectedValueChanged -= new EventHandler(verlegeartCombo_SelectedValueChanged);
-					DataGridViewCell pipeTypeCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[PipeType.DisplayIndex];
-					DataGridViewCell verlegeartCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[Verlegeart.DisplayIndex];
+					DataGridViewCell pipeTypeCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[PipeType.Index];
+					DataGridViewCell verlegeartCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[Verlegeart.Index];
 					verlegeartCombo.Items.Clear();
 					ConnectionPipe.VerlegeartEnumConverter conv = new ConnectionPipe.VerlegeartEnumConverter();
 					verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH));
@@ -244,10 +244,10 @@ namespace Europlan.Common {
 					verlegeartCombo.Location = new Point(rect.X, rect.Y);
 					verlegeartCombo.Size = new Size(rect.Width, rect.Height);
 					verlegeartCombo.Show();
-				} else if (e.ColumnIndex == Insulation.DisplayIndex && e.RowIndex >= 0) {
+				} else if (e.ColumnIndex == Insulation.Index && e.RowIndex >= 0) {
 					this.insulationCombo.SelectedValueChanged -= new EventHandler(insulationCombo_SelectedValueChanged);
-					DataGridViewCell verlegeartCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[Verlegeart.DisplayIndex];
-					DataGridViewCell insulationCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[Insulation.DisplayIndex];
+					DataGridViewCell verlegeartCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[Verlegeart.Index];
+					DataGridViewCell insulationCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[Insulation.Index];
 					insulationCombo.Items.Clear();
 					ConnectionPipe.InsulationEnumConverter conv = new ConnectionPipe.InsulationEnumConverter();
 					if (!ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH.Equals(verlegeartCell.Value)) {
@@ -263,7 +263,7 @@ namespace Europlan.Common {
 					insulationCombo.Size = new Size(rect.Width, rect.Height);
 					insulationCombo.Show();
 				}
-			}
+			//}
 		}
 
 		private void dgvConnectionPipes_CellLeave(object sender, DataGridViewCellEventArgs e) {
@@ -274,7 +274,7 @@ namespace Europlan.Common {
 		}
 
 		private void dgvConnectionPipes_CellParsing(object sender, DataGridViewCellParsingEventArgs e) {
-			if (e.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex) {
+			if (e.ColumnIndex == roomDataGridViewComboBoxColumn.Index) {
 				this.product = this.Tag as PlannedProduct;
 				foreach (Floor f in Project.Instance.Floors) {
 					if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
@@ -287,7 +287,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
-			} else if (e.ColumnIndex == productDataGridViewComboBoxColumn.DisplayIndex) {
+			} else if (e.ColumnIndex == productDataGridViewComboBoxColumn.Index) {
 				this.product = this.Tag as PlannedProduct;
 				foreach (Floor f in Project.Instance.Floors) {
 					if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
@@ -320,8 +320,8 @@ namespace Europlan.Common {
 				this.dgvConnectionPipes.SelectedRows.Count == 0 && this.dgvConnectionPipes.SelectedCells[0].Value != null) {
 				DataGridViewCell cell = this.dgvConnectionPipes.SelectedCells[0];
 				cell.Value = null;
-				if (cell.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex) {
-					this.dgvConnectionPipes.Rows[cell.RowIndex].Cells[productDataGridViewComboBoxColumn.DisplayIndex].Value = null;
+				if (cell.ColumnIndex == roomDataGridViewComboBoxColumn.Index) {
+					this.dgvConnectionPipes.Rows[cell.RowIndex].Cells[productDataGridViewComboBoxColumn.Index].Value = null;
 				}
 			}
 		}
@@ -336,7 +336,7 @@ namespace Europlan.Common {
 
 
 		void roomSelectionButton_Click(object sender, EventArgs e) {
-			if (dgvConnectionPipes.CurrentCell.ColumnIndex == roomDataGridViewComboBoxColumn.DisplayIndex) {
+			if (dgvConnectionPipes.CurrentCell.ColumnIndex == roomDataGridViewComboBoxColumn.Index) {
 				List<Room> rooms = new List<Room>();
 				foreach (Floor f in Project.Instance.Floors) {
 					if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
@@ -353,10 +353,10 @@ namespace Europlan.Common {
 					}
 				}
 				form.Dispose();
-			} else if (dgvConnectionPipes.CurrentCell.ColumnIndex == productDataGridViewComboBoxColumn.DisplayIndex) {
+			} else if (dgvConnectionPipes.CurrentCell.ColumnIndex == productDataGridViewComboBoxColumn.Index) {
 				List<PlannedProduct> products = new List<PlannedProduct>();
 
-				Room r = this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[roomDataGridViewComboBoxColumn.DisplayIndex].Value as Room;
+				Room r = this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[roomDataGridViewComboBoxColumn.Index].Value as Room;
 				// product items
 				if (r != null) {
 					foreach (PlannedProduct p in r.PlannedProducts) {
@@ -378,26 +378,26 @@ namespace Europlan.Common {
 
 		private void pipeTypeCombo_SelectedValueChanged(object sender, EventArgs e) {
 			ConnectionPipe.PipeTypeEnum pipeType = (ConnectionPipe.PipeTypeEnum)new ConnectionPipe.PipeTypeEnumConverter().ConvertFromString(pipeTypeCombo.SelectedItem as String);
-			this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[PipeType.DisplayIndex].Value = pipeType;
+			this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[PipeType.Index].Value = pipeType;
 			if (pipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
-				this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[Verlegeart.DisplayIndex].Value = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
-				this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[Insulation.DisplayIndex].Value = ConnectionPipe.InsulationEnum.IN_VL_RL;
+				this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[Verlegeart.Index].Value = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
+				this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[Insulation.Index].Value = ConnectionPipe.InsulationEnum.IN_VL_RL;
 			}
 			ReloadGrid();
 		}
 
 		private void verlegeartCombo_SelectedValueChanged(object sender, EventArgs e) {
 			ConnectionPipe.VerlegeartEnum verlegeart = (ConnectionPipe.VerlegeartEnum)new ConnectionPipe.VerlegeartEnumConverter().ConvertFromString(verlegeartCombo.SelectedItem as String);
-			this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[Verlegeart.DisplayIndex].Value = verlegeart;
+			this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[Verlegeart.Index].Value = verlegeart;
 			if (verlegeart == ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH) {
-				this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[Insulation.DisplayIndex].Value = ConnectionPipe.InsulationEnum.IN_VL_RL;
+				this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[Insulation.Index].Value = ConnectionPipe.InsulationEnum.IN_VL_RL;
 			}
 			ReloadGrid();
 		}
 
 		private void insulationCombo_SelectedValueChanged(object sender, EventArgs e) {
 			ConnectionPipe.InsulationEnum insulation = (ConnectionPipe.InsulationEnum)new ConnectionPipe.InsulationEnumConverter().ConvertFromString(insulationCombo.SelectedItem as String);
-			this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[Insulation.DisplayIndex].Value = insulation;
+			this.dgvConnectionPipes.Rows[dgvConnectionPipes.CurrentCell.RowIndex].Cells[Insulation.Index].Value = insulation;
 			ReloadGrid();
 		}
 
