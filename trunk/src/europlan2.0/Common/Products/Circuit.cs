@@ -119,6 +119,13 @@ namespace Europlan.Common {
 			get;
 		}
 
+		[XmlIgnore]
+		public double Area {
+			get	{
+				return 0;
+			}
+		}
+
 		/*public abstract string PlannedProductId {
 			get;
 			set;
