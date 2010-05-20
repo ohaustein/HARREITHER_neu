@@ -120,7 +120,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double Area {
+		public double CircuitArea {
 			get	{
 				return 0;
 			}
