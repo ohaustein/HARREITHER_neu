@@ -3382,7 +3382,7 @@ namespace Europlan.Common {
 											wrapper.Name += connStr;
 										}
 										wrapper.Name += "\n";
-										wrapper.Area += pipe.Vorlauf + EuroplanRes.Unit_Meter + "\n"; //"m\n";
+										wrapper.Area += Math.Round(pipe.Vorlauf, 1) + EuroplanRes.Unit_Meter + "\n"; //"m\n";
 									}
 								}
 
@@ -3420,7 +3420,7 @@ namespace Europlan.Common {
 									}
 								}
 
-								wrapper.Area += c.CircuitArea + EuroplanRes.Unit_Quadratmeter; //"m²";
+								wrapper.Area += Math.Round(c.CircuitArea, 1) + EuroplanRes.Unit_Quadratmeter; //"m²";
 								if (!circuitCount.ContainsKey(connection.Distributor.Id)) {
 									circuitCount.Add(connection.Distributor.Id, 1);							
 								} 
@@ -3482,7 +3482,7 @@ namespace Europlan.Common {
 											conStr = conStr.Replace("%VERLEGEART%", new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart));
 											wrapper.Name += conStr;
 										}
-										wrapper.Area += "\n" + pipe.Ruecklauf + EuroplanRes.Unit_Meter; // "m";
+										wrapper.Area += "\n" + Math.Round(pipe.Ruecklauf, 1) + EuroplanRes.Unit_Meter; // "m";
 									}
 								}
 								wrapperList.Add(wrapper);
