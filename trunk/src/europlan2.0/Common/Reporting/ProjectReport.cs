@@ -3420,7 +3420,7 @@ namespace Europlan.Common {
 									}
 								}
 
-								wrapper.Area += pp.PlannedArea + EuroplanRes.Unit_Quadratmeter; //"m²";
+								wrapper.Area += c.Area + EuroplanRes.Unit_Quadratmeter; //"m²";
 								if (!circuitCount.ContainsKey(connection.Distributor.Id)) {
 									circuitCount.Add(connection.Distributor.Id, 1);							
 								} 
