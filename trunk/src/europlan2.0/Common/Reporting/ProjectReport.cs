@@ -2879,7 +2879,8 @@ namespace Europlan.Common {
 										}
 
 										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
-										
+
+										wrapper.TotalArea = mc.ModulArea;
 										wrapper.Wassermenge = mc.C_DurchflussHeat;
 										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustHeat;
 										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorHeat;
@@ -2947,6 +2948,7 @@ namespace Europlan.Common {
 
 										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
 
+										wrapper.TotalArea = mc.ModulArea;
 										wrapper.Wassermenge = mc.C_DurchflussCool;
 										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustCool;
 										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorCool;
