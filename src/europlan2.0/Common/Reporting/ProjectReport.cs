@@ -1743,10 +1743,10 @@ namespace Europlan.Common {
 					wrapper.Id = room.Id;
 					wrapper.Name = room.Name;
 					wrapper.HeatTemperature = room.RoomHeatTemperature;
-					wrapper.HeatNetLoad = room.HeatLoad;
+					wrapper.HeatNetLoad = room.NormalizedHeatLoad;
 					wrapper.HeatPower = heatPower;
 					wrapper.CoolTemperature = room.RoomCoolTemperature;
-					wrapper.CoolNetLoad = room.CoolLoad;
+					wrapper.CoolNetLoad = room.NormalizedCoolLoad;
 					wrapper.CoolPower = coolPower;
 					wrapper.Area = room.Area;
 					wrapper.FloorId = floor.Id;
