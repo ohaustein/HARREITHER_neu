@@ -530,7 +530,6 @@ namespace Europlan.Common {
 	
 		internal void FinalizeLoading() {
  			foreach (PlannedProduct pp in this.plannedProducts) {
-				pp.Product.AssociatedRoom = this;
 				pp.FinalizeLoading();
 			}
 			foreach (Product p in this.usedProductsForQuickDimensioning) {
