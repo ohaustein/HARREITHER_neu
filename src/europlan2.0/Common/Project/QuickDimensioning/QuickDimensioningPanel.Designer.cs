@@ -41,6 +41,7 @@ namespace Europlan.Common {
 			this.cbEurovalCool = new System.Windows.Forms.CheckBox();
 			this.lblAllocation = new System.Windows.Forms.Label();
 			this.lblHeat = new System.Windows.Forms.Label();
+			this.lblAssumptions = new System.Windows.Forms.Label();
 			this.cmbDistance = new System.Windows.Forms.ComboBox();
 			this.lblCool = new System.Windows.Forms.Label();
 			this.cbHithermCompactCool = new System.Windows.Forms.CheckBox();
@@ -63,12 +64,12 @@ namespace Europlan.Common {
 			this.cbHithermCompactRoofCool = new System.Windows.Forms.CheckBox();
 			this.lblDistance = new System.Windows.Forms.Label();
 			this.txtAllocation = new Europlan.Common.NumericBox();
-			this.lblAssumptions = new System.Windows.Forms.Label();
 			this.txtCoolTemperature = new Europlan.Common.NumericBox();
 			this.pageDistributors = new System.Windows.Forms.TabPage();
 			this.quickDimensioningDistributorsSummary = new Europlan.Common.QuickDimensioningDistributorsSummary();
 			this.label3 = new System.Windows.Forms.Label();
 			this.quickDimensioningRoomDistributorsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -315,6 +316,18 @@ namespace Europlan.Common {
 			this.lblHeat.TabIndex = 4;
 			this.lblHeat.Text = "Heizen";
 			this.lblHeat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// lblAssumptions
+			// 
+			this.lblAssumptions.BackColor = System.Drawing.Color.Transparent;
+			this.lblAssumptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblAssumptions.Location = new System.Drawing.Point(286, 3);
+			this.lblAssumptions.Margin = new System.Windows.Forms.Padding(3);
+			this.lblAssumptions.Name = "lblAssumptions";
+			this.lblAssumptions.Size = new System.Drawing.Size(84, 17);
+			this.lblAssumptions.TabIndex = 18;
+			this.lblAssumptions.Text = "Annahmen";
+			this.lblAssumptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// cmbDistance
 			// 
@@ -607,18 +620,6 @@ namespace Europlan.Common {
             0});
 			this.txtAllocation.ValueChanged += new System.EventHandler(this.txtAllocation_ValueChanged);
 			// 
-			// lblAssumptions
-			// 
-			this.lblAssumptions.BackColor = System.Drawing.Color.Transparent;
-			this.lblAssumptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblAssumptions.Location = new System.Drawing.Point(286, 3);
-			this.lblAssumptions.Margin = new System.Windows.Forms.Padding(3);
-			this.lblAssumptions.Name = "lblAssumptions";
-			this.lblAssumptions.Size = new System.Drawing.Size(84, 17);
-			this.lblAssumptions.TabIndex = 18;
-			this.lblAssumptions.Text = "Annahmen";
-			this.lblAssumptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
 			// txtCoolTemperature
 			// 
 			this.txtCoolTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
@@ -686,13 +687,20 @@ namespace Europlan.Common {
 			// 
 			this.quickDimensioningRoomDistributorsWrapperBindingSource.DataSource = typeof(Europlan.Common.QuickDimensioningRoomDistributorsWrapper);
 			// 
+			// helpProvider
+			// 
+			this.helpProvider.HelpNamespace = "europlan.chm";
+			// 
 			// QuickDimensioningPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.tabQuickDimensioning);
+			this.helpProvider.SetHelpKeyword(this, "html\\Flächenaufstellung.htm");
+			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.Name = "QuickDimensioningPanel";
+			this.helpProvider.SetShowHelp(this, true);
 			this.Size = new System.Drawing.Size(865, 559);
 			this.tabQuickDimensioning.ResumeLayout(false);
 			this.pageSettings.ResumeLayout(false);
@@ -753,5 +761,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.CheckBox cbHithermCompactRoofHeat;
 		private System.Windows.Forms.CheckBox cbHithermCompactRoofCool;
 		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.HelpProvider helpProvider;
 	}
 }
