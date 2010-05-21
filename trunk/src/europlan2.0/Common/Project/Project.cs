@@ -294,6 +294,13 @@ namespace Europlan.Common {
 
 		internal void FinalizeLoading() {
 			foreach (Floor floor in this.floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						pp.Product.AssociatedRoom = room;
+					}
+				} 
+			}
+			foreach (Floor floor in this.floors) {
 				floor.FinalizeLoading();
 			}
 		}
