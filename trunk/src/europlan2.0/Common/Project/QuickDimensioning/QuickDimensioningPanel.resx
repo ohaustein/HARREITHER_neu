@@ -120,4 +120,7 @@
   <metadata name="quickDimensioningRoomDistributorsWrapperBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>12, 29</value>
   </metadata>
+  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>391, 29</value>
+  </metadata>
 </root>

@@ -3405,7 +3405,7 @@ recht</value>
     <value>Modul Klima-Decke</value>
   </data>
 	<data name="ProductConnection_AnschlussAn" xml:space="preserve">
-    <value>Anschluß an %SYSTEM% in %RAUMID%: %RAUMNAME%"</value>
+    <value>Anschluß an %SYSTEM% in %RAUMID%: %RAUMNAME%</value>
   </data>
 	<data name="ProductOverviewForm_DruckverlustHeiz" xml:space="preserve">
     <value>Druckverlust

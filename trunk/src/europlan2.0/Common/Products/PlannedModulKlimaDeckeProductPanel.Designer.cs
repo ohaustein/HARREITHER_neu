@@ -737,9 +737,12 @@ namespace Europlan.Common {
 			this.tabs.Controls.Add(this.pageCircuit);
 			this.tabs.Controls.Add(this.pageConstruction);
 			this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.helpProvider.SetHelpKeyword(this.tabs, "html\\Modul_Klimadecke.htm");
+			this.helpProvider.SetHelpNavigator(this.tabs, System.Windows.Forms.HelpNavigator.Topic);
 			this.tabs.Location = new System.Drawing.Point(0, 0);
 			this.tabs.Name = "tabs";
 			this.tabs.SelectedIndex = 0;
+			this.helpProvider.SetShowHelp(this.tabs, true);
 			this.tabs.Size = new System.Drawing.Size(864, 640);
 			this.tabs.TabIndex = 2;
 			this.tabs.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabs_Deselecting);
