@@ -1181,6 +1181,14 @@ namespace Europlan.Common {
 				} else {
 					listLabel1.Variables.Add("@PartnerLogo", "(NULL)");
 				}
+
+				Licensing.License license = Licensing.LicenseManager.Instance.License;
+				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatInternal)) {
+					listLabel1.Variables.Add("@InternalLicense", false);
+				} else {
+					listLabel1.Variables.Add("@InternalLicense", true);
+				}
+
 				string usedRoomTypes = "";
 				foreach (RoomType roomType in Project.Instance.Config.RoomTypes) {
 					foreach (QuickDimensioningReportWrapper wrapper in reportWrapper) {
