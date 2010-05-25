@@ -726,6 +726,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedDeltaRhoHeat {
 			get {
+				if (requestedHeatLoad == 0) {
+					return 0;
+				}
 				if (this.incompleteCalculation) {
 					return 0;
 				}
@@ -774,6 +777,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedDeltaRhoCool {
 			get {
+				if (requestedCoolLoad == 0) {
+					return 0;
+				}
 				if (this.incompleteCalculation) {
 					return 0;
 				}
@@ -819,6 +825,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedMhHeat {
 			get {
+				if (requestedHeatLoad == 0) {
+					return 0;
+				}
 				if (this.incompleteCalculation) {
 					return 0;
 				}
@@ -836,6 +845,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedMhCool {
 			get {
+				if (requestedCoolLoad == 0) {
+					return 0;
+				}
 				if (this.incompleteCalculation) {
 					return 0;
 				}
@@ -853,6 +865,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedMaxMhHeat {
 			get {
+				if (requestedHeatLoad == 0) {
+					return 0;
+				}
 				if (this.incompleteCalculation) {
 					return 0;
 				}
@@ -872,6 +887,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedMaxMhCool {
 			get {
+				if (requestedCoolLoad == 0) {
+					return 0;
+				}
 				if (this.incompleteCalculation) {
 					return 0;
 				}
@@ -1041,6 +1059,9 @@ namespace Europlan.Common {
 
 		private double QH2OHeat {
 			get {
+				if (requestedHeatLoad == 0) {
+					return 0;
+				}
 				double qH2OHeat = 0;
 				foreach (Circuit c in this.circuits) {
 					qH2OHeat += Math.Abs(c.C_Qh2oHeat);
@@ -1051,6 +1072,9 @@ namespace Europlan.Common {
 
 		private double QH2OCool {
 			get {
+				if (requestedCoolLoad == 0) {
+					return 0;
+				}
 				double qH2OCool = 0;
 				foreach (Circuit c in this.circuits) {
 					qH2OCool += Math.Abs(c.C_Qh2oCool);
