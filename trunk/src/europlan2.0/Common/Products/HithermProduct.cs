@@ -850,14 +850,14 @@ namespace Europlan.Common {
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
-			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
+			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool && this.requestedHeatLoad > 0) {
 				if (Math.Round(this.PlannedMaxMhHeat, 1) > HithermProduct.ConfigMaxMassenstrom) {
 					newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
 					newMsg = newMsg.Replace("%MAXIMUM%", HithermProduct.ConfigMaxMassenstrom.ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
-			} else {
+			} else if (this.requestedCoolLoad > 0) {
 				if (Math.Round(this.PlannedMaxMhCool, 1) > HithermProduct.ConfigMaxMassenstrom) {
 					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
@@ -865,14 +865,14 @@ namespace Europlan.Common {
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
-			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
+			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool && this.requestedHeatLoad > 0) {
 				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(HithermProduct.ConfigMaxPressureLost / 100.0, 2)) {
 					newMsg = EuroplanRes.ErrorMessage_DruckverlustHeiz;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoHeat, 2).ToString());
 					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(HithermProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
-			} else {
+			} else if (this.requestedCoolLoad > 0) {
 				if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(HithermProduct.ConfigMaxPressureLost / 100.0, 2)) {
 					newMsg = EuroplanRes.ErrorMessage_DruckverlustKuehl;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoCool, 2).ToString());

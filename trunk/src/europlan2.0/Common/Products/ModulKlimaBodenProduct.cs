@@ -9,7 +9,7 @@ namespace Europlan.Common {
 
 	[Serializable()]
 	[ProductName("Product_ModulKlimBodenName", "Product_ModulKlimBodenFullName")]
-	public class ModulKlimaBodenProduct : Product {
+	public class ModulKlimaBodenProduct : Product, ProductWithInsulationConstruction {
 
 		// quick dimensioning
 		private static int quickDimensioningHeatPowerPerSquareMeter = 50;
@@ -621,20 +621,20 @@ namespace Europlan.Common {
 				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedNetArea, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
-			if (Math.Round(this.PlannedFloorTemperatureHeat, 1) > this.MaxFloorTemp) {
+			if (Math.Round(this.PlannedFloorTemperatureHeat, 1) > this.MaxFloorTemp && this.requestedHeatLoad > 0) {
 				newMsg = EuroplanRes.ErrorMessage_Oberflaechentemperatur;
 				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedFloorTemperatureHeat, 1).ToString());
 				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.MaxFloorTemp, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
-			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool) {
+			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool && this.requestedHeatLoad > 0) {
 				if (Math.Round(this.PlannedMaxMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
 					newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
 					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
-			} else {
+			} else if (this.requestedCoolLoad > 0) {
 				if (Math.Round(this.PlannedMaxMhCool, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
 					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
@@ -642,14 +642,14 @@ namespace Europlan.Common {
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
-			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool) {
+			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool && this.requestedHeatLoad > 0) {
 				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2)) {
 					newMsg = EuroplanRes.ErrorMessage_DruckverlustHeiz;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoHeat, 2).ToString());
 					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
-			} else {
+			} else if (this.requestedCoolLoad > 0) {
 				if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0, 2)) {
 					newMsg = EuroplanRes.ErrorMessage_DruckverlustKuehl;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoCool, 2).ToString());

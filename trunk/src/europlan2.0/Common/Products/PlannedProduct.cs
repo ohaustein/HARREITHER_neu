@@ -245,13 +245,13 @@ namespace Europlan.Common {
 					return 0;
 				}
 				if (this.coverHeatLoad) {
-					return (float)this.NecessaryHeatLoad * 100 / this.Product.AssociatedRoom.NormalizedHeatLoad;
+					return (float)Math.Round(this.NecessaryHeatLoad * 100 / this.Product.AssociatedRoom.NormalizedHeatLoad, 1);
 				}
 				return (float)Math.Round(this.requestedHeatLoad * 100 / this.Product.AssociatedRoom.NormalizedHeatLoad, 1);
 			}
 			set {
 				if (this.Product.AssociatedRoom.HeatLoad != 0) {
-					this.requestedHeatLoad = this.Product.AssociatedRoom.HeatLoad * value / 100;
+					this.requestedHeatLoad = this.Product.AssociatedRoom.NormalizedHeatLoad * value / 100;
 				}
 			}
 		}

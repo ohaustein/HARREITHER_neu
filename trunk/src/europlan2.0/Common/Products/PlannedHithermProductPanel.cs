@@ -409,11 +409,11 @@ namespace Europlan.Common {
 
 				lblRest.Text = EuroplanRes.PlannedHithermProductPanel_Rest + " (" + this.product.Product.AssociatedRoom.ToString() + ")";
 				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 0).ToString();
-				lblQHeatDiff.Text = Math.Round(qDiffHeat, 0).ToString();
-				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 0).ToString();
+				lblQHeatDiff.Text = Math.Round(qDiffHeat, 0).ToString("+0;-0");
+				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 0).ToString("+0;-0");
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 0).ToString();
-				lblQCoolDiff.Text = (qDiffCool > 0 ? "+" : "") + Math.Round(qDiffCool, 0).ToString();
-				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 0).ToString();
+				lblQCoolDiff.Text = Math.Round(qDiffCool, 0).ToString("+0;-0");
+				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 0).ToString("+0;-0");
 				double area = hp.PlannedRegisterArea;
 				lblCoveredArea.Text = Math.Round(area, 2).ToString();
 				lblAvailableArea.Text = Math.Round(this.product.PlannedArea.HasValue ? this.product.PlannedArea.Value : 0, 2).ToString();
