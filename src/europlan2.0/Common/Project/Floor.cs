@@ -19,6 +19,9 @@ namespace Europlan.Common {
 		private RoomList rooms;
 		private DistributorList distributors;
 
+		private Construction lastInsulationConstruction = null;
+		private string lastInsulationConstructionId = null;
+
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Floor));
 
@@ -258,6 +261,33 @@ namespace Europlan.Common {
 				}
 			}
 			return null;
+		}
+
+		public string LastInsulationConstructionId {
+			get {
+				if (this.lastInsulationConstruction == null) {
+					return this.lastInsulationConstructionId;
+				}
+				return this.lastInsulationConstruction.Id;
+			}
+			set {
+				if (this.LastInsulationConstructionId != value) {
+					this.lastInsulationConstruction = null;
+					this.lastInsulationConstructionId = value;
+				}
+			}
+		}
+
+		[XmlIgnore]
+		public Construction LastInsulationConstruction {
+			get {
+				if (this.lastInsulationConstructionId != null) {
+					this.lastInsulationConstruction = Project.Instance.Config.GetConstruction(this.lastInsulationConstructionId);
+					this.lastInsulationConstructionId = null;
+				}
+				return this.lastInsulationConstruction;
+			}
+			set { this.lastInsulationConstruction = value; }
 		}
 	}
 
