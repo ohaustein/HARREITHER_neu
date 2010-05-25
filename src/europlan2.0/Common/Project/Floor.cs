@@ -285,6 +285,15 @@ namespace Europlan.Common {
 					this.lastInsulationConstruction = Project.Instance.Config.GetConstruction(this.lastInsulationConstructionId);
 					this.lastInsulationConstructionId = null;
 				}
+				if (lastInsulationConstruction == null) {
+					int i = 0;
+					while (i < Project.Instance.Config.Constructions.Count && this.lastInsulationConstruction == null) {
+						if (Project.Instance.Config.Constructions[i].Type.Scope == ConstructionScopeEnum.InsulationConstruction) {
+							this.lastInsulationConstruction = Project.Instance.Config.Constructions[i];
+						}
+						i++;
+					}
+				}
 				return this.lastInsulationConstruction;
 			}
 			set { this.lastInsulationConstruction = value; }

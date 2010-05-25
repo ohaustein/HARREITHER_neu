@@ -559,8 +559,8 @@ namespace Europlan.Common {
 				this.lblQfbhCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
 				double qRestHeat = this.product.PlannedHeatLoad - this.product.RequestedHeatLoad;
 				double qRestCool = this.product.PlannedCoolLoad - this.product.RequestedCoolLoad;
-				this.lblQRestHeat.Text = (qRestHeat > 0 ? "+" : "") + Math.Round(qRestHeat, 2).ToString();
-				this.lblQRestCool.Text = (qRestCool > 0 ? "+" : "") + Math.Round(qRestCool, 2).ToString();
+				this.lblQRestHeat.Text = Math.Round(qRestHeat, 2).ToString("+0.00;-0.00");
+				this.lblQRestCool.Text = Math.Round(qRestCool, 2).ToString("+0.00;-0.00");
 
 				// Randzone
 				if (complete && evProduct.PlannedRimType.HasValue) {
@@ -1026,6 +1026,7 @@ namespace Europlan.Common {
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.NONE);
+					this.product.Product.AssociatedRoom.GetFloor().LastInsulationConstruction = form.SelectedConstruction;
 				}
 			}
 			form.Dispose();

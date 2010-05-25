@@ -218,6 +218,10 @@ namespace Europlan.Common {
 							}
 						}
 					}
+					ProductWithInsulationConstruction pwic = p as ProductWithInsulationConstruction;
+					if (pwic != null) {
+						pwic.PlannedInsulationConstruction = this.room.GetFloor().LastInsulationConstruction;	
+					}
 					
 					pp.ConfigureProductDefault();
 					this.room.PlannedProducts.Add(pp);

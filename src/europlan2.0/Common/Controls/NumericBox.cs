@@ -124,10 +124,10 @@ namespace Europlan.Common {
 				//this.lastValue = value;
 				decimal correctedVal = Math.Round(value, decimalPlaces[(int)this.editType]);
 				if (this.MaxValue.HasValue && correctedVal > this.MaxValue.Value) {
-					correctedVal = this.MaxValue.Value;
+					correctedVal = Math.Round(this.MaxValue.Value, decimalPlaces[(int)this.editType]);
 				}
 				if (this.MinValue.HasValue && correctedVal < this.MinValue.Value) {
-					correctedVal = this.MinValue.Value;
+					correctedVal = Math.Round(this.MinValue.Value, decimalPlaces[(int)this.editType]);
 				}
 				string text = "";
 				if (correctedVal >= 0 && sign[(int)this.editType]) {
