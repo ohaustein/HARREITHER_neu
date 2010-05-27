@@ -108,7 +108,7 @@ namespace Europlan.Common {
 		private static double spreizungKuehlMax = 5;
 		private static ModulCeilingConstructionEnum construction = ModulCeilingConstructionEnum.C_PROFIL;
 
-		private static double maxCeilingTempHeat = 27.0;
+		private static double maxCeilingTempHeat = 29.0;
 
 		private ProductType modulType = ProductType.DH;
 		private float plannedFloorArea = 0;
@@ -1094,7 +1094,7 @@ namespace Europlan.Common {
 							// Modul
 							Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
 							nrOfElements++;
-							modulArea += modul.Area;
+							modulArea += modul.HeatArea;
 							if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) {
 								nrOfOtherElements++;
 							}

@@ -22,7 +22,7 @@ namespace Europlan.Common {
 
 			this.cmbType.Items.Add(Product.ProductType.WH);
 			this.cmbType.Items.Add(Product.ProductType.DH);
-			this.cmbType.Items.Add(Product.ProductType.DSH);
+			//this.cmbType.Items.Add(Product.ProductType.DSH);
 		}
 
 		private void SetLanguage() {
@@ -94,17 +94,22 @@ namespace Europlan.Common {
 			this.registerCountDataGridViewTextBoxColumn.HeaderText = EuroplanRes.PlannedHithermCompactProductPanel_AnzahlRegister;
 		}
 
-		private void UpdateRegisterItems(bool dachschraege) {
+		private void UpdateRegisterItems(bool ceiling) {
 			this.registerTypeDataGridViewTextBoxColumn.Items.Clear();
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std);
-			if (!dachschraege) {
-				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par);
-				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par);
-				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par);
+			if (!ceiling) {
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Ds);
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Ds);
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Ds);
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Ds);
+				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Ds);
 			}
 		}
 
@@ -146,7 +151,7 @@ namespace Europlan.Common {
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
 			if (this.product != null) {
-				this.UpdateRegisterItems((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.DSH);
+				this.UpdateRegisterItems((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.DH);
 				(this.product.Product as HithermCompactProduct).ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 			}
@@ -854,8 +859,8 @@ namespace Europlan.Common {
 		private void cmbType_SelectedValueChanged(object sender, EventArgs e) {
 			if (ignoreType == 0) {
 				if (this.cmbType.SelectedItem is Product.ProductType && this.product.Product.Type != (Product.ProductType)this.cmbType.SelectedItem) {
-					if ((Product.ProductType)this.cmbType.SelectedItem == Product.ProductType.DSH) {
-						if (MessageBox.Show(EuroplanRes.PlannedHithermCompactProductPanel_TypAendernText/*"Wenn Sie den Typ auf Dachschräge ändern, werden alle Register in Parapetauslegung gelöscht"*/, EuroplanRes.PlannedHithermCompactProductPanel_TypAendernTitel/*"Bestätigen"*/, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK) {
+					if ((Product.ProductType)this.cmbType.SelectedItem == Product.ProductType.DH) {
+						if (MessageBox.Show(EuroplanRes.PlannedHithermCompactProductPanel_TypAendernTextDh/*"Wenn Sie den Typ auf Dachschräge ändern, werden alle Register in Parapetauslegung gelöscht"*/, EuroplanRes.PlannedHithermCompactProductPanel_TypAendernTitel/*"Bestätigen"*/, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK) {
 							this.cmbType.SelectedItem = (this.product.Product as HithermCompactProduct).HithermCompactType;
 							return ;
 						}
@@ -877,7 +882,7 @@ namespace Europlan.Common {
 					} else if ((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.DH) {
 						(this.product.Product as HithermCompactProduct).PlannedCeilingArea = this.product.Product.AvailableCeilingArea;
 					}
-					this.UpdateRegisterItems((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.DSH);
+					this.UpdateRegisterItems((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.DH);
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.TYPE);

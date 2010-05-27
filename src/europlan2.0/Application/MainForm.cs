@@ -201,7 +201,7 @@ namespace Europlan.Application {
 			if (projectFileName != null) {
 				LoadProject();
 			} else {
-				NewProject();
+				NewProject(true);
 			}
 
 			Project.Instance.InitializeTreeView(this.projectTree);
@@ -272,12 +272,14 @@ namespace Europlan.Application {
 					string message = EuroplanRes.MainForm_NichtLizensiertesProduktImProjektText;
 					message = message.Replace("%PRODUKT%", name);
 					MessageBox.Show(message, EuroplanRes.MainForm_NichtLizensiertesProduktImProjektTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				} else if (ex is ProjectVersionNotCompatibleException) {
+					// nothing to do here
 				} else {
 					log.Error("Problem loading project:", ex);
 				}
 				currentProject = null;
 				projectFileName = null;
-				this.NewProject();
+				this.NewProject(false);
 			}
 		}
 
@@ -296,8 +298,8 @@ namespace Europlan.Application {
 			}
 		}
 
-		private void NewProject() {
-			if (CheckForUnsavedChanges()) {
+		private void NewProject(bool checkChanges) {
+			if (!checkChanges || CheckForUnsavedChanges()) {
 				this.splitContainer.Panel2.Controls.Clear();
 				if (currentProject == null) {
 					currentProject = Project.New();
@@ -444,7 +446,7 @@ namespace Europlan.Application {
 		}
 
 		private void newToolStripMenuItem_Click(object sender, EventArgs e) {
-			NewProject();
+			NewProject(true);
 		}
 
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e) {

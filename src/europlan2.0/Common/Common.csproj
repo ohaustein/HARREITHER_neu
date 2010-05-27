@@ -254,6 +254,7 @@
     <Compile Include="Project\ProductOverviewForm.Designer.cs">
       <DependentUpon>ProductOverviewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\ProjectVersionNotCompatibleException.cs" />
     <Compile Include="Project\RequiredMaterialGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -17,6 +17,11 @@ namespace Europlan.Common {
 			private static readonly string hitc_1000_par = EuroplanRes.HithermCompactRegister_Hit1000Par; //"HIT 1000 Par";
 			private static readonly string hitc_1500_par = EuroplanRes.HithermCompactRegister_Hit1500Par; //"HIT 1500 Par";
 			private static readonly string hitc_2000_par = EuroplanRes.HithermCompactRegister_Hit2000Par; //"HIT 2000 Par";
+			private static readonly string hitc_620_ds = EuroplanRes.HithermCompactRegister_Hit620Ds; //"HIT 620 DS";
+			private static readonly string hitc_1000_ds = EuroplanRes.HithermCompactRegister_Hit1000Ds; //"HIT 1000 DS";
+			private static readonly string hitc_1500_ds = EuroplanRes.HithermCompactRegister_Hit1500Ds; //"HIT 1500 DS";
+			private static readonly string hitc_2000_ds = EuroplanRes.HithermCompactRegister_Hit2000Ds; //"HIT 2000 DS";
+			private static readonly string hitc_2500_ds = EuroplanRes.HithermCompactRegister_Hit2500Ds; //"HIT 2500 DS";
 
 			private static readonly string hitc_620_std_Short = EuroplanRes.HithermCompactRegister_Hit620Std_Short; //"620 Std";
 			private static readonly string hitc_1000_std_Short = EuroplanRes.HithermCompactRegister_Hit1000Std_Short; //"1000 Std";
@@ -26,6 +31,11 @@ namespace Europlan.Common {
 			private static readonly string hitc_1000_par_Short = EuroplanRes.HithermCompactRegister_Hit1000Par_Short; //"1000 Par";
 			private static readonly string hitc_1500_par_Short = EuroplanRes.HithermCompactRegister_Hit1500Par_Short; //"1500 Par";
 			private static readonly string hitc_2000_par_Short = EuroplanRes.HithermCompactRegister_Hit2000Par_Short; //"2000 Par";
+			private static readonly string hitc_620_ds_Short = EuroplanRes.HithermCompactRegister_Hit620Ds_Short; //"620 DS";
+			private static readonly string hitc_1000_ds_Short = EuroplanRes.HithermCompactRegister_Hit1000Ds_Short; //"1000 DS";
+			private static readonly string hitc_1500_ds_Short = EuroplanRes.HithermCompactRegister_Hit1500Ds_Short; //"1500 DS";
+			private static readonly string hitc_2000_ds_Short = EuroplanRes.HithermCompactRegister_Hit2000Ds_Short; //"2000 DS";
+			private static readonly string hitc_2500_ds_Short = EuroplanRes.HithermCompactRegister_Hit2500Ds_Short; //"2500 DS";
 
 			private Dictionary<string, HithermCompactRegisterTypeEnum> mappingFromString = new Dictionary<string, HithermCompactRegisterTypeEnum>();
 			private Dictionary<HithermCompactRegisterTypeEnum, string> mappingToString = new Dictionary<HithermCompactRegisterTypeEnum, string>();
@@ -58,6 +68,11 @@ namespace Europlan.Common {
 				mappingFromString.Add(hitc_1000_par, HithermCompactRegisterTypeEnum.HITC_1000_Par);
 				mappingFromString.Add(hitc_1500_par, HithermCompactRegisterTypeEnum.HITC_1500_Par);
 				mappingFromString.Add(hitc_2000_par, HithermCompactRegisterTypeEnum.HITC_2000_Par);
+				mappingFromString.Add(hitc_620_ds, HithermCompactRegisterTypeEnum.HITC_620_Ds);
+				mappingFromString.Add(hitc_1000_ds, HithermCompactRegisterTypeEnum.HITC_1000_Ds);
+				mappingFromString.Add(hitc_1500_ds, HithermCompactRegisterTypeEnum.HITC_1500_Ds);
+				mappingFromString.Add(hitc_2000_ds, HithermCompactRegisterTypeEnum.HITC_2000_Ds);
+				mappingFromString.Add(hitc_2500_ds, HithermCompactRegisterTypeEnum.HITC_2500_Ds);
 
 				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_620_Std, hitc_620_std);
 				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Std, hitc_1000_std);
@@ -67,6 +82,11 @@ namespace Europlan.Common {
 				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Par, hitc_1000_par);
 				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1500_Par, hitc_1500_par);
 				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_2000_Par, hitc_2000_par);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_620_Ds, hitc_620_ds);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Ds, hitc_1000_ds);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_1500_Ds, hitc_1500_ds);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_2000_Ds, hitc_2000_ds);
+				mappingToString.Add(HithermCompactRegisterTypeEnum.HITC_2500_Ds, hitc_2500_ds);
 
 				mappingFromShortString.Add(hitc_620_std_Short, HithermCompactRegisterTypeEnum.HITC_620_Std);
 				mappingFromShortString.Add(hitc_1000_std_Short, HithermCompactRegisterTypeEnum.HITC_1000_Std);
@@ -76,6 +96,11 @@ namespace Europlan.Common {
 				mappingFromShortString.Add(hitc_1000_par_Short, HithermCompactRegisterTypeEnum.HITC_1000_Par);
 				mappingFromShortString.Add(hitc_1500_par_Short, HithermCompactRegisterTypeEnum.HITC_1500_Par);
 				mappingFromShortString.Add(hitc_2000_par_Short, HithermCompactRegisterTypeEnum.HITC_2000_Par);
+				mappingFromShortString.Add(hitc_620_ds_Short, HithermCompactRegisterTypeEnum.HITC_620_Ds);
+				mappingFromShortString.Add(hitc_1000_ds_Short, HithermCompactRegisterTypeEnum.HITC_1000_Ds);
+				mappingFromShortString.Add(hitc_1500_ds_Short, HithermCompactRegisterTypeEnum.HITC_1500_Ds);
+				mappingFromShortString.Add(hitc_2000_ds_Short, HithermCompactRegisterTypeEnum.HITC_2000_Ds);
+				mappingFromShortString.Add(hitc_2500_ds_Short, HithermCompactRegisterTypeEnum.HITC_2500_Ds);
 
 				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_620_Std, hitc_620_std_Short);
 				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Std, hitc_1000_std_Short);
@@ -85,6 +110,11 @@ namespace Europlan.Common {
 				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Par, hitc_1000_par_Short);
 				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_1500_Par, hitc_1500_par_Short);
 				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_2000_Par, hitc_2000_par_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_620_Ds, hitc_620_ds_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_1000_Ds, hitc_1000_ds_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_1500_Ds, hitc_1500_ds_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_2000_Ds, hitc_2000_ds_Short);
+				mappingToShortString.Add(HithermCompactRegisterTypeEnum.HITC_2500_Ds, hitc_2500_ds_Short);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -137,7 +167,12 @@ namespace Europlan.Common {
 			//HIT_1250_Par,
 			HITC_1500_Par,
 			//HIT_1750_Par,
-			HITC_2000_Par
+			HITC_2000_Par,
+			HITC_620_Ds,
+			HITC_1000_Ds,
+			HITC_1500_Ds,
+			HITC_2000_Ds,
+			HITC_2500_Ds
 		}
 		#endregion Enums
 
@@ -146,18 +181,23 @@ namespace Europlan.Common {
 		public static int GetRegisterHoehe(HithermCompactRegisterTypeEnum registerType) {
 			switch (registerType) {
 				case HithermCompactRegisterTypeEnum.HITC_620_Std:
+				case HithermCompactRegisterTypeEnum.HITC_620_Ds:
 					return 620;
 
 				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Ds:
 					return 1000;
 
 				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Ds:
 					return 1500;
 
 				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Ds:
 					return 2000;
 
 				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2500_Ds:
 					return 2500;
 
 				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
@@ -178,6 +218,11 @@ namespace Europlan.Common {
 				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
 				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
 				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_620_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_2500_Ds:
 					return 625;
 
 				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
@@ -197,22 +242,27 @@ namespace Europlan.Common {
 		public static double GetHeatArea(HithermCompactRegisterTypeEnum registerType) {
 			switch (registerType) {
 				case HithermCompactRegisterTypeEnum.HITC_620_Std:
-					return 0.5 * 0.5;
+				case HithermCompactRegisterTypeEnum.HITC_620_Ds:
+					return 0.5 * 0.5 + 0.5 * 0.1 + 0.5 * 0.1;
 
 				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Ds:
 				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
-					return 1.0 * 0.5;
+					return 1.0 * 0.5 + 1.0 * 0.1 + 0.5 * 0.1;
 
 				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Ds:
 				case HithermCompactRegisterTypeEnum.HITC_1500_Par:
-					return 1.5 * 0.5;
+					return 1.5 * 0.5 + 1.5 * 0.1 + 0.5 * 0.1;
 
 				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Ds:
 				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
-					return 2.0 * 0.5;
+					return 2.0 * 0.5 + 2.0 * 0.1 + 0.5 * 0.1;
 
 				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
-					return 2.5 * 0.5;
+				case HithermCompactRegisterTypeEnum.HITC_2500_Ds:
+					return 2.5 * 0.5 + 2.5 * 0.1 + 0.5 * 0.1;
 
 				default:
 					throw new Exception("Unknown Register Type");
@@ -249,6 +299,17 @@ namespace Europlan.Common {
 				if (setDefaultPipeVertical) {
 					this.pipeVertical = this.DefaultPipeVertical;
 				}
+			}
+		}
+
+		[XmlIgnore]
+		public bool IsDachschraege {
+			get {
+				return this.registerType == HithermCompactRegisterTypeEnum.HITC_620_Ds ||
+					this.registerType == HithermCompactRegisterTypeEnum.HITC_1000_Ds ||
+					this.registerType == HithermCompactRegisterTypeEnum.HITC_1500_Ds ||
+					this.registerType == HithermCompactRegisterTypeEnum.HITC_2000_Ds ||
+					this.registerType == HithermCompactRegisterTypeEnum.HITC_2500_Ds;
 			}
 		}
 
@@ -345,27 +406,33 @@ namespace Europlan.Common {
 			get { return GetHeatArea(this.registerType) * this.registerCount; }
 		}
 
-		public double Heizleistung(double heizmittelTemp, double roomTemp, double alpha) {
+		public double Heizleistung(double heizmittelTemp, double roomTemp, double alpha, double alphaDs) {
 			double faktor = 1;
 			if (this.Wall != null) {
 				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermCompactProduct.ConfigBeplankungRWerte, HithermCompactProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
-			faktor = faktor * alpha / Product.ConfigAlphaWandHeat * HithermCompactProduct.ConfigLeistungsFaktorHeizen;
+			double usedAlpha = this.IsDachschraege ? alphaDs : alpha;
+			faktor = faktor * usedAlpha / Product.ConfigAlphaWandHeat * HithermCompactProduct.ConfigLeistungsFaktorHeizen;
 			double[][] table;
 			switch (this.registerType) {
 				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2500_Ds:
 					table = HithermCompactProduct.ConfigHlRegHeizleistung2500Std;
 					break;
 				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Ds:
 					table = HithermCompactProduct.ConfigHlRegHeizleistung2000Std;
 					break;
 				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Ds:
 					table = HithermCompactProduct.ConfigHlRegHeizleistung1500Std;
 					break;
 				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Ds:
 					table = HithermCompactProduct.ConfigHlRegHeizleistung1000Std;
 					break;
 				case HithermCompactRegisterTypeEnum.HITC_620_Std:
+				case HithermCompactRegisterTypeEnum.HITC_620_Ds:
 					table = HithermCompactProduct.ConfigHlRegHeizleistung620Std;
 					break;
 				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
@@ -394,20 +461,25 @@ namespace Europlan.Common {
 			return leistung;
 		}
 
-		public double WaermeverlustAussen(double leistung, double roomTemp, double alphaAussen, double alphaInnen) {
+		public double WaermeverlustAussen(double leistung, double roomTemp, double alphaAussen, double alphaInnen, double alphaAussenDs, double alphaInnenDs) {
 			double verlust = 0;
 			if (this.Wall != null) {
-				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermCompactProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaInnen, roomTemp, this.Wall.TempBehindHeat);
+				if (this.IsDachschraege) {
+					verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnenDs, HithermCompactProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaAussenDs, roomTemp, this.Wall.TempBehindHeat);
+				} else {
+					verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermCompactProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaAussen, roomTemp, this.Wall.TempBehindHeat);
+				}
 			}
 			return verlust;
 		}
 
-		public double Kuehlleistung(double kuehlmittelTemp, double roomTemp, double alpha) {
+		public double Kuehlleistung(double kuehlmittelTemp, double roomTemp, double alpha, double alphaDs) {
 			double faktor = 1;
+			double usedAlpha = this.IsDachschraege ? alphaDs : alpha;
 			if (this.Wall != null) {
 				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermCompactProduct.ConfigBeplankungRWerte, HithermCompactProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
-			faktor = faktor * alpha / HithermCompactProduct.ConfigAlphaWandCool * HithermCompactProduct.ConfigLeistungsFaktorKuehlen;
+			faktor = faktor * usedAlpha / HithermCompactProduct.ConfigAlphaWandCool * HithermCompactProduct.ConfigLeistungsFaktorKuehlen;
 			return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, HithermCompactProduct.ConfigHlRegKuehlleistungProQm, faktor) * this.HeatArea;
 			// TODO
 			//return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, HithermCompactProduct.ConfigHlRegKuehlleistung, faktor) * this.registerCount;
@@ -424,10 +496,14 @@ namespace Europlan.Common {
 			return leistung;
 		}
 
-		public double KaelteverlustHinten(double leistung, double roomTemp, double alphaAussen, double alphaInnen) {
+		public double KaelteverlustHinten(double leistung, double roomTemp, double alphaAussen, double alphaInnen, double alphaAussenDs, double alphaInnenDs) {
 			double verlust = 0;
 			if (this.Wall != null) {
-				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermCompactProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaInnen, roomTemp, this.Wall.TempBehindCool);
+				if (this.IsDachschraege) {
+					verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnenDs, HithermCompactProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaAussenDs, roomTemp, this.Wall.TempBehindCool);
+				} else {
+					verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermCompactProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaAussen, roomTemp, this.Wall.TempBehindCool);
+				}
 			}
 			return verlust;
 		}
@@ -496,7 +572,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public string PartNumber {
 			get {
-				return this.wall.GetPartNumber(registerType, this.product.Product.Type == Product.ProductType.DSH, HithermCompactProduct.ConfigUsePlus);
+				return this.wall.GetPartNumber(registerType, HithermCompactProduct.ConfigUsePlus);
 			}
 		}
 
@@ -505,17 +581,22 @@ namespace Europlan.Common {
 			get {
 				switch (this.registerType) {
 					case HithermCompactRegisterTypeEnum.HITC_2500_Std:
+					case HithermCompactRegisterTypeEnum.HITC_2500_Ds:
 						return 1.04;
 					case HithermCompactRegisterTypeEnum.HITC_2000_Std:
+					case HithermCompactRegisterTypeEnum.HITC_2000_Ds:
 					case HithermCompactRegisterTypeEnum.HITC_2000_Par:
 						return 0.86;
 					case HithermCompactRegisterTypeEnum.HITC_1500_Std:
+					case HithermCompactRegisterTypeEnum.HITC_1500_Ds:
 					case HithermCompactRegisterTypeEnum.HITC_1500_Par:
 						return 0.69;
 					case HithermCompactRegisterTypeEnum.HITC_1000_Std:
+					case HithermCompactRegisterTypeEnum.HITC_1000_Ds:
 					case HithermCompactRegisterTypeEnum.HITC_1000_Par: 
 						return 0.52;
 					case HithermCompactRegisterTypeEnum.HITC_620_Std:
+					case HithermCompactRegisterTypeEnum.HITC_620_Ds:
 						return 0.34;
 					default:
 						throw new Exception("Unknown Register Type");

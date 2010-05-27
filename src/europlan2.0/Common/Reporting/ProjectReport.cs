@@ -2245,9 +2245,9 @@ namespace Europlan.Common {
 										wrapperHeat.PipeHorizontal += register.PipeHorizontal;
 										wrapperHeat.PipeVertical += register.PipeVertical;
 										if (register.IsHochleistungsRegister) {
-											wrapperHeat.Ra5Area += register.Area;
+											wrapperHeat.Ra5Area += register.CoveredArea;
 										} else {
-											wrapperHeat.Ra10Area += register.Area;
+											wrapperHeat.Ra10Area += register.CoveredArea;
 										}
 									}
 
@@ -2301,9 +2301,9 @@ namespace Europlan.Common {
 										wrapperCool.PipeHorizontal += register.PipeHorizontal;
 										wrapperCool.PipeVertical += register.PipeVertical;
 										if (register.IsHochleistungsRegister) {
-											wrapperCool.Ra5Area += register.Area;
+											wrapperCool.Ra5Area += register.CoveredArea;
 										} else {
-											wrapperCool.Ra10Area += register.Area;
+											wrapperCool.Ra10Area += register.CoveredArea;
 										}
 									}
 
@@ -3136,9 +3136,9 @@ namespace Europlan.Common {
 							foreach (HithermCircuit c in p.PlannedCircuits) {
 								foreach (HithermRegister register in c.Registers) {
 									if (register.IsHochleistungsRegister) {
-										ra5Area += register.Area;
+										ra5Area += register.CoveredArea;
 									} else {
-										ra10Area += register.Area;
+										ra10Area += register.CoveredArea;
 									}
 									rohr2417Length = register.PipeHorizontal + register.PipeVertical;
 								}
@@ -3250,7 +3250,7 @@ namespace Europlan.Common {
 							p = pp.Product as ModulKlimaBodenProduct;
 							foreach (ModulBodenCircuit c in p.PlannedCircuits) {
 								foreach (KlimaFlaechenModul register in c.Row.List) {
-									modulBodenArea += register.Area;
+									modulBodenArea += register.HeatArea;
 								}
 								rohr21Length += c.Row.LengthVerbindeleitungen;
 								rohr21Length += c.PipeLengthVorlaufWithoutOtherProductTotal + c.PipeLengthRuecklaufWithoutOtherProductTotal;
@@ -3299,9 +3299,9 @@ namespace Europlan.Common {
 									foreach (KlimaFlaechenList l in a.Rows) {
 										foreach (KlimaFlaechenModul register in l.List) {
 											if (!modulAreas.ContainsKey(register.ModulType)) {
-												modulAreas.Add(register.ModulType, register.Area);
+												modulAreas.Add(register.ModulType, register.HeatArea);
 											} else {
-												modulAreas[register.ModulType] += register.Area;
+												modulAreas[register.ModulType] += register.HeatArea;
 											}
 										}
 										rohr21Length += l.LengthVerbindeleitungen;

@@ -33,7 +33,18 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (KlimaFlaechenModul modul in this.list) {
-					area += modul.Area;
+					area += modul.HeatArea;
+				}
+				return area;
+			}
+		}
+
+		[XmlIgnore]
+		public double CoveredArea {
+			get {
+				double area = 0;
+				foreach (KlimaFlaechenModul modul in this.list) {
+					area += modul.CoveredArea;
 				}
 				return area;
 			}

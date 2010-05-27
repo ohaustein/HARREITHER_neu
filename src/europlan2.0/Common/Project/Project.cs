@@ -68,9 +68,18 @@ namespace Europlan.Common {
 			InitializeProject();
 		}
 
+		private string projectEuroplanVersion = null;
+
 		public string EuroplanVersion {
 			get { return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
-			set { /*nothing to do here; this shall only be serialized but not loaded;*/ }
+			set {
+				this.projectEuroplanVersion = value;
+			}
+		}
+
+		[XmlIgnore]
+		public string ProjectEuroplanVersion {
+			get { return this.projectEuroplanVersion == null ? this.EuroplanVersion : this.projectEuroplanVersion; }
 		}
 
 		/// <summary>
@@ -270,25 +279,94 @@ namespace Europlan.Common {
 			this.floors = new List<Floor>(floors);
 		}*/
 
+		public bool ProjectVersionCompatible() {
+			string[] projVers = instance.ProjectEuroplanVersion.Split('.');
+			if (projVers.Length == 4) {
+				string[] curVers = instance.EuroplanVersion.Split('.');
+
+				int[] projIntVers = { int.Parse(projVers[0]), int.Parse(projVers[1]), int.Parse(projVers[2]), int.Parse(projVers[3]) };
+				int[] curIntVers = { int.Parse(curVers[0]), int.Parse(curVers[1]), int.Parse(curVers[2]), int.Parse(curVers[3]) };
+
+				if (projIntVers[0] != curIntVers[0]) {
+					return projIntVers[0] < curIntVers[0];
+				}
+				if (projIntVers[1] != curIntVers[1]) {
+					return projIntVers[1] < curIntVers[1];
+				}
+				if (projIntVers[2] != curIntVers[2]) {
+					return projIntVers[2] < curIntVers[2];
+				}
+				return projIntVers[3] <= curIntVers[3];
+			}
+			return true;
+		}
+
 		public static void Load(string filename) {
 			lock (padlock) {
 				XmlSerializer s = new XmlSerializer(typeof(Project));
 				Stream r = new FileStream(filename, FileMode.Open);
 				try {
 					instance = (Project)s.Deserialize(r);
+				} catch (Exception e) {
+					MessageBox.Show(EuroplanRes.ProjectLoad_FehlerText, EuroplanRes.ProjectLoad_FehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					throw e;
 				} finally {
 					r.Close();
+				}
+				if (!instance.ProjectVersionCompatible()) {
+					if (MessageBox.Show(EuroplanRes.ProjectLoad_VersionNichtKompatibelText, EuroplanRes.ProjectLoad_VersionNichtKompatibelTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) {
+						throw new ProjectVersionNotCompatibleException();
+					}
 				}
 				//instance.configuration = (Configuration.AdminTemplate + Configuration.UserTemplate) + instance.configuration;
 				instance.configuration = Configuration.UserTemplate + instance.configuration;
 				instance.configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 				instance.configuration.RecalculateMaterialToCategoryMapping();
+				instance.FixHithermCompactDachschraege();
 				instance.RecalculateQuickDimensioningRoomToProjectMapping();
 				instance.FinalizeLoading();
 				instance.ProjectFileName = filename;
 			}
 			if (ProjectLoaded != null) {
 				Project.ProjectLoaded(Instance);
+			}
+		}
+
+		private void FixHithermCompactDachschraege() {
+			foreach (Floor f in Project.Instance.Floors) {
+				foreach (Room r in f.Rooms) {
+					foreach (PlannedProduct pp in r.PlannedProducts) {
+						if (pp.Product is HithermCompactProduct && pp.Product.Type == Product.ProductType.DSH) {
+							HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
+							hcp.HithermCompactType = Product.ProductType.WH;
+							foreach (HithermCompactCircuit hcc in hcp.PlannedCircuits) {
+								foreach (HithermCompactRegister hcr in hcc.Registers) {
+									switch (hcr.RegisterType) {
+										case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std:
+											hcr.RegisterType = HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Ds;
+											break;
+
+										case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std:
+											hcr.RegisterType = HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Ds;
+											break;
+
+										case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std:
+											hcr.RegisterType = HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Ds;
+											break;
+
+										case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std:
+											hcr.RegisterType = HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Ds;
+											break;
+
+										case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std:
+											hcr.RegisterType = HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Ds;
+											break;
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 

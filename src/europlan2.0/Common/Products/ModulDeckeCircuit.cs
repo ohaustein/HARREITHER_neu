@@ -66,6 +66,17 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public double HeatArea {
+			get {
+				double area = 0;
+				foreach (ModulDeckeSubArea subArea in subAreas) {
+					area += subArea.HeatArea;
+				}
+				return area;
+			}
+		}
+
 		//private double areaTotal;
 		//[XmlIgnore]
 		//public double AreaTotal {
@@ -165,12 +176,12 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double QHeat {
-			get { return this.c_qHeatPerSqm * this.ModulArea; }
+			get { return this.c_qHeatPerSqm * this.HeatArea; }
 		}
 
 		[XmlIgnore]
 		public double QCool {
-			get { return -this.c_qCoolPerSqm * this.ModulArea; }
+			get { return -this.c_qCoolPerSqm * this.HeatArea; }
 		}
 
 		[XmlIgnore]
@@ -261,7 +272,7 @@ namespace Europlan.Common {
 					double qU = en1264.WaermeverlustAussen(alphaInnenHeat, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qHeatPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
 
 					// hydraulische Berechnung
-					this.c_Qh2oHeat = (this.c_qHeatPerSqm + qU) * this.ModulArea;            // gesamte aufgenommene Leistung berechnen
+					this.c_Qh2oHeat = (this.c_qHeatPerSqm + qU) * this.HeatArea;            // gesamte aufgenommene Leistung berechnen
 					//                                                                           // gesamten Druckverlust berechnen
 
 					foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes) {
@@ -331,7 +342,7 @@ namespace Europlan.Common {
 					double qU = en1264.WaermeverlustAussen(alphaInnenCool, rLambdaB, su, lambdaU, rAlphaDeckeDk, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qCoolPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
 
 					// hydraulische Berechnung
-					this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.ModulArea;            // gesamte aufgenommene Leistung berechnen
+					this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.HeatArea;            // gesamte aufgenommene Leistung berechnen
 					//                                                                           // gesamten Druckverlust berechnen
 
 					foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes) {

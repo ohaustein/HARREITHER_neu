@@ -52,7 +52,18 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (HithermRegister register in this.registers) {
-					area += register.Area;
+					area += register.CoveredArea;
+				}
+				return area;
+			}
+		}
+
+		[XmlIgnore]
+		public double HeatArea {
+			get {
+				double area = 0;
+				foreach (HithermRegister register in this.registers) {
+					area += register.HeatArea;
 				}
 				return area;
 			}
@@ -151,12 +162,12 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double QHeat {
-			get { return this.c_qHeatPerSqm * this.RegisterArea; }
+			get { return this.c_qHeatPerSqm * this.HeatArea; }
 		}
 
 		[XmlIgnore]
 		public double QCool {
-			get { return -this.c_qCoolPerSqm * this.RegisterArea; }
+			get { return -this.c_qCoolPerSqm * this.HeatArea; }
 		}
 
 		[XmlIgnore]
@@ -239,11 +250,11 @@ namespace Europlan.Common {
 						heatLoadRegisters += heatLoad;
 						qU += reg.WaermeverlustAussen(heatLoad, this.HithermProduct.AssociatedRoom.RoomCoolTemperature, alphaAussenHeat, alphaInnenHeat);
 					}
-					this.c_qHeatPerSqm = heatLoadRegisters / this.RegisterArea;
-					qU = qU / this.RegisterArea;
+					this.c_qHeatPerSqm = heatLoadRegisters / this.HeatArea;
+					qU = qU / this.HeatArea;
 
 					// hydraulische Berechnung
-					this.c_Qh2oHeat = (this.c_qHeatPerSqm + qU) * this.RegisterArea;            // gesamte aufgenommene Leistung berechnen
+					this.c_Qh2oHeat = (this.c_qHeatPerSqm + qU) * this.HeatArea;            // gesamte aufgenommene Leistung berechnen
 					//                                                                           // gesamten Druckverlust berechnen
 
 					foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes) {
@@ -307,11 +318,11 @@ namespace Europlan.Common {
 						coolLoadRegisters += coolLoad;
 						qU += reg.KaelteverlustHinten(coolLoad, this.HithermProduct.AssociatedRoom.RoomCoolTemperature, alphaAussenCool, alphaInnenCool);
 					}
-					this.c_qCoolPerSqm = coolLoadRegisters / this.RegisterArea;
-					qU = qU / this.RegisterArea;
+					this.c_qCoolPerSqm = coolLoadRegisters / this.HeatArea;
+					qU = qU / this.HeatArea;
 
 					// hydraulische Berechnung
-					this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.RegisterArea;            // gesamte aufgenommene Leistung berechnen
+					this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.HeatArea;            // gesamte aufgenommene Leistung berechnen
 					//                                                                           // gesamten Druckverlust berechnen
 
 					foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes) {
