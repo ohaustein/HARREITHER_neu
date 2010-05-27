@@ -222,6 +222,10 @@ namespace Europlan.Common {
 					alphaAussenCool = Product.ConfigAlphaWandCool;
 					break;
 			}
+			double alphaInnenHeatDs = Product.ConfigAlphaDeckeHeat;
+			double alphaAussenHeatDs = Product.ConfigAlphaBodenHeat;
+			double alphaInnenCoolDs = Product.ConfigAlphaDeckeCool;
+			double alphaAussenCoolDs = Product.ConfigAlphaBodenCool;
 
 			{ // Heizlastberechnung
 				double distributorVorlaufTemp;
@@ -247,9 +251,9 @@ namespace Europlan.Common {
 					double heatLoadRegisters = 0;
 					double qU = 0; // TODO
 					foreach (HithermCompactRegister reg in this.registers) {
-						double heatLoad = reg.Heizleistung(heizmittelTemp, this.HithermCompactProduct.AssociatedRoom.RoomHeatTemperature, alphaInnenHeat);
+						double heatLoad = reg.Heizleistung(heizmittelTemp, this.HithermCompactProduct.AssociatedRoom.RoomHeatTemperature, alphaInnenHeat, alphaInnenHeatDs);
 						heatLoadRegisters += heatLoad;
-						qU += reg.WaermeverlustAussen(heatLoad, this.HithermCompactProduct.AssociatedRoom.RoomCoolTemperature, alphaAussenHeat, alphaInnenHeat);
+						qU += reg.WaermeverlustAussen(heatLoad, this.HithermCompactProduct.AssociatedRoom.RoomCoolTemperature, alphaAussenHeat, alphaInnenHeat, alphaAussenHeatDs, alphaInnenHeatDs);
 					}
 					this.c_qHeatPerSqm = heatLoadRegisters / this.RegisterArea;
 					qU = qU / this.RegisterArea;
@@ -316,9 +320,9 @@ namespace Europlan.Common {
 					double coolLoadRegisters = 0;
 					double qU = 0;
 					foreach (HithermCompactRegister reg in this.registers) {
-						double coolLoad = reg.Kuehlleistung(kuehlmittelTemp, this.HithermCompactProduct.AssociatedRoom.RoomCoolTemperature, alphaInnenCool);
+						double coolLoad = reg.Kuehlleistung(kuehlmittelTemp, this.HithermCompactProduct.AssociatedRoom.RoomCoolTemperature, alphaInnenCool, alphaInnenCoolDs);
 						coolLoadRegisters += coolLoad;
-						qU += reg.KaelteverlustHinten(coolLoad, this.HithermCompactProduct.AssociatedRoom.RoomCoolTemperature, alphaAussenCool, alphaInnenCool);
+						qU += reg.KaelteverlustHinten(coolLoad, this.HithermCompactProduct.AssociatedRoom.RoomCoolTemperature, alphaAussenCool, alphaInnenCool, alphaAussenCoolDs, alphaInnenCoolDs);
 					}
 					this.c_qCoolPerSqm = coolLoadRegisters / this.RegisterArea;
 					qU = qU / this.RegisterArea;

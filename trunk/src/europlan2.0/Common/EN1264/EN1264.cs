@@ -1111,29 +1111,34 @@ namespace Europlan.Common {
 
 			switch (type) {
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std:
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Ds:
 					return this.DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum.HIT_50_5, 50, massenstrom);
 					/*y = new double[] { 0.1, 0.3, 0.4, 0.6, 0.8, 0.9, 1.1, 1.3, 1.6, 1.8, 2.3, 2.8, 3.4, 4.0, 4.7, 5.4, 6.2, 7.0, 7.9, 8.8, 9.7, 10.7, 11.8, 12.8, 14.0 };
 					break;*/
 
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std:
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Ds:
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par:
 					return this.DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum.HIT_100_5, 50, massenstrom);
 					/*y = new double[] { 0.2, 0.4, 0.7, 0.9, 1.2, 1.4, 1.7, 2.0, 2.3, 2.7, 3.3, 4.1, 4.9, 5.7, 6.6, 7.5, 8.5, 9.5, 10.6, 11.7, 12.9, 14.2, 15.5, 16.8, 18.2 };
 					break;*/
 
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std:
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Ds:
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par:
 					return this.DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum.HIT_150_5, 50, massenstrom);
 					/*y = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.7, 2.0, 2.3, 3.0, 3.9, 4.7, 5.7, 6.8, 7.9, 9.2, 10.5, 11.9, 13.4, 15.0, 16.7, 18.4, 20.3, 22.2 };
 					break;*/
 
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std:
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Ds:
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par:
 					return this.DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum.HIT_200_5, 50, massenstrom);
 					/*y = new double[] { 0.2, 0.4, 0.7, 0.9, 1.2, 1.5, 1.9, 2.2, 2.6, 3.0, 3.8, 4.8, 5.8, 6.9, 8.1, 9.3, 10.7, 12.1, 13.7, 15.3, 17.0, 18.7, 20.6, 22.6, 24.6 };
 					break;*/
 
 				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std:
+				case HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Ds:
 					return this.DruckverlustRegister(HithermRegister.HithermRegisterTypeEnum.HIT_250_5, 50, massenstrom);
 					/*y = new double[] { 0.25, 0.5, 0.875, 1.125, 1.5, 1.875, 2.375, 2.75, 3.25, 3.75, 4.75, 6.0, 7.25, 8.625, 10.125, 11.625, 13.375, 15.125, 17.125, 19.125, 21.25, 23.375, 25.75, 28.25, 30.75 };
 					break;*/

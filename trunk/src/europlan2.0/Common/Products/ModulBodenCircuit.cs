@@ -84,7 +84,7 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double CoveredArea {
-			get { return row.HeatArea + this.langeFittinge * 0.15 + 0.055 * this.sonstigeVerbindeleitung; }
+			get { return row.CoveredArea + this.langeFittinge * 0.15 + 0.055 * this.sonstigeVerbindeleitung; }
 		}
 
 		//private double areaTotal;
@@ -370,7 +370,7 @@ namespace Europlan.Common {
 		}
 
 		public override double CircuitArea {
-			get { return this.HeatArea; }
+			get { return this.CoveredArea; }
 		}
 	}
 }

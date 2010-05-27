@@ -161,7 +161,7 @@ namespace Europlan.Common {
 			HIT_150_10,
 			HIT_200_10,
 			HIT_250_10,
-			HIT_300_10
+			HIT_300_10,
 		}
 
 		public class RegisterOrientationEnumConverter : System.ComponentModel.TypeConverter {
@@ -461,7 +461,7 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double EquivalentPipeLengthUnisolated {
-			get { return this.Area * 10; }
+			get { return this.HeatArea * 10; }
 		}
 
 		[XmlIgnore]
@@ -507,9 +507,16 @@ namespace Europlan.Common {
 		//}
 		
 		[XmlIgnore]
-		public double Area {
+		public double CoveredArea {
 			get {
 				return ((double)this.RegisterBreite / 100.0) * ((double)this.RegisterHoehe / 100.0);
+			}
+		}
+
+		[XmlIgnore]
+		public double HeatArea {
+			get {
+				return this.CoveredArea + ((double)this.RegisterBreite / 100.0) * 0.1 + ((double)this.RegisterHoehe / 100.0) * 0.1;
 			}
 		}
 
@@ -519,13 +526,13 @@ namespace Europlan.Common {
 				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
 			faktor = faktor * alpha / Product.ConfigAlphaWandHeat * HithermProduct.ConfigLeistungsFaktorHeizen;
-			return EN1264.Instance.WaermestromDichteRegister(heizmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegHeizleistung : HithermProduct.ConfigStdRegHeizleistung, faktor, false) * this.Area;
+			return EN1264.Instance.WaermestromDichteRegister(heizmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegHeizleistung : HithermProduct.ConfigStdRegHeizleistung, faktor, false) * this.HeatArea;
 		}
 
 		public double HeizleistungBereinigung(double roomTemp) {
 			double leistung = 0;
 			if (this.Wall != null && this.Wall.Bereinigen) {
-				leistung = this.Wall.UValueValue * this.Area * (roomTemp - this.Wall.TempBehindHeat);
+				leistung = this.Wall.UValueValue * this.HeatArea * (roomTemp - this.Wall.TempBehindHeat);
 				if (leistung < 0) {
 					leistung = 0;
 				}
@@ -547,13 +554,13 @@ namespace Europlan.Common {
 				faktor = this.Wall.Construction.Factor * EN1264.Instance.HithermBeplankungsFaktor(HithermProduct.ConfigBeplankungRWerte, HithermProduct.ConfigBeplankungFaktoren, this.Wall.DeckschichtValue);
 			}
 			faktor = faktor * alpha / Product.ConfigAlphaWandCool * HithermProduct.ConfigLeistungsFaktorKuehlen;
-			return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegKuehlleistung : HithermProduct.ConfigStdRegKuehlleistung, faktor) * this.Area;
+			return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, this.IsHochleistungsRegister ? HithermProduct.ConfigHlRegKuehlleistung : HithermProduct.ConfigStdRegKuehlleistung, faktor) * this.HeatArea;
 		}
 
 		public double KuehlleistungBereinigung(double roomTemp) {
 			double leistung = 0;
 			if (this.Wall != null && this.Wall.Bereinigen) {
-				leistung = this.Wall.UValueValue * this.Area * (this.Wall.TempBehindCool - roomTemp);
+				leistung = this.Wall.UValueValue * this.HeatArea * (this.Wall.TempBehindCool - roomTemp);
 				if (leistung < 0) {
 					leistung = 0;
 				}

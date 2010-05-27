@@ -351,7 +351,7 @@ namespace Europlan.Common {
 				lblRest.Text = EuroplanRes.PlannedModulProductPanel_Rest + " (" + this.product.Product.AssociatedRoom.ToString() + ")";
 				lblQHeat.Text = Math.Round(this.product.PlannedHeatLoad, 2).ToString();
 				lblQAnbHeat.Text = Math.Round(this.product.Product.PlannedHeatLoadAnbindung, 0).ToString();
-				lblQHeatDiff.Text = Math.Round(qDiffHeat, 2).ToString("+0.00;-0.00");
+				lblQHeatDiff.Text = Math.Round(qDiffHeat).ToString("+0;-0");
 				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString("+0.00;-0.00");
 				lblAvgqHeat.Text = Math.Round(mbProduct.PlannedHeatLoadPerSqM, 2).ToString();
 				lblDurchflussHeat.Text = Math.Round(mbProduct.PlannedMaxDurchflussHeat, 2).ToString();
@@ -359,7 +359,7 @@ namespace Europlan.Common {
 				lblTempHeat.Text = Math.Round(mbProduct.PlannedFloorTemperatureHeat, 2).ToString();
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
 				lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
-				lblQCoolDiff.Text = Math.Round(qDiffCool, 2).ToString("+0.00;-0.00");
+				lblQCoolDiff.Text = Math.Round(qDiffCool, 0).ToString("+0;-0");
 				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString("+0.00;-0.00");
 				lblAvgqCool.Text = Math.Round(mbProduct.PlannedCoolLoadPerSqM, 2).ToString();
 				lblDurchflussCool.Text = Math.Round(mbProduct.PlannedMaxDurchflussCool, 2).ToString();

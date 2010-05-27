@@ -33,6 +33,16 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (KlimaFlaechenList row in this.rows) {
+					area += row.CoveredArea;
+				}
+				return area;
+			}
+		}
+
+		public double HeatArea {
+			get {
+				double area = 0;
+				foreach (KlimaFlaechenList row in this.rows) {
 					area += row.HeatArea;
 				}
 				return area;
