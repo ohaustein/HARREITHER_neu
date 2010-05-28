@@ -239,34 +239,99 @@ namespace Europlan.Common {
 			}
 		}
 
-		public static double GetHeatArea(HithermCompactRegisterTypeEnum registerType) {
+		// Register Height in m
+		public static double GetHeatAreaHoehe(HithermCompactRegisterTypeEnum registerType) {
 			switch (registerType) {
 				case HithermCompactRegisterTypeEnum.HITC_620_Std:
 				case HithermCompactRegisterTypeEnum.HITC_620_Ds:
-					return 0.5 * 0.5 + 0.5 * 0.1 + 0.5 * 0.1;
+					return 0.5;
 
 				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
 				case HithermCompactRegisterTypeEnum.HITC_1000_Ds:
-				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
-					return 1.0 * 0.5 + 1.0 * 0.1 + 0.5 * 0.1;
+					return 1.0;
 
 				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
 				case HithermCompactRegisterTypeEnum.HITC_1500_Ds:
-				case HithermCompactRegisterTypeEnum.HITC_1500_Par:
-					return 1.5 * 0.5 + 1.5 * 0.1 + 0.5 * 0.1;
+					return 1.5;
 
 				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
 				case HithermCompactRegisterTypeEnum.HITC_2000_Ds:
-				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
-					return 2.0 * 0.5 + 2.0 * 0.1 + 0.5 * 0.1;
+					return 2.0;
 
 				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
 				case HithermCompactRegisterTypeEnum.HITC_2500_Ds:
-					return 2.5 * 0.5 + 2.5 * 0.1 + 0.5 * 0.1;
+					return 2.5;
+
+				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Par:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
+					return 0.5;
 
 				default:
 					throw new Exception("Unknown Register Type");
 			}
+		}
+
+		// Register Width in m
+		public static double GetHeatAreaBreite(HithermCompactRegisterTypeEnum registerType) {
+			switch (registerType) {
+				case HithermCompactRegisterTypeEnum.HITC_620_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_620_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_2500_Ds:
+					return 0.5;
+
+				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
+					return 1.0;
+
+				case HithermCompactRegisterTypeEnum.HITC_1500_Par:
+					return 1.5;
+
+				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
+					return 2.0;
+
+				default:
+					throw new Exception("Unknown Register Type");
+			}
+		}
+
+		public static double GetHeatArea(HithermCompactRegisterTypeEnum registerType) {
+			double hoehe = GetHeatAreaHoehe(registerType);
+			double breite = GetHeatAreaBreite(registerType);
+			return breite * hoehe + breite * 0.1 + hoehe * 0.1;
+			/*switch (registerType) {
+				case HithermCompactRegisterTypeEnum.HITC_620_Std:
+				case HithermCompactRegisterTypeEnum.HITC_620_Ds:
+					return 0.5 * 0.5;// + 0.5 * 0.1 + 0.5 * 0.1;
+
+				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
+					return 1.0 * 0.5;// + 1.0 * 0.1 + 0.5 * 0.1;
+
+				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_1500_Par:
+					return 1.5 * 0.5;// +1.5 * 0.1 + 0.5 * 0.1;
+
+				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Ds:
+				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
+					return 2.0 * 0.5;// +2.0 * 0.1 + 0.5 * 0.1;
+
+				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
+				case HithermCompactRegisterTypeEnum.HITC_2500_Ds:
+					return 2.5 * 0.5;// +2.5 * 0.1 + 0.5 * 0.1;
+
+				default:
+					throw new Exception("Unknown Register Type");
+			}*/
 		}
 		#endregion Static Methods
 
@@ -326,6 +391,16 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public int RegisterBreite {
 			get { return GetRegisterBreite(this.registerType); }
+		}
+
+		[XmlIgnore]
+		public double HeatAreaHoehe {
+			get { return GetHeatAreaHoehe(this.registerType); }
+		}
+
+		[XmlIgnore]
+		public double HeatAreaBreite {
+			get { return GetHeatAreaBreite(this.registerType); }
 		}
 
 		[XmlIgnore]

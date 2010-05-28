@@ -100,6 +100,9 @@ namespace Europlan.Application {
 		}
 
 		static bool IsApplicationAlreadyRunning() {
+#if DEBUG
+			return false;
+#else
 			string proc = Process.GetCurrentProcess().ProcessName;
 			log.Debug("IsApplicationAlreadyRunning - checking for process: " + proc);
 			Process[] processes = Process.GetProcessesByName(proc);
@@ -118,8 +121,8 @@ namespace Europlan.Application {
 			} else {
 				return false;
 			}
+#endif
 		}
-
 	}
 
 }
