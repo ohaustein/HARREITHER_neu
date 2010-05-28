@@ -3250,7 +3250,7 @@ namespace Europlan.Common {
 							p = pp.Product as ModulKlimaBodenProduct;
 							foreach (ModulBodenCircuit c in p.PlannedCircuits) {
 								foreach (KlimaFlaechenModul register in c.Row.List) {
-									modulBodenArea += register.HeatArea;
+									modulBodenArea += register.CoveredArea;
 								}
 								rohr21Length += c.Row.LengthVerbindeleitungen;
 								rohr21Length += c.PipeLengthVorlaufWithoutOtherProductTotal + c.PipeLengthRuecklaufWithoutOtherProductTotal;
@@ -3299,9 +3299,9 @@ namespace Europlan.Common {
 									foreach (KlimaFlaechenList l in a.Rows) {
 										foreach (KlimaFlaechenModul register in l.List) {
 											if (!modulAreas.ContainsKey(register.ModulType)) {
-												modulAreas.Add(register.ModulType, register.HeatArea);
+												modulAreas.Add(register.ModulType, register.CoveredArea);
 											} else {
-												modulAreas[register.ModulType] += register.HeatArea;
+												modulAreas[register.ModulType] += register.CoveredArea;
 											}
 										}
 										rohr21Length += l.LengthVerbindeleitungen;
