@@ -543,7 +543,7 @@ namespace Europlan.Common {
 		public double WaermeverlustAussen(double leistung, double roomTemp, double alphaAussen, double alphaInnen) {
 			double verlust = 0;
 			if (this.Wall != null) {
-				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaInnen, roomTemp, this.Wall.TempBehindHeat);
+				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaAussen, roomTemp, this.Wall.TempBehindHeat);
 			}
 			return verlust;
 		}
@@ -571,7 +571,7 @@ namespace Europlan.Common {
 		public double KaelteverlustHinten(double leistung, double roomTemp, double alphaAussen, double alphaInnen) {
 			double verlust = 0;
 			if (this.Wall != null) {
-				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaInnen, roomTemp, this.Wall.TempBehindCool);
+				verlust = EN1264.Instance.WaermeverlustAussen(leistung, this.Wall.Construction.RValue + this.Wall.DeckschichtValue + 1.0 / alphaInnen, HithermProduct.ConfigDefaultDaemmung + this.Wall.AdditionalInsulationValue + 1.0 / alphaAussen, roomTemp, this.Wall.TempBehindCool);
 			}
 			return verlust;
 		}
