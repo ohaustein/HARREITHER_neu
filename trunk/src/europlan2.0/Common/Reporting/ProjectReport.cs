@@ -1562,7 +1562,7 @@ namespace Europlan.Common {
 
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
-					normKuehlBedarf = room.CoolLoad;
+					normKuehlBedarf = room.NormalizedCoolLoad;
 					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
 						normKuehlBedarfBereinigt += plannedProduct.Product.PlannedKuehllastBereinigung;
 						qCool += plannedProduct.PlannedCoolLoad;
