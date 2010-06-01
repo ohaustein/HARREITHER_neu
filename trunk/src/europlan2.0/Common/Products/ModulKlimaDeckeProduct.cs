@@ -780,7 +780,7 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (ModulDeckeCircuit mc in this.circuits) {
-					area += mc.ModulArea;
+					area += mc.CoveredArea;
 				}
 				return area;
 			}
@@ -907,7 +907,7 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (ModulDeckeCircuit hc in this.circuits) {
-					area += hc.ModulArea;
+					area += hc.CoveredArea;
 				}
 				return (float)area;
 				/*switch (this.ModulType) {

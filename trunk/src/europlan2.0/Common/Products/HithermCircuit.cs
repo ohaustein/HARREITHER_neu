@@ -48,7 +48,7 @@ namespace Europlan.Common {
 		/// Summe der Flächen der einzelnen Register
 		/// </summary>
 		[XmlIgnore]
-		public double RegisterArea {
+		public double CoveredArea {
 			get {
 				double area = 0;
 				foreach (HithermRegister register in this.registers) {
@@ -384,7 +384,7 @@ namespace Europlan.Common {
 		}
 
 		public override double CircuitArea {
-			get { return this.RegisterArea; }
+			get { return this.CoveredArea; }
 		} 
 	}
 }

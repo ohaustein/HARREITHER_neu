@@ -13,16 +13,16 @@ namespace Europlan.Common {
 		private static double module_80_30_heatarea = 0.8 * (0.3 + 0.03 * 2);
 		private static double module_60_60_heatarea = 0.6 * 0.6;
 
-		private static double module_100_40_area = 1.0 * 0.4;
+		/*private static double module_100_40_area = 1.0 * 0.4;
 		private static double module_100_30_area = 1.0 * 0.3;
 		private static double module_120_30_area = 1.2 * 0.3;
 		private static double module_80_30_area = 0.8 * 0.3;
-		private static double module_60_60_area = 0.6 * 0.6;
-		/*private static double module_100_40_area = module_100_40_heatarea;
+		private static double module_60_60_area = 0.6 * 0.6;*/
+		private static double module_100_40_area = module_100_40_heatarea;
 		private static double module_100_30_area = module_100_30_heatarea;
 		private static double module_120_30_area = module_120_30_heatarea;
 		private static double module_80_30_area = module_80_30_heatarea;
-		private static double module_60_60_area = module_60_60_heatarea;*/
+		private static double module_60_60_area = module_60_60_heatarea;
 
 		public class ModulTypeEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string modul_100_40 = EuroplanRes.KlimaFlaechenModul_100_40; //"Modul 100/40";

@@ -509,14 +509,19 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double CoveredArea {
 			get {
-				return ((double)this.RegisterBreite / 100.0) * ((double)this.RegisterHoehe / 100.0);
+				return this.HeatArea;
+				//return ((double)this.RegisterBreite / 100.0) * ((double)this.RegisterHoehe / 100.0);
 			}
+		}
+
+		private double RealRegisterArea {
+			get { return ((double)this.RegisterBreite / 100.0) * ((double)this.RegisterHoehe / 100.0); }
 		}
 
 		[XmlIgnore]
 		public double HeatArea {
 			get {
-				return this.CoveredArea + ((double)this.RegisterBreite / 100.0) * 0.1 + ((double)this.RegisterHoehe / 100.0) * 0.1;
+				return this.RealRegisterArea + ((double)this.RegisterBreite / 100.0) * 0.1 + ((double)this.RegisterHoehe / 100.0) * 0.1;
 			}
 		}
 
