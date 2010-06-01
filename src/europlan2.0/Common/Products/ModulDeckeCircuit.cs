@@ -56,11 +56,11 @@ namespace Europlan.Common {
 		/// Summe der Flächen der einzelnen Module
 		/// </summary>
 		[XmlIgnore]
-		public double ModulArea {
+		public double CoveredArea {
 			get {
 				double area = 0;
 				foreach (ModulDeckeSubArea subArea in subAreas) {
-					area += subArea.ModulArea;
+					area += subArea.CoveredArea;
 				}
 				return area;
 			}
@@ -401,7 +401,7 @@ namespace Europlan.Common {
 		}
 
 		public override double CircuitArea {
-			get { return this.ModulArea; }
+			get { return this.CoveredArea; }
 		}
 	}
 }

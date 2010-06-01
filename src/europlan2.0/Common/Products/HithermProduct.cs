@@ -842,10 +842,10 @@ namespace Europlan.Common {
 			this.lastErrorMsg = "";
 			string newMsg;
 			foreach (HithermCircuit hc in this.circuits) {
-				if (Math.Round(hc.RegisterArea, 1) > Math.Round(ConfigMaxRegisterArea, 1)) {
+				if (Math.Round(hc.CoveredArea, 1) > Math.Round(ConfigMaxRegisterArea, 1)) {
 					newMsg = EuroplanRes.ErrorMessage_Registerflaeche;
 					newMsg = newMsg.Replace("%HK%", (hc.NrOfCircuit + 1).ToString());
-					newMsg = newMsg.Replace("%VALUE%", Math.Round(hc.RegisterArea, 1).ToString());
+					newMsg = newMsg.Replace("%VALUE%", Math.Round(hc.CoveredArea, 1).ToString());
 					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ConfigMaxRegisterArea, 1).ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
@@ -991,7 +991,7 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (HithermCircuit hc in this.circuits) {
-					area += hc.RegisterArea;
+					area += hc.CoveredArea;
 				}
 				return (float)area;
 			}
@@ -1308,7 +1308,7 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (HithermCircuit hc in this.PlannedCircuits) {
-					area += hc.RegisterArea;
+					area += hc.CoveredArea;
 				}
 				return area;
 			}

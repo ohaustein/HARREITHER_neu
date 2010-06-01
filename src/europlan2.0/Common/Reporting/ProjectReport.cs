@@ -2387,7 +2387,7 @@ namespace Europlan.Common {
 										wrapperHeat.PipeHorizontal += register.PipeHorizontal;
 										wrapperHeat.PipeVertical += register.PipeVertical;
 
-										wrapperHeat.Ra5Area += register.RegisterArea;
+										wrapperHeat.Ra5Area += register.CoveredArea;
 									}
 
 									pp.Product.GetHeatFlow(out v, out r);
@@ -2440,7 +2440,7 @@ namespace Europlan.Common {
 										wrapperCool.PipeHorizontal += register.PipeHorizontal;
 										wrapperCool.PipeVertical += register.PipeVertical;
 
-										wrapperCool.Ra5Area += register.RegisterArea;
+										wrapperCool.Ra5Area += register.CoveredArea;
 									}
 
 									//double v, r;
@@ -2880,7 +2880,7 @@ namespace Europlan.Common {
 
 										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
 
-										wrapper.TotalArea = mc.ModulArea;
+										wrapper.TotalArea = mc.CoveredArea;
 										wrapper.Wassermenge = mc.C_DurchflussHeat;
 										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustHeat;
 										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorHeat;
@@ -2948,7 +2948,7 @@ namespace Europlan.Common {
 
 										wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
 
-										wrapper.TotalArea = mc.ModulArea;
+										wrapper.TotalArea = mc.CoveredArea;
 										wrapper.Wassermenge = mc.C_DurchflussCool;
 										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustCool;
 										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorCool;
@@ -3198,7 +3198,7 @@ namespace Europlan.Common {
 							p = pp.Product as HithermCompactProduct;
 							foreach (HithermCompactCircuit c in p.PlannedCircuits) {
 								foreach (HithermCompactRegister register in c.Registers) {
-									registerArea += register.RegisterArea;
+									registerArea += register.CoveredArea;
 									rohr2417Length = register.PipeHorizontal + register.PipeVertical;
 								}
 								rohr21Length += c.PipeLengthVorlaufWithoutOtherProductTotal + c.PipeLengthRuecklaufWithoutOtherProductTotal;

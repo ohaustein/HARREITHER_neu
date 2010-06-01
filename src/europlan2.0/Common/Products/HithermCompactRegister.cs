@@ -304,7 +304,7 @@ namespace Europlan.Common {
 		public static double GetHeatArea(HithermCompactRegisterTypeEnum registerType) {
 			double hoehe = GetHeatAreaHoehe(registerType);
 			double breite = GetHeatAreaBreite(registerType);
-			return breite * hoehe + breite * 0.1 + hoehe * 0.1;
+			return breite * hoehe;
 			/*switch (registerType) {
 				case HithermCompactRegisterTypeEnum.HITC_620_Std:
 				case HithermCompactRegisterTypeEnum.HITC_620_Ds:
@@ -470,9 +470,10 @@ namespace Europlan.Common {
 		//}
 
 		[XmlIgnore]
-		public double RegisterArea {
+		public double CoveredArea {
 			get {
 				return ((double)this.RegisterBreite / 1000.0) * ((double)this.RegisterHoehe / 1000.0) * this.registerCount;
+				//return this.HeatArea;
 			}
 		}
 
