@@ -838,8 +838,9 @@ namespace Europlan.Common {
 				return value;
 			}
 		}
+
 		public double PlannedDurchflussHeat {
-			get { return PlannedMaxMhHeat * 1000 / Dichte; }
+			get { return PlannedMhHeat * 1000 / Dichte; }
 		}
 
 		[XmlIgnore]

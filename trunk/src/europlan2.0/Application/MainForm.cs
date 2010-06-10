@@ -275,6 +275,7 @@ namespace Europlan.Application {
 				} else if (ex is ProjectVersionNotCompatibleException) {
 					// nothing to do here
 				} else {
+					MessageBox.Show(EuroplanRes.ProjectLoad_FehlerText, EuroplanRes.ProjectLoad_FehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					log.Error("Problem loading project:", ex);
 				}
 				currentProject = null;

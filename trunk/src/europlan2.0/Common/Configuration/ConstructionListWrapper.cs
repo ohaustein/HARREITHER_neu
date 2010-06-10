@@ -400,7 +400,7 @@ namespace Europlan.Common {
 		#region IEnumerator<Construction> Members
 		public Construction Current {
 			get {
-				if (this.currentNode <= 0 || this.finished) {
+				if (this.currentNode < 0 || this.finished) {
 					return null;
 				} else {
 					return this.List[this.currentNode];
@@ -417,7 +417,7 @@ namespace Europlan.Common {
 		#region IEnumerator Members
 		object System.Collections.IEnumerator.Current {
 			get {
-				if (this.currentNode <= 0 || this.finished) {
+				if (this.currentNode < 0 || this.finished) {
 					return null;
 				} else {
 					return this.List[this.currentNode];
