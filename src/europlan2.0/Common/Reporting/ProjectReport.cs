@@ -443,8 +443,10 @@ namespace Europlan.Common {
 						qHeat += pp.Product.PlannedHeatLoad;
 						qCool += pp.Product.PlannedCoolLoad;
 
-						durchflussHeat += pp.Product.PlannedDurchflussHeat;
-						durchflussCool += pp.Product.PlannedDurchflussCool;
+						if (pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+							durchflussHeat += pp.Product.PlannedDurchflussHeat;
+							durchflussCool += pp.Product.PlannedDurchflussCool;
+						}
 												
 						deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
 						deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
@@ -1620,6 +1622,8 @@ namespace Europlan.Common {
 								durchflussCool += pp.Product.PlannedDurchflussCool;
 								deltaRhoHeat = deltaRhoHeat < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeat;
 								deltaRhoCool = deltaRhoCool < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCool;
+							}
+							foreach (PlannedProduct pp in d.PlannedDirectAndIndirectConnectedProducts) {
 								wasserInhalt += pp.Product.WasserInhalt;
 							}
 						}
@@ -1688,6 +1692,8 @@ namespace Europlan.Common {
 						durchflussCool += pp.Product.PlannedDurchflussCool;
 						deltaRhoHeat = deltaRhoHeat < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeat;
 						deltaRhoCool = deltaRhoCool < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCool;
+					}
+					foreach (PlannedProduct pp in distributor.PlannedDirectAndIndirectConnectedProducts) {
 						wasserInhalt += pp.Product.WasserInhalt;
 					}
 

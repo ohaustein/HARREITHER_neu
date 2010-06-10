@@ -99,7 +99,7 @@ namespace Europlan.Common {
 					this.cbPeFoil.Visible = false;
 					this.lblThickness.Visible = false;
 					this.numThickness.Visible = false;
-					this.lblFactor.Visible = true;
+					this.lblFactor.Visible = Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatInternal);
 					this.numFactor.Visible = Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatInternal);
 					this.chkHitherm.Visible = true;
 					this.chkHithermCompact.Visible = true;

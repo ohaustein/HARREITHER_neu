@@ -127,6 +127,19 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public Distributor DirectOrIndirectDistributor {
+			get {
+				if (this.distributor != null) {
+					return this.distributor;
+				}
+				if (this.otherProduct != null && this.otherProduct.Product != null && this.otherProduct.Product.PlannedConnection != null) {
+					return this.otherProduct.Product.PlannedConnection.DirectOrIndirectDistributor;
+				}
+				return null;
+			}
+		}
+
+		[XmlIgnore]
 		public object Connection {
 			get { return this.distributor != null ? (object)this.distributor : (object)this.otherProduct; }
 		}

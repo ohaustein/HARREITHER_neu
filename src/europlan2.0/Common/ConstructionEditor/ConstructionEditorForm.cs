@@ -40,6 +40,10 @@ namespace Europlan.Common {
 					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Decke; //"Deckenkonstruktion";
 					break;
 
+				case ConstructionScopeEnum.WallConstruction:
+					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Wand;
+					break;
+
 				default:
 					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Unbekannt; //"Unbekannte Konstruktion";
 					break;

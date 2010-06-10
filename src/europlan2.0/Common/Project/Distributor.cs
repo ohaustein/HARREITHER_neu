@@ -357,6 +357,22 @@ namespace Europlan.Common {
 			}
 		}
 
+		public List<PlannedProduct> PlannedDirectAndIndirectConnectedProducts {
+			get {
+				List<PlannedProduct> products = new List<PlannedProduct>();
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						foreach (PlannedProduct product in room.PlannedProducts) {
+							if (product.Product.PlannedConnection != null && product.Product.PlannedConnection.DirectOrIndirectDistributor == this) {
+								products.Add(product);
+							}
+						}
+					}
+				}
+				return products;
+			}
+		}
+
 		public int PlannedCircuits {
 			get {
 				int plannedCircuits = 0;

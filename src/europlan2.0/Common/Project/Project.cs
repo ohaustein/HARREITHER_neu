@@ -307,9 +307,6 @@ namespace Europlan.Common {
 				Stream r = new FileStream(filename, FileMode.Open);
 				try {
 					instance = (Project)s.Deserialize(r);
-				} catch (Exception e) {
-					MessageBox.Show(EuroplanRes.ProjectLoad_FehlerText, EuroplanRes.ProjectLoad_FehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
-					throw e;
 				} finally {
 					r.Close();
 				}
