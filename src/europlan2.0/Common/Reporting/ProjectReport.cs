@@ -443,7 +443,7 @@ namespace Europlan.Common {
 						qHeat += pp.Product.PlannedHeatLoad;
 						qCool += pp.Product.PlannedCoolLoad;
 
-						if (pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+						if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
 							durchflussHeat += pp.Product.PlannedDurchflussHeat;
 							durchflussCool += pp.Product.PlannedDurchflussCool;
 						}
