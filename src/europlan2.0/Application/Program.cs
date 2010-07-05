@@ -36,7 +36,7 @@ namespace Europlan.Application {
 			log4net.Config.XmlConfigurator.Configure();
 			log.Debug("Starting Application");
 
-			RegistryKey key = Registry.LocalMachine.OpenSubKey("Software\\bluesource\\Europlan2.0");
+			RegistryKey key = Registry.LocalMachine.OpenSubKey("Software\\bluesource\\Europlan2.0_grafisch");
 			if (key != null) {
 				string val = key.GetValue("SetupLanguage") as string;
 				if (val != null) {

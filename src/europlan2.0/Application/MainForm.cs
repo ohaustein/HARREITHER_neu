@@ -23,7 +23,7 @@ namespace Europlan.Application {
 		private string projectFileName = null;
 		private Project currentProject = null;
 
-		private static readonly string defaultTitle = "Europlan";
+		private static readonly string defaultTitle = "Europlan mit grafischer Auslegung";
 		private string title;
 
 		private Dictionary<Type, UserControl> userControls = new Dictionary<Type, UserControl>();
