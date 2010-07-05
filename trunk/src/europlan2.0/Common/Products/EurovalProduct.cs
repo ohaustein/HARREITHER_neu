@@ -1920,13 +1920,13 @@ namespace Europlan.Common {
 						error = EuroplanRes.ErrorMessage_HkAnschluss; // "Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					} else {
 						j--;
-					}
-					this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, ec, false));
-					if (this.plannedConnection.OtherProduct.Product.PlannedCircuits.Count > j) {
-						this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct.Product.PlannedCircuits[j], this.plannedConnection.UserDefined));
-					} else {
-						this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct, j, this.plannedConnection.UserDefined));
-					}
+						this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, ec, false));
+						if (this.plannedConnection.OtherProduct.Product.PlannedCircuits.Count > j) {
+							this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct.Product.PlannedCircuits[j], this.plannedConnection.UserDefined));
+						} else {
+							this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct, j, this.plannedConnection.UserDefined));
+						}
+					}					
 				}
 				this.circuits.Add(ec);
 			}

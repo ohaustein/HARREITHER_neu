@@ -520,7 +520,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public void CalculateHeatLoad(out double heatLoadRoom, out double qH2o) {
+		public void CalculateHeatLoad(out double heatLoadRoom, out double qH2o, Nullable<int> circuitNr) {
 			heatLoadRoom = 0;
 			qH2o = 0;
 
@@ -568,7 +568,9 @@ namespace Europlan.Common {
 			double distributorSpreizung = distributorTempOut - distributorTempIn;
 
 			int iterations = this.onlyFirst ? 1 : originalProduct.Product.PlannedCircuitCount;
-			for (int i = 0; i < iterations; i++) {
+			int startI = circuitNr.HasValue ? circuitNr.Value : 0;
+			int endI = circuitNr.HasValue ? circuitNr.Value + 1 : iterations;
+			for (int i = startI; i < endI; i++) {
 
 				double totalPipeLength = originalProduct.Product.GetCircuit(i).PipeLengthWithoutConnections;
 				double pipeBeforeVorlauf = 0;
@@ -632,9 +634,11 @@ namespace Europlan.Common {
 					}
 				}
 
-				totalPipeLength += pipeBeforeVorlauf + pipeAfterVorlauf;
-				totalPipeLength += this.vorlauf;
-				totalPipeLength += this.ruecklauf;
+				pipeAfterVorlauf += this.ruecklauf;
+				pipeBeforeRuecklauf += this.vorlauf;
+				totalPipeLength = pipeBeforeVorlauf + pipeAfterVorlauf + this.vorlauf;
+				//totalPipeLength += this.vorlauf;
+				//totalPipeLength += this.ruecklauf;
 
 				double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
 				double rLambdaB = this.ConnectionThrough.Product.PlannedInsideConstructionRValue;
@@ -677,7 +681,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public void CalculateCoolLoad(out double coolLoadRoom, out double qH2o) {
+		public void CalculateCoolLoad(out double coolLoadRoom, out double qH2o, Nullable<int> circuitNr) {
 			coolLoadRoom = 0;
 			qH2o = 0;
 			if (this.verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH) {
@@ -723,7 +727,10 @@ namespace Europlan.Common {
 			originalProduct.Product.GetCoolFlow(out distributorTempOut, out distributorTempIn);
 			double distributorSpreizung = distributorTempOut - distributorTempIn;
 
-			for (int i = 0; i < originalProduct.Product.PlannedCircuitCount; i++) {
+			int iterations = this.onlyFirst ? 1 : originalProduct.Product.PlannedCircuitCount;
+			int startI = circuitNr.HasValue ? circuitNr.Value : 0;
+			int endI = circuitNr.HasValue ? circuitNr.Value + 1 : iterations;
+			for (int i = startI; i < endI; i++) {
 
 				double totalPipeLength = originalProduct.Product.GetCircuit(i).PipeLengthWithoutConnections;
 				double pipeBeforeVorlauf = 0;
@@ -841,7 +848,7 @@ namespace Europlan.Common {
 			get {
 				double heatLoad;
 				double qH2o;
-				this.CalculateHeatLoad(out heatLoad, out qH2o);
+				this.CalculateHeatLoad(out heatLoad, out qH2o, null);
 				return heatLoad;
 			}
 		}
@@ -851,7 +858,7 @@ namespace Europlan.Common {
 			get {
 				double coolLoad;
 				double qH2o;
-				this.CalculateCoolLoad(out coolLoad, out qH2o);
+				this.CalculateCoolLoad(out coolLoad, out qH2o, null);
 				return coolLoad;
 			}
 		}

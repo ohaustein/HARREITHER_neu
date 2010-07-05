@@ -252,6 +252,13 @@ namespace Europlan.Common {
 								}
 							}
 						} else {
+							List<PlannedProduct> connectedProducts = toDelete.PlannedConnectedProducts;
+							foreach (PlannedProduct pp in connectedProducts) {
+								pp.Product.PlannedConnection = null;
+							}
+							foreach (PlannedProduct pp in connectedProducts) {
+								pp.ConfigureProductDefault();
+							}
 							floor.Distributors.Remove(toDelete);
 							if (ProjectStructureChanged != null) {
 								ProjectStructureChanged(this);

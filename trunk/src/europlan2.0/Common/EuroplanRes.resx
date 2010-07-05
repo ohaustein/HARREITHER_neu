@@ -123,6 +123,9 @@
   <data name="AbstractLicensedModule_Adminmodus" xml:space="preserve">
     <value>Adminmodus</value>
   </data>
+  <data name="AbstractLicensedModule_BetaUpdates" xml:space="preserve">
+    <value>Beta-Updates herunterladen</value>
+  </data>
   <data name="AbstractLicensedModule_BKA" xml:space="preserve">
     <value>Betonkernaktivierung</value>
   </data>
@@ -4527,6 +4530,12 @@ fläche
   </data>
   <data name="Unit_WattProQmKelvin" xml:space="preserve">
     <value>W/(m²K)</value>
+  </data>
+  <data name="Warning_SystemsConnectedButNoSeparateCircuitText" xml:space="preserve">
+    <value>An dieses System sind andere System vorlauf- bzw. rücklaufseitig angeschlossen. Wenn Sie den eigenen Heizkreis für dieses System entfernen werden dieses Systeme direkt an den Verteiler angeschlossen!</value>
+  </data>
+  <data name="Warning_SystemsConnectedButNoSeparateCircuitTitel" xml:space="preserve">
+    <value>Bestätigen</value>
   </data>
   <data name="WarningsAndErrorsForm_Hinweis" xml:space="preserve">
     <value>%SYSTEM% in %RAUMID% (%RAUMNAME%): %HINWEIS%</value>
