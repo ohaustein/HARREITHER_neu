@@ -265,7 +265,7 @@ namespace Europlan.Common {
 						if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
 							double heatLoad;
 							double qH2o;
-							cp.CalculateHeatLoad(out heatLoad, out qH2o);
+							cp.CalculateHeatLoad(out heatLoad, out qH2o, this.NrOfCircuit);
 							this.c_Qh2oHeat += qH2o;
 						}
 					}
@@ -323,7 +323,7 @@ namespace Europlan.Common {
 						if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {
 							double coolLoad;
 							double qH2o;
-							cp.CalculateCoolLoad(out coolLoad, out qH2o);
+							cp.CalculateCoolLoad(out coolLoad, out qH2o, this.NrOfCircuit);
 							this.c_Qh2oCool -= qH2o;
 						}
 					}

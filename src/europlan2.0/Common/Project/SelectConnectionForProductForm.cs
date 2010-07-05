@@ -272,64 +272,15 @@ namespace Europlan.Common {
 
 		private void SelectConnectionForProductForm_FormClosing(object sender, FormClosingEventArgs e) {
 			if (this.DialogResult == DialogResult.OK) {
-				List<PlannedProduct> wasConnectedTo = new List<PlannedProduct>();
-				if (this.product.Product.PlannedConnection != null && this.product.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-					// find out to which other product(s) this product was connected
-					foreach (Circuit.CircuitConnection cc in this.product.Product.InverseConnectedCircuits.Values) {
-						if (!wasConnectedTo.Contains(cc.OtherPlannedProduct)) {
-							wasConnectedTo.Add(cc.OtherPlannedProduct);
-						}
-					}
-
-					// remove the connection in the other product(s)
-					foreach (PlannedProduct pp in wasConnectedTo) {
-						List<int> delete = new List<int>();
-						foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in pp.Product.ConnectedCircuits) {
-							if (kvp.Value.OtherCircuit.PlannedProduct == this.product) {
-								delete.Add(kvp.Key);
-							}
-						}
-						foreach (int i in delete) {
-							pp.Product.ConnectedCircuits.Remove(i);
-						}
-					}
-
-					// remove the connection in this product
-					this.product.Product.InverseConnectedCircuits.Clear();
-				}
-
+				UnconnectProduct(this.product);
+				
 				if (this.tvDistributors.SelectedNode.Tag is Distributor) {
 					Distributor dist = this.tvDistributors.SelectedNode.Tag as Distributor;
-					this.product.Product.PlannedConnection = new ProductConnection(dist);
-					foreach (PlannedProduct pp in wasConnectedTo) {
-						pp.ConfigureProductDefault();
-					}
+					ConnectProduct(this.product, dist);
 				} else if (this.tvDistributors.SelectedNode.Tag is Circuit) {
 					PlannedProduct pp = (this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct;
-					this.product.Product.PlannedConnection = new ProductConnection(pp, this.rbRuecklauf.Checked ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF);
-					if (this.cbActivateUserDefinedConnection.Checked) {
-						List<UserDefinedConnection> list = this.userDefinedConnectionBindingSource.DataSource as List<UserDefinedConnection>;
-						foreach (UserDefinedConnection udc in list) {
-							pp.Product.ConnectedCircuits[udc.Hk2 - 1] = new Circuit.CircuitConnection((this.rbRuecklauf.Checked ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), this.product, udc.Hk1 - 1, true);
-							this.product.Product.InverseConnectedCircuits[udc.Hk1 - 1] = new Circuit.CircuitConnection((this.rbRuecklauf.Checked ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), pp, udc.Hk2 - 1, true);
-						}
-						this.product.Product.PlannedConnection.UserDefined = true;
-						// TODO
-						//foreach (DataGridViewRow row in this.gridUserDefinedConnection.Rows) {
-							//pp.Product.ConnectedCircuits[(int)row.Cells[1]] = new Circuit.CircuitConnection((
-						//}
-					} else {
-						int i = 0;
-						foreach (Circuit c in this.product.Product.PlannedCircuits) {
-							while (pp.Product.ConnectedCircuits.ContainsKey(i)) {
-								i++;
-							}
-							pp.Product.ConnectedCircuits[i] = new Circuit.CircuitConnection((this.rbRuecklauf.Checked ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), c, false);
-							this.product.Product.InverseConnectedCircuits[c.NrOfCircuit] = new Circuit.CircuitConnection((this.rbRuecklauf.Checked ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), this.tvDistributors.SelectedNode.Tag as Circuit, false);
-						}
-					}
-					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
-					pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+					ConnectProduct(this.product, pp, this.rbRuecklauf.Checked,
+						this.cbActivateUserDefinedConnection.Checked ? this.userDefinedConnectionBindingSource.DataSource as List<UserDefinedConnection> : null);
 				}
 				// TODO
 			}
@@ -337,6 +288,116 @@ namespace Europlan.Common {
 			settings.StorePoint("Location", this.Location);
 			SettingsFile.Update();
 		}
+
+		public static void UnconnectProduct(PlannedProduct product) {
+			List<PlannedProduct> wasConnectedTo = new List<PlannedProduct>();
+			if (product.Product.PlannedConnection != null && product.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				// find out to which other product(s) this product was connected
+				foreach (Circuit.CircuitConnection cc in product.Product.InverseConnectedCircuits.Values) {
+					if (!wasConnectedTo.Contains(cc.OtherPlannedProduct)) {
+						wasConnectedTo.Add(cc.OtherPlannedProduct);
+					}
+				}
+
+				// remove the connection in the other product(s)
+				foreach (PlannedProduct pp in wasConnectedTo) {
+					List<int> delete = new List<int>();
+					foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in pp.Product.ConnectedCircuits) {
+						if (kvp.Value.OtherCircuit.PlannedProduct == product) {
+							delete.Add(kvp.Key);
+						}
+					}
+					foreach (int i in delete) {
+						pp.Product.ConnectedCircuits.Remove(i);
+					}
+				}
+
+				// remove the connection in this product
+				product.Product.InverseConnectedCircuits.Clear();
+			}
+			foreach (PlannedProduct pp in wasConnectedTo) {
+				pp.ConfigureProductDefault();
+			}
+			//UnconnectProduct(product.Product);
+		}
+
+		/*public static void UnconnectProduct(Product product) {
+			List<PlannedProduct> wasConnectedTo = new List<PlannedProduct>();
+			if (product.PlannedConnection != null && product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				// find out to which other product(s) this product was connected
+				foreach (Circuit.CircuitConnection cc in product.InverseConnectedCircuits.Values) {
+					if (!wasConnectedTo.Contains(cc.OtherPlannedProduct)) {
+						wasConnectedTo.Add(cc.OtherPlannedProduct);
+					}
+				}
+
+				// remove the connection in the other product(s)
+				foreach (PlannedProduct pp in wasConnectedTo) {
+					List<int> delete = new List<int>();
+					foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in pp.Product.ConnectedCircuits) {
+						if (kvp.Value.OtherCircuit.PlannedProduct.Product == product) {
+							delete.Add(kvp.Key);
+						}
+					}
+					foreach (int i in delete) {
+						pp.Product.ConnectedCircuits.Remove(i);
+					}
+				}
+
+				// remove the connection in this product
+				product.InverseConnectedCircuits.Clear();
+			}
+			foreach (PlannedProduct pp in wasConnectedTo) {
+				pp.ConfigureProductDefault();
+			}
+		}*/
+
+		public static void ConnectProduct(PlannedProduct product, Distributor dist) {
+			product.Product.PlannedConnection = new ProductConnection(dist);
+			//ConnectProduct(product.Product, dist);
+		}
+
+		/*public static void ConnectProduct(Product product, Distributor dist) {
+			product.PlannedConnection = new ProductConnection(dist);
+		}*/
+
+		public static void ConnectProduct(PlannedProduct product, PlannedProduct otherProduct, bool ruecklauf, List<UserDefinedConnection> list) {
+			product.Product.PlannedConnection = new ProductConnection(otherProduct, ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF);
+			if (list != null) {
+				foreach (UserDefinedConnection udc in list) {
+					otherProduct.Product.ConnectedCircuits[udc.Hk2 - 1] = new Circuit.CircuitConnection((ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), product, udc.Hk1 - 1, true);
+					product.Product.InverseConnectedCircuits[udc.Hk1 - 1] = new Circuit.CircuitConnection((ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), otherProduct, udc.Hk2 - 1, true);
+				}
+				product.Product.PlannedConnection.UserDefined = true;
+				// TODO
+				//foreach (DataGridViewRow row in this.gridUserDefinedConnection.Rows) {
+				//pp.Product.ConnectedCircuits[(int)row.Cells[1]] = new Circuit.CircuitConnection((
+				//}
+			} else {
+				int i = 0;
+				foreach (Circuit c in product.Product.PlannedCircuits) {
+					while (otherProduct.Product.ConnectedCircuits.ContainsKey(i)) {
+						i++;
+					}
+					otherProduct.Product.ConnectedCircuits[i] = new Circuit.CircuitConnection((ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), c, false);
+					product.Product.InverseConnectedCircuits[c.NrOfCircuit] = new Circuit.CircuitConnection((ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), otherProduct.Product.PlannedCircuits[i], false);
+				}
+			}
+			product.Product.ConfigureProduct(product.RequestedHeatLoad, product.RequestedCoolLoad, product.CalculateHeat, product.CalculateCool, false);
+			otherProduct.Product.ConfigureProduct(otherProduct.RequestedHeatLoad, otherProduct.RequestedCoolLoad, otherProduct.CalculateHeat, otherProduct.CalculateCool, false);
+		}
+
+		/*public static void ConnectProduct(Product product, PlannedProduct otherProduct, bool ruecklauf, List<UserDefinedConnection> list) {
+			ConnectProduct(Project.Instance.GetPlannedProduct(product), otherProduct, ruecklauf, list);
+		}
+
+		public static void ConnectProduct(PlannedProduct product, Product otherProduct, bool ruecklauf, List<UserDefinedConnection> list) {
+			ConnectProduct(product, Project.Instance.GetPlannedProduct(otherProduct), ruecklauf, list);
+		}
+
+		public static void ConnectProduct(Product product, Product otherProduct, bool ruecklauf, List<UserDefinedConnection> list) {
+			ConnectProduct(Project.Instance.GetPlannedProduct(product), Project.Instance.GetPlannedProduct(otherProduct), ruecklauf, list);
+		}*/
 
 		private void cbActivateUserDefinedConnection_CheckedChanged(object sender, EventArgs e) {
 			if (this.cbActivateUserDefinedConnection.Checked) {

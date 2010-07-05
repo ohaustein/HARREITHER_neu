@@ -20,6 +20,7 @@ namespace Europlan.Licensing {
 		public static readonly string ProdModulKlimaBoden = "ProdModulKlimaBoden";
 		public static readonly string ProdModulKlimaDecke = "ProdModulKlimaDecke";
 		public static readonly string ProdConcreteActivation = "ProdConcreteActivation";
+		public static readonly string FeatBetaUpdates = "FeatBetaUpdates";
 		private static Dictionary<string, string> defaultModules = null;
 		private static List<string> defaultEnabledModules = null;
 		public static Dictionary<string, string> DefaultModules {
@@ -27,6 +28,7 @@ namespace Europlan.Licensing {
 				if (defaultModules == null) {
 					defaultModules = new Dictionary<string,string>();
 					defaultModules.Add(FeatInternal, EuroplanRes.AbstractLicensedModule_InterneLizenz /*"Interne Lizenz"*/);
+					defaultModules.Add(FeatBetaUpdates, EuroplanRes.AbstractLicensedModule_BetaUpdates);
 					defaultModules.Add(FeatAdmin, EuroplanRes.AbstractLicensedModule_Adminmodus /*"Adminmodus"*/);
 					defaultModules.Add(ProdEuroval, EuroplanRes.AbstractLicensedModule_Euroval /*"Euroval® Fußbodenheizung"*/);
 					defaultModules.Add(ProdEcotherm, EuroplanRes.AbstractLicensedModule_Ecotherm /*"Ecotherm® Fußbodenheizung"*/);

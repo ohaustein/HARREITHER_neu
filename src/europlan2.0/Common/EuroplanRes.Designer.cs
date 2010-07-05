@@ -79,6 +79,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Beta-Updates herunterladen.
+        /// </summary>
+        internal static string AbstractLicensedModule_BetaUpdates {
+            get {
+                return ResourceManager.GetString("AbstractLicensedModule_BetaUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Betonkernaktivierung.
         /// </summary>
         internal static string AbstractLicensedModule_BKA {
@@ -12736,6 +12745,24 @@ namespace Europlan.Common {
         internal static string Unit_WattProQmKelvin {
             get {
                 return ResourceManager.GetString("Unit_WattProQmKelvin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An dieses System sind andere System vorlauf- bzw. rücklaufseitig angeschlossen. Wenn Sie den eigenen Heizkreis für dieses System entfernen werden dieses Systeme direkt an den Verteiler angeschlossen!.
+        /// </summary>
+        internal static string Warning_SystemsConnectedButNoSeparateCircuitText {
+            get {
+                return ResourceManager.GetString("Warning_SystemsConnectedButNoSeparateCircuitText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bestätigen.
+        /// </summary>
+        internal static string Warning_SystemsConnectedButNoSeparateCircuitTitel {
+            get {
+                return ResourceManager.GetString("Warning_SystemsConnectedButNoSeparateCircuitTitel", resourceCulture);
             }
         }
         

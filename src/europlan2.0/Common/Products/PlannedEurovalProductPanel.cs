@@ -568,37 +568,37 @@ namespace Europlan.Common {
 						case EurovalProduct.EurovalLayDistance.EV5:
 							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV5; //"EV5";
                             this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV5; //"EV5";
-                            this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV5; //"EV5";
+                            this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV5 + "/" + evProduct.PlannedRimWidth.ToString(); //"EV5";
                             break;
 						case EurovalProduct.EurovalLayDistance.EV10:
 							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV10; //"EV10";
                             this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV10; //"EV10";
-                            this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV10; //"EV10";
+							this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV10 + "/" + evProduct.PlannedRimWidth.ToString(); //"EV10";
                             break;
 						case EurovalProduct.EurovalLayDistance.EV15:
 							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV15; //"EV15";
                             this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV15; //"EV15";
-                            this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV15; //"EV15";
+							this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV15 + "/" + evProduct.PlannedRimWidth.ToString(); //"EV15";
                             break;
 						case EurovalProduct.EurovalLayDistance.EV20:
 							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV20; //"EV20";
                             this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV20; //"EV20";
-                            this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV20; //"EV20";
+							this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV20 + "/" + evProduct.PlannedRimWidth.ToString(); //"EV20";
                             break;
 						case EurovalProduct.EurovalLayDistance.EV25:
 							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV25; //"EV25";
                             this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV25; //"EV25";
-                            this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV25; //"EV25";
+							this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV25 + "/" + evProduct.PlannedRimWidth.ToString(); //"EV25";
                             break;
 						case EurovalProduct.EurovalLayDistance.EV30:
 							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV30; //"EV30";
                             this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV30; //"EV30";
-                            this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV30; //"EV30";
+							this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV30 + "/" + evProduct.PlannedRimWidth.ToString(); //"EV30";
                             break;
 						case EurovalProduct.EurovalLayDistance.EV35:
 							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV35; //"EV35";
                             this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV35; //"EV35";
-                            this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV35; //"EV35";
+							this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV35 + "/" + evProduct.PlannedRimWidth.ToString(); //"EV35";
                             break;
 						default:
 							this.lblRimVaHeat.Text = "--";
@@ -1194,6 +1194,29 @@ namespace Europlan.Common {
 
 		private void cbSeparateCircuit_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreSeparateCircuit == 0) {
+				if (this.product.Product.PlannedConnectedProducts.Count != 0 && !this.cbSeparateCircuit.Checked) {
+					if (MessageBox.Show(EuroplanRes.Warning_SystemsConnectedButNoSeparateCircuitText, EuroplanRes.Warning_SystemsConnectedButNoSeparateCircuitTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
+						return;
+					}
+
+					while (this.product.Product.PlannedConnectedProducts.Count > 0) {
+						PlannedProduct pp = Project.Instance.GetPlannedProduct(this.product.Product.PlannedConnectedProducts[0]);
+						SelectConnectionForProductForm.UnconnectProduct(pp);
+						SelectConnectionForProductForm.ConnectProduct(pp, this.product.Product.PlannedConnection.Distributor);
+						pp.ConfigureProductDefault();
+					}
+					this.product.ConfigureProductDefault();
+
+
+
+
+					/*foreach (Product prod in this.product.Product.PlannedConnectedProducts) {
+					//while (this.product.Product.PlannedConnectedProducts.Count != 0) {
+						prod.PlannedConnection.Distributor = this.product.Product.PlannedConnection.Distributor;
+						prod.
+					}
+					this.product.Product.PlannedConnectedProducts.Clear();*/
+				}
 				this.product.Product.PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;

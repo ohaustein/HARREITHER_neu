@@ -650,7 +650,13 @@ namespace Europlan.Common {
 		}
 
 		public virtual ProductConnection PlannedConnection {
-			get { return this.plannedConnection; }
+			get {
+				if (this.plannedProductIsConnection) {
+					return null;
+				} else {
+					return this.plannedConnection;
+				}
+			}
 			set { this.plannedConnection = value; }
 		}
 
