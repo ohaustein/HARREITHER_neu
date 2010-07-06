@@ -41,22 +41,22 @@ namespace Europlan.Application {
 				string val = key.GetValue("SetupLanguage") as string;
 				if (val != null) {
 					if (val.Equals("en", StringComparison.InvariantCultureIgnoreCase)) {
-						Program.updateGuid = new System.Guid("d38bcedd-464a-4fc9-8263-fbf6e43a4cae");
-						Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/en";
-						Program.updatePublicKey = "<RSAKeyValue><Modulus>zx6ZJaMzPDozUcY5l0oq4y40M8qAyQobnURZXiVmsWxT5TnYa55yoxiZn9n" +
-												  "ftDpsPc0duQTgwVUag1sj9uxzWp3ANn1bQtgohH0tsm1+j4fxA3Y91ba/v7zSfNfa6To1wnNOHNeyy1O" +
-												  "40Pt4eXQXnbzmTocs322J+luWZPC3Fbc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValu" +
-												  "e>";
+						Program.updateGuid = new System.Guid("77e24619-79f7-43da-bcb3-df6e1bb86c8a");
+						Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/en";
+						Program.updatePublicKey = "<RSAKeyValue><Modulus>vafl6B8Su3p8+ZZlrlPMzv7Yi6Pi9lBWcCH6DMLK/+2cXhFcXR7DjI8tNo6" +
+							"diL0RDvIiZDEZ3F2BaP6j8fAaJ9Gj3l+EV7J1YWfXA1ADHWEqRbVoBR9uO+3x8lghZcSvG4whg8xARnu" +
+							"+9Y1NqzFmxUc1lEWfEtxm90FLaEOcMf0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValu" +
+							"e>";
 					}
 				}
 			}
 			if (Program.updateLocation == null) {
-				Program.updateGuid = new System.Guid("1f24573e-033c-448d-8e15-9f396e67e44e");
-				Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/de";
-				Program.updatePublicKey = "<RSAKeyValue><Modulus>vdBsdX09tG4aP1oLqHWHB3N6hHsEx+x0YbavsjRPuxhf1yLgkQFTN1Z26sV" +
-										  "EkIKnfQxxvcfcWClR4P9Xurm2dyoeA2z80nexnKuyVQAW3K72Z0kkFKEj/OFeXoEWJi1rPrNXjwaQ3zV" +
-										  "hn4WL1GKso8HiQlp34twvAJGx2A6JW7s=</Modulus><Exponent>AQAB</Exponent></RSAKeyValu" +
-										  "e>";
+				Program.updateGuid = new System.Guid("04e4c63a-a752-4fb3-a8ca-b7be57aed70b");
+				Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/de";
+				Program.updatePublicKey = "<RSAKeyValue><Modulus>59wJZhijX3EKxFb0XOFOJiQMrWXNfXIuGlCS7PTFW1f64kmV1O/A/BFjg0B" +
+					"OqY9lzp8IRVmm2gy3Md04HATIPx0MlpXD2GpJtPiy4BXRlRamdcOBNUr+2WeqR+y5b0Hm2UlI0ADzgrt" +
+					"2pinPX0GfK7DaiCBux7vK6ksNlGXbnhc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValu" +
+					"e>";
 			}
 
 			// using a customized class of SettingsFile which does not consider the assembly version for storing the settings
