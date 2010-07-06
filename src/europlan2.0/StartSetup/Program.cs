@@ -37,7 +37,7 @@ namespace StartSetup {
 				installProcess.WaitForExit();
 
 				MoveFileEx(Path.Combine(Application.StartupPath, "setup.exe"), null, MOVEFILE_DELAY_UNITL_REBOOT);
-				MoveFileEx(Path.Combine(Application.StartupPath, "tc.msi"), null, MOVEFILE_DELAY_UNITL_REBOOT);
+				MoveFileEx(Path.Combine(Application.StartupPath, "setup.msi"), null, MOVEFILE_DELAY_UNITL_REBOOT);
 				MoveFileEx(Path.Combine(Application.StartupPath, "instmsi.exe"), null, MOVEFILE_DELAY_UNITL_REBOOT);
 				MoveFileEx(Application.StartupPath, null, MOVEFILE_DELAY_UNITL_REBOOT);
 
