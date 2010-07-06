@@ -22,7 +22,7 @@ namespace StartSetup {
 				}*/
 
 				string foundProduct = new string(' ', 39);
-				bool found = (Msidll.MsiEnumRelatedProducts("{ca795401-2df9-4ed9-8770-f230bd4ab9dc}", 0, 0, foundProduct) == 0 );
+				bool found = (Msidll.MsiEnumRelatedProducts("{F33AAB86-9453-478e-A55B-20CAF7047F33}", 0, 0, foundProduct) == 0);
 				//found = false;
 				Process installProcess = new Process();
 				//MessageBox.Show(Application.StartupPath);
