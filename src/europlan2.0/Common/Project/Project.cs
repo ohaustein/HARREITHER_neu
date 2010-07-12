@@ -43,6 +43,7 @@ namespace Europlan.Common {
 		private TreeNode systemParametersNode = null;
 		private TreeNode quickDimensioningNode = null;
 		private TreeNode requiredMaterialNode = null;
+		private TreeNode importedPlansNode = null;
 
 		public delegate void ProjectLoadedHandler(object sender);
 		public delegate void ProjectSavedHandler(object sender);
@@ -52,6 +53,7 @@ namespace Europlan.Common {
 
 		FloorList floors;
 		List<RegulatorCircuit> regulatorCircuits;
+		List<Plan> importedPlans;
 		private Configuration configuration = null;
 		private QuickDimensioning quickDimensioning = null;
 		private SerializableDictionary<string, double> requiredMaterialOverrides;
@@ -122,6 +124,7 @@ namespace Europlan.Common {
 			floors = new FloorList();
 			regulatorCircuits = new List<RegulatorCircuit>();
 			quickDimensioning = new QuickDimensioning();
+			importedPlans = new List<Plan>();
 
 			requiredMaterialOverrides = new SerializableDictionary<string, double>();
 			requiredMaterialCalculated = new SerializableDictionary<string, double>();
@@ -163,6 +166,11 @@ namespace Europlan.Common {
 			localized = EuroplanRes.General_Materialbedarf;
 			requiredMaterialNode = new TreeNode(localized == null ? "Materialbedarf" : localized);
 			requiredMaterialNode.Tag = typeof(RequiredMaterialPanel);
+
+			localized = EuroplanRes.General_ImportiertePlaene;
+			importedPlansNode = new TreeNode(localized == null ? "Importierte Pläne" : localized);
+			importedPlansNode.Tag = typeof(ImportedPlansPanel);
+
 
 			/*ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
 			wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
@@ -261,6 +269,11 @@ namespace Europlan.Common {
 		public QuickDimensioning QuickDimensioning {
 			get { return quickDimensioning; }
 			set { quickDimensioning = value; }
+		}
+
+		public List<Plan> ImportedPlans {
+			get { return importedPlans; }
+			set { importedPlans = value; }
 		}
 
 		public SerializableDictionary<string, double> RequiredMaterialOverrides {
@@ -471,22 +484,26 @@ namespace Europlan.Common {
 			if (this.rootNode.Nodes.Count == 2 || this.rootNode.Nodes[2] != this.systemParametersNode) {
 				this.rootNode.Nodes.Insert(2, this.systemParametersNode);
 			}
+			// insert imported plans node if missing
+			if (this.rootNode.Nodes.Count == 3 || this.rootNode.Nodes[3] != this.importedPlansNode) {
+				this.rootNode.Nodes.Insert(3, this.importedPlansNode);
+			}
 			// insert floors node if missing
-			if (this.rootNode.Nodes.Count == 3 || this.rootNode.Nodes[3] != this.floorsNode) {
-				this.rootNode.Nodes.Insert(3, this.floorsNode);
+			if (this.rootNode.Nodes.Count == 4 || this.rootNode.Nodes[4] != this.floorsNode) {
+				this.rootNode.Nodes.Insert(4, this.floorsNode);
 			}
 			// insert quick dimensioning node if missing
-			if (this.rootNode.Nodes.Count == 4 || this.rootNode.Nodes[4] != this.quickDimensioningNode) {
-				this.rootNode.Nodes.Insert(4, this.quickDimensioningNode);
+			if (this.rootNode.Nodes.Count == 5 || this.rootNode.Nodes[5] != this.quickDimensioningNode) {
+				this.rootNode.Nodes.Insert(5, this.quickDimensioningNode);
 			}
 			// insert required material node if missing
-			if (this.rootNode.Nodes.Count == 5 || this.rootNode.Nodes[5] != this.requiredMaterialNode) {
-				this.rootNode.Nodes.Insert(5, this.requiredMaterialNode);
+			if (this.rootNode.Nodes.Count == 6 || this.rootNode.Nodes[6] != this.requiredMaterialNode) {
+				this.rootNode.Nodes.Insert(6, this.requiredMaterialNode);
 			}
 
 			// remove other nodes
-			while (this.rootNode.Nodes.Count > 6) {
-				this.rootNode.Nodes.RemoveAt(6);
+			while (this.rootNode.Nodes.Count > 7) {
+				this.rootNode.Nodes.RemoveAt(7);
 			}
 
 			// update floors

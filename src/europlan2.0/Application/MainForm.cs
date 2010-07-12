@@ -534,6 +534,9 @@ namespace Europlan.Application {
 						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
 						(control as IEditorUserControl).ProjectChanged += new ProjectChangedHandler(MainForm_ProjectChanged);
 						(control as IEditorUserControl).TreeSelectionRequested += new TreeSelectionRequestedHandler(MainForm_TreeSelectionRequested);
+						if (control is ISaveRequest) {
+							(control as ISaveRequest).ProjectSaveRequest += new ProjectSaveRequestHandler(MainForm_ProjectSaveRequest);
+						}
 						userControls[associatedPanelType] = control;
 					}
 					if (control.Tag != selectedTreeNode.Tag) {
@@ -548,6 +551,9 @@ namespace Europlan.Application {
 						(control as IEditorUserControl).ProjectStructureChanged += new ProjectStructureChangedHandler(MainForm_ProjectStructureChanged);
 						(control as IEditorUserControl).ProjectChanged += new ProjectChangedHandler(MainForm_ProjectChanged);
 						(control as IEditorUserControl).TreeSelectionRequested += new TreeSelectionRequestedHandler(MainForm_TreeSelectionRequested);
+						if (control is ISaveRequest) {
+							(control as ISaveRequest).ProjectSaveRequest += new ProjectSaveRequestHandler(MainForm_ProjectSaveRequest);
+						}
 						userControls[selectedTreeNode.Tag as Type] = control;
 					}
 				}
@@ -589,6 +595,13 @@ namespace Europlan.Application {
 				projectUnsaved = true;
 				UpdateTitle();
 			}
+		}
+
+		void MainForm_ProjectSaveRequest(object sender) {
+			if (projectFileName == null) {
+				projectUnsaved = true;
+			}
+			CheckForUnsavedChanges();
 		}
 
 		private Control GetActiveControl() {

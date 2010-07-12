@@ -18,6 +18,7 @@ namespace Europlan.Common {
 		private bool konstruktionen;
 		private bool requiredMaterial;
 		private bool recommendedMaterial;
+		private bool prices;
 
 
 		public ProjectReportOptions() {
@@ -39,6 +40,7 @@ namespace Europlan.Common {
 			this.chkRequiredMaterial.Text = EuroplanRes.ProjectReportOptions_Materialbedarf; //"Materialbedarf";
 			this.chkRecommendedMaterial.Text = EuroplanRes.ProjectReportOptions_Bestellvorschlag; //"Bestellvorschlag";
 			this.chkKonstruktionen.Text = EuroplanRes.ProjectReportOptions_Konstruktionen; //"Konstruktionen";
+			this.chkPrice.Text = EuroplanRes.ProjectReportOptions_Prices; //"Preise"
 			this.Text = EuroplanRes.ProjectReportOptions_Titel; //"Druckbereich";
 		}
 
@@ -53,6 +55,7 @@ namespace Europlan.Common {
 			this.konstruktionen = settings.GetSetting("Konstruktionen", true);
 			this.requiredMaterial = settings.GetSetting("RequiredMaterial", true);
 			this.recommendedMaterial = settings.GetSetting("RecommendedMaterial", true);
+			this.prices = settings.GetSetting("Prices", true);
 
 			this.chkProjectOverview.Checked = this.projectOverview;
 			this.chkAreaOverview.Enabled = this.projectOverview;
@@ -64,6 +67,7 @@ namespace Europlan.Common {
 			this.chkKonstruktionen.Checked = this.konstruktionen;
 			this.chkRequiredMaterial.Checked = this.requiredMaterial;
 			this.chkRecommendedMaterial.Checked = this.recommendedMaterial;
+			this.chkPrice.Checked = this.prices;
 		}
 
 		private void ProjectReportOptions_FormClosing(object sender, FormClosingEventArgs e) {
@@ -77,6 +81,7 @@ namespace Europlan.Common {
 			settings.StoreSetting("Konstruktionen", this.konstruktionen);
 			settings.StoreSetting("RequiredMaterial", this.requiredMaterial);
 			settings.StoreSetting("RecommendedMaterial", this.recommendedMaterial);
+			settings.StoreSetting("Prices", this.prices);
 			SettingsFile.Update();
 		}
 
@@ -114,6 +119,10 @@ namespace Europlan.Common {
 			this.recommendedMaterial = this.chkRecommendedMaterial.Checked;
 		}
 
+		private void chkPrice_CheckedChanged(object sender, EventArgs e) {
+			this.prices = this.chkPrice.Checked;
+		}
+
 		public bool ProjectOverview {
 			get { return projectOverview; }
 		}
@@ -146,8 +155,9 @@ namespace Europlan.Common {
 			get { return recommendedMaterial; }
 		}
 
-
-
+		public bool Prices {
+			get { return prices; }
+		}
 
 	}
 }

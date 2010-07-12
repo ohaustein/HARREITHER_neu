@@ -93,6 +93,16 @@ namespace Europlan.Common {
 			}
 		}
 
+		public double Price {
+			get {
+				if (RecommendedAmount.HasValue && RecommendedAmount.Value > 0 && material.Denomination.HasValue && material.Denomination.Value > 0) {
+					return material.Price * (RecommendedAmount.Value / material.Denomination.Value);
+				} else {
+					return 0.0;
+				}
+			}
+		}
+
 		public string Unit {
 			get { return material.Unit; }
 		}

@@ -158,7 +158,7 @@ namespace Europlan.Common {
 				konstruktionenWrapper = GetKonstruktionenWrapper();
 			}
 			
-			if (reportOptions.RequiredMaterial || reportOptions.RecommendedMaterial) {
+			if (reportOptions.RequiredMaterial || reportOptions.RecommendedMaterial || reportOptions.Prices) {
 				requiredMaterialWrapper = GetRequiredMaterialWrapper();
 			}
 
@@ -303,8 +303,8 @@ namespace Europlan.Common {
 			listLabel1.Variables.Add("@Konstruktionen", reportOptions.Konstruktionen);
 			listLabel1.Variables.Add("@RequiredMaterial", reportOptions.RequiredMaterial);
 			listLabel1.Variables.Add("@RecommendedMaterial", reportOptions.RecommendedMaterial);
+			listLabel1.Variables.Add("@PriceMaterial", reportOptions.Prices);
 
-			
 			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatInternal)) {
 				listLabel1.Variables.Add("@InternalLicense", false);
 			} else {

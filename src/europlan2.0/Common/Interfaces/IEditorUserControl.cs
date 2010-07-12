@@ -6,6 +6,7 @@ namespace Europlan.Common {
 
 	public delegate void ProjectStructureChangedHandler(object sender);
 	public delegate void ProjectChangedHandler(object sender);
+	public delegate void ProjectSaveRequestHandler(object sender);
 	public delegate void TreeSelectionRequestedHandler(object sender, object requestedItem);
 	
 	public interface IEditorUserControl {
@@ -16,5 +17,9 @@ namespace Europlan.Common {
 
 		void UpdateControl(bool resetUserInterface);
 		bool AllowLeave();
+	}
+
+	public interface ISaveRequest {
+		event ProjectSaveRequestHandler ProjectSaveRequest;
 	}
 }

@@ -248,6 +248,19 @@
       <DependentUpon>AuslegeAssistentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\AuslegeNode.cs" />
+    <Compile Include="Project\NewPlanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\NewPlanForm.Designer.cs">
+      <DependentUpon>NewPlanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ImportedPlansPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\ImportedPlansPanel.Designer.cs">
+      <DependentUpon>ImportedPlansPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Plan.cs" />
     <Compile Include="Project\ProductOverviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -555,6 +568,14 @@
       <SubType>Designer</SubType>
       <DependentUpon>AuslegeAssistentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\NewPlanForm.resx">
+      <DependentUpon>NewPlanForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ImportedPlansPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ImportedPlansPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\ProductOverviewForm.resx">
       <DependentUpon>ProductOverviewForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -684,6 +705,7 @@
     <None Include="Properties\DataSources\HithermWall.datasource" />
     <None Include="Properties\DataSources\IQuickDimensioningSummary.datasource" />
     <None Include="Properties\DataSources\KlimaFlaechenModul.datasource" />
+    <None Include="Properties\DataSources\Plan.datasource" />
     <None Include="Properties\DataSources\ProductOverviewWrapper.datasource" />
     <None Include="Properties\DataSources\QuickDimensioningRoomDistributorsWrapper.datasource" />
     <None Include="Properties\DataSources\RequiredMaterialWrapper.datasource" />

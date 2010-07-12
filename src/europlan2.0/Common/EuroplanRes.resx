@@ -982,6 +982,9 @@ klicken Sie in der Projekthierarchie auf den gewünschten Raum.</value>
   <data name="General_Geschosse" xml:space="preserve">
     <value>Geschoße</value>
   </data>
+  <data name="General_ImportiertePlaene" xml:space="preserve">
+    <value>Importierte Pläne</value>
+  </data>
   <data name="General_Kopieren" xml:space="preserve">
     <value>&amp;Kopieren</value>
   </data>
@@ -1252,6 +1255,21 @@ berein.</value>
     <value>zus. Dämmg
 R
 (m²K/W)</value>
+  </data>
+  <data name="ImportedPlansPanel_DxfFilter" xml:space="preserve">
+    <value>CAD Plan (*.dxf)</value>
+  </data>
+  <data name="ImportedPlansPanel_ImageFilter" xml:space="preserve">
+    <value>Eingescannter Plan (*.jpg, *.png, *.bmp)</value>
+  </data>
+  <data name="ImportedPlansPanel_ImportiertePlaene" xml:space="preserve">
+    <value>Importierte Pläne</value>
+  </data>
+  <data name="ImportedPlansPanel_PlanEntfernen" xml:space="preserve">
+    <value>Plan entfernen</value>
+  </data>
+  <data name="ImportedPlansPanel_PlanImportieren" xml:space="preserve">
+    <value>Plan importieren</value>
   </data>
   <data name="KlimaFlaechenModul_100_30" xml:space="preserve">
     <value>Modul 100/30</value>
@@ -2101,6 +2119,24 @@ leistung</value>
   <data name="LL_Report_MaterialbedarfMenge" xml:space="preserve">
     <value>Menge</value>
   </data>
+  <data name="LL_Report_Preis" xml:space="preserve">
+    <value>Kosten</value>
+  </data>
+  <data name="LL_Report_PreisArtikel" xml:space="preserve">
+    <value>Artikel</value>
+  </data>
+  <data name="LL_Report_PreisBestellnummer" xml:space="preserve">
+    <value>Bestellnr.</value>
+  </data>
+  <data name="LL_Report_Preise" xml:space="preserve">
+    <value>Preise</value>
+  </data>
+  <data name="LL_Report_PreisGesamt" xml:space="preserve">
+    <value>Gesamt</value>
+  </data>
+  <data name="LL_Report_PreisKategorie" xml:space="preserve">
+    <value>Preise %KATEGORIE%</value>
+  </data>
   <data name="LL_Report_Projektbilanz" xml:space="preserve">
     <value>Projektbilanz</value>
   </data>
@@ -2629,6 +2665,9 @@ ltg. m</value>
   <data name="LL_Report_VerteilerVorlaufTemperatur" xml:space="preserve">
     <value>tv</value>
   </data>
+  <data name="LL_Report_Waehrung" xml:space="preserve">
+    <value>€</value>
+  </data>
   <data name="LL_Report_Waermebedarf" xml:space="preserve">
     <value>Wärme-
 bedarf</value>
@@ -2921,6 +2960,18 @@ einheit</value>
   </data>
   <data name="NewHeatingSystemForm_Titel" xml:space="preserve">
     <value>Bitte wählen Sie das gewünschte Heizungssystem</value>
+  </data>
+  <data name="NewPlanForm_Bezeichnung" xml:space="preserve">
+    <value>Bezeichnung</value>
+  </data>
+  <data name="NewPlanForm_KeinBezeichnerText" xml:space="preserve">
+    <value>Bitte geben Sie eine Bezeichnung ein.</value>
+  </data>
+  <data name="NewPlanForm_KeinBezeichnerTitel" xml:space="preserve">
+    <value>Keine Bezeichnung</value>
+  </data>
+  <data name="NewPlanForm_PlanImportieren" xml:space="preserve">
+    <value>Plan importieren</value>
   </data>
   <data name="NewRoomTypeForm_Titel" xml:space="preserve">
     <value>Raumtypen</value>
@@ -3682,6 +3733,9 @@ RZ</value>
   </data>
   <data name="ProjectReportOptions_Materialbedarf" xml:space="preserve">
     <value>Materialbedarf</value>
+  </data>
+  <data name="ProjectReportOptions_Prices" xml:space="preserve">
+    <value>Preise</value>
   </data>
   <data name="ProjectReportOptions_Projektuebersicht" xml:space="preserve">
     <value>Projektübersicht</value>

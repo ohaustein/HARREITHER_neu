@@ -2576,6 +2576,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Importierte Pläne.
+        /// </summary>
+        internal static string General_ImportiertePlaene {
+            get {
+                return ResourceManager.GetString("General_ImportiertePlaene", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Kopieren.
         /// </summary>
         internal static string General_Kopieren {
@@ -3359,6 +3368,51 @@ namespace Europlan.Common {
         internal static string HithermWallGrid_ZusaetzlicheDaemmung {
             get {
                 return ResourceManager.GetString("HithermWallGrid_ZusaetzlicheDaemmung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CAD Plan (*.dxf).
+        /// </summary>
+        internal static string ImportedPlansPanel_DxfFilter {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_DxfFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eingescannter Plan (*.jpg, *.png, *.bmp).
+        /// </summary>
+        internal static string ImportedPlansPanel_ImageFilter {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_ImageFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importierte Pläne.
+        /// </summary>
+        internal static string ImportedPlansPanel_ImportiertePlaene {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_ImportiertePlaene", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plan entfernen.
+        /// </summary>
+        internal static string ImportedPlansPanel_PlanEntfernen {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_PlanEntfernen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plan importieren.
+        /// </summary>
+        internal static string ImportedPlansPanel_PlanImportieren {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_PlanImportieren", resourceCulture);
             }
         }
         
@@ -5747,6 +5801,60 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kosten.
+        /// </summary>
+        internal static string LL_Report_Preis {
+            get {
+                return ResourceManager.GetString("LL_Report_Preis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artikel.
+        /// </summary>
+        internal static string LL_Report_PreisArtikel {
+            get {
+                return ResourceManager.GetString("LL_Report_PreisArtikel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bestellnr..
+        /// </summary>
+        internal static string LL_Report_PreisBestellnummer {
+            get {
+                return ResourceManager.GetString("LL_Report_PreisBestellnummer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preise.
+        /// </summary>
+        internal static string LL_Report_Preise {
+            get {
+                return ResourceManager.GetString("LL_Report_Preise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gesamt.
+        /// </summary>
+        internal static string LL_Report_PreisGesamt {
+            get {
+                return ResourceManager.GetString("LL_Report_PreisGesamt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preise %KATEGORIE%.
+        /// </summary>
+        internal static string LL_Report_PreisKategorie {
+            get {
+                return ResourceManager.GetString("LL_Report_PreisKategorie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Projektbilanz.
         /// </summary>
         internal static string LL_Report_Projektbilanz {
@@ -7271,6 +7379,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to €.
+        /// </summary>
+        internal static string LL_Report_Waehrung {
+            get {
+                return ResourceManager.GetString("LL_Report_Waehrung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wärme-
         ///bedarf.
         /// </summary>
@@ -8106,6 +8223,42 @@ namespace Europlan.Common {
         internal static string NewHeatingSystemForm_Titel {
             get {
                 return ResourceManager.GetString("NewHeatingSystemForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bezeichnung.
+        /// </summary>
+        internal static string NewPlanForm_Bezeichnung {
+            get {
+                return ResourceManager.GetString("NewPlanForm_Bezeichnung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitte geben Sie eine Bezeichnung ein..
+        /// </summary>
+        internal static string NewPlanForm_KeinBezeichnerText {
+            get {
+                return ResourceManager.GetString("NewPlanForm_KeinBezeichnerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keine Bezeichnung.
+        /// </summary>
+        internal static string NewPlanForm_KeinBezeichnerTitel {
+            get {
+                return ResourceManager.GetString("NewPlanForm_KeinBezeichnerTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plan importieren.
+        /// </summary>
+        internal static string NewPlanForm_PlanImportieren {
+            get {
+                return ResourceManager.GetString("NewPlanForm_PlanImportieren", resourceCulture);
             }
         }
         
@@ -10319,6 +10472,15 @@ namespace Europlan.Common {
         internal static string ProjectReportOptions_Materialbedarf {
             get {
                 return ResourceManager.GetString("ProjectReportOptions_Materialbedarf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preise.
+        /// </summary>
+        internal static string ProjectReportOptions_Prices {
+            get {
+                return ResourceManager.GetString("ProjectReportOptions_Prices", resourceCulture);
             }
         }
         
