@@ -3367,7 +3367,7 @@ namespace Europlan.Common {
 								wrapper.Area = "";
 
 								wrapper.Distributor = connection.Distributor.Id + " " + connection.Distributor.Name + " " + connection.Distributor.AssociatedFloor.Name;
-								wrapper.Durchfluss = c.C_DurchflussHeat / 60;
+								wrapper.Durchfluss = Math.Max(c.C_DurchflussHeat, c.C_DurchflussCool) / 60;
 								
 								foreach (ConnectionPipe pipe in pp.Product.PlannedConnectionPipes) {
 									if (pipe.ConnectionThrough != null && pipe.ConnectionThrough.Product.PlannedProductIsConnection && (!pipe.OnlyFirst || c.NrOfCircuit == 0)) {
