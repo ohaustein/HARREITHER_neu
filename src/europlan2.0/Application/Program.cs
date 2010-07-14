@@ -37,10 +37,12 @@ namespace Europlan.Application {
 			log.Debug("Starting Application");
 
 			RegistryKey key = Registry.LocalMachine.OpenSubKey("Software\\bluesource\\Europlan2.0_grafisch");
+			string defaultLanguage = "de";
 			if (key != null) {
 				string val = key.GetValue("SetupLanguage") as string;
 				if (val != null) {
 					if (val.Equals("en", StringComparison.InvariantCultureIgnoreCase)) {
+						defaultLanguage = "en";
 						Program.updateGuid = new System.Guid("77e24619-79f7-43da-bcb3-df6e1bb86c8a");
 						Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/en";
 						Program.updatePublicKey = "<RSAKeyValue><Modulus>vafl6B8Su3p8+ZZlrlPMzv7Yi6Pi9lBWcCH6DMLK/+2cXhFcXR7DjI8tNo6" +
@@ -63,7 +65,7 @@ namespace Europlan.Application {
 			SettingsFile.Create();
 
 			SettingsKey settings = SettingsFile.Settings["OptionsForm"];
-			string language = settings.GetSetting("Language", Thread.CurrentThread.CurrentUICulture.ToString());
+			string language = settings.GetSetting("Language", defaultLanguage/*Thread.CurrentThread.CurrentUICulture.ToString()*/);
 			Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
 
 			if (IsApplicationAlreadyRunning()) {

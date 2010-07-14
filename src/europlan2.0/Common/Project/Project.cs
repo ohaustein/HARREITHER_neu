@@ -339,6 +339,14 @@ namespace Europlan.Common {
 			}
 			if (ProjectLoaded != null) {
 				Project.ProjectLoaded(Instance);
+				// calculate all products
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						foreach (PlannedProduct p in room.PlannedProducts) {
+							p.ConfigureProduct(false);
+						}
+					}
+				}
 			}
 		}
 

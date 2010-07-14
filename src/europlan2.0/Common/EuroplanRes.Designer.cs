@@ -8592,7 +8592,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (positive Ecken vergößern, negative verringern die Randzonenfläche).
+        ///   Looks up a localized string similar to (positive Ecken vergrößern, negative verringern die Randzonenfläche).
         /// </summary>
         internal static string PlannedEurovalProductPanel_EckenErklaerung {
             get {
@@ -11576,6 +11576,24 @@ namespace Europlan.Common {
         internal static string RegulatoryCircuitSummaryPanel_Regelkreise {
             get {
                 return ResourceManager.GetString("RegulatoryCircuitSummaryPanel_Regelkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An diesen Regelkreis sind bereits ein oder mehrere Verteiler angeschlossen. Wenn Sie diesen Regelkreis löschen, werden auch die daran angeschlossenen Verteiler gelöscht!.
+        /// </summary>
+        internal static string RegulatoryCircuitSummaryPanel_VerteilerLoeschenText {
+            get {
+                return ResourceManager.GetString("RegulatoryCircuitSummaryPanel_VerteilerLoeschenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bestätigen.
+        /// </summary>
+        internal static string RegulatoryCircuitSummaryPanel_VerteilerLoeschenTitel {
+            get {
+                return ResourceManager.GetString("RegulatoryCircuitSummaryPanel_VerteilerLoeschenTitel", resourceCulture);
             }
         }
         

@@ -69,6 +69,7 @@ namespace Europlan.Common {
 			this.gridRegulatoryCircuits.Size = new System.Drawing.Size(756, 453);
 			this.gridRegulatoryCircuits.TabIndex = 0;
 			this.gridRegulatoryCircuits.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.regulatoryCircuitsGrid_CellValueChanged);
+			this.gridRegulatoryCircuits.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridRegulatoryCircuits_UserDeletingRow);
 			this.gridRegulatoryCircuits.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.regulatoryCircuitsGrid_UserDeletedRow);
 			// 
 			// idDataGridViewTextBoxColumn

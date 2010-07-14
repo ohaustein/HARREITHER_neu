@@ -3087,7 +3087,7 @@ cm</value>
 mbar</value>
   </data>
   <data name="PlannedEurovalProductPanel_EckenErklaerung" xml:space="preserve">
-    <value>(positive Ecken vergößern, negative verringern die Randzonenfläche)</value>
+    <value>(positive Ecken vergrößern, negative verringern die Randzonenfläche)</value>
   </data>
   <data name="PlannedEurovalProductPanel_EigenerHeizkreis" xml:space="preserve">
     <value>Eigener Heizkreis für dieses Fußbodenheizsystem</value>
@@ -4135,6 +4135,12 @@ motore</value>
   </data>
   <data name="RegulatoryCircuitSummaryPanel_Regelkreise" xml:space="preserve">
     <value>Regelkreise</value>
+  </data>
+  <data name="RegulatoryCircuitSummaryPanel_VerteilerLoeschenText" xml:space="preserve">
+    <value>An diesen Regelkreis sind bereits ein oder mehrere Verteiler angeschlossen. Wenn Sie diesen Regelkreis löschen, werden auch die daran angeschlossenen Verteiler gelöscht!</value>
+  </data>
+  <data name="RegulatoryCircuitSummaryPanel_VerteilerLoeschenTitel" xml:space="preserve">
+    <value>Bestätigen</value>
   </data>
   <data name="RegulatoryCircuitSummaryPanel_VorlauftemperaturHeiz" xml:space="preserve">
     <value>TvHeiz (°C)</value>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using log4net;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 
@@ -58,6 +59,20 @@ namespace Europlan.Common {
 			return id + " - " + name;
 		}
 
+		[XmlIgnore]
+		public List<Distributor> ConnectedDistributors {
+			get {
+				List<Distributor> distributors = new List<Distributor>();
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Distributor dist in floor.Distributors) {
+						if (dist.RegulatorCircuit == this) {
+							distributors.Add(dist);
+						}
+					}
+				}
+				return distributors;
+			}
+		}
 	}
 
 }

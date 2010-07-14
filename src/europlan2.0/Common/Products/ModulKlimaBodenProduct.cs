@@ -330,7 +330,7 @@ namespace Europlan.Common {
 		public Nullable<int> RequestedCircuits {
 			get { return this.requestedCircuits; }
 			set {
-				if (this.plannedConnection != null && this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 					this.requestedCircuits = value.HasValue ? value.Value : 1;
 				} else {
 					this.requestedCircuits = value;
@@ -405,7 +405,7 @@ namespace Europlan.Common {
 			this.requestedHeatLoad = requestedHeatLoad;
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
-			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || this.plannedConnection == null) {
+			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || this.PlannedConnection == null) {
 				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
 				if (plannedFloorConstruction == null) {
 					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fuﬂbodenkonstruktion, ";
@@ -704,36 +704,36 @@ namespace Europlan.Common {
 				ModulBodenCircuit ec = new ModulBodenCircuit();
 				ec.ModulKlimaBodenProduct = this;
 				ec.NrOfCircuit = this.circuits.Count;
-				if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 					int j = 0;
 					bool found = false;
-					while (!found && j < this.plannedConnection.OtherProduct.Product.PlannedCircuitCount) {
-						found = !this.plannedConnection.OtherProduct.Product.ConnectedCircuits.ContainsKey(j);
+					while (!found && j < this.PlannedConnection.OtherProduct.Product.PlannedCircuitCount) {
+						found = !this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.ContainsKey(j);
 						j++;
 					}
 					if (!found) {
 						return EuroplanRes.ErrorMessage_HkAnschluss; // "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
 					}
 					j--;
-					this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, ec, false));
-					this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.plannedConnection.OtherProduct.Product.PlannedCircuits[j], false));
+					this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, ec, false));
+					this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, this.PlannedConnection.OtherProduct.Product.PlannedCircuits[j], false));
 				}
 				this.circuits.Add(ec);
 			}
 
-			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && this.inverseConnectedCircuits.Count < this.circuits.Count) {
+			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && this.inverseConnectedCircuits.Count < this.circuits.Count) {
 				for (int i = 0; i < this.circuits.Count; i++) {
 					if (!this.inverseConnectedCircuits.ContainsKey(i)) {
 						Circuit c = null;
-						foreach (Circuit oc in this.plannedConnection.OtherProduct.Product.PlannedCircuits) {
-							if (!this.plannedConnection.OtherProduct.Product.ConnectedCircuits.ContainsKey(oc.NrOfCircuit)) {
+						foreach (Circuit oc in this.PlannedConnection.OtherProduct.Product.PlannedCircuits) {
+							if (!this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.ContainsKey(oc.NrOfCircuit)) {
 								c = oc;
 								break;
 							}
 						}
 						if (c != null) {
-							this.inverseConnectedCircuits.Add(i, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, c, false));
-							this.plannedConnection.OtherProduct.Product.ConnectedCircuits.Add(c.NrOfCircuit, new Circuit.CircuitConnection(this.plannedConnection.CircuitConnectionType, this.circuits[i], false));
+							this.inverseConnectedCircuits.Add(i, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, c, false));
+							this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Add(c.NrOfCircuit, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, this.circuits[i], false));
 						}
 					}
 				}

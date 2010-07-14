@@ -73,5 +73,35 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void gridRegulatoryCircuits_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
+			RegulatorCircuit rc = e.Row.DataBoundItem as RegulatorCircuit;
+			if (rc != null) {
+				if (rc.ConnectedDistributors.Count > 0) {
+					if (MessageBox.Show(EuroplanRes.RegulatoryCircuitSummaryPanel_VerteilerLoeschenText, EuroplanRes.RegulatoryCircuitSummaryPanel_VerteilerLoeschenTitel, MessageBoxButtons.OKCancel) == DialogResult.OK) {
+						foreach (Floor floor in Project.Instance.Floors) {
+							List<Distributor> delDists = new List<Distributor>();
+							foreach (Distributor dist in floor.Distributors) {
+								if (dist.RegulatorCircuit == rc) {
+									delDists.Add(dist);
+									List<PlannedProduct> connectedProducts = dist.PlannedConnectedProducts;
+									foreach (PlannedProduct pp in connectedProducts) {
+										pp.Product.PlannedConnection = null;
+									}
+									foreach (PlannedProduct pp in connectedProducts) {
+										pp.ConfigureProductDefault();
+									}
+								}
+							}
+							foreach (Distributor dist in delDists) {
+								floor.Distributors.Remove(dist);
+							}
+						}
+					} else {
+						e.Cancel = true;
+					}
+				}
+			}
+		}
+
 	}
 }

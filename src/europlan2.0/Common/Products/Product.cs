@@ -592,7 +592,8 @@ namespace Europlan.Common {
 		}
 
 		public virtual void CalculateHeatAndCoolFlow() {
-			if (this.plannedConnection == null) {
+			if (this.PlannedConnection == null || this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.NONE ||
+				(this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR && this.PlannedConnection.Distributor.RegulatorCircuit == null)) {
 				this.plannedVorlaufTempHeat = 0;
 				this.plannedRuecklaufTempHeat = 0;
 				this.plannedVorlaufTempCool = 0;
@@ -601,49 +602,49 @@ namespace Europlan.Common {
 			}
 			double spreizungHeat = 0;
 			double spreizungCool = 0;
-			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				this.plannedConnection.OtherProduct.Product.CalculateHeatAndCoolFlow();
-				this.plannedConnection.OtherProduct.Product.GetHeatFlow(out this.plannedVorlaufTempHeat, out this.plannedRuecklaufTempHeat);
+			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				this.PlannedConnection.OtherProduct.Product.CalculateHeatAndCoolFlow();
+				this.PlannedConnection.OtherProduct.Product.GetHeatFlow(out this.plannedVorlaufTempHeat, out this.plannedRuecklaufTempHeat);
 				spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
-				this.plannedConnection.OtherProduct.Product.GetCoolFlow(out this.plannedVorlaufTempCool, out this.plannedRuecklaufTempCool);
+				this.PlannedConnection.OtherProduct.Product.GetCoolFlow(out this.plannedVorlaufTempCool, out this.plannedRuecklaufTempCool);
 				spreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
 			} else {
-				this.plannedVorlaufTempHeat = this.plannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
+				this.plannedVorlaufTempHeat = this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
 				spreizungHeat = EN1264.Instance.DefaultSpreizung(this.plannedVorlaufTempHeat);
 				this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
-				this.plannedVorlaufTempCool = this.plannedConnection.Distributor.RegulatorCircuit.CoolFlowTemperature;
+				this.plannedVorlaufTempCool = this.PlannedConnection.Distributor.RegulatorCircuit.CoolFlowTemperature;
 				spreizungCool = 3;
 				this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
 			}
 		}
 
 		public void GetHeatFlow(out double vorlauf, out double ruecklauf) {
-			/*if (this.plannedConnection == null) {
+			/*if (this.PlannedConnection == null) {
 				vorlauf = 0;
 				ruecklauf = 0;
 				return;
 			}
-			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				this.plannedConnection.OtherProduct.Product.GetHeatFlow(out vorlauf, out ruecklauf);
+			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				this.PlannedConnection.OtherProduct.Product.GetHeatFlow(out vorlauf, out ruecklauf);
 				return;
 			}
-			vorlauf = this.plannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
+			vorlauf = this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
 			ruecklauf = vorlauf - EN1264.Instance.DefaultSpreizung(vorlauf);*/
 			vorlauf = this.plannedVorlaufTempHeat;
 			ruecklauf = this.plannedRuecklaufTempHeat;
 		}
 
 		public void GetCoolFlow(out double vorlauf, out double ruecklauf) {
-			/*if (this.plannedConnection == null) {
+			/*if (this.PlannedConnection == null) {
 				vorlauf = 0;
 				ruecklauf = 0;
 				return;
 			}
-			if (this.plannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				this.plannedConnection.OtherProduct.Product.GetCoolFlow(out vorlauf, out ruecklauf);
+			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				this.PlannedConnection.OtherProduct.Product.GetCoolFlow(out vorlauf, out ruecklauf);
 				return;
 			}
-			vorlauf = this.plannedConnection.Distributor.RegulatorCircuit.CoolFlowTemperature;
+			vorlauf = this.PlannedConnection.Distributor.RegulatorCircuit.CoolFlowTemperature;
 			ruecklauf = vorlauf + 3;*/
 			vorlauf = this.plannedVorlaufTempCool;
 			ruecklauf = this.plannedRuecklaufTempCool;

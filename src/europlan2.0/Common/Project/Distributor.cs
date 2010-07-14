@@ -357,6 +357,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public List<PlannedProduct> PlannedDirectAndIndirectConnectedProducts {
 			get {
 				List<PlannedProduct> products = new List<PlannedProduct>();
