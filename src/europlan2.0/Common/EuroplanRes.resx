@@ -1256,6 +1256,9 @@ berein.</value>
 R
 (m²K/W)</value>
   </data>
+  <data name="ImportedPlansPanel_DateiPfad" xml:space="preserve">
+    <value>Pfad</value>
+  </data>
   <data name="ImportedPlansPanel_DxfFilter" xml:space="preserve">
     <value>CAD Plan (*.dxf)</value>
   </data>
@@ -1270,6 +1273,18 @@ R
   </data>
   <data name="ImportedPlansPanel_PlanImportieren" xml:space="preserve">
     <value>Plan importieren</value>
+  </data>
+  <data name="ImportedPlansPanel_PlanName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ImportedPlansPanel_PlanSchonVorhanden" xml:space="preserve">
+    <value>Dieser Plan ist bereits importiert.</value>
+  </data>
+  <data name="ImportedPlansPanel_WirklichLoeschenMessage" xml:space="preserve">
+    <value>Dieser Plan wird im Projekt verwendet. Wenn Sie den Plan entfernen, gehen alle damit verbundenen Informationen verloren. Wollen Sie den Plan wirklich entfernen?</value>
+  </data>
+  <data name="ImportedPlansPanel_WirklichLoeschenTitle" xml:space="preserve">
+    <value>Plan wirklich entfernen?</value>
   </data>
   <data name="KlimaFlaechenModul_100_30" xml:space="preserve">
     <value>Modul 100/30</value>

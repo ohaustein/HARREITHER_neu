@@ -22,12 +22,15 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.lblImportedPlans.Text = EuroplanRes.ImportedPlansPanel_ImportiertePlaene; //"Importierte Pläne";
-			this.btnImport.Text = EuroplanRes.ImportedPlansPanel_PlanImportieren; //"Plan importieren";
-			this.btnDelete.Text = EuroplanRes.ImportedPlansPanel_PlanEntfernen; //"Plan entfernen";
+			this.lblImportedPlans.Text = EuroplanRes.ImportedPlansPanel_ImportiertePlaene; //"Importierte Pläne"
+			this.btnImport.Text = EuroplanRes.ImportedPlansPanel_PlanImportieren; //"Plan importieren"
+			this.btnDelete.Text = EuroplanRes.ImportedPlansPanel_PlanEntfernen; //"Plan entfernen"
+			this.nameDataGridViewTextBoxColumn.Name = EuroplanRes.ImportedPlansPanel_PlanName; //"Name"
+			this.RelativeFileName.Name = EuroplanRes.ImportedPlansPanel_DateiPfad; //"Pfad"
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
+			btnDelete.Enabled = Project.Instance.ImportedPlans.Count > 0;
 			planSource.DataSource = Project.Instance.ImportedPlans;
 			planSource.ResetBindings(false);
 		}
@@ -52,7 +55,7 @@ namespace Europlan.Common {
 				List<Plan> plans = Project.Instance.ImportedPlans;
 				foreach (Plan plan in plans) {
 					if (Path.GetFileName(plan.RelativeFileName).Equals(Path.GetFileName(dialog.FileName))) {
-						result = MessageBox.Show("Gibts schon...");
+						result = MessageBox.Show(EuroplanRes.ImportedPlansPanel_PlanSchonVorhanden);
 						return;
 					}
 				}
@@ -82,7 +85,23 @@ namespace Europlan.Common {
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e) {
-
+			// TODO - check if plan is alerady used
+			// if (alreadyused) { ....
+			DialogResult result = MessageBox.Show(EuroplanRes.ImportedPlansPanel_WirklichLoeschenMessage, EuroplanRes.ImportedPlansPanel_WirklichLoeschenTitle, MessageBoxButtons.YesNo);
+			if (result.Equals(DialogResult.Yes)) {
+				if (dgvPlans.SelectedRows[0] != null) {
+					Plan plan = dgvPlans.SelectedRows[0].DataBoundItem as Plan;
+					string fileName = plan.AbsoluteFileName;
+					if (File.Exists(fileName)) {
+						File.Delete(fileName);
+					}
+					Project.Instance.ImportedPlans.Remove(plan);
+					if (ProjectChanged != null) {
+						ProjectChanged(this);
+					}
+					UpdateControl(false);
+				}
+			}
 		}
 
 		private void dgvPlans_CellValueChanged(object sender, DataGridViewCellEventArgs e) {

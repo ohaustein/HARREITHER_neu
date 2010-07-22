@@ -3372,6 +3372,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pfad.
+        /// </summary>
+        internal static string ImportedPlansPanel_DateiPfad {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_DateiPfad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CAD Plan (*.dxf).
         /// </summary>
         internal static string ImportedPlansPanel_DxfFilter {
@@ -3413,6 +3422,42 @@ namespace Europlan.Common {
         internal static string ImportedPlansPanel_PlanImportieren {
             get {
                 return ResourceManager.GetString("ImportedPlansPanel_PlanImportieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string ImportedPlansPanel_PlanName {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_PlanName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dieser Plan ist bereits importiert..
+        /// </summary>
+        internal static string ImportedPlansPanel_PlanSchonVorhanden {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_PlanSchonVorhanden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dieser Plan wird im Projekt verwendet. Wenn Sie den Plan entfernen, gehen alle damit verbundenen Informationen verloren. Wollen Sie den Plan wirklich entfernen?.
+        /// </summary>
+        internal static string ImportedPlansPanel_WirklichLoeschenMessage {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_WirklichLoeschenMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plan wirklich entfernen?.
+        /// </summary>
+        internal static string ImportedPlansPanel_WirklichLoeschenTitle {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_WirklichLoeschenTitle", resourceCulture);
             }
         }
         
