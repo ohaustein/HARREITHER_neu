@@ -150,6 +150,14 @@
     <Compile Include="MaterialEditor\MaterialEditorGrid.Designer.cs">
       <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\CadPlan.cs" />
+    <Compile Include="Plan\ImagePlan.cs" />
+    <Compile Include="Plan\ImagePlanOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plan\ImagePlanOptionsForm.Designer.cs">
+      <DependentUpon>ImagePlanOptionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Circuit.cs" />
     <Compile Include="Products\ConnectionPipePanel.cs">
       <SubType>UserControl</SubType>
@@ -260,7 +268,7 @@
     <Compile Include="Project\ImportedPlansPanel.Designer.cs">
       <DependentUpon>ImportedPlansPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\Plan.cs" />
+    <Compile Include="Plan\Plan.cs" />
     <Compile Include="Project\ProductOverviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -514,6 +522,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MaterialEditor\MaterialEditorGrid.resx">
       <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plan\ImagePlanOptionsForm.resx">
+      <DependentUpon>ImagePlanOptionsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\ConnectionPipePanel.resx">

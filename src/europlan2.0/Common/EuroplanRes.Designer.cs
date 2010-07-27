@@ -3372,6 +3372,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Optionen.
+        /// </summary>
+        internal static string ImagePlanOptionsForm_Titel {
+            get {
+                return ResourceManager.GetString("ImagePlanOptionsForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pfad.
         /// </summary>
         internal static string ImportedPlansPanel_DateiPfad {
@@ -3404,6 +3413,15 @@ namespace Europlan.Common {
         internal static string ImportedPlansPanel_ImportiertePlaene {
             get {
                 return ResourceManager.GetString("ImportedPlansPanel_ImportiertePlaene", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optionen.
+        /// </summary>
+        internal static string ImportedPlansPanel_Optionen {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_Optionen", resourceCulture);
             }
         }
         

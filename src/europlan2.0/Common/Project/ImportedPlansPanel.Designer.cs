@@ -28,9 +28,11 @@ namespace Europlan.Common {
 			this.btnImport = new System.Windows.Forms.Button();
 			this.btnDelete = new System.Windows.Forms.Button();
 			this.dgvPlans = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.planSource = new System.Windows.Forms.BindingSource(this.components);
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.RelativeFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.planSource = new System.Windows.Forms.BindingSource(this.components);
+			this.colOptions = new System.Windows.Forms.DataGridViewButtonColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlans)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.planSource)).BeginInit();
 			this.SuspendLayout();
@@ -77,7 +79,8 @@ namespace Europlan.Common {
 			this.dgvPlans.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvPlans.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameDataGridViewTextBoxColumn,
-            this.RelativeFileName});
+            this.RelativeFileName,
+            this.colOptions});
 			this.dgvPlans.DataSource = this.planSource;
 			this.dgvPlans.Location = new System.Drawing.Point(3, 66);
 			this.dgvPlans.MultiSelect = false;
@@ -87,6 +90,19 @@ namespace Europlan.Common {
 			this.dgvPlans.Size = new System.Drawing.Size(866, 487);
 			this.dgvPlans.TabIndex = 23;
 			this.dgvPlans.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlans_CellValueChanged);
+			this.dgvPlans.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlans_CellClick);
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "RelativeFileName";
+			this.dataGridViewTextBoxColumn1.HeaderText = "RelativeFileName";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			// 
+			// planSource
+			// 
+			this.planSource.DataSource = typeof(Europlan.Common.Plan);
 			// 
 			// nameDataGridViewTextBoxColumn
 			// 
@@ -103,9 +119,13 @@ namespace Europlan.Common {
 			this.RelativeFileName.Name = "RelativeFileName";
 			this.RelativeFileName.ReadOnly = true;
 			// 
-			// planSource
+			// colOptions
 			// 
-			this.planSource.DataSource = typeof(Europlan.Common.Plan);
+			this.colOptions.HeaderText = "Optionen";
+			this.colOptions.Name = "colOptions";
+			this.colOptions.Text = "...";
+			this.colOptions.UseColumnTextForButtonValue = true;
+			this.colOptions.Width = 80;
 			// 
 			// ImportedPlansPanel
 			// 
@@ -134,5 +154,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.BindingSource planSource;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn RelativeFileName;
+		private System.Windows.Forms.DataGridViewButtonColumn colOptions;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 	}
 }

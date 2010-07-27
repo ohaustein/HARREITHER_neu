@@ -27,6 +27,7 @@ namespace Europlan.Common {
 			this.btnDelete.Text = EuroplanRes.ImportedPlansPanel_PlanEntfernen; //"Plan entfernen"
 			this.nameDataGridViewTextBoxColumn.Name = EuroplanRes.ImportedPlansPanel_PlanName; //"Name"
 			this.RelativeFileName.Name = EuroplanRes.ImportedPlansPanel_DateiPfad; //"Pfad"
+			this.colOptions.Name = EuroplanRes.ImportedPlansPanel_Optionen; //"Optionen"
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -69,8 +70,14 @@ namespace Europlan.Common {
 						Directory.CreateDirectory(dir);
 					}
 					string newFileName = Path.Combine(dir, Path.GetFileName(dialog.FileName));
-					File.Copy(dialog.FileName, newFileName, true);				
-					Plan plan = new Plan();
+					File.Copy(dialog.FileName, newFileName, true);
+					string extension = Path.GetExtension(dialog.FileName);
+					Plan plan = null;
+					if (isImage(extension)) {
+						plan = new ImagePlan();
+					} else if (isCad(extension)) {
+						plan = new CadPlan();
+					}
 					plan.Name = newPlanForm.PlanName;
 					plan.RelativeFileName = Path.Combine(subDir, Path.GetFileName(dialog.FileName));
 					plans.Add(plan);
@@ -82,6 +89,16 @@ namespace Europlan.Common {
 				newPlanForm.Dispose();
 			}
 			dialog.Dispose();
+		}
+
+		private bool isImage(string extension) {
+			return extension == ".jpg" ||
+				   extension == ".bmp" ||
+				   extension == ".png";
+		}
+		
+		private bool isCad(string extension) {
+			return extension == ".dxf";
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e) {
@@ -107,6 +124,23 @@ namespace Europlan.Common {
 		private void dgvPlans_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
 			if (ProjectChanged != null) {
 				ProjectChanged(this);
+			}
+		}
+
+		private void dgvPlans_CellClick(object sender, DataGridViewCellEventArgs e) {
+			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.dgvPlans.Columns.Count &&
+				this.dgvPlans.Columns[e.ColumnIndex] == this.colOptions &&
+				e.RowIndex >= 0 && e.RowIndex < this.dgvPlans.Rows.Count) {
+				Plan plan = this.dgvPlans.Rows[e.RowIndex].DataBoundItem as Plan;
+				if (plan != null) {
+					if (plan is ImagePlan) {
+						ImagePlanOptionsForm ipoForm = new ImagePlanOptionsForm(plan as ImagePlan);
+						ipoForm.ShowDialog();
+						ipoForm.Dispose();
+					} else if (plan is CadPlan) {
+
+					}
+				}
 			}
 		}
 

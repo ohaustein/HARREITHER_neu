@@ -1256,6 +1256,9 @@ berein.</value>
 R
 (m²K/W)</value>
   </data>
+  <data name="ImagePlanOptionsForm_Titel" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
   <data name="ImportedPlansPanel_DateiPfad" xml:space="preserve">
     <value>Pfad</value>
   </data>
@@ -1267,6 +1270,9 @@ R
   </data>
   <data name="ImportedPlansPanel_ImportiertePlaene" xml:space="preserve">
     <value>Importierte Pläne</value>
+  </data>
+  <data name="ImportedPlansPanel_Optionen" xml:space="preserve">
+    <value>Optionen</value>
   </data>
   <data name="ImportedPlansPanel_PlanEntfernen" xml:space="preserve">
     <value>Plan entfernen</value>
