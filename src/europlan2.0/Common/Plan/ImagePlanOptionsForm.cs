@@ -15,6 +15,8 @@ namespace Europlan.Common {
 		private ImagePlan plan;
 		private Image image = null;
 		private float mouseDownX, mouseUpX, mouseDownY, mouseUpY;
+		private bool unsavedChanges = false;
+		private bool showRaster = false;
 
 		public ImagePlanOptionsForm(ImagePlan plan) {
 			InitializeComponent();
@@ -24,7 +26,7 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.ImagePlanOptionsForm_Titel; //"Raumtypen";
+			this.Text = EuroplanRes.ImagePlanOptionsForm_Titel; //"Optionen";
 		}
 
 		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -46,7 +48,9 @@ namespace Europlan.Common {
 		}
 
 		private void picturePanel_Paint(object sender, PaintEventArgs e) {
+
 			Graphics g = e.Graphics;
+			g.FillRectangle(Brushes.White, 0, 0, picturePanel.Width, picturePanel.Height);
 			if (image != null) {
 				Matrix X = new Matrix();
 				if (!plan.Scale.HasValue) {
@@ -63,21 +67,50 @@ namespace Europlan.Common {
 				g.Transform = X;
 
 				g.DrawImage(image, 0, 0, image.Width, image.Height);
+
+				X = new Matrix();
+				g.Transform = X;
+				if (showRaster) {
+					Pen pen = Pens.DarkGray.Clone() as Pen;
+					//pen.DashStyle = DashStyle.Dash;
+					for (int i = 0; i < picturePanel.Height; i = i + 100) {
+						g.DrawLine(pen, 0, i, picturePanel.Width, i);
+					}
+					for (int i = 0; i < picturePanel.Width; i = i + 100) {
+						g.DrawLine(pen, i, 0, i, picturePanel.Height);
+					}
+					pen.Dispose();
+				}
 			}
 		}
 
 		private void btnRotateLeft_Click(object sender, EventArgs e) {
-			plan.Angle -= 10;
+			unsavedChanges = true;
+			plan.Angle -= 5;
+			picturePanel.Invalidate();
+		}
+		
+		private void btnRotateLeftSmall_Click(object sender, EventArgs e) {
+			unsavedChanges = true;
+			plan.Angle -= 0.1f;
 			picturePanel.Invalidate();
 		}
 
 		private void btnRotateRight_Click(object sender, EventArgs e) {
-			plan.Angle += 10;
+			unsavedChanges = true;
+			plan.Angle += 5;
+			picturePanel.Invalidate();
+		}
+
+		private void btnRotateRightSmall_Click(object sender, EventArgs e) {
+			unsavedChanges = true;
+			plan.Angle += 0.1f;
 			picturePanel.Invalidate();
 		}
 
 		void ImagePlanOptionsForm_MouseWheel(object sender, MouseEventArgs e) {
-			plan.Scale += ((float)e.Delta) / 1200;
+			unsavedChanges = true;
+			plan.Scale += ((float)e.Delta) / 2400;
 			plan.Scale = plan.Scale < 0.1f ? 0.1f : plan.Scale;
 			picturePanel.Invalidate();
 		}
@@ -99,7 +132,12 @@ namespace Europlan.Common {
 		}
 
 		private void picturePanel_MouseUp(object sender, MouseEventArgs e) {
+
+		}
+
+		private void picturePanel_MouseMove(object sender, MouseEventArgs e) {
 			if (e.Button == MouseButtons.Left) {
+				unsavedChanges = true;
 				Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 				Point[] arr = new Point[] { mousePos };
 
@@ -118,5 +156,39 @@ namespace Europlan.Common {
 			}
 		}
 		
+		public bool UnsavedChanges {
+			get { return unsavedChanges; }
+		}
+
+		private void btnRaster_Click(object sender, EventArgs e) {
+			showRaster = !showRaster;
+			if (showRaster) {
+				btnRaster.Text = "Raster aus";
+			} else {
+				btnRaster.Text = "Raster ein";
+			}
+			picturePanel.Invalidate();
+		}
+
+		private void picturePanel_Resize(object sender, EventArgs e) {
+			picturePanel.Invalidate();
+		}
+
+		private void btnZoomIn_Click(object sender, EventArgs e) {
+			unsavedChanges = true;
+			plan.Scale += 0.05f;
+			plan.Scale = plan.Scale < 0.1f ? 0.1f : plan.Scale;
+			picturePanel.Invalidate();
+		}
+
+		private void btnZoomOut_Click(object sender, EventArgs e) {
+			unsavedChanges = true;
+			plan.Scale -= 0.05f;
+			plan.Scale = plan.Scale < 0.1f ? 0.1f : plan.Scale;
+			picturePanel.Invalidate();
+		}
+
+
+
 	}
 }

@@ -158,6 +158,12 @@
     <Compile Include="Plan\ImagePlanOptionsForm.Designer.cs">
       <DependentUpon>ImagePlanOptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\PicturePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Plan\PicturePanel.Designer.cs">
+      <DependentUpon>PicturePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Circuit.cs" />
     <Compile Include="Products\ConnectionPipePanel.cs">
       <SubType>UserControl</SubType>
@@ -262,10 +268,10 @@
     <Compile Include="Project\NewPlanForm.Designer.cs">
       <DependentUpon>NewPlanForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\ImportedPlansPanel.cs">
+    <Compile Include="Plan\ImportedPlansPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Project\ImportedPlansPanel.Designer.cs">
+    <Compile Include="Plan\ImportedPlansPanel.Designer.cs">
       <DependentUpon>ImportedPlansPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Plan\Plan.cs" />
@@ -528,6 +534,10 @@
       <DependentUpon>ImagePlanOptionsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Plan\PicturePanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PicturePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Products\ConnectionPipePanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
@@ -584,7 +594,7 @@
       <DependentUpon>NewPlanForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\ImportedPlansPanel.resx">
+    <EmbeddedResource Include="Plan\ImportedPlansPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ImportedPlansPanel.cs</DependentUpon>
     </EmbeddedResource>

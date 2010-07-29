@@ -136,6 +136,11 @@ namespace Europlan.Common {
 					if (plan is ImagePlan) {
 						ImagePlanOptionsForm ipoForm = new ImagePlanOptionsForm(plan as ImagePlan);
 						ipoForm.ShowDialog();
+						if (ipoForm.UnsavedChanges) {
+							if (ProjectChanged != null) {
+								ProjectChanged(this);
+							}
+						}
 						ipoForm.Dispose();
 					} else if (plan is CadPlan) {
 
