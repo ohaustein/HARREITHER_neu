@@ -25,7 +25,7 @@ namespace Europlan.Common {
 			this.Text = EuroplanRes.NewPlanForm_PlanImportieren; //"Plan importieren";
 		}
 
-		private void NewDistributor_FormClosing(object sender, FormClosingEventArgs e) {
+		private void NewPlanForm_FormClosing(object sender, FormClosingEventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["NewPlanForm"];
 			settings.StorePoint("Location", this.Location);
 			settings.StoreSize("Size", this.Size);
@@ -38,7 +38,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void NewDistributorForm_Load(object sender, EventArgs e) {
+		private void NewPlanForm_Load(object sender, EventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["NewPlanForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
 			this.Size = settings.GetSize("Size", this.Size);

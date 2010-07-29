@@ -262,10 +262,10 @@
       <DependentUpon>AuslegeAssistentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\AuslegeNode.cs" />
-    <Compile Include="Project\NewPlanForm.cs">
+    <Compile Include="Plan\NewPlanForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Project\NewPlanForm.Designer.cs">
+    <Compile Include="Plan\NewPlanForm.Designer.cs">
       <DependentUpon>NewPlanForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plan\ImportedPlansPanel.cs">
@@ -590,7 +590,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>AuslegeAssistentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\NewPlanForm.resx">
+    <EmbeddedResource Include="Plan\NewPlanForm.resx">
       <DependentUpon>NewPlanForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

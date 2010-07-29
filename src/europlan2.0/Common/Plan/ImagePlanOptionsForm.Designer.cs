@@ -32,6 +32,10 @@ namespace Europlan.Common {
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnRaster = new System.Windows.Forms.ToolStripButton();
+			this.btnMove = new System.Windows.Forms.ToolStripButton();
+			this.btnDistance = new System.Windows.Forms.ToolStripButton();
+			this.txtLength = new System.Windows.Forms.ToolStripTextBox();
+			this.lblLength = new System.Windows.Forms.ToolStripLabel();
 			this.picturePanel = new Europlan.Common.PicturePanel();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
@@ -46,7 +50,11 @@ namespace Europlan.Common {
             this.btnRotateRight,
             this.btnZoomIn,
             this.btnZoomOut,
-            this.btnRaster});
+            this.btnRaster,
+            this.btnMove,
+            this.btnDistance,
+            this.lblLength,
+            this.txtLength});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(668, 25);
@@ -123,6 +131,45 @@ namespace Europlan.Common {
 			this.btnRaster.Text = "Raster aus";
 			this.btnRaster.Click += new System.EventHandler(this.btnRaster_Click);
 			// 
+			// btnMove
+			// 
+			this.btnMove.Checked = true;
+			this.btnMove.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.btnMove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
+			this.btnMove.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnMove.Name = "btnMove";
+			this.btnMove.Size = new System.Drawing.Size(23, 22);
+			this.btnMove.Text = "toolStripButton1";
+			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+			// 
+			// btnDistance
+			// 
+			this.btnDistance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnDistance.Image = ((System.Drawing.Image)(resources.GetObject("btnDistance.Image")));
+			this.btnDistance.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDistance.Name = "btnDistance";
+			this.btnDistance.Size = new System.Drawing.Size(23, 22);
+			this.btnDistance.Text = "toolStripButton2";
+			this.btnDistance.Click += new System.EventHandler(this.btnDistance_Click);
+			// 
+			// txtLength
+			// 
+			this.txtLength.Enabled = false;
+			this.txtLength.MaxLength = 10;
+			this.txtLength.Name = "txtLength";
+			this.txtLength.Size = new System.Drawing.Size(50, 25);
+			this.txtLength.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.txtLength.Visible = false;
+			this.txtLength.TextChanged += new System.EventHandler(this.txtLength_TextChanged);
+			// 
+			// lblLength
+			// 
+			this.lblLength.Name = "lblLength";
+			this.lblLength.Size = new System.Drawing.Size(89, 22);
+			this.lblLength.Text = "Länge in Meter:";
+			this.lblLength.Visible = false;
+			// 
 			// picturePanel
 			// 
 			this.picturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -138,6 +185,7 @@ namespace Europlan.Common {
 			this.picturePanel.TabIndex = 0;
 			this.picturePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.picturePanel_Paint);
 			this.picturePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseMove);
+			this.picturePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseClick);
 			this.picturePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
 			this.picturePanel.Resize += new System.EventHandler(this.picturePanel_Resize);
 			this.picturePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseUp);
@@ -173,6 +221,10 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripButton btnRotateRightSmall;
 		private System.Windows.Forms.ToolStripButton btnZoomIn;
 		private System.Windows.Forms.ToolStripButton btnZoomOut;
+		private System.Windows.Forms.ToolStripButton btnMove;
+		private System.Windows.Forms.ToolStripButton btnDistance;
+		private System.Windows.Forms.ToolStripTextBox txtLength;
+		private System.Windows.Forms.ToolStripLabel lblLength;
 
 
 	}

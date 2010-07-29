@@ -17,6 +17,9 @@ namespace Europlan.Common {
 		private float mouseDownX, mouseUpX, mouseDownY, mouseUpY;
 		private bool unsavedChanges = false;
 		private bool showRaster = false;
+		private bool moveMode = true;
+		Nullable<Point> startPoint = null;
+		private double length = 0;
 
 		public ImagePlanOptionsForm(ImagePlan plan) {
 			InitializeComponent();
@@ -27,9 +30,7 @@ namespace Europlan.Common {
 
 		private void SetLanguage() {
 			this.Text = EuroplanRes.ImagePlanOptionsForm_Titel; //"Optionen";
-
-			// TODO...
-
+			this.lblLength.Text = EuroplanRes.ImagePlanOptionsForm_LeangeInMeter; //"Länge in Meter:"
 		}
 
 		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -51,6 +52,8 @@ namespace Europlan.Common {
 		}
 
 		private void picturePanel_Paint(object sender, PaintEventArgs e) {
+			Point mousePos = picturePanel.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+			Point[] arr = new Point[] { mousePos };
 
 			Graphics g = e.Graphics;
 			g.FillRectangle(Brushes.White, 0, 0, picturePanel.Width, picturePanel.Height);
@@ -60,6 +63,7 @@ namespace Europlan.Common {
 					float scaleX = (float)picturePanel.Width / (float)image.Width;
 					float scaleY = (float)picturePanel.Height / (float)image.Height;
 					float scale = Math.Min(scaleX, scaleY);
+					scale = 1;
 					plan.Scale = scale;
 				}
 				X.Translate(((float)image.Width / 2 + plan.XPos) * plan.Scale.Value, ((float)image.Height / 2 + plan.YPos) * plan.Scale.Value);
@@ -71,8 +75,22 @@ namespace Europlan.Common {
 
 				g.DrawImage(image, 0, 0, image.Width, image.Height);
 
+				Matrix m = new Matrix();
+				m.Translate(((float)image.Width / 2 + plan.XPos) * plan.Scale.Value, ((float)image.Height / 2 + plan.YPos) * plan.Scale.Value);
+				m.Rotate(plan.Angle);
+				m.Translate(-((float)image.Width / 2 + plan.XPos) * plan.Scale.Value, -((float)image.Height / 2 + plan.YPos) * plan.Scale.Value);
+				m.Scale(plan.Scale.Value, plan.Scale.Value);
+				m.Translate(plan.XPos, plan.YPos);
+				m.Invert();
+				m.TransformPoints(arr);
+
+				if (!moveMode && startPoint.HasValue) {
+					g.DrawLine(Pens.Red, startPoint.Value, arr[0]);
+				}
+
 				X = new Matrix();
 				g.Transform = X;
+			
 				if (showRaster) {
 					Pen pen = Pens.DarkGray.Clone() as Pen;
 					//pen.DashStyle = DashStyle.Dash;
@@ -119,8 +137,8 @@ namespace Europlan.Common {
 		}
 
 		private void picturePanel_MouseDown(object sender, MouseEventArgs e) {
-			if (e.Button == MouseButtons.Left) {
-				Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+			if ((moveMode && e.Button == MouseButtons.Left) || (!moveMode && e.Button == MouseButtons.Middle)) {
+				Point mousePos = picturePanel.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 				Point[] arr = new Point[] { mousePos };
 
 				Matrix X = new Matrix();
@@ -132,16 +150,21 @@ namespace Europlan.Common {
 				mouseDownX = arr[0].X;
 				mouseDownY = arr[0].Y;
 			}
+			if (!moveMode && e.Button == MouseButtons.Middle) {
+				picturePanel.Cursor = Cursors.Hand;
+			}
 		}
 
 		private void picturePanel_MouseUp(object sender, MouseEventArgs e) {
-
+			if (!moveMode && e.Button == MouseButtons.Middle) {
+				picturePanel.Cursor = Cursors.Cross;
+			}
 		}
 
 		private void picturePanel_MouseMove(object sender, MouseEventArgs e) {
-			if (e.Button == MouseButtons.Left) {
+			if ((moveMode && e.Button == MouseButtons.Left) || (!moveMode && e.Button == MouseButtons.Middle)) {
 				unsavedChanges = true;
-				Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+				Point mousePos = picturePanel.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 				Point[] arr = new Point[] { mousePos };
 
 				Matrix X = new Matrix();
@@ -155,8 +178,8 @@ namespace Europlan.Common {
 
 				plan.XPos += mouseUpX - mouseDownX;
 				plan.YPos += mouseUpY - mouseDownY;
-				picturePanel.Invalidate();
 			}
+			picturePanel.Invalidate();
 		}
 		
 		public bool UnsavedChanges {
@@ -166,9 +189,9 @@ namespace Europlan.Common {
 		private void btnRaster_Click(object sender, EventArgs e) {
 			showRaster = !showRaster;
 			if (showRaster) {
-				btnRaster.Text = "Raster aus";
+				btnRaster.Text = EuroplanRes.ImagePlanOptionsForm_RasterAus;
 			} else {
-				btnRaster.Text = "Raster ein";
+				btnRaster.Text = EuroplanRes.ImagePlanOptionsForm_RasterEin;
 			}
 			picturePanel.Invalidate();
 		}
@@ -191,7 +214,68 @@ namespace Europlan.Common {
 			picturePanel.Invalidate();
 		}
 
+		private double distance(int x1, int y1, int x2, int y2) {
+			double result = 0;
+			double part1 = Math.Pow((x2 - x1), 2);
+			double part2 = Math.Pow((y2 - y1), 2);
+			double underRadical = part1 + part2;
+			result = Math.Sqrt(underRadical);
+			return result;
+		}
 
+		private void btnMove_Click(object sender, EventArgs e) {
+			picturePanel.Cursor = Cursors.Hand;
+			btnMove.Checked = true;
+			btnDistance.Checked = false;
+			txtLength.Visible = false;
+			lblLength.Visible = false;
+			moveMode = true;
+		}
+
+		private void btnDistance_Click(object sender, EventArgs e) {
+			picturePanel.Cursor = Cursors.Cross;
+			btnMove.Checked = false;
+			btnDistance.Checked = true;
+			txtLength.Visible = true;
+			lblLength.Visible = true;
+		    txtLength.Enabled = plan.Measure.HasValue;
+			txtLength.Text = "";
+			moveMode = false;
+		}
+
+		private void picturePanel_MouseClick(object sender, MouseEventArgs e) {
+			if (!moveMode && e.Button == MouseButtons.Left) {
+				Point mousePos = picturePanel.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+				Point[] arr = new Point[] { mousePos };
+
+				Matrix X = new Matrix();
+				X.Translate(((float)image.Width / 2 + plan.XPos) * plan.Scale.Value, ((float)image.Height / 2 + plan.YPos) * plan.Scale.Value);
+				X.Rotate(plan.Angle);
+				X.Translate(-((float)image.Width / 2 + plan.XPos) * plan.Scale.Value, -((float)image.Height / 2 + plan.YPos) * plan.Scale.Value);
+				X.Scale(plan.Scale.Value, plan.Scale.Value);
+				X.Translate(plan.XPos, plan.YPos);
+				X.Invert();
+				X.TransformPoints(arr);
+				if (startPoint.HasValue) {
+					length = this.distance(startPoint.Value.X, startPoint.Value.Y, arr[0].X, arr[0].Y);
+					txtLength.Enabled = true;
+					if (plan.Measure.HasValue) {
+						txtLength.Text = "" + Math.Round(length / plan.Measure.Value, 2);
+					} 
+					startPoint = null;
+				} else {
+					startPoint = arr[0];
+				}
+			}
+		}
+
+		private void txtLength_TextChanged(object sender, EventArgs e) {
+			double len = 0;
+			if (Double.TryParse(txtLength.Text, out len)) {
+				unsavedChanges = true;
+				plan.Measure = (float)(length / len);
+			}
+		}
 
 	}
 }

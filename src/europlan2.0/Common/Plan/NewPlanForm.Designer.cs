@@ -89,6 +89,7 @@ namespace Europlan.Common {
 			this.MinimizeBox = false;
 			this.Name = "NewPlanForm";
 			this.helpProvider.SetShowHelp(this, true);
+			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Plan importieren";
 			this.ResumeLayout(false);

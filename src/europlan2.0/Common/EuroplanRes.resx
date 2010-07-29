@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name=".MeasureForm_Maßstab" xml:space="preserve">
+    <value>Maßstab</value>
+  </data>
   <data name="AbstractLicense_NeueLizenz" xml:space="preserve">
     <value>neue Lizenz</value>
   </data>
@@ -1255,6 +1258,15 @@ berein.</value>
     <value>zus. Dämmg
 R
 (m²K/W)</value>
+  </data>
+  <data name="ImagePlanOptionsForm_LeangeInMeter" xml:space="preserve">
+    <value>Länge in Meter:</value>
+  </data>
+  <data name="ImagePlanOptionsForm_RasterAus" xml:space="preserve">
+    <value>Raster aus</value>
+  </data>
+  <data name="ImagePlanOptionsForm_RasterEin" xml:space="preserve">
+    <value>Raster ein</value>
   </data>
   <data name="ImagePlanOptionsForm_Titel" xml:space="preserve">
     <value>Optionen</value>

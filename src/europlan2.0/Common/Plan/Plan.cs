@@ -15,6 +15,7 @@ namespace Europlan.Common {
 		private string name;
 		private string relativeFileName;
 		private Nullable<float> scale = null;
+		private Nullable<float> measure = null;
 		
 		public string Name {
 			get { return name; }
@@ -39,6 +40,10 @@ namespace Europlan.Common {
 			set { scale = value; }
 		}
 
+		public Nullable<float> Measure {
+			get { return measure; }
+			set { measure = value; }
+		}
 	}
 
 }

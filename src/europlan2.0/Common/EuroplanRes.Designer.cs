@@ -61,6 +61,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maßstab.
+        /// </summary>
+        internal static string _MeasureForm_Maßstab {
+            get {
+                return ResourceManager.GetString(".MeasureForm_Maßstab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to neue Lizenz.
         /// </summary>
         internal static string AbstractLicense_NeueLizenz {
@@ -3368,6 +3377,33 @@ namespace Europlan.Common {
         internal static string HithermWallGrid_ZusaetzlicheDaemmung {
             get {
                 return ResourceManager.GetString("HithermWallGrid_ZusaetzlicheDaemmung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge in Meter:.
+        /// </summary>
+        internal static string ImagePlanOptionsForm_LeangeInMeter {
+            get {
+                return ResourceManager.GetString("ImagePlanOptionsForm_LeangeInMeter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raster aus.
+        /// </summary>
+        internal static string ImagePlanOptionsForm_RasterAus {
+            get {
+                return ResourceManager.GetString("ImagePlanOptionsForm_RasterAus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raster ein.
+        /// </summary>
+        internal static string ImagePlanOptionsForm_RasterEin {
+            get {
+                return ResourceManager.GetString("ImagePlanOptionsForm_RasterEin", resourceCulture);
             }
         }
         
