@@ -64,7 +64,6 @@ namespace Europlan.Application {
 			this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
-			this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
 			this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -107,6 +106,7 @@ namespace Europlan.Application {
 			this.helpProvider.SetHelpKeyword(this.projectTree, resources.GetString("projectTree.HelpKeyword"));
 			this.helpProvider.SetHelpNavigator(this.projectTree, ((System.Windows.Forms.HelpNavigator)(resources.GetObject("projectTree.HelpNavigator"))));
 			this.projectTree.HideSelection = false;
+            this.projectTree.ImageList = this.imageList;
 			this.projectTree.Name = "projectTree";
 			this.helpProvider.SetShowHelp(this.projectTree, ((bool)(resources.GetObject("projectTree.ShowHelp"))));
 			this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
@@ -117,8 +117,21 @@ namespace Europlan.Application {
 			this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
 			this.imageList.TransparentColor = System.Drawing.Color.Transparent;
 			this.imageList.Images.SetKeyName(0, "default.png");
-			this.imageList.Images.SetKeyName(1, "kfm_home-alt.png");
-			this.imageList.Images.SetKeyName(2, "kontact_journal.png");
+            this.imageList.Images.SetKeyName(1, "Anlagedaten.png");
+            this.imageList.Images.SetKeyName(2, "Auslegungshilfe.png");
+            this.imageList.Images.SetKeyName(3, "Flächenaufstellung.png");
+            this.imageList.Images.SetKeyName(4, "Fußbodenheizung.png");
+            this.imageList.Images.SetKeyName(5, "Geschoß.png");
+            this.imageList.Images.SetKeyName(6, "Heizen.png");
+            this.imageList.Images.SetKeyName(7, "Hitherm.png");
+            this.imageList.Images.SetKeyName(8, "Klimadecke.png");
+            this.imageList.Images.SetKeyName(9, "Kühlen.png");
+            this.imageList.Images.SetKeyName(10, "Materialbedarf.png");
+            this.imageList.Images.SetKeyName(11, "Projekt.png");
+            this.imageList.Images.SetKeyName(12, "Raum.png");
+            this.imageList.Images.SetKeyName(13, "Regelkreise.png");
+            this.imageList.Images.SetKeyName(14, "Systemparameter.png");
+            this.imageList.Images.SetKeyName(15, "Verteiler.png");
 			// 
 			// mainMenu
 			// 
@@ -346,7 +359,6 @@ namespace Europlan.Application {
             this.newToolStripButton,
             this.openToolStripButton,
             this.saveToolStripButton,
-            this.printToolStripButton,
             this.toolStripSeparator,
             this.cutToolStripButton,
             this.copyToolStripButton,
@@ -380,12 +392,6 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.saveToolStripButton, "saveToolStripButton");
 			this.saveToolStripButton.Name = "saveToolStripButton";
 			this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-			// 
-			// printToolStripButton
-			// 
-			this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			resources.ApplyResources(this.printToolStripButton, "printToolStripButton");
-			this.printToolStripButton.Name = "printToolStripButton";
 			// 
 			// toolStripSeparator
 			// 
@@ -505,7 +511,6 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripButton newToolStripButton;
 		private System.Windows.Forms.ToolStripButton openToolStripButton;
 		private System.Windows.Forms.ToolStripButton saveToolStripButton;
-		private System.Windows.Forms.ToolStripButton printToolStripButton;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
 		private System.Windows.Forms.ToolStripButton cutToolStripButton;
 		private System.Windows.Forms.ToolStripButton copyToolStripButton;

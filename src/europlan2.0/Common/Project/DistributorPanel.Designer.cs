@@ -23,6 +23,7 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistributorPanel));
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.lblId = new System.Windows.Forms.Label();
@@ -53,16 +54,18 @@ namespace Europlan.Common {
 			this.lstError = new System.Windows.Forms.ListView();
 			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.numMaxCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAdditionalCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numZusStellantriebe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(35, 5);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(141, 24);
 			this.label1.TabIndex = 19;
@@ -349,10 +352,23 @@ namespace Europlan.Common {
 			// 
 			this.helpProvider.HelpNamespace = "europlan.chm";
 			// 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(1, 0);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 75;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
 			// DistributorPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.lstError);
 			this.Controls.Add(this.lblCircuits);
 			this.Controls.Add(this.label13);
@@ -389,6 +405,7 @@ namespace Europlan.Common {
 			((System.ComponentModel.ISupportInitialize)(this.numMaxCircuits)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAdditionalCircuits)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numZusStellantriebe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -426,5 +443,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ListView lstError;
 		private System.Windows.Forms.ColumnHeader defaultColumn;
 		private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }

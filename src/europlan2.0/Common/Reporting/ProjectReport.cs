@@ -1,4 +1,5 @@
 using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -304,7 +305,6 @@ namespace Europlan.Common {
 			listLabel1.Variables.Add("@RequiredMaterial", reportOptions.RequiredMaterial);
 			listLabel1.Variables.Add("@RecommendedMaterial", reportOptions.RecommendedMaterial);
 			listLabel1.Variables.Add("@PriceMaterial", reportOptions.Prices);
-
 			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatInternal)) {
 				listLabel1.Variables.Add("@InternalLicense", false);
 			} else {
@@ -314,7 +314,7 @@ namespace Europlan.Common {
 
 
 			listLabel1.Dictionary.Clear();
-			ResourceSet resourceSet = EuroplanRes.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentCulture, false, true);
+			ResourceSet resourceSet = EuroplanRes.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, false, true);
 			if (resourceSet != null) {
 			IDictionaryEnumerator enumerator = resourceSet.GetEnumerator();
 				while (enumerator.MoveNext()) {
@@ -335,7 +335,7 @@ namespace Europlan.Common {
 
 			filename = Path.Combine(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Reporting"), "ProjectReport.lst");
 			try {
-				listLabel1.Print(combit.ListLabel15.LlProject.List, filename, false, combit.ListLabel15.LlPrintMode.PreviewControl, combit.ListLabel15.LlBoxType.None, "", false, Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath));
+				listLabel1.Print(combit.ListLabel15.LlProject.List, filename, false, combit.ListLabel15.LlPrintMode.PreviewControl, combit.ListLabel15.LlBoxType.None, "", false, PathUtil.DataPath);
 				GC.Collect();
 			} catch (Exception ex) {
 				DialogResult result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_DruckerFehlerText, EuroplanRes.QuickDimensioningPanel_DruckerFehlerTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
@@ -1629,6 +1629,19 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				string anschlussDimensionierung = "";
+				double maxDurchfluss = Math.Max(durchflussHeat, durchflussCool);
+				if (maxDurchfluss <= 1000) {
+					anschlussDimensionierung = EuroplanRes.ProjectReport_HISAN32;
+				} else if (maxDurchfluss > 1000 && maxDurchfluss <= 2000) {
+					anschlussDimensionierung = EuroplanRes.ProjectReport_HISAN40;
+				} else if (maxDurchfluss > 2000 && maxDurchfluss <= 3000) {
+					anschlussDimensionierung = EuroplanRes.ProjectReport_HISAN50;
+				} else if (maxDurchfluss > 3000 && maxDurchfluss <= 5000) {
+					anschlussDimensionierung = EuroplanRes.ProjectReport_HISAN63;
+				} else if (maxDurchfluss > 5000 && maxDurchfluss <= 7000) {
+					anschlussDimensionierung = EuroplanRes.ProjectReport_HISAN75;
+				}
 
 				wrapper = new RegulatorCircuitWrapper();
 				wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb";
@@ -1638,6 +1651,7 @@ namespace Europlan.Common {
 				wrapper.VorlaufTemp = rc.HeatFlowTemperature;
 				wrapper.RuecklaufTemp = ruecklaufHeat;
 				wrapper.Durchfluss = durchflussHeat;
+				wrapper.AnschlussDimensionierung = anschlussDimensionierung;
 				wrapper.Druckverlust = deltaRhoHeat;
 				wrapper.Inhalt = wasserInhalt;
 				wrapperHeatList.Add(wrapper);
@@ -1650,6 +1664,7 @@ namespace Europlan.Common {
 					wrapper.VorlaufTemp = rc.CoolFlowTemperature;
 					wrapper.RuecklaufTemp = ruecklaufCool;
 					wrapper.Durchfluss = durchflussCool;
+					wrapper.AnschlussDimensionierung = anschlussDimensionierung;
 					wrapper.Druckverlust = deltaRhoCool;
 					wrapper.Inhalt = wasserInhalt;
 					wrapperCoolList.Add(wrapper);
@@ -1697,6 +1712,20 @@ namespace Europlan.Common {
 						wasserInhalt += pp.Product.WasserInhalt;
 					}
 
+					string anschlussDimensionierung = "";
+					double maxDurchfluss = Math.Max(durchflussHeat, durchflussCool);
+					if (maxDurchfluss <= 1000) {
+						anschlussDimensionierung = EuroplanRes.ProjectReport_HISAN32;
+					} else if (maxDurchfluss > 1000 && maxDurchfluss <= 2000) {
+						anschlussDimensionierung = EuroplanRes.ProjectReport_HISAN40;
+					} else if (maxDurchfluss > 2000 && maxDurchfluss <= 3000) {
+						anschlussDimensionierung = EuroplanRes.ProjectReport_HISAN50;
+					} else if (maxDurchfluss > 3000 && maxDurchfluss <= 5000) {
+						anschlussDimensionierung = EuroplanRes.ProjectReport_HISAN63;
+					} else if (maxDurchfluss > 5000 && maxDurchfluss <= 7000) {
+						anschlussDimensionierung = EuroplanRes.ProjectReport_HISAN75;
+					}
+
 					wrapper = new DistributorWrapper();
 					wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb";
 					wrapper.Id = distributor.Id;
@@ -1706,6 +1735,7 @@ namespace Europlan.Common {
 					wrapper.VorlaufTemp = distributor.RegulatorCircuit.HeatFlowTemperature;
 					wrapper.RuecklaufTemp = ruecklaufHeat;
 					wrapper.Durchfluss = durchflussHeat;
+					wrapper.AnschlussDimensionierung = anschlussDimensionierung;
 					wrapper.Druckverlust = deltaRhoHeat;
 					wrapper.Inhalt = wasserInhalt;
 					wrapperHeatList.Add(wrapper);
@@ -1719,6 +1749,7 @@ namespace Europlan.Common {
 						wrapper.VorlaufTemp = distributor.RegulatorCircuit.CoolFlowTemperature;
 						wrapper.RuecklaufTemp = ruecklaufCool;
 						wrapper.Durchfluss = durchflussCool;
+						wrapper.AnschlussDimensionierung = anschlussDimensionierung;
 						wrapper.Druckverlust = deltaRhoCool;
 						wrapper.Inhalt = wasserInhalt;
 						wrapperCoolList.Add(wrapper);
@@ -3256,7 +3287,7 @@ namespace Europlan.Common {
 							p = pp.Product as ModulKlimaBodenProduct;
 							foreach (ModulBodenCircuit c in p.PlannedCircuits) {
 								foreach (KlimaFlaechenModul register in c.Row.List) {
-									modulBodenArea += register.CoveredArea;
+									modulBodenArea += register.GetCoveredArea(true);
 								}
 								rohr21Length += c.Row.LengthVerbindeleitungen;
 								rohr21Length += c.PipeLengthVorlaufWithoutOtherProductTotal + c.PipeLengthRuecklaufWithoutOtherProductTotal;
@@ -3305,9 +3336,9 @@ namespace Europlan.Common {
 									foreach (KlimaFlaechenList l in a.Rows) {
 										foreach (KlimaFlaechenModul register in l.List) {
 											if (!modulAreas.ContainsKey(register.ModulType)) {
-												modulAreas.Add(register.ModulType, register.CoveredArea);
+												modulAreas.Add(register.ModulType, register.GetCoveredArea(false));
 											} else {
-												modulAreas[register.ModulType] += register.CoveredArea;
+												modulAreas[register.ModulType] += register.GetCoveredArea(false);
 											}
 										}
 										rohr21Length += l.LengthVerbindeleitungen;

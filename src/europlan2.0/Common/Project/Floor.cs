@@ -53,6 +53,8 @@ namespace Europlan.Common {
 			rooms = new RoomList();
 			distributors = new DistributorList();
 			this.floorNode.Tag = this;
+            this.floorNode.ImageKey = "Geschoﬂ.png";
+            this.floorNode.SelectedImageKey = "Geschoﬂ.png";
 		}
 
 		internal void Synchronize(Floor floor) {
@@ -179,12 +181,6 @@ namespace Europlan.Common {
 		public Type AssociatedPanelType {
 			get { 
 				return typeof(FloorSummaryPanel);
-			}
-		}
-
-		public System.Drawing.Icon AssociatedIcon {
-			get {
-				return null;
 			}
 		}
 

@@ -104,14 +104,14 @@ namespace Europlan.Common {
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par);
-			if (!ceiling) {
+			//if (!ceiling) {
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Ds);
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Ds);
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Ds);
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Ds);
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Ds);
+			//}
 			}
-		}
 
 		#region IEditorUserControl Members
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
@@ -859,23 +859,23 @@ namespace Europlan.Common {
 		private void cmbType_SelectedValueChanged(object sender, EventArgs e) {
 			if (ignoreType == 0) {
 				if (this.cmbType.SelectedItem is Product.ProductType && this.product.Product.Type != (Product.ProductType)this.cmbType.SelectedItem) {
-					if ((Product.ProductType)this.cmbType.SelectedItem == Product.ProductType.DH) {
-						if (MessageBox.Show(EuroplanRes.PlannedHithermCompactProductPanel_TypAendernTextDh/*"Wenn Sie den Typ auf Dachschräge ändern, werden alle Register in Parapetauslegung gelöscht"*/, EuroplanRes.PlannedHithermCompactProductPanel_TypAendernTitel/*"Bestätigen"*/, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK) {
-							this.cmbType.SelectedItem = (this.product.Product as HithermCompactProduct).HithermCompactType;
-							return ;
-						}
-						List<HithermCompactRegister> removeRegisters = new List<HithermCompactRegister>();
-						foreach (HithermCompactCircuit hcc in (this.product.Product as HithermCompactProduct).PlannedCircuits) {
-							foreach (HithermCompactRegister hcr in hcc.Registers){
-								if (hcr.IsParapet) {
-									removeRegisters.Add(hcr);
-								}
-							}
-						}
-						foreach (HithermCompactRegister hcr in removeRegisters) {
-							(this.product.Product as HithermCompactProduct).RemoveRegisterFromCircuit(hcr);
-						}
-					}
+					//if ((Product.ProductType)this.cmbType.SelectedItem == Product.ProductType.DH) {
+					//    if (MessageBox.Show(EuroplanRes.PlannedHithermCompactProductPanel_TypAendernTextDh/*"Wenn Sie den Typ auf Dachschräge ändern, werden alle Register in Parapetauslegung gelöscht"*/, EuroplanRes.PlannedHithermCompactProductPanel_TypAendernTitel/*"Bestätigen"*/, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK) {
+					//        this.cmbType.SelectedItem = (this.product.Product as HithermCompactProduct).HithermCompactType;
+					//        return ;
+					//    }
+					//    List<HithermCompactRegister> removeRegisters = new List<HithermCompactRegister>();
+					//    foreach (HithermCompactCircuit hcc in (this.product.Product as HithermCompactProduct).PlannedCircuits) {
+					//        foreach (HithermCompactRegister hcr in hcc.Registers){
+					//            if (hcr.IsParapet) {
+					//                removeRegisters.Add(hcr);
+					//            }
+					//        }
+					//    }
+					//    foreach (HithermCompactRegister hcr in removeRegisters) {
+					//        (this.product.Product as HithermCompactProduct).RemoveRegisterFromCircuit(hcr);
+					//    }
+					//}
 					(this.product.Product as HithermCompactProduct).HithermCompactType = (Product.ProductType)this.cmbType.SelectedItem;
 					if ((this.product.Product as HithermCompactProduct).HithermCompactType == Product.ProductType.FBH) {
 						(this.product.Product as HithermCompactProduct).PlannedFloorArea = this.product.Product.AvailableFloorArea;

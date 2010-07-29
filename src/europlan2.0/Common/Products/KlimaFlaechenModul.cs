@@ -7,7 +7,8 @@ using System.Threading;
 
 namespace Europlan.Common {
 	public class KlimaFlaechenModul {
-		private static double module_100_40_heatarea = 1.0 * (0.4 + 0.03 * 2);
+		private static double module_100_40_floor_heatarea = 1.0 * 0.4;
+		private static double module_100_40_roof_heatarea = 1.0 * (0.4 + 0.03 * 2);
 		private static double module_100_30_heatarea = 1.0 * (0.3 + 0.03 * 2);
 		private static double module_120_30_heatarea = 1.2 * (0.3 + 0.03 * 2);
 		private static double module_80_30_heatarea = 0.8 * (0.3 + 0.03 * 2);
@@ -18,7 +19,8 @@ namespace Europlan.Common {
 		private static double module_120_30_area = 1.2 * 0.3;
 		private static double module_80_30_area = 0.8 * 0.3;
 		private static double module_60_60_area = 0.6 * 0.6;*/
-		private static double module_100_40_area = module_100_40_heatarea;
+		private static double module_100_40_floor_area = module_100_40_floor_heatarea;
+		private static double module_100_40_roof_area = module_100_40_roof_heatarea;
 		private static double module_100_30_area = module_100_30_heatarea;
 		private static double module_120_30_area = module_120_30_heatarea;
 		private static double module_80_30_area = module_80_30_heatarea;
@@ -269,12 +271,12 @@ namespace Europlan.Common {
 			set { this.origin = value; }
 		}*/
 
-		[XmlIgnore]
-		public double HeatArea {
-			get {
+		//[XmlIgnore]
+		public double GetHeatArea(bool floor) {
+			//get {
 				switch (this.modulType) {
 					case ModulTypeEnum.MODUL_100_40:
-						return KlimaFlaechenModul.module_100_40_heatarea;
+						return floor ? KlimaFlaechenModul.module_100_40_floor_heatarea : KlimaFlaechenModul.module_100_40_roof_heatarea;
 
 					case ModulTypeEnum.MODUL_80_30:
 						return KlimaFlaechenModul.module_80_30_heatarea;
@@ -291,15 +293,15 @@ namespace Europlan.Common {
 					default:
 						return 0;
 				}
+			//}
 			}
-		}
 
-		[XmlIgnore]
-		public double CoveredArea {
-			get {
+		//[XmlIgnore]
+		public double GetCoveredArea(bool floor) {
+			//get {
 				switch (this.modulType) {
 					case ModulTypeEnum.MODUL_100_40:
-						return KlimaFlaechenModul.module_100_40_area;
+						return floor ? KlimaFlaechenModul.module_100_40_floor_area : KlimaFlaechenModul.module_100_40_roof_area;
 
 					case ModulTypeEnum.MODUL_80_30:
 						return KlimaFlaechenModul.module_80_30_area;
@@ -316,8 +318,8 @@ namespace Europlan.Common {
 					default:
 						return 0;
 				}
+			//}
 			}
-		}
 
 		public double Druckverlust(double massenstrom) {
 			switch (this.modulType) {

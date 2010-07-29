@@ -23,6 +23,7 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlannedEurovalProductPanel));
 			this.grpPowerArea = new System.Windows.Forms.GroupBox();
 			this.lblAreaUnheated = new System.Windows.Forms.Label();
 			this.numAreaUnheated = new Europlan.Common.NumericBox();
@@ -173,6 +174,8 @@ namespace Europlan.Common {
 			this.pageCorrections = new System.Windows.Forms.TabPage();
 			this.extendedCorrectionsGrid = new Europlan.Common.ExtendedCorrectionsGrid();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblTitle = new System.Windows.Forms.Label();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -187,6 +190,7 @@ namespace Europlan.Common {
 			this.groupBox8.SuspendLayout();
 			this.grpResults.SuspendLayout();
 			this.pageCorrections.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// grpPowerArea
@@ -815,10 +819,9 @@ namespace Europlan.Common {
 			this.tabs.Controls.Add(this.pageCircuit);
 			this.tabs.Controls.Add(this.pageConstruction);
 			this.tabs.Controls.Add(this.pageCorrections);
-			this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.helpProvider.SetHelpKeyword(this.tabs, "html\\euro9vfz.htm");
 			this.helpProvider.SetHelpNavigator(this.tabs, System.Windows.Forms.HelpNavigator.Topic);
-			this.tabs.Location = new System.Drawing.Point(0, 0);
+            this.tabs.Location = new System.Drawing.Point(0, 38);
 			this.tabs.Name = "tabs";
 			this.tabs.SelectedIndex = 0;
 			this.helpProvider.SetShowHelp(this.tabs, true);
@@ -1986,10 +1989,33 @@ namespace Europlan.Common {
 			// 
 			this.helpProvider.HelpNamespace = "europlan.chm";
 			// 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 82;
+            this.pictureBox1.TabStop = false;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(34, 5);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(96, 24);
+            this.lblTitle.TabIndex = 81;
+            this.lblTitle.Text = "Euroval®";
+            // 
 			// PlannedEurovalProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lblTitle);
 			this.Controls.Add(this.tabs);
 			this.Name = "PlannedEurovalProductPanel";
 			this.Size = new System.Drawing.Size(864, 528);
@@ -2012,7 +2038,9 @@ namespace Europlan.Common {
 			this.groupBox8.PerformLayout();
 			this.grpResults.ResumeLayout(false);
 			this.pageCorrections.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 
@@ -2168,5 +2196,7 @@ namespace Europlan.Common {
         private System.Windows.Forms.Label lblCircuitCount;
         private System.Windows.Forms.Label lblRimVa;
         private System.Windows.Forms.Label lblResidenceVa;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblTitle;
 	}
 }

@@ -187,6 +187,14 @@ namespace Europlan.Common {
 
 		}
 
+		public override string ImageKey {
+            get { return "Fuﬂbodenheizung.png"; }
+		}
+
+		public override string SelectedImageKey {
+            get { return "Fuﬂbodenheizung.png"; }
+		}
+
 		public override void Initialize() {
 		}
 

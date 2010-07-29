@@ -89,6 +89,17 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public float PricePerUnit {
+			get {
+				if (Denomination.HasValue && Project.Instance.Config.MaterialIdsWithPricePerPackage.Contains(Id)) {
+					return Price / (float)Denomination.Value;
+				} else {
+					return Price;
+				}
+			}
+		}
+
+		[XmlIgnore]
 		public string DiscountGroup {
 			get { return this.discountGroup; }
 			set { this.discountGroup = value; }

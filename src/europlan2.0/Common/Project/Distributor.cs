@@ -166,6 +166,8 @@ namespace Europlan.Common {
 			useForFloor = true;
 			useForWall = true;
 			useForCeiling = true;
+            distributorNode.ImageKey = "Verteiler.png";
+            distributorNode.SelectedImageKey = "Verteiler.png";
 		}
 
 		public string Id {
@@ -329,12 +331,6 @@ namespace Europlan.Common {
 		public Type AssociatedPanelType {
 			get {
 				return typeof(DistributorPanel);
-			}
-		}
-
-		public System.Drawing.Icon AssociatedIcon {
-			get {
-				return null;
 			}
 		}
 

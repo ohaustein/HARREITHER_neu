@@ -135,4 +135,27 @@
   <metadata name="hithermRegisterBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADmUlEQVRYR7WX2UuUURiH/QvC
+        NlrEtChaDAqCuuhCaSFop4uiopsKDSIbLyLKsNCiqwiCoqKaUjOcIqNCw8Qxl3HBSlNLK5fGtE0bx1mc
+        UfPXeeebc76ZcaxztA48+H1zlvc575xljIiYYElMTDQy8hiRExxKvTsLepEBP3nqI0ygBwt6JiA4lzgz
+        gSHlulKqGWYe3Gg0ggjMxH/7OtjACQwbBTMYDLBYLOCFngMkXrPnWLkpSbYKTHlGRgasVqsIzh/oMxLz
+        i5BoguTwYzcLl3KXyzUqOP+A6kgwIBuGcUv8KeVjGvgrQtYFbVW1bRqU8tOHwqb8bxLZTwrV18WolF/a
+        DlfjcuDbqb/FC6p/axtGcfcg7lmacDj5qNy6CEp58n5YTGuAxqUaXalKAo1MoLBr0Ede01ccT0v/87oI
+        SnnqXljLV7FZZwKOGqD9pFJw3rj+55Dol99qx/krtwIltHVB+zX0YHHVLgMa2Kz7WHAqX/LGJfDJ+Uv0
+        K/isZaOoqEhIpKSktJOA72Chv6WlpTZfj5olGr3V2gDPFgH2d0oSbY5fMHV4RZ8nnV7kf9beW1paxHlB
+        AtwoltWZfS1eLNZ4uFCnbJ+SQG6HB1ltOo+sXhC89PT0+OIGCojUoIDNmMheoGFaAQzalQR6vSPIZAI3
+        PmqYPnl9hF5g4QX4zBuM7PuvAroZ4yhdbn0N3G71ILvdM1og8JjkdshisyY6/YGzNgMetQx4hkdwm2WA
+        l6sfPLjJMiFi+CuCjmlReW0+QJydq3N9o1IOrrFg6Y1uweX3AyDkBC7OA4gTMTqv7isJvPw5jBNv3IIL
+        zQMg5ATOsZkTJTeBj5VAtVpwblrTqx9EaQ1unG1ySwqcZDuSaPb/4CgzKc2eNy7/oQscq3chlWVELgNH
+        5wDErigdc66SRMn3IeypcgpSXrtAhAiYwy/Cg9EAsWmWzpF1SgKGOhe2VTgESbVOEHICu9nMiQfXgboK
+        4MBadimpbUPn0AiSXjqF9M5KJ/ZVywpsmQ0QtSw4la7Rv/9k0tE9oB9Em8od2GFxSGZgzUyAqC7X4mxN
+        YJdRn0xM0eZt/zBWFfeL9/iSfmwokxVYOQMgoqbqrI9XEogrtCM6v0+w2twPQm4NxE0HiEmTdXJylARy
+        2M0X+dgmWPbcDiJEwBh+F8SwmRO83LmrFJw3zmS3Hy/znvWBCBEI/ldOVE6bAhD/sEx/agMhJRB6Z/+P
+        d57636mE7LJ6frzxAAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

@@ -11,10 +11,6 @@ namespace Europlan.Common {
 			get;
 		}
 
-		Icon AssociatedIcon {
-			get;
 		}
-
-	}
 
 }

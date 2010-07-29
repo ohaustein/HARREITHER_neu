@@ -27,6 +27,7 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegulatorCircuitsSummaryPanel));
 			this.gridRegulatoryCircuits = new System.Windows.Forms.DataGridView();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,8 +37,10 @@ namespace Europlan.Common {
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnNext = new System.Windows.Forms.Button();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridRegulatoryCircuits
@@ -63,10 +66,10 @@ namespace Europlan.Common {
             this.coolFlowTemperatureDataGridViewTextBoxColumn});
 			this.gridRegulatoryCircuits.DataMember = "RegulatorCircuits";
 			this.gridRegulatoryCircuits.DataSource = this.regulatoryCircuitsSource;
-			this.gridRegulatoryCircuits.Location = new System.Drawing.Point(3, 27);
+            this.gridRegulatoryCircuits.Location = new System.Drawing.Point(3, 34);
 			this.gridRegulatoryCircuits.MultiSelect = false;
 			this.gridRegulatoryCircuits.Name = "gridRegulatoryCircuits";
-			this.gridRegulatoryCircuits.Size = new System.Drawing.Size(756, 453);
+            this.gridRegulatoryCircuits.Size = new System.Drawing.Size(756, 449);
 			this.gridRegulatoryCircuits.TabIndex = 0;
 			this.gridRegulatoryCircuits.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.regulatoryCircuitsGrid_CellValueChanged);
 			this.gridRegulatoryCircuits.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridRegulatoryCircuits_UserDeletingRow);
@@ -125,7 +128,7 @@ namespace Europlan.Common {
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(37, 4);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(121, 24);
 			this.label1.TabIndex = 3;
@@ -134,7 +137,7 @@ namespace Europlan.Common {
 			// btnNext
 			// 
 			this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnNext.Location = new System.Drawing.Point(684, 486);
+            this.btnNext.Location = new System.Drawing.Point(684, 485);
 			this.btnNext.Name = "btnNext";
 			this.btnNext.Size = new System.Drawing.Size(75, 23);
 			this.btnNext.TabIndex = 31;
@@ -146,10 +149,22 @@ namespace Europlan.Common {
 			// 
 			this.helpProvider.HelpNamespace = "europlan.chm";
 			// 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(3, 0);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 78;
+            this.pictureBox1.TabStop = false;
+            // 
 			// RegulatorCircuitsSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.btnNext);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.gridRegulatoryCircuits);
@@ -160,6 +175,7 @@ namespace Europlan.Common {
 			this.Size = new System.Drawing.Size(762, 509);
 			((System.ComponentModel.ISupportInitialize)(this.gridRegulatoryCircuits)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.regulatoryCircuitsSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -176,5 +192,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnNext;
 		private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }

@@ -95,8 +95,8 @@ namespace Europlan.Common {
 
 		public double Price {
 			get {
-				if (RecommendedAmount.HasValue && RecommendedAmount.Value > 0 && material.Denomination.HasValue && material.Denomination.Value > 0) {
-					return material.Price * (RecommendedAmount.Value / material.Denomination.Value);
+				if (RequiredAmount.HasValue && RequiredAmount.Value > 0 && material.Denomination.HasValue && material.Denomination.Value > 0) {
+					return material.PricePerUnit * RequiredAmount.Value;
 				} else {
 					return 0.0;
 				}

@@ -126,4 +126,14 @@
   <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>177, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAeUlEQVRYR+2WQQpAIQhEPa13
+        8hxuvZufAoMWH5SMNiO4M2d8YEiUDGb2G5mUJ7ohPnqWDXhTqOokCgMg8J5Adb1ExLtybkHFgJm1iY8h
+        NgOn6x1Usn3WPxAEsg//6mAABEAABEAABEAABEDgmEDlOO2sLV3FncLR6wOAl8J3ZzXJTgAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
 </root>

@@ -69,7 +69,7 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double HeatArea {
-			get { return row.HeatArea + 0.02 * this.sonstigeVerbindeleitung; }
+			get { return row.GetHeatArea(true) + 0.02 * this.sonstigeVerbindeleitung; }
 		}
 
 		[XmlIgnore]
@@ -84,7 +84,7 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double CoveredArea {
-			get { return row.CoveredArea + this.langeFittinge * 0.15 + 0.055 * this.sonstigeVerbindeleitung; }
+			get { return row.GetCoveredArea(true) + this.langeFittinge * 0.15 + 0.055 * this.sonstigeVerbindeleitung; }
 		}
 
 		//private double areaTotal;
@@ -153,7 +153,7 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public override double PipeLengthWithoutConnections {
-			get { return row.EquivalentPipeLength; }
+			get { return row.GetEquivalentPipeLength(true); }
 		}
 
 		[XmlIgnore]

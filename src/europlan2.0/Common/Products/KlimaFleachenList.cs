@@ -28,33 +28,33 @@ namespace Europlan.Common {
 			return druckverlust;
 		}
 
-		[XmlIgnore]
-		public double HeatArea {
-			get {
+		//[XmlIgnore]
+		public double GetHeatArea(bool floor) {
+			//get {
 				double area = 0;
 				foreach (KlimaFlaechenModul modul in this.list) {
-					area += modul.HeatArea;
+					area += modul.GetHeatArea(floor);
 				}
 				return area;
+			//}
 			}
-		}
 
-		[XmlIgnore]
-		public double CoveredArea {
-			get {
+		//[XmlIgnore]
+		public double GetCoveredArea(bool floor) {
+			//get {
 				double area = 0;
 				foreach (KlimaFlaechenModul modul in this.list) {
-					area += modul.CoveredArea;
+					area += modul.GetCoveredArea(floor);
 				}
 				return area;
+			//}
 			}
-		}
 
-		[XmlIgnore]
-		public double EquivalentPipeLength {
-			get {
-				return HeatArea * 10 + lengthVerbindeleitungen;
+		//[XmlIgnore]
+		public double GetEquivalentPipeLength(bool floor) {
+			//get {
+				return GetHeatArea(floor) * 10 + lengthVerbindeleitungen;
+			//}
 			}
 		}
-	}
 }

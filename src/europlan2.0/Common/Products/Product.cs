@@ -227,6 +227,14 @@ namespace Europlan.Common {
 		public abstract int GetDefaultQuickDimensioningCircuits();
 		public abstract float GetDefaultQuickDimensioningPlannedArea();
 
+		public abstract string ImageKey {
+			get;
+		}
+
+		public abstract string SelectedImageKey {
+			get;
+		}
+
 		#region Quick Dimensioning
 		public abstract bool QuickDimensioningCanHeat {
 			get;

@@ -6,16 +6,18 @@ using System.IO;
 using log4net;
 using System.Reflection;
 using System.Globalization;
+using System.Collections;
 
 namespace Europlan.Common {
 
 	[XmlRootAttribute("Configuration")]
+	[XmlInclude(typeof(string))]
 	public class Configuration {
 
 		private static Configuration adminTemplate = null;
 		private static Configuration userTemplate = null;
 		private static readonly object padlock = new object();
-		private static string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
+		//private static string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(Configuration));
 
@@ -32,7 +34,7 @@ namespace Europlan.Common {
 		private SerializableDictionary<string, string> materialToCategoryMapping;
 		private Dictionary<string, float> discounts;
 		private List<RoomType> roomTypes;
-
+		private List<string> materialIdsWithPricePerPackage;
 		private SerializableDictionary<string, SerializableDictionary<string, string>> productConfiguration = new SerializableDictionary<string, SerializableDictionary<string,string>>();
 
 
@@ -116,6 +118,7 @@ namespace Europlan.Common {
 			this.materialToCategoryMapping = new SerializableDictionary<string, string>();
 			this.discounts = new Dictionary<string, float>();
 			this.roomTypes = new List<RoomType>();
+			this.materialIdsWithPricePerPackage = new List<string>();
 
 			this.partnerLogo = "";
 
@@ -123,7 +126,7 @@ namespace Europlan.Common {
 				allMaterials = new List<Material>();
 				StreamReader sr = null;
 				try {
-					sr = new StreamReader(Path.Combine(appDataPath, "BruttoPreise.csv"), System.Text.Encoding.Default);
+					sr = new StreamReader(Path.Combine(PathUtil.DataPath, "BruttoPreise.csv"), System.Text.Encoding.Default);
 					string line;
 					// ignore the first line (only header)
 					line = sr.ReadLine();
@@ -308,6 +311,18 @@ namespace Europlan.Common {
 				}
 			}
 
+			foreach (String materialId in first.materialIdsWithPricePerPackage) {
+				if (!config.materialIdsWithPricePerPackage.Contains(materialId)) {
+					config.materialIdsWithPricePerPackage.Add(materialId);
+				}
+			}
+
+			foreach (String materialId in second.materialIdsWithPricePerPackage) {
+				if (!config.materialIdsWithPricePerPackage.Contains(materialId)) {
+					config.materialIdsWithPricePerPackage.Add(materialId);
+				}
+			}
+
 			config.type = second.type;			 
 
 			return config;
@@ -323,7 +338,7 @@ namespace Europlan.Common {
 						try {
 							if (adminTemplate == null) {
 								XmlSerializer s = new XmlSerializer(typeof(Configuration));
-								Stream r = new FileStream(Path.Combine(appDataPath, "global.conf"), FileMode.Open);
+								Stream r = new FileStream(Path.Combine(PathUtil.DataPath, "global.conf"), FileMode.Open);
 								adminTemplate = (Configuration)s.Deserialize(r);
 								r.Close();
 							}
@@ -359,7 +374,7 @@ namespace Europlan.Common {
 						try {
 							if (userTemplate == null) {
 								XmlSerializer s = new XmlSerializer(typeof(Configuration));
-								Stream r = new FileStream(Path.Combine(appDataPath, "custom.conf"), FileMode.Open);
+								Stream r = new FileStream(Path.Combine(PathUtil.DataPath, "custom.conf"), FileMode.Open);
 								userTemplate = AdminTemplate + (Configuration)s.Deserialize(r);
 								r.Close();
 							}
@@ -435,6 +450,41 @@ namespace Europlan.Common {
 				this.materials = value;
 			}
 		}
+
+		[XmlArray("PricePerPackage")]
+		[XmlArrayItem("MaterialId")]
+		public List<string> MaterialIdsWithPricePerPackage {
+			get {
+				return this.materialIdsWithPricePerPackage;
+			}
+			set {
+				this.materialIdsWithPricePerPackage = value;
+			}
+		}
+
+		/*[XmlArray("PricePerPackage")]
+		[XmlArrayItem("blub")]
+		public List<string> SerializableMaterialIdsWithPricePerPackage {
+			get {
+				if (this.type == ConfigurationType.AdminConfiguration) {
+					List<string> materialIds = new List<string>();
+					foreach (String materialId in this.materialIdsWithPricePerPackage.Keys) {
+						materialIds.Add(materialId);
+					}
+					return materialIds;
+				} else {
+					return null;
+				}
+			}
+			set {
+				this.materialIdsWithPricePerPackage = new Hashtable();
+				if (value != null) {
+					foreach (string materialId in value) {
+						this.materialIdsWithPricePerPackage.Add(materialId, null);
+					}
+				}
+			}
+		}*/
 
 		[XmlIgnore]
 		public List<Category> Categories {
@@ -697,9 +747,9 @@ namespace Europlan.Common {
 				XmlSerializer s = new XmlSerializer(typeof(Configuration));
 				string filename = "";
 				if (this.type == ConfigurationType.AdminConfiguration) {
-					filename = Path.Combine(appDataPath, "global.conf");
+					filename = Path.Combine(PathUtil.DataPath, "global.conf");
 				} else if (this.type == ConfigurationType.UserConfiguration) {
-					filename = Path.Combine(appDataPath, "custom.conf");
+					filename = Path.Combine(PathUtil.DataPath, "custom.conf");
 				} else {
 					log.Error("Save() has been called for configuration type which is not supported: " + this.type);
 					return;
@@ -750,6 +800,7 @@ namespace Europlan.Common {
 				if (this.type == ConfigurationType.UserConfiguration) {
 					return new SerializableDictionary<string, SerializableDictionary<string, string>>();
 				}
+				this.productConfiguration.Clear();
 				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
 				foreach (Type t in types) {
 					if (typeof(Product).IsAssignableFrom(t)) {

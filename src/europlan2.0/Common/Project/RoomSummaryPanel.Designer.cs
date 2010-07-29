@@ -29,6 +29,7 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RoomSummaryPanel));
 			this.txtName = new System.Windows.Forms.TextBox();
 			this.lblName = new System.Windows.Forms.Label();
 			this.lblArea = new System.Windows.Forms.Label();
@@ -62,18 +63,20 @@ namespace Europlan.Common {
 			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.plannedProductWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnAdd = new System.Windows.Forms.Button();
+            this.btnWhatIsNext = new System.Windows.Forms.Button();
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.txtNormCool = new Europlan.Common.NumericBox();
 			this.txtCool = new Europlan.Common.NumericBox();
 			this.txtNormHeat = new Europlan.Common.NumericBox();
 			this.txtHeat = new Europlan.Common.NumericBox();
 			this.txtTemperature = new Europlan.Common.NumericBox();
 			this.txtArea = new Europlan.Common.NumericBox();
-			this.btnWhatIsNext = new System.Windows.Forms.Button();
-			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.grpBoxSummary.SuspendLayout();
 			this.grpBoxSystems.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.plannedProductWrapperBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// txtName
@@ -230,7 +233,7 @@ namespace Europlan.Common {
 			this.grpBoxSummary.Controls.Add(this.lblArea);
 			this.grpBoxSummary.Controls.Add(this.lblHeat);
 			this.grpBoxSummary.Controls.Add(this.lblCool);
-			this.grpBoxSummary.Location = new System.Drawing.Point(3, 25);
+            this.grpBoxSummary.Location = new System.Drawing.Point(3, 27);
 			this.grpBoxSummary.Name = "grpBoxSummary";
 			this.grpBoxSummary.Size = new System.Drawing.Size(577, 63);
 			this.grpBoxSummary.TabIndex = 39;
@@ -264,7 +267,7 @@ namespace Europlan.Common {
 			// 
 			this.lblRoomName.AutoSize = true;
 			this.lblRoomName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblRoomName.Location = new System.Drawing.Point(131, 0);
+            this.lblRoomName.Location = new System.Drawing.Point(161, 5);
 			this.lblRoomName.Name = "lblRoomName";
 			this.lblRoomName.Size = new System.Drawing.Size(0, 24);
 			this.lblRoomName.TabIndex = 41;
@@ -273,7 +276,7 @@ namespace Europlan.Common {
 			// 
 			this.lblRoomData.AutoSize = true;
 			this.lblRoomData.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblRoomData.Location = new System.Drawing.Point(3, 0);
+            this.lblRoomData.Location = new System.Drawing.Point(38, 5);
 			this.lblRoomData.Name = "lblRoomData";
 			this.lblRoomData.Size = new System.Drawing.Size(122, 24);
 			this.lblRoomData.TabIndex = 40;
@@ -447,6 +450,32 @@ namespace Europlan.Common {
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
+            // btnWhatIsNext
+            // 
+            this.btnWhatIsNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnWhatIsNext.Location = new System.Drawing.Point(627, 389);
+            this.btnWhatIsNext.Name = "btnWhatIsNext";
+            this.btnWhatIsNext.Size = new System.Drawing.Size(109, 23);
+            this.btnWhatIsNext.TabIndex = 23;
+            this.btnWhatIsNext.Text = "Wie geht\'s weiter?";
+            this.btnWhatIsNext.UseVisualStyleBackColor = true;
+            this.btnWhatIsNext.Click += new System.EventHandler(this.btnWhatIsNext_Click);
+            // 
+            // helpProvider
+            // 
+            this.helpProvider.HelpNamespace = "europlan.chm";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(4, 0);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 78;
+            this.pictureBox1.TabStop = false;
+            // 
 			// txtNormCool
 			// 
 			this.txtNormCool.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -637,25 +666,11 @@ namespace Europlan.Common {
 			this.txtArea.Visible = false;
 			this.txtArea.ValueChanged += new System.EventHandler(this.txtArea_TextChanged);
 			// 
-			// btnWhatIsNext
-			// 
-			this.btnWhatIsNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnWhatIsNext.Location = new System.Drawing.Point(627, 389);
-			this.btnWhatIsNext.Name = "btnWhatIsNext";
-			this.btnWhatIsNext.Size = new System.Drawing.Size(109, 23);
-			this.btnWhatIsNext.TabIndex = 23;
-			this.btnWhatIsNext.Text = "Wie geht\'s weiter?";
-			this.btnWhatIsNext.UseVisualStyleBackColor = true;
-			this.btnWhatIsNext.Click += new System.EventHandler(this.btnWhatIsNext_Click);
-			// 
-			// helpProvider
-			// 
-			this.helpProvider.HelpNamespace = "europlan.chm";
-			// 
 			// RoomSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.btnWhatIsNext);
 			this.Controls.Add(this.grpBoxSystems);
 			this.Controls.Add(this.lblRoomName);
@@ -687,6 +702,7 @@ namespace Europlan.Common {
 			this.grpBoxSystems.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.plannedProductWrapperBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -735,5 +751,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPlannedCoolLoad;
 		private System.Windows.Forms.DataGridViewButtonColumn colEdit;
 		private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }

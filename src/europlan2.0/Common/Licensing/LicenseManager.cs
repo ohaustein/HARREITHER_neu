@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using log4net;
+using Europlan.Common;
 
 namespace Europlan.Licensing {
 	public class LicenseManager {
@@ -42,7 +43,7 @@ namespace Europlan.Licensing {
 				EncryptionManager.Instance.Key = "<RSAKeyValue><Modulus>16CcCS56V1YIkjht12jOg5G2597D2lv+AwKMAKvueYpT2X5iE42yuKm/DFDhEIeyGckKe+Edz/T4OtpIq+5oTQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
 			}
 			
-			this.dataDirPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
+			this.dataDirPath = PathUtil.DataPath;
 			//this.dataDirPath = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath), "data");
 			string licensePath = Path.Combine(this.dataDirPath, licenseFileName);
 			if (File.Exists(licensePath)) {

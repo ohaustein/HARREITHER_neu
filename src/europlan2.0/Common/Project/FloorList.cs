@@ -9,11 +9,6 @@ namespace Europlan.Common {
 			get { return typeof(FloorListSummaryPanel); }
 		}
 
-		public System.Drawing.Icon AssociatedIcon {
-			get { return null; }
-		}
-
-
 		public bool SupportsCut {
 			get { return false; }
 		}

@@ -184,6 +184,7 @@ namespace Europlan.Application {
 			this.megFloor.Admin = false;
 			this.megFloor.AllowToAdd = false;
 			resources.ApplyResources(this.megFloor, "megFloor");
+			this.megFloor.Filter = Europlan.Common.CategoryType.Floor;
 			this.megFloor.Name = "megFloor";
 			this.megFloor.ShowOnlyAdditional = false;
 			// 
@@ -199,6 +200,7 @@ namespace Europlan.Application {
 			this.megWall.Admin = false;
 			this.megWall.AllowToAdd = false;
 			resources.ApplyResources(this.megWall, "megWall");
+			this.megWall.Filter = Europlan.Common.CategoryType.Wall;
 			this.megWall.Name = "megWall";
 			this.megWall.ShowOnlyAdditional = false;
 			// 
@@ -214,6 +216,7 @@ namespace Europlan.Application {
 			this.megCeiling.Admin = false;
 			this.megCeiling.AllowToAdd = false;
 			resources.ApplyResources(this.megCeiling, "megCeiling");
+			this.megCeiling.Filter = Europlan.Common.CategoryType.Ceiling;
 			this.megCeiling.Name = "megCeiling";
 			this.megCeiling.ShowOnlyAdditional = false;
 			// 
@@ -229,6 +232,7 @@ namespace Europlan.Application {
 			this.megDistributor.Admin = false;
 			this.megDistributor.AllowToAdd = false;
 			resources.ApplyResources(this.megDistributor, "megDistributor");
+			this.megDistributor.Filter = Europlan.Common.CategoryType.Distributor;
 			this.megDistributor.Name = "megDistributor";
 			this.megDistributor.ShowOnlyAdditional = false;
 			// 
@@ -244,6 +248,7 @@ namespace Europlan.Application {
 			this.megInsulation.Admin = false;
 			this.megInsulation.AllowToAdd = true;
 			resources.ApplyResources(this.megInsulation, "megInsulation");
+			this.megInsulation.Filter = Europlan.Common.CategoryType.Insulation;
 			this.megInsulation.Name = "megInsulation";
 			this.megInsulation.ShowOnlyAdditional = false;
 			// 
@@ -259,6 +264,7 @@ namespace Europlan.Application {
 			this.megGeneral.Admin = false;
 			this.megGeneral.AllowToAdd = true;
 			resources.ApplyResources(this.megGeneral, "megGeneral");
+			this.megGeneral.Filter = Europlan.Common.CategoryType.General;
 			this.megGeneral.Name = "megGeneral";
 			this.megGeneral.ShowOnlyAdditional = false;
 			// 

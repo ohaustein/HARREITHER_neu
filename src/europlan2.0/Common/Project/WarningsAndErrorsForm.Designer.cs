@@ -23,11 +23,14 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("fsdafasdfdas");
 			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("fdas");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WarningsAndErrorsForm));
 			this.btnClose = new System.Windows.Forms.Button();
 			this.lstErrors = new System.Windows.Forms.ListView();
 			this.columnText = new System.Windows.Forms.ColumnHeader();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.SuspendLayout();
 			// 
 			// btnClose
@@ -59,6 +62,7 @@ namespace Europlan.Common {
 			this.lstErrors.Name = "lstErrors";
 			this.lstErrors.ShowGroups = false;
 			this.lstErrors.Size = new System.Drawing.Size(683, 341);
+            this.lstErrors.SmallImageList = this.imageList;
 			this.lstErrors.TabIndex = 1;
 			this.lstErrors.UseCompatibleStateImageBehavior = false;
 			this.lstErrors.View = System.Windows.Forms.View.Details;
@@ -67,6 +71,13 @@ namespace Europlan.Common {
 			// 
 			this.columnText.Text = "";
 			// 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "error.png");
+            this.imageList.Images.SetKeyName(1, "warning.png");
+            // 
 			// WarningsAndErrorsForm
 			// 
 			this.AcceptButton = this.btnClose;
@@ -90,5 +101,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnClose;
 		private System.Windows.Forms.ListView lstErrors;
 		private System.Windows.Forms.ColumnHeader columnText;
+		private System.Windows.Forms.ImageList imageList;
 	}
 }

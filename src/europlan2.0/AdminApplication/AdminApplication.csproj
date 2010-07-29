@@ -9,6 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Europlan.AdminApplication</RootNamespace>
     <AssemblyName>EuroplanAdmin</AssemblyName>
+    <ApplicationIcon>Harreither.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -143,6 +144,9 @@
       <Project>{849BE2F8-4D35-43DA-A075-FD8672B8A687}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Harreither.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ContructionEditor\" />

@@ -4355,6 +4355,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anschl. Dim..
+        /// </summary>
+        internal static string LL_Report_AnschlussDimensionierung {
+            get {
+                return ResourceManager.GetString("LL_Report_AnschlussDimensionierung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Anteil.
         /// </summary>
         internal static string LL_Report_AnteilHeiz {
@@ -10328,6 +10337,51 @@ namespace Europlan.Common {
         internal static string ProjectReport_Hinweis {
             get {
                 return ResourceManager.GetString("ProjectReport_Hinweis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HISAN® Ø32.
+        /// </summary>
+        internal static string ProjectReport_HISAN32 {
+            get {
+                return ResourceManager.GetString("ProjectReport_HISAN32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HISAN® Ø40.
+        /// </summary>
+        internal static string ProjectReport_HISAN40 {
+            get {
+                return ResourceManager.GetString("ProjectReport_HISAN40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HISAN® Ø50.
+        /// </summary>
+        internal static string ProjectReport_HISAN50 {
+            get {
+                return ResourceManager.GetString("ProjectReport_HISAN50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HISAN® Ø63.
+        /// </summary>
+        internal static string ProjectReport_HISAN63 {
+            get {
+                return ResourceManager.GetString("ProjectReport_HISAN63", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HISAN® Ø75.
+        /// </summary>
+        internal static string ProjectReport_HISAN75 {
+            get {
+                return ResourceManager.GetString("ProjectReport_HISAN75", resourceCulture);
             }
         }
         

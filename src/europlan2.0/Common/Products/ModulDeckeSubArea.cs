@@ -21,7 +21,7 @@ namespace Europlan.Common {
 		public double Druckverlust(double durchfluss) {
 			double druckverlust = 0;
 			foreach (KlimaFlaechenList row in this.rows) {
-				double rowDruckverlust = row.Druckverlust(durchfluss / this.HeatArea * row.HeatArea);
+				double rowDruckverlust = row.Druckverlust(durchfluss / this.HeatArea * row.GetHeatArea(false));
 				if (rowDruckverlust > druckverlust) {
 					druckverlust = rowDruckverlust;
 				}
@@ -33,7 +33,7 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (KlimaFlaechenList row in this.rows) {
-					area += row.CoveredArea;
+					area += row.GetCoveredArea(false);
 				}
 				return area;
 			}
@@ -43,7 +43,7 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (KlimaFlaechenList row in this.rows) {
-					area += row.HeatArea;
+					area += row.GetHeatArea(false);
 				}
 				return area;
 			}
@@ -53,7 +53,7 @@ namespace Europlan.Common {
 			get {
 				double length = 0;
 				foreach (KlimaFlaechenList row in rows) {
-					double rowLength = row.EquivalentPipeLength;
+					double rowLength = row.GetEquivalentPipeLength(false);
 					if (rowLength > length) {
 						length = rowLength;
 					}

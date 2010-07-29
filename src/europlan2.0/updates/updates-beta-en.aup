@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UpdateProject BuilderVersion="1.3.0.23" SchemaVersion="1.1" xmlns="http://www.kineticjump.com/AppLifeUpdate/ProjectSchema">
+	<Properties ApplicationID="d38bcedd-464a-4fc9-8263-fbf6e43a4cae" ApplicationName="Europlan 2.0" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;zx6ZJaMzPDozUcY5l0oq4y40M8qAyQobnURZXiVmsWxT5TnYa55yoxiZn9nftDpsPc0duQTgwVUag1sj9uxzWp3ANn1bQtgohH0tsm1+j4fxA3Y91ba/v7zSfNfa6To1wnNOHNeyy1O40Pt4eXQXnbzmTocs322J+luWZPC3Fbc=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;+RAzJe80/QlRddrhjGx9bY//F4HSqCBDqN0VGgFKW3Jkrc26bQADCCD+5ZElfj7lm5teiCCM1vxZtweRPN39Cw==&lt;/P&gt;&lt;Q&gt;1ONXzfGpvlZkQG7RCOqGbNH2jzF6DRTNnB5VnxV0fx73a43c2206dkPp+FcVrleDIMIjGVWGU4amPhqefKU9hQ==&lt;/Q&gt;&lt;DP&gt;6YvlSncKSxRHzKnYwiKhYvGaFGLqNDk8+MWHGgGHxkR4X/oADGHsddzq6D242K8GA2ontKJBLv8m6VgxOtA2jQ==&lt;/DP&gt;&lt;DQ&gt;WgPy+Yqoimm/JBt3WbzIsDSre2qhP+y+77dH3udUhffTCHBIpaNu59jZkn9IFJq+QFi2PJ0UGjdCDdp1jyDTfQ==&lt;/DQ&gt;&lt;InverseQ&gt;dqLDQGQNUsl+QAmwLCg4XeHkVrEsH+4XA02bgtCvWupqRmaW7EFCiPa4MzF3RxVecZOh9sBkDO+3OSBrwUaj4Q==&lt;/InverseQ&gt;&lt;D&gt;Vc54ZhZhsI7wGe3EiEAK2omWyOoZRrCwVgwt9goKrHCTpUC8v4EqPxV+97Gcsx8NHuFucetqbc4jKM5GbRLyipW0VlCjavxd2QSfCqxzXbOus2sLGs2Ptc4iRPiIDoIHKvwStHBxwVvi4iP1UUfwaJPrGPAGNkOCjZSKik1vZ1k=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\beta\en" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/beta/en" BuildLocation="updates-beta-en Updates" PublishVersion="2.0.32.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions\v2.0.32.0\europlan20-en.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
+	<CurrentSummary />
+	<CurrentCustomData />
+	<NoUpdateDisplayText />
+	<AssemblyReferences />
+	<CurrentTargets>
+		<Target number="0.0.0.0" includeAllGreater="false" />
+	</CurrentTargets>
+	<Director>
+		<AppLifeUpdate BuilderVersion="1.3.0.23" type="full" xmlns="http://www.kineticjump.com/AppLifeUpdate/DirectorSchema">
+			<Application AppId="d38bcedd-464a-4fc9-8263-fbf6e43a4cae" NoUpdateDisplayText="">
+				<Versions>
+					<Version number="2.0.32.0" postdate="2010-07-29T12:40:42.0135673Z" signature="axalWkr17/VBMBrZQjE4Pb2VCHGWiPulye896+fH/9rEjmOFFwHBwXm1E1jLBb9CK4EwN5IqlU0acfgyP5wrqYHwbGs56lQeRdS8MWZH/SOHf85jSTpEhDGCnYAfYYqFTgewME8nBcY7cSfzv8lVWm50RRB9FmcE6qmXZphe3x8=" fileSize="17505685">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.31.0" postdate="2010-07-14T13:56:54.374737Z" signature="l38naKZQb5wzcnZjqBjcIjq7VMXvvkUzxmPv6+5x/OpMmOlUg7eM3d3EY00LALoVxthMyK89kEmKY8DTxpdGTPuwtcIcGecJ6ByXam2a5jWKcTUHM9yNO5xuxP1uBEbiPHOeEBxFkNFksbgl7CIglrHLRjJHMTfrPnItg0fw88s=" fileSize="17525789">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.30.0" postdate="2010-07-12T16:14:45.4030028Z" signature="RR60lkdSSFJRJf2+o+PWMSfNGgjgI0vNix+CdwL7PW3rqLGiLtEPf+SF/V3CYBll+c433yLgBSmEFQf29aqFcuFooXHPttIQPFMB1u1fGZc4yfT7YCO33EdGcCmgmTZhCHuj5hyUPYk1iTRGdKZItLCDYIxHRA+8uRc+zM1iAMg=" fileSize="17529704">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.29.0" postdate="2010-07-05T12:47:17.2129127Z" signature="DCkfchBjkHpUvBTATDszBXRiqGIgCNrsp97yQhD8B2bG7XXZEHUJMWzgzkDgqYcEDbNs8aaf/qS1mBcb2u6004gLIb1I+ykFHWTwxR9UkdYDae12GE3hskKrcBsD8Je0yRB3iVGzr4kMfSr0+4oXm4zpN2FqcJzp1/+lva3dPqc=" fileSize="17248349">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.28.0" postdate="2010-06-01T16:27:22.795799Z" signature="xMvJSrYYLOY6T5kKPB+GhsfAsc8EffXumjsgpHsoU+8CsLSNQkC+i/0L0WVr68te89WB2ynBt83TZ0m1it23uKLdMfSMkn8XLQ/aVqYhRJx05wk8VDzzHDrziucyZTypeJakUWROh5UYy9OClCfvweKzwzXGiRh0WBBw2mPngfk=" fileSize="17242473">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.27.0" postdate="2010-05-25T14:56:19.1351601Z" signature="azG9AS8aKVbgHy1chV/KCr5jHt1P37V+nnx5MS3zg4LMhQ3NesR2HMsfguMRUqNdOUw497ef5LStNwq/lf/+O0hnuuZKwbUrcue0rEnkmFHOQ4W/b0dYPIiA24SophzpJCE40au6JdTWiNDcwfWzZivU7fzUy108eCZzL9BtTVY=" fileSize="17238084">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.26.0" postdate="2010-04-22T13:18:30.5768519Z" signature="DsMlRjyumsmpuhta6o8nzeyyDXG5Wa0j0siQtiWDIV0g3gB3E41AQ3hTTC3cjK537j6emO4Zw4Fz9Oiw6hYOZTSIjATlCgW/pImL0EPLmc/pt4obTktgNkX+2SSx3w44YO235rbL7LsemRBoAueT/C4KYgYbQ60XILWS7RyZwgI=" fileSize="17243472">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.25.0" postdate="2010-03-16T15:50:47.3301305Z" signature="oQDjNLYy7iMFAYZNxifd5vNF//JcjnUAf7Y01gTDHmp60xKVmvn2oZen92x4W92rBPaueOgBpXRLCR7JrH9gyTk916ySHxLVZ+VLzpkM8fvUohan3iFkeUGL3Z/I3JuNXJwHp52rEN7HiGuAUER+xz7jivwA7hF+RUpi6PYUDtA=" fileSize="17227425">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.24.0" postdate="2010-03-05T11:49:44.4056725Z" signature="H0Eh+K4gIGXTaS2aiKBRIbvXJwuZE9eWh99dYSd5BaKJpKrSHTUjxsyJJ3bCHFL1PDk1yo9E7+LS6IDM03ZPxJbEpFZqF2c3pgUN8pBJH2/xgdFn9rjku2s0LZ1BwU2uo8UxPpsEQF4k+iaJhHk9C7RqpQQfNw3eeU5ohC4UHI8=" fileSize="13995223">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.23.0" postdate="2010-02-12T14:26:37.8427638Z" signature="MfqHY0+VVngPmuqDRGMf16FQMEqOsCjR5ccXzd0BdJVfu/Fdv0azQoiLijBBGXvAmpYahUHDgAM+WIWzLJju2kEFW7FmCDgFJ/K7P9NbNOyG28lRcatoSWv1o/Z4Ylk5wKYB4MZfZ/33ADT9S3826fAd8Ngf0/5ceSjlSTkEm1U=" fileSize="13715758">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.22.0" postdate="2010-02-05T15:23:22.9204712Z" signature="kx4uF033whhg6xVY41YXQB/M6jQ+rpcDDIlT47/2qtwBVa2QmFXvCm2/y67PKFmdd4jzmnsJNeEgGxRzDJr9BKFbl9Wf0oOJNpj8g6YSM1KTSsNR4U0P4iw5qYE5Lc+BEu3A2Kke4YPpYBHFW5wVQp7u7u0xEBmlLV7Ij2BwfsA=" fileSize="13551224">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.21.0" postdate="2010-01-25T08:25:30.6505478Z" signature="vbVNrk8okNy8BARyI7ZkktVVFZycSOEx2G8os9wIXXm2NGX1KCN7rT5PaFb9ZuQYUOFf6Cs8lgWdLaoS70jZg4inbUAEpUuo7cY9klXX0QM2FduZHkN7sY7fYndlxYekWcVByDxSkkVQm/oZY/2uYfE4LkfQKQoOSQH4pFPpYqc=" fileSize="13469374">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.20.0" postdate="2010-01-21T15:14:41.7789238Z" signature="I7KTn5L15O5kL+W0fBVn7apAcUrl/Uctu931ly6rLEfF2tiDqxZGD7F3tTmVGscF66DFfkJAqlV0kSn7xj4Nl14f464yial3j+W4RGcOlEFjR0OtuXd8HoZJo+hdX+EJZInxacu0z+vLnJ/hMHQpdTJcGS4yDTr/AEyK90jgzjg=" fileSize="13469291">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.19.0" postdate="2009-12-23T14:18:50.381362Z" signature="gMF4d1vl8jiT3l53Xr0lfEtBBC7AV9LxF4dl5VMjpm+vQ50eBh1hbC2jibdwRZy4+RkSZf7lXAEDKn+1Ka/lGcq/F96n9btGIIqgphYfx61zdFeA8Kny+HG3n6osdrX2x+9lMlPUWWfl8qLPGE0GZ0lOOAA47XOPIC5AJdYz13U=" fileSize="13353952">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Hitherm Compact&#xD;
+Ecotherm</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.18.0" postdate="2009-12-14T16:14:05.0431079Z" signature="uYAF0frcDUIniwW9mir6dz7+zPoUUENTdnDSJjqy29BTdLpLsqib7HgBHuRcct5E9PpPsct67VYacOCiZ2rmoBiCQXmAsqibEpO4XUCpvdLTkn7OWXmbB+ukukWR6mnU/tOOzI22SfOLSAadyCHjh/GeOl5OyuTfewbx/sBaH3M=" fileSize="13257168">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.17.0" postdate="2009-12-07T16:36:18.47049Z" signature="shEqLe6LK85gSdVDlo3ANsZ21ehTTqMSw733yRxW18DHbYf5AGZJUah2fsPp+5II48O0A/OAHSXMoTJSF6dP984qPy0F9Z1VLnr5TjuaddIuyVVlgeEqNgQY6uve+6EVbUTfenzjlcun79QoOxRC0ahDn3WKh8uGbobaM58x7Cg=" fileSize="13186758">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.16.0" postdate="2009-12-01T13:52:52.1294075Z" signature="gfxMNEbte3UVzabcxdu9ubutZXcrsWvEy5yy1Jep3jjHUukv73avJBB8pjrushTVonjJ+SWb2Rlp9hORBU+XXUW73gz5EaMkVHjJjq14W0iS42nNm7LtYCt7/lbYo505PSKa5bNb8nS45sewsVnJgxv/R/EaSgebIYu2L1M+ZXg=" fileSize="13174339">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>New user interface for Klimadecke&#xD;
+Bugfix report</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.15.0" postdate="2009-11-23T16:02:31.2408982Z" signature="MTioZWpHVrtfyssb7ksbFy1i6vqz4MQSIHOpANb5pkJJmrHGdjpFDbSHpzPr78MPeElgA/MOuZMH+IFNwIuMyrNG3vf4p8zzLZiNfMpmvW6O1Jf9mNO04VrD4rwOmQzia2bSz3Q2Qezno87kJ2BTTe7usRkj21KoqLLdifrLBag=" fileSize="13129070">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>New user interface for Klimadecke&#xD;
+Bugfix report</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.14.0" postdate="2009-11-23T15:45:54.0611902Z" signature="jWp/2LGzDA9kQGbv7KHZlye1J0OoQVu48WTtk/X0i9CEtIiOSZi5Ect9AYVq0OFOT9JU7fsTCDvPIya+QkFoEl5a9j16P8zAHkGtu+S3roUaeRv+xgv0isuAT725a/AJEQC7+WWnjVEgETQ4+wCmOyfKpXNPwk8NA/RIuoTSXao=" fileSize="13128770">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.13.0" postdate="2009-11-18T18:16:01.5955472Z" signature="dH0VXruXClwQFT51t/jzPiXdR1MtmMTLbxmxGTVXKT7af8u9UC+oxzwCY85tfu/vpgClfu1l5cxYHlXsuPq4X+FZcnl+pmQGQvxkTpO4JeaRKtj17hvJ5PHUajSkSjqPeWPaSxC5ulv2D1wOf/T/Pk3ebNWTes4ijbFkI5Hbank=" fileSize="13073546">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.12.0" postdate="2009-11-06T11:07:44.8845209Z" signature="zHkwOmNqclFdPiofcxEMRmm+hsshnynOg/CtFTlEtlNNy6TtHzTyz4OEQdpuJm+CSaYTBQPMUgta4uiUTIhuTrrKtAorA/lyqiYSvGV9BGioxOAPUjI2VIfC4Cs/Q/cyLBg+byhf6HcHP+yMN7aaUL4UBaB/AyWg0nGds9xZEf8=" fileSize="13014503">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.11.0" postdate="2009-11-04T11:39:05.4475014Z" signature="WjV/AfjU/rGalh/ATyAoHteKYw43tD9K9xqfqk7PX53JdQMzl4v0HsmDoJ1XctWVg8gSjGHq65G+7KCTxMmE1F5A2fNJQInficReEheXE2i6xRck2MtDkxkcpWVoeKjdRRnaz8vx2cqeo5RDTPTC7/SkwYLP0NFTqvGzUL3RyV8=" fileSize="13003068">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.10.0" postdate="2009-10-27T17:19:51.3369282Z" signature="DabYd0yHDok4kdwzf2m2kF1q15bHFpk5xqdrbNviYOwgs0tD43pFL1ZGwDu242kcDAoIxM1kXIrqdiBK/gBr9ZuAT9tyhyHQTFpNqTDCJ/jUM3CoK/4QyIdwX/ygqGetL4DsWzSnXYP6iIGU9POSTsr2IFq/3HLYFJ0I8gdQMfc=" fileSize="20741266">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.9.0" postdate="2009-10-16T12:48:08.6037683Z" signature="QOetMIofl5ZByZGeQd4ZVDKEocBofitSUV5QunIDRT/M+zRwDA5KUnu48+7VYqpbOKL+JeV0f7fc5hFrDPZNRwh3bEkXuGpuihTC2dWuPC1nZ8aq9xPxap36ZsF9cQNABn8qqW+4dNOSjvnwq4RQsk22n20H9/T2wyngTLDQjes=" fileSize="20715695">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.8.0" postdate="2009-10-08T15:28:32.8823092Z" signature="Bp7t4Yp8ngIHV156OnpGv3vo6+vpz+5nwK3NJhxH0tDTnSOoq75cBtu3fOW5vdpFnqcytxJztie0XouFhNzdxMolp305PF2cIGn2syKVy61wyl4x0o0oRV6VEUOipx5DQzTI/axVj15+6i8FhG2ggqnkSd1wG4f1WhOjcnkp4nE=" fileSize="20686490">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.7.0" postdate="2009-09-28T20:43:10.9422419Z" signature="Mpu3dPIF+ard5Oe0W+bOWu/8nNn8ddpH9DvvaQru+uV+PhYWvb8Gy2UbhrDvkO5pWnawdJfN5o5aIZ2xVzVg50i8oX7+QmLpA59v3gpYoLCvdkygDP06588OiK+Ds9RPQbe2r4fE+rGzBuaqIqbPHjtJFDICSCm1CNtD9fVN1Kg=" fileSize="20671525">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.6.0" postdate="2009-09-02T07:08:02.1681633Z" signature="DOYDiEVgXVaJFIAG40ifR4Lp+K7tqlDHkHczMkMYykdKjw84gS7XR4Jh5ADdGtuKsIi0IAXwir6s0s6IG5uxWZo6vXDd8Am8wS4vZqa6TImElcOjT1ES3mZBphZBqZi5iM3FUW/3mlA4pTULdczHsWel9xNgbbWzi+i0D15lE1g=" fileSize="20639128">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.5.0" postdate="2009-09-01T14:17:41.081971Z" signature="WaUKdxdvQN3JcedsBiVB5im/QYmX7c3tYx0z1oc82qBvgmzC9Ad7THjTaCgTQvRqB2lwOeFXh/3w2rNS+Wj5neK+wW9uKfnnclqtIvx01ICB5khl6AMIUW6Swmmq2AugZ+/O1qjqqQzRKscUe+f0TI3OjbsTDjhLoB1p3+Bp+pQ=" fileSize="20639095">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.4.0" postdate="2009-07-15T14:24:48.8712956Z" signature="JZWoIwd7Enj0qeJH3Ma+usticrJmBOUVt0qE5SGiNl4DPdv8ArTIfROwvHtH3MvocdlE7YyWC95lVsFqu8pUv7XWVF3bqP+sUcgdjCTkOoyv4f/8Q/yYNZodaQs3MQBepX1S3JJMlqHX7HFD1YoycF0763oM6xiAKcgWZPBx4cI=" fileSize="20577404">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.3.0" postdate="2009-06-10T14:27:38.7761758Z" signature="zvfVLeS6seGn/HwEHSEZXnSo/VWPxkcfomT221fTMdABfd3JaUeo6SQ3IqnX1a0pKT4gAss4NQBpxyMC3hdIVFImsx1hhyhEGdYOdWKPNv4kEmJusB1k/BG9txffZpXYZyeC53WwrKdsrOihUmzlRKkJuqTWSzBcWQ1WR2d+Tdk=" fileSize="810882">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 6</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.2.0" postdate="2009-04-06T11:16:21.5767878Z" signature="FSxE5l8PT9AJGE9AFb/g7B3499znqHw8i+HSXCmSy6jCwi/mYbgxO7n/NpQQQ1KIieL0d0W3upCc4a9U2faX8FM3/w/wPfp/wybfwx+8VgomPn9WkiDswZY1NC6F8GNuz/D79zQHrqsJxaIBVSx2Qji7xMxDddOGakqW+w06XlM=" fileSize="648377">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 2</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.1.0" postdate="2009-04-06T10:52:06.4382885Z" signature="p12oDsf6NQR2m+9ELy/CTlhgrn3EFkjCplcD+6bbsszMsXlAHmTd1FiXdQmsuwwC6s+AIJPWJlLcOi/4b8VVD2xSt+ReA9W7fRgwN7kMvb54I3itw5xyZiFp5F0e3Ryzg9bumVpTwHUxvX6XBBvJfEqCFQHd/hjv60G1I9XVYSI=" fileSize="645960">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Milestone 1</Summary>
+						<CustomData></CustomData>
+					</Version>
+				</Versions>
+			</Application>
+		</AppLifeUpdate>
+	</Director>
+	<Actions />
+	<ExtraFiles />
+	<ExtraLanguages useSingleLanguage="true" />
+	<TranslatedSummaryTexts />
+	<TranslatedUpdateTitleTexts />
+	<TranslatedNoUpdateDisplayTexts />
+	<SkippedBuilderIndexes />
+</UpdateProject>

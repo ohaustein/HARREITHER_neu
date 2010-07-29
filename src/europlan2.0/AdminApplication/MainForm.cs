@@ -84,7 +84,7 @@ namespace Europlan.AdminApplication {
 			SettingsFile.Update();
 
 			try {
-				string licensesFile = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath), "licenses.xml");
+				string licensesFile = Path.Combine(PathUtil.DataPath, "licenses.xml");
 				using (Stream s = new FileStream(licensesFile, FileMode.Create)) {
 					LicenseManager.Instance.SaveLicenseManager(s);
 				}
@@ -105,7 +105,7 @@ namespace Europlan.AdminApplication {
 			}
 
 			try {
-				string licensesFile = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath), "licenses.xml");
+				string licensesFile = Path.Combine(PathUtil.DataPath, "licenses.xml");
 				if (File.Exists(licensesFile)) {
 					using (Stream s = new FileStream(licensesFile, FileMode.Open)) {
 						LicenseManager.LoadLicenseManager(s);
@@ -132,10 +132,8 @@ namespace Europlan.AdminApplication {
 			Configuration.AdminTemplate.Save();
 			FolderBrowserDialog dialog = new FolderBrowserDialog();
 
-			string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
-
 			if (dialog.ShowDialog() == DialogResult.OK) {
-				File.Copy(Path.Combine(appDataPath, "global.conf"), Path.Combine(dialog.SelectedPath, "global.conf"), true);
+				File.Copy(Path.Combine(PathUtil.DataPath, "global.conf"), Path.Combine(dialog.SelectedPath, "global.conf"), true);
 			}
 		}
 
@@ -145,15 +143,51 @@ namespace Europlan.AdminApplication {
 			dialog.CheckPathExists = true;
 			dialog.DefaultExt = "csv";
 			dialog.Filter = "Artikelliste (*.csv)|*.csv";
-			string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 			if (dialog.ShowDialog() == DialogResult.OK) {
 				string path = Path.GetDirectoryName(dialog.FileName);
-				if (!path.Equals(appDataPath)) {
+				if (!path.Equals(PathUtil.DataPath)) {
 					//if (File.Exists(Path.Combine(path, "BruttoPreise.csv"))) {
-						File.Copy(dialog.FileName, Path.Combine(appDataPath, "BruttoPreise.csv"), true);
+						File.Copy(dialog.FileName, Path.Combine(PathUtil.DataPath, "BruttoPreise.csv"), true);
 						MessageBox.Show("Die Anwendung muss nun neu gestartet werden, damit die neu importierte Artikelliste geladen werden kann.");
 						Application.Restart();
 					//}
+				}
+			}
+		}
+
+		private void lizenzenToolStripMenuItem_Click(object sender, EventArgs e) {
+			OpenFileDialog dialog = new OpenFileDialog();
+			dialog.CheckFileExists = true;
+			dialog.CheckPathExists = true;
+			//dialog.DefaultExt = "xml";
+			dialog.Filter = "Lizenzvorlagen|licenses.xml|Endbenutzerlizenz (*.epl)|*.epl";
+			if (dialog.ShowDialog() == DialogResult.OK) {
+				string fileName = dialog.FileName;
+				List<LicenseTemplate> newLicenses = null;
+				if (Path.GetFileName(fileName).Equals("licenses.xml", StringComparison.InvariantCultureIgnoreCase)) {
+					FileStream fs = new FileStream(fileName, FileMode.Open);
+					newLicenses = LicenseManager.Instance.LoadAdditionalLicenses(fs, false);
+					fs.Close();
+				} else if (Path.GetFileName(fileName).EndsWith(".epl", StringComparison.InvariantCultureIgnoreCase)) {
+					FileStream fs = new FileStream(fileName, FileMode.Open);
+					newLicenses = LicenseManager.Instance.LoadAdditionalLicenses(fs, true);
+					fs.Close();
+					MessageBox.Show("In einer .epl-Datei ist leider keine Kontakt-Emailadresse enthalten. Bitte fügen Sie die Emailadresse, falls bekannt, zur eben importieren Lizenz manuell hinzu", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+				foreach (LicenseTemplate license in newLicenses) {
+					LicenseItem item = new LicenseItem(license);
+					this.lstLicenses.Items.Add(item);
+				}
+			}
+		}
+
+		private void lstLicenses_KeyDown(object sender, KeyEventArgs e) {
+			if (e.KeyCode == Keys.Delete) {
+				if (this.lstLicenses.SelectedItems.Count == 1 && this.lstLicenses.SelectedItems[0] is LicenseItem) {
+					if (MessageBox.Show("Wollen Sie diese Lizenz wirklich löschen?", "Bestätigen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+						LicenseManager.Instance.Licenses.Remove((this.lstLicenses.SelectedItems[0] as LicenseItem).License);
+						this.lstLicenses.Items.Remove(this.lstLicenses.SelectedItems[0]);
+					}
 				}
 			}
 		}

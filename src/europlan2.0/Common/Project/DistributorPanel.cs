@@ -231,5 +231,10 @@ namespace Europlan.Common {
 			}
 		}
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+	}
+
 	}
 }

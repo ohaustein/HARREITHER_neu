@@ -35,14 +35,14 @@ namespace Europlan.Common {
 							message = message.Replace("%RAUMID%", room.Id);
 							message = message.Replace("%RAUMNAME%", room.Name);
 							message = message.Replace("%WARNUNG%", warning);
-							lstErrors.Items.Add(message);
+							lstErrors.Items.Add(message, "error.png");
 						}
 
 					}
 				}
 			}
 			foreach (string notification in Project.Instance.NotificationMessageArray) {
-				lstErrors.Items.Add(notification);
+				lstErrors.Items.Add(notification, "warning.png");
 			}
 			foreach (Floor floor in Project.Instance.Floors) {
 				foreach (Distributor dist in floor.Distributors) {
@@ -52,7 +52,7 @@ namespace Europlan.Common {
 						message = message.Replace("%VERTEILERNAME%", dist.Name);
 						message = message.Replace("%GESCHOSS%", floor.Name);
 						message = message.Replace("%WARNUNG%", error);
-						lstErrors.Items.Add(message);
+						lstErrors.Items.Add(message, "warning.png");
 						//lstErrors.Items.Add(error);
 					}
 				}
@@ -66,7 +66,7 @@ namespace Europlan.Common {
 							message = message.Replace("%RAUMID%", room.Id);
 							message = message.Replace("%RAUMNAME%", room.Name);
 							message = message.Replace("%HINWEIS%", notification);
-							lstErrors.Items.Add(message);
+							lstErrors.Items.Add(message, "warning.png");
 						}
 					}
 				}

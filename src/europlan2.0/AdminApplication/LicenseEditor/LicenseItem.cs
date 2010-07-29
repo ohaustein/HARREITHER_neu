@@ -37,5 +37,17 @@ namespace Europlan.AdminApplication {
 		public LicenseTemplate License {
 			get { return this.license; }
 		}
+
+		public override int GetHashCode() {
+			return this.license.GetHashCode();
+	}
+
+		public override bool Equals(object obj) {
+			LicenseItem otherLicenseItem = obj as LicenseItem;
+			if (otherLicenseItem == null) {
+				return false;
+			}
+			return this.license.Equals(otherLicenseItem.license);
+		}
 	}
 }

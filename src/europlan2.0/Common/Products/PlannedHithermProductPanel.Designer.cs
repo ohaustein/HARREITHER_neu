@@ -31,33 +31,44 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlannedHithermProductPanel));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.pageCircuit = new System.Windows.Forms.TabPage();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btnDistributor = new System.Windows.Forms.Button();
+            this.lblDistributor = new System.Windows.Forms.Label();
+            this.txtDistributor = new System.Windows.Forms.TextBox();
+            this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
+            this.tabs = new System.Windows.Forms.TabControl();
+            this.pageInput = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
 			this.grpPowerArea = new System.Windows.Forms.GroupBox();
 			this.lblAreaPercentage = new System.Windows.Forms.Label();
+            this.numAreaPercentage = new Europlan.Common.NumericBox();
 			this.lblAreaUnit = new System.Windows.Forms.Label();
+            this.numArea = new Europlan.Common.NumericBox();
 			this.lblAreaTxt = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.cmbType = new System.Windows.Forms.ComboBox();
 			this.lblCoolLoadTotal = new System.Windows.Forms.Label();
 			this.chkCoverCoolLoad = new System.Windows.Forms.CheckBox();
 			this.lblCoolLoadPercentage = new System.Windows.Forms.Label();
+            this.numCoolLoadPercentage = new Europlan.Common.NumericBox();
 			this.lblCoolLoadUnit = new System.Windows.Forms.Label();
+            this.numCoolLoad = new Europlan.Common.NumericBox();
 			this.lblCoolLoadTxt = new System.Windows.Forms.Label();
 			this.lblHeatLoadTotal = new System.Windows.Forms.Label();
 			this.chkCoverHeatLoad = new System.Windows.Forms.CheckBox();
 			this.lblHeatLoadPercentage = new System.Windows.Forms.Label();
+            this.numHeatLoadPercentage = new Europlan.Common.NumericBox();
 			this.lblHeatLoadUnit = new System.Windows.Forms.Label();
+            this.numHeatLoad = new Europlan.Common.NumericBox();
 			this.lblHeatLoadTxt = new System.Windows.Forms.Label();
-			this.tabs = new System.Windows.Forms.TabControl();
-			this.pageInput = new System.Windows.Forms.TabPage();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.pageCircuit = new System.Windows.Forms.TabPage();
-			this.groupBox10 = new System.Windows.Forms.GroupBox();
-			this.groupBox9 = new System.Windows.Forms.GroupBox();
-			this.btnDistributor = new System.Windows.Forms.Button();
-			this.lblDistributor = new System.Windows.Forms.Label();
-			this.txtDistributor = new System.Windows.Forms.TextBox();
-			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.pageConstructions = new System.Windows.Forms.TabPage();
+            this.hithermWallGrid1 = new Europlan.Common.HithermWallGrid();
 			this.pageAuslegung = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.lstError = new System.Windows.Forms.ListView();
@@ -75,13 +86,25 @@ namespace Europlan.Common {
 			this.lblNecessaryWaermestromdichte = new System.Windows.Forms.Label();
 			this.lblNecessaryWaermestromdichteTitle = new System.Windows.Forms.Label();
 			this.dgvRegisters = new System.Windows.Forms.DataGridView();
+            this.registerTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.RegisterBreite = new Europlan.Common.NumericColumn();
 			this.Horizontal = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Wall = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heizkreisDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+            this.pipeHorizontalDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+            this.pipeVerticalDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+            this.rohrabstandDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.registerHoeheDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rohreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.equivalentPipeLengthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PlannedProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnSelectWall = new System.Windows.Forms.Button();
+            this.hithermRegisterBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.lblCoveredAreaUnit = new System.Windows.Forms.Label();
 			this.lblCoveredArea = new System.Windows.Forms.Label();
 			this.lblCoveredAreaTitle = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.lineInfo = new System.Windows.Forms.GroupBox();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.label32 = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.lblDruckverlustCoolUnit = new System.Windows.Forms.Label();
@@ -111,9 +134,9 @@ namespace Europlan.Common {
 			this.lblRest = new System.Windows.Forms.Label();
 			this.label16 = new System.Windows.Forms.Label();
 			this.label17 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.groupBox7 = new System.Windows.Forms.GroupBox();
 			this.lblCool = new System.Windows.Forms.Label();
 			this.lblHeat = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
@@ -122,43 +145,158 @@ namespace Europlan.Common {
 			this.label5 = new System.Windows.Forms.Label();
 			this.lblHk = new System.Windows.Forms.Label();
 			this.btnConnectionPipes = new System.Windows.Forms.Button();
-			this.helpProvider = new System.Windows.Forms.HelpProvider();
-			this.numAreaPercentage = new Europlan.Common.NumericBox();
-			this.numArea = new Europlan.Common.NumericBox();
-			this.numCoolLoadPercentage = new Europlan.Common.NumericBox();
-			this.numCoolLoad = new Europlan.Common.NumericBox();
-			this.numHeatLoadPercentage = new Europlan.Common.NumericBox();
-			this.numHeatLoad = new Europlan.Common.NumericBox();
-			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
-			this.hithermWallGrid1 = new Europlan.Common.HithermWallGrid();
-			this.registerTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.RegisterBreite = new Europlan.Common.NumericColumn();
-			this.Wall = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.heizkreisDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.pipeHorizontalDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.pipeVerticalDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.rohrabstandDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.registerHoeheDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.rohreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.equivalentPipeLengthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.areaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.PlannedProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.hithermRegisterBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.grpPowerArea.SuspendLayout();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.numericColumn1 = new Europlan.Common.NumericColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pageCircuit.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox9.SuspendLayout();
 			this.tabs.SuspendLayout();
 			this.pageInput.SuspendLayout();
 			this.panel1.SuspendLayout();
-			this.pageCircuit.SuspendLayout();
-			this.groupBox10.SuspendLayout();
-			this.groupBox9.SuspendLayout();
+            this.grpPowerArea.SuspendLayout();
 			this.pageConstructions.SuspendLayout();
 			this.pageAuslegung.SuspendLayout();
 			this.panel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvRegisters)).BeginInit();
 			this.dgvRegisters.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.hithermRegisterBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
+            // helpProvider
+            // 
+            this.helpProvider.HelpNamespace = "europlan.chm";
+            // 
+            // pageCircuit
+            // 
+            this.pageCircuit.Controls.Add(this.groupBox10);
+            this.pageCircuit.Controls.Add(this.groupBox9);
+            this.helpProvider.SetHelpKeyword(this.pageCircuit, "html\\euro8m7u.htm");
+            this.helpProvider.SetHelpNavigator(this.pageCircuit, System.Windows.Forms.HelpNavigator.Topic);
+            this.pageCircuit.Location = new System.Drawing.Point(4, 22);
+            this.pageCircuit.Name = "pageCircuit";
+            this.pageCircuit.Padding = new System.Windows.Forms.Padding(3);
+            this.helpProvider.SetShowHelp(this.pageCircuit, true);
+            this.pageCircuit.Size = new System.Drawing.Size(856, 614);
+            this.pageCircuit.TabIndex = 2;
+            this.pageCircuit.Text = "Anbindeleitungen";
+            this.pageCircuit.UseVisualStyleBackColor = true;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox10.Controls.Add(this.connectionPipePanel);
+            this.groupBox10.Location = new System.Drawing.Point(3, 53);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(847, 343);
+            this.groupBox10.TabIndex = 2;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Anbindeleitungen";
+            // 
+            // connectionPipePanel
+            // 
+            this.connectionPipePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.connectionPipePanel.Location = new System.Drawing.Point(3, 16);
+            this.connectionPipePanel.Name = "connectionPipePanel";
+            this.connectionPipePanel.ShowPipesThroughProduct = false;
+            this.connectionPipePanel.Size = new System.Drawing.Size(841, 324);
+            this.connectionPipePanel.TabIndex = 0;
+            this.connectionPipePanel.GridContentChanged += new Europlan.Common.ConnectionPipePanelContentChangedHandler(this.connectionPipePanel1_GridContentChanged);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox9.Controls.Add(this.btnDistributor);
+            this.groupBox9.Controls.Add(this.lblDistributor);
+            this.groupBox9.Controls.Add(this.txtDistributor);
+            this.groupBox9.Controls.Add(this.chkStellAntriebe);
+            this.groupBox9.Location = new System.Drawing.Point(3, 6);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(847, 41);
+            this.groupBox9.TabIndex = 0;
+            this.groupBox9.TabStop = false;
+            // 
+            // btnDistributor
+            // 
+            this.btnDistributor.Location = new System.Drawing.Point(388, 13);
+            this.btnDistributor.Name = "btnDistributor";
+            this.btnDistributor.Size = new System.Drawing.Size(25, 20);
+            this.btnDistributor.TabIndex = 5;
+            this.btnDistributor.Text = "...";
+            this.btnDistributor.UseVisualStyleBackColor = true;
+            this.btnDistributor.Click += new System.EventHandler(this.btnDistributor_Click);
+            // 
+            // lblDistributor
+            // 
+            this.lblDistributor.Location = new System.Drawing.Point(6, 16);
+            this.lblDistributor.Name = "lblDistributor";
+            this.lblDistributor.Size = new System.Drawing.Size(151, 13);
+            this.lblDistributor.TabIndex = 4;
+            this.lblDistributor.Text = "Verteileranschluß:";
+            // 
+            // txtDistributor
+            // 
+            this.txtDistributor.Location = new System.Drawing.Point(188, 13);
+            this.txtDistributor.Name = "txtDistributor";
+            this.txtDistributor.ReadOnly = true;
+            this.txtDistributor.Size = new System.Drawing.Size(194, 20);
+            this.txtDistributor.TabIndex = 3;
+            // 
+            // chkStellAntriebe
+            // 
+            this.chkStellAntriebe.AutoSize = true;
+            this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
+            this.chkStellAntriebe.Name = "chkStellAntriebe";
+            this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
+            this.chkStellAntriebe.TabIndex = 7;
+            this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
+            this.chkStellAntriebe.UseVisualStyleBackColor = true;
+            this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
+            // 
+            // tabs
+            // 
+            this.tabs.Controls.Add(this.pageInput);
+            this.tabs.Controls.Add(this.pageCircuit);
+            this.tabs.Controls.Add(this.pageConstructions);
+            this.tabs.Controls.Add(this.pageAuslegung);
+            this.helpProvider.SetHelpKeyword(this.tabs, "html\\euro3mln.htm");
+            this.helpProvider.SetHelpNavigator(this.tabs, System.Windows.Forms.HelpNavigator.Topic);
+            this.tabs.Location = new System.Drawing.Point(0, 38);
+            this.tabs.Name = "tabs";
+            this.tabs.SelectedIndex = 0;
+            this.helpProvider.SetShowHelp(this.tabs, true);
+            this.tabs.Size = new System.Drawing.Size(864, 640);
+            this.tabs.TabIndex = 2;
+            this.tabs.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabs_Deselecting);
+            // 
+            // pageInput
+            // 
+            this.pageInput.Controls.Add(this.panel1);
+            this.pageInput.Location = new System.Drawing.Point(4, 22);
+            this.pageInput.Name = "pageInput";
+            this.pageInput.Padding = new System.Windows.Forms.Padding(3);
+            this.pageInput.Size = new System.Drawing.Size(856, 614);
+            this.pageInput.TabIndex = 0;
+            this.pageInput.Text = "Eingabedaten";
+            this.pageInput.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.AutoScrollMinSize = new System.Drawing.Size(650, 0);
+            this.panel1.Controls.Add(this.grpPowerArea);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(850, 608);
+            this.panel1.TabIndex = 3;
+            // 
 			// grpPowerArea
 			// 
 			this.grpPowerArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -200,6 +338,38 @@ namespace Europlan.Common {
 			this.lblAreaPercentage.Text = "%";
 			this.lblAreaPercentage.Visible = false;
 			// 
+            // numAreaPercentage
+            // 
+            this.numAreaPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
+            this.numAreaPercentage.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaPercentage.Location = new System.Drawing.Point(328, 92);
+            this.numAreaPercentage.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numAreaPercentage.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaPercentage.Name = "numAreaPercentage";
+            this.numAreaPercentage.Size = new System.Drawing.Size(54, 20);
+            this.numAreaPercentage.TabIndex = 22;
+            this.numAreaPercentage.Text = "0";
+            this.numAreaPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numAreaPercentage.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaPercentage.Visible = false;
+            this.numAreaPercentage.ValueChanged += new System.EventHandler(this.numAreaPercentage_ValueChanged);
+            // 
 			// lblAreaUnit
 			// 
 			this.lblAreaUnit.Location = new System.Drawing.Point(303, 95);
@@ -209,6 +379,34 @@ namespace Europlan.Common {
 			this.lblAreaUnit.Text = "m²";
 			this.lblAreaUnit.Visible = false;
 			// 
+            // numArea
+            // 
+            this.numArea.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numArea.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numArea.Location = new System.Drawing.Point(188, 92);
+            this.numArea.MaxValue = null;
+            this.numArea.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numArea.Name = "numArea";
+            this.numArea.Size = new System.Drawing.Size(109, 20);
+            this.numArea.TabIndex = 20;
+            this.numArea.Text = "0";
+            this.numArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numArea.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numArea.Visible = false;
+            this.numArea.ValueChanged += new System.EventHandler(this.numArea_ValueChanged);
+            // 
 			// lblAreaTxt
 			// 
 			this.lblAreaTxt.Location = new System.Drawing.Point(6, 95);
@@ -265,6 +463,38 @@ namespace Europlan.Common {
 			this.lblCoolLoadPercentage.TabIndex = 11;
 			this.lblCoolLoadPercentage.Text = "%";
 			// 
+            // numCoolLoadPercentage
+            // 
+            this.numCoolLoadPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
+            this.numCoolLoadPercentage.Enabled = false;
+            this.numCoolLoadPercentage.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoadPercentage.Location = new System.Drawing.Point(328, 39);
+            this.numCoolLoadPercentage.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numCoolLoadPercentage.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoadPercentage.Name = "numCoolLoadPercentage";
+            this.numCoolLoadPercentage.Size = new System.Drawing.Size(54, 20);
+            this.numCoolLoadPercentage.TabIndex = 10;
+            this.numCoolLoadPercentage.Text = "0";
+            this.numCoolLoadPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCoolLoadPercentage.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoadPercentage.ValueChanged += new System.EventHandler(this.numCoolLoadPercentage_ValueChanged);
+            // 
 			// lblCoolLoadUnit
 			// 
 			this.lblCoolLoadUnit.Location = new System.Drawing.Point(303, 42);
@@ -273,6 +503,38 @@ namespace Europlan.Common {
 			this.lblCoolLoadUnit.TabIndex = 9;
 			this.lblCoolLoadUnit.Text = "W";
 			// 
+            // numCoolLoad
+            // 
+            this.numCoolLoad.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+            this.numCoolLoad.Enabled = false;
+            this.numCoolLoad.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoad.Location = new System.Drawing.Point(188, 39);
+            this.numCoolLoad.MaxValue = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.numCoolLoad.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoad.Name = "numCoolLoad";
+            this.numCoolLoad.Size = new System.Drawing.Size(109, 20);
+            this.numCoolLoad.TabIndex = 8;
+            this.numCoolLoad.Text = "0";
+            this.numCoolLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCoolLoad.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoad.ValueChanged += new System.EventHandler(this.numCoolLoad_ValueChanged);
+            // 
 			// lblCoolLoadTxt
 			// 
 			this.lblCoolLoadTxt.Location = new System.Drawing.Point(6, 42);
@@ -311,6 +573,38 @@ namespace Europlan.Common {
 			this.lblHeatLoadPercentage.TabIndex = 4;
 			this.lblHeatLoadPercentage.Text = "%";
 			// 
+            // numHeatLoadPercentage
+            // 
+            this.numHeatLoadPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
+            this.numHeatLoadPercentage.Enabled = false;
+            this.numHeatLoadPercentage.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoadPercentage.Location = new System.Drawing.Point(328, 13);
+            this.numHeatLoadPercentage.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numHeatLoadPercentage.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoadPercentage.Name = "numHeatLoadPercentage";
+            this.numHeatLoadPercentage.Size = new System.Drawing.Size(54, 20);
+            this.numHeatLoadPercentage.TabIndex = 3;
+            this.numHeatLoadPercentage.Text = "0";
+            this.numHeatLoadPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numHeatLoadPercentage.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoadPercentage.ValueChanged += new System.EventHandler(this.numHeatLoadPercentage_ValueChanged);
+            // 
 			// lblHeatLoadUnit
 			// 
 			this.lblHeatLoadUnit.Location = new System.Drawing.Point(303, 16);
@@ -319,6 +613,38 @@ namespace Europlan.Common {
 			this.lblHeatLoadUnit.TabIndex = 2;
 			this.lblHeatLoadUnit.Text = "W";
 			// 
+            // numHeatLoad
+            // 
+            this.numHeatLoad.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+            this.numHeatLoad.Enabled = false;
+            this.numHeatLoad.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoad.Location = new System.Drawing.Point(188, 13);
+            this.numHeatLoad.MaxValue = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.numHeatLoad.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoad.Name = "numHeatLoad";
+            this.numHeatLoad.Size = new System.Drawing.Size(109, 20);
+            this.numHeatLoad.TabIndex = 1;
+            this.numHeatLoad.Text = "0";
+            this.numHeatLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numHeatLoad.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoad.ValueChanged += new System.EventHandler(this.numHeatLoad_ValueChanged);
+            // 
 			// lblHeatLoadTxt
 			// 
 			this.lblHeatLoadTxt.Location = new System.Drawing.Point(6, 16);
@@ -326,124 +652,6 @@ namespace Europlan.Common {
 			this.lblHeatLoadTxt.Size = new System.Drawing.Size(151, 13);
 			this.lblHeatLoadTxt.TabIndex = 0;
 			this.lblHeatLoadTxt.Text = "gewünschte Heizleistung:";
-			// 
-			// tabs
-			// 
-			this.tabs.Controls.Add(this.pageInput);
-			this.tabs.Controls.Add(this.pageCircuit);
-			this.tabs.Controls.Add(this.pageConstructions);
-			this.tabs.Controls.Add(this.pageAuslegung);
-			this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.helpProvider.SetHelpKeyword(this.tabs, "html\\euro3mln.htm");
-			this.helpProvider.SetHelpNavigator(this.tabs, System.Windows.Forms.HelpNavigator.Topic);
-			this.tabs.Location = new System.Drawing.Point(0, 0);
-			this.tabs.Name = "tabs";
-			this.tabs.SelectedIndex = 0;
-			this.helpProvider.SetShowHelp(this.tabs, true);
-			this.tabs.Size = new System.Drawing.Size(864, 640);
-			this.tabs.TabIndex = 2;
-			this.tabs.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabs_Deselecting);
-			// 
-			// pageInput
-			// 
-			this.pageInput.Controls.Add(this.panel1);
-			this.pageInput.Location = new System.Drawing.Point(4, 22);
-			this.pageInput.Name = "pageInput";
-			this.pageInput.Padding = new System.Windows.Forms.Padding(3);
-			this.pageInput.Size = new System.Drawing.Size(856, 614);
-			this.pageInput.TabIndex = 0;
-			this.pageInput.Text = "Eingabedaten";
-			this.pageInput.UseVisualStyleBackColor = true;
-			// 
-			// panel1
-			// 
-			this.panel1.AutoScroll = true;
-			this.panel1.AutoScrollMinSize = new System.Drawing.Size(650, 0);
-			this.panel1.Controls.Add(this.grpPowerArea);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(3, 3);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(850, 608);
-			this.panel1.TabIndex = 3;
-			// 
-			// pageCircuit
-			// 
-			this.pageCircuit.Controls.Add(this.groupBox10);
-			this.pageCircuit.Controls.Add(this.groupBox9);
-			this.helpProvider.SetHelpKeyword(this.pageCircuit, "html\\euro8m7u.htm");
-			this.helpProvider.SetHelpNavigator(this.pageCircuit, System.Windows.Forms.HelpNavigator.Topic);
-			this.pageCircuit.Location = new System.Drawing.Point(4, 22);
-			this.pageCircuit.Name = "pageCircuit";
-			this.pageCircuit.Padding = new System.Windows.Forms.Padding(3);
-			this.helpProvider.SetShowHelp(this.pageCircuit, true);
-			this.pageCircuit.Size = new System.Drawing.Size(856, 614);
-			this.pageCircuit.TabIndex = 2;
-			this.pageCircuit.Text = "Anbindeleitungen";
-			this.pageCircuit.UseVisualStyleBackColor = true;
-			// 
-			// groupBox10
-			// 
-			this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox10.Controls.Add(this.connectionPipePanel);
-			this.groupBox10.Location = new System.Drawing.Point(3, 53);
-			this.groupBox10.Name = "groupBox10";
-			this.groupBox10.Size = new System.Drawing.Size(847, 343);
-			this.groupBox10.TabIndex = 2;
-			this.groupBox10.TabStop = false;
-			this.groupBox10.Text = "Anbindeleitungen";
-			// 
-			// groupBox9
-			// 
-			this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox9.Controls.Add(this.btnDistributor);
-			this.groupBox9.Controls.Add(this.lblDistributor);
-			this.groupBox9.Controls.Add(this.txtDistributor);
-			this.groupBox9.Controls.Add(this.chkStellAntriebe);
-			this.groupBox9.Location = new System.Drawing.Point(3, 6);
-			this.groupBox9.Name = "groupBox9";
-			this.groupBox9.Size = new System.Drawing.Size(847, 41);
-			this.groupBox9.TabIndex = 0;
-			this.groupBox9.TabStop = false;
-			// 
-			// btnDistributor
-			// 
-			this.btnDistributor.Location = new System.Drawing.Point(388, 13);
-			this.btnDistributor.Name = "btnDistributor";
-			this.btnDistributor.Size = new System.Drawing.Size(25, 20);
-			this.btnDistributor.TabIndex = 5;
-			this.btnDistributor.Text = "...";
-			this.btnDistributor.UseVisualStyleBackColor = true;
-			this.btnDistributor.Click += new System.EventHandler(this.btnDistributor_Click);
-			// 
-			// lblDistributor
-			// 
-			this.lblDistributor.Location = new System.Drawing.Point(6, 16);
-			this.lblDistributor.Name = "lblDistributor";
-			this.lblDistributor.Size = new System.Drawing.Size(151, 13);
-			this.lblDistributor.TabIndex = 4;
-			this.lblDistributor.Text = "Verteileranschluß:";
-			// 
-			// txtDistributor
-			// 
-			this.txtDistributor.Location = new System.Drawing.Point(188, 13);
-			this.txtDistributor.Name = "txtDistributor";
-			this.txtDistributor.ReadOnly = true;
-			this.txtDistributor.Size = new System.Drawing.Size(194, 20);
-			this.txtDistributor.TabIndex = 3;
-			// 
-			// chkStellAntriebe
-			// 
-			this.chkStellAntriebe.AutoSize = true;
-			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
-			this.chkStellAntriebe.Name = "chkStellAntriebe";
-			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
-			this.chkStellAntriebe.TabIndex = 7;
-			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
-			this.chkStellAntriebe.UseVisualStyleBackColor = true;
-			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
 			// 
 			// pageConstructions
 			// 
@@ -456,6 +664,16 @@ namespace Europlan.Common {
 			this.pageConstructions.Text = "Konstruktionen";
 			this.pageConstructions.UseVisualStyleBackColor = true;
 			// 
+            // hithermWallGrid1
+            // 
+            this.hithermWallGrid1.Location = new System.Drawing.Point(6, 6);
+            this.hithermWallGrid1.Name = "hithermWallGrid1";
+            this.hithermWallGrid1.ShowCompact = false;
+            this.hithermWallGrid1.Size = new System.Drawing.Size(844, 450);
+            this.hithermWallGrid1.TabIndex = 0;
+            this.hithermWallGrid1.WallChanged += new System.EventHandler<Europlan.Common.HithermWallGrid.WallEventArgs>(this.hithermWallGrid1_WallChanged);
+            this.hithermWallGrid1.WallRemoved += new System.EventHandler<Europlan.Common.HithermWallGrid.WallEventArgs>(this.hithermWallGrid1_WallRemoved);
+            // 
 			// pageAuslegung
 			// 
 			this.pageAuslegung.Controls.Add(this.panel2);
@@ -488,8 +706,8 @@ namespace Europlan.Common {
 			this.panel2.Controls.Add(this.lblCoveredAreaUnit);
 			this.panel2.Controls.Add(this.lblCoveredArea);
 			this.panel2.Controls.Add(this.lblCoveredAreaTitle);
+            this.panel2.Controls.Add(this.groupBox5);
 			this.panel2.Controls.Add(this.lineInfo);
-			this.panel2.Controls.Add(this.groupBox5);
 			this.panel2.Controls.Add(this.label32);
 			this.panel2.Controls.Add(this.groupBox4);
 			this.panel2.Controls.Add(this.lblDruckverlustCoolUnit);
@@ -519,9 +737,9 @@ namespace Europlan.Common {
 			this.panel2.Controls.Add(this.lblRest);
 			this.panel2.Controls.Add(this.label16);
 			this.panel2.Controls.Add(this.label17);
+            this.panel2.Controls.Add(this.groupBox7);
+            this.panel2.Controls.Add(this.groupBox2);
 			this.panel2.Controls.Add(this.groupBox3);
-			this.panel2.Controls.Add(this.groupBox2);
-			this.panel2.Controls.Add(this.groupBox7);
 			this.panel2.Controls.Add(this.lblCool);
 			this.panel2.Controls.Add(this.lblHeat);
 			this.panel2.Controls.Add(this.label4);
@@ -685,7 +903,6 @@ namespace Europlan.Common {
             this.registerHoeheDataGridViewTextBoxColumn,
             this.rohreDataGridViewTextBoxColumn,
             this.equivalentPipeLengthDataGridViewTextBoxColumn,
-            this.areaDataGridViewTextBoxColumn,
             this.PlannedProduct});
 			this.dgvRegisters.Controls.Add(this.btnSelectWall);
 			this.dgvRegisters.DataSource = this.hithermRegisterBindingSource;
@@ -719,6 +936,27 @@ namespace Europlan.Common {
 			this.dgvRegisters.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRegisters_CellEnter);
 			this.dgvRegisters.SelectionChanged += new System.EventHandler(this.dgvRegisters_SelectionChanged);
 			// 
+            // registerTypeDataGridViewTextBoxColumn
+            // 
+            this.registerTypeDataGridViewTextBoxColumn.DataPropertyName = "RegisterType";
+            this.registerTypeDataGridViewTextBoxColumn.FillWeight = 120F;
+            this.registerTypeDataGridViewTextBoxColumn.HeaderText = "Register-\ntype";
+            this.registerTypeDataGridViewTextBoxColumn.Name = "registerTypeDataGridViewTextBoxColumn";
+            this.registerTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.registerTypeDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // RegisterBreite
+            // 
+            this.RegisterBreite.DataPropertyName = "RegisterBreite";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "F0";
+            this.RegisterBreite.DefaultCellStyle = dataGridViewCellStyle2;
+            this.RegisterBreite.FillWeight = 80F;
+            this.RegisterBreite.HeaderText = "Breite\n(cm)";
+            this.RegisterBreite.Name = "RegisterBreite";
+            this.RegisterBreite.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.RegisterBreite.Width = 80;
+            // 
 			// Horizontal
 			// 
 			this.Horizontal.DataPropertyName = "Horizontal";
@@ -727,6 +965,94 @@ namespace Europlan.Common {
 			this.Horizontal.Name = "Horizontal";
 			this.Horizontal.Width = 50;
 			// 
+            // Wall
+            // 
+            this.Wall.DataPropertyName = "Wall";
+            this.Wall.FillWeight = 70F;
+            this.Wall.HeaderText = "Konstr.";
+            this.Wall.Name = "Wall";
+            this.Wall.ReadOnly = true;
+            this.Wall.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Wall.Width = 70;
+            // 
+            // heizkreisDataGridViewTextBoxColumn
+            // 
+            this.heizkreisDataGridViewTextBoxColumn.DataPropertyName = "Heizkreis";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "F0";
+            this.heizkreisDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.heizkreisDataGridViewTextBoxColumn.FillWeight = 50F;
+            this.heizkreisDataGridViewTextBoxColumn.HeaderText = "HK";
+            this.heizkreisDataGridViewTextBoxColumn.Name = "heizkreisDataGridViewTextBoxColumn";
+            this.heizkreisDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.HK_COUNT;
+            this.heizkreisDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.heizkreisDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // pipeHorizontalDataGridViewTextBoxColumn
+            // 
+            this.pipeHorizontalDataGridViewTextBoxColumn.DataPropertyName = "PipeHorizontal";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "F2";
+            this.pipeHorizontalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.pipeHorizontalDataGridViewTextBoxColumn.HeaderText = "Leitung\nwaagr.\n(m)";
+            this.pipeHorizontalDataGridViewTextBoxColumn.Name = "pipeHorizontalDataGridViewTextBoxColumn";
+            this.pipeHorizontalDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
+            this.pipeHorizontalDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // pipeVerticalDataGridViewTextBoxColumn
+            // 
+            this.pipeVerticalDataGridViewTextBoxColumn.DataPropertyName = "PipeVertical";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "F2";
+            this.pipeVerticalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            this.pipeVerticalDataGridViewTextBoxColumn.HeaderText = "Leitung\nsenkr.\n(m)";
+            this.pipeVerticalDataGridViewTextBoxColumn.Name = "pipeVerticalDataGridViewTextBoxColumn";
+            this.pipeVerticalDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
+            this.pipeVerticalDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // rohrabstandDataGridViewTextBoxColumn
+            // 
+            this.rohrabstandDataGridViewTextBoxColumn.DataPropertyName = "Rohrabstand";
+            this.rohrabstandDataGridViewTextBoxColumn.HeaderText = "Rohrabstand";
+            this.rohrabstandDataGridViewTextBoxColumn.Name = "rohrabstandDataGridViewTextBoxColumn";
+            this.rohrabstandDataGridViewTextBoxColumn.ReadOnly = true;
+            this.rohrabstandDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.rohrabstandDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // registerHoeheDataGridViewTextBoxColumn
+            // 
+            this.registerHoeheDataGridViewTextBoxColumn.DataPropertyName = "RegisterHoehe";
+            this.registerHoeheDataGridViewTextBoxColumn.HeaderText = "RegisterHoehe";
+            this.registerHoeheDataGridViewTextBoxColumn.Name = "registerHoeheDataGridViewTextBoxColumn";
+            this.registerHoeheDataGridViewTextBoxColumn.ReadOnly = true;
+            this.registerHoeheDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.registerHoeheDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // rohreDataGridViewTextBoxColumn
+            // 
+            this.rohreDataGridViewTextBoxColumn.DataPropertyName = "Rohre";
+            this.rohreDataGridViewTextBoxColumn.HeaderText = "Rohre";
+            this.rohreDataGridViewTextBoxColumn.Name = "rohreDataGridViewTextBoxColumn";
+            this.rohreDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.rohreDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // equivalentPipeLengthDataGridViewTextBoxColumn
+            // 
+            this.equivalentPipeLengthDataGridViewTextBoxColumn.DataPropertyName = "EquivalentPipeLength";
+            this.equivalentPipeLengthDataGridViewTextBoxColumn.HeaderText = "EquivalentPipeLength";
+            this.equivalentPipeLengthDataGridViewTextBoxColumn.Name = "equivalentPipeLengthDataGridViewTextBoxColumn";
+            this.equivalentPipeLengthDataGridViewTextBoxColumn.ReadOnly = true;
+            this.equivalentPipeLengthDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.equivalentPipeLengthDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // PlannedProduct
+            // 
+            this.PlannedProduct.DataPropertyName = "PlannedProduct";
+            this.PlannedProduct.HeaderText = "PlannedProduct";
+            this.PlannedProduct.Name = "PlannedProduct";
+            this.PlannedProduct.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.PlannedProduct.Visible = false;
+            // 
 			// btnSelectWall
 			// 
 			this.btnSelectWall.Location = new System.Drawing.Point(406, 133);
@@ -738,6 +1064,10 @@ namespace Europlan.Common {
 			this.btnSelectWall.Visible = false;
 			this.btnSelectWall.Click += new System.EventHandler(this.btnSelectWall_Click);
 			// 
+            // hithermRegisterBindingSource
+            // 
+            this.hithermRegisterBindingSource.DataSource = typeof(Europlan.Common.HithermRegister);
+            // 
 			// lblCoveredAreaUnit
 			// 
 			this.lblCoveredAreaUnit.Location = new System.Drawing.Point(652, 357);
@@ -764,6 +1094,14 @@ namespace Europlan.Common {
 			this.lblCoveredAreaTitle.TabIndex = 122;
 			this.lblCoveredAreaTitle.Text = "Belegte Fläche:";
 			// 
+            // groupBox5
+            // 
+            this.groupBox5.Location = new System.Drawing.Point(450, 321);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(230, 2);
+            this.groupBox5.TabIndex = 82;
+            this.groupBox5.TabStop = false;
+            // 
 			// lineInfo
 			// 
 			this.lineInfo.Location = new System.Drawing.Point(590, 300);
@@ -771,14 +1109,6 @@ namespace Europlan.Common {
 			this.lineInfo.Size = new System.Drawing.Size(2, 135);
 			this.lineInfo.TabIndex = 83;
 			this.lineInfo.TabStop = false;
-			// 
-			// groupBox5
-			// 
-			this.groupBox5.Location = new System.Drawing.Point(450, 321);
-			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(230, 2);
-			this.groupBox5.TabIndex = 82;
-			this.groupBox5.TabStop = false;
 			// 
 			// label32
 			// 
@@ -1029,14 +1359,13 @@ namespace Europlan.Common {
 			this.label17.TabIndex = 85;
 			this.label17.Text = "Erreichte Leistung:";
 			// 
-			// groupBox3
+            // groupBox7
 			// 
-			this.groupBox3.Location = new System.Drawing.Point(283, 305);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(2, 210);
-			this.groupBox3.TabIndex = 83;
-			this.groupBox3.TabStop = false;
-			this.groupBox3.Visible = false;
+            this.groupBox7.Location = new System.Drawing.Point(3, 321);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(390, 2);
+            this.groupBox7.TabIndex = 81;
+            this.groupBox7.TabStop = false;
 			// 
 			// groupBox2
 			// 
@@ -1046,13 +1375,14 @@ namespace Europlan.Common {
 			this.groupBox2.TabIndex = 82;
 			this.groupBox2.TabStop = false;
 			// 
-			// groupBox7
+            // groupBox3
 			// 
-			this.groupBox7.Location = new System.Drawing.Point(3, 321);
-			this.groupBox7.Name = "groupBox7";
-			this.groupBox7.Size = new System.Drawing.Size(390, 2);
-			this.groupBox7.TabIndex = 81;
-			this.groupBox7.TabStop = false;
+            this.groupBox3.Location = new System.Drawing.Point(283, 305);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(2, 210);
+            this.groupBox3.TabIndex = 83;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Visible = false;
 			// 
 			// lblCool
 			// 
@@ -1133,356 +1463,75 @@ namespace Europlan.Common {
 			this.btnConnectionPipes.UseVisualStyleBackColor = true;
 			this.btnConnectionPipes.Click += new System.EventHandler(this.btnConnectionPipes_Click);
 			// 
-			// helpProvider
+            // pictureBox1
 			// 
-			this.helpProvider.HelpNamespace = "europlan.chm";
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 84;
+            this.pictureBox1.TabStop = false;
 			// 
-			// numAreaPercentage
+            // lblTitle
 			// 
-			this.numAreaPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
-			this.numAreaPercentage.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numAreaPercentage.Location = new System.Drawing.Point(328, 92);
-			this.numAreaPercentage.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-			this.numAreaPercentage.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numAreaPercentage.Name = "numAreaPercentage";
-			this.numAreaPercentage.Size = new System.Drawing.Size(54, 20);
-			this.numAreaPercentage.TabIndex = 22;
-			this.numAreaPercentage.Text = "0";
-			this.numAreaPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numAreaPercentage.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numAreaPercentage.Visible = false;
-			this.numAreaPercentage.ValueChanged += new System.EventHandler(this.numAreaPercentage_ValueChanged);
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(34, 5);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(98, 24);
+            this.lblTitle.TabIndex = 83;
+            this.lblTitle.Text = "Hitherm®";
 			// 
-			// numArea
+            // numericColumn1
 			// 
-			this.numArea.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.numArea.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numArea.Location = new System.Drawing.Point(188, 92);
-			this.numArea.MaxValue = null;
-			this.numArea.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numArea.Name = "numArea";
-			this.numArea.Size = new System.Drawing.Size(109, 20);
-			this.numArea.TabIndex = 20;
-			this.numArea.Text = "0";
-			this.numArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numArea.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numArea.Visible = false;
-			this.numArea.ValueChanged += new System.EventHandler(this.numArea_ValueChanged);
+            this.numericColumn1.DataPropertyName = "RegisterBreite";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "F0";
+            this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle8;
+            this.numericColumn1.FillWeight = 80F;
+            this.numericColumn1.HeaderText = "Breite\n(cm)";
+            this.numericColumn1.Name = "numericColumn1";
+            this.numericColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.numericColumn1.Width = 80;
 			// 
-			// numCoolLoadPercentage
+            // dataGridViewTextBoxColumn1
 			// 
-			this.numCoolLoadPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
-			this.numCoolLoadPercentage.Enabled = false;
-			this.numCoolLoadPercentage.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numCoolLoadPercentage.Location = new System.Drawing.Point(328, 39);
-			this.numCoolLoadPercentage.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-			this.numCoolLoadPercentage.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numCoolLoadPercentage.Name = "numCoolLoadPercentage";
-			this.numCoolLoadPercentage.Size = new System.Drawing.Size(54, 20);
-			this.numCoolLoadPercentage.TabIndex = 10;
-			this.numCoolLoadPercentage.Text = "0";
-			this.numCoolLoadPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numCoolLoadPercentage.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numCoolLoadPercentage.ValueChanged += new System.EventHandler(this.numCoolLoadPercentage_ValueChanged);
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Wall";
+            this.dataGridViewTextBoxColumn1.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Konstr.";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 70;
 			// 
-			// numCoolLoad
+            // dataGridViewTextBoxColumn2
 			// 
-			this.numCoolLoad.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
-			this.numCoolLoad.Enabled = false;
-			this.numCoolLoad.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numCoolLoad.Location = new System.Drawing.Point(188, 39);
-			this.numCoolLoad.MaxValue = new decimal(new int[] {
-            2147483647,
-            0,
-            0,
-            0});
-			this.numCoolLoad.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numCoolLoad.Name = "numCoolLoad";
-			this.numCoolLoad.Size = new System.Drawing.Size(109, 20);
-			this.numCoolLoad.TabIndex = 8;
-			this.numCoolLoad.Text = "0";
-			this.numCoolLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numCoolLoad.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numCoolLoad.ValueChanged += new System.EventHandler(this.numCoolLoad_ValueChanged);
-			// 
-			// numHeatLoadPercentage
-			// 
-			this.numHeatLoadPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
-			this.numHeatLoadPercentage.Enabled = false;
-			this.numHeatLoadPercentage.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numHeatLoadPercentage.Location = new System.Drawing.Point(328, 13);
-			this.numHeatLoadPercentage.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-			this.numHeatLoadPercentage.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numHeatLoadPercentage.Name = "numHeatLoadPercentage";
-			this.numHeatLoadPercentage.Size = new System.Drawing.Size(54, 20);
-			this.numHeatLoadPercentage.TabIndex = 3;
-			this.numHeatLoadPercentage.Text = "0";
-			this.numHeatLoadPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numHeatLoadPercentage.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numHeatLoadPercentage.ValueChanged += new System.EventHandler(this.numHeatLoadPercentage_ValueChanged);
-			// 
-			// numHeatLoad
-			// 
-			this.numHeatLoad.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
-			this.numHeatLoad.Enabled = false;
-			this.numHeatLoad.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numHeatLoad.Location = new System.Drawing.Point(188, 13);
-			this.numHeatLoad.MaxValue = new decimal(new int[] {
-            2147483647,
-            0,
-            0,
-            0});
-			this.numHeatLoad.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numHeatLoad.Name = "numHeatLoad";
-			this.numHeatLoad.Size = new System.Drawing.Size(109, 20);
-			this.numHeatLoad.TabIndex = 1;
-			this.numHeatLoad.Text = "0";
-			this.numHeatLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numHeatLoad.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numHeatLoad.ValueChanged += new System.EventHandler(this.numHeatLoad_ValueChanged);
-			// 
-			// connectionPipePanel
-			// 
-			this.connectionPipePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.connectionPipePanel.Location = new System.Drawing.Point(3, 16);
-			this.connectionPipePanel.Name = "connectionPipePanel";
-			this.connectionPipePanel.ShowPipesThroughProduct = false;
-			this.connectionPipePanel.Size = new System.Drawing.Size(841, 324);
-			this.connectionPipePanel.TabIndex = 0;
-			this.connectionPipePanel.GridContentChanged += new Europlan.Common.ConnectionPipePanelContentChangedHandler(this.connectionPipePanel1_GridContentChanged);
-			// 
-			// hithermWallGrid1
-			// 
-			this.hithermWallGrid1.Location = new System.Drawing.Point(6, 6);
-			this.hithermWallGrid1.Name = "hithermWallGrid1";
-			this.hithermWallGrid1.ShowCompact = false;
-			this.hithermWallGrid1.Size = new System.Drawing.Size(844, 450);
-			this.hithermWallGrid1.TabIndex = 0;
-			this.hithermWallGrid1.WallChanged += new System.EventHandler<Europlan.Common.HithermWallGrid.WallEventArgs>(this.hithermWallGrid1_WallChanged);
-			this.hithermWallGrid1.WallRemoved += new System.EventHandler<Europlan.Common.HithermWallGrid.WallEventArgs>(this.hithermWallGrid1_WallRemoved);
-			// 
-			// registerTypeDataGridViewTextBoxColumn
-			// 
-			this.registerTypeDataGridViewTextBoxColumn.DataPropertyName = "RegisterType";
-			this.registerTypeDataGridViewTextBoxColumn.FillWeight = 120F;
-			this.registerTypeDataGridViewTextBoxColumn.HeaderText = "Register-\ntype";
-			this.registerTypeDataGridViewTextBoxColumn.Name = "registerTypeDataGridViewTextBoxColumn";
-			this.registerTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.registerTypeDataGridViewTextBoxColumn.Width = 120;
-			// 
-			// RegisterBreite
-			// 
-			this.RegisterBreite.DataPropertyName = "RegisterBreite";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F0";
-			this.RegisterBreite.DefaultCellStyle = dataGridViewCellStyle2;
-			this.RegisterBreite.FillWeight = 80F;
-			this.RegisterBreite.HeaderText = "Breite\n(cm)";
-			this.RegisterBreite.Name = "RegisterBreite";
-			this.RegisterBreite.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.RegisterBreite.Width = 80;
-			// 
-			// Wall
-			// 
-			this.Wall.DataPropertyName = "Wall";
-			this.Wall.FillWeight = 70F;
-			this.Wall.HeaderText = "Konstr.";
-			this.Wall.Name = "Wall";
-			this.Wall.ReadOnly = true;
-			this.Wall.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.Wall.Width = 70;
-			// 
-			// heizkreisDataGridViewTextBoxColumn
-			// 
-			this.heizkreisDataGridViewTextBoxColumn.DataPropertyName = "Heizkreis";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
-			this.heizkreisDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
-			this.heizkreisDataGridViewTextBoxColumn.FillWeight = 50F;
-			this.heizkreisDataGridViewTextBoxColumn.HeaderText = "HK";
-			this.heizkreisDataGridViewTextBoxColumn.Name = "heizkreisDataGridViewTextBoxColumn";
-			this.heizkreisDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.HK_COUNT;
-			this.heizkreisDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.heizkreisDataGridViewTextBoxColumn.Width = 50;
-			// 
-			// pipeHorizontalDataGridViewTextBoxColumn
-			// 
-			this.pipeHorizontalDataGridViewTextBoxColumn.DataPropertyName = "PipeHorizontal";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F2";
-			this.pipeHorizontalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
-			this.pipeHorizontalDataGridViewTextBoxColumn.HeaderText = "Leitung\nwaagr.\n(m)";
-			this.pipeHorizontalDataGridViewTextBoxColumn.Name = "pipeHorizontalDataGridViewTextBoxColumn";
-			this.pipeHorizontalDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
-			this.pipeHorizontalDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			// 
-			// pipeVerticalDataGridViewTextBoxColumn
-			// 
-			this.pipeVerticalDataGridViewTextBoxColumn.DataPropertyName = "PipeVertical";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle5.Format = "F2";
-			this.pipeVerticalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
-			this.pipeVerticalDataGridViewTextBoxColumn.HeaderText = "Leitung\nsenkr.\n(m)";
-			this.pipeVerticalDataGridViewTextBoxColumn.Name = "pipeVerticalDataGridViewTextBoxColumn";
-			this.pipeVerticalDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
-			this.pipeVerticalDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			// 
-			// rohrabstandDataGridViewTextBoxColumn
-			// 
-			this.rohrabstandDataGridViewTextBoxColumn.DataPropertyName = "Rohrabstand";
-			this.rohrabstandDataGridViewTextBoxColumn.HeaderText = "Rohrabstand";
-			this.rohrabstandDataGridViewTextBoxColumn.Name = "rohrabstandDataGridViewTextBoxColumn";
-			this.rohrabstandDataGridViewTextBoxColumn.ReadOnly = true;
-			this.rohrabstandDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.rohrabstandDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// registerHoeheDataGridViewTextBoxColumn
-			// 
-			this.registerHoeheDataGridViewTextBoxColumn.DataPropertyName = "RegisterHoehe";
-			this.registerHoeheDataGridViewTextBoxColumn.HeaderText = "RegisterHoehe";
-			this.registerHoeheDataGridViewTextBoxColumn.Name = "registerHoeheDataGridViewTextBoxColumn";
-			this.registerHoeheDataGridViewTextBoxColumn.ReadOnly = true;
-			this.registerHoeheDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.registerHoeheDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// rohreDataGridViewTextBoxColumn
-			// 
-			this.rohreDataGridViewTextBoxColumn.DataPropertyName = "Rohre";
-			this.rohreDataGridViewTextBoxColumn.HeaderText = "Rohre";
-			this.rohreDataGridViewTextBoxColumn.Name = "rohreDataGridViewTextBoxColumn";
-			this.rohreDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.rohreDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// equivalentPipeLengthDataGridViewTextBoxColumn
-			// 
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.DataPropertyName = "EquivalentPipeLength";
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.HeaderText = "EquivalentPipeLength";
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.Name = "equivalentPipeLengthDataGridViewTextBoxColumn";
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.ReadOnly = true;
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.equivalentPipeLengthDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// areaDataGridViewTextBoxColumn
-			// 
-			this.areaDataGridViewTextBoxColumn.DataPropertyName = "Area";
-			this.areaDataGridViewTextBoxColumn.HeaderText = "Area";
-			this.areaDataGridViewTextBoxColumn.Name = "areaDataGridViewTextBoxColumn";
-			this.areaDataGridViewTextBoxColumn.ReadOnly = true;
-			this.areaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.areaDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// PlannedProduct
-			// 
-			this.PlannedProduct.DataPropertyName = "PlannedProduct";
-			this.PlannedProduct.HeaderText = "PlannedProduct";
-			this.PlannedProduct.Name = "PlannedProduct";
-			this.PlannedProduct.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.PlannedProduct.Visible = false;
-			// 
-			// hithermRegisterBindingSource
-			// 
-			this.hithermRegisterBindingSource.DataSource = typeof(Europlan.Common.HithermRegister);
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "PlannedProduct";
+            this.dataGridViewTextBoxColumn2.HeaderText = "PlannedProduct";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn2.Visible = false;
 			// 
 			// PlannedHithermProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lblTitle);
 			this.Controls.Add(this.tabs);
 			this.Name = "PlannedHithermProductPanel";
 			this.Size = new System.Drawing.Size(864, 640);
-			this.grpPowerArea.ResumeLayout(false);
-			this.grpPowerArea.PerformLayout();
-			this.tabs.ResumeLayout(false);
-			this.pageInput.ResumeLayout(false);
-			this.panel1.ResumeLayout(false);
 			this.pageCircuit.ResumeLayout(false);
 			this.groupBox10.ResumeLayout(false);
 			this.groupBox9.ResumeLayout(false);
 			this.groupBox9.PerformLayout();
+            this.tabs.ResumeLayout(false);
+            this.pageInput.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.grpPowerArea.ResumeLayout(false);
+            this.grpPowerArea.PerformLayout();
 			this.pageConstructions.ResumeLayout(false);
 			this.pageAuslegung.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
@@ -1490,65 +1539,57 @@ namespace Europlan.Common {
 			((System.ComponentModel.ISupportInitialize)(this.dgvRegisters)).EndInit();
 			this.dgvRegisters.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.hithermRegisterBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.GroupBox grpPowerArea;
-		private NumericBox numHeatLoad;
-		private System.Windows.Forms.Label lblHeatLoadTxt;
-		private System.Windows.Forms.Label lblHeatLoadPercentage;
-		private NumericBox numHeatLoadPercentage;
-		private System.Windows.Forms.Label lblHeatLoadUnit;
-		private System.Windows.Forms.CheckBox chkCoverHeatLoad;
-		private System.Windows.Forms.Label lblHeatLoadTotal;
-		private System.Windows.Forms.Label lblCoolLoadTotal;
-		private System.Windows.Forms.CheckBox chkCoverCoolLoad;
-		private System.Windows.Forms.Label lblCoolLoadPercentage;
-		private NumericBox numCoolLoadPercentage;
-		private System.Windows.Forms.Label lblCoolLoadUnit;
-		private NumericBox numCoolLoad;
-		private System.Windows.Forms.Label lblCoolLoadTxt;
-		private System.Windows.Forms.TabControl tabs;
-		private System.Windows.Forms.TabPage pageInput;
+        private System.Windows.Forms.DataGridViewTextBoxColumn registerBreiteDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn constructionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nrOfRegistersDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn areaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource hithermRegisterBindingSource;
+        private System.Windows.Forms.HelpProvider helpProvider;
 		private System.Windows.Forms.TabPage pageAuslegung;
-		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.TabPage pageCircuit;
-		private System.Windows.Forms.GroupBox groupBox9;
-		private System.Windows.Forms.Button btnDistributor;
-		private System.Windows.Forms.Label lblDistributor;
-		private System.Windows.Forms.TextBox txtDistributor;
-		private System.Windows.Forms.GroupBox groupBox10;
-		private ConnectionPipePanel connectionPipePanel;
-		private System.Windows.Forms.Button btnConnectionPipes;
-		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Label lblHk;
-		private System.Windows.Forms.Label lblCool;
-		private System.Windows.Forms.Label lblHeat;
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.GroupBox groupBox7;
-		private System.Windows.Forms.GroupBox groupBox3;
-		private System.Windows.Forms.GroupBox groupBox2;
-		private System.Windows.Forms.Label lblRest;
-		private System.Windows.Forms.Label label16;
-		private System.Windows.Forms.Label label17;
-		private System.Windows.Forms.Label lblQHeat;
-		private System.Windows.Forms.Label lblDruckverlustHeat;
-		private System.Windows.Forms.Label lblDurchflussHeat;
-		private System.Windows.Forms.Label lblAvgqHeat;
-		private System.Windows.Forms.Label lblQHeatRest;
-		private System.Windows.Forms.Label lblQHeatDiff;
-		private System.Windows.Forms.Label lblDruckverlustCool;
-		private System.Windows.Forms.Label lblDurchflussCool;
-		private System.Windows.Forms.Label lblAvgqCool;
-		private System.Windows.Forms.Label lblQCoolRest;
-		private System.Windows.Forms.Label lblQCoolDiff;
-		private System.Windows.Forms.Label lblQCool;
+        private System.Windows.Forms.ListView lstError;
+        private System.Windows.Forms.ColumnHeader defaultColumn;
+        private System.Windows.Forms.Label lblRestAreaUnit;
+        private System.Windows.Forms.Label lblRestAreaTitle;
+        private System.Windows.Forms.Label lblAvailableAreaUnit;
+        private System.Windows.Forms.Label lblRestArea;
+        private System.Windows.Forms.Label lblAvailableArea;
+        private System.Windows.Forms.Label lblAvailableAreaTitle;
+        private System.Windows.Forms.Label lblNecessaryAreaUnit;
+        private System.Windows.Forms.Label lblNecessaryArea;
+        private System.Windows.Forms.Label lblNecessaryAreaTitle;
+        private System.Windows.Forms.Label lblNecessaryWaermestromdichteUnit;
+        private System.Windows.Forms.Label lblNecessaryWaermestromdichte;
+        private System.Windows.Forms.Label lblNecessaryWaermestromdichteTitle;
+        private System.Windows.Forms.DataGridView dgvRegisters;
+        private System.Windows.Forms.DataGridViewComboBoxColumn registerTypeDataGridViewTextBoxColumn;
+        private NumericColumn RegisterBreite;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Horizontal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Wall;
+        private NumericColumn heizkreisDataGridViewTextBoxColumn;
+        private NumericColumn pipeHorizontalDataGridViewTextBoxColumn;
+        private NumericColumn pipeVerticalDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rohrabstandDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn registerHoeheDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rohreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn equivalentPipeLengthDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlannedProduct;
+        private System.Windows.Forms.Button btnSelectWall;
+        private System.Windows.Forms.Label lblCoveredAreaUnit;
+        private System.Windows.Forms.Label lblCoveredArea;
+        private System.Windows.Forms.Label lblCoveredAreaTitle;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox lineInfo;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.Label lblDruckverlustCoolUnit;
 		private System.Windows.Forms.Label lblDurchflussCoolUnit;
 		private System.Windows.Forms.Label lblAvgqCoolUnit;
@@ -1561,56 +1602,71 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblQHeatRestUnit;
 		private System.Windows.Forms.Label lblQHeatDiffUnit;
 		private System.Windows.Forms.Label lblQHeatUnit;
-		private System.Windows.Forms.GroupBox groupBox4;
-		private System.Windows.Forms.Label lblCoveredAreaUnit;
-		private System.Windows.Forms.Label lblCoveredArea;
-		private System.Windows.Forms.Label lblCoveredAreaTitle;
-		private System.Windows.Forms.GroupBox lineInfo;
-		private System.Windows.Forms.GroupBox groupBox5;
-		private System.Windows.Forms.Label label32;
-		private System.Windows.Forms.DataGridView dgvRegisters;
-		private System.Windows.Forms.BindingSource hithermRegisterBindingSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn registerBreiteDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label lblDruckverlustCool;
+        private System.Windows.Forms.Label lblDurchflussCool;
+        private System.Windows.Forms.Label lblAvgqCool;
+        private System.Windows.Forms.Label lblQCoolRest;
+        private System.Windows.Forms.Label lblQCoolDiff;
+        private System.Windows.Forms.Label lblQCool;
+        private System.Windows.Forms.Label lblDruckverlustHeat;
+        private System.Windows.Forms.Label lblDurchflussHeat;
+        private System.Windows.Forms.Label lblAvgqHeat;
+        private System.Windows.Forms.Label lblQHeatRest;
+        private System.Windows.Forms.Label lblQHeatDiff;
+        private System.Windows.Forms.Label lblQHeat;
+        private System.Windows.Forms.Label lblRest;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label lblCool;
+        private System.Windows.Forms.Label lblHeat;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblHk;
+        private System.Windows.Forms.Button btnConnectionPipes;
 		private System.Windows.Forms.TabPage pageConstructions;
-		private System.Windows.Forms.Label lblNecessaryWaermestromdichteUnit;
-		private System.Windows.Forms.Label lblNecessaryWaermestromdichte;
-		private System.Windows.Forms.Label lblNecessaryWaermestromdichteTitle;
-		private System.Windows.Forms.Label lblNecessaryAreaUnit;
-		private System.Windows.Forms.Label lblNecessaryArea;
-		private System.Windows.Forms.Label lblNecessaryAreaTitle;
-		private System.Windows.Forms.DataGridViewTextBoxColumn constructionDataGridViewTextBoxColumn;
+        private HithermWallGrid hithermWallGrid1;
+        private System.Windows.Forms.TabPage pageCircuit;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private ConnectionPipePanel connectionPipePanel;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Button btnDistributor;
+        private System.Windows.Forms.Label lblDistributor;
+        private System.Windows.Forms.TextBox txtDistributor;
 		private System.Windows.Forms.CheckBox chkStellAntriebe;
-		private HithermWallGrid hithermWallGrid1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn nrOfRegistersDataGridViewTextBoxColumn;
-		private System.Windows.Forms.Button btnSelectWall;
-		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.TabControl tabs;
+        private System.Windows.Forms.TabPage pageInput;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox grpPowerArea;
 		private System.Windows.Forms.Label lblAreaPercentage;
 		private NumericBox numAreaPercentage;
 		private System.Windows.Forms.Label lblAreaUnit;
 		private NumericBox numArea;
 		private System.Windows.Forms.Label lblAreaTxt;
-		private System.Windows.Forms.Label lblRestAreaUnit;
-		private System.Windows.Forms.Label lblRestAreaTitle;
-		private System.Windows.Forms.Label lblAvailableAreaUnit;
-		private System.Windows.Forms.Label lblRestArea;
-		private System.Windows.Forms.Label lblAvailableArea;
-		private System.Windows.Forms.Label lblAvailableAreaTitle;
-		private System.Windows.Forms.ListView lstError;
-		private System.Windows.Forms.ColumnHeader defaultColumn;
-		private System.Windows.Forms.DataGridViewComboBoxColumn registerTypeDataGridViewTextBoxColumn;
-		private NumericColumn RegisterBreite;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn Horizontal;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Wall;
-		private NumericColumn heizkreisDataGridViewTextBoxColumn;
-		private NumericColumn pipeHorizontalDataGridViewTextBoxColumn;
-		private NumericColumn pipeVerticalDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn rohrabstandDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn registerHoeheDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn rohreDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn equivalentPipeLengthDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn areaDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn PlannedProduct;
-		private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.Label lblCoolLoadTotal;
+        private System.Windows.Forms.CheckBox chkCoverCoolLoad;
+        private System.Windows.Forms.Label lblCoolLoadPercentage;
+        private NumericBox numCoolLoadPercentage;
+        private System.Windows.Forms.Label lblCoolLoadUnit;
+        private NumericBox numCoolLoad;
+        private System.Windows.Forms.Label lblCoolLoadTxt;
+        private System.Windows.Forms.Label lblHeatLoadTotal;
+        private System.Windows.Forms.CheckBox chkCoverHeatLoad;
+        private System.Windows.Forms.Label lblHeatLoadPercentage;
+        private NumericBox numHeatLoadPercentage;
+        private System.Windows.Forms.Label lblHeatLoadUnit;
+        private NumericBox numHeatLoad;
+        private System.Windows.Forms.Label lblHeatLoadTxt;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblTitle;
+        private NumericColumn numericColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 	}
 }

@@ -155,6 +155,14 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
+		public override string ImageKey {
+            get { return "Hitherm.png"; }
+		}
+
+		public override string SelectedImageKey {
+            get { return "Hitherm.png"; }
+		}
+
 		public new static void StaticInitialize(Configuration config) {
 			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<HithermCompactProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
 			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<HithermCompactProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
@@ -1023,13 +1031,13 @@ namespace Europlan.Common {
 		}
 
 		public static void ReviseRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-			if (requiredMaterial.ContainsKey("HC42")) {
-				double amount = requiredMaterial["HC42"];
-				if (amount > 1000) {
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HC42", (-1) * (amount - (amount % 1000)));
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HC43", amount - (amount % 1000));
-				}
-			}
+			//if (requiredMaterial.ContainsKey("HC42")) {
+			//    double amount = requiredMaterial["HC42"];
+			//    if (amount > 1000) {
+			//        Project.Instance.AddRequiredMaterial(requiredMaterial, "HC42", (-1) * (amount - (amount % 1000)));
+			//        Project.Instance.AddRequiredMaterial(requiredMaterial, "HC43", amount - (amount % 1000));
+			//    }
+			//}
 		} 
 
 		public HithermCompactCircuit GetCircuitForRegister(HithermCompactRegister register) {

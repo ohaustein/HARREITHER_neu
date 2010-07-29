@@ -189,9 +189,6 @@
   <data name="chkPrice.Text" xml:space="preserve">
     <value>Preise</value>
   </data>
-  <data name="chkPrice.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;chkPrice.Name" xml:space="preserve">
     <value>chkPrice</value>
   </data>

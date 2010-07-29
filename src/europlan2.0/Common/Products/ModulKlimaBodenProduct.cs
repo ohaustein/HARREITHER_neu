@@ -72,6 +72,14 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
+		public override string ImageKey {
+            get { return "Fuﬂbodenheizung.png"; }
+		}
+
+		public override string SelectedImageKey {
+            get { return "Fuﬂbodenheizung.png"; }
+		}
+
 		public new static void StaticInitialize(Configuration config) {
 			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
 			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);

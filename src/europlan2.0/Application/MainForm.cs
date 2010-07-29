@@ -46,8 +46,9 @@ namespace Europlan.Application {
 
 			this.SetLanguage();
 
+			Licensing.License license = Licensing.LicenseManager.Instance.License;
 			this.updateController.ApplicationId = Program.updateGuid;
-			this.updateController.UpdateLocation = Program.updateLocation;
+			this.updateController.UpdateLocation = (license != null && license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatBetaUpdates)) ? Program.updateBetaLocation : Program.updateLocation;
 			this.updateController.PublicKeyToken = Program.updatePublicKey;
 
 			LicenseManager.Instance.LicenseChanged += new EventHandler(licenseManager_LicenseChanged);
@@ -83,7 +84,6 @@ namespace Europlan.Application {
 			optionsToolStripMenuItem.Text = EuroplanRes.MainForm_Optionen; //"&Optionen";
 			pasteToolStripButton.Text = EuroplanRes.MainForm_Einfuegen; //"&Einfügen";
 			pasteToolStripMenuItem.Text = EuroplanRes.MainForm_Einfuegen; //"Einfügen";
-			printToolStripButton.Text = EuroplanRes.MainForm_Drucken; //"&Drucken";
 			projectOverviewCoolToolStripButton.Text = EuroplanRes.MainForm_UebersichtKuehlen; //"Übersicht Kühlen";
 			projectOverviewHeatToolStripButton.Text = EuroplanRes.MainForm_UebersichtHeizen; //"Übersicht Heizen";
 			projektToolStripMenuItem.Text = EuroplanRes.MainForm_Projekt; //"Projekt";
@@ -110,7 +110,6 @@ namespace Europlan.Application {
 				this.saveToolStripMenuItem.Enabled = false;
 				this.saveToolStripButton.Enabled = false;
 				this.saveAsToolStripMenuItem.Enabled = false;
-				this.printToolStripButton.Enabled = false;
 				this.title = MainForm.defaultTitle + " (" + EuroplanRes.General_NichtLizenziert + ")";
 				this.UpdateTitle();
 			} else {
@@ -121,7 +120,6 @@ namespace Europlan.Application {
 				this.saveToolStripMenuItem.Enabled = true;
 				this.saveToolStripButton.Enabled = true;
 				this.saveAsToolStripMenuItem.Enabled = true;
-				this.printToolStripButton.Enabled = true;
 				this.title = MainForm.defaultTitle;
 				this.UpdateTitle();
 			}
@@ -753,9 +751,8 @@ namespace Europlan.Application {
 		private void importGlobalConfToolStripMenuItem_Click(object sender, EventArgs e) {
 			if (this.CheckForUnsavedChanges()) {
 				if (this.openGlobalConfDialog.ShowDialog() == DialogResult.OK) {
-					string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
-					if (!Path.GetDirectoryName(this.openGlobalConfDialog.FileName).Equals(appDataPath)) {
-						File.Copy(this.openGlobalConfDialog.FileName, Path.Combine(appDataPath, "global.conf"), true);
+					if (!Path.GetDirectoryName(this.openGlobalConfDialog.FileName).Equals(PathUtil.DataPath)) {
+						File.Copy(this.openGlobalConfDialog.FileName, Path.Combine(PathUtil.DataPath, "global.conf"), true);
 						Configuration.ResetConfigurations();
 					}
 					if (projectFileName == null) {
@@ -784,14 +781,13 @@ namespace Europlan.Application {
 				OpenFileDialog dialog = new OpenFileDialog();
 				//FolderBrowserDialog dialog = new FolderBrowserDialog();
 				dialog.Filter = EuroplanRes.MainForm_BruttoPreiseFilter + "|BruttoPreise*.csv";
-				string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 				if (dialog.ShowDialog() == DialogResult.OK) {
 					string path = Path.GetDirectoryName(dialog.FileName);
-					if (!path.Equals(appDataPath)) {
+					if (!path.Equals(PathUtil.DataPath)) {
 						// TODO 
 						// check if csv contains materials
 						if (File.Exists(dialog.FileName)) {
-							File.Copy(dialog.FileName, Path.Combine(appDataPath, "BruttoPreise.csv"), true);
+							File.Copy(dialog.FileName, Path.Combine(PathUtil.DataPath, "BruttoPreise.csv"), true);
 						}
 					}
 					if (projectFileName == null) {

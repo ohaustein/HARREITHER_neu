@@ -24,6 +24,7 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuickDimensioningPanel));
 			this.tabQuickDimensioning = new System.Windows.Forms.TabControl();
 			this.pageSummary = new System.Windows.Forms.TabPage();
 			this.pageSettings = new System.Windows.Forms.TabPage();
@@ -70,11 +71,13 @@ namespace Europlan.Common {
 			this.label3 = new System.Windows.Forms.Label();
 			this.quickDimensioningRoomDistributorsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.pageDistributors.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningRoomDistributorsWrapperBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabQuickDimensioning
@@ -85,10 +88,10 @@ namespace Europlan.Common {
 			this.tabQuickDimensioning.Controls.Add(this.pageSummary);
 			this.tabQuickDimensioning.Controls.Add(this.pageSettings);
 			this.tabQuickDimensioning.Controls.Add(this.pageDistributors);
-			this.tabQuickDimensioning.Location = new System.Drawing.Point(0, 27);
+            this.tabQuickDimensioning.Location = new System.Drawing.Point(0, 38);
 			this.tabQuickDimensioning.Name = "tabQuickDimensioning";
 			this.tabQuickDimensioning.SelectedIndex = 0;
-			this.tabQuickDimensioning.Size = new System.Drawing.Size(865, 532);
+            this.tabQuickDimensioning.Size = new System.Drawing.Size(865, 521);
 			this.tabQuickDimensioning.TabIndex = 0;
 			this.tabQuickDimensioning.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabQuickDimensioning_Selecting);
 			this.tabQuickDimensioning.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabQuickDimensioning_Selected);
@@ -98,7 +101,7 @@ namespace Europlan.Common {
 			this.pageSummary.Location = new System.Drawing.Point(4, 22);
 			this.pageSummary.Name = "pageSummary";
 			this.pageSummary.Padding = new System.Windows.Forms.Padding(3);
-			this.pageSummary.Size = new System.Drawing.Size(857, 506);
+            this.pageSummary.Size = new System.Drawing.Size(857, 495);
 			this.pageSummary.TabIndex = 1;
 			this.pageSummary.Text = "Ergebnis Flächenaufstellung";
 			this.pageSummary.UseVisualStyleBackColor = true;
@@ -116,7 +119,7 @@ namespace Europlan.Common {
 			this.pageSettings.Location = new System.Drawing.Point(4, 22);
 			this.pageSettings.Name = "pageSettings";
 			this.pageSettings.Padding = new System.Windows.Forms.Padding(3);
-			this.pageSettings.Size = new System.Drawing.Size(857, 506);
+            this.pageSettings.Size = new System.Drawing.Size(857, 495);
 			this.pageSettings.TabIndex = 0;
 			this.pageSettings.Text = "Einstellungen";
 			this.pageSettings.UseVisualStyleBackColor = true;
@@ -652,7 +655,7 @@ namespace Europlan.Common {
 			this.pageDistributors.Location = new System.Drawing.Point(4, 22);
 			this.pageDistributors.Name = "pageDistributors";
 			this.pageDistributors.Padding = new System.Windows.Forms.Padding(3);
-			this.pageDistributors.Size = new System.Drawing.Size(857, 506);
+            this.pageDistributors.Size = new System.Drawing.Size(857, 495);
 			this.pageDistributors.TabIndex = 2;
 			this.pageDistributors.Text = "Verteiler";
 			this.pageDistributors.UseVisualStyleBackColor = true;
@@ -669,7 +672,7 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributorsSummary.ModulKlimaBoden = true;
 			this.quickDimensioningDistributorsSummary.ModulKlimaDecke = true;
 			this.quickDimensioningDistributorsSummary.Name = "quickDimensioningDistributorsSummary";
-			this.quickDimensioningDistributorsSummary.Size = new System.Drawing.Size(851, 500);
+            this.quickDimensioningDistributorsSummary.Size = new System.Drawing.Size(851, 489);
 			this.quickDimensioningDistributorsSummary.TabIndex = 0;
 			this.quickDimensioningDistributorsSummary.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.quickDimensioningDistributorsSummary_ProjectChanged);
 			// 
@@ -677,7 +680,7 @@ namespace Europlan.Common {
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Location = new System.Drawing.Point(34, 5);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(187, 24);
 			this.label3.TabIndex = 3;
@@ -691,10 +694,22 @@ namespace Europlan.Common {
 			// 
 			this.helpProvider.HelpNamespace = "europlan.chm";
 			// 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 78;
+            this.pictureBox1.TabStop = false;
+            // 
 			// QuickDimensioningPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.tabQuickDimensioning);
 			this.helpProvider.SetHelpKeyword(this, "html\\Flächenaufstellung.htm");
@@ -709,6 +724,7 @@ namespace Europlan.Common {
 			this.tableLayoutPanel1.PerformLayout();
 			this.pageDistributors.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.quickDimensioningRoomDistributorsWrapperBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -762,5 +778,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.CheckBox cbHithermCompactRoofCool;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }

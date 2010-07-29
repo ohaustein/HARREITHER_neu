@@ -23,6 +23,7 @@ namespace Europlan.AdminApplication {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.mainTabControl = new System.Windows.Forms.TabControl();
 			this.tabPageLicenses = new System.Windows.Forms.TabPage();
 			this.splitContainerLicenses = new System.Windows.Forms.SplitContainer();
@@ -42,6 +43,7 @@ namespace Europlan.AdminApplication {
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.datanormDateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.lizenzenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.artikelUndKostruktionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,6 +137,7 @@ namespace Europlan.AdminApplication {
 			this.lstLicenses.UseCompatibleStateImageBehavior = false;
 			this.lstLicenses.View = System.Windows.Forms.View.Details;
 			this.lstLicenses.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lstLicenses_ItemSelectionChanged);
+			this.lstLicenses.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstLicenses_KeyDown);
 			// 
 			// colLicensedTo
 			// 
@@ -257,7 +260,8 @@ namespace Europlan.AdminApplication {
 			// importToolStripMenuItem
 			// 
 			this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.datanormDateiToolStripMenuItem});
+            this.datanormDateiToolStripMenuItem,
+            this.lizenzenToolStripMenuItem});
 			this.importToolStripMenuItem.Name = "importToolStripMenuItem";
 			this.importToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
 			this.importToolStripMenuItem.Text = "Importieren";
@@ -265,9 +269,16 @@ namespace Europlan.AdminApplication {
 			// datanormDateiToolStripMenuItem
 			// 
 			this.datanormDateiToolStripMenuItem.Name = "datanormDateiToolStripMenuItem";
-			this.datanormDateiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.datanormDateiToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
 			this.datanormDateiToolStripMenuItem.Text = "Artikelliste...";
 			this.datanormDateiToolStripMenuItem.Click += new System.EventHandler(this.datanormDateiToolStripMenuItem_Click);
+			// 
+			// lizenzenToolStripMenuItem
+			// 
+			this.lizenzenToolStripMenuItem.Name = "lizenzenToolStripMenuItem";
+			this.lizenzenToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+			this.lizenzenToolStripMenuItem.Text = "Lizenzen...";
+			this.lizenzenToolStripMenuItem.Click += new System.EventHandler(this.lizenzenToolStripMenuItem_Click);
 			// 
 			// exportToolStripMenuItem
 			// 
@@ -299,8 +310,9 @@ namespace Europlan.AdminApplication {
 			this.ClientSize = new System.Drawing.Size(787, 513);
 			this.Controls.Add(this.mainTabControl);
 			this.Controls.Add(this.menuStrip1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
-			this.Text = "Europlan Admin";
+			this.Text = "Europlan 2.0 Wartungbereich";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.mainTabControl.ResumeLayout(false);
@@ -342,6 +354,7 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.ToolStripMenuItem datanormDateiToolStripMenuItem;
 		private System.Windows.Forms.TabPage tabPageAdditionalArticles;
 		private Europlan.Common.MaterialEditorGrid materialEditorGrid1;
+		private System.Windows.Forms.ToolStripMenuItem lizenzenToolStripMenuItem;
 	}
 }
 

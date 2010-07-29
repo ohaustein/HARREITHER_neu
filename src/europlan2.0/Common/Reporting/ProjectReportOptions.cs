@@ -156,8 +156,7 @@ namespace Europlan.Common {
 		}
 
 		public bool Prices {
-			// TODO
-			get { return false; }
+			get { return prices; }
 		}
 
 	}

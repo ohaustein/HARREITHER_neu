@@ -43,10 +43,6 @@ namespace Europlan.Common {
 			get { return typeof(QuickDimensioningPanel); }
 		}
 
-		public System.Drawing.Icon AssociatedIcon {
-			get { return null; }
-		}
-
 		public ProductCheckState EurovalCheckState {
 			get { return eurovalCheckState; }
 			set { eurovalCheckState = value; }

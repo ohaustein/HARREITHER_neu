@@ -137,35 +137,45 @@ namespace Europlan.Common {
 			string localized = EuroplanRes.General_Projekt;
 			rootNode = new TreeNode(localized == null ? "Projekt" : localized);
 			rootNode.Tag = this;
-			rootNode.ImageIndex = 1;
-			rootNode.SelectedImageIndex = 1;
+            rootNode.ImageKey = "Projekt.png";
+            rootNode.SelectedImageKey = "Projekt.png";
 
 			// building (floors and rooms)
 			localized = EuroplanRes.General_Geschosse;
 			floorsNode = new TreeNode(localized == null ? "Geschoﬂe" : localized);
 			floorsNode.Tag = floors;
+            floorsNode.ImageKey = "Geschoﬂ.png";
+            floorsNode.SelectedImageKey = "Geschoﬂ.png";
 
 			localized = EuroplanRes.General_Anlagedaten;
 			facilityDetailsNode = new TreeNode(localized == null ? "Anlagedaten" : localized);
 			facilityDetailsNode.Tag = typeof(FacilityDetailsSummaryPanel);
-			facilityDetailsNode.ImageIndex = 2;
-			facilityDetailsNode.SelectedImageIndex = 2;
+            facilityDetailsNode.ImageKey = "Anlagedaten.png";
+            facilityDetailsNode.SelectedImageKey = "Anlagedaten.png";
 
 			localized = EuroplanRes.General_Regelkreise;
 			regulatorCircuitsNode = new TreeNode(localized == null ? "Regelkreise" : localized);
 			regulatorCircuitsNode.Tag = typeof(RegulatorCircuitsSummaryPanel);
+            regulatorCircuitsNode.ImageKey = "Regelkreise.png";
+            regulatorCircuitsNode.SelectedImageKey = "Regelkreise.png";
 
 			localized = EuroplanRes.General_Systemparameter;
 			systemParametersNode = new TreeNode(localized == null ? "Systemparameter" : localized);
 			systemParametersNode.Tag = typeof(SystemParametersPanel);
+            systemParametersNode.ImageKey = "Systemparameter.png";
+            systemParametersNode.SelectedImageKey = "Systemparameter.png";
 
 			localized = EuroplanRes.General_Flaechenausfstellung;
 			quickDimensioningNode = new TreeNode(localized == null ? "Fl‰chenaufstellung" : localized);
 			quickDimensioningNode.Tag = quickDimensioning;
+            quickDimensioningNode.ImageKey = "Fl‰chenaufstellung.png";
+            quickDimensioningNode.SelectedImageKey = "Fl‰chenaufstellung.png";
 
 			localized = EuroplanRes.General_Materialbedarf;
 			requiredMaterialNode = new TreeNode(localized == null ? "Materialbedarf" : localized);
 			requiredMaterialNode.Tag = typeof(RequiredMaterialPanel);
+            requiredMaterialNode.ImageKey = "Materialbedarf.png";
+            requiredMaterialNode.SelectedImageKey = "Materialbedarf.png";
 
 			localized = EuroplanRes.General_ImportiertePlaene;
 			importedPlansNode = new TreeNode(localized == null ? "Importierte Pl‰ne" : localized);
@@ -532,12 +542,6 @@ namespace Europlan.Common {
 		public Type AssociatedPanelType {
 			get { 
 				return typeof(ProjectSummaryPanel);
-			}
-		}
-
-		public Icon AssociatedIcon {
-			get { 
-				return null; 
 			}
 		}
 

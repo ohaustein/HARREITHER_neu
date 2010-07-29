@@ -103,6 +103,8 @@ namespace Europlan.Common {
 			this.quickDimensioningNrOfServos = -1;
 			this.quickDimensioningRoomController = RoomController.None;
 			this.quickDimensioningComments = "";
+            this.roomNode.ImageKey = "Raum.png";
+            this.roomNode.SelectedImageKey = "Raum.png";
 		}
 
 		internal void Synchronize(Room room) {
@@ -413,12 +415,6 @@ namespace Europlan.Common {
 		public Type AssociatedPanelType {
 			get {
 				return typeof(RoomSummaryPanel);
-			}
-		}
-
-		public System.Drawing.Icon AssociatedIcon {
-			get {
-				return null;
 			}
 		}
 

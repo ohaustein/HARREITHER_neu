@@ -128,6 +128,14 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
+		public override string ImageKey {
+            get { return "Klimadecke.png"; }
+		}
+
+		public override string SelectedImageKey {
+            get { return "Klimadecke.png"; }
+		}
+
 		public new static void StaticInitialize(Configuration config) {
 			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 80);
 			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 80);
@@ -1094,7 +1102,7 @@ namespace Europlan.Common {
 							// Modul
 							Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
 							nrOfElements++;
-							modulArea += modul.HeatArea;
+							modulArea += modul.GetHeatArea(false);
 							if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) {
 								nrOfOtherElements++;
 							}

@@ -1585,6 +1585,9 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
   <data name="LL_Report_AnbindeflaecheKurz" xml:space="preserve">
     <value>Anb:</value>
   </data>
+  <data name="LL_Report_AnschlussDimensionierung" xml:space="preserve">
+    <value>Anschl. Dim.</value>
+  </data>
   <data name="LL_Report_AnteilHeiz" xml:space="preserve">
     <value>Anteil</value>
   </data>
@@ -3685,6 +3688,21 @@ RZ</value>
   </data>
   <data name="ProjectReport_Hinweis" xml:space="preserve">
     <value>%SYSTEM% in %RAUMID% (%RAUMNAME%): %HINWEIS%</value>
+  </data>
+  <data name="ProjectReport_HISAN32" xml:space="preserve">
+    <value>HISAN® Ø32</value>
+  </data>
+  <data name="ProjectReport_HISAN40" xml:space="preserve">
+    <value>HISAN® Ø40</value>
+  </data>
+  <data name="ProjectReport_HISAN50" xml:space="preserve">
+    <value>HISAN® Ø50</value>
+  </data>
+  <data name="ProjectReport_HISAN63" xml:space="preserve">
+    <value>HISAN® Ø63</value>
+  </data>
+  <data name="ProjectReport_HISAN75" xml:space="preserve">
+    <value>HISAN® Ø75</value>
   </data>
   <data name="ProjectReport_HithermKlimawand" xml:space="preserve">
     <value>Hitherm Klimawand 24/17</value>

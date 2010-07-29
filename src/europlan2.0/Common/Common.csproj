@@ -64,6 +64,7 @@
     <Compile Include="Configuration\FloorConstruction.cs" />
     <Compile Include="Configuration\MaterialType.cs" />
     <Compile Include="Configuration\Material.cs" />
+    <Compile Include="Configuration\PathUtil.cs" />
     <Compile Include="Configuration\ProductParameterAttribute.cs" />
     <Compile Include="Configuration\RoomType.cs" />
     <Compile Include="Configuration\WallConstruction.cs" />
@@ -517,10 +518,26 @@
       <DependentUpon>ConstructionEditorGrid.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="EuroplanRes.en.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>EuroplanRes.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EuroplanRes.hr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EuroplanRes.hu.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EuroplanRes.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>EuroplanRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EuroplanRes.sl.resx">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ExtendedCorrections\ExtendedCorrectionsGrid.resx">
       <SubType>Designer</SubType>

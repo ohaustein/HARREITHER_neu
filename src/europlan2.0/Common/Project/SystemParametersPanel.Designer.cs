@@ -23,6 +23,8 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SystemParametersPanel));
 			this.lblTitle = new System.Windows.Forms.Label();
 			this.tabSystemParameters = new System.Windows.Forms.TabControl();
 			this.tabEuroval = new System.Windows.Forms.TabPage();
@@ -249,7 +251,9 @@ namespace Europlan.Common {
 			this.numGeneralAlphaBodenCool = new Europlan.Common.NumericBox();
 			this.numGeneralAlphaDeckeCool = new Europlan.Common.NumericBox();
 			this.numGeneralAlphaWandCool = new Europlan.Common.NumericBox();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.tabSystemParameters.SuspendLayout();
 			this.tabEuroval.SuspendLayout();
 			this.layoutEuroval.SuspendLayout();
@@ -265,13 +269,14 @@ namespace Europlan.Common {
 			this.layoutModulDecke.SuspendLayout();
 			this.tabGeneral.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// lblTitle
 			// 
 			this.lblTitle.AutoSize = true;
 			this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblTitle.Location = new System.Drawing.Point(3, 0);
+            this.lblTitle.Location = new System.Drawing.Point(34, 5);
 			this.lblTitle.Name = "lblTitle";
 			this.lblTitle.Size = new System.Drawing.Size(171, 24);
 			this.lblTitle.TabIndex = 3;
@@ -289,10 +294,11 @@ namespace Europlan.Common {
 			this.tabSystemParameters.Controls.Add(this.tabModulBoden);
 			this.tabSystemParameters.Controls.Add(this.tabModulDecke);
 			this.tabSystemParameters.Controls.Add(this.tabGeneral);
-			this.tabSystemParameters.Location = new System.Drawing.Point(0, 27);
+            this.tabSystemParameters.ImageList = this.imageList1;
+            this.tabSystemParameters.Location = new System.Drawing.Point(0, 38);
 			this.tabSystemParameters.Name = "tabSystemParameters";
 			this.tabSystemParameters.SelectedIndex = 0;
-			this.tabSystemParameters.Size = new System.Drawing.Size(852, 513);
+            this.tabSystemParameters.Size = new System.Drawing.Size(852, 502);
 			this.tabSystemParameters.TabIndex = 4;
 			// 
 			// tabEuroval
@@ -300,11 +306,12 @@ namespace Europlan.Common {
 			this.tabEuroval.Controls.Add(this.layoutEuroval);
 			this.helpProvider.SetHelpKeyword(this.tabEuroval, "html\\euro31kp.htm");
 			this.helpProvider.SetHelpNavigator(this.tabEuroval, System.Windows.Forms.HelpNavigator.Topic);
-			this.tabEuroval.Location = new System.Drawing.Point(4, 22);
+            this.tabEuroval.ImageKey = "Fußbodenheizung.png";
+            this.tabEuroval.Location = new System.Drawing.Point(4, 23);
 			this.tabEuroval.Name = "tabEuroval";
 			this.tabEuroval.Padding = new System.Windows.Forms.Padding(3);
 			this.helpProvider.SetShowHelp(this.tabEuroval, true);
-			this.tabEuroval.Size = new System.Drawing.Size(844, 487);
+            this.tabEuroval.Size = new System.Drawing.Size(844, 475);
 			this.tabEuroval.TabIndex = 0;
 			this.tabEuroval.Text = "Euroval®";
 			this.tabEuroval.UseVisualStyleBackColor = true;
@@ -1220,10 +1227,11 @@ namespace Europlan.Common {
 			this.tabEcotherm.Controls.Add(this.layoutEcotherm);
 			this.helpProvider.SetHelpKeyword(this.tabEcotherm, "html\\euro31kp.htm");
 			this.helpProvider.SetHelpNavigator(this.tabEcotherm, System.Windows.Forms.HelpNavigator.Topic);
-			this.tabEcotherm.Location = new System.Drawing.Point(4, 22);
+            this.tabEcotherm.ImageKey = "Fußbodenheizung.png";
+            this.tabEcotherm.Location = new System.Drawing.Point(4, 23);
 			this.tabEcotherm.Name = "tabEcotherm";
 			this.helpProvider.SetShowHelp(this.tabEcotherm, true);
-			this.tabEcotherm.Size = new System.Drawing.Size(844, 487);
+            this.tabEcotherm.Size = new System.Drawing.Size(844, 475);
 			this.tabEcotherm.TabIndex = 4;
 			this.tabEcotherm.Text = "Ecotherm®";
 			this.tabEcotherm.UseVisualStyleBackColor = true;
@@ -1901,10 +1909,11 @@ namespace Europlan.Common {
 			this.tabHitherm.Controls.Add(this.layoutHitherm);
 			this.helpProvider.SetHelpKeyword(this.tabHitherm, "html\\euro4up9.htm");
 			this.helpProvider.SetHelpNavigator(this.tabHitherm, System.Windows.Forms.HelpNavigator.Topic);
-			this.tabHitherm.Location = new System.Drawing.Point(4, 22);
+            this.tabHitherm.ImageKey = "Hitherm.png";
+            this.tabHitherm.Location = new System.Drawing.Point(4, 23);
 			this.tabHitherm.Name = "tabHitherm";
 			this.helpProvider.SetShowHelp(this.tabHitherm, true);
-			this.tabHitherm.Size = new System.Drawing.Size(844, 487);
+            this.tabHitherm.Size = new System.Drawing.Size(844, 475);
 			this.tabHitherm.TabIndex = 1;
 			this.tabHitherm.Text = "Hitherm®";
 			this.tabHitherm.UseVisualStyleBackColor = true;
@@ -2309,11 +2318,12 @@ namespace Europlan.Common {
 			this.tabHithermCompact.Controls.Add(this.layoutHithermCompact);
 			this.helpProvider.SetHelpKeyword(this.tabHithermCompact, "html\\euro4up9.htm");
 			this.helpProvider.SetHelpNavigator(this.tabHithermCompact, System.Windows.Forms.HelpNavigator.Topic);
-			this.tabHithermCompact.Location = new System.Drawing.Point(4, 22);
+            this.tabHithermCompact.ImageKey = "Hitherm.png";
+            this.tabHithermCompact.Location = new System.Drawing.Point(4, 23);
 			this.tabHithermCompact.Name = "tabHithermCompact";
 			this.tabHithermCompact.Padding = new System.Windows.Forms.Padding(3);
 			this.helpProvider.SetShowHelp(this.tabHithermCompact, true);
-			this.tabHithermCompact.Size = new System.Drawing.Size(844, 487);
+            this.tabHithermCompact.Size = new System.Drawing.Size(844, 475);
 			this.tabHithermCompact.TabIndex = 5;
 			this.tabHithermCompact.Text = "Hitherm® Compact";
 			this.tabHithermCompact.UseVisualStyleBackColor = true;
@@ -2794,9 +2804,10 @@ namespace Europlan.Common {
 			// tabModulBoden
 			// 
 			this.tabModulBoden.Controls.Add(this.layoutModulBoden);
-			this.tabModulBoden.Location = new System.Drawing.Point(4, 22);
+            this.tabModulBoden.ImageKey = "Fußbodenheizung.png";
+            this.tabModulBoden.Location = new System.Drawing.Point(4, 23);
 			this.tabModulBoden.Name = "tabModulBoden";
-			this.tabModulBoden.Size = new System.Drawing.Size(844, 487);
+            this.tabModulBoden.Size = new System.Drawing.Size(844, 475);
 			this.tabModulBoden.TabIndex = 2;
 			this.tabModulBoden.Text = "Modul Klima-Boden";
 			this.tabModulBoden.UseVisualStyleBackColor = true;
@@ -3345,9 +3356,10 @@ namespace Europlan.Common {
 			// tabModulDecke
 			// 
 			this.tabModulDecke.Controls.Add(this.layoutModulDecke);
-			this.tabModulDecke.Location = new System.Drawing.Point(4, 22);
+            this.tabModulDecke.ImageKey = "Klimadecke.png";
+            this.tabModulDecke.Location = new System.Drawing.Point(4, 23);
 			this.tabModulDecke.Name = "tabModulDecke";
-			this.tabModulDecke.Size = new System.Drawing.Size(844, 487);
+            this.tabModulDecke.Size = new System.Drawing.Size(844, 475);
 			this.tabModulDecke.TabIndex = 3;
 			this.tabModulDecke.Text = "Modul Klima-Decke";
 			this.tabModulDecke.UseVisualStyleBackColor = true;
@@ -4066,9 +4078,10 @@ namespace Europlan.Common {
 			// tabGeneral
 			// 
 			this.tabGeneral.Controls.Add(this.tableLayoutPanel1);
-			this.tabGeneral.Location = new System.Drawing.Point(4, 22);
+            this.tabGeneral.ImageKey = "Systemparameter.png";
+            this.tabGeneral.Location = new System.Drawing.Point(4, 23);
 			this.tabGeneral.Name = "tabGeneral";
-			this.tabGeneral.Size = new System.Drawing.Size(844, 487);
+            this.tabGeneral.Size = new System.Drawing.Size(844, 475);
 			this.tabGeneral.TabIndex = 6;
 			this.tabGeneral.Text = "Allgemein";
 			this.tabGeneral.UseVisualStyleBackColor = true;
@@ -4466,14 +4479,35 @@ namespace Europlan.Common {
             65536});
 			this.numGeneralAlphaWandCool.ValueChanged += new System.EventHandler(this.numGeneralAlphaWandCool_ValueChanged);
 			// 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Fußbodenheizung.png");
+            this.imageList1.Images.SetKeyName(1, "Hitherm.png");
+            this.imageList1.Images.SetKeyName(2, "Klimadecke.png");
+            this.imageList1.Images.SetKeyName(3, "Systemparameter.png");
+            // 
 			// helpProvider
 			// 
 			this.helpProvider.HelpNamespace = "europlan.chm";
 			// 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 78;
+            this.pictureBox1.TabStop = false;
+            // 
 			// SystemParametersPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.tabSystemParameters);
 			this.Controls.Add(this.lblTitle);
 			this.Name = "SystemParametersPanel";
@@ -4500,6 +4534,7 @@ namespace Europlan.Common {
 			this.tabGeneral.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -4734,5 +4769,7 @@ namespace Europlan.Common {
 		private NumericBox numGeneralAlphaDeckeCool;
 		private NumericBox numGeneralAlphaWandCool;
 		private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ImageList imageList1;
 	}
 }

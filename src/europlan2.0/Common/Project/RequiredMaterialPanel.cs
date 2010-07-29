@@ -18,6 +18,14 @@ namespace Europlan.Common {
 		public RequiredMaterialPanel() {
 			InitializeComponent();
 
+			// visual studio always deletes these lines of code from the designer.cs, so just do it here...
+			this.requiredMaterialGridFloor.CategoryType = Europlan.Common.CategoryType.Floor;
+			this.requiredMaterialGridWall.CategoryType = Europlan.Common.CategoryType.Wall;
+			this.requiredMaterialGridCeiling.CategoryType = Europlan.Common.CategoryType.Ceiling;
+			this.requiredMaterialGridDistributor.CategoryType = Europlan.Common.CategoryType.Distributor;
+			this.requiredMaterialGridInsulation.CategoryType = Europlan.Common.CategoryType.Insulation;
+			this.requiredMaterialGridGeneral.CategoryType = Europlan.Common.CategoryType.General;
+
 			this.SetLanguage();
 
 			UpdateControl(true);

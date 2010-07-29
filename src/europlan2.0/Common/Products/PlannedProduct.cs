@@ -32,6 +32,8 @@ namespace Europlan.Common {
 			this.id = Guid.NewGuid().ToString();
 			this.productNode = new TreeNode();
 			this.productNode.Tag = this;
+			this.productNode.ImageKey = plannedProduct.ImageKey;
+			this.productNode.SelectedImageKey = plannedProduct.SelectedImageKey;
 			this.Product = plannedProduct;
 		}
 
@@ -287,6 +289,8 @@ namespace Europlan.Common {
 					if (this.productNode == null) {
 						this.productNode = new TreeNode();
 						this.productNode.Tag = this;
+						this.productNode.ImageKey = plannedProduct.ImageKey;
+						this.productNode.SelectedImageKey = plannedProduct.SelectedImageKey;
 					}
 					if (this.plannedProduct.AssociatedRoom != null) {
 						List<PlannedProduct> products = this.plannedProduct.AssociatedRoom.PlannedProducts;
@@ -431,10 +435,6 @@ namespace Europlan.Common {
 				}
 				return null;
 			}
-		}
-
-		public System.Drawing.Icon AssociatedIcon {
-			get { return null; }
 		}
 
 		#endregion

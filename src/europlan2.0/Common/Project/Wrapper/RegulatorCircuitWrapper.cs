@@ -15,6 +15,7 @@ namespace Europlan.Common {
 		private double durchfluss;
 		private double druckverlust;
 		private double inhalt;
+		private string anschlussDimensionierung;
 
 		public string HeatOrCool {
 			get { return heatOrCool; }
@@ -60,6 +61,11 @@ namespace Europlan.Common {
 			get { return inhalt; }
 			set { inhalt = value; }
 		}
+
+		public string AnschlussDimensionierung {
+			get { return anschlussDimensionierung; }
+			set { anschlussDimensionierung = value; }
+	}
 
 	}
 

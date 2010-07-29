@@ -20,6 +20,7 @@ namespace Europlan.Application {
 
 		public static Guid updateGuid = new Guid();
 		public static string updateLocation = null;
+		public static string updateBetaLocation = null;
 		public static string updatePublicKey = null;
 
 		/// <summary>

@@ -195,6 +195,14 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
+		public override string ImageKey {
+            get { return "Hitherm.png"; }
+		}
+
+		public override string SelectedImageKey {
+            get { return "Hitherm.png"; }
+		}
+
 		public new static void StaticInitialize(Configuration config) {
 			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
 			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);

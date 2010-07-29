@@ -25,8 +25,8 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FloorListSummaryPanel));
 			this.gridFloors = new System.Windows.Forms.DataGridView();
-			this.associatedIconDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colView = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -35,8 +35,10 @@ namespace Europlan.Common {
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnWhatIsNext = new System.Windows.Forms.Button();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.gridFloors)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.projectFloorsSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridFloors
@@ -56,14 +58,13 @@ namespace Europlan.Common {
 			this.gridFloors.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.gridFloors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridFloors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.associatedIconDataGridViewImageColumn,
             this.nameDataGridViewTextBoxColumn,
             this.colView,
             this.idDataGridViewTextBoxColumn,
             this.associatedPanelTypeDataGridViewTextBoxColumn});
 			this.gridFloors.DataMember = "Floors";
 			this.gridFloors.DataSource = this.projectFloorsSource;
-			this.gridFloors.Location = new System.Drawing.Point(3, 31);
+            this.gridFloors.Location = new System.Drawing.Point(3, 35);
 			this.gridFloors.MultiSelect = false;
 			this.gridFloors.Name = "gridFloors";
 			this.gridFloors.Size = new System.Drawing.Size(672, 277);
@@ -73,15 +74,6 @@ namespace Europlan.Common {
 			this.gridFloors.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.gridFloors_RowPrePaint);
 			this.gridFloors.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridFloors_UserDeletedRow);
 			this.gridFloors.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFloors_CellClick);
-			// 
-			// associatedIconDataGridViewImageColumn
-			// 
-			this.associatedIconDataGridViewImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-			this.associatedIconDataGridViewImageColumn.DataPropertyName = "AssociatedIcon";
-			this.associatedIconDataGridViewImageColumn.HeaderText = global::Europlan.Common.EuroplanRes.LL_Report_VerlegedatenEurovalRaumNameZeile2;
-			this.associatedIconDataGridViewImageColumn.Name = "associatedIconDataGridViewImageColumn";
-			this.associatedIconDataGridViewImageColumn.ReadOnly = true;
-			this.associatedIconDataGridViewImageColumn.Visible = false;
 			// 
 			// nameDataGridViewTextBoxColumn
 			// 
@@ -128,7 +120,7 @@ namespace Europlan.Common {
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(34, 5);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(106, 24);
 			this.label1.TabIndex = 2;
@@ -149,10 +141,22 @@ namespace Europlan.Common {
 			// 
 			this.helpProvider.HelpNamespace = "europlan.chm";
 			// 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(3, 0);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 76;
+            this.pictureBox1.TabStop = false;
+            // 
 			// FloorListSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.btnWhatIsNext);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.gridFloors);
@@ -163,6 +167,7 @@ namespace Europlan.Common {
 			this.Size = new System.Drawing.Size(678, 340);
 			((System.ComponentModel.ISupportInitialize)(this.gridFloors)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.projectFloorsSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -180,5 +185,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnWhatIsNext;
 		private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }
