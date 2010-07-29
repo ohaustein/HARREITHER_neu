@@ -26,13 +26,13 @@ namespace Europlan.Common {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImagePlanOptionsForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
 			this.btnRotateLeft = new System.Windows.Forms.ToolStripButton();
-			this.btnRotateRight = new System.Windows.Forms.ToolStripButton();
-			this.btnRaster = new System.Windows.Forms.ToolStripButton();
 			this.btnRotateLeftSmall = new System.Windows.Forms.ToolStripButton();
 			this.btnRotateRightSmall = new System.Windows.Forms.ToolStripButton();
-			this.picturePanel = new Europlan.Common.PicturePanel();
+			this.btnRotateRight = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
+			this.btnRaster = new System.Windows.Forms.ToolStripButton();
+			this.picturePanel = new Europlan.Common.PicturePanel();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -63,26 +63,6 @@ namespace Europlan.Common {
 			this.btnRotateLeft.Text = "btnRotateLeft";
 			this.btnRotateLeft.Click += new System.EventHandler(this.btnRotateLeft_Click);
 			// 
-			// btnRotateRight
-			// 
-			this.btnRotateRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnRotateRight.Image = ((System.Drawing.Image)(resources.GetObject("btnRotateRight.Image")));
-			this.btnRotateRight.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnRotateRight.Name = "btnRotateRight";
-			this.btnRotateRight.Size = new System.Drawing.Size(23, 22);
-			this.btnRotateRight.Text = "toolStripButton2";
-			this.btnRotateRight.Click += new System.EventHandler(this.btnRotateRight_Click);
-			// 
-			// btnRaster
-			// 
-			this.btnRaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.btnRaster.Image = ((System.Drawing.Image)(resources.GetObject("btnRaster.Image")));
-			this.btnRaster.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnRaster.Name = "btnRaster";
-			this.btnRaster.Size = new System.Drawing.Size(64, 22);
-			this.btnRaster.Text = "Raster aus";
-			this.btnRaster.Click += new System.EventHandler(this.btnRaster_Click);
-			// 
 			// btnRotateLeftSmall
 			// 
 			this.btnRotateLeftSmall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -103,23 +83,15 @@ namespace Europlan.Common {
 			this.btnRotateRightSmall.Text = "toolStripButton2";
 			this.btnRotateRightSmall.Click += new System.EventHandler(this.btnRotateRightSmall_Click);
 			// 
-			// picturePanel
+			// btnRotateRight
 			// 
-			this.picturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.picturePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.picturePanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.picturePanel.Location = new System.Drawing.Point(9, 25);
-			this.picturePanel.Margin = new System.Windows.Forms.Padding(0);
-			this.picturePanel.Name = "picturePanel";
-			this.picturePanel.Size = new System.Drawing.Size(650, 397);
-			this.picturePanel.TabIndex = 0;
-			this.picturePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.picturePanel_Paint);
-			this.picturePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseMove);
-			this.picturePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
-			this.picturePanel.Resize += new System.EventHandler(this.picturePanel_Resize);
-			this.picturePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseUp);
+			this.btnRotateRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnRotateRight.Image = ((System.Drawing.Image)(resources.GetObject("btnRotateRight.Image")));
+			this.btnRotateRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnRotateRight.Name = "btnRotateRight";
+			this.btnRotateRight.Size = new System.Drawing.Size(23, 22);
+			this.btnRotateRight.Text = "toolStripButton2";
+			this.btnRotateRight.Click += new System.EventHandler(this.btnRotateRight_Click);
 			// 
 			// btnZoomIn
 			// 
@@ -140,6 +112,35 @@ namespace Europlan.Common {
 			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
 			this.btnZoomOut.Text = "toolStripButton1";
 			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
+			// 
+			// btnRaster
+			// 
+			this.btnRaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnRaster.Image = ((System.Drawing.Image)(resources.GetObject("btnRaster.Image")));
+			this.btnRaster.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnRaster.Name = "btnRaster";
+			this.btnRaster.Size = new System.Drawing.Size(64, 22);
+			this.btnRaster.Text = "Raster aus";
+			this.btnRaster.Click += new System.EventHandler(this.btnRaster_Click);
+			// 
+			// picturePanel
+			// 
+			this.picturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.picturePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.picturePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.picturePanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.picturePanel.Location = new System.Drawing.Point(9, 25);
+			this.picturePanel.Margin = new System.Windows.Forms.Padding(0);
+			this.picturePanel.Name = "picturePanel";
+			this.picturePanel.Size = new System.Drawing.Size(650, 397);
+			this.picturePanel.TabIndex = 0;
+			this.picturePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.picturePanel_Paint);
+			this.picturePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseMove);
+			this.picturePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
+			this.picturePanel.Resize += new System.EventHandler(this.picturePanel_Resize);
+			this.picturePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseUp);
 			// 
 			// ImagePlanOptionsForm
 			// 

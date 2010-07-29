@@ -27,6 +27,9 @@ namespace Europlan.Common {
 
 		private void SetLanguage() {
 			this.Text = EuroplanRes.ImagePlanOptionsForm_Titel; //"Optionen";
+
+			// TODO...
+
 		}
 
 		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
