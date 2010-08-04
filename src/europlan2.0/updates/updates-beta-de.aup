@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UpdateProject BuilderVersion="1.3.0.23" SchemaVersion="1.1" xmlns="http://www.kineticjump.com/AppLifeUpdate/ProjectSchema">
-	<Properties ApplicationID="1f24573e-033c-448d-8e15-9f396e67e44e" ApplicationName="Europlan 2.0" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vdBsdX09tG4aP1oLqHWHB3N6hHsEx+x0YbavsjRPuxhf1yLgkQFTN1Z26sVEkIKnfQxxvcfcWClR4P9Xurm2dyoeA2z80nexnKuyVQAW3K72Z0kkFKEj/OFeXoEWJi1rPrNXjwaQ3zVhn4WL1GKso8HiQlp34twvAJGx2A6JW7s=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;8b665HmN+DY5gAArY0crNGPDpm+hibcdoCWOz3UKec+mMR7fVVIjOYdWgR8CgR1WzBd5am6lZ7rxRAva6NoYrQ==&lt;/P&gt;&lt;Q&gt;yQHE8L+vEefup5hkda8kMVrEOh73orl/n/Lotw5lCqf+Sr9fYEs/Wfz+qN0sAECxgw5dQh1hmqC8cwtRK7hLBw==&lt;/Q&gt;&lt;DP&gt;PFm6PJmf+KxI1Iy2SDWXMqAJUv6hXEkLq1RU/7OfZuORAMhNRvaXdqAz105PiL4zUgY2OHzg7DF+U9eF0gXIjQ==&lt;/DP&gt;&lt;DQ&gt;i+uDX+LOxzQf2OIn7BPCqeh498xerRNbV8gLXoHSrBxM01Nr3OgEbWvDCWEMJBDkgEobeM5jBvQkuiCCnGBpOQ==&lt;/DQ&gt;&lt;InverseQ&gt;v9D25Q6G8fOZbeBu6Rbevp3KGfnUdITstY4fh15aDgjbZofAu0C6RfiHjeByQwNrsQUB1u7hpW5MMMlEk5GPDg==&lt;/InverseQ&gt;&lt;D&gt;IveHU2l7+YYi7bK/3QuxkUzTsB4ddlr34ZxO54w9d+D4nuA88FmHI/WYuI0YoWqAQkgNmAF+dPs/qyw+1BYsJ5wZZQmLLTbfaCKBwNEBbSWk1lIk33ZTKPXDs9ZLOr0LC0jW31XaVQZYhr8xSkSkP3y2ezux7HFHPccpoS7OMUk=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\beta\de" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/beta/de" BuildLocation="updates-beta-de Updates" PublishVersion="2.0.32.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions\v2.0.32.0\europlan20-de.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
+	<Properties ApplicationID="1f24573e-033c-448d-8e15-9f396e67e44e" ApplicationName="Europlan 2.0" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vdBsdX09tG4aP1oLqHWHB3N6hHsEx+x0YbavsjRPuxhf1yLgkQFTN1Z26sVEkIKnfQxxvcfcWClR4P9Xurm2dyoeA2z80nexnKuyVQAW3K72Z0kkFKEj/OFeXoEWJi1rPrNXjwaQ3zVhn4WL1GKso8HiQlp34twvAJGx2A6JW7s=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;8b665HmN+DY5gAArY0crNGPDpm+hibcdoCWOz3UKec+mMR7fVVIjOYdWgR8CgR1WzBd5am6lZ7rxRAva6NoYrQ==&lt;/P&gt;&lt;Q&gt;yQHE8L+vEefup5hkda8kMVrEOh73orl/n/Lotw5lCqf+Sr9fYEs/Wfz+qN0sAECxgw5dQh1hmqC8cwtRK7hLBw==&lt;/Q&gt;&lt;DP&gt;PFm6PJmf+KxI1Iy2SDWXMqAJUv6hXEkLq1RU/7OfZuORAMhNRvaXdqAz105PiL4zUgY2OHzg7DF+U9eF0gXIjQ==&lt;/DP&gt;&lt;DQ&gt;i+uDX+LOxzQf2OIn7BPCqeh498xerRNbV8gLXoHSrBxM01Nr3OgEbWvDCWEMJBDkgEobeM5jBvQkuiCCnGBpOQ==&lt;/DQ&gt;&lt;InverseQ&gt;v9D25Q6G8fOZbeBu6Rbevp3KGfnUdITstY4fh15aDgjbZofAu0C6RfiHjeByQwNrsQUB1u7hpW5MMMlEk5GPDg==&lt;/InverseQ&gt;&lt;D&gt;IveHU2l7+YYi7bK/3QuxkUzTsB4ddlr34ZxO54w9d+D4nuA88FmHI/WYuI0YoWqAQkgNmAF+dPs/qyw+1BYsJ5wZZQmLLTbfaCKBwNEBbSWk1lIk33ZTKPXDs9ZLOr0LC0jW31XaVQZYhr8xSkSkP3y2ezux7HFHPccpoS7OMUk=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\beta\de" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/beta/de" BuildLocation="updates-beta-de Updates" PublishVersion="2.0.29.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions\v2.0.29.0\europlan20-de.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
 	<CurrentSummary />
 	<CurrentCustomData />
 	<NoUpdateDisplayText />
@@ -12,27 +12,6 @@
 		<AppLifeUpdate BuilderVersion="1.3.0.23" type="full" xmlns="http://www.kineticjump.com/AppLifeUpdate/DirectorSchema">
 			<Application AppId="1f24573e-033c-448d-8e15-9f396e67e44e" NoUpdateDisplayText="">
 				<Versions>
-					<Version number="2.0.32.0" postdate="2010-07-29T12:42:12.6206271Z" signature="ncTj3WP+0P8hAVAe9hR3huesseguuB1ClQfY7SWozvO81W7G/qjWn9Dxl9LZwDfPTq4KPFmo6VmCMgR2BfQ0VXwuu5/QUrmyLFVGNh9C5qSgx/vH7b9ImEGDnuLBt83T5AdhmiC6gyrgefTrLKv+AuQC3aYvxSVJWP/PpnqX+i0=" fileSize="17506204">
-						<Targets>
-							<Target number="0.0.0.0" includeAllGreater="false" />
-						</Targets>
-						<Summary></Summary>
-						<CustomData></CustomData>
-					</Version>
-					<Version number="2.0.31.0" postdate="2010-07-14T13:57:22.097509Z" signature="qT/c3jXHVpnAbO2AuOSvmK7LX8oCGGLE4BI/F9zQBa0+hlzUJvCLb29T0wkqqmU7/qhY9Og0zg7TvNhbqv/+h7f7EyzCCOtReUHS5uzDS4us0ed83CGYegB5a0UfU/xM+DS1ooZSSCnmU30srj0bxGWkTmU/Jl1z96hteW8EfNo=" fileSize="17526312">
-						<Targets>
-							<Target number="0.0.0.0" includeAllGreater="false" />
-						</Targets>
-						<Summary></Summary>
-						<CustomData></CustomData>
-					</Version>
-					<Version number="2.0.30.0" postdate="2010-07-12T16:27:42.3836931Z" signature="XQaqGGOOUuOY4kfb9tLOLlh9cEAF1UazenHsK4vdw5vXYiaA2/uWtzRCxlqoWc6JUKVJFqh3xeoC3OT8FGHCjiHWhRKsNH/mx2K/DPUWALoeiWjRqr95rLcU4IQt1Ec+VzZtAUALOV93NuFWUXUjpltfJ7anyZN4XcxFO9Oc3Pg=" fileSize="17530222">
-						<Targets>
-							<Target number="0.0.0.0" includeAllGreater="false" />
-						</Targets>
-						<Summary></Summary>
-						<CustomData></CustomData>
-					</Version>
 					<Version number="2.0.29.0" postdate="2010-07-05T12:45:58.3110233Z" signature="O0026ZzCoURRyo7LnQl2f+hONUV91UqLohAtSVUGvdEgv/Mu/pcwW+whyNX7OSqrb71BjhnQLIu7v+slSnpnCrgCovrafeITMCsexs5UZtcoJfR4OloKsDmE5h8OTq3Md6C2TDm18dE6+sjqQ8BDqchS9JUHAJH+JlvFrBBl3a0=" fileSize="17248819">
 						<Targets>
 							<Target number="0.0.0.0" includeAllGreater="false" />

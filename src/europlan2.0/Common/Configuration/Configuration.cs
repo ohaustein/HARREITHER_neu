@@ -23,7 +23,7 @@ namespace Europlan.Common {
 
 		// IMPORTANT!!!
 		//
-		// do not forget to extend the initialization and the + operator when adding a new field
+		// do not forget to extend the initialization, the + operator when adding a new field and the copy constructor
 		//
 		// IMPORTANT!!!
 		private ConfigurationType type;
@@ -107,6 +107,12 @@ namespace Europlan.Common {
 				}
 			}
 
+			foreach (String materialId in config.MaterialIdsWithPricePerPackage) {
+				if (!this.materialIdsWithPricePerPackage.Contains(materialId)) {
+					this.materialIdsWithPricePerPackage.Add(materialId);
+				}
+			}
+
 			this.type = config.type;			 
 		}
 
@@ -140,11 +146,11 @@ namespace Europlan.Common {
 							//    name += " " + name2;
 							//}
 							float price = 0;
-							float.TryParse(positions[2], out price);
+							float.TryParse(positions[2], NumberStyles.Any, CultureInfo.GetCultureInfo("de-AT").NumberFormat, out price);
 							string discountGroup = "" /*positions[10].Trim()*/;
 							string unit = positions[9].Trim();
 							float denomination = 0;
-							if (float.TryParse(positions[4], out denomination)) {
+							if (float.TryParse(positions[4], NumberStyles.Any, CultureInfo.GetCultureInfo("de-AT").NumberFormat, out denomination)) {
 								allMaterials.Add(new Material(id, name, id, (int)denomination, unit, price, discountGroup, null, false, false));
 							} else {
 								allMaterials.Add(new Material(id, name, id, null, unit, price, discountGroup, null, false, false));
