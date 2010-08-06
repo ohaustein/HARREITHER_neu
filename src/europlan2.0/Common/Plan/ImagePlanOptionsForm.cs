@@ -131,8 +131,7 @@ namespace Europlan.Common {
 
 		void ImagePlanOptionsForm_MouseWheel(object sender, MouseEventArgs e) {
 			unsavedChanges = true;
-			plan.Scale += ((float)e.Delta) / 2400;
-			plan.Scale = plan.Scale < 0.1f ? 0.1f : plan.Scale;
+			plan.Scale *= (1.0f - ((float)e.Delta) / 1200.0f);
 			picturePanel.Invalidate();
 		}
 
@@ -202,15 +201,13 @@ namespace Europlan.Common {
 
 		private void btnZoomIn_Click(object sender, EventArgs e) {
 			unsavedChanges = true;
-			plan.Scale += 0.05f;
-			plan.Scale = plan.Scale < 0.1f ? 0.1f : plan.Scale;
+			plan.Scale *= 1.1f;
 			picturePanel.Invalidate();
 		}
 
 		private void btnZoomOut_Click(object sender, EventArgs e) {
 			unsavedChanges = true;
-			plan.Scale -= 0.05f;
-			plan.Scale = plan.Scale < 0.1f ? 0.1f : plan.Scale;
+			plan.Scale *= 0.9f;
 			picturePanel.Invalidate();
 		}
 

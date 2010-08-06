@@ -34,8 +34,8 @@ namespace Europlan.Common {
 			this.btnRaster = new System.Windows.Forms.ToolStripButton();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnDistance = new System.Windows.Forms.ToolStripButton();
-			this.txtLength = new System.Windows.Forms.ToolStripTextBox();
 			this.lblLength = new System.Windows.Forms.ToolStripLabel();
+			this.txtLength = new System.Windows.Forms.ToolStripTextBox();
 			this.picturePanel = new Europlan.Common.PicturePanel();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
@@ -153,6 +153,13 @@ namespace Europlan.Common {
 			this.btnDistance.Text = "toolStripButton2";
 			this.btnDistance.Click += new System.EventHandler(this.btnDistance_Click);
 			// 
+			// lblLength
+			// 
+			this.lblLength.Name = "lblLength";
+			this.lblLength.Size = new System.Drawing.Size(89, 22);
+			this.lblLength.Text = "Länge in Meter:";
+			this.lblLength.Visible = false;
+			// 
 			// txtLength
 			// 
 			this.txtLength.Enabled = false;
@@ -162,13 +169,6 @@ namespace Europlan.Common {
 			this.txtLength.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.txtLength.Visible = false;
 			this.txtLength.TextChanged += new System.EventHandler(this.txtLength_TextChanged);
-			// 
-			// lblLength
-			// 
-			this.lblLength.Name = "lblLength";
-			this.lblLength.Size = new System.Drawing.Size(89, 22);
-			this.lblLength.Text = "Länge in Meter:";
-			this.lblLength.Visible = false;
 			// 
 			// picturePanel
 			// 

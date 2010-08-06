@@ -14,7 +14,6 @@ namespace Europlan.Common {
 
 		private string name;
 		private string relativeFileName;
-		private Nullable<float> scale = null;
 		private Nullable<float> measure = null;
 		
 		public string Name {
@@ -33,11 +32,6 @@ namespace Europlan.Common {
 				string projectDir = Path.GetDirectoryName(Project.Instance.ProjectFileName);
 				return Path.Combine(projectDir, RelativeFileName);
 			}
-		}
-
-		public Nullable<float> Scale {
-			get { return scale; }
-			set { scale = value; }
 		}
 
 		public Nullable<float> Measure {

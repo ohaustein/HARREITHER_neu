@@ -1272,7 +1272,7 @@ R
     <value>Pfad</value>
   </data>
   <data name="ImportedPlansPanel_DxfFilter" xml:space="preserve">
-    <value>CAD Plan (*.dxf)</value>
+    <value>CAD Plan (*.dxf, *.dwg)</value>
   </data>
   <data name="ImportedPlansPanel_ImageFilter" xml:space="preserve">
     <value>Eingescannter Plan (*.jpg, *.png, *.bmp)</value>

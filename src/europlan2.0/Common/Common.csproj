@@ -34,6 +34,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\listlabel\optional\dotnet\combit.ListLabel15.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\cadlib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\log4net.dll</HintPath>
@@ -48,6 +52,18 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WW, Version=2.0.6.15, Culture=neutral, PublicKeyToken=87d16b8f7b531b65, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\cadlib\WW.dll</HintPath>
+    </Reference>
+    <Reference Include="WW.Cad, Version=2.0.28.18, Culture=neutral, PublicKeyToken=87d16b8f7b531b65, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\cadlib\WW.Cad.dll</HintPath>
+    </Reference>
+    <Reference Include="WW.License, Version=1.0.0.0, Culture=neutral, PublicKeyToken=87d16b8f7b531b65, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\cadlib\WW.License.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Category.cs" />
@@ -119,6 +135,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EuroplanRes.resx</DependentUpon>
     </Compile>
+    <Compile Include="EuroplanRes.el.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuroplanRes.el.resx</DependentUpon>
+    </Compile>
+    <Compile Include="EuroplanRes.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuroplanRes.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="EuroplanRes.hr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuroplanRes.hr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="EuroplanRes.hu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuroplanRes.hu.resx</DependentUpon>
+    </Compile>
+    <Compile Include="EuroplanRes.it.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuroplanRes.it.resx</DependentUpon>
+    </Compile>
+    <Compile Include="EuroplanRes.sl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuroplanRes.sl.resx</DependentUpon>
+    </Compile>
     <Compile Include="ExtendedCorrections\ExtendedCorrectionsGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -152,6 +198,18 @@
       <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Plan\CadPlan.cs" />
+    <Compile Include="Plan\CadPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Plan\CadPanel.Designer.cs">
+      <DependentUpon>CadPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plan\CadPlanOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plan\CadPlanOptionsForm.Designer.cs">
+      <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plan\ImagePlan.cs" />
     <Compile Include="Plan\ImagePlanOptionsForm.cs">
       <SubType>Form</SubType>
@@ -520,19 +578,28 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.el.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EuroplanRes.el.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.en.resx">
       <SubType>Designer</SubType>
       <LastGenOutput>EuroplanRes.en.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.hr.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EuroplanRes.hr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.hu.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EuroplanRes.hu.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.it.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EuroplanRes.it.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.resx">
       <SubType>Designer</SubType>
@@ -541,6 +608,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.sl.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EuroplanRes.sl.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ExtendedCorrections\ExtendedCorrectionsGrid.resx">
       <SubType>Designer</SubType>
@@ -548,6 +617,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MaterialEditor\MaterialEditorGrid.resx">
       <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plan\CadPanel.resx">
+      <DependentUpon>CadPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plan\CadPlanOptionsForm.resx">
+      <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plan\ImagePlanOptionsForm.resx">

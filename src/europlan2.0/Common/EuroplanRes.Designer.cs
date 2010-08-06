@@ -3417,7 +3417,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CAD Plan (*.dxf).
+        ///   Looks up a localized string similar to CAD Plan (*.dxf, *.dwg).
         /// </summary>
         internal static string ImportedPlansPanel_DxfFilter {
             get {

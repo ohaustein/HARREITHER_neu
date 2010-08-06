@@ -48,7 +48,7 @@ namespace Europlan.Common {
 			dialog.CheckFileExists = true;
 			dialog.CheckPathExists = true;
 			dialog.DefaultExt = "dxf";
-			dialog.Filter = EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf";
+			dialog.Filter = EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf;*.dwg";
 			dialog.Filter +=  "|" + EuroplanRes.ImportedPlansPanel_ImageFilter + "|*.jpg;*.png;*.bmp";
 			dialog.Multiselect = false;
 			DialogResult result = dialog.ShowDialog();
@@ -98,7 +98,8 @@ namespace Europlan.Common {
 		}
 		
 		private bool isCad(string extension) {
-			return extension == ".dxf";
+			return extension == ".dxf" ||
+				extension == ".dwg";
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e) {
@@ -143,7 +144,13 @@ namespace Europlan.Common {
 						}
 						ipoForm.Dispose();
 					} else if (plan is CadPlan) {
-
+						CadPlanOptionsForm cpoForm = new CadPlanOptionsForm(plan as CadPlan);
+						cpoForm.ShowDialog();
+						if (cpoForm.UnsavedChanges) {
+							if (ProjectChanged != null) {
+								ProjectChanged(this);
+							}
+						}
 					}
 				}
 			}
