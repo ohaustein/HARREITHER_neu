@@ -223,6 +223,12 @@
     <Compile Include="Plan\PicturePanel.Designer.cs">
       <DependentUpon>PicturePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\PlanSetMeasureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plan\PlanSetMeasureForm.Designer.cs">
+      <DependentUpon>PlanSetMeasureForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Circuit.cs" />
     <Compile Include="Products\ConnectionPipePanel.cs">
       <SubType>UserControl</SubType>
@@ -635,6 +641,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>PicturePanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Plan\PlanSetMeasureForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PlanSetMeasureForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Products\ConnectionPipePanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
@@ -837,10 +847,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons\default.png" />
-    <Content Include="Icons\folder_home2.png" />
-    <Content Include="Icons\kfm_home-alt.png" />
-    <Content Include="Icons\kfm_home.png" />
-    <Content Include="Icons\kontact_journal.png" />
     <Content Include="Reporting\Harreither.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

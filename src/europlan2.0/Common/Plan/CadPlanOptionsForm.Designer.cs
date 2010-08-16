@@ -27,10 +27,12 @@ namespace Europlan.Common {
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnDistance = new System.Windows.Forms.ToolStripButton();
 			this.lblLength = new System.Windows.Forms.ToolStripLabel();
 			this.txtLength = new System.Windows.Forms.ToolStripTextBox();
+			this.btnSetLength = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.lstLayers = new System.Windows.Forms.ListView();
 			this.cadPanel = new Europlan.Common.CadPanel();
@@ -44,10 +46,12 @@ namespace Europlan.Common {
 			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnZoomOut,
             this.btnZoomIn,
+            this.toolStripSeparator1,
             this.btnMove,
             this.btnDistance,
             this.lblLength,
-            this.txtLength});
+            this.txtLength,
+            this.btnSetLength});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(668, 25);
@@ -74,6 +78,11 @@ namespace Europlan.Common {
 			this.btnZoomIn.Text = "zoomIn";
 			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
 			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+			// 
 			// btnMove
 			// 
 			this.btnMove.Checked = true;
@@ -84,6 +93,7 @@ namespace Europlan.Common {
 			this.btnMove.Name = "btnMove";
 			this.btnMove.Size = new System.Drawing.Size(23, 22);
 			this.btnMove.Text = "toolStripButton1";
+			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
 			// 
 			// btnDistance
 			// 
@@ -93,23 +103,36 @@ namespace Europlan.Common {
 			this.btnDistance.Name = "btnDistance";
 			this.btnDistance.Size = new System.Drawing.Size(23, 22);
 			this.btnDistance.Text = "toolStripButton2";
+			this.btnDistance.Click += new System.EventHandler(this.btnDistance_Click);
 			// 
 			// lblLength
 			// 
 			this.lblLength.Name = "lblLength";
-			this.lblLength.Size = new System.Drawing.Size(89, 22);
-			this.lblLength.Text = "Länge in Meter:";
+			this.lblLength.Size = new System.Drawing.Size(42, 22);
+			this.lblLength.Text = "Länge:";
 			this.lblLength.Visible = false;
 			// 
 			// txtLength
 			// 
-			this.txtLength.Enabled = false;
 			this.txtLength.MaxLength = 10;
 			this.txtLength.Name = "txtLength";
+			this.txtLength.ReadOnly = true;
 			this.txtLength.Size = new System.Drawing.Size(50, 25);
 			this.txtLength.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.txtLength.Visible = false;
 			this.txtLength.TextChanged += new System.EventHandler(this.txtLength_TextChanged);
+			// 
+			// btnSetLength
+			// 
+			this.btnSetLength.AutoToolTip = false;
+			this.btnSetLength.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnSetLength.Image = ((System.Drawing.Image)(resources.GetObject("btnSetLength.Image")));
+			this.btnSetLength.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSetLength.Name = "btnSetLength";
+			this.btnSetLength.Size = new System.Drawing.Size(23, 22);
+			this.btnSetLength.Text = "...";
+			this.btnSetLength.Visible = false;
+			this.btnSetLength.Click += new System.EventHandler(this.btnSetLength_Click);
 			// 
 			// panel1
 			// 
@@ -134,15 +157,19 @@ namespace Europlan.Common {
 			// cadPanel
 			// 
 			this.cadPanel.BackColor = System.Drawing.Color.White;
+			this.cadPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.cadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.cadPanel.Location = new System.Drawing.Point(200, 25);
 			this.cadPanel.Model = null;
+			this.cadPanel.MoveMode = true;
 			this.cadPanel.Name = "cadPanel";
 			this.cadPanel.PlanDefaultMargin = 5;
 			this.cadPanel.PlanScale = 1;
 			this.cadPanel.PlanTranslation = ((WW.Math.Vector2D)(resources.GetObject("cadPanel.PlanTranslation")));
 			this.cadPanel.Size = new System.Drawing.Size(468, 406);
 			this.cadPanel.TabIndex = 2;
+			this.cadPanel.EndPointSelected += new System.EventHandler<Europlan.Common.CadPanel.EndPointSelectedArgs>(this.cadPanel_EndPointSelected);
+			this.cadPanel.StartPointSelected += new System.EventHandler<Europlan.Common.CadPanel.StartPointSelectedArgs>(this.cadPanel_StartPointSelected);
 			// 
 			// CadPlanOptionsForm
 			// 
@@ -178,6 +205,8 @@ namespace Europlan.Common {
 		private CadPanel cadPanel;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.ListView lstLayers;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripButton btnSetLength;
 
 
 	}

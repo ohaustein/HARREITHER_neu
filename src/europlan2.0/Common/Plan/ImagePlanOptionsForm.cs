@@ -19,6 +19,7 @@ namespace Europlan.Common {
 		private bool showRaster = false;
 		private bool moveMode = true;
 		Nullable<Point> startPoint = null;
+		Nullable<Point> endPoint = null;
 		private double length = 0;
 
 		public ImagePlanOptionsForm(ImagePlan plan) {
@@ -30,7 +31,7 @@ namespace Europlan.Common {
 
 		private void SetLanguage() {
 			this.Text = EuroplanRes.ImagePlanOptionsForm_Titel; //"Optionen";
-			this.lblLength.Text = EuroplanRes.ImagePlanOptionsForm_LeangeInMeter; //"Länge in Meter:"
+			this.lblLength.Text = EuroplanRes.PlanOptionsForm_Leange; //"Länge:"
 		}
 
 		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -85,7 +86,11 @@ namespace Europlan.Common {
 				m.TransformPoints(arr);
 
 				if (!moveMode && startPoint.HasValue) {
-					g.DrawLine(Pens.Red, startPoint.Value, arr[0]);
+					if (endPoint.HasValue) {
+						g.DrawLine(Pens.Red, startPoint.Value, endPoint.Value);
+					} else {
+						g.DrawLine(Pens.Red, startPoint.Value, arr[0]);
+					}
 				}
 
 				X = new Matrix();
@@ -131,7 +136,15 @@ namespace Europlan.Common {
 
 		void ImagePlanOptionsForm_MouseWheel(object sender, MouseEventArgs e) {
 			unsavedChanges = true;
-			plan.Scale *= (1.0f - ((float)e.Delta) / 1200.0f);
+			//float oldScale = plan.Scale.Value;
+			plan.Scale *= (1.0f + ((float)e.Delta) / 1200.0f);
+			/*picturePanel.ClientSize.Width / 2.0 - plan.XPos
+			plan.XPos -= (float)((plan.Scale - oldScale) * picturePanel.ClientSize.Width / 2.0);
+			plan.YPos -= (float)((plan.Scale - oldScale) * picturePanel.ClientSize.Height / 2.0);*/
+			//plan.XPos += ((picturePanel.ClientSize.Height / 2 - plan.XPos) * (1.0f + ((float)e.Delta) / 1200.0f) + plan.XPos * ((float)e.Delta) / 1200.0f) / plan.Scale.Value;
+			//plan.YPos += ((picturePanel.ClientSize.Width / 2 - plan.YPos) * (1.0f + ((float)e.Delta) / 1200.0f) + plan.YPos * ((float)e.Delta) / 1200.0f) / plan.Scale.Value;
+			/*plan.XPos *= (1.0f + ((float)e.Delta) / 1200.0f);
+			plan.YPos *= (1.0f + ((float)e.Delta) / 1200.0f);*/
 			picturePanel.Invalidate();
 		}
 
@@ -177,8 +190,10 @@ namespace Europlan.Common {
 
 				plan.XPos += mouseUpX - mouseDownX;
 				plan.YPos += mouseUpY - mouseDownY;
+				picturePanel.Invalidate();
+			} else if (!moveMode && startPoint.HasValue && !endPoint.HasValue) {
+				picturePanel.Invalidate();
 			}
-			picturePanel.Invalidate();
 		}
 		
 		public bool UnsavedChanges {
@@ -187,6 +202,7 @@ namespace Europlan.Common {
 
 		private void btnRaster_Click(object sender, EventArgs e) {
 			showRaster = !showRaster;
+			btnRaster.Checked = showRaster;
 			if (showRaster) {
 				btnRaster.Text = EuroplanRes.ImagePlanOptionsForm_RasterAus;
 			} else {
@@ -226,17 +242,21 @@ namespace Europlan.Common {
 			btnDistance.Checked = false;
 			txtLength.Visible = false;
 			lblLength.Visible = false;
+			btnSetLength.Visible = false;
 			moveMode = true;
+			startPoint = null;
+			endPoint = null;
+			picturePanel.Invalidate();
 		}
 
 		private void btnDistance_Click(object sender, EventArgs e) {
 			picturePanel.Cursor = Cursors.Cross;
 			btnMove.Checked = false;
 			btnDistance.Checked = true;
-			txtLength.Visible = true;
-			lblLength.Visible = true;
-		    txtLength.Enabled = plan.Measure.HasValue;
-			txtLength.Text = "";
+			//txtLength.Visible = true;
+			//lblLength.Visible = true;
+		    //txtLength.Enabled = plan.Measure.HasValue;
+			//txtLength.Text = "";
 			moveMode = false;
 		}
 
@@ -253,15 +273,22 @@ namespace Europlan.Common {
 				X.Translate(plan.XPos, plan.YPos);
 				X.Invert();
 				X.TransformPoints(arr);
-				if (startPoint.HasValue) {
+				if (startPoint.HasValue && !endPoint.HasValue) {
+					endPoint = arr[0];
 					length = this.distance(startPoint.Value.X, startPoint.Value.Y, arr[0].X, arr[0].Y);
-					txtLength.Enabled = true;
+					//txtLength.Enabled = true;
 					if (plan.Measure.HasValue) {
-						txtLength.Text = "" + Math.Round(length / plan.Measure.Value, 2);
-					} 
-					startPoint = null;
+						txtLength.Text = "" + (length / plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
+					} else {
+						txtLength.Text = "???";
+					}
+					lblLength.Visible = true;
+					txtLength.Visible = true;
+					btnSetLength.Visible = true;
+					//startPoint = null;
 				} else {
 					startPoint = arr[0];
+					endPoint = null;
 				}
 			}
 		}
@@ -271,6 +298,18 @@ namespace Europlan.Common {
 			if (Double.TryParse(txtLength.Text, out len)) {
 				unsavedChanges = true;
 				plan.Measure = (float)(length / len);
+			}
+		}
+
+		private void btnSetLength_Click(object sender, EventArgs e) {
+			Nullable<double> length = plan.Measure.HasValue ? this.length / this.plan.Measure.Value : (Nullable<double>)null;
+			PlanSetMeasureForm psmf = new PlanSetMeasureForm(length);
+			if (psmf.ShowDialog() == DialogResult.OK) {
+				if (length != psmf.Length) {
+					this.unsavedChanges = true;
+					plan.Measure = (float)(this.length / psmf.Length);
+					this.txtLength.Text = (this.length / this.plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
+				}
 			}
 		}
 

@@ -178,6 +178,9 @@
     <value>Tv
 °C</value>
   </data>
+  <data name="CadPlanOptionsForm_Titel" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
   <data name="Category_Allgemein" xml:space="preserve">
     <value>Allgemein</value>
   </data>
@@ -1255,9 +1258,6 @@ berein.</value>
     <value>zus. Dämmg
 R
 (m²K/W)</value>
-  </data>
-  <data name="ImagePlanOptionsForm_LeangeInMeter" xml:space="preserve">
-    <value>Länge in Meter:</value>
   </data>
   <data name="ImagePlanOptionsForm_RasterAus" xml:space="preserve">
     <value>Raster aus</value>
@@ -3478,6 +3478,15 @@ recht</value>
   </data>
   <data name="PlannedProductPanel_WaermebedarfDecken" xml:space="preserve">
     <value>Wärmebedarf decken</value>
+  </data>
+  <data name="PlanOptionsForm_Leange" xml:space="preserve">
+    <value>Länge:</value>
+  </data>
+  <data name="PlanSetMeasureForm_KeinMassstab" xml:space="preserve">
+    <value>Für diesen Plan ist noch kein Maßstab gesetzt. Bitte geben Sie nun die Länge für die gewählte Linie ein!</value>
+  </data>
+  <data name="PlanSetMeasureForm_Massstab" xml:space="preserve">
+    <value>Mit dem gesetzten Maßstab ergibt sich für die ausgewählte Linie eine Länge von %LAENGE%m. Falls dies nicht korrekt ist, geben Sie bitte die richtige Länge ein!</value>
   </data>
   <data name="Product_ConcreteActivationFullName" xml:space="preserve">
     <value>Betonkernaktivierung</value>

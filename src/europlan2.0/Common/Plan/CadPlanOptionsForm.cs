@@ -60,8 +60,8 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.ImagePlanOptionsForm_Titel; //"Optionen";
-			this.lblLength.Text = EuroplanRes.ImagePlanOptionsForm_LeangeInMeter; //"Länge in Meter:"
+			this.Text = EuroplanRes.CadPlanOptionsForm_Titel; //"Optionen";
+			this.lblLength.Text = EuroplanRes.PlanOptionsForm_Leange; //"Länge:"
 		}
 
 		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -90,7 +90,7 @@ namespace Europlan.Common {
 		}
 
 		public bool UnsavedChanges {
-			get { return unsavedChanges; }
+			get { return this.unsavedChanges || this.cadPanel.UnsavedChanges; }
 		}
 
 		private void txtLength_TextChanged(object sender, EventArgs e) {
@@ -112,10 +112,60 @@ namespace Europlan.Common {
 		private void lstLayers_ItemChecked(object sender, ItemCheckedEventArgs e) {
 			LayerListViewItem item = e.Item as LayerListViewItem;
 			if (item != null) {
+				this.unsavedChanges = true;
 				item.Layer.Enabled = item.Checked;
 				this.cadPanel.RecreateDrawables();
 			}
 		}
 
+		private void btnDistance_Click(object sender, EventArgs e) {
+			this.btnMove.Checked = false;
+			this.btnDistance.Checked = true;
+			this.cadPanel.MoveMode = false;
+			txtLength.Text = "";
+			/*txtLength.Visible = true;
+			lblLength.Visible = true;*/
+		}
+
+		private void btnMove_Click(object sender, EventArgs e) {
+			this.btnDistance.Checked = false;
+			this.btnMove.Checked = true;
+			this.cadPanel.MoveMode = true;
+			txtLength.Visible = false;
+			lblLength.Visible = false;
+			btnSetLength.Visible = false;
+		}
+
+		private void cadPanel_EndPointSelected(object sender, CadPanel.EndPointSelectedArgs e) {
+			this.length = e.Length;
+			if (this.plan.Measure.HasValue) {
+				this.txtLength.Text = (this.length / this.plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
+			} else {
+				this.txtLength.Text = "???";
+			}
+			this.lblLength.Visible = true;
+			this.txtLength.Visible = true;
+			this.btnSetLength.Visible = true;
+		}
+
+		private void cadPanel_StartPointSelected(object sender, CadPanel.StartPointSelectedArgs e) {
+			/*this.txtLength.Enabled = false;
+			this.txtLength.Text = "";*/
+			this.txtLength.Visible = false;
+			this.lblLength.Visible = false;
+			this.btnSetLength.Visible = false;
+		}
+
+		private void btnSetLength_Click(object sender, EventArgs e) {
+			Nullable<double> length = plan.Measure.HasValue ? this.length / this.plan.Measure.Value : (Nullable<double>)null;
+			PlanSetMeasureForm psmf = new PlanSetMeasureForm(length);
+			if (psmf.ShowDialog() == DialogResult.OK) {
+				if (length != psmf.Length) {
+					this.unsavedChanges = true;
+					plan.Measure = (float)(this.length / psmf.Length);
+					this.txtLength.Text = (this.length / this.plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
+				}
+			}
+		}
 	}
 }

@@ -29,14 +29,18 @@ namespace Europlan.Common {
 			this.btnRotateLeftSmall = new System.Windows.Forms.ToolStripButton();
 			this.btnRotateRightSmall = new System.Windows.Forms.ToolStripButton();
 			this.btnRotateRight = new System.Windows.Forms.ToolStripButton();
-			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
+			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnRaster = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnDistance = new System.Windows.Forms.ToolStripButton();
 			this.lblLength = new System.Windows.Forms.ToolStripLabel();
 			this.txtLength = new System.Windows.Forms.ToolStripTextBox();
 			this.picturePanel = new Europlan.Common.PicturePanel();
+			this.btnSetLength = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -48,13 +52,17 @@ namespace Europlan.Common {
             this.btnRotateLeftSmall,
             this.btnRotateRightSmall,
             this.btnRotateRight,
-            this.btnZoomIn,
+            this.toolStripSeparator1,
             this.btnZoomOut,
+            this.btnZoomIn,
+            this.toolStripSeparator2,
             this.btnRaster,
+            this.toolStripSeparator3,
             this.btnMove,
             this.btnDistance,
             this.lblLength,
-            this.txtLength});
+            this.txtLength,
+            this.btnSetLength});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(668, 25);
@@ -101,15 +109,10 @@ namespace Europlan.Common {
 			this.btnRotateRight.Text = "toolStripButton2";
 			this.btnRotateRight.Click += new System.EventHandler(this.btnRotateRight_Click);
 			// 
-			// btnZoomIn
+			// toolStripSeparator1
 			// 
-			this.btnZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomIn.Image")));
-			this.btnZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnZoomIn.Name = "btnZoomIn";
-			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomIn.Text = "toolStripButton1";
-			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
 			// 
 			// btnZoomOut
 			// 
@@ -121,15 +124,35 @@ namespace Europlan.Common {
 			this.btnZoomOut.Text = "toolStripButton1";
 			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
+			// btnZoomIn
+			// 
+			this.btnZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomIn.Image")));
+			this.btnZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnZoomIn.Name = "btnZoomIn";
+			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
+			this.btnZoomIn.Text = "toolStripButton1";
+			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+			// 
 			// btnRaster
 			// 
-			this.btnRaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnRaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnRaster.Image = ((System.Drawing.Image)(resources.GetObject("btnRaster.Image")));
 			this.btnRaster.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRaster.Name = "btnRaster";
-			this.btnRaster.Size = new System.Drawing.Size(64, 22);
+			this.btnRaster.Size = new System.Drawing.Size(23, 22);
 			this.btnRaster.Text = "Raster aus";
 			this.btnRaster.Click += new System.EventHandler(this.btnRaster_Click);
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
 			// 
 			// btnMove
 			// 
@@ -162,9 +185,9 @@ namespace Europlan.Common {
 			// 
 			// txtLength
 			// 
-			this.txtLength.Enabled = false;
 			this.txtLength.MaxLength = 10;
 			this.txtLength.Name = "txtLength";
+			this.txtLength.ReadOnly = true;
 			this.txtLength.Size = new System.Drawing.Size(50, 25);
 			this.txtLength.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.txtLength.Visible = false;
@@ -189,6 +212,18 @@ namespace Europlan.Common {
 			this.picturePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
 			this.picturePanel.Resize += new System.EventHandler(this.picturePanel_Resize);
 			this.picturePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseUp);
+			// 
+			// btnSetLength
+			// 
+			this.btnSetLength.AutoToolTip = false;
+			this.btnSetLength.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnSetLength.Image = ((System.Drawing.Image)(resources.GetObject("btnSetLength.Image")));
+			this.btnSetLength.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSetLength.Name = "btnSetLength";
+			this.btnSetLength.Size = new System.Drawing.Size(23, 22);
+			this.btnSetLength.Text = "...";
+			this.btnSetLength.Visible = false;
+			this.btnSetLength.Click += new System.EventHandler(this.btnSetLength_Click);
 			// 
 			// ImagePlanOptionsForm
 			// 
@@ -225,6 +260,10 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripButton btnDistance;
 		private System.Windows.Forms.ToolStripTextBox txtLength;
 		private System.Windows.Forms.ToolStripLabel lblLength;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripButton btnSetLength;
 
 
 	}
