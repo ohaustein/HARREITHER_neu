@@ -326,6 +326,12 @@ namespace Europlan.Common {
 				double sqDistStart = distX * distX + distY * distY;
 				distX = referencePoint.X - end.X;
 				distY = referencePoint.Y - end.Y;
+				if (line.OwnerObjectSoftReference is WW.Cad.Model.Tables.DxfBlockRecord) {
+					WW.Cad.Model.Tables.DxfBlockRecord block = line.OwnerObjectSoftReference as WW.Cad.Model.Tables.DxfBlockRecord;
+					//block.Block.BasePoint.X = block.Block.BasePoint.X;
+					Console.WriteLine("blub")
+					//block.Block.IsXRefOverlay
+				}
 				double sqDistEnd = distX * distX + distY * distY;
 				if (sqDistStart < sqDistEnd) {
 					sqDistance = sqDistStart;
