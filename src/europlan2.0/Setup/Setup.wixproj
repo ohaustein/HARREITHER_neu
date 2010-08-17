@@ -5,7 +5,7 @@
     <ProductVersion>3.0</ProductVersion>
     <ProjectGuid>{7e186967-4e4b-46e5-bfb6-35f416c7023c}</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>europlan20ga</OutputName>
+    <OutputName>europlan30</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
     <Name>Setup</Name>
@@ -97,24 +97,24 @@
       PostBuildEvent
     </CoreBuildDependsOn>
     <PostBuildEvent>copy "$(SolutionDir)StartSetup\$(OutDir)instmsi.exe" "$(TargetDir)de-DE\instmsi.exe"
-copy "$(TargetDir)de-DE\europlan20ga.msi" "$(TargetDir)de-DE\setup.msi"
+copy "$(TargetDir)de-DE\europlan30.msi" "$(TargetDir)de-DE\setup.msi"
 cd $(ProjectDir)
 for /F "tokens=1,2,3,4,5 delims=/.: " %%a in (%27utils\datetime%27) do set SUFFIX=%%c-%%b-%%a_%%d%%e
 mkdir $(TargetDir)\setup-%SUFFIX%
 mkdir $(TargetDir)\latest_setup
 7z.exe a "$(TargetDir)setup-%SUFFIX%\europlan20ga-de.zip" "$(TargetDir)de-DE\instmsi.exe" "$(TargetDir)de-DE\setup.exe" "$(TargetDir)de-DE\setup.msi" || echo Postbuild: warning CS0003: German zip archive was not built
 del "$(TargetDir)de-DE\setup.msi"
-ChilkatZipSE.exe -u BLUESOSFX_7WD8XKDznOuG -cfg chilkat-settings-de.xml -exe "$(TargetDir)setup-%SUFFIX%\europlan20ga-de.exe" "$(TargetDir)setup-%SUFFIX%\europlan20ga-de.zip" || echo Postbuild: warning CS0004: German setup exe was not built
+ChilkatZipSE.exe -u BLUESOSFX_7WD8XKDznOuG -cfg chilkat-settings-de.xml -exe "$(TargetDir)setup-%SUFFIX%\europlan30-de.exe" "$(TargetDir)setup-%SUFFIX%\europlan30-de.zip" || echo Postbuild: warning CS0004: German setup exe was not built
 set ERRORLEVEL=0
 
 rem english setup
 copy "$(SolutionDir)StartSetup\$(OutDir)instmsi.exe" "$(TargetDir)en-US\instmsi.exe"
-copy "$(TargetDir)en-US\europlan20ga.msi" "$(TargetDir)en-US\setup.msi"
+copy "$(TargetDir)en-US\europlan30.msi" "$(TargetDir)en-US\setup.msi"
 echo "blub"
 cd $(ProjectDir)
-7z.exe a "$(TargetDir)setup-%SUFFIX%\europlan20ga-en.zip" "$(TargetDir)en-US\instmsi.exe" "$(TargetDir)en-US\setup.exe" "$(TargetDir)en-US\setup.msi" || echo Postbuild: warning CS0003: English zip archive was not built
+7z.exe a "$(TargetDir)setup-%SUFFIX%\europlan30-en.zip" "$(TargetDir)en-US\instmsi.exe" "$(TargetDir)en-US\setup.exe" "$(TargetDir)en-US\setup.msi" || echo Postbuild: warning CS0003: English zip archive was not built
 del "$(TargetDir)en-US\setup.msi"
-ChilkatZipSE.exe -u BLUESOSFX_7WD8XKDznOuG -cfg chilkat-settings-en.xml -exe "$(TargetDir)setup-%SUFFIX%\europlan20ga-en.exe" "$(TargetDir)setup-%SUFFIX%\europlan20ga-en.zip" || echo Postbuild: warning CS0004: English setup exe was not built
+ChilkatZipSE.exe -u BLUESOSFX_7WD8XKDznOuG -cfg chilkat-settings-en.xml -exe "$(TargetDir)setup-%SUFFIX%\europlan30-en.exe" "$(TargetDir)setup-%SUFFIX%\europlan30-en.zip" || echo Postbuild: warning CS0004: English setup exe was not built
 copy /y $(TargetDir)\setup-%SUFFIX%\%2a.exe $(TargetDir)\latest_setup
 set ERRORLEVEL=0</PostBuildEvent>
   </PropertyGroup>
