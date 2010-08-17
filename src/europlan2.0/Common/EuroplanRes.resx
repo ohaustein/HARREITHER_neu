@@ -1037,6 +1037,12 @@ Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
   <data name="General_Projekt" xml:space="preserve">
     <value>Projekt</value>
   </data>
+  <data name="General_ProjektSpeichernText" xml:space="preserve">
+    <value>Um diese Aktion ausführen zu können muss das Projekt gespeichert werden. Wollen Sie das Projekt nun speichern?</value>
+  </data>
+  <data name="General_ProjektSpeichernTitel" xml:space="preserve">
+    <value>Projekt speichern?</value>
+  </data>
   <data name="General_Regelkreise" xml:space="preserve">
     <value>Regelkreise</value>
   </data>

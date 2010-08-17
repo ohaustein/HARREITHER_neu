@@ -41,54 +41,57 @@ namespace Europlan.Common {
 		}
 
 		private void btnImport_Click(object sender, EventArgs e) {
+			bool saved = true;
 			if (ProjectSaveRequest != null) {
-				ProjectSaveRequest(this);
+				ProjectSaveRequest(this, true, out saved);
 			}
-			OpenFileDialog dialog = new OpenFileDialog();
-			dialog.CheckFileExists = true;
-			dialog.CheckPathExists = true;
-			dialog.DefaultExt = "dxf";
-			dialog.Filter = EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf;*.dwg";
-			dialog.Filter +=  "|" + EuroplanRes.ImportedPlansPanel_ImageFilter + "|*.jpg;*.png;*.bmp";
-			dialog.Multiselect = false;
-			DialogResult result = dialog.ShowDialog();
-			if (result == DialogResult.OK) {
-				List<Plan> plans = Project.Instance.ImportedPlans;
-				foreach (Plan plan in plans) {
-					if (Path.GetFileName(plan.RelativeFileName).Equals(Path.GetFileName(dialog.FileName))) {
-						result = MessageBox.Show(EuroplanRes.ImportedPlansPanel_PlanSchonVorhanden);
-						return;
-					}
-				}
-				NewPlanForm newPlanForm = new NewPlanForm();
-				result = newPlanForm.ShowDialog();
+			if (saved) {
+				OpenFileDialog dialog = new OpenFileDialog();
+				dialog.CheckFileExists = true;
+				dialog.CheckPathExists = true;
+				dialog.DefaultExt = "dxf";
+				dialog.Filter = EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf;*.dwg";
+				dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_ImageFilter + "|*.jpg;*.png;*.bmp";
+				dialog.Multiselect = false;
+				DialogResult result = dialog.ShowDialog();
 				if (result == DialogResult.OK) {
-					string dir = Path.GetDirectoryName(Project.Instance.ProjectFileName);
-					string subDir = Path.GetFileNameWithoutExtension(Project.Instance.ProjectFileName) + "_plans";
-					dir = Path.Combine(dir, subDir);
-					if (!Directory.Exists(dir)) {
-						Directory.CreateDirectory(dir);
+					List<Plan> plans = Project.Instance.ImportedPlans;
+					foreach (Plan plan in plans) {
+						if (Path.GetFileName(plan.RelativeFileName).Equals(Path.GetFileName(dialog.FileName))) {
+							result = MessageBox.Show(EuroplanRes.ImportedPlansPanel_PlanSchonVorhanden);
+							return;
+						}
 					}
-					string newFileName = Path.Combine(dir, Path.GetFileName(dialog.FileName));
-					File.Copy(dialog.FileName, newFileName, true);
-					string extension = Path.GetExtension(dialog.FileName);
-					Plan plan = null;
-					if (isImage(extension)) {
-						plan = new ImagePlan();
-					} else if (isCad(extension)) {
-						plan = new CadPlan();
+					NewPlanForm newPlanForm = new NewPlanForm();
+					result = newPlanForm.ShowDialog();
+					if (result == DialogResult.OK) {
+						string dir = Path.GetDirectoryName(Project.Instance.ProjectFileName);
+						string subDir = Path.GetFileNameWithoutExtension(Project.Instance.ProjectFileName) + "_plans";
+						dir = Path.Combine(dir, subDir);
+						if (!Directory.Exists(dir)) {
+							Directory.CreateDirectory(dir);
+						}
+						string newFileName = Path.Combine(dir, Path.GetFileName(dialog.FileName));
+						File.Copy(dialog.FileName, newFileName, true);
+						string extension = Path.GetExtension(dialog.FileName);
+						Plan plan = null;
+						if (isImage(extension)) {
+							plan = new ImagePlan();
+						} else if (isCad(extension)) {
+							plan = new CadPlan();
+						}
+						plan.Name = newPlanForm.PlanName;
+						plan.RelativeFileName = Path.Combine(subDir, Path.GetFileName(dialog.FileName));
+						plans.Add(plan);
+						if (ProjectChanged != null) {
+							ProjectChanged(this);
+						}
+						UpdateControl(false);
 					}
-					plan.Name = newPlanForm.PlanName;
-					plan.RelativeFileName = Path.Combine(subDir, Path.GetFileName(dialog.FileName));
-					plans.Add(plan);
-					if (ProjectChanged != null) {
-						ProjectChanged(this);
-					}
-					UpdateControl(false);
+					newPlanForm.Dispose();
 				}
-				newPlanForm.Dispose();
+				dialog.Dispose();
 			}
-			dialog.Dispose();
 		}
 
 		private bool isImage(string extension) {

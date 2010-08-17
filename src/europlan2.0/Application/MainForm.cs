@@ -23,7 +23,7 @@ namespace Europlan.Application {
 		private string projectFileName = null;
 		private Project currentProject = null;
 
-		private static readonly string defaultTitle = "Europlan mit grafischer Auslegung";
+		private static readonly string defaultTitle = "Europlan 3.0";
 		private string title;
 
 		private Dictionary<Type, UserControl> userControls = new Dictionary<Type, UserControl>();
@@ -127,6 +127,32 @@ namespace Europlan.Application {
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
 			System.Windows.Forms.Application.Exit();
+		}
+
+		private bool AssureProjectFileExists() {
+			if (projectFileName == null) {
+				string messageText = EuroplanRes.General_ProjektSpeichernText;
+				string caption = EuroplanRes.General_ProjektSpeichernTitel;
+				if (MessageBox.Show(messageText, caption, MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					IEditorUserControl oldControl = splitContainer.Panel2.Controls[0] as IEditorUserControl;
+					if (oldControl != null && !oldControl.AllowLeave()) {
+						return false;
+					}
+					SaveFileDialog dialog = new SaveFileDialog();
+					dialog.CheckPathExists = true;
+					dialog.DefaultExt = "e2p";
+					dialog.Filter = EuroplanRes.MainForm_E2pFilter + "|*.e2p";
+					if (dialog.ShowDialog() == DialogResult.OK) {
+						projectFileName = dialog.FileName;
+						SaveProject();
+					} else {
+						return false;
+					}
+					return true;
+				}
+				return false;
+			}
+			return true;
 		}
 
 		private bool CheckForUnsavedChanges() {
@@ -595,11 +621,12 @@ namespace Europlan.Application {
 			}
 		}
 
-		void MainForm_ProjectSaveRequest(object sender) {
-			if (projectFileName == null) {
-				projectUnsaved = true;
+		void MainForm_ProjectSaveRequest(object sender, bool firstSave, out bool saved) {
+			if (firstSave) {
+				saved = AssureProjectFileExists();
+			} else {
+				saved = CheckForUnsavedChanges();
 			}
-			CheckForUnsavedChanges();
 		}
 
 		private Control GetActiveControl() {

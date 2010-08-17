@@ -39,8 +39,8 @@ namespace Europlan.Common {
 			this.btnDistance = new System.Windows.Forms.ToolStripButton();
 			this.lblLength = new System.Windows.Forms.ToolStripLabel();
 			this.txtLength = new System.Windows.Forms.ToolStripTextBox();
-			this.picturePanel = new Europlan.Common.PicturePanel();
 			this.btnSetLength = new System.Windows.Forms.ToolStripButton();
+			this.picturePanel = new Europlan.Common.PicturePanel();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -193,6 +193,18 @@ namespace Europlan.Common {
 			this.txtLength.Visible = false;
 			this.txtLength.TextChanged += new System.EventHandler(this.txtLength_TextChanged);
 			// 
+			// btnSetLength
+			// 
+			this.btnSetLength.AutoToolTip = false;
+			this.btnSetLength.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnSetLength.Image = ((System.Drawing.Image)(resources.GetObject("btnSetLength.Image")));
+			this.btnSetLength.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSetLength.Name = "btnSetLength";
+			this.btnSetLength.Size = new System.Drawing.Size(23, 22);
+			this.btnSetLength.Text = "...";
+			this.btnSetLength.Visible = false;
+			this.btnSetLength.Click += new System.EventHandler(this.btnSetLength_Click);
+			// 
 			// picturePanel
 			// 
 			this.picturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -212,18 +224,6 @@ namespace Europlan.Common {
 			this.picturePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
 			this.picturePanel.Resize += new System.EventHandler(this.picturePanel_Resize);
 			this.picturePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseUp);
-			// 
-			// btnSetLength
-			// 
-			this.btnSetLength.AutoToolTip = false;
-			this.btnSetLength.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.btnSetLength.Image = ((System.Drawing.Image)(resources.GetObject("btnSetLength.Image")));
-			this.btnSetLength.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnSetLength.Name = "btnSetLength";
-			this.btnSetLength.Size = new System.Drawing.Size(23, 22);
-			this.btnSetLength.Text = "...";
-			this.btnSetLength.Visible = false;
-			this.btnSetLength.Click += new System.EventHandler(this.btnSetLength_Click);
 			// 
 			// ImagePlanOptionsForm
 			// 

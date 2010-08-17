@@ -2739,6 +2739,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Um diese Aktion ausführen zu können muss das Projekt gespeichert werden. Wollen Sie das Projekt nun speichern?.
+        /// </summary>
+        internal static string General_ProjektSpeichernText {
+            get {
+                return ResourceManager.GetString("General_ProjektSpeichernText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Projekt speichern?.
+        /// </summary>
+        internal static string General_ProjektSpeichernTitel {
+            get {
+                return ResourceManager.GetString("General_ProjektSpeichernTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Regelkreise.
         /// </summary>
         internal static string General_Regelkreise {
