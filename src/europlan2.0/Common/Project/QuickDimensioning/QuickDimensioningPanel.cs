@@ -1209,7 +1209,7 @@ namespace Europlan.Common {
 				listLabel1.Variables.Add("@FileName", Path.GetFileName(Project.Instance.ProjectFileName));
 
 				listLabel1.Dictionary.Clear();
-				ResourceSet resourceSet = EuroplanRes.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentCulture, false, true);
+				ResourceSet resourceSet = EuroplanRes.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, false, true);
 				if (resourceSet != null) {
 					IDictionaryEnumerator enumerator = resourceSet.GetEnumerator();
 					while (enumerator.MoveNext()) {

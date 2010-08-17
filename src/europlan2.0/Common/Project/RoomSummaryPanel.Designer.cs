@@ -100,7 +100,6 @@ namespace Europlan.Common {
 			this.lblName.Text = "Name:";
 			this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.lblName.Visible = false;
-			this.lblName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
 			// 
 			// lblArea
 			// 
