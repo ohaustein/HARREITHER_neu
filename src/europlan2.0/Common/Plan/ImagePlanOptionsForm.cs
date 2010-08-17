@@ -136,16 +136,19 @@ namespace Europlan.Common {
 
 		void ImagePlanOptionsForm_MouseWheel(object sender, MouseEventArgs e) {
 			unsavedChanges = true;
-			//float oldScale = plan.Scale.Value;
-			plan.Scale *= (1.0f + ((float)e.Delta) / 1200.0f);
-			/*picturePanel.ClientSize.Width / 2.0 - plan.XPos
-			plan.XPos -= (float)((plan.Scale - oldScale) * picturePanel.ClientSize.Width / 2.0);
-			plan.YPos -= (float)((plan.Scale - oldScale) * picturePanel.ClientSize.Height / 2.0);*/
-			//plan.XPos += ((picturePanel.ClientSize.Height / 2 - plan.XPos) * (1.0f + ((float)e.Delta) / 1200.0f) + plan.XPos * ((float)e.Delta) / 1200.0f) / plan.Scale.Value;
-			//plan.YPos += ((picturePanel.ClientSize.Width / 2 - plan.YPos) * (1.0f + ((float)e.Delta) / 1200.0f) + plan.YPos * ((float)e.Delta) / 1200.0f) / plan.Scale.Value;
-			/*plan.XPos *= (1.0f + ((float)e.Delta) / 1200.0f);
-			plan.YPos *= (1.0f + ((float)e.Delta) / 1200.0f);*/
+			Point center = picturePanel.PointToClient(this.PointToScreen(e.Location));
+			AddScale(1.0f + ((float)e.Delta) / 1200.0f, center);
 			picturePanel.Invalidate();
+		}
+
+		private void AddScale(double scale, Nullable<PointF> center) {
+			double oldScale = plan.Scale.Value;
+			double newScale = oldScale * scale;
+			plan.Scale = (float) newScale;
+			double centerX = center.HasValue ? center.Value.X : picturePanel.ClientSize.Width / 2.0;
+			double centerY = center.HasValue ? center.Value.Y : picturePanel.ClientSize.Height / 2.0;
+			plan.XPos = (float)((centerX - (centerX - plan.XPos * oldScale) * scale) / newScale);
+			plan.YPos = (float)((centerY - (centerY - plan.YPos * oldScale) * scale) / newScale);
 		}
 
 		private void picturePanel_MouseDown(object sender, MouseEventArgs e) {
@@ -217,13 +220,15 @@ namespace Europlan.Common {
 
 		private void btnZoomIn_Click(object sender, EventArgs e) {
 			unsavedChanges = true;
-			plan.Scale *= 1.1f;
+			//plan.Scale *= 1.1f;
+			AddScale(1.1, null);
 			picturePanel.Invalidate();
 		}
 
 		private void btnZoomOut_Click(object sender, EventArgs e) {
 			unsavedChanges = true;
-			plan.Scale *= 0.9f;
+			//plan.Scale *= 0.9f;
+			AddScale(0.9, null);
 			picturePanel.Invalidate();
 		}
 
