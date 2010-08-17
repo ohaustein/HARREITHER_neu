@@ -60,6 +60,7 @@ namespace Europlan.Common {
 			// 
 			// btnZoomOut
 			// 
+			this.btnZoomOut.AutoToolTip = false;
 			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
 			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -70,6 +71,7 @@ namespace Europlan.Common {
 			// 
 			// btnZoomIn
 			// 
+			this.btnZoomIn.AutoToolTip = false;
 			this.btnZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomIn.Image")));
 			this.btnZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -85,6 +87,7 @@ namespace Europlan.Common {
 			// 
 			// btnMove
 			// 
+			this.btnMove.AutoToolTip = false;
 			this.btnMove.Checked = true;
 			this.btnMove.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.btnMove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -97,6 +100,7 @@ namespace Europlan.Common {
 			// 
 			// btnDistance
 			// 
+			this.btnDistance.AutoToolTip = false;
 			this.btnDistance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnDistance.Image = ((System.Drawing.Image)(resources.GetObject("btnDistance.Image")));
 			this.btnDistance.ImageTransparentColor = System.Drawing.Color.Magenta;
