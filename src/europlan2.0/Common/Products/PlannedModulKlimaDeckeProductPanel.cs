@@ -860,7 +860,11 @@ namespace Europlan.Common {
 		}
 
 		private void btnAddRow_Click(object sender, EventArgs e) {
+			if (this.selectedSubArea.Rows.Count > 0) {
+				this.selectedSubArea.Rows.Add(new KlimaFlaechenList(this.selectedSubArea.Rows[0]));
+			} else {
 			this.selectedSubArea.Rows.Add(new KlimaFlaechenList());
+			}
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			this.errorMsg = this.product.Product.LastErrorMessage;
 			this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.SUBAREA);

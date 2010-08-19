@@ -189,6 +189,11 @@ namespace Europlan.Common {
 			this.orientation = orientation;
 		}
 
+		public KlimaFlaechenModul(KlimaFlaechenModul other) {
+			this.modulType = other.modulType;
+			this.orientation = other.orientation;
+		}
+
 		public ModulTypeEnum ModulType {
 			get { return this.modulType; }
 			set { this.modulType = value; }

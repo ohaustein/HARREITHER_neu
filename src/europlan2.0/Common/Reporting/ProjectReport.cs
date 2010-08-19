@@ -421,13 +421,12 @@ namespace Europlan.Common {
 
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
-					normWaermeBedarf += room.NormalizedHeatLoad;
-					normKuehlBedarf += room.NormalizedCoolLoad;
+					normWaermeBedarf += room.HeatLoad;
+					normKuehlBedarf += room.CoolLoad;
+					normWaermeBedarfBereinigt += room.NormalizedHeatLoad;
+					normKuehlBedarfBereinigt += room.NormalizedCoolLoad;
 					roomArea += room.Area;
 					foreach (PlannedProduct pp in room.PlannedProducts) {
-						normWaermeBedarfBereinigt += pp.Product.PlannedHeizlastBereinigung;
-						normKuehlBedarfBereinigt += pp.Product.PlannedKuehllastBereinigung;
-
 						plannedFloorArea += pp.Product.PlannedFloorArea;
 						plannedWallArea += pp.Product.PlannedWallArea;
 						plannedCeilingArea += pp.Product.PlannedCeilingArea;
@@ -465,9 +464,9 @@ namespace Europlan.Common {
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = EuroplanRes.ProjectReport_GesamterBereinigterWaermebedarf; //"Gesamter bereinigter Wärmebedarf";
-			wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
+			wrapper.HeatValue = (normWaermeBedarfBereinigt).ToString("0.##");
 			wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
-			wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
+			wrapper.CoolValue = (normKuehlBedarfBereinigt).ToString("0.##");
 			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
 			wrapperList.Add(wrapper);
 

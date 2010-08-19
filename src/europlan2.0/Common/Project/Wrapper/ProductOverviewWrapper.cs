@@ -611,8 +611,8 @@ namespace Europlan.Common {
 
 		public Nullable<double> DruckverlustHeat {
 			get {
-				if (plannedProduct.Product.PlannedMhHeat > 0) {
-					return plannedProduct.Product.PlannedMhHeat; 
+				if (plannedProduct.Product.PlannedDeltaRhoHeat > 0) {
+					return plannedProduct.Product.PlannedDeltaRhoHeat; 
 				} else {
 					return null;
 				}
@@ -644,8 +644,8 @@ namespace Europlan.Common {
 
 		public Nullable<double> DruckverlustCool {
 			get {
-				if (plannedProduct.Product.PlannedMhCool > 0) {
-					return plannedProduct.Product.PlannedMhCool;
+				if (plannedProduct.Product.PlannedDeltaRhoCool > 0) {
+					return plannedProduct.Product.PlannedDeltaRhoCool;
 				} else {
 					return null;
 				}

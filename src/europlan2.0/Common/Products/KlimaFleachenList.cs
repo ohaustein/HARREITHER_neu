@@ -9,6 +9,16 @@ namespace Europlan.Common {
 		private double lengthVerbindeleitungen;
 		private List<KlimaFlaechenModul> list = new List<KlimaFlaechenModul>();
 
+		public KlimaFlaechenList() {
+		}
+
+		public KlimaFlaechenList(KlimaFlaechenList otherList) {
+			this.lengthVerbindeleitungen = otherList.lengthVerbindeleitungen;
+			foreach (KlimaFlaechenModul module in otherList.list) {
+				this.list.Add(new KlimaFlaechenModul(module));
+			}
+		}
+
 		public double LengthVerbindeleitungen {
 			get { return lengthVerbindeleitungen; }
 			set { lengthVerbindeleitungen = value; }
