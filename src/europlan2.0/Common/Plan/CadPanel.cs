@@ -403,6 +403,12 @@ namespace Europlan.Common {
 		}
 
 		public void AddScale(double addedScale, Nullable<Point2D> center) {
+			if (this.scale * addedScale < 0.01) {
+				addedScale = 0.01 / this.scale;
+			}
+			if (this.scale * addedScale > 10000.0) {
+				addedScale = 10000.0 / this.scale;
+			}
 			this.unsavedChanges = true;
 			if (!center.HasValue) {
 				center = new Point2D(this.ClientSize.Width / 2.0, this.ClientSize.Height / 2.0);

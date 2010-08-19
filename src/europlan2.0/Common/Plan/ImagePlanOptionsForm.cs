@@ -141,14 +141,20 @@ namespace Europlan.Common {
 			picturePanel.Invalidate();
 		}
 
-		private void AddScale(double scale, Nullable<PointF> center) {
+		private void AddScale(double addedScale, Nullable<PointF> center) {
+			if (plan.Scale.Value * addedScale < 0.01) {
+				addedScale = 0.01 / plan.Scale.Value;
+			}
+			if (plan.Scale.Value * addedScale > 10000.0) {
+				addedScale = 10000.0 / plan.Scale.Value;
+			}
 			double oldScale = plan.Scale.Value;
-			double newScale = oldScale * scale;
+			double newScale = oldScale * addedScale;
 			plan.Scale = (float) newScale;
 			double centerX = center.HasValue ? center.Value.X : picturePanel.ClientSize.Width / 2.0;
 			double centerY = center.HasValue ? center.Value.Y : picturePanel.ClientSize.Height / 2.0;
-			plan.XPos = (float)((centerX - (centerX - plan.XPos * oldScale) * scale) / newScale);
-			plan.YPos = (float)((centerY - (centerY - plan.YPos * oldScale) * scale) / newScale);
+			plan.XPos = (float)((centerX - (centerX - plan.XPos * oldScale) * addedScale) / newScale);
+			plan.YPos = (float)((centerY - (centerY - plan.YPos * oldScale) * addedScale) / newScale);
 		}
 
 		private void picturePanel_MouseDown(object sender, MouseEventArgs e) {
