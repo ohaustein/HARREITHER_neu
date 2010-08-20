@@ -282,13 +282,26 @@ namespace Europlan.Common {
 						model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
 						gdiGraphics3D.To2DTransform, referencePoint, 10.0);
 					double closestDistance = double.PositiveInfinity;
+					IList<DxfEntity> allCloseEntities = new List<DxfEntity>();
 					foreach (IList<DxfEntity> entities in closeEntities) {
 						foreach (DxfEntity entity in entities) {
-							double distance;
-							Nullable<Point2D> point = GetClosestPointOfEntity(referencePoint, entity, out distance);
-							if (distance < closestDistance) {
-								closestDistance = distance;
-								closestPoint = point;
+							allCloseEntities.Add(entity);
+						}
+					}
+					foreach (DxfEntity entity in allCloseEntities) {
+						double distance;
+						Nullable<Point2D> point = GetClosestPointOfEntity(referencePoint, entity, out distance);
+						if (distance < closestDistance) {
+							closestDistance = distance;
+							closestPoint = point;
+						}
+						foreach (DxfEntity entity2 in allCloseEntities) {
+							if (entity != entity2) {
+								point = GetClosestIntersection(referencePoint, entity, entity2, out distance);
+								if (distance < closestDistance) {
+									closestDistance = distance;
+									closestPoint = point;
+								}
 							}
 						}
 					}
@@ -321,12 +334,8 @@ namespace Europlan.Common {
 				DxfLine line = entity as DxfLine;
 				Point2D start = gdiGraphics3D.To2DTransform.TransformTo2D(line.Start);
 				Point2D end = gdiGraphics3D.To2DTransform.TransformTo2D(line.End);
-				double distX = referencePoint.X - start.X;
-				double distY = referencePoint.Y - start.Y;
-				double sqDistStart = distX * distX + distY * distY;
-				distX = referencePoint.X - end.X;
-				distY = referencePoint.Y - end.Y;
-				double sqDistEnd = distX * distX + distY * distY;
+				double sqDistStart = CalcSqDist(referencePoint, start);
+				double sqDistEnd = CalcSqDist(referencePoint, end);
 				if (sqDistStart < sqDistEnd) {
 					sqDistance = sqDistStart;
 					return start;
@@ -336,17 +345,13 @@ namespace Europlan.Common {
 				}
 			} else if (entity is DxfPolyline2D) {
 				DxfPolyline2D poly = entity as DxfPolyline2D;
-				double distX;
-				double distY;
 				double curSqDist;
 				sqDistance = double.PositiveInfinity;
 				Point2D vertexPoint;
 				Nullable<Point2D> bestPoint = null;
 				foreach (DxfVertex2D vertex in poly.Vertices) {
 					vertexPoint = gdiGraphics3D.To2DTransform.TransformTo2D(vertex.Position);
-					distX = referencePoint.X - vertexPoint.X;
-					distY = referencePoint.Y - vertexPoint.Y;
-					curSqDist = distX * distX + distY * distY;
+					curSqDist = CalcSqDist(referencePoint, vertexPoint);
 					if (curSqDist < sqDistance) {
 						sqDistance = curSqDist;
 						bestPoint = vertexPoint;
@@ -355,17 +360,13 @@ namespace Europlan.Common {
 				return bestPoint;
 			} else if (entity is DxfPolyline3D) {
 				DxfPolyline3D poly = entity as DxfPolyline3D;
-				double distX;
-				double distY;
 				double curSqDist;
 				sqDistance = double.PositiveInfinity;
 				Point2D vertexPoint;
 				Nullable<Point2D> bestPoint = null;
 				foreach (DxfVertex3D vertex in poly.Vertices) {
 					vertexPoint = gdiGraphics3D.To2DTransform.TransformTo2D(vertex.Position);
-					distX = referencePoint.X - vertexPoint.X;
-					distY = referencePoint.Y - vertexPoint.Y;
-					curSqDist = distX * distX + distY * distY;
+					curSqDist = CalcSqDist(referencePoint, vertexPoint);
 					if (curSqDist < sqDistance) {
 						sqDistance = curSqDist;
 						bestPoint = vertexPoint;
@@ -374,17 +375,13 @@ namespace Europlan.Common {
 				return bestPoint;
 			} else if (entity is DxfLwPolyline) {
 				DxfLwPolyline poly = entity as DxfLwPolyline;
-				double distX;
-				double distY;
 				double curSqDist;
 				sqDistance = double.PositiveInfinity;
 				Point2D vertexPoint;
 				Nullable<Point2D> bestPoint = null;
 				foreach (DxfLwPolyline.Vertex vertex in poly.Vertices) {
 					vertexPoint = gdiGraphics3D.To2DTransform.TransformTo2D(vertex.Position);
-					distX = referencePoint.X - vertexPoint.X;
-					distY = referencePoint.Y - vertexPoint.Y;
-					curSqDist = distX * distX + distY * distY;
+					curSqDist = CalcSqDist(referencePoint, vertexPoint);
 					if (curSqDist < sqDistance) {
 						sqDistance = curSqDist;
 						bestPoint = vertexPoint;
@@ -395,6 +392,131 @@ namespace Europlan.Common {
 			// TODO add missing entity types
 			sqDistance = double.PositiveInfinity;
 			return null;
+		}
+
+		private Nullable<Point2D> GetClosestIntersection(Point2D referencePoint, DxfEntity entity1, DxfEntity entity2, out double sqDistance) {
+			if (entity1 is DxfLine) {
+				DxfLine line1 = entity1 as DxfLine;
+				Point2D start1 = gdiGraphics3D.To2DTransform.TransformTo2D(line1.Start);
+				Point2D end1 = gdiGraphics3D.To2DTransform.TransformTo2D(line1.End);
+				return GetClosestIntersection(referencePoint, start1, end1, entity2, out sqDistance);
+			}
+
+			sqDistance = double.PositiveInfinity;
+			return null;
+		}
+
+		private Nullable<Point2D> GetClosestIntersection(Point2D referencePoint, Point2D p0, Point2D p1, DxfEntity entity2, out double sqDistance) {
+			if (entity2 is DxfLine) {
+				DxfLine line2 = entity2 as DxfLine;
+				Point2D start2 = gdiGraphics3D.To2DTransform.TransformTo2D(line2.Start);
+				Point2D end2 = gdiGraphics3D.To2DTransform.TransformTo2D(line2.End);
+				return GetIntersection(referencePoint, p0, p1, start2, end2, out sqDistance);
+			}
+
+			sqDistance = double.PositiveInfinity;
+			return null;
+		}
+
+		/// <summary>
+		/// Checks if the two lines P0P1 and Q0Q1 intersect and returns the intersection (or null if they don't)
+		/// </summary>
+		/// <param name="p1"></param>
+		/// <param name="p2"></param>
+		/// <param name="q1"></param>
+		/// <param name="q2"></param>
+		/// <returns></returns>
+		private Nullable<Point2D> GetIntersection(Point2D referencePoint, Point2D p0, Point2D p1, Point2D q0, Point2D q1, out double sqDistance) {
+			Vector2D u = p1 - p0;
+			Vector2D v = q1 - q0;
+			Vector2D w = p0 - q1;
+
+			if (u.X == 0 && u.Y == 0 && v.X == 0 && v.Y == 0) {
+				// they are both points;
+				if (u.X == v.X) {
+					// they are the same point
+					sqDistance = CalcSqDist(referencePoint, p0);
+					return p0;
+				} else {
+					// they are different points
+					sqDistance = double.PositiveInfinity;
+					return null;
+				}
+			}
+			if (u.X == 0 && u.Y == 0) {
+				// P0P1 is a point but Q0Q1 not
+				if (PointIsOnLine(p0, q0, q1)) {
+					sqDistance = CalcSqDist(referencePoint, p0);
+					return p0;
+				} else {
+					sqDistance = double.PositiveInfinity;
+					return null;
+				}
+			}
+			if (v.X == 0 && v.Y == 0) {
+				// Q0Q1 is a point but P0P1 not
+				if (PointIsOnLine(q0, p0, p1)) {
+					sqDistance = CalcSqDist(referencePoint, q0);
+					return q0;
+				} else {
+					sqDistance = double.PositiveInfinity;
+					return null;
+				}
+			}
+
+			double t0, t1;
+			Vector2D w2 = p1 - q0;
+			if (v.X != 0) {
+				t0 = w.X / v.X;
+				t1 = w2.X / v.X;
+			} else {
+				t0 = w.Y / v.Y;
+				t1 = w2.Y / v.Y;
+			}
+
+			// t0 must be smaller than t1 so swap them if this is not the case
+			if (t0 > t1) {
+				double t = t0;
+				t0 = t1;
+				t1 = t;
+			}
+
+			if (t0 > 1 || t1 < 0) {
+				// intersection lies outside of the line
+				sqDistance = double.PositiveInfinity;
+				return null;
+			}
+			t0 = t0 < 0 ? 0 : t0;	// clip to min 0
+			t1 = t1 > 1 ? 1 : t1;	// clip to max 1
+			if (t0 == t1) {
+				// intersection is a point
+				Point2D intersection = q0 + t0 * v;
+				sqDistance = CalcSqDist(referencePoint, intersection);
+				return intersection;
+			}
+
+			sqDistance = double.PositiveInfinity;
+			return null;
+		}
+
+		/// <summary>
+		/// Calculates the square distance for two points
+		/// </summary>
+		private double CalcSqDist(Point2D p1, Point2D p2) {
+			double x = p1.X - p2.X;
+			double y = p1.Y - p2.Y;
+			return x * x + y * y;
+		}
+
+		/// <summary>
+		/// Checks if the point P is on the line Q0Q1
+		/// </summary>
+		/// <param name="p"></param>
+		/// <param name="q0"></param>
+		/// <param name="q1"></param>
+		/// <returns></returns>
+		private bool PointIsOnLine(Point2D p, Point2D q0, Point2D q1) {
+			return false;
 		}
 
 		public void RecreateDrawables() {
