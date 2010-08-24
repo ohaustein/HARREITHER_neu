@@ -275,39 +275,60 @@ namespace Europlan.Common {
 			mouseDown = false;
 			if (!moveMode && e.Button == MouseButtons.Left) {
 				this.unsavedChanges = true;
-				Nullable<Point2D> closestPoint = null;
+				double bestSqDistance = double.PositiveInfinity;
+				Nullable<Point2D> bestPoint = null;
 				Point2D referencePoint = new Point2D(e.X, e.Y);
+				double grabDist = 50.0;
 				if (!shiftPressed) {
-					IList<IList<DxfEntity>> closeEntities = EntitySelector.GetEntitiesCloseToPoint(
+					IList<IList<DxfEntity>> closeEntityChains = EntitySelector.GetEntitiesCloseToPoint(
 						model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
-						gdiGraphics3D.To2DTransform, referencePoint, 10.0);
-					double closestDistance = double.PositiveInfinity;
-					IList<DxfEntity> allCloseEntities = new List<DxfEntity>();
-					foreach (IList<DxfEntity> entities in closeEntities) {
-						foreach (DxfEntity entity in entities) {
-							allCloseEntities.Add(entity);
-						}
+						gdiGraphics3D.To2DTransform, referencePoint, 2 * grabDist);
+
+					List<Polygon2D> closePolygons = new List<Polygon2D>();
+					foreach (List<DxfEntity> entityChain in closeEntityChains) {
+						closePolygons.AddRange(GetEntityAsPolygons(entityChain));
 					}
-					foreach (DxfEntity entity in allCloseEntities) {
-						double distance;
-						Nullable<Point2D> point = GetClosestPointOfEntity(referencePoint, entity, out distance);
-						if (distance < closestDistance) {
-							closestDistance = distance;
-							closestPoint = point;
-						}
-						foreach (DxfEntity entity2 in allCloseEntities) {
-							if (entity != entity2) {
-								point = GetClosestIntersection(referencePoint, entity, entity2, out distance);
-								if (distance < closestDistance) {
-									closestDistance = distance;
-									closestPoint = point;
+
+					double curSqDistance = double.PositiveInfinity;
+					Nullable<Point2D> curPoint = null;
+
+					foreach (Polygon2D polygon1 in closePolygons) {
+						Nullable<Point2D> oldVertex1 = polygon1.isClosed ? polygon1.vertices[polygon1.vertices.Count - 1] : (Nullable<Point2D>)null;
+						foreach (Point2D vertex1 in polygon1.vertices) {
+							curSqDistance = CalcSqDist(referencePoint, vertex1);
+							if (curSqDistance < bestSqDistance) {
+								bestSqDistance = curSqDistance;
+								bestPoint = vertex1;
+							}
+
+							if (oldVertex1.HasValue) {
+								foreach (Polygon2D polygon2 in closePolygons) {
+									Nullable<Point2D> oldVertex2 = polygon2.isClosed ? polygon2.vertices[polygon2.vertices.Count - 1] : (Nullable<Point2D>)null;
+									foreach (Point2D vertex2 in polygon2.vertices) {
+										if (oldVertex2.HasValue) {
+											curPoint = GetIntersection(referencePoint, oldVertex1.Value, vertex1, oldVertex2.Value, vertex2, out curSqDistance);
+											if (curSqDistance < bestSqDistance) {
+												bestSqDistance = curSqDistance;
+												bestPoint = curPoint;
+											}
+										}
+										oldVertex2 = vertex2;
+									}
 								}
 							}
+							oldVertex1 = vertex1;
 						}
 					}
+
+					if (bestSqDistance > grabDist * grabDist) {
+						// do not use points which distance is greater than 5 pixels (=> sqDistance > 25)
+						bestSqDistance = double.PositiveInfinity;
+						bestPoint = null;
+					}
+
 				}
 				if (selectedStartPointCad.HasValue && !selectedEndPointCad.HasValue) {
-					Point3D tmp = new Point3D((closestPoint.HasValue ? closestPoint.Value : referencePoint), 0);
+					Point3D tmp = new Point3D((bestPoint.HasValue ? bestPoint.Value : referencePoint), 0);
 					Matrix4D inverse = gdiGraphics3D.To2DTransform.GetInverse();
 					selectedEndPointCad = inverse.Transform(tmp);
 					if (this.EndPointSelected != null) {
@@ -318,7 +339,7 @@ namespace Europlan.Common {
 					}
 				} else {
 					selectedEndPointCad = null;
-					Point3D tmp = new Point3D((closestPoint.HasValue ? closestPoint.Value : referencePoint), 0);
+					Point3D tmp = new Point3D((bestPoint.HasValue ? bestPoint.Value : referencePoint), 0);
 					Matrix4D inverse = gdiGraphics3D.To2DTransform.GetInverse();
 					selectedStartPointCad = inverse.Transform(tmp);
 					if (this.StartPointSelected != null) {
@@ -329,93 +350,156 @@ namespace Europlan.Common {
 			}
 		}
 
-		private Nullable<Point2D> GetClosestPointOfEntity(Point2D referencePoint, DxfEntity entity, out double sqDistance) {
-			if (entity is DxfLine) {
-				DxfLine line = entity as DxfLine;
-				Point2D start = gdiGraphics3D.To2DTransform.TransformTo2D(line.Start);
-				Point2D end = gdiGraphics3D.To2DTransform.TransformTo2D(line.End);
-				double sqDistStart = CalcSqDist(referencePoint, start);
-				double sqDistEnd = CalcSqDist(referencePoint, end);
-				if (sqDistStart < sqDistEnd) {
-					sqDistance = sqDistStart;
-					return start;
+		private Point3D CorrectPoint(Point3D point, List<DxfEntity> entityChain, int pos) {
+			if (pos >= entityChain.Count) {
+				return point;
+			} else {
+				// todo correct point
+				DxfEntity correctionEntity = entityChain[pos];
+				if (correctionEntity is DxfInsert) {
+					
+					DxfInsert insert = correctionEntity as DxfInsert;
+
+					Matrix4D matrix = Matrix4D.Identity;
+					//insert.
+					//point = point * ((Vector4D)insert.ScaleFactor);
+					
+					double cosPhi = Math.Cos(insert.Rotation);
+					double sinPhi = Math.Sin(insert.Rotation);
+					Vector3D u = insert.ZAxis;
+					Matrix4D rotation =
+						new Matrix4D(
+							new Vector4D(
+								1.0 + (1.0 - cosPhi) * (u.X * u.X - 1),
+								(1.0 - cosPhi) * u.X * u.Y + u.Z * sinPhi,
+								(1.0 - cosPhi) * u.X * u.Z - u.Y + sinPhi,
+								0),
+							new Vector4D(
+								(1.0 - cosPhi) * u.X * u.Y - u.Z * sinPhi,
+								1.0 + (1.0 - cosPhi) * (u.Y * u.Y - 1),
+								(1.0 - cosPhi) * u.Y * u.Z + u.X * sinPhi,
+								0),
+							new Vector4D(
+								(1.0 - cosPhi) * u.X * u.Z + u.Y * sinPhi,
+								(1.0 - cosPhi) * u.Y * u.Z - u.X * sinPhi,
+								1.0 + (1.0 - cosPhi) * (u.Z * u.Z - 1),
+								0),
+							new Vector4D(
+								0,
+								0,
+								0,
+								1));
+
+					Matrix4D scale = new Matrix4D(
+						insert.ScaleFactor.X, 0, 0, 0,
+						0, insert.ScaleFactor.Y, 0, 0,
+						0, 0, insert.ScaleFactor.Z, 0,
+						0, 0, 0, 1);
+
+					Matrix4D translation = new Matrix4D(
+						1, 0, 0, insert.InsertionPoint.X,
+						0, 1, 0, insert.InsertionPoint.Y,
+						0, 0, 1, insert.InsertionPoint.Z,
+						0, 0, 0, 1);
+
+					Matrix4D totalMatrix = translation * rotation * scale;
+
+					point = totalMatrix.Transform(point);
+								
+													
+
+					/*point.X = point.X * insert.ScaleFactor.X + insert.InsertionPoint.X;
+					point.Y = point.Y * insert.ScaleFactor.Y + insert.InsertionPoint.Y;
+					point.Z = point.Z * insert.ScaleFactor.Z + insert.InsertionPoint.Z;*/
+					// todo
+				} else if (correctionEntity is DxfDimension) {
+					DxfDimension dimension = correctionEntity as DxfDimension;
+
+					point = point + (dimension.InsertionPoint - new Point3D(0, 0, 0));
+					/*point.X = point.X + dimension.InsertionPoint.X;
+					point.Y = point.Y + dimension.InsertionPoint.X;
+					point.Z = point.Z + dimension.InsertionPoint.X;*/
+					// todo
+				}
+
+				if (pos == entityChain.Count - 1) {
+					return point;
 				} else {
-					sqDistance = sqDistEnd;
-					return end;
+					return CorrectPoint(point, entityChain, pos + 1);
 				}
+			}
+		}
+
+		private struct Polygon3D {
+
+			public Polygon3D(bool isClosed) {
+				this.vertices = new List<Point3D>();
+				this.isClosed = isClosed;
+			}
+
+			public Polygon3D(ICollection<Point3D> vertices, bool isClosed) {
+				this.vertices = new List<Point3D>(vertices);
+				this.isClosed = isClosed;
+			}
+
+			public readonly List<Point3D> vertices;
+			public bool isClosed;
+		}
+
+		private struct Polygon2D {
+
+			public Polygon2D(bool isClosed) {
+				this.vertices = new List<Point2D>();
+				this.isClosed = isClosed;
+			}
+
+			public Polygon2D(ICollection<Point2D> vertices, bool isClosed) {
+				this.vertices = new List<Point2D>(vertices);
+				this.isClosed = isClosed;
+			}
+
+			public readonly List<Point2D> vertices;
+			public bool isClosed;
+		}
+
+		private List<Polygon2D> GetEntityAsPolygons(List<DxfEntity> entityChain) {
+			DxfEntity entity = entityChain[0];
+			List<Polygon3D> polygons3d = new List<Polygon3D>();
+
+			if (entity is DxfLine) {
+				Polygon3D poly = new Polygon3D(false);
+				poly.vertices.Add((entity as DxfLine).Start);
+				poly.vertices.Add((entity as DxfLine).End);
+				polygons3d.Add(poly);
 			} else if (entity is DxfPolyline2D) {
-				DxfPolyline2D poly = entity as DxfPolyline2D;
-				double curSqDist;
-				sqDistance = double.PositiveInfinity;
-				Point2D vertexPoint;
-				Nullable<Point2D> bestPoint = null;
-				foreach (DxfVertex2D vertex in poly.Vertices) {
-					vertexPoint = gdiGraphics3D.To2DTransform.TransformTo2D(vertex.Position);
-					curSqDist = CalcSqDist(referencePoint, vertexPoint);
-					if (curSqDist < sqDistance) {
-						sqDistance = curSqDist;
-						bestPoint = vertexPoint;
-					}
+				Polygon3D poly = new Polygon3D((entity as DxfPolyline2D).Closed);
+				foreach (DxfVertex2D vertex in (entity as DxfPolyline2D).Vertices) {
+					poly.vertices.Add((Point3D)vertex.Position);
 				}
-				return bestPoint;
+				polygons3d.Add(poly);
 			} else if (entity is DxfPolyline3D) {
-				DxfPolyline3D poly = entity as DxfPolyline3D;
-				double curSqDist;
-				sqDistance = double.PositiveInfinity;
-				Point2D vertexPoint;
-				Nullable<Point2D> bestPoint = null;
-				foreach (DxfVertex3D vertex in poly.Vertices) {
-					vertexPoint = gdiGraphics3D.To2DTransform.TransformTo2D(vertex.Position);
-					curSqDist = CalcSqDist(referencePoint, vertexPoint);
-					if (curSqDist < sqDistance) {
-						sqDistance = curSqDist;
-						bestPoint = vertexPoint;
-					}
+				Polygon3D poly = new Polygon3D((entity as DxfPolyline3D).Closed);
+				foreach (DxfVertex3D vertex in (entity as DxfPolyline3D).Vertices) {
+					poly.vertices.Add(vertex.Position);
 				}
-				return bestPoint;
+				polygons3d.Add(poly);
 			} else if (entity is DxfLwPolyline) {
-				DxfLwPolyline poly = entity as DxfLwPolyline;
-				double curSqDist;
-				sqDistance = double.PositiveInfinity;
-				Point2D vertexPoint;
-				Nullable<Point2D> bestPoint = null;
-				foreach (DxfLwPolyline.Vertex vertex in poly.Vertices) {
-					vertexPoint = gdiGraphics3D.To2DTransform.TransformTo2D(vertex.Position);
-					curSqDist = CalcSqDist(referencePoint, vertexPoint);
-					if (curSqDist < sqDistance) {
-						sqDistance = curSqDist;
-						bestPoint = vertexPoint;
-					}
+				Polygon3D poly = new Polygon3D((entity as DxfLwPolyline).Closed);
+				foreach (DxfLwPolyline.Vertex vertex in (entity as DxfLwPolyline).Vertices) {
+					poly.vertices.Add((Point3D)vertex.Position);
 				}
-				return bestPoint;
-			}
-			// TODO add missing entity types
-			sqDistance = double.PositiveInfinity;
-			return null;
-		}
-
-		private Nullable<Point2D> GetClosestIntersection(Point2D referencePoint, DxfEntity entity1, DxfEntity entity2, out double sqDistance) {
-			if (entity1 is DxfLine) {
-				DxfLine line1 = entity1 as DxfLine;
-				Point2D start1 = gdiGraphics3D.To2DTransform.TransformTo2D(line1.Start);
-				Point2D end1 = gdiGraphics3D.To2DTransform.TransformTo2D(line1.End);
-				return GetClosestIntersection(referencePoint, start1, end1, entity2, out sqDistance);
+				polygons3d.Add(poly);
 			}
 
-			sqDistance = double.PositiveInfinity;
-			return null;
-		}
-
-		private Nullable<Point2D> GetClosestIntersection(Point2D referencePoint, Point2D p0, Point2D p1, DxfEntity entity2, out double sqDistance) {
-			if (entity2 is DxfLine) {
-				DxfLine line2 = entity2 as DxfLine;
-				Point2D start2 = gdiGraphics3D.To2DTransform.TransformTo2D(line2.Start);
-				Point2D end2 = gdiGraphics3D.To2DTransform.TransformTo2D(line2.End);
-				return GetIntersection(referencePoint, p0, p1, start2, end2, out sqDistance);
+			List<Polygon2D> polygons2d = new List<Polygon2D>();
+			foreach (Polygon3D polygon3d in polygons3d) {
+				Polygon2D polygon2d = new Polygon2D(polygon3d.isClosed);
+				foreach (Point3D vertex3d in polygon3d.vertices) {
+					polygon2d.vertices.Add(gdiGraphics3D.To2DTransform.TransformTo2D(CorrectPoint(vertex3d, entityChain, 1)));
+				}
+				polygons2d.Add(polygon2d);
 			}
-
-			sqDistance = double.PositiveInfinity;
-			return null;
+			return polygons2d;
 		}
 
 		/// <summary>
@@ -429,11 +513,11 @@ namespace Europlan.Common {
 		private Nullable<Point2D> GetIntersection(Point2D referencePoint, Point2D p0, Point2D p1, Point2D q0, Point2D q1, out double sqDistance) {
 			Vector2D u = p1 - p0;
 			Vector2D v = q1 - q0;
-			Vector2D w = p0 - q1;
+			Vector2D w = p0 - q0;
 
 			if (u.X == 0 && u.Y == 0 && v.X == 0 && v.Y == 0) {
 				// they are both points;
-				if (u.X == v.X) {
+				if (p0.X == q0.X) {
 					// they are the same point
 					sqDistance = CalcSqDist(referencePoint, p0);
 					return p0;
@@ -464,6 +548,31 @@ namespace Europlan.Common {
 				}
 			}
 
+			double tmp = v.X * u.Y - u.X * v.Y;
+			if (tmp == 0) {
+				sqDistance = double.PositiveInfinity;
+				return null;
+			}
+
+			double si = (w.X * v.Y - v.X * w.Y) / tmp;
+			double ti = (w.X * u.Y - u.X * w.Y) / tmp;
+
+			if (si < 0.0 || si > 1.0 || ti < 0.0 || ti > 1.0) {
+				sqDistance = double.PositiveInfinity;
+				return null;
+			}
+
+			Point2D i = p0 + si * u;
+			sqDistance = CalcSqDist(referencePoint, i);
+			return i;
+
+
+
+
+
+
+
+			/*
 			double t0, t1;
 			Vector2D w2 = p1 - q0;
 			if (v.X != 0) {
@@ -496,7 +605,7 @@ namespace Europlan.Common {
 			}
 
 			sqDistance = double.PositiveInfinity;
-			return null;
+			return null;*/
 		}
 
 		/// <summary>
