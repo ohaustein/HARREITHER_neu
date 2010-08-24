@@ -908,6 +908,9 @@ raum</value>
   <data name="FloorSummaryPanel_NummerLang" xml:space="preserve">
     <value>eindeutige Raumnummer</value>
   </data>
+  <data name="FloorSummaryPanel_PlanVorhanden" xml:space="preserve">
+    <value>Plan für Geschoß vorhanden</value>
+  </data>
   <data name="FloorSummaryPanel_RaumflaecheZuKleinText" xml:space="preserve">
     <value>In diesem Raum sind bereits Systeme verplant die eine Raumgröße von %SYSTEME%m² in Anspruch nehmen, die neue Raumgröße beträgt aber nur %RAUM%m². Wenn Sie die neue Raumgröße übernehmen werden die verplanten Flächen der Systeme verkleinert.</value>
   </data>
@@ -4664,7 +4667,7 @@ fläche
     <value>%SYSTEM% in %RAUMID% (%RAUMNAME%): %HINWEIS%</value>
   </data>
   <data name="WarningsAndErrorsForm_Titel" xml:space="preserve">
-    <value>Warnungen und Fehler</value>
+    <value>s</value>
   </data>
   <data name="WarningsAndErrorsForm_VerteilerWarnung" xml:space="preserve">
     <value>%VERTEILERID% (%VERTEILERNAME%) in %GESCHOSS%: %WARNUNG%</value>

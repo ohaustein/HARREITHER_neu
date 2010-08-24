@@ -18,6 +18,7 @@ namespace Europlan.Common {
 
 		private RoomList rooms;
 		private DistributorList distributors;
+		private string associatedPlanId = null;
 
 		private Construction lastInsulationConstruction = null;
 		private string lastInsulationConstructionId = null;
@@ -103,6 +104,15 @@ namespace Europlan.Common {
 			}
 			set {
 				distributors = value;
+			}
+		}
+
+		public string AssociatedPlanId {
+			get {
+				return associatedPlanId;
+			}
+			set {
+				associatedPlanId = value;
 			}
 		}
 

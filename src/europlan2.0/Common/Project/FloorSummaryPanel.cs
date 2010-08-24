@@ -15,6 +15,7 @@ namespace Europlan.Common {
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 
 		private Floor floor;
+		private bool updateControlOngoing = false;
 		
 		public FloorSummaryPanel() {
 			InitializeComponent();
@@ -56,9 +57,11 @@ namespace Europlan.Common {
 			this.CoolLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_KuehlleistungLang; //"Erforderliche Külleistung laut Kühllastberechnung";
 			this.colView.HeaderText = EuroplanRes.FloorSummaryPanel_Bearbeiten; //"Bearbeiten\n";
 			this.IsNassraum.HeaderText = EuroplanRes.FloorSummaryPanel_Nassraum;
+			this.chkAssignPlan.Text = EuroplanRes.FloorSummaryPanel_PlanVorhanden;
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
+			updateControlOngoing = true;
 			if (this.Tag != null) {
 				this.floor = this.Tag as Floor;
 				this.floorRoomsSource.DataSource = this.floor.Rooms;
@@ -101,6 +104,28 @@ namespace Europlan.Common {
 			RoomCoolTemperature.Visible = Project.Instance.CalculateCoolLoad;
 			RoomRelativeHumidity.Visible = Project.Instance.CalculateCoolLoad;
 			CoolLoad.Visible = Project.Instance.CalculateCoolLoad;
+
+			planBindingSource.DataSource = null;
+			if (Project.Instance.ImportedPlans.Count > 0) {
+				chkAssignPlan.Enabled = true;
+				if (floor.AssociatedPlanId != null) {
+					planBindingSource.DataSource = Project.Instance.ImportedPlans;
+					cmbPlans.Enabled = true;
+					chkAssignPlan.Checked = true;
+					foreach (Plan plan in Project.Instance.ImportedPlans) {
+						if (plan.Id == floor.AssociatedPlanId) {
+							cmbPlans.SelectedItem = plan;
+						}
+					}
+				} else {
+					chkAssignPlan.Checked = false;
+					cmbPlans.Enabled = false;
+				}
+			} else {
+				chkAssignPlan.Enabled = false;
+				cmbPlans.Enabled = false;
+			}
+			updateControlOngoing = false;
 		}
 
 		public bool AllowLeave() {
@@ -361,6 +386,42 @@ namespace Europlan.Common {
 					e.RowIndex >= 0 && e.RowIndex < this.gridRooms.Rows.Count) {
 				if (this.gridRooms.Columns[e.ColumnIndex] == this.Area) {
 					this.oldArea = (this.gridRooms.Rows[e.RowIndex].DataBoundItem as Room).Area;
+				}
+			}
+		}
+
+		private void chkAssignPlan_CheckedChanged(object sender, EventArgs e) {
+			if (!updateControlOngoing) {
+				if (chkAssignPlan.Checked) {
+					cmbPlans.Enabled = true;
+
+					planBindingSource.DataSource = Project.Instance.ImportedPlans;
+
+					if (floor.AssociatedPlanId != null) {
+						foreach (Plan plan in Project.Instance.ImportedPlans) {
+							if (plan.Id == floor.AssociatedPlanId) {
+								cmbPlans.SelectedItem = plan;
+								break;
+							}
+						}
+					}
+				} else {
+					floor.AssociatedPlanId = null;
+					cmbPlans.Enabled = false;
+				}
+				if (ProjectChanged != null) {
+					ProjectChanged(this);
+				}
+			}
+		}
+
+		private void cmbPlans_SelectedValueChanged(object sender, EventArgs e) {
+			if (!updateControlOngoing) {
+				if (cmbPlans.SelectedItem != null) {
+					floor.AssociatedPlanId = (cmbPlans.SelectedItem as Plan).Id;
+					if (ProjectChanged != null) {
+						ProjectChanged(this);
+					}
 				}
 			}
 		}

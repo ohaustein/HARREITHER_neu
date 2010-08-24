@@ -12,6 +12,7 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(CadPlan))]
 	public abstract class Plan {
 
+		private string id = Guid.NewGuid().ToString();
 		private string name;
 		private string relativeFileName;
 		private Nullable<float> measure = null;
@@ -37,6 +38,11 @@ namespace Europlan.Common {
 		public Nullable<float> Measure {
 			get { return measure; }
 			set { measure = value; }
+		}
+
+		public string Id {
+			get { return id; }
+			set { id = value; }
 		}
 	}
 
