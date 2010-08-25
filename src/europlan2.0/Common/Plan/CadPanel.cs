@@ -60,7 +60,6 @@ namespace Europlan.Common {
 		private Matrix4D from2DTransform;
 		private Vector3D translation = Vector3D.Zero;
 		private Point lastMouseLocation;
-		private Point mouseClickLocation;
 		private double scale = 1.0;
 		private bool mouseDown = false;
 		private double defaultHeight = 1000.0;
@@ -68,6 +67,8 @@ namespace Europlan.Common {
 		private double defaultMargin = 5.0;
 		private Matrix4D toDefaultSize = Matrix4D.Identity;
 		private Matrix4D fromDefaultSize = Matrix4D.Identity;
+		private static double grabDist = 10.0; // radius des "fang"
+
 
 		private Nullable<Point3D> selectedStartPointCad = null;
 		private Nullable<Point3D> selectedEndPointCad = null;
@@ -278,7 +279,6 @@ namespace Europlan.Common {
 				double bestSqDistance = double.PositiveInfinity;
 				Nullable<Point2D> bestPoint = null;
 				Point2D referencePoint = new Point2D(e.X, e.Y);
-				double grabDist = 50.0;
 				if (!shiftPressed) {
 					IList<IList<DxfEntity>> closeEntityChains = EntitySelector.GetEntitiesCloseToPoint(
 						model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
