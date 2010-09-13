@@ -219,20 +219,25 @@ namespace Europlan.Common {
 			this.picturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.picturePanel.Angle = 0F;
 			this.picturePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.picturePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.picturePanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.picturePanel.EndPoint = null;
+			this.picturePanel.Length = 0;
 			this.picturePanel.Location = new System.Drawing.Point(9, 25);
 			this.picturePanel.Margin = new System.Windows.Forms.Padding(0);
+			this.picturePanel.MoveMode = true;
 			this.picturePanel.Name = "picturePanel";
+			this.picturePanel.Plan = null;
+			this.picturePanel.RoomPickerMode = false;
+			this.picturePanel.Scale = null;
+			this.picturePanel.ShowRaster = false;
 			this.picturePanel.Size = new System.Drawing.Size(650, 397);
+			this.picturePanel.StartPoint = null;
 			this.picturePanel.TabIndex = 0;
-			this.picturePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.picturePanel_Paint);
-			this.picturePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseMove);
-			this.picturePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseClick);
-			this.picturePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseDown);
-			this.picturePanel.Resize += new System.EventHandler(this.picturePanel_Resize);
-			this.picturePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picturePanel_MouseUp);
+			this.picturePanel.XPos = 0F;
+			this.picturePanel.YPos = 0F;
 			// 
 			// ImagePlanOptionsForm
 			// 

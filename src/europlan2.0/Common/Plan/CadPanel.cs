@@ -13,6 +13,7 @@ using WW.Cad.Base;
 using System.Collections;
 using WW.Cad.Model.Entities;
 using WW.Math.Geometry;
+using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
 	public partial class CadPanel : UserControl {
@@ -73,13 +74,19 @@ namespace Europlan.Common {
 		private Nullable<Point3D> selectedStartPointCad = null;
 		private Nullable<Point3D> selectedEndPointCad = null;
 
+		private List<Point3D> roomCoordinates = new List<Point3D>();
+		private List<Point3D> tempCoordinates = new List<Point3D>();
+
 		public event EventHandler<StartPointSelectedArgs> StartPointSelected;
 		public event EventHandler<EndPointSelectedArgs> EndPointSelected;
 
 		private bool unsavedChanges = false;
+		private bool unsavedRoomPickerChanges = false;
 
 		private bool moveMode = true;
+		private bool roomPickerMode = false;
 		private bool shiftPressed = false;
+		private bool inDesign = false;
 
 		public CadPanel() {
 			this.InitializeComponent();
@@ -103,6 +110,10 @@ namespace Europlan.Common {
 			get { return this.unsavedChanges; }
 		}
 
+		public bool UnsavedRoomPickerChanges {
+			get { return this.unsavedRoomPickerChanges; }
+		}
+
 		protected override void OnPaint(PaintEventArgs e) {
 			gdiGraphics3D.Draw(e.Graphics, this.ClientRectangle);
 			if (selectedStartPointCad.HasValue) {
@@ -113,6 +124,50 @@ namespace Europlan.Common {
 				} else {
 					e.Graphics.DrawLine(Pens.Red, (float)start.X, (float)start.Y, (float)lastMouseLocation.X, (float)lastMouseLocation.Y);
 				}
+			}
+
+			if (roomCoordinates.Count > 2) {
+				GraphicsPath path = new GraphicsPath();
+				path.StartFigure();
+				Point3D[] array3d = roomCoordinates.ToArray();
+				Point[] array2d = new Point[array3d.Length];
+				Point3D temp = Point3D.Zero;
+				for (int i = 0; i < array3d.Length; i++) {
+					temp = gdiGraphics3D.To2DTransform.Transform(array3d[i]);
+					array2d[i] = new Point((int)temp.X, (int)temp.Y);
+				}
+				path.AddPolygon(array2d);
+				path.CloseFigure();
+				Color c = Color.FromArgb(128, Color.Red);
+				Brush b = new SolidBrush(c);
+				e.Graphics.FillPath(b, path);
+				e.Graphics.DrawPath(new Pen(b), path);
+			}
+
+			if (tempCoordinates.Count > 0 && inDesign) {
+				Point3D[] array3d = tempCoordinates.ToArray();
+				Point[] array2d = new Point[array3d.Length + 1];
+				Point3D temp = Point3D.Zero;
+				for (int i = 0; i < array3d.Length; i++) {
+					temp = gdiGraphics3D.To2DTransform.Transform(array3d[i]);
+					array2d[i] = new Point((int)temp.X, (int)temp.Y);
+				}
+				array2d[array2d.Length - 1] = new Point((int)lastMouseLocation.X, (int)lastMouseLocation.Y);
+				//g.DrawPolygon(Pens.Black, points.ToArray());
+
+				GraphicsPath path = new GraphicsPath();
+				path.StartFigure();
+				
+				if (array2d.Length > 2) {
+					path.AddPolygon(array2d);
+				} else {
+					path.AddLine(array2d[0], array2d[1]);
+				}
+				path.CloseFigure();
+				Color c = Color.FromArgb(128, Color.Red);
+				Brush b = new SolidBrush(c);
+				e.Graphics.FillPath(b, path);
+				e.Graphics.DrawPath(new Pen(b), path);
 			}
 		}
 
@@ -137,6 +192,11 @@ namespace Europlan.Common {
 			}
 		}
 
+		public bool RoomPickerMode {
+			get { return this.roomPickerMode; }
+			set { this.roomPickerMode = value; }
+		}
+
 		public DxfModel Model {
 			get { return model; }
 			set {
@@ -153,6 +213,11 @@ namespace Europlan.Common {
 					}
 				}
 			}
+		}
+
+		public List<Point3D> RoomCoordinates {
+			get { return this.roomCoordinates; }
+			set { this.roomCoordinates = value; }
 		}
 
 		public Point2D GetModelSpaceCoordinates(Point2D screenScapeCoordinates) {
@@ -238,6 +303,96 @@ namespace Europlan.Common {
 			base.OnKeyUp(e);
 		}
 
+		protected override void OnMouseClick(MouseEventArgs e) {
+			base.OnMouseClick(e);
+			if (roomPickerMode) {
+				this.unsavedChanges = true;
+				double bestSqDistance = double.PositiveInfinity;
+				Nullable<Point2D> bestPoint = null;
+				Point2D referencePoint = new Point2D(e.X, e.Y);
+				if (!shiftPressed) {
+					IList<IList<DxfEntity>> closeEntityChains = EntitySelector.GetEntitiesCloseToPoint(
+						model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
+						gdiGraphics3D.To2DTransform, referencePoint, 2 * grabDist);
+
+					List<Polygon2D> closePolygons = new List<Polygon2D>();
+					foreach (List<DxfEntity> entityChain in closeEntityChains) {
+						closePolygons.AddRange(GetEntityAsPolygons(entityChain));
+					}
+
+					double curSqDistance = double.PositiveInfinity;
+					Nullable<Point2D> curPoint = null;
+
+					foreach (Polygon2D polygon1 in closePolygons) {
+						Nullable<Point2D> oldVertex1 = polygon1.isClosed ? polygon1.vertices[polygon1.vertices.Count - 1] : (Nullable<Point2D>)null;
+						foreach (Point2D vertex1 in polygon1.vertices) {
+							curSqDistance = CalcSqDist(referencePoint, vertex1);
+							if (curSqDistance < bestSqDistance) {
+								bestSqDistance = curSqDistance;
+								bestPoint = vertex1;
+							}
+
+							if (oldVertex1.HasValue) {
+								foreach (Polygon2D polygon2 in closePolygons) {
+									Nullable<Point2D> oldVertex2 = polygon2.isClosed ? polygon2.vertices[polygon2.vertices.Count - 1] : (Nullable<Point2D>)null;
+									foreach (Point2D vertex2 in polygon2.vertices) {
+										if (oldVertex2.HasValue) {
+											curPoint = GetIntersection(referencePoint, oldVertex1.Value, vertex1, oldVertex2.Value, vertex2, out curSqDistance);
+											if (curSqDistance < bestSqDistance) {
+												bestSqDistance = curSqDistance;
+												bestPoint = curPoint;
+											}
+										}
+										oldVertex2 = vertex2;
+									}
+								}
+							}
+							oldVertex1 = vertex1;
+						}
+					}
+
+					if (bestSqDistance > grabDist * grabDist) {
+						// do not use points which distance is greater than 5 pixels (=> sqDistance > 25)
+						bestSqDistance = double.PositiveInfinity;
+						bestPoint = null;
+					}
+
+				}
+
+				Point3D tmp = new Point3D((bestPoint.HasValue ? bestPoint.Value : referencePoint), 0);
+				Matrix4D inverse = gdiGraphics3D.To2DTransform.GetInverse();
+				Point3D currentPoint = inverse.Transform(tmp);
+
+				if (e.Button == MouseButtons.Left) {
+					if (!inDesign && roomCoordinates.Count > 0) {
+						// TODO
+						DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+						if (result == DialogResult.No) {
+							return;
+						}
+					}
+					unsavedRoomPickerChanges = true;
+					tempCoordinates.Add(currentPoint);
+					inDesign = true;
+					roomCoordinates.Clear();
+				} else if (e.Button == MouseButtons.Right) {
+					tempCoordinates.Add(currentPoint);
+					if (tempCoordinates.Count > 2) {
+						// TODO - Fläche berechnen
+						DialogResult result = MessageBox.Show("Wollen Sie diese Raumgeometrie übernehmen?", "Raumgeometrie übernehmen?", MessageBoxButtons.YesNo);
+						if (result.Equals(DialogResult.Yes)) {
+							roomCoordinates.AddRange(tempCoordinates);
+							unsavedRoomPickerChanges = true;
+						}
+					}
+					tempCoordinates.Clear();
+					inDesign = false;
+				}
+
+				Invalidate();
+			}
+		}
+
 		protected override void OnMouseDown(MouseEventArgs e) {
 			base.OnMouseDown(e);
 			lastMouseLocation = e.Location;
@@ -253,7 +408,7 @@ namespace Europlan.Common {
 				this.Invalidate();
 			}
 			lastMouseLocation = e.Location;
-			if (!moveMode && selectedStartPointCad.HasValue && !selectedEndPointCad.HasValue) {
+			if ((roomPickerMode) || (!moveMode && selectedStartPointCad.HasValue && !selectedEndPointCad.HasValue)) {
 				/*int x = (int)selectedStartPoint.Value.X;
 				int y = (int)selectedStartPoint.Value.Y;
 				int width = x - e.Location.X;
@@ -274,7 +429,7 @@ namespace Europlan.Common {
 		protected override void OnMouseUp(MouseEventArgs e) {
 			base.OnMouseUp(e);
 			mouseDown = false;
-			if (!moveMode && e.Button == MouseButtons.Left) {
+			if (!moveMode && ! roomPickerMode && e.Button == MouseButtons.Left) {
 				this.unsavedChanges = true;
 				double bestSqDistance = double.PositiveInfinity;
 				Nullable<Point2D> bestPoint = null;

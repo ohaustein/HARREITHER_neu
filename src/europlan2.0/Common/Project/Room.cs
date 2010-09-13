@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Threading;
 using Europlan.Common;
 using System.Xml.Serialization;
+using System.Drawing;
 
 namespace Europlan.Common {
 
@@ -43,6 +44,7 @@ namespace Europlan.Common {
 
 		private List<Product> usedProductsForQuickDimensioning;
 		private List<PlannedProduct> plannedProducts;
+		private List<Point> roomCoordinates;
 
 		private TreeNode roomNode = new TreeNode();
 
@@ -81,6 +83,8 @@ namespace Europlan.Common {
 			//foreach (Product product in room.UsedProductsForQuickDimensioning) {
 			//    this.usedProductsForQuickDimensioning.Add(product.Clone(this));
 			//}
+			this.roomCoordinates.Clear();
+			this.roomCoordinates.AddRange(room.roomCoordinates);
 		}
 
 		private void InitializeRoom() {
@@ -105,6 +109,7 @@ namespace Europlan.Common {
 			this.quickDimensioningComments = "";
             this.roomNode.ImageKey = "Raum.png";
             this.roomNode.SelectedImageKey = "Raum.png";
+			this.roomCoordinates = new List<Point>();
 		}
 
 		internal void Synchronize(Room room) {
@@ -131,6 +136,8 @@ namespace Europlan.Common {
 			foreach (PlannedProduct product in room.PlannedProducts) {
 				this.plannedProducts.Add(new PlannedProduct(product.Product.Clone(this)));
 			}
+			this.roomCoordinates.Clear();
+			this.roomCoordinates.AddRange(room.roomCoordinates);
 		}
 
 		[XmlIgnore]
@@ -547,6 +554,11 @@ namespace Europlan.Common {
 
 		public override string ToString() {
 			return this.Id + ": " + this.Name;
+		}
+
+		public List<Point> RoomCoordinates {
+			get { return this.roomCoordinates; }
+			set { this.roomCoordinates = value; }
 		}
 	}
 

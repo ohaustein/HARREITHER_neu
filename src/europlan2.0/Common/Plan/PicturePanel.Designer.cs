@@ -31,6 +31,12 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Name = "PicturePanel";
 			this.Size = new System.Drawing.Size(379, 283);
+			this.Paint += new System.Windows.Forms.PaintEventHandler(this.PicturePanel_Paint);
+			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PicturePanel_MouseMove);
+			this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicturePanel_MouseClick);
+			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PicturePanel_MouseDown);
+			this.Resize += new System.EventHandler(this.PicturePanel_Resize);
+			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PicturePanel_MouseUp);
 			this.ResumeLayout(false);
 
 		}

@@ -1277,6 +1277,9 @@ R
   <data name="ImagePlanOptionsForm_Titel" xml:space="preserve">
     <value>Optionen</value>
   </data>
+  <data name="ImagePlanRoomPickerForm_Titel" xml:space="preserve">
+    <value>Raum definieren</value>
+  </data>
   <data name="ImportedPlansPanel_DateiPfad" xml:space="preserve">
     <value>Pfad</value>
   </data>
@@ -4327,6 +4330,9 @@ fläche
   </data>
   <data name="RoomSummaryPanel_Raumdaten" xml:space="preserve">
     <value>Raumdaten:</value>
+  </data>
+  <data name="RoomSummaryPanel_Raumgeometrie_Erfassen" xml:space="preserve">
+    <value>Raumgeometrie erfassen</value>
   </data>
   <data name="RoomSummaryPanel_Raumtemperatur" xml:space="preserve">
     <value>Norminnentemperatur:</value>
