@@ -86,6 +86,11 @@ namespace Europlan.Common {
 			get { return this.unsavedChanges || this.cadPanel.UnsavedChanges; }
 		}
 
+		public List<PointF> RoomCoordinates {
+			get { return cadPanel.RoomCoordinates; }
+			set { cadPanel.RoomCoordinates = value; }
+		}
+
 		private void btnZoomIn_Click(object sender, EventArgs e) {
 			cadPanel.AddScale(1.1, null);
 		}

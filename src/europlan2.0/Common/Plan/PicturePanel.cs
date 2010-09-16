@@ -21,12 +21,12 @@ namespace Europlan.Common {
 		private bool showRaster = false;
 		private bool unsavedChanges = false;
 		private bool unsavedRoomPickerChanges = false;
-		Nullable<Point> startPoint = null;
-		Nullable<Point> endPoint = null;
+		Nullable<PointF> startPoint = null;
+		Nullable<PointF> endPoint = null;
 		private double length = 0;
 		private float mouseDownX, mouseUpX, mouseDownY, mouseUpY;
-		private List<Point> roomCoordinates = new List<Point>();
-		private List<Point> tempCoordinates = new List<Point>();
+		private List<PointF> roomCoordinates = new List<PointF>();
+		private List<PointF> tempCoordinates = new List<PointF>();
 		private bool inDesign = false;
 		private bool shiftPressed = false;
 
@@ -82,12 +82,12 @@ namespace Europlan.Common {
 			get { return this.unsavedRoomPickerChanges; }
 		}
 
-		public Nullable<Point> StartPoint {
+		public Nullable<PointF> StartPoint {
 			get { return this.startPoint; }
 			set { this.startPoint = value; }
 		}
 
-		public Nullable<Point> EndPoint {
+		public Nullable<PointF> EndPoint {
 			get { return this.endPoint; }
 			set { this.endPoint = value; }
 		}
@@ -129,7 +129,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public List<Point> RoomCoordinates {
+		public List<PointF> RoomCoordinates {
 			get { return this.roomCoordinates; }
 			set { this.roomCoordinates = value; }
 		}
@@ -150,7 +150,7 @@ namespace Europlan.Common {
 
 		private void PicturePanel_MouseClick(object sender, MouseEventArgs e) {
 			Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-			Point[] arr = new Point[] { mousePos };
+			PointF[] arr = new PointF[] { mousePos };
 
 			Matrix X = new Matrix();
 			X.Translate(((float)image.Width / 2 + this.XPos) * this.Scale.Value, ((float)image.Height / 2 + this.YPos) * this.Scale.Value);
@@ -162,7 +162,7 @@ namespace Europlan.Common {
 			X.TransformPoints(arr);
 	
 			if (RoomPickerMode) {
-				Point pos = arr[0];
+				PointF pos = arr[0];
 				if (e.Button == MouseButtons.Left) {
 					if (!shiftPressed && tempCoordinates.Count > 0) {
 						pos = GetNormalizedPoint(tempCoordinates[tempCoordinates.Count - 1], pos);
@@ -222,7 +222,7 @@ namespace Europlan.Common {
 
 		private void PicturePanel_Paint(object sender, PaintEventArgs e) {
 			Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-			Point[] arr = new Point[] { mousePos };
+			PointF[] arr = new PointF[] { mousePos };
 
 			Graphics g = e.Graphics;
 			g.FillRectangle(Brushes.White, 0, 0, this.Width, this.Height);
@@ -258,7 +258,7 @@ namespace Europlan.Common {
 				if (roomCoordinates.Count > 2) {
 					GraphicsPath path = new GraphicsPath();
 					path.StartFigure();
-					Point[] array = roomCoordinates.ToArray();
+					PointF[] array = roomCoordinates.ToArray();
 					path.AddPolygon(array);
 					path.CloseFigure();
 					Color c = Color.FromArgb(128, Color.Red);
@@ -268,8 +268,8 @@ namespace Europlan.Common {
 				}
 
 				if (tempCoordinates.Count > 0 && inDesign) {
-					List<Point> points = new List<Point>(tempCoordinates);
-					Point pos = arr[0];
+					List<PointF> points = new List<PointF>(tempCoordinates);
+					PointF pos = arr[0];
 					if (!shiftPressed) {
 						pos = GetNormalizedPoint(points[points.Count - 1], pos);
 					}
@@ -278,7 +278,7 @@ namespace Europlan.Common {
 
 					GraphicsPath path = new GraphicsPath();
 					path.StartFigure();
-					Point[] array = points.ToArray();
+					PointF[] array = points.ToArray();
 					if (array.Length > 2) {
 						path.AddPolygon(array);
 					} else {
@@ -316,7 +316,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public void AddScale(double addedScale, Nullable<Point> center) {
+		public void AddScale(double addedScale, Nullable<PointF> center) {
 			if (this.Scale.Value * addedScale < 0.01) {
 				addedScale = 0.01 / this.Scale.Value;
 			}
@@ -332,7 +332,7 @@ namespace Europlan.Common {
 			this.YPos = (float)((centerY - (centerY - this.YPos * oldScale) * addedScale) / newScale);
 		}
 
-		private double distance(int x1, int y1, int x2, int y2) {
+		private double distance(double x1, double y1, double x2, double y2) {
 			double result = 0;
 			double part1 = Math.Pow((x2 - x1), 2);
 			double part2 = Math.Pow((y2 - y1), 2);
@@ -344,7 +344,7 @@ namespace Europlan.Common {
 		private void PicturePanel_MouseDown(object sender, MouseEventArgs e) {
 			if ((moveMode && e.Button == MouseButtons.Left) || ((!moveMode || roomPickerMode) && e.Button == MouseButtons.Middle)) {
 				Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-				Point[] arr = new Point[] { mousePos };
+				PointF[] arr = new PointF[] { mousePos };
 
 				Matrix X = new Matrix();
 				X.Scale(this.Scale.Value, this.Scale.Value);
@@ -370,7 +370,7 @@ namespace Europlan.Common {
 			if ((moveMode && e.Button == MouseButtons.Left) || ((!moveMode || roomPickerMode) && e.Button == MouseButtons.Middle)) {
 				unsavedChanges = true;
 				Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-				Point[] arr = new Point[] { mousePos };
+				PointF[] arr = new PointF[] { mousePos };
 
 				Matrix X = new Matrix();
 				X.Scale(this.Scale.Value, this.Scale.Value);
@@ -401,18 +401,18 @@ namespace Europlan.Common {
 			this.plan.Angle = this.Angle;
 		}
 
-		private Point GetNormalizedPoint(Point basePoint, Point currentPoint) {
+		private PointF GetNormalizedPoint(PointF basePoint, PointF currentPoint) {
 			float xDistance = Math.Abs(basePoint.X - currentPoint.X);
 			float yDistance = Math.Abs(basePoint.Y - currentPoint.Y);
-			Point p;
+			PointF p;
 			if (xDistance < yDistance) {
 				double distanceInMeter = (currentPoint.Y - basePoint.Y) / this.Plan.Measure.Value;
 				distanceInMeter = Math.Round(distanceInMeter, 1);
-				p = new Point(basePoint.X, basePoint.Y + (int)(distanceInMeter * this.Plan.Measure.Value));
+				p = new PointF(basePoint.X, basePoint.Y + ((float)distanceInMeter * this.Plan.Measure.Value));
 			} else {
 				double distanceInMeter = (currentPoint.X - basePoint.X) / this.Plan.Measure.Value;
 				distanceInMeter = Math.Round(distanceInMeter, 1);
-				p = new Point(basePoint.X + (int)(distanceInMeter * this.Plan.Measure.Value), basePoint.Y);
+				p = new PointF(basePoint.X + ((float)distanceInMeter * this.Plan.Measure.Value), basePoint.Y);
 			}
 
 			return p;

@@ -28,7 +28,7 @@ namespace Europlan.Common {
 			this.Text = EuroplanRes.ImagePlanRoomPickerForm_Titel; //"Optionen";
 		}
 
-		public List<Point> RoomCoordinates {
+		public List<PointF> RoomCoordinates {
 			get { return picturePanel.RoomCoordinates; }
 			set { picturePanel.RoomCoordinates = value; }
 		}

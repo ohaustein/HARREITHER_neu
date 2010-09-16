@@ -60,7 +60,7 @@ namespace Europlan.Common {
 		private Matrix4D modelTransform = Matrix4D.Identity;
 		private Matrix4D from2DTransform;
 		private Vector3D translation = Vector3D.Zero;
-		private Point lastMouseLocation;
+		private PointF lastMouseLocation;
 		private double scale = 1.0;
 		private bool mouseDown = false;
 		private double defaultHeight = 1000.0;
@@ -75,6 +75,7 @@ namespace Europlan.Common {
 		private Nullable<Point3D> selectedEndPointCad = null;
 
 		private List<Point3D> roomCoordinates = new List<Point3D>();
+		private List<PointF> roomCoordinates2d = new List<PointF>();
 		private List<Point3D> tempCoordinates = new List<Point3D>();
 
 		public event EventHandler<StartPointSelectedArgs> StartPointSelected;
@@ -130,11 +131,11 @@ namespace Europlan.Common {
 				GraphicsPath path = new GraphicsPath();
 				path.StartFigure();
 				Point3D[] array3d = roomCoordinates.ToArray();
-				Point[] array2d = new Point[array3d.Length];
+				PointF[] array2d = new PointF[array3d.Length];
 				Point3D temp = Point3D.Zero;
 				for (int i = 0; i < array3d.Length; i++) {
 					temp = gdiGraphics3D.To2DTransform.Transform(array3d[i]);
-					array2d[i] = new Point((int)temp.X, (int)temp.Y);
+					array2d[i] = new PointF((float)temp.X, (float)temp.Y);
 				}
 				path.AddPolygon(array2d);
 				path.CloseFigure();
@@ -146,13 +147,13 @@ namespace Europlan.Common {
 
 			if (tempCoordinates.Count > 0 && inDesign) {
 				Point3D[] array3d = tempCoordinates.ToArray();
-				Point[] array2d = new Point[array3d.Length + 1];
+				PointF[] array2d = new PointF[array3d.Length + 1];
 				Point3D temp = Point3D.Zero;
 				for (int i = 0; i < array3d.Length; i++) {
 					temp = gdiGraphics3D.To2DTransform.Transform(array3d[i]);
-					array2d[i] = new Point((int)temp.X, (int)temp.Y);
+					array2d[i] = new PointF((float)temp.X, (float)temp.Y);
 				}
-				array2d[array2d.Length - 1] = new Point((int)lastMouseLocation.X, (int)lastMouseLocation.Y);
+				array2d[array2d.Length - 1] = new PointF(lastMouseLocation.X, lastMouseLocation.Y);
 				//g.DrawPolygon(Pens.Black, points.ToArray());
 
 				GraphicsPath path = new GraphicsPath();
@@ -215,9 +216,17 @@ namespace Europlan.Common {
 			}
 		}
 
-		public List<Point3D> RoomCoordinates {
-			get { return this.roomCoordinates; }
-			set { this.roomCoordinates = value; }
+		public List<PointF> RoomCoordinates {
+			get {
+				return roomCoordinates2d; 
+			}
+			set {
+				this.roomCoordinates.Clear();
+				this.roomCoordinates2d = value;
+				foreach (PointF point in value) {
+					this.roomCoordinates.Add(new Point3D(point.X, point.Y, 0));
+				}
+			}
 		}
 
 		public Point2D GetModelSpaceCoordinates(Point2D screenScapeCoordinates) {
@@ -382,6 +391,12 @@ namespace Europlan.Common {
 						DialogResult result = MessageBox.Show("Wollen Sie diese Raumgeometrie übernehmen?", "Raumgeometrie übernehmen?", MessageBoxButtons.YesNo);
 						if (result.Equals(DialogResult.Yes)) {
 							roomCoordinates.AddRange(tempCoordinates);
+
+							this.roomCoordinates2d.Clear();
+							foreach (Point3D point3d in roomCoordinates) {
+								this.roomCoordinates2d.Add(new PointF((float)point3d.X, (float)point3d.Y));
+							}	
+
 							unsavedRoomPickerChanges = true;
 						}
 					}

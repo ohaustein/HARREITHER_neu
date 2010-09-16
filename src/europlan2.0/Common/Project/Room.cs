@@ -44,7 +44,7 @@ namespace Europlan.Common {
 
 		private List<Product> usedProductsForQuickDimensioning;
 		private List<PlannedProduct> plannedProducts;
-		private List<Point> roomCoordinates;
+		private List<PointF> roomCoordinates;
 
 		private TreeNode roomNode = new TreeNode();
 
@@ -109,7 +109,7 @@ namespace Europlan.Common {
 			this.quickDimensioningComments = "";
             this.roomNode.ImageKey = "Raum.png";
             this.roomNode.SelectedImageKey = "Raum.png";
-			this.roomCoordinates = new List<Point>();
+			this.roomCoordinates = new List<PointF>();
 		}
 
 		internal void Synchronize(Room room) {
@@ -556,7 +556,7 @@ namespace Europlan.Common {
 			return this.Id + ": " + this.Name;
 		}
 
-		public List<Point> RoomCoordinates {
+		public List<PointF> RoomCoordinates {
 			get { return this.roomCoordinates; }
 			set { this.roomCoordinates = value; }
 		}

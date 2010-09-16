@@ -379,7 +379,7 @@ namespace Europlan.Common {
 							form.Dispose();
 						} else if (plan is CadPlan) {
 							CadPlanRoomPickerForm form = new CadPlanRoomPickerForm(plan as CadPlan);
-							//form.RoomCoordinates = room.RoomCoordinates;
+							form.RoomCoordinates = room.RoomCoordinates;
 							form.ShowDialog();
 							if (form.UnsavedChanges) {
 								//room.Area = (float)Math.Round((plan as ImagePlan).PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
