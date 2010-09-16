@@ -33,31 +33,6 @@ namespace Europlan.Common {
 			set { scale = value; }
 		}
 
-		public float PolygonArea(PointF[] coordinates) {
-			// Return the absolute value of the signed area.
-			// The signed area is negative if the polyogn is
-			// oriented clockwise.
-			return Math.Abs(SignedPolygonArea(coordinates));
-		}
-
-		private float SignedPolygonArea(PointF[] coordinates) {
-			// Add the first point to the end.
-			int num_points = coordinates.Length;
-			PointF[] pts = new PointF[num_points + 1];
-			coordinates.CopyTo(pts, 0);
-			pts[num_points] = coordinates[0];
-
-			// Get the areas.
-			float area = 0;
-			for (int i = 0; i < num_points; i++) {
-				area +=
-					(pts[i + 1].X - pts[i].X) *
-					(pts[i + 1].Y + pts[i].Y) / 2;
-			}
-
-			// Return the result.
-			return area;
-		}
 	}
 
 }

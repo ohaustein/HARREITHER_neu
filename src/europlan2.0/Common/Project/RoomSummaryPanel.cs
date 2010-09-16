@@ -370,7 +370,7 @@ namespace Europlan.Common {
 							form.RoomCoordinates = room.RoomCoordinates;
 							form.ShowDialog();
 							if (form.UnsavedChanges) {
-								room.Area = (float)Math.Round((plan as ImagePlan).PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
+								room.Area = (float)Math.Round(Plan.PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
 								// TODO - unbeheizte flächen...
 								if (this.ProjectChanged != null) {
 									this.ProjectChanged(this);
@@ -382,7 +382,7 @@ namespace Europlan.Common {
 							form.RoomCoordinates = room.RoomCoordinates;
 							form.ShowDialog();
 							if (form.UnsavedChanges) {
-								//room.Area = (float)Math.Round((plan as ImagePlan).PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
+								room.Area = (float)Math.Round(Plan.PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
 								// TODO - unbeheizte flächen...
 								if (this.ProjectChanged != null) {
 									this.ProjectChanged(this);

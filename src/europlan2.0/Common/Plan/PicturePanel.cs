@@ -185,7 +185,7 @@ namespace Europlan.Common {
 					tempCoordinates.Add(pos);
 					if (tempCoordinates.Count > 2) {
 						// TODO
-						DialogResult result = MessageBox.Show("Die definierte Fläche beträgt " + Math.Round(this.plan.PolygonArea(tempCoordinates.ToArray()) / Math.Pow(this.plan.Measure.Value, 2.0), 2) + "m². Kleine Ungenauigkeiten in der Flächenberechnung können nachträglich manuell geändert werden. Wollen Sie diese Raumgeometrie übernehmen?", "Raumgeometrie übernehmen?", MessageBoxButtons.YesNo);
+						DialogResult result = MessageBox.Show("Die definierte Fläche beträgt " + Math.Round(Europlan.Common.Plan.PolygonArea(tempCoordinates.ToArray()) / Math.Pow(this.plan.Measure.Value, 2.0), 2) + "m². Kleine Ungenauigkeiten in der Flächenberechnung können nachträglich manuell geändert werden. Wollen Sie diese Raumgeometrie übernehmen?", "Raumgeometrie übernehmen?", MessageBoxButtons.YesNo);
 						if (result.Equals(DialogResult.Yes)) {
 							roomCoordinates.AddRange(tempCoordinates);
 							unsavedRoomPickerChanges = true;

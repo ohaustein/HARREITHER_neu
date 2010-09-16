@@ -387,7 +387,6 @@ namespace Europlan.Common {
 				} else if (e.Button == MouseButtons.Right) {
 					tempCoordinates.Add(currentPoint);
 					if (tempCoordinates.Count > 2) {
-						// TODO - Fläche berechnen
 						DialogResult result = MessageBox.Show("Wollen Sie diese Raumgeometrie übernehmen?", "Raumgeometrie übernehmen?", MessageBoxButtons.YesNo);
 						if (result.Equals(DialogResult.Yes)) {
 							roomCoordinates.AddRange(tempCoordinates);
