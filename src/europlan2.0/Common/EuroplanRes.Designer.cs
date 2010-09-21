@@ -2195,6 +2195,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anderen Plan zuweisen?.
+        /// </summary>
+        internal static string FloorSummaryPanel_ChangePlanCaption {
+            get {
+                return ResourceManager.GetString("FloorSummaryPanel_ChangePlanCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Für den gewählten Plan sind bereits Räume definiert worden. Das Auswählen eines anderen Plans bewirkt, dass alle bereits definierten Raumgeometrien und darin verplante Systeme verloren gehen. Wollen Sie wirklich einen andern Plan wählen?.
+        /// </summary>
+        internal static string FloorSummaryPanel_ChangePlanText {
+            get {
+                return ResourceManager.GetString("FloorSummaryPanel_ChangePlanText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A
         ///(m²).
         /// </summary>

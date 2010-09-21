@@ -430,6 +430,13 @@ namespace Europlan.Common {
 						if (result == DialogResult.No) {
 							UpdateControl(false);
 							return;
+						} else {
+							foreach (Room room in floor.Rooms) {
+								if (room.RoomCoordinates.Count > 0) {
+									room.RoomCoordinates.Clear();
+									room.CeilingCoordinates.Clear();
+								}
+							}
 						}
 					}
 					floor.AssociatedPlanId = (cmbPlans.SelectedItem as Plan).Id;
