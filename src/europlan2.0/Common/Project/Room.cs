@@ -45,6 +45,7 @@ namespace Europlan.Common {
 		private List<Product> usedProductsForQuickDimensioning;
 		private List<PlannedProduct> plannedProducts;
 		private List<PointF> roomCoordinates;
+		private List<PointF> ceilingCoordinates;
 
 		private TreeNode roomNode = new TreeNode();
 
@@ -85,6 +86,8 @@ namespace Europlan.Common {
 			//}
 			this.roomCoordinates.Clear();
 			this.roomCoordinates.AddRange(room.roomCoordinates);
+			this.ceilingCoordinates.Clear();
+			this.ceilingCoordinates.AddRange(room.ceilingCoordinates);
 		}
 
 		private void InitializeRoom() {
@@ -110,6 +113,7 @@ namespace Europlan.Common {
             this.roomNode.ImageKey = "Raum.png";
             this.roomNode.SelectedImageKey = "Raum.png";
 			this.roomCoordinates = new List<PointF>();
+			this.ceilingCoordinates = new List<PointF>();
 		}
 
 		internal void Synchronize(Room room) {
@@ -138,6 +142,8 @@ namespace Europlan.Common {
 			}
 			this.roomCoordinates.Clear();
 			this.roomCoordinates.AddRange(room.roomCoordinates);
+			this.ceilingCoordinates.Clear();
+			this.ceilingCoordinates.AddRange(room.ceilingCoordinates);
 		}
 
 		[XmlIgnore]
@@ -559,6 +565,11 @@ namespace Europlan.Common {
 		public List<PointF> RoomCoordinates {
 			get { return this.roomCoordinates; }
 			set { this.roomCoordinates = value; }
+		}
+
+		public List<PointF> CeilingCoordinates {
+			get { return this.ceilingCoordinates; }
+			set { this.ceilingCoordinates = value; }
 		}
 	}
 

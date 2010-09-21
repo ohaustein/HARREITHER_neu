@@ -78,6 +78,7 @@ namespace Europlan.Common {
 				//this.txtNormCool.Text = room.NormalizedCoolLoad.ToString();
 
 				this.btnGeometry.Enabled = this.room.AssociatedFloor.AssociatedPlanId != null ? true : false;
+				this.btnCeilingGeometry.Visible = this.btnGeometry.Enabled && this.room.RoomCoordinates != null && this.room.RoomCoordinates.Count > 0;
 			}
 		}
 
@@ -361,13 +362,23 @@ namespace Europlan.Common {
 		}
 
 		private void btnGeometry_Click(object sender, EventArgs e) {
+			openGeometryPicker(room.RoomCoordinates);
+			UpdateControl(false);
+		}
+
+		private void btnCeilingGeometry_Click(object sender, EventArgs e) {
+			openGeometryPicker(room.CeilingCoordinates);
+			UpdateControl(false);
+		}
+
+		private void openGeometryPicker(List<PointF> coordinates) {
 			List<Plan> plans = Project.Instance.ImportedPlans;
 			foreach (Plan plan in plans) {
 				if (plan.Id == this.room.AssociatedFloor.AssociatedPlanId) {
 					if (plan.Measure.HasValue) {
 						if (plan is ImagePlan) {
 							ImagePlanRoomPickerForm form = new ImagePlanRoomPickerForm(plan as ImagePlan);
-							form.RoomCoordinates = room.RoomCoordinates;
+							form.RoomCoordinates = coordinates;
 							form.ShowDialog();
 							if (form.UnsavedChanges) {
 								room.Area = (float)Math.Round(Plan.PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
@@ -379,7 +390,7 @@ namespace Europlan.Common {
 							form.Dispose();
 						} else if (plan is CadPlan) {
 							CadPlanRoomPickerForm form = new CadPlanRoomPickerForm(plan as CadPlan);
-							form.RoomCoordinates = room.RoomCoordinates;
+							form.RoomCoordinates = coordinates;
 							form.ShowDialog();
 							if (form.UnsavedChanges) {
 								room.Area = (float)Math.Round(Plan.PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
