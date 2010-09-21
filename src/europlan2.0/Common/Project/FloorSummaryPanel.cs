@@ -418,6 +418,20 @@ namespace Europlan.Common {
 		private void cmbPlans_SelectedValueChanged(object sender, EventArgs e) {
 			if (!updateControlOngoing) {
 				if (cmbPlans.SelectedItem != null) {
+					bool roomCoordinatesAvailable = false;
+					foreach (Room room in floor.Rooms) {
+						if (room.RoomCoordinates.Count > 0) {
+							roomCoordinatesAvailable = true;
+							break;
+						}
+					}
+					if (roomCoordinatesAvailable) {
+						DialogResult result = MessageBox.Show(EuroplanRes.FloorSummaryPanel_ChangePlanText, EuroplanRes.FloorSummaryPanel_ChangePlanCaption, MessageBoxButtons.YesNo);
+						if (result == DialogResult.No) {
+							UpdateControl(false);
+							return;
+						}
+					}
 					floor.AssociatedPlanId = (cmbPlans.SelectedItem as Plan).Id;
 					if (ProjectChanged != null) {
 						ProjectChanged(this);
