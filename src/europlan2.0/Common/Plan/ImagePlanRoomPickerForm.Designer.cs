@@ -28,9 +28,11 @@ namespace Europlan.Common {
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.picturePanel = new Europlan.Common.PicturePanel();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnPick = new System.Windows.Forms.ToolStripButton();
+			this.btnUnused = new System.Windows.Forms.ToolStripButton();
+			this.picturePanel = new Europlan.Common.PicturePanel();
+			this.btnDeleteUnused = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -42,7 +44,9 @@ namespace Europlan.Common {
             this.btnZoomIn,
             this.toolStripSeparator2,
             this.btnMove,
-            this.btnPick});
+            this.btnPick,
+            this.btnUnused,
+            this.btnDeleteUnused});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(668, 25);
@@ -76,31 +80,6 @@ namespace Europlan.Common {
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
 			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
 			// 
-			// picturePanel
-			// 
-			this.picturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.picturePanel.Angle = 0F;
-			this.picturePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.picturePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.picturePanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.picturePanel.EndPoint = null;
-			this.picturePanel.Length = 0;
-			this.picturePanel.Location = new System.Drawing.Point(9, 25);
-			this.picturePanel.Margin = new System.Windows.Forms.Padding(0);
-			this.picturePanel.MoveMode = true;
-			this.picturePanel.Name = "picturePanel";
-			this.picturePanel.Plan = null;
-			this.picturePanel.RoomPickerMode = false;
-			this.picturePanel.Scale = null;
-			this.picturePanel.ShowRaster = false;
-			this.picturePanel.Size = new System.Drawing.Size(650, 397);
-			this.picturePanel.StartPoint = null;
-			this.picturePanel.TabIndex = 0;
-			this.picturePanel.XPos = 0F;
-			this.picturePanel.YPos = 0F;
-			// 
 			// btnMove
 			// 
 			this.btnMove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -120,6 +99,53 @@ namespace Europlan.Common {
 			this.btnPick.Size = new System.Drawing.Size(23, 22);
 			this.btnPick.Text = "toolStripButton1";
 			this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
+			// 
+			// btnUnused
+			// 
+			this.btnUnused.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnUnused.Image = ((System.Drawing.Image)(resources.GetObject("btnUnused.Image")));
+			this.btnUnused.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnUnused.Name = "btnUnused";
+			this.btnUnused.Size = new System.Drawing.Size(23, 22);
+			this.btnUnused.Text = "toolStripButton1";
+			this.btnUnused.Click += new System.EventHandler(this.btnUnused_Click);
+			// 
+			// picturePanel
+			// 
+			this.picturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.picturePanel.Angle = 0F;
+			this.picturePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.picturePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.picturePanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.picturePanel.EndPoint = null;
+			this.picturePanel.Length = 0;
+			this.picturePanel.Location = new System.Drawing.Point(9, 25);
+			this.picturePanel.Margin = new System.Windows.Forms.Padding(0);
+			this.picturePanel.MoveMode = true;
+			this.picturePanel.Name = "picturePanel";
+			this.picturePanel.Plan = null;
+			this.picturePanel.RoomCoordinates = ((System.Collections.Generic.List<System.Drawing.PointF>)(resources.GetObject("picturePanel.RoomCoordinates")));
+			this.picturePanel.RoomPickerMode = false;
+			this.picturePanel.Scale = null;
+			this.picturePanel.ShowRaster = false;
+			this.picturePanel.Size = new System.Drawing.Size(650, 397);
+			this.picturePanel.StartPoint = null;
+			this.picturePanel.TabIndex = 0;
+			this.picturePanel.UnusedPickerMode = false;
+			this.picturePanel.XPos = 0F;
+			this.picturePanel.YPos = 0F;
+			// 
+			// btnDeleteUnused
+			// 
+			this.btnDeleteUnused.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnDeleteUnused.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteUnused.Image")));
+			this.btnDeleteUnused.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDeleteUnused.Name = "btnDeleteUnused";
+			this.btnDeleteUnused.Size = new System.Drawing.Size(23, 22);
+			this.btnDeleteUnused.Text = "toolStripButton1";
+			this.btnDeleteUnused.Click += new System.EventHandler(this.btnDeleteUnused_Click);
 			// 
 			// ImagePlanRoomPickerForm
 			// 
@@ -150,6 +176,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripButton btnMove;
 		private System.Windows.Forms.ToolStripButton btnPick;
+		private System.Windows.Forms.ToolStripButton btnUnused;
+		private System.Windows.Forms.ToolStripButton btnDeleteUnused;
 
 
 	}

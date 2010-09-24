@@ -8641,6 +8641,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fläche löschen?.
+        /// </summary>
+        internal static string PicturePanel_DeleteUnusedCaption {
+            get {
+                return ResourceManager.GetString("PicturePanel_DeleteUnusedCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie diese Fläche löschen?.
+        /// </summary>
+        internal static string PicturePanel_DeleteUnusedText {
+            get {
+                return ResourceManager.GetString("PicturePanel_DeleteUnusedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A
         ///m².
         /// </summary>
@@ -12149,6 +12167,24 @@ namespace Europlan.Common {
         internal static string RoomSummaryPanel_LoeschenBestaetigenTitel {
             get {
                 return ResourceManager.GetString("RoomSummaryPanel_LoeschenBestaetigenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kein Maßstab.
+        /// </summary>
+        internal static string RoomSummaryPanel_MeasureCaption {
+            get {
+                return ResourceManager.GetString("RoomSummaryPanel_MeasureCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Für den ausgewählten Plan wurde noch kein Maßstab definiert. Bitte wechseln Sie zum Punkt &quot;Importierte Pläne&quot; und setzen Sie für den Plan einen Maßstab..
+        /// </summary>
+        internal static string RoomSummaryPanel_MeasureTitle {
+            get {
+                return ResourceManager.GetString("RoomSummaryPanel_MeasureTitle", resourceCulture);
             }
         }
         

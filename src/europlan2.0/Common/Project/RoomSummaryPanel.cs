@@ -362,16 +362,16 @@ namespace Europlan.Common {
 		}
 
 		private void btnGeometry_Click(object sender, EventArgs e) {
-			openGeometryPicker(room.RoomCoordinates);
+			openGeometryPicker(room.RoomCoordinates, room.RoomUnusedAreaCoordinates , true);
 			UpdateControl(false);
 		}
 
 		private void btnCeilingGeometry_Click(object sender, EventArgs e) {
-			openGeometryPicker(room.CeilingCoordinates);
+			openGeometryPicker(room.CeilingCoordinates, room.CeilingUnusedAreaCoordinates, false);
 			UpdateControl(false);
 		}
 
-		private void openGeometryPicker(List<PointF> coordinates) {
+		private void openGeometryPicker(List<PointF> coordinates, List<List<PointF>> unusedCoordinates, bool calculateRoomArea) {
 			List<Plan> plans = Project.Instance.ImportedPlans;
 			foreach (Plan plan in plans) {
 				if (plan.Id == this.room.AssociatedFloor.AssociatedPlanId) {
@@ -379,10 +379,13 @@ namespace Europlan.Common {
 						if (plan is ImagePlan) {
 							ImagePlanRoomPickerForm form = new ImagePlanRoomPickerForm(plan as ImagePlan);
 							form.RoomCoordinates = coordinates;
+							form.UnusedCoordinates = unusedCoordinates;
 							form.ShowDialog();
 							if (form.UnsavedChanges) {
-								room.Area = (float)Math.Round(Plan.PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
-								// TODO - unbeheizte flächen...
+								if (calculateRoomArea) {
+									// TODO - unbeheizte flächen...
+									room.Area = (float)Math.Round(Plan.PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
+								}
 								if (this.ProjectChanged != null) {
 									this.ProjectChanged(this);
 								}
@@ -391,10 +394,13 @@ namespace Europlan.Common {
 						} else if (plan is CadPlan) {
 							CadPlanRoomPickerForm form = new CadPlanRoomPickerForm(plan as CadPlan);
 							form.RoomCoordinates = coordinates;
+							//form.UnusedCoordinates = unusedCoordinates;
 							form.ShowDialog();
 							if (form.UnsavedChanges) {
-								room.Area = (float)Math.Round(Plan.PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
-								// TODO - unbeheizte flächen...
+								if (calculateRoomArea) {
+									// TODO - unbeheizte flächen...
+									room.Area = (float)Math.Round(Plan.PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
+								}
 								if (this.ProjectChanged != null) {
 									this.ProjectChanged(this);
 								}
@@ -402,8 +408,7 @@ namespace Europlan.Common {
 							form.Dispose();
 						}
 					} else {
-						//TODO - übersetzen
-						MessageBox.Show("Für den ausgewählten Plan wurde noch kein Maßstab definiert. Bitte wechseln Sie zum Punkt \"Importierte Pläne\" und setzen Sie für den Plan einen Maßstab.", "Kein Maßstab");
+						MessageBox.Show(EuroplanRes.RoomSummaryPanel_MeasureTitle, EuroplanRes.RoomSummaryPanel_MeasureCaption);
 					}
 				}
 			}

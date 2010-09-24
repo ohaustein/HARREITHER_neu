@@ -3099,6 +3099,12 @@ einheit</value>
   <data name="OptionsForm_Wand" xml:space="preserve">
     <value>Wand</value>
   </data>
+  <data name="PicturePanel_DeleteUnusedCaption" xml:space="preserve">
+    <value>Fläche löschen?</value>
+  </data>
+  <data name="PicturePanel_DeleteUnusedText" xml:space="preserve">
+    <value>Wollen Sie diese Fläche löschen?</value>
+  </data>
   <data name="PlannedEurovalProductPanel_A" xml:space="preserve">
     <value>A
 m²</value>
@@ -4330,6 +4336,12 @@ fläche
   </data>
   <data name="RoomSummaryPanel_LoeschenBestaetigenTitel" xml:space="preserve">
     <value>Heizsystem löschen</value>
+  </data>
+  <data name="RoomSummaryPanel_MeasureCaption" xml:space="preserve">
+    <value>Kein Maßstab</value>
+  </data>
+  <data name="RoomSummaryPanel_MeasureTitle" xml:space="preserve">
+    <value>Für den ausgewählten Plan wurde noch kein Maßstab definiert. Bitte wechseln Sie zum Punkt "Importierte Pläne" und setzen Sie für den Plan einen Maßstab.</value>
   </data>
   <data name="RoomSummaryPanel_Name" xml:space="preserve">
     <value>Name:</value>

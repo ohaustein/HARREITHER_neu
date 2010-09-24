@@ -45,7 +45,9 @@ namespace Europlan.Common {
 		private List<Product> usedProductsForQuickDimensioning;
 		private List<PlannedProduct> plannedProducts;
 		private List<PointF> roomCoordinates;
+		private List<List<PointF>> roomUnusedAreaCoordinates;
 		private List<PointF> ceilingCoordinates;
+		private List<List<PointF>> ceilingUnusedAreaCoordinates;
 
 		private TreeNode roomNode = new TreeNode();
 
@@ -88,6 +90,10 @@ namespace Europlan.Common {
 			this.roomCoordinates.AddRange(room.roomCoordinates);
 			this.ceilingCoordinates.Clear();
 			this.ceilingCoordinates.AddRange(room.ceilingCoordinates);
+			this.roomUnusedAreaCoordinates.Clear();
+			this.roomUnusedAreaCoordinates.AddRange(room.roomUnusedAreaCoordinates);
+			this.ceilingUnusedAreaCoordinates.Clear();
+			this.ceilingUnusedAreaCoordinates.AddRange(room.ceilingUnusedAreaCoordinates);
 		}
 
 		private void InitializeRoom() {
@@ -114,6 +120,8 @@ namespace Europlan.Common {
             this.roomNode.SelectedImageKey = "Raum.png";
 			this.roomCoordinates = new List<PointF>();
 			this.ceilingCoordinates = new List<PointF>();
+			this.roomUnusedAreaCoordinates = new List<List<PointF>>();
+			this.ceilingUnusedAreaCoordinates = new List<List<PointF>>();
 		}
 
 		internal void Synchronize(Room room) {
@@ -144,6 +152,10 @@ namespace Europlan.Common {
 			this.roomCoordinates.AddRange(room.roomCoordinates);
 			this.ceilingCoordinates.Clear();
 			this.ceilingCoordinates.AddRange(room.ceilingCoordinates);
+			this.roomUnusedAreaCoordinates.Clear();
+			this.roomUnusedAreaCoordinates.AddRange(room.roomUnusedAreaCoordinates);
+			this.ceilingUnusedAreaCoordinates.Clear();
+			this.ceilingUnusedAreaCoordinates.AddRange(room.ceilingUnusedAreaCoordinates);
 		}
 
 		[XmlIgnore]
@@ -570,6 +582,16 @@ namespace Europlan.Common {
 		public List<PointF> CeilingCoordinates {
 			get { return this.ceilingCoordinates; }
 			set { this.ceilingCoordinates = value; }
+		}
+
+		public List<List<PointF>> RoomUnusedAreaCoordinates {
+			get { return this.roomUnusedAreaCoordinates; }
+			set { this.roomUnusedAreaCoordinates = value; }
+		}
+
+		public List<List<PointF>> CeilingUnusedAreaCoordinates {
+			get { return this.ceilingUnusedAreaCoordinates; }
+			set { this.ceilingUnusedAreaCoordinates = value; }
 		}
 	}
 

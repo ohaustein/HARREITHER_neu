@@ -21,7 +21,7 @@ namespace Europlan.Common {
 			this.picturePanel.MoveMode = true;
 			btnMove.Checked = true;
 			btnPick.Checked = false;
-			this.picturePanel.Cursor = Cursors.Hand;
+			this.picturePanel.Cursor = Cursors.SizeAll;
 		}
 
 		private void SetLanguage() {
@@ -31,6 +31,13 @@ namespace Europlan.Common {
 		public List<PointF> RoomCoordinates {
 			get { return picturePanel.RoomCoordinates; }
 			set { picturePanel.RoomCoordinates = value; }
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public List<List<PointF>> UnusedCoordinates {
+			get { return picturePanel.UnusedCoordinates; }
+			set { picturePanel.UnusedCoordinates = value; }
 		}
 
 		private void ImagePlanRoomPickerForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -66,8 +73,12 @@ namespace Europlan.Common {
 			this.picturePanel.Cursor = Cursors.Hand;
 			this.picturePanel.MoveMode = true;
 			this.picturePanel.RoomPickerMode = false;
+			this.picturePanel.UnusedPickerMode = false;
+			this.picturePanel.DeleteUnusedMode = false;
 			btnMove.Checked = true;
 			btnPick.Checked = false;
+			btnUnused.Checked = false;
+			btnDeleteUnused.Checked = false;
 		}
 
 		private void btnPick_Click(object sender, EventArgs e) {
@@ -75,8 +86,40 @@ namespace Europlan.Common {
 				this.picturePanel.Cursor = Cursors.Cross;
 				this.picturePanel.MoveMode = false;
 				this.picturePanel.RoomPickerMode = true;
+				this.picturePanel.UnusedPickerMode = false;
+				this.picturePanel.DeleteUnusedMode = false;
 				btnMove.Checked = false;
 				btnPick.Checked = true;
+				btnUnused.Checked = false;
+				btnDeleteUnused.Checked = false;
+			}
+		}
+
+		private void btnUnused_Click(object sender, EventArgs e) {
+			if (!btnUnused.Checked) {
+				this.picturePanel.Cursor = Cursors.Cross;
+				this.picturePanel.MoveMode = false;
+				this.picturePanel.RoomPickerMode = false;
+				this.picturePanel.UnusedPickerMode = true;
+				this.picturePanel.DeleteUnusedMode = false;
+				btnMove.Checked = false;
+				btnPick.Checked = false;
+				btnUnused.Checked = true;
+				btnDeleteUnused.Checked = false;
+			}
+		}
+
+		private void btnDeleteUnused_Click(object sender, EventArgs e) {
+			if (!btnDeleteUnused.Checked) {
+				this.picturePanel.Cursor = Cursors.Cross;
+				this.picturePanel.MoveMode = false;
+				this.picturePanel.RoomPickerMode = false;
+				this.picturePanel.UnusedPickerMode = false;
+				this.picturePanel.DeleteUnusedMode = true;
+				btnMove.Checked = false;
+				btnPick.Checked = false;
+				btnUnused.Checked = false;
+				btnDeleteUnused.Checked = true;
 			}
 		}
 
