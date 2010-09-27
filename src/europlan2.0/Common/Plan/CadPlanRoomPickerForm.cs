@@ -38,17 +38,11 @@ namespace Europlan.Common {
 			InitializeComponent();
 			this.SetLanguage();
 			this.plan = plan;
-			DxfModel model;
-			if (this.plan.AbsoluteFileName.EndsWith(".dwg", StringComparison.InvariantCultureIgnoreCase)) {
-				model = DwgReader.Read(this.plan.AbsoluteFileName);
-			} else {
-				model = DxfReader.Read(this.plan.AbsoluteFileName);
-			}
+			DxfModel model = plan.LoadModel();
 			foreach (DxfLayer layer in model.Layers) {
-				layer.Enabled = !plan.DisabledLayers.Contains(layer.Name);
 				this.lstLayers.Items.Add(new LayerListViewItem(layer));
 			}
-			this.cadPanel.Model = model;
+			this.cadPanel.Plan = this.plan;
 			this.cadPanel.PlanScale = plan.Scale;
 			this.cadPanel.PlanTranslation = new Vector2D(plan.TranslationX, plan.TranslationY);
 		}
@@ -111,16 +105,14 @@ namespace Europlan.Common {
 		private void btnMove_Click(object sender, EventArgs e) {
 			this.btnPick.Checked = false;
 			this.btnMove.Checked = true;
-			this.cadPanel.MoveMode = true;
-			this.cadPanel.RoomPickerMode = false;
+			this.cadPanel.Mode = PlanMode.PM_MOVE;
 		}
 
 		private void btnPick_Click(object sender, EventArgs e) {
 			if (!btnPick.Checked) {
 				this.btnMove.Checked = false;
 				this.btnPick.Checked = true;
-				this.cadPanel.MoveMode = false;
-				this.cadPanel.RoomPickerMode = true;
+				this.cadPanel.Mode = PlanMode.PM_PICK_ROOM;
 			}
 		}
 

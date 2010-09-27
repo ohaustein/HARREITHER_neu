@@ -18,7 +18,7 @@ namespace Europlan.Common {
 			InitializeComponent();
 			this.SetLanguage();
 			this.picturePanel.Plan = plan;
-			this.picturePanel.LengthChanged += new PicturePanel.LengthChangedEventHandler(picturePanel_LengthChanged);
+			this.picturePanel.LengthChanged += new ImagePanel.LengthChangedEventHandler(picturePanel_LengthChanged);
 		}
 
 		void picturePanel_LengthChanged(object sender) {
@@ -112,7 +112,7 @@ namespace Europlan.Common {
 			txtLength.Visible = false;
 			lblLength.Visible = false;
 			btnSetLength.Visible = false;
-			picturePanel.MoveMode = true;
+			picturePanel.Mode = PlanMode.PM_MOVE;
 			picturePanel.StartPoint = null;
 			picturePanel.EndPoint = null;
 			picturePanel.Invalidate();
@@ -126,7 +126,7 @@ namespace Europlan.Common {
 			//lblLength.Visible = true;
 		    //txtLength.Enabled = plan.Measure.HasValue;
 			//txtLength.Text = "";
-			picturePanel.MoveMode = false;
+			picturePanel.Mode = PlanMode.PM_PICK_MEASURE;
 		}
 
 		private void txtLength_TextChanged(object sender, EventArgs e) {

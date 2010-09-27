@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WW.Cad.Model;
+using WW.Cad.Model.Tables;
+using WW.Cad.IO;
 
 namespace Europlan.Common {
 
@@ -29,6 +32,19 @@ namespace Europlan.Common {
 
 		public List<string> DisabledLayers {
 			get { return this.disabledLayers; }
+		}
+
+		public DxfModel LoadModel() {
+			DxfModel model;
+			if (this.AbsoluteFileName.EndsWith(".dwg", StringComparison.InvariantCultureIgnoreCase)) {
+				model = DwgReader.Read(this.AbsoluteFileName);
+			} else {
+				model = DxfReader.Read(this.AbsoluteFileName);
+			}
+			foreach (DxfLayer layer in model.Layers) {
+				layer.Enabled = !this.DisabledLayers.Contains(layer.Name);
+			}
+			return model;
 		}
 	}
 

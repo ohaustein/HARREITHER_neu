@@ -18,7 +18,7 @@ namespace Europlan.Common {
 			InitializeComponent();
 			this.SetLanguage();
 			this.picturePanel.Plan = plan;
-			this.picturePanel.MoveMode = true;
+			this.picturePanel.Mode = PlanMode.PM_MOVE;
 			btnMove.Checked = true;
 			btnPick.Checked = false;
 			this.picturePanel.Cursor = Cursors.SizeAll;
@@ -71,10 +71,7 @@ namespace Europlan.Common {
 
 		private void btnMove_Click(object sender, EventArgs e) {
 			this.picturePanel.Cursor = Cursors.Hand;
-			this.picturePanel.MoveMode = true;
-			this.picturePanel.RoomPickerMode = false;
-			this.picturePanel.UnusedPickerMode = false;
-			this.picturePanel.DeleteUnusedMode = false;
+			this.picturePanel.Mode = PlanMode.PM_MOVE;
 			btnMove.Checked = true;
 			btnPick.Checked = false;
 			btnUnused.Checked = false;
@@ -84,10 +81,7 @@ namespace Europlan.Common {
 		private void btnPick_Click(object sender, EventArgs e) {
 			if (!btnPick.Checked) {
 				this.picturePanel.Cursor = Cursors.Cross;
-				this.picturePanel.MoveMode = false;
-				this.picturePanel.RoomPickerMode = true;
-				this.picturePanel.UnusedPickerMode = false;
-				this.picturePanel.DeleteUnusedMode = false;
+				this.picturePanel.Mode = PlanMode.PM_PICK_ROOM;
 				btnMove.Checked = false;
 				btnPick.Checked = true;
 				btnUnused.Checked = false;
@@ -98,10 +92,7 @@ namespace Europlan.Common {
 		private void btnUnused_Click(object sender, EventArgs e) {
 			if (!btnUnused.Checked) {
 				this.picturePanel.Cursor = Cursors.Cross;
-				this.picturePanel.MoveMode = false;
-				this.picturePanel.RoomPickerMode = false;
-				this.picturePanel.UnusedPickerMode = true;
-				this.picturePanel.DeleteUnusedMode = false;
+				this.picturePanel.Mode = PlanMode.PM_PICK_UNUSED;
 				btnMove.Checked = false;
 				btnPick.Checked = false;
 				btnUnused.Checked = true;
@@ -112,10 +103,7 @@ namespace Europlan.Common {
 		private void btnDeleteUnused_Click(object sender, EventArgs e) {
 			if (!btnDeleteUnused.Checked) {
 				this.picturePanel.Cursor = Cursors.Cross;
-				this.picturePanel.MoveMode = false;
-				this.picturePanel.RoomPickerMode = false;
-				this.picturePanel.UnusedPickerMode = false;
-				this.picturePanel.DeleteUnusedMode = true;
+				this.picturePanel.Mode = PlanMode.PM_DEL_UNUSED;
 				btnMove.Checked = false;
 				btnPick.Checked = false;
 				btnUnused.Checked = false;

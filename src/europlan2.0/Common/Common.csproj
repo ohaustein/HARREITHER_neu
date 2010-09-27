@@ -229,11 +229,19 @@
     <Compile Include="Plan\ImagePlanOptionsForm.Designer.cs">
       <DependentUpon>ImagePlanOptionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Plan\PicturePanel.cs">
+    <Compile Include="Plan\IProductPlanner.cs" />
+    <Compile Include="Plan\ImagePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Plan\PicturePanel.Designer.cs">
-      <DependentUpon>PicturePanel.cs</DependentUpon>
+    <Compile Include="Plan\ImagePanel.Designer.cs">
+      <DependentUpon>ImagePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plan\IPlanPanel.cs" />
+    <Compile Include="Plan\RoomPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Plan\RoomPicker.Designer.cs">
+      <DependentUpon>RoomPicker.cs</DependentUpon>
     </Compile>
     <Compile Include="Plan\PlanSetMeasureForm.cs">
       <SubType>Form</SubType>
@@ -249,6 +257,24 @@
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ExtendedCorrections.cs" />
+    <Compile Include="Products\GraphicalModulKlimadeckePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Products\GraphicalModulKlimadeckePanel.Designer.cs">
+      <DependentUpon>GraphicalModulKlimadeckePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ModulKlimaDeckePlanner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Products\ModulKlimaDeckePlanner.Designer.cs">
+      <DependentUpon>ModulKlimaDeckePlanner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ModulKlimaDeckePlannerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\ModulKlimaDeckePlannerForm.Designer.cs">
+      <DependentUpon>ModulKlimaDeckePlannerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\PlannedEcothermProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -657,9 +683,9 @@
       <DependentUpon>ImagePlanOptionsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plan\PicturePanel.resx">
+    <EmbeddedResource Include="Plan\ImagePanel.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>PicturePanel.cs</DependentUpon>
+      <DependentUpon>ImagePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Plan\PlanSetMeasureForm.resx">
       <SubType>Designer</SubType>
@@ -672,6 +698,14 @@
     <EmbeddedResource Include="Products\ConnectionPipesForm.resx">
       <DependentUpon>ConnectionPipesForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\GraphicalModulKlimadeckePanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GraphicalModulKlimadeckePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\ModulKlimaDeckePlannerForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ModulKlimaDeckePlannerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\PlannedEcothermProductPanel.resx">
       <DependentUpon>PlannedEcothermProductPanel.cs</DependentUpon>

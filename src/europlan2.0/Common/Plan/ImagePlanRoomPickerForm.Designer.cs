@@ -31,7 +31,7 @@ namespace Europlan.Common {
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnPick = new System.Windows.Forms.ToolStripButton();
 			this.btnUnused = new System.Windows.Forms.ToolStripButton();
-			this.picturePanel = new Europlan.Common.PicturePanel();
+			this.picturePanel = new Europlan.Common.ImagePanel();
 			this.btnDeleteUnused = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
@@ -123,17 +123,15 @@ namespace Europlan.Common {
 			this.picturePanel.Length = 0;
 			this.picturePanel.Location = new System.Drawing.Point(9, 25);
 			this.picturePanel.Margin = new System.Windows.Forms.Padding(0);
-			this.picturePanel.MoveMode = true;
+			this.picturePanel.Mode = PlanMode.PM_MOVE;
 			this.picturePanel.Name = "picturePanel";
 			this.picturePanel.Plan = null;
 			this.picturePanel.RoomCoordinates = ((System.Collections.Generic.List<System.Drawing.PointF>)(resources.GetObject("picturePanel.RoomCoordinates")));
-			this.picturePanel.RoomPickerMode = false;
 			this.picturePanel.Scale = null;
 			this.picturePanel.ShowRaster = false;
 			this.picturePanel.Size = new System.Drawing.Size(650, 397);
 			this.picturePanel.StartPoint = null;
 			this.picturePanel.TabIndex = 0;
-			this.picturePanel.UnusedPickerMode = false;
 			this.picturePanel.XPos = 0F;
 			this.picturePanel.YPos = 0F;
 			// 
@@ -169,7 +167,7 @@ namespace Europlan.Common {
 
 		#endregion
 
-		private PicturePanel picturePanel;
+		private ImagePanel picturePanel;
 		private System.Windows.Forms.ToolStrip toolStrip;
 		private System.Windows.Forms.ToolStripButton btnZoomIn;
 		private System.Windows.Forms.ToolStripButton btnZoomOut;

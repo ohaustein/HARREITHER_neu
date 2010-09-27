@@ -16,7 +16,7 @@ using WW.Math.Geometry;
 using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
-	public partial class CadPanel : UserControl {
+	public partial class CadPanel : UserControl, IPlanPanel {
 
 		public class StartPointSelectedArgs : EventArgs {
 			private Point3D startPoint;
@@ -61,6 +61,7 @@ namespace Europlan.Common {
 		private Matrix4D from2DTransform;
 		private Vector3D translation = Vector3D.Zero;
 		private PointF lastMouseLocation;
+		private Point2D lastPlanPoint;
 		private double scale = 1.0;
 		private bool mouseDown = false;
 		private double defaultHeight = 1000.0;
@@ -84,8 +85,7 @@ namespace Europlan.Common {
 		private bool unsavedChanges = false;
 		private bool unsavedRoomPickerChanges = false;
 
-		private bool moveMode = true;
-		private bool roomPickerMode = false;
+		private PlanMode mode = PlanMode.PM_MOVE;
 		private bool shiftPressed = false;
 		private bool inDesign = false;
 
@@ -170,6 +170,9 @@ namespace Europlan.Common {
 				e.Graphics.FillPath(b, path);
 				e.Graphics.DrawPath(new Pen(b), path);
 			}
+			if (this.productPlanner != null) {
+				this.productPlanner.PaintAfterPlanPannel(e, this.gdiGraphics3D.To2DTransform);
+			}
 		}
 
 		protected override void OnResize(EventArgs e) {
@@ -178,27 +181,11 @@ namespace Europlan.Common {
 			Invalidate();
 		}
 
-		public bool MoveMode {
-			get { return this.moveMode; }
-			set {
-				this.moveMode = value;
-				this.Cursor = this.moveMode ? Cursors.Hand : Cursors.Cross;
-				if (this.moveMode) {
-					if (this.selectedStartPointCad.HasValue || this.selectedEndPointCad.HasValue) {
-						this.selectedEndPointCad = null;
-						this.selectedStartPointCad = null;
-						this.Invalidate();
-					}
-				}
-			}
-		}
-
-		public bool RoomPickerMode {
-			get { return this.roomPickerMode; }
-			set { this.roomPickerMode = value; }
-		}
-
 		public DxfModel Model {
+			get { return this.model; }
+		}
+
+		private DxfModel InternalModel {
 			get { return model; }
 			set {
 				if (value != model) {
@@ -216,6 +203,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public List<PointF> RoomCoordinates {
 			get {
 				return roomCoordinates2d; 
@@ -256,29 +244,6 @@ namespace Europlan.Common {
 			return to2DTransform;
 		}
 
-		public double PlanScale {
-			get { return this.scale; }
-			set {
-				if (this.scale != value) {
-					this.scale = value;
-					CalculateTo2DTransform();
-					this.Invalidate();
-				}
-			}
-		}
-
-		public Vector2D PlanTranslation {
-			get { return new Vector2D(this.translation.X, this.translation.Y); }
-			set {
-				if (this.translation.X != value.X || this.translation.Y != value.Y) {
-					this.translation.X = value.X;
-					this.translation.Y = value.Y;
-					CalculateTo2DTransform();
-					this.Invalidate();
-				}
-			}
-		}
-
 		public void SetPlanScaleAndTranslation(double scale, double translationX, double translationY) {
 			if (this.scale != scale || this.translation.X != translationX || this.translation.Y != translationY) {
 				this.unsavedChanges = true;
@@ -312,65 +277,93 @@ namespace Europlan.Common {
 			base.OnKeyUp(e);
 		}
 
-		protected override void OnMouseClick(MouseEventArgs e) {
-			base.OnMouseClick(e);
-			if (roomPickerMode) {
-				this.unsavedChanges = true;
-				double bestSqDistance = double.PositiveInfinity;
-				Nullable<Point2D> bestPoint = null;
-				Point2D referencePoint = new Point2D(e.X, e.Y);
-				if (!shiftPressed) {
-					IList<IList<DxfEntity>> closeEntityChains = EntitySelector.GetEntitiesCloseToPoint(
-						model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
-						gdiGraphics3D.To2DTransform, referencePoint, 2 * grabDist);
+		/// <summary>
+		/// Tries to get a snap point that is close to the reference point.
+		/// </summary>
+		/// <param name="referencePoint">The location where a snap point shall be searched</param>
+		/// <param name="snapPoint">
+		/// The closest snap point that was found, if no snap point that is close enough was
+		/// found, this will just refurn the reference point
+		/// </param>
+		/// <returns>
+		/// the square distance of the snap point from the reference point, if no snap point
+		/// that is close enough was found, this will return double.PositiveInfinity.
+		/// </returns>
+		private double SnapPoint(Point2D referencePoint, out Point2D snapPoint) {
+			if (shiftPressed) {
+				snapPoint = referencePoint;
+				return double.PositiveInfinity;
+			}
 
-					List<Polygon2D> closePolygons = new List<Polygon2D>();
-					foreach (List<DxfEntity> entityChain in closeEntityChains) {
-						closePolygons.AddRange(GetEntityAsPolygons(entityChain));
+			double bestSqDistance = double.PositiveInfinity;
+			Nullable<Point2D> bestPoint = null;
+
+			IList<IList<DxfEntity>> closeEntityChains = EntitySelector.GetEntitiesCloseToPoint(
+				model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
+				gdiGraphics3D.To2DTransform, referencePoint, 2 * grabDist);
+
+			List<Polygon2D> closePolygons = new List<Polygon2D>();
+			foreach (List<DxfEntity> entityChain in closeEntityChains) {
+				closePolygons.AddRange(GetEntityAsPolygons(entityChain));
+			}
+
+			double curSqDistance = double.PositiveInfinity;
+			Nullable<Point2D> curPoint = null;
+
+			foreach (Polygon2D polygon1 in closePolygons) {
+				Nullable<Point2D> oldVertex1 = polygon1.isClosed ? polygon1.vertices[polygon1.vertices.Count - 1] : (Nullable<Point2D>)null;
+				foreach (Point2D vertex1 in polygon1.vertices) {
+					curSqDistance = CalcSqDist(referencePoint, vertex1);
+					if (curSqDistance < bestSqDistance) {
+						bestSqDistance = curSqDistance;
+						bestPoint = vertex1;
 					}
 
-					double curSqDistance = double.PositiveInfinity;
-					Nullable<Point2D> curPoint = null;
-
-					foreach (Polygon2D polygon1 in closePolygons) {
-						Nullable<Point2D> oldVertex1 = polygon1.isClosed ? polygon1.vertices[polygon1.vertices.Count - 1] : (Nullable<Point2D>)null;
-						foreach (Point2D vertex1 in polygon1.vertices) {
-							curSqDistance = CalcSqDist(referencePoint, vertex1);
-							if (curSqDistance < bestSqDistance) {
-								bestSqDistance = curSqDistance;
-								bestPoint = vertex1;
-							}
-
-							if (oldVertex1.HasValue) {
-								foreach (Polygon2D polygon2 in closePolygons) {
-									Nullable<Point2D> oldVertex2 = polygon2.isClosed ? polygon2.vertices[polygon2.vertices.Count - 1] : (Nullable<Point2D>)null;
-									foreach (Point2D vertex2 in polygon2.vertices) {
-										if (oldVertex2.HasValue) {
-											curPoint = GetIntersection(referencePoint, oldVertex1.Value, vertex1, oldVertex2.Value, vertex2, out curSqDistance);
-											if (curSqDistance < bestSqDistance) {
-												bestSqDistance = curSqDistance;
-												bestPoint = curPoint;
-											}
-										}
-										oldVertex2 = vertex2;
+					if (oldVertex1.HasValue) {
+						foreach (Polygon2D polygon2 in closePolygons) {
+							Nullable<Point2D> oldVertex2 = polygon2.isClosed ? polygon2.vertices[polygon2.vertices.Count - 1] : (Nullable<Point2D>)null;
+							foreach (Point2D vertex2 in polygon2.vertices) {
+								if (oldVertex2.HasValue) {
+									curPoint = GetIntersection(referencePoint, oldVertex1.Value, vertex1, oldVertex2.Value, vertex2, out curSqDistance);
+									if (curSqDistance < bestSqDistance) {
+										bestSqDistance = curSqDistance;
+										bestPoint = curPoint;
 									}
 								}
+								oldVertex2 = vertex2;
 							}
-							oldVertex1 = vertex1;
 						}
 					}
-
-					if (bestSqDistance > grabDist * grabDist) {
-						// do not use points which distance is greater than 5 pixels (=> sqDistance > 25)
-						bestSqDistance = double.PositiveInfinity;
-						bestPoint = null;
-					}
-
+					oldVertex1 = vertex1;
 				}
+			}
 
-				Point3D tmp = new Point3D((bestPoint.HasValue ? bestPoint.Value : referencePoint), 0);
+			if (bestSqDistance > grabDist * grabDist) {
+				// do not use points which distance is greater than 5 pixels (=> sqDistance > 25)
+				bestSqDistance = double.PositiveInfinity;
+				bestPoint = null;
+			}
+
+			snapPoint = bestPoint.HasValue ? bestPoint.Value : referencePoint;
+			return bestSqDistance;
+		}
+
+		protected override void OnMouseClick(MouseEventArgs e) {
+			base.OnMouseClick(e);
+			bool invalidate = false;
+			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null) {
+				Point2D pickedPoint;
+				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
+				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
+				invalidate = this.productPlanner.PlannerClick(new Point2D(planPoint.X, planPoint.Y), new PointF((float)pickedPoint.X, (float)pickedPoint.Y), e.Button);
+			} else if (this.mode == PlanMode.PM_PICK_ROOM) {
+				this.unsavedChanges = true;
+
+				Point2D pickedPoint;
+				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
+
 				Matrix4D inverse = gdiGraphics3D.To2DTransform.GetInverse();
-				Point3D currentPoint = inverse.Transform(tmp);
+				Point3D currentPoint = inverse.Transform(new Point3D(pickedPoint, 0));
 
 				if (e.Button == MouseButtons.Left) {
 					if (!inDesign && roomCoordinates.Count > 0) {
@@ -403,26 +396,47 @@ namespace Europlan.Common {
 					inDesign = false;
 				}
 
+				invalidate = true;
+			}
+			if (invalidate) {
 				Invalidate();
 			}
 		}
 
 		protected override void OnMouseDown(MouseEventArgs e) {
 			base.OnMouseDown(e);
+			bool invalidate = false;
+			if (this.mode == PlanMode.PM_PLANNER_DRAG && e.Button != MouseButtons.Middle && this.productPlanner != null) {
+				Point2D pickedPoint;
+				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
+				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
+				invalidate = this.productPlanner.PlannerDragStart(new Point2D(planPoint.X, planPoint.Y), e.Location, e.Button);
+				lastPlanPoint = new Point2D(planPoint.X, planPoint.Y);
+			}
 			lastMouseLocation = e.Location;
 			mouseDown = true;
+			if (invalidate) {
+				Invalidate();
+			}
 		}
 
 		protected override void OnMouseMove(MouseEventArgs e) {
 			base.OnMouseMove(e);
-			if (mouseDown && ((moveMode && e.Button == MouseButtons.Left) || e.Button == MouseButtons.Middle)) {
+			bool invalidate = false;
+			if (mouseDown && this.mode == PlanMode.PM_PLANNER_DRAG && e.Button != MouseButtons.Middle && this.productPlanner != null) {
+				Point2D pickedPoint;
+				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
+				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
+				invalidate = this.productPlanner.PlannerDragMove(new Point2D(planPoint.X, planPoint.Y), e.Location, lastPlanPoint, lastMouseLocation, e.Button);
+			}
+			if (mouseDown && ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || e.Button == MouseButtons.Middle)) {
 				this.unsavedChanges = true;
 				translation += new Vector3D(e.X - lastMouseLocation.X, e.Y - lastMouseLocation.Y, 0);
 				this.CalculateTo2DTransform();
-				this.Invalidate();
+				invalidate = true;
 			}
 			lastMouseLocation = e.Location;
-			if ((roomPickerMode) || (!moveMode && selectedStartPointCad.HasValue && !selectedEndPointCad.HasValue)) {
+			if ((mode == PlanMode.PM_PICK_ROOM) || (mode == PlanMode.PM_PICK_MEASURE && selectedStartPointCad.HasValue && !selectedEndPointCad.HasValue)) {
 				/*int x = (int)selectedStartPoint.Value.X;
 				int y = (int)selectedStartPoint.Value.Y;
 				int width = x - e.Location.X;
@@ -436,70 +450,32 @@ namespace Europlan.Common {
 					y = e.Location.Y;
 				}
 				Invalidate(new Rectangle(x, y, width, height));*/
+				invalidate = true;
+			}
+			if (invalidate) {
 				Invalidate();
 			}
 		}
 
 		protected override void OnMouseUp(MouseEventArgs e) {
 			base.OnMouseUp(e);
+			bool invalidate = false;
+			if (this.mode == PlanMode.PM_PLANNER_DRAG && e.Button != MouseButtons.Middle && this.productPlanner != null) {
+				Point2D pickedPoint;
+				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
+				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
+				invalidate = this.productPlanner.PlannerDragEnd(new Point2D(planPoint.X, planPoint.Y), e.Location, e.Button);
+			}
 			mouseDown = false;
-			if (!moveMode && ! roomPickerMode && e.Button == MouseButtons.Left) {
+			if (mode == PlanMode.PM_PICK_MEASURE && e.Button == MouseButtons.Left) {
 				this.unsavedChanges = true;
-				double bestSqDistance = double.PositiveInfinity;
-				Nullable<Point2D> bestPoint = null;
-				Point2D referencePoint = new Point2D(e.X, e.Y);
-				if (!shiftPressed) {
-					IList<IList<DxfEntity>> closeEntityChains = EntitySelector.GetEntitiesCloseToPoint(
-						model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
-						gdiGraphics3D.To2DTransform, referencePoint, 2 * grabDist);
 
-					List<Polygon2D> closePolygons = new List<Polygon2D>();
-					foreach (List<DxfEntity> entityChain in closeEntityChains) {
-						closePolygons.AddRange(GetEntityAsPolygons(entityChain));
-					}
+				Point2D pickedPoint;
+				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
 
-					double curSqDistance = double.PositiveInfinity;
-					Nullable<Point2D> curPoint = null;
-
-					foreach (Polygon2D polygon1 in closePolygons) {
-						Nullable<Point2D> oldVertex1 = polygon1.isClosed ? polygon1.vertices[polygon1.vertices.Count - 1] : (Nullable<Point2D>)null;
-						foreach (Point2D vertex1 in polygon1.vertices) {
-							curSqDistance = CalcSqDist(referencePoint, vertex1);
-							if (curSqDistance < bestSqDistance) {
-								bestSqDistance = curSqDistance;
-								bestPoint = vertex1;
-							}
-
-							if (oldVertex1.HasValue) {
-								foreach (Polygon2D polygon2 in closePolygons) {
-									Nullable<Point2D> oldVertex2 = polygon2.isClosed ? polygon2.vertices[polygon2.vertices.Count - 1] : (Nullable<Point2D>)null;
-									foreach (Point2D vertex2 in polygon2.vertices) {
-										if (oldVertex2.HasValue) {
-											curPoint = GetIntersection(referencePoint, oldVertex1.Value, vertex1, oldVertex2.Value, vertex2, out curSqDistance);
-											if (curSqDistance < bestSqDistance) {
-												bestSqDistance = curSqDistance;
-												bestPoint = curPoint;
-											}
-										}
-										oldVertex2 = vertex2;
-									}
-								}
-							}
-							oldVertex1 = vertex1;
-						}
-					}
-
-					if (bestSqDistance > grabDist * grabDist) {
-						// do not use points which distance is greater than 5 pixels (=> sqDistance > 25)
-						bestSqDistance = double.PositiveInfinity;
-						bestPoint = null;
-					}
-
-				}
 				if (selectedStartPointCad.HasValue && !selectedEndPointCad.HasValue) {
-					Point3D tmp = new Point3D((bestPoint.HasValue ? bestPoint.Value : referencePoint), 0);
 					Matrix4D inverse = gdiGraphics3D.To2DTransform.GetInverse();
-					selectedEndPointCad = inverse.Transform(tmp);
+					selectedEndPointCad = inverse.Transform(new Point3D(pickedPoint, 0));
 					if (this.EndPointSelected != null) {
 						double distX = selectedEndPointCad.Value.X - selectedStartPointCad.Value.X;
 						double distY = selectedEndPointCad.Value.Y - selectedStartPointCad.Value.Y;
@@ -508,13 +484,15 @@ namespace Europlan.Common {
 					}
 				} else {
 					selectedEndPointCad = null;
-					Point3D tmp = new Point3D((bestPoint.HasValue ? bestPoint.Value : referencePoint), 0);
 					Matrix4D inverse = gdiGraphics3D.To2DTransform.GetInverse();
-					selectedStartPointCad = inverse.Transform(tmp);
+					selectedStartPointCad = inverse.Transform(new Point3D(pickedPoint, 0));
 					if (this.StartPointSelected != null) {
 						this.StartPointSelected(this, new StartPointSelectedArgs(selectedStartPointCad.Value)); ;
 					}
 				}
+				invalidate = true;
+			}
+			if (invalidate) {
 				Invalidate();
 			}
 		}
@@ -841,5 +819,107 @@ namespace Europlan.Common {
 			base.OnMouseWheel(e);
 			this.AddScale(1.0 + e.Delta / 1200.0, new Point2D(e.X, e.Y));
 		}
+
+		public Matrix TransformationMatrix {
+			get {
+				Matrix m = new Matrix();
+				m.Translate((float)translation.X, (float)translation.Y);
+				m.Scale((float)this.scale, (float)scale);
+
+				return m;
+			}
+		}
+
+		#region IPlanPanel Members
+		private IProductPlanner productPlanner = null;
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public IProductPlanner ProductPlanner {
+			get { return this.productPlanner; }
+			set {
+				if (this.productPlanner != null) {
+					this.productPlanner.ConnectedPlanPanel = null;
+				}
+				if (value != null && value.ConnectedPlanPanel != null) {
+					value = null;
+				}
+				this.productPlanner = value;
+				if (this.productPlanner != null) {
+					this.productPlanner.ConnectedPlanPanel = this;
+				}
+				this.Invalidate();
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public double PlanScale {
+			get { return this.scale; }
+			set {
+				if (this.scale != value) {
+					this.scale = value;
+					CalculateTo2DTransform();
+					this.Invalidate();
+				}
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Vector2D PlanTranslation {
+			get { return new Vector2D(this.translation.X, this.translation.Y); }
+			set {
+				if (this.translation.X != value.X || this.translation.Y != value.Y) {
+					this.translation.X = value.X;
+					this.translation.Y = value.Y;
+					CalculateTo2DTransform();
+					this.Invalidate();
+				}
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public PlanMode Mode {
+			get { return this.mode; }
+			set { this.mode = value; }
+		}
+
+		private CadPlan plan = null;
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Plan Plan {
+			get { return this.plan; }
+			set { 
+				if (value is CadPlan) {
+					this.plan = value as CadPlan;
+					this.InternalModel = this.plan.LoadModel();
+				} else if (value == null) {
+					this.plan = null;
+					this.InternalModel = null;
+				}
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Matrix4D PlanTransformation {
+			get { return this.gdiGraphics3D.To2DTransform; }
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public ColorMode ColorMode {
+			get { return ColorMode.CM_BLACK_BG; }
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public ModifierKey ModifierKey {
+			get { return ModifierKey.MK_NONE; }
+		}
+		#endregion
 	}
 }

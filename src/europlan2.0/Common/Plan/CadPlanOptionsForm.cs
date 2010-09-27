@@ -17,12 +17,7 @@ namespace Europlan.Common {
 	public partial class CadPlanOptionsForm : Form {
 
 		private CadPlan plan;
-		private Image image = null;
-		private float mouseDownX, mouseUpX, mouseDownY, mouseUpY;
 		private bool unsavedChanges = false;
-		private bool showRaster = false;
-		private bool moveMode = true;
-		Nullable<Point> startPoint = null;
 		private double length = 0;
 
 		private class LayerListViewItem : ListViewItem {
@@ -44,17 +39,11 @@ namespace Europlan.Common {
 			InitializeComponent();
 			this.SetLanguage();
 			this.plan = plan;
-			DxfModel model;
-			if (this.plan.AbsoluteFileName.EndsWith(".dwg", StringComparison.InvariantCultureIgnoreCase)) {
-				model = DwgReader.Read(this.plan.AbsoluteFileName);
-			} else {
-				model = DxfReader.Read(this.plan.AbsoluteFileName);
-			}
+			DxfModel model = this.plan.LoadModel(); ;
 			foreach (DxfLayer layer in model.Layers) {
-				layer.Enabled = !plan.DisabledLayers.Contains(layer.Name);
 				this.lstLayers.Items.Add(new LayerListViewItem(layer));
 			}
-			this.cadPanel.Model = model;
+			this.cadPanel.Plan = plan;
 			this.cadPanel.PlanScale = plan.Scale;
 			this.cadPanel.PlanTranslation = new Vector2D(plan.TranslationX, plan.TranslationY);
 		}
@@ -121,7 +110,7 @@ namespace Europlan.Common {
 		private void btnDistance_Click(object sender, EventArgs e) {
 			this.btnMove.Checked = false;
 			this.btnDistance.Checked = true;
-			this.cadPanel.MoveMode = false;
+			this.cadPanel.Mode = PlanMode.PM_PICK_MEASURE;
 			txtLength.Text = "";
 			/*txtLength.Visible = true;
 			lblLength.Visible = true;*/
@@ -130,7 +119,7 @@ namespace Europlan.Common {
 		private void btnMove_Click(object sender, EventArgs e) {
 			this.btnDistance.Checked = false;
 			this.btnMove.Checked = true;
-			this.cadPanel.MoveMode = true;
+			this.cadPanel.Mode = PlanMode.PM_MOVE;
 			txtLength.Visible = false;
 			lblLength.Visible = false;
 			btnSetLength.Visible = false;

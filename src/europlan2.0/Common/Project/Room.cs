@@ -172,6 +172,21 @@ namespace Europlan.Common {
 			}			
 		}
 
+		[XmlIgnore]
+		public Plan AssociatedPlan {
+			get {
+				if (this.AssociatedFloor == null || this.AssociatedFloor.AssociatedPlanId == null) {
+					return null;
+				}
+				foreach (Plan plan in Project.Instance.ImportedPlans) {
+					if (plan.Id.Equals(this.AssociatedFloor.AssociatedPlanId)) {
+						return plan;
+					}
+				}
+				return null;
+			}
+		}
+
 		public string Id {
 			get { return id; }
 			set { 

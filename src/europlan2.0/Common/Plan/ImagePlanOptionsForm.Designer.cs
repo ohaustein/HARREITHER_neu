@@ -40,7 +40,7 @@ namespace Europlan.Common {
 			this.lblLength = new System.Windows.Forms.ToolStripLabel();
 			this.txtLength = new System.Windows.Forms.ToolStripTextBox();
 			this.btnSetLength = new System.Windows.Forms.ToolStripButton();
-			this.picturePanel = new Europlan.Common.PicturePanel();
+			this.picturePanel = new Europlan.Common.ImagePanel();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -227,10 +227,9 @@ namespace Europlan.Common {
 			this.picturePanel.Length = 0;
 			this.picturePanel.Location = new System.Drawing.Point(9, 25);
 			this.picturePanel.Margin = new System.Windows.Forms.Padding(0);
-			this.picturePanel.MoveMode = true;
+			this.picturePanel.Mode = PlanMode.PM_MOVE;
 			this.picturePanel.Name = "picturePanel";
 			this.picturePanel.Plan = null;
-			this.picturePanel.RoomPickerMode = false;
 			this.picturePanel.Scale = null;
 			this.picturePanel.ShowRaster = false;
 			this.picturePanel.Size = new System.Drawing.Size(650, 397);
@@ -261,7 +260,7 @@ namespace Europlan.Common {
 
 		#endregion
 
-		private PicturePanel picturePanel;
+		private ImagePanel picturePanel;
 		private System.Windows.Forms.ToolStrip toolStrip;
 		private System.Windows.Forms.ToolStripButton btnRotateLeft;
 		private System.Windows.Forms.ToolStripButton btnRotateRight;

@@ -118,8 +118,7 @@ namespace Europlan.Common {
 			this.cadPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.cadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.cadPanel.Location = new System.Drawing.Point(200, 25);
-			this.cadPanel.Model = null;
-			this.cadPanel.MoveMode = true;
+			this.cadPanel.Mode = PlanMode.PM_MOVE;
 			this.cadPanel.Name = "cadPanel";
 			this.cadPanel.PlanDefaultMargin = 5;
 			this.cadPanel.PlanScale = 1;

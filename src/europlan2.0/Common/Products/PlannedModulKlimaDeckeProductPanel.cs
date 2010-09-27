@@ -969,6 +969,13 @@ namespace Europlan.Common {
 				gridContentChanged = false;
 			}
 		}
+
+		private void button1_Click(object sender, EventArgs e) {
+			if (this.product != null) {
+				Europlan.Common.Products.ModulKlimaDeckePlannerForm form = new Europlan.Common.Products.ModulKlimaDeckePlannerForm(this.product.Product as ModulKlimaDeckeProduct);
+				form.Show();
+			}
+		}
 		
 	}
 }
