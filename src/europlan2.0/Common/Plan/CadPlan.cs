@@ -34,15 +34,18 @@ namespace Europlan.Common {
 			get { return this.disabledLayers; }
 		}
 
+		DxfModel model = null;
+
 		public DxfModel LoadModel() {
-			DxfModel model;
-			if (this.AbsoluteFileName.EndsWith(".dwg", StringComparison.InvariantCultureIgnoreCase)) {
-				model = DwgReader.Read(this.AbsoluteFileName);
-			} else {
-				model = DxfReader.Read(this.AbsoluteFileName);
-			}
-			foreach (DxfLayer layer in model.Layers) {
-				layer.Enabled = !this.DisabledLayers.Contains(layer.Name);
+			if (model == null) {
+				if (this.AbsoluteFileName.EndsWith(".dwg", StringComparison.InvariantCultureIgnoreCase)) {
+					model = DwgReader.Read(this.AbsoluteFileName);
+				} else {
+					model = DxfReader.Read(this.AbsoluteFileName);
+				}
+				foreach (DxfLayer layer in model.Layers) {
+					layer.Enabled = !this.DisabledLayers.Contains(layer.Name);
+				}
 			}
 			return model;
 		}

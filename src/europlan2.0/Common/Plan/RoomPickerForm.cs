@@ -14,9 +14,8 @@ using WW.Cad.Model;
 
 namespace Europlan.Common {
 
-	public partial class CadPlanRoomPickerForm : Form {
+	public partial class RoomPickerForm : Form {
 
-		private CadPlan plan;
 		private bool unsavedChanges = false;
 
 		private class LayerListViewItem : ListViewItem {
@@ -34,17 +33,11 @@ namespace Europlan.Common {
 			}
 		}
 
-		public CadPlanRoomPickerForm(CadPlan plan) {
+		public RoomPickerForm(Plan plan) {
 			InitializeComponent();
 			this.SetLanguage();
-			this.plan = plan;
-			DxfModel model = plan.LoadModel();
-			foreach (DxfLayer layer in model.Layers) {
-				this.lstLayers.Items.Add(new LayerListViewItem(layer));
-			}
-			this.cadPanel.Plan = this.plan;
-			this.cadPanel.PlanScale = plan.Scale;
-			this.cadPanel.PlanTranslation = new Vector2D(plan.TranslationX, plan.TranslationY);
+			this.panel.Plan = plan;
+			this.panel.Mode = PlanMode.PM_MOVE;
 		}
 
 		private void SetLanguage() {
@@ -73,48 +66,71 @@ namespace Europlan.Common {
 			SettingsKey settings = SettingsFile.Settings["CadPlanRoomPickerForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
 			this.Size = settings.GetSize("Size", this.Size);
-			this.lstLayers.ItemChecked += new ItemCheckedEventHandler(lstLayers_ItemChecked);
 		}
 
 		public bool UnsavedChanges {
-			get { return this.unsavedChanges || this.cadPanel.UnsavedChanges; }
+			get { return this.unsavedChanges || this.panel.UnsavedChanges || this.roomPicker.UnsavedChanges; }
 		}
 
-		public List<PointF> RoomCoordinates {
-			get { return cadPanel.RoomCoordinates; }
-			set { cadPanel.RoomCoordinates = value; }
+		public List<Point2D> RoomCoordinates {
+			get { return this.roomPicker.RoomCoordinates; }
+			set { this.roomPicker.RoomCoordinates = value; }
+		}
+
+		public List<List<Point2D>> UnusedCoordinates {
+			get { return this.roomPicker.UnusedCoordinates; }
+			set { this.roomPicker.UnusedCoordinates = value; }
 		}
 
 		private void btnZoomIn_Click(object sender, EventArgs e) {
-			cadPanel.AddScale(1.1, null);
+			this.panel.AddScale(1.1, null);
 		}
 
 		private void btnZoomOut_Click(object sender, EventArgs e) {
-			cadPanel.AddScale(0.9, null);
-		}
-
-		private void lstLayers_ItemChecked(object sender, ItemCheckedEventArgs e) {
-			LayerListViewItem item = e.Item as LayerListViewItem;
-			if (item != null) {
-				//this.unsavedChanges = true;
-				item.Layer.Enabled = item.Checked;
-				this.cadPanel.RecreateDrawables();
-			}
+			this.panel.AddScale(0.9, null);
 		}
 
 		private void btnMove_Click(object sender, EventArgs e) {
-			this.btnPick.Checked = false;
-			this.btnMove.Checked = true;
-			this.cadPanel.Mode = PlanMode.PM_MOVE;
-		}
-
-		private void btnPick_Click(object sender, EventArgs e) {
-			if (!btnPick.Checked) {
-				this.btnMove.Checked = false;
-				this.btnPick.Checked = true;
-				this.cadPanel.Mode = PlanMode.PM_PICK_ROOM;
+			if (!btnMove.Checked) {
+				this.btnMove.Checked = true;
+				this.btnPickRoom.Checked = false;
+				this.btnPickUnused.Checked = false;
+				this.btnDelUnused.Checked = false;
+				this.panel.Mode = PlanMode.PM_MOVE;
 			}
 		}
 
+		private void btnPickRoom_Click(object sender, EventArgs e) {
+			if (!btnPickRoom.Checked) {
+				this.btnMove.Checked = false;
+				this.btnPickRoom.Checked = true;
+				this.btnPickUnused.Checked = false;
+				this.btnDelUnused.Checked = false;
+				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_PICK_ROOM;
+				this.panel.Mode = PlanMode.PM_PLANNER_CLICK;
+			}
+		}
+
+		private void btnPickUnused_Click(object sender, EventArgs e) {
+			if (!btnPickUnused.Checked) {
+				this.btnMove.Checked = false;
+				this.btnPickRoom.Checked = false;
+				this.btnPickUnused.Checked = true;
+				this.btnDelUnused.Checked = false;
+				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_PICK_UNUSED;
+				this.panel.Mode = PlanMode.PM_PLANNER_CLICK;
+			}
+		}
+
+		private void btnDelUnused_Click(object sender, EventArgs e) {
+			if (!btnDelUnused.Checked) {
+				this.btnMove.Checked = false;
+				this.btnPickRoom.Checked = false;
+				this.btnPickUnused.Checked = false;
+				this.btnDelUnused.Checked = true;
+				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_DEL_UNUSED;
+				this.panel.Mode = PlanMode.PM_PLANNER_CLICK;
+			}
+		}
 	}
 }

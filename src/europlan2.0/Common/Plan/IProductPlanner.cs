@@ -12,13 +12,17 @@ namespace Europlan.Common {
 			set;
 		}
 
-		void PaintAfterPlanPannel(PaintEventArgs e, Matrix4D additionalTransformation);
+		Cursor CustomCursor {
+			get;
+		}
 
-		bool PlannerClick(Point2D planPoint, PointF screenPoint, MouseButtons button);
-		bool PlannerMouseMove(Point2D planPoint, PointF screenPoint, MouseButtons button);
+		void PaintAfterPlanPannel(PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl);
 
-		bool PlannerDragStart(Point2D planPoint, PointF screenPoint, MouseButtons button);
-		bool PlannerDragMove(Point2D planPoint, PointF screenPoint, Point2D lastPlanPoint, PointF lastScreenPoint, MouseButtons button);
-		bool PlannerDragEnd(Point2D planPoint, PointF screenPoint, MouseButtons button);
+		bool PlannerClick(Point2D planPoint, Point pointInControl, MouseButtons button);
+		bool PlannerMouseMove(Point2D planPoint, Point pointInControl, MouseButtons button);
+
+		bool PlannerDragStart(Point2D planPoint, Point pointInControl, MouseButtons button);
+		bool PlannerDragMove(Point2D planPoint, Point pointInControl, MouseButtons button);
+		bool PlannerDragEnd(Point2D planPoint, Point pointInControl, MouseButtons button);
 	}
 }

@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using System.IO;
 using Europlan.Common;
 using System.Drawing;
+using WW.Math;
 
 namespace Europlan.Common {
 
@@ -47,22 +48,25 @@ namespace Europlan.Common {
 		}
 
 
-		public static float PolygonArea(PointF[] coordinates) {
+		public static double PolygonArea(Point2D[] coordinates) {
 			// Return the absolute value of the signed area.
 			// The signed area is negative if the polyogn is
 			// oriented clockwise.
 			return Math.Abs(SignedPolygonArea(coordinates));
 		}
 
-		private static float SignedPolygonArea(PointF[] coordinates) {
+		private static double SignedPolygonArea(Point2D[] coordinates) {
 			// Add the first point to the end.
 			int num_points = coordinates.Length;
-			PointF[] pts = new PointF[num_points + 1];
+			if (num_points < 3) {
+				return 0;
+			}
+			Point2D[] pts = new Point2D[num_points + 1];
 			coordinates.CopyTo(pts, 0);
 			pts[num_points] = coordinates[0];
 
 			// Get the areas.
-			float area = 0;
+			double area = 0;
 			for (int i = 0; i < num_points; i++) {
 				area +=
 					(pts[i + 1].X - pts[i].X) *

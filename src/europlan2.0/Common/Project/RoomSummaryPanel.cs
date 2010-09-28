@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using WW.Math;
 
 namespace Europlan.Common {
 	public partial class RoomSummaryPanel : UserControl, IEditorUserControl {
@@ -371,46 +372,25 @@ namespace Europlan.Common {
 			UpdateControl(false);
 		}
 
-		private void openGeometryPicker(List<PointF> coordinates, List<List<PointF>> unusedCoordinates, bool calculateRoomArea) {
-			List<Plan> plans = Project.Instance.ImportedPlans;
-			foreach (Plan plan in plans) {
-				if (plan.Id == this.room.AssociatedFloor.AssociatedPlanId) {
-					if (plan.Measure.HasValue) {
-						if (plan is ImagePlan) {
-							ImagePlanRoomPickerForm form = new ImagePlanRoomPickerForm(plan as ImagePlan);
-							form.RoomCoordinates = coordinates;
-							form.UnusedCoordinates = unusedCoordinates;
-							form.ShowDialog();
-							if (form.UnsavedChanges) {
-								if (calculateRoomArea) {
-									// TODO - unbeheizte flächen...
-									room.Area = (float)Math.Round(Plan.PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
-								}
-								if (this.ProjectChanged != null) {
-									this.ProjectChanged(this);
-								}
-							}
-							form.Dispose();
-						} else if (plan is CadPlan) {
-							CadPlanRoomPickerForm form = new CadPlanRoomPickerForm(plan as CadPlan);
-							form.RoomCoordinates = coordinates;
-							//form.UnusedCoordinates = unusedCoordinates;
-							form.ShowDialog();
-							if (form.UnsavedChanges) {
-								if (calculateRoomArea) {
-									// TODO - unbeheizte flächen...
-									room.Area = (float)Math.Round(Plan.PolygonArea(room.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
-								}
-								if (this.ProjectChanged != null) {
-									this.ProjectChanged(this);
-								}
-							}
-							form.Dispose();
-						}
-					} else {
-						MessageBox.Show(EuroplanRes.RoomSummaryPanel_MeasureTitle, EuroplanRes.RoomSummaryPanel_MeasureCaption);
+		private void openGeometryPicker(List<Point2D> coordinates, List<List<Point2D>> unusedCoordinates, bool calculateRoomArea) {
+			Plan plan = this.room.AssociatedPlan;
+			if (plan != null) {
+				RoomPickerForm form = new RoomPickerForm(plan);
+				form.RoomCoordinates = coordinates;
+				form.UnusedCoordinates = unusedCoordinates;
+				form.ShowDialog();
+				if (form.UnsavedChanges) {
+					if (calculateRoomArea) {
+						// TODO - unbeheizte flächen...
+						room.Area = (float)Math.Round(Plan.PolygonArea(form.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
+					}
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
 					}
 				}
+				form.Dispose();
+			} else {
+				MessageBox.Show(EuroplanRes.RoomSummaryPanel_MeasureTitle, EuroplanRes.RoomSummaryPanel_MeasureCaption);
 			}
 		}
 

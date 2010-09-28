@@ -161,14 +161,10 @@ namespace Europlan.Common {
 			// cadPanel
 			// 
 			this.cadPanel.BackColor = System.Drawing.Color.White;
-			this.cadPanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.cadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.cadPanel.Location = new System.Drawing.Point(200, 25);
-			this.cadPanel.Mode = PlanMode.PM_MOVE;
 			this.cadPanel.Name = "cadPanel";
 			this.cadPanel.PlanDefaultMargin = 5;
-			this.cadPanel.PlanScale = 1;
-			this.cadPanel.PlanTranslation = ((WW.Math.Vector2D)(resources.GetObject("cadPanel.PlanTranslation")));
 			this.cadPanel.Size = new System.Drawing.Size(468, 406);
 			this.cadPanel.TabIndex = 2;
 			this.cadPanel.EndPointSelected += new System.EventHandler<Europlan.Common.CadPanel.EndPointSelectedArgs>(this.cadPanel_EndPointSelected);

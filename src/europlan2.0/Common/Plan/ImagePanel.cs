@@ -24,9 +24,6 @@ namespace Europlan.Common {
 		Nullable<PointF> endPoint = null;
 		private double length = 0;
 		private float mouseDownX, mouseUpX, mouseDownY, mouseUpY;
-		private List<PointF> roomCoordinates = new List<PointF>();
-		private List<List<PointF>> unusedCoordinates = new List<List<PointF>>();
-		private List<PointF> tempCoordinates = new List<PointF>();
 		private bool inDesign = false;
 		private bool inMove = false;
 		private bool shiftPressed = false;
@@ -104,18 +101,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		public List<PointF> RoomCoordinates {
-			get { return this.roomCoordinates; }
-			set { this.roomCoordinates = value; }
-		}
-
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public List<List<PointF>> UnusedCoordinates {
-			get { return this.unusedCoordinates; }
-			set { this.unusedCoordinates = value; }
-		}
-
 		protected override void OnPaintBackground(PaintEventArgs e) {
 			
 		}
@@ -132,176 +117,34 @@ namespace Europlan.Common {
 
 		protected override void OnMouseClick(MouseEventArgs e) {
 			base.OnMouseClick(e);
-			Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-			PointF[] arr = new PointF[] { mousePos };
+			Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+			PointF[] tmp = new PointF[] { mousePosInCtrl };
 
-			Matrix X = new Matrix();
-			X.Translate(((float)image.Width / 2 + this.XPos) * this.Scale.Value, ((float)image.Height / 2 + this.YPos) * this.Scale.Value);
-			X.Rotate(this.Angle);
-			X.Translate(-((float)image.Width / 2 + this.XPos) * this.Scale.Value, -((float)image.Height / 2 + this.YPos) * this.Scale.Value);
-			X.Scale(this.Scale.Value, this.Scale.Value);
-			X.Translate(this.XPos, this.YPos);
-			X.Invert();
-			X.TransformPoints(arr);
+			Matrix ctrlToPlan = new Matrix();
+			ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
+			ctrlToPlan.Rotate(this.Angle);
+			ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
+			ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
+			ctrlToPlan.Translate(this.XPos, this.YPos);
+			ctrlToPlan.Invert();
+			ctrlToPlan.TransformPoints(tmp);
+			PointF mousePosInPlan = tmp[0];
 
 			bool invalidate = false;
 
-			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null) {
-				invalidate = this.productPlanner.PlannerClick(new WW.Math.Point2D(arr[0].X, arr[0].Y), new PointF(mousePos.X, mousePos.Y), e.Button);
-			} else if (this.Mode == PlanMode.PM_PICK_ROOM || this.Mode == PlanMode.PM_PICK_UNUSED) {
-				PointF pos = arr[0];
-
-				if (this.Mode == PlanMode.PM_PICK_UNUSED) {
-					GraphicsPath path = new GraphicsPath();
-					path.StartFigure();
-					PointF[] array = roomCoordinates.ToArray();
-					path.AddPolygon(array);
-					path.CloseFigure();
-					if (!path.IsVisible(pos)) {
-						path.Dispose();
-						return;
-					} else {
-						if (unusedCoordinates.Count > 0) {
-							foreach (List<PointF> unusedArea in unusedCoordinates) {
-								path.Dispose();
-								path = new GraphicsPath();
-								path.StartFigure();
-								array = unusedArea.ToArray();
-								path.AddPolygon(array);
-								path.CloseFigure();
-								if (path.IsVisible(arr[0])) {
-									path.Dispose();
-									return;
-								}
-								path.Dispose();
-								if (tempCoordinates.Count > 0 && inDesign) {
-									PointF prev = PointF.Empty;
-									PointF mouse = pos;
-									PointF start = tempCoordinates[tempCoordinates.Count - 1];
-									if (!shiftPressed) {
-										mouse = GetNormalizedPoint(start, pos);
-									}
-									if (tempCoordinates.Count >= 2) {
-										List<PointF> temp = new List<PointF>(tempCoordinates);
-										temp.Add(mouse);
-										path.Dispose();
-										path = new GraphicsPath();
-										path.StartFigure();
-										array = temp.ToArray();
-										path.AddPolygon(array);
-										path.CloseFigure();
-									}
-									foreach (PointF curr in unusedArea) {
-										if (tempCoordinates.Count >= 2 && path.IsVisible(curr)) {
-											path.Dispose();
-											return;
-										}
-										path.Dispose();
-										if (prev != PointF.Empty) {
-											if (IsIntersecting(mouse, start, prev, curr)) {
-												return;
-											}
-											if (IsIntersecting(mouse, tempCoordinates[0], prev, curr)) {
-												return;
-											}
-										}
-										prev = curr;
-									}
-
-									prev = PointF.Empty;
-									foreach (PointF curr in roomCoordinates) {
-										if (prev != PointF.Empty) {
-											if (IsIntersecting(mouse, start, prev, curr)) {
-												return;
-											}
-											if (IsIntersecting(mouse, tempCoordinates[0], prev, curr)) {
-												return;
-											}
-										}
-										prev = curr;
-									}
-
-								}
-							}
-						}
-					}
-				}
-
-				if (e.Button == MouseButtons.Left) {
-					if (!shiftPressed && tempCoordinates.Count > 0) {
-						pos = GetNormalizedPoint(tempCoordinates[tempCoordinates.Count - 1], pos);
-					}
-					if (!inDesign && this.Mode == PlanMode.PM_PICK_ROOM && roomCoordinates.Count > 0) {
-						// TODO
-						DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
-						if (result == DialogResult.No) {
-							return;
-						}
-					}
-					unsavedRoomPickerChanges = true;
-					tempCoordinates.Add(pos);
-					inDesign = true;
-					if (this.Mode == PlanMode.PM_PICK_ROOM) {
-						roomCoordinates.Clear();
-					}
-				} else if (e.Button == MouseButtons.Right) {
-					if (!shiftPressed && tempCoordinates.Count > 0) {
-						pos = GetNormalizedPoint(tempCoordinates[tempCoordinates.Count - 1], pos);
-					}
-					tempCoordinates.Add(pos);
-					if (tempCoordinates.Count > 2) {
-						if (this.Mode == PlanMode.PM_PICK_ROOM) {
-							// TODO
-							DialogResult result = MessageBox.Show("Die definierte Fläche beträgt " + Math.Round(Europlan.Common.Plan.PolygonArea(tempCoordinates.ToArray()) / Math.Pow(this.plan.Measure.Value, 2.0), 2) + "m². Kleine Ungenauigkeiten in der Flächenberechnung können nachträglich manuell geändert werden. Wollen Sie diese Raumgeometrie übernehmen?", "Raumgeometrie übernehmen?", MessageBoxButtons.YesNo);
-							if (result.Equals(DialogResult.Yes)) {
-								roomCoordinates.AddRange(tempCoordinates);
-								unsavedRoomPickerChanges = true;
-							}
-						} else if (this.Mode == PlanMode.PM_PICK_UNUSED) {
-							unusedCoordinates.Add(new List<PointF>(tempCoordinates));
-							unsavedRoomPickerChanges = true;
-						}
-					}
-					tempCoordinates.Clear();
-					inDesign = false;
-					//shiftPressed = false;
-				}
-				invalidate = true;
-			} else if (this.Mode == PlanMode.PM_DEL_UNUSED) {
-				if (e.Button == MouseButtons.Left) {
-					List<PointF> areaToDelete = null;
-					foreach (List<PointF> unusedArea in unusedCoordinates) {
-						GraphicsPath path = new GraphicsPath();
-						path.StartFigure();
-						PointF[] array = unusedArea.ToArray();
-						path.AddPolygon(array);
-						path.CloseFigure();
-						if (path.IsVisible(arr[0])) {
-							areaToDelete = unusedArea;
-							path.Dispose();
-							break;
-						}
-						path.Dispose();
-					}
-					if (areaToDelete != null) {
-						DialogResult result = MessageBox.Show(EuroplanRes.PicturePanel_DeleteUnusedText, EuroplanRes.PicturePanel_DeleteUnusedCaption, MessageBoxButtons.YesNo);
-						if (result == DialogResult.Yes) {
-							unusedCoordinates.Remove(areaToDelete);
-							invalidate = true;
-						}
-					}
-				}
+			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null && e.Button != MouseButtons.Middle) {
+				invalidate = this.productPlanner.PlannerClick(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
 			} else if (mode == PlanMode.PM_PICK_MEASURE && e.Button == MouseButtons.Left) {
 				if (startPoint.HasValue && !endPoint.HasValue) {
-					endPoint = arr[0];
-					length = this.distance(startPoint.Value.X, startPoint.Value.Y, arr[0].X, arr[0].Y);
+					endPoint = mousePosInPlan;
+					length = this.GetDistance(startPoint.Value.X, startPoint.Value.Y, endPoint.Value.X, endPoint.Value.Y);
 					//txtLength.Enabled = true;
 					if (LengthChanged != null) {
 						LengthChanged(this);
 					}
 					//startPoint = null;
 				} else {
-					startPoint = arr[0];
+					startPoint = mousePosInPlan;
 					endPoint = null;
 				}
 			}
@@ -314,18 +157,17 @@ namespace Europlan.Common {
 			base.OnMouseWheel(e);
 			unsavedChanges = true;
 			Point center = this.PointToClient(this.PointToScreen(e.Location));
-			AddScale(1.0f + ((float)e.Delta) / 1200.0f, center);
+			AddScale(1.0f + ((float)e.Delta) / 1200.0f, new WW.Math.Point2D(center.X, center.Y));
 			this.Invalidate();
 		}
 
 		protected override void OnPaint(PaintEventArgs e) {
-			Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-			PointF[] arr = new PointF[] { mousePos };
+			Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 
 			Graphics g = e.Graphics;
 			g.FillRectangle(Brushes.White, 0, 0, this.Width, this.Height);
 			if (image != null) {
-				Matrix X = new Matrix();
+				Matrix paintMatrix = new Matrix();
 				if (!this.Scale.HasValue) {
 					float scaleX = (float)this.Width / (float)image.Width;
 					float scaleY = (float)this.Height / (float)image.Height;
@@ -333,102 +175,37 @@ namespace Europlan.Common {
 					scale = 1;
 					this.Scale = scale;
 				}
-				X.Translate(((float)image.Width / 2 + this.XPos) * this.Scale.Value, ((float)image.Height / 2 + this.YPos) * this.Scale.Value);
-				X.Rotate(this.Angle);
-				X.Translate(-((float)image.Width / 2 + this.XPos) * this.Scale.Value, -((float)image.Height / 2 + this.YPos) * this.Scale.Value);
-				X.Scale(this.Scale.Value, this.Scale.Value);
-				X.Translate(this.XPos, this.YPos);
-				g.Transform = X;
+				paintMatrix.Translate(((float)image.Width / 2 + this.XPos) * this.Scale.Value, ((float)image.Height / 2 + this.YPos) * this.Scale.Value);
+				paintMatrix.Rotate(this.Angle);
+				paintMatrix.Translate(-((float)image.Width / 2 + this.XPos) * this.Scale.Value, -((float)image.Height / 2 + this.YPos) * this.Scale.Value);
+				paintMatrix.Scale(this.Scale.Value, this.Scale.Value);
+				paintMatrix.Translate(this.XPos, this.YPos);
+				g.Transform = paintMatrix;
 
 				g.DrawImage(image, 0, 0, image.Width, image.Height);
 
-				Matrix m = new Matrix();
-				m.Translate(((float)image.Width / 2 + this.XPos) * this.Scale.Value, ((float)image.Height / 2 + this.YPos) * this.Scale.Value);
-				m.Rotate(this.Angle);
-				m.Translate(-((float)image.Width / 2 + this.XPos) * this.Scale.Value, -((float)image.Height / 2 + this.YPos) * this.Scale.Value);
-				m.Scale(this.Scale.Value, this.Scale.Value);
-				m.Translate(this.XPos, this.YPos);
-				m.Invert();
-				m.TransformPoints(arr);
+				Matrix ctrlToPlan = paintMatrix.Clone();
+				/*transformPointsMatrix.Translate(((float)image.Width / 2 + this.XPos) * this.Scale.Value, ((float)image.Height / 2 + this.YPos) * this.Scale.Value);
+				transformPointsMatrix.Rotate(this.Angle);
+				transformPointsMatrix.Translate(-((float)image.Width / 2 + this.XPos) * this.Scale.Value, -((float)image.Height / 2 + this.YPos) * this.Scale.Value);
+				transformPointsMatrix.Scale(this.Scale.Value, this.Scale.Value);
+				transformPointsMatrix.Translate(this.XPos, this.YPos);*/
+				ctrlToPlan.Invert();
+				PointF[] tmp = new PointF[] { mousePosInCtrl };
+				ctrlToPlan.TransformPoints(tmp);
+				PointF mousePosInPlan = tmp[0];
 
 				g.SmoothingMode = SmoothingMode.AntiAlias;
-
-				if (roomCoordinates.Count > 2) {
-					GraphicsPath path = new GraphicsPath();
-					path.StartFigure();
-					PointF[] array = roomCoordinates.ToArray();
-					path.AddPolygon(array);
-					path.CloseFigure();
-					Color c = Color.FromArgb(128, Color.Red);
-					Brush b = new SolidBrush(c);
-					g.FillPath(b, path);
-					g.DrawPath(new Pen(b), path);
-					path.Dispose();
-				}
-
-				if (unusedCoordinates.Count > 0) {
-					foreach (List<PointF> unusedArea in unusedCoordinates) {
-						GraphicsPath path = new GraphicsPath();
-						path.StartFigure();
-						PointF[] array = unusedArea.ToArray();
-						path.AddPolygon(array);
-						path.CloseFigure();
-						Color c = Color.FromArgb(0, Color.Red);
-						Color c2 = Color.FromArgb(128, Color.White);
-						Brush b = new HatchBrush(HatchStyle.BackwardDiagonal, c2, c);
-						g.FillPath(b, path);
-						b = new SolidBrush(c2);
-						g.DrawPath(new Pen(b), path);
-						path.Dispose();
-					}
-				}
-
-				if (tempCoordinates.Count > 0 && inDesign) {
-					List<PointF> points = new List<PointF>(tempCoordinates);
-					PointF pos = arr[0];
-					if (!shiftPressed) {
-						pos = GetNormalizedPoint(points[points.Count - 1], pos);
-					}
-					points.Add(pos);
-					//g.DrawPolygon(Pens.Black, points.ToArray());
-
-					GraphicsPath path = new GraphicsPath();
-					path.StartFigure();
-					PointF[] array = points.ToArray();
-					if (array.Length > 2) {
-						path.AddPolygon(array);
-					} else {
-						path.AddLine(array[0], array[1]);
-					}
-					path.CloseFigure();
-					Brush b = null;
-					if (this.Mode == PlanMode.PM_PICK_ROOM) {
-						Color c = Color.FromArgb(128, Color.Red);
-						b = new SolidBrush(c);
-						g.FillPath(b, path);
-						g.DrawPath(new Pen(b), path);
-					} else if (this.Mode == PlanMode.PM_PICK_UNUSED) {
-						Color c = Color.FromArgb(0, Color.Red);
-						Color c2 = Color.FromArgb(128, Color.White);
-						b = new HatchBrush(HatchStyle.BackwardDiagonal, c2, c);
-						g.FillPath(b, path);
-						b = new SolidBrush(c2);
-						g.DrawPath(new Pen(b), path);
-					}
-					path.Dispose();
-				}
 
 				if (mode == PlanMode.PM_PICK_MEASURE && startPoint.HasValue) {
 					if (endPoint.HasValue) {
 						g.DrawLine(Pens.Red, startPoint.Value, endPoint.Value);
 					} else {
-						g.DrawLine(Pens.Red, startPoint.Value, arr[0]);
+						g.DrawLine(Pens.Red, startPoint.Value, mousePosInPlan);
 					}
 				}
 
-				X = new Matrix();
-				Matrix transformed = g.Transform;
-				g.Transform = X;
+				g.Transform = new Matrix();
 
 				if (showRaster) {
 					Pen pen = Pens.DarkGray.Clone() as Pen;
@@ -442,13 +219,13 @@ namespace Europlan.Common {
 					pen.Dispose();
 				}
 				if (this.productPlanner != null) {
-					e.Graphics.Transform = transformed;
-					this.productPlanner.PaintAfterPlanPannel(e, WW.Math.Matrix4D.Identity);
+					e.Graphics.Transform = paintMatrix;
+					this.productPlanner.PaintAfterPlanPannel(e, WW.Math.Matrix4D.Identity, new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), this.PointToClient(MousePosition));
 				}
 			}
 		}
 
-		public void AddScale(double addedScale, Nullable<PointF> center) {
+		public void AddScale(double addedScale, Nullable<WW.Math.Point2D> center) {
 			if (this.Scale.Value * addedScale < 0.01) {
 				addedScale = 0.01 / this.Scale.Value;
 			}
@@ -464,7 +241,7 @@ namespace Europlan.Common {
 			this.YPos = (float)((centerY - (centerY - this.YPos * oldScale) * addedScale) / newScale);
 		}
 
-		private double distance(double x1, double y1, double x2, double y2) {
+		private double GetDistance(double x1, double y1, double x2, double y2) {
 			double result = 0;
 			double part1 = Math.Pow((x2 - x1), 2);
 			double part2 = Math.Pow((y2 - y1), 2);
@@ -475,15 +252,31 @@ namespace Europlan.Common {
 
 		protected override void OnMouseDown(MouseEventArgs e) {
 			base.OnMouseDown(e);
-			if ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle)) {
-				Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-				PointF[] arr = new PointF[] { mousePos };
+			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
+				Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+				PointF[] arr = new PointF[] { mousePosInCtrl };
 
-				Matrix X = new Matrix();
-				X.Scale(this.Scale.Value, this.Scale.Value);
-				X.Translate(this.XPos, this.YPos);
-				X.Invert();
-				X.TransformPoints(arr);
+				Matrix ctrlToPlan = new Matrix();
+				ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
+				ctrlToPlan.Translate(this.XPos, this.YPos);
+				ctrlToPlan.Invert();
+				ctrlToPlan.TransformPoints(arr);
+
+				PointF mousePosInPlan = arr[0];
+
+				if (this.productPlanner != null) {
+					this.productPlanner.PlannerDragStart(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
+				}
+			}
+			if ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle)) {
+				Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+				PointF[] arr = new PointF[] { mousePosInCtrl };
+
+				Matrix ctrlToPlan = new Matrix();
+				ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
+				ctrlToPlan.Translate(this.XPos, this.YPos);
+				ctrlToPlan.Invert();
+				ctrlToPlan.TransformPoints(arr);
 
 				mouseDownX = arr[0].X;
 				mouseDownY = arr[0].Y;
@@ -497,6 +290,22 @@ namespace Europlan.Common {
 
 		protected override void OnMouseUp(MouseEventArgs e) {
 			base.OnMouseUp(e);
+			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
+				Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+				PointF[] arr = new PointF[] { mousePosInCtrl };
+
+				Matrix ctrlToPlan = new Matrix();
+				ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
+				ctrlToPlan.Translate(this.XPos, this.YPos);
+				ctrlToPlan.Invert();
+				ctrlToPlan.TransformPoints(arr);
+
+				PointF mousePosInPlan = arr[0];
+
+				if (this.productPlanner != null) {
+					this.productPlanner.PlannerDragEnd(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
+				}
+			}
 			if (e.Button == MouseButtons.Middle) {
 				this.Cursor = this.tempCursor;
 				inMove = false;
@@ -529,137 +338,39 @@ namespace Europlan.Common {
 
 		protected override void OnMouseMove(MouseEventArgs e) {
 			base.OnMouseMove(e);
-			Point mousePos = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-			PointF[] arr = new PointF[] { mousePos };
+			Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+			PointF[] arr = new PointF[] { mousePosInCtrl };
 
-			Matrix X = new Matrix();
-			X.Scale(this.Scale.Value, this.Scale.Value);
-			X.Translate(this.XPos, this.YPos);
-			X.Invert();
-			X.TransformPoints(arr);
+			Matrix ctrlToPlan = new Matrix();
+			ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
+			ctrlToPlan.Translate(this.XPos, this.YPos);
+			ctrlToPlan.Invert();
+			ctrlToPlan.TransformPoints(arr);
+			PointF mousePosInPlan = arr[0];
 
 			bool invalidate = false;
 
+			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
+				if (this.productPlanner != null) {
+					this.productPlanner.PlannerDragMove(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
+				}
+			} 
 			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null) {
-				invalidate = this.productPlanner.PlannerMouseMove(new WW.Math.Point2D(arr[0].X, arr[0].Y), new PointF(mousePos.X, mousePos.Y), e.Button);
-			} else {
-				if (!inMove) {
-					if (this.Mode == PlanMode.PM_PICK_UNUSED) {
-						GraphicsPath path = new GraphicsPath();
-						path.StartFigure();
-						PointF[] array = roomCoordinates.ToArray();
-						path.AddPolygon(array);
-						path.CloseFigure();
-						if (path.IsVisible(arr[0])) {
-							path.Dispose();
-							this.Cursor = Cursors.Cross;
-							if (unusedCoordinates.Count > 0) {
-								foreach (List<PointF> unusedArea in unusedCoordinates) {
-									path = new GraphicsPath();
-									path.StartFigure();
-									array = unusedArea.ToArray();
-									path.AddPolygon(array);
-									path.CloseFigure();
-									if (path.IsVisible(arr[0])) {
-										this.Cursor = Cursors.No;
-										path.Dispose();
-										break;
-									} else {
-										path.Dispose();
-										if (tempCoordinates.Count > 0 && inDesign) {
-											PointF prev = PointF.Empty;
-											PointF mouse = arr[0];
-											PointF start = tempCoordinates[tempCoordinates.Count - 1];
-											if (!shiftPressed) {
-												mouse = GetNormalizedPoint(start, arr[0]);
-											}
-											if (tempCoordinates.Count >= 2) {
-												List<PointF> temp = new List<PointF>(tempCoordinates);
-												temp.Add(mouse);
-												path = new GraphicsPath();
-												path.StartFigure();
-												array = temp.ToArray();
-												path.AddPolygon(array);
-												path.CloseFigure();
-											}
-											foreach (PointF curr in unusedArea) {
-												if (tempCoordinates.Count >= 2 && path.IsVisible(curr)) {
-													this.Cursor = Cursors.No;
-													break;
-												}
-												if (prev != PointF.Empty) {
-													if (IsIntersecting(mouse, start, prev, curr)) {
-														this.Cursor = Cursors.No;
-														break;
-													}
-													if (IsIntersecting(mouse, tempCoordinates[0], prev, curr)) {
-														this.Cursor = Cursors.No;
-														break;
-													}
-												}
-												prev = curr;
-											}
-
-											if (this.Cursor == Cursors.No) {
-												break;
-											}
-											path.Dispose();
-											prev = PointF.Empty;
-											foreach (PointF curr in roomCoordinates) {
-												if (prev != PointF.Empty) {
-													if (IsIntersecting(mouse, start, prev, curr)) {
-														this.Cursor = Cursors.No;
-														break;
-													}
-													if (IsIntersecting(mouse, tempCoordinates[0], prev, curr)) {
-														this.Cursor = Cursors.No;
-														break;
-													}
-												}
-												prev = curr;
-											}
-
-											if (this.Cursor == Cursors.No) {
-												break;
-											}
-										}
-									}
-								}
-							}
-						} else {
-							this.Cursor = Cursors.No;
-						}
-					} else if (this.Mode == PlanMode.PM_DEL_UNUSED) {
-						this.Cursor = Cursors.No;
-						foreach (List<PointF> unusedArea in unusedCoordinates) {
-							GraphicsPath path = new GraphicsPath();
-							path.StartFigure();
-							PointF[] array = unusedArea.ToArray();
-							path.AddPolygon(array);
-							path.CloseFigure();
-							if (path.IsVisible(arr[0])) {
-								this.Cursor = Cursors.Hand;
-								path.Dispose();
-								break;
-							}
-							path.Dispose();
-						}
-					}
-				}
-
-				if ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle)) {
-					unsavedChanges = true;
-
-					mouseUpX = arr[0].X;
-					mouseUpY = arr[0].Y;
-
-					this.XPos += mouseUpX - mouseDownX;
-					this.YPos += mouseUpY - mouseDownY;
-				} else if (mode == PlanMode.PM_PICK_MEASURE && startPoint.HasValue && !endPoint.HasValue) {
-
-				}
-				invalidate = true;
+				invalidate = this.productPlanner.PlannerMouseMove(new WW.Math.Point2D(arr[0].X, arr[0].Y), mousePosInCtrl, e.Button);
 			}
+
+			if ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle)) {
+				unsavedChanges = true;
+
+				mouseUpX = arr[0].X;
+				mouseUpY = arr[0].Y;
+
+				this.XPos += mouseUpX - mouseDownX;
+				this.YPos += mouseUpY - mouseDownY;
+			} else if (mode == PlanMode.PM_PICK_MEASURE && startPoint.HasValue && !endPoint.HasValue) {
+
+			}
+			invalidate = true;
 			if (invalidate) {
 				this.Invalidate();
 			}
@@ -720,19 +431,41 @@ namespace Europlan.Common {
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public double PlanScale {
 			get { return this.Scale.HasValue ? this.Scale.Value : 1.0; }
+			set { this.Scale = (float)value; }
 		}
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public WW.Math.Vector2D PlanTranslation {
 			get { return new WW.Math.Vector2D(this.XPos, this.YPos); }
+			set {
+				this.XPos = (float)value.X;
+				this.YPos = (float)value.Y;
+			}
 		}
 
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public PlanMode Mode {
 			get { return this.mode; }
-			set { this.mode = value; }
+			set {
+				this.mode = value;
+				switch (this.mode) {
+					case PlanMode.PM_MOVE:
+						this.Cursor = Cursors.NoMove2D;
+						break;
+					case PlanMode.PM_PICK_MEASURE:
+						this.Cursor = Cursors.Cross;
+						break;
+					case PlanMode.PM_PLANNER_CLICK:
+						this.Cursor = this.ProductPlanner != null && this.ProductPlanner.CustomCursor != null ? this.ProductPlanner.CustomCursor : Cursors.Cross;
+						break;
+					case PlanMode.PM_PLANNER_DRAG:
+						this.Cursor = this.ProductPlanner != null && this.ProductPlanner.CustomCursor != null ? this.ProductPlanner.CustomCursor : Cursors.Cross;
+						break;
+					default:
+						this.Cursor = Cursors.Default;
+						break;
+				}
+			}
 		}
 
 		[Browsable(false)]
@@ -771,7 +504,19 @@ namespace Europlan.Common {
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public ModifierKey ModifierKey {
-			get { return ModifierKey.MK_NONE; }
+			get {
+				ModifierKey key = ModifierKey.MK_NONE;
+				if (this.shiftPressed) {
+					key = key | ModifierKey.MK_SHIFT;
+				}
+				return key;
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool SupportsSnap {
+			get { return false; }
 		}
 		#endregion
 	}

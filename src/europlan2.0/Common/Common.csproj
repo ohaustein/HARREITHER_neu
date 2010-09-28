@@ -197,6 +197,12 @@
     <Compile Include="MaterialEditor\MaterialEditorGrid.Designer.cs">
       <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\CadPanelOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Plan\CadPanelOptions.Designer.cs">
+      <DependentUpon>CadPanelOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plan\CadPlan.cs" />
     <Compile Include="Plan\CadPanel.cs">
       <SubType>UserControl</SubType>
@@ -210,17 +216,17 @@
     <Compile Include="Plan\CadPlanOptionsForm.Designer.cs">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Plan\CadPlanRoomPickerForm.cs">
+    <Compile Include="Plan\PlanPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Plan\PlanPanel.Designer.cs">
+      <DependentUpon>PlanPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plan\RoomPickerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Plan\CadPlanRoomPickerForm.Designer.cs">
-      <DependentUpon>CadPlanRoomPickerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Plan\ImagePlanRoomPickerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Plan\ImagePlanRoomPickerForm.Designer.cs">
-      <DependentUpon>ImagePlanRoomPickerForm.cs</DependentUpon>
+    <Compile Include="Plan\RoomPickerForm.Designer.cs">
+      <DependentUpon>RoomPickerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plan\ImagePlan.cs" />
     <Compile Include="Plan\ImagePlanOptionsForm.cs">
@@ -661,16 +667,20 @@
       <DependentUpon>CadPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Plan\CadPanelOptions.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CadPanelOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Plan\CadPlanOptionsForm.resx">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plan\CadPlanRoomPickerForm.resx">
-      <DependentUpon>CadPlanRoomPickerForm.cs</DependentUpon>
+    <EmbeddedResource Include="Plan\PlanPanel.resx">
       <SubType>Designer</SubType>
+      <DependentUpon>PlanPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plan\ImagePlanRoomPickerForm.resx">
-      <DependentUpon>ImagePlanRoomPickerForm.cs</DependentUpon>
+    <EmbeddedResource Include="Plan\RoomPickerForm.resx">
+      <DependentUpon>RoomPickerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plan\ImagePlanOptionsForm.resx">

@@ -1,5 +1,5 @@
 namespace Europlan.Common {
-	partial class CadPlanRoomPickerForm {
+	partial class RoomPickerForm {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -23,18 +23,19 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CadPlanRoomPickerForm));
+			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RoomPickerForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.lstLayers = new System.Windows.Forms.ListView();
-			this.cadPanel = new Europlan.Common.CadPanel();
-			this.btnPick = new System.Windows.Forms.ToolStripButton();
+			this.btnPickRoom = new System.Windows.Forms.ToolStripButton();
+			this.btnPickUnused = new System.Windows.Forms.ToolStripButton();
+			this.roomPicker = new Europlan.Common.RoomPicker(this.components);
+			this.panel = new Europlan.Common.PlanPanel();
+			this.btnDelUnused = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
-			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip
@@ -45,7 +46,9 @@ namespace Europlan.Common {
             this.btnZoomIn,
             this.toolStripSeparator1,
             this.btnMove,
-            this.btnPick});
+            this.btnPickRoom,
+            this.btnPickUnused,
+            this.btnDelUnused});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(668, 25);
@@ -92,67 +95,66 @@ namespace Europlan.Common {
 			this.btnMove.Text = "toolStripButton1";
 			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
 			// 
-			// panel1
+			// btnPickRoom
 			// 
-			this.panel1.Controls.Add(this.lstLayers);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-			this.panel1.Location = new System.Drawing.Point(0, 25);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(200, 406);
-			this.panel1.TabIndex = 3;
+			this.btnPickRoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnPickRoom.Image = ((System.Drawing.Image)(resources.GetObject("btnPickRoom.Image")));
+			this.btnPickRoom.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnPickRoom.Name = "btnPickRoom";
+			this.btnPickRoom.Size = new System.Drawing.Size(23, 22);
+			this.btnPickRoom.Text = "Raumgeometrie definieren";
+			this.btnPickRoom.Click += new System.EventHandler(this.btnPickRoom_Click);
 			// 
-			// lstLayers
+			// btnPickUnused
 			// 
-			this.lstLayers.CheckBoxes = true;
-			this.lstLayers.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lstLayers.Location = new System.Drawing.Point(0, 0);
-			this.lstLayers.Name = "lstLayers";
-			this.lstLayers.Size = new System.Drawing.Size(200, 406);
-			this.lstLayers.TabIndex = 0;
-			this.lstLayers.UseCompatibleStateImageBehavior = false;
-			this.lstLayers.View = System.Windows.Forms.View.List;
+			this.btnPickUnused.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnPickUnused.Image = ((System.Drawing.Image)(resources.GetObject("btnPickUnused.Image")));
+			this.btnPickUnused.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnPickUnused.Name = "btnPickUnused";
+			this.btnPickUnused.Size = new System.Drawing.Size(23, 22);
+			this.btnPickUnused.Text = "Unbeheizte Flächen definieren";
+			this.btnPickUnused.Click += new System.EventHandler(this.btnPickUnused_Click);
 			// 
-			// cadPanel
+			// roomPicker
 			// 
-			this.cadPanel.BackColor = System.Drawing.Color.White;
-			this.cadPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.cadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.cadPanel.Location = new System.Drawing.Point(200, 25);
-			this.cadPanel.Mode = PlanMode.PM_MOVE;
-			this.cadPanel.Name = "cadPanel";
-			this.cadPanel.PlanDefaultMargin = 5;
-			this.cadPanel.PlanScale = 1;
-			this.cadPanel.PlanTranslation = ((WW.Math.Vector2D)(resources.GetObject("cadPanel.PlanTranslation")));
-			this.cadPanel.Size = new System.Drawing.Size(468, 406);
-			this.cadPanel.TabIndex = 2;
+			this.roomPicker.Mode = Europlan.Common.RoomPicker.RoomPickerMode.RPM_PICK_ROOM;
+			this.roomPicker.Room = null;
+			this.roomPicker.RoomCoordinates = ((System.Collections.Generic.List<WW.Math.Point2D>)(resources.GetObject("roomPicker.RoomCoordinates")));
 			// 
-			// btnPick
+			// panel
 			// 
-			this.btnPick.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnPick.Image = ((System.Drawing.Image)(resources.GetObject("btnPick.Image")));
-			this.btnPick.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnPick.Name = "btnPick";
-			this.btnPick.Size = new System.Drawing.Size(23, 22);
-			this.btnPick.Text = "toolStripButton1";
-			this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
+			this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel.Location = new System.Drawing.Point(0, 25);
+			this.panel.Name = "panel";
+			this.panel.ProductPlanner = this.roomPicker;
+			this.panel.Size = new System.Drawing.Size(668, 406);
+			this.panel.TabIndex = 2;
 			// 
-			// CadPlanRoomPickerForm
+			// btnDelUnused
+			// 
+			this.btnDelUnused.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnDelUnused.Image = ((System.Drawing.Image)(resources.GetObject("btnDelUnused.Image")));
+			this.btnDelUnused.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDelUnused.Name = "btnDelUnused";
+			this.btnDelUnused.Size = new System.Drawing.Size(23, 22);
+			this.btnDelUnused.Text = "Unbeheizte Flächen löschen";
+			this.btnDelUnused.Click += new System.EventHandler(this.btnDelUnused_Click);
+			// 
+			// RoomPickerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(668, 431);
-			this.Controls.Add(this.cadPanel);
-			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.panel);
 			this.Controls.Add(this.toolStrip);
 			this.DoubleBuffered = true;
 			this.MinimizeBox = false;
-			this.Name = "CadPlanRoomPickerForm";
+			this.Name = "RoomPickerForm";
 			this.Text = "Raumtypen";
 			this.Load += new System.EventHandler(this.ImagePlanOptionsForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImagePlanOptionsForm_FormClosing);
 			this.toolStrip.ResumeLayout(false);
 			this.toolStrip.PerformLayout();
-			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -164,11 +166,12 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripButton btnZoomIn;
 		private System.Windows.Forms.ToolStripButton btnZoomOut;
 		private System.Windows.Forms.ToolStripButton btnMove;
-		private CadPanel cadPanel;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.ListView lstLayers;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-		private System.Windows.Forms.ToolStripButton btnPick;
+		private System.Windows.Forms.ToolStripButton btnPickRoom;
+		private RoomPicker roomPicker;
+		private PlanPanel panel;
+		private System.Windows.Forms.ToolStripButton btnPickUnused;
+		private System.Windows.Forms.ToolStripButton btnDelUnused;
 
 
 	}

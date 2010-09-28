@@ -75,15 +75,10 @@ namespace Europlan.Common {
 		private Nullable<Point3D> selectedStartPointCad = null;
 		private Nullable<Point3D> selectedEndPointCad = null;
 
-		private List<Point3D> roomCoordinates = new List<Point3D>();
-		private List<PointF> roomCoordinates2d = new List<PointF>();
-		private List<Point3D> tempCoordinates = new List<Point3D>();
-
 		public event EventHandler<StartPointSelectedArgs> StartPointSelected;
 		public event EventHandler<EndPointSelectedArgs> EndPointSelected;
 
 		private bool unsavedChanges = false;
-		private bool unsavedRoomPickerChanges = false;
 
 		private PlanMode mode = PlanMode.PM_MOVE;
 		private bool shiftPressed = false;
@@ -111,10 +106,6 @@ namespace Europlan.Common {
 			get { return this.unsavedChanges; }
 		}
 
-		public bool UnsavedRoomPickerChanges {
-			get { return this.unsavedRoomPickerChanges; }
-		}
-
 		protected override void OnPaint(PaintEventArgs e) {
 			gdiGraphics3D.Draw(e.Graphics, this.ClientRectangle);
 			if (selectedStartPointCad.HasValue) {
@@ -127,51 +118,10 @@ namespace Europlan.Common {
 				}
 			}
 
-			if (roomCoordinates.Count > 2) {
-				GraphicsPath path = new GraphicsPath();
-				path.StartFigure();
-				Point3D[] array3d = roomCoordinates.ToArray();
-				PointF[] array2d = new PointF[array3d.Length];
-				Point3D temp = Point3D.Zero;
-				for (int i = 0; i < array3d.Length; i++) {
-					temp = gdiGraphics3D.To2DTransform.Transform(array3d[i]);
-					array2d[i] = new PointF((float)temp.X, (float)temp.Y);
-				}
-				path.AddPolygon(array2d);
-				path.CloseFigure();
-				Color c = Color.FromArgb(128, Color.Red);
-				Brush b = new SolidBrush(c);
-				e.Graphics.FillPath(b, path);
-				e.Graphics.DrawPath(new Pen(b), path);
-			}
-
-			if (tempCoordinates.Count > 0 && inDesign) {
-				Point3D[] array3d = tempCoordinates.ToArray();
-				PointF[] array2d = new PointF[array3d.Length + 1];
-				Point3D temp = Point3D.Zero;
-				for (int i = 0; i < array3d.Length; i++) {
-					temp = gdiGraphics3D.To2DTransform.Transform(array3d[i]);
-					array2d[i] = new PointF((float)temp.X, (float)temp.Y);
-				}
-				array2d[array2d.Length - 1] = new PointF(lastMouseLocation.X, lastMouseLocation.Y);
-				//g.DrawPolygon(Pens.Black, points.ToArray());
-
-				GraphicsPath path = new GraphicsPath();
-				path.StartFigure();
-				
-				if (array2d.Length > 2) {
-					path.AddPolygon(array2d);
-				} else {
-					path.AddLine(array2d[0], array2d[1]);
-				}
-				path.CloseFigure();
-				Color c = Color.FromArgb(128, Color.Red);
-				Brush b = new SolidBrush(c);
-				e.Graphics.FillPath(b, path);
-				e.Graphics.DrawPath(new Pen(b), path);
-			}
 			if (this.productPlanner != null) {
-				this.productPlanner.PaintAfterPlanPannel(e, this.gdiGraphics3D.To2DTransform);
+				Point mousePosInPlan = this.PointToClient(MousePosition);
+				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
+				this.productPlanner.PaintAfterPlanPannel(e, this.gdiGraphics3D.To2DTransform, new Point2D(planPoint.X, planPoint.Y), mousePosInPlan);
 			}
 		}
 
@@ -199,20 +149,6 @@ namespace Europlan.Common {
 						this.CalculateTo2DTransform();
 						this.Invalidate();
 					}
-				}
-			}
-		}
-
-		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public List<PointF> RoomCoordinates {
-			get {
-				return roomCoordinates2d; 
-			}
-			set {
-				this.roomCoordinates.Clear();
-				this.roomCoordinates2d = value;
-				foreach (PointF point in value) {
-					this.roomCoordinates.Add(new Point3D(point.X, point.Y, 0));
 				}
 			}
 		}
@@ -355,48 +291,7 @@ namespace Europlan.Common {
 				Point2D pickedPoint;
 				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
-				invalidate = this.productPlanner.PlannerClick(new Point2D(planPoint.X, planPoint.Y), new PointF((float)pickedPoint.X, (float)pickedPoint.Y), e.Button);
-			} else if (this.mode == PlanMode.PM_PICK_ROOM) {
-				this.unsavedChanges = true;
-
-				Point2D pickedPoint;
-				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
-
-				Matrix4D inverse = gdiGraphics3D.To2DTransform.GetInverse();
-				Point3D currentPoint = inverse.Transform(new Point3D(pickedPoint, 0));
-
-				if (e.Button == MouseButtons.Left) {
-					if (!inDesign && roomCoordinates.Count > 0) {
-						// TODO
-						DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
-						if (result == DialogResult.No) {
-							return;
-						}
-					}
-					unsavedRoomPickerChanges = true;
-					tempCoordinates.Add(currentPoint);
-					inDesign = true;
-					roomCoordinates.Clear();
-				} else if (e.Button == MouseButtons.Right) {
-					tempCoordinates.Add(currentPoint);
-					if (tempCoordinates.Count > 2) {
-						DialogResult result = MessageBox.Show("Wollen Sie diese Raumgeometrie übernehmen?", "Raumgeometrie übernehmen?", MessageBoxButtons.YesNo);
-						if (result.Equals(DialogResult.Yes)) {
-							roomCoordinates.AddRange(tempCoordinates);
-
-							this.roomCoordinates2d.Clear();
-							foreach (Point3D point3d in roomCoordinates) {
-								this.roomCoordinates2d.Add(new PointF((float)point3d.X, (float)point3d.Y));
-							}	
-
-							unsavedRoomPickerChanges = true;
-						}
-					}
-					tempCoordinates.Clear();
-					inDesign = false;
-				}
-
-				invalidate = true;
+				invalidate = this.productPlanner.PlannerClick(new Point2D(planPoint.X, planPoint.Y), new Point((int)pickedPoint.X, (int)pickedPoint.Y), e.Button);
 			}
 			if (invalidate) {
 				Invalidate();
@@ -427,8 +322,14 @@ namespace Europlan.Common {
 				Point2D pickedPoint;
 				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
-				invalidate = this.productPlanner.PlannerDragMove(new Point2D(planPoint.X, planPoint.Y), e.Location, lastPlanPoint, lastMouseLocation, e.Button);
-			}
+				invalidate = this.productPlanner.PlannerDragMove(new Point2D(planPoint.X, planPoint.Y), e.Location, e.Button);
+			} 
+			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null) {
+				Point2D pickedPoint;
+				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
+				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
+				invalidate = this.productPlanner.PlannerMouseMove(new Point2D(planPoint.X, planPoint.Y), e.Location, e.Button);
+			} 
 			if (mouseDown && ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || e.Button == MouseButtons.Middle)) {
 				this.unsavedChanges = true;
 				translation += new Vector3D(e.X - lastMouseLocation.X, e.Y - lastMouseLocation.Y, 0);
@@ -436,7 +337,7 @@ namespace Europlan.Common {
 				invalidate = true;
 			}
 			lastMouseLocation = e.Location;
-			if ((mode == PlanMode.PM_PICK_ROOM) || (mode == PlanMode.PM_PICK_MEASURE && selectedStartPointCad.HasValue && !selectedEndPointCad.HasValue)) {
+			if (mode == PlanMode.PM_PICK_MEASURE && selectedStartPointCad.HasValue && !selectedEndPointCad.HasValue) {
 				/*int x = (int)selectedStartPoint.Value.X;
 				int y = (int)selectedStartPoint.Value.Y;
 				int width = x - e.Location.X;
@@ -879,11 +780,36 @@ namespace Europlan.Common {
 			}
 		}
 
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[DefaultValue(PlanMode.PM_MOVE)]
 		public PlanMode Mode {
 			get { return this.mode; }
-			set { this.mode = value; }
+			set {
+				this.mode = value;
+				switch (this.mode) {
+					case PlanMode.PM_MOVE:
+						this.Cursor = Cursors.NoMove2D;
+						break;
+					case PlanMode.PM_PICK_MEASURE:
+						this.Cursor = Cursors.Cross;
+						break;
+					case PlanMode.PM_PLANNER_CLICK:
+						this.Cursor = this.ProductPlanner != null && this.ProductPlanner.CustomCursor != null ? this.ProductPlanner.CustomCursor : Cursors.Cross;
+						break;
+					case PlanMode.PM_PLANNER_DRAG:
+						this.Cursor = this.ProductPlanner != null && this.ProductPlanner.CustomCursor != null ? this.ProductPlanner.CustomCursor : Cursors.Cross;
+						break;
+					default:
+						this.Cursor = Cursors.Default;
+						break;
+				}
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public override Cursor Cursor {
+			get { return base.Cursor; }
+			set { base.Cursor = value; }
 		}
 
 		private CadPlan plan = null;
@@ -919,6 +845,12 @@ namespace Europlan.Common {
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public ModifierKey ModifierKey {
 			get { return ModifierKey.MK_NONE; }
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool SupportsSnap {
+			get { return true; }
 		}
 		#endregion
 	}

@@ -25,11 +25,12 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.SuspendLayout();
 			// 
-			// PicturePanel
+			// CadPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Name = "PicturePanel";
+			this.Cursor = System.Windows.Forms.Cursors.NoMove2D;
+			this.Name = "CadPanel";
 			this.Size = new System.Drawing.Size(379, 283);
 			this.ResumeLayout(false);
 

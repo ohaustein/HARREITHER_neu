@@ -45,12 +45,13 @@ namespace Europlan.Common {
 			set { this.connectedPlanPanel = value; }
 		}
 
-		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation) {
+		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
 				GraphicsPath path = new GraphicsPath();
 				List<PointF> transformedPoints = new List<PointF>();
-				foreach (PointF point in this.product.AssociatedRoom.RoomCoordinates) {
-					transformedPoints.Add(additionalTransformation.TransformTo2D(point));
+				foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+					Point2D tmp = additionalTransformation.TransformTo2D(point);
+					transformedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
 				}
 				path.AddPolygon(transformedPoints.ToArray());
 				//e.Graphics.DrawPath(System.Drawing.Pens.Red, path);
@@ -75,29 +76,33 @@ namespace Europlan.Common {
 			}
 		}
 
-		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.PointF screenPoint, MouseButtons button) {
+		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
 			return false;
 		}
 
-		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.PointF screenPoint, MouseButtons button) {
+		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
 			return false;
 		}
 
-		public bool PlannerDragStart(WW.Math.Point2D planPoint, System.Drawing.PointF screenPoint, MouseButtons button) {
+		public bool PlannerDragStart(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
 			return false;
 		}
 
-		public bool PlannerDragMove(WW.Math.Point2D planPoint, System.Drawing.PointF screenPoint, WW.Math.Point2D lastPlanPoint, System.Drawing.PointF lastScreenPoint, MouseButtons button) {
+		public bool PlannerDragMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
 			return false;
 		}
 
-		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.PointF screenPoint, MouseButtons button) {
+		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
 			return false;
+		}
+
+		public Cursor CustomCursor {
+			get { return null; }
 		}
 		#endregion
 	}

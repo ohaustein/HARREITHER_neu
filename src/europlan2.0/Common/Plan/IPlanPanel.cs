@@ -9,9 +9,6 @@ namespace Europlan.Common {
 	public enum PlanMode {
 		PM_MOVE,
 		PM_PICK_MEASURE,
-		PM_PICK_ROOM,
-		PM_PICK_UNUSED,
-		PM_DEL_UNUSED,
 		PM_PLANNER_CLICK,
 		PM_PLANNER_DRAG,
 	}
@@ -36,10 +33,12 @@ namespace Europlan.Common {
 
 		double PlanScale {
 			get;
+			set;
 		}
 
 		Vector2D PlanTranslation {
 			get;
+			set;
 		}
 
 		PlanMode Mode {
@@ -66,6 +65,16 @@ namespace Europlan.Common {
 
 		System.Windows.Forms.Cursor Cursor {
 			set;
+			get;
+		}
+
+		bool SupportsSnap {
+			get;
+		}
+
+		void AddScale(double addedScale, Nullable<Point2D> center);
+
+		bool UnsavedChanges {
 			get;
 		}
 	}
