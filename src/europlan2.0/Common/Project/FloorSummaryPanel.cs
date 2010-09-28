@@ -434,7 +434,9 @@ namespace Europlan.Common {
 							foreach (Room room in floor.Rooms) {
 								if (room.RoomCoordinates.Count > 0) {
 									room.RoomCoordinates.Clear();
+									room.RoomUnusedAreaCoordinates.Clear();
 									room.CeilingCoordinates.Clear();
+									room.CeilingUnusedAreaCoordinates.Clear();
 								}
 							}
 						}
