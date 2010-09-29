@@ -104,6 +104,10 @@ namespace Europlan.Common {
 		public Cursor CustomCursor {
 			get { return null; }
 		}
+
+		public bool PlannerKeyPress(Keys key) {
+			return false;
+		}
 		#endregion
 	}
 }
