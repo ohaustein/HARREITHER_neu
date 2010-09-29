@@ -70,7 +70,7 @@ namespace Europlan.Common {
 					this.roomCoordinates.Clear();
 					this.unusedCoordinates.Clear();
 					if (this.ConnectedPlanPanel != null) {
-						this.ConnectedPlanPanel.Invalidate();
+						this.ConnectedPlanPanel.InvalidateGraphics();
 					}
 				}
 				this.mode = value;
@@ -366,9 +366,9 @@ namespace Europlan.Common {
 					}
 				}
 				if (UnusedAreaIsValid(normalizedPoint)) {
-					this.ConnectedPlanPanel.Cursor = isStart ? Cursors.Hand : Cursors.Cross;
+					this.ConnectedPlanPanel.PlanCursor = isStart ? Cursors.Hand : Cursors.Cross;
 				} else {
-					this.ConnectedPlanPanel.Cursor = Cursors.No;
+					this.ConnectedPlanPanel.PlanCursor = Cursors.No;
 				}
 				return inDesign;
 			} else if (this.Mode == RoomPickerMode.RPM_DEL_UNUSED) {
@@ -380,9 +380,9 @@ namespace Europlan.Common {
 					}
 				}
 				if (ok) {
-					this.ConnectedPlanPanel.Cursor = Cursors.Hand;
+					this.ConnectedPlanPanel.PlanCursor = Cursors.Hand;
 				} else {
-					this.ConnectedPlanPanel.Cursor = Cursors.No;
+					this.ConnectedPlanPanel.PlanCursor = Cursors.No;
 				}
 
 				return false;
@@ -394,7 +394,7 @@ namespace Europlan.Common {
 						normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[coordsPickedSoFar.Count - 1], coordsPickedSoFar[0], planPoint, coordsPickedSoFar[0], out isStart);
 					}
 				}
-				this.ConnectedPlanPanel.Cursor = isStart ? Cursors.Hand : Cursors.Cross;
+				this.ConnectedPlanPanel.PlanCursor = isStart ? Cursors.Hand : Cursors.Cross;
 				return inDesign;
 			}
 			return false;
@@ -434,6 +434,7 @@ namespace Europlan.Common {
 
 		private Point2D GetNormalizedPoint(Point2D basePoint1, Nullable<Point2D> basePoint2, Point2D currentPoint, Nullable<Point2D> startPoint, out bool isStartPoint) {
 			if (startPoint.HasValue) {
+				// TODO include transformation to 1000x1000 pixel for cad plans
 				double xDistStart = (startPoint.Value.X - currentPoint.X) * this.ConnectedPlanPanel.PlanScale;
 				double yDistStart = (startPoint.Value.Y - currentPoint.Y) * this.ConnectedPlanPanel.PlanScale;
 				if (xDistStart * xDistStart + yDistStart * yDistStart < startPointSnapSqDist) {

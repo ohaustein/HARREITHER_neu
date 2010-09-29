@@ -298,6 +298,9 @@ namespace Europlan.Common {
 			}
 		}
 
+		private Cursor tempCursor = Cursors.Default;
+		private bool inMove = false;
+
 		protected override void OnMouseDown(MouseEventArgs e) {
 			base.OnMouseDown(e);
 			bool invalidate = false;
@@ -309,6 +312,11 @@ namespace Europlan.Common {
 				lastPlanPoint = new Point2D(planPoint.X, planPoint.Y);
 			}
 			lastMouseLocation = e.Location;
+			if (e.Button == MouseButtons.Middle) {
+				this.inMove = true;
+				this.tempCursor = this.Cursor;
+				this.Cursor = Cursors.SizeAll;
+			}
 			mouseDown = true;
 			if (invalidate) {
 				Invalidate();
@@ -392,6 +400,10 @@ namespace Europlan.Common {
 					}
 				}
 				invalidate = true;
+			}
+			if (e.Button == MouseButtons.Middle) {
+				this.inMove = false;
+				this.Cursor = this.tempCursor;
 			}
 			if (invalidate) {
 				Invalidate();
@@ -787,7 +799,7 @@ namespace Europlan.Common {
 				this.mode = value;
 				switch (this.mode) {
 					case PlanMode.PM_MOVE:
-						this.Cursor = Cursors.NoMove2D;
+						this.Cursor = Cursors.SizeAll;
 						break;
 					case PlanMode.PM_PICK_MEASURE:
 						this.Cursor = Cursors.Cross;
@@ -851,6 +863,21 @@ namespace Europlan.Common {
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool SupportsSnap {
 			get { return true; }
+		}
+
+		public void InvalidateGraphics() {
+			this.Invalidate();
+		}
+
+		public Cursor PlanCursor {
+			get { return this.Cursor; }
+			set {
+				if (this.inMove) {
+					this.tempCursor = value;
+				} else {
+					this.Cursor = value;
+				}
+			}
 		}
 		#endregion
 

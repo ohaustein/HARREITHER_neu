@@ -9,7 +9,7 @@ using WW.Cad.Model;
 using WW.Math;
 
 namespace Europlan.Common {
-	public partial class PlanPanel : UserControl, IPlanPanel {
+	public partial class PlanPanel : UserControl, IPlanPanel, IProductPlanner {
 
 		public enum PlanTypeEnum {
 			PT_CAD,
@@ -19,7 +19,8 @@ namespace Europlan.Common {
 		private Plan plan = null;
 		private IPlanPanel panel = null;
 		private PlanMode tmpMode = PlanMode.PM_MOVE;
-		private IProductPlanner tmpPlanner = null;
+		private IProductPlanner productPlanner = null;
+		private IPlanPanel connectedPlanPanel;
 
 		public PlanPanel() {
 			InitializeComponent();
@@ -39,7 +40,7 @@ namespace Europlan.Common {
 				if (this.plan != value)  {
 					if (this.panel != null) {
 						tmpMode = this.panel.Mode;
-						tmpPlanner = this.panel.ProductPlanner;
+						tmpCursor = this.panel.PlanCursor;
 					}
 					this.plan = value;
 					if (this.plan is CadPlan) {
@@ -53,6 +54,8 @@ namespace Europlan.Common {
 						this.cadPanel.Visible = true;
 						this.cadPanelOptions.Visible = true;
 						this.cadOptions.Visible = true;
+						this.imagePanel.ProductPlanner = null;
+						this.cadPanel.ProductPlanner = this;
 					} else if (this.plan is ImagePlan) {
 						this.imagePanel.Plan = plan;
 						this.imagePanel.Plan = plan;
@@ -64,15 +67,19 @@ namespace Europlan.Common {
 						this.cadPanel.Visible = false;
 						this.cadOptions.Visible = false;
 						this.imagePanel.Visible = true;
+						this.cadPanel.ProductPlanner = null;
+						this.imagePanel.ProductPlanner = this;
 					} else {
 						this.imagePanel.Visible = false;
 						this.cadPanel.Visible = false;
 						this.cadOptions.Visible = false;
 						this.panel = null;
+						this.cadPanel.ProductPlanner = null;
+						this.imagePanel.ProductPlanner = null;
 					}
 					if (this.panel != null) {
 						this.panel.Mode = tmpMode;
-						this.panel.ProductPlanner = tmpPlanner;
+						this.panel.PlanCursor = tmpCursor;
 					}
 				}
 			}
@@ -82,12 +89,20 @@ namespace Europlan.Common {
 		#region IPlanPanel Members
 
 		public IProductPlanner ProductPlanner {
-			get { return this.panel == null ? tmpPlanner : this.panel.ProductPlanner; }
+			get { return this.productPlanner; }
 			set {
+				if (this.productPlanner != null) {
+					this.productPlanner.ConnectedPlanPanel = null;
+				}
+				if (value != null && value.ConnectedPlanPanel != null) {
+					value = null;
+				}
+				this.productPlanner = value;
+				if (this.productPlanner != null) {
+					this.productPlanner.ConnectedPlanPanel = this;
+				}
 				if (this.panel != null) {
-					this.panel.ProductPlanner = value;
-				} else {
-					tmpPlanner = value;
+					this.panel.InvalidateGraphics();
 				}
 			}
 		}
@@ -164,6 +179,12 @@ namespace Europlan.Common {
 		public bool UnsavedChanges {
 			get { return this.panel == null ? false : this.panel.UnsavedChanges; }
 		}
+
+		public void InvalidateGraphics() {
+			if (this.panel != null) {
+				this.panel.InvalidateGraphics();
+			}
+		}
 		#endregion
 
 		private void cadPanelOptions_InvalidateNeeded(object sender, EventArgs e) {
@@ -171,5 +192,95 @@ namespace Europlan.Common {
 				this.cadPanel.RecreateDrawables();
 			}
 		}
+
+		#region IProductPlanner Members
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public IPlanPanel ConnectedPlanPanel {
+			get { return this.connectedPlanPanel; }
+			set { this.connectedPlanPanel = value; }
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Cursor CustomCursor {
+			get { return this.ProductPlanner != null ? this.ProductPlanner.CustomCursor : null; }
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public void PaintAfterPlanPannel(PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
+			if (this.ProductPlanner != null) {
+				this.ProductPlanner.PaintAfterPlanPannel(e, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool PlannerClick(Point2D planPoint, Point pointInControl, MouseButtons button) {
+			if (this.ProductPlanner != null) {
+				return this.ProductPlanner.PlannerClick(planPoint, pointInControl, button);
+			}
+			return false;
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool PlannerMouseMove(Point2D planPoint, Point pointInControl, MouseButtons button) {
+			if (this.ProductPlanner != null) {
+				return this.ProductPlanner.PlannerMouseMove(planPoint, pointInControl, button);
+			}
+			return false;
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool PlannerDragStart(Point2D planPoint, Point pointInControl, MouseButtons button) {
+			if (this.ProductPlanner != null) {
+				return this.ProductPlanner.PlannerDragStart(planPoint, pointInControl, button);
+			}
+			return false;
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool PlannerDragMove(Point2D planPoint, Point pointInControl, MouseButtons button) {
+			if (this.ProductPlanner != null) {
+				return this.ProductPlanner.PlannerDragMove(planPoint, pointInControl, button);
+			}
+			return false;
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool PlannerDragEnd(Point2D planPoint, Point pointInControl, MouseButtons button) {
+			if (this.ProductPlanner != null) {
+				return this.ProductPlanner.PlannerDragEnd(planPoint, pointInControl, button);
+			}
+			return false;
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public bool PlannerKeyPress(Keys key) {
+			if (this.ProductPlanner != null) {
+				return this.ProductPlanner.PlannerKeyPress(key);
+			}
+			return false;
+		}
+
+		private Cursor tmpCursor = Cursors.Default;
+
+		public Cursor PlanCursor {
+			get { return this.panel != null ? this.panel.PlanCursor : tmpCursor; }
+			set {
+				if (this.panel != null) {
+					this.panel.PlanCursor = value;
+				} else {
+					this.tmpCursor = value;
+				}
+			}
+		}
+		#endregion
 	}
 }

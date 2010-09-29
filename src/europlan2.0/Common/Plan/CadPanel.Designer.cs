@@ -29,7 +29,7 @@ namespace Europlan.Common {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Cursor = System.Windows.Forms.Cursors.NoMove2D;
+			this.Cursor = System.Windows.Forms.Cursors.SizeAll;
 			this.Name = "CadPanel";
 			this.Size = new System.Drawing.Size(379, 283);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CadPanel_KeyDown);

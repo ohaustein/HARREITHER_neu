@@ -450,7 +450,7 @@ namespace Europlan.Common {
 				this.mode = value;
 				switch (this.mode) {
 					case PlanMode.PM_MOVE:
-						this.Cursor = Cursors.NoMove2D;
+						this.Cursor = Cursors.SizeAll;
 						break;
 					case PlanMode.PM_PICK_MEASURE:
 						this.Cursor = Cursors.Cross;
@@ -517,6 +517,21 @@ namespace Europlan.Common {
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool SupportsSnap {
 			get { return false; }
+		}
+
+		public void InvalidateGraphics() {
+			this.Invalidate();
+		}
+
+		public Cursor PlanCursor {
+			get { return this.Cursor; }
+			set {
+				if (inMove) {
+					this.tempCursor = value;
+				} else {
+					this.Cursor = value;
+				}
+			}
 		}
 		#endregion
 

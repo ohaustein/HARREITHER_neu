@@ -63,7 +63,7 @@ namespace Europlan.Common {
 			get;
 		}
 
-		System.Windows.Forms.Cursor Cursor {
+		System.Windows.Forms.Cursor PlanCursor {
 			set;
 			get;
 		}
@@ -78,6 +78,6 @@ namespace Europlan.Common {
 			get;
 		}
 
-		void Invalidate();
+		void InvalidateGraphics();
 	}
 }
