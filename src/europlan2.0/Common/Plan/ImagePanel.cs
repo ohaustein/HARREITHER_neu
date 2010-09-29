@@ -367,10 +367,10 @@ namespace Europlan.Common {
 
 				this.XPos += mouseUpX - mouseDownX;
 				this.YPos += mouseUpY - mouseDownY;
+				invalidate = true;
 			} else if (mode == PlanMode.PM_PICK_MEASURE && startPoint.HasValue && !endPoint.HasValue) {
 
 			}
-			invalidate = true;
 			if (invalidate) {
 				this.Invalidate();
 			}
