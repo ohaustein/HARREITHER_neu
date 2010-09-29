@@ -32,9 +32,9 @@ namespace Europlan.Common {
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnPickRoom = new System.Windows.Forms.ToolStripButton();
 			this.btnPickUnused = new System.Windows.Forms.ToolStripButton();
+			this.btnDelUnused = new System.Windows.Forms.ToolStripButton();
 			this.roomPicker = new Europlan.Common.RoomPicker(this.components);
 			this.panel = new Europlan.Common.PlanPanel();
-			this.btnDelUnused = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -115,21 +115,6 @@ namespace Europlan.Common {
 			this.btnPickUnused.Text = "Unbeheizte Flächen definieren";
 			this.btnPickUnused.Click += new System.EventHandler(this.btnPickUnused_Click);
 			// 
-			// roomPicker
-			// 
-			this.roomPicker.Mode = Europlan.Common.RoomPicker.RoomPickerMode.RPM_PICK_ROOM;
-			this.roomPicker.Room = null;
-			this.roomPicker.RoomCoordinates = ((System.Collections.Generic.List<WW.Math.Point2D>)(resources.GetObject("roomPicker.RoomCoordinates")));
-			// 
-			// panel
-			// 
-			this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel.Location = new System.Drawing.Point(0, 25);
-			this.panel.Name = "panel";
-			this.panel.ProductPlanner = this.roomPicker;
-			this.panel.Size = new System.Drawing.Size(668, 406);
-			this.panel.TabIndex = 2;
-			// 
 			// btnDelUnused
 			// 
 			this.btnDelUnused.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -139,6 +124,22 @@ namespace Europlan.Common {
 			this.btnDelUnused.Size = new System.Drawing.Size(23, 22);
 			this.btnDelUnused.Text = "Unbeheizte Flächen löschen";
 			this.btnDelUnused.Click += new System.EventHandler(this.btnDelUnused_Click);
+			// 
+			// roomPicker
+			// 
+			this.roomPicker.Mode = Europlan.Common.RoomPicker.RoomPickerMode.RPM_NONE;
+			this.roomPicker.RoomCoordinates = ((System.Collections.Generic.List<WW.Math.Point2D>)(resources.GetObject("roomPicker.RoomCoordinates")));
+			this.roomPicker.UnusedCoordinates = ((System.Collections.Generic.List<System.Collections.Generic.List<WW.Math.Point2D>>)(resources.GetObject("roomPicker.UnusedCoordinates")));
+			this.roomPicker.ModeChanged += new System.EventHandler(this.roomPicker_ModeChanged);
+			// 
+			// panel
+			// 
+			this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel.Location = new System.Drawing.Point(0, 25);
+			this.panel.Name = "panel";
+			this.panel.ProductPlanner = this.roomPicker;
+			this.panel.Size = new System.Drawing.Size(668, 406);
+			this.panel.TabIndex = 2;
 			// 
 			// RoomPickerForm
 			// 

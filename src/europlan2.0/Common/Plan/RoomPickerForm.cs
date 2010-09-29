@@ -92,45 +92,69 @@ namespace Europlan.Common {
 
 		private void btnMove_Click(object sender, EventArgs e) {
 			if (!btnMove.Checked) {
-				this.btnMove.Checked = true;
-				this.btnPickRoom.Checked = false;
-				this.btnPickUnused.Checked = false;
-				this.btnDelUnused.Checked = false;
+				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_NONE;
 				this.panel.Mode = PlanMode.PM_MOVE;
+				this.UpdateButtons();
 			}
 		}
 
 		private void btnPickRoom_Click(object sender, EventArgs e) {
 			if (!btnPickRoom.Checked) {
-				this.btnMove.Checked = false;
-				this.btnPickRoom.Checked = true;
-				this.btnPickUnused.Checked = false;
-				this.btnDelUnused.Checked = false;
 				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_PICK_ROOM;
 				this.panel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
 			}
 		}
 
 		private void btnPickUnused_Click(object sender, EventArgs e) {
 			if (!btnPickUnused.Checked) {
-				this.btnMove.Checked = false;
-				this.btnPickRoom.Checked = false;
-				this.btnPickUnused.Checked = true;
-				this.btnDelUnused.Checked = false;
 				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_PICK_UNUSED;
 				this.panel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
 			}
 		}
 
 		private void btnDelUnused_Click(object sender, EventArgs e) {
 			if (!btnDelUnused.Checked) {
+				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_DEL_UNUSED;
+				this.panel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
+			}
+		}
+
+		private void UpdateButtons() {
+			if (this.panel.Mode == PlanMode.PM_MOVE) {
+				this.btnMove.Checked = true;
+				this.btnPickRoom.Checked = false;
+				this.btnPickUnused.Checked = false;
+				this.btnDelUnused.Checked = false;
+			} else if (this.panel.Mode == PlanMode.PM_PLANNER_CLICK) {
+				if (this.roomPicker.Mode == RoomPicker.RoomPickerMode.RPM_PICK_ROOM) {
+					this.btnMove.Checked = false;
+					this.btnPickRoom.Checked = true;
+					this.btnPickUnused.Checked = false;
+					this.btnDelUnused.Checked = false;
+				} else if (this.roomPicker.Mode == RoomPicker.RoomPickerMode.RPM_PICK_UNUSED) {
+					this.btnMove.Checked = false;
+					this.btnPickRoom.Checked = false;
+					this.btnPickUnused.Checked = true;
+					this.btnDelUnused.Checked = false;
+				} else if (this.roomPicker.Mode == RoomPicker.RoomPickerMode.RPM_DEL_UNUSED) {
+					this.btnMove.Checked = false;
+					this.btnPickRoom.Checked = false;
+					this.btnPickUnused.Checked = false;
+					this.btnDelUnused.Checked = true;
+				}
+			} else {
 				this.btnMove.Checked = false;
 				this.btnPickRoom.Checked = false;
 				this.btnPickUnused.Checked = false;
-				this.btnDelUnused.Checked = true;
-				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_DEL_UNUSED;
-				this.panel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.btnDelUnused.Checked = false;
 			}
+		}
+
+		private void roomPicker_ModeChanged(object sender, EventArgs e) {
+			this.UpdateButtons();
 		}
 	}
 }

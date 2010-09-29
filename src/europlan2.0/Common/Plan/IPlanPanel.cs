@@ -77,5 +77,7 @@ namespace Europlan.Common {
 		bool UnsavedChanges {
 			get;
 		}
+
+		void Invalidate();
 	}
 }

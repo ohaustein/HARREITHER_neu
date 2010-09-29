@@ -519,6 +519,14 @@ namespace Europlan.Common {
 			get { return false; }
 		}
 		#endregion
+
+		private void ImagePanel_KeyDown(object sender, KeyEventArgs e) {
+			if (this.ProductPlanner != null) {
+				if (this.ProductPlanner.PlannerKeyPress(e.KeyCode)) {
+					this.Invalidate();
+				}
+			}
+		}
 	}
 
 }

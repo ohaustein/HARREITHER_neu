@@ -33,6 +33,7 @@ namespace Europlan.Common {
 			this.Name = "ImagePanel";
 			this.Size = new System.Drawing.Size(379, 283);
 			this.Resize += new System.EventHandler(this.PicturePanel_Resize);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ImagePanel_KeyDown);
 			this.ResumeLayout(false);
 
 		}

@@ -24,5 +24,7 @@ namespace Europlan.Common {
 		bool PlannerDragStart(Point2D planPoint, Point pointInControl, MouseButtons button);
 		bool PlannerDragMove(Point2D planPoint, Point pointInControl, MouseButtons button);
 		bool PlannerDragEnd(Point2D planPoint, Point pointInControl, MouseButtons button);
+
+		bool PlannerKeyPress(Keys key);
 	}
 }

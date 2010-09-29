@@ -853,5 +853,12 @@ namespace Europlan.Common {
 			get { return true; }
 		}
 		#endregion
+
+		private void CadPanel_KeyDown(object sender, KeyEventArgs e) {
+			if (this.ProductPlanner != null) {
+				this.ProductPlanner.PlannerKeyPress(e.KeyCode);
+			}
+		}
+
 	}
 }

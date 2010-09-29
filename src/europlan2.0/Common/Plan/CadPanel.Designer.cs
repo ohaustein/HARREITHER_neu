@@ -32,6 +32,7 @@ namespace Europlan.Common {
 			this.Cursor = System.Windows.Forms.Cursors.NoMove2D;
 			this.Name = "CadPanel";
 			this.Size = new System.Drawing.Size(379, 283);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CadPanel_KeyDown);
 			this.ResumeLayout(false);
 
 		}
