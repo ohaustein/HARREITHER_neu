@@ -55,6 +55,10 @@ namespace Europlan.Common {
 			get;
 		}
 
+		double ScaleForCalculation {
+			get;
+		}
+
 		ColorMode ColorMode {
 			get;
 		}

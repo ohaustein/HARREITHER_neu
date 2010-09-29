@@ -879,6 +879,12 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public double ScaleForCalculation {
+			get { return Math.Abs(this.PlanTransformation.M00); }
+		}
 		#endregion
 
 		private void CadPanel_KeyDown(object sender, KeyEventArgs e) {

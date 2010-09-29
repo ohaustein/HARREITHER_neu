@@ -533,6 +533,12 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public double ScaleForCalculation {
+			get { return this.PlanScale; }
+		}
 		#endregion
 
 		private void ImagePanel_KeyDown(object sender, KeyEventArgs e) {

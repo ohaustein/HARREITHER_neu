@@ -185,6 +185,12 @@ namespace Europlan.Common {
 				this.panel.InvalidateGraphics();
 			}
 		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public double ScaleForCalculation {
+			get { return this.panel != null ? this.panel.ScaleForCalculation : 1.0; }
+		}
 		#endregion
 
 		private void cadPanelOptions_InvalidateNeeded(object sender, EventArgs e) {
