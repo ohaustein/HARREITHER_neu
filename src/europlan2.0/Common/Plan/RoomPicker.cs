@@ -434,9 +434,14 @@ namespace Europlan.Common {
 
 		private Point2D GetNormalizedPoint(Point2D basePoint1, Nullable<Point2D> basePoint2, Point2D currentPoint, Nullable<Point2D> startPoint, out bool isStartPoint) {
 			if (startPoint.HasValue) {
-				// TODO include transformation to 1000x1000 pixel for cad plans
-				double xDistStart = (startPoint.Value.X - currentPoint.X) * this.ConnectedPlanPanel.PlanScale;
-				double yDistStart = (startPoint.Value.Y - currentPoint.Y) * this.ConnectedPlanPanel.PlanScale;
+				// TODO fix this hack for cad,
+				// proper implementation of planscale, plantranslation and plantransformation needed!
+				double scale = this.ConnectedPlanPanel.PlanScale;
+				if (this.ConnectedPlanPanel is CadPanel) {
+					scale = this.ConnectedPlanPanel.PlanTransformation.M00;
+				}
+				double xDistStart = (startPoint.Value.X - currentPoint.X) * scale;
+				double yDistStart = (startPoint.Value.Y - currentPoint.Y) * scale;
 				if (xDistStart * xDistStart + yDistStart * yDistStart < startPointSnapSqDist) {
 					isStartPoint = true;
 					return startPoint.Value;
