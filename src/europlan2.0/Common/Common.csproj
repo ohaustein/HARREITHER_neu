@@ -216,6 +216,8 @@
     <Compile Include="Plan\CadPlanOptionsForm.Designer.cs">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\IDragableObject.cs" />
+    <Compile Include="Plan\IPickableObject.cs" />
     <Compile Include="Plan\PlanPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -263,6 +265,7 @@
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ExtendedCorrections.cs" />
+    <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstruction.cs" />
     <Compile Include="Products\ModulKlimaDeckePlanner.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -275,6 +278,8 @@
     <Compile Include="Products\ModulKlimaDeckePlannerForm.Designer.cs">
       <DependentUpon>ModulKlimaDeckePlannerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstructionAkustik.cs" />
+    <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstructionGlatt.cs" />
     <Compile Include="Products\PlannedEcothermProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -916,6 +921,7 @@
     <Content Include="Reporting\QuickDimensioning.lst">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\pickUnused.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

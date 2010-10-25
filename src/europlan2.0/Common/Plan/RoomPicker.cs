@@ -59,9 +59,11 @@ namespace Europlan.Common {
 			get { return this.mode; }
 			set {
 				if (value == RoomPickerMode.RPM_PICK_ROOM) {
-					DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
-					if (result == DialogResult.No) {
-						return;
+					if (this.room != null && this.room.RoomCoordinates != null && this.room.RoomCoordinates.Count > 0) {
+						DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+						if (result == DialogResult.No) {
+							return;
+						}
 					}
 					this.oldRoomCoordinates.Clear();
 					this.oldRoomCoordinates.AddRange(this.roomCoordinates);
@@ -146,7 +148,7 @@ namespace Europlan.Common {
 				//g.DrawPolygon(Pens.Black, points.ToArray());
 
 				GraphicsPath path = new GraphicsPath();
-				//path.StartFigure();
+				path.StartFigure();
 				PointF[] array = new PointF[points.Count];
 				int i = 0;
 				foreach (Point2D point in points) {
@@ -154,11 +156,12 @@ namespace Europlan.Common {
 					array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
 				}
 				if (array.Length > 2) {
-					path.AddLines(array);
+					//path.AddLines(array);
+					path.AddPolygon(array);
 				} else {
 					path.AddLine(array[0], array[1]);
 				}
-				//path.CloseFigure();
+				path.CloseFigure();
 				Brush b = null;
 				if (this.Mode == RoomPickerMode.RPM_PICK_ROOM) {
 					Color c = Color.FromArgb(128, Color.Red);
@@ -432,42 +435,71 @@ namespace Europlan.Common {
 		private double angleSnapDist = Math.Tan(10.0 / 180.0 * Math.PI);
 		private double startPointSnapSqDist = 100;
 
-		private Point2D GetNormalizedPoint(Point2D basePoint1, Nullable<Point2D> basePoint2, Point2D currentPoint, Nullable<Point2D> startPoint, out bool isStartPoint) {
+		private Point2D GetNormalizedPoint(Point2D basePoint1_, Nullable<Point2D> basePoint2_, Point2D currentPoint_, Nullable<Point2D> startPoint_, out bool isStartPoint) {
+			Matrix3D rotationMatrix = Transformation3D.Rotate(this.ConnectedPlanPanel.Plan.Rotation / 180 * Math.PI);
+			Point2D basePoint1 = rotationMatrix.Transform(basePoint1_);
+			Nullable<Point2D> basePoint2 = basePoint2_.HasValue ? rotationMatrix.Transform(basePoint2_.Value) : basePoint2_;
+			Point2D currentPoint = rotationMatrix.Transform(currentPoint_);
+			Nullable<Point2D> startPoint = startPoint_.HasValue ? rotationMatrix.Transform(startPoint_.Value) : startPoint_;
+			isStartPoint = false;
 			if (startPoint.HasValue) {
 				double scale = this.ConnectedPlanPanel.ScaleForCalculation;
 				double xDistStart = (startPoint.Value.X - currentPoint.X) * scale;
 				double yDistStart = (startPoint.Value.Y - currentPoint.Y) * scale;
 				if (xDistStart * xDistStart + yDistStart * yDistStart < startPointSnapSqDist) {
 					isStartPoint = true;
-					return startPoint.Value;
+					return startPoint_.Value;
 				}
 			}
-			isStartPoint = false;
 			if (ConnectedPlanPanel.SupportsSnap) {
 				return currentPoint;
 			}
+
 			double xDistance1 = Math.Abs(basePoint1.X - currentPoint.X);
 			double yDistance1 = Math.Abs(basePoint1.Y - currentPoint.Y);
-			double xDistInMeter1 = Math.Round((currentPoint.X - basePoint1.X) / this.ConnectedPlanPanel.Plan.Measure.Value, 1);
-			double yDistInMeter1 = Math.Round((currentPoint.Y - basePoint1.Y) / this.ConnectedPlanPanel.Plan.Measure.Value, 1);
+			double xDistInMeter1 = (currentPoint.X - basePoint1.X) / this.ConnectedPlanPanel.Plan.Measure.Value;
+			double yDistInMeter1 = (currentPoint.Y - basePoint1.Y) / this.ConnectedPlanPanel.Plan.Measure.Value;
+			double xDistInMeterRounded1 = Math.Round(xDistInMeter1, 1);
+			double yDistInMeterRounded1 = Math.Round(yDistInMeter1, 1);
 			Point2D p;
 			if (onlyHorizAndVert) {
 				if (xDistance1 < yDistance1) {
-					p = new Point2D(basePoint1.X, basePoint1.Y + ((float)yDistInMeter1 * this.ConnectedPlanPanel.Plan.Measure.Value));
+					p = new Point2D(basePoint1.X, basePoint1.Y + ((float)yDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value));
 				} else {
-					p = new Point2D(basePoint1.X + ((float)xDistInMeter1 * this.ConnectedPlanPanel.Plan.Measure.Value), basePoint1.Y);
+					p = new Point2D(basePoint1.X + ((float)xDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value), basePoint1.Y);
 				}
 
 			} else {
 				if (basePoint2.HasValue) {
 					double xDistance2 = Math.Abs(basePoint2.Value.X - currentPoint.X);
 					double yDistance2 = Math.Abs(basePoint2.Value.Y - currentPoint.Y);
+					double xDistInMeter2 = (currentPoint.X - basePoint2.Value.X) / this.ConnectedPlanPanel.Plan.Measure.Value;
+					double yDistInMeter2 = (currentPoint.Y - basePoint2.Value.Y) / this.ConnectedPlanPanel.Plan.Measure.Value;
+					double xDistInMeterRounded2 = Math.Round(xDistInMeter2, 1);
+					double yDistInMeterRounded2 = Math.Round(yDistInMeter2, 1);
+
+					double newX = currentPoint.X;
+					double newY = currentPoint.Y;
+					if (Math.Abs(xDistInMeter1 - xDistInMeterRounded1) <= Math.Abs(xDistInMeter2 - xDistInMeterRounded2)) {
+						newX = basePoint1.X + xDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					} else {
+						newX = basePoint2.Value.X + xDistInMeterRounded2 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					}
+					if (Math.Abs(yDistInMeter1 - yDistInMeterRounded1) <= Math.Abs(yDistInMeter2 - yDistInMeterRounded2)) {
+						newY = basePoint1.Y + yDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					} else {
+						newY = basePoint2.Value.Y + yDistInMeterRounded2 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					}
+
+					xDistance1 = Math.Abs(basePoint1.X - newX);
+					yDistance1 = Math.Abs(basePoint1.Y - newY);
+					xDistance2 = Math.Abs(basePoint2.Value.X - newX);
+					yDistance2 = Math.Abs(basePoint2.Value.Y - newY);
+
 					double xTan1 = xDistance1 / yDistance1;
 					double xTan2 = xDistance2 / yDistance2;
 					double yTan1 = yDistance1 / xDistance1;
 					double yTan2 = yDistance2 / xDistance2;
-					double newX = currentPoint.X;
-					double newY = currentPoint.Y;
 					if (xTan1 < xTan2) {
 						if (xTan1 < angleSnapDist) {
 							newX = basePoint1.X;
@@ -488,18 +520,22 @@ namespace Europlan.Common {
 					}
 					p = new Point2D(newX, newY);
 				} else {
+
+					double newX = basePoint1.X + xDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					double newY = basePoint1.Y + yDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					xDistance1 = Math.Abs(basePoint1.X - newX);
+					yDistance1 = Math.Abs(basePoint1.Y - newY);
+
 					if (xDistance1 / yDistance1 <= angleSnapDist) {
-						//p = new Point2D(basePoint1.X, basePoint1.Y + yDistInMeter1 * this.ConnectedPlanPanel.Plan.Measure.Value);
-						p = new Point2D(basePoint1.X, currentPoint.Y);
+						newX = basePoint1.X;
 					} else if (yDistance1 / xDistance1 <= angleSnapDist) {
-						//p = new Point2D(basePoint1.X + xDistInMeter1 * this.ConnectedPlanPanel.Plan.Measure.Value, basePoint1.Y);
-						p = new Point2D(currentPoint.X, basePoint1.Y);
-					} else {
-						//p = new Point2D(basePoint1.X + xDistInMeter1 * this.ConnectedPlanPanel.Plan.Measure.Value, basePoint1.Y + yDistInMeter1 * this.ConnectedPlanPanel.Plan.Measure.Value);
-						p = new Point2D(currentPoint.X, currentPoint.Y);
+						newY = basePoint1.Y;
 					}
+					p = new Point2D(newX, newY);
 				}
 			}
+			rotationMatrix = Transformation3D.Rotate(-this.ConnectedPlanPanel.Plan.Rotation / 180 * Math.PI);
+			p = rotationMatrix.Transform(p);
 			return p;
 		}
 

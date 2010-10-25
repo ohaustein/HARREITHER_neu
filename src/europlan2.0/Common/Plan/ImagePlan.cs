@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 
@@ -33,6 +34,10 @@ namespace Europlan.Common {
 			set { scale = value; }
 		}
 
+		[XmlIgnore]
+		public override double Rotation {
+			get { return angle; }
+		}
 	}
 
 }

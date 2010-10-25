@@ -76,6 +76,14 @@ namespace Europlan.Common {
 			get;
 		}
 
+		Matrix4D PlanToControl {
+			get;
+		}
+
+		Matrix4D ControlToPlan {
+			get;
+		}
+
 		void AddScale(double addedScale, Nullable<Point2D> center);
 
 		bool UnsavedChanges {

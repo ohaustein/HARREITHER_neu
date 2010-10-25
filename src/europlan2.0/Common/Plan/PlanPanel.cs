@@ -19,6 +19,7 @@ namespace Europlan.Common {
 		private Plan plan = null;
 		private IPlanPanel panel = null;
 		private PlanMode tmpMode = PlanMode.PM_MOVE;
+		private Cursor tmpCursor = Cursors.SizeAll;
 		private IProductPlanner productPlanner = null;
 		private IPlanPanel connectedPlanPanel;
 
@@ -275,8 +276,6 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		private Cursor tmpCursor = Cursors.Default;
-
 		public Cursor PlanCursor {
 			get { return this.panel != null ? this.panel.PlanCursor : tmpCursor; }
 			set {
@@ -287,6 +286,25 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Matrix4D PlanToControl {
+			get { return this.panel != null ? this.panel.PlanToControl : Matrix4D.Identity; }
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Matrix4D ControlToPlan {
+			get { return this.panel != null ? this.panel.ControlToPlan : Matrix4D.Identity; }
+		}
 		#endregion
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public override Cursor Cursor {
+			get { return base.Cursor; }
+			set { base.Cursor = value; }
+		}
 	}
 }

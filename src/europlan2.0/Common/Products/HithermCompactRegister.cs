@@ -648,6 +648,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public string PartNumber {
 			get {
+				if (this.wall == null) {
+					return "";
+				}
 				return this.wall.GetPartNumber(registerType, HithermCompactProduct.ConfigUsePlus);
 			}
 		}

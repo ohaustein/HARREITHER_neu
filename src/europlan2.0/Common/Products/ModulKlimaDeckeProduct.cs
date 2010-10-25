@@ -115,6 +115,8 @@ namespace Europlan.Common {
 		private float plannedCeilingArea = 0;
 		private float plannedFloorOrCeilingArea = 0;
 
+		private ModulKlimaDeckeConstruction graphConstruction = null;
+
 		public ModulKlimaDeckeProduct() {
 			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke)) {
 				throw new ProductNotLicensedException(this.GetType());
@@ -1237,6 +1239,11 @@ namespace Europlan.Common {
 				}
 				return value;
 			}
+		}
+
+		public ModulKlimaDeckeConstruction GraphConstruction {
+			get { return this.graphConstruction; }
+			set { this.graphConstruction = value; }
 		}
 	}
 	

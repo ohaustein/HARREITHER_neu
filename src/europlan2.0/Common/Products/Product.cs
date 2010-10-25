@@ -1372,5 +1372,9 @@ namespace Europlan.Common {
 				return rtn;
 			}
 		}
+
+		public bool GraphicalLayout {
+			get { return false; }
+		}
 	}
 }

@@ -75,6 +75,7 @@ namespace Europlan.Common {
 			this.txtDistributor = new System.Windows.Forms.TextBox();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.btnGraphical = new System.Windows.Forms.Button();
 			this.lstError = new System.Windows.Forms.ListView();
 			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
 			this.label13 = new System.Windows.Forms.Label();
@@ -156,7 +157,10 @@ namespace Europlan.Common {
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.lblTitle = new System.Windows.Forms.Label();
-			this.button1 = new System.Windows.Forms.Button();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.lblLayoutType = new System.Windows.Forms.Label();
+			this.rbLayoutTable = new System.Windows.Forms.RadioButton();
+			this.rbLayoutGraphical = new System.Windows.Forms.RadioButton();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -168,6 +172,7 @@ namespace Europlan.Common {
 			this.pageConstruction.SuspendLayout();
 			this.panel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.groupBox5.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// grpPowerArea
@@ -198,7 +203,7 @@ namespace Europlan.Common {
 			this.grpPowerArea.Controls.Add(this.lblHeatLoadUnit);
 			this.grpPowerArea.Controls.Add(this.numHeatLoad);
 			this.grpPowerArea.Controls.Add(this.lblHeatLoadTxt);
-			this.grpPowerArea.Location = new System.Drawing.Point(0, 3);
+			this.grpPowerArea.Location = new System.Drawing.Point(0, 48);
 			this.grpPowerArea.MinimumSize = new System.Drawing.Size(640, 0);
 			this.grpPowerArea.Name = "grpPowerArea";
 			this.grpPowerArea.Size = new System.Drawing.Size(847, 145);
@@ -583,7 +588,7 @@ namespace Europlan.Common {
 			this.groupBox1.Controls.Add(this.btnFloorConstruction);
 			this.groupBox1.Controls.Add(this.lblCeilingConstruction);
 			this.groupBox1.Controls.Add(this.txtFloorConstruction);
-			this.groupBox1.Location = new System.Drawing.Point(3, 154);
+			this.groupBox1.Location = new System.Drawing.Point(0, 199);
 			this.groupBox1.MinimumSize = new System.Drawing.Size(640, 0);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(847, 119);
@@ -766,6 +771,7 @@ namespace Europlan.Common {
 			// 
 			this.panel1.AutoScroll = true;
 			this.panel1.AutoScrollMinSize = new System.Drawing.Size(650, 0);
+			this.panel1.Controls.Add(this.groupBox5);
 			this.panel1.Controls.Add(this.grpPowerArea);
 			this.panel1.Controls.Add(this.groupBox1);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -878,7 +884,7 @@ namespace Europlan.Common {
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.AutoScrollMinSize = new System.Drawing.Size(760, 0);
-			this.panel2.Controls.Add(this.button1);
+			this.panel2.Controls.Add(this.btnGraphical);
 			this.panel2.Controls.Add(this.lstError);
 			this.panel2.Controls.Add(this.label13);
 			this.panel2.Controls.Add(this.btnRemoveSubarea);
@@ -961,6 +967,17 @@ namespace Europlan.Common {
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(850, 608);
 			this.panel2.TabIndex = 1;
+			// 
+			// btnGraphical
+			// 
+			this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnGraphical.Location = new System.Drawing.Point(680, 33);
+			this.btnGraphical.Name = "btnGraphical";
+			this.btnGraphical.Size = new System.Drawing.Size(167, 23);
+			this.btnGraphical.TabIndex = 169;
+			this.btnGraphical.Text = "Grafische Auslegung öffnen";
+			this.btnGraphical.UseVisualStyleBackColor = true;
+			this.btnGraphical.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// lstError
 			// 
@@ -1699,16 +1716,48 @@ namespace Europlan.Common {
 			this.lblTitle.TabIndex = 83;
 			this.lblTitle.Text = "Modul Klima-Decke";
 			// 
-			// button1
+			// groupBox5
 			// 
-			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.button1.Location = new System.Drawing.Point(743, 43);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 169;
-			this.button1.Text = "button1";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox5.Controls.Add(this.rbLayoutGraphical);
+			this.groupBox5.Controls.Add(this.rbLayoutTable);
+			this.groupBox5.Controls.Add(this.lblLayoutType);
+			this.groupBox5.Location = new System.Drawing.Point(0, 3);
+			this.groupBox5.Name = "groupBox5";
+			this.groupBox5.Size = new System.Drawing.Size(847, 39);
+			this.groupBox5.TabIndex = 2;
+			this.groupBox5.TabStop = false;
+			// 
+			// lblLayoutType
+			// 
+			this.lblLayoutType.Location = new System.Drawing.Point(6, 16);
+			this.lblLayoutType.Name = "lblLayoutType";
+			this.lblLayoutType.Size = new System.Drawing.Size(151, 13);
+			this.lblLayoutType.TabIndex = 1;
+			this.lblLayoutType.Text = "Auslegungsart:";
+			// 
+			// rbLayoutTable
+			// 
+			this.rbLayoutTable.AutoSize = true;
+			this.rbLayoutTable.Checked = true;
+			this.rbLayoutTable.Location = new System.Drawing.Point(188, 14);
+			this.rbLayoutTable.Name = "rbLayoutTable";
+			this.rbLayoutTable.Size = new System.Drawing.Size(78, 17);
+			this.rbLayoutTable.TabIndex = 2;
+			this.rbLayoutTable.TabStop = true;
+			this.rbLayoutTable.Text = "tabellarisch";
+			this.rbLayoutTable.UseVisualStyleBackColor = true;
+			// 
+			// rbLayoutGraphical
+			// 
+			this.rbLayoutGraphical.AutoSize = true;
+			this.rbLayoutGraphical.Location = new System.Drawing.Point(328, 14);
+			this.rbLayoutGraphical.Name = "rbLayoutGraphical";
+			this.rbLayoutGraphical.Size = new System.Drawing.Size(62, 17);
+			this.rbLayoutGraphical.TabIndex = 3;
+			this.rbLayoutGraphical.Text = "grafisch";
+			this.rbLayoutGraphical.UseVisualStyleBackColor = true;
 			// 
 			// PlannedModulKlimaDeckeProductPanel
 			// 
@@ -1734,6 +1783,8 @@ namespace Europlan.Common {
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			this.groupBox5.ResumeLayout(false);
+			this.groupBox5.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1873,6 +1924,10 @@ namespace Europlan.Common {
 		private System.Windows.Forms.HelpProvider helpProvider;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblTitle;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button btnGraphical;
+		private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.Label lblLayoutType;
+		private System.Windows.Forms.RadioButton rbLayoutGraphical;
+		private System.Windows.Forms.RadioButton rbLayoutTable;
 	}
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Collections;
+using WW.Math;
 
 namespace Europlan.Common {
 	public partial class ImagePanel : UserControl, IPlanPanel {
@@ -73,6 +74,7 @@ namespace Europlan.Common {
 			get { return angle; }
 			set { 
 				angle = value;
+				this.CalculateMatrices();
 				this.Invalidate();
 			}
 		}
@@ -81,6 +83,7 @@ namespace Europlan.Common {
 			get { return xPos; }
 			set { 
 				xPos = value;
+				this.CalculateMatrices();
 				this.Invalidate();
 			}
 		}
@@ -89,6 +92,7 @@ namespace Europlan.Common {
 			get { return yPos; }
 			set { 
 				yPos = value;
+				this.CalculateMatrices();
 				this.Invalidate();
 			}
 		}
@@ -97,6 +101,7 @@ namespace Europlan.Common {
 			get { return scale; }
 			set { 
 				scale = value;
+				this.CalculateMatrices();
 				this.Invalidate();
 			}
 		}
@@ -257,6 +262,9 @@ namespace Europlan.Common {
 				PointF[] arr = new PointF[] { mousePosInCtrl };
 
 				Matrix ctrlToPlan = new Matrix();
+				ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
+				ctrlToPlan.Rotate(this.Angle);
+				ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
 				ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
 				ctrlToPlan.Translate(this.XPos, this.YPos);
 				ctrlToPlan.Invert();
@@ -273,7 +281,10 @@ namespace Europlan.Common {
 				PointF[] arr = new PointF[] { mousePosInCtrl };
 
 				Matrix ctrlToPlan = new Matrix();
-				ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
+				ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
+				ctrlToPlan.Rotate(this.Angle);
+				ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
+				ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
 				ctrlToPlan.Translate(this.XPos, this.YPos);
 				ctrlToPlan.Invert();
 				ctrlToPlan.TransformPoints(arr);
@@ -295,6 +306,9 @@ namespace Europlan.Common {
 				PointF[] arr = new PointF[] { mousePosInCtrl };
 
 				Matrix ctrlToPlan = new Matrix();
+				ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
+				ctrlToPlan.Rotate(this.Angle);
+				ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
 				ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
 				ctrlToPlan.Translate(this.XPos, this.YPos);
 				ctrlToPlan.Invert();
@@ -342,7 +356,10 @@ namespace Europlan.Common {
 			PointF[] arr = new PointF[] { mousePosInCtrl };
 
 			Matrix ctrlToPlan = new Matrix();
-			ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
+			ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
+			ctrlToPlan.Rotate(this.Angle);
+			ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
+			ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
 			ctrlToPlan.Translate(this.XPos, this.YPos);
 			ctrlToPlan.Invert();
 			ctrlToPlan.TransformPoints(arr);
@@ -369,7 +386,7 @@ namespace Europlan.Common {
 				this.YPos += mouseUpY - mouseDownY;
 				invalidate = true;
 			} else if (mode == PlanMode.PM_PICK_MEASURE && startPoint.HasValue && !endPoint.HasValue) {
-
+				this.Invalidate();
 			}
 			if (invalidate) {
 				this.Invalidate();
@@ -482,6 +499,7 @@ namespace Europlan.Common {
 					this.xPos = plan.XPos;
 					this.yPos = plan.YPos;
 					this.scale = plan.Scale;
+					this.CalculateMatrices();
 				} else if (value == null) {
 					this.plan = null;
 				}
@@ -547,6 +565,46 @@ namespace Europlan.Common {
 					this.Invalidate();
 				}
 			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public override Cursor Cursor {
+			get { return base.Cursor; }
+			set { base.Cursor = value; }
+		}
+
+		private Matrix4D planToControl = Matrix4D.Identity;
+		private Matrix4D controlToPlan = Matrix4D.Identity;
+
+		private void CalculateMatrices() {
+			Matrix4D tmp = Matrix4D.Identity;
+			if (image == null) {
+				planToControl = tmp;
+				controlToPlan = tmp;
+				return;
+			}
+			double scale = this.Scale.HasValue ? this.Scale.Value : 1.0;
+			tmp = tmp * Transformation4D.Translation(((float)image.Width / 2.0 + this.XPos) * scale, ((float)image.Height / 2.0 + this.YPos) * scale, 0);
+			tmp = tmp * Transformation4D.RotateZ(this.Angle);
+			tmp = tmp * Transformation4D.Translation(-((float)image.Width / 2.0 + this.XPos) * scale, -((float)image.Height / 2.0 + this.YPos) * scale, 0);
+			tmp = tmp * Transformation4D.Scaling(scale);
+			tmp = tmp * Transformation4D.Translation(this.XPos, this.YPos, 0);
+
+			planToControl = tmp;
+			controlToPlan = planToControl.GetInverse();
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Matrix4D PlanToControl {
+			get { return this.planToControl; }
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Matrix4D ControlToPlan {
+			get { return this.controlToPlan; }
 		}
 	}
 

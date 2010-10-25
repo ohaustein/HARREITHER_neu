@@ -120,7 +120,9 @@ namespace Europlan.Common {
 
 			if (this.productPlanner != null) {
 				Point mousePosInPlan = this.PointToClient(MousePosition);
-				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
+
+				//Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
+				Point3D planPoint = from2DTransform.Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
 				this.productPlanner.PaintAfterPlanPannel(e, this.gdiGraphics3D.To2DTransform, new Point2D(planPoint.X, planPoint.Y), mousePosInPlan);
 			}
 		}
@@ -327,15 +329,17 @@ namespace Europlan.Common {
 			base.OnMouseMove(e);
 			bool invalidate = false;
 			if (mouseDown && this.mode == PlanMode.PM_PLANNER_DRAG && e.Button != MouseButtons.Middle && this.productPlanner != null) {
-				Point2D pickedPoint;
+				/*Point2D pickedPoint;
 				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
-				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
+				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));*/
+				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(e.X, e.Y, 0));
 				invalidate = this.productPlanner.PlannerDragMove(new Point2D(planPoint.X, planPoint.Y), e.Location, e.Button);
 			} 
 			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null) {
-				Point2D pickedPoint;
+				/*Point2D pickedPoint;
 				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
-				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
+				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));*/
+				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(e.X, e.Y, 0));
 				invalidate = this.productPlanner.PlannerMouseMove(new Point2D(planPoint.X, planPoint.Y), e.Location, e.Button);
 			} 
 			if (mouseDown && ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || e.Button == MouseButtons.Middle)) {
@@ -884,6 +888,18 @@ namespace Europlan.Common {
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public double ScaleForCalculation {
 			get { return Math.Abs(this.PlanTransformation.M00); }
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Matrix4D PlanToControl {
+			get { return this.gdiGraphics3D.To2DTransform; }
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Matrix4D ControlToPlan {
+			get { return this.from2DTransform;  }
 		}
 		#endregion
 

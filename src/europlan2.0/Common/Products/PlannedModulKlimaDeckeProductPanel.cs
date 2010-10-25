@@ -130,6 +130,7 @@ namespace Europlan.Common {
 			ROWS = 65536,
 			SUBAREA = 131072,
 			TYPE = 262144,
+			LAYOUT_TYPE = 524288
 		}
 
 
@@ -171,6 +172,7 @@ namespace Europlan.Common {
 		private int ignoreLengthVerbindungen = 0;
 		private int ignoreSubArea = 0;
 		private int ignoreType = 0;
+		private int ignoreLayoutType = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			if (this.product != null) {
@@ -232,6 +234,37 @@ namespace Europlan.Common {
 				lblDruckverlustCoolUnit.Visible = showCool;
 				//lblTempCool.Visible = showCool;
 				//lblTempCoolUnit.Visible = showCool;
+
+				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
+					this.rbLayoutTable.Checked = !this.product.Product.GraphicalLayout;
+					this.rbLayoutGraphical.Checked = !this.product.Product.GraphicalLayout;
+				}
+
+				if (this.product.Product.GraphicalLayout) {
+					this.numArea.Enabled = false;
+					this.numAreaPercentage.Enabled = false;
+					this.numAreaUnheated.Enabled = false;
+					this.btnAddHk.Enabled = false;
+					this.btnRemoveHk.Enabled = false;
+					this.btnAddSubarea.Enabled = false;
+					this.btnRemoveSubarea.Enabled = false;
+					this.btnAddRow.Enabled = false;
+					this.btnRemoveRow.Enabled = false;
+					this.dgvModules.Enabled = false;
+					this.btnGraphical.Visible = true;
+				} else {
+					this.numArea.Enabled = true;
+					this.numAreaPercentage.Enabled = true;
+					this.numAreaUnheated.Enabled = true;
+					this.btnAddHk.Enabled = true;
+					this.btnRemoveHk.Enabled = true;
+					this.btnAddSubarea.Enabled = true;
+					this.btnRemoveSubarea.Enabled = true;
+					this.btnAddRow.Enabled = true;
+					this.btnRemoveRow.Enabled = true;
+					this.dgvModules.Enabled = true;
+					this.btnGraphical.Visible = true;
+				}
 
 				this.numArea.MaxValue = (decimal)mdProduct.AvailableCeilingArea;
 				this.numAreaPercentage.MaxValue = (decimal)(mdProduct.AvailableCeilingArea * 100 / mdProduct.AssociatedRoom.Area);

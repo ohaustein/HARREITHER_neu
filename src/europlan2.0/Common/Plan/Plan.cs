@@ -47,6 +47,11 @@ namespace Europlan.Common {
 			set { id = value; }
 		}
 
+		[XmlIgnore]
+		public abstract double Rotation {
+			get;
+		}
+
 
 		public static double PolygonArea(Point2D[] coordinates) {
 			// Return the absolute value of the signed area.

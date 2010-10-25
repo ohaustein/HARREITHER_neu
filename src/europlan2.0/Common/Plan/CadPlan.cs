@@ -4,6 +4,7 @@ using System.Text;
 using WW.Cad.Model;
 using WW.Cad.Model.Tables;
 using WW.Cad.IO;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 
@@ -48,6 +49,11 @@ namespace Europlan.Common {
 				}
 			}
 			return model;
+		}
+
+		[XmlIgnore]
+		public override double Rotation {
+			get { return 0.0; }
 		}
 	}
 
