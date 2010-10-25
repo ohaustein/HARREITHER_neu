@@ -141,71 +141,11 @@ namespace Europlan.Common {
 			for (i = 0; i < room.Count; i++) {
 				roomBorder = new Segment2D(room[i], room[(i + 1) % room.Count]);
 				if (roomBorder.Start.X < roomBorder.End.X) {
-					intersection = Line2D.GetIntersection(borderLeft, roomBorder);
-					if (intersection.HasValue) {
-						lp.Add(intersection.Value.Y);
-						if (inside) {
-							if (enteredLeft) {
-								removes.Add(new CompareablePair<double>(GetMax(lp), GetMin(lp)));
-							} else {
-								bordersTop.Add(GetMin(lp));
-							}
-							lp = new List<double>();
-							inside = false;
-						} else {
-							inside = true;
-							enteredLeft = true;
-						}
-					}
-					intersection = Line2D.GetIntersection(borderRight, roomBorder);
-					if (intersection.HasValue) {
-						lp.Add(intersection.Value.Y);
-						if (inside) {
-							if (enteredLeft) {
-								bordersBottom.Add(GetMax(lp));
-							} else {
-								removes.Add(new CompareablePair<double>(GetMax(lp), GetMin(lp)));
-							}
-							lp = new List<double>();
-							inside = false;
-						} else {
-							inside = true;
-							enteredLeft = false;
-						}
-					}
+					this.CheckLeftBorder(borderLeft, roomBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
+					this.CheckRightBorder(borderRight, roomBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
 				} else {
-					intersection = Line2D.GetIntersection(borderRight, roomBorder);
-					if (intersection.HasValue) {
-						lp.Add(intersection.Value.Y);
-						if (inside) {
-							if (enteredLeft) {
-								bordersBottom.Add(GetMax(lp));
-							} else {
-								removes.Add(new CompareablePair<double>(GetMax(lp), GetMin(lp)));
-							}
-							lp = new List<double>();
-							inside = false;
-						} else {
-							inside = true;
-							enteredLeft = false;
-						}
-					}
-					intersection = Line2D.GetIntersection(borderLeft, roomBorder);
-					if (intersection.HasValue) {
-						lp.Add(intersection.Value.Y);
-						if (inside) {
-							if (enteredLeft) {
-								removes.Add(new CompareablePair<double>(GetMax(lp), GetMin(lp)));
-							} else {
-								bordersTop.Add(GetMin(lp));
-							}
-							lp = new List<double>();
-							inside = false;
-						} else {
-							inside = true;
-							enteredLeft = true;
-						}
-					}
+					this.CheckRightBorder(borderRight, roomBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
+					this.CheckLeftBorder(borderLeft, roomBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
 				}
 				if (inside) {
 					lp.Add(room[i + 1].Y);
@@ -244,6 +184,44 @@ namespace Europlan.Common {
 			}
 
 			return possibleAreas;
+		}
+
+		private void CheckLeftBorder(Line2D borderLeft, Segment2D roomBorder, ref bool inside, List<double> bordersTop, List<CompareablePair<double>> removes, ref List<double> possiblePoints, ref bool enteredLeft) {
+			Nullable<Point2D> intersection = Line2D.GetIntersection(borderLeft, roomBorder);
+			if (intersection.HasValue) {
+				possiblePoints.Add(intersection.Value.Y);
+				if (inside) {
+					if (enteredLeft) {
+						removes.Add(new CompareablePair<double>(GetMax(possiblePoints), GetMin(possiblePoints)));
+					} else {
+						bordersTop.Add(GetMin(possiblePoints));
+					}
+					possiblePoints = new List<double>();
+					inside = false;
+				} else {
+					inside = true;
+					enteredLeft = true;
+				}
+			}
+		}
+
+		private void CheckRightBorder(Line2D borderRight, Segment2D roomBorder, ref bool inside, List<double> bordersBottom, List<CompareablePair<double>> removes, ref List<double> possiblePoints, ref bool enteredLeft) {
+			Nullable<Point2D> intersection = Line2D.GetIntersection(borderRight, roomBorder);
+			if (intersection.HasValue) {
+				possiblePoints.Add(intersection.Value.Y);
+				if (inside) {
+					if (enteredLeft) {
+						bordersBottom.Add(GetMax(possiblePoints));
+					} else {
+						removes.Add(new CompareablePair<double>(GetMax(possiblePoints), GetMin(possiblePoints)));
+					}
+					possiblePoints = new List<double>();
+					inside = false;
+				} else {
+					inside = true;
+					enteredLeft = false;
+				}
+			}
 		}
 
 		private double GetMin(List<double> values) {
