@@ -266,16 +266,16 @@
     </Compile>
     <Compile Include="Products\ExtendedCorrections.cs" />
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstruction.cs" />
-    <Compile Include="Products\ModulKlimaDeckePlanner.cs">
+    <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckePlanner.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Products\ModulKlimaDeckePlanner.Designer.cs">
+    <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckePlanner.Designer.cs">
       <DependentUpon>ModulKlimaDeckePlanner.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\ModulKlimaDeckePlannerForm.cs">
+    <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckePlannerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Products\ModulKlimaDeckePlannerForm.Designer.cs">
+    <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckePlannerForm.Designer.cs">
       <DependentUpon>ModulKlimaDeckePlannerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstructionAkustik.cs" />
@@ -708,7 +708,7 @@
       <DependentUpon>ConnectionPipesForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Products\ModulKlimaDeckePlannerForm.resx">
+    <EmbeddedResource Include="Products\ModulKlimaDecke\ModulKlimaDeckePlannerForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ModulKlimaDeckePlannerForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -92,9 +92,9 @@ namespace Europlan.Common {
 			if (obj is CompareablePair<V>) {
 				int result = this.value1.CompareTo((obj as CompareablePair<double>).value1);
 				if (result != 0) {
-					return result * -1;
+					return result;
 				}
-				return this.value2.CompareTo((obj as CompareablePair<double>).value2) * -1;
+				return this.value2.CompareTo((obj as CompareablePair<double>).value2);
 			}
 			return 0;
 		}

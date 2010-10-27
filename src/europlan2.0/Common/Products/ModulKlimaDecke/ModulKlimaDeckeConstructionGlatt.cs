@@ -21,7 +21,14 @@ namespace Europlan.Common {
 		public ModulKlimaDeckeConstructionGlatt() {
 		}
 
-		private void RecalculateSchienen() {
+		public void RecalculateSchienen() {
+			if (this.Planner == null || this.Planner.Product == null ||
+				this.Planner.Product.AssociatedRoom == null ||
+				this.Planner.Product.AssociatedRoom.RoomCoordinates == null ||
+				this.Planner.ConnectedPlanPanel == null ||
+				this.Planner.ConnectedPlanPanel.Plan == null) {
+				return;
+			}
 			Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
 
 			Point2D tmp;
@@ -141,11 +148,11 @@ namespace Europlan.Common {
 			for (i = 0; i < room.Count; i++) {
 				roomBorder = new Segment2D(room[i], room[(i + 1) % room.Count]);
 				if (roomBorder.Start.X < roomBorder.End.X) {
-					this.CheckLeftBorder(borderLeft, roomBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
-					this.CheckRightBorder(borderRight, roomBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
+					this.CheckLeftBorder(borderLeft, roomBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
+					this.CheckRightBorder(borderRight, roomBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
 				} else {
-					this.CheckRightBorder(borderRight, roomBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
-					this.CheckLeftBorder(borderLeft, roomBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
+					this.CheckRightBorder(borderRight, roomBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
+					this.CheckLeftBorder(borderLeft, roomBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
 				}
 				if (inside) {
 					lp.Add(room[i + 1].Y);
@@ -163,15 +170,15 @@ namespace Europlan.Common {
 				double bottom;
 				Polygon2D area;
 				foreach (CompareablePair<double> remove in removes) {
-					if (remove.value1 < bordersTop[i] && remove.value1 > bordersBottom[i]) {
-						bottom = remove.value1;
+					if (remove.value1 > bordersTop[i] && remove.value1 < bordersBottom[i]) {
+						bottom = remove.value2;
 						area = new Polygon2D();
 						area.Add(matrix.Transform(new Point2D(borderLeft.Origin.X, top)));
 						area.Add(matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)));
 						area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, bottom)));
 						area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, top)));
 						possibleAreas.Add(new PossibleModulRowArea(area));
-						top = remove.value2;
+						top = remove.value1;
 					}
 				}
 				bottom = bordersBottom[i];
