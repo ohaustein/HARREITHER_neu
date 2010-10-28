@@ -42,7 +42,7 @@ namespace Europlan.Common {
 			set { this.randfries = value; }
 		}
 
-		public override void Paint(Graphics g) {
+		public override void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode) {
 			// TODO
 		}
 
@@ -65,6 +65,10 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override Cursor PickCursor {
 			get { return null; }
+		}
+
+		public override void RecalculateSchienen() {
+			throw new Exception("The method or operation is not implemented.");
 		}
 	}
 }

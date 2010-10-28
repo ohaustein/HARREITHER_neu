@@ -301,6 +301,7 @@ namespace Europlan.Common {
 
 		protected override void OnMouseUp(MouseEventArgs e) {
 			base.OnMouseUp(e);
+			bool invalidate = false;
 			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
 				Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 				PointF[] arr = new PointF[] { mousePosInCtrl };
@@ -317,12 +318,15 @@ namespace Europlan.Common {
 				PointF mousePosInPlan = arr[0];
 
 				if (this.productPlanner != null) {
-					this.productPlanner.PlannerDragEnd(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
+					invalidate = this.productPlanner.PlannerDragEnd(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
 				}
 			}
 			if (e.Button == MouseButtons.Middle) {
 				this.Cursor = this.tempCursor;
 				inMove = false;
+			}
+			if (invalidate) {
+				this.Invalidate();
 			}
 		}
 
@@ -369,7 +373,7 @@ namespace Europlan.Common {
 
 			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
 				if (this.productPlanner != null) {
-					this.productPlanner.PlannerDragMove(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
+					invalidate = this.productPlanner.PlannerDragMove(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
 				}
 			} 
 			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null) {

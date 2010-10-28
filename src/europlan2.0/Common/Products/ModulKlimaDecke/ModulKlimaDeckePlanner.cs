@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Drawing;
 using WW.Math;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
 	public partial class ModulKlimaDeckePlanner : Component, IProductPlanner {
@@ -14,12 +15,8 @@ namespace Europlan.Common {
 		public enum KlimaDeckeMode {
 			KDM_NONE,
 			KDM_CONSTRUCTION,
-			KDM_LAYOUT
+			KDM_LAYOUT_ADD_AREA
 		}
-
-		/*public struct ConstructionParameters {
-			float 
-		}*/
 
 		public ModulKlimaDeckePlanner() {
 			InitializeComponent();
@@ -72,23 +69,7 @@ namespace Europlan.Common {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
 				GraphicsPath path = new GraphicsPath();
 				List<PointF> transformedPoints = new List<PointF>();
-				/*double minX = double.MaxValue;
-				double maxX = double.MinValue;
-				double minY = double.MaxValue;
-				double maxY = double.MinValue;*/
 				foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
-					/*if (point.X < minX) {
-						minX = point.X;
-					}
-					if (point.X > maxX) {
-						maxX = point.X;
-					}
-					if (point.Y < minY) {
-						minY = point.Y;
-					}
-					if (point.Y > maxY) {
-						maxY = point.Y;
-					}*/
 					Point2D tmp = additionalTransformation.TransformTo2D(point);
 					transformedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
 				}
@@ -111,26 +92,46 @@ namespace Europlan.Common {
 				e.Graphics.FillRegion(b, clipDisabled);
 
 				if (this.product.AssociatedRoom.AssociatedPlan != null && this.product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
-					//e.Graphics.Clip = clipEnabled;
-					/*double curPos = minX;
-					double increment = (breite + abstand) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-					while (curPos < maxX) {
-						curPos += increment;
-						Point2D paintP1 = additionalTransformation.TransformTo2D(new Point2D(curPos, minY));
-						Point2D paintP2 = additionalTransformation.TransformTo2D(new Point2D(curPos + breite * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, maxY));
-						float x = (float)Math.Min(paintP1.X, paintP2.X);
-						float y = (float)Math.Min(paintP1.Y, paintP2.Y) - 1;
-						float width = (float)Math.Abs(paintP1.X - paintP2.X);
-						float height = (float)Math.Abs(paintP1.Y - paintP2.Y) + 2;
-						c = Color.Red;
-						b = new HatchBrush(HatchStyle.DiagonalCross, c, Color.FromArgb(0, c));
-						e.Graphics.DrawRectangle(new Pen(c), x, y, width, height);
-						e.Graphics.FillRectangle(b, x, y, width, height);
-						//e.Graphics.FillRectangle(b, (float)paintP1.X, (float)paintP1.Y, (float)paintP2.X, (float)paintP2.Y);
-					}*/
 					if (this.product.GraphConstruction != null) {
-						this.product.GraphConstruction.Paint(e.Graphics/*, minX, maxX, minY, maxY, this.product.AssociatedRoom.AssociatedPlan.Measure.Value, additionalTransformation*/);
+						this.product.GraphConstruction.Paint(e.Graphics, this.Mode);
 					}
+				}
+
+				if (this.layoutAddArea != null) {
+					PointF[] drawArea = new PointF[this.layoutAddArea.Count];
+					for (int i = 0; i < this.layoutAddArea.Count; i++) {
+						Point2D tmp = additionalTransformation.TransformTo2D(this.layoutAddArea[i]);
+						drawArea[i] = new PointF((float)tmp.X, (float)tmp.Y);
+					}
+					e.Graphics.DrawPolygon(Pens.Red, drawArea);
+
+					Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
+					Matrix3D invRotation = rotation.GetInverse();
+
+					Segment2D topSeg = new Segment2D(rotation.Transform(this.layoutAddArea[0]), rotation.Transform(this.layoutAddArea[3]));
+					double start = topSeg.Start.Y;
+					double end = rotation.Transform(this.layoutAddArea[1]).Y;
+					double step = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					foreach (PossibleModulRow row in this.product.GraphConstruction.PossibleRows) {
+						Point2D borderLeftOrigin = rotation.Transform(row.BorderLeft.Origin);
+						borderLeftOrigin.Y = topSeg.Start.Y;
+						Point2D borderRighOrigin = rotation.Transform(row.BorderRight.Origin);
+						borderLeftOrigin.Y = topSeg.Start.Y;
+						if (Line2D.Intersects(new Line2D(borderLeftOrigin, new Vector2D(0, 1)), topSeg) && Line2D.Intersects(new Line2D(borderRighOrigin, new Vector2D(0, 1)), topSeg)) {
+							if (this.layoutAddAreaBottomToTop) {
+								for (double y = start - step; y > end; y -= step) {
+									Point2D tmp = invRotation.Transform(new Point2D(borderLeftOrigin.X, y));
+									this.DrawModule(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT, new Point2D(tmp.X, tmp.Y), additionalTransformation, e.Graphics);
+								}
+							} else {
+								for (double y = start; y < end - step; y += step) {
+									Point2D tmp = invRotation.Transform(new Point2D(borderLeftOrigin.X, y));
+									this.DrawModule(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30, KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT, new Point2D(tmp.X, tmp.Y), additionalTransformation, e.Graphics);
+								}
+							}
+						}
+					}
+
 				}
 			}
 		}
@@ -142,35 +143,69 @@ namespace Europlan.Common {
 
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
-			if (this.product.GraphConstruction != null) {
-				if (this.product.GraphConstruction.HitTest(planPoint, pointInControl)) {
-					this.customCursor = this.product.GraphConstruction.PickCursor;
-					this.ConnectedPlanPanel.PlanCursor = this.product.GraphConstruction.PickCursor;
-				} else {
-					this.customCursor = Cursors.Default;
-					this.ConnectedPlanPanel.PlanCursor = Cursors.Default;
+			if (this.Mode == KlimaDeckeMode.KDM_CONSTRUCTION) {
+				if (this.product.GraphConstruction != null) {
+					if (this.product.GraphConstruction.HitTest(planPoint, pointInControl)) {
+						this.customCursor = this.product.GraphConstruction.PickCursor;
+						this.ConnectedPlanPanel.PlanCursor = this.product.GraphConstruction.PickCursor;
+					} else {
+						this.customCursor = Cursors.Default;
+						this.ConnectedPlanPanel.PlanCursor = Cursors.Default;
+					}
 				}
 			}
 			return false;
 		}
 
+		private Point2D layoutAddAreaStart;
+		private Polygon2D layoutAddArea = null;
+		private bool layoutAddAreaBottomToTop = false;
+
 		public bool PlannerDragStart(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			if (button == MouseButtons.Left && this.product.GraphConstruction != null) {
-				this.product.GraphConstruction.StartDrag(planPoint, pointInControl);
+			if (this.Mode == KlimaDeckeMode.KDM_CONSTRUCTION) {
+				if (button == MouseButtons.Left && this.product.GraphConstruction != null) {
+					this.product.GraphConstruction.StartDrag(planPoint, pointInControl);
+				}
+			} else if (this.Mode == KlimaDeckeMode.KDM_LAYOUT_ADD_AREA) {
+				this.layoutAddAreaStart = planPoint;
 			}
 			return false;
 		}
 
 		public bool PlannerDragMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			if (button == MouseButtons.Left && this.product.GraphConstruction != null) {
-				this.product.GraphConstruction.MoveDrag(planPoint, pointInControl);
-				return true;
+			if (this.Mode == KlimaDeckeMode.KDM_CONSTRUCTION) {
+				if (button == MouseButtons.Left && this.product.GraphConstruction != null) {
+					this.product.GraphConstruction.MoveDrag(planPoint, pointInControl);
+					return true;
+				}
+			} else if (this.Mode == KlimaDeckeMode.KDM_LAYOUT_ADD_AREA) {
+				if (button == MouseButtons.Left && this.product.GraphConstruction != null) {
+					Matrix3D matrix = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
+					Point2D rotatedP1 = matrix.Transform(layoutAddAreaStart);
+					Point2D rotatedP3 = matrix.Transform(planPoint);
+					this.layoutAddAreaBottomToTop = (rotatedP1.Y > rotatedP3.Y);
+					Point2D rotatedP2 = new Point2D(rotatedP1.X, rotatedP3.Y);
+					Point2D rotatedP4 = new Point2D(rotatedP3.X, rotatedP1.Y);
+					matrix = matrix.GetInverse();
+					//Point2D p2 = matrix.Transform(rotatedP2);
+					//Point2D p4 = matrix.Transform(rotatedP4);
+					layoutAddArea = new Polygon2D();
+					layoutAddArea.Add(layoutAddAreaStart);
+					layoutAddArea.Add(matrix.Transform(rotatedP2));
+					layoutAddArea.Add(planPoint);
+					layoutAddArea.Add(matrix.Transform(rotatedP4));
+					return true;
+				}
 			}
 			return false;
 		}
 
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
+			if (this.layoutAddArea != null) {
+				this.layoutAddArea = null;
+				return true;
+			}
 			return false;
 		}
 
@@ -180,6 +215,40 @@ namespace Europlan.Common {
 
 		public bool PlannerKeyPress(Keys key) {
 			return false;
+		}
+
+		public void DrawModule(KlimaFlaechenModul.ModulTypeEnum type, KlimaFlaechenModul.ModulOrientationEnum orientation, Point2D position, Matrix4D additionalTransformation, Graphics g) {
+			if (this.product == null || this.product.GraphConstruction == null ||
+				this.product.AssociatedRoom == null || this.product.AssociatedRoom.AssociatedPlan == null ||
+				this.product.AssociatedRoom.AssociatedPlan.Measure == null) {
+				return;
+			}
+			additionalTransformation = additionalTransformation * Transformation4D.Translation(position.X, position.Y, 0);
+			additionalTransformation = additionalTransformation * Transformation4D.RotateZ(this.product.GraphConstruction.Rotation * Math.PI / 180.0);
+
+			double height = KlimaFlaechenModul.GetModuleHeight(type) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			double width = KlimaFlaechenModul.GetModuleWidth(type) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+
+			Point2D topLeft2D = additionalTransformation.TransformTo2D(new Point2D(0, 0));
+			Point2D topRight2D = additionalTransformation.TransformTo2D(new Point2D(width, 0));
+			Point2D bottomRight2D = additionalTransformation.TransformTo2D(new Point2D(width, height));
+			Point2D bottomLeft2D = additionalTransformation.TransformTo2D(new Point2D(0, height));
+
+			PointF topLeft = new PointF((float)topLeft2D.X, (float)topLeft2D.Y);
+			PointF topRight = new PointF((float)topRight2D.X, (float)topRight2D.Y);
+			PointF bottomRight = new PointF((float)bottomRight2D.X, (float)bottomRight2D.Y);
+			PointF bottomLeft = new PointF((float)bottomLeft2D.X, (float)bottomLeft2D.Y);
+
+			Color c = Color.FromArgb(128, 0, 255, 0);
+			Pen p = new Pen(c);
+			Brush b = new SolidBrush(Color.FromArgb(64, c));
+			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
+				g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topRight });
+			} else {
+				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
+				g.DrawLines(p, new PointF[] { topRight, topLeft, topRight, bottomRight, topLeft });
+			}
 		}
 		#endregion
 	}

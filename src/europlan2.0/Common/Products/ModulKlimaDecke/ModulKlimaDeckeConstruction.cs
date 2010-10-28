@@ -12,7 +12,12 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(ModulKlimaDeckeConstructionGlatt))]
 	[XmlInclude(typeof(ModulKlimaDeckeConstructionAkustik))]
 	public abstract class ModulKlimaDeckeConstruction : IPickableObject, IDragableObject {
-		public abstract void Paint(Graphics g);
+
+		protected double rotation = 0;
+		protected List<Polygon2D> schienen = new List<Polygon2D>();
+		protected List<PossibleModulRow> possibleRows = new List<PossibleModulRow>();
+
+		public abstract void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode);
 
 		#region IPickableObject Members
 		public abstract bool HitTest(Point2D planPoint, Point pointInControl);
@@ -42,26 +47,121 @@ namespace Europlan.Common {
 				return this.Planner.ConnectedPlanPanel.PlanTransformation;
 			}
 		}
+
+		public double Rotation {
+			get { return this.rotation; }
+			set {
+				this.rotation = value;
+				this.RecalculateSchienen();
+			}
+		}
+
+		[XmlIgnore]
+		public double RotationRelativeToPlan {
+			get {
+				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
+					return this.rotation + (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation;
+				} else if (this.Planner.ConnectedPlanPanel.Plan is CadPlan) {
+					return -this.rotation;
+				}
+				return this.rotation;
+			}
+			set {
+				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
+					this.Rotation = value - (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation;
+				} else if (this.Planner.ConnectedPlanPanel.Plan is CadPlan) {
+					this.Rotation = -value;
+				} else {
+					this.Rotation = value;
+				}
+			}
+		}
+
+		public abstract void RecalculateSchienen();
+
+		[XmlIgnore]
+		public List<Polygon2D> Schienen {
+			get { return this.schienen; }
+		}
+
+		[XmlIgnore]
+		public List<PossibleModulRow> PossibleRows {
+			get { return this.possibleRows; }
+		}
+	}
+
+	public class PossibleModulRow {
+		private List<PossibleModulRowArea> areas = new List<PossibleModulRowArea>();
+		private Line2D borderLeft;
+		private Line2D borderRight;
+
+		public PossibleModulRow(Line2D borderLeft, Line2D borderRight) {
+			this.borderLeft = borderLeft;
+			this.borderRight = borderRight;
+		}
+
+		public PossibleModulRow(List<PossibleModulRowArea> areas) {
+			this.areas = areas;
+			if (this.areas.Count > 0) {
+				this.borderLeft = new Line2D(this.areas[0].TopLeft, this.areas[0].TopLeft - this.areas[0].BottomLeft);
+				this.borderRight = new Line2D(this.areas[0].TopRight, this.areas[0].TopRight - this.areas[0].BottomRight);
+			}
+		}
+
+		public List<PossibleModulRowArea> Areas {
+			get { return this.areas; }
+			set { this.areas = value; }
+		}
+
+		[XmlIgnore]
+		public Line2D BorderLeft {
+			get { return this.borderLeft; }
+		}
+
+		[XmlIgnore]
+		public Line2D BorderRight {
+			get { return this.borderRight; }
+		}
 	}
 
 	public class PossibleModulRowArea {
-		private Polygon2D area;
+		//private Polygon2D area;
+		private Point2D topLeft, topRight, bottomRight, bottomLeft;
 		private double length;
 		private double width;
 
-		public PossibleModulRowArea(Polygon2D area) {
-			this.Area = area;
-			length = 0;
-			width = 0;
+		public PossibleModulRowArea(/*Polygon2D area*/Point2D topLeft, Point2D bottomLeft, Point2D bottomRight, Point2D topRight) {
+			//this.area = area;
+			this.topLeft = topLeft;
+			this.topRight = topRight;
+			this.bottomRight = bottomRight;
+			this.bottomLeft = bottomLeft;
+			length = new Segment2D(this.topLeft, this.bottomLeft).GetLength();
+			width = new Segment2D(this.topLeft, this.topRight).GetLength();
 		}
 
 		public Polygon2D Area {
-			get { return this.area; }
-			set {
-				this.area = value;
-				length = new Segment2D(this.area[0], this.area[1]).GetLength();
-				width = new Segment2D(this.area[1], this.area[2]).GetLength();
+			get {
+				// return this.area;
+				return new Polygon2D(new Point2D[] { this.topLeft, this.bottomLeft, this.bottomRight, this.topRight });
 			}
+			/*set {
+				this.area = value;
+				if (this.area.Count != 4) {
+					this.area = null;
+				}
+				if (this.area == null) {
+					length = 0;
+					width = 0;
+					//borderLeft = null;
+					//borderRight = null;
+				} else {
+					length = new Segment2D(this.area[0], this.area[1]).GetLength();
+					width = new Segment2D(this.area[1], this.area[2]).GetLength();
+					//borderLeft = new Line2D(area[0], area[0] - area[3]);
+					//borderRight = new Line2D(area[1], area[1] - area[2]);
+				}
+			}*/
 		}
 
 		[XmlIgnore]
@@ -72,6 +172,26 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double Width {
 			get { return this.width; }
+		}
+
+		[XmlIgnore]
+		public Point2D TopLeft {
+			get { return this.topLeft; }
+		}
+
+		[XmlIgnore]
+		public Point2D TopRight {
+			get { return this.topRight; }
+		}
+
+		[XmlIgnore]
+		public Point2D BottomRight {
+			get { return this.bottomRight; }
+		}
+
+		[XmlIgnore]
+		public Point2D BottomLeft {
+			get { return this.bottomLeft; }
 		}
 	}
 

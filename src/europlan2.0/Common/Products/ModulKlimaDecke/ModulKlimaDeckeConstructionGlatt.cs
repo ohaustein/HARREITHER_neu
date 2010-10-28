@@ -10,18 +10,14 @@ using System.Windows.Forms;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionGlatt : ModulKlimaDeckeConstruction {
-		private double rotation = 0;
 		private double schienenBreite = 0.1; // meter
-		private double schienenAbstand = 0.5; // meter
+		private double schienenAbstand = 0.3; // meter
 		private double offset = 0; // meter
-
-		private List<Polygon2D> schienen = new List<Polygon2D>();
-		private List<List<PossibleModulRowArea>> possibleRows = new List<List<PossibleModulRowArea>>();
 
 		public ModulKlimaDeckeConstructionGlatt() {
 		}
 
-		public void RecalculateSchienen() {
+		public override void RecalculateSchienen() {
 			if (this.Planner == null || this.Planner.Product == null ||
 				this.Planner.Product.AssociatedRoom == null ||
 				this.Planner.Product.AssociatedRoom.RoomCoordinates == null ||
@@ -89,10 +85,8 @@ namespace Europlan.Common {
 				if (row.IsClockwise()) {
 					row = row.GetReverse();
 				}
-				//List<Polygon2D> rowList = Polygon2D.GetIntersection(new Polygon2D[] { room }, new Polygon2D[] { row });
-				//Console.WriteLine(rowList.ToString());
 
-				this.possibleRows.Add(GetPossibleModuleAreasInRow(row));
+				this.possibleRows.Add(new PossibleModulRow(GetPossibleModuleAreasInRow(row)));
 			}
 		}
 
@@ -168,26 +162,37 @@ namespace Europlan.Common {
 			for (i = 0; i < bordersTop.Count; i++) {
 				double top = bordersTop[i];
 				double bottom;
-				Polygon2D area;
+				//Polygon2D area;
 				foreach (CompareablePair<double> remove in removes) {
 					if (remove.value1 > bordersTop[i] && remove.value1 < bordersBottom[i]) {
 						bottom = remove.value2;
-						area = new Polygon2D();
+						/*area = new Polygon2D();
 						area.Add(matrix.Transform(new Point2D(borderLeft.Origin.X, top)));
 						area.Add(matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)));
 						area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, bottom)));
 						area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, top)));
-						possibleAreas.Add(new PossibleModulRowArea(area));
+						possibleAreas.Add(new PossibleModulRowArea(area));*/
+						possibleAreas.Add(new PossibleModulRowArea(
+							matrix.Transform(new Point2D(borderLeft.Origin.X, top)),
+							matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)),
+							matrix.Transform(new Point2D(borderRight.Origin.X, bottom)),
+							matrix.Transform(new Point2D(borderRight.Origin.X, top))));
 						top = remove.value1;
 					}
 				}
 				bottom = bordersBottom[i];
-				area = new Polygon2D();
+				/*area = new Polygon2D();
 				area.Add(matrix.Transform(new Point2D(borderLeft.Origin.X, top)));
 				area.Add(matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)));
 				area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, bottom)));
 				area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, top)));
-				possibleAreas.Add(new PossibleModulRowArea(area));
+				possibleAreas.Add(new PossibleModulRowArea(area));*/
+				possibleAreas.Add(new PossibleModulRowArea(
+					matrix.Transform(new Point2D(borderLeft.Origin.X, top)),
+					matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)),
+					matrix.Transform(new Point2D(borderRight.Origin.X, bottom)),
+					matrix.Transform(new Point2D(borderRight.Origin.X, top))));
+
 			}
 
 			return possibleAreas;
@@ -249,35 +254,6 @@ namespace Europlan.Common {
 				}
 			}
 			return max;
-		}
-
-		public double Rotation {
-			get { return this.rotation; }
-			set {
-				this.rotation = value;
-				this.RecalculateSchienen();
-			}
-		}
-
-		[XmlIgnore]
-		public double RotationRelativeToPlan {
-			get {
-				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
-					return this.rotation + (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation;
-				} else if (this.Planner.ConnectedPlanPanel.Plan is CadPlan) {
-					return -this.rotation;
-				}
-				return this.rotation;
-			}
-			set {
-				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
-					this.Rotation = value - (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation;
-				} else if (this.Planner.ConnectedPlanPanel.Plan is CadPlan) {
-					this.Rotation = -value;
-				} else {
-					this.Rotation = value;
-				}
-			}
 		}
 
 		public double SchienenBreite {
@@ -345,8 +321,8 @@ namespace Europlan.Common {
 		private List<Polygon2D> GetPossibleAreas(bool forDrawing) {
 			List<Polygon2D> possibleAreas = new List<Polygon2D>();
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
-			foreach (List<PossibleModulRowArea> possibleRow in this.possibleRows) {
-				foreach (PossibleModulRowArea possibleArea in possibleRow) {
+			foreach (PossibleModulRow possibleRow in this.possibleRows) {
+				foreach (PossibleModulRowArea possibleArea in possibleRow.Areas) {
 					if (forDrawing) {
 						Polygon2D a = new Polygon2D();
 						a.Add(additionalTransformation.TransformTo2D((Point3D)possibleArea.Area[0]));
@@ -362,7 +338,7 @@ namespace Europlan.Common {
 			return possibleAreas;
 		}
 
-		public override void Paint(Graphics g) {
+		public override void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode) {
 			if (this.Planner == null ||
 				this.Planner.Product == null ||
 				this.Planner.Product.AssociatedRoom == null ||
@@ -396,21 +372,22 @@ namespace Europlan.Common {
 				g.FillPolygon(b, poly);
 			}
 
-			c = Color.FromArgb(128, 0, 255, 0);
-			p = new Pen(c);
-			b = new SolidBrush(Color.FromArgb(64, c));
-			g.Clip.MakeInfinite();
-			Region r = new Region();
-			r.MakeInfinite();
-			g.Clip = r;
-			foreach (Polygon2D area in this.GetPossibleAreas(true)) {
-				PointF[] poly = new PointF[area.Count];
-				int i = 0;
-				foreach (Point2D point in area) {
-					poly[i++] = new PointF((float)point.X, (float)point.Y);
+			if (mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION) {
+				c = Color.FromArgb(128, 0, 255, 0);
+				p = new Pen(c);
+				b = new SolidBrush(Color.FromArgb(64, c));
+				Region r = new Region();
+				r.MakeInfinite();
+				g.Clip = r;
+				foreach (Polygon2D area in this.GetPossibleAreas(true)) {
+					PointF[] poly = new PointF[area.Count];
+					int i = 0;
+					foreach (Point2D point in area) {
+						poly[i++] = new PointF((float)point.X, (float)point.Y);
+					}
+					g.DrawPolygon(p, poly);
+					g.FillPolygon(b, poly);
 				}
-				g.DrawPolygon(p, poly);
-				g.FillPolygon(b, poly);
 			}
 		}
 

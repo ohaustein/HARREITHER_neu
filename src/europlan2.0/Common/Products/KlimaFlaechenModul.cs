@@ -7,12 +7,26 @@ using System.Threading;
 
 namespace Europlan.Common {
 	public class KlimaFlaechenModul {
-		private static double module_100_40_floor_heatarea = 1.0 * 0.4;
-		private static double module_100_40_roof_heatarea = 1.0 * (0.4 + 0.03 * 2);
-		private static double module_100_30_heatarea = 1.0 * (0.3 + 0.03 * 2);
-		private static double module_120_30_heatarea = 1.2 * (0.3 + 0.03 * 2);
-		private static double module_80_30_heatarea = 0.8 * (0.3 + 0.03 * 2);
-		private static double module_60_60_heatarea = 0.6 * 0.6;
+		private static double module_100_40_height = 1.0;
+		private static double module_100_30_height = 1.0;
+		private static double module_120_30_height = 1.2;
+		private static double module_80_30_height = 0.8;
+		private static double module_60_60_height = 0.6;
+
+		private static double module_100_40_width = 0.4;
+		private static double module_100_30_width = 0.3;
+		private static double module_120_30_width = 0.3;
+		private static double module_80_30_width = 0.3;
+		private static double module_60_60_width = 0.6;
+
+		private static double module_additional_width = 0.03 * 2;
+
+		private static double module_100_40_floor_heatarea = module_100_40_height * module_100_40_width;
+		private static double module_100_40_roof_heatarea = module_100_40_height * (module_100_40_width + module_additional_width);
+		private static double module_100_30_heatarea = module_100_30_height * (module_100_30_width + module_additional_width);
+		private static double module_120_30_heatarea = module_120_30_height * (module_120_30_width + module_additional_width);
+		private static double module_80_30_heatarea = module_80_30_height * (module_80_30_width + module_additional_width);
+		private static double module_60_60_heatarea = module_60_60_height * module_60_60_width;
 
 		/*private static double module_100_40_area = 1.0 * 0.4;
 		private static double module_100_30_area = 1.0 * 0.3;
@@ -342,6 +356,50 @@ namespace Europlan.Common {
 
 				case ModulTypeEnum.MODUL_60_60:
 					return EN1264.Instance.DruckverlustModul_120_30(1, massenstrom);
+
+				default:
+					return 0;
+			}
+		}
+
+		public static double GetModuleHeight(ModulTypeEnum type) {
+			switch (type) {
+				case ModulTypeEnum.MODUL_100_40:
+					return module_100_40_height;
+
+				case ModulTypeEnum.MODUL_100_30:
+					return module_100_30_height;
+
+				case ModulTypeEnum.MODUL_120_30:
+					return module_120_30_height;
+
+				case ModulTypeEnum.MODUL_80_30:
+					return module_80_30_height;
+
+				case ModulTypeEnum.MODUL_60_60:
+					return module_60_60_height;
+
+				default:
+					return 0;
+			}
+		}
+
+		public static double GetModuleWidth(ModulTypeEnum type) {
+			switch (type) {
+				case ModulTypeEnum.MODUL_100_40:
+					return module_100_40_width;
+
+				case ModulTypeEnum.MODUL_100_30:
+					return module_100_30_width;
+
+				case ModulTypeEnum.MODUL_120_30:
+					return module_120_30_width;
+
+				case ModulTypeEnum.MODUL_80_30:
+					return module_80_30_width;
+
+				case ModulTypeEnum.MODUL_60_60:
+					return module_60_60_width;
 
 				default:
 					return 0;

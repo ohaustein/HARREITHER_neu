@@ -87,16 +87,31 @@ namespace Europlan.Common.Products {
 			}
 		}
 
+		private void btnAddModules_Click(object sender, EventArgs e) {
+			if (!btnAddModules.Checked) {
+				this.modulKlimaBodenPlanner.Mode = ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_LAYOUT_ADD_AREA;
+				this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
+				this.UpdateButtons();
+			}
+		}
+
 		private void UpdateButtons() {
 			if (this.planPanel.Mode == PlanMode.PM_MOVE) {
 				this.btnMove.Checked = true;
 				this.btnConstruction.Checked = false;
+				this.btnAddModules.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaBodenPlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION) {
 				this.btnMove.Checked = false;
 				this.btnConstruction.Checked = true;
+				this.btnAddModules.Checked = false;
+			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaBodenPlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_LAYOUT_ADD_AREA) {
+				this.btnMove.Checked = false;
+				this.btnConstruction.Checked = false;
+				this.btnAddModules.Checked = true;
 			} else {
 				this.btnMove.Checked = false;
 				this.btnConstruction.Checked = false;
+				this.btnAddModules.Checked = false;
 			}
 		}
 
@@ -155,6 +170,32 @@ namespace Europlan.Common.Products {
 
 		private void btnVertical_Click(object sender, EventArgs e) {
 			this.numRotation.Value = 0;
+		}
+
+		private TabPage previousTab = null;
+
+		private void tabs_Selecting(object sender, TabControlCancelEventArgs e) {
+			if (previousTab == this.pageLayout && e.TabPage == this.pageConstruction) {
+				// TODO
+				e.Cancel = true;
+			}
+			if (!e.Cancel) {
+				this.UpdateToolbar(e.TabPage);
+			}
+		}
+
+		private void UpdateToolbar(TabPage tabPage) {
+			if (tabPage == this.pageLayout) {
+				this.btnConstruction.Visible = false;
+				this.btnAddModules.Visible = true;
+			} else if (tabPage == this.pageConstruction) {
+				this.btnAddModules.Visible = false;
+				this.btnConstruction.Visible = true;
+			}
+		}
+
+		private void tabs_Deselected(object sender, TabControlEventArgs e) {
+			this.previousTab = e.TabPage;
 		}
 	}
 }
