@@ -127,17 +127,19 @@ namespace Europlan.Common {
 	public class PossibleModulRowArea {
 		//private Polygon2D area;
 		private Point2D topLeft, topRight, bottomRight, bottomLeft;
-		private double length;
-		private double width;
+		private double top, bottom;
+		private double length, width;
 
-		public PossibleModulRowArea(/*Polygon2D area*/Point2D topLeft, Point2D bottomLeft, Point2D bottomRight, Point2D topRight) {
+		public PossibleModulRowArea(/*Polygon2D area*/Point2D topLeft, Point2D bottomLeft, Point2D bottomRight, Point2D topRight, double top, double bottom) {
 			//this.area = area;
 			this.topLeft = topLeft;
 			this.topRight = topRight;
 			this.bottomRight = bottomRight;
 			this.bottomLeft = bottomLeft;
-			length = new Segment2D(this.topLeft, this.bottomLeft).GetLength();
-			width = new Segment2D(this.topLeft, this.topRight).GetLength();
+			this.length = new Segment2D(this.topLeft, this.bottomLeft).GetLength();
+			this.width = new Segment2D(this.topLeft, this.topRight).GetLength();
+			this.top = top;
+			this.bottom = bottom;
 		}
 
 		public Polygon2D Area {
@@ -192,6 +194,52 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public Point2D BottomLeft {
 			get { return this.bottomLeft; }
+		}
+
+		[XmlIgnore]
+		public double Top {
+			get { return this.top; }
+		}
+
+		[XmlIgnore]
+		public double Bottom {
+			get { return this.bottom; }
+		}
+
+		public bool Fits(double moduleTop, double moduleBottom) {
+			return (this.top <= moduleTop && this.bottom >= moduleBottom);
+		}
+
+		public Nullable<double> BestStart(double moduleTop, double moduleBottom, bool bottomUp) {
+			if (bottomUp) {
+				if (moduleBottom <= this.bottom) {
+					if (moduleTop >= this.top) {
+						return moduleTop;
+					} else {
+						return null;
+					}
+				} else {
+					if (moduleTop <= this.bottom) {
+						return this.BestStart(this.bottom + moduleTop - moduleBottom, this.bottom, bottomUp);
+					} else {
+						return null;
+					}
+				}
+			} else {
+				if (moduleTop >= this.top) {
+					if (moduleBottom <= this.bottom) {
+						return moduleTop;
+					} else {
+						return null;
+					}
+				} else {
+					if (moduleBottom >= this.top) {
+						return this.BestStart(this.top, this.top + moduleBottom - moduleTop, bottomUp);
+					} else {
+						return null;
+					}
+				}
+			}
 		}
 	}
 

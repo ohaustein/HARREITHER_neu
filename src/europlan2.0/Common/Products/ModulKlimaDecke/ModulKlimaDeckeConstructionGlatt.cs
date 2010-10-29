@@ -176,7 +176,8 @@ namespace Europlan.Common {
 							matrix.Transform(new Point2D(borderLeft.Origin.X, top)),
 							matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)),
 							matrix.Transform(new Point2D(borderRight.Origin.X, bottom)),
-							matrix.Transform(new Point2D(borderRight.Origin.X, top))));
+							matrix.Transform(new Point2D(borderRight.Origin.X, top)),
+							top, bottom));
 						top = remove.value1;
 					}
 				}
@@ -191,7 +192,8 @@ namespace Europlan.Common {
 					matrix.Transform(new Point2D(borderLeft.Origin.X, top)),
 					matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)),
 					matrix.Transform(new Point2D(borderRight.Origin.X, bottom)),
-					matrix.Transform(new Point2D(borderRight.Origin.X, top))));
+					matrix.Transform(new Point2D(borderRight.Origin.X, top)),
+					top, bottom));
 
 			}
 
