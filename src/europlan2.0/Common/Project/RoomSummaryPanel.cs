@@ -15,6 +15,7 @@ namespace Europlan.Common {
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 
 		private Room room;
+		private bool updateOngoing = false;
 		
 		public RoomSummaryPanel() {
 			InitializeComponent();
@@ -53,10 +54,17 @@ namespace Europlan.Common {
 			this.colPlannedHeatLoad.HeaderText = EuroplanRes.RoomSummaryPanel_Heizleistung; //"PHeiz\n(W)";
 			this.colPlannedCoolLoad.HeaderText = EuroplanRes.RoomSummaryPanel_Kuehlleistung; //"PKühl\n(W)";
 			this.btnGeometry.Text = EuroplanRes.RoomSummaryPanel_Raumgeometrie_Erfassen; //"Raumgeometrie erfassen";
+			this.btnCeilingGeometry.Text = EuroplanRes.RoomSummaryPanel_Deckengeometrie_Erfassen; //"Deckengeometrie erfassen";
 		}
 
 
 		public void UpdateControl(bool resetUserInterface) {
+			updateOngoing = true;
+
+			if (resetUserInterface) {
+				this.chkCeilingGeometry.Checked = false;
+			}
+			
 			if (this.Tag != null) {
 				this.room = this.Tag as Room;
 				this.lblRoomName.Text = this.room.Id + " - " + this.room.Name;
@@ -79,8 +87,13 @@ namespace Europlan.Common {
 				//this.txtNormCool.Text = room.NormalizedCoolLoad.ToString();
 
 				this.btnGeometry.Enabled = this.room.AssociatedFloor.AssociatedPlanId != null ? true : false;
-				this.btnCeilingGeometry.Visible = this.btnGeometry.Enabled && this.room.RoomCoordinates != null && this.room.RoomCoordinates.Count > 0;
+				this.chkCeilingGeometry.Visible = this.btnGeometry.Enabled && this.room.RoomCoordinates != null && this.room.RoomCoordinates.Count > 0;
+				if (this.room.CeilingCoordinates != null && this.room.CeilingCoordinates.Count > 0) {
+					this.chkCeilingGeometry.Checked = true;
+				}
+				this.btnCeilingGeometry.Visible = this.chkCeilingGeometry.Checked;
 			}
+			updateOngoing = false;
 		}
 
 		public bool AllowLeave() {
@@ -376,10 +389,22 @@ namespace Europlan.Common {
 			Plan plan = this.room.AssociatedPlan;
 			if (plan != null) {
 				RoomPickerForm form = new RoomPickerForm(plan);
+				if (room.PlanSettingX.HasValue &&
+					room.PlanSettingY.HasValue &&
+					room.PlanSettingScale.HasValue &&
+					room.PlanSettingAngle.HasValue) {
+					form.Panel.SetPlanTransformations(room.PlanSettingScale.Value, room.PlanSettingX.Value, room.PlanSettingY.Value, room.PlanSettingAngle.Value);
+				}
 				form.RoomCoordinates = coordinates;
 				form.UnusedCoordinates = unusedCoordinates;
 				form.ShowDialog();
 				if (form.UnsavedChanges) {
+					double x,y,scale,angle;
+					form.Panel.GetPlanTransformations(out scale, out x, out y, out angle);
+					room.PlanSettingScale = scale;
+					room.PlanSettingX = x;
+					room.PlanSettingY = y;
+					room.PlanSettingAngle = angle;
 					if (calculateRoomArea) {
 						// TODO - unbeheizte flächen...
 						room.Area = (float)Math.Round(Plan.PolygonArea(form.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
@@ -391,6 +416,16 @@ namespace Europlan.Common {
 				form.Dispose();
 			} else {
 				MessageBox.Show(EuroplanRes.RoomSummaryPanel_MeasureTitle, EuroplanRes.RoomSummaryPanel_MeasureCaption);
+			}
+		}
+
+		private void chkCeilingGeometry_CheckedChanged(object sender, EventArgs e) {
+			if (!updateOngoing) {
+				if (!this.chkCeilingGeometry.Checked) {
+					this.room.CeilingCoordinates.Clear();
+					this.room.CeilingUnusedAreaCoordinates.Clear();
+				}
+				UpdateControl(false);
 			}
 		}
 

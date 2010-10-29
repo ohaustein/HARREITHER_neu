@@ -49,6 +49,10 @@ namespace Europlan.Common {
 		private List<List<Point2D>> roomUnusedAreaCoordinates;
 		private List<Point2D> ceilingCoordinates;
 		private List<List<Point2D>> ceilingUnusedAreaCoordinates;
+		private Nullable<double> planSettingX;
+		private Nullable<double> planSettingY;
+		private Nullable<double> planSettingScale;
+		private Nullable<double> planSettingAngle;
 
 		private TreeNode roomNode = new TreeNode();
 
@@ -608,6 +612,26 @@ namespace Europlan.Common {
 		public List<List<Point2D>> CeilingUnusedAreaCoordinates {
 			get { return this.ceilingUnusedAreaCoordinates; }
 			set { this.ceilingUnusedAreaCoordinates = value; }
+		}
+
+		public Nullable<double> PlanSettingX {
+			get { return planSettingX; }
+			set { planSettingX = value; }
+		}
+
+		public Nullable<double> PlanSettingY {
+			get { return planSettingY; }
+			set { planSettingY = value; }
+		}
+
+		public Nullable<double> PlanSettingScale {
+			get { return planSettingScale; }
+			set { planSettingScale = value; }
+		}
+
+		public Nullable<double> PlanSettingAngle {
+			get { return planSettingAngle; }
+			set { planSettingAngle = value; }
 		}
 	}
 

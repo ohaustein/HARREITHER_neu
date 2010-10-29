@@ -610,6 +610,25 @@ namespace Europlan.Common {
 		public Matrix4D ControlToPlan {
 			get { return this.controlToPlan; }
 		}
+
+		public void SetPlanTransformations(double scale, double translationX, double translationY, double rotation) {
+			if (this.scale != scale || this.xPos != translationX || this.yPos != translationY || this.angle != rotation) {
+				this.unsavedChanges = true;
+				this.scale = (float)scale;
+				this.xPos = (float)translationX;
+				this.yPos = (float)translationY;
+				this.angle = (float)rotation;
+				this.CalculateMatrices();
+				this.Invalidate();
+			}
+		}
+
+		public void GetPlanTransformations(out double scale, out double translationX, out double translationY, out double rotation) {
+			scale = this.scale.HasValue ? this.scale.Value : 1.0;
+			translationX = this.xPos;
+			translationY = this.yPos;
+			rotation = this.angle;
+		}
 	}
 
 }

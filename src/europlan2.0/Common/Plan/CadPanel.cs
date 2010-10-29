@@ -182,7 +182,15 @@ namespace Europlan.Common {
 			return to2DTransform;
 		}
 
-		public void SetPlanScaleAndTranslation(double scale, double translationX, double translationY) {
+
+		/// <summary>
+		/// rotation is ignored for cad plans
+		/// </summary>
+		/// <param name="scale"></param>
+		/// <param name="translationX"></param>
+		/// <param name="translationY"></param>
+		/// <param name="rotation"></param>
+		public void SetPlanTransformations(double scale, double translationX, double translationY, double rotation) {
 			if (this.scale != scale || this.translation.X != translationX || this.translation.Y != translationY) {
 				this.unsavedChanges = true;
 				this.scale = scale;
@@ -191,6 +199,20 @@ namespace Europlan.Common {
 				CalculateTo2DTransform();
 				this.Invalidate();
 			}
+		}
+
+		/// <summary>
+		/// rotation is ignored for cad plans
+		/// </summary>
+		/// <param name="scale"></param>
+		/// <param name="translationX"></param>
+		/// <param name="translationY"></param>
+		/// <param name="rotation"></param>
+		public void GetPlanTransformations(out double scale, out double translationX, out double translationY, out double rotation) {
+			scale = this.scale;
+			translationX = this.translation.X;
+			translationY = this.translation.Y;
+			rotation = 0;
 		}
 
 		public double PlanDefaultMargin {

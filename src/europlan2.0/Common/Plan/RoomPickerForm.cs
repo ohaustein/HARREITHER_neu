@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,6 +38,12 @@ namespace Europlan.Common {
 			this.SetLanguage();
 			this.panel.Plan = plan;
 			this.panel.Mode = PlanMode.PM_MOVE;
+		}
+
+		public PlanPanel Panel {
+			get {
+				return this.panel;
+			}
 		}
 
 		private void SetLanguage() {

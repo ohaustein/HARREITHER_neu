@@ -43,6 +43,13 @@ namespace Europlan.Common {
 						this.ConnectedPlanPanel.Plan = null;
 					} else {
 						this.ConnectedPlanPanel.Plan = this.product.AssociatedRoom.AssociatedPlan;
+						Room room = this.product.AssociatedRoom;
+						if (room.PlanSettingX.HasValue &&
+							room.PlanSettingY.HasValue &&
+							room.PlanSettingScale.HasValue &&
+							room.PlanSettingAngle.HasValue) {
+							this.ConnectedPlanPanel.SetPlanTransformations(room.PlanSettingScale.Value, room.PlanSettingX.Value, room.PlanSettingY.Value, room.PlanSettingAngle.Value);
+						}
 					}
 				}
 			}

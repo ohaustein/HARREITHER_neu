@@ -91,5 +91,8 @@ namespace Europlan.Common {
 		}
 
 		void InvalidateGraphics();
+
+		void SetPlanTransformations(double scale, double translationX, double translationY, double rotation);
+		void GetPlanTransformations(out double scale, out double translationX, out double translationY, out double rotation);
 	}
 }

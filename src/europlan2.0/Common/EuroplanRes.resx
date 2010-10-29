@@ -4283,6 +4283,9 @@ motore</value>
   <data name="RoomSummaryPanel_Bereinigt" xml:space="preserve">
     <value>(bereinigt)</value>
   </data>
+  <data name="RoomSummaryPanel_Deckengeometrie_Erfassen" xml:space="preserve">
+    <value>Deckengeometrie erfassen</value>
+  </data>
   <data name="RoomSummaryPanel_EingabefehlerText" xml:space="preserve">
     <value>Fehler im Format der Eingabe</value>
   </data>

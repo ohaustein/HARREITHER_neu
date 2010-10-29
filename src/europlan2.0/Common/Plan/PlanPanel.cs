@@ -306,5 +306,22 @@ namespace Europlan.Common {
 			get { return base.Cursor; }
 			set { base.Cursor = value; }
 		}
+
+		public void SetPlanTransformations(double scale, double translationX, double translationY, double rotation) {
+			if (this.panel != null) {
+				this.panel.SetPlanTransformations(scale, translationX, translationY, rotation);
+			}
+		}
+
+		public void GetPlanTransformations(out double scale, out double translationX, out double translationY, out double rotation) {
+			if (this.panel != null) {
+				this.panel.GetPlanTransformations(out scale, out translationX, out translationY, out rotation);
+			} else {
+				scale = 0;
+				translationX = 0;
+				translationY = 0;
+				rotation = 0;
+			}
+		}
 	}
 }

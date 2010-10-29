@@ -438,6 +438,10 @@ namespace Europlan.Common {
 									room.CeilingCoordinates.Clear();
 									room.CeilingUnusedAreaCoordinates.Clear();
 								}
+								room.PlanSettingX = null;
+								room.PlanSettingY = null;
+								room.PlanSettingScale = null;
+								room.PlanSettingAngle = null;
 							}
 						}
 					}
