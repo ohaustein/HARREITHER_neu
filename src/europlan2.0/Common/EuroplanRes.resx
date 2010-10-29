@@ -4286,6 +4286,9 @@ motore</value>
   <data name="RoomSummaryPanel_Deckengeometrie_Erfassen" xml:space="preserve">
     <value>Deckengeometrie erfassen</value>
   </data>
+  <data name="RoomSummaryPanel_Deckengeometrie_Gesondert_Erfassen" xml:space="preserve">
+    <value>Deckengeometrie gesondert erfassen</value>
+  </data>
   <data name="RoomSummaryPanel_EingabefehlerText" xml:space="preserve">
     <value>Fehler im Format der Eingabe</value>
   </data>

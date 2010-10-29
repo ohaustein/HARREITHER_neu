@@ -12030,6 +12030,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deckengeometrie gesondert erfassen.
+        /// </summary>
+        internal static string RoomSummaryPanel_Deckengeometrie_Gesondert_Erfassen {
+            get {
+                return ResourceManager.GetString("RoomSummaryPanel_Deckengeometrie_Gesondert_Erfassen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fehler im Format der Eingabe.
         /// </summary>
         internal static string RoomSummaryPanel_EingabefehlerText {

@@ -55,6 +55,7 @@ namespace Europlan.Common {
 			this.colPlannedCoolLoad.HeaderText = EuroplanRes.RoomSummaryPanel_Kuehlleistung; //"PKühl\n(W)";
 			this.btnGeometry.Text = EuroplanRes.RoomSummaryPanel_Raumgeometrie_Erfassen; //"Raumgeometrie erfassen";
 			this.btnCeilingGeometry.Text = EuroplanRes.RoomSummaryPanel_Deckengeometrie_Erfassen; //"Deckengeometrie erfassen";
+			this.chkCeilingGeometry.Text = EuroplanRes.RoomSummaryPanel_Deckengeometrie_Gesondert_Erfassen; //"Deckengeometrie gesondert erfassen"
 		}
 
 
