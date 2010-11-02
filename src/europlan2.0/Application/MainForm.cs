@@ -95,6 +95,7 @@ namespace Europlan.Application {
 			updateToolStripMenuItem.Text = EuroplanRes.MainForm_Aktualisieren; //"Auf Aktualisierungen prüfen...";
 			viewReportToolStripMenuItem.Text = EuroplanRes.MainForm_Ansehen; //"Ansehen";
 			warningsAndErrorsToolStripMenuItem.Text = EuroplanRes.MainForm_Warnungen; //"Warnungen und Fehler";
+			printPreviewToolStripButton.Text = EuroplanRes.MainForm_ProjektAnsehen; // "Projekt ansehen";
 		}
 
 		private void licenseManager_LicenseChanged(object sender, EventArgs e) {
@@ -779,7 +780,10 @@ namespace Europlan.Application {
 			if (this.CheckForUnsavedChanges()) {
 				if (this.openGlobalConfDialog.ShowDialog() == DialogResult.OK) {
 					if (!Path.GetDirectoryName(this.openGlobalConfDialog.FileName).Equals(PathUtil.DataPath)) {
+						string filename = Path.Combine(PathUtil.DataPath, "global.conf");
 						File.Copy(this.openGlobalConfDialog.FileName, Path.Combine(PathUtil.DataPath, "global.conf"), true);
+						FileUtils.SetAccessForEveryone(filename);
+
 						Configuration.ResetConfigurations();
 					}
 					if (projectFileName == null) {
@@ -814,7 +818,9 @@ namespace Europlan.Application {
 						// TODO 
 						// check if csv contains materials
 						if (File.Exists(dialog.FileName)) {
-							File.Copy(dialog.FileName, Path.Combine(PathUtil.DataPath, "BruttoPreise.csv"), true);
+							string filename = Path.Combine(PathUtil.DataPath, "BruttoPreise.csv");
+							File.Copy(dialog.FileName, filename, true);
+							FileUtils.SetAccessForEveryone(filename);
 						}
 					}
 					if (projectFileName == null) {

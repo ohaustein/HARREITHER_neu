@@ -27,10 +27,11 @@ namespace Europlan.Common {
 		}
 
 		public new static void StaticInitialize(Configuration config) {
-			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<HithermCompactRoofProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
+			/*quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<HithermCompactRoofProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
 			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<HithermCompactRoofProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
 			canHeat = config.GetProductParameterAsBool<HithermCompactRoofProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = config.GetProductParameterAsBool<HithermCompactRoofProduct>("ConfigQuickDimensioningCanCool", false);
+			canCool = config.GetProductParameterAsBool<HithermCompactRoofProduct>("ConfigQuickDimensioningCanCool", false);*/
+			Product.StaticInitialize<HithermCompactRoofProduct>(config);
 		}
 
 		public override Product Clone(Room room) {
@@ -40,7 +41,7 @@ namespace Europlan.Common {
 		}
 
 		#region Product Parameters
-		[ProductParameter]
+		[BoolProductParameter(true)]
 		public new static bool ConfigQuickDimensioningCanHeat {
 			get { return canHeat; }
 			set { canHeat = value; }
@@ -49,7 +50,7 @@ namespace Europlan.Common {
 			get { return canHeat; }
 		}
 
-		[ProductParameter]
+		[BoolProductParameter(false)]
 		public new static bool ConfigQuickDimensioningCanCool {
 			get { return canCool; }
 			set { canCool = value; }
@@ -58,7 +59,7 @@ namespace Europlan.Common {
 			get { return canCool; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(100)]
 		public new static int ConfigQuickDimensioningHeatPowerPerSquareMeter {
 			get { return quickDimensioningHeatPowerPerSquareMeter; }
 			set { quickDimensioningHeatPowerPerSquareMeter = value; }
@@ -67,7 +68,7 @@ namespace Europlan.Common {
 			get { return quickDimensioningHeatPowerPerSquareMeter; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(100)]
 		public new static int ConfigQuickDimensioningCoolPowerPerSquareMeter {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
 			set { quickDimensioningCoolPowerPerSquareMeter = value; }

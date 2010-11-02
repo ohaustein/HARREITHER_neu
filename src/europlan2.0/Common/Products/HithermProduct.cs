@@ -203,8 +203,12 @@ namespace Europlan.Common {
             get { return "Hitherm.png"; }
 		}
 
+		public override Product.CalculateModeEnum DefaultCalculateMode {
+			get { return CalculateModeEnum.HEAT; }
+		}
+
 		public new static void StaticInitialize(Configuration config) {
-			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
+			/*quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
 			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
 			canHeat = config.GetProductParameterAsBool<HithermProduct>("ConfigQuickDimensioningCanHeat", true);
 			canCool = config.GetProductParameterAsBool<HithermProduct>("ConfigQuickDimensioningCanCool", false);
@@ -213,7 +217,8 @@ namespace Europlan.Common {
 			maxDurchfluss = config.GetProductParameterAsInt<HithermProduct>("ConfigMaxDurchfluss", 240);
 			maxRegisterArea = config.GetProductParameterAsDouble<HithermProduct>("ConfigMaxRegisterArea", 10.0);
 			leistungsFaktorHeizen = config.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorHeizen", 1.0);
-			leistungsFaktorKuehlen = config.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorKuehlen", 1.0);
+			leistungsFaktorKuehlen = config.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorKuehlen", 1.0);*/
+			Product.StaticInitialize<HithermProduct>(config);
 		}
 
 		public static string GlobalNotificationMessage {
@@ -221,7 +226,7 @@ namespace Europlan.Common {
 				string message = null;
 				Configuration userConfig = Configuration.UserTemplate;
 
-				double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorHeizen", 1.0);
+				double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorHeizen");
 				if (leistungsFaktorHeizen != defaultLeistungsFaktorHeizen) {
 					if (message == null) {
 						message = "";
@@ -234,7 +239,7 @@ namespace Europlan.Common {
 					message += newMsg;
 				}
 
-				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorKuehlen", 1.0);
+				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorKuehlen");
 				if (leistungsFaktorKuehlen != defaultLeistungsFaktorKuehlen) {
 					if (message == null) {
 						message = "";
@@ -263,7 +268,7 @@ namespace Europlan.Common {
 		}
 
 		#region Product Parameters
-		[ProductParameter]
+		[BoolProductParameter(true)]
 		public static bool ConfigQuickDimensioningCanHeat {
 			get { return canHeat; }
 			set { canHeat = value; }
@@ -272,7 +277,7 @@ namespace Europlan.Common {
 			get { return canHeat; }
 		}
 
-		[ProductParameter]
+		[BoolProductParameter(false)]
 		public static bool ConfigQuickDimensioningCanCool {
 			get { return canCool; }
 			set { canCool = value; }
@@ -281,7 +286,7 @@ namespace Europlan.Common {
 			get { return canCool; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(100)]
 		public static int ConfigQuickDimensioningHeatPowerPerSquareMeter {
 			get { return quickDimensioningHeatPowerPerSquareMeter; }
 			set { quickDimensioningHeatPowerPerSquareMeter = value; }
@@ -290,7 +295,7 @@ namespace Europlan.Common {
 			get { return quickDimensioningHeatPowerPerSquareMeter; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(100)]
 		public static int ConfigQuickDimensioningCoolPowerPerSquareMeter {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
 			set { quickDimensioningCoolPowerPerSquareMeter = value; }
@@ -299,43 +304,43 @@ namespace Europlan.Common {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(4.19)]
 		public static double ConfigC {
 			get { return c; }
 			set { c = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.015099678)]
 		public static double ConfigVerbindeLeitungInnendurchmesser {
 			get { return verbindeLeitungInnendurchmesser; }
 			set { verbindeLeitungInnendurchmesser = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.000179071)]
 		public static double ConfigVerbindeLeitungInnenquerschnitt {
 			get { return verbindeLeitungInnenquerschnitt; }
 			set { verbindeLeitungInnenquerschnitt = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(1000)]
 		public static double ConfigRho {
 			get { return rho; }
 			set { rho = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.00000101)]
 		public static double ConfigV {
 			get { return v; }
 			set { v = value; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(15000)]
 		public static int ConfigMaxPressureLost {
 			get { return maxPressureLost; }
 			set { maxPressureLost = value; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(240)]
 		public static int ConfigMaxDurchfluss {
 			get { return maxDurchfluss; }
 			set { maxDurchfluss = value; }
@@ -344,13 +349,13 @@ namespace Europlan.Common {
 			get { return maxDurchfluss * rho / 1000; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(10)]
 		public static double ConfigMaxRegisterArea {
 			get { return maxRegisterArea; }
 			set { maxRegisterArea = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{105, 120, 140, 155, 175, 190, 210, 225, 240} ,{85, 100, 120, 135, 155, 170, 185, 205, 220} ,{70, 85, 105, 120, 140, 155, 175, 190, 210} ,{55, 70, 90, 105, 125, 140, 160, 175, 195} ,{45, 60, 80, 95, 115, 130, 145, 165, 180}}")]
 		public static string ConfigHlRegHeizleistungString {
 			get {
 				return ConvertArrayToString2(hlRegHeizleistung);
@@ -367,7 +372,7 @@ namespace Europlan.Common {
 			set { hlRegHeizleistung = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{70, 85, 95, 110, 120, 130, 145, 155, 170} ,{55, 70, 80, 95, 105, 120, 130, 145, 155} ,{50, 60, 75, 85, 100, 110, 125, 135, 150} ,{40, 50, 65, 75, 90, 100, 115, 125, 140} ,{30, 40, 55, 65, 80, 90, 100, 115, 130}}")]
 		public static string ConfigStdRegHeizleistungString {
 			get {
 				return ConvertArrayToString2(stdRegHeizleistung);
@@ -384,7 +389,7 @@ namespace Europlan.Common {
 			set { stdRegHeizleistung = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{0, 13, 20, 25, 33, 40, 45, 60}")]
 		public static string ConfigHlRegKuehlleistungString {
 			get {
 				return ConvertArrayToString(hlRegKuehlleistung);
@@ -401,7 +406,7 @@ namespace Europlan.Common {
 			set { hlRegKuehlleistung = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{0, 9, 14, 18, 24, 29, 32, 43}")]
 		public static string ConfigStdRegKuehlleistungString {
 			get {
 				return ConvertArrayToString(stdRegKuehlleistung);
@@ -418,7 +423,7 @@ namespace Europlan.Common {
 			set { stdRegKuehlleistung = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{0, 0.01, 0.02, 0.1}")]
 		public static string ConfigBeplankungRWerteString {
 			get {
 				return ConvertArrayToString(beplankungRWerte);
@@ -435,7 +440,7 @@ namespace Europlan.Common {
 			set { beplankungRWerte = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{1, 0.95, 0.91, 0.66}")]
 		public static string ConfigBeplankungFaktorenString {
 			get {
 				return ConvertArrayToString(beplankungFaktoren);
@@ -452,43 +457,43 @@ namespace Europlan.Common {
 			set { beplankungFaktoren = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(2.5)]
 		public static double ConfigDefaultDaemmung {
 			get { return defaultDaemmung; }
 			set { defaultDaemmung = value; }
 		}
 
-		[ProductParameter]
+		[BoolProductParameter(false, saveForUser = true)]
 		public static bool ConfigUsePlus {
 			get { return usePlus; }
 			set { usePlus = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(4)]
 		public static double ConfigSpreizungHeizMin {
 			get { return spreizungHeizMin; }
 			set { spreizungHeizMin = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(12)]
 		public static double ConfigSpreizungHeizMax {
 			get { return spreizungHeizMax; }
 			set { spreizungHeizMax = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(2)]
 		public static double ConfigSpreizungKuehlMin {
 			get { return spreizungKuehlMin; }
 			set { spreizungKuehlMin = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(5)]
 		public static double ConfigSpreizungKühlMax {
 			get { return spreizungKühlMax; }
 			set { spreizungKühlMax = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{0.1, 0.1, 0.1, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.5, 2.2, 3, 3.9, 5, 6.1, 7.4, 8.8, 10.4, 12, 13.8, 15.7, 17.8, 19.9, 22.2, 24.6} ,{0.1, 0.3, 0.4, 0.6, 0.8, 0.9, 1.1, 1.3, 1.6, 1.8, 2.3, 2.8, 3.4, 4, 4.7, 5.4, 6.2, 7, 7.9, 8.8, 9.7, 10.7, 11.8, 12.8, 14} ,{0.1, 0.2, 0.3, 0.5, 0.6, 0.8, 0.9, 1.1, 1.3, 1.5, 1.9, 2.4, 2.9, 3.5, 4.1, 4.8, 5.5, 6.3, 7.1, 8, 8.9, 9.8, 10.8, 11.9, 12.9} ,{0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 1, 1.2, 1.4, 1.9, 2.4, 2.9, 3.6, 4.2, 5, 5.8, 6.6, 7.5, 8.5, 9.5, 10.6, 11.7, 12.9, 14.2} ,{0.1, 0.1, 0.2, 0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.4, 1.9, 2.5, 3.1, 3.8, 4.6, 5.4, 6.3, 7.3, 8.3, 9.5, 10.7, 11.9, 13.2, 14.6, 16.1} ,{0.1, 0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1, 1.2, 1.5, 2.1, 2.8, 3.6, 4.4, 5.4, 6.5, 7.7, 8.9, 10.3, 11.8, 13.3, 15, 16.7, 18.6, 20.5}}")]
 		public static string ConfigDruckverlustHIT_50_5String {
 			get {
 				return ConvertArrayToString2(druckverlustHIT_50_5);
@@ -505,7 +510,7 @@ namespace Europlan.Common {
 			set { druckverlustHIT_50_5 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{0.1, 0.2, 0.3, 0.5, 0.6, 0.8, 1, 1.2, 1.5, 1.8, 2.4, 3.1, 3.8, 4.7, 5.6, 6.6, 7.7, 8.9, 10.1, 11.5, 12.9, 14.4, 16, 17.7, 19.4} ,{0.1, 0.3, 0.4, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.7, 2.2, 2.7, 3.2, 3.8, 4.5, 5.2, 5.9, 6.7, 7.5, 8.4, 9.3, 10.2, 11.2, 12.3, 13.4} ,{0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.9, 1.1, 1.2, 1.4, 1.9, 2.3, 2.9, 3.4, 4.1, 4.7, 5.4, 6.2, 7, 7.8, 8.7, 9.7, 10.7, 11.7, 12.8} ,{0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 1, 1.2, 1.4, 1.9, 2.4, 3, 3.6, 4.3, 5, 5.8, 6.7, 7.6, 8.6, 9.6, 10.7, 11.9, 13.1, 14.4} ,{0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.8, 1, 1.3, 1.5, 2, 2.7, 3.3, 4.1, 5, 5.9, 6.9, 8, 9.2, 10.4, 11.7, 13.1, 14.6, 16.1, 17.8} ,{0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.7, 2.3, 3.1, 4, 4.9, 6, 7.3, 8.6, 10, 11.5, 13.2, 14.9, 16.8, 18.8, 20.9, 23.1}}")]
 		public static string ConfigDruckverlustHIT_50_10String {
 			get {
 				return ConvertArrayToString2(druckverlustHIT_50_10);
@@ -522,7 +527,7 @@ namespace Europlan.Common {
 			set { druckverlustHIT_50_10 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{0.3, 0.7, 1.1, 1.5, 2, 2.5, 3, 3.6, 4.2, 4.9, 6.2, 7.7, 9.4, 11.2, 13.1, 15.1, 17.3, 19.7, 22.1, 24.7, 27.4, 30.3, 33.3, 36.4, 39.7} ,{0.2, 0.4, 0.7, 0.9, 1.2, 1.4, 1.7, 2, 2.3, 2.7, 3.3, 4.1, 4.9, 5.7, 6.6, 7.5, 8.5, 9.5, 10.6, 11.7, 12.9, 14.2, 15.5, 16.8, 18.2} ,{0.2, 0.4, 0.6, 0.9, 1.1, 1.4, 1.7, 1.9, 2.2, 2.6, 3.2, 4, 4.7, 5.6, 6.5, 7.4, 8.4, 9.4, 10.5, 11.7, 12.9, 14.1, 15.4, 16.8, 18.2} ,{0.2, 0.4, 0.6, 0.8, 1.1, 1.3, 1.6, 1.9, 2.2, 2.5, 3.3, 4.1, 4.9, 5.8, 6.8, 7.9, 9, 10.2, 11.5, 12.8, 14.2, 15.7, 17.2, 18.8, 20.5} ,{0.2, 0.4, 0.6, 0.9, 1.2, 1.4, 1.8, 2.1, 2.4, 2.8, 3.6, 4.4, 5.3, 6.3, 7.4, 8.5, 9.8, 11.1, 12.4, 13.9, 15.4, 17, 18.6, 20.4, 22.2} ,{0.2, 0.5, 0.7, 1, 1.3, 1.6, 1.9, 2.3, 2.7, 3.1, 3.9, 4.8, 5.9, 7, 8.1, 9.4, 10.7, 12.1, 13.6, 15.2, 16.8, 18.6, 20.4, 22.3, 24.2}}")]
 		public static string ConfigDruckverlustHIT_100_5String {
 			get {
 				return ConvertArrayToString2(druckverlustHIT_100_5);
@@ -539,7 +544,7 @@ namespace Europlan.Common {
 			set { druckverlustHIT_100_5 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{0.2, 0.5, 0.8, 1.1, 1.5, 1.8, 2.2, 2.6, 3.1, 3.6, 4.6, 5.7, 7, 8.3, 9.7, 11.3, 12.9, 14.7, 16.6, 18.5, 20.6, 22.8, 25, 27.4, 29.9} ,{0.2, 0.4, 0.6, 0.8, 1, 1.3, 1.6, 1.8, 2.1, 2.4, 3.1, 3.8, 4.6, 5.4, 6.3, 7.2, 8.2, 9.3, 10.4, 11.5, 12.7, 14, 15.3, 16.7, 18.2} ,{0.2, 0.5, 0.7, 1, 1.2, 1.5, 1.8, 2.1, 2.4, 2.8, 3.5, 4.2, 5, 5.9, 6.8, 7.7, 8.7, 9.7, 10.8, 12, 13.2, 14.4, 15.7, 17.1, 18.4} ,{0.2, 0.4, 0.6, 0.9, 1.1, 1.4, 1.7, 2, 2.4, 2.7, 3.4, 4.3, 5.1, 6.1, 7.1, 8.1, 9.3, 10.5, 11.8, 13.1, 14.5, 16, 17.5, 19.1, 20.8} ,{0.2, 0.5, 0.7, 1, 1.3, 1.6, 1.9, 2.3, 2.6, 3, 3.8, 4.7, 5.7, 6.7, 7.8, 8.9, 10.2, 11.5, 12.8, 14.3, 15.8, 17.4, 19, 20.8, 22.5} ,{0.3, 0.6, 0.9, 1.3, 1.6, 2, 2.4, 2.8, 3.2, 3.6, 4.6, 5.5, 6.6, 7.7, 8.8, 10, 11.3, 12.7, 14.1, 15.5, 17.1, 18.6, 20.3, 22, 23.8}}")]
 		public static string ConfigDruckverlustHIT_100_10String {
 			get {
 				return ConvertArrayToString2(druckverlustHIT_100_10);
@@ -556,7 +561,7 @@ namespace Europlan.Common {
 			set { druckverlustHIT_100_10 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{0.4, 0.8, 1.2, 1.7, 2.3, 2.8, 3.5, 4.1, 4.8, 5.6, 7.2, 9, 11, 13.1, 15.4, 17.9, 20.5, 23.3, 26.3, 29.4, 32.8, 36.2, 39.9, 43.7, 47.7} ,{0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.7, 2, 2.3, 3, 3.9, 4.7, 5.7, 6.8, 7.9, 9.2, 10.5, 11.9, 13.4, 15, 16.7, 18.4, 20.3, 22.2} ,{0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.4, 1.6, 1.9, 2.4, 3.1, 3.8, 4.5, 5.4, 6.3, 7.2, 8.3, 9.4, 10.5, 11.7, 13, 14.4, 15.8, 17.3} ,{0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.9, 1.1, 1.3, 1.5, 2, 2.5, 3.1, 3.8, 4.5, 5.3, 6.2, 7.1, 8, 9, 10.1, 11.3, 12.5, 13.8, 15.1} ,{0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9, 1, 1.2, 1.4, 1.9, 2.4, 3, 3.6, 4.3, 5, 5.9, 6.7, 7.6, 8.6, 9.6, 10.7, 11.9, 13.1, 14.3} ,{0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.9, 1.1, 1.3, 1.5, 2, 2.6, 3.2, 3.9, 4.6, 5.4, 6.3, 7.2, 8.2, 9.2, 10.3, 11.5, 12.7, 14, 15.4}}")]
 		public static string ConfigDruckverlustHIT_150_5String {
 			get {
 				return ConvertArrayToString2(druckverlustHIT_150_5);
@@ -573,7 +578,7 @@ namespace Europlan.Common {
 			set { druckverlustHIT_150_5 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{0.2, 0.4, 0.7, 1, 1.3, 1.7, 2.1, 2.6, 3.1, 3.6, 4.8, 6.2, 7.7, 9.4, 11.3, 13.3, 15.4, 17.7, 20.2, 22.9, 25.7, 28.6, 31.8, 35, 38.5} ,{0.2, 0.3, 0.5, 0.7, 1, 1.2, 1.5, 1.7, 2, 2.4, 3, 3.8, 4.6, 5.5, 6.5, 7.5, 8.6, 9.8, 11, 12.4, 13.8, 15.2, 16.8, 18.4, 20} ,{0.1, 0.2, 0.3, 0.5, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 2.2, 2.7, 3.4, 4.1, 4.8, 5.7, 6.6, 7.5, 8.5, 9.6, 10.7, 11.9, 13.2, 14.5, 15.9} ,{0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.9, 1.1, 1.3, 1.5, 1.9, 2.5, 3, 3.7, 4.3, 5.1, 5.9, 6.7, 7.6, 8.6, 9.6, 10.6, 11.7, 12.9, 14.1} ,{0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 0.9, 1.1, 1.3, 1.5, 2, 2.5, 3.1, 3.7, 4.4, 5.2, 5.9, 6.8, 7.7, 8.7, 9.7, 10.7, 11.9, 13, 14.3} ,{0.1, 0.2, 0.4, 0.5, 0.7, 0.8, 1, 1.2, 1.5, 1.7, 2.2, 2.8, 3.4, 4.1, 4.8, 5.7, 6.5, 7.4, 8.4, 9.5, 10.6, 11.7, 12.9, 14.2, 15.6}}")]
 		public static string ConfigDruckverlustHIT_150_10String {
 			get {
 				return ConvertArrayToString2(druckverlustHIT_150_10);
@@ -590,7 +595,7 @@ namespace Europlan.Common {
 			set { druckverlustHIT_150_10 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{0.2, 0.5, 0.9, 1.3, 1.8, 2.3, 2.8, 3.4, 4.1, 4.8, 6.5, 8.3, 10.3, 12.6, 15.1, 17.8, 20.7, 23.8, 27.1, 30.7, 34.4, 38.4, 42.6, 47, 51.6} ,{0.2, 0.4, 0.7, 0.9, 1.2, 1.5, 1.9, 2.2, 2.6, 3, 3.8, 4.8, 5.8, 6.9, 8.1, 9.3, 10.7, 12.1, 13.7, 15.3, 17, 18.7, 20.6, 22.6, 24.6} ,{0.1, 0.3, 0.5, 0.7, 1, 1.2, 1.5, 1.8, 2.1, 2.4, 3.2, 4, 4.9, 5.9, 7, 8.2, 9.4, 10.8, 12.2, 13.7, 15.3, 17, 18.8, 20.6, 22.5} ,{0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1, 1.3, 1.5, 1.8, 2.5, 3.2, 4.1, 5, 6.1, 7.2, 8.5, 9.8, 11.3, 12.8, 14.4, 16.2, 18, 19.9, 21.9} ,{0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.9, 2.6, 3.4, 4.3, 5.4, 6.5, 7.7, 9, 10.5, 12, 13.7, 15.4, 17.3, 19.2, 21.3} ,{0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.6, 0.9, 1.4, 2, 2.8, 3.7, 4.7, 5.8, 7, 8.4, 9.8, 11.4, 13.1, 15, 16.9, 19, 21.1}}")]
 		public static string ConfigDruckverlustHIT_200_5String {
 			get {
 				return ConvertArrayToString2(druckverlustHIT_200_5);
@@ -607,7 +612,7 @@ namespace Europlan.Common {
 			set { druckverlustHIT_200_5 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{0.1, 0.3, 0.5, 0.7, 1, 1.3, 1.7, 2.2, 2.6, 3.2, 4.4, 5.7, 7.3, 9, 10.9, 13.1, 15.3, 17.8, 20.5, 23.3, 26.4, 29.6, 33, 36.6, 40.3} ,{0.2, 0.4, 0.7, 1, 1.2, 1.5, 1.9, 2.2, 2.6, 3, 3.8, 4.7, 5.7, 6.7, 7.8, 9, 10.3, 11.7, 13.1, 14.6, 16.2, 17.9, 19.6, 21.4, 23.3} ,{0.1, 0.3, 0.4, 0.6, 0.8, 1.1, 1.3, 1.6, 1.9, 2.2, 2.9, 3.7, 4.6, 5.6, 6.6, 7.7, 9, 10.3, 11.7, 13.2, 14.7, 16.4, 18.2, 20, 21.9} ,{0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.4, 1.6, 2.2, 3, 3.8, 4.7, 5.7, 6.8, 8, 9.3, 10.7, 12.2, 13.8, 15.4, 17.2, 19.1, 21.1} ,{0.1, 0.1, 0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.7, 2.3, 3.1, 3.9, 4.9, 6, 7.2, 8.4, 9.8, 11.3, 12.9, 14.6, 16.5, 18.4, 20.4} ,{0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 1.2, 1.8, 2.5, 3.3, 4.3, 5.4, 6.6, 7.9, 9.3, 10.8, 12.5, 14.2, 16.1, 18.1, 20.2}}")]
 		public static string ConfigDruckverlustHIT_200_10String {
 			get {
 				return ConvertArrayToString2(druckverlustHIT_200_10);
@@ -624,7 +629,7 @@ namespace Europlan.Common {
 			set { druckverlustHIT_200_10 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{0.2, 0.5, 0.9, 1.3, 1.8, 2.3, 2.8, 3.4, 4.1, 4.8, 6.5, 8.3, 10.3, 12.6, 15.1, 17.8, 20.7, 23.8, 27.1, 30.7, 34.4, 38.4, 42.6, 47, 51.6} ,{0.2, 0.4, 0.7, 0.9, 1.2, 1.5, 1.9, 2.2, 2.6, 3, 3.8, 4.8, 5.8, 6.9, 8.1, 9.3, 10.7, 12.1, 13.7, 15.3, 17, 18.7, 20.6, 22.6, 24.6} ,{0.1, 0.3, 0.5, 0.7, 1, 1.2, 1.5, 1.8, 2.1, 2.4, 3.2, 4, 4.9, 5.9, 7, 8.2, 9.4, 10.8, 12.2, 13.7, 15.3, 17, 18.8, 20.6, 22.5} ,{0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1, 1.3, 1.5, 1.8, 2.5, 3.2, 4.1, 5, 6.1, 7.2, 8.5, 9.8, 11.3, 12.8, 14.4, 16.2, 18, 19.9, 21.9} ,{0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.1, 1.4, 1.9, 2.6, 3.4, 4.3, 5.4, 6.5, 7.7, 9, 10.5, 12, 13.7, 15.4, 17.3, 19.2, 21.3} ,{0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.6, 0.9, 1.4, 2, 2.8, 3.7, 4.7, 5.8, 7, 8.4, 9.8, 11.4, 13.1, 15, 16.9, 19, 21.1}}")]
 		public static string ConfigDruckverlustHIT_250_5String {
 			get {
 				return ConvertArrayToString2(druckverlustHIT_250_5);
@@ -641,7 +646,7 @@ namespace Europlan.Common {
 			set { druckverlustHIT_250_5 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{{0.1, 0.3, 0.5, 0.7, 1, 1.3, 1.7, 2.2, 2.6, 3.2, 4.4, 5.7, 7.3, 9, 10.9, 13.1, 15.3, 17.8, 20.5, 23.3, 26.4, 29.6, 33, 36.6, 40.3} ,{0.2, 0.4, 0.7, 1, 1.2, 1.5, 1.9, 2.2, 2.6, 3, 3.8, 4.7, 5.7, 6.7, 7.8, 9, 10.3, 11.7, 13.1, 14.6, 16.2, 17.9, 19.6, 21.4, 23.3} ,{0.1, 0.3, 0.4, 0.6, 0.8, 1.1, 1.3, 1.6, 1.9, 2.2, 2.9, 3.7, 4.6, 5.6, 6.6, 7.7, 9, 10.3, 11.7, 13.2, 14.7, 16.4, 18.2, 20, 21.9} ,{0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.4, 1.6, 2.2, 3, 3.8, 4.7, 5.7, 6.8, 8, 9.3, 10.7, 12.2, 13.8, 15.4, 17.2, 19.1, 21.1} ,{0.1, 0.1, 0.1, 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.7, 2.3, 3.1, 3.9, 4.9, 6, 7.2, 8.4, 9.8, 11.3, 12.9, 14.6, 16.5, 18.4, 20.4} ,{0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 1.2, 1.8, 2.5, 3.3, 4.3, 5.4, 6.6, 7.9, 9.3, 10.8, 12.5, 14.2, 16.1, 18.1, 20.2}}")]
 		public static string ConfigDruckverlustHIT_250_10String {
 			get {
 				return ConvertArrayToString2(druckverlustHIT_250_10);
@@ -658,13 +663,13 @@ namespace Europlan.Common {
 			set { druckverlustHIT_250_10 = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(1)]
 		public static double ConfigLeistungsFaktorKuehlen {
 			get { return leistungsFaktorKuehlen; }
 			set { leistungsFaktorKuehlen = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(1)]
 		public static double ConfigLeistungsFaktorHeizen {
 			get { return leistungsFaktorHeizen; }
 			set { leistungsFaktorHeizen = value; }
@@ -1195,38 +1200,8 @@ namespace Europlan.Common {
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 
-			// Euroval Anbindung
-			// 21mm Anbindung
-			double pipeEurovalLength = 0;
-			double pipe21mmLength = 0;
-			double circuit21mmOnlyFirstLength = 0;
-			double circuit21mmAllLength = 0;
-			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
-				if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
-					if (pipe.OnlyFirst) {
-						pipe21mmLength += (pipe.Vorlauf + pipe.Ruecklauf);
-						circuit21mmOnlyFirstLength += (pipe.Vorlauf + pipe.Ruecklauf);
-					} else {
-						pipe21mmLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
-						circuit21mmAllLength += (pipe.Vorlauf + pipe.Ruecklauf);
-					}
+			this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, 0);
 
-				} else {
-					if (pipe.OnlyFirst) {
-						pipeEurovalLength += (pipe.Vorlauf + pipe.Ruecklauf);
-					} else {
-						pipeEurovalLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
-					}
-				}
-			}
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", pipeEurovalLength);
-			if (ConfigUsePlus) {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR51", pipe21mmLength);
-			} else {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", pipe21mmLength);
-			}
-			
-			
 			double verbindeLength = 0;
 			int teilflaechen = 0;
 			double registerCount = 0;

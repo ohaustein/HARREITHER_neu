@@ -88,7 +88,7 @@ namespace Europlan.Common {
 										pp.Product.PlannedConnection = null;
 									}
 									foreach (PlannedProduct pp in connectedProducts) {
-										pp.ConfigureProductDefault();
+										pp.ConfigureProduct(false);
 									}
 								}
 							}

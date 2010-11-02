@@ -25,6 +25,7 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -35,6 +36,7 @@ namespace Europlan.Common {
 			this.gridExtendedCorrections = new System.Windows.Forms.DataGridView();
 			this.rbExtendedCorrections = new System.Windows.Forms.RadioButton();
 			this.rbStandardCorrections = new System.Windows.Forms.RadioButton();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.extendedCorrectionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.CircuitNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.correctAreaDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -71,7 +73,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
 			this.gridExtendedCorrections.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			this.gridExtendedCorrections.ColumnHeadersHeight = 55;
+			this.gridExtendedCorrections.ColumnHeadersHeight = 70;
 			this.gridExtendedCorrections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.gridExtendedCorrections.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CircuitNr,
@@ -123,6 +125,20 @@ namespace Europlan.Common {
 			this.rbStandardCorrections.Text = "nur Standardkorrekturen verwenden (keine erweiterten Korrekturen)";
 			this.rbStandardCorrections.UseVisualStyleBackColor = true;
 			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "CircuitNr";
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+			this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle9;
+			this.dataGridViewTextBoxColumn1.FillWeight = 70F;
+			this.dataGridViewTextBoxColumn1.Frozen = true;
+			this.dataGridViewTextBoxColumn1.HeaderText = "Heiz-\nkreis\nNr.";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn1.Width = 70;
+			// 
 			// extendedCorrectionsBindingSource
 			// 
 			this.extendedCorrectionsBindingSource.DataSource = typeof(Europlan.Common.ExtendedCorrections);
@@ -133,20 +149,22 @@ namespace Europlan.Common {
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
 			this.CircuitNr.DefaultCellStyle = dataGridViewCellStyle2;
-			this.CircuitNr.FillWeight = 40F;
+			this.CircuitNr.FillWeight = 80F;
+			this.CircuitNr.Frozen = true;
 			this.CircuitNr.HeaderText = "Heiz-\nkreis\nNr.";
 			this.CircuitNr.Name = "CircuitNr";
 			this.CircuitNr.ReadOnly = true;
 			this.CircuitNr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.CircuitNr.Width = 40;
+			this.CircuitNr.Width = 80;
 			// 
 			// correctAreaDataGridViewCheckBoxColumn
 			// 
 			this.correctAreaDataGridViewCheckBoxColumn.DataPropertyName = "CorrectArea";
-			this.correctAreaDataGridViewCheckBoxColumn.FillWeight = 45F;
+			this.correctAreaDataGridViewCheckBoxColumn.FillWeight = 70F;
+			this.correctAreaDataGridViewCheckBoxColumn.Frozen = true;
 			this.correctAreaDataGridViewCheckBoxColumn.HeaderText = "Vor-\ngabe";
 			this.correctAreaDataGridViewCheckBoxColumn.Name = "correctAreaDataGridViewCheckBoxColumn";
-			this.correctAreaDataGridViewCheckBoxColumn.Width = 45;
+			this.correctAreaDataGridViewCheckBoxColumn.Width = 70;
 			// 
 			// areaValueDataGridViewTextBoxColumn
 			// 
@@ -155,6 +173,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle3.Format = "F0";
 			this.areaValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.areaValueDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.areaValueDataGridViewTextBoxColumn.Frozen = true;
 			this.areaValueDataGridViewTextBoxColumn.HeaderText = "m²\n";
 			this.areaValueDataGridViewTextBoxColumn.Name = "areaValueDataGridViewTextBoxColumn";
 			this.areaValueDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
@@ -168,6 +187,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle4.Format = "F0";
 			this.areaPercentageDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
 			this.areaPercentageDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.areaPercentageDataGridViewTextBoxColumn.Frozen = true;
 			this.areaPercentageDataGridViewTextBoxColumn.HeaderText = "%\n";
 			this.areaPercentageDataGridViewTextBoxColumn.Name = "areaPercentageDataGridViewTextBoxColumn";
 			this.areaPercentageDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
@@ -195,10 +215,11 @@ namespace Europlan.Common {
 			// correctRimDataGridViewCheckBoxColumn
 			// 
 			this.correctRimDataGridViewCheckBoxColumn.DataPropertyName = "CorrectRim";
-			this.correctRimDataGridViewCheckBoxColumn.FillWeight = 45F;
+			this.correctRimDataGridViewCheckBoxColumn.FillWeight = 70F;
+			this.correctRimDataGridViewCheckBoxColumn.Frozen = true;
 			this.correctRimDataGridViewCheckBoxColumn.HeaderText = "Vor-\ngabe";
 			this.correctRimDataGridViewCheckBoxColumn.Name = "correctRimDataGridViewCheckBoxColumn";
-			this.correctRimDataGridViewCheckBoxColumn.Width = 45;
+			this.correctRimDataGridViewCheckBoxColumn.Width = 70;
 			// 
 			// rimLengthValueDataGridViewTextBoxColumn
 			// 
@@ -207,6 +228,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle5.Format = "F0";
 			this.rimLengthValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
 			this.rimLengthValueDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.rimLengthValueDataGridViewTextBoxColumn.Frozen = true;
 			this.rimLengthValueDataGridViewTextBoxColumn.HeaderText = "m\n";
 			this.rimLengthValueDataGridViewTextBoxColumn.Name = "rimLengthValueDataGridViewTextBoxColumn";
 			this.rimLengthValueDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
@@ -220,6 +242,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle6.Format = "F0";
 			this.rimPercentageDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
 			this.rimPercentageDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.rimPercentageDataGridViewTextBoxColumn.Frozen = true;
 			this.rimPercentageDataGridViewTextBoxColumn.HeaderText = "%\n";
 			this.rimPercentageDataGridViewTextBoxColumn.Name = "rimPercentageDataGridViewTextBoxColumn";
 			this.rimPercentageDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
@@ -233,6 +256,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle7.Format = "F0";
 			this.rimCornersValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
 			this.rimCornersValueDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.rimCornersValueDataGridViewTextBoxColumn.Frozen = true;
 			this.rimCornersValueDataGridViewTextBoxColumn.HeaderText = "Anzahl\nEcken";
 			this.rimCornersValueDataGridViewTextBoxColumn.Name = "rimCornersValueDataGridViewTextBoxColumn";
 			this.rimCornersValueDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -241,10 +265,11 @@ namespace Europlan.Common {
 			// correctConnectionsDataGridViewCheckBoxColumn
 			// 
 			this.correctConnectionsDataGridViewCheckBoxColumn.DataPropertyName = "CorrectConnections";
-			this.correctConnectionsDataGridViewCheckBoxColumn.FillWeight = 45F;
+			this.correctConnectionsDataGridViewCheckBoxColumn.FillWeight = 70F;
+			this.correctConnectionsDataGridViewCheckBoxColumn.Frozen = true;
 			this.correctConnectionsDataGridViewCheckBoxColumn.HeaderText = "Vor-\ngabe";
 			this.correctConnectionsDataGridViewCheckBoxColumn.Name = "correctConnectionsDataGridViewCheckBoxColumn";
-			this.correctConnectionsDataGridViewCheckBoxColumn.Width = 45;
+			this.correctConnectionsDataGridViewCheckBoxColumn.Width = 70;
 			// 
 			// connectionsPercentageDataGridViewTextBoxColumn
 			// 
@@ -252,12 +277,12 @@ namespace Europlan.Common {
 			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle8.Format = "F0";
 			this.connectionsPercentageDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
-			this.connectionsPercentageDataGridViewTextBoxColumn.FillWeight = 55F;
+			this.connectionsPercentageDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.connectionsPercentageDataGridViewTextBoxColumn.HeaderText = "Fläche\n%";
 			this.connectionsPercentageDataGridViewTextBoxColumn.Name = "connectionsPercentageDataGridViewTextBoxColumn";
 			this.connectionsPercentageDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
 			this.connectionsPercentageDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.connectionsPercentageDataGridViewTextBoxColumn.Width = 55;
+			this.connectionsPercentageDataGridViewTextBoxColumn.Width = 70;
 			// 
 			// connectionsValueDataGridViewTextBoxColumn
 			// 
@@ -289,6 +314,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.BindingSource extendedCorrectionsBindingSource;
 		private System.Windows.Forms.RadioButton rbExtendedCorrections;
 		private System.Windows.Forms.RadioButton rbStandardCorrections;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn CircuitNr;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn correctAreaDataGridViewCheckBoxColumn;
 		private NumericColumn areaValueDataGridViewTextBoxColumn;

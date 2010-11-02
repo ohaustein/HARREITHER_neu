@@ -211,7 +211,8 @@ namespace Europlan.Common {
 			r1.X += 1;
 			r1.Y += 1;
 			r1.Width = r1.Width + r2.Width + r3.Width - 4;
-			r1.Height = r1.Height / 2 - 2;
+			//r1.Height = r1.Height / 2 - 2;
+			r1.Height = 26;
 			StringFormat format = new StringFormat();
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Center;
@@ -232,7 +233,8 @@ namespace Europlan.Common {
 			r1.X += 1;
 			r1.Y += 1;
 			r1.Width = r1.Width + r2.Width + r3.Width + r4.Width - 4;
-			r1.Height = r1.Height / 2 - 2;
+			//r1.Height = r1.Height / 2 - 2;
+			r1.Height = 26;
 			format = new StringFormat();
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Center;
@@ -250,7 +252,8 @@ namespace Europlan.Common {
 			r1.X += 1;
 			r1.Y += 1;
 			r1.Width = r1.Width + r2.Width - 4;
-			r1.Height = r1.Height / 2 - 2;
+			//r1.Height = r1.Height / 2 - 2;
+			r1.Height = 26;
 			format = new StringFormat();
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Center;

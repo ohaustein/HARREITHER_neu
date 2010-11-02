@@ -25,6 +25,15 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -41,6 +50,22 @@ namespace Europlan.Common {
 			this.quickDimensioningGrid = new System.Windows.Forms.DataGridView();
 			this.roomBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.numericColumn1 = new Europlan.Common.NumericColumn();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numericColumn2 = new Europlan.Common.NumericColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numericColumn3 = new Europlan.Common.NumericColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numericColumn4 = new Europlan.Common.NumericColumn();
+			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numericColumn5 = new Europlan.Common.NumericColumn();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numericColumn6 = new Europlan.Common.NumericColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numericColumn7 = new Europlan.Common.NumericColumn();
+			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numericColumn8 = new Europlan.Common.NumericColumn();
+			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colRoomTemperature = new Europlan.Common.NumericColumn();
@@ -139,6 +164,182 @@ namespace Europlan.Common {
 			this.panel1.TabIndex = 1;
 			this.panel1.Visible = false;
 			// 
+			// numericColumn1
+			// 
+			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle15.Format = "F1";
+			this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle15;
+			this.numericColumn1.FillWeight = 70F;
+			this.numericColumn1.HeaderText = "Euroval®\n(m²)";
+			this.numericColumn1.Name = "numericColumn1";
+			this.numericColumn1.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numericColumn1.Visible = false;
+			this.numericColumn1.Width = 70;
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle16;
+			this.dataGridViewTextBoxColumn1.FillWeight = 70F;
+			this.dataGridViewTextBoxColumn1.HeaderText = "Euroval®\nHeizkreise";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn1.Visible = false;
+			this.dataGridViewTextBoxColumn1.Width = 70;
+			// 
+			// numericColumn2
+			// 
+			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle17.Format = "F1";
+			this.numericColumn2.DefaultCellStyle = dataGridViewCellStyle17;
+			this.numericColumn2.FillWeight = 70F;
+			this.numericColumn2.HeaderText = "BKA\n(m²)";
+			this.numericColumn2.Name = "numericColumn2";
+			this.numericColumn2.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numericColumn2.Visible = false;
+			this.numericColumn2.Width = 70;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.FillWeight = 70F;
+			this.dataGridViewTextBoxColumn2.HeaderText = "BKA\nHeizkreise";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn2.Visible = false;
+			this.dataGridViewTextBoxColumn2.Width = 70;
+			// 
+			// numericColumn3
+			// 
+			dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle18.Format = "F1";
+			this.numericColumn3.DefaultCellStyle = dataGridViewCellStyle18;
+			this.numericColumn3.FillWeight = 70F;
+			this.numericColumn3.HeaderText = "Hitherm®\n(m²)";
+			this.numericColumn3.Name = "numericColumn3";
+			this.numericColumn3.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numericColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.numericColumn3.Visible = false;
+			this.numericColumn3.Width = 70;
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.FillWeight = 70F;
+			this.dataGridViewTextBoxColumn3.HeaderText = "Hitherm®\nHeizkreise";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn3.Visible = false;
+			this.dataGridViewTextBoxColumn3.Width = 70;
+			// 
+			// numericColumn4
+			// 
+			dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle19.Format = "F1";
+			this.numericColumn4.DefaultCellStyle = dataGridViewCellStyle19;
+			this.numericColumn4.FillWeight = 75F;
+			this.numericColumn4.HeaderText = "Hitherm® Co\n(m²)";
+			this.numericColumn4.Name = "numericColumn4";
+			this.numericColumn4.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numericColumn4.Visible = false;
+			this.numericColumn4.Width = 75;
+			// 
+			// dataGridViewTextBoxColumn4
+			// 
+			this.dataGridViewTextBoxColumn4.FillWeight = 75F;
+			this.dataGridViewTextBoxColumn4.HeaderText = "Hitherm® Co\nHeizkreise";
+			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn4.Visible = false;
+			this.dataGridViewTextBoxColumn4.Width = 75;
+			// 
+			// numericColumn5
+			// 
+			dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle20.Format = "F1";
+			this.numericColumn5.DefaultCellStyle = dataGridViewCellStyle20;
+			this.numericColumn5.FillWeight = 75F;
+			this.numericColumn5.HeaderText = "Hitherm® Co\nDach (m²)";
+			this.numericColumn5.Name = "numericColumn5";
+			this.numericColumn5.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numericColumn5.Visible = false;
+			this.numericColumn5.Width = 75;
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this.dataGridViewTextBoxColumn5.FillWeight = 75F;
+			this.dataGridViewTextBoxColumn5.HeaderText = "Hitherm® Co\nDach Hkr.";
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn5.Visible = false;
+			this.dataGridViewTextBoxColumn5.Width = 75;
+			// 
+			// numericColumn6
+			// 
+			dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle21.Format = "F1";
+			this.numericColumn6.DefaultCellStyle = dataGridViewCellStyle21;
+			this.numericColumn6.FillWeight = 75F;
+			this.numericColumn6.HeaderText = "Klima-Boden\n(m²)";
+			this.numericColumn6.Name = "numericColumn6";
+			this.numericColumn6.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numericColumn6.Visible = false;
+			this.numericColumn6.Width = 75;
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.FillWeight = 75F;
+			this.dataGridViewTextBoxColumn6.HeaderText = "Klima-Boden\nHeizkreise";
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+			this.dataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn6.Visible = false;
+			this.dataGridViewTextBoxColumn6.Width = 75;
+			// 
+			// numericColumn7
+			// 
+			dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle22.Format = "F1";
+			this.numericColumn7.DefaultCellStyle = dataGridViewCellStyle22;
+			this.numericColumn7.FillWeight = 75F;
+			this.numericColumn7.HeaderText = "Klima-Decke\n(m²)";
+			this.numericColumn7.Name = "numericColumn7";
+			this.numericColumn7.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numericColumn7.Visible = false;
+			this.numericColumn7.Width = 75;
+			// 
+			// dataGridViewTextBoxColumn7
+			// 
+			this.dataGridViewTextBoxColumn7.FillWeight = 750F;
+			this.dataGridViewTextBoxColumn7.HeaderText = "Klima-Decke\nHeizkreise";
+			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+			this.dataGridViewTextBoxColumn7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn7.Visible = false;
+			this.dataGridViewTextBoxColumn7.Width = 75;
+			// 
+			// numericColumn8
+			// 
+			this.numericColumn8.DataPropertyName = "QuickDimensioningNrOfServos";
+			dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle23.Format = "F0";
+			this.numericColumn8.DefaultCellStyle = dataGridViewCellStyle23;
+			this.numericColumn8.FillWeight = 50F;
+			this.numericColumn8.HeaderText = "Stell-\nmotore";
+			this.numericColumn8.Name = "numericColumn8";
+			this.numericColumn8.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.numericColumn8.Width = 50;
+			// 
+			// dataGridViewTextBoxColumn8
+			// 
+			this.dataGridViewTextBoxColumn8.DataPropertyName = "QuickDimensioningComments";
+			this.dataGridViewTextBoxColumn8.HeaderText = "Bemerkung";
+			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+			this.dataGridViewTextBoxColumn8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			// 
 			// colId
 			// 
 			this.colId.DataPropertyName = "Id";
@@ -176,13 +377,12 @@ namespace Europlan.Common {
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle3.Format = "F0";
 			this.colArea.DefaultCellStyle = dataGridViewCellStyle3;
-			this.colArea.FillWeight = 50F;
+			this.colArea.FillWeight = 70F;
 			this.colArea.HeaderText = "Raumfl.\n(m²)";
 			this.colArea.Name = "colArea";
 			this.colArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-			this.colArea.ReadOnly = true;
 			this.colArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colArea.Width = 50;
+			this.colArea.Width = 70;
 			// 
 			// colRoomType
 			// 
@@ -391,11 +591,11 @@ namespace Europlan.Common {
 			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle14.Format = "F0";
 			this.colNrOfServos.DefaultCellStyle = dataGridViewCellStyle14;
-			this.colNrOfServos.FillWeight = 50F;
+			this.colNrOfServos.FillWeight = 55F;
 			this.colNrOfServos.HeaderText = "Stell-\nmotore";
 			this.colNrOfServos.Name = "colNrOfServos";
 			this.colNrOfServos.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colNrOfServos.Width = 50;
+			this.colNrOfServos.Width = 55;
 			// 
 			// colComments
 			// 
@@ -433,6 +633,22 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridView quickDimensioningGrid;
 		private System.Windows.Forms.BindingSource roomBindingSource;
 		private System.Windows.Forms.Panel panel1;
+		private NumericColumn numericColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private NumericColumn numericColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private NumericColumn numericColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private NumericColumn numericColumn4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private NumericColumn numericColumn5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+		private NumericColumn numericColumn6;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+		private NumericColumn numericColumn7;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+		private NumericColumn numericColumn8;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colId;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
 		private NumericColumn colRoomTemperature;

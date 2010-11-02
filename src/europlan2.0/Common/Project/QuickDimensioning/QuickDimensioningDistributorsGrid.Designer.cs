@@ -111,12 +111,12 @@ namespace Europlan.Common {
 			// colRoomId
 			// 
 			this.colRoomId.DataPropertyName = "RoomId";
-			this.colRoomId.FillWeight = 45F;
+			this.colRoomId.FillWeight = 50F;
 			this.colRoomId.HeaderText = "Raum-\nnr.";
 			this.colRoomId.Name = "colRoomId";
 			this.colRoomId.ReadOnly = true;
 			this.colRoomId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colRoomId.Width = 45;
+			this.colRoomId.Width = 50;
 			// 
 			// colRoomName
 			// 

@@ -209,21 +209,25 @@ namespace Europlan.Common {
 		}
 
 		public bool CoverHeatLoad {
-			get { return this.coverHeatLoad; }
+			get { return this.coverHeatLoad && (this.plannedProduct.CalculateMode == Product.CalculateModeEnum.HEAT || this.plannedProduct.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL); }
 			set { this.coverHeatLoad = value; }
 		}
 
 		public bool CoverCoolLoad {
-			get { return this.coverCoolLoad; }
+			get { return this.coverCoolLoad && (this.plannedProduct.CalculateMode == Product.CalculateModeEnum.COOL || this.plannedProduct.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL); ; }
 			set { this.coverCoolLoad = value; }
 		}
 
 		public double RequestedHeatLoad {
 			get {
-				if (this.coverHeatLoad) {
-					return this.NecessaryHeatLoad;
+				if (this.Product.CalculateMode == Product.CalculateModeEnum.HEAT || this.Product.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL) {
+					if (this.coverHeatLoad) {
+						return this.NecessaryHeatLoad;
+					} else {
+						return this.requestedHeatLoad;
+					}
 				} else {
-					return this.requestedHeatLoad;
+					return 0;
 				}
 			}
 			set { this.requestedHeatLoad = Math.Round(value, 1); }
@@ -231,10 +235,14 @@ namespace Europlan.Common {
 
 		public double RequestedCoolLoad {
 			get {
-				if (this.coverCoolLoad) {
-					return this.NecessaryCoolLoad;
+				if (this.Product.CalculateMode == Product.CalculateModeEnum.COOL || this.Product.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL) {
+					if (this.coverCoolLoad) {
+						return this.NecessaryCoolLoad;
+					} else {
+						return this.requestedCoolLoad;
+					}
 				} else {
-					return this.requestedCoolLoad;
+					return 0;
 				}
 			}
 			set { this.requestedCoolLoad = Math.Round(value, 1); }
@@ -246,14 +254,14 @@ namespace Europlan.Common {
 				if (this.Product.AssociatedRoom.HeatLoad == 0) {
 					return 0;
 				}
-				if (this.coverHeatLoad) {
+				/*if (this.coverHeatLoad) {
 					return (float)Math.Round(this.NecessaryHeatLoad * 100 / this.Product.AssociatedRoom.NormalizedHeatLoad, 1);
-				}
-				return (float)Math.Round(this.requestedHeatLoad * 100 / this.Product.AssociatedRoom.NormalizedHeatLoad, 1);
+				}*/
+				return (float)Math.Round(this.RequestedHeatLoad * 100 / this.Product.AssociatedRoom.NormalizedHeatLoad, 1);
 			}
 			set {
 				if (this.Product.AssociatedRoom.HeatLoad != 0) {
-					this.requestedHeatLoad = this.Product.AssociatedRoom.NormalizedHeatLoad * value / 100;
+					this.RequestedHeatLoad = this.Product.AssociatedRoom.NormalizedHeatLoad * value / 100;
 				}
 			}
 		}
@@ -264,14 +272,14 @@ namespace Europlan.Common {
 				if (this.Product.AssociatedRoom.CoolLoad == 0) {
 					return 0;
 				}
-				if (this.coverCoolLoad) {
+				/*if (this.coverCoolLoad) {
 					return (float)this.NecessaryCoolLoad * 100 / this.Product.AssociatedRoom.NormalizedCoolLoad;
-				}
-				return (float)(this.requestedCoolLoad * 100 / this.Product.AssociatedRoom.NormalizedCoolLoad);
+				}*/
+				return (float)Math.Round(this.RequestedCoolLoad * 100 / this.Product.AssociatedRoom.NormalizedCoolLoad, 1);
 			}
 			set {
 				if (this.NecessaryCoolLoad != 0) {
-					this.requestedCoolLoad = this.NecessaryCoolLoad * value / 100;
+					this.RequestedCoolLoad = this.Product.AssociatedRoom.NormalizedCoolLoad * value / 100;
 				}
 			}
 		}
@@ -408,11 +416,11 @@ namespace Europlan.Common {
 			this.requestedHeatLoad = this.NecessaryHeatLoad;
 			this.calculateHeat = this.requestedHeatLoad > 0;
 			this.calculateCool = this.requestedCoolLoad > 0;
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, false);
+			this.plannedProduct.ConfigureProduct(this.RequestedHeatLoad, this.RequestedCoolLoad, this.calculateHeat, this.calculateCool, false);
 		}
 
 		public string ConfigureProduct(bool variableSpreizung) {
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, variableSpreizung);
+			this.plannedProduct.ConfigureProduct(this.RequestedHeatLoad, this.RequestedCoolLoad, this.calculateHeat, this.calculateCool, variableSpreizung);
 			return this.plannedProduct.LastErrorMessage;
 		}
 
@@ -454,7 +462,7 @@ namespace Europlan.Common {
 				p.productNode.Text = p.internalName + ": " + p.System;
 			}
 
-			this.plannedProduct.ConfigureProduct(this.requestedHeatLoad, this.requestedCoolLoad, this.calculateHeat, this.calculateCool, false);
+			this.plannedProduct.ConfigureProduct(this.RequestedHeatLoad, this.RequestedCoolLoad, this.calculateHeat, this.calculateCool, false);
 
 		}
 
@@ -477,6 +485,26 @@ namespace Europlan.Common {
 				p.internalName = p.PlannedProductType.ToString() + productCounter[p.PlannedProductType];
 				p.productNode.Text = p.internalName + ": " + p.System;
 			}
+		}
+
+		public void RestwaermeUebernehmen() {
+			foreach (PlannedProduct pp in this.Product.AssociatedRoom.PlannedProducts) {
+				if (pp != this) {
+					pp.coverHeatLoad = false;
+					pp.RequestedHeatLoad = pp.Product.PlannedHeatLoad;
+				}
+			}
+			this.CoverHeatLoad = true;
+		}
+
+		public void RestkaelteUebernehmen() {
+			foreach (PlannedProduct pp in this.Product.AssociatedRoom.PlannedProducts) {
+				if (pp != this) {
+					pp.coverCoolLoad = false;
+					pp.RequestedCoolLoad = pp.Product.PlannedCoolLoad;
+				}
+			}
+			this.CoverCoolLoad = true;
 		}
 	}
 }

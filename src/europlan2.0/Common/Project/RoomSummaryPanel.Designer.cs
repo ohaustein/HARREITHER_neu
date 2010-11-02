@@ -108,7 +108,7 @@ namespace Europlan.Common {
 			// 
 			this.lblArea.Location = new System.Drawing.Point(6, 37);
 			this.lblArea.Name = "lblArea";
-			this.lblArea.Size = new System.Drawing.Size(60, 13);
+			this.lblArea.Size = new System.Drawing.Size(110, 13);
 			this.lblArea.TabIndex = 14;
 			this.lblArea.Text = "Fläche:";
 			this.lblArea.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -127,7 +127,7 @@ namespace Europlan.Common {
 			// 
 			this.lblHeat.Location = new System.Drawing.Point(6, 16);
 			this.lblHeat.Name = "lblHeat";
-			this.lblHeat.Size = new System.Drawing.Size(60, 13);
+			this.lblHeat.Size = new System.Drawing.Size(110, 13);
 			this.lblHeat.TabIndex = 18;
 			this.lblHeat.Text = "Heizlast:";
 			this.lblHeat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -144,9 +144,9 @@ namespace Europlan.Common {
 			// 
 			// lblCool
 			// 
-			this.lblCool.Location = new System.Drawing.Point(231, 16);
+			this.lblCool.Location = new System.Drawing.Point(281, 16);
 			this.lblCool.Name = "lblCool";
-			this.lblCool.Size = new System.Drawing.Size(60, 13);
+			this.lblCool.Size = new System.Drawing.Size(110, 13);
 			this.lblCool.TabIndex = 22;
 			this.lblCool.Text = "Kühllast:";
 			this.lblCool.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -242,7 +242,7 @@ namespace Europlan.Common {
 			this.grpBoxSummary.Controls.Add(this.lblCool);
 			this.grpBoxSummary.Location = new System.Drawing.Point(3, 27);
 			this.grpBoxSummary.Name = "grpBoxSummary";
-			this.grpBoxSummary.Size = new System.Drawing.Size(733, 75);
+			this.grpBoxSummary.Size = new System.Drawing.Size(733, 63);
 			this.grpBoxSummary.TabIndex = 39;
 			this.grpBoxSummary.TabStop = false;
 			// 
@@ -271,7 +271,7 @@ namespace Europlan.Common {
 			// 
 			// lblAreaValue
 			// 
-			this.lblAreaValue.Location = new System.Drawing.Point(72, 37);
+			this.lblAreaValue.Location = new System.Drawing.Point(122, 37);
 			this.lblAreaValue.Name = "lblAreaValue";
 			this.lblAreaValue.Size = new System.Drawing.Size(153, 13);
 			this.lblAreaValue.TabIndex = 25;
@@ -279,7 +279,7 @@ namespace Europlan.Common {
 			// 
 			// lblCoolLoadValue
 			// 
-			this.lblCoolLoadValue.Location = new System.Drawing.Point(297, 16);
+			this.lblCoolLoadValue.Location = new System.Drawing.Point(397, 16);
 			this.lblCoolLoadValue.Name = "lblCoolLoadValue";
 			this.lblCoolLoadValue.Size = new System.Drawing.Size(153, 13);
 			this.lblCoolLoadValue.TabIndex = 24;
@@ -287,7 +287,7 @@ namespace Europlan.Common {
 			// 
 			// lblHeatLoadValue
 			// 
-			this.lblHeatLoadValue.Location = new System.Drawing.Point(72, 16);
+			this.lblHeatLoadValue.Location = new System.Drawing.Point(122, 16);
 			this.lblHeatLoadValue.Name = "lblHeatLoadValue";
 			this.lblHeatLoadValue.Size = new System.Drawing.Size(153, 13);
 			this.lblHeatLoadValue.TabIndex = 23;
@@ -320,9 +320,9 @@ namespace Europlan.Common {
 			this.grpBoxSystems.Controls.Add(this.btnDelete);
 			this.grpBoxSystems.Controls.Add(this.dgvProducts);
 			this.grpBoxSystems.Controls.Add(this.btnAdd);
-			this.grpBoxSystems.Location = new System.Drawing.Point(3, 108);
+			this.grpBoxSystems.Location = new System.Drawing.Point(3, 94);
 			this.grpBoxSystems.Name = "grpBoxSystems";
-			this.grpBoxSystems.Size = new System.Drawing.Size(733, 335);
+			this.grpBoxSystems.Size = new System.Drawing.Size(733, 289);
 			this.grpBoxSystems.TabIndex = 42;
 			this.grpBoxSystems.TabStop = false;
 			this.grpBoxSystems.Text = "Heizsysteme";
@@ -365,7 +365,7 @@ namespace Europlan.Common {
 			this.dgvProducts.Location = new System.Drawing.Point(6, 48);
 			this.dgvProducts.MultiSelect = false;
 			this.dgvProducts.Name = "dgvProducts";
-			this.dgvProducts.Size = new System.Drawing.Size(721, 281);
+			this.dgvProducts.Size = new System.Drawing.Size(721, 235);
 			this.dgvProducts.TabIndex = 2;
 			this.dgvProducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellValueChanged);
 			this.dgvProducts.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
@@ -399,7 +399,7 @@ namespace Europlan.Common {
 			// btnWhatIsNext
 			// 
 			this.btnWhatIsNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnWhatIsNext.Location = new System.Drawing.Point(627, 449);
+			this.btnWhatIsNext.Location = new System.Drawing.Point(627, 389);
 			this.btnWhatIsNext.Name = "btnWhatIsNext";
 			this.btnWhatIsNext.Size = new System.Drawing.Size(109, 23);
 			this.btnWhatIsNext.TabIndex = 23;
@@ -464,55 +464,55 @@ namespace Europlan.Common {
 			// 
 			this.colFloorArea.DataPropertyName = "FloorArea";
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F1";
+			dataGridViewCellStyle2.Format = "F0";
 			this.colFloorArea.DefaultCellStyle = dataGridViewCellStyle2;
-			this.colFloorArea.FillWeight = 50F;
+			this.colFloorArea.FillWeight = 80F;
 			this.colFloorArea.HeaderText = "FBH-\nFläche\n(m²)";
 			this.colFloorArea.Name = "colFloorArea";
 			this.colFloorArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colFloorArea.ReadOnly = true;
 			this.colFloorArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colFloorArea.Width = 50;
+			this.colFloorArea.Width = 80;
 			// 
 			// colPlannedArea
 			// 
 			this.colPlannedArea.DataPropertyName = "PlannedArea";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F1";
+			dataGridViewCellStyle3.Format = "F0";
 			this.colPlannedArea.DefaultCellStyle = dataGridViewCellStyle3;
-			this.colPlannedArea.FillWeight = 50F;
+			this.colPlannedArea.FillWeight = 70F;
 			this.colPlannedArea.HeaderText = "Heiz-\nfläche\n(m²)";
 			this.colPlannedArea.Name = "colPlannedArea";
 			this.colPlannedArea.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
 			this.colPlannedArea.ReadOnly = true;
 			this.colPlannedArea.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colPlannedArea.Width = 50;
+			this.colPlannedArea.Width = 70;
 			// 
 			// colPlannedHeatLoad
 			// 
 			this.colPlannedHeatLoad.DataPropertyName = "PlannedHeatLoadString";
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colPlannedHeatLoad.DefaultCellStyle = dataGridViewCellStyle4;
-			this.colPlannedHeatLoad.FillWeight = 50F;
+			this.colPlannedHeatLoad.FillWeight = 75F;
 			this.colPlannedHeatLoad.HeaderText = "PHeiz\n(W)";
 			this.colPlannedHeatLoad.Name = "colPlannedHeatLoad";
 			this.colPlannedHeatLoad.ReadOnly = true;
 			this.colPlannedHeatLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colPlannedHeatLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colPlannedHeatLoad.Width = 50;
+			this.colPlannedHeatLoad.Width = 75;
 			// 
 			// colPlannedCoolLoad
 			// 
 			this.colPlannedCoolLoad.DataPropertyName = "PlannedCoolLoadString";
 			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			this.colPlannedCoolLoad.DefaultCellStyle = dataGridViewCellStyle5;
-			this.colPlannedCoolLoad.FillWeight = 50F;
+			this.colPlannedCoolLoad.FillWeight = 75F;
 			this.colPlannedCoolLoad.HeaderText = "PKühl\n(W)";
 			this.colPlannedCoolLoad.Name = "colPlannedCoolLoad";
 			this.colPlannedCoolLoad.ReadOnly = true;
 			this.colPlannedCoolLoad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colPlannedCoolLoad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colPlannedCoolLoad.Width = 50;
+			this.colPlannedCoolLoad.Width = 75;
 			// 
 			// plannedProductWrapperBindingSource
 			// 

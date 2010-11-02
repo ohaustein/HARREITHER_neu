@@ -258,15 +258,18 @@ namespace Europlan.Common {
 			}
 		}
 
-		public PlannedProduct FindConnectedProduct(PlannedProduct origin) {
+		public List<PlannedProduct> FindConnectedProduct(PlannedProduct origin) {
+			List<PlannedProduct> connectedProducts = new List<PlannedProduct>();
 			foreach (Room r in this.Rooms) {
 				foreach (PlannedProduct pp in r.PlannedProducts) {
 					if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && pp.Product.PlannedConnection.OtherProduct == origin) {
-						return pp;
+						connectedProducts.Add(pp);
+						//return pp;
 					}
 				}
 			}
-			return null;
+			return connectedProducts;
+			//return null;
 		}
 
 		public string LastInsulationConstructionId {

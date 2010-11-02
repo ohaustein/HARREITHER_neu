@@ -76,6 +76,17 @@ namespace Europlan.Common {
 			get { return this.rimCorners; }
 			set { this.rimCorners = value; }
 		}
+
+		[XmlIgnore]
+		public double AreaAz {
+			get { return this.c_areaAz; }
+		}
+
+		[XmlIgnore]
+		public double AreaRz {
+			get { return this.c_areaRz; }
+		}
+
 		#endregion Area
 
 		private double c_areaAz;

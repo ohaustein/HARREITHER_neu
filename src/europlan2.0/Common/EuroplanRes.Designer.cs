@@ -476,6 +476,42 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Die eingegebene Systemnummer ist nicht gültig. Bitte geben Sie eine gültige Systemnummer ein!.
+        /// </summary>
+        internal static string ConnectionPipePanel_UngueltigeProduktNrText {
+            get {
+                return ResourceManager.GetString("ConnectionPipePanel_UngueltigeProduktNrText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fehler.
+        /// </summary>
+        internal static string ConnectionPipePanel_UngueltigeProduktNrTitel {
+            get {
+                return ResourceManager.GetString("ConnectionPipePanel_UngueltigeProduktNrTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die eingegebene Raumnummer ist nicht gültig. Bitte geben Sie eine gültige Raumnummer ein!.
+        /// </summary>
+        internal static string ConnectionPipePanel_UngueltigeRaumNrText {
+            get {
+                return ResourceManager.GetString("ConnectionPipePanel_UngueltigeRaumNrText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fehler.
+        /// </summary>
+        internal static string ConnectionPipePanel_UngueltigeRaumNrTitel {
+            get {
+                return ResourceManager.GetString("ConnectionPipePanel_UngueltigeRaumNrTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verlege-
         ///art.
         /// </summary>
@@ -1210,7 +1246,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  + %VALUE% (zus.) = %SUM%.
+        ///   Looks up a localized string similar to + %VALUE% (zus.) = %SUM%.
         /// </summary>
         internal static string DistributorPanel_Zusaetzlich {
             get {
@@ -3967,7 +4003,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Gültigkeit der Lizenz ist abgelaufen. Bitte kontaktieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine neue Lizenz anzufordern..
+        ///   Looks up a localized string similar to Die Gültigkeit der Lizenz ist abgelaufen. Bitte kontaktieren sie Kontakt-Name unter office@harreither.com oder +43-7353-6660 um eine neue Lizenz anzufordern..
         /// </summary>
         internal static string LicenseForm_GueltigkeitAbgelaufen {
             get {
@@ -4003,7 +4039,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Es wurde keine Lizenz gefunden. Falls Sie bereits eine Lizenz besitzen importieren Sie diese bitte über die Schaltfläche &apos;Lizenz importieren&apos;. Falls Sie noch keine Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben..
+        ///   Looks up a localized string similar to Es wurde keine Lizenz gefunden. Falls Sie bereits eine Lizenz besitzen importieren Sie diese bitte über die Schaltfläche &apos;Lizenz importieren&apos;. Falls Sie noch keine Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-7353-6660 um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben..
         /// </summary>
         internal static string LicenseForm_KeineLizenzGefunden {
             get {
@@ -4021,7 +4057,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Lizenz ist ungültig da sie von nicht authorisierter Stelle modifiziert wurde. Bitte verwenden Sie Ihre original Lizenz oder kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine neue Lizenz anzufordern..
+        ///   Looks up a localized string similar to Die Lizenz ist ungültig da sie von nicht authorisierter Stelle modifiziert wurde. Bitte verwenden Sie Ihre original Lizenz oder kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-7353-6660 um eine neue Lizenz anzufordern..
         /// </summary>
         internal static string LicenseForm_LizenzModifiziert {
             get {
@@ -4030,7 +4066,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Lizenz ist nicht gültig. Falls Sie bereits eine gültige Lizenz besitzen importieren Sie diese bitte über die Schaltfläche &apos;Lizenz importieren&apos;. Falls Sie noch keine gültige Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben..
+        ///   Looks up a localized string similar to Die Lizenz ist nicht gültig. Falls Sie bereits eine gültige Lizenz besitzen importieren Sie diese bitte über die Schaltfläche &apos;Lizenz importieren&apos;. Falls Sie noch keine gültige Lizenz besitzen kontaktieren sie Kontakt-Name unter office@harreither.com oder +43-7353-6660 um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben..
         /// </summary>
         internal static string LicenseForm_NichtGueltig {
             get {
@@ -4039,7 +4075,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Lizenz ist auf dem aktuellen Rechner nicht gültig. Bitte kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz für diesen Rechner anzufordern. Zum Anfordern einer Lizenz. müssen Sie die hier angegebene Hardware ID bekannt geben..
+        ///   Looks up a localized string similar to Die Lizenz ist auf dem aktuellen Rechner nicht gültig. Bitte kontatkieren sie Kontakt-Name unter office@harreither.com oder +43-7353-6660 um eine Lizenz für diesen Rechner anzufordern. Zum Anfordern einer Lizenz. müssen Sie die hier angegebene Hardware ID bekannt geben..
         /// </summary>
         internal static string LicenseForm_RechnerNichtGueltig {
             get {
@@ -5178,7 +5214,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to tv
+        ///   Looks up a localized string similar to Tv
         ///°C.
         /// </summary>
         internal static string LL_Report_FussbodenVorlauftemperaur {
@@ -5586,7 +5622,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to tv
+        ///   Looks up a localized string similar to Tv
         ///°C.
         /// </summary>
         internal static string LL_Report_KlimabodenVorlauftemperaur {
@@ -5822,7 +5858,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to tv
+        ///   Looks up a localized string similar to Tv
         ///°C.
         /// </summary>
         internal static string LL_Report_KlimadeckeVorlauftemperaur {
@@ -7846,7 +7882,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to tv
+        ///   Looks up a localized string similar to Tv
         ///°C.
         /// </summary>
         internal static string LL_Report_WandVorlauftemperaur {
@@ -8123,6 +8159,15 @@ namespace Europlan.Common {
         internal static string MainForm_Projekt {
             get {
                 return ResourceManager.GetString("MainForm_Projekt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Projekt ansehen.
+        /// </summary>
+        internal static string MainForm_ProjektAnsehen {
+            get {
+                return ResourceManager.GetString("MainForm_ProjektAnsehen", resourceCulture);
             }
         }
         
@@ -8610,6 +8655,15 @@ namespace Europlan.Common {
         internal static string OptionsForm_Sprache {
             get {
                 return ResourceManager.GetString("OptionsForm_Sprache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Systemparameter.
+        /// </summary>
+        internal static string OptionsForm_StandardSystemparameter {
+            get {
+                return ResourceManager.GetString("OptionsForm_StandardSystemparameter", resourceCulture);
             }
         }
         
@@ -9735,11 +9789,56 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Heizen.
+        /// </summary>
+        internal static string PlannedProductPanel_Heizen {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_Heizen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizen und Kühlen.
+        /// </summary>
+        internal static string PlannedProductPanel_HeizenUndKuehlen {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_HeizenUndKuehlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kühlen.
+        /// </summary>
+        internal static string PlannedProductPanel_Kuehlen {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_Kuehlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kühllast decken.
         /// </summary>
         internal static string PlannedProductPanel_KuehllastDecken {
             get {
                 return ResourceManager.GetString("PlannedProductPanel_KuehllastDecken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restkälte übernehmen.
+        /// </summary>
+        internal static string PlannedProductPanel_RestkaelteUebernehmen {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_RestkaelteUebernehmen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restwärme übernehmen.
+        /// </summary>
+        internal static string PlannedProductPanel_RestwaermeUebernehmen {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_RestwaermeUebernehmen", resourceCulture);
             }
         }
         
@@ -9794,6 +9893,15 @@ namespace Europlan.Common {
         internal static string PlannedProductPanel_Verteileranschluss {
             get {
                 return ResourceManager.GetString("PlannedProductPanel_Verteileranschluss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verwendungszweck.
+        /// </summary>
+        internal static string PlannedProductPanel_Verwendungszweck {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_Verwendungszweck", resourceCulture);
             }
         }
         
@@ -12803,6 +12911,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diese Werte betreffen nicht das aktuelle Projekt, sondern sind Standardwerte, welche verwendet werden wenn ein neues Projekt angelegt wird!.
+        /// </summary>
+        internal static string SystemParametersPanel_InfoCustomConf {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_InfoCustomConf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diese Werte betreffen nur das aktuelle Projekt. Um die Standardwerte zu ändern, die verwendet werden, wenn ein neues Projekt angelegt wird, klicken Sie auf &quot;Optionen&quot; &gt; &quot;Einstellungen&quot; &gt; &quot;Standard Systemparameter&quot;.
+        /// </summary>
+        internal static string SystemParametersPanel_InfoProjectConf {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_InfoProjectConf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modul Klima-Boden.
         /// </summary>
         internal static string SystemParametersPanel_KlimaBoden {
@@ -12952,6 +13078,15 @@ namespace Europlan.Common {
         internal static string SystemParametersPanel_Rohrlaenge {
             get {
                 return ResourceManager.GetString("SystemParametersPanel_Rohrlaenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rücksetzen.
+        /// </summary>
+        internal static string SystemParametersPanel_Ruecksetzen {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_Ruecksetzen", resourceCulture);
             }
         }
         

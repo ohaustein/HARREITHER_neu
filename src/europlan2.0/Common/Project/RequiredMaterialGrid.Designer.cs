@@ -117,6 +117,7 @@ namespace Europlan.Common {
 			this.partNumberDataGridViewTextBoxColumn.Name = "partNumberDataGridViewTextBoxColumn";
 			this.partNumberDataGridViewTextBoxColumn.ReadOnly = true;
 			this.partNumberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.partNumberDataGridViewTextBoxColumn.Width = 120;
 			// 
 			// requiredAmountDataGridViewTextBoxColumn
 			// 
@@ -127,7 +128,6 @@ namespace Europlan.Common {
 			this.requiredAmountDataGridViewTextBoxColumn.HeaderText = "Menge";
 			this.requiredAmountDataGridViewTextBoxColumn.Name = "requiredAmountDataGridViewTextBoxColumn";
 			this.requiredAmountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.requiredAmountDataGridViewTextBoxColumn.Width = 70;
 			// 
 			// calculatedAmountDataGridViewTextBoxColumn
 			// 
@@ -140,7 +140,6 @@ namespace Europlan.Common {
 			this.calculatedAmountDataGridViewTextBoxColumn.ReadOnly = true;
 			this.calculatedAmountDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.calculatedAmountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.calculatedAmountDataGridViewTextBoxColumn.Width = 70;
 			// 
 			// unitDataGridViewTextBoxColumn
 			// 

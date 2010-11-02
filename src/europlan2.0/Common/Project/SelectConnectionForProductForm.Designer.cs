@@ -63,7 +63,7 @@ namespace Europlan.Common {
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(615, 440);
+			this.btnCancel.Location = new System.Drawing.Point(676, 440);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 1;
@@ -75,7 +75,7 @@ namespace Europlan.Common {
 			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOk.Enabled = false;
-			this.btnOk.Location = new System.Drawing.Point(534, 440);
+			this.btnOk.Location = new System.Drawing.Point(595, 440);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
 			this.btnOk.TabIndex = 2;
@@ -84,29 +84,35 @@ namespace Europlan.Common {
 			// 
 			// grpInfo
 			// 
+			this.grpInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.grpInfo.Controls.Add(this.lblInfo);
 			this.grpInfo.Location = new System.Drawing.Point(318, 12);
 			this.grpInfo.Name = "grpInfo";
-			this.grpInfo.Size = new System.Drawing.Size(372, 55);
+			this.grpInfo.Size = new System.Drawing.Size(433, 55);
 			this.grpInfo.TabIndex = 3;
 			this.grpInfo.TabStop = false;
 			this.grpInfo.Text = "Information";
 			// 
 			// lblInfo
 			// 
+			this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.lblInfo.Location = new System.Drawing.Point(6, 19);
 			this.lblInfo.Name = "lblInfo";
-			this.lblInfo.Size = new System.Drawing.Size(360, 29);
+			this.lblInfo.Size = new System.Drawing.Size(421, 29);
 			this.lblInfo.TabIndex = 0;
 			// 
 			// grpConnection
 			// 
+			this.grpConnection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.grpConnection.Controls.Add(this.rbRuecklauf);
 			this.grpConnection.Controls.Add(this.rbVorlauf);
 			this.grpConnection.Enabled = false;
 			this.grpConnection.Location = new System.Drawing.Point(318, 73);
 			this.grpConnection.Name = "grpConnection";
-			this.grpConnection.Size = new System.Drawing.Size(372, 72);
+			this.grpConnection.Size = new System.Drawing.Size(433, 72);
 			this.grpConnection.TabIndex = 4;
 			this.grpConnection.TabStop = false;
 			this.grpConnection.Text = "Heizkreisanschluﬂ (nur bei Anschluﬂ an anderen Heizkreis)";
@@ -135,14 +141,15 @@ namespace Europlan.Common {
 			// 
 			// grpUserDefinedConnection
 			// 
-			this.grpUserDefinedConnection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
+			this.grpUserDefinedConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.grpUserDefinedConnection.Controls.Add(this.gridUserDefinedConnection);
 			this.grpUserDefinedConnection.Controls.Add(this.cbActivateUserDefinedConnection);
 			this.grpUserDefinedConnection.Enabled = false;
 			this.grpUserDefinedConnection.Location = new System.Drawing.Point(318, 151);
 			this.grpUserDefinedConnection.Name = "grpUserDefinedConnection";
-			this.grpUserDefinedConnection.Size = new System.Drawing.Size(372, 283);
+			this.grpUserDefinedConnection.Size = new System.Drawing.Size(433, 283);
 			this.grpUserDefinedConnection.TabIndex = 5;
 			this.grpUserDefinedConnection.TabStop = false;
 			this.grpUserDefinedConnection.Text = "Benuzerdefinierte Zuordnung (nur bei Anschluﬂ an anderen Heizkreis)";
@@ -173,7 +180,7 @@ namespace Europlan.Common {
 			this.gridUserDefinedConnection.Location = new System.Drawing.Point(6, 49);
 			this.gridUserDefinedConnection.Name = "gridUserDefinedConnection";
 			this.gridUserDefinedConnection.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-			this.gridUserDefinedConnection.Size = new System.Drawing.Size(360, 228);
+			this.gridUserDefinedConnection.Size = new System.Drawing.Size(421, 228);
 			this.gridUserDefinedConnection.TabIndex = 1;
 			this.gridUserDefinedConnection.Visible = false;
 			this.gridUserDefinedConnection.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridUserDefinedConnection_CellValueChanged);
@@ -221,7 +228,7 @@ namespace Europlan.Common {
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(702, 475);
+			this.ClientSize = new System.Drawing.Size(763, 475);
 			this.Controls.Add(this.grpUserDefinedConnection);
 			this.Controls.Add(this.grpConnection);
 			this.Controls.Add(this.grpInfo);

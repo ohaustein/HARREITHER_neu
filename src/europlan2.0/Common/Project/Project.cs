@@ -342,8 +342,9 @@ namespace Europlan.Common {
 				instance.configuration = Configuration.UserTemplate + instance.configuration;
 				instance.configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 				instance.configuration.RecalculateMaterialToCategoryMapping();
-				instance.FixHithermCompactDachschraege();
+				instance.FixOldProjects();
 				instance.RecalculateQuickDimensioningRoomToProjectMapping();
+				instance.InitializeProductParameters();
 				instance.FinalizeLoading();
 				instance.ProjectFileName = filename;
 			}
@@ -360,10 +361,35 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void FixHithermCompactDachschraege() {
+		private void FixOldProjects() {
 			foreach (Floor f in Project.Instance.Floors) {
 				foreach (Room r in f.Rooms) {
 					foreach (PlannedProduct pp in r.PlannedProducts) {
+						// for old projects where CalculateMode has not existed yet
+						if (pp.Product.CalculateMode == Product.CalculateModeEnum.NONE) {
+							bool heat = false;
+							bool cool = false;
+							if (pp.CoverHeatLoad) {
+								heat = true;
+							} else {
+								heat = pp.RequestedHeatLoad > 0;
+							}
+							if (pp.CoverCoolLoad) {
+								cool = true;
+							} else {
+								cool = pp.RequestedCoolLoad > 0;
+							}
+							if (heat && cool) {
+								pp.Product.CalculateMode = Product.CalculateModeEnum.HEAT_AND_COOL;
+							} else if (heat && !cool) {
+								pp.Product.CalculateMode = Product.CalculateModeEnum.HEAT;
+							} else if (!heat && cool) {
+								pp.Product.CalculateMode = Product.CalculateModeEnum.COOL;
+							} else {
+								pp.Product.CalculateMode = pp.Product.DefaultCalculateMode;
+							}
+						}
+
 						if (pp.Product is HithermCompactProduct && pp.Product.Type == Product.ProductType.DSH) {
 							HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
 							hcp.HithermCompactType = Product.ProductType.WH;
@@ -430,6 +456,7 @@ namespace Europlan.Common {
 				Instance.ProjectFileName = filename;
 				s.Serialize(w, Instance);
 				w.Close();
+				FileUtils.SetAccessForEveryone(filename);
 			}
 			if (ProjectSaved != null) {
 				Project.ProjectSaved(Instance);
@@ -441,8 +468,21 @@ namespace Europlan.Common {
 				Instance.InitializeProject();
 				string localized = EuroplanRes.General_Standardregelkreis;
 				Instance.RegulatorCircuits.Add(new RegulatorCircuit(localized));
+				Instance.InitializeProductParameters();
 				return Instance;
 			}			
+		}
+
+		private void InitializeProductParameters() {
+			Product.StaticInitialize(this.Config);
+			ConcreteActivationProduct.StaticInitialize(this.Config);
+			EcothermProduct.StaticInitialize(this.Config);
+			EurovalProduct.StaticInitialize(this.Config);
+			HithermCompactProduct.StaticInitialize(this.Config);
+			HithermCompactRoofProduct.StaticInitialize(this.Config);
+			HithermProduct.StaticInitialize(this.Config);
+			ModulKlimaBodenProduct.StaticInitialize(this.Config);
+			ModulKlimaDeckeProduct.StaticInitialize(this.Config);
 		}
 
 
@@ -597,12 +637,14 @@ namespace Europlan.Common {
 		}
 
 		public void AddRequiredMaterial(SerializableDictionary<string, double> requiredMaterial, string materialId, double amount) {
-			Material material = this.Config.Materials.Find(delegate(Material m) { return m.Id == materialId; });
-			if (material != null) {
-				if (requiredMaterial.ContainsKey(material.Id)) {
-					requiredMaterial[material.Id] += amount;
-				} else {
-					requiredMaterial.Add(material.Id, amount);
+			if (amount != 0) {
+				Material material = this.Config.Materials.Find(delegate(Material m) { return m.Id == materialId; });
+				if (material != null) {
+					if (requiredMaterial.ContainsKey(material.Id)) {
+						requiredMaterial[material.Id] += amount;
+					} else {
+						requiredMaterial.Add(material.Id, amount);
+					}
 				}
 			}
 		}

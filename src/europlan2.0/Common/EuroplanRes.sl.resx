@@ -175,7 +175,7 @@
 		<value>Modul klima-tla</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaBoden" xml:space="preserve">
-		<value>Modul klima-tla</value>
+		<value>Modul Klima-Boden</value>
 	</data>
 	<data name="SystemParametersPanel_KlimaBoden" xml:space="preserve">
 		<value>Modul klima-tla</value>
@@ -190,7 +190,7 @@
 		<value>Modul klima-strop</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaDecke" xml:space="preserve">
-		<value>Modul klima-strop</value>
+		<value>Modul Klima-Decke</value>
 	</data>
 	<data name="SystemParametersPanel_KlimaDecke" xml:space="preserve">
 		<value>Modul klima-strop</value>
@@ -235,25 +235,30 @@
 		<value>Obrobna cona</value>
 	</data>
 	<data name="AuslegeAssistentForm_SystemInRaum" xml:space="preserve">
-		<value>% SYSTEM% v % RAUMID % (% RAUMNAME %)</value>
+		<value>%SYSTEM% v %RAUMID% (%RAUMNAME%)</value>
 	</data>
 	<data name="ProjectReport_System" xml:space="preserve">
-		<value>% SYSTEM% v % RAUMID % (% RAUMNAME %)</value>
+		<value>%SYSTEM% v %RAUMID% (%RAUMNAME%)</value>
 	</data>
 	<data name="AuslegeAssistentForm_Tv" xml:space="preserve">
-		<value>tv, °C</value>
+		<value>Tv
+°C</value>
 	</data>
 	<data name="LL_Report_FussbodenVorlauftemperaur" xml:space="preserve">
-		<value>tv, °C</value>
+		<value>tv
+°C</value>
 	</data>
 	<data name="LL_Report_KlimabodenVorlauftemperaur" xml:space="preserve">
-		<value>tv, °C</value>
+		<value>tv
+°C</value>
 	</data>
 	<data name="LL_Report_KlimadeckeVorlauftemperaur" xml:space="preserve">
-		<value>tv, °C</value>
+		<value>tv
+°C</value>
 	</data>
 	<data name="LL_Report_WandVorlauftemperaur" xml:space="preserve">
-		<value>tv, °C</value>
+		<value>tv
+°C</value>
 	</data>
 	<data name="Category_Allgemein" xml:space="preserve">
 		<value>Splošno</value>
@@ -328,7 +333,9 @@
 		<value>Predtok</value>
 	</data>
 	<data name="ConnectionPipePanel_DurchRaumCol" xml:space="preserve">
-		<value>skozi prostor št.</value>
+		<value>skozi
+ prostor
+ št.</value>
 	</data>
 	<data name="ConnectionPipePanel_FlaecheCol" xml:space="preserve">
 		<value>Površina</value>
@@ -340,7 +347,8 @@
 		<value>Površina</value>
 	</data>
 	<data name="ConnectionPipePanel_HeizleistungCol" xml:space="preserve">
-		<value>Ogrevalna zmogljivost</value>
+		<value>Ogrevalna
+ zmogljivost</value>
 	</data>
 	<data name="LL_Report_Heizleistung" xml:space="preserve">
 		<value>Ogrevalna zmogljivost</value>
@@ -349,13 +357,16 @@
 		<value>Število</value>
 	</data>
 	<data name="ConnectionPipePanel_KuehlleistungCol" xml:space="preserve">
-		<value>Hladilna zmogljivost</value>
+		<value>Hladilna
+ zmogljivost</value>
 	</data>
 	<data name="LL_Report_Kuehlleistung" xml:space="preserve">
 		<value>Hladilna zmogljivost</value>
 	</data>
 	<data name="ConnectionPipePanel_NurErsterHkCol" xml:space="preserve">
-		<value>Samo prvi ogrevalni krog</value>
+		<value>Samo prvi
+ ogrevalni 
+krog</value>
 	</data>
 	<data name="ConnectionPipePanel_RaumCol" xml:space="preserve">
 		<value>Prostor</value>
@@ -382,22 +393,30 @@
 		<value>Prostor</value>
 	</data>
 	<data name="ConnectionPipePanel_RohrsystemCol" xml:space="preserve">
-		<value>Cevni sistem</value>
+		<value>Cevni 
+sistem</value>
 	</data>
 	<data name="ConnectionPipePanel_RuecklaufCol" xml:space="preserve">
-		<value>Dolžina povratnega toka (m)</value>
+		<value>Dolžina 
+povratnega toka 
+(m)</value>
 	</data>
 	<data name="ConnectionPipePanel_TeilsystemCol" xml:space="preserve">
 		<value>Delni sistem</value>
 	</data>
 	<data name="ConnectionPipePanel_VerlegeartCol" xml:space="preserve">
-		<value>Način polaganja</value>
+		<value>Način 
+polaganja</value>
 	</data>
 	<data name="ConnectionPipePanel_VerlegedatenDruckenCol" xml:space="preserve">
-		<value>Natisni podatke o polaganju</value>
+		<value>Natisni 
+podatke o 
+polaganju</value>
 	</data>
 	<data name="ConnectionPipePanel_VorlaufCol" xml:space="preserve">
-		<value>Dolžina predtoka (v m)</value>
+		<value>Dolžina 
+predtoka 
+(m)</value>
 	</data>
 	<data name="ConnectionPipesForm_Anbindeflaeche" xml:space="preserve">
 		<value>Površina, ki jo zajamejo priključni vodi</value>
@@ -409,7 +428,7 @@
 		<value>Hladilna zmogljivost s priključnimi vodi:</value>
 	</data>
 	<data name="ConnectionPipesForm_AnbindeleitungDurch" xml:space="preserve">
-		<value>Priključni vodi skozi % SYSTEM % v % RAUM %</value>
+		<value>Priključni vodi skozi %SYSTEM% v %RAUM%</value>
 	</data>
 	<data name="ConnectionPipesForm_Anbindeleitungen" xml:space="preserve">
 		<value>Priključni vodi</value>
@@ -481,10 +500,10 @@
 		<value>PE folija</value>
 	</data>
 	<data name="ConstructionEditor_RWertCol" xml:space="preserve">
-		<value>R (m2)</value>
+		<value>R (m²K/W)</value>
 	</data>
 	<data name="ConstructionEditorGrid_RWertCol" xml:space="preserve">
-		<value>R (m2)</value>
+		<value>R (m²K/W)</value>
 	</data>
 	<data name="ConstructionEditorForm_Daemm" xml:space="preserve">
 		<value>Toplotnoizolacijska konstrukcija</value>
@@ -634,13 +653,13 @@
 		<value>Ni imenovan.</value>
 	</data>
 	<data name="Distributor_ZuVieleHeizkreise" xml:space="preserve">
-		<value>Preveč ogrevalnih krogov je priključenih na razdelilnik (% VALUE % &gt; % MAXIMUM %)</value>
+		<value>Preveč ogrevalnih krogov je priključenih na razdelilnik (%VALUE% &gt; %MAXIMUM%)</value>
 	</data>
 	<data name="Distributor_ZuVieleHeizkreiseZus" xml:space="preserve">
 		<value>Preveč ogrevalnih krogov je priključenih na razdelilnik (%VALUE% + %VALUEZUS% &gt; %MAXIMUM%)</value>
 	</data>
 	<data name="DistributorPanel_Aktiv" xml:space="preserve">
-		<value>% VALUE % (dejavno)</value>
+		<value>%VALUE% (dejavno)</value>
 	</data>
 	<data name="DistributorPanel_Anschlusshollaender" xml:space="preserve">
 		<value>Priključna holandska matica:</value>
@@ -727,7 +746,7 @@
 		<value>Dodeljeni ogrevalni krogi:</value>
 	</data>
 	<data name="DistributorPanel_Zusaetzlich" xml:space="preserve">
-		<value>+ % VALUE % '+ (skupaj) '= % SUM %</value>
+		<value>+ %VALUE% (skupaj) = %SUM%</value>
 	</data>
 	<data name="DistributorPanel_ZusaetzlicheHeizkreise" xml:space="preserve">
 		<value>dodatni ogrevalni krogi:</value>
@@ -850,7 +869,7 @@
 		<value>Sistemi Ecotherm se izračunajo s spremenjenimi parametri. Naslednji parametri odstopajo od standardnih vrednosti: </value>
 	</data>
 	<data name="ErrorMessage_BelegteFlaeche" xml:space="preserve">
-		<value>Zajeta površina v ogrevalnem krogu % HK % je prevelika (% VALUE % m² &gt; % MAXIMUM % m²).</value>
+		<value>Zajeta površina v ogrevalnem krogu %HK% je prevelika (%VALUE%m² &gt; %MAXIMUM%m²).</value>
 	</data>
 	<data name="ErrorMessage_DeckentemperaturHeat" xml:space="preserve">
 		<value>Temperatura na površini je prevelika (%VALUE%°C &gt; %MAXIMUM%°C)</value>
@@ -859,16 +878,16 @@
 		<value>Temperatura na površini je prevelika (%VALUE%°C &gt; %MAXIMUM%°C)</value>
 	</data>
 	<data name="ErrorMessage_DruckverlustHeiz" xml:space="preserve">
-		<value>Izguba tlaka pri ogrevanju je prevelika (% VALUE % mbar &gt; % MAXIMUM % mbar).</value>
+		<value>Izguba tlaka pri ogrevanju je prevelika (%VALUE%mbar &gt; %MAXIMUM%mbar).</value>
 	</data>
 	<data name="ErrorMessage_DruckverlustKuehl" xml:space="preserve">
-		<value>Izguba tlaka pri hlajenju je prevelika (% VALUE % mbar &gt; % MAXIMUM % mbar)</value>
+		<value>Izguba tlaka pri hlajenju je prevelika (%VALUE%mbar &gt; %MAXIMUM%mbar)</value>
 	</data>
 	<data name="ErrorMessage_DurchflussHeiz" xml:space="preserve">
 		<value>Pretok pri ogrevanju je prevelik (%VALUE%kg/h &gt; %MAXIMUM%kg/h). </value>
 	</data>
 	<data name="ErrorMessage_DurchflussKuehl" xml:space="preserve">
-		<value>Pretok pri hlajenju je prevelik (% VALUE % kg/h &gt; % MAXIMUM % kg/h).</value>
+		<value>Pretok pri hlajenju je prevelik (%VALUE%kg/h &gt; %MAXIMUM%kg/h).</value>
 	</data>
 	<data name="ErrorMessage_FehlendeEingaben" xml:space="preserve">
 		<value>Manjkajoči podatki:</value>
@@ -883,37 +902,37 @@
 		<value>Samodejna nastavitev ni mogoča.</value>
 	</data>
 	<data name="ErrorMessage_ModulAnzahl" xml:space="preserve">
-		<value>Ogrevalni krog HK % HK % vsebuje preveč modulov (% VALUE % &gt; % MAXIMUM%).</value>
+		<value>Ogrevalni krog HK%HK% vsebuje preveč modulov (%VALUE% &gt; %MAXIMUM%).</value>
 	</data>
 	<data name="ErrorMessage_ModulBelegung" xml:space="preserve">
-		<value>Več kot 75 % skupne površine je zajetih z moduli (% VALUE % &gt; % MAXIMUM %).</value>
+		<value>Več kot 75 % skupne površine je zajetih z moduli (%VALUE% &gt; %MAXIMUM%).</value>
 	</data>
 	<data name="ErrorMessage_Modulflaeche" xml:space="preserve">
-		<value>Načrtovani moduli zajamejo več površine, kot je na voljo za ta sistem (% VALUE % m² &gt; % MAXIMUM % m²).</value>
+		<value>Načrtovani moduli zajamejo več površine, kot je na voljo za ta sistem (%VALUE%m² &gt; %MAXIMUM m²).</value>
 	</data>
 	<data name="ErrorMessage_ModulReiheLaenge" xml:space="preserve">
-		<value>Ogrevalni krog HK % HK % vsebuje preveč serijskih modulov (% VALUE % &gt; % MAXIMUM %). </value>
+		<value>Ogrevalni krog HK%HK% vsebuje preveč serijskih modulov (%VALUE% &gt; %MAXIMUM%).</value>
 	</data>
 	<data name="ErrorMessage_ModulReihen" xml:space="preserve">
-		<value>Delna površina % TEILFL% v ogrevalnem krogu HK % HK % vsebuje preveč vzporednih vrst (% VALUE % &gt; % MAXIMUM %).</value>
+		<value>Delna površina % TEILFL% v ogrevalnem krogu HK%HK% vsebuje preveč vzporednih vrst (%VALUE% &gt; %MAXIMUM%).</value>
 	</data>
 	<data name="ErrorMessage_ModulReiheUnterschied" xml:space="preserve">
-		<value>Vrsta % REIHELANG % v delni površini % TEILFL % v ogrevalnem krogu HK % HK % je daljša za več kot en modul od vrste % REIHEKURZ% (% VALUELANG %, % VALUEKURZ %).</value>
+		<value>Vrsta %REIHELANG% v delni površini %TEILFL% v ogrevalnem krogu HK%HK% je daljša za več kot en modul od vrste %REIHEKURZ% (%VALUELANG%, %VALUEKURZ%).</value>
 	</data>
 	<data name="ErrorMessage_Registerflaeche" xml:space="preserve">
-		<value>Registrska površina v ogrevalnem krogu % HK % je prevelika (% VALUE % m² &gt; % MAXIMUM % m²).</value>
+		<value>Registrska površina v ogrevalnem krogu %HK% je prevelika (%VALUE%m² &gt; %MAXIMUM%m²).</value>
 	</data>
 	<data name="ErrorMessage_Registerflaeche2" xml:space="preserve">
-		<value>Načrtovani registri zajamejo več površine, kot je na voljo za ta sistem (% VALUE % m² &gt; % MAXIMUM % m²).</value>
+		<value>Načrtovani registri zajamejo več površine, kot je na voljo za ta sistem (%VALUE%m² &gt; %MAXIMUM%m²).</value>
 	</data>
 	<data name="ErrorMessage_Rohrlaenge" xml:space="preserve">
-		<value>Dolžina cevi je prevelika (% VALUE % m &gt; % MAXIMUM % m).</value>
+		<value>Dolžina cevi je prevelika (%VALUE%m &gt; %MAXIMUM%m).</value>
 	</data>
 	<data name="ErrorMessage_TemperaturAz" xml:space="preserve">
-		<value>Temperatura površine v bivalni coni je prevelika (% VALUE % °C &gt; % MAXIMUM % °C).</value>
+		<value>Temperatura površine v bivalni coni je prevelika (%VALUE%°C &gt; %MAXIMUM%°C).</value>
 	</data>
 	<data name="ErrorMessage_TemperaturRz" xml:space="preserve">
-		<value>Temperatura v obrobni coni je prevelika (% VALUE % °C &gt; % MAXIMUM % °C).</value>
+		<value>Temperatura v obrobni coni je prevelika (%VALUE%°C &gt; %MAXIMUM%°C).</value>
 	</data>
 	<data name="EurovalProduct_NotificationParameter" xml:space="preserve">
 		<value>Sistemi Euroval se izračunajo s spremenjenimi parametri. Naslednji parametri odstopajo od standardnih vrednosti: </value>
@@ -931,7 +950,8 @@
 		<value>Normirano</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_AnbindungProzent" xml:space="preserve">
-		<value>Površina v %.</value>
+		<value>Površina v 
+%.</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_Deaktivieren" xml:space="preserve">
 		<value>Uporabljaj samo standardne korekture (nobenih razširjenih korektur).</value>
@@ -961,7 +981,7 @@
 		<value>%</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_FlaecheWert" xml:space="preserve">
-		<value>m2</value>
+		<value>m²</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_HeizkreisCol" xml:space="preserve">
 		<value>Št. ogrevalnega kroga</value>
@@ -1075,13 +1095,15 @@
 		<value>Obdelaj</value>
 	</data>
 	<data name="FloorSummaryPanel_Bezeichnung" xml:space="preserve">
-		<value>Oznaka</value>
+		<value>Oznaka
+</value>
 	</data>
 	<data name="FloorSummaryPanel_BezeichnungLang" xml:space="preserve">
 		<value>Oznaka prostora</value>
 	</data>
 	<data name="FloorSummaryPanel_Flaeche" xml:space="preserve">
-		<value>A (m2)</value>
+		<value>A
+(m²)</value>
 	</data>
 	<data name="FloorSummaryPanel_FlaecheLang" xml:space="preserve">
 		<value>Površina prostora</value>
@@ -1144,7 +1166,8 @@
 		<value>Potrebna hladilna moč v skladu z izračunom hladilne </value>
 	</data>
 	<data name="FloorSummaryPanel_Luftfeuchtigkeit" xml:space="preserve">
-		<value>RF (%)</value>
+		<value>RF 
+(%)</value>
 	</data>
 	<data name="FloorSummaryPanel_LuftfeuchtigkeitLang" xml:space="preserve">
 		<value>Relativna vlažnost zraka za hlajenje</value>
@@ -1165,10 +1188,12 @@
 		<value>Ali želite prevzeti novo velikost prostora?</value>
 	</data>
 	<data name="FloorSummaryPanel_RaumtemperaturHeiz" xml:space="preserve">
-		<value>Ti (°C)</value>
+		<value>Ti 
+(°C)</value>
 	</data>
 	<data name="FloorSummaryPanel_RaumtemperaturKuehl" xml:space="preserve">
-		<value>Ti (°C)</value>
+		<value>Ti 
+(°C)</value>
 	</data>
 	<data name="FloorSummaryPanel_RaumtemperaturHeizLang" xml:space="preserve">
 		<value>Normirana notranja temperatura v skladu z izračunom potrebe po toploti</value>
@@ -1192,7 +1217,8 @@
 		<value>Ali bi izbrisal razdelilnik?</value>
 	</data>
 	<data name="FloorSummaryPanel_Waermebedarf" xml:space="preserve">
-		<value>QN (W)</value>
+		<value>QN 
+(W)</value>
 	</data>
 	<data name="FloorSummaryPanel_WaermebedarfLang" xml:space="preserve">
 		<value>Normirana toplotna potreba v skladu z izračunom toplotne potrebe</value>
@@ -1477,25 +1503,36 @@
 		<value>Osnovna konstrukcija</value>
 	</data>
 	<data name="HithermWallGrid_Deckschicht" xml:space="preserve">
-		<value>Pokrivalna plast R (m2K/W)</value>
+		<value>Pokrivalna plast 
+R 
+(m²K/W)</value>
 	</data>
 	<data name="HithermWallGrid_NeueWandkonstruktion" xml:space="preserve">
 		<value>Nova stenska konstrukcija</value>
 	</data>
 	<data name="HithermWallGrid_TemperaturHeiz" xml:space="preserve">
-		<value>Kurilna temperatura (°C)</value>
+		<value>Kurilna 
+temperatura 
+(°C)</value>
 	</data>
 	<data name="HithermWallGrid_TemperaturKuehl" xml:space="preserve">
-		<value>Hladilna temperatura (°C)</value>
+		<value>Hladilna 
+temperatura 
+(°C)</value>
 	</data>
 	<data name="HithermWallGrid_UWert" xml:space="preserve">
-		<value>U-vrednost (W/m2K)</value>
+		<value>U-vrednost 
+(W/m²K)</value>
 	</data>
 	<data name="HithermWallGrid_WaermebedarfBereinigen" xml:space="preserve">
-		<value>Potrebo po toploti je treba nastaviti na novo.</value>
+		<value>Potrebo po toploti
+ je treba nastaviti 
+na novo.</value>
 	</data>
 	<data name="HithermWallGrid_ZusaetzlicheDaemmung" xml:space="preserve">
-		<value>Dodatna izolacija R (m2K/W)</value>
+		<value>Dodatna izolacija 
+R 
+(m²K/W)</value>
 	</data>
 	<data name="KlimaFlaechenModul_100_30" xml:space="preserve">
 		<value>Modul 100/30</value>
@@ -1546,7 +1583,7 @@
 		<value>Tip modula</value>
 	</data>
 	<data name="LengthAssistent_AnbindeleitungVon" xml:space="preserve">
-		<value>Priključni vod od % SYSTEM % v % RAUM$, % ANZAHL % ogrevalni/-ih krog/-ov</value>
+		<value>Priključni vod od %SYSTEM% v %RAUM%, %ANZAHL% ogrevalni/-ih krog/-ov</value>
 	</data>
 	<data name="LengthAssistent_FlaecheFbh" xml:space="preserve">
 		<value>Površina talnega ogrevanja brez nekurjenih površin:</value>
@@ -1627,7 +1664,7 @@
 		<value>Veljavno do:</value>
 	</data>
 	<data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
-		<value>Veljavnost licence se je iztekla. Prosimo, da to sporočite na naslov lizenz@dummy.at ali pa pokličete na +43-0000-LIZENZ ter zaprosite za novo licenco.</value>
+		<value>Veljavnost licence se je iztekla. Prosimo, da to sporočite na naslov office@harreither.com ali pa pokličete na +43-7353-6660 ter zaprosite za novo licenco.</value>
 	</data>
 	<data name="LicenseForm_HardwareId" xml:space="preserve">
 		<value>ID strojne opreme:</value>
@@ -1639,19 +1676,19 @@
 		<value>Nameščene licence:</value>
 	</data>
 	<data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
-		<value>Nisem našel licence. Če licenco že imate, jo uvozite z gumbom "Uvozi licenco". Če licence še nimate, vas prosimo, da to sporočite na naslov lizenz@dummy.at ali pokličite na +43-0000-LIZENZ in zaprosite za licenco. V ta namen je treba navesti ID strojne opreme.</value>
+		<value>Nisem našel licence. Če licenco že imate, jo uvozite z gumbom "Uvozi licenco". Če licence še nimate, vas prosimo, da to sporočite na naslov lizenz@dummy.at ali pokličite na +43-7353-6660 in zaprosite za licenco. V ta namen je treba navesti ID strojne opreme.</value>
 	</data>
 	<data name="LicenseForm_LizensiertFuer" xml:space="preserve">
 		<value>Licencirano za:</value>
 	</data>
 	<data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
-		<value>Licenca je neveljavna, ker jo je spremenila nepooblaščena oseba. Prosimo, da uporabite originalno licenco ali to sporočite na naslov lizenz@dummy.at ali pa pokličete na +43-0000-LIZENZ ter zaprosite za novo licenco.</value>
+		<value>Licenca je neveljavna, ker jo je spremenila nepooblaščena oseba. Prosimo, da uporabite originalno licenco ali to sporočite na naslov lizenz@dummy.at ali pa pokličete na +43-7353-6660 ter zaprosite za novo licenco.</value>
 	</data>
 	<data name="LicenseForm_NichtGueltig" xml:space="preserve">
-		<value>Licenca ni veljavna. Če licenco že imate, prosimo, da jo uvozite z gumbom "Uvozi licenco". Če licence še nimate, vas prosimo, da to sporočite na naslov lizenz@dummy.at ali pokličete na +43-0000-LIZENZ in zaprositea licenco. V ta namen je treba navesti ID strojne opreme.</value>
+		<value>Licenca ni veljavna. Če licenco že imate, prosimo, da jo uvozite z gumbom "Uvozi licenco". Če licence še nimate, vas prosimo, da to sporočite na naslov office@harreither.com ali pokličete na +43-7353-6660 in zaprositea licenco. V ta namen je treba navesti ID strojne opreme.</value>
 	</data>
 	<data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
-		<value>Licenca v tem računalniku ni veljavna. Prosimo, da to sporočite na naslov lizenz@dummy.at ali pokličite na +43-0000-LIZENZ in zaprosite za licenco. V ta namen je treba navesti ID strojne opreme.</value>
+		<value>Licenca v tem računalniku ni veljavna. Prosimo, da to sporočite na naslov office@harreither.com ali pokličite na +43-7353-6660 in zaprosite za licenco. V ta namen je treba navesti ID strojne opreme.</value>
 	</data>
 	<data name="LicenseForm_Seitenkopf" xml:space="preserve">
 		<value>Glava strani:</value>
@@ -1672,7 +1709,7 @@
 		<value>Gradbeni projekt</value>
 	</data>
 	<data name="LL_QuickDimensioning_Bearbeiter" xml:space="preserve">
-		<value>Referent: % BEARBEITER %</value>
+		<value>Referent: %BEARBEITER%</value>
 	</data>
 	<data name="LL_QuickDimensioning_BelegefaktorDecke" xml:space="preserve">
 		<value>Dodeljeni faktor strop=</value>
@@ -1714,19 +1751,19 @@
 		<value>Kontrolor prostorov</value>
 	</data>
 	<data name="LL_QuickDimensioning_RaumcontrollerRc" xml:space="preserve">
-		<value>% ANZAHL% * RC</value>
+		<value>%ANZAH% * RC</value>
 	</data>
 	<data name="LL_QuickDimensioning_RaumcontrollerRcf" xml:space="preserve">
-		<value>% ANZAHL % * RCF</value>
+		<value>%ANZAHL% * RCF</value>
 	</data>
 	<data name="LL_QuickDimensioning_RaumcontrollerRcFunk" xml:space="preserve">
-		<value>% ANZAHL % * RC-radiotelegrafija</value>
+		<value>%ANZAHL% * RC-radiotelegrafija</value>
 	</data>
 	<data name="LL_QuickDimensioning_RaumcontrollerRf" xml:space="preserve">
-		<value>% ANZAHL % * RF</value>
+		<value>%ANZAH% * RF</value>
 	</data>
 	<data name="LL_QuickDimensioning_Raumflaeche" xml:space="preserve">
-		<value>Površina prostora (m2)</value>
+		<value>Površina prostora (m²)</value>
 	</data>
 	<data name="LL_QuickDimensioning_Raumnr" xml:space="preserve">
 		<value>Št. prostora</value>
@@ -1753,10 +1790,10 @@
 		<value>RC-radiotelegerafija</value>
 	</data>
 	<data name="LL_QuickDimensioning_Seite" xml:space="preserve">
-		<value>Stran % SEITE %</value>
+		<value>Stran %SEITE%</value>
 	</data>
 	<data name="LL_Report_Seite" xml:space="preserve">
-		<value>Stran % SEITE %</value>
+		<value>Stran %SEITE%</value>
 	</data>
 	<data name="LL_QuickDimensioning_Stellmotore" xml:space="preserve">
 		<value>Nastavljiv motor</value>
@@ -1765,13 +1802,13 @@
 		<value>Vsota</value>
 	</data>
 	<data name="LL_QuickDimensioning_SummeGeschoss" xml:space="preserve">
-		<value>Vsota % GESCHOSS %</value>
+		<value>Vsota %GESCHOSS%</value>
 	</data>
 	<data name="LL_QuickDimensioning_Titel" xml:space="preserve">
-		<value>Pregled površin % PROJEKTNR %</value>
+		<value>Pregled površin %PROJEKTNR%</value>
 	</data>
 	<data name="LL_QuickDimensioning_Verteileranschlussdaten" xml:space="preserve">
-		<value>Priključni podatki za razdelilnik % PROJEKTNR %</value>
+		<value>Priključni podatki za razdelilnik %PROJEKTNR%</value>
 	</data>
 	<data name="LL_QuickDimensioning_VorlauftempHeizen" xml:space="preserve">
 		<value>Temperatura predtoka=</value>
@@ -1816,7 +1853,7 @@
 		<value>Nastavitev talnega ogrevanja Euroval® - %GESCHOSS% (ogrevanje)</value>
 	</data>
 	<data name="LL_Report_AuslegungEurovalGeschossKuehl" xml:space="preserve">
-		<value>Nastavitev talnega ogrevanja Euroval® - %GESCHOSS%(hlajenje9</value>
+		<value>Nastavitev talnega ogrevanja Euroval® - %GESCHOSS%(hlajenje)</value>
 	</data>
 	<data name="LL_Report_AuslegungFussboden" xml:space="preserve">
 		<value>Nastavitev talnega ogrevanja</value>
@@ -1909,10 +1946,12 @@
 		<value>Program teh artiklov ne more natančno izračunati. Ugotoviti jih mora načrtovalec!</value>
 	</data>
 	<data name="LL_Report_BestellvorschlagKategorie" xml:space="preserve">
-		<value>Potreba po materialu % KATEGORIE %</value>
+		<value>Potreba po materialu 
+%KATEGORIE%</value>
 	</data>
 	<data name="LL_Report_MaterialbedarfKategorie" xml:space="preserve">
-		<value>Potreba po materialu % KATEGORIE %</value>
+		<value>Potreba po materialu 
+%KATEGORIE%</value>
 	</data>
 	<data name="LL_Report_BestellvorschlagMenge" xml:space="preserve">
 		<value>Količina</value>
@@ -1948,7 +1987,7 @@
 		<value>Datum izdelave</value>
 	</data>
 	<data name="LL_Report_Europlan" xml:space="preserve">
-		<value>Europlan % VERSION %</value>
+		<value>Europlan %VERSION%</value>
 	</data>
 	<data name="LL_Report_FlaecheFbh" xml:space="preserve">
 		<value>Površina talnega ogrevanja</value>
@@ -1975,10 +2014,12 @@
 		<value>Priključek</value>
 	</data>
 	<data name="LL_Report_FussbodenBreite" xml:space="preserve">
-		<value>Širina cm</value>
+		<value>Širina 
+cm</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_B" xml:space="preserve">
-		<value>Širina cm</value>
+		<value>Širina 
+cm</value>
 	</data>
 	<data name="LL_Report_FussbodenDruckverlust" xml:space="preserve">
 		<value>Izguba tlaka</value>
@@ -1993,31 +2034,39 @@
 		<value>Izguba tlaka</value>
 	</data>
 	<data name="LL_Report_FussbodenDruckverlustRohr" xml:space="preserve">
-		<value>Cev, mbar</value>
+		<value>Cev 
+mbar</value>
 	</data>
 	<data name="LL_Report_WandDruckverlustRohr" xml:space="preserve">
-		<value>Cev, mbar</value>
+		<value>Cev
+ mbar</value>
 	</data>
 	<data name="LL_Report_FussbodenDruckverlustVerteiler" xml:space="preserve">
-		<value>Razdelilnik, mbar</value>
+		<value>Razdelilnik 
+mbar</value>
 	</data>
 	<data name="LL_Report_KlimabodenDruckverlustVerteiler" xml:space="preserve">
-		<value>Razdelilnik, mbar</value>
+		<value>Razdelilnik, 
+mbar</value>
 	</data>
 	<data name="LL_Report_KlimadeckeDruckverlustVerteiler" xml:space="preserve">
-		<value>Razdelilnik, mbar</value>
+		<value>Razdelilnik, 
+mbar</value>
 	</data>
 	<data name="LL_Report_WandDruckverlustVerteiler" xml:space="preserve">
 		<value>Razdelilnik, mbar</value>
 	</data>
 	<data name="LL_Report_FussbodenFbKonstruktion" xml:space="preserve">
-		<value>Konstrukcija tal RL, B</value>
+		<value>Konstrukcija tal 
+RL, B</value>
 	</data>
 	<data name="LL_Report_FussbodenFlaeche" xml:space="preserve">
-		<value>A m2</value>
+		<value>A
+m²</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_A" xml:space="preserve">
-		<value>A m2</value>
+		<value>A
+m²</value>
 	</data>
 	<data name="LL_Report_FussbodenFlussgeschwindigkeit" xml:space="preserve">
 		<value>v</value>
@@ -2050,13 +2099,15 @@
 		<value>Ogrevalni krogi</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeHeizkreise" xml:space="preserve">
-		<value>Ogrevalni krogi</value>
+		<value>Ogrevalni 
+krogi</value>
 	</data>
 	<data name="LL_Report_WandHeizkreise" xml:space="preserve">
 		<value>Ogrevalni krogi</value>
 	</data>
 	<data name="ProductOverviewForm_Heizkreise" xml:space="preserve">
-		<value>Ogrevalni krogi</value>
+		<value>Ogrevalni 
+krogi</value>
 	</data>
 	<data name="LL_Report_FussbodenHinweisHintereinandergeschaltet" xml:space="preserve">
 		<value>Navedeni sta temperaturi predtoka in povratnega toka na razdelilniku, ker je več sistemov priklopljenih zapored.</value>
@@ -2077,25 +2128,32 @@
 		<value>Navedeni so hidravlični podatki za celotni ogrevalni krog, ker je več sistemov priklopljenih zapored.</value>
 	</data>
 	<data name="LL_Report_FussbodenLeistung" xml:space="preserve">
-		<value>Q, talno ogrevanje, W</value>
+		<value>Q, talno ogrevanje 
+W</value>
 	</data>
 	<data name="LL_Report_KlimabodenLeistung" xml:space="preserve">
-		<value>Q, talno ogrevanje, W</value>
+		<value>Q, talno ogrevanje, 
+W</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_QFbh" xml:space="preserve">
-		<value>Q, talno ogrevanje, W</value>
+		<value>Q, talno ogrevanje, 
+W</value>
 	</data>
 	<data name="LL_Report_FussbodenLeistungProQm" xml:space="preserve">
-		<value>q, talno ogrevanje, W/m2</value>
+		<value>q, talno ogrevanje 
+W/m2</value>
 	</data>
 	<data name="LL_Report_KlimabodenLeistungProQm" xml:space="preserve">
-		<value>q, talno ogrevanje, W/m2</value>
+		<value>q, talno ogrevanje, 
+W/m²</value>
 	</data>
 	<data name="LL_Report_FussbodenOberflaechenTempAz" xml:space="preserve">
-		<value>t, talno ogrevanje, bivalna cona, °C</value>
+		<value>t, talno ogrevanje, bivalna cona, 
+°C</value>
 	</data>
 	<data name="LL_Report_FussbodenOberflaechenTempRz" xml:space="preserve">
-		<value>t, talno ogrevanje, obrobna cona, °C</value>
+		<value>t, talno ogrevanje, obrobna cona 
+°C</value>
 	</data>
 	<data name="LL_Report_FussbodenRaumName" xml:space="preserve">
 		<value>Ime</value>
@@ -2161,19 +2219,23 @@
 		<value>Št. prostora</value>
 	</data>
 	<data name="LL_Report_FussbodenRaumtemperatur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>ti
+°C</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtRaumtemperatur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>ti
+°C</value>
 	</data>
 	<data name="LL_Report_KlimabodenRaumtemperatur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>ti
+°C</value>
 	</data>
 	<data name="LL_Report_KlimadeckeRaumtemperatur" xml:space="preserve">
 		<value>ti °C</value>
 	</data>
 	<data name="LL_Report_WandRaumtemperatur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>ti
+°C</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaenge" xml:space="preserve">
 		<value>Dolžina cevi</value>
@@ -2182,46 +2244,57 @@
 		<value>Dolžina cevi</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeAnbindung" xml:space="preserve">
-		<value>Priključni vod, m</value>
+		<value>Priključni 
+vod. m</value>
 	</data>
 	<data name="LL_Report_WandRohrlaengeAnbindung" xml:space="preserve">
 		<value>Priključni vod, m</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeHeizkreis" xml:space="preserve">
-		<value>Ogrevalni krog (talno ogrevanje), m</value>
+		<value>Ogrevalni krog 
+(talno ogrevanje), m</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeHeizkreisGesamt" xml:space="preserve">
-		<value>Ogrevalni krog (skupaj), m</value>
+		<value>Ogrevalni krog 
+(skupaj), m</value>
 	</data>
 	<data name="LL_Report_WandRohrlaengeHeizkreisGesamt" xml:space="preserve">
-		<value>Ogrevalni krog (skupaj), m</value>
+		<value>Ogrevalni krog 
+(skupaj), m</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeRzAz" xml:space="preserve">
-		<value>Obrobna cona + bivalna cona, m</value>
+		<value>Obrobna cona + bivalna cona
+ m</value>
 	</data>
 	<data name="LL_Report_FussbodenRücklauftemperaur" xml:space="preserve">
-		<value>tr, °C</value>
+		<value>tr
+°C</value>
 	</data>
 	<data name="LL_Report_KlimabodenRuecklauftemperaur" xml:space="preserve">
-		<value>tr, °C</value>
+		<value>tr
+°C</value>
 	</data>
 	<data name="LL_Report_KlimadeckeRuecklauftemperaur" xml:space="preserve">
 		<value>tr, °C</value>
 	</data>
 	<data name="LL_Report_WandRuecklauftemperaur" xml:space="preserve">
-		<value>tr, °C</value>
+		<value>tr
+°C</value>
 	</data>
 	<data name="LL_Report_FussbodenSollLeistung" xml:space="preserve">
-		<value>Q, standardna vrednost (izračunan), W</value>
+		<value>Q, standardna vrednost 
+(izračunan), W</value>
 	</data>
 	<data name="LL_Report_KlimabodenSollLeistung" xml:space="preserve">
-		<value>Q, standardna vrednost (izračunan), W</value>
+		<value>Q, standardna vrednost 
+(izračunan), W</value>
 	</data>
 	<data name="LL_Report_KlimadeckeSollLeistung" xml:space="preserve">
 		<value>Q, standardna vrednost (izračunan), W</value>
 	</data>
 	<data name="LL_Report_WandSollLeistung" xml:space="preserve">
-		<value>Q, standardna vrednost (izračunan), W</value>
+		<value>Q, standardna vrednost 
+(izračunan), W</value>
 	</data>
 	<data name="LL_Report_FussbodenTeilsystem" xml:space="preserve">
 		<value>Delni sistem</value>
@@ -2230,7 +2303,8 @@
 		<value>Delni sistem</value>
 	</data>
 	<data name="LL_Report_KlimadeckeTeilsystem" xml:space="preserve">
-		<value>Delni sistem</value>
+		<value>Delni 
+sistem</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeTeilsystem" xml:space="preserve">
 		<value>Delni sistem</value>
@@ -2254,19 +2328,22 @@
 		<value>Način polaganja</value>
 	</data>
 	<data name="LL_Report_FussbodenWassermenge" xml:space="preserve">
-		<value>Količina vode</value>
+		<value>Količina 
+vode</value>
 	</data>
 	<data name="LL_Report_KlimabodenWassermenge" xml:space="preserve">
 		<value>Količina vode</value>
 	</data>
 	<data name="LL_Report_KlimadeckeWassermenge" xml:space="preserve">
-		<value>Količina vode</value>
+		<value>Količina 
+vode</value>
 	</data>
 	<data name="LL_Report_WandWassermenge" xml:space="preserve">
 		<value>Količina vode</value>
 	</data>
 	<data name="LL_Report_FussbodenWdKonstruktion" xml:space="preserve">
-		<value>Konstrukcija toplotne izolacije Ru</value>
+		<value>Konstrukcija toplotne izolacije 
+Ru</value>
 	</data>
 	<data name="LL_Report_Geschoss" xml:space="preserve">
 		<value>Nadstropje %GESCHOSS%</value>
@@ -2275,67 +2352,86 @@
 		<value>Pregled %GESCHOSS%</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtBereinigterBedarf" xml:space="preserve">
-		<value>Q, izračunan, W</value>
+		<value>Q, izračunan, 
+W</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtFlaecheEinheit" xml:space="preserve">
-		<value>m2</value>
+		<value>
+m²</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtHeizleistung" xml:space="preserve">
-		<value>Q, ogrevanje, W</value>
+		<value>Q, ogrevanje, 
+W</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtKuehlleistung" xml:space="preserve">
-		<value>Q, lhajenje, W</value>
+		<value>Q, lhajenje, 
+W</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtRaumNr" xml:space="preserve">
 		<value>Št. prostora</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtRestleistung" xml:space="preserve">
-		<value>Q, ostanek, W</value>
+		<value>Q, ostanek, 
+W</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_QRest" xml:space="preserve">
-		<value>Q, ostanek, W</value>
+		<value>Q, ostanek, 
+W</value>
 	</data>
 	<data name="LL_Report_Hinweise" xml:space="preserve">
 		<value>Opozorila</value>
 	</data>
 	<data name="LL_Report_KlimabodenAnbindeleitung" xml:space="preserve">
-		<value>Priključni vod, m</value>
+		<value>Priključni vod, 
+m</value>
 	</data>
 	<data name="LL_Report_KlimadeckeAnbindeleitung" xml:space="preserve">
-		<value>Priključni vod, m</value>
+		<value>Priključni vod, 
+m</value>
 	</data>
 	<data name="LL_Report_KlimabodenAnzahlModule" xml:space="preserve">
 		<value>Št. modulov</value>
 	</data>
 	<data name="LL_Report_KlimabodenDruckverlustHeizkreis" xml:space="preserve">
-		<value>Ogrevalni krog, mbar</value>
+		<value>Ogrevalni krog, 
+mbar</value>
 	</data>
 	<data name="LL_Report_KlimadeckeDruckverlustHeizkreis" xml:space="preserve">
-		<value>Ogrevalni krog, mbar</value>
+		<value>Ogrevalni krog, 
+mbar</value>
 	</data>
 	<data name="LL_Report_KlimabodenFbKonstruktion" xml:space="preserve">
-		<value>Konstrukcija tal, RL-B m2K/W</value>
+		<value>Konstrukcija tal, 
+RL-B 
+m²K/W</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheAnbindung" xml:space="preserve">
-		<value>Priključek, m2</value>
+		<value>Priključek, 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimadeckeFlaecheAnbindung" xml:space="preserve">
-		<value>Priključek, m2</value>
+		<value>Priključek, 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheDicht" xml:space="preserve">
-		<value>Gostota polaganja, m2</value>
+		<value>Gostota polaganja, 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheModulierend" xml:space="preserve">
-		<value>Modulirajoč, m2</value>
+		<value>Modulirajoč, 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheSonstige" xml:space="preserve">
-		<value>Drugo, m2</value>
+		<value>Drugo 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenOberflaechenTemp" xml:space="preserve">
-		<value>tfb, °C</value>
+		<value>tfb, 
+°C</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Tfb" xml:space="preserve">
-		<value>tfb, °C</value>
+		<value>tfb
+°C</value>
 	</data>
 	<data name="LL_Report_KlimabodenSystemkomponenten" xml:space="preserve">
 		<value>Sistemske komponente</value>
@@ -2344,19 +2440,26 @@
 		<value>Sistemske komponente</value>
 	</data>
 	<data name="LL_Report_KlimabodenWdKonstruktion" xml:space="preserve">
-		<value>Toplotnoizolacijska konstrukcija Ru m2K/W </value>
+		<value>Toplotnoizolacijska konstrukcija 
+Ru 
+m²K/W</value>
 	</data>
 	<data name="LL_Report_KlimadeckeWdKonstruktion" xml:space="preserve">
-		<value>Toplotnoizolacijska konstrukcija Ru m2K/W </value>
+		<value>Toplotnoizolacijska konstrukcija 
+Ru 
+m²K/W</value>
 	</data>
 	<data name="LL_Report_KlimadeckeAnzahlModule" xml:space="preserve">
 		<value>Število modulov (kos)</value>
 	</data>
 	<data name="LL_Report_KlimadeckeDeckenKonstruktion" xml:space="preserve">
-		<value>Strešna konstrukcija RL, B m2K/W</value>
+		<value>Strešna konstrukcija 
+RL, B 
+m²K/W</value>
 	</data>
 	<data name="LL_Report_KlimadeckeFlaecheModule" xml:space="preserve">
-		<value>Površina modula m2</value>
+		<value>Površina modula 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimadeckeLeistung" xml:space="preserve">
 		<value>Q, stropno ogrevanje, W</value>
@@ -2467,16 +2570,16 @@
 		<value>Transmisije stena</value>
 	</data>
 	<data name="LL_Report_UebersichtGeschosse" xml:space="preserve">
-		<value>Pregled nadstropij (% ART %)</value>
+		<value>Pregled nadstropij (%ART%)</value>
 	</data>
 	<data name="LL_Report_UebersichtRegelkreise" xml:space="preserve">
-		<value>Pregled regulacijskih zank % ART %</value>
+		<value>Pregled regulacijskih zank %ART%</value>
 	</data>
 	<data name="LL_Report_UebersichtVerteiler" xml:space="preserve">
-		<value>Pregled razdelilnikov % ART %</value>
+		<value>Pregled razdelilnikov %ART%</value>
 	</data>
 	<data name="LL_Report_Verlegeart" xml:space="preserve">
-		<value>Način polaganja % VERLEGEART %</value>
+		<value>Način polaganja %VERLEGEART%</value>
 	</data>
 	<data name="LL_Report_Verlegedaten" xml:space="preserve">
 		<value>Podatki o polaganju</value>
@@ -2485,7 +2588,7 @@
 		<value>Podatki o polaganju</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcotherm" xml:space="preserve">
-		<value>Podatki o plaganju Ecotherm® talno ogrevanje  % NADSTROPJE %</value>
+		<value>Podatki o plaganju Ecotherm® talno ogrevanje  %GESCHOSS%</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermAufenthaltszone" xml:space="preserve">
 		<value>Bivalna cona</value>
@@ -2503,19 +2606,24 @@
 		<value>mh/</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermDurchflussProHkZeile2" xml:space="preserve">
-		<value>Ogrevalni krog, l/h</value>
+		<value>Ogrevalni krog, 
+l/h</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEurovalDurchflussProHkZeile2" xml:space="preserve">
-		<value>Ogrevalni krog, l/h</value>
+		<value>Ogrevalni krog, 
+l/h</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2" xml:space="preserve">
-		<value>Ogrevalni krog, l/h</value>
+		<value>Ogrevalni krog
+l/h</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermFlaecheProHk" xml:space="preserve">
-		<value>Površina/ogrevalni krog</value>
+		<value>Površina/
+ogrevalni krog</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEurovalFlaecheProHk" xml:space="preserve">
-		<value>Površina/ogrevalni krog</value>
+		<value>Površina/
+ogrevalni krog</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile1" xml:space="preserve">
 		<value>A, nekurjeno</value>
@@ -2527,16 +2635,16 @@
 		<value>A, nekurjeno</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile2" xml:space="preserve">
-		<value>m2</value>
+		<value>m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEurovalFlaecheUnbeheiztZeile2" xml:space="preserve">
 		<value>m2</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimabodenFlaecheUnbeheiztZeile2" xml:space="preserve">
-		<value>m2</value>
+		<value>m²</value>
 	</data>
 	<data name="LL_Report_WandFlaecheZeile2" xml:space="preserve">
-		<value>m2</value>
+		<value>m²</value>
 	</data>
 	<data name="Unit_Quadratmeter" xml:space="preserve">
 		<value>m2</value>
@@ -2569,10 +2677,12 @@
 		<value>krogi</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermLaengeProHk" xml:space="preserve">
-		<value>Dolžina /ogrevalni krogi</value>
+		<value>Dolžina /
+ogrevalni krogi</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEurovalLaengeProHk" xml:space="preserve">
-		<value>Dolžina /ogrevalni krogi</value>
+		<value>Dolžina /
+ogrevalni krogi</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile1" xml:space="preserve">
 		<value>Cev</value>
@@ -2581,10 +2691,12 @@
 		<value>Cev</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile2" xml:space="preserve">
-		<value>Ogrevalni krog, m</value>
+		<value>Ogrevalni krog, 
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEurovalRohrlaengeProHkZeile2" xml:space="preserve">
-		<value>Ogrevalni krog, m</value>
+		<value>Ogrevalni krog, 
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermTeilsystemZeile1" xml:space="preserve">
 		<value>Delni</value>
@@ -2659,7 +2771,7 @@
 		<value>Konstrukcija</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEuroval" xml:space="preserve">
-		<value>Podatki o polaganju talnega ogrevanja Euroval®  - % GESCHOSS %</value>
+		<value>Podatki o polaganju talnega ogrevanja Euroval®  - %GESCHOSS%</value>
 	</data>
 	<data name="LL_Report_VerlegedatenFussbodenheizung" xml:space="preserve">
 		<value>Podatki o polaganju talnega ogrevanja</value>
@@ -2668,7 +2780,7 @@
 		<value>Ogrevalni krog</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHitherm" xml:space="preserve">
-		<value>Podatki o polaganju klime-stene Hitherm - % GESCHOSS %</value>
+		<value>Podatki o polaganju klime-stene Hitherm - %GESCHOSS%</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermAnbindeleitung" xml:space="preserve">
 		<value>Priključni vod</value>
@@ -2686,10 +2798,12 @@
 		<value>Skupaj</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile2" xml:space="preserve">
-		<value>Površina, m2</value>
+		<value>Površina,
+m²</value>
 	</data>
 	<data name="ProductOverviewForm_Flaeche" xml:space="preserve">
-		<value>Površina, m2</value>
+		<value>Površina 
+m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactHeizkreisZeile2" xml:space="preserve">
 		<value>Krog</value>
@@ -2701,19 +2815,22 @@
 		<value>Krog</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactLaengeRuecklauf" xml:space="preserve">
-		<value>Povratni krog, m</value>
+		<value>Povratni krog, 
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermLaengeRuecklauf" xml:space="preserve">
 		<value>Povratni krog, m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactLaengeVorlauf" xml:space="preserve">
-		<value>Predtok, m</value>
+		<value>Predtok, 
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermLaengeVorlauf" xml:space="preserve">
 		<value>Predtok, m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactLaengeWand" xml:space="preserve">
-		<value>Stena</value>
+		<value>Stena
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermLaengeWand" xml:space="preserve">
 		<value>Stena</value>
@@ -2737,10 +2854,12 @@
 		<value>Stena-</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermFlaecheRa10" xml:space="preserve">
-		<value>RA10</value>
+		<value>RA10
+m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermFlaecheRa5" xml:space="preserve">
-		<value>RA5, m²</value>
+		<value>RA5 
+m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermGesamtflaeche" xml:space="preserve">
 		<value>Skupna površina</value>
@@ -2782,13 +2901,16 @@
 		<value>Podatki o polaganju modula klima strop -%GESCHOSS%</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeDeckenKonstruktion" xml:space="preserve">
-		<value>Stropna konstrukcija</value>
+		<value>Stropna 
+konstrukcija</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeDurchflussProHk" xml:space="preserve">
-		<value>mh/ogrevalni krog, l/h</value>
+		<value>mh/ogrevalni krog
+l/h</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeFlaecheUnbeheizt" xml:space="preserve">
-		<value>Anekurjeno m2</value>
+		<value>Anekurjeno 
+m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeKonstruktion" xml:space="preserve">
 		<value>Konstrukcija: %KONSTRUKTION%</value>
@@ -2809,7 +2931,8 @@
 		<value>Moduli</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeModulflaeche" xml:space="preserve">
-		<value>Površina modula, m2</value>
+		<value>Površina 
+modula m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeReihe" xml:space="preserve">
 		<value>Vrsta</value>
@@ -2818,7 +2941,8 @@
 		<value>Vrsta</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeVerbindeleitung" xml:space="preserve">
-		<value>Ostali priključni vodi m</value>
+		<value>Ostali priključni 
+vodi m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenVerteiler" xml:space="preserve">
 		<value>Podatki o polaganju za razdelilnik %VERTEILER%</value>
@@ -2836,28 +2960,34 @@
 		<value>Potreba po toploti</value>
 	</data>
 	<data name="LL_Report_WandAnbindeleitungSenkrecht" xml:space="preserve">
-		<value>navpično m</value>
+		<value>navpično 
+m</value>
 	</data>
 	<data name="LL_Report_WandAnbindeleitungWaagrecht" xml:space="preserve">
-		<value>vodoravno m</value>
+		<value>vodoravno 
+m</value>
 	</data>
 	<data name="LL_Report_WandAnzahlRegister" xml:space="preserve">
 		<value>Število toplotnih registrov (kos)</value>
 	</data>
 	<data name="LL_Report_WandBereinigungLeistung" xml:space="preserve">
-		<value>Qdelta, W</value>
+		<value>Qdelta 
+W</value>
 	</data>
 	<data name="LL_Report_WandFlaecheZeile1" xml:space="preserve">
 		<value>A-stensko ogrevanje</value>
 	</data>
 	<data name="LL_Report_WandLeistung" xml:space="preserve">
-		<value>Q-stensko ogrevanje, W</value>
+		<value>Q-stensko ogrevanje 
+W</value>
 	</data>
 	<data name="LL_Report_WandLeistungProQm" xml:space="preserve">
-		<value>q-stensko ogrevanje, W/m2</value>
+		<value>q-stensko ogrevanje 
+W/m²</value>
 	</data>
 	<data name="LL_Report_WandRohrlaengeInWand" xml:space="preserve">
-		<value>V steni m</value>
+		<value>V steni 
+m</value>
 	</data>
 	<data name="LL_Report_WarnungenUndFehler" xml:space="preserve">
 		<value>Opozorila in napake</value>
@@ -3049,7 +3179,7 @@
 		<value>Gostota goriva: %VALUE% (standardna vrednost: %DEFAULT%)</value>
 	</data>
 	<data name="NotificationMessage_Entfeuchtung" xml:space="preserve">
-		<value>Zaradi povečanja hladilnega bremena (%VALUE% &gt;%MAXIMUM%W/m2) je treba predvideti sušenje.</value>
+		<value>Zaradi povečanja hladilnega bremena (%VALUE% &gt;%MAXIMUM%W/m²) je treba predvideti sušenje.</value>
 	</data>
 	<data name="NotificationMessage_Estrichueberdeckung" xml:space="preserve">
 		<value>Pokrivanje estriha: %VALUE% (standardna vrednost: %DEFAULT%)</value>
@@ -3097,7 +3227,8 @@
 		<value>Nastavitve</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_AAnb" xml:space="preserve">
-		<value>A-priključek, m2</value>
+		<value>A-priključek 
+m²</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Anhydritestrich" xml:space="preserve">
 		<value>Anhidritni estrih</value>
@@ -3121,7 +3252,8 @@
 		<value>Klipna tračnica z lepilnim trakom</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_DeltaP" xml:space="preserve">
-		<value>DeltaP, mbar</value>
+		<value>DeltaP
+mbar</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_EckenErklaerung" xml:space="preserve">
 		<value>(pozitivni koti povečajo, negativni zmanjšujejo površino obrobnih con)</value>
@@ -3157,7 +3289,8 @@
 		<value>Dolžina obrobne cone:</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Mg" xml:space="preserve">
-		<value>mh kg/h</value>
+		<value>mh 
+kg/h</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_NachHeizbetrieb" xml:space="preserve">
 		<value>po ogrevanju</value>
@@ -3169,16 +3302,20 @@
 		<value>po hlajenju</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Q" xml:space="preserve">
-		<value>Q W</value>
+		<value>Q 
+W</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_QAnb" xml:space="preserve">
-		<value>Q, priključek, W</value>
+		<value>Q, priključek, 
+W</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_QSoll" xml:space="preserve">
-		<value>Q, normiran, W</value>
+		<value>Q, normiran, 
+W</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_QSollProQuadratmeter" xml:space="preserve">
-		<value>q, normiran, W/m2</value>
+		<value>q, normiran, 
+W/m²</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_ReduzierteFlaeche" xml:space="preserve">
 		<value>Površina z zmanjšanim ogrevanjem/hlajenjem:</value>
@@ -3187,10 +3324,12 @@
 		<value>Površina z zmanjšanim ogrevanjem/hlajenjem:</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Rohrlaenge" xml:space="preserve">
-		<value>Dolžina cevi, m</value>
+		<value>Dolžina cevi 
+m</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Spreizung" xml:space="preserve">
-		<value>Razcep, K</value>
+		<value>Razcep, 
+K</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_TatsaechlicheAuslegung" xml:space="preserve">
 		<value>dejansko polaganje</value>
@@ -3229,7 +3368,8 @@
 		<value>Rezultati izračunov:</value>
 	</data>
 	<data name="PlannedHithermProductPanel_Breite" xml:space="preserve">
-		<value>Širina (cm)</value>
+		<value>Širina 
+(cm)</value>
 	</data>
 	<data name="PlannedHithermProductPanel_DifferenzLeistung" xml:space="preserve">
 		<value>Razlika do pričakovane zmogljivosti:</value>
@@ -3268,10 +3408,14 @@
 		<value>Ogrevalni krog</value>
 	</data>
 	<data name="PlannedHithermProductPanel_LeitungSenkrecht" xml:space="preserve">
-		<value>Vod navpično (m)</value>
+		<value>Vod 
+navpično 
+(m)</value>
 	</data>
 	<data name="PlannedHithermProductPanel_LeitungWaagrecht" xml:space="preserve">
-		<value>Vod vodoravno (m)</value>
+		<value>Vod 
+vodoravno 
+(m)</value>
 	</data>
 	<data name="PlannedHithermProductPanel_RegisterTyp" xml:space="preserve">
 		<value>Tip registra</value>
@@ -3427,16 +3571,20 @@
 		<value>Strešina Hitherm ® Compact</value>
 	</data>
 	<data name="ProductOverviewForm_DruckverlustHeiz" xml:space="preserve">
-		<value>Izguba tlaka, mbar</value>
+		<value>Izguba tlaka
+mbar</value>
 	</data>
 	<data name="ProductOverviewForm_DruckverlustKuehl" xml:space="preserve">
-		<value>Izguba tlaka, mbar</value>
+		<value>Izguba tlaka 
+mbar</value>
 	</data>
 	<data name="ProductOverviewForm_Kuehllast" xml:space="preserve">
-		<value>Hladilno breme, W</value>
+		<value>Hladilno breme 
+W</value>
 	</data>
 	<data name="ProductOverviewForm_Normwaerme" xml:space="preserve">
-		<value>Normirana toplota, W</value>
+		<value>Normirana toplota, 
+W</value>
 	</data>
 	<data name="ProductOverviewForm_Ok" xml:space="preserve">
 		<value>Ok</value>
@@ -3448,13 +3596,16 @@
 		<value>Oznaka prostora</value>
 	</data>
 	<data name="ProductOverviewForm_Restkuellast" xml:space="preserve">
-		<value>Ostanek, W</value>
+		<value>Ostanek
+W</value>
 	</data>
 	<data name="ProductOverviewForm_Restwaerme" xml:space="preserve">
-		<value>Odpadna toplota, W</value>
+		<value>Odpadna toplota 
+W</value>
 	</data>
 	<data name="ProductOverviewForm_Rohrlaenge" xml:space="preserve">
-		<value>Dolžina cevi, m</value>
+		<value>Dolžina cevi 
+m</value>
 	</data>
 	<data name="ProductOverviewForm_Titel" xml:space="preserve">
 		<value>Pregled</value>
@@ -3469,7 +3620,7 @@
 		<value>Priključek skozi prostor %RAUMID% (%RAUMNAME%), %ROHRTYP%, %VERLEGEART%</value>
 	</data>
 	<data name="ProjectReport_AnbindungDurchRaumGedaemmt" xml:space="preserve">
-		<value>Priključek skozi prostor %RAUMID% (%RAUMNAME%), %ROHRTYP%, %VERLEGEART%, %DÄMMUNG% izolirano</value>
+		<value>Priključek skozi prostor %RAUMID% (%RAUMNAME%), %ROHRTYP%, %VERLEGEART%, %DAEMMUNG% izolirano</value>
 	</data>
 	<data name="ProjectReport_BeheizteFlaeche" xml:space="preserve">
 		<value>Skupna ogrevana površina</value>
@@ -3712,13 +3863,15 @@
 		<value>Razdelilniku je dodeljenih preveč ogrevalnih krogov!</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_BkaFlaeche" xml:space="preserve">
-		<value>Aktiviranje betonskega jedra (m2)</value>
+		<value>Aktiviranje betonskega jedra 
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_BkaHeizkreise" xml:space="preserve">
 		<value>Aktiviranje betonskega jedra ogrevalni krogi</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_EurovalFlaeche" xml:space="preserve">
-		<value>Euroval®</value>
+		<value>Euroval®
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_EurovalHeizkreise" xml:space="preserve">
 		<value>Euroval® ogrevalni krogi</value>
@@ -3733,37 +3886,44 @@
 		<value>Ogrevalno in hladilno breme nista pokrita.</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactDachFlaeche" xml:space="preserve">
-		<value>Hitherm® Co</value>
+		<value>Hitherm® Co
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactDachHeizkreise" xml:space="preserve">
 		<value>Hitherm® Co Streha, ogrevalni krogi</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactFlaeche" xml:space="preserve">
-		<value>Hitherm® Co (m2)</value>
+		<value>Hitherm® Co 
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactHeizkreise" xml:space="preserve">
 		<value>Hitherm® Co Ogrevalni krogi</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermFlaeche" xml:space="preserve">
-		<value>Hitherm® (m2)</value>
+		<value>Hitherm®
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermHeizkreise" xml:space="preserve">
-		<value>Hitherm® Ogrevalni krogi</value>
+		<value>Hitherm® 
+Ogrevalni krogi</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenFlaeche" xml:space="preserve">
-		<value>Klima-tla (m2)</value>
+		<value>Klima-Boden
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenHeizkreise" xml:space="preserve">
-		<value>Klima-tla ogrevalni krogi</value>
+		<value>Klima-Boden ogrevalni krogi</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaDeckeFlaeche" xml:space="preserve">
-		<value>Klima-strop (m2)</value>
+		<value>Klima-Decke
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaDeckeHeizkreise" xml:space="preserve">
-		<value>Klima-strop (ogrevalni krogi)</value>
+		<value>Klima-Decke (ogrevalni krogi)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Kuehllast" xml:space="preserve">
-		<value>Hladilno breme (W)</value>
+		<value>Hladilno breme 
+(W)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KuehllastFehler" xml:space="preserve">
 		<value>Ogrevalno breme ni pokrito.</value>
@@ -3775,7 +3935,8 @@
 		<value>Kontrolor prostorov</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Raumflaeche" xml:space="preserve">
-		<value>Površina prostora (m2)</value>
+		<value>Površina prostora 
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_RC" xml:space="preserve">
 		<value>RC</value>
@@ -3793,7 +3954,8 @@
 		<value>Elektroventili</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Temperatur" xml:space="preserve">
-		<value>Temp. (°C)</value>
+		<value>Temp.
+(°C)</value>
 	</data>
 	<data name="QuickDimensioningFloorGridFlaecheFehler" xml:space="preserve">
 		<value>Načrtovana površina je večja od maksimalno razpoložljive površine</value>
@@ -3850,13 +4012,13 @@
 		<value>Ali res želite odstraniti proizvod modul klima-tla  iz pregleda površin?</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaBodenEntfernenTitel" xml:space="preserve">
-		<value>Odstrani klima-tla</value>
+		<value>Odstrani Modul Klimaboden</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaDeckeEntfernenText" xml:space="preserve">
-		<value>Ali res želite odstraniti proizvod modul klima-strop  iz pregleda površin?</value>
+		<value>Ali res želite odstraniti proizvod modul Modul Klimadecke  iz pregleda površin?</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaDeckeEntfernenTitel" xml:space="preserve">
-		<value>Odstrani modul klima-strop</value>
+		<value>Odstrani modul Modul Klimadecke</value>
 	</data>
 	<data name="QuickDimensioningPanel_ProdukteWaehlen" xml:space="preserve">
 		<value>Prosimo, izberite proizvode Harreither, ki naj so na razpolago pri pregledu površin:</value>
@@ -3916,7 +4078,9 @@
 		<value>Napaka pri formatu vnosa</value>
 	</data>
 	<data name="RoomSummaryPanel_FbhFlaeche" xml:space="preserve">
-		<value>Površina talnega ogrevanja (m2)</value>
+		<value>Površina talnega 
+ogrevanja 
+(m2)</value>
 	</data>
 	<data name="RoomSummaryPanel_Flaeche" xml:space="preserve">
 		<value>Površina:</value>
@@ -3931,7 +4095,8 @@
 		<value>Ogrevalno breme (očiščeno):</value>
 	</data>
 	<data name="RoomSummaryPanel_Heizleistung" xml:space="preserve">
-		<value>P-ogrevanje (W)</value>
+		<value>P-ogrevanje 
+(W)</value>
 	</data>
 	<data name="RoomSummaryPanel_Heizsysteme" xml:space="preserve">
 		<value>Ogrevalni sistemi</value>
@@ -3946,7 +4111,8 @@
 		<value>Hladilno breme (očiščeno):</value>
 	</data>
 	<data name="RoomSummaryPanel_Kuehlleistung" xml:space="preserve">
-		<value>P-hlajenje (W)</value>
+		<value>P-hlajenje 
+(W)</value>
 	</data>
 	<data name="RoomSummaryPanel_LoeschenBestaetigenText" xml:space="preserve">
 		<value>Ali res želite izbrisati sistem %SYSTEM%</value>
@@ -3967,10 +4133,10 @@
 		<value>Kliknite gumb v stolpcu "Obdelaj", da bi odprli ustrezni ogrevalni sistem ali pa kliknete na ogrevalni sistem v hirarhiji projekta.</value>
 	</data>
 	<data name="RoomTypeGrid_Heizlast" xml:space="preserve">
-		<value>Ogrevalno breme (W/m2)</value>
+		<value>Ogrevalno breme (W/m²)</value>
 	</data>
 	<data name="RoomTypeGrid_Kuehllast" xml:space="preserve">
-		<value>Hladilno breme (W/m2)</value>
+		<value>Hladilno breme (W/m²)</value>
 	</data>
 	<data name="SelectConnectionForProductForm_AnschlussAnSichSelbst" xml:space="preserve">
 		<value>Priključek ni mogoč. Ogrevalni sistem se ne more priključiti nase.</value>
@@ -4208,11 +4374,5 @@
 	</data>
 	<data name="QuickDimensioningPanel_Euroval" xml:space="preserve">
 		<value>Klima in stena Euroval®</value>
-	</data>
-	<data name="FacilityDetailsSummaryPanel_Allgemein" xml:space="preserve">
-		<value>Splošno</value>
-	</data>
-	<data name="ProductConnection_AnschlussAn" xml:space="preserve">
-		<value>Priključek na %SYSTEM% v %RAUM%: %RAUMNAME%</value>
 	</data>
 </root>

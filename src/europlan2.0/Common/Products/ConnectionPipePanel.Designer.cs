@@ -38,10 +38,11 @@ namespace Europlan.Common {
 			this.dgvConnectionPipes = new System.Windows.Forms.DataGridView();
 			this.connectionPipeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ConnectionOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.vorlaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.ruecklaufDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.roomDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.productDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ConnectionThrough = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.PlannedCircuits = new Europlan.Common.NumericColumn();
 			this.onlyFirstDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.printDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -70,10 +71,11 @@ namespace Europlan.Common {
 			this.dgvConnectionPipes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvConnectionPipes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Room,
+            this.ConnectionOf,
             this.vorlaufDataGridViewTextBoxColumn,
             this.ruecklaufDataGridViewTextBoxColumn,
             this.roomDataGridViewComboBoxColumn,
-            this.productDataGridViewComboBoxColumn,
+            this.ConnectionThrough,
             this.PlannedCircuits,
             this.onlyFirstDataGridViewCheckBoxColumn,
             this.printDataGridViewCheckBoxColumn,
@@ -93,11 +95,13 @@ namespace Europlan.Common {
 			this.dgvConnectionPipes.TabIndex = 2;
 			this.dgvConnectionPipes.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellValueChanged);
 			this.dgvConnectionPipes.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvConnectionPipes_UserDeletingRow);
+			this.dgvConnectionPipes.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvConnectionPipes_CellBeginEdit);
 			this.dgvConnectionPipes.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellLeave);
 			this.dgvConnectionPipes.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dgvConnectionPipes_PreviewKeyDown);
 			this.dgvConnectionPipes.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvConnectionPipes_UserDeletedRow);
 			this.dgvConnectionPipes.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvConnectionPipes_CellParsing);
 			this.dgvConnectionPipes.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvConnectionPipes_DefaultValuesNeeded);
+			this.dgvConnectionPipes.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvConnectionPipes_EditingControlShowing);
 			this.dgvConnectionPipes.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvConnectionPipes_DataError);
 			this.dgvConnectionPipes.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConnectionPipes_CellEnter);
 			// 
@@ -118,18 +122,29 @@ namespace Europlan.Common {
 			this.Room.Visible = false;
 			this.Room.Width = 120;
 			// 
+			// connectionOfDataGridViewComboBoxColumn
+			// 
+			this.ConnectionOf.DataPropertyName = "ConnectionOf";
+			this.ConnectionOf.FillWeight = 70F;
+			this.ConnectionOf.HeaderText = "Teilsystem";
+			this.ConnectionOf.Name = "connectionOfDataGridViewComboBoxColumn";
+			this.ConnectionOf.ReadOnly = true;
+			this.ConnectionOf.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConnectionOf.Visible = false;
+			this.ConnectionOf.Width = 120;
+			// 
 			// vorlaufDataGridViewTextBoxColumn
 			// 
 			this.vorlaufDataGridViewTextBoxColumn.DataPropertyName = "Vorlauf";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle3.Format = "F0";
 			this.vorlaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
-			this.vorlaufDataGridViewTextBoxColumn.FillWeight = 70F;
+			this.vorlaufDataGridViewTextBoxColumn.FillWeight = 80F;
 			this.vorlaufDataGridViewTextBoxColumn.HeaderText = "Länge\nVorlauf\n(m)";
 			this.vorlaufDataGridViewTextBoxColumn.Name = "vorlaufDataGridViewTextBoxColumn";
 			this.vorlaufDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
 			this.vorlaufDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.vorlaufDataGridViewTextBoxColumn.Width = 70;
+			this.vorlaufDataGridViewTextBoxColumn.Width = 80;
 			// 
 			// ruecklaufDataGridViewTextBoxColumn
 			// 
@@ -137,12 +152,12 @@ namespace Europlan.Common {
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle4.Format = "F0";
 			this.ruecklaufDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
-			this.ruecklaufDataGridViewTextBoxColumn.FillWeight = 70F;
+			this.ruecklaufDataGridViewTextBoxColumn.FillWeight = 80F;
 			this.ruecklaufDataGridViewTextBoxColumn.HeaderText = "Länge\nRücklauf\n(m)";
 			this.ruecklaufDataGridViewTextBoxColumn.Name = "ruecklaufDataGridViewTextBoxColumn";
 			this.ruecklaufDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
 			this.ruecklaufDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.ruecklaufDataGridViewTextBoxColumn.Width = 70;
+			this.ruecklaufDataGridViewTextBoxColumn.Width = 80;
 			// 
 			// roomDataGridViewComboBoxColumn
 			// 
@@ -150,21 +165,19 @@ namespace Europlan.Common {
 			this.roomDataGridViewComboBoxColumn.FillWeight = 70F;
 			this.roomDataGridViewComboBoxColumn.HeaderText = "durch\nRaum\nNr.";
 			this.roomDataGridViewComboBoxColumn.Name = "roomDataGridViewComboBoxColumn";
-			this.roomDataGridViewComboBoxColumn.ReadOnly = true;
 			this.roomDataGridViewComboBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.roomDataGridViewComboBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.roomDataGridViewComboBoxColumn.Width = 120;
 			// 
-			// productDataGridViewComboBoxColumn
+			// connectionThroughDataGridViewComboBoxColumn
 			// 
-			this.productDataGridViewComboBoxColumn.DataPropertyName = "ConnectionThrough";
-			this.productDataGridViewComboBoxColumn.FillWeight = 70F;
-			this.productDataGridViewComboBoxColumn.HeaderText = "Teilsystem";
-			this.productDataGridViewComboBoxColumn.Name = "productDataGridViewComboBoxColumn";
-			this.productDataGridViewComboBoxColumn.ReadOnly = true;
-			this.productDataGridViewComboBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.productDataGridViewComboBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.productDataGridViewComboBoxColumn.Width = 120;
+			this.ConnectionThrough.DataPropertyName = "ConnectionThrough";
+			this.ConnectionThrough.FillWeight = 70F;
+			this.ConnectionThrough.HeaderText = "Teilsystem";
+			this.ConnectionThrough.Name = "connectionThroughDataGridViewComboBoxColumn";
+			this.ConnectionThrough.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.ConnectionThrough.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConnectionThrough.Width = 120;
 			// 
 			// PlannedCircuits
 			// 
@@ -187,10 +200,10 @@ namespace Europlan.Common {
 			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			dataGridViewCellStyle6.NullValue = false;
 			this.onlyFirstDataGridViewCheckBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
-			this.onlyFirstDataGridViewCheckBoxColumn.FillWeight = 55F;
+			this.onlyFirstDataGridViewCheckBoxColumn.FillWeight = 65F;
 			this.onlyFirstDataGridViewCheckBoxColumn.HeaderText = "nur\nerster\nHK";
 			this.onlyFirstDataGridViewCheckBoxColumn.Name = "onlyFirstDataGridViewCheckBoxColumn";
-			this.onlyFirstDataGridViewCheckBoxColumn.Width = 55;
+			this.onlyFirstDataGridViewCheckBoxColumn.Width = 65;
 			// 
 			// printDataGridViewCheckBoxColumn
 			// 
@@ -199,10 +212,10 @@ namespace Europlan.Common {
 			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			dataGridViewCellStyle7.NullValue = false;
 			this.printDataGridViewCheckBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
-			this.printDataGridViewCheckBoxColumn.FillWeight = 55F;
+			this.printDataGridViewCheckBoxColumn.FillWeight = 70F;
 			this.printDataGridViewCheckBoxColumn.HeaderText = "Verlege-\ndaten\ndrucken";
 			this.printDataGridViewCheckBoxColumn.Name = "printDataGridViewCheckBoxColumn";
-			this.printDataGridViewCheckBoxColumn.Width = 55;
+			this.printDataGridViewCheckBoxColumn.Width = 70;
 			// 
 			// PipeType
 			// 
@@ -308,10 +321,11 @@ namespace Europlan.Common {
 		private System.Windows.Forms.BindingSource connectionPipeBindingSource;
 		private System.Windows.Forms.DataGridView dgvConnectionPipes;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Room;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ConnectionOf;
 		private NumericColumn vorlaufDataGridViewTextBoxColumn;
 		private NumericColumn ruecklaufDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn roomDataGridViewComboBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn productDataGridViewComboBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ConnectionThrough;
 		private NumericColumn PlannedCircuits;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn onlyFirstDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn printDataGridViewCheckBoxColumn;

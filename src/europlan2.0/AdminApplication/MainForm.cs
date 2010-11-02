@@ -64,6 +64,7 @@ namespace Europlan.AdminApplication {
 					using (Stream s = new FileStream(dialog.FileName, FileMode.Create)) {
 						lic.SaveLicense(s);
 					}
+					FileUtils.SetAccessForEveryone(dialog.FileName);
 				}
 			}
 		}
@@ -88,6 +89,7 @@ namespace Europlan.AdminApplication {
 				using (Stream s = new FileStream(licensesFile, FileMode.Create)) {
 					LicenseManager.Instance.SaveLicenseManager(s);
 				}
+				FileUtils.SetAccessForEveryone(licensesFile);
 			} catch (Exception ex) {
 				log.Error("Problem while saving licenses", ex);
 			}
@@ -133,7 +135,10 @@ namespace Europlan.AdminApplication {
 			FolderBrowserDialog dialog = new FolderBrowserDialog();
 
 			if (dialog.ShowDialog() == DialogResult.OK) {
-				File.Copy(Path.Combine(PathUtil.DataPath, "global.conf"), Path.Combine(dialog.SelectedPath, "global.conf"), true);
+				string filename = Path.Combine(dialog.SelectedPath, "global.conf");
+				File.Copy(Path.Combine(PathUtil.DataPath, "global.conf"), filename, true);
+
+				FileUtils.SetAccessForEveryone(filename);
 			}
 		}
 
@@ -147,7 +152,11 @@ namespace Europlan.AdminApplication {
 				string path = Path.GetDirectoryName(dialog.FileName);
 				if (!path.Equals(PathUtil.DataPath)) {
 					//if (File.Exists(Path.Combine(path, "BruttoPreise.csv"))) {
-						File.Copy(dialog.FileName, Path.Combine(PathUtil.DataPath, "BruttoPreise.csv"), true);
+						string filename = Path.Combine(PathUtil.DataPath, "BruttoPreise.csv");
+						File.Copy(dialog.FileName, filename, true);
+
+						FileUtils.SetAccessForEveryone(filename);
+						
 						MessageBox.Show("Die Anwendung muss nun neu gestartet werden, damit die neu importierte Artikelliste geladen werden kann.");
 						Application.Restart();
 					//}

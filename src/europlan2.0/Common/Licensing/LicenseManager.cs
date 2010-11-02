@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using log4net;
 using Europlan.Common;
+using System.Security.AccessControl;
+using System.Security.Principal;
 
 namespace Europlan.Licensing {
 	public class LicenseManager {
@@ -89,7 +91,11 @@ namespace Europlan.Licensing {
 						}
 					}
 					try {
-						File.Copy(filename, Path.Combine(this.dataDirPath, licenseFileName), true);
+						string licenseFilename = Path.Combine(this.dataDirPath, licenseFileName);
+						File.Copy(filename, licenseFilename, true);
+
+						FileUtils.SetAccessForEveryone(licenseFileName);
+
 						copied = true;
 					} catch (Exception e) {
 						log.Warn("Cannot copy license to data directory", e);

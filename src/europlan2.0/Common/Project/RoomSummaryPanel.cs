@@ -241,8 +241,10 @@ namespace Europlan.Common {
 					if (pwic != null) {
 						pwic.PlannedInsulationConstruction = this.room.GetFloor().LastInsulationConstruction;	
 					}
+
+					pp.Product.CalculateMode = pp.Product.DefaultCalculateMode;
 					
-					pp.ConfigureProductDefault();
+					pp.ConfigureProduct(false);
 					this.room.PlannedProducts.Add(pp);
 					this.UpdateControl(true);
 					if (this.ProjectStructureChanged != null) {
@@ -267,11 +269,13 @@ namespace Europlan.Common {
 					message = message.Replace("%SYSTEM%", product.Node.Text);
 					if (MessageBox.Show(message, EuroplanRes.RoomSummaryPanel_LoeschenBestaetigenTitel, MessageBoxButtons.YesNo) == DialogResult.Yes) {
 
-						PlannedProduct connectedProduct = this.room.GetFloor().FindConnectedProduct(product);
-						if (connectedProduct != null) {
+						List<PlannedProduct> connectedProducts = this.room.GetFloor().FindConnectedProduct(product);
+						foreach (PlannedProduct connectedProduct in connectedProducts) {
+							SelectConnectionForProductForm.UnconnectProduct(connectedProduct);
 							connectedProduct.Product.PlannedConnection = null;
 							connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, false);
 						}
+						SelectConnectionForProductForm.UnconnectProduct(product);
 						this.room.PlannedProducts.Remove(product);
 						if (this.ProjectStructureChanged != null) {
 							this.ProjectStructureChanged(this);
@@ -300,19 +304,27 @@ namespace Europlan.Common {
 				if ((e.Row.DataBoundItem as PlannedProduct).Product == null) {
 					e.Cancel = true;
 				} else {
-					this.deletedProduct = e.Row.DataBoundItem as PlannedProduct;
+					string message = EuroplanRes.RoomSummaryPanel_LoeschenBestaetigenText;
+					message = message.Replace("%SYSTEM%", (e.Row.DataBoundItem as PlannedProduct).Node.Text);
+					if (MessageBox.Show(message, EuroplanRes.RoomSummaryPanel_LoeschenBestaetigenTitel, MessageBoxButtons.YesNo) == DialogResult.Yes) {
+						this.deletedProduct = e.Row.DataBoundItem as PlannedProduct;
+					} else {
+						e.Cancel = true;
+					}
 				}
 			}
 		}
 
 		private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
 			if (this.deletedProduct != null) {
-				this.room.PlannedProducts.Remove(this.deletedProduct);
-				PlannedProduct connectedProduct = this.room.GetFloor().FindConnectedProduct(this.deletedProduct);
-				if (connectedProduct != null) {
+				List<PlannedProduct> connectedProducts = this.room.GetFloor().FindConnectedProduct(this.deletedProduct);
+				foreach (PlannedProduct connectedProduct in connectedProducts) {
+					SelectConnectionForProductForm.UnconnectProduct(connectedProduct);
 					connectedProduct.Product.PlannedConnection = null;
 					connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, false);
 				}
+				SelectConnectionForProductForm.UnconnectProduct(this.deletedProduct);
+				this.room.PlannedProducts.Remove(this.deletedProduct);
 				if (this.ProjectStructureChanged != null) {
 					this.ProjectStructureChanged(this);
 				}

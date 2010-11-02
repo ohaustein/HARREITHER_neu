@@ -262,6 +262,18 @@ Rücklauf
   <data name="ConnectionPipePanel_TeilsystemCol" xml:space="preserve">
     <value>Teilsystem</value>
   </data>
+  <data name="ConnectionPipePanel_UngueltigeProduktNrText" xml:space="preserve">
+    <value>Die eingegebene Systemnummer ist nicht gültig. Bitte geben Sie eine gültige Systemnummer ein!</value>
+  </data>
+  <data name="ConnectionPipePanel_UngueltigeProduktNrTitel" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="ConnectionPipePanel_UngueltigeRaumNrText" xml:space="preserve">
+    <value>Die eingegebene Raumnummer ist nicht gültig. Bitte geben Sie eine gültige Raumnummer ein!</value>
+  </data>
+  <data name="ConnectionPipePanel_UngueltigeRaumNrTitel" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
   <data name="ConnectionPipePanel_VerlegeartCol" xml:space="preserve">
     <value>Verlege-
 art</value>
@@ -511,7 +523,7 @@ Vorlauf
     <value>zugewiesene Heizkreise:</value>
   </data>
   <data name="DistributorPanel_Zusaetzlich" xml:space="preserve">
-    <value> + %VALUE% (zus.) = %SUM%</value>
+    <value>+ %VALUE% (zus.) = %SUM%</value>
   </data>
   <data name="DistributorPanel_ZusaetzlicheHeizkreise" xml:space="preserve">
     <value>zus. Heizkreise:</value>
@@ -1456,7 +1468,7 @@ Wollen Sie trotzdem fortfahren?</value>
     <value>Gültig bis:</value>
   </data>
   <data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
-    <value>Die Gültigkeit der Lizenz ist abgelaufen. Bitte kontaktieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine neue Lizenz anzufordern.</value>
+    <value>Die Gültigkeit der Lizenz ist abgelaufen. Bitte kontaktieren sie Kontakt-Name unter office@harreither.com oder +43-7353-6660 um eine neue Lizenz anzufordern.</value>
   </data>
   <data name="LicenseForm_HardwareId" xml:space="preserve">
     <value>Hardware ID:</value>
@@ -1468,19 +1480,19 @@ Wollen Sie trotzdem fortfahren?</value>
     <value>Installierte Lizenzen:</value>
   </data>
   <data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
-    <value>Es wurde keine Lizenz gefunden. Falls Sie bereits eine Lizenz besitzen importieren Sie diese bitte über die Schaltfläche 'Lizenz importieren'. Falls Sie noch keine Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben.</value>
+    <value>Es wurde keine Lizenz gefunden. Falls Sie bereits eine Lizenz besitzen importieren Sie diese bitte über die Schaltfläche 'Lizenz importieren'. Falls Sie noch keine Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-7353-6660 um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben.</value>
   </data>
   <data name="LicenseForm_LizensiertFuer" xml:space="preserve">
     <value>Lizenziert für:</value>
   </data>
   <data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
-    <value>Die Lizenz ist ungültig da sie von nicht authorisierter Stelle modifiziert wurde. Bitte verwenden Sie Ihre original Lizenz oder kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine neue Lizenz anzufordern.</value>
+    <value>Die Lizenz ist ungültig da sie von nicht authorisierter Stelle modifiziert wurde. Bitte verwenden Sie Ihre original Lizenz oder kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-7353-6660 um eine neue Lizenz anzufordern.</value>
   </data>
   <data name="LicenseForm_NichtGueltig" xml:space="preserve">
-    <value>Die Lizenz ist nicht gültig. Falls Sie bereits eine gültige Lizenz besitzen importieren Sie diese bitte über die Schaltfläche 'Lizenz importieren'. Falls Sie noch keine gültige Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben.</value>
+    <value>Die Lizenz ist nicht gültig. Falls Sie bereits eine gültige Lizenz besitzen importieren Sie diese bitte über die Schaltfläche 'Lizenz importieren'. Falls Sie noch keine gültige Lizenz besitzen kontaktieren sie Kontakt-Name unter office@harreither.com oder +43-7353-6660 um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben.</value>
   </data>
   <data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
-    <value>Die Lizenz ist auf dem aktuellen Rechner nicht gültig. Bitte kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz für diesen Rechner anzufordern. Zum Anfordern einer Lizenz. müssen Sie die hier angegebene Hardware ID bekannt geben.</value>
+    <value>Die Lizenz ist auf dem aktuellen Rechner nicht gültig. Bitte kontatkieren sie Kontakt-Name unter office@harreither.com oder +43-7353-6660 um eine Lizenz für diesen Rechner anzufordern. Zum Anfordern einer Lizenz. müssen Sie die hier angegebene Hardware ID bekannt geben.</value>
   </data>
   <data name="LicenseForm_Seitenkopf" xml:space="preserve">
     <value>Seitenkopf:</value>
@@ -1875,7 +1887,7 @@ system</value>
     <value>VA</value>
   </data>
   <data name="LL_Report_FussbodenVorlauftemperaur" xml:space="preserve">
-    <value>tv
+    <value>Tv
 °C</value>
   </data>
   <data name="LL_Report_FussbodenWassermenge" xml:space="preserve">
@@ -2031,7 +2043,7 @@ Nr.</value>
 system</value>
   </data>
   <data name="LL_Report_KlimabodenVorlauftemperaur" xml:space="preserve">
-    <value>tv
+    <value>Tv
 °C</value>
   </data>
   <data name="LL_Report_KlimabodenWassermenge" xml:space="preserve">
@@ -2123,7 +2135,7 @@ Nr.</value>
 system</value>
   </data>
   <data name="LL_Report_KlimadeckeVorlauftemperaur" xml:space="preserve">
-    <value>tv
+    <value>Tv
 °C</value>
   </data>
   <data name="LL_Report_KlimadeckeWassermenge" xml:space="preserve">
@@ -2833,7 +2845,7 @@ system</value>
     <value>system</value>
   </data>
   <data name="LL_Report_WandVorlauftemperaur" xml:space="preserve">
-    <value>tv
+    <value>Tv
 °C</value>
   </data>
   <data name="LL_Report_WandWassermenge" xml:space="preserve">
@@ -2926,6 +2938,9 @@ menge</value>
   </data>
   <data name="MainForm_Projekt" xml:space="preserve">
     <value>Projekt</value>
+  </data>
+  <data name="MainForm_ProjektAnsehen" xml:space="preserve">
+    <value>Projekt ansehen</value>
   </data>
   <data name="MainForm_Speichern" xml:space="preserve">
     <value>Speic&amp;hern</value>
@@ -3089,6 +3104,9 @@ einheit</value>
   </data>
   <data name="OptionsForm_Sprache" xml:space="preserve">
     <value>Sprache:</value>
+  </data>
+  <data name="OptionsForm_StandardSystemparameter" xml:space="preserve">
+    <value>Standard Systemparameter</value>
   </data>
   <data name="OptionsForm_Titel" xml:space="preserve">
     <value>Einstellungen</value>
@@ -3479,8 +3497,23 @@ recht</value>
   <data name="PlannedProductPanel_GewuenschteKuehlleistung" xml:space="preserve">
     <value>gewünschte Kühlleistung:</value>
   </data>
+  <data name="PlannedProductPanel_Heizen" xml:space="preserve">
+    <value>Heizen</value>
+  </data>
+  <data name="PlannedProductPanel_HeizenUndKuehlen" xml:space="preserve">
+    <value>Heizen und Kühlen</value>
+  </data>
+  <data name="PlannedProductPanel_Kuehlen" xml:space="preserve">
+    <value>Kühlen</value>
+  </data>
   <data name="PlannedProductPanel_KuehllastDecken" xml:space="preserve">
     <value>Kühllast decken</value>
+  </data>
+  <data name="PlannedProductPanel_RestkaelteUebernehmen" xml:space="preserve">
+    <value>Restkälte übernehmen</value>
+  </data>
+  <data name="PlannedProductPanel_RestwaermeUebernehmen" xml:space="preserve">
+    <value>Restwärme übernehmen</value>
   </data>
   <data name="PlannedProductPanel_Stellantriebe" xml:space="preserve">
     <value>Stellantrieb(e) verwenden</value>
@@ -3499,6 +3532,9 @@ recht</value>
   </data>
   <data name="PlannedProductPanel_Verteileranschluss" xml:space="preserve">
     <value>Verteileranschluß:</value>
+  </data>
+  <data name="PlannedProductPanel_Verwendungszweck" xml:space="preserve">
+    <value>Verwendungszweck</value>
   </data>
   <data name="PlannedProductPanel_WaermebedarfDecken" xml:space="preserve">
     <value>Wärmebedarf decken</value>
@@ -4549,6 +4585,12 @@ fläche
   <data name="SystemParametersPanel_HithermCompact" xml:space="preserve">
     <value>Hitherm® Compact</value>
   </data>
+  <data name="SystemParametersPanel_InfoCustomConf" xml:space="preserve">
+    <value>Diese Werte betreffen nicht das aktuelle Projekt, sondern sind Standardwerte, welche verwendet werden wenn ein neues Projekt angelegt wird!</value>
+  </data>
+  <data name="SystemParametersPanel_InfoProjectConf" xml:space="preserve">
+    <value>Diese Werte betreffen nur das aktuelle Projekt. Um die Standardwerte zu ändern, die verwendet werden, wenn ein neues Projekt angelegt wird, klicken Sie auf "Optionen" &gt; "Einstellungen" &gt; "Standard Systemparameter"</value>
+  </data>
   <data name="SystemParametersPanel_KlimaBoden" xml:space="preserve">
     <value>Modul Klima-Boden</value>
   </data>
@@ -4599,6 +4641,9 @@ fläche
   </data>
   <data name="SystemParametersPanel_Rohrlaenge" xml:space="preserve">
     <value>Max. Rohrlänge je Heizkreis:</value>
+  </data>
+  <data name="SystemParametersPanel_Ruecksetzen" xml:space="preserve">
+    <value>Rücksetzen</value>
   </data>
   <data name="SystemParametersPanel_SpreizungHeiz" xml:space="preserve">
     <value>Spreizung Heizbetrieb:</value>

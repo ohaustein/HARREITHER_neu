@@ -182,12 +182,12 @@ namespace Europlan.Common {
 									}
 								}
 								foreach (PlannedProduct pp in r.PlannedProducts) {
-									PlannedProduct connectedProduct = this.floor.FindConnectedProduct(pp);
-									if (connectedProduct != null) {
+									List<PlannedProduct> connectedProducts = this.floor.FindConnectedProduct(pp);
+									foreach (PlannedProduct connectedProduct in connectedProducts) {
 										connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, false);
 									}
 									pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
-									if (connectedProduct != null) {
+									foreach (PlannedProduct connectedProduct in connectedProducts) {
 										connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, false);
 									}
 									PlannedProduct inverseConnectedProduct = null;
@@ -282,7 +282,7 @@ namespace Europlan.Common {
 								pp.Product.PlannedConnection = null;
 							}
 							foreach (PlannedProduct pp in connectedProducts) {
-								pp.ConfigureProductDefault();
+								pp.ConfigureProduct(false);
 							}
 							floor.Distributors.Remove(toDelete);
 							if (ProjectStructureChanged != null) {

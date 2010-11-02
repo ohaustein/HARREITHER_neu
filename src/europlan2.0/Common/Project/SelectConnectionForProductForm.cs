@@ -192,7 +192,8 @@ namespace Europlan.Common {
 				this.hk2DataGridViewTextBoxColumn.Items.Clear();
 				Product p = (this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct.Product;
 				List<UserDefinedConnection> list = new List<UserDefinedConnection>();
-				if (this.product.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT &&
+				if (this.product.Product.PlannedConnection != null && 
+					this.product.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT &&
 					this.product.Product.PlannedConnection.OtherProduct.Product == p &&
 					this.product.Product.PlannedConnection.UserDefined) {
 					for (int i = 0; i < this.product.Product.PlannedCircuits.Count; i++) {
@@ -316,7 +317,7 @@ namespace Europlan.Common {
 				product.Product.InverseConnectedCircuits.Clear();
 			}
 			foreach (PlannedProduct pp in wasConnectedTo) {
-				pp.ConfigureProductDefault();
+				pp.ConfigureProduct(false);
 			}
 			//UnconnectProduct(product.Product);
 		}

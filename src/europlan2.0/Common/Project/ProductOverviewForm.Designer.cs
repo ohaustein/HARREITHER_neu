@@ -79,8 +79,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
 			this.dgvProductOverview.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			this.dgvProductOverview.ColumnHeadersHeight = 38;
-			this.dgvProductOverview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.dgvProductOverview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvProductOverview.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.roomIdDataGridViewTextBoxColumn,
             this.roomNameDataGridViewTextBoxColumn,

@@ -336,8 +336,9 @@
 		<value>belépő</value>
 	</data>
 	<data name="ConnectionPipePanel_DurchRaumCol" xml:space="preserve">
-		<value>a … sz. helyiségen át
-</value>
+		<value>a … sz.
+ helyiségen 
+át</value>
 	</data>
 	<data name="ConnectionPipePanel_FlaecheCol" xml:space="preserve">
 		<value>Terület</value>
@@ -368,7 +369,9 @@ teljesítmény</value>
 teljesítmény</value>
 	</data>
 	<data name="ConnectionPipePanel_NurErsterHkCol" xml:space="preserve">
-		<value>Csak első fűtőkör</value>
+		<value>Csak 
+első 
+fűtőkör</value>
 	</data>
 	<data name="ConnectionPipePanel_RaumCol" xml:space="preserve">
 		<value>Helyiség</value>
@@ -398,19 +401,26 @@ teljesítmény</value>
 		<value>Csőrendszer</value>
 	</data>
 	<data name="ConnectionPipePanel_RuecklaufCol" xml:space="preserve">
-		<value>Visszatérő hossz (m)</value>
+		<value>Visszatérő
+ hossz 
+(m)</value>
 	</data>
 	<data name="ConnectionPipePanel_TeilsystemCol" xml:space="preserve">
 		<value>Részrendszer</value>
 	</data>
 	<data name="ConnectionPipePanel_VerlegeartCol" xml:space="preserve">
-		<value>Lefektetés fajtája</value>
+		<value>Lefektetés 
+fajtája</value>
 	</data>
 	<data name="ConnectionPipePanel_VerlegedatenDruckenCol" xml:space="preserve">
-		<value>Lefektetési dátum nyomtatása</value>
+		<value>Lefektetési 
+dátum 
+nyomtatása</value>
 	</data>
 	<data name="ConnectionPipePanel_VorlaufCol" xml:space="preserve">
-		<value>Előremenő hossz (m)</value>
+		<value>Előremenő 
+hossz 
+(m)</value>
 	</data>
 	<data name="ConnectionPipesForm_Anbindeflaeche" xml:space="preserve">
 		<value>A bekötővezetékkel lefoglalt terület:</value>
@@ -740,7 +750,7 @@ teljesítmény</value>
 		<value>Hozzárendelt fűtőkörök</value>
 	</data>
 	<data name="DistributorPanel_Zusaetzlich" xml:space="preserve">
-		<value> + %VALUE% (plusz) = %SUM%</value>
+		<value>+ %VALUE% (plusz) = %SUM%</value>
 	</data>
 	<data name="DistributorPanel_ZusaetzlicheHeizkreise" xml:space="preserve">
 		<value>Pótlólagos fűtőkörök:</value>
@@ -1093,7 +1103,8 @@ teljesítmény</value>
 		<value>Szerkesztés</value>
 	</data>
 	<data name="FloorSummaryPanel_Bezeichnung" xml:space="preserve">
-		<value>Megnevezés</value>
+		<value>Megnevezés
+</value>
 	</data>
 	<data name="FloorSummaryPanel_BezeichnungLang" xml:space="preserve">
 		<value>A helyiség megnevezése</value>
@@ -1288,52 +1299,40 @@ teljesítmény</value>
 		<value>Nem rendelkezik licensszel</value>
 	</data>
 	<data name="General_NummerCol" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="LL_Report_RegelkreisNr" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermRaumNrZeile2" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEurovalRaumNrZeile2" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactRaumNrZeile2" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermRaumNrZeile2" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimabodenRaumNrZeile2" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="LL_Report_VerteilerNr" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="LL_Report_WandRaumNrZeile2" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Nr" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="RegulatoryCircuitSummaryPanel_Nummer" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="SelectConstructionForm_Nummer" xml:space="preserve">
-		<value>Száma
-</value>
+		<value>Száma</value>
 	</data>
 	<data name="SelectDistributorForm_Nummer" xml:space="preserve">
 		<value>Száma
@@ -1525,11 +1524,13 @@ R
 		<value>Új falszerkezet</value>
 	</data>
 	<data name="HithermWallGrid_TemperaturHeiz" xml:space="preserve">
-		<value>Fűtési hőmérséklet
+		<value>Fűtési 
+hőmérséklet
 (°C)</value>
 	</data>
 	<data name="HithermWallGrid_TemperaturKuehl" xml:space="preserve">
-		<value>Hűtési hőmérséklet
+		<value>Hűtési 
+hőmérséklet
 (°C)</value>
 	</data>
 	<data name="HithermWallGrid_UWert" xml:space="preserve">
@@ -1537,7 +1538,8 @@ R
 (W/m²K)</value>
 	</data>
 	<data name="HithermWallGrid_WaermebedarfBereinigen" xml:space="preserve">
-		<value>Hőigény tisztázása</value>
+		<value>Hőigény 
+tisztázása</value>
 	</data>
 	<data name="HithermWallGrid_ZusaetzlicheDaemmung" xml:space="preserve">
 		<value>További szigetelés
@@ -1674,7 +1676,7 @@ R
 		<value>Érvényességi határidő: </value>
 	</data>
 	<data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
-		<value>A licensz érvényessége lejárt. Kerjük, vegye fel a kapcsolatot a lizenz@dummy.at vagy +43-0000-LIZENZ kapcsolatnévvel, hogy új licenszet kérjen. </value>
+		<value>A licensz érvényessége lejárt. Kerjük, vegye fel a kapcsolatot a office@harreither.com vagy +43-7353-6660 kapcsolatnévvel, hogy új licenszet kérjen.</value>
 	</data>
 	<data name="LicenseForm_HardwareId" xml:space="preserve">
 		<value>Hardverazonosító</value>
@@ -1686,19 +1688,19 @@ R
 		<value>Telepített licenszek: </value>
 	</data>
 	<data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
-		<value>Nem találtam licenszet. Ha már rendelkezik licensszel, kérem, importálja azt a 'Licensz importálása' kapcsolómezővel. Ha még nem rendelkezik licensszel, vegye fel a kapcsolatot a lizenz@dummy.at vagy +43-0000-LIZENZ kapcsolatnévvel, hogy licenszet kérjen. Licensz kéréséhez az itt megadott hardverazonosítót meg kell adnia. </value>
+		<value>Nem találtam licenszet. Ha már rendelkezik licensszel, kérem, importálja azt a 'Licensz importálása' kapcsolómezővel. Ha még nem rendelkezik licensszel, vegye fel a kapcsolatot a lizenz@dummy.at vagy +43-7353-6660 kapcsolatnévvel, hogy licenszet kérjen. Licensz kéréséhez az itt megadott hardverazonosítót meg kell adnia.</value>
 	</data>
 	<data name="LicenseForm_LizensiertFuer" xml:space="preserve">
 		<value>Licensz kiadva a következő névre: </value>
 	</data>
 	<data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
-		<value>A licensz érvénytelen, mivel nem engedélyezett hely módosította azt. Kérjük, használja az eredeti licenszet vagy vegye fel a kapcsolatot a lizenz@dummy.at vagy +43-0000-LIZENZ kapcsolatnévvel, hogy új licenszet kérjen</value>
+		<value>A licensz érvénytelen, mivel nem engedélyezett hely módosította azt. Kérjük, használja az eredeti licenszet vagy vegye fel a kapcsolatot a lizenz@dummy.at vagy +43-7353-6660 kapcsolatnévvel, hogy új licenszet kérjen</value>
 	</data>
 	<data name="LicenseForm_NichtGueltig" xml:space="preserve">
-		<value>A licensz érvénytelen. Ha már rendelkezik érvényes licensszel, kérjük,  importálja azt a 'Licensz importálása" kapcsolófelülettel. Ha még nem rendelkezik érvényes licensszel,  vegye fel a kapcsolatot a lizenz@dummy.at vagy +43-0000-LIZENZ kapcsolatnévvel, hogy új licenszet kérjen. Licensz kéréséhez az itt megadott hardverazonosítót meg kell adni. </value>
+		<value>A licensz érvénytelen. Ha már rendelkezik érvényes licensszel, kérjük,  importálja azt a 'Licensz importálása" kapcsolófelülettel. Ha még nem rendelkezik érvényes licensszel,  vegye fel a kapcsolatot a office@harreither.com vagy +43-7353-6660 kapcsolatnévvel, hogy új licenszet kérjen. Licensz kéréséhez az itt megadott hardverazonosítót meg kell adni.</value>
 	</data>
 	<data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
-		<value>A licensz az aktuális számítógépen nem érvényes. Kérjük, vegye fel a kapcsolatot a lizenz@dummy.at vagy +43-0000-LIZENZ kapcsolatnévvel, hogy új licenszet kérjen. Licensz kéréséhez az itt megadott hardverazonosítót meg kell adni. </value>
+		<value>A licensz az aktuális számítógépen nem érvényes. Kérjük, vegye fel a kapcsolatot a office@harreither.com vagy +43-7353-6660 kapcsolatnévvel, hogy új licenszet kérjen. Licensz kéréséhez az itt megadott hardverazonosítót meg kell adni.</value>
 	</data>
 	<data name="LicenseForm_Seitenkopf" xml:space="preserve">
 		<value>Oldalfejléc:</value>
@@ -1962,7 +1964,8 @@ anyagigény</value>
 		<value>Anyagigény %KATEGORIE%</value>
 	</data>
 	<data name="LL_Report_MaterialbedarfKategorie" xml:space="preserve">
-		<value>Anyagigény %KATEGORIE%</value>
+		<value>Anyagigény 
+%KATEGORIE%</value>
 	</data>
 	<data name="LL_Report_BestellvorschlagMenge" xml:space="preserve">
 		<value>Mennyiség</value>
@@ -2270,7 +2273,8 @@ száma</value>
 		<value>Csőhossz</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeAnbindung" xml:space="preserve">
-		<value>Bekötő vezeték m</value>
+		<value>Bekötő 
+vezeték m</value>
 	</data>
 	<data name="LL_Report_WandRohrlaengeAnbindung" xml:space="preserve">
 		<value>Bekötő vezeték m</value>
@@ -2931,11 +2935,11 @@ cm</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimabodenModuleSonstige" xml:space="preserve">
 		<value>Egyéb
-m²</value>
+</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile1" xml:space="preserve">
 		<value>Egyéb
-m²</value>
+</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile2" xml:space="preserve">
 		<value>Összekötő
@@ -3970,18 +3974,18 @@ fűtőkörök</value>
 fűtőkörök</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenFlaeche" xml:space="preserve">
-		<value>Klímapadló
+		<value>Klima-Boden
 (m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenHeizkreise" xml:space="preserve">
-		<value>Klímapadló fűtőkörei</value>
+		<value>Klima-Boden fűtőkörei</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaDeckeFlaeche" xml:space="preserve">
-		<value>Klímafödém
+		<value>Klima-Decke
 (m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaDeckeHeizkreise" xml:space="preserve">
-		<value>Klímafödém
+		<value>Klima-Decke
 fűtőkörei</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Kuehllast" xml:space="preserve">
@@ -4075,13 +4079,13 @@ fűtőkörei</value>
 		<value>A klímapadlómodul terméket tényleg eltávolítja a területi összeállításból? </value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaBodenEntfernenTitel" xml:space="preserve">
-		<value>A klímapadlómodul eltávolítása</value>
+		<value>A Modul Klimaboden eltávolítása</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaDeckeEntfernenText" xml:space="preserve">
-		<value>A klímafödémmodult tényleg eltávolítja a területi összeállításból? </value>
+		<value>A Modul Klimadecke tényleg eltávolítja a területi összeállításból? </value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaDeckeEntfernenTitel" xml:space="preserve">
-		<value>A klímafödémmodul eltávolítása</value>
+		<value>A Modul Klimadecke eltávolítása</value>
 	</data>
 	<data name="QuickDimensioningPanel_ProdukteWaehlen" xml:space="preserve">
 		<value>Kérem, válassza ki azokat a Harreither-termékeket, melyeknek a területi összeállításban rendelkezésre kell állniuk:</value>
@@ -4437,11 +4441,5 @@ felület
 	</data>
 	<data name="WarningsAndErrorsForm_Warnung" xml:space="preserve">
 		<value>%SYSTEM% in %RAUMID% (%RAUMNAME%): %WARNUNG%</value>
-	</data>
-	<data name="FacilityDetailsSummaryPanel_Allgemein" xml:space="preserve">
-		<value>Általános</value>
-	</data>
-	<data name="ProductConnection_AnschlussAn" xml:space="preserve">
-		<value>Csatlakoztatás a %SYSTEM%-re a %RAUM% : %RAUMNAME%</value>
 	</data>
 </root>

@@ -29,7 +29,7 @@ namespace Europlan.Application {
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.tabOptions = new System.Windows.Forms.TabControl();
 			this.tabGeneral = new System.Windows.Forms.TabPage();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
@@ -51,9 +51,11 @@ namespace Europlan.Application {
 			this.megGeneral = new Europlan.Common.MaterialEditorGrid();
 			this.tabConstructions = new System.Windows.Forms.TabPage();
 			this.constructionEditorGrid1 = new Europlan.Common.ConstructionEditorGrid();
+			this.tabDefaultSystemParameters = new System.Windows.Forms.TabPage();
+			this.systemParametersPanel = new Europlan.Common.SystemParametersPanel();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.panel1.SuspendLayout();
-			this.tabControl1.SuspendLayout();
+			this.tabOptions.SuspendLayout();
 			this.tabGeneral.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.tabMaterials.SuspendLayout();
@@ -65,6 +67,7 @@ namespace Europlan.Application {
 			this.tabPageInsulation.SuspendLayout();
 			this.tabPageGeneral.SuspendLayout();
 			this.tabConstructions.SuspendLayout();
+			this.tabDefaultSystemParameters.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// lblLanguage
@@ -103,17 +106,18 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.panel1, "panel1");
 			this.panel1.Name = "panel1";
 			// 
-			// tabControl1
+			// tabOptions
 			// 
-			this.tabControl1.Controls.Add(this.tabGeneral);
-			this.tabControl1.Controls.Add(this.tabMaterials);
-			this.tabControl1.Controls.Add(this.tabConstructions);
-			resources.ApplyResources(this.tabControl1, "tabControl1");
-			this.helpProvider.SetHelpKeyword(this.tabControl1, resources.GetString("tabControl1.HelpKeyword"));
-			this.helpProvider.SetHelpNavigator(this.tabControl1, ((System.Windows.Forms.HelpNavigator)(resources.GetObject("tabControl1.HelpNavigator"))));
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
-			this.helpProvider.SetShowHelp(this.tabControl1, ((bool)(resources.GetObject("tabControl1.ShowHelp"))));
+			this.tabOptions.Controls.Add(this.tabGeneral);
+			this.tabOptions.Controls.Add(this.tabMaterials);
+			this.tabOptions.Controls.Add(this.tabConstructions);
+			this.tabOptions.Controls.Add(this.tabDefaultSystemParameters);
+			resources.ApplyResources(this.tabOptions, "tabOptions");
+			this.helpProvider.SetHelpKeyword(this.tabOptions, resources.GetString("tabOptions.HelpKeyword"));
+			this.helpProvider.SetHelpNavigator(this.tabOptions, ((System.Windows.Forms.HelpNavigator)(resources.GetObject("tabOptions.HelpNavigator"))));
+			this.tabOptions.Name = "tabOptions";
+			this.tabOptions.SelectedIndex = 0;
+			this.helpProvider.SetShowHelp(this.tabOptions, ((bool)(resources.GetObject("tabOptions.ShowHelp"))));
 			// 
 			// tabGeneral
 			// 
@@ -184,7 +188,7 @@ namespace Europlan.Application {
 			this.megFloor.Admin = false;
 			this.megFloor.AllowToAdd = false;
 			resources.ApplyResources(this.megFloor, "megFloor");
-			this.megFloor.Filter = Europlan.Common.CategoryType.Floor;
+			this.megFloor.Filter = null;
 			this.megFloor.Name = "megFloor";
 			this.megFloor.ShowOnlyAdditional = false;
 			// 
@@ -200,7 +204,7 @@ namespace Europlan.Application {
 			this.megWall.Admin = false;
 			this.megWall.AllowToAdd = false;
 			resources.ApplyResources(this.megWall, "megWall");
-			this.megWall.Filter = Europlan.Common.CategoryType.Wall;
+			this.megWall.Filter = null;
 			this.megWall.Name = "megWall";
 			this.megWall.ShowOnlyAdditional = false;
 			// 
@@ -216,7 +220,7 @@ namespace Europlan.Application {
 			this.megCeiling.Admin = false;
 			this.megCeiling.AllowToAdd = false;
 			resources.ApplyResources(this.megCeiling, "megCeiling");
-			this.megCeiling.Filter = Europlan.Common.CategoryType.Ceiling;
+			this.megCeiling.Filter = null;
 			this.megCeiling.Name = "megCeiling";
 			this.megCeiling.ShowOnlyAdditional = false;
 			// 
@@ -232,7 +236,7 @@ namespace Europlan.Application {
 			this.megDistributor.Admin = false;
 			this.megDistributor.AllowToAdd = false;
 			resources.ApplyResources(this.megDistributor, "megDistributor");
-			this.megDistributor.Filter = Europlan.Common.CategoryType.Distributor;
+			this.megDistributor.Filter = null;
 			this.megDistributor.Name = "megDistributor";
 			this.megDistributor.ShowOnlyAdditional = false;
 			// 
@@ -248,7 +252,7 @@ namespace Europlan.Application {
 			this.megInsulation.Admin = false;
 			this.megInsulation.AllowToAdd = true;
 			resources.ApplyResources(this.megInsulation, "megInsulation");
-			this.megInsulation.Filter = Europlan.Common.CategoryType.Insulation;
+			this.megInsulation.Filter = null;
 			this.megInsulation.Name = "megInsulation";
 			this.megInsulation.ShowOnlyAdditional = false;
 			// 
@@ -264,7 +268,7 @@ namespace Europlan.Application {
 			this.megGeneral.Admin = false;
 			this.megGeneral.AllowToAdd = true;
 			resources.ApplyResources(this.megGeneral, "megGeneral");
-			this.megGeneral.Filter = Europlan.Common.CategoryType.General;
+			this.megGeneral.Filter = null;
 			this.megGeneral.Name = "megGeneral";
 			this.megGeneral.ShowOnlyAdditional = false;
 			// 
@@ -282,6 +286,19 @@ namespace Europlan.Application {
 			this.constructionEditorGrid1.Name = "constructionEditorGrid1";
 			this.constructionEditorGrid1.Type = Europlan.Common.Configuration.ConfigurationType.UserConfiguration;
 			// 
+			// tabDefaultSystemParameters
+			// 
+			this.tabDefaultSystemParameters.Controls.Add(this.systemParametersPanel);
+			resources.ApplyResources(this.tabDefaultSystemParameters, "tabDefaultSystemParameters");
+			this.tabDefaultSystemParameters.Name = "tabDefaultSystemParameters";
+			this.tabDefaultSystemParameters.UseVisualStyleBackColor = true;
+			// 
+			// systemParametersPanel
+			// 
+			this.systemParametersPanel.ConfigurationType = Europlan.Common.Configuration.ConfigurationType.UserConfiguration;
+			resources.ApplyResources(this.systemParametersPanel, "systemParametersPanel");
+			this.systemParametersPanel.Name = "systemParametersPanel";
+			// 
 			// helpProvider
 			// 
 			resources.ApplyResources(this.helpProvider, "helpProvider");
@@ -293,7 +310,7 @@ namespace Europlan.Application {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
 			this.ControlBox = false;
-			this.Controls.Add(this.tabControl1);
+			this.Controls.Add(this.tabOptions);
 			this.Controls.Add(this.panel1);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -301,7 +318,7 @@ namespace Europlan.Application {
 			this.Load += new System.EventHandler(this.OptionsForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
 			this.panel1.ResumeLayout(false);
-			this.tabControl1.ResumeLayout(false);
+			this.tabOptions.ResumeLayout(false);
 			this.tabGeneral.ResumeLayout(false);
 			this.tabGeneral.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -314,6 +331,7 @@ namespace Europlan.Application {
 			this.tabPageInsulation.ResumeLayout(false);
 			this.tabPageGeneral.ResumeLayout(false);
 			this.tabConstructions.ResumeLayout(false);
+			this.tabDefaultSystemParameters.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -325,7 +343,7 @@ namespace Europlan.Application {
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.TabControl tabOptions;
 		private System.Windows.Forms.TabPage tabGeneral;
 		private System.Windows.Forms.TabPage tabMaterials;
 		private System.Windows.Forms.TabPage tabConstructions;
@@ -348,5 +366,7 @@ namespace Europlan.Application {
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.HelpProvider helpProvider;
+		private System.Windows.Forms.TabPage tabDefaultSystemParameters;
+		private Europlan.Common.SystemParametersPanel systemParametersPanel;
 	}
 }

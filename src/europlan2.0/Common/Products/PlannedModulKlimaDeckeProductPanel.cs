@@ -22,6 +22,9 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
+			this.btnRestwaerme.Text = EuroplanRes.PlannedProductPanel_RestwaermeUebernehmen;
+			this.btnRestkaelte.Text = EuroplanRes.PlannedProductPanel_RestkaelteUebernehmen;
+
 			this.lblAreaPercentage.Text = EuroplanRes.Unit_Prozent; //"%";
 			this.lblCoolLoadPercentage.Text = EuroplanRes.Unit_Prozent; //"%";
 			this.lblHeatLoadPercentage.Text = EuroplanRes.Unit_Prozent; //"%";
@@ -95,6 +98,11 @@ namespace Europlan.Common {
 			this.label17.Text = EuroplanRes.PlannedModulProductPanel_ErreichteLeistung; //"Erreichte Leistung:";
 			this.lblAreaUnheatedTxt.Text = EuroplanRes.PlannedModulProductPanel_FlaecheUnbeheizt; //"unbeheizte/ungekühlte Fläche:";
 			this.label45.Text = EuroplanRes.PlannedModulProductPanel_LeistungAnbindung; //"Leistung Anbindeleitungen:";
+
+			this.lblCalculateMode.Text = EuroplanRes.PlannedProductPanel_Verwendungszweck;
+			this.rbHeat.Text = EuroplanRes.PlannedProductPanel_Heizen;
+			this.rbCool.Text = EuroplanRes.PlannedProductPanel_Kuehlen;
+			this.rbHeatAndCool.Text = EuroplanRes.PlannedProductPanel_HeizenUndKuehlen;
 
 			this.label2.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_SummeVerbindungsleitungen; //"Summe Verbindungsleitungen:";
 			this.label12.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_Heizkreis; //"Heizkreise";
@@ -172,6 +180,7 @@ namespace Europlan.Common {
 		private int ignoreLengthVerbindungen = 0;
 		private int ignoreSubArea = 0;
 		private int ignoreType = 0;
+		private int ignoreCalculationMode = 0;
 		private int ignoreLayoutType = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
@@ -194,6 +203,8 @@ namespace Europlan.Common {
 				ignoreLengthVerbindungen++;
 				ignoreSubArea++;
 				ignoreType++;
+				ignoreCalculationMode++;
+				ignoreLayoutType++;
 
 				ModulKlimaDeckeProduct mdProduct = this.product.Product as ModulKlimaDeckeProduct;
 
@@ -276,7 +287,12 @@ namespace Europlan.Common {
 				}
 
 				this.numArea.MaxValue = (decimal)mdProduct.AvailableCeilingArea;
-				this.numAreaPercentage.MaxValue = (decimal)(mdProduct.AvailableCeilingArea * 100 / mdProduct.AssociatedRoom.Area);
+				if (mdProduct.AssociatedRoom.Area > 0) {
+					this.numAreaPercentage.MaxValue = (decimal)(mdProduct.AvailableCeilingArea * 100 / mdProduct.AssociatedRoom.Area);
+				} else {
+					this.numAreaPercentage.MaxValue = 100;
+				}
+
 				//this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
 				this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
 				this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
@@ -323,7 +339,11 @@ namespace Europlan.Common {
 						break;
 					case Product.ProductType.DH:
 						this.numArea.MaxValue = (decimal)mdProduct.AvailableCeilingArea;
-						this.numAreaPercentage.MaxValue = (decimal)(mdProduct.AvailableCeilingArea * 100 / mdProduct.AssociatedRoom.Area);
+						if (mdProduct.AssociatedRoom.Area > 0) {
+							this.numAreaPercentage.MaxValue = (decimal)(mdProduct.AvailableCeilingArea * 100 / mdProduct.AssociatedRoom.Area);
+						} else {
+							this.numAreaPercentage.MaxValue = 100;
+						}
 						break;
 					default:
 						//this.numArea.MaxValue = (decimal)0;
@@ -331,9 +351,18 @@ namespace Europlan.Common {
 						break;
 				}
 
+				if (this.product.Product.CalculateMode == Product.CalculateModeEnum.HEAT) {
+					rbHeat.Checked = true;
+				} else if (this.product.Product.CalculateMode == Product.CalculateModeEnum.COOL) {
+					rbCool.Checked = true;
+				} else if (this.product.Product.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL) {
+					rbHeatAndCool.Checked = true;
+				}
 
-				if (this.product.NecessaryHeatLoad > 0) {
+				if ((this.product.Product.CalculateMode == Product.CalculateModeEnum.HEAT ||
+					this.product.Product.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL)) {
 			        this.chkCoverHeatLoad.Enabled = true;
+					this.btnRestwaerme.Enabled = true;
 			        if ((skipFields & (FieldEnum.HEAT_LOAD | FieldEnum.HEAT_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
 			            if (this.product.CoverHeatLoad) {
 			                this.chkCoverHeatLoad.Checked = true;
@@ -341,8 +370,8 @@ namespace Europlan.Common {
 			                this.numHeatLoadPercentage.Enabled = false;
 			            } else {
 			                this.chkCoverHeatLoad.Checked = false;
-			                this.numHeatLoad.Enabled = true;
-			                this.numHeatLoadPercentage.Enabled = true;
+							this.numHeatLoad.Enabled = this.product.NecessaryHeatLoad > 0;
+							this.numHeatLoadPercentage.Enabled = this.product.NecessaryHeatLoad > 0;
 			            }
 			        }
 			        if ((skipFields & FieldEnum.HEAT_LOAD) == FieldEnum.NONE) {
@@ -357,12 +386,15 @@ namespace Europlan.Common {
 					this.numHeatLoadPercentage.Enabled = false;
 					this.numHeatLoadPercentage.Text = "";
 					this.chkCoverHeatLoad.Enabled = false;
+					this.btnRestwaerme.Enabled = false;
 					this.chkCoverHeatLoad.Checked = false;
 				}
 				this.numCoolLoad.MaxValue = (decimal)this.product.NecessaryCoolLoad;
 				this.numCoolLoadPercentage.MaxValue = (decimal)(mdProduct.AssociatedRoom.NormalizedCoolLoad <= 0 ? 0 : this.product.NecessaryCoolLoad * 100 / mdProduct.AssociatedRoom.NormalizedCoolLoad);
-				if (this.product.NecessaryCoolLoad > 0) {
+				if ((this.product.Product.CalculateMode == Product.CalculateModeEnum.COOL ||
+					this.product.Product.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL)) {
 					this.chkCoverCoolLoad.Enabled = true;
+					this.btnRestkaelte.Enabled = true;
 					if ((skipFields & (FieldEnum.COOL_LOAD | FieldEnum.COOL_LOAD_PERCENTAGE)) == FieldEnum.NONE) {
 						if (this.product.CoverCoolLoad) {
 							this.chkCoverCoolLoad.Checked = true;
@@ -370,8 +402,8 @@ namespace Europlan.Common {
 							this.numCoolLoadPercentage.Enabled = false;
 						} else {
 							this.chkCoverCoolLoad.Checked = false;
-							this.numCoolLoad.Enabled = true;
-							this.numCoolLoadPercentage.Enabled = true;
+							this.numCoolLoad.Enabled = this.product.NecessaryCoolLoad > 0;
+							this.numCoolLoadPercentage.Enabled = this.product.NecessaryCoolLoad > 0;
 						}
 					}
 					if ((skipFields & FieldEnum.COOL_LOAD) == FieldEnum.NONE) {
@@ -386,6 +418,7 @@ namespace Europlan.Common {
 					this.numCoolLoadPercentage.Enabled = false;
 					this.numCoolLoadPercentage.Text = "";
 					this.chkCoverCoolLoad.Enabled = false;
+					this.btnRestkaelte.Enabled = false;
 					this.chkCoverCoolLoad.Checked = false;
 				}
 				this.lblHeatLoadTotal.Text = "(" + this.product.Product.AssociatedRoom.NormalizedHeatLoad.ToString() + " " + EuroplanRes.Unit_Watt + ")";
@@ -604,6 +637,8 @@ namespace Europlan.Common {
 				ignoreLengthVerbindungen--;
 				ignoreSubArea--;
 				ignoreType--;
+				ignoreCalculationMode--;
+				ignoreLayoutType--;
 			}
 			// TODO
 		}
@@ -1037,11 +1072,67 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void rbHeat_CheckedChanged(object sender, EventArgs e) {
+			if (ignoreCalculationMode == 0) {
+				if (this.rbHeat.Checked) {
+					this.product.Product.CalculateMode = Product.CalculateModeEnum.HEAT;
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+					this.UpdateControl(FieldEnum.NONE);
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
+					}
+				}
+			}
+		}
+
+		private void rbCool_CheckedChanged(object sender, EventArgs e) {
+			if (ignoreCalculationMode == 0) {
+				if (this.rbCool.Checked) {
+					this.product.Product.CalculateMode = Product.CalculateModeEnum.COOL;
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+					this.UpdateControl(FieldEnum.NONE);
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
+					}
+				}
+			}
+		}
+
+		private void rbHeatAndCool_CheckedChanged(object sender, EventArgs e) {
+			if (ignoreCalculationMode == 0) {
+				if (this.rbHeatAndCool.Checked) {
+					this.product.Product.CalculateMode = Product.CalculateModeEnum.HEAT_AND_COOL;
+					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+					this.UpdateControl(FieldEnum.NONE);
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
+					}
+				}
+			}
+		}
+
+		private void btnRestwaerme_Click(object sender, EventArgs e) {
+			this.product.RestwaermeUebernehmen();
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+			this.UpdateControl(FieldEnum.NONE);
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
+		private void btnRestkaelte_Click(object sender, EventArgs e) {
+			this.product.RestkaelteUebernehmen();
+			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+			this.UpdateControl(FieldEnum.NONE);
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
 		private void button1_Click(object sender, EventArgs e) {
 			if (this.product != null) {
 				Europlan.Common.Products.ModulKlimaDeckePlannerForm form = new Europlan.Common.Products.ModulKlimaDeckePlannerForm(this.product.Product as ModulKlimaDeckeProduct);
 				form.Show();
-				form.Dispose();
 			}
 		}
 

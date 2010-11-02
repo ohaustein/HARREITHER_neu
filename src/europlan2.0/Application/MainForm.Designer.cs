@@ -72,6 +72,7 @@ namespace Europlan.Application {
 			this.projectOverviewHeatToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.projectOverviewCoolToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.auslegeAssistentButton = new System.Windows.Forms.ToolStripButton();
+			this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -367,6 +368,7 @@ namespace Europlan.Application {
             this.projectOverviewHeatToolStripButton,
             this.projectOverviewCoolToolStripButton,
             this.auslegeAssistentButton,
+            this.printPreviewToolStripButton,
             this.toolStripSeparator6,
             this.helpToolStripButton});
 			resources.ApplyResources(this.toolStrip1, "toolStrip1");
@@ -441,6 +443,13 @@ namespace Europlan.Application {
 			resources.ApplyResources(this.auslegeAssistentButton, "auslegeAssistentButton");
 			this.auslegeAssistentButton.Name = "auslegeAssistentButton";
 			this.auslegeAssistentButton.Click += new System.EventHandler(this.auslegeAssistentButton_Click);
+			// 
+			// printPreviewToolStripButton
+			// 
+			this.printPreviewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			resources.ApplyResources(this.printPreviewToolStripButton, "printPreviewToolStripButton");
+			this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
+			this.printPreviewToolStripButton.Click += new System.EventHandler(this.viewReportToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator6
 			// 
@@ -546,6 +555,7 @@ namespace Europlan.Application {
 		private System.Windows.Forms.HelpProvider helpProvider;
 		private System.Windows.Forms.ToolStripMenuItem inhaltToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem tutorialToolStripMenuItem;
+		private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
 
 	}
 }

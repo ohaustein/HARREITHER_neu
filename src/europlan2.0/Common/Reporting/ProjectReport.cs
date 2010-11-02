@@ -1923,6 +1923,9 @@ namespace Europlan.Common {
 										EurovalWrapper wrapper = new EurovalWrapper(wrapperHeat);
 										wrapper.UsedAsCircuitWrapper = true;
 
+										wrapper.AzArea = ec.AreaAz;
+										wrapper.RzArea = ec.RimLength;
+
 										wrapper.Circuits = ec.NrOfCircuit + 1;
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
@@ -1941,6 +1944,8 @@ namespace Europlan.Common {
 											wrapperHeatList.Add(wrapper);
 										} else {
 											bool ok = true;
+											ok = ok && Math.Round(prevWrapper.AzArea, 3) == Math.Round(wrapper.AzArea, 3);
+											ok = ok && Math.Round(prevWrapper.RzArea, 3) == Math.Round(wrapper.RzArea, 3);
 											ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
 											ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
 											ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);
@@ -1971,6 +1976,9 @@ namespace Europlan.Common {
 										EurovalWrapper wrapper = new EurovalWrapper(wrapperCool);
 										wrapper.UsedAsCircuitWrapper = true;
 
+										wrapper.AzArea = ec.AreaAz;
+										wrapper.RzArea = ec.RimLength;
+
 										wrapper.Circuits = ec.NrOfCircuit + 1;
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
@@ -1989,6 +1997,8 @@ namespace Europlan.Common {
 											wrapperCoolList.Add(wrapper);
 										} else {
 											bool ok = true;
+											ok = ok && Math.Round(prevWrapper.AzArea, 3) == Math.Round(wrapper.AzArea, 3);
+											ok = ok && Math.Round(prevWrapper.RzArea, 3) == Math.Round(wrapper.RzArea, 3);
 											ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
 											ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
 											ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);
@@ -2148,6 +2158,9 @@ namespace Europlan.Common {
 										EcothermWrapper wrapper = new EcothermWrapper(wrapperHeat);
 										wrapper.UsedAsCircuitWrapper = true;
 
+										wrapper.AzArea = ec.AreaAz;
+										wrapper.RzArea = ec.RimLength;
+
 										wrapper.Circuits = ec.NrOfCircuit + 1;
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
@@ -2166,6 +2179,8 @@ namespace Europlan.Common {
 											wrapperHeatList.Add(wrapper);
 										} else {
 											bool ok = true;
+											ok = ok && Math.Round(prevWrapper.AzArea, 3) == Math.Round(wrapper.AzArea, 3);
+											ok = ok && Math.Round(prevWrapper.RzArea, 3) == Math.Round(wrapper.RzArea, 3);
 											ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
 											ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
 											ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);
@@ -2196,6 +2211,9 @@ namespace Europlan.Common {
 										EcothermWrapper wrapper = new EcothermWrapper(wrapperCool);
 										wrapper.UsedAsCircuitWrapper = true;
 
+										wrapper.AzArea = ec.AreaAz;
+										wrapper.RzArea = ec.RimLength;
+
 										wrapper.Circuits = ec.NrOfCircuit + 1;
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
@@ -2214,6 +2232,8 @@ namespace Europlan.Common {
 											wrapperCoolList.Add(wrapper);
 										} else {
 											bool ok = true;
+											ok = ok && Math.Round(prevWrapper.AzArea, 3) == Math.Round(wrapper.AzArea, 3);
+											ok = ok && Math.Round(prevWrapper.RzArea, 3) == Math.Round(wrapper.RzArea, 3);
 											ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
 											ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
 											ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);

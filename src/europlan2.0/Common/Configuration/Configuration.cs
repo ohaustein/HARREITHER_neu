@@ -7,6 +7,8 @@ using log4net;
 using System.Reflection;
 using System.Globalization;
 using System.Collections;
+using System.Security.AccessControl;
+using System.Security.Principal;
 
 namespace Europlan.Common {
 
@@ -752,9 +754,13 @@ namespace Europlan.Common {
 			try {
 				XmlSerializer s = new XmlSerializer(typeof(Configuration));
 				string filename = "";
+				List<string> originalMaterialIdsWithPricePerPackage = this.MaterialIdsWithPricePerPackage;
+				bool resetMaterialIdsWithPricePerPackage = false;
 				if (this.type == ConfigurationType.AdminConfiguration) {
 					filename = Path.Combine(PathUtil.DataPath, "global.conf");
 				} else if (this.type == ConfigurationType.UserConfiguration) {
+					resetMaterialIdsWithPricePerPackage = true;
+					this.MaterialIdsWithPricePerPackage = new List<string>();
 					filename = Path.Combine(PathUtil.DataPath, "custom.conf");
 				} else {
 					log.Error("Save() has been called for configuration type which is not supported: " + this.type);
@@ -763,6 +769,12 @@ namespace Europlan.Common {
 				Stream w = new FileStream(filename, FileMode.Create);
 				s.Serialize(w, this);
 				w.Close();
+
+				FileUtils.SetAccessForEveryone(filename);
+
+				if (resetMaterialIdsWithPricePerPackage) {
+					this.MaterialIdsWithPricePerPackage = originalMaterialIdsWithPricePerPackage;
+				}
 			} catch (Exception ex) {
 				log.Error("Error while saving configuration", ex);
 			}
@@ -786,6 +798,8 @@ namespace Europlan.Common {
 					Stream w = new FileStream(filename, FileMode.Create);
 					s.Serialize(w, this);
 					w.Close();
+
+					FileUtils.SetAccessForEveryone(filename);
 				} catch (Exception ex) {
 					log.Error("Error while exporting configuration", ex);
 				}
@@ -801,13 +815,45 @@ namespace Europlan.Common {
 			return null;
 		}
 
+		[XmlIgnore]
+		public SerializableDictionary<string, SerializableDictionary<string, string>> InternalProductConfiguration {
+			get { return this.productConfiguration; }
+		}
+
 		public SerializableDictionary<string, SerializableDictionary<string, string>> ProductConfiguration {
 			get {
+				Type[] types;
 				if (this.type == ConfigurationType.UserConfiguration) {
-					return new SerializableDictionary<string, SerializableDictionary<string, string>>();
+					// TODO remove this line when implementation is finished
+					//return new SerializableDictionary<string, SerializableDictionary<string, string>>();
+
+					SerializableDictionary<string, SerializableDictionary<string, string>> result;
+					result = new SerializableDictionary<string, SerializableDictionary<string, string>>();
+
+					types = Assembly.GetExecutingAssembly().GetTypes();
+					foreach (Type t in types) {
+						if (typeof(Product).IsAssignableFrom(t)) {
+							foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.GetProperty)) {
+								object[] attributes = info.GetCustomAttributes(typeof(ProductParameterAttribute), false);
+								if (attributes.Length > 0) {
+									ProductParameterAttribute ppa = attributes[0] as ProductParameterAttribute;
+									if (ppa.saveForUser) {
+										string valueStr = this.GetProductParameter(t, info.Name);
+
+										if (!result.ContainsKey(t.FullName)) {
+											result[t.FullName] = new SerializableDictionary<string, string>();
+										}
+										result[t.FullName][info.Name] = valueStr;
+									}
+								}
+							}
+						}
+					}
+
+					return result;
 				}
 				this.productConfiguration.Clear();
-				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+				types = Assembly.GetExecutingAssembly().GetTypes();
 				foreach (Type t in types) {
 					if (typeof(Product).IsAssignableFrom(t)) {
 						foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.GetProperty)) {
@@ -828,8 +874,8 @@ namespace Europlan.Common {
 								} else if (value.GetType() == typeof(bool)) {
 									bool b = (bool)value;
 									valueStr = b.ToString(CultureInfo.InvariantCulture.NumberFormat);
-								} else if (value.GetType().IsSubclassOf(typeof(Enum))) {
-									valueStr = Enum.GetName(value.GetType(), value);
+								/*} else if (value.GetType().IsSubclassOf(typeof(Enum))) {
+									valueStr = Enum.GetName(value.GetType(), value);*/
 								} else {
 									log.Warn("Error when trying to get Product Configuration: Unknown type");
 									continue;
@@ -843,6 +889,7 @@ namespace Europlan.Common {
 			}
 			set { 
 				this.productConfiguration = value;
+				/*
 				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
 				SerializableDictionary<string, string> current;
 				foreach (Type t in types) {
@@ -882,12 +929,12 @@ namespace Europlan.Common {
 											} else {
 												log.Warn("Error when trying to set Product Configuration");
 											}
-										} else if (info.PropertyType.IsSubclassOf(typeof(Enum))) {
-											if (Enum.IsDefined(info.PropertyType, current[info.Name])) {
-												info.SetValue(null, Enum.Parse(info.PropertyType, current[info.Name]), null);
-											} else {
-												log.Warn("Error when trying to set Product Configuration");
-											}
+											//} else if (info.PropertyType.IsSubclassOf(typeof(Enum))) {
+											//	if (Enum.IsDefined(info.PropertyType, current[info.Name])) {
+											//		info.SetValue(null, Enum.Parse(info.PropertyType, current[info.Name]), null);
+											//	} else {
+											//		log.Warn("Error when trying to set Product Configuration");
+											//	}
 										} else {
 											log.Warn("Error when trying to set Product Configuration: Unknown type");
 										}
@@ -903,101 +950,308 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				*/
 			}
+		}
+
+		public string GetProductParameter(Type productType, string parameterName) {
+			if (!typeof(Product).IsAssignableFrom(productType)) {
+				return null;
+			}
+
+			string defaultValue = null;
+			if (this.type == ConfigurationType.AdminConfiguration) {
+				object[] attributes = productType.GetProperty(parameterName).GetCustomAttributes(typeof(ProductParameterAttribute), false);
+				if (attributes.Length > 0) {
+					defaultValue = (attributes[0] as ProductParameterAttribute).DefaultValueAsString;
+				}
+			} else if (this.type == ConfigurationType.ProjectConfiguration) {
+				defaultValue = Configuration.UserTemplate.GetProductParameter(productType, parameterName);
+			} else if (this.type == ConfigurationType.UserConfiguration) {
+				defaultValue = Configuration.AdminTemplate.GetProductParameter(productType, parameterName);
+			}
+
+			if (!this.productConfiguration.ContainsKey(productType.FullName)) {
+				return defaultValue;
+			}
+			if (!this.productConfiguration[productType.FullName].ContainsKey(parameterName)) {
+				return defaultValue;
+			}
+
+			return this.productConfiguration[productType.FullName][parameterName];
 		}
 
 		public string GetProductParameter<ProductType>(string parameterName) where ProductType : Product {
-			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
+			/*if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
 				return null;
 			}
 			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
 				return null;
 			}
-			return this.productConfiguration[typeof(ProductType).FullName][parameterName];
+			return this.productConfiguration[typeof(ProductType).FullName][parameterName];*/
+			return this.GetProductParameter(typeof(ProductType), parameterName);
 		}
 
-		public int GetProductParameterAsInt<ProductType>(string parameterName, int defaultValue) where ProductType : Product {
-			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
-				return defaultValue;
+		public object GetProductParameterAsNativeType<ProductType>(string parameterName) where ProductType : Product {
+			object[] attributes = typeof(ProductType).GetProperty(parameterName).GetCustomAttributes(typeof(ProductParameterAttribute), false);
+			if (attributes.Length == 0) {
+				return null;
+			}
+
+			if (attributes[0] is BoolProductParameterAttribute) {
+				string valueStr = GetProductParameter(typeof(ProductType), parameterName);
+				bool value;
+				if (bool.TryParse(valueStr, out value)) {
+					return value;
+				}
+				return null;
+			} else if (attributes[0] is IntProductParameterAttribute) {
+				string valueStr = GetProductParameter(typeof(ProductType), parameterName);
+				int value;
+				if (int.TryParse(valueStr, NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out value)) {
+					return value;
+				}
+				return null;
+			} else if (attributes[0] is FloatProductParameterAttribute) {
+				string valueStr = GetProductParameter(typeof(ProductType), parameterName);
+				float value;
+				if (float.TryParse(valueStr, NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out value)) {
+					return value;
+				}
+				return null;
+			} else if (attributes[0] is DoubleProductParameterAttribute) {
+				string valueStr = GetProductParameter(typeof(ProductType), parameterName);
+				double value;
+				if (double.TryParse(valueStr, NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out value)) {
+					return value;
+				}
+				return null;
+			} else if (attributes[0] is StringProductParameterAttribute) {
+				return GetProductParameter(typeof(ProductType), parameterName);
+			} else {
+				return null;
+			}
+
+			/*if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
+				return null;
 			}
 			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
-				return defaultValue;
+				return null;
 			}
+			return this.productConfiguration[typeof(ProductType).FullName][parameterName];*/
+			return this.GetProductParameter(typeof(ProductType), parameterName);
+		}
+
+		public int GetProductParameterAsInt<ProductType>(string parameterName) where ProductType : Product {
+			Nullable<int> defaultValue = null;
+			object[] attributes = typeof(ProductType).GetProperty(parameterName).GetCustomAttributes(typeof(IntProductParameterAttribute), false);
+			if (attributes.Length > 0) {
+				defaultValue = (attributes[0] as IntProductParameterAttribute).defaultValue;
+			}
+
+			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return 0;
+				}
+				return defaultValue.Value;
+			}
+
+			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return 0;
+				}
+				return defaultValue.Value;
+			}
+
 			int value;
 			if (!int.TryParse(this.productConfiguration[typeof(ProductType).FullName][parameterName], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out value)) {
-				value = defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					value = 0;
+				} else {
+					value = defaultValue.Value;
+				}
 			}
+
 			return value;
 		}
 
-		public double GetProductParameterAsDouble<ProductType>(string parameterName, double defaultValue) where ProductType : Product {
+		public double GetProductParameterAsDouble<ProductType>(string parameterName) where ProductType : Product {
+			Nullable<double> defaultValue = null;
+			object[] attributes = typeof(ProductType).GetProperty(parameterName).GetCustomAttributes(typeof(DoubleProductParameterAttribute), false);
+			if (attributes.Length > 0) {
+				defaultValue = (attributes[0] as DoubleProductParameterAttribute).defaultValue;
+			}
+
 			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
-				return defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return 0;
+				}
+				return defaultValue.Value;
 			}
+
 			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
-				return defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return 0;
+				}
+				return defaultValue.Value;
 			}
+
 			double value;
 			if (!double.TryParse(this.productConfiguration[typeof(ProductType).FullName][parameterName], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out value)) {
-				value = defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					value = 0;
+				} else {
+					value = defaultValue.Value;
+				}
 			}
+
 			return value;
 		}
 
-		public float GetProductParameterAsFloat<ProductType>(string parameterName, float defaultValue) where ProductType : Product {
+		public float GetProductParameterAsFloat<ProductType>(string parameterName) where ProductType : Product {
+			Nullable<float> defaultValue = null;
+			object[] attributes = typeof(ProductType).GetProperty(parameterName).GetCustomAttributes(typeof(FloatProductParameterAttribute), false);
+			if (attributes.Length > 0) {
+				defaultValue = (attributes[0] as FloatProductParameterAttribute).defaultValue;
+			}
+
 			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
-				return defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return 0;
+				}
+				return defaultValue.Value;
 			}
+
 			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
-				return defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return 0;
+				}
+				return defaultValue.Value;
 			}
+
 			float value;
 			if (!float.TryParse(this.productConfiguration[typeof(ProductType).FullName][parameterName], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out value)) {
-				value = defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					value = 0;
+				} else {
+					value = defaultValue.Value;
+				}
 			}
+
 			return value;
 		}
 
-		public string GetProductParameterAsString<ProductType>(string parameterName, string defaultValue) where ProductType : Product {
+		public string GetProductParameterAsString<ProductType>(string parameterName) where ProductType : Product {
+			string defaultValue = null;
+			bool defaultValueFound = false;
+			object[] attributes = typeof(ProductType).GetProperty(parameterName).GetCustomAttributes(typeof(StringProductParameterAttribute), false);
+			if (attributes.Length > 0) {
+				defaultValue = (attributes[0] as StringProductParameterAttribute).defaultValue;
+				defaultValueFound = true;
+			}
+
 			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
+				if (!defaultValueFound) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return "";
+				}
 				return defaultValue;
 			}
+
 			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
+				if (!defaultValueFound) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return "";
+				}
 				return defaultValue;
 			}
+
 			return this.productConfiguration[typeof(ProductType).FullName][parameterName];
 		}
 
-		public bool GetProductParameterAsBool<ProductType>(string parameterName, bool defaultValue) where ProductType : Product {
+		public bool GetProductParameterAsBool<ProductType>(string parameterName) where ProductType : Product {
+			Nullable<bool> defaultValue = null;
+			object[] attributes = typeof(ProductType).GetProperty(parameterName).GetCustomAttributes(typeof(BoolProductParameterAttribute), false);
+			if (attributes.Length > 0) {
+				defaultValue = (attributes[0] as BoolProductParameterAttribute).defaultValue;
+			}
+
 			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
-				return defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return false;
+				}
+				return defaultValue.Value;
 			}
+
 			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
-				return defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return false;
+				}
+				return defaultValue.Value;
 			}
+
 			bool value;
 			if (!bool.TryParse(this.productConfiguration[typeof(ProductType).FullName][parameterName], out value)) {
-				value = defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					value = false;
+				} else {
+					value = defaultValue.Value;
+				}
 			}
+
 			return value;
 		}
 
-		public EnumType GetProductParameterAsEnum<ProductType, EnumType>(string parameterName, EnumType defaultValue)
+		/*public EnumType GetProductParameterAsEnum<ProductType, EnumType>(string parameterName)
 															where ProductType : Product {
+			Nullable<EnumType> defaultValue = null;
+			object[] attributes = typeof(ProductType).GetProperty(parameterName).GetCustomAttributes(typeof(EnumProductParameterAttribute), false);
+			if (attributes.Length > 0) {
+				defaultValue = (attributes[0] as EnumProductParameterAttribute).defaultValue;
+			}
+
 			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
-				return defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return Enum.GetValues(typeof(EnumType))[0];
+				}
+				return defaultValue.Value;
 			}
+
 			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
-				return defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					return Enum.GetValues(typeof(EnumType))[0];
+				}
+				return defaultValue.Value;
 			}
+
 			EnumType value;
 			if (Enum.IsDefined(typeof(EnumType), this.productConfiguration[typeof(ProductType).FullName][parameterName])) {
 				value = (EnumType)Enum.Parse(typeof(EnumType), this.productConfiguration[typeof(ProductType).FullName][parameterName]);
 			} else {
-				value = defaultValue;
+				if (!defaultValue.HasValue) {
+					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
+					value = Enum.GetValues(typeof(EnumType))[0]; ;
+				} else {
+					value = defaultValue.Value;
+				}
 			}
+
 			return value;
-		}
+		}*/
 
 		private void AddProductParameter(Type t, string parameterName, string value) {
 			if (!(typeof(Product).IsAssignableFrom(t))) {
@@ -1016,6 +1270,22 @@ namespace Europlan.Common {
 				this.productConfiguration[typeof(T).FullName] = new SerializableDictionary<string, string>();
 			}
 			this.productConfiguration[typeof(T).FullName][parameterName] = value;*/
+		}
+
+		public void AddProductParameter<T>(string parameterName, double value) where T : Product {
+			this.AddProductParameter<T>(parameterName, value.ToString(CultureInfo.InvariantCulture.NumberFormat));
+		}
+
+		public void AddProductParameter<T>(string parameterName, float value) where T : Product {
+			this.AddProductParameter<T>(parameterName, value.ToString(CultureInfo.InvariantCulture.NumberFormat));
+		}
+
+		public void AddProductParameter<T>(string parameterName, int value) where T : Product {
+			this.AddProductParameter<T>(parameterName, value.ToString(CultureInfo.InvariantCulture.NumberFormat));
+		}
+
+		public void AddProductParameter<T>(string parameterName, bool value) where T : Product {
+			this.AddProductParameter<T>(parameterName, value.ToString(CultureInfo.InvariantCulture.NumberFormat));
 		}
 
 		public void RemoveProductParameter<T>(string parameterName) where T : Product {

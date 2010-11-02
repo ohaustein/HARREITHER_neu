@@ -187,6 +187,10 @@ namespace Europlan.Common {
 		public override void Initialize() {
 		}
 
+		public override Product.CalculateModeEnum DefaultCalculateMode {
+			get { return CalculateModeEnum.HEAT; }
+		}
+
 		public override string ImageKey {
             get { return "Fuﬂbodenheizung.png"; }
 		}
@@ -195,8 +199,66 @@ namespace Europlan.Common {
             get { return "Fuﬂbodenheizung.png"; }
 		}
 
+		/*#region default paramter values
+		public static string GetDefaultConfigQuickDimensioningHeatPowerPerSquareMeter() {
+			return quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
+		}
+
+		public static string GetDefaultConfigQuickDimensioningCoolPowerPerSquareMeter() {
+			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
+		}
+
+		public static string GetDefaultConfigQuickDimensioningCanHeat() {
+			canHeat = config.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanHeat", true);
+		}
+
+		public static string GetDefaultConfigQuickDimensioningCanCool() {
+			canCool = config.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanCool", false);
+		}
+
+		public static string GetDefaultConfigUseHarreitherNorm() {
+			useHarreitherNorm = config.GetProductParameterAsBool<EcothermProduct>("ConfigUseHarreitherNorm", true);
+		}
+
+		public static string GetDefaultConfigMaxCircuitLength() {
+			maxCircuitLength = config.GetProductParameterAsDouble<EcothermProduct>("ConfigMaxCircuitLength", 100.0);
+		}
+
+		public static string GetDefaultConfigMaxPressureLost() {
+			maxPressureLost = config.GetProductParameterAsInt<EcothermProduct>("ConfigMaxPressureLost", 15000);
+		}
+
+		public static double GetDefaultConfigMaxDurchfluss() {
+			return config.GetProductParameterAsInt<EcothermProduct>("ConfigMaxDurchfluss", 240);
+		}
+
+		public static double GetDefaultConfigSpreizungHeizMin() {
+			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMin", 4);
+		}
+
+		public static double GetDefaultConfigSpreizungHeizMax() {
+			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMax", 12);
+		}
+
+		public static double GetDefaultConfigSpreizungKuehlMin() {
+			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMin", 2);
+		}
+
+		public static double GetDefaultConfigSpreizungKuehlMax() {
+			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMax", 5);
+		}
+
+		public static double GetDefaultConfigSu0() {
+			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu0", 0.045);
+		}
+
+		public static double GetDefaultConfigSu() {
+			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
+		}
+		#endregion*/
+
 		public new static void StaticInitialize(Configuration config) {
-			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
+			/*quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
 			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
 			canHeat = config.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanHeat", true);
 			canCool = config.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanCool", false);
@@ -209,7 +271,8 @@ namespace Europlan.Common {
 			spreizungKuehlMin = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMin", 2);
 			spreizungKuehlMax = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMax", 5);
 			su0 = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu0", 0.045);
-			su = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
+			su = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);*/
+			Product.StaticInitialize<EcothermProduct>(config);
 		}
 
 		public static string GlobalNotificationMessage {
@@ -217,7 +280,7 @@ namespace Europlan.Common {
 				string message = null;
 				Configuration userConfig = Configuration.UserTemplate;
 
-				double defaultSu0 = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu0", 0.045);
+				double defaultSu0 = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu0");
 				if (su0 != defaultSu0) {
 					if (message == null) {
 						message = "";
@@ -230,7 +293,7 @@ namespace Europlan.Common {
 					message += newMsg;
 				}
 
-				double defaultSu = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
+				double defaultSu = userConfig.GetProductParameterAsDouble<EcothermProduct>("ConfigSu");
 				if (su != defaultSu) {
 					if (message == null) {
 						message = "";
@@ -259,7 +322,7 @@ namespace Europlan.Common {
 		}
 
 		#region Product Parameters
-		[ProductParameter]
+		[BoolProductParameter(true)]
 		public static bool ConfigQuickDimensioningCanHeat {
 			get { return canHeat; }
 			set { canHeat = value; }
@@ -268,7 +331,7 @@ namespace Europlan.Common {
 			get { return canHeat; }
 		}
 
-		[ProductParameter]
+		[BoolProductParameter(false)]
 		public static bool ConfigQuickDimensioningCanCool {
 			get { return canCool; }
 			set { canCool = value; }
@@ -277,7 +340,7 @@ namespace Europlan.Common {
 			get { return canCool; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(50)]
 		public static int ConfigQuickDimensioningHeatPowerPerSquareMeter {
 			get { return quickDimensioningHeatPowerPerSquareMeter; }
 			set { quickDimensioningHeatPowerPerSquareMeter = value; }
@@ -286,7 +349,7 @@ namespace Europlan.Common {
 			get { return quickDimensioningHeatPowerPerSquareMeter; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(50)]
 		public static int ConfigQuickDimensioningCoolPowerPerSquareMeter {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
 			set { quickDimensioningCoolPowerPerSquareMeter = value; }
@@ -295,13 +358,13 @@ namespace Europlan.Common {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.045)]
 		public static double ConfigSu0 {
 			get { return su0; }
 			set { su0 = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(10.8)]
 		public static double ConfigAlpha0 {
 			get { return alpha0; }
 			set { alpha0 = value; }
@@ -315,169 +378,169 @@ namespace Europlan.Common {
 			get { return Product.ConfigAlphaBodenHeat; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.35)]
 		public static double ConfigLambdaR0 {
 			get { return lambdaR0; }
 			set { lambdaR0 = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.22)]
 		public static double ConfigLambdaR {
 			get { return lambdaR; }
 			set { lambdaR = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(1)]
 		public static double ConfigLambdaU0 {
 			get { return lambdaU0; }
 			set { lambdaU0 = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(1.2)]
 		public static double ConfigLambdaE {
 			get { return lambdaE; }
 			set { lambdaE = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.35)]
 		public static double ConfigSu {
 			get { return su; }
 			set { su = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(1.2)]
 		public static double ConfigLambdaU {
 			get { return lambdaU; }
 			set { lambdaU = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.017)]
 		public static double ConfigRohrAussenD {
 			get { return rohrAussenD; }
 			set { rohrAussenD = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.013)]
 		public static double ConfigRohrInnenD {
 			get { return rohrInnenD; }
 			set { rohrInnenD = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.000132732289614169)]
 		public static double ConfigRohrInnenA {
 			get { return rohrInnenA; }
 			set { rohrInnenA = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(1)]
 		public static double ConfigAg {
 			get { return ag; }
 			set { ag = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.002)]
 		public static double ConfigSr0 {
 			get { return sr0; }
 			set { sr0 = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.00238)]
 		public static double ConfigSr {
 			get { return sr; }
 			set { sr = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(4.19)]
 		public static double ConfigC {
 			get { return c; }
 			set { c = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(1000)]
 		public static double ConfigRho {
 			get { return rho; }
 			set { rho = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.00000101)]
 		public static double ConfigV {
 			get { return v; }
 			set { v = value; }
 		}
 
-		[ProductParameter]
+		[BoolProductParameter(false)]
 		public static bool ConfigAgActivated {
 			get { return agActivated; }
 			set { agActivated = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.11)]
 		public static double ConfigRLambdaDecke {
 			get { return rLambdaDecke; }
 			set { rLambdaDecke = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.02)]
 		public static double ConfigRLambdaPutz {
 			get { return rLambdaPutz; }
 			set { rLambdaPutz = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.45)]
 		public static double ConfigFaktorTrockenkonstruktion {
 			get { return faktorTrockenkonstruktion; }
 			set { faktorTrockenkonstruktion = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(27)]
 		public static double ConfigMaxResidenceTempHarreither {
 			get { return maxResidenceTempHarreither; }
 			set { maxResidenceTempHarreither = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(33)]
 		public static double ConfigMaxRimTempHarreither {
 			get { return maxRimTempHarreither; }
 			set { maxRimTempHarreither = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(29)]
 		public static double ConfigMaxResidenceTempEn1264 {
 			get { return maxResidenceTempEn1264; }
 			set { maxResidenceTempEn1264 = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(35)]
 		public static double ConfigMaxRimTempEn1264 {
 			get { return maxRimTempEn1264; }
 			set { maxRimTempEn1264 = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(33)]
 		public static double ConfigMaxNassraumTemp {
 			get { return maxNassraumTemp; }
 			set { maxNassraumTemp = value; }
 		}
 
-		[ProductParameter]
+		[BoolProductParameter(true)]
 		public static bool ConfigUseHarreitherNorm {
 			get { return useHarreitherNorm; }
 			set { useHarreitherNorm = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(100)]
 		public static double ConfigMaxCircuitLength {
 			get { return maxCircuitLength; }
 			set { maxCircuitLength = value; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(15000)]
 		public static int ConfigMaxPressureLost {
 			get { return maxPressureLost; }
 			set { maxPressureLost = value; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(240)]
 		public static int ConfigMaxDurchfluss {
 			get { return maxDurchfluss; }
 			set { maxDurchfluss = value; }
@@ -486,25 +549,25 @@ namespace Europlan.Common {
 			get { return maxDurchfluss * rho / 1000; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(4)]
 		public static double ConfigSpreizungHeizMin {
 			get { return spreizungHeizMin; }
 			set { spreizungHeizMin = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(12)]
 		public static double ConfigSpreizungHeizMax {
 			get { return spreizungHeizMax; }
 			set { spreizungHeizMax = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(2)]
 		public static double ConfigSpreizungKuehlMin {
 			get { return spreizungKuehlMin; }
 			set { spreizungKuehlMin = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(5)]
 		public static double ConfigSpreizungKuehlMax {
 			get { return spreizungKuehlMax; }
 			set { spreizungKuehlMax = value; }
@@ -589,7 +652,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private double GetMuffePerSqm(EcothermLayDistance layDistance) {
+		public static double GetMuffePerSqm(EcothermLayDistance layDistance) {
 			switch (layDistance) {
 				case EcothermLayDistance.A5:
 					return 0.1;
@@ -1362,7 +1425,7 @@ namespace Europlan.Common {
 		}
 
 		public override ProductConnection PlannedConnection {
-			get { return this.plannedConnection; }
+			get { return base.PlannedConnection; }
 			set {
 				if (value != null && value.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 					this.requestedCircuits = this.PlannedCircuitCount > 0 ? this.PlannedCircuitCount : 1;
@@ -1750,7 +1813,7 @@ namespace Europlan.Common {
 			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 				if (!this.secondConfig) {
 					this.secondConfig = true;
-					this.PlannedConnection.OtherProduct.ConfigureProductDefault();
+					this.PlannedConnection.OtherProduct.ConfigureProduct(variableSpreizung);
 					bool ok = this.ConfigureProduct(requestedHeatLoad, requestedCoolLoad, canHeat, canCool, false);
 					this.secondConfig = false;
 					this.incompleteCalculation = !ok;
@@ -1924,23 +1987,18 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-			
-			double connectionPipeArea = 0;
-			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
-				connectionPipeArea += pipe.AreaTotal;
-			}
 
-			double totalArea = this.PlannedAreaResidence + this.PlannedAreaRim + connectionPipeArea;
-			
+			// Anbindeleitungen
+			this.AddRequiredMaterialForConnections(requiredMaterial, false, 0);
+
 			// Ecotherm Rohr
 			double length = 0;
 			foreach (EcothermCircuit c in this.circuits) {
-				length += c.PipeLengthWithoutOtherProduct;
+				length += c.PipeLengthWithoutConnections;
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EC01", length);
 
 			// Clipschiene
-			string clipschiene = "EC02";
 			double amount = 0;
 			if (this.PlannedLayDistance.HasValue) {
 			    amount += this.PlannedAreaResidence * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
@@ -1948,12 +2006,7 @@ namespace Europlan.Common {
 			if (this.PlannedRimType.HasValue) {
 			    amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
 			}
-			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
-				if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH) {
-					amount += pipe.AreaTotal * GetClipschienePerSqm(ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart), anhydritEstrich);
-				}
-			}
-			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EC02", amount);
 
 			// Muffe
 			amount = 0;
@@ -1962,11 +2015,6 @@ namespace Europlan.Common {
 			}
 			if (this.PlannedRimType.HasValue) {
 				amount += this.PlannedAreaRim * GetMuffePerSqm(GetRimLayDistance(this.PlannedRimType.Value));
-			}
-			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
-				if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH) {
-					amount += pipe.AreaTotal * GetMuffePerSqm(ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart));
-				}
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EC06", amount);
 
@@ -1984,7 +2032,7 @@ namespace Europlan.Common {
 
 					// EZ 70
 					if (!anhydritEstrich) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "EC08", (totalArea + this.PlannedAreaUnheated) * 0.2);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "EC08", this.plannedArea * 0.2);
 					}
 				}
 			}
@@ -1993,7 +2041,7 @@ namespace Europlan.Common {
 			if (this.HasOutsideConstruction) {
 				foreach (ConstructionLayer layer in this.PlannedOutsideConstruction.Layers) {
 					if (layer.LayerMaterial != null) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, layer.LayerMaterial.Id, this.PlannedFloorArea + this.PlannedAreaUnheated);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, layer.LayerMaterial.Id, this.plannedArea);
 					}
 				}
 			}

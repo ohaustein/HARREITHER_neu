@@ -234,8 +234,12 @@ namespace Europlan.Common {
 				return this.room;
 			}
 			set {
+				bool roomChanged = this.Room != value;
 				this.roomId = null;
 				this.room = value;
+				if (roomChanged) {
+					this.ConnectionThrough = null;
+				}
 			}
 		}
 
@@ -356,9 +360,9 @@ namespace Europlan.Common {
 
 		public VerlegeartEnum Verlegeart {
 			get {
-				if (this.ConnectionThrough != null && !(this.ConnectionThrough.Product is EurovalProduct) && !(this.ConnectionThrough.Product is ModulKlimaBodenProduct)) {
+				/*if (this.ConnectionThrough != null && !(this.ConnectionThrough.Product is EurovalProduct) && !(this.ConnectionThrough.Product is EcothermProduct) && !(this.ConnectionThrough.Product is ModulKlimaBodenProduct)) {
 					return VerlegeartEnum.VA_UNTER_ESTRICH;
-				}
+				}*/
 				return this.verlegeart;
 			}
 			set { this.verlegeart = value; }
@@ -372,6 +376,11 @@ namespace Europlan.Common {
 				return this.insulation;
 			}
 			set { this.insulation = value; }
+		}
+
+		[XmlIgnore]
+		public InsulationEnum InsulationForCalculation {
+			get { return this.ConnectionThrough == null ? InsulationEnum.IN_VL_RL : this.Insulation; }
 		}
 
 		[XmlIgnore]
@@ -558,7 +567,7 @@ namespace Europlan.Common {
 				}
 			}
 
-			if (originalProduct.Product.PlannedConnection == null || originalProduct.Product.PlannedConnection.Distributor == null || originalProduct.Product.PlannedConnection.Distributor.RegulatorCircuit == null) {
+			if (originalProduct == null || originalProduct.Product == null || originalProduct.Product.PlannedConnection == null || originalProduct.Product.PlannedConnection.Distributor == null || originalProduct.Product.PlannedConnection.Distributor.RegulatorCircuit == null) {
 				// TODO
 				return;
 			}
@@ -585,28 +594,28 @@ namespace Europlan.Common {
 					} else {
 						if (!found) {
 							if (i == 0 || !cp.OnlyFirst) {
-								if (cp.Insulation == InsulationEnum.IN_NONE) {
+								if (cp.InsulationForCalculation == InsulationEnum.IN_NONE) {
 									pipeBeforeVorlauf += cp.Vorlauf;
 								}
-								if (cp.Insulation != InsulationEnum.IN_VL_RL) {
+								if (cp.InsulationForCalculation != InsulationEnum.IN_VL_RL) {
 									pipeAfterRuecklauf += cp.Ruecklauf;
 								}
 							}
 						} else {
 							if (i == 0 || !cp.OnlyFirst) {
-								if (cp.Insulation == InsulationEnum.IN_NONE) {
+								if (cp.InsulationForCalculation == InsulationEnum.IN_NONE) {
 									pipeAfterVorlauf += cp.Vorlauf;
 								}
-								if (cp.Insulation != InsulationEnum.IN_VL_RL) {
+								if (cp.InsulationForCalculation != InsulationEnum.IN_VL_RL) {
 									pipeBeforeRuecklauf += cp.Ruecklauf;
 								}
 							}
 						}
 						if (i == 0 || !cp.OnlyFirst) {
-							if (cp.Insulation == InsulationEnum.IN_NONE) {
+							if (cp.InsulationForCalculation == InsulationEnum.IN_NONE) {
 								pipeBeforeRuecklauf += cp.Vorlauf;
 							}
-							if (cp.Insulation != InsulationEnum.IN_VL_RL) {
+							if (cp.InsulationForCalculation != InsulationEnum.IN_VL_RL) {
 								pipeAfterVorlauf += cp.Ruecklauf;
 							}
 						}
@@ -745,28 +754,28 @@ namespace Europlan.Common {
 					} else {
 						if (!found) {
 							if (i == 0 || !cp.OnlyFirst) {
-								if (cp.Insulation == InsulationEnum.IN_NONE) {
+								if (cp.InsulationForCalculation == InsulationEnum.IN_NONE) {
 									pipeBeforeVorlauf += cp.Vorlauf;
 								}
-								if (cp.Insulation != InsulationEnum.IN_VL_RL) {
+								if (cp.InsulationForCalculation != InsulationEnum.IN_VL_RL) {
 									pipeAfterRuecklauf += cp.Ruecklauf;
 								}
 							}
 						} else {
 							if (i == 0 || !cp.OnlyFirst) {
-								if (cp.Insulation == InsulationEnum.IN_NONE) {
+								if (cp.InsulationForCalculation == InsulationEnum.IN_NONE) {
 									pipeAfterVorlauf += cp.Vorlauf;
 								}
-								if (cp.Insulation != InsulationEnum.IN_VL_RL) {
+								if (cp.InsulationForCalculation != InsulationEnum.IN_VL_RL) {
 									pipeBeforeRuecklauf += cp.Ruecklauf;
 								}
 							}
 						}
 						if (i == 0 || !cp.OnlyFirst) {
-							if (cp.Insulation == InsulationEnum.IN_NONE) {
+							if (cp.InsulationForCalculation == InsulationEnum.IN_NONE) {
 								pipeBeforeRuecklauf += cp.Vorlauf;
 							}
-							if (cp.Insulation != InsulationEnum.IN_VL_RL) {
+							if (cp.InsulationForCalculation != InsulationEnum.IN_VL_RL) {
 								pipeAfterVorlauf += cp.Ruecklauf;
 							}
 						}

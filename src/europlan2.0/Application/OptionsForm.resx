@@ -385,7 +385,7 @@
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabGeneral.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+    <value>tabOptions</value>
   </data>
   <data name="&gt;&gt;tabGeneral.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -406,7 +406,7 @@
     <value>megFloor</value>
   </data>
   <data name="&gt;&gt;megFloor.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.29.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megFloor.Parent" xml:space="preserve">
     <value>tabPageFloor</value>
@@ -457,7 +457,7 @@
     <value>megWall</value>
   </data>
   <data name="&gt;&gt;megWall.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.29.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megWall.Parent" xml:space="preserve">
     <value>tabPageWall</value>
@@ -508,7 +508,7 @@
     <value>megCeiling</value>
   </data>
   <data name="&gt;&gt;megCeiling.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.29.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megCeiling.Parent" xml:space="preserve">
     <value>tabPageCeiling</value>
@@ -559,7 +559,7 @@
     <value>megDistributor</value>
   </data>
   <data name="&gt;&gt;megDistributor.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.29.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megDistributor.Parent" xml:space="preserve">
     <value>tabPageDistributor</value>
@@ -610,7 +610,7 @@
     <value>megInsulation</value>
   </data>
   <data name="&gt;&gt;megInsulation.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.29.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megInsulation.Parent" xml:space="preserve">
     <value>tabPageInsulation</value>
@@ -661,7 +661,7 @@
     <value>megGeneral</value>
   </data>
   <data name="&gt;&gt;megGeneral.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.29.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megGeneral.Parent" xml:space="preserve">
     <value>tabPageGeneral</value>
@@ -742,7 +742,7 @@
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabMaterials.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+    <value>tabOptions</value>
   </data>
   <data name="&gt;&gt;tabMaterials.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -763,7 +763,7 @@
     <value>constructionEditorGrid1</value>
   </data>
   <data name="&gt;&gt;constructionEditorGrid1.Type" xml:space="preserve">
-    <value>Europlan.Common.ConstructionEditorGrid, Common, Version=2.0.29.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.ConstructionEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;constructionEditorGrid1.Parent" xml:space="preserve">
     <value>tabConstructions</value>
@@ -793,12 +793,63 @@
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabConstructions.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+    <value>tabOptions</value>
   </data>
   <data name="&gt;&gt;tabConstructions.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="systemParametersPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="systemParametersPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="systemParametersPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>678, 365</value>
+  </data>
+  <data name="systemParametersPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;systemParametersPanel.Name" xml:space="preserve">
+    <value>systemParametersPanel</value>
+  </data>
+  <data name="&gt;&gt;systemParametersPanel.Type" xml:space="preserve">
+    <value>Europlan.Common.SystemParametersPanel, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;systemParametersPanel.Parent" xml:space="preserve">
+    <value>tabDefaultSystemParameters</value>
+  </data>
+  <data name="&gt;&gt;systemParametersPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabDefaultSystemParameters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabDefaultSystemParameters.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabDefaultSystemParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>684, 371</value>
+  </data>
+  <data name="tabDefaultSystemParameters.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tabDefaultSystemParameters.Text" xml:space="preserve">
+    <value>Standard Systemparameter</value>
+  </data>
+  <data name="&gt;&gt;tabDefaultSystemParameters.Name" xml:space="preserve">
+    <value>tabDefaultSystemParameters</value>
+  </data>
+  <data name="&gt;&gt;tabDefaultSystemParameters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabDefaultSystemParameters.Parent" xml:space="preserve">
+    <value>tabOptions</value>
+  </data>
+  <data name="&gt;&gt;tabDefaultSystemParameters.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tabOptions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -807,34 +858,34 @@
   <data name="helpProvider.HelpNamespace" xml:space="preserve">
     <value>europlan.chm</value>
   </data>
-  <data name="tabControl1.HelpKeyword" xml:space="preserve">
+  <data name="tabOptions.HelpKeyword" xml:space="preserve">
     <value>html\euro9xba.htm</value>
   </data>
-  <data name="tabControl1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+  <data name="tabOptions.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>Topic</value>
   </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="tabControl1.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="tabOptions.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>692, 397</value>
   </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+  <data name="tabOptions.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
-    <value>tabControl1</value>
+  <data name="&gt;&gt;tabOptions.Name" xml:space="preserve">
+    <value>tabOptions</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabOptions.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tabOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

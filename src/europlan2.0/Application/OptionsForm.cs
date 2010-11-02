@@ -18,8 +18,31 @@ namespace Europlan.Application {
 		public OptionsForm() {
 			InitializeComponent();
 
+			this.megCeiling.Filter = CategoryType.Ceiling;
+			this.megDistributor.Filter = CategoryType.Distributor;
+			this.megFloor.Filter = CategoryType.Floor;
+			this.megGeneral.Filter = CategoryType.General;
+			this.megInsulation.Filter = CategoryType.Insulation;
+			this.megWall.Filter = CategoryType.Wall;
+
+			this.SetLanguague();
+		}
+
+		public OptionsForm(bool standardWerte) {
+			InitializeComponent();
+
+			this.megCeiling.Filter = CategoryType.Ceiling;
+			this.megDistributor.Filter = CategoryType.Distributor;
+			this.megFloor.Filter = CategoryType.Floor;
+			this.megGeneral.Filter = CategoryType.General;
+			this.megInsulation.Filter = CategoryType.Insulation;
+			this.megWall.Filter = CategoryType.Wall;
+
 			this.SetLanguague();
 
+			if (standardWerte) {
+				this.tabDefaultSystemParameters.Show();
+			}
 		}
 
 		private void SetLanguague() {
@@ -39,6 +62,7 @@ namespace Europlan.Application {
 			tabPageGeneral.Text = EuroplanRes.OptionsForm_Allgmein; //"Allgemein";
 			tabPageInsulation.Text = EuroplanRes.OptionsForm_Daemmung; //"Dämmung";
 			tabPageWall.Text = EuroplanRes.OptionsForm_Wand; //"Wand";
+			tabDefaultSystemParameters.Text = EuroplanRes.OptionsForm_StandardSystemparameter;
 		}
 
 		public bool RestartRequired {

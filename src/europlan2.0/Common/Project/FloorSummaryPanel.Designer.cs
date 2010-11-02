@@ -131,7 +131,7 @@ namespace Europlan.Common {
 			// 
 			this.Area.DataPropertyName = "Area";
 			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle11.Format = "F1";
+			dataGridViewCellStyle11.Format = "F0";
 			this.Area.DefaultCellStyle = dataGridViewCellStyle11;
 			this.Area.HeaderText = "A\n(m²)";
 			this.Area.Name = "Area";
@@ -144,7 +144,7 @@ namespace Europlan.Common {
 			this.IsNassraum.DataPropertyName = "IsNassraum";
 			this.IsNassraum.HeaderText = "Nassraum";
 			this.IsNassraum.Name = "IsNassraum";
-			this.IsNassraum.Width = 40;
+			this.IsNassraum.Width = 60;
 			// 
 			// RoomTemperature
 			// 
@@ -211,14 +211,14 @@ namespace Europlan.Common {
 			// 
 			this.RoomRelativeHumidity.DataPropertyName = "RoomRelativeHumidity";
 			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle17.Format = "F1";
+			dataGridViewCellStyle17.Format = "F0";
 			this.RoomRelativeHumidity.DefaultCellStyle = dataGridViewCellStyle17;
 			this.RoomRelativeHumidity.HeaderText = "RF\n(%)";
 			this.RoomRelativeHumidity.Name = "RoomRelativeHumidity";
 			this.RoomRelativeHumidity.NumEditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
 			this.RoomRelativeHumidity.ToolTipText = "Relative Luftfeuchtigkeit für Kühlung";
 			this.RoomRelativeHumidity.Visible = false;
-			this.RoomRelativeHumidity.Width = 40;
+			this.RoomRelativeHumidity.Width = 60;
 			// 
 			// CoolLoad
 			// 
@@ -231,7 +231,7 @@ namespace Europlan.Common {
 			this.CoolLoad.NumEditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
 			this.CoolLoad.ToolTipText = "Erforderliche Külleistung laut Kühllastberechnung";
 			this.CoolLoad.Visible = false;
-			this.CoolLoad.Width = 50;
+			this.CoolLoad.Width = 65;
 			// 
 			// associatedPanelTypeDataGridViewTextBoxColumn
 			// 

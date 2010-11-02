@@ -23,7 +23,7 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FacilityDetailsSummaryPanel));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FacilityDetailsSummaryPanel));
 			this.label1 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -47,17 +47,17 @@ namespace Europlan.Common {
 			this.chkCool = new System.Windows.Forms.CheckBox();
 			this.btnNext = new System.Windows.Forms.Button();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(34, 5);
+			this.label1.Location = new System.Drawing.Point(34, 5);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(128, 24);
 			this.label1.TabIndex = 20;
@@ -67,7 +67,7 @@ namespace Europlan.Common {
 			// 
 			this.label3.Location = new System.Drawing.Point(6, 16);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(133, 23);
+			this.label3.Size = new System.Drawing.Size(215, 23);
 			this.label3.TabIndex = 23;
 			this.label3.Text = "Normaußentemperatur:";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -76,7 +76,7 @@ namespace Europlan.Common {
 			// 
 			this.label2.Location = new System.Drawing.Point(6, 39);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(133, 23);
+			this.label2.Size = new System.Drawing.Size(215, 23);
 			this.label2.TabIndex = 24;
 			this.label2.Text = "Spreizung:";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -84,7 +84,7 @@ namespace Europlan.Common {
 			// chkSpreizung
 			// 
 			this.chkSpreizung.AutoSize = true;
-			this.chkSpreizung.Location = new System.Drawing.Point(145, 43);
+			this.chkSpreizung.Location = new System.Drawing.Point(227, 43);
 			this.chkSpreizung.Name = "chkSpreizung";
 			this.chkSpreizung.Size = new System.Drawing.Size(297, 17);
 			this.chkSpreizung.TabIndex = 26;
@@ -94,7 +94,7 @@ namespace Europlan.Common {
 			// 
 			// label4
 			// 
-			this.label4.Location = new System.Drawing.Point(204, 16);
+			this.label4.Location = new System.Drawing.Point(285, 16);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(46, 23);
 			this.label4.TabIndex = 27;
@@ -125,7 +125,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			this.numNormOutsideTemperature.Location = new System.Drawing.Point(145, 18);
+			this.numNormOutsideTemperature.Location = new System.Drawing.Point(227, 18);
 			this.numNormOutsideTemperature.MaxValue = new decimal(new int[] {
             10,
             0,
@@ -137,7 +137,7 @@ namespace Europlan.Common {
             0,
             -2147483648});
 			this.numNormOutsideTemperature.Name = "numNormOutsideTemperature";
-			this.numNormOutsideTemperature.Size = new System.Drawing.Size(53, 20);
+			this.numNormOutsideTemperature.Size = new System.Drawing.Size(52, 20);
 			this.numNormOutsideTemperature.TabIndex = 25;
 			this.numNormOutsideTemperature.Text = "0";
 			this.numNormOutsideTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -174,7 +174,7 @@ namespace Europlan.Common {
 			// 
 			// label5
 			// 
-			this.label5.Location = new System.Drawing.Point(236, 62);
+			this.label5.Location = new System.Drawing.Point(285, 62);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(46, 23);
 			this.label5.TabIndex = 40;
@@ -185,14 +185,14 @@ namespace Europlan.Common {
 			// 
 			this.label12.Location = new System.Drawing.Point(6, 108);
 			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(133, 23);
+			this.label12.Size = new System.Drawing.Size(215, 23);
 			this.label12.TabIndex = 37;
 			this.label12.Text = "Taupunkttemperatur:";
 			this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// label13
 			// 
-			this.label13.Location = new System.Drawing.Point(236, 108);
+			this.label13.Location = new System.Drawing.Point(285, 108);
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(46, 23);
 			this.label13.TabIndex = 39;
@@ -202,7 +202,7 @@ namespace Europlan.Common {
 			// numDewPoint
 			// 
 			this.numDewPoint.Enabled = false;
-			this.numDewPoint.Location = new System.Drawing.Point(178, 110);
+			this.numDewPoint.Location = new System.Drawing.Point(227, 110);
 			this.numDewPoint.Name = "numDewPoint";
 			this.numDewPoint.Size = new System.Drawing.Size(52, 20);
 			this.numDewPoint.TabIndex = 38;
@@ -213,14 +213,14 @@ namespace Europlan.Common {
 			// 
 			this.label10.Location = new System.Drawing.Point(6, 85);
 			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(158, 23);
+			this.label10.Size = new System.Drawing.Size(215, 23);
 			this.label10.TabIndex = 34;
 			this.label10.Text = "Innentemperatur für Kühlung:";
 			this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// label11
 			// 
-			this.label11.Location = new System.Drawing.Point(236, 85);
+			this.label11.Location = new System.Drawing.Point(285, 85);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(46, 23);
 			this.label11.TabIndex = 36;
@@ -235,7 +235,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			this.numInsideTemperature.Location = new System.Drawing.Point(178, 87);
+			this.numInsideTemperature.Location = new System.Drawing.Point(227, 87);
 			this.numInsideTemperature.MaxValue = new decimal(new int[] {
             40,
             0,
@@ -262,7 +262,7 @@ namespace Europlan.Common {
 			// 
 			this.label8.Location = new System.Drawing.Point(6, 62);
 			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(133, 23);
+			this.label8.Size = new System.Drawing.Size(215, 23);
 			this.label8.TabIndex = 31;
 			this.label8.Text = "Relative Luftfeuchtigkeit:";
 			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -275,7 +275,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			this.numHumidity.Location = new System.Drawing.Point(178, 64);
+			this.numHumidity.Location = new System.Drawing.Point(227, 64);
 			this.numHumidity.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -302,14 +302,14 @@ namespace Europlan.Common {
 			// 
 			this.label6.Location = new System.Drawing.Point(6, 39);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(166, 23);
+			this.label6.Size = new System.Drawing.Size(215, 23);
 			this.label6.TabIndex = 28;
 			this.label6.Text = "Außentemperatur für Kühlung:";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// label7
 			// 
-			this.label7.Location = new System.Drawing.Point(236, 39);
+			this.label7.Location = new System.Drawing.Point(285, 39);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(46, 23);
 			this.label7.TabIndex = 30;
@@ -324,7 +324,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			this.numOutsideTemperature.Location = new System.Drawing.Point(178, 41);
+			this.numOutsideTemperature.Location = new System.Drawing.Point(227, 41);
 			this.numOutsideTemperature.MaxValue = new decimal(new int[] {
             50,
             0,
@@ -350,7 +350,7 @@ namespace Europlan.Common {
 			// chkCool
 			// 
 			this.chkCool.AutoSize = true;
-			this.chkCool.Location = new System.Drawing.Point(178, 20);
+			this.chkCool.Location = new System.Drawing.Point(227, 20);
 			this.chkCool.Name = "chkCool";
 			this.chkCool.Size = new System.Drawing.Size(137, 17);
 			this.chkCool.TabIndex = 26;
@@ -373,23 +373,23 @@ namespace Europlan.Common {
 			// 
 			this.helpProvider.HelpNamespace = "europlan.chm";
 			// 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
-            this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox1.TabIndex = 78;
-            this.pictureBox1.TabStop = false;
-            // 
+			// pictureBox1
+			// 
+			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+			this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+			this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+			this.pictureBox1.TabIndex = 78;
+			this.pictureBox1.TabStop = false;
+			// 
 			// FacilityDetailsSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
-            this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.btnNext);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
@@ -403,7 +403,7 @@ namespace Europlan.Common {
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

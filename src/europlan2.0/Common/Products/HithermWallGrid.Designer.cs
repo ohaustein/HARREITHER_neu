@@ -31,8 +31,8 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvWalls = new System.Windows.Forms.DataGridView();
-			this.btnSelectConstruction = new System.Windows.Forms.Button();
 			this.hithermWallBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnSelectConstruction = new System.Windows.Forms.Button();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Construction = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.constructionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,6 +86,10 @@ namespace Europlan.Common {
 			this.dgvWalls.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvWalls_DefaultValuesNeeded);
 			this.dgvWalls.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWalls_CellEnter);
 			// 
+			// hithermWallBindingSource
+			// 
+			this.hithermWallBindingSource.DataSource = typeof(Europlan.Common.HithermWall);
+			// 
 			// btnSelectConstruction
 			// 
 			this.btnSelectConstruction.Location = new System.Drawing.Point(372, 202);
@@ -96,10 +100,6 @@ namespace Europlan.Common {
 			this.btnSelectConstruction.UseVisualStyleBackColor = true;
 			this.btnSelectConstruction.Visible = false;
 			this.btnSelectConstruction.Click += new System.EventHandler(this.btnSelectConstruction_Click);
-			// 
-			// hithermWallBindingSource
-			// 
-			this.hithermWallBindingSource.DataSource = typeof(Europlan.Common.HithermWall);
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -156,12 +156,12 @@ namespace Europlan.Common {
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle3.Format = "F0";
 			this.kValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
-			this.kValueDataGridViewTextBoxColumn.FillWeight = 60F;
+			this.kValueDataGridViewTextBoxColumn.FillWeight = 75F;
 			this.kValueDataGridViewTextBoxColumn.HeaderText = "U-Wert\n(W/m²K)";
 			this.kValueDataGridViewTextBoxColumn.Name = "kValueDataGridViewTextBoxColumn";
 			this.kValueDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
 			this.kValueDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.kValueDataGridViewTextBoxColumn.Width = 60;
+			this.kValueDataGridViewTextBoxColumn.Width = 75;
 			// 
 			// bereinigenDataGridViewCheckBoxColumn
 			// 

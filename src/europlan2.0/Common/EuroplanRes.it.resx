@@ -178,7 +178,7 @@
 		<value>Pavimento modulare climatizzato</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaBoden" xml:space="preserve">
-		<value>Pavimento modulare climatizzato</value>
+		<value>Modul Klima-Boden</value>
 	</data>
 	<data name="SystemParametersPanel_KlimaBoden" xml:space="preserve">
 		<value>Pavimento modulare climatizzato</value>
@@ -193,7 +193,7 @@
 		<value>Soffitto modulare climatizzato</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaDecke" xml:space="preserve">
-		<value>Soffitto modulare climatizzato</value>
+		<value>Modul Klima-Decke</value>
 	</data>
 	<data name="SystemParametersPanel_KlimaDecke" xml:space="preserve">
 		<value>Soffitto modulare climatizzato</value>
@@ -244,19 +244,24 @@
 		<value>%SYSTEM% in %RAUMID% (%RAUMNAME%)</value>
 	</data>
 	<data name="AuslegeAssistentForm_Tv" xml:space="preserve">
-		<value>tv °C</value>
+		<value>Tv
+°C</value>
 	</data>
 	<data name="LL_Report_FussbodenVorlauftemperaur" xml:space="preserve">
-		<value>tv °C</value>
+		<value>tv
+°C</value>
 	</data>
 	<data name="LL_Report_KlimabodenVorlauftemperaur" xml:space="preserve">
-		<value>tv °C</value>
+		<value>tv
+°C</value>
 	</data>
 	<data name="LL_Report_KlimadeckeVorlauftemperaur" xml:space="preserve">
-		<value>tv °C</value>
+		<value>tv
+°C</value>
 	</data>
 	<data name="LL_Report_WandVorlauftemperaur" xml:space="preserve">
-		<value>tv °C</value>
+		<value>tv
+°C</value>
 	</data>
 	<data name="Category_Allgemein" xml:space="preserve">
 		<value>In generale</value>
@@ -331,7 +336,8 @@
 		<value>mandata</value>
 	</data>
 	<data name="ConnectionPipePanel_DurchRaumCol" xml:space="preserve">
-		<value>attraverso locale N.</value>
+		<value>attraverso
+ locale N.</value>
 	</data>
 	<data name="ConnectionPipePanel_FlaecheCol" xml:space="preserve">
 		<value>superficie</value>
@@ -343,7 +349,8 @@
 		<value>superficie</value>
 	</data>
 	<data name="ConnectionPipePanel_HeizleistungCol" xml:space="preserve">
-		<value>potenza termica</value>
+		<value>potenza
+ termica</value>
 	</data>
 	<data name="LL_Report_Heizleistung" xml:space="preserve">
 		<value>potenza termica</value>
@@ -352,13 +359,16 @@
 		<value>Numero</value>
 	</data>
 	<data name="ConnectionPipePanel_KuehlleistungCol" xml:space="preserve">
-		<value>potenza di raffreddamento</value>
+		<value>potenza di
+ raffreddamento</value>
 	</data>
 	<data name="LL_Report_Kuehlleistung" xml:space="preserve">
 		<value>potenza di raffreddamento</value>
 	</data>
 	<data name="ConnectionPipePanel_NurErsterHkCol" xml:space="preserve">
-		<value>solo primo circuito di riscaldamento</value>
+		<value>solo primo 
+circuito di 
+riscaldamento</value>
 	</data>
 	<data name="ConnectionPipePanel_RaumCol" xml:space="preserve">
 		<value>locale</value>
@@ -385,22 +395,30 @@
 		<value>locale</value>
 	</data>
 	<data name="ConnectionPipePanel_RohrsystemCol" xml:space="preserve">
-		<value>Sistema tubi</value>
+		<value>Sistema 
+tubi</value>
 	</data>
 	<data name="ConnectionPipePanel_RuecklaufCol" xml:space="preserve">
-		<value>Lunghezza ritorno (m)</value>
+		<value>Lunghezza 
+ritorno 
+(m)</value>
 	</data>
 	<data name="ConnectionPipePanel_TeilsystemCol" xml:space="preserve">
 		<value>sistema parziale</value>
 	</data>
 	<data name="ConnectionPipePanel_VerlegeartCol" xml:space="preserve">
-		<value>Tipo di posa</value>
+		<value>Tipo di 
+posa</value>
 	</data>
 	<data name="ConnectionPipePanel_VerlegedatenDruckenCol" xml:space="preserve">
-		<value>Stampa dati di posa</value>
+		<value>Stampa 
+dati di 
+posa</value>
 	</data>
 	<data name="ConnectionPipePanel_VorlaufCol" xml:space="preserve">
-		<value>Lunghezza mandata (m)</value>
+		<value>Lunghezza 
+mandata 
+(m)</value>
 	</data>
 	<data name="ConnectionPipesForm_Anbindeflaeche" xml:space="preserve">
 		<value>Superficie occupata da tubature di connessione:</value>
@@ -730,7 +748,7 @@
 		<value>circuiti di riscaldamento assegnati:</value>
 	</data>
 	<data name="DistributorPanel_Zusaetzlich" xml:space="preserve">
-		<value> + %VALUE% (add.) = %SUM%</value>
+		<value>+ %VALUE% (add.) = %SUM%</value>
 	</data>
 	<data name="DistributorPanel_ZusaetzlicheHeizkreise" xml:space="preserve">
 		<value>circuiti di riscaldamento addizionali:</value>
@@ -934,7 +952,8 @@
 		<value>Indicazione</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_AnbindungProzent" xml:space="preserve">
-		<value>Superficie %</value>
+		<value>Superficie 
+%</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_Deaktivieren" xml:space="preserve">
 		<value>impiegare solo le correzioni standard (no correzioni ampliate)</value>
@@ -1078,13 +1097,15 @@
 		<value>Modifica</value>
 	</data>
 	<data name="FloorSummaryPanel_Bezeichnung" xml:space="preserve">
-		<value>Denominazione</value>
+		<value>Denominazione
+</value>
 	</data>
 	<data name="FloorSummaryPanel_BezeichnungLang" xml:space="preserve">
 		<value>Denominazione del locale</value>
 	</data>
 	<data name="FloorSummaryPanel_Flaeche" xml:space="preserve">
-		<value>A (m²)</value>
+		<value>A
+(m²)</value>
 	</data>
 	<data name="FloorSummaryPanel_FlaecheLang" xml:space="preserve">
 		<value>Superficie del locale</value>
@@ -1147,7 +1168,8 @@
 		<value>Potenza refrigerante necessaria secondo il calcolo del carico di raffreddamento</value>
 	</data>
 	<data name="FloorSummaryPanel_Luftfeuchtigkeit" xml:space="preserve">
-		<value>umidità relativa (%)</value>
+		<value>umidità rel. 
+(%)</value>
 	</data>
 	<data name="FloorSummaryPanel_LuftfeuchtigkeitLang" xml:space="preserve">
 		<value>Umidità relativa dell'aria per il raffreddamento</value>
@@ -1168,10 +1190,12 @@
 		<value>Volete adottare la nuova dimensione ambiente?</value>
 	</data>
 	<data name="FloorSummaryPanel_RaumtemperaturHeiz" xml:space="preserve">
-		<value>Ti (°C)</value>
+		<value>Ti 
+(°C)</value>
 	</data>
 	<data name="FloorSummaryPanel_RaumtemperaturKuehl" xml:space="preserve">
-		<value>Ti (°C)</value>
+		<value>Ti 
+(°C)</value>
 	</data>
 	<data name="FloorSummaryPanel_RaumtemperaturHeizLang" xml:space="preserve">
 		<value>Temperatura interna nominale secondo il calcolo del fabbisogno termico</value>
@@ -1195,7 +1219,8 @@
 		<value>Cancellare il distributore?</value>
 	</data>
 	<data name="FloorSummaryPanel_Waermebedarf" xml:space="preserve">
-		<value>QN (W)</value>
+		<value>QN 
+(W)</value>
 	</data>
 	<data name="FloorSummaryPanel_WaermebedarfLang" xml:space="preserve">
 		<value>Fabbisogno termico normale secondo il calcolo di fabbisogno termico</value>
@@ -1480,25 +1505,36 @@
 		<value>costr. di base</value>
 	</data>
 	<data name="HithermWallGrid_Deckschicht" xml:space="preserve">
-		<value>strato di copertura R (m²K/W)</value>
+		<value>strato di copertura 
+R 
+(m²K/W)</value>
 	</data>
 	<data name="HithermWallGrid_NeueWandkonstruktion" xml:space="preserve">
 		<value>Costruzione di parete nuova</value>
 	</data>
 	<data name="HithermWallGrid_TemperaturHeiz" xml:space="preserve">
-		<value>Temp. risc. (°C)</value>
+		<value>Temp. 
+risc. 
+(°C)</value>
 	</data>
 	<data name="HithermWallGrid_TemperaturKuehl" xml:space="preserve">
-		<value>Temp. raffr. (°C)</value>
+		<value>Temp. 
+raffr. 
+(°C)</value>
 	</data>
 	<data name="HithermWallGrid_UWert" xml:space="preserve">
-		<value>valore U (W/m²K)</value>
+		<value>valore U 
+(W/m²K)</value>
 	</data>
 	<data name="HithermWallGrid_WaermebedarfBereinigen" xml:space="preserve">
-		<value>fabbisogno termico rettif.</value>
+		<value>fabbisogno 
+termico 
+rettif.</value>
 	</data>
 	<data name="HithermWallGrid_ZusaetzlicheDaemmung" xml:space="preserve">
-		<value>coibent. add. R (m²K/W)</value>
+		<value>coibent. add. 
+R 
+(m²K/W)</value>
 	</data>
 	<data name="KlimaFlaechenModul_100_30" xml:space="preserve">
 		<value>Modulo 100/30</value>
@@ -1630,7 +1666,7 @@
 		<value>validità fino:</value>
 	</data>
 	<data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
-		<value>La validità della licenza è scaduta. Per favore, mettetevi in contatto all'indirizzo e-mail lizenz@dummy.at oppure al telefono +43-0000-LIZENZ, per richiedere una nuova licenza.</value>
+		<value>La validità della licenza è scaduta. Per favore, mettetevi in contatto all'indirizzo e-mail office@harreither.com oppure al telefono +43-7353-6660, per richiedere una nuova licenza.</value>
 	</data>
 	<data name="LicenseForm_HardwareId" xml:space="preserve">
 		<value>ID hardware:</value>
@@ -1642,19 +1678,19 @@
 		<value>licenze installate:</value>
 	</data>
 	<data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
-		<value>Non è stata trovata alcuna licenza. Se siete già in possesso di una licenza, importatela mediante il pulsante "Importa licenza". Se non possedete ancora alcuna licenza, mettetevi in contatto all'indirizzo e-mail lizenz@dummy.at oppure al telefono +43-0000-LIZENZ, per richiedere la licenza. Per richiedere la licenza si deve comunicare il codice ID del hardware qui indicato.</value>
+		<value>Non è stata trovata alcuna licenza. Se siete già in possesso di una licenza, importatela mediante il pulsante "Importa licenza". Se non possedete ancora alcuna licenza, mettetevi in contatto all'indirizzo e-mail lizenz@dummy.at oppure al telefono +43-7353-6660, per richiedere la licenza. Per richiedere la licenza si deve comunicare il codice ID del hardware qui indicato.</value>
 	</data>
 	<data name="LicenseForm_LizensiertFuer" xml:space="preserve">
 		<value>Licenziato per:</value>
 	</data>
 	<data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
-		<value>la licenza è invalida poiché non è stata modificata da un soggetto autorizzato. Per favore, utilizzate la vostra licenza originale oppure mettetevi in contatto all'indirizzo e-mail lizenz@dummy.at oppure al telefono +43-0000-LIZENZ, per richiedere una nuova licenza.</value>
+		<value>la licenza è invalida poiché non è stata modificata da un soggetto autorizzato. Per favore, utilizzate la vostra licenza originale oppure mettetevi in contatto all'indirizzo e-mail lizenz@dummy.at oppure al telefono +43-7353-6660, per richiedere una nuova licenza.</value>
 	</data>
 	<data name="LicenseForm_NichtGueltig" xml:space="preserve">
-		<value>La licenza non è valida. Se siete già in possesso di una licenza valida, importatela mediante il pulsante "Importa licenza". Se non possedete ancora alcuna licenza valida, mettetevi in contatto all'indirizzo e-mail lizenz@dummy.at oppure al telefono +43-0000-LIZENZ, per richiedere la licenza. Per richiedere la licenza si deve comunicare il codice ID del hardware qui indicato.</value>
+		<value>La licenza non è valida. Se siete già in possesso di una licenza valida, importatela mediante il pulsante "Importa licenza". Se non possedete ancora alcuna licenza valida, mettetevi in contatto all'indirizzo e-mail office@harreither.com oppure al telefono +43-7353-6660, per richiedere la licenza. Per richiedere la licenza si deve comunicare il codice ID del hardware qui indicato.</value>
 	</data>
 	<data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
-		<value>La licenza non vale sul computer attuale. Per favore, mettetevi in contatto all'indirizzo e-mail lizenz@dummy.at oppure al telefono +43-0000-LIZENZ, per richiedere la licenza per questo computer. Per richiedere la licenza si deve comunicare il codice ID del hardware qui indicato.</value>
+		<value>La licenza non vale sul computer attuale. Per favore, mettetevi in contatto all'indirizzo e-mail office@harreither.com oppure al telefono +43-7353-6660, per richiedere la licenza per questo computer. Per richiedere la licenza si deve comunicare il codice ID del hardware qui indicato.</value>
 	</data>
 	<data name="LicenseForm_Seitenkopf" xml:space="preserve">
 		<value>Testata:</value>
@@ -1915,7 +1951,8 @@
 		<value>Fabbisogno materiale %KATEGORIE%</value>
 	</data>
 	<data name="LL_Report_MaterialbedarfKategorie" xml:space="preserve">
-		<value>Fabbisogno materiale %KATEGORIE%</value>
+		<value>Fabbisogno materiale 
+%KATEGORIE%</value>
 	</data>
 	<data name="LL_Report_BestellvorschlagMenge" xml:space="preserve">
 		<value>quantità</value>
@@ -1978,10 +2015,12 @@
 		<value>Conn.</value>
 	</data>
 	<data name="LL_Report_FussbodenBreite" xml:space="preserve">
-		<value>Largh. cm</value>
+		<value>Largh. 
+cm</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_B" xml:space="preserve">
-		<value>Largh. cm</value>
+		<value>Largh. 
+cm</value>
 	</data>
 	<data name="LL_Report_FussbodenDruckverlust" xml:space="preserve">
 		<value>Perdita di pressione</value>
@@ -1996,19 +2035,24 @@
 		<value>Perdita di pressione</value>
 	</data>
 	<data name="LL_Report_FussbodenDruckverlustRohr" xml:space="preserve">
-		<value>Tubo mbar</value>
+		<value>Tubo 
+mbar</value>
 	</data>
 	<data name="LL_Report_WandDruckverlustRohr" xml:space="preserve">
-		<value>Tubo mbar</value>
+		<value>Tubo 
+mbar</value>
 	</data>
 	<data name="LL_Report_FussbodenDruckverlustVerteiler" xml:space="preserve">
-		<value>Distributore mbar</value>
+		<value>Distributore 
+mbar</value>
 	</data>
 	<data name="LL_Report_KlimabodenDruckverlustVerteiler" xml:space="preserve">
-		<value>Distributore mbar</value>
+		<value>Distributore 
+mbar</value>
 	</data>
 	<data name="LL_Report_KlimadeckeDruckverlustVerteiler" xml:space="preserve">
-		<value>Distributore mbar</value>
+		<value>Distributore 
+mbar</value>
 	</data>
 	<data name="LL_Report_WandDruckverlustVerteiler" xml:space="preserve">
 		<value>Distributore mbar</value>
@@ -2017,10 +2061,12 @@
 		<value>Costruzione pavimento RL, pav.</value>
 	</data>
 	<data name="LL_Report_FussbodenFlaeche" xml:space="preserve">
-		<value>A (m²)</value>
+		<value>A
+m²</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_A" xml:space="preserve">
-		<value>A (m²)</value>
+		<value>A
+m²</value>
 	</data>
 	<data name="LL_Report_FussbodenFlussgeschwindigkeit" xml:space="preserve">
 		<value>v</value>
@@ -2053,13 +2099,15 @@
 		<value>circuito(i) di riscaldamento</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeHeizkreise" xml:space="preserve">
-		<value>circuito(i) di riscaldamento</value>
+		<value>circuito(i) di 
+riscaldamento</value>
 	</data>
 	<data name="LL_Report_WandHeizkreise" xml:space="preserve">
 		<value>circuito(i) di riscaldamento</value>
 	</data>
 	<data name="ProductOverviewForm_Heizkreise" xml:space="preserve">
-		<value>circuito(i) di riscaldamento</value>
+		<value>circuito(i) di 
+riscaldamento</value>
 	</data>
 	<data name="LL_Report_FussbodenHinweisHintereinandergeschaltet" xml:space="preserve">
 		<value>Sono indicate le temperature di mandata e ritorno sul distributore, poiché sono connessi più sistemi in serie.</value>
@@ -2080,25 +2128,32 @@
 		<value>Sono indicati i dati idraulici per tutto il cicuito di riscaldamento, poiché sono connessi più sistemi in serie.</value>
 	</data>
 	<data name="LL_Report_FussbodenLeistung" xml:space="preserve">
-		<value>Qrisc.a pav. W</value>
+		<value>Qrisc.a pav. 
+W</value>
 	</data>
 	<data name="LL_Report_KlimabodenLeistung" xml:space="preserve">
-		<value>Qrisc.a pav. W</value>
+		<value>Qrisc.a pav. 
+W</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_QFbh" xml:space="preserve">
-		<value>Qrisc.a pav. W</value>
+		<value>Qrisc.a pav. 
+W</value>
 	</data>
 	<data name="LL_Report_FussbodenLeistungProQm" xml:space="preserve">
-		<value>qrisc.a pav. W/m²</value>
+		<value>qrisc.a pav. 
+W/m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenLeistungProQm" xml:space="preserve">
-		<value>qrisc.a pav. W/m²</value>
+		<value>qrisc.a pav. 
+W/m²</value>
 	</data>
 	<data name="LL_Report_FussbodenOberflaechenTempAz" xml:space="preserve">
-		<value>tpav.,zona sogg. °C</value>
+		<value>tpav.,zona sogg. 
+°C</value>
 	</data>
 	<data name="LL_Report_FussbodenOberflaechenTempRz" xml:space="preserve">
-		<value>tpav.,zona marg. °C</value>
+		<value>tpav.,zona marg. 
+°C</value>
 	</data>
 	<data name="LL_Report_FussbodenRaumName" xml:space="preserve">
 		<value>Nome</value>
@@ -2164,19 +2219,23 @@
 		<value>locale N.</value>
 	</data>
 	<data name="LL_Report_FussbodenRaumtemperatur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>ti
+°C</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtRaumtemperatur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>ti
+°C</value>
 	</data>
 	<data name="LL_Report_KlimabodenRaumtemperatur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>ti
+°C</value>
 	</data>
 	<data name="LL_Report_KlimadeckeRaumtemperatur" xml:space="preserve">
 		<value>ti °C</value>
 	</data>
 	<data name="LL_Report_WandRaumtemperatur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>ti
+°C</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaenge" xml:space="preserve">
 		<value>Lunghezza tubo</value>
@@ -2185,46 +2244,56 @@
 		<value>Lunghezza tubo</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeAnbindung" xml:space="preserve">
-		<value>Tubatura di connessione m</value>
+		<value>Tubatura di 
+connessione m</value>
 	</data>
 	<data name="LL_Report_WandRohrlaengeAnbindung" xml:space="preserve">
 		<value>Tubatura di connessione m</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeHeizkreis" xml:space="preserve">
-		<value>Circuito risc. (Riscald. a pav.) m</value>
+		<value>Circuito risc. 
+(Riscald. a pav.) m</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeHeizkreisGesamt" xml:space="preserve">
-		<value>Circuito risc. (tot.) m</value>
+		<value>Circuito risc. 
+(tot.) m</value>
 	</data>
 	<data name="LL_Report_WandRohrlaengeHeizkreisGesamt" xml:space="preserve">
-		<value>Circuito risc. (tot.) m</value>
+		<value>Circuito risc. 
+(tot.) m</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeRzAz" xml:space="preserve">
 		<value>zona marg. + zona sogg. m</value>
 	</data>
 	<data name="LL_Report_FussbodenRücklauftemperaur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>tr
+°C</value>
 	</data>
 	<data name="LL_Report_KlimabodenRuecklauftemperaur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>tr
+°C</value>
 	</data>
 	<data name="LL_Report_KlimadeckeRuecklauftemperaur" xml:space="preserve">
 		<value>ti °C</value>
 	</data>
 	<data name="LL_Report_WandRuecklauftemperaur" xml:space="preserve">
-		<value>ti °C</value>
+		<value>tr
+°C</value>
 	</data>
 	<data name="LL_Report_FussbodenSollLeistung" xml:space="preserve">
-		<value>Qnom (calc.) W</value>
+		<value>Qnom 
+calc.) W</value>
 	</data>
 	<data name="LL_Report_KlimabodenSollLeistung" xml:space="preserve">
-		<value>Qnom (calc.) W</value>
+		<value>Qnom 
+(calc.) W</value>
 	</data>
 	<data name="LL_Report_KlimadeckeSollLeistung" xml:space="preserve">
 		<value>Qnom (calc.) W</value>
 	</data>
 	<data name="LL_Report_WandSollLeistung" xml:space="preserve">
-		<value>Qnom (calc.) W</value>
+		<value>Qnom 
+(calc.) W</value>
 	</data>
 	<data name="LL_Report_FussbodenTeilsystem" xml:space="preserve">
 		<value>Sistema parziale</value>
@@ -2233,7 +2302,8 @@
 		<value>Sistema parziale</value>
 	</data>
 	<data name="LL_Report_KlimadeckeTeilsystem" xml:space="preserve">
-		<value>Sistema parziale</value>
+		<value>Sistema 
+parziale</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeTeilsystem" xml:space="preserve">
 		<value>Sistema parziale</value>
@@ -2257,13 +2327,15 @@
 		<value>tipo di posa</value>
 	</data>
 	<data name="LL_Report_FussbodenWassermenge" xml:space="preserve">
-		<value>Quantità d'acqua</value>
+		<value>Quantità 
+d'acqua</value>
 	</data>
 	<data name="LL_Report_KlimabodenWassermenge" xml:space="preserve">
 		<value>Quantità d'acqua</value>
 	</data>
 	<data name="LL_Report_KlimadeckeWassermenge" xml:space="preserve">
-		<value>Quantità d'acqua</value>
+		<value>Quantità 
+d'acqua</value>
 	</data>
 	<data name="LL_Report_WandWassermenge" xml:space="preserve">
 		<value>Quantità d'acqua</value>
@@ -2278,67 +2350,86 @@
 		<value>Panoramica %GESCHOSS%</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtBereinigterBedarf" xml:space="preserve">
-		<value>Qcalc. W</value>
+		<value>Qcalc. 
+W</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtFlaecheEinheit" xml:space="preserve">
-		<value>m²</value>
+		<value>
+m²</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtHeizleistung" xml:space="preserve">
-		<value>Qrisc W</value>
+		<value>Qrisc 
+W</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtKuehlleistung" xml:space="preserve">
-		<value>Qraffr W)</value>
+		<value>Qraffr 
+W</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtRaumNr" xml:space="preserve">
 		<value>locale N.</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtRestleistung" xml:space="preserve">
-		<value>Qresiduo W</value>
+		<value>Qresiduo 
+W</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_QRest" xml:space="preserve">
-		<value>Qresiduo W</value>
+		<value>Qresiduo 
+W</value>
 	</data>
 	<data name="LL_Report_Hinweise" xml:space="preserve">
 		<value>Avvertenze</value>
 	</data>
 	<data name="LL_Report_KlimabodenAnbindeleitung" xml:space="preserve">
-		<value>Tubatura di connessione m</value>
+		<value>Tubatura di connessione 
+m</value>
 	</data>
 	<data name="LL_Report_KlimadeckeAnbindeleitung" xml:space="preserve">
-		<value>Tubatura di connessione m</value>
+		<value>Tubatura di connessione
+ m</value>
 	</data>
 	<data name="LL_Report_KlimabodenAnzahlModule" xml:space="preserve">
 		<value>Numero moduli</value>
 	</data>
 	<data name="LL_Report_KlimabodenDruckverlustHeizkreis" xml:space="preserve">
-		<value>Circuito di riscaldamento mbar</value>
+		<value>Circuito di riscaldamento 
+mbar</value>
 	</data>
 	<data name="LL_Report_KlimadeckeDruckverlustHeizkreis" xml:space="preserve">
-		<value>Circuito di riscaldamento mbar</value>
+		<value>Circuito di riscaldamento 
+mbar</value>
 	</data>
 	<data name="LL_Report_KlimabodenFbKonstruktion" xml:space="preserve">
-		<value>Costruzione pavimento RL,B m²K/W</value>
+		<value>Costruzione pavimento 
+RL,B 
+m²K/W</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheAnbindung" xml:space="preserve">
-		<value>Conn. m²</value>
+		<value>Conn. 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimadeckeFlaecheAnbindung" xml:space="preserve">
-		<value>Conn. m²</value>
+		<value>Conn. 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheDicht" xml:space="preserve">
-		<value>fitto m²</value>
+		<value>fitto 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheModulierend" xml:space="preserve">
-		<value>Modulante m²</value>
+		<value>Modulante 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheSonstige" xml:space="preserve">
-		<value>Altri (m²)</value>
+		<value>Altri 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenOberflaechenTemp" xml:space="preserve">
-		<value>tfb °C</value>
+		<value>tfb 
+°C</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Tfb" xml:space="preserve">
-		<value>tfb °C</value>
+		<value>tfb
+°C</value>
 	</data>
 	<data name="LL_Report_KlimabodenSystemkomponenten" xml:space="preserve">
 		<value>Componenti del sistema</value>
@@ -2347,19 +2438,26 @@
 		<value>Componenti del sistema</value>
 	</data>
 	<data name="LL_Report_KlimabodenWdKonstruktion" xml:space="preserve">
-		<value>Costr. coib. termica Ru m²K/W</value>
+		<value>Costr. coib. termica 
+Ru 
+m²K/W</value>
 	</data>
 	<data name="LL_Report_KlimadeckeWdKonstruktion" xml:space="preserve">
-		<value>Costr. coib. termica Ru m²K/W</value>
+		<value>Costr. coib. termica 
+Ru 
+m²K/W</value>
 	</data>
 	<data name="LL_Report_KlimadeckeAnzahlModule" xml:space="preserve">
 		<value>Numero moduli (pz.)</value>
 	</data>
 	<data name="LL_Report_KlimadeckeDeckenKonstruktion" xml:space="preserve">
-		<value>Costruz. soffitto RL,B m²K/W</value>
+		<value>Costruz. soffitto 
+RL,B 
+m²K/W</value>
 	</data>
 	<data name="LL_Report_KlimadeckeFlaecheModule" xml:space="preserve">
-		<value>Superficie modulare m²</value>
+		<value>Superficie modulare 
+m²</value>
 	</data>
 	<data name="LL_Report_KlimadeckeLeistung" xml:space="preserve">
 		<value>Qrisc. soff. W</value>
@@ -2506,19 +2604,24 @@
 		<value>mh/</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermDurchflussProHkZeile2" xml:space="preserve">
-		<value>circ.risc. l/h</value>
+		<value>circ.risc. 
+l/h</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEurovalDurchflussProHkZeile2" xml:space="preserve">
-		<value>circ.risc. l/h</value>
+		<value>circ.risc. 
+l/h</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2" xml:space="preserve">
-		<value>circ.risc. l/h</value>
+		<value>circ.risc.
+l/h</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermFlaecheProHk" xml:space="preserve">
-		<value>superficie/ circ.risc.</value>
+		<value>superficie/ 
+circ.risc.</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEurovalFlaecheProHk" xml:space="preserve">
-		<value>superficie/ circ.risc.</value>
+		<value>superficie/ 
+circ.risc.</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile1" xml:space="preserve">
 		<value>ANon risc.</value>
@@ -2572,10 +2675,12 @@
 		<value>riscaldamento</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermLaengeProHk" xml:space="preserve">
-		<value>lunghezza/ circ.risc.</value>
+		<value>lunghezza/ 
+circ.risc.</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEurovalLaengeProHk" xml:space="preserve">
-		<value>lunghezza/ circ.risc.</value>
+		<value>lunghezza/ 
+circ.risc.</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile1" xml:space="preserve">
 		<value>Itubo/</value>
@@ -2584,10 +2689,12 @@
 		<value>Itubo/</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile2" xml:space="preserve">
-		<value>circuito di riscaldamento m</value>
+		<value>circuito di riscaldamento 
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEurovalRohrlaengeProHkZeile2" xml:space="preserve">
-		<value>circuito di riscaldamento m</value>
+		<value>circuito di riscaldamento 
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermTeilsystemZeile1" xml:space="preserve">
 		<value>Sistema</value>
@@ -2689,10 +2796,12 @@
 		<value>superficie</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile2" xml:space="preserve">
-		<value>superficie m²</value>
+		<value>superficie 
+m²</value>
 	</data>
 	<data name="ProductOverviewForm_Flaeche" xml:space="preserve">
-		<value>superficie m²</value>
+		<value>superficie 
+m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactHeizkreisZeile2" xml:space="preserve">
 		<value>circuito</value>
@@ -2704,19 +2813,22 @@
 		<value>circuito</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactLaengeRuecklauf" xml:space="preserve">
-		<value>ritorno m</value>
+		<value>ritorno 
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermLaengeRuecklauf" xml:space="preserve">
 		<value>ritorno m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactLaengeVorlauf" xml:space="preserve">
-		<value>mandata m</value>
+		<value>mandata 
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermLaengeVorlauf" xml:space="preserve">
 		<value>mandata m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactLaengeWand" xml:space="preserve">
-		<value>parete m</value>
+		<value>parete 
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermLaengeWand" xml:space="preserve">
 		<value>parete m</value>
@@ -2740,10 +2852,12 @@
 		<value>costruzione di</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermFlaecheRa10" xml:space="preserve">
-		<value>RA10 m²</value>
+		<value>RA10 
+m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermFlaecheRa5" xml:space="preserve">
-		<value>RA 5 m²</value>
+		<value>RA 5 
+m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermGesamtflaeche" xml:space="preserve">
 		<value>Superficie totale</value>
@@ -2785,13 +2899,16 @@
 		<value>Dati di posa modulo soffitto climatizzato  - %GESCHOSS%</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeDeckenKonstruktion" xml:space="preserve">
-		<value>costr. di soffitto</value>
+		<value>costr. di 
+soffitto</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeDurchflussProHk" xml:space="preserve">
-		<value>mh/circ.risc. l/h</value>
+		<value>mh/circ.risc. 
+l/h</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeFlaecheUnbeheizt" xml:space="preserve">
-		<value>ANon risc. m²</value>
+		<value>ANon risc. 
+m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeKonstruktion" xml:space="preserve">
 		<value>Costruzione: %KONSTRUKTION%</value>
@@ -2812,7 +2929,8 @@
 		<value>Moduli</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeModulflaeche" xml:space="preserve">
-		<value>Modulo superficie di m²</value>
+		<value>Modulo 
+superficie di m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeReihe" xml:space="preserve">
 		<value>Fila</value>
@@ -2821,7 +2939,8 @@
 		<value>Fila</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeVerbindeleitung" xml:space="preserve">
-		<value>Altra tubatura di connessione m</value>
+		<value>Altra tubatura di 
+connessione m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenVerteiler" xml:space="preserve">
 		<value>Dati di posa per distributore %VERTEILER%</value>
@@ -2839,28 +2958,34 @@
 		<value>fabbisogno termico</value>
 	</data>
 	<data name="LL_Report_WandAnbindeleitungSenkrecht" xml:space="preserve">
-		<value>verticale m</value>
+		<value>verticale 
+m</value>
 	</data>
 	<data name="LL_Report_WandAnbindeleitungWaagrecht" xml:space="preserve">
-		<value>orizz. m</value>
+		<value>orizz. 
+m</value>
 	</data>
 	<data name="LL_Report_WandAnzahlRegister" xml:space="preserve">
 		<value>Numero batterie di riscaldamento (pz.)</value>
 	</data>
 	<data name="LL_Report_WandBereinigungLeistung" xml:space="preserve">
-		<value>QDelta W</value>
+		<value>QDelta 
+W</value>
 	</data>
 	<data name="LL_Report_WandFlaecheZeile1" xml:space="preserve">
 		<value>Arisc. parete</value>
 	</data>
 	<data name="LL_Report_WandLeistung" xml:space="preserve">
-		<value>Qrisc. parete W</value>
+		<value>Qrisc. parete 
+W</value>
 	</data>
 	<data name="LL_Report_WandLeistungProQm" xml:space="preserve">
-		<value>qrisc. parete W/m²</value>
+		<value>qrisc. parete 
+W/m²</value>
 	</data>
 	<data name="LL_Report_WandRohrlaengeInWand" xml:space="preserve">
-		<value>In parete m</value>
+		<value>In parete 
+m</value>
 	</data>
 	<data name="LL_Report_WarnungenUndFehler" xml:space="preserve">
 		<value>Avvertenze ed errori</value>
@@ -3100,7 +3225,8 @@
 		<value>impostazioni</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_AAnb" xml:space="preserve">
-		<value>Aconn. m²</value>
+		<value>Aconn. 
+m²</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Anhydritestrich" xml:space="preserve">
 		<value>Massetto d'anidride</value>
@@ -3124,7 +3250,8 @@
 		<value>Barra a clip con nastro adesivo</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_DeltaP" xml:space="preserve">
-		<value>DeltaP mbar</value>
+		<value>DeltaP 
+mbar</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_EckenErklaerung" xml:space="preserve">
 		<value>(gli angoli positivi aumentano, gli angoli negativi riducono la superficie delle zone marginali)</value>
@@ -3160,7 +3287,8 @@
 		<value>Lunghezza della zona marginale:</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Mg" xml:space="preserve">
-		<value>mh kg/h</value>
+		<value>mh 
+kg/h</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_NachHeizbetrieb" xml:space="preserve">
 		<value>dopo funzionamento di riscaldamento</value>
@@ -3172,16 +3300,20 @@
 		<value>dopo funzionamento di raffreddamento</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Q" xml:space="preserve">
-		<value>Q W</value>
+		<value>Q 
+W</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_QAnb" xml:space="preserve">
-		<value>QConn. W</value>
+		<value>QConn. 
+W</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_QSoll" xml:space="preserve">
-		<value>Qnom W</value>
+		<value>Qnom 
+W</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_QSollProQuadratmeter" xml:space="preserve">
-		<value>qnom W/m²</value>
+		<value>qnom 
+W/m²</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_ReduzierteFlaeche" xml:space="preserve">
 		<value>Superficie con ridotta potenza termica/refrigerante:</value>
@@ -3190,10 +3322,12 @@
 		<value>Superficie con ridotta potenza termica/refrigerante:</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Rohrlaenge" xml:space="preserve">
-		<value>Tubatura m</value>
+		<value>Tubatura 
+m</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Spreizung" xml:space="preserve">
-		<value>Distanza K</value>
+		<value>Distanza 
+K</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_TatsaechlicheAuslegung" xml:space="preserve">
 		<value>lay-out effettivo</value>
@@ -3232,7 +3366,8 @@
 		<value>Risultati del calcolo:</value>
 	</data>
 	<data name="PlannedHithermProductPanel_Breite" xml:space="preserve">
-		<value>Largh. (cm)</value>
+		<value>Largh. 
+(cm)</value>
 	</data>
 	<data name="PlannedHithermProductPanel_DifferenzLeistung" xml:space="preserve">
 		<value>Scostamento dalla potenza prevista:</value>
@@ -3271,10 +3406,14 @@
 		<value>circ. risc.</value>
 	</data>
 	<data name="PlannedHithermProductPanel_LeitungSenkrecht" xml:space="preserve">
-		<value>tubatura verticale (m)</value>
+		<value>tubatura 
+verticale 
+(m)</value>
 	</data>
 	<data name="PlannedHithermProductPanel_LeitungWaagrecht" xml:space="preserve">
-		<value>tubatura orizzontale (m)</value>
+		<value>tubatura 
+orizzontale 
+(m)</value>
 	</data>
 	<data name="PlannedHithermProductPanel_RegisterTyp" xml:space="preserve">
 		<value>Tipo batteria</value>
@@ -3430,16 +3569,20 @@
 		<value>Hitherm® Compact falda</value>
 	</data>
 	<data name="ProductOverviewForm_DruckverlustHeiz" xml:space="preserve">
-		<value>perdita di pressione mbar</value>
+		<value>perdita di pressione 
+mbar</value>
 	</data>
 	<data name="ProductOverviewForm_DruckverlustKuehl" xml:space="preserve">
-		<value>perdita di pressione mbar</value>
+		<value>perdita di pressione 
+mbar</value>
 	</data>
 	<data name="ProductOverviewForm_Kuehllast" xml:space="preserve">
-		<value>carico di raffreddamento  W</value>
+		<value>carico di raffreddamento  
+W</value>
 	</data>
 	<data name="ProductOverviewForm_Normwaerme" xml:space="preserve">
-		<value>calore normale W</value>
+		<value>calore normale 
+W</value>
 	</data>
 	<data name="ProductOverviewForm_Ok" xml:space="preserve">
 		<value>OK</value>
@@ -3451,13 +3594,16 @@
 		<value>Nome ambiente</value>
 	</data>
 	<data name="ProductOverviewForm_Restkuellast" xml:space="preserve">
-		<value>Res W</value>
+		<value>Res 
+W</value>
 	</data>
 	<data name="ProductOverviewForm_Restwaerme" xml:space="preserve">
-		<value>Calore residuo W</value>
+		<value>Calore residuo 
+W</value>
 	</data>
 	<data name="ProductOverviewForm_Rohrlaenge" xml:space="preserve">
-		<value>lunghezza tubo m</value>
+		<value>lunghezza tubo 
+m</value>
 	</data>
 	<data name="ProductOverviewForm_Titel" xml:space="preserve">
 		<value>Panoramica</value>
@@ -3715,13 +3861,15 @@
 		<value>Al distributore sono stati assegnati troppi circuiti di riscaldamento!</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_BkaFlaeche" xml:space="preserve">
-		<value>attiv.term.massa (m²)</value>
+		<value>attiv.term.massa
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_BkaHeizkreise" xml:space="preserve">
 		<value>attiv.term.massa circuiti di riscaldamento</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_EurovalFlaeche" xml:space="preserve">
-		<value>Euroval® (m²)</value>
+		<value>Euroval®
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_EurovalHeizkreise" xml:space="preserve">
 		<value>Euroval® circuiti di riscaldamento</value>
@@ -3736,37 +3884,44 @@
 		<value>carichi termico e refrigerante non coperti</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactDachFlaeche" xml:space="preserve">
-		<value>Hitherm® Co tetto (m²).</value>
+		<value>Hitherm® Co 
+tetto (m²).</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactDachHeizkreise" xml:space="preserve">
 		<value>Hitherm® Co tetto circ.di risc.</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactFlaeche" xml:space="preserve">
-		<value>Hitherm® Co (m²).</value>
+		<value>Hitherm® Co 
+(m²).</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactHeizkreise" xml:space="preserve">
 		<value>Hitherm® Co circuiti di riscaldamento</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermFlaeche" xml:space="preserve">
-		<value>Hitherm® (m²).</value>
+		<value>Hitherm®
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermHeizkreise" xml:space="preserve">
-		<value>Hitherm® circuiti di riscaldamento</value>
+		<value>Hitherm® 
+circuiti di riscaldamento</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenFlaeche" xml:space="preserve">
-		<value>pavimento climatizzato (m²).</value>
+		<value>Klima-Boden
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenHeizkreise" xml:space="preserve">
-		<value>pavimento climatizzato circuiti di riscaldamento</value>
+		<value>Klima-Boden circuiti di riscaldamento</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaDeckeFlaeche" xml:space="preserve">
-		<value>soffitto climatizzato (m²).</value>
+		<value>Klima-Decke
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaDeckeHeizkreise" xml:space="preserve">
-		<value>soffitto climatizzato circuiti di riscaldamento</value>
+		<value>Klima-Decke circuiti di riscaldamento</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Kuehllast" xml:space="preserve">
-		<value>carico refrigerante (W)</value>
+		<value>carico refrigerante 
+(W)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KuehllastFehler" xml:space="preserve">
 		<value>carico termico non coperto</value>
@@ -3778,7 +3933,8 @@
 		<value>Controller locale</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Raumflaeche" xml:space="preserve">
-		<value>Superf. d'ambiente (m²)</value>
+		<value>Superf. d'ambiente 
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_RC" xml:space="preserve">
 		<value>RC</value>
@@ -3796,7 +3952,8 @@
 		<value>attuatori</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Temperatur" xml:space="preserve">
-		<value>Temp. (°C)</value>
+		<value>Temp.
+(°C)</value>
 	</data>
 	<data name="QuickDimensioningFloorGridFlaecheFehler" xml:space="preserve">
 		<value>La superficie pianificata è maggiore della superficie massima disponibile.</value>
@@ -3853,13 +4010,13 @@
 		<value>Siete sicuri di voler eliminare il prodotto modulo pavimento climatizzato dal lay-out superficiale?</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaBodenEntfernenTitel" xml:space="preserve">
-		<value>Eliminare il modulo pavimento climatizzato</value>
+		<value>Eliminare il Modul Klimaboden</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaDeckeEntfernenText" xml:space="preserve">
-		<value>Siete sicuri di voler eliminare il prodotto modulo soffitto climatizzato dal lay-out superficiale?</value>
+		<value>Siete sicuri di voler eliminare il prodotto Modul Klimadecke dal lay-out superficiale?</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaDeckeEntfernenTitel" xml:space="preserve">
-		<value>Eliminare il modulo soffitto climatizzato</value>
+		<value>Eliminare il Modul Klimadecke</value>
 	</data>
 	<data name="QuickDimensioningPanel_ProdukteWaehlen" xml:space="preserve">
 		<value>Per favore, selezionare quei prodotti Harreither, che dovranno essere a disposizione nel lay-out superficiale:</value>
@@ -3919,7 +4076,9 @@
 		<value>errore nel formato dell'impostazione</value>
 	</data>
 	<data name="RoomSummaryPanel_FbhFlaeche" xml:space="preserve">
-		<value>superficie riscaldamento a pavimento(m²)</value>
+		<value>superficie riscaldamento
+ a pavimento
+(m²)</value>
 	</data>
 	<data name="RoomSummaryPanel_Flaeche" xml:space="preserve">
 		<value>Superficie:</value>
@@ -3934,7 +4093,8 @@
 		<value>carico termico (rettificato):</value>
 	</data>
 	<data name="RoomSummaryPanel_Heizleistung" xml:space="preserve">
-		<value>Prisc (W)</value>
+		<value>Prisc 
+(W)</value>
 	</data>
 	<data name="RoomSummaryPanel_Heizsysteme" xml:space="preserve">
 		<value>sistemi di riscaldamento</value>
@@ -3949,7 +4109,8 @@
 		<value>carico refrigerante (rettificato):</value>
 	</data>
 	<data name="RoomSummaryPanel_Kuehlleistung" xml:space="preserve">
-		<value>Praffr (W)</value>
+		<value>Praffr 
+(W)</value>
 	</data>
 	<data name="RoomSummaryPanel_LoeschenBestaetigenText" xml:space="preserve">
 		<value>Siete sicuri di voler cancellare il sistema %SYSTEM%?</value>
@@ -4208,11 +4369,5 @@
 	</data>
 	<data name="WarningsAndErrorsForm_Warnung" xml:space="preserve">
 		<value>%SYSTEM% in %RAUMID% (%RAUMNAME%) %WARNUNG%</value>
-	</data>
-	<data name="FacilityDetailsSummaryPanel_Allgemein" xml:space="preserve">
-		<value>In generale</value>
-	</data>
-	<data name="ProductConnection_AnschlussAn" xml:space="preserve">
-		<value>Allaccio a %SYSTEM% in %RAUM%: %RAUMNAME%</value>
 	</data>
 </root>

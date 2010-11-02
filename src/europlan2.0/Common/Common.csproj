@@ -171,6 +171,7 @@
     <Compile Include="ExtendedCorrections\ExtendedCorrectionsGrid.Designer.cs">
       <DependentUpon>ExtendedCorrectionsGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileUtils.cs" />
     <Compile Include="Interfaces\IClipboard.cs" />
     <Compile Include="Interfaces\IEditorUserControl.cs" />
     <Compile Include="Interfaces\IGuiRepresentation.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using System.Globalization;
+using log4net;
 
 namespace Europlan.Common {
 
@@ -15,6 +16,8 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(ModulKlimaDeckeProduct))]
 	[Serializable()]
 	public abstract class Product : IRequiredMaterial {
+
+		private static readonly ILog log = LogManager.GetLogger(typeof(Product));
 
 		public static readonly double rundrohr21mmAussenD = 0.021;
 		public static readonly double rundrohr21mmInnenD = 0.0162;
@@ -33,43 +36,43 @@ namespace Europlan.Common {
 		protected double requestedCoolLoad = 0;
 
 		#region Product Parameters
-		[ProductParameter]
+		[DoubleProductParameter(6.5)]
 		public static double ConfigAlphaDeckeHeat {
 			get { return alphaDeckeHeat; }
 			set { alphaDeckeHeat = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(10.8)]
 		public static double ConfigAlphaBodenHeat {
 			get { return alphaBodenHeat; }
 			set { alphaBodenHeat = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(8.0)]
 		public static double ConfigAlphaWandHeat {
 			get { return alphaWandHeat; }
 			set { alphaWandHeat = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(10.8)]
 		public static double ConfigAlphaDeckeCool {
 			get { return alphaDeckeCool; }
 			set { alphaDeckeCool = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(6.5)]
 		public static double ConfigAlphaBodenCool {
 			get { return alphaBodenCool; }
 			set { alphaBodenCool = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(8.0)]
 		public static double ConfigAlphaWandCool {
 			get { return alphaWandCool; }
 			set { alphaWandCool = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(70.0)]
 		public static double ConfigMaxCoolLoadPerSqm {
 			get { return maxCoolLoadPerSqm ; }
 			set { maxCoolLoadPerSqm = value; }
@@ -135,6 +138,13 @@ namespace Europlan.Common {
 			REST
 		}
 
+		public enum CalculateModeEnum {
+			NONE,
+			HEAT,
+			COOL,
+			HEAT_AND_COOL
+		}
+
 		protected int quickDimensioningCircuits = 0;
 		protected string quickDimensioningCircuitsAsString = null;
 		protected float quickDimensioningPlannedArea = 0;
@@ -166,6 +176,7 @@ namespace Europlan.Common {
 
 		protected string comment = null;
 		private Nullable<bool> graphicalMode = null;
+		protected CalculateModeEnum calculateMode = CalculateModeEnum.NONE;
 
 		protected SerializableDictionary<int, Circuit.CircuitConnection> connectedCircuits = new SerializableDictionary<int, Circuit.CircuitConnection>();
 		public SerializableDictionary<int, Circuit.CircuitConnection> ConnectedCircuits {
@@ -193,13 +204,31 @@ namespace Europlan.Common {
 			return null;
 		}
 
+		protected static void StaticInitialize<ProductType>(Configuration config) where ProductType : Product {
+			foreach (System.Reflection.PropertyInfo info in typeof(ProductType).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.GetProperty)) {
+				object[] attributes = info.GetCustomAttributes(typeof(ProductParameterAttribute), false);
+				if (attributes.Length > 0) {
+					ProductParameterAttribute ppa = attributes[0] as ProductParameterAttribute;
+					if (ppa.DefaultValue.GetType() == info.PropertyType) {
+						object value = config.GetProductParameterAsNativeType<ProductType>(info.Name);
+						if (value != null) {
+							info.SetValue(null, config.GetProductParameterAsNativeType<ProductType>(info.Name), null);
+						}
+					} else {
+						log.Warn("Error when trying to initialize Product Configuration: types don't match");
+					}
+				}
+			}
+		}
+
 		public static void StaticInitialize(Configuration config) {
-			Product.alphaBodenHeat = config.GetProductParameterAsDouble<Product>("ConfigAlphaBodenHeat", 10.8);
+			/*Product.alphaBodenHeat = config.GetProductParameterAsDouble<Product>("ConfigAlphaBodenHeat", 10.8);
 			Product.alphaDeckeHeat = config.GetProductParameterAsDouble<Product>("ConfigAlphaDeckeHeat", 6.5);
 			Product.alphaWandHeat = config.GetProductParameterAsDouble<Product>("ConfigAlphaWandHeat", 8.0);
 			Product.alphaBodenCool = config.GetProductParameterAsDouble<Product>("ConfigAlphaBodenCool", 6.5);
 			Product.alphaDeckeCool = config.GetProductParameterAsDouble<Product>("ConfigAlphaDeckeCool", 10.8);
-			Product.alphaWandCool = config.GetProductParameterAsDouble<Product>("ConfigAlphaWandCool", 8.0);
+			Product.alphaWandCool = config.GetProductParameterAsDouble<Product>("ConfigAlphaWandCool", 8.0);*/
+			StaticInitialize<Product>(config);
 		}
 
 		public Product() {
@@ -399,6 +428,15 @@ namespace Europlan.Common {
 		public string Comment {
 			get { return this.comment; }
 			set { this.comment = value; }
+		}
+
+		public CalculateModeEnum CalculateMode {
+			get { return this.calculateMode; }
+			set { this.calculateMode = value; }
+		}
+
+		public abstract CalculateModeEnum DefaultCalculateMode {
+			get;
 		}
 
 		public float AvailableFloorArea {
@@ -953,19 +991,19 @@ namespace Europlan.Common {
 			foreach (ConnectionPipe cp in this.PlannedConnectionPipes) {
 				vorlaufTotalFirst += cp.Vorlauf;
 				ruecklaufTotalFirst += cp.Ruecklauf;
-				if (cp.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) {
+				if (cp.InsulationForCalculation == ConnectionPipe.InsulationEnum.IN_NONE) {
 					vorlaufNotIsolatedFirst += cp.Vorlauf;
 				}
-				if (cp.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
+				if (cp.InsulationForCalculation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
 					ruecklaufNotIsolatedFirst += cp.Ruecklauf;
 				}
 				if (!cp.OnlyFirst) {
 					vorlaufTotalOthers += cp.Vorlauf;
 					ruecklaufTotalOthers += cp.Ruecklauf;
-					if (cp.Insulation == ConnectionPipe.InsulationEnum.IN_NONE) {
+					if (cp.InsulationForCalculation == ConnectionPipe.InsulationEnum.IN_NONE) {
 						vorlaufNotIsolatedOthers += cp.Vorlauf;
 					}
-					if (cp.Insulation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
+					if (cp.InsulationForCalculation != ConnectionPipe.InsulationEnum.IN_VL_RL) {
 						ruecklaufNotIsolatedOthers += cp.Ruecklauf;
 					}
 				}
@@ -1373,10 +1411,141 @@ namespace Europlan.Common {
 				return rtn;
 			}
 		}
+		protected void AddRequiredMaterialForConnections(SerializableDictionary<string, double> requiredMaterial, bool usePlus, double additional21mm) {
+			// Euroval Anbindung
+			// 21mm Anbindung
+			/*double pipeEurovalLength = 0;*/
+			double pipe21mm = additional21mm;
+			double circuit21mmFirstLength = 0;
+			double circuit21mmOthersLength = 0;
 
+			double pipeEcotherm = 0;
+			double clipschieneEcotherm = 0;
+			double muffeEcotherm = 0;
+
+			double pipeEuroval = 0;
+			double clipschieneEuroval = 0;
+			double clipschieneKlebebandEuroval = 0;
+			double ovalMuffeEuroval = 0;
+
+			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
+				if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+					if (pipe.OnlyFirst) {
+						pipe21mm += (pipe.Vorlauf + pipe.Ruecklauf);
+						circuit21mmFirstLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					} else {
+						pipe21mm += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+						circuit21mmFirstLength += (pipe.Vorlauf + pipe.Ruecklauf);
+						circuit21mmOthersLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					}
+
+				} else if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_ECOTHERM) {
+					if (pipe.OnlyFirst) {
+						pipeEcotherm += (pipe.Vorlauf + pipe.Ruecklauf);
+					} else {
+						pipeEcotherm += (pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount;
+					}
+
+					if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH) {
+						bool anhydritEstrich = false;
+						if (pipe.ConnectionThrough != null) {
+							if (pipe.ConnectionThrough.Product is EcothermProduct) {
+								anhydritEstrich = (pipe.ConnectionThrough.Product as EcothermProduct).UseAnhydritEstrich;
+							} else if (pipe.ConnectionThrough.Product is EurovalProduct) {
+								anhydritEstrich = (pipe.ConnectionThrough.Product as EurovalProduct).UseAnhydritEstrich;
+							}
+						}
+						clipschieneEcotherm += pipe.AreaTotal * EcothermProduct.GetClipschienePerSqm(ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart), anhydritEstrich);
+						muffeEcotherm += pipe.AreaTotal * EcothermProduct.GetMuffePerSqm(ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart));
+					}
+				} else if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_EUROVAL) {
+					if (pipe.OnlyFirst) {
+						pipeEuroval += (pipe.Vorlauf + pipe.Ruecklauf);
+					} else {
+						pipeEuroval += (pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount;
+					}
+
+					if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH) {
+						bool anhydritEstrich = false;
+						if (pipe.ConnectionThrough != null) {
+							if (pipe.ConnectionThrough.Product is EcothermProduct) {
+								anhydritEstrich = (pipe.ConnectionThrough.Product as EcothermProduct).UseAnhydritEstrich;
+							} else if (pipe.ConnectionThrough.Product is EurovalProduct) {
+								anhydritEstrich = (pipe.ConnectionThrough.Product as EurovalProduct).UseAnhydritEstrich;
+							}
+						}
+						bool clipschieneKlebeband = false;
+						if (pipe.ConnectionOf != null) {
+							if (pipe.ConnectionOf.Product is EurovalProduct) {
+								clipschieneKlebeband = (pipe.ConnectionOf.Product as EurovalProduct).UseClipSchieneKlebeband;
+							}
+						}
+						if (clipschieneKlebeband) {
+							clipschieneKlebebandEuroval += pipe.AreaTotal * EurovalProduct.GetClipschienePerSqm(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart), anhydritEstrich);
+						} else {
+							clipschieneEuroval += pipe.AreaTotal * EurovalProduct.GetClipschienePerSqm(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart), anhydritEstrich);
+						}
+						ovalMuffeEuroval += pipe.AreaTotal * EurovalProduct.GetOvalmuffePerSqm(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart));
+					}
+
+					// TODO
+					/*if (pipe.OnlyFirst) {
+						pipeEurovalLength += (pipe.Vorlauf + pipe.Ruecklauf);
+					} else {
+						pipeEurovalLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+					}*/
+				}
+			}
+			/*Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", pipeEurovalLength);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", pipe21mmLength);*/
+
+			// materials for 21mm pipe
+			// Muffe
+			if (usePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR55", pipe21mm * 0.3);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", pipe21mm * 0.3);
+			}
+
+			// Winkel 90°
+			if (usePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR56", pipe21mm * 0.8);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", pipe21mm * 0.8);
+			}
+
+			// Winkel 45°
+			if (usePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR57", GetWinkel45(circuit21mmFirstLength) + GetWinkel45(circuit21mmOthersLength) * (this.PlannedCircuitCount - 1));
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", GetWinkel45(circuit21mmFirstLength) + GetWinkel45(circuit21mmOthersLength) * (this.PlannedCircuitCount - 1));
+			}
+
+			// materials for ecotherm pipe
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EC01", pipeEcotherm);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EC02", clipschieneEcotherm);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EC06", muffeEcotherm);
+
+			// materials for euroval pipe
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", pipeEuroval);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV15", clipschieneEuroval);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV16", clipschieneKlebebandEuroval);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", ovalMuffeEuroval);
+		}
+
+		// for 21mm pipes
+		private double GetWinkel45(double lfm) {
+			if (lfm < 20) {
+				return 0;
+			} else {
+				return ((lfm / 10) - 1) * 2;
+			}
+		}
+		
 		public Nullable<bool> GraphicalMode {
 			get { return graphicalMode; }
 			set { graphicalMode = value; }
-		}
+		}		
+		
 	}
 }

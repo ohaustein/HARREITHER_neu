@@ -138,8 +138,12 @@ namespace Europlan.Common {
             get { return "Klimadecke.png"; }
 		}
 
+		public override Product.CalculateModeEnum DefaultCalculateMode {
+			get { return CalculateModeEnum.COOL; }
+		}
+
 		public new static void StaticInitialize(Configuration config) {
-			quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 80);
+			/*quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 80);
 			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 80);
 			canHeat = config.GetProductParameterAsBool<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCanHeat", true);
 			canCool = config.GetProductParameterAsBool<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCanCool", true);
@@ -155,7 +159,8 @@ namespace Europlan.Common {
 			spreizungKuehlMax = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMax", 5);
 			construction = config.GetProductParameterAsEnum<ModulKlimaDeckeProduct, ModulCeilingConstructionEnum>("ConfigModulCeilingConstruction", ModulCeilingConstructionEnum.C_PROFIL);
 			leistungsFaktorHeizen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.95);
-			leistungsFaktorKuehlen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.95);
+			leistungsFaktorKuehlen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.95);*/
+			Product.StaticInitialize<ModulKlimaDeckeProduct>(config);
 		}
 
 		public static string GlobalNotificationMessage {
@@ -163,7 +168,7 @@ namespace Europlan.Common {
 				string message = null;
 				Configuration userConfig = Configuration.UserTemplate;
 
-				double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.77);
+				double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen");
 				if (leistungsFaktorHeizen != defaultLeistungsFaktorHeizen) {
 					if (message == null) {
 						message = "";
@@ -176,7 +181,7 @@ namespace Europlan.Common {
 					message += newMsg;
 				}
 
-				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.77);
+				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen");
 				if (leistungsFaktorKuehlen != defaultLeistungsFaktorKuehlen) {
 					if (message == null) {
 						message = "";
@@ -205,7 +210,7 @@ namespace Europlan.Common {
 		}
 
 		#region Product Parameters
-		[ProductParameter]
+		[BoolProductParameter(true)]
 		public static bool ConfigQuickDimensioningCanHeat {
 			get { return canHeat; }
 			set { canHeat = value; }
@@ -214,7 +219,7 @@ namespace Europlan.Common {
 			get { return canHeat; }
 		}
 
-		[ProductParameter]
+		[BoolProductParameter(true)]
 		public static bool ConfigQuickDimensioningCanCool {
 			get { return canCool; }
 			set { canCool = value; }
@@ -223,7 +228,7 @@ namespace Europlan.Common {
 			get { return canCool; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(80)]
 		public static int ConfigQuickDimensioningHeatPowerPerSquareMeter {
 			get { return quickDimensioningHeatPowerPerSquareMeter; }
 			set { quickDimensioningHeatPowerPerSquareMeter = value; }
@@ -232,7 +237,7 @@ namespace Europlan.Common {
 			get { return quickDimensioningHeatPowerPerSquareMeter; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(80)]
 		public static int ConfigQuickDimensioningCoolPowerPerSquareMeter {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
 			set { quickDimensioningCoolPowerPerSquareMeter = value; }
@@ -241,13 +246,13 @@ namespace Europlan.Common {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.045)]
 		public static double ConfigSu0 {
 			get { return su0; }
 			set { su0 = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(10.8)]
 		public static double ConfigAlpha0 {
 			get { return alpha0; }
 			set { alpha0 = value; }
@@ -261,55 +266,55 @@ namespace Europlan.Common {
 		//    get { return Product.ConfigAlphaDecke; }
 		//}
 
-		[ProductParameter]
+		[DoubleProductParameter(1)]
 		public static double ConfigLambdaU0 {
 			get { return lambdaU0; }
 			set { lambdaU0 = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.11)]
 		public static double ConfigRLambdaDecke {
 			get { return rLambdaDecke; }
 			set { rLambdaDecke = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0)]
 		public static double ConfigRLambdaDach {
 			get { return rLambdaDach; }
 			set { rLambdaDach = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(1.06)]
 		public static double ConfigAtmt {
 			get { return atmt; }
 			set { atmt = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(6.5)]
 		public static double ConfigB {
 			get { return b; }
 			set { b = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.95)]
 		public static double ConfigLeistungsFaktorHeizen {
 			get { return leistungsFaktorHeizen; }
 			set { leistungsFaktorHeizen = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.95)]
 		public static double ConfigLeistungsFaktorKuehlen {
 			get { return leistungsFaktorKuehlen; }
 			set { leistungsFaktorKuehlen = value; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(15000)]
 		public static int ConfigMaxPressureLost {
 			get { return ModulKlimaDeckeProduct.maxPressureLost; }
 			set { ModulKlimaDeckeProduct.maxPressureLost = value; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(240)]
 		public static int ConfigMaxDurchfluss {
 			get { return ModulKlimaDeckeProduct.maxDurchfluss; }
 			set { ModulKlimaDeckeProduct.maxDurchfluss = value; }
@@ -318,72 +323,72 @@ namespace Europlan.Common {
 			get { return maxDurchfluss; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(20)]
 		public static int ConfigMaxModulesInRow {
 			get { return ModulKlimaDeckeProduct.maxModulesInRow; }
 			set { ModulKlimaDeckeProduct.maxModulesInRow = value; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(6)]
 		public static int ConfigMaxModulesInParallel {
 			get { return ModulKlimaDeckeProduct.maxModulesInParallel; }
 			set { ModulKlimaDeckeProduct.maxModulesInParallel = value; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(50)]
 		public static int ConfigModulesInCircuit {
 			get { return ModulKlimaDeckeProduct.maxModulesInCircuit; }
 			set { ModulKlimaDeckeProduct.maxModulesInCircuit = value; }
 		}
-		[ProductParameter]
+		[DoubleProductParameter(4)]
 		public static double ConfigSpreizungHeizMin {
 			get { return spreizungHeizMin; }
 			set { spreizungHeizMin = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(12)]
 		public static double ConfigSpreizungHeizMax {
 			get { return spreizungHeizMax; }
 			set { spreizungHeizMax = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(2)]
 		public static double ConfigSpreizungKuehlMin {
 			get { return spreizungKuehlMin; }
 			set { spreizungKuehlMin = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(5)]
 		public static double ConfigSpreizungKuehlMax {
 			get { return spreizungKuehlMax; }
 			set { spreizungKuehlMax = value; }
 		}
 
-		[ProductParameter]
+		[IntProductParameter(1)]
 		public static int ConfigModulCeilingConstruction {
 			get { return (int)ModulKlimaDeckeProduct.construction; }
 			set { ModulKlimaDeckeProduct.construction = (ModulCeilingConstructionEnum)value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(1000)]
 		public static double ConfigRho {
 			get { return rho; }
 			set { rho = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(4.19)]
 		public static double ConfigC {
 			get { return c; }
 			set { c = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(0.00000101)]
 		public static double ConfigV {
 			get { return v; }
 			set { v = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1}")]
 		public static string ConfigDruckverlustModul_120_30String {
 			get {
 				return ConvertArrayToString(druckverlustModul_120_30);
@@ -400,7 +405,7 @@ namespace Europlan.Common {
 			set { druckverlustModul_120_30 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3}")]
 		public static string ConfigDruckverlustModul_100_30String {
 			get {
 				return ConvertArrayToString(druckverlustModul_100_30);
@@ -417,7 +422,7 @@ namespace Europlan.Common {
 			set { druckverlustModul_100_30 = value; }
 		}
 
-		[ProductParameter]
+		[StringProductParameter("{0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3}")]
 		public static string ConfigDruckverlustModul_80_30String {
 			get {
 				return ConvertArrayToString(druckverlustModul_80_30);
@@ -434,7 +439,7 @@ namespace Europlan.Common {
 			set { druckverlustModul_80_30 = value; }
 		}
 
-		[ProductParameter]
+		[DoubleProductParameter(29)]
 		public static double ConfigMaxCeilingTempHeat {
 			get { return maxCeilingTempHeat; }
 			set { maxCeilingTempHeat = value; }
@@ -1063,31 +1068,7 @@ namespace Europlan.Common {
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 
-			// Euroval Anbindung
-			// 21mm Anbindung
-			double pipeEurovalLength = 0;
-			double pipe21mmLength = 0;
-			double circuit21mmOnlyFirstLength = 0;
-			double circuit21mmAllLength = 0;
-			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
-				if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
-					if (pipe.OnlyFirst) {
-						pipe21mmLength += (pipe.Vorlauf + pipe.Ruecklauf);
-						circuit21mmOnlyFirstLength += (pipe.Vorlauf + pipe.Ruecklauf);
-					} else {
-						pipe21mmLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
-						circuit21mmAllLength += (pipe.Vorlauf + pipe.Ruecklauf);
-					}
-
-				} else {
-					if (pipe.OnlyFirst) {
-						pipeEurovalLength += (pipe.Vorlauf + pipe.Ruecklauf);
-					} else {
-						pipeEurovalLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
-					}
-				}
-			}
-
+			double additional21mm = 0;
 			int nrOfElements = 0;
 			int nrOfOtherElements = 0;
 			int rows = 0;
@@ -1098,8 +1079,8 @@ namespace Europlan.Common {
 					subAreas++;
 					foreach (KlimaFlaechenList row in subArea.Rows) {
 						rows++;
-						pipe21mmLength += row.LengthVerbindeleitungen;
-						pipe21mmLength += 1.4;
+						additional21mm += row.LengthVerbindeleitungen;
+						additional21mm += 1.4;
 						foreach (KlimaFlaechenModul modul in row.List) {
 							// Modul
 							Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
@@ -1113,18 +1094,9 @@ namespace Europlan.Common {
 				}
 			}
 
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", pipeEurovalLength);
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", pipe21mmLength);
+			this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm);
 
 			// Muffe
-			if (circuit21mmOnlyFirstLength > 0) {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", (circuit21mmOnlyFirstLength + circuit21mmAllLength) / 2);
-				if (this.PlannedCircuitCount > 1) {
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", circuit21mmAllLength * (this.PlannedCircuitCount - 1) / 2);
-				}
-			} else {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", circuit21mmAllLength * this.PlannedCircuitCount / 2);
-			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
 
 			// T-Stück
