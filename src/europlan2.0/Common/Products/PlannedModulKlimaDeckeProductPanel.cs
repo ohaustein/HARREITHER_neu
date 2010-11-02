@@ -235,35 +235,44 @@ namespace Europlan.Common {
 				//lblTempCool.Visible = showCool;
 				//lblTempCoolUnit.Visible = showCool;
 
-				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
-					this.rbLayoutTable.Checked = !this.product.Product.GraphicalLayout;
-					this.rbLayoutGraphical.Checked = !this.product.Product.GraphicalLayout;
+				if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
+					this.rbLayoutTable.Enabled = true;
+					this.rbLayoutGraphical.Enabled = true;
+				} else {
+					this.rbLayoutTable.Enabled = false;
+					this.rbLayoutGraphical.Enabled = false;
 				}
 
-				if (this.product.Product.GraphicalLayout) {
+				bool graphicalMode = false;
+				if (this.product.Product.GraphicalMode.HasValue) {
+					graphicalMode = this.product.Product.GraphicalMode.Value;
+				} else {
+					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
+						graphicalMode = true;
+						this.product.Product.GraphicalMode = true;
+					} else {
+						graphicalMode = false;
+						this.product.Product.GraphicalMode = false;
+					}
+				}
+
+				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
+					this.rbLayoutTable.Checked = !graphicalMode;
+					this.rbLayoutGraphical.Checked = graphicalMode;
+				}
+
+				if (graphicalMode) {
 					this.numArea.Enabled = false;
 					this.numAreaPercentage.Enabled = false;
 					this.numAreaUnheated.Enabled = false;
-					this.btnAddHk.Enabled = false;
-					this.btnRemoveHk.Enabled = false;
-					this.btnAddSubarea.Enabled = false;
-					this.btnRemoveSubarea.Enabled = false;
-					this.btnAddRow.Enabled = false;
-					this.btnRemoveRow.Enabled = false;
 					this.dgvModules.Enabled = false;
-					this.btnGraphical.Visible = true;
+					this.btnGraphical.Enabled = true;
 				} else {
 					this.numArea.Enabled = true;
 					this.numAreaPercentage.Enabled = true;
 					this.numAreaUnheated.Enabled = true;
-					this.btnAddHk.Enabled = true;
-					this.btnRemoveHk.Enabled = true;
-					this.btnAddSubarea.Enabled = true;
-					this.btnRemoveSubarea.Enabled = true;
-					this.btnAddRow.Enabled = true;
-					this.btnRemoveRow.Enabled = true;
 					this.dgvModules.Enabled = true;
-					this.btnGraphical.Visible = true;
+					this.btnGraphical.Enabled = false;
 				}
 
 				this.numArea.MaxValue = (decimal)mdProduct.AvailableCeilingArea;
@@ -415,8 +424,13 @@ namespace Europlan.Common {
 					if (lstCircuits.Items.Count > 0) {
 						lstCircuits.SelectedIndex = 0;
 					}
-					btnAddHk.Enabled = lstCircuits.Items.Count < 12;
-					btnRemoveHk.Enabled = lstCircuits.Items.Count > 1;
+					if (graphicalMode) {
+						btnAddHk.Enabled = false;
+						btnRemoveHk.Enabled = false;
+					} else {
+						btnAddHk.Enabled = lstCircuits.Items.Count < 12;
+						btnRemoveHk.Enabled = lstCircuits.Items.Count > 1;
+					}
 				}
 				if (this.lstCircuits.SelectedIndex < 0) {
 					this.lstCircuits.SelectedIndex = 0;
@@ -434,8 +448,13 @@ namespace Europlan.Common {
 					if (lstSubarea.Items.Count > 0) {
 						lstSubarea.SelectedIndex = 0;
 					}
-					btnAddSubarea.Enabled = lstSubarea.Items.Count < 12;
-					btnRemoveSubarea.Enabled = lstSubarea.Items.Count > 1;
+					if (graphicalMode) {
+						btnAddSubarea.Enabled = false;
+						btnRemoveSubarea.Enabled = false;
+					} else {
+						btnAddSubarea.Enabled = lstSubarea.Items.Count < 12;
+						btnRemoveSubarea.Enabled = lstSubarea.Items.Count > 1;
+					}
 				}
 				if (this.lstSubarea.SelectedIndex < 0) {
 					this.lstSubarea.SelectedIndex = 0;
@@ -454,8 +473,15 @@ namespace Europlan.Common {
 						lstRows.SelectedIndex = 0;
 					}
 					//btnAddRow.Enabled = lstCircuits.SelectedIndex >= 0 && lstRows.Items.Count < ModulKlimaDeckeProduct.ConfigMaxModulesInParallel;
-					btnRemoveRow.Enabled = lstRows.Items.Count > 1;
-					numLength.Enabled = lstRows.SelectedIndex >= 0;
+					if (graphicalMode) {
+						btnAddRow.Enabled = false;
+						btnRemoveRow.Enabled = false;
+						numLength.Enabled = false;
+					} else {
+						btnAddRow.Enabled = true;
+						btnRemoveRow.Enabled = lstRows.Items.Count > 1;
+						numLength.Enabled = lstRows.SelectedIndex >= 0;
+					}
 				}
 				if (this.lstRows.SelectedIndex < 0) {
 					this.lstSubarea.SelectedIndex = 0;
@@ -463,7 +489,11 @@ namespace Europlan.Common {
 				this.selectedRow = this.selectedSubArea.Rows[this.lstRows.SelectedIndex];
 				if ((skipFields & FieldEnum.MODULES) == FieldEnum.NONE) {
 					dgvModules.Row = this.selectedRow.List;
-					numLength.Enabled = this.selectedRow.List.Count > 0;
+					if (graphicalMode) {
+						numLength.Enabled = false;
+					} else {
+						numLength.Enabled = this.selectedRow.List.Count > 0;
+					}
 				}
 				if ((skipFields & FieldEnum.LENGTH_VERBINDUNGEN) == FieldEnum.NONE) {
 					this.numLength.Value = (decimal)this.selectedRow.LengthVerbindeleitungen;
@@ -931,7 +961,11 @@ namespace Europlan.Common {
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			this.errorMsg = this.product.Product.LastErrorMessage;
 			this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.SUBAREA | FieldEnum.ROWS | FieldEnum.MODULES);
-			numLength.Enabled = this.selectedRow.List.Count > 0;
+			if (rbLayoutGraphical.Checked) {
+				numLength.Enabled = false;
+			} else {
+				numLength.Enabled = this.selectedRow.List.Count > 0;
+			}
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
@@ -1007,6 +1041,16 @@ namespace Europlan.Common {
 			if (this.product != null) {
 				Europlan.Common.Products.ModulKlimaDeckePlannerForm form = new Europlan.Common.Products.ModulKlimaDeckePlannerForm(this.product.Product as ModulKlimaDeckeProduct);
 				form.Show();
+				form.Dispose();
+			}
+		}
+
+		private void rbGraphical_CheckedChanged(object sender, EventArgs e) {
+			// TODO check if change is intentionally
+			this.product.Product.GraphicalMode = rbLayoutGraphical.Checked;
+			this.UpdateControl(FieldEnum.LAYOUT_TYPE);
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
 			}
 		}
 		

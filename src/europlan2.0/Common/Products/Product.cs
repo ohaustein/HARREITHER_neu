@@ -165,6 +165,7 @@ namespace Europlan.Common {
 		protected bool stellMotore = false;
 
 		protected string comment = null;
+		private Nullable<bool> graphicalMode = null;
 
 		protected SerializableDictionary<int, Circuit.CircuitConnection> connectedCircuits = new SerializableDictionary<int, Circuit.CircuitConnection>();
 		public SerializableDictionary<int, Circuit.CircuitConnection> ConnectedCircuits {
@@ -1373,8 +1374,9 @@ namespace Europlan.Common {
 			}
 		}
 
-		public bool GraphicalLayout {
-			get { return false; }
+		public Nullable<bool> GraphicalMode {
+			get { return graphicalMode; }
+			set { graphicalMode = value; }
 		}
 	}
 }
