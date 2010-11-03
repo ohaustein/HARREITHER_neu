@@ -1225,12 +1225,12 @@ namespace Europlan.Common {
 					foreach (ModulDeckeSubArea subArea in c.SubAreas) {
 						foreach (KlimaFlaechenList row in subArea.Rows) {
 							if (row.List.Count > 0) {
-								return true;
+								return false;
 							}
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		}
 	}
