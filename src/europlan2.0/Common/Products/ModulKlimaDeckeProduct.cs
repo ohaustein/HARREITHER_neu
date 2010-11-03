@@ -1217,6 +1217,22 @@ namespace Europlan.Common {
 			get { return this.graphConstruction; }
 			set { this.graphConstruction = value; }
 		}
+
+		[XmlIgnore]
+		public override bool AllowToSwitchMode {
+			get {
+				foreach (ModulDeckeCircuit c in this.circuits) {
+					foreach (ModulDeckeSubArea subArea in c.SubAreas) {
+						foreach (KlimaFlaechenList row in subArea.Rows) {
+							if (row.List.Count > 0) {
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+			}
+		}
 	}
 	
 }

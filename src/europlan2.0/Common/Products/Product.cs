@@ -1547,5 +1547,9 @@ namespace Europlan.Common {
 			set { graphicalMode = value; }
 		}		
 		
+		[XmlIgnore]
+		public virtual bool AllowToSwitchMode {
+			get { return false; }
+		}
 	}
 }
