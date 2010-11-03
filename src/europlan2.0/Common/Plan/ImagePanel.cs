@@ -29,6 +29,7 @@ namespace Europlan.Common {
 		private bool inMove = false;
 		private bool shiftPressed = false;
 		private Cursor tempCursor = Cursors.Default;
+		private bool mouseDown = false;
 
 		private float angle = 0;
 		private float xPos = 0;
@@ -257,6 +258,7 @@ namespace Europlan.Common {
 
 		protected override void OnMouseDown(MouseEventArgs e) {
 			base.OnMouseDown(e);
+			mouseDown = true;
 			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
 				Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 				PointF[] arr = new PointF[] { mousePosInCtrl };
@@ -301,6 +303,7 @@ namespace Europlan.Common {
 
 		protected override void OnMouseUp(MouseEventArgs e) {
 			base.OnMouseUp(e);
+			mouseDown = false;
 			bool invalidate = false;
 			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
 				Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
@@ -380,7 +383,7 @@ namespace Europlan.Common {
 				invalidate = this.productPlanner.PlannerMouseMove(new WW.Math.Point2D(arr[0].X, arr[0].Y), mousePosInCtrl, e.Button);
 			}
 
-			if ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle)) {
+			if (mouseDown && ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle))) {
 				unsavedChanges = true;
 
 				mouseUpX = arr[0].X;
