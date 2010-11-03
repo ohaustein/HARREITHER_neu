@@ -68,9 +68,10 @@ namespace Europlan.Common {
 			this.pageInput = new System.Windows.Forms.TabPage();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.groupBox11 = new System.Windows.Forms.GroupBox();
+			this.panel3 = new System.Windows.Forms.Panel();
+			this.rbLayoutTable = new System.Windows.Forms.RadioButton();
 			this.rbLayoutGraphical = new System.Windows.Forms.RadioButton();
 			this.lblCalculateMode = new System.Windows.Forms.Label();
-			this.rbLayoutTable = new System.Windows.Forms.RadioButton();
 			this.rbHeatAndCool = new System.Windows.Forms.RadioButton();
 			this.lblLayoutType = new System.Windows.Forms.Label();
 			this.rbCool = new System.Windows.Forms.RadioButton();
@@ -167,20 +168,19 @@ namespace Europlan.Common {
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.lblTitle = new System.Windows.Forms.Label();
-			this.panel3 = new System.Windows.Forms.Panel();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
 			this.pageInput.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.groupBox11.SuspendLayout();
+			this.panel3.SuspendLayout();
 			this.pageCircuit.SuspendLayout();
 			this.groupBox10.SuspendLayout();
 			this.groupBox9.SuspendLayout();
 			this.pageConstruction.SuspendLayout();
 			this.panel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-			this.panel3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// grpPowerArea
@@ -217,7 +217,7 @@ namespace Europlan.Common {
 			this.grpPowerArea.MinimumSize = new System.Drawing.Size(640, 0);
 			this.grpPowerArea.Name = "grpPowerArea";
 			this.grpPowerArea.Size = new System.Drawing.Size(887, 145);
-			this.grpPowerArea.TabIndex = 0;
+			this.grpPowerArea.TabIndex = 1;
 			this.grpPowerArea.TabStop = false;
 			// 
 			// btnRestkaelte
@@ -622,7 +622,7 @@ namespace Europlan.Common {
 			this.groupBox1.MinimumSize = new System.Drawing.Size(640, 0);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(887, 119);
-			this.groupBox1.TabIndex = 1;
+			this.groupBox1.TabIndex = 2;
 			this.groupBox1.TabStop = false;
 			// 
 			// label27
@@ -828,8 +828,30 @@ namespace Europlan.Common {
 			this.groupBox11.Location = new System.Drawing.Point(0, 3);
 			this.groupBox11.Name = "groupBox11";
 			this.groupBox11.Size = new System.Drawing.Size(887, 92);
-			this.groupBox11.TabIndex = 27;
+			this.groupBox11.TabIndex = 0;
 			this.groupBox11.TabStop = false;
+			// 
+			// panel3
+			// 
+			this.panel3.Controls.Add(this.rbLayoutTable);
+			this.panel3.Controls.Add(this.rbLayoutGraphical);
+			this.panel3.Location = new System.Drawing.Point(488, 12);
+			this.panel3.Name = "panel3";
+			this.panel3.Size = new System.Drawing.Size(200, 70);
+			this.panel3.TabIndex = 4;
+			// 
+			// rbLayoutTable
+			// 
+			this.rbLayoutTable.AutoSize = true;
+			this.rbLayoutTable.Checked = true;
+			this.rbLayoutTable.Location = new System.Drawing.Point(0, 7);
+			this.rbLayoutTable.Name = "rbLayoutTable";
+			this.rbLayoutTable.Size = new System.Drawing.Size(78, 17);
+			this.rbLayoutTable.TabIndex = 2;
+			this.rbLayoutTable.TabStop = true;
+			this.rbLayoutTable.Text = "tabellarisch";
+			this.rbLayoutTable.UseVisualStyleBackColor = true;
+			this.rbLayoutTable.CheckedChanged += new System.EventHandler(this.rbGraphical_CheckedChanged);
 			// 
 			// rbLayoutGraphical
 			// 
@@ -849,19 +871,6 @@ namespace Europlan.Common {
 			this.lblCalculateMode.Size = new System.Drawing.Size(231, 13);
 			this.lblCalculateMode.TabIndex = 3;
 			this.lblCalculateMode.Text = "Verwendungszweck:";
-			// 
-			// rbLayoutTable
-			// 
-			this.rbLayoutTable.AutoSize = true;
-			this.rbLayoutTable.Checked = true;
-			this.rbLayoutTable.Location = new System.Drawing.Point(0, 7);
-			this.rbLayoutTable.Name = "rbLayoutTable";
-			this.rbLayoutTable.Size = new System.Drawing.Size(78, 17);
-			this.rbLayoutTable.TabIndex = 2;
-			this.rbLayoutTable.TabStop = true;
-			this.rbLayoutTable.Text = "tabellarisch";
-			this.rbLayoutTable.UseVisualStyleBackColor = true;
-			this.rbLayoutTable.CheckedChanged += new System.EventHandler(this.rbGraphical_CheckedChanged);
 			// 
 			// rbHeatAndCool
 			// 
@@ -1100,7 +1109,7 @@ namespace Europlan.Common {
 			// btnGraphical
 			// 
 			this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnGraphical.Location = new System.Drawing.Point(682, 32);
+			this.btnGraphical.Location = new System.Drawing.Point(665, 32);
 			this.btnGraphical.Name = "btnGraphical";
 			this.btnGraphical.Size = new System.Drawing.Size(167, 23);
 			this.btnGraphical.TabIndex = 169;
@@ -1122,7 +1131,7 @@ namespace Europlan.Common {
 			this.lstError.Location = new System.Drawing.Point(3, 557);
 			this.lstError.Name = "lstError";
 			this.lstError.ShowGroups = false;
-			this.lstError.Size = new System.Drawing.Size(812, 30);
+			this.lstError.Size = new System.Drawing.Size(795, 30);
 			this.lstError.TabIndex = 168;
 			this.lstError.UseCompatibleStateImageBehavior = false;
 			this.lstError.View = System.Windows.Forms.View.Details;
@@ -1670,7 +1679,7 @@ namespace Europlan.Common {
 			// btnConnectionPipes
 			// 
 			this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnConnectionPipes.Location = new System.Drawing.Point(682, 3);
+			this.btnConnectionPipes.Location = new System.Drawing.Point(665, 3);
 			this.btnConnectionPipes.Name = "btnConnectionPipes";
 			this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
 			this.btnConnectionPipes.TabIndex = 73;
@@ -1730,7 +1739,7 @@ namespace Europlan.Common {
 			this.dgvModules.Boden = false;
 			this.dgvModules.Location = new System.Drawing.Point(340, 43);
 			this.dgvModules.Name = "dgvModules";
-			this.dgvModules.Size = new System.Drawing.Size(488, 212);
+			this.dgvModules.Size = new System.Drawing.Size(471, 212);
 			this.dgvModules.TabIndex = 34;
 			this.dgvModules.GridContentChanged += new Europlan.Common.KlimaFlaechenModulGridContentChangedHandler(this.dgvModules_GridContentChanged);
 			// 
@@ -1835,15 +1844,6 @@ namespace Europlan.Common {
 			this.lblTitle.TabIndex = 83;
 			this.lblTitle.Text = "Modul Klima-Decke";
 			// 
-			// panel3
-			// 
-			this.panel3.Controls.Add(this.rbLayoutTable);
-			this.panel3.Controls.Add(this.rbLayoutGraphical);
-			this.panel3.Location = new System.Drawing.Point(488, 12);
-			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(200, 70);
-			this.panel3.TabIndex = 4;
-			// 
 			// PlannedModulKlimaDeckeProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1862,6 +1862,8 @@ namespace Europlan.Common {
 			this.panel1.ResumeLayout(false);
 			this.groupBox11.ResumeLayout(false);
 			this.groupBox11.PerformLayout();
+			this.panel3.ResumeLayout(false);
+			this.panel3.PerformLayout();
 			this.pageCircuit.ResumeLayout(false);
 			this.groupBox10.ResumeLayout(false);
 			this.groupBox9.ResumeLayout(false);
@@ -1870,8 +1872,6 @@ namespace Europlan.Common {
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-			this.panel3.ResumeLayout(false);
-			this.panel3.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

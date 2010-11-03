@@ -205,7 +205,7 @@ namespace Europlan.Common {
 			this.grpPowerArea.MinimumSize = new System.Drawing.Size(640, 0);
 			this.grpPowerArea.Name = "grpPowerArea";
 			this.grpPowerArea.Size = new System.Drawing.Size(884, 121);
-			this.grpPowerArea.TabIndex = 0;
+			this.grpPowerArea.TabIndex = 1;
 			this.grpPowerArea.TabStop = false;
 			// 
 			// btnRestkaelte
@@ -605,7 +605,7 @@ namespace Europlan.Common {
 			this.groupBox11.Location = new System.Drawing.Point(0, 3);
 			this.groupBox11.Name = "groupBox11";
 			this.groupBox11.Size = new System.Drawing.Size(884, 92);
-			this.groupBox11.TabIndex = 4;
+			this.groupBox11.TabIndex = 0;
 			this.groupBox11.TabStop = false;
 			// 
 			// lblCalculateMode

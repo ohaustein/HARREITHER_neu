@@ -236,7 +236,7 @@ namespace Europlan.Common {
 			this.grpPowerArea.MinimumSize = new System.Drawing.Size(640, 0);
 			this.grpPowerArea.Name = "grpPowerArea";
 			this.grpPowerArea.Size = new System.Drawing.Size(884, 146);
-			this.grpPowerArea.TabIndex = 0;
+			this.grpPowerArea.TabIndex = 1;
 			this.grpPowerArea.TabStop = false;
 			// 
 			// btnRestkaelte
@@ -672,7 +672,7 @@ namespace Europlan.Common {
 			this.groupBox1.MinimumSize = new System.Drawing.Size(640, 0);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(884, 119);
-			this.groupBox1.TabIndex = 1;
+			this.groupBox1.TabIndex = 2;
 			this.groupBox1.TabStop = false;
 			// 
 			// chkAnhydritEstrich
@@ -899,7 +899,7 @@ namespace Europlan.Common {
 			this.groupBox11.Location = new System.Drawing.Point(0, 3);
 			this.groupBox11.Name = "groupBox11";
 			this.groupBox11.Size = new System.Drawing.Size(884, 92);
-			this.groupBox11.TabIndex = 4;
+			this.groupBox11.TabIndex = 0;
 			this.groupBox11.TabStop = false;
 			// 
 			// lblCalculateMode
@@ -961,7 +961,7 @@ namespace Europlan.Common {
 			this.groupBox6.MinimumSize = new System.Drawing.Size(640, 0);
 			this.groupBox6.Name = "groupBox6";
 			this.groupBox6.Size = new System.Drawing.Size(884, 110);
-			this.groupBox6.TabIndex = 2;
+			this.groupBox6.TabIndex = 3;
 			this.groupBox6.TabStop = false;
 			// 
 			// cbSeparateCircuit

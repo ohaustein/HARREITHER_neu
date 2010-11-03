@@ -24,15 +24,15 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle105 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle110 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle111 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle106 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle107 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle108 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle109 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlannedHithermProductPanel));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle112 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.pageCircuit = new System.Windows.Forms.TabPage();
 			this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -333,7 +333,7 @@ namespace Europlan.Common {
 			this.grpPowerArea.MinimumSize = new System.Drawing.Size(640, 0);
 			this.grpPowerArea.Name = "grpPowerArea";
 			this.grpPowerArea.Size = new System.Drawing.Size(884, 121);
-			this.grpPowerArea.TabIndex = 0;
+			this.grpPowerArea.TabIndex = 1;
 			this.grpPowerArea.TabStop = false;
 			// 
 			// btnRestkaelte
@@ -691,7 +691,7 @@ namespace Europlan.Common {
 			this.groupBox11.Location = new System.Drawing.Point(3, 6);
 			this.groupBox11.Name = "groupBox11";
 			this.groupBox11.Size = new System.Drawing.Size(884, 92);
-			this.groupBox11.TabIndex = 4;
+			this.groupBox11.TabIndex = 0;
 			this.groupBox11.TabStop = false;
 			// 
 			// lblCalculateMode
@@ -780,7 +780,7 @@ namespace Europlan.Common {
 			this.pageAuslegung.Location = new System.Drawing.Point(4, 22);
 			this.pageAuslegung.Name = "pageAuslegung";
 			this.pageAuslegung.Padding = new System.Windows.Forms.Padding(3);
-			this.pageAuslegung.Size = new System.Drawing.Size(892, 536);
+			this.pageAuslegung.Size = new System.Drawing.Size(892, 535);
 			this.pageAuslegung.TabIndex = 1;
 			this.pageAuslegung.Text = "Auslegung";
 			this.pageAuslegung.UseVisualStyleBackColor = true;
@@ -975,14 +975,14 @@ namespace Europlan.Common {
 			// dgvRegisters
 			// 
 			this.dgvRegisters.AutoGenerateColumns = false;
-			dataGridViewCellStyle105.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle105.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle105.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle105.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle105.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle105.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle105.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dgvRegisters.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle105;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvRegisters.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.dgvRegisters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvRegisters.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.registerTypeDataGridViewTextBoxColumn,
@@ -999,25 +999,25 @@ namespace Europlan.Common {
             this.PlannedProduct});
 			this.dgvRegisters.Controls.Add(this.btnSelectWall);
 			this.dgvRegisters.DataSource = this.hithermRegisterBindingSource;
-			dataGridViewCellStyle110.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle110.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle110.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle110.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle110.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle110.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle110.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dgvRegisters.DefaultCellStyle = dataGridViewCellStyle110;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dgvRegisters.DefaultCellStyle = dataGridViewCellStyle6;
 			this.dgvRegisters.Location = new System.Drawing.Point(7, 4);
 			this.dgvRegisters.MultiSelect = false;
 			this.dgvRegisters.Name = "dgvRegisters";
-			dataGridViewCellStyle111.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle111.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle111.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle111.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle111.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle111.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle111.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dgvRegisters.RowHeadersDefaultCellStyle = dataGridViewCellStyle111;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvRegisters.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
 			this.dgvRegisters.Size = new System.Drawing.Size(667, 280);
 			this.dgvRegisters.TabIndex = 139;
 			this.dgvRegisters.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRegisters_CellValueChanged);
@@ -1041,9 +1041,9 @@ namespace Europlan.Common {
 			// RegisterBreite
 			// 
 			this.RegisterBreite.DataPropertyName = "RegisterBreite";
-			dataGridViewCellStyle106.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle106.Format = "F0";
-			this.RegisterBreite.DefaultCellStyle = dataGridViewCellStyle106;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle2.Format = "F0";
+			this.RegisterBreite.DefaultCellStyle = dataGridViewCellStyle2;
 			this.RegisterBreite.FillWeight = 80F;
 			this.RegisterBreite.HeaderText = "Breite\n(cm)";
 			this.RegisterBreite.Name = "RegisterBreite";
@@ -1071,9 +1071,9 @@ namespace Europlan.Common {
 			// heizkreisDataGridViewTextBoxColumn
 			// 
 			this.heizkreisDataGridViewTextBoxColumn.DataPropertyName = "Heizkreis";
-			dataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle107.Format = "F0";
-			this.heizkreisDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle107;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle3.Format = "F0";
+			this.heizkreisDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.heizkreisDataGridViewTextBoxColumn.FillWeight = 50F;
 			this.heizkreisDataGridViewTextBoxColumn.HeaderText = "HK";
 			this.heizkreisDataGridViewTextBoxColumn.Name = "heizkreisDataGridViewTextBoxColumn";
@@ -1084,9 +1084,9 @@ namespace Europlan.Common {
 			// pipeHorizontalDataGridViewTextBoxColumn
 			// 
 			this.pipeHorizontalDataGridViewTextBoxColumn.DataPropertyName = "PipeHorizontal";
-			dataGridViewCellStyle108.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle108.Format = "F2";
-			this.pipeHorizontalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle108;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle4.Format = "F2";
+			this.pipeHorizontalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
 			this.pipeHorizontalDataGridViewTextBoxColumn.HeaderText = "Leitung\nwaagr.\n(m)";
 			this.pipeHorizontalDataGridViewTextBoxColumn.Name = "pipeHorizontalDataGridViewTextBoxColumn";
 			this.pipeHorizontalDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
@@ -1095,9 +1095,9 @@ namespace Europlan.Common {
 			// pipeVerticalDataGridViewTextBoxColumn
 			// 
 			this.pipeVerticalDataGridViewTextBoxColumn.DataPropertyName = "PipeVertical";
-			dataGridViewCellStyle109.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle109.Format = "F2";
-			this.pipeVerticalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle109;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle5.Format = "F2";
+			this.pipeVerticalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
 			this.pipeVerticalDataGridViewTextBoxColumn.HeaderText = "Leitung\nsenkr.\n(m)";
 			this.pipeVerticalDataGridViewTextBoxColumn.Name = "pipeVerticalDataGridViewTextBoxColumn";
 			this.pipeVerticalDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
@@ -1571,9 +1571,9 @@ namespace Europlan.Common {
 			// numericColumn1
 			// 
 			this.numericColumn1.DataPropertyName = "RegisterBreite";
-			dataGridViewCellStyle112.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle112.Format = "F0";
-			this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle112;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle8.Format = "F0";
+			this.numericColumn1.DefaultCellStyle = dataGridViewCellStyle8;
 			this.numericColumn1.FillWeight = 80F;
 			this.numericColumn1.HeaderText = "Breite\n(cm)";
 			this.numericColumn1.Name = "numericColumn1";
