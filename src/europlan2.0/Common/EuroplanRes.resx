@@ -3374,6 +3374,15 @@ recht</value>
   <data name="PlannedModulKlimaBodenProductPanel_SonstigeModule" xml:space="preserve">
     <value>Sonstige Module:</value>
   </data>
+  <data name="PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Grafisch" xml:space="preserve">
+    <value>Wollen Sie tatsächlich von der grafischen zu der tabellarischen Auslegungsart wechseln? Bitte beachten Sie, dass bereits ausgelegte Module erhalten bleiben, aber kein erneuter Wechsel zurück zur Grafischen Auslegung möglich ist. Trotzdem fortfahren?</value>
+  </data>
+  <data name="PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Tabellarisch" xml:space="preserve">
+    <value>Wollen Sie tatsächlich von der tabellarischen zu der grafischen Auslegungsart wechseln? Bitte beachten Sie, dass bereits ausgelegte Module verloren gehen. Trotzdem fortfahren?</value>
+  </data>
+  <data name="PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Titel" xml:space="preserve">
+    <value>Auslegungsart ändern?</value>
+  </data>
   <data name="PlannedModulKlimaDeckeProductPanel_ErklaerungVerbindeleitungen" xml:space="preserve">
     <value>(Pro Winkel zusätzlich 1m Verbindungsleitung)</value>
   </data>

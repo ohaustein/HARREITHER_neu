@@ -11,6 +11,7 @@ namespace Europlan.Common {
 		private PlannedProduct product = null;
 
 		private bool gridContentChanged = false;
+		private bool updateOngoing = false;
 
 		public PlannedModulKlimaDeckeProductPanel() {
 			InitializeComponent();
@@ -184,6 +185,7 @@ namespace Europlan.Common {
 		private int ignoreLayoutType = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
+			updateOngoing = true;
 			if (this.product != null) {
 				ignoreCoverHeatLoad++;
 				ignoreHeatLoad++;
@@ -268,8 +270,11 @@ namespace Europlan.Common {
 				}
 
 				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
-					this.rbLayoutTable.Checked = !graphicalMode;
-					this.rbLayoutGraphical.Checked = graphicalMode;
+					if (graphicalMode) {
+						this.rbLayoutGraphical.Checked = true;
+					} else {
+						this.rbLayoutTable.Checked = true;
+					}
 				}
 
 				if (graphicalMode) {
@@ -640,6 +645,7 @@ namespace Europlan.Common {
 				ignoreCalculationMode--;
 				ignoreLayoutType--;
 			}
+			updateOngoing = false;
 			// TODO
 		}
 
@@ -1137,11 +1143,36 @@ namespace Europlan.Common {
 		}
 
 		private void rbGraphical_CheckedChanged(object sender, EventArgs e) {
-			// TODO check if change is intentionally
-			this.product.Product.GraphicalMode = rbLayoutGraphical.Checked;
-			this.UpdateControl(FieldEnum.LAYOUT_TYPE);
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (!updateOngoing && (sender as RadioButton).Checked) {
+				if (this.product.Product.GraphicalMode.HasValue && this.product.Product.GraphicalMode.Value != rbLayoutGraphical.Checked) {
+					// change from graphical to table based
+					if (this.product.Product.GraphicalMode.Value) {
+						if (!this.product.Product.AllowToSwitchMode) {
+							DialogResult result = MessageBox.Show(EuroplanRes.PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Grafisch, EuroplanRes.PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Titel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								this.UpdateControl(FieldEnum.NONE);
+								return;
+							}
+						}
+					// change from table based to graphical  
+					} else {
+						if (!this.product.Product.AllowToSwitchMode) {
+							DialogResult result = MessageBox.Show(EuroplanRes.PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Tabellarisch, EuroplanRes.PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Titel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								this.UpdateControl(FieldEnum.NONE);
+								return;
+							} else {
+								this.product.Product.PlannedCircuits.Clear();
+								this.product.Product.PlannedCircuits.Add(new ModulDeckeCircuit());
+							}
+						}
+					}
+				}
+				this.product.Product.GraphicalMode = rbLayoutGraphical.Checked;
+				this.UpdateControl(FieldEnum.LAYOUT_TYPE);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
 		

@@ -9420,6 +9420,33 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie tatsächlich von der grafischen zu der tabellarischen Auslegungsart wechseln? Bitte beachten Sie, dass bereits ausgelegte Module erhalten bleiben, aber kein erneuter Wechsel zurück zur Grafischen Auslegung möglich ist. Trotzdem fortfahren?.
+        /// </summary>
+        internal static string PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Grafisch {
+            get {
+                return ResourceManager.GetString("PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Grafisch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie tatsächlich von der tabellarischen zu der grafischen Auslegungsart wechseln? Bitte beachten Sie, dass bereits ausgelegte Module verloren gehen. Trotzdem fortfahren?.
+        /// </summary>
+        internal static string PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Tabellarisch {
+            get {
+                return ResourceManager.GetString("PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Tabellarisch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegungsart ändern?.
+        /// </summary>
+        internal static string PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Titel {
+            get {
+                return ResourceManager.GetString("PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (Pro Winkel zusätzlich 1m Verbindungsleitung).
         /// </summary>
         internal static string PlannedModulKlimaDeckeProductPanel_ErklaerungVerbindeleitungen {
