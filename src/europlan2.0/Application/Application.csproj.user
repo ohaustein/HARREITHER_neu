@@ -14,6 +14,6 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <StartArguments>C:\Users\Neudorfer.BLUESOURCE\Desktop\importTest.e2p</StartArguments>
+    <StartArguments></StartArguments>
   </PropertyGroup>
 </Project>
