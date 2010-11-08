@@ -68,5 +68,16 @@ namespace Europlan.Common {
 				this.rows.RemoveAt(0);
 			}
 		}
+
+		public bool ContainsModul(KlimaFlaechenModul modul) {
+			if (this.rows != null) {
+				foreach (KlimaFlaechenList row in this.rows) {
+					if (row.ContainsModul(modul)) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 	}
 }

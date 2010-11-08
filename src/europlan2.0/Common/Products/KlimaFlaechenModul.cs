@@ -191,7 +191,10 @@ namespace Europlan.Common {
 		private ModulTypeEnum modulType;
 		private ModulOrientationEnum orientation;
 
-		/*private Nullable<Point> origin = null;*/
+		// position in graphical mode
+		private int graphLane = -1;
+		private double graphPositionInLane = double.NaN;
+		private bool graphBottomUp = false;
 
 		public KlimaFlaechenModul() {
 			this.modulType = ModulTypeEnum.MODUL_100_40;
@@ -404,6 +407,25 @@ namespace Europlan.Common {
 				default:
 					return 0;
 			}
+		}
+
+		public int GraphLane {
+			get { return this.graphLane; }
+			set { this.graphLane = value; }
+		}
+
+		public double GraphPositionInLan {
+			get { return this.graphPositionInLane; }
+			set { this.graphPositionInLane = value; }
+		}
+
+		public bool GraphBottomUp {
+			get { return this.graphBottomUp; }
+			set { this.graphBottomUp = value; }
+		}
+
+		public double GraphBottomPositionInLane(double measure) {
+			return this.graphPositionInLane + measure * KlimaFlaechenModul.GetModuleHeight(this.modulType);
 		}
 	}
 }

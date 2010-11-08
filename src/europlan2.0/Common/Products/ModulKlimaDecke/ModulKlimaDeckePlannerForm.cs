@@ -42,8 +42,20 @@ namespace Europlan.Common.Products {
 				this.akustik.Planner = this.modulKlimaBodenPlanner;
 			}
 
+			this.cmbOrientation.Items.Add(KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
+			this.cmbOrientation.Items.Add(KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
+			this.cmbOrientation.SelectedIndex = 0;
+
+			this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
+			this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30);
+			this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30);
+			this.cmbModulType.SelectedIndex = 2;
+
+			this.UpdateLists(true, true, true);
+
 			this.UpdateControls();
 		}
+
 
 		private void UpdateControls() {
 			this.rbGlatt.Checked = this.modulKlimaBodenPlanner.Product.GraphConstruction is ModulKlimaDeckeConstructionGlatt;
@@ -196,6 +208,102 @@ namespace Europlan.Common.Products {
 
 		private void tabs_Deselected(object sender, TabControlEventArgs e) {
 			this.previousTab = e.TabPage;
+		}
+
+		private void modulKlimaBodenPlanner_ListsNeedUpdate(object sender, EventArgs e) {
+			this.UpdateLists(true, true, true);
+		}
+
+		private void UpdateLists(bool updateCircuits, bool updateSubareas, bool updateRows) {
+			List<Circuit> circuits = (this.modulKlimaBodenPlanner.Product.ContainsModules ? this.modulKlimaBodenPlanner.Product.PlannedCircuits : new List<Circuit>());
+
+			ignoreListChange++;
+			if (updateCircuits) {
+				int circuitsCount = circuits.Count;
+				int tmp = (lstCircuits.SelectedIndex == lstCircuits.Items.Count - 1 ? circuitsCount : lstCircuits.SelectedIndex);
+				lstCircuits.BeginUpdate();
+				lstCircuits.Items.Clear();
+				for (int i = 1; i <= circuitsCount; i++) {
+					lstCircuits.Items.Add(EuroplanRes.PlannedModulKlimaDeckeProductPanel_HeizkreisAbkuerzung + i.ToString());
+				}
+				lstCircuits.Items.Add("neuer HK");
+				lstCircuits.SelectedIndex = tmp;
+				lstCircuits.EndUpdate();
+			}
+
+			if (updateSubareas) {
+				int subAreasCount = (this.lstCircuits.SelectedIndex < this.lstCircuits.Items.Count - 1 && this.lstCircuits.SelectedIndex >= 0 ? (circuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit).SubAreas.Count : 0);
+				int tmp = (lstSubarea.SelectedIndex == lstSubarea.Items.Count - 1 ? subAreasCount : lstSubarea.SelectedIndex);
+				lstSubarea.BeginUpdate();
+				lstSubarea.Items.Clear();
+				for (int i = 1; i <= subAreasCount; i++) {
+					lstSubarea.Items.Add(EuroplanRes.PlannedModulKlimaDeckeProductPanel_Teilflaeche + i.ToString());
+				}
+				lstSubarea.Items.Add("neue Teilfläche");
+				lstSubarea.SelectedIndex = tmp;
+				lstSubarea.EndUpdate();
+			}
+
+			if (updateRows) {
+				int rowsCount = (this.lstSubarea.SelectedIndex < this.lstSubarea.Items.Count - 1 && this.lstSubarea.SelectedIndex >= 0 ? (circuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit).SubAreas[this.lstSubarea.SelectedIndex].Rows.Count : 0);
+				int tmp = (lstRows.SelectedIndex == lstRows.Items.Count - 1 ? rowsCount : lstRows.SelectedIndex);
+				lstRows.BeginUpdate();
+				lstRows.Items.Clear();
+				for (int i = 1; i <= rowsCount; i++) {
+					lstRows.Items.Add(EuroplanRes.PlannedModulKlimaDeckeProductPanel_Reihe + i.ToString());
+				}
+				lstRows.Items.Add("neue Reihe");
+				lstRows.SelectedIndex = tmp;
+				lstRows.EndUpdate();
+			}
+			ignoreListChange--;
+		}
+
+		private int ignoreListChange = 0;
+		private void lstCircuits_SelectedIndexChanged(object sender, EventArgs e) {
+			if (this.ignoreListChange == 0) {
+				this.ignoreListChange++;
+				if (this.lstCircuits.SelectedIndex >= 0 && this.lstCircuits.SelectedIndex < this.lstCircuits.Items.Count - 1) {
+					if (this.lstSubarea.SelectedIndex < 0 || sender == this.lstCircuits) {
+						this.lstSubarea.SelectedIndex = this.lstSubarea.Items.Count - 1;
+					}
+				} else {
+					this.lstSubarea.SelectedIndex = -1;
+				}
+
+				if (this.lstSubarea.SelectedIndex >= 0 && this.lstSubarea.SelectedIndex < this.lstSubarea.Items.Count - 1) {
+					if (this.lstRows.SelectedIndex < 0 || sender == this.lstSubarea) {
+						this.lstRows.SelectedIndex = this.lstRows.Items.Count - 1;
+					}
+				} else {
+					this.lstRows.SelectedIndex = -1;
+				}
+
+				if (sender != lstRows) {
+					this.UpdateLists(false, sender == lstCircuits, true);
+				}
+
+				if (this.lstRows.SelectedIndex >= 0 && this.lstRows.SelectedIndex < this.lstRows.Items.Count - 1) {
+					this.modulKlimaBodenPlanner.HighlightRow = (this.lstRows.Items.Count - 1 > this.lstRows.SelectedIndex ? (this.modulKlimaBodenPlanner.Product.PlannedCircuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit).SubAreas[this.lstSubarea.SelectedIndex].Rows[this.lstRows.SelectedIndex] : null);
+				} else if (this.lstSubarea.SelectedIndex >= 0 && this.lstSubarea.SelectedIndex < this.lstSubarea.Items.Count - 1) {
+					this.modulKlimaBodenPlanner.HighlightSubArea = (this.lstSubarea.Items.Count - 1 > this.lstSubarea.SelectedIndex ? (this.modulKlimaBodenPlanner.Product.PlannedCircuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit).SubAreas[this.lstSubarea.SelectedIndex] : null);
+				} else if (this.lstCircuits.SelectedIndex >= 0 && this.lstCircuits.SelectedIndex < this.lstCircuits.Items.Count - 1) {
+					this.modulKlimaBodenPlanner.HighlightCircuit = (this.lstCircuits.Items.Count - 1 > this.lstCircuits.SelectedIndex ? (this.modulKlimaBodenPlanner.Product.PlannedCircuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit) : null);
+				} else {
+					this.modulKlimaBodenPlanner.HighlightCircuit = null;
+				}
+
+				this.ignoreListChange--;
+			}
+		}
+
+		private void cmbModulType_SelectedIndexChanged(object sender, EventArgs e) {
+			if (this.cmbModulType.SelectedItem is KlimaFlaechenModul.ModulTypeEnum) {
+				this.modulKlimaBodenPlanner.ModuleTypeToAdd = (KlimaFlaechenModul.ModulTypeEnum)this.cmbModulType.SelectedItem;
+			}
+			if (this.cmbOrientation.SelectedItem is KlimaFlaechenModul.ModulOrientationEnum) {
+				this.modulKlimaBodenPlanner.StartingOrientation = (KlimaFlaechenModul.ModulOrientationEnum)this.cmbOrientation.SelectedItem;
+			}
 		}
 	}
 }

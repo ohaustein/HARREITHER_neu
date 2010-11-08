@@ -50,7 +50,7 @@ namespace Europlan.Common {
 			matrix = matrix.GetInverse();
 
 			this.schienen.Clear();
-			this.possibleRows.Clear();
+			this.possibleLanes.Clear();
 
 			double measure = this.Planner.ConnectedPlanPanel.Plan.Measure.Value;
 			double increment = (schienenBreite + schienenAbstand) * measure;
@@ -77,20 +77,20 @@ namespace Europlan.Common {
 			for (int i = 0; i < this.schienen.Count - 1; i++) {
 				Polygon2D schieneLeft = this.schienen[i];
 				Polygon2D schieneRight = this.schienen[i + 1];
-				Polygon2D row = new Polygon2D();
-				row.Add(schieneLeft[1]);
-				row.Add(schieneLeft[2]);
-				row.Add(schieneRight[3]);
-				row.Add(schieneRight[0]);
-				if (row.IsClockwise()) {
-					row = row.GetReverse();
+				Polygon2D lane = new Polygon2D();
+				lane.Add(schieneLeft[1]);
+				lane.Add(schieneLeft[2]);
+				lane.Add(schieneRight[3]);
+				lane.Add(schieneRight[0]);
+				if (lane.IsClockwise()) {
+					lane = lane.GetReverse();
 				}
 
-				this.possibleRows.Add(new PossibleModulRow(GetPossibleModuleAreasInRow(row)));
+				this.possibleLanes.Add(new PossibleModulLane(GetPossibleModuleAreasInLane(lane), i));
 			}
 		}
 
-		private List<PossibleModulRowArea> GetPossibleModuleAreasInRow(Polygon2D row) {
+		private List<PossibleModulLaneArea> GetPossibleModuleAreasInLane(Polygon2D lane) {
 			Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
 
 			Polygon2D tmp = new Polygon2D();
@@ -117,10 +117,10 @@ namespace Europlan.Common {
 				}
 			}
 
-			Point2D p = matrix.Transform(row[0]);
-			Line2D borderRight = new Line2D(p, p - matrix.Transform(row[1]));
-			p = matrix.Transform(row[3]);
-			Line2D borderLeft = new Line2D(p, p - matrix.Transform(row[2]));
+			Point2D p = matrix.Transform(lane[0]);
+			Line2D borderRight = new Line2D(p, p - matrix.Transform(lane[1]));
+			p = matrix.Transform(lane[3]);
+			Line2D borderLeft = new Line2D(p, p - matrix.Transform(lane[2]));
 			/*Polygon2D rowTf = new Polygon2D();
 			foreach (Point2D point in row) {
 				rowTf.Add(matrix.Transform(point));
@@ -129,8 +129,8 @@ namespace Europlan.Common {
 			Segment2D roomBorder;
 			Nullable<Point2D> intersection = null;
 			if (startPoint.X > borderLeft.Origin.X) {
-				// no possible module areas in row found
-				return new List<PossibleModulRowArea>();
+				// no possible module areas in lane found
+				return new List<PossibleModulLaneArea>();
 			}
 
 			bool inside = false;
@@ -157,7 +157,7 @@ namespace Europlan.Common {
 			bordersBottom.Sort();
 			removes.Sort();
 
-			List<PossibleModulRowArea> possibleAreas = new List<PossibleModulRowArea>();
+			List<PossibleModulLaneArea> possibleAreas = new List<PossibleModulLaneArea>();
 			matrix = matrix.GetInverse();
 			for (i = 0; i < bordersTop.Count; i++) {
 				double top = bordersTop[i];
@@ -172,7 +172,7 @@ namespace Europlan.Common {
 						area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, bottom)));
 						area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, top)));
 						possibleAreas.Add(new PossibleModulRowArea(area));*/
-						possibleAreas.Add(new PossibleModulRowArea(
+						possibleAreas.Add(new PossibleModulLaneArea(
 							matrix.Transform(new Point2D(borderLeft.Origin.X, top)),
 							matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)),
 							matrix.Transform(new Point2D(borderRight.Origin.X, bottom)),
@@ -188,7 +188,7 @@ namespace Europlan.Common {
 				area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, bottom)));
 				area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, top)));
 				possibleAreas.Add(new PossibleModulRowArea(area));*/
-				possibleAreas.Add(new PossibleModulRowArea(
+				possibleAreas.Add(new PossibleModulLaneArea(
 					matrix.Transform(new Point2D(borderLeft.Origin.X, top)),
 					matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)),
 					matrix.Transform(new Point2D(borderRight.Origin.X, bottom)),
@@ -323,8 +323,8 @@ namespace Europlan.Common {
 		private List<Polygon2D> GetPossibleAreas(bool forDrawing) {
 			List<Polygon2D> possibleAreas = new List<Polygon2D>();
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
-			foreach (PossibleModulRow possibleRow in this.possibleRows) {
-				foreach (PossibleModulRowArea possibleArea in possibleRow.Areas) {
+			foreach (PossibleModulLane possibleLane in this.possibleLanes) {
+				foreach (PossibleModulLaneArea possibleArea in possibleLane.Areas) {
 					if (forDrawing) {
 						Polygon2D a = new Polygon2D();
 						a.Add(additionalTransformation.TransformTo2D((Point3D)possibleArea.Area[0]));
@@ -375,7 +375,7 @@ namespace Europlan.Common {
 			}
 
 			if (mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION) {
-				c = Color.FromArgb(128, 0, 255, 0);
+				c = Color.FromArgb(128, 0, 240, 0);
 				p = new Pen(c);
 				b = new SolidBrush(Color.FromArgb(64, c));
 				Region r = new Region();

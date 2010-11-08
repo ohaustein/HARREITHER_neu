@@ -65,6 +65,10 @@ namespace Europlan.Common {
 			//get {
 				return GetHeatArea(floor) * 10 + lengthVerbindeleitungen;
 			//}
-			}
 		}
+
+		public bool ContainsModul(KlimaFlaechenModul modul) {
+			return this.list != null && this.list.Contains(modul);
+		}
+	}
 }

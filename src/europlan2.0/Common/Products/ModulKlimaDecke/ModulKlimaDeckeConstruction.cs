@@ -15,7 +15,7 @@ namespace Europlan.Common {
 
 		protected double rotation = 0;
 		protected List<Polygon2D> schienen = new List<Polygon2D>();
-		protected List<PossibleModulRow> possibleRows = new List<PossibleModulRow>();
+		protected List<PossibleModulLane> possibleLanes = new List<PossibleModulLane>();
 
 		public abstract void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode);
 
@@ -85,32 +85,67 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public List<PossibleModulRow> PossibleRows {
-			get { return this.possibleRows; }
+		public List<PossibleModulLane> PossibleLanes {
+			get { return this.possibleLanes; }
 		}
 	}
 
-	public class PossibleModulRow {
-		private List<PossibleModulRowArea> areas = new List<PossibleModulRowArea>();
+	public class PossibleModulLane {
+		private List<PossibleModulLaneArea> areas = new List<PossibleModulLaneArea>();
 		private Line2D borderLeft;
 		private Line2D borderRight;
+		private int nr = -1;
 
-		public PossibleModulRow(Line2D borderLeft, Line2D borderRight) {
+		public PossibleModulLane(Line2D borderLeft, Line2D borderRight, int nr) {
 			this.borderLeft = borderLeft;
 			this.borderRight = borderRight;
+			this.nr = nr;
 		}
 
-		public PossibleModulRow(List<PossibleModulRowArea> areas) {
+		public PossibleModulLane(List<PossibleModulLaneArea> areas, int nr) {
 			this.areas = areas;
 			if (this.areas.Count > 0) {
 				this.borderLeft = new Line2D(this.areas[0].TopLeft, this.areas[0].TopLeft - this.areas[0].BottomLeft);
 				this.borderRight = new Line2D(this.areas[0].TopRight, this.areas[0].TopRight - this.areas[0].BottomRight);
 			}
+			this.nr = nr;
 		}
 
-		public List<PossibleModulRowArea> Areas {
+		public List<PossibleModulLaneArea> Areas {
 			get { return this.areas; }
 			set { this.areas = value; }
+		}
+
+		public List<FreeModulLaneArea> GetFreeAreas(ModulKlimaDeckeProduct product) {
+			List<FreeModulLaneArea> freeAreas = new List<FreeModulLaneArea>();
+			if (product.AssociatedRoom == null || product.AssociatedRoom.AssociatedPlan == null ||
+				!product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
+				return freeAreas;
+			} 
+
+			double measure = product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			List<KlimaFlaechenModul> module = this.GetModulesInThisLane(product);
+			foreach (PossibleModulLaneArea area in this.areas) {
+				freeAreas.Add(new FreeModulLaneArea(area.Top, area.Bottom));
+			}
+			foreach (KlimaFlaechenModul modul in module) {
+				foreach (FreeModulLaneArea area in freeAreas) {
+					if (modul.GraphPositionInLan >= area.Top && modul.GraphPositionInLan <= area.Bottom) {
+						int index = freeAreas.IndexOf(area);
+						freeAreas.Remove(area);
+						double modulTop = modul.GraphPositionInLan;
+						double modulBottom = modul.GraphBottomPositionInLane(measure);
+						if (area.Bottom != modulBottom) {
+							freeAreas.Insert(index, new FreeModulLaneArea(modulBottom, area.Bottom));
+						}
+						if (area.Top != modulTop) {
+							freeAreas.Insert(index, new FreeModulLaneArea(area.Top, modulTop));
+						}
+						break;
+					}
+				}
+			}
+			return freeAreas;
 		}
 
 		[XmlIgnore]
@@ -122,15 +157,79 @@ namespace Europlan.Common {
 		public Line2D BorderRight {
 			get { return this.borderRight; }
 		}
+
+		public List<KlimaFlaechenModul> GetModulesInThisLane(ModulKlimaDeckeProduct product) {
+			return product.GetModulesInLane(this.nr);
+		}
+
+		[XmlIgnore]
+		public int Nr {
+			get { return this.nr; }
+		}
 	}
 
-	public class PossibleModulRowArea {
+	public class FreeModulLaneArea {
+		protected double top, bottom;
+
+		public FreeModulLaneArea(double top, double bottom) {
+			this.top = top;
+			this.bottom = bottom;
+		}
+
+		[XmlIgnore]
+		public double Top {
+			get { return this.top; }
+		}
+
+		[XmlIgnore]
+		public double Bottom {
+			get { return this.bottom; }
+		}
+
+		public bool Fits(double moduleTop, double moduleBottom) {
+			return (this.top <= moduleTop && this.bottom >= moduleBottom);
+		}
+
+		public Nullable<double> BestStart(double moduleTop, double moduleBottom, bool bottomUp) {
+			if (bottomUp) {
+				if (moduleBottom <= this.bottom) {
+					if (moduleTop >= this.top) {
+						return moduleTop;
+					} else {
+						return null;
+					}
+				} else {
+					if (moduleTop <= this.bottom) {
+						return this.BestStart(this.bottom + moduleTop - moduleBottom, this.bottom, bottomUp);
+					} else {
+						return null;
+					}
+				}
+			} else {
+				if (moduleTop >= this.top) {
+					if (moduleBottom <= this.bottom) {
+						return moduleTop;
+					} else {
+						return null;
+					}
+				} else {
+					if (moduleBottom >= this.top) {
+						return this.BestStart(this.top, this.top + moduleBottom - moduleTop, bottomUp);
+					} else {
+						return null;
+					}
+				}
+			}
+		}
+	}
+
+	public class PossibleModulLaneArea : FreeModulLaneArea {
 		//private Polygon2D area;
 		private Point2D topLeft, topRight, bottomRight, bottomLeft;
-		private double top, bottom;
+		//private double top, bottom;
 		private double length, width;
 
-		public PossibleModulRowArea(/*Polygon2D area*/Point2D topLeft, Point2D bottomLeft, Point2D bottomRight, Point2D topRight, double top, double bottom) {
+		public PossibleModulLaneArea(/*Polygon2D area*/Point2D topLeft, Point2D bottomLeft, Point2D bottomRight, Point2D topRight, double top, double bottom) : base(top, bottom) {
 			//this.area = area;
 			this.topLeft = topLeft;
 			this.topRight = topRight;
@@ -138,8 +237,8 @@ namespace Europlan.Common {
 			this.bottomLeft = bottomLeft;
 			this.length = new Segment2D(this.topLeft, this.bottomLeft).GetLength();
 			this.width = new Segment2D(this.topLeft, this.topRight).GetLength();
-			this.top = top;
-			this.bottom = bottom;
+			//this.top = top;
+			//this.bottom = bottom;
 		}
 
 		public Polygon2D Area {
@@ -196,51 +295,51 @@ namespace Europlan.Common {
 			get { return this.bottomLeft; }
 		}
 
-		[XmlIgnore]
-		public double Top {
-			get { return this.top; }
-		}
-
-		[XmlIgnore]
-		public double Bottom {
-			get { return this.bottom; }
-		}
-
-		public bool Fits(double moduleTop, double moduleBottom) {
-			return (this.top <= moduleTop && this.bottom >= moduleBottom);
-		}
-
-		public Nullable<double> BestStart(double moduleTop, double moduleBottom, bool bottomUp) {
-			if (bottomUp) {
-				if (moduleBottom <= this.bottom) {
-					if (moduleTop >= this.top) {
-						return moduleTop;
-					} else {
-						return null;
-					}
-				} else {
-					if (moduleTop <= this.bottom) {
-						return this.BestStart(this.bottom + moduleTop - moduleBottom, this.bottom, bottomUp);
-					} else {
-						return null;
-					}
-				}
-			} else {
-				if (moduleTop >= this.top) {
-					if (moduleBottom <= this.bottom) {
-						return moduleTop;
-					} else {
-						return null;
-					}
-				} else {
-					if (moduleBottom >= this.top) {
-						return this.BestStart(this.top, this.top + moduleBottom - moduleTop, bottomUp);
-					} else {
-						return null;
-					}
-				}
-			}
-		}
+		//[XmlIgnore]
+		//public double Top {
+		//	get { return this.top; }
+		//}
+		//
+		//[XmlIgnore]
+		//public double Bottom {
+		//	get { return this.bottom; }
+		//}
+		//
+		//public bool Fits(double moduleTop, double moduleBottom) {
+		//	return (this.top <= moduleTop && this.bottom >= moduleBottom);
+		//}
+		//
+		//public Nullable<double> BestStart(double moduleTop, double moduleBottom, bool bottomUp) {
+		//	if (bottomUp) {
+		//		if (moduleBottom <= this.bottom) {
+		//			if (moduleTop >= this.top) {
+		//				return moduleTop;
+		//			} else {
+		//				return null;
+		//			}
+		//		} else {
+		//			if (moduleTop <= this.bottom) {
+		//				return this.BestStart(this.bottom + moduleTop - moduleBottom, this.bottom, bottomUp);
+		//			} else {
+		//				return null;
+		//			}
+		//		}
+		//	} else {
+		//		if (moduleTop >= this.top) {
+		//			if (moduleBottom <= this.bottom) {
+		//				return moduleTop;
+		//			} else {
+		//				return null;
+		//			}
+		//		} else {
+		//			if (moduleBottom >= this.top) {
+		//				return this.BestStart(this.top, this.top + moduleBottom - moduleTop, bottomUp);
+		//			} else {
+		//				return null;
+		//			}
+		//		}
+		//	}
+		//}
 	}
 
 	public class CompareablePair<V> : IComparable where V : IComparable {

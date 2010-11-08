@@ -180,6 +180,8 @@ namespace Europlan.Common {
 			localized = EuroplanRes.General_ImportiertePlaene;
 			importedPlansNode = new TreeNode(localized == null ? "Importierte Pläne" : localized);
 			importedPlansNode.Tag = typeof(ImportedPlansPanel);
+			importedPlansNode.ImageKey = "Plaene.png";
+			importedPlansNode.SelectedImageKey = "Plaene.png";
 
 
 			/*ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);

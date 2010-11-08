@@ -1220,18 +1220,39 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public override bool AllowToSwitchMode {
+			get { return !this.ContainsModules; }
+		}
+
+		[XmlIgnore]
+		public bool ContainsModules {
 			get {
 				foreach (ModulDeckeCircuit c in this.circuits) {
 					foreach (ModulDeckeSubArea subArea in c.SubAreas) {
 						foreach (KlimaFlaechenList row in subArea.Rows) {
 							if (row.List.Count > 0) {
-								return false;
+								return true;
 							}
 						}
 					}
 				}
-				return true;
+				return false;
 			}
+		}
+
+		public List<KlimaFlaechenModul> GetModulesInLane(int lane) {
+			List<KlimaFlaechenModul> modules = new List<KlimaFlaechenModul>();
+			foreach (ModulDeckeCircuit c in this.circuits) {
+				foreach (ModulDeckeSubArea subArea in c.SubAreas) {
+					foreach (KlimaFlaechenList row in subArea.Rows) {
+						foreach (KlimaFlaechenModul modul in row.List) {
+							if (modul.GraphLane == lane) {
+								modules.Add(modul);
+							}
+						}
+					}
+				}
+			}
+			return modules;
 		}
 	}
 	

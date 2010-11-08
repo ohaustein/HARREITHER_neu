@@ -69,8 +69,13 @@ namespace Europlan.Common {
 			set { this.connectedPlanPanel = value; }
 		}
 
+		public event EventHandler ListsNeedUpdate;
+
 		private double breite = 0.1; // meter
 		private double abstand = 0.5; // meter
+
+		public delegate void AddModuleDelegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added);
+			//Graphics g, Matrix4D additionalTransformation, Matrix3D invRotation, double step, ref bool left, PossibleModulLane lane, Point2D borderLeftOrigin, ref double y, bool bottomUp, double start, double end);
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
@@ -104,6 +109,28 @@ namespace Europlan.Common {
 					}
 				}
 
+				foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
+					Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
+					Matrix3D invRotation = rotation.GetInverse();
+
+					double left = rotation.Transform(lane.BorderLeft.Origin).X;
+
+					List<KlimaFlaechenModul> modules = lane.GetModulesInThisLane(this.product);
+					foreach (KlimaFlaechenModul module in modules) {
+						bool highlight = false;
+						if (this.highlightCircuit != null && this.highlightCircuit.ContainsModul(module)) {
+							highlight = true;
+						}
+						if (this.highlightSubArea != null && this.highlightSubArea.ContainsModul(module)) {
+							highlight = true;
+						}
+						if (this.highlightRow != null && this.highlightRow.ContainsModul(module)) {
+							highlight = true;
+						}
+						this.DrawModule(module.ModulType, module.Orientation, invRotation.Transform(new Point2D(left, module.GraphPositionInLan)), additionalTransformation, e.Graphics, module.GraphBottomUp, highlight);
+					}
+				}
+
 				if (this.layoutAddArea != null) {
 					PointF[] drawArea = new PointF[this.layoutAddArea.Count];
 					for (int i = 0; i < this.layoutAddArea.Count; i++) {
@@ -112,80 +139,99 @@ namespace Europlan.Common {
 					}
 					e.Graphics.DrawPolygon(Pens.Red, drawArea);
 
-					Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
-					Matrix3D invRotation = rotation.GetInverse();
+					this.AddModulesForLayoutArea(delegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added) {
+						added = this.TryDrawModule(e.Graphics, additionalTransformation, ref y, start, end, step, ref left, this.layoutAddAreaBottomUp, invRotation, lane, borderLeftOrigin);
+					});
+				}
+			}
+		}
 
-					if (alignRectangle) {
-						// rectangle aligned to schienen
-						Segment2D topSeg = new Segment2D(rotation.Transform(this.layoutAddArea[0]), rotation.Transform(this.layoutAddArea[3]));
-						double start = topSeg.Start.Y;
-						double end = rotation.Transform(this.layoutAddArea[1]).Y;
-						double step = KlimaFlaechenModul.GetModuleHeight(this.moduleTypeToAdd) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-						bool left;
-						foreach (PossibleModulRow row in this.product.GraphConstruction.PossibleRows) {
-							left = this.startingOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
-							Point2D borderLeftOrigin = rotation.Transform(row.BorderLeft.Origin);
-							borderLeftOrigin.Y = topSeg.Start.Y;
-							Point2D borderRighOrigin = rotation.Transform(row.BorderRight.Origin);
-							borderLeftOrigin.Y = topSeg.Start.Y;
-							if (Line2D.Intersects(new Line2D(borderLeftOrigin, new Vector2D(0, 1)), topSeg) && Line2D.Intersects(new Line2D(borderRighOrigin, new Vector2D(0, 1)), topSeg)) {
-								if (this.layoutAddAreaBottomUp) {
-									for (double y = start - step; y > end; y -= step) {
-										this.TryAddModule(e.Graphics, additionalTransformation, invRotation, step, ref left, row, borderLeftOrigin, ref y, this.layoutAddAreaBottomUp, start, end);
-									}
-								} else {
-									for (double y = start; y < end - step; y += step) {
-										this.TryAddModule(e.Graphics, additionalTransformation, invRotation, step, ref left, row, borderLeftOrigin, ref y, this.layoutAddAreaBottomUp, start, end);
-									}
+		private int AddModulesForLayoutArea(AddModuleDelegate doIt) {
+			Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
+			Matrix3D invRotation = rotation.GetInverse();
+
+			bool added = false;
+			int count = 0;
+			if (alignRectangle) {
+				// rectangle aligned to schienen
+				Segment2D topSeg = new Segment2D(rotation.Transform(this.layoutAddArea[0]), rotation.Transform(this.layoutAddArea[3]));
+				double start = topSeg.Start.Y;
+				double end = rotation.Transform(this.layoutAddArea[1]).Y;
+				double step = KlimaFlaechenModul.GetModuleHeight(this.moduleTypeToAdd) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+				bool left;
+				foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
+					left = this.startingOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+					Point2D borderLeftOrigin = rotation.Transform(lane.BorderLeft.Origin);
+					borderLeftOrigin.Y = topSeg.Start.Y;
+					Point2D borderRighOrigin = rotation.Transform(lane.BorderRight.Origin);
+					borderLeftOrigin.Y = topSeg.Start.Y;
+					if (Line2D.Intersects(new Line2D(borderLeftOrigin, new Vector2D(0, 1)), topSeg) && Line2D.Intersects(new Line2D(borderRighOrigin, new Vector2D(0, 1)), topSeg)) {
+						if (this.layoutAddAreaBottomUp) {
+							for (double y = start - step; y > end; y -= step) {
+								doIt(ref y, start, end, step, ref left, invRotation, lane, borderLeftOrigin, out added);
+								if (added) {
+									count++;
 								}
 							}
-						}
-					} else {
-						// rectangle not aligned to schienen
-						// the optimalLayout flag is ignored in this mode as this will always be layouted optimal
-						Polygon2D rotatedLayoutAddArea = new Polygon2D();
-						foreach (Point2D p in this.layoutAddArea) {
-							rotatedLayoutAddArea.Add(rotation.Transform(p));
-						}
-
-						double step = KlimaFlaechenModul.GetModuleHeight(this.moduleTypeToAdd) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-						bool left;
-						foreach (PossibleModulRow row in this.product.GraphConstruction.PossibleRows) {
-							left = this.startingOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
-							Nullable<Point2D> topLeftIntersection = null;
-							Nullable<Point2D> bottomLeftIntersection = null;
-							
-							Point2D borderLeftOrigin = rotation.Transform(row.BorderLeft.Origin);
-
-							bool bottomUpLeft;
-							bool bottomUpRight;
-							if (this.GetIntersections(out topLeftIntersection, out bottomLeftIntersection, new Line2D(borderLeftOrigin, new Vector2D(0, 1)), rotatedLayoutAddArea /*, out bottomUpLeft*/)) {
-								Point2D borderRightOrigin = rotation.Transform(row.BorderRight.Origin);
-
-								Nullable<Point2D> topRightIntersection = null;
-								Nullable<Point2D> bottomRightIntersection = null;
-								if (this.GetIntersections(out topRightIntersection, out bottomRightIntersection, new Line2D(borderRightOrigin, new Vector2D(0, 1)), rotatedLayoutAddArea /*, out bottomUpRight*/)) {
-									double top = Math.Max(topLeftIntersection.Value.Y, topRightIntersection.Value.Y);
-									double bottom = Math.Min(bottomLeftIntersection.Value.Y, bottomRightIntersection.Value.Y);
-									if (top > bottom) {
-										continue;
-									}
-									if (this.layoutAddAreaBottomUp /*bottomUpLeft && bottomUpRight*/) {
-										for (double y = bottom - step; y > top; y -= step) {
-											this.TryAddModule(e.Graphics, additionalTransformation, invRotation, step, ref left, row, borderLeftOrigin, ref y, true, top, bottom);
-										}
-									} else {
-										for (double y = top; y < bottom - step; y += step) {
-											this.TryAddModule(e.Graphics, additionalTransformation, invRotation, step, ref left, row, borderLeftOrigin, ref y, false, top, bottom);
-										}
-									}
+						} else {
+							for (double y = start; y < end - step; y += step) {
+								doIt(ref y, start, end, step, ref left, invRotation, lane, borderLeftOrigin, out added);
+								if (added) {
+									count++;
 								}
-
 							}
 						}
 					}
 				}
+			} else {
+				// rectangle not aligned to schienen
+				// the optimalLayout flag is ignored in this mode as this will always be layouted optimal
+				Polygon2D rotatedLayoutAddArea = new Polygon2D();
+				foreach (Point2D p in this.layoutAddArea) {
+					rotatedLayoutAddArea.Add(rotation.Transform(p));
+				}
+
+				double step = KlimaFlaechenModul.GetModuleHeight(this.moduleTypeToAdd) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+				bool left;
+				foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
+					left = this.startingOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+					Nullable<Point2D> topLeftIntersection = null;
+					Nullable<Point2D> bottomLeftIntersection = null;
+					
+					Point2D borderLeftOrigin = rotation.Transform(lane.BorderLeft.Origin);
+
+					if (this.GetIntersections(out topLeftIntersection, out bottomLeftIntersection, new Line2D(borderLeftOrigin, new Vector2D(0, 1)), rotatedLayoutAddArea /*, out bottomUpLeft*/)) {
+						Point2D borderRightOrigin = rotation.Transform(lane.BorderRight.Origin);
+
+						Nullable<Point2D> topRightIntersection = null;
+						Nullable<Point2D> bottomRightIntersection = null;
+						if (this.GetIntersections(out topRightIntersection, out bottomRightIntersection, new Line2D(borderRightOrigin, new Vector2D(0, 1)), rotatedLayoutAddArea /*, out bottomUpRight*/)) {
+							double top = Math.Max(topLeftIntersection.Value.Y, topRightIntersection.Value.Y);
+							double bottom = Math.Min(bottomLeftIntersection.Value.Y, bottomRightIntersection.Value.Y);
+							if (top > bottom) {
+								continue;
+							}
+							if (this.layoutAddAreaBottomUp /*bottomUpLeft && bottomUpRight*/) {
+								for (double y = bottom - step; y > top; y -= step) {
+									doIt(ref y, top, bottom, step, ref left, invRotation, lane, borderLeftOrigin, out added);
+									if (added) {
+										count++;
+									}
+								}
+							} else {
+								for (double y = top; y < bottom - step; y += step) {
+									doIt(ref y, top, bottom, step, ref left, invRotation, lane, borderLeftOrigin, out added);
+									if (added) {
+										count++;
+									}
+								}
+							}
+						}
+
+					}
+				}
 			}
+			return count;
 		}
 
 		/// <summary>
@@ -197,62 +243,9 @@ namespace Europlan.Common {
 		/// <param name="polygon"></param>
 		private bool GetIntersections(out Nullable<Point2D> topIntersection, out Nullable<Point2D> bottomIntersection, Line2D line, Polygon2D  rectangle/*Point2D p1, Point2D p2, Point2D p3, Point2D p4, out bool bottomUp*/) {
 			List<Segment2D> segments = new List<Segment2D>();
-			/*Segment2D p1p2 = new Segment2D(p1, p2);
-			Segment2D p2p3 = new Segment2D(p2, p3);
-			Segment2D p3p4 = new Segment2D(p3, p4);
-			Segment2D p4p1 = new Segment2D(p4, p1);*/
 			Polygon2D.GetSegments(rectangle, segments);
-			/*topIntersection = new Point2D(0, double.MaxValue);
-			bottomIntersection = new Point2D(0, double.MinValue);*/
 			topIntersection = null;
 			bottomIntersection = null;
-			/*bottomUp = false;
-			bool topDown = false;*/
-
-			/*Nullable<Point2D> intersection = Line2D.GetIntersection(line, p1p2);
-			if (intersection.HasValue && (!topIntersection.HasValue || intersection.Value.Y < topIntersection.Value.Y)) {
-				topIntersection = intersection;
-				bottomUp = false;
-			}
-			if (intersection.HasValue && (!bottomIntersection.HasValue || intersection.Value.Y > bottomIntersection.Value.Y)) {
-				bottomIntersection = intersection;
-				topDown = false;
-			}
-
-			intersection = Line2D.GetIntersection(line, p2p3);
-			if (intersection.HasValue && (!topIntersection.HasValue || intersection.Value.Y < topIntersection.Value.Y)) {
-				topIntersection = intersection;
-				bottomUp = true;
-			}
-			if (intersection.HasValue && (!bottomIntersection.HasValue || intersection.Value.Y > bottomIntersection.Value.Y)) {
-				bottomIntersection = intersection;
-				topDown = true;
-			}
-
-			intersection = Line2D.GetIntersection(line, p3p4);
-			if (intersection.HasValue && (!topIntersection.HasValue || intersection.Value.Y < topIntersection.Value.Y)) {
-				topIntersection = intersection;
-				bottomUp = false;
-			}
-			if (intersection.HasValue && (!bottomIntersection.HasValue || intersection.Value.Y > bottomIntersection.Value.Y)) {
-				bottomIntersection = intersection;
-				topDown = false;
-			}
-
-			intersection = Line2D.GetIntersection(line, p4p1);
-			if (intersection.HasValue && (!topIntersection.HasValue || intersection.Value.Y < topIntersection.Value.Y)) {
-				topIntersection = intersection;
-				bottomUp = true;
-			}
-			if (intersection.HasValue && (!bottomIntersection.HasValue || intersection.Value.Y > bottomIntersection.Value.Y)) {
-				bottomIntersection = intersection;
-				topDown = true;
-			}
-
-			if (topDown == bottomUp) {
-				bottomUp = false;
-			}*/
-
 			foreach (Segment2D segment in segments) {
 				Nullable<Point2D> intersection = Line2D.GetIntersection(line, segment);
 				if (intersection.HasValue && (!topIntersection.HasValue || intersection.Value.Y < topIntersection.Value.Y)) {
@@ -270,30 +263,125 @@ namespace Europlan.Common {
 			return topIntersection != null;
 		}
 
-		private void TryAddModule(Graphics g, Matrix4D additionalTransformation, Matrix3D invRotation, double step, ref bool left, PossibleModulRow row, Point2D borderLeftOrigin, ref double y, bool bottomUp, double start, double end) {
-			foreach (PossibleModulRowArea area in row.Areas) {
+		private ModulDeckeCircuit highlightCircuit = null;
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public ModulDeckeCircuit HighlightCircuit {
+			get { return this.highlightCircuit; }
+			set {
+				this.highlightCircuit = value;
+				this.highlightSubArea = null;
+				this.highlightRow = null;
+				this.ConnectedPlanPanel.InvalidateGraphics();
+			}
+		}
+
+		private ModulDeckeSubArea highlightSubArea = null;
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public ModulDeckeSubArea HighlightSubArea {
+			get { return this.highlightSubArea; }
+			set {
+				this.highlightSubArea = value;
+				this.highlightCircuit = null;
+				this.highlightRow = null;
+				this.ConnectedPlanPanel.InvalidateGraphics();
+			}
+		}
+
+		private KlimaFlaechenList highlightRow = null;
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public KlimaFlaechenList HighlightRow {
+			get { return this.highlightRow; }
+			set {
+				this.highlightRow = value;
+				this.highlightCircuit = null;
+				this.highlightSubArea = null;
+				this.ConnectedPlanPanel.InvalidateGraphics();
+			}
+		}
+
+		private bool TryDrawModule(Graphics g, Matrix4D additionalTransformation, ref double y, double start, double end, double step, ref bool left, bool bottomUp, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin) {
+			foreach (FreeModulLaneArea area in lane.GetFreeAreas(this.product)) {
 				if (!this.alignRectangle || this.optimalLayout) {
 					Nullable<double> bestStart = area.BestStart(y, y + step, bottomUp);
 					if (bestStart.HasValue) {
 						y = bestStart.Value;
 						if (bestStart.Value >= start && bestStart.Value + step <= end) {
 							Point2D tmp = invRotation.Transform(new Point2D(borderLeftOrigin.X, y));
-							this.DrawModule(this.moduleTypeToAdd, left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT, tmp, additionalTransformation, g);
+							this.DrawModule(this.moduleTypeToAdd, left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT, tmp, additionalTransformation, g, false, true);
 							left = !left;
+							return true;
 						}
 						break;
 					}
 				} else {
 					if (area.Fits(y, y + step)) {
 						Point2D tmp = invRotation.Transform(new Point2D(borderLeftOrigin.X, y));
-						this.DrawModule(this.moduleTypeToAdd, left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT, tmp, additionalTransformation, g);
+						this.DrawModule(this.moduleTypeToAdd, left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT, tmp, additionalTransformation, g, false, true);
 						left = !left;
+						return true;
 						break;
 					}
 				}
 			}
+			return false;
 		}
-		
+
+		private bool TryAddModule(Matrix4D additionalTransformation, ref double y, double start, double end, double step, ref bool left, bool bottomUp, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, Dictionary<PossibleModulLane ,KlimaFlaechenList> laneToRowMapping, ModulDeckeSubArea subArea, KlimaFlaechenList row) {
+			foreach (FreeModulLaneArea area in lane.GetFreeAreas(this.product)) {
+				if (!this.alignRectangle || this.optimalLayout) {
+					Nullable<double> bestStart = area.BestStart(y, y + step, bottomUp);
+					if (bestStart.HasValue) {
+						y = bestStart.Value;
+						if (bestStart.Value >= start && bestStart.Value + step <= end) {
+							KlimaFlaechenModul modul = new KlimaFlaechenModul(moduleTypeToAdd, left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
+							modul.GraphLane = lane.Nr;
+							modul.GraphPositionInLan = bestStart.Value;
+							modul.GraphBottomUp = bottomUp;
+							KlimaFlaechenList usedRow;
+							if (row != null) {
+								usedRow = row;
+							} else if (laneToRowMapping.ContainsKey(lane)) {
+								usedRow = laneToRowMapping[lane];
+							} else {
+								usedRow = new KlimaFlaechenList();
+								subArea.Rows.Add(usedRow);
+								laneToRowMapping.Add(lane, usedRow);
+							}
+							usedRow.List.Add(modul);
+							left = !left;
+							return true;
+						}
+						break;
+					}
+				} else {
+					if (area.Fits(y, y + step)) {
+						KlimaFlaechenModul modul = new KlimaFlaechenModul(moduleTypeToAdd, left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
+						modul.GraphLane = lane.Nr;
+						modul.GraphPositionInLan = y;
+						modul.GraphBottomUp = bottomUp;
+						KlimaFlaechenList usedRow;
+						if (row != null) {
+							usedRow = row;
+						} else if (laneToRowMapping.ContainsKey(lane)) {
+							usedRow = laneToRowMapping[lane];
+						} else {
+							usedRow = new KlimaFlaechenList();
+							subArea.Rows.Add(usedRow);
+							laneToRowMapping.Add(lane, usedRow);
+						}
+						usedRow.List.Add(modul);
+
+						left = !left;
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
 		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
 			return false;
@@ -397,6 +485,41 @@ namespace Europlan.Common {
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
 			if (this.layoutAddArea != null) {
+				ModulDeckeSubArea newSubArea = null;
+				ModulDeckeCircuit newCircuit = null;
+				ModulDeckeSubArea oldSubArea = null;
+				KlimaFlaechenList oldRow = null;
+				if (this.highlightCircuit == null && highlightSubArea == null && highlightRow == null) {
+					newCircuit = new ModulDeckeCircuit();
+					newSubArea = newCircuit.SubAreas[0];
+					newSubArea.Rows.Clear();
+				} else if (this.highlightSubArea == null && highlightRow == null) {
+					newSubArea = new ModulDeckeSubArea();
+					newSubArea.Rows.Clear();
+				} else if (this.highlightRow == null) {
+					oldSubArea = this.highlightSubArea;
+				} else {
+					oldRow = this.highlightRow;
+				}
+				Dictionary<PossibleModulLane, KlimaFlaechenList> laneToRowMapping = new Dictionary<PossibleModulLane, KlimaFlaechenList>();
+				int count = this.AddModulesForLayoutArea(delegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added) {
+					added = this.TryAddModule(this.ConnectedPlanPanel.PlanTransformation, ref y, start, end, step, ref left, this.layoutAddAreaBottomUp, invRotation, lane, borderLeftOrigin, laneToRowMapping, (newSubArea != null ? newSubArea : oldSubArea), oldRow);
+				});
+
+				if (count > 0) {
+					if (!this.product.ContainsModules && newCircuit != null) {
+						this.product.PlannedCircuits.Clear();
+					}
+					if (newCircuit != null) {
+						this.product.PlannedCircuits.Add(newCircuit);
+					} else if (newSubArea != null) {
+						this.highlightCircuit.SubAreas.Add(newSubArea);
+					}
+					if (this.ListsNeedUpdate != null) {
+						this.ListsNeedUpdate(this, EventArgs.Empty);
+					}
+				}
+				
 				this.layoutAddArea = null;
 				return true;
 			}
@@ -411,7 +534,7 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		public void DrawModule(KlimaFlaechenModul.ModulTypeEnum type, KlimaFlaechenModul.ModulOrientationEnum orientation, Point2D position, Matrix4D additionalTransformation, Graphics g) {
+		public void DrawModule(KlimaFlaechenModul.ModulTypeEnum type, KlimaFlaechenModul.ModulOrientationEnum orientation, Point2D position, Matrix4D additionalTransformation, Graphics g, bool bottomUp, bool highlight) {
 			if (this.product == null || this.product.GraphConstruction == null ||
 				this.product.AssociatedRoom == null || this.product.AssociatedRoom.AssociatedPlan == null ||
 				this.product.AssociatedRoom.AssociatedPlan.Measure == null) {
@@ -433,7 +556,13 @@ namespace Europlan.Common {
 			PointF bottomRight = new PointF((float)bottomRight2D.X, (float)bottomRight2D.Y);
 			PointF bottomLeft = new PointF((float)bottomLeft2D.X, (float)bottomLeft2D.Y);
 
-			Color c = Color.FromArgb(128, 0, 255, 0);
+			Color c;
+			if (highlight) {
+				c = Color.FromArgb(128, 0, 240, 0);
+			} else {
+				c = Color.FromArgb(128, 0, 128, 0);
+			}
+
 			Pen p = new Pen(c);
 			Brush b = new SolidBrush(Color.FromArgb(64, c));
 			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
@@ -450,7 +579,7 @@ namespace Europlan.Common {
 		private KlimaFlaechenModul.ModulTypeEnum moduleTypeToAdd = KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30;
 		private KlimaFlaechenModul.ModulOrientationEnum startingOrientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
 		private bool optimalLayout = true;
-		private bool alignRectangle = false;
+		private bool alignRectangle = true;
 
 		public KlimaFlaechenModul.ModulTypeEnum ModuleTypeToAdd {
 			get { return this.moduleTypeToAdd; }

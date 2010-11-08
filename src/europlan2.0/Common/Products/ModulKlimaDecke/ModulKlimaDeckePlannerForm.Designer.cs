@@ -31,6 +31,7 @@ namespace Europlan.Common.Products {
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnConstruction = new System.Windows.Forms.ToolStripButton();
+			this.btnAddModules = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
@@ -50,7 +51,17 @@ namespace Europlan.Common.Products {
 			this.lblRandfriesUnit = new System.Windows.Forms.Label();
 			this.lblRandfries = new System.Windows.Forms.Label();
 			this.pageLayout = new System.Windows.Forms.TabPage();
-			this.btnAddModules = new System.Windows.Forms.ToolStripButton();
+			this.label13 = new System.Windows.Forms.Label();
+			this.lstSubarea = new System.Windows.Forms.ListBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.lstRows = new System.Windows.Forms.ListBox();
+			this.label12 = new System.Windows.Forms.Label();
+			this.lstCircuits = new System.Windows.Forms.ListBox();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.cmbModulType = new System.Windows.Forms.ComboBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.cmbOrientation = new System.Windows.Forms.ComboBox();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.modulKlimaBodenPlanner = new Europlan.Common.ModulKlimaDeckePlanner(this.components);
 			this.numRotation = new Europlan.Common.NumericBox();
@@ -61,6 +72,8 @@ namespace Europlan.Common.Products {
 			this.pageConstruction.SuspendLayout();
 			this.grpCeilingContruction.SuspendLayout();
 			this.grpConstructionParameter.SuspendLayout();
+			this.pageLayout.SuspendLayout();
+			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip
@@ -120,6 +133,7 @@ namespace Europlan.Common.Products {
 			// 
 			// btnConstruction
 			// 
+			this.btnConstruction.AutoToolTip = false;
 			this.btnConstruction.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnConstruction.Image = ((System.Drawing.Image)(resources.GetObject("btnConstruction.Image")));
 			this.btnConstruction.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -127,6 +141,18 @@ namespace Europlan.Common.Products {
 			this.btnConstruction.Size = new System.Drawing.Size(23, 22);
 			this.btnConstruction.Text = "toolStripButton1";
 			this.btnConstruction.Click += new System.EventHandler(this.btnConstruction_Click);
+			// 
+			// btnAddModules
+			// 
+			this.btnAddModules.AutoToolTip = false;
+			this.btnAddModules.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddModules.Image = ((System.Drawing.Image)(resources.GetObject("btnAddModules.Image")));
+			this.btnAddModules.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddModules.Name = "btnAddModules";
+			this.btnAddModules.Size = new System.Drawing.Size(23, 22);
+			this.btnAddModules.Text = "toolStripButton1";
+			this.btnAddModules.Visible = false;
+			this.btnAddModules.Click += new System.EventHandler(this.btnAddModules_Click);
 			// 
 			// panel1
 			// 
@@ -331,6 +357,13 @@ namespace Europlan.Common.Products {
 			// 
 			// pageLayout
 			// 
+			this.pageLayout.Controls.Add(this.groupBox1);
+			this.pageLayout.Controls.Add(this.label13);
+			this.pageLayout.Controls.Add(this.lstSubarea);
+			this.pageLayout.Controls.Add(this.label1);
+			this.pageLayout.Controls.Add(this.lstRows);
+			this.pageLayout.Controls.Add(this.label12);
+			this.pageLayout.Controls.Add(this.lstCircuits);
 			this.pageLayout.Location = new System.Drawing.Point(4, 22);
 			this.pageLayout.Name = "pageLayout";
 			this.pageLayout.Padding = new System.Windows.Forms.Padding(3);
@@ -339,16 +372,110 @@ namespace Europlan.Common.Products {
 			this.pageLayout.Text = "Module auslegen";
 			this.pageLayout.UseVisualStyleBackColor = true;
 			// 
-			// btnAddModules
+			// label13
 			// 
-			this.btnAddModules.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnAddModules.Image = ((System.Drawing.Image)(resources.GetObject("btnAddModules.Image")));
-			this.btnAddModules.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnAddModules.Name = "btnAddModules";
-			this.btnAddModules.Size = new System.Drawing.Size(23, 22);
-			this.btnAddModules.Text = "toolStripButton1";
-			this.btnAddModules.Visible = false;
-			this.btnAddModules.Click += new System.EventHandler(this.btnAddModules_Click);
+			this.label13.Location = new System.Drawing.Point(336, 3);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(103, 26);
+			this.label13.TabIndex = 149;
+			this.label13.Text = "Teilflächen";
+			this.label13.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+			// 
+			// lstSubarea
+			// 
+			this.lstSubarea.FormattingEnabled = true;
+			this.lstSubarea.Location = new System.Drawing.Point(337, 32);
+			this.lstSubarea.Name = "lstSubarea";
+			this.lstSubarea.Size = new System.Drawing.Size(129, 69);
+			this.lstSubarea.TabIndex = 148;
+			this.lstSubarea.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
+			this.lstSubarea.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
+			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(471, 3);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(103, 26);
+			this.label1.TabIndex = 147;
+			this.label1.Text = "Parallele Reihen im Heizkreis";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+			// 
+			// lstRows
+			// 
+			this.lstRows.FormattingEnabled = true;
+			this.lstRows.Location = new System.Drawing.Point(472, 32);
+			this.lstRows.Name = "lstRows";
+			this.lstRows.Size = new System.Drawing.Size(102, 69);
+			this.lstRows.TabIndex = 146;
+			this.lstRows.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
+			this.lstRows.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
+			// 
+			// label12
+			// 
+			this.label12.Location = new System.Drawing.Point(243, 3);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(88, 26);
+			this.label12.TabIndex = 145;
+			this.label12.Text = "Heizkreise";
+			this.label12.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+			// 
+			// lstCircuits
+			// 
+			this.lstCircuits.FormattingEnabled = true;
+			this.lstCircuits.Location = new System.Drawing.Point(246, 32);
+			this.lstCircuits.Name = "lstCircuits";
+			this.lstCircuits.Size = new System.Drawing.Size(85, 69);
+			this.lstCircuits.TabIndex = 144;
+			this.lstCircuits.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
+			this.lstCircuits.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.Controls.Add(this.cmbOrientation);
+			this.groupBox1.Controls.Add(this.label3);
+			this.groupBox1.Controls.Add(this.cmbModulType);
+			this.groupBox1.Controls.Add(this.label2);
+			this.groupBox1.Location = new System.Drawing.Point(8, 6);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(214, 90);
+			this.groupBox1.TabIndex = 150;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Modul";
+			// 
+			// label2
+			// 
+			this.label2.Location = new System.Drawing.Point(6, 22);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(50, 13);
+			this.label2.TabIndex = 151;
+			this.label2.Text = "Typ:";
+			// 
+			// cmbModulType
+			// 
+			this.cmbModulType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbModulType.FormattingEnabled = true;
+			this.cmbModulType.Location = new System.Drawing.Point(62, 19);
+			this.cmbModulType.Name = "cmbModulType";
+			this.cmbModulType.Size = new System.Drawing.Size(146, 21);
+			this.cmbModulType.TabIndex = 151;
+			this.cmbModulType.SelectedIndexChanged += new System.EventHandler(this.cmbModulType_SelectedIndexChanged);
+			// 
+			// label3
+			// 
+			this.label3.Location = new System.Drawing.Point(6, 49);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(86, 13);
+			this.label3.TabIndex = 152;
+			this.label3.Text = "Ausrichtung:";
+			// 
+			// cmbOrientation
+			// 
+			this.cmbOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbOrientation.FormattingEnabled = true;
+			this.cmbOrientation.Location = new System.Drawing.Point(98, 46);
+			this.cmbOrientation.Name = "cmbOrientation";
+			this.cmbOrientation.Size = new System.Drawing.Size(110, 21);
+			this.cmbOrientation.TabIndex = 153;
 			// 
 			// planPanel
 			// 
@@ -362,7 +489,12 @@ namespace Europlan.Common.Products {
 			// 
 			// modulKlimaBodenPlanner
 			// 
+			this.modulKlimaBodenPlanner.AlignRectangle = false;
 			this.modulKlimaBodenPlanner.Mode = Europlan.Common.ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_NONE;
+			this.modulKlimaBodenPlanner.ModuleTypeToAdd = ((Europlan.Common.KlimaFlaechenModul.ModulTypeEnum)(Europlan.Common.KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30));
+			this.modulKlimaBodenPlanner.OptimalLayout = true;
+			this.modulKlimaBodenPlanner.StartingOrientation = ((Europlan.Common.KlimaFlaechenModul.ModulOrientationEnum)(Europlan.Common.KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT));
+			this.modulKlimaBodenPlanner.ListsNeedUpdate += new System.EventHandler(this.modulKlimaBodenPlanner_ListsNeedUpdate);
 			// 
 			// numRotation
 			// 
@@ -436,6 +568,8 @@ namespace Europlan.Common.Products {
 			this.grpCeilingContruction.PerformLayout();
 			this.grpConstructionParameter.ResumeLayout(false);
 			this.grpConstructionParameter.PerformLayout();
+			this.pageLayout.ResumeLayout(false);
+			this.groupBox1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -473,5 +607,16 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.Button btnVertical;
 		private System.Windows.Forms.Button btnHorizontal;
 		private System.Windows.Forms.ToolStripButton btnAddModules;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.ListBox lstSubarea;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.ListBox lstRows;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.ListBox lstCircuits;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.ComboBox cmbOrientation;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.ComboBox cmbModulType;
+		private System.Windows.Forms.Label label2;
 	}
 }

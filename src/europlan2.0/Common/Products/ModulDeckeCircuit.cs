@@ -403,5 +403,16 @@ namespace Europlan.Common {
 		public override double CircuitArea {
 			get { return this.CoveredArea; }
 		}
+
+		public bool ContainsModul(KlimaFlaechenModul modul) {
+			if (this.subAreas != null) {
+				foreach (ModulDeckeSubArea subArea in this.subAreas) {
+					if (subArea.ContainsModul(modul)) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 	}
 }
