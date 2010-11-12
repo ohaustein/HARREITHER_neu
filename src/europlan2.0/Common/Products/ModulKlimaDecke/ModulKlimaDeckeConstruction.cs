@@ -116,7 +116,7 @@ namespace Europlan.Common {
 			set { this.areas = value; }
 		}
 
-		public List<FreeModulLaneArea> GetFreeAreas(ModulKlimaDeckeProduct product) {
+		public List<FreeModulLaneArea> GetFreeAreas(ModulKlimaDeckeProduct product, List<KlimaFlaechenModul> excludeModules) {
 			List<FreeModulLaneArea> freeAreas = new List<FreeModulLaneArea>();
 			if (product.AssociatedRoom == null || product.AssociatedRoom.AssociatedPlan == null ||
 				!product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
@@ -129,19 +129,21 @@ namespace Europlan.Common {
 				freeAreas.Add(new FreeModulLaneArea(area.Top, area.Bottom));
 			}
 			foreach (KlimaFlaechenModul modul in module) {
-				foreach (FreeModulLaneArea area in freeAreas) {
-					if (modul.GraphPositionInLan >= area.Top && modul.GraphPositionInLan <= area.Bottom) {
-						int index = freeAreas.IndexOf(area);
-						freeAreas.Remove(area);
-						double modulTop = modul.GraphPositionInLan;
-						double modulBottom = modul.GraphBottomPositionInLane(measure);
-						if (area.Bottom != modulBottom) {
-							freeAreas.Insert(index, new FreeModulLaneArea(modulBottom, area.Bottom));
+				if (excludeModules == null || !excludeModules.Contains(modul)) {
+					foreach (FreeModulLaneArea area in freeAreas) {
+						if (modul.GraphPositionInLan >= area.Top && modul.GraphPositionInLan <= area.Bottom) {
+							int index = freeAreas.IndexOf(area);
+							freeAreas.Remove(area);
+							double modulTop = modul.GraphPositionInLan;
+							double modulBottom = modul.GraphBottomPositionInLane(measure);
+							if (area.Bottom != modulBottom) {
+								freeAreas.Insert(index, new FreeModulLaneArea(modulBottom, area.Bottom));
+							}
+							if (area.Top != modulTop) {
+								freeAreas.Insert(index, new FreeModulLaneArea(area.Top, modulTop));
+							}
+							break;
 						}
-						if (area.Top != modulTop) {
-							freeAreas.Insert(index, new FreeModulLaneArea(area.Top, modulTop));
-						}
-						break;
 					}
 				}
 			}
@@ -165,6 +167,33 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public int Nr {
 			get { return this.nr; }
+		}
+
+		public bool ModuleChangesPossible(KlimaFlaechenModul modul, KlimaFlaechenModul.ModulTypeEnum modulType, double position, double measure, ModulKlimaDeckeProduct product) {
+			List<KlimaFlaechenModul> excludeModules = new List<KlimaFlaechenModul>();
+			excludeModules.Add(modul);
+			double top = modul.GraphPositionInLan;
+			double bottom = modul.GraphPositionInLan + KlimaFlaechenModul.GetModuleHeight(modulType) * measure;
+			foreach (FreeModulLaneArea area in this.GetFreeAreas(product, excludeModules)) {
+				if (area.Fits(top, bottom)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public Nullable<double> BestMovePossible(KlimaFlaechenModul modul, double desiredPosition, double measure, ModulKlimaDeckeProduct product, bool bottomUp) {
+			List<KlimaFlaechenModul> excludeModules = new List<KlimaFlaechenModul>();
+			excludeModules.Add(modul);
+			double top = desiredPosition;
+			double bottom = desiredPosition + KlimaFlaechenModul.GetModuleHeight(modul.ModulType) * measure;
+			foreach (FreeModulLaneArea area in this.GetFreeAreas(product, excludeModules)) {
+				Nullable<double> bestMove = area.BestStart(top, bottom, bottomUp);
+				if (bestMove.HasValue) {
+					return bestMove;
+				}
+			}
+			return null;
 		}
 	}
 

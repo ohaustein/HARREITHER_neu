@@ -604,6 +604,11 @@ namespace Europlan.Common {
 			set { this.ceilingCoordinates = value; }
 		}
 
+		[XmlIgnore]
+		public List<Point2D> CeilingCoordinatesToUse {
+			get { return (this.ceilingCoordinates != null && this.ceilingCoordinates.Count > 0 ? this.ceilingCoordinates : this.roomCoordinates); }
+		}
+
 		public List<List<Point2D>> RoomUnusedAreaCoordinates {
 			get { return this.roomUnusedAreaCoordinates; }
 			set { this.roomUnusedAreaCoordinates = value; }

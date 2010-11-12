@@ -323,5 +323,13 @@ namespace Europlan.Common {
 				rotation = 0;
 			}
 		}
+
+		private void imagePanel_KeyDown(object sender, KeyEventArgs e) {
+			this.OnKeyDown(e);
+		}
+
+		private void imagePanel_KeyUp(object sender, KeyEventArgs e) {
+			this.OnKeyUp(e);
+		}
 	}
 }

@@ -23,11 +23,10 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanPanel));
 			this.cadOptions = new System.Windows.Forms.Panel();
-			this.cadPanelOptions = new Europlan.Common.CadPanelOptions();
-			this.cadPanel = new Europlan.Common.CadPanel();
 			this.imagePanel = new Europlan.Common.ImagePanel();
+			this.cadPanel = new Europlan.Common.CadPanel();
+			this.cadPanelOptions = new Europlan.Common.CadPanelOptions();
 			this.cadOptions.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -41,6 +40,39 @@ namespace Europlan.Common {
 			this.cadOptions.TabIndex = 0;
 			this.cadOptions.Visible = false;
 			// 
+			// imagePanel
+			// 
+			this.imagePanel.Angle = 0F;
+			this.imagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.imagePanel.EndPoint = null;
+			this.imagePanel.Length = 0;
+			this.imagePanel.Location = new System.Drawing.Point(200, 0);
+			this.imagePanel.Mode = Europlan.Common.PlanMode.PM_MOVE;
+			this.imagePanel.Name = "imagePanel";
+			this.imagePanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
+			this.imagePanel.Scale = null;
+			this.imagePanel.ShowRaster = false;
+			this.imagePanel.Size = new System.Drawing.Size(561, 459);
+			this.imagePanel.StartPoint = null;
+			this.imagePanel.TabIndex = 2;
+			this.imagePanel.XPos = 0F;
+			this.imagePanel.YPos = 0F;
+			this.imagePanel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.imagePanel_KeyUp);
+			this.imagePanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.imagePanel_KeyDown);
+			// 
+			// cadPanel
+			// 
+			this.cadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cadPanel.Location = new System.Drawing.Point(200, 0);
+			this.cadPanel.Name = "cadPanel";
+			this.cadPanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
+			this.cadPanel.PlanDefaultMargin = 5;
+			this.cadPanel.Size = new System.Drawing.Size(561, 459);
+			this.cadPanel.TabIndex = 1;
+			this.cadPanel.Visible = false;
+			this.cadPanel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.imagePanel_KeyUp);
+			this.cadPanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.imagePanel_KeyDown);
+			// 
 			// cadPanelOptions
 			// 
 			this.cadPanelOptions.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -50,32 +82,6 @@ namespace Europlan.Common {
 			this.cadPanelOptions.Size = new System.Drawing.Size(200, 459);
 			this.cadPanelOptions.TabIndex = 1;
 			this.cadPanelOptions.InvalidateNeeded += new System.EventHandler(this.cadPanelOptions_InvalidateNeeded);
-			// 
-			// cadPanel
-			// 
-			this.cadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.cadPanel.Location = new System.Drawing.Point(200, 0);
-			this.cadPanel.Name = "cadPanel";
-			this.cadPanel.PlanDefaultMargin = 5;
-			this.cadPanel.Size = new System.Drawing.Size(561, 459);
-			this.cadPanel.TabIndex = 1;
-			this.cadPanel.Visible = false;
-			// 
-			// imagePanel
-			// 
-			this.imagePanel.Angle = 0F;
-			this.imagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.imagePanel.EndPoint = null;
-			this.imagePanel.Length = 0;
-			this.imagePanel.Location = new System.Drawing.Point(200, 0);
-			this.imagePanel.Name = "imagePanel";
-			this.imagePanel.Scale = null;
-			this.imagePanel.ShowRaster = false;
-			this.imagePanel.Size = new System.Drawing.Size(561, 459);
-			this.imagePanel.StartPoint = null;
-			this.imagePanel.TabIndex = 2;
-			this.imagePanel.XPos = 0F;
-			this.imagePanel.YPos = 0F;
 			// 
 			// PlanPanel
 			// 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using WW.Math;
+using System.Windows.Forms;
 
 namespace Europlan.Common {
 
@@ -94,5 +95,8 @@ namespace Europlan.Common {
 
 		void SetPlanTransformations(double scale, double translationX, double translationY, double rotation);
 		void GetPlanTransformations(out double scale, out double translationX, out double translationY, out double rotation);
+
+		event KeyEventHandler KeyDown;
+		event KeyEventHandler KeyUp;
 	}
 }

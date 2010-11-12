@@ -20,7 +20,7 @@ namespace Europlan.Common {
 		public override void RecalculateSchienen() {
 			if (this.Planner == null || this.Planner.Product == null ||
 				this.Planner.Product.AssociatedRoom == null ||
-				this.Planner.Product.AssociatedRoom.RoomCoordinates == null ||
+				this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse == null ||
 				this.Planner.ConnectedPlanPanel == null ||
 				this.Planner.ConnectedPlanPanel.Plan == null) {
 				return;
@@ -32,7 +32,7 @@ namespace Europlan.Common {
 			double minX = double.MaxValue;
 			double maxY = double.MinValue;
 			double minY = double.MaxValue;
-			foreach (Point2D point in this.Planner.Product.AssociatedRoom.RoomCoordinates) {
+			foreach (Point2D point in this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse) {
 				tmp = matrix.Transform(point);
 				if (tmp.X > maxX) {
 					maxX = tmp.X;
@@ -69,7 +69,7 @@ namespace Europlan.Common {
 				curPos += increment;
 			}
 
-			Polygon2D room = new Polygon2D(this.Planner.Product.AssociatedRoom.RoomCoordinates);
+			Polygon2D room = new Polygon2D(this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse);
 			if (room.IsClockwise()) {
 				room = room.GetReverse();
 			}
@@ -97,7 +97,7 @@ namespace Europlan.Common {
 			Point2D startPoint = new Point2D(double.MaxValue, 0);
 			int start = -1;
 			int i = 0;
-			foreach (Point2D point in this.Planner.Product.AssociatedRoom.RoomCoordinates) {
+			foreach (Point2D point in this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse) {
 				Point2D pointTf = matrix.Transform(point);
 				if (pointTf.X < startPoint.X) {
 					startPoint = pointTf;
@@ -292,7 +292,7 @@ namespace Europlan.Common {
 		private GraphicsPath GetRoomPath() {
 			List<PointF> transformedPoints = new List<PointF>();
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
-			foreach (Point2D point in this.Planner.Product.AssociatedRoom.RoomCoordinates) {
+			foreach (Point2D point in this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse) {
 				Point2D tmp = additionalTransformation.TransformTo2D(point);
 				transformedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
 			}
@@ -344,8 +344,8 @@ namespace Europlan.Common {
 			if (this.Planner == null ||
 				this.Planner.Product == null ||
 				this.Planner.Product.AssociatedRoom == null ||
-				this.Planner.Product.AssociatedRoom.RoomCoordinates == null ||
-				this.Planner.Product.AssociatedRoom.RoomCoordinates.Count < 3 ||
+				this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse == null ||
+				this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse.Count < 3 ||
 				this.Planner.ConnectedPlanPanel == null ||
 				this.Planner.ConnectedPlanPanel.Plan == null ||
 				this.Planner.ConnectedPlanPanel.Plan.Measure == null) {
@@ -397,8 +397,8 @@ namespace Europlan.Common {
 			if (this.Planner == null ||
 				this.Planner.Product == null ||
 				this.Planner.Product.AssociatedRoom == null ||
-				this.Planner.Product.AssociatedRoom.RoomCoordinates == null ||
-				this.Planner.Product.AssociatedRoom.RoomCoordinates.Count < 3 ||
+				this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse == null ||
+				this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse.Count < 3 ||
 				this.Planner.ConnectedPlanPanel == null ||
 				this.Planner.ConnectedPlanPanel.Plan == null ||
 				this.Planner.ConnectedPlanPanel.Plan.Measure == null) {
