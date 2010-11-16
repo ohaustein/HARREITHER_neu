@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Star.SettingsXpress;
 
 namespace Europlan.Common.Products {
 	public partial class ModulKlimaDeckePlannerForm : Form {
