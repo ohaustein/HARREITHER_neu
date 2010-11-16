@@ -44,13 +44,13 @@ namespace Europlan.Common {
 			this.picturePanel.ApplyChangesToPlan();
 			SettingsFile.Update();
 
-			if (!plan.Measure.HasValue) {
+			if (!this.picturePanel.Plan.Measure.HasValue) {
 				DialogResult result = MessageBox.Show(EuroplanRes.PlanOptionsForm_KeinMaﬂstabText, EuroplanRes.PlanOptionsForm_KeinMaﬂstabTitel, MessageBoxButtons.YesNo);
 				if (result == DialogResult.Yes) {
-					this.btnMove.Checked = false;
-					this.btnDistance.Checked = true;
-					this.cadPanel.Mode = PlanMode.PM_PICK_MEASURE;
-					txtLength.Text = "";
+					picturePanel.Cursor = Cursors.Cross;
+					btnMove.Checked = false;
+					btnDistance.Checked = true;
+					picturePanel.Mode = PlanMode.PM_PICK_MEASURE;
 					e.Cancel = true;
 				} else {
 					this.DialogResult = DialogResult.Cancel;

@@ -136,7 +136,7 @@ namespace Europlan.Common {
 		}
 
 		private void openPlanOptions(Plan plan) {
-			DialogResult result;
+			DialogResult result = DialogResult.OK;
 			if (plan != null) {
 				if (plan is ImagePlan) {
 					ImagePlanOptionsForm ipoForm = new ImagePlanOptionsForm(plan as ImagePlan);

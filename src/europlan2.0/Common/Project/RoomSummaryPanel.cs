@@ -437,6 +437,10 @@ namespace Europlan.Common {
 				if (!this.chkCeilingGeometry.Checked) {
 					this.room.CeilingCoordinates.Clear();
 					this.room.CeilingUnusedAreaCoordinates.Clear();
+				} else {
+					this.room.CeilingCoordinates.Clear();
+					this.room.CeilingUnusedAreaCoordinates.Clear();
+					this.room.CeilingCoordinates.AddRange(this.room.RoomCoordinates);
 				}
 				UpdateControl(false);
 			}
