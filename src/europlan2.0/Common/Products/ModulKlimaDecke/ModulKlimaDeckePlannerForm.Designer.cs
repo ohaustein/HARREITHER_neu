@@ -654,6 +654,8 @@ namespace Europlan.Common.Products {
 			this.Controls.Add(this.toolStrip);
 			this.Name = "ModulKlimaDeckePlannerForm";
 			this.Text = "Modul Klima-Decke - grafische Auslegung";
+			this.Load += new System.EventHandler(this.ModulKlimaDeckePlannerForm_Load);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModulKlimaDeckePlannerForm_FormClosing);
 			this.toolStrip.ResumeLayout(false);
 			this.toolStrip.PerformLayout();
 			this.panel1.ResumeLayout(false);

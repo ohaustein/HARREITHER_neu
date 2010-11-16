@@ -578,5 +578,18 @@ namespace Europlan.Common.Products {
 				this.planPanel.InvalidateGraphics();
 			}
 		}
+
+		private void ModulKlimaDeckePlannerForm_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["ModulKlimaDeckePlannerForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
+			this.Size = settings.GetSize("Size", this.Size);
+		}
+
+		private void ModulKlimaDeckePlannerForm_FormClosing(object sender, FormClosingEventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["ModulKlimaDeckePlannerForm"];
+			settings.StorePoint("Location", this.Location);
+			settings.StoreSize("Size", this.Size);
+			SettingsFile.Update();
+		}
 	}
 }
