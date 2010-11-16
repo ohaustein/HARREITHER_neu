@@ -9942,6 +9942,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sie haben noch keinen Maßstab für diesen Plan definiert. Ohne Maßstab kann der Plan nicht verwendet werden. Klicken Sie auf Ja, um den Maßstab zu definieren oder Nein, um die Änderungen zu verwerfen und den Plan zu löschen..
+        /// </summary>
+        internal static string PlanOptionsForm_KeinMaßstabText {
+            get {
+                return ResourceManager.GetString("PlanOptionsForm_KeinMaßstabText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kein Maßstab definiert.
+        /// </summary>
+        internal static string PlanOptionsForm_KeinMaßstabTitel {
+            get {
+                return ResourceManager.GetString("PlanOptionsForm_KeinMaßstabTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Länge:.
         /// </summary>
         internal static string PlanOptionsForm_Leange {

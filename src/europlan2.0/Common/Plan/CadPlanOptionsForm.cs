@@ -54,6 +54,25 @@ namespace Europlan.Common {
 		}
 
 		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["CadPlanOptionsForm"];
+			settings.StorePoint("Location", this.Location);
+			settings.StoreSize("Size", this.Size);
+			SettingsFile.Update();
+
+			if (!plan.Measure.HasValue) {
+				DialogResult result = MessageBox.Show(EuroplanRes.PlanOptionsForm_KeinMaﬂstabText, EuroplanRes.PlanOptionsForm_KeinMaﬂstabTitel, MessageBoxButtons.YesNo);
+				if (result == DialogResult.Yes) {
+					this.btnMove.Checked = false;
+					this.btnDistance.Checked = true;
+					this.cadPanel.Mode = PlanMode.PM_PICK_MEASURE;
+					txtLength.Text = "";
+					e.Cancel = true;
+				} else {
+					this.DialogResult = DialogResult.Cancel;
+					return;
+				}
+			}
+
 			this.plan.Scale = this.cadPanel.PlanScale;
 			this.plan.TranslationX = this.cadPanel.PlanTranslation.X;
 			this.plan.TranslationY = this.cadPanel.PlanTranslation.Y;
@@ -64,11 +83,7 @@ namespace Europlan.Common {
 					this.plan.DisabledLayers.Add(layer.Name);
 				}
 			}
-
-			SettingsKey settings = SettingsFile.Settings["CadPlanOptionsForm"];
-			settings.StorePoint("Location", this.Location);
-			settings.StoreSize("Size", this.Size);
-			SettingsFile.Update();
+			this.DialogResult = DialogResult.OK;
 		}
 
 		private void ImagePlanOptionsForm_Load(object sender, EventArgs e) {

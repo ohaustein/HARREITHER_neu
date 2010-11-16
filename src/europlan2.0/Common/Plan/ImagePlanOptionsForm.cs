@@ -44,6 +44,20 @@ namespace Europlan.Common {
 			this.picturePanel.ApplyChangesToPlan();
 			SettingsFile.Update();
 
+			if (!plan.Measure.HasValue) {
+				DialogResult result = MessageBox.Show(EuroplanRes.PlanOptionsForm_KeinMaﬂstabText, EuroplanRes.PlanOptionsForm_KeinMaﬂstabTitel, MessageBoxButtons.YesNo);
+				if (result == DialogResult.Yes) {
+					this.btnMove.Checked = false;
+					this.btnDistance.Checked = true;
+					this.cadPanel.Mode = PlanMode.PM_PICK_MEASURE;
+					txtLength.Text = "";
+					e.Cancel = true;
+				} else {
+					this.DialogResult = DialogResult.Cancel;
+					return;
+				}
+			}
+			this.DialogResult = DialogResult.OK;
 		}
 
 		private void ImagePlanOptionsForm_Load(object sender, EventArgs e) {

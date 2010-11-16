@@ -3548,6 +3548,12 @@ recht</value>
   <data name="PlannedProductPanel_WaermebedarfDecken" xml:space="preserve">
     <value>Wärmebedarf decken</value>
   </data>
+  <data name="PlanOptionsForm_KeinMaßstabText" xml:space="preserve">
+    <value>Sie haben noch keinen Maßstab für diesen Plan definiert. Ohne Maßstab kann der Plan nicht verwendet werden. Klicken Sie auf Ja, um den Maßstab zu definieren oder Nein, um die Änderungen zu verwerfen und den Plan zu löschen.</value>
+  </data>
+  <data name="PlanOptionsForm_KeinMaßstabTitel" xml:space="preserve">
+    <value>Kein Maßstab definiert</value>
+  </data>
   <data name="PlanOptionsForm_Leange" xml:space="preserve">
     <value>Länge:</value>
   </data>

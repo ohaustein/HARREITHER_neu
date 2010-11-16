@@ -136,10 +136,11 @@ namespace Europlan.Common {
 		}
 
 		private void openPlanOptions(Plan plan) {
+			DialogResult result;
 			if (plan != null) {
 				if (plan is ImagePlan) {
 					ImagePlanOptionsForm ipoForm = new ImagePlanOptionsForm(plan as ImagePlan);
-					ipoForm.ShowDialog();
+					result = ipoForm.ShowDialog();
 					if (ipoForm.UnsavedChanges) {
 						if (ProjectChanged != null) {
 							ProjectChanged(this);
@@ -148,13 +149,16 @@ namespace Europlan.Common {
 					ipoForm.Dispose();
 				} else if (plan is CadPlan) {
 					CadPlanOptionsForm cpoForm = new CadPlanOptionsForm(plan as CadPlan);
-					cpoForm.ShowDialog();
+					result = cpoForm.ShowDialog();
 					if (cpoForm.UnsavedChanges) {
 						if (ProjectChanged != null) {
 							ProjectChanged(this);
 						}
 					}
 					cpoForm.Dispose();
+				}
+				if (result == DialogResult.Cancel) {
+					deletePlan(plan);
 				}
 			}
 		}
