@@ -87,6 +87,7 @@ namespace Europlan.Common {
 							ProjectChanged(this);
 						}
 						UpdateControl(false);
+						openPlanOptions(plan);
 					}
 					newPlanForm.Dispose();
 				}
@@ -112,15 +113,7 @@ namespace Europlan.Common {
 			if (result.Equals(DialogResult.Yes)) {
 				if (dgvPlans.SelectedRows[0] != null) {
 					Plan plan = dgvPlans.SelectedRows[0].DataBoundItem as Plan;
-					string fileName = plan.AbsoluteFileName;
-					if (File.Exists(fileName)) {
-						File.Delete(fileName);
-					}
-					Project.Instance.ImportedPlans.Remove(plan);
-					if (ProjectChanged != null) {
-						ProjectChanged(this);
-					}
-					UpdateControl(false);
+					deletePlan(plan);
 				}
 			}
 		}
@@ -137,25 +130,46 @@ namespace Europlan.Common {
 				e.RowIndex >= 0 && e.RowIndex < this.dgvPlans.Rows.Count) {
 				Plan plan = this.dgvPlans.Rows[e.RowIndex].DataBoundItem as Plan;
 				if (plan != null) {
-					if (plan is ImagePlan) {
-						ImagePlanOptionsForm ipoForm = new ImagePlanOptionsForm(plan as ImagePlan);
-						ipoForm.ShowDialog();
-						if (ipoForm.UnsavedChanges) {
-							if (ProjectChanged != null) {
-								ProjectChanged(this);
-							}
-						}
-						ipoForm.Dispose();
-					} else if (plan is CadPlan) {
-						CadPlanOptionsForm cpoForm = new CadPlanOptionsForm(plan as CadPlan);
-						cpoForm.ShowDialog();
-						if (cpoForm.UnsavedChanges) {
-							if (ProjectChanged != null) {
-								ProjectChanged(this);
-							}
+					openPlanOptions(plan);
+				}
+			}
+		}
+
+		private void openPlanOptions(Plan plan) {
+			if (plan != null) {
+				if (plan is ImagePlan) {
+					ImagePlanOptionsForm ipoForm = new ImagePlanOptionsForm(plan as ImagePlan);
+					ipoForm.ShowDialog();
+					if (ipoForm.UnsavedChanges) {
+						if (ProjectChanged != null) {
+							ProjectChanged(this);
 						}
 					}
+					ipoForm.Dispose();
+				} else if (plan is CadPlan) {
+					CadPlanOptionsForm cpoForm = new CadPlanOptionsForm(plan as CadPlan);
+					cpoForm.ShowDialog();
+					if (cpoForm.UnsavedChanges) {
+						if (ProjectChanged != null) {
+							ProjectChanged(this);
+						}
+					}
+					cpoForm.Dispose();
 				}
+			}
+		}
+
+		private void deletePlan(Plan plan) {
+			if (plan != null) {
+				string fileName = plan.AbsoluteFileName;
+				if (File.Exists(fileName)) {
+					File.Delete(fileName);
+				}
+				Project.Instance.ImportedPlans.Remove(plan);
+				if (ProjectChanged != null) {
+					ProjectChanged(this);
+				}
+				UpdateControl(false);
 			}
 		}
 
