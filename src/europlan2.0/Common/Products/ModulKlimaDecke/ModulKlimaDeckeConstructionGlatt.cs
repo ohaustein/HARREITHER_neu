@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionGlatt : ModulKlimaDeckeConstruction {
-		private double schienenBreite = 0.1; // meter
+		private double schienenBreite = 0.06; // meter
 		private double schienenAbstand = 0.3; // meter
 		private double offset = 0; // meter
 
