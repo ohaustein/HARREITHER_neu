@@ -2483,6 +2483,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plan entfernen?.
+        /// </summary>
+        internal static string FloorSummaryPanel_RemovePlanCaption {
+            get {
+                return ResourceManager.GetString("FloorSummaryPanel_RemovePlanCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Für den gewählten Plan sind bereits Räume definiert worden. Das Entfernen eines Plans bewirkt, dass alle bereits definierten Raumgeometrien und darin grafisch ausgelegte Systeme verloren gehen. Wollen Sie wirklich den Plan entfernen?.
+        /// </summary>
+        internal static string FloorSummaryPanel_RemovePlanText {
+            get {
+                return ResourceManager.GetString("FloorSummaryPanel_RemovePlanText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verteiler anlegen.
         /// </summary>
         internal static string FloorSummaryPanel_VerteilerAnlegen {

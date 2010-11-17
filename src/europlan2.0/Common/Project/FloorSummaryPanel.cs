@@ -414,7 +414,7 @@ namespace Europlan.Common {
 						}
 					}
 					if (roomCoordinatesAvailable) {
-						DialogResult result = MessageBox.Show(EuroplanRes.FloorSummaryPanel_ChangePlanText, EuroplanRes.FloorSummaryPanel_ChangePlanCaption, MessageBoxButtons.YesNo);
+						DialogResult result = MessageBox.Show(EuroplanRes.FloorSummaryPanel_RemovePlanText, EuroplanRes.FloorSummaryPanel_RemovePlanCaption, MessageBoxButtons.YesNo);
 						if (result == DialogResult.No) {
 							UpdateControl(false);
 							return;

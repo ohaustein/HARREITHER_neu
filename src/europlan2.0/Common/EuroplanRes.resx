@@ -949,6 +949,12 @@ raum</value>
   <data name="FloorSummaryPanel_RaumtemperaturKuehlLang" xml:space="preserve">
     <value>Gewünschte Rauminnentemperatur bei Kühlung</value>
   </data>
+  <data name="FloorSummaryPanel_RemovePlanCaption" xml:space="preserve">
+    <value>Plan entfernen?</value>
+  </data>
+  <data name="FloorSummaryPanel_RemovePlanText" xml:space="preserve">
+    <value>Für den gewählten Plan sind bereits Räume definiert worden. Das Entfernen eines Plans bewirkt, dass alle bereits definierten Raumgeometrien und darin grafisch ausgelegte Systeme verloren gehen. Wollen Sie wirklich den Plan entfernen?</value>
+  </data>
   <data name="FloorSummaryPanel_VerteilerAnlegen" xml:space="preserve">
     <value>Verteiler anlegen</value>
   </data>
