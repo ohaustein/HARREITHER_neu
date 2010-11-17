@@ -114,6 +114,8 @@ namespace Europlan.Common {
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "PlanSetMeasureForm";
 			this.Text = "Maﬂstab setzen";
+			this.Load += new System.EventHandler(this.PlanSetMeasureForm_Load);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PlanSetMeasureForm_FormClosing);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

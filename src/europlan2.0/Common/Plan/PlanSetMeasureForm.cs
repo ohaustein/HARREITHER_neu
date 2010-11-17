@@ -30,5 +30,16 @@ namespace Europlan.Common {
 		public double Length {
 			get { return (double)this.txtLength.Value; }
 		}
+
+		private void PlanSetMeasureForm_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["PlanSetMeasureForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
+		}
+
+		private void PlanSetMeasureForm_FormClosing(object sender, FormClosingEventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["PlanSetMeasureForm"];
+			settings.StorePoint("Location", this.Location);
+			SettingsFile.Update();
+		}
 	}
 }

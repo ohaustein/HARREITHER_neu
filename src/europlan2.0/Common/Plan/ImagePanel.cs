@@ -130,7 +130,7 @@ namespace Europlan.Common {
 			ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
 			ctrlToPlan.Rotate(this.Angle);
 			ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-			ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
+			ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
 			ctrlToPlan.Translate(this.XPos, this.YPos);
 			ctrlToPlan.Invert();
 			ctrlToPlan.TransformPoints(tmp);
@@ -181,10 +181,10 @@ namespace Europlan.Common {
 					scale = 1;
 					this.Scale = scale;
 				}
-				paintMatrix.Translate(((float)image.Width / 2 + this.XPos) * this.Scale.Value, ((float)image.Height / 2 + this.YPos) * this.Scale.Value);
+				paintMatrix.Translate((float)((image.Width / 2 + this.XPos) * this.PlanScale), (float)((image.Height / 2 + this.YPos) * this.PlanScale));
 				paintMatrix.Rotate(this.Angle);
-				paintMatrix.Translate(-((float)image.Width / 2 + this.XPos) * this.Scale.Value, -((float)image.Height / 2 + this.YPos) * this.Scale.Value);
-				paintMatrix.Scale(this.Scale.Value, this.Scale.Value);
+				paintMatrix.Translate(-(float)((image.Width / 2 + this.XPos) * this.PlanScale), -(float)((image.Height / 2 + this.YPos) * this.PlanScale));
+				paintMatrix.Scale((float)this.PlanScale, (float)this.PlanScale);
 				paintMatrix.Translate(this.XPos, this.YPos);
 				g.Transform = paintMatrix;
 
@@ -232,13 +232,13 @@ namespace Europlan.Common {
 		}
 
 		public void AddScale(double addedScale, Nullable<WW.Math.Point2D> center) {
-			if (this.Scale.Value * addedScale < 0.01) {
-				addedScale = 0.01 / this.Scale.Value;
+			if (this.PlanScale * addedScale < 0.01) {
+				addedScale = 0.01 / this.PlanScale;
 			}
-			if (this.Scale.Value * addedScale > 10000.0) {
-				addedScale = 10000.0 / this.Scale.Value;
+			if (this.PlanScale * addedScale > 10000.0) {
+				addedScale = 10000.0 / this.PlanScale;
 			}
-			double oldScale = this.Scale.Value;
+			double oldScale = this.PlanScale;
 			double newScale = oldScale * addedScale;
 			this.Scale = (float)newScale;
 			double centerX = center.HasValue ? center.Value.X : this.ClientSize.Width / 2.0;
@@ -267,7 +267,7 @@ namespace Europlan.Common {
 				ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
 				ctrlToPlan.Rotate(this.Angle);
 				ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-				ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
+				ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
 				ctrlToPlan.Translate(this.XPos, this.YPos);
 				ctrlToPlan.Invert();
 				ctrlToPlan.TransformPoints(arr);
@@ -286,7 +286,7 @@ namespace Europlan.Common {
 				ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
 				ctrlToPlan.Rotate(this.Angle);
 				ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-				ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
+				ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
 				ctrlToPlan.Translate(this.XPos, this.YPos);
 				ctrlToPlan.Invert();
 				ctrlToPlan.TransformPoints(arr);
@@ -313,7 +313,7 @@ namespace Europlan.Common {
 				ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
 				ctrlToPlan.Rotate(this.Angle);
 				ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-				ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
+				ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
 				ctrlToPlan.Translate(this.XPos, this.YPos);
 				ctrlToPlan.Invert();
 				ctrlToPlan.TransformPoints(arr);
@@ -366,7 +366,7 @@ namespace Europlan.Common {
 			ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
 			ctrlToPlan.Rotate(this.Angle);
 			ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-			ctrlToPlan.Scale(this.Scale.Value, this.Scale.Value);
+			ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
 			ctrlToPlan.Translate(this.XPos, this.YPos);
 			ctrlToPlan.Invert();
 			ctrlToPlan.TransformPoints(arr);
