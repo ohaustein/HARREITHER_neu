@@ -2240,7 +2240,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Für den gewählten Plan sind bereits Räume definiert worden. Das Auswählen eines anderen Plans bewirkt, dass alle bereits definierten Raumgeometrien und darin verplante Systeme verloren gehen. Wollen Sie wirklich einen andern Plan wählen?.
+        ///   Looks up a localized string similar to Für den gewählten Plan sind bereits Räume definiert worden. Das Auswählen eines anderen Plans bewirkt, dass alle bereits definierten Raumgeometrien und darin grafisch ausgelegte Systeme verloren gehen. Wollen Sie wirklich einen anderen Plan wählen?.
         /// </summary>
         internal static string FloorSummaryPanel_ChangePlanText {
             get {

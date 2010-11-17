@@ -406,6 +406,39 @@ namespace Europlan.Common {
 						}
 					}
 				} else {
+					bool roomCoordinatesAvailable = false;
+					foreach (Room room in floor.Rooms) {
+						if (room.RoomCoordinates.Count > 0) {
+							roomCoordinatesAvailable = true;
+							break;
+						}
+					}
+					if (roomCoordinatesAvailable) {
+						DialogResult result = MessageBox.Show(EuroplanRes.FloorSummaryPanel_ChangePlanText, EuroplanRes.FloorSummaryPanel_ChangePlanCaption, MessageBoxButtons.YesNo);
+						if (result == DialogResult.No) {
+							UpdateControl(false);
+							return;
+						} else {
+							foreach (Room room in floor.Rooms) {
+								if (room.RoomCoordinates.Count > 0) {
+									room.RoomCoordinates.Clear();
+									room.RoomUnusedAreaCoordinates.Clear();
+									room.CeilingCoordinates.Clear();
+									room.CeilingUnusedAreaCoordinates.Clear();
+									foreach (PlannedProduct pp in room.PlannedProducts) {
+										if (pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
+											pp.Product.GraphicalMode = false;
+										}
+									}
+								}
+								room.PlanSettingX = null;
+								room.PlanSettingY = null;
+								room.PlanSettingScale = null;
+								room.PlanSettingAngle = null;
+							}
+						}
+					}
+
 					floor.AssociatedPlanId = null;
 					cmbPlans.Enabled = false;
 				}
@@ -437,6 +470,11 @@ namespace Europlan.Common {
 									room.RoomUnusedAreaCoordinates.Clear();
 									room.CeilingCoordinates.Clear();
 									room.CeilingUnusedAreaCoordinates.Clear();
+									foreach (PlannedProduct pp in room.PlannedProducts) {
+										if (pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
+											pp.Product.GraphicalMode = false;
+										}
+									}
 								}
 								room.PlanSettingX = null;
 								room.PlanSettingY = null;

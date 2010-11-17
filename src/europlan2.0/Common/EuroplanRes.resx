@@ -863,7 +863,7 @@ Ecken</value>
     <value>Anderen Plan zuweisen?</value>
   </data>
   <data name="FloorSummaryPanel_ChangePlanText" xml:space="preserve">
-    <value>Für den gewählten Plan sind bereits Räume definiert worden. Das Auswählen eines anderen Plans bewirkt, dass alle bereits definierten Raumgeometrien und darin verplante Systeme verloren gehen. Wollen Sie wirklich einen andern Plan wählen?</value>
+    <value>Für den gewählten Plan sind bereits Räume definiert worden. Das Auswählen eines anderen Plans bewirkt, dass alle bereits definierten Raumgeometrien und darin grafisch ausgelegte Systeme verloren gehen. Wollen Sie wirklich einen anderen Plan wählen?</value>
   </data>
   <data name="FloorSummaryPanel_Flaeche" xml:space="preserve">
     <value>A
