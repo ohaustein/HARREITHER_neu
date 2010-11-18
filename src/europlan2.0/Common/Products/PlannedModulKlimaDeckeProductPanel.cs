@@ -283,6 +283,7 @@ namespace Europlan.Common {
 					this.numAreaUnheated.Enabled = false;
 					this.dgvModules.Enabled = false;
 					this.btnGraphical.Enabled = true;
+					(this.product.Product as ModulKlimaDeckeProduct).PlannedCeilingAreaPercentage = 100;
 				} else {
 					this.numArea.Enabled = true;
 					this.numAreaPercentage.Enabled = true;
@@ -1167,6 +1168,7 @@ namespace Europlan.Common {
 								this.product.Product.PlannedCircuits.Add(new ModulDeckeCircuit());
 							}
 						}
+						(this.product.Product as ModulKlimaDeckeProduct).PlannedCeilingAreaPercentage = 100;
 					}
 				}
 				this.product.Product.GraphicalMode = rbLayoutGraphical.Checked;
