@@ -12866,6 +12866,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unterkonstruktion ändern?.
+        /// </summary>
+        internal static string SystemParametersPanel_ChangeConstructionCaption {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_ChangeConstructionCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es sind bereits Produkte im grafischen Modus verplant, die eine andere Unterkonstruktion verwenden. Durch das Ändern der Unterkonstruktion gehen die bereits grafisch verplanten Produkte verloren. Wollen Sie wirklich die Unterkonstruktion ändern?.
+        /// </summary>
+        internal static string SystemParametersPanel_ChangeConstructionText {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_ChangeConstructionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dichte des Mediums:.
         /// </summary>
         internal static string SystemParametersPanel_Dichte {

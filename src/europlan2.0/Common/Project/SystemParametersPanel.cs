@@ -12,6 +12,7 @@ namespace Europlan.Common {
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+		private bool updateOngoing = false;
 
 		private Configuration.ConfigurationType configurationType = Configuration.ConfigurationType.ProjectConfiguration;
 		
@@ -227,12 +228,14 @@ namespace Europlan.Common {
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
+			updateOngoing = true;
 			InitializeEurovalValues();
 			InitializeEcothermValues();
 			InitializeModulBodenValues();
 			InitializeModulDeckeValues();
 			InitializeHithermValues();
 			InitializeHithermCompactValues();
+			updateOngoing = false;
 		}
 
 		public bool AllowLeave() {
@@ -1032,6 +1035,28 @@ namespace Europlan.Common {
 		}
 
 		private void cmbConstruction_SelectedIndexChanged(object sender, EventArgs e) {
+			if (!updateOngoing) {
+				bool graphicalPlanned = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						foreach (PlannedProduct pp in room.PlannedProducts) {
+							if (pp.Product is ModulKlimaDeckeProduct) {
+								if (pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
+									graphicalPlanned = true;
+									break;
+								}
+							}
+						}
+					}
+				}
+				if (graphicalPlanned) {
+					DialogResult result = MessageBox.Show(EuroplanRes.SystemParametersPanel_ChangeConstructionText, EuroplanRes.SystemParametersPanel_ChangeConstructionCaption, MessageBoxButtons.YesNo);
+					if (result == DialogResult.No) {
+						UpdateControl(false);
+						return;
+					}
+				}
+			}
 			ModulKlimaDeckeProduct.ConfigModulCeilingConstruction = (int)cmbModulDeckeConstruction.SelectedItem;
 			if (ProjectChanged != null) {
 				ProjectChanged(null);

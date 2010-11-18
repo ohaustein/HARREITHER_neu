@@ -4570,6 +4570,12 @@ fläche
   <data name="SystemParametersPanel_AlphaWand" xml:space="preserve">
     <value>Alpha Wand:</value>
   </data>
+  <data name="SystemParametersPanel_ChangeConstructionCaption" xml:space="preserve">
+    <value>Unterkonstruktion ändern?</value>
+  </data>
+  <data name="SystemParametersPanel_ChangeConstructionText" xml:space="preserve">
+    <value>Es sind bereits Produkte im grafischen Modus verplant, die eine andere Unterkonstruktion verwenden. Durch das Ändern der Unterkonstruktion gehen die bereits grafisch verplanten Produkte verloren. Wollen Sie wirklich die Unterkonstruktion ändern?</value>
+  </data>
   <data name="SystemParametersPanel_Dichte" xml:space="preserve">
     <value>Dichte des Mediums:</value>
   </data>
