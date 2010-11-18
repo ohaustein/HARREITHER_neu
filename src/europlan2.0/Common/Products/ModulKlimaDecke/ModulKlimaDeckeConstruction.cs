@@ -85,6 +85,11 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public abstract List<Point2D> CeilingCoordinates {
+			get;
+		}
+
+		[XmlIgnore]
 		public List<PossibleModulLane> PossibleLanes {
 			get { return this.possibleLanes; }
 		}
