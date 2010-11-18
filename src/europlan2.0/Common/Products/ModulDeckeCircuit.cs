@@ -414,5 +414,13 @@ namespace Europlan.Common {
 			}
 			return false;
 		}
+
+		public int CountModules() {
+			int count = 0;
+			foreach (ModulDeckeSubArea subArea in this.subAreas) {
+				count += subArea.CountModules();
+			}
+			return count;
+		}
 	}
 }

@@ -79,5 +79,13 @@ namespace Europlan.Common {
 			}
 			return false;
 		}
+
+		public int CountModules() {
+			int count = 0;
+			foreach (KlimaFlaechenList row in this.rows) {
+				count += row.CountModules();
+			}
+			return count;
+		}
 	}
 }

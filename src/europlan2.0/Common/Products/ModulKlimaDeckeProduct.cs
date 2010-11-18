@@ -1254,6 +1254,39 @@ namespace Europlan.Common {
 			}
 			return modules;
 		}
+
+		public List<KlimaFlaechenModulWithRow> GetModulesInLaneWithRow(int lane) {
+			List<KlimaFlaechenModulWithRow> modules = new List<KlimaFlaechenModulWithRow>();
+			foreach (ModulDeckeCircuit c in this.circuits) {
+				foreach (ModulDeckeSubArea subArea in c.SubAreas) {
+					foreach (KlimaFlaechenList row in subArea.Rows) {
+						foreach (KlimaFlaechenModul modul in row.List) {
+							if (modul.GraphLane == lane) {
+								modules.Add(new KlimaFlaechenModulWithRow(modul, row));
+							}
+						}
+					}
+				}
+			}
+			return modules;
+		}
+
+		public int CountModules() {
+			int count = 0;
+			foreach (ModulDeckeCircuit circuit in this.circuits) {
+				count += circuit.CountModules();
+			}
+			return count;
+		}
 	}
-	
+
+	public struct KlimaFlaechenModulWithRow {
+		public KlimaFlaechenModul modul;
+		public KlimaFlaechenList row;
+
+		public KlimaFlaechenModulWithRow(KlimaFlaechenModul modul, KlimaFlaechenList row) {
+			this.modul = modul;
+			this.row = row;
+		}
+	}
 }

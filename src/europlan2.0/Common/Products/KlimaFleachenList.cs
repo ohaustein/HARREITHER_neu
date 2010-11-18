@@ -70,5 +70,9 @@ namespace Europlan.Common {
 		public bool ContainsModul(KlimaFlaechenModul modul) {
 			return this.list != null && this.list.Contains(modul);
 		}
+
+		public int CountModules() {
+			return this.list.Count;
+		}
 	}
 }

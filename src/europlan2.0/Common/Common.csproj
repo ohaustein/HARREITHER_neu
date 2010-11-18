@@ -266,6 +266,8 @@
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ExtendedCorrections.cs" />
+    <Compile Include="Products\ModulKlimaDecke\CompareablePair.cs" />
+    <Compile Include="Products\ModulKlimaDecke\FreeModulLaneArea.cs" />
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstruction.cs" />
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckePlanner.cs">
       <SubType>Component</SubType>
@@ -281,6 +283,8 @@
     </Compile>
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstructionAkustik.cs" />
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstructionGlatt.cs" />
+    <Compile Include="Products\ModulKlimaDecke\PossibleModulLane.cs" />
+    <Compile Include="Products\ModulKlimaDecke\PossibleModulLaneArea.cs" />
     <Compile Include="Products\PlannedEcothermProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

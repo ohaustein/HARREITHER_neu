@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionGlatt : ModulKlimaDeckeConstruction {
-		private double schienenBreite = 0.04; // meter
+		private double schienenBreite = 0.045; // meter
 		private double schienenAbstand = 0.3; // meter
 		private double offset = 0; // meter
 
@@ -94,14 +94,18 @@ namespace Europlan.Common {
 			Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
 
 			Polygon2D tmp = new Polygon2D();
-			Point2D startPoint = new Point2D(double.MaxValue, 0);
+			double startPointX = double.MaxValue;
+			double endPointX = double.MinValue;
 			int start = -1;
 			int i = 0;
 			foreach (Point2D point in this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse) {
 				Point2D pointTf = matrix.Transform(point);
-				if (pointTf.X < startPoint.X) {
-					startPoint = pointTf;
+				if (pointTf.X < startPointX) {
+					startPointX = pointTf.X;
 					start = i;
+				}
+				if (pointTf.X > endPointX) {
+					endPointX = pointTf.X;
 				}
 				tmp.Add(matrix.Transform(point));
 				i++;
@@ -121,14 +125,10 @@ namespace Europlan.Common {
 			Line2D borderRight = new Line2D(p, p - matrix.Transform(lane[1]));
 			p = matrix.Transform(lane[3]);
 			Line2D borderLeft = new Line2D(p, p - matrix.Transform(lane[2]));
-			/*Polygon2D rowTf = new Polygon2D();
-			foreach (Point2D point in row) {
-				rowTf.Add(matrix.Transform(point));
-			}*/
 
 			Segment2D roomBorder;
 			Nullable<Point2D> intersection = null;
-			if (startPoint.X > borderLeft.Origin.X) {
+			if (startPointX > borderLeft.Origin.X || endPointX < borderRight.Origin.X) {
 				// no possible module areas in lane found
 				return new List<PossibleModulLaneArea>();
 			}
@@ -149,7 +149,57 @@ namespace Europlan.Common {
 					this.CheckLeftBorder(borderLeft, roomBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
 				}
 				if (inside) {
-					lp.Add(room[i + 1].Y);
+					lp.Add(room[i == room.Count - 1 ? 0 : i + 1].Y);
+				}
+			}
+
+			if (this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
+				foreach (List<Point2D> unusedArea in this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
+					tmp = new Polygon2D();
+					startPointX = double.MaxValue;
+					endPointX = double.MinValue;
+					i = 0;
+					foreach (Point2D unusedPoint in unusedArea) {
+						Point2D pointTf = matrix.Transform(unusedPoint);
+						if (pointTf.X < startPointX) {
+							startPointX = pointTf.X;
+							start = i;
+						}
+						if (pointTf.X > endPointX) {
+							endPointX = pointTf.X;
+						}
+						tmp.Add(matrix.Transform(unusedPoint));
+						i++;
+					}
+
+					if (startPointX <= borderRight.Origin.X && endPointX >= borderLeft.Origin.X) {
+						Polygon2D unused = new Polygon2D();
+						if (!tmp.IsClockwise()) {
+							for (i = tmp.Count; i > 0; i--) {
+								unused.Add(tmp[(start + i) % tmp.Count]);
+							}
+						} else {
+							for (i = 0; i < tmp.Count; i++) {
+								unused.Add(tmp[(start + i) % tmp.Count]);
+							}
+						}
+
+						Segment2D unusedBorder;
+						inside = false;
+						for (i = 0; i < unused.Count; i++) {
+							unusedBorder = new Segment2D(unused[i], unused[(i + 1) % unused.Count]);
+							if (unusedBorder.Start.X < unusedBorder.End.X) {
+								this.CheckLeftBorder(borderLeft, unusedBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
+								this.CheckRightBorder(borderRight, unusedBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
+							} else {
+								this.CheckRightBorder(borderRight, unusedBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
+								this.CheckLeftBorder(borderLeft, unusedBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
+							}
+							if (inside) {
+								lp.Add(unused[i == unused.Count - 1 ? 0 : i + 1].Y);
+							}
+						}
+					}
 				}
 			}
 
@@ -166,12 +216,6 @@ namespace Europlan.Common {
 				foreach (CompareablePair<double> remove in removes) {
 					if (remove.value1 > bordersTop[i] && remove.value1 < bordersBottom[i]) {
 						bottom = remove.value2;
-						/*area = new Polygon2D();
-						area.Add(matrix.Transform(new Point2D(borderLeft.Origin.X, top)));
-						area.Add(matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)));
-						area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, bottom)));
-						area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, top)));
-						possibleAreas.Add(new PossibleModulRowArea(area));*/
 						possibleAreas.Add(new PossibleModulLaneArea(
 							matrix.Transform(new Point2D(borderLeft.Origin.X, top)),
 							matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)),
@@ -182,12 +226,6 @@ namespace Europlan.Common {
 					}
 				}
 				bottom = bordersBottom[i];
-				/*area = new Polygon2D();
-				area.Add(matrix.Transform(new Point2D(borderLeft.Origin.X, top)));
-				area.Add(matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)));
-				area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, bottom)));
-				area.Add(matrix.Transform(new Point2D(borderRight.Origin.X, top)));
-				possibleAreas.Add(new PossibleModulRowArea(area));*/
 				possibleAreas.Add(new PossibleModulLaneArea(
 					matrix.Transform(new Point2D(borderLeft.Origin.X, top)),
 					matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)),
@@ -196,6 +234,10 @@ namespace Europlan.Common {
 					top, bottom));
 
 			}
+
+			/*if (this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
+				foreach (
+			}*/
 
 			return possibleAreas;
 		}
@@ -258,6 +300,7 @@ namespace Europlan.Common {
 			return max;
 		}
 
+		[XmlIgnore]
 		public double SchienenBreite {
 			get { return this.schienenBreite; }
 			set {
