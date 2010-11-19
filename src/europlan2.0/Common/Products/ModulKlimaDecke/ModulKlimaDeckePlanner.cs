@@ -244,6 +244,28 @@ namespace Europlan.Common {
 						unusedPoints.Clear();
 					}
 				}
+
+
+				if (this.dragStartedInPlan.HasValue && this.dragEndedInPlan.HasValue) {
+					Matrix3D rotation = Transformation3D.Rotate(this.Product.AssociatedRoom.AssociatedPlan.Rotation * Math.PI / 180.0);
+					Point2D rotatedStart = rotation.Transform(this.dragStartedInPlan.Value);
+					Point2D rotatedEnd = rotation.Transform(this.dragEndedInPlan.Value);
+					Matrix3D invRotation = rotation.GetInverse();
+					Polygon2D selectedPoly = new Polygon2D();
+					selectedPoly.Add(this.dragStartedInPlan.Value);
+					selectedPoly.Add(invRotation.Transform(new Point2D(rotatedStart.X, rotatedEnd.Y)));
+					selectedPoly.Add(this.dragEndedInPlan.Value);
+					selectedPoly.Add(invRotation.Transform(new Point2D(rotatedEnd.X, rotatedStart.Y)));
+
+					PointF[] arr = new PointF[selectedPoly.Count];
+					int i = 0;
+					foreach (Point2D point in selectedPoly) {
+						Point2D tmp = additionalTransformation.TransformTo2D(new Point3D(point, 0));
+						arr[i] = new PointF((float)tmp.X, (float)tmp.Y);
+						i++;
+					}
+					e.Graphics.DrawPolygon(new Pen(Color.Red), arr);
+				}
 			}
 		}
 
@@ -652,10 +674,12 @@ namespace Europlan.Common {
 		private PointF layoutAddAreaStartScreen;
 		private Polygon2D layoutAddArea = null;
 		private bool layoutAddAreaBottomUp = false;
-		
-		private Point dragStartedInControl;
-		private Point2D dragStartedInPlan;
-		private bool dragIsPick;
+
+		private Nullable<Point> dragStartedInControl;
+		private Nullable<Point2D> dragStartedInPlan;
+		private Nullable<Point> dragEndedInControl;
+		private Nullable<Point2D> dragEndedInPlan;
+		//private bool dragIsPick;
 		private Dictionary<KlimaFlaechenModul, double> oldModulPositions;
 		private bool moveModules = false;
 
@@ -668,36 +692,43 @@ namespace Europlan.Common {
 				this.layoutAddAreaStart = planPoint;
 				this.layoutAddAreaStartScreen = pointInControl;
 			} else if (this.Mode == KlimaDeckeMode.KDM_PICK_MODULE) {
-				Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
-				Point2D rotatedPoint = rotation.Transform(planPoint);
-				double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-				KlimaFlaechenModul pickedModul = null;
-				foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
-					Point2D left = rotation.Transform(lane.BorderLeft.Origin);
-					Point2D right = rotation.Transform(lane.BorderRight.Origin);
-					if (rotatedPoint.X >= left.X && rotatedPoint.X <= right.X) {
-						List<KlimaFlaechenModul> modules = this.product.GetModulesInLane(lane.Nr);
-						foreach (KlimaFlaechenModul module in modules) {
-							if (rotatedPoint.Y >= module.GraphPositionInLan && rotatedPoint.Y <= module.GraphPositionInLan + KlimaFlaechenModul.GetModuleHeight(module.ModulType) * measure) {
-								pickedModul = module;
+				if (!this.ShiftPressed) {
+					Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
+					Point2D rotatedPoint = rotation.Transform(planPoint);
+					double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					KlimaFlaechenModul pickedModul = null;
+					foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
+						Point2D left = rotation.Transform(lane.BorderLeft.Origin);
+						Point2D right = rotation.Transform(lane.BorderRight.Origin);
+						if (rotatedPoint.X >= left.X && rotatedPoint.X <= right.X) {
+							List<KlimaFlaechenModul> modules = this.product.GetModulesInLane(lane.Nr);
+							foreach (KlimaFlaechenModul module in modules) {
+								if (rotatedPoint.Y >= module.GraphPositionInLan && rotatedPoint.Y <= module.GraphPositionInLan + KlimaFlaechenModul.GetModuleHeight(module.ModulType) * measure) {
+									pickedModul = module;
+									break;
+								}
+							}
+							if (pickedModul != null) {
 								break;
 							}
 						}
-						if (pickedModul != null) {
-							break;
-						}
 					}
-				}
-				this.moveModules = this.GetAllSelectedModules().Contains(pickedModul);
-					if (this.moveModules) {
+					this.moveModules = this.GetAllSelectedModules().Contains(pickedModul);
 					this.dragStartedInControl = pointInControl;
 					this.dragStartedInPlan = planPoint;
-					oldModulPositions = new Dictionary<KlimaFlaechenModul, double>();
-					foreach (KlimaFlaechenModul modul in this.GetAllSelectedModules()) {
-						oldModulPositions.Add(modul, modul.GraphPositionInLan);
+					if (this.moveModules) {
+						oldModulPositions = new Dictionary<KlimaFlaechenModul, double>();
+						foreach (KlimaFlaechenModul modul in this.GetAllSelectedModules()) {
+							oldModulPositions.Add(modul, modul.GraphPositionInLan);
+						}
 					}
+					//dragIsPick = true;
+				} else {
+					this.moveModules = false;
+					this.dragStartedInControl = pointInControl;
+					this.dragStartedInPlan = planPoint;
+					//dragIsPick = true;
 				}
-				dragIsPick = true;
 			}
 			return false;
 		}
@@ -761,17 +792,17 @@ namespace Europlan.Common {
 					}
 				}
 			} else if (this.Mode == KlimaDeckeMode.KDM_PICK_MODULE && button == MouseButtons.Left) {
-				int deltaX = this.dragStartedInControl.X - pointInControl.X;
-				int deltaY = this.dragStartedInControl.Y - pointInControl.Y;
+				/*int deltaX = this.dragStartedInControl.X - pointInControl.X;
+				int deltaY = this.dragStartedInControl.Y - pointInControl.Y;*/
 				Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
-				Point2D rotatedStartPoint = rotation.Transform(this.dragStartedInPlan);
-				Point2D rotatedCurPoint = rotation.Transform(planPoint);
-				double delta = rotatedCurPoint.Y - rotatedStartPoint.Y;
 
-				if (deltaX * deltaX + deltaY * deltaY > 25) {
+				/*if (deltaX * deltaX + deltaY * deltaY > 25) {
 					dragIsPick = false;
-				}
-				if (!dragIsPick && moveModules) {
+				}*/
+				if (/*!dragIsPick && */moveModules) {
+					Point2D rotatedStartPoint = rotation.Transform(this.dragStartedInPlan.Value);
+					Point2D rotatedCurPoint = rotation.Transform(planPoint);
+					double delta = rotatedCurPoint.Y - rotatedStartPoint.Y;
 					double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 					Console.WriteLine(delta / measure);
 					// TODO move modules
@@ -796,6 +827,10 @@ namespace Europlan.Common {
 							}
 						}
 					}
+					this.connectedPlanPanel.InvalidateGraphics();
+				} else {
+					this.dragEndedInControl = pointInControl;
+					this.dragEndedInPlan = planPoint;
 					this.connectedPlanPanel.InvalidateGraphics();
 				}
 			}
@@ -857,7 +892,7 @@ namespace Europlan.Common {
 		internal bool ShiftPressed {
 			get { return (Control.ModifierKeys & (Keys.Shift | Keys.ShiftKey | Keys.LShiftKey | Keys.RShiftKey)) != Keys.None; }
 		}
-
+		
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
 			if (this.mode == KlimaDeckeMode.KDM_LAYOUT_ADD_AREA) {
@@ -945,13 +980,59 @@ namespace Europlan.Common {
 					return true;
 				}
 			} else if (this.mode == KlimaDeckeMode.KDM_PICK_MODULE) {
-				if (dragIsPick) {
+				if (!this.moveModules) {
 					if (this.product == null || this.product.AssociatedRoom == null ||
 						this.product.AssociatedRoom.AssociatedPlan == null || this.product.AssociatedRoom.AssociatedPlan.Measure == null) {
+						this.dragStartedInPlan = null;
+						this.dragStartedInControl = null;
+						this.dragEndedInPlan = null;
+						this.dragEndedInControl = null;
 						return false;
 					}
 
-					KlimaFlaechenModul module = GetModuleAtPoint(planPoint);
+					this.dragEndedInControl = pointInControl;
+					this.dragEndedInPlan = planPoint;
+
+					Matrix3D rotation = Transformation3D.Rotate(this.Product.AssociatedRoom.AssociatedPlan.Rotation * Math.PI / 180.0);
+					Point2D rotatedStart = rotation.Transform(this.dragStartedInPlan.Value);
+					Point2D rotatedEnd = rotation.Transform(this.dragEndedInPlan.Value);
+					Matrix3D invRotation = rotation.GetInverse();
+					Polygon2D selectedPoly = new Polygon2D();
+					selectedPoly.Add(this.dragStartedInPlan.Value);
+					selectedPoly.Add(invRotation.Transform(new Point2D(rotatedStart.X, rotatedEnd.Y)));
+					selectedPoly.Add(this.dragEndedInPlan.Value);
+					selectedPoly.Add(invRotation.Transform(new Point2D(rotatedEnd.X, rotatedStart.Y)));
+					List<KlimaFlaechenModul> modules = GetModuleInPoly(selectedPoly);
+					if (this.ShiftPressed) {
+						if (this.HighlightModules == null) {
+							this.HighlightModules = this.GetAllSelectedModules();
+						}
+						if (modules.Count == 1) {
+							if (this.HighlightModules.Contains(modules[0])) {
+								this.HighlightModules.Remove(modules[0]);
+							} else {
+								this.HighlightModules.Add(modules[0]);
+							}
+						} else {
+							foreach (KlimaFlaechenModul modul in modules) {
+								if (!this.HighlightModules.Contains(modul)) {
+									this.HighlightModules.Add(modul);
+								}
+							}
+						}
+					} else {
+						this.HighlightModules = modules;
+					}
+
+					this.dragStartedInPlan = null;
+					this.dragStartedInControl = null;
+					this.dragEndedInPlan = null;
+					this.dragEndedInControl = null;
+
+					this.ConnectedPlanPanel.InvalidateGraphics();
+					this.ModuleSelected(this, new ModuleSelectedEventArgs(modules));
+
+					/*KlimaFlaechenModul module = GetModuleAtPoint(planPoint);
 					if (module != null) {
 						if (this.ShiftPressed) {
 							if (this.HighlightModules == null) {
@@ -986,7 +1067,7 @@ namespace Europlan.Common {
 						return true;
 					} else if (module != null) {
 						return true;
-					}
+					}*/
 				}
 			}
 			return false;
@@ -1009,6 +1090,71 @@ namespace Europlan.Common {
 				}
 			}
 			return null;
+		}
+
+		private List<KlimaFlaechenModul> GetModuleInPoly(Polygon2D poly) {
+			Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
+			//Matrix3D invRotation = rotation.GetInverse();
+			Polygon2D rotatedPoly = new Polygon2D();
+			foreach (Point2D point in poly) {
+				rotatedPoly.Add(rotation.Transform(point));
+			}
+			/*Point2D topLeft = new Point2D(startPoint.X < endPoint.X ? startPoint.X : endPoint.X, startPoint.Y < endPoint.Y ? startPoint.Y : endPoint.Y);
+			Point2D bottomRight = new Point2D(startPoint.X >= endPoint.X ? startPoint.X : endPoint.X, startPoint.Y >= endPoint.Y ? startPoint.Y : endPoint.Y);
+			Point2D rotatedTopLeft = rotation.Transform(topLeft);
+			Point2D rotatedBottomRight = rotation.Transform(bottomRight);*/
+			double height;
+			double width;
+
+			List<KlimaFlaechenModul> pickedModules = new List<KlimaFlaechenModul>();
+
+			foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
+				double left = rotation.Transform(lane.BorderLeft.Origin).X;
+
+				List<KlimaFlaechenModul> modules = lane.GetModulesInThisLane(this.product);
+				foreach (KlimaFlaechenModul modul in modules) {
+					height = KlimaFlaechenModul.GetModuleHeight(modul.ModulType) * this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					width = KlimaFlaechenModul.GetModuleWidth(modul.ModulType) * this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					Polygon2D modulPoly = new Polygon2D(new Point2D[] { new Point2D(left, modul.GraphPositionInLan), new Point2D(left, modul.GraphPositionInLan + height), new Point2D(left + width, modul.GraphPositionInLan), new Point2D(left + width, modul.GraphPositionInLan + height) });
+
+					if (rotatedPoly.IsInside(new Point2D(left, modul.GraphPositionInLan)) &&
+						rotatedPoly.IsInside(new Point2D(left, modul.GraphPositionInLan + height)) &&
+						rotatedPoly.IsInside(new Point2D(left + width, modul.GraphPositionInLan)) &&
+						rotatedPoly.IsInside(new Point2D(left + width, modul.GraphPositionInLan + height))) {
+						pickedModules.Add(modul);
+						continue;
+					}
+					if (modulPoly.IsInside(rotatedPoly[0]) && modulPoly.IsInside(rotatedPoly[1]) && modulPoly.IsInside(rotatedPoly[2]) && modulPoly.IsInside(rotatedPoly[3])) {
+						pickedModules.Add(modul);
+						continue;
+					}
+					/*if (rotatedPoly.IsInside(new Point2D(left, modul.GraphPositionInLan + height))) {
+						pickedModules.Add(modul);
+						continue;
+					}
+					if (rotatedPoly.IsInside(new Point2D(left + width, modul.GraphPositionInLan))) {
+						pickedModules.Add(modul);
+						continue;
+					}
+					if (rotatedPoly.IsInside(new Point2D(left + width, modul.GraphPositionInLan + height))) {
+						pickedModules.Add(modul);
+						continue;
+					}*/
+				}
+			}
+			return pickedModules;
+
+			/*foreach (ModulDeckeCircuit circuit in this.Product.PlannedCircuits) {
+				foreach (ModulDeckeSubArea subArea in circuit) {
+					foreach (KlimaFlaechenList row in subArea.Rows) {
+						foreach (KlimaFlaechenModul modul in row.List) {
+							height = KlimaFlaechenModul.GetModuleHeight(modul.ModulType) * this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+							width = KlimaFlaechenModul.GetModuleWidth(modul.ModulType) * this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+						}
+					}
+				}
+			}
+			throw new Exception("The method or operation is not implemented.");*/
 		}
 
 		public Cursor CustomCursor {

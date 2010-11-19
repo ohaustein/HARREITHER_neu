@@ -267,6 +267,7 @@
     </Compile>
     <Compile Include="Products\ExtendedCorrections.cs" />
     <Compile Include="Products\ModulKlimaDecke\CompareablePair.cs" />
+    <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstructionKassette.cs" />
     <Compile Include="Products\ModulKlimaDecke\FreeModulLaneArea.cs" />
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstruction.cs" />
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckePlanner.cs">

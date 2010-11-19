@@ -12,6 +12,7 @@ namespace Europlan.Common.Products {
 
 		private ModulKlimaDeckeConstructionGlatt glatt = null;
 		private ModulKlimaDeckeConstructionAkustik akustik = null;
+		private ModulKlimaDeckeConstructionKassette kassette = null;
 
 		private int ignoreRotation = 0;
 		private bool newVisible = false;
@@ -34,6 +35,7 @@ namespace Europlan.Common.Products {
 			}
 			this.glatt = product.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
 			this.akustik = product.GraphConstruction as ModulKlimaDeckeConstructionAkustik;
+			this.kassette = product.GraphConstruction as ModulKlimaDeckeConstructionKassette;
 			if (this.glatt == null) {
 				this.glatt = new ModulKlimaDeckeConstructionGlatt();
 				this.glatt.Planner = this.modulKlimaBodenPlanner;
@@ -49,6 +51,15 @@ namespace Europlan.Common.Products {
 			} else {
 				this.akustik.Planner = this.modulKlimaBodenPlanner;
 			}
+			this.akustik.RecalculateSchienen();
+
+			if (this.kassette == null) {
+				this.kassette = new ModulKlimaDeckeConstructionKassette();
+				this.kassette.Planner = this.modulKlimaBodenPlanner;
+			} else {
+				this.kassette.Planner = this.modulKlimaBodenPlanner;
+			}
+			this.kassette.RecalculateSchienen();
 
 			ModulKlimaDeckeProduct.ModulCeilingConstructionEnum constrType = (ModulKlimaDeckeProduct.ModulCeilingConstructionEnum)ModulKlimaDeckeProduct.ConfigModulCeilingConstruction;
 			if (constrType == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.C_PROFIL) {
@@ -237,6 +248,13 @@ namespace Europlan.Common.Products {
 		private void rbAkustik_CheckedChanged(object sender, EventArgs e) {
 			if (rbAkustik.Checked) {
 				this.modulKlimaBodenPlanner.Product.GraphConstruction = this.akustik;
+				this.planPanel.InvalidateGraphics();
+			}
+		}
+
+		private void rbKassetten_CheckedChanged(object sender, EventArgs e) {
+			if (rbAkustik.Checked) {
+				this.modulKlimaBodenPlanner.Product.GraphConstruction = this.kassette;
 				this.planPanel.InvalidateGraphics();
 			}
 		}

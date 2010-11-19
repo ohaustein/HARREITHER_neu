@@ -331,6 +331,7 @@ namespace Europlan.Common.Products {
 			this.rbKassetten.Text = "Kassettendecke";
 			this.rbKassetten.UseVisualStyleBackColor = true;
 			this.rbKassetten.Visible = false;
+			this.rbKassetten.CheckedChanged += new System.EventHandler(this.rbKassetten_CheckedChanged);
 			// 
 			// rbAkustik
 			// 
