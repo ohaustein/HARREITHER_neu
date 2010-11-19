@@ -25,7 +25,17 @@ namespace Europlan.Common {
 			if (this.picturePanel.Plan.Measure.HasValue) {
 				txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
 			} else {
-				txtLength.Text = "???";
+				Nullable<double> length = this.picturePanel.Plan.Measure.HasValue ? this.picturePanel.Length / this.picturePanel.Plan.Measure.Value : (Nullable<double>)null;
+				PlanSetMeasureForm psmf = new PlanSetMeasureForm(length);
+				if (psmf.ShowDialog() == DialogResult.OK) {
+					if (length != psmf.Length) {
+						this.unsavedChanges = true;
+						this.picturePanel.Plan.Measure = (float)(this.picturePanel.Length / psmf.Length);
+						this.txtLength.Text = (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
+					}
+				} else {
+					txtLength.Text = "???";
+				}
 			}
 			lblLength.Visible = true;
 			txtLength.Visible = true;
@@ -34,6 +44,7 @@ namespace Europlan.Common {
 
 		private void SetLanguage() {
 			this.Text = EuroplanRes.ImagePlanOptionsForm_Titel; //"Optionen";
+			this.btnRaster.ToolTipText = EuroplanRes.ImagePlanOptionsForm_RasterEin;
 			this.lblLength.Text = EuroplanRes.PlanOptionsForm_Leange; //"Länge:"
 		}
 
@@ -98,9 +109,9 @@ namespace Europlan.Common {
 			picturePanel.ShowRaster = !picturePanel.ShowRaster;
 			btnRaster.Checked = picturePanel.ShowRaster;
 			if (picturePanel.ShowRaster) {
-				btnRaster.Text = EuroplanRes.ImagePlanOptionsForm_RasterAus;
+				btnRaster.ToolTipText = EuroplanRes.ImagePlanOptionsForm_RasterAus;
 			} else {
-				btnRaster.Text = EuroplanRes.ImagePlanOptionsForm_RasterEin;
+				btnRaster.ToolTipText = EuroplanRes.ImagePlanOptionsForm_RasterEin;
 			}
 			picturePanel.Invalidate();
 		}

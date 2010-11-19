@@ -145,7 +145,17 @@ namespace Europlan.Common {
 			if (this.plan.Measure.HasValue) {
 				this.txtLength.Text = (this.length / this.plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
 			} else {
-				this.txtLength.Text = "???";
+				Nullable<double> length = plan.Measure.HasValue ? this.length / this.plan.Measure.Value : (Nullable<double>)null;
+				PlanSetMeasureForm psmf = new PlanSetMeasureForm(length);
+				if (psmf.ShowDialog() == DialogResult.OK) {
+					if (length != psmf.Length) {
+						this.unsavedChanges = true;
+						plan.Measure = (float)(this.length / psmf.Length);
+						this.txtLength.Text = (this.length / this.plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
+					}
+				} else {
+					this.txtLength.Text = "???";
+				}
 			}
 			this.lblLength.Visible = true;
 			this.txtLength.Visible = true;

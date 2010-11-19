@@ -15,12 +15,14 @@ namespace Europlan.Common.Products {
 
 		private int ignoreRotation = 0;
 		private bool newVisible = false;
+		private PlannedProduct plannedProduct;
 
-		public ModulKlimaDeckePlannerForm(ModulKlimaDeckeProduct product) {
+		public ModulKlimaDeckePlannerForm(PlannedProduct plannedProduct) {
 			InitializeComponent();
-
+			this.plannedProduct = plannedProduct;
 			this.cbAutomaticOrientation.Checked = this.modulKlimaBodenPlanner.AutomaticOrientation;
 			this.cbAutomaticRows.Checked = this.modulKlimaBodenPlanner.AutomaticRows;
+			ModulKlimaDeckeProduct product = plannedProduct.Product as ModulKlimaDeckeProduct;
 
 			this.modulKlimaBodenPlanner.Product = product;
 			if (product.GraphConstruction == null) {
@@ -765,6 +767,97 @@ namespace Europlan.Common.Products {
 					}
 				}
 			}
+		}
+
+		private void CalculateAndUpdate() {
+			this.plannedProduct.Product.ConfigureProduct(this.plannedProduct.RequestedHeatLoad, this.plannedProduct.RequestedCoolLoad, this.plannedProduct.CalculateHeat, this.plannedProduct.CalculateCool, false);
+			string errorMsg = this.plannedProduct.Product.LastErrorMessage;
+			this.lstError.Items.Clear();
+			string[] messages;
+			if (errorMsg != null) {
+				messages = errorMsg.Split('\n');
+				foreach (string message in messages) {
+					if (!string.IsNullOrEmpty(message)) {
+						ListViewItem item = new ListViewItem(message);
+						item.ForeColor = Color.Red;
+						//item.Font = new Font(item.Font, FontStyle.Bold);
+						this.lstError.Items.Add(item);
+					}
+				}
+			}
+			string notifications = this.plannedProduct.Product.NotificationMessage;
+			if (notifications != null) {
+				messages = notifications.Split('\n');
+				foreach (string message in messages) {
+					if (!string.IsNullOrEmpty(message)) {
+						ListViewItem item = new ListViewItem(message);
+						item.ForeColor = Color.Orange;
+						this.lstError.Items.Add(item);
+					}
+				}
+			}
+			notifications = ModulKlimaDeckeProduct.GlobalNotificationMessage;
+			if (notifications != null) {
+				messages = notifications.Split('\n');
+				foreach (string message in messages) {
+					if (!string.IsNullOrEmpty(message)) {
+						ListViewItem item = new ListViewItem(message);
+						item.ForeColor = Color.Orange;
+						this.lstError.Items.Add(item);
+					}
+				}
+			}
+			if (lstError.Items.Count > 0) {
+				this.lstError.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+				int height = this.lstError.Items[this.lstError.Items.Count - 1].Position.Y + this.lstError.Items[this.lstError.Items.Count - 1].Bounds.Height + 5;
+				this.lstError.Height = height;
+				this.lstError.Visible = true;
+			} else {
+				this.lstError.Visible = false;
+			}
+
+			bool showHeat = this.plannedProduct.RequestedHeatLoad > 0;
+			bool showCool = this.plannedProduct.RequestedCoolLoad > 0;
+
+			lblQHeat.Visible = showHeat;
+			lblQHeatUnit.Visible = showHeat;
+			lblQAnbHeat.Visible = showHeat;
+			lblQAnbHeatUnit.Visible = showHeat;
+			lblQHeatDiff.Visible = showHeat;
+			lblQHeatDiffUnit.Visible = showHeat;
+			lblQHeatRest.Visible = showHeat;
+			lblQHeatRestUnit.Visible = showHeat;
+
+			lblQCool.Visible = showCool;
+			lblQCoolUnit.Visible = showCool;
+			lblQAnbCool.Visible = showCool;
+			lblQAnbCoolUnit.Visible = showCool;
+			lblQCoolDiff.Visible = showCool;
+			lblQCoolDiffUnit.Visible = showCool;
+			lblQCoolRest.Visible = showCool;
+			lblQCoolRestUnit.Visible = showCool;
+
+			// General
+			double qDiffHeat = this.plannedProduct.PlannedHeatLoad - this.plannedProduct.RequestedHeatLoad;
+			double qDiffCool = this.plannedProduct.PlannedCoolLoad - this.plannedProduct.RequestedCoolLoad;
+
+			lblQHeat.Text = Math.Round(this.plannedProduct.Product.PlannedHeatLoad, 2).ToString();
+			lblQAnbHeat.Text = Math.Round(this.plannedProduct.Product.PlannedHeatLoadAnbindung, 0).ToString();
+			lblQHeatDiff.Text = Math.Round(qDiffHeat, 0).ToString("+0;-0");
+			lblQHeatRest.Text = Math.Round(this.plannedProduct.Product.AssociatedRoom.OpenHeatLoad, 2).ToString("+0.00;-0.00");
+			lblQCool.Text = Math.Round(this.plannedProduct.Product.PlannedCoolLoad, 2).ToString();
+			lblQAnbCool.Text = Math.Round(this.plannedProduct.Product.PlannedCoolLoadAnbindung, 0).ToString();
+			lblQCoolDiff.Text = Math.Round(qDiffCool, 0).ToString("+0;-0");
+			lblQCoolRest.Text = Math.Round(this.plannedProduct.Product.AssociatedRoom.OpenCoolLoad, 2).ToString("+0.00;-0.00");
+
+		}
+
+		private void button1_Click(object sender, EventArgs e) {
+			CalculateAndUpdate();
+		}
+
+		private void numLength_ValueChanged(object sender, EventArgs e) {
+
 		}
 	}
 }

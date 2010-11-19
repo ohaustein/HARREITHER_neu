@@ -171,7 +171,8 @@ namespace Europlan.Common {
 			this.btnMove.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnMove.Name = "btnMove";
 			this.btnMove.Size = new System.Drawing.Size(23, 22);
-			this.btnMove.Text = "toolStripButton1";
+			this.btnMove.Text = "Plan verschieben";
+			this.btnMove.ToolTipText = "Plan verschieben";
 			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
 			// 
 			// btnDistance
@@ -182,7 +183,8 @@ namespace Europlan.Common {
 			this.btnDistance.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnDistance.Name = "btnDistance";
 			this.btnDistance.Size = new System.Drawing.Size(23, 22);
-			this.btnDistance.Text = "toolStripButton2";
+			this.btnDistance.Text = "Maﬂstab";
+			this.btnDistance.ToolTipText = "Maﬂstab";
 			this.btnDistance.Click += new System.EventHandler(this.btnDistance_Click);
 			// 
 			// lblLength
@@ -222,14 +224,13 @@ namespace Europlan.Common {
 			this.picturePanel.Angle = 0F;
 			this.picturePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.picturePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.picturePanel.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.picturePanel.EndPoint = null;
 			this.picturePanel.Length = 0;
 			this.picturePanel.Location = new System.Drawing.Point(9, 25);
 			this.picturePanel.Margin = new System.Windows.Forms.Padding(0);
-			this.picturePanel.Mode = PlanMode.PM_MOVE;
+			this.picturePanel.Mode = Europlan.Common.PlanMode.PM_MOVE;
 			this.picturePanel.Name = "picturePanel";
-			this.picturePanel.Plan = null;
+			this.picturePanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.picturePanel.Scale = null;
 			this.picturePanel.ShowRaster = false;
 			this.picturePanel.Size = new System.Drawing.Size(650, 397);

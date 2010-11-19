@@ -55,7 +55,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(185, 96);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 3;
+			this.btnOk.TabIndex = 2;
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			// 
@@ -65,7 +65,7 @@ namespace Europlan.Common {
 			this.btnCancel.Location = new System.Drawing.Point(104, 96);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 4;
+			this.btnCancel.TabIndex = 3;
 			this.btnCancel.Text = "Abbrechen";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
@@ -90,7 +90,7 @@ namespace Europlan.Common {
             131072});
 			this.txtLength.Name = "txtLength";
 			this.txtLength.Size = new System.Drawing.Size(156, 20);
-			this.txtLength.TabIndex = 5;
+			this.txtLength.TabIndex = 1;
 			this.txtLength.Text = "0,01";
 			this.txtLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.txtLength.Value = new decimal(new int[] {
