@@ -3399,7 +3399,7 @@ recht</value>
     <value>HK</value>
   </data>
   <data name="PlannedModulKlimaDeckeProductPanel_ParalleleReihen" xml:space="preserve">
-    <value>Parallele Reihen im Heizkreis</value>
+    <value>Parallele Reihen in der Teilfläche</value>
   </data>
   <data name="PlannedModulKlimaDeckeProductPanel_Reihe" xml:space="preserve">
     <value>Reihe</value>

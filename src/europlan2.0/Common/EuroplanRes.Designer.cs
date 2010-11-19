@@ -9492,7 +9492,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parallele Reihen im Heizkreis.
+        ///   Looks up a localized string similar to Parallele Reihen in der Teilfläche.
         /// </summary>
         internal static string PlannedModulKlimaDeckeProductPanel_ParalleleReihen {
             get {
