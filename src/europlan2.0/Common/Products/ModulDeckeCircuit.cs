@@ -422,5 +422,17 @@ namespace Europlan.Common {
 			}
 			return count;
 		}
+
+		public ModulDeckeSubArea GetSubareaForModul(KlimaFlaechenModul modul, out int index) {
+			index = 0;
+			foreach (ModulDeckeSubArea sa in this.subAreas) {
+				if (sa.ContainsModul(modul)) {
+					return sa;
+				}
+				index++;
+			}
+			index = -1;
+			return null;
+		}
 	}
 }

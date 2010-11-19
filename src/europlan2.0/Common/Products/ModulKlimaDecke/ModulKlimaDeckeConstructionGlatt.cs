@@ -339,10 +339,22 @@ namespace Europlan.Common {
 			}
 		}
 
-		private GraphicsPath GetRoomPath() {
+		protected GraphicsPath GetProductAreaPath() {
 			List<PointF> transformedPoints = new List<PointF>();
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
 			foreach (Point2D point in this.CeilingCoordinates) {
+				Point2D tmp = additionalTransformation.TransformTo2D(point);
+				transformedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
+			}
+			GraphicsPath path = new GraphicsPath();
+			path.AddPolygon(transformedPoints.ToArray());
+			return path;
+		}
+
+		protected GraphicsPath GetCeilingPath() {
+			List<PointF> transformedPoints = new List<PointF>();
+			Matrix4D additionalTransformation = this.AdditionalTransformation;
+			foreach (Point2D point in this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse) {
 				Point2D tmp = additionalTransformation.TransformTo2D(point);
 				transformedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
 			}
@@ -405,7 +417,7 @@ namespace Europlan.Common {
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
 
 			/*double minX, maxX, minY, maxY;*/
-			GraphicsPath roomPath = this.GetRoomPath(/*out minX, out maxX, out minY, out maxY*/);
+			GraphicsPath roomPath = this.GetProductAreaPath(/*out minX, out maxX, out minY, out maxY*/);
 			g.Clip = new Region(roomPath);
 
 			Color c = Color.Red;
@@ -455,7 +467,7 @@ namespace Europlan.Common {
 				return false;
 			}
 
-			GraphicsPath roomPath = this.GetRoomPath();
+			GraphicsPath roomPath = this.GetProductAreaPath();
 			if (!roomPath.IsVisible(pointInControl)) {
 				return false;
 			}

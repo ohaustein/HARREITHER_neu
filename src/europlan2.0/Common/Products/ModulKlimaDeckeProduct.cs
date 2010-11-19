@@ -1278,6 +1278,18 @@ namespace Europlan.Common {
 			}
 			return count;
 		}
+
+		public ModulDeckeCircuit GetCircuitForModul(KlimaFlaechenModul modul, out int index) {
+			index = 0;
+			foreach (ModulDeckeCircuit c in this.circuits) {
+				if (c.ContainsModul(modul)) {
+					return c;
+				}
+				index++;
+			}
+			index = -1;
+			return null;
+		}
 	}
 
 	public struct KlimaFlaechenModulWithRow {

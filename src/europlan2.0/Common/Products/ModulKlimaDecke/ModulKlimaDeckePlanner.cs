@@ -950,57 +950,65 @@ namespace Europlan.Common {
 						this.product.AssociatedRoom.AssociatedPlan == null || this.product.AssociatedRoom.AssociatedPlan.Measure == null) {
 						return false;
 					}
-					Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
-					Point2D rotatedPoint = rotation.Transform(planPoint);
-					double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-					bool moduleFound = false;
-					foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
-						Point2D left = rotation.Transform(lane.BorderLeft.Origin);
-						Point2D right = rotation.Transform(lane.BorderRight.Origin);
-						if (rotatedPoint.X >= left.X && rotatedPoint.X <= right.X) {
-							List<KlimaFlaechenModul> modules = this.product.GetModulesInLane(lane.Nr);
-							foreach (KlimaFlaechenModul module in modules) {
-								if (rotatedPoint.Y >= module.GraphPositionInLan && rotatedPoint.Y <= module.GraphPositionInLan + KlimaFlaechenModul.GetModuleHeight(module.ModulType) * measure) {
-									moduleFound = true;
-									if (this.ShiftPressed) {
-										if (this.HighlightModules == null) {
-											this.HighlightModules = this.GetAllSelectedModules();
-										}
-										if (this.HighlightModules.Contains(module)) {
-											this.HighlightModules.Remove(module);
-										} else {
-											this.HighlightModules.Add(module);
-										}
-										if (this.ModuleSelected != null) {
-											this.ModuleSelected(this, new ModuleSelectedEventArgs(this.HighlightModules));
-										}
-									} else {
-										if (this.HighlightModules == null) {
-											this.HighlightModules = new List<KlimaFlaechenModul>();
-										} else {
-											this.HighlightModules.Clear();
-										}
-										this.HighlightModules.Add(module);
-										if (this.ModuleSelected != null) {
-											this.ModuleSelected(this, new ModuleSelectedEventArgs(module));
-										}
-									}
-								}
+
+					KlimaFlaechenModul module = GetModuleAtPoint(planPoint);
+					if (module != null) {
+						if (this.ShiftPressed) {
+							if (this.HighlightModules == null) {
+								this.HighlightModules = this.GetAllSelectedModules();
+							}
+							if (this.HighlightModules.Contains(module)) {
+								this.HighlightModules.Remove(module);
+							} else {
+								this.HighlightModules.Add(module);
+							}
+							if (this.ModuleSelected != null) {
+								this.ModuleSelected(this, new ModuleSelectedEventArgs(this.HighlightModules));
+							}
+						} else {
+							if (this.HighlightModules == null) {
+								this.HighlightModules = new List<KlimaFlaechenModul>();
+							} else {
+								this.HighlightModules.Clear();
+							}
+							this.HighlightModules.Add(module);
+							if (this.ModuleSelected != null) {
+								this.ModuleSelected(this, new ModuleSelectedEventArgs(module));
 							}
 						}
 					}
-					if (!moduleFound && !this.ShiftPressed) {
+
+					if (module == null && !this.ShiftPressed) {
 						this.HighlightModules = null;
 						if (this.ModuleSelected != null) {
 							this.ModuleSelected(this, new ModuleSelectedEventArgs());
 						}
 						return true;
-					} else if (moduleFound) {
+					} else if (module != null) {
 						return true;
 					}
 				}
 			}
 			return false;
+		}
+
+		private KlimaFlaechenModul GetModuleAtPoint(Point2D planPoint) {
+			Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
+			Point2D rotatedPoint = rotation.Transform(planPoint);
+			double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
+				Point2D left = rotation.Transform(lane.BorderLeft.Origin);
+				Point2D right = rotation.Transform(lane.BorderRight.Origin);
+				if (rotatedPoint.X >= left.X && rotatedPoint.X <= right.X) {
+					List<KlimaFlaechenModul> modules = this.product.GetModulesInLane(lane.Nr);
+					foreach (KlimaFlaechenModul module in modules) {
+						if (rotatedPoint.Y >= module.GraphPositionInLan && rotatedPoint.Y <= module.GraphPositionInLan + KlimaFlaechenModul.GetModuleHeight(module.ModulType) * measure) {
+							return module;
+						}
+					}
+				}
+			}
+			return null;
 		}
 
 		public Cursor CustomCursor {

@@ -51,13 +51,19 @@ namespace Europlan.Common.Products {
 			this.btnCcwSmall = new System.Windows.Forms.Button();
 			this.btnCcwLarge = new System.Windows.Forms.Button();
 			this.lblRotationUnit = new System.Windows.Forms.Label();
+			this.numRotation = new Europlan.Common.NumericBox();
 			this.lblRotation = new System.Windows.Forms.Label();
 			this.lblRandfriesUnit = new System.Windows.Forms.Label();
+			this.numRandfries = new Europlan.Common.NumericBox();
 			this.lblRandfries = new System.Windows.Forms.Label();
 			this.pageLayout = new System.Windows.Forms.TabPage();
-			this.grpAutomatic = new System.Windows.Forms.GroupBox();
-			this.cbAutomaticRows = new System.Windows.Forms.CheckBox();
-			this.cbAutomaticOrientation = new System.Windows.Forms.CheckBox();
+			this.grpSelection = new System.Windows.Forms.GroupBox();
+			this.llReihe = new System.Windows.Forms.LinkLabel();
+			this.llSubarea = new System.Windows.Forms.LinkLabel();
+			this.llHk = new System.Windows.Forms.LinkLabel();
+			this.lblReihe = new System.Windows.Forms.Label();
+			this.lblSubarea = new System.Windows.Forms.Label();
+			this.lblHk = new System.Windows.Forms.Label();
 			this.grpSelectedModules = new System.Windows.Forms.GroupBox();
 			this.lblOrientationError = new System.Windows.Forms.Label();
 			this.lblTypError = new System.Windows.Forms.Label();
@@ -65,21 +71,22 @@ namespace Europlan.Common.Products {
 			this.label4 = new System.Windows.Forms.Label();
 			this.cmbSelectedModuleType = new System.Windows.Forms.ComboBox();
 			this.label5 = new System.Windows.Forms.Label();
+			this.grpAutomatic = new System.Windows.Forms.GroupBox();
+			this.cbAutomaticRows = new System.Windows.Forms.CheckBox();
+			this.cbAutomaticOrientation = new System.Windows.Forms.CheckBox();
+			this.label13 = new System.Windows.Forms.Label();
+			this.lstSubarea = new System.Windows.Forms.ListBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.lstRows = new System.Windows.Forms.ListBox();
 			this.grpNewModules = new System.Windows.Forms.GroupBox();
 			this.cmbOrientation = new System.Windows.Forms.ComboBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.cmbModulType = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
-			this.label13 = new System.Windows.Forms.Label();
-			this.lstSubarea = new System.Windows.Forms.ListBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.lstRows = new System.Windows.Forms.ListBox();
 			this.label12 = new System.Windows.Forms.Label();
 			this.lstCircuits = new System.Windows.Forms.ListBox();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.modulKlimaBodenPlanner = new Europlan.Common.ModulKlimaDeckePlanner(this.components);
-			this.numRotation = new Europlan.Common.NumericBox();
-			this.numRandfries = new Europlan.Common.NumericBox();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -88,8 +95,9 @@ namespace Europlan.Common.Products {
 			this.grpCeilingContruction.SuspendLayout();
 			this.grpConstructionParameter.SuspendLayout();
 			this.pageLayout.SuspendLayout();
-			this.grpAutomatic.SuspendLayout();
+			this.grpSelection.SuspendLayout();
 			this.grpSelectedModules.SuspendLayout();
+			this.grpAutomatic.SuspendLayout();
 			this.grpNewModules.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -215,7 +223,7 @@ namespace Europlan.Common.Products {
 			this.pageConstruction.Location = new System.Drawing.Point(4, 22);
 			this.pageConstruction.Name = "pageConstruction";
 			this.pageConstruction.Padding = new System.Windows.Forms.Padding(3);
-			this.pageConstruction.Size = new System.Drawing.Size(620, 105);
+			this.pageConstruction.Size = new System.Drawing.Size(874, 105);
 			this.pageConstruction.TabIndex = 0;
 			this.pageConstruction.Text = "Konstruktion einrichten";
 			this.pageConstruction.UseVisualStyleBackColor = true;
@@ -241,6 +249,7 @@ namespace Europlan.Common.Products {
 			this.rbSerie40.TabStop = true;
 			this.rbSerie40.Text = "Klimamodul Serie 40";
 			this.rbSerie40.UseVisualStyleBackColor = true;
+			this.rbSerie40.CheckedChanged += new System.EventHandler(this.rbSerie_CheckedChanged);
 			// 
 			// rbSerie30
 			// 
@@ -394,6 +403,37 @@ namespace Europlan.Common.Products {
 			this.lblRotationUnit.TabIndex = 9;
 			this.lblRotationUnit.Text = "°";
 			// 
+			// numRotation
+			// 
+			this.numRotation.EditType = Europlan.Common.NumericBox.NumericEditType.ROTATION;
+			this.numRotation.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRotation.Location = new System.Drawing.Point(117, 18);
+			this.numRotation.MaxValue = new decimal(new int[] {
+            1799,
+            0,
+            0,
+            65536});
+			this.numRotation.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRotation.Name = "numRotation";
+			this.numRotation.Size = new System.Drawing.Size(74, 20);
+			this.numRotation.TabIndex = 8;
+			this.numRotation.Text = "0";
+			this.numRotation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRotation.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRotation.ValueChanged += new System.EventHandler(this.numAusrichtung_ValueChanged);
+			// 
 			// lblRotation
 			// 
 			this.lblRotation.AutoSize = true;
@@ -412,6 +452,28 @@ namespace Europlan.Common.Products {
 			this.lblRandfriesUnit.TabIndex = 6;
 			this.lblRandfriesUnit.Text = "cm";
 			// 
+			// numRandfries
+			// 
+			this.numRandfries.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numRandfries.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRandfries.Location = new System.Drawing.Point(117, 64);
+			this.numRandfries.MaxValue = null;
+			this.numRandfries.MinValue = null;
+			this.numRandfries.Name = "numRandfries";
+			this.numRandfries.Size = new System.Drawing.Size(74, 20);
+			this.numRandfries.TabIndex = 5;
+			this.numRandfries.Text = "0";
+			this.numRandfries.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRandfries.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			// 
 			// lblRandfries
 			// 
 			this.lblRandfries.AutoSize = true;
@@ -423,8 +485,9 @@ namespace Europlan.Common.Products {
 			// 
 			// pageLayout
 			// 
-			this.pageLayout.Controls.Add(this.grpAutomatic);
+			this.pageLayout.Controls.Add(this.grpSelection);
 			this.pageLayout.Controls.Add(this.grpSelectedModules);
+			this.pageLayout.Controls.Add(this.grpAutomatic);
 			this.pageLayout.Controls.Add(this.label13);
 			this.pageLayout.Controls.Add(this.lstSubarea);
 			this.pageLayout.Controls.Add(this.label1);
@@ -440,41 +503,72 @@ namespace Europlan.Common.Products {
 			this.pageLayout.Text = "Module auslegen";
 			this.pageLayout.UseVisualStyleBackColor = true;
 			// 
-			// grpAutomatic
+			// grpSelection
 			// 
-			this.grpAutomatic.Controls.Add(this.cbAutomaticRows);
-			this.grpAutomatic.Controls.Add(this.cbAutomaticOrientation);
-			this.grpAutomatic.Location = new System.Drawing.Point(560, 6);
-			this.grpAutomatic.Name = "grpAutomatic";
-			this.grpAutomatic.Size = new System.Drawing.Size(214, 90);
-			this.grpAutomatic.TabIndex = 152;
-			this.grpAutomatic.TabStop = false;
-			this.grpAutomatic.Text = "Automatische Anpassungen";
-			this.grpAutomatic.Visible = false;
+			this.grpSelection.Controls.Add(this.llReihe);
+			this.grpSelection.Controls.Add(this.llSubarea);
+			this.grpSelection.Controls.Add(this.llHk);
+			this.grpSelection.Controls.Add(this.lblReihe);
+			this.grpSelection.Controls.Add(this.lblSubarea);
+			this.grpSelection.Controls.Add(this.lblHk);
+			this.grpSelection.Location = new System.Drawing.Point(646, 6);
+			this.grpSelection.Name = "grpSelection";
+			this.grpSelection.Size = new System.Drawing.Size(214, 90);
+			this.grpSelection.TabIndex = 153;
+			this.grpSelection.TabStop = false;
+			this.grpSelection.Text = "Ausgewähltes Modul";
+			this.grpSelection.Visible = false;
 			// 
-			// cbAutomaticRows
+			// llReihe
 			// 
-			this.cbAutomaticRows.Checked = true;
-			this.cbAutomaticRows.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbAutomaticRows.Location = new System.Drawing.Point(6, 52);
-			this.cbAutomaticRows.Name = "cbAutomaticRows";
-			this.cbAutomaticRows.Size = new System.Drawing.Size(204, 30);
-			this.cbAutomaticRows.TabIndex = 1;
-			this.cbAutomaticRows.Text = "wenn möglich zu vorhandenen Reihen hinzufügen";
-			this.cbAutomaticRows.UseVisualStyleBackColor = true;
-			this.cbAutomaticRows.CheckedChanged += new System.EventHandler(this.cbAutomaticRows_CheckedChanged);
+			this.llReihe.AutoSize = true;
+			this.llReihe.Location = new System.Drawing.Point(92, 59);
+			this.llReihe.Name = "llReihe";
+			this.llReihe.Size = new System.Drawing.Size(0, 13);
+			this.llReihe.TabIndex = 5;
+			this.llReihe.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llReihe_LinkClicked);
 			// 
-			// cbAutomaticOrientation
+			// llSubarea
 			// 
-			this.cbAutomaticOrientation.Checked = true;
-			this.cbAutomaticOrientation.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbAutomaticOrientation.Location = new System.Drawing.Point(6, 15);
-			this.cbAutomaticOrientation.Name = "cbAutomaticOrientation";
-			this.cbAutomaticOrientation.Size = new System.Drawing.Size(204, 30);
-			this.cbAutomaticOrientation.TabIndex = 0;
-			this.cbAutomaticOrientation.Text = "wenn möglich automatisch ausrichten";
-			this.cbAutomaticOrientation.UseVisualStyleBackColor = true;
-			this.cbAutomaticOrientation.CheckedChanged += new System.EventHandler(this.cbAutomaticOrientation_CheckedChanged);
+			this.llSubarea.AutoSize = true;
+			this.llSubarea.Location = new System.Drawing.Point(92, 39);
+			this.llSubarea.Name = "llSubarea";
+			this.llSubarea.Size = new System.Drawing.Size(0, 13);
+			this.llSubarea.TabIndex = 4;
+			this.llSubarea.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llSubarea_LinkClicked);
+			// 
+			// llHk
+			// 
+			this.llHk.AutoSize = true;
+			this.llHk.Location = new System.Drawing.Point(92, 19);
+			this.llHk.Name = "llHk";
+			this.llHk.Size = new System.Drawing.Size(0, 13);
+			this.llHk.TabIndex = 3;
+			this.llHk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llHk_LinkClicked);
+			// 
+			// lblReihe
+			// 
+			this.lblReihe.Location = new System.Drawing.Point(6, 59);
+			this.lblReihe.Name = "lblReihe";
+			this.lblReihe.Size = new System.Drawing.Size(80, 13);
+			this.lblReihe.TabIndex = 2;
+			this.lblReihe.Text = "Reihe:";
+			// 
+			// lblSubarea
+			// 
+			this.lblSubarea.Location = new System.Drawing.Point(6, 39);
+			this.lblSubarea.Name = "lblSubarea";
+			this.lblSubarea.Size = new System.Drawing.Size(80, 13);
+			this.lblSubarea.TabIndex = 1;
+			this.lblSubarea.Text = "Teilfläche:";
+			// 
+			// lblHk
+			// 
+			this.lblHk.Location = new System.Drawing.Point(6, 19);
+			this.lblHk.Name = "lblHk";
+			this.lblHk.Size = new System.Drawing.Size(80, 13);
+			this.lblHk.TabIndex = 0;
+			this.lblHk.Text = "Heizkreis:";
 			// 
 			// grpSelectedModules
 			// 
@@ -486,7 +580,7 @@ namespace Europlan.Common.Products {
 			this.grpSelectedModules.Controls.Add(this.label5);
 			this.grpSelectedModules.Location = new System.Drawing.Point(340, 6);
 			this.grpSelectedModules.Name = "grpSelectedModules";
-			this.grpSelectedModules.Size = new System.Drawing.Size(450, 90);
+			this.grpSelectedModules.Size = new System.Drawing.Size(300, 90);
 			this.grpSelectedModules.TabIndex = 151;
 			this.grpSelectedModules.TabStop = false;
 			this.grpSelectedModules.Text = "ausgewählte Module";
@@ -498,7 +592,7 @@ namespace Europlan.Common.Products {
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.lblOrientationError.Location = new System.Drawing.Point(214, 49);
 			this.lblOrientationError.Name = "lblOrientationError";
-			this.lblOrientationError.Size = new System.Drawing.Size(230, 13);
+			this.lblOrientationError.Size = new System.Drawing.Size(0, 13);
 			this.lblOrientationError.TabIndex = 155;
 			// 
 			// lblTypError
@@ -507,7 +601,7 @@ namespace Europlan.Common.Products {
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.lblTypError.Location = new System.Drawing.Point(214, 22);
 			this.lblTypError.Name = "lblTypError";
-			this.lblTypError.Size = new System.Drawing.Size(230, 13);
+			this.lblTypError.Size = new System.Drawing.Size(0, 13);
 			this.lblTypError.TabIndex = 154;
 			// 
 			// cmbSelectedModuleOrientation
@@ -545,6 +639,80 @@ namespace Europlan.Common.Products {
 			this.label5.Size = new System.Drawing.Size(50, 13);
 			this.label5.TabIndex = 151;
 			this.label5.Text = "Typ:";
+			// 
+			// grpAutomatic
+			// 
+			this.grpAutomatic.Controls.Add(this.cbAutomaticRows);
+			this.grpAutomatic.Controls.Add(this.cbAutomaticOrientation);
+			this.grpAutomatic.Location = new System.Drawing.Point(560, 6);
+			this.grpAutomatic.Name = "grpAutomatic";
+			this.grpAutomatic.Size = new System.Drawing.Size(214, 90);
+			this.grpAutomatic.TabIndex = 152;
+			this.grpAutomatic.TabStop = false;
+			this.grpAutomatic.Text = "Automatische Anpassungen";
+			this.grpAutomatic.Visible = false;
+			// 
+			// cbAutomaticRows
+			// 
+			this.cbAutomaticRows.Checked = true;
+			this.cbAutomaticRows.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.cbAutomaticRows.Location = new System.Drawing.Point(6, 52);
+			this.cbAutomaticRows.Name = "cbAutomaticRows";
+			this.cbAutomaticRows.Size = new System.Drawing.Size(204, 30);
+			this.cbAutomaticRows.TabIndex = 1;
+			this.cbAutomaticRows.Text = "wenn möglich zu vorhandenen Reihen hinzufügen";
+			this.cbAutomaticRows.UseVisualStyleBackColor = true;
+			this.cbAutomaticRows.CheckedChanged += new System.EventHandler(this.cbAutomaticRows_CheckedChanged);
+			// 
+			// cbAutomaticOrientation
+			// 
+			this.cbAutomaticOrientation.Checked = true;
+			this.cbAutomaticOrientation.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.cbAutomaticOrientation.Location = new System.Drawing.Point(6, 15);
+			this.cbAutomaticOrientation.Name = "cbAutomaticOrientation";
+			this.cbAutomaticOrientation.Size = new System.Drawing.Size(204, 30);
+			this.cbAutomaticOrientation.TabIndex = 0;
+			this.cbAutomaticOrientation.Text = "wenn möglich automatisch ausrichten";
+			this.cbAutomaticOrientation.UseVisualStyleBackColor = true;
+			this.cbAutomaticOrientation.CheckedChanged += new System.EventHandler(this.cbAutomaticOrientation_CheckedChanged);
+			// 
+			// label13
+			// 
+			this.label13.Location = new System.Drawing.Point(96, 4);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(103, 26);
+			this.label13.TabIndex = 149;
+			this.label13.Text = "Teilflächen";
+			this.label13.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+			// 
+			// lstSubarea
+			// 
+			this.lstSubarea.FormattingEnabled = true;
+			this.lstSubarea.Location = new System.Drawing.Point(97, 33);
+			this.lstSubarea.Name = "lstSubarea";
+			this.lstSubarea.Size = new System.Drawing.Size(129, 69);
+			this.lstSubarea.TabIndex = 148;
+			this.lstSubarea.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
+			this.lstSubarea.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
+			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(231, 4);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(103, 26);
+			this.label1.TabIndex = 147;
+			this.label1.Text = "Parallele Reihen im Heizkreis";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+			// 
+			// lstRows
+			// 
+			this.lstRows.FormattingEnabled = true;
+			this.lstRows.Location = new System.Drawing.Point(232, 33);
+			this.lstRows.Name = "lstRows";
+			this.lstRows.Size = new System.Drawing.Size(102, 69);
+			this.lstRows.TabIndex = 146;
+			this.lstRows.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
+			this.lstRows.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
 			// 
 			// grpNewModules
 			// 
@@ -596,44 +764,6 @@ namespace Europlan.Common.Products {
 			this.label2.TabIndex = 151;
 			this.label2.Text = "Typ:";
 			// 
-			// label13
-			// 
-			this.label13.Location = new System.Drawing.Point(96, 4);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(103, 26);
-			this.label13.TabIndex = 149;
-			this.label13.Text = "Teilflächen";
-			this.label13.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-			// 
-			// lstSubarea
-			// 
-			this.lstSubarea.FormattingEnabled = true;
-			this.lstSubarea.Location = new System.Drawing.Point(97, 33);
-			this.lstSubarea.Name = "lstSubarea";
-			this.lstSubarea.Size = new System.Drawing.Size(129, 69);
-			this.lstSubarea.TabIndex = 148;
-			this.lstSubarea.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
-			this.lstSubarea.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
-			// 
-			// label1
-			// 
-			this.label1.Location = new System.Drawing.Point(231, 4);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(103, 26);
-			this.label1.TabIndex = 147;
-			this.label1.Text = "Parallele Reihen im Heizkreis";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-			// 
-			// lstRows
-			// 
-			this.lstRows.FormattingEnabled = true;
-			this.lstRows.Location = new System.Drawing.Point(232, 33);
-			this.lstRows.Name = "lstRows";
-			this.lstRows.Size = new System.Drawing.Size(102, 69);
-			this.lstRows.TabIndex = 146;
-			this.lstRows.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
-			this.lstRows.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
-			// 
 			// label12
 			// 
 			this.label12.Location = new System.Drawing.Point(3, 4);
@@ -675,59 +805,6 @@ namespace Europlan.Common.Products {
 			this.modulKlimaBodenPlanner.ModuleSelected += new System.EventHandler<Europlan.Common.ModulKlimaDeckePlanner.ModuleSelectedEventArgs>(this.modulKlimaBodenPlanner_ModuleSelected);
 			this.modulKlimaBodenPlanner.ListsNeedUpdate += new System.EventHandler(this.modulKlimaBodenPlanner_ListsNeedUpdate);
 			// 
-			// numRotation
-			// 
-			this.numRotation.EditType = Europlan.Common.NumericBox.NumericEditType.ROTATION;
-			this.numRotation.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRotation.Location = new System.Drawing.Point(117, 18);
-			this.numRotation.MaxValue = new decimal(new int[] {
-            1799,
-            0,
-            0,
-            65536});
-			this.numRotation.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRotation.Name = "numRotation";
-			this.numRotation.Size = new System.Drawing.Size(74, 20);
-			this.numRotation.TabIndex = 8;
-			this.numRotation.Text = "0";
-			this.numRotation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRotation.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRotation.ValueChanged += new System.EventHandler(this.numAusrichtung_ValueChanged);
-			// 
-			// numRandfries
-			// 
-			this.numRandfries.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numRandfries.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRandfries.Location = new System.Drawing.Point(117, 64);
-			this.numRandfries.MaxValue = null;
-			this.numRandfries.MinValue = null;
-			this.numRandfries.Name = "numRandfries";
-			this.numRandfries.Size = new System.Drawing.Size(74, 20);
-			this.numRandfries.TabIndex = 5;
-			this.numRandfries.Text = "0";
-			this.numRandfries.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRandfries.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			// 
 			// ModulKlimaDeckePlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -752,8 +829,10 @@ namespace Europlan.Common.Products {
 			this.grpConstructionParameter.ResumeLayout(false);
 			this.grpConstructionParameter.PerformLayout();
 			this.pageLayout.ResumeLayout(false);
-			this.grpAutomatic.ResumeLayout(false);
+			this.grpSelection.ResumeLayout(false);
+			this.grpSelection.PerformLayout();
 			this.grpSelectedModules.ResumeLayout(false);
+			this.grpAutomatic.ResumeLayout(false);
 			this.grpNewModules.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -817,5 +896,12 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.GroupBox grpAutomatic;
 		private System.Windows.Forms.CheckBox cbAutomaticRows;
 		private System.Windows.Forms.CheckBox cbAutomaticOrientation;
+		private System.Windows.Forms.GroupBox grpSelection;
+		private System.Windows.Forms.Label lblReihe;
+		private System.Windows.Forms.Label lblSubarea;
+		private System.Windows.Forms.Label lblHk;
+		private System.Windows.Forms.LinkLabel llReihe;
+		private System.Windows.Forms.LinkLabel llSubarea;
+		private System.Windows.Forms.LinkLabel llHk;
 	}
 }
