@@ -732,12 +732,32 @@ namespace Europlan.Common.Products {
 
 		private void rbSerie_CheckedChanged(object sender, EventArgs e) {
 			if (sender is RadioButton && (sender as RadioButton).Checked) {
+
+				this.cmbModulType.Items.Clear();
+				this.cmbSelectedModuleType.Items.Clear();
+
 				if (sender == this.rbSerie30) {
 					this.glatt.SchienenAbstand = 0.3;
 					this.akustik.SchienenAbstand = 0.3;
+
+					
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30);
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30);
+					this.cmbModulType.SelectedIndex = 2;
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30);
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30);
+					this.cmbSelectedModuleType.SelectedIndex = -1;
+
 				} else if (sender == this.rbSerie40) {
 					this.glatt.SchienenAbstand = 0.4;
 					this.akustik.SchienenAbstand = 0.4;
+
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
+					this.cmbModulType.SelectedIndex = 0;
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
+					this.cmbSelectedModuleType.SelectedIndex = -1;
 				}
 			}
 			this.planPanel.InvalidateGraphics();

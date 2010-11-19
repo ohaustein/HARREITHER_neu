@@ -263,7 +263,7 @@ namespace Europlan.Common.Products {
 			this.pageConstruction.Location = new System.Drawing.Point(4, 22);
 			this.pageConstruction.Name = "pageConstruction";
 			this.pageConstruction.Padding = new System.Windows.Forms.Padding(3);
-			this.pageConstruction.Size = new System.Drawing.Size(874, 178);
+			this.pageConstruction.Size = new System.Drawing.Size(884, 178);
 			this.pageConstruction.TabIndex = 0;
 			this.pageConstruction.Text = "Konstruktion einrichten";
 			this.pageConstruction.UseVisualStyleBackColor = true;
@@ -276,7 +276,7 @@ namespace Europlan.Common.Products {
 			this.grpModulSerie.Controls.Add(this.rbSerie30);
 			this.grpModulSerie.Location = new System.Drawing.Point(423, 6);
 			this.grpModulSerie.Name = "grpModulSerie";
-			this.grpModulSerie.Size = new System.Drawing.Size(181, 226);
+			this.grpModulSerie.Size = new System.Drawing.Size(181, 169);
 			this.grpModulSerie.TabIndex = 2;
 			this.grpModulSerie.TabStop = false;
 			this.grpModulSerie.Text = "Klimamodul Serie";
@@ -315,7 +315,7 @@ namespace Europlan.Common.Products {
 			this.grpCeilingContruction.Controls.Add(this.rbGlatt);
 			this.grpCeilingContruction.Location = new System.Drawing.Point(6, 6);
 			this.grpCeilingContruction.Name = "grpCeilingContruction";
-			this.grpCeilingContruction.Size = new System.Drawing.Size(181, 226);
+			this.grpCeilingContruction.Size = new System.Drawing.Size(181, 169);
 			this.grpCeilingContruction.TabIndex = 0;
 			this.grpCeilingContruction.TabStop = false;
 			this.grpCeilingContruction.Text = "Deckenkonstruktion";
@@ -375,7 +375,7 @@ namespace Europlan.Common.Products {
 			this.grpConstructionParameter.Controls.Add(this.lblRandfries);
 			this.grpConstructionParameter.Location = new System.Drawing.Point(193, 6);
 			this.grpConstructionParameter.Name = "grpConstructionParameter";
-			this.grpConstructionParameter.Size = new System.Drawing.Size(224, 226);
+			this.grpConstructionParameter.Size = new System.Drawing.Size(224, 169);
 			this.grpConstructionParameter.TabIndex = 1;
 			this.grpConstructionParameter.TabStop = false;
 			this.grpConstructionParameter.Text = "Konstruktionsparameter";
@@ -936,7 +936,7 @@ namespace Europlan.Common.Products {
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(874, 178);
+			this.tabPage1.Size = new System.Drawing.Size(884, 178);
 			this.tabPage1.TabIndex = 2;
 			this.tabPage1.Text = "Berechnungsergebnisse";
 			this.tabPage1.UseVisualStyleBackColor = true;
