@@ -253,7 +253,7 @@ namespace Europlan.Common.Products {
 		}
 
 		private void rbKassetten_CheckedChanged(object sender, EventArgs e) {
-			if (rbAkustik.Checked) {
+			if (rbKassetten.Checked) {
 				this.modulKlimaBodenPlanner.Product.GraphConstruction = this.kassette;
 				this.planPanel.InvalidateGraphics();
 			}
