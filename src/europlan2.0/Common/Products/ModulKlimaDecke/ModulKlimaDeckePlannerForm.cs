@@ -223,6 +223,10 @@ namespace Europlan.Common.Products {
 			this.UpdateLists(true, true, true);
 		}
 
+		private KlimaFlaechenList GetSelectedRow() {
+			return this.modulKlimaBodenPlanner.HighlightRow;
+		}
+
 		private void rbGlatt_CheckedChanged(object sender, EventArgs e) {
 			if (rbGlatt.Checked) {
 				this.modulKlimaBodenPlanner.Product.GraphConstruction = this.glatt;
@@ -335,6 +339,7 @@ namespace Europlan.Common.Products {
 			int dec = this.newVisible ? 1 : 0;
 			this.newVisible = this.modulKlimaBodenPlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_LAYOUT_ADD_AREA;
 			ignoreListChange++;
+
 			if (updateCircuits) {
 				int circuitsCount = circuits.Count;
 				int tmp = (lstCircuits.SelectedIndex == lstCircuits.Items.Count - dec ? circuitsCount : lstCircuits.SelectedIndex);
@@ -401,6 +406,7 @@ namespace Europlan.Common.Products {
 				}
 				lstRows.EndUpdate();
 			}
+
 			ignoreListChange--;
 			this.lstCircuits_SelectedIndexChanged(this.lstRows, EventArgs.Empty);
 		}
@@ -474,6 +480,12 @@ namespace Europlan.Common.Products {
 				} else {
 					this.modulKlimaBodenPlanner.HighlightCircuit = null;
 					this.UpdateSelectedModules();
+				}
+
+				numLength.Enabled = GetSelectedRow() != null && GetSelectedRow().List.Count > 0;
+
+				if (GetSelectedRow() != null) {
+					this.numLength.Value = (decimal)GetSelectedRow().LengthVerbindeleitungen;
 				}
 
 				this.ignoreListChange--;
@@ -857,7 +869,10 @@ namespace Europlan.Common.Products {
 		}
 
 		private void numLength_ValueChanged(object sender, EventArgs e) {
-
+			if (ignoreListChange == 0 && GetSelectedRow() != null) {
+				GetSelectedRow().LengthVerbindeleitungen = (double)this.numLength.Value;
+				CalculateAndUpdate();
+			}
 		}
 	}
 }
