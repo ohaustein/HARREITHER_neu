@@ -599,6 +599,11 @@ namespace Europlan.Common.Products {
 			this.ignoreModuleOrientationChange++;
 			this.ignoreModuleTypeChange++;
 
+			if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaBodenPlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_PICK_MODULE) {
+				if (this.modulKlimaBodenPlanner.HighlightCircuit == null && this.modulKlimaBodenPlanner.HighlightSubArea == null && this.modulKlimaBodenPlanner.HighlightRow == null) {
+					this.lstCircuits.SelectedIndex = -1;
+				}
+			}
 			List<KlimaFlaechenModul> module = this.modulKlimaBodenPlanner.GetAllSelectedModules();
 			
 			if (module != null && module.Count > 0) {
