@@ -89,7 +89,7 @@ namespace Europlan.Common.Products {
 			this.label2 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.lstCircuits = new System.Windows.Forms.ListBox();
-			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.pageCalculations = new System.Windows.Forms.TabPage();
 			this.button1 = new System.Windows.Forms.Button();
 			this.lstError = new System.Windows.Forms.ListView();
 			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
@@ -133,7 +133,7 @@ namespace Europlan.Common.Products {
 			this.grpSelectedModules.SuspendLayout();
 			this.grpAutomatic.SuspendLayout();
 			this.grpNewModules.SuspendLayout();
-			this.tabPage1.SuspendLayout();
+			this.pageCalculations.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip
@@ -245,7 +245,7 @@ namespace Europlan.Common.Products {
 			// 
 			this.tabs.Controls.Add(this.pageConstruction);
 			this.tabs.Controls.Add(this.pageLayout);
-			this.tabs.Controls.Add(this.tabPage1);
+			this.tabs.Controls.Add(this.pageCalculations);
 			this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabs.Location = new System.Drawing.Point(0, 0);
 			this.tabs.Name = "tabs";
@@ -904,43 +904,43 @@ namespace Europlan.Common.Products {
 			this.lstCircuits.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
 			this.lstCircuits.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
 			// 
-			// tabPage1
+			// pageCalculations
 			// 
-			this.tabPage1.Controls.Add(this.button1);
-			this.tabPage1.Controls.Add(this.lstError);
-			this.tabPage1.Controls.Add(this.lblQAnbCoolUnit);
-			this.tabPage1.Controls.Add(this.lblQAnbHeatUnit);
-			this.tabPage1.Controls.Add(this.lblQAnbCool);
-			this.tabPage1.Controls.Add(this.lblQAnbHeat);
-			this.tabPage1.Controls.Add(this.label45);
-			this.tabPage1.Controls.Add(this.lblQCoolRestUnit);
-			this.tabPage1.Controls.Add(this.lblQCoolDiffUnit);
-			this.tabPage1.Controls.Add(this.lblQCoolUnit);
-			this.tabPage1.Controls.Add(this.lblQHeatRestUnit);
-			this.tabPage1.Controls.Add(this.lblQHeatDiffUnit);
-			this.tabPage1.Controls.Add(this.lblQHeatUnit);
-			this.tabPage1.Controls.Add(this.lblQCoolRest);
-			this.tabPage1.Controls.Add(this.lblQCoolDiff);
-			this.tabPage1.Controls.Add(this.lblQCool);
-			this.tabPage1.Controls.Add(this.lblQHeatRest);
-			this.tabPage1.Controls.Add(this.lblQHeatDiff);
-			this.tabPage1.Controls.Add(this.lblQHeat);
-			this.tabPage1.Controls.Add(this.lblRest);
-			this.tabPage1.Controls.Add(this.label16);
-			this.tabPage1.Controls.Add(this.label17);
-			this.tabPage1.Controls.Add(this.groupBox3);
-			this.tabPage1.Controls.Add(this.groupBox2);
-			this.tabPage1.Controls.Add(this.groupBox7);
-			this.tabPage1.Controls.Add(this.label11);
-			this.tabPage1.Controls.Add(this.label10);
-			this.tabPage1.Controls.Add(this.label6);
-			this.tabPage1.Location = new System.Drawing.Point(4, 22);
-			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(884, 178);
-			this.tabPage1.TabIndex = 2;
-			this.tabPage1.Text = "Berechnungsergebnisse";
-			this.tabPage1.UseVisualStyleBackColor = true;
+			this.pageCalculations.Controls.Add(this.button1);
+			this.pageCalculations.Controls.Add(this.lstError);
+			this.pageCalculations.Controls.Add(this.lblQAnbCoolUnit);
+			this.pageCalculations.Controls.Add(this.lblQAnbHeatUnit);
+			this.pageCalculations.Controls.Add(this.lblQAnbCool);
+			this.pageCalculations.Controls.Add(this.lblQAnbHeat);
+			this.pageCalculations.Controls.Add(this.label45);
+			this.pageCalculations.Controls.Add(this.lblQCoolRestUnit);
+			this.pageCalculations.Controls.Add(this.lblQCoolDiffUnit);
+			this.pageCalculations.Controls.Add(this.lblQCoolUnit);
+			this.pageCalculations.Controls.Add(this.lblQHeatRestUnit);
+			this.pageCalculations.Controls.Add(this.lblQHeatDiffUnit);
+			this.pageCalculations.Controls.Add(this.lblQHeatUnit);
+			this.pageCalculations.Controls.Add(this.lblQCoolRest);
+			this.pageCalculations.Controls.Add(this.lblQCoolDiff);
+			this.pageCalculations.Controls.Add(this.lblQCool);
+			this.pageCalculations.Controls.Add(this.lblQHeatRest);
+			this.pageCalculations.Controls.Add(this.lblQHeatDiff);
+			this.pageCalculations.Controls.Add(this.lblQHeat);
+			this.pageCalculations.Controls.Add(this.lblRest);
+			this.pageCalculations.Controls.Add(this.label16);
+			this.pageCalculations.Controls.Add(this.label17);
+			this.pageCalculations.Controls.Add(this.groupBox3);
+			this.pageCalculations.Controls.Add(this.groupBox2);
+			this.pageCalculations.Controls.Add(this.groupBox7);
+			this.pageCalculations.Controls.Add(this.label11);
+			this.pageCalculations.Controls.Add(this.label10);
+			this.pageCalculations.Controls.Add(this.label6);
+			this.pageCalculations.Location = new System.Drawing.Point(4, 22);
+			this.pageCalculations.Name = "pageCalculations";
+			this.pageCalculations.Padding = new System.Windows.Forms.Padding(3);
+			this.pageCalculations.Size = new System.Drawing.Size(884, 178);
+			this.pageCalculations.TabIndex = 2;
+			this.pageCalculations.Text = "Berechnungsergebnisse";
+			this.pageCalculations.UseVisualStyleBackColor = true;
 			// 
 			// button1
 			// 
@@ -1248,7 +1248,7 @@ namespace Europlan.Common.Products {
 			this.grpSelectedModules.ResumeLayout(false);
 			this.grpAutomatic.ResumeLayout(false);
 			this.grpNewModules.ResumeLayout(false);
-			this.tabPage1.ResumeLayout(false);
+			this.pageCalculations.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1318,7 +1318,7 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.LinkLabel llReihe;
 		private System.Windows.Forms.LinkLabel llSubarea;
 		private System.Windows.Forms.LinkLabel llHk;
-		private System.Windows.Forms.TabPage tabPage1;
+		private System.Windows.Forms.TabPage pageCalculations;
 		private System.Windows.Forms.Label lblQAnbCoolUnit;
 		private System.Windows.Forms.Label lblQAnbHeatUnit;
 		private System.Windows.Forms.Label lblQAnbCool;

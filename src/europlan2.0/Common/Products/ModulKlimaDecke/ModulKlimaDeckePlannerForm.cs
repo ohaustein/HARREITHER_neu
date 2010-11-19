@@ -305,7 +305,7 @@ namespace Europlan.Common.Products {
 		private TabPage previousTab = null;
 
 		private void tabs_Selecting(object sender, TabControlCancelEventArgs e) {
-			if (previousTab == this.pageLayout && e.TabPage == this.pageConstruction) {
+			if ((previousTab == this.pageLayout || previousTab == this.pageCalculations) && e.TabPage == this.pageConstruction) {
 				if (this.modulKlimaBodenPlanner.Product.ContainsModules) {
 					if (MessageBox.Show("Wenn Sie die Konstruktion ändern wollen, werden alle bereits verplanten Module gelöscht!", "Bestätigen", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) {
 						e.Cancel = true;
