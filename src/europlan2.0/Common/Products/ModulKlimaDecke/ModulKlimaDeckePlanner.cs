@@ -133,16 +133,29 @@ namespace Europlan.Common {
 					foreach (Circuit emptyCircuit in emptyCircuits) {
 						this.product.PlannedCircuits.Remove(emptyCircuit);
 					}
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
+					}
 					this.ModuleSelected(this, new ModuleSelectedEventArgs());
 					this.ConnectedPlanPanel.InvalidateGraphics();
 				}
 			}
 		}
 
-		public event EventHandler ListsNeedUpdate;
+		public class ListNeedsUpdateEventArgs : EventArgs {
+			public bool selectLastCircuit = false;
 
-		private double breite = 0.1; // meter
-		private double abstand = 0.5; // meter
+			public ListNeedsUpdateEventArgs() {
+			}
+
+			public ListNeedsUpdateEventArgs(bool selectLastCircuit) {
+				this.selectLastCircuit = selectLastCircuit;
+			}
+		}
+		public event EventHandler<ListNeedsUpdateEventArgs> ListsNeedUpdate;
+
+		//private double breite = 0.1; // meter
+		//private double abstand = 0.5; // meter
 
 		public delegate void AddModuleDelegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added);
 			//Graphics g, Matrix4D additionalTransformation, Matrix3D invRotation, double step, ref bool left, PossibleModulLane lane, Point2D borderLeftOrigin, ref double y, bool bottomUp, double start, double end);
@@ -277,9 +290,33 @@ namespace Europlan.Common {
 			int count = 0;
 			if (alignRectangle) {
 				// rectangle aligned to schienen
+				/*Point2D p1 = rotation.Transform(this.layoutAddArea[0]);
+				Point2D p2 = rotation.Transform(this.layoutAddArea[1]);
+				Point2D p3 = rotation.Transform(this.layoutAddArea[2]);
+				Point2D p4 = rotation.Transform(this.layoutAddArea[3]);
+				double t;
+				double l;
+				double r;
+				double b;
+				if (p1.Y < p2.Y) {
+					t = p1.Y;
+					b = p2.Y;
+				} else {
+					t = p2.Y;
+					b = p1.Y;
+				}
+				if (p1.X < p3.X) {
+					l = p1.X;
+					r = p3.X;
+				} else {
+					l = p3.X;
+					r = p1.X;
+				}*/
 				Segment2D topSeg = new Segment2D(rotation.Transform(this.layoutAddArea[0]), rotation.Transform(this.layoutAddArea[3]));
+				//Segment2D topSeg = new Segment2D(new Point2D(l, t), new Point2D(r, t));
 				double start = topSeg.Start.Y;
 				double end = rotation.Transform(this.layoutAddArea[1]).Y;
+				//double end = b;
 				double step = KlimaFlaechenModul.GetModuleHeight(this.moduleTypeToAdd) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 				bool left;
 				foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
@@ -478,7 +515,9 @@ namespace Europlan.Common {
 					Nullable<double> bestStart = area.BestStart(y, y + step, bottomUp);
 					if (bestStart.HasValue) {
 						y = bestStart.Value;
-						if (bestStart.Value >= start && bestStart.Value + step <= end) {
+						double upperBorder = Math.Min(start, end);
+						double lowerBorder = Math.Max(start, end);
+						if (bestStart.Value >= upperBorder && bestStart.Value + step <= lowerBorder) {
 							Point2D tmp = invRotation.Transform(new Point2D(borderLeftOrigin.X, y));
 							this.DrawModule(this.moduleTypeToAdd, null /*left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT*/, tmp, additionalTransformation, g, false, true);
 							left = !left;
@@ -504,7 +543,9 @@ namespace Europlan.Common {
 					Nullable<double> bestStart = area.BestStart(y, y + step, bottomUp);
 					if (bestStart.HasValue) {
 						y = bestStart.Value;
-						if (bestStart.Value >= start && bestStart.Value + step <= end) {
+						double upperBorder = Math.Min(start, end);
+						double lowerBorder = Math.Max(start, end);
+						if (bestStart.Value >= upperBorder && bestStart.Value + step <= lowerBorder) {
 							KlimaFlaechenModul modul = new KlimaFlaechenModul(moduleTypeToAdd, left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
 							modul.GraphLane = lane.Nr;
 							modul.GraphPositionInLan = bestStart.Value;
@@ -737,6 +778,9 @@ namespace Europlan.Common {
 			if (this.Mode == KlimaDeckeMode.KDM_CONSTRUCTION) {
 				if (button == MouseButtons.Left && this.product.GraphConstruction != null) {
 					this.product.GraphConstruction.MoveDrag(planPoint, pointInControl);
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
+					}
 					return true;
 				}
 			} else if (this.Mode == KlimaDeckeMode.KDM_LAYOUT_ADD_AREA) {
@@ -826,6 +870,9 @@ namespace Europlan.Common {
 								}
 							}
 						}
+					}
+					if (this.ProjectChanged != null) {
+						this.ProjectChanged(this);
 					}
 					this.connectedPlanPanel.InvalidateGraphics();
 				} else {
@@ -971,8 +1018,11 @@ namespace Europlan.Common {
 								}
 							}
 						}*/
+						if (this.ProjectChanged != null) {
+							this.ProjectChanged(this);
+						}
 						if (this.ListsNeedUpdate != null) {
-							this.ListsNeedUpdate(this, EventArgs.Empty);
+							this.ListsNeedUpdate(this, new ListNeedsUpdateEventArgs(newCircuit != null && newCircuit.CountModules() > 0));
 						}
 					}
 
@@ -1115,7 +1165,7 @@ namespace Europlan.Common {
 				foreach (KlimaFlaechenModul modul in modules) {
 					height = KlimaFlaechenModul.GetModuleHeight(modul.ModulType) * this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 					width = KlimaFlaechenModul.GetModuleWidth(modul.ModulType) * this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
-					Polygon2D modulPoly = new Polygon2D(new Point2D[] { new Point2D(left, modul.GraphPositionInLan), new Point2D(left, modul.GraphPositionInLan + height), new Point2D(left + width, modul.GraphPositionInLan), new Point2D(left + width, modul.GraphPositionInLan + height) });
+					Polygon2D modulPoly = new Polygon2D(new Point2D[] { new Point2D(left, modul.GraphPositionInLan), new Point2D(left, modul.GraphPositionInLan + height), new Point2D(left + width, modul.GraphPositionInLan + height), new Point2D(left + width, modul.GraphPositionInLan) });
 
 					if (rotatedPoly.IsInside(new Point2D(left, modul.GraphPositionInLan)) &&
 						rotatedPoly.IsInside(new Point2D(left, modul.GraphPositionInLan + height)) &&
@@ -1235,5 +1285,7 @@ namespace Europlan.Common {
 			set { this.alignRectangle = value; }
 		}
 		#endregion layoutAddArea
+
+		public event ProjectChangedHandler ProjectChanged;
 	}
 }

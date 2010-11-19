@@ -28,8 +28,12 @@ namespace Europlan.Common {
 			g.FillRegion(new SolidBrush(Color.FromArgb(127, Color.Red)), region);
 		}
 
+		[XmlIgnore]
 		public override List<Point2D> CeilingCoordinates {
 			get {
+				if (this.Planner == null || this.Planner.Product == null || this.Planner.Product.AssociatedRoom == null || this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
+					return null;
+				}
 				Polygon2D coords = new Polygon2D(this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse);
 				if (this.Planner == null || this.Planner.Product == null ||
 					this.Planner.Product.AssociatedRoom == null ||

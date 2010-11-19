@@ -1140,6 +1140,9 @@ namespace Europlan.Common {
 			if (this.product != null) {
 				Europlan.Common.Products.ModulKlimaDeckePlannerForm form = new Europlan.Common.Products.ModulKlimaDeckePlannerForm(this.product);
 				form.ShowDialog();
+				if (form.Changed && this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 				this.UpdateControl(FieldEnum.NONE);
 			}
 		}

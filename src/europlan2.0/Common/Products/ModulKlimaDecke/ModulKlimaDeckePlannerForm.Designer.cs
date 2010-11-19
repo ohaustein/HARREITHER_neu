@@ -323,7 +323,7 @@ namespace Europlan.Common.Products {
 			// rbKassetten
 			// 
 			this.rbKassetten.AutoSize = true;
-			this.rbKassetten.Location = new System.Drawing.Point(9, 65);
+			this.rbKassetten.Location = new System.Drawing.Point(9, 19);
 			this.rbKassetten.Name = "rbKassetten";
 			this.rbKassetten.Size = new System.Drawing.Size(102, 17);
 			this.rbKassetten.TabIndex = 3;
@@ -520,6 +520,7 @@ namespace Europlan.Common.Products {
             0,
             0,
             0});
+			this.numRandfries.ValueChanged += new System.EventHandler(this.numRandfries_ValueChanged);
 			// 
 			// lblRandfries
 			// 
@@ -950,6 +951,7 @@ namespace Europlan.Common.Products {
 			this.button1.TabIndex = 170;
 			this.button1.Text = "button1";
 			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Visible = false;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// lstError
@@ -1208,15 +1210,16 @@ namespace Europlan.Common.Products {
 			// 
 			// modulKlimaBodenPlanner
 			// 
-			this.modulKlimaBodenPlanner.AlignRectangle = false;
+			this.modulKlimaBodenPlanner.AlignRectangle = true;
 			this.modulKlimaBodenPlanner.AutomaticOrientation = true;
 			this.modulKlimaBodenPlanner.AutomaticRows = true;
 			this.modulKlimaBodenPlanner.Mode = Europlan.Common.ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_NONE;
 			this.modulKlimaBodenPlanner.ModuleTypeToAdd = ((Europlan.Common.KlimaFlaechenModul.ModulTypeEnum)(Europlan.Common.KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30));
 			this.modulKlimaBodenPlanner.OptimalLayout = true;
 			this.modulKlimaBodenPlanner.StartingOrientation = ((Europlan.Common.KlimaFlaechenModul.ModulOrientationEnum)(Europlan.Common.KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT));
+			this.modulKlimaBodenPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.modulKlimaBodenPlanner_ProjectChanged);
 			this.modulKlimaBodenPlanner.ModuleSelected += new System.EventHandler<Europlan.Common.ModulKlimaDeckePlanner.ModuleSelectedEventArgs>(this.modulKlimaBodenPlanner_ModuleSelected);
-			this.modulKlimaBodenPlanner.ListsNeedUpdate += new System.EventHandler(this.modulKlimaBodenPlanner_ListsNeedUpdate);
+			this.modulKlimaBodenPlanner.ListsNeedUpdate += new System.EventHandler<Europlan.Common.ModulKlimaDeckePlanner.ListNeedsUpdateEventArgs>(this.modulKlimaBodenPlanner_ListsNeedUpdate);
 			// 
 			// ModulKlimaDeckePlannerForm
 			// 

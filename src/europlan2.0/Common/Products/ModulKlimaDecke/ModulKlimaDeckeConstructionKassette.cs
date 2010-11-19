@@ -11,9 +11,9 @@ using System.Windows.Forms;
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionKassette : ModulKlimaDeckeConstruction {
 		private double schienenBreiteX = 0.05; // meter
-		private double schienenBreiteY = 0.05; // meter
+		private double schienenBreiteY = 0.05 - 0.0001; // meter
 		private double schienenAbstandX = 0.4; // meter
-		private double schienenAbstandY = 1.0; // meter
+		private double schienenAbstandY = 1.0 + 0.0001; // meter
 		private double offsetX = 0; // meter
 		private double offsetY = 0; // meter
 		protected List<Polygon2D> schienenY = new List<Polygon2D>();
@@ -24,6 +24,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override List<Point2D> CeilingCoordinates {
 			get {
+				if (this.Planner == null || this.Planner.Product == null || this.Planner.Product.AssociatedRoom == null || this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
+					return null;
+				}
 				return this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse;
 			}
 		}
@@ -61,6 +64,7 @@ namespace Europlan.Common {
 			matrix = matrix.GetInverse();
 
 			this.schienen.Clear();
+			this.schienenY.Clear();
 			this.possibleLanes.Clear();
 
 			double measure = this.Planner.ConnectedPlanPanel.Plan.Measure.Value;
@@ -80,7 +84,7 @@ namespace Europlan.Common {
 				curPos += increment;
 			}
 
-			increment = (schienenBreiteX + schienenAbstandX) * measure;
+			increment = (schienenBreiteY + schienenAbstandY) * measure;
 			curPos = (minY + maxY - schienenBreiteY * measure) / 2.0 + (offsetY * measure);
 			while (curPos > minY) {
 				curPos -= increment;
@@ -89,8 +93,8 @@ namespace Europlan.Common {
 				Polygon2D schiene = new Polygon2D();
 				schiene.Add(matrix.Transform(new Point2D(minX, curPos)));
 				schiene.Add(matrix.Transform(new Point2D(minX, curPos + schienenBreiteY * measure)));
-				schiene.Add(matrix.Transform(new Point2D(maxY, curPos + schienenBreiteY * measure)));
-				schiene.Add(matrix.Transform(new Point2D(maxY, curPos)));
+				schiene.Add(matrix.Transform(new Point2D(maxX, curPos + schienenBreiteY * measure)));
+				schiene.Add(matrix.Transform(new Point2D(maxX, curPos)));
 				this.schienenY.Add(schiene);
 				curPos += increment;
 			}
@@ -550,8 +554,9 @@ namespace Europlan.Common {
 				foreach (Point2D point in schiene) {
 					poly[i++] = new PointF((float)point.X, (float)point.Y);
 				}
-				g.DrawPolygon(p, poly);
-				g.FillPolygon(b, poly);
+				//g.DrawPolygon(p, poly);
+				//g.FillPolygon(b, poly);
+				g.FillPolygon(new SolidBrush(Color.FromArgb(127, Color.Red)), poly);
 			}
 
 			foreach (Polygon2D schieneY in this.GetSchienenY(true)) {
@@ -568,9 +573,9 @@ namespace Europlan.Common {
 				c = Color.FromArgb(128, 0, 240, 0);
 				p = new Pen(c);
 				b = new SolidBrush(Color.FromArgb(64, c));
-				Region r = new Region();
-				r.MakeInfinite();
-				g.Clip = r;
+				//Region r = new Region();
+				//r.MakeInfinite();
+				//g.Clip = r;
 				foreach (Polygon2D area in this.GetPossibleAreas(true)) {
 					PointF[] poly = new PointF[area.Count];
 					int i = 0;
@@ -638,6 +643,27 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override Cursor PickCursor {
 			get { return Cursors.NoMove2D; }
+		}
+
+		[XmlIgnore]
+		public override double RotationRelativeToPlan {
+			get {
+				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
+					return this.rotation + (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation + 90.0;
+				} else if (this.Planner.ConnectedPlanPanel.Plan is CadPlan) {
+					return -this.rotation + 90.0;
+				}
+				return this.rotation + 90.0;
+			}
+			set {
+				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
+					this.Rotation = value - (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation + 90.0;
+				} else if (this.Planner.ConnectedPlanPanel.Plan is CadPlan) {
+					this.Rotation = -value - 90.0;
+				} else {
+					this.Rotation = value - 90.0;
+				}
+			}
 		}
 	}
 }

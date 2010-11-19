@@ -20,6 +20,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override List<Point2D> CeilingCoordinates {
 			get {
+				if (this.Planner == null || this.Planner.Product == null || this.Planner.Product.AssociatedRoom == null || this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
+					return null;
+				}
 				return this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse;
 			}
 		}

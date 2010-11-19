@@ -57,7 +57,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double RotationRelativeToPlan {
+		public virtual double RotationRelativeToPlan {
 			get {
 				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
 					return this.rotation + (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation;
