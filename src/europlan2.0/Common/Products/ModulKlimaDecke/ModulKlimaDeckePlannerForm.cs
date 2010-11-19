@@ -739,8 +739,7 @@ namespace Europlan.Common.Products {
 				if (sender == this.rbSerie30) {
 					this.glatt.SchienenAbstand = 0.3;
 					this.akustik.SchienenAbstand = 0.3;
-
-					
+										
 					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
 					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30);
 					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30);
