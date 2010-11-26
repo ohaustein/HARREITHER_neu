@@ -80,6 +80,7 @@ namespace Europlan.Common {
 						} else if (isCad(extension)) {
 							plan = new CadPlan();
 						}
+						// TODO assure that plan is not null
 						plan.Name = newPlanForm.PlanName;
 						plan.RelativeFileName = Path.Combine(subDir, Path.GetFileName(dialog.FileName));
 						plans.Add(plan);
@@ -96,14 +97,15 @@ namespace Europlan.Common {
 		}
 
 		private bool isImage(string extension) {
-			return extension == ".jpg" ||
-				   extension == ".bmp" ||
-				   extension == ".png";
+
+			return string.Compare(".jpg", extension, true) == 0 ||
+				string.Compare(".bmp", extension, true) == 0 ||
+				string.Compare(".png", extension, true) == 0;
 		}
 		
 		private bool isCad(string extension) {
-			return extension == ".dxf" ||
-				extension == ".dwg";
+			return string.Compare(".dxf", extension, true) == 0 ||
+				string.Compare(".dwg", extension, true) == 0;
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e) {

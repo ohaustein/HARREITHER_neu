@@ -141,7 +141,7 @@ namespace Europlan.Common.Products {
 				this.lblRandfriesUnit.Visible = false;
 				this.grpModulSerie.Visible = true;
 				this.numRotation.Value = (decimal)this.glatt.RotationRelativeToPlan;
-				if (Math.Round(this.glatt.SchienenBreite, 2) == 0.3) {
+				if (Math.Round(this.glatt.SchienenAbstand, 2) == 0.3) {
 					if (!this.rbSerie30.Checked) {
 						this.rbSerie30.Checked = true;
 					}
@@ -159,7 +159,7 @@ namespace Europlan.Common.Products {
 				this.grpModulSerie.Visible = true;
 				this.grpModulSerie.Visible = true;
 				this.numRotation.Value = (decimal)this.akustik.RotationRelativeToPlan;
-				if (Math.Round(this.akustik.SchienenBreite, 2) == 0.3) {
+				if (Math.Round(this.akustik.SchienenAbstand, 2) == 0.3) {
 					if (!this.rbSerie30.Checked) {
 						this.rbSerie30.Checked = true;
 					}
