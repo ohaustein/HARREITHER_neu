@@ -9996,7 +9996,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mit dem gesetzten Maßstab ergibt sich für die ausgewählte Linie eine Länge von %LAENGE%m. Falls dies nicht korrekt ist, geben Sie bitte die richtige Länge ein!.
+        ///   Looks up a localized string similar to Mit dem gesetzten Maßstab ergibt sich für die ausgewählte Linie eine Länge von %LAENGE%%EINHEIT%. Falls dies nicht korrekt ist, geben Sie bitte die richtige Länge ein!.
         /// </summary>
         internal static string PlanSetMeasureForm_Massstab {
             get {
@@ -13150,6 +13150,51 @@ namespace Europlan.Common {
         internal static string SystemParametersPanel_Oberflaechentemperatur29 {
             get {
                 return ResourceManager.GetString("SystemParametersPanel_Oberflaechentemperatur29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importierte Pläne.
+        /// </summary>
+        internal static string SystemParametersPanel_Plaene {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_Plaene", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Einheit:.
+        /// </summary>
+        internal static string SystemParametersPanel_PlaeneEinheit {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_PlaeneEinheit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zentimeter.
+        /// </summary>
+        internal static string SystemParametersPanel_PlaeneEinheitCM {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_PlaeneEinheitCM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meter.
+        /// </summary>
+        internal static string SystemParametersPanel_PlaeneEinheitM {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_PlaeneEinheitM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Millimeter.
+        /// </summary>
+        internal static string SystemParametersPanel_PlaeneEinheitMM {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_PlaeneEinheitMM", resourceCulture);
             }
         }
         

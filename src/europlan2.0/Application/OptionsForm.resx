@@ -148,7 +148,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;lblLanguage.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="cmbLanguage.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 13</value>
@@ -169,7 +169,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;cmbLanguage.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -255,6 +255,54 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="lblPlanUnit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 131</value>
+  </data>
+  <data name="lblPlanUnit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 23</value>
+  </data>
+  <data name="lblPlanUnit.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="lblPlanUnit.Text" xml:space="preserve">
+    <value>Einheit für Pläne:</value>
+  </data>
+  <data name="lblPlanUnit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblPlanUnit.Name" xml:space="preserve">
+    <value>lblPlanUnit</value>
+  </data>
+  <data name="&gt;&gt;lblPlanUnit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPlanUnit.Parent" xml:space="preserve">
+    <value>tabGeneral</value>
+  </data>
+  <data name="&gt;&gt;lblPlanUnit.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cmbPlanUnit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 133</value>
+  </data>
+  <data name="cmbPlanUnit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 21</value>
+  </data>
+  <data name="cmbPlanUnit.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="&gt;&gt;cmbPlanUnit.Name" xml:space="preserve">
+    <value>cmbPlanUnit</value>
+  </data>
+  <data name="&gt;&gt;cmbPlanUnit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbPlanUnit.Parent" xml:space="preserve">
+    <value>tabGeneral</value>
+  </data>
+  <data name="&gt;&gt;cmbPlanUnit.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -280,7 +328,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>424, 48</value>
@@ -304,7 +352,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="pictureBox1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -331,7 +379,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -361,7 +409,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="tabGeneral.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -406,7 +454,7 @@
     <value>megFloor</value>
   </data>
   <data name="&gt;&gt;megFloor.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megFloor.Parent" xml:space="preserve">
     <value>tabPageFloor</value>
@@ -457,7 +505,7 @@
     <value>megWall</value>
   </data>
   <data name="&gt;&gt;megWall.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megWall.Parent" xml:space="preserve">
     <value>tabPageWall</value>
@@ -508,7 +556,7 @@
     <value>megCeiling</value>
   </data>
   <data name="&gt;&gt;megCeiling.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megCeiling.Parent" xml:space="preserve">
     <value>tabPageCeiling</value>
@@ -559,7 +607,7 @@
     <value>megDistributor</value>
   </data>
   <data name="&gt;&gt;megDistributor.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megDistributor.Parent" xml:space="preserve">
     <value>tabPageDistributor</value>
@@ -610,7 +658,7 @@
     <value>megInsulation</value>
   </data>
   <data name="&gt;&gt;megInsulation.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megInsulation.Parent" xml:space="preserve">
     <value>tabPageInsulation</value>
@@ -661,7 +709,7 @@
     <value>megGeneral</value>
   </data>
   <data name="&gt;&gt;megGeneral.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megGeneral.Parent" xml:space="preserve">
     <value>tabPageGeneral</value>
@@ -763,7 +811,7 @@
     <value>constructionEditorGrid1</value>
   </data>
   <data name="&gt;&gt;constructionEditorGrid1.Type" xml:space="preserve">
-    <value>Europlan.Common.ConstructionEditorGrid, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.ConstructionEditorGrid, Common, Version=3.0.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;constructionEditorGrid1.Parent" xml:space="preserve">
     <value>tabConstructions</value>
@@ -814,7 +862,7 @@
     <value>systemParametersPanel</value>
   </data>
   <data name="&gt;&gt;systemParametersPanel.Type" xml:space="preserve">
-    <value>Europlan.Common.SystemParametersPanel, Common, Version=2.0.35.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.SystemParametersPanel, Common, Version=3.0.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;systemParametersPanel.Parent" xml:space="preserve">
     <value>tabDefaultSystemParameters</value>

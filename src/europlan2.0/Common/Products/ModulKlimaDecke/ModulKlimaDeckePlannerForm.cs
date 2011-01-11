@@ -22,6 +22,29 @@ namespace Europlan.Common.Products {
 
 		public ModulKlimaDeckePlannerForm(PlannedProduct plannedProduct) {
 			InitializeComponent();
+			switch (Product.ConfigPlanMeasureEnum) {
+				case Product.PlanMeasureEnum.PM_CENTIMETER:
+					this.lblBeplankungBreiteUnit.Text = "cm";
+					this.lblBeplankungLaengeUnit.Text = "cm";
+					this.numBeplankungBreite.EditType = NumericBox.NumericEditType.BEPLANKUNG_CM;
+					this.numBeplankungLaenge.EditType = NumericBox.NumericEditType.BEPLANKUNG_CM;
+					break;
+
+				case Product.PlanMeasureEnum.PM_MILLIMETER:
+					this.lblBeplankungBreiteUnit.Text = "mm";
+					this.lblBeplankungLaengeUnit.Text = "mm";
+					this.numBeplankungBreite.EditType = NumericBox.NumericEditType.BEPLANKUNG_MM;
+					this.numBeplankungLaenge.EditType = NumericBox.NumericEditType.BEPLANKUNG_MM;
+					break;
+
+				case Product.PlanMeasureEnum.PM_METER:
+				default:
+					this.lblBeplankungBreiteUnit.Text = "m";
+					this.lblBeplankungLaengeUnit.Text = "m";
+					this.numBeplankungBreite.EditType = NumericBox.NumericEditType.BEPLANKUNG_M;
+					this.numBeplankungLaenge.EditType = NumericBox.NumericEditType.BEPLANKUNG_M;
+					break;
+			}
 			this.plannedProduct = plannedProduct;
 			this.cbAutomaticOrientation.Checked = this.modulKlimaBodenPlanner.AutomaticOrientation;
 			this.cbAutomaticRows.Checked = this.modulKlimaBodenPlanner.AutomaticRows;
@@ -88,8 +111,30 @@ namespace Europlan.Common.Products {
 
 			if (product.GraphConstruction is ModulKlimaDeckeConstructionGlatt) {
 				this.rbGlatt.Checked = true;
+				ignoreBeplankung++;
+				if (this.glatt.Beplankung.HasValue) {
+					this.numBeplankungLaenge.Value = (decimal)(this.glatt.Beplankung.Value.X * Product.ConfigPlanMeasureMultiplier);
+					this.numBeplankungBreite.Value = (decimal)(this.glatt.Beplankung.Value.Y * Product.ConfigPlanMeasureMultiplier);
+					this.cbBeplankung.Checked = true;
+				} else {
+					this.cbBeplankung.Checked = false;
+					this.numBeplankungLaenge.Text = "";
+					this.numBeplankungBreite.Text = "";
+				}
+				ignoreBeplankung--;
 			} else if (product.GraphConstruction is ModulKlimaDeckeConstructionAkustik) {
 				this.rbAkustik.Checked = true;
+				ignoreBeplankung++;
+				if (this.akustik.Beplankung.HasValue) {
+					this.numBeplankungLaenge.Value = (decimal)(this.akustik.Beplankung.Value.X * Product.ConfigPlanMeasureMultiplier);
+					this.numBeplankungBreite.Value = (decimal)(this.akustik.Beplankung.Value.Y * Product.ConfigPlanMeasureMultiplier);
+					this.cbBeplankung.Checked = true;
+				} else {
+					this.cbBeplankung.Checked = false;
+					this.numBeplankungLaenge.Text = "";
+					this.numBeplankungBreite.Text = "";
+				}
+				ignoreBeplankung--;
 			} else if (product.GraphConstruction is ModulKlimaDeckeConstructionKassette) {
 				this.rbKassetten.Checked = true;
 			}
@@ -281,6 +326,10 @@ namespace Europlan.Common.Products {
 			return this.modulKlimaBodenPlanner.HighlightRow;
 		}
 
+		private ModulDeckeCircuit GetSelectedCircuit() {
+			return this.modulKlimaBodenPlanner.HighlightCircuit;
+		}
+
 		private void rbGlatt_CheckedChanged(object sender, EventArgs e) {
 			if (rbGlatt.Checked && this.modulKlimaBodenPlanner.Product.GraphConstruction != this.glatt) {
 				this.modulKlimaBodenPlanner.Product.GraphConstruction = this.glatt;
@@ -344,10 +393,10 @@ namespace Europlan.Common.Products {
 			}
 			decimal value = this.numRotation.Value + rotation;
 			while (value < 0) {
-				value += 180;
+				value += 360;
 			}
-			while (value >= 180) {
-				value -= 180;
+			while (value >= 360) {
+				value -= 360;
 			}
 			this.numRotation.Value = value;
 		}
@@ -576,6 +625,20 @@ namespace Europlan.Common.Products {
 
 				if (GetSelectedRow() != null) {
 					this.numLength.Value = (decimal)GetSelectedRow().LengthVerbindeleitungen;
+				}
+
+				if (this.lstCircuits.SelectedIndex >= 0 && this.lstCircuits.SelectedIndex < this.lstCircuits.Items.Count - dec) {
+					ModulDeckeCircuit circuit = (this.lstCircuits.Items.Count - dec > this.lstCircuits.SelectedIndex ? (this.modulKlimaBodenPlanner.Product.PlannedCircuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit) : null);
+					if (circuit != null) {
+						btnColor.BackColor = circuit.CircuitColor;
+						btnColor.Enabled = true;
+					} else {
+						btnColor.BackColor = Color.Transparent;
+						btnColor.Enabled = false;
+					}
+				} else {
+					btnColor.BackColor = Color.Transparent;
+					btnColor.Enabled = false;
 				}
 
 				this.ignoreListChange--;
@@ -1019,6 +1082,65 @@ namespace Europlan.Common.Products {
 				this.akustik.Randfries = ((double)numRandfries.Value) / 100.0;
 				this.planPanel.InvalidateGraphics();
 			}
+		}
+
+		private int ignoreBeplankung = 0;
+
+		private void cbBeplankung_CheckedChanged(object sender, EventArgs e) {
+			if (ignoreBeplankung == 0) {
+				// Akustik is subclass of Glatt!!!
+				ModulKlimaDeckeConstructionGlatt constr = this.modulKlimaBodenPlanner.Product.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
+				if (constr != null) {
+					ignoreBeplankungValue++;
+					if (this.cbBeplankung.Checked) {
+						this.numBeplankungBreite.Value = (decimal)(0.625 * Product.ConfigPlanMeasureMultiplier);
+						this.numBeplankungLaenge.Value = (decimal)(2.500 * Product.ConfigPlanMeasureMultiplier);
+						this.numBeplankungBreite.Enabled = true;
+						this.numBeplankungLaenge.Enabled = true;
+						this.numBeplankungBreite.ReadOnly = false;
+						this.numBeplankungLaenge.ReadOnly = false;
+						constr.Beplankung = new WW.Math.Size2D((double)this.numBeplankungLaenge.Value / Product.ConfigPlanMeasureMultiplier, (double)this.numBeplankungBreite.Value / Product.ConfigPlanMeasureMultiplier);
+					} else {
+						this.numBeplankungBreite.Enabled = false;
+						this.numBeplankungLaenge.Enabled = false;
+						this.numBeplankungLaenge.ReadOnly = true;
+						this.numBeplankungBreite.ReadOnly = true;
+						this.numBeplankungLaenge.Text = "";
+						this.numBeplankungBreite.Text = "";
+						constr.Beplankung = null;
+					}
+					this.planPanel.InvalidateGraphics();
+					ignoreBeplankungValue--;
+				}
+			}
+		}
+
+		private int ignoreBeplankungValue = 0;
+		private void numBeplankung_ValueChanged(object sender, EventArgs e) {
+			if (this.ignoreBeplankungValue == 0) {
+				// Akustik is subclass of Glatt!!!
+				ModulKlimaDeckeConstructionGlatt constr = this.modulKlimaBodenPlanner.Product.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
+				if (constr != null && this.cbBeplankung.Checked) {
+					constr.Beplankung = new WW.Math.Size2D((double)this.numBeplankungLaenge.Value / Product.ConfigPlanMeasureMultiplier, (double)this.numBeplankungBreite.Value / Product.ConfigPlanMeasureMultiplier);
+					this.planPanel.InvalidateGraphics();
+				}				
+			}
+		}
+
+		private void btnColor_Click(object sender, EventArgs e) {
+			int dec = this.newVisible ? 1 : 0;
+			if (this.lstCircuits.SelectedIndex >= 0 && this.lstCircuits.SelectedIndex < this.lstCircuits.Items.Count - dec) {
+				ModulDeckeCircuit circuit = (this.lstCircuits.Items.Count - dec > this.lstCircuits.SelectedIndex ? (this.modulKlimaBodenPlanner.Product.PlannedCircuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit) : null);
+				if (circuit != null) {
+					colorDialog.Color = circuit.CircuitColor;
+					if (colorDialog.ShowDialog() == DialogResult.OK) {
+						circuit.CircuitColor = colorDialog.Color;
+						this.btnColor.BackColor = circuit.CircuitColor;
+						this.planPanel.InvalidateGraphics();
+					}
+				}
+			}
+
 		}
 	}
 }

@@ -34,6 +34,7 @@ namespace Europlan.Common {
 		private Cursor customCursor = null;
 		private bool automaticOrientation = true;
 		private bool automaticRows = true;
+		private bool drawBeplankung = true;
 
 		public bool AutomaticOrientation {
 			get { return this.automaticOrientation; }
@@ -200,7 +201,7 @@ namespace Europlan.Common {
 
 				if (this.product.AssociatedRoom.AssociatedPlan != null && this.product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
 					if (this.product.GraphConstruction != null) {
-						this.product.GraphConstruction.Paint(e.Graphics, this.Mode);
+						this.product.GraphConstruction.Paint(e.Graphics, this.Mode, this.drawBeplankung);
 					}
 				}
 
@@ -211,22 +212,23 @@ namespace Europlan.Common {
 
 						double left = rotation.Transform(lane.BorderLeft.Origin).X;
 
-						List<KlimaFlaechenModul> modules = lane.GetModulesInThisLane(this.product);
-						foreach (KlimaFlaechenModul module in modules) {
+						List<KlimaFlaechenModulWithRowAndCircuit> modules = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
+						//List<KlimaFlaechenModul> modules = lane.GetModulesInThisLane(this.product);
+						foreach (KlimaFlaechenModulWithRowAndCircuit mrc in modules) {
 							bool highlight = false;
-							if (this.highlightCircuit != null && this.highlightCircuit.ContainsModul(module)) {
+							if (this.highlightCircuit != null && this.highlightCircuit.ContainsModul(mrc.modul)) {
 								highlight = true;
 							}
-							if (this.highlightSubArea != null && this.highlightSubArea.ContainsModul(module)) {
+							if (this.highlightSubArea != null && this.highlightSubArea.ContainsModul(mrc.modul)) {
 								highlight = true;
 							}
-							if (this.highlightRow != null && this.highlightRow.ContainsModul(module)) {
+							if (this.highlightRow != null && this.highlightRow.ContainsModul(mrc.modul)) {
 								highlight = true;
 							}
-							if (this.highlightModules != null && this.highlightModules.Contains(module)) {
+							if (this.highlightModules != null && this.highlightModules.Contains(mrc.modul)) {
 								highlight = true;
 							}
-							this.DrawModule(module.ModulType, module.Orientation, invRotation.Transform(new Point2D(left, module.GraphPositionInLan)), additionalTransformation, e.Graphics, module.GraphBottomUp, highlight);
+							this.DrawModule(mrc.modul.ModulType, mrc.modul.Orientation, invRotation.Transform(new Point2D(left, mrc.modul.GraphPositionInLan)), additionalTransformation, e.Graphics, mrc.modul.GraphBottomUp, highlight, mrc.circuit.CircuitColor);
 						}
 					}
 				}
@@ -519,7 +521,7 @@ namespace Europlan.Common {
 						double lowerBorder = Math.Max(start, end);
 						if (bestStart.Value >= upperBorder && bestStart.Value + step <= lowerBorder) {
 							Point2D tmp = invRotation.Transform(new Point2D(borderLeftOrigin.X, y));
-							this.DrawModule(this.moduleTypeToAdd, null /*left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT*/, tmp, additionalTransformation, g, false, true);
+							this.DrawModule(this.moduleTypeToAdd, null /*left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT*/, tmp, additionalTransformation, g, false, true, Color.FromArgb(0, 240, 0));
 							left = !left;
 							return true;
 						}
@@ -528,7 +530,7 @@ namespace Europlan.Common {
 				} else {
 					if (area.Fits(y, y + step)) {
 						Point2D tmp = invRotation.Transform(new Point2D(borderLeftOrigin.X, y));
-						this.DrawModule(this.moduleTypeToAdd, null /*left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT*/, tmp, additionalTransformation, g, false, true);
+						this.DrawModule(this.moduleTypeToAdd, null /*left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT*/, tmp, additionalTransformation, g, false, true, Color.FromArgb(0, 240, 0));
 						left = !left;
 						return true;
 					}
@@ -552,11 +554,11 @@ namespace Europlan.Common {
 							modul.GraphBottomUp = bottomUp;
 							KlimaFlaechenList usedRow = null;
 							if (tryToFindRow) {
-								List<KlimaFlaechenModulWithRow> modulesInLane = this.product.GetModulesInLaneWithRow(lane.Nr);
+								List<KlimaFlaechenModulWithRowAndCircuit> modulesInLane = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
 								//modulesInLane.Sort(new KlimaFlaechenModuleComparer(true));
 								double bestPosBefore = double.MinValue;
 								double bestPosAfter = double.MaxValue;
-								foreach (KlimaFlaechenModulWithRow modulInLane in modulesInLane) {
+								foreach (KlimaFlaechenModulWithRowAndCircuit modulInLane in modulesInLane) {
 									if (modulInLane.modul.GraphPositionInLan < modul.GraphPositionInLan && modulInLane.modul.GraphPositionInLan > bestPosBefore) {
 										bestPosBefore = modulInLane.modul.GraphPositionInLan;
 										usedRow = modulInLane.row;
@@ -910,15 +912,15 @@ namespace Europlan.Common {
 			#endregion
 		}
 
-		public class KlimaFlaechenModuleWithRowComparer : IComparer<KlimaFlaechenModulWithRow> {
+		public class KlimaFlaechenModuleWithRowAndCircuitComparer : IComparer<KlimaFlaechenModulWithRowAndCircuit> {
 			private bool ascending;
 
-			public KlimaFlaechenModuleWithRowComparer(bool ascending) {
+			public KlimaFlaechenModuleWithRowAndCircuitComparer(bool ascending) {
 				this.ascending = ascending;
 			}
 
-			#region IComparer<KlimaFlaechenModulWithRow> Members
-			public int Compare(KlimaFlaechenModulWithRow x, KlimaFlaechenModulWithRow y) {
+			#region IComparer<KlimaFlaechenModulWithRowAndCircuit> Members
+			public int Compare(KlimaFlaechenModulWithRowAndCircuit x, KlimaFlaechenModulWithRowAndCircuit y) {
 				int result;
 				if (ascending) {
 					result = x.modul.GraphLane.CompareTo(y.modul.GraphLane);
@@ -939,7 +941,9 @@ namespace Europlan.Common {
 		internal bool ShiftPressed {
 			get { return (Control.ModifierKeys & (Keys.Shift | Keys.ShiftKey | Keys.LShiftKey | Keys.RShiftKey)) != Keys.None; }
 		}
-		
+
+		private Random random = new Random((int)DateTime.Now.Ticks);
+
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
 			if (this.mode == KlimaDeckeMode.KDM_LAYOUT_ADD_AREA) {
@@ -950,6 +954,7 @@ namespace Europlan.Common {
 					KlimaFlaechenList oldRow = null;
 					if (this.highlightCircuit == null && highlightSubArea == null && highlightRow == null) {
 						newCircuit = new ModulDeckeCircuit();
+						newCircuit.CircuitColor = Color.FromArgb(random.Next(255), random.Next(255), random.Next(255));
 						newSubArea = newCircuit.SubAreas[0];
 						newSubArea.Rows.Clear();
 					} else if (this.highlightSubArea == null && highlightRow == null) {
@@ -977,11 +982,11 @@ namespace Europlan.Common {
 						}
 						if (this.automaticOrientation) {
 							foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
-								List<KlimaFlaechenModulWithRow> modules = this.product.GetModulesInLaneWithRow(lane.Nr);
-								modules.Sort(new KlimaFlaechenModuleWithRowComparer(false));
+								List<KlimaFlaechenModulWithRowAndCircuit> modules = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
+								modules.Sort(new KlimaFlaechenModuleWithRowAndCircuitComparer(false));
 								Nullable<bool> left = null;
 								KlimaFlaechenList lastRow = null;
-								foreach (KlimaFlaechenModulWithRow moduleWithRow in modules) {
+								foreach (KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
 									if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul)) {
 										moduleWithRow.modul.Orientation = left.Value ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
 										left = !left;
@@ -990,10 +995,10 @@ namespace Europlan.Common {
 										left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
 									}
 								}
-								modules.Sort(new KlimaFlaechenModuleWithRowComparer(true));
+								modules.Sort(new KlimaFlaechenModuleWithRowAndCircuitComparer(true));
 								left = null;
 								lastRow = null;
-								foreach (KlimaFlaechenModulWithRow moduleWithRow in modules) {
+								foreach (KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
 									if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul)) {
 										moduleWithRow.modul.Orientation = left.Value ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
 										left = !left;
@@ -1215,7 +1220,7 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		public void DrawModule(KlimaFlaechenModul.ModulTypeEnum type, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, Point2D position, Matrix4D additionalTransformation, Graphics g, bool bottomUp, bool highlight) {
+		public void DrawModule(KlimaFlaechenModul.ModulTypeEnum type, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, Point2D position, Matrix4D additionalTransformation, Graphics g, bool bottomUp, bool highlight, Color circuitColor) {
 			if (this.product == null || this.product.GraphConstruction == null ||
 				this.product.AssociatedRoom == null || this.product.AssociatedRoom.AssociatedPlan == null ||
 				this.product.AssociatedRoom.AssociatedPlan.Measure == null) {
@@ -1239,12 +1244,21 @@ namespace Europlan.Common {
 
 			Color c;
 			if (highlight) {
-				c = Color.FromArgb(128, 0, 240, 0);
+				//c = Color.FromArgb(128, 0, 240, 0);
+				int cr = Math.Min((int)(circuitColor.R * 1.5), 255);
+				int cg = Math.Min((int)(circuitColor.G * 1.5), 255);
+				int cb = Math.Min((int)(circuitColor.B * 1.5), 255);
+				c = Color.FromArgb(128, cr, cg, cb);
 			} else {
-				c = Color.FromArgb(128, 0, 128, 0);
+				//c = Color.FromArgb(128, 0, 128, 0);
+				c = Color.FromArgb(128, circuitColor);
 			}
 
 			Pen p = new Pen(c);
+			if (highlight) {
+				p.Width = 1.5f;
+			}
+			//Console.WriteLine(p.Width);
 			Brush b = new SolidBrush(Color.FromArgb(64, c));
 			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
@@ -1287,5 +1301,11 @@ namespace Europlan.Common {
 		#endregion layoutAddArea
 
 		public event ProjectChangedHandler ProjectChanged;
+
+		[DefaultValue(true)]
+		public bool DrawBeplankung {
+			get { return this.drawBeplankung; }
+			set { this.drawBeplankung = value; }
+		}
 	}
 }

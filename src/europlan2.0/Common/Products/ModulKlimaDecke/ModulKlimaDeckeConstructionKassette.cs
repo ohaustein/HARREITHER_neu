@@ -524,7 +524,7 @@ namespace Europlan.Common {
 			return possibleAreas;
 		}
 
-		public override void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode) {
+		public override void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode, bool drawBeplankung) {
 			if (this.Planner == null ||
 				this.Planner.Product == null ||
 				this.Planner.Product.AssociatedRoom == null ||
@@ -542,7 +542,7 @@ namespace Europlan.Common {
 			GraphicsPath roomPath = this.GetProductAreaPath(/*out minX, out maxX, out minY, out maxY*/);
 			g.Clip = new Region(roomPath);
 
-			Color c = Color.Red;
+			Color c = Color.Gray;
 			Pen p = new Pen(c);
 			Brush b = new HatchBrush(HatchStyle.DiagonalCross, c, Color.FromArgb(0, c));
 

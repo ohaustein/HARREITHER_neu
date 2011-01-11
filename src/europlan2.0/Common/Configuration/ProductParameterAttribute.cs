@@ -9,6 +9,7 @@ namespace Europlan.Common {
 		public bool overrideableInPlanning = false;
 		public bool overrideableInQuickDimensioning = false;
 		public bool saveForUser = false;
+		public bool saveInProject = true;
 		//public object defaultValue = null;
 
 		public ProductParameterAttribute(/*object defaultValue*/) {

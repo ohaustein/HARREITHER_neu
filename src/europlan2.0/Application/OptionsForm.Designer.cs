@@ -54,6 +54,8 @@ namespace Europlan.Application {
 			this.tabDefaultSystemParameters = new System.Windows.Forms.TabPage();
 			this.systemParametersPanel = new Europlan.Common.SystemParametersPanel();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
+			this.lblPlanUnit = new System.Windows.Forms.Label();
+			this.cmbPlanUnit = new System.Windows.Forms.ComboBox();
 			this.panel1.SuspendLayout();
 			this.tabOptions.SuspendLayout();
 			this.tabGeneral.SuspendLayout();
@@ -121,6 +123,8 @@ namespace Europlan.Application {
 			// 
 			// tabGeneral
 			// 
+			this.tabGeneral.Controls.Add(this.lblPlanUnit);
+			this.tabGeneral.Controls.Add(this.cmbPlanUnit);
 			this.tabGeneral.Controls.Add(this.button2);
 			this.tabGeneral.Controls.Add(this.button1);
 			this.tabGeneral.Controls.Add(this.pictureBox1);
@@ -303,6 +307,18 @@ namespace Europlan.Application {
 			// 
 			resources.ApplyResources(this.helpProvider, "helpProvider");
 			// 
+			// lblPlanUnit
+			// 
+			resources.ApplyResources(this.lblPlanUnit, "lblPlanUnit");
+			this.lblPlanUnit.Name = "lblPlanUnit";
+			// 
+			// cmbPlanUnit
+			// 
+			this.cmbPlanUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbPlanUnit.FormattingEnabled = true;
+			resources.ApplyResources(this.cmbPlanUnit, "cmbPlanUnit");
+			this.cmbPlanUnit.Name = "cmbPlanUnit";
+			// 
 			// OptionsForm
 			// 
 			this.AcceptButton = this.btnOk;
@@ -368,5 +384,7 @@ namespace Europlan.Application {
 		private System.Windows.Forms.HelpProvider helpProvider;
 		private System.Windows.Forms.TabPage tabDefaultSystemParameters;
 		private Europlan.Common.SystemParametersPanel systemParametersPanel;
+		private System.Windows.Forms.Label lblPlanUnit;
+		private System.Windows.Forms.ComboBox cmbPlanUnit;
 	}
 }

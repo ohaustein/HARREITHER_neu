@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using System.Drawing;
 
 namespace Europlan.Common {
 
@@ -9,6 +10,7 @@ namespace Europlan.Common {
 
 		//private List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
 		private List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
+		private Color circuitColor = Color.FromArgb(0, 128, 0);
 
 		public ModulDeckeCircuit() {
 			// A circuit needs to have at least one subarea so add this subarea by default,
@@ -433,6 +435,11 @@ namespace Europlan.Common {
 			}
 			index = -1;
 			return null;
+		}
+
+		public Color CircuitColor {
+			get { return this.circuitColor; }
+			set { this.circuitColor = value; }
 		}
 	}
 }

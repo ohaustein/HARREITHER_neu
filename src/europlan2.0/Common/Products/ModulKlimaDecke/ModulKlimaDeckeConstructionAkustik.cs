@@ -20,8 +20,8 @@ namespace Europlan.Common {
 			set { this.randfries = value; }
 		}
 
-		public override void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode) {
-			base.Paint(g, mode);
+		public override void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode, bool drawBeplankung) {
+			base.Paint(g, mode, drawBeplankung);
 			Region region = new Region(this.GetCeilingPath());
 			region.Exclude(this.GetProductAreaPath());
 			g.Clip = new Region();

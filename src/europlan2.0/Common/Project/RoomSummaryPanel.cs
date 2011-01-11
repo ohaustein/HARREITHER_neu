@@ -401,7 +401,7 @@ namespace Europlan.Common {
 		private void openGeometryPicker(List<Point2D> coordinates, List<List<Point2D>> unusedCoordinates, bool calculateRoomArea) {
 			Plan plan = this.room.AssociatedPlan;
 			if (plan != null) {
-				RoomPickerForm form = new RoomPickerForm(plan);
+				RoomPickerForm form = new RoomPickerForm(this.room);
 				if (room.PlanSettingX.HasValue &&
 					room.PlanSettingY.HasValue &&
 					room.PlanSettingScale.HasValue &&

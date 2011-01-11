@@ -42,12 +42,11 @@ namespace Europlan.Common {
 			// 
 			// lblLength
 			// 
-			this.lblLength.AutoSize = true;
 			this.lblLength.Location = new System.Drawing.Point(12, 73);
 			this.lblLength.Name = "lblLength";
 			this.lblLength.Size = new System.Drawing.Size(81, 13);
 			this.lblLength.TabIndex = 1;
-			this.lblLength.Text = "Länge in Meter:";
+			this.lblLength.Text = "Länge in m:";
 			// 
 			// btnOk
 			// 
@@ -71,33 +70,24 @@ namespace Europlan.Common {
 			// 
 			// txtLength
 			// 
-			this.txtLength.EditType = Europlan.Common.NumericBox.NumericEditType.LENGTH;
+			this.txtLength.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.txtLength.InternalValue = new decimal(new int[] {
-            1,
             0,
-            0,
-            131072});
-			this.txtLength.Location = new System.Drawing.Point(104, 70);
-			this.txtLength.MaxValue = new decimal(new int[] {
-            2147483647,
             0,
             0,
             0});
-			this.txtLength.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
+			this.txtLength.Location = new System.Drawing.Point(104, 70);
+			this.txtLength.MaxValue = null;
+			this.txtLength.MinValue = null;
 			this.txtLength.Name = "txtLength";
 			this.txtLength.Size = new System.Drawing.Size(156, 20);
 			this.txtLength.TabIndex = 1;
-			this.txtLength.Text = "0,01";
 			this.txtLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.txtLength.Value = new decimal(new int[] {
-            1,
             0,
             0,
-            131072});
+            0,
+            0});
 			// 
 			// PlanSetMeasureForm
 			// 

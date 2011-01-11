@@ -26,6 +26,7 @@ namespace Europlan.Application {
 			this.megWall.Filter = CategoryType.Wall;
 
 			this.SetLanguague();
+			this.cmbPlanUnit.SelectedIndex = Product.ConfigPlanMeasure;
 		}
 
 		public OptionsForm(bool standardWerte) {
@@ -39,6 +40,7 @@ namespace Europlan.Application {
 			this.megWall.Filter = CategoryType.Wall;
 
 			this.SetLanguague();
+			this.cmbPlanUnit.SelectedIndex = Product.ConfigPlanMeasure;
 
 			if (standardWerte) {
 				this.tabDefaultSystemParameters.Show();
@@ -63,6 +65,12 @@ namespace Europlan.Application {
 			tabPageInsulation.Text = EuroplanRes.OptionsForm_Daemmung; //"Dämmung";
 			tabPageWall.Text = EuroplanRes.OptionsForm_Wand; //"Wand";
 			tabDefaultSystemParameters.Text = EuroplanRes.OptionsForm_StandardSystemparameter;
+
+			this.lblPlanUnit.Text = EuroplanRes.SystemParametersPanel_PlaeneEinheit;
+			this.cmbPlanUnit.Items.Clear();
+			this.cmbPlanUnit.Items.Add(EuroplanRes.SystemParametersPanel_PlaeneEinheitM);
+			this.cmbPlanUnit.Items.Add(EuroplanRes.SystemParametersPanel_PlaeneEinheitCM);
+			this.cmbPlanUnit.Items.Add(EuroplanRes.SystemParametersPanel_PlaeneEinheitMM);
 		}
 
 		public bool RestartRequired {
@@ -100,6 +108,7 @@ namespace Europlan.Application {
 				this.pictureBox1.Image = Image.FromFile(partnerLogo);
 			}
 			cmbLanguage.SelectedItem = CultureInfo.GetCultureInfo((string)settings.GetSetting("Language", "de"));
+			cmbPlanUnit.SelectedIndex = Product.ConfigPlanMeasure;
 		}
 
 		private void OptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -119,6 +128,7 @@ namespace Europlan.Application {
 		}
 
 		private void btnOk_Click(object sender, EventArgs e) {
+			Product.ConfigPlanMeasure = cmbPlanUnit.SelectedIndex;
 			Configuration.UserTemplate.Save();
 		}
 

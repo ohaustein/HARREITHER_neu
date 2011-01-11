@@ -17,7 +17,7 @@ namespace Europlan.Common {
 		protected List<Polygon2D> schienen = new List<Polygon2D>();
 		protected List<PossibleModulLane> possibleLanes = new List<PossibleModulLane>();
 
-		public abstract void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode);
+		public abstract void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode, bool drawBeplankung);
 
 		#region IPickableObject Members
 		public abstract bool HitTest(Point2D planPoint, Point pointInControl);

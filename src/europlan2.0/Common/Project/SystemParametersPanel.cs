@@ -235,6 +235,7 @@ namespace Europlan.Common {
 			InitializeModulDeckeValues();
 			InitializeHithermValues();
 			InitializeHithermCompactValues();
+			InitializeGeneralPanel();
 			updateOngoing = false;
 		}
 

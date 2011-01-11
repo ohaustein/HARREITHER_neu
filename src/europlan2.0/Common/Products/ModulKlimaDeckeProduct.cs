@@ -1255,14 +1255,14 @@ namespace Europlan.Common {
 			return modules;
 		}
 
-		public List<KlimaFlaechenModulWithRow> GetModulesInLaneWithRow(int lane) {
-			List<KlimaFlaechenModulWithRow> modules = new List<KlimaFlaechenModulWithRow>();
-			foreach (ModulDeckeCircuit c in this.circuits) {
-				foreach (ModulDeckeSubArea subArea in c.SubAreas) {
+		public List<KlimaFlaechenModulWithRowAndCircuit> GetModulesInLaneWithRowAndCircuit(int lane) {
+			List<KlimaFlaechenModulWithRowAndCircuit> modules = new List<KlimaFlaechenModulWithRowAndCircuit>();
+			foreach (ModulDeckeCircuit circuit in this.circuits) {
+				foreach (ModulDeckeSubArea subArea in circuit.SubAreas) {
 					foreach (KlimaFlaechenList row in subArea.Rows) {
 						foreach (KlimaFlaechenModul modul in row.List) {
 							if (modul.GraphLane == lane) {
-								modules.Add(new KlimaFlaechenModulWithRow(modul, row));
+								modules.Add(new KlimaFlaechenModulWithRowAndCircuit(modul, row, circuit));
 							}
 						}
 					}
@@ -1292,13 +1292,15 @@ namespace Europlan.Common {
 		}
 	}
 
-	public struct KlimaFlaechenModulWithRow {
+	public struct KlimaFlaechenModulWithRowAndCircuit {
 		public KlimaFlaechenModul modul;
 		public KlimaFlaechenList row;
+		public ModulDeckeCircuit circuit;
 
-		public KlimaFlaechenModulWithRow(KlimaFlaechenModul modul, KlimaFlaechenList row) {
+		public KlimaFlaechenModulWithRowAndCircuit(KlimaFlaechenModul modul, KlimaFlaechenList row, ModulDeckeCircuit circuit) {
 			this.modul = modul;
 			this.row = row;
+			this.circuit = circuit;
 		}
 	}
 }

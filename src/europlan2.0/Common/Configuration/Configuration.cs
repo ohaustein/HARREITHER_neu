@@ -823,10 +823,7 @@ namespace Europlan.Common {
 		public SerializableDictionary<string, SerializableDictionary<string, string>> ProductConfiguration {
 			get {
 				Type[] types;
-				if (this.type == ConfigurationType.UserConfiguration) {
-					// TODO remove this line when implementation is finished
-					//return new SerializableDictionary<string, SerializableDictionary<string, string>>();
-
+				/*if (this.type == ConfigurationType.UserConfiguration) {
 					SerializableDictionary<string, SerializableDictionary<string, string>> result;
 					result = new SerializableDictionary<string, SerializableDictionary<string, string>>();
 
@@ -851,41 +848,54 @@ namespace Europlan.Common {
 					}
 
 					return result;
+				}*/
+				SerializableDictionary<string, SerializableDictionary<string, string>> result;
+				if (this.Type == ConfigurationType.UserConfiguration) {
+					result = new SerializableDictionary<string,SerializableDictionary<string,string>>();
+				} else {
+					result = this.productConfiguration;
+					result.Clear();
 				}
-				this.productConfiguration.Clear();
 				types = Assembly.GetExecutingAssembly().GetTypes();
 				foreach (Type t in types) {
 					if (typeof(Product).IsAssignableFrom(t)) {
 						foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.GetProperty)) {
-							if (info.GetCustomAttributes(typeof(ProductParameterAttribute), false).Length > 0) {
-								object value = info.GetValue(null, null);
-								string valueStr = null;
-								if (value.GetType() == typeof(int)) {
-									int i = (int)value;
-									valueStr = i.ToString(CultureInfo.InvariantCulture.NumberFormat);
-								} else if (value.GetType() == typeof(double)) {
-									double d = (double)value;
-									valueStr = d.ToString(CultureInfo.InvariantCulture.NumberFormat);
-								} else if (value.GetType() == typeof(float)) {
-									float f = (float)value;
-									valueStr = f.ToString(CultureInfo.InvariantCulture.NumberFormat);
-								} else if (value.GetType() == typeof(string)) {
-									valueStr = (string)value;
-								} else if (value.GetType() == typeof(bool)) {
-									bool b = (bool)value;
-									valueStr = b.ToString(CultureInfo.InvariantCulture.NumberFormat);
-								/*} else if (value.GetType().IsSubclassOf(typeof(Enum))) {
-									valueStr = Enum.GetName(value.GetType(), value);*/
-								} else {
-									log.Warn("Error when trying to get Product Configuration: Unknown type");
-									continue;
+							object[] attributes = info.GetCustomAttributes(typeof(ProductParameterAttribute), false);
+							if (attributes.Length > 0) {
+								ProductParameterAttribute ppa = attributes[0] as ProductParameterAttribute;
+								if (this.Type == ConfigurationType.UserConfiguration && ppa.saveForUser ||
+									this.Type == ConfigurationType.ProjectConfiguration && ppa.saveInProject ||
+									this.Type == ConfigurationType.AdminConfiguration ||
+									this.Type == ConfigurationType.InitializedConfiguration) {
+									object value = info.GetValue(null, null);
+									string valueStr = null;
+									if (value.GetType() == typeof(int)) {
+										int i = (int)value;
+										valueStr = i.ToString(CultureInfo.InvariantCulture.NumberFormat);
+									} else if (value.GetType() == typeof(double)) {
+										double d = (double)value;
+										valueStr = d.ToString(CultureInfo.InvariantCulture.NumberFormat);
+									} else if (value.GetType() == typeof(float)) {
+										float f = (float)value;
+										valueStr = f.ToString(CultureInfo.InvariantCulture.NumberFormat);
+									} else if (value.GetType() == typeof(string)) {
+										valueStr = (string)value;
+									} else if (value.GetType() == typeof(bool)) {
+										bool b = (bool)value;
+										valueStr = b.ToString(CultureInfo.InvariantCulture.NumberFormat);
+										/*} else if (value.GetType().IsSubclassOf(typeof(Enum))) {
+											valueStr = Enum.GetName(value.GetType(), value);*/
+									} else {
+										log.Warn("Error when trying to get Product Configuration: Unknown type");
+										continue;
+									}
+									this.AddProductParameter(t, info.Name, valueStr, result);
 								}
-								this.AddProductParameter(t, info.Name, valueStr);
 							}
 						}
 					}
 				}
-				return this.productConfiguration;
+				return result;
 			}
 			set { 
 				this.productConfiguration = value;
@@ -1254,14 +1264,18 @@ namespace Europlan.Common {
 		}*/
 
 		private void AddProductParameter(Type t, string parameterName, string value) {
+			this.AddProductParameter(t, parameterName, value, this.productConfiguration);
+		}
+
+		private void AddProductParameter(Type t, string parameterName, string value, SerializableDictionary<string, SerializableDictionary<string, string>> dictionary) {
 			if (!(typeof(Product).IsAssignableFrom(t))) {
 				log.Warn("Cannot add parameters for non-Product types");
 				return;
 			}
-			if (!this.productConfiguration.ContainsKey(t.FullName)) {
-				this.productConfiguration[t.FullName] = new SerializableDictionary<string, string>();
+			if (!dictionary.ContainsKey(t.FullName)) {
+				dictionary[t.FullName] = new SerializableDictionary<string, string>();
 			}
-			this.productConfiguration[t.FullName][parameterName] = value;
+			dictionary[t.FullName][parameterName] = value;
 		}
 
 		public void AddProductParameter<T>(string parameterName, string value) where T : Product {

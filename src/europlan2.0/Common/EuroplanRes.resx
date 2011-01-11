@@ -3567,7 +3567,7 @@ recht</value>
     <value>Für diesen Plan ist noch kein Maßstab gesetzt. Bitte geben Sie nun die Länge für die gewählte Linie ein!</value>
   </data>
   <data name="PlanSetMeasureForm_Massstab" xml:space="preserve">
-    <value>Mit dem gesetzten Maßstab ergibt sich für die ausgewählte Linie eine Länge von %LAENGE%m. Falls dies nicht korrekt ist, geben Sie bitte die richtige Länge ein!</value>
+    <value>Mit dem gesetzten Maßstab ergibt sich für die ausgewählte Linie eine Länge von %LAENGE%%EINHEIT%. Falls dies nicht korrekt ist, geben Sie bitte die richtige Länge ein!</value>
   </data>
   <data name="Product_ConcreteActivationFullName" xml:space="preserve">
     <value>Betonkernaktivierung</value>
@@ -4665,6 +4665,21 @@ fläche
   </data>
   <data name="SystemParametersPanel_Oberflaechentemperatur29" xml:space="preserve">
     <value>29 °C (EN 1264)</value>
+  </data>
+  <data name="SystemParametersPanel_Plaene" xml:space="preserve">
+    <value>Importierte Pläne</value>
+  </data>
+  <data name="SystemParametersPanel_PlaeneEinheit" xml:space="preserve">
+    <value>Einheit:</value>
+  </data>
+  <data name="SystemParametersPanel_PlaeneEinheitCM" xml:space="preserve">
+    <value>Zentimeter</value>
+  </data>
+  <data name="SystemParametersPanel_PlaeneEinheitM" xml:space="preserve">
+    <value>Meter</value>
+  </data>
+  <data name="SystemParametersPanel_PlaeneEinheitMM" xml:space="preserve">
+    <value>Millimeter</value>
   </data>
   <data name="SystemParametersPanel_Rohrlaenge" xml:space="preserve">
     <value>Max. Rohrlänge je Heizkreis:</value>

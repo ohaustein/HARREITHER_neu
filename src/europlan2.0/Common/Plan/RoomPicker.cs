@@ -16,6 +16,8 @@ namespace Europlan.Common {
 			RPM_NONE,
 			RPM_PICK_ROOM,
 			RPM_PICK_UNUSED,
+			RPM_ADD_UNUSED,
+			RPM_SET_REFERENCE,
 			RPM_DEL_UNUSED
 		}
 
@@ -38,6 +40,9 @@ namespace Europlan.Common {
 		private List<Point2D> coordsPickedSoFar = new List<Point2D>();
 		private bool inDesign = false;
 		private bool unsavedChanges = false;
+		private Nullable<Point2D> referencePoint = null;
+		private Point2D newUnheatedAreaPos = new Point2D();
+		private Size2D newUnheatedAreaSize = new Size2D();
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -178,6 +183,83 @@ namespace Europlan.Common {
 				}
 				path.Dispose();
 			}
+
+			if ((this.Mode == RoomPickerMode.RPM_SET_REFERENCE || this.Mode == RoomPickerMode.RPM_ADD_UNUSED) && this.referencePoint != null) {
+				Pen p = new Pen(new SolidBrush(Color.Black));
+
+				Matrix transform = g.Transform;
+				g.Transform = new Matrix();
+
+				Point2D tmp = additionalTransformation.TransformTo2D(this.referencePoint.Value);
+
+				PointF[] refPoint = new PointF[] { new PointF((float)tmp.X, (float)tmp.Y) };
+				transform.TransformPoints(refPoint);
+				g.FillEllipse(new SolidBrush(Color.FromArgb(127, Color.White)), new RectangleF(refPoint[0].X - 5, refPoint[0].Y - 5, 10, 10));
+				g.DrawLine(p, new PointF(refPoint[0].X - 5, refPoint[0].Y), new PointF(refPoint[0].X + 5, refPoint[0].Y));
+				g.DrawLine(p, new PointF(refPoint[0].X, refPoint[0].Y - 5), new PointF(refPoint[0].X, refPoint[0].Y + 5));
+				//g.DrawEllipse(p, new RectangleF(refPoint[0].X - 10, refPoint[0].Y - 10, 20, 20));
+
+				g.Transform = transform;
+
+				if (this.Mode == RoomPickerMode.RPM_ADD_UNUSED && this.newUnheatedAreaSize.X > 0 && this.newUnheatedAreaSize.Y > 0) {
+					/*double posX = this.referencePoint.Value.X + this.newUnheatedAreaPos.X * this.Room.AssociatedPlan.Measure.Value;
+					double posY = this.referencePoint.Value.Y + this.newUnheatedAreaPos.Y * this.Room.AssociatedPlan.Measure.Value;
+					double sizeX = this.newUnheatedAreaSize.X * this.Room.AssociatedPlan.Measure.Value;
+					double sizeY = this.newUnheatedAreaSize.Y * this.Room.AssociatedPlan.Measure.Value;
+
+					Matrix3D matrix = Matrix3D.Identity;
+					matrix = matrix * Transformation3D.Translation(this.referencePoint.Value.X, this.referencePoint.Value.Y);
+					matrix = matrix * Transformation3D.Rotate(-this.room.AssociatedPlan.Rotation / 180 * Math.PI);
+					matrix = matrix * Transformation3D.Translation(-this.referencePoint.Value.X, -this.referencePoint.Value.Y);
+
+					Point2D p1 = new Point2D(posX, posY);
+					Point2D p2 = new Point2D(posX + sizeX, posY);
+					Point2D p3 = new Point2D(posX + sizeX, posY + sizeY);
+					Point2D p4 = new Point2D(posX, posY + sizeY);
+					p1 = additionalTransformation.TransformTo2D(p1);
+					p2 = additionalTransformation.TransformTo2D(p2);
+					p3 = additionalTransformation.TransformTo2D(p3);
+					p4 = additionalTransformation.TransformTo2D(p4);
+
+					p1 = matrix.Transform(p1);
+					p2 = matrix.Transform(p2);
+					p3 = matrix.Transform(p3);
+					p4 = matrix.Transform(p4);
+
+					GraphicsPath path = new GraphicsPath();
+					path.StartFigure();
+					path.AddPolygon(new PointF[] { new PointF((float)p1.X, (float)p1.Y), new PointF((float)p2.X, (float)p2.Y), new PointF((float)p3.X, (float)p3.Y), new PointF((float)p4.X, (float)p4.Y) });
+					path.CloseFigure();
+					Color c = Color.FromArgb(0, Color.Red);
+					Color c2 = Color.FromArgb(128, Color.White);
+					Brush b = new HatchBrush(HatchStyle.BackwardDiagonal, c2, c);
+					g.FillPath(b, path);
+					b = new SolidBrush(c2);
+					g.DrawPath(new Pen(b), path);
+					path.Dispose();*/
+					if (this.newUnheatedArea.Count > 0) {
+						foreach (List<Point2D> unusedArea in this.newUnheatedArea) {
+							GraphicsPath path = new GraphicsPath();
+							path.StartFigure();
+							PointF[] array = new PointF[unusedArea.Count];
+							int i = 0;
+							foreach (Point2D point in unusedArea) {
+								Point2D tmp2 = additionalTransformation.TransformTo2D(point);
+								array[i++] = new PointF((float)tmp2.X, (float)tmp2.Y);
+							}
+							path.AddPolygon(array);
+							path.CloseFigure();
+							Color c = Color.FromArgb(0, Color.Red);
+							Color c2 = Color.FromArgb(128, Color.White);
+							Brush b = new HatchBrush(HatchStyle.BackwardDiagonal, c2, c);
+							g.FillPath(b, path);
+							b = new SolidBrush(c2);
+							g.DrawPath(new Pen(b), path);
+							path.Dispose();
+						}
+					}
+				}
+			}
 		}
 
 		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
@@ -247,23 +329,29 @@ namespace Europlan.Common {
 					inDesign = false;
 				}
 				return true;
-			} else {
-				if (this.Mode == RoomPickerMode.RPM_DEL_UNUSED) {
-					if (button == MouseButtons.Left) {
-						List<Point2D> areaToDelete = null;
-						foreach (List<Point2D> unusedArea in unusedCoordinates) {
-							Polygon2D unusedPoly = new Polygon2D(unusedArea);
-							if (unusedPoly.IsInside(planPoint)) {
-								areaToDelete = unusedArea;
-								break;
-							}
+			} else if (this.Mode == RoomPickerMode.RPM_SET_REFERENCE && (button == MouseButtons.Left || button == MouseButtons.Right)) {
+				PointF pos = new PointF((float)planPoint.X, (float)planPoint.Y);
+
+				Point2D normalizedPoint = planPoint;
+				//normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[0], null, normalizedPoint);
+
+				this.referencePoint = normalizedPoint;
+				return true;
+			} else if (this.Mode == RoomPickerMode.RPM_DEL_UNUSED) {
+				if (button == MouseButtons.Left) {
+					List<Point2D> areaToDelete = null;
+					foreach (List<Point2D> unusedArea in unusedCoordinates) {
+						Polygon2D unusedPoly = new Polygon2D(unusedArea);
+						if (unusedPoly.IsInside(planPoint)) {
+							areaToDelete = unusedArea;
+							break;
 						}
-						if (areaToDelete != null) {
-							DialogResult result = MessageBox.Show(EuroplanRes.PicturePanel_DeleteUnusedText, EuroplanRes.PicturePanel_DeleteUnusedCaption, MessageBoxButtons.YesNo);
-							if (result == DialogResult.Yes) {
-								unusedCoordinates.Remove(areaToDelete);
-								return true;
-							}
+					}
+					if (areaToDelete != null) {
+						DialogResult result = MessageBox.Show(EuroplanRes.PicturePanel_DeleteUnusedText, EuroplanRes.PicturePanel_DeleteUnusedCaption, MessageBoxButtons.YesNo);
+						if (result == DialogResult.Yes) {
+							unusedCoordinates.Remove(areaToDelete);
+							return true;
 						}
 					}
 				}
@@ -599,6 +687,97 @@ namespace Europlan.Common {
 				}
 			}
 			return false;
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Nullable<Point2D> ReferencePoint {
+			get { return this.referencePoint; }
+			set {
+				this.referencePoint = value;
+				this.CalulacteNewUnheatedArea();
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Point2D NewUnheatedAreaPos {
+			get { return this.newUnheatedAreaPos; }
+			set {
+				this.newUnheatedAreaPos = value;
+				this.CalulacteNewUnheatedArea();
+			}
+		}
+
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Size2D NewUnheatedAreaSize {
+			get { return this.newUnheatedAreaSize; }
+			set {
+				this.newUnheatedAreaSize = value;
+				this.CalulacteNewUnheatedArea();
+			}
+		}
+
+		public bool IsNewUnheatedAreaValid {
+			get { return this.newUnheatedArea != null && this.newUnheatedArea.Count > 0; }
+		}
+
+		private List<Polygon2D> newUnheatedArea = null;
+
+		private void CalulacteNewUnheatedArea() {
+			if (this.referencePoint.HasValue && this.newUnheatedAreaSize.X > 0 && this.newUnheatedAreaSize.Y > 0) {
+				double posX = this.referencePoint.Value.X + this.newUnheatedAreaPos.X * this.Room.AssociatedPlan.Measure.Value;
+				double posY = this.referencePoint.Value.Y + this.newUnheatedAreaPos.Y * this.Room.AssociatedPlan.Measure.Value;
+				double sizeX = this.newUnheatedAreaSize.X * this.Room.AssociatedPlan.Measure.Value;
+				double sizeY = this.newUnheatedAreaSize.Y * this.Room.AssociatedPlan.Measure.Value;
+
+				Matrix3D matrix = Matrix3D.Identity;
+				matrix = matrix * Transformation3D.Translation(this.referencePoint.Value.X, this.referencePoint.Value.Y);
+				matrix = matrix * Transformation3D.Rotate(-this.room.AssociatedPlan.Rotation / 180 * Math.PI);
+				matrix = matrix * Transformation3D.Translation(-this.referencePoint.Value.X, -this.referencePoint.Value.Y);
+
+				Point2D p1 = new Point2D(posX, posY);
+				Point2D p2 = new Point2D(posX + sizeX, posY);
+				Point2D p3 = new Point2D(posX + sizeX, posY + sizeY);
+				Point2D p4 = new Point2D(posX, posY + sizeY);
+
+				p1 = matrix.Transform(p1);
+				p2 = matrix.Transform(p2);
+				p3 = matrix.Transform(p3);
+				p4 = matrix.Transform(p4);
+
+				Polygon2D tmp = new Polygon2D(new Point2D[] { p1, p2, p3, p4 });
+				if (tmp.IsClockwise()) {
+					tmp.Reverse();
+				}
+				Polygon2D room = new Polygon2D(this.roomCoordinates);
+				if (room.IsClockwise()) {
+					room.Reverse();
+				}
+				List<Polygon2D> list1 = new List<Polygon2D>();
+				list1.Add(tmp);
+				List<Polygon2D> list2 = new List<Polygon2D>();
+				list2.Add(room);
+				newUnheatedArea = Polygon2D.GetIntersection(list1, list2);
+
+				foreach (List<Point2D> unused in this.unusedCoordinates) {
+					list2.Clear();
+					tmp = new Polygon2D(unused);
+					if (tmp.IsClockwise()) {
+						tmp.Reverse();
+					}
+					list2.Add(tmp);
+
+					newUnheatedArea = Polygon2D.GetDifference(newUnheatedArea, list2);
+				}
+
+				/*p1 = additionalTransformation.TransformTo2D(p1);
+				p2 = additionalTransformation.TransformTo2D(p2);
+				p3 = additionalTransformation.TransformTo2D(p3);
+				p4 = additionalTransformation.TransformTo2D(p4);*/
+
+			}
 		}
 	}
 }

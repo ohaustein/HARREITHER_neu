@@ -30,6 +30,8 @@ namespace Europlan.Common {
 		private static double alphaBodenCool = 6.5;
 		private static double alphaWandCool = 8.0;
 
+		private static PlanMeasureEnum planMeasure = PlanMeasureEnum.PM_METER;
+
 		private static double maxCoolLoadPerSqm = 70.0;
 
 		protected double requestedHeatLoad = 0;
@@ -76,6 +78,43 @@ namespace Europlan.Common {
 		public static double ConfigMaxCoolLoadPerSqm {
 			get { return maxCoolLoadPerSqm ; }
 			set { maxCoolLoadPerSqm = value; }
+		}
+
+		public enum PlanMeasureEnum {
+			PM_METER = 0,
+			PM_CENTIMETER = 1,
+			PM_MILLIMETER = 2
+		}
+
+		public static PlanMeasureEnum ConfigPlanMeasureEnum {
+			get { return planMeasure; }
+			set { planMeasure = value; }
+		}
+
+		public static double ConfigPlanMeasureMultiplier {
+			get {
+				if (planMeasure == PlanMeasureEnum.PM_CENTIMETER) {
+					return 100.0;
+				} else if (planMeasure == PlanMeasureEnum.PM_MILLIMETER) {
+					return 1000.0;
+				} else if (planMeasure == PlanMeasureEnum.PM_METER) {
+					return 1.0;
+				} else {
+					return 1.0;
+				}
+			}
+		}
+
+		[IntProductParameter(0, saveForUser = true, saveInProject = false)]
+		public static int ConfigPlanMeasure {
+			get { return (int)planMeasure; }
+			set {
+				try {
+					planMeasure = (PlanMeasureEnum)value;
+				} catch (Exception e) {
+					log.Warn("Could not set plan measure", e);
+				}
+			}
 		}
 		#endregion Product Parameters
 

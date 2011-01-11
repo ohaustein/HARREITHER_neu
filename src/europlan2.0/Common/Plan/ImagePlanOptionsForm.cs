@@ -16,6 +16,20 @@ namespace Europlan.Common {
 		
 		public ImagePlanOptionsForm(ImagePlan plan) {
 			InitializeComponent();
+			switch (Product.ConfigPlanMeasureEnum) {
+				case Product.PlanMeasureEnum.PM_CENTIMETER:
+					this.lblLength.Text = "Länge in cm:";
+					break;
+
+				case Product.PlanMeasureEnum.PM_MILLIMETER:
+					this.lblLength.Text = "Länge in mm:";
+					break;
+
+				case Product.PlanMeasureEnum.PM_METER:
+				default:
+					this.lblLength.Text = "Länge in m:";
+					break;
+			}
 			this.SetLanguage();
 			this.picturePanel.Plan = plan;
 			this.picturePanel.LengthChanged += new ImagePanel.LengthChangedEventHandler(picturePanel_LengthChanged);
@@ -23,7 +37,20 @@ namespace Europlan.Common {
 
 		void picturePanel_LengthChanged(object sender) {
 			if (this.picturePanel.Plan.Measure.HasValue) {
-				txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
+				switch (Product.ConfigPlanMeasureEnum) {
+					case Product.PlanMeasureEnum.PM_CENTIMETER:
+						txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + "cm";
+						break;
+
+					case Product.PlanMeasureEnum.PM_MILLIMETER:
+						txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + "mm";
+						break;
+
+					case Product.PlanMeasureEnum.PM_METER:
+					default:
+						txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0.00") + EuroplanRes.Unit_Meter;
+						break;
+				}
 			} else {
 				Nullable<double> length = this.picturePanel.Plan.Measure.HasValue ? this.picturePanel.Length / this.picturePanel.Plan.Measure.Value : (Nullable<double>)null;
 				PlanSetMeasureForm psmf = new PlanSetMeasureForm(length);
@@ -158,7 +185,7 @@ namespace Europlan.Common {
 			double len = 0;
 			if (Double.TryParse(txtLength.Text, out len)) {
 				unsavedChanges = true;
-				this.picturePanel.Plan.Measure = (float)(this.picturePanel.Length / len);
+				this.picturePanel.Plan.Measure = (float)(this.picturePanel.Length / len / Product.ConfigPlanMeasureMultiplier);
 			}
 		}
 
@@ -169,7 +196,21 @@ namespace Europlan.Common {
 				if (length != psmf.Length) {
 					this.unsavedChanges = true;
 					this.picturePanel.Plan.Measure = (float)(this.picturePanel.Length / psmf.Length);
-					this.txtLength.Text = (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
+					//this.txtLength.Text = (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
+					switch (Product.ConfigPlanMeasureEnum) {
+						case Product.PlanMeasureEnum.PM_CENTIMETER:
+							txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + "cm";
+							break;
+
+						case Product.PlanMeasureEnum.PM_MILLIMETER:
+							txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + "mm";
+							break;
+
+						case Product.PlanMeasureEnum.PM_METER:
+						default:
+							txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0.00") + EuroplanRes.Unit_Meter;
+							break;
+					}
 				}
 			}
 		}
