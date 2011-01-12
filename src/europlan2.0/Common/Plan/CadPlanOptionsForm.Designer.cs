@@ -36,8 +36,11 @@ namespace Europlan.Common {
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.lstLayers = new System.Windows.Forms.ListView();
 			this.cadPanel = new Europlan.Common.CadPanel();
+			this.panel2 = new System.Windows.Forms.Panel();
+			this.btnOk = new System.Windows.Forms.Button();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
+			this.panel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip
@@ -146,7 +149,7 @@ namespace Europlan.Common {
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.panel1.Location = new System.Drawing.Point(0, 25);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(200, 406);
+			this.panel1.Size = new System.Drawing.Size(200, 377);
 			this.panel1.TabIndex = 3;
 			// 
 			// lstLayers
@@ -155,7 +158,7 @@ namespace Europlan.Common {
 			this.lstLayers.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lstLayers.Location = new System.Drawing.Point(0, 0);
 			this.lstLayers.Name = "lstLayers";
-			this.lstLayers.Size = new System.Drawing.Size(200, 406);
+			this.lstLayers.Size = new System.Drawing.Size(200, 377);
 			this.lstLayers.TabIndex = 0;
 			this.lstLayers.UseCompatibleStateImageBehavior = false;
 			this.lstLayers.View = System.Windows.Forms.View.List;
@@ -168,10 +171,30 @@ namespace Europlan.Common {
 			this.cadPanel.Name = "cadPanel";
 			this.cadPanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.cadPanel.PlanDefaultMargin = 5;
-			this.cadPanel.Size = new System.Drawing.Size(468, 406);
+			this.cadPanel.Size = new System.Drawing.Size(468, 377);
 			this.cadPanel.TabIndex = 2;
 			this.cadPanel.EndPointSelected += new System.EventHandler<Europlan.Common.CadPanel.EndPointSelectedArgs>(this.cadPanel_EndPointSelected);
 			this.cadPanel.StartPointSelected += new System.EventHandler<Europlan.Common.CadPanel.StartPointSelectedArgs>(this.cadPanel_StartPointSelected);
+			// 
+			// panel2
+			// 
+			this.panel2.Controls.Add(this.btnOk);
+			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panel2.Location = new System.Drawing.Point(0, 402);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(668, 29);
+			this.panel2.TabIndex = 4;
+			// 
+			// btnOk
+			// 
+			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOk.Location = new System.Drawing.Point(570, 3);
+			this.btnOk.Name = "btnOk";
+			this.btnOk.Size = new System.Drawing.Size(95, 23);
+			this.btnOk.TabIndex = 3;
+			this.btnOk.Text = "Übernehmen";
+			this.btnOk.UseVisualStyleBackColor = true;
+			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
 			// 
 			// CadPlanOptionsForm
 			// 
@@ -180,6 +203,7 @@ namespace Europlan.Common {
 			this.ClientSize = new System.Drawing.Size(668, 431);
 			this.Controls.Add(this.cadPanel);
 			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.toolStrip);
 			this.DoubleBuffered = true;
 			this.MinimizeBox = false;
@@ -190,6 +214,7 @@ namespace Europlan.Common {
 			this.toolStrip.ResumeLayout(false);
 			this.toolStrip.PerformLayout();
 			this.panel1.ResumeLayout(false);
+			this.panel2.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -209,6 +234,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ListView lstLayers;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripButton btnSetLength;
+		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.Button btnOk;
 
 
 	}

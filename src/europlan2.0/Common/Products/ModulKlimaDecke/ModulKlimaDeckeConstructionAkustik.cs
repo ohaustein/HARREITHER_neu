@@ -6,6 +6,7 @@ using WW.Math;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using WW.Math.Geometry;
+using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionAkustik : ModulKlimaDeckeConstructionGlatt {
@@ -23,14 +24,28 @@ namespace Europlan.Common {
 		public override void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode, bool drawBeplankung) {
 			base.Paint(g, mode, drawBeplankung);
 			Region region = new Region(this.GetCeilingPath());
-			region.Exclude(this.GetProductAreaPath());
+			region.Exclude(this.GetProductAreaPathForAkustik());
 			g.Clip = new Region();
-			g.FillRegion(new SolidBrush(Color.FromArgb(127, Color.Red)), region);
+			//g.FillRegion(new SolidBrush(Color.FromArgb(31, Color.Red)), region);
+			g.FillRegion(new HatchBrush(HatchStyle.BackwardDiagonal, Color.FromArgb(127, Color.Red), Color.FromArgb(10, Color.Red)), region);
+		}
+
+		protected GraphicsPath GetProductAreaPathForAkustik() {
+			List<PointF> transformedPoints = new List<PointF>();
+			Matrix4D additionalTransformation = this.AdditionalTransformation;
+			foreach (Point2D point in this.CeilingCoordinatesAkustik) {
+				Point2D tmp = additionalTransformation.TransformTo2D(point);
+				transformedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
+			}
+			GraphicsPath path = new GraphicsPath();
+			path.AddPolygon(transformedPoints.ToArray());
+			return path;
 		}
 
 		[XmlIgnore]
-		public override List<Point2D> CeilingCoordinates {
+		public List<Point2D> CeilingCoordinatesAkustik {
 			get {
+				//return base.CeilingCoordinates;
 				if (this.Planner == null || this.Planner.Product == null || this.Planner.Product.AssociatedRoom == null || this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
 					return null;
 				}

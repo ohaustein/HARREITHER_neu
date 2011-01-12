@@ -40,6 +40,7 @@ namespace Europlan.Common {
 			this.lblLength = new System.Windows.Forms.ToolStripLabel();
 			this.txtLength = new System.Windows.Forms.ToolStripTextBox();
 			this.btnSetLength = new System.Windows.Forms.ToolStripButton();
+			this.btnOk = new System.Windows.Forms.Button();
 			this.picturePanel = new Europlan.Common.ImagePanel();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
@@ -216,6 +217,17 @@ namespace Europlan.Common {
 			this.btnSetLength.Visible = false;
 			this.btnSetLength.Click += new System.EventHandler(this.btnSetLength_Click);
 			// 
+			// btnOk
+			// 
+			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOk.Location = new System.Drawing.Point(568, 428);
+			this.btnOk.Name = "btnOk";
+			this.btnOk.Size = new System.Drawing.Size(95, 23);
+			this.btnOk.TabIndex = 2;
+			this.btnOk.Text = "Übernehmen";
+			this.btnOk.UseVisualStyleBackColor = true;
+			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+			// 
 			// picturePanel
 			// 
 			this.picturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -226,14 +238,14 @@ namespace Europlan.Common {
 			this.picturePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.picturePanel.EndPoint = null;
 			this.picturePanel.Length = 0;
-			this.picturePanel.Location = new System.Drawing.Point(9, 25);
+			this.picturePanel.Location = new System.Drawing.Point(0, 25);
 			this.picturePanel.Margin = new System.Windows.Forms.Padding(0);
 			this.picturePanel.Mode = Europlan.Common.PlanMode.PM_MOVE;
 			this.picturePanel.Name = "picturePanel";
 			this.picturePanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.picturePanel.Scale = null;
 			this.picturePanel.ShowRaster = false;
-			this.picturePanel.Size = new System.Drawing.Size(650, 397);
+			this.picturePanel.Size = new System.Drawing.Size(668, 400);
 			this.picturePanel.StartPoint = null;
 			this.picturePanel.TabIndex = 0;
 			this.picturePanel.XPos = 0F;
@@ -243,7 +255,8 @@ namespace Europlan.Common {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(668, 431);
+			this.ClientSize = new System.Drawing.Size(668, 455);
+			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.toolStrip);
 			this.Controls.Add(this.picturePanel);
 			this.DoubleBuffered = true;
@@ -278,6 +291,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripButton btnSetLength;
+		private System.Windows.Forms.Button btnOk;
 
 
 	}

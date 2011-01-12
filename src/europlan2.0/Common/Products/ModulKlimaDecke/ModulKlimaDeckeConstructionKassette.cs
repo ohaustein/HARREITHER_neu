@@ -556,7 +556,7 @@ namespace Europlan.Common {
 				}
 				//g.DrawPolygon(p, poly);
 				//g.FillPolygon(b, poly);
-				g.FillPolygon(new SolidBrush(Color.FromArgb(127, Color.Red)), poly);
+				g.FillPolygon(new SolidBrush(Color.FromArgb(127, Color.Gray)), poly);
 			}
 
 			foreach (Polygon2D schieneY in this.GetSchienenY(true)) {

@@ -298,5 +298,17 @@ namespace Europlan.Common {
 			this.btnAddUnheatedArea.Enabled = this.roomPicker.IsNewUnheatedAreaValid;
 			this.Panel.InvalidateGraphics();
 		}
+
+		private void btnAddUnheatedArea_Click(object sender, EventArgs e) {
+			this.roomPicker.AddNewUnheatedArea();
+			this.numDistanceX.Value = 0;
+			this.numDistanceY.Value = 0;
+			this.numSizeX.Value = 0;
+			this.numSizeY.Value = 0;
+		}
+
+		private void btnOk_Click(object sender, EventArgs e) {
+			this.Close();
+		}
 	}
 }

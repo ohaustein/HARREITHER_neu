@@ -50,7 +50,8 @@ namespace Europlan.Common {
 				dialog.CheckFileExists = true;
 				dialog.CheckPathExists = true;
 				dialog.DefaultExt = "dxf";
-				dialog.Filter = EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf;*.dwg";
+				dialog.Filter = "alle Pläne|*.dxf;*.dwg;*.jpg;*.png;*.bmp";
+				dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf;*.dwg";
 				dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_ImageFilter + "|*.jpg;*.png;*.bmp";
 				dialog.Multiselect = false;
 				DialogResult result = dialog.ShowDialog();

@@ -668,7 +668,9 @@ namespace Europlan.Common.Products {
 				}
 			}
 			List<KlimaFlaechenModul> module = this.modulKlimaBodenPlanner.GetAllSelectedModules();
-			
+
+			this.btnInvertDirection.Enabled = module != null && module.Count > 0;
+
 			if (module != null && module.Count > 0) {
 				Nullable<KlimaFlaechenModul.ModulTypeEnum> typ = null;
 				bool typOk = true;
@@ -1141,6 +1143,21 @@ namespace Europlan.Common.Products {
 				}
 			}
 
+		}
+
+		private void btnShowBeplankung_Click(object sender, EventArgs e) {
+			this.modulKlimaBodenPlanner.DrawBeplankung = btnShowBeplankung.Checked;
+			this.planPanel.InvalidateGraphics();
+		}
+
+		private void btnInvertDirection_Click(object sender, EventArgs e) {
+			this.changed = true;
+			List<KlimaFlaechenModul> modules = this.modulKlimaBodenPlanner.GetAllSelectedModules();
+			foreach (KlimaFlaechenModul modul in modules) {
+				modul.GraphBottomUp = !modul.GraphBottomUp;
+			}
+			this.UpdateSelectedModules();
+			this.planPanel.InvalidateGraphics();
 		}
 	}
 }

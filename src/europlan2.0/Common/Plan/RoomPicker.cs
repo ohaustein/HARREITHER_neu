@@ -250,7 +250,7 @@ namespace Europlan.Common {
 							path.AddPolygon(array);
 							path.CloseFigure();
 							Color c = Color.FromArgb(0, Color.Red);
-							Color c2 = Color.FromArgb(128, Color.White);
+							Color c2 = Color.FromArgb(64, Color.White);
 							Brush b = new HatchBrush(HatchStyle.BackwardDiagonal, c2, c);
 							g.FillPath(b, path);
 							b = new SolidBrush(c2);
@@ -487,6 +487,10 @@ namespace Europlan.Common {
 				}
 				this.ConnectedPlanPanel.PlanCursor = isStart ? Cursors.Hand : Cursors.Cross;
 				return inDesign;
+			} else if (this.Mode == RoomPickerMode.RPM_SET_REFERENCE) {
+				this.ConnectedPlanPanel.PlanCursor = Cursors.Cross;
+			} else if (this.Mode == RoomPickerMode.RPM_ADD_UNUSED) {
+				this.ConnectedPlanPanel.PlanCursor = Cursors.No;
 			}
 			return false;
 		}
@@ -778,6 +782,21 @@ namespace Europlan.Common {
 				p4 = additionalTransformation.TransformTo2D(p4);*/
 
 			}
+		}
+
+		public void AddNewUnheatedArea() {
+			if (this.newUnheatedArea != null && this.newUnheatedArea.Count > 0) {
+				if (this.unusedCoordinates == null) {
+					this.unusedCoordinates = new List<List<Point2D>>();
+				}
+				foreach (Polygon2D poly in this.newUnheatedArea) {
+					List<Point2D> newArea = new List<Point2D>(poly);
+					this.unusedCoordinates.Add(newArea);
+				}
+			}
+			this.newUnheatedAreaPos = new Point2D();
+			this.newUnheatedAreaSize = new Size2D();
+			this.newUnheatedArea = null;
 		}
 	}
 }

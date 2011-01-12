@@ -141,11 +141,11 @@ namespace Europlan.Common {
 		private List<PossibleModulLaneArea> GetPossibleModuleAreasInLane(Polygon2D lane) {
 			Line2D rightBorder = new Line2D(lane[0], lane[0] - lane[1]);
 			Line2D leftBorder = new Line2D(lane[3], lane[3] - lane[2]);
-			List<LineSegment> unusableSegments = GetUnusableSegments(leftBorder, rightBorder, this.CeilingCoordinates, false);
+			List<LineSegment> unusableSegments = GetUnusableSegments(leftBorder, rightBorder, this.CeilingCoordinates, false, 0.15);
 			if (this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
 				List<LineSegment> tmp;
 				foreach (List<Point2D> unusedArea in this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
-					tmp = GetUnusableSegments(leftBorder, rightBorder, unusedArea, true);
+					tmp = GetUnusableSegments(leftBorder, rightBorder, unusedArea, true, 0);
 					unusableSegments.AddRange(tmp);
 					NormalizeSegments(unusableSegments);
 				}
@@ -318,7 +318,7 @@ namespace Europlan.Common {
 			return possibleAreas;*/
 		}
 
-		private List<LineSegment> GetUnusableSegments(Line2D borderLeft, Line2D borderRight, List<Point2D> polygon, bool unused) {
+		private List<LineSegment> GetUnusableSegments(Line2D borderLeft, Line2D borderRight, List<Point2D> polygon, bool unused, double wallDist) {
 			if (polygon.Count < 3) {
 				return new List<LineSegment>();
 			}
@@ -387,6 +387,21 @@ namespace Europlan.Common {
 				}
 			}
 			NormalizeSegments(segmentsUnusable);
+			if (wallDist != 0) {
+				List<LineSegment> segmentsUsable = InvertSegments(segmentsUnusable);
+				int i = 0;
+				double wallDistAdd = wallDist * this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+				while (i < segmentsUsable.Count) {
+					segmentsUsable[i].Start += wallDistAdd;
+					segmentsUsable[i].End -= wallDistAdd;
+					if (segmentsUsable[i].Start > segmentsUsable[i].End) {
+						segmentsUsable.RemoveAt(i);
+					} else {
+						i++;
+					}
+				}
+				segmentsUnusable = InvertSegments(segmentsUsable);
+			}
 			return segmentsUnusable;
 		}
 

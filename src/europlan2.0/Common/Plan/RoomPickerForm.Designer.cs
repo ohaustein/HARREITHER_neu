@@ -38,17 +38,13 @@ namespace Europlan.Common {
 			this.btnAddUnheatedArea = new System.Windows.Forms.Button();
 			this.grpSize = new System.Windows.Forms.GroupBox();
 			this.lblSizeYUnit = new System.Windows.Forms.Label();
-			this.numSizeY = new Europlan.Common.NumericBox();
 			this.lblSizeY = new System.Windows.Forms.Label();
 			this.lblSizeXUnit = new System.Windows.Forms.Label();
-			this.numSizeX = new Europlan.Common.NumericBox();
 			this.lblSizeX = new System.Windows.Forms.Label();
 			this.grpDistance = new System.Windows.Forms.GroupBox();
 			this.lblDistanceYUnit = new System.Windows.Forms.Label();
-			this.numDistanceY = new Europlan.Common.NumericBox();
 			this.lblDistanceY = new System.Windows.Forms.Label();
 			this.lblDistanceXUnit = new System.Windows.Forms.Label();
-			this.numDistanceX = new Europlan.Common.NumericBox();
 			this.lblDistanceX = new System.Windows.Forms.Label();
 			this.cbReferencePoint = new System.Windows.Forms.CheckBox();
 			this.cbUnheatedTextual = new System.Windows.Forms.RadioButton();
@@ -56,10 +52,17 @@ namespace Europlan.Common {
 			this.lblAddUnheatedArea = new System.Windows.Forms.Label();
 			this.panel = new Europlan.Common.PlanPanel();
 			this.roomPicker = new Europlan.Common.RoomPicker(this.components);
+			this.numSizeY = new Europlan.Common.NumericBox();
+			this.numSizeX = new Europlan.Common.NumericBox();
+			this.numDistanceY = new Europlan.Common.NumericBox();
+			this.numDistanceX = new Europlan.Common.NumericBox();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnOk = new System.Windows.Forms.Button();
 			this.toolStrip.SuspendLayout();
 			this.panUnheatedArea.SuspendLayout();
 			this.grpSize.SuspendLayout();
 			this.grpDistance.SuspendLayout();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip
@@ -75,7 +78,7 @@ namespace Europlan.Common {
             this.btnDelUnused});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
-			this.toolStrip.Size = new System.Drawing.Size(668, 25);
+			this.toolStrip.Size = new System.Drawing.Size(679, 25);
 			this.toolStrip.TabIndex = 1;
 			this.toolStrip.Text = "toolStrip";
 			// 
@@ -160,9 +163,9 @@ namespace Europlan.Common {
 			this.panUnheatedArea.Controls.Add(this.cbUnheatedGraphical);
 			this.panUnheatedArea.Controls.Add(this.lblAddUnheatedArea);
 			this.panUnheatedArea.Dock = System.Windows.Forms.DockStyle.Right;
-			this.panUnheatedArea.Location = new System.Drawing.Point(511, 25);
+			this.panUnheatedArea.Location = new System.Drawing.Point(522, 25);
 			this.panUnheatedArea.Name = "panUnheatedArea";
-			this.panUnheatedArea.Size = new System.Drawing.Size(157, 406);
+			this.panUnheatedArea.Size = new System.Drawing.Size(157, 408);
 			this.panUnheatedArea.TabIndex = 3;
 			this.panUnheatedArea.Visible = false;
 			// 
@@ -188,6 +191,7 @@ namespace Europlan.Common {
 			this.btnAddUnheatedArea.TabIndex = 4;
 			this.btnAddUnheatedArea.Text = "Fläche hinzufügen";
 			this.btnAddUnheatedArea.UseVisualStyleBackColor = true;
+			this.btnAddUnheatedArea.Click += new System.EventHandler(this.btnAddUnheatedArea_Click);
 			// 
 			// grpSize
 			// 
@@ -213,29 +217,6 @@ namespace Europlan.Common {
 			this.lblSizeYUnit.TabIndex = 13;
 			this.lblSizeYUnit.Text = "m";
 			// 
-			// numSizeY
-			// 
-			this.numSizeY.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numSizeY.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numSizeY.Location = new System.Drawing.Point(14, 71);
-			this.numSizeY.MaxValue = null;
-			this.numSizeY.MinValue = null;
-			this.numSizeY.Name = "numSizeY";
-			this.numSizeY.Size = new System.Drawing.Size(100, 20);
-			this.numSizeY.TabIndex = 12;
-			this.numSizeY.Text = "0";
-			this.numSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSizeY.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numSizeY.ValueChanged += new System.EventHandler(this.numSize_ValueChanged);
-			// 
 			// lblSizeY
 			// 
 			this.lblSizeY.Location = new System.Drawing.Point(6, 55);
@@ -251,29 +232,6 @@ namespace Europlan.Common {
 			this.lblSizeXUnit.Size = new System.Drawing.Size(23, 13);
 			this.lblSizeXUnit.TabIndex = 8;
 			this.lblSizeXUnit.Text = "m";
-			// 
-			// numSizeX
-			// 
-			this.numSizeX.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numSizeX.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numSizeX.Location = new System.Drawing.Point(14, 32);
-			this.numSizeX.MaxValue = null;
-			this.numSizeX.MinValue = null;
-			this.numSizeX.Name = "numSizeX";
-			this.numSizeX.Size = new System.Drawing.Size(100, 20);
-			this.numSizeX.TabIndex = 9;
-			this.numSizeX.Text = "0";
-			this.numSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSizeX.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numSizeX.ValueChanged += new System.EventHandler(this.numSize_ValueChanged);
 			// 
 			// lblSizeX
 			// 
@@ -307,29 +265,6 @@ namespace Europlan.Common {
 			this.lblDistanceYUnit.TabIndex = 7;
 			this.lblDistanceYUnit.Text = "m";
 			// 
-			// numDistanceY
-			// 
-			this.numDistanceY.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numDistanceY.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numDistanceY.Location = new System.Drawing.Point(14, 84);
-			this.numDistanceY.MaxValue = null;
-			this.numDistanceY.MinValue = null;
-			this.numDistanceY.Name = "numDistanceY";
-			this.numDistanceY.Size = new System.Drawing.Size(100, 20);
-			this.numDistanceY.TabIndex = 6;
-			this.numDistanceY.Text = "0";
-			this.numDistanceY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numDistanceY.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numDistanceY.ValueChanged += new System.EventHandler(this.numDistance_ValueChanged);
-			// 
 			// lblDistanceY
 			// 
 			this.lblDistanceY.Location = new System.Drawing.Point(6, 68);
@@ -345,29 +280,6 @@ namespace Europlan.Common {
 			this.lblDistanceXUnit.Size = new System.Drawing.Size(23, 13);
 			this.lblDistanceXUnit.TabIndex = 4;
 			this.lblDistanceXUnit.Text = "m";
-			// 
-			// numDistanceX
-			// 
-			this.numDistanceX.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numDistanceX.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numDistanceX.Location = new System.Drawing.Point(14, 45);
-			this.numDistanceX.MaxValue = null;
-			this.numDistanceX.MinValue = null;
-			this.numDistanceX.Name = "numDistanceX";
-			this.numDistanceX.Size = new System.Drawing.Size(100, 20);
-			this.numDistanceX.TabIndex = 4;
-			this.numDistanceX.Text = "0";
-			this.numDistanceX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numDistanceX.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numDistanceX.ValueChanged += new System.EventHandler(this.numDistance_ValueChanged);
 			// 
 			// lblDistanceX
 			// 
@@ -429,7 +341,7 @@ namespace Europlan.Common {
 			this.panel.Name = "panel";
 			this.panel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.panel.ProductPlanner = this.roomPicker;
-			this.panel.Size = new System.Drawing.Size(511, 406);
+			this.panel.Size = new System.Drawing.Size(679, 437);
 			this.panel.TabIndex = 2;
 			// 
 			// roomPicker
@@ -439,16 +351,130 @@ namespace Europlan.Common {
 			this.roomPicker.UnusedCoordinates = ((System.Collections.Generic.List<System.Collections.Generic.List<WW.Math.Point2D>>)(resources.GetObject("roomPicker.UnusedCoordinates")));
 			this.roomPicker.ModeChanged += new System.EventHandler(this.roomPicker_ModeChanged);
 			// 
+			// numSizeY
+			// 
+			this.numSizeY.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numSizeY.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numSizeY.Location = new System.Drawing.Point(14, 71);
+			this.numSizeY.MaxValue = null;
+			this.numSizeY.MinValue = null;
+			this.numSizeY.Name = "numSizeY";
+			this.numSizeY.Size = new System.Drawing.Size(100, 20);
+			this.numSizeY.TabIndex = 12;
+			this.numSizeY.Text = "0";
+			this.numSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numSizeY.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numSizeY.ValueChanged += new System.EventHandler(this.numSize_ValueChanged);
+			// 
+			// numSizeX
+			// 
+			this.numSizeX.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numSizeX.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numSizeX.Location = new System.Drawing.Point(14, 32);
+			this.numSizeX.MaxValue = null;
+			this.numSizeX.MinValue = null;
+			this.numSizeX.Name = "numSizeX";
+			this.numSizeX.Size = new System.Drawing.Size(100, 20);
+			this.numSizeX.TabIndex = 9;
+			this.numSizeX.Text = "0";
+			this.numSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numSizeX.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numSizeX.ValueChanged += new System.EventHandler(this.numSize_ValueChanged);
+			// 
+			// numDistanceY
+			// 
+			this.numDistanceY.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numDistanceY.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numDistanceY.Location = new System.Drawing.Point(14, 84);
+			this.numDistanceY.MaxValue = null;
+			this.numDistanceY.MinValue = null;
+			this.numDistanceY.Name = "numDistanceY";
+			this.numDistanceY.Size = new System.Drawing.Size(100, 20);
+			this.numDistanceY.TabIndex = 6;
+			this.numDistanceY.Text = "0";
+			this.numDistanceY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numDistanceY.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numDistanceY.ValueChanged += new System.EventHandler(this.numDistance_ValueChanged);
+			// 
+			// numDistanceX
+			// 
+			this.numDistanceX.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numDistanceX.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numDistanceX.Location = new System.Drawing.Point(14, 45);
+			this.numDistanceX.MaxValue = null;
+			this.numDistanceX.MinValue = null;
+			this.numDistanceX.Name = "numDistanceX";
+			this.numDistanceX.Size = new System.Drawing.Size(100, 20);
+			this.numDistanceX.TabIndex = 4;
+			this.numDistanceX.Text = "0";
+			this.numDistanceX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numDistanceX.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numDistanceX.ValueChanged += new System.EventHandler(this.numDistance_ValueChanged);
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.btnOk);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panel1.Location = new System.Drawing.Point(0, 433);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(679, 29);
+			this.panel1.TabIndex = 4;
+			// 
+			// btnOk
+			// 
+			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOk.Location = new System.Drawing.Point(581, 3);
+			this.btnOk.Name = "btnOk";
+			this.btnOk.Size = new System.Drawing.Size(95, 23);
+			this.btnOk.TabIndex = 4;
+			this.btnOk.Text = "Übernehmen";
+			this.btnOk.UseVisualStyleBackColor = true;
+			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+			// 
 			// RoomPickerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(668, 431);
-			this.Controls.Add(this.panel);
+			this.ClientSize = new System.Drawing.Size(679, 462);
 			this.Controls.Add(this.panUnheatedArea);
+			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.panel);
 			this.Controls.Add(this.toolStrip);
 			this.DoubleBuffered = true;
 			this.MinimizeBox = false;
+			this.MinimumSize = new System.Drawing.Size(500, 500);
 			this.Name = "RoomPickerForm";
 			this.Text = "Raumtypen";
 			this.Load += new System.EventHandler(this.ImagePlanOptionsForm_Load);
@@ -461,6 +487,7 @@ namespace Europlan.Common {
 			this.grpSize.PerformLayout();
 			this.grpDistance.ResumeLayout(false);
 			this.grpDistance.PerformLayout();
+			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -499,6 +526,8 @@ namespace Europlan.Common {
 		private NumericBox numDistanceX;
 		private System.Windows.Forms.Label lblDistanceX;
 		private System.Windows.Forms.CheckBox cbEnterArea;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Button btnOk;
 
 
 	}
