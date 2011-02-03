@@ -44,7 +44,11 @@ namespace Europlan.Common {
 
 		protected Matrix4D AdditionalTransformation {
 			get {
-				return this.Planner.ConnectedPlanPanel.PlanTransformation;
+				if (this.Planner.ConnectedPlanPanel == null) {
+					return Matrix4D.Identity;
+				} else {
+					return this.Planner.ConnectedPlanPanel.PlanTransformation;
+				}
 			}
 		}
 
@@ -59,17 +63,17 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public virtual double RotationRelativeToPlan {
 			get {
-				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
-					return this.rotation + (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation;
-				} else if (this.Planner.ConnectedPlanPanel.Plan is CadPlan) {
+				if (this.Planner.Product.AssociatedRoom.AssociatedPlan is ImagePlan) {
+					return this.rotation + (this.Planner.Product.AssociatedRoom.AssociatedPlan as ImagePlan).Rotation;
+				} else if (this.Planner.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
 					return -this.rotation;
 				}
 				return this.rotation;
 			}
 			set {
-				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
-					this.Rotation = value - (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation;
-				} else if (this.Planner.ConnectedPlanPanel.Plan is CadPlan) {
+				if (this.Planner.Product.AssociatedRoom.AssociatedPlan is ImagePlan) {
+					this.Rotation = value - (this.Planner.Product.AssociatedRoom.AssociatedPlan as ImagePlan).Rotation;
+				} else if (this.Planner.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
 					this.Rotation = -value;
 				} else {
 					this.Rotation = value;
