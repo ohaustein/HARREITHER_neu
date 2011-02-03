@@ -37,8 +37,7 @@ namespace Europlan.Common {
 			if (this.Planner == null || this.Planner.Product == null ||
 				this.Planner.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
-				this.Planner.ConnectedPlanPanel == null ||
-				this.Planner.ConnectedPlanPanel.Plan == null) {
+				this.Planner.Product.AssociatedRoom.AssociatedPlan == null) {
 				return;
 			}
 			Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
@@ -68,7 +67,7 @@ namespace Europlan.Common {
 			this.schienen.Clear();
 			this.possibleLanes.Clear();
 
-			double measure = this.Planner.ConnectedPlanPanel.Plan.Measure.Value;
+			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			double increment = (schienenBreite + schienenAbstand) * measure;
 			double curPos = (minX + maxX - schienenBreite * measure) / 2.0 + (offset * measure);
 			double curYPos = (minY + maxY) / 2.0 + (offsetY * measure);
@@ -664,12 +663,11 @@ namespace Europlan.Common {
 				this.Planner.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
 				this.CeilingCoordinates.Count < 3 ||
-				this.Planner.ConnectedPlanPanel == null ||
-				this.Planner.ConnectedPlanPanel.Plan == null ||
-				this.Planner.ConnectedPlanPanel.Plan.Measure == null) {
+				this.Planner.Product.AssociatedRoom.AssociatedPlan == null ||
+				this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
 				return;
 			}
-			double measure = this.Planner.ConnectedPlanPanel.Plan.Measure.Value;
+			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
 
 			/*double minX, maxX, minY, maxY;*/
@@ -731,9 +729,8 @@ namespace Europlan.Common {
 				this.Planner.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
 				this.CeilingCoordinates.Count < 3 ||
-				this.Planner.ConnectedPlanPanel == null ||
-				this.Planner.ConnectedPlanPanel.Plan == null ||
-				this.Planner.ConnectedPlanPanel.Plan.Measure == null) {
+				this.Planner.Product.AssociatedRoom.AssociatedPlan == null ||
+				this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
 				return false;
 			}
 
@@ -764,14 +761,13 @@ namespace Europlan.Common {
 		}
 
 		public override void MoveDrag(Point2D planPoint, Point pointInControl) {
-			/*double dist = planPoint.X - startPlanPoint.X;
-			this.Offset = startOffset + (dist / this.Planner.ConnectedPlanPanel.Plan.Measure.Value);*/
-
 			Vector2D move = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0).Transform(planPoint - startPlanPoint);
-			this.Offset = startOffset + (move.X / this.Planner.ConnectedPlanPanel.Plan.Measure.Value);
-			this.OffsetY = startOffsetY + (move.Y / this.Planner.ConnectedPlanPanel.Plan.Measure.Value);
+			this.Offset = startOffset + (move.X / this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
+			this.OffsetY = startOffsetY + (move.Y / this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
 
-			this.Planner.ConnectedPlanPanel.InvalidateGraphics();
+			if (this.Planner.ConnectedPlanPanel != null) {
+				this.Planner.ConnectedPlanPanel.InvalidateGraphics();
+			}
 		}
 
 		public override void EndDrag(Point2D planPoint, Point pointInControl) {
