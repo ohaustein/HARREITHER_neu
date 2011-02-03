@@ -1416,9 +1416,14 @@ namespace Europlan.Common {
 			GraphicsPath path = new GraphicsPath();
 
 			Matrix oldTransform = g.Transform;
-			Matrix newTransform = g.Transform;
+			Matrix newTransform = g.Transform.Clone();
 			g.Transform = new Matrix();
-			newTransform.RotateAt((float)-this.product.AssociatedRoom.AssociatedPlan.Rotation, topLeft);
+			
+			//newTransform.RotateAt((float)-this.product.AssociatedRoom.AssociatedPlan.Rotation, topLeft);
+			newTransform.RotateAt((float)(this.product.GraphConstruction.Rotation), topLeft);
+			/*newTransform.Translate(-topLeft.X, -topLeft.Y);
+			newTransform.Scale((float)(Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), (float)(Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+			newTransform.Translate(topLeft.X, topLeft.Y);*/
 			g.Transform = newTransform;
 
 			string moduleString = "";
@@ -1441,10 +1446,12 @@ namespace Europlan.Common {
 			}
 			//additionalTransformation.Get
 			if (this.product.AssociatedRoom.AssociatedPlan is CadPlan) {
-				g.DrawString(moduleString, new Font("Arial", (float)(0.05 * Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value)), new SolidBrush(Color.FromArgb(255, c)), bottomLeft);
+				//g.DrawString(moduleString, new Font("Arial", (float)(0.05 * Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value)), new SolidBrush(Color.FromArgb(255, c)), bottomLeft);
+				g.DrawString(moduleString, new Font("Arial", 0.05f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), topLeft);
 				g.Transform = oldTransform;
 			} else {
-				g.DrawString(moduleString, new Font("Arial", (float)(0.05 * Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value)), new SolidBrush(Color.FromArgb(255, c)), topLeft);
+				//g.DrawString(moduleString, new Font("Arial", (float)(0.05 * Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value)), new SolidBrush(Color.FromArgb(255, c)), topLeft);
+				g.DrawString(moduleString, new Font("Arial", 0.05f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), topLeft);
 				g.Transform = oldTransform;
 			}
 		}
