@@ -61,7 +61,7 @@ namespace Europlan.Common {
 				if (this.plan != value && (value == null || value is CadPlan)) {
 					this.plan = value as CadPlan;
 					if (this.plan != null) {
-						DxfModel model = this.plan.LoadModel();
+						DxfModel model = this.plan.LoadModel(false);
 						this.lstLayers.BeginUpdate();
 						this.lstLayers.Items.Clear();
 						foreach (DxfLayer layer in model.Layers) {

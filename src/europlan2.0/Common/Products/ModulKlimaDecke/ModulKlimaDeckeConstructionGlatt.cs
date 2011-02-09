@@ -598,72 +598,91 @@ namespace Europlan.Common {
 				return;
 			}
 			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			//Matrix4D additionalTransformation = this.AdditionalTransformation;
 
-			/*double minX, maxX, minY, maxY;*/
-			//GraphicsPath roomPath = this.GetProductAreaPath(/*out minX, out maxX, out minY, out maxY*/);
-			//g.Clip = new Region(roomPath);
+			Polygon2D clipRegion = new Polygon2D();
+			foreach (Point2D point in this.CeilingCoordinates) {
+				clipRegion.Add(point);
+			}
+			if (clipRegion.IsClockwise()) {
+				clipRegion.Reverse();
+			}
 
-			Color c = Color.Red;
-			Pen p = new Pen(c);
-			//Brush b = new HatchBrush(HatchStyle.DiagonalCross, c, Color.FromArgb(0, c));
+			Color c = Color.Gray;
 
 			DxfHatch hatch = new DxfHatch();
 			hatch.Color = c;
 			
 			foreach (Polygon2D schiene in this.GetSchienen(false)) {
-				//Matrix4D m = (this.Planner.Product.AssociatedRoom.AssociatedPlan as CadPlan).FromDefaultSize;
 				List<Point2D> dxfPoints = new List<Point2D>();
 				foreach (Point2D point in schiene) {
-					//dxfPoints.Add(m.TransformTo2D(point));
 					dxfPoints.Add(point);
 				}
-				DxfPolyline2D polyLine = new DxfPolyline2D(c, dxfPoints);
-				polyLine.Closed = true;
-				polyLine.Layer = layer;
-				model.Entities.Add(polyLine);
+				Polygon2D clipped = new Polygon2D(dxfPoints);
+				if (clipped.IsClockwise()) {
+					clipped.Reverse();
+				}
+				List<Polygon2D> list1 = new List<Polygon2D>();
+				list1.Add(clipRegion);
+				List<Polygon2D> list2 = new List<Polygon2D>();
+				list2.Add(clipped);
 
-				DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
-				boundaryPath.Type = BoundaryPathType.Polyline;
-				boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(dxfPoints.ToArray());
-				boundaryPath.PolylineData.Closed = true;
-				hatch.BoundaryPaths.Add(boundaryPath);
-								
+				IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+				foreach (Polygon2D polygon in clippedPolygons) {
+					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
+					polyLine.Closed = true;
+					polyLine.Layer = layer;
+					model.Entities.Add(polyLine);
+
+					DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+					boundaryPath.Type = BoundaryPathType.Polyline;
+					boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
+					boundaryPath.PolylineData.Closed = true;
+					hatch.BoundaryPaths.Add(boundaryPath);
+				}
+												
 			}
+
+			hatch.Pattern = new DxfPattern();
+			DxfPattern.Line patternLine = new DxfPattern.Line();
+			patternLine.Angle = Math.PI / 4d;
+			patternLine.Offset = new Vector2D(0.02 * measure, -0.02d * measure);
+			hatch.Pattern.Lines.Add(patternLine);
+			patternLine = new DxfPattern.Line();
+			patternLine.Angle = 3d * Math.PI / 4d;
+			patternLine.Offset = new Vector2D(0.02 * measure, 0.02d * measure);
+			hatch.Pattern.Lines.Add(patternLine);
+
 			hatch.Layer = layer;
 			model.Entities.Add(hatch);
 
-			/*if (drawBeplankung && this.beplankung.HasValue && this.beplankungStart.HasValue && this.beplankungEnd.HasValue) {
+			if (drawBeplankung && this.beplankung.HasValue && this.beplankungStart.HasValue && this.beplankungEnd.HasValue) {
 				Matrix3D matrix = Transformation3D.Rotate(this.Rotation * Math.PI / 180.0);
 				for (double beplankungX = this.beplankungStart.Value.X; beplankungX < this.beplankungEnd.Value.X; beplankungX += beplankung.Value.X * measure) {
 					for (double beplankungY = this.beplankungStart.Value.Y; beplankungY < this.beplankungEnd.Value.Y; beplankungY += beplankung.Value.Y * measure) {
-						Point2D p1 = additionalTransformation.TransformTo2D(matrix.Transform(new Point3D(beplankungX, beplankungY, 0)));
-						Point2D p2 = additionalTransformation.TransformTo2D(matrix.Transform(new Point3D(beplankungX + beplankung.Value.X * measure, beplankungY, 0)));
-						Point2D p3 = additionalTransformation.TransformTo2D(matrix.Transform(new Point3D(beplankungX + beplankung.Value.X * measure, beplankungY + beplankung.Value.Y * measure, 0)));
-						Point2D p4 = additionalTransformation.TransformTo2D(matrix.Transform(new Point3D(beplankungX, beplankungY + beplankung.Value.Y * measure, 0)));
-						g.DrawPolygon(p, new PointF[] { new PointF((float)p1.X, (float)p1.Y), new PointF((float)p2.X, (float)p2.Y), new PointF((float)p3.X, (float)p3.Y), new PointF((float)p4.X, (float)p4.Y) });
-						//g.DrawRectangle(p, (float)(beplankungX), (float)(beplankungY), (float)(beplankung.Value.X * measure), (float)(beplankung.Value.Y * measure));
-					}
-				}
-			}*/
+						Point2D p1 = matrix.Transform(new Point2D(beplankungX, beplankungY));
+						Point2D p2 = matrix.Transform(new Point2D(beplankungX + beplankung.Value.X * measure, beplankungY));
+						Point2D p3 = matrix.Transform(new Point2D(beplankungX + beplankung.Value.X * measure, beplankungY + beplankung.Value.Y * measure));
+						Point2D p4 = matrix.Transform(new Point2D(beplankungX, beplankungY + beplankung.Value.Y * measure));
+						Polygon2D clipped = new Polygon2D(new Point2D[] { p1, p2, p3, p4 });
 
-			/*if (mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION) {
-				c = Color.FromArgb(128, 0, 240, 0);
-				p = new Pen(c);
-				b = new SolidBrush(Color.FromArgb(64, c));
-				Region r = new Region();
-				r.MakeInfinite();
-				g.Clip = r;
-				foreach (Polygon2D area in this.GetPossibleAreas(true)) {
-					PointF[] poly = new PointF[area.Count];
-					int i = 0;
-					foreach (Point2D point in area) {
-						poly[i++] = new PointF((float)point.X, (float)point.Y);
+						if (clipped.IsClockwise()) {
+							clipped.Reverse();
+						}
+						List<Polygon2D> list1 = new List<Polygon2D>();
+						list1.Add(clipRegion);
+						List<Polygon2D> list2 = new List<Polygon2D>();
+						list2.Add(clipped);
+
+						IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+						foreach (Polygon2D polygon in clippedPolygons) {
+							DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
+							polyLine.Closed = true;
+							polyLine.Layer = layer;
+							model.Entities.Add(polyLine);
+						}
 					}
-					g.DrawPolygon(p, poly);
-					g.FillPolygon(b, poly);
 				}
-			}*/
+			}
 		}
 
 		public override bool HitTest(Point2D planPoint, Point pointInControl) {

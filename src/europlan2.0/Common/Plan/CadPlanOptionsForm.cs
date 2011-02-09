@@ -39,7 +39,7 @@ namespace Europlan.Common {
 			InitializeComponent();
 			this.SetLanguage();
 			this.plan = plan;
-			DxfModel model = this.plan.LoadModel(); ;
+			DxfModel model = this.plan.LoadModel(false); ;
 			foreach (DxfLayer layer in model.Layers) {
 				this.lstLayers.Items.Add(new LayerListViewItem(layer));
 			}

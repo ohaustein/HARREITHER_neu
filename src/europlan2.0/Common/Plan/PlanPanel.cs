@@ -45,7 +45,7 @@ namespace Europlan.Common {
 					}
 					this.plan = value;
 					if (this.plan is CadPlan) {
-						DxfModel model = (plan as CadPlan).LoadModel();
+						DxfModel model = (plan as CadPlan).LoadModel(false);
 						this.cadPanelOptions.Plan = plan;
 						this.cadPanel.Plan = plan;
 						this.cadPanel.PlanScale = (plan as CadPlan).Scale;

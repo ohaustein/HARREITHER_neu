@@ -819,7 +819,7 @@ namespace Europlan.Common {
 			set { 
 				if (value is CadPlan) {
 					this.plan = value as CadPlan;
-					this.InternalModel = this.plan.LoadModel();
+					this.InternalModel = this.plan.LoadModel(false);
 				} else if (value == null) {
 					this.plan = null;
 					this.InternalModel = null;

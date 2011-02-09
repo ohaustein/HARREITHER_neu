@@ -49,15 +49,23 @@ namespace Europlan.Common {
 
 		DxfModel model = null;
 
-		public DxfModel LoadModel() {
-			if (model == null) {
+		public DxfModel LoadModel(bool createForExternalUse) {
+			if (createForExternalUse) {
 				if (this.AbsoluteFileName.EndsWith(".dwg", StringComparison.InvariantCultureIgnoreCase)) {
-					model = DwgReader.Read(this.AbsoluteFileName);
+					return DwgReader.Read(this.AbsoluteFileName);
 				} else {
-					model = DxfReader.Read(this.AbsoluteFileName);
+					return DxfReader.Read(this.AbsoluteFileName);
 				}
-				foreach (DxfLayer layer in model.Layers) {
-					layer.Enabled = !this.DisabledLayers.Contains(layer.Name);
+			} else {
+				if (model == null) {
+					if (this.AbsoluteFileName.EndsWith(".dwg", StringComparison.InvariantCultureIgnoreCase)) {
+						model = DwgReader.Read(this.AbsoluteFileName);
+					} else {
+						model = DxfReader.Read(this.AbsoluteFileName);
+					}
+					foreach (DxfLayer layer in model.Layers) {
+						layer.Enabled = !this.DisabledLayers.Contains(layer.Name);
+					}
 				}
 			}
 			return model;

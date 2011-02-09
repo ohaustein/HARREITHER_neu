@@ -179,7 +179,7 @@ namespace Europlan.Common {
 				image.Save(txtPath.Text, format);
 				g.Dispose();
 			} else if (plan is CadPlan) {
-				DxfModel model = (plan as CadPlan).LoadModel();
+				DxfModel model = (plan as CadPlan).LoadModel(true);
 				Dictionary<Type, DxfLayer> layers = new Dictionary<Type, DxfLayer>();
 
 				foreach (Floor floor in Project.Instance.Floors) {
@@ -200,7 +200,7 @@ namespace Europlan.Common {
 											(p as ModulKlimaDeckeProduct).GraphConstruction.RecalculateSchienen();
 											planner.HighlightRoomCoordinates = false;
 											// TODO
-											// planner.DrawBeplankung = ???
+											// planner.DrawBeplankung ???
 											// planner.Mode = ???
 											planner.DrawDxf(model, layer);
 										}
