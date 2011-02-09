@@ -7,6 +7,9 @@ using System.Drawing;
 using WW.Math.Geometry;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using WW.Cad.Model;
+using WW.Cad.Model.Tables;
+using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionGlatt : ModulKlimaDeckeConstruction {
@@ -168,153 +171,6 @@ namespace Europlan.Common {
 			}
 
 			return possibleAreas;
-
-
-			/*Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
-
-			Polygon2D tmp = new Polygon2D();
-			double startPointX = double.MaxValue;
-			double endPointX = double.MinValue;
-			int start = -1;
-			int i = 0;
-			foreach (Point2D point in this.CeilingCoordinates) {
-				Point2D pointTf = matrix.Transform(point);
-				if (pointTf.X < startPointX) {
-					startPointX = pointTf.X;
-					start = i;
-				}
-				if (pointTf.X > endPointX) {
-					endPointX = pointTf.X;
-				}
-				tmp.Add(matrix.Transform(point));
-				i++;
-			}
-			Polygon2D room = new Polygon2D();
-			if (tmp.IsClockwise()) {
-				for (i = tmp.Count; i > 0; i--) {
-					room.Add(tmp[(start + i) % tmp.Count]);
-				}
-			} else {
-				for (i = 0; i < tmp.Count; i++) {
-					room.Add(tmp[(start + i) % tmp.Count]);
-				}
-			}
-
-			Point2D p = matrix.Transform(lane[0]);
-			Line2D borderRight = new Line2D(p, p - matrix.Transform(lane[1]));
-			p = matrix.Transform(lane[3]);
-			Line2D borderLeft = new Line2D(p, p - matrix.Transform(lane[2]));
-
-			Segment2D roomBorder;
-			Nullable<Point2D> intersection = null;
-			if (startPointX > borderLeft.Origin.X || endPointX < borderRight.Origin.X) {
-				// no possible module areas in lane found
-				return new List<PossibleModulLaneArea>();
-			}
-
-			bool inside = false;
-			List<double> bordersTop = new List<double>();
-			List<double> bordersBottom = new List<double>();
-			List<CompareablePair<double>> removes = new List<CompareablePair<double>>();
-			List<double> lp = new List<double>();
-			bool enteredLeft = true;
-			for (i = 0; i < room.Count; i++) {
-				roomBorder = new Segment2D(room[i], room[(i + 1) % room.Count]);
-				if (roomBorder.Start.X < roomBorder.End.X) {
-					this.CheckLeftBorder(borderLeft, roomBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
-					this.CheckRightBorder(borderRight, roomBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
-				} else {
-					this.CheckRightBorder(borderRight, roomBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
-					this.CheckLeftBorder(borderLeft, roomBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
-				}
-				if (inside) {
-					lp.Add(room[i == room.Count - 1 ? 0 : i + 1].Y);
-				}
-			}
-
-			if (this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
-				foreach (List<Point2D> unusedArea in this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
-					tmp = new Polygon2D();
-					startPointX = double.MaxValue;
-					endPointX = double.MinValue;
-					i = 0;
-					foreach (Point2D unusedPoint in unusedArea) {
-						Point2D pointTf = matrix.Transform(unusedPoint);
-						if (pointTf.X < startPointX) {
-							startPointX = pointTf.X;
-							start = i;
-						}
-						if (pointTf.X > endPointX) {
-							endPointX = pointTf.X;
-						}
-						tmp.Add(matrix.Transform(unusedPoint));
-						i++;
-					}
-
-					if (startPointX <= borderRight.Origin.X && endPointX >= borderLeft.Origin.X) {
-						Polygon2D unused = new Polygon2D();
-						if (!tmp.IsClockwise()) {
-							for (i = tmp.Count; i > 0; i--) {
-								unused.Add(tmp[(start + i) % tmp.Count]);
-							}
-						} else {
-							for (i = 0; i < tmp.Count; i++) {
-								unused.Add(tmp[(start + i) % tmp.Count]);
-							}
-						}
-
-						Segment2D unusedBorder;
-						inside = false;
-						for (i = 0; i < unused.Count; i++) {
-							unusedBorder = new Segment2D(unused[i], unused[(i + 1) % unused.Count]);
-							if (unusedBorder.Start.X < unusedBorder.End.X) {
-								this.CheckLeftBorder(borderLeft, unusedBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
-								this.CheckRightBorder(borderRight, unusedBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
-							} else {
-								this.CheckRightBorder(borderRight, unusedBorder, ref inside, bordersTop, removes, ref lp, ref enteredLeft);
-								this.CheckLeftBorder(borderLeft, unusedBorder, ref inside, bordersBottom, removes, ref lp, ref enteredLeft);
-							}
-							if (inside) {
-								lp.Add(unused[i == unused.Count - 1 ? 0 : i + 1].Y);
-							}
-						}
-					}
-				}
-			}
-
-			bordersTop.Sort();
-			bordersBottom.Sort();
-			removes.Sort();
-
-			List<PossibleModulLaneArea> possibleAreas = new List<PossibleModulLaneArea>();
-			matrix = matrix.GetInverse();
-			for (i = 0; i < bordersTop.Count; i++) {
-				double top = bordersTop[i];
-				double bottom;
-				//Polygon2D area;
-				foreach (CompareablePair<double> remove in removes) {
-					if (remove.value1 > bordersTop[i] && remove.value1 < bordersBottom[i]) {
-						bottom = remove.value2;
-						possibleAreas.Add(new PossibleModulLaneArea(
-							matrix.Transform(new Point2D(borderLeft.Origin.X, top)),
-							matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)),
-							matrix.Transform(new Point2D(borderRight.Origin.X, bottom)),
-							matrix.Transform(new Point2D(borderRight.Origin.X, top)),
-							top, bottom));
-						top = remove.value1;
-					}
-				}
-				bottom = bordersBottom[i];
-				possibleAreas.Add(new PossibleModulLaneArea(
-					matrix.Transform(new Point2D(borderLeft.Origin.X, top)),
-					matrix.Transform(new Point2D(borderLeft.Origin.X, bottom)),
-					matrix.Transform(new Point2D(borderRight.Origin.X, bottom)),
-					matrix.Transform(new Point2D(borderRight.Origin.X, top)),
-					top, bottom));
-
-			}
-
-			return possibleAreas;*/
 		}
 
 		private List<LineSegment> GetUnusableSegments(Line2D borderLeft, Line2D borderRight, List<Point2D> polygon, bool unused, double wallDist) {
@@ -676,7 +532,7 @@ namespace Europlan.Common {
 
 			Color c = Color.Gray;
 			Pen p = new Pen(c);
-			Brush b = new HatchBrush(HatchStyle.DiagonalCross, c, Color.FromArgb(0, c));
+			Brush b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.DiagonalCross, c, Color.FromArgb(0, c));
 
 			//g.FillPath(new SolidBrush(Color.FromArgb(128, Color.Yellow)), roomPath);
 
@@ -721,6 +577,85 @@ namespace Europlan.Common {
 					g.FillPolygon(b, poly);
 				}
 			}
+		}
+
+		public override void PaintDxf(DxfModel model, DxfLayer layer, bool drawBeplankung) {
+			if (this.Planner == null ||
+				this.Planner.Product == null ||
+				this.Planner.Product.AssociatedRoom == null ||
+				this.CeilingCoordinates == null ||
+				this.CeilingCoordinates.Count < 3 ||
+				this.Planner.Product.AssociatedRoom.AssociatedPlan == null ||
+				this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
+				return;
+			}
+			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			//Matrix4D additionalTransformation = this.AdditionalTransformation;
+
+			/*double minX, maxX, minY, maxY;*/
+			//GraphicsPath roomPath = this.GetProductAreaPath(/*out minX, out maxX, out minY, out maxY*/);
+			//g.Clip = new Region(roomPath);
+
+			Color c = Color.Red;
+			Pen p = new Pen(c);
+			//Brush b = new HatchBrush(HatchStyle.DiagonalCross, c, Color.FromArgb(0, c));
+
+			DxfHatch hatch = new DxfHatch();
+			hatch.Color = c;
+			
+			foreach (Polygon2D schiene in this.GetSchienen(false)) {
+				//Matrix4D m = (this.Planner.Product.AssociatedRoom.AssociatedPlan as CadPlan).FromDefaultSize;
+				List<Point2D> dxfPoints = new List<Point2D>();
+				foreach (Point2D point in schiene) {
+					//dxfPoints.Add(m.TransformTo2D(point));
+					dxfPoints.Add(point);
+				}
+				DxfPolyline2D polyLine = new DxfPolyline2D(c, dxfPoints);
+				polyLine.Closed = true;
+				polyLine.Layer = layer;
+				model.Entities.Add(polyLine);
+
+				DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+				boundaryPath.Type = BoundaryPathType.Polyline;
+				boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(dxfPoints.ToArray());
+				boundaryPath.PolylineData.Closed = true;
+				hatch.BoundaryPaths.Add(boundaryPath);
+								
+			}
+			hatch.Layer = layer;
+			model.Entities.Add(hatch);
+
+			/*if (drawBeplankung && this.beplankung.HasValue && this.beplankungStart.HasValue && this.beplankungEnd.HasValue) {
+				Matrix3D matrix = Transformation3D.Rotate(this.Rotation * Math.PI / 180.0);
+				for (double beplankungX = this.beplankungStart.Value.X; beplankungX < this.beplankungEnd.Value.X; beplankungX += beplankung.Value.X * measure) {
+					for (double beplankungY = this.beplankungStart.Value.Y; beplankungY < this.beplankungEnd.Value.Y; beplankungY += beplankung.Value.Y * measure) {
+						Point2D p1 = additionalTransformation.TransformTo2D(matrix.Transform(new Point3D(beplankungX, beplankungY, 0)));
+						Point2D p2 = additionalTransformation.TransformTo2D(matrix.Transform(new Point3D(beplankungX + beplankung.Value.X * measure, beplankungY, 0)));
+						Point2D p3 = additionalTransformation.TransformTo2D(matrix.Transform(new Point3D(beplankungX + beplankung.Value.X * measure, beplankungY + beplankung.Value.Y * measure, 0)));
+						Point2D p4 = additionalTransformation.TransformTo2D(matrix.Transform(new Point3D(beplankungX, beplankungY + beplankung.Value.Y * measure, 0)));
+						g.DrawPolygon(p, new PointF[] { new PointF((float)p1.X, (float)p1.Y), new PointF((float)p2.X, (float)p2.Y), new PointF((float)p3.X, (float)p3.Y), new PointF((float)p4.X, (float)p4.Y) });
+						//g.DrawRectangle(p, (float)(beplankungX), (float)(beplankungY), (float)(beplankung.Value.X * measure), (float)(beplankung.Value.Y * measure));
+					}
+				}
+			}*/
+
+			/*if (mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION) {
+				c = Color.FromArgb(128, 0, 240, 0);
+				p = new Pen(c);
+				b = new SolidBrush(Color.FromArgb(64, c));
+				Region r = new Region();
+				r.MakeInfinite();
+				g.Clip = r;
+				foreach (Polygon2D area in this.GetPossibleAreas(true)) {
+					PointF[] poly = new PointF[area.Count];
+					int i = 0;
+					foreach (Point2D point in area) {
+						poly[i++] = new PointF((float)point.X, (float)point.Y);
+					}
+					g.DrawPolygon(p, poly);
+					g.FillPolygon(b, poly);
+				}
+			}*/
 		}
 
 		public override bool HitTest(Point2D planPoint, Point pointInControl) {

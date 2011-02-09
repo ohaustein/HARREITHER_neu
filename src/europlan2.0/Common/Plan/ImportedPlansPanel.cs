@@ -22,9 +22,10 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.lblImportedPlans.Text = EuroplanRes.ImportedPlansPanel_ImportiertePlaene; //"Importierte Pläne"
+			this.lblImportedPlans.Text = EuroplanRes.ImportedPlansPanel_ImportiertePlaene; //"Planverwaltung"
 			this.btnImport.Text = EuroplanRes.ImportedPlansPanel_PlanImportieren; //"Plan importieren"
 			this.btnDelete.Text = EuroplanRes.ImportedPlansPanel_PlanEntfernen; //"Plan entfernen"
+			this.btnExport.Text = EuroplanRes.ImportedPlansPanel_PlanExportieren; //"Plan exportieren"
 			this.nameDataGridViewTextBoxColumn.Name = EuroplanRes.ImportedPlansPanel_PlanName; //"Name"
 			this.RelativeFileName.Name = EuroplanRes.ImportedPlansPanel_DateiPfad; //"Pfad"
 			this.colOptions.Name = EuroplanRes.ImportedPlansPanel_Optionen; //"Optionen"
@@ -32,6 +33,7 @@ namespace Europlan.Common {
 
 		public void UpdateControl(bool resetUserInterface) {
 			btnDelete.Enabled = Project.Instance.ImportedPlans.Count > 0;
+			btnExport.Enabled = Project.Instance.ImportedPlans.Count > 0;
 			planSource.DataSource = Project.Instance.ImportedPlans;
 			planSource.ResetBindings(false);
 		}
@@ -73,7 +75,9 @@ namespace Europlan.Common {
 							Directory.CreateDirectory(dir);
 						}
 						string newFileName = Path.Combine(dir, Path.GetFileName(dialog.FileName));
-						File.Copy(dialog.FileName, newFileName, true);
+						if (!dialog.FileName.Equals(newFileName)) {
+							File.Copy(dialog.FileName, newFileName, true);
+						}
 						string extension = Path.GetExtension(dialog.FileName);
 						Plan plan = null;
 						if (isImage(extension)) {
@@ -118,6 +122,15 @@ namespace Europlan.Common {
 					Plan plan = dgvPlans.SelectedRows[0].DataBoundItem as Plan;
 					deletePlan(plan);
 				}
+			}
+		}
+
+		private void btnExport_Click(object sender, EventArgs e) {
+			if (dgvPlans.SelectedRows[0] != null) {
+				Plan plan = dgvPlans.SelectedRows[0].DataBoundItem as Plan;
+				ExportPlanForm form = new ExportPlanForm(plan);
+				form.ShowDialog();
+				form.Dispose();
 			}
 		}
 
@@ -179,7 +192,6 @@ namespace Europlan.Common {
 				UpdateControl(false);
 			}
 		}
-
 
 	}
 }

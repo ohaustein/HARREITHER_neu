@@ -7,6 +7,8 @@ using System.Drawing;
 using WW.Math.Geometry;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using WW.Cad.Model;
+using WW.Cad.Model.Tables;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionKassette : ModulKlimaDeckeConstruction {
@@ -586,6 +588,10 @@ namespace Europlan.Common {
 					g.FillPolygon(b, poly);
 				}
 			}
+		}
+
+		public override void PaintDxf(DxfModel model, DxfLayer layer, bool drawBeplankung) {
+
 		}
 
 		public override bool HitTest(Point2D planPoint, Point pointInControl) {

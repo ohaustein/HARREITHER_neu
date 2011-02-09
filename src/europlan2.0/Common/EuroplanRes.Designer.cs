@@ -1840,6 +1840,78 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Decke.
+        /// </summary>
+        internal static string ExportOption_DH {
+            get {
+                return ResourceManager.GetString("ExportOption_DH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boden und Decke.
+        /// </summary>
+        internal static string ExportOption_DH_FBH {
+            get {
+                return ResourceManager.GetString("ExportOption_DH_FBH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boden.
+        /// </summary>
+        internal static string ExportOption_FBH {
+            get {
+                return ResourceManager.GetString("ExportOption_FBH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abbrechen.
+        /// </summary>
+        internal static string ExportPlanForm_Abbrechen {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_Abbrechen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dateipfad.
+        /// </summary>
+        internal static string ExportPlanForm_Dateipfad {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_Dateipfad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exportieren.
+        /// </summary>
+        internal static string ExportPlanForm_Exportieren {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_Exportieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exportumfang.
+        /// </summary>
+        internal static string ExportPlanForm_Exportumfang {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_Exportumfang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plan exportieren.
+        /// </summary>
+        internal static string ExportPlanForm_Titel {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to erweiterte Korrekturen aktivieren.
         /// </summary>
         internal static string ExtendedCorrectionsGrid_Aktivieren {
@@ -2666,7 +2738,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importierte Pläne.
+        ///   Looks up a localized string similar to Planverwaltung.
         /// </summary>
         internal static string General_ImportiertePlaene {
             get {
@@ -3543,7 +3615,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importierte Pläne.
+        ///   Looks up a localized string similar to Planverwaltung.
         /// </summary>
         internal static string ImportedPlansPanel_ImportiertePlaene {
             get {
@@ -3566,6 +3638,15 @@ namespace Europlan.Common {
         internal static string ImportedPlansPanel_PlanEntfernen {
             get {
                 return ResourceManager.GetString("ImportedPlansPanel_PlanEntfernen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plan exportieren.
+        /// </summary>
+        internal static string ImportedPlansPanel_PlanExportieren {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_PlanExportieren", resourceCulture);
             }
         }
         
@@ -13150,15 +13231,6 @@ namespace Europlan.Common {
         internal static string SystemParametersPanel_Oberflaechentemperatur29 {
             get {
                 return ResourceManager.GetString("SystemParametersPanel_Oberflaechentemperatur29", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Importierte Pläne.
-        /// </summary>
-        internal static string SystemParametersPanel_Plaene {
-            get {
-                return ResourceManager.GetString("SystemParametersPanel_Plaene", resourceCulture);
             }
         }
         

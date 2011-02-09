@@ -7,6 +7,8 @@ using System.Drawing.Drawing2D;
 using System.Xml.Serialization;
 using System.Windows.Forms;
 using WW.Math.Geometry;
+using WW.Cad.Model;
+using WW.Cad.Model.Tables;
 
 namespace Europlan.Common {
 	[XmlInclude(typeof(ModulKlimaDeckeConstructionGlatt))]
@@ -18,6 +20,7 @@ namespace Europlan.Common {
 		protected List<PossibleModulLane> possibleLanes = new List<PossibleModulLane>();
 
 		public abstract void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode, bool drawBeplankung);
+		public abstract void PaintDxf(DxfModel model, DxfLayer layer, bool drawBeplankung);
 
 		#region IPickableObject Members
 		public abstract bool HitTest(Point2D planPoint, Point pointInControl);
@@ -44,10 +47,14 @@ namespace Europlan.Common {
 
 		protected Matrix4D AdditionalTransformation {
 			get {
-				if (this.Planner.ConnectedPlanPanel == null) {
-					return Matrix4D.Identity;
+				if (this.Planner != null && 
+					this.Planner.Product != null && 
+					this.Planner.Product.AssociatedRoom != null && 
+					this.Planner.Product.AssociatedRoom.AssociatedPlan != null &&
+					this.Planner.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
+					return (this.Planner.Product.AssociatedRoom.AssociatedPlan as CadPlan).GdiGraphics3D.To2DTransform;
 				} else {
-					return this.Planner.ConnectedPlanPanel.PlanTransformation;
+					return Matrix4D.Identity;
 				}
 			}
 		}
@@ -97,6 +104,7 @@ namespace Europlan.Common {
 		public List<PossibleModulLane> PossibleLanes {
 			get { return this.possibleLanes; }
 		}
+
 	}
 
 }

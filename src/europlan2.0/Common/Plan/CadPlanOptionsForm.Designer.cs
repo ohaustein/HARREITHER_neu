@@ -170,7 +170,6 @@ namespace Europlan.Common {
 			this.cadPanel.Location = new System.Drawing.Point(200, 25);
 			this.cadPanel.Name = "cadPanel";
 			this.cadPanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
-			this.cadPanel.PlanDefaultMargin = 5;
 			this.cadPanel.Size = new System.Drawing.Size(468, 377);
 			this.cadPanel.TabIndex = 2;
 			this.cadPanel.EndPointSelected += new System.EventHandler<Europlan.Common.CadPanel.EndPointSelectedArgs>(this.cadPanel_EndPointSelected);

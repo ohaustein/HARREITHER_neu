@@ -28,11 +28,12 @@ namespace Europlan.Common {
 			this.btnImport = new System.Windows.Forms.Button();
 			this.btnDelete = new System.Windows.Forms.Button();
 			this.dgvPlans = new System.Windows.Forms.DataGridView();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.planSource = new System.Windows.Forms.BindingSource(this.components);
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.RelativeFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colOptions = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.planSource = new System.Windows.Forms.BindingSource(this.components);
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnExport = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPlans)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.planSource)).BeginInit();
 			this.SuspendLayout();
@@ -43,9 +44,9 @@ namespace Europlan.Common {
 			this.lblImportedPlans.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblImportedPlans.Location = new System.Drawing.Point(3, 0);
 			this.lblImportedPlans.Name = "lblImportedPlans";
-			this.lblImportedPlans.Size = new System.Drawing.Size(168, 24);
+			this.lblImportedPlans.Size = new System.Drawing.Size(152, 24);
 			this.lblImportedPlans.TabIndex = 20;
-			this.lblImportedPlans.Text = "Importierte Pläne";
+			this.lblImportedPlans.Text = "Planverwaltung";
 			// 
 			// btnImport
 			// 
@@ -92,18 +93,6 @@ namespace Europlan.Common {
 			this.dgvPlans.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlans_CellValueChanged);
 			this.dgvPlans.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlans_CellClick);
 			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "RelativeFileName";
-			this.dataGridViewTextBoxColumn1.HeaderText = "RelativeFileName";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			// 
-			// planSource
-			// 
-			this.planSource.DataSource = typeof(Europlan.Common.Plan);
-			// 
 			// nameDataGridViewTextBoxColumn
 			// 
 			this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -127,10 +116,33 @@ namespace Europlan.Common {
 			this.colOptions.UseColumnTextForButtonValue = true;
 			this.colOptions.Width = 80;
 			// 
+			// planSource
+			// 
+			this.planSource.DataSource = typeof(Europlan.Common.Plan);
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "RelativeFileName";
+			this.dataGridViewTextBoxColumn1.HeaderText = "RelativeFileName";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			// 
+			// btnExport
+			// 
+			this.btnExport.Location = new System.Drawing.Point(275, 37);
+			this.btnExport.Name = "btnExport";
+			this.btnExport.Size = new System.Drawing.Size(130, 23);
+			this.btnExport.TabIndex = 24;
+			this.btnExport.Text = "Plan exportieren";
+			this.btnExport.UseVisualStyleBackColor = true;
+			this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+			// 
 			// ImportedPlansPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.btnExport);
 			this.Controls.Add(this.dgvPlans);
 			this.Controls.Add(this.btnDelete);
 			this.Controls.Add(this.btnImport);
@@ -156,5 +168,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn RelativeFileName;
 		private System.Windows.Forms.DataGridViewButtonColumn colOptions;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.Button btnExport;
 	}
 }

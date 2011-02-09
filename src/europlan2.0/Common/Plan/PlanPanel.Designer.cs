@@ -66,7 +66,6 @@ namespace Europlan.Common {
 			this.cadPanel.Location = new System.Drawing.Point(200, 0);
 			this.cadPanel.Name = "cadPanel";
 			this.cadPanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
-			this.cadPanel.PlanDefaultMargin = 5;
 			this.cadPanel.Size = new System.Drawing.Size(561, 459);
 			this.cadPanel.TabIndex = 1;
 			this.cadPanel.Visible = false;

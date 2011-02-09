@@ -217,6 +217,12 @@
     <Compile Include="Plan\CadPlanOptionsForm.Designer.cs">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\ExportPlanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plan\ExportPlanForm.Designer.cs">
+      <DependentUpon>ExportPlanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plan\IDragableObject.cs" />
     <Compile Include="Plan\IPickableObject.cs" />
     <Compile Include="Plan\PlanPanel.cs">
@@ -686,6 +692,10 @@
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Plan\ExportPlanForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ExportPlanForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Plan\PlanPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PlanPanel.cs</DependentUpon>
@@ -927,6 +937,7 @@
     <Content Include="Reporting\QuickDimensioning.lst">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\DataSources\ExportPlanForm.ExportOptionType.datasource" />
     <None Include="Resources\pickUnused.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -720,6 +720,30 @@ Vorlauf
   <data name="EurovalProduct_NotificationParameter" xml:space="preserve">
     <value>Euroval-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
   </data>
+  <data name="ExportOption_DH" xml:space="preserve">
+    <value>Decke</value>
+  </data>
+  <data name="ExportOption_DH_FBH" xml:space="preserve">
+    <value>Boden und Decke</value>
+  </data>
+  <data name="ExportOption_FBH" xml:space="preserve">
+    <value>Boden</value>
+  </data>
+  <data name="ExportPlanForm_Abbrechen" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ExportPlanForm_Dateipfad" xml:space="preserve">
+    <value>Dateipfad</value>
+  </data>
+  <data name="ExportPlanForm_Exportieren" xml:space="preserve">
+    <value>Exportieren</value>
+  </data>
+  <data name="ExportPlanForm_Exportumfang" xml:space="preserve">
+    <value>Exportumfang</value>
+  </data>
+  <data name="ExportPlanForm_Titel" xml:space="preserve">
+    <value>Plan exportieren</value>
+  </data>
   <data name="ExtendedCorrectionsGrid_Aktivieren" xml:space="preserve">
     <value>erweiterte Korrekturen aktivieren</value>
   </data>
@@ -1013,7 +1037,7 @@ klicken Sie in der Projekthierarchie auf den gewünschten Raum.</value>
     <value>Geschoße</value>
   </data>
   <data name="General_ImportiertePlaene" xml:space="preserve">
-    <value>Importierte Pläne</value>
+    <value>Planverwaltung</value>
   </data>
   <data name="General_Kopieren" xml:space="preserve">
     <value>&amp;Kopieren</value>
@@ -1314,13 +1338,16 @@ R
     <value>Eingescannter Plan (*.jpg, *.png, *.bmp)</value>
   </data>
   <data name="ImportedPlansPanel_ImportiertePlaene" xml:space="preserve">
-    <value>Importierte Pläne</value>
+    <value>Planverwaltung</value>
   </data>
   <data name="ImportedPlansPanel_Optionen" xml:space="preserve">
     <value>Optionen</value>
   </data>
   <data name="ImportedPlansPanel_PlanEntfernen" xml:space="preserve">
     <value>Plan entfernen</value>
+  </data>
+  <data name="ImportedPlansPanel_PlanExportieren" xml:space="preserve">
+    <value>Plan exportieren</value>
   </data>
   <data name="ImportedPlansPanel_PlanImportieren" xml:space="preserve">
     <value>Plan importieren</value>
@@ -4665,9 +4692,6 @@ fläche
   </data>
   <data name="SystemParametersPanel_Oberflaechentemperatur29" xml:space="preserve">
     <value>29 °C (EN 1264)</value>
-  </data>
-  <data name="SystemParametersPanel_Plaene" xml:space="preserve">
-    <value>Importierte Pläne</value>
   </data>
   <data name="SystemParametersPanel_PlaeneEinheit" xml:space="preserve">
     <value>Einheit:</value>
