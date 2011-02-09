@@ -95,14 +95,10 @@ namespace Europlan.Common.Products {
 				this.rbGlatt.Visible = true;
 				this.rbAkustik.Visible = true;
 				this.rbKassetten.Visible = false;
-				this.glatt.SchienenBreite = 0.065;
-				this.akustik.SchienenBreite = 0.065;
 			} else if (constrType == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.HOLZSTAFFEL) {
 				this.rbGlatt.Visible = true;
 				this.rbAkustik.Visible = true;
 				this.rbKassetten.Visible = false;
-				this.glatt.SchienenBreite = 0.045;
-				this.akustik.SchienenBreite = 0.045;
 			} else if (constrType == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.KASSETTENDECKE) {
 				this.rbGlatt.Visible = false;
 				this.rbAkustik.Visible = false;

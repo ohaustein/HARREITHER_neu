@@ -39,7 +39,7 @@ namespace Europlan.Common {
 			get { return this.planner; }
 			set { this.planner = value; }
 		}
-
+		
 		[XmlIgnore]
 		public abstract Cursor PickCursor {
 			get;

@@ -13,7 +13,7 @@ using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionGlatt : ModulKlimaDeckeConstruction {
-		private double schienenBreite = 0.045; // meter
+		//private double schienenBreite = 0.045; // meter
 		private double schienenAbstand = 0.3; // meter
 		private double offset = 0; // meter
 		private double offsetY = 0; // meter (only used for beplankung)
@@ -71,8 +71,8 @@ namespace Europlan.Common {
 			this.possibleLanes.Clear();
 
 			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			double increment = (schienenBreite + schienenAbstand) * measure;
-			double curPos = (minX + maxX - schienenBreite * measure) / 2.0 + (offset * measure);
+			double increment = (SchienenBreite + schienenAbstand) * measure;
+			double curPos = (minX + maxX - SchienenBreite * measure) / 2.0 + (offset * measure);
 			double curYPos = (minY + maxY) / 2.0 + (offsetY * measure);
 			double curBeplankungsPos = 0;
 			if (beplankung.HasValue) {
@@ -84,11 +84,11 @@ namespace Europlan.Common {
 				while (curYPos > minY) {
 					curYPos -= beplankungsYIncrement;
 				}
-				this.beplankungStart = new Size2D(curPos + schienenBreite / 2.0 * measure, curYPos);
+				this.beplankungStart = new Size2D(curPos + SchienenBreite / 2.0 * measure, curYPos);
 				this.beplankungEnd = new Size2D(maxX, maxY);
 				while (curPos + increment < minX) {
 					curPos += increment;
-					curBeplankungsPos += schienenBreite + schienenAbstand;
+					curBeplankungsPos += SchienenBreite + schienenAbstand;
 				}
 			} else {
 				while (curPos > minX) {
@@ -102,11 +102,11 @@ namespace Europlan.Common {
 			while (curPos < maxX) {
 				Polygon2D schiene = new Polygon2D();
 				schiene.Add(matrix.Transform(new Point2D(curPos, minY)));
-				schiene.Add(matrix.Transform(new Point2D(curPos + schienenBreite * measure, minY)));
-				schiene.Add(matrix.Transform(new Point2D(curPos + schienenBreite * measure, maxY)));
+				schiene.Add(matrix.Transform(new Point2D(curPos + SchienenBreite * measure, minY)));
+				schiene.Add(matrix.Transform(new Point2D(curPos + SchienenBreite * measure, maxY)));
 				schiene.Add(matrix.Transform(new Point2D(curPos, maxY)));
 				this.schienen.Add(schiene);
-				curBeplankungsPos += (schienenBreite + schienenAbstand);
+				curBeplankungsPos += (SchienenBreite + schienenAbstand);
 				curPos += increment;
 				if (beplankung.HasValue && curBeplankungsPos >= beplankung.Value.X) {
 					if (curBeplankungsPos > beplankung.Value.X) {
@@ -394,10 +394,18 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double SchienenBreite {
-			get { return this.schienenBreite; }
-			set {
-				this.schienenBreite = value;
-				this.RecalculateSchienen();
+			get {
+				switch ((ModulKlimaDeckeProduct.ModulCeilingConstructionEnum)ModulKlimaDeckeProduct.ConfigModulCeilingConstruction) {
+					case ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.C_PROFIL:
+						return 0.065;
+						break;
+					case ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.HOLZSTAFFEL:
+						return 0.045;
+						break;
+					default:
+						return 0.045;
+						break;
+				}
 			}
 		}
 
@@ -413,7 +421,7 @@ namespace Europlan.Common {
 			get { return this.offset; }
 			set {
 				this.offset = value;
-				double increment = this.beplankung.HasValue ? this.beplankung.Value.X : this.schienenBreite + this.schienenAbstand;
+				double increment = this.beplankung.HasValue ? this.beplankung.Value.X : this.SchienenBreite + this.schienenAbstand;
 				while (this.offset >= increment) {
 					this.offset -= increment;
 				}
