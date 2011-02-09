@@ -96,7 +96,7 @@ namespace Europlan.Common {
 								instance = new Project();
 							} catch {
 								instance = null;
-							} 
+							}
 						}
 					}
 				}
@@ -137,45 +137,45 @@ namespace Europlan.Common {
 			string localized = EuroplanRes.General_Projekt;
 			rootNode = new TreeNode(localized == null ? "Projekt" : localized);
 			rootNode.Tag = this;
-            rootNode.ImageKey = "Projekt.png";
-            rootNode.SelectedImageKey = "Projekt.png";
+			rootNode.ImageKey = "Projekt.png";
+			rootNode.SelectedImageKey = "Projekt.png";
 
 			// building (floors and rooms)
 			localized = EuroplanRes.General_Geschosse;
 			floorsNode = new TreeNode(localized == null ? "Geschoﬂe" : localized);
 			floorsNode.Tag = floors;
-            floorsNode.ImageKey = "Geschoﬂ.png";
-            floorsNode.SelectedImageKey = "Geschoﬂ.png";
+			floorsNode.ImageKey = "Geschoﬂ.png";
+			floorsNode.SelectedImageKey = "Geschoﬂ.png";
 
 			localized = EuroplanRes.General_Anlagedaten;
 			facilityDetailsNode = new TreeNode(localized == null ? "Anlagedaten" : localized);
 			facilityDetailsNode.Tag = typeof(FacilityDetailsSummaryPanel);
-            facilityDetailsNode.ImageKey = "Anlagedaten.png";
-            facilityDetailsNode.SelectedImageKey = "Anlagedaten.png";
+			facilityDetailsNode.ImageKey = "Anlagedaten.png";
+			facilityDetailsNode.SelectedImageKey = "Anlagedaten.png";
 
 			localized = EuroplanRes.General_Regelkreise;
 			regulatorCircuitsNode = new TreeNode(localized == null ? "Regelkreise" : localized);
 			regulatorCircuitsNode.Tag = typeof(RegulatorCircuitsSummaryPanel);
-            regulatorCircuitsNode.ImageKey = "Regelkreise.png";
-            regulatorCircuitsNode.SelectedImageKey = "Regelkreise.png";
+			regulatorCircuitsNode.ImageKey = "Regelkreise.png";
+			regulatorCircuitsNode.SelectedImageKey = "Regelkreise.png";
 
 			localized = EuroplanRes.General_Systemparameter;
 			systemParametersNode = new TreeNode(localized == null ? "Systemparameter" : localized);
 			systemParametersNode.Tag = typeof(SystemParametersPanel);
-            systemParametersNode.ImageKey = "Systemparameter.png";
-            systemParametersNode.SelectedImageKey = "Systemparameter.png";
+			systemParametersNode.ImageKey = "Systemparameter.png";
+			systemParametersNode.SelectedImageKey = "Systemparameter.png";
 
 			localized = EuroplanRes.General_Flaechenausfstellung;
 			quickDimensioningNode = new TreeNode(localized == null ? "Fl‰chenaufstellung" : localized);
 			quickDimensioningNode.Tag = quickDimensioning;
-            quickDimensioningNode.ImageKey = "Fl‰chenaufstellung.png";
-            quickDimensioningNode.SelectedImageKey = "Fl‰chenaufstellung.png";
+			quickDimensioningNode.ImageKey = "Fl‰chenaufstellung.png";
+			quickDimensioningNode.SelectedImageKey = "Fl‰chenaufstellung.png";
 
 			localized = EuroplanRes.General_Materialbedarf;
 			requiredMaterialNode = new TreeNode(localized == null ? "Materialbedarf" : localized);
 			requiredMaterialNode.Tag = typeof(RequiredMaterialPanel);
-            requiredMaterialNode.ImageKey = "Materialbedarf.png";
-            requiredMaterialNode.SelectedImageKey = "Materialbedarf.png";
+			requiredMaterialNode.ImageKey = "Materialbedarf.png";
+			requiredMaterialNode.SelectedImageKey = "Materialbedarf.png";
 
 			localized = EuroplanRes.General_ImportiertePlaene;
 			importedPlansNode = new TreeNode(localized == null ? "Importierte Pl‰ne" : localized);
@@ -252,7 +252,7 @@ namespace Europlan.Common {
 			get { return outsideTemperatureForCooling; }
 			set { outsideTemperatureForCooling = value; }
 		}
-		
+
 		public int RelativeHumidity {
 			get { return relativeHumidity; }
 			set { relativeHumidity = value; }
@@ -297,7 +297,7 @@ namespace Europlan.Common {
 		public SerializableDictionary<string, double> RequiredMaterialCalculated {
 			get { return requiredMaterialCalculated; }
 			set { requiredMaterialCalculated = value; }
-		}		
+		}
 
 		/*public void SetFloors(List<Floor> floors) {
 			this.floors.Clear();
@@ -432,7 +432,7 @@ namespace Europlan.Common {
 					foreach (PlannedProduct pp in room.PlannedProducts) {
 						pp.Product.AssociatedRoom = room;
 					}
-				} 
+				}
 			}
 			foreach (Floor floor in this.floors) {
 				floor.FinalizeLoading();
@@ -472,7 +472,7 @@ namespace Europlan.Common {
 				Instance.RegulatorCircuits.Add(new RegulatorCircuit(localized));
 				Instance.InitializeProductParameters();
 				return Instance;
-			}			
+			}
 		}
 
 		private void InitializeProductParameters() {
@@ -582,7 +582,7 @@ namespace Europlan.Common {
 
 
 		public Type AssociatedPanelType {
-			get { 
+			get {
 				return typeof(ProjectSummaryPanel);
 			}
 		}
@@ -835,6 +835,33 @@ namespace Europlan.Common {
 				String[] rtn = new String[notifications.Count];
 				notifications.CopyTo(rtn);
 				return rtn;
+			}
+		}
+
+		public static void CopyPlans(string source, string destination) {
+			string sourceDir = Path.GetDirectoryName(source);
+			string sourceSubDir = Path.GetFileNameWithoutExtension(source) + "_plans";
+			string from = Path.Combine(sourceDir, sourceSubDir);
+			string destinationDir = Path.GetDirectoryName(destination);
+			string destinationSubDir = Path.GetFileNameWithoutExtension(destination) + "_plans";
+			string to = Path.Combine(destinationDir, destinationSubDir);
+			CopyDirectory(new DirectoryInfo(from), new DirectoryInfo(to));
+			foreach (Plan plan in Project.Instance.ImportedPlans) {
+				plan.RelativeFileName = plan.RelativeFileName.Replace(sourceSubDir, destinationSubDir);
+			}
+		}
+
+		private static void CopyDirectory(DirectoryInfo diSourceDir, DirectoryInfo diDestDir) {
+			if (!diDestDir.Exists) {
+				diDestDir.Create();
+			}
+			FileInfo[] fiSrcFiles = diSourceDir.GetFiles();
+			foreach (FileInfo fiSrcFile in fiSrcFiles) {
+				fiSrcFile.CopyTo(Path.Combine(diDestDir.FullName, fiSrcFile.Name));
+			}
+			DirectoryInfo[] diSrcDirectories = diSourceDir.GetDirectories();
+			foreach (DirectoryInfo diSrcDirectory in diSrcDirectories) {
+				CopyDirectory(diSrcDirectory, new DirectoryInfo(Path.Combine(diDestDir.FullName, diSrcDirectory.Name)));
 			}
 		}
 	}

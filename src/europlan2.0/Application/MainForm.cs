@@ -506,6 +506,7 @@ namespace Europlan.Application {
 			dialog.Filter = EuroplanRes.MainForm_E2pFilter + "|*.e2p";
 			DialogResult result = dialog.ShowDialog();
 			if (result == DialogResult.OK) {
+				Project.CopyPlans(projectFileName, dialog.FileName);
 				projectFileName = dialog.FileName;
 				SaveProject();
 			}
