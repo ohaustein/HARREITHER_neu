@@ -147,16 +147,19 @@ namespace Europlan.Common {
 									|| (cmbExportOption.SelectedValue.Equals(ExportOptionType.FBH) && pp.Product.Type == Product.ProductType.FBH)
 									|| (cmbExportOption.SelectedValue.Equals(ExportOptionType.DH) && pp.Product.Type == Product.ProductType.DH)) {
 									Product p = pp.Product;
-									if (p is ModulKlimaDeckeProduct) {
-										ModulKlimaDeckePlanner planner = new ModulKlimaDeckePlanner();
-										planner.Product = p as ModulKlimaDeckeProduct;
-										(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
-										(p as ModulKlimaDeckeProduct).GraphConstruction.RecalculateSchienen();
-										planner.HighlightRoomCoordinates = false;
-										// TODO
-										// planner.DrawBeplankung = ???
-										// planner.Mode = ???
-										planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty);
+									if (p.GraphicalMode.HasValue && p.GraphicalMode.Value) {
+										if (p is ModulKlimaDeckeProduct) {
+											ModulKlimaDeckePlanner planner = new ModulKlimaDeckePlanner();
+											planner.Product = p as ModulKlimaDeckeProduct;
+											(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
+											(p as ModulKlimaDeckeProduct).GraphConstruction.RecalculateSchienen();
+											planner.HighlightRoomCoordinates = false;
+											// TODO
+											// planner.DrawBeplankung = ???
+											// planner.Mode = ???
+											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty);
+										}
+										//...
 									}
 								}
 
@@ -188,17 +191,20 @@ namespace Europlan.Common {
 									|| (cmbExportOption.SelectedValue.Equals(ExportOptionType.FBH) && pp.Product.Type == Product.ProductType.FBH)
 									|| (cmbExportOption.SelectedValue.Equals(ExportOptionType.DH) && pp.Product.Type == Product.ProductType.DH)) {
 									Product p = pp.Product;
-									if (p is ModulKlimaDeckeProduct) {
-										DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaDeckeProduct));
-										ModulKlimaDeckePlanner planner = new ModulKlimaDeckePlanner();
-										planner.Product = p as ModulKlimaDeckeProduct;
-										(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
-										(p as ModulKlimaDeckeProduct).GraphConstruction.RecalculateSchienen();
-										planner.HighlightRoomCoordinates = false;
-										// TODO
-										// planner.DrawBeplankung = ???
-										// planner.Mode = ???
-										planner.DrawDxf(model, layer);
+									if (p.GraphicalMode.HasValue && p.GraphicalMode.Value) {
+										if (p is ModulKlimaDeckeProduct) {
+											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaDeckeProduct));
+											ModulKlimaDeckePlanner planner = new ModulKlimaDeckePlanner();
+											planner.Product = p as ModulKlimaDeckeProduct;
+											(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
+											(p as ModulKlimaDeckeProduct).GraphConstruction.RecalculateSchienen();
+											planner.HighlightRoomCoordinates = false;
+											// TODO
+											// planner.DrawBeplankung = ???
+											// planner.Mode = ???
+											planner.DrawDxf(model, layer);
+										}
+										//.....
 									}
 								}
 							}
