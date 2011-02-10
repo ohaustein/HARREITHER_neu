@@ -1544,6 +1544,7 @@ namespace Europlan.Common {
 			Point2D topRight2D = additionalTransformation.TransformTo2D(new Point2D(width, 0));
 			Point2D bottomRight2D = additionalTransformation.TransformTo2D(new Point2D(width, height));
 			Point2D bottomLeft2D = additionalTransformation.TransformTo2D(new Point2D(0, height));
+			Point2D textStart = additionalTransformation.TransformTo2D(new Point2D(0.01 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.06 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 
 			Point2D directionTop12D;
 			Point2D directionTop22D;
@@ -1607,16 +1608,6 @@ namespace Europlan.Common {
 				model.Entities.Add(polyLine);
 			}
 
-			/*
-			GraphicsPath path = new GraphicsPath();
-
-			Matrix oldTransform = g.Transform;
-			Matrix newTransform = g.Transform.Clone();
-			g.Transform = new Matrix();
-
-			newTransform.RotateAt((float)(this.product.GraphConstruction.Rotation), topLeft);
-			g.Transform = newTransform;
-
 			string moduleString = "";
 			switch (type) {
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30:
@@ -1635,14 +1626,19 @@ namespace Europlan.Common {
 					moduleString = EuroplanRes.KlimaFlaechenModul_80_30_Short;
 					break;
 			}
-			if (this.product.AssociatedRoom.AssociatedPlan is CadPlan) {
-				g.DrawString(moduleString, new Font("Arial", 0.05f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), topLeft);
-				g.Transform = oldTransform;
-			} else {
-				g.DrawString(moduleString, new Font("Arial", 0.05f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), topLeft);
-				g.Transform = oldTransform;
+
+			if (!model.TextStyles.Contains("HarreitherStyle")) {
+				DxfTextStyle textStyle = new DxfTextStyle("HarreitherStyle", "Arial.ttf");
+				model.TextStyles.Add(textStyle);
 			}
-			 */
+			DxfText text = new DxfText(moduleString, (Point3D)textStart, 0.05f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
+			//text3.Thickness = 0.4d;
+			text.Style = model.TextStyles["HarreitherStyle"];
+			text.Layer = layer;
+			text.Color = c;
+			Console.WriteLine(this.product.GraphConstruction.Rotation);
+			text.Rotation = this.product.GraphConstruction.Rotation / 180.0 * Math.PI;
+			model.Entities.Add(text);		
 		}
 	}
 }
