@@ -138,6 +138,7 @@ namespace Europlan.Common {
 			if (plan is ImagePlan) {
 				Image image = Image.FromFile(plan.AbsoluteFileName);
 				Graphics g = Graphics.FromImage(image);
+				g.InterpolationMode = InterpolationMode.Bicubic;
 				foreach (Floor floor in Project.Instance.Floors) {
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
 						foreach (Room room in floor.Rooms) {
@@ -193,7 +194,7 @@ namespace Europlan.Common {
 									Product p = pp.Product;
 									if (p.GraphicalMode.HasValue && p.GraphicalMode.Value) {
 										if (p is ModulKlimaDeckeProduct) {
-											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaDeckeProduct));
+											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaDeckeProduct), model);
 											ModulKlimaDeckePlanner planner = new ModulKlimaDeckePlanner();
 											planner.Product = p as ModulKlimaDeckeProduct;
 											(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
@@ -219,7 +220,7 @@ namespace Europlan.Common {
 			this.Close();
 		}
 
-		private DxfLayer GetOrCreateDxfLayer(Dictionary<Type, DxfLayer> layers, Type key) {
+		private DxfLayer GetOrCreateDxfLayer(Dictionary<Type, DxfLayer> layers, Type key, DxfModel model) {
 			if (layers.ContainsKey(key)) {
 				return layers[key];
 			} else {
@@ -232,6 +233,13 @@ namespace Europlan.Common {
 					name = key.Name;
 				}
 				name = name.Replace(' ', '_');
+
+				foreach (DxfLayer l in model.Layers) {
+					if (l.Name == name) {
+						return l;
+					}
+				}
+
 				DxfLayer layer = new DxfLayer(name);
 				layers.Add(key, layer);
 				return layer;
