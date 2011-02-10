@@ -591,7 +591,7 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintDxf(DxfModel model, DxfLayer layer, bool drawBeplankung) {
-
+			// TODO
 		}
 
 		public override bool HitTest(Point2D planPoint, Point pointInControl) {

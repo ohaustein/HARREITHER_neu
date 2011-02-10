@@ -1496,38 +1496,14 @@ namespace Europlan.Common {
 
 		internal void DrawDxf(DxfModel model, DxfLayer layer) {
 			Matrix4D additionalTransformation = Matrix4D.Identity;
-
-			/*
+						
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.CeilingCoordinatesToUse != null) {
-				GraphicsPath path = new GraphicsPath();
-				List<PointF> transformedPoints = new List<PointF>();
-				foreach (Point2D point in this.product.AssociatedRoom.CeilingCoordinatesToUse) {
-					Point2D tmp = additionalTransformation.TransformTo2D(point);
-					transformedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
-				}
-				path.AddPolygon(transformedPoints.ToArray());
-				Region clipDisabled = new Region();
-				clipDisabled.MakeInfinite();
-				clipDisabled.Exclude(path);
-				path.Dispose();
-				Color c = Color.Black;
-				if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
-					c = Color.White;
-				}
-				Brush b = new SolidBrush(c);
-				b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(128, c), Color.FromArgb(112, c));
-
-				if (highlightRoomCoordinates) {
-					// gray out all except the room
-					g.FillRegion(b, clipDisabled);
-				}
-				*/
 				if (this.product.AssociatedRoom.AssociatedPlan != null && this.product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
 					if (this.product.GraphConstruction != null) {
 						this.product.GraphConstruction.PaintDxf(model, layer, this.drawBeplankung);
 					}
 				}
-				/*
+				
 				if (this.mode != KlimaDeckeMode.KDM_CONSTRUCTION) {
 					foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
 						Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
@@ -1541,65 +1517,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				
-				if (this.layoutAddArea != null) {
-					PointF[] drawArea = new PointF[this.layoutAddArea.Count];
-					for (int i = 0; i < this.layoutAddArea.Count; i++) {
-						Point2D tmp = additionalTransformation.TransformTo2D(this.layoutAddArea[i]);
-						drawArea[i] = new PointF((float)tmp.X, (float)tmp.Y);
-					}
-					g.DrawPolygon(Pens.Red, drawArea);
-
-					this.AddModulesForLayoutArea(delegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added) {
-						added = this.TryDrawModule(g, additionalTransformation, ref y, start, end, step, ref left, this.layoutAddAreaBottomUp, invRotation, lane, borderLeftOrigin);
-					});
-				}
-
-				if (this.product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
-					List<PointF> unusedPoints = new List<PointF>();
-					foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
-						foreach (Point2D point in unusedArea) {
-							Point2D tmp = additionalTransformation.TransformTo2D(point);
-							unusedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
-						}
-						PointF[] pointArray = unusedPoints.ToArray();
-						g.DrawPolygon(new Pen(c), pointArray);
-						g.FillPolygon(b, pointArray);
-						unusedPoints.Clear();
-					}
-				}
-
-
-				if (this.dragStartedInPlan.HasValue && this.dragEndedInPlan.HasValue) {
-					Matrix3D rotation = Transformation3D.Rotate(this.Product.AssociatedRoom.AssociatedPlan.Rotation * Math.PI / 180.0);
-					Point2D rotatedStart = rotation.Transform(this.dragStartedInPlan.Value);
-					Point2D rotatedEnd = rotation.Transform(this.dragEndedInPlan.Value);
-					Matrix3D invRotation = rotation.GetInverse();
-					Polygon2D selectedPoly = new Polygon2D();
-					selectedPoly.Add(this.dragStartedInPlan.Value);
-					selectedPoly.Add(invRotation.Transform(new Point2D(rotatedStart.X, rotatedEnd.Y)));
-					selectedPoly.Add(this.dragEndedInPlan.Value);
-					selectedPoly.Add(invRotation.Transform(new Point2D(rotatedEnd.X, rotatedStart.Y)));
-
-					PointF[] arr = new PointF[selectedPoly.Count];
-					int i = 0;
-					foreach (Point2D point in selectedPoly) {
-						Point2D tmp = additionalTransformation.TransformTo2D(new Point3D(point, 0));
-						arr[i] = new PointF((float)tmp.X, (float)tmp.Y);
-						i++;
-					}
-					g.DrawPolygon(new Pen(Color.Red), arr);
-				}
 			}		
-			*/
-
-
-			//DxfLine line1 = new DxfLine(new Point3D(1d, 1d, 1d), new Point3D(5d, 5d, 1d));
-			//line1.Color = Color.Green;
-			//line1.Layer = layer;
-			//model.Entities.Add(line1);
-
-
 		}
 
 		private void DrawDxfModule(KlimaFlaechenModul.ModulTypeEnum type, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, Point2D position, Matrix4D additionalTransformation, DxfModel model, DxfLayer layer, bool bottomUp, Color circuitColor) {
@@ -1608,7 +1526,7 @@ namespace Europlan.Common {
 						this.product.AssociatedRoom.AssociatedPlan.Measure == null) {
 				return;
 			}
-			/*
+			
 			additionalTransformation = additionalTransformation * Transformation4D.Translation(position.X, position.Y, 0);
 			additionalTransformation = additionalTransformation * Transformation4D.RotateZ(this.product.GraphConstruction.Rotation * Math.PI / 180.0);
 
@@ -1627,93 +1545,62 @@ namespace Europlan.Common {
 			Point2D directionBottom22D;
 			Point2D directionBottom32D;
 
-			if (this.product.AssociatedRoom.AssociatedPlan is CadPlan) {
-				if (bottomUp) {
-					directionTop12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionTop22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionTop32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, 0));
+			if (bottomUp) {
+				directionTop12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionTop22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionTop32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, 0));
 
-					directionBottom12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionBottom22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionBottom32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height - 0.2 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-				} else {
-					directionTop12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
-					directionTop22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
-					directionTop32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-
-					directionBottom12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.2 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionBottom22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.2 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionBottom32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-				}
+				directionBottom12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionBottom22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionBottom32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height - 0.2 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 			} else {
-				if (bottomUp) {
-					directionTop12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.20 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionTop22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.20 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionTop32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionTop12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
+				directionTop22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
+				directionTop32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 
-					directionBottom12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height));
-					directionBottom22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height));
-					directionBottom32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-				} else {
-					directionTop12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionTop22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionTop32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, 0.20 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-
-					directionBottom12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionBottom22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-					directionBottom32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height));
-				}
+				directionBottom12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.2 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionBottom22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.2 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionBottom32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 			}
 
-			PointF topLeft = new PointF((float)topLeft2D.X, (float)topLeft2D.Y);
-			PointF topRight = new PointF((float)topRight2D.X, (float)topRight2D.Y);
-			PointF bottomRight = new PointF((float)bottomRight2D.X, (float)bottomRight2D.Y);
-			PointF bottomLeft = new PointF((float)bottomLeft2D.X, (float)bottomLeft2D.Y);
-
-			PointF directionTop1 = new PointF((float)directionTop12D.X, (float)directionTop12D.Y);
-			PointF directionTop2 = new PointF((float)directionTop22D.X, (float)directionTop22D.Y);
-			PointF directionTop3 = new PointF((float)directionTop32D.X, (float)directionTop32D.Y);
-
-			PointF directionBottom1 = new PointF((float)directionBottom12D.X, (float)directionBottom12D.Y);
-			PointF directionBottom2 = new PointF((float)directionBottom22D.X, (float)directionBottom22D.Y);
-			PointF directionBottom3 = new PointF((float)directionBottom32D.X, (float)directionBottom32D.Y);
-
-			Color c;
-			if (highlight) {
-				int cr = Math.Min((int)(circuitColor.R * 1.5) + 32, 255);
-				int cg = Math.Min((int)(circuitColor.G * 1.5) + 32, 255);
-				int cb = Math.Min((int)(circuitColor.B * 1.5) + 32, 255);
-				c = Color.FromArgb(128, cr, cg, cb);
-			} else {
-				c = Color.FromArgb(128, circuitColor);
-			}
-
+			Color c = Color.FromArgb(128, circuitColor);
+			
 			Pen p = new Pen(c);
-			if (highlight) {
-				p.Width = 1.5f;
-			}
-			Brush b = new SolidBrush(Color.FromArgb(64, c));
+
+			Point2D[] polygon = null;
 			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
-				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
-				g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, topRight });
+				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
+				DxfLine line = new DxfLine(c, bottomLeft2D, topRight2D);
+				line.Layer = layer;
+				model.Entities.Add(line);
 			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
-				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
-				g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft, bottomRight });
+				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
+				DxfLine line = new DxfLine(c, topLeft2D, bottomRight2D);
+				line.Layer = layer;
+				model.Entities.Add(line);
 			} else {
-				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
-				g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft });
+				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
 			}
+
+			DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
+			polyLine.Closed = true;
+			polyLine.Layer = layer;
+			model.Entities.Add(polyLine);
 
 			if (orientation != null) {
-				if (highlight) {
-					g.FillPolygon(b, new PointF[] { directionTop1, directionTop2, directionTop3 });
-					g.FillPolygon(b, new PointF[] { directionBottom1, directionBottom2, directionBottom3 });
-				} else {
-					g.DrawPolygon(p, new PointF[] { directionTop1, directionTop2, directionTop3 });
-					g.DrawPolygon(p, new PointF[] { directionBottom1, directionBottom2, directionBottom3 });
-				}
+				polygon = new Point2D[] { directionTop12D, directionTop22D, directionTop32D };
+				polyLine = new DxfPolyline2D(c, polygon);
+				polyLine.Closed = true;
+				polyLine.Layer = layer;
+				model.Entities.Add(polyLine);
+				polygon = new Point2D[] { directionBottom12D, directionBottom22D, directionBottom32D };
+				polyLine = new DxfPolyline2D(c, polygon);
+				polyLine.Closed = true;
+				polyLine.Layer = layer;
+				model.Entities.Add(polyLine);
 			}
 
+			/*
 			GraphicsPath path = new GraphicsPath();
 
 			Matrix oldTransform = g.Transform;
@@ -1748,7 +1635,7 @@ namespace Europlan.Common {
 				g.DrawString(moduleString, new Font("Arial", 0.05f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), topLeft);
 				g.Transform = oldTransform;
 			}
-			*/
+			 */
 		}
 	}
 }
