@@ -1449,11 +1449,11 @@ namespace Europlan.Common {
 				//Matrix transform = g.Transform;
 				//transform.Multiply(new Matrix((float)additionalTransformation.M00, (float)additionalTransformation.M01, (float)additionalTransformation.M10, (float)additionalTransformation.M11, (float)additionalTransformation.M30, (float)additionalTransformation.M03));
 				//g.Transform = transform;
-				g.DrawString(moduleString, new Font("Arial", 0.05f * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), bottomLeft);
+				g.DrawString(moduleString, new Font("Arial", 5.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), bottomLeft);
 				g.Transform = oldTransform;
 			} else {
 				//g.DrawString(moduleString, new Font("Arial", (float)(0.05 * Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value)), new SolidBrush(Color.FromArgb(255, c)), topLeft);
-				g.DrawString(moduleString, new Font("Arial", 0.05f * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), topLeft);
+				g.DrawString(moduleString, new Font("Arial", 5.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), topLeft);
 				g.Transform = oldTransform;
 			}
 		}
