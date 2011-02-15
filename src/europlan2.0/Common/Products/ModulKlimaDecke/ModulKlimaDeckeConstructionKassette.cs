@@ -17,7 +17,7 @@ namespace Europlan.Common {
 		public enum RasterMass {
 			Raster_1050_450,
 			Raster_625,
-			Raster_600			
+			Raster_600
 		}
 
 		private double schienenBreiteX = 0.05; // meter
