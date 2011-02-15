@@ -638,8 +638,7 @@ namespace Europlan.Common {
 					boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
 					boundaryPath.PolylineData.Closed = true;
 					hatch.BoundaryPaths.Add(boundaryPath);
-				}
-												
+				}								
 			}
 
 			hatch.Pattern = new DxfPattern();

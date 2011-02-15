@@ -9,6 +9,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using WW.Cad.Model;
 using WW.Cad.Model.Tables;
+using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionKassette : ModulKlimaDeckeConstruction {
@@ -546,7 +547,7 @@ namespace Europlan.Common {
 
 			Color c = Color.Gray;
 			Pen p = new Pen(c);
-			Brush b = new HatchBrush(HatchStyle.DiagonalCross, c, Color.FromArgb(0, c));
+			Brush b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.DiagonalCross, c, Color.FromArgb(0, c));
 
 			//g.FillPath(new SolidBrush(Color.FromArgb(128, Color.Yellow)), roomPath);
 
@@ -591,7 +592,115 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintDxf(DxfModel model, DxfLayer layer, bool drawBeplankung) {
-			// TODO
+			if (this.Planner == null ||
+				this.Planner.Product == null ||
+				this.Planner.Product.AssociatedRoom == null ||
+				this.CeilingCoordinates == null ||
+				this.CeilingCoordinates.Count < 3 ||
+				this.Planner.Product.AssociatedRoom.AssociatedPlan == null ||
+				this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
+				return;
+			}
+			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+
+			Polygon2D clipRegion = new Polygon2D();
+			foreach (Point2D point in this.CeilingCoordinates) {
+				clipRegion.Add(point);
+			}
+			if (clipRegion.IsClockwise()) {
+				clipRegion.Reverse();
+			}
+
+			Color c = Color.Gray;
+
+			DxfHatch hatch = new DxfHatch();
+			hatch.Color = c;
+			DxfHatch hatchY = new DxfHatch();
+			hatchY.Color = c;
+
+			foreach (Polygon2D schiene in this.GetSchienen(false)) {
+				List<Point2D> dxfPoints = new List<Point2D>();
+				foreach (Point2D point in schiene) {
+					dxfPoints.Add(point);
+				}
+				Polygon2D clipped = new Polygon2D(dxfPoints);
+				if (clipped.IsClockwise()) {
+					clipped.Reverse();
+				}
+				List<Polygon2D> list1 = new List<Polygon2D>();
+				list1.Add(clipRegion);
+				List<Polygon2D> list2 = new List<Polygon2D>();
+				list2.Add(clipped);
+
+				IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+				foreach (Polygon2D polygon in clippedPolygons) {
+					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
+					polyLine.Closed = true;
+					polyLine.Layer = layer;
+					model.Entities.Add(polyLine);
+
+					DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+					boundaryPath.Type = BoundaryPathType.Polyline;
+					boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
+					boundaryPath.PolylineData.Closed = true;
+					hatch.BoundaryPaths.Add(boundaryPath);
+				}
+			}
+
+			foreach (Polygon2D schieneY in this.GetSchienenY(false)) {
+				List<Point2D> dxfPoints = new List<Point2D>();
+				foreach (Point2D point in schieneY) {
+					dxfPoints.Add(point);
+				}
+				Polygon2D clipped = new Polygon2D(dxfPoints);
+				if (clipped.IsClockwise()) {
+					clipped.Reverse();
+				}
+				List<Polygon2D> list1 = new List<Polygon2D>();
+				list1.Add(clipRegion);
+				List<Polygon2D> list2 = new List<Polygon2D>();
+				list2.Add(clipped);
+
+				IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+				foreach (Polygon2D polygon in clippedPolygons) {
+					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
+					polyLine.Closed = true;
+					polyLine.Layer = layer;
+					model.Entities.Add(polyLine);
+
+					DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+					boundaryPath.Type = BoundaryPathType.Polyline;
+					boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
+					boundaryPath.PolylineData.Closed = true;
+					hatchY.BoundaryPaths.Add(boundaryPath);
+				}
+			}
+
+			hatch.Pattern = new DxfPattern();
+			DxfPattern.Line patternLine = new DxfPattern.Line();
+			patternLine.Angle = Math.PI / 4d;
+			patternLine.Offset = new Vector2D(0.02 * measure, -0.02d * measure);
+			hatch.Pattern.Lines.Add(patternLine);
+			patternLine = new DxfPattern.Line();
+			patternLine.Angle = 3d * Math.PI / 4d;
+			patternLine.Offset = new Vector2D(0.02 * measure, 0.02d * measure);
+			hatch.Pattern.Lines.Add(patternLine);
+
+			hatch.Layer = layer;
+			model.Entities.Add(hatch);
+
+			hatchY.Pattern = new DxfPattern();
+			patternLine = new DxfPattern.Line();
+			patternLine.Angle = Math.PI / 4d;
+			patternLine.Offset = new Vector2D(0.02 * measure, -0.02d * measure);
+			hatchY.Pattern.Lines.Add(patternLine);
+			patternLine = new DxfPattern.Line();
+			patternLine.Angle = 3d * Math.PI / 4d;
+			patternLine.Offset = new Vector2D(0.02 * measure, 0.02d * measure);
+			hatchY.Pattern.Lines.Add(patternLine);
+
+			hatchY.Layer = layer;
+			model.Entities.Add(hatchY);
 		}
 
 		public override bool HitTest(Point2D planPoint, Point pointInControl) {
