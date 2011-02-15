@@ -13,6 +13,13 @@ using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionKassette : ModulKlimaDeckeConstruction {
+
+		public enum RasterMass {
+			Raster_1050_450,
+			Raster_625,
+			Raster_600			
+		}
+
 		private double schienenBreiteX = 0.05; // meter
 		private double schienenBreiteY = 0.05 - 0.0001; // meter
 		private double schienenAbstandX = 0.4; // meter
