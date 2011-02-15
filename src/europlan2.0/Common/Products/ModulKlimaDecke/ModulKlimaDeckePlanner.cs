@@ -294,35 +294,15 @@ namespace Europlan.Common {
 
 			bool added = false;
 			int count = 0;
+			// TODO enable moduleHeightTolerance to avoid problems with rounding
+			//double moduleHeightTolerance = 0.0001 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			double moduleHeightTolerance = 0;
+
 			if (alignRectangle) {
 				// rectangle aligned to schienen
-				/*Point2D p1 = rotation.Transform(this.layoutAddArea[0]);
-				Point2D p2 = rotation.Transform(this.layoutAddArea[1]);
-				Point2D p3 = rotation.Transform(this.layoutAddArea[2]);
-				Point2D p4 = rotation.Transform(this.layoutAddArea[3]);
-				double t;
-				double l;
-				double r;
-				double b;
-				if (p1.Y < p2.Y) {
-					t = p1.Y;
-					b = p2.Y;
-				} else {
-					t = p2.Y;
-					b = p1.Y;
-				}
-				if (p1.X < p3.X) {
-					l = p1.X;
-					r = p3.X;
-				} else {
-					l = p3.X;
-					r = p1.X;
-				}*/
 				Segment2D topSeg = new Segment2D(rotation.Transform(this.layoutAddArea[0]), rotation.Transform(this.layoutAddArea[3]));
-				//Segment2D topSeg = new Segment2D(new Point2D(l, t), new Point2D(r, t));
 				double start = topSeg.Start.Y;
 				double end = rotation.Transform(this.layoutAddArea[1]).Y;
-				//double end = b;
 				double step = KlimaFlaechenModul.GetModuleHeight(this.moduleTypeToAdd) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 				bool left;
 				int newRows = 0;
@@ -336,7 +316,7 @@ namespace Europlan.Common {
 					if (Line2D.Intersects(new Line2D(borderLeftOrigin, new Vector2D(0, 1)), topSeg) && Line2D.Intersects(new Line2D(borderRighOrigin, new Vector2D(0, 1)), topSeg)) {
 						if (this.layoutAddAreaBottomUp) {
 							for (double y = start - step; y > end; y -= step) {
-								doIt(ref y, start, end, step, ref left, invRotation, lane, borderLeftOrigin, out added);
+								doIt(ref y, start, end, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added);
 								if (added) {
 									if (laneCount == 0) {
 										newRows++;
@@ -350,7 +330,7 @@ namespace Europlan.Common {
 							}
 						} else {
 							for (double y = start; y < end - step; y += step) {
-								doIt(ref y, start, end, step, ref left, invRotation, lane, borderLeftOrigin, out added);
+								doIt(ref y, start, end, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added);
 								if (added) {
 									if (laneCount == 0) {
 										newRows++;
@@ -396,16 +376,16 @@ namespace Europlan.Common {
 							if (top > bottom) {
 								continue;
 							}
-							if (this.layoutAddAreaBottomUp /*bottomUpLeft && bottomUpRight*/) {
+							if (this.layoutAddAreaBottomUp) {
 								for (double y = bottom - step; y > top; y -= step) {
-									doIt(ref y, top, bottom, step, ref left, invRotation, lane, borderLeftOrigin, out added);
+									doIt(ref y, top, bottom, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added);
 									if (added) {
 										count++;
 									}
 								}
 							} else {
 								for (double y = top; y < bottom - step; y += step) {
-									doIt(ref y, top, bottom, step, ref left, invRotation, lane, borderLeftOrigin, out added);
+									doIt(ref y, top, bottom, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added);
 									if (added) {
 										count++;
 									}
