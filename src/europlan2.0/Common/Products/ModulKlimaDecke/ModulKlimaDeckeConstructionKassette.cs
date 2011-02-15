@@ -20,10 +20,11 @@ namespace Europlan.Common {
 			Raster_600
 		}
 
-		private double schienenBreiteX = 0.05; // meter
+		/*private double schienenBreiteX = 0.05; // meter
 		private double schienenBreiteY = 0.05 - 0.0001; // meter
 		private double schienenAbstandX = 0.4; // meter
-		private double schienenAbstandY = 1.0 + 0.0001; // meter
+		private double schienenAbstandY = 1.0 + 0.0001; // meter*/
+		private RasterMass rasterMass = RasterMass.Raster_1050_450;
 		private double offsetX = 0; // meter
 		private double offsetY = 0; // meter
 		protected List<Polygon2D> schienenY = new List<Polygon2D>();
@@ -78,8 +79,8 @@ namespace Europlan.Common {
 			this.possibleLanes.Clear();
 
 			double measure = this.Planner.ConnectedPlanPanel.Plan.Measure.Value;
-			double increment = (schienenBreiteX + schienenAbstandX) * measure;
-			double curPos = (minX + maxX - schienenBreiteX * measure) / 2.0 + (offsetX * measure);
+			double increment = (SchienenBreiteX + SchienenAbstandX) * measure;
+			double curPos = (minX + maxX - SchienenBreiteX * measure) / 2.0 + (offsetX * measure);
 			while (curPos > minX) {
 				curPos -= increment;
 			}
@@ -87,23 +88,23 @@ namespace Europlan.Common {
 			while (curPos < maxX) {
 				Polygon2D schiene = new Polygon2D();
 				schiene.Add(matrix.Transform(new Point2D(curPos, minY)));
-				schiene.Add(matrix.Transform(new Point2D(curPos + schienenBreiteX * measure, minY)));
-				schiene.Add(matrix.Transform(new Point2D(curPos + schienenBreiteX * measure, maxY)));
+				schiene.Add(matrix.Transform(new Point2D(curPos + SchienenBreiteX * measure, minY)));
+				schiene.Add(matrix.Transform(new Point2D(curPos + SchienenBreiteX * measure, maxY)));
 				schiene.Add(matrix.Transform(new Point2D(curPos, maxY)));
 				this.schienen.Add(schiene);
 				curPos += increment;
 			}
 
-			increment = (schienenBreiteY + schienenAbstandY) * measure;
-			curPos = (minY + maxY - schienenBreiteY * measure) / 2.0 + (offsetY * measure);
+			increment = (SchienenBreiteY + SchienenAbstandY) * measure;
+			curPos = (minY + maxY - SchienenBreiteY * measure) / 2.0 + (offsetY * measure);
 			while (curPos > minY) {
 				curPos -= increment;
 			}
 			while (curPos < maxY) {
 				Polygon2D schiene = new Polygon2D();
 				schiene.Add(matrix.Transform(new Point2D(minX, curPos)));
-				schiene.Add(matrix.Transform(new Point2D(minX, curPos + schienenBreiteY * measure)));
-				schiene.Add(matrix.Transform(new Point2D(maxX, curPos + schienenBreiteY * measure)));
+				schiene.Add(matrix.Transform(new Point2D(minX, curPos + SchienenBreiteY * measure)));
+				schiene.Add(matrix.Transform(new Point2D(maxX, curPos + SchienenBreiteY * measure)));
 				schiene.Add(matrix.Transform(new Point2D(maxX, curPos)));
 				this.schienenY.Add(schiene);
 				curPos += increment;
@@ -388,37 +389,93 @@ namespace Europlan.Common {
 			return max;
 		}
 
-		[XmlIgnore]
-		public double SchienenBreiteX {
-			get { return this.schienenBreiteX; }
+		public RasterMass Raster {
+			get { return this.rasterMass; }
 			set {
-				this.schienenBreiteX = value;
+				this.rasterMass = value;
 				this.RecalculateSchienen();
 			}
 		}
 
+		/*private double schienenBreiteX = 0.05; // meter
+private double schienenBreiteY = 0.05 - 0.0001; // meter
+private double schienenAbstandX = 0.4; // meter
+private double schienenAbstandY = 1.0 + 0.0001; // meter*/
+
+		[XmlIgnore]
+		public double SchienenBreiteX {
+			get {
+				switch (this.Raster) {
+					case RasterMass.Raster_625:
+						return 0.025; // meter
+						break;
+
+					case RasterMass.Raster_600:
+						return 0; // meter
+						break;
+
+					case RasterMass.Raster_1050_450:
+					default:
+						return 0.05; // meter
+						break;
+				}
+			}
+		}
+
+		[XmlIgnore]
 		public double SchienenAbstandX {
-			get { return this.schienenAbstandX; }
-			set {
-				this.schienenAbstandX = value;
-				this.RecalculateSchienen();
+			get {
+				switch (this.Raster) {
+					case RasterMass.Raster_625:
+					case RasterMass.Raster_600:
+						return 0.6; // meter
+						break;
+
+					case RasterMass.Raster_1050_450:
+					default:
+						return 0.4; // meter
+						break;
+				}
 			}
 		}
 
 		[XmlIgnore]
 		public double SchienenBreiteY {
-			get { return this.schienenBreiteY; }
-			set {
-				this.schienenBreiteY = value;
-				this.RecalculateSchienen();
+			get {
+				switch (this.Raster) {
+					case RasterMass.Raster_625:
+						return 0.025 - 0.0001; // meter
+						break;
+
+					case RasterMass.Raster_600:
+						return 0;
+						break;
+
+					case RasterMass.Raster_1050_450:
+					default:
+						return 0.05 - 0.0001; // meter
+						break;
+				}
 			}
 		}
 
+		[XmlIgnore]
 		public double SchienenAbstandY {
-			get { return this.schienenAbstandY; }
-			set {
-				this.schienenAbstandY = value;
-				this.RecalculateSchienen();
+			get {
+				switch (this.Raster) {
+					case RasterMass.Raster_625:
+						return 0.6 + 0.0001; // meter
+						break;
+
+					case RasterMass.Raster_600:
+						return 0.6; // meter
+						break;
+
+					case RasterMass.Raster_1050_450:
+					default:
+						return 1.0 + 0.0001; // meter
+						break;
+				}
 			}
 		}
 
@@ -426,7 +483,7 @@ namespace Europlan.Common {
 			get { return this.offsetX; }
 			set {
 				this.offsetX = value;
-				double increment = this.schienenBreiteX + this.schienenAbstandX;
+				double increment = this.SchienenBreiteX + this.SchienenAbstandX;
 				while (this.offsetX >= increment) {
 					this.offsetX -= increment;
 				}
@@ -441,7 +498,7 @@ namespace Europlan.Common {
 			get { return this.offsetY; }
 			set {
 				this.offsetY = value;
-				double increment = this.schienenBreiteY + this.schienenAbstandY;
+				double increment = this.SchienenBreiteY + this.SchienenAbstandY;
 				while (this.offsetY >= increment) {
 					this.offsetY -= increment;
 				}

@@ -54,15 +54,13 @@ namespace Europlan.Common.Products {
 
 			this.modulKlimaBodenPlanner.Product = product;
 			if (product.GraphConstruction == null) {
-				product.GraphConstruction = new ModulKlimaDeckeConstructionGlatt();
-				product.GraphConstruction.Planner = this.modulKlimaBodenPlanner;
-			}
-			if (product.GraphConstruction == null) {
 				product.GraphConstruction = (constrType == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.KASSETTENDECKE ? (ModulKlimaDeckeConstruction)new ModulKlimaDeckeConstructionKassette() : (ModulKlimaDeckeConstruction)new ModulKlimaDeckeConstructionGlatt());
+				product.GraphConstruction.Planner = this.modulKlimaBodenPlanner;
 			}
 			this.glatt = product.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
 			this.akustik = product.GraphConstruction as ModulKlimaDeckeConstructionAkustik;
 			this.kassette = product.GraphConstruction as ModulKlimaDeckeConstructionKassette;
+
 			if (this.glatt == null) {
 				this.glatt = new ModulKlimaDeckeConstructionGlatt();
 				this.glatt.Planner = this.modulKlimaBodenPlanner;
