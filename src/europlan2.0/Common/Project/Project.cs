@@ -845,9 +845,11 @@ namespace Europlan.Common {
 			string destinationDir = Path.GetDirectoryName(destination);
 			string destinationSubDir = Path.GetFileNameWithoutExtension(destination) + "_plans";
 			string to = Path.Combine(destinationDir, destinationSubDir);
-			CopyDirectory(new DirectoryInfo(from), new DirectoryInfo(to));
-			foreach (Plan plan in Project.Instance.ImportedPlans) {
-				plan.RelativeFileName = plan.RelativeFileName.Replace(sourceSubDir, destinationSubDir);
+			if (Directory.Exists(from)) {
+				CopyDirectory(new DirectoryInfo(from), new DirectoryInfo(to));
+				foreach (Plan plan in Project.Instance.ImportedPlans) {
+					plan.RelativeFileName = plan.RelativeFileName.Replace(sourceSubDir, destinationSubDir);
+				}
 			}
 		}
 

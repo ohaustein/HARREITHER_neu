@@ -1383,10 +1383,28 @@ R
     <value>120/30</value>
   </data>
   <data name="KlimaFlaechenModul_60_60" xml:space="preserve">
-    <value>Modul 60/60</value>
+    <value>Modul 60/60 Typ A</value>
   </data>
   <data name="KlimaFlaechenModul_60_60_Short" xml:space="preserve">
-    <value>60/60</value>
+    <value>60/60 A</value>
+  </data>
+  <data name="KlimaFlaechenModul_60_60B" xml:space="preserve">
+    <value>Modul 60/60 Typ B</value>
+  </data>
+  <data name="KlimaFlaechenModul_60_60B_Short" xml:space="preserve">
+    <value>60/60 B</value>
+  </data>
+  <data name="KlimaFlaechenModul_60_60C" xml:space="preserve">
+    <value>Modul 60/60 Typ C</value>
+  </data>
+  <data name="KlimaFlaechenModul_60_60C_Short" xml:space="preserve">
+    <value>60/60 C</value>
+  </data>
+  <data name="KlimaFlaechenModul_60_60D" xml:space="preserve">
+    <value>Modul 60/60 Typ D</value>
+  </data>
+  <data name="KlimaFlaechenModul_60_60D_Short" xml:space="preserve">
+    <value>60/60 D</value>
   </data>
   <data name="KlimaFlaechenModul_80_30" xml:space="preserve">
     <value>Modul 80/30</value>
@@ -4704,6 +4722,9 @@ fläche
   </data>
   <data name="SystemParametersPanel_PlaeneEinheitMM" xml:space="preserve">
     <value>Millimeter</value>
+  </data>
+  <data name="SystemParametersPanel_RasterMass" xml:space="preserve">
+    <value>Standardwert Rastermaß:</value>
   </data>
   <data name="SystemParametersPanel_Rohrlaenge" xml:space="preserve">
     <value>Max. Rohrlänge je Heizkreis:</value>

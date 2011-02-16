@@ -65,6 +65,10 @@ namespace Europlan.Common.Products {
 			this.lblRandfriesUnit = new System.Windows.Forms.Label();
 			this.numRandfries = new Europlan.Common.NumericBox();
 			this.lblRandfries = new System.Windows.Forms.Label();
+			this.grpRasterMass = new System.Windows.Forms.GroupBox();
+			this.rb600 = new System.Windows.Forms.RadioButton();
+			this.rb625 = new System.Windows.Forms.RadioButton();
+			this.rb1050 = new System.Windows.Forms.RadioButton();
 			this.pageLayout = new System.Windows.Forms.TabPage();
 			this.btnColor = new System.Windows.Forms.Button();
 			this.lblColor = new System.Windows.Forms.Label();
@@ -142,6 +146,7 @@ namespace Europlan.Common.Products {
 			this.grpModulSerie.SuspendLayout();
 			this.grpCeilingContruction.SuspendLayout();
 			this.grpConstructionParameter.SuspendLayout();
+			this.grpRasterMass.SuspendLayout();
 			this.pageLayout.SuspendLayout();
 			this.grpNewModules.SuspendLayout();
 			this.grpAutomatic.SuspendLayout();
@@ -286,9 +291,10 @@ namespace Europlan.Common.Products {
 			// pageConstruction
 			// 
 			this.pageConstruction.Controls.Add(this.grpBeplankung);
-			this.pageConstruction.Controls.Add(this.grpModulSerie);
 			this.pageConstruction.Controls.Add(this.grpCeilingContruction);
 			this.pageConstruction.Controls.Add(this.grpConstructionParameter);
+			this.pageConstruction.Controls.Add(this.grpModulSerie);
+			this.pageConstruction.Controls.Add(this.grpRasterMass);
 			this.pageConstruction.Location = new System.Drawing.Point(4, 22);
 			this.pageConstruction.Name = "pageConstruction";
 			this.pageConstruction.Padding = new System.Windows.Forms.Padding(3);
@@ -667,6 +673,58 @@ namespace Europlan.Common.Products {
 			this.lblRandfries.Size = new System.Drawing.Size(55, 13);
 			this.lblRandfries.TabIndex = 4;
 			this.lblRandfries.Text = "Randfries:";
+			// 
+			// grpRasterMass
+			// 
+			this.grpRasterMass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.grpRasterMass.Controls.Add(this.rb600);
+			this.grpRasterMass.Controls.Add(this.rb625);
+			this.grpRasterMass.Controls.Add(this.rb1050);
+			this.grpRasterMass.Location = new System.Drawing.Point(423, 6);
+			this.grpRasterMass.Name = "grpRasterMass";
+			this.grpRasterMass.Size = new System.Drawing.Size(181, 169);
+			this.grpRasterMass.TabIndex = 3;
+			this.grpRasterMass.TabStop = false;
+			this.grpRasterMass.Text = "Rastermaﬂ";
+			this.grpRasterMass.Visible = false;
+			// 
+			// rb600
+			// 
+			this.rb600.AutoSize = true;
+			this.rb600.Location = new System.Drawing.Point(9, 65);
+			this.rb600.Name = "rb600";
+			this.rb600.Size = new System.Drawing.Size(54, 17);
+			this.rb600.TabIndex = 3;
+			this.rb600.TabStop = true;
+			this.rb600.Text = "60/60";
+			this.rb600.UseVisualStyleBackColor = true;
+			this.rb600.CheckedChanged += new System.EventHandler(this.rbRasterMass_CheckedChanged);
+			// 
+			// rb625
+			// 
+			this.rb625.AutoSize = true;
+			this.rb625.Location = new System.Drawing.Point(9, 42);
+			this.rb625.Name = "rb625";
+			this.rb625.Size = new System.Drawing.Size(72, 17);
+			this.rb625.TabIndex = 2;
+			this.rb625.TabStop = true;
+			this.rb625.Text = "62,5/62,5";
+			this.rb625.UseVisualStyleBackColor = true;
+			this.rb625.CheckedChanged += new System.EventHandler(this.rbRasterMass_CheckedChanged);
+			// 
+			// rb1050
+			// 
+			this.rb1050.AutoSize = true;
+			this.rb1050.Checked = true;
+			this.rb1050.Location = new System.Drawing.Point(9, 19);
+			this.rb1050.Name = "rb1050";
+			this.rb1050.Size = new System.Drawing.Size(60, 17);
+			this.rb1050.TabIndex = 1;
+			this.rb1050.TabStop = true;
+			this.rb1050.Text = "105/45";
+			this.rb1050.UseVisualStyleBackColor = true;
+			this.rb1050.CheckedChanged += new System.EventHandler(this.rbRasterMass_CheckedChanged);
 			// 
 			// pageLayout
 			// 
@@ -1416,6 +1474,8 @@ namespace Europlan.Common.Products {
 			this.grpCeilingContruction.PerformLayout();
 			this.grpConstructionParameter.ResumeLayout(false);
 			this.grpConstructionParameter.PerformLayout();
+			this.grpRasterMass.ResumeLayout(false);
+			this.grpRasterMass.PerformLayout();
 			this.pageLayout.ResumeLayout(false);
 			this.pageLayout.PerformLayout();
 			this.grpNewModules.ResumeLayout(false);
@@ -1540,5 +1600,9 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.ColorDialog colorDialog;
 		private System.Windows.Forms.ToolStripButton btnShowBeplankung;
 		private System.Windows.Forms.Button btnInvertDirection;
+		private System.Windows.Forms.GroupBox grpRasterMass;
+		private System.Windows.Forms.RadioButton rb600;
+		private System.Windows.Forms.RadioButton rb625;
+		private System.Windows.Forms.RadioButton rb1050;
 	}
 }

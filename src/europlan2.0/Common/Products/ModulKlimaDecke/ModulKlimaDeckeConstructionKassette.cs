@@ -20,16 +20,13 @@ namespace Europlan.Common {
 			Raster_600
 		}
 
-		/*private double schienenBreiteX = 0.05; // meter
-		private double schienenBreiteY = 0.05 - 0.0001; // meter
-		private double schienenAbstandX = 0.4; // meter
-		private double schienenAbstandY = 1.0 + 0.0001; // meter*/
 		private RasterMass rasterMass = RasterMass.Raster_1050_450;
 		private double offsetX = 0; // meter
 		private double offsetY = 0; // meter
 		protected List<Polygon2D> schienenY = new List<Polygon2D>();
 
 		public ModulKlimaDeckeConstructionKassette() {
+			this.rasterMass = (RasterMass)ModulKlimaDeckeProduct.ConfigModulCeilingConstructionKassetteRasterMass;
 		}
 
 		[XmlIgnore]
@@ -397,11 +394,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		/*private double schienenBreiteX = 0.05; // meter
-private double schienenBreiteY = 0.05 - 0.0001; // meter
-private double schienenAbstandX = 0.4; // meter
-private double schienenAbstandY = 1.0 + 0.0001; // meter*/
-
 		[XmlIgnore]
 		public double SchienenBreiteX {
 			get {
@@ -444,7 +436,7 @@ private double schienenAbstandY = 1.0 + 0.0001; // meter*/
 			get {
 				switch (this.Raster) {
 					case RasterMass.Raster_625:
-						return 0.025 - 0.0001; // meter
+						return 0.025; // meter
 						break;
 
 					case RasterMass.Raster_600:
@@ -453,7 +445,7 @@ private double schienenAbstandY = 1.0 + 0.0001; // meter*/
 
 					case RasterMass.Raster_1050_450:
 					default:
-						return 0.05 - 0.0001; // meter
+						return 0.05; // meter
 						break;
 				}
 			}
@@ -464,7 +456,7 @@ private double schienenAbstandY = 1.0 + 0.0001; // meter*/
 			get {
 				switch (this.Raster) {
 					case RasterMass.Raster_625:
-						return 0.6 + 0.0001; // meter
+						return 0.6; // meter
 						break;
 
 					case RasterMass.Raster_600:
@@ -473,7 +465,7 @@ private double schienenAbstandY = 1.0 + 0.0001; // meter*/
 
 					case RasterMass.Raster_1050_450:
 					default:
-						return 1.0 + 0.0001; // meter
+						return 1.0; // meter
 						break;
 				}
 			}
@@ -621,7 +613,7 @@ private double schienenAbstandY = 1.0 + 0.0001; // meter*/
 				foreach (Point2D point in schiene) {
 					poly[i++] = new PointF((float)point.X, (float)point.Y);
 				}
-				//g.DrawPolygon(p, poly);
+				g.DrawPolygon(p, poly);
 				//g.FillPolygon(b, poly);
 				g.FillPolygon(new SolidBrush(Color.FromArgb(127, Color.Gray)), poly);
 			}

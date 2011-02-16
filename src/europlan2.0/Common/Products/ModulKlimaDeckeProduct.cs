@@ -107,6 +107,7 @@ namespace Europlan.Common {
 		private static double spreizungKuehlMin = 2;
 		private static double spreizungKuehlMax = 5;
 		private static ModulCeilingConstructionEnum construction = ModulCeilingConstructionEnum.C_PROFIL;
+		private static ModulKlimaDeckeConstructionKassette.RasterMass rasterMass = ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450;
 
 		private static double maxCeilingTempHeat = 29.0;
 
@@ -368,6 +369,12 @@ namespace Europlan.Common {
 		public static int ConfigModulCeilingConstruction {
 			get { return (int)ModulKlimaDeckeProduct.construction; }
 			set { ModulKlimaDeckeProduct.construction = (ModulCeilingConstructionEnum)value; }
+		}
+
+		[IntProductParameter(0)]
+		public static int ConfigModulCeilingConstructionKassetteRasterMass {
+			get { return (int)ModulKlimaDeckeProduct.rasterMass; }
+			set { ModulKlimaDeckeProduct.rasterMass = (ModulKlimaDeckeConstructionKassette.RasterMass)value; }
 		}
 
 		[DoubleProductParameter(1000)]
@@ -1086,7 +1093,11 @@ namespace Europlan.Common {
 							Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
 							nrOfElements++;
 							modulArea += modul.GetHeatArea(false);
-							if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) {
+							if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 ||
+								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B ||
+								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C ||
+								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D || 
+								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) {
 								nrOfOtherElements++;
 							}
 						}

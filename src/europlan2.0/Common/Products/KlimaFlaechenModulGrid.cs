@@ -70,13 +70,20 @@ namespace Europlan.Common {
 				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30);
 				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
 				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60);
+				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B);
+				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C);
+				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D);
 				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
 			}
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e) {
 			KlimaFlaechenModul modul = new KlimaFlaechenModul();
-			modul.ModulType = (KlimaFlaechenModul.ModulTypeEnum)modulTypeDataGridViewTextBoxColumn.Items[0];
+			if (modules.Count > 0) {
+				modul.ModulType = modules[modules.Count - 1].ModulType;
+			} else {
+				modul.ModulType = (KlimaFlaechenModul.ModulTypeEnum)modulTypeDataGridViewTextBoxColumn.Items[0];
+			}
 			if (modules.Count > 0) {
 				KlimaFlaechenModul m = modules[modules.Count - 1];
 				if (m.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {

@@ -189,6 +189,7 @@ namespace Europlan.Common {
 			this.lblModulDeckeSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:";
 			this.lblModulDeckeSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:";
 			this.lblModulDeckeSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min.";
+			this.lblModulDeckeRasterMass.Text = EuroplanRes.SystemParametersPanel_RasterMass; //"Standardwert Rastermaß:";
 
 			this.tabGeneral.Text = EuroplanRes.SystemParametersPanel_Allgemein; //"Allgemein";
 			this.lblGeneralAlphaWandHeat.Text = EuroplanRes.SystemParametersPanel_AlphaWand; //"Alpha Wand:";
@@ -559,6 +560,13 @@ namespace Europlan.Common {
 				foreach (ModulKlimaDeckeProduct.ModulCeilingConstructionEnum item in Enum.GetValues(typeof(ModulKlimaDeckeProduct.ModulCeilingConstructionEnum))) {
 					this.cmbModulDeckeConstruction.Items.Add(item);
 				}
+
+				cmbModulDeckeRasterMass.Items.Clear();
+				cmbModulDeckeRasterMass.Items.Add("105/45");
+				cmbModulDeckeRasterMass.Items.Add("62,5/62,5");
+				cmbModulDeckeRasterMass.Items.Add("60/60");
+				cmbModulDeckeRasterMass.SelectedIndex = ModulKlimaDeckeProduct.ConfigModulCeilingConstructionKassetteRasterMass;
+
 				numModulDeckePressurePa.Value = ModulKlimaDeckeProduct.ConfigMaxPressureLost;
 				numModulDeckeDurchfluss.Value = ModulKlimaDeckeProduct.ConfigMaxDurchfluss;
 				numModulDeckeMaxModulesInRow.Value = ModulKlimaDeckeProduct.ConfigMaxModulesInRow;
@@ -1057,10 +1065,38 @@ namespace Europlan.Common {
 						return;
 					}
 				}
+				ModulKlimaDeckeProduct.ConfigModulCeilingConstruction = (int)cmbModulDeckeConstruction.SelectedItem;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						foreach (PlannedProduct pp in room.PlannedProducts) {
+							if (pp.Product is ModulKlimaDeckeProduct) {
+								if (pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
+									pp.Product.GraphicalMode = false;
+									(pp.Product as ModulKlimaDeckeProduct).GraphConstruction = null;
+								}
+							}
+						}
+					}
+				}
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
+				}
 			}
-			ModulKlimaDeckeProduct.ConfigModulCeilingConstruction = (int)cmbModulDeckeConstruction.SelectedItem;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (ModulKlimaDeckeProduct.ConfigModulCeilingConstruction == (int)ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.KASSETTENDECKE) {
+				this.lblModulDeckeRasterMass.Visible = true;
+				this.cmbModulDeckeRasterMass.Visible = true;
+			} else {
+				this.lblModulDeckeRasterMass.Visible = false;
+				this.cmbModulDeckeRasterMass.Visible = false;
+			}
+		}
+
+		private void cmbModulDeckeRasterMass_SelectedIndexChanged(object sender, EventArgs e) {
+			if (!updateOngoing) {
+				ModulKlimaDeckeProduct.ConfigModulCeilingConstructionKassetteRasterMass = cmbModulDeckeRasterMass.SelectedIndex;
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
+				}
 			}
 		}
 
@@ -1217,5 +1253,6 @@ namespace Europlan.Common {
 			Configuration.UserTemplate.AddProductParameter<HithermCompactProduct>("ConfigUsePlus", usePlus);
 			this.InitializeHithermCompactValues();
 		}
+
 	}
 }

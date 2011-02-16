@@ -228,6 +228,8 @@ namespace Europlan.Common {
 			this.numModulDeckeSpreizungHeizMin = new Europlan.Common.NumericBox();
 			this.numModulDeckePressureMbar = new Europlan.Common.NumericBox();
 			this.numModulDeckeDurchfluss = new Europlan.Common.NumericBox();
+			this.lblModulDeckeRasterMass = new System.Windows.Forms.Label();
+			this.cmbModulDeckeRasterMass = new System.Windows.Forms.ComboBox();
 			this.tabGeneral = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.lblGeneralAlphaWandHeat = new System.Windows.Forms.Label();
@@ -3405,6 +3407,8 @@ namespace Europlan.Common {
 			this.layoutModulDecke.Controls.Add(this.numModulDeckeSpreizungHeizMin, 2, 5);
 			this.layoutModulDecke.Controls.Add(this.numModulDeckePressureMbar, 5, 3);
 			this.layoutModulDecke.Controls.Add(this.numModulDeckeDurchfluss, 2, 4);
+			this.layoutModulDecke.Controls.Add(this.lblModulDeckeRasterMass, 0, 10);
+			this.layoutModulDecke.Controls.Add(this.cmbModulDeckeRasterMass, 2, 10);
 			this.layoutModulDecke.Location = new System.Drawing.Point(3, 5);
 			this.layoutModulDecke.Name = "layoutModulDecke";
 			this.layoutModulDecke.RowCount = 12;
@@ -4069,6 +4073,31 @@ namespace Europlan.Common {
             0,
             0});
 			this.numModulDeckeDurchfluss.ValueChanged += new System.EventHandler(this.numModulDeckeDurchfluss_ValueChanged);
+			// 
+			// lblModulDeckeRasterMass
+			// 
+			this.lblModulDeckeRasterMass.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblModulDeckeRasterMass.Location = new System.Drawing.Point(3, 230);
+			this.lblModulDeckeRasterMass.Name = "lblModulDeckeRasterMass";
+			this.lblModulDeckeRasterMass.Size = new System.Drawing.Size(259, 23);
+			this.lblModulDeckeRasterMass.TabIndex = 78;
+			this.lblModulDeckeRasterMass.Text = "Standardwert Rastermaﬂ:";
+			this.lblModulDeckeRasterMass.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.lblModulDeckeRasterMass.Visible = false;
+			// 
+			// cmbModulDeckeRasterMass
+			// 
+			this.layoutModulDecke.SetColumnSpan(this.cmbModulDeckeRasterMass, 2);
+			this.cmbModulDeckeRasterMass.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cmbModulDeckeRasterMass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbModulDeckeRasterMass.FormattingEnabled = true;
+			this.cmbModulDeckeRasterMass.Location = new System.Drawing.Point(308, 231);
+			this.cmbModulDeckeRasterMass.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+			this.cmbModulDeckeRasterMass.Name = "cmbModulDeckeRasterMass";
+			this.cmbModulDeckeRasterMass.Size = new System.Drawing.Size(109, 21);
+			this.cmbModulDeckeRasterMass.TabIndex = 79;
+			this.cmbModulDeckeRasterMass.Visible = false;
+			this.cmbModulDeckeRasterMass.SelectedIndexChanged += new System.EventHandler(this.cmbModulDeckeRasterMass_SelectedIndexChanged);
 			// 
 			// tabGeneral
 			// 
@@ -5890,5 +5919,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label26;
 		private System.Windows.Forms.Label label27;
 		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.Label lblModulDeckeRasterMass;
+		private System.Windows.Forms.ComboBox cmbModulDeckeRasterMass;
 	}
 }

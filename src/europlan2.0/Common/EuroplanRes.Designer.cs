@@ -3750,7 +3750,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modul 60/60.
+        ///   Looks up a localized string similar to Modul 60/60 Typ A.
         /// </summary>
         internal static string KlimaFlaechenModul_60_60 {
             get {
@@ -3759,11 +3759,65 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 60/60.
+        ///   Looks up a localized string similar to 60/60 A.
         /// </summary>
         internal static string KlimaFlaechenModul_60_60_Short {
             get {
                 return ResourceManager.GetString("KlimaFlaechenModul_60_60_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modul 60/60 Typ B.
+        /// </summary>
+        internal static string KlimaFlaechenModul_60_60B {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_60_60B", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 60/60 B.
+        /// </summary>
+        internal static string KlimaFlaechenModul_60_60B_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_60_60B_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modul 60/60 Typ C.
+        /// </summary>
+        internal static string KlimaFlaechenModul_60_60C {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_60_60C", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 60/60 C.
+        /// </summary>
+        internal static string KlimaFlaechenModul_60_60C_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_60_60C_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modul 60/60 Typ D.
+        /// </summary>
+        internal static string KlimaFlaechenModul_60_60D {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_60_60D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 60/60 D.
+        /// </summary>
+        internal static string KlimaFlaechenModul_60_60D_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_60_60D_Short", resourceCulture);
             }
         }
         
@@ -13267,6 +13321,15 @@ namespace Europlan.Common {
         internal static string SystemParametersPanel_PlaeneEinheitMM {
             get {
                 return ResourceManager.GetString("SystemParametersPanel_PlaeneEinheitMM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standardwert Rastermaß:.
+        /// </summary>
+        internal static string SystemParametersPanel_RasterMass {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_RasterMass", resourceCulture);
             }
         }
         

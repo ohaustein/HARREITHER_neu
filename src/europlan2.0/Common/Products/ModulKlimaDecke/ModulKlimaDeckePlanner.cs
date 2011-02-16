@@ -295,8 +295,8 @@ namespace Europlan.Common {
 			bool added = false;
 			int count = 0;
 			// TODO enable moduleHeightTolerance to avoid problems with rounding
-			//double moduleHeightTolerance = 0.0001 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			double moduleHeightTolerance = 0;
+			double moduleHeightTolerance = 0.0001 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			//double moduleHeightTolerance = 0;
 
 			if (alignRectangle) {
 				// rectangle aligned to schienen
@@ -1419,6 +1419,15 @@ namespace Europlan.Common {
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60:
 					moduleString = EuroplanRes.KlimaFlaechenModul_60_60_Short;
 					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60B_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60C_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60D_Short;
+					break;
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30:
 					moduleString = EuroplanRes.KlimaFlaechenModul_80_30_Short;
 					break;
@@ -1601,6 +1610,15 @@ namespace Europlan.Common {
 					break;
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60:
 					moduleString = EuroplanRes.KlimaFlaechenModul_60_60_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60B_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60C_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60D_Short;
 					break;
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30:
 					moduleString = EuroplanRes.KlimaFlaechenModul_80_30_Short;
