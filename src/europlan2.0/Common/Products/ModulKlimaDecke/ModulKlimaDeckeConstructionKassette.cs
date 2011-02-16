@@ -43,8 +43,7 @@ namespace Europlan.Common {
 			if (this.Planner == null || this.Planner.Product == null ||
 				this.Planner.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
-				this.Planner.ConnectedPlanPanel == null ||
-				this.Planner.ConnectedPlanPanel.Plan == null) {
+				this.Planner.Product.AssociatedRoom.AssociatedPlan == null) {
 				return;
 			}
 			Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
@@ -75,7 +74,7 @@ namespace Europlan.Common {
 			this.schienenY.Clear();
 			this.possibleLanes.Clear();
 
-			double measure = this.Planner.ConnectedPlanPanel.Plan.Measure.Value;
+			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			double increment = (SchienenBreiteX + SchienenAbstandX) * measure;
 			double curPos = (minX + maxX - SchienenBreiteX * measure) / 2.0 + (offsetX * measure);
 			while (curPos > minX) {
@@ -589,12 +588,11 @@ namespace Europlan.Common {
 				this.Planner.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
 				this.CeilingCoordinates.Count < 3 ||
-				this.Planner.ConnectedPlanPanel == null ||
-				this.Planner.ConnectedPlanPanel.Plan == null ||
-				this.Planner.ConnectedPlanPanel.Plan.Measure == null) {
+				this.Planner.Product.AssociatedRoom.AssociatedPlan == null ||
+				this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
 				return;
 			}
-			double measure = this.Planner.ConnectedPlanPanel.Plan.Measure.Value;
+			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
 
 			/*double minX, maxX, minY, maxY;*/
@@ -679,6 +677,7 @@ namespace Europlan.Common {
 				foreach (Point2D point in schiene) {
 					dxfPoints.Add(point);
 				}
+
 				Polygon2D clipped = new Polygon2D(dxfPoints);
 				if (clipped.IsClockwise()) {
 					clipped.Reverse();
@@ -688,18 +687,30 @@ namespace Europlan.Common {
 				List<Polygon2D> list2 = new List<Polygon2D>();
 				list2.Add(clipped);
 
-				IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+				IList<Polygon2D> clippedPolygons = null;
+				try {
+					clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+				} catch {
+					list2[0][1] = new Point2D(list2[0][1].X + (0.0001 * measure), list2[0][1].Y);
+					list2[0][2] = new Point2D(list2[0][2].X + (0.0001 * measure), list2[0][2].Y);
+					if (list2[0].IsClockwise()) {
+						list2[0].Reverse();
+					}
+					clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+				}
 				foreach (Polygon2D polygon in clippedPolygons) {
 					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
 					polyLine.Closed = true;
 					polyLine.Layer = layer;
 					model.Entities.Add(polyLine);
 
-					DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
-					boundaryPath.Type = BoundaryPathType.Polyline;
-					boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
-					boundaryPath.PolylineData.Closed = true;
-					hatch.BoundaryPaths.Add(boundaryPath);
+					if (polygon.Count > 2) {
+						DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+						boundaryPath.Type = BoundaryPathType.Polyline;
+						boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
+						boundaryPath.PolylineData.Closed = true;
+						hatch.BoundaryPaths.Add(boundaryPath);
+					}
 				}
 			}
 
@@ -717,18 +728,30 @@ namespace Europlan.Common {
 				List<Polygon2D> list2 = new List<Polygon2D>();
 				list2.Add(clipped);
 
-				IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+				IList<Polygon2D> clippedPolygons = null;
+				try {
+					clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+				} catch {
+					list2[0][2] = new Point2D(list2[0][2].X, list2[0][2].Y + (0.0001 * measure));
+					list2[0][3] = new Point2D(list2[0][3].X, list2[0][3].Y + (0.0001 * measure));
+					if (list2[0].IsClockwise()) {
+						list2[0].Reverse();
+					}
+					clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+				}
 				foreach (Polygon2D polygon in clippedPolygons) {
 					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
 					polyLine.Closed = true;
 					polyLine.Layer = layer;
 					model.Entities.Add(polyLine);
 
-					DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
-					boundaryPath.Type = BoundaryPathType.Polyline;
-					boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
-					boundaryPath.PolylineData.Closed = true;
-					hatchY.BoundaryPaths.Add(boundaryPath);
+					if (polygon.Count > 2) {
+						DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+						boundaryPath.Type = BoundaryPathType.Polyline;
+						boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
+						boundaryPath.PolylineData.Closed = true;
+						hatchY.BoundaryPaths.Add(boundaryPath);
+					}
 				}
 			}
 
@@ -816,7 +839,7 @@ namespace Europlan.Common {
 			get { return Cursors.NoMove2D; }
 		}
 
-		[XmlIgnore]
+		/*[XmlIgnore]
 		public override double RotationRelativeToPlan {
 			get {
 				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
@@ -835,6 +858,6 @@ namespace Europlan.Common {
 					this.Rotation = value - 90.0;
 				}
 			}
-		}
+		}*/
 	}
 }

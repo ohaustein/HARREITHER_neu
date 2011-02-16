@@ -859,7 +859,7 @@ namespace Europlan.Common {
 			}
 			FileInfo[] fiSrcFiles = diSourceDir.GetFiles();
 			foreach (FileInfo fiSrcFile in fiSrcFiles) {
-				fiSrcFile.CopyTo(Path.Combine(diDestDir.FullName, fiSrcFile.Name));
+				fiSrcFile.CopyTo(Path.Combine(diDestDir.FullName, fiSrcFile.Name), true);
 			}
 			DirectoryInfo[] diSrcDirectories = diSourceDir.GetDirectories();
 			foreach (DirectoryInfo diSrcDirectory in diSrcDirectories) {

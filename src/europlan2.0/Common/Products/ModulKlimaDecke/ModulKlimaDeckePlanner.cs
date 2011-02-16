@@ -1327,7 +1327,7 @@ namespace Europlan.Common {
 			PointF topRight = new PointF((float)topRight2D.X, (float)topRight2D.Y);
 			PointF bottomRight = new PointF((float)bottomRight2D.X, (float)bottomRight2D.Y);
 			PointF bottomLeft = new PointF((float)bottomLeft2D.X, (float)bottomLeft2D.Y);
-			PointF middle = new PointF((topRight.X + topLeft.X) / 2, (topLeft.Y + bottomLeft.Y) / 2);
+			PointF middle = new PointF((topLeft.X + bottomRight.X) / 2, (topLeft.Y + bottomRight.Y) / 2);
 
 			/*PointF highlightTopLeft1 = new PointF((float)highlightTopLeft12D.X, (float)highlightTopLeft12D.Y);
 			PointF highlightTopLeft2 = new PointF((float)highlightTopLeft22D.X, (float)highlightTopLeft22D.Y);
@@ -1362,17 +1362,17 @@ namespace Europlan.Common {
 			}
 			//Console.WriteLine(p.Width);
 			Brush b = new SolidBrush(Color.FromArgb(64, c));
-			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
-				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
-				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
-					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, middle, topLeft });
-				} else {
-					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, topRight });
-				}
-			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
 				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
 					g.DrawLines(p, new PointF[] { topRight, bottomRight, bottomLeft, topLeft, topRight, middle, bottomRight });
+				} else {
+					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, topRight });
+				}
+			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
+				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, middle, topLeft });
 				} else {
 					g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft, bottomRight });
 				}
@@ -1542,6 +1542,7 @@ namespace Europlan.Common {
 			Point2D topRight2D = additionalTransformation.TransformTo2D(new Point2D(width, 0));
 			Point2D bottomRight2D = additionalTransformation.TransformTo2D(new Point2D(width, height));
 			Point2D bottomLeft2D = additionalTransformation.TransformTo2D(new Point2D(0, height));
+			Point2D middle2D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height / 2));
 			Point2D textStart = additionalTransformation.TransformTo2D(new Point2D(0.01 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.06 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 
 			Point2D directionTop12D;
@@ -1576,14 +1577,32 @@ namespace Europlan.Common {
 			Point2D[] polygon = null;
 			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
-				DxfLine line = new DxfLine(c, bottomLeft2D, topRight2D);
-				line.Layer = layer;
-				model.Entities.Add(line);
+				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+					DxfLine line = new DxfLine(c, bottomLeft2D, middle2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+					line = new DxfLine(c, middle2D, topLeft2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+				} else {
+					DxfLine line = new DxfLine(c, topRight2D, bottomLeft2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+				}
 			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
-				DxfLine line = new DxfLine(c, topLeft2D, bottomRight2D);
-				line.Layer = layer;
-				model.Entities.Add(line);
+				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+					DxfLine line = new DxfLine(c, bottomRight2D, middle2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+					line = new DxfLine(c, middle2D, topRight2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+				} else {
+					DxfLine line = new DxfLine(c, topLeft2D, bottomRight2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+				}
 			} else {
 				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
 			}

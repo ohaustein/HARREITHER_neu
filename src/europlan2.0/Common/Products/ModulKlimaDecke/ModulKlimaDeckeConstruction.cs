@@ -13,6 +13,7 @@ using WW.Cad.Model.Tables;
 namespace Europlan.Common {
 	[XmlInclude(typeof(ModulKlimaDeckeConstructionGlatt))]
 	[XmlInclude(typeof(ModulKlimaDeckeConstructionAkustik))]
+	[XmlInclude(typeof(ModulKlimaDeckeConstructionKassette))]
 	public abstract class ModulKlimaDeckeConstruction : IPickableObject, IDragableObject {
 
 		protected double rotation = 0;

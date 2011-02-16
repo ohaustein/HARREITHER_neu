@@ -56,6 +56,7 @@ namespace Europlan.Common.Products {
 			if (product.GraphConstruction == null) {
 				product.GraphConstruction = (constrType == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.KASSETTENDECKE ? (ModulKlimaDeckeConstruction)new ModulKlimaDeckeConstructionKassette() : (ModulKlimaDeckeConstruction)new ModulKlimaDeckeConstructionGlatt());
 				product.GraphConstruction.Planner = this.modulKlimaBodenPlanner;
+				product.GraphConstruction.RotationRelativeToPlan = 0;
 			}
 			this.glatt = product.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
 			this.akustik = product.GraphConstruction as ModulKlimaDeckeConstructionAkustik;
