@@ -1327,6 +1327,7 @@ namespace Europlan.Common {
 			PointF topRight = new PointF((float)topRight2D.X, (float)topRight2D.Y);
 			PointF bottomRight = new PointF((float)bottomRight2D.X, (float)bottomRight2D.Y);
 			PointF bottomLeft = new PointF((float)bottomLeft2D.X, (float)bottomLeft2D.Y);
+			PointF middle = new PointF((topRight.X + topLeft.X) / 2, (topLeft.Y + bottomLeft.Y) / 2);
 
 			/*PointF highlightTopLeft1 = new PointF((float)highlightTopLeft12D.X, (float)highlightTopLeft12D.Y);
 			PointF highlightTopLeft2 = new PointF((float)highlightTopLeft22D.X, (float)highlightTopLeft22D.Y);
@@ -1363,10 +1364,18 @@ namespace Europlan.Common {
 			Brush b = new SolidBrush(Color.FromArgb(64, c));
 			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
-				g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, topRight });
+				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, middle, topLeft });
+				} else {
+					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, topRight });
+				}
 			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
-				g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft, bottomRight });
+				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+					g.DrawLines(p, new PointF[] { topRight, bottomRight, bottomLeft, topLeft, topRight, middle, bottomRight });
+				} else {
+					g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft, bottomRight });
+				}
 			} else {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
 				g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft });

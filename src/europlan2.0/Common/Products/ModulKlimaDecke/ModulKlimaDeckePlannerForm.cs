@@ -270,9 +270,13 @@ namespace Europlan.Common.Products {
 				this.grpModulSerie.Visible = false;
 				this.grpRasterMass.Visible = true;
 				this.numRotation.Value = (decimal)this.kassette.RotationRelativeToPlan;
-				if (!this.rbSerie40.Checked) {
-					this.rbSerie40.Checked = true;
-				}
+				if (this.kassette.Raster == ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450) {
+					this.rb1050.Checked = true;
+				} else if (this.kassette.Raster == ModulKlimaDeckeConstructionKassette.RasterMass.Raster_625) {
+					this.rb625.Checked = true;
+				} else if (this.kassette.Raster == ModulKlimaDeckeConstructionKassette.RasterMass.Raster_600) {
+					this.rb600.Checked = true;
+				}	
 				ignoreRotation--;
 			} else {
 			}
