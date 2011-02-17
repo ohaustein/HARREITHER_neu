@@ -272,6 +272,21 @@
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ExtendedCorrections.cs" />
+    <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenConstructionStaffeln.cs" />
+    <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenPlanner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenPlanner.Designer.cs">
+      <DependentUpon>ModulKlimaBodenPlanner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenPlannerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenPlannerForm.Designer.cs">
+      <DependentUpon>ModulKlimaBodenPlannerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenConstruction.cs" />
+    <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenConstructionFrei.cs" />
     <Compile Include="Products\ModulKlimaDecke\CompareablePair.cs" />
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstructionKassette.cs" />
     <Compile Include="Products\ModulKlimaDecke\FreeModulLaneArea.cs" />
@@ -722,6 +737,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Products\ConnectionPipesForm.resx">
       <DependentUpon>ConnectionPipesForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\ModulKlimaBoden\ModulKlimaBodenPlannerForm.resx">
+      <DependentUpon>ModulKlimaBodenPlannerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\ModulKlimaDecke\ModulKlimaDeckePlannerForm.resx">

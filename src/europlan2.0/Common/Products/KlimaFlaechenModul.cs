@@ -212,10 +212,17 @@ namespace Europlan.Common {
 		private ModulTypeEnum modulType;
 		private ModulOrientationEnum orientation;
 
-		// position in graphical mode
+		// position in graphical mode (for klimadecke)
 		private int graphLane = -1;
 		private double graphPositionInLane = double.NaN;
 		private bool graphBottomUp = false;
+
+		// position in graphical mode (for klimaboden)
+		private double graphPosX = double.NaN;
+		private double graphPosY = double.NaN;
+		private double graphRotation = 0;
+		private bool graphModulierendX = false;
+		private bool graphModulierendY = false;
 
 		public KlimaFlaechenModul() {
 			this.modulType = ModulTypeEnum.MODUL_100_40;
@@ -469,6 +476,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		#region Properties for graphical mode (Klimadecke)
 		public int GraphLane {
 			get { return this.graphLane; }
 			set { this.graphLane = value; }
@@ -487,5 +495,33 @@ namespace Europlan.Common {
 		public double GraphBottomPositionInLane(double measure) {
 			return this.graphPositionInLane + measure * KlimaFlaechenModul.GetModuleHeight(this.modulType);
 		}
+		#endregion
+
+		#region Properties for graphical mode (Klimaboden)
+		public double GraphPosX {
+			get { return this.graphPosX; }
+			set { this.graphPosX = value; }
+		}
+
+		public double GraphPosY {
+			get { return this.graphPosY; }
+			set { this.graphPosY = value; }
+		}
+
+		public double GraphRotation {
+			get { return this.graphRotation; }
+			set { this.graphRotation = value; }
+		}
+
+		public bool GraphModulierendX {
+			get { return this.graphModulierendX; }
+			set { this.graphModulierendX = value; }
+		}
+
+		public bool GraphModulierendY {
+			get { return this.graphModulierendY; }
+			set { this.graphModulierendY = value; }
+		}
+		#endregion
 	}
 }

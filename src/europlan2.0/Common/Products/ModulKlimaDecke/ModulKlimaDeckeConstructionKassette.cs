@@ -851,11 +851,11 @@ namespace Europlan.Common {
 			}
 			set {
 				if (this.Planner.ConnectedPlanPanel.Plan is ImagePlan) {
-					this.Rotation = value - (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation + 90.0;
+					this.Rotation = value - (this.Planner.ConnectedPlanPanel.Plan as ImagePlan).Rotation - 90.0;
 				} else if (this.Planner.ConnectedPlanPanel.Plan is CadPlan) {
-					this.Rotation = -value - 90.0;
+					this.Rotation = -value + 90.0;
 				} else {
-					this.Rotation = value - 90.0;
+					this.Rotation = value + 90.0;
 				}
 			}
 		}*/

@@ -59,6 +59,8 @@ namespace Europlan.Common {
 		private int requestedModulesSonstige = 0;
 		private double requestedSonstigeVerbindeLeitung = 0;
 
+		private ModulKlimaBodenConstruction graphConstruction = null;
+
 		public ModulKlimaBodenProduct() {
 			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden)) {
 				throw new ProductNotLicensedException(this.GetType());
@@ -510,6 +512,7 @@ namespace Europlan.Common {
 				cCount = 1;
 			}
 			this.CalculateHeatAndCoolFlow();
+			bool graphical = (this.GraphicalMode.HasValue && this.GraphicalMode.Value);
 			bool found = false;
 			while (!found) {
 				int modulesPerCircuit = this.RequestedModulesTotal / cCount;
@@ -521,14 +524,18 @@ namespace Europlan.Common {
 				int sonstigeModulePerCircuit = this.RequestedModulesSonstige / cCount;
 				int additionalSonstigeModule = this.RequestedModulesSonstige - sonstigeModulePerCircuit * cCount;
 
-				this.CorrectCircuits(cCount, false);
+				if (!graphical) {
+					this.CorrectCircuits(cCount, false);
+				}
 
 				int curCNr = 0;
 				foreach (ModulBodenCircuit c in this.circuits) {
-					c.Row.List.Clear();
-					for (int i = 0; i < modulesPerCircuit + (curCNr < additionalModules ? 1 : 0); i++ ) {
-						KlimaFlaechenModul m = new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40, i % 2 == 0 ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
-						c.Row.List.Add(m);
+					if (!graphical) {
+						c.Row.List.Clear();
+						for (int i = 0; i < modulesPerCircuit + (curCNr < additionalModules ? 1 : 0); i++) {
+							KlimaFlaechenModul m = new KlimaFlaechenModul(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40, i % 2 == 0 ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
+							c.Row.List.Add(m);
+						}
 					}
 					c.ModulKlimaBodenProduct = this;
 					c.NrOfCircuit = curCNr;
@@ -540,9 +547,11 @@ namespace Europlan.Common {
 					c.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[curCNr];
 					c.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[curCNr];
 					c.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[curCNr];
-					c.LangeFittinge = langeFittingePerCircuit + (cCount - curCNr - 1 < additionalLangeFittinge ? 1 : 0);
-					c.SonstigeModule = sonstigeModulePerCircuit + (cCount - curCNr - 1 < additionalSonstigeModule ? 1 : 0);
-					c.SonstigeVerbindeleitung = this.requestedSonstigeVerbindeLeitung / cCount;
+					if (!graphical) {
+						c.LangeFittinge = langeFittingePerCircuit + (cCount - curCNr - 1 < additionalLangeFittinge ? 1 : 0);
+						c.SonstigeModule = sonstigeModulePerCircuit + (cCount - curCNr - 1 < additionalSonstigeModule ? 1 : 0);
+						c.SonstigeVerbindeleitung = this.requestedSonstigeVerbindeLeitung / cCount;
+					}
 					c.ReducedArea = this.PlannedAreaReduced / cCount;
 					c.Calculate();
 					curCNr++;
@@ -1111,6 +1120,27 @@ namespace Europlan.Common {
 		public override double Viskositaet {
 			get { return ModulKlimaBodenProduct.ConfigV; }
 		}
+
+		public ModulKlimaBodenConstruction GraphConstruction {
+			get { return this.graphConstruction; }
+			set { this.graphConstruction = value; }
+		}
+
+		[XmlIgnore]
+		public override bool AllowToSwitchMode {
+			get { return !this.ContainsModules; }
+		}
+
+		[XmlIgnore]
+		public bool ContainsModules {
+			get {
+				foreach (ModulBodenCircuit c in this.circuits) {
+					if (c.ModuleTotal > 0) {
+						return true;
+					}
+				}
+				return false;
+			}
+		}
 	}
-	
 }

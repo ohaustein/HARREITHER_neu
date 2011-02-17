@@ -1263,7 +1263,6 @@ namespace Europlan.Common.Products {
 					}
 				}
 			}
-
 		}
 
 		private void btnShowBeplankung_Click(object sender, EventArgs e) {

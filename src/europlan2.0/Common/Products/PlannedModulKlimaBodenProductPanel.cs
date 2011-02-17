@@ -11,6 +11,7 @@ namespace Europlan.Common {
 		private PlannedProduct product = null;
 
 		private bool gridContentChanged = false;
+		private bool updateOngoing = false;
 
 		public PlannedModulKlimaBodenProductPanel() {
 			InitializeComponent();
@@ -152,7 +153,8 @@ namespace Europlan.Common {
 			MODULES_DICHT              = 0x8000,
 			MODULES_MODULIEREND        = 0x10000,
 			MODULES_SONTIGE            = 0x20000,
-			MODULES_VERBINDELEITUNG    = 0x40000
+			MODULES_VERBINDELEITUNG    = 0x40000,
+			LAYOUT_TYPE	               = 0x80000
 		}
 
 
@@ -193,6 +195,7 @@ namespace Europlan.Common {
 		private int ignoreCalculationMode = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
+			updateOngoing = true;
 			if (this.product != null) {
 				ignoreCoverHeatLoad++;
 				ignoreHeatLoad++;
@@ -215,6 +218,48 @@ namespace Europlan.Common {
 				ignoreCalculationMode++;
 
 				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
+
+				if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.CeilingCoordinatesToUse.Count > 0) {
+					this.rbLayoutTable.Enabled = true;
+					this.rbLayoutGraphical.Enabled = true;
+				} else {
+					this.rbLayoutTable.Enabled = false;
+					this.rbLayoutGraphical.Enabled = false;
+				}
+
+				bool graphicalMode = false;
+				if (this.product.Product.GraphicalMode.HasValue) {
+					graphicalMode = this.product.Product.GraphicalMode.Value;
+				} else {
+					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.CeilingCoordinatesToUse.Count > 0) {
+						graphicalMode = true;
+						this.product.Product.GraphicalMode = true;
+					} else {
+						graphicalMode = false;
+						this.product.Product.GraphicalMode = false;
+					}
+				}
+
+				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
+					if (graphicalMode) {
+						this.rbLayoutGraphical.Checked = true;
+					} else {
+						this.rbLayoutTable.Checked = true;
+					}
+				}
+
+				if (graphicalMode) {
+					this.numArea.Enabled = false;
+					this.numAreaPercentage.Enabled = false;
+					this.numAreaUnheated.Enabled = false;
+					this.btnGraphical.Enabled = true;
+					(this.product.Product as ModulKlimaBodenProduct).PlannedFloorAreaPercentage = 100;
+				} else {
+					this.numArea.Enabled = true;
+					this.numAreaPercentage.Enabled = true;
+					this.numAreaUnheated.Enabled = true;
+					this.btnGraphical.Enabled = false;
+				}
 
 				//bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0;
 				//bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0;
@@ -585,6 +630,7 @@ namespace Europlan.Common {
 				ignoreVerbindeleitungen--;
 				ignoreCalculationMode--;
 			}
+			updateOngoing = false;
 			// TODO
 		}
 
@@ -1020,6 +1066,52 @@ namespace Europlan.Common {
 			this.UpdateControl(FieldEnum.NONE);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
+			}
+		}
+
+		private void btnGraphical_Click(object sender, EventArgs e) {
+			if (this.product != null) {
+				Europlan.Common.Products.ModulKlimaBodenPlannerForm form = new Europlan.Common.Products.ModulKlimaBodenPlannerForm(this.product);
+				form.ShowDialog();
+				if (form.Changed && this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				this.UpdateControl(FieldEnum.NONE);
+			}
+		}
+
+		private void rbGraphical_CheckedChanged(object sender, EventArgs e) {
+			if (!updateOngoing && (sender as RadioButton).Checked) {
+				if (this.product.Product.GraphicalMode.HasValue && this.product.Product.GraphicalMode.Value != rbLayoutGraphical.Checked) {
+					// change from graphical to table based
+					if (this.product.Product.GraphicalMode.Value) {
+						if (!this.product.Product.AllowToSwitchMode) {
+							DialogResult result = MessageBox.Show(EuroplanRes.PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Grafisch, EuroplanRes.PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Titel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								this.UpdateControl(FieldEnum.NONE);
+								return;
+							}
+						}
+						// change from table based to graphical  
+					} else {
+						if (!this.product.Product.AllowToSwitchMode) {
+							DialogResult result = MessageBox.Show(EuroplanRes.PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Tabellarisch, EuroplanRes.PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Titel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								this.UpdateControl(FieldEnum.NONE);
+								return;
+							} else {
+								this.product.Product.PlannedCircuits.Clear();
+								this.product.Product.PlannedCircuits.Add(new ModulBodenCircuit());
+							}
+						}
+						(this.product.Product as ModulKlimaBodenProduct).PlannedFloorAreaPercentage = 100;
+					}
+				}
+				this.product.Product.GraphicalMode = rbLayoutGraphical.Checked;
+				this.UpdateControl(FieldEnum.LAYOUT_TYPE);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
 	}

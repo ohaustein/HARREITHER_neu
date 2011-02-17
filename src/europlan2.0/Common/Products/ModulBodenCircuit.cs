@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using System.Drawing;
 
 namespace Europlan.Common {
 
@@ -13,6 +14,7 @@ namespace Europlan.Common {
 		private double sonstigeVerbindeleitung;
 		private int sonstigeModule;
 		private double reducedArea = 0;
+		private Color circuitColor = Color.FromArgb(0, 128, 0);
 
 		public ModulBodenCircuit() {
 
@@ -371,6 +373,27 @@ namespace Europlan.Common {
 
 		public override double CircuitArea {
 			get { return this.CoveredArea; }
+		}
+
+		[XmlIgnore]
+		public Color CircuitColor {
+			get { return this.circuitColor; }
+			set { this.circuitColor = value; }
+		}
+
+		// Color cannot be serialized!!!
+		// quick workaround to serialize it nevertheless
+		public int CircuitColorR {
+			get { return this.circuitColor.R; }
+			set { this.circuitColor = Color.FromArgb(value, this.circuitColor.G, this.circuitColor.B); }
+		}
+		public int CircuitColorG {
+			get { return this.circuitColor.G; }
+			set { this.circuitColor = Color.FromArgb(this.circuitColor.R, value, this.circuitColor.B); }
+		}
+		public int CircuitColorB {
+			get { return this.circuitColor.B; }
+			set { this.circuitColor = Color.FromArgb(this.circuitColor.R, this.circuitColor.G, value); }
 		}
 	}
 }
