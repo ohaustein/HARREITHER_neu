@@ -152,6 +152,9 @@ namespace Europlan.Common {
 					}
 					this.ModuleSelected(this, new ModuleSelectedEventArgs());
 					this.ConnectedPlanPanel.InvalidateGraphics();
+					if (this.ListsNeedUpdate != null) {
+						this.ListsNeedUpdate(this, new ListNeedsUpdateEventArgs(true));
+					}
 				}
 			}
 		}
