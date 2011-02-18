@@ -9,6 +9,9 @@ using System.Drawing;
 using WW.Math;
 using WW.Math.Geometry;
 using System.Xml.Serialization;
+using WW.Cad.Model;
+using WW.Cad.Model.Tables;
+using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
 	public partial class ModulKlimaBodenPlanner : Component, IProductPlanner {
@@ -921,7 +924,7 @@ namespace Europlan.Common {
 				return;
 			}
 			additionalTransformation = additionalTransformation * Transformation4D.Translation(position.X, position.Y, 0);
-			additionalTransformation = additionalTransformation * Transformation4D.RotateZ(rotation * Math.PI / 180.0);
+			additionalTransformation = additionalTransformation * Transformation4D.RotateZ(this.product.GraphConstruction.Rotation * Math.PI / 180.0);
 
 			double height = KlimaFlaechenModul.GetModuleHeight(type) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			double width = KlimaFlaechenModul.GetModuleWidth(type) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
@@ -980,6 +983,7 @@ namespace Europlan.Common {
 			PointF topRight = new PointF((float)topRight2D.X, (float)topRight2D.Y);
 			PointF bottomRight = new PointF((float)bottomRight2D.X, (float)bottomRight2D.Y);
 			PointF bottomLeft = new PointF((float)bottomLeft2D.X, (float)bottomLeft2D.Y);
+			PointF middle = new PointF((topLeft.X + bottomRight.X) / 2, (topLeft.Y + bottomRight.Y) / 2);
 
 			PointF directionTop1 = new PointF((float)directionTop12D.X, (float)directionTop12D.Y);
 			PointF directionTop2 = new PointF((float)directionTop22D.X, (float)directionTop22D.Y);
@@ -991,13 +995,11 @@ namespace Europlan.Common {
 
 			Color c;
 			if (highlight) {
-				//c = Color.FromArgb(128, 0, 240, 0);
 				int cr = Math.Min((int)(circuitColor.R * 1.5) + 32, 255);
 				int cg = Math.Min((int)(circuitColor.G * 1.5) + 32, 255);
 				int cb = Math.Min((int)(circuitColor.B * 1.5) + 32, 255);
 				c = Color.FromArgb(128, cr, cg, cb);
 			} else {
-				//c = Color.FromArgb(128, 0, 128, 0);
 				c = Color.FromArgb(128, circuitColor);
 			}
 
@@ -1006,12 +1008,20 @@ namespace Europlan.Common {
 				p.Width = 1.5f;
 			}
 			Brush b = new SolidBrush(Color.FromArgb(64, c));
-			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
-				g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, topRight });
-			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+					g.DrawLines(p, new PointF[] { topRight, bottomRight, bottomLeft, topLeft, topRight, middle, bottomRight });
+				} else {
+					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, topRight });
+				}
+			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
-				g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft, bottomRight });
+				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, middle, topLeft });
+				} else {
+					g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft, bottomRight });
+				}
 			} else {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
 				g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft });
@@ -1034,9 +1044,9 @@ namespace Europlan.Common {
 			g.Transform = new Matrix();
 
 			if (this.product.AssociatedRoom.AssociatedPlan is CadPlan) {
-				newTransform.RotateAt(-(float)(rotation), bottomLeft);
+				newTransform.RotateAt(-(float)(this.product.GraphConstruction.Rotation), bottomLeft);
 			} else {
-				newTransform.RotateAt((float)(rotation), topLeft);
+				newTransform.RotateAt((float)(this.product.GraphConstruction.Rotation), topLeft);
 			}
 			g.Transform = newTransform;
 
@@ -1054,17 +1064,192 @@ namespace Europlan.Common {
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60:
 					moduleString = EuroplanRes.KlimaFlaechenModul_60_60_Short;
 					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60B_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60C_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60D_Short;
+					break;
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30:
 					moduleString = EuroplanRes.KlimaFlaechenModul_80_30_Short;
 					break;
 			}
+
 			if (this.product.AssociatedRoom.AssociatedPlan is CadPlan) {
 				g.DrawString(moduleString, new Font("Arial", 5.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), bottomLeft);
 				g.Transform = oldTransform;
 			} else {
-				//g.DrawString(moduleString, new Font("Arial", (float)(0.05 * Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value)), new SolidBrush(Color.FromArgb(255, c)), topLeft);
 				g.DrawString(moduleString, new Font("Arial", 5.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), topLeft);
 				g.Transform = oldTransform;
+			}
+		}
+
+		private void DrawDxfModule(KlimaFlaechenModul.ModulTypeEnum type, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, Point2D position, Matrix4D additionalTransformation, DxfModel model, DxfLayer layer, bool bottomUp, Color circuitColor) {
+			if (this.product == null || this.product.GraphConstruction == null ||
+						this.product.AssociatedRoom == null || this.product.AssociatedRoom.AssociatedPlan == null ||
+						this.product.AssociatedRoom.AssociatedPlan.Measure == null) {
+				return;
+			}
+
+			additionalTransformation = additionalTransformation * Transformation4D.Translation(position.X, position.Y, 0);
+			additionalTransformation = additionalTransformation * Transformation4D.RotateZ(this.product.GraphConstruction.Rotation * Math.PI / 180.0);
+
+			double height = KlimaFlaechenModul.GetModuleHeight(type) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			double width = KlimaFlaechenModul.GetModuleWidth(type) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+
+			Point2D topLeft2D = additionalTransformation.TransformTo2D(new Point2D(0, 0));
+			Point2D topRight2D = additionalTransformation.TransformTo2D(new Point2D(width, 0));
+			Point2D bottomRight2D = additionalTransformation.TransformTo2D(new Point2D(width, height));
+			Point2D bottomLeft2D = additionalTransformation.TransformTo2D(new Point2D(0, height));
+			Point2D middle2D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height / 2));
+			Point2D textStart = additionalTransformation.TransformTo2D(new Point2D(0.01 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.06 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+
+			Point2D directionTop12D;
+			Point2D directionTop22D;
+			Point2D directionTop32D;
+			Point2D directionBottom12D;
+			Point2D directionBottom22D;
+			Point2D directionBottom32D;
+
+			if (bottomUp) {
+				directionTop12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionTop22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionTop32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, 0));
+
+				directionBottom12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionBottom22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionBottom32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height - 0.2 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+			} else {
+				directionTop12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
+				directionTop22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
+				directionTop32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, 0.10 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+
+				directionBottom12D = additionalTransformation.TransformTo2D(new Point2D(width / 2 - 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.2 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionBottom22D = additionalTransformation.TransformTo2D(new Point2D(width / 2 + 0.05 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.2 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+				directionBottom32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
+			}
+
+			Color c = Color.FromArgb(128, circuitColor);
+
+			Pen p = new Pen(c);
+
+			Point2D[] polygon = null;
+			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
+				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+					DxfLine line = new DxfLine(c, bottomLeft2D, middle2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+					line = new DxfLine(c, middle2D, topLeft2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+				} else {
+					DxfLine line = new DxfLine(c, topRight2D, bottomLeft2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+				}
+			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
+				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+					DxfLine line = new DxfLine(c, bottomRight2D, middle2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+					line = new DxfLine(c, middle2D, topRight2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+				} else {
+					DxfLine line = new DxfLine(c, topLeft2D, bottomRight2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+				}
+			} else {
+				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
+			}
+
+			DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
+			polyLine.Closed = true;
+			polyLine.Layer = layer;
+			model.Entities.Add(polyLine);
+
+			if (orientation != null) {
+				polygon = new Point2D[] { directionTop12D, directionTop22D, directionTop32D };
+				polyLine = new DxfPolyline2D(c, polygon);
+				polyLine.Closed = true;
+				polyLine.Layer = layer;
+				model.Entities.Add(polyLine);
+				polygon = new Point2D[] { directionBottom12D, directionBottom22D, directionBottom32D };
+				polyLine = new DxfPolyline2D(c, polygon);
+				polyLine.Closed = true;
+				polyLine.Layer = layer;
+				model.Entities.Add(polyLine);
+			}
+
+			string moduleString = "";
+			switch (type) {
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30:
+					moduleString = EuroplanRes.KlimaFlaechenModul_100_30_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40:
+					moduleString = EuroplanRes.KlimaFlaechenModul_100_40_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30:
+					moduleString = EuroplanRes.KlimaFlaechenModul_120_30_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60B_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60C_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D:
+					moduleString = EuroplanRes.KlimaFlaechenModul_60_60D_Short;
+					break;
+				case KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30:
+					moduleString = EuroplanRes.KlimaFlaechenModul_80_30_Short;
+					break;
+			}
+
+			if (!model.TextStyles.Contains("HarreitherStyle")) {
+				DxfTextStyle textStyle = new DxfTextStyle("HarreitherStyle", "Arial.ttf");
+				model.TextStyles.Add(textStyle);
+			}
+			DxfText text = new DxfText(moduleString, (Point3D)textStart, 0.05f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
+			//text3.Thickness = 0.4d;
+			text.Style = model.TextStyles["HarreitherStyle"];
+			text.Layer = layer;
+			text.Color = c;
+			Console.WriteLine(this.product.GraphConstruction.Rotation);
+			text.Rotation = this.product.GraphConstruction.Rotation / 180.0 * Math.PI;
+			model.Entities.Add(text);
+		}
+
+		internal void DrawDxf(DxfModel model, DxfLayer layer) {
+			Matrix4D additionalTransformation = Matrix4D.Identity;
+
+			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.CeilingCoordinatesToUse != null) {
+				if (this.product.AssociatedRoom.AssociatedPlan != null && this.product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
+					if (this.product.GraphConstruction != null) {
+						this.product.GraphConstruction.PaintDxf(model, layer);
+					}
+				}
+
+				if (this.mode != KlimaBodenMode.KDM_CONSTRUCTION) {
+					Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
+					Matrix3D invRotation = rotation.GetInverse();
+
+					List<KlimaFlaechenModul> selectedModules = this.GetAllSelectedModules();
+					foreach (ModulBodenCircuit circuit in this.product.PlannedCircuits) {
+						foreach (KlimaFlaechenModul modul in circuit.Row.List) {
+							this.DrawDxfModule(modul.ModulType, modul.Orientation, invRotation.Transform(new Point2D(modul.GraphPosX, modul.GraphPosY)), additionalTransformation, model, layer, modul.GraphBottomUp, circuit.CircuitColor);
+						}
+					}
+				}
 			}
 		}
 
@@ -1130,6 +1315,12 @@ namespace Europlan.Common {
 				// TODO check if the area really contains modules
 				return this.layoutAddArea != null;
 			}
+		}
+
+		[DefaultValue(true)]
+		public bool HighlightRoomCoordinates {
+			get { return this.highlightRoomCoordinates; }
+			set { this.highlightRoomCoordinates = value; }
 		}
 	}
 }

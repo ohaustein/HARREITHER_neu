@@ -1310,34 +1310,11 @@ namespace Europlan.Common {
 				}
 			}
 
-			/*Point2D highlightTopLeft12D;
-			Point2D highlightTopLeft22D;
-			Point2D highlightBottomRight12D;
-			Point2D highlightBottomRight22D;
-			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
-				highlightTopLeft12D = additionalTransformation.TransformTo2D(new Point2D(0, width / 4));
-				highlightTopLeft22D = additionalTransformation.TransformTo2D(new Point2D(width / 4, 0));
-				highlightBottomRight12D = additionalTransformation.TransformTo2D(new Point2D(width, height - width / 4));
-				highlightBottomRight22D = additionalTransformation.TransformTo2D(new Point2D(width - width / 4, height));
-			} else {
-				highlightTopLeft12D = additionalTransformation.TransformTo2D(new Point2D(width, width / 4));
-				highlightTopLeft22D = additionalTransformation.TransformTo2D(new Point2D(width - width / 4, 0));
-				highlightBottomRight12D = additionalTransformation.TransformTo2D(new Point2D(0, height - width / 4));
-				highlightBottomRight22D = additionalTransformation.TransformTo2D(new Point2D(width / 4, height));
-			}*/
-
 			PointF topLeft = new PointF((float)topLeft2D.X, (float)topLeft2D.Y);
 			PointF topRight = new PointF((float)topRight2D.X, (float)topRight2D.Y);
 			PointF bottomRight = new PointF((float)bottomRight2D.X, (float)bottomRight2D.Y);
 			PointF bottomLeft = new PointF((float)bottomLeft2D.X, (float)bottomLeft2D.Y);
 			PointF middle = new PointF((topLeft.X + bottomRight.X) / 2, (topLeft.Y + bottomRight.Y) / 2);
-
-			/*PointF highlightTopLeft1 = new PointF((float)highlightTopLeft12D.X, (float)highlightTopLeft12D.Y);
-			PointF highlightTopLeft2 = new PointF((float)highlightTopLeft22D.X, (float)highlightTopLeft22D.Y);
-			PointF highlightTopLeft3 = orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? topLeft : topRight;
-			PointF highlightBottomRight1 = new PointF((float)highlightBottomRight12D.X, (float)highlightBottomRight12D.Y);
-			PointF highlightBottomRight2 = new PointF((float)highlightBottomRight22D.X, (float)highlightBottomRight22D.Y);
-			PointF highlightBottomRight3 = orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? bottomRight : bottomLeft;*/
 
 			PointF directionTop1 = new PointF((float)directionTop12D.X, (float)directionTop12D.Y);
 			PointF directionTop2 = new PointF((float)directionTop22D.X, (float)directionTop22D.Y);
@@ -1349,13 +1326,11 @@ namespace Europlan.Common {
 
 			Color c;
 			if (highlight) {
-				//c = Color.FromArgb(128, 0, 240, 0);
 				int cr = Math.Min((int)(circuitColor.R * 1.5) + 32, 255);
 				int cg = Math.Min((int)(circuitColor.G * 1.5) + 32, 255);
 				int cb = Math.Min((int)(circuitColor.B * 1.5) + 32, 255);
 				c = Color.FromArgb(128, cr, cg, cb);
 			} else {
-				//c = Color.FromArgb(128, 0, 128, 0);
 				c = Color.FromArgb(128, circuitColor);
 			}
 
@@ -1363,7 +1338,6 @@ namespace Europlan.Common {
 			if (highlight) {
 				p.Width = 1.5f;
 			}
-			//Console.WriteLine(p.Width);
 			Brush b = new SolidBrush(Color.FromArgb(64, c));
 			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
@@ -1384,12 +1358,6 @@ namespace Europlan.Common {
 				g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft });
 			}
 
-			/*if (highlight && orientation != null) {
-				b = new SolidBrush(c);
-				g.FillPolygon(b, new PointF[] { highlightTopLeft1, highlightTopLeft2, highlightTopLeft3 });
-				g.FillPolygon(b, new PointF[] { highlightBottomRight1, highlightBottomRight2, highlightBottomRight3 });
-			}*/
-
 			if (orientation != null) {
 				if (highlight) {
 					g.FillPolygon(b, new PointF[] { directionTop1, directionTop2, directionTop3 });
@@ -1406,15 +1374,11 @@ namespace Europlan.Common {
 			Matrix newTransform = g.Transform.Clone();
 			g.Transform = new Matrix();
 			
-			//newTransform.RotateAt((float)-this.product.AssociatedRoom.AssociatedPlan.Rotation, topLeft);
 			if (this.product.AssociatedRoom.AssociatedPlan is CadPlan) {
 				newTransform.RotateAt(-(float)(this.product.GraphConstruction.Rotation), bottomLeft);
 			} else {
 				newTransform.RotateAt((float)(this.product.GraphConstruction.Rotation), topLeft);
 			}
-			/*newTransform.Translate(-topLeft.X, -topLeft.Y);
-			newTransform.Scale((float)(Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), (float)(Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-			newTransform.Translate(topLeft.X, topLeft.Y);*/
 			g.Transform = newTransform;
 
 			string moduleString = "";
@@ -1444,16 +1408,11 @@ namespace Europlan.Common {
 					moduleString = EuroplanRes.KlimaFlaechenModul_80_30_Short;
 					break;
 			}
-			//additionalTransformation.Get
+
 			if (this.product.AssociatedRoom.AssociatedPlan is CadPlan) {
-				//g.DrawString(moduleString, new Font("Arial", (float)(0.05 * Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value)), new SolidBrush(Color.FromArgb(255, c)), bottomLeft);
-				//Matrix transform = g.Transform;
-				//transform.Multiply(new Matrix((float)additionalTransformation.M00, (float)additionalTransformation.M01, (float)additionalTransformation.M10, (float)additionalTransformation.M11, (float)additionalTransformation.M30, (float)additionalTransformation.M03));
-				//g.Transform = transform;
 				g.DrawString(moduleString, new Font("Arial", 5.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), bottomLeft);
 				g.Transform = oldTransform;
 			} else {
-				//g.DrawString(moduleString, new Font("Arial", (float)(0.05 * Math.Abs(additionalTransformation.M00) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value)), new SolidBrush(Color.FromArgb(255, c)), topLeft);
 				g.DrawString(moduleString, new Font("Arial", 5.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(255, c)), topLeft);
 				g.Transform = oldTransform;
 			}

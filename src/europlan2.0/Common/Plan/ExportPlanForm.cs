@@ -159,6 +159,16 @@ namespace Europlan.Common {
 											// planner.DrawBeplankung = ???
 											// planner.Mode = ???
 											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty);
+										} else if (p is ModulKlimaBodenProduct) {
+											ModulKlimaBodenPlanner planner = new ModulKlimaBodenPlanner();
+											planner.Product = p as ModulKlimaBodenProduct;
+											(p as ModulKlimaBodenProduct).GraphConstruction.Planner = planner;
+											(p as ModulKlimaBodenProduct).GraphConstruction.RecalculateSchienen();
+											planner.HighlightRoomCoordinates = false;
+											// TODO
+											// planner.DrawBeplankung = ???
+											// planner.Mode = ???
+											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty);
 										}
 										//...
 									}
@@ -199,6 +209,17 @@ namespace Europlan.Common {
 											planner.Product = p as ModulKlimaDeckeProduct;
 											(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
 											(p as ModulKlimaDeckeProduct).GraphConstruction.RecalculateSchienen();
+											planner.HighlightRoomCoordinates = false;
+											// TODO
+											// planner.DrawBeplankung ???
+											// planner.Mode = ???
+											planner.DrawDxf(model, layer);
+										} else if (p is ModulKlimaBodenProduct) {
+											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaBodenProduct), model);
+											ModulKlimaBodenPlanner planner = new ModulKlimaBodenPlanner();
+											planner.Product = p as ModulKlimaBodenProduct;
+											(p as ModulKlimaBodenProduct).GraphConstruction.Planner = planner;
+											(p as ModulKlimaBodenProduct).GraphConstruction.RecalculateSchienen();
 											planner.HighlightRoomCoordinates = false;
 											// TODO
 											// planner.DrawBeplankung ???
