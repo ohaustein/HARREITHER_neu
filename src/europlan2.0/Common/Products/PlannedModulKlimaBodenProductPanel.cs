@@ -253,12 +253,22 @@ namespace Europlan.Common {
 					this.numAreaPercentage.Enabled = false;
 					this.numAreaUnheated.Enabled = false;
 					this.btnGraphical.Enabled = true;
+					this.numDicht.Enabled = false;
+					this.numModulierend.Enabled = false;
+					this.numSonstige.Enabled = false;
+					this.numVerbindeleitungen.Enabled = false;
+					this.cmbCircuits.Enabled = false;
 					(this.product.Product as ModulKlimaBodenProduct).PlannedFloorAreaPercentage = 100;
 				} else {
 					this.numArea.Enabled = true;
 					this.numAreaPercentage.Enabled = true;
 					this.numAreaUnheated.Enabled = true;
 					this.btnGraphical.Enabled = false;
+					this.numDicht.Enabled = true;
+					this.numModulierend.Enabled = true;
+					this.numSonstige.Enabled = true;
+					this.numVerbindeleitungen.Enabled = true;
+					this.cmbCircuits.Enabled = true;
 				}
 
 				//bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0;
