@@ -4375,4 +4375,52 @@ ogrevanja
 	<data name="QuickDimensioningPanel_Euroval" xml:space="preserve">
 		<value>Klima in stena Euroval®</value>
 	</data>
+	<data name="HithermCompactRegister_Hit1000Ds" xml:space="preserve">
+		<value>HIT 1000 DS</value>
+	</data>
+	<data name="HithermCompactRegister_Hit1000Ds_Short" xml:space="preserve">
+		<value>1000 DS</value>
+	</data>
+	<data name="HithermCompactRegister_Hit1500Ds" xml:space="preserve">
+		<value>HIT 1500 DS</value>
+	</data>
+	<data name="HithermCompactRegister_Hit1500Ds_Short" xml:space="preserve">
+		<value>1500 DS</value>
+	</data>
+	<data name="HithermCompactRegister_Hit2000Ds" xml:space="preserve">
+		<value>HIT 2000 DS</value>
+	</data>
+	<data name="HithermCompactRegister_Hit2000Ds_Short" xml:space="preserve">
+		<value>2000 DS</value>
+	</data>
+	<data name="HithermCompactRegister_Hit2500Ds" xml:space="preserve">
+		<value>HIT 2500 DS</value>
+	</data>
+	<data name="HithermCompactRegister_Hit2500Ds_Short" xml:space="preserve">
+		<value>2500 DS</value>
+	</data>
+	<data name="HithermCompactRegister_Hit620Ds" xml:space="preserve">
+		<value>HIT 620 DS</value>
+	</data>
+	<data name="HithermCompactRegister_Hit620Ds_Short" xml:space="preserve">
+		<value>620 DS</value>
+	</data>
+	<data name="LL_Report_Waehrung" xml:space="preserve">
+		<value>€</value>
+	</data>
+	<data name="ProjectReport_HISAN32" xml:space="preserve">
+		<value>HISAN® Ø32</value>
+	</data>
+	<data name="ProjectReport_HISAN40" xml:space="preserve">
+		<value>HISAN® Ø40</value>
+	</data>
+	<data name="ProjectReport_HISAN50" xml:space="preserve">
+		<value>HISAN® Ø50</value>
+	</data>
+	<data name="ProjectReport_HISAN63" xml:space="preserve">
+		<value>HISAN® Ø63</value>
+	</data>
+	<data name="ProjectReport_HISAN75" xml:space="preserve">
+		<value>HISAN® Ø75</value>
+	</data>
 </root>

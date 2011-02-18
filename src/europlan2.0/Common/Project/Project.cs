@@ -341,8 +341,8 @@ namespace Europlan.Common {
 					}
 				}
 				//instance.configuration = (Configuration.AdminTemplate + Configuration.UserTemplate) + instance.configuration;
-				instance.configuration = Configuration.UserTemplate + instance.configuration;
 				instance.configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
+				instance.configuration = Configuration.UserTemplate + instance.configuration;
 				instance.configuration.RecalculateMaterialToCategoryMapping();
 				instance.FixOldProjects();
 				instance.RecalculateQuickDimensioningRoomToProjectMapping();

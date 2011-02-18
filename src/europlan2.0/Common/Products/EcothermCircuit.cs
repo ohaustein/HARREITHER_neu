@@ -2,9 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using log4net;
 
 namespace Europlan.Common {
 	public class EcothermCircuit : Circuit {
+
+		private static readonly ILog log = LogManager.GetLogger(typeof(EcothermCircuit));
+
 		[XmlIgnore]
 		public EcothermProduct EcothermProduct {
 			get { return this.PlannedProduct.Product as EcothermProduct; }
@@ -194,7 +198,6 @@ namespace Europlan.Common {
 		}
 
 		public void Calculate(Europlan.Common.EcothermProduct.EcothermLayDistance layDistance, Nullable<Europlan.Common.EcothermProduct.EcothermRimType> rimType) {
-
 			if (layDistance == EcothermProduct.EcothermLayDistance.NONE) {
 				c_Qh2oHeat = 0;
 
@@ -275,6 +278,9 @@ namespace Europlan.Common {
 
 			// Aufteilung RZ - AZ
 			double aFbh = this.areaTotal - this.areaReduced / 2- this.areaUnheated - this.areaRemovedDueConnection;	// wirksam beheizte Fläche
+			if (aFbh < 0) {
+				aFbh = 0;
+			}
 
 			bool calculateWithRim = rimType.HasValue && (rimLength - this.rimCorners * EcothermProduct.GetRimWidth(rimType.Value) / 100 > 0);
 			this.c_areaRz = 0;
@@ -282,6 +288,9 @@ namespace Europlan.Common {
 			if (calculateWithRim) {
 				this.c_areaRz = this.GetAreaRim(rimType);
 				this.c_pipeLengthRz = this.c_areaRz * EcothermProduct.GetPipeLengthPerSqm(EcothermProduct.GetRimLayDistance(rimType.Value));  // Rohrlänge der Randzone berechnen
+			}
+			if (this.c_areaRz > aFbh) {
+				this.c_areaRz = aFbh;
 			}
 			this.c_areaAz = aFbh - this.c_areaRz;                                                      // Fläche der Aufenthaltszone berechnen
 			this.c_pipeLengthAz = (this.c_areaAz + this.areaReduced / 2) * EcothermProduct.GetPipeLengthPerSqm(layDistance);                           // Rohlänge der Aufenthaltszone berechnen

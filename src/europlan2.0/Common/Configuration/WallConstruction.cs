@@ -45,7 +45,7 @@ namespace Europlan.Common {
 		public HithermWall DefaultWall {
 			get {
 				if (defaultWall == null) {
-					defaultWall = new HithermWall(this.Id, this.Name, this, null, null, false, null, -16, 30, true);
+					defaultWall = new HithermWall(this.Id, this.LocalizedName, this, null, null, false, null, -16, 30, true);
 				}
 				return defaultWall;
 			}

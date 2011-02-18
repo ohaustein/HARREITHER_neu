@@ -201,6 +201,31 @@ namespace Europlan.AdminApplication {
 			}
 		}
 
+		private void mainTabControl_Selecting(object sender, TabControlCancelEventArgs e) {
+			if (e.TabPage == this.tabPageErrors) {
+				this.lstTranslationMissing.Items.Clear();
+				Configuration config = Configuration.AdminTemplate;
+				foreach (Category category in config.Categories) {
+					if (!category.ResourceOk) {
+						this.lstTranslationMissing.Items.Add("Kategorie: " + category.Id + " (" + category.Name + ")");
+					}
+				}
+				foreach (Material material in config.Materials) {
+					if (material.Category != null && !material.ResourceOk) {
+						this.lstTranslationMissing.Items.Add("Material: " + material.Id + " (" + material.Name + ")");
+					}
+				}
+				foreach (Construction construction in config.Constructions) {
+					if (!construction.ResourceOk) {
+						this.lstTranslationMissing.Items.Add("Konstruktion: " + construction.Id + " (" + construction.Name + ")");
+					}
+				}
+				if (this.lstTranslationMissing.Items.Count == 0) {
+					this.lstTranslationMissing.Items.Add("keine Elemente ohne Vorbereitung zur Übersetzung gefunden");
+				}
+			}
+		}
+
 		/*private void cmsViewItem_Click(object sender, EventArgs e) {
 			int i = 0;
 			string selected = "";

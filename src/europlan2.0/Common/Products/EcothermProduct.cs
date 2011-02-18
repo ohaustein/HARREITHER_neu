@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using System.Collections;
+using log4net;
 using System.Threading;
 using Europlan.Licensing;
 
@@ -65,6 +66,8 @@ namespace Europlan.Common {
 		private int plannedRimCorners = 0;
 		private Construction plannedFloorConstruction = null;
 		private Construction plannedInsulationConstruction = null;
+		private string plannedFloorConstructionId = null;
+		private string plannedInsulationConstructionId = null;
 
 		private Nullable<EcothermLayDistance> requestedLayDistance = null;
 		private Nullable<EcothermRimType> requestedRimType = null;
@@ -181,7 +184,6 @@ namespace Europlan.Common {
 		}
 
 		protected EcothermProduct(EcothermProduct product) : base(product) {
-
 		}
 
 		public override void Initialize() {
@@ -199,79 +201,7 @@ namespace Europlan.Common {
             get { return "Fuﬂbodenheizung.png"; }
 		}
 
-		/*#region default paramter values
-		public static string GetDefaultConfigQuickDimensioningHeatPowerPerSquareMeter() {
-			return quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
-		}
-
-		public static string GetDefaultConfigQuickDimensioningCoolPowerPerSquareMeter() {
-			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
-		}
-
-		public static string GetDefaultConfigQuickDimensioningCanHeat() {
-			canHeat = config.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanHeat", true);
-		}
-
-		public static string GetDefaultConfigQuickDimensioningCanCool() {
-			canCool = config.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanCool", false);
-		}
-
-		public static string GetDefaultConfigUseHarreitherNorm() {
-			useHarreitherNorm = config.GetProductParameterAsBool<EcothermProduct>("ConfigUseHarreitherNorm", true);
-		}
-
-		public static string GetDefaultConfigMaxCircuitLength() {
-			maxCircuitLength = config.GetProductParameterAsDouble<EcothermProduct>("ConfigMaxCircuitLength", 100.0);
-		}
-
-		public static string GetDefaultConfigMaxPressureLost() {
-			maxPressureLost = config.GetProductParameterAsInt<EcothermProduct>("ConfigMaxPressureLost", 15000);
-		}
-
-		public static double GetDefaultConfigMaxDurchfluss() {
-			return config.GetProductParameterAsInt<EcothermProduct>("ConfigMaxDurchfluss", 240);
-		}
-
-		public static double GetDefaultConfigSpreizungHeizMin() {
-			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMin", 4);
-		}
-
-		public static double GetDefaultConfigSpreizungHeizMax() {
-			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMax", 12);
-		}
-
-		public static double GetDefaultConfigSpreizungKuehlMin() {
-			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMin", 2);
-		}
-
-		public static double GetDefaultConfigSpreizungKuehlMax() {
-			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMax", 5);
-		}
-
-		public static double GetDefaultConfigSu0() {
-			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu0", 0.045);
-		}
-
-		public static double GetDefaultConfigSu() {
-			return config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);
-		}
-		#endregion*/
-
 		public new static void StaticInitialize(Configuration config) {
-			/*quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
-			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<EcothermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
-			canHeat = config.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = config.GetProductParameterAsBool<EcothermProduct>("ConfigQuickDimensioningCanCool", false);
-			useHarreitherNorm = config.GetProductParameterAsBool<EcothermProduct>("ConfigUseHarreitherNorm", true);
-			maxCircuitLength = config.GetProductParameterAsDouble<EcothermProduct>("ConfigMaxCircuitLength", 100.0);
-			maxPressureLost = config.GetProductParameterAsInt<EcothermProduct>("ConfigMaxPressureLost", 15000);
-			maxDurchfluss = config.GetProductParameterAsInt<EcothermProduct>("ConfigMaxDurchfluss", 240);
-			spreizungHeizMin = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMin", 4);
-			spreizungHeizMax = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungHeizMax", 12);
-			spreizungKuehlMin = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMin", 2);
-			spreizungKuehlMax = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSpreizungKuehlMax", 5);
-			su0 = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu0", 0.045);
-			su = config.GetProductParameterAsDouble<EcothermProduct>("ConfigSu", 0.035);*/
 			Product.StaticInitialize<EcothermProduct>(config);
 		}
 
@@ -887,16 +817,22 @@ namespace Europlan.Common {
 		/// The id of the planned floor construction for serialization
 		/// </summary>
 		public string PlannedFloorConstructionId {
-			get { return (this.plannedFloorConstruction == null ? "" : this.plannedFloorConstruction.Id); }
-			set { this.plannedFloorConstruction = Project.Instance.Config.GetConstruction(value); }
+			get { return this.PlannedFloorConstruction == null ? this.plannedFloorConstructionId : this.PlannedFloorConstruction.Id; }
+			set {
+				this.plannedFloorConstructionId = value;
+				this.plannedFloorConstruction = null;
+			}
 		}
 
 		/// <summary>
 		/// The id of the planned insulation construction for serialization
 		/// </summary>
 		public string PlannedInsulationConstructionId {
-			get { return (this.plannedInsulationConstruction == null ? "" : this.plannedInsulationConstruction.Id); }
-			set { this.plannedInsulationConstruction = Project.Instance.Config.GetConstruction(value); }
+			get { return this.PlannedInsulationConstruction == null ? this.plannedInsulationConstructionId : this.PlannedInsulationConstruction.Id; }
+			set {
+				this.plannedInsulationConstructionId = value;
+				this.plannedInsulationConstruction = null;
+			}
 		}
 
 		/// <summary>
@@ -904,8 +840,17 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public Construction PlannedFloorConstruction {
-			get { return this.plannedFloorConstruction; }
-			set { this.plannedFloorConstruction = value; }
+			get {
+				if (this.plannedFloorConstructionId != null) {
+					this.plannedFloorConstruction = Project.Instance.Config.GetConstruction(this.plannedFloorConstructionId);
+					this.plannedFloorConstructionId = null;
+				}
+				return this.plannedFloorConstruction;
+			}
+			set {
+				this.plannedFloorConstruction = value;
+				this.plannedFloorConstructionId = null;
+			}
 		}
 
 		/// <summary>
@@ -913,8 +858,17 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public Construction PlannedInsulationConstruction {
-			get { return this.plannedInsulationConstruction; }
-			set { this.plannedInsulationConstruction = value; }
+			get {
+				if (this.plannedInsulationConstructionId != null) {
+					this.plannedInsulationConstruction = Project.Instance.Config.GetConstruction(this.plannedInsulationConstructionId);
+					this.plannedInsulationConstructionId = null;
+				}
+				return this.plannedInsulationConstruction;
+			}
+			set {
+				this.plannedInsulationConstruction = value;
+				this.plannedInsulationConstructionId = null;
+			}
 		}
 
 		/// <summary>
@@ -922,17 +876,17 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public override float PlannedInsideConstructionRValue {
-			get { return (this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue); }
+			get { return (this.PlannedFloorConstruction == null ? 0 : this.PlannedFloorConstruction.RValue); }
 		}
 
 		[XmlIgnore]
 		public override bool HasInsideConstruction {
-			get { return this.plannedFloorConstruction != null; }
+			get { return this.PlannedFloorConstruction != null; }
 		}
 
 		[XmlIgnore]
 		public override Construction PlannedInsideConstruction {
-			get { return this.plannedFloorConstruction; }
+			get { return this.PlannedFloorConstruction; }
 		}
 
 		/// <summary>
@@ -940,17 +894,17 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public override float PlannedOutsideConstructionRValue {
-			get { return (this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue); }
+			get { return (this.PlannedInsulationConstruction == null ? 0 : this.PlannedInsulationConstruction.RValue); }
 		}
 
 		[XmlIgnore]
 		public override bool HasOutsideConstruction {
-			get { return this.plannedInsulationConstruction != null; }
+			get { return this.PlannedInsulationConstruction != null; }
 		}
 
 		[XmlIgnore]
 		public override Construction PlannedOutsideConstruction {
-			get { return this.plannedInsulationConstruction; }
+			get { return this.PlannedInsulationConstruction; }
 		}
 
 		/// <summary>
@@ -997,7 +951,12 @@ namespace Europlan.Common {
 			get {
 				double value = 0;
 				foreach (EcothermCircuit ec in this.circuits) {
-					value += (ec.AreaTotal - ec.GetAreaRim(this.plannedRimType) - ec.AreaRemovedDueConnection);
+					double area = (ec.AreaTotal - ec.GetAreaRim(this.plannedRimType) - ec.AreaRemovedDueConnection);
+					if (area < 0) {
+						area = 0;
+					}
+					//value += (ec.AreaTotal - ec.GetAreaRim(this.plannedRimType) - ec.AreaRemovedDueConnection);
+					value += area;
 				}
 				return (float)value;
 			}
@@ -1360,10 +1319,10 @@ namespace Europlan.Common {
 			double floorTempCoolRim, double floorTempCoolRes, double pressureLossCool, 
 			double circuitLength, bool checkHeat, bool checkCool, bool ignoreResidence, bool ignoreRim, bool ignoreCircuitLength) {
 
-			if (checkHeat && (useHarreitherNorm && ((floorTempHeatRim > maxRimTempHarreither && !ignoreRim) || (floorTempHeatRes > maxResidenceTempHarreither && !ignoreResidence)))) {
+			if (checkHeat && !ignoreRim && (floorTempHeatRim > this.MaxRimTemp)) {
 				return false;
 			}
-			if (checkHeat && ((floorTempHeatRim > maxRimTempEn1264 && !ignoreRim) || (floorTempHeatRes > maxResidenceTempEn1264 && !ignoreResidence))) {
+			if (checkHeat && !ignoreResidence && (floorTempHeatRes > this.MaxResidenceTemp)) {
 				return false;
 			}
 			if (checkHeat && (pressureLossHeat > maxPressureLost) && !ignoreCircuitLength) {
@@ -1430,7 +1389,8 @@ namespace Europlan.Common {
 				if (value != null && value.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 					this.requestedCircuits = this.PlannedCircuitCount > 0 ? this.PlannedCircuitCount : 1;
 					this.requestedLayDistance = this.plannedLayDistance.HasValue ? this.plannedLayDistance.Value : EcothermLayDistance.EV35;
-					this.requestedRimType = this.plannedRimType.HasValue ? this.plannedRimType.Value : EcothermRimType.EV15_60;
+					//this.requestedRimType = this.plannedRimType.HasValue ? this.plannedRimType.Value : EcothermRimType.EV15_60;
+					this.requestedRimType = this.plannedRimType;
 				}
 				this.plannedConnection = value;
 
@@ -1469,12 +1429,12 @@ namespace Europlan.Common {
 			this.requestedHeatLoad = requestedHeatLoad;
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
-			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
+			if (this.PlannedFloorConstruction == null || this.PlannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
 				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
-				if (plannedFloorConstruction == null) {
+				if (PlannedFloorConstruction == null) {
 					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fuﬂbodenkonstruktion, ";
 				}
-				if (plannedInsulationConstruction == null) {
+				if (PlannedInsulationConstruction == null) {
 					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"W‰rmed‰mmkonstruktion, ";
 				}
 				if (PlannedConnection == null) {
@@ -1821,6 +1781,14 @@ namespace Europlan.Common {
 				}
 			}
 
+			if (areaRemovedDueConnection > this.plannedArea - this.plannedAreaUnheated) {
+				this.incompleteCalculation = true;
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_Anbindeleitung;
+				this.lastErrorMsg = this.lastErrorMsg.Replace("%VALUE%", Math.Round(this.PlannedRemoveArea, 1).ToString());
+				this.lastErrorMsg = this.lastErrorMsg.Replace("%MAXIMUM%", Math.Round(this.AvailableFloorArea, 1).ToString());
+				return false;
+			}
+
 			this.lastErrorMsg = "";
 			string newMsg;
 			if (this.LongestPipeLengthPerCircuitWithAllConnections > EcothermProduct.ConfigMaxCircuitLength) {
@@ -1930,12 +1898,12 @@ namespace Europlan.Common {
 						error = EuroplanRes.ErrorMessage_HkAnschluss; // "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
 					} else {
 						j--;
-					}
-					this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, ec, false));
-					if (this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count > j) {
-						this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, this.PlannedConnection.OtherProduct.Product.PlannedCircuits[j], this.PlannedConnection.UserDefined));
-					} else {
-						this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, this.PlannedConnection.OtherProduct, j, this.PlannedConnection.UserDefined));
+						this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, ec, false));
+						if (this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count > j) {
+							this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, this.PlannedConnection.OtherProduct.Product.PlannedCircuits[j], this.PlannedConnection.UserDefined));
+						} else {
+							this.inverseConnectedCircuits.Add(ec.NrOfCircuit, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, this.PlannedConnection.OtherProduct, j, this.PlannedConnection.UserDefined));
+						}
 					}
 				}
 				this.circuits.Add(ec);

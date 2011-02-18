@@ -43,7 +43,7 @@ namespace Europlan.Common {
 			[XmlIgnore]
 			public Product OtherProduct {
 				get {
-					return OtherPlannedProduct.Product;
+					return OtherPlannedProduct == null ? null : OtherPlannedProduct.Product;
 				}
 				/*set { otherProduct = value; }*/
 			}

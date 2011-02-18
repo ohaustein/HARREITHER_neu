@@ -23,6 +23,7 @@ namespace Europlan.AdminApplication {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("asdf asdg sdf asdg sdf ");
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.mainTabControl = new System.Windows.Forms.TabControl();
 			this.tabPageLicenses = new System.Windows.Forms.TabPage();
@@ -39,6 +40,9 @@ namespace Europlan.AdminApplication {
 			this.materialEditorGrid1 = new Europlan.Common.MaterialEditorGrid();
 			this.tabPageConstructions = new System.Windows.Forms.TabPage();
 			this.constructionEditorPage = new Europlan.Common.ConstructionEditorGrid();
+			this.tabPageErrors = new System.Windows.Forms.TabPage();
+			this.grpMissingTranslations = new System.Windows.Forms.GroupBox();
+			this.lstTranslationMissing = new System.Windows.Forms.ListView();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +59,8 @@ namespace Europlan.AdminApplication {
 			this.tabPageArticles.SuspendLayout();
 			this.tabPageAdditionalArticles.SuspendLayout();
 			this.tabPageConstructions.SuspendLayout();
+			this.tabPageErrors.SuspendLayout();
+			this.grpMissingTranslations.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -64,12 +70,14 @@ namespace Europlan.AdminApplication {
 			this.mainTabControl.Controls.Add(this.tabPageArticles);
 			this.mainTabControl.Controls.Add(this.tabPageAdditionalArticles);
 			this.mainTabControl.Controls.Add(this.tabPageConstructions);
+			this.mainTabControl.Controls.Add(this.tabPageErrors);
 			this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.mainTabControl.Location = new System.Drawing.Point(0, 24);
 			this.mainTabControl.Name = "mainTabControl";
 			this.mainTabControl.SelectedIndex = 0;
 			this.mainTabControl.Size = new System.Drawing.Size(787, 489);
 			this.mainTabControl.TabIndex = 0;
+			this.mainTabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabControl_Selecting);
 			// 
 			// tabPageLicenses
 			// 
@@ -237,6 +245,42 @@ namespace Europlan.AdminApplication {
 			this.constructionEditorPage.TabIndex = 0;
 			this.constructionEditorPage.Type = Europlan.Common.Configuration.ConfigurationType.AdminConfiguration;
 			// 
+			// tabPageErrors
+			// 
+			this.tabPageErrors.Controls.Add(this.grpMissingTranslations);
+			this.tabPageErrors.Location = new System.Drawing.Point(4, 22);
+			this.tabPageErrors.Name = "tabPageErrors";
+			this.tabPageErrors.Padding = new System.Windows.Forms.Padding(5, 3, 5, 5);
+			this.tabPageErrors.Size = new System.Drawing.Size(779, 463);
+			this.tabPageErrors.TabIndex = 5;
+			this.tabPageErrors.Text = "Fehler";
+			this.tabPageErrors.UseVisualStyleBackColor = true;
+			// 
+			// grpMissingTranslations
+			// 
+			this.grpMissingTranslations.Controls.Add(this.lstTranslationMissing);
+			this.grpMissingTranslations.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.grpMissingTranslations.Location = new System.Drawing.Point(5, 3);
+			this.grpMissingTranslations.Name = "grpMissingTranslations";
+			this.grpMissingTranslations.Size = new System.Drawing.Size(769, 455);
+			this.grpMissingTranslations.TabIndex = 0;
+			this.grpMissingTranslations.TabStop = false;
+			this.grpMissingTranslations.Text = "nicht für Übersetzung vorbereitete Elemente";
+			// 
+			// lstTranslationMissing
+			// 
+			this.lstTranslationMissing.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lstTranslationMissing.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+			this.lstTranslationMissing.Location = new System.Drawing.Point(6, 19);
+			this.lstTranslationMissing.Name = "lstTranslationMissing";
+			this.lstTranslationMissing.Size = new System.Drawing.Size(757, 430);
+			this.lstTranslationMissing.TabIndex = 0;
+			this.lstTranslationMissing.UseCompatibleStateImageBehavior = false;
+			this.lstTranslationMissing.View = System.Windows.Forms.View.List;
+			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -323,6 +367,8 @@ namespace Europlan.AdminApplication {
 			this.tabPageArticles.ResumeLayout(false);
 			this.tabPageAdditionalArticles.ResumeLayout(false);
 			this.tabPageConstructions.ResumeLayout(false);
+			this.tabPageErrors.ResumeLayout(false);
+			this.grpMissingTranslations.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
@@ -355,6 +401,9 @@ namespace Europlan.AdminApplication {
 		private System.Windows.Forms.TabPage tabPageAdditionalArticles;
 		private Europlan.Common.MaterialEditorGrid materialEditorGrid1;
 		private System.Windows.Forms.ToolStripMenuItem lizenzenToolStripMenuItem;
+		private System.Windows.Forms.TabPage tabPageErrors;
+		private System.Windows.Forms.GroupBox grpMissingTranslations;
+		private System.Windows.Forms.ListView lstTranslationMissing;
 	}
 }
 

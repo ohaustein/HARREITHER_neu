@@ -99,19 +99,23 @@ namespace Europlan.Common {
 			// 
 			// txtName
 			// 
+			this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.txtName.Location = new System.Drawing.Point(171, 77);
 			this.txtName.Name = "txtName";
-			this.txtName.Size = new System.Drawing.Size(385, 20);
+			this.txtName.Size = new System.Drawing.Size(503, 20);
 			this.txtName.TabIndex = 23;
 			this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
 			// 
 			// cmbCircuit
 			// 
+			this.cmbCircuit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.cmbCircuit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbCircuit.FormattingEnabled = true;
 			this.cmbCircuit.Location = new System.Drawing.Point(172, 105);
 			this.cmbCircuit.Name = "cmbCircuit";
-			this.cmbCircuit.Size = new System.Drawing.Size(385, 21);
+			this.cmbCircuit.Size = new System.Drawing.Size(502, 21);
 			this.cmbCircuit.TabIndex = 25;
 			this.cmbCircuit.SelectedIndexChanged += new System.EventHandler(this.cmbCircuit_SelectedIndexChanged);
 			// 
@@ -148,11 +152,13 @@ namespace Europlan.Common {
 			// 
 			// listFloors
 			// 
+			this.listFloors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.listFloors.CheckOnClick = true;
 			this.listFloors.FormattingEnabled = true;
 			this.listFloors.Location = new System.Drawing.Point(172, 268);
 			this.listFloors.Name = "listFloors";
-			this.listFloors.Size = new System.Drawing.Size(385, 79);
+			this.listFloors.Size = new System.Drawing.Size(502, 79);
 			this.listFloors.TabIndex = 28;
 			this.listFloors.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listFloors_ItemCheck);
 			// 
@@ -209,11 +215,13 @@ namespace Europlan.Common {
 			// 
 			// cmbAnschlussHollaender
 			// 
+			this.cmbAnschlussHollaender.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.cmbAnschlussHollaender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbAnschlussHollaender.FormattingEnabled = true;
 			this.cmbAnschlussHollaender.Location = new System.Drawing.Point(172, 132);
 			this.cmbAnschlussHollaender.Name = "cmbAnschlussHollaender";
-			this.cmbAnschlussHollaender.Size = new System.Drawing.Size(385, 21);
+			this.cmbAnschlussHollaender.Size = new System.Drawing.Size(502, 21);
 			this.cmbAnschlussHollaender.TabIndex = 38;
 			this.cmbAnschlussHollaender.SelectedIndexChanged += new System.EventHandler(this.cmbAnschlussHollaender_SelectedIndexChanged);
 			// 
@@ -270,14 +278,16 @@ namespace Europlan.Common {
 			// 
 			// numZusStellantriebe
 			// 
-			this.numZusStellantriebe.Location = new System.Drawing.Point(505, 242);
+			this.numZusStellantriebe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numZusStellantriebe.Location = new System.Drawing.Point(389, 242);
 			this.numZusStellantriebe.Maximum = new decimal(new int[] {
             0,
             0,
             0,
             0});
 			this.numZusStellantriebe.Name = "numZusStellantriebe";
-			this.numZusStellantriebe.Size = new System.Drawing.Size(51, 20);
+			this.numZusStellantriebe.Size = new System.Drawing.Size(284, 20);
 			this.numZusStellantriebe.TabIndex = 45;
 			this.numZusStellantriebe.ValueChanged += new System.EventHandler(this.numZusStellantriebe_ValueChanged);
 			// 
@@ -292,11 +302,13 @@ namespace Europlan.Common {
 			// 
 			// lstSystems
 			// 
+			this.lstSystems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.lstSystems.CheckOnClick = true;
 			this.lstSystems.FormattingEnabled = true;
 			this.lstSystems.Location = new System.Drawing.Point(172, 354);
 			this.lstSystems.Name = "lstSystems";
-			this.lstSystems.Size = new System.Drawing.Size(385, 79);
+			this.lstSystems.Size = new System.Drawing.Size(502, 79);
 			this.lstSystems.TabIndex = 46;
 			this.lstSystems.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lstSystems_ItemCheck);
 			// 
@@ -321,16 +333,19 @@ namespace Europlan.Common {
 			// 
 			// lblCircuits
 			// 
-			this.lblCircuits.Location = new System.Drawing.Point(456, 213);
+			this.lblCircuits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lblCircuits.Location = new System.Drawing.Point(389, 213);
 			this.lblCircuits.Name = "lblCircuits";
-			this.lblCircuits.Size = new System.Drawing.Size(101, 23);
+			this.lblCircuits.Size = new System.Drawing.Size(285, 23);
 			this.lblCircuits.TabIndex = 49;
 			this.lblCircuits.Text = "7 (aktiv)";
-			this.lblCircuits.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.lblCircuits.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// lstError
 			// 
-			this.lstError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			this.lstError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.lstError.BackColor = System.Drawing.SystemColors.Control;
 			this.lstError.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -342,7 +357,7 @@ namespace Europlan.Common {
 			this.lstError.Location = new System.Drawing.Point(7, 439);
 			this.lstError.Name = "lstError";
 			this.lstError.ShowGroups = false;
-			this.lstError.Size = new System.Drawing.Size(770, 50);
+			this.lstError.Size = new System.Drawing.Size(681, 70);
 			this.lstError.TabIndex = 74;
 			this.lstError.UseCompatibleStateImageBehavior = false;
 			this.lstError.View = System.Windows.Forms.View.Details;
@@ -368,6 +383,8 @@ namespace Europlan.Common {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScroll = true;
+			this.AutoScrollMinSize = new System.Drawing.Size(600, 500);
 			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.lstError);
 			this.Controls.Add(this.lblCircuits);
@@ -401,7 +418,7 @@ namespace Europlan.Common {
 			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
 			this.Name = "DistributorPanel";
 			this.helpProvider.SetShowHelp(this, true);
-			this.Size = new System.Drawing.Size(780, 492);
+			this.Size = new System.Drawing.Size(691, 512);
 			((System.ComponentModel.ISupportInitialize)(this.numMaxCircuits)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAdditionalCircuits)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numZusStellantriebe)).EndInit();

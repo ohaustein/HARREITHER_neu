@@ -157,7 +157,7 @@ namespace Europlan.Common {
 			int plannedCircuits = this.distributor.PlannedCircuits;
 			lblCircuits.Text = EuroplanRes.DistributorPanel_Aktiv.Replace("%VALUE%", plannedCircuits.ToString());
 			if (numAdditionalCircuits.Value > 0) {
-				lblCircuits.Text += EuroplanRes.DistributorPanel_Zusaetzlich.Replace("%VALUE%", numAdditionalCircuits.Value.ToString()).Replace("%SUM%", (plannedCircuits + numAdditionalCircuits.Value).ToString());
+				lblCircuits.Text += " " + EuroplanRes.DistributorPanel_Zusaetzlich.Replace("%VALUE%", numAdditionalCircuits.Value.ToString()).Replace("%SUM%", (plannedCircuits + numAdditionalCircuits.Value).ToString());
 			}
 		}
 

@@ -15,7 +15,7 @@ namespace Europlan.Common {
 
 			public WallConstructionItem(WallConstruction construction) {
 				this.construction = construction;
-				this.Text = construction.Id + ": " + construction.Name;
+				this.Text = construction.Id + ": " + construction.LocalizedName;
 			}
 
 			public WallConstruction Construction {

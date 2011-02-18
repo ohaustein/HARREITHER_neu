@@ -29,7 +29,7 @@ namespace Europlan.AdminApplication {
 			foreach (Material material in config.Materials) {
 				if (material.Category == null && !material.Additional) {
 					//string[] mat = new string[] { material.Name, material.PartNumber, material.Denomination.Value.ToString(), material.Unit, material.Price.ToString("0.00") };
-					string[] mat = new string[] { material.PartNumber, material.Name};
+					string[] mat = new string[] { material.PartNumber, material.Name };
 					ListViewItem item = new ListViewItem(mat);
 					item.Tag = material;
 					listUncategorizedMaterials.Items.Add(item);

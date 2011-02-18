@@ -181,6 +181,58 @@
   <data name="CadPlanOptionsForm_Titel" xml:space="preserve">
     <value>Optionen</value>
   </data>
+  <data name="Category_12d2b721_99c0_4d72_905d_2f218abd26f7" xml:space="preserve">
+    <value />
+    <comment>Trittschalldämmung</comment>
+  </data>
+  <data name="Category_3757b0af_4891_4d6a_911c_bf2c0bc18ebc" xml:space="preserve">
+    <value />
+    <comment>Modul Klimaboden</comment>
+  </data>
+  <data name="Category_3da3227a_9ffe_4af4_bcbd_509a159066e1" xml:space="preserve">
+    <value />
+    <comment>Fußbodenheizung allgemein</comment>
+  </data>
+  <data name="Category_47dcf857_a316_40c5_992e_f5913fd643dd" xml:space="preserve">
+    <value />
+    <comment>Wärmedämmung</comment>
+  </data>
+  <data name="Category_6d414984_2bc3_41ed_83a0_5a085911689b" xml:space="preserve">
+    <value />
+    <comment>Hitherm Compact</comment>
+  </data>
+  <data name="Category_6ee36a0d_5077_4ac7_bba3_fb7dcde87a05" xml:space="preserve">
+    <value />
+    <comment>Hitherm Klimawand</comment>
+  </data>
+  <data name="Category_733a961b_265b_4119_aa6d_64f29cc6aee3" xml:space="preserve">
+    <value />
+    <comment>Verteiler Zubehör</comment>
+  </data>
+  <data name="Category_74215bac_568f_4685_9c97_6c880fcdd5f3" xml:space="preserve">
+    <value />
+    <comment>Wandheizung Rohre und Fittinge</comment>
+  </data>
+  <data name="Category_763da832_711a_41af_ad59_3d3527be6131" xml:space="preserve">
+    <value />
+    <comment>Euroval Fußbodenheizung</comment>
+  </data>
+  <data name="Category_785616e8_757a_4442_ba9f_b7deed7d03ce" xml:space="preserve">
+    <value />
+    <comment>Allgemein</comment>
+  </data>
+  <data name="Category_92fea213_58a1_405a_ba72_17e4e851848c" xml:space="preserve">
+    <value />
+    <comment>Wandheizung allgemein</comment>
+  </data>
+  <data name="Category_98bf6ba8_cec1_4d99_be2e_5f1836dde18a" xml:space="preserve">
+    <value />
+    <comment>Modul Klimadecke</comment>
+  </data>
+  <data name="Category_a8824ebb_19ac_4ff8_90c1_320b1a15225b" xml:space="preserve">
+    <value />
+    <comment>Ecotherm Fußbodenheizung</comment>
+  </data>
   <data name="Category_Allgemein" xml:space="preserve">
     <value>Allgemein</value>
   </data>
@@ -189,6 +241,10 @@
   </data>
   <data name="Category_Deckenkuehlung" xml:space="preserve">
     <value>Deckenkühlung</value>
+  </data>
+  <data name="Category_e76a2892_0065_45d0_8fb5_914fffbda956" xml:space="preserve">
+    <value />
+    <comment>Verteiler</comment>
   </data>
   <data name="Category_Fussbodenheizung" xml:space="preserve">
     <value>Fußbodenheizung</value>
@@ -314,6 +370,218 @@ Vorlauf
   </data>
   <data name="ConnectionPipesForm_Nettoflaeche" xml:space="preserve">
     <value>Nettofläche des Heizsystems:</value>
+  </data>
+  <data name="Construction_DK01" xml:space="preserve">
+    <value />
+    <comment>Metalldecke</comment>
+  </data>
+  <data name="Construction_DK02" xml:space="preserve">
+    <value />
+    <comment>Gipskartondecke</comment>
+  </data>
+  <data name="Construction_DK03" xml:space="preserve">
+    <value />
+    <comment>Gipsfaserdecke</comment>
+  </data>
+  <data name="Construction_DK04" xml:space="preserve">
+    <value />
+    <comment>Gips-graphit-Decke</comment>
+  </data>
+  <data name="Construction_DK05" xml:space="preserve">
+    <value />
+    <comment>Akustikdecke</comment>
+  </data>
+  <data name="Construction_DK06" xml:space="preserve">
+    <value />
+    <comment>Akustikdecke mit Flies</comment>
+  </data>
+  <data name="Construction_SCW01" xml:space="preserve">
+    <value />
+    <comment>Fermacell 10mm</comment>
+  </data>
+  <data name="Construction_SCW02" xml:space="preserve">
+    <value />
+    <comment>Fermacell 12.5mm</comment>
+  </data>
+  <data name="Construction_SCW03" xml:space="preserve">
+    <value />
+    <comment>Fermacell 15mm</comment>
+  </data>
+  <data name="Construction_SCW05" xml:space="preserve">
+    <value />
+    <comment>Gipskarton 12.5mm</comment>
+  </data>
+  <data name="Construction_SCW06" xml:space="preserve">
+    <value />
+    <comment>Gipskarton 15mm</comment>
+  </data>
+  <data name="Construction_STB01" xml:space="preserve">
+    <value />
+    <comment>Keramik</comment>
+  </data>
+  <data name="Construction_STB02" xml:space="preserve">
+    <value />
+    <comment>Naturstein</comment>
+  </data>
+  <data name="Construction_STB03" xml:space="preserve">
+    <value />
+    <comment>PVC-Belag</comment>
+  </data>
+  <data name="Construction_STB04" xml:space="preserve">
+    <value />
+    <comment>Klebeparkett 10mm</comment>
+  </data>
+  <data name="Construction_STB05" xml:space="preserve">
+    <value />
+    <comment>Klebeparkett 15mm</comment>
+  </data>
+  <data name="Construction_STB06" xml:space="preserve">
+    <value />
+    <comment>Klebeparkett 22mm</comment>
+  </data>
+  <data name="Construction_STB07" xml:space="preserve">
+    <value />
+    <comment>Teppich 2mm Schaum</comment>
+  </data>
+  <data name="Construction_STB08" xml:space="preserve">
+    <value />
+    <comment>Teppich 4mm Schaum</comment>
+  </data>
+  <data name="Construction_STD01" xml:space="preserve">
+    <value />
+    <comment>Keramik</comment>
+  </data>
+  <data name="Construction_STD02" xml:space="preserve">
+    <value />
+    <comment>Naturstein</comment>
+  </data>
+  <data name="Construction_STD03" xml:space="preserve">
+    <value />
+    <comment>PVC-Belag</comment>
+  </data>
+  <data name="Construction_STD04" xml:space="preserve">
+    <value />
+    <comment>Klebeparkett 10mm</comment>
+  </data>
+  <data name="Construction_STD05" xml:space="preserve">
+    <value />
+    <comment>Klebeparkett 15mm</comment>
+  </data>
+  <data name="Construction_STD06" xml:space="preserve">
+    <value />
+    <comment>Klebeparkett 22mm</comment>
+  </data>
+  <data name="Construction_STD07" xml:space="preserve">
+    <value />
+    <comment>Fertigparkett 13mm</comment>
+  </data>
+  <data name="Construction_STD08" xml:space="preserve">
+    <value />
+    <comment>Teppich 2mm Schaum</comment>
+  </data>
+  <data name="Construction_STD09" xml:space="preserve">
+    <value />
+    <comment>Teppich 4mm Schaum</comment>
+  </data>
+  <data name="Construction_STW01" xml:space="preserve">
+    <value />
+    <comment>Hitherm®-Putz</comment>
+  </data>
+  <data name="Construction_STW02" xml:space="preserve">
+    <value />
+    <comment>Maschinenputz</comment>
+  </data>
+  <data name="Construction_STW03" xml:space="preserve">
+    <value />
+    <comment>Lehmputz</comment>
+  </data>
+  <data name="Construction_STW04" xml:space="preserve">
+    <value />
+    <comment>Hohlraum mit Gipskartonplatten</comment>
+  </data>
+  <data name="Construction_STW05" xml:space="preserve">
+    <value />
+    <comment>Hohlraum mit Holzverkleidung</comment>
+  </data>
+  <data name="Construction_TRE01" xml:space="preserve">
+    <value />
+    <comment>Keramik</comment>
+  </data>
+  <data name="Construction_TRE02" xml:space="preserve">
+    <value />
+    <comment>Naturstein</comment>
+  </data>
+  <data name="Construction_TRE03" xml:space="preserve">
+    <value />
+    <comment>PVC-Belag</comment>
+  </data>
+  <data name="Construction_TRE04" xml:space="preserve">
+    <value />
+    <comment>Klebeparkett 10mm</comment>
+  </data>
+  <data name="Construction_TRE05" xml:space="preserve">
+    <value />
+    <comment>Klebeparkett 15mm</comment>
+  </data>
+  <data name="Construction_TRE06" xml:space="preserve">
+    <value />
+    <comment>Klebeparkett 22mm</comment>
+  </data>
+  <data name="Construction_TRE07" xml:space="preserve">
+    <value />
+    <comment>Fertigparkett 13mm</comment>
+  </data>
+  <data name="Construction_TRE08" xml:space="preserve">
+    <value />
+    <comment>Teppich 2mm Schaum</comment>
+  </data>
+  <data name="Construction_TRE09" xml:space="preserve">
+    <value />
+    <comment>Teppich 4mm Schaum</comment>
+  </data>
+  <data name="Construction_TRK01" xml:space="preserve">
+    <value />
+    <comment>Parketdielen 15-18mm</comment>
+  </data>
+  <data name="Construction_TRK02" xml:space="preserve">
+    <value />
+    <comment>Parkett auf Streuschalung</comment>
+  </data>
+  <data name="Construction_TRK03" xml:space="preserve">
+    <value />
+    <comment>Schiffboden 20-22mm</comment>
+  </data>
+  <data name="Construction_WD00" xml:space="preserve">
+    <value />
+    <comment>keine Dämmung</comment>
+  </data>
+  <data name="Construction_WD01" xml:space="preserve">
+    <value />
+    <comment>PST 20mm</comment>
+  </data>
+  <data name="Construction_WD02" xml:space="preserve">
+    <value />
+    <comment>PST 30mm</comment>
+  </data>
+  <data name="Construction_WD03" xml:space="preserve">
+    <value />
+    <comment>PS 20mm + PST 20mm</comment>
+  </data>
+  <data name="Construction_WD04" xml:space="preserve">
+    <value />
+    <comment>PS 30mm + PST 20mm</comment>
+  </data>
+  <data name="Construction_WD05" xml:space="preserve">
+    <value />
+    <comment>PS 30mm + PST 30mm</comment>
+  </data>
+  <data name="Construction_WD06" xml:space="preserve">
+    <value />
+    <comment>PS 50mm + PST 30mm</comment>
+  </data>
+  <data name="Construction_WD07" xml:space="preserve">
+    <value />
+    <comment>Modul Dämmschale</comment>
   </data>
   <data name="ConstructionEditor_DickeCol" xml:space="preserve">
     <value>d (mm)</value>
@@ -586,7 +854,10 @@ Vorlauf
     <value>EV5/80</value>
   </data>
   <data name="EcothermProduct_NotificationParameter" xml:space="preserve">
-    <value>Ecotherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
+    <value>Ecotherm-Systeme werden mit veränderten Parametern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
+  </data>
+  <data name="ErrorMessage_Anbindeleitung" xml:space="preserve">
+    <value>Die Fläche der Anbindeleitung ist größer als die zur Verfügung stehende Fläche (%VALUE%m² &gt; %MAXIMUM%m²)</value>
   </data>
   <data name="ErrorMessage_BelegteFlaeche" xml:space="preserve">
     <value>Die belegte Fläche im Heizkreis %HK% ist zu groß (%VALUE%m² &gt; %MAXIMUM%m²)</value>
@@ -619,7 +890,7 @@ Vorlauf
     <value>Fußbodenkonstruktion</value>
   </data>
   <data name="ErrorMessage_FehlendeEingabenHkAnschluss" xml:space="preserve">
-    <value>Heizkreisanschluß</value>
+    <value>Heizkreisanschluss</value>
   </data>
   <data name="ErrorMessage_HkAnschluss" xml:space="preserve">
     <value>Es sind nicht alle Heizkreise dieses Systems angeschloßen</value>
@@ -718,7 +989,7 @@ Vorlauf
     <value>EV5/80</value>
   </data>
   <data name="EurovalProduct_NotificationParameter" xml:space="preserve">
-    <value>Euroval-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
+    <value>Euroval-Systeme werden mit veränderten Parametern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
   </data>
   <data name="ExportOption_DH" xml:space="preserve">
     <value>Decke</value>
@@ -3014,6 +3285,632 @@ menge</value>
   <data name="MainForm_Warnungen" xml:space="preserve">
     <value>Warnungen und Fehler</value>
   </data>
+  <data name="Material_1a29f733_ab7b_41fd_a0df_926d64a8526d" xml:space="preserve">
+    <value />
+    <comment>Wärmedämmung EPS-W 20, 40 mm</comment>
+  </data>
+  <data name="Material_648b5196_3bb6_4e3d_856c_a569315f56f2" xml:space="preserve">
+    <value />
+    <comment>Trittschalldämmung EPS-T 23/20, 20 mm</comment>
+  </data>
+  <data name="Material_a2fbf91c_12a0_43af_ad0e_5a26a0431a00" xml:space="preserve">
+    <value />
+    <comment>Trittschalldämmung EPS-T 34/30, 30 mm</comment>
+  </data>
+  <data name="Material_a834583d_750c_4695_ba45_7e346108551f" xml:space="preserve">
+    <value />
+    <comment>Wärmedämmung EPS-W 20, 30 mm</comment>
+  </data>
+  <data name="Material_ac14b03f_63f2_420a_9134_424348bbc3ee" xml:space="preserve">
+    <value />
+    <comment>Wärmedämmung EPS-W 20, 20 mm</comment>
+  </data>
+  <data name="Material_b75adb45_8e48_4f91_b0dd_ebe853df344f" xml:space="preserve">
+    <value />
+    <comment>Wärmedämmung EPS-W 20, 50 mm</comment>
+  </data>
+  <data name="Material_d3e1298f_6755_4fc8_9097_bd9b47d2c1c5" xml:space="preserve">
+    <value />
+    <comment>Trittschalldämmung EPS-T 55/50, 50 mm</comment>
+  </data>
+  <data name="Material_EC01" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EC02" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EC04" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EC05" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EC06" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EC08" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV01" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV12" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV15" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV16" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV20" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV21" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV30" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV31" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_EV34" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_f2532e64_771a_4013_9d18_e90c1ad2ddd8" xml:space="preserve">
+    <value />
+    <comment>Trittschalldämmung EPS-T 45/40, 40 mm</comment>
+  </data>
+  <data name="Material_HC06" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC08" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC12" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC15" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC16" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC17" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC20" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC21" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC22" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC25" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC27" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC41" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC42" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC43" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC44" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC56plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC58plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC60plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC61plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC62plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC65plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC66plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC67plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC70plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC71plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC72plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC75plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HC77plus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF01" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF02" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF03" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF04" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF05" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF06" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF07" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF08" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF12" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF13" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF21" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF22" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF23" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF24" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF25" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF26" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF27" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF28" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF29" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF30" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF31" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF32" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF50" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF51" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF52" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF53" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF54" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF55" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF56" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF57" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF59" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF60" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF61" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HF62" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG01" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG02" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG03" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG04" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG05" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG06" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG07" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG08" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG12" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG13" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG50" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG51" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG52" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG53" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG54" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG55" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG56" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG57" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG60" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG61" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HG62" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI05" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI06" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI15" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI16" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI20" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI21" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI25" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI26" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI30" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI31" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI40" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI41" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI42" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI51" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI52" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI54" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI55" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI56" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI57" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI58" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI60" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI65" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI66" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI67" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI68" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI69" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI70" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HI71" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HP05" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HP10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HP15" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HP20" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HP25" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HP30" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR51" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR55" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR56" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR57" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR60" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR65" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR66" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR67" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR68" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR69" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR70" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR75" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR76" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK01" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK02" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK03" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK04" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK05" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK12" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK13" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK15" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK20" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK21" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK22" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK23" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK30" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK31" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK32" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK33" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK34" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK35" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK40" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK49" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK50" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK51" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK52" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO02" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO03" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO04" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO05" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO06" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO07" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO08" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO09" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO12" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO44" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO60" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO61" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VO62" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VT20" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VT21" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VT35" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_WZ13" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_WZ14" xml:space="preserve">
+    <value />
+  </data>
   <data name="MaterialEditorGrid_BestellnummerCol" xml:space="preserve">
     <value>Bestellnr.</value>
   </data>
@@ -3283,7 +4180,7 @@ W/m²</value>
     <value>Fläche mit red. Heiz-/Kühlleistung:</value>
   </data>
   <data name="PlannedEurovalProductPanel_Rohrlaenge" xml:space="preserve">
-    <value>Rorhl.
+    <value>Rohrl.
 m</value>
   </data>
   <data name="PlannedEurovalProductPanel_Spreizung" xml:space="preserve">
@@ -3663,7 +4560,7 @@ recht</value>
     <value>Modul Klima-Decke</value>
   </data>
   <data name="ProductConnection_AnschlussAn" xml:space="preserve">
-    <value>Anschluß an %SYSTEM% in %RAUMID%: %RAUMNAME%</value>
+    <value>Anschluss an %SYSTEM% in %RAUMID%: %RAUMNAME%</value>
   </data>
   <data name="ProductOverviewForm_DruckverlustHeiz" xml:space="preserve">
     <value>Druckverlust
@@ -3735,7 +4632,7 @@ RZ</value>
     <value>Fehler beim Laden</value>
   </data>
   <data name="ProjectLoad_VersionNichtKompatibelText" xml:space="preserve">
-    <value>Die von Ihnen verwendet Version von Europlan 2.0 ist älter als die Version mit der das Projekt zuletzt abgespeichert wurde. Dies kann zu Problemen beim Anzeigen bzw. Bearbeiten des Projekts führen. Wollen Sie das Projekt trotzdem laden?</value>
+    <value>Die von Ihnen verwendete Version von Europlan 2.0 ist älter als die Version mit der das Projekt zuletzt abgespeichert wurde. Dies kann zu Problemen beim Anzeigen bzw. Bearbeiten des Projekts führen. Wollen Sie das Projekt trotzdem laden?</value>
   </data>
   <data name="ProjectLoad_VersionNichtKompatibelTitel" xml:space="preserve">
     <value>Version nicht kompatibel</value>
@@ -4043,10 +4940,10 @@ Heizkreise</value>
 nr.</value>
   </data>
   <data name="QuickDimensioningDistributorsSummary_AlleAnschluesseVerplant" xml:space="preserve">
-    <value>Alle Anschlüße des Verteilers sind verplant.</value>
+    <value>Alle Anschlüsse des Verteilers sind verplant.</value>
   </data>
   <data name="QuickDimensioningDistributorsSummary_VerplanteAnschluesse" xml:space="preserve">
-    <value>Verplante Anschlüße:</value>
+    <value>Verplante Anschlüsse:</value>
   </data>
   <data name="QuickDimensioningDistributorsSummary_Verteiler" xml:space="preserve">
     <value>Verteiler:</value>
@@ -4487,31 +5384,31 @@ fläche
     <value>Kühllast (W/m²)</value>
   </data>
   <data name="SelectConnectionForProductForm_AnschlussAnSichSelbst" xml:space="preserve">
-    <value>Anschluß nicht möglich. Das Heizsystem kann nicht an sich selbst angeschlossen werden.</value>
+    <value>Anschluss nicht möglich. Das Heizsystem kann nicht an sich selbst angeschlossen werden.</value>
   </data>
   <data name="SelectConnectionForProductForm_AnschlussAnSystem" xml:space="preserve">
-    <value>Anschluß an %SYSTEM% in %RAUM%</value>
+    <value>Anschluss an %SYSTEM% in %RAUM%</value>
   </data>
   <data name="SelectConnectionForProductForm_AnschlussAnSystemNichtMoeglich" xml:space="preserve">
-    <value>Anschluß nicht möglich. Bei diesem Heizsystem sind nicht genug Heizkreise verfügbar.</value>
+    <value>Anschluss nicht möglich. Bei diesem Heizsystem sind nicht genug Heizkreise verfügbar.</value>
   </data>
   <data name="SelectConnectionForProductForm_AnschlussAnVerteiler" xml:space="preserve">
-    <value>Anschluß an %ID%: %NAME%</value>
+    <value>Anschluss an %ID%: %NAME%</value>
   </data>
   <data name="SelectConnectionForProductForm_AnschlussNichtMoeglich" xml:space="preserve">
-    <value>Anschluß nicht möglich</value>
+    <value>Anschluss nicht möglich</value>
   </data>
   <data name="SelectConnectionForProductForm_AnschlussNurAnVerteiler" xml:space="preserve">
-    <value>Anschluß nicht möglich. An das Heizsystem ist mindestens ein anderes Teilsystem angeschloßen. Es kann daher nur an einen Verteiler angeschloßen werden.</value>
+    <value>Anschluss nicht möglich. An das Heizsystem ist mindestens ein anderes Teilsystem angeschlossen. Es kann daher nur an einen Verteiler angeschlossen werden.</value>
   </data>
   <data name="SelectConnectionForProductForm_Benutzerdefiniert" xml:space="preserve">
-    <value>Benuzerdefinierte Zuordnung (nur bei Anschluß an anderen Heizkreis)</value>
+    <value>Benuzerdefinierte Zuordnung (nur bei Anschluss an anderen Heizkreis)</value>
   </data>
   <data name="SelectConnectionForProductForm_BenutzerdefiniertAktivieren" xml:space="preserve">
     <value>benutzerdefinierte Heizkreiszuordnung aktivieren</value>
   </data>
   <data name="SelectConnectionForProductForm_Heizkreisanschluss" xml:space="preserve">
-    <value>Heizkreisanschluß (nur bei Anschluß an anderen Heizkreis)</value>
+    <value>Heizkreisanschluss (nur bei Anschluss an anderen Heizkreis)</value>
   </data>
   <data name="SelectConnectionForProductForm_HeizkreisIn" xml:space="preserve">
     <value>Heizkreis in %SYSTEM% in %RAUM%</value>
@@ -4529,7 +5426,7 @@ fläche
     <value>%SYSTEM% (HK%HK%) in %RAUM%</value>
   </data>
   <data name="SelectConnectionForProductForm_Verteileranschluss" xml:space="preserve">
-    <value>Verteileranschluß</value>
+    <value>Verteileranschluss</value>
   </data>
   <data name="SelectConnectionForProductForm_Vorlaufseitig" xml:space="preserve">
     <value>vorlaufseitig</value>
@@ -4628,7 +5525,7 @@ fläche
     <value>Max. Druckverlust:</value>
   </data>
   <data name="SystemParametersPanel_Durchfluss" xml:space="preserve">
-    <value>Max. Durchflußmenge:</value>
+    <value>Max. Durchflussmenge:</value>
   </data>
   <data name="SystemParametersPanel_Ecotherm" xml:space="preserve">
     <value>Ecotherm®</value>

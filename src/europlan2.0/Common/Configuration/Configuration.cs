@@ -140,19 +140,27 @@ namespace Europlan.Common {
 					line = sr.ReadLine();
 					while ((line = sr.ReadLine()) != null) {
 						string[] positions = line.Split(';');
-						if (positions[0].CompareTo("AG01") >= 0 && positions[0].CompareTo("YY76") <= 0) {
+						if (positions.Length > 0 && positions[0].CompareTo("AG01") >= 0 && positions[0].CompareTo("YY76") <= 0) {
 							string id = positions[0].Trim();
-							string name = positions[1].Trim();
+							string name = "";
+							if (positions.Length > 1) {
+								name = positions[1].Trim();
+							}
 							//string name2 = positions[5].Trim();
 							//if (name2 != "") {
 							//    name += " " + name2;
 							//}
 							float price = 0;
-							float.TryParse(positions[2], NumberStyles.Any, CultureInfo.GetCultureInfo("de-AT").NumberFormat, out price);
+							if (positions.Length > 2) {
+								float.TryParse(positions[2], NumberStyles.Any, CultureInfo.GetCultureInfo("de-AT").NumberFormat, out price);
+							}
 							string discountGroup = "" /*positions[10].Trim()*/;
-							string unit = positions[9].Trim();
+							string unit = "";
+							if (positions.Length > 9) {
+								unit = positions[9].Trim();
+							}
 							float denomination = 0;
-							if (float.TryParse(positions[4], NumberStyles.Any, CultureInfo.GetCultureInfo("de-AT").NumberFormat, out denomination)) {
+							if (positions.Length > 4 && float.TryParse(positions[4], NumberStyles.Any, CultureInfo.GetCultureInfo("de-AT").NumberFormat, out denomination)) {
 								allMaterials.Add(new Material(id, name, id, (int)denomination, unit, price, discountGroup, null, false, false));
 							} else {
 								allMaterials.Add(new Material(id, name, id, null, unit, price, discountGroup, null, false, false));

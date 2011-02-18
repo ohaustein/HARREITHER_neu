@@ -251,6 +251,123 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_12d2b721_99c0_4d72_905d_2f218abd26f7 {
+            get {
+                return ResourceManager.GetString("Category_12d2b721_99c0_4d72_905d_2f218abd26f7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_3757b0af_4891_4d6a_911c_bf2c0bc18ebc {
+            get {
+                return ResourceManager.GetString("Category_3757b0af_4891_4d6a_911c_bf2c0bc18ebc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_3da3227a_9ffe_4af4_bcbd_509a159066e1 {
+            get {
+                return ResourceManager.GetString("Category_3da3227a_9ffe_4af4_bcbd_509a159066e1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_47dcf857_a316_40c5_992e_f5913fd643dd {
+            get {
+                return ResourceManager.GetString("Category_47dcf857_a316_40c5_992e_f5913fd643dd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_6d414984_2bc3_41ed_83a0_5a085911689b {
+            get {
+                return ResourceManager.GetString("Category_6d414984_2bc3_41ed_83a0_5a085911689b", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_6ee36a0d_5077_4ac7_bba3_fb7dcde87a05 {
+            get {
+                return ResourceManager.GetString("Category_6ee36a0d_5077_4ac7_bba3_fb7dcde87a05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_733a961b_265b_4119_aa6d_64f29cc6aee3 {
+            get {
+                return ResourceManager.GetString("Category_733a961b_265b_4119_aa6d_64f29cc6aee3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_74215bac_568f_4685_9c97_6c880fcdd5f3 {
+            get {
+                return ResourceManager.GetString("Category_74215bac_568f_4685_9c97_6c880fcdd5f3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_763da832_711a_41af_ad59_3d3527be6131 {
+            get {
+                return ResourceManager.GetString("Category_763da832_711a_41af_ad59_3d3527be6131", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_785616e8_757a_4442_ba9f_b7deed7d03ce {
+            get {
+                return ResourceManager.GetString("Category_785616e8_757a_4442_ba9f_b7deed7d03ce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_92fea213_58a1_405a_ba72_17e4e851848c {
+            get {
+                return ResourceManager.GetString("Category_92fea213_58a1_405a_ba72_17e4e851848c", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_98bf6ba8_cec1_4d99_be2e_5f1836dde18a {
+            get {
+                return ResourceManager.GetString("Category_98bf6ba8_cec1_4d99_be2e_5f1836dde18a", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_a8824ebb_19ac_4ff8_90c1_320b1a15225b {
+            get {
+                return ResourceManager.GetString("Category_a8824ebb_19ac_4ff8_90c1_320b1a15225b", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allgemein.
         /// </summary>
         internal static string Category_Allgemein {
@@ -274,6 +391,15 @@ namespace Europlan.Common {
         internal static string Category_Deckenkuehlung {
             get {
                 return ResourceManager.GetString("Category_Deckenkuehlung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Category_e76a2892_0065_45d0_8fb5_914fffbda956 {
+            get {
+                return ResourceManager.GetString("Category_e76a2892_0065_45d0_8fb5_914fffbda956", resourceCulture);
             }
         }
         
@@ -621,6 +747,483 @@ namespace Europlan.Common {
         internal static string ConnectionPipesForm_Nettoflaeche {
             get {
                 return ResourceManager.GetString("ConnectionPipesForm_Nettoflaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_DK01 {
+            get {
+                return ResourceManager.GetString("Construction_DK01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_DK02 {
+            get {
+                return ResourceManager.GetString("Construction_DK02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_DK03 {
+            get {
+                return ResourceManager.GetString("Construction_DK03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_DK04 {
+            get {
+                return ResourceManager.GetString("Construction_DK04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_DK05 {
+            get {
+                return ResourceManager.GetString("Construction_DK05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_DK06 {
+            get {
+                return ResourceManager.GetString("Construction_DK06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_SCW01 {
+            get {
+                return ResourceManager.GetString("Construction_SCW01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_SCW02 {
+            get {
+                return ResourceManager.GetString("Construction_SCW02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_SCW03 {
+            get {
+                return ResourceManager.GetString("Construction_SCW03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_SCW05 {
+            get {
+                return ResourceManager.GetString("Construction_SCW05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_SCW06 {
+            get {
+                return ResourceManager.GetString("Construction_SCW06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STB01 {
+            get {
+                return ResourceManager.GetString("Construction_STB01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STB02 {
+            get {
+                return ResourceManager.GetString("Construction_STB02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STB03 {
+            get {
+                return ResourceManager.GetString("Construction_STB03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STB04 {
+            get {
+                return ResourceManager.GetString("Construction_STB04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STB05 {
+            get {
+                return ResourceManager.GetString("Construction_STB05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STB06 {
+            get {
+                return ResourceManager.GetString("Construction_STB06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STB07 {
+            get {
+                return ResourceManager.GetString("Construction_STB07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STB08 {
+            get {
+                return ResourceManager.GetString("Construction_STB08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STD01 {
+            get {
+                return ResourceManager.GetString("Construction_STD01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STD02 {
+            get {
+                return ResourceManager.GetString("Construction_STD02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STD03 {
+            get {
+                return ResourceManager.GetString("Construction_STD03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STD04 {
+            get {
+                return ResourceManager.GetString("Construction_STD04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STD05 {
+            get {
+                return ResourceManager.GetString("Construction_STD05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STD06 {
+            get {
+                return ResourceManager.GetString("Construction_STD06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STD07 {
+            get {
+                return ResourceManager.GetString("Construction_STD07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STD08 {
+            get {
+                return ResourceManager.GetString("Construction_STD08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STD09 {
+            get {
+                return ResourceManager.GetString("Construction_STD09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STW01 {
+            get {
+                return ResourceManager.GetString("Construction_STW01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STW02 {
+            get {
+                return ResourceManager.GetString("Construction_STW02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STW03 {
+            get {
+                return ResourceManager.GetString("Construction_STW03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STW04 {
+            get {
+                return ResourceManager.GetString("Construction_STW04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_STW05 {
+            get {
+                return ResourceManager.GetString("Construction_STW05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRE01 {
+            get {
+                return ResourceManager.GetString("Construction_TRE01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRE02 {
+            get {
+                return ResourceManager.GetString("Construction_TRE02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRE03 {
+            get {
+                return ResourceManager.GetString("Construction_TRE03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRE04 {
+            get {
+                return ResourceManager.GetString("Construction_TRE04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRE05 {
+            get {
+                return ResourceManager.GetString("Construction_TRE05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRE06 {
+            get {
+                return ResourceManager.GetString("Construction_TRE06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRE07 {
+            get {
+                return ResourceManager.GetString("Construction_TRE07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRE08 {
+            get {
+                return ResourceManager.GetString("Construction_TRE08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRE09 {
+            get {
+                return ResourceManager.GetString("Construction_TRE09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRK01 {
+            get {
+                return ResourceManager.GetString("Construction_TRK01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRK02 {
+            get {
+                return ResourceManager.GetString("Construction_TRK02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_TRK03 {
+            get {
+                return ResourceManager.GetString("Construction_TRK03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_WD00 {
+            get {
+                return ResourceManager.GetString("Construction_WD00", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_WD01 {
+            get {
+                return ResourceManager.GetString("Construction_WD01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_WD02 {
+            get {
+                return ResourceManager.GetString("Construction_WD02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_WD03 {
+            get {
+                return ResourceManager.GetString("Construction_WD03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_WD04 {
+            get {
+                return ResourceManager.GetString("Construction_WD04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_WD05 {
+            get {
+                return ResourceManager.GetString("Construction_WD05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_WD06 {
+            get {
+                return ResourceManager.GetString("Construction_WD06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_WD07 {
+            get {
+                return ResourceManager.GetString("Construction_WD07", resourceCulture);
             }
         }
         
@@ -1435,11 +2038,20 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ecotherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:.
+        ///   Looks up a localized string similar to Ecotherm-Systeme werden mit veränderten Parametern berechnet. Folgende Parameter weichen von den Standardwerten ab:.
         /// </summary>
         internal static string EcothermProduct_NotificationParameter {
             get {
                 return ResourceManager.GetString("EcothermProduct_NotificationParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die Fläche der Anbindeleitung ist größer als die zur Verfügung stehende Fläche (%VALUE%m² &gt; %MAXIMUM%m²).
+        /// </summary>
+        internal static string ErrorMessage_Anbindeleitung {
+            get {
+                return ResourceManager.GetString("ErrorMessage_Anbindeleitung", resourceCulture);
             }
         }
         
@@ -1534,7 +2146,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Heizkreisanschluß.
+        ///   Looks up a localized string similar to Heizkreisanschluss.
         /// </summary>
         internal static string ErrorMessage_FehlendeEingabenHkAnschluss {
             get {
@@ -1831,7 +2443,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Euroval-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:.
+        ///   Looks up a localized string similar to Euroval-Systeme werden mit veränderten Parametern berechnet. Folgende Parameter weichen von den Standardwerten ab:.
         /// </summary>
         internal static string EurovalProduct_NotificationParameter {
             get {
@@ -8388,6 +9000,1860 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_1a29f733_ab7b_41fd_a0df_926d64a8526d {
+            get {
+                return ResourceManager.GetString("Material_1a29f733_ab7b_41fd_a0df_926d64a8526d", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_648b5196_3bb6_4e3d_856c_a569315f56f2 {
+            get {
+                return ResourceManager.GetString("Material_648b5196_3bb6_4e3d_856c_a569315f56f2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_a2fbf91c_12a0_43af_ad0e_5a26a0431a00 {
+            get {
+                return ResourceManager.GetString("Material_a2fbf91c_12a0_43af_ad0e_5a26a0431a00", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_a834583d_750c_4695_ba45_7e346108551f {
+            get {
+                return ResourceManager.GetString("Material_a834583d_750c_4695_ba45_7e346108551f", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_ac14b03f_63f2_420a_9134_424348bbc3ee {
+            get {
+                return ResourceManager.GetString("Material_ac14b03f_63f2_420a_9134_424348bbc3ee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_b75adb45_8e48_4f91_b0dd_ebe853df344f {
+            get {
+                return ResourceManager.GetString("Material_b75adb45_8e48_4f91_b0dd_ebe853df344f", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_d3e1298f_6755_4fc8_9097_bd9b47d2c1c5 {
+            get {
+                return ResourceManager.GetString("Material_d3e1298f_6755_4fc8_9097_bd9b47d2c1c5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EC01 {
+            get {
+                return ResourceManager.GetString("Material_EC01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EC02 {
+            get {
+                return ResourceManager.GetString("Material_EC02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EC04 {
+            get {
+                return ResourceManager.GetString("Material_EC04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EC05 {
+            get {
+                return ResourceManager.GetString("Material_EC05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EC06 {
+            get {
+                return ResourceManager.GetString("Material_EC06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EC08 {
+            get {
+                return ResourceManager.GetString("Material_EC08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV01 {
+            get {
+                return ResourceManager.GetString("Material_EV01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV10 {
+            get {
+                return ResourceManager.GetString("Material_EV10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV11 {
+            get {
+                return ResourceManager.GetString("Material_EV11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV12 {
+            get {
+                return ResourceManager.GetString("Material_EV12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV15 {
+            get {
+                return ResourceManager.GetString("Material_EV15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV16 {
+            get {
+                return ResourceManager.GetString("Material_EV16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV20 {
+            get {
+                return ResourceManager.GetString("Material_EV20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV21 {
+            get {
+                return ResourceManager.GetString("Material_EV21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV30 {
+            get {
+                return ResourceManager.GetString("Material_EV30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV31 {
+            get {
+                return ResourceManager.GetString("Material_EV31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_EV34 {
+            get {
+                return ResourceManager.GetString("Material_EV34", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_f2532e64_771a_4013_9d18_e90c1ad2ddd8 {
+            get {
+                return ResourceManager.GetString("Material_f2532e64_771a_4013_9d18_e90c1ad2ddd8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC06 {
+            get {
+                return ResourceManager.GetString("Material_HC06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC08 {
+            get {
+                return ResourceManager.GetString("Material_HC08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC10 {
+            get {
+                return ResourceManager.GetString("Material_HC10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC11 {
+            get {
+                return ResourceManager.GetString("Material_HC11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC12 {
+            get {
+                return ResourceManager.GetString("Material_HC12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC15 {
+            get {
+                return ResourceManager.GetString("Material_HC15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC16 {
+            get {
+                return ResourceManager.GetString("Material_HC16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC17 {
+            get {
+                return ResourceManager.GetString("Material_HC17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC20 {
+            get {
+                return ResourceManager.GetString("Material_HC20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC21 {
+            get {
+                return ResourceManager.GetString("Material_HC21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC22 {
+            get {
+                return ResourceManager.GetString("Material_HC22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC25 {
+            get {
+                return ResourceManager.GetString("Material_HC25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC27 {
+            get {
+                return ResourceManager.GetString("Material_HC27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC41 {
+            get {
+                return ResourceManager.GetString("Material_HC41", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC42 {
+            get {
+                return ResourceManager.GetString("Material_HC42", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC43 {
+            get {
+                return ResourceManager.GetString("Material_HC43", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC44 {
+            get {
+                return ResourceManager.GetString("Material_HC44", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC56plus {
+            get {
+                return ResourceManager.GetString("Material_HC56plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC58plus {
+            get {
+                return ResourceManager.GetString("Material_HC58plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC60plus {
+            get {
+                return ResourceManager.GetString("Material_HC60plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC61plus {
+            get {
+                return ResourceManager.GetString("Material_HC61plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC62plus {
+            get {
+                return ResourceManager.GetString("Material_HC62plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC65plus {
+            get {
+                return ResourceManager.GetString("Material_HC65plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC66plus {
+            get {
+                return ResourceManager.GetString("Material_HC66plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC67plus {
+            get {
+                return ResourceManager.GetString("Material_HC67plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC70plus {
+            get {
+                return ResourceManager.GetString("Material_HC70plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC71plus {
+            get {
+                return ResourceManager.GetString("Material_HC71plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC72plus {
+            get {
+                return ResourceManager.GetString("Material_HC72plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC75plus {
+            get {
+                return ResourceManager.GetString("Material_HC75plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HC77plus {
+            get {
+                return ResourceManager.GetString("Material_HC77plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF01 {
+            get {
+                return ResourceManager.GetString("Material_HF01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF02 {
+            get {
+                return ResourceManager.GetString("Material_HF02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF03 {
+            get {
+                return ResourceManager.GetString("Material_HF03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF04 {
+            get {
+                return ResourceManager.GetString("Material_HF04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF05 {
+            get {
+                return ResourceManager.GetString("Material_HF05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF06 {
+            get {
+                return ResourceManager.GetString("Material_HF06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF07 {
+            get {
+                return ResourceManager.GetString("Material_HF07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF08 {
+            get {
+                return ResourceManager.GetString("Material_HF08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF11 {
+            get {
+                return ResourceManager.GetString("Material_HF11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF12 {
+            get {
+                return ResourceManager.GetString("Material_HF12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF13 {
+            get {
+                return ResourceManager.GetString("Material_HF13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF21 {
+            get {
+                return ResourceManager.GetString("Material_HF21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF22 {
+            get {
+                return ResourceManager.GetString("Material_HF22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF23 {
+            get {
+                return ResourceManager.GetString("Material_HF23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF24 {
+            get {
+                return ResourceManager.GetString("Material_HF24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF25 {
+            get {
+                return ResourceManager.GetString("Material_HF25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF26 {
+            get {
+                return ResourceManager.GetString("Material_HF26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF27 {
+            get {
+                return ResourceManager.GetString("Material_HF27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF28 {
+            get {
+                return ResourceManager.GetString("Material_HF28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF29 {
+            get {
+                return ResourceManager.GetString("Material_HF29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF30 {
+            get {
+                return ResourceManager.GetString("Material_HF30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF31 {
+            get {
+                return ResourceManager.GetString("Material_HF31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF32 {
+            get {
+                return ResourceManager.GetString("Material_HF32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF50 {
+            get {
+                return ResourceManager.GetString("Material_HF50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF51 {
+            get {
+                return ResourceManager.GetString("Material_HF51", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF52 {
+            get {
+                return ResourceManager.GetString("Material_HF52", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF53 {
+            get {
+                return ResourceManager.GetString("Material_HF53", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF54 {
+            get {
+                return ResourceManager.GetString("Material_HF54", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF55 {
+            get {
+                return ResourceManager.GetString("Material_HF55", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF56 {
+            get {
+                return ResourceManager.GetString("Material_HF56", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF57 {
+            get {
+                return ResourceManager.GetString("Material_HF57", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF59 {
+            get {
+                return ResourceManager.GetString("Material_HF59", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF60 {
+            get {
+                return ResourceManager.GetString("Material_HF60", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF61 {
+            get {
+                return ResourceManager.GetString("Material_HF61", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HF62 {
+            get {
+                return ResourceManager.GetString("Material_HF62", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG01 {
+            get {
+                return ResourceManager.GetString("Material_HG01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG02 {
+            get {
+                return ResourceManager.GetString("Material_HG02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG03 {
+            get {
+                return ResourceManager.GetString("Material_HG03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG04 {
+            get {
+                return ResourceManager.GetString("Material_HG04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG05 {
+            get {
+                return ResourceManager.GetString("Material_HG05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG06 {
+            get {
+                return ResourceManager.GetString("Material_HG06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG07 {
+            get {
+                return ResourceManager.GetString("Material_HG07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG08 {
+            get {
+                return ResourceManager.GetString("Material_HG08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG11 {
+            get {
+                return ResourceManager.GetString("Material_HG11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG12 {
+            get {
+                return ResourceManager.GetString("Material_HG12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG13 {
+            get {
+                return ResourceManager.GetString("Material_HG13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG50 {
+            get {
+                return ResourceManager.GetString("Material_HG50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG51 {
+            get {
+                return ResourceManager.GetString("Material_HG51", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG52 {
+            get {
+                return ResourceManager.GetString("Material_HG52", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG53 {
+            get {
+                return ResourceManager.GetString("Material_HG53", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG54 {
+            get {
+                return ResourceManager.GetString("Material_HG54", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG55 {
+            get {
+                return ResourceManager.GetString("Material_HG55", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG56 {
+            get {
+                return ResourceManager.GetString("Material_HG56", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG57 {
+            get {
+                return ResourceManager.GetString("Material_HG57", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG60 {
+            get {
+                return ResourceManager.GetString("Material_HG60", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG61 {
+            get {
+                return ResourceManager.GetString("Material_HG61", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HG62 {
+            get {
+                return ResourceManager.GetString("Material_HG62", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI05 {
+            get {
+                return ResourceManager.GetString("Material_HI05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI06 {
+            get {
+                return ResourceManager.GetString("Material_HI06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI10 {
+            get {
+                return ResourceManager.GetString("Material_HI10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI11 {
+            get {
+                return ResourceManager.GetString("Material_HI11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI15 {
+            get {
+                return ResourceManager.GetString("Material_HI15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI16 {
+            get {
+                return ResourceManager.GetString("Material_HI16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI20 {
+            get {
+                return ResourceManager.GetString("Material_HI20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI21 {
+            get {
+                return ResourceManager.GetString("Material_HI21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI25 {
+            get {
+                return ResourceManager.GetString("Material_HI25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI26 {
+            get {
+                return ResourceManager.GetString("Material_HI26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI30 {
+            get {
+                return ResourceManager.GetString("Material_HI30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI31 {
+            get {
+                return ResourceManager.GetString("Material_HI31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI40 {
+            get {
+                return ResourceManager.GetString("Material_HI40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI41 {
+            get {
+                return ResourceManager.GetString("Material_HI41", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI42 {
+            get {
+                return ResourceManager.GetString("Material_HI42", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI51 {
+            get {
+                return ResourceManager.GetString("Material_HI51", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI52 {
+            get {
+                return ResourceManager.GetString("Material_HI52", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI54 {
+            get {
+                return ResourceManager.GetString("Material_HI54", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI55 {
+            get {
+                return ResourceManager.GetString("Material_HI55", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI56 {
+            get {
+                return ResourceManager.GetString("Material_HI56", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI57 {
+            get {
+                return ResourceManager.GetString("Material_HI57", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI58 {
+            get {
+                return ResourceManager.GetString("Material_HI58", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI60 {
+            get {
+                return ResourceManager.GetString("Material_HI60", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI65 {
+            get {
+                return ResourceManager.GetString("Material_HI65", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI66 {
+            get {
+                return ResourceManager.GetString("Material_HI66", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI67 {
+            get {
+                return ResourceManager.GetString("Material_HI67", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI68 {
+            get {
+                return ResourceManager.GetString("Material_HI68", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI69 {
+            get {
+                return ResourceManager.GetString("Material_HI69", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI70 {
+            get {
+                return ResourceManager.GetString("Material_HI70", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HI71 {
+            get {
+                return ResourceManager.GetString("Material_HI71", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HP05 {
+            get {
+                return ResourceManager.GetString("Material_HP05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HP10 {
+            get {
+                return ResourceManager.GetString("Material_HP10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HP15 {
+            get {
+                return ResourceManager.GetString("Material_HP15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HP20 {
+            get {
+                return ResourceManager.GetString("Material_HP20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HP25 {
+            get {
+                return ResourceManager.GetString("Material_HP25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HP30 {
+            get {
+                return ResourceManager.GetString("Material_HP30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR51 {
+            get {
+                return ResourceManager.GetString("Material_HR51", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR55 {
+            get {
+                return ResourceManager.GetString("Material_HR55", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR56 {
+            get {
+                return ResourceManager.GetString("Material_HR56", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR57 {
+            get {
+                return ResourceManager.GetString("Material_HR57", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR60 {
+            get {
+                return ResourceManager.GetString("Material_HR60", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR65 {
+            get {
+                return ResourceManager.GetString("Material_HR65", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR66 {
+            get {
+                return ResourceManager.GetString("Material_HR66", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR67 {
+            get {
+                return ResourceManager.GetString("Material_HR67", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR68 {
+            get {
+                return ResourceManager.GetString("Material_HR68", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR69 {
+            get {
+                return ResourceManager.GetString("Material_HR69", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR70 {
+            get {
+                return ResourceManager.GetString("Material_HR70", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR75 {
+            get {
+                return ResourceManager.GetString("Material_HR75", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR76 {
+            get {
+                return ResourceManager.GetString("Material_HR76", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK01 {
+            get {
+                return ResourceManager.GetString("Material_MK01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK02 {
+            get {
+                return ResourceManager.GetString("Material_MK02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK03 {
+            get {
+                return ResourceManager.GetString("Material_MK03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK04 {
+            get {
+                return ResourceManager.GetString("Material_MK04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK05 {
+            get {
+                return ResourceManager.GetString("Material_MK05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK10 {
+            get {
+                return ResourceManager.GetString("Material_MK10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK11 {
+            get {
+                return ResourceManager.GetString("Material_MK11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK12 {
+            get {
+                return ResourceManager.GetString("Material_MK12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK13 {
+            get {
+                return ResourceManager.GetString("Material_MK13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK15 {
+            get {
+                return ResourceManager.GetString("Material_MK15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK20 {
+            get {
+                return ResourceManager.GetString("Material_MK20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK21 {
+            get {
+                return ResourceManager.GetString("Material_MK21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK22 {
+            get {
+                return ResourceManager.GetString("Material_MK22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK23 {
+            get {
+                return ResourceManager.GetString("Material_MK23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK30 {
+            get {
+                return ResourceManager.GetString("Material_MK30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK31 {
+            get {
+                return ResourceManager.GetString("Material_MK31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK32 {
+            get {
+                return ResourceManager.GetString("Material_MK32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK33 {
+            get {
+                return ResourceManager.GetString("Material_MK33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK34 {
+            get {
+                return ResourceManager.GetString("Material_MK34", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK35 {
+            get {
+                return ResourceManager.GetString("Material_MK35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK40 {
+            get {
+                return ResourceManager.GetString("Material_MK40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK49 {
+            get {
+                return ResourceManager.GetString("Material_MK49", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK50 {
+            get {
+                return ResourceManager.GetString("Material_MK50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK51 {
+            get {
+                return ResourceManager.GetString("Material_MK51", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK52 {
+            get {
+                return ResourceManager.GetString("Material_MK52", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO02 {
+            get {
+                return ResourceManager.GetString("Material_VO02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO03 {
+            get {
+                return ResourceManager.GetString("Material_VO03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO04 {
+            get {
+                return ResourceManager.GetString("Material_VO04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO05 {
+            get {
+                return ResourceManager.GetString("Material_VO05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO06 {
+            get {
+                return ResourceManager.GetString("Material_VO06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO07 {
+            get {
+                return ResourceManager.GetString("Material_VO07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO08 {
+            get {
+                return ResourceManager.GetString("Material_VO08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO09 {
+            get {
+                return ResourceManager.GetString("Material_VO09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO10 {
+            get {
+                return ResourceManager.GetString("Material_VO10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO11 {
+            get {
+                return ResourceManager.GetString("Material_VO11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO12 {
+            get {
+                return ResourceManager.GetString("Material_VO12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO44 {
+            get {
+                return ResourceManager.GetString("Material_VO44", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO60 {
+            get {
+                return ResourceManager.GetString("Material_VO60", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO61 {
+            get {
+                return ResourceManager.GetString("Material_VO61", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VO62 {
+            get {
+                return ResourceManager.GetString("Material_VO62", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VT20 {
+            get {
+                return ResourceManager.GetString("Material_VT20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VT21 {
+            get {
+                return ResourceManager.GetString("Material_VT21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VT35 {
+            get {
+                return ResourceManager.GetString("Material_VT35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_WZ13 {
+            get {
+                return ResourceManager.GetString("Material_WZ13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_WZ14 {
+            get {
+                return ResourceManager.GetString("Material_WZ14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bestellnr..
         /// </summary>
         internal static string MaterialEditorGrid_BestellnummerCol {
@@ -9166,7 +11632,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rorhl.
+        ///   Looks up a localized string similar to Rohrl.
         ///m.
         /// </summary>
         internal static string PlannedEurovalProductPanel_Rohrlaenge {
@@ -10284,7 +12750,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anschluß an %SYSTEM% in %RAUMID%: %RAUMNAME%.
+        ///   Looks up a localized string similar to Anschluss an %SYSTEM% in %RAUMID%: %RAUMNAME%.
         /// </summary>
         internal static string ProductConnection_AnschlussAn {
             get {
@@ -10476,7 +12942,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die von Ihnen verwendet Version von Europlan 2.0 ist älter als die Version mit der das Projekt zuletzt abgespeichert wurde. Dies kann zu Problemen beim Anzeigen bzw. Bearbeiten des Projekts führen. Wollen Sie das Projekt trotzdem laden?.
+        ///   Looks up a localized string similar to Die von Ihnen verwendete Version von Europlan 2.0 ist älter als die Version mit der das Projekt zuletzt abgespeichert wurde. Dies kann zu Problemen beim Anzeigen bzw. Bearbeiten des Projekts führen. Wollen Sie das Projekt trotzdem laden?.
         /// </summary>
         internal static string ProjectLoad_VersionNichtKompatibelText {
             get {
@@ -11342,7 +13808,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Alle Anschlüße des Verteilers sind verplant..
+        ///   Looks up a localized string similar to Alle Anschlüsse des Verteilers sind verplant..
         /// </summary>
         internal static string QuickDimensioningDistributorsSummary_AlleAnschluesseVerplant {
             get {
@@ -11351,7 +13817,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verplante Anschlüße:.
+        ///   Looks up a localized string similar to Verplante Anschlüsse:.
         /// </summary>
         internal static string QuickDimensioningDistributorsSummary_VerplanteAnschluesse {
             get {
@@ -12614,7 +15080,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anschluß nicht möglich. Das Heizsystem kann nicht an sich selbst angeschlossen werden..
+        ///   Looks up a localized string similar to Anschluss nicht möglich. Das Heizsystem kann nicht an sich selbst angeschlossen werden..
         /// </summary>
         internal static string SelectConnectionForProductForm_AnschlussAnSichSelbst {
             get {
@@ -12623,7 +15089,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anschluß an %SYSTEM% in %RAUM%.
+        ///   Looks up a localized string similar to Anschluss an %SYSTEM% in %RAUM%.
         /// </summary>
         internal static string SelectConnectionForProductForm_AnschlussAnSystem {
             get {
@@ -12632,7 +15098,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anschluß nicht möglich. Bei diesem Heizsystem sind nicht genug Heizkreise verfügbar..
+        ///   Looks up a localized string similar to Anschluss nicht möglich. Bei diesem Heizsystem sind nicht genug Heizkreise verfügbar..
         /// </summary>
         internal static string SelectConnectionForProductForm_AnschlussAnSystemNichtMoeglich {
             get {
@@ -12641,7 +15107,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anschluß an %ID%: %NAME%.
+        ///   Looks up a localized string similar to Anschluss an %ID%: %NAME%.
         /// </summary>
         internal static string SelectConnectionForProductForm_AnschlussAnVerteiler {
             get {
@@ -12650,7 +15116,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anschluß nicht möglich.
+        ///   Looks up a localized string similar to Anschluss nicht möglich.
         /// </summary>
         internal static string SelectConnectionForProductForm_AnschlussNichtMoeglich {
             get {
@@ -12659,7 +15125,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anschluß nicht möglich. An das Heizsystem ist mindestens ein anderes Teilsystem angeschloßen. Es kann daher nur an einen Verteiler angeschloßen werden..
+        ///   Looks up a localized string similar to Anschluss nicht möglich. An das Heizsystem ist mindestens ein anderes Teilsystem angeschlossen. Es kann daher nur an einen Verteiler angeschlossen werden..
         /// </summary>
         internal static string SelectConnectionForProductForm_AnschlussNurAnVerteiler {
             get {
@@ -12668,7 +15134,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Benuzerdefinierte Zuordnung (nur bei Anschluß an anderen Heizkreis).
+        ///   Looks up a localized string similar to Benuzerdefinierte Zuordnung (nur bei Anschluss an anderen Heizkreis).
         /// </summary>
         internal static string SelectConnectionForProductForm_Benutzerdefiniert {
             get {
@@ -12686,7 +15152,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Heizkreisanschluß (nur bei Anschluß an anderen Heizkreis).
+        ///   Looks up a localized string similar to Heizkreisanschluss (nur bei Anschluss an anderen Heizkreis).
         /// </summary>
         internal static string SelectConnectionForProductForm_Heizkreisanschluss {
             get {
@@ -12740,7 +15206,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verteileranschluß.
+        ///   Looks up a localized string similar to Verteileranschluss.
         /// </summary>
         internal static string SelectConnectionForProductForm_Verteileranschluss {
             get {
@@ -13037,7 +15503,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Max. Durchflußmenge:.
+        ///   Looks up a localized string similar to Max. Durchflussmenge:.
         /// </summary>
         internal static string SystemParametersPanel_Durchfluss {
             get {

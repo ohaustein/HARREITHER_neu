@@ -278,6 +278,9 @@ namespace Europlan.Common {
 
 			// Aufteilung RZ - AZ
 			double aFbh = this.areaTotal - this.areaReduced / 2- this.areaUnheated - this.areaRemovedDueConnection;	// wirksam beheizte Fläche
+			if (aFbh < 0) {
+				aFbh = 0;
+			}
 
 			bool calculateWithRim = rimType.HasValue && (rimLength - this.rimCorners * EurovalProduct.GetRimWidth(rimType.Value) / 100 > 0);
 			this.c_areaRz = 0;
@@ -285,6 +288,9 @@ namespace Europlan.Common {
 			if (calculateWithRim) {
 				this.c_areaRz = this.GetAreaRim(rimType);
 				this.c_pipeLengthRz = this.c_areaRz * EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.GetRimLayDistance(rimType.Value));  // Rohrlänge der Randzone berechnen
+			}
+			if (this.c_areaRz > aFbh) {
+				this.c_areaRz = aFbh;
 			}
 			this.c_areaAz = aFbh - this.c_areaRz;                                                      // Fläche der Aufenthaltszone berechnen
 			this.c_pipeLengthAz = (this.c_areaAz + this.areaReduced / 2) * EurovalProduct.GetPipeLengthPerSqm(layDistance);                           // Rohlänge der Aufenthaltszone berechnen

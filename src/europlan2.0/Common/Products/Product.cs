@@ -231,14 +231,14 @@ namespace Europlan.Common {
 
 		public Circuit.CircuitConnection GetCircuitConnected(int thisCircuit) {
 			if (this.connectedCircuits.ContainsKey(thisCircuit)) {
-				return this.connectedCircuits[thisCircuit];
+				return this.connectedCircuits[thisCircuit].OtherCircuit == null ? null : this.connectedCircuits[thisCircuit];
 			}
 			return null;
 		}
 
 		public Circuit.CircuitConnection GetCircuitInverseConnected(int thisCircuit) {
 			if (this.inverseConnectedCircuits.ContainsKey(thisCircuit)) {
-				return this.inverseConnectedCircuits[thisCircuit];
+				return this.inverseConnectedCircuits[thisCircuit].OtherCircuit == null ? null : this.inverseConnectedCircuits[thisCircuit];
 			}
 			return null;
 		}
@@ -557,6 +557,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedHeatLoadAnbindung {
 			get {
+				/*if (this.incompleteCalculation || this.requestedHeatLoad == 0) {
+					return 0;
+				}*/
 				double value = 0;
 				foreach (Floor f in Project.Instance.Floors) {
 					foreach (Room r in f.Rooms) {
@@ -603,6 +606,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedCoolLoadAnbindung {
 			get {
+				/*if (this.incompleteCalculation || this.requestedCoolLoad == 0) {
+					return 0;
+				}*/
 				double value = 0;
 				foreach (Floor f in Project.Instance.Floors) {
 					foreach (Room r in f.Rooms) {
@@ -1559,6 +1565,14 @@ namespace Europlan.Common {
 			} else {
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", GetWinkel45(circuit21mmFirstLength) + GetWinkel45(circuit21mmOthersLength) * (this.PlannedCircuitCount - 1));
 			}
+
+			// 21mm pipe
+			if (usePlus) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR51", pipe21mm);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", pipe21mm);
+			}
+
 
 			// materials for ecotherm pipe
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EC01", pipeEcotherm);

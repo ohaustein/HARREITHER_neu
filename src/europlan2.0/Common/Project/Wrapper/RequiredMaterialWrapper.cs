@@ -21,7 +21,7 @@ namespace Europlan.Common {
 		}
 
 		public string Name {
-			get { return material.Name; }
+			get { return material.LocalizedName; }
 		}
 
 		public double CalculatedAmount {

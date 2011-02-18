@@ -36,6 +36,8 @@ namespace Europlan.Common {
 		private float plannedAreaUnheated = 0;
 		private Construction plannedFloorConstruction = null;
 		private Construction plannedInsulationConstruction = null;
+		private string plannedFloorConstructionId = null;
+		private string plannedInsulationConstructionId = null;
 
 		//  !!!!!!!!!!! changes must be also applied in SystemParametersPanel.cs !!!!!!!!!!!
 		private static bool useHarreitherNorm = true;
@@ -420,12 +422,12 @@ namespace Europlan.Common {
 			this.requestedHeatLoad = requestedHeatLoad;
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
-			if (this.plannedFloorConstruction == null || this.plannedInsulationConstruction == null || this.PlannedConnection == null) {
+			if (this.PlannedFloorConstruction == null || this.PlannedInsulationConstruction == null || this.PlannedConnection == null) {
 				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
-				if (plannedFloorConstruction == null) {
+				if (PlannedFloorConstruction == null) {
 					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fußbodenkonstruktion, ";
 				}
-				if (plannedInsulationConstruction == null) {
+				if (PlannedInsulationConstruction == null) {
 					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"Wärmedämmkonstruktion, ";
 				}
 				if (PlannedConnection == null) {
@@ -679,6 +681,12 @@ namespace Europlan.Common {
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
+			if (this.PlannedRemoveArea > this.AvailableFloorArea) {
+				newMsg = EuroplanRes.ErrorMessage_Anbindeleitung;
+				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedRemoveArea, 1).ToString());
+				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.AvailableFloorArea, 1).ToString());
+				this.lastErrorMsg += newMsg + "\n";
+			}
 			if (this.lastErrorMsg.Length == 0) {
 				this.lastErrorMsg = null;
 			}
@@ -882,16 +890,22 @@ namespace Europlan.Common {
 		/// The id of the planned floor construction for serialization
 		/// </summary>
 		public string PlannedFloorConstructionId {
-			get { return (this.plannedFloorConstruction == null ? "" : this.plannedFloorConstruction.Id); }
-			set { this.plannedFloorConstruction = Project.Instance.Config.GetConstruction(value); }
+			get { return this.PlannedFloorConstruction == null ? this.plannedFloorConstructionId : this.PlannedFloorConstruction.Id; }
+			set {
+				this.plannedFloorConstructionId = value;
+				this.plannedFloorConstruction = null;
+			}
 		}
 
 		/// <summary>
 		/// The id of the planned insulation construction for serialization
 		/// </summary>
 		public string PlannedInsulationConstructionId {
-			get { return (this.plannedInsulationConstruction == null ? "" : this.plannedInsulationConstruction.Id); }
-			set { this.plannedInsulationConstruction = Project.Instance.Config.GetConstruction(value); }
+			get { return this.PlannedInsulationConstruction == null ? this.plannedInsulationConstructionId : this.PlannedInsulationConstruction.Id; }
+			set {
+				this.plannedInsulationConstructionId = value;
+				this.plannedInsulationConstruction = null;
+			}
 		}
 
 		/// <summary>
@@ -899,8 +913,17 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public Construction PlannedFloorConstruction {
-			get { return this.plannedFloorConstruction; }
-			set { this.plannedFloorConstruction = value; }
+			get {
+				if (this.plannedFloorConstructionId != null) {
+					this.plannedFloorConstruction = Project.Instance.Config.GetConstruction(this.plannedFloorConstructionId);
+					this.plannedFloorConstructionId = null;
+				}
+				return this.plannedFloorConstruction;
+			}
+			set {
+				this.plannedFloorConstruction = value;
+				this.plannedFloorConstructionId = null;
+			}
 		}
 
 		/// <summary>
@@ -908,8 +931,17 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public Construction PlannedInsulationConstruction {
-			get { return this.plannedInsulationConstruction; }
-			set { this.plannedInsulationConstruction = value; }
+			get {
+				if (this.plannedInsulationConstructionId != null) {
+					this.plannedInsulationConstruction = Project.Instance.Config.GetConstruction(this.plannedInsulationConstructionId);
+					this.plannedInsulationConstructionId = null;
+				}
+				return this.plannedInsulationConstruction;
+			}
+			set {
+				this.plannedInsulationConstruction = value;
+				this.plannedInsulationConstructionId = null;
+			}
 		}
 
 		/// <summary>
@@ -917,7 +949,7 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public float PlannedFloorConstructionRValue {
-			get { return (this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue); }
+			get { return (this.PlannedFloorConstruction == null ? 0 : this.PlannedFloorConstruction.RValue); }
 		}
 
 		/// <summary>
@@ -925,7 +957,7 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public float PlannedInsulationConstructionRValue {
-			get { return (this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue); }
+			get { return (this.PlannedInsulationConstruction == null ? 0 : this.PlannedInsulationConstruction.RValue); }
 		}
 
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
@@ -937,17 +969,17 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public override float PlannedInsideConstructionRValue {
-			get { return (this.plannedFloorConstruction == null ? 0 : this.plannedFloorConstruction.RValue); }
+			get { return (this.PlannedFloorConstruction == null ? 0 : this.PlannedFloorConstruction.RValue); }
 		}
 
 		[XmlIgnore]
 		public override bool HasInsideConstruction {
-			get { return this.plannedFloorConstruction != null; }
+			get { return this.PlannedFloorConstruction != null; }
 		}
 
 		[XmlIgnore]
 		public override Construction PlannedInsideConstruction {
-			get { return this.plannedFloorConstruction; }
+			get { return this.PlannedFloorConstruction; }
 		}
 
 		/// <summary>
@@ -955,17 +987,17 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public override float PlannedOutsideConstructionRValue {
-			get { return (this.plannedInsulationConstruction == null ? 0 : this.plannedInsulationConstruction.RValue); }
+			get { return (this.PlannedInsulationConstruction == null ? 0 : this.PlannedInsulationConstruction.RValue); }
 		}
 
 		[XmlIgnore]
 		public override bool HasOutsideConstruction {
-			get { return this.plannedInsulationConstruction != null; }
+			get { return this.PlannedInsulationConstruction != null; }
 		}
 
 		[XmlIgnore]
 		public override Construction PlannedOutsideConstruction {
-			get { return this.plannedInsulationConstruction; }
+			get { return this.PlannedInsulationConstruction; }
 		}
 
 		[XmlIgnore]

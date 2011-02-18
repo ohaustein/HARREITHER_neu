@@ -502,25 +502,13 @@ namespace Europlan.Common {
 				e.Row.Cells[Verlegeart.Index].Value = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
 				e.Row.Cells[Insulation.Index].Value = ConnectionPipe.InsulationEnum.IN_VL_RL;
 			} else if (this.product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_ECOTHERM) {
-				if (e.Row.DataBoundItem is ConnectionPipe && (e.Row.DataBoundItem as ConnectionPipe).Room != null && (e.Row.DataBoundItem as ConnectionPipe).ConnectionThrough != null) {
-					e.Row.Cells[PipeType.Index].Value = ConnectionPipe.PipeTypeEnum.PT_ECOTHERM;
-					e.Row.Cells[Verlegeart.Index].Value = ConnectionPipe.VerlegeartEnum.VA_EV5;
-					e.Row.Cells[Insulation.Index].Value = ConnectionPipe.InsulationEnum.IN_NONE;
-				} else {
-					e.Row.Cells[PipeType.Index].Value = ConnectionPipe.PipeTypeEnum.PT_ECOTHERM;
-					e.Row.Cells[Verlegeart.Index].Value = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
-					e.Row.Cells[Insulation.Index].Value = ConnectionPipe.InsulationEnum.IN_VL_RL;
-				}
+				e.Row.Cells[PipeType.Index].Value = ConnectionPipe.PipeTypeEnum.PT_ECOTHERM;
+				e.Row.Cells[Verlegeart.Index].Value = ConnectionPipe.VerlegeartEnum.VA_EV5;
+				e.Row.Cells[Insulation.Index].Value = ConnectionPipe.InsulationEnum.IN_NONE;
 			} else {
-				if (e.Row.DataBoundItem is ConnectionPipe && (e.Row.DataBoundItem as ConnectionPipe).Room != null && (e.Row.DataBoundItem as ConnectionPipe).ConnectionThrough != null) {
-					e.Row.Cells[PipeType.Index].Value = ConnectionPipe.PipeTypeEnum.PT_EUROVAL;
-					e.Row.Cells[Verlegeart.Index].Value = ConnectionPipe.VerlegeartEnum.VA_EV5;
-					e.Row.Cells[Insulation.Index].Value = ConnectionPipe.InsulationEnum.IN_NONE;
-				} else {
-					e.Row.Cells[PipeType.Index].Value = ConnectionPipe.PipeTypeEnum.PT_EUROVAL;
-					e.Row.Cells[Verlegeart.Index].Value = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
-					e.Row.Cells[Insulation.Index].Value = ConnectionPipe.InsulationEnum.IN_VL_RL;
-				}
+				e.Row.Cells[PipeType.Index].Value = ConnectionPipe.PipeTypeEnum.PT_EUROVAL;
+				e.Row.Cells[Verlegeart.Index].Value = ConnectionPipe.VerlegeartEnum.VA_EV5;
+				e.Row.Cells[Insulation.Index].Value = ConnectionPipe.InsulationEnum.IN_NONE;
 			}
 		}
 

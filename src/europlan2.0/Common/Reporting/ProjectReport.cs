@@ -3654,17 +3654,17 @@ namespace Europlan.Common {
 						} else {
 							if (pp.Product.PlannedInsideConstruction != null) {
 								konstruktion = pp.Product.PlannedInsideConstruction.Id + " " +
-									pp.Product.PlannedInsideConstruction.Name;
+									pp.Product.PlannedInsideConstruction.LocalizedName;
 								if (pp.Product.PlannedOutsideConstruction != null) {
 									konstruktion += " + " +
 										pp.Product.PlannedOutsideConstruction.Id + " " +
-										pp.Product.PlannedOutsideConstruction.Name;
+										pp.Product.PlannedOutsideConstruction.LocalizedName;
 								}
 								AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
 							} else {
 								if (pp.Product.PlannedOutsideConstruction != null) {
 									konstruktion += pp.Product.PlannedOutsideConstruction.Id + " " +
-										pp.Product.PlannedOutsideConstruction.Name;
+										pp.Product.PlannedOutsideConstruction.LocalizedName;
 									AddKeyValueToDictionary(konstruktion, pp, konstruktionen);
 								}
 							}

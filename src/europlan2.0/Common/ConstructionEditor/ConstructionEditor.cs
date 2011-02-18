@@ -72,7 +72,7 @@ namespace Europlan.Common {
 			//this.colMaterial.Items.Add(Material.EmptyMaterial);
 			this.colMaterial.Items.Add(new MaterialItem("", null));
 			foreach (Material m in insulations) {
-				this.colMaterial.Items.Add(new MaterialItem(m.Name, m));
+				this.colMaterial.Items.Add(new MaterialItem(m.LocalizedName, m));
 			}
 			switch (this.ConstructionScope) {
 				case ConstructionScopeEnum.FloorConstruction:

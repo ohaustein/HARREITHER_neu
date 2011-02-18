@@ -99,7 +99,7 @@ namespace Europlan.Common {
 			// 
 			// nameDataGridViewTextBoxColumn
 			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "LocalizedName";
 			this.nameDataGridViewTextBoxColumn.FillWeight = 170F;
 			this.nameDataGridViewTextBoxColumn.HeaderText = "Bezeichnung";
 			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";

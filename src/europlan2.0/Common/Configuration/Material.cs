@@ -63,6 +63,42 @@ namespace Europlan.Common {
 			set { this.id = value; }
 		}
 
+		public bool ResourceOk {
+			get {
+				string resKey = this.ResKey;
+				if (resKey == null) {
+					return false;
+				}
+				return EuroplanRes.ResourceManager.GetString(resKey) != null;
+			}
+		}
+
+		private string ResKey {
+			get {
+				if (string.IsNullOrEmpty(this.id)) {
+					return null;
+				}
+				string resId = this.id.Replace("+", "plus");
+				resId = resId.Replace("-", "_");
+				resId = "Material_" + resId;
+				return resId;
+			}
+		}
+
+		public string LocalizedName {
+			get {
+				string localizedName = null;
+				string resKey = this.ResKey;
+				if (resKey != null) {
+					localizedName = EuroplanRes.ResourceManager.GetString(resKey);
+					if (!string.IsNullOrEmpty(localizedName)) {
+						return localizedName;
+					}
+				}
+				return this.Name;
+			}
+		}
+
 		public string Name {
 			get { return this.name; }
 			set { this.name = value; }

@@ -28,7 +28,7 @@ namespace Europlan.Common {
 						return "";
 					}
 					CategoryTypeEnumConverter tc = new CategoryTypeEnumConverter();
-					return tc.ConvertToString(this.itemCategory.Type) + " - " + this.itemCategory.Name;
+					return tc.ConvertToString(this.itemCategory.Type) + " - " + this.itemCategory.LocalizedName;
 				}
 			}
 		}

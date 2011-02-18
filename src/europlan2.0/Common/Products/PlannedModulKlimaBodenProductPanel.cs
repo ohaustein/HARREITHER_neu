@@ -409,8 +409,8 @@ namespace Europlan.Common {
 				if ((skipFields & FieldEnum.AREA_UNHEATED) == FieldEnum.NONE) {
 					this.numAreaUnheated.Value = Math.Round((decimal)mbProduct.PlannedAreaUnheated, 2);
 				}
-				this.txtFloorConstruction.Text = (mbProduct.PlannedFloorConstruction == null ? "" : mbProduct.PlannedFloorConstruction.Id + ": " + mbProduct.PlannedFloorConstruction.Name);
-				this.txtInsulationConstruction.Text = (mbProduct.PlannedInsulationConstruction == null ? "" : mbProduct.PlannedInsulationConstruction.Id + ": " + mbProduct.PlannedInsulationConstruction.Name);
+				this.txtFloorConstruction.Text = (mbProduct.PlannedFloorConstruction == null ? "" : mbProduct.PlannedFloorConstruction.Id + ": " + mbProduct.PlannedFloorConstruction.LocalizedName);
+				this.txtInsulationConstruction.Text = (mbProduct.PlannedInsulationConstruction == null ? "" : mbProduct.PlannedInsulationConstruction.Id + ": " + mbProduct.PlannedInsulationConstruction.LocalizedName);
 				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
 					this.numRoomTemperatureBelowHeat.Value = Math.Round((decimal)mbProduct.PlannedRoomTemperatureBelowHeat, 2);
 				}
