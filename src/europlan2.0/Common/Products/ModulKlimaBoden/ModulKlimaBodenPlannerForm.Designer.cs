@@ -47,6 +47,7 @@ namespace Europlan.Common.Products {
 			this.btnCcwSmall = new System.Windows.Forms.Button();
 			this.btnCcwLarge = new System.Windows.Forms.Button();
 			this.lblRotationUnit = new System.Windows.Forms.Label();
+			this.numRotation = new Europlan.Common.NumericBox();
 			this.lblRotation = new System.Windows.Forms.Label();
 			this.pageLayout = new System.Windows.Forms.TabPage();
 			this.btnColor = new System.Windows.Forms.Button();
@@ -67,6 +68,7 @@ namespace Europlan.Common.Products {
 			this.btnNewCwSmall = new System.Windows.Forms.Button();
 			this.btnNewCcwSmall = new System.Windows.Forms.Button();
 			this.btnNewCcwLarge = new System.Windows.Forms.Button();
+			this.numNewRotation = new Europlan.Common.NumericBox();
 			this.lblNewRotation = new System.Windows.Forms.Label();
 			this.cmbOrientation = new System.Windows.Forms.ComboBox();
 			this.label3 = new System.Windows.Forms.Label();
@@ -74,6 +76,7 @@ namespace Europlan.Common.Products {
 			this.label8 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
+			this.numLength = new Europlan.Common.NumericBox();
 			this.lstCircuits = new System.Windows.Forms.ListBox();
 			this.grpSelectedModules = new System.Windows.Forms.GroupBox();
 			this.btnInvertDirection = new System.Windows.Forms.Button();
@@ -117,9 +120,6 @@ namespace Europlan.Common.Products {
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.modulKlimaBodenPlanner = new Europlan.Common.ModulKlimaBodenPlanner(this.components);
-			this.numRotation = new Europlan.Common.NumericBox();
-			this.numNewRotation = new Europlan.Common.NumericBox();
-			this.numLength = new Europlan.Common.NumericBox();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -200,6 +200,7 @@ namespace Europlan.Common.Products {
 			this.btnConstruction.Size = new System.Drawing.Size(23, 22);
 			this.btnConstruction.Text = "Unterkonstruktion ausrichten";
 			this.btnConstruction.ToolTipText = "Unterkonstruktion ausrichten";
+			this.btnConstruction.Visible = false;
 			this.btnConstruction.Click += new System.EventHandler(this.btnConstruction_Click);
 			// 
 			// btnAddModules
@@ -315,6 +316,7 @@ namespace Europlan.Common.Products {
 			this.grpConstructionParameter.TabIndex = 2;
 			this.grpConstructionParameter.TabStop = false;
 			this.grpConstructionParameter.Text = "Konstruktionsparameter";
+			this.grpConstructionParameter.Visible = false;
 			// 
 			// btnVertical
 			// 
@@ -385,6 +387,36 @@ namespace Europlan.Common.Products {
 			this.lblRotationUnit.TabIndex = 9;
 			this.lblRotationUnit.Text = "°";
 			// 
+			// numRotation
+			// 
+			this.numRotation.EditType = Europlan.Common.NumericBox.NumericEditType.ROTATION_360;
+			this.numRotation.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRotation.Location = new System.Drawing.Point(117, 18);
+			this.numRotation.MaxValue = new decimal(new int[] {
+            3599,
+            0,
+            0,
+            65536});
+			this.numRotation.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRotation.Name = "numRotation";
+			this.numRotation.Size = new System.Drawing.Size(74, 20);
+			this.numRotation.TabIndex = 8;
+			this.numRotation.Text = "0";
+			this.numRotation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRotation.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			// 
 			// lblRotation
 			// 
 			this.lblRotation.AutoSize = true;
@@ -417,8 +449,9 @@ namespace Europlan.Common.Products {
 			// 
 			// btnColor
 			// 
-			this.btnColor.BackColor = System.Drawing.Color.DarkRed;
-			this.btnColor.Location = new System.Drawing.Point(296, 117);
+			this.btnColor.BackColor = System.Drawing.Color.Transparent;
+			this.btnColor.Enabled = false;
+			this.btnColor.Location = new System.Drawing.Point(311, 117);
 			this.btnColor.Name = "btnColor";
 			this.btnColor.Size = new System.Drawing.Size(23, 23);
 			this.btnColor.TabIndex = 159;
@@ -467,6 +500,7 @@ namespace Europlan.Common.Products {
 			// chkSelectReferenceModule
 			// 
 			this.chkSelectReferenceModule.Appearance = System.Windows.Forms.Appearance.Button;
+			this.chkSelectReferenceModule.Enabled = false;
 			this.chkSelectReferenceModule.Location = new System.Drawing.Point(338, 75);
 			this.chkSelectReferenceModule.Name = "chkSelectReferenceModule";
 			this.chkSelectReferenceModule.Size = new System.Drawing.Size(217, 24);
@@ -496,6 +530,7 @@ namespace Europlan.Common.Products {
 			// 
 			// btnAdd
 			// 
+			this.btnAdd.Enabled = false;
 			this.btnAdd.Location = new System.Drawing.Point(561, 76);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(75, 23);
@@ -559,7 +594,7 @@ namespace Europlan.Common.Products {
 			this.btnNewCwLarge.Size = new System.Drawing.Size(24, 24);
 			this.btnNewCwLarge.TabIndex = 159;
 			this.btnNewCwLarge.UseVisualStyleBackColor = true;
-			this.btnNewCwLarge.Click += new System.EventHandler(this.btnRotate_Click);
+			this.btnNewCwLarge.Click += new System.EventHandler(this.btnNewRotate_Click);
 			// 
 			// lblHorizontal
 			// 
@@ -597,7 +632,7 @@ namespace Europlan.Common.Products {
 			this.btnNewCcwSmall.Size = new System.Drawing.Size(24, 24);
 			this.btnNewCcwSmall.TabIndex = 157;
 			this.btnNewCcwSmall.UseVisualStyleBackColor = true;
-			this.btnNewCcwSmall.Click += new System.EventHandler(this.btnRotate_Click);
+			this.btnNewCcwSmall.Click += new System.EventHandler(this.btnNewRotate_Click);
 			// 
 			// btnNewCcwLarge
 			// 
@@ -608,6 +643,37 @@ namespace Europlan.Common.Products {
 			this.btnNewCcwLarge.TabIndex = 156;
 			this.btnNewCcwLarge.UseVisualStyleBackColor = true;
 			this.btnNewCcwLarge.Click += new System.EventHandler(this.btnNewRotate_Click);
+			// 
+			// numNewRotation
+			// 
+			this.numNewRotation.EditType = Europlan.Common.NumericBox.NumericEditType.ROTATION_360;
+			this.numNewRotation.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numNewRotation.Location = new System.Drawing.Point(98, 41);
+			this.numNewRotation.MaxValue = new decimal(new int[] {
+            3599,
+            0,
+            0,
+            65536});
+			this.numNewRotation.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numNewRotation.Name = "numNewRotation";
+			this.numNewRotation.Size = new System.Drawing.Size(93, 20);
+			this.numNewRotation.TabIndex = 155;
+			this.numNewRotation.Text = "0";
+			this.numNewRotation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numNewRotation.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numNewRotation.ValueChanged += new System.EventHandler(this.numNewRotation_ValueChanged);
 			// 
 			// lblNewRotation
 			// 
@@ -640,7 +706,7 @@ namespace Europlan.Common.Products {
 			// 
 			this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(406, 150);
+			this.label14.Location = new System.Drawing.Point(421, 150);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(224, 13);
 			this.label14.TabIndex = 157;
@@ -662,9 +728,9 @@ namespace Europlan.Common.Products {
 			this.label7.AutoSize = true;
 			this.label7.Location = new System.Drawing.Point(98, 150);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(192, 13);
+			this.label7.Size = new System.Drawing.Size(207, 13);
 			this.label7.TabIndex = 154;
-			this.label7.Text = "Summe Verbindungsleitungen in Reihe:";
+			this.label7.Text = "Summe Verbindungsleitungen in Heizkreis:";
 			// 
 			// label12
 			// 
@@ -674,6 +740,35 @@ namespace Europlan.Common.Products {
 			this.label12.TabIndex = 145;
 			this.label12.Text = "Heizkreise";
 			this.label12.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+			// 
+			// numLength
+			// 
+			this.numLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.numLength.EditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
+			this.numLength.Enabled = false;
+			this.numLength.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numLength.Location = new System.Drawing.Point(311, 147);
+			this.numLength.MaxValue = null;
+			this.numLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numLength.Name = "numLength";
+			this.numLength.Size = new System.Drawing.Size(83, 20);
+			this.numLength.TabIndex = 155;
+			this.numLength.Text = "0";
+			this.numLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numLength.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numLength.ValueChanged += new System.EventHandler(this.numLength_ValueChanged);
 			// 
 			// lstCircuits
 			// 
@@ -1091,95 +1186,7 @@ namespace Europlan.Common.Products {
 			this.modulKlimaBodenPlanner.ModuleSelected += new System.EventHandler(this.modulKlimaBodenPlanner_ModuleSelected);
 			this.modulKlimaBodenPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.modulKlimaBodenPlanner_ModeChanged);
 			this.modulKlimaBodenPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.modulKlimaBodenPlanner_ProjectChanged);
-			// 
-			// numRotation
-			// 
-			this.numRotation.EditType = Europlan.Common.NumericBox.NumericEditType.ROTATION_360;
-			this.numRotation.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRotation.Location = new System.Drawing.Point(117, 18);
-			this.numRotation.MaxValue = new decimal(new int[] {
-            3599,
-            0,
-            0,
-            65536});
-			this.numRotation.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRotation.Name = "numRotation";
-			this.numRotation.Size = new System.Drawing.Size(74, 20);
-			this.numRotation.TabIndex = 8;
-			this.numRotation.Text = "0";
-			this.numRotation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRotation.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			// 
-			// numNewRotation
-			// 
-			this.numNewRotation.EditType = Europlan.Common.NumericBox.NumericEditType.ROTATION_360;
-			this.numNewRotation.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numNewRotation.Location = new System.Drawing.Point(98, 41);
-			this.numNewRotation.MaxValue = new decimal(new int[] {
-            3599,
-            0,
-            0,
-            65536});
-			this.numNewRotation.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numNewRotation.Name = "numNewRotation";
-			this.numNewRotation.Size = new System.Drawing.Size(93, 20);
-			this.numNewRotation.TabIndex = 155;
-			this.numNewRotation.Text = "0";
-			this.numNewRotation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numNewRotation.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numNewRotation.ValueChanged += new System.EventHandler(this.numNewRotation_ValueChanged);
-			// 
-			// numLength
-			// 
-			this.numLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.numLength.EditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
-			this.numLength.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numLength.Location = new System.Drawing.Point(296, 147);
-			this.numLength.MaxValue = null;
-			this.numLength.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numLength.Name = "numLength";
-			this.numLength.Size = new System.Drawing.Size(83, 20);
-			this.numLength.TabIndex = 155;
-			this.numLength.Text = "0";
-			this.numLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numLength.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numLength.ValueChanged += new System.EventHandler(this.numLength_ValueChanged);
+			this.modulKlimaBodenPlanner.ListsNeedUpdate += new System.EventHandler<System.EventArgs>(this.modulKlimaBodenPlanner_ListsNeedUpdate);
 			// 
 			// ModulKlimaBodenPlannerForm
 			// 

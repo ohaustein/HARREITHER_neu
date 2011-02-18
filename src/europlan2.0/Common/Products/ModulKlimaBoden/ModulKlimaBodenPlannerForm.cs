@@ -27,6 +27,11 @@ namespace Europlan.Common.Products {
 			this.cmbOrientation.Items.Add(KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
 			this.cmbOrientation.SelectedIndex = 0;
 
+			this.cmbSelectedModuleOrientation.Items.Add(KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
+			this.cmbSelectedModuleOrientation.Items.Add(KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
+			this.cmbSelectedModuleOrientation.SelectedIndex = -1;
+			this.cmbSelectedModuleOrientation.Enabled = false;
+
 			this.cmbHorizontal.Items.Add("modulierend");
 			this.cmbHorizontal.Items.Add("dicht");
 			this.cmbHorizontal.SelectedIndex = 0;
@@ -66,6 +71,13 @@ namespace Europlan.Common.Products {
 			}
 			this.staffeln.RecalculateSchienen();
 
+			this.UpdateLists(true, false);
+
+			if (product.ContainsModules) {
+				this.tabs.SelectedTab = this.pageLayout;
+			}
+			this.UpdateToolbar(this.tabs.SelectedTab);
+			this.CalculateAndUpdate();
 		}
 
 		private void UpdateControls() {
@@ -181,6 +193,7 @@ namespace Europlan.Common.Products {
 					if (MessageBox.Show("Wenn Sie die Konstruktion ändern wollen, werden alle bereits verplanten Module gelöscht!", "Bestätigen", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) {
 						e.Cancel = true;
 					} else {
+						this.modulKlimaBodenPlanner.HighlightCircuit = null;
 						this.modulKlimaBodenPlanner.Product.PlannedCircuits.Clear();
 						this.modulKlimaBodenPlanner.Product.PlannedCircuits.Add(new ModulBodenCircuit());
 					}
@@ -205,7 +218,7 @@ namespace Europlan.Common.Products {
 			} else if (tabPage == this.pageConstruction) {
 				this.btnAddModules.Visible = false;
 				this.btnSelectModule.Visible = false;
-				this.btnConstruction.Visible = true;
+				this.btnConstruction.Visible = false;
 				if (!this.btnConstruction.Checked && !this.btnMove.Checked) {
 					this.planPanel.Mode = PlanMode.PM_MOVE;
 					this.modulKlimaBodenPlanner.Mode = ModulKlimaBodenPlanner.KlimaBodenMode.KDM_NONE;
@@ -238,11 +251,13 @@ namespace Europlan.Common.Products {
 					lstCircuits.Items.Add("neuer HK");
 				}
 				if (selectLastCircuit) {
+					ignoreListChange--;
 					if (this.newVisible && lstCircuits.Items.Count > 1) {
 						lstCircuits.SelectedIndex = lstCircuits.Items.Count - 2;
 					} else {
 						lstCircuits.SelectedIndex = lstCircuits.Items.Count - 1;
 					}
+					ignoreListChange++;
 				} else {
 					if (tmp < lstCircuits.Items.Count && tmp >= 0) {
 						lstCircuits.SelectedIndex = tmp;
@@ -270,7 +285,6 @@ namespace Europlan.Common.Products {
 			if (this.ignoreListChange == 0) {
 				this.ignoreListChange++;
 				int dec = this.newVisible ? 1 : 0;
-				this.UpdateSelectedModules();
 
 				if (this.lstCircuits.SelectedIndex >= 0 && this.lstCircuits.SelectedIndex < this.lstCircuits.Items.Count - dec) {
 					ModulBodenCircuit circuit = (this.lstCircuits.Items.Count - dec > this.lstCircuits.SelectedIndex ? (this.modulKlimaBodenPlanner.Product.PlannedCircuits[this.lstCircuits.SelectedIndex] as ModulBodenCircuit) : null);
@@ -287,6 +301,13 @@ namespace Europlan.Common.Products {
 					btnColor.BackColor = Color.Transparent;
 					btnColor.Enabled = false;
 				}
+				this.UpdateSelectedModules();
+				numLength.Enabled = this.modulKlimaBodenPlanner.HighlightCircuit != null;
+				if (numLength.Enabled) {
+					this.numLength.Value = (decimal)this.modulKlimaBodenPlanner.HighlightCircuit.SonstigeVerbindeleitung;
+				} else {
+					this.numLength.Text = "";
+				}
 
 				this.ignoreListChange--;
 			}
@@ -295,6 +316,7 @@ namespace Europlan.Common.Products {
 		private void cmbModulType_SelectedIndexChanged(object sender, EventArgs e) {
 			if (cmbOrientation.SelectedItem is KlimaFlaechenModul.ModulOrientationEnum) {
 				this.modulKlimaBodenPlanner.NewModulesStartingOrientation = (KlimaFlaechenModul.ModulOrientationEnum)cmbOrientation.SelectedItem;
+				this.planPanel.InvalidateGraphics();
 			}
 		}
 
@@ -353,6 +375,37 @@ namespace Europlan.Common.Products {
 				this.cmbSelectedModuleOrientation.SelectedIndex = -1;
 				this.cmbSelectedModuleOrientation.Enabled = false;
 			}
+
+			if (module.Count == 0) {
+				this.llHk.Enabled = false;
+				this.llHk.Tag = null;
+				this.llHk.Text = "keiner";
+			} else {
+				ModulBodenCircuit circuit = null;
+				bool circuitOk = true;
+				int circuitIndex = 0;
+				foreach (KlimaFlaechenModul modul in module) {
+					ModulBodenCircuit curCircuit = this.modulKlimaBodenPlanner.Product.GetCircuitForModul(modul, out circuitIndex);
+					if (circuit != null && circuit != curCircuit) {
+						circuitOk = false;
+					}
+					if (curCircuit == null) {
+						circuitOk = false;
+					} else {
+						circuit = curCircuit;
+					}
+				}
+				if (circuitOk) {
+					this.llHk.Tag = circuitIndex;
+					circuitIndex++;
+					this.llHk.Text = "HK" + circuitIndex.ToString();
+					this.llHk.Enabled = true;
+				} else {
+					this.llHk.Tag = null;
+					this.llHk.Enabled = false;
+					this.llHk.Text = "verschiende";
+				}
+			}
 			this.ignoreModuleOrientationChange--;
 		}
 
@@ -372,13 +425,25 @@ namespace Europlan.Common.Products {
 		private void cmbSelectedModuleOrientation_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreModuleOrientationChange == 0) {
 				this.changed = true;
+				List<KlimaFlaechenModul> modules = this.modulKlimaBodenPlanner.GetAllSelectedModules();
+				if (cmbSelectedModuleOrientation.SelectedIndex == 2) {
+					foreach (KlimaFlaechenModul modul in modules) {
+						modul.Orientation = (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
+					}
+				} else if (this.cmbSelectedModuleOrientation.SelectedItem is KlimaFlaechenModul.ModulOrientationEnum) {
+					foreach (KlimaFlaechenModul modul in modules) {
+						modul.Orientation = (KlimaFlaechenModul.ModulOrientationEnum)this.cmbSelectedModuleOrientation.SelectedItem;
+					}
+				}
+				this.UpdateSelectedModules();
+				this.planPanel.InvalidateGraphics();
 			}
 		}
 
 		private void ModulKlimaBodenPlannerForm_Load(object sender, EventArgs e) {
-			//SettingsKey settings = SettingsFile.Settings["ModulKlimaBodenPlannerForm"];
-			//this.Location = settings.GetPoint("Location", this.Location);
-			//this.Size = settings.GetSize("Size", this.Size);
+			SettingsKey settings = SettingsFile.Settings["ModulKlimaBodenPlannerForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
+			this.Size = settings.GetSize("Size", this.Size);
 		}
 
 		private void ModulKlimaBodenPlannerForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -485,6 +550,10 @@ namespace Europlan.Common.Products {
 		}
 
 		private void numLength_ValueChanged(object sender, EventArgs e) {
+			if (this.modulKlimaBodenPlanner.HighlightCircuit != null) {
+				this.modulKlimaBodenPlanner.HighlightCircuit.SonstigeVerbindeleitung = (double)this.numLength.Value;
+				this.CalculateAndUpdate();
+			}
 		}
 
 		private void modulKlimaBodenPlanner_ProjectChanged(object sender) {
@@ -493,7 +562,11 @@ namespace Europlan.Common.Products {
 		}
 
 		public bool Changed {
-			get { return this.changed; }
+			get {
+				// TODO remove this when the cahnged flag is properly implemented
+				return true;
+				return this.changed; 
+			}
 		}
 
 		private int ignoreRandfries = 0;
@@ -534,10 +607,14 @@ namespace Europlan.Common.Products {
 			}
 		}
 
-		private void btnShowBeplankung_Click(object sender, EventArgs e) {
-		}
-
 		private void btnInvertDirection_Click(object sender, EventArgs e) {
+			this.changed = true;
+			List<KlimaFlaechenModul> modules = this.modulKlimaBodenPlanner.GetAllSelectedModules();
+			foreach (KlimaFlaechenModul modul in modules) {
+				modul.GraphBottomUp = !modul.GraphBottomUp;
+			}
+			this.UpdateSelectedModules();
+			this.planPanel.InvalidateGraphics();
 		}
 
 		private void btnConstruction_Click(object sender, EventArgs e) {
@@ -621,11 +698,11 @@ namespace Europlan.Common.Products {
 		}
 
 		private void cmbHorizontal_SelectedIndexChanged(object sender, EventArgs e) {
-			this.modulKlimaBodenPlanner.NewModulesXDicht = cmbHorizontal.SelectedIndex == 1;
+			this.modulKlimaBodenPlanner.NewModulesYDicht = cmbHorizontal.SelectedIndex == 1;
 		}
 
 		private void cmbVertical_SelectedIndexChanged(object sender, EventArgs e) {
-			this.modulKlimaBodenPlanner.NewModulesYDicht = cmbVertical.SelectedIndex == 1;
+			this.modulKlimaBodenPlanner.NewModulesXDicht = cmbVertical.SelectedIndex == 1;
 		}
 
 		private void cmbConnections_SelectedIndexChanged(object sender, EventArgs e) {
@@ -643,13 +720,43 @@ namespace Europlan.Common.Products {
 		}
 
 		private void modulKlimaBodenPlanner_ModeChanged(object sender, EventArgs e) {
-			if (this.modulKlimaBodenPlanner.Mode == ModulKlimaBodenPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH && this.planPanel.Mode != PlanMode.PM_PLANNER_DRAG) {
-				this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
+			if (this.modulKlimaBodenPlanner.Mode == ModulKlimaBodenPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH) {
+				this.numNewRotation.Enabled = false;
+				this.btnNewCcwLarge.Enabled = false;
+				this.btnNewCcwSmall.Enabled = false;
+				this.btnNewCwLarge.Enabled = false;
+				this.btnNewCwSmall.Enabled = false;
+				this.btnNewHorizontal.Enabled = false;
+				this.btnNewVertical.Enabled = false;
+				this.btnAdd.Enabled = true;
+				this.chkSelectReferenceModule.Enabled = true;
+				if (this.planPanel.Mode != PlanMode.PM_PLANNER_DRAG) {
+					this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
+				}
+			} else {
+				this.numNewRotation.Enabled = true;
+				this.btnNewCcwLarge.Enabled = true;
+				this.btnNewCcwSmall.Enabled = true;
+				this.btnNewCwLarge.Enabled = true;
+				this.btnNewCwSmall.Enabled = true;
+				this.btnNewHorizontal.Enabled = true;
+				this.btnNewVertical.Enabled = true;
+			}
+			if (this.modulKlimaBodenPlanner.Mode != ModulKlimaBodenPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE) {
+				if (this.modulKlimaBodenPlanner.Mode != ModulKlimaBodenPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH) {
+					this.btnAdd.Enabled = false;
+					this.chkSelectReferenceModule.Enabled = false;
+				}
+				this.chkSelectReferenceModule.Checked = false;
 			}
 		}
 
 		private void modulKlimaBodenPlanner_ModuleSelected(object sender, EventArgs e) {
+			this.UpdateSelectedModules();
+		}
 
+		private void modulKlimaBodenPlanner_ListsNeedUpdate(object sender, EventArgs e) {
+			this.UpdateLists(true, false);
 		}
 	}
 }

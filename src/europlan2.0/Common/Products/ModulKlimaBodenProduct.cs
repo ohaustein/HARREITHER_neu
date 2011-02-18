@@ -1174,5 +1174,17 @@ namespace Europlan.Common {
 				return false;
 			}
 		}
+
+		internal ModulBodenCircuit GetCircuitForModul(KlimaFlaechenModul modul, out int index) {
+			index = 0;
+			foreach (ModulBodenCircuit c in this.circuits) {
+				if (c.Row.List.Contains(modul)) {
+					return c;
+				}
+				index++;
+			}
+			index = -1;
+			return null;
+		}
 	}
 }
