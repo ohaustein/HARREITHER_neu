@@ -839,16 +839,18 @@ namespace Europlan.Common {
 		}
 
 		public static void CopyPlans(string source, string destination) {
-			string sourceDir = Path.GetDirectoryName(source);
-			string sourceSubDir = Path.GetFileNameWithoutExtension(source) + "_plans";
-			string from = Path.Combine(sourceDir, sourceSubDir);
-			string destinationDir = Path.GetDirectoryName(destination);
-			string destinationSubDir = Path.GetFileNameWithoutExtension(destination) + "_plans";
-			string to = Path.Combine(destinationDir, destinationSubDir);
-			if (Directory.Exists(from)) {
-				CopyDirectory(new DirectoryInfo(from), new DirectoryInfo(to));
-				foreach (Plan plan in Project.Instance.ImportedPlans) {
-					plan.RelativeFileName = plan.RelativeFileName.Replace(sourceSubDir, destinationSubDir);
+			if (source != null && destination != null) {
+				string sourceDir = Path.GetDirectoryName(source);
+				string sourceSubDir = Path.GetFileNameWithoutExtension(source) + "_plans";
+				string from = Path.Combine(sourceDir, sourceSubDir);
+				string destinationDir = Path.GetDirectoryName(destination);
+				string destinationSubDir = Path.GetFileNameWithoutExtension(destination) + "_plans";
+				string to = Path.Combine(destinationDir, destinationSubDir);
+				if (Directory.Exists(from)) {
+					CopyDirectory(new DirectoryInfo(from), new DirectoryInfo(to));
+					foreach (Plan plan in Project.Instance.ImportedPlans) {
+						plan.RelativeFileName = plan.RelativeFileName.Replace(sourceSubDir, destinationSubDir);
+					}
 				}
 			}
 		}
