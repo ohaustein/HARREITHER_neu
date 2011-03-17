@@ -451,14 +451,22 @@ namespace Europlan.Common {
 		private void cmbPlans_SelectedValueChanged(object sender, EventArgs e) {
 			if (!updateControlOngoing) {
 				if (cmbPlans.SelectedItem != null) {
-					bool roomCoordinatesAvailable = false;
+					bool planAlreadyUsed = false;
 					foreach (Room room in floor.Rooms) {
 						if (room.RoomCoordinates.Count > 0) {
-							roomCoordinatesAvailable = true;
+							planAlreadyUsed = true;
 							break;
 						}
 					}
-					if (roomCoordinatesAvailable) {
+					if (!planAlreadyUsed) {
+						foreach (Distributor d in floor.Distributors) {
+							if (d.GraphicalRepresentations.Count > 0) {
+								planAlreadyUsed = true;
+								break;
+							}
+						}
+					}
+					if (planAlreadyUsed) {
 						DialogResult result = MessageBox.Show(EuroplanRes.FloorSummaryPanel_ChangePlanText, EuroplanRes.FloorSummaryPanel_ChangePlanCaption, MessageBoxButtons.YesNo);
 						if (result == DialogResult.No) {
 							UpdateControl(false);
@@ -480,6 +488,14 @@ namespace Europlan.Common {
 								room.PlanSettingY = null;
 								room.PlanSettingScale = null;
 								room.PlanSettingAngle = null;
+							}
+							foreach (Distributor d in floor.Distributors) {
+								for (int i = 0; i < d.GraphicalRepresentations.Count; i++) {
+									if (d.GraphicalRepresentations[i].floorId == floor.Id) {
+										d.GraphicalRepresentations.RemoveAt(i);
+										i--;
+									}
+								}
 							}
 						}
 					}

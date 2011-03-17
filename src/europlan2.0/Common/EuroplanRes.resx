@@ -760,6 +760,9 @@ Vorlauf
   <data name="DistributorPanel_Geschosse" xml:space="preserve">
     <value>Geschoße, die diesen Verteiler auch nutzen können:</value>
   </data>
+  <data name="DistributorPanel_GraphicalPosition" xml:space="preserve">
+    <value>Grafische Positionierung</value>
+  </data>
   <data name="DistributorPanel_Heizsyteme" xml:space="preserve">
     <value>Heizsysteme, die standard- mäßig an diesen Verteiler angeschlossen werden sollen:</value>
   </data>

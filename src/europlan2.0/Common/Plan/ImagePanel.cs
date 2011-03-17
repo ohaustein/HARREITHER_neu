@@ -138,7 +138,7 @@ namespace Europlan.Common {
 
 			bool invalidate = false;
 
-			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null && e.Button != MouseButtons.Middle) {
+			if ((this.mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_SET_DISTRIBUTOR) && this.productPlanner != null && e.Button != MouseButtons.Middle) {
 				invalidate = this.productPlanner.PlannerClick(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
 			} else if (mode == PlanMode.PM_PICK_MEASURE && e.Button == MouseButtons.Left) {
 				if (startPoint.HasValue && !endPoint.HasValue) {
@@ -379,7 +379,7 @@ namespace Europlan.Common {
 					invalidate = this.productPlanner.PlannerDragMove(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
 				}
 			} 
-			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null) {
+			if ((this.mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_SET_DISTRIBUTOR) && this.productPlanner != null) {
 				invalidate = this.productPlanner.PlannerMouseMove(new WW.Math.Point2D(arr[0].X, arr[0].Y), mousePosInCtrl, e.Button);
 			}
 
@@ -483,6 +483,9 @@ namespace Europlan.Common {
 						this.Cursor = this.ProductPlanner != null && this.ProductPlanner.CustomCursor != null ? this.ProductPlanner.CustomCursor : Cursors.Cross;
 						break;
 					case PlanMode.PM_PLANNER_DRAG:
+						this.Cursor = this.ProductPlanner != null && this.ProductPlanner.CustomCursor != null ? this.ProductPlanner.CustomCursor : Cursors.Cross;
+						break;
+					case PlanMode.PM_SET_DISTRIBUTOR:
 						this.Cursor = this.ProductPlanner != null && this.ProductPlanner.CustomCursor != null ? this.ProductPlanner.CustomCursor : Cursors.Cross;
 						break;
 					default:

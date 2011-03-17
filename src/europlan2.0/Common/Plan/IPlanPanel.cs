@@ -12,6 +12,7 @@ namespace Europlan.Common {
 		PM_PICK_MEASURE,
 		PM_PLANNER_CLICK,
 		PM_PLANNER_DRAG,
+		PM_SET_DISTRIBUTOR
 	}
 
 	public enum ColorMode {

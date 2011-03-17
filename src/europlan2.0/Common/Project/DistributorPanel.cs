@@ -39,6 +39,7 @@ namespace Europlan.Common {
 			this.label12.Text = EuroplanRes.DistributorPanel_Heizsyteme; //"Heizsysteme, die standard- m‰ﬂig an diesen Verteiler angeschlossen werden sollen:";
 			this.label13.Text = EuroplanRes.DistributorPanel_ZugewieseneHeizkreise; //"zugewiesene Heizkreise: ";
 			this.lblCircuits.Text = EuroplanRes.DistributorPanel_Aktiv.Replace("%VALUE%", "7"); //"7 (aktiv)";
+			this.btnGraphicalPosition.Text = EuroplanRes.DistributorPanel_GraphicalPosition; //"Grafische Positionierung";
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -78,6 +79,8 @@ namespace Europlan.Common {
 				this.cmbCircuit.SelectedItem = distributor.RegulatorCircuit;
 				//this.cmbDistributorType.SelectedItem = distributor.DistributorType;
 				this.cmbAnschlussHollaender.SelectedItem = distributor.AnschlussHollaender;
+
+				this.btnGraphicalPosition.Enabled = distributor.AssociatedFloor.AssociatedPlanId != null && distributor.AssociatedFloor.AssociatedPlanId != "";
 
 				UpdateCircuitsLabel();
 
@@ -231,10 +234,16 @@ namespace Europlan.Common {
 			}
 		}
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-	}
+		private void btnGraphicalPosition_Click(object sender, EventArgs e) {
+			DistributionPositionerForm form = new DistributionPositionerForm(this.distributor, this.distributor.AssociatedFloor);
+			form.ShowDialog();
+			if (form.UnsavedChanges) {
+				if (ProjectChanged != null) {
+					ProjectChanged(null);
+				}
+			}
+			form.Dispose();
+		}
 
 	}
 }

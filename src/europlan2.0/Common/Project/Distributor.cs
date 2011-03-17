@@ -4,11 +4,19 @@ using System.Text;
 using log4net;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using WW.Math;
 
 namespace Europlan.Common {
 
 	[Serializable()]
 	public class Distributor : IGuiRepresentation, IRequiredMaterial {
+
+	public struct GraphicalRepresentation {
+		public Point2D position;
+		public double rotation;
+		public bool isOnThisFloor;
+		public string floorId;
+	}
 
 #region enums
 
@@ -135,6 +143,7 @@ namespace Europlan.Common {
 		private bool useForCeiling;
 
 		private List<string> additionalFloors;
+		private List<GraphicalRepresentation> graphicalRepresentations;
 
 		[NonSerialized]
 		private static readonly ILog log = LogManager.GetLogger(typeof(Distributor));
@@ -162,6 +171,7 @@ namespace Europlan.Common {
 			flanschKugelHaehne = true;
 			einbauSchrank = true;
 			additionalFloors = new List<string>();
+			graphicalRepresentations = new List<GraphicalRepresentation>();
 			distributorNode.Tag = this;
 			useForFloor = true;
 			useForWall = true;
@@ -198,6 +208,37 @@ namespace Europlan.Common {
 		public AnschlussHollaenderEnum AnschlussHollaender {
 			get { return anschlussHollaender; }
 			set { anschlussHollaender = value; }
+		}
+
+		[XmlIgnore]
+		public double Width {
+			get {
+				switch (anschlussHollaender) {
+					case AnschlussHollaenderEnum.Kein:
+						return 0.349 + ((maxCircuits - 2) * 0.055);
+						break;
+					case AnschlussHollaenderEnum.hollaender32:
+						return 0.349 + ((maxCircuits - 2) * 0.055);
+						break;
+					case AnschlussHollaenderEnum.hollaenderIG:
+						if (flanschKugelHaehne) {
+							return 0.372 + ((maxCircuits - 2) * 0.055);
+						} else {
+							return 0.326 + ((maxCircuits - 2) * 0.055);
+						}
+						break;
+					default:
+						return 0;
+						break;
+				}
+			}
+		}
+
+		[XmlIgnore]
+		public double Height {
+			get {
+				return 0.108;
+			}
 		}
 
 		[XmlIgnore]
@@ -287,6 +328,11 @@ namespace Europlan.Common {
 		public List<string> AdditionalFloorIds {
 			get { return additionalFloors; }
 			set { additionalFloors = value; }
+		}
+
+		public List<GraphicalRepresentation> GraphicalRepresentations {
+			get { return graphicalRepresentations; }
+			set { graphicalRepresentations = value; }
 		}
 
 		[XmlIgnore]

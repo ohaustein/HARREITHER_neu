@@ -92,23 +92,25 @@ namespace Europlan.Common {
 		}
 
 		protected override void OnPaint(PaintEventArgs e) {
-			gdiGraphics3D.Draw(e.Graphics, this.ClientRectangle);
-			if (selectedStartPointCad.HasValue) {
-				Point3D start = gdiGraphics3D.To2DTransform.Transform(selectedStartPointCad.Value);
-				if (selectedEndPointCad.HasValue) {
-					Point3D end = gdiGraphics3D.To2DTransform.Transform(selectedEndPointCad.Value);
-					e.Graphics.DrawLine(Pens.Red, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
-				} else {
-					e.Graphics.DrawLine(Pens.Red, (float)start.X, (float)start.Y, (float)lastMouseLocation.X, (float)lastMouseLocation.Y);
+			if (gdiGraphics3D != null) {
+				gdiGraphics3D.Draw(e.Graphics, this.ClientRectangle);
+				if (selectedStartPointCad.HasValue) {
+					Point3D start = gdiGraphics3D.To2DTransform.Transform(selectedStartPointCad.Value);
+					if (selectedEndPointCad.HasValue) {
+						Point3D end = gdiGraphics3D.To2DTransform.Transform(selectedEndPointCad.Value);
+						e.Graphics.DrawLine(Pens.Red, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
+					} else {
+						e.Graphics.DrawLine(Pens.Red, (float)start.X, (float)start.Y, (float)lastMouseLocation.X, (float)lastMouseLocation.Y);
+					}
 				}
-			}
 
-			if (this.productPlanner != null) {
-				Point mousePosInPlan = this.PointToClient(MousePosition);
+				if (this.productPlanner != null) {
+					Point mousePosInPlan = this.PointToClient(MousePosition);
 
-				//Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
-				Point3D planPoint = from2DTransform.Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
-				this.productPlanner.PaintAfterPlanPannel(e, this.gdiGraphics3D.To2DTransform, new Point2D(planPoint.X, planPoint.Y), mousePosInPlan);
+					//Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
+					Point3D planPoint = from2DTransform.Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
+					this.productPlanner.PaintAfterPlanPannel(e, this.gdiGraphics3D.To2DTransform, new Point2D(planPoint.X, planPoint.Y), mousePosInPlan);
+				}
 			}
 		}
 
@@ -271,7 +273,7 @@ namespace Europlan.Common {
 		protected override void OnMouseClick(MouseEventArgs e) {
 			base.OnMouseClick(e);
 			bool invalidate = false;
-			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null) {
+			if ((this.mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_SET_DISTRIBUTOR) && this.productPlanner != null) {
 				Point2D pickedPoint;
 				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
@@ -316,8 +318,8 @@ namespace Europlan.Common {
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));*/
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(e.X, e.Y, 0));
 				invalidate = this.productPlanner.PlannerDragMove(new Point2D(planPoint.X, planPoint.Y), e.Location, e.Button);
-			} 
-			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null) {
+			}
+			if ((this.mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_SET_DISTRIBUTOR) && this.productPlanner != null) {
 				/*Point2D pickedPoint;
 				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));*/
@@ -794,6 +796,9 @@ namespace Europlan.Common {
 						this.Cursor = this.ProductPlanner != null && this.ProductPlanner.CustomCursor != null ? this.ProductPlanner.CustomCursor : Cursors.Cross;
 						break;
 					case PlanMode.PM_PLANNER_DRAG:
+						this.Cursor = this.ProductPlanner != null && this.ProductPlanner.CustomCursor != null ? this.ProductPlanner.CustomCursor : Cursors.Cross;
+						break;
+					case PlanMode.PM_SET_DISTRIBUTOR:
 						this.Cursor = this.ProductPlanner != null && this.ProductPlanner.CustomCursor != null ? this.ProductPlanner.CustomCursor : Cursors.Cross;
 						break;
 					default:
