@@ -1283,13 +1283,13 @@ namespace Europlan.Common {
 			model.Entities.Add(text);
 		}
 
-		internal void DrawDxf(DxfModel model, DxfLayer layer) {
+		internal void DrawDxf(DxfModel model, DxfLayer modulLayer, DxfLayer floorConstructionLayer) {
 			Matrix4D additionalTransformation = Matrix4D.Identity;
 
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.CeilingCoordinatesToUse != null) {
 				if (this.product.AssociatedRoom.AssociatedPlan != null && this.product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
 					if (this.product.GraphConstruction != null) {
-						this.product.GraphConstruction.PaintDxf(model, layer);
+						this.product.GraphConstruction.PaintDxf(model, floorConstructionLayer);
 					}
 				}
 
@@ -1300,7 +1300,7 @@ namespace Europlan.Common {
 					List<KlimaFlaechenModul> selectedModules = this.GetAllSelectedModules();
 					foreach (ModulBodenCircuit circuit in this.product.PlannedCircuits) {
 						foreach (KlimaFlaechenModul modul in circuit.Row.List) {
-							this.DrawDxfModule(modul.ModulType, modul.Orientation, invRotation.Transform(new Point2D(modul.GraphPosX, modul.GraphPosY)), additionalTransformation, model, layer, modul.GraphBottomUp, circuit.CircuitColor);
+							this.DrawDxfModule(modul.ModulType, modul.Orientation, invRotation.Transform(new Point2D(modul.GraphPosX, modul.GraphPosY)), additionalTransformation, model, modulLayer, modul.GraphBottomUp, circuit.CircuitColor);
 						}
 					}
 				}

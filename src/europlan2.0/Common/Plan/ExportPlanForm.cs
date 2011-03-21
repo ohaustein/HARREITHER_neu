@@ -193,6 +193,11 @@ namespace Europlan.Common {
 				DxfModel model = (plan as CadPlan).LoadModel(true);
 				Dictionary<Type, DxfLayer> layers = new Dictionary<Type, DxfLayer>();
 
+				DxfLayer ceilingConstructionLayer = new DxfLayer(EuroplanRes.ConstructionEditorForm_Decke);
+				DxfLayer floorConstructionLayer = new DxfLayer(EuroplanRes.ConstructionEditorForm_Fussboden);
+				// TODO: übersetzen
+				DxfLayer beplankungLayer = new DxfLayer("Beplankung");
+
 				foreach (Floor floor in Project.Instance.Floors) {
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
 						foreach (Room room in floor.Rooms) {
@@ -204,7 +209,7 @@ namespace Europlan.Common {
 									Product p = pp.Product;
 									if (p.GraphicalMode.HasValue && p.GraphicalMode.Value) {
 										if (p is ModulKlimaDeckeProduct) {
-											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaDeckeProduct), model);
+											DxfLayer modulLayer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaDeckeProduct), model);
 											ModulKlimaDeckePlanner planner = new ModulKlimaDeckePlanner();
 											planner.Product = p as ModulKlimaDeckeProduct;
 											(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
@@ -213,9 +218,9 @@ namespace Europlan.Common {
 											// TODO
 											// planner.DrawBeplankung ???
 											// planner.Mode = ???
-											planner.DrawDxf(model, layer);
+											planner.DrawDxf(model, modulLayer, ceilingConstructionLayer, beplankungLayer);
 										} else if (p is ModulKlimaBodenProduct) {
-											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaBodenProduct), model);
+											DxfLayer modulLayer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaBodenProduct), model);
 											ModulKlimaBodenPlanner planner = new ModulKlimaBodenPlanner();
 											planner.Product = p as ModulKlimaBodenProduct;
 											(p as ModulKlimaBodenProduct).GraphConstruction.Planner = planner;
@@ -224,7 +229,7 @@ namespace Europlan.Common {
 											// TODO
 											// planner.DrawBeplankung ???
 											// planner.Mode = ???
-											planner.DrawDxf(model, layer);
+											planner.DrawDxf(model, modulLayer, floorConstructionLayer);
 										}
 										//.....
 									}

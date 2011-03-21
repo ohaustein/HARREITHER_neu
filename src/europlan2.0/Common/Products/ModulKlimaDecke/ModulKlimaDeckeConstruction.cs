@@ -21,7 +21,7 @@ namespace Europlan.Common {
 		protected List<PossibleModulLane> possibleLanes = new List<PossibleModulLane>();
 
 		public abstract void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode, bool drawBeplankung);
-		public abstract void PaintDxf(DxfModel model, DxfLayer layer, bool drawBeplankung);
+		public abstract void PaintDxf(DxfModel model, DxfLayer constructionLayer, DxfLayer beplankungLayer, bool drawBeplankung);
 
 		#region IPickableObject Members
 		public abstract bool HitTest(Point2D planPoint, Point pointInControl);

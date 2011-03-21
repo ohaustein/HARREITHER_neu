@@ -645,7 +645,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override void PaintDxf(DxfModel model, DxfLayer layer, bool drawBeplankung) {
+		public override void PaintDxf(DxfModel model, DxfLayer constructionLayer, DxfLayer beplankungLayer, bool drawBeplankung) {
 			if (this.Planner == null ||
 				this.Planner.Product == null ||
 				this.Planner.Product.AssociatedRoom == null ||
@@ -701,7 +701,7 @@ namespace Europlan.Common {
 				foreach (Polygon2D polygon in clippedPolygons) {
 					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
 					polyLine.Closed = true;
-					polyLine.Layer = layer;
+					polyLine.Layer = constructionLayer;
 					model.Entities.Add(polyLine);
 
 					if (polygon.Count > 2) {
@@ -742,7 +742,7 @@ namespace Europlan.Common {
 				foreach (Polygon2D polygon in clippedPolygons) {
 					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
 					polyLine.Closed = true;
-					polyLine.Layer = layer;
+					polyLine.Layer = constructionLayer;
 					model.Entities.Add(polyLine);
 
 					if (polygon.Count > 2) {
@@ -765,7 +765,7 @@ namespace Europlan.Common {
 			patternLine.Offset = new Vector2D(0.02 * measure, 0.02d * measure);
 			hatch.Pattern.Lines.Add(patternLine);
 
-			hatch.Layer = layer;
+			hatch.Layer = constructionLayer;
 			model.Entities.Add(hatch);
 
 			hatchY.Pattern = new DxfPattern();
@@ -778,7 +778,7 @@ namespace Europlan.Common {
 			patternLine.Offset = new Vector2D(0.02 * measure, 0.02d * measure);
 			hatchY.Pattern.Lines.Add(patternLine);
 
-			hatchY.Layer = layer;
+			hatchY.Layer = constructionLayer;
 			model.Entities.Add(hatchY);
 		}
 
