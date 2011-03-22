@@ -111,52 +111,58 @@ namespace Europlan.Common {
 
 		private void connectedPlanPanel_KeyDown(object sender, KeyEventArgs e) {
 			if (this.mode == KlimaDeckeMode.KDM_PICK_MODULE) {
-				if (e.KeyCode == Keys.Delete && this.highlightModules != null) {
-					List<KlimaFlaechenList> emptyRows = new List<KlimaFlaechenList>();
-					List<ModulDeckeSubArea> emptySubAreas = new List<ModulDeckeSubArea>();
-					List<Circuit> emptyCircuits = new List<Circuit>();
-					foreach (Circuit c in this.product.PlannedCircuits) {
-						ModulDeckeCircuit dc = c as ModulDeckeCircuit;
-						foreach (ModulDeckeSubArea sa in dc.SubAreas) {
-							foreach (KlimaFlaechenList kfl in sa.Rows) {
-								foreach (KlimaFlaechenModul kfm in this.highlightModules) {
-									if (kfl.List.Contains(kfm)) {
-										kfl.List.Remove(kfm);
-									}
+				KeyDown(e.KeyCode, this.highlightModules);
+			}
+		}
+
+		private bool KeyDown(Keys key, List<KlimaFlaechenModul> modules) {
+			if (key == Keys.Delete && modules != null) {
+				List<KlimaFlaechenList> emptyRows = new List<KlimaFlaechenList>();
+				List<ModulDeckeSubArea> emptySubAreas = new List<ModulDeckeSubArea>();
+				List<Circuit> emptyCircuits = new List<Circuit>();
+				foreach (Circuit c in this.product.PlannedCircuits) {
+					ModulDeckeCircuit dc = c as ModulDeckeCircuit;
+					foreach (ModulDeckeSubArea sa in dc.SubAreas) {
+						foreach (KlimaFlaechenList kfl in sa.Rows) {
+							foreach (KlimaFlaechenModul kfm in modules) {
+								if (kfl.List.Contains(kfm)) {
+									kfl.List.Remove(kfm);
 								}
-								if (kfl.List.Count == 0) {
-									emptyRows.Add(kfl);
-								}
 							}
-							foreach (KlimaFlaechenList emptyRow in emptyRows) {
-								sa.Rows.Remove(emptyRow);
-							}
-							emptyRows.Clear();
-							if (sa.Rows.Count == 0) {
-								emptySubAreas.Add(sa);
+							if (kfl.List.Count == 0) {
+								emptyRows.Add(kfl);
 							}
 						}
-						foreach (ModulDeckeSubArea emptySubArea in emptySubAreas) {
-							dc.SubAreas.Remove(emptySubArea);
+						foreach (KlimaFlaechenList emptyRow in emptyRows) {
+							sa.Rows.Remove(emptyRow);
 						}
-						emptySubAreas.Clear();
-						if (dc.SubAreas.Count == 0) {
-							emptyCircuits.Add(dc);
+						emptyRows.Clear();
+						if (sa.Rows.Count == 0) {
+							emptySubAreas.Add(sa);
 						}
 					}
-					foreach (Circuit emptyCircuit in emptyCircuits) {
-						this.product.PlannedCircuits.Remove(emptyCircuit);
+					foreach (ModulDeckeSubArea emptySubArea in emptySubAreas) {
+						dc.SubAreas.Remove(emptySubArea);
 					}
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
-					}
-					this.ModuleSelected(this, new ModuleSelectedEventArgs());
-					this.ConnectedPlanPanel.InvalidateGraphics();
-					if (this.ListsNeedUpdate != null) {
-						this.ListsNeedUpdate(this, new ListNeedsUpdateEventArgs(false));
+					emptySubAreas.Clear();
+					if (dc.SubAreas.Count == 0) {
+						emptyCircuits.Add(dc);
 					}
 				}
+				foreach (Circuit emptyCircuit in emptyCircuits) {
+					this.product.PlannedCircuits.Remove(emptyCircuit);
+				}
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				this.ModuleSelected(this, new ModuleSelectedEventArgs());
+				this.ConnectedPlanPanel.InvalidateGraphics();
+				if (this.ListsNeedUpdate != null) {
+					this.ListsNeedUpdate(this, new ListNeedsUpdateEventArgs(false));
+				}
+				return true;
 			}
+			return false;
 		}
 
 		public class ListNeedsUpdateEventArgs : EventArgs {
@@ -1245,7 +1251,7 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerKeyPress(Keys key) {
-			return false;
+			return KeyDown(key, this.GetAllSelectedModules());
 		}
 
 		public void DrawModule(KlimaFlaechenModul.ModulTypeEnum type, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, Point2D position, Matrix4D additionalTransformation, Graphics g, bool bottomUp, bool highlight, Color circuitColor) {

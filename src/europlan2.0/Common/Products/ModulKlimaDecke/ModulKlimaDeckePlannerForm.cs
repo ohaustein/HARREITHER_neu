@@ -1280,5 +1280,12 @@ namespace Europlan.Common.Products {
 			this.planPanel.InvalidateGraphics();
 		}
 
+		private void lst_KeyPress(object sender, KeyPressEventArgs e) {
+		}
+
+		private void lst_KeyDown(object sender, KeyEventArgs e) {
+			this.modulKlimaDeckePlanner.PlannerKeyPress(e.KeyCode);
+		}
+
 	}
 }
