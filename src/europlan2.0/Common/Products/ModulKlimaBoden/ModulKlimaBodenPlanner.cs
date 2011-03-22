@@ -123,33 +123,7 @@ namespace Europlan.Common {
 
 		private void connectedPlanPanel_KeyDown(object sender, KeyEventArgs e) {
 			if (this.mode == KlimaBodenMode.KDM_PICK_MODULE) {
-				if (e.KeyCode == Keys.Delete && this.highlightModules != null) {
-					List<Circuit> emptyCircuits = new List<Circuit>();
-					foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
-						foreach (KlimaFlaechenModul kfm in this.highlightModules) {
-							if (c.Row.List.Contains(kfm)) {
-								c.Row.List.Remove(kfm);
-							}
-						}
-						if (c.Row.List.Count == 0) {
-							emptyCircuits.Add(c);
-						}
-					}
-					foreach (Circuit emptyCircuit in emptyCircuits) {
-						this.product.PlannedCircuits.Remove(emptyCircuit);
-					}
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
-					}
-					this.ModuleSelected(this, EventArgs.Empty);
-					this.ConnectedPlanPanel.InvalidateGraphics();
-					if (this.ListsNeedUpdate != null) {
-						this.ListsNeedUpdate(this, EventArgs.Empty);
-					}
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
-					}
-				}
+				KeyDown(e.KeyCode, this.highlightModules);
 			} if (this.mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH || this.mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE) {
 				if (e.KeyCode == Keys.Escape) {
 					this.layoutAddArea = null;
@@ -157,6 +131,38 @@ namespace Europlan.Common {
 					this.connectedPlanPanel.InvalidateGraphics();
 				}
 			}
+		}
+
+		private bool KeyDown(Keys key, List<KlimaFlaechenModul> modules) {
+			if (key == Keys.Delete && modules != null) {
+				List<Circuit> emptyCircuits = new List<Circuit>();
+				foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
+					foreach (KlimaFlaechenModul kfm in modules) {
+						if (c.Row.List.Contains(kfm)) {
+							c.Row.List.Remove(kfm);
+						}
+					}
+					if (c.Row.List.Count == 0) {
+						emptyCircuits.Add(c);
+					}
+				}
+				foreach (Circuit emptyCircuit in emptyCircuits) {
+					this.product.PlannedCircuits.Remove(emptyCircuit);
+				}
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				this.ModuleSelected(this, EventArgs.Empty);
+				this.ConnectedPlanPanel.InvalidateGraphics();
+				if (this.ListsNeedUpdate != null) {
+					this.ListsNeedUpdate(this, EventArgs.Empty);
+				}
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				return true;
+			}
+			return false;
 		}
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
@@ -594,7 +600,7 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerKeyPress(Keys key) {
-			return false;
+			return KeyDown(key, this.GetAllSelectedModules());
 		}
 
 		#endregion

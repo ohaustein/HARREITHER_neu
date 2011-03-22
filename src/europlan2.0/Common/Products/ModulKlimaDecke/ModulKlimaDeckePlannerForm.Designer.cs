@@ -937,7 +937,6 @@ namespace Europlan.Common.Products {
 			this.lstSubarea.Size = new System.Drawing.Size(129, 134);
 			this.lstSubarea.TabIndex = 148;
 			this.lstSubarea.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
-			this.lstSubarea.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lst_KeyPress);
 			this.lstSubarea.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lst_KeyDown);
 			this.lstSubarea.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
 			// 
@@ -960,7 +959,6 @@ namespace Europlan.Common.Products {
 			this.lstRows.Size = new System.Drawing.Size(102, 134);
 			this.lstRows.TabIndex = 146;
 			this.lstRows.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
-			this.lstRows.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lst_KeyPress);
 			this.lstRows.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lst_KeyDown);
 			this.lstRows.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
 			// 
@@ -983,7 +981,6 @@ namespace Europlan.Common.Products {
 			this.lstCircuits.Size = new System.Drawing.Size(85, 134);
 			this.lstCircuits.TabIndex = 144;
 			this.lstCircuits.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
-			this.lstCircuits.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lst_KeyPress);
 			this.lstCircuits.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lst_KeyDown);
 			this.lstCircuits.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
 			// 

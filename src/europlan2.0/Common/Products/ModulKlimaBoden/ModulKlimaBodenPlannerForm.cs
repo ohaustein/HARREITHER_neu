@@ -758,5 +758,9 @@ namespace Europlan.Common.Products {
 		private void modulKlimaBodenPlanner_ListsNeedUpdate(object sender, EventArgs e) {
 			this.UpdateLists(true, false);
 		}
+
+		private void lst_KeyDown(object sender, KeyEventArgs e) {
+			this.modulKlimaBodenPlanner.PlannerKeyPress(e.KeyCode);
+		}
 	}
 }

@@ -780,6 +780,7 @@ namespace Europlan.Common.Products {
 			this.lstCircuits.Size = new System.Drawing.Size(85, 147);
 			this.lstCircuits.TabIndex = 144;
 			this.lstCircuits.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
+			this.lstCircuits.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lst_KeyDown);
 			this.lstCircuits.Click += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
 			// 
 			// grpSelectedModules
