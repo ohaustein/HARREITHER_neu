@@ -503,8 +503,7 @@ namespace Europlan.Common {
 			} else if (this.Mode == RoomPickerMode.RPM_ADD_UNUSED) {
 				this.ConnectedPlanPanel.PlanCursor = Cursors.No;
 			} else if (this.Mode == RoomPickerMode.RPM_ADD_EXPANSION_GAP) {
-				//return expansionGapStart != Point2D.Zero;
-				return true;
+				return expansionGapStart != Point2D.Zero;
 			} else if (this.Mode == RoomPickerMode.RPM_DEL_EXPANSION_GAP) {
 				bool ok = false;
 				foreach (Segment2D expansionGap in this.room.AssociatedFloor.ExpansionGaps) {
