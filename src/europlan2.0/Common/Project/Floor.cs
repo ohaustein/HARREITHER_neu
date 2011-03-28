@@ -5,6 +5,7 @@ using log4net;
 using System.Xml.Serialization;
 using System.Windows.Forms;
 using System.Threading;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
 
@@ -19,6 +20,7 @@ namespace Europlan.Common {
 		private RoomList rooms;
 		private DistributorList distributors;
 		private string associatedPlanId = null;
+		private List<Segment2D> expansionGaps = null;
 
 		private Construction lastInsulationConstruction = null;
 		private string lastInsulationConstructionId = null;
@@ -56,6 +58,7 @@ namespace Europlan.Common {
 			this.floorNode.Tag = this;
             this.floorNode.ImageKey = "Geschoﬂ.png";
             this.floorNode.SelectedImageKey = "Geschoﬂ.png";
+			this.expansionGaps = new List<Segment2D>();
 		}
 
 		internal void Synchronize(Floor floor) {
@@ -113,6 +116,15 @@ namespace Europlan.Common {
 			}
 			set {
 				associatedPlanId = value;
+			}
+		}
+
+		public List<Segment2D> ExpansionGaps {
+			get {
+				return expansionGaps;
+			}
+			set {
+				expansionGaps = value;
 			}
 		}
 

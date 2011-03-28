@@ -140,6 +140,7 @@ namespace Europlan.Common {
 				Graphics g = Graphics.FromImage(image);
 				g.InterpolationMode = InterpolationMode.Bicubic;
 				foreach (Floor floor in Project.Instance.Floors) {
+					// TODO: dehnungsfugen
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct pp in room.PlannedProducts) {
@@ -199,6 +200,7 @@ namespace Europlan.Common {
 				DxfLayer beplankungLayer = new DxfLayer("Beplankung");
 
 				foreach (Floor floor in Project.Instance.Floors) {
+					// TODO: dehnungsfugen
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct pp in room.PlannedProducts) {

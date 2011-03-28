@@ -18,7 +18,9 @@ namespace Europlan.Common {
 			RPM_PICK_UNUSED,
 			RPM_ADD_UNUSED,
 			RPM_SET_REFERENCE,
-			RPM_DEL_UNUSED
+			RPM_DEL_UNUSED,
+			RPM_ADD_EXPANSION_GAP,
+			RPM_DEL_EXPANSION_GAP
 		}
 
 		public RoomPicker() {
@@ -43,6 +45,7 @@ namespace Europlan.Common {
 		private Nullable<Point2D> referencePoint = null;
 		private Point2D newUnheatedAreaPos = new Point2D();
 		private Size2D newUnheatedAreaSize = new Size2D();
+		private Point2D expansionGapStart = Point2D.Zero;
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -184,6 +187,20 @@ namespace Europlan.Common {
 				path.Dispose();
 			}
 
+			if (expansionGapStart != Point2D.Zero) {
+				Point2D pos = new Point2D((float)mousePositionInPlan.X, (float)mousePositionInPlan.Y);
+				if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+					pos = GetNormalizedPoint(expansionGapStart, null, pos);
+				}
+				g.DrawLine(Pens.Blue, (float)expansionGapStart.X, (float)expansionGapStart.Y, (float)pos.X, (float)pos.Y);
+			}
+
+			foreach (Segment2D expansionGap in this.room.AssociatedFloor.ExpansionGaps) {
+				Point2D start = additionalTransformation.TransformTo2D(expansionGap.Start);
+				Point2D end = additionalTransformation.TransformTo2D(expansionGap.End);
+				g.DrawLine(Pens.Blue, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
+			}
+			
 			if ((this.Mode == RoomPickerMode.RPM_SET_REFERENCE || this.Mode == RoomPickerMode.RPM_ADD_UNUSED) && this.referencePoint != null) {
 				Pen p = new Pen(new SolidBrush(Color.Black));
 
@@ -202,41 +219,6 @@ namespace Europlan.Common {
 				g.Transform = transform;
 
 				if (this.Mode == RoomPickerMode.RPM_ADD_UNUSED && this.newUnheatedAreaSize.X > 0 && this.newUnheatedAreaSize.Y > 0) {
-					/*double posX = this.referencePoint.Value.X + this.newUnheatedAreaPos.X * this.Room.AssociatedPlan.Measure.Value;
-					double posY = this.referencePoint.Value.Y + this.newUnheatedAreaPos.Y * this.Room.AssociatedPlan.Measure.Value;
-					double sizeX = this.newUnheatedAreaSize.X * this.Room.AssociatedPlan.Measure.Value;
-					double sizeY = this.newUnheatedAreaSize.Y * this.Room.AssociatedPlan.Measure.Value;
-
-					Matrix3D matrix = Matrix3D.Identity;
-					matrix = matrix * Transformation3D.Translation(this.referencePoint.Value.X, this.referencePoint.Value.Y);
-					matrix = matrix * Transformation3D.Rotate(-this.room.AssociatedPlan.Rotation / 180 * Math.PI);
-					matrix = matrix * Transformation3D.Translation(-this.referencePoint.Value.X, -this.referencePoint.Value.Y);
-
-					Point2D p1 = new Point2D(posX, posY);
-					Point2D p2 = new Point2D(posX + sizeX, posY);
-					Point2D p3 = new Point2D(posX + sizeX, posY + sizeY);
-					Point2D p4 = new Point2D(posX, posY + sizeY);
-					p1 = additionalTransformation.TransformTo2D(p1);
-					p2 = additionalTransformation.TransformTo2D(p2);
-					p3 = additionalTransformation.TransformTo2D(p3);
-					p4 = additionalTransformation.TransformTo2D(p4);
-
-					p1 = matrix.Transform(p1);
-					p2 = matrix.Transform(p2);
-					p3 = matrix.Transform(p3);
-					p4 = matrix.Transform(p4);
-
-					GraphicsPath path = new GraphicsPath();
-					path.StartFigure();
-					path.AddPolygon(new PointF[] { new PointF((float)p1.X, (float)p1.Y), new PointF((float)p2.X, (float)p2.Y), new PointF((float)p3.X, (float)p3.Y), new PointF((float)p4.X, (float)p4.Y) });
-					path.CloseFigure();
-					Color c = Color.FromArgb(0, Color.Red);
-					Color c2 = Color.FromArgb(128, Color.White);
-					Brush b = new HatchBrush(HatchStyle.BackwardDiagonal, c2, c);
-					g.FillPath(b, path);
-					b = new SolidBrush(c2);
-					g.DrawPath(new Pen(b), path);
-					path.Dispose();*/
 					if (this.newUnheatedArea.Count > 0) {
 						foreach (List<Point2D> unusedArea in this.newUnheatedArea) {
 							GraphicsPath path = new GraphicsPath();
@@ -354,6 +336,33 @@ namespace Europlan.Common {
 							return true;
 						}
 					}
+				}
+			} else if (this.Mode == RoomPickerMode.RPM_ADD_EXPANSION_GAP && button == MouseButtons.Left) {
+				if (expansionGapStart == Point2D.Zero) {
+					expansionGapStart = planPoint;
+				} else {
+					Point2D normalizedPoint = planPoint;
+					if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+						normalizedPoint = GetNormalizedPoint(expansionGapStart, null, normalizedPoint);
+					}
+					this.room.AssociatedFloor.ExpansionGaps.Add(new Segment2D(expansionGapStart.X, expansionGapStart.Y, normalizedPoint.X, normalizedPoint.Y));
+					expansionGapStart = Point2D.Zero;
+				}
+				return true;
+			} else if (this.Mode == RoomPickerMode.RPM_DEL_EXPANSION_GAP && button == MouseButtons.Left) {
+				Segment2D toDelete = new Segment2D();
+				bool found = false;
+				foreach (Segment2D expansionGap in this.room.AssociatedFloor.ExpansionGaps) {
+					double dist = expansionGap.GetDistance(planPoint);
+					if (dist < (this.room.AssociatedPlan.Measure * 0.05)) {
+						found = true;
+						toDelete = expansionGap;
+						break;
+					}
+				}
+				if (found) {
+					this.room.AssociatedFloor.ExpansionGaps.Remove(toDelete);
+					return true;
 				}
 			}
 			return false;
@@ -491,6 +500,23 @@ namespace Europlan.Common {
 				this.ConnectedPlanPanel.PlanCursor = Cursors.Cross;
 			} else if (this.Mode == RoomPickerMode.RPM_ADD_UNUSED) {
 				this.ConnectedPlanPanel.PlanCursor = Cursors.No;
+			} else if (this.Mode == RoomPickerMode.RPM_ADD_EXPANSION_GAP) {
+				return expansionGapStart != Point2D.Zero;
+			} else if (this.Mode == RoomPickerMode.RPM_DEL_EXPANSION_GAP) {
+				bool ok = false;
+				foreach (Segment2D expansionGap in this.room.AssociatedFloor.ExpansionGaps) {
+					double dist = expansionGap.GetDistance(planPoint);
+					if (dist < (this.room.AssociatedPlan.Measure * 0.05)) {
+						ok = true;
+						break;
+					}
+				}
+				if (ok) {
+					this.ConnectedPlanPanel.PlanCursor = Cursors.Hand;
+				} else {
+					this.ConnectedPlanPanel.PlanCursor = Cursors.No;
+				}
+				return false;
 			}
 			return false;
 		}

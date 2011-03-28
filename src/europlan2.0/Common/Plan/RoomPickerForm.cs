@@ -169,6 +169,24 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void btnAddExpansionGap_Click(object sender, EventArgs e) {
+			if (!btnAddExpansionGap.Checked) {
+				this.panUnheatedArea.Visible = false;
+				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_ADD_EXPANSION_GAP;
+				this.panel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
+			}
+		}
+
+		private void btnRemoveExpansionGap_Click(object sender, EventArgs e) {
+			if (!btnRemoveExpansionGap.Checked) {
+				this.panUnheatedArea.Visible = false;
+				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_DEL_EXPANSION_GAP;
+				this.panel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
+			}
+		}
+
 		private void UpdateButtons() {
 			if (this.panel.Mode == PlanMode.PM_MOVE) {
 				this.btnMove.Checked = true;
@@ -181,22 +199,44 @@ namespace Europlan.Common {
 					this.btnPickRoom.Checked = true;
 					this.btnPickUnused.Checked = false;
 					this.btnDelUnused.Checked = false;
+					this.btnAddExpansionGap.Checked = false;
+					this.btnRemoveExpansionGap.Checked = false;
 				} else if (this.roomPicker.Mode == RoomPicker.RoomPickerMode.RPM_PICK_UNUSED) {
 					this.btnMove.Checked = false;
 					this.btnPickRoom.Checked = false;
 					this.btnPickUnused.Checked = true;
 					this.btnDelUnused.Checked = false;
+					this.btnAddExpansionGap.Checked = false;
+					this.btnRemoveExpansionGap.Checked = false;
 				} else if (this.roomPicker.Mode == RoomPicker.RoomPickerMode.RPM_DEL_UNUSED) {
 					this.btnMove.Checked = false;
 					this.btnPickRoom.Checked = false;
 					this.btnPickUnused.Checked = false;
 					this.btnDelUnused.Checked = true;
+					this.btnAddExpansionGap.Checked = false;
+					this.btnRemoveExpansionGap.Checked = false;
+				} else if (this.roomPicker.Mode == RoomPicker.RoomPickerMode.RPM_ADD_EXPANSION_GAP) {
+					this.btnMove.Checked = false;
+					this.btnPickRoom.Checked = false;
+					this.btnPickUnused.Checked = false;
+					this.btnDelUnused.Checked = false;
+					this.btnAddExpansionGap.Checked = true;
+					this.btnRemoveExpansionGap.Checked = false;
+				} else if (this.roomPicker.Mode == RoomPicker.RoomPickerMode.RPM_DEL_EXPANSION_GAP) {
+					this.btnMove.Checked = false;
+					this.btnPickRoom.Checked = false;
+					this.btnPickUnused.Checked = false;
+					this.btnDelUnused.Checked = false;
+					this.btnAddExpansionGap.Checked = false;
+					this.btnRemoveExpansionGap.Checked = true;
 				}
 			} else {
 				this.btnMove.Checked = false;
 				this.btnPickRoom.Checked = false;
 				this.btnPickUnused.Checked = false;
 				this.btnDelUnused.Checked = false;
+				this.btnAddExpansionGap.Checked = false;
+				this.btnRemoveExpansionGap.Checked = false;
 			}
 		}
 
