@@ -192,7 +192,9 @@ namespace Europlan.Common {
 				if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
 					pos = GetNormalizedPoint(expansionGapStart, null, pos);
 				}
-				g.DrawLine(Pens.Blue, (float)expansionGapStart.X, (float)expansionGapStart.Y, (float)pos.X, (float)pos.Y);
+				Point2D start = additionalTransformation.TransformTo2D(expansionGapStart);
+				Point2D end = additionalTransformation.TransformTo2D(pos);
+				g.DrawLine(Pens.Blue, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
 			}
 
 			foreach (Segment2D expansionGap in this.room.AssociatedFloor.ExpansionGaps) {
@@ -501,7 +503,8 @@ namespace Europlan.Common {
 			} else if (this.Mode == RoomPickerMode.RPM_ADD_UNUSED) {
 				this.ConnectedPlanPanel.PlanCursor = Cursors.No;
 			} else if (this.Mode == RoomPickerMode.RPM_ADD_EXPANSION_GAP) {
-				return expansionGapStart != Point2D.Zero;
+				//return expansionGapStart != Point2D.Zero;
+				return true;
 			} else if (this.Mode == RoomPickerMode.RPM_DEL_EXPANSION_GAP) {
 				bool ok = false;
 				foreach (Segment2D expansionGap in this.room.AssociatedFloor.ExpansionGaps) {
