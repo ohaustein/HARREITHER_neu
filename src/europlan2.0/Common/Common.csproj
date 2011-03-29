@@ -975,6 +975,9 @@
     <None Include="Properties\DataSources\ExportPlanForm.ExportOptionType.datasource" />
     <None Include="Resources\pickUnused.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Products\Euroval\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

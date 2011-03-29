@@ -50,6 +50,7 @@ namespace Europlan.Common {
 		private KlimaBodenMode mode = KlimaBodenMode.KDM_NONE;
 		private Cursor customCursor = null;
 		private bool highlightRoomCoordinates = true;
+		private bool drawExpansionGaps = true;
 		private double newModulesRotation = 0.0;
 		private bool newModulesXDicht = false;
 		private bool newModulesYDicht = false;
@@ -234,6 +235,14 @@ namespace Europlan.Common {
 						g.DrawPolygon(new Pen(c), pointArray);
 						g.FillPolygon(b, pointArray);
 						unusedPoints.Clear();
+					}
+				}
+
+				if (drawExpansionGaps) {
+					foreach (Segment2D expansionGap in this.Product.AssociatedRoom.AssociatedFloor.ExpansionGaps) {
+						Point2D start = additionalTransformation.TransformTo2D(expansionGap.Start);
+						Point2D end = additionalTransformation.TransformTo2D(expansionGap.End);
+						g.DrawLine(Pens.Blue, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
 					}
 				}
 
@@ -1422,6 +1431,12 @@ namespace Europlan.Common {
 		public bool HighlightRoomCoordinates {
 			get { return this.highlightRoomCoordinates; }
 			set { this.highlightRoomCoordinates = value; }
+		}
+
+		[DefaultValue(true)]
+		public bool DrawExpansionGaps {
+			get { return this.drawExpansionGaps; }
+			set { this.drawExpansionGaps = value; }
 		}
 	}
 }

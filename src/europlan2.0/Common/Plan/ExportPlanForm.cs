@@ -166,6 +166,7 @@ namespace Europlan.Common {
 											(p as ModulKlimaBodenProduct).GraphConstruction.Planner = planner;
 											(p as ModulKlimaBodenProduct).GraphConstruction.RecalculateSchienen();
 											planner.HighlightRoomCoordinates = false;
+											planner.DrawExpansionGaps = false;
 											// TODO
 											// planner.DrawBeplankung = ???
 											// planner.Mode = ???
@@ -228,6 +229,7 @@ namespace Europlan.Common {
 											(p as ModulKlimaBodenProduct).GraphConstruction.Planner = planner;
 											(p as ModulKlimaBodenProduct).GraphConstruction.RecalculateSchienen();
 											planner.HighlightRoomCoordinates = false;
+											planner.DrawExpansionGaps = false;
 											// TODO
 											// planner.DrawBeplankung ???
 											// planner.Mode = ???
