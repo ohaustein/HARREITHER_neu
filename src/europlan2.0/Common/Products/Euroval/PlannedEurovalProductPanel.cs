@@ -12,6 +12,7 @@ namespace Europlan.Common {
 		
 		private PlannedProduct product = null;
 		private bool gridContentChanged = false;
+		private bool updateOngoing = false;
 
 		private class LayDistanceItem {
 			public Nullable<EurovalProduct.EurovalLayDistance> layDistance;
@@ -216,6 +217,7 @@ namespace Europlan.Common {
 			SEPARATE_CIRCUIT = 65536,
 			CORRECTIONS = 131072,
 			//CORRECTIONS_LIST = 262144,
+			LAYOUT_TYPE = 262144
 		}
 
 		/*private class ComboItem {
@@ -295,6 +297,7 @@ namespace Europlan.Common {
 		private int ignoreCalculationMode = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
+			updateOngoing = true;
 			if (this.product != null) {
 				ignoreCoverHeatLoad++;
 				ignoreHeatLoad++;
@@ -319,6 +322,35 @@ namespace Europlan.Common {
 				ignoreCalculationMode++;
 
 				EurovalProduct evProduct = this.product.Product as EurovalProduct;
+
+				if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.CeilingCoordinatesToUse.Count > 0) {
+					this.rbLayoutTable.Enabled = true;
+					this.rbLayoutGraphical.Enabled = true;
+				} else {
+					this.rbLayoutTable.Enabled = false;
+					this.rbLayoutGraphical.Enabled = false;
+				}
+
+				bool graphicalMode = false;
+				if (this.product.Product.GraphicalMode.HasValue) {
+					graphicalMode = this.product.Product.GraphicalMode.Value;
+				} else {
+					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.CeilingCoordinatesToUse.Count > 0) {
+						graphicalMode = true;
+						this.product.Product.GraphicalMode = true;
+					} else {
+						graphicalMode = false;
+						this.product.Product.GraphicalMode = false;
+					}
+				}
+
+				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
+					if (graphicalMode) {
+						this.rbLayoutGraphical.Checked = true;
+					} else {
+						this.rbLayoutTable.Checked = true;
+					}
+				}
 
 				//bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0 && evProduct.PlannedLayDistance != EurovalProduct.EurovalLayDistance.NONE;
 				//bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0 && evProduct.PlannedLayDistance != EurovalProduct.EurovalLayDistance.NONE;
@@ -808,6 +840,30 @@ namespace Europlan.Common {
 					this.gridExtendedCorrections.Enabled = evProduct.PlannedCorrections;
 				}*/
 
+				if (graphicalMode) {
+					this.tabs.TabPages.Remove(pageCorrections);
+					this.numArea.Enabled = false;
+					this.numAreaPercentage.Enabled = false;
+					this.numAreaReduced.Enabled = false;
+					this.numAreaUnheated.Enabled = false;
+					this.groupBox6.Enabled = false;
+					this.cmbLayDistance.Enabled = false;
+					this.cmbRimType.Enabled = false;
+					this.cmbCircuits.Enabled = false;
+					this.btnGraphical.Enabled = true;
+				} else {
+					this.tabs.TabPages.Add(pageCorrections);
+					this.numArea.Enabled = true;
+					this.numAreaPercentage.Enabled = true;
+					this.numAreaReduced.Enabled = true;
+					this.numAreaUnheated.Enabled = true;
+					this.groupBox6.Enabled = true;
+					this.cmbLayDistance.Enabled = true;
+					this.cmbRimType.Enabled = true;
+					this.cmbCircuits.Enabled = true;
+					this.btnGraphical.Enabled = false;
+				}
+
 				ignoreCoverHeatLoad--;
 				ignoreHeatLoad--;
 				ignoreHeatLoadPercentage--;
@@ -830,6 +886,7 @@ namespace Europlan.Common {
 				ignoreCorrections--;
 				ignoreCalculationMode--;
 			}
+			updateOngoing = false;
 			// TODO
 		}
 
@@ -1409,6 +1466,50 @@ namespace Europlan.Common {
 			this.UpdateControl(FieldEnum.NONE);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
+			}
+		}
+
+		private void rbGraphical_CheckedChanged(object sender, EventArgs e) {
+			if (!updateOngoing && (sender as RadioButton).Checked) {
+				if (this.product.Product.GraphicalMode.HasValue && this.product.Product.GraphicalMode.Value != rbLayoutGraphical.Checked) {
+					// change from graphical to table based
+					if (this.product.Product.GraphicalMode.Value) {
+						if (!this.product.Product.AllowToSwitchMode) {
+							DialogResult result = MessageBox.Show(EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Grafisch, EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Titel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								this.UpdateControl(FieldEnum.NONE);
+								return;
+							}
+						}
+						// change from table based to graphical  
+					} else {
+						if (!this.product.Product.AllowToSwitchMode) {
+							DialogResult result = MessageBox.Show(EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Tabellarisch, EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Titel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								this.UpdateControl(FieldEnum.NONE);
+								return;
+							} else {
+								(this.product.Product as EurovalProduct).ResetProduct();
+							}
+						}
+					}
+				}
+				this.product.Product.GraphicalMode = rbLayoutGraphical.Checked;
+				this.UpdateControl(FieldEnum.LAYOUT_TYPE);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}
+
+		private void btnGraphical_Click(object sender, EventArgs e) {
+			if (this.product != null) {
+				Europlan.Common.Products.EurovalPlannerForm form = new Europlan.Common.Products.EurovalPlannerForm(this.product);
+				form.ShowDialog();
+				if (form.Changed && this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				this.UpdateControl(FieldEnum.NONE);
 			}
 		}
 

@@ -203,8 +203,33 @@ namespace Europlan.Common {
             get { return "Fuﬂbodenheizung.png"; }
 		}
 
+		[XmlIgnore]
+		public override bool AllowToSwitchMode {
+			get {
+				return (PlannedFloorArea == 0 || PlannedFloorArea == this.associatedRoom.Area) &&
+						PlannedAreaReduced == 0 &&
+						PlannedAreaUnheated == 0 &&
+						PlannedRimLength == 0 &&
+						PlannedRimCorners == 0 &&
+						RequestedLayDistance == null &&
+						RequestedRimType == null &&
+						RequestedCircuits == null;
+			}
+		}
+
 		public new static void StaticInitialize(Configuration config) {
 			Product.StaticInitialize<EurovalProduct>(config);
+		}
+
+		public void ResetProduct() {
+			PlannedFloorArea = 0;
+			PlannedAreaReduced = 0;
+			PlannedAreaUnheated = 0;
+			PlannedRimLength = 0;
+			plannedRimCorners = 0;
+			RequestedLayDistance = null;
+			RequestedRimType = null;
+			RequestedCircuits = null;
 		}
 
 		public static string GlobalNotificationMessage {

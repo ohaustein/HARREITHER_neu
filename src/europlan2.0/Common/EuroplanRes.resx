@@ -4098,6 +4098,15 @@ HK</value>
   <data name="PlannedEurovalProductPanel_Aufenthaltszone" xml:space="preserve">
     <value>Aufenthaltszone</value>
   </data>
+  <data name="PlannedEurovalProductPanel_Auslegung_Aendern_Grafisch" xml:space="preserve">
+    <value>Wollen Sie tatsächlich von der grafischen zu der tabellarischen Auslegungsart wechseln? Bitte beachten Sie, dass die Auslegung erhalten bleibt, aber kein erneuter Wechsel zurück zur Grafischen Auslegung möglich ist. Trotzdem fortfahren?</value>
+  </data>
+  <data name="PlannedEurovalProductPanel_Auslegung_Aendern_Tabellarisch" xml:space="preserve">
+    <value>Wollen Sie tatsächlich von der tabellarischen zu der grafischen Auslegungsart wechseln? Bitte beachten Sie, dass die bereits erfolgte Auslegung verloren geht. Trotzdem fortfahren?</value>
+  </data>
+  <data name="PlannedEurovalProductPanel_Auslegung_Aendern_Titel" xml:space="preserve">
+    <value>Auslegungsart ändern?</value>
+  </data>
   <data name="PlannedEurovalProductPanel_B" xml:space="preserve">
     <value>B
 cm</value>

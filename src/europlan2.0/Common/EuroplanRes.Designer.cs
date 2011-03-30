@@ -11407,6 +11407,33 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie tatsächlich von der grafischen zu der tabellarischen Auslegungsart wechseln? Bitte beachten Sie, dass die Auslegung erhalten bleibt, aber kein erneuter Wechsel zurück zur Grafischen Auslegung möglich ist. Trotzdem fortfahren?.
+        /// </summary>
+        internal static string PlannedEurovalProductPanel_Auslegung_Aendern_Grafisch {
+            get {
+                return ResourceManager.GetString("PlannedEurovalProductPanel_Auslegung_Aendern_Grafisch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie tatsächlich von der tabellarischen zu der grafischen Auslegungsart wechseln? Bitte beachten Sie, dass die bereits erfolgte Auslegung verloren geht. Trotzdem fortfahren?.
+        /// </summary>
+        internal static string PlannedEurovalProductPanel_Auslegung_Aendern_Tabellarisch {
+            get {
+                return ResourceManager.GetString("PlannedEurovalProductPanel_Auslegung_Aendern_Tabellarisch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegungsart ändern?.
+        /// </summary>
+        internal static string PlannedEurovalProductPanel_Auslegung_Aendern_Titel {
+            get {
+                return ResourceManager.GetString("PlannedEurovalProductPanel_Auslegung_Aendern_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to B
         ///cm.
         /// </summary>

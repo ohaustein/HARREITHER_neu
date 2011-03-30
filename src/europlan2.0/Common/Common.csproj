@@ -283,6 +283,18 @@
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\Euroval\EurovalPlanner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Products\Euroval\EurovalPlanner.Designer.cs">
+      <DependentUpon>EurovalPlanner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\Euroval\EurovalPlannerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Euroval\EurovalPlannerForm.Designer.cs">
+      <DependentUpon>EurovalPlannerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\ExtendedCorrections.cs" />
     <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenConstructionStaffeln.cs" />
     <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenPlanner.cs">
@@ -319,41 +331,41 @@
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstructionGlatt.cs" />
     <Compile Include="Products\ModulKlimaDecke\PossibleModulLane.cs" />
     <Compile Include="Products\ModulKlimaDecke\PossibleModulLaneArea.cs" />
-    <Compile Include="Products\PlannedEcothermProductPanel.cs">
+    <Compile Include="Products\Ecotherm\PlannedEcothermProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Products\PlannedEcothermProductPanel.Designer.cs">
+    <Compile Include="Products\Ecotherm\PlannedEcothermProductPanel.Designer.cs">
       <DependentUpon>PlannedEcothermProductPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\EcothermProduct.cs" />
-    <Compile Include="Products\EcothermCircuit.cs" />
-    <Compile Include="Products\PlannedHithermCompactProductPanel.cs">
+    <Compile Include="Products\Ecotherm\EcothermProduct.cs" />
+    <Compile Include="Products\Ecotherm\EcothermCircuit.cs" />
+    <Compile Include="Products\HithermCompact\PlannedHithermCompactProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Products\PlannedHithermCompactProductPanel.Designer.cs">
+    <Compile Include="Products\HithermCompact\PlannedHithermCompactProductPanel.Designer.cs">
       <DependentUpon>PlannedHithermCompactProductPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\HithermCompactCircuit.cs" />
-    <Compile Include="Products\HithermCompactRegister.cs" />
+    <Compile Include="Products\HithermCompact\HithermCompactCircuit.cs" />
+    <Compile Include="Products\HithermCompact\HithermCompactRegister.cs" />
     <Compile Include="Products\ProductWithInsulationConstruction.cs" />
-    <Compile Include="Products\SelectHithermWallForm.cs">
+    <Compile Include="Products\Hitherm\SelectHithermWallForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Products\SelectHithermWallForm.Designer.cs">
+    <Compile Include="Products\Hitherm\SelectHithermWallForm.Designer.cs">
       <DependentUpon>SelectHithermWallForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\HithermWall.cs" />
-    <Compile Include="Products\HithermWallGrid.cs">
+    <Compile Include="Products\Hitherm\HithermWall.cs" />
+    <Compile Include="Products\Hitherm\HithermWallGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Products\HithermWallGrid.Designer.cs">
+    <Compile Include="Products\Hitherm\HithermWallGrid.Designer.cs">
       <DependentUpon>HithermWallGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ModulDeckeSubArea.cs" />
-    <Compile Include="Products\PlannedHithermProductPanel.cs">
+    <Compile Include="Products\Hitherm\PlannedHithermProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Products\PlannedHithermProductPanel.Designer.cs">
+    <Compile Include="Products\Hitherm\PlannedHithermProductPanel.Designer.cs">
       <DependentUpon>PlannedHithermProductPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\PlannedModulKlimaBodenProductPanel.cs">
@@ -363,8 +375,8 @@
       <DependentUpon>PlannedModulKlimaBodenProductPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ModulBodenCircuit.cs" />
-    <Compile Include="Products\HithermRegister.cs" />
-    <Compile Include="Products\HithermCircuit.cs" />
+    <Compile Include="Products\Hitherm\HithermRegister.cs" />
+    <Compile Include="Products\Hitherm\HithermCircuit.cs" />
     <Compile Include="Products\KlimaFlaechenModulGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -379,10 +391,10 @@
     <Compile Include="Products\PlannedModulKlimaDeckeProductPanel.Designer.cs">
       <DependentUpon>PlannedModulKlimaDeckeProductPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\EurovalCircuit.cs" />
+    <Compile Include="Products\Euroval\EurovalCircuit.cs" />
     <Compile Include="Products\KlimaFlaechenModul.cs" />
     <Compile Include="Products\ProductNameAttribute.cs" />
-    <Compile Include="Products\HithermCompactRoofProduct.cs" />
+    <Compile Include="Products\HithermCompact\HithermCompactRoofProduct.cs" />
     <Compile Include="Products\ConnectionPipe.cs" />
     <Compile Include="Products\ConnectionPipesForm.cs">
       <SubType>Form</SubType>
@@ -396,10 +408,10 @@
     <Compile Include="Products\LenghtAssistantForm.Designer.cs">
       <DependentUpon>LenghtAssistantForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\SelectHithermWallConstructionForm.cs">
+    <Compile Include="Products\Hitherm\SelectHithermWallConstructionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Products\SelectHithermWallConstructionForm.Designer.cs">
+    <Compile Include="Products\Hitherm\SelectHithermWallConstructionForm.Designer.cs">
       <DependentUpon>SelectHithermWallConstructionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\AuslegeAssistentForm.cs">
@@ -514,9 +526,9 @@
     <Compile Include="Products\ConcreteActivationProduct.cs" />
     <Compile Include="Products\ModulKlimaDeckeProduct.cs" />
     <Compile Include="Products\ModulKlimaBodenProduct.cs" />
-    <Compile Include="Products\HithermCompactProduct.cs" />
-    <Compile Include="Products\HithermProduct.cs" />
-    <Compile Include="Products\EurovalProduct.cs" />
+    <Compile Include="Products\HithermCompact\HithermCompactProduct.cs" />
+    <Compile Include="Products\Hitherm\HithermProduct.cs" />
+    <Compile Include="Products\Euroval\EurovalProduct.cs" />
     <Compile Include="Products\Product.cs" />
     <Compile Include="Project\Floor.cs" />
     <Compile Include="Project\FloorList.cs" />
@@ -532,10 +544,10 @@
     <Compile Include="Project\FloorSummaryPanel.Designer.cs">
       <DependentUpon>FloorSummaryPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\PlannedEurovalProductPanel.cs">
+    <Compile Include="Products\Euroval\PlannedEurovalProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Products\PlannedEurovalProductPanel.Designer.cs">
+    <Compile Include="Products\Euroval\PlannedEurovalProductPanel.Designer.cs">
       <DependentUpon>PlannedEurovalProductPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\PlannedProduct.cs" />
@@ -755,6 +767,10 @@
       <DependentUpon>ConnectionPipesForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Products\Euroval\EurovalPlannerForm.resx">
+      <DependentUpon>EurovalPlannerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Products\ModulKlimaBoden\ModulKlimaBodenPlannerForm.resx">
       <DependentUpon>ModulKlimaBodenPlannerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -763,23 +779,23 @@
       <SubType>Designer</SubType>
       <DependentUpon>ModulKlimaDeckePlannerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Products\PlannedEcothermProductPanel.resx">
+    <EmbeddedResource Include="Products\Ecotherm\PlannedEcothermProductPanel.resx">
       <DependentUpon>PlannedEcothermProductPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Products\PlannedHithermCompactProductPanel.resx">
+    <EmbeddedResource Include="Products\HithermCompact\PlannedHithermCompactProductPanel.resx">
       <DependentUpon>PlannedHithermCompactProductPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Products\SelectHithermWallForm.resx">
+    <EmbeddedResource Include="Products\Hitherm\SelectHithermWallForm.resx">
       <DependentUpon>SelectHithermWallForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Products\HithermWallGrid.resx">
+    <EmbeddedResource Include="Products\Hitherm\HithermWallGrid.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HithermWallGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Products\PlannedHithermProductPanel.resx">
+    <EmbeddedResource Include="Products\Hitherm\PlannedHithermProductPanel.resx">
       <DependentUpon>PlannedHithermProductPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -799,7 +815,7 @@
       <DependentUpon>LenghtAssistantForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Products\SelectHithermWallConstructionForm.resx">
+    <EmbeddedResource Include="Products\Hitherm\SelectHithermWallConstructionForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SelectHithermWallConstructionForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -863,7 +879,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>NewRoomTypeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Products\PlannedEurovalProductPanel.resx">
+    <EmbeddedResource Include="Products\Euroval\PlannedEurovalProductPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PlannedEurovalProductPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -974,9 +990,6 @@
     </Content>
     <None Include="Properties\DataSources\ExportPlanForm.ExportOptionType.datasource" />
     <None Include="Resources\pickUnused.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Products\Euroval\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
