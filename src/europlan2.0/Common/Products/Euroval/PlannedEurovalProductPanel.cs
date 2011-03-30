@@ -846,7 +846,8 @@ namespace Europlan.Common {
 					this.numAreaPercentage.Enabled = false;
 					this.numAreaReduced.Enabled = false;
 					this.numAreaUnheated.Enabled = false;
-					this.groupBox6.Enabled = false;
+					this.numRim.Enabled = false;
+					this.numCorners.Enabled = false;
 					this.cmbLayDistance.Enabled = false;
 					this.cmbRimType.Enabled = false;
 					this.cmbCircuits.Enabled = false;
@@ -857,7 +858,8 @@ namespace Europlan.Common {
 					this.numAreaPercentage.Enabled = true;
 					this.numAreaReduced.Enabled = true;
 					this.numAreaUnheated.Enabled = true;
-					this.groupBox6.Enabled = true;
+					this.numRim.Enabled = false;
+					this.numCorners.Enabled = false;
 					this.cmbLayDistance.Enabled = true;
 					this.cmbRimType.Enabled = true;
 					this.cmbCircuits.Enabled = true;
