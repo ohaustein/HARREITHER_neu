@@ -1,5 +1,5 @@
 namespace Europlan.Common {
-	partial class DistributionPositionerForm {
+	partial class DistributiorPositionerForm {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -24,7 +24,7 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistributionPositionerForm));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistributiorPositionerForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();

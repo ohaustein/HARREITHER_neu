@@ -14,7 +14,7 @@ namespace Europlan.Common {
 		private bool gridContentChanged = false;
 		private bool updateOngoing = false;
 
-		private class LayDistanceItem {
+		public class LayDistanceItem {
 			public Nullable<EurovalProduct.EurovalLayDistance> layDistance;
 			public string name;
 
@@ -36,7 +36,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private class RimTypeItem {
+		public class RimTypeItem {
 			public Nullable<EurovalProduct.EurovalRimType> rimType;
 			public string name;
 
@@ -840,8 +840,9 @@ namespace Europlan.Common {
 					this.gridExtendedCorrections.Enabled = evProduct.PlannedCorrections;
 				}*/
 
+				this.tabs.TabPages.Remove(pageCorrections);
+
 				if (graphicalMode) {
-					this.tabs.TabPages.Remove(pageCorrections);
 					this.numArea.Enabled = false;
 					this.numAreaPercentage.Enabled = false;
 					this.numAreaReduced.Enabled = false;
@@ -858,11 +859,11 @@ namespace Europlan.Common {
 					this.numAreaPercentage.Enabled = true;
 					this.numAreaReduced.Enabled = true;
 					this.numAreaUnheated.Enabled = true;
-					this.numRim.Enabled = false;
-					this.numCorners.Enabled = false;
-					this.cmbLayDistance.Enabled = true;
-					this.cmbRimType.Enabled = true;
-					this.cmbCircuits.Enabled = true;
+					this.numRim.Enabled = true;
+					this.numCorners.Enabled = true;
+					//this.cmbLayDistance.Enabled = true;
+					//this.cmbRimType.Enabled = true;
+					//this.cmbCircuits.Enabled = true;
 					this.btnGraphical.Enabled = false;
 				}
 

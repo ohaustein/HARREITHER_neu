@@ -217,11 +217,11 @@
     <Compile Include="Plan\CadPlanOptionsForm.Designer.cs">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Plan\DistributionPositionerForm.cs">
+    <Compile Include="Plan\DistributiorPositionerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Plan\DistributionPositionerForm.Designer.cs">
-      <DependentUpon>DistributionPositionerForm.cs</DependentUpon>
+    <Compile Include="Plan\DistributiorPositionerForm.Designer.cs">
+      <DependentUpon>DistributiorPositionerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plan\DistributorPositioner.cs">
       <SubType>Component</SubType>
@@ -731,8 +731,8 @@
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plan\DistributionPositionerForm.resx">
-      <DependentUpon>DistributionPositionerForm.cs</DependentUpon>
+    <EmbeddedResource Include="Plan\DistributiorPositionerForm.resx">
+      <DependentUpon>DistributiorPositionerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plan\ExportPlanForm.resx">

@@ -18,10 +18,8 @@ namespace Europlan.Common {
 
 		public enum EurovalMode {
 			EVM_NONE,
-			KDM_CONSTRUCTION,
-			KDM_LAYOUT_ADD_AREA,
-			KDM_LAYOUT_ADD_AREA_FINISH,
-			KDM_LAYOUT_ADD_AREA_PICK_REFERENCE
+			EVM_ADD_RZ,
+			EVM_DEL_RZ
 		}
 
 		public delegate void AddModuleDelegate(double x, double y, double rotation, out bool added, KlimaFlaechenModul.ModulOrientationEnum orientation, bool bottomUp);
@@ -106,13 +104,16 @@ namespace Europlan.Common {
 		private void connectedPlanPanel_KeyDown(object sender, KeyEventArgs e) {
 			//if (this.mode == KlimaBodenMode.KDM_PICK_MODULE) {
 			//    KeyDown(e.KeyCode, this.highlightModules);
-			//} if (this.mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH || this.mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE) {
-			//    if (e.KeyCode == Keys.Escape) {
+			//} 
+			if (this.mode == EurovalMode.EVM_ADD_RZ || this.mode == EurovalMode.EVM_DEL_RZ) {
+			    if (e.KeyCode == Keys.Escape) {
 			//        this.layoutAddArea = null;
 			//        this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
 			//        this.connectedPlanPanel.InvalidateGraphics();
-			//    }
-			//}
+					this.Mode = EurovalMode.EVM_NONE;
+					this.connectedPlanPanel.InvalidateGraphics();
+			    }
+			}
 		}
 
 		private bool KeyDown(Keys key) {
@@ -152,10 +153,10 @@ namespace Europlan.Common {
 		}
 
 		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
-			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.CeilingCoordinatesToUse != null) {
+			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
 				GraphicsPath path = new GraphicsPath();
 				List<PointF> transformedPoints = new List<PointF>();
-				foreach (Point2D point in this.product.AssociatedRoom.CeilingCoordinatesToUse) {
+				foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
 					Point2D tmp = additionalTransformation.TransformTo2D(point);
 					transformedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
 				}
@@ -180,6 +181,50 @@ namespace Europlan.Common {
 					//if (this.product.GraphConstruction != null) {
 						//this.product.GraphConstruction.Paint(g, this.Mode);
 					//}
+				}
+
+				if (this.mode == EurovalMode.EVM_ADD_RZ) {
+					double distance = Double.MaxValue;
+					Point2D rzPoint = Point2D.Zero;
+					Point2D prevPoint = Point2D.Zero;
+					Segment2D line = new Segment2D();
+					foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+						if (prevPoint != Point2D.Zero) {
+							line = new Segment2D(prevPoint, point);
+							if (line.GetDistance(mousePositionInPlan) < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
+								if (line.GetDistance(mousePositionInPlan) < distance) {
+									distance = line.GetDistance(mousePositionInPlan);
+									rzPoint = line.GetClosestPoint(mousePositionInPlan);
+								}
+							}
+						}
+						prevPoint = point;
+					}
+					if (rzPoint == Point2D.Zero) {
+						line = new Segment2D(prevPoint, this.product.AssociatedRoom.RoomCoordinates[0]);
+						if (line.GetDistance(mousePositionInPlan) < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
+							if (line.GetDistance(mousePositionInPlan) < distance) {
+								distance = line.GetDistance(mousePositionInPlan);
+								rzPoint = line.GetClosestPoint(mousePositionInPlan);
+							}
+						}
+					}
+
+					if (rzPoint != Point2D.Zero) {
+						foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+							line = new Segment2D(point, rzPoint);
+							if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
+								rzPoint = point;
+								break;
+							}
+						}
+						Point2D p = additionalTransformation.TransformTo2D(rzPoint);
+						float size = (float)(this.product.AssociatedRoom.AssociatedPlan.Measure * 0.05);
+						Pen pen = new Pen(Color.Blue, 2);
+						g.DrawLine(pen, (float)p.X - size, (float)p.Y - size, (float)p.X + size, (float)p.Y + size);
+						g.DrawLine(pen, (float)p.X - size, (float)p.Y + size, (float)p.X + size, (float)p.Y - size);
+					}
+
 				}
 
 				//if (this.mode != KlimaBodenMode.KDM_CONSTRUCTION) {
@@ -342,6 +387,9 @@ namespace Europlan.Common {
 
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
+			if (this.Mode == EurovalMode.EVM_ADD_RZ) {
+				return true;
+			}
 			//if (this.Mode == KlimaBodenMode.KDM_CONSTRUCTION) {
 			//    if (this.product.GraphConstruction != null) {
 			//        if (this.product.GraphConstruction.HitTest(planPoint, pointInControl)) {
