@@ -1209,6 +1209,8 @@ namespace Europlan.Common {
 			Point2D output12D, output22D, output32D, output42D;
 
 			// TODO wenn distributor bereit gesetzt ist dürfen nicht alle zurückgegeben werden
+			List<ModulBodenCircuit> openInputs = this.GetOpenInputs();
+			List<ModulBodenCircuit> openOutputs = this.GetOpenOutputs();
 
 			foreach (ModulBodenCircuit c in this.PlannedCircuits) {
 				foreach (KlimaFlaechenModul modul in c.Row.List) {
@@ -1221,14 +1223,14 @@ namespace Europlan.Common {
 
 					if (invertXAxis == modul.GraphBottomUp) {
 						if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
-							if (output && modul.GetOutputLink(c, invertXAxis) == null) {
+							if (output && modul.GetOutputLink(c, invertXAxis) == null && openOutputs.Contains(c)) {
 								output12D = transformation.Transform(new Point2D(0, 0));
 								output22D = transformation.Transform(new Point2D(0, 0.1 * measure));
 								output32D = transformation.Transform(new Point2D(0.1 * measure, 0.1 * measure));
 								output42D = transformation.Transform(new Point2D(0.1 * measure, 0));
 								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
 							}
-							if (input && modul.GetInputLink(c, invertXAxis) == null) {
+							if (input && modul.GetInputLink(c, invertXAxis) == null && openInputs.Contains(c)) {
 								input12D = transformation.Transform(new Point2D(width, height));
 								input22D = transformation.Transform(new Point2D(width, height - 0.1 * measure));
 								input32D = transformation.Transform(new Point2D(width - 0.1 * measure, height - 0.1 * measure));
@@ -1236,14 +1238,14 @@ namespace Europlan.Common {
 								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
 							}
 						} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
-							if (output && modul.GetOutputLink(c, invertXAxis) == null) {
+							if (output && modul.GetOutputLink(c, invertXAxis) == null && openOutputs.Contains(c)) {
 								output12D = transformation.Transform(new Point2D(width, 0));
 								output22D = transformation.Transform(new Point2D(width, 0.1 * measure));
 								output32D = transformation.Transform(new Point2D(width - 0.1 * measure, 0.1 * measure));
 								output42D = transformation.Transform(new Point2D(width - 0.1 * measure, 0));
 								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
 							}
-							if (input && modul.GetInputLink(c, invertXAxis) == null) {
+							if (input && modul.GetInputLink(c, invertXAxis) == null && openInputs.Contains(c)) {
 								input12D = transformation.Transform(new Point2D(0, height));
 								input22D = transformation.Transform(new Point2D(0, height - 0.1 * measure));
 								input32D = transformation.Transform(new Point2D(0.1 * measure, height - 0.1 * measure));
@@ -1253,14 +1255,14 @@ namespace Europlan.Common {
 						}
 					} else {
 						if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
-							if (input && modul.GetInputLink(c, invertXAxis) == null) {
+							if (input && modul.GetInputLink(c, invertXAxis) == null && openInputs.Contains(c)) {
 								input12D = transformation.Transform(new Point2D(0, 0));
 								input22D = transformation.Transform(new Point2D(0, 0.1 * measure));
 								input32D = transformation.Transform(new Point2D(0.1 * measure, 0.1 * measure));
 								input42D = transformation.Transform(new Point2D(0.1 * measure, 0));
 								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
 							}
-							if (output && modul.GetOutputLink(c, invertXAxis) == null) {
+							if (output && modul.GetOutputLink(c, invertXAxis) == null && openOutputs.Contains(c)) {
 								output12D = transformation.Transform(new Point2D(width, height));
 								output22D = transformation.Transform(new Point2D(width, height - 0.1 * measure));
 								output32D = transformation.Transform(new Point2D(width - 0.1 * measure, height - 0.1 * measure));
@@ -1268,14 +1270,14 @@ namespace Europlan.Common {
 								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
 							}
 						} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
-							if (input && modul.GetInputLink(c, invertXAxis) == null) {
+							if (input && modul.GetInputLink(c, invertXAxis) == null && openInputs.Contains(c)) {
 								input12D = transformation.Transform(new Point2D(width, 0));
 								input22D = transformation.Transform(new Point2D(width, 0.1 * measure));
 								input32D = transformation.Transform(new Point2D(width - 0.1 * measure, 0.1 * measure));
 								input42D = transformation.Transform(new Point2D(width - 0.1 * measure, 0));
 								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
 							}
-							if (output && modul.GetOutputLink(c, invertXAxis) == null) {
+							if (output && modul.GetOutputLink(c, invertXAxis) == null && openOutputs.Contains(c)) {
 								output12D = transformation.Transform(new Point2D(0, height));
 								output22D = transformation.Transform(new Point2D(0, height - 0.1 * measure));
 								output32D = transformation.Transform(new Point2D(0.1 * measure, height - 0.1 * measure));
@@ -1288,6 +1290,32 @@ namespace Europlan.Common {
 			}
 
 			return possibleConnections;
+		}
+
+		private List<ModulBodenCircuit> GetOpenInputs() {
+			List<ModulBodenCircuit> openInputs = new List<ModulBodenCircuit>();
+			foreach (ModulBodenCircuit c in this.PlannedCircuits) {
+				openInputs.Add(c);
+			}
+			foreach (GraphicalProductConnection conn in this.Connections) {
+				if (conn.Vorlauf) {
+					openInputs.Remove(conn.ProductCircuit as ModulBodenCircuit);
+				}
+			}
+			return openInputs;
+		}
+
+		private List<ModulBodenCircuit> GetOpenOutputs() {
+			List<ModulBodenCircuit> openOutputs = new List<ModulBodenCircuit>();
+			foreach (ModulBodenCircuit c in this.PlannedCircuits) {
+				openOutputs.Add(c);
+			}
+			foreach (GraphicalProductConnection conn in this.Connections) {
+				if (!conn.Vorlauf) {
+					openOutputs.Remove(conn.ProductCircuit as ModulBodenCircuit);
+				}
+			}
+			return openOutputs;
 		}
 	}
 }

@@ -91,29 +91,33 @@ namespace Europlan.Common {
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public System.Windows.Forms.Cursor PickCursor {
-			get {
-				// TODO
-				throw new Exception("The method or operation is not implemented.");
-			}
-		}
-
-		public bool HitTest(Point2D planPoint, double maxDist) {
+		public double HitTest(Point2D planPoint, double maxDist) {
 			Point2D oldVertex = new Point2D();
 			bool first = false;
+			double bestDist = double.MaxValue;
 			foreach (Point2D newVertex in this.vertices) {
 				if (first) {
 					first = false;
 				} else {
 					Segment2D segment = new Segment2D(oldVertex, newVertex);
 					double dist = segment.GetDistance(planPoint);
-					if (dist <= maxDist) {
-						return true;
+					if (dist <= bestDist) {
+						bestDist = dist;
 					}
 				}
 				oldVertex = newVertex;
 			}
-			return false;
+			if (bestDist <= maxDist) {
+				bestDist = -bestDist;
+			}
+			return bestDist;
+		}
+
+		public System.Windows.Forms.Cursor PickCursor {
+			get {
+				// TODO
+				throw new Exception("The method or operation is not implemented.");
+			}
 		}
 
 		[XmlIgnore]

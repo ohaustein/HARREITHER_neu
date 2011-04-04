@@ -612,6 +612,9 @@ namespace Europlan.Common {
 				return possibleConnections;
 			}
 
+			List<int> openInputs = this.GetOpenInputs();
+			List<int> openOutputs = this.GetOpenOutputs();
+
 			if (invertYAxis) {
 				transformation = transformation * Transformation3D.Translation(representation.Value.position.X, representation.Value.position.Y);
 				transformation = transformation * Transformation3D.Rotate(-representation.Value.rotation * Math.PI / 180.0);
@@ -636,35 +639,81 @@ namespace Europlan.Common {
 
 			if (invertYAxis) {
 				for (int i = 0; i < this.maxCircuits; i++) {
-					leftBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y));
-					leftTop = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y + height));
-					rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y + height));
-					rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y));
-					possibleConnections.Add(new PossibleConnection(transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.25) * connectionWidth, representation.Value.position.Y + height * 0.5)), new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), false, true, null, -1, representation.Value.rotation, 0));
+					if (output && openOutputs.Contains(i)) {
+						leftBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y));
+						leftTop = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y + height));
+						rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y + height));
+						rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y));
+						possibleConnections.Add(new PossibleConnection(transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.25) * connectionWidth, representation.Value.position.Y + height * 0.7)), new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), false, true, this, i, representation.Value.rotation, 0));
+					}
 
-					leftBottom = rightBottom;
-					leftTop = rightTop;
-					rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1.0) * connectionWidth, representation.Value.position.Y + height));
-					rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1.0) * connectionWidth, representation.Value.position.Y));
-					possibleConnections.Add(new PossibleConnection(transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.75) * connectionWidth, representation.Value.position.Y + height * 0.5)), new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), true, false, null, -1, representation.Value.rotation, 0));
+					if (input && openInputs.Contains(i)) {
+						leftBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y)); ;
+						leftTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y + height));
+						rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1.0) * connectionWidth, representation.Value.position.Y + height));
+						rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1.0) * connectionWidth, representation.Value.position.Y));
+						possibleConnections.Add(new PossibleConnection(transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.75) * connectionWidth, representation.Value.position.Y + height * 0.3)), new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), true, false, this, i, representation.Value.rotation, 0));
+					}
 				}
 			} else {
 				for (int i = 0; i < this.maxCircuits; i++) {
-					leftBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y));
-					leftTop = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y - height));
-					rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y - height));
-					rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y));
-					possibleConnections.Add(new PossibleConnection(transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.25) * connectionWidth, representation.Value.position.Y - height * 0.5)), new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), false, true, null, -1, representation.Value.rotation, 0));
+					if (output && openOutputs.Contains(i)) {
+						leftBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y));
+						leftTop = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y - height));
+						rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y - height));
+						rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y));
+						possibleConnections.Add(new PossibleConnection(transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.25) * connectionWidth, representation.Value.position.Y - height * 0.7)), new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), false, true, this, i, representation.Value.rotation, 0));
+					}
 
-					leftBottom = rightBottom;
-					leftTop = rightTop;
-					rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y - height));
-					rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y));
-					possibleConnections.Add(new PossibleConnection(transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.75) * connectionWidth, representation.Value.position.Y - height * 0.5)), new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), true, false, null, -1, representation.Value.rotation, 0));
+					if (input && openInputs.Contains(i)) {
+						leftBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y));
+						leftTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y - height));
+						rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y - height));
+						rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y));
+						possibleConnections.Add(new PossibleConnection(transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.75) * connectionWidth, representation.Value.position.Y - height * 0.3)), new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), true, false, this, i, representation.Value.rotation, 0));
+					}
 				}
 			}
 
 			return possibleConnections;
+		}
+
+		private List<int> GetOpenInputs() {
+			List<int> openInputs = new List<int>();
+			for (int i = 0; i < this.maxCircuits; i++) {
+				openInputs.Add(i);
+			}
+			foreach (Floor floor in Project.Instance.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						foreach (GraphicalProductConnection conn in pp.Product.Connections) {
+							if (!conn.Vorlauf && conn.Distributor == this) {
+								openInputs.Remove(conn.DistributorIndex);
+							}
+						}
+					}
+				}
+			}
+			return openInputs;
+		}
+
+		private List<int> GetOpenOutputs() {
+			List<int> openOutputs = new List<int>();
+			for (int i = 0; i < this.maxCircuits; i++) {
+				openOutputs.Add(i);
+			}
+			foreach (Floor floor in Project.Instance.Floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						foreach (GraphicalProductConnection conn in pp.Product.Connections) {
+							if (conn.Vorlauf && conn.Distributor == this) {
+								openOutputs.Remove(conn.DistributorIndex);
+							}
+						}
+					}
+				}
+			}
+			return openOutputs;
 		}
 	}
 }

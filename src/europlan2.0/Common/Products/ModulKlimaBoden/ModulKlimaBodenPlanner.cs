@@ -527,13 +527,22 @@ namespace Europlan.Common {
 					redraw = true;
 				}
 			} else if (this.Mode == KlimaBodenMode.KDM_DEL_CONNECTION) {
+				double bestDist = double.MinValue;
+				KlimaFlaechenModulVerbindung bestLink = null;
+				ModulBodenCircuit bestCircuit = null;
 				foreach (ModulBodenCircuit circuit in this.product.PlannedCircuits) {
 					foreach (KlimaFlaechenModulVerbindung link in circuit.Links) {
-						if (link.HitTest(planPoint, this.product.AssociatedRoom.AssociatedPlan.Measure.Value * 0.0105)) {
-							circuit.Links.Remove(link);
-							return true;
+						double dist = link.HitTest(planPoint, this.product.AssociatedRoom.AssociatedPlan.Measure.Value * 0.025);
+						if (dist <= 0 && dist > bestDist) {
+							bestDist = dist;
+							bestLink = link;
+							bestCircuit = circuit;
 						}
 					}
+				}
+				if (bestLink != null) {
+					bestCircuit.Links.Remove(bestLink);
+					redraw = true;
 				}
 			}
 			return redraw;

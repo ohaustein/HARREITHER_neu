@@ -247,6 +247,8 @@ namespace Europlan.Common.Products {
 				this.btnAddModules.Visible = true;
 				this.btnSelectModule.Visible = true;
 				this.btnConstruction.Visible = false;
+				this.btnConnections.Visible = true;
+				this.btnDeleteConnection.Visible = true;
 				if (!this.btnAddModules.Checked && !this.btnSelectModule.Checked && !this.btnMove.Checked) {
 					this.planPanel.Mode = PlanMode.PM_MOVE;
 					this.modulKlimaBodenPlanner.Mode = ModulKlimaBodenPlanner.KlimaBodenMode.KDM_NONE;
@@ -256,6 +258,8 @@ namespace Europlan.Common.Products {
 				this.btnAddModules.Visible = false;
 				this.btnSelectModule.Visible = false;
 				this.btnConstruction.Visible = this.modulKlimaBodenPlanner.Product.GraphConstruction is ModulKlimaBodenConstructionStaffeln;
+				this.btnConnections.Visible = false;
+				this.btnDeleteConnection.Visible = false;
 				if (!this.btnConstruction.Checked && !this.btnMove.Checked) {
 					this.planPanel.Mode = PlanMode.PM_MOVE;
 					this.modulKlimaBodenPlanner.Mode = ModulKlimaBodenPlanner.KlimaBodenMode.KDM_NONE;
