@@ -14,6 +14,8 @@ using WW.Cad.Model;
 using WW.Cad.IO;
 using WW.Cad.Model.Tables;
 using WW.Cad.Base;
+using WW.Cad.Model.Entities;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
 
@@ -140,7 +142,11 @@ namespace Europlan.Common {
 				Graphics g = Graphics.FromImage(image);
 				g.InterpolationMode = InterpolationMode.Bicubic;
 				foreach (Floor floor in Project.Instance.Floors) {
-					// TODO: dehnungsfugen
+
+					foreach (Segment2D expansionGap in floor.ExpansionGaps) {
+						g.DrawLine(Pens.Blue, (float)expansionGap.Start.X, (float)expansionGap.Start.Y, (float)expansionGap.End.X, (float)expansionGap.End.Y);
+					}
+
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct pp in room.PlannedProducts) {
@@ -199,9 +205,16 @@ namespace Europlan.Common {
 				DxfLayer floorConstructionLayer = new DxfLayer(EuroplanRes.ConstructionEditorForm_Fussboden);
 				// TODO: übersetzen
 				DxfLayer beplankungLayer = new DxfLayer("Beplankung");
+				DxfLayer dehnfugenLayer = new DxfLayer("Dehnfugen");
 
 				foreach (Floor floor in Project.Instance.Floors) {
-					// TODO: dehnungsfugen
+
+					foreach (Segment2D expansionGap in floor.ExpansionGaps) {
+						DxfLine line = new DxfLine(Color.Blue, expansionGap.Start, expansionGap.End);
+						line.Layer = dehnfugenLayer;
+						model.Entities.Add(line);
+					}
+
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct pp in room.PlannedProducts) {
