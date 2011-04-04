@@ -142,12 +142,10 @@ namespace Europlan.Common {
 				Graphics g = Graphics.FromImage(image);
 				g.InterpolationMode = InterpolationMode.Bicubic;
 				foreach (Floor floor in Project.Instance.Floors) {
-
-					foreach (Segment2D expansionGap in floor.ExpansionGaps) {
-						g.DrawLine(Pens.Blue, (float)expansionGap.Start.X, (float)expansionGap.Start.Y, (float)expansionGap.End.X, (float)expansionGap.End.Y);
-					}
-
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
+						foreach (Segment2D expansionGap in floor.ExpansionGaps) {
+							g.DrawLine(Pens.Blue, (float)expansionGap.Start.X, (float)expansionGap.Start.Y, (float)expansionGap.End.X, (float)expansionGap.End.Y);
+						}
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct pp in room.PlannedProducts) {
 								if ((cmbExportOption.SelectedValue.Equals(ExportOptionType.DH_FBH) &&
@@ -208,14 +206,12 @@ namespace Europlan.Common {
 				DxfLayer dehnfugenLayer = new DxfLayer("Dehnfugen");
 
 				foreach (Floor floor in Project.Instance.Floors) {
-
-					foreach (Segment2D expansionGap in floor.ExpansionGaps) {
-						DxfLine line = new DxfLine(Color.Blue, expansionGap.Start, expansionGap.End);
-						line.Layer = dehnfugenLayer;
-						model.Entities.Add(line);
-					}
-
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
+						foreach (Segment2D expansionGap in floor.ExpansionGaps) {
+							DxfLine line = new DxfLine(Color.Blue, expansionGap.Start, expansionGap.End);
+							line.Layer = dehnfugenLayer;
+							model.Entities.Add(line);
+						}
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct pp in room.PlannedProducts) {
 								if ((cmbExportOption.SelectedValue.Equals(ExportOptionType.DH_FBH) &&
