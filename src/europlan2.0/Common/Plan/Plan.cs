@@ -81,6 +81,11 @@ namespace Europlan.Common {
 			// Return the result.
 			return area;
 		}
+
+		[XmlIgnore]
+		public abstract bool InvertYAxis {
+			get;
+		}
 	}
 
 }

@@ -9,7 +9,7 @@ using WW.Cad.Model;
 using WW.Math;
 
 namespace Europlan.Common {
-	public partial class PlanPanel : UserControl, IPlanPanel, IProductPlanner {
+	public partial class PlanPanel : UserControl, IPlanPanel, IPlanner {
 
 		public enum PlanTypeEnum {
 			PT_CAD,
@@ -20,7 +20,7 @@ namespace Europlan.Common {
 		private IPlanPanel panel = null;
 		private PlanMode tmpMode = PlanMode.PM_MOVE;
 		private Cursor tmpCursor = Cursors.SizeAll;
-		private IProductPlanner productPlanner = null;
+		private IPlanner productPlanner = null;
 		private IPlanPanel connectedPlanPanel;
 
 		public PlanPanel() {
@@ -89,7 +89,7 @@ namespace Europlan.Common {
 
 		#region IPlanPanel Members
 
-		public IProductPlanner ProductPlanner {
+		public IPlanner ProductPlanner {
 			get { return this.productPlanner; }
 			set {
 				if (this.productPlanner != null) {

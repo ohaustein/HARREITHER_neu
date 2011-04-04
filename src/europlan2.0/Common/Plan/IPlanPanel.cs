@@ -28,7 +28,7 @@ namespace Europlan.Common {
 	}
 
 	public interface IPlanPanel {
-		IProductPlanner ProductPlanner {
+		IPlanner ProductPlanner {
 			get;
 			set;
 		}

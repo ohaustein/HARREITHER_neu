@@ -16,6 +16,8 @@ namespace Europlan.Common {
 		private double reducedArea = 0;
 		private Color circuitColor = Color.FromArgb(0, 128, 0);
 
+		private List<KlimaFlaechenModulVerbindung> verbindungen = null;
+
 		public ModulBodenCircuit() {
 
 		}
@@ -394,6 +396,54 @@ namespace Europlan.Common {
 		public int CircuitColorB {
 			get { return this.circuitColor.B; }
 			set { this.circuitColor = Color.FromArgb(this.circuitColor.R, this.circuitColor.G, value); }
+		}
+
+		public List<KlimaFlaechenModulVerbindung> Links {
+			get { return this.verbindungen; }
+			set { this.verbindungen = value; }
+		}
+
+		/// <summary>
+		/// Returns all modules that are already connected to this module via links
+		/// </summary>
+		/// <param name="referenceModul"></param>
+		/// <returns></returns>
+		public List<KlimaFlaechenModul> GetAllLinkedModules(KlimaFlaechenModul referenceModul) {
+			List<KlimaFlaechenModul> linkedModules = new List<KlimaFlaechenModul>();
+			linkedModules.Add(referenceModul);
+			KlimaFlaechenModul nextModul = this.GetNextLinkedModule(referenceModul);
+			while (nextModul != null && !linkedModules.Contains(nextModul)) {
+				linkedModules.Add(nextModul);
+				nextModul = this.GetNextLinkedModule(nextModul);
+			}
+			KlimaFlaechenModul previousModul = this.GetPreviousLinkedModule(referenceModul);
+			while (previousModul != null && !linkedModules.Contains(previousModul)) {
+				linkedModules.Add(previousModul);
+				previousModul = this.GetPreviousLinkedModule(previousModul);
+			}
+			return linkedModules;
+		}
+
+		private KlimaFlaechenModul GetNextLinkedModule(KlimaFlaechenModul referenceModul) {
+			if (this.verbindungen != null) {
+				foreach (KlimaFlaechenModulVerbindung link in this.verbindungen) {
+					if (link.Start == referenceModul) {
+						return link.End;
+					}
+				}
+			}
+			return null;
+		}
+
+		private KlimaFlaechenModul GetPreviousLinkedModule(KlimaFlaechenModul referenceModul) {
+			if (this.verbindungen != null) {
+				foreach (KlimaFlaechenModulVerbindung link in this.verbindungen) {
+					if (link.End == referenceModul) {
+						return link.Start;
+					}
+				}
+			}
+			return null;
 		}
 	}
 }

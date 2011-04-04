@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WW.Cad.Model;
 using WW.Cad.Model.Tables;
 using WW.Cad.Model.Entities;
+using Europlan.Common.Products.ModulKlimaDecke;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionGlatt : ModulKlimaDeckeConstruction {
@@ -22,6 +23,8 @@ namespace Europlan.Common {
 
 		private Nullable<Size2D> beplankungStart = null;
 		private Nullable<Size2D> beplankungEnd = null;
+
+		private ModulKlimaDeckeProduct.ModulCeilingConstructionEnum constructionType = (ModulKlimaDeckeProduct.ModulCeilingConstructionEnum)ModulKlimaDeckeProduct.ConfigModulCeilingConstruction == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.KASSETTENDECKE ? ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.C_PROFIL : (ModulKlimaDeckeProduct.ModulCeilingConstructionEnum)ModulKlimaDeckeProduct.ConfigModulCeilingConstruction;
 
 		public ModulKlimaDeckeConstructionGlatt() {
 		}
@@ -149,11 +152,11 @@ namespace Europlan.Common {
 				foreach (List<Point2D> unusedArea in this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
 					tmp = GetUnusableSegments(leftBorder, rightBorder, unusedArea, true, 0);
 					unusableSegments.AddRange(tmp);
-					NormalizeSegments(unusableSegments);
+					LineSegment.NormalizeSegments(unusableSegments);
 				}
 			}
 
-			List<LineSegment> usableSegments = InvertSegments(unusableSegments);
+			List<LineSegment> usableSegments = LineSegment.InvertSegments(unusableSegments);
 			List<PossibleModulLaneArea> possibleAreas = new List<PossibleModulLaneArea>();
 			Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
 			Point2D tmpPoint = matrix.Transform(leftBorder.Origin);
@@ -241,9 +244,9 @@ namespace Europlan.Common {
 					segmentsUnusable.Add(new LineSegment(lineIntersections[j], lineIntersections[j + 1]));
 				}
 			}
-			NormalizeSegments(segmentsUnusable);
+			LineSegment.NormalizeSegments(segmentsUnusable);
 			if (wallDist != 0) {
-				List<LineSegment> segmentsUsable = InvertSegments(segmentsUnusable);
+				List<LineSegment> segmentsUsable = LineSegment.InvertSegments(segmentsUnusable);
 				int i = 0;
 				double wallDistAdd = wallDist * this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 				while (i < segmentsUsable.Count) {
@@ -255,12 +258,12 @@ namespace Europlan.Common {
 						i++;
 					}
 				}
-				segmentsUnusable = InvertSegments(segmentsUsable);
+				segmentsUnusable = LineSegment.InvertSegments(segmentsUsable);
 			}
 			return segmentsUnusable;
 		}
 
-		private class LineSegment : IComparable<LineSegment> {
+		/*private class LineSegment : IComparable<LineSegment> {
 			private double start;
 			private double end;
 
@@ -293,9 +296,9 @@ namespace Europlan.Common {
 				return rtn;
 			}
 			#endregion
-		}
+		}*/
 
-		private List<LineSegment> MergeSegments(List<LineSegment> segments1, List<LineSegment> segments2) {
+/*		private List<LineSegment> MergeSegments(List<LineSegment> segments1, List<LineSegment> segments2) {
 			List<LineSegment> mergedSegments = new List<LineSegment>(segments1);
 			mergedSegments.AddRange(segments2);
 			NormalizeSegments(mergedSegments);
@@ -332,7 +335,7 @@ namespace Europlan.Common {
 				}
 			}
 			return invertedSegments;
-		}
+		}*/
 
 		private void CheckLeftBorder(Line2D borderLeft, Segment2D roomBorder, ref bool inside, List<double> bordersTop, List<CompareablePair<double>> removes, ref List<double> possiblePoints, ref bool enteredLeft) {
 			Nullable<Point2D> intersection = Line2D.GetIntersection(borderLeft, roomBorder);
@@ -340,9 +343,9 @@ namespace Europlan.Common {
 				possiblePoints.Add(intersection.Value.Y);
 				if (inside) {
 					if (enteredLeft) {
-						removes.Add(new CompareablePair<double>(GetMax(possiblePoints), GetMin(possiblePoints)));
+						removes.Add(new CompareablePair<double>(LineSegment.GetMax(possiblePoints), LineSegment.GetMin(possiblePoints)));
 					} else {
-						bordersTop.Add(GetMin(possiblePoints));
+						bordersTop.Add(LineSegment.GetMin(possiblePoints));
 					}
 					possiblePoints = new List<double>();
 					inside = false;
@@ -359,9 +362,9 @@ namespace Europlan.Common {
 				possiblePoints.Add(intersection.Value.Y);
 				if (inside) {
 					if (enteredLeft) {
-						bordersBottom.Add(GetMax(possiblePoints));
+						bordersBottom.Add(LineSegment.GetMax(possiblePoints));
 					} else {
-						removes.Add(new CompareablePair<double>(GetMax(possiblePoints), GetMin(possiblePoints)));
+						removes.Add(new CompareablePair<double>(LineSegment.GetMax(possiblePoints), LineSegment.GetMin(possiblePoints)));
 					}
 					possiblePoints = new List<double>();
 					inside = false;
@@ -372,7 +375,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private double GetMin(List<double> values) {
+		/*private double GetMin(List<double> values) {
 			double min = double.MaxValue;
 			foreach (double val in values) {
 				if (val < min) {
@@ -390,12 +393,22 @@ namespace Europlan.Common {
 				}
 			}
 			return max;
+		}*/
+
+		[XmlIgnore]
+		public override ModulKlimaDeckeProduct.ModulCeilingConstructionEnum CeilingConstruction {
+			get { return this.constructionType; }
+		}
+
+		public ModulKlimaDeckeProduct.ModulCeilingConstructionEnum ContructionType {
+			get { return this.constructionType; }
+			set { this.constructionType = value; }
 		}
 
 		[XmlIgnore]
 		public double SchienenBreite {
 			get {
-				switch ((ModulKlimaDeckeProduct.ModulCeilingConstructionEnum)ModulKlimaDeckeProduct.ConfigModulCeilingConstruction) {
+				switch (this.ContructionType) {
 					case ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.C_PROFIL:
 						return 0.065;
 						break;

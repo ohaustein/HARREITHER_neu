@@ -4,6 +4,7 @@ using System.Text;
 using System.Drawing;
 using System.Xml.Serialization;
 using System.Threading;
+using WW.Math;
 
 namespace Europlan.Common {
 	public class KlimaFlaechenModul {
@@ -521,6 +522,100 @@ namespace Europlan.Common {
 		public bool GraphModulierendY {
 			get { return this.graphModulierendY; }
 			set { this.graphModulierendY = value; }
+		}
+
+		public Point2D GetOutputConnection(double measure, bool invertXAxis) {
+			if (invertXAxis) {
+				return GetInputConnection(measure, false);
+			}
+			Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
+			transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
+
+			double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
+			double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+			double connectionDist = 0.035 * measure; // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+
+			if (this.graphBottomUp) {
+				if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+					return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+				} else {
+					return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+				}
+			} else {
+				if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+					return transformation.Transform(new Point2D(connectionDist, connectionDist));
+				} else {
+					return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+				}
+			}
+		}
+
+		public Point2D GetInputConnection(double measure, bool invertXAxis) {
+			if (invertXAxis) {
+				return GetOutputConnection(measure, false);
+			}
+			Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
+			transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
+
+			double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
+			double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+			double connectionDist = 0.035 * measure; // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+
+			if (this.graphBottomUp) {
+				if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+					return transformation.Transform(new Point2D(connectionDist, connectionDist));
+				} else {
+					return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+				}
+			} else {
+				if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+					return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+				} else {
+					return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+				}
+			}
+		}
+
+		public KlimaFlaechenModulVerbindung GetInputLink(Circuit circuit, bool invertXAxis) {
+			//if (invertXAxis) {
+			//	return GetOutputLink(circuit, false);
+			//}
+			KlimaFlaechenModulVerbindung link = null;
+			if (circuit is ModulBodenCircuit) {
+				ModulBodenCircuit mbc = circuit as ModulBodenCircuit;
+				if (mbc.Links != null) {
+					foreach (KlimaFlaechenModulVerbindung verbindung in mbc.Links) {
+						if (verbindung.End == this) {
+							link = verbindung;
+							break;
+						}
+					}
+				}
+			} else if (circuit is ModulDeckeCircuit) {
+				throw new Exception("todo");
+			}
+			return link;
+		}
+
+		public KlimaFlaechenModulVerbindung GetOutputLink(Circuit circuit, bool invertXAxis) {
+			//if (invertXAxis) {
+			//	return GetInputLink(circuit, false);
+			//}
+			KlimaFlaechenModulVerbindung link = null;
+			if (circuit is ModulBodenCircuit) {
+				ModulBodenCircuit mbc = circuit as ModulBodenCircuit;
+				if (mbc.Links != null) {
+					foreach (KlimaFlaechenModulVerbindung verbindung in mbc.Links) {
+						if (verbindung.Start == this) {
+							link = verbindung;
+							break;
+						}
+					}
+				}
+			} else if (circuit is ModulDeckeCircuit) {
+				throw new Exception("todo");
+			}
+			return link;
 		}
 		#endregion
 	}

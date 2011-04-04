@@ -27,7 +27,8 @@ namespace Europlan.Common {
 			}
 		}
 
-		public override void RecalculateSchienen() {
+		public override void RecalculateStaffeln() {
+			// nothing to do as there are no staffeln in this construction
 		}
 
 		private double GetMin(List<double> values) {
@@ -74,7 +75,7 @@ namespace Europlan.Common {
 			return path;
 		}
 
-		private List<Polygon2D> GetPossibleAreas(bool forDrawing) {
+		/*private List<Polygon2D> GetPossibleAreas(bool forDrawing) {
 			List<Polygon2D> possibleAreas = new List<Polygon2D>();
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
 			foreach (PossibleModulLane possibleLane in this.possibleLanes) {
@@ -92,7 +93,7 @@ namespace Europlan.Common {
 				}
 			}
 			return possibleAreas;
-		}
+		}*/
 
 		public override void Paint(Graphics g, ModulKlimaBodenPlanner.KlimaBodenMode mode) {
 			if (this.Planner == null ||
@@ -124,7 +125,7 @@ namespace Europlan.Common {
 				Region r = new Region();
 				r.MakeInfinite();
 				g.Clip = r;
-				foreach (Polygon2D area in this.GetPossibleAreas(true)) {
+				/*foreach (Polygon2D area in this.GetPossibleAreas(true)) {
 					PointF[] poly = new PointF[area.Count];
 					int i = 0;
 					foreach (Point2D point in area) {
@@ -132,7 +133,7 @@ namespace Europlan.Common {
 					}
 					g.DrawPolygon(p, poly);
 					g.FillPolygon(b, poly);
-				}
+				}*/
 			}
 		}
 
@@ -158,6 +159,10 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override Cursor PickCursor {
 			get { return Cursors.NoMove2D; }
+		}
+
+		public override List<Polygon2D> Staffeln {
+			get { return new List<Polygon2D>(); }
 		}
 	}
 }

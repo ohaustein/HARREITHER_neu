@@ -14,7 +14,7 @@ using WW.Cad.Model;
 
 namespace Europlan.Common {
 
-	public partial class DistributiorPositionerForm : Form {
+	public partial class DistributorPositionerForm : Form {
 
 		private bool unsavedChanges = false;
 
@@ -33,7 +33,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public DistributiorPositionerForm(Distributor distributor, Floor floor) {
+		public DistributorPositionerForm(Distributor distributor, Floor floor) {
 			InitializeComponent();
 			this.SetLanguage();
 			this.distributorPositioner.Distributor = distributor;

@@ -10,7 +10,7 @@ using WW.Math;
 using WW.Math.Geometry;
 
 namespace Europlan.Common {
-	public partial class DistributorPositioner : Component, IProductPlanner {
+	public partial class DistributorPositioner : Component, IPlanner {
 
 		public enum DistributorPositionerMode {
 			DPM_NONE,
@@ -56,6 +56,12 @@ namespace Europlan.Common {
 			set { this.rotation = value; }
 		}
 
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public double RotationInclPlan {
+			get { return this.rotation - this.floor.AssociatedPlan.Rotation; }
+		}
+
 		public DistributorPositionerMode Mode {
 			get { return this.mode; }
 			set {
@@ -88,21 +94,24 @@ namespace Europlan.Common {
 		}
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
-			Graphics g = e.Graphics;
+			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+		}
+
+		internal void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 			Pen pen = Pens.Red;
-			double width = distributor.Width * this.ConnectedPlanPanel.Plan.Measure.Value;
-			double height = distributor.Height * this.ConnectedPlanPanel.Plan.Measure.Value;
+			double width = distributor.Width * this.floor.AssociatedPlan.Measure.Value;
+			double height = distributor.Height * this.floor.AssociatedPlan.Measure.Value;
 
 			Point2D leftBottom = Point2D.Zero;
 			Point2D leftTop = Point2D.Zero;
 			Point2D rightTop = Point2D.Zero;
 			Point2D rightBottom = Point2D.Zero;
-			
+
 			if (this.Mode == DistributorPositionerMode.DPM_POSITION) {
 				if (this.ConnectedPlanPanel.Plan is CadPlan) {
 					additionalTransformation = additionalTransformation * Transformation4D.Translation(mousePositionInPlan.X, mousePositionInPlan.Y, 0);
-					additionalTransformation = additionalTransformation * Transformation4D.RotateZ(-this.rotation * Math.PI / 180.0);
+					additionalTransformation = additionalTransformation * Transformation4D.RotateZ(-this.RotationInclPlan * Math.PI / 180.0);
 					additionalTransformation = additionalTransformation * Transformation4D.Translation(-mousePositionInPlan.X, -mousePositionInPlan.Y, 0);
 
 					leftBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X, mousePositionInPlan.Y));
@@ -111,7 +120,7 @@ namespace Europlan.Common {
 					rightBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X + width, mousePositionInPlan.Y));
 				} else {
 					additionalTransformation = additionalTransformation * Transformation4D.Translation(mousePositionInPlan.X, mousePositionInPlan.Y, 0);
-					additionalTransformation = additionalTransformation * Transformation4D.RotateZ(this.rotation * Math.PI / 180.0);
+					additionalTransformation = additionalTransformation * Transformation4D.RotateZ(this.RotationInclPlan * Math.PI / 180.0);
 					additionalTransformation = additionalTransformation * Transformation4D.Translation(-mousePositionInPlan.X, -mousePositionInPlan.Y, 0);
 
 					leftBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X, mousePositionInPlan.Y));
@@ -161,7 +170,7 @@ namespace Europlan.Common {
 			if (this.Mode == DistributorPositionerMode.DPM_POSITION && button == MouseButtons.Left) {
 				Distributor.GraphicalRepresentation gp = new Distributor.GraphicalRepresentation();
 				gp.position = planPoint;
-				gp.rotation = this.rotation;
+				gp.rotation = this.RotationInclPlan;
 				gp.isOnThisFloor = distributor.AssociatedFloor == this.Floor;
 				gp.floorId = this.Floor.Id;
 				distributor.GraphicalRepresentations.Add(gp);

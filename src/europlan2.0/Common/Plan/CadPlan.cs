@@ -117,6 +117,10 @@ namespace Europlan.Common {
 			return toDefaultSize;
 		}
 
+		[XmlIgnore]
+		public override bool InvertYAxis {
+			get { return true; }
+		}
 	}
 
 }

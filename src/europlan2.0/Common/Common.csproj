@@ -217,11 +217,11 @@
     <Compile Include="Plan\CadPlanOptionsForm.Designer.cs">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Plan\DistributiorPositionerForm.cs">
+    <Compile Include="Plan\DistributorPositionerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Plan\DistributiorPositionerForm.Designer.cs">
-      <DependentUpon>DistributiorPositionerForm.cs</DependentUpon>
+    <Compile Include="Plan\DistributorPositionerForm.Designer.cs">
+      <DependentUpon>DistributorPositionerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plan\DistributorPositioner.cs">
       <SubType>Component</SubType>
@@ -276,6 +276,7 @@
     <Compile Include="Plan\PlanSetMeasureForm.Designer.cs">
       <DependentUpon>PlanSetMeasureForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PossibleConnection.cs" />
     <Compile Include="Products\Circuit.cs" />
     <Compile Include="Products\ConnectionPipePanel.cs">
       <SubType>UserControl</SubType>
@@ -283,6 +284,7 @@
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\GraphicalProductConnection.cs" />
     <Compile Include="Products\Euroval\EurovalPlanner.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -296,6 +298,7 @@
       <DependentUpon>EurovalPlannerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ExtendedCorrections.cs" />
+    <Compile Include="Products\KlimaFlaechenModulVerbindung.cs" />
     <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenConstructionStaffeln.cs" />
     <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenPlanner.cs">
       <SubType>Component</SubType>
@@ -312,6 +315,7 @@
     <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenConstruction.cs" />
     <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenConstructionFrei.cs" />
     <Compile Include="Products\ModulKlimaDecke\CompareablePair.cs" />
+    <Compile Include="Products\ModulKlimaDecke\LineSegment.cs" />
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstructionKassette.cs" />
     <Compile Include="Products\ModulKlimaDecke\FreeModulLaneArea.cs" />
     <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeConstruction.cs" />
@@ -434,6 +438,18 @@
       <DependentUpon>ImportedPlansPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Plan\Plan.cs" />
+    <Compile Include="Project\ConnectionPlanner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Project\ConnectionPlanner.Designer.cs">
+      <DependentUpon>ConnectionPlanner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ConnectionPlannerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\ConnectionPlannerForm.Designer.cs">
+      <DependentUpon>ConnectionPlannerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\ProductOverviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -731,8 +747,8 @@
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plan\DistributiorPositionerForm.resx">
-      <DependentUpon>DistributiorPositionerForm.cs</DependentUpon>
+    <EmbeddedResource Include="Plan\DistributorPositionerForm.resx">
+      <DependentUpon>DistributorPositionerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plan\ExportPlanForm.resx">
@@ -830,6 +846,14 @@
     <EmbeddedResource Include="Plan\ImportedPlansPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ImportedPlansPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ConnectionPlanner.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConnectionPlanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ConnectionPlannerForm.resx">
+      <DependentUpon>ConnectionPlannerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\ProductOverviewForm.resx">
       <DependentUpon>ProductOverviewForm.cs</DependentUpon>

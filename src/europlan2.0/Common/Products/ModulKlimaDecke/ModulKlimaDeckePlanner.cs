@@ -13,7 +13,7 @@ using WW.Cad.Model;
 using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
-	public partial class ModulKlimaDeckePlanner : Component, IProductPlanner {
+	public partial class ModulKlimaDeckePlanner : Component, IPlanner {
 
 		public enum KlimaDeckeMode {
 			KDM_NONE,

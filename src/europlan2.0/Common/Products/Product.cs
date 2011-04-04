@@ -4,8 +4,27 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Globalization;
 using log4net;
+using WW.Math;
 
 namespace Europlan.Common {
+
+	[XmlInclude(typeof(ModulKlimaBodenConnection))]
+	public abstract class Connection {
+		private Distributor distributor;
+		private Product product;
+		private Circuit circuit;
+		bool vorlauf;
+
+		internal Connection() {
+		}
+
+		public Connection(Distributor distributor, Product product, Circuit circuit, bool vorlauf) {
+			this.distributor = distributor;
+			this.product = product;
+			this.circuit = circuit;
+			this.vorlauf = vorlauf;
+		}
+	}
 
 	[XmlInclude(typeof(EurovalProduct))]
 	[XmlInclude(typeof(EcothermProduct))]
@@ -216,6 +235,8 @@ namespace Europlan.Common {
 		protected string comment = null;
 		private Nullable<bool> graphicalMode = null;
 		protected CalculateModeEnum calculateMode = CalculateModeEnum.NONE;
+
+		protected List<GraphicalProductConnection> connections = new List<GraphicalProductConnection>();
 
 		protected SerializableDictionary<int, Circuit.CircuitConnection> connectedCircuits = new SerializableDictionary<int, Circuit.CircuitConnection>();
 		public SerializableDictionary<int, Circuit.CircuitConnection> ConnectedCircuits {
@@ -1603,6 +1624,16 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public virtual bool AllowToSwitchMode {
 			get { return false; }
+		}
+
+		public virtual List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertXAxis, Point2D currentMousePoint, Distributor distributor, Nullable<int> nr) {
+			// must be overriden by all products that can be planned graphically
+			return new List<PossibleConnection>();
+		}
+
+		public List<GraphicalProductConnection> Connections {
+			get { return this.connections; }
+			set { this.connections = value; }
 		}
 	}
 }

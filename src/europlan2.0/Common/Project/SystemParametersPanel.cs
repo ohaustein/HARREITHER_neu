@@ -1045,7 +1045,7 @@ namespace Europlan.Common {
 
 		private void cmbConstruction_SelectedIndexChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
-				bool graphicalPlanned = false;
+				/*bool graphicalPlanned = false;
 				foreach (Floor floor in Project.Instance.Floors) {
 					foreach (Room room in floor.Rooms) {
 						foreach (PlannedProduct pp in room.PlannedProducts) {
@@ -1064,9 +1064,9 @@ namespace Europlan.Common {
 						UpdateControl(false);
 						return;
 					}
-				}
+				}*/
 				ModulKlimaDeckeProduct.ConfigModulCeilingConstruction = (int)cmbModulDeckeConstruction.SelectedItem;
-				foreach (Floor floor in Project.Instance.Floors) {
+				/*foreach (Floor floor in Project.Instance.Floors) {
 					foreach (Room room in floor.Rooms) {
 						foreach (PlannedProduct pp in room.PlannedProducts) {
 							if (pp.Product is ModulKlimaDeckeProduct) {
@@ -1077,7 +1077,7 @@ namespace Europlan.Common {
 							}
 						}
 					}
-				}
+				}*/
 				if (ProjectChanged != null) {
 					ProjectChanged(null);
 				}

@@ -161,6 +161,10 @@ namespace Europlan.Common {
 
 		protected override void OnMouseWheel(MouseEventArgs e) {
 			base.OnMouseWheel(e);
+			if (image == null) {
+				return;
+			}
+
 			unsavedChanges = true;
 			Point center = this.PointToClient(this.PointToScreen(e.Location));
 			AddScale(1.0f + ((float)e.Delta) / 1200.0f, new WW.Math.Point2D(center.X, center.Y));
@@ -258,6 +262,10 @@ namespace Europlan.Common {
 
 		protected override void OnMouseDown(MouseEventArgs e) {
 			base.OnMouseDown(e);
+			if (image == null) {
+				return;
+			}
+
 			mouseDown = true;
 			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
 				Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
@@ -303,6 +311,10 @@ namespace Europlan.Common {
 
 		protected override void OnMouseUp(MouseEventArgs e) {
 			base.OnMouseUp(e);
+			if (image == null) {
+				return;
+			}
+
 			mouseDown = false;
 			bool invalidate = false;
 			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
@@ -359,6 +371,10 @@ namespace Europlan.Common {
 
 		protected override void OnMouseMove(MouseEventArgs e) {
 			base.OnMouseMove(e);
+			if (image == null) {
+				return;
+			}
+
 			Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 			PointF[] arr = new PointF[] { mousePosInCtrl };
 
@@ -430,11 +446,11 @@ namespace Europlan.Common {
 		}
 
 		#region IPlanPanel Members
-		private IProductPlanner productPlanner = null;
+		private IPlanner productPlanner = null;
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public IProductPlanner ProductPlanner {
+		public IPlanner ProductPlanner {
 			get { return this.productPlanner; }
 			set {
 				if (this.productPlanner != null) {

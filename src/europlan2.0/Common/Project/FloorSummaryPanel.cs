@@ -507,5 +507,10 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void btnDefineConnections_Click(object sender, EventArgs e) {
+			ConnectionPlannerForm form = new ConnectionPlannerForm(this.floor);
+			form.ShowDialog();
+		}
+
 	}
 }

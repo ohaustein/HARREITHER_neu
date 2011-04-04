@@ -38,6 +38,11 @@ namespace Europlan.Common {
 		public override double Rotation {
 			get { return angle; }
 		}
+
+		[XmlIgnore]
+		public override bool InvertYAxis {
+			get { return false; }
+		}
 	}
 
 }

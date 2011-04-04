@@ -732,11 +732,11 @@ namespace Europlan.Common {
 		}
 
 		#region IPlanPanel Members
-		private IProductPlanner productPlanner = null;
+		private IPlanner productPlanner = null;
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public IProductPlanner ProductPlanner {
+		public IPlanner ProductPlanner {
 			get { return this.productPlanner; }
 			set {
 				if (this.productPlanner != null) {

@@ -10,7 +10,7 @@ using WW.Math;
 using WW.Math.Geometry;
 
 namespace Europlan.Common {
-	public partial class RoomPicker : Component, IProductPlanner {
+	public partial class RoomPicker : Component, IPlanner {
 
 		public enum RoomPickerMode {
 			RPM_NONE,

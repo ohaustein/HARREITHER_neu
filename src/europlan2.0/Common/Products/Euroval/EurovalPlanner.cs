@@ -14,7 +14,7 @@ using WW.Cad.Model.Tables;
 using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
-	public partial class EurovalPlanner : Component, IProductPlanner {
+	public partial class EurovalPlanner : Component, IPlanner {
 
 		public enum EurovalMode {
 			EVM_NONE,

@@ -56,8 +56,8 @@ namespace Europlan.Common {
 			rooms = new RoomList();
 			distributors = new DistributorList();
 			this.floorNode.Tag = this;
-            this.floorNode.ImageKey = "Geschoﬂ.png";
-            this.floorNode.SelectedImageKey = "Geschoﬂ.png";
+			this.floorNode.ImageKey = "Geschoﬂ.png";
+			this.floorNode.SelectedImageKey = "Geschoﬂ.png";
 			this.expansionGaps = new List<Segment2D>();
 		}
 
@@ -75,7 +75,7 @@ namespace Europlan.Common {
 
 		public string Name {
 			get { return name; }
-			set { 
+			set {
 				name = value;
 				if (floorNode != null) {
 					floorNode.Text = (String.IsNullOrEmpty(name) ? EuroplanRes.Floor_Unbenannt : name);
@@ -153,7 +153,7 @@ namespace Europlan.Common {
 		internal void UpdateTree() {
 			int i = 0;
 			bool expand = this.Node.Nodes.Count == 0;
-			
+
 			foreach (Distributor distributor in this.Distributors) {
 				int index = this.Node.Nodes.IndexOf(distributor.Node);
 				if (index < 0) {
@@ -201,7 +201,7 @@ namespace Europlan.Common {
 		}
 
 		public Type AssociatedPanelType {
-			get { 
+			get {
 				return typeof(FloorSummaryPanel);
 			}
 		}
@@ -260,7 +260,7 @@ namespace Europlan.Common {
 				distributors.Add(o as Distributor);
 			} else {
 				throw new Exception("Paste of this type not supported");
-			}			
+			}
 		}
 
 
@@ -319,7 +319,18 @@ namespace Europlan.Common {
 			}
 			set { this.lastInsulationConstruction = value; }
 		}
-	}
 
+		[XmlIgnore]
+		public Plan AssociatedPlan {
+			get {
+				foreach (Plan plan in Project.Instance.ImportedPlans) {
+					if (plan.Id.Equals(this.AssociatedPlanId)) {
+						return plan;
+					}
+				}
+				return null;
+			}
+		}
+	}
 }
 

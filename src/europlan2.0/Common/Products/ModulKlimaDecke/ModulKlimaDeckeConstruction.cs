@@ -106,6 +106,10 @@ namespace Europlan.Common {
 			get { return this.possibleLanes; }
 		}
 
+		[XmlIgnore]
+		public abstract ModulKlimaDeckeProduct.ModulCeilingConstructionEnum CeilingConstruction {
+			get;
+		}
 	}
 
 }

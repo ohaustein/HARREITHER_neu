@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WW.Cad.Model;
 using WW.Cad.Model.Tables;
 using WW.Cad.Model.Entities;
+using Europlan.Common.Products.ModulKlimaDecke;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionKassette : ModulKlimaDeckeConstruction {
@@ -128,7 +129,42 @@ namespace Europlan.Common {
 		}
 
 		private List<PossibleModulLaneArea> GetPossibleModuleAreasInLane(Polygon2D lane) {
+			Line2D rightBorder = new Line2D(lane[0], lane[0] - lane[1]);
+			Line2D leftBorder = new Line2D(lane[3], lane[3] - lane[2]);
+			List<LineSegment> unusableSegments = GetUnusableSegments(leftBorder, rightBorder, this.CeilingCoordinates, false, 0.15);
+			if (this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
+				List<LineSegment> tmp;
+				foreach (List<Point2D> unusedArea in this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
+					tmp = GetUnusableSegments(leftBorder, rightBorder, unusedArea, true, 0);
+					unusableSegments.AddRange(tmp);
+					LineSegment.NormalizeSegments(unusableSegments);
+				}
+				foreach (List<Point2D> schieneY in this.GetSchienenY(false)) {
+					tmp = GetUnusableSegments(leftBorder, rightBorder, schieneY, true, 0);
+					unusableSegments.AddRange(tmp);
+					LineSegment.NormalizeSegments(unusableSegments);
+				}
+			}
+
+			List<LineSegment> usableSegments = LineSegment.InvertSegments(unusableSegments);
+			List<PossibleModulLaneArea> possibleAreas = new List<PossibleModulLaneArea>();
 			Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
+			Point2D tmpPoint = matrix.Transform(leftBorder.Origin);
+			double leftBorderX = tmpPoint.X;
+			tmpPoint = matrix.Transform(rightBorder.Origin);
+			double rightBorderX = tmpPoint.X;
+			matrix = matrix.GetInverse();
+			foreach (LineSegment segment in usableSegments) {
+				possibleAreas.Add(new PossibleModulLaneArea(
+					matrix.Transform(new Point2D(leftBorderX, segment.Start)),
+					matrix.Transform(new Point2D(leftBorderX, segment.End)),
+					matrix.Transform(new Point2D(rightBorderX, segment.End)),
+					matrix.Transform(new Point2D(rightBorderX, segment.Start)),
+					segment.Start, segment.End));
+			}
+
+			return possibleAreas;
+			/*Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
 
 			Polygon2D tmp = new Polygon2D();
 			double startPointX = double.MaxValue;
@@ -320,11 +356,94 @@ namespace Europlan.Common {
 
 			}
 
-			/*if (this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
-				foreach (
+			return possibleAreas;*/
+		}
+
+		private List<LineSegment> GetUnusableSegments(Line2D borderLeft, Line2D borderRight, List<Point2D> polygon, bool unused, double wallDist) {
+			if (polygon.Count < 3) {
+				return new List<LineSegment>();
+			}
+			Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
+
+			Polygon2D alignedPolygon = new Polygon2D();
+			double startPointX = double.MaxValue;
+			double endPointX = double.MinValue;
+			int start = -1;
+			//int i = 0;
+			//Vector2D normalizedBorderDirection = matrix.Transform(borderLeft.Direction);
+			Vector2D normalizedBorderDirection = new Vector2D(0, 1);
+			// todo replace by new Vector2D(0, 1)
+			Line2D normalizedBorderLeft = new Line2D(matrix.Transform(borderLeft.Origin), normalizedBorderDirection);
+			Line2D normalizedBorderRight = new Line2D(matrix.Transform(borderRight.Origin), normalizedBorderDirection);
+			List<Line2D> normalizedLines = new List<Line2D>();
+			normalizedLines.Add(normalizedBorderLeft);
+			for (int i = 0; i < polygon.Count; i++) {
+				Point2D pointTf = matrix.Transform(polygon[i]);
+				if (pointTf.X < startPointX) {
+					startPointX = pointTf.X;
+					start = i;
+				}
+				if (pointTf.X > endPointX) {
+					endPointX = pointTf.X;
+				}
+				alignedPolygon.Add(pointTf);
+				if (pointTf.X > normalizedBorderLeft.Origin.X && pointTf.X < normalizedBorderRight.Origin.X) {
+					normalizedLines.Add(new Line2D(pointTf, normalizedBorderDirection));
+				}
+			}
+			normalizedLines.Add(normalizedBorderRight);
+
+			/*if (startPointX > normalizedBorderRight.Origin.X || endPointX < normalizedBorderLeft.Origin.X) {
+				return new List<LineSegment>();
 			}*/
 
-			return possibleAreas;
+			List<LineSegment> segmentsUnusable = new List<LineSegment>();
+			for (int i = 0; i < normalizedLines.Count; i++) {
+				Line2D line = normalizedLines[i];
+				List<double> lineIntersections = new List<double>();
+				int k;
+				if (!unused) {
+					lineIntersections.Add(double.MinValue);
+				}
+				for (int j = 0; j < alignedPolygon.Count; j++) {
+					k = (j + 1) % alignedPolygon.Count;
+					if ((alignedPolygon[j].X < line.Origin.X) != (alignedPolygon[k].X < line.Origin.X)) {
+						if (alignedPolygon[j].X == line.Origin.X) {
+							lineIntersections.Add(alignedPolygon[j].Y);
+						} else if (alignedPolygon[k].X == line.Origin.X) {
+							lineIntersections.Add(alignedPolygon[k].Y);
+						} else {
+							Segment2D segment = new Segment2D(alignedPolygon[j], alignedPolygon[k]);
+							Nullable<Point2D> intersection = Line2D.GetIntersection(line, segment);
+							lineIntersections.Add(intersection.Value.Y);
+						}
+					}
+				}
+				if (!unused) {
+					lineIntersections.Add(double.MaxValue);
+				}
+				lineIntersections.Sort();
+				for (int j = 0; j < lineIntersections.Count; j += 2) {
+					segmentsUnusable.Add(new LineSegment(lineIntersections[j], lineIntersections[j + 1]));
+				}
+			}
+			LineSegment.NormalizeSegments(segmentsUnusable);
+			if (wallDist != 0) {
+				List<LineSegment> segmentsUsable = LineSegment.InvertSegments(segmentsUnusable);
+				int i = 0;
+				double wallDistAdd = wallDist * this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+				while (i < segmentsUsable.Count) {
+					segmentsUsable[i].Start += wallDistAdd;
+					segmentsUsable[i].End -= wallDistAdd;
+					if (segmentsUsable[i].Start > segmentsUsable[i].End) {
+						segmentsUsable.RemoveAt(i);
+					} else {
+						i++;
+					}
+				}
+				segmentsUnusable = LineSegment.InvertSegments(segmentsUsable);
+			}
+			return segmentsUnusable;
 		}
 
 		private void CheckLeftBorder(Line2D borderLeft, Segment2D roomBorder, ref bool inside, List<double> bordersTop, List<CompareablePair<double>> removes, ref List<double> possiblePoints, ref bool enteredLeft) {
@@ -859,5 +978,10 @@ namespace Europlan.Common {
 				}
 			}
 		}*/
+
+		[XmlIgnore]
+		public override ModulKlimaDeckeProduct.ModulCeilingConstructionEnum CeilingConstruction {
+			get { return ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.KASSETTENDECKE; }
+		}
 	}
 }

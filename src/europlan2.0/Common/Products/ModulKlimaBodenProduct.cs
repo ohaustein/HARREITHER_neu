@@ -4,8 +4,21 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Threading;
 using Europlan.Licensing;
+using WW.Math;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
+
+	public class ModulKlimaBodenConnection : Connection {
+		private KlimaFlaechenModul modul;
+
+		internal ModulKlimaBodenConnection() {
+		}
+
+		public ModulKlimaBodenConnection(Distributor distributor, Product product, Circuit circuit, KlimaFlaechenModul modul, bool vorlauf) : base(distributor, product, circuit, vorlauf) {
+			this.modul = modul;
+		}
+	}
 
 	[Serializable()]
 	[ProductName("Product_ModulKlimBodenName", "Product_ModulKlimBodenFullName")]
@@ -1185,6 +1198,96 @@ namespace Europlan.Common {
 			}
 			index = -1;
 			return null;
+		}
+
+		public override List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertXAxis, Point2D currentMousePoint, Distributor distributor, Nullable<int> nr) {
+			if (!Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates)) {
+				return new List<PossibleConnection>();
+			}
+			List<PossibleConnection> possibleConnections = new List<PossibleConnection>();
+			Point2D input12D, input22D, input32D, input42D;
+			Point2D output12D, output22D, output32D, output42D;
+
+			// TODO wenn distributor bereit gesetzt ist dürfen nicht alle zurückgegeben werden
+
+			foreach (ModulBodenCircuit c in this.PlannedCircuits) {
+				foreach (KlimaFlaechenModul modul in c.Row.List) {
+					Matrix3D transformation = Matrix3D.Identity;
+					transformation = transformation * Transformation3D.Translation(modul.GraphPosX, modul.GraphPosY);
+					transformation = transformation * Transformation3D.Rotate(modul.GraphRotation * Math.PI / 180.0);
+
+					double height = KlimaFlaechenModul.GetModuleHeight(modul.ModulType) * measure;
+					double width = KlimaFlaechenModul.GetModuleWidth(modul.ModulType) * measure;
+
+					if (invertXAxis == modul.GraphBottomUp) {
+						if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+							if (output && modul.GetOutputLink(c, invertXAxis) == null) {
+								output12D = transformation.Transform(new Point2D(0, 0));
+								output22D = transformation.Transform(new Point2D(0, 0.1 * measure));
+								output32D = transformation.Transform(new Point2D(0.1 * measure, 0.1 * measure));
+								output42D = transformation.Transform(new Point2D(0.1 * measure, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
+							}
+							if (input && modul.GetInputLink(c, invertXAxis) == null) {
+								input12D = transformation.Transform(new Point2D(width, height));
+								input22D = transformation.Transform(new Point2D(width, height - 0.1 * measure));
+								input32D = transformation.Transform(new Point2D(width - 0.1 * measure, height - 0.1 * measure));
+								input42D = transformation.Transform(new Point2D(width - 0.1 * measure, height));
+								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
+							}
+						} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+							if (output && modul.GetOutputLink(c, invertXAxis) == null) {
+								output12D = transformation.Transform(new Point2D(width, 0));
+								output22D = transformation.Transform(new Point2D(width, 0.1 * measure));
+								output32D = transformation.Transform(new Point2D(width - 0.1 * measure, 0.1 * measure));
+								output42D = transformation.Transform(new Point2D(width - 0.1 * measure, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
+							}
+							if (input && modul.GetInputLink(c, invertXAxis) == null) {
+								input12D = transformation.Transform(new Point2D(0, height));
+								input22D = transformation.Transform(new Point2D(0, height - 0.1 * measure));
+								input32D = transformation.Transform(new Point2D(0.1 * measure, height - 0.1 * measure));
+								input42D = transformation.Transform(new Point2D(0.1 * measure, height));
+								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
+							}
+						}
+					} else {
+						if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+							if (input && modul.GetInputLink(c, invertXAxis) == null) {
+								input12D = transformation.Transform(new Point2D(0, 0));
+								input22D = transformation.Transform(new Point2D(0, 0.1 * measure));
+								input32D = transformation.Transform(new Point2D(0.1 * measure, 0.1 * measure));
+								input42D = transformation.Transform(new Point2D(0.1 * measure, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
+							}
+							if (output && modul.GetOutputLink(c, invertXAxis) == null) {
+								output12D = transformation.Transform(new Point2D(width, height));
+								output22D = transformation.Transform(new Point2D(width, height - 0.1 * measure));
+								output32D = transformation.Transform(new Point2D(width - 0.1 * measure, height - 0.1 * measure));
+								output42D = transformation.Transform(new Point2D(width - 0.1 * measure, height));
+								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
+							}
+						} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+							if (input && modul.GetInputLink(c, invertXAxis) == null) {
+								input12D = transformation.Transform(new Point2D(width, 0));
+								input22D = transformation.Transform(new Point2D(width, 0.1 * measure));
+								input32D = transformation.Transform(new Point2D(width - 0.1 * measure, 0.1 * measure));
+								input42D = transformation.Transform(new Point2D(width - 0.1 * measure, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
+							}
+							if (output && modul.GetOutputLink(c, invertXAxis) == null) {
+								output12D = transformation.Transform(new Point2D(0, height));
+								output22D = transformation.Transform(new Point2D(0, height - 0.1 * measure));
+								output32D = transformation.Transform(new Point2D(0.1 * measure, height - 0.1 * measure));
+								output42D = transformation.Transform(new Point2D(0.1 * measure, height));
+								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
+							}
+						}
+					}
+				}
+			}
+
+			return possibleConnections;
 		}
 	}
 }

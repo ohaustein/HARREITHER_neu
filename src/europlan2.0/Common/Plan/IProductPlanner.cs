@@ -6,7 +6,7 @@ using WW.Math;
 using System.Drawing;
 
 namespace Europlan.Common {
-	public interface IProductPlanner {
+	public interface IPlanner {
 		IPlanPanel ConnectedPlanPanel {
 			get;
 			set;
@@ -26,5 +26,9 @@ namespace Europlan.Common {
 		bool PlannerDragEnd(Point2D planPoint, Point pointInControl, MouseButtons button);
 
 		bool PlannerKeyPress(Keys key);
+	}
+
+	public interface IProductPlanner : IPlanner {
+		void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl);
 	}
 }

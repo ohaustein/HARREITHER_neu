@@ -59,6 +59,7 @@ namespace Europlan.Common {
 			this.chkAssignPlan = new System.Windows.Forms.CheckBox();
 			this.cmbPlans = new System.Windows.Forms.ComboBox();
 			this.planBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnDefineConnections = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.gridRooms)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.floorRoomsSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -131,7 +132,7 @@ namespace Europlan.Common {
 			// 
 			this.Area.DataPropertyName = "Area";
 			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle11.Format = "F0";
+			dataGridViewCellStyle11.Format = "F1";
 			this.Area.DefaultCellStyle = dataGridViewCellStyle11;
 			this.Area.HeaderText = "A\n(m²)";
 			this.Area.Name = "Area";
@@ -211,7 +212,7 @@ namespace Europlan.Common {
 			// 
 			this.RoomRelativeHumidity.DataPropertyName = "RoomRelativeHumidity";
 			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle17.Format = "F0";
+			dataGridViewCellStyle17.Format = "F1";
 			this.RoomRelativeHumidity.DefaultCellStyle = dataGridViewCellStyle17;
 			this.RoomRelativeHumidity.HeaderText = "RF\n(%)";
 			this.RoomRelativeHumidity.Name = "RoomRelativeHumidity";
@@ -352,10 +353,21 @@ namespace Europlan.Common {
 			// 
 			this.planBindingSource.DataSource = typeof(Europlan.Common.Plan);
 			// 
+			// btnDefineConnections
+			// 
+			this.btnDefineConnections.Location = new System.Drawing.Point(251, 33);
+			this.btnDefineConnections.Name = "btnDefineConnections";
+			this.btnDefineConnections.Size = new System.Drawing.Size(153, 23);
+			this.btnDefineConnections.TabIndex = 80;
+			this.btnDefineConnections.Text = "grafische Anbindeleitungen";
+			this.btnDefineConnections.UseVisualStyleBackColor = true;
+			this.btnDefineConnections.Click += new System.EventHandler(this.btnDefineConnections_Click);
+			// 
 			// FloorSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.btnDefineConnections);
 			this.Controls.Add(this.cmbPlans);
 			this.Controls.Add(this.chkAssignPlan);
 			this.Controls.Add(this.pictureBox1);
@@ -408,5 +420,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.CheckBox chkAssignPlan;
 		private System.Windows.Forms.ComboBox cmbPlans;
 		private System.Windows.Forms.BindingSource planBindingSource;
+		private System.Windows.Forms.Button btnDefineConnections;
 	}
 }
