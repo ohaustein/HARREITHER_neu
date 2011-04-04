@@ -33,6 +33,8 @@ namespace Europlan.Common {
 			this.btnPickRoom = new System.Windows.Forms.ToolStripButton();
 			this.btnPickUnused = new System.Windows.Forms.ToolStripButton();
 			this.btnDelUnused = new System.Windows.Forms.ToolStripButton();
+			this.btnAddExpansionGap = new System.Windows.Forms.ToolStripButton();
+			this.btnRemoveExpansionGap = new System.Windows.Forms.ToolStripButton();
 			this.panUnheatedArea = new System.Windows.Forms.Panel();
 			this.cbEnterArea = new System.Windows.Forms.CheckBox();
 			this.btnAddUnheatedArea = new System.Windows.Forms.Button();
@@ -58,8 +60,6 @@ namespace Europlan.Common {
 			this.roomPicker = new Europlan.Common.RoomPicker(this.components);
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnOk = new System.Windows.Forms.Button();
-			this.btnAddExpansionGap = new System.Windows.Forms.ToolStripButton();
-			this.btnRemoveExpansionGap = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.panUnheatedArea.SuspendLayout();
 			this.grpSize.SuspendLayout();
@@ -155,6 +155,26 @@ namespace Europlan.Common {
 			this.btnDelUnused.Size = new System.Drawing.Size(23, 22);
 			this.btnDelUnused.Text = "Unbeheizte Flächen löschen";
 			this.btnDelUnused.Click += new System.EventHandler(this.btnDelUnused_Click);
+			// 
+			// btnAddExpansionGap
+			// 
+			this.btnAddExpansionGap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddExpansionGap.Image = ((System.Drawing.Image)(resources.GetObject("btnAddExpansionGap.Image")));
+			this.btnAddExpansionGap.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddExpansionGap.Name = "btnAddExpansionGap";
+			this.btnAddExpansionGap.Size = new System.Drawing.Size(23, 22);
+			this.btnAddExpansionGap.Text = "Dehnfuge hinzufügen";
+			this.btnAddExpansionGap.Click += new System.EventHandler(this.btnAddExpansionGap_Click);
+			// 
+			// btnRemoveExpansionGap
+			// 
+			this.btnRemoveExpansionGap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnRemoveExpansionGap.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveExpansionGap.Image")));
+			this.btnRemoveExpansionGap.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnRemoveExpansionGap.Name = "btnRemoveExpansionGap";
+			this.btnRemoveExpansionGap.Size = new System.Drawing.Size(23, 22);
+			this.btnRemoveExpansionGap.Text = "Dehnfuge löschen";
+			this.btnRemoveExpansionGap.Click += new System.EventHandler(this.btnRemoveExpansionGap_Click);
 			// 
 			// panUnheatedArea
 			// 
@@ -466,26 +486,6 @@ namespace Europlan.Common {
 			this.btnOk.Text = "Übernehmen";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-			// 
-			// btnAddExpansionGap
-			// 
-			this.btnAddExpansionGap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnAddExpansionGap.Image = ((System.Drawing.Image)(resources.GetObject("btnAddExpansionGap.Image")));
-			this.btnAddExpansionGap.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnAddExpansionGap.Name = "btnAddExpansionGap";
-			this.btnAddExpansionGap.Size = new System.Drawing.Size(23, 22);
-			this.btnAddExpansionGap.Text = "toolStripButton1";
-			this.btnAddExpansionGap.Click += new System.EventHandler(this.btnAddExpansionGap_Click);
-			// 
-			// btnRemoveExpansionGap
-			// 
-			this.btnRemoveExpansionGap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnRemoveExpansionGap.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveExpansionGap.Image")));
-			this.btnRemoveExpansionGap.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnRemoveExpansionGap.Name = "btnRemoveExpansionGap";
-			this.btnRemoveExpansionGap.Size = new System.Drawing.Size(23, 22);
-			this.btnRemoveExpansionGap.Text = "toolStripButton2";
-			this.btnRemoveExpansionGap.Click += new System.EventHandler(this.btnRemoveExpansionGap_Click);
 			// 
 			// RoomPickerForm
 			// 

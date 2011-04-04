@@ -30,9 +30,17 @@ namespace Europlan.Common.Products {
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
+			this.btnAddRz = new System.Windows.Forms.ToolStripButton();
+			this.btnDelRz = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.pageAuslegung = new System.Windows.Forms.TabPage();
+			this.label12 = new System.Windows.Forms.Label();
+			this.numCorners = new Europlan.Common.NumericBox();
+			this.label11 = new System.Windows.Forms.Label();
+			this.label9 = new System.Windows.Forms.Label();
+			this.numRim = new Europlan.Common.NumericBox();
+			this.label10 = new System.Windows.Forms.Label();
 			this.lblCircuitCount = new System.Windows.Forms.Label();
 			this.lblRimVa = new System.Windows.Forms.Label();
 			this.lblResidenceVa = new System.Windows.Forms.Label();
@@ -118,7 +126,6 @@ namespace Europlan.Common.Products {
 			this.label1 = new System.Windows.Forms.Label();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.eurovalPlanner = new Europlan.Common.EurovalPlanner(this.components);
-			this.btnAddRz = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -133,7 +140,8 @@ namespace Europlan.Common.Products {
             this.btnZoomIn,
             this.toolStripSeparator1,
             this.btnMove,
-            this.btnAddRz});
+            this.btnAddRz,
+            this.btnDelRz});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(846, 25);
@@ -181,6 +189,27 @@ namespace Europlan.Common.Products {
 			this.btnMove.ToolTipText = "Plan verschieben";
 			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
 			// 
+			// btnAddRz
+			// 
+			this.btnAddRz.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddRz.Image = ((System.Drawing.Image)(resources.GetObject("btnAddRz.Image")));
+			this.btnAddRz.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddRz.Name = "btnAddRz";
+			this.btnAddRz.Size = new System.Drawing.Size(23, 22);
+			this.btnAddRz.Text = "Randzone hinzufügen";
+			this.btnAddRz.Click += new System.EventHandler(this.btnAddRz_Click);
+			// 
+			// btnDelRz
+			// 
+			this.btnDelRz.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnDelRz.Image = ((System.Drawing.Image)(resources.GetObject("btnDelRz.Image")));
+			this.btnDelRz.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDelRz.Name = "btnDelRz";
+			this.btnDelRz.Size = new System.Drawing.Size(23, 22);
+			this.btnDelRz.Text = "Randzone löschen";
+			this.btnDelRz.ToolTipText = "Randzone löschen";
+			this.btnDelRz.Click += new System.EventHandler(this.btnDelRz_Click);
+			// 
 			// panel1
 			// 
 			this.panel1.AutoScroll = true;
@@ -206,6 +235,12 @@ namespace Europlan.Common.Products {
 			// 
 			// pageAuslegung
 			// 
+			this.pageAuslegung.Controls.Add(this.label12);
+			this.pageAuslegung.Controls.Add(this.numCorners);
+			this.pageAuslegung.Controls.Add(this.label11);
+			this.pageAuslegung.Controls.Add(this.label9);
+			this.pageAuslegung.Controls.Add(this.numRim);
+			this.pageAuslegung.Controls.Add(this.label10);
 			this.pageAuslegung.Controls.Add(this.lblCircuitCount);
 			this.pageAuslegung.Controls.Add(this.lblRimVa);
 			this.pageAuslegung.Controls.Add(this.lblResidenceVa);
@@ -225,6 +260,91 @@ namespace Europlan.Common.Products {
 			this.pageAuslegung.TabIndex = 3;
 			this.pageAuslegung.Text = "Auslegung";
 			this.pageAuslegung.UseVisualStyleBackColor = true;
+			// 
+			// label12
+			// 
+			this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.label12.Location = new System.Drawing.Point(360, 129);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(475, 36);
+			this.label12.TabIndex = 93;
+			this.label12.Text = "(positive Ecken vergößern, negative verringern die Randzonenfläche)";
+			// 
+			// numCorners
+			// 
+			this.numCorners.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numCorners.Enabled = false;
+			this.numCorners.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numCorners.Location = new System.Drawing.Point(245, 126);
+			this.numCorners.MaxValue = null;
+			this.numCorners.MinValue = null;
+			this.numCorners.Name = "numCorners";
+			this.numCorners.Size = new System.Drawing.Size(109, 20);
+			this.numCorners.TabIndex = 92;
+			this.numCorners.Text = "0";
+			this.numCorners.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numCorners.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numCorners.ValueChanged += new System.EventHandler(this.numCorners_ValueChanged);
+			// 
+			// label11
+			// 
+			this.label11.Location = new System.Drawing.Point(8, 129);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(231, 13);
+			this.label11.TabIndex = 91;
+			this.label11.Text = "Anzahl der Ecken:";
+			// 
+			// label9
+			// 
+			this.label9.Location = new System.Drawing.Point(442, 103);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(19, 13);
+			this.label9.TabIndex = 90;
+			this.label9.Text = "m";
+			// 
+			// numRim
+			// 
+			this.numRim.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+			this.numRim.Enabled = false;
+			this.numRim.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRim.Location = new System.Drawing.Point(245, 100);
+			this.numRim.MaxValue = null;
+			this.numRim.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRim.Name = "numRim";
+			this.numRim.Size = new System.Drawing.Size(194, 20);
+			this.numRim.TabIndex = 89;
+			this.numRim.Text = "0";
+			this.numRim.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRim.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			// 
+			// label10
+			// 
+			this.label10.Location = new System.Drawing.Point(8, 103);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(231, 13);
+			this.label10.TabIndex = 88;
+			this.label10.Text = "Länge der Randzone:";
 			// 
 			// lblCircuitCount
 			// 
@@ -1089,16 +1209,6 @@ namespace Europlan.Common.Products {
 			this.eurovalPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.eurovalPlanner_ModeChanged);
 			this.eurovalPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.europlanPlanner_ProjectChanged);
 			// 
-			// btnAddRz
-			// 
-			this.btnAddRz.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnAddRz.Image = ((System.Drawing.Image)(resources.GetObject("btnAddRz.Image")));
-			this.btnAddRz.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnAddRz.Name = "btnAddRz";
-			this.btnAddRz.Size = new System.Drawing.Size(23, 22);
-			this.btnAddRz.Text = "toolStripButton1";
-			this.btnAddRz.Click += new System.EventHandler(this.btnAddRz_Click);
-			// 
 			// EurovalPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1108,7 +1218,7 @@ namespace Europlan.Common.Products {
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.toolStrip);
 			this.Name = "EurovalPlannerForm";
-			this.Text = "Modul Klima-Boden - grafische Auslegung";
+			this.Text = "Euroval® - grafische Auslegung";
 			this.Load += new System.EventHandler(this.EurovalPlannerForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EurovalPlannerForm_FormClosing);
 			this.toolStrip.ResumeLayout(false);
@@ -1219,5 +1329,12 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.Label label14;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.ToolStripButton btnAddRz;
+		private System.Windows.Forms.ToolStripButton btnDelRz;
+		private System.Windows.Forms.Label label12;
+		private NumericBox numCorners;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Label label9;
+		private NumericBox numRim;
+		private System.Windows.Forms.Label label10;
 	}
 }

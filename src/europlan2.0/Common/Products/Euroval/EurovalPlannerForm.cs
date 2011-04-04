@@ -101,6 +101,14 @@ namespace Europlan.Common.Products {
 			}
 		}
 
+		private void btnDelRz_Click(object sender, EventArgs e) {
+			if (!btnDelRz.Checked) {
+				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_DEL_RZ;
+				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
+			}
+		}
+
 		//private void btnAddModules_Click(object sender, EventArgs e) {
 		//    if (!btnAddModules.Checked) {
 		//        this.eurovalPlanner.Mode = EurovalPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
@@ -132,16 +140,25 @@ namespace Europlan.Common.Products {
 			if (this.planPanel.Mode == PlanMode.PM_MOVE) {
 				this.btnMove.Checked = true;
 				this.btnAddRz.Checked = false;
+				this.btnDelRz.Checked = false;
 				//this.btnAddModules.Checked = false;
 				//this.btnSelectModule.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_RZ) {
 				this.btnMove.Checked = false;
 				this.btnAddRz.Checked = true;
+				this.btnDelRz.Checked = false;
+				//this.btnAddModules.Checked = true;
+				//this.btnSelectModule.Checked = false;
+			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_DEL_RZ) {
+				this.btnMove.Checked = false;
+				this.btnAddRz.Checked = false;
+				this.btnDelRz.Checked = true;
 				//this.btnAddModules.Checked = true;
 				//this.btnSelectModule.Checked = false;
 			} else {
 				this.btnMove.Checked = false;
 				this.btnAddRz.Checked = false;
+				this.btnDelRz.Checked = false;
 				//this.btnAddModules.Checked = false;
 				//this.btnSelectModule.Checked = false;
 			}
@@ -349,7 +366,7 @@ namespace Europlan.Common.Products {
 			if (this.cmbLayDistanceContainsAutomatic != newCmbLayDistanceContainsAutomatic) {
 				this.cmbLayDistanceContainsAutomatic = newCmbLayDistanceContainsAutomatic;
 				if (this.cmbLayDistanceContainsAutomatic) {
-					this.cmbLayDistance.Items.Insert(0, new Europlan.Common.ProductOverviewWrapper.LayDistanceItem(null, EuroplanRes.EurovalProduct_Automatisch/*"Automatisch"*/));
+					this.cmbLayDistance.Items.Insert(0, new Europlan.Common.PlannedEurovalProductPanel.LayDistanceItem(null, EuroplanRes.EurovalProduct_Automatisch/*"Automatisch"*/));
 				} else {
 					this.cmbLayDistance.Items.RemoveAt(0);
 				}
@@ -363,7 +380,7 @@ namespace Europlan.Common.Products {
 						newCmbRimTypeContainsNone = false;
 						this.cmbRimType.Items.RemoveAt(0);
 					}
-					this.cmbRimType.Items.Insert(0, new Europlan.Common.ProductOverviewWrapper.RimTypeItem(null, EuroplanRes.EurovalProduct_Automatisch/*"Automatisch"*/));
+					this.cmbRimType.Items.Insert(0, new Europlan.Common.PlannedEurovalProductPanel.RimTypeItem(null, EuroplanRes.EurovalProduct_Automatisch/*"Automatisch"*/));
 				} else {
 					this.cmbRimType.Items.RemoveAt(0);
 					this.cmbRimTypeContainsNone = false;
@@ -372,7 +389,7 @@ namespace Europlan.Common.Products {
 			if (this.cmbRimTypeContainsNone != newCmbRimTypeContainsNone) {
 				this.cmbRimTypeContainsNone = newCmbRimTypeContainsNone;
 				if (this.cmbRimTypeContainsNone) {
-					this.cmbRimType.Items.Insert(0, new Europlan.Common.ProductOverviewWrapper.RimTypeItem(null, ""));
+					this.cmbRimType.Items.Insert(0, new Europlan.Common.PlannedEurovalProductPanel.RimTypeItem(null, ""));
 				} else {
 					this.cmbRimType.Items.RemoveAt(0);
 				}
@@ -541,7 +558,11 @@ namespace Europlan.Common.Products {
 			this.lblSpreizungHeat.Text = Math.Round(evProduct.PlannedSpreizungHeat, 1).ToString();
 			this.lblSpreizungCool.Text = Math.Round(evProduct.PlannedSpreizungCool, 1).ToString();
 
-			
+			this.numCorners.Enabled = evProduct.PlannedRimLength > 0;
+			this.numRim.Value = Math.Round((decimal)evProduct.PlannedRimLength, 2);
+			this.numCorners.Value = (decimal)evProduct.PlannedRimCorners;
+
+			this.planPanel.InvalidateGraphics();
 		}
 
 		private void europlanPlanner_ProjectChanged(object sender) {
@@ -558,6 +579,7 @@ namespace Europlan.Common.Products {
 		}
 
 		private void eurovalPlanner_ModeChanged(object sender, EventArgs e) {
+			UpdateButtons();
 		//    if (this.eurovalPlanner.Mode == EurovalPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH) {
 		//        this.numNewRotation.Enabled = false;
 		//        this.btnNewCcwLarge.Enabled = false;
@@ -611,6 +633,11 @@ namespace Europlan.Common.Products {
 			} else {
 				(this.plannedProduct.Product as EurovalProduct).RequestedCircuits = null;
 			}
+			this.CalculateAndUpdate();
+		}
+
+		private void numCorners_ValueChanged(object sender, EventArgs e) {
+			(this.plannedProduct.Product as EurovalProduct).PlannedRimCorners = (int)this.numCorners.Value;
 			this.CalculateAndUpdate();
 		}
 

@@ -6,6 +6,7 @@ using System.Collections;
 using log4net;
 using System.Threading;
 using Europlan.Licensing;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
 
@@ -79,6 +80,7 @@ namespace Europlan.Common {
 		private Nullable<EurovalRimType> plannedRimType = null;
 
 		private List<ExtendedCorrections> plannedCorrectionList = new List<ExtendedCorrections>();
+		private List<Segment2D> plannedRimSegments = new List<Segment2D>();
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			int i = 0;
@@ -883,6 +885,14 @@ namespace Europlan.Common {
 		public float PlannedRimLength {
 			get { return this.plannedRimLength; }
 			set { this.plannedRimLength = value; }
+		}
+
+		/// <summary>
+		/// The rim segments planned in the graphical mode
+		/// </summary>
+		public List<Segment2D> PlannedRimSegments {
+			get { return this.plannedRimSegments; }
+			set { this.plannedRimSegments = value; }
 		}
 
 		/// <summary>
