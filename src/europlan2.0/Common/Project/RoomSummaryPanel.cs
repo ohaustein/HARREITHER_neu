@@ -189,6 +189,8 @@ namespace Europlan.Common {
 					p.UsedForQuickDimensioning = false;
 					p.AssociatedRoom = this.room;
 					PlannedProduct pp = new PlannedProduct(p);
+					pp.CalculateHeat = p.DefaultCalculateMode == Product.CalculateModeEnum.HEAT || p.DefaultCalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL;
+					pp.CalculateCool = p.DefaultCalculateMode == Product.CalculateModeEnum.COOL || p.DefaultCalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL;
 					if (p.Type == Product.ProductType.FBH) {
 						double plannedFloorArea = this.room.Area;
 						//double necessaryHeatLoad = this.room.NormalizedHeatLoad;

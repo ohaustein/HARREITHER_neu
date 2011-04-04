@@ -369,9 +369,9 @@ namespace Europlan.Common {
 				this.lblDeltaPCool.Visible = showCool && complete;
 				this.lblSpreizungCool.Visible = showCool && complete;
 
-				this.rbCalculateHeat.Enabled = this.product.RequestedHeatLoad > 0;
-				this.rbCalculateCool.Enabled = this.product.RequestedCoolLoad > 0;
-				this.rbCalculateBoth.Enabled = this.product.RequestedHeatLoad > 0 && this.product.RequestedCoolLoad > 0;
+				this.rbCalculateHeat.Enabled = evProduct.CalculateMode == Product.CalculateModeEnum.HEAT || evProduct.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL;
+				this.rbCalculateCool.Enabled = evProduct.CalculateMode == Product.CalculateModeEnum.HEAT || evProduct.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL;
+				this.rbCalculateBoth.Enabled = evProduct.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL;
 				this.numCorners.Enabled = evProduct.PlannedRimLength > 0;
 				this.cmbRimType.Enabled = evProduct.PlannedRimLength > 0;
 
@@ -1360,6 +1360,8 @@ namespace Europlan.Common {
 			if (ignoreCalculationMode == 0) {
 				if (this.rbHeat.Checked) {
 					this.product.Product.CalculateMode = Product.CalculateModeEnum.HEAT;
+					this.product.CalculateHeat = true;
+					this.product.CalculateCool = false;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.UpdateControl(FieldEnum.NONE);
 					if (this.ProjectChanged != null) {
@@ -1373,6 +1375,8 @@ namespace Europlan.Common {
 			if (ignoreCalculationMode == 0) {
 				if (this.rbCool.Checked) {
 					this.product.Product.CalculateMode = Product.CalculateModeEnum.COOL;
+					this.product.CalculateHeat = false;
+					this.product.CalculateCool = true;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.UpdateControl(FieldEnum.NONE);
 					if (this.ProjectChanged != null) {
@@ -1386,6 +1390,8 @@ namespace Europlan.Common {
 			if (ignoreCalculationMode == 0) {
 				if (this.rbHeatAndCool.Checked) {
 					this.product.Product.CalculateMode = Product.CalculateModeEnum.HEAT_AND_COOL;
+					this.product.CalculateHeat = true;
+					this.product.CalculateCool = true;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.UpdateControl(FieldEnum.NONE);
 					if (this.ProjectChanged != null) {

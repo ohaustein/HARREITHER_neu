@@ -416,11 +416,11 @@ namespace Europlan.Common {
 			this.requestedHeatLoad = this.NecessaryHeatLoad;
 			this.calculateHeat = this.requestedHeatLoad > 0;
 			this.calculateCool = this.requestedCoolLoad > 0;
-			this.plannedProduct.ConfigureProduct(this.RequestedHeatLoad, this.RequestedCoolLoad, this.calculateHeat, this.calculateCool, false);
+			this.plannedProduct.ConfigureProduct(this.RequestedHeatLoad, this.RequestedCoolLoad, this.CalculateHeat, this.CalculateCool, false);
 		}
 
 		public string ConfigureProduct(bool variableSpreizung) {
-			this.plannedProduct.ConfigureProduct(this.RequestedHeatLoad, this.RequestedCoolLoad, this.calculateHeat, this.calculateCool, variableSpreizung);
+			this.plannedProduct.ConfigureProduct(this.RequestedHeatLoad, this.RequestedCoolLoad, this.CalculateHeat, this.CalculateCool, variableSpreizung);
 			return this.plannedProduct.LastErrorMessage;
 		}
 
@@ -462,7 +462,7 @@ namespace Europlan.Common {
 				p.productNode.Text = p.internalName + ": " + p.System;
 			}
 
-			this.plannedProduct.ConfigureProduct(this.RequestedHeatLoad, this.RequestedCoolLoad, this.calculateHeat, this.calculateCool, false);
+			this.plannedProduct.ConfigureProduct(this.RequestedHeatLoad, this.RequestedCoolLoad, this.CalculateHeat, this.CalculateCool, false);
 
 		}
 
