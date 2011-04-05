@@ -336,9 +336,9 @@ namespace Europlan.Common.Products {
 			this.lblDeltaPCool.Visible = showCool && complete;
 			this.lblSpreizungCool.Visible = showCool && complete;
 
-			this.rbCalculateHeat.Enabled = this.plannedProduct.RequestedHeatLoad > 0;
-			this.rbCalculateCool.Enabled = this.plannedProduct.RequestedCoolLoad > 0;
-			this.rbCalculateBoth.Enabled = this.plannedProduct.RequestedHeatLoad > 0 && this.plannedProduct.RequestedCoolLoad > 0;
+			this.rbCalculateHeat.Enabled = evProduct.CalculateMode == Product.CalculateModeEnum.HEAT || evProduct.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL;
+			this.rbCalculateCool.Enabled = evProduct.CalculateMode == Product.CalculateModeEnum.HEAT || evProduct.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL;
+			this.rbCalculateBoth.Enabled = evProduct.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL;
 			this.cmbRimType.Enabled = evProduct.PlannedRimLength > 0;
 
 			// disable the following controls if the product is a connection
