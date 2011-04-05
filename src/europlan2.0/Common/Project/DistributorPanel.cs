@@ -168,11 +168,41 @@ namespace Europlan.Common {
 			Floor floor = this.listFloors.Items[e.Index] as Floor;
 			if (e.NewValue == CheckState.Checked) {
 				if (!this.distributor.AdditionalFloorIds.Contains(floor.Id)) {
-					this.distributor.AdditionalFloorIds.Add(floor.Id);
+					if (floor.AssociatedPlan != null) {
+						DistributorPositionerForm form = new DistributorPositionerForm(this.distributor, floor);
+						form.ShowDialog();
+						if (form.UnsavedChanges) {
+							if (ProjectChanged != null) {
+								ProjectChanged(null);
+							}
+						}
+						form.Dispose();
+						bool success = false;
+						foreach (Distributor.GraphicalRepresentation gp in distributor.GraphicalRepresentations) {
+							if (gp.floorId == floor.Id) {
+								this.distributor.AdditionalFloorIds.Add(floor.Id);
+								success = true;
+							}
+						}
+						if (!success) {
+							e.NewValue = e.CurrentValue;
+						}
+					} else {
+						this.distributor.AdditionalFloorIds.Add(floor.Id);
+					}
 				}
 			} else {
 				// TODO: check if distributor is also planned in a floor
 				if (this.distributor.AdditionalFloorIds.Contains(floor.Id)) {
+					Distributor.GraphicalRepresentation toDelete = new Distributor.GraphicalRepresentation();
+					foreach (Distributor.GraphicalRepresentation gp in distributor.GraphicalRepresentations) {
+						if (gp.floorId == floor.Id) {
+							toDelete = gp;
+						}
+					}
+					if (distributor.GraphicalRepresentations.Contains(toDelete)) {
+						distributor.GraphicalRepresentations.Remove(toDelete);
+					}
 					this.distributor.AdditionalFloorIds.Remove(floor.Id);
 				}
 			}
