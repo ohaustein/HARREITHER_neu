@@ -219,7 +219,7 @@ namespace Europlan.Common {
 
 				ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
 
-				if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.CeilingCoordinatesToUse.Count > 0) {
+				if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
 					this.rbLayoutTable.Enabled = true;
 					this.rbLayoutGraphical.Enabled = true;
 				} else {
@@ -231,7 +231,7 @@ namespace Europlan.Common {
 				if (this.product.Product.GraphicalMode.HasValue) {
 					graphicalMode = this.product.Product.GraphicalMode.Value;
 				} else {
-					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.CeilingCoordinatesToUse.Count > 0) {
+					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
 						graphicalMode = true;
 						this.product.Product.GraphicalMode = true;
 					} else {

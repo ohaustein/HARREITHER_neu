@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Star.SettingsXpress;
+using WW.Math.Geometry;
+using WW.Math;
 
 namespace Europlan.Common.Products {
 	public partial class EurovalPlannerForm : Form {
@@ -25,6 +27,35 @@ namespace Europlan.Common.Products {
 			this.plannedProduct = plannedProduct;
 
 			EurovalProduct product = plannedProduct.Product as EurovalProduct;
+			if (product.PlannedAreaGraphical.Count == 0) {
+				product.PlannedAreaGraphical.AddRange(product.AssociatedRoom.RoomCoordinates);
+				product.PlannedFloorArea = (float)Math.Round(Math.Abs(new Polygon2D(product.PlannedAreaGraphical).GetArea()) / Math.Pow(product.AssociatedRoom.AssociatedPlan.Measure.Value, 2.0), 2);
+
+				if (product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
+					Polygon2D productPolygon = new Polygon2D(product.PlannedAreaGraphical);
+					if (productPolygon.IsClockwise()) {
+						productPolygon.Reverse();
+					}
+					List<Polygon2D> list1 = new List<Polygon2D>();
+					list1.Add(productPolygon);
+					List<Polygon2D> list2 = new List<Polygon2D>();
+
+					foreach (List<Point2D> unusedArea in product.AssociatedRoom.RoomUnusedAreaCoordinates) {
+						Polygon2D unusedAreaPolygon = new Polygon2D(unusedArea);
+						if (unusedAreaPolygon.IsClockwise()) {
+							unusedAreaPolygon.Reverse();
+						}
+						list2.Add(unusedAreaPolygon);
+					}
+					IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+					double area = 0;
+					foreach (Polygon2D clippedPolygon in clippedPolygons) {
+						area += Math.Round(Math.Abs(clippedPolygon.GetArea()) / Math.Pow(product.AssociatedRoom.AssociatedPlan.Measure.Value, 2.0), 2);
+					}
+					product.PlannedAreaUnheated = (float)area;
+				}
+
+			}
 
 			this.eurovalPlanner.Product = product;
 			this.SetLanguage();
@@ -93,6 +124,14 @@ namespace Europlan.Common.Products {
 			}
 		}
 
+		private void btnDefineArea_Click(object sender, EventArgs e) {
+			if (!btnDefineArea.Checked) {
+				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_ADD_AREA;
+				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
+			}
+		}
+
 		private void btnAddRz_Click(object sender, EventArgs e) {
 			if (!btnAddRz.Checked) {
 				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_ADD_RZ;
@@ -137,50 +176,35 @@ namespace Europlan.Common.Products {
 		//}
 
 		private void UpdateButtons() {
+			EurovalProduct product = plannedProduct.Product as EurovalProduct;
+			this.btnAddRz.Enabled = product.PlannedAreaGraphical.Count > 0;
+			this.btnDelRz.Enabled = product.PlannedAreaGraphical.Count > 0;
 			if (this.planPanel.Mode == PlanMode.PM_MOVE) {
 				this.btnMove.Checked = true;
+				this.btnDefineArea.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
-				//this.btnAddModules.Checked = false;
-				//this.btnSelectModule.Checked = false;
+			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_AREA) {
+				this.btnMove.Checked = false;
+				this.btnDefineArea.Checked = true;
+				this.btnAddRz.Checked = false;
+				this.btnDelRz.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_RZ) {
 				this.btnMove.Checked = false;
+				this.btnDefineArea.Checked = false;
 				this.btnAddRz.Checked = true;
 				this.btnDelRz.Checked = false;
-				//this.btnAddModules.Checked = true;
-				//this.btnSelectModule.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_DEL_RZ) {
 				this.btnMove.Checked = false;
+				this.btnDefineArea.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = true;
-				//this.btnAddModules.Checked = true;
-				//this.btnSelectModule.Checked = false;
 			} else {
 				this.btnMove.Checked = false;
+				this.btnDefineArea.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
-				//this.btnAddModules.Checked = false;
-				//this.btnSelectModule.Checked = false;
 			}
-			//this.grpSelectedModules.Visible = this.btnSelectModule.Checked;
-			//this.grpSelection.Visible = this.btnSelectModule.Checked;
-			//this.grpNewModules.Visible = this.btnAddModules.Checked;
-			//if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.KDM_LAYOUT_ADD_AREA) {
-			//    if (!this.newVisible) {
-			//        this.newVisible = true;
-			//        //this.ignoreListChange++;
-			//        //lstCircuits.Items.Add("neuer HK");
-			//        //this.ignoreListChange--;
-			//    }
-			//} else {
-			//    if (this.newVisible) {
-			//        this.newVisible = false;
-			//        //this.ignoreListChange++;
-			//        //this.lstCircuits.Items.RemoveAt(this.lstCircuits.Items.Count - 1);
-			//        //this.ignoreListChange--;
-			//    }
-			//}
-			//this.UpdateLists(true, false);
 		}
 
 		private TabPage previousTab = null;
@@ -580,35 +604,6 @@ namespace Europlan.Common.Products {
 
 		private void eurovalPlanner_ModeChanged(object sender, EventArgs e) {
 			UpdateButtons();
-		//    if (this.eurovalPlanner.Mode == EurovalPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH) {
-		//        this.numNewRotation.Enabled = false;
-		//        this.btnNewCcwLarge.Enabled = false;
-		//        this.btnNewCcwSmall.Enabled = false;
-		//        this.btnNewCwLarge.Enabled = false;
-		//        this.btnNewCwSmall.Enabled = false;
-		//        this.btnNewHorizontal.Enabled = false;
-		//        this.btnNewVertical.Enabled = false;
-		//        this.btnAdd.Enabled = true;
-		//        this.chkSelectReferenceModule.Enabled = true;
-		//        if (this.planPanel.Mode != PlanMode.PM_PLANNER_DRAG) {
-		//            this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
-		//        }
-		//    } else {
-		//        this.numNewRotation.Enabled = true;
-		//        this.btnNewCcwLarge.Enabled = true;
-		//        this.btnNewCcwSmall.Enabled = true;
-		//        this.btnNewCwLarge.Enabled = true;
-		//        this.btnNewCwSmall.Enabled = true;
-		//        this.btnNewHorizontal.Enabled = true;
-		//        this.btnNewVertical.Enabled = true;
-		//    }
-		//    if (this.eurovalPlanner.Mode != EurovalPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE) {
-		//        if (this.eurovalPlanner.Mode != EurovalPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH) {
-		//            this.btnAdd.Enabled = false;
-		//            this.chkSelectReferenceModule.Enabled = false;
-		//        }
-		//        this.chkSelectReferenceModule.Checked = false;
-		//    }
 		}
 
 		private void rbCalculationType_CheckedChanged(object sender, EventArgs e) {

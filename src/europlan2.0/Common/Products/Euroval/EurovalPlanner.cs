@@ -18,6 +18,7 @@ namespace Europlan.Common {
 
 		public enum EurovalMode {
 			EVM_NONE,
+			EVM_ADD_AREA,
 			EVM_ADD_RZ,
 			EVM_DEL_RZ
 		}
@@ -32,12 +33,15 @@ namespace Europlan.Common {
 			InitializeComponent();
 		}
 
+		private bool unsavedChanges = false;
+		private bool inDesign = false;
 		private EurovalProduct product;
 		private EurovalMode mode = EurovalMode.EVM_NONE;
 		private Cursor customCursor = null;
 		private bool highlightRoomCoordinates = true;
 		private bool drawExpansionGaps = true;
 		private Point2D rzStart = Point2D.Zero;
+		private List<Point2D> coordsPickedSoFar = new List<Point2D>();
 
 		public event EventHandler<EventArgs> ModeChanged;
 
@@ -70,16 +74,11 @@ namespace Europlan.Common {
 				this.mode = value;
 				if (this.mode == EurovalMode.EVM_ADD_RZ) {
 					rzStart = Point2D.Zero;
+				} else if (this.mode == EurovalMode.EVM_ADD_AREA) {
+					if (this.product.PlannedAreaGraphical.Count > 0) {
+						Reset();
+					}
 				}
-				//if (this.mode != KlimaBodenMode.KDM_PICK_MODULE && this.HighlightModules != null) {
-				//    this.HighlightModules = null;
-				//}
-				//if (this.mode != KlimaBodenMode.KDM_LAYOUT_ADD_AREA && this.mode != KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH && this.mode != KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE) {
-				//    this.layoutAddArea = null;
-				//    if (this.connectedPlanPanel != null) {
-				//        this.connectedPlanPanel.InvalidateGraphics();
-				//    }
-				//}
 				if (this.ModeChanged != null) {
 					this.ModeChanged(this, EventArgs.Empty);
 				}
@@ -104,50 +103,13 @@ namespace Europlan.Common {
 		}
 
 		private void connectedPlanPanel_KeyDown(object sender, KeyEventArgs e) {
-			//if (this.mode == KlimaBodenMode.KDM_PICK_MODULE) {
-			//    KeyDown(e.KeyCode, this.highlightModules);
-			//} 
 			if (this.mode == EurovalMode.EVM_ADD_RZ || this.mode == EurovalMode.EVM_DEL_RZ) {
 			    if (e.KeyCode == Keys.Escape) {
-			//        this.layoutAddArea = null;
-			//        this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
-			//        this.connectedPlanPanel.InvalidateGraphics();
+					this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
 					this.Mode = EurovalMode.EVM_NONE;
 					this.connectedPlanPanel.InvalidateGraphics();
 			    }
 			}
-		}
-
-		private bool KeyDown(Keys key) {
-			//if (key == Keys.Delete && modules != null) {
-			//    List<Circuit> emptyCircuits = new List<Circuit>();
-			//    foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
-			//        foreach (KlimaFlaechenModul kfm in modules) {
-			//            if (c.Row.List.Contains(kfm)) {
-			//                c.Row.List.Remove(kfm);
-			//            }
-			//        }
-			//        if (c.Row.List.Count == 0) {
-			//            emptyCircuits.Add(c);
-			//        }
-			//    }
-			//    foreach (Circuit emptyCircuit in emptyCircuits) {
-			//        this.product.PlannedCircuits.Remove(emptyCircuit);
-			//    }
-			//    if (this.ProjectChanged != null) {
-			//        this.ProjectChanged(this);
-			//    }
-			//    this.ModuleSelected(this, EventArgs.Empty);
-			//    this.ConnectedPlanPanel.InvalidateGraphics();
-			//    if (this.ListsNeedUpdate != null) {
-			//        this.ListsNeedUpdate(this, EventArgs.Empty);
-			//    }
-			//    if (this.ProjectChanged != null) {
-			//        this.ProjectChanged(this);
-			//    }
-			//    return true;
-			//}
-			return false;
 		}
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
@@ -178,14 +140,94 @@ namespace Europlan.Common {
 					g.FillRegion(b, clipDisabled);
 				}
 
+
+				if (this.product.PlannedAreaGraphical.Count > 2) {
+					GraphicsPath fillPath = new GraphicsPath();
+					fillPath.StartFigure();
+					PointF[] array = new PointF[this.product.PlannedAreaGraphical.Count];
+					int i = 0;
+					foreach (Point2D point in this.product.PlannedAreaGraphical) {
+						Point2D tmp = additionalTransformation.TransformTo2D(point);
+						array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
+					}
+					fillPath.AddPolygon(array);
+					fillPath.CloseFigure();
+					c = Color.FromArgb(64, Color.Red);
+					b = new SolidBrush(c);
+					g.FillPath(b, fillPath);
+					g.DrawPath(new Pen(b), fillPath);
+					fillPath.Dispose();
+				}
+
+				path.Reset();
+				transformedPoints.Clear();
+				if (coordsPickedSoFar.Count > 0 && inDesign) {
+					List<Point2D> points = new List<Point2D>(coordsPickedSoFar);
+					Point2D pos = new Point2D((float)mousePositionInPlan.X, (float)mousePositionInPlan.Y);
+					if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, pos) != Point2D.Zero) {
+						pos = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, pos);
+						foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+							Segment2D line = new Segment2D(point, pos);
+							if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
+								pos = point;
+								break;
+							}
+						}
+					} else {
+						if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+							if (points.Count == 1) {
+								pos = GetNormalizedPoint(points[0], null, pos);
+							} else if (points.Count == 2) {
+								pos = GetNormalizedPoint(points[points.Count - 1], points[0], pos);
+							} else {
+								pos = GetNormalizedPoint(points[points.Count - 1], points[0], pos, points[0]);
+							}
+						}
+					}
+
+					points.Add(pos);
+
+					path.StartFigure();
+					PointF[] array = new PointF[points.Count];
+					int i = 0;
+					foreach (Point2D point in points) {
+						Point2D tmp = additionalTransformation.TransformTo2D(point);
+						array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
+					}
+					if (array.Length > 2) {
+						//path.AddLines(array);
+						path.AddPolygon(array);
+					} else {
+						path.AddLine(array[0], array[1]);
+					}
+					path.CloseFigure();
+					b = null;
+					if (this.Mode == EurovalMode.EVM_ADD_AREA) {
+						c = Color.FromArgb(64, Color.Red);
+						b = new SolidBrush(c);
+						g.FillPath(b, path);
+						g.DrawPath(new Pen(b), path);
+					} 
+					// else if (this.Mode == RoomPickerMode.RPM_PICK_UNUSED) {
+					//    Color c = Color.FromArgb(0, Color.Red);
+					//    Color c2 = Color.FromArgb(128, Color.White);
+					//    b = new HatchBrush(HatchStyle.BackwardDiagonal, c2, c);
+					//    g.FillPath(b, path);
+					//    b = new SolidBrush(c2);
+					//    g.DrawPath(new Pen(b), path);
+					//}
+				}
+
 				// paint product
-				g.FillPath(new SolidBrush(Color.FromArgb(64, Color.Red)), path);
+				//path.Reset();
+				//transformedPoints.Clear();
+				//g.FillPath(new SolidBrush(Color.FromArgb(64, Color.Red)), path);
 
 				if (this.mode == EurovalMode.EVM_ADD_RZ) {
-					Point2D rzPoint = GetRzPoint(mousePositionInPlan);
+					Point2D rzPoint = GetSnapPoint(this.product.PlannedAreaGraphical, mousePositionInPlan);
 
 					if (rzPoint != Point2D.Zero) {
-						foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+						foreach (Point2D point in this.product.PlannedAreaGraphical) {
 							Segment2D line = new Segment2D(point, rzPoint);
 							if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 								rzPoint = point;
@@ -193,14 +235,14 @@ namespace Europlan.Common {
 							}
 						}
 						Point2D p = additionalTransformation.TransformTo2D(rzPoint);
-						float size = (float)(this.product.AssociatedRoom.AssociatedPlan.Measure * 0.05 * Math.Abs(additionalTransformation.M00));
+						float size = (float)(this.product.AssociatedRoom.AssociatedPlan.Measure * 0.10 * Math.Abs(additionalTransformation.M00));
 						Pen pen = new Pen(Color.Blue, 2);
 						g.DrawLine(pen, (float)p.X - size, (float)p.Y - size, (float)p.X + size, (float)p.Y + size);
 						g.DrawLine(pen, (float)p.X - size, (float)p.Y + size, (float)p.X + size, (float)p.Y - size);
 					}
 
 					if (rzStart != Point2D.Zero) {
-						List<Segment2D> rzSegments = GetSegments(rzStart);
+						List<Segment2D> rzSegments = GetSegments(this.product.PlannedAreaGraphical, rzStart);
 						double dist = double.MaxValue;
 						Segment2D closest = new Segment2D();
 						foreach (Segment2D rzSegment in rzSegments) {
@@ -218,7 +260,18 @@ namespace Europlan.Common {
 				}
 
 				// paint rim
+				path.Reset();
+				transformedPoints.Clear();
 				if (this.product.PlannedRimLength > 0) {
+					path.StartFigure();
+					PointF[] array = new PointF[this.product.PlannedAreaGraphical.Count];
+					int i = 0;
+					foreach (Point2D point in this.product.PlannedAreaGraphical) {
+						Point2D tmp = additionalTransformation.TransformTo2D(point);
+						array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
+					}
+					path.AddPolygon(array);
+					path.CloseFigure();
 					Brush rzBrush = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.Percent30, Color.FromArgb(255, Color.Red), Color.FromArgb(0, Color.Red));
 					foreach (Segment2D rimSegment in this.product.PlannedRimSegments) {
 						float width = this.product.PlannedRimWidth > 0 ? this.product.PlannedRimWidth : 5.0f;
@@ -240,6 +293,11 @@ namespace Europlan.Common {
 							unusedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
 						}
 						PointF[] pointArray = unusedPoints.ToArray();
+						c = Color.Black;
+						if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
+							c = Color.White;
+						}
+						b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(128, c), Color.FromArgb(112, c));
 						g.DrawPolygon(new Pen(c), pointArray);
 						g.FillPolygon(b, pointArray);
 						unusedPoints.Clear();
@@ -257,36 +315,36 @@ namespace Europlan.Common {
 			}
 		}
 
-		private Point2D GetRzPoint(Point2D mousePosition) {
+		private Point2D GetSnapPoint(List<Point2D> border, Point2D mousePosition) {
 			double distance = Double.MaxValue;
-			Point2D rzPoint = Point2D.Zero;
+			Point2D snapPoint = Point2D.Zero;
 			Point2D prevPoint = Point2D.Zero;
 			Segment2D line = new Segment2D();
-			foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+			foreach (Point2D point in border) {
 				if (prevPoint != Point2D.Zero) {
 					line = new Segment2D(prevPoint, point);
 					if (line.GetDistance(mousePosition) < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 						if (line.GetDistance(mousePosition) < distance) {
 							distance = line.GetDistance(mousePosition);
-							rzPoint = line.GetClosestPoint(mousePosition);
+							snapPoint = line.GetClosestPoint(mousePosition);
 						}
 					}
 				}
 				prevPoint = point;
 			}
-			if (rzPoint == Point2D.Zero) {
-				line = new Segment2D(prevPoint, this.product.AssociatedRoom.RoomCoordinates[0]);
+			if (snapPoint == Point2D.Zero) {
+				line = new Segment2D(prevPoint, border[0]);
 				if (line.GetDistance(mousePosition) < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 					if (line.GetDistance(mousePosition) < distance) {
 						distance = line.GetDistance(mousePosition);
-						rzPoint = line.GetClosestPoint(mousePosition);
+						snapPoint = line.GetClosestPoint(mousePosition);
 					}
 				}
 			}
-			return rzPoint;
+			return snapPoint;
 		}
 
-		private List<Segment2D> GetSegments(Point2D referencePoint) {
+		private List<Segment2D> GetSegments(List<Point2D> border, Point2D referencePoint) {
 			double distance = Double.MaxValue;
 			
 			Point2D rzPoint = Point2D.Zero;
@@ -294,7 +352,7 @@ namespace Europlan.Common {
 			List<Segment2D> list = new List<Segment2D>();
 
 			Segment2D line = new Segment2D();
-			foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+			foreach (Point2D point in border) {
 				if (prevPoint != Point2D.Zero) {
 					line = new Segment2D(prevPoint, point);
 					if (line.GetDistance(referencePoint) < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
@@ -306,7 +364,7 @@ namespace Europlan.Common {
 				prevPoint = point;
 			}
 
-			line = new Segment2D(prevPoint, this.product.AssociatedRoom.RoomCoordinates[0]);
+			line = new Segment2D(prevPoint, border[0]);
 			if (line.GetDistance(referencePoint) < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 				if (line.GetDistance(referencePoint) < distance) {
 					list.Add(line);
@@ -317,26 +375,169 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			if (button == MouseButtons.Right) {
+			if (this.Mode != EurovalMode.EVM_ADD_AREA && button == MouseButtons.Right) {
 				rzStart = Point2D.Zero;
 				this.Mode = EurovalMode.EVM_NONE;
 				this.connectedPlanPanel.InvalidateGraphics();
 				return true;
 			}
-			if (this.Mode == EurovalMode.EVM_ADD_RZ && button == MouseButtons.Left) {
-				if (rzStart == Point2D.Zero) {
-					rzStart = GetRzPoint(planPoint);
+
+			if (this.Mode == EurovalMode.EVM_ADD_AREA) {
+				PointF pos = new PointF((float)planPoint.X, (float)planPoint.Y);
+
+				Point2D normalizedPoint = planPoint;
+				bool pick = (button == MouseButtons.Left) || (button == MouseButtons.Right);
+				bool finishPick = button == MouseButtons.Right;
+				bool addFinishinigPick = true;
+				bool snapFound = false;
+				if (coordsPickedSoFar.Count > 0 && (this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+					if (coordsPickedSoFar.Count == 1) {
+						if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint) != Point2D.Zero) {
+							normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint);
+							snapFound = true;
+						} else {
+							normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[0], null, normalizedPoint);
+						}
+					} else if (coordsPickedSoFar.Count == 2) {
+						if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates,normalizedPoint) != Point2D.Zero) {
+							normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint);
+							snapFound = true;
+						} else {
+							normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[coordsPickedSoFar.Count - 1], coordsPickedSoFar[0], normalizedPoint);
+						}
+					} else {
+						bool isStart;
+						if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint) != Point2D.Zero) {
+							normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint);
+							snapFound = true;
+							foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+								Segment2D line = new Segment2D(point, normalizedPoint);
+								if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
+									normalizedPoint = point;
+									break;
+								}
+							}
+							isStart = coordsPickedSoFar.Count > 0 && normalizedPoint == coordsPickedSoFar[0];
+						} else {
+							normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[coordsPickedSoFar.Count - 1], coordsPickedSoFar[0], normalizedPoint, coordsPickedSoFar[0], out isStart);
+						}
+						addFinishinigPick = finishPick;
+						finishPick = finishPick || (pick && isStart);
+					}
+				} else {
+					if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint) != Point2D.Zero) {
+						normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint);
+						snapFound = true;
+					}
+				}
+
+				if (snapFound) {
 					foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
-						Segment2D line = new Segment2D(point, rzStart);
+						Segment2D line = new Segment2D(point, normalizedPoint);
 						if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
-							rzStart = point;
+							normalizedPoint = point;
 							break;
 						}
 					}
+				}
+
+				if (!this.AreaIsValid(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint)) {
+					return false;
+				}
+
+				if (pick && !finishPick) {
+					if (!inDesign && coordsPickedSoFar.Count == 0 && this.product.PlannedAreaGraphical.Count > 0) {
+						if (!Reset()) {
+							return false;
+						}
+					}
+
+					unsavedChanges = true;
+					coordsPickedSoFar.Add(normalizedPoint);
+					this.SimplifyPolygon(coordsPickedSoFar, false);
+					inDesign = true;
+				} else if (finishPick) {
+					if (addFinishinigPick) {
+						coordsPickedSoFar.Add(normalizedPoint);
+					}
+					this.SimplifyPolygon(coordsPickedSoFar, true);
+					if (coordsPickedSoFar.Count > 2) {
+						if (this.Mode == EurovalMode.EVM_ADD_AREA) {
+							double area = Math.Round(Math.Abs(new Polygon2D(coordsPickedSoFar).GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
+							DialogResult result = MessageBox.Show("Die definierte Fläche beträgt " + area + "m². Wollen Sie diese Fläche übernehmen?", "Fläche übernehmen?", MessageBoxButtons.YesNo);
+							if (result.Equals(DialogResult.Yes)) {
+								Polygon2D room = new Polygon2D(this.product.AssociatedRoom.RoomCoordinates);
+								if (room.IsClockwise()) {
+									room.Reverse();
+								}
+								Polygon2D prod = new Polygon2D(coordsPickedSoFar);
+								if (prod.IsClockwise()) {
+									prod.Reverse();
+								}
+								List<Polygon2D> list1 = new List<Polygon2D>();
+								list1.Add(room);
+								List<Polygon2D> list2 = new List<Polygon2D>();
+								list2.Add(prod);
+
+								IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+								if (clippedPolygons.Count > 0) {
+									this.product.PlannedAreaGraphical.AddRange(clippedPolygons[0]);
+									this.product.PlannedFloorArea = (float)Math.Round(Math.Abs(clippedPolygons[0].GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
+									list1.Clear();
+									list1.Add(clippedPolygons[0]);
+									list2.Clear();
+									if (this.product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
+										foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.RoomUnusedAreaCoordinates) {
+											Polygon2D unusedAreaPolygon = new Polygon2D(unusedArea);
+											if (unusedAreaPolygon.IsClockwise()) {
+												unusedAreaPolygon.Reverse();
+											}
+											list2.Add(unusedAreaPolygon);
+										}
+										clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+										area = 0;
+										foreach (Polygon2D clippedPolygon in clippedPolygons) {
+											area += Math.Round(Math.Abs(clippedPolygon.GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
+										}
+										this.product.PlannedAreaUnheated = (float)area;
+									}
+
+								}								
+								unsavedChanges = true;
+								this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
+								this.Mode = EurovalMode.EVM_NONE;
+								if (ModeChanged != null) {
+									this.ModeChanged(this, EventArgs.Empty);
+								}
+							}
+						} 
+						//else if (this.Mode == RoomPickerMode.RPM_PICK_UNUSED) {
+						//    unusedCoordinates.Add(new List<Point2D>(coordsPickedSoFar));
+						//    unsavedChanges = true;
+						//}
+					}
+					coordsPickedSoFar.Clear();
+					inDesign = false;
+				}
+				return true;
+			}
+
+			if (this.Mode == EurovalMode.EVM_ADD_RZ && button == MouseButtons.Left) {
+				if (rzStart == Point2D.Zero) {
+					rzStart = GetSnapPoint(this.product.PlannedAreaGraphical, planPoint);
+					if (rzStart != Point2D.Zero) {
+						foreach (Point2D point in this.product.PlannedAreaGraphical) {
+							Segment2D line = new Segment2D(point, rzStart);
+							if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
+								rzStart = point;
+								break;
+							}
+						}
+					}
 				} else {
-					Point2D rzEnd = GetRzPoint(planPoint);
+					Point2D rzEnd = GetSnapPoint(this.product.PlannedAreaGraphical, planPoint);
 					if (rzEnd != Point2D.Zero) {
-						foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+						foreach (Point2D point in this.product.PlannedAreaGraphical) {
 							Segment2D line = new Segment2D(point, rzEnd);
 							if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 								rzEnd = point;
@@ -344,9 +545,9 @@ namespace Europlan.Common {
 							}
 						}
 
-						List<Segment2D> rzSegments = GetSegments(rzEnd);
+						List<Segment2D> rzSegments = GetSegments(this.product.PlannedAreaGraphical, rzEnd);
 						foreach (Segment2D rzSegment in rzSegments) {
-							if (GetSegments(rzStart).Contains(rzSegment)) {
+							if (GetSegments(this.product.PlannedAreaGraphical, rzStart).Contains(rzSegment)) {
 								this.product.PlannedRimSegments.Add(new Segment2D(rzStart, rzEnd));
 
 								float sum = 0;
@@ -388,253 +589,116 @@ namespace Europlan.Common {
 				}
 				return true;
 			}
-			//if (this.Mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE) {
-			//    Dictionary<KlimaFlaechenModul, Polygon2D> moduleAreas = this.GetModuleAreas();
-			//    KlimaFlaechenModul pickedModul = null;
-			//    foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> kvp in moduleAreas) {
-			//        if (kvp.Value.IsInside(planPoint)) {
-			//            pickedModul = kvp.Key;
-			//            break;
-			//        }
-			//    }
-
-
-			//    if (pickedModul != null) {
-			//        Matrix3D rotation = Transformation3D.Rotate(-this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
-			//        Matrix3D invRotation = rotation.GetInverse();
-
-			//        //Polygon2D rotatedAddArea = new Polygon2D();
-			//        double top = double.MaxValue;
-			//        double bottom = double.MinValue;
-			//        double left = double.MaxValue;
-			//        double right = double.MinValue;
-			//        foreach (Point2D point in this.layoutAddArea) {
-			//            Point2D rotatedPoint = invRotation.Transform(point);
-			//            if (rotatedPoint.X < left) {
-			//                left = rotatedPoint.X;
-			//            }
-			//            if (rotatedPoint.X > right) {
-			//                right = rotatedPoint.X;
-			//            }
-			//            if (rotatedPoint.Y < top) {
-			//                top = rotatedPoint.Y;
-			//            }
-			//            if (rotatedPoint.Y > bottom) {
-			//                bottom = rotatedPoint.Y;
-			//            }
-			//        }
-			//        Point2D referencePoint = invRotation.Transform(new Point2D(pickedModul.GraphPosX, pickedModul.GraphPosY));
-
-			//        double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			//        double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-
-			//        double stepX = width;
-			//        if (!this.newModulesXDicht) {
-			//            stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			//        }
-			//        double stepY = height;
-			//        if (!this.newModulesYDicht) {
-			//            stepY += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			//        }
-
-			//        double refLeft = referencePoint.X;
-			//        while (refLeft - stepX > left) {
-			//            refLeft -= stepX;
-			//        }
-			//        while (refLeft < left) {
-			//            refLeft += stepX;
-			//        }
-			//        double refTop = referencePoint.Y;
-			//        while (refTop - stepY > top) {
-			//            refTop -= stepY;
-			//        }
-			//        while (refTop < top) {
-			//            refTop += stepY;
-			//        }
-			//        this.NewModulesOffsetX = refLeft - left;
-			//        this.NewModulesOffsetY = refTop - top;
-
-			//        this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH;
-			//        if (this.connectedPlanPanel != null) {
-			//            this.connectedPlanPanel.InvalidateGraphics();
-			//        }
-			//        if (this.ModeChanged != null) {
-			//            this.ModeChanged(this, EventArgs.Empty);
-			//        }
-			//    }
-			//}
 			return false;
+		}
+
+		private bool Reset() {
+			DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Fläche verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+			if (result == DialogResult.No) {
+				return false;
+			}
+			this.product.PlannedAreaGraphical.Clear();
+			this.product.PlannedRimSegments.Clear();
+			this.product.PlannedRimLength = 0;
+			this.product.PlannedRimCorners = 0;
+			this.connectedPlanPanel.InvalidateGraphics();
+			return true;
 		}
 
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
 			if (this.Mode == EurovalMode.EVM_ADD_RZ) {
 				return true;
+			} else if (this.Mode == EurovalMode.EVM_ADD_AREA) {
+				Point2D normalizedPoint = planPoint;
+				bool isStart = false;
+				if (coordsPickedSoFar.Count == 0) {
+					bool snapFound = false;
+					if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, planPoint) != Point2D.Zero) {
+						normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, planPoint);
+						snapFound = true;
+					}
+					foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+						Segment2D line = new Segment2D(point, normalizedPoint);
+						if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
+							normalizedPoint = point;
+							snapFound = true;
+							break;
+						}
+					}
+				} else if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, planPoint) != Point2D.Zero) {
+					normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, planPoint);
+					foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+						Segment2D line = new Segment2D(point, normalizedPoint);
+						if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
+							normalizedPoint = point;
+							break;
+						}
+					}
+					isStart = coordsPickedSoFar.Count > 0 && normalizedPoint == coordsPickedSoFar[0];
+				} else {
+					if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+						if (coordsPickedSoFar.Count == 1) {
+							normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[0], null, planPoint);
+						} else if (coordsPickedSoFar.Count == 2) {
+							normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[coordsPickedSoFar.Count - 1], coordsPickedSoFar[0], planPoint);
+						} else {
+							normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[coordsPickedSoFar.Count - 1], coordsPickedSoFar[0], planPoint, coordsPickedSoFar[0], out isStart);
+						}
+					}
+				}
+				if (AreaIsValid(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint)) {
+					this.ConnectedPlanPanel.PlanCursor = isStart ? Cursors.Hand : Cursors.Cross;
+				} else {
+					this.ConnectedPlanPanel.PlanCursor = Cursors.No;
+				}
+				return inDesign;
 			}
-			//if (this.Mode == KlimaBodenMode.KDM_CONSTRUCTION) {
-			//    if (this.product.GraphConstruction != null) {
-			//        if (this.product.GraphConstruction.HitTest(planPoint, pointInControl)) {
-			//            this.customCursor = this.product.GraphConstruction.PickCursor;
-			//            this.ConnectedPlanPanel.PlanCursor = this.product.GraphConstruction.PickCursor;
-			//        } else {
-			//            this.customCursor = Cursors.Default;
-			//            this.ConnectedPlanPanel.PlanCursor = Cursors.Default;
-			//        }
-			//    }
-			//}
 			return false;
 		}
 
-		private Point2D layoutAddAreaStart;
-		private PointF layoutAddAreaStartScreen;
-		private Polygon2D layoutAddArea = null;
-		private bool layoutAddAreaBottomUp = false;
-		private bool layoutAddAreaRightToLeft = false;
 
-		private Nullable<Point> dragStartedInControl;
-		private Nullable<Point2D> dragStartedInPlan;
-		private Nullable<Point> dragEndedInControl;
-		private Nullable<Point2D> dragEndedInPlan;
+		private bool AreaIsValid(List<Point2D> border, Point2D normalizedPoint) {
+			Polygon2D polygon = new Polygon2D(border);
+			if (!polygon.IsInside(normalizedPoint)) {
+				// the current point is not inside the area
+				List<Segment2D> segments = new List<Segment2D>();
+				Polygon2D.GetSegments(polygon, segments);
+				foreach (Segment2D segment in segments) {
+					if (segment.GetDistance(normalizedPoint) == 0) {
+						return true;
+					}
+				}
+				return false;
+			}
+			return true;
+		}
 
-		private Point2D lastPlanPoint;
-		private Point lastPointInControl;
+		//private bool Intersects(Polygon2D polygon, Segment2D line) {
+		//    List<Segment2D> segments = new List<Segment2D>();
+		//    Polygon2D.GetSegments(polygon, segments);
+		//    foreach (Segment2D segment in segments) {
+		//        if (Segment2D.Intersects(segment, line)) {
+		//            if (segment.GetDistance(line.Start) == 0 || segment.GetDistance(line.End) == 0) {
+		//                if (!polygon.IsInside(line.GetCenter())) {
+		//                    return true;
+		//                }
+		//            } else {
+		//                return true;
+		//            }
+		//        } else {
+		//            string test = "";
+		//        }
+		//    }
+		//    return false;
+		//}
+
 
 		public bool PlannerDragStart(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			//if (this.Mode == KlimaBodenMode.KDM_CONSTRUCTION) {
-			//    if (button == MouseButtons.Left && this.product.GraphConstruction != null) {
-			//        this.product.GraphConstruction.StartDrag(planPoint, pointInControl);
-			//    }
-			//} else if (this.Mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA) {
-			//    this.newModulesOffsetX = 0;
-			//    this.newModulesOffsetY = 0;
-			//    this.layoutAddAreaStart = planPoint;
-			//    this.layoutAddAreaStartScreen = pointInControl;
-			//} else if (this.Mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH) {
-			//    this.lastPlanPoint = planPoint;
-			//    this.lastPointInControl = pointInControl;
-			//} else if (this.Mode == KlimaBodenMode.KDM_PICK_MODULE) {
-			//    if (!this.ShiftPressed) {
-
-			//        /*double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			//        KlimaFlaechenModul pickedModul = null;
-			//        foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
-			//            Point2D left = rotation.Transform(lane.BorderLeft.Origin);
-			//            Point2D right = rotation.Transform(lane.BorderRight.Origin);
-			//            if (rotatedPoint.X >= left.X && rotatedPoint.X <= right.X) {
-			//                List<KlimaFlaechenModul> modules = this.product.GetModulesInLane(lane.Nr);
-			//                foreach (KlimaFlaechenModul module in modules) {
-			//                    if (rotatedPoint.Y >= module.GraphPositionInLan && rotatedPoint.Y <= module.GraphPositionInLan + KlimaFlaechenModul.GetModuleHeight(module.ModulType) * measure) {
-			//                        pickedModul = module;
-			//                        break;
-			//                    }
-			//                }
-			//                if (pickedModul != null) {
-			//                    break;
-			//                }
-			//            }
-			//        }
-			//        this.moveModules = this.GetAllSelectedModules().Contains(pickedModul);*/
-			//        this.dragStartedInControl = pointInControl;
-			//        this.dragStartedInPlan = planPoint;
-			//        /*if (this.moveModules) {
-			//            oldModulPositions = new Dictionary<KlimaFlaechenModul, double>();
-			//            foreach (KlimaFlaechenModul modul in this.GetAllSelectedModules()) {
-			//                oldModulPositions.Add(modul, modul.GraphPositionInLan);
-			//            }
-			//        }*/
-			//        //dragIsPick = true;
-			//    } else {
-			//        //this.moveModules = false;
-			//        this.dragStartedInControl = pointInControl;
-			//        this.dragStartedInPlan = planPoint;
-			//        //dragIsPick = true;
-			//    }
-			//}
 			return false;
 		}
 
 		public bool PlannerDragMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			//if (this.Mode == KlimaBodenMode.KDM_CONSTRUCTION) {
-			//    if (button == MouseButtons.Left && this.product.GraphConstruction != null) {
-			//        this.product.GraphConstruction.MoveDrag(planPoint, pointInControl);
-			//        if (this.ProjectChanged != null) {
-			//            this.ProjectChanged(this);
-			//        }
-			//        return true;
-			//    }
-			//} else if (this.Mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA) {
-			//    if (button == MouseButtons.Left && this.product.GraphConstruction != null) {
-			//        Matrix3D matrix = Transformation3D.Rotate(this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
-			//        Point2D rotatedP1 = matrix.Transform(layoutAddAreaStart);
-			//        Point2D rotatedP3 = matrix.Transform(planPoint);
-			//        this.layoutAddAreaBottomUp = (rotatedP1.Y > rotatedP3.Y);
-			//        Point2D rotatedP2 = new Point2D(rotatedP1.X, rotatedP3.Y);
-			//        Point2D rotatedP4 = new Point2D(rotatedP3.X, rotatedP1.Y);
-			//        matrix = matrix.GetInverse();
-			//        //Point2D p2 = matrix.Transform(rotatedP2);
-			//        //Point2D p4 = matrix.Transform(rotatedP4);
-			//        layoutAddArea = new Polygon2D();
-			//        layoutAddArea.Add(layoutAddAreaStart);
-			//        layoutAddArea.Add(matrix.Transform(rotatedP2));
-			//        layoutAddArea.Add(planPoint);
-			//        layoutAddArea.Add(matrix.Transform(rotatedP4));
-			//        return true;
-			//    }
-			//} else if (this.Mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH && button == MouseButtons.Left) {
-			//    Vector2D vector = planPoint - this.lastPlanPoint;
-			//    Matrix3D rotate = Transformation3D.Rotate(this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
-			//    vector = rotate.Transform(vector);
-			//    this.NewModulesOffsetX += vector.X;
-			//    this.NewModulesOffsetY += vector.Y;
-			//    this.lastPlanPoint = planPoint;
-			//    this.lastPointInControl = pointInControl;
-			//    if (this.ConnectedPlanPanel != null) {
-			//        this.ConnectedPlanPanel.InvalidateGraphics();
-			//    }
-			//} else if (this.Mode == KlimaBodenMode.KDM_PICK_MODULE && button == MouseButtons.Left) {
-			//    //int deltaY = this.dragStartedInControl.Y - pointInControl.Y;
-			//    //Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
-
-			//    /*if (deltaX * deltaX + deltaY * deltaY > 25) {
-			//        dragIsPick = false;
-			//    }*/
-			//    //if (/*!dragIsPick && */moveModules) {
-			//    /*	Point2D rotatedStartPoint = rotation.Transform(this.dragStartedInPlan.Value);
-			//        Point2D rotatedCurPoint = rotation.Transform(planPoint);
-			//        double delta = rotatedCurPoint.Y - rotatedStartPoint.Y;
-			//        double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			//        Console.WriteLine(delta / measure);
-			//        Dictionary<int, List<KlimaFlaechenModul>> modulesPerLane = new Dictionary<int, List<KlimaFlaechenModul>>();
-			//        foreach (KlimaFlaechenModul modul in this.GetAllSelectedModules()) {
-			//            if (!modulesPerLane.ContainsKey(modul.GraphLane)) {
-			//                modulesPerLane.Add(modul.GraphLane, new List<KlimaFlaechenModul>());
-			//            }
-			//            modulesPerLane[modul.GraphLane].Add(modul);
-			//        }
-			//        foreach (KeyValuePair<int, List<KlimaFlaechenModul>> kvp in modulesPerLane) {
-			//            if (kvp.Value.Count > 0) {
-			//                KlimaFlaechenModul firstModul = kvp.Value[0];
-			//                bool bottomUp = firstModul.GraphPositionInLan < this.oldModulPositions[firstModul] + delta;
-			//                kvp.Value.Sort(new KlimaFlaechenModuleComparer(!bottomUp));
-			//                PossibleModulLane lane = this.product.GraphConstruction.PossibleLanes[kvp.Key];
-			//                foreach (KlimaFlaechenModul modul in kvp.Value) {
-			//                    Nullable<double> bestMove = lane.BestMovePossible(modul, this.oldModulPositions[modul] + delta, measure, this.product, bottomUp);
-			//                    if (bestMove.HasValue) {
-			//                        modul.GraphPositionInLan = bestMove.Value;
-			//                    }
-			//                }
-			//            }
-			//        }
-			//        if (this.ProjectChanged != null) {
-			//            this.ProjectChanged(this);
-			//        }
-			//        this.connectedPlanPanel.InvalidateGraphics();
-			//    } else {*/
-			//        this.dragEndedInControl = pointInControl;
-			//        this.dragEndedInPlan = planPoint;
-			//        this.connectedPlanPanel.InvalidateGraphics();
-			//    //}
-			//}
 			return false;
 		}
 
@@ -650,63 +714,6 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			//if (this.Mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA) {
-			//    this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH;
-			//    if (this.ModeChanged != null) {
-			//        this.ModeChanged(this, EventArgs.Empty);
-			//    }
-			//} else if (this.mode == KlimaBodenMode.KDM_PICK_MODULE) {
-			//    if (this.dragStartedInPlan.HasValue) {
-			//        dragEndedInPlan = planPoint;
-
-			//        Matrix3D rotation = Transformation3D.Rotate(this.product.AssociatedRoom.AssociatedPlan.Rotation * Math.PI / 180.0);
-			//        Matrix3D invRotation = rotation.GetInverse();
-
-			//        Point2D p1 = rotation.Transform(dragStartedInPlan.Value);
-			//        Point2D p3 = rotation.Transform(dragEndedInPlan.Value);
-			//        Point2D p2 = new Point2D(p1.X, p3.Y);
-			//        Point2D p4 = new Point2D(p3.X, p1.Y);
-
-			//        Polygon2D selection = new Polygon2D(new Point2D[] { dragStartedInPlan.Value, invRotation.Transform(p2), dragEndedInPlan.Value, invRotation.Transform(p4) });
-
-			//        List<KlimaFlaechenModul> selectedModules;
-			//        if (this.ShiftPressed) {
-			//            selectedModules = new List<KlimaFlaechenModul>(this.HighlightModules);
-			//        } else {
-			//            selectedModules = new List<KlimaFlaechenModul>();
-			//        }
-
-			//        foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
-			//            foreach (KlimaFlaechenModul modul in c.Row.List) {
-			//                Polygon2D modulArea = GetModuleArea(modul);
-			//                if (AllPointsInside(selection, modulArea)) {
-			//                    selectedModules.Add(modul);
-			//                }
-			//                if (AllPointsInside(modulArea, selection)) {
-			//                    selectedModules.Add(modul);
-			//                }
-			//            }
-			//        }
-
-			//        if (selectedModules.Count > 0) {
-			//            this.HighlightModules = selectedModules;
-			//        } else {
-			//            this.HighlightModules = null;
-			//        }
-
-			//        this.dragStartedInControl = null;
-			//        this.dragStartedInPlan = null;
-			//        this.dragEndedInControl = null;
-			//        this.dragEndedInPlan = null;
-			//        if (this.ConnectedPlanPanel != null) {
-			//            this.ConnectedPlanPanel.InvalidateGraphics();
-			//        }
-			//        if (this.ModuleSelected != null) {
-			//            this.ModuleSelected(this, EventArgs.Empty);
-			//        }
-			//        return true;
-			//    }
-			//}
 			return false;
 		}
 
@@ -719,7 +726,170 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerKeyPress(Keys key) {
-			return KeyDown(key);
+			//return KeyDown(key);
+			return false;
+		}
+
+		private Point2D GetNormalizedPoint(Point2D basePoint1, Nullable<Point2D> basePoint2, Point2D currentPoint, Nullable<Point2D> startPoint) {
+			bool tmp;
+			return this.GetNormalizedPoint(basePoint1, basePoint2, currentPoint, startPoint, out tmp);
+		}
+
+		private Point2D GetNormalizedPoint(Point2D basePoint1, Nullable<Point2D> basePoint2, Point2D currentPoint) {
+			bool tmp;
+			return this.GetNormalizedPoint(basePoint1, basePoint2, currentPoint, null, out tmp);
+		}
+
+		private bool onlyHorizAndVert = false;
+		private double angleSnapDist = Math.Tan(10.0 / 180.0 * Math.PI);
+		private double startPointSnapSqDist = 100;
+
+		private Point2D GetNormalizedPoint(Point2D basePoint1_, Nullable<Point2D> basePoint2_, Point2D currentPoint_, Nullable<Point2D> startPoint_, out bool isStartPoint) {
+			Matrix3D rotationMatrix = Transformation3D.Rotate(this.ConnectedPlanPanel.Plan.Rotation / 180 * Math.PI);
+			Point2D basePoint1 = rotationMatrix.Transform(basePoint1_);
+			Nullable<Point2D> basePoint2 = basePoint2_.HasValue ? rotationMatrix.Transform(basePoint2_.Value) : basePoint2_;
+			Point2D currentPoint = rotationMatrix.Transform(currentPoint_);
+			Nullable<Point2D> startPoint = startPoint_.HasValue ? rotationMatrix.Transform(startPoint_.Value) : startPoint_;
+			isStartPoint = false;
+			if (startPoint.HasValue) {
+				double scale = this.ConnectedPlanPanel.ScaleForCalculation;
+				double xDistStart = (startPoint.Value.X - currentPoint.X) * scale;
+				double yDistStart = (startPoint.Value.Y - currentPoint.Y) * scale;
+				if (xDistStart * xDistStart + yDistStart * yDistStart < startPointSnapSqDist) {
+					isStartPoint = true;
+					return startPoint_.Value;
+				}
+			}
+			if (ConnectedPlanPanel.SupportsSnap) {
+				return currentPoint;
+			}
+
+			double xDistance1 = Math.Abs(basePoint1.X - currentPoint.X);
+			double yDistance1 = Math.Abs(basePoint1.Y - currentPoint.Y);
+			double xDistInMeter1 = (currentPoint.X - basePoint1.X) / this.ConnectedPlanPanel.Plan.Measure.Value;
+			double yDistInMeter1 = (currentPoint.Y - basePoint1.Y) / this.ConnectedPlanPanel.Plan.Measure.Value;
+			double xDistInMeterRounded1 = Math.Round(xDistInMeter1, 1);
+			double yDistInMeterRounded1 = Math.Round(yDistInMeter1, 1);
+			Point2D p;
+			if (onlyHorizAndVert) {
+				if (xDistance1 < yDistance1) {
+					p = new Point2D(basePoint1.X, basePoint1.Y + ((float)yDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value));
+				} else {
+					p = new Point2D(basePoint1.X + ((float)xDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value), basePoint1.Y);
+				}
+
+			} else {
+				if (basePoint2.HasValue) {
+					double xDistance2 = Math.Abs(basePoint2.Value.X - currentPoint.X);
+					double yDistance2 = Math.Abs(basePoint2.Value.Y - currentPoint.Y);
+					double xDistInMeter2 = (currentPoint.X - basePoint2.Value.X) / this.ConnectedPlanPanel.Plan.Measure.Value;
+					double yDistInMeter2 = (currentPoint.Y - basePoint2.Value.Y) / this.ConnectedPlanPanel.Plan.Measure.Value;
+					double xDistInMeterRounded2 = Math.Round(xDistInMeter2, 1);
+					double yDistInMeterRounded2 = Math.Round(yDistInMeter2, 1);
+
+					double newX = currentPoint.X;
+					double newY = currentPoint.Y;
+					if (Math.Abs(xDistInMeter1 - xDistInMeterRounded1) <= Math.Abs(xDistInMeter2 - xDistInMeterRounded2)) {
+						newX = basePoint1.X + xDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					} else {
+						newX = basePoint2.Value.X + xDistInMeterRounded2 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					}
+					if (Math.Abs(yDistInMeter1 - yDistInMeterRounded1) <= Math.Abs(yDistInMeter2 - yDistInMeterRounded2)) {
+						newY = basePoint1.Y + yDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					} else {
+						newY = basePoint2.Value.Y + yDistInMeterRounded2 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					}
+
+					xDistance1 = Math.Abs(basePoint1.X - newX);
+					yDistance1 = Math.Abs(basePoint1.Y - newY);
+					xDistance2 = Math.Abs(basePoint2.Value.X - newX);
+					yDistance2 = Math.Abs(basePoint2.Value.Y - newY);
+
+					double xTan1 = xDistance1 / yDistance1;
+					double xTan2 = xDistance2 / yDistance2;
+					double yTan1 = yDistance1 / xDistance1;
+					double yTan2 = yDistance2 / xDistance2;
+					if (xTan1 < xTan2) {
+						if (xTan1 < angleSnapDist) {
+							newX = basePoint1.X;
+						}
+					} else {
+						if (xTan2 < angleSnapDist) {
+							newX = basePoint2.Value.X;
+						}
+					}
+					if (yTan1 < yTan2) {
+						if (yTan1 < angleSnapDist) {
+							newY = basePoint1.Y;
+						}
+					} else {
+						if (yTan2 < angleSnapDist) {
+							newY = basePoint2.Value.Y;
+						}
+					}
+					p = new Point2D(newX, newY);
+				} else {
+
+					double newX = basePoint1.X + xDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					double newY = basePoint1.Y + yDistInMeterRounded1 * this.ConnectedPlanPanel.Plan.Measure.Value;
+					xDistance1 = Math.Abs(basePoint1.X - newX);
+					yDistance1 = Math.Abs(basePoint1.Y - newY);
+
+					if (xDistance1 / yDistance1 <= angleSnapDist) {
+						newX = basePoint1.X;
+					} else if (yDistance1 / xDistance1 <= angleSnapDist) {
+						newY = basePoint1.Y;
+					}
+					p = new Point2D(newX, newY);
+				}
+			}
+			rotationMatrix = Transformation3D.Rotate(-this.ConnectedPlanPanel.Plan.Rotation / 180 * Math.PI);
+			p = rotationMatrix.Transform(p);
+			return p;
+		}
+
+		private double minSqDist = 0.00000001; // (0.1mm)
+
+		private void SimplifyPolygon(List<Point2D> polygon, bool closed) {
+			if (polygon.Count < 3) {
+				return;
+			}
+			Point2D prev;
+			Point2D cur;
+			Point2D next;
+			Line2D line;
+			double measureSq = this.ConnectedPlanPanel.Plan.Measure.Value * this.ConnectedPlanPanel.Plan.Measure.Value;
+			for (int i = 1; i < polygon.Count - 1; i++) {
+				prev = polygon[i - 1];
+				cur = polygon[i];
+				next = polygon[i + 1];
+				line = new Line2D(prev, next - prev);
+				if (line.GetDistanceSquared(cur) / measureSq < minSqDist) {
+					polygon.Remove(cur);
+					SimplifyPolygon(polygon, closed);
+					return;
+				}
+			}
+			if (closed) {
+				prev = polygon[polygon.Count - 2];
+				cur = polygon[polygon.Count - 1];
+				next = polygon[0];
+				line = new Line2D(prev, next - prev);
+				if (line.GetDistanceSquared(cur) / measureSq < minSqDist) {
+					polygon.Remove(cur);
+					SimplifyPolygon(polygon, closed);
+					return;
+				}
+				prev = polygon[polygon.Count - 1];
+				cur = polygon[0];
+				next = polygon[1];
+				line = new Line2D(prev, next - prev);
+				if (line.GetDistanceSquared(cur) / measureSq < minSqDist) {
+					polygon.Remove(cur);
+					SimplifyPolygon(polygon, closed);
+					return;
+				}
+			}
 		}
 
 		#endregion

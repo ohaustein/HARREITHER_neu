@@ -126,6 +126,7 @@ namespace Europlan.Common.Products {
 			this.label1 = new System.Windows.Forms.Label();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.eurovalPlanner = new Europlan.Common.EurovalPlanner(this.components);
+			this.btnDefineArea = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -140,6 +141,7 @@ namespace Europlan.Common.Products {
             this.btnZoomIn,
             this.toolStripSeparator1,
             this.btnMove,
+            this.btnDefineArea,
             this.btnAddRz,
             this.btnDelRz});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
@@ -1209,6 +1211,16 @@ namespace Europlan.Common.Products {
 			this.eurovalPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.eurovalPlanner_ModeChanged);
 			this.eurovalPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.europlanPlanner_ProjectChanged);
 			// 
+			// btnDefineArea
+			// 
+			this.btnDefineArea.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnDefineArea.Image = ((System.Drawing.Image)(resources.GetObject("btnDefineArea.Image")));
+			this.btnDefineArea.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDefineArea.Name = "btnDefineArea";
+			this.btnDefineArea.Size = new System.Drawing.Size(23, 22);
+			this.btnDefineArea.Text = "Fläche definieren";
+			this.btnDefineArea.Click += new System.EventHandler(this.btnDefineArea_Click);
+			// 
 			// EurovalPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1336,5 +1348,6 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.Label label9;
 		private NumericBox numRim;
 		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.ToolStripButton btnDefineArea;
 	}
 }

@@ -7,6 +7,7 @@ using log4net;
 using System.Threading;
 using Europlan.Licensing;
 using WW.Math.Geometry;
+using WW.Math;
 
 namespace Europlan.Common {
 
@@ -81,6 +82,7 @@ namespace Europlan.Common {
 
 		private List<ExtendedCorrections> plannedCorrectionList = new List<ExtendedCorrections>();
 		private List<Segment2D> plannedRimSegments = new List<Segment2D>();
+		private List<Point2D> plannedAreaGraphical = new List<Point2D>();
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			int i = 0;
@@ -893,6 +895,14 @@ namespace Europlan.Common {
 		public List<Segment2D> PlannedRimSegments {
 			get { return this.plannedRimSegments; }
 			set { this.plannedRimSegments = value; }
+		}
+
+		/// <summary>
+		/// The graphical representation of the area
+		/// </summary>
+		public List<Point2D> PlannedAreaGraphical {
+			get { return this.plannedAreaGraphical; }
+			set { this.plannedAreaGraphical = value; }
 		}
 
 		/// <summary>

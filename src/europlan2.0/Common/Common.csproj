@@ -372,10 +372,10 @@
     <Compile Include="Products\Hitherm\PlannedHithermProductPanel.Designer.cs">
       <DependentUpon>PlannedHithermProductPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\PlannedModulKlimaBodenProductPanel.cs">
+    <Compile Include="Products\ModulKlimaBoden\PlannedModulKlimaBodenProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Products\PlannedModulKlimaBodenProductPanel.Designer.cs">
+    <Compile Include="Products\ModulKlimaBoden\PlannedModulKlimaBodenProductPanel.Designer.cs">
       <DependentUpon>PlannedModulKlimaBodenProductPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ModulBodenCircuit.cs" />
@@ -389,10 +389,10 @@
     </Compile>
     <Compile Include="Products\KlimaFleachenList.cs" />
     <Compile Include="Products\ModulDeckeCircuit.cs" />
-    <Compile Include="Products\PlannedModulKlimaDeckeProductPanel.cs">
+    <Compile Include="Products\ModulKlimaDecke\PlannedModulKlimaDeckeProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Products\PlannedModulKlimaDeckeProductPanel.Designer.cs">
+    <Compile Include="Products\ModulKlimaDecke\PlannedModulKlimaDeckeProductPanel.Designer.cs">
       <DependentUpon>PlannedModulKlimaDeckeProductPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\Euroval\EurovalCircuit.cs" />
@@ -540,8 +540,8 @@
       <DependentUpon>NewRoomTypeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ConcreteActivationProduct.cs" />
-    <Compile Include="Products\ModulKlimaDeckeProduct.cs" />
-    <Compile Include="Products\ModulKlimaBodenProduct.cs" />
+    <Compile Include="Products\ModulKlimaDecke\ModulKlimaDeckeProduct.cs" />
+    <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenProduct.cs" />
     <Compile Include="Products\HithermCompact\HithermCompactProduct.cs" />
     <Compile Include="Products\Hitherm\HithermProduct.cs" />
     <Compile Include="Products\Euroval\EurovalProduct.cs" />
@@ -815,7 +815,7 @@
       <DependentUpon>PlannedHithermProductPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Products\PlannedModulKlimaBodenProductPanel.resx">
+    <EmbeddedResource Include="Products\ModulKlimaBoden\PlannedModulKlimaBodenProductPanel.resx">
       <DependentUpon>PlannedModulKlimaBodenProductPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -823,7 +823,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>KlimaFlaechenModulGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Products\PlannedModulKlimaDeckeProductPanel.resx">
+    <EmbeddedResource Include="Products\ModulKlimaDecke\PlannedModulKlimaDeckeProductPanel.resx">
       <DependentUpon>PlannedModulKlimaDeckeProductPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
