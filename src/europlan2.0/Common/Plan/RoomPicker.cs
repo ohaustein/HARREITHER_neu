@@ -698,7 +698,7 @@ namespace Europlan.Common {
 		public bool PlannerKeyPress(Keys key) {
 			if (this.inDesign && coordsPickedSoFar.Count > 0 && key == Keys.Escape) {
 				if (this.Mode == RoomPickerMode.RPM_PICK_ROOM) {
-					if (MessageBox.Show("Wollen Sie das definieren der Raumgeometrie abbrechen?", "Abbrechen?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					if (MessageBox.Show("Wollen Sie das Definieren der Raumgeometrie abbrechen?", "Abbrechen?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 						this.inDesign = false;
 						this.coordsPickedSoFar.Clear();
 						this.roomCoordinates.AddRange(this.oldRoomCoordinates);
@@ -711,7 +711,7 @@ namespace Europlan.Common {
 						return true;
 					}
 				} else {
-					if (MessageBox.Show("Wollen Sie das definieren der Fläche abbrechen?", "Abbrechen?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					if (MessageBox.Show("Wollen Sie das Definieren der Fläche abbrechen?", "Abbrechen?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 						this.inDesign = false;
 						this.coordsPickedSoFar.Clear();
 						return true;

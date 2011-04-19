@@ -132,6 +132,22 @@ namespace Europlan.Common.Products {
 			}
 		}
 
+		private void btnAddReduced_Click(object sender, EventArgs e) {
+			if (!btnAddReduced.Checked) {
+				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_ADD_RED;
+				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
+			}
+		}
+
+		private void btnDelReduced_Click(object sender, EventArgs e) {
+			if (!btnDelReduced.Checked) {
+				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_DEL_RED;
+				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
+			}
+		}
+
 		private void btnAddRz_Click(object sender, EventArgs e) {
 			if (!btnAddRz.Checked) {
 				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_ADD_RZ;
@@ -177,31 +193,57 @@ namespace Europlan.Common.Products {
 
 		private void UpdateButtons() {
 			EurovalProduct product = plannedProduct.Product as EurovalProduct;
+			this.btnAddReduced.Enabled = product.PlannedAreaGraphical.Count > 0;
+			this.btnDelReduced.Enabled = product.PlannedAreaGraphical.Count > 0;
 			this.btnAddRz.Enabled = product.PlannedAreaGraphical.Count > 0;
 			this.btnDelRz.Enabled = product.PlannedAreaGraphical.Count > 0;
 			if (this.planPanel.Mode == PlanMode.PM_MOVE) {
 				this.btnMove.Checked = true;
 				this.btnDefineArea.Checked = false;
+				this.btnAddReduced.Checked = false;
+				this.btnDelReduced.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_AREA) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = true;
+				this.btnAddReduced.Checked = false;
+				this.btnDelReduced.Checked = false;
+				this.btnAddRz.Checked = false;
+				this.btnDelRz.Checked = false;
+			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_RED) {
+				this.btnMove.Checked = false;
+				this.btnDefineArea.Checked = false;
+				this.btnAddReduced.Checked = true;
+				this.btnDelReduced.Checked = false;
+				this.btnAddRz.Checked = false;
+				this.btnDelRz.Checked = false;
+			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_DEL_RED) {
+				this.btnMove.Checked = false;
+				this.btnDefineArea.Checked = false;
+				this.btnAddReduced.Checked = false;
+				this.btnDelReduced.Checked = true;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_RZ) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
+				this.btnAddReduced.Checked = false;
+				this.btnDelReduced.Checked = false;
 				this.btnAddRz.Checked = true;
 				this.btnDelRz.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_DEL_RZ) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
+				this.btnAddReduced.Checked = false;
+				this.btnDelReduced.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = true;
 			} else {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
+				this.btnAddReduced.Checked = false;
+				this.btnDelReduced.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
 			}

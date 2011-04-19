@@ -30,6 +30,7 @@ namespace Europlan.Common.Products {
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
+			this.btnDefineArea = new System.Windows.Forms.ToolStripButton();
 			this.btnAddRz = new System.Windows.Forms.ToolStripButton();
 			this.btnDelRz = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
@@ -126,7 +127,8 @@ namespace Europlan.Common.Products {
 			this.label1 = new System.Windows.Forms.Label();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.eurovalPlanner = new Europlan.Common.EurovalPlanner(this.components);
-			this.btnDefineArea = new System.Windows.Forms.ToolStripButton();
+			this.btnAddReduced = new System.Windows.Forms.ToolStripButton();
+			this.btnDelReduced = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -142,6 +144,8 @@ namespace Europlan.Common.Products {
             this.toolStripSeparator1,
             this.btnMove,
             this.btnDefineArea,
+            this.btnAddReduced,
+            this.btnDelReduced,
             this.btnAddRz,
             this.btnDelRz});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
@@ -190,6 +194,16 @@ namespace Europlan.Common.Products {
 			this.btnMove.Text = "Plan verschieben";
 			this.btnMove.ToolTipText = "Plan verschieben";
 			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+			// 
+			// btnDefineArea
+			// 
+			this.btnDefineArea.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnDefineArea.Image = ((System.Drawing.Image)(resources.GetObject("btnDefineArea.Image")));
+			this.btnDefineArea.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDefineArea.Name = "btnDefineArea";
+			this.btnDefineArea.Size = new System.Drawing.Size(23, 22);
+			this.btnDefineArea.Text = "Fläche definieren";
+			this.btnDefineArea.Click += new System.EventHandler(this.btnDefineArea_Click);
 			// 
 			// btnAddRz
 			// 
@@ -1211,15 +1225,25 @@ namespace Europlan.Common.Products {
 			this.eurovalPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.eurovalPlanner_ModeChanged);
 			this.eurovalPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.europlanPlanner_ProjectChanged);
 			// 
-			// btnDefineArea
+			// btnAddReduced
 			// 
-			this.btnDefineArea.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnDefineArea.Image = ((System.Drawing.Image)(resources.GetObject("btnDefineArea.Image")));
-			this.btnDefineArea.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnDefineArea.Name = "btnDefineArea";
-			this.btnDefineArea.Size = new System.Drawing.Size(23, 22);
-			this.btnDefineArea.Text = "Fläche definieren";
-			this.btnDefineArea.Click += new System.EventHandler(this.btnDefineArea_Click);
+			this.btnAddReduced.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddReduced.Image = ((System.Drawing.Image)(resources.GetObject("btnAddReduced.Image")));
+			this.btnAddReduced.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddReduced.Name = "btnAddReduced";
+			this.btnAddReduced.Size = new System.Drawing.Size(23, 22);
+			this.btnAddReduced.Text = "Fläche mit red. Heiz-/Kühlleistung hinzufügen";
+			this.btnAddReduced.Click += new System.EventHandler(this.btnAddReduced_Click);
+			// 
+			// btnDelReduced
+			// 
+			this.btnDelReduced.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnDelReduced.Image = ((System.Drawing.Image)(resources.GetObject("btnDelReduced.Image")));
+			this.btnDelReduced.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDelReduced.Name = "btnDelReduced";
+			this.btnDelReduced.Size = new System.Drawing.Size(23, 22);
+			this.btnDelReduced.Text = "Fläche mit red. Heiz-/Kühlleistung löschen";
+			this.btnDelReduced.Click += new System.EventHandler(this.btnDelReduced_Click);
 			// 
 			// EurovalPlannerForm
 			// 
@@ -1349,5 +1373,7 @@ namespace Europlan.Common.Products {
 		private NumericBox numRim;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.ToolStripButton btnDefineArea;
+		private System.Windows.Forms.ToolStripButton btnAddReduced;
+		private System.Windows.Forms.ToolStripButton btnDelReduced;
 	}
 }

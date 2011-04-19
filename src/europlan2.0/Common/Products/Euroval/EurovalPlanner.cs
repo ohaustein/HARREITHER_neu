@@ -20,7 +20,9 @@ namespace Europlan.Common {
 			EVM_NONE,
 			EVM_ADD_AREA,
 			EVM_ADD_RZ,
-			EVM_DEL_RZ
+			EVM_DEL_RZ,
+			EVM_ADD_RED,
+			EVM_DEL_RED
 		}
 
 		public EurovalPlanner() {
@@ -29,7 +31,6 @@ namespace Europlan.Common {
 
 		public EurovalPlanner(IContainer container) {
 			container.Add(this);
-
 			InitializeComponent();
 		}
 
@@ -103,13 +104,29 @@ namespace Europlan.Common {
 		}
 
 		private void connectedPlanPanel_KeyDown(object sender, KeyEventArgs e) {
-			if (this.mode == EurovalMode.EVM_ADD_RZ || this.mode == EurovalMode.EVM_DEL_RZ) {
+			if (this.mode == EurovalMode.EVM_ADD_RZ || this.mode == EurovalMode.EVM_DEL_RZ || this.mode == EurovalMode.EVM_DEL_RED) {
 			    if (e.KeyCode == Keys.Escape) {
 					this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
 					this.Mode = EurovalMode.EVM_NONE;
 					this.connectedPlanPanel.InvalidateGraphics();
+					if (this.ModeChanged != null) {
+						this.ModeChanged(this, EventArgs.Empty);
+					}
 			    }
-			}
+			} else if (this.mode == EurovalMode.EVM_ADD_AREA || this.mode == EurovalMode.EVM_ADD_RED) {
+				if (e.KeyCode == Keys.Escape) {
+					if (MessageBox.Show("Wollen Sie das Definieren der Fläche abbrechen?", "Abbrechen?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+						this.inDesign = false;
+						this.coordsPickedSoFar.Clear();
+						this.Mode = EurovalMode.EVM_NONE;
+						this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
+						this.ConnectedPlanPanel.InvalidateGraphics();
+						if (this.ModeChanged != null) {
+							this.ModeChanged(this, EventArgs.Empty);
+						}
+					}
+				}
+			} 
 		}
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
@@ -159,14 +176,47 @@ namespace Europlan.Common {
 					fillPath.Dispose();
 				}
 
+				// paint rim
+				path.Reset();
+				transformedPoints.Clear();
+				if (this.product.PlannedRimLength > 0) {
+					path.StartFigure();
+					PointF[] array = new PointF[this.product.PlannedAreaGraphical.Count];
+					int i = 0;
+					foreach (Point2D point in this.product.PlannedAreaGraphical) {
+						Point2D tmp = additionalTransformation.TransformTo2D(point);
+						array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
+					}
+					path.AddPolygon(array);
+					path.CloseFigure();
+					Brush rzBrush = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.Percent30, Color.FromArgb(255, Color.Red), Color.FromArgb(0, Color.Red));
+					foreach (Segment2D rimSegment in this.product.PlannedRimSegments) {
+						float width = this.product.PlannedRimWidth > 0 ? this.product.PlannedRimWidth : 5.0f;
+						Pen pen = new Pen(rzBrush, (float)((width * 2.0 / 100.0) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * Math.Abs(additionalTransformation.M00)));
+						Region oldClip = g.Clip;
+						g.Clip = new Region(path);
+						Point2D start = additionalTransformation.TransformTo2D(rimSegment.Start);
+						Point2D end = additionalTransformation.TransformTo2D(rimSegment.End);
+						g.DrawLine(pen, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
+						g.Clip = oldClip;
+					}
+				}
+
 				path.Reset();
 				transformedPoints.Clear();
 				if (coordsPickedSoFar.Count > 0 && inDesign) {
+					List<Point2D> border = new List<Point2D>();
+					if (this.Mode == EurovalMode.EVM_ADD_AREA) {
+						border = this.product.AssociatedRoom.RoomCoordinates;
+					} else {
+						border = this.product.PlannedAreaGraphical;
+					}
+
 					List<Point2D> points = new List<Point2D>(coordsPickedSoFar);
 					Point2D pos = new Point2D((float)mousePositionInPlan.X, (float)mousePositionInPlan.Y);
-					if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, pos) != Point2D.Zero) {
-						pos = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, pos);
-						foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+					if (GetSnapPoint(border, pos) != Point2D.Zero) {
+						pos = GetSnapPoint(border, pos);
+						foreach (Point2D point in border) {
 							Segment2D line = new Segment2D(point, pos);
 							if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 								pos = point;
@@ -207,15 +257,16 @@ namespace Europlan.Common {
 						b = new SolidBrush(c);
 						g.FillPath(b, path);
 						g.DrawPath(new Pen(b), path);
-					} 
-					// else if (this.Mode == RoomPickerMode.RPM_PICK_UNUSED) {
-					//    Color c = Color.FromArgb(0, Color.Red);
-					//    Color c2 = Color.FromArgb(128, Color.White);
-					//    b = new HatchBrush(HatchStyle.BackwardDiagonal, c2, c);
-					//    g.FillPath(b, path);
-					//    b = new SolidBrush(c2);
-					//    g.DrawPath(new Pen(b), path);
-					//}
+					} else if (this.Mode == EurovalMode.EVM_ADD_RED) {
+						c = Color.Black;
+						if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
+							c = Color.White;
+						}
+						b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.LargeGrid, Color.FromArgb(128, c), Color.FromArgb(112, c));
+						g.FillPath(b, path);
+						b = new SolidBrush(c);
+						g.DrawPath(new Pen(b), path);
+					}
 				}
 
 				// paint product
@@ -259,32 +310,6 @@ namespace Europlan.Common {
 					}
 				}
 
-				// paint rim
-				path.Reset();
-				transformedPoints.Clear();
-				if (this.product.PlannedRimLength > 0) {
-					path.StartFigure();
-					PointF[] array = new PointF[this.product.PlannedAreaGraphical.Count];
-					int i = 0;
-					foreach (Point2D point in this.product.PlannedAreaGraphical) {
-						Point2D tmp = additionalTransformation.TransformTo2D(point);
-						array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
-					}
-					path.AddPolygon(array);
-					path.CloseFigure();
-					Brush rzBrush = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.Percent30, Color.FromArgb(255, Color.Red), Color.FromArgb(0, Color.Red));
-					foreach (Segment2D rimSegment in this.product.PlannedRimSegments) {
-						float width = this.product.PlannedRimWidth > 0 ? this.product.PlannedRimWidth : 5.0f;
-						Pen pen = new Pen(rzBrush, (float)((width * 2.0 / 100.0) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * Math.Abs(additionalTransformation.M00)));
-						Region oldClip = g.Clip;
-						g.Clip = new Region(path);
-						Point2D start = additionalTransformation.TransformTo2D(rimSegment.Start);
-						Point2D end = additionalTransformation.TransformTo2D(rimSegment.End);
-						g.DrawLine(pen, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
-						g.Clip = oldClip;
-					}
-				}
-
 				if (this.product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
 					List<PointF> unusedPoints = new List<PointF>();
 					foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.RoomUnusedAreaCoordinates) {
@@ -301,6 +326,25 @@ namespace Europlan.Common {
 						g.DrawPolygon(new Pen(c), pointArray);
 						g.FillPolygon(b, pointArray);
 						unusedPoints.Clear();
+					}
+				}
+
+				if (this.product.PlannedReducedAreas.Count > 0) {
+					List<PointF> reducedPoints = new List<PointF>();
+					foreach (List<Point2D> reducedArea in this.product.PlannedReducedAreas) {
+						foreach (Point2D point in reducedArea) {
+							Point2D tmp = additionalTransformation.TransformTo2D(point);
+							reducedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
+						}
+						PointF[] pointArray = reducedPoints.ToArray();
+						c = Color.Black;
+						if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
+							c = Color.White;
+						}
+						b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.LargeGrid, Color.FromArgb(128, c), Color.FromArgb(112, c));
+						g.DrawPolygon(new Pen(c), pointArray);
+						g.FillPolygon(b, pointArray);
+						reducedPoints.Clear();
 					}
 				}
 
@@ -375,14 +419,20 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			if (this.Mode != EurovalMode.EVM_ADD_AREA && button == MouseButtons.Right) {
+			if (this.Mode != EurovalMode.EVM_ADD_AREA && this.Mode != EurovalMode.EVM_ADD_RED && button == MouseButtons.Right) {
 				rzStart = Point2D.Zero;
 				this.Mode = EurovalMode.EVM_NONE;
 				this.connectedPlanPanel.InvalidateGraphics();
 				return true;
 			}
 
-			if (this.Mode == EurovalMode.EVM_ADD_AREA) {
+			if (this.Mode == EurovalMode.EVM_ADD_AREA || this.Mode == EurovalMode.EVM_ADD_RED) {
+				List<Point2D> border = new List<Point2D>();
+				if (this.Mode == EurovalMode.EVM_ADD_AREA) {
+					border = this.product.AssociatedRoom.RoomCoordinates;
+				} else {
+					border = this.product.PlannedAreaGraphical;
+				}
 				PointF pos = new PointF((float)planPoint.X, (float)planPoint.Y);
 
 				Point2D normalizedPoint = planPoint;
@@ -392,25 +442,25 @@ namespace Europlan.Common {
 				bool snapFound = false;
 				if (coordsPickedSoFar.Count > 0 && (this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
 					if (coordsPickedSoFar.Count == 1) {
-						if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint) != Point2D.Zero) {
-							normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint);
+						if (GetSnapPoint(border, normalizedPoint) != Point2D.Zero) {
+							normalizedPoint = GetSnapPoint(border, normalizedPoint);
 							snapFound = true;
 						} else {
 							normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[0], null, normalizedPoint);
 						}
 					} else if (coordsPickedSoFar.Count == 2) {
-						if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates,normalizedPoint) != Point2D.Zero) {
-							normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint);
+						if (GetSnapPoint(border, normalizedPoint) != Point2D.Zero) {
+							normalizedPoint = GetSnapPoint(border, normalizedPoint);
 							snapFound = true;
 						} else {
 							normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[coordsPickedSoFar.Count - 1], coordsPickedSoFar[0], normalizedPoint);
 						}
 					} else {
 						bool isStart;
-						if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint) != Point2D.Zero) {
-							normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint);
+						if (GetSnapPoint(border, normalizedPoint) != Point2D.Zero) {
+							normalizedPoint = GetSnapPoint(border, normalizedPoint);
 							snapFound = true;
-							foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+							foreach (Point2D point in border) {
 								Segment2D line = new Segment2D(point, normalizedPoint);
 								if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 									normalizedPoint = point;
@@ -425,14 +475,14 @@ namespace Europlan.Common {
 						finishPick = finishPick || (pick && isStart);
 					}
 				} else {
-					if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint) != Point2D.Zero) {
-						normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint);
+					if (GetSnapPoint(border, normalizedPoint) != Point2D.Zero) {
+						normalizedPoint = GetSnapPoint(border, normalizedPoint);
 						snapFound = true;
 					}
 				}
 
 				if (snapFound) {
-					foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+					foreach (Point2D point in border) {
 						Segment2D line = new Segment2D(point, normalizedPoint);
 						if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 							normalizedPoint = point;
@@ -441,7 +491,7 @@ namespace Europlan.Common {
 					}
 				}
 
-				if (!this.AreaIsValid(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint)) {
+				if (!this.AreaIsValid(border, normalizedPoint)) {
 					return false;
 				}
 
@@ -501,7 +551,6 @@ namespace Europlan.Common {
 										}
 										this.product.PlannedAreaUnheated = (float)area;
 									}
-
 								}								
 								unsavedChanges = true;
 								this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
@@ -510,11 +559,68 @@ namespace Europlan.Common {
 									this.ModeChanged(this, EventArgs.Empty);
 								}
 							}
-						} 
-						//else if (this.Mode == RoomPickerMode.RPM_PICK_UNUSED) {
-						//    unusedCoordinates.Add(new List<Point2D>(coordsPickedSoFar));
-						//    unsavedChanges = true;
-						//}
+						} else if (this.Mode == EurovalMode.EVM_ADD_RED) {
+							Polygon2D prod = new Polygon2D(this.product.PlannedAreaGraphical);
+							if (prod.IsClockwise()) {
+								prod.Reverse();
+							}
+							Polygon2D reduced = new Polygon2D(coordsPickedSoFar);
+							if (reduced.IsClockwise()) {
+								reduced.Reverse();
+							}
+							List<Polygon2D> list1 = new List<Polygon2D>();
+							list1.Add(prod);
+							List<Polygon2D> list2 = new List<Polygon2D>();
+							list2.Add(reduced);
+
+							try {
+								IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+								if (clippedPolygons.Count > 0) {
+									list1.Clear();
+									if (clippedPolygons[0].IsClockwise()) {
+										clippedPolygons[0].Reverse();
+									}
+									list1.Add(clippedPolygons[0]);
+									list2.Clear();
+									foreach (List<Point2D> redArea in this.product.PlannedReducedAreas) {
+										Polygon2D poly = new Polygon2D(redArea);
+										if (poly.IsClockwise()) {
+											poly.Reverse();
+										}
+										list2.Add(poly);
+									}
+									if (list2.Count > 0) {
+										try {
+											IList<Polygon2D> clippedPolygons2 = Polygon2D.GetDifference(list1, list2);
+											if (clippedPolygons2.Count > 0) {
+												this.product.PlannedReducedAreas.Add(new List<Point2D>(clippedPolygons2[0]));
+											}
+										} catch (Exception /*ex*/) {
+											this.product.PlannedReducedAreas.Add(new List<Point2D>(clippedPolygons[0]));
+										}
+									} else {
+										this.product.PlannedReducedAreas.Add(new List<Point2D>(clippedPolygons[0]));
+									}
+
+									double area = 0;
+									foreach (List<Point2D> reducedArea in this.product.PlannedReducedAreas) {
+										Polygon2D poly = new Polygon2D(reducedArea);
+										area += Math.Round(Math.Abs(poly.GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
+									}
+
+									this.product.PlannedAreaReduced = (float)area;
+								}
+							} catch (Exception /*ex*/) {
+								return true;
+							}					
+
+							unsavedChanges = true;
+							//this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
+							//this.Mode = EurovalMode.EVM_NONE;
+							//if (ModeChanged != null) {
+							//    this.ModeChanged(this, EventArgs.Empty);
+							//}
+						}
 					}
 					coordsPickedSoFar.Clear();
 					inDesign = false;
@@ -588,20 +694,46 @@ namespace Europlan.Common {
 					this.ProjectChanged(this);
 				}
 				return true;
+			} else if (this.Mode == EurovalMode.EVM_DEL_RED) {
+				if (button == MouseButtons.Left) {
+					List<Point2D> areaToDelete = null;
+					foreach (List<Point2D> reducedArea in this.product.PlannedReducedAreas) {
+						Polygon2D reducedPoly = new Polygon2D(reducedArea);
+						if (reducedPoly.IsInside(planPoint)) {
+							areaToDelete = reducedArea;
+							break;
+						}
+					}
+					if (areaToDelete != null) {
+						this.product.PlannedReducedAreas.Remove(areaToDelete);
+						double area = 0;
+						foreach (List<Point2D> reducedArea in this.product.PlannedReducedAreas) {
+							Polygon2D poly = new Polygon2D(reducedArea);
+							area += Math.Round(Math.Abs(poly.GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
+						}
+						this.product.PlannedAreaReduced = (float)area;
+						return true;
+					}
+				}
 			}
 			return false;
 		}
 
 		private bool Reset() {
-			DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Fläche verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
-			if (result == DialogResult.No) {
-				return false;
+			if (this.Mode == EurovalMode.EVM_ADD_AREA) {
+				DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Fläche verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+				if (result == DialogResult.No) {
+					return false;
+				}
+				this.product.PlannedAreaGraphical.Clear();
+				this.product.PlannedRimSegments.Clear();
+				this.product.PlannedRimLength = 0;
+				this.product.PlannedRimCorners = 0;
+				this.connectedPlanPanel.InvalidateGraphics();
+				return true;
+			} else if (this.Mode == EurovalMode.EVM_ADD_RED) {
+				return true;
 			}
-			this.product.PlannedAreaGraphical.Clear();
-			this.product.PlannedRimSegments.Clear();
-			this.product.PlannedRimLength = 0;
-			this.product.PlannedRimCorners = 0;
-			this.connectedPlanPanel.InvalidateGraphics();
 			return true;
 		}
 
@@ -609,16 +741,37 @@ namespace Europlan.Common {
 			// TODO
 			if (this.Mode == EurovalMode.EVM_ADD_RZ) {
 				return true;
-			} else if (this.Mode == EurovalMode.EVM_ADD_AREA) {
+			} else if (this.Mode == EurovalMode.EVM_DEL_RED) {
+				bool ok = false;
+				foreach (List<Point2D> reducedArea in product.PlannedReducedAreas) {
+					Polygon2D polygon = new Polygon2D(reducedArea);
+					if (polygon.IsInside(planPoint)) {
+						ok = true;
+					}
+				}
+				if (ok) {
+					this.ConnectedPlanPanel.PlanCursor = Cursors.Hand;
+				} else {
+					this.ConnectedPlanPanel.PlanCursor = Cursors.No;
+				}
+				return false;
+			} else if (this.Mode == EurovalMode.EVM_ADD_AREA || this.Mode == EurovalMode.EVM_ADD_RED) {
+				List<Point2D> border = new List<Point2D>();
+				if (this.Mode == EurovalMode.EVM_ADD_AREA) {
+					border = this.product.AssociatedRoom.RoomCoordinates;
+				} else {
+					border = this.product.PlannedAreaGraphical;
+				}
+				
 				Point2D normalizedPoint = planPoint;
 				bool isStart = false;
 				if (coordsPickedSoFar.Count == 0) {
 					bool snapFound = false;
-					if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, planPoint) != Point2D.Zero) {
-						normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, planPoint);
+					if (GetSnapPoint(border, planPoint) != Point2D.Zero) {
+						normalizedPoint = GetSnapPoint(border, planPoint);
 						snapFound = true;
 					}
-					foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+					foreach (Point2D point in border) {
 						Segment2D line = new Segment2D(point, normalizedPoint);
 						if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 							normalizedPoint = point;
@@ -626,9 +779,9 @@ namespace Europlan.Common {
 							break;
 						}
 					}
-				} else if (GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, planPoint) != Point2D.Zero) {
-					normalizedPoint = GetSnapPoint(this.product.AssociatedRoom.RoomCoordinates, planPoint);
-					foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+				} else if (GetSnapPoint(border, planPoint) != Point2D.Zero) {
+					normalizedPoint = GetSnapPoint(border, planPoint);
+					foreach (Point2D point in border) {
 						Segment2D line = new Segment2D(point, normalizedPoint);
 						if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 							normalizedPoint = point;
@@ -647,7 +800,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				if (AreaIsValid(this.product.AssociatedRoom.RoomCoordinates, normalizedPoint)) {
+				if (AreaIsValid(border, normalizedPoint)) {
 					this.ConnectedPlanPanel.PlanCursor = isStart ? Cursors.Hand : Cursors.Cross;
 				} else {
 					this.ConnectedPlanPanel.PlanCursor = Cursors.No;
