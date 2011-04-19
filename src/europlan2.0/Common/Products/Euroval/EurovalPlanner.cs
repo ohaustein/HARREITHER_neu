@@ -592,8 +592,8 @@ namespace Europlan.Common {
 									if (list2.Count > 0) {
 										try {
 											IList<Polygon2D> clippedPolygons2 = Polygon2D.GetDifference(list1, list2);
-											if (clippedPolygons2.Count > 0) {
-												this.product.PlannedReducedAreas.Add(new List<Point2D>(clippedPolygons2[0]));
+											foreach (Polygon2D poly in clippedPolygons2) {
+												this.product.PlannedReducedAreas.Add(new List<Point2D>(poly));
 											}
 										} catch (Exception /*ex*/) {
 											this.product.PlannedReducedAreas.Add(new List<Point2D>(clippedPolygons[0]));
