@@ -235,7 +235,14 @@
     <Compile Include="Plan\ExportPlanForm.Designer.cs">
       <DependentUpon>ExportPlanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\GraphicalWallPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Plan\GraphicalWallPanel.Designer.cs">
+      <DependentUpon>GraphicalWallPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plan\IDragableObject.cs" />
+    <Compile Include="Plan\IGraphicalWallObstacle.cs" />
     <Compile Include="Plan\IPickableObject.cs" />
     <Compile Include="Plan\PlanPanel.cs">
       <SubType>UserControl</SubType>
@@ -298,6 +305,7 @@
       <DependentUpon>EurovalPlannerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\ExtendedCorrections.cs" />
+    <Compile Include="Plan\GraphicalWall.cs" />
     <Compile Include="Products\KlimaFlaechenModulVerbindung.cs" />
     <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenConstructionStaffeln.cs" />
     <Compile Include="Products\ModulKlimaBoden\ModulKlimaBodenPlanner.cs">
@@ -754,6 +762,10 @@
     <EmbeddedResource Include="Plan\ExportPlanForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ExportPlanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plan\GraphicalWallPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GraphicalWallPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Plan\PlanPanel.resx">
       <SubType>Designer</SubType>
