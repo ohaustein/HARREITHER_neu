@@ -8,8 +8,9 @@ namespace Europlan.Common {
 
 	public class GraphicalWall {
 
-		private GraphicalWall nextWall = null;
-		private GraphicalWall prevWall = null;
+		private string id = Guid.NewGuid().ToString();
+		private string nextWallId = null;
+		private string prevWallId = null;
 		private Point2D planStartPoint = Point2D.Zero;
 		private Point2D planEndPoint = Point2D.Zero;
 		private List<Point2D> ceilingContour = new List<Point2D>();
@@ -21,15 +22,28 @@ namespace Europlan.Common {
 
 		}
 
-		public GraphicalWall NextWall {
-			get { return nextWall; }
-			set { nextWall = value; }
+		public string Id {
+			get { return id; }
+			set { id = value; }
 		}
 
-		public GraphicalWall PrevWall {
-			get { return prevWall; }
-			set { prevWall = value; }
+		public string PrevWallId {
+			get { return prevWallId; }
+			set { prevWallId = value; }
 		}
+
+		public string NextWallId {
+			get { return nextWallId; }
+			set { nextWallId = value; }
+		}
+
+		//public GraphicalWall NextWall {
+		//    get { return nextWall; }
+		//}
+
+		//public GraphicalWall PrevWall {
+		//    get { return prevWall; }
+		//}
 
 		public Point2D PlanStartPoint {
 			get { return planStartPoint; }
