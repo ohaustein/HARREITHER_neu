@@ -242,7 +242,7 @@
       <DependentUpon>GraphicalWallPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Plan\IDragableObject.cs" />
-    <Compile Include="Plan\IGraphicalWallObstacle.cs" />
+    <Compile Include="Plan\GraphicalWallObstacle.cs" />
     <Compile Include="Plan\IPickableObject.cs" />
     <Compile Include="Plan\PlanPanel.cs">
       <SubType>UserControl</SubType>
