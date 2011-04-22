@@ -14,7 +14,7 @@ namespace Europlan.Common {
 		private Point2D planEndPoint = Point2D.Zero;
 		private List<Point2D> ceilingContour = new List<Point2D>();
 		private string wallId = "";
-		private List<IGraphicalWallObstacle> obstacles = new List<IGraphicalWallObstacle>();
+		private List<GraphicalWallObstacle> obstacles = new List<GraphicalWallObstacle>();
 		private GraphicalWall dachSchraege = null;
 
 		public GraphicalWall() {
@@ -46,7 +46,7 @@ namespace Europlan.Common {
 			set { ceilingContour = value; }
 		}
 
-		public List<IGraphicalWallObstacle> Obstacles {
+		public List<GraphicalWallObstacle> Obstacles {
 			get { return obstacles; }
 			set { obstacles = value; }
 		}

@@ -1342,6 +1342,10 @@ namespace Europlan.Common {
 		public override double Viskositaet {
 			get { return HithermProduct.ConfigV; }
 		}
+
+		public void ResetProduct() {
+			// TODO
+		}
 	}
 	
 }

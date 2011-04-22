@@ -69,6 +69,10 @@ namespace Europlan.Common {
 			this.numHeatLoad = new Europlan.Common.NumericBox();
 			this.lblHeatLoadTxt = new System.Windows.Forms.Label();
 			this.groupBox11 = new System.Windows.Forms.GroupBox();
+			this.panel3 = new System.Windows.Forms.Panel();
+			this.rbLayoutTable = new System.Windows.Forms.RadioButton();
+			this.rbLayoutGraphical = new System.Windows.Forms.RadioButton();
+			this.lblLayoutType = new System.Windows.Forms.Label();
 			this.lblCalculateMode = new System.Windows.Forms.Label();
 			this.rbHeatAndCool = new System.Windows.Forms.RadioButton();
 			this.rbCool = new System.Windows.Forms.RadioButton();
@@ -164,6 +168,7 @@ namespace Europlan.Common {
 			this.pageInput.SuspendLayout();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox11.SuspendLayout();
+			this.panel3.SuspendLayout();
 			this.pageConstructions.SuspendLayout();
 			this.pageAuslegung.SuspendLayout();
 			this.panel2.SuspendLayout();
@@ -684,6 +689,8 @@ namespace Europlan.Common {
 			// 
 			this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox11.Controls.Add(this.panel3);
+			this.groupBox11.Controls.Add(this.lblLayoutType);
 			this.groupBox11.Controls.Add(this.lblCalculateMode);
 			this.groupBox11.Controls.Add(this.rbHeatAndCool);
 			this.groupBox11.Controls.Add(this.rbCool);
@@ -693,6 +700,47 @@ namespace Europlan.Common {
 			this.groupBox11.Size = new System.Drawing.Size(884, 92);
 			this.groupBox11.TabIndex = 0;
 			this.groupBox11.TabStop = false;
+			// 
+			// panel3
+			// 
+			this.panel3.Controls.Add(this.rbLayoutTable);
+			this.panel3.Controls.Add(this.rbLayoutGraphical);
+			this.panel3.Location = new System.Drawing.Point(511, 12);
+			this.panel3.Name = "panel3";
+			this.panel3.Size = new System.Drawing.Size(200, 70);
+			this.panel3.TabIndex = 10;
+			// 
+			// rbLayoutTable
+			// 
+			this.rbLayoutTable.AutoSize = true;
+			this.rbLayoutTable.Checked = true;
+			this.rbLayoutTable.Location = new System.Drawing.Point(0, 7);
+			this.rbLayoutTable.Name = "rbLayoutTable";
+			this.rbLayoutTable.Size = new System.Drawing.Size(78, 17);
+			this.rbLayoutTable.TabIndex = 2;
+			this.rbLayoutTable.TabStop = true;
+			this.rbLayoutTable.Text = "tabellarisch";
+			this.rbLayoutTable.UseVisualStyleBackColor = true;
+			this.rbLayoutTable.CheckedChanged += new System.EventHandler(this.rbGraphical_CheckedChanged);
+			// 
+			// rbLayoutGraphical
+			// 
+			this.rbLayoutGraphical.AutoSize = true;
+			this.rbLayoutGraphical.Location = new System.Drawing.Point(0, 30);
+			this.rbLayoutGraphical.Name = "rbLayoutGraphical";
+			this.rbLayoutGraphical.Size = new System.Drawing.Size(62, 17);
+			this.rbLayoutGraphical.TabIndex = 3;
+			this.rbLayoutGraphical.Text = "grafisch";
+			this.rbLayoutGraphical.UseVisualStyleBackColor = true;
+			this.rbLayoutGraphical.CheckedChanged += new System.EventHandler(this.rbGraphical_CheckedChanged);
+			// 
+			// lblLayoutType
+			// 
+			this.lblLayoutType.Location = new System.Drawing.Point(419, 21);
+			this.lblLayoutType.Name = "lblLayoutType";
+			this.lblLayoutType.Size = new System.Drawing.Size(151, 13);
+			this.lblLayoutType.TabIndex = 9;
+			this.lblLayoutType.Text = "Auslegungsart:";
 			// 
 			// lblCalculateMode
 			// 
@@ -1617,6 +1665,8 @@ namespace Europlan.Common {
 			this.grpPowerArea.PerformLayout();
 			this.groupBox11.ResumeLayout(false);
 			this.groupBox11.PerformLayout();
+			this.panel3.ResumeLayout(false);
+			this.panel3.PerformLayout();
 			this.pageConstructions.ResumeLayout(false);
 			this.pageAuslegung.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
@@ -1759,5 +1809,9 @@ namespace Europlan.Common {
 		private System.Windows.Forms.RadioButton rbHeat;
 		private System.Windows.Forms.Button btnRestkaelte;
 		private System.Windows.Forms.Button btnRestwaerme;
+		private System.Windows.Forms.Panel panel3;
+		private System.Windows.Forms.RadioButton rbLayoutTable;
+		private System.Windows.Forms.RadioButton rbLayoutGraphical;
+		private System.Windows.Forms.Label lblLayoutType;
 	}
 }
