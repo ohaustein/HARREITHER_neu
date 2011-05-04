@@ -175,6 +175,12 @@ namespace Europlan.Common {
 											// planner.DrawBeplankung = ???
 											// planner.Mode = ???
 											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty);
+										} else if (p is EurovalProduct) {
+											EurovalPlanner planner = new EurovalPlanner();
+											planner.Product = p as EurovalProduct;
+											planner.HighlightRoomCoordinates = false;
+											planner.DrawExpansionGaps = false;
+											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty);
 										}
 										//...
 									}
@@ -243,6 +249,13 @@ namespace Europlan.Common {
 											// planner.DrawBeplankung ???
 											// planner.Mode = ???
 											planner.DrawDxf(model, modulLayer, floorConstructionLayer);
+										} else if (p is EurovalProduct) {
+											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(EurovalProduct), model);
+											EurovalPlanner planner = new EurovalPlanner();
+											planner.Product = p as EurovalProduct;
+											planner.HighlightRoomCoordinates = false;
+											planner.DrawExpansionGaps = false;
+											planner.DrawDxf(model, layer);
 										}
 										//.....
 									}
@@ -254,7 +267,11 @@ namespace Europlan.Common {
 				foreach (DxfLayer layer in layers.Values) {
 					model.Layers.Add(layer);
 				}
-				DxfWriter.Write(txtPath.Text, model);
+				try {
+					DxfWriter.Write(txtPath.Text, model);
+				} catch (Exception ex) {
+					Console.Out.WriteLine(ex.StackTrace);
+				}
 			}
 			this.Close();
 		}
@@ -272,6 +289,7 @@ namespace Europlan.Common {
 					name = key.Name;
 				}
 				name = name.Replace(' ', '_');
+				name = name.Replace("®", "");
 
 				foreach (DxfLayer l in model.Layers) {
 					if (l.Name == name) {

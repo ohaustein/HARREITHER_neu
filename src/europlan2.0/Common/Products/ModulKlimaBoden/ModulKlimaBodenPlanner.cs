@@ -1936,6 +1936,17 @@ namespace Europlan.Common {
 						}
 					}
 				}
+
+				if (this.product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
+					Color gray = Color.Gray;
+					foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.RoomUnusedAreaCoordinates) {
+						Polygon2D polygon = new Polygon2D(unusedArea);
+						DxfPolyline2D polyLine = new DxfPolyline2D(gray, polygon.ToArray());
+						polyLine.Closed = true;
+						polyLine.Layer = modulLayer;
+						model.Entities.Add(polyLine);
+					}
+				}
 			}
 		}
 

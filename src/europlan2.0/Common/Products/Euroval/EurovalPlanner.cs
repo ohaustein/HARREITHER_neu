@@ -1049,10 +1049,185 @@ namespace Europlan.Common {
 
 		public event ProjectChangedHandler ProjectChanged;
 
-		internal void DrawDxf(DxfModel model, DxfLayer modulLayer, DxfLayer floorConstructionLayer) {
-			Matrix4D additionalTransformation = Matrix4D.Identity;
+		internal void DrawDxf(DxfModel model, DxfLayer layer) {
+			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
+				Color c = Color.Red;
+				double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+				List<Polygon2D> clip = new List<Polygon2D>();
 
-			//if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.CeilingCoordinatesToUse != null) {
+				if (this.product.PlannedReducedAreas.Count > 0) {
+					Color gray = Color.Gray;
+					foreach (List<Point2D> reducedArea in this.product.PlannedReducedAreas) {
+						Polygon2D polygon = new Polygon2D(reducedArea);
+						clip.Add(polygon);
+						DxfPolyline2D polyLine = new DxfPolyline2D(gray, polygon.ToArray());
+						polyLine.Closed = true;
+						polyLine.Layer = layer;
+						model.Entities.Add(polyLine);
+
+						DxfHatch hatch = new DxfHatch();
+						hatch.Color = gray;
+						DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+						boundaryPath.Type = BoundaryPathType.Polyline;
+						boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
+						boundaryPath.PolylineData.Closed = true;
+						hatch.BoundaryPaths.Add(boundaryPath);
+
+						hatch.Pattern = new DxfPattern();
+						DxfPattern.Line patternLine = new DxfPattern.Line();
+						patternLine.Angle = Math.PI / 4d;
+						patternLine.Offset = new Vector2D(0.11d * measure, -0.11d * measure);
+						hatch.Pattern.Lines.Add(patternLine);
+
+						hatch.Layer = layer;
+						model.Entities.Add(hatch);
+					}
+				}
+
+				if (this.product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
+					Color gray = Color.Red;
+					foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.RoomUnusedAreaCoordinates) {
+						Polygon2D polygon = new Polygon2D(unusedArea);
+						clip.Add(polygon);
+						DxfPolyline2D polyLine = new DxfPolyline2D(gray, polygon.ToArray());
+						polyLine.Closed = true;
+						polyLine.Layer = layer;
+						model.Entities.Add(polyLine);
+					}
+				}
+
+				if (this.product.PlannedAreaGraphical.Count > 2) {
+					Point2D[] polygon = this.product.PlannedAreaGraphical.ToArray();
+
+					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
+					polyLine.Closed = true;
+					polyLine.Layer = layer;
+					model.Entities.Add(polyLine);
+
+					DxfHatch hatch = new DxfHatch();
+					hatch.Color = c;
+					DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+					boundaryPath.Type = BoundaryPathType.Polyline;
+					boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon);
+					boundaryPath.PolylineData.Closed = true;
+					hatch.BoundaryPaths.Add(boundaryPath);
+
+					foreach (Polygon2D poly in clip) {
+						if (!poly.IsClockwise()) {
+							poly.Reverse();
+						}
+						boundaryPath = new DxfHatch.BoundaryPath();
+						boundaryPath.Type = BoundaryPathType.Polyline;
+						boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(poly);
+						boundaryPath.PolylineData.Closed = true;
+						hatch.BoundaryPaths.Add(boundaryPath);
+					}
+										
+					hatch.Pattern = new DxfPattern();
+					DxfPattern.Line patternLine = new DxfPattern.Line();
+					patternLine.Angle = Math.PI / 4d;
+					patternLine.Offset = new Vector2D(0.3d * measure, -0.3d * measure);
+					hatch.Pattern.Lines.Add(patternLine);
+					//patternLine = new DxfPattern.Line();
+					//patternLine.Angle = 3d * Math.PI / 4d;
+					//patternLine.Offset = new Vector2D(0.02 * measure, 0.02d * measure);
+					//hatch.Pattern.Lines.Add(patternLine);
+
+					hatch.Layer = layer;
+					model.Entities.Add(hatch);
+				}
+
+				// paint rim
+				if (this.product.PlannedRimLength > 0) {
+					Polygon2D product = new Polygon2D(this.product.PlannedAreaGraphical);
+					List<Polygon2D> list1 = new List<Polygon2D>();
+					if (product.IsClockwise()) {
+						product.Reverse();
+					}
+
+
+					Brush rzBrush = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.Percent30, Color.FromArgb(255, Color.Red), Color.FromArgb(0, Color.Red));
+					foreach (Segment2D rimSegment in this.product.PlannedRimSegments) {
+						list1.Clear();
+						list1.Add(product);
+						List<Polygon2D> list2 = new List<Polygon2D>();
+						float width = this.product.PlannedRimWidth > 0 ? this.product.PlannedRimWidth : 5.0f;
+						width = width / 100 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+						Vector2D vector = rimSegment.GetDelta();
+						vector.Normalize();
+						Vector2D norm1 = new Vector2D(-vector.Y, vector.X);
+						Vector2D norm2 = new Vector2D(vector.Y, -vector.X);
+						norm1 *= width;
+						norm2 *= width;
+						Point2D p1 = rimSegment.Start + norm1;
+						Point2D p2 = rimSegment.Start + norm2;
+						Point2D p3 = rimSegment.End + norm2;
+						Point2D p4 = rimSegment.End + norm1;
+
+						Polygon2D rim = new Polygon2D();
+						rim.Add(p1);
+						rim.Add(p2);
+						rim.Add(p3);
+						rim.Add(p4);
+						if (rim.IsClockwise()) {
+							rim.Reverse();
+						}
+						list2.Add(rim);
+
+						IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+						foreach (Polygon2D polygon in clippedPolygons) {
+							//DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
+							//polyLine.Closed = true;
+							//polyLine.Layer = layer;
+							//model.Entities.Add(polyLine);
+							if (polygon.IsClockwise()) {
+								polygon.Reverse();
+							}
+
+							DxfHatch hatch = new DxfHatch();
+							hatch.Color = c;
+							DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+							boundaryPath.Type = BoundaryPathType.Polyline;
+							boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon);
+							boundaryPath.PolylineData.Closed = true;
+							hatch.BoundaryPaths.Add(boundaryPath);
+							
+
+							foreach (Polygon2D poly in clip) {
+								if (poly.IsClockwise()) {
+									poly.Reverse();
+								}
+								list1 = new List<Polygon2D>();
+								list1.Add(polygon);
+								list2 = new List<Polygon2D>();
+								list2.Add(poly);
+								IList<Polygon2D> clipped = Polygon2D.GetIntersection(list1, list2);
+								if (clipped.Count > 0) {
+									foreach (Polygon2D p in clipped) {
+										boundaryPath = new DxfHatch.BoundaryPath();
+										boundaryPath.Type = BoundaryPathType.Polyline;
+										boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(p);
+										boundaryPath.PolylineData.Closed = true;
+										hatch.BoundaryPaths.Add(boundaryPath);
+									}
+								}
+							}
+
+							hatch.Pattern = new DxfPattern();
+							DxfPattern.Line patternLine = new DxfPattern.Line();
+							patternLine.Angle = 3d * Math.PI / 4d;
+							patternLine.Offset = new Vector2D(0.15d * measure, 0.15d * measure);
+							hatch.Pattern.Lines.Add(patternLine);
+							hatch.Layer = layer;
+							model.Entities.Add(hatch);
+						}
+					}
+
+				}
+
+
+
+
 			//    if (this.product.AssociatedRoom.AssociatedPlan != null && this.product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
 			//        if (this.product.GraphConstruction != null) {
 			//            this.product.GraphConstruction.PaintDxf(model, floorConstructionLayer);
@@ -1070,7 +1245,7 @@ namespace Europlan.Common {
 			//            }
 			//        }
 			//    }
-			//}
+			}
 		}
 
 		[DefaultValue(true)]

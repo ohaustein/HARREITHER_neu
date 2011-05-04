@@ -9,6 +9,7 @@ using System.Threading;
 using System.Drawing;
 using System.ComponentModel;
 using Europlan.Licensing;
+using WW.Math;
 
 namespace Europlan.Common {
 
@@ -328,6 +329,7 @@ namespace Europlan.Common {
 
 		public static void Load(string filename) {
 			lock (padlock) {
+				Project old = instance;
 				XmlSerializer s = new XmlSerializer(typeof(Project));
 				Stream r = new FileStream(filename, FileMode.Open);
 				try {
@@ -349,6 +351,70 @@ namespace Europlan.Common {
 				instance.InitializeProductParameters();
 				instance.FinalizeLoading();
 				instance.ProjectFileName = filename;
+
+				if (instance.ImportedPlans.Count > 0) {
+					List<Plan> toDelete = new List<Plan>();
+					foreach (Plan plan in instance.ImportedPlans) {
+						if (!File.Exists(plan.AbsoluteFileName)) {
+							DialogResult result = MessageBox.Show("Beim Laden konnte der folgende Plan nicht gefunden werden: '" + plan.Name + "' (" + plan.AbsoluteFileName + ") Falls der Plan versehentlich aus dem Verzeichnis gelöscht oder verschoben wurde, können Sie ihn erneut importieren. Falls Sie den Plan erneut importieren möchten, klicken Sie auf JA, wenn Sie NEIN auswählen, gehen bereits grafisch ausgelegte Produkte verloren. Erneut importieren?", "Problem beim Laden", MessageBoxButtons.YesNoCancel);
+							if (result == DialogResult.Yes) {
+								OpenFileDialog dialog = new OpenFileDialog();
+								dialog.CheckFileExists = true;
+								dialog.CheckPathExists = true;
+								if (plan is CadPlan) {
+									dialog.DefaultExt = "dxf";
+									dialog.Filter = "CAD|*.dxf;*.dwg";
+								} else if (plan is ImagePlan) {
+									dialog.DefaultExt = Path.GetExtension(plan.AbsoluteFileName);
+									dialog.Filter = dialog.DefaultExt + "|*." + dialog.DefaultExt;
+								}
+								dialog.Multiselect = false;
+								result = dialog.ShowDialog();
+								if (result == DialogResult.OK) {
+									string dir = Path.GetDirectoryName(Project.Instance.ProjectFileName);
+									string subDir = Path.GetFileNameWithoutExtension(Project.Instance.ProjectFileName) + "_plans";
+									dir = Path.Combine(dir, subDir);
+									if (!Directory.Exists(dir)) {
+										Directory.CreateDirectory(dir);
+									}
+									string newFileName = Path.Combine(dir, Path.GetFileName(dialog.FileName));
+									if (!dialog.FileName.Equals(newFileName)) {
+										File.Copy(dialog.FileName, newFileName, true);
+									}
+
+									plan.RelativeFileName = Path.Combine(subDir, Path.GetFileName(dialog.FileName));	
+								}
+								dialog.Dispose();
+							} else if (result == DialogResult.No) {
+								toDelete.Add(plan);
+							} else {
+								instance = old;
+								break;
+							}
+						}
+					}
+					if (toDelete.Count > 0) {
+						foreach (Plan plan in toDelete) {
+							instance.ImportedPlans.Remove(plan);
+							foreach (Floor floor in instance.Floors) {
+								if (floor.AssociatedPlanId == plan.Id) {
+									floor.AssociatedPlanId = null;
+									foreach (Room room in floor.Rooms) {
+										room.RoomCoordinates = new List<Point2D>();
+										room.CeilingCoordinates = new List<Point2D>();
+										room.RoomUnusedAreaCoordinates = new List<List<Point2D>>();
+										room.CeilingUnusedAreaCoordinates = new List<List<Point2D>>();
+										foreach (PlannedProduct pp in room.PlannedProducts) {
+											if (pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
+												pp.Product.GraphicalMode = false;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 			if (ProjectLoaded != null) {
 				Project.ProjectLoaded(Instance);
