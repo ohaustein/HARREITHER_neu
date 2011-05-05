@@ -30,8 +30,8 @@ namespace Europlan.Common {
 		private double startXPos;
 		private double startYPos;
 
-		private double totalWidth = 0;
-		private double totalHeight = 0;
+		//private double totalWidth = 0;
+		//private double totalHeight = 0;
 
 		private Cursor tempCursor;
 
@@ -54,20 +54,9 @@ namespace Europlan.Common {
 			get { return this.room; }
 			set {
 				this.room = value;
-				double totalWidth = 0;
-				double totalHeight = 0;
-				if (this.room != null && this.room.Walls != null) {
-					foreach (GraphicalWall wall in this.room.Walls) {
-						totalWidth += wall.CeilingContour[wall.CeilingContour.Count - 1].X;
-						foreach (Point2D point in wall.CeilingContour) {
-							if (point.Y > totalHeight) {
-								totalHeight = point.Y;
-							}
-						}
-					}
-				}
-				this.totalWidth = totalWidth;
-				this.totalHeight = totalHeight;
+				// quick hack to recalculate correct x and y pos
+				this.XPos = this.XPos;
+				this.YPos = this.YPos;
 			}
 		}
 
@@ -81,14 +70,50 @@ namespace Europlan.Common {
 			set { this.scale = value; }
 		}
 
+		public double TotalWidth {
+			get {
+				double totalWidth = 0;
+				double totalHeight = 0;
+				if (this.room != null && this.room.Walls != null) {
+					foreach (GraphicalWall wall in this.room.Walls) {
+						totalWidth += wall.CeilingContour[wall.CeilingContour.Count - 1].X;
+						foreach (Point2D point in wall.CeilingContour) {
+							if (point.Y > totalHeight) {
+								totalHeight = point.Y;
+							}
+						}
+					}
+				}
+				return totalWidth;
+			}
+		}
+
+		public double TotalHeight {
+			get {
+				double totalWidth = 0;
+				double totalHeight = 0;
+				if (this.room != null && this.room.Walls != null) {
+					foreach (GraphicalWall wall in this.room.Walls) {
+						totalWidth += wall.CeilingContour[wall.CeilingContour.Count - 1].X;
+						foreach (Point2D point in wall.CeilingContour) {
+							if (point.Y > totalHeight) {
+								totalHeight = point.Y;
+							}
+						}
+					}
+				}
+				return totalHeight;
+			}
+		}
+
 		public double XPos {
 			get { return this.xPos; }
 			set {
 				double maxX = 10;
-				double minX = (-totalWidth * 100) + this.Width / this.Scale - 10;
+				double minX = (-TotalWidth * 100) + this.Width / this.Scale - 10;
 				if (maxX < minX) {
 					// center
-					this.xPos = (this.Width / this.Scale - (totalWidth + 0.2) * 100) / 2.0;
+					this.xPos = (this.Width / this.Scale - (TotalWidth + 0.2) * 100) / 2.0;
 				} else {
 					if (value > maxX) {
 						this.xPos = maxX;
@@ -105,10 +130,10 @@ namespace Europlan.Common {
 			get { return this.yPos; }
 			set {
 				double maxY = - this.Height / this.Scale + 10;
-				double minY = -totalHeight * 100 - 10;
+				double minY = -TotalHeight * 100 - 10;
 				if (maxY < minY) {
 					// center
-					this.yPos = -(this.Height / this.Scale) + (-totalHeight * 100 + (this.Height) / this.Scale) / 2.0;
+					this.yPos = -(this.Height / this.Scale) + (-TotalHeight * 100 + (this.Height) / this.Scale) / 2.0;
 				} else {
 					if (value > maxY) {
 						this.yPos = maxY;
@@ -119,13 +144,6 @@ namespace Europlan.Common {
 					}
 				}
 				Console.WriteLine(this.yPos);
-				//if (value > 0/* || totalHeight * 100 * this.Scale < this.Height*/) {
-				//	this.yPos = 0;
-				//} else if (value < (-totalHeight * 100) + this.Height / this.Scale - 20) {
-				//	this.yPos = (-totalHeight * 100) + this.Height / this.Scale - 20;
-				//} else {
-					//this.yPos = value;
-				//}
 			}
 		}
 
@@ -220,11 +238,20 @@ namespace Europlan.Common {
 		}
 
 		public void InvalidateGraphics() {
+			// quick hack to recalculate correct x and y pos
+			this.XPos = this.XPos;
+			this.YPos = this.YPos;
+
 			this.Invalidate();
 		}
 
 		protected override void OnSizeChanged(EventArgs e) {
 			base.OnSizeChanged(e);
+
+			// quick hack to recalculate correct x and y pos
+			this.XPos = this.XPos;
+			this.YPos = this.YPos;
+
 			this.InvalidateGraphics();
 		}
 
