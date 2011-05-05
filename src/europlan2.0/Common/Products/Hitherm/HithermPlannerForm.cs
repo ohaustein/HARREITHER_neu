@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using WW.Math;
 using WW.Math.Geometry;
+using Star.SettingsXpress;
 
 namespace Europlan.Common {
 	public partial class HithermPlannerForm : Form {
