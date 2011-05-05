@@ -34,13 +34,19 @@ namespace Europlan.Common {
 			this.btnDeleteConnection = new System.Windows.Forms.ToolStripButton();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.planPanel = new Europlan.Common.PlanPanel();
-			this.connectionPlanner1 = new Europlan.Common.ConnectionPlanner(this.components);
+			this.connectionPlanner = new Europlan.Common.ConnectionPlanner(this.components);
+			this.btnBoden = new System.Windows.Forms.ToolStripButton();
+			this.btnDecke = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip
 			// 
 			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnBoden,
+            this.btnDecke,
+            this.toolStripSeparator2,
             this.btnZoomOut,
             this.btnZoomIn,
             this.toolStripSeparator1,
@@ -120,13 +126,42 @@ namespace Europlan.Common {
 			this.planPanel.Location = new System.Drawing.Point(0, 25);
 			this.planPanel.Name = "planPanel";
 			this.planPanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
-			this.planPanel.ProductPlanner = this.connectionPlanner1;
+			this.planPanel.ProductPlanner = this.connectionPlanner;
 			this.planPanel.Size = new System.Drawing.Size(892, 440);
 			this.planPanel.TabIndex = 0;
 			// 
-			// connectionPlanner1
+			// connectionPlanner
 			// 
-			this.connectionPlanner1.Mode = Europlan.Common.ConnectionPlanner.ConnectionMode.CM_NONE;
+			this.connectionPlanner.Mode = Europlan.Common.ConnectionPlanner.ConnectionMode.CM_NONE;
+			this.connectionPlanner.PlanCeiling = false;
+			this.connectionPlanner.PlanFloor = true;
+			// 
+			// btnBoden
+			// 
+			this.btnBoden.Checked = true;
+			this.btnBoden.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.btnBoden.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnBoden.Image = ((System.Drawing.Image)(resources.GetObject("btnBoden.Image")));
+			this.btnBoden.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnBoden.Name = "btnBoden";
+			this.btnBoden.Size = new System.Drawing.Size(45, 22);
+			this.btnBoden.Text = "Boden";
+			this.btnBoden.Click += new System.EventHandler(this.btnBoden_Click);
+			// 
+			// btnDecke
+			// 
+			this.btnDecke.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnDecke.Image = ((System.Drawing.Image)(resources.GetObject("btnDecke.Image")));
+			this.btnDecke.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDecke.Name = "btnDecke";
+			this.btnDecke.Size = new System.Drawing.Size(43, 22);
+			this.btnDecke.Text = "Decke";
+			this.btnDecke.Click += new System.EventHandler(this.btnDecke_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
 			// 
 			// ConnectionPlannerForm
 			// 
@@ -157,6 +192,9 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ColorDialog colorDialog;
 		private System.Windows.Forms.ToolStripButton btnConnections;
 		private System.Windows.Forms.ToolStripButton btnDeleteConnection;
-		private ConnectionPlanner connectionPlanner1;
+		private ConnectionPlanner connectionPlanner;
+		private System.Windows.Forms.ToolStripButton btnBoden;
+		private System.Windows.Forms.ToolStripButton btnDecke;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 	}
 }

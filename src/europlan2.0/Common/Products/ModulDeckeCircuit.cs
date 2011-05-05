@@ -12,6 +12,8 @@ namespace Europlan.Common {
 		private List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
 		private Color circuitColor = Color.FromArgb(0, 128, 0);
 
+		private List<KlimaFlaechenSubAreaVerbindung> verbindungen = null;
+
 		public ModulDeckeCircuit() {
 			// A circuit needs to have at least one subarea so add this subarea by default,
 			// if this circuit is deserialized this subarea will be deleted again in FinalizeLoading
@@ -43,7 +45,7 @@ namespace Europlan.Common {
 				}
 			}
 		}
-
+		
 		private PlannedProduct plannedProduct = null;
 
 		[XmlIgnore]
@@ -456,6 +458,78 @@ namespace Europlan.Common {
 		public int CircuitColorB {
 			get { return this.circuitColor.B; }
 			set { this.circuitColor = Color.FromArgb(this.circuitColor.R, this.circuitColor.G, value); }
+		}
+
+		public List<KlimaFlaechenSubAreaVerbindung> Links {
+			get { return this.verbindungen; }
+			set { this.verbindungen = value; }
+		}
+
+		public List<KlimaFlaechenModul> GetAllLinkedModules(KlimaFlaechenModul referenceModul) {
+			List<KlimaFlaechenModul> linkedModules = new List<KlimaFlaechenModul>();
+			linkedModules.Add(referenceModul);
+			List<KlimaFlaechenModul> nextModules = this.GetNextLinkedModules(referenceModul);
+			nextModules.AddRange(this.GetPreviousLinkedModules(referenceModul));
+			while (nextModules.Count > 0) {
+				KlimaFlaechenModul nextModule = nextModules[0];
+				nextModules.RemoveAt(0);
+				if (!linkedModules.Contains(nextModule)) {
+					linkedModules.Add(nextModule);
+					nextModules.AddRange(this.GetNextLinkedModules(nextModule));
+					nextModules.AddRange(this.GetPreviousLinkedModules(nextModule));
+				}
+			}
+			return linkedModules;
+		}
+
+		private List<KlimaFlaechenModul> GetNextLinkedModules(KlimaFlaechenModul referenceModul) {
+			List<KlimaFlaechenModul> nextModules = new List<KlimaFlaechenModul>();
+			foreach (ModulDeckeSubArea sa in this.subAreas) {
+				foreach (KlimaFlaechenList row in sa.Rows) {
+					if (row.Links != null) {
+						foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+							if (link.Start == referenceModul) {
+								nextModules.Add(link.End);
+							}
+						}
+					}
+				}
+			}
+
+			if (this.Links != null) {
+				foreach (KlimaFlaechenSubAreaVerbindung saLink in this.Links) {
+					if (saLink.Start.Contains(referenceModul)) {
+						nextModules.AddRange(saLink.End);
+					}
+				}
+			}
+
+			return nextModules;
+		}
+
+		private List<KlimaFlaechenModul> GetPreviousLinkedModules(KlimaFlaechenModul referenceModul) {
+			List<KlimaFlaechenModul> prevModules = new List<KlimaFlaechenModul>();
+			foreach (ModulDeckeSubArea sa in this.subAreas) {
+				foreach (KlimaFlaechenList row in sa.Rows) {
+					if (row.Links != null) {
+						foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+							if (link.End == referenceModul) {
+								prevModules.Add(link.Start);
+							}
+						}
+					}
+				}
+			}
+
+			if (this.Links != null) {
+				foreach (KlimaFlaechenSubAreaVerbindung saLink in this.Links) {
+					if (saLink.End.Contains(referenceModul)) {
+						prevModules.AddRange(saLink.Start);
+					}
+				}
+			}
+
+			return prevModules;
 		}
 	}
 }

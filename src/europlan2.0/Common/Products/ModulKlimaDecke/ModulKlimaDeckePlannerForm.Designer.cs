@@ -142,6 +142,8 @@ namespace Europlan.Common.Products {
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.modulKlimaDeckePlanner = new Europlan.Common.ModulKlimaDeckePlanner(this.components);
+			this.btnAddConnections = new System.Windows.Forms.ToolStripButton();
+			this.btnDeleteConnection = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -170,6 +172,8 @@ namespace Europlan.Common.Products {
             this.btnConstruction,
             this.btnAddModules,
             this.btnSelectModule,
+            this.btnAddConnections,
+            this.btnDeleteConnection,
             this.btnShowBeplankung});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
@@ -1505,6 +1509,28 @@ namespace Europlan.Common.Products {
 			this.modulKlimaDeckePlanner.ModuleSelected += new System.EventHandler<Europlan.Common.ModulKlimaDeckePlanner.ModuleSelectedEventArgs>(this.modulKlimaBodenPlanner_ModuleSelected);
 			this.modulKlimaDeckePlanner.ListsNeedUpdate += new System.EventHandler<Europlan.Common.ModulKlimaDeckePlanner.ListNeedsUpdateEventArgs>(this.modulKlimaBodenPlanner_ListsNeedUpdate);
 			// 
+			// btnAddConnections
+			// 
+			this.btnAddConnections.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddConnections.Image = ((System.Drawing.Image)(resources.GetObject("btnAddConnections.Image")));
+			this.btnAddConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddConnections.Name = "btnAddConnections";
+			this.btnAddConnections.Size = new System.Drawing.Size(23, 22);
+			this.btnAddConnections.Text = "Verbindeleitung hinzufügen";
+			this.btnAddConnections.Visible = false;
+			this.btnAddConnections.Click += new System.EventHandler(this.btnAddConnections_Click);
+			// 
+			// btnDeleteConnection
+			// 
+			this.btnDeleteConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnDeleteConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteConnection.Image")));
+			this.btnDeleteConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDeleteConnection.Name = "btnDeleteConnection";
+			this.btnDeleteConnection.Size = new System.Drawing.Size(23, 22);
+			this.btnDeleteConnection.Text = "Verbindeleitung löschen";
+			this.btnDeleteConnection.Visible = false;
+			this.btnDeleteConnection.Click += new System.EventHandler(this.btnDeleteConnection_Click);
+			// 
 			// ModulKlimaDeckePlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1666,5 +1692,7 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.RadioButton rbHolzstaffel;
 		private System.Windows.Forms.RadioButton rbCProfil;
 		private System.Windows.Forms.RadioButton rbKassettendecke;
+		private System.Windows.Forms.ToolStripButton btnAddConnections;
+		private System.Windows.Forms.ToolStripButton btnDeleteConnection;
 	}
 }

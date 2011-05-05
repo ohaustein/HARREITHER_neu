@@ -529,6 +529,10 @@ namespace Europlan.Common {
 			this.CalculateHeatAndCoolFlow();
 			bool graphical = (this.GraphicalMode.HasValue && this.GraphicalMode.Value);
 			bool found = false;
+			double measure = 1;
+			if (this.AssociatedRoom != null && this.AssociatedRoom.AssociatedPlan != null && this.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
+				measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
+			}
 			while (!found) {
 				int modulesPerCircuit = this.RequestedModulesTotal / cCount;
 				int additionalModules = this.RequestedModulesTotal - modulesPerCircuit * cCount;
@@ -566,6 +570,19 @@ namespace Europlan.Common {
 						c.LangeFittinge = langeFittingePerCircuit + (cCount - curCNr - 1 < additionalLangeFittinge ? 1 : 0);
 						c.SonstigeModule = sonstigeModulePerCircuit + (cCount - curCNr - 1 < additionalSonstigeModule ? 1 : 0);
 						c.SonstigeVerbindeleitung = this.requestedSonstigeVerbindeLeitung / cCount;
+					} else {
+						int langeFittinge = 0;
+						double verbindeleitung = 0;
+						foreach (KlimaFlaechenModulVerbindung link in c.Links) {
+							Segment2D test;
+							if (link.IsLangerFitting(measure)) {
+								langeFittinge++;
+							} else {
+								verbindeleitung += link.GetLength(measure);
+							}
+						}
+						c.LangeFittinge = langeFittinge;
+						c.SonstigeVerbindeleitung = verbindeleitung;
 					}
 					c.ReducedArea = this.PlannedAreaReduced / cCount;
 					c.Calculate();
@@ -1228,14 +1245,14 @@ namespace Europlan.Common {
 								output22D = transformation.Transform(new Point2D(0, 0.1 * measure));
 								output32D = transformation.Transform(new Point2D(0.1 * measure, 0.1 * measure));
 								output42D = transformation.Transform(new Point2D(0.1 * measure, 0));
-								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
 							}
 							if (input && modul.GetInputLink(c, invertXAxis) == null && openInputs.Contains(c)) {
 								input12D = transformation.Transform(new Point2D(width, height));
 								input22D = transformation.Transform(new Point2D(width, height - 0.1 * measure));
 								input32D = transformation.Transform(new Point2D(width - 0.1 * measure, height - 0.1 * measure));
 								input42D = transformation.Transform(new Point2D(width - 0.1 * measure, height));
-								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
 							}
 						} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 							if (output && modul.GetOutputLink(c, invertXAxis) == null && openOutputs.Contains(c)) {
@@ -1243,14 +1260,14 @@ namespace Europlan.Common {
 								output22D = transformation.Transform(new Point2D(width, 0.1 * measure));
 								output32D = transformation.Transform(new Point2D(width - 0.1 * measure, 0.1 * measure));
 								output42D = transformation.Transform(new Point2D(width - 0.1 * measure, 0));
-								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
 							}
 							if (input && modul.GetInputLink(c, invertXAxis) == null && openInputs.Contains(c)) {
 								input12D = transformation.Transform(new Point2D(0, height));
 								input22D = transformation.Transform(new Point2D(0, height - 0.1 * measure));
 								input32D = transformation.Transform(new Point2D(0.1 * measure, height - 0.1 * measure));
 								input42D = transformation.Transform(new Point2D(0.1 * measure, height));
-								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
 							}
 						}
 					} else {
@@ -1260,14 +1277,14 @@ namespace Europlan.Common {
 								input22D = transformation.Transform(new Point2D(0, 0.1 * measure));
 								input32D = transformation.Transform(new Point2D(0.1 * measure, 0.1 * measure));
 								input42D = transformation.Transform(new Point2D(0.1 * measure, 0));
-								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
 							}
 							if (output && modul.GetOutputLink(c, invertXAxis) == null && openOutputs.Contains(c)) {
 								output12D = transformation.Transform(new Point2D(width, height));
 								output22D = transformation.Transform(new Point2D(width, height - 0.1 * measure));
 								output32D = transformation.Transform(new Point2D(width - 0.1 * measure, height - 0.1 * measure));
 								output42D = transformation.Transform(new Point2D(width - 0.1 * measure, height));
-								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
 							}
 						} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 							if (input && modul.GetInputLink(c, invertXAxis) == null && openInputs.Contains(c)) {
@@ -1275,14 +1292,14 @@ namespace Europlan.Common {
 								input22D = transformation.Transform(new Point2D(width, 0.1 * measure));
 								input32D = transformation.Transform(new Point2D(width - 0.1 * measure, 0.1 * measure));
 								input42D = transformation.Transform(new Point2D(width - 0.1 * measure, 0));
-								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertXAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
 							}
 							if (output && modul.GetOutputLink(c, invertXAxis) == null && openOutputs.Contains(c)) {
 								output12D = transformation.Transform(new Point2D(0, height));
 								output22D = transformation.Transform(new Point2D(0, height - 0.1 * measure));
 								output32D = transformation.Transform(new Point2D(0.1 * measure, height - 0.1 * measure));
 								output42D = transformation.Transform(new Point2D(0.1 * measure, height));
-								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
+								possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertXAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
 							}
 						}
 					}
@@ -1316,6 +1333,11 @@ namespace Europlan.Common {
 				}
 			}
 			return openOutputs;
+		}
+
+		[XmlIgnore]
+		public override WW.Math.Geometry.Polygon2D GraphicalArea {
+			get { return (this.GraphicalMode.HasValue && this.GraphicalMode.Value == true) ? new Polygon2D(this.AssociatedRoom.RoomCoordinates) : null; }
 		}
 	}
 }

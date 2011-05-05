@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using System.Globalization;
 using log4net;
 using WW.Math;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
 
@@ -1634,6 +1635,11 @@ namespace Europlan.Common {
 		public List<GraphicalProductConnection> Connections {
 			get { return this.connections; }
 			set { this.connections = value; }
+		}
+
+		[XmlIgnore]
+		public abstract Polygon2D GraphicalArea {
+			get;
 		}
 	}
 }

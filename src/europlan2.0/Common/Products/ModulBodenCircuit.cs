@@ -73,7 +73,7 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double HeatArea {
-			get { return row.GetHeatArea(true) + 0.02 * this.sonstigeVerbindeleitung; }
+			get { return row.GetHeatArea(true) + 0.02 * this.SonstigeVerbindeleitung; }
 		}
 
 		[XmlIgnore]
@@ -88,7 +88,7 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double CoveredArea {
-			get { return row.GetCoveredArea(true) + this.langeFittinge * 0.15 + 0.055 * this.sonstigeVerbindeleitung; }
+			get { return row.GetCoveredArea(true) + this.LangeFittinge * 0.15 + 0.055 * this.SonstigeVerbindeleitung; }
 		}
 
 		//private double areaTotal;
@@ -236,7 +236,7 @@ namespace Europlan.Common {
 			double rLambdaB = this.ModulKlimaBodenProduct.PlannedFloorConstruction == null ? 0 : this.ModulKlimaBodenProduct.PlannedFloorConstruction.RValue;
 			double rLambdaIns = this.ModulKlimaBodenProduct.PlannedInsulationConstruction == null ? 0 : this.ModulKlimaBodenProduct.PlannedInsulationConstruction.RValue;
 
-			this.row.LengthVerbindeleitungen = this.sonstigeVerbindeleitung + this.langeFittinge * 0.1;
+			this.row.LengthVerbindeleitungen = this.SonstigeVerbindeleitung + this.LangeFittinge * 0.1;
 
 			{ // Heizlastberechnung
 				double distributorVorlaufTemp;
@@ -365,7 +365,7 @@ namespace Europlan.Common {
 		}
 
 		public int ModulierendeModule {
-			get { return this.langeFittinge; }
+			get { return this.LangeFittinge; }
 		}
 
 		public int SonstigeModule {

@@ -1219,6 +1219,12 @@ namespace Europlan.Common {
 		public override double Viskositaet {
 			get { return HithermCompactProduct.ConfigV; }
 		}
+
+		[XmlIgnore]
+		public override WW.Math.Geometry.Polygon2D GraphicalArea {
+			// TODO
+			get { return null; }
+		}
 	}
 	
 }

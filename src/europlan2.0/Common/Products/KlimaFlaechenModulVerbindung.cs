@@ -97,8 +97,8 @@ namespace Europlan.Common {
 			}
 		}
 
-		public double HitTest(Point2D planPoint, double maxDist) {
-			Point2D oldVertex = new Point2D();
+		public bool HitTest(Point2D planPoint, double maxDist) {
+			/*Point2D oldVertex = new Point2D();
 			bool first = false;
 			double bestDist = double.MaxValue;
 			foreach (Point2D newVertex in this.vertices) {
@@ -115,6 +115,26 @@ namespace Europlan.Common {
 			}
 			if (bestDist <= maxDist) {
 				bestDist = -bestDist;
+			}
+			return bestDist;*/
+			return this.GetDistance(planPoint) <= maxDist;
+		}
+
+		public double GetDistance(Point2D planPoint) {
+			Point2D oldVertex = new Point2D();
+			bool first = false;
+			double bestDist = double.MaxValue;
+			foreach (Point2D newVertex in this.vertices) {
+				if (first) {
+					first = false;
+				} else {
+					Segment2D segment = new Segment2D(oldVertex, newVertex);
+					double dist = segment.GetDistance(planPoint);
+					if (dist <= bestDist) {
+						bestDist = dist;
+					}
+				}
+				oldVertex = newVertex;
 			}
 			return bestDist;
 		}
@@ -251,6 +271,28 @@ namespace Europlan.Common {
 		public string ProductGuid {
 			set { this.productGuid = value; }
 			get { return this.product.Id; }
+		}
+
+		public bool IsLangerFitting(double measure) {
+			return this.vertices.Count == 2 && Math.Abs((this.vertices[0] - this.vertices[1]).GetLength() / measure - (0.1 + 2 * KlimaFlaechenModul.CONNECTION_DISTANCE)) < 0.0001;
+		}
+
+		public double GetLength(double measure) {
+			if (measure == 0) {
+				return 0;
+			}
+			double length = 0;
+			if (this.vertices.Count > 1) {
+				for (int i = 1; i < this.vertices.Count; i++) {
+					length += (this.vertices[i - 1] - this.vertices[i]).GetLength();
+				}
+			}
+			length = length / measure;
+			length -= 2 * KlimaFlaechenModul.CONNECTION_DISTANCE;
+			if (length < 0) {
+				length = 0;
+			}
+			return length;
 		}
 		#endregion
 	}

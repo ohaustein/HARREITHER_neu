@@ -1322,8 +1322,10 @@ namespace Europlan.Common.Products {
 			// 
 			this.modulKlimaBodenPlanner.Mode = Europlan.Common.ModulKlimaBodenPlanner.KlimaBodenMode.KDM_NONE;
 			this.modulKlimaBodenPlanner.NewModulesRotation = 0;
+			this.modulKlimaBodenPlanner.ModuleSelected += new System.EventHandler(this.modulKlimaBodenPlanner_ModuleSelected);
 			this.modulKlimaBodenPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.modulKlimaBodenPlanner_ModeChanged);
 			this.modulKlimaBodenPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.modulKlimaBodenPlanner_ProjectChanged);
+			this.modulKlimaBodenPlanner.ListsNeedUpdate += new System.EventHandler<System.EventArgs>(this.modulKlimaBodenPlanner_ListsNeedUpdate);
 			// 
 			// ModulKlimaBodenPlannerForm
 			// 

@@ -8,6 +8,8 @@ using WW.Math;
 
 namespace Europlan.Common {
 	public class KlimaFlaechenModul {
+		public static readonly double CONNECTION_DISTANCE = 0.035;  // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+
 		private static double module_100_40_height = 1.0;
 		private static double module_100_30_height = 1.0;
 		private static double module_120_30_height = 1.2;
@@ -524,55 +526,109 @@ namespace Europlan.Common {
 			set { this.graphModulierendY = value; }
 		}
 
-		public Point2D GetOutputConnection(double measure, bool invertXAxis) {
+		public Point2D GetOutputConnection(double measure, bool invertXAxis, Product product) {
 			if (invertXAxis) {
-				return GetInputConnection(measure, false);
+				return GetInputConnection(measure, false, product);
 			}
-			Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
-			transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
+			if (product is ModulKlimaBodenProduct) {
+				Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
+				transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
 
-			double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
-			double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
-			double connectionDist = 0.035 * measure; // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+				double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
+				double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+				double connectionDist = CONNECTION_DISTANCE * measure;
 
-			if (this.graphBottomUp) {
-				if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
-					return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+				if (this.graphBottomUp) {
+					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+						return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+					} else {
+						return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+					}
 				} else {
-					return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+						return transformation.Transform(new Point2D(connectionDist, connectionDist));
+					} else {
+						return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+					}
+				}
+			} else if (product is ModulKlimaDeckeProduct) {
+				Matrix3D laneRotation = Transformation3D.Rotate(-(product as ModulKlimaDeckeProduct).GraphConstruction.Rotation * Math.PI / 180.0);
+				Matrix3D moduleRotation = Transformation3D.Rotate((product as ModulKlimaDeckeProduct).GraphConstruction.Rotation * Math.PI / 180.0);
+				double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
+				double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+				double connectionDist = 0.035 * measure; // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+				double x = laneRotation.Transform((product as ModulKlimaDeckeProduct).GraphConstruction.PossibleLanes[this.GraphLane].BorderLeft.Origin).X;
+				double y = this.GraphPositionInLan;
+				Matrix3D transformation = moduleRotation * Transformation3D.Translation(x, y);
+
+				if (this.graphBottomUp) {
+					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+						return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+					} else {
+						return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+					}
+				} else {
+					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+						return transformation.Transform(new Point2D(connectionDist, connectionDist));
+					} else {
+						return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+					}
 				}
 			} else {
-				if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
-					return transformation.Transform(new Point2D(connectionDist, connectionDist));
-				} else {
-					return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
-				}
+				throw new Exception("invalid Product");
 			}
 		}
 
-		public Point2D GetInputConnection(double measure, bool invertXAxis) {
+		public Point2D GetInputConnection(double measure, bool invertXAxis, Product product) {
 			if (invertXAxis) {
-				return GetOutputConnection(measure, false);
+				return GetOutputConnection(measure, false, product);
 			}
-			Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
-			transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
+			if (product is ModulKlimaBodenProduct) {
+				Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
+				transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
 
-			double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
-			double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
-			double connectionDist = 0.035 * measure; // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+				double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
+				double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+				double connectionDist = 0.035 * measure; // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
 
-			if (this.graphBottomUp) {
-				if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
-					return transformation.Transform(new Point2D(connectionDist, connectionDist));
+				if (this.graphBottomUp) {
+					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+						return transformation.Transform(new Point2D(connectionDist, connectionDist));
+					} else {
+						return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+					}
 				} else {
-					return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+						return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+					} else {
+						return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+					}
+				}
+			} else if (product is ModulKlimaDeckeProduct) {
+				Matrix3D laneRotation = Transformation3D.Rotate(-(product as ModulKlimaDeckeProduct).GraphConstruction.Rotation * Math.PI / 180.0);
+				Matrix3D moduleRotation = Transformation3D.Rotate((product as ModulKlimaDeckeProduct).GraphConstruction.Rotation * Math.PI / 180.0);
+				double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
+				double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+				double connectionDist = 0.035 * measure; // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+				double x = laneRotation.Transform((product as ModulKlimaDeckeProduct).GraphConstruction.PossibleLanes[this.GraphLane].BorderLeft.Origin).X;
+				double y = this.GraphPositionInLan;
+				Matrix3D transformation = moduleRotation * Transformation3D.Translation(x, y);
+
+				if (this.graphBottomUp) {
+					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+						return transformation.Transform(new Point2D(connectionDist, connectionDist));
+					} else {
+						return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+					}
+				} else {
+					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+						return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+					} else {
+						return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+					}
 				}
 			} else {
-				if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
-					return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
-				} else {
-					return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
-				}
+				throw new Exception("invalid Product");
 			}
 		}
 
@@ -592,7 +648,18 @@ namespace Europlan.Common {
 					}
 				}
 			} else if (circuit is ModulDeckeCircuit) {
-				throw new Exception("todo");
+				ModulDeckeCircuit mdc = circuit as ModulDeckeCircuit;
+				foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+					foreach (KlimaFlaechenList row in sa.Rows) {
+						if (row.Links != null) {
+							foreach (KlimaFlaechenModulVerbindung verbindung in row.Links) {
+								if (verbindung.End == this) {
+									return verbindung;
+								}
+							}
+						}
+					}
+				}
 			}
 			return link;
 		}
@@ -613,7 +680,52 @@ namespace Europlan.Common {
 					}
 				}
 			} else if (circuit is ModulDeckeCircuit) {
-				throw new Exception("todo");
+				ModulDeckeCircuit mdc = circuit as ModulDeckeCircuit;
+				foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+					foreach (KlimaFlaechenList row in sa.Rows) {
+						if (row.Links != null) {
+							foreach (KlimaFlaechenModulVerbindung verbindung in row.Links) {
+								if (verbindung.Start == this) {
+									return verbindung;
+								}
+							}
+						}
+					}
+				}
+			}
+			return link;
+		}
+
+		public KlimaFlaechenSubAreaVerbindung GetSubareaInputLink(Circuit circuit, bool invertXAxis) {
+			KlimaFlaechenSubAreaVerbindung link = null;
+			// no subareas for boden!
+			if (circuit is ModulDeckeCircuit) {
+				ModulDeckeCircuit mdc = circuit as ModulDeckeCircuit;
+				if (mdc.Links != null) {
+					foreach (KlimaFlaechenSubAreaVerbindung saLink in mdc.Links) {
+						if (saLink.End.Contains(this)) {
+							link = saLink;
+							break;
+						}
+					}
+				}
+			}
+			return link;
+		}
+
+		public KlimaFlaechenSubAreaVerbindung GetSubareaOutputLink(Circuit circuit, bool invertXAxis) {
+			KlimaFlaechenSubAreaVerbindung link = null;
+			// no subareas for boden!
+			if (circuit is ModulDeckeCircuit) {
+				ModulDeckeCircuit mdc = circuit as ModulDeckeCircuit;
+				if (mdc.Links != null) {
+					foreach (KlimaFlaechenSubAreaVerbindung saLink in mdc.Links) {
+						if (saLink.Start.Contains(this)) {
+							link = saLink;
+							break;
+						}
+					}
+				}
 			}
 			return link;
 		}

@@ -8,6 +8,7 @@ namespace Europlan.Common {
 
 		private double lengthVerbindeleitungen;
 		private List<KlimaFlaechenModul> list = new List<KlimaFlaechenModul>();
+		private List<KlimaFlaechenModulVerbindung> verbindungen = null;
 
 		public KlimaFlaechenList() {
 		}
@@ -36,6 +37,11 @@ namespace Europlan.Common {
 			}
 			druckverlust += EN1264.Instance.DruckverlustRohr(massenstrom, Product.rundrohr21mmInnenA, EurovalProduct.ConfigRho, Product.rundrohr21mmInnenD, EurovalProduct.ConfigV, 0.000004, lengthVerbindeleitungen);
 			return druckverlust;
+		}
+
+		public List<KlimaFlaechenModulVerbindung> Links {
+			get { return this.verbindungen; }
+			set { this.verbindungen = value; }
 		}
 
 		//[XmlIgnore]

@@ -2212,5 +2212,11 @@ namespace Europlan.Common {
 					//this.PlannedCorrections;
 			}
 		}
+
+		[XmlIgnore]
+		public override WW.Math.Geometry.Polygon2D GraphicalArea {
+			// TODO
+			get { return null; }
+		}
 	}
 }

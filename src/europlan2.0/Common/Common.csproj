@@ -283,7 +283,14 @@
     <Compile Include="Plan\PlanSetMeasureForm.Designer.cs">
       <DependentUpon>PlanSetMeasureForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PossibleConnection.cs" />
+    <Compile Include="Products\Hitherm\HithermPlannerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Hitherm\HithermPlannerForm.Designer.cs">
+      <DependentUpon>HithermPlannerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\KlimaFlaechenSubAreaVerbindung.cs" />
+    <Compile Include="Project\PossibleConnection.cs" />
     <Compile Include="Products\Circuit.cs" />
     <Compile Include="Products\ConnectionPipePanel.cs">
       <SubType>UserControl</SubType>
@@ -291,7 +298,7 @@
     <Compile Include="Products\ConnectionPipePanel.Designer.cs">
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\GraphicalProductConnection.cs" />
+    <Compile Include="Project\GraphicalProductConnection.cs" />
     <Compile Include="Products\Euroval\EurovalPlanner.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -685,6 +692,7 @@
     </Compile>
     <Compile Include="Reporting\ReportHelper.cs" />
     <Compile Include="SerializableDictionary.cs" />
+    <Compile Include="CompareUtil.cs" />
     <Compile Include="Settings\SettingsXpress.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -798,6 +806,10 @@
     <EmbeddedResource Include="Products\Euroval\EurovalPlannerForm.resx">
       <DependentUpon>EurovalPlannerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\Hitherm\HithermPlannerForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>HithermPlannerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\ModulKlimaBoden\ModulKlimaBodenPlannerForm.resx">
       <DependentUpon>ModulKlimaBodenPlannerForm.cs</DependentUpon>

@@ -17,6 +17,7 @@ namespace Europlan.Common {
 		private string wallId = "";
 		private List<GraphicalWallObstacle> obstacles = new List<GraphicalWallObstacle>();
 		private GraphicalWall dachSchraege = null;
+		private double borderDistance = 0.1;
 
 		public GraphicalWall() {
 
@@ -92,6 +93,11 @@ namespace Europlan.Common {
 		public GraphicalWall DachSchraege {
 			get { return dachSchraege; }
 			set { dachSchraege = value; }
+		}
+
+		public double BorderDistance {
+			get { return borderDistance; }
+			set { borderDistance = value; }
 		}
 
 	}

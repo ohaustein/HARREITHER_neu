@@ -1343,6 +1343,12 @@ namespace Europlan.Common {
 			get { return HithermProduct.ConfigV; }
 		}
 
+		[XmlIgnore]
+		public override WW.Math.Geometry.Polygon2D GraphicalArea {
+			// TODO
+			get { return null; }
+		}
+
 		public void ResetProduct() {
 			// TODO
 		}

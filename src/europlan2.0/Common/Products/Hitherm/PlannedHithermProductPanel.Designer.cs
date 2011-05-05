@@ -161,6 +161,7 @@ namespace Europlan.Common {
 			this.numericColumn1 = new Europlan.Common.NumericColumn();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnGrafischeAuslegung = new System.Windows.Forms.Button();
 			this.pageCircuit.SuspendLayout();
 			this.groupBox10.SuspendLayout();
 			this.groupBox9.SuspendLayout();
@@ -835,6 +836,7 @@ namespace Europlan.Common {
 			// 
 			// panel2
 			// 
+			this.panel2.Controls.Add(this.btnGrafischeAuslegung);
 			this.panel2.Controls.Add(this.lstError);
 			this.panel2.Controls.Add(this.lblRestAreaUnit);
 			this.panel2.Controls.Add(this.lblRestAreaTitle);
@@ -1646,6 +1648,17 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.dataGridViewTextBoxColumn2.Visible = false;
 			// 
+			// btnGrafischeAuslegung
+			// 
+			this.btnGrafischeAuslegung.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnGrafischeAuslegung.Location = new System.Drawing.Point(699, 32);
+			this.btnGrafischeAuslegung.Name = "btnGrafischeAuslegung";
+			this.btnGrafischeAuslegung.Size = new System.Drawing.Size(167, 23);
+			this.btnGrafischeAuslegung.TabIndex = 169;
+			this.btnGrafischeAuslegung.Text = "Grafische Auslegung";
+			this.btnGrafischeAuslegung.UseVisualStyleBackColor = true;
+			this.btnGrafischeAuslegung.Click += new System.EventHandler(this.btnGrafischeAuslegung_Click);
+			// 
 			// PlannedHithermProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1813,5 +1826,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.RadioButton rbLayoutTable;
 		private System.Windows.Forms.RadioButton rbLayoutGraphical;
 		private System.Windows.Forms.Label lblLayoutType;
+		private System.Windows.Forms.Button btnGrafischeAuslegung;
 	}
 }

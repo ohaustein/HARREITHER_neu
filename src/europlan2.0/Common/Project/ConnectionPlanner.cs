@@ -41,6 +41,7 @@ namespace Europlan.Common {
 		private Dictionary<Product, IProductPlanner> productsInFloor = new Dictionary<Product, IProductPlanner>();
 		private Dictionary<Distributor, DistributorPositioner> distributorsInFloor = new Dictionary<Distributor, DistributorPositioner>();
 		private Floor floor = null;
+		private bool planFloor = true;
 
 		public event EventHandler<EventArgs> ModeChanged;
 
@@ -66,6 +67,28 @@ namespace Europlan.Common {
 			}
 		}
 
+		public bool PlanFloor {
+			get { return this.planFloor; }
+			set {
+				if (this.planFloor != value) {
+					this.planFloor = value;
+					// quick workaround to get affected products
+					this.Plan = this.Plan;
+				}
+			}
+		}
+
+		public bool PlanCeiling {
+			get { return !this.planFloor; }
+			set {
+				if (this.planFloor == value) {
+					this.planFloor = !value;
+					// quick workaround to get affected products
+					this.Plan = this.Plan;
+				}
+			}
+		}
+
 		private Plan tmpPlan = null;
 		private Plan Plan {
 			get { return this.connectedPlanPanel == null ? this.tmpPlan : this.connectedPlanPanel.Plan; }
@@ -76,18 +99,37 @@ namespace Europlan.Common {
 					this.connectedPlanPanel.Plan = value;
 					this.productsInFloor.Clear();
 					if (this.Plan != null) {
-						foreach (Product p in this.GetAllProducts()) {
-							if (p is ModulKlimaBodenProduct) {
-								ModulKlimaBodenPlanner pp = new ModulKlimaBodenPlanner();
-								pp.Product = p as ModulKlimaBodenProduct;
-								pp.ConnectedPlanPanel = this.connectedPlanPanel;
-								pp.DrawExpansionGaps = false;
-								pp.HighlightRoomCoordinates = false;
-								productsInFloor.Add(p, pp);
-							}
-						}
+						ResetProducts();
 					}
 				}
+			}
+		}
+
+		private void ResetProducts() {
+			this.productsInFloor.Clear();
+			foreach (Product p in this.GetAllProducts()) {
+				// TODO add other products
+				if (this.planFloor) {
+					if (p is ModulKlimaBodenProduct) {
+						ModulKlimaBodenPlanner pp = new ModulKlimaBodenPlanner();
+						pp.Product = p as ModulKlimaBodenProduct;
+						pp.ConnectedPlanPanel = this.connectedPlanPanel;
+						pp.DrawExpansionGaps = false;
+						pp.HighlightRoomCoordinates = false;
+						productsInFloor.Add(p, pp);
+					}
+				} else {
+					if (p is ModulKlimaDeckeProduct) {
+						ModulKlimaDeckePlanner pp = new ModulKlimaDeckePlanner();
+						pp.Product = p as ModulKlimaDeckeProduct;
+						pp.ConnectedPlanPanel = this.connectedPlanPanel;
+						pp.HighlightRoomCoordinates = false;
+						productsInFloor.Add(p, pp);
+					}
+				}
+			}
+			if (this.connectedPlanPanel as Control != null) {
+				this.connectedPlanPanel.InvalidateGraphics();
 			}
 		}
 
@@ -120,16 +162,7 @@ namespace Europlan.Common {
 				}
 				this.productsInFloor.Clear();
 				if (this.Plan != null) {
-					foreach (Product p in this.GetAllProducts()) {
-						if (p is ModulKlimaBodenProduct) {
-							ModulKlimaBodenPlanner pp = new ModulKlimaBodenPlanner();
-							pp.Product = p as ModulKlimaBodenProduct;
-							pp.ConnectedPlanPanel = this.connectedPlanPanel;
-							pp.DrawExpansionGaps = false;
-							pp.HighlightRoomCoordinates = false;
-							productsInFloor.Add(p, pp);
-						}
-					}
+					this.ResetProducts();
 				}
 			}
 		}
@@ -211,10 +244,12 @@ namespace Europlan.Common {
 
 		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			if (this.Plan != null) {
+				Region clip = g.Clip;
 				foreach (KeyValuePair<Distributor, DistributorPositioner> kvp in this.distributorsInFloor) {
 					kvp.Value.PaintAfterPlanPannel(g, additionalTransformation, mousePositionInPlan, mousePositionInControl);
 				}
-				if (drawExpansionGaps) {
+				g.Clip = clip;
+				if (drawExpansionGaps && this.planFloor) {
 					foreach (Floor floor in this.GetAllFloors()) {
 						foreach (Segment2D expansionGap in floor.ExpansionGaps) {
 							Point2D start = additionalTransformation.TransformTo2D(expansionGap.Start);
@@ -225,11 +260,13 @@ namespace Europlan.Common {
 				}
 				foreach (KeyValuePair<Product, IProductPlanner> kvp in this.productsInFloor) {
 					kvp.Value.PaintAfterPlanPannel(g, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+				}
+				g.Clip = clip;
+				foreach (KeyValuePair<Product, IProductPlanner> kvp in this.productsInFloor) {
 					foreach (GraphicalProductConnection connection in kvp.Key.Connections) {
 						connection.Draw(g, additionalTransformation, connection.Vorlauf ? Color.Red : Color.Blue, this.Plan.Measure.Value);
 					}
 				}
-
 				if (this.mode == ConnectionMode.KDM_ADD_CONNECTION) {
 					if (this.possibleConnections != null) {
 						foreach (PossibleConnection pc in this.possibleConnections) {
@@ -335,7 +372,7 @@ namespace Europlan.Common {
 							distributorConnection = new PossibleConnection();
 						}
 						if (ok) {
-							productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.Circuit, distributorConnection.DistributorIndex, vorlauf));
+							productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.Circuit, distributorConnection.DistributorIndex, vorlauf, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
 							this.newConnectionVertices = null;
 							this.newConnectionStart = null;
 						}
@@ -343,14 +380,14 @@ namespace Europlan.Common {
 					redraw = true;
 				}
 			} else if (this.Mode == ConnectionMode.KDM_DEL_CONNECTION) {
-				double bestDist = double.MinValue;
+				double bestDist = double.MaxValue;
 				GraphicalProductConnection bestConnection = null;
 				Product bestProduct = null;
 				foreach (Room room in this.floor.Rooms) {
 					foreach (PlannedProduct pp in room.PlannedProducts) {
 						foreach (GraphicalProductConnection conn in pp.Product.Connections) {
-							double dist = conn.HitTest(planPoint, this.Plan.Measure.Value * 0.025);
-							if (dist <= 0 && dist > bestDist) {
+							double dist = conn.GetDistance(planPoint);
+							if (dist < bestDist && dist <= this.Plan.Measure.Value * 0.025) {
 								bestDist = dist;
 								bestConnection = conn;
 								bestProduct = pp.Product;

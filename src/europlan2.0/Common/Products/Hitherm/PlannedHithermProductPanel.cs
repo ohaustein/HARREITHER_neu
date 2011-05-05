@@ -1081,5 +1081,11 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		private void btnGrafischeAuslegung_Click(object sender, EventArgs e) {
+			HithermPlannerForm form = new HithermPlannerForm(this.product.Product as HithermProduct);
+			form.ShowDialog();
+			form.Dispose();
+		}
 	}
 }
