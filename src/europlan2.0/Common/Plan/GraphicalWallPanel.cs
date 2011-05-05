@@ -84,12 +84,19 @@ namespace Europlan.Common {
 		public double XPos {
 			get { return this.xPos; }
 			set {
-				if (value > 0 || totalWidth * 100 * this.Scale < this.Width) {
-					this.xPos = 0;
-				} else if (value < (-totalWidth * 100) + this.Width / this.Scale - 20) {
-					this.xPos = -totalWidth * 100 + this.Width / this.Scale - 20;
+				double maxX = 10;
+				double minX = (-totalWidth * 100) + this.Width / this.Scale - 10;
+				if (maxX < minX) {
+					// center
+					this.xPos = (this.Width / this.Scale - (totalWidth + 0.2) * 100) / 2.0;
 				} else {
-					this.xPos = value;
+					if (value > maxX) {
+						this.xPos = maxX;
+					} else if (value < minX) {
+						this.xPos = minX;
+					} else {
+						this.xPos = value;
+					}
 				}
 			}
 		}
@@ -97,13 +104,28 @@ namespace Europlan.Common {
 		public double YPos {
 			get { return this.yPos; }
 			set {
-				if (value > 0/* || totalHeight * 100 * this.Scale < this.Height*/) {
-					this.yPos = 0;
-				} else if (value < (-totalHeight * 100) + this.Height / this.Scale - 20) {
-					this.yPos = (-totalHeight * 100) + this.Height / this.Scale - 20;
+				double maxY = - this.Height / this.Scale + 10;
+				double minY = -totalHeight * 100 - 10;
+				if (maxY < minY) {
+					// center
+					this.yPos = -(this.Height / this.Scale) + (-totalHeight * 100 + (this.Height) / this.Scale) / 2.0;
 				} else {
-					this.yPos = value;
+					if (value > maxY) {
+						this.yPos = maxY;
+					} else if (value < minY) {
+						this.yPos = minY;
+					} else {
+						this.yPos = value;
+					}
 				}
+				Console.WriteLine(this.yPos);
+				//if (value > 0/* || totalHeight * 100 * this.Scale < this.Height*/) {
+				//	this.yPos = 0;
+				//} else if (value < (-totalHeight * 100) + this.Height / this.Scale - 20) {
+				//	this.yPos = (-totalHeight * 100) + this.Height / this.Scale - 20;
+				//} else {
+					//this.yPos = value;
+				//}
 			}
 		}
 
@@ -118,7 +140,8 @@ namespace Europlan.Common {
 
 			Matrix paintMatrix = new Matrix();
 			paintMatrix.Scale((float)this.Scale, -(float)this.Scale);
-			paintMatrix.Translate((float)this.XPos + 10, (float)(-(this.Height - 10.0) + this.YPos));
+			//paintMatrix.Translate((float)this.XPos + 10, (float)(-(this.Height / this.Scale) + this.YPos + 10));
+			paintMatrix.Translate((float)this.XPos, (float)(this.YPos));
 			e.Graphics.Transform = paintMatrix;
 
 			double startX = 0;
