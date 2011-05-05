@@ -25,20 +25,22 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HithermPlannerForm));
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
+			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip2 = new System.Windows.Forms.ToolStrip();
 			this.btnPick = new System.Windows.Forms.ToolStripButton();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnWall = new System.Windows.Forms.ToolStripButton();
 			this.btnObstacle = new System.Windows.Forms.ToolStripButton();
-			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
-			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.panel2 = new System.Windows.Forms.Panel();
-			this.graphicalWallPanel1 = new Europlan.Common.GraphicalWallPanel();
+			this.panelTop = new System.Windows.Forms.Panel();
 			this.btnCreateWalls = new System.Windows.Forms.Button();
+			this.panelBottom = new System.Windows.Forms.Panel();
+			this.panelDefineWalls = new System.Windows.Forms.Panel();
+			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
-			this.panel1.SuspendLayout();
+			this.panelTop.SuspendLayout();
+			this.panelDefineWalls.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip1
@@ -53,6 +55,26 @@ namespace Europlan.Common {
 			this.toolStrip1.Size = new System.Drawing.Size(886, 25);
 			this.toolStrip1.TabIndex = 0;
 			this.toolStrip1.Text = "toolStrip1";
+			// 
+			// btnZoomOut
+			// 
+			this.btnZoomOut.AutoToolTip = false;
+			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
+			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnZoomOut.Name = "btnZoomOut";
+			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
+			this.btnZoomOut.Text = "zoomOut";
+			// 
+			// btnZoomIn
+			// 
+			this.btnZoomIn.AutoToolTip = false;
+			this.btnZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomIn.Image")));
+			this.btnZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnZoomIn.Name = "btnZoomIn";
+			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
+			this.btnZoomIn.Text = "zoomIn";
 			// 
 			// toolStrip2
 			// 
@@ -106,78 +128,75 @@ namespace Europlan.Common {
 			this.btnObstacle.Size = new System.Drawing.Size(21, 55);
 			this.btnObstacle.Text = "obstacle";
 			// 
-			// btnZoomOut
+			// panelTop
 			// 
-			this.btnZoomOut.AutoToolTip = false;
-			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
-			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnZoomOut.Name = "btnZoomOut";
-			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomOut.Text = "zoomOut";
-			// 
-			// btnZoomIn
-			// 
-			this.btnZoomIn.AutoToolTip = false;
-			this.btnZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomIn.Image")));
-			this.btnZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnZoomIn.Name = "btnZoomIn";
-			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomIn.Text = "zoomIn";
-			// 
-			// panel1
-			// 
-			this.panel1.Controls.Add(this.btnCreateWalls);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel1.Location = new System.Drawing.Point(24, 25);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(862, 76);
-			this.panel1.TabIndex = 2;
-			// 
-			// panel2
-			// 
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel2.Location = new System.Drawing.Point(24, 398);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(862, 88);
-			this.panel2.TabIndex = 3;
-			// 
-			// graphicalWallPanel1
-			// 
-			this.graphicalWallPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.graphicalWallPanel1.Location = new System.Drawing.Point(24, 101);
-			this.graphicalWallPanel1.Name = "graphicalWallPanel1";
-			this.graphicalWallPanel1.Size = new System.Drawing.Size(862, 297);
-			this.graphicalWallPanel1.TabIndex = 4;
+			this.panelTop.Controls.Add(this.panelDefineWalls);
+			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panelTop.Location = new System.Drawing.Point(24, 25);
+			this.panelTop.Name = "panelTop";
+			this.panelTop.Size = new System.Drawing.Size(862, 76);
+			this.panelTop.TabIndex = 2;
 			// 
 			// btnCreateWalls
 			// 
 			this.btnCreateWalls.Location = new System.Drawing.Point(3, 3);
 			this.btnCreateWalls.Name = "btnCreateWalls";
-			this.btnCreateWalls.Size = new System.Drawing.Size(75, 23);
+			this.btnCreateWalls.Size = new System.Drawing.Size(205, 41);
 			this.btnCreateWalls.TabIndex = 0;
-			this.btnCreateWalls.Text = "button1";
+			this.btnCreateWalls.Text = "Wände aus Raumgeometrie erzeugen";
 			this.btnCreateWalls.UseVisualStyleBackColor = true;
 			this.btnCreateWalls.Click += new System.EventHandler(this.btnCreateWalls_Click);
+			// 
+			// panelBottom
+			// 
+			this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panelBottom.Location = new System.Drawing.Point(24, 398);
+			this.panelBottom.Name = "panelBottom";
+			this.panelBottom.Size = new System.Drawing.Size(862, 88);
+			this.panelBottom.TabIndex = 3;
+			// 
+			// panelDefineWalls
+			// 
+			this.panelDefineWalls.Controls.Add(this.btnCreateWalls);
+			this.panelDefineWalls.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelDefineWalls.Location = new System.Drawing.Point(0, 0);
+			this.panelDefineWalls.Name = "panelDefineWalls";
+			this.panelDefineWalls.Size = new System.Drawing.Size(862, 76);
+			this.panelDefineWalls.TabIndex = 1;
+			// 
+			// graphicalWallPanel
+			// 
+			this.graphicalWallPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.graphicalWallPanel.Location = new System.Drawing.Point(24, 101);
+			this.graphicalWallPanel.Name = "graphicalWallPanel";
+			this.graphicalWallPanel.ProductPlanner = null;
+			this.graphicalWallPanel.Room = null;
+			this.graphicalWallPanel.Scale = 1;
+			this.graphicalWallPanel.Size = new System.Drawing.Size(862, 297);
+			this.graphicalWallPanel.TabIndex = 4;
+			this.graphicalWallPanel.XPos = 0;
+			this.graphicalWallPanel.YPos = 277;
 			// 
 			// HithermPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(886, 486);
-			this.Controls.Add(this.graphicalWallPanel1);
-			this.Controls.Add(this.panel2);
-			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.graphicalWallPanel);
+			this.Controls.Add(this.panelBottom);
+			this.Controls.Add(this.panelTop);
 			this.Controls.Add(this.toolStrip2);
 			this.Controls.Add(this.toolStrip1);
 			this.Name = "HithermPlannerForm";
 			this.Text = "HithermPlannerForm";
+			this.Load += new System.EventHandler(this.HithermPlannerForm_Load);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HithermPlannerForm_FormClosing);
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
 			this.toolStrip2.ResumeLayout(false);
 			this.toolStrip2.PerformLayout();
-			this.panel1.ResumeLayout(false);
+			this.panelTop.ResumeLayout(false);
+			this.panelDefineWalls.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -193,10 +212,11 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripButton btnObstacle;
 		private System.Windows.Forms.ToolStripButton btnZoomOut;
 		private System.Windows.Forms.ToolStripButton btnZoomIn;
-		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Panel panelTop;
 		private System.Windows.Forms.Button btnCreateWalls;
-		private System.Windows.Forms.Panel panel2;
-		private GraphicalWallPanel graphicalWallPanel1;
+		private System.Windows.Forms.Panel panelBottom;
+		private GraphicalWallPanel graphicalWallPanel;
+		private System.Windows.Forms.Panel panelDefineWalls;
 
 
 	}

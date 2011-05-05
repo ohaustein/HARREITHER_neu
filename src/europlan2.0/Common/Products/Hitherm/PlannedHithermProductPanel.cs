@@ -218,8 +218,13 @@ namespace Europlan.Common {
 				if (this.product.Product.GraphicalMode.HasValue) {
 					graphicalMode = this.product.Product.GraphicalMode.Value;
 				} else {
-					graphicalMode = false;
-					this.product.Product.GraphicalMode = false;
+					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
+						graphicalMode = true;
+						this.product.Product.GraphicalMode = true;
+					} else {
+						graphicalMode = false;
+						this.product.Product.GraphicalMode = false;
+					}
 				}
 
 				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {

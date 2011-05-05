@@ -167,6 +167,7 @@ namespace Europlan.Common {
 
 		private static double leistungsFaktorKuehlen = 1.0;
 		private static double leistungsFaktorHeizen = 1.0;
+		private static double graphicalRandabstandDefault = 10.0;
 
 		/*private static double factorSpezialputz = 1.15;
 		private static double factorMaschinenputz = 1.0;
@@ -673,6 +674,12 @@ namespace Europlan.Common {
 		public static double ConfigLeistungsFaktorHeizen {
 			get { return leistungsFaktorHeizen; }
 			set { leistungsFaktorHeizen = value; }
+		}
+
+		[DoubleProductParameter(10)]
+		public static double ConfigGraphicalRandabstandDefault {
+			get { return graphicalRandabstandDefault; }
+			set { graphicalRandabstandDefault = value; }
 		}
 		#endregion Product Parameters
 
@@ -1351,6 +1358,12 @@ namespace Europlan.Common {
 
 		public void ResetProduct() {
 			// TODO
+		}
+
+		[XmlIgnore]
+		public override bool AllowToSwitchMode {
+			// TODO
+			get { return true; }
 		}
 	}
 	

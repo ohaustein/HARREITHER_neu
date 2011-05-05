@@ -13,31 +13,60 @@ namespace Europlan.Common {
 
 		public HithermPlannerForm(HithermProduct product) {
 			InitializeComponent();
-			this.graphicalWallPanel1.Room = product.AssociatedRoom;
+			this.graphicalWallPanel.Room = product.AssociatedRoom;
+			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
 		}
 
 		private void btnCreateWalls_Click(object sender, EventArgs e) {
-			if (this.graphicalWallPanel1.Room != null && this.graphicalWallPanel1.Room.RoomCoordinates != null && this.graphicalWallPanel1.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel1.Room.AssociatedPlan != null && this.graphicalWallPanel1.Room.AssociatedPlan.Measure.HasValue) {
-				this.graphicalWallPanel1.Room.Walls.Clear();
-				double height = 2.5;
-				double measure = this.graphicalWallPanel1.Room.AssociatedPlan.Measure.Value;
-				Point2D lastVertex = this.graphicalWallPanel1.Room.RoomCoordinates[this.graphicalWallPanel1.Room.RoomCoordinates.Count - 1];
-				Polygon2D roomCoords = new Polygon2D(this.graphicalWallPanel1.Room.RoomCoordinates);
+			this.graphicalWallPanel.Room.Walls.Clear();
+			NewWallForm form = new NewWallForm(true, false);
+			DialogResult result = form.ShowDialog();
+			if (result == DialogResult.OK) {
+				double height = form.Height / 100.0;
+				double measure = this.graphicalWallPanel.Room.AssociatedPlan.Measure.Value;
+				Point2D lastVertex = this.graphicalWallPanel.Room.RoomCoordinates[this.graphicalWallPanel.Room.RoomCoordinates.Count - 1];
+				Polygon2D roomCoords = new Polygon2D(this.graphicalWallPanel.Room.RoomCoordinates);
 				if (!roomCoords.IsClockwise()) {
 					roomCoords.Reverse();
 				}
-				foreach (Point2D vertex in this.graphicalWallPanel1.Room.RoomCoordinates) {
+				foreach (Point2D vertex in this.graphicalWallPanel.Room.RoomCoordinates) {
 					double length = (lastVertex - vertex).GetLength() / measure;
 					GraphicalWall newWall = new GraphicalWall();
+					newWall.WallId = form.WallId;
 					newWall.PlanStartPoint = lastVertex;
 					newWall.PlanEndPoint = vertex;
 					newWall.CeilingContour.Add(new Point2D(0, height));
 					newWall.CeilingContour.Add(new Point2D(length, height));
-					this.graphicalWallPanel1.Room.Walls.Add(newWall);
+					this.graphicalWallPanel.Room.Walls.Add(newWall);
 					lastVertex = vertex;
 				}
 			}
-			this.graphicalWallPanel1.InvalidateGraphics();
+			form.Dispose();
+			this.graphicalWallPanel.InvalidateGraphics();
 		}
+
+		private void HithermPlannerForm_Load(object sender, EventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["HithermPlannerForm"];
+			this.Location = settings.GetPoint("Location", this.Location);
+			this.Size = settings.GetSize("Size", this.Size);
+			if (settings.GetSetting("Maximized", false)) {
+				this.WindowState = FormWindowState.Maximized;
+			} else {
+				this.WindowState = FormWindowState.Normal;
+			}
+		}
+
+		private void HithermPlannerForm_FormClosing(object sender, FormClosingEventArgs e) {
+			SettingsKey settings = SettingsFile.Settings["HithermPlannerForm"];
+			if (this.WindowState == FormWindowState.Normal) {
+				settings.StorePoint("Location", this.Location);
+				settings.StoreSize("Size", this.Size);
+				settings.StoreSetting("Maximized", false);
+			} else if (this.WindowState == FormWindowState.Maximized) {
+				settings.StoreSetting("Maximized", true);
+			}
+			SettingsFile.Update();
+		}
+
 	}
 }
