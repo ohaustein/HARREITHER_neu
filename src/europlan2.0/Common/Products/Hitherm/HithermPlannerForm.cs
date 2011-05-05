@@ -70,5 +70,9 @@ namespace Europlan.Common {
 			SettingsFile.Update();
 		}
 
+		private void btnWallSelectConstruction_Click(object sender, EventArgs e) {
+			// TODO
+		}
+
 	}
 }

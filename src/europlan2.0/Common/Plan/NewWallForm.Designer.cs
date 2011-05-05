@@ -27,15 +27,15 @@ namespace Europlan.Common {
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
-			this.numWidth = new Europlan.Common.NumericBox();
 			this.lblWidth = new System.Windows.Forms.Label();
 			this.lblHeight = new System.Windows.Forms.Label();
-			this.numHeight = new Europlan.Common.NumericBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.txtConstruction = new System.Windows.Forms.TextBox();
 			this.btnSelectConstruction = new System.Windows.Forms.Button();
 			this.lblConstructionName = new System.Windows.Forms.Label();
+			this.numHeight = new Europlan.Common.NumericBox();
+			this.numWidth = new Europlan.Common.NumericBox();
 			this.SuspendLayout();
 			// 
 			// lblConstruction
@@ -50,7 +50,7 @@ namespace Europlan.Common {
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(661, 290);
+			this.btnCancel.Location = new System.Drawing.Point(528, 274);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 3;
@@ -61,7 +61,7 @@ namespace Europlan.Common {
 			// 
 			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOk.Location = new System.Drawing.Point(580, 290);
+			this.btnOk.Location = new System.Drawing.Point(447, 274);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
 			this.btnOk.TabIndex = 2;
@@ -71,27 +71,6 @@ namespace Europlan.Common {
 			// helpProvider
 			// 
 			this.helpProvider.HelpNamespace = "europlan.chm";
-			// 
-			// numWidth
-			// 
-			this.numWidth.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numWidth.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numWidth.Location = new System.Drawing.Point(185, 33);
-			this.numWidth.MaxValue = null;
-			this.numWidth.MinValue = null;
-			this.numWidth.Name = "numWidth";
-			this.numWidth.Size = new System.Drawing.Size(121, 20);
-			this.numWidth.TabIndex = 4;
-			this.numWidth.Text = "0";
-			this.numWidth.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
 			// 
 			// lblWidth
 			// 
@@ -108,27 +87,6 @@ namespace Europlan.Common {
 			this.lblHeight.Size = new System.Drawing.Size(167, 17);
 			this.lblHeight.TabIndex = 7;
 			this.lblHeight.Text = "Höhe:";
-			// 
-			// numHeight
-			// 
-			this.numHeight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numHeight.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numHeight.Location = new System.Drawing.Point(185, 59);
-			this.numHeight.MaxValue = null;
-			this.numHeight.MinValue = null;
-			this.numHeight.Name = "numHeight";
-			this.numHeight.Size = new System.Drawing.Size(121, 20);
-			this.numHeight.TabIndex = 8;
-			this.numHeight.Text = "0";
-			this.numHeight.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
 			// 
 			// label2
 			// 
@@ -168,10 +126,56 @@ namespace Europlan.Common {
 			// 
 			// lblConstructionName
 			// 
+			this.lblConstructionName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.lblConstructionName.Location = new System.Drawing.Point(351, 9);
 			this.lblConstructionName.Name = "lblConstructionName";
-			this.lblConstructionName.Size = new System.Drawing.Size(167, 17);
+			this.lblConstructionName.Size = new System.Drawing.Size(252, 18);
 			this.lblConstructionName.TabIndex = 14;
+			// 
+			// numHeight
+			// 
+			this.numHeight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numHeight.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numHeight.Location = new System.Drawing.Point(185, 59);
+			this.numHeight.MaxValue = null;
+			this.numHeight.MinValue = null;
+			this.numHeight.Name = "numHeight";
+			this.numHeight.Size = new System.Drawing.Size(121, 20);
+			this.numHeight.TabIndex = 8;
+			this.numHeight.Text = "0";
+			this.numHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numHeight.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			// 
+			// numWidth
+			// 
+			this.numWidth.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numWidth.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numWidth.Location = new System.Drawing.Point(185, 33);
+			this.numWidth.MaxValue = null;
+			this.numWidth.MinValue = null;
+			this.numWidth.Name = "numWidth";
+			this.numWidth.Size = new System.Drawing.Size(121, 20);
+			this.numWidth.TabIndex = 4;
+			this.numWidth.Text = "0";
+			this.numWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numWidth.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			// 
 			// NewWallForm
 			// 
@@ -179,7 +183,7 @@ namespace Europlan.Common {
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(748, 325);
+			this.ClientSize = new System.Drawing.Size(615, 309);
 			this.Controls.Add(this.lblConstructionName);
 			this.Controls.Add(this.btnSelectConstruction);
 			this.Controls.Add(this.txtConstruction);
