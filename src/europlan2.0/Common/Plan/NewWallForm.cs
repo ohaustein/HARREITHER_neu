@@ -10,6 +10,7 @@ using Star.SettingsXpress;
 namespace Europlan.Common {
 	public partial class NewWallForm : Form {
 
+		private static double defaultHeight = 250.0;
 		private bool autoGeneration;
 		private bool isCompact;
 		private string wallId;
@@ -21,13 +22,17 @@ namespace Europlan.Common {
 			this.isCompact = isCompact;
 
 			this.numWidth.Enabled = !autoGeneration;
+			this.numHeight.Value = (decimal)defaultHeight;
 
 			if (isCompact) {
 				wallId = Project.Instance.HithermCompactWalls[0].Id;
+				this.lblConstructionName.Text = Project.Instance.HithermCompactWalls[0].Name;
 			} else {
 				wallId = Project.Instance.HithermWalls[0].Id;
+				this.lblConstructionName.Text = Project.Instance.HithermWalls[0].Name;
 			}
 			this.txtConstruction.Text = wallId;
+			
 
 			this.SetLanguage();
 		}
@@ -50,6 +55,7 @@ namespace Europlan.Common {
 				//    MessageBox.Show(EuroplanRes.NewPlanForm_KeinBezeichnerText, EuroplanRes.NewPlanForm_KeinBezeichnerTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				//    e.Cancel = true;
 				//}
+				defaultHeight = (double)this.numHeight.Value;
 			}
 		}
 
@@ -76,6 +82,7 @@ namespace Europlan.Common {
 			if (form.ShowDialog() == DialogResult.OK) {
 				this.wallId = form.SelectedWall.Id;
 				this.txtConstruction.Text = this.wallId;
+				this.lblConstructionName.Text = form.SelectedWall.Name;
 			}
 			form.Dispose();
 		}

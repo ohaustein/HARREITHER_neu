@@ -28,7 +28,6 @@ namespace Europlan.Common {
 			this.btnOk = new System.Windows.Forms.Button();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.numWidth = new Europlan.Common.NumericBox();
-			this.label1 = new System.Windows.Forms.Label();
 			this.lblWidth = new System.Windows.Forms.Label();
 			this.lblHeight = new System.Windows.Forms.Label();
 			this.numHeight = new Europlan.Common.NumericBox();
@@ -36,6 +35,7 @@ namespace Europlan.Common {
 			this.label3 = new System.Windows.Forms.Label();
 			this.txtConstruction = new System.Windows.Forms.TextBox();
 			this.btnSelectConstruction = new System.Windows.Forms.Button();
+			this.lblConstructionName = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// lblConstruction
@@ -50,7 +50,7 @@ namespace Europlan.Common {
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(375, 264);
+			this.btnCancel.Location = new System.Drawing.Point(661, 290);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 3;
@@ -61,7 +61,7 @@ namespace Europlan.Common {
 			// 
 			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOk.Location = new System.Drawing.Point(294, 264);
+			this.btnOk.Location = new System.Drawing.Point(580, 290);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
 			this.btnOk.TabIndex = 2;
@@ -92,15 +92,6 @@ namespace Europlan.Common {
             0,
             0,
             0});
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(473, 9);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(21, 13);
-			this.label1.TabIndex = 5;
-			this.label1.Text = "cm";
 			// 
 			// lblWidth
 			// 
@@ -175,13 +166,21 @@ namespace Europlan.Common {
 			this.btnSelectConstruction.UseVisualStyleBackColor = true;
 			this.btnSelectConstruction.Click += new System.EventHandler(this.btnSelectConstruction_Click);
 			// 
+			// lblConstructionName
+			// 
+			this.lblConstructionName.Location = new System.Drawing.Point(351, 9);
+			this.lblConstructionName.Name = "lblConstructionName";
+			this.lblConstructionName.Size = new System.Drawing.Size(167, 17);
+			this.lblConstructionName.TabIndex = 14;
+			// 
 			// NewWallForm
 			// 
 			this.AcceptButton = this.btnOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(462, 299);
+			this.ClientSize = new System.Drawing.Size(748, 325);
+			this.Controls.Add(this.lblConstructionName);
 			this.Controls.Add(this.btnSelectConstruction);
 			this.Controls.Add(this.txtConstruction);
 			this.Controls.Add(this.label3);
@@ -189,7 +188,6 @@ namespace Europlan.Common {
 			this.Controls.Add(this.numHeight);
 			this.Controls.Add(this.lblHeight);
 			this.Controls.Add(this.lblWidth);
-			this.Controls.Add(this.label1);
 			this.Controls.Add(this.numWidth);
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.btnCancel);
@@ -216,7 +214,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.HelpProvider helpProvider;
 		private NumericBox numWidth;
-		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label lblWidth;
 		private System.Windows.Forms.Label lblHeight;
 		private NumericBox numHeight;
@@ -224,5 +221,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TextBox txtConstruction;
 		private System.Windows.Forms.Button btnSelectConstruction;
+		private System.Windows.Forms.Label lblConstructionName;
 	}
 }

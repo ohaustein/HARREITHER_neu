@@ -36,6 +36,7 @@ namespace Europlan.Common {
 					newWall.WallId = form.WallId;
 					newWall.PlanStartPoint = lastVertex;
 					newWall.PlanEndPoint = vertex;
+					newWall.BorderDistance = HithermProduct.ConfigGraphicalRandabstandDefault;
 					newWall.CeilingContour.Add(new Point2D(0, height));
 					newWall.CeilingContour.Add(new Point2D(length, height));
 					this.graphicalWallPanel.Room.Walls.Add(newWall);
