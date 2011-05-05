@@ -217,6 +217,8 @@
     <Compile Include="Plan\CadPlanOptionsForm.Designer.cs">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\IGraphicalWallObject.cs" />
+    <Compile Include="Plan\IWallProductPlanner.cs" />
     <Compile Include="Plan\NewWallForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -294,6 +296,9 @@
     </Compile>
     <Compile Include="Plan\PlanSetMeasureForm.Designer.cs">
       <DependentUpon>PlanSetMeasureForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\Hitherm\HithermPlanner.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Products\Hitherm\HithermPlannerForm.cs">
       <SubType>Form</SubType>

@@ -65,37 +65,45 @@ namespace Europlan.Common {
 				}
 			}
 			if (ok) {
-				this.graphicalWallPanel.Room.Walls.Clear();
-				NewWallForm form = new NewWallForm(true, false);
-				DialogResult result = form.ShowDialog();
-				if (result == DialogResult.OK) {
-					double height = form.Height / 100.0;
-					double measure = this.graphicalWallPanel.Room.AssociatedPlan.Measure.Value;
-					Point2D lastVertex = this.graphicalWallPanel.Room.RoomCoordinates[this.graphicalWallPanel.Room.RoomCoordinates.Count - 1];
-					Polygon2D roomCoords = new Polygon2D(this.graphicalWallPanel.Room.RoomCoordinates);
-					if (!roomCoords.IsClockwise()) {
-						roomCoords.Reverse();
-					}
-					foreach (Point2D vertex in this.graphicalWallPanel.Room.RoomCoordinates) {
-						double length = (lastVertex - vertex).GetLength() / measure;
-						GraphicalWall newWall = new GraphicalWall();
-						newWall.WallId = form.WallId;
-						newWall.PlanStartPoint = lastVertex;
-						newWall.PlanEndPoint = vertex;
-						newWall.BorderDistance = HithermProduct.ConfigGraphicalRandabstandDefault;
-						newWall.CeilingContour.Add(new Point2D(0, height));
-						newWall.CeilingContour.Add(new Point2D(length, height));
-						this.graphicalWallPanel.Room.Walls.Add(newWall);
-						lastVertex = vertex;
-					}
+			this.graphicalWallPanel.Room.Walls.Clear();
+			NewWallForm form = new NewWallForm(true, false);
+			DialogResult result = form.ShowDialog();
+			if (result == DialogResult.OK) {
+				double height = form.Height / 100.0;
+				double measure = this.graphicalWallPanel.Room.AssociatedPlan.Measure.Value;
+				Point2D lastVertex = this.graphicalWallPanel.Room.RoomCoordinates[this.graphicalWallPanel.Room.RoomCoordinates.Count - 1];
+				Polygon2D roomCoords = new Polygon2D(this.graphicalWallPanel.Room.RoomCoordinates);
+				if (!roomCoords.IsClockwise()) {
+					roomCoords.Reverse();
 				}
-				form.Dispose();
+				foreach (Point2D vertex in this.graphicalWallPanel.Room.RoomCoordinates) {
+					double length = (lastVertex - vertex).GetLength() / measure;
+					GraphicalWall newWall = new GraphicalWall();
+					newWall.WallId = form.WallId;
+					newWall.PlanStartPoint = lastVertex;
+					newWall.PlanEndPoint = vertex;
+						newWall.BorderDistance = HithermProduct.ConfigGraphicalRandabstandDefault;
+					newWall.CeilingContour.Add(new Point2D(0, height));
+					newWall.CeilingContour.Add(new Point2D(length, height));
+					this.graphicalWallPanel.Room.Walls.Add(newWall);
+					lastVertex = vertex;
+				}
+			}
+			form.Dispose();
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
 		private void btnWallEdgeDistance_Click(object sender, EventArgs e) {
 			// TODO
+		}
+
+		private void btnPick_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_SELECT_OBJECT;
+		}
+
+		private void btnMove_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_MOVE;
 		}
 
 	}

@@ -12,7 +12,7 @@ using WW.Math.Geometry;
 namespace Europlan.Common {
 	public partial class GraphicalWallPanel : UserControl {
 
-		private IProductPlanner productPlanner;
+		private IWallProductPlanner productPlanner;
 		private Room room;
 		private double scale;
 		private double xPos;
@@ -30,24 +30,35 @@ namespace Europlan.Common {
 		private double startXPos;
 		private double startYPos;
 
-		//private double totalWidth = 0;
-		//private double totalHeight = 0;
+		private bool shiftPressed = false;
 
 		private Cursor tempCursor;
 
+		private IGraphicalWallObject selectedObject;
+
+		private event EventHandler<SelectedObjectArgs> objectSelected;
+		public event EventHandler<SelectedObjectArgs> ObjectSelected {
+			add { this.objectSelected += value; }
+			remove { this.objectSelected -= value; }
+		}
+
+		protected virtual void OnObjectSelected(IGraphicalWallObject selectedObject) {
+			if (this.objectSelected != null) {
+				this.objectSelected(this, new SelectedObjectArgs(selectedObject));
+			}
+		}
+
 		public enum PlanMode {
-			PM_MOVE
+			PM_MOVE,
+			PM_SELECT_OBJECT,
+			PM_PLANNER_CLICK,
+			PM_PLANNER_DRAG
 		}
 
 		public GraphicalWallPanel() {
 			this.scale = 1;
 			this.DoubleBuffered = true;
 			InitializeComponent();
-		}
-
-		public IProductPlanner ProductPlanner {
-			get { return this.productPlanner; }
-			set { this.productPlanner = value; }
 		}
 
 		public Room Room {
@@ -156,19 +167,20 @@ namespace Europlan.Common {
 			e.Graphics.ResetClip();
 			e.Graphics.Clear(Color.LightGray);
 
-			Matrix paintMatrix = new Matrix();
+			/*Matrix paintMatrix = new Matrix();
 			paintMatrix.Scale((float)this.Scale, -(float)this.Scale);
-			//paintMatrix.Translate((float)this.XPos + 10, (float)(-(this.Height / this.Scale) + this.YPos + 10));
 			paintMatrix.Translate((float)this.XPos, (float)(this.YPos));
+			e.Graphics.Transform = paintMatrix;*/
+			Matrix paintMatrix = this.PlanToControlMatrix;
 			e.Graphics.Transform = paintMatrix;
 
-			double startX = 0;
+			double xOffset = 0;
 			Pen wallBorderPen = Pens.Black;
 			Brush wallBrush = new SolidBrush(Color.White);
 			Pen unusableBorderPen = Pens.Gray;
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Gray, Color.White);
 			foreach (GraphicalWall wall in this.Room.Walls) {
-				Polygon2D wallBorder = new Polygon2D();
+				/*Polygon2D wallBorder = new Polygon2D();
 				wallBorder.Add(new Point2D(startX, 0));
 				if (wall.CeilingContour[0].X != 0) {
 					wallBorder.Add(new Point2D(startX, wall.CeilingContour[0].Y * 100.0));
@@ -205,36 +217,21 @@ namespace Europlan.Common {
 
 				e.Graphics.ResetClip();
 				e.Graphics.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
-				e.Graphics.DrawPolygon(wallBorderPen, pointArr);
-
-				startX += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
+				e.Graphics.DrawPolygon(wallBorderPen, pointArr);*/
+				wall.PaintObject(e.Graphics, xOffset, 0, this.selectedObject);
+				xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
 			}
 
 			e.Graphics.Transform = oldTransform;
+			e.Graphics.ResetClip();
+			if (this.productPlanner != null) {
+				e.Graphics.Transform = paintMatrix;
+				Point pointInCtrl = this.PointToClient(MousePosition);
+				Point2D pointInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(pointInCtrl.X, pointInCtrl.Y));
+				this.productPlanner.PaintAfterPlanPannel(e, pointInPlan, pointInCtrl);
+			}
 			e.Graphics.DrawRectangle(Pens.Gray, 0, 0, this.Width - 1, this.Height - 1);
 			e.Graphics.Clip = oldClip;
-
-
-			/*if (gdiGraphics3D != null) {
-				gdiGraphics3D.Draw(e.Graphics, this.ClientRectangle);
-				if (selectedStartPointCad.HasValue) {
-					Point3D start = gdiGraphics3D.To2DTransform.Transform(selectedStartPointCad.Value);
-					if (selectedEndPointCad.HasValue) {
-						Point3D end = gdiGraphics3D.To2DTransform.Transform(selectedEndPointCad.Value);
-						e.Graphics.DrawLine(Pens.Red, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
-					} else {
-						e.Graphics.DrawLine(Pens.Red, (float)start.X, (float)start.Y, (float)lastMouseLocation.X, (float)lastMouseLocation.Y);
-					}
-				}
-
-				if (this.productPlanner != null) {
-					Point mousePosInPlan = this.PointToClient(MousePosition);
-
-					//Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
-					Point3D planPoint = from2DTransform.Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
-					this.productPlanner.PaintAfterPlanPannel(e, this.gdiGraphics3D.To2DTransform, new Point2D(planPoint.X, planPoint.Y), mousePosInPlan);
-				}
-			}*/
 		}
 
 		public void InvalidateGraphics() {
@@ -255,21 +252,31 @@ namespace Europlan.Common {
 			this.InvalidateGraphics();
 		}
 
-		private Matrix3D ControlToPlanMatrix3D {
+		private Matrix3D PlanToControlMatrix3D {
 			get {
 				Matrix3D ctrlToPlan = Matrix3D.Identity;
 				ctrlToPlan = ctrlToPlan * Transformation3D.Scaling(this.Scale, -this.Scale);
-				ctrlToPlan = ctrlToPlan * Transformation3D.Translation(this.XPos + 10, -(this.Height - 10) + this.YPos);
+				ctrlToPlan = ctrlToPlan * Transformation3D.Translation(this.XPos, this.YPos);
 				return ctrlToPlan;
 			}
 		}
+		private Matrix3D ControlToPlanMatrix3D {
+			get { return this.PlanToControlMatrix3D.GetInverse(); }
+		}
 
-		private Matrix ControlToPlanMatrix {
+		private Matrix PlanToControlMatrix {
 			get {
 				Matrix ctrlToPlan = new Matrix();
 				ctrlToPlan.Scale((float)this.Scale, -(float)this.Scale);
-				ctrlToPlan.Translate((float)this.XPos + 10, (float)(-(this.Height - 10.0) + this.YPos));
+				ctrlToPlan.Translate((float)this.XPos, (float)(this.YPos));
 				return ctrlToPlan;
+			}
+		}
+		private Matrix ControlToPlanMatrix {
+			get {
+				Matrix result = this.PlanToControlMatrix;
+				result.Invert();
+				return result;
 			}
 		}
 
@@ -280,57 +287,30 @@ namespace Europlan.Common {
 			}
 
 			mouseDown = true;
-			Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-			mouseDownXInCtrl = mousePosInCtrl.X;
-			mouseDownYInCtrl = mousePosInCtrl.Y;
-			/*if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
-				Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-				PointF[] arr = new PointF[] { mousePosInCtrl };
-
-				Matrix ctrlToPlan = new Matrix();
-				ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-				ctrlToPlan.Rotate(this.Angle);
-				ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-				ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
-				ctrlToPlan.Translate(this.XPos, this.YPos);
-				ctrlToPlan.Invert();
-				ctrlToPlan.TransformPoints(arr);
-
-				PointF mousePosInPlan = arr[0];
-
+			//Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+			Point mousePosInCtrl = new Point(e.X, e.Y);
+			Point2D mousePosInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(mousePosInCtrl.X, mousePosInCtrl.Y)); ;
+			bool invalidate = false;
+			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
 				if (this.productPlanner != null) {
-					this.productPlanner.PlannerDragStart(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
+					invalidate = this.productPlanner.PlannerDragStart(mousePosInPlan, mousePosInCtrl, e.Button);
 				}
-			}*/
+			}
 			if ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle)) {
-				
-
-				Point2D mousePosInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(mousePosInCtrl.X, mousePosInCtrl.Y));
+				this.mouseDownXInCtrl = mousePosInCtrl.X;
+				this.mouseDownYInCtrl = mousePosInCtrl.Y;
 				this.mouseDownXInPlan = mousePosInPlan.X;
 				this.mouseDownYInPlan = mousePosInPlan.Y;
 				this.startXPos = this.XPos;
 				this.startYPos = this.YPos;
-
-				//				ctrlToPlan.Scale(
-
-				/*PointF[] arr = new PointF[] { mousePosInCtrl };
-
-				Matrix ctrlToPlan = new Matrix();
-				ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-				ctrlToPlan.Rotate(this.Angle);
-				ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-				ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
-				ctrlToPlan.Translate(this.XPos, this.YPos);
-				ctrlToPlan.Invert();
-				ctrlToPlan.TransformPoints(arr);
-
-				mouseDownX = arr[0].X;
-				mouseDownY = arr[0].Y;*/
 			}
 			if (e.Button == MouseButtons.Middle) {
 				inMove = true;
 				this.tempCursor = this.Cursor;
 				this.Cursor = Cursors.SizeAll;
+			}
+			if (invalidate) {
+				this.Invalidate();
 			}
 		}
 
@@ -341,26 +321,15 @@ namespace Europlan.Common {
 			}
 
 			mouseDown = false;
+			//Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+			Point mousePosInCtrl = new Point(e.X, e.Y);
+			Point2D mousePosInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(mousePosInCtrl.X, mousePosInCtrl.Y)); ;
 			bool invalidate = false;
-			/*if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
-				Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-				PointF[] arr = new PointF[] { mousePosInCtrl };
-
-				Matrix ctrlToPlan = new Matrix();
-				ctrlToPlan.Translate(((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, ((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-				ctrlToPlan.Rotate(this.Angle);
-				ctrlToPlan.Translate(-((float)image.Width / 2 + this.XPos) * (float)this.PlanScale, -((float)image.Height / 2 + this.YPos) * (float)this.PlanScale);
-				ctrlToPlan.Scale((float)this.PlanScale, (float)this.PlanScale);
-				ctrlToPlan.Translate(this.XPos, this.YPos);
-				ctrlToPlan.Invert();
-				ctrlToPlan.TransformPoints(arr);
-
-				PointF mousePosInPlan = arr[0];
-
+			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
 				if (this.productPlanner != null) {
-					invalidate = this.productPlanner.PlannerDragEnd(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
+					invalidate = this.productPlanner.PlannerDragEnd(mousePosInPlan, mousePosInCtrl, e.Button);
 				}
-			}*/
+			}
 			if (e.Button == MouseButtons.Middle) {
 				this.Cursor = this.tempCursor;
 				inMove = false;
@@ -376,31 +345,75 @@ namespace Europlan.Common {
 				return;
 			}
 
-			Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+			//Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+			Point mousePosInCtrl = new Point(e.X, e.Y);
 			Point2D mousePosInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(mousePosInCtrl.X, mousePosInCtrl.Y)); ;
 
 			bool invalidate = false;
 
-			/*if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
+			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
 				if (this.productPlanner != null) {
-					invalidate = this.productPlanner.PlannerDragMove(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
+					invalidate = this.productPlanner.PlannerDragMove(mousePosInPlan, mousePosInCtrl, e.Button);
 				}
 			}
-			if ((this.mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_SET_DISTRIBUTOR) && this.productPlanner != null) {
-				invalidate = this.productPlanner.PlannerMouseMove(new WW.Math.Point2D(arr[0].X, arr[0].Y), mousePosInCtrl, e.Button);
-			}*/
+			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null) {
+				invalidate = this.productPlanner.PlannerMouseMove(mousePosInPlan, mousePosInCtrl, e.Button);
+			}
 
 			if (mouseDown && ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle))) {
 				this.XPos = this.startXPos + (mousePosInCtrl.X - mouseDownXInCtrl) / this.Scale;
 				this.YPos = this.startYPos + (mousePosInCtrl.Y - mouseDownYInCtrl) / -this.Scale;
-				Console.WriteLine("x: " + this.XPos + " y: " + this.YPos);
+				this.RecalculateScrollBar();
 				invalidate = true;
-			/*} else if (mode == PlanMode.PM_PICK_MEASURE && startPoint.HasValue && !endPoint.HasValue) {
-				this.Invalidate();*/
 			}
 			if (invalidate) {
 				this.Invalidate();
 			}
+		}
+
+		protected override void OnMouseClick(MouseEventArgs e) {
+			base.OnMouseClick(e);
+			if (this.room == null) {
+				return;
+			}
+
+			//Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+			Point mousePosInCtrl = new Point(e.X, e.Y);
+			Point2D mousePosInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(mousePosInCtrl.X, mousePosInCtrl.Y)); ;
+			bool invalidate = false;
+
+			if (this.mode == PlanMode.PM_PLANNER_CLICK && this.productPlanner != null && e.Button != MouseButtons.Middle) {
+				invalidate = this.productPlanner.PlannerClick(mousePosInPlan, mousePosInCtrl, e.Button);
+			}
+			if (this.mode == PlanMode.PM_SELECT_OBJECT && e.Button == MouseButtons.Left) {
+				double xOffset = 0;
+				IGraphicalWallObject pickedObject = null;
+				foreach (GraphicalWall wall in this.room.Walls) {
+					pickedObject = wall.GetPickedObject(mousePosInPlan, xOffset, 0);
+					if (pickedObject != null) {
+						break;
+					}
+					xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100;
+				}
+				if (pickedObject != null) {
+					invalidate = true;
+					this.selectedObject = pickedObject;
+					this.OnObjectSelected(this.selectedObject);
+				}
+			}
+			if (invalidate) {
+				this.Invalidate();
+			}
+		}
+
+		protected override void OnKeyDown(KeyEventArgs e) {
+			shiftPressed = e.Shift;
+			base.OnKeyDown(e);
+		}
+
+		protected override void OnKeyUp(KeyEventArgs e) {
+			shiftPressed = false;
+			base.OnKeyUp(e);
 		}
 
 		protected override void OnMouseWheel(MouseEventArgs e) {
@@ -428,6 +441,75 @@ namespace Europlan.Common {
 			double centerY = center.HasValue ? -center.Value.Y : -this.ClientSize.Height / 2.0;
 			this.XPos = (float)((centerX - (centerX - this.XPos * oldScale) * addedScale) / newScale);
 			this.YPos = (float)((centerY - (centerY - this.YPos * oldScale) * addedScale) / newScale);
+			this.RecalculateScrollBar();
+		}
+
+		private void RecalculateScrollBar() {
+			/*int value = -(int)(this.XPos + (this.Width / this.Scale));
+			int min = -(10 + (int)(this.Width / this.Scale));
+			int max = -(int)((-TotalWidth * 100) + this.Width / this.Scale - 10);
+			if (value <= max && value >= min) {
+				this.hScrollBar1.Minimum = min;
+				this.hScrollBar1.Maximum = max;
+				this.hScrollBar1.LargeChange = (int)(this.Width / this.Scale);
+				this.hScrollBar1.Value = value;
+				this.hScrollBar1.Visible = true;
+			} else {
+				this.hScrollBar1.Minimum = min;
+				this.hScrollBar1.Maximum = max;
+				this.hScrollBar1.LargeChange = max - min + 1;
+				this.hScrollBar1.Value = min;
+				this.hScrollBar1.Visible = false;
+			}*/
+		}
+
+		public IWallProductPlanner ProductPlanner {
+			get { return this.productPlanner; }
+			set {
+				if (this.productPlanner != null) {
+					this.productPlanner.ConnectedWallPanel = null;
+				}
+				if (value != null && value.ConnectedWallPanel != null) {
+					value = null;
+				}
+				this.productPlanner = value;
+				if (this.productPlanner != null) {
+					this.productPlanner.ConnectedWallPanel = this;
+				}
+				this.Invalidate();
+			}
+		}
+
+		private void hScrollBar1_Scroll(object sender, ScrollEventArgs e) {
+
+		}
+
+		public IGraphicalWallObject SelectedObject {
+			get { return this.selectedObject; }
+			set { this.selectedObject = value; }
+		}
+
+		public PlanMode Mode {
+			get { return this.mode; }
+			set {
+				if (this.mode != value) {
+					this.mode = value;
+					this.Invalidate();
+				}
+			}
+		}
+
+		public class SelectedObjectArgs : EventArgs {
+			private IGraphicalWallObject selectedObject;
+
+			public SelectedObjectArgs(IGraphicalWallObject selectedObject) {
+				this.selectedObject = selectedObject;
+			}
+
+			public IGraphicalWallObject SelectedObject {
+				get { return this.selectedObject; }
+				set { this.selectedObject = value; }
+			}
 		}
 	}
 }
