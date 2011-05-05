@@ -18,35 +18,6 @@ namespace Europlan.Common {
 			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
 		}
 
-		private void btnCreateWalls_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.Room.Walls.Clear();
-			NewWallForm form = new NewWallForm(true, false);
-			DialogResult result = form.ShowDialog();
-			if (result == DialogResult.OK) {
-				double height = form.Height / 100.0;
-				double measure = this.graphicalWallPanel.Room.AssociatedPlan.Measure.Value;
-				Point2D lastVertex = this.graphicalWallPanel.Room.RoomCoordinates[this.graphicalWallPanel.Room.RoomCoordinates.Count - 1];
-				Polygon2D roomCoords = new Polygon2D(this.graphicalWallPanel.Room.RoomCoordinates);
-				if (!roomCoords.IsClockwise()) {
-					roomCoords.Reverse();
-				}
-				foreach (Point2D vertex in this.graphicalWallPanel.Room.RoomCoordinates) {
-					double length = (lastVertex - vertex).GetLength() / measure;
-					GraphicalWall newWall = new GraphicalWall();
-					newWall.WallId = form.WallId;
-					newWall.PlanStartPoint = lastVertex;
-					newWall.PlanEndPoint = vertex;
-					newWall.BorderDistance = HithermProduct.ConfigGraphicalRandabstandDefault;
-					newWall.CeilingContour.Add(new Point2D(0, height));
-					newWall.CeilingContour.Add(new Point2D(length, height));
-					this.graphicalWallPanel.Room.Walls.Add(newWall);
-					lastVertex = vertex;
-				}
-			}
-			form.Dispose();
-			this.graphicalWallPanel.InvalidateGraphics();
-		}
-
 		private void HithermPlannerForm_Load(object sender, EventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["HithermPlannerForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
@@ -71,6 +42,59 @@ namespace Europlan.Common {
 		}
 
 		private void btnWallSelectConstruction_Click(object sender, EventArgs e) {
+			// TODO
+		}
+
+		private void btnWallNewWall_Click(object sender, EventArgs e) {
+			NewWallForm form = new NewWallForm(true, false);
+			DialogResult result = form.ShowDialog();
+			if (result == DialogResult.OK) {
+				double height = form.Height / 100.0;
+				double measure = this.graphicalWallPanel.Room.AssociatedPlan.Measure.Value;
+
+			}
+			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void btnCreateWalls_Click(object sender, EventArgs e) {
+			bool ok = true;
+			if (this.graphicalWallPanel.Room.Walls.Count > 0) {
+				DialogResult result = MessageBox.Show("Es sind bereits Wände vorhanden. Wollen Sie wirklich alle bestehenden Wände löschen und automatisch erzeugen?", "Wände vorhanden", MessageBoxButtons.YesNo);
+				if (result == DialogResult.No) {
+					ok = false;
+				}
+			}
+			if (ok) {
+				this.graphicalWallPanel.Room.Walls.Clear();
+				NewWallForm form = new NewWallForm(true, false);
+				DialogResult result = form.ShowDialog();
+				if (result == DialogResult.OK) {
+					double height = form.Height / 100.0;
+					double measure = this.graphicalWallPanel.Room.AssociatedPlan.Measure.Value;
+					Point2D lastVertex = this.graphicalWallPanel.Room.RoomCoordinates[this.graphicalWallPanel.Room.RoomCoordinates.Count - 1];
+					Polygon2D roomCoords = new Polygon2D(this.graphicalWallPanel.Room.RoomCoordinates);
+					if (!roomCoords.IsClockwise()) {
+						roomCoords.Reverse();
+					}
+					foreach (Point2D vertex in this.graphicalWallPanel.Room.RoomCoordinates) {
+						double length = (lastVertex - vertex).GetLength() / measure;
+						GraphicalWall newWall = new GraphicalWall();
+						newWall.WallId = form.WallId;
+						newWall.PlanStartPoint = lastVertex;
+						newWall.PlanEndPoint = vertex;
+						newWall.BorderDistance = HithermProduct.ConfigGraphicalRandabstandDefault;
+						newWall.CeilingContour.Add(new Point2D(0, height));
+						newWall.CeilingContour.Add(new Point2D(length, height));
+						this.graphicalWallPanel.Room.Walls.Add(newWall);
+						lastVertex = vertex;
+					}
+				}
+				form.Dispose();
+			}
+			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void btnWallEdgeDistance_Click(object sender, EventArgs e) {
 			// TODO
 		}
 

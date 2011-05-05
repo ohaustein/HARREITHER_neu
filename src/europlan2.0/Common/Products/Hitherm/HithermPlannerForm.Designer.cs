@@ -36,7 +36,6 @@ namespace Europlan.Common {
 			this.panelDefineWalls = new System.Windows.Forms.Panel();
 			this.btnCreateWalls = new System.Windows.Forms.Button();
 			this.panelBottom = new System.Windows.Forms.Panel();
-			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.lblSelectedWall = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.btnWallSelectConstruction = new System.Windows.Forms.Button();
@@ -46,17 +45,18 @@ namespace Europlan.Common {
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.lblWallVertical = new System.Windows.Forms.Label();
-			this.numWallHorizontal = new Europlan.Common.NumericBox();
-			this.numWallVertical = new Europlan.Common.NumericBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.btnWallRight = new System.Windows.Forms.Button();
 			this.btnWallLeft = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
-			this.button5 = new System.Windows.Forms.Button();
+			this.btnWallNewWall = new System.Windows.Forms.Button();
+			this.btnWallEdgeDistance = new System.Windows.Forms.Button();
 			this.button6 = new System.Windows.Forms.Button();
+			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
+			this.numWallVertical = new Europlan.Common.NumericBox();
+			this.numWallHorizontal = new Europlan.Common.NumericBox();
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
 			this.panelTop.SuspendLayout();
@@ -163,8 +163,8 @@ namespace Europlan.Common {
 			// panelDefineWalls
 			// 
 			this.panelDefineWalls.Controls.Add(this.button6);
-			this.panelDefineWalls.Controls.Add(this.button5);
-			this.panelDefineWalls.Controls.Add(this.button4);
+			this.panelDefineWalls.Controls.Add(this.btnWallEdgeDistance);
+			this.panelDefineWalls.Controls.Add(this.btnWallNewWall);
 			this.panelDefineWalls.Controls.Add(this.button3);
 			this.panelDefineWalls.Controls.Add(this.button2);
 			this.panelDefineWalls.Controls.Add(this.button1);
@@ -197,19 +197,6 @@ namespace Europlan.Common {
 			this.panelBottom.Name = "panelBottom";
 			this.panelBottom.Size = new System.Drawing.Size(862, 88);
 			this.panelBottom.TabIndex = 3;
-			// 
-			// graphicalWallPanel
-			// 
-			this.graphicalWallPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.graphicalWallPanel.Location = new System.Drawing.Point(24, 116);
-			this.graphicalWallPanel.Name = "graphicalWallPanel";
-			this.graphicalWallPanel.ProductPlanner = null;
-			this.graphicalWallPanel.Room = null;
-			this.graphicalWallPanel.Scale = 1;
-			this.graphicalWallPanel.Size = new System.Drawing.Size(862, 261);
-			this.graphicalWallPanel.TabIndex = 4;
-			this.graphicalWallPanel.XPos = 421;
-			this.graphicalWallPanel.YPos = -130.5;
 			// 
 			// lblSelectedWall
 			// 
@@ -307,50 +294,6 @@ namespace Europlan.Common {
 			this.lblWallVertical.TabIndex = 18;
 			this.lblWallVertical.Text = "Senkrecht:";
 			// 
-			// numWallHorizontal
-			// 
-			this.numWallHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numWallHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numWallHorizontal.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numWallHorizontal.Location = new System.Drawing.Point(97, 19);
-			this.numWallHorizontal.MaxValue = null;
-			this.numWallHorizontal.MinValue = null;
-			this.numWallHorizontal.Name = "numWallHorizontal";
-			this.numWallHorizontal.Size = new System.Drawing.Size(87, 20);
-			this.numWallHorizontal.TabIndex = 20;
-			this.numWallHorizontal.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			// 
-			// numWallVertical
-			// 
-			this.numWallVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numWallVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numWallVertical.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numWallVertical.Location = new System.Drawing.Point(97, 42);
-			this.numWallVertical.MaxValue = null;
-			this.numWallVertical.MinValue = null;
-			this.numWallVertical.Name = "numWallVertical";
-			this.numWallVertical.Size = new System.Drawing.Size(87, 20);
-			this.numWallVertical.TabIndex = 21;
-			this.numWallVertical.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			// 
 			// groupBox3
 			// 
 			this.groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -406,21 +349,23 @@ namespace Europlan.Common {
 			this.button3.TabIndex = 19;
 			this.button3.UseVisualStyleBackColor = true;
 			// 
-			// button4
+			// btnWallNewWall
 			// 
-			this.button4.Location = new System.Drawing.Point(496, 56);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(25, 25);
-			this.button4.TabIndex = 20;
-			this.button4.UseVisualStyleBackColor = true;
+			this.btnWallNewWall.Location = new System.Drawing.Point(496, 56);
+			this.btnWallNewWall.Name = "btnWallNewWall";
+			this.btnWallNewWall.Size = new System.Drawing.Size(25, 25);
+			this.btnWallNewWall.TabIndex = 20;
+			this.btnWallNewWall.UseVisualStyleBackColor = true;
+			this.btnWallNewWall.Click += new System.EventHandler(this.btnWallNewWall_Click);
 			// 
-			// button5
+			// btnWallEdgeDistance
 			// 
-			this.button5.Location = new System.Drawing.Point(527, 25);
-			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(25, 25);
-			this.button5.TabIndex = 21;
-			this.button5.UseVisualStyleBackColor = true;
+			this.btnWallEdgeDistance.Location = new System.Drawing.Point(527, 25);
+			this.btnWallEdgeDistance.Name = "btnWallEdgeDistance";
+			this.btnWallEdgeDistance.Size = new System.Drawing.Size(25, 25);
+			this.btnWallEdgeDistance.TabIndex = 21;
+			this.btnWallEdgeDistance.UseVisualStyleBackColor = true;
+			this.btnWallEdgeDistance.Click += new System.EventHandler(this.btnWallEdgeDistance_Click);
 			// 
 			// button6
 			// 
@@ -429,6 +374,65 @@ namespace Europlan.Common {
 			this.button6.Size = new System.Drawing.Size(25, 25);
 			this.button6.TabIndex = 22;
 			this.button6.UseVisualStyleBackColor = true;
+			// 
+			// graphicalWallPanel
+			// 
+			this.graphicalWallPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.graphicalWallPanel.Location = new System.Drawing.Point(24, 116);
+			this.graphicalWallPanel.Name = "graphicalWallPanel";
+			this.graphicalWallPanel.ProductPlanner = null;
+			this.graphicalWallPanel.Room = null;
+			this.graphicalWallPanel.Scale = 1;
+			this.graphicalWallPanel.Size = new System.Drawing.Size(862, 261);
+			this.graphicalWallPanel.TabIndex = 4;
+			this.graphicalWallPanel.XPos = 421;
+			this.graphicalWallPanel.YPos = -130.5;
+			// 
+			// numWallVertical
+			// 
+			this.numWallVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numWallVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numWallVertical.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numWallVertical.Location = new System.Drawing.Point(97, 42);
+			this.numWallVertical.MaxValue = null;
+			this.numWallVertical.MinValue = null;
+			this.numWallVertical.Name = "numWallVertical";
+			this.numWallVertical.Size = new System.Drawing.Size(87, 20);
+			this.numWallVertical.TabIndex = 21;
+			this.numWallVertical.Text = "0";
+			this.numWallVertical.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			// 
+			// numWallHorizontal
+			// 
+			this.numWallHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numWallHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numWallHorizontal.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numWallHorizontal.Location = new System.Drawing.Point(97, 19);
+			this.numWallHorizontal.MaxValue = null;
+			this.numWallHorizontal.MinValue = null;
+			this.numWallHorizontal.Name = "numWallHorizontal";
+			this.numWallHorizontal.Size = new System.Drawing.Size(87, 20);
+			this.numWallHorizontal.TabIndex = 20;
+			this.numWallHorizontal.Text = "0";
+			this.numWallHorizontal.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			// 
 			// HithermPlannerForm
 			// 
@@ -491,8 +495,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnWallLeft;
 		private System.Windows.Forms.Button btnWallRight;
 		private System.Windows.Forms.Button button6;
-		private System.Windows.Forms.Button button5;
-		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Button btnWallEdgeDistance;
+		private System.Windows.Forms.Button btnWallNewWall;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button1;
