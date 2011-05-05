@@ -313,6 +313,23 @@ namespace Europlan.Common {
 					throw new Exception("Unknown Register Type");
 			}
 		}
+
+		public static Nullable<HithermRegisterTypeEnum> GetRegisterTypeForHoehe(int hoehe, bool hochleistungsRegister) {
+			if (hoehe >= GetRegisterHoehe(HithermRegisterTypeEnum.HIT_300_5)) {
+				return hochleistungsRegister ? HithermRegisterTypeEnum.HIT_300_5 : HithermRegisterTypeEnum.HIT_300_10;
+			} else if (hoehe >= GetRegisterHoehe(HithermRegisterTypeEnum.HIT_250_5)) {
+				return hochleistungsRegister ? HithermRegisterTypeEnum.HIT_250_5 : HithermRegisterTypeEnum.HIT_250_10;
+			} else if (hoehe >= GetRegisterHoehe(HithermRegisterTypeEnum.HIT_200_5)) {
+				return hochleistungsRegister ? HithermRegisterTypeEnum.HIT_200_5 : HithermRegisterTypeEnum.HIT_200_10;
+			} else if (hoehe >= GetRegisterHoehe(HithermRegisterTypeEnum.HIT_150_5)) {
+				return hochleistungsRegister ? HithermRegisterTypeEnum.HIT_150_5 : HithermRegisterTypeEnum.HIT_150_10;
+			} else if (hoehe >= GetRegisterHoehe(HithermRegisterTypeEnum.HIT_100_5)) {
+				return hochleistungsRegister ? HithermRegisterTypeEnum.HIT_100_5 : HithermRegisterTypeEnum.HIT_100_10;
+			} else if (hoehe >= GetRegisterHoehe(HithermRegisterTypeEnum.HIT_50_5)) {
+				return hochleistungsRegister ? HithermRegisterTypeEnum.HIT_50_5 : HithermRegisterTypeEnum.HIT_50_10;
+			}
+			return null;
+		}
 		#endregion Static Methods
 
 		private HithermRegisterTypeEnum registerType = HithermRegisterTypeEnum.HIT_50_5;
@@ -322,6 +339,10 @@ namespace Europlan.Common {
 		private double pipeVertical = 0.5;
 		private HithermWall wall;
 		private String wallId = null;
+
+		private String graphWallId = null;
+		private double graphPosX = 0;
+		private double graphPosY = 0;
 
 		/*private Nullable<Point> origin = null;*/
 
@@ -497,6 +518,37 @@ namespace Europlan.Common {
 					}
 				} else {
 					this.Rohre = value / 10;
+				}
+			}
+		}
+
+		[XmlIgnore]
+		public double RegisterBreiteForDrawing {
+			get {
+				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
+					if (HithermProduct.ConfigUsePlus) {
+						return (this.Rohre % 14 == 0) ? this.RegisterBreite : this.RegisterBreite + 2.5;
+					} else {
+						return (this.Rohre % 9 == 0) ? this.RegisterBreite : this.RegisterBreite + 2.5;
+					}
+				} else {
+					return this.RegisterBreite;
+				}
+			}
+			set {
+				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
+					value = value - 2.5;
+					if (HithermProduct.ConfigUsePlus) {
+						int rohre = (int)Math.Floor(value / 5);
+						rohre -= rohre / 15;
+						this.Rohre = rohre;
+					} else {
+						int rohre = (int)Math.Floor(value / 5);
+						rohre -= rohre / 10;
+						this.Rohre = rohre;
+					}
+				} else {
+					this.Rohre = (int)Math.Floor(value / 10);
 				}
 			}
 		}
@@ -757,6 +809,21 @@ namespace Europlan.Common {
 						throw new Exception("Unknown Register Type");
 				}
 			}
+		}
+
+		public String GraphWallId {
+			get { return this.graphWallId; }
+			set { this.graphWallId = value; }
+		}
+
+		public double GraphPosX {
+			get { return this.graphPosX; }
+			set { this.graphPosX = value; }
+		}
+
+		public double GraphPosY {
+			get { return this.graphPosY; }
+			set { this.graphPosY = value; }
 		}
 	}
 }

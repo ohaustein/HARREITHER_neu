@@ -222,7 +222,6 @@ namespace Europlan.Common {
 				xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
 			}
 
-			e.Graphics.Transform = oldTransform;
 			e.Graphics.ResetClip();
 			if (this.productPlanner != null) {
 				e.Graphics.Transform = paintMatrix;
@@ -230,6 +229,7 @@ namespace Europlan.Common {
 				Point2D pointInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(pointInCtrl.X, pointInCtrl.Y));
 				this.productPlanner.PaintAfterPlanPannel(e, pointInPlan, pointInCtrl);
 			}
+			e.Graphics.Transform = oldTransform;
 			e.Graphics.DrawRectangle(Pens.Gray, 0, 0, this.Width - 1, this.Height - 1);
 			e.Graphics.Clip = oldClip;
 		}
@@ -351,7 +351,7 @@ namespace Europlan.Common {
 
 			bool invalidate = false;
 
-			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
+			if (mode == PlanMode.PM_PLANNER_DRAG && mouseDown && this.productPlanner != null && e.Button != MouseButtons.Middle) {
 				if (this.productPlanner != null) {
 					invalidate = this.productPlanner.PlannerDragMove(mousePosInPlan, mousePosInCtrl, e.Button);
 				}
@@ -470,7 +470,7 @@ namespace Europlan.Common {
 					this.productPlanner.ConnectedWallPanel = null;
 				}
 				if (value != null && value.ConnectedWallPanel != null) {
-					value = null;
+					value.ConnectedWallPanel = null;
 				}
 				this.productPlanner = value;
 				if (this.productPlanner != null) {

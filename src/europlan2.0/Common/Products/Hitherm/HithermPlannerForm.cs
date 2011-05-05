@@ -100,10 +100,17 @@ namespace Europlan.Common {
 
 		private void btnPick_Click(object sender, EventArgs e) {
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_SELECT_OBJECT;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
 		}
 
 		private void btnMove_Click(object sender, EventArgs e) {
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_MOVE;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+		}
+
+		private void btnRegister_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_REGISTER;
 		}
 
 	}

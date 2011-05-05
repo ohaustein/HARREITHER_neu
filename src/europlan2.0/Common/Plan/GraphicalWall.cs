@@ -176,6 +176,20 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+
+		public GraphicalWall GetPickedWall(Point2D planPoint, double xOffset, double yOffset) {
+			GraphicalWall pickedWall = null;
+			if (this.dachSchraege != null) {
+				pickedWall = this.dachSchraege.GetPickedWall(planPoint, xOffset, yOffset + this.GetWallHeight());
+				if (pickedWall != null) {
+					return pickedWall;
+				}
+			}
+			if (HitTest(planPoint, xOffset, yOffset)) {
+				return this;
+			}
+			return null;
+		}
 		#endregion
 
 		public double GetWallHeight() {
@@ -186,6 +200,13 @@ namespace Europlan.Common {
 				}
 			}
 			return height;
+		}
+
+		public double GetWallWidth() {
+			if (this.CeilingContour == null || this.CeilingContour.Count == 0) {
+				return 0;
+			}
+			return this.CeilingContour[this.CeilingContour.Count - 1].X;
 		}
 
 		public Polygon2D GetWallPolygon(double xOffset, double yOffset) {
@@ -199,6 +220,16 @@ namespace Europlan.Common {
 			}
 			wallBorder.Add(new Point2D(xOffset + this.CeilingContour[this.CeilingContour.Count - 1].X * 100.0, yOffset));
 			return wallBorder;
+		}
+
+		public Nullable<double> GetWallYOffset(GraphicalWall wall, double startOffset) {
+			if (this == wall) {
+				return startOffset;
+			}
+			if (this.DachSchraege != null) {
+				return this.DachSchraege.GetWallYOffset(wall, startOffset + this.GetWallHeight());
+			}
+			return null;
 		}
 	}
 }
