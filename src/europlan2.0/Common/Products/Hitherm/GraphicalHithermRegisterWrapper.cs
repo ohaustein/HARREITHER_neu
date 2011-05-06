@@ -161,5 +161,17 @@ namespace Europlan.Common {
 		public PossibleHithermRegisterConnection GetInputConnection(double xOffset, double yOffset, HithermProduct product, HithermCircuit circuit) {
 			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset), GetInputConnectionArea(xOffset, yOffset), false, true, product, circuit, this.register);
 		}
+
+		public override bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset) {
+			Polygon2D register = GetObjectBorders(xOffset, yOffset);
+			bool inside = false;
+			foreach (Point2D point in polygon) {
+				if (Polygon2D.IsInside(point, register)) {
+					inside = true;
+					break;
+				}
+			}
+			return inside;
+		}
 	}
 }

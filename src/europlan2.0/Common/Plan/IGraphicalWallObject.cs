@@ -11,5 +11,6 @@ namespace Europlan.Common {
 		void PaintObject(Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale);
 		IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset);
 		Polygon2D GetObjectBorders(double xOffset, double yOffset);
+		bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset);
 	}
 }

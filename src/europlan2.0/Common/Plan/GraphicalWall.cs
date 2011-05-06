@@ -140,8 +140,7 @@ namespace Europlan.Common {
 
 			g.FillPolygon(wallBrush, pointArr);
 
-			Polygon2D usableArea = new Polygon2D(wallBorder);
-			usableArea.Outset(-this.BorderDistance * 100.0);
+			Polygon2D usableArea = GetUsableBorder(wallBorder);
 			List<PointF> usablePoints = new List<PointF>();
 			foreach (Point2D vertex in usableArea) {
 				usablePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
@@ -172,6 +171,12 @@ namespace Europlan.Common {
 			if (this.DachSchraege != null) {
 				this.DachSchraege.PaintObject(g, xOffset, yOffset + this.GetWallHeight() * 100, selectedObject, scale);
 			}
+		}
+
+		private Polygon2D GetUsableBorder(Polygon2D wallBorder) {
+			Polygon2D usableArea = new Polygon2D(wallBorder);
+			usableArea.Outset(-this.BorderDistance * 100.0);
+			return usableArea;
 		}
 
 		public IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset) {
@@ -321,5 +326,18 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+
+		public bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset) {
+			Polygon2D wall = GetUsableBorder(this.GetObjectBorders(xOffset, yOffset));
+			bool outside = false;
+			foreach (Point2D point in polygon) {
+				if (!Polygon2D.IsInside(point, wall)) {
+					outside = true;
+					break;
+				}
+			}
+			return outside;
+		}
+
 	}
 }
