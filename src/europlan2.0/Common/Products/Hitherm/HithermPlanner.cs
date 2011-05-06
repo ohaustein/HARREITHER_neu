@@ -11,7 +11,8 @@ namespace Europlan.Common {
 
 		public enum HithermPlannerMode {
 			HPM_NONE,
-			HPM_ADD_REGISTER
+			HPM_ADD_REGISTER,
+			HPM_ADD_CONNECTION
 		}
 
 		private GraphicalWallPanel connectedWallPanel;
@@ -25,7 +26,52 @@ namespace Europlan.Common {
 		private double newRegisterWallXOffset = 0;
 		private double newRegisterWallYOffset = 0;
 
+		private PossibleHithermRegisterConnection startConnection = null;
+
+		private HithermRegister.RohrabstandEnum newRegisterRohrabstand = HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG;
+		private bool newRegisterVorlaufRight = true;
+		private bool newRegisterUseHelpline = true;
+		private bool newRegisterOnlyWhole = false;
+		private HithermRegister.RegisterOrientationEnum newRegisterOrientation = HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
+
+		public HithermRegister.RohrabstandEnum NewRegisterRohrabstand {
+			get { return newRegisterRohrabstand; }
+			set { newRegisterRohrabstand = value; }
+		}
+
+		public bool NewRegisterVorlaufRight {
+			get { return newRegisterVorlaufRight; }
+			set { newRegisterVorlaufRight = value; }
+		}
+
+		public bool NewRegisterUseHelpline {
+			get { return newRegisterUseHelpline; }
+			set { newRegisterUseHelpline = value; }
+		}
+
+		public bool NewRegisterOnlyWhole {
+			get { return newRegisterOnlyWhole; }
+			set { newRegisterOnlyWhole = value; }
+		}
+
+		public HithermRegister.RegisterOrientationEnum NewRegisterOrientation {
+			get { return newRegisterOrientation; }
+			set { newRegisterOrientation = value; }
+		}
+
 		private HithermProduct product = null;
+
+		private event EventHandler<EventArgs> recalculationNecessary;
+		public event EventHandler<EventArgs> RecalculationNecessary {
+			add { this.recalculationNecessary += value; }
+			remove { this.recalculationNecessary -= value; }
+		}
+
+		protected virtual void OnRecalculationNecessary() {
+			if (this.recalculationNecessary != null) {
+				this.recalculationNecessary(this, EventArgs.Empty);
+			}
+		}
 
 		#region IWallProductPlanner Members
 		public GraphicalWallPanel ConnectedWallPanel {
@@ -74,6 +120,12 @@ namespace Europlan.Common {
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, System.Windows.Forms.MouseButtons button) {
 			if (this.mode == HithermPlannerMode.HPM_NONE) {
 				return false;
+			}
+
+			if (this.mode == HithermPlannerMode.HPM_ADD_CONNECTION) {
+				/*if (this.startConnection == null) {
+					foreach (
+				}*/
 			}
 
 			return false;
@@ -143,6 +195,7 @@ namespace Europlan.Common {
 				this.product.PlannedCircuits.Add(c);
 				this.newRegister = null;
 				this.newRegisterWall = null;
+				this.OnRecalculationNecessary();
 				return true;
 			}
 

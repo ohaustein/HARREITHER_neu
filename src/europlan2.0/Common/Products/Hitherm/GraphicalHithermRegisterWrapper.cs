@@ -78,8 +78,10 @@ namespace Europlan.Common {
 						pos += 10;
 					}
 				}
-				//register.RegisterBreite;
-				//register.RegisterHoehe;
+				if (true) { // TODO check if vorlauf is on the right or left side
+
+				} else {
+				}
 			} else {
 			}
 		}

@@ -322,7 +322,7 @@ namespace Europlan.Common {
 		}
 
 		private List<Point2D> newConnectionVertices = null;
-		private Nullable<PossibleConnection> newConnectionStart = null;
+		private PossibleConnection newConnectionStart = null;
 		private bool newConnectionStartAtOutput = true;
 		//private bool newConnectionLastSegmentHorizontal = true;
 
@@ -330,7 +330,7 @@ namespace Europlan.Common {
 			bool redraw = false;
 			if (this.mode == ConnectionMode.KDM_ADD_CONNECTION && button != MouseButtons.Middle) {
 				if (this.newConnectionStart == null) {
-					Nullable<PossibleConnection> connection = null;
+					PossibleConnection connection = null;
 					foreach (PossibleConnection pc in this.possibleConnections) {
 						if (pc.ConnectionArea.IsInside(planPoint)) {
 							connection = pc;
@@ -338,16 +338,16 @@ namespace Europlan.Common {
 						}
 					}
 					if (connection != null) {
-						if (connection.Value.PossibleInput && connection.Value.PossibleOutput) {
+						if (connection.PossibleInput && connection.PossibleOutput) {
 							this.contextMenu.Show(this.connectedPlanPanel as Control, pointInControl);
-						} else if (connection.Value.PossibleInput) {
-							this.AddConnection(connection.Value, true);
-						} else if (connection.Value.PossibleOutput) {
-							this.AddConnection(connection.Value, false);
+						} else if (connection.PossibleInput) {
+							this.AddConnection(connection, true);
+						} else if (connection.PossibleOutput) {
+							this.AddConnection(connection, false);
 						}
 					}
 				} else {
-					Nullable<PossibleConnection> endConnection;
+					PossibleConnection endConnection;
 					this.newConnectionVertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection));
 					this.nextConnectionPoints.Clear();
 					if (endConnection != null) {
@@ -357,14 +357,14 @@ namespace Europlan.Common {
 						PossibleConnection distributorConnection;
 						bool ok = false;
 						bool vorlauf = true;
-						if (this.newConnectionStart.Value.Product != null && endConnection.Value.Distributor != null) {
-							productConnection = this.newConnectionStart.Value;
-							distributorConnection = endConnection.Value;
+						if (this.newConnectionStart.Product != null && endConnection.Distributor != null) {
+							productConnection = this.newConnectionStart;
+							distributorConnection = endConnection;
 							vorlauf = !this.newConnectionStartAtOutput;
 							ok = true;
-						} else if (endConnection.Value.Product != null && this.newConnectionStart.Value.Distributor != null) {
-							distributorConnection = this.newConnectionStart.Value;
-							productConnection = endConnection.Value;
+						} else if (endConnection.Product != null && this.newConnectionStart.Distributor != null) {
+							distributorConnection = this.newConnectionStart;
+							productConnection = endConnection;
 							vorlauf = this.newConnectionStartAtOutput;
 							ok = true;
 						} else {
@@ -522,7 +522,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (this.newConnectionStart != null) {
-					Nullable<PossibleConnection> tmp;
+					PossibleConnection tmp;
 					this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out tmp);
 				} else {
 					this.nextConnectionPoints = new List<Point2D>();
@@ -691,7 +691,7 @@ namespace Europlan.Common {
 
 		}
 
-		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out Nullable<PossibleConnection> endConnection) {
+		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out PossibleConnection endConnection) {
 			List<Point2D> nextConnectionPoints = new List<Point2D>();
 			endConnection = null;
 			int index;
@@ -718,9 +718,9 @@ namespace Europlan.Common {
 			}*/
 			if (endConnection == null) {
 				bool horizontal;
-				nextConnectionPoints.Add(this.GetNextConnectionVertex(mousePoint, this.newConnectionStart.Value.Rotation, out horizontal));
+				nextConnectionPoints.Add(this.GetNextConnectionVertex(mousePoint, this.newConnectionStart.Rotation, out horizontal));
 			} else {
-				Point2D connectionPoint = endConnection.Value.ConnectionPoint;
+				Point2D connectionPoint = endConnection.ConnectionPoint;
 				if (this.newConnectionVertices.Count > 1) {
 					Point2D p1 = this.newConnectionVertices[this.newConnectionVertices.Count - 2];
 					Point2D p2 = this.newConnectionVertices[this.newConnectionVertices.Count - 1];

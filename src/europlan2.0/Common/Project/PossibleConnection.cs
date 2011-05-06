@@ -5,7 +5,7 @@ using WW.Math;
 using WW.Math.Geometry;
 
 namespace Europlan.Common {
-	public struct PossibleConnection {
+	public class PossibleConnection {
 		private Point2D connectionPoint;
 		private Polygon2D connectionArea;
 		private bool possibleInput;
@@ -15,6 +15,9 @@ namespace Europlan.Common {
 		private Distributor distributor;
 		private int distributorPosition;
 		private double rotation;
+
+		public PossibleConnection() {
+		}
 
 		public PossibleConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, Product product, Circuit circuit, double rotation, int i) {
 			this.connectionPoint = connectionPoint;
@@ -80,6 +83,22 @@ namespace Europlan.Common {
 
 		public double Rotation {
 			get { return this.rotation; }
+		}
+	}
+
+	public class PossibleHithermRegisterConnection : PossibleConnection {
+		private HithermRegister register;
+
+		public PossibleHithermRegisterConnection() {
+		}
+
+		public PossibleHithermRegisterConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, HithermProduct product, HithermCircuit circuit, HithermRegister register)
+			: base(connectionPoint, connectionArea, possibleInput, possibleOutput, product, circuit, 0, 0) {
+			this.register = register;
+		}
+
+		public HithermRegister Register {
+			get { return this.register; }
 		}
 	}
 }
