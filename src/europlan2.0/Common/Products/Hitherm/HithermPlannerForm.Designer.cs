@@ -33,6 +33,7 @@ namespace Europlan.Common {
 			this.btnWall = new System.Windows.Forms.ToolStripButton();
 			this.btnObstacle = new System.Windows.Forms.ToolStripButton();
 			this.btnRegister = new System.Windows.Forms.ToolStripButton();
+			this.btnConnection = new System.Windows.Forms.ToolStripButton();
 			this.panelTop = new System.Windows.Forms.Panel();
 			this.panelModifyHitherm = new System.Windows.Forms.Panel();
 			this.chkRegisterWholeRegister = new System.Windows.Forms.CheckBox();
@@ -48,8 +49,6 @@ namespace Europlan.Common {
 			this.rbRegisterRight = new System.Windows.Forms.RadioButton();
 			this.rbRegisterLeft = new System.Windows.Forms.RadioButton();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.numRegisterVertical = new Europlan.Common.NumericBox();
-			this.numRegisterLeft = new Europlan.Common.NumericBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
@@ -67,8 +66,6 @@ namespace Europlan.Common {
 			this.lblSelectedWall = new System.Windows.Forms.Label();
 			this.btnCreateWalls = new System.Windows.Forms.Button();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.numWallVertical = new Europlan.Common.NumericBox();
-			this.numWallHorizontal = new Europlan.Common.NumericBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.lblWallVertical = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -77,8 +74,6 @@ namespace Europlan.Common {
 			this.btnWallDelete = new System.Windows.Forms.Button();
 			this.btnWallRevert = new System.Windows.Forms.Button();
 			this.btnWallApply = new System.Windows.Forms.Button();
-			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
-			this.hithermPlanner = new Europlan.Common.HithermPlanner();
 			this.label7 = new System.Windows.Forms.Label();
 			this.lblHeat = new System.Windows.Forms.Label();
 			this.lblCool = new System.Windows.Forms.Label();
@@ -121,7 +116,12 @@ namespace Europlan.Common {
 			this.lstError = new System.Windows.Forms.ListView();
 			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
 			this.panelBottom = new System.Windows.Forms.Panel();
-			this.btnConnection = new System.Windows.Forms.ToolStripButton();
+			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
+			this.hithermPlanner = new Europlan.Common.HithermPlanner();
+			this.numWallVertical = new Europlan.Common.NumericBox();
+			this.numWallHorizontal = new Europlan.Common.NumericBox();
+			this.numRegisterVertical = new Europlan.Common.NumericBox();
+			this.numRegisterLeft = new Europlan.Common.NumericBox();
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
 			this.panelTop.SuspendLayout();
@@ -189,56 +189,66 @@ namespace Europlan.Common {
 			// 
 			// btnPick
 			// 
-			this.btnPick.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnPick.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnPick.Image = ((System.Drawing.Image)(resources.GetObject("btnPick.Image")));
 			this.btnPick.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnPick.Name = "btnPick";
-			this.btnPick.Size = new System.Drawing.Size(29, 33);
-			this.btnPick.Text = "pick";
+			this.btnPick.Size = new System.Drawing.Size(29, 20);
+			this.btnPick.Text = "Objekte bearbeiten";
 			this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
 			// 
 			// btnMove
 			// 
-			this.btnMove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnMove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
 			this.btnMove.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnMove.Name = "btnMove";
-			this.btnMove.Size = new System.Drawing.Size(29, 41);
-			this.btnMove.Text = "move";
+			this.btnMove.Size = new System.Drawing.Size(29, 20);
+			this.btnMove.Text = "Ausschnitt verschieben";
 			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
 			// 
 			// btnWall
 			// 
-			this.btnWall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnWall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnWall.Image = ((System.Drawing.Image)(resources.GetObject("btnWall.Image")));
 			this.btnWall.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnWall.Name = "btnWall";
-			this.btnWall.Size = new System.Drawing.Size(29, 32);
-			this.btnWall.Text = "wall";
+			this.btnWall.Size = new System.Drawing.Size(29, 20);
+			this.btnWall.Text = "Wände";
 			// 
 			// btnObstacle
 			// 
-			this.btnObstacle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnObstacle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnObstacle.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacle.Image")));
 			this.btnObstacle.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnObstacle.Name = "btnObstacle";
-			this.btnObstacle.Size = new System.Drawing.Size(29, 55);
-			this.btnObstacle.Text = "obstacle";
+			this.btnObstacle.Size = new System.Drawing.Size(29, 20);
+			this.btnObstacle.Text = "Fenster und Türen";
 			// 
 			// btnRegister
 			// 
-			this.btnRegister.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnRegister.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnRegister.Image = ((System.Drawing.Image)(resources.GetObject("btnRegister.Image")));
 			this.btnRegister.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRegister.Name = "btnRegister";
-			this.btnRegister.Size = new System.Drawing.Size(29, 31);
-			this.btnRegister.Text = "add";
+			this.btnRegister.Size = new System.Drawing.Size(29, 20);
+			this.btnRegister.Text = "Wärmeregister";
 			this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+			// 
+			// btnConnection
+			// 
+			this.btnConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnConnection.Image")));
+			this.btnConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnConnection.Name = "btnConnection";
+			this.btnConnection.Size = new System.Drawing.Size(29, 20);
+			this.btnConnection.Text = "Anbindeleitungen";
+			this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
 			// 
 			// panelTop
 			// 
-			this.panelTop.Controls.Add(this.panelModifyHitherm);
 			this.panelTop.Controls.Add(this.panelDefineWalls);
+			this.panelTop.Controls.Add(this.panelModifyHitherm);
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelTop.Location = new System.Drawing.Point(32, 25);
 			this.panelTop.Name = "panelTop";
@@ -289,6 +299,7 @@ namespace Europlan.Common {
 			// 
 			this.btnRegisterConnect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterConnect.Image")));
 			this.btnRegisterConnect.Location = new System.Drawing.Point(607, 60);
 			this.btnRegisterConnect.Name = "btnRegisterConnect";
 			this.btnRegisterConnect.Size = new System.Drawing.Size(25, 25);
@@ -300,6 +311,7 @@ namespace Europlan.Common {
 			// 
 			this.btnRegisterDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterDelete.Image")));
 			this.btnRegisterDelete.Location = new System.Drawing.Point(607, 29);
 			this.btnRegisterDelete.Name = "btnRegisterDelete";
 			this.btnRegisterDelete.Size = new System.Drawing.Size(25, 25);
@@ -311,6 +323,7 @@ namespace Europlan.Common {
 			// 
 			this.btnRegisterRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterRevert.Image")));
 			this.btnRegisterRevert.Location = new System.Drawing.Point(576, 60);
 			this.btnRegisterRevert.Name = "btnRegisterRevert";
 			this.btnRegisterRevert.Size = new System.Drawing.Size(25, 25);
@@ -322,6 +335,7 @@ namespace Europlan.Common {
 			// 
 			this.btnRegisterAccept.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterAccept.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterAccept.Image")));
 			this.btnRegisterAccept.Location = new System.Drawing.Point(576, 29);
 			this.btnRegisterAccept.Name = "btnRegisterAccept";
 			this.btnRegisterAccept.Size = new System.Drawing.Size(25, 25);
@@ -420,64 +434,6 @@ namespace Europlan.Common {
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Position";
 			// 
-			// numRegisterVertical
-			// 
-			this.numRegisterVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numRegisterVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numRegisterVertical.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.Location = new System.Drawing.Point(97, 42);
-			this.numRegisterVertical.MaxValue = null;
-			this.numRegisterVertical.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.Name = "numRegisterVertical";
-			this.numRegisterVertical.Size = new System.Drawing.Size(87, 20);
-			this.numRegisterVertical.TabIndex = 2;
-			this.numRegisterVertical.Text = "1";
-			this.numRegisterVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRegisterVertical.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.ValueChanged += new System.EventHandler(this.numRegisterVertical_ValueChanged);
-			// 
-			// numRegisterLeft
-			// 
-			this.numRegisterLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numRegisterLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numRegisterLeft.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.Location = new System.Drawing.Point(97, 19);
-			this.numRegisterLeft.MaxValue = null;
-			this.numRegisterLeft.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.Name = "numRegisterLeft";
-			this.numRegisterLeft.Size = new System.Drawing.Size(87, 20);
-			this.numRegisterLeft.TabIndex = 1;
-			this.numRegisterLeft.Text = "1";
-			this.numRegisterLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRegisterLeft.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.ValueChanged += new System.EventHandler(this.numRegisterLeft_ValueChanged);
-			// 
 			// label1
 			// 
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -546,6 +502,7 @@ namespace Europlan.Common {
 			// 
 			this.btnWallHelpLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallHelpLine.Image = ((System.Drawing.Image)(resources.GetObject("btnWallHelpLine.Image")));
 			this.btnWallHelpLine.Location = new System.Drawing.Point(527, 56);
 			this.btnWallHelpLine.Name = "btnWallHelpLine";
 			this.btnWallHelpLine.Size = new System.Drawing.Size(25, 25);
@@ -556,6 +513,7 @@ namespace Europlan.Common {
 			// 
 			this.btnWallEdgeDistance.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallEdgeDistance.Image = ((System.Drawing.Image)(resources.GetObject("btnWallEdgeDistance.Image")));
 			this.btnWallEdgeDistance.Location = new System.Drawing.Point(527, 25);
 			this.btnWallEdgeDistance.Name = "btnWallEdgeDistance";
 			this.btnWallEdgeDistance.Size = new System.Drawing.Size(25, 25);
@@ -668,64 +626,6 @@ namespace Europlan.Common {
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Größe";
 			// 
-			// numWallVertical
-			// 
-			this.numWallVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numWallVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numWallVertical.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numWallVertical.Location = new System.Drawing.Point(97, 42);
-			this.numWallVertical.MaxValue = null;
-			this.numWallVertical.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numWallVertical.Name = "numWallVertical";
-			this.numWallVertical.Size = new System.Drawing.Size(87, 20);
-			this.numWallVertical.TabIndex = 21;
-			this.numWallVertical.Text = "1";
-			this.numWallVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numWallVertical.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numWallVertical.ValueChanged += new System.EventHandler(this.numWallVertical_ValueChanged);
-			// 
-			// numWallHorizontal
-			// 
-			this.numWallHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numWallHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numWallHorizontal.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numWallHorizontal.Location = new System.Drawing.Point(97, 19);
-			this.numWallHorizontal.MaxValue = null;
-			this.numWallHorizontal.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numWallHorizontal.Name = "numWallHorizontal";
-			this.numWallHorizontal.Size = new System.Drawing.Size(87, 20);
-			this.numWallHorizontal.TabIndex = 20;
-			this.numWallHorizontal.Text = "1";
-			this.numWallHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numWallHorizontal.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numWallHorizontal.ValueChanged += new System.EventHandler(this.numWallHorizontal_ValueChanged);
-			// 
 			// label3
 			// 
 			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -766,6 +666,7 @@ namespace Europlan.Common {
 			// 
 			this.btnWallNewWall.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallNewWall.Image = ((System.Drawing.Image)(resources.GetObject("btnWallNewWall.Image")));
 			this.btnWallNewWall.Location = new System.Drawing.Point(496, 56);
 			this.btnWallNewWall.Name = "btnWallNewWall";
 			this.btnWallNewWall.Size = new System.Drawing.Size(25, 25);
@@ -777,6 +678,7 @@ namespace Europlan.Common {
 			// 
 			this.btnWallDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnWallDelete.Image")));
 			this.btnWallDelete.Location = new System.Drawing.Point(496, 25);
 			this.btnWallDelete.Name = "btnWallDelete";
 			this.btnWallDelete.Size = new System.Drawing.Size(25, 25);
@@ -788,6 +690,7 @@ namespace Europlan.Common {
 			// 
 			this.btnWallRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnWallRevert.Image")));
 			this.btnWallRevert.Location = new System.Drawing.Point(465, 56);
 			this.btnWallRevert.Name = "btnWallRevert";
 			this.btnWallRevert.Size = new System.Drawing.Size(25, 25);
@@ -799,39 +702,13 @@ namespace Europlan.Common {
 			// 
 			this.btnWallApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallApply.Image = ((System.Drawing.Image)(resources.GetObject("btnWallApply.Image")));
 			this.btnWallApply.Location = new System.Drawing.Point(465, 25);
 			this.btnWallApply.Name = "btnWallApply";
 			this.btnWallApply.Size = new System.Drawing.Size(25, 25);
 			this.btnWallApply.TabIndex = 17;
 			this.btnWallApply.UseVisualStyleBackColor = true;
 			this.btnWallApply.Click += new System.EventHandler(this.btnWallApply_Click);
-			// 
-			// graphicalWallPanel
-			// 
-			this.graphicalWallPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.graphicalWallPanel.Location = new System.Drawing.Point(32, 116);
-			this.graphicalWallPanel.Mode = Europlan.Common.GraphicalWallPanel.PlanMode.PM_MOVE;
-			this.graphicalWallPanel.Name = "graphicalWallPanel";
-			this.graphicalWallPanel.ProductPlanner = this.hithermPlanner;
-			this.graphicalWallPanel.Room = null;
-			this.graphicalWallPanel.Scale = 1;
-			this.graphicalWallPanel.SelectedObject = null;
-			this.graphicalWallPanel.Size = new System.Drawing.Size(854, 143);
-			this.graphicalWallPanel.TabIndex = 4;
-			this.graphicalWallPanel.XPos = 417;
-			this.graphicalWallPanel.YPos = -71.5;
-			this.graphicalWallPanel.ObjectSelected += new System.EventHandler<Europlan.Common.GraphicalWallPanel.SelectedObjectArgs>(this.graphicalWallPanel_ObjectSelected);
-			// 
-			// hithermPlanner
-			// 
-			this.hithermPlanner.ConnectedWallPanel = this.graphicalWallPanel;
-			this.hithermPlanner.Mode = Europlan.Common.HithermPlanner.HithermPlannerMode.HPM_NONE;
-			this.hithermPlanner.NewRegisterOnlyWhole = false;
-			this.hithermPlanner.NewRegisterOrientation = ((Europlan.Common.HithermRegister.RegisterOrientationEnum)(Europlan.Common.HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL));
-			this.hithermPlanner.NewRegisterRohrabstand = ((Europlan.Common.HithermRegister.RohrabstandEnum)(Europlan.Common.HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG));
-			this.hithermPlanner.NewRegisterUseHelpline = true;
-			this.hithermPlanner.NewRegisterVorlaufRight = true;
-			this.hithermPlanner.RecalculationNecessary += new System.EventHandler<System.EventArgs>(this.hithermPlanner_RecalculationNecessary);
 			// 
 			// label7
 			// 
@@ -1232,15 +1109,148 @@ namespace Europlan.Common {
 			this.panelBottom.Size = new System.Drawing.Size(854, 206);
 			this.panelBottom.TabIndex = 3;
 			// 
-			// btnConnection
+			// graphicalWallPanel
 			// 
-			this.btnConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.btnConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnConnection.Image")));
-			this.btnConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnConnection.Name = "btnConnection";
-			this.btnConnection.Size = new System.Drawing.Size(29, 71);
-			this.btnConnection.Text = "connection";
-			this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
+			this.graphicalWallPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.graphicalWallPanel.Location = new System.Drawing.Point(32, 116);
+			this.graphicalWallPanel.Mode = Europlan.Common.GraphicalWallPanel.PlanMode.PM_MOVE;
+			this.graphicalWallPanel.Name = "graphicalWallPanel";
+			this.graphicalWallPanel.ProductPlanner = this.hithermPlanner;
+			this.graphicalWallPanel.Room = null;
+			this.graphicalWallPanel.Scale = 1;
+			this.graphicalWallPanel.SelectedObject = null;
+			this.graphicalWallPanel.Size = new System.Drawing.Size(854, 143);
+			this.graphicalWallPanel.TabIndex = 4;
+			this.graphicalWallPanel.XPos = 417;
+			this.graphicalWallPanel.YPos = -71.5;
+			this.graphicalWallPanel.ObjectSelected += new System.EventHandler<Europlan.Common.GraphicalWallPanel.SelectedObjectArgs>(this.graphicalWallPanel_ObjectSelected);
+			// 
+			// hithermPlanner
+			// 
+			this.hithermPlanner.ConnectedWallPanel = this.graphicalWallPanel;
+			this.hithermPlanner.Mode = Europlan.Common.HithermPlanner.HithermPlannerMode.HPM_NONE;
+			this.hithermPlanner.NewRegisterOnlyWhole = false;
+			this.hithermPlanner.NewRegisterOrientation = ((Europlan.Common.HithermRegister.RegisterOrientationEnum)(Europlan.Common.HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL));
+			this.hithermPlanner.NewRegisterRohrabstand = ((Europlan.Common.HithermRegister.RohrabstandEnum)(Europlan.Common.HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG));
+			this.hithermPlanner.NewRegisterUseHelpline = true;
+			this.hithermPlanner.NewRegisterVorlaufRight = true;
+			this.hithermPlanner.RecalculationNecessary += new System.EventHandler<System.EventArgs>(this.hithermPlanner_RecalculationNecessary);
+			// 
+			// numWallVertical
+			// 
+			this.numWallVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numWallVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numWallVertical.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numWallVertical.Location = new System.Drawing.Point(97, 42);
+			this.numWallVertical.MaxValue = null;
+			this.numWallVertical.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numWallVertical.Name = "numWallVertical";
+			this.numWallVertical.Size = new System.Drawing.Size(87, 20);
+			this.numWallVertical.TabIndex = 21;
+			this.numWallVertical.Text = "1";
+			this.numWallVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numWallVertical.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numWallVertical.ValueChanged += new System.EventHandler(this.numWallVertical_ValueChanged);
+			// 
+			// numWallHorizontal
+			// 
+			this.numWallHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numWallHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numWallHorizontal.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numWallHorizontal.Location = new System.Drawing.Point(97, 19);
+			this.numWallHorizontal.MaxValue = null;
+			this.numWallHorizontal.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numWallHorizontal.Name = "numWallHorizontal";
+			this.numWallHorizontal.Size = new System.Drawing.Size(87, 20);
+			this.numWallHorizontal.TabIndex = 20;
+			this.numWallHorizontal.Text = "1";
+			this.numWallHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numWallHorizontal.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numWallHorizontal.ValueChanged += new System.EventHandler(this.numWallHorizontal_ValueChanged);
+			// 
+			// numRegisterVertical
+			// 
+			this.numRegisterVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numRegisterVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numRegisterVertical.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.Location = new System.Drawing.Point(97, 42);
+			this.numRegisterVertical.MaxValue = null;
+			this.numRegisterVertical.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.Name = "numRegisterVertical";
+			this.numRegisterVertical.Size = new System.Drawing.Size(87, 20);
+			this.numRegisterVertical.TabIndex = 2;
+			this.numRegisterVertical.Text = "1";
+			this.numRegisterVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRegisterVertical.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.ValueChanged += new System.EventHandler(this.numRegisterVertical_ValueChanged);
+			// 
+			// numRegisterLeft
+			// 
+			this.numRegisterLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numRegisterLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numRegisterLeft.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.Location = new System.Drawing.Point(97, 19);
+			this.numRegisterLeft.MaxValue = null;
+			this.numRegisterLeft.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.Name = "numRegisterLeft";
+			this.numRegisterLeft.Size = new System.Drawing.Size(87, 20);
+			this.numRegisterLeft.TabIndex = 1;
+			this.numRegisterLeft.Text = "1";
+			this.numRegisterLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRegisterLeft.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.ValueChanged += new System.EventHandler(this.numRegisterLeft_ValueChanged);
 			// 
 			// HithermPlannerForm
 			// 
