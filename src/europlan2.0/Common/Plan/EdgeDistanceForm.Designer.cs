@@ -74,11 +74,21 @@ namespace Europlan.Common {
             0,
             0});
 			this.numEdgeDistance.Location = new System.Drawing.Point(270, 6);
-			this.numEdgeDistance.MaxValue = null;
-			this.numEdgeDistance.MinValue = null;
+			this.numEdgeDistance.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numEdgeDistance.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			this.numEdgeDistance.Name = "numEdgeDistance";
 			this.numEdgeDistance.Size = new System.Drawing.Size(197, 20);
-			this.numEdgeDistance.TabIndex = 4;
+			this.numEdgeDistance.TabIndex = 1;
+			this.numEdgeDistance.Text = "0";
+			this.numEdgeDistance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numEdgeDistance.Value = new decimal(new int[] {
             0,
             0,

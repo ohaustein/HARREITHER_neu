@@ -14,7 +14,7 @@ namespace Europlan.Common {
 			InitializeComponent();
 
 			this.SetLanguage();
-			this.numEdgeDistance.Value = (decimal)edgeDistance;
+			this.numEdgeDistance.Value = (decimal)(edgeDistance * 100.0);
 		}
 
 		private void SetLanguage() {
