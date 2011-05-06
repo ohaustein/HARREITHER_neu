@@ -72,6 +72,7 @@ namespace Europlan.Common {
 						this.graphicalWallPanel.Room.Walls.Insert(form.AfterWallNumber, newWall);
 					} else {
 						wall.DachSchraege = newWall;
+						newWall.IsDachSchraege = true;
 					}
 
 				}
@@ -162,7 +163,17 @@ namespace Europlan.Common {
 			updateOngoing = true;
 			if (wall != null) {
 				this.panelDefineWalls.BringToFront();
-				int index = this.graphicalWallPanel.Room.Walls.IndexOf(wall);
+				int index = 0;
+				if (wall.IsDachSchraege) {
+					foreach (GraphicalWall graphicalWall in this.graphicalWallPanel.Room.Walls) {
+						if (graphicalWall.GetWallForId(wall.Id) != null) {
+							index = this.graphicalWallPanel.Room.Walls.IndexOf(graphicalWall);
+							break;
+						}
+					}
+				} else {
+					index = this.graphicalWallPanel.Room.Walls.IndexOf(wall);
+				}
 				this.lblSelectedWall.Text = "Wand Nr: " + (index + 1);
 				this.txtWallConstruction.Text = wall.WallId;
 				this.numWallHorizontal.Value = (decimal)wall.GetWallWidth() * 100;

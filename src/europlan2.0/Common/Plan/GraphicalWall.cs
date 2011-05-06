@@ -22,6 +22,7 @@ namespace Europlan.Common {
 		private List<GraphicalRegisterWrapper> registers = new List<GraphicalRegisterWrapper>();
 		private GraphicalWall dachSchraege = null;
 		private double borderDistance = 0.1;
+		private bool isDachSchraege = false;
 
 		public GraphicalWall() {
 
@@ -97,6 +98,11 @@ namespace Europlan.Common {
 		public GraphicalWall DachSchraege {
 			get { return dachSchraege; }
 			set { dachSchraege = value; }
+		}
+
+		public bool IsDachSchraege {
+			get { return isDachSchraege; }
+			set { isDachSchraege = value; }
 		}
 
 		public double BorderDistance {
