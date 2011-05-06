@@ -204,7 +204,7 @@ namespace Europlan.Common {
 		public GraphicalWall GetPickedWall(Point2D planPoint, double xOffset, double yOffset) {
 			GraphicalWall pickedWall = null;
 			if (this.dachSchraege != null) {
-				pickedWall = this.dachSchraege.GetPickedWall(planPoint, xOffset, yOffset + this.GetWallHeight());
+				pickedWall = this.dachSchraege.GetPickedWall(planPoint, xOffset, yOffset + this.GetWallHeight() * 100);
 				if (pickedWall != null) {
 					return pickedWall;
 				}

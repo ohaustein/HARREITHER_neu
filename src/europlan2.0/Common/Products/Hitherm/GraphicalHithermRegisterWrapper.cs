@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using WW.Math.Geometry;
+using WW.Math;
 
 namespace Europlan.Common {
 	public class GraphicalHithermRegisterWrapper : GraphicalRegisterWrapper {
@@ -20,11 +22,16 @@ namespace Europlan.Common {
 		}
 
 		public override bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
-			throw new Exception("The method or operation is not implemented.");
+			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
 		}
 
 		public override WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset) {
-			throw new Exception("The method or operation is not implemented.");
+			Polygon2D borders = new Polygon2D();
+			borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY));
+			borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterHoehe));
+			borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + this.register.RegisterHoehe));
+			borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY));
+			return borders;
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
@@ -78,7 +85,10 @@ namespace Europlan.Common {
 		}
 
 		public override IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
-			throw new Exception("The method or operation is not implemented.");
+			if (HitTest(planPoint, xOffset, yOffset)) {
+				return this;
+			}
+			return null;
 		}
 	}
 }

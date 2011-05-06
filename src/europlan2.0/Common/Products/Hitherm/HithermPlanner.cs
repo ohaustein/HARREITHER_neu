@@ -141,10 +141,11 @@ namespace Europlan.Common {
 				HithermCircuit c = new HithermCircuit();
 				c.Registers.Add(this.newRegister.Register);
 				this.product.PlannedCircuits.Add(c);
+				this.newRegister = null;
+				this.newRegisterWall = null;
+				return true;
 			}
 
-			this.newRegister = null;
-			this.newRegisterWall = null;
 
 			this.dragStart = null;
 			return false;
