@@ -279,7 +279,9 @@ namespace Europlan.Common {
 			if (hithermRegister != null) {
 				this.btnRegisterAccept.Enabled = unsavedChanges;
 				this.btnRegisterRevert.Enabled = unsavedChanges;
-				this.btnRegisterConnect.Enabled = true;
+				// TODO
+				//this.btnRegisterConnect.Enabled = true;
+				this.btnRegisterConnect.Enabled = false;
 				this.btnRegisterDelete.Enabled = true;
 			} else {
 				this.btnRegisterAccept.Enabled = false;
