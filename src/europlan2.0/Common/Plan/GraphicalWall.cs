@@ -19,6 +19,7 @@ namespace Europlan.Common {
 		private List<Point2D> ceilingContour = new List<Point2D>();
 		private string wallId = "";
 		private List<GraphicalWallObstacle> obstacles = new List<GraphicalWallObstacle>();
+		private List<GraphicalRegisterWrapper> registers = new List<GraphicalRegisterWrapper>();
 		private GraphicalWall dachSchraege = null;
 		private double borderDistance = 0.1;
 
@@ -262,6 +263,12 @@ namespace Europlan.Common {
 					ceilingContour[i] = new Point2D(p.X, y);
 				}
 			}
+		}
+
+		[XmlIgnore]
+		public List<GraphicalRegisterWrapper> Registers {
+			get { return this.registers; }
+			set { this.registers = value; }
 		}
 	}
 }

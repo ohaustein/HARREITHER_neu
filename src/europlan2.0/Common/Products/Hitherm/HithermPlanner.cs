@@ -25,6 +25,8 @@ namespace Europlan.Common {
 		private double newRegisterWallXOffset = 0;
 		private double newRegisterWallYOffset = 0;
 
+		private HithermProduct product = null;
+
 		#region IWallProductPlanner Members
 		public GraphicalWallPanel ConnectedWallPanel {
 			get { return this.connectedWallPanel; }
@@ -53,11 +55,11 @@ namespace Europlan.Common {
 				float width = (float)Math.Abs(this.dragStart.Value.X - this.dragEnd.X);
 				float y = (float)(this.dragStart.Value.Y < mousePositionInPlan.Y ? this.dragStart.Value.Y : this.dragEnd.Y);
 				float height = (float)Math.Abs(this.dragStart.Value.Y - this.dragEnd.Y);
-				Brush brush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Green, Color.White);
+				Brush brush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Green, Color.Transparent);
 				Pen pen = new Pen(brush, (float)(1.0 / scale));
 				g.DrawRectangle(pen, x, y, width, height);
 				if (this.newRegister != null) {
-					this.newRegister.PaintObject(g, newRegisterWallXOffset, newRegisterWallYOffset, Color.Green, this.connectedWallPanel.Scale);
+					this.newRegister.PaintObject(g, newRegisterWallXOffset, newRegisterWallYOffset, Color.Green, scale);
 				}
 			}
 		}
@@ -102,8 +104,6 @@ namespace Europlan.Common {
 			this.dragEnd = planPoint;
 
 			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER && this.dragStart.HasValue && this.newRegister != null) {
-				double x = this.dragStart.Value.X < this.dragEnd.X ? this.dragStart.Value.X : this.dragEnd.X;
-				double y = this.dragStart.Value.Y < this.dragEnd.Y ? this.dragStart.Value.Y : this.dragEnd.Y;
 				double width = Math.Abs(this.dragStart.Value.X - this.dragEnd.X);
 				double height = Math.Abs(this.dragStart.Value.Y - this.dragEnd.Y);
 				Nullable<HithermRegister.HithermRegisterTypeEnum> registerType = HithermRegister.GetRegisterTypeForHoehe((int)Math.Floor(height), true);
@@ -113,9 +113,15 @@ namespace Europlan.Common {
 					}
 					this.newRegister.Register.RegisterType = registerType.Value;
 					this.newRegister.Register.RegisterBreiteForDrawing = width;
-					this.newRegister.Register.GraphPosX = x;
-					this.newRegister.Register.GraphPosY = y;
-					this.newRegister.Register.GraphWallId = this.newRegisterWall.Id;
+					if (this.newRegister.Register.RegisterBreiteForDrawing > width) {
+						this.newRegister.Register = null;
+					} else {
+						double x = this.dragStart.Value.X < this.dragEnd.X ? this.dragStart.Value.X : this.dragStart.Value.X - this.newRegister.Register.RegisterBreiteForDrawing;
+						double y = this.dragStart.Value.Y < this.dragEnd.Y ? this.dragStart.Value.Y : this.dragStart.Value.Y - this.newRegister.Register.RegisterHoehe;
+						this.newRegister.Register.GraphPosX = x - this.newRegisterWallXOffset;
+						this.newRegister.Register.GraphPosY = y - this.newRegisterWallYOffset;
+						this.newRegister.Register.GraphWallId = this.newRegisterWall.Id;
+					}
 				} else {
 					this.newRegister.Register = null;
 				}
@@ -129,6 +135,13 @@ namespace Europlan.Common {
 				return false;
 			}
 
+			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER && this.dragStart.HasValue && this.newRegister != null) {
+				this.newRegisterWall.Registers.Add(this.newRegister);
+			}
+
+			this.newRegister = null;
+			this.newRegisterWall = null;
+
 			this.dragStart = null;
 			return false;
 		}
@@ -141,26 +154,76 @@ namespace Europlan.Common {
 		}
 		#endregion
 
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public HithermProduct Product {
+			get { return this.product; }
+			set {
+				this.product = value;
+				if (this.ConnectedWallPanel != null) {
+					if (this.product == null || this.product.AssociatedRoom == null) {
+						this.ConnectedWallPanel.Room = null;
+					} else {
+						this.ConnectedWallPanel.Room = this.product.AssociatedRoom;
+						Room room = this.product.AssociatedRoom;
+					}
+				}
+			}
+		}
+
 		private GraphicalWall GetWallForPoint(Point2D planPoint, out double xOffset, out double yOffset) {
 			xOffset = 0;
 			yOffset = 0;
-			if (this.connectedWallPanel == null) {
+			if (this.product == null || this.product.AssociatedRoom == null) {
 				return null;
 			}
 			GraphicalWall pickedWall = null;
-			foreach (GraphicalWall wall in this.connectedWallPanel.Room.Walls) {
+			foreach (GraphicalWall wall in this.product.AssociatedRoom.Walls) {
 				pickedWall = wall.GetPickedWall(planPoint, xOffset, 0);
 				if (pickedWall != null) {
 					yOffset = wall.GetWallYOffset(pickedWall, 0).Value;
 					break;
 				}
-				xOffset += wall.GetWallWidth();
+				xOffset += wall.GetWallWidth() * 100;
 			}
 			if (pickedWall == null) {
 				xOffset = 0;
 				yOffset = 0;
 			}
 			return pickedWall;
+		}
+
+		/// <summary>
+		/// Returns x-offset in m
+		/// </summary>
+		/// <param name="wall"></param>
+		/// <returns></returns>
+		private Nullable<double> GetWallXOffset(GraphicalWall wall) {
+			if (this.product == null || this.product.AssociatedRoom == null) {
+				return null;
+			}
+			double xOffset = 0;
+			foreach (GraphicalWall w in this.product.AssociatedRoom.Walls) {
+				if (w.GetWallYOffset(wall, 0).HasValue) { // quick hack to determine if the searched wall is a dachschräge of w
+					return xOffset;
+				}
+				xOffset += w.GetWallWidth();
+			}
+			return null;
+		}
+
+		private Nullable<double> GetWallYOffset(GraphicalWall wall) {
+			if (this.product == null || this.product.AssociatedRoom == null) {
+				return null;
+			}
+			Nullable<double> yOffset = null;
+			foreach (GraphicalWall w in this.product.AssociatedRoom.Walls) {
+				yOffset = w.GetWallYOffset(wall, 0);
+				if (yOffset.HasValue) {
+					return yOffset;
+				}
+			}
+			return null;
 		}
 
 		public HithermPlannerMode Mode {

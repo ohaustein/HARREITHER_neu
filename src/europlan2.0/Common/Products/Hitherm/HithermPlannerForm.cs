@@ -18,7 +18,8 @@ namespace Europlan.Common {
 
 		public HithermPlannerForm(HithermProduct product) {
 			InitializeComponent();
-			this.graphicalWallPanel.Room = product.AssociatedRoom;
+			//this.graphicalWallPanel.Room = product.AssociatedRoom;
+			this.hithermPlanner.Product = product;
 			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
 			UpdateDefineWallsPanelButtons(null);
 		}
@@ -51,7 +52,6 @@ namespace Europlan.Common {
 			DialogResult result = form.ShowDialog();
 			if (result == DialogResult.OK) {
 				double height = form.Height / 100.0;
-				double measure = this.graphicalWallPanel.Room.AssociatedPlan.Measure.Value;
 
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
