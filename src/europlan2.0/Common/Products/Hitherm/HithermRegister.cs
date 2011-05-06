@@ -343,6 +343,7 @@ namespace Europlan.Common {
 		private String graphWallId = null;
 		private double graphPosX = 0;
 		private double graphPosY = 0;
+		private bool graphVorlaufRight = true;
 
 		/*private Nullable<Point> origin = null;*/
 
@@ -828,6 +829,11 @@ namespace Europlan.Common {
 		public double GraphPosY {
 			get { return this.graphPosY; }
 			set { this.graphPosY = value; }
+		}
+
+		public bool GraphVorlaufRight {
+			get { return this.graphVorlaufRight; }
+			set { this.graphVorlaufRight = value; }
 		}
 	}
 }
