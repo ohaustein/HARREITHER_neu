@@ -108,10 +108,10 @@ namespace Europlan.Common {
 			return this.GetWallPolygon(xOffset, yOffset).IsInside(planPoint);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject) {
-			Pen wallBorderPen = (this == selectedObject) ? new Pen(Color.FromArgb(128, 0, 0), 3) : Pens.Black;
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
+			Pen wallBorderPen = (this == selectedObject) ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
 			Brush wallBrush = new SolidBrush(Color.White);
-			Pen unusableBorderPen = (this == selectedObject) ? new Pen(Color.FromArgb(128, 64, 64)) : Pens.Gray;
+			Pen unusableBorderPen = (this == selectedObject) ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, (this == selectedObject) ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.White);
 
 			Region oldClip = g.Clip;
@@ -211,14 +211,24 @@ namespace Europlan.Common {
 
 		public Polygon2D GetWallPolygon(double xOffset, double yOffset) {
 			Polygon2D wallBorder = new Polygon2D();
-			wallBorder.Add(new Point2D(xOffset, yOffset));
+			Point2D lastPoint = new Point2D(xOffset, yOffset);
+			wallBorder.Add(lastPoint);
 			if (this.CeilingContour[0].X != 0) {
-				wallBorder.Add(new Point2D(xOffset, yOffset + this.CeilingContour[0].Y * 100.0));
+				lastPoint = new Point2D(xOffset, yOffset + this.CeilingContour[0].Y * 100.0);
+				wallBorder.Add(lastPoint);
 			}
+			Point2D curPoint;
 			foreach (Point2D vertex in this.CeilingContour) {
-				wallBorder.Add(new Point2D(xOffset + vertex.X * 100.0, yOffset + vertex.Y * 100.0));
+				curPoint = new Point2D(xOffset + vertex.X * 100.0, yOffset + vertex.Y * 100.0);
+				if (curPoint != lastPoint) {
+					wallBorder.Add(curPoint);
+					lastPoint = curPoint;
+				}
 			}
-			wallBorder.Add(new Point2D(xOffset + this.CeilingContour[this.CeilingContour.Count - 1].X * 100.0, yOffset));
+			curPoint = new Point2D(xOffset + this.CeilingContour[this.CeilingContour.Count - 1].X * 100.0, yOffset);
+			if (curPoint != lastPoint) {
+				wallBorder.Add(curPoint);
+			}
 			return wallBorder;
 		}
 

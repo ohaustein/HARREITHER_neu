@@ -8,7 +8,7 @@ using WW.Math.Geometry;
 namespace Europlan.Common {
 	public interface IGraphicalWallObject {
 		bool HitTest(Point2D planPoint, double xOffset, double yOffset);
-		void PaintObject(Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject);
+		void PaintObject(Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale);
 		IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset);
 	}
 }

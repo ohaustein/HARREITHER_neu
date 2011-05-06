@@ -8,7 +8,7 @@ namespace Europlan.Common {
 		#region IGraphicalWallObject Members
 		public abstract bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset);
 
-		public abstract void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject);
+		public abstract void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale);
 
 		public abstract IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset);
 		#endregion

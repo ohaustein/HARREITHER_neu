@@ -536,7 +536,11 @@ namespace Europlan.Common {
 				}
 			}
 			set {
-				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
+				this.Rohre = 30;
+				while (this.RegisterBreiteForDrawing > value && this.Rohre > 3) {
+					this.Rohre--;
+				}
+				/*if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
 					value = value - 2.5;
 					if (HithermProduct.ConfigUsePlus) {
 						int rohre = (int)Math.Floor(value / 5);
@@ -549,7 +553,7 @@ namespace Europlan.Common {
 					}
 				} else {
 					this.Rohre = (int)Math.Floor(value / 10);
-				}
+				}*/
 			}
 		}
 

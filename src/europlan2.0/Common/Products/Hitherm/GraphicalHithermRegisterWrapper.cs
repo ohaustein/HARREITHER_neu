@@ -16,15 +16,19 @@ namespace Europlan.Common {
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject) {
-			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black);
+		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
+			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale);
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color) {
+			this.PaintObject(g, xOffset, yOffset, color, 1);
+		}
+
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale) {
 			if (register == null) {
 				return;
 			}
-			Pen registerPen = new Pen(color);
+			Pen registerPen = new Pen(color, (float)(1 / scale));
 			if (register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
 				float x = (float)(xOffset + register.GraphPosX);
 				float y1 = (float)(yOffset + register.GraphPosY);

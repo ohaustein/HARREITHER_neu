@@ -218,7 +218,7 @@ namespace Europlan.Common {
 				e.Graphics.ResetClip();
 				e.Graphics.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
 				e.Graphics.DrawPolygon(wallBorderPen, pointArr);*/
-				wall.PaintObject(e.Graphics, xOffset, 0, this.selectedObject);
+				wall.PaintObject(e.Graphics, xOffset, 0, this.selectedObject, this.Scale);
 				xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
 			}
 
@@ -227,7 +227,7 @@ namespace Europlan.Common {
 				e.Graphics.Transform = paintMatrix;
 				Point pointInCtrl = this.PointToClient(MousePosition);
 				Point2D pointInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(pointInCtrl.X, pointInCtrl.Y));
-				this.productPlanner.PaintAfterPlanPannel(e, pointInPlan, pointInCtrl);
+				this.productPlanner.PaintAfterPlanPannel(e, pointInPlan, pointInCtrl, this.Scale);
 			}
 			e.Graphics.Transform = oldTransform;
 			e.Graphics.DrawRectangle(Pens.Gray, 0, 0, this.Width - 1, this.Height - 1);

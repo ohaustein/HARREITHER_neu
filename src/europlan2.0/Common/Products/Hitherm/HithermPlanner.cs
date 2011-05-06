@@ -4,6 +4,7 @@ using System.Text;
 using System.ComponentModel;
 using WW.Math;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
 	public class HithermPlanner : Component, IWallProductPlanner {
@@ -42,19 +43,21 @@ namespace Europlan.Common {
 			get { return null; }
 		}
 
-		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, WW.Math.Point2D mousePositionInPlan, System.Drawing.Point mousePositionInControl) {
-			this.PaintAfterPlanPannel(e.Graphics, mousePositionInPlan, mousePositionInControl);
+		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, WW.Math.Point2D mousePositionInPlan, System.Drawing.Point mousePositionInControl, double scale) {
+			this.PaintAfterPlanPannel(e.Graphics, mousePositionInPlan, mousePositionInControl, scale);
 		}
 
-		public void PaintAfterPlanPannel(System.Drawing.Graphics g, WW.Math.Point2D mousePositionInPlan, System.Drawing.Point mousePositionInControl) {
+		public void PaintAfterPlanPannel(System.Drawing.Graphics g, WW.Math.Point2D mousePositionInPlan, System.Drawing.Point mousePositionInControl, double scale) {
 			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER && dragStart != null) {
 				float x = (float)(this.dragStart.Value.X < mousePositionInPlan.X ? this.dragStart.Value.X : this.dragEnd.X);
 				float width = (float)Math.Abs(this.dragStart.Value.X - this.dragEnd.X);
 				float y = (float)(this.dragStart.Value.Y < mousePositionInPlan.Y ? this.dragStart.Value.Y : this.dragEnd.Y);
 				float height = (float)Math.Abs(this.dragStart.Value.Y - this.dragEnd.Y);
-				g.DrawRectangle(Pens.Green, x, y, width, height);
+				Brush brush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Green, Color.White);
+				Pen pen = new Pen(brush, (float)(1.0 / scale));
+				g.DrawRectangle(pen, x, y, width, height);
 				if (this.newRegister != null) {
-					this.newRegister.PaintObject(g, newRegisterWallXOffset, newRegisterWallYOffset, Color.Green);
+					this.newRegister.PaintObject(g, newRegisterWallXOffset, newRegisterWallYOffset, Color.Green, this.connectedWallPanel.Scale);
 				}
 			}
 		}
