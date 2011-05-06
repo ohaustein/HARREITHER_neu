@@ -461,6 +461,8 @@ namespace Europlan.Common {
 						hithermPlanner.Product.PlannedCircuits.Remove(toDelete);
 					}
 				}
+				UpdateModifyRegisterPanel(wrapper);
+				this.graphicalWallPanel.InvalidateGraphics();
 			}
 		}
 
