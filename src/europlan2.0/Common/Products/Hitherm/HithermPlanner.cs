@@ -136,7 +136,11 @@ namespace Europlan.Common {
 			}
 
 			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER && this.dragStart.HasValue && this.newRegister != null) {
+				this.newRegister.Register.Wall = this.newRegisterWall.Wall;
 				this.newRegisterWall.Registers.Add(this.newRegister);
+				HithermCircuit c = new HithermCircuit();
+				c.Registers.Add(this.newRegister.Register);
+				this.product.PlannedCircuits.Add(c);
 			}
 
 			this.newRegister = null;
@@ -160,6 +164,17 @@ namespace Europlan.Common {
 			get { return this.product; }
 			set {
 				this.product = value;
+				foreach (GraphicalWall wall in this.product.AssociatedRoom.Walls) {
+					wall.Registers.Clear();
+				}
+				foreach (HithermCircuit c in product.PlannedCircuits) {
+					foreach (HithermRegister r in c.Registers) {
+						GraphicalWall wall = this.product.AssociatedRoom.GetWallForId(r.GraphWallId);
+						if (wall != null) {
+							wall.Registers.Add(new GraphicalHithermRegisterWrapper(r));
+						}
+					}
+				}
 				if (this.ConnectedWallPanel != null) {
 					if (this.product == null || this.product.AssociatedRoom == null) {
 						this.ConnectedWallPanel.Room = null;

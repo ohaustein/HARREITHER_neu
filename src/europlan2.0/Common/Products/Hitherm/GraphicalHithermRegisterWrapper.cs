@@ -7,12 +7,23 @@ namespace Europlan.Common {
 	public class GraphicalHithermRegisterWrapper : GraphicalRegisterWrapper {
 		private HithermRegister register;
 
+		public GraphicalHithermRegisterWrapper() {
+		}
+
+		public GraphicalHithermRegisterWrapper(HithermRegister register) {
+			this.register = register;
+		}
+
 		public HithermRegister Register {
 			get { return this.register; }
 			set { this.register = value; }
 		}
 
 		public override bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public override WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset) {
 			throw new Exception("The method or operation is not implemented.");
 		}
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
 	public abstract class GraphicalRegisterWrapper : IGraphicalWallObject {
@@ -11,6 +12,8 @@ namespace Europlan.Common {
 		public abstract void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale);
 
 		public abstract IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset);
+
+		public abstract Polygon2D GetObjectBorders(double xOffset, double yOffset);
 		#endregion
 	}
 }

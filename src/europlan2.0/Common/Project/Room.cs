@@ -649,6 +649,21 @@ namespace Europlan.Common {
 			get { return planSettingAngle; }
 			set { planSettingAngle = value; }
 		}
+
+
+		public GraphicalWall GetWallForId(string wallId) {
+			if (this.Walls == null || wallId == null) {
+				return null;
+			}
+			GraphicalWall foundWall = null;
+			foreach (GraphicalWall wall in this.Walls) {
+				foundWall = wall.GetWallForId(wallId);
+				if (foundWall != null) {
+					break;
+				}
+			}
+			return foundWall;
+		}
 	}
 
 }

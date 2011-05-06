@@ -106,7 +106,7 @@ namespace Europlan.Common {
 
 		#region IGraphicalWallObject Members
 		public bool HitTest(Point2D planPoint, double xOffset, double yOffset) {
-			return this.GetWallPolygon(xOffset, yOffset).IsInside(planPoint);
+			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
@@ -116,7 +116,7 @@ namespace Europlan.Common {
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, (this == selectedObject) ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.White);
 
 			Region oldClip = g.Clip;
-			Polygon2D wallBorder = this.GetWallPolygon(xOffset, yOffset);
+			Polygon2D wallBorder = this.GetObjectBorders(xOffset, yOffset);
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 
 			List<PointF> borderPoints = new List<PointF>();
@@ -141,6 +141,13 @@ namespace Europlan.Common {
 				usablePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
 			}
 
+			/*foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
+				obstacle
+			}*/
+			foreach (GraphicalRegisterWrapper register in this.Registers) {
+				register.PaintObject(g, xOffset, yOffset, selectedObject, scale);
+			}
+
 			GraphicsPath path = new GraphicsPath();
 			path.AddPolygon(borderPoints.ToArray());
 			Region clip = new Region(path);
@@ -155,18 +162,28 @@ namespace Europlan.Common {
 			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
 			g.DrawPolygon(wallBorderPen, pointArr);
 			g.Clip = oldClip;
+
+			if (this.DachSchraege != null) {
+				this.DachSchraege.PaintObject(g, xOffset, yOffset + this.GetWallHeight() * 100, selectedObject, scale);
+			}
 		}
 
 		public IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset) {
 			IGraphicalWallObject pickedObject = null;
 			if (this.dachSchraege != null) {
-				pickedObject = this.dachSchraege.GetPickedObject(planPoint, xOffset, yOffset + this.GetWallHeight());
+				pickedObject = this.dachSchraege.GetPickedObject(planPoint, xOffset, yOffset + this.GetWallHeight() * 100);
 				if (pickedObject != null) {
 					return pickedObject;
 				}
 			}
 			foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
 				//pickedObject = obstacle.GetPickedObject(planPoint, xOffset, yOffset);
+				if (pickedObject != null) {
+					return pickedObject;
+				}
+			}
+			foreach (GraphicalRegisterWrapper register in this.Registers) {
+				pickedObject = register.GetPickedObject(planPoint, xOffset, yOffset);
 				if (pickedObject != null) {
 					return pickedObject;
 				}
@@ -210,7 +227,10 @@ namespace Europlan.Common {
 			return this.CeilingContour[this.CeilingContour.Count - 1].X;
 		}
 
-		public Polygon2D GetWallPolygon(double xOffset, double yOffset) {
+		/*public Polygon2D GetWallPolygon(double xOffset, double yOffset) {
+		}*/
+
+		public Polygon2D GetObjectBorders(double xOffset, double yOffset) {
 			Polygon2D wallBorder = new Polygon2D();
 			Point2D lastPoint = new Point2D(xOffset, yOffset);
 			wallBorder.Add(lastPoint);
@@ -232,6 +252,7 @@ namespace Europlan.Common {
 			}
 			return wallBorder;
 		}
+
 
 		public Nullable<double> GetWallYOffset(GraphicalWall wall, double startOffset) {
 			if (this == wall) {
@@ -269,6 +290,16 @@ namespace Europlan.Common {
 		public List<GraphicalRegisterWrapper> Registers {
 			get { return this.registers; }
 			set { this.registers = value; }
+		}
+
+		public GraphicalWall GetWallForId(string wallId) {
+			if (this.Id == wallId) {
+				return this;
+			}
+			if (this.DachSchraege != null) {
+				return this.DachSchraege.GetWallForId(wallId);
+			}
+			return null;
 		}
 	}
 }
