@@ -377,6 +377,55 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public bool IsHochleistungsRegister {
 			get { return this.registerType == HithermRegisterTypeEnum.HIT_50_5 || this.registerType == HithermRegisterTypeEnum.HIT_100_5 || this.registerType == HithermRegisterTypeEnum.HIT_150_5 || this.registerType == HithermRegisterTypeEnum.HIT_200_5 || this.registerType == HithermRegisterTypeEnum.HIT_250_5 || this.registerType == HithermRegisterTypeEnum.HIT_300_5; }
+			set {
+				if (value) {
+					switch (this.registerType) {
+						case HithermRegisterTypeEnum.HIT_50_10:
+							this.registerType = HithermRegisterTypeEnum.HIT_50_5;
+							break;
+						case HithermRegisterTypeEnum.HIT_100_10:
+							this.registerType = HithermRegisterTypeEnum.HIT_100_5;
+							break;
+						case HithermRegisterTypeEnum.HIT_150_10:
+							this.registerType = HithermRegisterTypeEnum.HIT_150_5;
+							break;
+						case HithermRegisterTypeEnum.HIT_200_10:
+							this.registerType = HithermRegisterTypeEnum.HIT_200_5;
+							break;
+						case HithermRegisterTypeEnum.HIT_250_10:
+							this.registerType = HithermRegisterTypeEnum.HIT_250_5;
+							break;
+						case HithermRegisterTypeEnum.HIT_300_10:
+							this.registerType = HithermRegisterTypeEnum.HIT_300_5;
+							break;
+						default:
+							break;
+					}
+				} else {
+					switch (this.registerType) {
+						case HithermRegisterTypeEnum.HIT_50_5:
+							this.registerType = HithermRegisterTypeEnum.HIT_50_10;
+							break;
+						case HithermRegisterTypeEnum.HIT_100_5:
+							this.registerType = HithermRegisterTypeEnum.HIT_100_10;
+							break;
+						case HithermRegisterTypeEnum.HIT_150_5:
+							this.registerType = HithermRegisterTypeEnum.HIT_150_10;
+							break;
+						case HithermRegisterTypeEnum.HIT_200_5:
+							this.registerType = HithermRegisterTypeEnum.HIT_200_10;
+							break;
+						case HithermRegisterTypeEnum.HIT_250_5:
+							this.registerType = HithermRegisterTypeEnum.HIT_250_10;
+							break;
+						case HithermRegisterTypeEnum.HIT_300_5:
+							this.registerType = HithermRegisterTypeEnum.HIT_300_10;
+							break;
+						default:
+							break;
+					}
+				}
+			}
 		}
 
 		[XmlIgnore]

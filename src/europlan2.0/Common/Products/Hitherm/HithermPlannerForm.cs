@@ -21,6 +21,7 @@ namespace Europlan.Common {
 			//this.graphicalWallPanel.Room = product.AssociatedRoom;
 			this.hithermPlanner.Product = product;
 			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
+			this.panelDefineWalls.BringToFront();
 			UpdateDefineWallsPanelButtons(null);
 		}
 
@@ -144,6 +145,8 @@ namespace Europlan.Common {
 		private void btnRegister_Click(object sender, EventArgs e) {
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_REGISTER;
+			UpdateModifyRegisterPanel(null);
+			this.panelModifyHitherm.BringToFront();
 		}
 
 		private void graphicalWallPanel_ObjectSelected(object sender, GraphicalWallPanel.SelectedObjectArgs e) {
@@ -153,10 +156,59 @@ namespace Europlan.Common {
 			this.selectedObject = e.SelectedObject;
 			if (selectedObject != null) {
 				if (selectedObject is GraphicalWall) {
-					UpdateDefineWallsPanel(selectedObject as GraphicalWall);					
+					UpdateDefineWallsPanel(selectedObject as GraphicalWall);
+				} else if (selectedObject is GraphicalHithermRegisterWrapper) {
+					UpdateModifyRegisterPanel(selectedObject as GraphicalHithermRegisterWrapper);
 				}
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void UpdateModifyRegisterPanel(GraphicalHithermRegisterWrapper hithermRegister) {
+			updateOngoing = true;
+			this.panelModifyHitherm.BringToFront();
+			if (hithermRegister != null) {
+				string text = "Hitherm Klimawand   " + hithermRegister.Register.RegisterCount + " Stück Hitherm ";
+				if (hithermRegister.Register.IsHochleistungsRegister) {
+					text += "Hochleistungsregister ";
+				} else {
+					text += "Standardregister ";
+				}
+				text += hithermRegister.Register.RegisterHoehe + "cm (" + hithermRegister.Register.Rohre + " Leistungsrohre)";
+				lblRegisterSelectedRegister.Text = text;
+				numRegisterLeft.Value = (decimal)hithermRegister.Register.GraphPosX;
+				numRegisterVertical.Value = (decimal)hithermRegister.Register.GraphPosY;
+				if (hithermRegister.Register.GraphVorlaufRight) {
+					rbRegisterRight.Checked = true;
+				} else {
+					rbRegisterLeft.Checked = true;
+				}
+				if (hithermRegister.Register.IsHochleistungsRegister) {
+					rbRegister5.Checked = true;
+				} else {
+					rbRegister10.Checked = true;
+				}
+				chkRegisterHelpLines.Checked = this.hithermPlanner.NewRegisterUseHelpline;
+				chkRegisterWholeRegister.Checked = this.hithermPlanner.NewRegisterOnlyWhole;
+			} else {
+				lblRegisterSelectedRegister.Text = "Kein Register ausgewählt";
+				numRegisterLeft.Value = 0;
+				numRegisterVertical.Value = 0;
+				if (this.hithermPlanner.NewRegisterVorlaufRight) {
+					rbRegisterRight.Checked = true;
+				} else {
+					rbRegisterLeft.Checked = true;
+				}
+				if (this.hithermPlanner.NewRegisterRohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG) {
+					rbRegister5.Checked = true;
+				} else {
+					rbRegister10.Checked = true;
+				}
+				chkRegisterHelpLines.Checked = this.hithermPlanner.NewRegisterUseHelpline;
+				chkRegisterWholeRegister.Checked = this.hithermPlanner.NewRegisterOnlyWhole;
+			}
+			UpdateModifyRegisterPanelButtons(hithermRegister);
+			updateOngoing = false;
 		}
 
 		private void UpdateDefineWallsPanel(GraphicalWall wall) {
@@ -198,7 +250,7 @@ namespace Europlan.Common {
 				this.btnWallDelete.Enabled = true;
 				this.btnWallEdgeDistance.Enabled = true;
 				this.btnWallHelpLine.Enabled = true;
-								int index = this.graphicalWallPanel.Room.Walls.IndexOf(wall);
+				int index = this.graphicalWallPanel.Room.Walls.IndexOf(wall);
 				if (index > 0) {
 					this.btnWallLeft.Enabled = true;
 				} else {
@@ -220,6 +272,20 @@ namespace Europlan.Common {
 				this.btnWallDelete.Enabled = false;
 				this.btnWallEdgeDistance.Enabled = false;
 				this.btnWallHelpLine.Enabled = false;
+			}
+		}
+
+		private void UpdateModifyRegisterPanelButtons(GraphicalHithermRegisterWrapper hithermRegister) {
+			if (hithermRegister != null) {
+				this.btnRegisterAccept.Enabled = unsavedChanges;
+				this.btnRegisterRevert.Enabled = unsavedChanges;
+				this.btnRegisterConnect.Enabled = true;
+				this.btnRegisterDelete.Enabled = true;
+			} else {
+				this.btnRegisterAccept.Enabled = false;
+				this.btnRegisterRevert.Enabled = false;
+				this.btnRegisterConnect.Enabled = false;
+				this.btnRegisterDelete.Enabled = false;
 			}
 		}
 
@@ -330,6 +396,93 @@ namespace Europlan.Common {
 		private void btnWallRevert_Click(object sender, EventArgs e) {
 			GraphicalWall wall = selectedObject as GraphicalWall;
 			UpdateDefineWallsPanel(wall);		
+		}
+
+		private void numRegisterLeft_ValueChanged(object sender, EventArgs e) {
+			if (!updateOngoing) {
+				GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
+				unsavedChanges = true;
+				UpdateModifyRegisterPanelButtons(wrapper);
+			}
+		}
+
+		private void numRegisterVertical_ValueChanged(object sender, EventArgs e) {
+			if (!updateOngoing) {
+				GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
+				unsavedChanges = true;
+				UpdateModifyRegisterPanelButtons(wrapper);
+			}
+		}
+
+		private void rbRegisterLeftRight_CheckedChanged(object sender, EventArgs e) {
+			if (selectedObject != null) {
+				GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
+				wrapper.Register.GraphVorlaufRight = rbRegisterRight.Checked;
+			}
+			hithermPlanner.NewRegisterVorlaufRight = rbRegisterRight.Checked;
+			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void rbPipeDistance_CheckedChanged(object sender, EventArgs e) {
+			if (selectedObject != null) {
+				GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
+				wrapper.Register.IsHochleistungsRegister = rbRegister5.Checked;
+			}
+			hithermPlanner.NewRegisterRohrabstand = rbRegister5.Checked ? HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG : HithermRegister.RohrabstandEnum.RC_STANDARD;
+			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void btnRegisterAccept_Click(object sender, EventArgs e) {
+			GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
+			wrapper.Register.GraphPosX = (double)numRegisterLeft.Value;
+			wrapper.Register.GraphPosY = (double)numRegisterVertical.Value;
+			UpdateModifyRegisterPanel(wrapper);
+			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void btnRegisterDelete_Click(object sender, EventArgs e) {
+			if (selectedObject != null) {
+				GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
+				foreach (GraphicalWall wall in graphicalWallPanel.Room.Walls) {
+					GraphicalWall wrapperWall = wall.GetWallForWrapper(wrapper);
+					if (wrapperWall != null) {
+						wrapperWall.Registers.Remove(wrapper);
+					}
+					HithermCircuit toDelete = null;
+					foreach (HithermCircuit circuit in hithermPlanner.Product.PlannedCircuits) {
+						if (circuit.Registers.Contains(wrapper.Register)) {
+							circuit.Registers.Remove(wrapper.Register);
+							if (circuit.Registers.Count == 0) {
+								toDelete = circuit;
+							}
+						}
+					}
+					if (toDelete != null) {
+						hithermPlanner.Product.PlannedCircuits.Remove(toDelete);
+					}
+				}
+			}
+		}
+
+		private void btnRegisterRevert_Click(object sender, EventArgs e) {
+			GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
+			UpdateModifyRegisterPanel(wrapper);
+		}
+
+		private void btnRegisterConnect_Click(object sender, EventArgs e) {
+
+		}
+
+		private void chkRegisterHelpLines_CheckedChanged(object sender, EventArgs e) {
+			hithermPlanner.NewRegisterUseHelpline = chkRegisterHelpLines.Checked;
+		}
+
+		private void chkRegisterWholeRegister_CheckedChanged(object sender, EventArgs e) {
+			hithermPlanner.NewRegisterOnlyWhole = chkRegisterWholeRegister.Checked;
+		}
+
+		private void hithermPlanner_RecalculationNecessary(object sender, EventArgs e) {
+			// TODO - recalculate product
 		}
 	}
 }

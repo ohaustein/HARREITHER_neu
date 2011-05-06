@@ -311,5 +311,15 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+
+		public GraphicalWall GetWallForWrapper(GraphicalHithermRegisterWrapper wrapper) {
+			if (this.Registers.Contains(wrapper)) {
+				return this;
+			}
+			if (this.DachSchraege != null) {
+				return this.DachSchraege.GetWallForWrapper(wrapper);
+			}
+			return null;
+		}
 	}
 }

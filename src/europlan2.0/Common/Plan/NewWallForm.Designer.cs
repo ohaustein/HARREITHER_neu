@@ -37,11 +37,11 @@ namespace Europlan.Common {
 			this.numHeight = new Europlan.Common.NumericBox();
 			this.numWidth = new Europlan.Common.NumericBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.rbPrev = new System.Windows.Forms.RadioButton();
-			this.rbNext = new System.Windows.Forms.RadioButton();
-			this.rbAfter = new System.Windows.Forms.RadioButton();
-			this.rbSchraege = new System.Windows.Forms.RadioButton();
 			this.numWallId = new Europlan.Common.NumericBox();
+			this.rbSchraege = new System.Windows.Forms.RadioButton();
+			this.rbAfter = new System.Windows.Forms.RadioButton();
+			this.rbNext = new System.Windows.Forms.RadioButton();
+			this.rbPrev = new System.Windows.Forms.RadioButton();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -60,7 +60,7 @@ namespace Europlan.Common {
 			this.btnCancel.Location = new System.Drawing.Point(297, 231);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 3;
+			this.btnCancel.TabIndex = 5;
 			this.btnCancel.Text = "&Abbrechen";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
@@ -71,7 +71,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(216, 231);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 2;
+			this.btnOk.TabIndex = 4;
 			this.btnOk.Text = "&OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			// 
@@ -130,7 +130,7 @@ namespace Europlan.Common {
 			this.btnSelectConstruction.Location = new System.Drawing.Point(315, 4);
 			this.btnSelectConstruction.Name = "btnSelectConstruction";
 			this.btnSelectConstruction.Size = new System.Drawing.Size(30, 23);
-			this.btnSelectConstruction.TabIndex = 13;
+			this.btnSelectConstruction.TabIndex = 6;
 			this.btnSelectConstruction.Text = "...";
 			this.btnSelectConstruction.UseVisualStyleBackColor = true;
 			this.btnSelectConstruction.Click += new System.EventHandler(this.btnSelectConstruction_Click);
@@ -160,7 +160,7 @@ namespace Europlan.Common {
 			this.numHeight.MinValue = null;
 			this.numHeight.Name = "numHeight";
 			this.numHeight.Size = new System.Drawing.Size(168, 20);
-			this.numHeight.TabIndex = 8;
+			this.numHeight.TabIndex = 2;
 			this.numHeight.Text = "0";
 			this.numHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numHeight.Value = new decimal(new int[] {
@@ -184,7 +184,7 @@ namespace Europlan.Common {
 			this.numWidth.MinValue = null;
 			this.numWidth.Name = "numWidth";
 			this.numWidth.Size = new System.Drawing.Size(168, 20);
-			this.numWidth.TabIndex = 4;
+			this.numWidth.TabIndex = 1;
 			this.numWidth.Text = "0";
 			this.numWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWidth.Value = new decimal(new int[] {
@@ -206,55 +206,9 @@ namespace Europlan.Common {
 			this.groupBox1.Location = new System.Drawing.Point(12, 103);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(360, 122);
-			this.groupBox1.TabIndex = 15;
+			this.groupBox1.TabIndex = 3;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Position";
-			// 
-			// rbPrev
-			// 
-			this.rbPrev.AutoSize = true;
-			this.rbPrev.Location = new System.Drawing.Point(7, 20);
-			this.rbPrev.Name = "rbPrev";
-			this.rbPrev.Size = new System.Drawing.Size(116, 17);
-			this.rbPrev.TabIndex = 0;
-			this.rbPrev.Text = "Vor aktueller Wand";
-			this.rbPrev.UseVisualStyleBackColor = true;
-			this.rbPrev.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// rbNext
-			// 
-			this.rbNext.AutoSize = true;
-			this.rbNext.Checked = true;
-			this.rbNext.Location = new System.Drawing.Point(7, 43);
-			this.rbNext.Name = "rbNext";
-			this.rbNext.Size = new System.Drawing.Size(126, 17);
-			this.rbNext.TabIndex = 1;
-			this.rbNext.TabStop = true;
-			this.rbNext.Text = "Nach aktueller Wand";
-			this.rbNext.UseVisualStyleBackColor = true;
-			this.rbNext.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// rbAfter
-			// 
-			this.rbAfter.AutoSize = true;
-			this.rbAfter.Location = new System.Drawing.Point(7, 66);
-			this.rbAfter.Name = "rbAfter";
-			this.rbAfter.Size = new System.Drawing.Size(100, 17);
-			this.rbAfter.TabIndex = 2;
-			this.rbAfter.Text = "Nach Wand Nr.";
-			this.rbAfter.UseVisualStyleBackColor = true;
-			this.rbAfter.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
-			// 
-			// rbSchraege
-			// 
-			this.rbSchraege.AutoSize = true;
-			this.rbSchraege.Location = new System.Drawing.Point(7, 89);
-			this.rbSchraege.Name = "rbSchraege";
-			this.rbSchraege.Size = new System.Drawing.Size(169, 17);
-			this.rbSchraege.TabIndex = 3;
-			this.rbSchraege.Text = "Als Schräge für aktuelle Wand";
-			this.rbSchraege.UseVisualStyleBackColor = true;
-			this.rbSchraege.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
 			// 
 			// numWallId
 			// 
@@ -279,11 +233,58 @@ namespace Europlan.Common {
 			this.numWallId.Name = "numWallId";
 			this.numWallId.Size = new System.Drawing.Size(150, 20);
 			this.numWallId.TabIndex = 4;
+			this.numWallId.Text = "1";
 			this.numWallId.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+			// 
+			// rbSchraege
+			// 
+			this.rbSchraege.AutoSize = true;
+			this.rbSchraege.Location = new System.Drawing.Point(7, 89);
+			this.rbSchraege.Name = "rbSchraege";
+			this.rbSchraege.Size = new System.Drawing.Size(169, 17);
+			this.rbSchraege.TabIndex = 3;
+			this.rbSchraege.Text = "Als Schräge für aktuelle Wand";
+			this.rbSchraege.UseVisualStyleBackColor = true;
+			this.rbSchraege.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
+			// 
+			// rbAfter
+			// 
+			this.rbAfter.AutoSize = true;
+			this.rbAfter.Location = new System.Drawing.Point(7, 66);
+			this.rbAfter.Name = "rbAfter";
+			this.rbAfter.Size = new System.Drawing.Size(100, 17);
+			this.rbAfter.TabIndex = 2;
+			this.rbAfter.Text = "Nach Wand Nr.";
+			this.rbAfter.UseVisualStyleBackColor = true;
+			this.rbAfter.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
+			// 
+			// rbNext
+			// 
+			this.rbNext.AutoSize = true;
+			this.rbNext.Checked = true;
+			this.rbNext.Location = new System.Drawing.Point(7, 43);
+			this.rbNext.Name = "rbNext";
+			this.rbNext.Size = new System.Drawing.Size(126, 17);
+			this.rbNext.TabIndex = 1;
+			this.rbNext.TabStop = true;
+			this.rbNext.Text = "Nach aktueller Wand";
+			this.rbNext.UseVisualStyleBackColor = true;
+			this.rbNext.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
+			// 
+			// rbPrev
+			// 
+			this.rbPrev.AutoSize = true;
+			this.rbPrev.Location = new System.Drawing.Point(7, 20);
+			this.rbPrev.Name = "rbPrev";
+			this.rbPrev.Size = new System.Drawing.Size(116, 17);
+			this.rbPrev.TabIndex = 0;
+			this.rbPrev.Text = "Vor aktueller Wand";
+			this.rbPrev.UseVisualStyleBackColor = true;
+			this.rbPrev.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
 			// 
 			// NewWallForm
 			// 
