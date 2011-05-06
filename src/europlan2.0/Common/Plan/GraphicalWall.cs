@@ -227,6 +227,10 @@ namespace Europlan.Common {
 			return this.CeilingContour[this.CeilingContour.Count - 1].X;
 		}
 
+		public double GetTotalWallHeight() {
+			return this.DachSchraege != null ? this.GetWallHeight() + this.DachSchraege.GetWallHeight() : this.GetWallHeight();
+		}
+
 		/*public Polygon2D GetWallPolygon(double xOffset, double yOffset) {
 		}*/
 

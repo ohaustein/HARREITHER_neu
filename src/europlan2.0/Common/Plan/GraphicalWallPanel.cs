@@ -84,15 +84,9 @@ namespace Europlan.Common {
 		public double TotalWidth {
 			get {
 				double totalWidth = 0;
-				double totalHeight = 0;
 				if (this.room != null && this.room.Walls != null) {
 					foreach (GraphicalWall wall in this.room.Walls) {
-						totalWidth += wall.CeilingContour[wall.CeilingContour.Count - 1].X;
-						foreach (Point2D point in wall.CeilingContour) {
-							if (point.Y > totalHeight) {
-								totalHeight = point.Y;
-							}
-						}
+						totalWidth += wall.GetWallWidth();
 					}
 				}
 				return totalWidth;
@@ -101,15 +95,13 @@ namespace Europlan.Common {
 
 		public double TotalHeight {
 			get {
-				double totalWidth = 0;
 				double totalHeight = 0;
 				if (this.room != null && this.room.Walls != null) {
+					double wallHeight;
 					foreach (GraphicalWall wall in this.room.Walls) {
-						totalWidth += wall.CeilingContour[wall.CeilingContour.Count - 1].X;
-						foreach (Point2D point in wall.CeilingContour) {
-							if (point.Y > totalHeight) {
-								totalHeight = point.Y;
-							}
+						wallHeight = wall.GetTotalWallHeight();
+						if (wallHeight > totalHeight) {
+							totalHeight = wallHeight;
 						}
 					}
 				}
