@@ -1357,13 +1357,19 @@ namespace Europlan.Common {
 		}
 
 		public void ResetProduct() {
-			// TODO
+			registerCircuits = new Dictionary<HithermRegister, int>();
+			circuitIds = new Dictionary<int, HithermCircuit>();
+
+			hithermType = ProductType.WH;
+			plannedFloorArea = 0;
+			plannedCeilingArea = 0;
+			plannedFloorOrCeilingArea = 0;
+			this.circuits.Clear();
 		}
 
 		[XmlIgnore]
 		public override bool AllowToSwitchMode {
-			// TODO
-			get { return true; }
+			get { return this.circuits.Count == 0; }
 		}
 	}
 	
