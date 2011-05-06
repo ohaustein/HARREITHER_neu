@@ -434,7 +434,9 @@ namespace Europlan.Common {
 		private void rbPipeDistance_CheckedChanged(object sender, EventArgs e) {
 			if (selectedObject != null) {
 				GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
+				int oldRegisterBreite = wrapper.Register.RegisterBreite;
 				wrapper.Register.IsHochleistungsRegister = rbRegister5.Checked;
+				wrapper.Register.RegisterBreite = oldRegisterBreite;
 			}
 			hithermPlanner.NewRegisterRohrabstand = rbRegister5.Checked ? HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG : HithermRegister.RohrabstandEnum.RC_STANDARD;
 			this.graphicalWallPanel.InvalidateGraphics();
@@ -459,6 +461,15 @@ namespace Europlan.Common {
 					HithermCircuit toDelete = null;
 					foreach (HithermCircuit circuit in hithermPlanner.Product.PlannedCircuits) {
 						if (circuit.Registers.Contains(wrapper.Register)) {
+							List<HithermRegisterVerbindung> linksToDelete = new List<HithermRegisterVerbindung>();
+							foreach (HithermRegisterVerbindung link in circuit.Links) {
+								if (link.Start == wrapper.Register || link.End == wrapper.Register) {
+									linksToDelete.Add(link);
+								}
+							}
+							foreach (HithermRegisterVerbindung link in linksToDelete) {
+								circuit.Links.Remove(link);
+							}
 							circuit.Registers.Remove(wrapper.Register);
 							if (circuit.Registers.Count == 0) {
 								toDelete = circuit;

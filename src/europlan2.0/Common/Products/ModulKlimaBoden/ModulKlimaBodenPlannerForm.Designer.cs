@@ -128,6 +128,7 @@ namespace Europlan.Common.Products {
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.modulKlimaBodenPlanner = new Europlan.Common.ModulKlimaBodenPlanner(this.components);
+			this.lblNewModules = new System.Windows.Forms.Label();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -608,6 +609,7 @@ namespace Europlan.Common.Products {
 			// 
 			// grpNewModules
 			// 
+			this.grpNewModules.Controls.Add(this.lblNewModules);
 			this.grpNewModules.Controls.Add(this.chkSelectReferenceModule);
 			this.grpNewModules.Controls.Add(this.lblConnections);
 			this.grpNewModules.Controls.Add(this.cmbConnections);
@@ -1326,6 +1328,18 @@ namespace Europlan.Common.Products {
 			this.modulKlimaBodenPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.modulKlimaBodenPlanner_ModeChanged);
 			this.modulKlimaBodenPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.modulKlimaBodenPlanner_ProjectChanged);
 			this.modulKlimaBodenPlanner.ListsNeedUpdate += new System.EventHandler<System.EventArgs>(this.modulKlimaBodenPlanner_ListsNeedUpdate);
+			this.modulKlimaBodenPlanner.UpdateNewCount += new System.EventHandler<Europlan.Common.ModulKlimaBodenPlanner.UpdateNewCountArgs>(this.modulKlimaBodenPlanner_UpdateNewCount);
+			// 
+			// lblNewModules
+			// 
+			this.lblNewModules.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.lblNewModules.AutoSize = true;
+			this.lblNewModules.Location = new System.Drawing.Point(434, 44);
+			this.lblNewModules.Name = "lblNewModules";
+			this.lblNewModules.Size = new System.Drawing.Size(74, 13);
+			this.lblNewModules.TabIndex = 160;
+			this.lblNewModules.Text = "Neue Module:";
+			this.lblNewModules.Visible = false;
 			// 
 			// ModulKlimaBodenPlannerForm
 			// 
@@ -1465,5 +1479,6 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.Label lblAchsabstand;
 		private System.Windows.Forms.ToolStripButton btnConnections;
 		private System.Windows.Forms.ToolStripButton btnDeleteConnection;
+		private System.Windows.Forms.Label lblNewModules;
 	}
 }

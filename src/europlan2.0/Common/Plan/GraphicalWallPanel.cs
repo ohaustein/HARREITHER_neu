@@ -58,6 +58,7 @@ namespace Europlan.Common {
 		public GraphicalWallPanel() {
 			this.scale = 1;
 			this.DoubleBuffered = true;
+			this.Cursor = Cursors.SizeAll;
 			InitializeComponent();
 		}
 
@@ -172,44 +173,6 @@ namespace Europlan.Common {
 			Pen unusableBorderPen = Pens.Gray;
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Gray, Color.White);
 			foreach (GraphicalWall wall in this.Room.Walls) {
-				/*Polygon2D wallBorder = new Polygon2D();
-				wallBorder.Add(new Point2D(startX, 0));
-				if (wall.CeilingContour[0].X != 0) {
-					wallBorder.Add(new Point2D(startX, wall.CeilingContour[0].Y * 100.0));
-				}
-				foreach (Point2D vertex in wall.CeilingContour) {
-					wallBorder.Add(new Point2D(startX + vertex.X * 100.0, vertex.Y * 100.0));
-				}
-				wallBorder.Add(new Point2D(startX + wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0, 0));
-
-				List<PointF> borderPoints = new List<PointF>();
-				foreach (Point2D vertex in wallBorder) {
-					borderPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
-				}
-				borderPoints.Add(new PointF((float)(startX + wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0), 0));
-				PointF[] pointArr = borderPoints.ToArray();
-				e.Graphics.FillPolygon(wallBrush, pointArr);
-
-				Polygon2D usableArea = new Polygon2D(wallBorder);
-				usableArea.Outset(-wall.BorderDistance * 100.0);
-				List<PointF> usablePoints = new List<PointF>();
-				foreach (Point2D vertex in usableArea) {
-					usablePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
-				}
-
-				GraphicsPath path = new GraphicsPath();
-				path.AddPolygon(borderPoints.ToArray());
-				Region clip = new Region(path);
-				GraphicsPath excludePath = new GraphicsPath();
-				excludePath.AddPolygon(usablePoints.ToArray());
-				clip.Exclude(excludePath);
-				e.Graphics.Clip = clip;
-
-				e.Graphics.FillPolygon(unusableBrush, borderPoints.ToArray());
-
-				e.Graphics.ResetClip();
-				e.Graphics.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
-				e.Graphics.DrawPolygon(wallBorderPen, pointArr);*/
 				wall.PaintObject(e.Graphics, xOffset, 0, this.selectedObject, this.Scale);
 				xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
 			}
@@ -406,6 +369,9 @@ namespace Europlan.Common {
 		protected override void OnKeyUp(KeyEventArgs e) {
 			shiftPressed = false;
 			base.OnKeyUp(e);
+			if ((this.Mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_PLANNER_DRAG) && this.productPlanner != null) {
+				this.productPlanner.PlannerKeyPress(e.KeyCode);
+			}
 		}
 
 		protected override void OnMouseWheel(MouseEventArgs e) {
@@ -489,6 +455,13 @@ namespace Europlan.Common {
 			set {
 				if (this.mode != value) {
 					this.mode = value;
+					if (this.mode == PlanMode.PM_MOVE) {
+						this.Cursor = Cursors.SizeAll;
+					} else if (this.mode == PlanMode.PM_SELECT_OBJECT) {
+						this.Cursor = Cursors.Default;
+					} else {
+						this.Cursor = Cursors.Default;
+					}
 					this.Invalidate();
 				}
 			}

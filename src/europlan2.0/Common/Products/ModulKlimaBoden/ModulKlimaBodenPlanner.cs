@@ -42,6 +42,16 @@ namespace Europlan.Common {
 			KDM_DEL_CONNECTION
 		}
 
+		public class UpdateNewCountArgs : EventArgs {
+			public int count;
+
+			public UpdateNewCountArgs(int count) {
+				this.count = count;
+			}
+		}
+
+		public event EventHandler<UpdateNewCountArgs> UpdateNewCount;
+
 		public delegate void AddModuleDelegate(double x, double y, double rotation, out bool added, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, out KlimaFlaechenModul addedModul, out ModulBodenCircuit circuitOfModul, bool fits);
 
 		public ModulKlimaBodenPlanner() {
@@ -252,11 +262,18 @@ namespace Europlan.Common {
 					}
 					g.DrawPolygon(Pens.Red, drawArea);
 
+					int count = 0;
 					this.AddModulesForLayoutArea(delegate(double x, double y, double rotation, out bool added, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, out KlimaFlaechenModul addedModul, out ModulBodenCircuit circuitOfModul, bool fits) {
 						added = this.TryDrawModule(g, additionalTransformation, x, y, rotation, orientation, bottomUp, fits ? Color.Green : Color.FromArgb(63, Color.Red));
+						if (fits) {
+							count++;
+						}
 						addedModul = null;
 						circuitOfModul = null;
 					}, true, false);
+					if (this.UpdateNewCount != null) {
+						this.UpdateNewCount(this, new UpdateNewCountArgs(count));
+					}
 				}
 
 				if (this.product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
@@ -1971,6 +1988,9 @@ namespace Europlan.Common {
 					added = false;
 				}
 			}, false, true);
+			if (this.UpdateNewCount != null) {
+				this.UpdateNewCount(this, new UpdateNewCountArgs(0));
+			}
 			if (newModules > 0 && newCircuit) {
 				this.product.PlannedCircuits.Add(c);
 			}

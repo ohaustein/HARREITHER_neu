@@ -1396,5 +1396,14 @@ namespace Europlan.Common.Products {
 			this.UpdateButtons();
 		}
 
+		private void modulKlimaDeckePlanner_UpdateNewCount(object sender, ModulKlimaDeckePlanner.UpdateNewCountArgs e) {
+			if (e.count == 0) {
+				this.lblNewModules.Visible = false;
+			} else {
+				this.lblNewModules.Text = e.count.ToString() + " neue Module";
+				this.lblNewModules.Visible = true;
+			}
+		}
+
 	}
 }

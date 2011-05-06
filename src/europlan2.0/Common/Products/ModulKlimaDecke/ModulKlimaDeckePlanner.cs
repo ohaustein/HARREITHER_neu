@@ -63,6 +63,16 @@ namespace Europlan.Common {
 			Color.FromArgb(0, 128, 255)
 		};
 
+		public class UpdateNewCountArgs : EventArgs {
+			public int count;
+
+			public UpdateNewCountArgs(int count) {
+				this.count = count;
+			}
+		}
+
+		public event EventHandler<UpdateNewCountArgs> UpdateNewCount;
+
 		public bool AutomaticOrientation {
 			get { return this.automaticOrientation; }
 			set { this.automaticOrientation = value; }
@@ -300,9 +310,16 @@ namespace Europlan.Common {
 					}
 					g.DrawPolygon(Pens.Red, drawArea);
 
+					int count = 0;
 					this.AddModulesForLayoutArea(delegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added) {
 						added = this.TryDrawModule(g, additionalTransformation, ref y, start, end, step, ref left, this.layoutAddAreaBottomUp, invRotation, lane, borderLeftOrigin);
+						if (added) {
+							count++;
+						}
 					});
+					if (this.UpdateNewCount != null) {
+						this.UpdateNewCount(this, new UpdateNewCountArgs(count));
+					}
 				}
 
 				if (this.product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
@@ -1406,6 +1423,9 @@ namespace Europlan.Common {
 					int count = this.AddModulesForLayoutArea(delegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added) {
 						added = this.TryAddModule(this.ConnectedPlanPanel.PlanTransformation, ref y, start, end, step, ref left, this.layoutAddAreaBottomUp, invRotation, lane, borderLeftOrigin, laneToRowMapping, (newSubArea != null ? newSubArea : oldSubArea), oldRow, modulesAdded, this.automaticRows);
 					});
+					if (this.UpdateNewCount != null) {
+						this.UpdateNewCount(this, new UpdateNewCountArgs(0));
+					}
 
 					if (count > 0) {
 						if (!this.product.ContainsModules && newCircuit != null) {

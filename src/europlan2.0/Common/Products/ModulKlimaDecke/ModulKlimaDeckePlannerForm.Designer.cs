@@ -33,6 +33,8 @@ namespace Europlan.Common.Products {
 			this.btnConstruction = new System.Windows.Forms.ToolStripButton();
 			this.btnAddModules = new System.Windows.Forms.ToolStripButton();
 			this.btnSelectModule = new System.Windows.Forms.ToolStripButton();
+			this.btnAddConnections = new System.Windows.Forms.ToolStripButton();
+			this.btnDeleteConnection = new System.Windows.Forms.ToolStripButton();
 			this.btnShowBeplankung = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabs = new System.Windows.Forms.TabControl();
@@ -77,6 +79,7 @@ namespace Europlan.Common.Products {
 			this.btnColor = new System.Windows.Forms.Button();
 			this.lblColor = new System.Windows.Forms.Label();
 			this.grpNewModules = new System.Windows.Forms.GroupBox();
+			this.lblNewModules = new System.Windows.Forms.Label();
 			this.cmbOrientation = new System.Windows.Forms.ComboBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.cmbModulType = new System.Windows.Forms.ComboBox();
@@ -142,8 +145,6 @@ namespace Europlan.Common.Products {
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.modulKlimaDeckePlanner = new Europlan.Common.ModulKlimaDeckePlanner(this.components);
-			this.btnAddConnections = new System.Windows.Forms.ToolStripButton();
-			this.btnDeleteConnection = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -259,6 +260,28 @@ namespace Europlan.Common.Products {
 			this.btnSelectModule.ToolTipText = "Module auswählen";
 			this.btnSelectModule.Visible = false;
 			this.btnSelectModule.Click += new System.EventHandler(this.btnSelectModule_Click);
+			// 
+			// btnAddConnections
+			// 
+			this.btnAddConnections.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddConnections.Image = ((System.Drawing.Image)(resources.GetObject("btnAddConnections.Image")));
+			this.btnAddConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddConnections.Name = "btnAddConnections";
+			this.btnAddConnections.Size = new System.Drawing.Size(23, 22);
+			this.btnAddConnections.Text = "Verbindeleitung hinzufügen";
+			this.btnAddConnections.Visible = false;
+			this.btnAddConnections.Click += new System.EventHandler(this.btnAddConnections_Click);
+			// 
+			// btnDeleteConnection
+			// 
+			this.btnDeleteConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnDeleteConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteConnection.Image")));
+			this.btnDeleteConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDeleteConnection.Name = "btnDeleteConnection";
+			this.btnDeleteConnection.Size = new System.Drawing.Size(23, 22);
+			this.btnDeleteConnection.Text = "Verbindeleitung löschen";
+			this.btnDeleteConnection.Visible = false;
+			this.btnDeleteConnection.Click += new System.EventHandler(this.btnDeleteConnection_Click);
 			// 
 			// btnShowBeplankung
 			// 
@@ -831,6 +854,7 @@ namespace Europlan.Common.Products {
 			// 
 			// grpNewModules
 			// 
+			this.grpNewModules.Controls.Add(this.lblNewModules);
 			this.grpNewModules.Controls.Add(this.cmbOrientation);
 			this.grpNewModules.Controls.Add(this.label3);
 			this.grpNewModules.Controls.Add(this.cmbModulType);
@@ -842,6 +866,17 @@ namespace Europlan.Common.Products {
 			this.grpNewModules.TabStop = false;
 			this.grpNewModules.Text = "neue Module";
 			this.grpNewModules.Visible = false;
+			// 
+			// lblNewModules
+			// 
+			this.lblNewModules.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.lblNewModules.AutoSize = true;
+			this.lblNewModules.Location = new System.Drawing.Point(6, 78);
+			this.lblNewModules.Name = "lblNewModules";
+			this.lblNewModules.Size = new System.Drawing.Size(74, 13);
+			this.lblNewModules.TabIndex = 161;
+			this.lblNewModules.Text = "Neue Module:";
+			this.lblNewModules.Visible = false;
 			// 
 			// cmbOrientation
 			// 
@@ -1508,28 +1543,7 @@ namespace Europlan.Common.Products {
 			this.modulKlimaDeckePlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.modulKlimaBodenPlanner_ProjectChanged);
 			this.modulKlimaDeckePlanner.ModuleSelected += new System.EventHandler<Europlan.Common.ModulKlimaDeckePlanner.ModuleSelectedEventArgs>(this.modulKlimaBodenPlanner_ModuleSelected);
 			this.modulKlimaDeckePlanner.ListsNeedUpdate += new System.EventHandler<Europlan.Common.ModulKlimaDeckePlanner.ListNeedsUpdateEventArgs>(this.modulKlimaBodenPlanner_ListsNeedUpdate);
-			// 
-			// btnAddConnections
-			// 
-			this.btnAddConnections.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnAddConnections.Image = ((System.Drawing.Image)(resources.GetObject("btnAddConnections.Image")));
-			this.btnAddConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnAddConnections.Name = "btnAddConnections";
-			this.btnAddConnections.Size = new System.Drawing.Size(23, 22);
-			this.btnAddConnections.Text = "Verbindeleitung hinzufügen";
-			this.btnAddConnections.Visible = false;
-			this.btnAddConnections.Click += new System.EventHandler(this.btnAddConnections_Click);
-			// 
-			// btnDeleteConnection
-			// 
-			this.btnDeleteConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnDeleteConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteConnection.Image")));
-			this.btnDeleteConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnDeleteConnection.Name = "btnDeleteConnection";
-			this.btnDeleteConnection.Size = new System.Drawing.Size(23, 22);
-			this.btnDeleteConnection.Text = "Verbindeleitung löschen";
-			this.btnDeleteConnection.Visible = false;
-			this.btnDeleteConnection.Click += new System.EventHandler(this.btnDeleteConnection_Click);
+			this.modulKlimaDeckePlanner.UpdateNewCount += new System.EventHandler<Europlan.Common.ModulKlimaDeckePlanner.UpdateNewCountArgs>(this.modulKlimaDeckePlanner_UpdateNewCount);
 			// 
 			// ModulKlimaDeckePlannerForm
 			// 
@@ -1563,6 +1577,7 @@ namespace Europlan.Common.Products {
 			this.pageLayout.ResumeLayout(false);
 			this.pageLayout.PerformLayout();
 			this.grpNewModules.ResumeLayout(false);
+			this.grpNewModules.PerformLayout();
 			this.grpAutomatic.ResumeLayout(false);
 			this.grpSelectedModules.ResumeLayout(false);
 			this.grpSelection.ResumeLayout(false);
@@ -1694,5 +1709,6 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.RadioButton rbKassettendecke;
 		private System.Windows.Forms.ToolStripButton btnAddConnections;
 		private System.Windows.Forms.ToolStripButton btnDeleteConnection;
+		private System.Windows.Forms.Label lblNewModules;
 	}
 }

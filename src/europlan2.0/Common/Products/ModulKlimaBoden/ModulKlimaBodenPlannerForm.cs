@@ -934,5 +934,14 @@ namespace Europlan.Common.Products {
 		private void modulKlimaBodenPlanner_ModuleSelected(object sender, EventArgs e) {
 			this.UpdateSelectedModules();
 		}
+
+		private void modulKlimaBodenPlanner_UpdateNewCount(object sender, ModulKlimaBodenPlanner.UpdateNewCountArgs e) {
+			if (e.count == 0) {
+				this.lblNewModules.Visible = false;
+			} else {
+				this.lblNewModules.Text = e.count.ToString() + " neue Module";
+				this.lblNewModules.Visible = true;
+			}
+		}
 	}
 }

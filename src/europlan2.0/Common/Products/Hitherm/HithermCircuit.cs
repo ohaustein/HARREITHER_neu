@@ -8,14 +8,20 @@ namespace Europlan.Common {
 	public class HithermCircuit : Circuit {
 
 		private List<HithermRegister> registers = new List<HithermRegister>();
+		private List<HithermRegisterVerbindung> links = new List<HithermRegisterVerbindung>();
 
 		public HithermCircuit() {
 
 		}
-	
+
 		public List<HithermRegister> Registers {
 			get { return this.registers; }
 			set { this.registers = value; }
+		}
+
+		public List<HithermRegisterVerbindung> Links {
+			get { return this.links; }
+			set { this.links = value; }
 		}
 
 		[XmlIgnore]
@@ -385,6 +391,21 @@ namespace Europlan.Common {
 
 		public override double CircuitArea {
 			get { return this.CoveredArea; }
-		} 
+		}
+
+		public bool IsConnectionAvailable(HithermRegister register, bool input) {
+			foreach (HithermRegisterVerbindung link in this.links) {
+				if (input) {
+					if (link.End == register) {
+						return false;
+					}
+				} else {
+					if (link.Start == register) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
 	}
 }

@@ -308,6 +308,7 @@
     <Compile Include="Products\Hitherm\HithermPlannerForm.Designer.cs">
       <DependentUpon>HithermPlannerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\Hitherm\HithermRegisterVerbindung.cs" />
     <Compile Include="Products\KlimaFlaechenSubAreaVerbindung.cs" />
     <Compile Include="Project\PossibleConnection.cs" />
     <Compile Include="Products\Circuit.cs" />

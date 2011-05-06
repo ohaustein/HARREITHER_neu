@@ -4,6 +4,7 @@ using System.Text;
 using System.Drawing;
 using WW.Math.Geometry;
 using WW.Math;
+using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
 	public class GraphicalHithermRegisterWrapper : GraphicalRegisterWrapper {
@@ -35,18 +36,21 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
-			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, (this == selectedObject));
+			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, (this == selectedObject), false);
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color) {
-			this.PaintObject(g, xOffset, yOffset, color, 1, false);
+			this.PaintObject(g, xOffset, yOffset, color, 1, false, false);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool highlightConnections) {
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool highlightConnections, bool error) {
 			if (register == null) {
 				return;
 			}
 			Pen registerPen = new Pen(color, (float)(1 / scale));
+			if (error) {
+				registerPen.DashStyle = DashStyle.DashDotDot;
+			}
 			Brush bInput = new SolidBrush(Color.FromArgb(127, Color.Red));
 			Pen pInput = new Pen(Color.Red, (float)(1.0 / scale));
 			Brush bOutput = new SolidBrush(Color.FromArgb(127, Color.Blue));
@@ -89,10 +93,10 @@ namespace Europlan.Common {
 						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
 						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
 					} else {
-						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 10, 10);
-						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 10, 10);
-						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
-						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
+						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
+						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
+						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
+						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
 					}
 				}
 			} else {
@@ -132,9 +136,9 @@ namespace Europlan.Common {
 
 		public Point2D GetInputConnectionPoint(double xOffset, double yOffset) {
 			if (this.register.GraphVorlaufRight) {
-				return new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + this.register.RegisterHoehe - 1);
+				return new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + 1);
 			} else {
-				return new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterHoehe - 1);
+				return new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + 1);
 			}
 		}
 
@@ -146,10 +150,10 @@ namespace Europlan.Common {
 				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + 1.5, yOffset + register.GraphPosY + 3.5));
 				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + 1.5, yOffset + register.GraphPosY - 1.5));
 			} else {
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing - 3.5, yOffset + register.GraphPosY - 1.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing - 3.5, yOffset + register.GraphPosY + 3.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + 1.5, yOffset + register.GraphPosY + 3.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + 1.5, yOffset + register.GraphPosY - 1.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX - 1.5, yOffset + register.GraphPosY - 1.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX - 1.5, yOffset + register.GraphPosY + 3.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + 3.5, yOffset + register.GraphPosY + 3.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + 3.5, yOffset + register.GraphPosY - 1.5));
 			}
 			return area;
 		}
@@ -159,19 +163,23 @@ namespace Europlan.Common {
 		}
 
 		public PossibleHithermRegisterConnection GetInputConnection(double xOffset, double yOffset, HithermProduct product, HithermCircuit circuit) {
-			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset), GetInputConnectionArea(xOffset, yOffset), false, true, product, circuit, this.register);
+			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register);
 		}
 
 		public override bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset) {
 			Polygon2D register = GetObjectBorders(xOffset, yOffset);
-			bool inside = false;
-			foreach (Point2D point in polygon) {
-				if (Polygon2D.IsInside(point, register)) {
-					inside = true;
-					break;
-				}
+			if (polygon.IsClockwise()) {
+				polygon.Reverse();
 			}
-			return inside;
+			if (register.IsClockwise()) {
+				register.Reverse();
+			}
+			List<Polygon2D> list1 = new List<Polygon2D>();
+			list1.Add(polygon);
+			List<Polygon2D> list2 = new List<Polygon2D>();
+			list2.Add(register);
+
+			return Polygon2D.GetIntersection(list1, list2).Count > 0;
 		}
 	}
 }

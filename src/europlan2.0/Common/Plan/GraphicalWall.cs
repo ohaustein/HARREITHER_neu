@@ -221,6 +221,10 @@ namespace Europlan.Common {
 		}
 		#endregion
 
+		/// <summary>
+		/// Returns the height of the wall in meter
+		/// </summary>
+		/// <returns></returns>
 		public double GetWallHeight() {
 			double height = 0;
 			foreach (Point2D point in this.ceilingContour) {
@@ -231,6 +235,10 @@ namespace Europlan.Common {
 			return height;
 		}
 
+		/// <summary>
+		/// Returns the width of the wall in meter
+		/// </summary>
+		/// <returns></returns>
 		public double GetWallWidth() {
 			if (this.CeilingContour == null || this.CeilingContour.Count == 0) {
 				return 0;

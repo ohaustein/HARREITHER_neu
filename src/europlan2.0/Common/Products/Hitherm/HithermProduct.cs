@@ -751,6 +751,11 @@ namespace Europlan.Common {
 				this.incompleteCalculation = true;
 				return false;
 			}
+			if (this.PlannedCircuits.Count > 12) {
+				this.lastErrorMsg = "Es sind zuviele Heizkreise in diesem Produkt vorhanden"; // TODO
+				this.incompleteCalculation = true;
+				return false;
+			}
 
 			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 				// TODO connect all circuits
