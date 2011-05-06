@@ -31,10 +31,10 @@ namespace Europlan.Common.Products {
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnDefineArea = new System.Windows.Forms.ToolStripButton();
-			this.btnAddReduced = new System.Windows.Forms.ToolStripButton();
-			this.btnDelReduced = new System.Windows.Forms.ToolStripButton();
 			this.btnAddRz = new System.Windows.Forms.ToolStripButton();
 			this.btnDelRz = new System.Windows.Forms.ToolStripButton();
+			this.btnAddReduced = new System.Windows.Forms.ToolStripButton();
+			this.btnDelReduced = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.pageAuslegung = new System.Windows.Forms.TabPage();
@@ -205,26 +205,6 @@ namespace Europlan.Common.Products {
 			this.btnDefineArea.Text = "Fläche definieren";
 			this.btnDefineArea.Click += new System.EventHandler(this.btnDefineArea_Click);
 			// 
-			// btnAddReduced
-			// 
-			this.btnAddReduced.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnAddReduced.Image = ((System.Drawing.Image)(resources.GetObject("btnAddReduced.Image")));
-			this.btnAddReduced.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnAddReduced.Name = "btnAddReduced";
-			this.btnAddReduced.Size = new System.Drawing.Size(23, 22);
-			this.btnAddReduced.Text = "Fläche mit red. Heiz-/Kühlleistung hinzufügen";
-			this.btnAddReduced.Click += new System.EventHandler(this.btnAddReduced_Click);
-			// 
-			// btnDelReduced
-			// 
-			this.btnDelReduced.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnDelReduced.Image = ((System.Drawing.Image)(resources.GetObject("btnDelReduced.Image")));
-			this.btnDelReduced.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnDelReduced.Name = "btnDelReduced";
-			this.btnDelReduced.Size = new System.Drawing.Size(23, 22);
-			this.btnDelReduced.Text = "Fläche mit red. Heiz-/Kühlleistung löschen";
-			this.btnDelReduced.Click += new System.EventHandler(this.btnDelReduced_Click);
-			// 
 			// btnAddRz
 			// 
 			this.btnAddRz.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -245,6 +225,26 @@ namespace Europlan.Common.Products {
 			this.btnDelRz.Text = "Randzone löschen";
 			this.btnDelRz.ToolTipText = "Randzone löschen";
 			this.btnDelRz.Click += new System.EventHandler(this.btnDelRz_Click);
+			// 
+			// btnAddReduced
+			// 
+			this.btnAddReduced.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddReduced.Image = ((System.Drawing.Image)(resources.GetObject("btnAddReduced.Image")));
+			this.btnAddReduced.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddReduced.Name = "btnAddReduced";
+			this.btnAddReduced.Size = new System.Drawing.Size(23, 22);
+			this.btnAddReduced.Text = "Fläche mit red. Heiz-/Kühlleistung hinzufügen";
+			this.btnAddReduced.Click += new System.EventHandler(this.btnAddReduced_Click);
+			// 
+			// btnDelReduced
+			// 
+			this.btnDelReduced.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnDelReduced.Image = ((System.Drawing.Image)(resources.GetObject("btnDelReduced.Image")));
+			this.btnDelReduced.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDelReduced.Name = "btnDelReduced";
+			this.btnDelReduced.Size = new System.Drawing.Size(23, 22);
+			this.btnDelReduced.Text = "Fläche mit red. Heiz-/Kühlleistung löschen";
+			this.btnDelReduced.Click += new System.EventHandler(this.btnDelReduced_Click);
 			// 
 			// panel1
 			// 
