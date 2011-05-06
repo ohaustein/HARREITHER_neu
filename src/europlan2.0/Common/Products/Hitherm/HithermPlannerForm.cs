@@ -266,11 +266,13 @@ namespace Europlan.Common {
 
 		private void btnWallDelete_Click(object sender, EventArgs e) {
 			if (IsChangeAllowed()) {
-				GraphicalWall wall = selectedObject as GraphicalWall;
-				graphicalWallPanel.Room.Walls.Remove(wall);
-				selectedObject = null;
-				UpdateDefineWallsPanel(null);
-				this.graphicalWallPanel.InvalidateGraphics();
+				if (MessageBox.Show("Wollen Sie die aktuelle Wand wirklich löschen?", "Wand löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					GraphicalWall wall = selectedObject as GraphicalWall;
+					graphicalWallPanel.Room.Walls.Remove(wall);
+					selectedObject = null;
+					UpdateDefineWallsPanel(null);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
 			}
 		}
 
