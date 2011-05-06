@@ -235,6 +235,8 @@ namespace Europlan.Common {
 					}
 				}
 
+				dgvRegisters.Enabled = !graphicalMode;
+
 				int selectedCircuit = (this.dgvRegisters.SelectedCells.Count > 0 &&
 					this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem is HithermRegister) ?
 					(this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem as HithermRegister).Heizkreis : -1;
