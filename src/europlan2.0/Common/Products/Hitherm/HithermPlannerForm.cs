@@ -149,6 +149,12 @@ namespace Europlan.Common {
 			this.panelModifyHitherm.BringToFront();
 		}
 
+		private void btnConnection_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_CLICK;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_CONNECTION;
+			// panel.BringToFront()...
+		}
+
 		private void graphicalWallPanel_ObjectSelected(object sender, GraphicalWallPanel.SelectedObjectArgs e) {
 			if (this.selectedObject != e.SelectedObject) {
 				unsavedChanges = false;
@@ -494,8 +500,129 @@ namespace Europlan.Common {
 			PlannedProduct pp = Project.Instance.GetPlannedProduct(product);
 			product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
 			string errorMsg = pp.Product.LastErrorMessage;
-			//this.lstError.Items.Clear();
-			//string[] messages;
+			this.lstError.Items.Clear();
+			string[] messages;
+			if (errorMsg != null) {
+				messages = errorMsg.Split('\n');
+				foreach (string message in messages) {
+					if (!string.IsNullOrEmpty(message)) {
+						ListViewItem item = new ListViewItem(message);
+						item.ForeColor = Color.Red;
+						//item.Font = new Font(item.Font, FontStyle.Bold);
+						this.lstError.Items.Add(item);
+					}
+				}
+			}
+			string notifications = pp.Product.NotificationMessage;
+			if (notifications != null) {
+				messages = notifications.Split('\n');
+				foreach (string message in messages) {
+					if (!string.IsNullOrEmpty(message)) {
+						ListViewItem item = new ListViewItem(message);
+						item.ForeColor = Color.Orange;
+						this.lstError.Items.Add(item);
+					}
+				}
+			}
+			notifications = ModulKlimaDeckeProduct.GlobalNotificationMessage;
+			if (notifications != null) {
+				messages = notifications.Split('\n');
+				foreach (string message in messages) {
+					if (!string.IsNullOrEmpty(message)) {
+						ListViewItem item = new ListViewItem(message);
+						item.ForeColor = Color.Orange;
+						this.lstError.Items.Add(item);
+					}
+				}
+			}
+			if (lstError.Items.Count > 0) {
+				this.lstError.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+				int height = this.lstError.Items[this.lstError.Items.Count - 1].Position.Y + this.lstError.Items[this.lstError.Items.Count - 1].Bounds.Height + 5;
+				this.lstError.Height = height;
+				this.lstError.Visible = true;
+			} else {
+				this.lstError.Visible = false;
+			}
+
+			bool showHeat = pp.RequestedHeatLoad > 0;
+			bool showCool = pp.RequestedCoolLoad > 0;
+			//bool showHeatCircuit = selectedCircuit >= 0 && showHeat;
+			//bool showCoolCircuit = selectedCircuit >= 0 && showCool;
+			bool showRestArea = product.HithermType == Product.ProductType.FBH || product.HithermType == Product.ProductType.DH;
+
+			lblHeat.Visible = showHeat;
+			lblQHeat.Visible = showHeat;
+			lblQHeatUnit.Visible = showHeat;
+			lblQHeatDiff.Visible = showHeat;
+			lblQHeatDiffUnit.Visible = showHeat;
+			lblQHeatRest.Visible = showHeat;
+			lblQHeatRestUnit.Visible = showHeat;
+			//lblAvgqHeat.Visible = showHeatCircuit;
+			//lblAvgqHeatUnit.Visible = showHeatCircuit;
+			//lblDurchflussHeat.Visible = showHeatCircuit;
+			//lblDurchflussHeatUnit.Visible = showHeatCircuit;
+			//lblDruckverlustHeat.Visible = showHeatCircuit;
+			//lblDruckverlustHeatUnit.Visible = showHeatCircuit;
+			lblCool.Visible = showCool;
+			lblQCool.Visible = showCool;
+			lblQCoolUnit.Visible = showCool;
+			lblQCoolDiff.Visible = showCool;
+			lblQCoolDiffUnit.Visible = showCool;
+			lblQCoolRest.Visible = showCool;
+			lblQCoolRestUnit.Visible = showCool;
+			//lblAvgqCool.Visible = showCoolCircuit;
+			//lblAvgqCoolUnit.Visible = showCoolCircuit;
+			//lblDurchflussCool.Visible = showCoolCircuit;
+			//lblDurchflussCoolUnit.Visible = showCoolCircuit;
+			//lblDruckverlustCool.Visible = showCoolCircuit;
+			//lblDruckverlustCoolUnit.Visible = showCoolCircuit;
+
+			int xDiff = this.lblNecessaryArea.Top - this.lblNecessaryWaermestromdichte.Top;
+			if (showRestArea) {
+				this.lblCoveredAreaTitle.Top = this.lblAvailableAreaUnit.Top + xDiff;
+				this.lblCoveredArea.Top = this.lblAvailableArea.Top + xDiff;
+				this.lblCoveredAreaUnit.Top = this.lblAvailableAreaUnit.Top + xDiff;
+				this.lblNecessaryWaermestromdichteTitle.Top = this.lblRestAreaTitle.Top + xDiff;
+				this.lblNecessaryWaermestromdichte.Top = this.lblRestArea.Top + xDiff;
+				this.lblNecessaryWaermestromdichteUnit.Top = this.lblRestAreaUnit.Top + xDiff;
+				this.lblNecessaryAreaTitle.Top = this.lblNecessaryWaermestromdichteTitle.Top + xDiff;
+				this.lblNecessaryArea.Top = this.lblNecessaryWaermestromdichte.Top + xDiff;
+				this.lblNecessaryAreaUnit.Top = this.lblNecessaryWaermestromdichteUnit.Top + xDiff;
+				this.lblAvailableAreaTitle.Visible = true;
+				this.lblAvailableArea.Visible = true;
+				this.lblAvailableAreaUnit.Visible = true;
+				this.lblRestAreaTitle.Visible = true;
+				this.lblRestArea.Visible = true;
+				this.lblRestAreaUnit.Visible = true;
+				this.lineInfo.Height = 135;
+			} else {
+				this.lblAvailableAreaTitle.Visible = false;
+				this.lblAvailableArea.Visible = false;
+				this.lblAvailableAreaUnit.Visible = false;
+				this.lblRestAreaTitle.Visible = false;
+				this.lblRestArea.Visible = false;
+				this.lblRestAreaUnit.Visible = false;
+				this.lblCoveredAreaTitle.Top = this.lblAvailableAreaUnit.Top;
+				this.lblCoveredArea.Top = this.lblAvailableArea.Top;
+				this.lblCoveredAreaUnit.Top = this.lblAvailableAreaUnit.Top;
+				this.lblNecessaryWaermestromdichteTitle.Top = this.lblCoveredAreaTitle.Top + xDiff;
+				this.lblNecessaryWaermestromdichte.Top = this.lblCoveredArea.Top + xDiff;
+				this.lblNecessaryWaermestromdichteUnit.Top = this.lblCoveredAreaUnit.Top + xDiff;
+				this.lblNecessaryAreaTitle.Top = this.lblNecessaryWaermestromdichteTitle.Top + xDiff;
+				this.lblNecessaryArea.Top = this.lblNecessaryWaermestromdichte.Top + xDiff;
+				this.lblNecessaryAreaUnit.Top = this.lblNecessaryWaermestromdichteUnit.Top + xDiff;
+				this.lineInfo.Height = 100;
+			}
+
+
+			//this.lblAreaTxt.Visible = showArea;
+			//this.numArea.Visible = showArea;
+			//this.lblAreaUnit.Visible = showArea;
+			//this.numAreaPercentage.Visible = showArea;
+			//this.lblAreaPercentage.Visible = showArea;
+
 		}
+
+
 	}
 }
