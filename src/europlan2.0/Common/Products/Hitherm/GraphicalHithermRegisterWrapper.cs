@@ -35,18 +35,22 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
-			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale);
+			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, (this == selectedObject));
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color) {
-			this.PaintObject(g, xOffset, yOffset, color, 1);
+			this.PaintObject(g, xOffset, yOffset, color, 1, false);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale) {
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool highlightConnections) {
 			if (register == null) {
 				return;
 			}
 			Pen registerPen = new Pen(color, (float)(1 / scale));
+			Brush bInput = new SolidBrush(Color.FromArgb(127, Color.Red));
+			Pen pInput = new Pen(Color.Red, (float)(1.0 / scale));
+			Brush bOutput = new SolidBrush(Color.FromArgb(127, Color.Blue));
+			Pen pOutput = new Pen(Color.Blue, (float)(1.0 / scale));
 			if (register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
 				float x = (float)(xOffset + register.GraphPosX);
 				float y1 = (float)(yOffset + register.GraphPosY);
@@ -78,9 +82,18 @@ namespace Europlan.Common {
 						pos += 10;
 					}
 				}
-				if (true) { // TODO check if vorlauf is on the right or left side
-
-				} else {
+				if (highlightConnections) {
+					if (register.GraphVorlaufRight) {
+						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
+						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
+						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
+						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
+					} else {
+						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 10, 10);
+						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 10, 10);
+						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
+						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
+					}
 				}
 			} else {
 			}
@@ -91,6 +104,62 @@ namespace Europlan.Common {
 				return this;
 			}
 			return null;
+		}
+
+		public Point2D GetOutputConnectionPoint(double xOffset, double yOffset) {
+			if (this.register.GraphVorlaufRight) {
+				return new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterHoehe - 1);
+			} else {
+				return new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + this.register.RegisterHoehe - 1);
+			}
+		}
+
+		public Polygon2D GetOutputConnectionArea(double xOffset, double yOffset) {
+			Polygon2D area = new Polygon2D();
+			if (this.register.GraphVorlaufRight) {
+				area.Add(new Point2D(xOffset + this.register.GraphPosX - 1.5, yOffset + register.GraphPosY + register.RegisterHoehe - 3.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX - 1.5, yOffset + register.GraphPosY + register.RegisterHoehe + 1.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + 3.5, yOffset + register.GraphPosY + register.RegisterHoehe + 1.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + 3.5, yOffset + register.GraphPosY + register.RegisterHoehe - 3.5));
+			} else {
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing - 3.5, yOffset + register.GraphPosY + register.RegisterHoehe - 3.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing - 3.5, yOffset + register.GraphPosY + register.RegisterHoehe + 1.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + 1.5, yOffset + register.GraphPosY + register.RegisterHoehe + 1.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + 1.5, yOffset + register.GraphPosY + register.RegisterHoehe - 3.5));
+			}
+			return area;
+		}
+
+		public Point2D GetInputConnectionPoint(double xOffset, double yOffset) {
+			if (this.register.GraphVorlaufRight) {
+				return new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + this.register.RegisterHoehe - 1);
+			} else {
+				return new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterHoehe - 1);
+			}
+		}
+
+		public Polygon2D GetInputConnectionArea(double xOffset, double yOffset) {
+			Polygon2D area = new Polygon2D();
+			if (this.register.GraphVorlaufRight) {
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing - 3.5, yOffset + register.GraphPosY - 1.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing - 3.5, yOffset + register.GraphPosY + 3.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + 1.5, yOffset + register.GraphPosY + 3.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + 1.5, yOffset + register.GraphPosY - 1.5));
+			} else {
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing - 3.5, yOffset + register.GraphPosY - 1.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing - 3.5, yOffset + register.GraphPosY + 3.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + 1.5, yOffset + register.GraphPosY + 3.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + 1.5, yOffset + register.GraphPosY - 1.5));
+			}
+			return area;
+		}
+
+		public PossibleHithermRegisterConnection GetOutputConnection(double xOffset, double yOffset, HithermProduct product, HithermCircuit circuit) {
+			return new PossibleHithermRegisterConnection(this.GetOutputConnectionPoint(xOffset, yOffset), GetOutputConnectionArea(xOffset, yOffset), false, true, product, circuit, this.register);
+		}
+
+		public PossibleHithermRegisterConnection GetInputConnection(double xOffset, double yOffset, HithermProduct product, HithermCircuit circuit) {
+			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset), GetInputConnectionArea(xOffset, yOffset), false, true, product, circuit, this.register);
 		}
 	}
 }

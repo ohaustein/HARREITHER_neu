@@ -105,7 +105,7 @@ namespace Europlan.Common {
 				Pen pen = new Pen(brush, (float)(1.0 / scale));
 				g.DrawRectangle(pen, x, y, width, height);
 				if (this.newRegister != null) {
-					this.newRegister.PaintObject(g, newRegisterWallXOffset, newRegisterWallYOffset, Color.Green, scale);
+					this.newRegister.PaintObject(g, newRegisterWallXOffset, newRegisterWallYOffset, Color.Green, scale, true);
 				}
 			}
 		}
@@ -188,20 +188,28 @@ namespace Europlan.Common {
 			}
 
 			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER && this.dragStart.HasValue && this.newRegister != null) {
-				this.newRegister.Register.Wall = this.newRegisterWall.Wall;
-				this.newRegisterWall.Registers.Add(this.newRegister);
-				HithermCircuit c = new HithermCircuit();
-				c.Registers.Add(this.newRegister.Register);
-				this.product.PlannedCircuits.Add(c);
+				bool recalc = false;
+				if (this.newRegister.Register != null) {
+					this.newRegister.Register.Wall = this.newRegisterWall.Wall;
+					this.newRegisterWall.Registers.Add(this.newRegister);
+					HithermCircuit c = new HithermCircuit();
+					c.Registers.Add(this.newRegister.Register);
+					this.product.PlannedCircuits.Add(c);
+					if (this.ConnectedWallPanel != null) {
+						this.ConnectedWallPanel.SelectedObject = this.newRegister;
+					}
+					recalc = true;
+				}
 				this.newRegister = null;
 				this.newRegisterWall = null;
-				this.OnRecalculationNecessary();
-				return true;
+				if (recalc) {
+					this.OnRecalculationNecessary();
+				}
 			}
 
-
 			this.dragStart = null;
-			return false;
+
+			return true;
 		}
 
 		public bool PlannerKeyPress(System.Windows.Forms.Keys key) {

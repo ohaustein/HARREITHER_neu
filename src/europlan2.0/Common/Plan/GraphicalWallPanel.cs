@@ -478,7 +478,10 @@ namespace Europlan.Common {
 
 		public IGraphicalWallObject SelectedObject {
 			get { return this.selectedObject; }
-			set { this.selectedObject = value; }
+			set {
+				this.selectedObject = value;
+				this.OnObjectSelected(this.selectedObject);
+			}
 		}
 
 		public PlanMode Mode {
