@@ -246,6 +246,7 @@ namespace Europlan.Common {
 			this.btnWallRevert.Size = new System.Drawing.Size(25, 25);
 			this.btnWallRevert.TabIndex = 18;
 			this.btnWallRevert.UseVisualStyleBackColor = true;
+			this.btnWallRevert.Click += new System.EventHandler(this.btnWallRevert_Click);
 			// 
 			// btnWallApply
 			// 
@@ -256,6 +257,7 @@ namespace Europlan.Common {
 			this.btnWallApply.Size = new System.Drawing.Size(25, 25);
 			this.btnWallApply.TabIndex = 17;
 			this.btnWallApply.UseVisualStyleBackColor = true;
+			this.btnWallApply.Click += new System.EventHandler(this.btnWallApply_Click);
 			// 
 			// groupBox3
 			// 
@@ -314,20 +316,24 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.numWallVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.numWallVertical.InternalValue = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
 			this.numWallVertical.Location = new System.Drawing.Point(97, 42);
 			this.numWallVertical.MaxValue = null;
-			this.numWallVertical.MinValue = null;
+			this.numWallVertical.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.numWallVertical.Name = "numWallVertical";
 			this.numWallVertical.Size = new System.Drawing.Size(87, 20);
 			this.numWallVertical.TabIndex = 21;
 			this.numWallVertical.Text = "0";
 			this.numWallVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWallVertical.Value = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
@@ -339,20 +345,24 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.numWallHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.numWallHorizontal.InternalValue = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
 			this.numWallHorizontal.Location = new System.Drawing.Point(97, 19);
 			this.numWallHorizontal.MaxValue = null;
-			this.numWallHorizontal.MinValue = null;
+			this.numWallHorizontal.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.numWallHorizontal.Name = "numWallHorizontal";
 			this.numWallHorizontal.Size = new System.Drawing.Size(87, 20);
 			this.numWallHorizontal.TabIndex = 20;
 			this.numWallHorizontal.Text = "0";
 			this.numWallHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWallHorizontal.Value = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});

@@ -85,6 +85,8 @@ namespace Europlan.Common {
 					newWall.PlanEndPoint = vertex;
 					newWall.BorderDistance = HithermProduct.ConfigGraphicalRandabstandDefault;
 					newWall.CeilingContour.Add(new Point2D(0, height));
+					newWall.CeilingContour.Add(new Point2D(0, height));
+					newWall.CeilingContour.Add(new Point2D(length, height));
 					newWall.CeilingContour.Add(new Point2D(length, height));
 					this.graphicalWallPanel.Room.Walls.Add(newWall);
 					lastVertex = vertex;
@@ -200,14 +202,18 @@ namespace Europlan.Common {
 
 		private void numWallHorizontal_ValueChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
+				GraphicalWall wall = selectedObject as GraphicalWall;
 				unsavedChanges = true;
+				UpdateDefineWallsPanelButtons(wall);
 			}
 			
 		}
 
 		private void numWallVertical_ValueChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
+				GraphicalWall wall = selectedObject as GraphicalWall;
 				unsavedChanges = true;
+				UpdateDefineWallsPanelButtons(wall);
 			}
 		}
 
@@ -266,6 +272,27 @@ namespace Europlan.Common {
 				UpdateDefineWallsPanel(null);
 				this.graphicalWallPanel.InvalidateGraphics();
 			}
+		}
+
+		private void btnWallApply_Click(object sender, EventArgs e) {
+			GraphicalWall wall = selectedObject as GraphicalWall;
+			if (wall.WallId != txtWallConstruction.Text || Math.Round((decimal)wall.GetWallWidth() * 100, 0) != numWallHorizontal.Value) {
+				if (IsChangeAllowed()) {
+					wall.WallId = txtWallConstruction.Text;
+					wall.SetWallWidth((double)numWallHorizontal.Value / 100.0);
+					wall.SetWallHeight((double)numWallVertical.Value / 100.0);
+				}
+			} else {
+				wall.WallId = txtWallConstruction.Text;
+				wall.SetWallWidth((double)numWallHorizontal.Value / 100.0);
+				wall.SetWallHeight((double)numWallVertical.Value / 100.0);
+			}
+			UpdateDefineWallsPanel(wall);
+		}
+
+		private void btnWallRevert_Click(object sender, EventArgs e) {
+			GraphicalWall wall = selectedObject as GraphicalWall;
+			UpdateDefineWallsPanel(wall);		
 		}
 	}
 }

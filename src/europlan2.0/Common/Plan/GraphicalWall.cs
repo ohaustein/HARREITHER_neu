@@ -241,5 +241,27 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+
+		public void SetWallWidth(double width) {
+			double currentWidth = GetWallWidth();
+			double delta = width - currentWidth;
+			// TODO: breite der dachschräge prüfen
+			if (Math.Round(delta, 2) != 0) {
+				ceilingContour[2] = new Point2D(ceilingContour[2].X + delta, ceilingContour[2].Y);
+				ceilingContour[3] = new Point2D(ceilingContour[3].X + delta, ceilingContour[3].Y);
+			}
+		}
+
+		public void SetWallHeight(double height) {
+			double currentHeight = GetWallHeight();
+			double delta = height - currentHeight;
+			if (Math.Round(delta, 2) > 0) {
+				for (int i = 0; i < CeilingContour.Count; i++) {
+					Point2D p = ceilingContour[i];
+					double y = p.Y + delta > 0 ? p.Y + delta : 0;
+					ceilingContour[i] = new Point2D(p.X, y);
+				}
+			}
+		}
 	}
 }
