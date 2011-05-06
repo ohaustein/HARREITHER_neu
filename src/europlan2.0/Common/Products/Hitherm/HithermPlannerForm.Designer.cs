@@ -338,24 +338,24 @@ namespace Europlan.Common {
 			// rbRegisterRight
 			// 
 			this.rbRegisterRight.AutoSize = true;
-			this.rbRegisterRight.Location = new System.Drawing.Point(6, 43);
+			this.rbRegisterRight.Location = new System.Drawing.Point(6, 20);
 			this.rbRegisterRight.Name = "rbRegisterRight";
-			this.rbRegisterRight.Size = new System.Drawing.Size(80, 17);
+			this.rbRegisterRight.Size = new System.Drawing.Size(117, 17);
 			this.rbRegisterRight.TabIndex = 1;
 			this.rbRegisterRight.TabStop = true;
-			this.rbRegisterRight.Text = "Links unten";
+			this.rbRegisterRight.Text = "Rechts unten (Std.)";
 			this.rbRegisterRight.UseVisualStyleBackColor = true;
 			this.rbRegisterRight.CheckedChanged += new System.EventHandler(this.rbRegisterLeftRight_CheckedChanged);
 			// 
 			// rbRegisterLeft
 			// 
 			this.rbRegisterLeft.AutoSize = true;
-			this.rbRegisterLeft.Location = new System.Drawing.Point(6, 20);
+			this.rbRegisterLeft.Location = new System.Drawing.Point(6, 43);
 			this.rbRegisterLeft.Name = "rbRegisterLeft";
-			this.rbRegisterLeft.Size = new System.Drawing.Size(117, 17);
+			this.rbRegisterLeft.Size = new System.Drawing.Size(80, 17);
 			this.rbRegisterLeft.TabIndex = 0;
 			this.rbRegisterLeft.TabStop = true;
-			this.rbRegisterLeft.Text = "Rechts unten (Std.)";
+			this.rbRegisterLeft.Text = "Links unten";
 			this.rbRegisterLeft.UseVisualStyleBackColor = true;
 			this.rbRegisterLeft.CheckedChanged += new System.EventHandler(this.rbRegisterLeftRight_CheckedChanged);
 			// 
