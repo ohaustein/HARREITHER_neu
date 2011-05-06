@@ -621,6 +621,26 @@ namespace Europlan.Common {
 			//this.numAreaPercentage.Visible = showArea;
 			//this.lblAreaPercentage.Visible = showArea;
 
+
+
+			double qDiffHeat = pp.PlannedHeatLoad - pp.RequestedHeatLoad;
+			double qDiffCool = pp.PlannedCoolLoad - pp.RequestedCoolLoad;
+
+			lblRest.Text = EuroplanRes.PlannedHithermProductPanel_Rest + " (" + product.AssociatedRoom.ToString() + ")";
+			lblQHeat.Text = Math.Round(pp.PlannedHeatLoad, 0).ToString();
+			lblQHeatDiff.Text = Math.Round(qDiffHeat, 0).ToString("+0;-0");
+			lblQHeatRest.Text = Math.Round(product.AssociatedRoom.OpenHeatLoad, 0).ToString("+0;-0");
+			lblQCool.Text = Math.Round(pp.PlannedCoolLoad, 0).ToString();
+			lblQCoolDiff.Text = Math.Round(qDiffCool, 0).ToString("+0;-0");
+			lblQCoolRest.Text = Math.Round(product.AssociatedRoom.OpenCoolLoad, 0).ToString("+0;-0");
+			double area = product.PlannedRegisterArea;
+			lblCoveredArea.Text = Math.Round(area, 2).ToString();
+			lblAvailableArea.Text = Math.Round(pp.PlannedArea.HasValue ? pp.PlannedArea.Value : 0, 2).ToString();
+			lblRestArea.Text = Math.Round((pp.PlannedArea.HasValue ? pp.PlannedArea.Value : 0) - area, 2).ToString();
+			lblNecessaryWaermestromdichte.Text = (area > 0) ? Math.Round(pp.RequestedHeatLoad / area, 2).ToString() : "--";
+			lblNecessaryArea.Text = (product.PlannedHeatLoad > 0 && area > 0) ? Math.Round(pp.RequestedHeatLoad / (product.PlannedHeatLoad / area), 2).ToString() : "--";
+				
+
 		}
 
 
