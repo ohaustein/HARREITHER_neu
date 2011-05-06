@@ -10,16 +10,27 @@ using Star.SettingsXpress;
 namespace Europlan.Common {
 	public partial class NewWallForm : Form {
 
+		public enum CreationTypeEnum {
+			Prev,
+			Next,
+			After,
+			Schraege
+		}
+
 		private static double defaultHeight = 250.0;
 		private bool autoGeneration;
 		private bool isCompact;
 		private string wallId;
+		private double selectedWidth = 0;
+		private int wallCount = 0;
 
-		public NewWallForm(bool autoGeneration, bool isCompact) {
+		public NewWallForm(bool autoGeneration, bool isCompact, double selectedWidth, int wallCount) {
 			InitializeComponent();
 
 			this.autoGeneration = autoGeneration;
 			this.isCompact = isCompact;
+			this.selectedWidth = selectedWidth;
+			this.wallCount = wallCount;
 
 			this.numWidth.Enabled = !autoGeneration;
 			this.numHeight.Value = (decimal)defaultHeight;
@@ -32,7 +43,8 @@ namespace Europlan.Common {
 				this.lblConstructionName.Text = Project.Instance.HithermWalls[0].Name;
 			}
 			this.txtConstruction.Text = wallId;
-			
+
+			groupBox1.Enabled = !autoGeneration;
 
 			this.SetLanguage();
 		}
@@ -77,6 +89,24 @@ namespace Europlan.Common {
 			get { return this.wallId; }
 		}
 
+		public int AfterWallNumber {
+			get { return (int)this.numWallId.Value; }
+		}
+
+		public CreationTypeEnum CreationType {
+			get {
+				if (rbPrev.Checked) {
+					return CreationTypeEnum.Prev;
+				} else if (rbNext.Checked) {
+					return CreationTypeEnum.Next;
+				} else if (rbAfter.Checked) {
+					return CreationTypeEnum.After;
+				} else {
+					return CreationTypeEnum.Schraege;
+				}
+			}
+		}
+
 		private void btnSelectConstruction_Click(object sender, EventArgs e) {
 			SelectHithermWallForm form = new SelectHithermWallForm(this.isCompact);
 			if (form.ShowDialog() == DialogResult.OK) {
@@ -85,6 +115,17 @@ namespace Europlan.Common {
 				this.lblConstructionName.Text = form.SelectedWall.Name;
 			}
 			form.Dispose();
+		}
+
+		private void rb_CheckedChanged(object sender, EventArgs e) {
+			numWallId.Enabled = rbAfter.Checked;
+			numWidth.Enabled = !rbSchraege.Checked;
+			if (rbSchraege.Checked) {
+				numWidth.Value = (decimal)selectedWidth;
+			}
+			if (rbAfter.Checked) {
+				numWallId.MaxValue = wallCount;
+			}
 		}
 	}
 }

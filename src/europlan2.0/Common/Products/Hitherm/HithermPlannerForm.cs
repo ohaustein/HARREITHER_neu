@@ -48,11 +48,34 @@ namespace Europlan.Common {
 		}
 
 		private void btnWallNewWall_Click(object sender, EventArgs e) {
-			NewWallForm form = new NewWallForm(true, false);
+			NewWallForm form = new NewWallForm(false, false, selectedObject != null ? (selectedObject as GraphicalWall).GetWallWidth() * 100 : 0, graphicalWallPanel.Room.Walls.Count);
 			DialogResult result = form.ShowDialog();
 			if (result == DialogResult.OK) {
 				double height = form.Height / 100.0;
+				double width = form.Width / 100.0;
+				GraphicalWall newWall = new GraphicalWall();
+				newWall.WallId = form.WallId;
+				newWall.BorderDistance = HithermProduct.ConfigGraphicalRandabstandDefault;
+				newWall.CeilingContour.Add(new Point2D(0, height));
+				newWall.CeilingContour.Add(new Point2D(0, height));
+				newWall.CeilingContour.Add(new Point2D(width, height));
+				newWall.CeilingContour.Add(new Point2D(width, height));
+				if (selectedObject == null) {
+					this.graphicalWallPanel.Room.Walls.Add(newWall);
+				} else {
+					GraphicalWall wall = selectedObject as GraphicalWall;
+					if (form.CreationType == NewWallForm.CreationTypeEnum.Prev) {
+						this.graphicalWallPanel.Room.Walls.Insert(this.graphicalWallPanel.Room.Walls.IndexOf(wall), newWall);
+					} else if (form.CreationType == NewWallForm.CreationTypeEnum.Next) {
+						this.graphicalWallPanel.Room.Walls.Insert(this.graphicalWallPanel.Room.Walls.IndexOf(wall) + 1, newWall);
+					} else if (form.CreationType == NewWallForm.CreationTypeEnum.After) {
+						this.graphicalWallPanel.Room.Walls.Insert(form.AfterWallNumber, newWall);
+					} else {
+						wall.DachSchraege = newWall;
+					}
 
+				}
+				
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
@@ -67,7 +90,7 @@ namespace Europlan.Common {
 			}
 			if (ok) {
 			this.graphicalWallPanel.Room.Walls.Clear();
-			NewWallForm form = new NewWallForm(true, false);
+			NewWallForm form = new NewWallForm(true, false, 0, 0);
 			DialogResult result = form.ShowDialog();
 			if (result == DialogResult.OK) {
 				double height = form.Height / 100.0;
@@ -290,6 +313,7 @@ namespace Europlan.Common {
 				wall.SetWallHeight((double)numWallVertical.Value / 100.0);
 			}
 			UpdateDefineWallsPanel(wall);
+			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
 		private void btnWallRevert_Click(object sender, EventArgs e) {

@@ -36,13 +36,20 @@ namespace Europlan.Common {
 			this.lblConstructionName = new System.Windows.Forms.Label();
 			this.numHeight = new Europlan.Common.NumericBox();
 			this.numWidth = new Europlan.Common.NumericBox();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.rbPrev = new System.Windows.Forms.RadioButton();
+			this.rbNext = new System.Windows.Forms.RadioButton();
+			this.rbAfter = new System.Windows.Forms.RadioButton();
+			this.rbSchraege = new System.Windows.Forms.RadioButton();
+			this.numWallId = new Europlan.Common.NumericBox();
+			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// lblConstruction
 			// 
 			this.lblConstruction.Location = new System.Drawing.Point(12, 9);
 			this.lblConstruction.Name = "lblConstruction";
-			this.lblConstruction.Size = new System.Drawing.Size(167, 17);
+			this.lblConstruction.Size = new System.Drawing.Size(120, 17);
 			this.lblConstruction.TabIndex = 2;
 			this.lblConstruction.Text = "Konstruktion:";
 			// 
@@ -50,7 +57,7 @@ namespace Europlan.Common {
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(528, 274);
+			this.btnCancel.Location = new System.Drawing.Point(297, 231);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 3;
@@ -61,7 +68,7 @@ namespace Europlan.Common {
 			// 
 			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOk.Location = new System.Drawing.Point(447, 274);
+			this.btnOk.Location = new System.Drawing.Point(216, 231);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
 			this.btnOk.TabIndex = 2;
@@ -74,24 +81,26 @@ namespace Europlan.Common {
 			// 
 			// lblWidth
 			// 
-			this.lblWidth.Location = new System.Drawing.Point(12, 36);
+			this.lblWidth.Location = new System.Drawing.Point(12, 54);
 			this.lblWidth.Name = "lblWidth";
-			this.lblWidth.Size = new System.Drawing.Size(167, 17);
+			this.lblWidth.Size = new System.Drawing.Size(120, 17);
 			this.lblWidth.TabIndex = 6;
 			this.lblWidth.Text = "Breite:";
 			// 
 			// lblHeight
 			// 
-			this.lblHeight.Location = new System.Drawing.Point(12, 62);
+			this.lblHeight.Location = new System.Drawing.Point(12, 80);
 			this.lblHeight.Name = "lblHeight";
-			this.lblHeight.Size = new System.Drawing.Size(167, 17);
+			this.lblHeight.Size = new System.Drawing.Size(120, 17);
 			this.lblHeight.TabIndex = 7;
 			this.lblHeight.Text = "Höhe:";
 			// 
 			// label2
 			// 
+			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(312, 36);
+			this.label2.Location = new System.Drawing.Point(324, 54);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(21, 13);
 			this.label2.TabIndex = 10;
@@ -99,8 +108,10 @@ namespace Europlan.Common {
 			// 
 			// label3
 			// 
+			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(312, 62);
+			this.label3.Location = new System.Drawing.Point(324, 80);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(21, 13);
 			this.label3.TabIndex = 11;
@@ -108,10 +119,10 @@ namespace Europlan.Common {
 			// 
 			// txtConstruction
 			// 
-			this.txtConstruction.Location = new System.Drawing.Point(185, 6);
+			this.txtConstruction.Location = new System.Drawing.Point(138, 6);
 			this.txtConstruction.Name = "txtConstruction";
 			this.txtConstruction.ReadOnly = true;
-			this.txtConstruction.Size = new System.Drawing.Size(121, 20);
+			this.txtConstruction.Size = new System.Drawing.Size(168, 20);
 			this.txtConstruction.TabIndex = 12;
 			// 
 			// btnSelectConstruction
@@ -128,24 +139,27 @@ namespace Europlan.Common {
 			// 
 			this.lblConstructionName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.lblConstructionName.Location = new System.Drawing.Point(351, 9);
+			this.lblConstructionName.Location = new System.Drawing.Point(15, 30);
 			this.lblConstructionName.Name = "lblConstructionName";
-			this.lblConstructionName.Size = new System.Drawing.Size(252, 18);
+			this.lblConstructionName.Size = new System.Drawing.Size(330, 18);
 			this.lblConstructionName.TabIndex = 14;
+			this.lblConstructionName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// numHeight
 			// 
+			this.numHeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.numHeight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.numHeight.InternalValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.numHeight.Location = new System.Drawing.Point(185, 59);
+			this.numHeight.Location = new System.Drawing.Point(138, 77);
 			this.numHeight.MaxValue = null;
 			this.numHeight.MinValue = null;
 			this.numHeight.Name = "numHeight";
-			this.numHeight.Size = new System.Drawing.Size(121, 20);
+			this.numHeight.Size = new System.Drawing.Size(168, 20);
 			this.numHeight.TabIndex = 8;
 			this.numHeight.Text = "0";
 			this.numHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -157,22 +171,116 @@ namespace Europlan.Common {
 			// 
 			// numWidth
 			// 
+			this.numWidth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.numWidth.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.numWidth.InternalValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.numWidth.Location = new System.Drawing.Point(185, 33);
+			this.numWidth.Location = new System.Drawing.Point(138, 51);
 			this.numWidth.MaxValue = null;
 			this.numWidth.MinValue = null;
 			this.numWidth.Name = "numWidth";
-			this.numWidth.Size = new System.Drawing.Size(121, 20);
+			this.numWidth.Size = new System.Drawing.Size(168, 20);
 			this.numWidth.TabIndex = 4;
 			this.numWidth.Text = "0";
 			this.numWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWidth.Value = new decimal(new int[] {
             0,
+            0,
+            0,
+            0});
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox1.Controls.Add(this.numWallId);
+			this.groupBox1.Controls.Add(this.rbSchraege);
+			this.groupBox1.Controls.Add(this.rbAfter);
+			this.groupBox1.Controls.Add(this.rbNext);
+			this.groupBox1.Controls.Add(this.rbPrev);
+			this.groupBox1.Location = new System.Drawing.Point(12, 103);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(360, 122);
+			this.groupBox1.TabIndex = 15;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Position";
+			// 
+			// rbPrev
+			// 
+			this.rbPrev.AutoSize = true;
+			this.rbPrev.Location = new System.Drawing.Point(7, 20);
+			this.rbPrev.Name = "rbPrev";
+			this.rbPrev.Size = new System.Drawing.Size(116, 17);
+			this.rbPrev.TabIndex = 0;
+			this.rbPrev.Text = "Vor aktueller Wand";
+			this.rbPrev.UseVisualStyleBackColor = true;
+			this.rbPrev.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
+			// 
+			// rbNext
+			// 
+			this.rbNext.AutoSize = true;
+			this.rbNext.Checked = true;
+			this.rbNext.Location = new System.Drawing.Point(7, 43);
+			this.rbNext.Name = "rbNext";
+			this.rbNext.Size = new System.Drawing.Size(126, 17);
+			this.rbNext.TabIndex = 1;
+			this.rbNext.TabStop = true;
+			this.rbNext.Text = "Nach aktueller Wand";
+			this.rbNext.UseVisualStyleBackColor = true;
+			this.rbNext.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
+			// 
+			// rbAfter
+			// 
+			this.rbAfter.AutoSize = true;
+			this.rbAfter.Location = new System.Drawing.Point(7, 66);
+			this.rbAfter.Name = "rbAfter";
+			this.rbAfter.Size = new System.Drawing.Size(100, 17);
+			this.rbAfter.TabIndex = 2;
+			this.rbAfter.Text = "Nach Wand Nr.";
+			this.rbAfter.UseVisualStyleBackColor = true;
+			this.rbAfter.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
+			// 
+			// rbSchraege
+			// 
+			this.rbSchraege.AutoSize = true;
+			this.rbSchraege.Location = new System.Drawing.Point(7, 89);
+			this.rbSchraege.Name = "rbSchraege";
+			this.rbSchraege.Size = new System.Drawing.Size(169, 17);
+			this.rbSchraege.TabIndex = 3;
+			this.rbSchraege.Text = "Als Schräge für aktuelle Wand";
+			this.rbSchraege.UseVisualStyleBackColor = true;
+			this.rbSchraege.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
+			// 
+			// numWallId
+			// 
+			this.numWallId.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numWallId.Enabled = false;
+			this.numWallId.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numWallId.Location = new System.Drawing.Point(204, 65);
+			this.numWallId.MaxValue = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+			this.numWallId.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numWallId.Name = "numWallId";
+			this.numWallId.Size = new System.Drawing.Size(150, 20);
+			this.numWallId.TabIndex = 4;
+			this.numWallId.Value = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -183,7 +291,8 @@ namespace Europlan.Common {
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(615, 309);
+			this.ClientSize = new System.Drawing.Size(384, 266);
+			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.lblConstructionName);
 			this.Controls.Add(this.btnSelectConstruction);
 			this.Controls.Add(this.txtConstruction);
@@ -206,6 +315,8 @@ namespace Europlan.Common {
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Wand hinzufügen";
+			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -226,5 +337,11 @@ namespace Europlan.Common {
 		private System.Windows.Forms.TextBox txtConstruction;
 		private System.Windows.Forms.Button btnSelectConstruction;
 		private System.Windows.Forms.Label lblConstructionName;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private NumericBox numWallId;
+		private System.Windows.Forms.RadioButton rbSchraege;
+		private System.Windows.Forms.RadioButton rbAfter;
+		private System.Windows.Forms.RadioButton rbNext;
+		private System.Windows.Forms.RadioButton rbPrev;
 	}
 }
