@@ -486,7 +486,16 @@ namespace Europlan.Common {
 		}
 
 		private void hithermPlanner_RecalculationNecessary(object sender, EventArgs e) {
-			// TODO - recalculate product
+			CalculateAndUpdate();
+		}
+
+		private void CalculateAndUpdate() {
+			HithermProduct product = this.hithermPlanner.Product;
+			PlannedProduct pp = Project.Instance.GetPlannedProduct(product);
+			product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
+			string errorMsg = pp.Product.LastErrorMessage;
+			//this.lstError.Items.Clear();
+			//string[] messages;
 		}
 	}
 }
