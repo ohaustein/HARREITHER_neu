@@ -474,7 +474,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnRegisterConnect_Click(object sender, EventArgs e) {
-
+			// TODO
 		}
 
 		private void chkRegisterHelpLines_CheckedChanged(object sender, EventArgs e) {
