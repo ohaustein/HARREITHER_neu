@@ -223,7 +223,10 @@ namespace Europlan.Common {
 					if (floor.AssociatedPlanId == this.Plan.Id) {
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct product in room.PlannedProducts) {
-								products.Add(product.Product);
+								if ((this.PlanFloor && product.Product.Type == Product.ProductType.FBH) ||
+									(this.PlanCeiling && product.Product.Type == Product.ProductType.DH)) {
+									products.Add(product.Product);
+								}
 							}
 						}
 					}

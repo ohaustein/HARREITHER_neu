@@ -134,6 +134,9 @@ namespace Europlan.Common {
 
 		public int StartIndex {
 			get {
+				if (this.startIndex >= 0) {
+					return this.startIndex;
+				}
 				int index = -1;
 				if (this.Circuit is HithermCircuit) {
 					HithermCircuit hc = this.Circuit as HithermCircuit;
@@ -153,6 +156,9 @@ namespace Europlan.Common {
 
 		public int EndIndex {
 			get {
+				if (this.endIndex >= 0) {
+					return this.endIndex;
+				}
 				int index = -1;
 				if (this.Circuit is HithermCircuit) {
 					HithermCircuit hc = this.Circuit as HithermCircuit;
@@ -183,6 +189,9 @@ namespace Europlan.Common {
 
 		public int CircuitIndex {
 			get {
+				if (this.circuitIndex >= 0) {
+					return this.circuitIndex;
+				}
 				int index = -1;
 				int i = 0;
 				foreach (Circuit c in this.Product.Product.PlannedCircuits) {
@@ -227,7 +236,7 @@ namespace Europlan.Common {
 
 		public string ProductGuid {
 			set { this.productGuid = value; }
-			get { return this.product.Id; }
+			get { return (this.productGuid != null || this.product == null) ? this.productGuid : this.product.Id; }
 		}
 
 		public double GetLength() {

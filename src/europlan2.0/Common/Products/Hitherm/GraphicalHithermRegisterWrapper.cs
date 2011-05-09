@@ -28,10 +28,17 @@ namespace Europlan.Common {
 
 		public override WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset) {
 			Polygon2D borders = new Polygon2D();
-			borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY));
-			borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterHoehe));
-			borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + this.register.RegisterHoehe));
-			borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY));
+			if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
+				borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY));
+				borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterHoehe));
+				borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + this.register.RegisterHoehe));
+				borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY));
+			} else {
+				borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY));
+				borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterBreiteForDrawing));
+				borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterHoehe, yOffset + this.register.GraphPosY + this.register.RegisterBreiteForDrawing));
+				borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterHoehe, yOffset + this.register.GraphPosY));
+			}
 			return borders;
 		}
 
@@ -70,7 +77,7 @@ namespace Europlan.Common {
 					g.DrawLine(registerPen, x, y1, x, y2);
 					if (register.Rohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG) {
 						if (HithermProduct.ConfigUsePlus) {
-							if (i % 15 == 14) {
+							if (i % 14 == 13) {
 								pos += 10;
 							} else {
 								pos += 5;
@@ -100,6 +107,50 @@ namespace Europlan.Common {
 					}
 				}
 			} else {
+				float x1 = (float)(xOffset + register.GraphPosX);
+				float x2 = (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2);
+				float y = (float)(yOffset + register.GraphPosY);
+				float breite = (float)register.RegisterBreiteForDrawing;
+				g.DrawRectangle(registerPen, x1, y, 2, breite);
+				g.DrawRectangle(registerPen, x2, y, 2, breite);
+				double pos = 5;
+				for (int i = 0; i < register.Rohre; i++) {
+					x1 = (float)(xOffset + register.GraphPosX + 1);
+					x2 = (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 1);
+					y = (float)(yOffset + register.GraphPosY + pos);
+
+					g.DrawLine(registerPen, x1, y, x2, y);
+					if (register.Rohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG) {
+						if (HithermProduct.ConfigUsePlus) {
+							if (i % 14 == 13) {
+								pos += 10;
+							} else {
+								pos += 5;
+							}
+						} else {
+							if (i % 9 == 8) {
+								pos += 10;
+							} else {
+								pos += 5;
+							}
+						}
+					} else {
+						pos += 10;
+					}
+				}
+				if (highlightConnections) {
+					if (register.GraphVorlaufRight) {
+						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 3.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
+						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 3.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
+						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 3.5), 5, 5);
+						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 3.5), 5, 5);
+					} else {
+						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
+						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
+						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 3.5), 5, 5);
+						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 3.5), 5, 5);
+					}
+				}
 			}
 		}
 

@@ -297,21 +297,23 @@ namespace Europlan.Common {
 			this.dragEnd = planPoint;
 
 			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER && this.dragStart.HasValue && this.newRegister != null) {
-				double width = Math.Abs(this.dragStart.Value.X - this.dragEnd.X);
+				bool vertical = this.newRegisterOrientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
+				double width =  Math.Abs(this.dragStart.Value.X - this.dragEnd.X);
 				double height = Math.Abs(this.dragStart.Value.Y - this.dragEnd.Y);
-				Nullable<HithermRegister.HithermRegisterTypeEnum> registerType = HithermRegister.GetRegisterTypeForHoehe((int)Math.Floor(height), this.newRegisterRohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG);
+				Nullable<HithermRegister.HithermRegisterTypeEnum> registerType = HithermRegister.GetRegisterTypeForHoehe(vertical ? (int)Math.Floor(height) : (int)Math.Floor(width), this.newRegisterRohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG);
 				if (registerType.HasValue) {
 					if (this.newRegister.Register == null) {
 						this.newRegister.Register = new HithermRegister();
 					}
+					this.newRegister.Register.Orientation = this.newRegisterOrientation;
 					this.newRegister.Register.RegisterType = registerType.Value;
-					this.newRegister.Register.RegisterBreiteForDrawing = width;
+					this.newRegister.Register.RegisterBreiteForDrawing = vertical ? width : height;
 					this.newRegister.Register.GraphVorlaufRight = this.newRegisterVorlaufRight;
-					if (this.newRegister.Register.RegisterBreiteForDrawing > width) {
+					if (this.newRegister.Register.RegisterBreiteForDrawing > (vertical ? width : height)) {
 						this.newRegister.Register = null;
 					} else {
-						double x = this.dragStart.Value.X < this.dragEnd.X ? this.dragStart.Value.X : this.dragStart.Value.X - this.newRegister.Register.RegisterBreiteForDrawing;
-						double y = this.dragStart.Value.Y < this.dragEnd.Y ? this.dragStart.Value.Y : this.dragStart.Value.Y - this.newRegister.Register.RegisterHoehe;
+						double x = this.dragStart.Value.X < this.dragEnd.X ? this.dragStart.Value.X : this.dragStart.Value.X - (vertical ? this.newRegister.Register.RegisterBreiteForDrawing : this.newRegister.Register.RegisterHoehe);
+						double y = this.dragStart.Value.Y < this.dragEnd.Y ? this.dragStart.Value.Y : this.dragStart.Value.Y - (vertical ? this.newRegister.Register.RegisterHoehe : this.newRegister.Register.RegisterBreiteForDrawing);
 						this.newRegister.Register.GraphPosX = x - this.newRegisterWallXOffset;
 						this.newRegister.Register.GraphPosY = y - this.newRegisterWallYOffset;
 						this.newRegister.Register.GraphWallId = this.newRegisterWall.Id;

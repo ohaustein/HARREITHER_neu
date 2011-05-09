@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using WW.Math.Geometry;
 
 namespace Europlan.Common {
-	public class KlimaFlaechenSubAreaVerbindung : IPickableObject {
+	public class KlimaFlaechenSubAreaVerbindung {
 		private List<KlimaFlaechenModul> start;
 		private List<KlimaFlaechenModul> end;
 		private List<List<Point2D>> vertices;
@@ -101,39 +101,7 @@ namespace Europlan.Common {
 			// TODO
 		}
 
-		#region IPickableObject Members
-		public bool HitTest(Point2D planPoint, Point pointInControl) {
-			// TODO
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public System.Windows.Forms.Cursor PickCursor {
-			get {
-				// TODO
-				throw new Exception("The method or operation is not implemented.");
-			}
-		}
-
 		public bool HitTest(Point2D planPoint, double maxDist) {
-			/*Point2D oldVertex = new Point2D();
-			bool first = false;
-			double bestDist = double.MaxValue;
-			foreach (Point2D newVertex in this.vertices) {
-				if (first) {
-					first = false;
-				} else {
-					Segment2D segment = new Segment2D(oldVertex, newVertex);
-					double dist = segment.GetDistance(planPoint);
-					if (dist <= bestDist) {
-						bestDist = dist;
-					}
-				}
-				oldVertex = newVertex;
-			}
-			if (bestDist <= maxDist) {
-				bestDist = -bestDist;
-			}
-			return bestDist;*/
 			return this.GetDistance(planPoint) <= maxDist;
 		}
 
@@ -460,6 +428,9 @@ namespace Europlan.Common {
 
 		public int CircuitIndex {
 			get {
+				if (this.circuitIndex >= 0) {
+					return this.circuitIndex;
+				}
 				int index = -1;
 				int i = 0;
 				foreach (Circuit c in this.Product.Product.PlannedCircuits) {
@@ -504,7 +475,7 @@ namespace Europlan.Common {
 
 		public string ProductGuid {
 			set { this.productGuid = value; }
-			get { return this.product.Id; }
+			get { return (this.productGuid != null || this.product == null) ? this.productGuid : this.product.Id; }
 		}
 
 		public Nullable<Point2D> GetClosestPoint(Point2D planPoint, out double bestDist) {
@@ -529,7 +500,5 @@ namespace Europlan.Common {
 			}
 			return bestPoint;
 		}
-
-		#endregion
 	}
 }

@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using WW.Math.Geometry;
 
 namespace Europlan.Common {
-	public class KlimaFlaechenModulVerbindung : IPickableObject {
+	public class KlimaFlaechenModulVerbindung {
 		private KlimaFlaechenModul start;
 		private KlimaFlaechenModul end;
 		private List<Point2D> vertices;
@@ -65,7 +65,6 @@ namespace Europlan.Common {
 		}
 
 		public void Draw(Graphics g, Matrix4D additionalTransformation, Color c, double measure) {
-			//Point2D oldVertex2D;
 			Point2D newVertex2D;
 			PointF oldVertex = PointF.Empty;
 			PointF newVertex;
@@ -84,39 +83,7 @@ namespace Europlan.Common {
 			// TODO
 		}
 
-		#region IPickableObject Members
-		public bool HitTest(Point2D planPoint, Point pointInControl) {
-			// TODO
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public System.Windows.Forms.Cursor PickCursor {
-			get {
-				// TODO
-				throw new Exception("The method or operation is not implemented.");
-			}
-		}
-
 		public bool HitTest(Point2D planPoint, double maxDist) {
-			/*Point2D oldVertex = new Point2D();
-			bool first = false;
-			double bestDist = double.MaxValue;
-			foreach (Point2D newVertex in this.vertices) {
-				if (first) {
-					first = false;
-				} else {
-					Segment2D segment = new Segment2D(oldVertex, newVertex);
-					double dist = segment.GetDistance(planPoint);
-					if (dist <= bestDist) {
-						bestDist = dist;
-					}
-				}
-				oldVertex = newVertex;
-			}
-			if (bestDist <= maxDist) {
-				bestDist = -bestDist;
-			}
-			return bestDist;*/
 			return this.GetDistance(planPoint) <= maxDist;
 		}
 
@@ -173,6 +140,9 @@ namespace Europlan.Common {
 
 		public int StartIndex {
 			get {
+				if (this.startIndex >= 0) {
+					return this.startIndex;
+				}
 				int index = -1;
 				if (this.Circuit is ModulBodenCircuit) {
 					ModulBodenCircuit mbc = this.Circuit as ModulBodenCircuit;
@@ -194,6 +164,9 @@ namespace Europlan.Common {
 
 		public int EndIndex {
 			get {
+				if (this.endIndex >= 0) {
+					return this.endIndex;
+				}
 				int index = -1;
 				if (this.Circuit is ModulBodenCircuit) {
 					ModulBodenCircuit mbc = this.Circuit as ModulBodenCircuit;
@@ -226,6 +199,9 @@ namespace Europlan.Common {
 
 		public int CircuitIndex {
 			get {
+				if (this.circuitIndex >= 0) {
+					return this.circuitIndex;
+				}
 				int index = -1;
 				int i = 0;
 				foreach (Circuit c in this.Product.Product.PlannedCircuits) {
@@ -270,7 +246,7 @@ namespace Europlan.Common {
 
 		public string ProductGuid {
 			set { this.productGuid = value; }
-			get { return this.product.Id; }
+			get { return (this.productGuid != null || this.product == null) ? this.productGuid : this.product.Id; }
 		}
 
 		public bool IsLangerFitting(double measure) {
@@ -294,6 +270,5 @@ namespace Europlan.Common {
 			}
 			return length;
 		}
-		#endregion
 	}
 }

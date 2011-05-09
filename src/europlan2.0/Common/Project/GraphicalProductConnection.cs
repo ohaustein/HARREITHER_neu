@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using WW.Math.Geometry;
 
 namespace Europlan.Common {
-	public class GraphicalProductConnection : IPickableObject {
+	public class GraphicalProductConnection {
 
 
 		private PlannedProduct product;
@@ -71,7 +71,6 @@ namespace Europlan.Common {
 		}
 
 		public void Draw(Graphics g, Matrix4D additionalTransformation, Color c, double measure) {
-			//Point2D oldVertex2D;
 			Point2D newVertex2D;
 			PointF oldVertex = PointF.Empty;
 			PointF newVertex;
@@ -90,32 +89,7 @@ namespace Europlan.Common {
 			// TODO
 		}
 
-		#region IPickableObject Members
-		public bool HitTest(Point2D planPoint, Point pointInControl) {
-			// TODO
-			throw new Exception("The method or operation is not implemented.");
-		}
-
 		public bool HitTest(Point2D planPoint, double maxDist) {
-			/*Point2D oldVertex = new Point2D();
-			bool first = false;
-			double bestDist = double.MaxValue;
-			foreach (Point2D newVertex in this.vertices) {
-				if (first) {
-					first = false;
-				} else {
-					Segment2D segment = new Segment2D(oldVertex, newVertex);
-					double dist = segment.GetDistance(planPoint);
-					if (dist <= bestDist) {
-						bestDist = dist;
-					}
-				}
-				oldVertex = newVertex;
-			}
-			if (bestDist <= maxDist) {
-				bestDist = -bestDist;
-			}
-			return bestDist;*/
 			return this.GetDistance(planPoint) <= maxDist;
 		}
 
@@ -136,13 +110,6 @@ namespace Europlan.Common {
 				oldVertex = newVertex;
 			}
 			return bestDist;
-		}
-
-		public System.Windows.Forms.Cursor PickCursor {
-			get {
-				// TODO
-				throw new Exception("The method or operation is not implemented.");
-			}
 		}
 
 		[XmlIgnore]
@@ -175,7 +142,7 @@ namespace Europlan.Common {
 
 		public string ProductGuid {
 			set { this.productGuid = value; }
-			get { return this.product == null ? null : this.product.Id; }
+			get { return (this.productGuid != null || this.product == null) ? this.productGuid : this.product.Id; }
 		}
 
 		[XmlIgnore]
@@ -200,7 +167,7 @@ namespace Europlan.Common {
 		}
 
 		public string DistributorId {
-			get { return this.Distributor == null ? null : this.Distributor.Id; }
+			get { return (this.distributorId != null && this.distributor == null) ? this.distributorId : this.distributor.Id; }
 			set { this.distributorId = value; }
 		}
 
@@ -222,14 +189,19 @@ namespace Europlan.Common {
 
 		public int ProductCircuitIndex {
 			get {
+				if (this.productCircuitIndex >= 0) {
+					return this.productCircuitIndex;
+				}
 				int index = -1;
 				int i = 0;
-				foreach (Circuit c in this.Product.Product.PlannedCircuits) {
-					if (c == this.productCircuit) {
-						index = i;
-						break;
+				if (this.Product != null && this.Product.Product != null && this.Product.Product.PlannedCircuits != null) {
+					foreach (Circuit c in this.Product.Product.PlannedCircuits) {
+						if (c == this.productCircuit) {
+							index = i;
+							break;
+						}
+						i++;
 					}
-					i++;
 				}
 				return index;
 			}
@@ -326,6 +298,5 @@ namespace Europlan.Common {
 			}
 			return length;
 		}
-		#endregion
 	}
 }
