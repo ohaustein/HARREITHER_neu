@@ -139,8 +139,23 @@ namespace Europlan.Common {
 		private void btnExport_Click(object sender, EventArgs e) {
 			if (plan is ImagePlan) {
 				Image image = Image.FromFile(plan.AbsoluteFileName);
-				Graphics g = Graphics.FromImage(image);
-				g.InterpolationMode = InterpolationMode.Bicubic;
+				Bitmap b;
+				Graphics g;
+				if (plan.Measure.Value < 200) {
+					float factor = 200.0f / plan.Measure.Value;
+					b = new Bitmap((int)(image.Width * factor), (int)(image.Height * factor));
+					g = Graphics.FromImage(b);
+					g.InterpolationMode = InterpolationMode.Bicubic;
+					g.DrawImage(image, 0, 0, image.Width * factor, image.Height * factor);
+					Matrix m = new Matrix();
+					m.Scale(factor, factor);
+					g.Transform = m;
+
+				} else {
+					b = new Bitmap(image);
+					g = Graphics.FromImage(b);
+					g.InterpolationMode = InterpolationMode.Bicubic;
+				}
 				foreach (Floor floor in Project.Instance.Floors) {
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
 						foreach (Segment2D expansionGap in floor.ExpansionGaps) {
@@ -199,7 +214,7 @@ namespace Europlan.Common {
 				} if (extension.ToLower() == ".bmp") {
 					format = ImageFormat.Bmp;
 				}
-				image.Save(txtPath.Text, format);
+				b.Save(txtPath.Text, format);
 				g.Dispose();
 			} else if (plan is CadPlan) {
 				DxfModel model = (plan as CadPlan).LoadModel(true);

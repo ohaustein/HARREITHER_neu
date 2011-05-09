@@ -129,6 +129,7 @@ namespace Europlan.Common.Products {
 			this.label1 = new System.Windows.Forms.Label();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.eurovalPlanner = new Europlan.Common.EurovalPlanner(this.components);
+			this.btnSetText = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -147,7 +148,8 @@ namespace Europlan.Common.Products {
             this.btnAddRz,
             this.btnDelRz,
             this.btnAddReduced,
-            this.btnDelReduced});
+            this.btnDelReduced,
+            this.btnSetText});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(846, 25);
@@ -1245,6 +1247,16 @@ namespace Europlan.Common.Products {
 			this.eurovalPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.eurovalPlanner_ModeChanged);
 			this.eurovalPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.europlanPlanner_ProjectChanged);
 			// 
+			// btnSetText
+			// 
+			this.btnSetText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnSetText.Image = ((System.Drawing.Image)(resources.GetObject("btnSetText.Image")));
+			this.btnSetText.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSetText.Name = "btnSetText";
+			this.btnSetText.Size = new System.Drawing.Size(23, 22);
+			this.btnSetText.Text = "Textbox positionieren";
+			this.btnSetText.Click += new System.EventHandler(this.btnSetText_Click);
+			// 
 			// EurovalPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1375,5 +1387,6 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.ToolStripButton btnDefineArea;
 		private System.Windows.Forms.ToolStripButton btnAddReduced;
 		private System.Windows.Forms.ToolStripButton btnDelReduced;
+		private System.Windows.Forms.ToolStripButton btnSetText;
 	}
 }

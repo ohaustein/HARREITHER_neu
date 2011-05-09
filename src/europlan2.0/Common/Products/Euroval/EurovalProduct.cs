@@ -84,6 +84,7 @@ namespace Europlan.Common {
 		private List<Segment2D> plannedRimSegments = new List<Segment2D>();
 		private List<Point2D> plannedAreaGraphical = new List<Point2D>();
 		private List<List<Point2D>> plannedReducedAreas = new List<List<Point2D>>();
+		private Point2D textBoxPosition = Point2D.Zero;
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			int i = 0;
@@ -2218,5 +2219,11 @@ namespace Europlan.Common {
 			// TODO
 			get { return null; }
 		}
+
+		public Point2D TextBoxPosition {
+			get { return this.textBoxPosition; }
+			set { this.textBoxPosition = value;	}
+		}
+
 	}
 }

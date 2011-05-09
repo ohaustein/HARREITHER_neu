@@ -12,7 +12,6 @@ using WW.Math;
 namespace Europlan.Common.Products {
 	public partial class EurovalPlannerForm : Form {
 
-		private bool newVisible = false;
 		private PlannedProduct plannedProduct;
 
 		private bool changed = false;
@@ -55,6 +54,13 @@ namespace Europlan.Common.Products {
 					product.PlannedAreaUnheated = (float)area;
 				}
 
+			}
+
+			if (product.TextBoxPosition == Point2D.Zero) {
+				Polygon2D polygon = new Polygon2D(product.PlannedAreaGraphical);
+				if (polygon.GetCentroid().HasValue) {
+					product.TextBoxPosition = polygon.GetCentroid().Value;
+				}
 			}
 
 			this.eurovalPlanner.Product = product;
@@ -164,6 +170,15 @@ namespace Europlan.Common.Products {
 			}
 		}
 
+		private void btnSetText_Click(object sender, EventArgs e) {
+			if (!btnSetText.Checked) {
+				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_SET_TEXT;
+				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
+			}
+		}
+
+
 		//private void btnAddModules_Click(object sender, EventArgs e) {
 		//    if (!btnAddModules.Checked) {
 		//        this.eurovalPlanner.Mode = EurovalPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
@@ -197,6 +212,7 @@ namespace Europlan.Common.Products {
 			this.btnDelReduced.Enabled = product.PlannedAreaGraphical.Count > 0;
 			this.btnAddRz.Enabled = product.PlannedAreaGraphical.Count > 0;
 			this.btnDelRz.Enabled = product.PlannedAreaGraphical.Count > 0;
+			this.btnSetText.Enabled = product.PlannedAreaGraphical.Count > 0;
 			if (this.planPanel.Mode == PlanMode.PM_MOVE) {
 				this.btnMove.Checked = true;
 				this.btnDefineArea.Checked = false;
@@ -204,6 +220,7 @@ namespace Europlan.Common.Products {
 				this.btnDelReduced.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
+				this.btnSetText.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_AREA) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = true;
@@ -211,6 +228,7 @@ namespace Europlan.Common.Products {
 				this.btnDelReduced.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
+				this.btnSetText.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_RED) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
@@ -218,6 +236,7 @@ namespace Europlan.Common.Products {
 				this.btnDelReduced.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
+				this.btnSetText.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_DEL_RED) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
@@ -225,6 +244,7 @@ namespace Europlan.Common.Products {
 				this.btnDelReduced.Checked = true;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
+				this.btnSetText.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_RZ) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
@@ -232,6 +252,7 @@ namespace Europlan.Common.Products {
 				this.btnDelReduced.Checked = false;
 				this.btnAddRz.Checked = true;
 				this.btnDelRz.Checked = false;
+				this.btnSetText.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_DEL_RZ) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
@@ -239,6 +260,15 @@ namespace Europlan.Common.Products {
 				this.btnDelReduced.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = true;
+				this.btnSetText.Checked = false;
+			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_SET_TEXT) {
+				this.btnMove.Checked = false;
+				this.btnDefineArea.Checked = false;
+				this.btnAddReduced.Checked = false;
+				this.btnDelReduced.Checked = false;
+				this.btnAddRz.Checked = false;
+				this.btnDelRz.Checked = false;
+				this.btnSetText.Checked = true;
 			} else {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
