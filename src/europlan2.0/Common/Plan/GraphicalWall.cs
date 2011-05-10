@@ -116,10 +116,14 @@ namespace Europlan.Common {
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
-			Pen wallBorderPen = (this == selectedObject) ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
+			this.PaintObject(g, xOffset, yOffset, selectedObject, this.GetOwningWall(selectedObject), scale);
+		}
+
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, GraphicalWall selectedWall, double scale) {
+			Pen wallBorderPen = (this == selectedObject || this == selectedWall) ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
 			Brush wallBrush = new SolidBrush(Color.White);
-			Pen unusableBorderPen = (this == selectedObject) ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
-			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, (this == selectedObject) ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.White);
+			Pen unusableBorderPen = (this == selectedObject || this == selectedWall) ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
+			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, (this == selectedObject || this == selectedWall) ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.White);
 
 			Region oldClip = g.Clip;
 			Polygon2D wallBorder = this.GetObjectBorders(xOffset, yOffset);

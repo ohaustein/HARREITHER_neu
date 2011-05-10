@@ -174,7 +174,7 @@ namespace Europlan.Common {
 			Pen unusableBorderPen = Pens.Gray;
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Gray, Color.White);
 			foreach (GraphicalWall wall in this.Room.Walls) {
-				wall.PaintObject(e.Graphics, xOffset, 0, this.SelectedObject, this.Scale);
+				wall.PaintObject(e.Graphics, xOffset, 0, this.SelectedObject, this.SelectedWall, this.Scale);
 				xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
 			}
 
@@ -449,12 +449,22 @@ namespace Europlan.Common {
 					this.selectedObject = value;
 					if (this.selectedObject != null) {
 						GraphicalWall owningWall = null;
+						bool found = false;
 						foreach (GraphicalWall wall in this.room.Walls) {
+							if (wall == this.selectedObject) {
+								this.selectedWall = wall;
+								found = true;
+								break;
+							}
 							owningWall = wall.GetOwningWall(this.selectedObject);
 							if (owningWall != null) {
 								this.selectedWall = owningWall;
+								found = true;
 								break;
 							}
+						}
+						if (!found) {
+							this.selectedWall = null;
 						}
 					}
 					this.Invalidate();
