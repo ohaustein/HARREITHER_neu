@@ -43,14 +43,15 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
-			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, (this == selectedObject), false);
+			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, (this == selectedObject), false/*, this == selectedObject*/);
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color) {
-			this.PaintObject(g, xOffset, yOffset, color, 1, false, false);
+			this.PaintObject(g, xOffset, yOffset, color, 1, false, false/*, false*/);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool highlightConnections, bool error) {
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool highlightConnections, bool error/*, bool drawAnchors*/) {
+			highlightConnections = false;
 			if (register == null) {
 				return;
 			}
@@ -105,6 +106,18 @@ namespace Europlan.Common {
 						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
 						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
 					}
+				} else {
+					if (register.GraphVorlaufRight) {
+						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 2), (float)(yOffset + register.GraphPosY - 0), 2, 2);
+						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 2), (float)(yOffset + register.GraphPosY - 0), 2, 2);
+						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 2), 2, 2);
+						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 2), 2, 2);
+					} else {
+						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY - 0), 2, 2);
+						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY - 0), 2, 2);
+						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 2), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 2), 2, 2);
+						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 2), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 2), 2, 2);
+					}
 				}
 			} else {
 				float x1 = (float)(xOffset + register.GraphPosX);
@@ -150,8 +163,28 @@ namespace Europlan.Common {
 						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 3.5), 5, 5);
 						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 3.5), 5, 5);
 					}
+				} else {
+					if (register.GraphVorlaufRight) {
+						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2), (float)(yOffset + register.GraphPosY - 0), 2, 2);
+						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2), (float)(yOffset + register.GraphPosY - 0), 2, 2);
+						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 2), 2, 2);
+						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 2), 2, 2);
+					} else {
+						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY - 0), 2, 2);
+						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY - 0), 2, 2);
+						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 2), 2, 2);
+						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 2), 2, 2);
+					}
 				}
 			}
+			/*if (drawAnchors) {
+				Region oldClip = g.Clip;
+				g.ResetClip();
+				foreach (Anchor a in this.GetAnchors(scale)) {
+					a.PaintAnchor(g, xOffset, yOffset, scale);
+				}
+				g.Clip = oldClip;
+			}*/
 		}
 
 		public override IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
@@ -231,6 +264,150 @@ namespace Europlan.Common {
 			list2.Add(register);
 
 			return Polygon2D.GetIntersection(list1, list2).Count > 0;
+		}
+
+		public override List<Anchor> GetAnchors(double scale) {
+			List<Anchor> anchors = new List<Anchor>();
+			double px5 = 4.0 / scale;
+			anchors.Add(new Anchor(this.X - px5,              this.Y - px5,               AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_LEFT,  this));
+			anchors.Add(new Anchor(this.X - px5,              this.Y + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT,         this));
+			anchors.Add(new Anchor(this.X - px5,              this.Y + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP_LEFT,     this));
+			anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP,          this));
+			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP_RIGHT,    this));
+			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_RIGHT,        this));
+			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y - px5,               AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_RIGHT, this));
+			anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y - px5,               AnchorTypeEnum.ANCHOR_SCALE_BOTTOM,       this));
+			return anchors;
+		}
+
+		private int GetBestRohrCount(double width) {
+			int bestRohre = 3;
+			double bestDelta = double.MaxValue;
+			foreach (KeyValuePair<int, double> kvp in this.register.PossibleWidths) {
+				if (Math.Abs(kvp.Value - width) < bestDelta) {
+					bestDelta = Math.Abs(kvp.Value - width);
+					bestRohre = kvp.Key;
+				}
+			}
+			return bestRohre;
+		}
+
+		private Nullable<Point2D> startDrag = null;
+		private double startDragRegisterX, startDragRegisterY, startDragRegisterWidth;
+		private int startDragRegisterHeight, startRegisterRohre;
+
+		public override bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			this.startDrag = planPoint;
+			this.startDragRegisterX = this.register.GraphPosX;
+			this.startDragRegisterY = this.register.GraphPosY;
+			this.startDragRegisterHeight = this.register.RegisterHoehe;
+			this.startDragRegisterWidth = this.register.RegisterBreiteForDrawing;
+			this.startRegisterRohre = this.register.Rohre;
+			// TODO
+			return false;
+		}
+
+		public override bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
+				if (anchor == null) {
+					// move
+					double tmpX = this.register.GraphPosX;
+					double tmpY = this.register.GraphPosY;
+					bool retryY = false;
+					this.register.GraphPosY = startDragRegisterY + planPoint.Y - startDrag.Value.Y;
+					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+						this.register.GraphPosY = tmpY;
+						retryY = true;
+					}
+					this.register.GraphPosX = startDragRegisterX + planPoint.X - startDrag.Value.X;
+					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+						this.register.GraphPosX = tmpX;
+					}
+					if (retryY) {
+						this.register.GraphPosY = startDragRegisterY + planPoint.Y - startDrag.Value.Y;
+						if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+							this.register.GraphPosY = tmpY;
+						}
+					}
+				} else {
+					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
+						int tmpRohre = this.register.Rohre;
+						double tmpX = this.register.GraphPosX;
+						this.register.Rohre = GetBestRohrCount(this.startDragRegisterWidth - planPoint.X + startDrag.Value.X);
+						this.register.GraphPosX = this.startDragRegisterX + this.startDragRegisterWidth - this.register.RegisterBreiteForDrawing;
+						if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+							this.register.Rohre = tmpRohre;
+							this.register.GraphPosX = tmpX;
+						}
+					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_RIGHT) == AnchorTypeEnum.ANCHOR_SCALE_RIGHT) {
+						int tmpRohre = this.register.Rohre;
+						this.register.Rohre = GetBestRohrCount(this.startDragRegisterWidth + planPoint.X - startDrag.Value.X);
+						if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+							this.register.Rohre = tmpRohre;
+						}
+					}
+
+					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_TOP) == AnchorTypeEnum.ANCHOR_SCALE_TOP) {
+						HithermRegister.HithermRegisterTypeEnum tmpType = this.register.RegisterType;
+						Nullable<HithermRegister.HithermRegisterTypeEnum> newType = HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight + planPoint.Y - this.startDrag.Value.Y + 25), this.register.IsHochleistungsRegister);
+						this.register.RegisterType = newType.HasValue ? newType.Value : HithermRegister.GetRegisterTypeForHoehe(50, this.register.IsHochleistungsRegister).Value;
+						if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+							this.register.RegisterType = tmpType;
+						}
+					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) == AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) {
+						HithermRegister.HithermRegisterTypeEnum tmpType = this.register.RegisterType;
+						double tmpY = this.register.GraphPosY;
+						Nullable<HithermRegister.HithermRegisterTypeEnum> newType = HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight - planPoint.Y + this.startDrag.Value.Y + 25), this.register.IsHochleistungsRegister);
+						this.register.RegisterType = newType.HasValue ? newType.Value : HithermRegister.GetRegisterTypeForHoehe(50, this.register.IsHochleistungsRegister).Value;
+						this.register.GraphPosY = this.startDragRegisterY + this.startDragRegisterHeight - this.register.RegisterHoehe;
+						if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+							this.register.RegisterType = tmpType;
+							this.register.GraphPosY = tmpY;
+						}
+					}
+				}
+			} else {
+				// TODO
+			}
+
+			// TODO
+			return true;
+		}
+
+		public override bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			// TODO
+			this.startDrag = null;
+			return false;
+		}
+
+		public bool PositionAndSizeOk(GraphicalWall owningWall, double offsetX, double offsetY) {
+			Polygon2D registerBorders = this.GetObjectBorders(offsetX, offsetY);
+			if (owningWall.CollisionTest(registerBorders, offsetX, offsetY)) {
+				return false;
+			} else {
+				foreach (GraphicalHithermRegisterWrapper register in owningWall.Registers) {
+					if (register != this && register.CollisionTest(registerBorders, offsetX, offsetY)) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+
+		public double X {
+			get { return this.register.GraphPosX; }
+		}
+
+		public double Y {
+			get { return this.register.GraphPosY; }
+		}
+
+		public double Height {
+			get { return this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL ? this.register.RegisterHoehe : this.register.RegisterBreiteForDrawing; }
+		}
+
+		public double Width {
+			get { return this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL ? this.register.RegisterBreiteForDrawing : this.register.RegisterHoehe; }
 		}
 	}
 }

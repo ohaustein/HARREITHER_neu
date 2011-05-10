@@ -36,6 +36,8 @@ namespace Europlan.Common {
 
 		private IGraphicalWallObject selectedObject;
 		private GraphicalWall selectedWall;
+		private double selectedWallXOffset;
+		private double selectedWallYOffset;
 
 		private event EventHandler<SelectedObjectArgs> objectSelected;
 		public event EventHandler<SelectedObjectArgs> ObjectSelected {
@@ -185,8 +187,17 @@ namespace Europlan.Common {
 				Point2D pointInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(pointInCtrl.X, pointInCtrl.Y));
 				this.productPlanner.PaintAfterPlanPannel(e, pointInPlan, pointInCtrl, this.Scale);
 			}
+
+			if (this.mode == PlanMode.PM_SELECT_OBJECT && this.selectedObject != null) {
+				e.Graphics.ResetClip();
+				foreach (Anchor a in this.selectedObject.GetAnchors(scale)) {
+					a.PaintAnchor(e.Graphics, this.selectedWallXOffset * 100, this.selectedWallYOffset * 100, scale);
+				}
+			}
+
 			e.Graphics.Transform = oldTransform;
 			e.Graphics.DrawRectangle(Pens.Gray, 0, 0, this.Width - 1, this.Height - 1);
+
 			e.Graphics.Clip = oldClip;
 		}
 
@@ -252,6 +263,24 @@ namespace Europlan.Common {
 					invalidate = this.productPlanner.PlannerDragStart(mousePosInPlan, mousePosInCtrl, e.Button);
 				}
 			}
+
+			if (mode == PlanMode.PM_SELECT_OBJECT) {
+				if (this.selectedObject != null && this.selectedWall != null) {
+					foreach (Anchor a in this.selectedObject.GetAnchors(this.scale)) {
+						if (a.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100, this.scale)) {
+							this.draggingObject = a.Owner;
+							this.draggingAnchor = a;
+						}
+					}
+					if (this.draggingObject == null && this.selectedObject.IsMoveable && this.selectedObject.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100)) {
+						this.draggingObject = this.selectedObject;
+						this.draggingAnchor = null;
+					}
+					if (this.draggingObject != null) {
+						invalidate = invalidate || this.draggingObject.StartDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
+					}
+				}
+			}
 			if ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle)) {
 				this.mouseDownXInCtrl = mousePosInCtrl.X;
 				this.mouseDownYInCtrl = mousePosInCtrl.Y;
@@ -286,6 +315,15 @@ namespace Europlan.Common {
 					invalidate = this.productPlanner.PlannerDragEnd(mousePosInPlan, mousePosInCtrl, e.Button);
 				}
 			}
+
+			if (mode == PlanMode.PM_SELECT_OBJECT) {
+				if (this.draggingObject != null) {
+					invalidate = invalidate || this.draggingObject.EndDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
+					this.draggingObject = null;
+					this.draggingAnchor = null;
+					// TODO set cursor correctly;
+				}
+			}
 			if (e.Button == MouseButtons.Middle) {
 				this.Cursor = this.tempCursor;
 				inMove = false;
@@ -294,6 +332,9 @@ namespace Europlan.Common {
 				this.Invalidate();
 			}
 		}
+
+		private IGraphicalWallObject draggingObject = null;
+		private Anchor draggingAnchor = null;
 
 		protected override void OnMouseMove(MouseEventArgs e) {
 			base.OnMouseMove(e);
@@ -316,6 +357,28 @@ namespace Europlan.Common {
 				invalidate = this.productPlanner.PlannerMouseMove(mousePosInPlan, mousePosInCtrl, e.Button);
 			}
 
+			if (mode == PlanMode.PM_SELECT_OBJECT) {
+				if (this.draggingObject != null) {
+					invalidate = invalidate || this.draggingObject.MoveDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
+				} else {
+					if (this.selectedObject != null && this.selectedWall != null) {
+						bool found = false;
+						foreach (Anchor a in this.selectedObject.GetAnchors(this.scale)) {
+							if (a.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100, this.scale)) {
+								found = true;
+								this.Cursor = a.Cursor;
+							}
+						}
+						if (!found && this.selectedObject.IsMoveable && this.selectedObject.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100)) {
+							found = true;
+							this.Cursor = Cursors.SizeAll;
+						}
+						if (!found) {
+							this.Cursor = Cursors.Default;
+						}
+					}
+				}
+			}
 			if (mouseDown && ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle))) {
 				this.XPos = this.startXPos + (mousePosInCtrl.X - mouseDownXInCtrl) / this.Scale;
 				this.YPos = this.startYPos + (mousePosInCtrl.Y - mouseDownYInCtrl) / -this.Scale;
@@ -342,18 +405,37 @@ namespace Europlan.Common {
 				invalidate = this.productPlanner.PlannerClick(mousePosInPlan, mousePosInCtrl, e.Button);
 			}
 			if (this.mode == PlanMode.PM_SELECT_OBJECT && e.Button == MouseButtons.Left) {
-				double xOffset = 0;
-				IGraphicalWallObject pickedObject = null;
-				foreach (GraphicalWall wall in this.room.Walls) {
-					pickedObject = wall.GetPickedObject(mousePosInPlan, xOffset, 0);
-					if (pickedObject != null) {
-						break;
+				/*if (this.selectedObject != null && this.selectedWall != null) {
+					bool found = false;
+					foreach (Anchor a in this.selectedObject.GetAnchors(this.scale)) {
+						if (a.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100, this.scale)) {
+							found = true;
+							this.Cursor = a.Cursor;
+						}
 					}
-					xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100;
-				}
-				if (pickedObject != null) {
-					invalidate = true;
-					this.SelectedObject = pickedObject;
+					if (!found && this.selectedObject.IsMoveable && this.selectedObject.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100)) {
+						found = true;
+						this.Cursor = Cursors.SizeAll;
+					}
+					if (!found) {
+						this.Cursor = Cursors.Default;
+					}
+				}*/
+				// TODO
+				if (this.draggingObject == null) {
+					double xOffset = 0;
+					IGraphicalWallObject pickedObject = null;
+					foreach (GraphicalWall wall in this.room.Walls) {
+						pickedObject = wall.GetPickedObject(mousePosInPlan, xOffset, 0);
+						if (pickedObject != null) {
+							break;
+						}
+						xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100;
+					}
+					if (pickedObject != null) {
+						invalidate = true;
+						this.SelectedObject = pickedObject;
+					}
 				}
 			}
 			if (invalidate) {
@@ -450,18 +532,24 @@ namespace Europlan.Common {
 					if (this.selectedObject != null) {
 						GraphicalWall owningWall = null;
 						bool found = false;
+						double xOffset = 0.0;
 						foreach (GraphicalWall wall in this.room.Walls) {
 							if (wall == this.selectedObject) {
 								this.selectedWall = wall;
+								this.selectedWallXOffset = xOffset;
+								this.selectedWallYOffset = 0;
 								found = true;
 								break;
 							}
 							owningWall = wall.GetOwningWall(this.selectedObject);
 							if (owningWall != null) {
 								this.selectedWall = owningWall;
+								this.selectedWallXOffset = xOffset;
+								this.selectedWallYOffset = wall.GetWallYOffset(owningWall, 0).Value;
 								found = true;
 								break;
 							}
+							xOffset += wall.GetWallWidth();
 						}
 						if (!found) {
 							this.selectedWall = null;
@@ -471,6 +559,14 @@ namespace Europlan.Common {
 					this.OnObjectSelected(this.selectedObject);
 				}
 			}
+		}
+
+		public double SelectedWallXOffset {
+			get { return this.selectedWallXOffset; }
+		}
+
+		public double SelectedWallYOffset {
+			get { return this.selectedWallYOffset; }
 		}
 
 		public GraphicalWall SelectedWall {

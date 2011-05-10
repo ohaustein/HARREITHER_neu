@@ -28,6 +28,10 @@ namespace Europlan.Common {
 
 		}
 
+		public bool IsMoveable {
+			get { return false; }
+		}
+
 		public string Id {
 			get { return id; }
 			set { id = value; }
@@ -150,13 +154,6 @@ namespace Europlan.Common {
 				usablePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
 			}
 
-			/*foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
-				obstacle
-			}*/
-			foreach (GraphicalRegisterWrapper register in this.Registers) {
-				register.PaintObject(g, xOffset, yOffset, selectedObject, scale);
-			}
-
 			GraphicsPath path = new GraphicsPath();
 			path.AddPolygon(borderPoints.ToArray());
 			Region clip = new Region(path);
@@ -170,6 +167,14 @@ namespace Europlan.Common {
 			g.Clip = wallClip;
 			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
 			g.DrawPolygon(wallBorderPen, pointArr);
+			g.Clip = oldClip;
+
+			/*foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
+				obstacle
+			}*/
+			foreach (GraphicalRegisterWrapper register in this.Registers) {
+				register.PaintObject(g, xOffset, yOffset, selectedObject, scale);
+			}
 			g.Clip = oldClip;
 
 			if (this.DachSchraege != null) {
@@ -280,6 +285,24 @@ namespace Europlan.Common {
 			return wallBorder;
 		}
 
+		public List<Anchor> GetAnchors(double scale) {
+			return new List<Anchor>();
+		}
+
+		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			// nothing to do here as the wall doesn't have any anchors
+			return false;
+		}
+
+		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			// nothing to do here as the wall doesn't have any anchors
+			return false;
+		}
+
+		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			// nothing to do here as the wall doesn't have any anchors
+			return false;
+		}
 
 		public Nullable<double> GetWallYOffset(GraphicalWall wall, double startOffset) {
 			if (this == wall) {

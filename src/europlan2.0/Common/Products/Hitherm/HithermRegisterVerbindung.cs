@@ -64,6 +64,10 @@ namespace Europlan.Common {
 			this.product = product;
 		}
 
+		public bool IsMoveable {
+			get { return false; }
+		}
+
 		private void Draw(Graphics g, Color c) {
 			PointF oldVertex = PointF.Empty;
 			PointF newVertex;
@@ -271,15 +275,29 @@ namespace Europlan.Common {
 		public Polygon2D GetObjectBorders(double xOffset, double yOffset) {
 			throw new Exception("The method or operation is not implemented.");
 		}
-		#endregion
-
-		#region IGraphicalWallObject Members
-
 
 		public bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset) {
 			throw new Exception("The method or operation is not implemented.");
 		}
 
+		public List<Anchor> GetAnchors(double scale) {
+			return new List<Anchor>();
+		}
+
+		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			// nothing to do here as the verbindung doesn't have any anchors
+			return false;
+		}
+
+		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			// nothing to do here as the verbindung doesn't have any anchors
+			return false;
+		}
+
+		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			// nothing to do here as the verbindung doesn't have any anchors
+			return false;
+		}
 		#endregion
 	}
 }

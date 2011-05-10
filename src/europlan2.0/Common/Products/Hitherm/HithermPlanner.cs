@@ -110,7 +110,7 @@ namespace Europlan.Common {
 				Pen pen = new Pen(brush, (float)(1.0 / scale));
 				g.DrawRectangle(pen, x, y, width, height);
 				if (this.newRegister != null) {
-					this.newRegister.PaintObject(g, newRegisterWallXOffset, newRegisterWallYOffset, Color.Green, scale, true, !this.newRegisterOk);
+					this.newRegister.PaintObject(g, newRegisterWallXOffset, newRegisterWallYOffset, Color.Green, scale, true, !this.newRegisterOk/*, false*/);
 				}
 			}
 			foreach (HithermCircuit c in this.product.PlannedCircuits) {
@@ -319,7 +319,8 @@ namespace Europlan.Common {
 						this.newRegister.Register.GraphWallId = this.newRegisterWall.Id;
 					}
 					if (this.newRegister.Register != null) {
-						Polygon2D registerBorders = this.newRegister.GetObjectBorders(this.newRegisterWallXOffset, this.newRegisterWallYOffset);
+						this.newRegisterOk = this.newRegister.PositionAndSizeOk(this.newRegisterWall, this.newRegisterWallXOffset, this.newRegisterWallYOffset);
+						/*Polygon2D registerBorders = this.newRegister.GetObjectBorders(this.newRegisterWallXOffset, this.newRegisterWallYOffset);
 						if (this.newRegisterWall.CollisionTest(registerBorders, this.newRegisterWallXOffset, this.newRegisterWallYOffset)) {
 							this.newRegisterOk = false;
 						} else {
@@ -330,7 +331,7 @@ namespace Europlan.Common {
 									break;
 								}
 							}
-						}
+						}*/
 					}
 				} else {
 					this.newRegister.Register = null;

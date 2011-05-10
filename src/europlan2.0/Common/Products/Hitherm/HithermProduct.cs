@@ -1106,6 +1106,16 @@ namespace Europlan.Common {
 				if (hc.Registers.Count == 0) {
 					this.circuits.Remove(hc);
 					this.circuitIds.Remove(this.registerCircuits[register]);
+				} else {
+					List<HithermRegisterVerbindung> linksToDelete = new List<HithermRegisterVerbindung>();
+					foreach (HithermRegisterVerbindung link in hc.Links) {
+						if (link.Start == register || link.End == register) {
+							linksToDelete.Add(link);
+						}
+					}
+					foreach (HithermRegisterVerbindung link in linksToDelete) {
+						hc.Links.Remove(link);
+					}
 				}
 				this.registerCircuits.Remove(register);
 			}

@@ -13,34 +13,46 @@ namespace Europlan.Common {
 		IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset);
 		Polygon2D GetObjectBorders(double xOffset, double yOffset);
 		bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset);
-		//List<Pickpoint> GetPickpoints(double xOffset, double yOffset);
+		bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall);
+		bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall);
+		bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall);
+		List<Anchor> GetAnchors(double scale);
+		bool IsMoveable {
+			get;
+		}
 	}
 
-	public enum PickpointType {
-		PPT_NONE = 0x0,
-		PPT_SCALE_TOP = 0x1,
-		PPT_SCALE_RIGHT = 0x2,
-		PPT_SCALE_BOTTOM = 0x4,
-		PPT_SCALE_LEFT = 0x8,
-		PPT_SCALE_TOP_RIGHT = PPT_SCALE_TOP | PPT_SCALE_RIGHT,
-		PPT_SCALE_BOTTOM_RIGHT = PPT_SCALE_BOTTOM | PPT_SCALE_RIGHT,
-		PPT_SCALE_BOTTOM_LEFT = PPT_SCALE_BOTTOM | PPT_SCALE_LEFT,
-		PPT_SCALE_TOP_LEFT = PPT_SCALE_TOP | PPT_SCALE_LEFT,
+	public enum AnchorTypeEnum {
+		ANCHOR_NONE = 0x0,
+		ANCHOR_SCALE_TOP = 0x1,
+		ANCHOR_SCALE_RIGHT = 0x2,
+		ANCHOR_SCALE_BOTTOM = 0x4,
+		ANCHOR_SCALE_LEFT = 0x8,
+		ANCHOR_SCALE_TOP_RIGHT = ANCHOR_SCALE_TOP | ANCHOR_SCALE_RIGHT,
+		ANCHOR_SCALE_BOTTOM_RIGHT = ANCHOR_SCALE_BOTTOM | ANCHOR_SCALE_RIGHT,
+		ANCHOR_SCALE_BOTTOM_LEFT = ANCHOR_SCALE_BOTTOM | ANCHOR_SCALE_LEFT,
+		ANCHOR_SCALE_TOP_LEFT = ANCHOR_SCALE_TOP | ANCHOR_SCALE_LEFT,
 	}
 
-	public class Pickpoint {
-		private PickpointType ppType = PickpointType.PPT_NONE;
+	public class Anchor {
+		private AnchorTypeEnum anchorType = AnchorTypeEnum.ANCHOR_NONE;
 		private Point2D position = Point2D.Zero;
 		private IGraphicalWallObject owner = null;
 
-		public Pickpoint(Point2D position, PickpointType ppType, IGraphicalWallObject owner) {
-			this.position = position;
-			this.ppType = ppType;
+		public Anchor(double x, double y, AnchorTypeEnum anchorType, IGraphicalWallObject owner) {
+			this.position = new Point2D(x, y); ;
+			this.anchorType = anchorType;
 			this.owner = owner;
 		}
 
-		public PickpointType PpType {
-			get { return this.ppType; }
+		public Anchor(Point2D position, AnchorTypeEnum anchorType, IGraphicalWallObject owner) {
+			this.position = position;
+			this.anchorType = anchorType;
+			this.owner = owner;
+		}
+
+		public AnchorTypeEnum AnchorType {
+			get { return this.anchorType; }
 		}
 
 		public Point2D Position {
@@ -53,20 +65,20 @@ namespace Europlan.Common {
 
 		public Cursor Cursor {
 			get {
-				switch (this.ppType) {
-					case PickpointType.PPT_NONE:
+				switch (this.anchorType) {
+					case AnchorTypeEnum.ANCHOR_NONE:
 						return Cursors.No;
-					case PickpointType.PPT_SCALE_LEFT:
-					case PickpointType.PPT_SCALE_RIGHT:
+					case AnchorTypeEnum.ANCHOR_SCALE_LEFT:
+					case AnchorTypeEnum.ANCHOR_SCALE_RIGHT:
 						return Cursors.SizeWE;
-					case PickpointType.PPT_SCALE_TOP:
-					case PickpointType.PPT_SCALE_BOTTOM:
+					case AnchorTypeEnum.ANCHOR_SCALE_TOP:
+					case AnchorTypeEnum.ANCHOR_SCALE_BOTTOM:
 						return Cursors.SizeNS;
-					case PickpointType.PPT_SCALE_BOTTOM_LEFT:
-					case PickpointType.PPT_SCALE_TOP_RIGHT:
+					case AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_LEFT:
+					case AnchorTypeEnum.ANCHOR_SCALE_TOP_RIGHT:
 						return Cursors.SizeNESW;
-					case PickpointType.PPT_SCALE_TOP_LEFT:
-					case PickpointType.PPT_SCALE_BOTTOM_RIGHT:
+					case AnchorTypeEnum.ANCHOR_SCALE_TOP_LEFT:
+					case AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_RIGHT:
 						return Cursors.SizeNWSE;
 					default:
 						return Cursors.Default;
@@ -74,9 +86,17 @@ namespace Europlan.Common {
 			}
 		}
 
-		public void PaintPickpoint(Graphics g, double xOffset, double yOffset, double scale) {
+		public void PaintAnchor(Graphics g, double xOffset, double yOffset, double scale) {
 			Brush b = new SolidBrush(Color.DarkBlue);
-			g.FillRectangle(b, (float)(this.position.X + xOffset - 2.5 / scale), (float)(this.position.Y + yOffset - 2.5 / scale), (float)(5.0 / scale), (float)(5.0 / scale));
+			g.FillRectangle(b, (float)(this.position.X + xOffset - 3.0 / scale), (float)(this.position.Y + yOffset - 3.0 / scale), (float)(6.0 / scale), (float)(6.0 / scale));
+		}
+
+		private bool IsInside(double value, double lowerBorder, double upperBorder) {
+			return value >= lowerBorder && value <= upperBorder;
+		}
+
+		public bool HitTest(Point2D planPoint, double xOffset, double yOffset, double scale) {
+			return IsInside(planPoint.X, this.position.X + xOffset - 3.5 / scale, this.position.X + xOffset + 3.5 / scale) && IsInside(planPoint.Y, this.position.Y + yOffset - 3.5 / scale, this.position.Y + yOffset + 3.5 / scale);
 		}
 	}
 }
