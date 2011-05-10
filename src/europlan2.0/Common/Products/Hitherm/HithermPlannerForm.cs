@@ -23,6 +23,7 @@ namespace Europlan.Common {
 			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
 			this.panelDefineWalls.BringToFront();
 			UpdateDefineWallsPanelButtons(null);
+			ApplyButtonCheckedState(this.btnPick);
 		}
 
 		private void HithermPlannerForm_Load(object sender, EventArgs e) {
@@ -46,6 +47,17 @@ namespace Europlan.Common {
 				settings.StoreSetting("Maximized", true);
 			}
 			SettingsFile.Update();
+		}
+
+		private void ApplyButtonCheckedState(ToolStripButton buttonToCheck) {
+			this.btnPick.Checked = false;
+			this.btnMove.Checked = false;
+			this.btnWall.Checked = false;
+			this.btnObstacle.Checked = false;
+			this.btnRegisterVertical.Checked = false;
+			this.btnRegisterHorizontal.Checked = false;
+			this.btnConnection.Checked = false;
+			buttonToCheck.Checked = true;
 		}
 
 		private void btnWallNewWall_Click(object sender, EventArgs e) {
@@ -133,26 +145,61 @@ namespace Europlan.Common {
 		}
 
 		private void btnPick_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_SELECT_OBJECT;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+			ApplyButtonCheckedState(this.btnPick);
 		}
 
 		private void btnMove_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_MOVE;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+			ApplyButtonCheckedState(this.btnMove);
 		}
 
-		private void btnRegister_Click(object sender, EventArgs e) {
+		private void btnWall_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.SelectedObject = null;
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_MOVE;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+			UpdateDefineWallsPanel(null);
+			this.panelDefineWalls.BringToFront();
+			ApplyButtonCheckedState(this.btnWall);
+		}
+
+		private void btnObstacle_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.SelectedObject = null;
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
+			//this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.;
+			ApplyButtonCheckedState(this.btnPick);
+		}
+
+		private void btnRegisterVertical_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_REGISTER;
+			this.hithermPlanner.NewRegisterOrientation = HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 			UpdateModifyRegisterPanel(null);
 			this.panelModifyHitherm.BringToFront();
+			ApplyButtonCheckedState(this.btnRegisterVertical);
+		}
+
+		private void btnRegisterHorizontal_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.SelectedObject = null;
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_REGISTER;
+			this.hithermPlanner.NewRegisterOrientation = HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL;
+			UpdateModifyRegisterPanel(null);
+			this.panelModifyHitherm.BringToFront();
+			ApplyButtonCheckedState(this.btnRegisterHorizontal);
 		}
 
 		private void btnConnection_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_CLICK;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_CONNECTION;
 			// panel.BringToFront()...
+			ApplyButtonCheckedState(this.btnConnection);
 		}
 
 		private void graphicalWallPanel_ObjectSelected(object sender, GraphicalWallPanel.SelectedObjectArgs e) {
@@ -189,10 +236,16 @@ namespace Europlan.Common {
 				} else {
 					rbRegisterLeft.Checked = true;
 				}
-				if (hithermRegister.Register.IsHochleistungsRegister) {
+				if (HithermProduct.ConfigUsePlus) {
+					rbRegister10.Enabled = false;
 					rbRegister5.Checked = true;
 				} else {
-					rbRegister10.Checked = true;
+					rbRegister10.Enabled = true;
+					if (hithermRegister.Register.IsHochleistungsRegister) {
+						rbRegister5.Checked = true;
+					} else {
+						rbRegister10.Checked = true;
+					}
 				}
 				chkRegisterHelpLines.Checked = this.hithermPlanner.NewRegisterUseHelpline;
 				chkRegisterWholeRegister.Checked = this.hithermPlanner.NewRegisterOnlyWhole;
@@ -205,10 +258,16 @@ namespace Europlan.Common {
 				} else {
 					rbRegisterLeft.Checked = true;
 				}
-				if (this.hithermPlanner.NewRegisterRohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG) {
+				if (HithermProduct.ConfigUsePlus) {
+					rbRegister10.Enabled = false;
 					rbRegister5.Checked = true;
 				} else {
-					rbRegister10.Checked = true;
+					rbRegister10.Enabled = true;
+					if (this.hithermPlanner.NewRegisterRohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG) {
+						rbRegister5.Checked = true;
+					} else {
+						rbRegister10.Checked = true;
+					}
 				}
 				chkRegisterHelpLines.Checked = this.hithermPlanner.NewRegisterUseHelpline;
 				chkRegisterWholeRegister.Checked = this.hithermPlanner.NewRegisterOnlyWhole;
@@ -423,23 +482,27 @@ namespace Europlan.Common {
 		}
 
 		private void rbRegisterLeftRight_CheckedChanged(object sender, EventArgs e) {
-			if (selectedObject != null) {
-				GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
-				wrapper.Register.GraphVorlaufRight = rbRegisterRight.Checked;
+			if (!updateOngoing) {
+				if (selectedObject != null) {
+					GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
+					wrapper.Register.GraphVorlaufRight = rbRegisterRight.Checked;
+				}
+				hithermPlanner.NewRegisterVorlaufRight = rbRegisterRight.Checked;
+				this.graphicalWallPanel.InvalidateGraphics();
 			}
-			hithermPlanner.NewRegisterVorlaufRight = rbRegisterRight.Checked;
-			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
 		private void rbPipeDistance_CheckedChanged(object sender, EventArgs e) {
-			if (selectedObject != null) {
-				GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
-				int oldRegisterBreite = wrapper.Register.RegisterBreite;
-				wrapper.Register.IsHochleistungsRegister = rbRegister5.Checked;
-				wrapper.Register.RegisterBreite = oldRegisterBreite;
+			if (!updateOngoing) {
+				if (selectedObject != null) {
+					GraphicalHithermRegisterWrapper wrapper = selectedObject as GraphicalHithermRegisterWrapper;
+					int oldRegisterBreite = wrapper.Register.RegisterBreite;
+					wrapper.Register.IsHochleistungsRegister = rbRegister5.Checked;
+					wrapper.Register.RegisterBreite = oldRegisterBreite;
+				}
+				hithermPlanner.NewRegisterRohrabstand = rbRegister5.Checked ? HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG : HithermRegister.RohrabstandEnum.RC_STANDARD;
+				this.graphicalWallPanel.InvalidateGraphics();
 			}
-			hithermPlanner.NewRegisterRohrabstand = rbRegister5.Checked ? HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG : HithermRegister.RohrabstandEnum.RC_STANDARD;
-			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
 		private void btnRegisterAccept_Click(object sender, EventArgs e) {

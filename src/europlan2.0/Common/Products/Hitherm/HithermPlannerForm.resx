@@ -173,11 +173,18 @@
         BgAGv4Z0EUXdDgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="btnRegister.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnRegisterVertical.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA8SURBVDhPY/hPIWAA6WdgYCAZg/T9+vXrP0UGgC2H+QDk
         CphriKHh+kYNGA1EShMS9ZIyuZkJJS+Qm6sB2hOtUYTP9rIAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnRegisterHorizontal.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA3SURBVDhPY/hPIWAA6WdgYABjYgGyehQDYBLE0mDLR10w
+        GgbDKB0Qm4mwqUPJgr9+/SLaLJhaADWFrVGYXaUeAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnConnection.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
