@@ -263,7 +263,7 @@ namespace Europlan.Common {
 						if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
 							c = Color.White;
 						}
-						b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.LargeGrid, Color.FromArgb(128, c), Color.FromArgb(112, c));
+						b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(128, c), Color.FromArgb(112, c));
 						g.FillPath(b, path);
 						b = new SolidBrush(c);
 						g.DrawPath(new Pen(b), path);
@@ -323,7 +323,7 @@ namespace Europlan.Common {
 						if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
 							c = Color.White;
 						}
-						b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(128, c), Color.FromArgb(112, c));
+						b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(198, c), Color.FromArgb(182, c));
 						g.DrawPolygon(new Pen(c), pointArray);
 						g.FillPolygon(b, pointArray);
 						unusedPoints.Clear();
@@ -342,7 +342,7 @@ namespace Europlan.Common {
 						if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
 							c = Color.White;
 						}
-						b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.LargeGrid, Color.FromArgb(128, c), Color.FromArgb(112, c));
+						b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(128, c), Color.FromArgb(112, c));
 						g.DrawPolygon(new Pen(c), pointArray);
 						g.FillPolygon(b, pointArray);
 						reducedPoints.Clear();
