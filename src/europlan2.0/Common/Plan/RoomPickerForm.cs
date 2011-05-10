@@ -86,7 +86,7 @@ namespace Europlan.Common {
 			this.Text = EuroplanRes.CadPlanOptionsForm_Titel; //"Optionen";
 		}
 
-		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
+		private void RoomPickerForm_FormClosing(object sender, FormClosingEventArgs e) {
 			//this.plan.Scale = this.cadPanel.PlanScale;
 			//this.plan.TranslationX = this.cadPanel.PlanTranslation.X;
 			//this.plan.TranslationY = this.cadPanel.PlanTranslation.Y;
@@ -104,7 +104,7 @@ namespace Europlan.Common {
 			SettingsFile.Update();
 		}
 
-		private void ImagePlanOptionsForm_Load(object sender, EventArgs e) {
+		private void RoomPickerForm_Load(object sender, EventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["CadPlanRoomPickerForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
 			this.Size = settings.GetSize("Size", this.Size);

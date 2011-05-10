@@ -103,33 +103,35 @@ namespace Europlan.Common {
 				}
 			}
 			if (ok) {
-			this.graphicalWallPanel.Room.Walls.Clear();
-			NewWallForm form = new NewWallForm(true, false, 0, 0);
-			DialogResult result = form.ShowDialog();
-			if (result == DialogResult.OK) {
-				double height = form.Height / 100.0;
-				double measure = this.graphicalWallPanel.Room.AssociatedPlan.Measure.Value;
-				Point2D lastVertex = this.graphicalWallPanel.Room.RoomCoordinates[this.graphicalWallPanel.Room.RoomCoordinates.Count - 1];
-				Polygon2D roomCoords = new Polygon2D(this.graphicalWallPanel.Room.RoomCoordinates);
-				if (!roomCoords.IsClockwise()) {
-					roomCoords.Reverse();
+				this.graphicalWallPanel.Room.Walls.Clear();
+				NewWallForm form = new NewWallForm(true, false, 0, 0);
+				DialogResult result = form.ShowDialog();
+				if (result == DialogResult.OK) {
+					double height = form.Height / 100.0;
+					double measure = this.graphicalWallPanel.Room.AssociatedPlan.Measure.Value;
+					Point2D lastVertex = this.graphicalWallPanel.Room.RoomCoordinates[this.graphicalWallPanel.Room.RoomCoordinates.Count - 1];
+					Polygon2D roomCoords = new Polygon2D(this.graphicalWallPanel.Room.RoomCoordinates);
+					if (!roomCoords.IsClockwise()) {
+						roomCoords.Reverse();
+					}
+					foreach (Point2D vertex in this.graphicalWallPanel.Room.RoomCoordinates) {
+						double length = (lastVertex - vertex).GetLength() / measure;
+						GraphicalWall newWall = new GraphicalWall();
+						newWall.WallId = form.WallId;
+						newWall.PlanStartPoint = lastVertex;
+						newWall.PlanEndPoint = vertex;
+						newWall.BorderDistance = HithermProduct.ConfigGraphicalRandabstandDefault;
+						newWall.CeilingContour.Add(new Point2D(0, height));
+						newWall.CeilingContour.Add(new Point2D(0, height));
+						newWall.CeilingContour.Add(new Point2D(length, height));
+						newWall.CeilingContour.Add(new Point2D(length, height));
+						this.graphicalWallPanel.Room.Walls.Add(newWall);
+						lastVertex = vertex;
+					}
+
+
 				}
-				foreach (Point2D vertex in this.graphicalWallPanel.Room.RoomCoordinates) {
-					double length = (lastVertex - vertex).GetLength() / measure;
-					GraphicalWall newWall = new GraphicalWall();
-					newWall.WallId = form.WallId;
-					newWall.PlanStartPoint = lastVertex;
-					newWall.PlanEndPoint = vertex;
-					newWall.BorderDistance = HithermProduct.ConfigGraphicalRandabstandDefault;
-					newWall.CeilingContour.Add(new Point2D(0, height));
-					newWall.CeilingContour.Add(new Point2D(0, height));
-					newWall.CeilingContour.Add(new Point2D(length, height));
-					newWall.CeilingContour.Add(new Point2D(length, height));
-					this.graphicalWallPanel.Room.Walls.Add(newWall);
-					lastVertex = vertex;
-				}
-			}
-			form.Dispose();
+				form.Dispose();
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
@@ -436,6 +438,7 @@ namespace Europlan.Common {
 				if (MessageBox.Show("Wollen Sie die aktuelle Wand wirklich löschen?", "Wand löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 					GraphicalWall wall = selectedObject as GraphicalWall;
 					graphicalWallPanel.Room.Walls.Remove(wall);
+					wall.RemoveAllRegisters(this.hithermPlanner.Product);
 					selectedObject = null;
 					UpdateDefineWallsPanel(null);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -521,27 +524,7 @@ namespace Europlan.Common {
 					if (wrapperWall != null) {
 						wrapperWall.Registers.Remove(wrapper);
 					}
-					HithermCircuit toDelete = null;
-					foreach (HithermCircuit circuit in hithermPlanner.Product.PlannedCircuits) {
-						if (circuit.Registers.Contains(wrapper.Register)) {
-							List<HithermRegisterVerbindung> linksToDelete = new List<HithermRegisterVerbindung>();
-							foreach (HithermRegisterVerbindung link in circuit.Links) {
-								if (link.Start == wrapper.Register || link.End == wrapper.Register) {
-									linksToDelete.Add(link);
-								}
-							}
-							foreach (HithermRegisterVerbindung link in linksToDelete) {
-								circuit.Links.Remove(link);
-							}
-							circuit.Registers.Remove(wrapper.Register);
-							if (circuit.Registers.Count == 0) {
-								toDelete = circuit;
-							}
-						}
-					}
-					if (toDelete != null) {
-						hithermPlanner.Product.PlannedCircuits.Remove(toDelete);
-					}
+					hithermPlanner.Product.RemoveRegisterFromCircuit(wrapper.Register);
 				}
 				UpdateModifyRegisterPanel(wrapper);
 				this.graphicalWallPanel.InvalidateGraphics();

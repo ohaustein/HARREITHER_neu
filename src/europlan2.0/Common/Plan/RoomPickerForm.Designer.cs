@@ -501,8 +501,8 @@ namespace Europlan.Common {
 			this.MinimumSize = new System.Drawing.Size(500, 500);
 			this.Name = "RoomPickerForm";
 			this.Text = "Raumtypen";
-			this.Load += new System.EventHandler(this.ImagePlanOptionsForm_Load);
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImagePlanOptionsForm_FormClosing);
+			this.Load += new System.EventHandler(this.RoomPickerForm_Load);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RoomPickerForm_FormClosing);
 			this.toolStrip.ResumeLayout(false);
 			this.toolStrip.PerformLayout();
 			this.panUnheatedArea.ResumeLayout(false);

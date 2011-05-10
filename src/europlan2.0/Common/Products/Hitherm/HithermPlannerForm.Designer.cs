@@ -184,7 +184,7 @@ namespace Europlan.Common {
             this.btnConnection});
 			this.toolStrip2.Location = new System.Drawing.Point(0, 25);
 			this.toolStrip2.Name = "toolStrip2";
-			this.toolStrip2.Size = new System.Drawing.Size(32, 440);
+			this.toolStrip2.Size = new System.Drawing.Size(24, 440);
 			this.toolStrip2.TabIndex = 1;
 			this.toolStrip2.Text = "toolStrip2";
 			this.toolStrip2.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical270;
@@ -264,9 +264,9 @@ namespace Europlan.Common {
 			this.panelTop.Controls.Add(this.panelDefineWalls);
 			this.panelTop.Controls.Add(this.panelModifyHitherm);
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panelTop.Location = new System.Drawing.Point(32, 25);
+			this.panelTop.Location = new System.Drawing.Point(24, 25);
 			this.panelTop.Name = "panelTop";
-			this.panelTop.Size = new System.Drawing.Size(854, 91);
+			this.panelTop.Size = new System.Drawing.Size(862, 91);
 			this.panelTop.TabIndex = 2;
 			// 
 			// panelDefineWalls
@@ -285,7 +285,7 @@ namespace Europlan.Common {
 			this.panelDefineWalls.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelDefineWalls.Location = new System.Drawing.Point(0, 0);
 			this.panelDefineWalls.Name = "panelDefineWalls";
-			this.panelDefineWalls.Size = new System.Drawing.Size(854, 91);
+			this.panelDefineWalls.Size = new System.Drawing.Size(862, 91);
 			this.panelDefineWalls.TabIndex = 1;
 			// 
 			// btnWallHelpLine
@@ -391,7 +391,7 @@ namespace Europlan.Common {
 			// btnCreateWalls
 			// 
 			this.btnCreateWalls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCreateWalls.Location = new System.Drawing.Point(599, 3);
+			this.btnCreateWalls.Location = new System.Drawing.Point(607, 3);
 			this.btnCreateWalls.Name = "btnCreateWalls";
 			this.btnCreateWalls.Size = new System.Drawing.Size(252, 23);
 			this.btnCreateWalls.TabIndex = 0;
@@ -573,7 +573,7 @@ namespace Europlan.Common {
 			this.panelModifyHitherm.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelModifyHitherm.Location = new System.Drawing.Point(0, 0);
 			this.panelModifyHitherm.Name = "panelModifyHitherm";
-			this.panelModifyHitherm.Size = new System.Drawing.Size(854, 91);
+			this.panelModifyHitherm.Size = new System.Drawing.Size(862, 91);
 			this.panelModifyHitherm.TabIndex = 2;
 			// 
 			// chkRegisterWholeRegister
@@ -1185,7 +1185,7 @@ namespace Europlan.Common {
 			this.lstError.Location = new System.Drawing.Point(4, 173);
 			this.lstError.Name = "lstError";
 			this.lstError.ShowGroups = false;
-			this.lstError.Size = new System.Drawing.Size(847, 30);
+			this.lstError.Size = new System.Drawing.Size(855, 30);
 			this.lstError.TabIndex = 225;
 			this.lstError.UseCompatibleStateImageBehavior = false;
 			this.lstError.View = System.Windows.Forms.View.Details;
@@ -1234,25 +1234,25 @@ namespace Europlan.Common {
 			this.panelBottom.Controls.Add(this.lblHeat);
 			this.panelBottom.Controls.Add(this.label7);
 			this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panelBottom.Location = new System.Drawing.Point(32, 259);
+			this.panelBottom.Location = new System.Drawing.Point(24, 259);
 			this.panelBottom.Name = "panelBottom";
-			this.panelBottom.Size = new System.Drawing.Size(854, 206);
+			this.panelBottom.Size = new System.Drawing.Size(862, 206);
 			this.panelBottom.TabIndex = 3;
 			// 
 			// graphicalWallPanel
 			// 
 			this.graphicalWallPanel.Cursor = System.Windows.Forms.Cursors.SizeAll;
 			this.graphicalWallPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.graphicalWallPanel.Location = new System.Drawing.Point(32, 116);
+			this.graphicalWallPanel.Location = new System.Drawing.Point(24, 116);
 			this.graphicalWallPanel.Mode = Europlan.Common.GraphicalWallPanel.PlanMode.PM_MOVE;
 			this.graphicalWallPanel.Name = "graphicalWallPanel";
 			this.graphicalWallPanel.ProductPlanner = this.hithermPlanner;
 			this.graphicalWallPanel.Room = null;
 			this.graphicalWallPanel.Scale = 1;
 			this.graphicalWallPanel.SelectedObject = null;
-			this.graphicalWallPanel.Size = new System.Drawing.Size(854, 143);
+			this.graphicalWallPanel.Size = new System.Drawing.Size(862, 143);
 			this.graphicalWallPanel.TabIndex = 4;
-			this.graphicalWallPanel.XPos = 417;
+			this.graphicalWallPanel.XPos = 421;
 			this.graphicalWallPanel.YPos = -71.5;
 			this.graphicalWallPanel.ObjectSelected += new System.EventHandler<Europlan.Common.GraphicalWallPanel.SelectedObjectArgs>(this.graphicalWallPanel_ObjectSelected);
 			// 
