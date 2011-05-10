@@ -347,5 +347,21 @@ namespace Europlan.Common {
 			return outside;
 		}
 
+		public GraphicalWall GetOwningWall(IGraphicalWallObject obj) {
+			foreach (GraphicalRegisterWrapper register in this.registers) {
+				if (register == obj) {
+					return this;
+				}
+			}
+			foreach (GraphicalWallObstacle obstacle in this.obstacles) {
+				if (obstacle == obj) {
+					return this;
+				}
+			}
+			if (this.DachSchraege != null) {
+				return this.DachSchraege.GetOwningWall(obj);
+			}
+			return null;
+		}
 	}
 }

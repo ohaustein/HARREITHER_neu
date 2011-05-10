@@ -35,6 +35,7 @@ namespace Europlan.Common {
 		private Cursor tempCursor;
 
 		private IGraphicalWallObject selectedObject;
+		private GraphicalWall selectedWall;
 
 		private event EventHandler<SelectedObjectArgs> objectSelected;
 		public event EventHandler<SelectedObjectArgs> ObjectSelected {
@@ -173,7 +174,7 @@ namespace Europlan.Common {
 			Pen unusableBorderPen = Pens.Gray;
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Gray, Color.White);
 			foreach (GraphicalWall wall in this.Room.Walls) {
-				wall.PaintObject(e.Graphics, xOffset, 0, this.selectedObject, this.Scale);
+				wall.PaintObject(e.Graphics, xOffset, 0, this.SelectedObject, this.Scale);
 				xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
 			}
 
@@ -352,8 +353,7 @@ namespace Europlan.Common {
 				}
 				if (pickedObject != null) {
 					invalidate = true;
-					this.selectedObject = pickedObject;
-					this.OnObjectSelected(this.selectedObject);
+					this.SelectedObject = pickedObject;
 				}
 			}
 			if (invalidate) {
@@ -445,9 +445,24 @@ namespace Europlan.Common {
 		public IGraphicalWallObject SelectedObject {
 			get { return this.selectedObject; }
 			set {
-				this.selectedObject = value;
-				this.OnObjectSelected(this.selectedObject);
+				if (this.selectedObject != value) {
+					this.selectedObject = value;
+					GraphicalWall owningWall = null;
+					foreach (GraphicalWall wall in this.room.Walls) {
+						owningWall = wall.GetOwningWall(this.selectedObject);
+						if (owningWall != null) {
+							this.selectedWall = owningWall;
+							break;
+						}
+					}
+					this.Invalidate();
+					this.OnObjectSelected(this.selectedObject);
+				}
 			}
+		}
+
+		public GraphicalWall SelectedWall {
+			get { return this.selectedWall; }
 		}
 
 		public PlanMode Mode {
