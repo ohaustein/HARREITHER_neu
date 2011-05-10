@@ -447,12 +447,14 @@ namespace Europlan.Common {
 			set {
 				if (this.selectedObject != value) {
 					this.selectedObject = value;
-					GraphicalWall owningWall = null;
-					foreach (GraphicalWall wall in this.room.Walls) {
-						owningWall = wall.GetOwningWall(this.selectedObject);
-						if (owningWall != null) {
-							this.selectedWall = owningWall;
-							break;
+					if (this.selectedObject != null) {
+						GraphicalWall owningWall = null;
+						foreach (GraphicalWall wall in this.room.Walls) {
+							owningWall = wall.GetOwningWall(this.selectedObject);
+							if (owningWall != null) {
+								this.selectedWall = owningWall;
+								break;
+							}
 						}
 					}
 					this.Invalidate();
