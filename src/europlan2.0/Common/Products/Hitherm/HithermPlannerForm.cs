@@ -171,7 +171,7 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
 			//this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.;
-			ApplyButtonCheckedState(this.btnPick);
+			ApplyButtonCheckedState(this.btnObstacle);
 		}
 
 		private void btnRegisterVertical_Click(object sender, EventArgs e) {
