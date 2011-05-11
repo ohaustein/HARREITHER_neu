@@ -673,15 +673,15 @@ namespace Europlan.Common {
 			Nullable<double> yOffset;
 			GraphicalWall oldWall = null;
 			foreach (GraphicalWall curWall in this.walls) {
+				if (oldWall != null && oldWall.PlanEndPoint.HasValue && curWall.PlanStartPoint.HasValue &&
+					(oldWall.PlanEndPoint.Value - curWall.PlanStartPoint.Value).GetLength() > 0.000001) {
+					xOffset += 0.2;
+				}
 				yOffset = curWall.GetWallYOffset(wall, 0);
 				if (yOffset.HasValue) {
 					return new Vector2D(xOffset, yOffset.Value);
 				}
 				xOffset += curWall.GetWallWidth();
-				if (oldWall != null && oldWall.PlanEndPoint.HasValue && curWall.PlanStartPoint.HasValue &&
-					(oldWall.PlanEndPoint.Value - curWall.PlanStartPoint.Value).GetLength() > 0.000001) {
-						xOffset += 0.2;
-				}
 				oldWall = curWall;
 			}
 			return null;
