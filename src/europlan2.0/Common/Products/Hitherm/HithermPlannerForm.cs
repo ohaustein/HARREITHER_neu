@@ -412,19 +412,19 @@ namespace Europlan.Common {
 			if (this.graphicalWallPanel.Room != null) {
 				bool removePlanPointsAllowed = false;
 				foreach (GraphicalWall wall in this.graphicalWallPanel.Room.Walls) {
-					if (wall.PlanStartPoint != Point2D.Zero || wall.PlanEndPoint != Point2D.Zero) {
+					if (wall.PlanStartPoint.HasValue || wall.PlanEndPoint.HasValue) {
 						if (!removePlanPointsAllowed) {
 							DialogResult result = MessageBox.Show("Die Wanddefinitionen wurden automatisch erzeugt. Falls Sie Änderungen vornehmen wollen, können Anbindeleitungen nicht mehr grafisch verplant werden. Wollen Sie wirklich fortfahren?", "Wanddefinition manuell anpassen?", MessageBoxButtons.YesNoCancel);
 							if (result != DialogResult.Yes) {
 								return false;
 							} else {
 								removePlanPointsAllowed = true;
-								wall.PlanStartPoint = Point2D.Zero;
-								wall.PlanEndPoint = Point2D.Zero;
+								wall.PlanStartPoint = null;
+								wall.PlanEndPoint = null;
 							}
 						} else {
-							wall.PlanStartPoint = Point2D.Zero;
-							wall.PlanEndPoint = Point2D.Zero;
+							wall.PlanStartPoint = null;
+							wall.PlanEndPoint = null;
 						}
 					}
 				}

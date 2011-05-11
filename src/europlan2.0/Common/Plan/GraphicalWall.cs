@@ -14,8 +14,8 @@ namespace Europlan.Common {
 		private string id = Guid.NewGuid().ToString();
 		private string nextWallId = null;
 		private string prevWallId = null;
-		private Point2D planStartPoint = Point2D.Zero;
-		private Point2D planEndPoint = Point2D.Zero;
+		private Nullable<Point2D> planStartPoint = Point2D.Zero;
+		private Nullable<Point2D> planEndPoint = Point2D.Zero;
 		private List<Point2D> ceilingContour = new List<Point2D>();
 		private string wallId = "";
 		private List<GraphicalWallObstacle> obstacles = new List<GraphicalWallObstacle>();
@@ -55,12 +55,12 @@ namespace Europlan.Common {
 		//    get { return prevWall; }
 		//}
 
-		public Point2D PlanStartPoint {
+		public Nullable<Point2D> PlanStartPoint {
 			get { return planStartPoint; }
 			set { planStartPoint = value; }
 		}
 
-		public Point2D PlanEndPoint {
+		public Nullable<Point2D> PlanEndPoint {
 			get { return planEndPoint; }
 			set { planEndPoint = value; }
 		}
