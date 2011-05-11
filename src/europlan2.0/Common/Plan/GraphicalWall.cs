@@ -23,6 +23,7 @@ namespace Europlan.Common {
 		private GraphicalWall dachSchraege = null;
 		private double borderDistance = 0.1;
 		private bool isDachSchraege = false;
+		private bool enabled = true;
 
 		public GraphicalWall() {
 
@@ -107,6 +108,12 @@ namespace Europlan.Common {
 		public bool IsDachSchraege {
 			get { return isDachSchraege; }
 			set { isDachSchraege = value; }
+		}
+		
+		[XmlIgnore]
+		public bool Enabled {
+			get { return enabled; }
+			set { enabled = value; }
 		}
 
 		public double BorderDistance {
@@ -327,7 +334,7 @@ namespace Europlan.Common {
 		public void SetWallHeight(double height) {
 			double currentHeight = GetWallHeight();
 			double delta = height - currentHeight;
-			if (Math.Round(delta, 2) > 0) {
+			if (Math.Round(delta, 2) != 0) {
 				for (int i = 0; i < CeilingContour.Count; i++) {
 					Point2D p = ceilingContour[i];
 					double y = p.Y + delta > 0 ? p.Y + delta : 0;

@@ -129,7 +129,9 @@ namespace Europlan.Common {
 						lastVertex = vertex;
 					}
 
-
+					GraphicalWallModifierForm gwmFrom = new GraphicalWallModifierForm(this.graphicalWallPanel.Room);
+					gwmFrom.ShowDialog();
+					gwmFrom.Dispose();
 				}
 				form.Dispose();
 			}

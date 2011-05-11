@@ -217,6 +217,18 @@
     <Compile Include="Plan\CadPlanOptionsForm.Designer.cs">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\GraphicalWallModifierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plan\GraphicalWallModifierForm.Designer.cs">
+      <DependentUpon>GraphicalWallModifierForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plan\GraphicalWallModifier.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Plan\GraphicalWallModifier.Designer.cs">
+      <DependentUpon>GraphicalWallModifier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plan\GraphicalRegisterWrapper.cs" />
     <Compile Include="Plan\IGraphicalWallObject.cs" />
     <Compile Include="Plan\IWallProductPlanner.cs" />
@@ -781,6 +793,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plan\CadPlanOptionsForm.resx">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plan\GraphicalWallModifierForm.resx">
+      <DependentUpon>GraphicalWallModifierForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plan\NewWallForm.resx">

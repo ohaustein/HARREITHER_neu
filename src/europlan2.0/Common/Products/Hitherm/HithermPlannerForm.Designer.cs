@@ -195,7 +195,7 @@ namespace Europlan.Common {
 			this.btnPick.Image = ((System.Drawing.Image)(resources.GetObject("btnPick.Image")));
 			this.btnPick.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnPick.Name = "btnPick";
-			this.btnPick.Size = new System.Drawing.Size(29, 20);
+			this.btnPick.Size = new System.Drawing.Size(21, 20);
 			this.btnPick.Text = "Objekte bearbeiten";
 			this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
 			// 
@@ -205,7 +205,7 @@ namespace Europlan.Common {
 			this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
 			this.btnMove.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnMove.Name = "btnMove";
-			this.btnMove.Size = new System.Drawing.Size(29, 20);
+			this.btnMove.Size = new System.Drawing.Size(21, 20);
 			this.btnMove.Text = "Ausschnitt verschieben";
 			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
 			// 
@@ -215,7 +215,7 @@ namespace Europlan.Common {
 			this.btnWall.Image = ((System.Drawing.Image)(resources.GetObject("btnWall.Image")));
 			this.btnWall.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnWall.Name = "btnWall";
-			this.btnWall.Size = new System.Drawing.Size(29, 20);
+			this.btnWall.Size = new System.Drawing.Size(21, 20);
 			this.btnWall.Text = "Wände";
 			this.btnWall.Click += new System.EventHandler(this.btnWall_Click);
 			// 
@@ -225,7 +225,7 @@ namespace Europlan.Common {
 			this.btnObstacle.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacle.Image")));
 			this.btnObstacle.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnObstacle.Name = "btnObstacle";
-			this.btnObstacle.Size = new System.Drawing.Size(29, 20);
+			this.btnObstacle.Size = new System.Drawing.Size(21, 20);
 			this.btnObstacle.Text = "Fenster und Türen";
 			this.btnObstacle.Click += new System.EventHandler(this.btnObstacle_Click);
 			// 
@@ -235,7 +235,7 @@ namespace Europlan.Common {
 			this.btnRegisterVertical.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterVertical.Image")));
 			this.btnRegisterVertical.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRegisterVertical.Name = "btnRegisterVertical";
-			this.btnRegisterVertical.Size = new System.Drawing.Size(29, 20);
+			this.btnRegisterVertical.Size = new System.Drawing.Size(21, 20);
 			this.btnRegisterVertical.Text = "Wärmeregister senkrecht";
 			this.btnRegisterVertical.Click += new System.EventHandler(this.btnRegisterVertical_Click);
 			// 
@@ -245,7 +245,7 @@ namespace Europlan.Common {
 			this.btnRegisterHorizontal.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterHorizontal.Image")));
 			this.btnRegisterHorizontal.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRegisterHorizontal.Name = "btnRegisterHorizontal";
-			this.btnRegisterHorizontal.Size = new System.Drawing.Size(29, 20);
+			this.btnRegisterHorizontal.Size = new System.Drawing.Size(21, 20);
 			this.btnRegisterHorizontal.Text = "Wärmeregister waagrecht";
 			this.btnRegisterHorizontal.Click += new System.EventHandler(this.btnRegisterHorizontal_Click);
 			// 
@@ -255,7 +255,7 @@ namespace Europlan.Common {
 			this.btnConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnConnection.Image")));
 			this.btnConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnConnection.Name = "btnConnection";
-			this.btnConnection.Size = new System.Drawing.Size(29, 20);
+			this.btnConnection.Size = new System.Drawing.Size(21, 20);
 			this.btnConnection.Text = "Anbindeleitungen";
 			this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
 			// 
@@ -422,24 +422,24 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.numWallVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.numWallVertical.InternalValue = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
 			this.numWallVertical.Location = new System.Drawing.Point(97, 42);
 			this.numWallVertical.MaxValue = null;
 			this.numWallVertical.MinValue = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
 			this.numWallVertical.Name = "numWallVertical";
 			this.numWallVertical.Size = new System.Drawing.Size(87, 20);
 			this.numWallVertical.TabIndex = 21;
-			this.numWallVertical.Text = "1";
+			this.numWallVertical.Text = "0";
 			this.numWallVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWallVertical.Value = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
@@ -451,24 +451,24 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.numWallHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
 			this.numWallHorizontal.InternalValue = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
 			this.numWallHorizontal.Location = new System.Drawing.Point(97, 19);
 			this.numWallHorizontal.MaxValue = null;
 			this.numWallHorizontal.MinValue = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
 			this.numWallHorizontal.Name = "numWallHorizontal";
 			this.numWallHorizontal.Size = new System.Drawing.Size(87, 20);
 			this.numWallHorizontal.TabIndex = 20;
-			this.numWallHorizontal.Text = "1";
+			this.numWallHorizontal.Text = "0";
 			this.numWallHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWallHorizontal.Value = new decimal(new int[] {
-            1,
+            0,
             0,
             0,
             0});
