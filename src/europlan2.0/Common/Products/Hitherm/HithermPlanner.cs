@@ -183,31 +183,30 @@ namespace Europlan.Common {
 			if (this.mode == HithermPlannerMode.HPM_ADD_CONNECTION) {
 				if (this.startConnection == null) {
 					this.newConnectionVertices.Clear();
-					double xOffset = 0;
 					foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
 						GraphicalWall wall = baseWall;
-						double yOffset = 0;
 						while (wall != null) {
-							foreach (GraphicalRegisterWrapper wrapper in wall.Registers) {
-								if (wrapper == this.connectedWallPanel.SelectedObject || wrapper is GraphicalHithermRegisterWrapper && wrapper.HitTest(planPoint, xOffset, yOffset)) {
-									PossibleHithermRegisterConnection conn = (wrapper as GraphicalHithermRegisterWrapper).GetOutputConnection(xOffset, yOffset, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
-									if (conn.ConnectionArea.IsInside(planPoint)) {
-										this.startConnection = conn;
-										this.newConnectionVertices.Add(this.startConnection.ConnectionPoint);
-										return true;
-									}
-									conn = (wrapper as GraphicalHithermRegisterWrapper).GetInputConnection(xOffset, yOffset, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
-									if (conn.ConnectionArea.IsInside(planPoint)) {
-										this.startConnection = conn;
-										this.newConnectionVertices.Add(this.startConnection.ConnectionPoint);
-										return true;
+							Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall);
+							if (offset.HasValue) {
+								foreach (GraphicalRegisterWrapper wrapper in wall.Registers) {
+									if (wrapper == this.connectedWallPanel.SelectedObject || wrapper is GraphicalHithermRegisterWrapper && wrapper.HitTest(planPoint, offset.Value.X, offset.Value.Y)) {
+										PossibleHithermRegisterConnection conn = (wrapper as GraphicalHithermRegisterWrapper).GetOutputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
+										if (conn.ConnectionArea.IsInside(planPoint)) {
+											this.startConnection = conn;
+											this.newConnectionVertices.Add(this.startConnection.ConnectionPoint);
+											return true;
+										}
+										conn = (wrapper as GraphicalHithermRegisterWrapper).GetInputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
+										if (conn.ConnectionArea.IsInside(planPoint)) {
+											this.startConnection = conn;
+											this.newConnectionVertices.Add(this.startConnection.ConnectionPoint);
+											return true;
+										}
 									}
 								}
 							}
-							yOffset += wall.GetWallHeight() * 100;
 							wall = wall.DachSchraege;
 						}
-						xOffset += baseWall.GetWallWidth() * 100;
 					}
 				} else {
 					HithermRegister endRegister;
@@ -243,27 +242,26 @@ namespace Europlan.Common {
 			if (this.mode == HithermPlannerMode.HPM_ADD_CONNECTION) {
 				this.highlightedConnections.Clear();
 				//if (this.startConnection == null) {
-					double xOffset = 0;
 					foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
 						GraphicalWall wall = baseWall;
-						double yOffset = 0;
 						while (wall != null) {
-							foreach (GraphicalRegisterWrapper wrapper in wall.Registers) {
-								if (wrapper != this.connectedWallPanel.SelectedObject && wrapper is GraphicalHithermRegisterWrapper && wrapper.HitTest(planPoint, xOffset, yOffset)) {
-									HithermRegister register = (wrapper as GraphicalHithermRegisterWrapper).Register;
-									HithermCircuit circuit = this.product.GetCircuitForRegister(register);
-									if (circuit.IsConnectionAvailable(register, true) && (this.startConnection == null || circuit != this.startConnection.Circuit)) {
-										highlightedConnections.Add((wrapper as GraphicalHithermRegisterWrapper).GetOutputConnection(xOffset, yOffset, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register)));
-									}
-									if (circuit.IsConnectionAvailable(register, false) && (this.startConnection == null || circuit != this.startConnection.Circuit)) {
-										highlightedConnections.Add((wrapper as GraphicalHithermRegisterWrapper).GetInputConnection(xOffset, yOffset, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register)));
+							Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall);
+							if (offset.HasValue) {
+								foreach (GraphicalRegisterWrapper wrapper in wall.Registers) {
+									if (wrapper != this.connectedWallPanel.SelectedObject && wrapper is GraphicalHithermRegisterWrapper && wrapper.HitTest(planPoint, offset.Value.X, offset.Value.Y)) {
+										HithermRegister register = (wrapper as GraphicalHithermRegisterWrapper).Register;
+										HithermCircuit circuit = this.product.GetCircuitForRegister(register);
+										if (circuit.IsConnectionAvailable(register, true) && (this.startConnection == null || circuit != this.startConnection.Circuit)) {
+											highlightedConnections.Add((wrapper as GraphicalHithermRegisterWrapper).GetOutputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register)));
+										}
+										if (circuit.IsConnectionAvailable(register, false) && (this.startConnection == null || circuit != this.startConnection.Circuit)) {
+											highlightedConnections.Add((wrapper as GraphicalHithermRegisterWrapper).GetInputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register)));
+										}
 									}
 								}
 							}
-							yOffset += wall.GetWallHeight() * 100;
 							wall = wall.DachSchraege;
 						}
-						xOffset += baseWall.GetWallWidth() * 100;
 					}
 				//}
 				return true;
@@ -320,18 +318,6 @@ namespace Europlan.Common {
 					}
 					if (this.newRegister.Register != null) {
 						this.newRegisterOk = this.newRegister.PositionAndSizeOk(this.newRegisterWall, this.newRegisterWallXOffset, this.newRegisterWallYOffset);
-						/*Polygon2D registerBorders = this.newRegister.GetObjectBorders(this.newRegisterWallXOffset, this.newRegisterWallYOffset);
-						if (this.newRegisterWall.CollisionTest(registerBorders, this.newRegisterWallXOffset, this.newRegisterWallYOffset)) {
-							this.newRegisterOk = false;
-						} else {
-							this.newRegisterOk = true;
-							foreach (GraphicalHithermRegisterWrapper register in this.newRegisterWall.Registers) {
-								if (register.CollisionTest(registerBorders, this.newRegisterWallXOffset, this.newRegisterWallYOffset)) {
-									this.newRegisterOk = false;
-									break;
-								}
-							}
-						}*/
 					}
 				} else {
 					this.newRegister.Register = null;
@@ -424,28 +410,35 @@ namespace Europlan.Common {
 		}
 
 		private GraphicalWall GetWallForPoint(Point2D planPoint, out double xOffset, out double yOffset) {
-			xOffset = 0;
-			yOffset = 0;
 			if (this.product == null || this.product.AssociatedRoom == null) {
+				xOffset = 0;
+				yOffset = 0;
 				return null;
 			}
 			GraphicalWall pickedWall = null;
 			foreach (GraphicalWall wall in this.product.AssociatedRoom.Walls) {
-				pickedWall = wall.GetPickedWall(planPoint, xOffset, 0);
+				pickedWall = wall.GetPickedWall(planPoint, this.product.AssociatedRoom.GetWallOffset(wall).Value.X * 100, 0);
 				if (pickedWall != null) {
-					yOffset = wall.GetWallYOffset(pickedWall, 0).Value;
 					break;
 				}
-				xOffset += wall.GetWallWidth() * 100;
 			}
 			if (pickedWall == null) {
 				xOffset = 0;
 				yOffset = 0;
+			} else {
+				Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(pickedWall);
+				if (offset.HasValue) {
+					xOffset = offset.Value.X * 100;
+					yOffset = offset.Value.Y * 100;
+				} else {
+					xOffset = 0;
+					yOffset = 0;
+				}
 			}
 			return pickedWall;
 		}
 
-		/// <summary>
+		/*/// <summary>
 		/// Returns x-offset in m
 		/// </summary>
 		/// <param name="wall"></param>
@@ -476,7 +469,7 @@ namespace Europlan.Common {
 				}
 			}
 			return null;
-		}
+		}*/
 
 		public HithermPlannerMode Mode {
 			get { return this.mode; }
@@ -545,32 +538,32 @@ namespace Europlan.Common {
 		}
 
 		private PossibleHithermRegisterConnection GetHoveredRegisterConnection(Point2D planPoint, bool checkInput, bool checkOutput) {
-			double xOffset = 0;
 			foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
 				GraphicalWall wall = baseWall;
-				double yOffset = 0;
 				while (wall != null) {
-					foreach (GraphicalRegisterWrapper wrapper in wall.Registers) {
-						if (wrapper == this.connectedWallPanel.SelectedObject || wrapper is GraphicalHithermRegisterWrapper && wrapper.HitTest(planPoint, xOffset, yOffset)) {
-							PossibleHithermRegisterConnection conn;
-							if (checkOutput) {
-								conn = (wrapper as GraphicalHithermRegisterWrapper).GetOutputConnection(xOffset, yOffset, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
-								if (conn.ConnectionArea.IsInside(planPoint)) {
-									return conn;
+					Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall);
+					if (offset.HasValue) {
+						offset = offset * 100;
+						foreach (GraphicalRegisterWrapper wrapper in wall.Registers) {
+							if (wrapper == this.connectedWallPanel.SelectedObject || wrapper is GraphicalHithermRegisterWrapper && wrapper.HitTest(planPoint, offset.Value.X, offset.Value.Y)) {
+								PossibleHithermRegisterConnection conn;
+								if (checkOutput) {
+									conn = (wrapper as GraphicalHithermRegisterWrapper).GetOutputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
+									if (conn.ConnectionArea.IsInside(planPoint)) {
+										return conn;
+									}
 								}
-							}
-							if (checkInput) {
-								conn = (wrapper as GraphicalHithermRegisterWrapper).GetInputConnection(xOffset, yOffset, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
-								if (conn.ConnectionArea.IsInside(planPoint)) {
-									return conn;
+								if (checkInput) {
+									conn = (wrapper as GraphicalHithermRegisterWrapper).GetInputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
+									if (conn.ConnectionArea.IsInside(planPoint)) {
+										return conn;
+									}
 								}
 							}
 						}
+						wall = wall.DachSchraege;
 					}
-					yOffset += wall.GetWallHeight() * 100;
-					wall = wall.DachSchraege;
 				}
-				xOffset += baseWall.GetWallWidth() * 100;
 			}
 			return null;
 		}

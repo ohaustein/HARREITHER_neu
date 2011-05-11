@@ -170,14 +170,14 @@ namespace Europlan.Common {
 			Matrix paintMatrix = this.PlanToControlMatrix;
 			e.Graphics.Transform = paintMatrix;
 
-			double xOffset = 0;
+			//double xOffset = 0;
 			Pen wallBorderPen = Pens.Black;
 			Brush wallBrush = new SolidBrush(Color.White);
 			Pen unusableBorderPen = Pens.Gray;
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Gray, Color.White);
 			foreach (GraphicalWall wall in this.Room.Walls) {
-				wall.PaintObject(e.Graphics, xOffset, 0, this.SelectedObject, this.SelectedWall, this.Scale);
-				xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
+				wall.PaintObject(e.Graphics, this.room.GetWallOffset(wall).Value.X * 100.0, 0, this.SelectedObject, this.SelectedWall, this.Scale);
+				//xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
 			}
 
 			e.Graphics.ResetClip();
@@ -532,26 +532,30 @@ namespace Europlan.Common {
 					if (this.selectedObject != null) {
 						GraphicalWall owningWall = null;
 						bool found = false;
-						double xOffset = 0.0;
+						//double xOffset = 0.0;
 						foreach (GraphicalWall wall in this.room.Walls) {
 							if (wall == this.selectedObject) {
 								this.selectedWall = wall;
-								this.selectedWallXOffset = xOffset;
-								this.selectedWallYOffset = 0;
+								//this.selectedWallXOffset = xOffset;
+								//this.selectedWallYOffset = 0;
 								found = true;
 								break;
 							}
 							owningWall = wall.GetOwningWall(this.selectedObject);
 							if (owningWall != null) {
 								this.selectedWall = owningWall;
-								this.selectedWallXOffset = xOffset;
-								this.selectedWallYOffset = wall.GetWallYOffset(owningWall, 0).Value;
+								//this.selectedWallXOffset = xOffset;
+								//this.selectedWallYOffset = wall.GetWallYOffset(owningWall, 0).Value;
 								found = true;
 								break;
 							}
-							xOffset += wall.GetWallWidth();
+							//xOffset += wall.GetWallWidth();
 						}
-						if (!found) {
+						if (found) {
+							Vector2D offset = this.room.GetWallOffset(this.selectedWall).Value;
+							this.selectedWallXOffset = offset.X;
+							this.selectedWallYOffset = offset.Y;
+						} else {
 							this.selectedWall = null;
 						}
 					}
