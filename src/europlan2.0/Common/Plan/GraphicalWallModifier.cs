@@ -119,6 +119,8 @@ namespace Europlan.Common {
 				}
 				float size = (float)(room.AssociatedPlan.Measure * 0.1 * Math.Abs(additionalTransformation.M00));
 				Pen p = new Pen(c, size);
+				p.StartCap = LineCap.Square;
+				p.EndCap = LineCap.Square;
 				Point2D start = additionalTransformation.TransformTo2D(wall.PlanStartPoint.Value);
 				Point2D end = additionalTransformation.TransformTo2D(wall.PlanEndPoint.Value);
 				g.DrawLine(p, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
@@ -134,6 +136,8 @@ namespace Europlan.Common {
 					c = Color.FromArgb(255, Color.Red);
 					float size = (float)(room.AssociatedPlan.Measure * 0.1 * Math.Abs(additionalTransformation.M00));
 					Pen p = new Pen(c, size);
+					p.StartCap = LineCap.Square;
+					p.EndCap = LineCap.Square;
 					Point2D start = additionalTransformation.TransformTo2D(wall.PlanStartPoint.Value);
 					Point2D end = additionalTransformation.TransformTo2D(wall.PlanEndPoint.Value);
 					g.DrawLine(p, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
@@ -147,6 +151,8 @@ namespace Europlan.Common {
 					c = Color.FromArgb(255, Color.Red);
 					float size = (float)(room.AssociatedPlan.Measure * 0.1 * Math.Abs(additionalTransformation.M00));
 					Pen p = new Pen(c, size);
+					p.StartCap = LineCap.Square;
+					p.EndCap = LineCap.Square;
 					Point2D start = additionalTransformation.TransformTo2D(wall.PlanStartPoint.Value);
 					Point2D end = additionalTransformation.TransformTo2D(wall.PlanEndPoint.Value);
 					g.DrawLine(p, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);

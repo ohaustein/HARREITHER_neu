@@ -26,7 +26,11 @@ namespace Europlan.Common {
 		private bool enabled = true;
 
 		public GraphicalWall() {
-
+			//GraphicalDoor door = new GraphicalDoor();
+			//door.GraphPosX = 20;
+			//door.Width = 100;
+			//door.Height = 210;
+			//this.obstacles.Add(door);
 		}
 
 		public bool IsMoveable {
@@ -176,9 +180,9 @@ namespace Europlan.Common {
 			g.DrawPolygon(wallBorderPen, pointArr);
 			g.Clip = oldClip;
 
-			/*foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
-				obstacle
-			}*/
+			foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
+				obstacle.PaintObject(g, xOffset, yOffset, selectedObject, scale);
+			}
 			foreach (GraphicalRegisterWrapper register in this.Registers) {
 				register.PaintObject(g, xOffset, yOffset, selectedObject, scale);
 			}
@@ -204,7 +208,7 @@ namespace Europlan.Common {
 				}
 			}
 			foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
-				//pickedObject = obstacle.GetPickedObject(planPoint, xOffset, yOffset);
+				pickedObject = obstacle.GetPickedObject(planPoint, xOffset, yOffset);
 				if (pickedObject != null) {
 					return pickedObject;
 				}
