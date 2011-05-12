@@ -9,7 +9,7 @@ using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
 
-	public class GraphicalDoor : GraphicalWallObstacle {
+	public class GraphicalWindow : GraphicalWallObstacle {
 
 		private string id = Guid.NewGuid().ToString();
 		private double borderDistance = 0.1;
@@ -18,7 +18,7 @@ namespace Europlan.Common {
 		private double width = 0;
 		private double height = 0;
 
-		public GraphicalDoor() {
+		public GraphicalWindow() {
 
 		}
 
@@ -41,7 +41,6 @@ namespace Europlan.Common {
 			set { this.graphPosX = value; }
 		}
 
-		[XmlIgnore]
 		public double GraphPosY {
 			get { return this.graphPosY; }
 			set { this.graphPosY = value; }
@@ -66,36 +65,36 @@ namespace Europlan.Common {
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error) {
-			Pen doorBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
-			Brush doorBrush = new SolidBrush(SystemColors.ControlLight);
+			Pen windowBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
+			Brush windowBrush = new SolidBrush(SystemColors.ControlLight);
 			Pen unusableBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, this == selectedObject ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.White);
 
 			if (error) {
-				doorBorderPen.DashStyle = DashStyle.DashDotDot;
+				windowBorderPen.DashStyle = DashStyle.DashDotDot;
 				unusableBorderPen.DashStyle = DashStyle.DashDotDot;
 			}
 
 			Region oldClip = g.Clip;
-			Polygon2D doorBorder = this.GetObjectBorders(xOffset, yOffset);
+			Polygon2D windowBorder = this.GetObjectBorders(xOffset, yOffset);
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 
 			List<PointF> borderPoints = new List<PointF>();
-			foreach (Point2D vertex in doorBorder) {
+			foreach (Point2D vertex in windowBorder) {
 				borderPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
 			}
 
 			PointF[] pointArr = borderPoints.ToArray();
 
-			GraphicsPath doorPath = new GraphicsPath();
-			doorPath.AddPolygon(pointArr);
-			Region doorClip = new Region(doorPath);
-			g.Clip = doorClip;
+			GraphicsPath windowPath = new GraphicsPath();
+			windowPath.AddPolygon(pointArr);
+			Region windowClip = new Region(windowPath);
+			g.Clip = windowClip;
 
 
-			g.FillPolygon(doorBrush, pointArr);
+			g.FillPolygon(windowBrush, pointArr);
 
-			Polygon2D usableArea = GetUsableBorder(doorBorder);
+			Polygon2D usableArea = GetUsableBorder(windowBorder);
 			List<PointF> usablePoints = new List<PointF>();
 			foreach (Point2D vertex in usableArea) {
 				usablePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
@@ -111,9 +110,9 @@ namespace Europlan.Common {
 
 			g.FillPolygon(unusableBrush, borderPoints.ToArray());
 
-			g.Clip = doorClip;
+			g.Clip = windowClip;
 			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
-			g.DrawPolygon(doorBorderPen, pointArr);
+			g.DrawPolygon(windowBorderPen, pointArr);
 			g.Clip = oldClip;
 		}
 
@@ -125,30 +124,30 @@ namespace Europlan.Common {
 		}
 
 		public override WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset) {
-			Polygon2D doorBorder = new Polygon2D();
-			doorBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY)); // left bottom
-			doorBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY + height)); // left top
-			doorBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY + height)); // right top
-			doorBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY)); // right bottom
-			return doorBorder;
+			Polygon2D windowBorder = new Polygon2D();
+			windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY)); // left bottom
+			windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY + height)); // left top
+			windowBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY + height)); // right top
+			windowBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY)); // right bottom
+			return windowBorder;
 		}
 
 		public override bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
-			Polygon2D door = GetObjectBorders(xOffset, yOffset);
+			Polygon2D window = GetObjectBorders(xOffset, yOffset);
 			if (ignoreBorders) {
-				door = GetUsableBorder(door);
+				window = GetUsableBorder(window);
 			}
 
 			if (polygon.IsClockwise()) {
 				polygon.Reverse();
 			}
-			if (door.IsClockwise()) {
-				door.Reverse();
+			if (window.IsClockwise()) {
+				window.Reverse();
 			}
 			List<Polygon2D> list1 = new List<Polygon2D>();
 			list1.Add(polygon);
 			List<Polygon2D> list2 = new List<Polygon2D>();
-			list2.Add(door);
+			list2.Add(window);
 
 			return Polygon2D.GetIntersection(list1, list2).Count > 0;
 		}
@@ -170,24 +169,42 @@ namespace Europlan.Common {
 				// move
 				double tmpX = this.GraphPosX;
 				double tmpY = this.GraphPosY;
+				
+				//this.GraphPosX = startX + planPoint.X - startDrag.Value.X;
+				this.GraphPosY = startY + planPoint.Y - startDrag.Value.Y;
+				bool retryY = false;
+				if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+					this.GraphPosY = tmpY;
+					retryY = true;
+				}
+				
 				this.GraphPosX = startX + planPoint.X - startDrag.Value.X;
 				if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
 					this.GraphPosX = tmpX;
+					retryY = false;
 				}
+
+				if (retryY) {
+					this.GraphPosY = startY + planPoint.Y - startDrag.Value.Y;
+					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+						this.GraphPosY = tmpY;
+					}
+				}
+
 			} else {
 				if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
 					double tmpWidth = this.Width;
 					double tmpX = this.GraphPosX;
 					this.Width = this.startWidth - planPoint.X + startDrag.Value.X;
 					this.GraphPosX = this.startX + this.startWidth - this.Width;
-					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+					if ((!this.PositionAndSizeOk(owningWall, 0, 0)) || this.Width < 0) {
 						this.Width = tmpWidth;
 						this.GraphPosX = tmpX;
 					}
 				} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_RIGHT) == AnchorTypeEnum.ANCHOR_SCALE_RIGHT) {
 					double tmpWidth = this.Width;
 					this.Width = this.startWidth + planPoint.X - startDrag.Value.X;
-					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+					if ((!this.PositionAndSizeOk(owningWall, 0, 0)) || this.Width < 0) {
 						this.Width = tmpWidth;
 					}
 				}
@@ -195,8 +212,17 @@ namespace Europlan.Common {
 				if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_TOP) == AnchorTypeEnum.ANCHOR_SCALE_TOP) {
 					double tmpHeight = this.Height;
 					this.Height = this.startHeight + planPoint.Y - this.startDrag.Value.Y;
-					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+					if ((!this.PositionAndSizeOk(owningWall, 0, 0)) || this.Height < 0) {
 						this.Height = tmpHeight;
+					}
+				} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) == AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) {
+					double tmpHeight = this.Height;
+					double tmpY = this.GraphPosY;
+					this.Height = this.startHeight + this.startDrag.Value.Y - planPoint.Y;
+					this.GraphPosY = this.startY + this.startHeight - this.Height;
+					if ((!this.PositionAndSizeOk(owningWall, 0, 0)) || this.Height < 0) {
+						this.Height = tmpHeight;
+						this.GraphPosY = tmpY;
 					}
 				}
 			}
@@ -211,27 +237,27 @@ namespace Europlan.Common {
 		public override List<Anchor> GetAnchors(double scale) {
 			List<Anchor> anchors = new List<Anchor>();
 			double px5 = 4.0 / scale;
-			anchors.Add(new Anchor(this.GraphPosX - px5, this.GraphPosY - px5, AnchorTypeEnum.ANCHOR_SCALE_LEFT, this));
+			anchors.Add(new Anchor(this.GraphPosX - px5, this.GraphPosY - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_LEFT, this));
 			anchors.Add(new Anchor(this.GraphPosX - px5, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT, this));
 			anchors.Add(new Anchor(this.GraphPosX - px5, this.GraphPosY + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP_LEFT, this));
 			anchors.Add(new Anchor(this.GraphPosX + this.Width / 2.0, this.GraphPosY + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP, this));
 			anchors.Add(new Anchor(this.GraphPosX + this.Width + px5, this.GraphPosY + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP_RIGHT, this));
 			anchors.Add(new Anchor(this.GraphPosX + this.Width + px5, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
-			anchors.Add(new Anchor(this.GraphPosX + this.Width + px5, this.GraphPosY - px5, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
-			//anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width + px5, this.GraphPosY - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_RIGHT, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width / 2.0, this.GraphPosY - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
 			return anchors;
 		}
 
 		public bool PositionAndSizeOk(GraphicalWall owningWall, double offsetX, double offsetY) {
-			Polygon2D doorBorders = this.GetObjectBorders(offsetX, offsetY);
-			if (owningWall.CollisionTest(doorBorders, offsetX, offsetY, true)) {
+			Polygon2D windowBorders = this.GetObjectBorders(offsetX, offsetY);
+			if (owningWall.CollisionTest(windowBorders, offsetX, offsetY, false)) {
 				return false;
 			} 
 			return true;
 		}
 
-		private Polygon2D GetUsableBorder(Polygon2D doorBorder) {
-			Polygon2D usableArea = new Polygon2D(doorBorder);
+		private Polygon2D GetUsableBorder(Polygon2D windowBorder) {
+			Polygon2D usableArea = new Polygon2D(windowBorder);
 			usableArea.Outset(-this.BorderDistance * 100.0);
 			return usableArea;
 		}

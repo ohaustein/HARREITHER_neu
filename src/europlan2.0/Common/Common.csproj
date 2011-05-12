@@ -217,6 +217,7 @@
     <Compile Include="Plan\CadPlanOptionsForm.Designer.cs">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\GraphicalWindow.cs" />
     <Compile Include="Plan\GraphicalDoor.cs" />
     <Compile Include="Plan\GraphicalWallModifierForm.cs">
       <SubType>Form</SubType>

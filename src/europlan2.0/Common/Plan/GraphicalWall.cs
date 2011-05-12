@@ -31,6 +31,13 @@ namespace Europlan.Common {
 			//door.Width = 100;
 			//door.Height = 210;
 			//this.obstacles.Add(door);
+			//GraphicalWindow window = new GraphicalWindow();
+			//window.GraphPosX = 20;
+			//window.GraphPosY = 120;
+			//window.Width = 100;
+			//window.Height = 120;
+			//this.obstacles.Add(window);
+
 		}
 
 		public bool IsMoveable {
@@ -383,8 +390,17 @@ namespace Europlan.Common {
 			bool outside = false;
 			foreach (Point2D point in polygon) {
 				if (!Polygon2D.IsInside(point, wall)) {
+					IList<Segment2D> segments = new List<Segment2D>();
+					Polygon2D.GetSegments(wall, segments);
 					outside = true;
-					break;
+					foreach (Segment2D segment in segments) {
+						if (segment.GetDistance(point) < 0.01) {
+							outside = false;
+						}
+					}
+					if (outside) {
+						break;
+					}
 				}
 			}
 			return outside;
