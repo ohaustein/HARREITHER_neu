@@ -15,7 +15,7 @@ namespace Europlan.Common {
 		public abstract Polygon2D GetObjectBorders(double xOffset, double yOffset);
 
 		public abstract bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset);
-		public abstract bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset);
+		public abstract bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders);
 
 		public abstract List<Anchor> GetAnchors(double scale);
 

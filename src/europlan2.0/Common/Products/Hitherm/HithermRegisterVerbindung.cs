@@ -73,12 +73,15 @@ namespace Europlan.Common {
 			PointF newVertex;
 			bool first = true;
 			Pen p = new Pen(c, 2);
+			p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
 			foreach (Point2D vertex in vertices) {
 				newVertex = new PointF((float)vertex.X, (float)vertex.Y);
 				if (first) {
 					first = false;
 				} else {
 					g.DrawLine(p, oldVertex, newVertex);
+					p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
+					p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
 				}
 				oldVertex = newVertex;
 			}
@@ -276,7 +279,7 @@ namespace Europlan.Common {
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset) {
+		public bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
 			throw new Exception("The method or operation is not implemented.");
 		}
 
@@ -299,5 +302,83 @@ namespace Europlan.Common {
 			return false;
 		}
 		#endregion
+
+		public void MoveStartPointTo(Point2D newStartPoint) {
+		}
+
+		public void MoveEndPointTo(Point2D newEndPoint) {
+			if (this.vertices == null || this.vertices.Count < 3) {
+				return;
+			}
+			Point2D lastPoint = this.vertices[this.vertices.Count - 1];
+			Point2D prevLastPoint = this.vertices[this.vertices.Count - 2];
+			//Segment2D lastSegment = new Segment2D(prevLastPoint, lastPoint);
+			Vector2D delta = new Segment2D(prevLastPoint, lastPoint).GetDelta();
+			bool moved = false;
+			if (Math.Abs(delta.X) <= Math.Abs(delta.Y)) {
+				if (Math.Abs(delta.X) <= 0.00001) {
+					this.MoveVerticalSegment(this.vertices.Count - 2, - lastPoint.X + newEndPoint.X);
+					lastPoint = this.vertices[this.vertices.Count - 1];
+					prevLastPoint = this.vertices[this.vertices.Count -2];
+					if (lastPoint.X < prevLastPoint.X && newEndPoint.X > prevLastPoint.X) {
+						Point2D prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
+						double tmpY = prevLastPoint.Y > prevPrevLastPoint.Y ? (prevLastPoint.Y - 10) : (prevLastPoint.Y + 10);
+						this.vertices.RemoveAt(this.vertices.Count - 2);
+						this.vertices.Insert(this.vertices.Count - 1, new Point2D(prevLastPoint.X, tmpY));
+						this.vertices.Insert(this.vertices.Count - 1, new Point2D(newEndPoint.X + 5, tmpY));
+						this.vertices.Insert(this.vertices.Count - 1, new Point2D(newEndPoint.X + 5, lastPoint.Y));
+						this.vertices[this.vertices.Count - 1] = newEndPoint;
+					} else if (lastPoint.X > prevLastPoint.X && newEndPoint.X < prevLastPoint.X) {
+						//this.vertices
+						// TODO
+					} else {
+						this.vertices[this.vertices.Count - 1] = newEndPoint;
+					}
+					moved = true;
+				}
+			} else {
+				if (Math.Abs(delta.Y) <= 0.00001) {
+					this.MoveHorizontalSegment(this.vertices.Count - 2, - lastPoint.Y + newEndPoint.Y);
+					lastPoint = this.vertices[this.vertices.Count - 1];
+					prevLastPoint = this.vertices[this.vertices.Count - 2];
+					if (lastPoint.X < prevLastPoint.X && newEndPoint.X >= prevLastPoint.X) {
+						Point2D prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
+						double tmpY = prevLastPoint.Y > prevPrevLastPoint.Y ? (prevLastPoint.Y - 10) : (prevLastPoint.Y + 10);
+						this.vertices.RemoveAt(this.vertices.Count - 2);
+						this.vertices.Insert(this.vertices.Count - 1, new Point2D(prevLastPoint.X, tmpY));
+						this.vertices.Insert(this.vertices.Count - 1, new Point2D(lastPoint.X + 5, tmpY));
+						this.vertices.Insert(this.vertices.Count - 1, new Point2D(lastPoint.X + 5, lastPoint.Y));
+					} else if (lastPoint.X > prevLastPoint.X && newEndPoint.X <= prevLastPoint.X) {
+						Console.WriteLine("blub");
+						//this.vertices
+						// TODO
+					} else {
+						this.vertices[this.vertices.Count - 1] = newEndPoint;
+					}
+					moved = true;
+				}
+			}
+			if (!moved) {
+				this.vertices[this.vertices.Count - 1] = newEndPoint;
+			}
+		}
+
+		public void MoveVerticalSegment(int segmentIndex, double delta) {
+			if (this.vertices.Count < segmentIndex + 2) {
+				return;
+			}
+			Vector2D deltaVector = new Vector2D(delta, 0);
+			this.vertices[segmentIndex] += deltaVector;
+			this.vertices[segmentIndex + 1] += deltaVector;
+		}
+
+		public void MoveHorizontalSegment(int segmentIndex, double delta) {
+			if (this.vertices.Count < segmentIndex + 2) {
+				return;
+			}
+			Vector2D deltaVector = new Vector2D(0, delta);
+			this.vertices[segmentIndex] += deltaVector;
+			this.vertices[segmentIndex + 1] += deltaVector;
+		}
 	}
 }

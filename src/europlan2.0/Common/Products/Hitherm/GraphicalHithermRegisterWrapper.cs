@@ -9,12 +9,15 @@ using System.Drawing.Drawing2D;
 namespace Europlan.Common {
 	public class GraphicalHithermRegisterWrapper : GraphicalRegisterWrapper {
 		private HithermRegister register;
+		private HithermProduct product;
 
-		public GraphicalHithermRegisterWrapper() {
+		public GraphicalHithermRegisterWrapper(HithermProduct product) {
+			this.product = product;
 		}
 
-		public GraphicalHithermRegisterWrapper(HithermRegister register) {
+		public GraphicalHithermRegisterWrapper(HithermRegister register, HithermProduct product) {
 			this.register = register;
+			this.product = product;
 		}
 
 		public HithermRegister Register {
@@ -250,7 +253,7 @@ namespace Europlan.Common {
 			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register);
 		}
 
-		public override bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset) {
+		public override bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
 			Polygon2D register = GetObjectBorders(xOffset, yOffset);
 			if (polygon.IsClockwise()) {
 				polygon.Reverse();
@@ -292,9 +295,31 @@ namespace Europlan.Common {
 			return bestRohre;
 		}
 
+		public HithermRegisterVerbindung GetInputConnection() {
+			HithermCircuit c = this.product.GetCircuitForRegister(this.register);
+			foreach (HithermRegisterVerbindung link in c.Links) {
+				if (link.End == this.register) {
+					return link;
+				}
+			}
+			return null;
+		}
+
+		public HithermRegisterVerbindung GetOutputConnection() {
+			HithermCircuit c = this.product.GetCircuitForRegister(this.register);
+			foreach (HithermRegisterVerbindung link in c.Links) {
+				if (link.Start == this.register) {
+					return link;
+				}
+			}
+			return null;
+		}
+
 		private Nullable<Point2D> startDrag = null;
 		private double startDragRegisterX, startDragRegisterY, startDragRegisterWidth;
 		private int startDragRegisterHeight, startRegisterRohre;
+		private List<Point2D> startInputConnectionVertices, startOutputConnectionVertices;
+		private HithermRegisterVerbindung startInputConnection, startOutputConnection;
 
 		public override bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
 			this.startDrag = planPoint;
@@ -303,6 +328,15 @@ namespace Europlan.Common {
 			this.startDragRegisterHeight = this.register.RegisterHoehe;
 			this.startDragRegisterWidth = this.register.RegisterBreiteForDrawing;
 			this.startRegisterRohre = this.register.Rohre;
+			
+			this.startInputConnection = this.GetInputConnection();
+			this.startOutputConnection = this.GetOutputConnection();
+			if (this.startInputConnection != null) {
+				this.startInputConnectionVertices = new List<Point2D>(this.startInputConnection.Vertices);
+			}
+			if (this.startOutputConnection != null) {
+				this.startOutputConnectionVertices = new List<Point2D>(this.startOutputConnection.Vertices);
+			}
 			// TODO
 			return false;
 		}
@@ -311,66 +345,44 @@ namespace Europlan.Common {
 			if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
 				if (anchor == null) {
 					// move
-					double tmpX = this.register.GraphPosX;
-					double tmpY = this.register.GraphPosY;
-					bool retryY = false;
-					this.register.GraphPosY = startDragRegisterY + planPoint.Y - startDrag.Value.Y;
-					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
-						this.register.GraphPosY = tmpY;
-						retryY = true;
+					if (this.startInputConnection != null) {
+						this.startInputConnection.Vertices = new List<Point2D>(this.startInputConnectionVertices);
 					}
-					this.register.GraphPosX = startDragRegisterX + planPoint.X - startDrag.Value.X;
-					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
-						this.register.GraphPosX = tmpX;
+					if (this.startOutputConnection != null) {
+						this.startOutputConnection.Vertices = new List<Point2D>(this.startOutputConnectionVertices);
 					}
-					if (retryY) {
-						this.register.GraphPosY = startDragRegisterY + planPoint.Y - startDrag.Value.Y;
-						if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
-							this.register.GraphPosY = tmpY;
-						}
-					}
+					this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY + planPoint.Y - startDrag.Value.Y);
 				} else {
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
-						int tmpRohre = this.register.Rohre;
-						double tmpX = this.register.GraphPosX;
-						this.register.Rohre = GetBestRohrCount(this.startDragRegisterWidth - planPoint.X + startDrag.Value.X);
-						this.register.GraphPosX = this.startDragRegisterX + this.startDragRegisterWidth - this.register.RegisterBreiteForDrawing;
-						if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
-							this.register.Rohre = tmpRohre;
-							this.register.GraphPosX = tmpX;
-						}
+						this.UpdateRohre(owningWall, GetBestRohrCount(this.startDragRegisterWidth - planPoint.X + startDrag.Value.X), false);
 					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_RIGHT) == AnchorTypeEnum.ANCHOR_SCALE_RIGHT) {
-						int tmpRohre = this.register.Rohre;
-						this.register.Rohre = GetBestRohrCount(this.startDragRegisterWidth + planPoint.X - startDrag.Value.X);
-						if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
-							this.register.Rohre = tmpRohre;
-						}
+						this.UpdateRohre(owningWall, GetBestRohrCount(this.startDragRegisterWidth + planPoint.X - startDrag.Value.X), true);
 					}
 
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_TOP) == AnchorTypeEnum.ANCHOR_SCALE_TOP) {
-						HithermRegister.HithermRegisterTypeEnum tmpType = this.register.RegisterType;
-						Nullable<HithermRegister.HithermRegisterTypeEnum> newType = HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight + planPoint.Y - this.startDrag.Value.Y + 25), this.register.IsHochleistungsRegister);
-						this.register.RegisterType = newType.HasValue ? newType.Value : HithermRegister.GetRegisterTypeForHoehe(50, this.register.IsHochleistungsRegister).Value;
-						if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
-							this.register.RegisterType = tmpType;
-						}
+						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight + planPoint.Y - this.startDrag.Value.Y + 25), this.register.IsHochleistungsRegister, false).Value, true);
 					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) == AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) {
-						HithermRegister.HithermRegisterTypeEnum tmpType = this.register.RegisterType;
-						double tmpY = this.register.GraphPosY;
-						Nullable<HithermRegister.HithermRegisterTypeEnum> newType = HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight - planPoint.Y + this.startDrag.Value.Y + 25), this.register.IsHochleistungsRegister);
-						this.register.RegisterType = newType.HasValue ? newType.Value : HithermRegister.GetRegisterTypeForHoehe(50, this.register.IsHochleistungsRegister).Value;
-						this.register.GraphPosY = this.startDragRegisterY + this.startDragRegisterHeight - this.register.RegisterHoehe;
-						if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
-							this.register.RegisterType = tmpType;
-							this.register.GraphPosY = tmpY;
-						}
+						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight - planPoint.Y + this.startDrag.Value.Y + 25), this.register.IsHochleistungsRegister, false).Value, false);
 					}
 				}
 			} else {
-				// TODO
-			}
+				if (anchor == null) {
+					// move
+					this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY + planPoint.Y - startDrag.Value.Y);
+				} else {
+					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
+						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight - planPoint.X + this.startDrag.Value.X + 25), this.register.IsHochleistungsRegister, false).Value, false);
+					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_RIGHT) == AnchorTypeEnum.ANCHOR_SCALE_RIGHT) {
+						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight + planPoint.X - this.startDrag.Value.X + 25), this.register.IsHochleistungsRegister, false).Value, true);
+					}
 
-			// TODO
+					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_TOP) == AnchorTypeEnum.ANCHOR_SCALE_TOP) {
+						this.UpdateRohre(owningWall, GetBestRohrCount(this.startDragRegisterWidth + planPoint.Y - startDrag.Value.Y), true);
+					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) == AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) {
+						this.UpdateRohre(owningWall, GetBestRohrCount(this.startDragRegisterWidth - planPoint.Y + startDrag.Value.Y), false);
+					}
+				}
+			}
 			return true;
 		}
 
@@ -380,18 +392,122 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		public bool PositionAndSizeOk(GraphicalWall owningWall, double offsetX, double offsetY) {
+		public bool CheckPositionAndSize(GraphicalWall owningWall, double offsetX, double offsetY) {
 			Polygon2D registerBorders = this.GetObjectBorders(offsetX, offsetY);
-			if (owningWall.CollisionTest(registerBorders, offsetX, offsetY)) {
+			if (owningWall.CollisionTest(registerBorders, offsetX, offsetY, false)) {
 				return false;
 			} else {
 				foreach (GraphicalHithermRegisterWrapper register in owningWall.Registers) {
-					if (register != this && register.CollisionTest(registerBorders, offsetX, offsetY)) {
+					if (register != this && register.CollisionTest(registerBorders, offsetX, offsetY, false)) {
+						return false;
+					}
+				}
+				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+					if (obstacle.CollisionTest(registerBorders, offsetX, offsetY, false)) {
 						return false;
 					}
 				}
 			}
 			return true;
+		}
+
+		public bool UpdatePosition(GraphicalWall owningWall, double newPosX, double newPosY) {
+			return this.UpdatePositionAndSize(owningWall, newPosX, newPosY, null, null, null, null);
+		}
+
+		public bool UpdateRohre(GraphicalWall owningWall, int newRohre, bool anchorStart) {
+			return this.UpdatePositionAndSize(owningWall, null, null, newRohre, anchorStart, null, null);
+		}
+
+		public bool UpdateType(GraphicalWall owningWall, HithermRegister.HithermRegisterTypeEnum newType, bool anchorStart) {
+			return this.UpdatePositionAndSize(owningWall, null, null, null, null, newType, anchorStart);
+		}
+
+		public bool UpdatePositionAndSize(GraphicalWall owningWall, Nullable<double> newPosX, Nullable<double> newPosY, Nullable<int> newRohre, Nullable<bool> anchorRohreStart, Nullable<HithermRegister.HithermRegisterTypeEnum> newType, Nullable<bool> anchorTypeStart) {
+			double oldPosX = this.register.GraphPosX;
+			double oldPosY = this.register.GraphPosY;
+			double oldWidth = this.register.RegisterBreiteForDrawing;
+			double oldHeight = this.register.RegisterHoehe;
+			int oldRohre = this.register.Rohre;
+			HithermRegister.HithermRegisterTypeEnum oldType = this.register.RegisterType;
+
+			bool ok = false;
+			if (newPosX.HasValue && newPosY.HasValue && !newRohre.HasValue && !newType.HasValue) {
+				this.register.GraphPosY = newPosY.Value;
+				bool retryY = false;
+				if (!this.CheckPositionAndSize(owningWall, 0, 0)) {
+					this.register.GraphPosY = oldPosY;
+					retryY = true;
+				}
+				this.register.GraphPosX = newPosX.Value;
+				if (!this.CheckPositionAndSize(owningWall, 0, 0)) {
+					this.register.GraphPosX = oldPosX;
+				}
+				if (retryY) {
+					this.register.GraphPosY = newPosY.Value;
+					if (!this.CheckPositionAndSize(owningWall, 0, 0)) {
+						this.register.GraphPosY = oldPosY;
+					}
+				}
+				ok = this.register.GraphPosX != oldPosX || this.register.GraphPosY != oldPosY;
+			} else {
+				if (newPosX.HasValue) {
+					this.register.GraphPosX = newPosX.Value;
+				}
+				if (newPosY.HasValue) {
+					this.register.GraphPosY = newPosY.Value;
+				}
+				if (newRohre.HasValue) {
+					double oldBreite = this.register.RegisterBreiteForDrawing;
+					this.register.Rohre = newRohre.Value;
+					if (anchorRohreStart.HasValue && !anchorRohreStart.Value) {
+						if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
+							this.register.GraphPosX = this.register.GraphPosX + oldBreite - this.register.RegisterBreiteForDrawing;
+						} else {
+							this.register.GraphPosY = this.register.GraphPosY + oldBreite - this.register.RegisterBreiteForDrawing;
+						}
+					}
+				}
+				if (newType.HasValue) {
+					double oldHoehe = this.register.RegisterHoehe;
+					this.register.RegisterType = newType.Value;
+					if (anchorTypeStart.HasValue && !anchorTypeStart.Value) {
+						if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
+							this.register.GraphPosY = this.register.GraphPosY + oldHoehe - this.register.RegisterHoehe;
+						} else {
+							this.register.GraphPosX = this.register.GraphPosX + oldHoehe - this.register.RegisterHoehe;
+						}
+					}
+				}
+
+				ok = this.CheckPositionAndSize(owningWall, 0, 0);
+				if (!ok) {
+					this.register.GraphPosX = oldPosX;
+					this.register.GraphPosY = oldPosY;
+					this.register.Rohre = oldRohre;
+					this.register.RegisterType = oldType;
+				} else {
+					// TODO move Verbindeleitungen
+				}
+			}
+
+			HithermCircuit circuit = product.GetCircuitForRegister(this.register);
+			foreach (HithermRegisterVerbindung link in circuit.Links) {
+				if (link.Start == this.register) {
+					Point2D newStartPoint = this.GetOutputConnectionPoint(0, 0);
+					/*newStartPoint.X = newStartPoint.X / 100;
+					newStartPoint.Y = newStartPoint.Y / 100;*/
+					link.MoveStartPointTo(newStartPoint); // TODO
+				}
+				if (link.End == this.register) {
+					Point2D newEndPoint = this.GetInputConnectionPoint(0, 0);
+					/*newEndPoint.X = newEndPoint.X / 100;
+					newEndPoint.Y = newEndPoint.Y / 100;*/
+					link.MoveEndPointTo(newEndPoint); // TODO
+				}
+			}
+
+			return ok;
 		}
 
 		public double X {

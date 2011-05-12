@@ -133,7 +133,7 @@ namespace Europlan.Common {
 			return doorBorder;
 		}
 
-		public override bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset) {
+		public override bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
 			Polygon2D door = GetObjectBorders(xOffset, yOffset);
 			if (polygon.IsClockwise()) {
 				polygon.Reverse();
@@ -220,7 +220,7 @@ namespace Europlan.Common {
 
 		public bool PositionAndSizeOk(GraphicalWall owningWall, double offsetX, double offsetY) {
 			Polygon2D doorBorders = this.GetObjectBorders(offsetX, offsetY);
-			if (owningWall.CollisionTest(doorBorders, offsetX, offsetY)) {
+			if (owningWall.CollisionTest(doorBorders, offsetX, offsetY, true)) {
 				return false;
 			} 
 			return true;

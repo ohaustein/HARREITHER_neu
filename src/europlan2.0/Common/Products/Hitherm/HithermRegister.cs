@@ -314,7 +314,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public static Nullable<HithermRegisterTypeEnum> GetRegisterTypeForHoehe(int hoehe, bool hochleistungsRegister) {
+		public static Nullable<HithermRegisterTypeEnum> GetRegisterTypeForHoehe(int hoehe, bool hochleistungsRegister, bool allowNull) {
 			if (hoehe >= GetRegisterHoehe(HithermRegisterTypeEnum.HIT_300_5)) {
 				return hochleistungsRegister ? HithermRegisterTypeEnum.HIT_300_5 : HithermRegisterTypeEnum.HIT_300_10;
 			} else if (hoehe >= GetRegisterHoehe(HithermRegisterTypeEnum.HIT_250_5)) {
@@ -328,7 +328,7 @@ namespace Europlan.Common {
 			} else if (hoehe >= GetRegisterHoehe(HithermRegisterTypeEnum.HIT_50_5)) {
 				return hochleistungsRegister ? HithermRegisterTypeEnum.HIT_50_5 : HithermRegisterTypeEnum.HIT_50_10;
 			}
-			return null;
+			return allowNull ? (Nullable<HithermRegisterTypeEnum>)null : (hochleistungsRegister ? HithermRegisterTypeEnum.HIT_50_5 : HithermRegisterTypeEnum.HIT_50_10);
 		}
 		#endregion Static Methods
 

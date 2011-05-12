@@ -35,7 +35,7 @@ namespace Europlan.Common {
 		private HithermRegister.RegisterOrientationEnum newRegisterOrientation = HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 
 		private PossibleHithermRegisterConnection startConnection = null;
-		private PossibleHithermRegisterConnection endConnection = null;
+		private PossibleConnection endConnection = null;
 		private List<PossibleConnection> highlightedConnections = new List<PossibleConnection>();
 		private List<Point2D> newConnectionVertices = new List<Point2D>();
 
@@ -147,8 +147,8 @@ namespace Europlan.Common {
 					}
 				}
 				if (this.startConnection != null) {
-					HithermRegister endRegister;
-					List<Point2D> nextVertices = this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endRegister);
+					PossibleConnection endConn;
+					List<Point2D> nextVertices = this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn);
 					bool first = true;
 					PointF oldPoint = new PointF();
 					PointF newPoint;
@@ -209,19 +209,42 @@ namespace Europlan.Common {
 						}
 					}
 				} else {
-					HithermRegister endRegister;
-					List<Point2D> nextVertices = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endRegister);
+					PossibleConnection endConnection;
+					List<Point2D> nextVertices = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection);
 					this.newConnectionVertices.AddRange(nextVertices);
-					if (endRegister != null) {
-						HithermCircuit endCircuit = this.product.GetCircuitForRegister(endRegister);
-						HithermCircuit startCircuit = this.product.GetCircuitForRegister(this.startConnection.Register);
-						List<HithermRegister> registersToMove = new List<HithermRegister>(endCircuit.Registers);
-						foreach (HithermRegister register in registersToMove) {
-							//register.Heizkreis = this.startConnection.Register.Heizkreis;
-							this.product.MoveRegisterToCircuit(register, this.startConnection.Register.Heizkreis);
+					if (endConnection != null) {
+						HithermRegister endRegister = null;
+						HithermCircuit endCircuit = null;
+						if (endConnection is PossibleHithermRegisterConnection) {
+							endRegister = (endConnection as PossibleHithermRegisterConnection).Register;
+							endCircuit = this.product.GetCircuitForRegister(endRegister);
 						}
-						HithermRegisterVerbindung link = new HithermRegisterVerbindung(this.startConnection.Register, endRegister, this.newConnectionVertices, this.product.GetCircuitForRegister(this.startConnection.Register), Project.Instance.GetPlannedProduct(this.product));
-						startCircuit.Links.Add(link);
+						if (endRegister != null) {
+							HithermCircuit startCircuit = this.product.GetCircuitForRegister(this.startConnection.Register);
+							List<HithermRegister> registersToMove = new List<HithermRegister>(endCircuit.Registers);
+							foreach (HithermRegister register in registersToMove) {
+								//register.Heizkreis = this.startConnection.Register.Heizkreis;
+								this.product.MoveRegisterToCircuit(register, this.startConnection.Register.Heizkreis);
+							}
+							HithermRegisterVerbindung link;
+							if (this.startConnection.PossibleInput) {
+								this.newConnectionVertices.Reverse();
+								link = new HithermRegisterVerbindung(endRegister, this.startConnection.Register, this.newConnectionVertices, this.product.GetCircuitForRegister(this.startConnection.Register), Project.Instance.GetPlannedProduct(this.product));
+							} else {
+								link = new HithermRegisterVerbindung(this.startConnection.Register, endRegister, this.newConnectionVertices, this.product.GetCircuitForRegister(this.startConnection.Register), Project.Instance.GetPlannedProduct(this.product));
+							}
+							startCircuit.Links.Add(link);
+						} else {
+							HithermRegisterVerbindung link;
+							if (this.startConnection.PossibleInput) {
+								this.newConnectionVertices.Reverse();
+								link = new HithermRegisterVerbindung(null, this.startConnection.Register, this.newConnectionVertices, this.product.GetCircuitForRegister(this.startConnection.Register), Project.Instance.GetPlannedProduct(this.product));
+							} else {
+								link = new HithermRegisterVerbindung(this.startConnection.Register, null, this.newConnectionVertices, this.product.GetCircuitForRegister(this.startConnection.Register), Project.Instance.GetPlannedProduct(this.product));
+							}
+							HithermCircuit startCircuit = this.product.GetCircuitForRegister(this.startConnection.Register);
+							startCircuit.Links.Add(link);
+						}
 						this.startConnection = null;
 						this.endConnection = null;
 						this.newConnectionVertices.Clear();
@@ -245,19 +268,30 @@ namespace Europlan.Common {
 					foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
 						GraphicalWall wall = baseWall;
 						while (wall != null) {
-							Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall);
+							Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall) * 100;
 							if (offset.HasValue) {
 								foreach (GraphicalRegisterWrapper wrapper in wall.Registers) {
 									if (wrapper != this.connectedWallPanel.SelectedObject && wrapper is GraphicalHithermRegisterWrapper && wrapper.HitTest(planPoint, offset.Value.X, offset.Value.Y)) {
 										HithermRegister register = (wrapper as GraphicalHithermRegisterWrapper).Register;
 										HithermCircuit circuit = this.product.GetCircuitForRegister(register);
 										if (circuit.IsConnectionAvailable(register, true) && (this.startConnection == null || circuit != this.startConnection.Circuit)) {
-											highlightedConnections.Add((wrapper as GraphicalHithermRegisterWrapper).GetOutputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register)));
-										}
-										if (circuit.IsConnectionAvailable(register, false) && (this.startConnection == null || circuit != this.startConnection.Circuit)) {
 											highlightedConnections.Add((wrapper as GraphicalHithermRegisterWrapper).GetInputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register)));
 										}
+										if (circuit.IsConnectionAvailable(register, false) && (this.startConnection == null || circuit != this.startConnection.Circuit)) {
+											highlightedConnections.Add((wrapper as GraphicalHithermRegisterWrapper).GetOutputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register)));
+										}
 									}
+								}
+							}
+							if (this.startConnection != null) {
+								PossibleConnection wallConnection = wall.GetPossibleConnection(planPoint, offset.Value.X, offset.Value.Y);
+								if (wallConnection != null) {
+									if (this.startConnection.PossibleInput) {
+										wallConnection.PossibleInput = false;
+									} else {
+										wallConnection.PossibleOutput = false;
+									}
+									highlightedConnections.Add(wallConnection);
 								}
 							}
 							wall = wall.DachSchraege;
@@ -280,7 +314,7 @@ namespace Europlan.Common {
 			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER) {
 				this.newRegisterWall = this.GetWallForPoint(planPoint, out this.newRegisterWallXOffset, out this.newRegisterWallYOffset);
 				if (this.newRegisterWall != null) {
-					this.newRegister = new GraphicalHithermRegisterWrapper();
+					this.newRegister = new GraphicalHithermRegisterWrapper(this.product);
 				}
 			}
 
@@ -298,7 +332,7 @@ namespace Europlan.Common {
 				bool vertical = this.newRegisterOrientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 				double width =  Math.Abs(this.dragStart.Value.X - this.dragEnd.X);
 				double height = Math.Abs(this.dragStart.Value.Y - this.dragEnd.Y);
-				Nullable<HithermRegister.HithermRegisterTypeEnum> registerType = HithermRegister.GetRegisterTypeForHoehe(vertical ? (int)Math.Floor(height) : (int)Math.Floor(width), this.newRegisterRohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG);
+				Nullable<HithermRegister.HithermRegisterTypeEnum> registerType = HithermRegister.GetRegisterTypeForHoehe(vertical ? (int)Math.Floor(height) : (int)Math.Floor(width), this.newRegisterRohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG, true);
 				if (registerType.HasValue) {
 					if (this.newRegister.Register == null) {
 						this.newRegister.Register = new HithermRegister();
@@ -317,7 +351,7 @@ namespace Europlan.Common {
 						this.newRegister.Register.GraphWallId = this.newRegisterWall.Id;
 					}
 					if (this.newRegister.Register != null) {
-						this.newRegisterOk = this.newRegister.PositionAndSizeOk(this.newRegisterWall, this.newRegisterWallXOffset, this.newRegisterWallYOffset);
+						this.newRegisterOk = this.newRegister.CheckPositionAndSize(this.newRegisterWall, this.newRegisterWallXOffset, this.newRegisterWallYOffset);
 					}
 				} else {
 					this.newRegister.Register = null;
@@ -394,7 +428,7 @@ namespace Europlan.Common {
 					foreach (HithermRegister r in c.Registers) {
 						GraphicalWall wall = this.product.AssociatedRoom.GetWallForId(r.GraphWallId);
 						if (wall != null) {
-							wall.Registers.Add(new GraphicalHithermRegisterWrapper(r));
+							wall.Registers.Add(new GraphicalHithermRegisterWrapper(r, this.product));
 						}
 					}
 				}
@@ -499,16 +533,18 @@ namespace Europlan.Common {
 			return transformation.GetInverse().Transform(transformedMousePoint);
 		}
 
-		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out HithermRegister endRegister) {
+		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out PossibleConnection endConnection) {
 			List<Point2D> nextConnectionPoints = new List<Point2D>();
-			endRegister = null;
-			this.endConnection = this.GetHoveredRegisterConnection(mousePoint, this.startConnection.PossibleOutput, this.startConnection.PossibleInput);
+			//endRegister = null;
+			endConnection = this.GetHoveredRegisterConnection(mousePoint, this.startConnection.PossibleOutput, this.startConnection.PossibleInput);
 			
 			// TODO check if end connection is valid
-			if (this.endConnection != null) {
-				HithermCircuit circuit = this.product.GetCircuitForRegister(this.endConnection.Register);
-				if (circuit == this.startConnection.Circuit || !circuit.IsConnectionAvailable(this.endConnection.Register, this.startConnection.PossibleOutput)) {
-					this.endConnection = null;
+			if (endConnection != null) {
+				if (endConnection is PossibleHithermRegisterConnection) {
+					HithermCircuit circuit = this.product.GetCircuitForRegister((endConnection as PossibleHithermRegisterConnection).Register);
+					if (circuit == this.startConnection.Circuit || !circuit.IsConnectionAvailable((endConnection as PossibleHithermRegisterConnection).Register, this.startConnection.PossibleOutput)) {
+						endConnection = null;
+					}
 				}
 			}
 
@@ -516,11 +552,11 @@ namespace Europlan.Common {
 				endModule = null;
 			}*/
 
-			if (this.endConnection == null) {
+			if (endConnection == null) {
 				bool horizontal;
 				nextConnectionPoints.Add(this.GetNextConnectionVertex(mousePoint, this.startConnection.Rotation, out horizontal));
 			} else {
-				Point2D connectionPoint = this.endConnection.ConnectionPoint;
+				Point2D connectionPoint = endConnection.ConnectionPoint;
 				if (this.newConnectionVertices.Count > 1) {
 					Point2D p1 = this.newConnectionVertices[this.newConnectionVertices.Count - 2];
 					Point2D p2 = this.newConnectionVertices[this.newConnectionVertices.Count - 1];
@@ -532,13 +568,15 @@ namespace Europlan.Common {
 					}
 				}
 				nextConnectionPoints.Add(connectionPoint);
-				endRegister = this.endConnection.Register;
+				//endRegister = (this.endConnection is PossibleHithermRegisterConnection) ? (this.endConnection as PossibleHithermRegisterConnection).Register : null;
 			}
+			this.endConnection = endConnection;
 			return nextConnectionPoints;
 		}
 
-		private PossibleHithermRegisterConnection GetHoveredRegisterConnection(Point2D planPoint, bool checkInput, bool checkOutput) {
-			foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
+		private PossibleConnection GetHoveredRegisterConnection(Point2D planPoint, bool checkInput, bool checkOutput) {
+		//private PossibleHithermRegisterConnection GetHoveredRegisterConnection(Point2D planPoint, bool checkInput, bool checkOutput) {
+			/*foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
 				GraphicalWall wall = baseWall;
 				while (wall != null) {
 					Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall);
@@ -563,6 +601,12 @@ namespace Europlan.Common {
 						}
 						wall = wall.DachSchraege;
 					}
+				}
+			}
+			return null;*/
+			foreach (PossibleConnection conn in this.highlightedConnections) {
+				if (conn.ConnectionArea.IsInside(planPoint) && ((conn.PossibleInput && checkInput) || (conn.PossibleOutput && checkOutput))) {
+					return conn;
 				}
 			}
 			return null;

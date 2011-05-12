@@ -373,8 +373,13 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset) {
-			Polygon2D wall = GetUsableBorder(this.GetObjectBorders(xOffset, yOffset));
+		public bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
+			Polygon2D wall;
+			if (ignoreBorders) {
+				wall = GetObjectBorders(xOffset, yOffset);
+			} else {
+				wall = GetUsableBorder(this.GetObjectBorders(xOffset, yOffset));
+			}
 			bool outside = false;
 			foreach (Point2D point in polygon) {
 				if (!Polygon2D.IsInside(point, wall)) {
@@ -409,6 +414,39 @@ namespace Europlan.Common {
 			foreach (GraphicalHithermRegisterWrapper wrapper in this.Registers) {
 				hithermProduct.RemoveRegisterFromCircuit(wrapper.Register);
 			}
+		}
+
+		public PossibleConnection GetPossibleConnection(Point2D mousePointInPlan, double offsetX, double offsetY) {
+			if (offsetY > 0) {
+				// no conenctions for dachschrägen
+				return null;
+			}
+			double width = this.GetWallWidth() * 100;
+			if (mousePointInPlan.Y <= 10 && mousePointInPlan.Y >= 0 && mousePointInPlan.X >= offsetX && mousePointInPlan.X <= offsetX + width) {
+				Polygon2D area = new Polygon2D();
+				double left;
+				double right;
+				if (width < 10) {
+					left = offsetX;
+					right = offsetX + width;
+				} else {
+					left = mousePointInPlan.X - 5;
+					if (left < offsetX) {
+						left = offsetX;
+					}
+					right = left + 10;
+					if (right > offsetX + width) {
+						right = offsetX + width;
+						left = right - 10;
+					}
+				}
+				area.Add(new Point2D(left, 0));
+				area.Add(new Point2D(left, 10));
+				area.Add(new Point2D(right, 10));
+				area.Add(new Point2D(right, 0));
+				return new PossibleConnection(new Point2D(mousePointInPlan.X, 0), area, true, true, 0, true);
+			}
+			return null;
 		}
 	}
 }
