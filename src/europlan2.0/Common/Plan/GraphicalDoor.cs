@@ -69,7 +69,7 @@ namespace Europlan.Common {
 			Pen doorBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
 			Brush doorBrush = new SolidBrush(SystemColors.ControlLight);
 			Pen unusableBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
-			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, this == selectedObject ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.White);
+			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, this == selectedObject ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.Transparent);
 
 			if (error) {
 				doorBorderPen.DashStyle = DashStyle.DashDotDot;
@@ -77,43 +77,47 @@ namespace Europlan.Common {
 			}
 
 			Region oldClip = g.Clip;
-			Polygon2D doorBorder = this.GetObjectBorders(xOffset, yOffset);
+			Region baseClip = new Region(oldClip.GetRegionData());
+			Polygon2D doorArea = this.GetObjectBorders(xOffset, yOffset);
+			Polygon2D outsideBorder = GetOutsideBorder(doorArea);
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 
-			List<PointF> borderPoints = new List<PointF>();
-			foreach (Point2D vertex in doorBorder) {
-				borderPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
+			List<PointF> doorPoints = new List<PointF>();
+			foreach (Point2D vertex in doorArea) {
+				doorPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
 			}
 
-			PointF[] pointArr = borderPoints.ToArray();
+			PointF[] doorPointArr = doorPoints.ToArray();
 
 			GraphicsPath doorPath = new GraphicsPath();
-			doorPath.AddPolygon(pointArr);
-			Region doorClip = new Region(doorPath);
-			g.Clip = doorClip;
+			doorPath.AddPolygon(doorPointArr);
+			//Region doorClip = new Region(doorPath);
+			//doorClip.Intersect(baseClip);
+			//g.Clip = doorClip;
 
 
-			g.FillPolygon(doorBrush, pointArr);
+			g.FillPolygon(doorBrush, doorPointArr);
 
-			Polygon2D usableArea = GetUsableBorder(doorBorder);
-			List<PointF> usablePoints = new List<PointF>();
-			foreach (Point2D vertex in usableArea) {
-				usablePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
+			
+			List<PointF> outsidePoints = new List<PointF>();
+			foreach (Point2D vertex in outsideBorder) {
+				outsidePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
 			}
 
 			GraphicsPath path = new GraphicsPath();
-			path.AddPolygon(borderPoints.ToArray());
+			path.AddPolygon(outsidePoints.ToArray());
 			Region clip = new Region(path);
 			GraphicsPath excludePath = new GraphicsPath();
-			excludePath.AddPolygon(usablePoints.ToArray());
+			excludePath.AddPolygon(doorPoints.ToArray());
 			clip.Exclude(excludePath);
+			clip.Intersect(baseClip);
 			g.Clip = clip;
 
-			g.FillPolygon(unusableBrush, borderPoints.ToArray());
+			g.FillPolygon(unusableBrush, outsidePoints.ToArray());
 
-			g.Clip = doorClip;
-			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
-			g.DrawPolygon(doorBorderPen, pointArr);
+			g.Clip = baseClip;
+			g.DrawPolygon(unusableBorderPen, outsidePoints.ToArray());
+			g.DrawPolygon(doorBorderPen, doorPointArr);
 			g.Clip = oldClip;
 		}
 
@@ -136,7 +140,7 @@ namespace Europlan.Common {
 		public override bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
 			Polygon2D door = GetObjectBorders(xOffset, yOffset);
 			if (ignoreBorders) {
-				door = GetUsableBorder(door);
+				door = GetOutsideBorder(door);
 			}
 
 			if (polygon.IsClockwise()) {
@@ -210,14 +214,14 @@ namespace Europlan.Common {
 
 		public override List<Anchor> GetAnchors(double scale) {
 			List<Anchor> anchors = new List<Anchor>();
-			double px5 = 4.0 / scale;
-			anchors.Add(new Anchor(this.GraphPosX - px5, this.GraphPosY - px5, AnchorTypeEnum.ANCHOR_SCALE_LEFT, this));
-			anchors.Add(new Anchor(this.GraphPosX - px5, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT, this));
-			anchors.Add(new Anchor(this.GraphPosX - px5, this.GraphPosY + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP_LEFT, this));
-			anchors.Add(new Anchor(this.GraphPosX + this.Width / 2.0, this.GraphPosY + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP, this));
-			anchors.Add(new Anchor(this.GraphPosX + this.Width + px5, this.GraphPosY + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP_RIGHT, this));
-			anchors.Add(new Anchor(this.GraphPosX + this.Width + px5, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
-			anchors.Add(new Anchor(this.GraphPosX + this.Width + px5, this.GraphPosY - px5, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
+			double px = 4.0 / scale;
+			anchors.Add(new Anchor(this.GraphPosX - px, this.GraphPosY - px, AnchorTypeEnum.ANCHOR_SCALE_LEFT, this));
+			anchors.Add(new Anchor(this.GraphPosX - px, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT, this));
+			anchors.Add(new Anchor(this.GraphPosX - px, this.GraphPosY + this.Height + px, AnchorTypeEnum.ANCHOR_SCALE_TOP_LEFT, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width / 2.0, this.GraphPosY + this.Height + px, AnchorTypeEnum.ANCHOR_SCALE_TOP, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY + this.Height + px, AnchorTypeEnum.ANCHOR_SCALE_TOP_RIGHT, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY - px, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
 			//anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
 			return anchors;
 		}
@@ -230,9 +234,9 @@ namespace Europlan.Common {
 			return true;
 		}
 
-		private Polygon2D GetUsableBorder(Polygon2D doorBorder) {
+		private Polygon2D GetOutsideBorder(Polygon2D doorBorder) {
 			Polygon2D usableArea = new Polygon2D(doorBorder);
-			usableArea.Outset(-this.BorderDistance * 100.0);
+			usableArea.Outset(this.BorderDistance * 100.0);
 			return usableArea;
 		}
 

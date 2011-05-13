@@ -76,7 +76,8 @@ namespace Europlan.Common {
 			}
 
 			Region oldClip = g.Clip;
-			Polygon2D windowBorder = this.GetObjectBorders(xOffset, yOffset);
+			Polygon2D usableArea = this.GetObjectBorders(xOffset, yOffset);
+			Polygon2D windowBorder = GetOutsideBorder(usableArea);
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 
 			List<PointF> borderPoints = new List<PointF>();
@@ -94,7 +95,6 @@ namespace Europlan.Common {
 
 			g.FillPolygon(windowBrush, pointArr);
 
-			Polygon2D usableArea = GetUsableBorder(windowBorder);
 			List<PointF> usablePoints = new List<PointF>();
 			foreach (Point2D vertex in usableArea) {
 				usablePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
@@ -135,7 +135,7 @@ namespace Europlan.Common {
 		public override bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
 			Polygon2D window = GetObjectBorders(xOffset, yOffset);
 			if (ignoreBorders) {
-				window = GetUsableBorder(window);
+				window = GetOutsideBorder(window);
 			}
 
 			if (polygon.IsClockwise()) {
@@ -236,15 +236,15 @@ namespace Europlan.Common {
 
 		public override List<Anchor> GetAnchors(double scale) {
 			List<Anchor> anchors = new List<Anchor>();
-			double px5 = 4.0 / scale;
-			anchors.Add(new Anchor(this.GraphPosX - px5, this.GraphPosY - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_LEFT, this));
-			anchors.Add(new Anchor(this.GraphPosX - px5, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT, this));
-			anchors.Add(new Anchor(this.GraphPosX - px5, this.GraphPosY + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP_LEFT, this));
-			anchors.Add(new Anchor(this.GraphPosX + this.Width / 2.0, this.GraphPosY + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP, this));
-			anchors.Add(new Anchor(this.GraphPosX + this.Width + px5, this.GraphPosY + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP_RIGHT, this));
-			anchors.Add(new Anchor(this.GraphPosX + this.Width + px5, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
-			anchors.Add(new Anchor(this.GraphPosX + this.Width + px5, this.GraphPosY - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_RIGHT, this));
-			anchors.Add(new Anchor(this.GraphPosX + this.Width / 2.0, this.GraphPosY - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
+			double px = 4.0 / scale;
+			anchors.Add(new Anchor(this.GraphPosX - px, this.GraphPosY - px, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_LEFT, this));
+			anchors.Add(new Anchor(this.GraphPosX - px, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT, this));
+			anchors.Add(new Anchor(this.GraphPosX - px, this.GraphPosY + this.Height + px, AnchorTypeEnum.ANCHOR_SCALE_TOP_LEFT, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width / 2.0, this.GraphPosY + this.Height + px, AnchorTypeEnum.ANCHOR_SCALE_TOP, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY + this.Height + px, AnchorTypeEnum.ANCHOR_SCALE_TOP_RIGHT, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY - px, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_RIGHT, this));
+			anchors.Add(new Anchor(this.GraphPosX + this.Width / 2.0, this.GraphPosY - px, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
 			return anchors;
 		}
 
@@ -256,9 +256,9 @@ namespace Europlan.Common {
 			return true;
 		}
 
-		private Polygon2D GetUsableBorder(Polygon2D windowBorder) {
+		private Polygon2D GetOutsideBorder(Polygon2D windowBorder) {
 			Polygon2D usableArea = new Polygon2D(windowBorder);
-			usableArea.Outset(-this.BorderDistance * 100.0);
+			usableArea.Outset(this.BorderDistance * 100.0);
 			return usableArea;
 		}
 

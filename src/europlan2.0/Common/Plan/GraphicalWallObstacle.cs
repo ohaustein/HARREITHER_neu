@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 
-	
+	[XmlInclude(typeof(GraphicalDoor))]
+	[XmlInclude(typeof(GraphicalWindow))]
 	public abstract class GraphicalWallObstacle : IGraphicalWallObject {
 
 		public abstract bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset);
