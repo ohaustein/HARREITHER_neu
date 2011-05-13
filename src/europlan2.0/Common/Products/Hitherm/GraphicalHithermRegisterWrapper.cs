@@ -25,6 +25,10 @@ namespace Europlan.Common {
 			set { this.register = value; }
 		}
 
+		public HithermProduct Product {
+			get { return this.product; }
+		}
+
 		public override bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
 			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
 		}
@@ -197,11 +201,11 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public Point2D GetOutputConnectionPoint(double xOffset, double yOffset) {
+		public Point2D GetOutputConnectionPoint(double xOffset, double yOffset, double dist) {
 			if (this.register.GraphVorlaufRight) {
-				return new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterHoehe - 1);
+				return new Point2D(xOffset + this.register.GraphPosX - dist, yOffset + this.register.GraphPosY + this.register.RegisterHoehe - 1);
 			} else {
-				return new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + this.register.RegisterHoehe - 1);
+				return new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + dist, yOffset + this.register.GraphPosY + this.register.RegisterHoehe - 1);
 			}
 		}
 
@@ -221,11 +225,11 @@ namespace Europlan.Common {
 			return area;
 		}
 
-		public Point2D GetInputConnectionPoint(double xOffset, double yOffset) {
+		public Point2D GetInputConnectionPoint(double xOffset, double yOffset, double dist) {
 			if (this.register.GraphVorlaufRight) {
-				return new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + 1);
+				return new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing + dist, yOffset + this.register.GraphPosY + 1);
 			} else {
-				return new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + 1);
+				return new Point2D(xOffset + this.register.GraphPosX - dist, yOffset + this.register.GraphPosY + 1);
 			}
 		}
 
@@ -246,11 +250,11 @@ namespace Europlan.Common {
 		}
 
 		public PossibleHithermRegisterConnection GetOutputConnection(double xOffset, double yOffset, HithermProduct product, HithermCircuit circuit) {
-			return new PossibleHithermRegisterConnection(this.GetOutputConnectionPoint(xOffset, yOffset), GetOutputConnectionArea(xOffset, yOffset), false, true, product, circuit, this.register);
+			return new PossibleHithermRegisterConnection(this.GetOutputConnectionPoint(xOffset, yOffset, 0), GetOutputConnectionArea(xOffset, yOffset), false, true, product, circuit, this.register);
 		}
 
 		public PossibleHithermRegisterConnection GetInputConnection(double xOffset, double yOffset, HithermProduct product, HithermCircuit circuit) {
-			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register);
+			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset, 0), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register);
 		}
 
 		public override bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
@@ -328,7 +332,7 @@ namespace Europlan.Common {
 			this.startDragRegisterHeight = this.register.RegisterHoehe;
 			this.startDragRegisterWidth = this.register.RegisterBreiteForDrawing;
 			this.startRegisterRohre = this.register.Rohre;
-			
+
 			this.startInputConnection = this.GetInputConnection();
 			this.startOutputConnection = this.GetOutputConnection();
 			if (this.startInputConnection != null) {
@@ -342,15 +346,15 @@ namespace Europlan.Common {
 		}
 
 		public override bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			if (this.startInputConnection != null) {
+				this.startInputConnection.Vertices = new List<Point2D>(this.startInputConnectionVertices);
+			}
+			if (this.startOutputConnection != null) {
+				this.startOutputConnection.Vertices = new List<Point2D>(this.startOutputConnectionVertices);
+			}
 			if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
 				if (anchor == null) {
 					// move
-					if (this.startInputConnection != null) {
-						this.startInputConnection.Vertices = new List<Point2D>(this.startInputConnectionVertices);
-					}
-					if (this.startOutputConnection != null) {
-						this.startOutputConnection.Vertices = new List<Point2D>(this.startOutputConnectionVertices);
-					}
 					this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY + planPoint.Y - startDrag.Value.Y);
 				} else {
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
@@ -494,16 +498,16 @@ namespace Europlan.Common {
 			HithermCircuit circuit = product.GetCircuitForRegister(this.register);
 			foreach (HithermRegisterVerbindung link in circuit.Links) {
 				if (link.Start == this.register) {
-					Point2D newStartPoint = this.GetOutputConnectionPoint(0, 0);
+					Point2D newStartPoint = this.GetOutputConnectionPoint(0, 0, 0);
 					/*newStartPoint.X = newStartPoint.X / 100;
 					newStartPoint.Y = newStartPoint.Y / 100;*/
-					link.MoveStartPointTo(newStartPoint); // TODO
+					link.UpdateStartPoint(this, owningWall); // TODO
 				}
 				if (link.End == this.register) {
-					Point2D newEndPoint = this.GetInputConnectionPoint(0, 0);
+					Point2D newEndPoint = this.GetInputConnectionPoint(0, 0, 0);
 					/*newEndPoint.X = newEndPoint.X / 100;
 					newEndPoint.Y = newEndPoint.Y / 100;*/
-					link.MoveEndPointTo(newEndPoint); // TODO
+					link.UpdateEndPoint(this, owningWall); // TODO
 				}
 			}
 

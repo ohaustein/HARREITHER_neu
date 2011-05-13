@@ -8,6 +8,8 @@ using WW.Math.Geometry;
 
 namespace Europlan.Common {
 	public class HithermRegisterVerbindung : IGraphicalWallObject {
+		private static double WIDTH = 2.0;
+
 		private HithermRegister start;
 		private HithermRegister end;
 		private List<Point2D> vertices;
@@ -24,6 +26,7 @@ namespace Europlan.Common {
 		}
 
 		internal HithermRegisterVerbindung() {
+			this.vertices = new List<Point2D>();
 		}
 
 		public HithermRegisterVerbindung(HithermRegister start, HithermRegister end, IEnumerable<Point2D> vertices, Circuit circuit, PlannedProduct product) {
@@ -276,7 +279,56 @@ namespace Europlan.Common {
 		}
 
 		public Polygon2D GetObjectBorders(double xOffset, double yOffset) {
-			throw new Exception("The method or operation is not implemented.");
+			Nullable<Point2D> prevVertex = null;
+			Nullable<Line2D> prevBorderLeft = null;
+			Nullable<Line2D> prevBorderRight = null;
+			Line2D borderLeft, borderRight;
+			Segment2D segment;
+			Vector2D vector = new Vector2D(0, 0);
+			Vector2D vLeft = new Vector2D();
+			Vector2D vRight = new Vector2D();
+			List<Point2D> leftPoints = new List<Point2D>();
+			List<Point2D> rightPoints = new List<Point2D>();
+			Nullable<Point2D> leftPoint, rightPoint;
+			foreach (Point2D vertex in this.vertices) {
+				if (prevVertex.HasValue && vertex != prevVertex) {
+					vector = (vertex - prevVertex.Value);
+					vector.Normalize();
+					vector = vector * WIDTH / 2.0;
+					vLeft = new Vector2D(-vector.Y, vector.X);
+					vRight = new Vector2D(vector.Y, -vector.X);
+					borderLeft = new Line2D(prevVertex.Value + vLeft, vector);
+					borderRight = new Line2D(prevVertex.Value + vRight, vector);
+					if (prevBorderLeft.HasValue) {
+						leftPoint = Line2D.GetIntersection(borderLeft, prevBorderLeft.Value);
+						rightPoint = Line2D.GetIntersection(borderRight, prevBorderRight.Value);
+					} else {
+						leftPoint = null;
+						rightPoint = null;
+					}
+					if (leftPoint.HasValue) {
+						leftPoints.Add(leftPoint.Value);
+					} else {
+						leftPoints.Add(prevVertex.Value + vLeft);
+					}
+					if (rightPoint.HasValue) {
+						rightPoints.Add(rightPoint.Value);
+					} else {
+						rightPoints.Add(prevVertex.Value + vRight);
+					}
+					prevBorderLeft = borderLeft;
+					prevBorderRight = borderRight;
+				}
+				prevVertex = vertex;
+			}
+			if (vector != new Vector2D(0,0)) {
+				rightPoints.Add(prevVertex.Value + vRight);
+				leftPoints.Add(prevVertex.Value + vLeft);
+			}
+			leftPoints.Reverse();
+			Polygon2D border = new Polygon2D(leftPoints);
+			border.AddRange(rightPoints);
+			return border;
 		}
 
 		public bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
@@ -303,63 +355,138 @@ namespace Europlan.Common {
 		}
 		#endregion
 
-		public void MoveStartPointTo(Point2D newStartPoint) {
-		}
-
-		public void MoveEndPointTo(Point2D newEndPoint) {
-			if (this.vertices == null || this.vertices.Count < 3) {
+		public void UpdateStartPoint(GraphicalHithermRegisterWrapper register, GraphicalWall owningWall) {
+			if (this.vertices == null || this.vertices.Count < 2) {
 				return;
 			}
+			bool vertexAdded = false;
+			if (this.vertices.Count == 2) {
+				this.vertices.Insert(0, new Point2D(this.vertices[0]));
+				vertexAdded = true;
+			}
+			Nullable<Vector2D> offset = register.Product.AssociatedRoom.GetWallOffset(owningWall);
+			if (!offset.HasValue) {
+				return;
+			}
+			Point2D newStartPoint = register.GetOutputConnectionPoint(offset.Value.X, offset.Value.Y, 0);
+			Point2D newStartPoint5 = register.GetOutputConnectionPoint(offset.Value.X, offset.Value.Y, 5);
+			Point2D firstPoint = this.vertices[0];
+			Point2D secondPoint = this.vertices[1];
+			Vector2D delta = new Segment2D(secondPoint, firstPoint).GetDelta();
+			bool moved = false;
+			if (Math.Abs(delta.X) < 0.00001 && Math.Abs(delta.Y) >= 0.00001 && !vertexAdded) {
+				this.vertices.Insert(0, new Point2D(this.vertices[0]));
+			}
+			if (Math.Abs(delta.Y) <= 0.00001) {
+				firstPoint = this.vertices[0];
+				secondPoint = this.vertices[1];
+				Point2D thirdPoint = this.vertices[2];
+				bool upside = secondPoint.Y < thirdPoint.Y;
+				this.MoveHorizontalSegment(0, -firstPoint.Y + newStartPoint.Y);
+				firstPoint = this.vertices[0];
+				secondPoint = this.vertices[1];
+				thirdPoint = this.vertices[2];
+				if ((!register.Register.GraphVorlaufRight && newStartPoint5.X > secondPoint.X) ||
+					(register.Register.GraphVorlaufRight && newStartPoint5.X < secondPoint.X)) {
+					double tmpY;
+					if (upside) {
+						tmpY = secondPoint.Y + 10;
+					} else {
+						tmpY = secondPoint.Y - register.Height - 10;
+					}
+					this.vertices.RemoveAt(1);
+					// oder 1
+					this.vertices.Insert(1, new Point2D(secondPoint.X, tmpY));
+					this.vertices.Insert(1, new Point2D(newStartPoint5.X, tmpY));
+					this.vertices.Insert(1, new Point2D(newStartPoint5.X, newStartPoint5.Y));
+					this.vertices[0] = newStartPoint;
+				} else {
+					this.vertices[0] = newStartPoint;
+				}
+				moved = true;
+			}
+			if (!moved) {
+				this.vertices[0] = newStartPoint;
+			}
+			this.Simplify();
+			Polygon2D borders = this.GetObjectBorders(0, 0);
+			try {
+				foreach (IGraphicalWallObject obj in owningWall.Registers) {
+					if (obj.CollisionTest(borders, offset.Value.X, offset.Value.Y, true)) {
+						this.vertices.Clear();
+						break;
+					}
+				}
+			} catch {
+				// the borders-polygon is invalid as it intersects itself
+				this.vertices.Clear();
+			}
+		}
+
+		public void UpdateEndPoint(GraphicalHithermRegisterWrapper register, GraphicalWall owningWall) {
+			if (this.vertices == null || this.vertices.Count < 2) {
+				return;
+			}
+			bool vertexAdded = false;
+			if (this.vertices.Count == 2) {
+				this.vertices.Insert(this.vertices.Count - 1, new Point2D(this.vertices[this.vertices.Count - 1]));
+				vertexAdded = true;
+			}
+			Nullable<Vector2D> offset = register.Product.AssociatedRoom.GetWallOffset(owningWall);
+			if (!offset.HasValue) {
+				return;
+			}
+			Point2D newEndPoint = register.GetInputConnectionPoint(offset.Value.X, offset.Value.Y, 0);
+			Point2D newEndPoint5 = register.GetInputConnectionPoint(offset.Value.X, offset.Value.Y, 5);
 			Point2D lastPoint = this.vertices[this.vertices.Count - 1];
 			Point2D prevLastPoint = this.vertices[this.vertices.Count - 2];
-			//Segment2D lastSegment = new Segment2D(prevLastPoint, lastPoint);
 			Vector2D delta = new Segment2D(prevLastPoint, lastPoint).GetDelta();
 			bool moved = false;
-			if (Math.Abs(delta.X) <= Math.Abs(delta.Y)) {
-				if (Math.Abs(delta.X) <= 0.00001) {
-					this.MoveVerticalSegment(this.vertices.Count - 2, - lastPoint.X + newEndPoint.X);
-					lastPoint = this.vertices[this.vertices.Count - 1];
-					prevLastPoint = this.vertices[this.vertices.Count -2];
-					if (lastPoint.X < prevLastPoint.X && newEndPoint.X > prevLastPoint.X) {
-						Point2D prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-						double tmpY = prevLastPoint.Y > prevPrevLastPoint.Y ? (prevLastPoint.Y - 10) : (prevLastPoint.Y + 10);
-						this.vertices.RemoveAt(this.vertices.Count - 2);
-						this.vertices.Insert(this.vertices.Count - 1, new Point2D(prevLastPoint.X, tmpY));
-						this.vertices.Insert(this.vertices.Count - 1, new Point2D(newEndPoint.X + 5, tmpY));
-						this.vertices.Insert(this.vertices.Count - 1, new Point2D(newEndPoint.X + 5, lastPoint.Y));
-						this.vertices[this.vertices.Count - 1] = newEndPoint;
-					} else if (lastPoint.X > prevLastPoint.X && newEndPoint.X < prevLastPoint.X) {
-						//this.vertices
-						// TODO
+			if (Math.Abs(delta.X) < 0.00001 && Math.Abs(delta.Y) >= 0.00001 && !vertexAdded) {
+				this.vertices.Insert(this.vertices.Count - 1, new Point2D(this.vertices[this.vertices.Count - 1]));
+			}
+			if (Math.Abs(delta.Y) <= 0.00001) {
+				lastPoint = this.vertices[this.vertices.Count - 1];
+				prevLastPoint = this.vertices[this.vertices.Count - 2];
+				Point2D prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
+				bool upside = prevLastPoint.Y < prevPrevLastPoint.Y;
+				this.MoveHorizontalSegment(this.vertices.Count - 2, -lastPoint.Y + newEndPoint.Y);
+				lastPoint = this.vertices[this.vertices.Count - 1];
+				prevLastPoint = this.vertices[this.vertices.Count - 2];
+				prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
+				if ((register.Register.GraphVorlaufRight && newEndPoint5.X > prevLastPoint.X) ||
+					(!register.Register.GraphVorlaufRight && newEndPoint5.X < prevLastPoint.X)) {
+					double tmpY;
+					if (upside) {
+						tmpY = prevLastPoint.Y + register.Height + 10;
 					} else {
-						this.vertices[this.vertices.Count - 1] = newEndPoint;
+						tmpY = prevLastPoint.Y - 10;
 					}
-					moved = true;
+					this.vertices.RemoveAt(this.vertices.Count - 2);
+					this.vertices.Insert(this.vertices.Count - 1, new Point2D(prevLastPoint.X, tmpY));
+					this.vertices.Insert(this.vertices.Count - 1, new Point2D(newEndPoint5.X, tmpY));
+					this.vertices.Insert(this.vertices.Count - 1, new Point2D(newEndPoint5.X, lastPoint.Y));
+					this.vertices[this.vertices.Count - 1] = newEndPoint;
+				} else {
+					this.vertices[this.vertices.Count - 1] = newEndPoint;
 				}
-			} else {
-				if (Math.Abs(delta.Y) <= 0.00001) {
-					this.MoveHorizontalSegment(this.vertices.Count - 2, - lastPoint.Y + newEndPoint.Y);
-					lastPoint = this.vertices[this.vertices.Count - 1];
-					prevLastPoint = this.vertices[this.vertices.Count - 2];
-					if (lastPoint.X < prevLastPoint.X && newEndPoint.X >= prevLastPoint.X) {
-						Point2D prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-						double tmpY = prevLastPoint.Y > prevPrevLastPoint.Y ? (prevLastPoint.Y - 10) : (prevLastPoint.Y + 10);
-						this.vertices.RemoveAt(this.vertices.Count - 2);
-						this.vertices.Insert(this.vertices.Count - 1, new Point2D(prevLastPoint.X, tmpY));
-						this.vertices.Insert(this.vertices.Count - 1, new Point2D(lastPoint.X + 5, tmpY));
-						this.vertices.Insert(this.vertices.Count - 1, new Point2D(lastPoint.X + 5, lastPoint.Y));
-					} else if (lastPoint.X > prevLastPoint.X && newEndPoint.X <= prevLastPoint.X) {
-						Console.WriteLine("blub");
-						//this.vertices
-						// TODO
-					} else {
-						this.vertices[this.vertices.Count - 1] = newEndPoint;
-					}
-					moved = true;
-				}
+				moved = true;
 			}
 			if (!moved) {
 				this.vertices[this.vertices.Count - 1] = newEndPoint;
+			}
+			this.Simplify();
+			Polygon2D borders = this.GetObjectBorders(0, 0);
+			try {
+				foreach (IGraphicalWallObject obj in owningWall.Registers) {
+					if (obj.CollisionTest(borders, offset.Value.X, offset.Value.Y, true)) {
+						this.vertices.Clear();
+						break;
+					}
+				}
+			} catch {
+				// the borders-polygon is invalid as it intersects itself
+				this.vertices.Clear();
 			}
 		}
 
@@ -379,6 +506,48 @@ namespace Europlan.Common {
 			Vector2D deltaVector = new Vector2D(0, delta);
 			this.vertices[segmentIndex] += deltaVector;
 			this.vertices[segmentIndex + 1] += deltaVector;
+		}
+
+		public void Simplify() {
+			Point2D vertex, prevVertex, nextVertex;
+			for (int i = 1; i < this.vertices.Count - 1; i++) {
+				prevVertex = this.vertices[i - 1];
+				vertex = this.vertices[i];
+				if (vertex == prevVertex) {
+					this.vertices.RemoveAt(i);
+					i--;
+				} else {
+					nextVertex = this.vertices[i + 1];
+					if (new Segment2D(prevVertex, nextVertex).GetDistance(vertex) < 0.0001) {
+						this.vertices.RemoveAt(i);
+						i--;
+					}
+				}
+			}
+			if (this.vertices[this.vertices.Count - 2] == this.vertices[this.vertices.Count - 1]) {
+				this.vertices.RemoveAt(this.vertices.Count - 1);
+			}
+			for (int i = 1; i < this.vertices.Count; i++) {
+				Segment2D seg1 = new Segment2D(this.vertices[i - 1], this.vertices[i]);
+				for (int j = i + 2; j < this.vertices.Count; j++) {
+					Segment2D seg2 = new Segment2D(this.vertices[j - 1], this.vertices[j]);
+					double[] pArr, qArr;
+					if (Segment2D.GetIntersectionParameters(seg1, seg2, out pArr, out qArr) && pArr.Length == 1) {
+						Point2D intersection = seg1.Start + seg1.GetDelta() * pArr[0];
+						int count = j - i;
+						for (int k = 0; k < count; k++) {
+						//for (int k = i; k < j; k++) {
+							j--;
+							this.vertices.RemoveAt(i);
+						}
+						j++;
+						this.vertices.Insert(i, intersection);
+						if (j < i + 1) {
+							j = i + 1;
+						}
+					}
+				}
+			}
 		}
 	}
 }

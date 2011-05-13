@@ -27,5 +27,7 @@ namespace Europlan.Common {
 		bool PlannerDragEnd(Point2D planPoint, Point pointInControl, MouseButtons button);
 
 		bool PlannerKeyPress(Keys key);
+
+		IGraphicalWallObject PickObject(Point2D mousePosInPlan);
 	}
 }

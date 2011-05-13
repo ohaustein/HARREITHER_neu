@@ -432,6 +432,9 @@ namespace Europlan.Common {
 						}
 						xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100;
 					}
+					if (pickedObject == null && this.productPlanner != null) {
+						pickedObject = this.productPlanner.PickObject(mousePosInPlan);
+					}
 					if (pickedObject != null) {
 						invalidate = true;
 						this.SelectedObject = pickedObject;
