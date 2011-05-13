@@ -225,8 +225,8 @@ namespace Europlan.Common {
 					UpdateModifyRegisterPanel(selectedObject as GraphicalHithermRegisterWrapper);
 				} else if (selectedObject is GraphicalWallObstacle) {
 					UpdateModifyObstaclesPanel(selectedObject as GraphicalWallObstacle);
-				} else if (selectedObject is GraphicalProductConnection) {
-					UpdateModifyConnectionPanel(selectedObject as GraphicalProductConnection);
+				} else if (selectedObject is HithermRegisterVerbindung) {
+					UpdateModifyConnectionPanel(selectedObject as HithermRegisterVerbindung);
 				}
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
@@ -332,7 +332,7 @@ namespace Europlan.Common {
 			updateOngoing = false;
 		}
 
-		private void UpdateModifyConnectionPanel(GraphicalProductConnection connection) {
+		private void UpdateModifyConnectionPanel(HithermRegisterVerbindung connection) {
 			updateOngoing = true;
 			this.panelModifyConnection.BringToFront();
 			if (connection != null) {
@@ -404,7 +404,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void UpdateModifyConnectionPanelButtons(GraphicalProductConnection connection) {
+		private void UpdateModifyConnectionPanelButtons(HithermRegisterVerbindung connection) {
 			if (connection != null) {
 
 			} else {
