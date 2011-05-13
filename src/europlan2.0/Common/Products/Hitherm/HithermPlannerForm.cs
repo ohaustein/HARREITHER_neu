@@ -22,6 +22,11 @@ namespace Europlan.Common {
 			this.hithermPlanner.Product = product;
 			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
 			this.panelDefineWalls.BringToFront();
+
+			this.graphicalWallPanel.SelectedObject = null;
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_SELECT_OBJECT;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+						
 			UpdateDefineWallsPanelButtons(null);
 			ApplyButtonCheckedState(this.btnPick);
 		}
@@ -174,10 +179,11 @@ namespace Europlan.Common {
 		private void btnObstacle_Click(object sender, EventArgs e) {
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
-			//this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_OBSTACLE;
+			UpdateModifyObstaclesPanel(null);
+			this.panelModifyObstacle.BringToFront();
 			ApplyButtonCheckedState(this.btnObstacle);
 		}
-
 		private void btnRegisterVertical_Click(object sender, EventArgs e) {
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
@@ -202,7 +208,8 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_CLICK;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_CONNECTION;
-			// panel.BringToFront()...
+			UpdateModifyConnectionPanel(null);
+			this.panelModifyConnection.BringToFront();
 			ApplyButtonCheckedState(this.btnConnection);
 		}
 
@@ -216,6 +223,10 @@ namespace Europlan.Common {
 					UpdateDefineWallsPanel(selectedObject as GraphicalWall);
 				} else if (selectedObject is GraphicalHithermRegisterWrapper) {
 					UpdateModifyRegisterPanel(selectedObject as GraphicalHithermRegisterWrapper);
+				} else if (selectedObject is GraphicalWallObstacle) {
+					UpdateModifyObstaclesPanel(selectedObject as GraphicalWallObstacle);
+				} else if (selectedObject is GraphicalProductConnection) {
+					UpdateModifyConnectionPanel(selectedObject as GraphicalProductConnection);
 				}
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
@@ -309,6 +320,31 @@ namespace Europlan.Common {
 			updateOngoing = false;
 		}
 
+		private void UpdateModifyObstaclesPanel(GraphicalWallObstacle obstacle) {
+			updateOngoing = true;
+			this.panelModifyObstacle.BringToFront();
+			if (obstacle != null) {
+
+			} else {
+
+			}
+			UpdateModifyObstaclesPanelButtons(obstacle);
+			updateOngoing = false;
+		}
+
+		private void UpdateModifyConnectionPanel(GraphicalProductConnection connection) {
+			updateOngoing = true;
+			this.panelModifyConnection.BringToFront();
+			if (connection != null) {
+
+			} else {
+
+			}
+			UpdateModifyConnectionPanelButtons(connection);
+			updateOngoing = false;
+		}
+
+		
 		private void UpdateDefineWallsPanelButtons(GraphicalWall wall) {
 			if (wall != null) {
 				this.btnWallSelectConstruction.Enabled = true;
@@ -357,6 +393,22 @@ namespace Europlan.Common {
 				this.btnRegisterRevert.Enabled = false;
 				this.btnRegisterConnect.Enabled = false;
 				this.btnRegisterDelete.Enabled = false;
+			}
+		}
+
+		private void UpdateModifyObstaclesPanelButtons(GraphicalWallObstacle obstacle) {
+			if (obstacle != null) {
+
+			} else {
+
+			}
+		}
+
+		private void UpdateModifyConnectionPanelButtons(GraphicalProductConnection connection) {
+			if (connection != null) {
+
+			} else {
+
 			}
 		}
 

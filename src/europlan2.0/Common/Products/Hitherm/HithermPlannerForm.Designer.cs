@@ -36,6 +36,7 @@ namespace Europlan.Common {
 			this.btnRegisterHorizontal = new System.Windows.Forms.ToolStripButton();
 			this.btnConnection = new System.Windows.Forms.ToolStripButton();
 			this.panelTop = new System.Windows.Forms.Panel();
+			this.panelModifyObstacle = new System.Windows.Forms.Panel();
 			this.panelDefineWalls = new System.Windows.Forms.Panel();
 			this.btnWallHelpLine = new System.Windows.Forms.Button();
 			this.btnWallEdgeDistance = new System.Windows.Forms.Button();
@@ -79,6 +80,7 @@ namespace Europlan.Common {
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.lblRegisterSelectedRegister = new System.Windows.Forms.Label();
+			this.panelModifyConnection = new System.Windows.Forms.Panel();
 			this.label7 = new System.Windows.Forms.Label();
 			this.lblHeat = new System.Windows.Forms.Label();
 			this.lblCool = new System.Windows.Forms.Label();
@@ -195,7 +197,7 @@ namespace Europlan.Common {
 			this.btnPick.Image = ((System.Drawing.Image)(resources.GetObject("btnPick.Image")));
 			this.btnPick.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnPick.Name = "btnPick";
-			this.btnPick.Size = new System.Drawing.Size(21, 20);
+			this.btnPick.Size = new System.Drawing.Size(29, 20);
 			this.btnPick.Text = "Objekte bearbeiten";
 			this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
 			// 
@@ -205,7 +207,7 @@ namespace Europlan.Common {
 			this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
 			this.btnMove.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnMove.Name = "btnMove";
-			this.btnMove.Size = new System.Drawing.Size(21, 20);
+			this.btnMove.Size = new System.Drawing.Size(29, 20);
 			this.btnMove.Text = "Ausschnitt verschieben";
 			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
 			// 
@@ -215,7 +217,7 @@ namespace Europlan.Common {
 			this.btnWall.Image = ((System.Drawing.Image)(resources.GetObject("btnWall.Image")));
 			this.btnWall.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnWall.Name = "btnWall";
-			this.btnWall.Size = new System.Drawing.Size(21, 20);
+			this.btnWall.Size = new System.Drawing.Size(29, 20);
 			this.btnWall.Text = "Wände";
 			this.btnWall.Click += new System.EventHandler(this.btnWall_Click);
 			// 
@@ -225,7 +227,7 @@ namespace Europlan.Common {
 			this.btnObstacle.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacle.Image")));
 			this.btnObstacle.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnObstacle.Name = "btnObstacle";
-			this.btnObstacle.Size = new System.Drawing.Size(21, 20);
+			this.btnObstacle.Size = new System.Drawing.Size(29, 20);
 			this.btnObstacle.Text = "Fenster und Türen";
 			this.btnObstacle.Click += new System.EventHandler(this.btnObstacle_Click);
 			// 
@@ -235,7 +237,7 @@ namespace Europlan.Common {
 			this.btnRegisterVertical.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterVertical.Image")));
 			this.btnRegisterVertical.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRegisterVertical.Name = "btnRegisterVertical";
-			this.btnRegisterVertical.Size = new System.Drawing.Size(21, 20);
+			this.btnRegisterVertical.Size = new System.Drawing.Size(29, 20);
 			this.btnRegisterVertical.Text = "Wärmeregister senkrecht";
 			this.btnRegisterVertical.Click += new System.EventHandler(this.btnRegisterVertical_Click);
 			// 
@@ -245,7 +247,7 @@ namespace Europlan.Common {
 			this.btnRegisterHorizontal.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterHorizontal.Image")));
 			this.btnRegisterHorizontal.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRegisterHorizontal.Name = "btnRegisterHorizontal";
-			this.btnRegisterHorizontal.Size = new System.Drawing.Size(21, 20);
+			this.btnRegisterHorizontal.Size = new System.Drawing.Size(29, 20);
 			this.btnRegisterHorizontal.Text = "Wärmeregister waagrecht";
 			this.btnRegisterHorizontal.Click += new System.EventHandler(this.btnRegisterHorizontal_Click);
 			// 
@@ -255,19 +257,29 @@ namespace Europlan.Common {
 			this.btnConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnConnection.Image")));
 			this.btnConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnConnection.Name = "btnConnection";
-			this.btnConnection.Size = new System.Drawing.Size(21, 20);
+			this.btnConnection.Size = new System.Drawing.Size(29, 20);
 			this.btnConnection.Text = "Anbindeleitungen";
 			this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
 			// 
 			// panelTop
 			// 
+			this.panelTop.Controls.Add(this.panelModifyObstacle);
 			this.panelTop.Controls.Add(this.panelDefineWalls);
 			this.panelTop.Controls.Add(this.panelModifyHitherm);
+			this.panelTop.Controls.Add(this.panelModifyConnection);
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelTop.Location = new System.Drawing.Point(24, 25);
 			this.panelTop.Name = "panelTop";
 			this.panelTop.Size = new System.Drawing.Size(862, 91);
 			this.panelTop.TabIndex = 2;
+			// 
+			// panelModifyObstacle
+			// 
+			this.panelModifyObstacle.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelModifyObstacle.Location = new System.Drawing.Point(0, 0);
+			this.panelModifyObstacle.Name = "panelModifyObstacle";
+			this.panelModifyObstacle.Size = new System.Drawing.Size(862, 91);
+			this.panelModifyObstacle.TabIndex = 23;
 			// 
 			// panelDefineWalls
 			// 
@@ -840,6 +852,14 @@ namespace Europlan.Common {
 			this.lblRegisterSelectedRegister.TabIndex = 1;
 			this.lblRegisterSelectedRegister.Text = "Keine Wand ausgewählt";
 			// 
+			// panelModifyConnection
+			// 
+			this.panelModifyConnection.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelModifyConnection.Location = new System.Drawing.Point(0, 0);
+			this.panelModifyConnection.Name = "panelModifyConnection";
+			this.panelModifyConnection.Size = new System.Drawing.Size(862, 91);
+			this.panelModifyConnection.TabIndex = 0;
+			// 
 			// label7
 			// 
 			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1408,6 +1428,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Panel panelBottom;
 		private System.Windows.Forms.ToolStripButton btnConnection;
 		private System.Windows.Forms.ToolStripButton btnRegisterHorizontal;
+		private System.Windows.Forms.Panel panelModifyObstacle;
+		private System.Windows.Forms.Panel panelModifyConnection;
 
 
 	}
