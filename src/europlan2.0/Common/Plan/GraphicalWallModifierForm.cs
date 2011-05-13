@@ -25,8 +25,10 @@ namespace Europlan.Common {
 			this.SetLanguage();
 			this.graphicalWallModifier.Room = room;
 			this.panel.Plan = room.AssociatedPlan;
-			this.panel.Mode = PlanMode.PM_MOVE;
+			this.graphicalWallModifier.Mode = GraphicalWallModifier.GraphicalWallModifierMode.GWM_PICK;
+			this.panel.Mode = PlanMode.PM_PLANNER_CLICK;
 			this.UpdateControls();
+			this.DialogResult = DialogResult.Ignore;
 		}
 
 		public PlanPanel Panel {
@@ -40,8 +42,18 @@ namespace Europlan.Common {
 		}
 
 		private void GraphicalWallModifierForm_FormClosing(object sender, FormClosingEventArgs e) {
-			DialogResult result = MessageBox.Show("Wollen Sie die definierten Wände übernehmen?", "Wände übernehmen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-			if (result == DialogResult.Yes) {
+			bool create = false;
+			if (this.DialogResult == DialogResult.Cancel) {
+				if (e.CloseReason == CloseReason.UserClosing) {
+					DialogResult result = MessageBox.Show("Wollen Sie die definierten Wände übernehmen?", "Wände übernehmen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					if (result == DialogResult.Yes) {
+						create = true;
+					} 
+				} 
+			} else if (this.DialogResult == DialogResult.OK) {
+				create = true;
+			} 
+			if (create) {
 				List<GraphicalWall> toDelete = new List<GraphicalWall>();
 				foreach (GraphicalWall wall in graphicalWallModifier.Room.Walls) {
 					if (!wall.Enabled) {
@@ -54,6 +66,7 @@ namespace Europlan.Common {
 			} else {
 				graphicalWallModifier.Room.Walls.Clear();
 			}
+
 			SettingsKey settings = SettingsFile.Settings["GraphicalWallModifierForm"];
 			settings.StorePoint("Location", this.Location);
 			settings.StoreSize("Size", this.Size);
@@ -109,11 +122,11 @@ namespace Europlan.Common {
 			this.btnMove.Checked = false;
 			this.btnPickWall.Checked = false;
 			this.btnObstacle.Checked = false;
-			this.panelBottom.Visible = true;
+			this.panelWall.Visible = true;
 
 			if (this.panel.Mode == PlanMode.PM_MOVE) {
 				this.btnMove.Checked = true;
-				this.panelBottom.Visible = false;
+				this.panelWall.Visible = false;
 			} else {
 				if (this.graphicalWallModifier.Mode == GraphicalWallModifier.GraphicalWallModifierMode.GWM_PICK) {
 					this.btnPickWall.Checked = true;

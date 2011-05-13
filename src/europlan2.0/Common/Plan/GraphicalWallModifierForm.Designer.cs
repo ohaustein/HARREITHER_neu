@@ -33,6 +33,8 @@ namespace Europlan.Common {
 			this.btnPickWall = new System.Windows.Forms.ToolStripButton();
 			this.btnObstacle = new System.Windows.Forms.ToolStripButton();
 			this.panelBottom = new System.Windows.Forms.Panel();
+			this.btnOk = new System.Windows.Forms.Button();
+			this.btnCancel = new System.Windows.Forms.Button();
 			this.panelWall = new System.Windows.Forms.Panel();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.numWallVertical = new Europlan.Common.NumericBox();
@@ -133,20 +135,46 @@ namespace Europlan.Common {
 			// 
 			// panelBottom
 			// 
+			this.panelBottom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.panelBottom.Controls.Add(this.btnOk);
+			this.panelBottom.Controls.Add(this.btnCancel);
 			this.panelBottom.Controls.Add(this.panelWall);
-			this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panelBottom.Location = new System.Drawing.Point(0, 384);
+			this.panelBottom.Location = new System.Drawing.Point(0, 378);
 			this.panelBottom.Name = "panelBottom";
-			this.panelBottom.Size = new System.Drawing.Size(679, 78);
+			this.panelBottom.Size = new System.Drawing.Size(679, 84);
 			this.panelBottom.TabIndex = 3;
+			// 
+			// btnOk
+			// 
+			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.btnOk.Location = new System.Drawing.Point(475, 49);
+			this.btnOk.Name = "btnOk";
+			this.btnOk.Size = new System.Drawing.Size(93, 23);
+			this.btnOk.TabIndex = 1;
+			this.btnOk.Text = "OK";
+			this.btnOk.UseVisualStyleBackColor = true;
+			// 
+			// btnCancel
+			// 
+			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.Location = new System.Drawing.Point(574, 49);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(93, 23);
+			this.btnCancel.TabIndex = 2;
+			this.btnCancel.Text = "Abbrechen";
+			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
 			// panelWall
 			// 
+			this.panelWall.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.panelWall.Controls.Add(this.groupBox2);
 			this.panelWall.Controls.Add(this.groupBox1);
 			this.panelWall.Controls.Add(this.chkStartWall);
 			this.panelWall.Controls.Add(this.chkEnable);
-			this.panelWall.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelWall.Location = new System.Drawing.Point(0, 0);
 			this.panelWall.Name = "panelWall";
 			this.panelWall.Size = new System.Drawing.Size(679, 78);
@@ -162,7 +190,7 @@ namespace Europlan.Common {
 			this.groupBox2.Controls.Add(this.lblWallVertical);
 			this.groupBox2.Controls.Add(this.label2);
 			this.groupBox2.Controls.Add(this.lblWallHorizontal);
-			this.groupBox2.Location = new System.Drawing.Point(324, 9);
+			this.groupBox2.Location = new System.Drawing.Point(164, 9);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(217, 66);
 			this.groupBox2.TabIndex = 17;
@@ -269,7 +297,7 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Left)));
 			this.groupBox1.Controls.Add(this.btnWallSelectConstruction);
 			this.groupBox1.Controls.Add(this.txtWallConstruction);
-			this.groupBox1.Location = new System.Drawing.Point(172, 9);
+			this.groupBox1.Location = new System.Drawing.Point(12, 9);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(146, 66);
 			this.groupBox1.TabIndex = 3;
@@ -300,7 +328,7 @@ namespace Europlan.Common {
 			// chkStartWall
 			// 
 			this.chkStartWall.AutoSize = true;
-			this.chkStartWall.Location = new System.Drawing.Point(12, 30);
+			this.chkStartWall.Location = new System.Drawing.Point(513, 26);
 			this.chkStartWall.Name = "chkStartWall";
 			this.chkStartWall.Size = new System.Drawing.Size(154, 17);
 			this.chkStartWall.TabIndex = 1;
@@ -311,7 +339,7 @@ namespace Europlan.Common {
 			// chkEnable
 			// 
 			this.chkEnable.AutoSize = true;
-			this.chkEnable.Location = new System.Drawing.Point(12, 9);
+			this.chkEnable.Location = new System.Drawing.Point(387, 26);
 			this.chkEnable.Name = "chkEnable";
 			this.chkEnable.Size = new System.Drawing.Size(108, 17);
 			this.chkEnable.TabIndex = 0;
@@ -337,8 +365,10 @@ namespace Europlan.Common {
 			// 
 			// GraphicalWallModifierForm
 			// 
+			this.AcceptButton = this.btnOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(679, 462);
 			this.Controls.Add(this.panelBottom);
 			this.Controls.Add(this.panel);
@@ -389,6 +419,8 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblWallVertical;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label lblWallHorizontal;
+		private System.Windows.Forms.Button btnOk;
+		private System.Windows.Forms.Button btnCancel;
 
 
 	}
