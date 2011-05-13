@@ -272,7 +272,7 @@ namespace Europlan.Common {
 
 			try {
 				return Polygon2D.GetIntersection(list1, list2).Count > 0;
-			} catch (Exception e) {
+			} catch {
 				return true;
 			}
 		}

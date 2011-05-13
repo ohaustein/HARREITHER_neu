@@ -40,6 +40,8 @@ namespace Europlan.Common {
 		private List<PossibleConnection> highlightedConnections = new List<PossibleConnection>();
 		//private List<Point2D> newConnectionVertices = new List<Point2D>();
 		private HithermRegisterVerbindung newConnection = new HithermRegisterVerbindung();
+		private HithermRegisterVerbindung newConnectionDraw = new HithermRegisterVerbindung();
+		private bool newConnectionOk = true;
 
 		public HithermRegister.RohrabstandEnum NewRegisterRohrabstand {
 			get { return newRegisterRohrabstand; }
@@ -150,8 +152,11 @@ namespace Europlan.Common {
 				}
 				if (this.startConnection != null) {
 					PossibleConnection endConn;
-					List<Point2D> nextVertices = this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn);
-					bool first = true;
+					this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
+					//List<Point2D> nextVertices = this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn);
+					this.newConnectionDraw.Vertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn));
+					this.newConnectionDraw.PaintObject(g, Color.Green, !this.newConnectionDraw.CheckValidity(null, 0, 0));
+					/*bool first = true;
 					PointF oldPoint = new PointF();
 					PointF newPoint;
 					Pen newConnectionPen = new Pen(Color.Green, 2);
@@ -172,7 +177,7 @@ namespace Europlan.Common {
 							g.DrawLine(newConnectionPen, oldPoint, newPoint);
 						}
 						oldPoint = newPoint;
-					}
+					}*/
 				}
 			}
 		}
@@ -443,6 +448,12 @@ namespace Europlan.Common {
 						Room room = this.product.AssociatedRoom;
 					}
 				}
+				if (this.product == null) {
+					this.newConnectionDraw = new HithermRegisterVerbindung(null, null, new List<Point2D>(), null, null);
+				} else {
+					this.newConnectionDraw = new HithermRegisterVerbindung(null, null, new List<Point2D>(), null, Project.Instance.GetPlannedProduct(this.product));
+				}
+
 			}
 		}
 

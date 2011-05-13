@@ -686,6 +686,63 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+
+		public WW.Math.Geometry.Polygon2D GetTotalWallsArea() {
+			WW.Math.Geometry.Polygon2D area = new WW.Math.Geometry.Polygon2D();
+			if (this.walls == null) {
+				return area;
+			}
+			foreach (GraphicalWall w in this.walls) {
+				GraphicalWall wall = w;
+				while (wall != null) {
+					Vector2D offset = this.GetWallOffset(wall).Value * 100;
+					WW.Math.Geometry.Polygon2D wallBorder = wall.GetObjectBorders(offset.X, offset.Y);
+					if (wallBorder.IsClockwise()) {
+						wallBorder.Reverse();
+					}
+					if (area.Count == 0) {
+						area.AddRange(wallBorder);
+					} else {
+						List<WW.Math.Geometry.Polygon2D> list1 = new List<WW.Math.Geometry.Polygon2D>();
+						list1.Add(area);
+						List<WW.Math.Geometry.Polygon2D> list2 = new List<WW.Math.Geometry.Polygon2D>();
+						list2.Add(wallBorder);
+						List<WW.Math.Geometry.Polygon2D> result = WW.Math.Geometry.Polygon2D.GetUnion(list1, list2);
+						if (result.Count == 1) {
+							area = result[0];
+							if (area.IsClockwise()) {
+								area.Reverse();
+							}
+						} else {
+							throw new Exception();
+						}
+					}
+					wall = wall.DachSchraege;
+				}
+			}
+			return area;
+		}
+
+		public bool CollisionTest(WW.Math.Geometry.Polygon2D polygon) {
+			WW.Math.Geometry.Polygon2D wall = this.GetTotalWallsArea();
+			bool outside = false;
+			foreach (Point2D point in polygon) {
+				if (!WW.Math.Geometry.Polygon2D.IsInside(point, wall)) {
+					IList<WW.Math.Geometry.Segment2D> segments = new List<WW.Math.Geometry.Segment2D>();
+					WW.Math.Geometry.Polygon2D.GetSegments(wall, segments);
+					outside = true;
+					foreach (WW.Math.Geometry.Segment2D segment in segments) {
+						if (segment.GetDistance(point) < 0.01) {
+							outside = false;
+						}
+					}
+					if (outside) {
+						break;
+					}
+				}
+			}
+			return outside;
+		}
 	}
 
 }

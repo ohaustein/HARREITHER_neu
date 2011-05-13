@@ -71,11 +71,14 @@ namespace Europlan.Common {
 			get { return false; }
 		}
 
-		private void Draw(Graphics g, Color c) {
+		public void PaintObject(Graphics g, Color c, bool error) {
 			PointF oldVertex = PointF.Empty;
 			PointF newVertex;
 			bool first = true;
 			Pen p = new Pen(c, 2);
+			if (error) {
+				p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+			}
 			p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
 			foreach (Point2D vertex in vertices) {
 				newVertex = new PointF((float)vertex.X, (float)vertex.Y);
@@ -268,7 +271,7 @@ namespace Europlan.Common {
 		}
 
 		public void PaintObject(Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
-			this.Draw(g, (this == selectedObject) ? Color.Red : Color.Black);
+			this.PaintObject(g, (this == selectedObject) ? Color.Red : Color.Black, false);
 		}
 
 		public IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset) {
@@ -348,9 +351,9 @@ namespace Europlan.Common {
 					AnchorTypeEnum type = AnchorTypeEnum.ANCHOR_NONE;
 					if (prev.Value == vertex) {
 						type = lastHorizontal ? AnchorTypeEnum.ANCHOR_MOVE_LEFT_RIGHT : AnchorTypeEnum.ANCHOR_MOVE_UP_DOWN;
-					} else if (prev.Value.X == vertex.X) {
+					} else if (Math.Abs(prev.Value.X - vertex.X) < 0.00001) {
 						type = AnchorTypeEnum.ANCHOR_MOVE_LEFT_RIGHT;
-					} else if (prev.Value.Y == vertex.Y) {
+					} else if (Math.Abs(prev.Value.Y - vertex.Y) < 0.00001) {
 						type = AnchorTypeEnum.ANCHOR_MOVE_UP_DOWN;
 					} else {
 						// TODO
@@ -368,6 +371,9 @@ namespace Europlan.Common {
 		public bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
 			Room room = this.Product.Product.AssociatedRoom;
 			Polygon2D linkBorders = this.GetObjectBorders(offsetX, offsetY);
+			if (room.CollisionTest(linkBorders)) {
+				return false;
+			}
 			foreach (GraphicalWall wall in room.Walls) {
 				Nullable<Vector2D> offset = room.GetWallOffset(wall);
 				if (!offset.HasValue) {
