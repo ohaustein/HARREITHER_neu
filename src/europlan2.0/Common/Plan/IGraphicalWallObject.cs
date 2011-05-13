@@ -32,12 +32,14 @@ namespace Europlan.Common {
 		ANCHOR_SCALE_BOTTOM_RIGHT = ANCHOR_SCALE_BOTTOM | ANCHOR_SCALE_RIGHT,
 		ANCHOR_SCALE_BOTTOM_LEFT = ANCHOR_SCALE_BOTTOM | ANCHOR_SCALE_LEFT,
 		ANCHOR_SCALE_TOP_LEFT = ANCHOR_SCALE_TOP | ANCHOR_SCALE_LEFT,
+		ANCHOR_MOVE_LEFT_RIGHT = ANCHOR_SCALE_LEFT | ANCHOR_SCALE_RIGHT,
+		ANCHOR_MOVE_UP_DOWN = ANCHOR_SCALE_TOP | ANCHOR_SCALE_BOTTOM
 	}
 
 	public class Anchor {
-		private AnchorTypeEnum anchorType = AnchorTypeEnum.ANCHOR_NONE;
-		private Point2D position = Point2D.Zero;
-		private IGraphicalWallObject owner = null;
+		protected AnchorTypeEnum anchorType = AnchorTypeEnum.ANCHOR_NONE;
+		protected Point2D position = Point2D.Zero;
+		protected IGraphicalWallObject owner = null;
 
 		public Anchor(double x, double y, AnchorTypeEnum anchorType, IGraphicalWallObject owner) {
 			this.position = new Point2D(x, y); ;
@@ -68,9 +70,11 @@ namespace Europlan.Common {
 				switch (this.anchorType) {
 					case AnchorTypeEnum.ANCHOR_NONE:
 						return Cursors.No;
+					case AnchorTypeEnum.ANCHOR_MOVE_LEFT_RIGHT:
 					case AnchorTypeEnum.ANCHOR_SCALE_LEFT:
 					case AnchorTypeEnum.ANCHOR_SCALE_RIGHT:
 						return Cursors.SizeWE;
+					case AnchorTypeEnum.ANCHOR_MOVE_UP_DOWN:
 					case AnchorTypeEnum.ANCHOR_SCALE_TOP:
 					case AnchorTypeEnum.ANCHOR_SCALE_BOTTOM:
 						return Cursors.SizeNS;
@@ -86,16 +90,16 @@ namespace Europlan.Common {
 			}
 		}
 
-		public void PaintAnchor(Graphics g, double xOffset, double yOffset, double scale) {
+		public virtual void PaintAnchor(Graphics g, double xOffset, double yOffset, double scale) {
 			Brush b = new SolidBrush(Color.DarkBlue);
 			g.FillRectangle(b, (float)(this.position.X + xOffset - 3.0 / scale), (float)(this.position.Y + yOffset - 3.0 / scale), (float)(6.0 / scale), (float)(6.0 / scale));
 		}
 
-		private bool IsInside(double value, double lowerBorder, double upperBorder) {
+		protected bool IsInside(double value, double lowerBorder, double upperBorder) {
 			return value >= lowerBorder && value <= upperBorder;
 		}
 
-		public bool HitTest(Point2D planPoint, double xOffset, double yOffset, double scale) {
+		public virtual bool HitTest(Point2D planPoint, double xOffset, double yOffset, double scale) {
 			return IsInside(planPoint.X, this.position.X + xOffset - 3.5 / scale, this.position.X + xOffset + 3.5 / scale) && IsInside(planPoint.Y, this.position.Y + yOffset - 3.5 / scale, this.position.Y + yOffset + 3.5 / scale);
 		}
 	}

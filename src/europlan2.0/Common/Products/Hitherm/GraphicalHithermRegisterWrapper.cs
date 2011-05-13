@@ -270,7 +270,11 @@ namespace Europlan.Common {
 			List<Polygon2D> list2 = new List<Polygon2D>();
 			list2.Add(register);
 
-			return Polygon2D.GetIntersection(list1, list2).Count > 0;
+			try {
+				return Polygon2D.GetIntersection(list1, list2).Count > 0;
+			} catch (Exception e) {
+				return true;
+			}
 		}
 
 		public override List<Anchor> GetAnchors(double scale) {

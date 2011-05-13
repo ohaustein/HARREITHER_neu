@@ -265,14 +265,20 @@ namespace Europlan.Common {
 			}
 
 			if (mode == PlanMode.PM_SELECT_OBJECT) {
-				if (this.selectedObject != null && this.selectedWall != null) {
+				if (this.selectedObject != null) {
+					double offsetX = 0;
+					double offsetY = 0;
+					if (this.selectedWall != null) {
+						offsetX = selectedWallXOffset * 100;
+						offsetY = selectedWallYOffset * 100;
+					}
 					foreach (Anchor a in this.selectedObject.GetAnchors(this.scale)) {
-						if (a.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100, this.scale)) {
+						if (a.HitTest(mousePosInPlan, offsetX, offsetY, this.scale)) {
 							this.draggingObject = a.Owner;
 							this.draggingAnchor = a;
 						}
 					}
-					if (this.draggingObject == null && this.selectedObject.IsMoveable && this.selectedObject.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100)) {
+					if (this.draggingObject == null && this.selectedObject.IsMoveable && this.selectedObject.HitTest(mousePosInPlan, offsetX, offsetY)) {
 						this.draggingObject = this.selectedObject;
 						this.draggingAnchor = null;
 					}
@@ -361,15 +367,21 @@ namespace Europlan.Common {
 				if (this.draggingObject != null) {
 					invalidate = invalidate || this.draggingObject.MoveDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
 				} else {
-					if (this.selectedObject != null && this.selectedWall != null) {
+					if (this.selectedObject != null) {
+						double offsetX = 0;
+						double offsetY = 0;
+						if (this.selectedWall != null) {
+							offsetX = selectedWallXOffset * 100;
+							offsetY = selectedWallYOffset * 100;
+						}
 						bool found = false;
 						foreach (Anchor a in this.selectedObject.GetAnchors(this.scale)) {
-							if (a.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100, this.scale)) {
+							if (a.HitTest(mousePosInPlan, offsetX, offsetY, this.scale)) {
 								found = true;
 								this.Cursor = a.Cursor;
 							}
 						}
-						if (!found && this.selectedObject.IsMoveable && this.selectedObject.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100)) {
+						if (!found && this.selectedObject.IsMoveable && this.selectedObject.HitTest(mousePosInPlan, offsetX, offsetY)) {
 							found = true;
 							this.Cursor = Cursors.SizeAll;
 						}
@@ -432,8 +444,12 @@ namespace Europlan.Common {
 						}
 						xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100;
 					}
-					if (pickedObject == null && this.productPlanner != null) {
+					if (pickedObject == null && this.productPlanner != null || pickedObject is GraphicalWall) {
+						IGraphicalWallObject pickedWall = pickedObject;
 						pickedObject = this.productPlanner.PickObject(mousePosInPlan);
+						if (pickedObject == null) {
+							pickedObject = pickedWall;
+						}
 					}
 					if (pickedObject != null) {
 						invalidate = true;

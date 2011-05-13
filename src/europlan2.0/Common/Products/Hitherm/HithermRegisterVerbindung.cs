@@ -336,22 +336,102 @@ namespace Europlan.Common {
 		}
 
 		public List<Anchor> GetAnchors(double scale) {
-			return new List<Anchor>();
+			List<Anchor> anchors = new List<Anchor>();
+			if (this.vertices == null || this.vertices.Count < 2) {
+				return anchors;
+			}
+			Nullable<Point2D> prev = null;
+			bool lastHorizontal = this.vertices[0].Y != 0;
+			int i = 0;
+			foreach (Point2D vertex in this.vertices) {
+				if (prev.HasValue) {
+					AnchorTypeEnum type = AnchorTypeEnum.ANCHOR_NONE;
+					if (prev.Value == vertex) {
+						type = lastHorizontal ? AnchorTypeEnum.ANCHOR_MOVE_LEFT_RIGHT : AnchorTypeEnum.ANCHOR_MOVE_UP_DOWN;
+					} else if (prev.Value.X == vertex.X) {
+						type = AnchorTypeEnum.ANCHOR_MOVE_LEFT_RIGHT;
+					} else if (prev.Value.Y == vertex.Y) {
+						type = AnchorTypeEnum.ANCHOR_MOVE_UP_DOWN;
+					} else {
+						// TODO
+					}
+					if (type != AnchorTypeEnum.ANCHOR_NONE) {
+						anchors.Add(new InvisibleSegmentAnchor(prev.Value, vertex, i, 4.0, type, this));
+					}
+					i++;
+				}
+				prev = vertex;
+			}
+			return anchors;
 		}
 
+		public bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
+			Room room = this.Product.Product.AssociatedRoom;
+			Polygon2D linkBorders = this.GetObjectBorders(offsetX, offsetY);
+			foreach (GraphicalWall wall in room.Walls) {
+				Nullable<Vector2D> offset = room.GetWallOffset(wall);
+				if (!offset.HasValue) {
+					offset = new Vector2D(0, 0);
+				}
+				foreach (GraphicalHithermRegisterWrapper register in wall.Registers) {
+					if (register.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, true)) {
+						return false;
+					}
+				}
+				foreach (GraphicalWallObstacle obstacle in wall.Obstacles) {
+					if (obstacle.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, true)) {
+						return false;
+					}
+				}
+			}
+			foreach (HithermCircuit hc in this.Product.Product.PlannedCircuits) {
+				foreach (HithermRegisterVerbindung link in hc.Links) {
+					if (link != this && link.CollisionTest(linkBorders, offsetX, offsetY, true)) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+
+		private Nullable<Point2D> startDrag = null;
+		private List<Point2D> startVertices;
+
 		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+			this.startDrag = planPoint;
+			this.startVertices = new List<Point2D>(this.vertices);
 			// nothing to do here as the verbindung doesn't have any anchors
 			return false;
 		}
 
 		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
 			// nothing to do here as the verbindung doesn't have any anchors
+			if (anchor != null && anchor is InvisibleSegmentAnchor) {
+				List<Point2D> oldVertices = this.vertices;
+				this.vertices = new List<Point2D>(this.startVertices);
+				bool moved = false;
+				if (anchor.AnchorType == AnchorTypeEnum.ANCHOR_MOVE_LEFT_RIGHT) {
+					this.MoveVerticalSegment((anchor as InvisibleSegmentAnchor).SegmentIndex, planPoint.X - startDrag.Value.X);
+					moved = true;
+				} else if (anchor.AnchorType == AnchorTypeEnum.ANCHOR_MOVE_UP_DOWN) {
+					this.MoveHorizontalSegment((anchor as InvisibleSegmentAnchor).SegmentIndex, planPoint.Y - startDrag.Value.Y);
+					moved = true;
+				}
+				if (moved) {
+					if (!this.CheckValidity(owningWall, 0, 0)) {
+						this.vertices = oldVertices;
+						return false;
+					}
+					return true;
+				}
+			}
 			return false;
 		}
 
 		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
 			// nothing to do here as the verbindung doesn't have any anchors
-			return false;
+			this.Simplify();
+			return true;
 		}
 		#endregion
 
@@ -548,6 +628,46 @@ namespace Europlan.Common {
 					}
 				}
 			}
+		}
+	}
+
+	public class InvisibleSegmentAnchor : Anchor {
+		private Segment2D segment;
+		private int segmentIndex;
+		private double thickness;
+
+		public InvisibleSegmentAnchor(Segment2D segment, int segmentIndex, double thickness, AnchorTypeEnum anchorType, IGraphicalWallObject owner)
+			: base(segment.Start, anchorType, owner) {
+			this.segment = segment;
+			this.segmentIndex = segmentIndex;
+			this.thickness = thickness;
+		}
+
+		public InvisibleSegmentAnchor(Point2D start, Point2D end, int segmentIndex, double thickness, AnchorTypeEnum anchorType, IGraphicalWallObject owner)
+			: base(start, anchorType, owner) {
+			this.segment = new Segment2D(start, end);
+			this.segmentIndex = segmentIndex;
+			this.thickness = thickness;
+		}
+
+		public Segment2D Segment {
+			get { return this.segment; }
+		}
+
+		public double Thickness {
+			get { return this.thickness; }
+		}
+
+		public int SegmentIndex {
+			get { return this.segmentIndex; }
+		}
+
+		public override void PaintAnchor(Graphics g, double xOffset, double yOffset, double scale) {
+			// nothing to do as this anchor is invisible
+		}
+
+		public override bool HitTest(Point2D planPoint, double xOffset, double yOffset, double scale) {
+			return segment.GetDistance(planPoint - new Vector2D(xOffset, yOffset)) <= thickness / 2.0;
 		}
 	}
 }

@@ -185,12 +185,13 @@ namespace Europlan.Common {
 			g.Clip = wallClip;
 			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
 			g.DrawPolygon(wallBorderPen, pointArr);
-			g.Clip = oldClip;
 
 			foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
+				g.Clip = wallClip;
 				obstacle.PaintObject(g, xOffset, yOffset, selectedObject, scale);
 			}
 			foreach (GraphicalRegisterWrapper register in this.Registers) {
+				g.Clip = wallClip;
 				register.PaintObject(g, xOffset, yOffset, selectedObject, scale);
 			}
 			g.Clip = oldClip;
