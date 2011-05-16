@@ -494,15 +494,13 @@ namespace Europlan.Common {
 		}
 
 		private void btnWallDelete_Click(object sender, EventArgs e) {
-			if (IsChangeAllowed()) {
-				if (MessageBox.Show("Wollen Sie die aktuelle Wand wirklich löschen?", "Wand löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-					GraphicalWall wall = selectedObject as GraphicalWall;
-					graphicalWallPanel.Room.Walls.Remove(wall);
-					wall.RemoveAllRegisters(this.hithermPlanner.Product);
-					selectedObject = null;
-					UpdateDefineWallsPanel(null);
-					this.graphicalWallPanel.InvalidateGraphics();
-				}
+			if (MessageBox.Show("Wollen Sie die aktuelle Wand wirklich löschen?", "Wand löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+				GraphicalWall wall = selectedObject as GraphicalWall;
+				graphicalWallPanel.Room.Walls.Remove(wall);
+				wall.RemoveAllRegisters(this.hithermPlanner.Product);
+				selectedObject = null;
+				UpdateDefineWallsPanel(null);
+				this.graphicalWallPanel.InvalidateGraphics();
 			}
 		}
 
@@ -774,7 +772,7 @@ namespace Europlan.Common {
 		private void btnObstacleRemove_Click(object sender, EventArgs e) {
 			if (selectedObject is GraphicalWallObstacle && graphicalWallPanel.SelectedWall != null) {
 				graphicalWallPanel.SelectedWall.Obstacles.Remove(selectedObject as GraphicalWallObstacle);
-				selectedObject = null;
+				graphicalWallPanel.SelectedObject = null;
 				UpdateModifyObstaclesPanel(null);
 				this.graphicalWallPanel.InvalidateGraphics();
 			}
@@ -794,20 +792,18 @@ namespace Europlan.Common {
 			if (e.KeyCode == Keys.Delete) {
 				if (selectedObject != null) {
 					if (selectedObject is GraphicalWall) {
-						if (IsChangeAllowed()) {
-							if (MessageBox.Show("Wollen Sie die aktuelle Wand wirklich löschen?", "Wand löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-								GraphicalWall wall = selectedObject as GraphicalWall;
-								graphicalWallPanel.Room.Walls.Remove(wall);
-								wall.RemoveAllRegisters(this.hithermPlanner.Product);
-								selectedObject = null;
-								UpdateDefineWallsPanel(null);
-								this.graphicalWallPanel.InvalidateGraphics();
-							}
+						if (MessageBox.Show("Wollen Sie die aktuelle Wand wirklich löschen?", "Wand löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+							GraphicalWall wall = selectedObject as GraphicalWall;
+							graphicalWallPanel.Room.Walls.Remove(wall);
+							wall.RemoveAllRegisters(this.hithermPlanner.Product);
+							graphicalWallPanel.SelectedObject = null;
+							UpdateDefineWallsPanel(null);
+							this.graphicalWallPanel.InvalidateGraphics();
 						}
 					} else if (selectedObject is GraphicalWallObstacle) {
 						if (graphicalWallPanel.SelectedWall != null) {
 							graphicalWallPanel.SelectedWall.Obstacles.Remove(selectedObject as GraphicalWallObstacle);
-							selectedObject = null;
+							graphicalWallPanel.SelectedObject = null;
 							UpdateModifyObstaclesPanel(null);
 							this.graphicalWallPanel.InvalidateGraphics();
 						}
