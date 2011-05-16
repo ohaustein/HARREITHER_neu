@@ -335,7 +335,16 @@ namespace Europlan.Common {
 		}
 
 		public bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
-			throw new Exception("The method or operation is not implemented.");
+			Polygon2D linkBorders = this.GetObjectBorders(0, 0);
+			List<Polygon2D> list1 = new List<Polygon2D>();
+			list1.Add(polygon);
+			List<Polygon2D> list2 = new List<Polygon2D>();
+			list2.Add(linkBorders);
+			try {
+				return Polygon2D.GetIntersection(list1, list2).Count > 0;
+			} catch {
+				return false;
+			}
 		}
 
 		public List<Anchor> GetAnchors(double scale) {
@@ -358,7 +367,7 @@ namespace Europlan.Common {
 					} else {
 						// TODO
 					}
-					if (type != AnchorTypeEnum.ANCHOR_NONE) {
+					if (type != AnchorTypeEnum.ANCHOR_NONE && i > 0 && i < this.vertices.Count - 2) {
 						anchors.Add(new InvisibleSegmentAnchor(prev.Value, vertex, i, 4.0, type, this));
 					}
 					i++;
@@ -375,7 +384,7 @@ namespace Europlan.Common {
 				return false;
 			}
 			foreach (GraphicalWall wall in room.Walls) {
-				Nullable<Vector2D> offset = room.GetWallOffset(wall);
+				Nullable<Vector2D> offset = room.GetWallOffset(wall) * 100;
 				if (!offset.HasValue) {
 					offset = new Vector2D(0, 0);
 				}
@@ -450,7 +459,7 @@ namespace Europlan.Common {
 				this.vertices.Insert(0, new Point2D(this.vertices[0]));
 				vertexAdded = true;
 			}
-			Nullable<Vector2D> offset = register.Product.AssociatedRoom.GetWallOffset(owningWall);
+			Nullable<Vector2D> offset = register.Product.AssociatedRoom.GetWallOffset(owningWall) * 100;
 			if (!offset.HasValue) {
 				return;
 			}

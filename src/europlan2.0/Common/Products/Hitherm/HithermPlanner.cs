@@ -193,7 +193,7 @@ namespace Europlan.Common {
 					foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
 						GraphicalWall wall = baseWall;
 						while (wall != null) {
-							Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall);
+							Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall) * 100;
 							if (offset.HasValue) {
 								foreach (GraphicalRegisterWrapper wrapper in wall.Registers) {
 									if (wrapper == this.connectedWallPanel.SelectedObject || wrapper is GraphicalHithermRegisterWrapper && wrapper.HitTest(planPoint, offset.Value.X, offset.Value.Y)) {
