@@ -494,6 +494,10 @@ namespace Europlan.Common {
 		}
 
 		private void btnWallDelete_Click(object sender, EventArgs e) {
+			DeleteWall();
+		}
+
+		private void DeleteWall() {
 			if (MessageBox.Show("Wollen Sie die aktuelle Wand wirklich löschen?", "Wand löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 				GraphicalWall wall = selectedObject as GraphicalWall;
 				graphicalWallPanel.Room.Walls.Remove(wall);
@@ -792,14 +796,7 @@ namespace Europlan.Common {
 			if (e.KeyCode == Keys.Delete) {
 				if (selectedObject != null) {
 					if (selectedObject is GraphicalWall) {
-						if (MessageBox.Show("Wollen Sie die aktuelle Wand wirklich löschen?", "Wand löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-							GraphicalWall wall = selectedObject as GraphicalWall;
-							graphicalWallPanel.Room.Walls.Remove(wall);
-							wall.RemoveAllRegisters(this.hithermPlanner.Product);
-							graphicalWallPanel.SelectedObject = null;
-							UpdateDefineWallsPanel(null);
-							this.graphicalWallPanel.InvalidateGraphics();
-						}
+						DeleteWall();
 					} else if (selectedObject is GraphicalWallObstacle) {
 						if (graphicalWallPanel.SelectedWall != null) {
 							graphicalWallPanel.SelectedWall.Obstacles.Remove(selectedObject as GraphicalWallObstacle);
