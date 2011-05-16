@@ -22,7 +22,7 @@ namespace Europlan.Common {
 
 		}
 
-		public double BorderDistance {
+		public override double BorderDistance {
 			get { return borderDistance; }
 			set { borderDistance = value; }
 		}

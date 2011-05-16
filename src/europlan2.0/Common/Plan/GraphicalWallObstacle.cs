@@ -21,6 +21,10 @@ namespace Europlan.Common {
 		public abstract bool IsMoveable {
 			get;
 		}
+		public abstract double BorderDistance {
+			get;
+			set;
+		}
 
 	}
 

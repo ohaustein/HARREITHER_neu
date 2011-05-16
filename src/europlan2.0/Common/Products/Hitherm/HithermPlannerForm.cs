@@ -398,9 +398,15 @@ namespace Europlan.Common {
 
 		private void UpdateModifyObstaclesPanelButtons(GraphicalWallObstacle obstacle) {
 			if (obstacle != null) {
-
+				this.btnObstacleApply.Enabled = unsavedChanges;
+				this.btnObstacleRevert.Enabled = unsavedChanges;
+				this.btnObstacleRemove.Enabled = true;
+				this.btnObstacleBorder.Enabled = true;
 			} else {
-
+				this.btnObstacleApply.Enabled = false;
+				this.btnObstacleRevert.Enabled = false;
+				this.btnObstacleRemove.Enabled = false;
+				this.btnObstacleBorder.Enabled = false;
 			}
 		}
 
@@ -752,6 +758,31 @@ namespace Europlan.Common {
 			lblNecessaryArea.Text = (product.PlannedHeatLoad > 0 && area > 0) ? Math.Round(pp.RequestedHeatLoad / (product.PlannedHeatLoad / area), 2).ToString() : "--";
 				
 
+		}
+
+		private void btnObstacleApply_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnObstacleRevert_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnObstacleRemove_Click(object sender, EventArgs e) {
+			if (selectedObject is GraphicalWallObstacle && graphicalWallPanel.SelectedWall != null) {
+				graphicalWallPanel.SelectedWall.Obstacles.Remove(selectedObject as GraphicalWallObstacle);
+				this.graphicalWallPanel.InvalidateGraphics();
+			}
+		}
+
+		private void btnObstacleBorder_Click(object sender, EventArgs e) {
+			GraphicalWallObstacle obstacle = selectedObject as GraphicalWallObstacle;
+			EdgeDistanceForm form = new EdgeDistanceForm(obstacle.BorderDistance);
+			if (form.ShowDialog() == DialogResult.OK) {
+				double distance = form.EdgeDistance > 0 ? form.EdgeDistance / 100.0 : 0;
+				obstacle.BorderDistance = distance;
+				this.graphicalWallPanel.InvalidateGraphics();
+			}
 		}
 
 

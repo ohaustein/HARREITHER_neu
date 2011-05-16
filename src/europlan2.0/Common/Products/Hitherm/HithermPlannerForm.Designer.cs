@@ -125,9 +125,14 @@ namespace Europlan.Common {
 			this.panelBottom = new System.Windows.Forms.Panel();
 			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.hithermPlanner = new Europlan.Common.HithermPlanner();
+			this.btnObstacleBorder = new System.Windows.Forms.Button();
+			this.btnObstacleRemove = new System.Windows.Forms.Button();
+			this.btnObstacleRevert = new System.Windows.Forms.Button();
+			this.btnObstacleApply = new System.Windows.Forms.Button();
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
 			this.panelTop.SuspendLayout();
+			this.panelModifyObstacle.SuspendLayout();
 			this.panelDefineWalls.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -197,7 +202,7 @@ namespace Europlan.Common {
 			this.btnPick.Image = ((System.Drawing.Image)(resources.GetObject("btnPick.Image")));
 			this.btnPick.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnPick.Name = "btnPick";
-			this.btnPick.Size = new System.Drawing.Size(29, 20);
+			this.btnPick.Size = new System.Drawing.Size(21, 20);
 			this.btnPick.Text = "Objekte bearbeiten";
 			this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
 			// 
@@ -207,7 +212,7 @@ namespace Europlan.Common {
 			this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
 			this.btnMove.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnMove.Name = "btnMove";
-			this.btnMove.Size = new System.Drawing.Size(29, 20);
+			this.btnMove.Size = new System.Drawing.Size(21, 20);
 			this.btnMove.Text = "Ausschnitt verschieben";
 			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
 			// 
@@ -217,7 +222,7 @@ namespace Europlan.Common {
 			this.btnWall.Image = ((System.Drawing.Image)(resources.GetObject("btnWall.Image")));
 			this.btnWall.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnWall.Name = "btnWall";
-			this.btnWall.Size = new System.Drawing.Size(29, 20);
+			this.btnWall.Size = new System.Drawing.Size(21, 20);
 			this.btnWall.Text = "Wände";
 			this.btnWall.Click += new System.EventHandler(this.btnWall_Click);
 			// 
@@ -227,7 +232,7 @@ namespace Europlan.Common {
 			this.btnObstacle.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacle.Image")));
 			this.btnObstacle.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnObstacle.Name = "btnObstacle";
-			this.btnObstacle.Size = new System.Drawing.Size(29, 20);
+			this.btnObstacle.Size = new System.Drawing.Size(21, 20);
 			this.btnObstacle.Text = "Fenster und Türen";
 			this.btnObstacle.Click += new System.EventHandler(this.btnObstacle_Click);
 			// 
@@ -237,7 +242,7 @@ namespace Europlan.Common {
 			this.btnRegisterVertical.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterVertical.Image")));
 			this.btnRegisterVertical.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRegisterVertical.Name = "btnRegisterVertical";
-			this.btnRegisterVertical.Size = new System.Drawing.Size(29, 20);
+			this.btnRegisterVertical.Size = new System.Drawing.Size(21, 20);
 			this.btnRegisterVertical.Text = "Wärmeregister senkrecht";
 			this.btnRegisterVertical.Click += new System.EventHandler(this.btnRegisterVertical_Click);
 			// 
@@ -247,7 +252,7 @@ namespace Europlan.Common {
 			this.btnRegisterHorizontal.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterHorizontal.Image")));
 			this.btnRegisterHorizontal.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRegisterHorizontal.Name = "btnRegisterHorizontal";
-			this.btnRegisterHorizontal.Size = new System.Drawing.Size(29, 20);
+			this.btnRegisterHorizontal.Size = new System.Drawing.Size(21, 20);
 			this.btnRegisterHorizontal.Text = "Wärmeregister waagrecht";
 			this.btnRegisterHorizontal.Click += new System.EventHandler(this.btnRegisterHorizontal_Click);
 			// 
@@ -257,7 +262,7 @@ namespace Europlan.Common {
 			this.btnConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnConnection.Image")));
 			this.btnConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnConnection.Name = "btnConnection";
-			this.btnConnection.Size = new System.Drawing.Size(29, 20);
+			this.btnConnection.Size = new System.Drawing.Size(21, 20);
 			this.btnConnection.Text = "Anbindeleitungen";
 			this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
 			// 
@@ -275,6 +280,10 @@ namespace Europlan.Common {
 			// 
 			// panelModifyObstacle
 			// 
+			this.panelModifyObstacle.Controls.Add(this.btnObstacleBorder);
+			this.panelModifyObstacle.Controls.Add(this.btnObstacleRemove);
+			this.panelModifyObstacle.Controls.Add(this.btnObstacleRevert);
+			this.panelModifyObstacle.Controls.Add(this.btnObstacleApply);
 			this.panelModifyObstacle.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelModifyObstacle.Location = new System.Drawing.Point(0, 0);
 			this.panelModifyObstacle.Name = "panelModifyObstacle";
@@ -1287,6 +1296,54 @@ namespace Europlan.Common {
 			this.hithermPlanner.NewRegisterVorlaufRight = true;
 			this.hithermPlanner.RecalculationNecessary += new System.EventHandler<System.EventArgs>(this.hithermPlanner_RecalculationNecessary);
 			// 
+			// btnObstacleBorder
+			// 
+			this.btnObstacleBorder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleBorder.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleBorder.Image")));
+			this.btnObstacleBorder.Location = new System.Drawing.Point(419, 48);
+			this.btnObstacleBorder.Name = "btnObstacleBorder";
+			this.btnObstacleBorder.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleBorder.TabIndex = 25;
+			this.btnObstacleBorder.UseVisualStyleBackColor = true;
+			this.btnObstacleBorder.Click += new System.EventHandler(this.btnObstacleBorder_Click);
+			// 
+			// btnObstacleRemove
+			// 
+			this.btnObstacleRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleRemove.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRemove.Image")));
+			this.btnObstacleRemove.Location = new System.Drawing.Point(419, 17);
+			this.btnObstacleRemove.Name = "btnObstacleRemove";
+			this.btnObstacleRemove.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleRemove.TabIndex = 24;
+			this.btnObstacleRemove.UseVisualStyleBackColor = true;
+			this.btnObstacleRemove.Click += new System.EventHandler(this.btnObstacleRemove_Click);
+			// 
+			// btnObstacleRevert
+			// 
+			this.btnObstacleRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRevert.Image")));
+			this.btnObstacleRevert.Location = new System.Drawing.Point(388, 48);
+			this.btnObstacleRevert.Name = "btnObstacleRevert";
+			this.btnObstacleRevert.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleRevert.TabIndex = 23;
+			this.btnObstacleRevert.UseVisualStyleBackColor = true;
+			this.btnObstacleRevert.Click += new System.EventHandler(this.btnObstacleRevert_Click);
+			// 
+			// btnObstacleApply
+			// 
+			this.btnObstacleApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleApply.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleApply.Image")));
+			this.btnObstacleApply.Location = new System.Drawing.Point(388, 17);
+			this.btnObstacleApply.Name = "btnObstacleApply";
+			this.btnObstacleApply.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleApply.TabIndex = 22;
+			this.btnObstacleApply.UseVisualStyleBackColor = true;
+			this.btnObstacleApply.Click += new System.EventHandler(this.btnObstacleApply_Click);
+			// 
 			// HithermPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1306,6 +1363,7 @@ namespace Europlan.Common {
 			this.toolStrip2.ResumeLayout(false);
 			this.toolStrip2.PerformLayout();
 			this.panelTop.ResumeLayout(false);
+			this.panelModifyObstacle.ResumeLayout(false);
 			this.panelDefineWalls.ResumeLayout(false);
 			this.panelDefineWalls.PerformLayout();
 			this.groupBox3.ResumeLayout(false);
@@ -1430,6 +1488,10 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripButton btnRegisterHorizontal;
 		private System.Windows.Forms.Panel panelModifyObstacle;
 		private System.Windows.Forms.Panel panelModifyConnection;
+		private System.Windows.Forms.Button btnObstacleBorder;
+		private System.Windows.Forms.Button btnObstacleRemove;
+		private System.Windows.Forms.Button btnObstacleRevert;
+		private System.Windows.Forms.Button btnObstacleApply;
 
 
 	}
