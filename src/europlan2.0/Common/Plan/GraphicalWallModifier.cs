@@ -113,19 +113,37 @@ namespace Europlan.Common {
 
 			Region oldClip = g.Clip;
 			g.Clip = new Region(path);
+
+			int i = 1;
 			foreach (GraphicalWall wall in room.Walls) {
 				if (wall.Enabled) {
 					c = Color.FromArgb(255, Color.DarkRed);
 				} else {
 					c = Color.FromArgb(128, Color.DarkRed);
 				}
-				float size = (float)(room.AssociatedPlan.Measure * 0.1 * Math.Abs(additionalTransformation.M00));
+				float size = (float)(room.AssociatedPlan.Measure * 0.1 * Math.Abs(additionalTransformation.M22));
 				Pen p = new Pen(c, size);
 				p.StartCap = LineCap.Square;
 				p.EndCap = LineCap.Square;
 				Point2D start = additionalTransformation.TransformTo2D(wall.PlanStartPoint.Value);
 				Point2D end = additionalTransformation.TransformTo2D(wall.PlanEndPoint.Value);
+				Vector2D normVector = wall.PlanEndPoint.Value - wall.PlanStartPoint.Value;
+				normVector.Normalize();
+				normVector = new Vector2D(normVector.Y, -normVector.X);
+				Segment2D segment = new Segment2D(wall.PlanStartPoint.Value, wall.PlanEndPoint.Value);
+				Point2D numberStart = segment.GetCenter() + (normVector * (room.AssociatedPlan.Measure.Value * 0.15));
+				numberStart = additionalTransformation.TransformTo2D(numberStart);
 				g.DrawLine(p, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
+
+				if (wall.Enabled) {
+					if (this.connectedPlanPanel != null && this.connectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
+						p = new Pen(Color.White);
+					} else {
+						p = new Pen(Color.Black);
+					}
+					Font font = new Font("Arial", 8.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * room.AssociatedPlan.Measure.Value);
+					g.DrawString("" + i++, font, new SolidBrush(p.Color), (float)numberStart.X, (float)numberStart.Y);
+				}
 
 				foreach (GraphicalWallObstacle obstacle in wall.Obstacles) {
 					double startPos = 0;

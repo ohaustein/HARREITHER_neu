@@ -776,7 +776,10 @@ namespace Europlan.Common {
 		}
 
 		private void btnObstacleRevert_Click(object sender, EventArgs e) {
+			GraphicalWallObstacle obstacle = SelectedObject as GraphicalWallObstacle;
 			unsavedChanges = false;
+			UpdateModifyObstaclesPanel(obstacle);
+
 		}
 
 		private void btnObstacleRemove_Click(object sender, EventArgs e) {

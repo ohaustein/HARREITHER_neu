@@ -170,7 +170,7 @@ namespace Europlan.Common {
 
 		private void chkEnable_CheckedChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
-				if (selectedWall != null){
+				if (selectedWall != null) {
 					if (chkEnable.Checked) {
 						selectedWall.Enabled = true;
 					} else {
@@ -186,6 +186,7 @@ namespace Europlan.Common {
 							}
 						}
 					}
+					panel.InvalidateGraphics();
 				}
 			}
 		}
@@ -198,6 +199,7 @@ namespace Europlan.Common {
 					graphicalWallModifier.Room.Walls.RemoveRange(0, index);
 					graphicalWallModifier.Room.Walls.AddRange(walls);
 					chkStartWall.Checked = true;
+					panel.InvalidateGraphics();
 				} else {
 					MessageBox.Show("Um eine andere Wand als 'erste Wand' zu definieren, wählen Sie bitte dazu die gewünschte Wand und setzen sie dort die Option.");
 				}
