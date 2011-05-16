@@ -336,6 +336,12 @@ namespace Europlan.Common {
 
 		public bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
 			Polygon2D linkBorders = this.GetObjectBorders(0, 0);
+			if (linkBorders.IsClockwise()) {
+				linkBorders.Reverse();
+			}
+			if (polygon.IsClockwise()) {
+				polygon.Reverse();
+			}
 			List<Polygon2D> list1 = new List<Polygon2D>();
 			list1.Add(polygon);
 			List<Polygon2D> list2 = new List<Polygon2D>();
@@ -470,7 +476,32 @@ namespace Europlan.Common {
 			Vector2D delta = new Segment2D(secondPoint, firstPoint).GetDelta();
 			bool moved = false;
 			if (Math.Abs(delta.X) < 0.00001 && Math.Abs(delta.Y) >= 0.00001 && !vertexAdded) {
-				this.vertices.Insert(0, new Point2D(this.vertices[0]));
+				//this.vertices.Insert(0, new Point2D(this.vertices[0]));
+				firstPoint = this.vertices[0];
+				secondPoint = this.vertices[1];
+				Point2D thirdPoint = this.vertices[2];
+				bool left = secondPoint.X < thirdPoint.X;
+				this.MoveVerticalSegment(0, -firstPoint.X + newStartPoint.X);
+				firstPoint = this.vertices[0];
+				secondPoint = this.vertices[1];
+				thirdPoint = this.vertices[2];
+				if ((register.Register.GraphVorlaufRight && newStartPoint5.Y > secondPoint.Y) ||
+					(!register.Register.GraphVorlaufRight && newStartPoint5.Y < secondPoint.Y)) {
+					double tmpX;
+					if (left) {
+						tmpX = secondPoint.X + register.Width + 10;
+					} else {
+						tmpX = secondPoint.X - 10;
+					}
+					this.vertices.RemoveAt(1);
+					this.vertices.Insert(1, new Point2D(tmpX, secondPoint.Y));
+					this.vertices.Insert(1, new Point2D(tmpX, newStartPoint5.Y));
+					this.vertices.Insert(1, new Point2D(newStartPoint5.X, newStartPoint5.Y));
+					this.vertices[0] = newStartPoint;
+				} else {
+					this.vertices[0] = newStartPoint;
+				}
+				moved = true;
 			}
 			if (Math.Abs(delta.Y) <= 0.00001) {
 				firstPoint = this.vertices[0];
@@ -490,7 +521,6 @@ namespace Europlan.Common {
 						tmpY = secondPoint.Y - register.Height - 10;
 					}
 					this.vertices.RemoveAt(1);
-					// oder 1
 					this.vertices.Insert(1, new Point2D(secondPoint.X, tmpY));
 					this.vertices.Insert(1, new Point2D(newStartPoint5.X, tmpY));
 					this.vertices.Insert(1, new Point2D(newStartPoint5.X, newStartPoint5.Y));
@@ -504,16 +534,7 @@ namespace Europlan.Common {
 				this.vertices[0] = newStartPoint;
 			}
 			this.Simplify();
-			Polygon2D borders = this.GetObjectBorders(0, 0);
-			try {
-				foreach (IGraphicalWallObject obj in owningWall.Registers) {
-					if (obj.CollisionTest(borders, offset.Value.X, offset.Value.Y, true)) {
-						this.vertices.Clear();
-						break;
-					}
-				}
-			} catch {
-				// the borders-polygon is invalid as it intersects itself
+			if (!this.CheckValidity(owningWall, 0, 0)) {
 				this.vertices.Clear();
 			}
 		}
@@ -527,7 +548,7 @@ namespace Europlan.Common {
 				this.vertices.Insert(this.vertices.Count - 1, new Point2D(this.vertices[this.vertices.Count - 1]));
 				vertexAdded = true;
 			}
-			Nullable<Vector2D> offset = register.Product.AssociatedRoom.GetWallOffset(owningWall);
+			Nullable<Vector2D> offset = register.Product.AssociatedRoom.GetWallOffset(owningWall) * 100;
 			if (!offset.HasValue) {
 				return;
 			}
@@ -538,7 +559,32 @@ namespace Europlan.Common {
 			Vector2D delta = new Segment2D(prevLastPoint, lastPoint).GetDelta();
 			bool moved = false;
 			if (Math.Abs(delta.X) < 0.00001 && Math.Abs(delta.Y) >= 0.00001 && !vertexAdded) {
-				this.vertices.Insert(this.vertices.Count - 1, new Point2D(this.vertices[this.vertices.Count - 1]));
+				//this.vertices.Insert(this.vertices.Count - 1, new Point2D(this.vertices[this.vertices.Count - 1]));
+				lastPoint = this.vertices[this.vertices.Count - 1];
+				prevLastPoint = this.vertices[this.vertices.Count - 2];
+				Point2D prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
+				bool left = prevLastPoint.X < prevPrevLastPoint.X;
+				this.MoveVerticalSegment(this.vertices.Count - 2, -lastPoint.X + newEndPoint.X);
+				lastPoint = this.vertices[this.vertices.Count - 1];
+				prevLastPoint = this.vertices[this.vertices.Count - 2];
+				prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
+				if ((!register.Register.GraphVorlaufRight && newEndPoint5.Y > prevLastPoint.Y) ||
+					(register.Register.GraphVorlaufRight && newEndPoint5.Y < prevLastPoint.Y)) {
+					double tmpX;
+					if (left) {
+						tmpX = prevLastPoint.X + 10;
+					} else {
+						tmpX = prevLastPoint.X - register.Width - 10;
+					}
+					this.vertices.RemoveAt(this.vertices.Count - 2);
+					this.vertices.Insert(this.vertices.Count - 1, new Point2D(tmpX, prevLastPoint.Y));
+					this.vertices.Insert(this.vertices.Count - 1, new Point2D(tmpX, newEndPoint5.Y));
+					this.vertices.Insert(this.vertices.Count - 1, new Point2D(lastPoint.X, newEndPoint5.Y));
+					this.vertices[this.vertices.Count - 1] = newEndPoint;
+				} else {
+					this.vertices[this.vertices.Count - 1] = newEndPoint;
+				}
+				moved = true;
 			}
 			if (Math.Abs(delta.Y) <= 0.00001) {
 				lastPoint = this.vertices[this.vertices.Count - 1];
@@ -571,16 +617,7 @@ namespace Europlan.Common {
 				this.vertices[this.vertices.Count - 1] = newEndPoint;
 			}
 			this.Simplify();
-			Polygon2D borders = this.GetObjectBorders(0, 0);
-			try {
-				foreach (IGraphicalWallObject obj in owningWall.Registers) {
-					if (obj.CollisionTest(borders, offset.Value.X, offset.Value.Y, true)) {
-						this.vertices.Clear();
-						break;
-					}
-				}
-			} catch {
-				// the borders-polygon is invalid as it intersects itself
+			if (!this.CheckValidity(owningWall, 0, 0)) {
 				this.vertices.Clear();
 			}
 		}
