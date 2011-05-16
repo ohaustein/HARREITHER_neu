@@ -780,6 +780,10 @@ namespace Europlan.Common {
 		}
 
 		private void btnObstacleRemove_Click(object sender, EventArgs e) {
+			DeleteObstacle();
+		}
+
+		private void DeleteObstacle() {
 			if (SelectedObject is GraphicalWallObstacle && graphicalWallPanel.SelectedWall != null) {
 				graphicalWallPanel.SelectedWall.Obstacles.Remove(SelectedObject as GraphicalWallObstacle);
 				graphicalWallPanel.SelectedObject = null;
@@ -804,12 +808,7 @@ namespace Europlan.Common {
 					if (SelectedObject is GraphicalWall) {
 						DeleteWall();
 					} else if (SelectedObject is GraphicalWallObstacle) {
-						if (graphicalWallPanel.SelectedWall != null) {
-							graphicalWallPanel.SelectedWall.Obstacles.Remove(SelectedObject as GraphicalWallObstacle);
-							graphicalWallPanel.SelectedObject = null;
-							UpdateModifyObstaclesPanel(null);
-							this.graphicalWallPanel.InvalidateGraphics();
-						}
+						DeleteObstacle();
 					} else if (SelectedObject is GraphicalRegisterWrapper) {
 						DeleteRegister();
 					} else if (SelectedObject is HithermRegisterVerbindung) {
