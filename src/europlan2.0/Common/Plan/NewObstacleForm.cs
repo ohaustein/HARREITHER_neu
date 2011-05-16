@@ -10,14 +10,9 @@ using Star.SettingsXpress;
 namespace Europlan.Common {
 	public partial class NewObstacleForm : Form {
 
-		public enum ObstacleTypeEnum {
-			Door,
-			Window
-		}
-
 		public NewObstacleForm() {
 			InitializeComponent();
-			cmbType.DataSource = Enum.GetValues(typeof(ObstacleTypeEnum));
+			cmbType.DataSource = Enum.GetValues(typeof(Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum));
 			UpdateControls();
 			this.SetLanguage();
 		}
@@ -59,8 +54,8 @@ namespace Europlan.Common {
 			set { this.numHeightOffset.Value = (decimal)value; }
 		}
 
-		public ObstacleTypeEnum ObstacleType {
-			get { return (ObstacleTypeEnum)cmbType.SelectedValue; }
+		public Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum ObstacleType {
+			get { return (Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum)cmbType.SelectedValue; }
 		}
 
 		private void cmbType_SelectedValueChanged(object sender, EventArgs e) {
@@ -68,7 +63,7 @@ namespace Europlan.Common {
 		}
 
 		private void UpdateControls() {
-			if (ObstacleType == ObstacleTypeEnum.Door) {
+			if (ObstacleType == Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum.Door) {
 				numHeightOffset.Visible = false;
 				lblHeightOffset.Visible = false;
 			} else {

@@ -37,6 +37,10 @@ namespace Europlan.Common {
 			this.btnConnection = new System.Windows.Forms.ToolStripButton();
 			this.panelTop = new System.Windows.Forms.Panel();
 			this.panelModifyObstacle = new System.Windows.Forms.Panel();
+			this.btnObstacleBorder = new System.Windows.Forms.Button();
+			this.btnObstacleRemove = new System.Windows.Forms.Button();
+			this.btnObstacleRevert = new System.Windows.Forms.Button();
+			this.btnObstacleApply = new System.Windows.Forms.Button();
 			this.panelDefineWalls = new System.Windows.Forms.Panel();
 			this.btnWallHelpLine = new System.Windows.Forms.Button();
 			this.btnWallEdgeDistance = new System.Windows.Forms.Button();
@@ -125,10 +129,6 @@ namespace Europlan.Common {
 			this.panelBottom = new System.Windows.Forms.Panel();
 			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.hithermPlanner = new Europlan.Common.HithermPlanner();
-			this.btnObstacleBorder = new System.Windows.Forms.Button();
-			this.btnObstacleRemove = new System.Windows.Forms.Button();
-			this.btnObstacleRevert = new System.Windows.Forms.Button();
-			this.btnObstacleApply = new System.Windows.Forms.Button();
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
 			this.panelTop.SuspendLayout();
@@ -289,6 +289,54 @@ namespace Europlan.Common {
 			this.panelModifyObstacle.Name = "panelModifyObstacle";
 			this.panelModifyObstacle.Size = new System.Drawing.Size(862, 91);
 			this.panelModifyObstacle.TabIndex = 23;
+			// 
+			// btnObstacleBorder
+			// 
+			this.btnObstacleBorder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleBorder.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleBorder.Image")));
+			this.btnObstacleBorder.Location = new System.Drawing.Point(419, 48);
+			this.btnObstacleBorder.Name = "btnObstacleBorder";
+			this.btnObstacleBorder.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleBorder.TabIndex = 25;
+			this.btnObstacleBorder.UseVisualStyleBackColor = true;
+			this.btnObstacleBorder.Click += new System.EventHandler(this.btnObstacleBorder_Click);
+			// 
+			// btnObstacleRemove
+			// 
+			this.btnObstacleRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleRemove.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRemove.Image")));
+			this.btnObstacleRemove.Location = new System.Drawing.Point(419, 17);
+			this.btnObstacleRemove.Name = "btnObstacleRemove";
+			this.btnObstacleRemove.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleRemove.TabIndex = 24;
+			this.btnObstacleRemove.UseVisualStyleBackColor = true;
+			this.btnObstacleRemove.Click += new System.EventHandler(this.btnObstacleRemove_Click);
+			// 
+			// btnObstacleRevert
+			// 
+			this.btnObstacleRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRevert.Image")));
+			this.btnObstacleRevert.Location = new System.Drawing.Point(388, 48);
+			this.btnObstacleRevert.Name = "btnObstacleRevert";
+			this.btnObstacleRevert.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleRevert.TabIndex = 23;
+			this.btnObstacleRevert.UseVisualStyleBackColor = true;
+			this.btnObstacleRevert.Click += new System.EventHandler(this.btnObstacleRevert_Click);
+			// 
+			// btnObstacleApply
+			// 
+			this.btnObstacleApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleApply.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleApply.Image")));
+			this.btnObstacleApply.Location = new System.Drawing.Point(388, 17);
+			this.btnObstacleApply.Name = "btnObstacleApply";
+			this.btnObstacleApply.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleApply.TabIndex = 22;
+			this.btnObstacleApply.UseVisualStyleBackColor = true;
+			this.btnObstacleApply.Click += new System.EventHandler(this.btnObstacleApply_Click);
 			// 
 			// panelDefineWalls
 			// 
@@ -1284,6 +1332,7 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.XPos = 421;
 			this.graphicalWallPanel.YPos = -71.5;
 			this.graphicalWallPanel.ObjectSelected += new System.EventHandler<Europlan.Common.GraphicalWallPanel.SelectedObjectArgs>(this.graphicalWallPanel_ObjectSelected);
+			this.graphicalWallPanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.graphicalWallPanel_KeyDown);
 			// 
 			// hithermPlanner
 			// 
@@ -1295,54 +1344,6 @@ namespace Europlan.Common {
 			this.hithermPlanner.NewRegisterUseHelpline = true;
 			this.hithermPlanner.NewRegisterVorlaufRight = true;
 			this.hithermPlanner.RecalculationNecessary += new System.EventHandler<System.EventArgs>(this.hithermPlanner_RecalculationNecessary);
-			// 
-			// btnObstacleBorder
-			// 
-			this.btnObstacleBorder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnObstacleBorder.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleBorder.Image")));
-			this.btnObstacleBorder.Location = new System.Drawing.Point(419, 48);
-			this.btnObstacleBorder.Name = "btnObstacleBorder";
-			this.btnObstacleBorder.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleBorder.TabIndex = 25;
-			this.btnObstacleBorder.UseVisualStyleBackColor = true;
-			this.btnObstacleBorder.Click += new System.EventHandler(this.btnObstacleBorder_Click);
-			// 
-			// btnObstacleRemove
-			// 
-			this.btnObstacleRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnObstacleRemove.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRemove.Image")));
-			this.btnObstacleRemove.Location = new System.Drawing.Point(419, 17);
-			this.btnObstacleRemove.Name = "btnObstacleRemove";
-			this.btnObstacleRemove.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleRemove.TabIndex = 24;
-			this.btnObstacleRemove.UseVisualStyleBackColor = true;
-			this.btnObstacleRemove.Click += new System.EventHandler(this.btnObstacleRemove_Click);
-			// 
-			// btnObstacleRevert
-			// 
-			this.btnObstacleRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnObstacleRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRevert.Image")));
-			this.btnObstacleRevert.Location = new System.Drawing.Point(388, 48);
-			this.btnObstacleRevert.Name = "btnObstacleRevert";
-			this.btnObstacleRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleRevert.TabIndex = 23;
-			this.btnObstacleRevert.UseVisualStyleBackColor = true;
-			this.btnObstacleRevert.Click += new System.EventHandler(this.btnObstacleRevert_Click);
-			// 
-			// btnObstacleApply
-			// 
-			this.btnObstacleApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnObstacleApply.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleApply.Image")));
-			this.btnObstacleApply.Location = new System.Drawing.Point(388, 17);
-			this.btnObstacleApply.Name = "btnObstacleApply";
-			this.btnObstacleApply.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleApply.TabIndex = 22;
-			this.btnObstacleApply.UseVisualStyleBackColor = true;
-			this.btnObstacleApply.Click += new System.EventHandler(this.btnObstacleApply_Click);
 			// 
 			// HithermPlannerForm
 			// 

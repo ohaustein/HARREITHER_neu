@@ -366,7 +366,7 @@ namespace Europlan.Common {
 									Segment2D second = new Segment2D(wall.PlanStartPoint.Value, planPoint);
 									double x = first.GetLength() < second.GetLength() ? first.GetLength() : second.GetLength();
 									x = (x * 100) / room.AssociatedPlan.Measure.Value;
-									if (form.ObstacleType == NewObstacleForm.ObstacleTypeEnum.Door) {
+									if (form.ObstacleType == Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum.Door) {
 										GraphicalDoor door = new GraphicalDoor();
 										door.Width = form.Width;
 										door.Height = form.Height;

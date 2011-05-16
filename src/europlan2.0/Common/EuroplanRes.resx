@@ -1386,6 +1386,12 @@ Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
   <data name="General_WieGehtsWeiter" xml:space="preserve">
     <value>Wie geht's weiter?</value>
   </data>
+  <data name="GraphicalWallObstacle_Door" xml:space="preserve">
+    <value>Tür</value>
+  </data>
+  <data name="GraphicalWallObstacle_Window" xml:space="preserve">
+    <value>Fenster</value>
+  </data>
   <data name="HithermCompactProduct_NotificationParameter" xml:space="preserve">
     <value>Hitherm Compact-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
   </data>
