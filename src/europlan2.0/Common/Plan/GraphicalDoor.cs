@@ -18,6 +18,11 @@ namespace Europlan.Common {
 		private double width = 0;
 		private double height = 0;
 
+		private double bakGraphPosX = 0;
+		private double bakGraphPosY = 0;
+		private double bakWidth = 0;
+		private double bakHeight = 0;
+
 		public GraphicalDoor() {
 
 		}
@@ -212,6 +217,21 @@ namespace Europlan.Common {
 			//anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
 			return anchors;
 		}
+
+		public override void BackupState() {
+			bakGraphPosX = GraphPosX;
+			bakGraphPosY = GraphPosY;
+			bakWidth = Width;
+			bakHeight = Height;
+		}
+
+		public override void RevertState() {
+			GraphPosX = bakGraphPosX;
+			GraphPosY = bakGraphPosY;
+			Width = bakWidth;
+			Height = bakHeight;
+		}
+
 
 	}
 

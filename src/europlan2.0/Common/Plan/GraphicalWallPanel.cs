@@ -53,15 +53,15 @@ namespace Europlan.Common {
 			remove { this.selectedObjectModified -= value; }
 		}
 
-		protected virtual void OnObjectSelected(IGraphicalWallObject selectedObject) {
+		protected virtual void OnObjectSelected(IGraphicalWallObject selectedObject, IGraphicalWallObject oldSelectedObject, GraphicalWall oldSelectedWall) {
 			if (this.objectSelected != null) {
-				this.objectSelected(this, new SelectedObjectArgs(selectedObject));
+				this.objectSelected(this, new SelectedObjectArgs(selectedObject, oldSelectedObject, oldSelectedWall));
 			}
 		}
 
 		protected virtual void OnSelectedObjectModified(IGraphicalWallObject selectedObject) {
 			if (this.selectedObjectModified != null) {
-				this.selectedObjectModified(this, new SelectedObjectArgs(selectedObject));
+				this.selectedObjectModified(this, new SelectedObjectArgs(selectedObject, null, null));
 			}
 		}
 
@@ -649,6 +649,8 @@ namespace Europlan.Common {
 			get { return this.selectedObject; }
 			set {
 				if (this.selectedObject != value) {
+					IGraphicalWallObject oldSelectedObject = this.selectedObject;
+					GraphicalWall oldSelectedWall = this.SelectedWall;
 					this.selectedObject = value;
 					if (this.selectedObject != null) {
 						GraphicalWall owningWall = null;
@@ -681,7 +683,7 @@ namespace Europlan.Common {
 						}
 					}
 					this.Invalidate();
-					this.OnObjectSelected(this.selectedObject);
+					this.OnObjectSelected(this.selectedObject, oldSelectedObject, oldSelectedWall);
 				}
 			}
 		}
@@ -717,14 +719,28 @@ namespace Europlan.Common {
 
 		public class SelectedObjectArgs : EventArgs {
 			private IGraphicalWallObject selectedObject;
+			private IGraphicalWallObject oldSelectedObject;
+			private GraphicalWall oldSelectedWall;
 
-			public SelectedObjectArgs(IGraphicalWallObject selectedObject) {
+			public SelectedObjectArgs(IGraphicalWallObject selectedObject, IGraphicalWallObject oldSelectedObject, GraphicalWall oldSelectedWall) {
 				this.selectedObject = selectedObject;
+				this.oldSelectedObject = oldSelectedObject;
+				this.oldSelectedWall = oldSelectedWall;
 			}
 
 			public IGraphicalWallObject SelectedObject {
 				get { return this.selectedObject; }
 				set { this.selectedObject = value; }
+			}
+
+			public IGraphicalWallObject OldSelectedObject {
+				get { return this.oldSelectedObject; }
+				set { this.oldSelectedObject = value; }
+			}
+
+			public GraphicalWall OldSelectedWall {
+				get { return this.oldSelectedWall; }
+				set { this.oldSelectedWall = value; }
 			}
 		}
 	}

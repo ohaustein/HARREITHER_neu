@@ -79,6 +79,8 @@ namespace Europlan.Common {
 		public abstract bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall);
 		public abstract bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall);
 		public abstract List<Anchor> GetAnchors(double scale);
+		public abstract void BackupState();
+		public abstract void RevertState();
 		public abstract bool IsMoveable {
 			get;
 		}
@@ -135,7 +137,7 @@ namespace Europlan.Common {
 			return Polygon2D.GetIntersection(list1, list2).Count > 0;
 		}
 
-		protected Polygon2D GetOutsideBorder(Polygon2D border) {
+		public Polygon2D GetOutsideBorder(Polygon2D border) {
 			Polygon2D usableArea = new Polygon2D(border);
 			usableArea.Outset(this.BorderDistance * 100.0);
 			return usableArea;

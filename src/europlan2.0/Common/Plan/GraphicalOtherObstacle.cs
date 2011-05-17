@@ -17,6 +17,11 @@ namespace Europlan.Common {
 		private double graphPosY = 0;
 		private double width = 0;
 		private double height = 0;
+
+		private double bakGraphPosX = 0;
+		private double bakGraphPosY = 0;
+		private double bakWidth = 0;
+		private double bakHeight = 0;
 		
 		public GraphicalOtherObstacle() {
 
@@ -234,6 +239,20 @@ namespace Europlan.Common {
 			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY - px, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_RIGHT, this));
 			anchors.Add(new Anchor(this.GraphPosX + this.Width / 2.0, this.GraphPosY - px, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
 			return anchors;
+		}
+
+		public override void BackupState() {
+			bakGraphPosX = GraphPosX;
+			bakGraphPosY = GraphPosY;
+			bakWidth = Width;
+			bakHeight = Height;
+		}
+
+		public override void RevertState() {
+			GraphPosX = bakGraphPosX;
+			GraphPosY = bakGraphPosY;
+			Width = bakWidth;
+			Height = bakHeight;
 		}
 
 	}
