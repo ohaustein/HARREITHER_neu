@@ -57,6 +57,13 @@ namespace Europlan.Common {
 			set { this.height = value; }
 		}
 
+		public override ObstacleTypeEnum ObstacleType {
+			get { return ObstacleTypeEnum.Door; }
+			set {
+				// obstacle type of door cannot be changed
+			}
+		}
+
 		public override bool HitTest(Point2D planPoint, double xOffset, double yOffset) {
 			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
 		}

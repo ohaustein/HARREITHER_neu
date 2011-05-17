@@ -10,18 +10,27 @@ namespace Europlan.Common {
 	public abstract class GraphicalWallObstacle : IGraphicalWallObject {
 
 		public class ObstacleTypeConverter : System.ComponentModel.TypeConverter {
-			private static readonly string window = EuroplanRes.GraphicalWallObstacle_Window; //"Fenster";
 			private static readonly string door = EuroplanRes.GraphicalWallObstacle_Door; //"Tür";
+			private static readonly string window = EuroplanRes.GraphicalWallObstacle_Window; //"Fenster";
+			private static readonly string windowTriangleLeft = EuroplanRes.GraphicalWallObstacle_WindowTriangleLeft; //"Dreiecksfenster Links";
+			private static readonly string windowTriangleRight = EuroplanRes.GraphicalWallObstacle_WindowTriangleRight; //"Dreiecksfenster Rechts";
+			private static readonly string other = EuroplanRes.GraphicalWallObstacle_Other; //"Anderes";
 
 			private Dictionary<string, ObstacleTypeEnum> mappingFromString = new Dictionary<string, ObstacleTypeEnum>();
 			private Dictionary<ObstacleTypeEnum, string> mappingToString = new Dictionary<ObstacleTypeEnum, string>();
 
 			public ObstacleTypeConverter() {
-				
-				mappingFromString.Add(window , ObstacleTypeEnum.Window);
 				mappingFromString.Add(door, ObstacleTypeEnum.Door);
-				mappingToString.Add(ObstacleTypeEnum.Window, window);
+				mappingFromString.Add(window, ObstacleTypeEnum.Window);
+				mappingFromString.Add(windowTriangleLeft, ObstacleTypeEnum.WindowTriangleLeft);
+				mappingFromString.Add(windowTriangleRight, ObstacleTypeEnum.WindowTriangleRight);
+				mappingFromString.Add(other, ObstacleTypeEnum.Other);
+
 				mappingToString.Add(ObstacleTypeEnum.Door, door);
+				mappingToString.Add(ObstacleTypeEnum.Window, window);
+				mappingToString.Add(ObstacleTypeEnum.WindowTriangleLeft, windowTriangleLeft);
+				mappingToString.Add(ObstacleTypeEnum.WindowTriangleRight, windowTriangleRight);
+				mappingToString.Add(ObstacleTypeEnum.Other, other);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -54,7 +63,10 @@ namespace Europlan.Common {
 		[System.ComponentModel.TypeConverter(typeof(ObstacleTypeConverter))]
 		public enum ObstacleTypeEnum {
 			Door,
-			Window
+			Window,
+			WindowTriangleLeft,
+			WindowTriangleRight,
+			Other
 		}
 
 		public abstract bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset);
@@ -70,6 +82,10 @@ namespace Europlan.Common {
 			get;
 		}
 		public abstract double BorderDistance {
+			get;
+			set;
+		}
+		public abstract ObstacleTypeEnum ObstacleType {
 			get;
 			set;
 		}

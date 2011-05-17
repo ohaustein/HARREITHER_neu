@@ -1389,8 +1389,17 @@ Drücken Sie OK, um die Anwendung jetzt neu zu starten.</value>
   <data name="GraphicalWallObstacle_Door" xml:space="preserve">
     <value>Tür</value>
   </data>
+  <data name="GraphicalWallObstacle_Other" xml:space="preserve">
+    <value>Anderes</value>
+  </data>
   <data name="GraphicalWallObstacle_Window" xml:space="preserve">
     <value>Fenster</value>
+  </data>
+  <data name="GraphicalWallObstacle_WindowTriangleLeft" xml:space="preserve">
+    <value>Dreiecksfenster Links</value>
+  </data>
+  <data name="GraphicalWallObstacle_WindowTriangleRight" xml:space="preserve">
+    <value>Dreiecksfender Rechts</value>
   </data>
   <data name="HithermCompactProduct_NotificationParameter" xml:space="preserve">
     <value>Hitherm Compact-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>

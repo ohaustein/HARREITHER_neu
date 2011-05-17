@@ -17,6 +17,7 @@ namespace Europlan.Common {
 		private double graphPosY = 0;
 		private double width = 0;
 		private double height = 0;
+		private ObstacleTypeEnum windowType = ObstacleTypeEnum.Window;
 
 		public GraphicalWindow() {
 
@@ -56,6 +57,15 @@ namespace Europlan.Common {
 			set { this.height = value; }
 		}
 
+		public override ObstacleTypeEnum ObstacleType {
+			get { return windowType; }
+			set {
+				if (value == ObstacleTypeEnum.Window || value == ObstacleTypeEnum.WindowTriangleLeft || value == ObstacleTypeEnum.WindowTriangleRight) {
+					windowType = value;
+				}
+			}
+		}
+
 		public override bool HitTest(Point2D planPoint, double xOffset, double yOffset) {
 			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
 		}
@@ -65,6 +75,7 @@ namespace Europlan.Common {
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error) {
+			// TODO windowType beachten
 			Pen windowBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
 			Brush windowBrush = new SolidBrush(SystemColors.ControlLight);
 			Pen unusableBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
@@ -124,6 +135,7 @@ namespace Europlan.Common {
 		}
 
 		public override WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset) {
+			// TODO windowType beachten
 			Polygon2D windowBorder = new Polygon2D();
 			windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY)); // left bottom
 			windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY + height)); // left top

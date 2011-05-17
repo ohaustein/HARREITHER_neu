@@ -39,6 +39,8 @@ namespace Europlan.Common {
 		private double selectedWallXOffset;
 		private double selectedWallYOffset;
 
+		private GraphicalWallObstacle.ObstacleTypeEnum newObstacleType = GraphicalWallObstacle.ObstacleTypeEnum.Window;
+
 		private event EventHandler<SelectedObjectArgs> objectSelected;
 		public event EventHandler<SelectedObjectArgs> ObjectSelected {
 			add { this.objectSelected += value; }
@@ -55,7 +57,8 @@ namespace Europlan.Common {
 			PM_MOVE,
 			PM_SELECT_OBJECT,
 			PM_PLANNER_CLICK,
-			PM_PLANNER_DRAG
+			PM_PLANNER_DRAG,
+			PM_ADD_OBSTACLE
 		}
 
 		public GraphicalWallPanel() {
@@ -85,15 +88,25 @@ namespace Europlan.Common {
 			set { this.scale = value; }
 		}
 
+		public GraphicalWallObstacle.ObstacleTypeEnum NewObstacleType {
+			get { return newObstacleType; }
+			set { newObstacleType = value; }
+		}
+
 		public double TotalWidth {
 			get {
-				double totalWidth = 0;
+				/*double totalWidth = 0;
 				if (this.room != null && this.room.Walls != null) {
 					foreach (GraphicalWall wall in this.room.Walls) {
 						totalWidth += wall.GetWallWidth();
 					}
 				}
-				return totalWidth;
+				return totalWidth;*/
+				if (this.room == null || this.room.Walls == null || this.room.Walls.Count == 0) {
+					return 0;
+				} else {
+					return this.room.GetWallOffset(this.room.Walls[this.room.Walls.Count - 1]).Value.X + this.room.Walls[this.room.Walls.Count - 1].GetWallWidth();
+				}
 			}
 		}
 
@@ -363,7 +376,7 @@ namespace Europlan.Common {
 				invalidate = this.productPlanner.PlannerMouseMove(mousePosInPlan, mousePosInCtrl, e.Button);
 			}
 
-			if (mode == PlanMode.PM_SELECT_OBJECT) {
+			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {
 				if (this.draggingObject != null) {
 					invalidate = invalidate || this.draggingObject.MoveDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
 				} else {
