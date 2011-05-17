@@ -134,6 +134,9 @@ namespace Europlan.Common {
 			this.panelBottom = new System.Windows.Forms.Panel();
 			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.hithermPlanner = new Europlan.Common.HithermPlanner();
+			this.groupBox13 = new System.Windows.Forms.GroupBox();
+			this.numObstacleVertical = new Europlan.Common.NumericBox();
+			this.label11 = new System.Windows.Forms.Label();
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
 			this.panelTop.SuspendLayout();
@@ -149,6 +152,7 @@ namespace Europlan.Common {
 			this.groupBox5.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.panelBottom.SuspendLayout();
+			this.groupBox13.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip1
@@ -287,6 +291,7 @@ namespace Europlan.Common {
 			// 
 			// panelModifyObstacle
 			// 
+			this.panelModifyObstacle.Controls.Add(this.groupBox13);
 			this.panelModifyObstacle.Controls.Add(this.groupBox12);
 			this.panelModifyObstacle.Controls.Add(this.groupBox8);
 			this.panelModifyObstacle.Controls.Add(this.btnObstacleBorder);
@@ -1447,6 +1452,58 @@ namespace Europlan.Common {
 			this.hithermPlanner.NewRegisterVorlaufRight = true;
 			this.hithermPlanner.RecalculationNecessary += new System.EventHandler<System.EventArgs>(this.hithermPlanner_RecalculationNecessary);
 			// 
+			// groupBox13
+			// 
+			this.groupBox13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox13.Controls.Add(this.numObstacleVertical);
+			this.groupBox13.Controls.Add(this.label11);
+			this.groupBox13.Location = new System.Drawing.Point(256, 19);
+			this.groupBox13.Name = "groupBox13";
+			this.groupBox13.Size = new System.Drawing.Size(91, 66);
+			this.groupBox13.TabIndex = 28;
+			this.groupBox13.TabStop = false;
+			this.groupBox13.Text = "Position vert.";
+			// 
+			// numObstacleVertical
+			// 
+			this.numObstacleVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numObstacleVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numObstacleVertical.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleVertical.Location = new System.Drawing.Point(9, 19);
+			this.numObstacleVertical.MaxValue = null;
+			this.numObstacleVertical.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleVertical.Name = "numObstacleVertical";
+			this.numObstacleVertical.Size = new System.Drawing.Size(49, 20);
+			this.numObstacleVertical.TabIndex = 20;
+			this.numObstacleVertical.Text = "0";
+			this.numObstacleVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numObstacleVertical.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleVertical.ValueChanged += new System.EventHandler(this.numObstacleVertical_ValueChanged);
+			// 
+			// label11
+			// 
+			this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(64, 22);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(21, 13);
+			this.label11.TabIndex = 16;
+			this.label11.Text = "cm";
+			// 
 			// HithermPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1486,6 +1543,8 @@ namespace Europlan.Common {
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
 			this.panelBottom.ResumeLayout(false);
+			this.groupBox13.ResumeLayout(false);
+			this.groupBox13.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1603,6 +1662,9 @@ namespace Europlan.Common {
 		private NumericBox numObstacleWidth;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.GroupBox groupBox13;
+		private NumericBox numObstacleVertical;
+		private System.Windows.Forms.Label label11;
 
 
 	}

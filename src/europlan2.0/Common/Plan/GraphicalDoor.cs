@@ -44,7 +44,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override double GraphPosY {
 			get { return this.graphPosY; }
-			set { this.graphPosY = value; }
+			set { }
 		}
 
 		public override double Width {
