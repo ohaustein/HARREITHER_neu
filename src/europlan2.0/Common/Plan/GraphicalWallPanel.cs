@@ -429,7 +429,11 @@ namespace Europlan.Common {
 			}
 			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {
 				if (this.draggingObject != null) {
-					invalidate = invalidate || this.draggingObject.MoveDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
+					bool changed = this.draggingObject.MoveDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
+					if (changed) {
+						this.OnSelectedObjectModified(this.selectedObject);
+					}
+					invalidate = invalidate || changed;
 				} else {
 					if (this.selectedObject != null) {
 						double offsetX = 0;
