@@ -58,17 +58,23 @@ namespace Europlan.Common {
 		}
 
 		private void NewWallForm_FormClosing(object sender, FormClosingEventArgs e) {
-			SettingsKey settings = SettingsFile.Settings["NewWallForm"];
-			settings.StorePoint("Location", this.Location);
-			settings.StoreSize("Size", this.Size);
-			SettingsFile.Update();
 			if (this.DialogResult == DialogResult.OK) {
 				//if (txtName.Text == "") {
 				//    MessageBox.Show(EuroplanRes.NewPlanForm_KeinBezeichnerText, EuroplanRes.NewPlanForm_KeinBezeichnerTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				//    e.Cancel = true;
 				//}
+				if (this.Width < 10) {
+					MessageBox.Show("Bitte geben Sie für die Breite einen gültigen Wert ein (min. 10cm).", "Wand zu schmal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					e.Cancel = true;
+					return;
+				}
 				defaultHeight = (double)this.numHeight.Value;
 			}
+
+			SettingsKey settings = SettingsFile.Settings["NewWallForm"];
+			settings.StorePoint("Location", this.Location);
+			settings.StoreSize("Size", this.Size);
+			SettingsFile.Update();
 		}
 
 		private void NewWallForm_Load(object sender, EventArgs e) {

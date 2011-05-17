@@ -14,8 +14,8 @@ namespace Europlan.Common {
 		private string id = Guid.NewGuid().ToString();
 		private string nextWallId = null;
 		private string prevWallId = null;
-		private Nullable<Point2D> planStartPoint = Point2D.Zero;
-		private Nullable<Point2D> planEndPoint = Point2D.Zero;
+		private Nullable<Point2D> planStartPoint = null;
+		private Nullable<Point2D> planEndPoint = null;
 		private List<Point2D> ceilingContour = new List<Point2D>();
 		private string wallId = "";
 		private List<GraphicalWallObstacle> obstacles = new List<GraphicalWallObstacle>();

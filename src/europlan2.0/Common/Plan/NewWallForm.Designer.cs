@@ -316,6 +316,8 @@ namespace Europlan.Common {
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Wand hinzufügen";
+			this.Load += new System.EventHandler(this.NewWallForm_Load);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewWallForm_FormClosing);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
