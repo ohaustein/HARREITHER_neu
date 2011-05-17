@@ -687,10 +687,10 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public WW.Math.Geometry.Polygon2D GetTotalWallsArea() {
-			WW.Math.Geometry.Polygon2D area = new WW.Math.Geometry.Polygon2D();
+		public List<WW.Math.Geometry.Polygon2D> GetTotalWallsArea() {
+			List<WW.Math.Geometry.Polygon2D> result = new List<WW.Math.Geometry.Polygon2D>();
 			if (this.walls == null) {
-				return area;
+				return result;
 			}
 			foreach (GraphicalWall w in this.walls) {
 				GraphicalWall wall = w;
@@ -700,32 +700,41 @@ namespace Europlan.Common {
 					if (wallBorder.IsClockwise()) {
 						wallBorder.Reverse();
 					}
-					if (area.Count == 0) {
-						area.AddRange(wallBorder);
+					if (result.Count == 0) {
+						result.Add(wallBorder);
 					} else {
-						List<WW.Math.Geometry.Polygon2D> list1 = new List<WW.Math.Geometry.Polygon2D>();
-						list1.Add(area);
-						List<WW.Math.Geometry.Polygon2D> list2 = new List<WW.Math.Geometry.Polygon2D>();
-						list2.Add(wallBorder);
-						List<WW.Math.Geometry.Polygon2D> result = WW.Math.Geometry.Polygon2D.GetUnion(list1, list2);
-						if (result.Count == 1) {
-							area = result[0];
-							if (area.IsClockwise()) {
-								area.Reverse();
-							}
-						} else {
-							throw new Exception();
-						}
+						List<WW.Math.Geometry.Polygon2D> list = new List<WW.Math.Geometry.Polygon2D>();
+						list.Add(wallBorder);
+						result = WW.Math.Geometry.Polygon2D.GetUnion(result, list);
 					}
 					wall = wall.DachSchraege;
 				}
 			}
-			return area;
+			return result;
 		}
 
 		public bool CollisionTest(WW.Math.Geometry.Polygon2D polygon) {
-			WW.Math.Geometry.Polygon2D wall = this.GetTotalWallsArea();
-			bool outside = false;
+			if (polygon == null || polygon.Count < 1) {
+				return false;
+			}
+			List<WW.Math.Geometry.Polygon2D> walls = this.GetTotalWallsArea();
+			List<WW.Math.Geometry.Polygon2D> polyList = new List<WW.Math.Geometry.Polygon2D>();
+			if (polygon.IsClockwise()) {
+				polygon.Reverse();
+			}
+			polyList.Add(polygon);
+			List<WW.Math.Geometry.Polygon2D> result = WW.Math.Geometry.Polygon2D.GetDifference(polyList, walls);
+			return result != null && result.Count > 0;
+			/*bool outside = false;
+			Point2D firstPoint = polygon[0];
+			WW.Math.Geometry.Polygon2D wall = null;
+			foreach (WW.Math.Geometry.Polygon2D poly in walls) {
+				if (poly.IsInside(firstPoint)) {
+					wall = poly;
+					break;
+				}
+
+			}
 			foreach (Point2D point in polygon) {
 				if (!WW.Math.Geometry.Polygon2D.IsInside(point, wall)) {
 					IList<WW.Math.Geometry.Segment2D> segments = new List<WW.Math.Geometry.Segment2D>();
@@ -741,7 +750,7 @@ namespace Europlan.Common {
 					}
 				}
 			}
-			return outside;
+			return outside;*/
 		}
 	}
 

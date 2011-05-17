@@ -435,14 +435,16 @@ namespace Europlan.Common {
 				}*/
 				// TODO
 				if (this.draggingObject == null) {
-					double xOffset = 0;
+					//double xOffset = 0;
 					IGraphicalWallObject pickedObject = null;
+					Vector2D offset;
 					foreach (GraphicalWall wall in this.room.Walls) {
-						pickedObject = wall.GetPickedObject(mousePosInPlan, xOffset, 0);
+						offset = this.room.GetWallOffset(wall).Value * 100;
+						pickedObject = wall.GetPickedObject(mousePosInPlan, offset.X, 0);
 						if (pickedObject != null) {
 							break;
 						}
-						xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100;
+						//xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100;
 					}
 					if (pickedObject == null && this.productPlanner != null || pickedObject is GraphicalWall) {
 						IGraphicalWallObject pickedWall = pickedObject;

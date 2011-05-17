@@ -474,21 +474,22 @@ namespace Europlan.Common {
 			int oldRohre = this.register.Rohre;
 			HithermRegister.HithermRegisterTypeEnum oldType = this.register.RegisterType;
 
+			Vector2D offset = this.product.AssociatedRoom.GetWallOffset(owningWall).Value * 100;
 			bool ok = false;
 			if (newPosX.HasValue && newPosY.HasValue && !newRohre.HasValue && !newType.HasValue) {
 				this.register.GraphPosY = newPosY.Value;
 				bool retryY = false;
-				if (!this.CheckPositionAndSize(owningWall, 0, 0)) {
+				if (!this.CheckPositionAndSize(owningWall, offset.X, offset.Y)) {
 					this.register.GraphPosY = oldPosY;
 					retryY = true;
 				}
 				this.register.GraphPosX = newPosX.Value;
-				if (!this.CheckPositionAndSize(owningWall, 0, 0)) {
+				if (!this.CheckPositionAndSize(owningWall, offset.X, offset.Y)) {
 					this.register.GraphPosX = oldPosX;
 				}
 				if (retryY) {
 					this.register.GraphPosY = newPosY.Value;
-					if (!this.CheckPositionAndSize(owningWall, 0, 0)) {
+					if (!this.CheckPositionAndSize(owningWall, offset.X, offset.Y)) {
 						this.register.GraphPosY = oldPosY;
 					}
 				}
@@ -523,7 +524,7 @@ namespace Europlan.Common {
 					}
 				}
 
-				ok = this.CheckPositionAndSize(owningWall, 0, 0);
+				ok = this.CheckPositionAndSize(owningWall, offset.X, offset.Y);
 				if (!ok) {
 					this.register.GraphPosX = oldPosX;
 					this.register.GraphPosY = oldPosY;

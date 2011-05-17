@@ -486,12 +486,16 @@ namespace Europlan.Common {
 				secondPoint = this.vertices[1];
 				thirdPoint = this.vertices[2];
 				if ((register.Register.GraphVorlaufRight && newStartPoint5.Y > secondPoint.Y) ||
-					(!register.Register.GraphVorlaufRight && newStartPoint5.Y < secondPoint.Y)) {
+					(!register.Register.GraphVorlaufRight && newStartPoint5.Y > secondPoint.Y)) {
 					double tmpX;
-					if (left) {
+					if (left && register.Register.GraphVorlaufRight) {
 						tmpX = secondPoint.X + register.Width + 10;
-					} else {
+					} else if (!left && register.Register.GraphVorlaufRight) {
 						tmpX = secondPoint.X - 10;
+					} else if (left && !register.Register.GraphVorlaufRight) {
+						tmpX = secondPoint.X + 10;
+					} else {
+						tmpX = secondPoint.X - register.Width - 10;
 					}
 					this.vertices.RemoveAt(1);
 					this.vertices.Insert(1, new Point2D(tmpX, secondPoint.Y));
@@ -568,13 +572,17 @@ namespace Europlan.Common {
 				lastPoint = this.vertices[this.vertices.Count - 1];
 				prevLastPoint = this.vertices[this.vertices.Count - 2];
 				prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-				if ((!register.Register.GraphVorlaufRight && newEndPoint5.Y > prevLastPoint.Y) ||
+				if ((!register.Register.GraphVorlaufRight && newEndPoint5.Y < prevLastPoint.Y) ||
 					(register.Register.GraphVorlaufRight && newEndPoint5.Y < prevLastPoint.Y)) {
 					double tmpX;
-					if (left) {
+					if (left && register.Register.GraphVorlaufRight) {
 						tmpX = prevLastPoint.X + 10;
-					} else {
+					} else if (!left && register.Register.GraphVorlaufRight) {
 						tmpX = prevLastPoint.X - register.Width - 10;
+					} else if (left && !register.Register.GraphVorlaufRight) {
+						tmpX = prevLastPoint.X + register.Width + 10;
+					} else {
+						tmpX = prevLastPoint.X - 10;
 					}
 					this.vertices.RemoveAt(this.vertices.Count - 2);
 					this.vertices.Insert(this.vertices.Count - 1, new Point2D(tmpX, prevLastPoint.Y));
