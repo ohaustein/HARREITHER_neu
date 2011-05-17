@@ -7,6 +7,7 @@ namespace Europlan.Common {
 
 	[XmlInclude(typeof(GraphicalDoor))]
 	[XmlInclude(typeof(GraphicalWindow))]
+	[XmlInclude(typeof(GraphicalOtherObstacle))]
 	public abstract class GraphicalWallObstacle : IGraphicalWallObject {
 
 		public class ObstacleTypeConverter : System.ComponentModel.TypeConverter {

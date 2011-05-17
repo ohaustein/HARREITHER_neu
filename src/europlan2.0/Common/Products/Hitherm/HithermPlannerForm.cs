@@ -18,6 +18,9 @@ namespace Europlan.Common {
 
 		public HithermPlannerForm(HithermProduct product) {
 			InitializeComponent();
+
+			cmbNewObstacleType.DataSource = Enum.GetValues(typeof(Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum));
+
 			//this.graphicalWallPanel.Room = product.AssociatedRoom;
 			this.hithermPlanner.Product = product;
 			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
@@ -324,6 +327,7 @@ namespace Europlan.Common {
 		private void UpdateModifyObstaclesPanel(GraphicalWallObstacle obstacle) {
 			updateOngoing = true;
 			this.panelModifyObstacle.BringToFront();
+			cmbNewObstacleType.SelectedValue = graphicalWallPanel.NewObstacleType;
 			if (obstacle != null) {
 
 			} else {
@@ -830,6 +834,10 @@ namespace Europlan.Common {
 					break;
 				}
 			}
+		}
+
+		private void cmbNewObstacleType_SelectedValueChanged(object sender, EventArgs e) {
+			graphicalWallPanel.NewObstacleType = (Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum)cmbNewObstacleType.SelectedValue;
 		}
 	}
 }
