@@ -36,23 +36,23 @@ namespace Europlan.Common {
 			set { id = value; }
 		}
 
-		public double GraphPosX {
+		public override double GraphPosX {
 			get { return this.graphPosX; }
 			set { this.graphPosX = value; }
 		}
 
 		[XmlIgnore]
-		public double GraphPosY {
+		public override double GraphPosY {
 			get { return this.graphPosY; }
 			set { this.graphPosY = value; }
 		}
 
-		public double Width {
+		public override double Width {
 			get { return this.width; }
 			set { this.width = value; }
 		}
 
-		public double Height {
+		public override double Height {
 			get { return this.height; }
 			set { this.height = value; }
 		}

@@ -90,6 +90,22 @@ namespace Europlan.Common {
 			get;
 			set;
 		}
+		public abstract double GraphPosX {
+			get;
+			set;
+		}
+		public abstract double GraphPosY {
+			get;
+			set;
+		}
+		public abstract double Width {
+			get;
+			set;
+		}
+		public abstract double Height {
+			get;
+			set;
+		}
 
 	}
 

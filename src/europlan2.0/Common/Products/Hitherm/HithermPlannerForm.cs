@@ -327,11 +327,15 @@ namespace Europlan.Common {
 		private void UpdateModifyObstaclesPanel(GraphicalWallObstacle obstacle) {
 			updateOngoing = true;
 			this.panelModifyObstacle.BringToFront();
-			cmbNewObstacleType.SelectedValue = graphicalWallPanel.NewObstacleType;
+			cmbNewObstacleType.SelectedItem = graphicalWallPanel.NewObstacleType;
 			if (obstacle != null) {
-
+				if (obstacle is GraphicalWallObstacle) {
+					this.numObstacleWidth.Value = (decimal)(obstacle as GraphicalWallObstacle).Width;
+					this.numObstacleHeight.Value = (decimal)(obstacle as GraphicalWallObstacle).Height;
+				}
 			} else {
-
+				this.numObstacleHeight.Text = "";
+				this.numObstacleWidth.Text = "";
 			}
 			UpdateModifyObstaclesPanelButtons(obstacle);
 			updateOngoing = false;
@@ -403,15 +407,23 @@ namespace Europlan.Common {
 
 		private void UpdateModifyObstaclesPanelButtons(GraphicalWallObstacle obstacle) {
 			if (obstacle != null) {
-				this.btnObstacleApply.Enabled = unsavedChanges;
-				this.btnObstacleRevert.Enabled = unsavedChanges;
 				this.btnObstacleRemove.Enabled = true;
 				this.btnObstacleBorder.Enabled = true;
+				this.numObstacleWidth.Enabled = true;
+				this.numObstacleHeight.Enabled = true;
+
+				if (obstacle is GraphicalDoor) {
+
+				} else if (obstacle is GraphicalWindow) {
+				
+				} else if (obstacle is GraphicalOtherObstacle) {
+				
+				}
 			} else {
-				this.btnObstacleApply.Enabled = false;
-				this.btnObstacleRevert.Enabled = false;
 				this.btnObstacleRemove.Enabled = false;
 				this.btnObstacleBorder.Enabled = false;
+				this.numObstacleWidth.Enabled = false;
+				this.numObstacleHeight.Enabled = false;
 			}
 		}
 
@@ -775,17 +787,6 @@ namespace Europlan.Common {
 
 		}
 
-		private void btnObstacleApply_Click(object sender, EventArgs e) {
-			unsavedChanges = false;
-		}
-
-		private void btnObstacleRevert_Click(object sender, EventArgs e) {
-			GraphicalWallObstacle obstacle = SelectedObject as GraphicalWallObstacle;
-			unsavedChanges = false;
-			UpdateModifyObstaclesPanel(obstacle);
-
-		}
-
 		private void btnObstacleRemove_Click(object sender, EventArgs e) {
 			DeleteObstacle();
 		}
@@ -838,6 +839,20 @@ namespace Europlan.Common {
 
 		private void cmbNewObstacleType_SelectedValueChanged(object sender, EventArgs e) {
 			graphicalWallPanel.NewObstacleType = (Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum)cmbNewObstacleType.SelectedValue;
+		}
+
+		private void numObstacleWidth_ValueChanged(object sender, EventArgs e) {
+			if (SelectedObject is GraphicalWallObstacle) {
+				(SelectedObject as GraphicalWallObstacle).Width = (double)numObstacleWidth.Value;
+				this.graphicalWallPanel.InvalidateGraphics();
+			}
+		}
+
+		private void numObstacleHeight_ValueChanged(object sender, EventArgs e) {
+			if (SelectedObject is GraphicalWallObstacle) {
+				(SelectedObject as GraphicalWallObstacle).Height = (double)numObstacleHeight.Value;
+				this.graphicalWallPanel.InvalidateGraphics();
+			}
 		}
 	}
 }
