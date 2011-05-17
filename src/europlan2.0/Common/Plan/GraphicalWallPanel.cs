@@ -47,9 +47,21 @@ namespace Europlan.Common {
 			remove { this.objectSelected -= value; }
 		}
 
+		private event EventHandler<SelectedObjectArgs> selectedObjectModified;
+		public event EventHandler<SelectedObjectArgs> SelectedObjectModified {
+			add { this.selectedObjectModified += value; }
+			remove { this.selectedObjectModified -= value; }
+		}
+
 		protected virtual void OnObjectSelected(IGraphicalWallObject selectedObject) {
 			if (this.objectSelected != null) {
 				this.objectSelected(this, new SelectedObjectArgs(selectedObject));
+			}
+		}
+
+		protected virtual void OnSelectedObjectModified(IGraphicalWallObject selectedObject) {
+			if (this.selectedObjectModified != null) {
+				this.selectedObjectModified(this, new SelectedObjectArgs(selectedObject));
 			}
 		}
 
@@ -260,6 +272,12 @@ namespace Europlan.Common {
 			}
 		}
 
+		private Nullable<Point2D> dragStart = null;
+		private Point2D dragEnd = Point2D.Zero;
+		private GraphicalWallObstacle newObstacle = null;
+		private GraphicalWall newObstacleWall = null;
+		private double newObstacleWallXOffset, newObstacleWallYOffset;
+
 		protected override void OnMouseDown(MouseEventArgs e) {
 			base.OnMouseDown(e);
 			if (this.room == null) {
@@ -277,7 +295,29 @@ namespace Europlan.Common {
 				}
 			}
 
-			if (mode == PlanMode.PM_SELECT_OBJECT) {
+			if (mode == PlanMode.PM_ADD_OBSTACLE && this.room != null) {
+				this.dragStart = mousePosInPlan;
+				this.newObstacleWall = this.room.GetWallForPoint(mousePosInPlan, out this.newObstacleWallXOffset, out this.newObstacleWallYOffset);
+				if (this.newObstacleWall != null) {
+					switch (this.newObstacleType) {
+						case GraphicalWallObstacle.ObstacleTypeEnum.Door:
+							this.newObstacle = new GraphicalDoor();
+							break;
+						case GraphicalWallObstacle.ObstacleTypeEnum.Window:
+						case GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleLeft:
+						case GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleRight:
+							this.newObstacle = new GraphicalWindow();
+							this.newObstacle.ObstacleType = this.newObstacleType;
+							break;
+						case GraphicalWallObstacle.ObstacleTypeEnum.Other:
+							this.newObstacle = new GraphicalOtherObstacle();
+							break;
+						default:
+							throw new Exception();
+					}
+				}
+			}
+			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {
 				if (this.selectedObject != null) {
 					double offsetX = 0;
 					double offsetY = 0;
@@ -335,6 +375,12 @@ namespace Europlan.Common {
 				}
 			}
 
+			if (mode == PlanMode.PM_ADD_OBSTACLE) {
+				this.dragStart = null;
+				this.newObstacle = null;
+				this.newObstacleWall = null;
+			}
+
 			if (mode == PlanMode.PM_SELECT_OBJECT) {
 				if (this.draggingObject != null) {
 					invalidate = invalidate || this.draggingObject.EndDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
@@ -376,6 +422,11 @@ namespace Europlan.Common {
 				invalidate = this.productPlanner.PlannerMouseMove(mousePosInPlan, mousePosInCtrl, e.Button);
 			}
 
+			if (this.mode == PlanMode.PM_ADD_OBSTACLE && this.dragStart.HasValue && this.newObstacle != null && this.newObstacleWall != null) {
+				// TODO
+				/*double x = mousePosInCtrl.X < this.dragStart.Value.X ? mousePosInCtrl.X : this.dragStart.Value.X;
+				double y = mousePosInCtrl.Y */
+			}
 			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {
 				if (this.draggingObject != null) {
 					invalidate = invalidate || this.draggingObject.MoveDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);

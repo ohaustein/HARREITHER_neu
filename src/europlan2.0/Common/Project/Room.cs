@@ -752,6 +752,30 @@ namespace Europlan.Common {
 			}
 			return outside;*/
 		}
+
+		public GraphicalWall GetWallForPoint(Point2D planPoint, out double xOffset, out double yOffset) {
+			GraphicalWall pickedWall = null;
+			foreach (GraphicalWall wall in this.Walls) {
+				pickedWall = wall.GetPickedWall(planPoint, this.GetWallOffset(wall).Value.X * 100, 0);
+				if (pickedWall != null) {
+					break;
+				}
+			}
+			if (pickedWall == null) {
+				xOffset = 0;
+				yOffset = 0;
+			} else {
+				Nullable<Vector2D> offset = this.GetWallOffset(pickedWall);
+				if (offset.HasValue) {
+					xOffset = offset.Value.X * 100;
+					yOffset = offset.Value.Y * 100;
+				} else {
+					xOffset = 0;
+					yOffset = 0;
+				}
+			}
+			return pickedWall;
+		}
 	}
 
 }

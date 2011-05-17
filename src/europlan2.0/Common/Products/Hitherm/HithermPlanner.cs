@@ -327,8 +327,8 @@ namespace Europlan.Common {
 
 			this.dragStart = planPoint;
 
-			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER) {
-				this.newRegisterWall = this.GetWallForPoint(planPoint, out this.newRegisterWallXOffset, out this.newRegisterWallYOffset);
+			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER && this.product != null && this.product.AssociatedRoom != null) {
+				this.newRegisterWall = this.product.AssociatedRoom.GetWallForPoint(planPoint, out this.newRegisterWallXOffset, out this.newRegisterWallYOffset);
 				if (this.newRegisterWall != null) {
 					this.newRegister = new GraphicalHithermRegisterWrapper(this.product);
 				}
@@ -463,35 +463,6 @@ namespace Europlan.Common {
 				}
 
 			}
-		}
-
-		private GraphicalWall GetWallForPoint(Point2D planPoint, out double xOffset, out double yOffset) {
-			if (this.product == null || this.product.AssociatedRoom == null) {
-				xOffset = 0;
-				yOffset = 0;
-				return null;
-			}
-			GraphicalWall pickedWall = null;
-			foreach (GraphicalWall wall in this.product.AssociatedRoom.Walls) {
-				pickedWall = wall.GetPickedWall(planPoint, this.product.AssociatedRoom.GetWallOffset(wall).Value.X * 100, 0);
-				if (pickedWall != null) {
-					break;
-				}
-			}
-			if (pickedWall == null) {
-				xOffset = 0;
-				yOffset = 0;
-			} else {
-				Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(pickedWall);
-				if (offset.HasValue) {
-					xOffset = offset.Value.X * 100;
-					yOffset = offset.Value.Y * 100;
-				} else {
-					xOffset = 0;
-					yOffset = 0;
-				}
-			}
-			return pickedWall;
 		}
 
 		/*/// <summary>
