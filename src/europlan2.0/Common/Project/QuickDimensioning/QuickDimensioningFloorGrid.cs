@@ -527,7 +527,6 @@ namespace Europlan.Common {
 		}
 
 		private void quickDimensioningGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e) {
-			Console.WriteLine(e.Control);
 			if (e.Control is DataGridViewComboBoxEditingControl) {
 				DataGridViewComboBoxEditingControl combo = (e.Control as DataGridViewComboBoxEditingControl);
 				if (combo.Items.Count > 0 && combo.Items[0] is RoomTypeItem) {
@@ -541,7 +540,6 @@ namespace Europlan.Common {
 			DataGridViewComboBoxEditingControl combo = (sender as DataGridViewComboBoxEditingControl);
 			RoomTypeItem selectedRoomType = combo.SelectedItem as RoomTypeItem;
 			if (selectedRoomType != null) {
-				Console.WriteLine(selectedRoomType.Name);
 				if (selectedRoomType.Value == this.newRoomType) {
 					NewRoomTypeForm form = new NewRoomTypeForm(Project.Instance.Config);
 					form.SelectedRoomType = (this.quickDimensioningGrid.Rows[(sender as DataGridViewComboBoxEditingControl).EditingControlRowIndex].DataBoundItem as Room).QuickDimensioningRoomType;

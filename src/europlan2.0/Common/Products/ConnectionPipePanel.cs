@@ -520,7 +520,6 @@ namespace Europlan.Common {
 		}
 
 		private void dgvConnectionPipes_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e) {
-			Console.WriteLine("showing");
 			if (e.Control is DataGridViewTextBoxEditingControl) {
 				DataGridViewTextBoxEditingControl txtBox = (e.Control as DataGridViewTextBoxEditingControl);
 				if (txtBox.EditingControlRowIndex >= 0 && txtBox.EditingControlRowIndex < this.dgvConnectionPipes.Rows.Count) {

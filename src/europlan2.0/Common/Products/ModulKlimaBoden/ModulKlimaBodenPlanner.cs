@@ -814,7 +814,6 @@ namespace Europlan.Common {
 					Point2D rotatedCurPoint = rotation.Transform(planPoint);
 					double delta = rotatedCurPoint.Y - rotatedStartPoint.Y;
 					double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-					Console.WriteLine(delta / measure);
 					Dictionary<int, List<KlimaFlaechenModul>> modulesPerLane = new Dictionary<int, List<KlimaFlaechenModul>>();
 					foreach (KlimaFlaechenModul modul in this.GetAllSelectedModules()) {
 						if (!modulesPerLane.ContainsKey(modul.GraphLane)) {

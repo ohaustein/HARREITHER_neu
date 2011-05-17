@@ -175,7 +175,6 @@ namespace Europlan.Common {
 						this.yPos = value;
 					}
 				}
-				Console.WriteLine(this.yPos);
 			}
 		}
 
@@ -211,6 +210,23 @@ namespace Europlan.Common {
 				Point pointInCtrl = this.PointToClient(MousePosition);
 				Point2D pointInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(pointInCtrl.X, pointInCtrl.Y));
 				this.productPlanner.PaintAfterPlanPannel(e, pointInPlan, pointInCtrl, this.Scale);
+			}
+
+			if (this.newObstacle != null && this.newObstacleWall != null) {
+				Vector2D offset = this.room.GetWallOffset(this.newObstacleWall).Value * 100;
+				List<PointF> borderPoints = new List<PointF>();
+				foreach (Point2D vertex in this.newObstacleWall.GetObjectBorders(offset.X, offset.Y)) {
+					borderPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
+				}
+
+				PointF[] pointArr = borderPoints.ToArray();
+
+				GraphicsPath wallPath = new GraphicsPath();
+				wallPath.AddPolygon(pointArr);
+				Region wallClip = new Region(wallPath);
+				e.Graphics.Clip = wallClip;
+
+				this.newObstacle.PaintObject(e.Graphics, offset.X, offset.Y, this.newObstacle, scale);
 			}
 
 			if (this.mode == PlanMode.PM_SELECT_OBJECT && this.selectedObject != null) {
@@ -298,10 +314,15 @@ namespace Europlan.Common {
 			if (mode == PlanMode.PM_ADD_OBSTACLE && this.room != null) {
 				this.dragStart = mousePosInPlan;
 				this.newObstacleWall = this.room.GetWallForPoint(mousePosInPlan, out this.newObstacleWallXOffset, out this.newObstacleWallYOffset);
+				this.selectedWall = this.newObstacleWall;
 				if (this.newObstacleWall != null) {
 					switch (this.newObstacleType) {
 						case GraphicalWallObstacle.ObstacleTypeEnum.Door:
-							this.newObstacle = new GraphicalDoor();
+							if (!this.newObstacleWall.IsDachSchraege) {
+								this.newObstacle = new GraphicalDoor();
+							} else {
+								this.newObstacle = null;
+							}
 							break;
 						case GraphicalWallObstacle.ObstacleTypeEnum.Window:
 						case GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleLeft:
@@ -313,7 +334,11 @@ namespace Europlan.Common {
 							this.newObstacle = new GraphicalOtherObstacle();
 							break;
 						default:
-							throw new Exception();
+							this.newObstacle = null;
+							break;
+					}
+					if (this.newObstacle == null) {
+						this.newObstacleWall = null;
 					}
 				}
 			}
@@ -376,6 +401,7 @@ namespace Europlan.Common {
 			}
 
 			if (mode == PlanMode.PM_ADD_OBSTACLE) {
+				this.newObstacleWall.Obstacles.Add(this.newObstacle);
 				this.dragStart = null;
 				this.newObstacle = null;
 				this.newObstacleWall = null;
@@ -423,9 +449,15 @@ namespace Europlan.Common {
 			}
 
 			if (this.mode == PlanMode.PM_ADD_OBSTACLE && this.dragStart.HasValue && this.newObstacle != null && this.newObstacleWall != null) {
-				// TODO
-				/*double x = mousePosInCtrl.X < this.dragStart.Value.X ? mousePosInCtrl.X : this.dragStart.Value.X;
-				double y = mousePosInCtrl.Y */
+				double x = (mousePosInPlan.X < this.dragStart.Value.X ? mousePosInPlan.X : this.dragStart.Value.X) - this.newObstacleWallXOffset;
+				double y = (mousePosInPlan.Y < this.dragStart.Value.Y ? mousePosInPlan.Y : this.dragStart.Value.Y) - this.newObstacleWallYOffset;
+				double width = Math.Abs(mousePosInPlan.X - this.dragStart.Value.X);
+				double height = this.newObstacle is GraphicalDoor ? mousePosInPlan.Y : Math.Abs(mousePosInPlan.Y - this.dragStart.Value.Y);
+				this.newObstacle.GraphPosX = x;
+				this.newObstacle.GraphPosY = y;
+				this.newObstacle.Height = height;
+				this.newObstacle.Width = width;
+				invalidate = true;
 			}
 			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {
 				if (this.draggingObject != null) {

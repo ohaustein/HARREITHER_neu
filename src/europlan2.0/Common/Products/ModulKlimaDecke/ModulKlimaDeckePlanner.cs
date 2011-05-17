@@ -1281,7 +1281,6 @@ namespace Europlan.Common {
 					Point2D rotatedCurPoint = rotation.Transform(planPoint);
 					double delta = rotatedCurPoint.Y - rotatedStartPoint.Y;
 					double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-					Console.WriteLine(delta / measure);
 					// TODO move modules
 					Dictionary<int, List<KlimaFlaechenModul>> modulesPerLane = new Dictionary<int, List<KlimaFlaechenModul>>();
 					foreach (KlimaFlaechenModul modul in this.GetAllSelectedModules()) {
@@ -2159,7 +2158,6 @@ namespace Europlan.Common {
 			text.Style = model.TextStyles["HarreitherStyle"];
 			text.Layer = layer;
 			text.Color = c;
-			Console.WriteLine(this.product.GraphConstruction.Rotation);
 			text.Rotation = this.product.GraphConstruction.Rotation / 180.0 * Math.PI;
 			model.Entities.Add(text);		
 		}

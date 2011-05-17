@@ -22,8 +22,7 @@ namespace Europlan.Common {
 			set {
 				try {
 					base.ReadOnly = value;
-				} catch (Exception e) {
-					Console.WriteLine("blub");
+				} catch {
 				}
 			}
 		}

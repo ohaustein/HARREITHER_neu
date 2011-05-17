@@ -186,14 +186,30 @@ namespace Europlan.Common {
 			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
 			g.DrawPolygon(wallBorderPen, pointArr);
 
+			bool drawSelected = false;
+
 			foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
-				g.Clip = wallClip;
-				obstacle.PaintObject(g, xOffset, yOffset, selectedObject, scale);
+				if (obstacle != selectedObject) {
+					g.Clip = wallClip;
+					obstacle.PaintObject(g, xOffset, yOffset, selectedObject, scale);
+				} else {
+					drawSelected = true;
+				}
 			}
 			foreach (GraphicalRegisterWrapper register in this.Registers) {
-				g.Clip = wallClip;
-				register.PaintObject(g, xOffset, yOffset, selectedObject, scale);
+				if (register != selectedObject) {
+					g.Clip = wallClip;
+					register.PaintObject(g, xOffset, yOffset, selectedObject, scale);
+				} else {
+					drawSelected = true;
+				}
 			}
+
+			g.Clip = wallClip;
+			if (drawSelected) {
+				selectedObject.PaintObject(g, xOffset, yOffset, selectedObject, scale);
+			}
+
 			g.Clip = oldClip;
 
 			if (this.DachSchraege != null) {
@@ -215,12 +231,20 @@ namespace Europlan.Common {
 					return pickedObject;
 				}
 			}
-			foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
+
+			pickedObject = this.Obstacles.FindLast(delegate(GraphicalWallObstacle obstacle) {
+				return obstacle.HitTest(planPoint, xOffset, yOffset);
+			});
+			if (pickedObject != null) {
+				return pickedObject.GetPickedObject(planPoint, xOffset, yOffset);
+			}
+			/*foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
 				pickedObject = obstacle.GetPickedObject(planPoint, xOffset, yOffset);
 				if (pickedObject != null) {
 					return pickedObject;
 				}
-			}
+			}*/
+
 			foreach (GraphicalRegisterWrapper register in this.Registers) {
 				pickedObject = register.GetPickedObject(planPoint, xOffset, yOffset);
 				if (pickedObject != null) {
