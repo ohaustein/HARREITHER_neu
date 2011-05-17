@@ -13,8 +13,7 @@ namespace Europlan.Common {
 		public enum HithermPlannerMode {
 			HPM_NONE,
 			HPM_ADD_REGISTER,
-			HPM_ADD_CONNECTION,
-			HPM_ADD_OBSTACLE
+			HPM_ADD_CONNECTION
 		}
 
 		private GraphicalWallPanel connectedWallPanel;

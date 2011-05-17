@@ -178,8 +178,8 @@ namespace Europlan.Common {
 
 		private void btnObstacle_Click(object sender, EventArgs e) {
 			this.graphicalWallPanel.SelectedObject = null;
-			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
-			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_OBSTACLE;
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_ADD_OBSTACLE;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
 			UpdateModifyObstaclesPanel(null);
 			this.panelModifyObstacle.BringToFront();
 			ApplyButtonCheckedState(this.btnObstacle);
