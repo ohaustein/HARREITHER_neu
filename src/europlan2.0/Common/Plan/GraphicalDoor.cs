@@ -144,26 +144,6 @@ namespace Europlan.Common {
 			return doorBorder;
 		}
 
-		public override bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
-			Polygon2D door = GetObjectBorders(xOffset, yOffset);
-			if (ignoreBorders) {
-				door = GetOutsideBorder(door);
-			}
-
-			if (polygon.IsClockwise()) {
-				polygon.Reverse();
-			}
-			if (door.IsClockwise()) {
-				door.Reverse();
-			}
-			List<Polygon2D> list1 = new List<Polygon2D>();
-			list1.Add(polygon);
-			List<Polygon2D> list2 = new List<Polygon2D>();
-			list2.Add(door);
-
-			return Polygon2D.GetIntersection(list1, list2).Count > 0;
-		}
-
 		private Nullable<Point2D> startDrag = null;
 		private double startX, startY, startWidth, startHeight;
 
@@ -231,20 +211,6 @@ namespace Europlan.Common {
 			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY - px, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
 			//anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
 			return anchors;
-		}
-
-		public bool PositionAndSizeOk(GraphicalWall owningWall, double offsetX, double offsetY) {
-			Polygon2D doorBorders = this.GetObjectBorders(offsetX, offsetY);
-			if (owningWall.CollisionTest(doorBorders, offsetX, offsetY, true)) {
-				return false;
-			} 
-			return true;
-		}
-
-		private Polygon2D GetOutsideBorder(Polygon2D doorBorder) {
-			Polygon2D usableArea = new Polygon2D(doorBorder);
-			usableArea.Outset(this.BorderDistance * 100.0);
-			return usableArea;
 		}
 
 	}

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
 
@@ -74,7 +75,6 @@ namespace Europlan.Common {
 		public abstract void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale);
 		public abstract IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset);
 		public abstract WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset);
-		public abstract bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders);
 		public abstract bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall);
 		public abstract bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall);
 		public abstract bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall);
@@ -105,6 +105,53 @@ namespace Europlan.Common {
 		public abstract double Height {
 			get;
 			set;
+		}
+
+		public bool PositionAndSizeOk(GraphicalWall owningWall, double offsetX, double offsetY) {
+			Polygon2D borders = this.GetObjectBorders(offsetX, offsetY);
+			if (owningWall.CollisionTest(borders, offsetX, offsetY, true)) {
+				return false;
+			}
+			Polygon2D outsideBorders = this.GetOutsideBorder(borders);
+			foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+				if (obstacle != this) {
+					if (obstacle.CollisionTest(outsideBorders, offsetX, offsetY, false)) {
+						return false;
+					}
+				}
+			}
+			foreach (GraphicalHithermRegisterWrapper wrapper in owningWall.Registers) {
+				if (wrapper.CollisionTest(outsideBorders, offsetX, offsetY, false)) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
+			Polygon2D door = GetObjectBorders(xOffset, yOffset);
+			if (!ignoreBorders) {
+				door = GetOutsideBorder(door);
+			}
+
+			if (polygon.IsClockwise()) {
+				polygon.Reverse();
+			}
+			if (door.IsClockwise()) {
+				door.Reverse();
+			}
+			List<Polygon2D> list1 = new List<Polygon2D>();
+			list1.Add(polygon);
+			List<Polygon2D> list2 = new List<Polygon2D>();
+			list2.Add(door);
+
+			return Polygon2D.GetIntersection(list1, list2).Count > 0;
+		}
+
+		protected Polygon2D GetOutsideBorder(Polygon2D border) {
+			Polygon2D usableArea = new Polygon2D(border);
+			usableArea.Outset(this.BorderDistance * 100.0);
+			return usableArea;
 		}
 
 	}
