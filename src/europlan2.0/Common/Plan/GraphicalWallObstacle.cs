@@ -112,19 +112,6 @@ namespace Europlan.Common {
 			if (owningWall.CollisionTest(borders, offsetX, offsetY, true)) {
 				return false;
 			}
-			Polygon2D outsideBorders = this.GetOutsideBorder(borders);
-			foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
-				if (obstacle != this) {
-					if (obstacle.CollisionTest(outsideBorders, offsetX, offsetY, false)) {
-						return false;
-					}
-				}
-			}
-			foreach (GraphicalHithermRegisterWrapper wrapper in owningWall.Registers) {
-				if (wrapper.CollisionTest(outsideBorders, offsetX, offsetY, false)) {
-					return false;
-				}
-			}
 			return true;
 		}
 
