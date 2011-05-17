@@ -1092,6 +1092,7 @@ namespace Europlan.Common {
 				this.registerCircuits[register] = circuitId;
 				if (!this.circuitIds.ContainsKey(circuitId)) {
 					hc = new HithermCircuit();
+					hc.HithermProduct = this;
 					this.circuits.Add(hc);
 					this.circuitIds[circuitId] = hc;
 				}

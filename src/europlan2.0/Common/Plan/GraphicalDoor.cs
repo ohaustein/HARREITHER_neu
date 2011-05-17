@@ -91,7 +91,7 @@ namespace Europlan.Common {
 			Region oldClip = g.Clip;
 			Region baseClip = new Region(oldClip.GetRegionData());
 			Polygon2D doorArea = this.GetObjectBorders(xOffset, yOffset);
-			Polygon2D outsideBorder = GetOutsideBorder(doorArea);
+			Polygon2D outsideBorder = GetOutsideBorder(xOffset, yOffset);
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 
 			List<PointF> doorPoints = new List<PointF>();
@@ -232,7 +232,15 @@ namespace Europlan.Common {
 			Height = bakHeight;
 		}
 
-
+		public override Polygon2D GetOutsideBorder(double xOffset, double yOffset) {
+			Polygon2D doorBorder = new Polygon2D();
+			double dist = this.BorderDistance * 100;
+			doorBorder.Add(new Point2D(xOffset + graphPosX - dist, yOffset + graphPosY)); // left bottom
+			doorBorder.Add(new Point2D(xOffset + graphPosX - dist, yOffset + graphPosY + height + dist)); // left top
+			doorBorder.Add(new Point2D(xOffset + graphPosX + width + dist, yOffset + graphPosY + height + dist)); // right top
+			doorBorder.Add(new Point2D(xOffset + graphPosX + width + dist, yOffset + graphPosY)); // right bottom
+			return doorBorder;
+		}
 	}
 
 }

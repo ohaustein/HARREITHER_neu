@@ -238,22 +238,28 @@ namespace Europlan.Common {
 				if (!obstacle.PositionAndSizeOk(e.OldSelectedWall, 0, 0)) {
 					obstacle.RevertState();
 				} else {
-					Vector2D offset = this.graphicalWallPanel.Room.GetWallOffset(e.OldSelectedWall).Value;
+					Vector2D offset = this.graphicalWallPanel.Room.GetWallOffset(e.OldSelectedWall).Value * 100;
 					Polygon2D border = obstacle.GetObjectBorders(offset.X, offset.Y);
-					Polygon2D outsideBorder = obstacle.GetOutsideBorder(border);
+					Polygon2D outsideBorder = obstacle.GetOutsideBorder(offset.X, offset.Y);
 					List<GraphicalRegisterWrapper> toDelete = new List<GraphicalRegisterWrapper>();
 					foreach (GraphicalRegisterWrapper wrapper in e.OldSelectedWall.Registers) {
 						if (wrapper.CollisionTest(outsideBorder, offset.X, offset.Y, false)) {
 							toDelete.Add(wrapper);
 						}
 					}
+					foreach (GraphicalRegisterWrapper wrapper in toDelete) {
+						DeleteRegister(wrapper as GraphicalHithermRegisterWrapper);
+					}
+					List<HithermRegisterVerbindung> linksToDelete = new List<HithermRegisterVerbindung>();
 					foreach (HithermCircuit c in this.hithermPlanner.Product.PlannedCircuits) {
-						List<HithermRegisterVerbindung> linksToDelete = new List<HithermRegisterVerbindung>();
 						foreach (HithermRegisterVerbindung link in c.Links) {
 							if (link.CollisionTest(outsideBorder, offset.X, offset.Y, false)) {
 								linksToDelete.Add(link);
 							}
 						}
+					}
+					foreach (HithermRegisterVerbindung link in linksToDelete) {
+						DeleteVerbindung(link);
 					}
 				}
 			}
@@ -643,20 +649,21 @@ namespace Europlan.Common {
 		}
 
 		private void btnRegisterDelete_Click(object sender, EventArgs e) {
-			DeleteRegister();
+			DeleteRegister(this.SelectedObject as GraphicalHithermRegisterWrapper);
 		}
 
-		private void DeleteRegister() {
-			if (SelectedObject != null) {
-				GraphicalHithermRegisterWrapper wrapper = SelectedObject as GraphicalHithermRegisterWrapper;
+		private void DeleteRegister(GraphicalHithermRegisterWrapper register) {
+			if (register != null) {
 				foreach (GraphicalWall wall in graphicalWallPanel.Room.Walls) {
-					GraphicalWall wrapperWall = wall.GetWallForWrapper(wrapper);
+					GraphicalWall wrapperWall = wall.GetWallForWrapper(register);
 					if (wrapperWall != null) {
-						wrapperWall.Registers.Remove(wrapper);
+						wrapperWall.Registers.Remove(register);
 					}
-					hithermPlanner.Product.RemoveRegisterFromCircuit(wrapper.Register);
+					hithermPlanner.Product.RemoveRegisterFromCircuit(register.Register);
 				}
-				UpdateModifyRegisterPanel(wrapper);
+				if (register == SelectedObject) {
+					UpdateModifyRegisterPanel(register);
+				}
 				this.graphicalWallPanel.SelectedObject = null;
 				this.graphicalWallPanel.InvalidateGraphics();
 			}
@@ -847,7 +854,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnObstacleRemove_Click(object sender, EventArgs e) {
-			DeleteObstacle();
+			DeleteObstacle(SelectedObject as GraphicalWallObstacle);
 		}
 
 		private void btnObstacleBorder_Click(object sender, EventArgs e) {
@@ -860,12 +867,19 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void DeleteObstacle() {
-			if (SelectedObject is GraphicalWallObstacle && graphicalWallPanel.SelectedWall != null) {
-				graphicalWallPanel.SelectedWall.Obstacles.Remove(SelectedObject as GraphicalWallObstacle);
-				graphicalWallPanel.SelectedObject = null;
-				UpdateModifyObstaclesPanel(null);
-				this.graphicalWallPanel.InvalidateGraphics();
+		private void DeleteObstacle(GraphicalWallObstacle obstacle) {
+			if (obstacle != null) {
+				foreach (GraphicalWall wall in graphicalWallPanel.Room.Walls) {
+					GraphicalWall obstacleWall = wall.GetWallForObstacle(obstacle);
+					if (obstacleWall != null) {
+						obstacleWall.Obstacles.Remove(obstacle);
+						if (obstacle == this.SelectedObject) {
+							graphicalWallPanel.SelectedObject = null;
+							UpdateModifyObstaclesPanel(null);
+						}
+						this.graphicalWallPanel.InvalidateGraphics();
+					}
+				}
 			}
 		}
 		
@@ -875,23 +889,34 @@ namespace Europlan.Common {
 					if (SelectedObject is GraphicalWall) {
 						DeleteWall();
 					} else if (SelectedObject is GraphicalWallObstacle) {
-						DeleteObstacle();
-					} else if (SelectedObject is GraphicalRegisterWrapper) {
-						DeleteRegister();
+						DeleteObstacle(SelectedObject as GraphicalWallObstacle);
+					} else if (SelectedObject is GraphicalHithermRegisterWrapper) {
+						DeleteRegister(SelectedObject as GraphicalHithermRegisterWrapper);
 					} else if (SelectedObject is HithermRegisterVerbindung) {
-						DeleteVerbindung();
+						DeleteVerbindung(SelectedObject as HithermRegisterVerbindung);
 					}
 				}
 			}
 		}
 
-		private void DeleteVerbindung() {
-			foreach (HithermCircuit c in this.hithermPlanner.Product.PlannedCircuits) {
-				if (c.Links.Contains(SelectedObject as HithermRegisterVerbindung)) {
-					c.Links.Remove(SelectedObject as HithermRegisterVerbindung);
-					this.graphicalWallPanel.SelectedObject = null;
-					this.graphicalWallPanel.InvalidateGraphics();
-					break;
+		private void DeleteVerbindung(HithermRegisterVerbindung verbindung) {
+			if (verbindung != null) {
+				foreach (HithermCircuit c in this.hithermPlanner.Product.PlannedCircuits) {
+					if (c.Links.Contains(verbindung)) {
+						c.Links.Remove(verbindung);
+						if (verbindung == this.graphicalWallPanel.SelectedObject) {
+							this.graphicalWallPanel.SelectedObject = null;
+						}
+						if (verbindung.Start != null && verbindung.End != null) {
+							List<HithermRegister> registersToMove = c.GetAllConnectedRegisters(verbindung.End);
+							int hkId = this.hithermPlanner.Product.PlannedCircuits.Count + 1;
+							foreach (HithermRegister register in registersToMove) {
+								this.hithermPlanner.Product.MoveRegisterToCircuit(register, hkId);
+							}
+						}
+						this.graphicalWallPanel.InvalidateGraphics();
+						break;
+					}
 				}
 			}
 		}

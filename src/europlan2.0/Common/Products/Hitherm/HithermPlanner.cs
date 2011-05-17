@@ -275,8 +275,8 @@ namespace Europlan.Common {
 
 			if (this.mode == HithermPlannerMode.HPM_ADD_CONNECTION) {
 				foreach (PossibleConnection conn in this.highlightedConnections) {
-					if (conn.ConnectionArea.IsInside(planPoint)) {
-						return false;
+					if (conn is PossibleHithermRegisterConnection &&  conn.ConnectionArea.IsInside(planPoint)) {
+						return true;
 					}
 				}
 				this.highlightedConnections.Clear();
@@ -553,7 +553,13 @@ namespace Europlan.Common {
 				if (this.newConnection.Vertices.Count > 1) {
 					Point2D p1 = this.newConnection.Vertices[this.newConnection.Vertices.Count - 2];
 					Point2D p2 = this.newConnection.Vertices[this.newConnection.Vertices.Count - 1];
-					Line2D line1 = new Line2D(p1, p1 - p2);
+					Vector2D v = p1 - p2;
+					if (!endConnection.ConnectHorizontal && endConnection.ConnectVertical) {
+						v = new Vector2D(1, 0);
+					} else if (endConnection.ConnectHorizontal && !endConnection.ConnectVertical) {
+						v = new Vector2D(0, 1);
+					}
+					Line2D line1 = new Line2D(p2, v);
 					Line2D line2 = new Line2D(connectionPoint, new Vector2D(line1.Direction.Y, -line1.Direction.X));
 					Nullable<Point2D> intersection = Line2D.GetIntersection(line1, line2);
 					if (intersection.HasValue) {

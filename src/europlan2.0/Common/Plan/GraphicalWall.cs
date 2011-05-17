@@ -395,12 +395,31 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public GraphicalWall GetWallForWrapper(GraphicalHithermRegisterWrapper wrapper) {
+		public GraphicalWall GetWallForWrapper(GraphicalRegisterWrapper wrapper) {
 			if (this.Registers.Contains(wrapper)) {
 				return this;
 			}
 			if (this.DachSchraege != null) {
 				return this.DachSchraege.GetWallForWrapper(wrapper);
+			}
+			return null;
+		}
+
+		public GraphicalWall GetWallForObstacle(GraphicalWallObstacle obstacle) {
+			if (this.Obstacles.Contains(obstacle)) {
+				return this;
+			}
+			if (this.DachSchraege != null) {
+				return this.DachSchraege.GetWallForObstacle(obstacle);
+			}
+			return null;
+		}
+
+		public GraphicalWall GetWallForObject(IGraphicalWallObject obj) {
+			if (obj is GraphicalRegisterWrapper) {
+				return this.GetWallForWrapper(obj as GraphicalRegisterWrapper);
+			} else if (obj is GraphicalWallObstacle) {
+				return this.GetWallForObstacle(obj as GraphicalWallObstacle);
 			}
 			return null;
 		}
@@ -485,7 +504,7 @@ namespace Europlan.Common {
 				area.Add(new Point2D(left, 10));
 				area.Add(new Point2D(right, 10));
 				area.Add(new Point2D(right, 0));
-				return new PossibleConnection(new Point2D(mousePointInPlan.X, 0), area, true, true, 0, true);
+				return new PossibleConnection(new Point2D(mousePointInPlan.X, 0), area, true, true, 0, true, false, true);
 			}
 			return null;
 		}

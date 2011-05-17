@@ -407,5 +407,54 @@ namespace Europlan.Common {
 			}
 			return true;
 		}
+
+		public List<HithermRegister> GetAllConnectedRegisters(HithermRegister register) {
+			List<HithermRegister> connectedRegisters = new List<HithermRegister>();
+			HithermRegister cur = register;
+			while (cur != null) {
+				connectedRegisters.Add(cur);
+				cur = GetNextConnectedRegister(cur);
+			}
+			cur = GetPreviousConnectedRegister(cur);
+			while (cur != null) {
+				connectedRegisters.Add(cur);
+				cur = GetPreviousConnectedRegister(cur);
+			}
+			return connectedRegisters;
+		}
+
+		public HithermRegister GetNextConnectedRegister(HithermRegister register) {
+			HithermRegisterVerbindung link = this.GetOutputLink(register);
+			if (link != null) {
+				return link.End;
+			}
+			return null;
+		}
+
+		public HithermRegister GetPreviousConnectedRegister(HithermRegister register) {
+			HithermRegisterVerbindung link = this.GetInputLink(register);
+			if (link != null) {
+				return link.Start;
+			}
+			return null;
+		}
+
+		public HithermRegisterVerbindung GetOutputLink(HithermRegister register) {
+			foreach (HithermRegisterVerbindung link in this.Links) {
+				if (link.Start == register) {
+					return link;
+				}
+			}
+			return null;
+		}
+
+		public HithermRegisterVerbindung GetInputLink(HithermRegister register) {
+			foreach (HithermRegisterVerbindung link in this.Links) {
+				if (link.End == register) {
+					return link;
+				}
+			}
+			return null;
+		}
 	}
 }

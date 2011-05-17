@@ -723,8 +723,12 @@ namespace Europlan.Common {
 				polygon.Reverse();
 			}
 			polyList.Add(polygon);
-			List<WW.Math.Geometry.Polygon2D> result = WW.Math.Geometry.Polygon2D.GetDifference(polyList, walls);
-			return result != null && result.Count > 0;
+			try {
+				List<WW.Math.Geometry.Polygon2D> result = WW.Math.Geometry.Polygon2D.GetDifference(polyList, walls);
+				return result != null && result.Count > 0;
+			} catch (Exception e) {
+				return true;
+			}
 			/*bool outside = false;
 			Point2D firstPoint = polygon[0];
 			WW.Math.Geometry.Polygon2D wall = null;

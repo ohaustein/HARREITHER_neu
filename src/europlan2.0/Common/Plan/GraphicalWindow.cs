@@ -84,7 +84,7 @@ namespace Europlan.Common {
 			Pen windowBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
 			Brush windowBrush = new SolidBrush(SystemColors.ControlLight);
 			Pen unusableBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
-			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, this == selectedObject ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.White);
+			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, this == selectedObject ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.Transparent);
 
 			if (error) {
 				windowBorderPen.DashStyle = DashStyle.DashDotDot;
@@ -92,8 +92,52 @@ namespace Europlan.Common {
 			}
 
 			Region oldClip = g.Clip;
+			Region baseClip = new Region(oldClip.GetRegionData());
+			Polygon2D doorArea = this.GetObjectBorders(xOffset, yOffset);
+			Polygon2D outsideBorder = GetOutsideBorder(xOffset, yOffset);
+			g.SmoothingMode = SmoothingMode.AntiAlias;
+
+			List<PointF> doorPoints = new List<PointF>();
+			foreach (Point2D vertex in doorArea) {
+				doorPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
+			}
+
+			PointF[] doorPointArr = doorPoints.ToArray();
+
+			GraphicsPath doorPath = new GraphicsPath();
+			doorPath.AddPolygon(doorPointArr);
+			//Region doorClip = new Region(doorPath);
+			//doorClip.Intersect(baseClip);
+			//g.Clip = doorClip;
+
+
+			g.FillPolygon(windowBrush, doorPointArr);
+
+
+			List<PointF> outsidePoints = new List<PointF>();
+			foreach (Point2D vertex in outsideBorder) {
+				outsidePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
+			}
+
+			GraphicsPath path = new GraphicsPath();
+			path.AddPolygon(outsidePoints.ToArray());
+			Region clip = new Region(path);
+			GraphicsPath excludePath = new GraphicsPath();
+			excludePath.AddPolygon(doorPoints.ToArray());
+			clip.Exclude(excludePath);
+			clip.Intersect(baseClip);
+			g.Clip = clip;
+
+			g.FillPolygon(unusableBrush, outsidePoints.ToArray());
+
+			g.Clip = baseClip;
+			g.DrawPolygon(unusableBorderPen, outsidePoints.ToArray());
+			g.DrawPolygon(windowBorderPen, doorPointArr);
+			g.Clip = oldClip;
+
+			/*Region oldClip = g.Clip;
 			Polygon2D usableArea = this.GetObjectBorders(xOffset, yOffset);
-			Polygon2D windowBorder = GetOutsideBorder(usableArea);
+			Polygon2D windowBorder = this.GetOutsideBorder(xOffset, yOffset);
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 
 			List<PointF> borderPoints = new List<PointF>();
@@ -129,7 +173,7 @@ namespace Europlan.Common {
 			g.Clip = windowClip;
 			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
 			g.DrawPolygon(windowBorderPen, pointArr);
-			g.Clip = oldClip;
+			g.Clip = oldClip;*/
 		}
 
 		public override IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
@@ -259,6 +303,9 @@ namespace Europlan.Common {
 			Height = bakHeight;
 		}
 
+		public override Polygon2D GetOutsideBorder(double xOffset, double yOffset) {
+			return this.GetOutsideBorder(this.GetObjectBorders(xOffset, yOffset));
+		}
 	}
 
 }

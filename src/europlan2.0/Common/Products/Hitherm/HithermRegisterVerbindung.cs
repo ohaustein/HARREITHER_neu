@@ -400,7 +400,7 @@ namespace Europlan.Common {
 					}
 				}
 				foreach (GraphicalWallObstacle obstacle in wall.Obstacles) {
-					if (obstacle.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, true)) {
+					if (obstacle.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, false)) {
 						return false;
 					}
 				}

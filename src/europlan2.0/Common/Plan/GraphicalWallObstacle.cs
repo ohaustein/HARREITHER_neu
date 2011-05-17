@@ -118,9 +118,11 @@ namespace Europlan.Common {
 		}
 
 		public bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
-			Polygon2D door = GetObjectBorders(xOffset, yOffset);
+			Polygon2D door;
 			if (!ignoreBorders) {
-				door = GetOutsideBorder(door);
+				door = GetOutsideBorder(xOffset, yOffset);
+			} else {
+				door = GetObjectBorders(xOffset, yOffset);
 			}
 
 			if (polygon.IsClockwise()) {
@@ -137,12 +139,13 @@ namespace Europlan.Common {
 			return Polygon2D.GetIntersection(list1, list2).Count > 0;
 		}
 
-		public Polygon2D GetOutsideBorder(Polygon2D border) {
+		public abstract Polygon2D GetOutsideBorder(double xOffset, double yOffset);
+
+		protected Polygon2D GetOutsideBorder(Polygon2D border) {
 			Polygon2D usableArea = new Polygon2D(border);
 			usableArea.Outset(this.BorderDistance * 100.0);
 			return usableArea;
 		}
-
 	}
 
 }
