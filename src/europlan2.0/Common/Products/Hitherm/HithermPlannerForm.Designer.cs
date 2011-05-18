@@ -23,6 +23,7 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HithermPlannerForm));
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
@@ -37,21 +38,9 @@ namespace Europlan.Common {
 			this.btnRegisterHorizontal = new System.Windows.Forms.ToolStripButton();
 			this.btnConnection = new System.Windows.Forms.ToolStripButton();
 			this.panelTop = new System.Windows.Forms.Panel();
-			this.panelModifySchraege = new System.Windows.Forms.Panel();
-			this.btnSchraegeDelete = new System.Windows.Forms.Button();
-			this.btnSchraegeRevert = new System.Windows.Forms.Button();
-			this.btnSchraegeApply = new System.Windows.Forms.Button();
-			this.groupBox17 = new System.Windows.Forms.GroupBox();
-			this.rbSchraegeLeft = new System.Windows.Forms.RadioButton();
-			this.rbSchraegeRight = new System.Windows.Forms.RadioButton();
-			this.groupBox18 = new System.Windows.Forms.GroupBox();
-			this.numSchraegeVertical = new Europlan.Common.NumericBox();
-			this.numSchraegeHorizontal = new Europlan.Common.NumericBox();
-			this.label19 = new System.Windows.Forms.Label();
-			this.label20 = new System.Windows.Forms.Label();
-			this.label21 = new System.Windows.Forms.Label();
-			this.label22 = new System.Windows.Forms.Label();
 			this.panelModifyConnection = new System.Windows.Forms.Panel();
+			this.label23 = new System.Windows.Forms.Label();
+			this.btnConnectionDelete = new System.Windows.Forms.Button();
 			this.panelModifyObstacle = new System.Windows.Forms.Panel();
 			this.groupBox16 = new System.Windows.Forms.GroupBox();
 			this.numObstacleMiddleDistanceRight = new Europlan.Common.NumericBox();
@@ -126,6 +115,21 @@ namespace Europlan.Common {
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.lblRegisterSelectedRegister = new System.Windows.Forms.Label();
+			this.panelModifySchraege = new System.Windows.Forms.Panel();
+			this.lblSchraege = new System.Windows.Forms.Label();
+			this.btnSchraegeDelete = new System.Windows.Forms.Button();
+			this.btnSchraegeRevert = new System.Windows.Forms.Button();
+			this.btnSchraegeApply = new System.Windows.Forms.Button();
+			this.groupBox17 = new System.Windows.Forms.GroupBox();
+			this.rbSchraegeLeft = new System.Windows.Forms.RadioButton();
+			this.rbSchraegeRight = new System.Windows.Forms.RadioButton();
+			this.groupBox18 = new System.Windows.Forms.GroupBox();
+			this.numSchraegeVertical = new Europlan.Common.NumericBox();
+			this.numSchraegeHorizontal = new Europlan.Common.NumericBox();
+			this.label19 = new System.Windows.Forms.Label();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label21 = new System.Windows.Forms.Label();
+			this.label22 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.lblHeat = new System.Windows.Forms.Label();
 			this.lblCool = new System.Windows.Forms.Label();
@@ -170,13 +174,11 @@ namespace Europlan.Common {
 			this.panelBottom = new System.Windows.Forms.Panel();
 			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.hithermPlanner = new Europlan.Common.HithermPlanner();
-			this.lblSchraege = new System.Windows.Forms.Label();
+			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
 			this.panelTop.SuspendLayout();
-			this.panelModifySchraege.SuspendLayout();
-			this.groupBox17.SuspendLayout();
-			this.groupBox18.SuspendLayout();
+			this.panelModifyConnection.SuspendLayout();
 			this.panelModifyObstacle.SuspendLayout();
 			this.groupBox16.SuspendLayout();
 			this.groupBox15.SuspendLayout();
@@ -192,6 +194,9 @@ namespace Europlan.Common {
 			this.groupBox6.SuspendLayout();
 			this.groupBox5.SuspendLayout();
 			this.groupBox4.SuspendLayout();
+			this.panelModifySchraege.SuspendLayout();
+			this.groupBox17.SuspendLayout();
+			this.groupBox18.SuspendLayout();
 			this.panelBottom.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -330,222 +335,48 @@ namespace Europlan.Common {
 			// 
 			// panelTop
 			// 
+			this.panelTop.Controls.Add(this.panelModifyHitherm);
 			this.panelTop.Controls.Add(this.panelModifySchraege);
 			this.panelTop.Controls.Add(this.panelModifyConnection);
 			this.panelTop.Controls.Add(this.panelModifyObstacle);
 			this.panelTop.Controls.Add(this.panelDefineWalls);
-			this.panelTop.Controls.Add(this.panelModifyHitherm);
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelTop.Location = new System.Drawing.Point(24, 25);
 			this.panelTop.Name = "panelTop";
 			this.panelTop.Size = new System.Drawing.Size(862, 91);
 			this.panelTop.TabIndex = 2;
 			// 
-			// panelModifySchraege
-			// 
-			this.panelModifySchraege.Controls.Add(this.lblSchraege);
-			this.panelModifySchraege.Controls.Add(this.btnSchraegeDelete);
-			this.panelModifySchraege.Controls.Add(this.btnSchraegeRevert);
-			this.panelModifySchraege.Controls.Add(this.btnSchraegeApply);
-			this.panelModifySchraege.Controls.Add(this.groupBox17);
-			this.panelModifySchraege.Controls.Add(this.groupBox18);
-			this.panelModifySchraege.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelModifySchraege.Location = new System.Drawing.Point(0, 0);
-			this.panelModifySchraege.Name = "panelModifySchraege";
-			this.panelModifySchraege.Size = new System.Drawing.Size(862, 91);
-			this.panelModifySchraege.TabIndex = 1;
-			// 
-			// btnSchraegeDelete
-			// 
-			this.btnSchraegeDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnSchraegeDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeDelete.Image")));
-			this.btnSchraegeDelete.Location = new System.Drawing.Point(345, 25);
-			this.btnSchraegeDelete.Name = "btnSchraegeDelete";
-			this.btnSchraegeDelete.Size = new System.Drawing.Size(25, 25);
-			this.btnSchraegeDelete.TabIndex = 29;
-			this.btnSchraegeDelete.UseVisualStyleBackColor = true;
-			this.btnSchraegeDelete.Click += new System.EventHandler(this.btnSchraegeDelete_Click);
-			// 
-			// btnSchraegeRevert
-			// 
-			this.btnSchraegeRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnSchraegeRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeRevert.Image")));
-			this.btnSchraegeRevert.Location = new System.Drawing.Point(314, 56);
-			this.btnSchraegeRevert.Name = "btnSchraegeRevert";
-			this.btnSchraegeRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnSchraegeRevert.TabIndex = 28;
-			this.btnSchraegeRevert.UseVisualStyleBackColor = true;
-			this.btnSchraegeRevert.Click += new System.EventHandler(this.btnSchraegeRevert_Click);
-			// 
-			// btnSchraegeApply
-			// 
-			this.btnSchraegeApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnSchraegeApply.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeApply.Image")));
-			this.btnSchraegeApply.Location = new System.Drawing.Point(314, 25);
-			this.btnSchraegeApply.Name = "btnSchraegeApply";
-			this.btnSchraegeApply.Size = new System.Drawing.Size(25, 25);
-			this.btnSchraegeApply.TabIndex = 27;
-			this.btnSchraegeApply.UseVisualStyleBackColor = true;
-			this.btnSchraegeApply.Click += new System.EventHandler(this.btnSchraegeApply_Click);
-			// 
-			// groupBox17
-			// 
-			this.groupBox17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox17.Controls.Add(this.rbSchraegeLeft);
-			this.groupBox17.Controls.Add(this.rbSchraegeRight);
-			this.groupBox17.Location = new System.Drawing.Point(210, 19);
-			this.groupBox17.Name = "groupBox17";
-			this.groupBox17.Size = new System.Drawing.Size(98, 66);
-			this.groupBox17.TabIndex = 26;
-			this.groupBox17.TabStop = false;
-			this.groupBox17.Text = "Position";
-			// 
-			// rbSchraegeLeft
-			// 
-			this.rbSchraegeLeft.AutoSize = true;
-			this.rbSchraegeLeft.Location = new System.Drawing.Point(6, 20);
-			this.rbSchraegeLeft.Name = "rbSchraegeLeft";
-			this.rbSchraegeLeft.Size = new System.Drawing.Size(50, 17);
-			this.rbSchraegeLeft.TabIndex = 1;
-			this.rbSchraegeLeft.TabStop = true;
-			this.rbSchraegeLeft.Text = "Links";
-			this.rbSchraegeLeft.UseVisualStyleBackColor = true;
-			this.rbSchraegeLeft.CheckedChanged += new System.EventHandler(this.rbSchraegeLeft_CheckedChanged);
-			// 
-			// rbSchraegeRight
-			// 
-			this.rbSchraegeRight.AutoSize = true;
-			this.rbSchraegeRight.Location = new System.Drawing.Point(6, 43);
-			this.rbSchraegeRight.Name = "rbSchraegeRight";
-			this.rbSchraegeRight.Size = new System.Drawing.Size(59, 17);
-			this.rbSchraegeRight.TabIndex = 0;
-			this.rbSchraegeRight.TabStop = true;
-			this.rbSchraegeRight.Text = "Rechts";
-			this.rbSchraegeRight.UseVisualStyleBackColor = true;
-			this.rbSchraegeRight.CheckedChanged += new System.EventHandler(this.rbSchraegeRight_CheckedChanged);
-			// 
-			// groupBox18
-			// 
-			this.groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox18.Controls.Add(this.numSchraegeVertical);
-			this.groupBox18.Controls.Add(this.numSchraegeHorizontal);
-			this.groupBox18.Controls.Add(this.label19);
-			this.groupBox18.Controls.Add(this.label20);
-			this.groupBox18.Controls.Add(this.label21);
-			this.groupBox18.Controls.Add(this.label22);
-			this.groupBox18.Location = new System.Drawing.Point(9, 19);
-			this.groupBox18.Name = "groupBox18";
-			this.groupBox18.Size = new System.Drawing.Size(195, 66);
-			this.groupBox18.TabIndex = 25;
-			this.groupBox18.TabStop = false;
-			this.groupBox18.Text = "Größe";
-			// 
-			// numSchraegeVertical
-			// 
-			this.numSchraegeVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numSchraegeVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numSchraegeVertical.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeVertical.Location = new System.Drawing.Point(97, 42);
-			this.numSchraegeVertical.MaxValue = null;
-			this.numSchraegeVertical.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeVertical.Name = "numSchraegeVertical";
-			this.numSchraegeVertical.Size = new System.Drawing.Size(65, 20);
-			this.numSchraegeVertical.TabIndex = 2;
-			this.numSchraegeVertical.Text = "1";
-			this.numSchraegeVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSchraegeVertical.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeVertical.ValueChanged += new System.EventHandler(this.numSchraegeVertical_ValueChanged);
-			// 
-			// numSchraegeHorizontal
-			// 
-			this.numSchraegeHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numSchraegeHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numSchraegeHorizontal.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeHorizontal.Location = new System.Drawing.Point(97, 19);
-			this.numSchraegeHorizontal.MaxValue = null;
-			this.numSchraegeHorizontal.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeHorizontal.Name = "numSchraegeHorizontal";
-			this.numSchraegeHorizontal.Size = new System.Drawing.Size(65, 20);
-			this.numSchraegeHorizontal.TabIndex = 1;
-			this.numSchraegeHorizontal.Text = "1";
-			this.numSchraegeHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSchraegeHorizontal.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeHorizontal.ValueChanged += new System.EventHandler(this.numSchraegeHorizontal_ValueChanged);
-			// 
-			// label19
-			// 
-			this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label19.AutoSize = true;
-			this.label19.Location = new System.Drawing.Point(168, 45);
-			this.label19.Name = "label19";
-			this.label19.Size = new System.Drawing.Size(21, 13);
-			this.label19.TabIndex = 19;
-			this.label19.Text = "cm";
-			// 
-			// label20
-			// 
-			this.label20.Location = new System.Drawing.Point(6, 45);
-			this.label20.Name = "label20";
-			this.label20.Size = new System.Drawing.Size(85, 18);
-			this.label20.TabIndex = 18;
-			this.label20.Text = "Vertikal:";
-			// 
-			// label21
-			// 
-			this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(168, 22);
-			this.label21.Name = "label21";
-			this.label21.Size = new System.Drawing.Size(21, 13);
-			this.label21.TabIndex = 16;
-			this.label21.Text = "cm";
-			// 
-			// label22
-			// 
-			this.label22.Location = new System.Drawing.Point(6, 22);
-			this.label22.Name = "label22";
-			this.label22.Size = new System.Drawing.Size(85, 23);
-			this.label22.TabIndex = 15;
-			this.label22.Text = "Horizontal:";
-			// 
 			// panelModifyConnection
 			// 
+			this.panelModifyConnection.Controls.Add(this.label23);
+			this.panelModifyConnection.Controls.Add(this.btnConnectionDelete);
 			this.panelModifyConnection.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelModifyConnection.Location = new System.Drawing.Point(0, 0);
 			this.panelModifyConnection.Name = "panelModifyConnection";
 			this.panelModifyConnection.Size = new System.Drawing.Size(862, 91);
 			this.panelModifyConnection.TabIndex = 0;
+			// 
+			// label23
+			// 
+			this.label23.AutoSize = true;
+			this.label23.Location = new System.Drawing.Point(4, 3);
+			this.label23.Name = "label23";
+			this.label23.Size = new System.Drawing.Size(89, 13);
+			this.label23.TabIndex = 31;
+			this.label23.Text = "Anbindeleitungen";
+			// 
+			// btnConnectionDelete
+			// 
+			this.btnConnectionDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnConnectionDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnConnectionDelete.Image")));
+			this.btnConnectionDelete.Location = new System.Drawing.Point(232, 19);
+			this.btnConnectionDelete.Name = "btnConnectionDelete";
+			this.btnConnectionDelete.Size = new System.Drawing.Size(25, 25);
+			this.btnConnectionDelete.TabIndex = 30;
+			this.toolTip.SetToolTip(this.btnConnectionDelete, "Anbindeleitung löschen");
+			this.btnConnectionDelete.UseVisualStyleBackColor = true;
+			this.btnConnectionDelete.Click += new System.EventHandler(this.btnConnectionDelete_Click);
 			// 
 			// panelModifyObstacle
 			// 
@@ -863,6 +694,7 @@ namespace Europlan.Common {
 			this.btnObstacleRevert.Name = "btnObstacleRevert";
 			this.btnObstacleRevert.Size = new System.Drawing.Size(25, 25);
 			this.btnObstacleRevert.TabIndex = 30;
+			this.toolTip.SetToolTip(this.btnObstacleRevert, "Änderungen verwerfen");
 			this.btnObstacleRevert.UseVisualStyleBackColor = true;
 			this.btnObstacleRevert.Click += new System.EventHandler(this.btnObstacleRevert_Click);
 			// 
@@ -875,6 +707,7 @@ namespace Europlan.Common {
 			this.btnObstacleApply.Name = "btnObstacleApply";
 			this.btnObstacleApply.Size = new System.Drawing.Size(25, 25);
 			this.btnObstacleApply.TabIndex = 29;
+			this.toolTip.SetToolTip(this.btnObstacleApply, "Änderungen speichern");
 			this.btnObstacleApply.UseVisualStyleBackColor = true;
 			this.btnObstacleApply.Click += new System.EventHandler(this.btnObstacleApply_Click);
 			// 
@@ -1056,6 +889,7 @@ namespace Europlan.Common {
 			this.btnObstacleBorder.Name = "btnObstacleBorder";
 			this.btnObstacleBorder.Size = new System.Drawing.Size(25, 25);
 			this.btnObstacleBorder.TabIndex = 25;
+			this.toolTip.SetToolTip(this.btnObstacleBorder, "Randabstand ändern");
 			this.btnObstacleBorder.UseVisualStyleBackColor = true;
 			this.btnObstacleBorder.Click += new System.EventHandler(this.btnObstacleBorder_Click);
 			// 
@@ -1068,6 +902,7 @@ namespace Europlan.Common {
 			this.btnObstacleRemove.Name = "btnObstacleRemove";
 			this.btnObstacleRemove.Size = new System.Drawing.Size(25, 25);
 			this.btnObstacleRemove.TabIndex = 24;
+			this.toolTip.SetToolTip(this.btnObstacleRemove, "Objekt löschen");
 			this.btnObstacleRemove.UseVisualStyleBackColor = true;
 			this.btnObstacleRemove.Click += new System.EventHandler(this.btnObstacleRemove_Click);
 			// 
@@ -1099,6 +934,7 @@ namespace Europlan.Common {
 			this.btnWallHelpLine.Name = "btnWallHelpLine";
 			this.btnWallHelpLine.Size = new System.Drawing.Size(25, 25);
 			this.btnWallHelpLine.TabIndex = 22;
+			this.toolTip.SetToolTip(this.btnWallHelpLine, "Hilfslinien einrichten");
 			this.btnWallHelpLine.UseVisualStyleBackColor = true;
 			// 
 			// btnWallEdgeDistance
@@ -1110,6 +946,7 @@ namespace Europlan.Common {
 			this.btnWallEdgeDistance.Name = "btnWallEdgeDistance";
 			this.btnWallEdgeDistance.Size = new System.Drawing.Size(25, 25);
 			this.btnWallEdgeDistance.TabIndex = 21;
+			this.toolTip.SetToolTip(this.btnWallEdgeDistance, "Randabstand ändern");
 			this.btnWallEdgeDistance.UseVisualStyleBackColor = true;
 			this.btnWallEdgeDistance.Click += new System.EventHandler(this.btnWallEdgeDistance_Click);
 			// 
@@ -1133,6 +970,7 @@ namespace Europlan.Common {
 			this.btnWallLeft.Size = new System.Drawing.Size(30, 36);
 			this.btnWallLeft.TabIndex = 16;
 			this.btnWallLeft.Text = "<";
+			this.toolTip.SetToolTip(this.btnWallLeft, "Wand nach links verschienben");
 			this.btnWallLeft.UseVisualStyleBackColor = true;
 			this.btnWallLeft.Click += new System.EventHandler(this.btnWallLeft_Click);
 			// 
@@ -1144,6 +982,7 @@ namespace Europlan.Common {
 			this.btnWallRight.Size = new System.Drawing.Size(30, 36);
 			this.btnWallRight.TabIndex = 15;
 			this.btnWallRight.Text = ">";
+			this.toolTip.SetToolTip(this.btnWallRight, "Wand nach rechts verschieben");
 			this.btnWallRight.UseVisualStyleBackColor = true;
 			this.btnWallRight.Click += new System.EventHandler(this.btnWallRight_Click);
 			// 
@@ -1321,6 +1160,7 @@ namespace Europlan.Common {
 			this.btnWallNewWall.Name = "btnWallNewWall";
 			this.btnWallNewWall.Size = new System.Drawing.Size(25, 25);
 			this.btnWallNewWall.TabIndex = 20;
+			this.toolTip.SetToolTip(this.btnWallNewWall, "Neue Wand anlegen");
 			this.btnWallNewWall.UseVisualStyleBackColor = true;
 			this.btnWallNewWall.Click += new System.EventHandler(this.btnWallNewWall_Click);
 			// 
@@ -1333,6 +1173,7 @@ namespace Europlan.Common {
 			this.btnWallDelete.Name = "btnWallDelete";
 			this.btnWallDelete.Size = new System.Drawing.Size(25, 25);
 			this.btnWallDelete.TabIndex = 19;
+			this.toolTip.SetToolTip(this.btnWallDelete, "Wand löschen");
 			this.btnWallDelete.UseVisualStyleBackColor = true;
 			this.btnWallDelete.Click += new System.EventHandler(this.btnWallDelete_Click);
 			// 
@@ -1345,6 +1186,7 @@ namespace Europlan.Common {
 			this.btnWallRevert.Name = "btnWallRevert";
 			this.btnWallRevert.Size = new System.Drawing.Size(25, 25);
 			this.btnWallRevert.TabIndex = 18;
+			this.toolTip.SetToolTip(this.btnWallRevert, "Änderungen verwerfen");
 			this.btnWallRevert.UseVisualStyleBackColor = true;
 			this.btnWallRevert.Click += new System.EventHandler(this.btnWallRevert_Click);
 			// 
@@ -1357,6 +1199,7 @@ namespace Europlan.Common {
 			this.btnWallApply.Name = "btnWallApply";
 			this.btnWallApply.Size = new System.Drawing.Size(25, 25);
 			this.btnWallApply.TabIndex = 17;
+			this.toolTip.SetToolTip(this.btnWallApply, "Änderungen speichern");
 			this.btnWallApply.UseVisualStyleBackColor = true;
 			this.btnWallApply.Click += new System.EventHandler(this.btnWallApply_Click);
 			// 
@@ -1409,6 +1252,7 @@ namespace Europlan.Common {
 			this.btnRegisterConnect.Name = "btnRegisterConnect";
 			this.btnRegisterConnect.Size = new System.Drawing.Size(25, 25);
 			this.btnRegisterConnect.TabIndex = 25;
+			this.toolTip.SetToolTip(this.btnRegisterConnect, "Register verbinden");
 			this.btnRegisterConnect.UseVisualStyleBackColor = true;
 			this.btnRegisterConnect.Click += new System.EventHandler(this.btnRegisterConnect_Click);
 			// 
@@ -1421,6 +1265,7 @@ namespace Europlan.Common {
 			this.btnRegisterDelete.Name = "btnRegisterDelete";
 			this.btnRegisterDelete.Size = new System.Drawing.Size(25, 25);
 			this.btnRegisterDelete.TabIndex = 24;
+			this.toolTip.SetToolTip(this.btnRegisterDelete, "Register löschen");
 			this.btnRegisterDelete.UseVisualStyleBackColor = true;
 			this.btnRegisterDelete.Click += new System.EventHandler(this.btnRegisterDelete_Click);
 			// 
@@ -1433,6 +1278,7 @@ namespace Europlan.Common {
 			this.btnRegisterRevert.Name = "btnRegisterRevert";
 			this.btnRegisterRevert.Size = new System.Drawing.Size(25, 25);
 			this.btnRegisterRevert.TabIndex = 23;
+			this.toolTip.SetToolTip(this.btnRegisterRevert, "Änderungen verwerfen");
 			this.btnRegisterRevert.UseVisualStyleBackColor = true;
 			this.btnRegisterRevert.Click += new System.EventHandler(this.btnRegisterRevert_Click);
 			// 
@@ -1445,6 +1291,7 @@ namespace Europlan.Common {
 			this.btnRegisterAccept.Name = "btnRegisterAccept";
 			this.btnRegisterAccept.Size = new System.Drawing.Size(25, 25);
 			this.btnRegisterAccept.TabIndex = 22;
+			this.toolTip.SetToolTip(this.btnRegisterAccept, "Änderungen speichern");
 			this.btnRegisterAccept.UseVisualStyleBackColor = true;
 			this.btnRegisterAccept.Click += new System.EventHandler(this.btnRegisterAccept_Click);
 			// 
@@ -1641,6 +1488,216 @@ namespace Europlan.Common {
 			this.lblRegisterSelectedRegister.Size = new System.Drawing.Size(123, 13);
 			this.lblRegisterSelectedRegister.TabIndex = 1;
 			this.lblRegisterSelectedRegister.Text = "Keine Wand ausgewählt";
+			// 
+			// panelModifySchraege
+			// 
+			this.panelModifySchraege.Controls.Add(this.lblSchraege);
+			this.panelModifySchraege.Controls.Add(this.btnSchraegeDelete);
+			this.panelModifySchraege.Controls.Add(this.btnSchraegeRevert);
+			this.panelModifySchraege.Controls.Add(this.btnSchraegeApply);
+			this.panelModifySchraege.Controls.Add(this.groupBox17);
+			this.panelModifySchraege.Controls.Add(this.groupBox18);
+			this.panelModifySchraege.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelModifySchraege.Location = new System.Drawing.Point(0, 0);
+			this.panelModifySchraege.Name = "panelModifySchraege";
+			this.panelModifySchraege.Size = new System.Drawing.Size(862, 91);
+			this.panelModifySchraege.TabIndex = 1;
+			// 
+			// lblSchraege
+			// 
+			this.lblSchraege.AutoSize = true;
+			this.lblSchraege.Location = new System.Drawing.Point(4, 3);
+			this.lblSchraege.Name = "lblSchraege";
+			this.lblSchraege.Size = new System.Drawing.Size(134, 13);
+			this.lblSchraege.TabIndex = 32;
+			this.lblSchraege.Text = "Keine Schräge ausgewählt";
+			// 
+			// btnSchraegeDelete
+			// 
+			this.btnSchraegeDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSchraegeDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeDelete.Image")));
+			this.btnSchraegeDelete.Location = new System.Drawing.Point(345, 25);
+			this.btnSchraegeDelete.Name = "btnSchraegeDelete";
+			this.btnSchraegeDelete.Size = new System.Drawing.Size(25, 25);
+			this.btnSchraegeDelete.TabIndex = 29;
+			this.toolTip.SetToolTip(this.btnSchraegeDelete, "Schräge löschen");
+			this.btnSchraegeDelete.UseVisualStyleBackColor = true;
+			this.btnSchraegeDelete.Click += new System.EventHandler(this.btnSchraegeDelete_Click);
+			// 
+			// btnSchraegeRevert
+			// 
+			this.btnSchraegeRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSchraegeRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeRevert.Image")));
+			this.btnSchraegeRevert.Location = new System.Drawing.Point(314, 56);
+			this.btnSchraegeRevert.Name = "btnSchraegeRevert";
+			this.btnSchraegeRevert.Size = new System.Drawing.Size(25, 25);
+			this.btnSchraegeRevert.TabIndex = 28;
+			this.toolTip.SetToolTip(this.btnSchraegeRevert, "Änderungen verwerfen");
+			this.btnSchraegeRevert.UseVisualStyleBackColor = true;
+			this.btnSchraegeRevert.Click += new System.EventHandler(this.btnSchraegeRevert_Click);
+			// 
+			// btnSchraegeApply
+			// 
+			this.btnSchraegeApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSchraegeApply.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeApply.Image")));
+			this.btnSchraegeApply.Location = new System.Drawing.Point(314, 25);
+			this.btnSchraegeApply.Name = "btnSchraegeApply";
+			this.btnSchraegeApply.Size = new System.Drawing.Size(25, 25);
+			this.btnSchraegeApply.TabIndex = 27;
+			this.toolTip.SetToolTip(this.btnSchraegeApply, "Änderungen speichern");
+			this.btnSchraegeApply.UseVisualStyleBackColor = true;
+			this.btnSchraegeApply.Click += new System.EventHandler(this.btnSchraegeApply_Click);
+			// 
+			// groupBox17
+			// 
+			this.groupBox17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox17.Controls.Add(this.rbSchraegeLeft);
+			this.groupBox17.Controls.Add(this.rbSchraegeRight);
+			this.groupBox17.Location = new System.Drawing.Point(210, 19);
+			this.groupBox17.Name = "groupBox17";
+			this.groupBox17.Size = new System.Drawing.Size(98, 66);
+			this.groupBox17.TabIndex = 26;
+			this.groupBox17.TabStop = false;
+			this.groupBox17.Text = "Position";
+			// 
+			// rbSchraegeLeft
+			// 
+			this.rbSchraegeLeft.AutoSize = true;
+			this.rbSchraegeLeft.Location = new System.Drawing.Point(6, 20);
+			this.rbSchraegeLeft.Name = "rbSchraegeLeft";
+			this.rbSchraegeLeft.Size = new System.Drawing.Size(50, 17);
+			this.rbSchraegeLeft.TabIndex = 1;
+			this.rbSchraegeLeft.TabStop = true;
+			this.rbSchraegeLeft.Text = "Links";
+			this.rbSchraegeLeft.UseVisualStyleBackColor = true;
+			this.rbSchraegeLeft.CheckedChanged += new System.EventHandler(this.rbSchraegeLeft_CheckedChanged);
+			// 
+			// rbSchraegeRight
+			// 
+			this.rbSchraegeRight.AutoSize = true;
+			this.rbSchraegeRight.Location = new System.Drawing.Point(6, 43);
+			this.rbSchraegeRight.Name = "rbSchraegeRight";
+			this.rbSchraegeRight.Size = new System.Drawing.Size(59, 17);
+			this.rbSchraegeRight.TabIndex = 0;
+			this.rbSchraegeRight.TabStop = true;
+			this.rbSchraegeRight.Text = "Rechts";
+			this.rbSchraegeRight.UseVisualStyleBackColor = true;
+			this.rbSchraegeRight.CheckedChanged += new System.EventHandler(this.rbSchraegeRight_CheckedChanged);
+			// 
+			// groupBox18
+			// 
+			this.groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox18.Controls.Add(this.numSchraegeVertical);
+			this.groupBox18.Controls.Add(this.numSchraegeHorizontal);
+			this.groupBox18.Controls.Add(this.label19);
+			this.groupBox18.Controls.Add(this.label20);
+			this.groupBox18.Controls.Add(this.label21);
+			this.groupBox18.Controls.Add(this.label22);
+			this.groupBox18.Location = new System.Drawing.Point(9, 19);
+			this.groupBox18.Name = "groupBox18";
+			this.groupBox18.Size = new System.Drawing.Size(195, 66);
+			this.groupBox18.TabIndex = 25;
+			this.groupBox18.TabStop = false;
+			this.groupBox18.Text = "Größe";
+			// 
+			// numSchraegeVertical
+			// 
+			this.numSchraegeVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numSchraegeVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numSchraegeVertical.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.Location = new System.Drawing.Point(97, 42);
+			this.numSchraegeVertical.MaxValue = null;
+			this.numSchraegeVertical.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.Name = "numSchraegeVertical";
+			this.numSchraegeVertical.Size = new System.Drawing.Size(65, 20);
+			this.numSchraegeVertical.TabIndex = 2;
+			this.numSchraegeVertical.Text = "1";
+			this.numSchraegeVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numSchraegeVertical.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.ValueChanged += new System.EventHandler(this.numSchraegeVertical_ValueChanged);
+			// 
+			// numSchraegeHorizontal
+			// 
+			this.numSchraegeHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numSchraegeHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numSchraegeHorizontal.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.Location = new System.Drawing.Point(97, 19);
+			this.numSchraegeHorizontal.MaxValue = null;
+			this.numSchraegeHorizontal.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.Name = "numSchraegeHorizontal";
+			this.numSchraegeHorizontal.Size = new System.Drawing.Size(65, 20);
+			this.numSchraegeHorizontal.TabIndex = 1;
+			this.numSchraegeHorizontal.Text = "1";
+			this.numSchraegeHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numSchraegeHorizontal.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.ValueChanged += new System.EventHandler(this.numSchraegeHorizontal_ValueChanged);
+			// 
+			// label19
+			// 
+			this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(168, 45);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(21, 13);
+			this.label19.TabIndex = 19;
+			this.label19.Text = "cm";
+			// 
+			// label20
+			// 
+			this.label20.Location = new System.Drawing.Point(6, 45);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(85, 18);
+			this.label20.TabIndex = 18;
+			this.label20.Text = "Vertikal:";
+			// 
+			// label21
+			// 
+			this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label21.AutoSize = true;
+			this.label21.Location = new System.Drawing.Point(168, 22);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(21, 13);
+			this.label21.TabIndex = 16;
+			this.label21.Text = "cm";
+			// 
+			// label22
+			// 
+			this.label22.Location = new System.Drawing.Point(6, 22);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(85, 23);
+			this.label22.TabIndex = 15;
+			this.label22.Text = "Horizontal:";
 			// 
 			// label7
 			// 
@@ -2073,15 +2130,6 @@ namespace Europlan.Common {
 			this.hithermPlanner.NewRegisterVorlaufRight = true;
 			this.hithermPlanner.RecalculationNecessary += new System.EventHandler<System.EventArgs>(this.hithermPlanner_RecalculationNecessary);
 			// 
-			// lblSchraege
-			// 
-			this.lblSchraege.AutoSize = true;
-			this.lblSchraege.Location = new System.Drawing.Point(4, 3);
-			this.lblSchraege.Name = "lblSchraege";
-			this.lblSchraege.Size = new System.Drawing.Size(134, 13);
-			this.lblSchraege.TabIndex = 32;
-			this.lblSchraege.Text = "Keine Schräge ausgewählt";
-			// 
 			// HithermPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2101,12 +2149,8 @@ namespace Europlan.Common {
 			this.toolStrip2.ResumeLayout(false);
 			this.toolStrip2.PerformLayout();
 			this.panelTop.ResumeLayout(false);
-			this.panelModifySchraege.ResumeLayout(false);
-			this.panelModifySchraege.PerformLayout();
-			this.groupBox17.ResumeLayout(false);
-			this.groupBox17.PerformLayout();
-			this.groupBox18.ResumeLayout(false);
-			this.groupBox18.PerformLayout();
+			this.panelModifyConnection.ResumeLayout(false);
+			this.panelModifyConnection.PerformLayout();
 			this.panelModifyObstacle.ResumeLayout(false);
 			this.panelModifyObstacle.PerformLayout();
 			this.groupBox16.ResumeLayout(false);
@@ -2135,6 +2179,12 @@ namespace Europlan.Common {
 			this.groupBox5.PerformLayout();
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
+			this.panelModifySchraege.ResumeLayout(false);
+			this.panelModifySchraege.PerformLayout();
+			this.groupBox17.ResumeLayout(false);
+			this.groupBox17.PerformLayout();
+			this.groupBox18.ResumeLayout(false);
+			this.groupBox18.PerformLayout();
 			this.panelBottom.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -2290,6 +2340,9 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label21;
 		private System.Windows.Forms.Label label22;
 		private System.Windows.Forms.Label lblSchraege;
+		private System.Windows.Forms.Label label23;
+		private System.Windows.Forms.Button btnConnectionDelete;
+		private System.Windows.Forms.ToolTip toolTip;
 
 
 	}

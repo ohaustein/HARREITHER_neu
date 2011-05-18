@@ -1141,6 +1141,11 @@ namespace Europlan.Common {
 		private void rbSchraegeRight_CheckedChanged(object sender, EventArgs e) {
 
 		}
+
+		private void btnConnectionDelete_Click(object sender, EventArgs e) {
+			DeleteVerbindung(SelectedObject as HithermRegisterVerbindung);
+		}
+
 		
 	}
 }
