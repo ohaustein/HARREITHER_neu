@@ -109,6 +109,32 @@ namespace Europlan.Common {
 			set;
 		}
 
+		public double GetGraphPosXLeft(GraphicalWall owningWall) {
+			return GraphPosX;
+		}
+
+		public void SetGraphPosXLeft(double graphPosXLeft, GraphicalWall owningWall) {
+			if (owningWall != null && graphPosXLeft >= 0) {
+				if (graphPosXLeft + Width <= (owningWall.GetWallWidth() * 100.0)) {
+					GraphPosX = graphPosXLeft;
+				}
+			}
+		}
+
+		public double GetGraphPosXRight(GraphicalWall owningWall) {
+			double result = 0;
+			if (owningWall != null) {
+				result = (owningWall.GetWallWidth() * 100.0) - (GraphPosX + Width);
+			}
+			return result;
+		}
+
+		public void SetGraphPosXRight(double graphPosXRight, GraphicalWall owningWall) {
+			if (owningWall != null && graphPosXRight >= 0) {
+				GraphPosX = (owningWall.GetWallWidth() * 100.0) - graphPosXRight - Width;
+			}
+		}
+
 		public bool PositionAndSizeOk(GraphicalWall owningWall, double offsetX, double offsetY) {
 			Polygon2D borders = this.GetObjectBorders(offsetX, offsetY);
 			if (owningWall.CollisionTest(borders, offsetX, offsetY, true)) {
