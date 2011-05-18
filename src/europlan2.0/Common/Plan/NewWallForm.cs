@@ -63,7 +63,7 @@ namespace Europlan.Common {
 				//    MessageBox.Show(EuroplanRes.NewPlanForm_KeinBezeichnerText, EuroplanRes.NewPlanForm_KeinBezeichnerTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				//    e.Cancel = true;
 				//}
-				if (this.Width < 10) {
+				if (this.numWidth.Enabled && this.Width < 10) {
 					MessageBox.Show("Bitte geben Sie für die Breite einen gültigen Wert ein (min. 10cm).", "Wand zu schmal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					e.Cancel = true;
 					return;
