@@ -38,6 +38,42 @@ namespace Europlan.Common {
 			this.btnRegisterHorizontal = new System.Windows.Forms.ToolStripButton();
 			this.btnConnection = new System.Windows.Forms.ToolStripButton();
 			this.panelTop = new System.Windows.Forms.Panel();
+			this.panelModifyHitherm = new System.Windows.Forms.Panel();
+			this.chkRegisterWholeRegister = new System.Windows.Forms.CheckBox();
+			this.chkRegisterHelpLines = new System.Windows.Forms.CheckBox();
+			this.btnRegisterConnect = new System.Windows.Forms.Button();
+			this.btnRegisterDelete = new System.Windows.Forms.Button();
+			this.btnRegisterRevert = new System.Windows.Forms.Button();
+			this.btnRegisterAccept = new System.Windows.Forms.Button();
+			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.rbRegister10 = new System.Windows.Forms.RadioButton();
+			this.rbRegister5 = new System.Windows.Forms.RadioButton();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.rbRegisterRight = new System.Windows.Forms.RadioButton();
+			this.rbRegisterLeft = new System.Windows.Forms.RadioButton();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.numRegisterVertical = new Europlan.Common.NumericBox();
+			this.numRegisterLeft = new Europlan.Common.NumericBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.lblRegisterSelectedRegister = new System.Windows.Forms.Label();
+			this.panelModifySchraege = new System.Windows.Forms.Panel();
+			this.lblSchraege = new System.Windows.Forms.Label();
+			this.btnSchraegeDelete = new System.Windows.Forms.Button();
+			this.btnSchraegeRevert = new System.Windows.Forms.Button();
+			this.btnSchraegeApply = new System.Windows.Forms.Button();
+			this.groupBox17 = new System.Windows.Forms.GroupBox();
+			this.rbSchraegeLeft = new System.Windows.Forms.RadioButton();
+			this.rbSchraegeRight = new System.Windows.Forms.RadioButton();
+			this.groupBox18 = new System.Windows.Forms.GroupBox();
+			this.numSchraegeVertical = new Europlan.Common.NumericBox();
+			this.numSchraegeHorizontal = new Europlan.Common.NumericBox();
+			this.label19 = new System.Windows.Forms.Label();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label21 = new System.Windows.Forms.Label();
+			this.label22 = new System.Windows.Forms.Label();
 			this.panelModifyConnection = new System.Windows.Forms.Panel();
 			this.label23 = new System.Windows.Forms.Label();
 			this.btnConnectionDelete = new System.Windows.Forms.Button();
@@ -94,42 +130,6 @@ namespace Europlan.Common {
 			this.btnWallDelete = new System.Windows.Forms.Button();
 			this.btnWallRevert = new System.Windows.Forms.Button();
 			this.btnWallApply = new System.Windows.Forms.Button();
-			this.panelModifyHitherm = new System.Windows.Forms.Panel();
-			this.chkRegisterWholeRegister = new System.Windows.Forms.CheckBox();
-			this.chkRegisterHelpLines = new System.Windows.Forms.CheckBox();
-			this.btnRegisterConnect = new System.Windows.Forms.Button();
-			this.btnRegisterDelete = new System.Windows.Forms.Button();
-			this.btnRegisterRevert = new System.Windows.Forms.Button();
-			this.btnRegisterAccept = new System.Windows.Forms.Button();
-			this.groupBox6 = new System.Windows.Forms.GroupBox();
-			this.rbRegister10 = new System.Windows.Forms.RadioButton();
-			this.rbRegister5 = new System.Windows.Forms.RadioButton();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
-			this.rbRegisterRight = new System.Windows.Forms.RadioButton();
-			this.rbRegisterLeft = new System.Windows.Forms.RadioButton();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.numRegisterVertical = new Europlan.Common.NumericBox();
-			this.numRegisterLeft = new Europlan.Common.NumericBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
-			this.lblRegisterSelectedRegister = new System.Windows.Forms.Label();
-			this.panelModifySchraege = new System.Windows.Forms.Panel();
-			this.lblSchraege = new System.Windows.Forms.Label();
-			this.btnSchraegeDelete = new System.Windows.Forms.Button();
-			this.btnSchraegeRevert = new System.Windows.Forms.Button();
-			this.btnSchraegeApply = new System.Windows.Forms.Button();
-			this.groupBox17 = new System.Windows.Forms.GroupBox();
-			this.rbSchraegeLeft = new System.Windows.Forms.RadioButton();
-			this.rbSchraegeRight = new System.Windows.Forms.RadioButton();
-			this.groupBox18 = new System.Windows.Forms.GroupBox();
-			this.numSchraegeVertical = new Europlan.Common.NumericBox();
-			this.numSchraegeHorizontal = new Europlan.Common.NumericBox();
-			this.label19 = new System.Windows.Forms.Label();
-			this.label20 = new System.Windows.Forms.Label();
-			this.label21 = new System.Windows.Forms.Label();
-			this.label22 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.lblHeat = new System.Windows.Forms.Label();
 			this.lblCool = new System.Windows.Forms.Label();
@@ -178,6 +178,13 @@ namespace Europlan.Common {
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
 			this.panelTop.SuspendLayout();
+			this.panelModifyHitherm.SuspendLayout();
+			this.groupBox6.SuspendLayout();
+			this.groupBox5.SuspendLayout();
+			this.groupBox4.SuspendLayout();
+			this.panelModifySchraege.SuspendLayout();
+			this.groupBox17.SuspendLayout();
+			this.groupBox18.SuspendLayout();
 			this.panelModifyConnection.SuspendLayout();
 			this.panelModifyObstacle.SuspendLayout();
 			this.groupBox16.SuspendLayout();
@@ -190,13 +197,6 @@ namespace Europlan.Common {
 			this.groupBox3.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
-			this.panelModifyHitherm.SuspendLayout();
-			this.groupBox6.SuspendLayout();
-			this.groupBox5.SuspendLayout();
-			this.groupBox4.SuspendLayout();
-			this.panelModifySchraege.SuspendLayout();
-			this.groupBox17.SuspendLayout();
-			this.groupBox18.SuspendLayout();
 			this.panelBottom.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -345,6 +345,502 @@ namespace Europlan.Common {
 			this.panelTop.Name = "panelTop";
 			this.panelTop.Size = new System.Drawing.Size(862, 91);
 			this.panelTop.TabIndex = 2;
+			// 
+			// panelModifyHitherm
+			// 
+			this.panelModifyHitherm.Controls.Add(this.chkRegisterWholeRegister);
+			this.panelModifyHitherm.Controls.Add(this.chkRegisterHelpLines);
+			this.panelModifyHitherm.Controls.Add(this.btnRegisterConnect);
+			this.panelModifyHitherm.Controls.Add(this.btnRegisterDelete);
+			this.panelModifyHitherm.Controls.Add(this.btnRegisterRevert);
+			this.panelModifyHitherm.Controls.Add(this.btnRegisterAccept);
+			this.panelModifyHitherm.Controls.Add(this.groupBox6);
+			this.panelModifyHitherm.Controls.Add(this.groupBox5);
+			this.panelModifyHitherm.Controls.Add(this.groupBox4);
+			this.panelModifyHitherm.Controls.Add(this.lblRegisterSelectedRegister);
+			this.panelModifyHitherm.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelModifyHitherm.Location = new System.Drawing.Point(0, 0);
+			this.panelModifyHitherm.Name = "panelModifyHitherm";
+			this.panelModifyHitherm.Size = new System.Drawing.Size(862, 91);
+			this.panelModifyHitherm.TabIndex = 2;
+			// 
+			// chkRegisterWholeRegister
+			// 
+			this.chkRegisterWholeRegister.AutoSize = true;
+			this.chkRegisterWholeRegister.Location = new System.Drawing.Point(652, 65);
+			this.chkRegisterWholeRegister.Name = "chkRegisterWholeRegister";
+			this.chkRegisterWholeRegister.Size = new System.Drawing.Size(117, 17);
+			this.chkRegisterWholeRegister.TabIndex = 27;
+			this.chkRegisterWholeRegister.Text = "Nur ganze Register";
+			this.chkRegisterWholeRegister.UseVisualStyleBackColor = true;
+			this.chkRegisterWholeRegister.CheckedChanged += new System.EventHandler(this.chkRegisterWholeRegister_CheckedChanged);
+			// 
+			// chkRegisterHelpLines
+			// 
+			this.chkRegisterHelpLines.AutoSize = true;
+			this.chkRegisterHelpLines.Location = new System.Drawing.Point(652, 40);
+			this.chkRegisterHelpLines.Name = "chkRegisterHelpLines";
+			this.chkRegisterHelpLines.Size = new System.Drawing.Size(138, 17);
+			this.chkRegisterHelpLines.TabIndex = 26;
+			this.chkRegisterHelpLines.Text = "An Hilfslinien ausrichten";
+			this.chkRegisterHelpLines.UseVisualStyleBackColor = true;
+			this.chkRegisterHelpLines.CheckedChanged += new System.EventHandler(this.chkRegisterHelpLines_CheckedChanged);
+			// 
+			// btnRegisterConnect
+			// 
+			this.btnRegisterConnect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterConnect.Image")));
+			this.btnRegisterConnect.Location = new System.Drawing.Point(607, 60);
+			this.btnRegisterConnect.Name = "btnRegisterConnect";
+			this.btnRegisterConnect.Size = new System.Drawing.Size(25, 25);
+			this.btnRegisterConnect.TabIndex = 25;
+			this.toolTip.SetToolTip(this.btnRegisterConnect, "Register verbinden");
+			this.btnRegisterConnect.UseVisualStyleBackColor = true;
+			this.btnRegisterConnect.Click += new System.EventHandler(this.btnRegisterConnect_Click);
+			// 
+			// btnRegisterDelete
+			// 
+			this.btnRegisterDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterDelete.Image")));
+			this.btnRegisterDelete.Location = new System.Drawing.Point(607, 29);
+			this.btnRegisterDelete.Name = "btnRegisterDelete";
+			this.btnRegisterDelete.Size = new System.Drawing.Size(25, 25);
+			this.btnRegisterDelete.TabIndex = 24;
+			this.toolTip.SetToolTip(this.btnRegisterDelete, "Register löschen");
+			this.btnRegisterDelete.UseVisualStyleBackColor = true;
+			this.btnRegisterDelete.Click += new System.EventHandler(this.btnRegisterDelete_Click);
+			// 
+			// btnRegisterRevert
+			// 
+			this.btnRegisterRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterRevert.Image")));
+			this.btnRegisterRevert.Location = new System.Drawing.Point(576, 60);
+			this.btnRegisterRevert.Name = "btnRegisterRevert";
+			this.btnRegisterRevert.Size = new System.Drawing.Size(25, 25);
+			this.btnRegisterRevert.TabIndex = 23;
+			this.toolTip.SetToolTip(this.btnRegisterRevert, "Änderungen verwerfen");
+			this.btnRegisterRevert.UseVisualStyleBackColor = true;
+			this.btnRegisterRevert.Click += new System.EventHandler(this.btnRegisterRevert_Click);
+			// 
+			// btnRegisterAccept
+			// 
+			this.btnRegisterAccept.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterAccept.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterAccept.Image")));
+			this.btnRegisterAccept.Location = new System.Drawing.Point(576, 29);
+			this.btnRegisterAccept.Name = "btnRegisterAccept";
+			this.btnRegisterAccept.Size = new System.Drawing.Size(25, 25);
+			this.btnRegisterAccept.TabIndex = 22;
+			this.toolTip.SetToolTip(this.btnRegisterAccept, "Änderungen speichern");
+			this.btnRegisterAccept.UseVisualStyleBackColor = true;
+			this.btnRegisterAccept.Click += new System.EventHandler(this.btnRegisterAccept_Click);
+			// 
+			// groupBox6
+			// 
+			this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox6.Controls.Add(this.rbRegister10);
+			this.groupBox6.Controls.Add(this.rbRegister5);
+			this.groupBox6.Location = new System.Drawing.Point(401, 21);
+			this.groupBox6.Name = "groupBox6";
+			this.groupBox6.Size = new System.Drawing.Size(169, 66);
+			this.groupBox6.TabIndex = 21;
+			this.groupBox6.TabStop = false;
+			this.groupBox6.Text = "Rohrabstand";
+			// 
+			// rbRegister10
+			// 
+			this.rbRegister10.AutoSize = true;
+			this.rbRegister10.Location = new System.Drawing.Point(6, 43);
+			this.rbRegister10.Name = "rbRegister10";
+			this.rbRegister10.Size = new System.Drawing.Size(124, 17);
+			this.rbRegister10.TabIndex = 1;
+			this.rbRegister10.TabStop = true;
+			this.rbRegister10.Text = "10 cm (Standardreg.)";
+			this.rbRegister10.UseVisualStyleBackColor = true;
+			this.rbRegister10.CheckedChanged += new System.EventHandler(this.rbPipeDistance_CheckedChanged);
+			// 
+			// rbRegister5
+			// 
+			this.rbRegister5.AutoSize = true;
+			this.rbRegister5.Location = new System.Drawing.Point(6, 20);
+			this.rbRegister5.Name = "rbRegister5";
+			this.rbRegister5.Size = new System.Drawing.Size(142, 17);
+			this.rbRegister5.TabIndex = 0;
+			this.rbRegister5.TabStop = true;
+			this.rbRegister5.Text = "5 cm (Hochleistungsreg.)";
+			this.rbRegister5.UseVisualStyleBackColor = true;
+			this.rbRegister5.CheckedChanged += new System.EventHandler(this.rbPipeDistance_CheckedChanged);
+			// 
+			// groupBox5
+			// 
+			this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox5.Controls.Add(this.rbRegisterRight);
+			this.groupBox5.Controls.Add(this.rbRegisterLeft);
+			this.groupBox5.Location = new System.Drawing.Point(226, 21);
+			this.groupBox5.Name = "groupBox5";
+			this.groupBox5.Size = new System.Drawing.Size(169, 66);
+			this.groupBox5.TabIndex = 20;
+			this.groupBox5.TabStop = false;
+			this.groupBox5.Text = "Vorlauf";
+			// 
+			// rbRegisterRight
+			// 
+			this.rbRegisterRight.AutoSize = true;
+			this.rbRegisterRight.Location = new System.Drawing.Point(6, 20);
+			this.rbRegisterRight.Name = "rbRegisterRight";
+			this.rbRegisterRight.Size = new System.Drawing.Size(117, 17);
+			this.rbRegisterRight.TabIndex = 1;
+			this.rbRegisterRight.TabStop = true;
+			this.rbRegisterRight.Text = "Rechts unten (Std.)";
+			this.rbRegisterRight.UseVisualStyleBackColor = true;
+			this.rbRegisterRight.CheckedChanged += new System.EventHandler(this.rbRegisterLeftRight_CheckedChanged);
+			// 
+			// rbRegisterLeft
+			// 
+			this.rbRegisterLeft.AutoSize = true;
+			this.rbRegisterLeft.Location = new System.Drawing.Point(6, 43);
+			this.rbRegisterLeft.Name = "rbRegisterLeft";
+			this.rbRegisterLeft.Size = new System.Drawing.Size(80, 17);
+			this.rbRegisterLeft.TabIndex = 0;
+			this.rbRegisterLeft.TabStop = true;
+			this.rbRegisterLeft.Text = "Links unten";
+			this.rbRegisterLeft.UseVisualStyleBackColor = true;
+			this.rbRegisterLeft.CheckedChanged += new System.EventHandler(this.rbRegisterLeftRight_CheckedChanged);
+			// 
+			// groupBox4
+			// 
+			this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox4.Controls.Add(this.numRegisterVertical);
+			this.groupBox4.Controls.Add(this.numRegisterLeft);
+			this.groupBox4.Controls.Add(this.label1);
+			this.groupBox4.Controls.Add(this.label4);
+			this.groupBox4.Controls.Add(this.label5);
+			this.groupBox4.Controls.Add(this.label6);
+			this.groupBox4.Location = new System.Drawing.Point(3, 21);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Size = new System.Drawing.Size(217, 66);
+			this.groupBox4.TabIndex = 17;
+			this.groupBox4.TabStop = false;
+			this.groupBox4.Text = "Position";
+			// 
+			// numRegisterVertical
+			// 
+			this.numRegisterVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numRegisterVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numRegisterVertical.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.Location = new System.Drawing.Point(97, 42);
+			this.numRegisterVertical.MaxValue = null;
+			this.numRegisterVertical.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.Name = "numRegisterVertical";
+			this.numRegisterVertical.Size = new System.Drawing.Size(87, 20);
+			this.numRegisterVertical.TabIndex = 2;
+			this.numRegisterVertical.Text = "1";
+			this.numRegisterVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRegisterVertical.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.ValueChanged += new System.EventHandler(this.numRegisterVertical_ValueChanged);
+			// 
+			// numRegisterLeft
+			// 
+			this.numRegisterLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numRegisterLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numRegisterLeft.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.Location = new System.Drawing.Point(97, 19);
+			this.numRegisterLeft.MaxValue = null;
+			this.numRegisterLeft.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.Name = "numRegisterLeft";
+			this.numRegisterLeft.Size = new System.Drawing.Size(87, 20);
+			this.numRegisterLeft.TabIndex = 1;
+			this.numRegisterLeft.Text = "1";
+			this.numRegisterLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRegisterLeft.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.ValueChanged += new System.EventHandler(this.numRegisterLeft_ValueChanged);
+			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(190, 45);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(21, 13);
+			this.label1.TabIndex = 19;
+			this.label1.Text = "cm";
+			// 
+			// label4
+			// 
+			this.label4.Location = new System.Drawing.Point(6, 45);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(85, 18);
+			this.label4.TabIndex = 18;
+			this.label4.Text = "Vertikal:";
+			// 
+			// label5
+			// 
+			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(190, 22);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(21, 13);
+			this.label5.TabIndex = 16;
+			this.label5.Text = "cm";
+			// 
+			// label6
+			// 
+			this.label6.Location = new System.Drawing.Point(6, 22);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(85, 23);
+			this.label6.TabIndex = 15;
+			this.label6.Text = "Links:";
+			// 
+			// lblRegisterSelectedRegister
+			// 
+			this.lblRegisterSelectedRegister.AutoSize = true;
+			this.lblRegisterSelectedRegister.Location = new System.Drawing.Point(4, 3);
+			this.lblRegisterSelectedRegister.Name = "lblRegisterSelectedRegister";
+			this.lblRegisterSelectedRegister.Size = new System.Drawing.Size(123, 13);
+			this.lblRegisterSelectedRegister.TabIndex = 1;
+			this.lblRegisterSelectedRegister.Text = "Keine Wand ausgewählt";
+			// 
+			// panelModifySchraege
+			// 
+			this.panelModifySchraege.Controls.Add(this.lblSchraege);
+			this.panelModifySchraege.Controls.Add(this.btnSchraegeDelete);
+			this.panelModifySchraege.Controls.Add(this.btnSchraegeRevert);
+			this.panelModifySchraege.Controls.Add(this.btnSchraegeApply);
+			this.panelModifySchraege.Controls.Add(this.groupBox17);
+			this.panelModifySchraege.Controls.Add(this.groupBox18);
+			this.panelModifySchraege.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelModifySchraege.Location = new System.Drawing.Point(0, 0);
+			this.panelModifySchraege.Name = "panelModifySchraege";
+			this.panelModifySchraege.Size = new System.Drawing.Size(862, 91);
+			this.panelModifySchraege.TabIndex = 1;
+			// 
+			// lblSchraege
+			// 
+			this.lblSchraege.AutoSize = true;
+			this.lblSchraege.Location = new System.Drawing.Point(4, 3);
+			this.lblSchraege.Name = "lblSchraege";
+			this.lblSchraege.Size = new System.Drawing.Size(134, 13);
+			this.lblSchraege.TabIndex = 32;
+			this.lblSchraege.Text = "Keine Schräge ausgewählt";
+			// 
+			// btnSchraegeDelete
+			// 
+			this.btnSchraegeDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSchraegeDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeDelete.Image")));
+			this.btnSchraegeDelete.Location = new System.Drawing.Point(345, 25);
+			this.btnSchraegeDelete.Name = "btnSchraegeDelete";
+			this.btnSchraegeDelete.Size = new System.Drawing.Size(25, 25);
+			this.btnSchraegeDelete.TabIndex = 29;
+			this.toolTip.SetToolTip(this.btnSchraegeDelete, "Schräge löschen");
+			this.btnSchraegeDelete.UseVisualStyleBackColor = true;
+			this.btnSchraegeDelete.Click += new System.EventHandler(this.btnSchraegeDelete_Click);
+			// 
+			// btnSchraegeRevert
+			// 
+			this.btnSchraegeRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSchraegeRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeRevert.Image")));
+			this.btnSchraegeRevert.Location = new System.Drawing.Point(314, 56);
+			this.btnSchraegeRevert.Name = "btnSchraegeRevert";
+			this.btnSchraegeRevert.Size = new System.Drawing.Size(25, 25);
+			this.btnSchraegeRevert.TabIndex = 28;
+			this.toolTip.SetToolTip(this.btnSchraegeRevert, "Änderungen verwerfen");
+			this.btnSchraegeRevert.UseVisualStyleBackColor = true;
+			this.btnSchraegeRevert.Click += new System.EventHandler(this.btnSchraegeRevert_Click);
+			// 
+			// btnSchraegeApply
+			// 
+			this.btnSchraegeApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSchraegeApply.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeApply.Image")));
+			this.btnSchraegeApply.Location = new System.Drawing.Point(314, 25);
+			this.btnSchraegeApply.Name = "btnSchraegeApply";
+			this.btnSchraegeApply.Size = new System.Drawing.Size(25, 25);
+			this.btnSchraegeApply.TabIndex = 27;
+			this.toolTip.SetToolTip(this.btnSchraegeApply, "Änderungen speichern");
+			this.btnSchraegeApply.UseVisualStyleBackColor = true;
+			this.btnSchraegeApply.Click += new System.EventHandler(this.btnSchraegeApply_Click);
+			// 
+			// groupBox17
+			// 
+			this.groupBox17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox17.Controls.Add(this.rbSchraegeLeft);
+			this.groupBox17.Controls.Add(this.rbSchraegeRight);
+			this.groupBox17.Location = new System.Drawing.Point(210, 19);
+			this.groupBox17.Name = "groupBox17";
+			this.groupBox17.Size = new System.Drawing.Size(98, 66);
+			this.groupBox17.TabIndex = 26;
+			this.groupBox17.TabStop = false;
+			this.groupBox17.Text = "Position";
+			// 
+			// rbSchraegeLeft
+			// 
+			this.rbSchraegeLeft.AutoSize = true;
+			this.rbSchraegeLeft.Location = new System.Drawing.Point(6, 20);
+			this.rbSchraegeLeft.Name = "rbSchraegeLeft";
+			this.rbSchraegeLeft.Size = new System.Drawing.Size(50, 17);
+			this.rbSchraegeLeft.TabIndex = 1;
+			this.rbSchraegeLeft.TabStop = true;
+			this.rbSchraegeLeft.Text = "Links";
+			this.rbSchraegeLeft.UseVisualStyleBackColor = true;
+			this.rbSchraegeLeft.CheckedChanged += new System.EventHandler(this.rbSchraegeLeft_CheckedChanged);
+			// 
+			// rbSchraegeRight
+			// 
+			this.rbSchraegeRight.AutoSize = true;
+			this.rbSchraegeRight.Location = new System.Drawing.Point(6, 43);
+			this.rbSchraegeRight.Name = "rbSchraegeRight";
+			this.rbSchraegeRight.Size = new System.Drawing.Size(59, 17);
+			this.rbSchraegeRight.TabIndex = 0;
+			this.rbSchraegeRight.TabStop = true;
+			this.rbSchraegeRight.Text = "Rechts";
+			this.rbSchraegeRight.UseVisualStyleBackColor = true;
+			this.rbSchraegeRight.CheckedChanged += new System.EventHandler(this.rbSchraegeRight_CheckedChanged);
+			// 
+			// groupBox18
+			// 
+			this.groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox18.Controls.Add(this.numSchraegeVertical);
+			this.groupBox18.Controls.Add(this.numSchraegeHorizontal);
+			this.groupBox18.Controls.Add(this.label19);
+			this.groupBox18.Controls.Add(this.label20);
+			this.groupBox18.Controls.Add(this.label21);
+			this.groupBox18.Controls.Add(this.label22);
+			this.groupBox18.Location = new System.Drawing.Point(9, 19);
+			this.groupBox18.Name = "groupBox18";
+			this.groupBox18.Size = new System.Drawing.Size(195, 66);
+			this.groupBox18.TabIndex = 25;
+			this.groupBox18.TabStop = false;
+			this.groupBox18.Text = "Größe";
+			// 
+			// numSchraegeVertical
+			// 
+			this.numSchraegeVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numSchraegeVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numSchraegeVertical.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.Location = new System.Drawing.Point(97, 42);
+			this.numSchraegeVertical.MaxValue = null;
+			this.numSchraegeVertical.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.Name = "numSchraegeVertical";
+			this.numSchraegeVertical.Size = new System.Drawing.Size(65, 20);
+			this.numSchraegeVertical.TabIndex = 2;
+			this.numSchraegeVertical.Text = "1";
+			this.numSchraegeVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numSchraegeVertical.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.ValueChanged += new System.EventHandler(this.numSchraegeVertical_ValueChanged);
+			// 
+			// numSchraegeHorizontal
+			// 
+			this.numSchraegeHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numSchraegeHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numSchraegeHorizontal.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.Location = new System.Drawing.Point(97, 19);
+			this.numSchraegeHorizontal.MaxValue = null;
+			this.numSchraegeHorizontal.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.Name = "numSchraegeHorizontal";
+			this.numSchraegeHorizontal.Size = new System.Drawing.Size(65, 20);
+			this.numSchraegeHorizontal.TabIndex = 1;
+			this.numSchraegeHorizontal.Text = "1";
+			this.numSchraegeHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numSchraegeHorizontal.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.ValueChanged += new System.EventHandler(this.numSchraegeHorizontal_ValueChanged);
+			// 
+			// label19
+			// 
+			this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(168, 45);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(21, 13);
+			this.label19.TabIndex = 19;
+			this.label19.Text = "cm";
+			// 
+			// label20
+			// 
+			this.label20.Location = new System.Drawing.Point(6, 45);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(85, 18);
+			this.label20.TabIndex = 18;
+			this.label20.Text = "Vertikal:";
+			// 
+			// label21
+			// 
+			this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label21.AutoSize = true;
+			this.label21.Location = new System.Drawing.Point(168, 22);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(21, 13);
+			this.label21.TabIndex = 16;
+			this.label21.Text = "cm";
+			// 
+			// label22
+			// 
+			this.label22.Location = new System.Drawing.Point(6, 22);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(85, 23);
+			this.label22.TabIndex = 15;
+			this.label22.Text = "Horizontal:";
 			// 
 			// panelModifyConnection
 			// 
@@ -1203,502 +1699,6 @@ namespace Europlan.Common {
 			this.btnWallApply.UseVisualStyleBackColor = true;
 			this.btnWallApply.Click += new System.EventHandler(this.btnWallApply_Click);
 			// 
-			// panelModifyHitherm
-			// 
-			this.panelModifyHitherm.Controls.Add(this.chkRegisterWholeRegister);
-			this.panelModifyHitherm.Controls.Add(this.chkRegisterHelpLines);
-			this.panelModifyHitherm.Controls.Add(this.btnRegisterConnect);
-			this.panelModifyHitherm.Controls.Add(this.btnRegisterDelete);
-			this.panelModifyHitherm.Controls.Add(this.btnRegisterRevert);
-			this.panelModifyHitherm.Controls.Add(this.btnRegisterAccept);
-			this.panelModifyHitherm.Controls.Add(this.groupBox6);
-			this.panelModifyHitherm.Controls.Add(this.groupBox5);
-			this.panelModifyHitherm.Controls.Add(this.groupBox4);
-			this.panelModifyHitherm.Controls.Add(this.lblRegisterSelectedRegister);
-			this.panelModifyHitherm.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelModifyHitherm.Location = new System.Drawing.Point(0, 0);
-			this.panelModifyHitherm.Name = "panelModifyHitherm";
-			this.panelModifyHitherm.Size = new System.Drawing.Size(862, 91);
-			this.panelModifyHitherm.TabIndex = 2;
-			// 
-			// chkRegisterWholeRegister
-			// 
-			this.chkRegisterWholeRegister.AutoSize = true;
-			this.chkRegisterWholeRegister.Location = new System.Drawing.Point(652, 65);
-			this.chkRegisterWholeRegister.Name = "chkRegisterWholeRegister";
-			this.chkRegisterWholeRegister.Size = new System.Drawing.Size(117, 17);
-			this.chkRegisterWholeRegister.TabIndex = 27;
-			this.chkRegisterWholeRegister.Text = "Nur ganze Register";
-			this.chkRegisterWholeRegister.UseVisualStyleBackColor = true;
-			this.chkRegisterWholeRegister.CheckedChanged += new System.EventHandler(this.chkRegisterWholeRegister_CheckedChanged);
-			// 
-			// chkRegisterHelpLines
-			// 
-			this.chkRegisterHelpLines.AutoSize = true;
-			this.chkRegisterHelpLines.Location = new System.Drawing.Point(652, 40);
-			this.chkRegisterHelpLines.Name = "chkRegisterHelpLines";
-			this.chkRegisterHelpLines.Size = new System.Drawing.Size(138, 17);
-			this.chkRegisterHelpLines.TabIndex = 26;
-			this.chkRegisterHelpLines.Text = "An Hilfslinien ausrichten";
-			this.chkRegisterHelpLines.UseVisualStyleBackColor = true;
-			this.chkRegisterHelpLines.CheckedChanged += new System.EventHandler(this.chkRegisterHelpLines_CheckedChanged);
-			// 
-			// btnRegisterConnect
-			// 
-			this.btnRegisterConnect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnRegisterConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterConnect.Image")));
-			this.btnRegisterConnect.Location = new System.Drawing.Point(607, 60);
-			this.btnRegisterConnect.Name = "btnRegisterConnect";
-			this.btnRegisterConnect.Size = new System.Drawing.Size(25, 25);
-			this.btnRegisterConnect.TabIndex = 25;
-			this.toolTip.SetToolTip(this.btnRegisterConnect, "Register verbinden");
-			this.btnRegisterConnect.UseVisualStyleBackColor = true;
-			this.btnRegisterConnect.Click += new System.EventHandler(this.btnRegisterConnect_Click);
-			// 
-			// btnRegisterDelete
-			// 
-			this.btnRegisterDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnRegisterDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterDelete.Image")));
-			this.btnRegisterDelete.Location = new System.Drawing.Point(607, 29);
-			this.btnRegisterDelete.Name = "btnRegisterDelete";
-			this.btnRegisterDelete.Size = new System.Drawing.Size(25, 25);
-			this.btnRegisterDelete.TabIndex = 24;
-			this.toolTip.SetToolTip(this.btnRegisterDelete, "Register löschen");
-			this.btnRegisterDelete.UseVisualStyleBackColor = true;
-			this.btnRegisterDelete.Click += new System.EventHandler(this.btnRegisterDelete_Click);
-			// 
-			// btnRegisterRevert
-			// 
-			this.btnRegisterRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnRegisterRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterRevert.Image")));
-			this.btnRegisterRevert.Location = new System.Drawing.Point(576, 60);
-			this.btnRegisterRevert.Name = "btnRegisterRevert";
-			this.btnRegisterRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnRegisterRevert.TabIndex = 23;
-			this.toolTip.SetToolTip(this.btnRegisterRevert, "Änderungen verwerfen");
-			this.btnRegisterRevert.UseVisualStyleBackColor = true;
-			this.btnRegisterRevert.Click += new System.EventHandler(this.btnRegisterRevert_Click);
-			// 
-			// btnRegisterAccept
-			// 
-			this.btnRegisterAccept.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnRegisterAccept.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterAccept.Image")));
-			this.btnRegisterAccept.Location = new System.Drawing.Point(576, 29);
-			this.btnRegisterAccept.Name = "btnRegisterAccept";
-			this.btnRegisterAccept.Size = new System.Drawing.Size(25, 25);
-			this.btnRegisterAccept.TabIndex = 22;
-			this.toolTip.SetToolTip(this.btnRegisterAccept, "Änderungen speichern");
-			this.btnRegisterAccept.UseVisualStyleBackColor = true;
-			this.btnRegisterAccept.Click += new System.EventHandler(this.btnRegisterAccept_Click);
-			// 
-			// groupBox6
-			// 
-			this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox6.Controls.Add(this.rbRegister10);
-			this.groupBox6.Controls.Add(this.rbRegister5);
-			this.groupBox6.Location = new System.Drawing.Point(401, 21);
-			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(169, 66);
-			this.groupBox6.TabIndex = 21;
-			this.groupBox6.TabStop = false;
-			this.groupBox6.Text = "Rohrabstand";
-			// 
-			// rbRegister10
-			// 
-			this.rbRegister10.AutoSize = true;
-			this.rbRegister10.Location = new System.Drawing.Point(6, 43);
-			this.rbRegister10.Name = "rbRegister10";
-			this.rbRegister10.Size = new System.Drawing.Size(124, 17);
-			this.rbRegister10.TabIndex = 1;
-			this.rbRegister10.TabStop = true;
-			this.rbRegister10.Text = "10 cm (Standardreg.)";
-			this.rbRegister10.UseVisualStyleBackColor = true;
-			this.rbRegister10.CheckedChanged += new System.EventHandler(this.rbPipeDistance_CheckedChanged);
-			// 
-			// rbRegister5
-			// 
-			this.rbRegister5.AutoSize = true;
-			this.rbRegister5.Location = new System.Drawing.Point(6, 20);
-			this.rbRegister5.Name = "rbRegister5";
-			this.rbRegister5.Size = new System.Drawing.Size(142, 17);
-			this.rbRegister5.TabIndex = 0;
-			this.rbRegister5.TabStop = true;
-			this.rbRegister5.Text = "5 cm (Hochleistungsreg.)";
-			this.rbRegister5.UseVisualStyleBackColor = true;
-			this.rbRegister5.CheckedChanged += new System.EventHandler(this.rbPipeDistance_CheckedChanged);
-			// 
-			// groupBox5
-			// 
-			this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox5.Controls.Add(this.rbRegisterRight);
-			this.groupBox5.Controls.Add(this.rbRegisterLeft);
-			this.groupBox5.Location = new System.Drawing.Point(226, 21);
-			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(169, 66);
-			this.groupBox5.TabIndex = 20;
-			this.groupBox5.TabStop = false;
-			this.groupBox5.Text = "Vorlauf";
-			// 
-			// rbRegisterRight
-			// 
-			this.rbRegisterRight.AutoSize = true;
-			this.rbRegisterRight.Location = new System.Drawing.Point(6, 20);
-			this.rbRegisterRight.Name = "rbRegisterRight";
-			this.rbRegisterRight.Size = new System.Drawing.Size(117, 17);
-			this.rbRegisterRight.TabIndex = 1;
-			this.rbRegisterRight.TabStop = true;
-			this.rbRegisterRight.Text = "Rechts unten (Std.)";
-			this.rbRegisterRight.UseVisualStyleBackColor = true;
-			this.rbRegisterRight.CheckedChanged += new System.EventHandler(this.rbRegisterLeftRight_CheckedChanged);
-			// 
-			// rbRegisterLeft
-			// 
-			this.rbRegisterLeft.AutoSize = true;
-			this.rbRegisterLeft.Location = new System.Drawing.Point(6, 43);
-			this.rbRegisterLeft.Name = "rbRegisterLeft";
-			this.rbRegisterLeft.Size = new System.Drawing.Size(80, 17);
-			this.rbRegisterLeft.TabIndex = 0;
-			this.rbRegisterLeft.TabStop = true;
-			this.rbRegisterLeft.Text = "Links unten";
-			this.rbRegisterLeft.UseVisualStyleBackColor = true;
-			this.rbRegisterLeft.CheckedChanged += new System.EventHandler(this.rbRegisterLeftRight_CheckedChanged);
-			// 
-			// groupBox4
-			// 
-			this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox4.Controls.Add(this.numRegisterVertical);
-			this.groupBox4.Controls.Add(this.numRegisterLeft);
-			this.groupBox4.Controls.Add(this.label1);
-			this.groupBox4.Controls.Add(this.label4);
-			this.groupBox4.Controls.Add(this.label5);
-			this.groupBox4.Controls.Add(this.label6);
-			this.groupBox4.Location = new System.Drawing.Point(3, 21);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(217, 66);
-			this.groupBox4.TabIndex = 17;
-			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "Position";
-			// 
-			// numRegisterVertical
-			// 
-			this.numRegisterVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numRegisterVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numRegisterVertical.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.Location = new System.Drawing.Point(97, 42);
-			this.numRegisterVertical.MaxValue = null;
-			this.numRegisterVertical.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.Name = "numRegisterVertical";
-			this.numRegisterVertical.Size = new System.Drawing.Size(87, 20);
-			this.numRegisterVertical.TabIndex = 2;
-			this.numRegisterVertical.Text = "1";
-			this.numRegisterVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRegisterVertical.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.ValueChanged += new System.EventHandler(this.numRegisterVertical_ValueChanged);
-			// 
-			// numRegisterLeft
-			// 
-			this.numRegisterLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numRegisterLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numRegisterLeft.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.Location = new System.Drawing.Point(97, 19);
-			this.numRegisterLeft.MaxValue = null;
-			this.numRegisterLeft.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.Name = "numRegisterLeft";
-			this.numRegisterLeft.Size = new System.Drawing.Size(87, 20);
-			this.numRegisterLeft.TabIndex = 1;
-			this.numRegisterLeft.Text = "1";
-			this.numRegisterLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRegisterLeft.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.ValueChanged += new System.EventHandler(this.numRegisterLeft_ValueChanged);
-			// 
-			// label1
-			// 
-			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(190, 45);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(21, 13);
-			this.label1.TabIndex = 19;
-			this.label1.Text = "cm";
-			// 
-			// label4
-			// 
-			this.label4.Location = new System.Drawing.Point(6, 45);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(85, 18);
-			this.label4.TabIndex = 18;
-			this.label4.Text = "Vertikal:";
-			// 
-			// label5
-			// 
-			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(190, 22);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(21, 13);
-			this.label5.TabIndex = 16;
-			this.label5.Text = "cm";
-			// 
-			// label6
-			// 
-			this.label6.Location = new System.Drawing.Point(6, 22);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(85, 23);
-			this.label6.TabIndex = 15;
-			this.label6.Text = "Links:";
-			// 
-			// lblRegisterSelectedRegister
-			// 
-			this.lblRegisterSelectedRegister.AutoSize = true;
-			this.lblRegisterSelectedRegister.Location = new System.Drawing.Point(4, 3);
-			this.lblRegisterSelectedRegister.Name = "lblRegisterSelectedRegister";
-			this.lblRegisterSelectedRegister.Size = new System.Drawing.Size(123, 13);
-			this.lblRegisterSelectedRegister.TabIndex = 1;
-			this.lblRegisterSelectedRegister.Text = "Keine Wand ausgewählt";
-			// 
-			// panelModifySchraege
-			// 
-			this.panelModifySchraege.Controls.Add(this.lblSchraege);
-			this.panelModifySchraege.Controls.Add(this.btnSchraegeDelete);
-			this.panelModifySchraege.Controls.Add(this.btnSchraegeRevert);
-			this.panelModifySchraege.Controls.Add(this.btnSchraegeApply);
-			this.panelModifySchraege.Controls.Add(this.groupBox17);
-			this.panelModifySchraege.Controls.Add(this.groupBox18);
-			this.panelModifySchraege.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelModifySchraege.Location = new System.Drawing.Point(0, 0);
-			this.panelModifySchraege.Name = "panelModifySchraege";
-			this.panelModifySchraege.Size = new System.Drawing.Size(862, 91);
-			this.panelModifySchraege.TabIndex = 1;
-			// 
-			// lblSchraege
-			// 
-			this.lblSchraege.AutoSize = true;
-			this.lblSchraege.Location = new System.Drawing.Point(4, 3);
-			this.lblSchraege.Name = "lblSchraege";
-			this.lblSchraege.Size = new System.Drawing.Size(134, 13);
-			this.lblSchraege.TabIndex = 32;
-			this.lblSchraege.Text = "Keine Schräge ausgewählt";
-			// 
-			// btnSchraegeDelete
-			// 
-			this.btnSchraegeDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnSchraegeDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeDelete.Image")));
-			this.btnSchraegeDelete.Location = new System.Drawing.Point(345, 25);
-			this.btnSchraegeDelete.Name = "btnSchraegeDelete";
-			this.btnSchraegeDelete.Size = new System.Drawing.Size(25, 25);
-			this.btnSchraegeDelete.TabIndex = 29;
-			this.toolTip.SetToolTip(this.btnSchraegeDelete, "Schräge löschen");
-			this.btnSchraegeDelete.UseVisualStyleBackColor = true;
-			this.btnSchraegeDelete.Click += new System.EventHandler(this.btnSchraegeDelete_Click);
-			// 
-			// btnSchraegeRevert
-			// 
-			this.btnSchraegeRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnSchraegeRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeRevert.Image")));
-			this.btnSchraegeRevert.Location = new System.Drawing.Point(314, 56);
-			this.btnSchraegeRevert.Name = "btnSchraegeRevert";
-			this.btnSchraegeRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnSchraegeRevert.TabIndex = 28;
-			this.toolTip.SetToolTip(this.btnSchraegeRevert, "Änderungen verwerfen");
-			this.btnSchraegeRevert.UseVisualStyleBackColor = true;
-			this.btnSchraegeRevert.Click += new System.EventHandler(this.btnSchraegeRevert_Click);
-			// 
-			// btnSchraegeApply
-			// 
-			this.btnSchraegeApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnSchraegeApply.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeApply.Image")));
-			this.btnSchraegeApply.Location = new System.Drawing.Point(314, 25);
-			this.btnSchraegeApply.Name = "btnSchraegeApply";
-			this.btnSchraegeApply.Size = new System.Drawing.Size(25, 25);
-			this.btnSchraegeApply.TabIndex = 27;
-			this.toolTip.SetToolTip(this.btnSchraegeApply, "Änderungen speichern");
-			this.btnSchraegeApply.UseVisualStyleBackColor = true;
-			this.btnSchraegeApply.Click += new System.EventHandler(this.btnSchraegeApply_Click);
-			// 
-			// groupBox17
-			// 
-			this.groupBox17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox17.Controls.Add(this.rbSchraegeLeft);
-			this.groupBox17.Controls.Add(this.rbSchraegeRight);
-			this.groupBox17.Location = new System.Drawing.Point(210, 19);
-			this.groupBox17.Name = "groupBox17";
-			this.groupBox17.Size = new System.Drawing.Size(98, 66);
-			this.groupBox17.TabIndex = 26;
-			this.groupBox17.TabStop = false;
-			this.groupBox17.Text = "Position";
-			// 
-			// rbSchraegeLeft
-			// 
-			this.rbSchraegeLeft.AutoSize = true;
-			this.rbSchraegeLeft.Location = new System.Drawing.Point(6, 20);
-			this.rbSchraegeLeft.Name = "rbSchraegeLeft";
-			this.rbSchraegeLeft.Size = new System.Drawing.Size(50, 17);
-			this.rbSchraegeLeft.TabIndex = 1;
-			this.rbSchraegeLeft.TabStop = true;
-			this.rbSchraegeLeft.Text = "Links";
-			this.rbSchraegeLeft.UseVisualStyleBackColor = true;
-			this.rbSchraegeLeft.CheckedChanged += new System.EventHandler(this.rbSchraegeLeft_CheckedChanged);
-			// 
-			// rbSchraegeRight
-			// 
-			this.rbSchraegeRight.AutoSize = true;
-			this.rbSchraegeRight.Location = new System.Drawing.Point(6, 43);
-			this.rbSchraegeRight.Name = "rbSchraegeRight";
-			this.rbSchraegeRight.Size = new System.Drawing.Size(59, 17);
-			this.rbSchraegeRight.TabIndex = 0;
-			this.rbSchraegeRight.TabStop = true;
-			this.rbSchraegeRight.Text = "Rechts";
-			this.rbSchraegeRight.UseVisualStyleBackColor = true;
-			this.rbSchraegeRight.CheckedChanged += new System.EventHandler(this.rbSchraegeRight_CheckedChanged);
-			// 
-			// groupBox18
-			// 
-			this.groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox18.Controls.Add(this.numSchraegeVertical);
-			this.groupBox18.Controls.Add(this.numSchraegeHorizontal);
-			this.groupBox18.Controls.Add(this.label19);
-			this.groupBox18.Controls.Add(this.label20);
-			this.groupBox18.Controls.Add(this.label21);
-			this.groupBox18.Controls.Add(this.label22);
-			this.groupBox18.Location = new System.Drawing.Point(9, 19);
-			this.groupBox18.Name = "groupBox18";
-			this.groupBox18.Size = new System.Drawing.Size(195, 66);
-			this.groupBox18.TabIndex = 25;
-			this.groupBox18.TabStop = false;
-			this.groupBox18.Text = "Größe";
-			// 
-			// numSchraegeVertical
-			// 
-			this.numSchraegeVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numSchraegeVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numSchraegeVertical.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeVertical.Location = new System.Drawing.Point(97, 42);
-			this.numSchraegeVertical.MaxValue = null;
-			this.numSchraegeVertical.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeVertical.Name = "numSchraegeVertical";
-			this.numSchraegeVertical.Size = new System.Drawing.Size(65, 20);
-			this.numSchraegeVertical.TabIndex = 2;
-			this.numSchraegeVertical.Text = "1";
-			this.numSchraegeVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSchraegeVertical.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeVertical.ValueChanged += new System.EventHandler(this.numSchraegeVertical_ValueChanged);
-			// 
-			// numSchraegeHorizontal
-			// 
-			this.numSchraegeHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numSchraegeHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numSchraegeHorizontal.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeHorizontal.Location = new System.Drawing.Point(97, 19);
-			this.numSchraegeHorizontal.MaxValue = null;
-			this.numSchraegeHorizontal.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeHorizontal.Name = "numSchraegeHorizontal";
-			this.numSchraegeHorizontal.Size = new System.Drawing.Size(65, 20);
-			this.numSchraegeHorizontal.TabIndex = 1;
-			this.numSchraegeHorizontal.Text = "1";
-			this.numSchraegeHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSchraegeHorizontal.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeHorizontal.ValueChanged += new System.EventHandler(this.numSchraegeHorizontal_ValueChanged);
-			// 
-			// label19
-			// 
-			this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label19.AutoSize = true;
-			this.label19.Location = new System.Drawing.Point(168, 45);
-			this.label19.Name = "label19";
-			this.label19.Size = new System.Drawing.Size(21, 13);
-			this.label19.TabIndex = 19;
-			this.label19.Text = "cm";
-			// 
-			// label20
-			// 
-			this.label20.Location = new System.Drawing.Point(6, 45);
-			this.label20.Name = "label20";
-			this.label20.Size = new System.Drawing.Size(85, 18);
-			this.label20.TabIndex = 18;
-			this.label20.Text = "Vertikal:";
-			// 
-			// label21
-			// 
-			this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(168, 22);
-			this.label21.Name = "label21";
-			this.label21.Size = new System.Drawing.Size(21, 13);
-			this.label21.TabIndex = 16;
-			this.label21.Text = "cm";
-			// 
-			// label22
-			// 
-			this.label22.Location = new System.Drawing.Point(6, 22);
-			this.label22.Name = "label22";
-			this.label22.Size = new System.Drawing.Size(85, 23);
-			this.label22.TabIndex = 15;
-			this.label22.Text = "Horizontal:";
-			// 
 			// label7
 			// 
 			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2141,7 +2141,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.toolStrip2);
 			this.Controls.Add(this.toolStrip1);
 			this.Name = "HithermPlannerForm";
-			this.Text = "HithermPlannerForm";
+			this.Text = "Grafische Auslegung Hitherm";
 			this.Load += new System.EventHandler(this.HithermPlannerForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HithermPlannerForm_FormClosing);
 			this.toolStrip1.ResumeLayout(false);
@@ -2149,6 +2149,20 @@ namespace Europlan.Common {
 			this.toolStrip2.ResumeLayout(false);
 			this.toolStrip2.PerformLayout();
 			this.panelTop.ResumeLayout(false);
+			this.panelModifyHitherm.ResumeLayout(false);
+			this.panelModifyHitherm.PerformLayout();
+			this.groupBox6.ResumeLayout(false);
+			this.groupBox6.PerformLayout();
+			this.groupBox5.ResumeLayout(false);
+			this.groupBox5.PerformLayout();
+			this.groupBox4.ResumeLayout(false);
+			this.groupBox4.PerformLayout();
+			this.panelModifySchraege.ResumeLayout(false);
+			this.panelModifySchraege.PerformLayout();
+			this.groupBox17.ResumeLayout(false);
+			this.groupBox17.PerformLayout();
+			this.groupBox18.ResumeLayout(false);
+			this.groupBox18.PerformLayout();
 			this.panelModifyConnection.ResumeLayout(false);
 			this.panelModifyConnection.PerformLayout();
 			this.panelModifyObstacle.ResumeLayout(false);
@@ -2171,20 +2185,6 @@ namespace Europlan.Common {
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
-			this.panelModifyHitherm.ResumeLayout(false);
-			this.panelModifyHitherm.PerformLayout();
-			this.groupBox6.ResumeLayout(false);
-			this.groupBox6.PerformLayout();
-			this.groupBox5.ResumeLayout(false);
-			this.groupBox5.PerformLayout();
-			this.groupBox4.ResumeLayout(false);
-			this.groupBox4.PerformLayout();
-			this.panelModifySchraege.ResumeLayout(false);
-			this.panelModifySchraege.PerformLayout();
-			this.groupBox17.ResumeLayout(false);
-			this.groupBox17.PerformLayout();
-			this.groupBox18.ResumeLayout(false);
-			this.groupBox18.PerformLayout();
 			this.panelBottom.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
