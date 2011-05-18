@@ -383,6 +383,31 @@ namespace Europlan.Common {
 					this.numObstacleVertical.Value = (decimal)(obstacle as GraphicalWallObstacle).GraphPosY;
 					this.numObstacleHorizontalLeft.Value = (decimal)obstacle.GetGraphPosXLeft(graphicalWallPanel.SelectedWall);
 					this.numObstacleHorizontalRight.Value = (decimal)obstacle.GetGraphPosXRight(graphicalWallPanel.SelectedWall);
+					Nullable<double> distanceLeft = obstacle.GetGraphDistanceXLeft(graphicalWallPanel.SelectedWall);
+					if (distanceLeft.HasValue) {
+						this.numObstacleDistanceLeft.Value = (decimal)distanceLeft.Value;
+					} else {
+						this.numObstacleDistanceLeft.Text = "";
+					}
+					Nullable<double> distanceRight = obstacle.GetGraphDistanceXRight(graphicalWallPanel.SelectedWall);
+					if (distanceRight.HasValue) {
+						this.numObstacleDistanceRight.Value = (decimal)distanceRight.Value;
+					} else {
+						this.numObstacleDistanceRight.Text = "";
+					}
+					Nullable<double> middleDistanceLeft = obstacle.GetGraphMiddleDistanceXLeft(graphicalWallPanel.SelectedWall);
+					if (middleDistanceLeft.HasValue) {
+						this.numObstacleMiddleDistanceLeft.Value = (decimal)middleDistanceLeft.Value;
+					} else {
+						this.numObstacleMiddleDistanceLeft.Text = "";
+					}
+					Nullable<double> middleDistanceRight = obstacle.GetGraphMiddleDistanceXRight(graphicalWallPanel.SelectedWall);
+					if (middleDistanceRight.HasValue) {
+						this.numObstacleMiddleDistanceRight.Value = (decimal)middleDistanceRight.Value;
+					} else {
+						this.numObstacleMiddleDistanceRight.Text = "";
+					}
+
 					this.lblObstacle.Text = "Typ: " + new GraphicalWallObstacle.ObstacleTypeConverter().ConvertToString(obstacle.ObstacleType) + " " + this.numObstacleWidth.Value + "cm x " + this.numObstacleHeight.Value + "cm";
 				}
 			} else {
@@ -391,6 +416,10 @@ namespace Europlan.Common {
 				this.numObstacleVertical.Text = "";
 				this.numObstacleHorizontalLeft.Text = "";
 				this.numObstacleHorizontalRight.Text = "";
+				this.numObstacleDistanceLeft.Text = "";
+				this.numObstacleDistanceRight.Text = "";
+				this.numObstacleMiddleDistanceLeft.Text = "";
+				this.numObstacleMiddleDistanceRight.Text = "";
 				this.lblObstacle.Text = "Kein Objekt ausgewählt";
 			}
 			UpdateModifyObstaclesPanelButtons(obstacle);
@@ -471,6 +500,10 @@ namespace Europlan.Common {
 				this.numObstacleHeight.Enabled = true;
 				this.numObstacleHorizontalLeft.Enabled = true;
 				this.numObstacleHorizontalRight.Enabled = true;
+				this.numObstacleDistanceLeft.Enabled = true;
+				this.numObstacleDistanceRight.Enabled = true;
+				this.numObstacleMiddleDistanceLeft.Enabled = true;
+				this.numObstacleMiddleDistanceRight.Enabled = true;
 				if (obstacle is GraphicalDoor) {
 					this.numObstacleVertical.Enabled = false;
 				} else if (obstacle is GraphicalWindow) {
@@ -487,7 +520,10 @@ namespace Europlan.Common {
 				this.numObstacleHeight.Enabled = false;
 				this.numObstacleHorizontalLeft.Enabled = false;
 				this.numObstacleHorizontalRight.Enabled = false;
-
+				this.numObstacleDistanceLeft.Enabled = false;
+				this.numObstacleDistanceRight.Enabled = false;
+				this.numObstacleMiddleDistanceLeft.Enabled = false;
+				this.numObstacleMiddleDistanceRight.Enabled = false;
 			}
 		}
 
@@ -987,6 +1023,50 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).SetGraphPosXRight((double)numObstacleHorizontalRight.Value, graphicalWallPanel.SelectedWall);
+					unsavedChanges = true;
+					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
+			}
+		}
+
+		private void numObstacleDistanceLeft_ValueChanged(object sender, EventArgs e) {
+			if (!updateOngoing) {
+				if (SelectedObject is GraphicalWallObstacle) {
+					(SelectedObject as GraphicalWallObstacle).SetGraphDistanceXLeft((double)numObstacleDistanceLeft.Value, graphicalWallPanel.SelectedWall);
+					unsavedChanges = true;
+					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
+			}
+		}
+
+		private void numObstacleDistanceRight_ValueChanged(object sender, EventArgs e) {
+			if (!updateOngoing) {
+				if (SelectedObject is GraphicalWallObstacle) {
+					(SelectedObject as GraphicalWallObstacle).SetGraphDistanceXRight((double)numObstacleDistanceRight.Value, graphicalWallPanel.SelectedWall);
+					unsavedChanges = true;
+					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
+			}
+		}
+
+		private void numObstacleMiddleDistanceLeft_ValueChanged(object sender, EventArgs e) {
+			if (!updateOngoing) {
+				if (SelectedObject is GraphicalWallObstacle) {
+					(SelectedObject as GraphicalWallObstacle).SetGraphMiddleDistanceXLeft((double)numObstacleMiddleDistanceLeft.Value, graphicalWallPanel.SelectedWall);
+					unsavedChanges = true;
+					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
+			}
+		}
+
+		private void numObstacleMiddleDistanceRight_ValueChanged(object sender, EventArgs e) {
+			if (!updateOngoing) {
+				if (SelectedObject is GraphicalWallObstacle) {
+					(SelectedObject as GraphicalWallObstacle).SetGraphMiddleDistanceXRight((double)numObstacleMiddleDistanceRight.Value, graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();

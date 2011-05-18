@@ -136,6 +136,176 @@ namespace Europlan.Common {
 			}
 		}
 
+		public Nullable<double> GetGraphDistanceXLeft(GraphicalWall owningWall) {
+			Nullable<double> result = null;
+			if (owningWall != null) {
+				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+					if (obstacle != this) {
+						if ((obstacle.GraphPosX + obstacle.Width) <= GraphPosX) {
+							if (!result.HasValue) {
+								result = GraphPosX - (obstacle.GraphPosX + obstacle.Width);
+							} else {
+								double distance = GraphPosX - (obstacle.GraphPosX + obstacle.Width);
+								if (distance < result) {
+									result = distance;
+								}
+							}
+						}
+					}
+				}
+			}
+			return result;
+		}
+
+		public void SetGraphDistanceXLeft(double graphDistanceXLeft, GraphicalWall owningWall) {
+			if (owningWall != null && graphDistanceXLeft >= 0) {
+				GraphicalWallObstacle closest = null;
+				double result = Double.PositiveInfinity;
+				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+					if (obstacle != this) {
+						if ((obstacle.GraphPosX + obstacle.Width) <= GraphPosX) {
+							double distance = GraphPosX - (obstacle.GraphPosX + obstacle.Width);
+							if (distance < result) {
+								result = distance;
+								closest = obstacle;
+							}
+						}
+					}
+				}
+				if (closest != null) {
+					GraphPosX = closest.GraphPosX + closest.Width + graphDistanceXLeft;
+				}
+			}
+		}
+
+		public Nullable<double> GetGraphMiddleDistanceXLeft(GraphicalWall owningWall) {
+			Nullable<double> result = null;
+			if (owningWall != null) {
+				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+					if (obstacle != this) {
+						if ((obstacle.GraphPosX + (obstacle.Width / 2.0)) <= (GraphPosX + (Width / 2.0))) {
+							if (!result.HasValue) {
+								result = (GraphPosX + (Width / 2.0)) - (obstacle.GraphPosX + (obstacle.Width / 2.0));
+							} else {
+								double distance = (GraphPosX + (Width / 2.0)) - (obstacle.GraphPosX + (obstacle.Width / 2.0));
+								if (distance < result) {
+									result = distance;
+								}
+							}
+						}
+					}
+				}
+			}
+			return result;
+		}
+
+		public void SetGraphMiddleDistanceXLeft(double graphDistanceXLeft, GraphicalWall owningWall) {
+			if (owningWall != null && graphDistanceXLeft >= 0) {
+				GraphicalWallObstacle closest = null;
+				double result = Double.PositiveInfinity;
+				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+					if (obstacle != this) {
+						if ((obstacle.GraphPosX + (obstacle.Width / 2.0)) <= (GraphPosX + (Width / 2.0))) {
+							double distance = (GraphPosX + (Width / 2.0)) - (obstacle.GraphPosX + (obstacle.Width / 2.0));
+							if (distance < result) {
+								result = distance;
+								closest = obstacle;
+							}
+						}
+					}
+				}
+				if (closest != null) {
+					GraphPosX = (closest.GraphPosX + (closest.Width / 2.0)) + graphDistanceXLeft - (Width / 2.0);
+				}
+			}
+		}
+
+		public Nullable<double> GetGraphDistanceXRight(GraphicalWall owningWall) {
+			Nullable<double> result = null;
+			if (owningWall != null) {
+				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+					if (obstacle != this) {
+						if (GraphPosX + Width <= obstacle.GraphPosX) {
+							if (!result.HasValue) {
+								result = obstacle.GraphPosX - (GraphPosX + Width);
+							} else {
+								double distance = obstacle.GraphPosX - (GraphPosX + Width);
+								if (distance < result) {
+									result = distance;
+								}
+							}
+						}
+					}
+				}
+			}
+			return result;
+		}
+
+		public void SetGraphDistanceXRight(double graphDistanceXRight, GraphicalWall owningWall) {
+			if (owningWall != null && graphDistanceXRight >= 0) {
+				GraphicalWallObstacle closest = null;
+				double result = Double.PositiveInfinity;
+				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+					if (obstacle != this) {
+						if (GraphPosX + Width <= obstacle.GraphPosX) {
+							double distance = obstacle.GraphPosX - (GraphPosX + Width);
+							if (distance < result) {
+								result = distance;
+								closest = obstacle;
+							}
+						}
+					}
+				}
+				if (closest != null) {
+					GraphPosX = closest.GraphPosX - graphDistanceXRight - Width;
+				}
+			}
+		}
+
+		public Nullable<double> GetGraphMiddleDistanceXRight(GraphicalWall owningWall) {
+			Nullable<double> result = null;
+			if (owningWall != null) {
+				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+					if (obstacle != this) {
+						if ((GraphPosX + (Width / 2.0) <= (obstacle.GraphPosX + (obstacle.Width / 2.0)))) {
+							if (!result.HasValue) {
+								result = ((obstacle.GraphPosX + (obstacle.Width / 2.0) - GraphPosX + (Width / 2.0)));
+							} else {
+								double distance = ((obstacle.GraphPosX + (obstacle.Width / 2.0) - GraphPosX + (Width / 2.0)));
+								if (distance < result) {
+									result = distance;
+								}
+							}
+						}
+					}
+				}
+			}
+			return result;
+		}
+
+		public void SetGraphMiddleDistanceXRight(double graphDistanceXRight, GraphicalWall owningWall) {
+			if (owningWall != null && graphDistanceXRight >= 0) {
+				GraphicalWallObstacle closest = null;
+				double result = Double.PositiveInfinity;
+				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+					if (obstacle != this) {
+						if ((GraphPosX + (Width / 2.0) <= (obstacle.GraphPosX + (obstacle.Width / 2.0)))) {
+							double distance = ((obstacle.GraphPosX + (obstacle.Width / 2.0) - GraphPosX + (Width / 2.0)));
+							if (distance < result) {
+								result = distance;
+								closest = obstacle;
+							}
+						}
+					}
+				}
+				if (closest != null) {
+					GraphPosX = (closest.GraphPosX + (closest.Width / 2.0)) - graphDistanceXRight - (Width / 2.0);
+				}
+			}
+		}
+
+
+
 		public bool PositionAndSizeOk(GraphicalWall owningWall, double offsetX, double offsetY) {
 			Polygon2D borders = this.GetObjectBorders(offsetX, offsetY);
 			if (this.Width < 10 || this.Height < 10) {
