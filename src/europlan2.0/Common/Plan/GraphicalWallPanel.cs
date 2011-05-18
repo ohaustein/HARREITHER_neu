@@ -403,7 +403,7 @@ namespace Europlan.Common {
 			}
 
 			if (mode == PlanMode.PM_ADD_OBSTACLE) {
-				if (this.newObstacleWall != null && this.newObstacle != null && this.newObstacle.Width > 0 && this.newObstacle.Height > 0) {
+				if (this.newObstacleWall != null && this.newObstacle != null) {
 					if (this.newObstacleOk) {
 						this.newObstacleWall.Obstacles.Add(this.newObstacle);
 					}
