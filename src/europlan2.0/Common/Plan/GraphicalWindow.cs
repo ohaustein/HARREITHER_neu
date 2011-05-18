@@ -79,7 +79,7 @@ namespace Europlan.Common {
 			PaintObject(g, xOffset, yOffset, selectedObject, scale, false);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error) {
+		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error) {
 			Pen windowBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
 			Brush windowBrush = new SolidBrush(SystemColors.ControlLight);
 			Pen unusableBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));

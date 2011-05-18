@@ -226,7 +226,7 @@ namespace Europlan.Common {
 				Region wallClip = new Region(wallPath);
 				e.Graphics.Clip = wallClip;
 
-				this.newObstacle.PaintObject(e.Graphics, offset.X, offset.Y, this.newObstacle, scale);
+				this.newObstacle.PaintObject(e.Graphics, offset.X, offset.Y, this.newObstacle, scale, !this.newObstacleOk);
 			}
 
 			if (this.mode == PlanMode.PM_SELECT_OBJECT && this.selectedObject != null) {
@@ -293,6 +293,7 @@ namespace Europlan.Common {
 		private GraphicalWallObstacle newObstacle = null;
 		private GraphicalWall newObstacleWall = null;
 		private double newObstacleWallXOffset, newObstacleWallYOffset;
+		private bool newObstacleOk = true;
 
 		protected override void OnMouseDown(MouseEventArgs e) {
 			base.OnMouseDown(e);
@@ -337,6 +338,7 @@ namespace Europlan.Common {
 							this.newObstacle = null;
 							break;
 					}
+					this.newObstacleOk = false;
 					if (this.newObstacle == null) {
 						this.newObstacleWall = null;
 					}
@@ -401,10 +403,15 @@ namespace Europlan.Common {
 			}
 
 			if (mode == PlanMode.PM_ADD_OBSTACLE) {
-				this.newObstacleWall.Obstacles.Add(this.newObstacle);
-				this.dragStart = null;
-				this.newObstacle = null;
-				this.newObstacleWall = null;
+				if (this.newObstacleWall != null && this.newObstacle != null && this.newObstacle.Width > 0 && this.newObstacle.Height > 0) {
+					if (this.newObstacleOk) {
+						this.newObstacleWall.Obstacles.Add(this.newObstacle);
+					}
+					this.dragStart = null;
+					this.newObstacle = null;
+					this.newObstacleWall = null;
+				}
+				invalidate = true;
 			}
 
 			if (mode == PlanMode.PM_SELECT_OBJECT) {
@@ -457,6 +464,7 @@ namespace Europlan.Common {
 				this.newObstacle.GraphPosY = y;
 				this.newObstacle.Height = height;
 				this.newObstacle.Width = width;
+				this.newObstacleOk = this.newObstacle.PositionAndSizeOk(this.newObstacleWall, this.newObstacleWallXOffset, this.newObstacleWallYOffset);
 				invalidate = true;
 			}
 			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {
