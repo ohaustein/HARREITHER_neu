@@ -70,7 +70,8 @@ namespace Europlan.Common {
 			PM_SELECT_OBJECT,
 			PM_PLANNER_CLICK,
 			PM_PLANNER_DRAG,
-			PM_ADD_OBSTACLE
+			PM_ADD_OBSTACLE,
+			PM_ADD_SCHRAEGE
 		}
 
 		public GraphicalWallPanel() {
