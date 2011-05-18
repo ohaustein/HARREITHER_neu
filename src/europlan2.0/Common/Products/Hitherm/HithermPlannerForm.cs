@@ -381,11 +381,13 @@ namespace Europlan.Common {
 					this.numObstacleWidth.Value = (decimal)(obstacle as GraphicalWallObstacle).Width;
 					this.numObstacleHeight.Value = (decimal)(obstacle as GraphicalWallObstacle).Height;
 					this.numObstacleVertical.Value = (decimal)(obstacle as GraphicalWallObstacle).GraphPosY;
+					this.lblObstacle.Text = "Typ: " + new GraphicalWallObstacle.ObstacleTypeConverter().ConvertToString(obstacle.ObstacleType) + " " + this.numObstacleWidth.Value + "cm x " + this.numObstacleHeight.Value + "cm";
 				}
 			} else {
 				this.numObstacleHeight.Text = "";
 				this.numObstacleWidth.Text = "";
 				this.numObstacleVertical.Text = "";
+				this.lblObstacle.Text = "Kein Objekt ausgewählt";
 			}
 			UpdateModifyObstaclesPanelButtons(obstacle);
 			updateOngoing = false;

@@ -37,6 +37,8 @@ namespace Europlan.Common {
 			this.btnConnection = new System.Windows.Forms.ToolStripButton();
 			this.panelTop = new System.Windows.Forms.Panel();
 			this.panelModifyObstacle = new System.Windows.Forms.Panel();
+			this.btnObstacleRevert = new System.Windows.Forms.Button();
+			this.btnObstacleApply = new System.Windows.Forms.Button();
 			this.groupBox13 = new System.Windows.Forms.GroupBox();
 			this.numObstacleVertical = new Europlan.Common.NumericBox();
 			this.label11 = new System.Windows.Forms.Label();
@@ -137,8 +139,7 @@ namespace Europlan.Common {
 			this.panelBottom = new System.Windows.Forms.Panel();
 			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.hithermPlanner = new Europlan.Common.HithermPlanner();
-			this.btnObstacleRevert = new System.Windows.Forms.Button();
-			this.btnObstacleApply = new System.Windows.Forms.Button();
+			this.lblObstacle = new System.Windows.Forms.Label();
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
 			this.panelTop.SuspendLayout();
@@ -293,6 +294,7 @@ namespace Europlan.Common {
 			// 
 			// panelModifyObstacle
 			// 
+			this.panelModifyObstacle.Controls.Add(this.lblObstacle);
 			this.panelModifyObstacle.Controls.Add(this.btnObstacleRevert);
 			this.panelModifyObstacle.Controls.Add(this.btnObstacleApply);
 			this.panelModifyObstacle.Controls.Add(this.groupBox13);
@@ -305,6 +307,30 @@ namespace Europlan.Common {
 			this.panelModifyObstacle.Name = "panelModifyObstacle";
 			this.panelModifyObstacle.Size = new System.Drawing.Size(862, 91);
 			this.panelModifyObstacle.TabIndex = 23;
+			// 
+			// btnObstacleRevert
+			// 
+			this.btnObstacleRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRevert.Image")));
+			this.btnObstacleRevert.Location = new System.Drawing.Point(587, 60);
+			this.btnObstacleRevert.Name = "btnObstacleRevert";
+			this.btnObstacleRevert.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleRevert.TabIndex = 30;
+			this.btnObstacleRevert.UseVisualStyleBackColor = true;
+			this.btnObstacleRevert.Click += new System.EventHandler(this.btnObstacleRevert_Click);
+			// 
+			// btnObstacleApply
+			// 
+			this.btnObstacleApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleApply.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleApply.Image")));
+			this.btnObstacleApply.Location = new System.Drawing.Point(587, 29);
+			this.btnObstacleApply.Name = "btnObstacleApply";
+			this.btnObstacleApply.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleApply.TabIndex = 29;
+			this.btnObstacleApply.UseVisualStyleBackColor = true;
+			this.btnObstacleApply.Click += new System.EventHandler(this.btnObstacleApply_Click);
 			// 
 			// groupBox13
 			// 
@@ -1508,29 +1534,14 @@ namespace Europlan.Common {
 			this.hithermPlanner.NewRegisterVorlaufRight = true;
 			this.hithermPlanner.RecalculationNecessary += new System.EventHandler<System.EventArgs>(this.hithermPlanner_RecalculationNecessary);
 			// 
-			// btnObstacleRevert
+			// lblObstacle
 			// 
-			this.btnObstacleRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnObstacleRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRevert.Image")));
-			this.btnObstacleRevert.Location = new System.Drawing.Point(587, 60);
-			this.btnObstacleRevert.Name = "btnObstacleRevert";
-			this.btnObstacleRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleRevert.TabIndex = 30;
-			this.btnObstacleRevert.UseVisualStyleBackColor = true;
-			this.btnObstacleRevert.Click += new System.EventHandler(this.btnObstacleRevert_Click);
-			// 
-			// btnObstacleApply
-			// 
-			this.btnObstacleApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnObstacleApply.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleApply.Image")));
-			this.btnObstacleApply.Location = new System.Drawing.Point(587, 29);
-			this.btnObstacleApply.Name = "btnObstacleApply";
-			this.btnObstacleApply.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleApply.TabIndex = 29;
-			this.btnObstacleApply.UseVisualStyleBackColor = true;
-			this.btnObstacleApply.Click += new System.EventHandler(this.btnObstacleApply_Click);
+			this.lblObstacle.AutoSize = true;
+			this.lblObstacle.Location = new System.Drawing.Point(4, 3);
+			this.lblObstacle.Name = "lblObstacle";
+			this.lblObstacle.Size = new System.Drawing.Size(119, 13);
+			this.lblObstacle.TabIndex = 31;
+			this.lblObstacle.Text = "Kein Objekt ausgewählt";
 			// 
 			// HithermPlannerForm
 			// 
@@ -1552,6 +1563,7 @@ namespace Europlan.Common {
 			this.toolStrip2.PerformLayout();
 			this.panelTop.ResumeLayout(false);
 			this.panelModifyObstacle.ResumeLayout(false);
+			this.panelModifyObstacle.PerformLayout();
 			this.groupBox13.ResumeLayout(false);
 			this.groupBox13.PerformLayout();
 			this.groupBox12.ResumeLayout(false);
@@ -1695,6 +1707,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Button btnObstacleRevert;
 		private System.Windows.Forms.Button btnObstacleApply;
+		private System.Windows.Forms.Label lblObstacle;
 
 
 	}

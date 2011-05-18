@@ -80,7 +80,6 @@ namespace Europlan.Common {
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error) {
-			// TODO windowType beachten
 			Pen windowBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
 			Brush windowBrush = new SolidBrush(SystemColors.ControlLight);
 			Pen unusableBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
@@ -93,87 +92,50 @@ namespace Europlan.Common {
 
 			Region oldClip = g.Clip;
 			Region baseClip = new Region(oldClip.GetRegionData());
-			Polygon2D doorArea = this.GetObjectBorders(xOffset, yOffset);
+			Polygon2D windowArea = this.GetObjectBorders(xOffset, yOffset);
 			Polygon2D outsideBorder = GetOutsideBorder(xOffset, yOffset);
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 
-			List<PointF> doorPoints = new List<PointF>();
-			foreach (Point2D vertex in doorArea) {
-				doorPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
+			List<PointF> windowPoints = new List<PointF>();
+			foreach (Point2D vertex in windowArea) {
+				windowPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
 			}
 
-			PointF[] doorPointArr = doorPoints.ToArray();
+			PointF[] windowPointArr = windowPoints.ToArray();
 
-			GraphicsPath doorPath = new GraphicsPath();
-			doorPath.AddPolygon(doorPointArr);
-			//Region doorClip = new Region(doorPath);
-			//doorClip.Intersect(baseClip);
-			//g.Clip = doorClip;
+			GraphicsPath windowPath = new GraphicsPath();
+			windowPath.AddPolygon(windowPointArr);
 
+			g.FillPolygon(windowBrush, windowPointArr);
 
-			g.FillPolygon(windowBrush, doorPointArr);
-
-
+			bool outsideOk = true;
 			List<PointF> outsidePoints = new List<PointF>();
 			foreach (Point2D vertex in outsideBorder) {
+				if (Double.NaN.Equals(vertex.X) || Double.NaN.Equals(vertex.Y)) {
+					outsideOk = false;
+				}
 				outsidePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
 			}
 
-			GraphicsPath path = new GraphicsPath();
-			path.AddPolygon(outsidePoints.ToArray());
-			Region clip = new Region(path);
-			GraphicsPath excludePath = new GraphicsPath();
-			excludePath.AddPolygon(doorPoints.ToArray());
-			clip.Exclude(excludePath);
-			clip.Intersect(baseClip);
-			g.Clip = clip;
+			if (outsideOk) {
+				GraphicsPath path = new GraphicsPath();
+				path.AddPolygon(outsidePoints.ToArray());
+				Region clip = new Region(path);
+				GraphicsPath excludePath = new GraphicsPath();
+				excludePath.AddPolygon(windowPoints.ToArray());
+				clip.Exclude(excludePath);
+				clip.Intersect(baseClip);
+				g.Clip = clip;
 
-			g.FillPolygon(unusableBrush, outsidePoints.ToArray());
+				g.FillPolygon(unusableBrush, outsidePoints.ToArray());
+			}
 
 			g.Clip = baseClip;
-			g.DrawPolygon(unusableBorderPen, outsidePoints.ToArray());
-			g.DrawPolygon(windowBorderPen, doorPointArr);
+			if (outsideOk) {
+				g.DrawPolygon(unusableBorderPen, outsidePoints.ToArray());
+			}
+			g.DrawPolygon(windowBorderPen, windowPointArr);
 			g.Clip = oldClip;
-
-			/*Region oldClip = g.Clip;
-			Polygon2D usableArea = this.GetObjectBorders(xOffset, yOffset);
-			Polygon2D windowBorder = this.GetOutsideBorder(xOffset, yOffset);
-			g.SmoothingMode = SmoothingMode.AntiAlias;
-
-			List<PointF> borderPoints = new List<PointF>();
-			foreach (Point2D vertex in windowBorder) {
-				borderPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
-			}
-
-			PointF[] pointArr = borderPoints.ToArray();
-
-			GraphicsPath windowPath = new GraphicsPath();
-			windowPath.AddPolygon(pointArr);
-			Region windowClip = new Region(windowPath);
-			g.Clip = windowClip;
-
-
-			g.FillPolygon(windowBrush, pointArr);
-
-			List<PointF> usablePoints = new List<PointF>();
-			foreach (Point2D vertex in usableArea) {
-				usablePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
-			}
-
-			GraphicsPath path = new GraphicsPath();
-			path.AddPolygon(borderPoints.ToArray());
-			Region clip = new Region(path);
-			GraphicsPath excludePath = new GraphicsPath();
-			excludePath.AddPolygon(usablePoints.ToArray());
-			clip.Exclude(excludePath);
-			g.Clip = clip;
-
-			g.FillPolygon(unusableBrush, borderPoints.ToArray());
-
-			g.Clip = windowClip;
-			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
-			g.DrawPolygon(windowBorderPen, pointArr);
-			g.Clip = oldClip;*/
 		}
 
 		public override IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
@@ -184,12 +146,21 @@ namespace Europlan.Common {
 		}
 
 		public override WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset) {
-			// TODO windowType beachten
 			Polygon2D windowBorder = new Polygon2D();
-			windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY)); // left bottom
-			windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY + height)); // left top
-			windowBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY + height)); // right top
-			windowBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY)); // right bottom
+			if (ObstacleType == ObstacleTypeEnum.Window) {
+				windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY)); // left bottom
+				windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY + height)); // left top
+				windowBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY + height)); // right top
+				windowBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY)); // right bottom
+			} else if (ObstacleType == ObstacleTypeEnum.WindowTriangleLeft) {
+				windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY)); // left bottom
+				windowBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY + height)); // right top
+				windowBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY)); // right bottom
+			} else if (ObstacleType == ObstacleTypeEnum.WindowTriangleRight) {
+				windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY)); // left bottom
+				windowBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY + height)); // left top
+				windowBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY)); // right bottom
+			}
 			return windowBorder;
 		}
 
