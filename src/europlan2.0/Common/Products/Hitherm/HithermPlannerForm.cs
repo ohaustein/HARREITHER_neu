@@ -229,6 +229,7 @@ namespace Europlan.Common {
 					UpdateModifyRegisterPanel(SelectedObject as GraphicalHithermRegisterWrapper);
 				} else if (SelectedObject is GraphicalWallObstacle) {
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
+					(SelectedObject as GraphicalWallObstacle).BackupState();
 				} else if (SelectedObject is HithermRegisterVerbindung) {
 					UpdateModifyConnectionPanel(SelectedObject as HithermRegisterVerbindung);
 				}
@@ -269,6 +270,7 @@ namespace Europlan.Common {
 
 		private void graphicalWallPanel_SelectedObjectModified(object sender, GraphicalWallPanel.SelectedObjectArgs e) {
 			if (SelectedObject != null) {
+				unsavedChanges = true;
 				if (SelectedObject is GraphicalWall) {
 					UpdateDefineWallsPanel(SelectedObject as GraphicalWall);
 				} else if (SelectedObject is GraphicalHithermRegisterWrapper) {
@@ -841,6 +843,7 @@ namespace Europlan.Common {
 
 		private void btnObstacleApply_Click(object sender, EventArgs e) {
 			graphicalWallPanel.SelectedObject = null;
+			UpdateModifyObstaclesPanel(null);
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
@@ -849,7 +852,7 @@ namespace Europlan.Common {
 			obstacle.RevertState();
 			graphicalWallPanel.SelectedObject = null;
 			unsavedChanges = false;
-			UpdateModifyObstaclesPanel(obstacle);
+			UpdateModifyObstaclesPanel(null);
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
@@ -929,6 +932,8 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).Width = (double)numObstacleWidth.Value;
+					unsavedChanges = true;
+					UpdateModifyObstaclesPanelButtons(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
 				}
 			}
@@ -938,6 +943,8 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).Height = (double)numObstacleHeight.Value;
+					unsavedChanges = true;
+					UpdateModifyObstaclesPanelButtons(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
 				}
 			}
@@ -947,6 +954,8 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).GraphPosY = (double)numObstacleVertical.Value;
+					unsavedChanges = true;
+					UpdateModifyObstaclesPanelButtons(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
 				}
 			}
