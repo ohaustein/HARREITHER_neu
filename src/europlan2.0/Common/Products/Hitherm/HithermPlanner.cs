@@ -330,6 +330,9 @@ namespace Europlan.Common {
 			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER && this.product != null && this.product.AssociatedRoom != null) {
 				this.newRegisterWall = this.product.AssociatedRoom.GetWallForPoint(planPoint, out this.newRegisterWallXOffset, out this.newRegisterWallYOffset);
 				if (this.newRegisterWall != null) {
+					if (this.connectedWallPanel != null) {
+						this.connectedWallPanel.SelectedWall = this.newRegisterWall;
+					}
 					this.newRegister = new GraphicalHithermRegisterWrapper(this.product);
 				}
 			}

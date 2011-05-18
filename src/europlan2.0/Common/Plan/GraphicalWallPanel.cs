@@ -339,9 +339,11 @@ namespace Europlan.Common {
 							this.newObstacle = null;
 							break;
 					}
-					this.newObstacleOk = false;
 					if (this.newObstacle == null) {
 						this.newObstacleWall = null;
+					} else {
+						this.newObstacleOk = false;
+						this.SelectedObject = null;
 					}
 				}
 			}
@@ -407,6 +409,7 @@ namespace Europlan.Common {
 				if (this.newObstacleWall != null && this.newObstacle != null) {
 					if (this.newObstacleOk) {
 						this.newObstacleWall.Obstacles.Add(this.newObstacle);
+						this.SelectedObject = this.newObstacle;
 					}
 					this.dragStart = null;
 					this.newObstacle = null;
@@ -707,6 +710,22 @@ namespace Europlan.Common {
 
 		public GraphicalWall SelectedWall {
 			get { return this.selectedWall; }
+			set {
+				if (this.selectedObject == null) {
+					this.selectedWall = value;
+					Nullable<Vector2D> offset = null;
+					if (this.selectedWall != null) {
+						offset = this.room.GetWallOffset(this.selectedWall);
+					}
+					if (offset.HasValue) {
+						this.selectedWallXOffset = offset.Value.X;
+						this.selectedWallXOffset = offset.Value.Y;
+					} else {
+						this.selectedWallXOffset = 0;
+						this.selectedWallXOffset = 0;
+					}
+				}
+			}
 		}
 
 		public PlanMode Mode {
