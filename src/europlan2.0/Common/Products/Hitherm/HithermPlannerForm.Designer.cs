@@ -32,10 +32,26 @@ namespace Europlan.Common {
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnWall = new System.Windows.Forms.ToolStripButton();
 			this.btnObstacle = new System.Windows.Forms.ToolStripButton();
+			this.btnSchraege = new System.Windows.Forms.ToolStripButton();
 			this.btnRegisterVertical = new System.Windows.Forms.ToolStripButton();
 			this.btnRegisterHorizontal = new System.Windows.Forms.ToolStripButton();
 			this.btnConnection = new System.Windows.Forms.ToolStripButton();
 			this.panelTop = new System.Windows.Forms.Panel();
+			this.panelModifySchraege = new System.Windows.Forms.Panel();
+			this.btnSchraegeDelete = new System.Windows.Forms.Button();
+			this.btnSchraegeRevert = new System.Windows.Forms.Button();
+			this.btnSchraegeApply = new System.Windows.Forms.Button();
+			this.groupBox17 = new System.Windows.Forms.GroupBox();
+			this.rbSchraegeLeft = new System.Windows.Forms.RadioButton();
+			this.rbSchraegeRight = new System.Windows.Forms.RadioButton();
+			this.groupBox18 = new System.Windows.Forms.GroupBox();
+			this.numSchraegeVertical = new Europlan.Common.NumericBox();
+			this.numSchraegeHorizontal = new Europlan.Common.NumericBox();
+			this.label19 = new System.Windows.Forms.Label();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label21 = new System.Windows.Forms.Label();
+			this.label22 = new System.Windows.Forms.Label();
+			this.panelModifyConnection = new System.Windows.Forms.Panel();
 			this.panelModifyObstacle = new System.Windows.Forms.Panel();
 			this.groupBox16 = new System.Windows.Forms.GroupBox();
 			this.numObstacleMiddleDistanceRight = new Europlan.Common.NumericBox();
@@ -110,7 +126,6 @@ namespace Europlan.Common {
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.lblRegisterSelectedRegister = new System.Windows.Forms.Label();
-			this.panelModifyConnection = new System.Windows.Forms.Panel();
 			this.label7 = new System.Windows.Forms.Label();
 			this.lblHeat = new System.Windows.Forms.Label();
 			this.lblCool = new System.Windows.Forms.Label();
@@ -155,9 +170,13 @@ namespace Europlan.Common {
 			this.panelBottom = new System.Windows.Forms.Panel();
 			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.hithermPlanner = new Europlan.Common.HithermPlanner();
+			this.lblSchraege = new System.Windows.Forms.Label();
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
 			this.panelTop.SuspendLayout();
+			this.panelModifySchraege.SuspendLayout();
+			this.groupBox17.SuspendLayout();
+			this.groupBox18.SuspendLayout();
 			this.panelModifyObstacle.SuspendLayout();
 			this.groupBox16.SuspendLayout();
 			this.groupBox15.SuspendLayout();
@@ -218,6 +237,7 @@ namespace Europlan.Common {
             this.btnMove,
             this.btnWall,
             this.btnObstacle,
+            this.btnSchraege,
             this.btnRegisterVertical,
             this.btnRegisterHorizontal,
             this.btnConnection});
@@ -268,6 +288,16 @@ namespace Europlan.Common {
 			this.btnObstacle.Text = "Fenster und Türen";
 			this.btnObstacle.Click += new System.EventHandler(this.btnObstacle_Click);
 			// 
+			// btnSchraege
+			// 
+			this.btnSchraege.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnSchraege.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraege.Image")));
+			this.btnSchraege.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSchraege.Name = "btnSchraege";
+			this.btnSchraege.Size = new System.Drawing.Size(21, 20);
+			this.btnSchraege.Text = "Schrägen";
+			this.btnSchraege.Click += new System.EventHandler(this.btnSchraege_Click);
+			// 
 			// btnRegisterVertical
 			// 
 			this.btnRegisterVertical.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -300,15 +330,222 @@ namespace Europlan.Common {
 			// 
 			// panelTop
 			// 
+			this.panelTop.Controls.Add(this.panelModifySchraege);
+			this.panelTop.Controls.Add(this.panelModifyConnection);
 			this.panelTop.Controls.Add(this.panelModifyObstacle);
 			this.panelTop.Controls.Add(this.panelDefineWalls);
 			this.panelTop.Controls.Add(this.panelModifyHitherm);
-			this.panelTop.Controls.Add(this.panelModifyConnection);
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelTop.Location = new System.Drawing.Point(24, 25);
 			this.panelTop.Name = "panelTop";
 			this.panelTop.Size = new System.Drawing.Size(862, 91);
 			this.panelTop.TabIndex = 2;
+			// 
+			// panelModifySchraege
+			// 
+			this.panelModifySchraege.Controls.Add(this.lblSchraege);
+			this.panelModifySchraege.Controls.Add(this.btnSchraegeDelete);
+			this.panelModifySchraege.Controls.Add(this.btnSchraegeRevert);
+			this.panelModifySchraege.Controls.Add(this.btnSchraegeApply);
+			this.panelModifySchraege.Controls.Add(this.groupBox17);
+			this.panelModifySchraege.Controls.Add(this.groupBox18);
+			this.panelModifySchraege.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelModifySchraege.Location = new System.Drawing.Point(0, 0);
+			this.panelModifySchraege.Name = "panelModifySchraege";
+			this.panelModifySchraege.Size = new System.Drawing.Size(862, 91);
+			this.panelModifySchraege.TabIndex = 1;
+			// 
+			// btnSchraegeDelete
+			// 
+			this.btnSchraegeDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSchraegeDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeDelete.Image")));
+			this.btnSchraegeDelete.Location = new System.Drawing.Point(345, 25);
+			this.btnSchraegeDelete.Name = "btnSchraegeDelete";
+			this.btnSchraegeDelete.Size = new System.Drawing.Size(25, 25);
+			this.btnSchraegeDelete.TabIndex = 29;
+			this.btnSchraegeDelete.UseVisualStyleBackColor = true;
+			this.btnSchraegeDelete.Click += new System.EventHandler(this.btnSchraegeDelete_Click);
+			// 
+			// btnSchraegeRevert
+			// 
+			this.btnSchraegeRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSchraegeRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeRevert.Image")));
+			this.btnSchraegeRevert.Location = new System.Drawing.Point(314, 56);
+			this.btnSchraegeRevert.Name = "btnSchraegeRevert";
+			this.btnSchraegeRevert.Size = new System.Drawing.Size(25, 25);
+			this.btnSchraegeRevert.TabIndex = 28;
+			this.btnSchraegeRevert.UseVisualStyleBackColor = true;
+			this.btnSchraegeRevert.Click += new System.EventHandler(this.btnSchraegeRevert_Click);
+			// 
+			// btnSchraegeApply
+			// 
+			this.btnSchraegeApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSchraegeApply.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeApply.Image")));
+			this.btnSchraegeApply.Location = new System.Drawing.Point(314, 25);
+			this.btnSchraegeApply.Name = "btnSchraegeApply";
+			this.btnSchraegeApply.Size = new System.Drawing.Size(25, 25);
+			this.btnSchraegeApply.TabIndex = 27;
+			this.btnSchraegeApply.UseVisualStyleBackColor = true;
+			this.btnSchraegeApply.Click += new System.EventHandler(this.btnSchraegeApply_Click);
+			// 
+			// groupBox17
+			// 
+			this.groupBox17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox17.Controls.Add(this.rbSchraegeLeft);
+			this.groupBox17.Controls.Add(this.rbSchraegeRight);
+			this.groupBox17.Location = new System.Drawing.Point(210, 19);
+			this.groupBox17.Name = "groupBox17";
+			this.groupBox17.Size = new System.Drawing.Size(98, 66);
+			this.groupBox17.TabIndex = 26;
+			this.groupBox17.TabStop = false;
+			this.groupBox17.Text = "Position";
+			// 
+			// rbSchraegeLeft
+			// 
+			this.rbSchraegeLeft.AutoSize = true;
+			this.rbSchraegeLeft.Location = new System.Drawing.Point(6, 20);
+			this.rbSchraegeLeft.Name = "rbSchraegeLeft";
+			this.rbSchraegeLeft.Size = new System.Drawing.Size(50, 17);
+			this.rbSchraegeLeft.TabIndex = 1;
+			this.rbSchraegeLeft.TabStop = true;
+			this.rbSchraegeLeft.Text = "Links";
+			this.rbSchraegeLeft.UseVisualStyleBackColor = true;
+			this.rbSchraegeLeft.CheckedChanged += new System.EventHandler(this.rbSchraegeLeft_CheckedChanged);
+			// 
+			// rbSchraegeRight
+			// 
+			this.rbSchraegeRight.AutoSize = true;
+			this.rbSchraegeRight.Location = new System.Drawing.Point(6, 43);
+			this.rbSchraegeRight.Name = "rbSchraegeRight";
+			this.rbSchraegeRight.Size = new System.Drawing.Size(59, 17);
+			this.rbSchraegeRight.TabIndex = 0;
+			this.rbSchraegeRight.TabStop = true;
+			this.rbSchraegeRight.Text = "Rechts";
+			this.rbSchraegeRight.UseVisualStyleBackColor = true;
+			this.rbSchraegeRight.CheckedChanged += new System.EventHandler(this.rbSchraegeRight_CheckedChanged);
+			// 
+			// groupBox18
+			// 
+			this.groupBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox18.Controls.Add(this.numSchraegeVertical);
+			this.groupBox18.Controls.Add(this.numSchraegeHorizontal);
+			this.groupBox18.Controls.Add(this.label19);
+			this.groupBox18.Controls.Add(this.label20);
+			this.groupBox18.Controls.Add(this.label21);
+			this.groupBox18.Controls.Add(this.label22);
+			this.groupBox18.Location = new System.Drawing.Point(9, 19);
+			this.groupBox18.Name = "groupBox18";
+			this.groupBox18.Size = new System.Drawing.Size(195, 66);
+			this.groupBox18.TabIndex = 25;
+			this.groupBox18.TabStop = false;
+			this.groupBox18.Text = "Größe";
+			// 
+			// numSchraegeVertical
+			// 
+			this.numSchraegeVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numSchraegeVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numSchraegeVertical.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.Location = new System.Drawing.Point(97, 42);
+			this.numSchraegeVertical.MaxValue = null;
+			this.numSchraegeVertical.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.Name = "numSchraegeVertical";
+			this.numSchraegeVertical.Size = new System.Drawing.Size(65, 20);
+			this.numSchraegeVertical.TabIndex = 2;
+			this.numSchraegeVertical.Text = "1";
+			this.numSchraegeVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numSchraegeVertical.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.ValueChanged += new System.EventHandler(this.numSchraegeVertical_ValueChanged);
+			// 
+			// numSchraegeHorizontal
+			// 
+			this.numSchraegeHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numSchraegeHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numSchraegeHorizontal.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.Location = new System.Drawing.Point(97, 19);
+			this.numSchraegeHorizontal.MaxValue = null;
+			this.numSchraegeHorizontal.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.Name = "numSchraegeHorizontal";
+			this.numSchraegeHorizontal.Size = new System.Drawing.Size(65, 20);
+			this.numSchraegeHorizontal.TabIndex = 1;
+			this.numSchraegeHorizontal.Text = "1";
+			this.numSchraegeHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numSchraegeHorizontal.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.ValueChanged += new System.EventHandler(this.numSchraegeHorizontal_ValueChanged);
+			// 
+			// label19
+			// 
+			this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(168, 45);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(21, 13);
+			this.label19.TabIndex = 19;
+			this.label19.Text = "cm";
+			// 
+			// label20
+			// 
+			this.label20.Location = new System.Drawing.Point(6, 45);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(85, 18);
+			this.label20.TabIndex = 18;
+			this.label20.Text = "Vertikal:";
+			// 
+			// label21
+			// 
+			this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label21.AutoSize = true;
+			this.label21.Location = new System.Drawing.Point(168, 22);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(21, 13);
+			this.label21.TabIndex = 16;
+			this.label21.Text = "cm";
+			// 
+			// label22
+			// 
+			this.label22.Location = new System.Drawing.Point(6, 22);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(85, 23);
+			this.label22.TabIndex = 15;
+			this.label22.Text = "Horizontal:";
+			// 
+			// panelModifyConnection
+			// 
+			this.panelModifyConnection.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelModifyConnection.Location = new System.Drawing.Point(0, 0);
+			this.panelModifyConnection.Name = "panelModifyConnection";
+			this.panelModifyConnection.Size = new System.Drawing.Size(862, 91);
+			this.panelModifyConnection.TabIndex = 0;
 			// 
 			// panelModifyObstacle
 			// 
@@ -1053,7 +1290,7 @@ namespace Europlan.Common {
 			// 
 			this.lblWallVertical.Location = new System.Drawing.Point(6, 45);
 			this.lblWallVertical.Name = "lblWallVertical";
-			this.lblWallVertical.Size = new System.Drawing.Size(85, 23);
+			this.lblWallVertical.Size = new System.Drawing.Size(85, 18);
 			this.lblWallVertical.TabIndex = 18;
 			this.lblWallVertical.Text = "Senkrecht:";
 			// 
@@ -1374,7 +1611,7 @@ namespace Europlan.Common {
 			// 
 			this.label4.Location = new System.Drawing.Point(6, 45);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(85, 23);
+			this.label4.Size = new System.Drawing.Size(85, 18);
 			this.label4.TabIndex = 18;
 			this.label4.Text = "Vertikal:";
 			// 
@@ -1404,14 +1641,6 @@ namespace Europlan.Common {
 			this.lblRegisterSelectedRegister.Size = new System.Drawing.Size(123, 13);
 			this.lblRegisterSelectedRegister.TabIndex = 1;
 			this.lblRegisterSelectedRegister.Text = "Keine Wand ausgewählt";
-			// 
-			// panelModifyConnection
-			// 
-			this.panelModifyConnection.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelModifyConnection.Location = new System.Drawing.Point(0, 0);
-			this.panelModifyConnection.Name = "panelModifyConnection";
-			this.panelModifyConnection.Size = new System.Drawing.Size(862, 91);
-			this.panelModifyConnection.TabIndex = 0;
 			// 
 			// label7
 			// 
@@ -1824,6 +2053,7 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.Room = null;
 			this.graphicalWallPanel.Scale = 1;
 			this.graphicalWallPanel.SelectedObject = null;
+			this.graphicalWallPanel.SelectedWall = null;
 			this.graphicalWallPanel.Size = new System.Drawing.Size(862, 143);
 			this.graphicalWallPanel.TabIndex = 4;
 			this.graphicalWallPanel.XPos = 421;
@@ -1842,6 +2072,15 @@ namespace Europlan.Common {
 			this.hithermPlanner.NewRegisterUseHelpline = true;
 			this.hithermPlanner.NewRegisterVorlaufRight = true;
 			this.hithermPlanner.RecalculationNecessary += new System.EventHandler<System.EventArgs>(this.hithermPlanner_RecalculationNecessary);
+			// 
+			// lblSchraege
+			// 
+			this.lblSchraege.AutoSize = true;
+			this.lblSchraege.Location = new System.Drawing.Point(4, 3);
+			this.lblSchraege.Name = "lblSchraege";
+			this.lblSchraege.Size = new System.Drawing.Size(134, 13);
+			this.lblSchraege.TabIndex = 32;
+			this.lblSchraege.Text = "Keine Schräge ausgewählt";
 			// 
 			// HithermPlannerForm
 			// 
@@ -1862,6 +2101,12 @@ namespace Europlan.Common {
 			this.toolStrip2.ResumeLayout(false);
 			this.toolStrip2.PerformLayout();
 			this.panelTop.ResumeLayout(false);
+			this.panelModifySchraege.ResumeLayout(false);
+			this.panelModifySchraege.PerformLayout();
+			this.groupBox17.ResumeLayout(false);
+			this.groupBox17.PerformLayout();
+			this.groupBox18.ResumeLayout(false);
+			this.groupBox18.PerformLayout();
 			this.panelModifyObstacle.ResumeLayout(false);
 			this.panelModifyObstacle.PerformLayout();
 			this.groupBox16.ResumeLayout(false);
@@ -2029,6 +2274,22 @@ namespace Europlan.Common {
 		private NumericBox numObstacleMiddleDistanceLeft;
 		private System.Windows.Forms.Label label15;
 		private System.Windows.Forms.Label label18;
+		private System.Windows.Forms.ToolStripButton btnSchraege;
+		private System.Windows.Forms.Panel panelModifySchraege;
+		private System.Windows.Forms.Button btnSchraegeDelete;
+		private System.Windows.Forms.Button btnSchraegeRevert;
+		private System.Windows.Forms.Button btnSchraegeApply;
+		private System.Windows.Forms.GroupBox groupBox17;
+		private System.Windows.Forms.RadioButton rbSchraegeLeft;
+		private System.Windows.Forms.RadioButton rbSchraegeRight;
+		private System.Windows.Forms.GroupBox groupBox18;
+		private NumericBox numSchraegeVertical;
+		private NumericBox numSchraegeHorizontal;
+		private System.Windows.Forms.Label label19;
+		private System.Windows.Forms.Label label20;
+		private System.Windows.Forms.Label label21;
+		private System.Windows.Forms.Label label22;
+		private System.Windows.Forms.Label lblSchraege;
 
 
 	}

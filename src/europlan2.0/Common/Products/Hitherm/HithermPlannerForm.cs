@@ -62,6 +62,7 @@ namespace Europlan.Common {
 			this.btnMove.Checked = false;
 			this.btnWall.Checked = false;
 			this.btnObstacle.Checked = false;
+			this.btnSchraege.Checked = false;
 			this.btnRegisterVertical.Checked = false;
 			this.btnRegisterHorizontal.Checked = false;
 			this.btnConnection.Checked = false;
@@ -187,6 +188,17 @@ namespace Europlan.Common {
 			this.panelModifyObstacle.BringToFront();
 			ApplyButtonCheckedState(this.btnObstacle);
 		}
+
+
+		private void btnSchraege_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.SelectedObject = null;
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_ADD_SCHRAEGE;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+			UpdateModifySchraegePanel(null);
+			this.panelModifySchraege.BringToFront();
+			ApplyButtonCheckedState(this.btnSchraege);
+		}
+
 		private void btnRegisterVertical_Click(object sender, EventArgs e) {
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
@@ -426,6 +438,19 @@ namespace Europlan.Common {
 			updateOngoing = false;
 		}
 
+		private void UpdateModifySchraegePanel(IGraphicalWallObject schraege) {
+			updateOngoing = true;
+			this.panelModifySchraege.BringToFront();
+			if (schraege != null) {
+
+			} else {
+				this.lblSchraege.Text = "Keine Schräge ausgewählt";
+			}
+			UpdateModifySchraegePanelButtons(schraege);
+			updateOngoing = false;
+		}
+
+
 		private void UpdateModifyConnectionPanel(HithermRegisterVerbindung connection) {
 			updateOngoing = true;
 			this.panelModifyConnection.BringToFront();
@@ -524,6 +549,21 @@ namespace Europlan.Common {
 				this.numObstacleDistanceRight.Enabled = false;
 				this.numObstacleMiddleDistanceLeft.Enabled = false;
 				this.numObstacleMiddleDistanceRight.Enabled = false;
+			}
+		}
+
+
+		private void UpdateModifySchraegePanelButtons(IGraphicalWallObject schraege) {
+			if (schraege != null) {
+
+			} else {
+				this.numSchraegeHorizontal.Enabled = false;
+				this.numSchraegeVertical.Enabled = false;
+				this.rbSchraegeLeft.Enabled = false;
+				this.rbSchraegeRight.Enabled = false;
+				this.btnSchraegeApply.Enabled = false;
+				this.btnSchraegeDelete.Enabled = false;
+				this.btnSchraegeRevert.Enabled = false;
 			}
 		}
 
@@ -1074,7 +1114,33 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void btnSchraegeApply_Click(object sender, EventArgs e) {
 
+		}
 
+		private void btnSchraegeRevert_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnSchraegeDelete_Click(object sender, EventArgs e) {
+
+		}
+
+		private void numSchraegeHorizontal_ValueChanged(object sender, EventArgs e) {
+
+		}
+
+		private void numSchraegeVertical_ValueChanged(object sender, EventArgs e) {
+
+		}
+
+		private void rbSchraegeLeft_CheckedChanged(object sender, EventArgs e) {
+
+		}
+
+		private void rbSchraegeRight_CheckedChanged(object sender, EventArgs e) {
+
+		}
+		
 	}
 }
