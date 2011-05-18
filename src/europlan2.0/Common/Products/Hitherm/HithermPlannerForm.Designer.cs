@@ -2141,7 +2141,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.toolStrip2);
 			this.Controls.Add(this.toolStrip1);
 			this.Name = "HithermPlannerForm";
-			this.Text = "Grafische Auslegung Hitherm";
+			this.Text = "Hitherm - grafische Auslegung";
 			this.Load += new System.EventHandler(this.HithermPlannerForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HithermPlannerForm_FormClosing);
 			this.toolStrip1.ResumeLayout(false);
