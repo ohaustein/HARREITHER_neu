@@ -102,6 +102,7 @@ namespace Europlan.Common {
 		}
 
 		private void ApplyDataSource(List<double> dataSource) {
+			// dirty hack to make the fucking listbox work - do not remove!!! ;)
 			lstOffsets.DataSource = null;
 			lstOffsets.DataSource = dataSource;
 		}
@@ -112,6 +113,16 @@ namespace Europlan.Common {
 			} else {
 				return wall.HelpLines;
 			}
+		}
+
+		private void lstOffsets_DrawItem(object sender, DrawItemEventArgs e) {
+			e.DrawBackground();
+			SizeF stringSize = new SizeF();
+			stringSize = e.Graphics.MeasureString(lstOffsets.Items[e.Index].ToString(), e.Font);
+			// Draw the current item text based on the current Font and the custom brush settings.
+			e.Graphics.DrawString(lstOffsets.Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), new PointF(e.Bounds.Right - stringSize.Width, e.Bounds.Y));
+			// If the ListBox has focus, draw a focus rectangle around the selected item.
+			e.DrawFocusRectangle();
 		}
 
 	}

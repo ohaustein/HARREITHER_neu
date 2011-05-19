@@ -148,11 +148,13 @@ namespace Europlan.Common {
 			// 
 			this.lstOffsets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)));
+			this.lstOffsets.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
 			this.lstOffsets.FormattingEnabled = true;
 			this.lstOffsets.Location = new System.Drawing.Point(7, 46);
 			this.lstOffsets.Name = "lstOffsets";
 			this.lstOffsets.Size = new System.Drawing.Size(116, 121);
 			this.lstOffsets.TabIndex = 3;
+			this.lstOffsets.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lstOffsets_DrawItem);
 			this.lstOffsets.SelectedValueChanged += new System.EventHandler(this.lstOffsets_SelectedValueChanged);
 			// 
 			// btnAdd
