@@ -571,9 +571,9 @@ namespace Europlan.Common {
 
 		private void UpdateModifyConnectionPanelButtons(HithermRegisterVerbindung connection) {
 			if (connection != null) {
-
+				this.btnConnectionDelete.Enabled = true;
 			} else {
-
+				this.btnConnectionDelete.Enabled = false;
 			}
 		}
 

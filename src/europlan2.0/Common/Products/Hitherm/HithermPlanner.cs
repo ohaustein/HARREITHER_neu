@@ -217,6 +217,7 @@ namespace Europlan.Common {
 							} else {
 								startConnection = endConnection;
 								endConnection = newConnectionStart;
+								this.newConnection.Vertices.Reverse();
 							}
 							HithermRegister endRegister = null;
 							HithermCircuit endCircuit = null;
@@ -227,7 +228,7 @@ namespace Europlan.Common {
 								endCircuit = this.product.GetCircuitForRegister(endRegister);
 							}
 							if (startConnection is PossibleHithermRegisterConnection) {
-								startRegister = (newConnectionStart as PossibleHithermRegisterConnection).Register;
+								startRegister = (startConnection as PossibleHithermRegisterConnection).Register;
 								startCircuit = this.product.GetCircuitForRegister(startRegister);
 							}
 							
