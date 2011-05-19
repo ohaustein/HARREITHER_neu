@@ -26,6 +26,7 @@ namespace Europlan.Common {
 		private bool enabled = true;
 		private List<double> helpLines = new List<double>();
 		private bool showGlobalHelpLines = true;
+		private Room assiociatedRoom = null;
 
 		public GraphicalWall() {
 			//GraphicalDoor door = new GraphicalDoor();
@@ -202,6 +203,11 @@ namespace Europlan.Common {
 
 			Pen helpLinesPen = new Pen(Color.Blue, (float)(1.0 / scale));
 			helpLinesPen.DashStyle = DashStyle.Dash;
+			if (ShowGlobalHelpLines && AssiociatedRoom != null) {
+				foreach (double offset in AssiociatedRoom.HelpLines) {
+					g.DrawLine(helpLinesPen, (float)xOffset, (float)(yOffset + offset), (float)(xOffset + GetWallWidth() * 100), (float)(yOffset + offset));
+				}
+			}
 			foreach (double offset in HelpLines) {
 				g.DrawLine(helpLinesPen, (float)xOffset, (float)(yOffset + offset), (float)(xOffset + GetWallWidth() * 100), (float)(yOffset + offset));
 			}
@@ -528,5 +534,23 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+
+		[XmlIgnore]
+		public Room AssiociatedRoom {
+			get {
+				if (assiociatedRoom == null) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							if (room.Walls.Contains(this)) {
+								assiociatedRoom = room;
+								return assiociatedRoom;
+							}
+						}
+					}
+				}
+				return this.assiociatedRoom;
+			}
+		}
+
 	}
 }

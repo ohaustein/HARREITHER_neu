@@ -120,7 +120,7 @@ namespace Europlan.Common {
 			SizeF stringSize = new SizeF();
 			stringSize = e.Graphics.MeasureString(lstOffsets.Items[e.Index].ToString(), e.Font);
 			// Draw the current item text based on the current Font and the custom brush settings.
-			e.Graphics.DrawString(lstOffsets.Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), new PointF(e.Bounds.Right - stringSize.Width, e.Bounds.Y));
+			e.Graphics.DrawString(lstOffsets.Items[e.Index].ToString() + " cm", e.Font, new SolidBrush(e.ForeColor), new PointF(e.Bounds.Right - stringSize.Width, e.Bounds.Y));
 			// If the ListBox has focus, draw a focus rectangle around the selected item.
 			e.DrawFocusRectangle();
 		}

@@ -1219,7 +1219,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnWallHelpLine_Click(object sender, EventArgs e) {
-			WallHelpLinesForm form = new WallHelpLinesForm(graphicalWallPanel.Room, graphicalWallPanel.SelectedWall);
+			WallHelpLinesForm form = new WallHelpLinesForm(graphicalWallPanel.Room, graphicalWallPanel.SelectedObject as GraphicalWall);
 			form.ShowDialog();
 			form.Dispose();
 			this.graphicalWallPanel.InvalidateGraphics();
