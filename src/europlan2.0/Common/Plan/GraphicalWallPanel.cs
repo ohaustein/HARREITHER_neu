@@ -200,7 +200,7 @@ namespace Europlan.Common {
 			Brush wallBrush = new SolidBrush(Color.White);
 			Pen unusableBorderPen = Pens.Gray;
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Gray, Color.White);
-			Pen helpLinesPen = new Pen(Color.Blue);
+			Pen helpLinesPen = new Pen(Color.Blue, (float)(1.0 / this.Scale));
 			helpLinesPen.DashStyle = DashStyle.Dash;
 			foreach (GraphicalWall wall in this.Room.Walls) {
 				double xOffset = this.room.GetWallOffset(wall).Value.X * 100.0;

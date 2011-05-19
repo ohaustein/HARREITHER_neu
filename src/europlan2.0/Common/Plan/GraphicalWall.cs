@@ -200,7 +200,7 @@ namespace Europlan.Common {
 			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
 			g.DrawPolygon(wallBorderPen, pointArr);
 
-			Pen helpLinesPen = new Pen(Color.Blue);
+			Pen helpLinesPen = new Pen(Color.Blue, (float)(1.0 / scale));
 			helpLinesPen.DashStyle = DashStyle.Dash;
 			foreach (double offset in HelpLines) {
 				g.DrawLine(helpLinesPen, (float)xOffset, (float)(yOffset + offset), (float)(xOffset + GetWallWidth() * 100), (float)(yOffset + offset));
