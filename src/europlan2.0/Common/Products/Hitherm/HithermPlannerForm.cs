@@ -12,16 +12,12 @@ using Star.SettingsXpress;
 namespace Europlan.Common {
 	public partial class HithermPlannerForm : Form {
 
-		//private IGraphicalWallObject selectedObject = null;
 		private bool updateOngoing = false;
 		private bool unsavedChanges = false;
 
 		public HithermPlannerForm(HithermProduct product) {
 			InitializeComponent();
 
-			cmbNewObstacleType.DataSource = Enum.GetValues(typeof(Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum));
-
-			//this.graphicalWallPanel.Room = product.AssociatedRoom;
 			this.hithermPlanner.Product = product;
 			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
 			this.panelDefineWalls.BringToFront();
@@ -63,10 +59,22 @@ namespace Europlan.Common {
 			this.btnWall.Checked = false;
 			this.btnObstacle.Checked = false;
 			this.btnSchraege.Checked = false;
-			this.btnRegisterVertical.Checked = false;
-			this.btnRegisterHorizontal.Checked = false;
+			this.btnRegister.Checked = false;
 			this.btnConnection.Checked = false;
 			buttonToCheck.Checked = true;
+		}
+
+		private void ApplyRegisterButtonCheckedState(ToolStripButton buttonToCheck) {
+			this.btnRegisterHorizontal.Checked = this.btnRegisterHorizontal == buttonToCheck;
+			this.btnRegisterVertical.Checked = this.btnRegisterVertical == buttonToCheck;
+		}
+
+		private void ApplyObstacleButtonCheckedState(ToolStripButton buttonToCheck) {
+			this.btnObstacleDoor.Checked = this.btnObstacleDoor == buttonToCheck;
+			this.btnObstacleWindow.Checked = this.btnObstacleWindow == buttonToCheck;
+			this.btnObstacleTriangleWindowLeft.Checked = this.btnObstacleTriangleWindowLeft == buttonToCheck;
+			this.btnObstacleTriangleWindowRight.Checked = this.btnObstacleTriangleWindowRight == buttonToCheck;
+			this.btnObstacleOther.Checked = this.btnObstacleOther == buttonToCheck;
 		}
 
 		private void btnWallNewWall_Click(object sender, EventArgs e) {
@@ -162,6 +170,7 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_SELECT_OBJECT;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
 			ApplyButtonCheckedState(this.btnPick);
+			this.UpdateSubmenuToolstrip();
 		}
 
 		private void btnMove_Click(object sender, EventArgs e) {
@@ -169,6 +178,7 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_MOVE;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
 			ApplyButtonCheckedState(this.btnMove);
+			this.UpdateSubmenuToolstrip();
 		}
 
 		private void btnWall_Click(object sender, EventArgs e) {
@@ -178,15 +188,22 @@ namespace Europlan.Common {
 			UpdateDefineWallsPanel(null);
 			this.panelDefineWalls.BringToFront();
 			ApplyButtonCheckedState(this.btnWall);
+			this.UpdateSubmenuToolstrip();
 		}
 
 		private void btnObstacle_Click(object sender, EventArgs e) {
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_ADD_OBSTACLE;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+			this.btnObstacleDoor.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.Door;
+			this.btnObstacleWindow.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.Window;
+			this.btnObstacleTriangleWindowLeft.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleLeft;
+			this.btnObstacleTriangleWindowRight.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleRight;
+			this.btnObstacleOther.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.Other;
 			UpdateModifyObstaclesPanel(null);
 			this.panelModifyObstacle.BringToFront();
 			ApplyButtonCheckedState(this.btnObstacle);
+			this.UpdateSubmenuToolstrip();
 		}
 
 
@@ -197,26 +214,20 @@ namespace Europlan.Common {
 			UpdateModifySchraegePanel(null);
 			this.panelModifySchraege.BringToFront();
 			ApplyButtonCheckedState(this.btnSchraege);
+			this.UpdateSubmenuToolstrip();
 		}
 
-		private void btnRegisterVertical_Click(object sender, EventArgs e) {
+		private void btnRegister_Click(object sender, EventArgs e) {
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_REGISTER;
-			this.hithermPlanner.NewRegisterOrientation = HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
+			//this.hithermPlanner.NewRegisterOrientation = (this.btnRegisterHorizontal.Checked ? HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL : HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL);
+			this.btnRegisterHorizontal.Checked = this.hithermPlanner.NewRegisterOrientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL;
+			this.btnRegisterVertical.Checked = this.hithermPlanner.NewRegisterOrientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 			UpdateModifyRegisterPanel(null);
 			this.panelModifyHitherm.BringToFront();
-			ApplyButtonCheckedState(this.btnRegisterVertical);
-		}
-
-		private void btnRegisterHorizontal_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.SelectedObject = null;
-			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
-			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_REGISTER;
-			this.hithermPlanner.NewRegisterOrientation = HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL;
-			UpdateModifyRegisterPanel(null);
-			this.panelModifyHitherm.BringToFront();
-			ApplyButtonCheckedState(this.btnRegisterHorizontal);
+			ApplyButtonCheckedState(this.btnRegister);
+			this.UpdateSubmenuToolstrip();
 		}
 
 		private void btnConnection_Click(object sender, EventArgs e) {
@@ -226,6 +237,42 @@ namespace Europlan.Common {
 			UpdateModifyConnectionPanel(null);
 			this.panelModifyConnection.BringToFront();
 			ApplyButtonCheckedState(this.btnConnection);
+			this.UpdateSubmenuToolstrip();
+		}
+
+		private void btnRegisterVertical_Click(object sender, EventArgs e) {
+			this.hithermPlanner.NewRegisterOrientation = HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
+			ApplyRegisterButtonCheckedState(this.btnRegisterVertical);
+		}
+
+		private void btnRegisterHorizontal_Click(object sender, EventArgs e) {
+			this.hithermPlanner.NewRegisterOrientation = HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL;
+			ApplyRegisterButtonCheckedState(this.btnRegisterHorizontal);
+		}
+
+		private void btnObstacleDoor_Click(object sender, EventArgs e) {
+			graphicalWallPanel.NewObstacleType = GraphicalWallObstacle.ObstacleTypeEnum.Door;
+			ApplyObstacleButtonCheckedState(this.btnObstacleDoor);
+		}
+
+		private void btnObstacleWindow_Click(object sender, EventArgs e) {
+			graphicalWallPanel.NewObstacleType = GraphicalWallObstacle.ObstacleTypeEnum.Window;
+			ApplyObstacleButtonCheckedState(this.btnObstacleWindow);
+		}
+
+		private void btnObstacleTriangleWindowLeft_Click(object sender, EventArgs e) {
+			graphicalWallPanel.NewObstacleType = GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleLeft;
+			ApplyObstacleButtonCheckedState(this.btnObstacleTriangleWindowLeft);
+		}
+
+		private void btnObstacleTriangleWindowRight_Click(object sender, EventArgs e) {
+			graphicalWallPanel.NewObstacleType = GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleRight;
+			ApplyObstacleButtonCheckedState(this.btnObstacleTriangleWindowRight);
+		}
+
+		private void btnObstacleOther_Click(object sender, EventArgs e) {
+			graphicalWallPanel.NewObstacleType = GraphicalWallObstacle.ObstacleTypeEnum.Other;
+			ApplyObstacleButtonCheckedState(this.btnObstacleOther);
 		}
 
 		private IGraphicalWallObject SelectedObject {
@@ -294,6 +341,19 @@ namespace Europlan.Common {
 				}
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void UpdateSubmenuToolstrip() {
+			this.btnObstacleDoor.Visible = this.btnObstacle.Checked;
+			this.btnObstacleWindow.Visible = this.btnObstacle.Checked;
+			this.btnObstacleTriangleWindowLeft.Visible = this.btnObstacle.Checked;
+			this.btnObstacleTriangleWindowRight.Visible = this.btnObstacle.Checked;
+			this.btnObstacleOther.Visible = this.btnObstacle.Checked;
+
+			this.btnRegisterHorizontal.Visible = this.btnRegister.Checked;
+			this.btnRegisterVertical.Visible = this.btnRegister.Checked;
+
+			//this.toolStripSubmenu.Visible = this.btnObstacle.Checked || this.btnRegister.Checked;
 		}
 
 		private void UpdateModifyRegisterPanel(GraphicalHithermRegisterWrapper hithermRegister) {
@@ -387,7 +447,6 @@ namespace Europlan.Common {
 		private void UpdateModifyObstaclesPanel(GraphicalWallObstacle obstacle) {
 			updateOngoing = true;
 			this.panelModifyObstacle.BringToFront();
-			cmbNewObstacleType.SelectedItem = graphicalWallPanel.NewObstacleType;
 			if (obstacle != null) {
 				if (obstacle is GraphicalWallObstacle) {
 					this.numObstacleWidth.Value = (decimal)(obstacle as GraphicalWallObstacle).Width;
@@ -1030,10 +1089,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void cmbNewObstacleType_SelectedValueChanged(object sender, EventArgs e) {
-			graphicalWallPanel.NewObstacleType = (Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum)cmbNewObstacleType.SelectedValue;
-		}
-
 		private void numObstacleWidth_ValueChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
@@ -1165,6 +1220,6 @@ namespace Europlan.Common {
 			DeleteVerbindung(SelectedObject as HithermRegisterVerbindung);
 		}
 
-		
+
 	}
 }

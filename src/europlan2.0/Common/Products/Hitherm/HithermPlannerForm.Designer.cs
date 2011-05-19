@@ -25,87 +25,45 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HithermPlannerForm));
-			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+			this.toolStripMain = new System.Windows.Forms.ToolStrip();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
-			this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnPick = new System.Windows.Forms.ToolStripButton();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnWall = new System.Windows.Forms.ToolStripButton();
 			this.btnObstacle = new System.Windows.Forms.ToolStripButton();
 			this.btnSchraege = new System.Windows.Forms.ToolStripButton();
+			this.btnRegister = new System.Windows.Forms.ToolStripButton();
+			this.btnConnection = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSubmenu = new System.Windows.Forms.ToolStrip();
+			this.btnObstacleDoor = new System.Windows.Forms.ToolStripButton();
+			this.btnObstacleWindow = new System.Windows.Forms.ToolStripButton();
+			this.btnObstacleTriangleWindowLeft = new System.Windows.Forms.ToolStripButton();
+			this.btnObstacleTriangleWindowRight = new System.Windows.Forms.ToolStripButton();
+			this.btnObstacleOther = new System.Windows.Forms.ToolStripButton();
 			this.btnRegisterVertical = new System.Windows.Forms.ToolStripButton();
 			this.btnRegisterHorizontal = new System.Windows.Forms.ToolStripButton();
-			this.btnConnection = new System.Windows.Forms.ToolStripButton();
 			this.panelTop = new System.Windows.Forms.Panel();
-			this.panelModifyHitherm = new System.Windows.Forms.Panel();
-			this.chkRegisterWholeRegister = new System.Windows.Forms.CheckBox();
-			this.chkRegisterHelpLines = new System.Windows.Forms.CheckBox();
-			this.btnRegisterConnect = new System.Windows.Forms.Button();
-			this.btnRegisterDelete = new System.Windows.Forms.Button();
-			this.btnRegisterRevert = new System.Windows.Forms.Button();
-			this.btnRegisterAccept = new System.Windows.Forms.Button();
-			this.groupBox6 = new System.Windows.Forms.GroupBox();
-			this.rbRegister10 = new System.Windows.Forms.RadioButton();
-			this.rbRegister5 = new System.Windows.Forms.RadioButton();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
-			this.rbRegisterRight = new System.Windows.Forms.RadioButton();
-			this.rbRegisterLeft = new System.Windows.Forms.RadioButton();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.numRegisterVertical = new Europlan.Common.NumericBox();
-			this.numRegisterLeft = new Europlan.Common.NumericBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
-			this.lblRegisterSelectedRegister = new System.Windows.Forms.Label();
-			this.panelModifySchraege = new System.Windows.Forms.Panel();
-			this.lblSchraege = new System.Windows.Forms.Label();
-			this.btnSchraegeDelete = new System.Windows.Forms.Button();
-			this.btnSchraegeRevert = new System.Windows.Forms.Button();
-			this.btnSchraegeApply = new System.Windows.Forms.Button();
-			this.groupBox17 = new System.Windows.Forms.GroupBox();
-			this.rbSchraegeLeft = new System.Windows.Forms.RadioButton();
-			this.rbSchraegeRight = new System.Windows.Forms.RadioButton();
-			this.groupBox18 = new System.Windows.Forms.GroupBox();
-			this.numSchraegeVertical = new Europlan.Common.NumericBox();
-			this.numSchraegeHorizontal = new Europlan.Common.NumericBox();
-			this.label19 = new System.Windows.Forms.Label();
-			this.label20 = new System.Windows.Forms.Label();
-			this.label21 = new System.Windows.Forms.Label();
-			this.label22 = new System.Windows.Forms.Label();
-			this.panelModifyConnection = new System.Windows.Forms.Panel();
-			this.label23 = new System.Windows.Forms.Label();
-			this.btnConnectionDelete = new System.Windows.Forms.Button();
 			this.panelModifyObstacle = new System.Windows.Forms.Panel();
 			this.groupBox16 = new System.Windows.Forms.GroupBox();
-			this.numObstacleMiddleDistanceRight = new Europlan.Common.NumericBox();
-			this.numObstacleMiddleDistanceLeft = new Europlan.Common.NumericBox();
 			this.label15 = new System.Windows.Forms.Label();
 			this.label18 = new System.Windows.Forms.Label();
 			this.groupBox15 = new System.Windows.Forms.GroupBox();
-			this.numObstacleDistanceRight = new Europlan.Common.NumericBox();
-			this.numObstacleDistanceLeft = new Europlan.Common.NumericBox();
 			this.label13 = new System.Windows.Forms.Label();
 			this.label14 = new System.Windows.Forms.Label();
 			this.groupBox14 = new System.Windows.Forms.GroupBox();
-			this.numObstacleHorizontalRight = new Europlan.Common.NumericBox();
-			this.numObstacleHorizontalLeft = new Europlan.Common.NumericBox();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.lblObstacle = new System.Windows.Forms.Label();
 			this.btnObstacleRevert = new System.Windows.Forms.Button();
 			this.btnObstacleApply = new System.Windows.Forms.Button();
 			this.groupBox13 = new System.Windows.Forms.GroupBox();
-			this.numObstacleVertical = new Europlan.Common.NumericBox();
 			this.label11 = new System.Windows.Forms.Label();
 			this.groupBox12 = new System.Windows.Forms.GroupBox();
-			this.numObstacleHeight = new Europlan.Common.NumericBox();
-			this.numObstacleWidth = new Europlan.Common.NumericBox();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
-			this.groupBox8 = new System.Windows.Forms.GroupBox();
-			this.cmbNewObstacleType = new System.Windows.Forms.ComboBox();
 			this.btnObstacleBorder = new System.Windows.Forms.Button();
 			this.btnObstacleRemove = new System.Windows.Forms.Button();
 			this.panelDefineWalls = new System.Windows.Forms.Panel();
@@ -120,8 +78,6 @@ namespace Europlan.Common {
 			this.lblSelectedWall = new System.Windows.Forms.Label();
 			this.btnCreateWalls = new System.Windows.Forms.Button();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.numWallVertical = new Europlan.Common.NumericBox();
-			this.numWallHorizontal = new Europlan.Common.NumericBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.lblWallVertical = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -130,6 +86,43 @@ namespace Europlan.Common {
 			this.btnWallDelete = new System.Windows.Forms.Button();
 			this.btnWallRevert = new System.Windows.Forms.Button();
 			this.btnWallApply = new System.Windows.Forms.Button();
+			this.panelModifyHitherm = new System.Windows.Forms.Panel();
+			this.chkRegisterWholeRegister = new System.Windows.Forms.CheckBox();
+			this.chkRegisterHelpLines = new System.Windows.Forms.CheckBox();
+			this.btnRegisterConnect = new System.Windows.Forms.Button();
+			this.btnRegisterDelete = new System.Windows.Forms.Button();
+			this.btnRegisterRevert = new System.Windows.Forms.Button();
+			this.btnRegisterAccept = new System.Windows.Forms.Button();
+			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.rbRegister10 = new System.Windows.Forms.RadioButton();
+			this.rbRegister5 = new System.Windows.Forms.RadioButton();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.rbRegisterRight = new System.Windows.Forms.RadioButton();
+			this.rbRegisterLeft = new System.Windows.Forms.RadioButton();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.lblRegisterSelectedRegister = new System.Windows.Forms.Label();
+			this.panelModifySchraege = new System.Windows.Forms.Panel();
+			this.lblSchraege = new System.Windows.Forms.Label();
+			this.btnSchraegeDelete = new System.Windows.Forms.Button();
+			this.btnSchraegeRevert = new System.Windows.Forms.Button();
+			this.btnSchraegeApply = new System.Windows.Forms.Button();
+			this.groupBox17 = new System.Windows.Forms.GroupBox();
+			this.rbSchraegeLeft = new System.Windows.Forms.RadioButton();
+			this.rbSchraegeRight = new System.Windows.Forms.RadioButton();
+			this.groupBox18 = new System.Windows.Forms.GroupBox();
+			this.label19 = new System.Windows.Forms.Label();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label21 = new System.Windows.Forms.Label();
+			this.label22 = new System.Windows.Forms.Label();
+			this.panelModifyConnection = new System.Windows.Forms.Panel();
+			this.btnConnectionConnectDirect = new System.Windows.Forms.Button();
+			this.btnConnectionConnectNormal = new System.Windows.Forms.Button();
+			this.label23 = new System.Windows.Forms.Label();
+			this.btnConnectionDelete = new System.Windows.Forms.Button();
 			this.label7 = new System.Windows.Forms.Label();
 			this.lblHeat = new System.Windows.Forms.Label();
 			this.lblCool = new System.Windows.Forms.Label();
@@ -172,14 +165,38 @@ namespace Europlan.Common {
 			this.lstError = new System.Windows.Forms.ListView();
 			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
 			this.panelBottom = new System.Windows.Forms.Panel();
+			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.hithermPlanner = new Europlan.Common.HithermPlanner();
-			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.btnConnectionConnectNormal = new System.Windows.Forms.Button();
-			this.btnConnectionConnectDirect = new System.Windows.Forms.Button();
-			this.toolStrip1.SuspendLayout();
-			this.toolStrip2.SuspendLayout();
+			this.numObstacleMiddleDistanceRight = new Europlan.Common.NumericBox();
+			this.numObstacleMiddleDistanceLeft = new Europlan.Common.NumericBox();
+			this.numObstacleDistanceRight = new Europlan.Common.NumericBox();
+			this.numObstacleDistanceLeft = new Europlan.Common.NumericBox();
+			this.numObstacleHorizontalRight = new Europlan.Common.NumericBox();
+			this.numObstacleHorizontalLeft = new Europlan.Common.NumericBox();
+			this.numObstacleVertical = new Europlan.Common.NumericBox();
+			this.numObstacleHeight = new Europlan.Common.NumericBox();
+			this.numObstacleWidth = new Europlan.Common.NumericBox();
+			this.numWallVertical = new Europlan.Common.NumericBox();
+			this.numWallHorizontal = new Europlan.Common.NumericBox();
+			this.numRegisterVertical = new Europlan.Common.NumericBox();
+			this.numRegisterLeft = new Europlan.Common.NumericBox();
+			this.numSchraegeVertical = new Europlan.Common.NumericBox();
+			this.numSchraegeHorizontal = new Europlan.Common.NumericBox();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripMain.SuspendLayout();
+			this.toolStripSubmenu.SuspendLayout();
 			this.panelTop.SuspendLayout();
+			this.panelModifyObstacle.SuspendLayout();
+			this.groupBox16.SuspendLayout();
+			this.groupBox15.SuspendLayout();
+			this.groupBox14.SuspendLayout();
+			this.groupBox13.SuspendLayout();
+			this.groupBox12.SuspendLayout();
+			this.panelDefineWalls.SuspendLayout();
+			this.groupBox3.SuspendLayout();
+			this.groupBox1.SuspendLayout();
+			this.groupBox2.SuspendLayout();
 			this.panelModifyHitherm.SuspendLayout();
 			this.groupBox6.SuspendLayout();
 			this.groupBox5.SuspendLayout();
@@ -188,32 +205,30 @@ namespace Europlan.Common {
 			this.groupBox17.SuspendLayout();
 			this.groupBox18.SuspendLayout();
 			this.panelModifyConnection.SuspendLayout();
-			this.panelModifyObstacle.SuspendLayout();
-			this.groupBox16.SuspendLayout();
-			this.groupBox15.SuspendLayout();
-			this.groupBox14.SuspendLayout();
-			this.groupBox13.SuspendLayout();
-			this.groupBox12.SuspendLayout();
-			this.groupBox8.SuspendLayout();
-			this.panelDefineWalls.SuspendLayout();
-			this.groupBox3.SuspendLayout();
-			this.groupBox1.SuspendLayout();
-			this.groupBox2.SuspendLayout();
 			this.panelBottom.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// toolStrip1
+			// toolStripMain
 			// 
-			this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.toolStripMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnZoomOut,
-            this.btnZoomIn});
-			this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-			this.toolStrip1.Name = "toolStrip1";
-			this.toolStrip1.Size = new System.Drawing.Size(886, 25);
-			this.toolStrip1.TabIndex = 0;
-			this.toolStrip1.Text = "toolStrip1";
+            this.btnZoomIn,
+            this.toolStripSeparator1,
+            this.btnPick,
+            this.btnMove,
+            this.toolStripSeparator2,
+            this.btnWall,
+            this.btnObstacle,
+            this.btnSchraege,
+            this.btnRegister,
+            this.btnConnection});
+			this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+			this.toolStripMain.Location = new System.Drawing.Point(0, 0);
+			this.toolStripMain.Name = "toolStripMain";
+			this.toolStripMain.Size = new System.Drawing.Size(886, 25);
+			this.toolStripMain.TabIndex = 0;
+			this.toolStripMain.Text = "toolStrip1";
 			// 
 			// btnZoomOut
 			// 
@@ -235,33 +250,20 @@ namespace Europlan.Common {
 			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
 			this.btnZoomIn.Text = "zoomIn";
 			// 
-			// toolStrip2
+			// toolStripSeparator1
 			// 
-			this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Left;
-			this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-			this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnPick,
-            this.btnMove,
-            this.btnWall,
-            this.btnObstacle,
-            this.btnSchraege,
-            this.btnRegisterVertical,
-            this.btnRegisterHorizontal,
-            this.btnConnection});
-			this.toolStrip2.Location = new System.Drawing.Point(0, 25);
-			this.toolStrip2.Name = "toolStrip2";
-			this.toolStrip2.Size = new System.Drawing.Size(24, 440);
-			this.toolStrip2.TabIndex = 1;
-			this.toolStrip2.Text = "toolStrip2";
-			this.toolStrip2.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical270;
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
 			// 
 			// btnPick
 			// 
+			this.btnPick.Checked = true;
+			this.btnPick.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.btnPick.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnPick.Image = ((System.Drawing.Image)(resources.GetObject("btnPick.Image")));
 			this.btnPick.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnPick.Name = "btnPick";
-			this.btnPick.Size = new System.Drawing.Size(21, 20);
+			this.btnPick.Size = new System.Drawing.Size(23, 22);
 			this.btnPick.Text = "Objekte bearbeiten";
 			this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
 			// 
@@ -271,9 +273,14 @@ namespace Europlan.Common {
 			this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
 			this.btnMove.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnMove.Name = "btnMove";
-			this.btnMove.Size = new System.Drawing.Size(21, 20);
+			this.btnMove.Size = new System.Drawing.Size(23, 22);
 			this.btnMove.Text = "Ausschnitt verschieben";
 			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
 			// 
 			// btnWall
 			// 
@@ -281,7 +288,7 @@ namespace Europlan.Common {
 			this.btnWall.Image = ((System.Drawing.Image)(resources.GetObject("btnWall.Image")));
 			this.btnWall.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnWall.Name = "btnWall";
-			this.btnWall.Size = new System.Drawing.Size(21, 20);
+			this.btnWall.Size = new System.Drawing.Size(23, 22);
 			this.btnWall.Text = "Wände";
 			this.btnWall.Click += new System.EventHandler(this.btnWall_Click);
 			// 
@@ -291,7 +298,7 @@ namespace Europlan.Common {
 			this.btnObstacle.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacle.Image")));
 			this.btnObstacle.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnObstacle.Name = "btnObstacle";
-			this.btnObstacle.Size = new System.Drawing.Size(21, 20);
+			this.btnObstacle.Size = new System.Drawing.Size(23, 22);
 			this.btnObstacle.Text = "Fenster und Türen";
 			this.btnObstacle.Click += new System.EventHandler(this.btnObstacle_Click);
 			// 
@@ -301,9 +308,104 @@ namespace Europlan.Common {
 			this.btnSchraege.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraege.Image")));
 			this.btnSchraege.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnSchraege.Name = "btnSchraege";
-			this.btnSchraege.Size = new System.Drawing.Size(21, 20);
+			this.btnSchraege.Size = new System.Drawing.Size(23, 22);
 			this.btnSchraege.Text = "Schrägen";
 			this.btnSchraege.Click += new System.EventHandler(this.btnSchraege_Click);
+			// 
+			// btnRegister
+			// 
+			this.btnRegister.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnRegister.Image = ((System.Drawing.Image)(resources.GetObject("btnRegister.Image")));
+			this.btnRegister.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnRegister.Name = "btnRegister";
+			this.btnRegister.Size = new System.Drawing.Size(23, 22);
+			this.btnRegister.Text = "Wärmeregister";
+			this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+			// 
+			// btnConnection
+			// 
+			this.btnConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnConnection.Image")));
+			this.btnConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnConnection.Name = "btnConnection";
+			this.btnConnection.Size = new System.Drawing.Size(23, 22);
+			this.btnConnection.Text = "Anbindeleitungen";
+			this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
+			// 
+			// toolStripSubmenu
+			// 
+			this.toolStripSubmenu.AutoSize = false;
+			this.toolStripSubmenu.Dock = System.Windows.Forms.DockStyle.Left;
+			this.toolStripSubmenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.toolStripSubmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator3,
+            this.btnObstacleDoor,
+            this.btnObstacleWindow,
+            this.btnObstacleTriangleWindowLeft,
+            this.btnObstacleTriangleWindowRight,
+            this.btnObstacleOther,
+            this.btnRegisterVertical,
+            this.btnRegisterHorizontal});
+			this.toolStripSubmenu.Location = new System.Drawing.Point(0, 25);
+			this.toolStripSubmenu.Name = "toolStripSubmenu";
+			this.toolStripSubmenu.Size = new System.Drawing.Size(25, 507);
+			this.toolStripSubmenu.TabIndex = 1;
+			this.toolStripSubmenu.Text = "toolStrip2";
+			// 
+			// btnObstacleDoor
+			// 
+			this.btnObstacleDoor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnObstacleDoor.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleDoor.Image")));
+			this.btnObstacleDoor.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnObstacleDoor.Name = "btnObstacleDoor";
+			this.btnObstacleDoor.Size = new System.Drawing.Size(23, 20);
+			this.btnObstacleDoor.Text = "Tür";
+			this.btnObstacleDoor.Visible = false;
+			this.btnObstacleDoor.Click += new System.EventHandler(this.btnObstacleDoor_Click);
+			// 
+			// btnObstacleWindow
+			// 
+			this.btnObstacleWindow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnObstacleWindow.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleWindow.Image")));
+			this.btnObstacleWindow.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnObstacleWindow.Name = "btnObstacleWindow";
+			this.btnObstacleWindow.Size = new System.Drawing.Size(23, 20);
+			this.btnObstacleWindow.Text = "Fenster";
+			this.btnObstacleWindow.Visible = false;
+			this.btnObstacleWindow.Click += new System.EventHandler(this.btnObstacleWindow_Click);
+			// 
+			// btnObstacleTriangleWindowLeft
+			// 
+			this.btnObstacleTriangleWindowLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnObstacleTriangleWindowLeft.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleTriangleWindowLeft.Image")));
+			this.btnObstacleTriangleWindowLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnObstacleTriangleWindowLeft.Name = "btnObstacleTriangleWindowLeft";
+			this.btnObstacleTriangleWindowLeft.Size = new System.Drawing.Size(23, 20);
+			this.btnObstacleTriangleWindowLeft.Text = "Dreieckfenster Links";
+			this.btnObstacleTriangleWindowLeft.Visible = false;
+			this.btnObstacleTriangleWindowLeft.Click += new System.EventHandler(this.btnObstacleTriangleWindowLeft_Click);
+			// 
+			// btnObstacleTriangleWindowRight
+			// 
+			this.btnObstacleTriangleWindowRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnObstacleTriangleWindowRight.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleTriangleWindowRight.Image")));
+			this.btnObstacleTriangleWindowRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnObstacleTriangleWindowRight.Name = "btnObstacleTriangleWindowRight";
+			this.btnObstacleTriangleWindowRight.Size = new System.Drawing.Size(23, 20);
+			this.btnObstacleTriangleWindowRight.Text = "Dreiecksfenster Rechts";
+			this.btnObstacleTriangleWindowRight.Visible = false;
+			this.btnObstacleTriangleWindowRight.Click += new System.EventHandler(this.btnObstacleTriangleWindowRight_Click);
+			// 
+			// btnObstacleOther
+			// 
+			this.btnObstacleOther.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnObstacleOther.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleOther.Image")));
+			this.btnObstacleOther.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnObstacleOther.Name = "btnObstacleOther";
+			this.btnObstacleOther.Size = new System.Drawing.Size(23, 20);
+			this.btnObstacleOther.Text = "Sonstiges";
+			this.btnObstacleOther.Visible = false;
+			this.btnObstacleOther.Click += new System.EventHandler(this.btnObstacleOther_Click);
 			// 
 			// btnRegisterVertical
 			// 
@@ -311,8 +413,9 @@ namespace Europlan.Common {
 			this.btnRegisterVertical.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterVertical.Image")));
 			this.btnRegisterVertical.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRegisterVertical.Name = "btnRegisterVertical";
-			this.btnRegisterVertical.Size = new System.Drawing.Size(21, 20);
+			this.btnRegisterVertical.Size = new System.Drawing.Size(23, 20);
 			this.btnRegisterVertical.Text = "Wärmeregister senkrecht";
+			this.btnRegisterVertical.Visible = false;
 			this.btnRegisterVertical.Click += new System.EventHandler(this.btnRegisterVertical_Click);
 			// 
 			// btnRegisterHorizontal
@@ -321,19 +424,10 @@ namespace Europlan.Common {
 			this.btnRegisterHorizontal.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterHorizontal.Image")));
 			this.btnRegisterHorizontal.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRegisterHorizontal.Name = "btnRegisterHorizontal";
-			this.btnRegisterHorizontal.Size = new System.Drawing.Size(21, 20);
+			this.btnRegisterHorizontal.Size = new System.Drawing.Size(23, 20);
 			this.btnRegisterHorizontal.Text = "Wärmeregister waagrecht";
+			this.btnRegisterHorizontal.Visible = false;
 			this.btnRegisterHorizontal.Click += new System.EventHandler(this.btnRegisterHorizontal_Click);
-			// 
-			// btnConnection
-			// 
-			this.btnConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnConnection.Image")));
-			this.btnConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnConnection.Name = "btnConnection";
-			this.btnConnection.Size = new System.Drawing.Size(21, 20);
-			this.btnConnection.Text = "Anbindeleitungen";
-			this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
 			// 
 			// panelTop
 			// 
@@ -343,10 +437,491 @@ namespace Europlan.Common {
 			this.panelTop.Controls.Add(this.panelModifyHitherm);
 			this.panelTop.Controls.Add(this.panelModifySchraege);
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panelTop.Location = new System.Drawing.Point(24, 25);
+			this.panelTop.Location = new System.Drawing.Point(25, 25);
 			this.panelTop.Name = "panelTop";
-			this.panelTop.Size = new System.Drawing.Size(862, 91);
+			this.panelTop.Size = new System.Drawing.Size(861, 91);
 			this.panelTop.TabIndex = 2;
+			// 
+			// panelModifyObstacle
+			// 
+			this.panelModifyObstacle.Controls.Add(this.groupBox16);
+			this.panelModifyObstacle.Controls.Add(this.groupBox15);
+			this.panelModifyObstacle.Controls.Add(this.groupBox14);
+			this.panelModifyObstacle.Controls.Add(this.lblObstacle);
+			this.panelModifyObstacle.Controls.Add(this.btnObstacleRevert);
+			this.panelModifyObstacle.Controls.Add(this.btnObstacleApply);
+			this.panelModifyObstacle.Controls.Add(this.groupBox13);
+			this.panelModifyObstacle.Controls.Add(this.groupBox12);
+			this.panelModifyObstacle.Controls.Add(this.btnObstacleBorder);
+			this.panelModifyObstacle.Controls.Add(this.btnObstacleRemove);
+			this.panelModifyObstacle.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelModifyObstacle.Location = new System.Drawing.Point(0, 0);
+			this.panelModifyObstacle.Name = "panelModifyObstacle";
+			this.panelModifyObstacle.Size = new System.Drawing.Size(861, 91);
+			this.panelModifyObstacle.TabIndex = 23;
+			// 
+			// groupBox16
+			// 
+			this.groupBox16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox16.Controls.Add(this.numObstacleMiddleDistanceRight);
+			this.groupBox16.Controls.Add(this.numObstacleMiddleDistanceLeft);
+			this.groupBox16.Controls.Add(this.label15);
+			this.groupBox16.Controls.Add(this.label18);
+			this.groupBox16.Location = new System.Drawing.Point(395, 19);
+			this.groupBox16.Name = "groupBox16";
+			this.groupBox16.Size = new System.Drawing.Size(91, 66);
+			this.groupBox16.TabIndex = 30;
+			this.groupBox16.TabStop = false;
+			this.groupBox16.Text = "Mittelmaß hor.";
+			// 
+			// label15
+			// 
+			this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label15.AutoSize = true;
+			this.label15.Location = new System.Drawing.Point(64, 45);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(21, 13);
+			this.label15.TabIndex = 19;
+			this.label15.Text = "cm";
+			// 
+			// label18
+			// 
+			this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label18.AutoSize = true;
+			this.label18.Location = new System.Drawing.Point(64, 22);
+			this.label18.Name = "label18";
+			this.label18.Size = new System.Drawing.Size(21, 13);
+			this.label18.TabIndex = 16;
+			this.label18.Text = "cm";
+			// 
+			// groupBox15
+			// 
+			this.groupBox15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox15.Controls.Add(this.numObstacleDistanceRight);
+			this.groupBox15.Controls.Add(this.numObstacleDistanceLeft);
+			this.groupBox15.Controls.Add(this.label13);
+			this.groupBox15.Controls.Add(this.label14);
+			this.groupBox15.Location = new System.Drawing.Point(298, 19);
+			this.groupBox15.Name = "groupBox15";
+			this.groupBox15.Size = new System.Drawing.Size(91, 66);
+			this.groupBox15.TabIndex = 29;
+			this.groupBox15.TabStop = false;
+			this.groupBox15.Text = "Abstand hor.";
+			// 
+			// label13
+			// 
+			this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label13.AutoSize = true;
+			this.label13.Location = new System.Drawing.Point(64, 45);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(21, 13);
+			this.label13.TabIndex = 19;
+			this.label13.Text = "cm";
+			// 
+			// label14
+			// 
+			this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label14.AutoSize = true;
+			this.label14.Location = new System.Drawing.Point(64, 22);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(21, 13);
+			this.label14.TabIndex = 16;
+			this.label14.Text = "cm";
+			// 
+			// groupBox14
+			// 
+			this.groupBox14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox14.Controls.Add(this.numObstacleHorizontalRight);
+			this.groupBox14.Controls.Add(this.numObstacleHorizontalLeft);
+			this.groupBox14.Controls.Add(this.label9);
+			this.groupBox14.Controls.Add(this.label12);
+			this.groupBox14.Location = new System.Drawing.Point(201, 19);
+			this.groupBox14.Name = "groupBox14";
+			this.groupBox14.Size = new System.Drawing.Size(91, 66);
+			this.groupBox14.TabIndex = 28;
+			this.groupBox14.TabStop = false;
+			this.groupBox14.Text = "Position hor.";
+			// 
+			// label9
+			// 
+			this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(64, 45);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(21, 13);
+			this.label9.TabIndex = 19;
+			this.label9.Text = "cm";
+			// 
+			// label12
+			// 
+			this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label12.AutoSize = true;
+			this.label12.Location = new System.Drawing.Point(64, 22);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(21, 13);
+			this.label12.TabIndex = 16;
+			this.label12.Text = "cm";
+			// 
+			// lblObstacle
+			// 
+			this.lblObstacle.AutoSize = true;
+			this.lblObstacle.Location = new System.Drawing.Point(4, 3);
+			this.lblObstacle.Name = "lblObstacle";
+			this.lblObstacle.Size = new System.Drawing.Size(119, 13);
+			this.lblObstacle.TabIndex = 31;
+			this.lblObstacle.Text = "Kein Objekt ausgewählt";
+			// 
+			// btnObstacleRevert
+			// 
+			this.btnObstacleRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRevert.Image")));
+			this.btnObstacleRevert.Location = new System.Drawing.Point(492, 56);
+			this.btnObstacleRevert.Name = "btnObstacleRevert";
+			this.btnObstacleRevert.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleRevert.TabIndex = 30;
+			this.toolTip.SetToolTip(this.btnObstacleRevert, "Änderungen verwerfen");
+			this.btnObstacleRevert.UseVisualStyleBackColor = true;
+			this.btnObstacleRevert.Click += new System.EventHandler(this.btnObstacleRevert_Click);
+			// 
+			// btnObstacleApply
+			// 
+			this.btnObstacleApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleApply.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleApply.Image")));
+			this.btnObstacleApply.Location = new System.Drawing.Point(492, 25);
+			this.btnObstacleApply.Name = "btnObstacleApply";
+			this.btnObstacleApply.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleApply.TabIndex = 29;
+			this.toolTip.SetToolTip(this.btnObstacleApply, "Änderungen speichern");
+			this.btnObstacleApply.UseVisualStyleBackColor = true;
+			this.btnObstacleApply.Click += new System.EventHandler(this.btnObstacleApply_Click);
+			// 
+			// groupBox13
+			// 
+			this.groupBox13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox13.Controls.Add(this.numObstacleVertical);
+			this.groupBox13.Controls.Add(this.label11);
+			this.groupBox13.Location = new System.Drawing.Point(104, 19);
+			this.groupBox13.Name = "groupBox13";
+			this.groupBox13.Size = new System.Drawing.Size(91, 66);
+			this.groupBox13.TabIndex = 28;
+			this.groupBox13.TabStop = false;
+			this.groupBox13.Text = "Position vert.";
+			// 
+			// label11
+			// 
+			this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(64, 22);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(21, 13);
+			this.label11.TabIndex = 16;
+			this.label11.Text = "cm";
+			// 
+			// groupBox12
+			// 
+			this.groupBox12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox12.Controls.Add(this.numObstacleHeight);
+			this.groupBox12.Controls.Add(this.numObstacleWidth);
+			this.groupBox12.Controls.Add(this.label8);
+			this.groupBox12.Controls.Add(this.label10);
+			this.groupBox12.Location = new System.Drawing.Point(7, 19);
+			this.groupBox12.Name = "groupBox12";
+			this.groupBox12.Size = new System.Drawing.Size(91, 66);
+			this.groupBox12.TabIndex = 27;
+			this.groupBox12.TabStop = false;
+			this.groupBox12.Text = "Größe";
+			// 
+			// label8
+			// 
+			this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(64, 45);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(21, 13);
+			this.label8.TabIndex = 19;
+			this.label8.Text = "cm";
+			// 
+			// label10
+			// 
+			this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label10.AutoSize = true;
+			this.label10.Location = new System.Drawing.Point(64, 22);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(21, 13);
+			this.label10.TabIndex = 16;
+			this.label10.Text = "cm";
+			// 
+			// btnObstacleBorder
+			// 
+			this.btnObstacleBorder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleBorder.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleBorder.Image")));
+			this.btnObstacleBorder.Location = new System.Drawing.Point(523, 56);
+			this.btnObstacleBorder.Name = "btnObstacleBorder";
+			this.btnObstacleBorder.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleBorder.TabIndex = 25;
+			this.toolTip.SetToolTip(this.btnObstacleBorder, "Randabstand ändern");
+			this.btnObstacleBorder.UseVisualStyleBackColor = true;
+			this.btnObstacleBorder.Click += new System.EventHandler(this.btnObstacleBorder_Click);
+			// 
+			// btnObstacleRemove
+			// 
+			this.btnObstacleRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnObstacleRemove.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRemove.Image")));
+			this.btnObstacleRemove.Location = new System.Drawing.Point(523, 25);
+			this.btnObstacleRemove.Name = "btnObstacleRemove";
+			this.btnObstacleRemove.Size = new System.Drawing.Size(25, 25);
+			this.btnObstacleRemove.TabIndex = 24;
+			this.toolTip.SetToolTip(this.btnObstacleRemove, "Objekt löschen");
+			this.btnObstacleRemove.UseVisualStyleBackColor = true;
+			this.btnObstacleRemove.Click += new System.EventHandler(this.btnObstacleRemove_Click);
+			// 
+			// panelDefineWalls
+			// 
+			this.panelDefineWalls.Controls.Add(this.btnWallHelpLine);
+			this.panelDefineWalls.Controls.Add(this.btnWallEdgeDistance);
+			this.panelDefineWalls.Controls.Add(this.groupBox3);
+			this.panelDefineWalls.Controls.Add(this.groupBox1);
+			this.panelDefineWalls.Controls.Add(this.lblSelectedWall);
+			this.panelDefineWalls.Controls.Add(this.btnCreateWalls);
+			this.panelDefineWalls.Controls.Add(this.groupBox2);
+			this.panelDefineWalls.Controls.Add(this.btnWallNewWall);
+			this.panelDefineWalls.Controls.Add(this.btnWallDelete);
+			this.panelDefineWalls.Controls.Add(this.btnWallRevert);
+			this.panelDefineWalls.Controls.Add(this.btnWallApply);
+			this.panelDefineWalls.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelDefineWalls.Location = new System.Drawing.Point(0, 0);
+			this.panelDefineWalls.Name = "panelDefineWalls";
+			this.panelDefineWalls.Size = new System.Drawing.Size(861, 91);
+			this.panelDefineWalls.TabIndex = 1;
+			// 
+			// btnWallHelpLine
+			// 
+			this.btnWallHelpLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallHelpLine.Image = ((System.Drawing.Image)(resources.GetObject("btnWallHelpLine.Image")));
+			this.btnWallHelpLine.Location = new System.Drawing.Point(527, 56);
+			this.btnWallHelpLine.Name = "btnWallHelpLine";
+			this.btnWallHelpLine.Size = new System.Drawing.Size(25, 25);
+			this.btnWallHelpLine.TabIndex = 22;
+			this.toolTip.SetToolTip(this.btnWallHelpLine, "Hilfslinien einrichten");
+			this.btnWallHelpLine.UseVisualStyleBackColor = true;
+			// 
+			// btnWallEdgeDistance
+			// 
+			this.btnWallEdgeDistance.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallEdgeDistance.Image = ((System.Drawing.Image)(resources.GetObject("btnWallEdgeDistance.Image")));
+			this.btnWallEdgeDistance.Location = new System.Drawing.Point(527, 25);
+			this.btnWallEdgeDistance.Name = "btnWallEdgeDistance";
+			this.btnWallEdgeDistance.Size = new System.Drawing.Size(25, 25);
+			this.btnWallEdgeDistance.TabIndex = 21;
+			this.toolTip.SetToolTip(this.btnWallEdgeDistance, "Randabstand ändern");
+			this.btnWallEdgeDistance.UseVisualStyleBackColor = true;
+			this.btnWallEdgeDistance.Click += new System.EventHandler(this.btnWallEdgeDistance_Click);
+			// 
+			// groupBox3
+			// 
+			this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox3.Controls.Add(this.btnWallLeft);
+			this.groupBox3.Controls.Add(this.btnWallRight);
+			this.groupBox3.Location = new System.Drawing.Point(382, 19);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Size = new System.Drawing.Size(77, 66);
+			this.groupBox3.TabIndex = 16;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Position";
+			// 
+			// btnWallLeft
+			// 
+			this.btnWallLeft.Location = new System.Drawing.Point(6, 22);
+			this.btnWallLeft.Name = "btnWallLeft";
+			this.btnWallLeft.Size = new System.Drawing.Size(30, 36);
+			this.btnWallLeft.TabIndex = 16;
+			this.btnWallLeft.Text = "<";
+			this.toolTip.SetToolTip(this.btnWallLeft, "Wand nach links verschienben");
+			this.btnWallLeft.UseVisualStyleBackColor = true;
+			this.btnWallLeft.Click += new System.EventHandler(this.btnWallLeft_Click);
+			// 
+			// btnWallRight
+			// 
+			this.btnWallRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnWallRight.Location = new System.Drawing.Point(41, 22);
+			this.btnWallRight.Name = "btnWallRight";
+			this.btnWallRight.Size = new System.Drawing.Size(30, 36);
+			this.btnWallRight.TabIndex = 15;
+			this.btnWallRight.Text = ">";
+			this.toolTip.SetToolTip(this.btnWallRight, "Wand nach rechts verschieben");
+			this.btnWallRight.UseVisualStyleBackColor = true;
+			this.btnWallRight.Click += new System.EventHandler(this.btnWallRight_Click);
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox1.Controls.Add(this.btnWallSelectConstruction);
+			this.groupBox1.Controls.Add(this.txtWallConstruction);
+			this.groupBox1.Location = new System.Drawing.Point(7, 19);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(146, 66);
+			this.groupBox1.TabIndex = 2;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Konstruktion";
+			// 
+			// btnWallSelectConstruction
+			// 
+			this.btnWallSelectConstruction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnWallSelectConstruction.Location = new System.Drawing.Point(110, 17);
+			this.btnWallSelectConstruction.Name = "btnWallSelectConstruction";
+			this.btnWallSelectConstruction.Size = new System.Drawing.Size(30, 23);
+			this.btnWallSelectConstruction.TabIndex = 15;
+			this.btnWallSelectConstruction.Text = "...";
+			this.btnWallSelectConstruction.UseVisualStyleBackColor = true;
+			this.btnWallSelectConstruction.Click += new System.EventHandler(this.btnWallSelectConstruction_Click);
+			// 
+			// txtWallConstruction
+			// 
+			this.txtWallConstruction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.txtWallConstruction.Location = new System.Drawing.Point(6, 19);
+			this.txtWallConstruction.Name = "txtWallConstruction";
+			this.txtWallConstruction.ReadOnly = true;
+			this.txtWallConstruction.Size = new System.Drawing.Size(98, 20);
+			this.txtWallConstruction.TabIndex = 14;
+			// 
+			// lblSelectedWall
+			// 
+			this.lblSelectedWall.AutoSize = true;
+			this.lblSelectedWall.Location = new System.Drawing.Point(4, 3);
+			this.lblSelectedWall.Name = "lblSelectedWall";
+			this.lblSelectedWall.Size = new System.Drawing.Size(123, 13);
+			this.lblSelectedWall.TabIndex = 1;
+			this.lblSelectedWall.Text = "Keine Wand ausgewählt";
+			// 
+			// btnCreateWalls
+			// 
+			this.btnCreateWalls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnCreateWalls.Location = new System.Drawing.Point(606, 3);
+			this.btnCreateWalls.Name = "btnCreateWalls";
+			this.btnCreateWalls.Size = new System.Drawing.Size(252, 23);
+			this.btnCreateWalls.TabIndex = 0;
+			this.btnCreateWalls.Text = "Wände aus Raumgeometrie erzeugen";
+			this.btnCreateWalls.UseVisualStyleBackColor = true;
+			this.btnCreateWalls.Click += new System.EventHandler(this.btnCreateWalls_Click);
+			// 
+			// groupBox2
+			// 
+			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox2.Controls.Add(this.numWallVertical);
+			this.groupBox2.Controls.Add(this.numWallHorizontal);
+			this.groupBox2.Controls.Add(this.label3);
+			this.groupBox2.Controls.Add(this.lblWallVertical);
+			this.groupBox2.Controls.Add(this.label2);
+			this.groupBox2.Controls.Add(this.lblWallHorizontal);
+			this.groupBox2.Location = new System.Drawing.Point(159, 19);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(217, 66);
+			this.groupBox2.TabIndex = 16;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Größe";
+			// 
+			// label3
+			// 
+			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(190, 45);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(21, 13);
+			this.label3.TabIndex = 19;
+			this.label3.Text = "cm";
+			// 
+			// lblWallVertical
+			// 
+			this.lblWallVertical.Location = new System.Drawing.Point(6, 45);
+			this.lblWallVertical.Name = "lblWallVertical";
+			this.lblWallVertical.Size = new System.Drawing.Size(85, 18);
+			this.lblWallVertical.TabIndex = 18;
+			this.lblWallVertical.Text = "Senkrecht:";
+			// 
+			// label2
+			// 
+			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(190, 22);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(21, 13);
+			this.label2.TabIndex = 16;
+			this.label2.Text = "cm";
+			// 
+			// lblWallHorizontal
+			// 
+			this.lblWallHorizontal.Location = new System.Drawing.Point(6, 22);
+			this.lblWallHorizontal.Name = "lblWallHorizontal";
+			this.lblWallHorizontal.Size = new System.Drawing.Size(85, 23);
+			this.lblWallHorizontal.TabIndex = 15;
+			this.lblWallHorizontal.Text = "Waagrecht:";
+			// 
+			// btnWallNewWall
+			// 
+			this.btnWallNewWall.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallNewWall.Image = ((System.Drawing.Image)(resources.GetObject("btnWallNewWall.Image")));
+			this.btnWallNewWall.Location = new System.Drawing.Point(496, 56);
+			this.btnWallNewWall.Name = "btnWallNewWall";
+			this.btnWallNewWall.Size = new System.Drawing.Size(25, 25);
+			this.btnWallNewWall.TabIndex = 20;
+			this.toolTip.SetToolTip(this.btnWallNewWall, "Neue Wand anlegen");
+			this.btnWallNewWall.UseVisualStyleBackColor = true;
+			this.btnWallNewWall.Click += new System.EventHandler(this.btnWallNewWall_Click);
+			// 
+			// btnWallDelete
+			// 
+			this.btnWallDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnWallDelete.Image")));
+			this.btnWallDelete.Location = new System.Drawing.Point(496, 25);
+			this.btnWallDelete.Name = "btnWallDelete";
+			this.btnWallDelete.Size = new System.Drawing.Size(25, 25);
+			this.btnWallDelete.TabIndex = 19;
+			this.toolTip.SetToolTip(this.btnWallDelete, "Wand löschen");
+			this.btnWallDelete.UseVisualStyleBackColor = true;
+			this.btnWallDelete.Click += new System.EventHandler(this.btnWallDelete_Click);
+			// 
+			// btnWallRevert
+			// 
+			this.btnWallRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnWallRevert.Image")));
+			this.btnWallRevert.Location = new System.Drawing.Point(465, 56);
+			this.btnWallRevert.Name = "btnWallRevert";
+			this.btnWallRevert.Size = new System.Drawing.Size(25, 25);
+			this.btnWallRevert.TabIndex = 18;
+			this.toolTip.SetToolTip(this.btnWallRevert, "Änderungen verwerfen");
+			this.btnWallRevert.UseVisualStyleBackColor = true;
+			this.btnWallRevert.Click += new System.EventHandler(this.btnWallRevert_Click);
+			// 
+			// btnWallApply
+			// 
+			this.btnWallApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnWallApply.Image = ((System.Drawing.Image)(resources.GetObject("btnWallApply.Image")));
+			this.btnWallApply.Location = new System.Drawing.Point(465, 25);
+			this.btnWallApply.Name = "btnWallApply";
+			this.btnWallApply.Size = new System.Drawing.Size(25, 25);
+			this.btnWallApply.TabIndex = 17;
+			this.toolTip.SetToolTip(this.btnWallApply, "Änderungen speichern");
+			this.btnWallApply.UseVisualStyleBackColor = true;
+			this.btnWallApply.Click += new System.EventHandler(this.btnWallApply_Click);
 			// 
 			// panelModifyHitherm
 			// 
@@ -363,7 +938,7 @@ namespace Europlan.Common {
 			this.panelModifyHitherm.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelModifyHitherm.Location = new System.Drawing.Point(0, 0);
 			this.panelModifyHitherm.Name = "panelModifyHitherm";
-			this.panelModifyHitherm.Size = new System.Drawing.Size(862, 91);
+			this.panelModifyHitherm.Size = new System.Drawing.Size(861, 91);
 			this.panelModifyHitherm.TabIndex = 2;
 			// 
 			// chkRegisterWholeRegister
@@ -531,64 +1106,6 @@ namespace Europlan.Common {
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Position";
 			// 
-			// numRegisterVertical
-			// 
-			this.numRegisterVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numRegisterVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numRegisterVertical.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.Location = new System.Drawing.Point(97, 42);
-			this.numRegisterVertical.MaxValue = null;
-			this.numRegisterVertical.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.Name = "numRegisterVertical";
-			this.numRegisterVertical.Size = new System.Drawing.Size(87, 20);
-			this.numRegisterVertical.TabIndex = 2;
-			this.numRegisterVertical.Text = "1";
-			this.numRegisterVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRegisterVertical.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.ValueChanged += new System.EventHandler(this.numRegisterVertical_ValueChanged);
-			// 
-			// numRegisterLeft
-			// 
-			this.numRegisterLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numRegisterLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numRegisterLeft.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.Location = new System.Drawing.Point(97, 19);
-			this.numRegisterLeft.MaxValue = null;
-			this.numRegisterLeft.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.Name = "numRegisterLeft";
-			this.numRegisterLeft.Size = new System.Drawing.Size(87, 20);
-			this.numRegisterLeft.TabIndex = 1;
-			this.numRegisterLeft.Text = "1";
-			this.numRegisterLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRegisterLeft.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.ValueChanged += new System.EventHandler(this.numRegisterLeft_ValueChanged);
-			// 
 			// label1
 			// 
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -645,7 +1162,7 @@ namespace Europlan.Common {
 			this.panelModifySchraege.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelModifySchraege.Location = new System.Drawing.Point(0, 0);
 			this.panelModifySchraege.Name = "panelModifySchraege";
-			this.panelModifySchraege.Size = new System.Drawing.Size(862, 91);
+			this.panelModifySchraege.Size = new System.Drawing.Size(861, 91);
 			this.panelModifySchraege.TabIndex = 1;
 			// 
 			// lblSchraege
@@ -750,64 +1267,6 @@ namespace Europlan.Common {
 			this.groupBox18.TabStop = false;
 			this.groupBox18.Text = "Größe";
 			// 
-			// numSchraegeVertical
-			// 
-			this.numSchraegeVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numSchraegeVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numSchraegeVertical.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeVertical.Location = new System.Drawing.Point(97, 42);
-			this.numSchraegeVertical.MaxValue = null;
-			this.numSchraegeVertical.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeVertical.Name = "numSchraegeVertical";
-			this.numSchraegeVertical.Size = new System.Drawing.Size(65, 20);
-			this.numSchraegeVertical.TabIndex = 2;
-			this.numSchraegeVertical.Text = "1";
-			this.numSchraegeVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSchraegeVertical.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeVertical.ValueChanged += new System.EventHandler(this.numSchraegeVertical_ValueChanged);
-			// 
-			// numSchraegeHorizontal
-			// 
-			this.numSchraegeHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numSchraegeHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numSchraegeHorizontal.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeHorizontal.Location = new System.Drawing.Point(97, 19);
-			this.numSchraegeHorizontal.MaxValue = null;
-			this.numSchraegeHorizontal.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeHorizontal.Name = "numSchraegeHorizontal";
-			this.numSchraegeHorizontal.Size = new System.Drawing.Size(65, 20);
-			this.numSchraegeHorizontal.TabIndex = 1;
-			this.numSchraegeHorizontal.Text = "1";
-			this.numSchraegeHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numSchraegeHorizontal.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numSchraegeHorizontal.ValueChanged += new System.EventHandler(this.numSchraegeHorizontal_ValueChanged);
-			// 
 			// label19
 			// 
 			this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -853,8 +1312,32 @@ namespace Europlan.Common {
 			this.panelModifyConnection.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelModifyConnection.Location = new System.Drawing.Point(0, 0);
 			this.panelModifyConnection.Name = "panelModifyConnection";
-			this.panelModifyConnection.Size = new System.Drawing.Size(862, 91);
+			this.panelModifyConnection.Size = new System.Drawing.Size(861, 91);
 			this.panelModifyConnection.TabIndex = 0;
+			// 
+			// btnConnectionConnectDirect
+			// 
+			this.btnConnectionConnectDirect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnConnectionConnectDirect.Enabled = false;
+			this.btnConnectionConnectDirect.Location = new System.Drawing.Point(7, 50);
+			this.btnConnectionConnectDirect.Name = "btnConnectionConnectDirect";
+			this.btnConnectionConnectDirect.Size = new System.Drawing.Size(25, 25);
+			this.btnConnectionConnectDirect.TabIndex = 33;
+			this.toolTip.SetToolTip(this.btnConnectionConnectDirect, "Anbindeleitung löschen");
+			this.btnConnectionConnectDirect.UseVisualStyleBackColor = true;
+			this.btnConnectionConnectDirect.Visible = false;
+			// 
+			// btnConnectionConnectNormal
+			// 
+			this.btnConnectionConnectNormal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnConnectionConnectNormal.Location = new System.Drawing.Point(7, 19);
+			this.btnConnectionConnectNormal.Name = "btnConnectionConnectNormal";
+			this.btnConnectionConnectNormal.Size = new System.Drawing.Size(25, 25);
+			this.btnConnectionConnectNormal.TabIndex = 32;
+			this.toolTip.SetToolTip(this.btnConnectionConnectNormal, "Anbindeleitung löschen");
+			this.btnConnectionConnectNormal.UseVisualStyleBackColor = true;
 			// 
 			// label23
 			// 
@@ -877,831 +1360,6 @@ namespace Europlan.Common {
 			this.toolTip.SetToolTip(this.btnConnectionDelete, "Anbindeleitung löschen");
 			this.btnConnectionDelete.UseVisualStyleBackColor = true;
 			this.btnConnectionDelete.Click += new System.EventHandler(this.btnConnectionDelete_Click);
-			// 
-			// panelModifyObstacle
-			// 
-			this.panelModifyObstacle.Controls.Add(this.groupBox16);
-			this.panelModifyObstacle.Controls.Add(this.groupBox15);
-			this.panelModifyObstacle.Controls.Add(this.groupBox14);
-			this.panelModifyObstacle.Controls.Add(this.lblObstacle);
-			this.panelModifyObstacle.Controls.Add(this.btnObstacleRevert);
-			this.panelModifyObstacle.Controls.Add(this.btnObstacleApply);
-			this.panelModifyObstacle.Controls.Add(this.groupBox13);
-			this.panelModifyObstacle.Controls.Add(this.groupBox12);
-			this.panelModifyObstacle.Controls.Add(this.groupBox8);
-			this.panelModifyObstacle.Controls.Add(this.btnObstacleBorder);
-			this.panelModifyObstacle.Controls.Add(this.btnObstacleRemove);
-			this.panelModifyObstacle.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelModifyObstacle.Location = new System.Drawing.Point(0, 0);
-			this.panelModifyObstacle.Name = "panelModifyObstacle";
-			this.panelModifyObstacle.Size = new System.Drawing.Size(862, 91);
-			this.panelModifyObstacle.TabIndex = 23;
-			// 
-			// groupBox16
-			// 
-			this.groupBox16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox16.Controls.Add(this.numObstacleMiddleDistanceRight);
-			this.groupBox16.Controls.Add(this.numObstacleMiddleDistanceLeft);
-			this.groupBox16.Controls.Add(this.label15);
-			this.groupBox16.Controls.Add(this.label18);
-			this.groupBox16.Location = new System.Drawing.Point(547, 19);
-			this.groupBox16.Name = "groupBox16";
-			this.groupBox16.Size = new System.Drawing.Size(91, 66);
-			this.groupBox16.TabIndex = 30;
-			this.groupBox16.TabStop = false;
-			this.groupBox16.Text = "Mittelmaß hor.";
-			// 
-			// numObstacleMiddleDistanceRight
-			// 
-			this.numObstacleMiddleDistanceRight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numObstacleMiddleDistanceRight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numObstacleMiddleDistanceRight.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleMiddleDistanceRight.Location = new System.Drawing.Point(9, 42);
-			this.numObstacleMiddleDistanceRight.MaxValue = null;
-			this.numObstacleMiddleDistanceRight.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleMiddleDistanceRight.Name = "numObstacleMiddleDistanceRight";
-			this.numObstacleMiddleDistanceRight.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleMiddleDistanceRight.TabIndex = 21;
-			this.numObstacleMiddleDistanceRight.Text = "0";
-			this.numObstacleMiddleDistanceRight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numObstacleMiddleDistanceRight.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleMiddleDistanceRight.ValueChanged += new System.EventHandler(this.numObstacleMiddleDistanceRight_ValueChanged);
-			// 
-			// numObstacleMiddleDistanceLeft
-			// 
-			this.numObstacleMiddleDistanceLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numObstacleMiddleDistanceLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numObstacleMiddleDistanceLeft.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleMiddleDistanceLeft.Location = new System.Drawing.Point(9, 19);
-			this.numObstacleMiddleDistanceLeft.MaxValue = null;
-			this.numObstacleMiddleDistanceLeft.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleMiddleDistanceLeft.Name = "numObstacleMiddleDistanceLeft";
-			this.numObstacleMiddleDistanceLeft.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleMiddleDistanceLeft.TabIndex = 20;
-			this.numObstacleMiddleDistanceLeft.Text = "0";
-			this.numObstacleMiddleDistanceLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numObstacleMiddleDistanceLeft.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleMiddleDistanceLeft.ValueChanged += new System.EventHandler(this.numObstacleMiddleDistanceLeft_ValueChanged);
-			// 
-			// label15
-			// 
-			this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label15.AutoSize = true;
-			this.label15.Location = new System.Drawing.Point(64, 45);
-			this.label15.Name = "label15";
-			this.label15.Size = new System.Drawing.Size(21, 13);
-			this.label15.TabIndex = 19;
-			this.label15.Text = "cm";
-			// 
-			// label18
-			// 
-			this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label18.AutoSize = true;
-			this.label18.Location = new System.Drawing.Point(64, 22);
-			this.label18.Name = "label18";
-			this.label18.Size = new System.Drawing.Size(21, 13);
-			this.label18.TabIndex = 16;
-			this.label18.Text = "cm";
-			// 
-			// groupBox15
-			// 
-			this.groupBox15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox15.Controls.Add(this.numObstacleDistanceRight);
-			this.groupBox15.Controls.Add(this.numObstacleDistanceLeft);
-			this.groupBox15.Controls.Add(this.label13);
-			this.groupBox15.Controls.Add(this.label14);
-			this.groupBox15.Location = new System.Drawing.Point(450, 19);
-			this.groupBox15.Name = "groupBox15";
-			this.groupBox15.Size = new System.Drawing.Size(91, 66);
-			this.groupBox15.TabIndex = 29;
-			this.groupBox15.TabStop = false;
-			this.groupBox15.Text = "Abstand hor.";
-			// 
-			// numObstacleDistanceRight
-			// 
-			this.numObstacleDistanceRight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numObstacleDistanceRight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numObstacleDistanceRight.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleDistanceRight.Location = new System.Drawing.Point(9, 42);
-			this.numObstacleDistanceRight.MaxValue = null;
-			this.numObstacleDistanceRight.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleDistanceRight.Name = "numObstacleDistanceRight";
-			this.numObstacleDistanceRight.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleDistanceRight.TabIndex = 21;
-			this.numObstacleDistanceRight.Text = "0";
-			this.numObstacleDistanceRight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numObstacleDistanceRight.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleDistanceRight.ValueChanged += new System.EventHandler(this.numObstacleDistanceRight_ValueChanged);
-			// 
-			// numObstacleDistanceLeft
-			// 
-			this.numObstacleDistanceLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numObstacleDistanceLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numObstacleDistanceLeft.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleDistanceLeft.Location = new System.Drawing.Point(9, 19);
-			this.numObstacleDistanceLeft.MaxValue = null;
-			this.numObstacleDistanceLeft.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleDistanceLeft.Name = "numObstacleDistanceLeft";
-			this.numObstacleDistanceLeft.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleDistanceLeft.TabIndex = 20;
-			this.numObstacleDistanceLeft.Text = "0";
-			this.numObstacleDistanceLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numObstacleDistanceLeft.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleDistanceLeft.ValueChanged += new System.EventHandler(this.numObstacleDistanceLeft_ValueChanged);
-			// 
-			// label13
-			// 
-			this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(64, 45);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(21, 13);
-			this.label13.TabIndex = 19;
-			this.label13.Text = "cm";
-			// 
-			// label14
-			// 
-			this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(64, 22);
-			this.label14.Name = "label14";
-			this.label14.Size = new System.Drawing.Size(21, 13);
-			this.label14.TabIndex = 16;
-			this.label14.Text = "cm";
-			// 
-			// groupBox14
-			// 
-			this.groupBox14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox14.Controls.Add(this.numObstacleHorizontalRight);
-			this.groupBox14.Controls.Add(this.numObstacleHorizontalLeft);
-			this.groupBox14.Controls.Add(this.label9);
-			this.groupBox14.Controls.Add(this.label12);
-			this.groupBox14.Location = new System.Drawing.Point(353, 19);
-			this.groupBox14.Name = "groupBox14";
-			this.groupBox14.Size = new System.Drawing.Size(91, 66);
-			this.groupBox14.TabIndex = 28;
-			this.groupBox14.TabStop = false;
-			this.groupBox14.Text = "Position hor.";
-			// 
-			// numObstacleHorizontalRight
-			// 
-			this.numObstacleHorizontalRight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numObstacleHorizontalRight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numObstacleHorizontalRight.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleHorizontalRight.Location = new System.Drawing.Point(9, 42);
-			this.numObstacleHorizontalRight.MaxValue = null;
-			this.numObstacleHorizontalRight.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleHorizontalRight.Name = "numObstacleHorizontalRight";
-			this.numObstacleHorizontalRight.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleHorizontalRight.TabIndex = 21;
-			this.numObstacleHorizontalRight.Text = "0";
-			this.numObstacleHorizontalRight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numObstacleHorizontalRight.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleHorizontalRight.ValueChanged += new System.EventHandler(this.numObstacleHorizontalRight_ValueChanged);
-			// 
-			// numObstacleHorizontalLeft
-			// 
-			this.numObstacleHorizontalLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numObstacleHorizontalLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numObstacleHorizontalLeft.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleHorizontalLeft.Location = new System.Drawing.Point(9, 19);
-			this.numObstacleHorizontalLeft.MaxValue = null;
-			this.numObstacleHorizontalLeft.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleHorizontalLeft.Name = "numObstacleHorizontalLeft";
-			this.numObstacleHorizontalLeft.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleHorizontalLeft.TabIndex = 20;
-			this.numObstacleHorizontalLeft.Text = "0";
-			this.numObstacleHorizontalLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numObstacleHorizontalLeft.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleHorizontalLeft.ValueChanged += new System.EventHandler(this.numObstacleHorizontalLeft_ValueChanged);
-			// 
-			// label9
-			// 
-			this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(64, 45);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(21, 13);
-			this.label9.TabIndex = 19;
-			this.label9.Text = "cm";
-			// 
-			// label12
-			// 
-			this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(64, 22);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(21, 13);
-			this.label12.TabIndex = 16;
-			this.label12.Text = "cm";
-			// 
-			// lblObstacle
-			// 
-			this.lblObstacle.AutoSize = true;
-			this.lblObstacle.Location = new System.Drawing.Point(4, 3);
-			this.lblObstacle.Name = "lblObstacle";
-			this.lblObstacle.Size = new System.Drawing.Size(119, 13);
-			this.lblObstacle.TabIndex = 31;
-			this.lblObstacle.Text = "Kein Objekt ausgewählt";
-			// 
-			// btnObstacleRevert
-			// 
-			this.btnObstacleRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnObstacleRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRevert.Image")));
-			this.btnObstacleRevert.Location = new System.Drawing.Point(644, 56);
-			this.btnObstacleRevert.Name = "btnObstacleRevert";
-			this.btnObstacleRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleRevert.TabIndex = 30;
-			this.toolTip.SetToolTip(this.btnObstacleRevert, "Änderungen verwerfen");
-			this.btnObstacleRevert.UseVisualStyleBackColor = true;
-			this.btnObstacleRevert.Click += new System.EventHandler(this.btnObstacleRevert_Click);
-			// 
-			// btnObstacleApply
-			// 
-			this.btnObstacleApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnObstacleApply.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleApply.Image")));
-			this.btnObstacleApply.Location = new System.Drawing.Point(644, 25);
-			this.btnObstacleApply.Name = "btnObstacleApply";
-			this.btnObstacleApply.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleApply.TabIndex = 29;
-			this.toolTip.SetToolTip(this.btnObstacleApply, "Änderungen speichern");
-			this.btnObstacleApply.UseVisualStyleBackColor = true;
-			this.btnObstacleApply.Click += new System.EventHandler(this.btnObstacleApply_Click);
-			// 
-			// groupBox13
-			// 
-			this.groupBox13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox13.Controls.Add(this.numObstacleVertical);
-			this.groupBox13.Controls.Add(this.label11);
-			this.groupBox13.Location = new System.Drawing.Point(256, 19);
-			this.groupBox13.Name = "groupBox13";
-			this.groupBox13.Size = new System.Drawing.Size(91, 66);
-			this.groupBox13.TabIndex = 28;
-			this.groupBox13.TabStop = false;
-			this.groupBox13.Text = "Position vert.";
-			// 
-			// numObstacleVertical
-			// 
-			this.numObstacleVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numObstacleVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numObstacleVertical.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleVertical.Location = new System.Drawing.Point(9, 19);
-			this.numObstacleVertical.MaxValue = null;
-			this.numObstacleVertical.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleVertical.Name = "numObstacleVertical";
-			this.numObstacleVertical.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleVertical.TabIndex = 20;
-			this.numObstacleVertical.Text = "0";
-			this.numObstacleVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numObstacleVertical.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleVertical.ValueChanged += new System.EventHandler(this.numObstacleVertical_ValueChanged);
-			// 
-			// label11
-			// 
-			this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(64, 22);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(21, 13);
-			this.label11.TabIndex = 16;
-			this.label11.Text = "cm";
-			// 
-			// groupBox12
-			// 
-			this.groupBox12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox12.Controls.Add(this.numObstacleHeight);
-			this.groupBox12.Controls.Add(this.numObstacleWidth);
-			this.groupBox12.Controls.Add(this.label8);
-			this.groupBox12.Controls.Add(this.label10);
-			this.groupBox12.Location = new System.Drawing.Point(159, 19);
-			this.groupBox12.Name = "groupBox12";
-			this.groupBox12.Size = new System.Drawing.Size(91, 66);
-			this.groupBox12.TabIndex = 27;
-			this.groupBox12.TabStop = false;
-			this.groupBox12.Text = "Größe";
-			// 
-			// numObstacleHeight
-			// 
-			this.numObstacleHeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numObstacleHeight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numObstacleHeight.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleHeight.Location = new System.Drawing.Point(9, 42);
-			this.numObstacleHeight.MaxValue = null;
-			this.numObstacleHeight.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleHeight.Name = "numObstacleHeight";
-			this.numObstacleHeight.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleHeight.TabIndex = 21;
-			this.numObstacleHeight.Text = "0";
-			this.numObstacleHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numObstacleHeight.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleHeight.ValueChanged += new System.EventHandler(this.numObstacleHeight_ValueChanged);
-			// 
-			// numObstacleWidth
-			// 
-			this.numObstacleWidth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numObstacleWidth.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numObstacleWidth.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleWidth.Location = new System.Drawing.Point(9, 19);
-			this.numObstacleWidth.MaxValue = null;
-			this.numObstacleWidth.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleWidth.Name = "numObstacleWidth";
-			this.numObstacleWidth.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleWidth.TabIndex = 20;
-			this.numObstacleWidth.Text = "0";
-			this.numObstacleWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numObstacleWidth.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numObstacleWidth.ValueChanged += new System.EventHandler(this.numObstacleWidth_ValueChanged);
-			// 
-			// label8
-			// 
-			this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(64, 45);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(21, 13);
-			this.label8.TabIndex = 19;
-			this.label8.Text = "cm";
-			// 
-			// label10
-			// 
-			this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(64, 22);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(21, 13);
-			this.label10.TabIndex = 16;
-			this.label10.Text = "cm";
-			// 
-			// groupBox8
-			// 
-			this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox8.Controls.Add(this.cmbNewObstacleType);
-			this.groupBox8.Location = new System.Drawing.Point(9, 19);
-			this.groupBox8.Name = "groupBox8";
-			this.groupBox8.Size = new System.Drawing.Size(144, 66);
-			this.groupBox8.TabIndex = 26;
-			this.groupBox8.TabStop = false;
-			this.groupBox8.Text = "Typ für neue Objekte";
-			// 
-			// cmbNewObstacleType
-			// 
-			this.cmbNewObstacleType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.cmbNewObstacleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbNewObstacleType.FormattingEnabled = true;
-			this.cmbNewObstacleType.Location = new System.Drawing.Point(6, 21);
-			this.cmbNewObstacleType.Name = "cmbNewObstacleType";
-			this.cmbNewObstacleType.Size = new System.Drawing.Size(132, 21);
-			this.cmbNewObstacleType.TabIndex = 0;
-			this.cmbNewObstacleType.SelectedValueChanged += new System.EventHandler(this.cmbNewObstacleType_SelectedValueChanged);
-			// 
-			// btnObstacleBorder
-			// 
-			this.btnObstacleBorder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnObstacleBorder.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleBorder.Image")));
-			this.btnObstacleBorder.Location = new System.Drawing.Point(675, 56);
-			this.btnObstacleBorder.Name = "btnObstacleBorder";
-			this.btnObstacleBorder.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleBorder.TabIndex = 25;
-			this.toolTip.SetToolTip(this.btnObstacleBorder, "Randabstand ändern");
-			this.btnObstacleBorder.UseVisualStyleBackColor = true;
-			this.btnObstacleBorder.Click += new System.EventHandler(this.btnObstacleBorder_Click);
-			// 
-			// btnObstacleRemove
-			// 
-			this.btnObstacleRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnObstacleRemove.Image = ((System.Drawing.Image)(resources.GetObject("btnObstacleRemove.Image")));
-			this.btnObstacleRemove.Location = new System.Drawing.Point(675, 25);
-			this.btnObstacleRemove.Name = "btnObstacleRemove";
-			this.btnObstacleRemove.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleRemove.TabIndex = 24;
-			this.toolTip.SetToolTip(this.btnObstacleRemove, "Objekt löschen");
-			this.btnObstacleRemove.UseVisualStyleBackColor = true;
-			this.btnObstacleRemove.Click += new System.EventHandler(this.btnObstacleRemove_Click);
-			// 
-			// panelDefineWalls
-			// 
-			this.panelDefineWalls.Controls.Add(this.btnWallHelpLine);
-			this.panelDefineWalls.Controls.Add(this.btnWallEdgeDistance);
-			this.panelDefineWalls.Controls.Add(this.groupBox3);
-			this.panelDefineWalls.Controls.Add(this.groupBox1);
-			this.panelDefineWalls.Controls.Add(this.lblSelectedWall);
-			this.panelDefineWalls.Controls.Add(this.btnCreateWalls);
-			this.panelDefineWalls.Controls.Add(this.groupBox2);
-			this.panelDefineWalls.Controls.Add(this.btnWallNewWall);
-			this.panelDefineWalls.Controls.Add(this.btnWallDelete);
-			this.panelDefineWalls.Controls.Add(this.btnWallRevert);
-			this.panelDefineWalls.Controls.Add(this.btnWallApply);
-			this.panelDefineWalls.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelDefineWalls.Location = new System.Drawing.Point(0, 0);
-			this.panelDefineWalls.Name = "panelDefineWalls";
-			this.panelDefineWalls.Size = new System.Drawing.Size(862, 91);
-			this.panelDefineWalls.TabIndex = 1;
-			// 
-			// btnWallHelpLine
-			// 
-			this.btnWallHelpLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnWallHelpLine.Image = ((System.Drawing.Image)(resources.GetObject("btnWallHelpLine.Image")));
-			this.btnWallHelpLine.Location = new System.Drawing.Point(527, 56);
-			this.btnWallHelpLine.Name = "btnWallHelpLine";
-			this.btnWallHelpLine.Size = new System.Drawing.Size(25, 25);
-			this.btnWallHelpLine.TabIndex = 22;
-			this.toolTip.SetToolTip(this.btnWallHelpLine, "Hilfslinien einrichten");
-			this.btnWallHelpLine.UseVisualStyleBackColor = true;
-			// 
-			// btnWallEdgeDistance
-			// 
-			this.btnWallEdgeDistance.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnWallEdgeDistance.Image = ((System.Drawing.Image)(resources.GetObject("btnWallEdgeDistance.Image")));
-			this.btnWallEdgeDistance.Location = new System.Drawing.Point(527, 25);
-			this.btnWallEdgeDistance.Name = "btnWallEdgeDistance";
-			this.btnWallEdgeDistance.Size = new System.Drawing.Size(25, 25);
-			this.btnWallEdgeDistance.TabIndex = 21;
-			this.toolTip.SetToolTip(this.btnWallEdgeDistance, "Randabstand ändern");
-			this.btnWallEdgeDistance.UseVisualStyleBackColor = true;
-			this.btnWallEdgeDistance.Click += new System.EventHandler(this.btnWallEdgeDistance_Click);
-			// 
-			// groupBox3
-			// 
-			this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox3.Controls.Add(this.btnWallLeft);
-			this.groupBox3.Controls.Add(this.btnWallRight);
-			this.groupBox3.Location = new System.Drawing.Point(382, 19);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(77, 66);
-			this.groupBox3.TabIndex = 16;
-			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "Position";
-			// 
-			// btnWallLeft
-			// 
-			this.btnWallLeft.Location = new System.Drawing.Point(6, 22);
-			this.btnWallLeft.Name = "btnWallLeft";
-			this.btnWallLeft.Size = new System.Drawing.Size(30, 36);
-			this.btnWallLeft.TabIndex = 16;
-			this.btnWallLeft.Text = "<";
-			this.toolTip.SetToolTip(this.btnWallLeft, "Wand nach links verschienben");
-			this.btnWallLeft.UseVisualStyleBackColor = true;
-			this.btnWallLeft.Click += new System.EventHandler(this.btnWallLeft_Click);
-			// 
-			// btnWallRight
-			// 
-			this.btnWallRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnWallRight.Location = new System.Drawing.Point(41, 22);
-			this.btnWallRight.Name = "btnWallRight";
-			this.btnWallRight.Size = new System.Drawing.Size(30, 36);
-			this.btnWallRight.TabIndex = 15;
-			this.btnWallRight.Text = ">";
-			this.toolTip.SetToolTip(this.btnWallRight, "Wand nach rechts verschieben");
-			this.btnWallRight.UseVisualStyleBackColor = true;
-			this.btnWallRight.Click += new System.EventHandler(this.btnWallRight_Click);
-			// 
-			// groupBox1
-			// 
-			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox1.Controls.Add(this.btnWallSelectConstruction);
-			this.groupBox1.Controls.Add(this.txtWallConstruction);
-			this.groupBox1.Location = new System.Drawing.Point(7, 19);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(146, 66);
-			this.groupBox1.TabIndex = 2;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Konstruktion";
-			// 
-			// btnWallSelectConstruction
-			// 
-			this.btnWallSelectConstruction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnWallSelectConstruction.Location = new System.Drawing.Point(110, 17);
-			this.btnWallSelectConstruction.Name = "btnWallSelectConstruction";
-			this.btnWallSelectConstruction.Size = new System.Drawing.Size(30, 23);
-			this.btnWallSelectConstruction.TabIndex = 15;
-			this.btnWallSelectConstruction.Text = "...";
-			this.btnWallSelectConstruction.UseVisualStyleBackColor = true;
-			this.btnWallSelectConstruction.Click += new System.EventHandler(this.btnWallSelectConstruction_Click);
-			// 
-			// txtWallConstruction
-			// 
-			this.txtWallConstruction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtWallConstruction.Location = new System.Drawing.Point(6, 19);
-			this.txtWallConstruction.Name = "txtWallConstruction";
-			this.txtWallConstruction.ReadOnly = true;
-			this.txtWallConstruction.Size = new System.Drawing.Size(98, 20);
-			this.txtWallConstruction.TabIndex = 14;
-			// 
-			// lblSelectedWall
-			// 
-			this.lblSelectedWall.AutoSize = true;
-			this.lblSelectedWall.Location = new System.Drawing.Point(4, 3);
-			this.lblSelectedWall.Name = "lblSelectedWall";
-			this.lblSelectedWall.Size = new System.Drawing.Size(123, 13);
-			this.lblSelectedWall.TabIndex = 1;
-			this.lblSelectedWall.Text = "Keine Wand ausgewählt";
-			// 
-			// btnCreateWalls
-			// 
-			this.btnCreateWalls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCreateWalls.Location = new System.Drawing.Point(607, 3);
-			this.btnCreateWalls.Name = "btnCreateWalls";
-			this.btnCreateWalls.Size = new System.Drawing.Size(252, 23);
-			this.btnCreateWalls.TabIndex = 0;
-			this.btnCreateWalls.Text = "Wände aus Raumgeometrie erzeugen";
-			this.btnCreateWalls.UseVisualStyleBackColor = true;
-			this.btnCreateWalls.Click += new System.EventHandler(this.btnCreateWalls_Click);
-			// 
-			// groupBox2
-			// 
-			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox2.Controls.Add(this.numWallVertical);
-			this.groupBox2.Controls.Add(this.numWallHorizontal);
-			this.groupBox2.Controls.Add(this.label3);
-			this.groupBox2.Controls.Add(this.lblWallVertical);
-			this.groupBox2.Controls.Add(this.label2);
-			this.groupBox2.Controls.Add(this.lblWallHorizontal);
-			this.groupBox2.Location = new System.Drawing.Point(159, 19);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(217, 66);
-			this.groupBox2.TabIndex = 16;
-			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "Größe";
-			// 
-			// numWallVertical
-			// 
-			this.numWallVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numWallVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numWallVertical.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numWallVertical.Location = new System.Drawing.Point(97, 42);
-			this.numWallVertical.MaxValue = null;
-			this.numWallVertical.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numWallVertical.Name = "numWallVertical";
-			this.numWallVertical.Size = new System.Drawing.Size(87, 20);
-			this.numWallVertical.TabIndex = 21;
-			this.numWallVertical.Text = "0";
-			this.numWallVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numWallVertical.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numWallVertical.ValueChanged += new System.EventHandler(this.numWallVertical_ValueChanged);
-			// 
-			// numWallHorizontal
-			// 
-			this.numWallHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numWallHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numWallHorizontal.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numWallHorizontal.Location = new System.Drawing.Point(97, 19);
-			this.numWallHorizontal.MaxValue = null;
-			this.numWallHorizontal.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numWallHorizontal.Name = "numWallHorizontal";
-			this.numWallHorizontal.Size = new System.Drawing.Size(87, 20);
-			this.numWallHorizontal.TabIndex = 20;
-			this.numWallHorizontal.Text = "0";
-			this.numWallHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numWallHorizontal.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numWallHorizontal.ValueChanged += new System.EventHandler(this.numWallHorizontal_ValueChanged);
-			// 
-			// label3
-			// 
-			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(190, 45);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(21, 13);
-			this.label3.TabIndex = 19;
-			this.label3.Text = "cm";
-			// 
-			// lblWallVertical
-			// 
-			this.lblWallVertical.Location = new System.Drawing.Point(6, 45);
-			this.lblWallVertical.Name = "lblWallVertical";
-			this.lblWallVertical.Size = new System.Drawing.Size(85, 18);
-			this.lblWallVertical.TabIndex = 18;
-			this.lblWallVertical.Text = "Senkrecht:";
-			// 
-			// label2
-			// 
-			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(190, 22);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(21, 13);
-			this.label2.TabIndex = 16;
-			this.label2.Text = "cm";
-			// 
-			// lblWallHorizontal
-			// 
-			this.lblWallHorizontal.Location = new System.Drawing.Point(6, 22);
-			this.lblWallHorizontal.Name = "lblWallHorizontal";
-			this.lblWallHorizontal.Size = new System.Drawing.Size(85, 23);
-			this.lblWallHorizontal.TabIndex = 15;
-			this.lblWallHorizontal.Text = "Waagrecht:";
-			// 
-			// btnWallNewWall
-			// 
-			this.btnWallNewWall.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnWallNewWall.Image = ((System.Drawing.Image)(resources.GetObject("btnWallNewWall.Image")));
-			this.btnWallNewWall.Location = new System.Drawing.Point(496, 56);
-			this.btnWallNewWall.Name = "btnWallNewWall";
-			this.btnWallNewWall.Size = new System.Drawing.Size(25, 25);
-			this.btnWallNewWall.TabIndex = 20;
-			this.toolTip.SetToolTip(this.btnWallNewWall, "Neue Wand anlegen");
-			this.btnWallNewWall.UseVisualStyleBackColor = true;
-			this.btnWallNewWall.Click += new System.EventHandler(this.btnWallNewWall_Click);
-			// 
-			// btnWallDelete
-			// 
-			this.btnWallDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnWallDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnWallDelete.Image")));
-			this.btnWallDelete.Location = new System.Drawing.Point(496, 25);
-			this.btnWallDelete.Name = "btnWallDelete";
-			this.btnWallDelete.Size = new System.Drawing.Size(25, 25);
-			this.btnWallDelete.TabIndex = 19;
-			this.toolTip.SetToolTip(this.btnWallDelete, "Wand löschen");
-			this.btnWallDelete.UseVisualStyleBackColor = true;
-			this.btnWallDelete.Click += new System.EventHandler(this.btnWallDelete_Click);
-			// 
-			// btnWallRevert
-			// 
-			this.btnWallRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnWallRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnWallRevert.Image")));
-			this.btnWallRevert.Location = new System.Drawing.Point(465, 56);
-			this.btnWallRevert.Name = "btnWallRevert";
-			this.btnWallRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnWallRevert.TabIndex = 18;
-			this.toolTip.SetToolTip(this.btnWallRevert, "Änderungen verwerfen");
-			this.btnWallRevert.UseVisualStyleBackColor = true;
-			this.btnWallRevert.Click += new System.EventHandler(this.btnWallRevert_Click);
-			// 
-			// btnWallApply
-			// 
-			this.btnWallApply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnWallApply.Image = ((System.Drawing.Image)(resources.GetObject("btnWallApply.Image")));
-			this.btnWallApply.Location = new System.Drawing.Point(465, 25);
-			this.btnWallApply.Name = "btnWallApply";
-			this.btnWallApply.Size = new System.Drawing.Size(25, 25);
-			this.btnWallApply.TabIndex = 17;
-			this.toolTip.SetToolTip(this.btnWallApply, "Änderungen speichern");
-			this.btnWallApply.UseVisualStyleBackColor = true;
-			this.btnWallApply.Click += new System.EventHandler(this.btnWallApply_Click);
 			// 
 			// label7
 			// 
@@ -2048,7 +1706,7 @@ namespace Europlan.Common {
 			this.lstError.Location = new System.Drawing.Point(4, 173);
 			this.lstError.Name = "lstError";
 			this.lstError.ShowGroups = false;
-			this.lstError.Size = new System.Drawing.Size(855, 30);
+			this.lstError.Size = new System.Drawing.Size(854, 30);
 			this.lstError.TabIndex = 225;
 			this.lstError.UseCompatibleStateImageBehavior = false;
 			this.lstError.View = System.Windows.Forms.View.Details;
@@ -2097,16 +1755,16 @@ namespace Europlan.Common {
 			this.panelBottom.Controls.Add(this.lblHeat);
 			this.panelBottom.Controls.Add(this.label7);
 			this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panelBottom.Location = new System.Drawing.Point(24, 259);
+			this.panelBottom.Location = new System.Drawing.Point(25, 326);
 			this.panelBottom.Name = "panelBottom";
-			this.panelBottom.Size = new System.Drawing.Size(862, 206);
+			this.panelBottom.Size = new System.Drawing.Size(861, 206);
 			this.panelBottom.TabIndex = 3;
 			// 
 			// graphicalWallPanel
 			// 
 			this.graphicalWallPanel.Cursor = System.Windows.Forms.Cursors.SizeAll;
 			this.graphicalWallPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.graphicalWallPanel.Location = new System.Drawing.Point(24, 116);
+			this.graphicalWallPanel.Location = new System.Drawing.Point(25, 116);
 			this.graphicalWallPanel.Mode = Europlan.Common.GraphicalWallPanel.PlanMode.PM_MOVE;
 			this.graphicalWallPanel.Name = "graphicalWallPanel";
 			this.graphicalWallPanel.NewObstacleType = ((Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum)(Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum.Window));
@@ -2115,10 +1773,10 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.Scale = 1;
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.SelectedWall = null;
-			this.graphicalWallPanel.Size = new System.Drawing.Size(862, 143);
+			this.graphicalWallPanel.Size = new System.Drawing.Size(861, 210);
 			this.graphicalWallPanel.TabIndex = 4;
-			this.graphicalWallPanel.XPos = 421;
-			this.graphicalWallPanel.YPos = -71.5;
+			this.graphicalWallPanel.XPos = 420.5;
+			this.graphicalWallPanel.YPos = -105;
 			this.graphicalWallPanel.SelectedObjectModified += new System.EventHandler<Europlan.Common.GraphicalWallPanel.SelectedObjectArgs>(this.graphicalWallPanel_SelectedObjectModified);
 			this.graphicalWallPanel.ObjectSelected += new System.EventHandler<Europlan.Common.GraphicalWallPanel.SelectedObjectArgs>(this.graphicalWallPanel_ObjectSelected);
 			this.graphicalWallPanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.graphicalWallPanel_KeyDown);
@@ -2134,49 +1792,484 @@ namespace Europlan.Common {
 			this.hithermPlanner.NewRegisterVorlaufRight = true;
 			this.hithermPlanner.RecalculationNecessary += new System.EventHandler<System.EventArgs>(this.hithermPlanner_RecalculationNecessary);
 			// 
-			// btnConnectionConnectNormal
+			// numObstacleMiddleDistanceRight
 			// 
-			this.btnConnectionConnectNormal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnConnectionConnectNormal.Location = new System.Drawing.Point(7, 19);
-			this.btnConnectionConnectNormal.Name = "btnConnectionConnectNormal";
-			this.btnConnectionConnectNormal.Size = new System.Drawing.Size(25, 25);
-			this.btnConnectionConnectNormal.TabIndex = 32;
-			this.toolTip.SetToolTip(this.btnConnectionConnectNormal, "Anbindeleitung löschen");
-			this.btnConnectionConnectNormal.UseVisualStyleBackColor = true;
+			this.numObstacleMiddleDistanceRight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numObstacleMiddleDistanceRight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numObstacleMiddleDistanceRight.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleMiddleDistanceRight.Location = new System.Drawing.Point(9, 42);
+			this.numObstacleMiddleDistanceRight.MaxValue = null;
+			this.numObstacleMiddleDistanceRight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleMiddleDistanceRight.Name = "numObstacleMiddleDistanceRight";
+			this.numObstacleMiddleDistanceRight.Size = new System.Drawing.Size(49, 20);
+			this.numObstacleMiddleDistanceRight.TabIndex = 21;
+			this.numObstacleMiddleDistanceRight.Text = "0";
+			this.numObstacleMiddleDistanceRight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numObstacleMiddleDistanceRight.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleMiddleDistanceRight.ValueChanged += new System.EventHandler(this.numObstacleMiddleDistanceRight_ValueChanged);
 			// 
-			// btnConnectionConnectDirect
+			// numObstacleMiddleDistanceLeft
 			// 
-			this.btnConnectionConnectDirect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnConnectionConnectDirect.Enabled = false;
-			this.btnConnectionConnectDirect.Location = new System.Drawing.Point(7, 50);
-			this.btnConnectionConnectDirect.Name = "btnConnectionConnectDirect";
-			this.btnConnectionConnectDirect.Size = new System.Drawing.Size(25, 25);
-			this.btnConnectionConnectDirect.TabIndex = 33;
-			this.toolTip.SetToolTip(this.btnConnectionConnectDirect, "Anbindeleitung löschen");
-			this.btnConnectionConnectDirect.UseVisualStyleBackColor = true;
-			this.btnConnectionConnectDirect.Visible = false;
+			this.numObstacleMiddleDistanceLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numObstacleMiddleDistanceLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numObstacleMiddleDistanceLeft.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleMiddleDistanceLeft.Location = new System.Drawing.Point(9, 19);
+			this.numObstacleMiddleDistanceLeft.MaxValue = null;
+			this.numObstacleMiddleDistanceLeft.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleMiddleDistanceLeft.Name = "numObstacleMiddleDistanceLeft";
+			this.numObstacleMiddleDistanceLeft.Size = new System.Drawing.Size(49, 20);
+			this.numObstacleMiddleDistanceLeft.TabIndex = 20;
+			this.numObstacleMiddleDistanceLeft.Text = "0";
+			this.numObstacleMiddleDistanceLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numObstacleMiddleDistanceLeft.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleMiddleDistanceLeft.ValueChanged += new System.EventHandler(this.numObstacleMiddleDistanceLeft_ValueChanged);
+			// 
+			// numObstacleDistanceRight
+			// 
+			this.numObstacleDistanceRight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numObstacleDistanceRight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numObstacleDistanceRight.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleDistanceRight.Location = new System.Drawing.Point(9, 42);
+			this.numObstacleDistanceRight.MaxValue = null;
+			this.numObstacleDistanceRight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleDistanceRight.Name = "numObstacleDistanceRight";
+			this.numObstacleDistanceRight.Size = new System.Drawing.Size(49, 20);
+			this.numObstacleDistanceRight.TabIndex = 21;
+			this.numObstacleDistanceRight.Text = "0";
+			this.numObstacleDistanceRight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numObstacleDistanceRight.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleDistanceRight.ValueChanged += new System.EventHandler(this.numObstacleDistanceRight_ValueChanged);
+			// 
+			// numObstacleDistanceLeft
+			// 
+			this.numObstacleDistanceLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numObstacleDistanceLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numObstacleDistanceLeft.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleDistanceLeft.Location = new System.Drawing.Point(9, 19);
+			this.numObstacleDistanceLeft.MaxValue = null;
+			this.numObstacleDistanceLeft.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleDistanceLeft.Name = "numObstacleDistanceLeft";
+			this.numObstacleDistanceLeft.Size = new System.Drawing.Size(49, 20);
+			this.numObstacleDistanceLeft.TabIndex = 20;
+			this.numObstacleDistanceLeft.Text = "0";
+			this.numObstacleDistanceLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numObstacleDistanceLeft.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleDistanceLeft.ValueChanged += new System.EventHandler(this.numObstacleDistanceLeft_ValueChanged);
+			// 
+			// numObstacleHorizontalRight
+			// 
+			this.numObstacleHorizontalRight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numObstacleHorizontalRight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numObstacleHorizontalRight.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleHorizontalRight.Location = new System.Drawing.Point(9, 42);
+			this.numObstacleHorizontalRight.MaxValue = null;
+			this.numObstacleHorizontalRight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleHorizontalRight.Name = "numObstacleHorizontalRight";
+			this.numObstacleHorizontalRight.Size = new System.Drawing.Size(49, 20);
+			this.numObstacleHorizontalRight.TabIndex = 21;
+			this.numObstacleHorizontalRight.Text = "0";
+			this.numObstacleHorizontalRight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numObstacleHorizontalRight.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleHorizontalRight.ValueChanged += new System.EventHandler(this.numObstacleHorizontalRight_ValueChanged);
+			// 
+			// numObstacleHorizontalLeft
+			// 
+			this.numObstacleHorizontalLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numObstacleHorizontalLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numObstacleHorizontalLeft.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleHorizontalLeft.Location = new System.Drawing.Point(9, 19);
+			this.numObstacleHorizontalLeft.MaxValue = null;
+			this.numObstacleHorizontalLeft.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleHorizontalLeft.Name = "numObstacleHorizontalLeft";
+			this.numObstacleHorizontalLeft.Size = new System.Drawing.Size(49, 20);
+			this.numObstacleHorizontalLeft.TabIndex = 20;
+			this.numObstacleHorizontalLeft.Text = "0";
+			this.numObstacleHorizontalLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numObstacleHorizontalLeft.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleHorizontalLeft.ValueChanged += new System.EventHandler(this.numObstacleHorizontalLeft_ValueChanged);
+			// 
+			// numObstacleVertical
+			// 
+			this.numObstacleVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numObstacleVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numObstacleVertical.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleVertical.Location = new System.Drawing.Point(9, 19);
+			this.numObstacleVertical.MaxValue = null;
+			this.numObstacleVertical.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleVertical.Name = "numObstacleVertical";
+			this.numObstacleVertical.Size = new System.Drawing.Size(49, 20);
+			this.numObstacleVertical.TabIndex = 20;
+			this.numObstacleVertical.Text = "0";
+			this.numObstacleVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numObstacleVertical.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleVertical.ValueChanged += new System.EventHandler(this.numObstacleVertical_ValueChanged);
+			// 
+			// numObstacleHeight
+			// 
+			this.numObstacleHeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numObstacleHeight.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numObstacleHeight.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleHeight.Location = new System.Drawing.Point(9, 42);
+			this.numObstacleHeight.MaxValue = null;
+			this.numObstacleHeight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleHeight.Name = "numObstacleHeight";
+			this.numObstacleHeight.Size = new System.Drawing.Size(49, 20);
+			this.numObstacleHeight.TabIndex = 21;
+			this.numObstacleHeight.Text = "0";
+			this.numObstacleHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numObstacleHeight.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleHeight.ValueChanged += new System.EventHandler(this.numObstacleHeight_ValueChanged);
+			// 
+			// numObstacleWidth
+			// 
+			this.numObstacleWidth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numObstacleWidth.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numObstacleWidth.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleWidth.Location = new System.Drawing.Point(9, 19);
+			this.numObstacleWidth.MaxValue = null;
+			this.numObstacleWidth.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleWidth.Name = "numObstacleWidth";
+			this.numObstacleWidth.Size = new System.Drawing.Size(49, 20);
+			this.numObstacleWidth.TabIndex = 20;
+			this.numObstacleWidth.Text = "0";
+			this.numObstacleWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numObstacleWidth.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numObstacleWidth.ValueChanged += new System.EventHandler(this.numObstacleWidth_ValueChanged);
+			// 
+			// numWallVertical
+			// 
+			this.numWallVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numWallVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numWallVertical.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numWallVertical.Location = new System.Drawing.Point(97, 42);
+			this.numWallVertical.MaxValue = null;
+			this.numWallVertical.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numWallVertical.Name = "numWallVertical";
+			this.numWallVertical.Size = new System.Drawing.Size(87, 20);
+			this.numWallVertical.TabIndex = 21;
+			this.numWallVertical.Text = "0";
+			this.numWallVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numWallVertical.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numWallVertical.ValueChanged += new System.EventHandler(this.numWallVertical_ValueChanged);
+			// 
+			// numWallHorizontal
+			// 
+			this.numWallHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numWallHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numWallHorizontal.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numWallHorizontal.Location = new System.Drawing.Point(97, 19);
+			this.numWallHorizontal.MaxValue = null;
+			this.numWallHorizontal.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numWallHorizontal.Name = "numWallHorizontal";
+			this.numWallHorizontal.Size = new System.Drawing.Size(87, 20);
+			this.numWallHorizontal.TabIndex = 20;
+			this.numWallHorizontal.Text = "0";
+			this.numWallHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numWallHorizontal.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numWallHorizontal.ValueChanged += new System.EventHandler(this.numWallHorizontal_ValueChanged);
+			// 
+			// numRegisterVertical
+			// 
+			this.numRegisterVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numRegisterVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numRegisterVertical.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.Location = new System.Drawing.Point(97, 42);
+			this.numRegisterVertical.MaxValue = null;
+			this.numRegisterVertical.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.Name = "numRegisterVertical";
+			this.numRegisterVertical.Size = new System.Drawing.Size(87, 20);
+			this.numRegisterVertical.TabIndex = 2;
+			this.numRegisterVertical.Text = "1";
+			this.numRegisterVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRegisterVertical.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.ValueChanged += new System.EventHandler(this.numRegisterVertical_ValueChanged);
+			// 
+			// numRegisterLeft
+			// 
+			this.numRegisterLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numRegisterLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numRegisterLeft.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.Location = new System.Drawing.Point(97, 19);
+			this.numRegisterLeft.MaxValue = null;
+			this.numRegisterLeft.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.Name = "numRegisterLeft";
+			this.numRegisterLeft.Size = new System.Drawing.Size(87, 20);
+			this.numRegisterLeft.TabIndex = 1;
+			this.numRegisterLeft.Text = "1";
+			this.numRegisterLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRegisterLeft.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.ValueChanged += new System.EventHandler(this.numRegisterLeft_ValueChanged);
+			// 
+			// numSchraegeVertical
+			// 
+			this.numSchraegeVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numSchraegeVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numSchraegeVertical.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.Location = new System.Drawing.Point(97, 42);
+			this.numSchraegeVertical.MaxValue = null;
+			this.numSchraegeVertical.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.Name = "numSchraegeVertical";
+			this.numSchraegeVertical.Size = new System.Drawing.Size(65, 20);
+			this.numSchraegeVertical.TabIndex = 2;
+			this.numSchraegeVertical.Text = "1";
+			this.numSchraegeVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numSchraegeVertical.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeVertical.ValueChanged += new System.EventHandler(this.numSchraegeVertical_ValueChanged);
+			// 
+			// numSchraegeHorizontal
+			// 
+			this.numSchraegeHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numSchraegeHorizontal.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numSchraegeHorizontal.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.Location = new System.Drawing.Point(97, 19);
+			this.numSchraegeHorizontal.MaxValue = null;
+			this.numSchraegeHorizontal.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.Name = "numSchraegeHorizontal";
+			this.numSchraegeHorizontal.Size = new System.Drawing.Size(65, 20);
+			this.numSchraegeHorizontal.TabIndex = 1;
+			this.numSchraegeHorizontal.Text = "1";
+			this.numSchraegeHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numSchraegeHorizontal.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numSchraegeHorizontal.ValueChanged += new System.EventHandler(this.numSchraegeHorizontal_ValueChanged);
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(23, 6);
 			// 
 			// HithermPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(886, 465);
+			this.ClientSize = new System.Drawing.Size(886, 532);
 			this.Controls.Add(this.graphicalWallPanel);
 			this.Controls.Add(this.panelBottom);
 			this.Controls.Add(this.panelTop);
-			this.Controls.Add(this.toolStrip2);
-			this.Controls.Add(this.toolStrip1);
+			this.Controls.Add(this.toolStripSubmenu);
+			this.Controls.Add(this.toolStripMain);
 			this.Name = "HithermPlannerForm";
 			this.Text = "Hitherm - grafische Auslegung";
 			this.Load += new System.EventHandler(this.HithermPlannerForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HithermPlannerForm_FormClosing);
-			this.toolStrip1.ResumeLayout(false);
-			this.toolStrip1.PerformLayout();
-			this.toolStrip2.ResumeLayout(false);
-			this.toolStrip2.PerformLayout();
+			this.toolStripMain.ResumeLayout(false);
+			this.toolStripMain.PerformLayout();
+			this.toolStripSubmenu.ResumeLayout(false);
+			this.toolStripSubmenu.PerformLayout();
 			this.panelTop.ResumeLayout(false);
+			this.panelModifyObstacle.ResumeLayout(false);
+			this.panelModifyObstacle.PerformLayout();
+			this.groupBox16.ResumeLayout(false);
+			this.groupBox16.PerformLayout();
+			this.groupBox15.ResumeLayout(false);
+			this.groupBox15.PerformLayout();
+			this.groupBox14.ResumeLayout(false);
+			this.groupBox14.PerformLayout();
+			this.groupBox13.ResumeLayout(false);
+			this.groupBox13.PerformLayout();
+			this.groupBox12.ResumeLayout(false);
+			this.groupBox12.PerformLayout();
+			this.panelDefineWalls.ResumeLayout(false);
+			this.panelDefineWalls.PerformLayout();
+			this.groupBox3.ResumeLayout(false);
+			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
+			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
 			this.panelModifyHitherm.ResumeLayout(false);
 			this.panelModifyHitherm.PerformLayout();
 			this.groupBox6.ResumeLayout(false);
@@ -2193,26 +2286,6 @@ namespace Europlan.Common {
 			this.groupBox18.PerformLayout();
 			this.panelModifyConnection.ResumeLayout(false);
 			this.panelModifyConnection.PerformLayout();
-			this.panelModifyObstacle.ResumeLayout(false);
-			this.panelModifyObstacle.PerformLayout();
-			this.groupBox16.ResumeLayout(false);
-			this.groupBox16.PerformLayout();
-			this.groupBox15.ResumeLayout(false);
-			this.groupBox15.PerformLayout();
-			this.groupBox14.ResumeLayout(false);
-			this.groupBox14.PerformLayout();
-			this.groupBox13.ResumeLayout(false);
-			this.groupBox13.PerformLayout();
-			this.groupBox12.ResumeLayout(false);
-			this.groupBox12.PerformLayout();
-			this.groupBox8.ResumeLayout(false);
-			this.panelDefineWalls.ResumeLayout(false);
-			this.panelDefineWalls.PerformLayout();
-			this.groupBox3.ResumeLayout(false);
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
-			this.groupBox2.ResumeLayout(false);
-			this.groupBox2.PerformLayout();
 			this.panelBottom.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -2221,12 +2294,8 @@ namespace Europlan.Common {
 
 		#endregion
 
-		private System.Windows.Forms.ToolStrip toolStrip1;
-		private System.Windows.Forms.ToolStrip toolStrip2;
-		private System.Windows.Forms.ToolStripButton btnPick;
-		private System.Windows.Forms.ToolStripButton btnMove;
-		private System.Windows.Forms.ToolStripButton btnWall;
-		private System.Windows.Forms.ToolStripButton btnObstacle;
+		private System.Windows.Forms.ToolStrip toolStripMain;
+		private System.Windows.Forms.ToolStrip toolStripSubmenu;
 		private System.Windows.Forms.ToolStripButton btnZoomOut;
 		private System.Windows.Forms.ToolStripButton btnZoomIn;
 		private System.Windows.Forms.Panel panelTop;
@@ -2254,7 +2323,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnWallRevert;
 		private System.Windows.Forms.Button btnWallApply;
 		private HithermPlanner hithermPlanner;
-		private System.Windows.Forms.ToolStripButton btnRegisterVertical;
 		private System.Windows.Forms.Panel panelModifyHitherm;
 		private System.Windows.Forms.Label lblRegisterSelectedRegister;
 		private System.Windows.Forms.GroupBox groupBox4;
@@ -2318,14 +2386,10 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ListView lstError;
 		private System.Windows.Forms.ColumnHeader defaultColumn;
 		private System.Windows.Forms.Panel panelBottom;
-		private System.Windows.Forms.ToolStripButton btnConnection;
-		private System.Windows.Forms.ToolStripButton btnRegisterHorizontal;
 		private System.Windows.Forms.Panel panelModifyObstacle;
 		private System.Windows.Forms.Panel panelModifyConnection;
 		private System.Windows.Forms.Button btnObstacleBorder;
 		private System.Windows.Forms.Button btnObstacleRemove;
-		private System.Windows.Forms.GroupBox groupBox8;
-		private System.Windows.Forms.ComboBox cmbNewObstacleType;
 		private System.Windows.Forms.GroupBox groupBox12;
 		private NumericBox numObstacleHeight;
 		private NumericBox numObstacleWidth;
@@ -2352,7 +2416,6 @@ namespace Europlan.Common {
 		private NumericBox numObstacleMiddleDistanceLeft;
 		private System.Windows.Forms.Label label15;
 		private System.Windows.Forms.Label label18;
-		private System.Windows.Forms.ToolStripButton btnSchraege;
 		private System.Windows.Forms.Panel panelModifySchraege;
 		private System.Windows.Forms.Button btnSchraegeDelete;
 		private System.Windows.Forms.Button btnSchraegeRevert;
@@ -2373,6 +2436,23 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolTip toolTip;
 		private System.Windows.Forms.Button btnConnectionConnectDirect;
 		private System.Windows.Forms.Button btnConnectionConnectNormal;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripButton btnPick;
+		private System.Windows.Forms.ToolStripButton btnMove;
+		private System.Windows.Forms.ToolStripButton btnWall;
+		private System.Windows.Forms.ToolStripButton btnObstacle;
+		private System.Windows.Forms.ToolStripButton btnSchraege;
+		private System.Windows.Forms.ToolStripButton btnConnection;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripButton btnRegister;
+		private System.Windows.Forms.ToolStripButton btnObstacleDoor;
+		private System.Windows.Forms.ToolStripButton btnObstacleWindow;
+		private System.Windows.Forms.ToolStripButton btnObstacleTriangleWindowLeft;
+		private System.Windows.Forms.ToolStripButton btnObstacleTriangleWindowRight;
+		private System.Windows.Forms.ToolStripButton btnObstacleOther;
+		private System.Windows.Forms.ToolStripButton btnRegisterHorizontal;
+		private System.Windows.Forms.ToolStripButton btnRegisterVertical;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 
 
 	}
