@@ -131,6 +131,7 @@ namespace Europlan.Common {
 			}
 			if (ok) {
 				this.graphicalWallPanel.Room.Walls.Clear();
+				this.hithermPlanner.Product.PlannedCircuits.Clear();
 				NewWallForm form = new NewWallForm(true, false, 0, 0, false);
 				DialogResult result = form.ShowDialog();
 				if (result == DialogResult.OK) {

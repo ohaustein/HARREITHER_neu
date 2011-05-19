@@ -384,19 +384,33 @@ namespace Europlan.Common {
 									Segment2D second = new Segment2D(wall.PlanStartPoint.Value, planPoint);
 									double x = first.GetLength() < second.GetLength() ? first.GetLength() : second.GetLength();
 									x = (x * 100) / room.AssociatedPlan.Measure.Value;
-									if (form.ObstacleType == Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum.Door) {
-										GraphicalDoor door = new GraphicalDoor();
-										door.Width = form.Width;
-										door.Height = form.Height;
-										door.GraphPosX = x;
-										wall.Obstacles.Add(door);
-									} else {
-										GraphicalWindow window = new GraphicalWindow();
-										window.Width = form.Width;
-										window.Height = form.Height;
-										window.GraphPosX = x;
-										window.GraphPosY = form.HeightOffset;
-										wall.Obstacles.Add(window);
+									switch (form.ObstacleType) {
+										case GraphicalWallObstacle.ObstacleTypeEnum.Door:
+											GraphicalDoor door = new GraphicalDoor();
+											door.Width = form.Width;
+											door.Height = form.Height;
+											door.GraphPosX = x;
+											wall.Obstacles.Add(door);
+											break;
+										case GraphicalWallObstacle.ObstacleTypeEnum.Window:
+										case GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleLeft:
+										case GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleRight:
+											GraphicalWindow window = new GraphicalWindow();
+											window.Width = form.Width;
+											window.Height = form.Height;
+											window.GraphPosX = x;
+											window.GraphPosY = form.HeightOffset;
+											wall.Obstacles.Add(window);
+											window.ObstacleType = form.ObstacleType;
+											break;
+										case GraphicalWallObstacle.ObstacleTypeEnum.Other:
+											GraphicalOtherObstacle other = new GraphicalOtherObstacle();
+											other.Width = form.Width;
+											other.Height = form.Height;
+											other.GraphPosX = x;
+											other.GraphPosY = form.HeightOffset;
+											wall.Obstacles.Add(other);
+											break;
 									}
 								}
 								form.Dispose();
