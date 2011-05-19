@@ -1220,6 +1220,12 @@ namespace Europlan.Common {
 			DeleteVerbindung(SelectedObject as HithermRegisterVerbindung);
 		}
 
+		private void btnWallHelpLine_Click(object sender, EventArgs e) {
+			WallHelpLinesForm form = new WallHelpLinesForm(graphicalWallPanel.Room, graphicalWallPanel.SelectedWall);
+			form.ShowDialog();
+			form.Dispose();
+		}
+
 
 	}
 }
