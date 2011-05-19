@@ -78,7 +78,7 @@ namespace Europlan.Common {
 			this.rbWall.TabIndex = 1;
 			this.rbWall.Text = "Individuelle Hilfslinien für die aktuelle Wand bearbeiten";
 			this.rbWall.UseVisualStyleBackColor = true;
-			this.rbWall.CheckedChanged += new System.EventHandler(this.rbWall_CheckedChanged);
+			this.rbWall.CheckedChanged += new System.EventHandler(this.rbType_CheckedChanged);
 			// 
 			// rbGlobal
 			// 
@@ -91,7 +91,7 @@ namespace Europlan.Common {
 			this.rbGlobal.TabStop = true;
 			this.rbGlobal.Text = "Globale Hilfslinien für den gesamten Raum bearbeiten";
 			this.rbGlobal.UseVisualStyleBackColor = true;
-			this.rbGlobal.CheckedChanged += new System.EventHandler(this.rbGlobal_CheckedChanged);
+			this.rbGlobal.CheckedChanged += new System.EventHandler(this.rbType_CheckedChanged);
 			// 
 			// groupBox2
 			// 
@@ -151,7 +151,7 @@ namespace Europlan.Common {
 			this.lstOffsets.FormattingEnabled = true;
 			this.lstOffsets.Location = new System.Drawing.Point(7, 46);
 			this.lstOffsets.Name = "lstOffsets";
-			this.lstOffsets.Size = new System.Drawing.Size(116, 108);
+			this.lstOffsets.Size = new System.Drawing.Size(116, 121);
 			this.lstOffsets.TabIndex = 3;
 			this.lstOffsets.SelectedValueChanged += new System.EventHandler(this.lstOffsets_SelectedValueChanged);
 			// 
@@ -190,6 +190,7 @@ namespace Europlan.Common {
 			this.numOffset.Size = new System.Drawing.Size(116, 20);
 			this.numOffset.TabIndex = 0;
 			this.numOffset.Text = "0";
+			this.numOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numOffset.Value = new decimal(new int[] {
             0,
             0,

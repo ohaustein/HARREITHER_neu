@@ -18,13 +18,17 @@ namespace Europlan.Common {
 			InitializeComponent();
 			updateOngoing = true;
 
+			this.room = room;
+			this.wall = wall;
+
 			if (wall == null) {
 				rbWall.Enabled = false;
 				chkUseGlobal.Enabled = false;
 			} else {
 				chkUseGlobal.Checked = wall.ShowGlobalHelpLines;
 			}
-			lstOffsets.DataSource = room.HelpLines;
+			ApplyDataSource(GetOffsets());
+			numOffset.Text = "";
 			
 			updateOngoing = false;
 			this.SetLanguage();
@@ -47,16 +51,16 @@ namespace Europlan.Common {
 			this.Size = settings.GetSize("Size", this.Size);
 		}
 
-		private void rbGlobal_CheckedChanged(object sender, EventArgs e) {
-
-		}
-
-		private void rbWall_CheckedChanged(object sender, EventArgs e) {
-
+		private void rbType_CheckedChanged(object sender, EventArgs e) {
+			if (!updateOngoing) {
+				ApplyDataSource(GetOffsets());
+			}
 		}
 
 		private void chkUseGlobal_CheckedChanged(object sender, EventArgs e) {
-
+			if (!updateOngoing) {
+				wall.ShowGlobalHelpLines = chkUseGlobal.Checked;
+			}
 		}
 
 		private void numOffset_TextChanged(object sender, EventArgs e) {
@@ -70,11 +74,20 @@ namespace Europlan.Common {
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e) {
-
+			List<double> offsets = GetOffsets();
+			if (!offsets.Contains((double)numOffset.Value)) {
+				offsets.Add((double)numOffset.Value);
+				offsets.Sort();
+				ApplyDataSource(offsets);
+			}
+			numOffset.Text = "";
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e) {
-
+			if (lstOffsets.SelectedIndex >= 0) {
+				GetOffsets().RemoveAt(lstOffsets.SelectedIndex);
+				ApplyDataSource(GetOffsets());
+			}
 		}
 
 		private void lstOffsets_SelectedValueChanged(object sender, EventArgs e) {
@@ -86,6 +99,19 @@ namespace Europlan.Common {
 				}
 			}
 
+		}
+
+		private void ApplyDataSource(List<double> dataSource) {
+			lstOffsets.DataSource = null;
+			lstOffsets.DataSource = dataSource;
+		}
+
+		private List<double> GetOffsets() {
+			if (rbGlobal.Checked) {
+				return room.HelpLines;
+			} else {
+				return wall.HelpLines;
+			}
 		}
 
 	}
