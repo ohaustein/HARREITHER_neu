@@ -1222,6 +1222,7 @@ namespace Europlan.Common {
 			WallHelpLinesForm form = new WallHelpLinesForm(graphicalWallPanel.Room, graphicalWallPanel.SelectedWall);
 			form.ShowDialog();
 			form.Dispose();
+			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
 
