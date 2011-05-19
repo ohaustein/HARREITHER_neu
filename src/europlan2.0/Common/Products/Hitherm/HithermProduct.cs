@@ -1090,14 +1090,14 @@ namespace Europlan.Common {
 					circuit = this.MoveSingleRegisterToCircuit(register, circuitId);
 				}
 				if (circuit != null) {
-					List<HithermRegisterVerbindung> linksToMove = new List<HithermRegisterVerbindung>();
-					foreach (HithermRegisterVerbindung link in oldCircuit.Links) {
+					List<GraphicalHithermVerbindung> linksToMove = new List<GraphicalHithermVerbindung>();
+					foreach (GraphicalHithermVerbindung link in oldCircuit.Links) {
 						if ((link.Start != null && circuit.Registers.Contains(link.Start)) ||
 							(link.End != null && circuit.Registers.Contains(link.End))) {
 							linksToMove.Add(link);
 						}
 					}
-					foreach (HithermRegisterVerbindung link in linksToMove) {
+					foreach (GraphicalHithermVerbindung link in linksToMove) {
 						oldCircuit.Links.Remove(link);
 						link.Circuit = circuit;
 						circuit.Links.Add(link);
@@ -1136,13 +1136,13 @@ namespace Europlan.Common {
 					this.circuitIds.Remove(this.registerCircuits[register]);
 				} else {
 					// delete connections of the deleted register
-					List<HithermRegisterVerbindung> linksToDelete = new List<HithermRegisterVerbindung>();
-					foreach (HithermRegisterVerbindung link in hc.Links) {
+					List<GraphicalHithermVerbindung> linksToDelete = new List<GraphicalHithermVerbindung>();
+					foreach (GraphicalHithermVerbindung link in hc.Links) {
 						if (link.Start == register || link.End == register) {
 							linksToDelete.Add(link);
 						}
 					}
-					foreach (HithermRegisterVerbindung link in linksToDelete) {
+					foreach (GraphicalHithermVerbindung link in linksToDelete) {
 						hc.Links.Remove(link);
 					}
 				}

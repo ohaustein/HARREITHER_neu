@@ -38,8 +38,8 @@ namespace Europlan.Common {
 		private PossibleConnection endConnection = null;
 		private PossibleConnection startConnection = null;
 		private List<PossibleConnection> highlightedConnections = new List<PossibleConnection>();
-		private HithermRegisterVerbindung newConnection = new HithermRegisterVerbindung();
-		private HithermRegisterVerbindung newConnectionDraw = new HithermRegisterVerbindung(false);
+		private GraphicalHithermVerbindung newConnection = new GraphicalHithermVerbindung();
+		private GraphicalHithermVerbindung newConnectionDraw = new GraphicalHithermVerbindung(false);
 
 		public HithermRegister.RohrabstandEnum NewRegisterRohrabstand {
 			get { return newRegisterRohrabstand; }
@@ -116,7 +116,7 @@ namespace Europlan.Common {
 				}
 			}
 			foreach (HithermCircuit c in this.product.PlannedCircuits) {
-				foreach (HithermRegisterVerbindung link in c.Links) {
+				foreach (GraphicalHithermVerbindung link in c.Links) {
 					link.PaintObject(g, 0, 0, this.connectedWallPanel.SelectedObject, scale);
 				}
 			}
@@ -239,14 +239,14 @@ namespace Europlan.Common {
 								while (deleteCircuit.Registers.Count > 0) {
 									this.product.MoveRegisterToCircuit(deleteCircuit.Registers[0], combinedCircuitNr);
 								}
-								HithermRegisterVerbindung newLink;
-								newLink = new HithermRegisterVerbindung(startRegister, endRegister, this.newConnection.Vertices, combinedCircuit, Project.Instance.GetPlannedProduct(this.product));
+								GraphicalHithermVerbindung newLink;
+								newLink = new GraphicalHithermVerbindung(startRegister, endRegister, this.newConnection.Vertices, combinedCircuit, Project.Instance.GetPlannedProduct(this.product));
 								combinedCircuit.Links.Add(newLink);
 								this.product.CorrectCircuitIds();
 							} else {
 								HithermCircuit circuitToAdd = (startCircuit == null ? endCircuit : startCircuit);
-								HithermRegisterVerbindung newLink;
-								newLink = new HithermRegisterVerbindung(startRegister, endRegister, this.newConnection.Vertices, this.product.GetCircuitForRegister(this.newConnectionStart.Register), Project.Instance.GetPlannedProduct(this.product));
+								GraphicalHithermVerbindung newLink;
+								newLink = new GraphicalHithermVerbindung(startRegister, endRegister, this.newConnection.Vertices, this.product.GetCircuitForRegister(this.newConnectionStart.Register), Project.Instance.GetPlannedProduct(this.product));
 								circuitToAdd.Links.Add(newLink);
 							}
 							this.newConnectionStart = null;
@@ -454,10 +454,10 @@ namespace Europlan.Common {
 					}
 				}
 				if (this.product == null) {
-					this.newConnectionDraw = new HithermRegisterVerbindung(null, null, new List<Point2D>(), null, null);
+					this.newConnectionDraw = new GraphicalHithermVerbindung(null, null, new List<Point2D>(), null, null);
 					this.newConnectionDraw.Finished = false;
 				} else {
-					this.newConnectionDraw = new HithermRegisterVerbindung(null, null, new List<Point2D>(), null, Project.Instance.GetPlannedProduct(this.product));
+					this.newConnectionDraw = new GraphicalHithermVerbindung(null, null, new List<Point2D>(), null, Project.Instance.GetPlannedProduct(this.product));
 					this.newConnectionDraw.Finished = false;
 				}
 
@@ -617,7 +617,7 @@ namespace Europlan.Common {
 				return null;
 			}
 			foreach (HithermCircuit hc in this.product.PlannedCircuits) {
-				foreach (HithermRegisterVerbindung link in hc.Links) {
+				foreach (GraphicalHithermVerbindung link in hc.Links) {
 					if (link.HitTest(mousePosInPlan, 2)) {
 						return link;
 					}

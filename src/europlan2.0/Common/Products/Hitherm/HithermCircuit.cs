@@ -8,7 +8,7 @@ namespace Europlan.Common {
 	public class HithermCircuit : Circuit {
 
 		private List<HithermRegister> registers = new List<HithermRegister>();
-		private List<HithermRegisterVerbindung> links = new List<HithermRegisterVerbindung>();
+		private List<GraphicalHithermVerbindung> links = new List<GraphicalHithermVerbindung>();
 
 		public HithermCircuit() {
 
@@ -19,7 +19,7 @@ namespace Europlan.Common {
 			set { this.registers = value; }
 		}
 
-		public List<HithermRegisterVerbindung> Links {
+		public List<GraphicalHithermVerbindung> Links {
 			get { return this.links; }
 			set { this.links = value; }
 		}
@@ -401,7 +401,7 @@ namespace Europlan.Common {
 		}
 
 		public bool IsConnectionAvailable(HithermRegister register, bool input) {
-			foreach (HithermRegisterVerbindung link in this.links) {
+			foreach (GraphicalHithermVerbindung link in this.links) {
 				if (input) {
 					if (link.End == register) {
 						return false;
@@ -431,7 +431,7 @@ namespace Europlan.Common {
 		}
 
 		public HithermRegister GetNextConnectedRegister(HithermRegister register) {
-			HithermRegisterVerbindung link = this.GetOutputLink(register);
+			GraphicalHithermVerbindung link = this.GetOutputLink(register);
 			if (link != null) {
 				return link.End;
 			}
@@ -439,18 +439,18 @@ namespace Europlan.Common {
 		}
 
 		public HithermRegister GetPreviousConnectedRegister(HithermRegister register) {
-			HithermRegisterVerbindung link = this.GetInputLink(register);
+			GraphicalHithermVerbindung link = this.GetInputLink(register);
 			if (link != null) {
 				return link.Start;
 			}
 			return null;
 		}
 
-		public HithermRegisterVerbindung GetOutputLink(HithermRegister register) {
+		public GraphicalHithermVerbindung GetOutputLink(HithermRegister register) {
 			if (register == null) {
 				return null;
 			}
-			foreach (HithermRegisterVerbindung link in this.Links) {
+			foreach (GraphicalHithermVerbindung link in this.Links) {
 				if (link.Start == register) {
 					return link;
 				}
@@ -458,11 +458,11 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public HithermRegisterVerbindung GetInputLink(HithermRegister register) {
+		public GraphicalHithermVerbindung GetInputLink(HithermRegister register) {
 			if (register == null) {
 				return null;
 			}
-			foreach (HithermRegisterVerbindung link in this.Links) {
+			foreach (GraphicalHithermVerbindung link in this.Links) {
 				if (link.End == register) {
 					return link;
 				}
@@ -473,7 +473,7 @@ namespace Europlan.Common {
 		public bool IsConnectedToGround(bool checkVorlauf, bool checkRuecklauf) {
 			bool vorlaufConnected = false;
 			bool ruecklaufConnected = false;
-			foreach (HithermRegisterVerbindung link in this.Links) {
+			foreach (GraphicalHithermVerbindung link in this.Links) {
 				if (checkRuecklauf && link.Start == null) {
 					ruecklaufConnected = true;
 					if (vorlaufConnected) {

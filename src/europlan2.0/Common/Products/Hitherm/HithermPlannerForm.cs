@@ -300,8 +300,8 @@ namespace Europlan.Common {
 				} else if (SelectedObject is GraphicalWallObstacle) {
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
 					(SelectedObject as GraphicalWallObstacle).BackupState();
-				} else if (SelectedObject is HithermRegisterVerbindung) {
-					UpdateModifyConnectionPanel(SelectedObject as HithermRegisterVerbindung);
+				} else if (SelectedObject is GraphicalHithermVerbindung) {
+					UpdateModifyConnectionPanel(SelectedObject as GraphicalHithermVerbindung);
 				}
 			} 
 			if (e.OldSelectedObject is GraphicalWallObstacle) {
@@ -321,15 +321,15 @@ namespace Europlan.Common {
 					foreach (GraphicalRegisterWrapper wrapper in toDelete) {
 						DeleteRegister(wrapper as GraphicalHithermRegisterWrapper);
 					}
-					List<HithermRegisterVerbindung> linksToDelete = new List<HithermRegisterVerbindung>();
+					List<GraphicalHithermVerbindung> linksToDelete = new List<GraphicalHithermVerbindung>();
 					foreach (HithermCircuit c in this.hithermPlanner.Product.PlannedCircuits) {
-						foreach (HithermRegisterVerbindung link in c.Links) {
+						foreach (GraphicalHithermVerbindung link in c.Links) {
 							if (link.CollisionTest(outsideBorder, offset.X, offset.Y, false)) {
 								linksToDelete.Add(link);
 							}
 						}
 					}
-					foreach (HithermRegisterVerbindung link in linksToDelete) {
+					foreach (GraphicalHithermVerbindung link in linksToDelete) {
 						DeleteVerbindung(link);
 					}
 				}
@@ -347,8 +347,8 @@ namespace Europlan.Common {
 					UpdateModifyRegisterPanel(SelectedObject as GraphicalHithermRegisterWrapper);
 				} else if (SelectedObject is GraphicalWallObstacle) {
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
-				} else if (SelectedObject is HithermRegisterVerbindung) {
-					UpdateModifyConnectionPanel(SelectedObject as HithermRegisterVerbindung);
+				} else if (SelectedObject is GraphicalHithermVerbindung) {
+					UpdateModifyConnectionPanel(SelectedObject as GraphicalHithermVerbindung);
 				}
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
@@ -523,7 +523,7 @@ namespace Europlan.Common {
 		}
 
 
-		private void UpdateModifyConnectionPanel(HithermRegisterVerbindung connection) {
+		private void UpdateModifyConnectionPanel(GraphicalHithermVerbindung connection) {
 			updateOngoing = true;
 			this.panelModifyConnection.BringToFront();
 			if (connection != null) {
@@ -637,7 +637,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void UpdateModifyConnectionPanelButtons(HithermRegisterVerbindung connection) {
+		private void UpdateModifyConnectionPanelButtons(GraphicalHithermVerbindung connection) {
 			if (connection != null) {
 				this.btnConnectionDelete.Enabled = true;
 			} else {
@@ -1053,14 +1053,14 @@ namespace Europlan.Common {
 						DeleteObstacle(SelectedObject as GraphicalWallObstacle);
 					} else if (SelectedObject is GraphicalHithermRegisterWrapper) {
 						DeleteRegister(SelectedObject as GraphicalHithermRegisterWrapper);
-					} else if (SelectedObject is HithermRegisterVerbindung) {
-						DeleteVerbindung(SelectedObject as HithermRegisterVerbindung);
+					} else if (SelectedObject is GraphicalHithermVerbindung) {
+						DeleteVerbindung(SelectedObject as GraphicalHithermVerbindung);
 					}
 				}
 			}
 		}
 
-		private void DeleteVerbindung(HithermRegisterVerbindung verbindung) {
+		private void DeleteVerbindung(GraphicalHithermVerbindung verbindung) {
 			if (verbindung != null) {
 				foreach (HithermCircuit c in this.hithermPlanner.Product.PlannedCircuits) {
 					if (c.Links.Contains(verbindung)) {
@@ -1207,7 +1207,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnConnectionDelete_Click(object sender, EventArgs e) {
-			DeleteVerbindung(SelectedObject as HithermRegisterVerbindung);
+			DeleteVerbindung(SelectedObject as GraphicalHithermVerbindung);
 		}
 
 		private void btnWallHelpLine_Click(object sender, EventArgs e) {

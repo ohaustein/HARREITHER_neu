@@ -8,7 +8,7 @@ using WW.Math.Geometry;
 using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
-	public class HithermRegisterVerbindung : IGraphicalWallObject {
+	public class GraphicalHithermVerbindung : IGraphicalWallObject {
 		private static double WIDTH = 2.0;
 
 		private HithermRegister start;
@@ -27,16 +27,16 @@ namespace Europlan.Common {
 		  set { vertices = value; }
 		}
 
-		internal HithermRegisterVerbindung() {
+		internal GraphicalHithermVerbindung() {
 			this.vertices = new List<Point2D>();
 		}
 
-		internal HithermRegisterVerbindung(bool finished) {
+		internal GraphicalHithermVerbindung(bool finished) {
 			this.vertices = new List<Point2D>();
 			this.finished = finished;
 		}
 
-		public HithermRegisterVerbindung(HithermRegister start, HithermRegister end, IEnumerable<Point2D> vertices, HithermCircuit circuit, PlannedProduct product) {
+		public GraphicalHithermVerbindung(HithermRegister start, HithermRegister end, IEnumerable<Point2D> vertices, HithermCircuit circuit, PlannedProduct product) {
 			this.start = start;
 			this.end = end;
 			this.vertices = new List<Point2D>(vertices);
@@ -473,7 +473,7 @@ namespace Europlan.Common {
 				}
 			}
 			foreach (HithermCircuit hc in this.Product.Product.PlannedCircuits) {
-				foreach (HithermRegisterVerbindung link in hc.Links) {
+				foreach (GraphicalHithermVerbindung link in hc.Links) {
 					if (link != this && link.CollisionTest(linkBorders, offsetX, offsetY, true)) {
 						return false;
 					}

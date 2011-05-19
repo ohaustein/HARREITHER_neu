@@ -321,9 +321,9 @@ namespace Europlan.Common {
 			return bestRohre;
 		}
 
-		public HithermRegisterVerbindung GetInputConnection() {
+		public GraphicalHithermVerbindung GetInputConnection() {
 			HithermCircuit c = this.product.GetCircuitForRegister(this.register);
-			foreach (HithermRegisterVerbindung link in c.Links) {
+			foreach (GraphicalHithermVerbindung link in c.Links) {
 				if (link.End == this.register) {
 					return link;
 				}
@@ -331,9 +331,9 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public HithermRegisterVerbindung GetOutputConnection() {
+		public GraphicalHithermVerbindung GetOutputConnection() {
 			HithermCircuit c = this.product.GetCircuitForRegister(this.register);
-			foreach (HithermRegisterVerbindung link in c.Links) {
+			foreach (GraphicalHithermVerbindung link in c.Links) {
 				if (link.Start == this.register) {
 					return link;
 				}
@@ -345,7 +345,7 @@ namespace Europlan.Common {
 		private double startDragRegisterX, startDragRegisterY, startDragRegisterWidth;
 		private int startDragRegisterHeight, startRegisterRohre;
 		private List<Point2D> startInputConnectionVertices, startOutputConnectionVertices;
-		private HithermRegisterVerbindung startInputConnection, startOutputConnection;
+		private GraphicalHithermVerbindung startInputConnection, startOutputConnection;
 
 		public override bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
 			this.startDrag = planPoint;
@@ -414,15 +414,15 @@ namespace Europlan.Common {
 
 		public override bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
 			HithermCircuit circuit = product.GetCircuitForRegister(this.register);
-			List<HithermRegisterVerbindung> linksToDel = new List<HithermRegisterVerbindung>();
-			foreach (HithermRegisterVerbindung link in circuit.Links) {
+			List<GraphicalHithermVerbindung> linksToDel = new List<GraphicalHithermVerbindung>();
+			foreach (GraphicalHithermVerbindung link in circuit.Links) {
 				if (link.Start == this.register && link.Vertices.Count == 0) {
 					linksToDel.Add(link);
 				} else if (link.End == this.register && link.Vertices.Count == 0) {
 					linksToDel.Add(link);
 				}
 			}
-			foreach (HithermRegisterVerbindung link in linksToDel) {
+			foreach (GraphicalHithermVerbindung link in linksToDel) {
 				circuit.Links.Remove(link);
 			}
 
@@ -446,7 +446,7 @@ namespace Europlan.Common {
 					}
 				}
 				foreach (HithermCircuit hc in this.product.PlannedCircuits) {
-					foreach (HithermRegisterVerbindung link in hc.Links) {
+					foreach (GraphicalHithermVerbindung link in hc.Links) {
 						if (link.Start != this.Register && link.End != this.Register && link.CollisionTest(registerBorders, 0, 0, false)) {
 							return false;
 						}
@@ -538,7 +538,7 @@ namespace Europlan.Common {
 			}
 
 			HithermCircuit circuit = product.GetCircuitForRegister(this.register);
-			foreach (HithermRegisterVerbindung link in circuit.Links) {
+			foreach (GraphicalHithermVerbindung link in circuit.Links) {
 				if (link.Start == this.register) {
 					//Point2D newStartPoint = this.GetOutputConnectionPoint(offset.X, offset.Y, 0);
 					/*newStartPoint.X = newStartPoint.X / 100;
