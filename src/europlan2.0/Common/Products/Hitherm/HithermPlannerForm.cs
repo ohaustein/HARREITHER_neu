@@ -534,7 +534,6 @@ namespace Europlan.Common {
 				this.btnWallRevert.Enabled = unsavedChanges;
 				this.btnWallDelete.Enabled = true;
 				this.btnWallEdgeDistance.Enabled = true;
-				this.btnWallHelpLine.Enabled = true;
 				int index = this.graphicalWallPanel.Room.Walls.IndexOf(wall);
 				if (index > 0) {
 					this.btnWallLeft.Enabled = true;
@@ -556,7 +555,6 @@ namespace Europlan.Common {
 				this.btnWallRevert.Enabled = false;
 				this.btnWallDelete.Enabled = false;
 				this.btnWallEdgeDistance.Enabled = false;
-				this.btnWallHelpLine.Enabled = false;
 			}
 		}
 
