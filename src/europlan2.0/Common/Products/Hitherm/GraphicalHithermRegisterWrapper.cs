@@ -272,7 +272,7 @@ namespace Europlan.Common {
 		}
 
 		public PossibleHithermRegisterConnection GetInputConnection(double xOffset, double yOffset, HithermProduct product, HithermCircuit circuit) {
-			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset, 0), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL);
+			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset, 0), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL);
 		}
 
 		public override bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
@@ -321,7 +321,7 @@ namespace Europlan.Common {
 			return bestRohre;
 		}
 
-		public GraphicalHithermVerbindung GetInputConnection() {
+		public GraphicalHithermVerbindung GetInputLink() {
 			HithermCircuit c = this.product.GetCircuitForRegister(this.register);
 			foreach (GraphicalHithermVerbindung link in c.Links) {
 				if (link.End == this.register) {
@@ -331,7 +331,7 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public GraphicalHithermVerbindung GetOutputConnection() {
+		public GraphicalHithermVerbindung GetOutputLink() {
 			HithermCircuit c = this.product.GetCircuitForRegister(this.register);
 			foreach (GraphicalHithermVerbindung link in c.Links) {
 				if (link.Start == this.register) {
@@ -355,8 +355,8 @@ namespace Europlan.Common {
 			this.startDragRegisterWidth = this.register.RegisterBreiteForDrawing;
 			this.startRegisterRohre = this.register.Rohre;
 
-			this.startInputConnection = this.GetInputConnection();
-			this.startOutputConnection = this.GetOutputConnection();
+			this.startInputConnection = this.GetInputLink();
+			this.startOutputConnection = this.GetOutputLink();
 			if (this.startInputConnection != null) {
 				this.startInputConnectionVertices = new List<Point2D>(this.startInputConnection.Vertices);
 			}

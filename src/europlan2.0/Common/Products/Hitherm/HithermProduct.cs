@@ -1186,6 +1186,9 @@ namespace Europlan.Common {
 						this.registerCircuits[hr] = i;
 						hr.PlannedProduct = pp;
 					}
+					foreach (GraphicalHithermVerbindung link in hc.Links) {
+						link.FinalizeLoading();
+					}
 					i++;
 				}
 			}
@@ -1438,7 +1441,32 @@ namespace Europlan.Common {
 		}
 
 		public void CorrectCircuitIds() {
-			int newId = this.GetNewHkId();
+			List<HithermCircuit> notConnectedCircuits = new List<HithermCircuit>();
+			for (int i = 0; i < this.PlannedCircuits.Count; i++) {
+				HithermCircuit hc = this.PlannedCircuits[i] as HithermCircuit;
+				if (!hc.IsConnectedToGround(false, false)) {
+					notConnectedCircuits.Add(hc);
+					this.PlannedCircuits.RemoveAt(i);
+					i--;
+				}
+			}
+			foreach (HithermCircuit hc in notConnectedCircuits) {
+				this.PlannedCircuits.Add(hc);
+			}
+			this.circuitIds.Clear();
+			this.registerCircuits.Clear();
+			int nr = 1;
+			PlannedProduct pp = Project.Instance.GetPlannedProduct(this);
+			foreach (HithermCircuit hc in this.circuits) {
+				this.circuitIds[nr] = hc;
+				foreach (HithermRegister hr in hc.Registers) {
+					this.registerCircuits[hr] = nr;
+					hr.PlannedProduct = pp;
+				}
+				nr++;
+			}
+
+			/*int newId = this.GetNewHkId();
 			while (newId < this.PlannedCircuits.Count + 1) {
 				HithermCircuit circuitToRename = null;
 				foreach (HithermCircuit c in this.PlannedCircuits) {
@@ -1451,10 +1479,10 @@ namespace Europlan.Common {
 				}
 				this.ChangeCircuitId(circuitToRename, newId);
 				newId = this.GetNewHkId();
-			}
+			}*/
 		}
 
-		private int GetCircuitId(HithermCircuit circuit) {
+		/*private int GetCircuitId(HithermCircuit circuit) {
 			foreach (KeyValuePair<int, HithermCircuit> kvp in this.circuitIds) {
 				if (kvp.Value == circuit) {
 					return kvp.Key;
@@ -1467,7 +1495,7 @@ namespace Europlan.Common {
 			while (circuit.Registers != null && circuit.Registers.Count > 0) {
 				this.MoveRegisterToCircuit(circuit.Registers[0], newId);
 			}
-		}
+		}*/
 
 	}
 	

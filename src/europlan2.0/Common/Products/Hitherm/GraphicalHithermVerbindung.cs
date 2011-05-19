@@ -74,6 +74,13 @@ namespace Europlan.Common {
 			this.product = product;
 		}
 
+		public void FinalizeLoading() {
+			PlannedProduct tmpProduct = this.Product;
+			HithermCircuit tmpCircuit = this.Circuit;
+			HithermRegister tmpRegister = this.End;
+			tmpRegister = this.Start;
+		}
+
 		public bool IsMoveable {
 			get { return false; }
 		}

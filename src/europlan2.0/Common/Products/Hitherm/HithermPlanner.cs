@@ -242,13 +242,13 @@ namespace Europlan.Common {
 								GraphicalHithermVerbindung newLink;
 								newLink = new GraphicalHithermVerbindung(startRegister, endRegister, this.newConnection.Vertices, combinedCircuit, Project.Instance.GetPlannedProduct(this.product));
 								combinedCircuit.Links.Add(newLink);
-								this.product.CorrectCircuitIds();
 							} else {
 								HithermCircuit circuitToAdd = (startCircuit == null ? endCircuit : startCircuit);
 								GraphicalHithermVerbindung newLink;
 								newLink = new GraphicalHithermVerbindung(startRegister, endRegister, this.newConnection.Vertices, this.product.GetCircuitForRegister(this.newConnectionStart.Register), Project.Instance.GetPlannedProduct(this.product));
 								circuitToAdd.Links.Add(newLink);
 							}
+							this.product.CorrectCircuitIds();
 							this.newConnectionStart = null;
 							this.endConnection = null;
 							this.newConnection.Vertices.Clear();
