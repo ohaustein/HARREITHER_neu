@@ -39,8 +39,8 @@ namespace Europlan.Common {
 			//window.Width = 100;
 			//window.Height = 120;
 			//this.obstacles.Add(window);
-			helpLines.Add(20);
-			helpLines.Add(200);
+			//helpLines.Add(20);
+			//helpLines.Add(200);
 
 		}
 
