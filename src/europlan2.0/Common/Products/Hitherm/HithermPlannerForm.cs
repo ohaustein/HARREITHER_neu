@@ -88,7 +88,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnWallNewWall_Click(object sender, EventArgs e) {
-			NewWallForm form = new NewWallForm(false, false, SelectedObject != null ? (SelectedObject as GraphicalWall).GetWallWidth() * 100 : 0, graphicalWallPanel.Room.Walls.Count);
+			NewWallForm form = new NewWallForm(false, false, SelectedObject != null ? (SelectedObject as GraphicalWall).GetWallWidth() * 100 : 0, graphicalWallPanel.Room.Walls.Count, (graphicalWallPanel.SelectedWall != null && !graphicalWallPanel.SelectedWall.IsDachSchraege));
 			DialogResult result = form.ShowDialog();
 			if (result == DialogResult.OK) {
 				double height = form.Height / 100.0;
@@ -131,7 +131,7 @@ namespace Europlan.Common {
 			}
 			if (ok) {
 				this.graphicalWallPanel.Room.Walls.Clear();
-				NewWallForm form = new NewWallForm(true, false, 0, 0);
+				NewWallForm form = new NewWallForm(true, false, 0, 0, false);
 				DialogResult result = form.ShowDialog();
 				if (result == DialogResult.OK) {
 					double height = form.Height / 100.0;

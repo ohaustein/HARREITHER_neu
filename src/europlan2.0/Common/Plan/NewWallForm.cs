@@ -24,13 +24,14 @@ namespace Europlan.Common {
 		private double selectedWidth = 0;
 		private int wallCount = 0;
 
-		public NewWallForm(bool autoGeneration, bool isCompact, double selectedWidth, int wallCount) {
+		public NewWallForm(bool autoGeneration, bool isCompact, double selectedWidth, int wallCount, bool allowSchraege) {
 			InitializeComponent();
 
 			this.autoGeneration = autoGeneration;
 			this.isCompact = isCompact;
 			this.selectedWidth = selectedWidth;
 			this.wallCount = wallCount;
+			rbSchraege.Enabled = allowSchraege;
 
 			this.numWidth.Enabled = !autoGeneration;
 			this.numHeight.Value = (decimal)defaultHeight;
