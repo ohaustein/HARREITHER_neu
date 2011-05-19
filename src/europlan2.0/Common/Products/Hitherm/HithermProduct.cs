@@ -1436,6 +1436,39 @@ namespace Europlan.Common {
 			}
 			return newHkId;
 		}
+
+		public void CorrectCircuitIds() {
+			int newId = this.GetNewHkId();
+			while (newId < this.PlannedCircuits.Count + 1) {
+				HithermCircuit circuitToRename = null;
+				foreach (HithermCircuit c in this.PlannedCircuits) {
+					if (this.GetCircuitId(c) > this.PlannedCircuits.Count) {
+						circuitToRename = c;
+					}
+				}
+				if (circuitToRename == null) {
+					break;
+				}
+				this.ChangeCircuitId(circuitToRename, newId);
+				newId = this.GetNewHkId();
+			}
+		}
+
+		private int GetCircuitId(HithermCircuit circuit) {
+			foreach (KeyValuePair<int, HithermCircuit> kvp in this.circuitIds) {
+				if (kvp.Value == circuit) {
+					return kvp.Key;
+				}
+			}
+			return -1;
+		}
+
+		public void ChangeCircuitId(HithermCircuit circuit, int newId) {
+			while (circuit.Registers != null && circuit.Registers.Count > 0) {
+				this.MoveRegisterToCircuit(circuit.Registers[0], newId);
+			}
+		}
+
 	}
 	
 }

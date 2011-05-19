@@ -808,6 +808,7 @@ namespace Europlan.Common {
 						wrapperWall.Registers.Remove(register);
 					}
 					hithermPlanner.Product.RemoveRegisterFromCircuit(register.Register);
+					this.hithermPlanner.Product.CorrectCircuitIds();
 				}
 				if (register == SelectedObject) {
 					UpdateModifyRegisterPanel(register);
@@ -1058,27 +1059,7 @@ namespace Europlan.Common {
 						}
 						if (verbindung.Start != null && verbindung.End != null) {
 							this.hithermPlanner.Product.MoveRegisterToCircuit(verbindung.End, this.hithermPlanner.Product.GetNewHkId());
-							/*HithermCircuit oldCircuit = verbindung.Circuit;
-							//verbindung.Start = null;
-							List<HithermRegister> registersToMove = c.GetAllConnectedRegisters(verbindung.End);
-							int hkId = this.hithermPlanner.Product.GetNewHkId();
-							foreach (HithermRegister register in registersToMove) {
-								this.hithermPlanner.Product.MoveRegisterToCircuit(register, hkId);
-							}
-							if (registersToMove.Count > 0) {
-								HithermCircuit newCircuit = this.hithermPlanner.Product.GetCircuitForRegister(registersToMove[0]);
-								if (newCircuit != null) {
-									foreach (HithermRegisterVerbindung link in oldCircuit.Links) {
-										if ((link.Start != null && newCircuit.Registers.Contains(link.Start)) ||
-											(link.End != null && newCircuit.Registers.Contains(link.End))) {
-											newCircuit.Links.Add(link);
-										}
-									}
-									foreach (HithermRegisterVerbindung link in newCircuit.Links) {
-										oldCircuit.Links.Remove(link);
-									}
-								}
-							}*/
+							this.hithermPlanner.Product.CorrectCircuitIds();
 						}
 						this.graphicalWallPanel.InvalidateGraphics();
 						break;

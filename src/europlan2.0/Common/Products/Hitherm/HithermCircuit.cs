@@ -469,5 +469,28 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+
+		public bool IsConnectedToGround(bool checkVorlauf, bool checkRuecklauf) {
+			bool vorlaufConnected = false;
+			bool ruecklaufConnected = false;
+			foreach (HithermRegisterVerbindung link in this.Links) {
+				if (checkRuecklauf && link.Start == null) {
+					ruecklaufConnected = true;
+					if (vorlaufConnected) {
+						break;
+					}
+				}
+				if (checkVorlauf && link.End == null) {
+					vorlaufConnected = true;
+					if (ruecklaufConnected) {
+						break;
+					}
+				}
+			}
+			if (!checkVorlauf && !checkRuecklauf) {
+				return vorlaufConnected || ruecklaufConnected;
+			}
+			return (vorlaufConnected || !checkVorlauf) && (ruecklaufConnected || !checkRuecklauf);
+		}
 	}
 }

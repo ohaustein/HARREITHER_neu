@@ -239,42 +239,19 @@ namespace Europlan.Common {
 								while (deleteCircuit.Registers.Count > 0) {
 									this.product.MoveRegisterToCircuit(deleteCircuit.Registers[0], combinedCircuitNr);
 								}
-								/*List<HithermRegister> registersToMove = new List<HithermRegister>(deleteCircuit.Registers);
-								foreach (HithermRegister register in registersToMove) {
-									this.product.MoveRegisterToCircuit(register, this.newConnectionStart.Register.Heizkreis);
-								}*/
-								/*foreach (HithermRegisterVerbindung link in deleteCircuit.Links) {
-									link.Circuit = combinedCircuit;
-									combinedCircuit.Links.Add(link);
-								}*/
 								HithermRegisterVerbindung newLink;
-								/*if (this.startConnection.PossibleInput) {
-									this.newConnection.Vertices.Reverse();
-									newLink = new HithermRegisterVerbindung(endRegister, this.startConnection.Register, this.newConnection.Vertices, combinedCircuit, Project.Instance.GetPlannedProduct(this.product));
-								} else {*/
-								//HithermRegister startRegister = (startConnection as PossibleHithermRegisterConnection).Register;
-								//HithermRegister endRegister = (endConnection as PossibleHithermRegisterConnection).Register;
 								newLink = new HithermRegisterVerbindung(startRegister, endRegister, this.newConnection.Vertices, combinedCircuit, Project.Instance.GetPlannedProduct(this.product));
-								//}
 								combinedCircuit.Links.Add(newLink);
+								this.product.CorrectCircuitIds();
 							} else {
 								HithermCircuit circuitToAdd = (startCircuit == null ? endCircuit : startCircuit);
 								HithermRegisterVerbindung newLink;
-								/*if (this.startConnection.PossibleInput) {
-									this.newConnection.Vertices.Reverse();
-									newLink = new HithermRegisterVerbindung(null, this.startConnection.Register, this.newConnection.Vertices, this.product.GetCircuitForRegister(this.startConnection.Register), Project.Instance.GetPlannedProduct(this.product));
-								} else {*/
-								//HithermRegister startRegister = (startConnection is PossibleHithermRegisterConnection ? (startConnection as PossibleHithermRegisterConnection).Register : null);
-								//HithermRegister endRegister = (endConnection is PossibleHithermRegisterConnection ? (endConnection as PossibleHithermRegisterConnection).Register : null);
 								newLink = new HithermRegisterVerbindung(startRegister, endRegister, this.newConnection.Vertices, this.product.GetCircuitForRegister(this.newConnectionStart.Register), Project.Instance.GetPlannedProduct(this.product));
-								//}
-								//HithermCircuit startCircuit = this.product.GetCircuitForRegister(this.startConnection.Register);
 								circuitToAdd.Links.Add(newLink);
 							}
 							this.newConnectionStart = null;
 							this.endConnection = null;
 							this.newConnection.Vertices.Clear();
-							// TODO commit connection
 						}
 					}
 					return true;
