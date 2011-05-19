@@ -1082,6 +1082,31 @@ namespace Europlan.Common {
 		}
 
 		internal void MoveRegisterToCircuit(HithermRegister register, int circuitId) {
+			HithermCircuit oldCircuit = this.GetCircuitForRegister(register);
+			if (oldCircuit != null) {
+				List<HithermRegister> registersToMove = oldCircuit.GetAllConnectedRegisters(register);
+				HithermCircuit circuit = null;
+				foreach (HithermRegister registerToMove in registersToMove) {
+					circuit = this.MoveSingleRegisterToCircuit(register, circuitId);
+				}
+				if (circuit != null) {
+					List<HithermRegisterVerbindung> linksToMove = new List<HithermRegisterVerbindung>();
+					foreach (HithermRegisterVerbindung link in oldCircuit.Links) {
+						if ((link.Start != null && circuit.Registers.Contains(link.Start)) ||
+							(link.End != null && circuit.Registers.Contains(link.End))) {
+							linksToMove.Add(link);
+						}
+					}
+					foreach (HithermRegisterVerbindung link in linksToMove) {
+						oldCircuit.Links.Remove(link);
+						link.Circuit = circuit;
+						circuit.Links.Add(link);
+					}
+				}
+			}
+		}
+
+		private HithermCircuit MoveSingleRegisterToCircuit(HithermRegister register, int circuitId) {
 			if (this.registerCircuits.ContainsKey(register)) {
 				HithermCircuit hc = this.circuitIds[this.registerCircuits[register]];
 				hc.Registers.Remove(register);
@@ -1097,7 +1122,9 @@ namespace Europlan.Common {
 					this.circuitIds[circuitId] = hc;
 				}
 				this.circuitIds[circuitId].Registers.Add(register);
+				return this.circuitIds[circuitId];
 			}
+			return null;
 		}
 
 		internal void RemoveRegisterFromCircuit(HithermRegister register) {
@@ -1108,6 +1135,7 @@ namespace Europlan.Common {
 					this.circuits.Remove(hc);
 					this.circuitIds.Remove(this.registerCircuits[register]);
 				} else {
+					// delete connections of the deleted register
 					List<HithermRegisterVerbindung> linksToDelete = new List<HithermRegisterVerbindung>();
 					foreach (HithermRegisterVerbindung link in hc.Links) {
 						if (link.Start == register || link.End == register) {
@@ -1386,6 +1414,27 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override bool AllowToSwitchMode {
 			get { return this.circuits.Count == 0; }
+		}
+
+		public int GetNewHkId() {
+			bool[] hkUsed = new bool[this.PlannedCircuits.Count + 1];
+			for (int i = 0; i < hkUsed.Length; i++) {
+				hkUsed[i] = false;
+			}
+			foreach (HithermCircuit c in this.PlannedCircuits) {
+				int labelNr = c.HkLabelNr - 1;
+				if (labelNr >= 0 && labelNr < hkUsed.Length) {
+					hkUsed[labelNr] = true;
+				}
+			}
+			int newHkId = hkUsed.Length;
+			for (int i = 0; i < hkUsed.Length; i++) {
+				if (!hkUsed[i]) {
+					newHkId = i + 1;
+					break;
+				}
+			}
+			return newHkId;
 		}
 	}
 	

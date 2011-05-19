@@ -49,6 +49,13 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public int HkLabelNr {
+			get {
+				return this.registers.Count == 0 ? -1 : this.registers[0].Heizkreis;
+			}
+		}
+
 		#region Area
 		/// <summary>
 		/// Summe der Flächen der einzelnen Register
@@ -440,6 +447,9 @@ namespace Europlan.Common {
 		}
 
 		public HithermRegisterVerbindung GetOutputLink(HithermRegister register) {
+			if (register == null) {
+				return null;
+			}
 			foreach (HithermRegisterVerbindung link in this.Links) {
 				if (link.Start == register) {
 					return link;
@@ -449,6 +459,9 @@ namespace Europlan.Common {
 		}
 
 		public HithermRegisterVerbindung GetInputLink(HithermRegister register) {
+			if (register == null) {
+				return null;
+			}
 			foreach (HithermRegisterVerbindung link in this.Links) {
 				if (link.End == register) {
 					return link;

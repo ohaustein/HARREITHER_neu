@@ -5,6 +5,7 @@ using WW.Math;
 using System.Drawing;
 using System.Xml.Serialization;
 using WW.Math.Geometry;
+using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
 	public class HithermRegisterVerbindung : IGraphicalWallObject {
@@ -15,10 +16,11 @@ namespace Europlan.Common {
 		private List<Point2D> vertices;
 		private int startIndex = -1;
 		private int endIndex = -1;
-		private Circuit circuit;
+		private HithermCircuit circuit;
 		private int circuitIndex = -1;
 		private PlannedProduct product;
 		private string productGuid = null;
+		private bool finished = true;
 
 		public List<Point2D> Vertices {
 		  get { return vertices; }
@@ -29,7 +31,12 @@ namespace Europlan.Common {
 			this.vertices = new List<Point2D>();
 		}
 
-		public HithermRegisterVerbindung(HithermRegister start, HithermRegister end, IEnumerable<Point2D> vertices, Circuit circuit, PlannedProduct product) {
+		internal HithermRegisterVerbindung(bool finished) {
+			this.vertices = new List<Point2D>();
+			this.finished = finished;
+		}
+
+		public HithermRegisterVerbindung(HithermRegister start, HithermRegister end, IEnumerable<Point2D> vertices, HithermCircuit circuit, PlannedProduct product) {
 			this.start = start;
 			this.end = end;
 			this.vertices = new List<Point2D>(vertices);
@@ -71,7 +78,10 @@ namespace Europlan.Common {
 			get { return false; }
 		}
 
-		public void PaintObject(Graphics g, Color c, bool error) {
+		private static double arrowWidth = 5.0;
+		private static double arrowHeight = arrowWidth * 1.118;
+
+		public void PaintObject(Graphics g, Color c, bool error, double scale) {
 			PointF oldVertex = PointF.Empty;
 			PointF newVertex;
 			bool first = true;
@@ -90,6 +100,55 @@ namespace Europlan.Common {
 					p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
 				}
 				oldVertex = newVertex;
+			}
+			if (finished && this.vertices != null && this.vertices.Count > 0) {
+				if (this.start == null && this.vertices[0].Y == 0) {
+					PointF[] arrow = new PointF[3];
+					arrow[0] = new PointF((float)(this.vertices[0].X - arrowWidth / 2.0), (float)(arrowHeight / 2.0));
+					arrow[1] = new PointF((float)(this.vertices[0].X + arrowWidth / 2.0), (float)(arrowHeight / 2.0));
+					arrow[2] = new PointF((float)(this.vertices[0].X), (float)(-arrowHeight / 2.0));
+					g.FillPolygon(Brushes.Red, arrow);
+					g.DrawPolygon(new Pen(Color.DarkRed, (float)(1 / scale)), arrow);
+
+					if (circuit.Registers.Count > 0) {
+						Font font = new Font("Arial", (float)(10.0 / scale));
+						string label = circuit.Registers[0].Heizkreis.ToString();
+						SizeF size = g.MeasureString(label, font);
+						Matrix oldTransform = g.Transform;
+						Matrix textTransform = oldTransform.Clone();
+						float x = (float)(this.vertices[0].X - size.Width / 2.0);
+						float y = (float)(-arrowHeight * 0.75);
+						textTransform.Translate(0, -y);
+						textTransform.Scale(1, -1);
+						textTransform.Translate(0, -y);
+						g.Transform = textTransform;
+						g.DrawString(label, font, Brushes.DarkRed, x, -y);
+						g.Transform = oldTransform;
+					}
+				} else if (this.end == null && this.vertices[this.vertices.Count - 1].Y == 0) {
+					PointF[] arrow = new PointF[3];
+					arrow[0] = new PointF((float)(this.vertices[this.vertices.Count - 1].X - arrowWidth / 2.0), (float)(arrowHeight / 2.0));
+					arrow[1] = new PointF((float)(this.vertices[this.vertices.Count - 1].X + arrowWidth / 2.0), (float)(arrowHeight / 2.0));
+					arrow[2] = new PointF((float)(this.vertices[this.vertices.Count - 1].X), (float)(-arrowHeight / 2.0));
+					g.FillPolygon(Brushes.Blue, arrow);
+					g.DrawPolygon(new Pen(Color.DarkBlue, (float)(1 / scale)), arrow);
+
+					if (circuit.Registers.Count > 0) {
+						Font font = new Font("Arial", (float)(10.0 / scale));
+						string label = circuit.Registers[0].Heizkreis.ToString();
+						SizeF size = g.MeasureString(label, font);
+						Matrix oldTransform = g.Transform;
+						Matrix textTransform = oldTransform.Clone();
+						float x = (float)(this.vertices[this.vertices.Count - 1].X - size.Width / 2.0);
+						float y = (float)(-arrowHeight * 0.75);
+						textTransform.Translate(0, -y);
+						textTransform.Scale(1, -1);
+						textTransform.Translate(0, -y);
+						g.Transform = textTransform;
+						g.DrawString(label, font, Brushes.DarkBlue, x, -y);
+						g.Transform = oldTransform;
+					}
+				}
 			}
 			// TODO
 		}
@@ -190,13 +249,17 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public Circuit Circuit {
+		public HithermCircuit Circuit {
 			get {
 				if (this.circuitIndex >= 0) {
-					this.circuit = this.Product.Product.PlannedCircuits[this.circuitIndex];
+					this.circuit = this.Product.Product.PlannedCircuits[this.circuitIndex] as HithermCircuit;
 					this.circuitIndex = -1;
 				}
 				return this.circuit;
+			}
+			set {
+				this.circuit = value;
+				this.circuitIndex = -1;
 			}
 		}
 
@@ -271,7 +334,7 @@ namespace Europlan.Common {
 		}
 
 		public void PaintObject(Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
-			this.PaintObject(g, (this == selectedObject) ? Color.Red : Color.Black, false);
+			this.PaintObject(g, (this == selectedObject) ? Color.Red : Color.Black, false, scale);
 		}
 
 		public IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset) {
@@ -688,6 +751,12 @@ namespace Europlan.Common {
 					}
 				}
 			}
+		}
+
+		[XmlIgnore]
+		public bool Finished {
+			get { return this.finished; }
+			set { this.finished = value; }
 		}
 	}
 

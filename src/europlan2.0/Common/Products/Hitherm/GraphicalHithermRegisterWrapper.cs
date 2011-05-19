@@ -217,18 +217,20 @@ namespace Europlan.Common {
 			}
 		}
 
+		private double connectionSize = 7;
+
 		public Polygon2D GetOutputConnectionArea(double xOffset, double yOffset) {
 			Polygon2D area = new Polygon2D();
 			if (this.register.GraphVorlaufRight) {
-				area.Add(new Point2D(xOffset + this.register.GraphPosX - 1.5, yOffset + register.GraphPosY + this.Height - 3.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX - 1.5, yOffset + register.GraphPosY + this.Height + 1.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + 3.5, yOffset + register.GraphPosY + this.Height + 1.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + 3.5, yOffset + register.GraphPosY + this.Height - 3.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX - connectionSize / 2 + 1.0, yOffset + register.GraphPosY + this.Height - connectionSize / 2 - 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX - connectionSize / 2 + 1.0, yOffset + register.GraphPosY + this.Height + connectionSize / 2 - 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + connectionSize / 2 + 1.0, yOffset + register.GraphPosY + this.Height + connectionSize / 2 - 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + connectionSize / 2 + 1.0, yOffset + register.GraphPosY + this.Height - connectionSize / 2 - 1.0));
 			} else {
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width - 3.5, yOffset + register.GraphPosY + this.Height - 3.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width - 3.5, yOffset + register.GraphPosY + this.Height + 1.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width + 1.5, yOffset + register.GraphPosY + this.Height + 1.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width + 1.5, yOffset + register.GraphPosY + this.Height - 3.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width - connectionSize / 2 - 1.0, yOffset + register.GraphPosY + this.Height - connectionSize / 2 - 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width - connectionSize / 2 - 1.0, yOffset + register.GraphPosY + this.Height + connectionSize / 2 - 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width + connectionSize / 2 - 1.0, yOffset + register.GraphPosY + this.Height + connectionSize / 2 - 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width + connectionSize / 2 - 1.0, yOffset + register.GraphPosY + this.Height - connectionSize / 2 - 1.0));
 			}
 			return area;
 		}
@@ -252,15 +254,15 @@ namespace Europlan.Common {
 		public Polygon2D GetInputConnectionArea(double xOffset, double yOffset) {
 			Polygon2D area = new Polygon2D();
 			if (this.register.GraphVorlaufRight) {
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width - 3.5, yOffset + register.GraphPosY - 1.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width - 3.5, yOffset + register.GraphPosY + 3.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width + 1.5, yOffset + register.GraphPosY + 3.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width + 1.5, yOffset + register.GraphPosY - 1.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width - connectionSize / 2 - 1.0, yOffset + register.GraphPosY - connectionSize / 2 + 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width - connectionSize / 2 - 1.0, yOffset + register.GraphPosY + connectionSize / 2 + 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width + connectionSize / 2 - 1.0, yOffset + register.GraphPosY + connectionSize / 2 + 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width + connectionSize / 2 - 1.0, yOffset + register.GraphPosY - connectionSize / 2 + 1.0));
 			} else {
-				area.Add(new Point2D(xOffset + this.register.GraphPosX - 1.5, yOffset + register.GraphPosY - 1.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX - 1.5, yOffset + register.GraphPosY + 3.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + 3.5, yOffset + register.GraphPosY + 3.5));
-				area.Add(new Point2D(xOffset + this.register.GraphPosX + 3.5, yOffset + register.GraphPosY - 1.5));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX - connectionSize / 2 + 1.0, yOffset + register.GraphPosY - connectionSize / 2 + 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX - connectionSize / 2 + 1.0, yOffset + register.GraphPosY + connectionSize / 2 + 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + connectionSize / 2 + 1.0, yOffset + register.GraphPosY + connectionSize / 2 + 1.0));
+				area.Add(new Point2D(xOffset + this.register.GraphPosX + connectionSize / 2 + 1.0, yOffset + register.GraphPosY - connectionSize / 2 + 1.0));
 			}
 			return area;
 		}

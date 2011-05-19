@@ -162,7 +162,7 @@ namespace Europlan.Common {
 		public double YPos {
 			get { return this.yPos; }
 			set {
-				double maxY = - this.Height / this.Scale + 10;
+				double maxY = -this.Height / this.Scale + 10 + 10 / this.Scale;
 				double minY = -TotalHeight * 100 - 10;
 				if (maxY < minY) {
 					// center

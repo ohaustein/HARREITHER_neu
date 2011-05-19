@@ -336,7 +336,18 @@ namespace Europlan.Common {
 			List<Polygon2D> list2 = new List<Polygon2D>();
 			list2.Add(door);
 
-			return Polygon2D.GetIntersection(list1, list2).Count > 0;
+			try {
+				return Polygon2D.GetIntersection(list1, list2).Count > 0;
+#if DEBUG
+			} catch (Exception e) {
+				Console.WriteLine(e);
+				return true;
+			}
+#else
+			} catch {
+				return true;
+			}
+#endif
 		}
 
 		public abstract Polygon2D GetOutsideBorder(double xOffset, double yOffset);
