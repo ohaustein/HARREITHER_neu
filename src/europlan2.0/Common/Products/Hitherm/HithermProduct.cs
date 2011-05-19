@@ -1087,7 +1087,7 @@ namespace Europlan.Common {
 				List<HithermRegister> registersToMove = oldCircuit.GetAllConnectedRegisters(register);
 				HithermCircuit circuit = null;
 				foreach (HithermRegister registerToMove in registersToMove) {
-					circuit = this.MoveSingleRegisterToCircuit(register, circuitId);
+					circuit = this.MoveSingleRegisterToCircuit(registerToMove, circuitId);
 				}
 				if (circuit != null) {
 					List<GraphicalHithermVerbindung> linksToMove = new List<GraphicalHithermVerbindung>();
