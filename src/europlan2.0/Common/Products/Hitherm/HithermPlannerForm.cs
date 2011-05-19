@@ -53,6 +53,16 @@ namespace Europlan.Common {
 			SettingsFile.Update();
 		}
 
+		private void btnZoomOut_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.AddScale(0.9, null);
+			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void btnZoomIn_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.AddScale(1.1, null);
+			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
 		private void ApplyButtonCheckedState(ToolStripButton buttonToCheck) {
 			this.btnPick.Checked = false;
 			this.btnMove.Checked = false;
@@ -1205,7 +1215,6 @@ namespace Europlan.Common {
 			form.Dispose();
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
-
 
 	}
 }
