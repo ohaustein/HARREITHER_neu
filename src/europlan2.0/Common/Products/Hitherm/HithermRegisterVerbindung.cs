@@ -110,9 +110,9 @@ namespace Europlan.Common {
 					g.FillPolygon(Brushes.Red, arrow);
 					g.DrawPolygon(new Pen(Color.DarkRed, (float)(1 / scale)), arrow);
 
-					if (circuit.Registers.Count > 0) {
+					if (this.Circuit.Registers.Count > 0) {
 						Font font = new Font("Arial", (float)(10.0 / scale));
-						string label = circuit.Registers[0].Heizkreis.ToString();
+						string label = this.Circuit.Registers[0].Heizkreis.ToString();
 						SizeF size = g.MeasureString(label, font);
 						Matrix oldTransform = g.Transform;
 						Matrix textTransform = oldTransform.Clone();
@@ -133,9 +133,9 @@ namespace Europlan.Common {
 					g.FillPolygon(Brushes.Blue, arrow);
 					g.DrawPolygon(new Pen(Color.DarkBlue, (float)(1 / scale)), arrow);
 
-					if (circuit.Registers.Count > 0) {
+					if (this.Circuit.Registers.Count > 0) {
 						Font font = new Font("Arial", (float)(10.0 / scale));
-						string label = circuit.Registers[0].Heizkreis.ToString();
+						string label = this.Circuit.Registers[0].Heizkreis.ToString();
 						SizeF size = g.MeasureString(label, font);
 						Matrix oldTransform = g.Transform;
 						Matrix textTransform = oldTransform.Clone();
@@ -452,20 +452,24 @@ namespace Europlan.Common {
 			if (room.CollisionTest(linkBorders)) {
 				return false;
 			}
-			foreach (GraphicalWall wall in room.Walls) {
-				Nullable<Vector2D> offset = room.GetWallOffset(wall) * 100;
-				if (!offset.HasValue) {
-					offset = new Vector2D(0, 0);
-				}
-				foreach (GraphicalHithermRegisterWrapper register in wall.Registers) {
-					if (register.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, true)) {
-						return false;
+			foreach (GraphicalWall baseWall in room.Walls) {
+				GraphicalWall wall = baseWall;
+				while (wall != null) {
+					Nullable<Vector2D> offset = room.GetWallOffset(wall) * 100;
+					if (!offset.HasValue) {
+						offset = new Vector2D(0, 0);
 					}
-				}
-				foreach (GraphicalWallObstacle obstacle in wall.Obstacles) {
-					if (obstacle.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, false)) {
-						return false;
+					foreach (GraphicalHithermRegisterWrapper register in wall.Registers) {
+						if (register.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, true)) {
+							return false;
+						}
 					}
+					foreach (GraphicalWallObstacle obstacle in wall.Obstacles) {
+						if (obstacle.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, false)) {
+							return false;
+						}
+					}
+					wall = wall.DachSchraege;
 				}
 			}
 			foreach (HithermCircuit hc in this.Product.Product.PlannedCircuits) {

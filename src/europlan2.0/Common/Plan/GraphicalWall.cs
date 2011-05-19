@@ -495,7 +495,7 @@ namespace Europlan.Common {
 
 		public void RemoveAllRegisters(HithermProduct hithermProduct) {
 			if (this.DachSchraege != null) {
-				RemoveAllRegisters(hithermProduct);
+				this.DachSchraege.RemoveAllRegisters(hithermProduct);
 			}
 			foreach (GraphicalHithermRegisterWrapper wrapper in this.Registers) {
 				hithermProduct.RemoveRegisterFromCircuit(wrapper.Register);
