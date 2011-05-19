@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using WW.Cad.Model;
 using WW.Math;
+using Europlan.Common.Icons;
 
 namespace Europlan.Common {
 	public partial class PlanPanel : UserControl, IPlanPanel, IPlanner {
@@ -19,7 +20,7 @@ namespace Europlan.Common {
 		private Plan plan = null;
 		private IPlanPanel panel = null;
 		private PlanMode tmpMode = PlanMode.PM_MOVE;
-		private Cursor tmpCursor = Cursors.SizeAll;
+		private Cursor tmpCursor = EuroplanCursors.MOVE_PLAN;
 		private IPlanner productPlanner = null;
 		private IPlanPanel connectedPlanPanel;
 

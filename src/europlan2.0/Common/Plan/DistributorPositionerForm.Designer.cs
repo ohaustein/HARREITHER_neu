@@ -33,13 +33,13 @@ namespace Europlan.Common {
 			this.btnPosition = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.lblRotationUnit = new System.Windows.Forms.Label();
+			this.numRotation = new Europlan.Common.NumericBox();
 			this.lblRotation = new System.Windows.Forms.Label();
 			this.btnCwLarge = new System.Windows.Forms.Button();
 			this.btnCwSmall = new System.Windows.Forms.Button();
 			this.btnCcwSmall = new System.Windows.Forms.Button();
 			this.btnCcwLarge = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
-			this.numRotation = new Europlan.Common.NumericBox();
 			this.panel = new Europlan.Common.PlanPanel();
 			this.distributorPositioner = new Europlan.Common.DistributorPositioner(this.components);
 			this.toolStrip.SuspendLayout();
@@ -136,6 +136,37 @@ namespace Europlan.Common {
 			this.lblRotationUnit.TabIndex = 20;
 			this.lblRotationUnit.Text = "°";
 			// 
+			// numRotation
+			// 
+			this.numRotation.EditType = Europlan.Common.NumericBox.NumericEditType.ROTATION_360;
+			this.numRotation.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRotation.Location = new System.Drawing.Point(213, 5);
+			this.numRotation.MaxValue = new decimal(new int[] {
+            3599,
+            0,
+            0,
+            65536});
+			this.numRotation.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRotation.Name = "numRotation";
+			this.numRotation.Size = new System.Drawing.Size(74, 20);
+			this.numRotation.TabIndex = 19;
+			this.numRotation.Text = "0";
+			this.numRotation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRotation.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRotation.ValueChanged += new System.EventHandler(this.numRotation_ValueChanged);
+			// 
 			// lblRotation
 			// 
 			this.lblRotation.AutoSize = true;
@@ -196,43 +227,11 @@ namespace Europlan.Common {
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
 			// 
-			// numRotation
-			// 
-			this.numRotation.EditType = Europlan.Common.NumericBox.NumericEditType.ROTATION_360;
-			this.numRotation.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRotation.Location = new System.Drawing.Point(213, 5);
-			this.numRotation.MaxValue = new decimal(new int[] {
-            3599,
-            0,
-            0,
-            65536});
-			this.numRotation.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRotation.Name = "numRotation";
-			this.numRotation.Size = new System.Drawing.Size(74, 20);
-			this.numRotation.TabIndex = 19;
-			this.numRotation.Text = "0";
-			this.numRotation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRotation.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-			this.numRotation.ValueChanged += new System.EventHandler(this.numRotation_ValueChanged);
-			// 
 			// panel
 			// 
 			this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel.Location = new System.Drawing.Point(0, 25);
 			this.panel.Name = "panel";
-			this.panel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.panel.ProductPlanner = this.distributorPositioner;
 			this.panel.Size = new System.Drawing.Size(679, 437);
 			this.panel.TabIndex = 2;
@@ -242,7 +241,7 @@ namespace Europlan.Common {
 			this.distributorPositioner.Mode = Europlan.Common.DistributorPositioner.DistributorPositionerMode.DPM_NONE;
 			this.distributorPositioner.ModeChanged += new System.EventHandler(this.distributorPositioner_ModeChanged);
 			// 
-			// DistributionPositionerForm
+			// DistributorPositionerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -253,7 +252,7 @@ namespace Europlan.Common {
 			this.DoubleBuffered = true;
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(500, 500);
-			this.Name = "DistributionPositionerForm";
+			this.Name = "DistributorPositionerForm";
 			this.Text = "Raumtypen";
 			this.Load += new System.EventHandler(this.DistributionPositionerForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DistributionPositionerForm_FormClosing);

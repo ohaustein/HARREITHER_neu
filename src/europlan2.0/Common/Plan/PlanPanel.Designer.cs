@@ -49,7 +49,6 @@ namespace Europlan.Common {
 			this.imagePanel.Location = new System.Drawing.Point(200, 0);
 			this.imagePanel.Mode = Europlan.Common.PlanMode.PM_MOVE;
 			this.imagePanel.Name = "imagePanel";
-			this.imagePanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.imagePanel.Scale = null;
 			this.imagePanel.ShowRaster = false;
 			this.imagePanel.Size = new System.Drawing.Size(561, 459);
@@ -65,7 +64,6 @@ namespace Europlan.Common {
 			this.cadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.cadPanel.Location = new System.Drawing.Point(200, 0);
 			this.cadPanel.Name = "cadPanel";
-			this.cadPanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.cadPanel.Size = new System.Drawing.Size(561, 459);
 			this.cadPanel.TabIndex = 1;
 			this.cadPanel.Visible = false;

@@ -61,6 +61,7 @@ namespace Europlan.Common.Products {
 			this.btnColor = new System.Windows.Forms.Button();
 			this.lblColor = new System.Windows.Forms.Label();
 			this.grpNewModules = new System.Windows.Forms.GroupBox();
+			this.lblNewModules = new System.Windows.Forms.Label();
 			this.chkSelectReferenceModule = new System.Windows.Forms.CheckBox();
 			this.lblConnections = new System.Windows.Forms.Label();
 			this.cmbConnections = new System.Windows.Forms.ComboBox();
@@ -128,7 +129,6 @@ namespace Europlan.Common.Products {
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.modulKlimaBodenPlanner = new Europlan.Common.ModulKlimaBodenPlanner(this.components);
-			this.lblNewModules = new System.Windows.Forms.Label();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -636,6 +636,17 @@ namespace Europlan.Common.Products {
 			this.grpNewModules.TabStop = false;
 			this.grpNewModules.Text = "neue Module";
 			this.grpNewModules.Visible = false;
+			// 
+			// lblNewModules
+			// 
+			this.lblNewModules.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.lblNewModules.AutoSize = true;
+			this.lblNewModules.Location = new System.Drawing.Point(434, 44);
+			this.lblNewModules.Name = "lblNewModules";
+			this.lblNewModules.Size = new System.Drawing.Size(74, 13);
+			this.lblNewModules.TabIndex = 160;
+			this.lblNewModules.Text = "Neue Module:";
+			this.lblNewModules.Visible = false;
 			// 
 			// chkSelectReferenceModule
 			// 
@@ -1315,7 +1326,6 @@ namespace Europlan.Common.Products {
 			this.planPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.planPanel.Location = new System.Drawing.Point(0, 25);
 			this.planPanel.Name = "planPanel";
-			this.planPanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.planPanel.ProductPlanner = this.modulKlimaBodenPlanner;
 			this.planPanel.Size = new System.Drawing.Size(892, 236);
 			this.planPanel.TabIndex = 0;
@@ -1329,17 +1339,6 @@ namespace Europlan.Common.Products {
 			this.modulKlimaBodenPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.modulKlimaBodenPlanner_ProjectChanged);
 			this.modulKlimaBodenPlanner.ListsNeedUpdate += new System.EventHandler<System.EventArgs>(this.modulKlimaBodenPlanner_ListsNeedUpdate);
 			this.modulKlimaBodenPlanner.UpdateNewCount += new System.EventHandler<Europlan.Common.ModulKlimaBodenPlanner.UpdateNewCountArgs>(this.modulKlimaBodenPlanner_UpdateNewCount);
-			// 
-			// lblNewModules
-			// 
-			this.lblNewModules.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.lblNewModules.AutoSize = true;
-			this.lblNewModules.Location = new System.Drawing.Point(434, 44);
-			this.lblNewModules.Name = "lblNewModules";
-			this.lblNewModules.Size = new System.Drawing.Size(74, 13);
-			this.lblNewModules.TabIndex = 160;
-			this.lblNewModules.Text = "Neue Module:";
-			this.lblNewModules.Visible = false;
 			// 
 			// ModulKlimaBodenPlannerForm
 			// 

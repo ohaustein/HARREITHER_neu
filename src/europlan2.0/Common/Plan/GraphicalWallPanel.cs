@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using WW.Math;
 using System.Drawing.Drawing2D;
 using WW.Math.Geometry;
+using Europlan.Common.Icons;
 
 namespace Europlan.Common {
 	public partial class GraphicalWallPanel : UserControl {
@@ -77,7 +78,6 @@ namespace Europlan.Common {
 		public GraphicalWallPanel() {
 			this.scale = 1;
 			this.DoubleBuffered = true;
-			this.Cursor = Cursors.SizeAll;
 			InitializeComponent();
 		}
 
@@ -372,18 +372,18 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			if (e.Button == MouseButtons.Middle) {
+				inMove = true;
+				this.tempCursor = this.Cursor;
+			}
 			if ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle)) {
+				this.Cursor = EuroplanCursors.MOVE_PLAN_ACTIVE;
 				this.mouseDownXInCtrl = mousePosInCtrl.X;
 				this.mouseDownYInCtrl = mousePosInCtrl.Y;
 				this.mouseDownXInPlan = mousePosInPlan.X;
 				this.mouseDownYInPlan = mousePosInPlan.Y;
 				this.startXPos = this.XPos;
 				this.startYPos = this.YPos;
-			}
-			if (e.Button == MouseButtons.Middle) {
-				inMove = true;
-				this.tempCursor = this.Cursor;
-				this.Cursor = Cursors.SizeAll;
 			}
 			if (invalidate) {
 				this.Invalidate();
@@ -427,6 +427,9 @@ namespace Europlan.Common {
 					this.draggingAnchor = null;
 					// TODO set cursor correctly;
 				}
+			}
+			if (mode == PlanMode.PM_MOVE) {
+				this.Cursor = EuroplanCursors.MOVE_PLAN;
 			}
 			if (e.Button == MouseButtons.Middle) {
 				this.Cursor = this.tempCursor;
@@ -522,7 +525,6 @@ namespace Europlan.Common {
 				return;
 			}
 
-			//Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 			Point mousePosInCtrl = new Point(e.X, e.Y);
 			Point2D mousePosInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(mousePosInCtrl.X, mousePosInCtrl.Y)); ;
 			bool invalidate = false;
@@ -531,25 +533,7 @@ namespace Europlan.Common {
 				invalidate = this.productPlanner.PlannerClick(mousePosInPlan, mousePosInCtrl, e.Button);
 			}
 			if (this.mode == PlanMode.PM_SELECT_OBJECT && e.Button == MouseButtons.Left) {
-				/*if (this.selectedObject != null && this.selectedWall != null) {
-					bool found = false;
-					foreach (Anchor a in this.selectedObject.GetAnchors(this.scale)) {
-						if (a.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100, this.scale)) {
-							found = true;
-							this.Cursor = a.Cursor;
-						}
-					}
-					if (!found && this.selectedObject.IsMoveable && this.selectedObject.HitTest(mousePosInPlan, selectedWallXOffset * 100, selectedWallYOffset * 100)) {
-						found = true;
-						this.Cursor = Cursors.SizeAll;
-					}
-					if (!found) {
-						this.Cursor = Cursors.Default;
-					}
-				}*/
-				// TODO
 				if (this.draggingObject == null) {
-					//double xOffset = 0;
 					IGraphicalWallObject pickedObject = null;
 					Vector2D offset;
 					foreach (GraphicalWall wall in this.room.Walls) {
@@ -558,7 +542,6 @@ namespace Europlan.Common {
 						if (pickedObject != null) {
 							break;
 						}
-						//xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100;
 					}
 					if (pickedObject == null && this.productPlanner != null || pickedObject is GraphicalWall) {
 						IGraphicalWallObject pickedWall = pickedObject;
@@ -736,7 +719,7 @@ namespace Europlan.Common {
 				if (this.mode != value) {
 					this.mode = value;
 					if (this.mode == PlanMode.PM_MOVE) {
-						this.Cursor = Cursors.SizeAll;
+						this.Cursor = EuroplanCursors.MOVE_PLAN; ;
 					} else if (this.mode == PlanMode.PM_SELECT_OBJECT) {
 						this.Cursor = Cursors.Default;
 					} else {

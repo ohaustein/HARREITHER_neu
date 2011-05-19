@@ -172,6 +172,7 @@
       <DependentUpon>ExtendedCorrectionsGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="FileUtils.cs" />
+    <Compile Include="Icons\EuroplanCursors.cs" />
     <Compile Include="Interfaces\IClipboard.cs" />
     <Compile Include="Interfaces\IEditorUserControl.cs" />
     <Compile Include="Interfaces\IGuiRepresentation.cs" />
@@ -1087,6 +1088,8 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Icons\hand.cur" />
+    <EmbeddedResource Include="Icons\handGrabbed.cur" />
     <Content Include="Icons\default.png" />
     <Content Include="Reporting\Harreither.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

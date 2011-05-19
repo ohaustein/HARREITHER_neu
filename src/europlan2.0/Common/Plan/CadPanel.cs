@@ -14,6 +14,7 @@ using System.Collections;
 using WW.Cad.Model.Entities;
 using WW.Math.Geometry;
 using System.Drawing.Drawing2D;
+using Europlan.Common.Icons;
 
 namespace Europlan.Common {
 	public partial class CadPanel : UserControl, IPlanPanel {
@@ -81,6 +82,7 @@ namespace Europlan.Common {
 			this.SetStyle(ControlStyles.UserPaint, true);
 			this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 			this.SetStyle(ControlStyles.DoubleBuffer, true);
+			this.Mode = PlanMode.PM_MOVE;
 		}
 
 		protected override void OnPaintBackground(PaintEventArgs e) {
@@ -301,7 +303,10 @@ namespace Europlan.Common {
 			if (e.Button == MouseButtons.Middle) {
 				this.inMove = true;
 				this.tempCursor = this.Cursor;
-				this.Cursor = Cursors.SizeAll;
+				this.Cursor = EuroplanCursors.MOVE_PLAN_ACTIVE;
+			}
+			if (this.mode == PlanMode.PM_MOVE) {
+				this.Cursor = EuroplanCursors.MOVE_PLAN_ACTIVE;
 			}
 			mouseDown = true;
 			if (invalidate) {
@@ -388,6 +393,9 @@ namespace Europlan.Common {
 					}
 				}
 				invalidate = true;
+			}
+			if (this.mode == PlanMode.PM_MOVE) {
+				this.Cursor = EuroplanCursors.MOVE_PLAN;
 			}
 			if (e.Button == MouseButtons.Middle) {
 				this.inMove = false;
@@ -787,7 +795,7 @@ namespace Europlan.Common {
 				this.mode = value;
 				switch (this.mode) {
 					case PlanMode.PM_MOVE:
-						this.Cursor = Cursors.SizeAll;
+						this.Cursor = EuroplanCursors.MOVE_PLAN;
 						break;
 					case PlanMode.PM_PICK_MEASURE:
 						this.Cursor = Cursors.Cross;
@@ -860,13 +868,17 @@ namespace Europlan.Common {
 			this.Invalidate();
 		}
 
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Cursor PlanCursor {
 			get { return this.Cursor; }
 			set {
-				if (this.inMove) {
-					this.tempCursor = value;
-				} else {
-					this.Cursor = value;
+				if (this.Mode == PlanMode.PM_PLANNER_CLICK || this.Mode == PlanMode.PM_PLANNER_DRAG) {
+					if (this.inMove) {
+						this.tempCursor = value;
+					} else {
+						this.Cursor = value;
+					}
 				}
 			}
 		}

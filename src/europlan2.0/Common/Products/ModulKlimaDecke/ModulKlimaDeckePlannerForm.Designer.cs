@@ -1526,7 +1526,6 @@ namespace Europlan.Common.Products {
 			this.planPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.planPanel.Location = new System.Drawing.Point(0, 25);
 			this.planPanel.Name = "planPanel";
-			this.planPanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.planPanel.ProductPlanner = this.modulKlimaDeckePlanner;
 			this.planPanel.Size = new System.Drawing.Size(892, 274);
 			this.planPanel.TabIndex = 0;

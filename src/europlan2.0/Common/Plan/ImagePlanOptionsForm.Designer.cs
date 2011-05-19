@@ -238,11 +238,10 @@ namespace Europlan.Common {
 			this.picturePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.picturePanel.EndPoint = null;
 			this.picturePanel.Length = 0;
-			this.picturePanel.Location = new System.Drawing.Point(0, 25);
+			this.picturePanel.Location = new System.Drawing.Point(-5, 25);
 			this.picturePanel.Margin = new System.Windows.Forms.Padding(0);
 			this.picturePanel.Mode = Europlan.Common.PlanMode.PM_MOVE;
 			this.picturePanel.Name = "picturePanel";
-			this.picturePanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.picturePanel.Scale = null;
 			this.picturePanel.ShowRaster = false;
 			this.picturePanel.Size = new System.Drawing.Size(668, 400);

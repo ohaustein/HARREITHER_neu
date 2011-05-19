@@ -352,7 +352,6 @@ namespace Europlan.Common {
 			this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel.Location = new System.Drawing.Point(0, 25);
 			this.panel.Name = "panel";
-			this.panel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.panel.ProductPlanner = this.graphicalWallModifier;
 			this.panel.Size = new System.Drawing.Size(679, 437);
 			this.panel.TabIndex = 2;

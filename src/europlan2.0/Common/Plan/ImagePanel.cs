@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Collections;
 using WW.Math;
+using Europlan.Common.Icons;
 
 namespace Europlan.Common {
 	public partial class ImagePanel : UserControl, IPlanPanel {
@@ -41,6 +42,7 @@ namespace Europlan.Common {
 			SetStyle(ControlStyles.UserPaint, true);
 			SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 			SetStyle(ControlStyles.DoubleBuffer, true);
+			this.Mode = PlanMode.PM_MOVE;
 		}
 
 		public bool ShowRaster {
@@ -305,7 +307,10 @@ namespace Europlan.Common {
 			if (e.Button == MouseButtons.Middle) {
 				inMove = true;
 				this.tempCursor = this.Cursor;
-				this.Cursor = Cursors.SizeAll;
+				this.Cursor = EuroplanCursors.MOVE_PLAN_ACTIVE;
+			}
+			if (this.mode == PlanMode.PM_MOVE) {
+				this.Cursor = EuroplanCursors.MOVE_PLAN_ACTIVE;
 			}
 		}
 
@@ -335,6 +340,9 @@ namespace Europlan.Common {
 				if (this.productPlanner != null) {
 					invalidate = this.productPlanner.PlannerDragEnd(new WW.Math.Point2D(mousePosInPlan.X, mousePosInPlan.Y), mousePosInCtrl, e.Button);
 				}
+			}
+			if (this.mode == PlanMode.PM_MOVE) {
+				this.Cursor = EuroplanCursors.MOVE_PLAN;
 			}
 			if (e.Button == MouseButtons.Middle) {
 				this.Cursor = this.tempCursor;
@@ -490,7 +498,7 @@ namespace Europlan.Common {
 				this.mode = value;
 				switch (this.mode) {
 					case PlanMode.PM_MOVE:
-						this.Cursor = Cursors.SizeAll;
+						this.Cursor = EuroplanCursors.MOVE_PLAN;
 						break;
 					case PlanMode.PM_PICK_MEASURE:
 						this.Cursor = Cursors.Cross;
@@ -567,13 +575,17 @@ namespace Europlan.Common {
 			this.Invalidate();
 		}
 
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Cursor PlanCursor {
 			get { return this.Cursor; }
 			set {
-				if (inMove) {
-					this.tempCursor = value;
-				} else {
-					this.Cursor = value;
+				if (this.Mode == PlanMode.PM_PLANNER_CLICK || this.Mode == PlanMode.PM_PLANNER_DRAG) {
+					if (inMove) {
+						this.tempCursor = value;
+					} else {
+						this.Cursor = value;
+					}
 				}
 			}
 		}

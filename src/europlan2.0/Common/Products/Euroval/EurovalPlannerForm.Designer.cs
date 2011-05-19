@@ -35,6 +35,7 @@ namespace Europlan.Common.Products {
 			this.btnDelRz = new System.Windows.Forms.ToolStripButton();
 			this.btnAddReduced = new System.Windows.Forms.ToolStripButton();
 			this.btnDelReduced = new System.Windows.Forms.ToolStripButton();
+			this.btnSetText = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.pageAuslegung = new System.Windows.Forms.TabPage();
@@ -129,7 +130,6 @@ namespace Europlan.Common.Products {
 			this.label1 = new System.Windows.Forms.Label();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.eurovalPlanner = new Europlan.Common.EurovalPlanner(this.components);
-			this.btnSetText = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -247,6 +247,16 @@ namespace Europlan.Common.Products {
 			this.btnDelReduced.Size = new System.Drawing.Size(23, 22);
 			this.btnDelReduced.Text = "Fläche mit red. Heiz-/Kühlleistung löschen";
 			this.btnDelReduced.Click += new System.EventHandler(this.btnDelReduced_Click);
+			// 
+			// btnSetText
+			// 
+			this.btnSetText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnSetText.Image = ((System.Drawing.Image)(resources.GetObject("btnSetText.Image")));
+			this.btnSetText.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSetText.Name = "btnSetText";
+			this.btnSetText.Size = new System.Drawing.Size(23, 22);
+			this.btnSetText.Text = "Textbox positionieren";
+			this.btnSetText.Click += new System.EventHandler(this.btnSetText_Click);
 			// 
 			// panel1
 			// 
@@ -1236,7 +1246,6 @@ namespace Europlan.Common.Products {
 			this.planPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.planPanel.Location = new System.Drawing.Point(0, 25);
 			this.planPanel.Name = "planPanel";
-			this.planPanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.planPanel.ProductPlanner = this.eurovalPlanner;
 			this.planPanel.Size = new System.Drawing.Size(846, 228);
 			this.planPanel.TabIndex = 0;
@@ -1246,16 +1255,6 @@ namespace Europlan.Common.Products {
 			this.eurovalPlanner.Mode = Europlan.Common.EurovalPlanner.EurovalMode.EVM_NONE;
 			this.eurovalPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.eurovalPlanner_ModeChanged);
 			this.eurovalPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.europlanPlanner_ProjectChanged);
-			// 
-			// btnSetText
-			// 
-			this.btnSetText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnSetText.Image = ((System.Drawing.Image)(resources.GetObject("btnSetText.Image")));
-			this.btnSetText.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnSetText.Name = "btnSetText";
-			this.btnSetText.Size = new System.Drawing.Size(23, 22);
-			this.btnSetText.Text = "Textbox positionieren";
-			this.btnSetText.Click += new System.EventHandler(this.btnSetText_Click);
 			// 
 			// EurovalPlannerForm
 			// 

@@ -26,6 +26,9 @@ namespace Europlan.Common {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnectionPlannerForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
+			this.btnBoden = new System.Windows.Forms.ToolStripButton();
+			this.btnDecke = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -35,9 +38,6 @@ namespace Europlan.Common {
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.connectionPlanner = new Europlan.Common.ConnectionPlanner(this.components);
-			this.btnBoden = new System.Windows.Forms.ToolStripButton();
-			this.btnDecke = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -58,6 +58,33 @@ namespace Europlan.Common {
 			this.toolStrip.Size = new System.Drawing.Size(892, 25);
 			this.toolStrip.TabIndex = 1;
 			this.toolStrip.Text = "toolStrip1";
+			// 
+			// btnBoden
+			// 
+			this.btnBoden.Checked = true;
+			this.btnBoden.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.btnBoden.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnBoden.Image = ((System.Drawing.Image)(resources.GetObject("btnBoden.Image")));
+			this.btnBoden.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnBoden.Name = "btnBoden";
+			this.btnBoden.Size = new System.Drawing.Size(45, 22);
+			this.btnBoden.Text = "Boden";
+			this.btnBoden.Click += new System.EventHandler(this.btnBoden_Click);
+			// 
+			// btnDecke
+			// 
+			this.btnDecke.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btnDecke.Image = ((System.Drawing.Image)(resources.GetObject("btnDecke.Image")));
+			this.btnDecke.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnDecke.Name = "btnDecke";
+			this.btnDecke.Size = new System.Drawing.Size(43, 22);
+			this.btnDecke.Text = "Decke";
+			this.btnDecke.Click += new System.EventHandler(this.btnDecke_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
 			// 
 			// btnZoomOut
 			// 
@@ -125,7 +152,6 @@ namespace Europlan.Common {
 			this.planPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.planPanel.Location = new System.Drawing.Point(0, 25);
 			this.planPanel.Name = "planPanel";
-			this.planPanel.PlanCursor = System.Windows.Forms.Cursors.SizeAll;
 			this.planPanel.ProductPlanner = this.connectionPlanner;
 			this.planPanel.Size = new System.Drawing.Size(892, 440);
 			this.planPanel.TabIndex = 0;
@@ -135,33 +161,6 @@ namespace Europlan.Common {
 			this.connectionPlanner.Mode = Europlan.Common.ConnectionPlanner.ConnectionMode.CM_NONE;
 			this.connectionPlanner.PlanCeiling = false;
 			this.connectionPlanner.PlanFloor = true;
-			// 
-			// btnBoden
-			// 
-			this.btnBoden.Checked = true;
-			this.btnBoden.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.btnBoden.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.btnBoden.Image = ((System.Drawing.Image)(resources.GetObject("btnBoden.Image")));
-			this.btnBoden.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnBoden.Name = "btnBoden";
-			this.btnBoden.Size = new System.Drawing.Size(45, 22);
-			this.btnBoden.Text = "Boden";
-			this.btnBoden.Click += new System.EventHandler(this.btnBoden_Click);
-			// 
-			// btnDecke
-			// 
-			this.btnDecke.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.btnDecke.Image = ((System.Drawing.Image)(resources.GetObject("btnDecke.Image")));
-			this.btnDecke.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnDecke.Name = "btnDecke";
-			this.btnDecke.Size = new System.Drawing.Size(43, 22);
-			this.btnDecke.Text = "Decke";
-			this.btnDecke.Click += new System.EventHandler(this.btnDecke_Click);
-			// 
-			// toolStripSeparator2
-			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
 			// 
 			// ConnectionPlannerForm
 			// 

@@ -29,7 +29,7 @@ namespace Europlan.Common {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Cursor = System.Windows.Forms.Cursors.SizeAll;
+			this.Cursor = Europlan.Common.Icons.EuroplanCursors.MOVE_PLAN;
 			this.Name = "ImagePanel";
 			this.Size = new System.Drawing.Size(379, 283);
 			this.Resize += new System.EventHandler(this.PicturePanel_Resize);
