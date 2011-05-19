@@ -109,10 +109,12 @@ namespace Europlan.Common {
 			}
 			Brush b = new SolidBrush(c);
 			b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(128, c), Color.FromArgb(112, c));
+			g.ResetClip();
 			g.FillRegion(b, clipDisabled);
 
 			Region oldClip = g.Clip;
 			g.Clip = new Region(path);
+			g.ResetClip();
 
 			int i = 1;
 			foreach (GraphicalWall wall in room.Walls) {
