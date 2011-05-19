@@ -444,6 +444,8 @@ namespace Europlan.Common {
 			if (schraege != null) {
 
 			} else {
+				this.numSchraegeHorizontal.Text = "";
+				this.numSchraegeVertical.Text = "";
 				this.lblSchraege.Text = "Keine Schräge ausgewählt";
 			}
 			UpdateModifySchraegePanelButtons(schraege);
