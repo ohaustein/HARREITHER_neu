@@ -24,6 +24,8 @@ namespace Europlan.Common {
 		private double borderDistance = 0.1;
 		private bool isDachSchraege = false;
 		private bool enabled = true;
+		private List<double> helpLines = new List<double>();
+		private bool showGlobalHelpLines = true;
 
 		public GraphicalWall() {
 			//GraphicalDoor door = new GraphicalDoor();
@@ -37,6 +39,8 @@ namespace Europlan.Common {
 			//window.Width = 100;
 			//window.Height = 120;
 			//this.obstacles.Add(window);
+			helpLines.Add(20);
+			helpLines.Add(200);
 
 		}
 
@@ -90,6 +94,16 @@ namespace Europlan.Common {
 		public string WallId {
 			get { return wallId; }
 			set { wallId = value; }
+		}
+
+		public List<double> HelpLines {
+			get { return this.helpLines; }
+			set { this.helpLines = value; }
+		}
+
+		public bool ShowGlobalHelpLines {
+			get { return showGlobalHelpLines; }
+			set { showGlobalHelpLines = value; }
 		}
 
 		[XmlIgnore]
@@ -185,6 +199,12 @@ namespace Europlan.Common {
 			g.Clip = wallClip;
 			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
 			g.DrawPolygon(wallBorderPen, pointArr);
+
+			Pen helpLinesPen = new Pen(Color.Blue);
+			helpLinesPen.DashStyle = DashStyle.Dash;
+			foreach (double offset in HelpLines) {
+				g.DrawLine(helpLinesPen, (float)xOffset, (float)(yOffset + offset), (float)(xOffset + GetWallWidth() * 100), (float)(yOffset + offset));
+			}
 
 			bool drawSelected = false;
 

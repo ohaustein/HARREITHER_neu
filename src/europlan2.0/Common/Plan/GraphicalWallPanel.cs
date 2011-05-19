@@ -200,8 +200,17 @@ namespace Europlan.Common {
 			Brush wallBrush = new SolidBrush(Color.White);
 			Pen unusableBorderPen = Pens.Gray;
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Gray, Color.White);
+			Pen helpLinesPen = new Pen(Color.Blue);
+			helpLinesPen.DashStyle = DashStyle.Dash;
 			foreach (GraphicalWall wall in this.Room.Walls) {
-				wall.PaintObject(e.Graphics, this.room.GetWallOffset(wall).Value.X * 100.0, 0, this.SelectedObject, this.SelectedWall, this.Scale);
+				double xOffset = this.room.GetWallOffset(wall).Value.X * 100.0;
+				double yOffset = 0;
+				wall.PaintObject(e.Graphics, xOffset, yOffset, this.SelectedObject, this.SelectedWall, this.Scale);
+				if (wall.ShowGlobalHelpLines) {
+					foreach (double offset in room.HelpLines) {
+						e.Graphics.DrawLine(helpLinesPen, (float)xOffset, (float)(yOffset + offset), (float)(xOffset + wall.GetWallWidth() * 100), (float)(yOffset + offset));
+					}
+				}
 				//xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
 			}
 

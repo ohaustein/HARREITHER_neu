@@ -50,6 +50,7 @@ namespace Europlan.Common {
 		private List<Point2D> ceilingCoordinates;
 		private List<List<Point2D>> ceilingUnusedAreaCoordinates;
 		private List<GraphicalWall> walls;
+		private List<double> helpLines;
 		private Nullable<double> planSettingX;
 		private Nullable<double> planSettingY;
 		private Nullable<double> planSettingScale;
@@ -102,6 +103,8 @@ namespace Europlan.Common {
 			this.ceilingUnusedAreaCoordinates.AddRange(room.ceilingUnusedAreaCoordinates);
 			this.walls.Clear();
 			this.walls.AddRange(room.walls);
+			this.helpLines.Clear();
+			this.helpLines.AddRange(room.helpLines);
 		}
 
 		private void InitializeRoom() {
@@ -131,6 +134,7 @@ namespace Europlan.Common {
 			this.roomUnusedAreaCoordinates = new List<List<Point2D>>();
 			this.ceilingUnusedAreaCoordinates = new List<List<Point2D>>();
 			this.walls = new List<GraphicalWall>();
+			this.helpLines = new List<double>();
 		}
 
 		internal void Synchronize(Room room) {
@@ -167,6 +171,8 @@ namespace Europlan.Common {
 			this.ceilingUnusedAreaCoordinates.AddRange(room.ceilingUnusedAreaCoordinates);
 			this.walls.Clear();
 			this.walls.AddRange(room.walls);
+			this.helpLines.Clear();
+			this.helpLines.AddRange(room.helpLines);
 		}
 
 		[XmlIgnore]
@@ -629,6 +635,11 @@ namespace Europlan.Common {
 			get { return this.walls; }
 			set { this.walls = value; }
 		}
+
+		public List<double> HelpLines {
+			get { return this.helpLines; }
+			set { this.helpLines = value; }
+		}		
 
 		public Nullable<double> PlanSettingX {
 			get { return planSettingX; }
