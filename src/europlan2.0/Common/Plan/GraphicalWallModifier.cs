@@ -142,7 +142,10 @@ namespace Europlan.Common {
 						p = new Pen(Color.Black);
 					}
 					Font font = new Font("Arial", 8.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * room.AssociatedPlan.Measure.Value);
-					g.DrawString("" + i++, font, new SolidBrush(p.Color), (float)numberStart.X, (float)numberStart.Y);
+					StringFormat stringFormat = new StringFormat();
+					stringFormat.Alignment = StringAlignment.Center;
+					stringFormat.LineAlignment = StringAlignment.Center;
+					g.DrawString("" + i++, font, new SolidBrush(p.Color), (float)numberStart.X, (float)numberStart.Y, stringFormat);
 				}
 
 				foreach (GraphicalWallObstacle obstacle in wall.Obstacles) {
