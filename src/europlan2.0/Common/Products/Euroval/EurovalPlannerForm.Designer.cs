@@ -140,8 +140,8 @@ namespace Europlan.Common.Products {
 			// toolStrip
 			// 
 			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnZoomOut,
             this.btnZoomIn,
+            this.btnZoomOut,
             this.toolStripSeparator1,
             this.btnMove,
             this.btnDefineArea,

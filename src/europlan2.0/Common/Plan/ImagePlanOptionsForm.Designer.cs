@@ -30,8 +30,8 @@ namespace Europlan.Common {
 			this.btnRotateRightSmall = new System.Windows.Forms.ToolStripButton();
 			this.btnRotateRight = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
+			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnRaster = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -54,8 +54,8 @@ namespace Europlan.Common {
             this.btnRotateRightSmall,
             this.btnRotateRight,
             this.toolStripSeparator1,
-            this.btnZoomOut,
             this.btnZoomIn,
+            this.btnZoomOut,
             this.toolStripSeparator2,
             this.btnRaster,
             this.toolStripSeparator3,
@@ -119,17 +119,6 @@ namespace Europlan.Common {
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
 			// 
-			// btnZoomOut
-			// 
-			this.btnZoomOut.AutoToolTip = false;
-			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
-			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnZoomOut.Name = "btnZoomOut";
-			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomOut.Text = "toolStripButton1";
-			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
-			// 
 			// btnZoomIn
 			// 
 			this.btnZoomIn.AutoToolTip = false;
@@ -140,6 +129,17 @@ namespace Europlan.Common {
 			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
 			this.btnZoomIn.Text = "toolStripButton1";
 			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+			// 
+			// btnZoomOut
+			// 
+			this.btnZoomOut.AutoToolTip = false;
+			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
+			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnZoomOut.Name = "btnZoomOut";
+			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
+			this.btnZoomOut.Text = "toolStripButton1";
+			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// toolStripSeparator2
 			// 

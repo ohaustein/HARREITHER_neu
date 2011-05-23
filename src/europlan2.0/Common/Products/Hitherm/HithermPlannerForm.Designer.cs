@@ -210,8 +210,8 @@ namespace Europlan.Common {
 			// 
 			this.toolStripMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnZoomOut,
             this.btnZoomIn,
+            this.btnZoomOut,
             this.toolStripSeparator1,
             this.btnPick,
             this.btnMove,
