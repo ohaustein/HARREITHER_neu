@@ -445,11 +445,13 @@ namespace Europlan.Common {
 				this.txtWallConstruction.Text = wall.WallId;
 				this.numWallHorizontal.Value = (decimal)wall.GetWallWidth() * 100;
 				this.numWallVertical.Value = (decimal)wall.GetWallHeight() * 100;
+				this.btnWallNewWall.Enabled = !wall.IsDachSchraege;
 			} else {
 				this.lblSelectedWall.Text = "Keine Wand ausgewählt";
 				this.txtWallConstruction.Text = "";
 				this.numWallHorizontal.Text = "";
 				this.numWallVertical.Text = "";
+				this.btnWallNewWall.Enabled = true;
 			}
 			UpdateDefineWallsPanelButtons(wall);
 			updateOngoing = false;

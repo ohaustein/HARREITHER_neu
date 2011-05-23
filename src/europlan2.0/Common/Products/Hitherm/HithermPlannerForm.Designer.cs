@@ -436,11 +436,11 @@ namespace Europlan.Common {
 			// 
 			// panelTop
 			// 
-			this.panelTop.Controls.Add(this.panelModifyConnection);
-			this.panelTop.Controls.Add(this.panelModifyObstacle);
 			this.panelTop.Controls.Add(this.panelDefineWalls);
 			this.panelTop.Controls.Add(this.panelModifyHitherm);
 			this.panelTop.Controls.Add(this.panelModifySchraege);
+			this.panelTop.Controls.Add(this.panelModifyConnection);
+			this.panelTop.Controls.Add(this.panelModifyObstacle);
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelTop.Location = new System.Drawing.Point(25, 25);
 			this.panelTop.Name = "panelTop";
