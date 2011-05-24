@@ -464,7 +464,7 @@ namespace Europlan.Common {
 				invalidate = this.productPlanner.PlannerMouseMove(mousePosInPlan, mousePosInCtrl, e.Button);
 			}
 
-			if (this.mode == PlanMode.PM_ADD_OBSTACLE && this.dragStart.HasValue && this.newObstacle != null && this.newObstacleWall != null) {
+			if (this.mode == PlanMode.PM_ADD_OBSTACLE && this.dragStart.HasValue && this.newObstacle != null && this.newObstacleWall != null && e.Button != MouseButtons.Middle) {
 				double x = (mousePosInPlan.X < this.dragStart.Value.X ? mousePosInPlan.X : this.dragStart.Value.X) - this.newObstacleWallXOffset;
 				double y = (mousePosInPlan.Y < this.dragStart.Value.Y ? mousePosInPlan.Y : this.dragStart.Value.Y) - this.newObstacleWallYOffset;
 				double width = Math.Abs(mousePosInPlan.X - this.dragStart.Value.X);
