@@ -494,14 +494,14 @@ namespace Europlan.Common {
 		private Nullable<Point2D> startDrag = null;
 		private List<Point2D> startVertices;
 
-		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			this.startDrag = planPoint;
 			this.startVertices = new List<Point2D>(this.vertices);
 			// nothing to do here as the verbindung doesn't have any anchors
 			return false;
 		}
 
-		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			// nothing to do here as the verbindung doesn't have any anchors
 			if (anchor != null && anchor is InvisibleSegmentAnchor) {
 				List<Point2D> oldVertices = this.vertices;
@@ -525,7 +525,7 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			// nothing to do here as the verbindung doesn't have any anchors
 			this.Simplify();
 			return true;
@@ -802,7 +802,8 @@ namespace Europlan.Common {
 		}
 
 		public bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom) {
-			throw new Exception("TODO");
+			// nothing to do
+			return false;
 		}
 	}
 

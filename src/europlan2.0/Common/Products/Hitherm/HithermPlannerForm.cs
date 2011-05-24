@@ -800,7 +800,7 @@ namespace Europlan.Common {
 							link.RevertState();
 						}
 					}
-					wrapper.UpdatePosition(this.graphicalWallPanel.SelectedWall, (double)numRegisterLeft.Value, wrapper.Y, true);
+					wrapper.UpdatePosition(this.graphicalWallPanel.SelectedWall, (double)numRegisterLeft.Value, wrapper.Y, true, false);
 					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyRegisterPanelButtons(wrapper);
@@ -1271,6 +1271,11 @@ namespace Europlan.Common {
 			form.ShowDialog();
 			form.Dispose();
 			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void btnUseHelplines_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.SnapEnabled = !this.btnUseHelplines.Checked;
+			this.btnUseHelplines.Checked = this.graphicalWallPanel.SnapEnabled;
 		}
 	}
 }

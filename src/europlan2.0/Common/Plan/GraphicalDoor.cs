@@ -147,7 +147,7 @@ namespace Europlan.Common {
 		private Nullable<Point2D> startDrag = null;
 		private double startX, startY, startWidth, startHeight;
 
-		public override bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public override bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			this.startDrag = planPoint;
 			this.startX = this.GraphPosX;
 			this.startY = this.GraphPosY;
@@ -156,7 +156,7 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		public override bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public override bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			if (anchor == null) {
 				// move
 				double tmpX = this.GraphPosX;
@@ -186,6 +186,9 @@ namespace Europlan.Common {
 				if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_TOP) == AnchorTypeEnum.ANCHOR_SCALE_TOP) {
 					double tmpHeight = this.Height;
 					this.Height = this.startHeight + planPoint.Y - this.startDrag.Value.Y;
+					if (useSnap) {
+						this.SnapToHelplines(owningWall.AllHelpLines, true, false);
+					}
 					if (!this.CheckValidity(owningWall, 0, 0)) {
 						this.Height = tmpHeight;
 					}
@@ -195,7 +198,7 @@ namespace Europlan.Common {
 			return true;
 		}
 
-		public override bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public override bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			this.startDrag = null;
 			return false;
 		}
@@ -239,7 +242,29 @@ namespace Europlan.Common {
 		}
 
 		public override bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom) {
-			throw new Exception("The method or operation is not implemented.");
+			if (helplines == null) {
+				return false;
+			}
+			double top = this.Height;
+
+			double deltaTop = double.MaxValue;
+
+			double newTop = top;
+
+			double newDeltaTop;
+			bool snappedTop = false;
+			foreach (double helpline in helplines) {
+				newDeltaTop = Math.Abs(helpline - top);
+				if (snapTop && newDeltaTop <= GraphicalWall.HELPLINE_SNAP_DISTANCE && newDeltaTop < deltaTop) {
+					deltaTop = newDeltaTop;
+					newTop = helpline;
+					snappedTop = true;
+				}
+			}
+			if (snapTop) {
+				this.Height = newTop - this.GraphPosY;
+			}
+			return snappedTop && snapTop;
 		}
 	}
 

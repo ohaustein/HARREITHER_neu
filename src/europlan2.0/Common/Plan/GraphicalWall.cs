@@ -375,17 +375,17 @@ namespace Europlan.Common {
 			return new List<Anchor>();
 		}
 
-		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			// nothing to do here as the wall doesn't have any anchors
 			return false;
 		}
 
-		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			// nothing to do here as the wall doesn't have any anchors
 			return false;
 		}
 
-		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			// nothing to do here as the wall doesn't have any anchors
 			return false;
 		}

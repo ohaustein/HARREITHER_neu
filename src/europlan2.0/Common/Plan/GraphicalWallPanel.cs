@@ -42,6 +42,8 @@ namespace Europlan.Common {
 
 		private GraphicalWallObstacle.ObstacleTypeEnum newObstacleType = GraphicalWallObstacle.ObstacleTypeEnum.Window;
 
+		private bool snapEnabled = true;
+
 		private event EventHandler<SelectedObjectArgs> objectSelected;
 		public event EventHandler<SelectedObjectArgs> ObjectSelected {
 			add { this.objectSelected += value; }
@@ -79,6 +81,12 @@ namespace Europlan.Common {
 			this.scale = 1;
 			this.DoubleBuffered = true;
 			InitializeComponent();
+		}
+
+		[DefaultValue(true)]
+		public bool SnapEnabled {
+			get { return this.snapEnabled; }
+			set { this.snapEnabled = value; }
 		}
 
 		public Room Room {
@@ -334,7 +342,7 @@ namespace Europlan.Common {
 				}
 			}
 
-			if (mode == PlanMode.PM_ADD_OBSTACLE && this.room != null) {
+			if (mode == PlanMode.PM_ADD_OBSTACLE && this.room != null && e.Button == MouseButtons.Left) {
 				this.dragStart = mousePosInPlan;
 				this.newObstacleWall = this.room.GetWallForPoint(mousePosInPlan, out this.newObstacleWallXOffset, out this.newObstacleWallYOffset);
 				this.selectedWall = this.newObstacleWall;
@@ -369,7 +377,7 @@ namespace Europlan.Common {
 					}
 				}
 			}
-			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {
+			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button == MouseButtons.Left) {
 				if (this.selectedObject != null) {
 					double offsetX = 0;
 					double offsetY = 0;
@@ -388,7 +396,7 @@ namespace Europlan.Common {
 						this.draggingAnchor = null;
 					}
 					if (this.draggingObject != null) {
-						invalidate = invalidate || this.draggingObject.StartDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall, this.room, this.productPlanner == null ? null : this.productPlanner.Product);
+						invalidate = invalidate || this.draggingObject.StartDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall, this.room, this.productPlanner == null ? null : this.productPlanner.Product, snapEnabled);
 					}
 				}
 			}
@@ -442,7 +450,7 @@ namespace Europlan.Common {
 
 			if (mode == PlanMode.PM_SELECT_OBJECT) {
 				if (this.draggingObject != null) {
-					invalidate = invalidate || this.draggingObject.EndDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall, this.room, this.productPlanner == null ? null : this.productPlanner.Product);
+					invalidate = invalidate || this.draggingObject.EndDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall, this.room, this.productPlanner == null ? null : this.productPlanner.Product, snapEnabled);
 					this.draggingObject = null;
 					this.draggingAnchor = null;
 					// TODO set cursor correctly;
@@ -493,6 +501,10 @@ namespace Europlan.Common {
 				this.newObstacle.GraphPosY = y;
 				this.newObstacle.Height = height;
 				this.newObstacle.Width = width;
+				if (this.snapEnabled) {
+					this.newObstacle.SnapToHelplines(this.newObstacleWall.AllHelpLines, false, true);
+					this.newObstacle.SnapToHelplines(this.newObstacleWall.AllHelpLines, true, false);
+				}
 				this.newObstacleOk = this.newObstacle.CheckValidity(this.newObstacleWall, this.newObstacleWallXOffset, this.newObstacleWallYOffset);
 				if (this.newObstacleOk) {
 					this.room.MarkErrors(this.newObstacle, this.newObstacleWall);
@@ -503,7 +515,7 @@ namespace Europlan.Common {
 			}
 			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {
 				if (this.draggingObject != null) {
-					bool changed = this.draggingObject.MoveDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall, this.room, this.productPlanner == null ? null : this.productPlanner.Product);
+					bool changed = this.draggingObject.MoveDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall, this.room, this.productPlanner == null ? null : this.productPlanner.Product, snapEnabled);
 					if (changed) {
 						this.OnSelectedObjectModified(this.selectedObject);
 					}

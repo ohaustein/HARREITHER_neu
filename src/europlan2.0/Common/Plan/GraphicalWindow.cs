@@ -162,7 +162,7 @@ namespace Europlan.Common {
 		private Nullable<Point2D> startDrag = null;
 		private double startX, startY, startWidth, startHeight;
 
-		public override bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public override bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			this.startDrag = planPoint;
 			this.startX = this.GraphPosX;
 			this.startY = this.GraphPosY;
@@ -171,7 +171,7 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		public override bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public override bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			if (anchor == null) {
 				// move
 				double tmpX = this.GraphPosX;
@@ -180,7 +180,9 @@ namespace Europlan.Common {
 				//this.GraphPosX = startX + planPoint.X - startDrag.Value.X;
 				this.GraphPosY = startY + planPoint.Y - startDrag.Value.Y;
 				bool retryY = false;
-				this.SnapToHelplines(owningWall.AllHelpLines, true, true);
+				if (useSnap) {
+					this.SnapToHelplines(owningWall.AllHelpLines, true, true);
+				}
 				if (!this.CheckValidity(owningWall, 0, 0)) {
 					this.GraphPosY = tmpY;
 					retryY = true;
@@ -194,7 +196,9 @@ namespace Europlan.Common {
 
 				if (retryY) {
 					this.GraphPosY = startY + planPoint.Y - startDrag.Value.Y;
-					this.SnapToHelplines(owningWall.AllHelpLines, true, true);
+					if (useSnap) {
+						this.SnapToHelplines(owningWall.AllHelpLines, true, true);
+					}
 					if (!this.CheckValidity(owningWall, 0, 0)) {
 						this.GraphPosY = tmpY;
 					}
@@ -221,7 +225,9 @@ namespace Europlan.Common {
 				if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_TOP) == AnchorTypeEnum.ANCHOR_SCALE_TOP) {
 					double tmpHeight = this.Height;
 					this.Height = this.startHeight + planPoint.Y - this.startDrag.Value.Y;
-					this.SnapToHelplines(owningWall.AllHelpLines, true, false);
+					if (useSnap) {
+						this.SnapToHelplines(owningWall.AllHelpLines, true, false);
+					}
 					if ((!this.CheckValidity(owningWall, 0, 0)) || this.Height < 0) {
 						this.Height = tmpHeight;
 					}
@@ -230,7 +236,9 @@ namespace Europlan.Common {
 					double tmpY = this.GraphPosY;
 					this.Height = this.startHeight + this.startDrag.Value.Y - planPoint.Y;
 					this.GraphPosY = this.startY + this.startHeight - this.Height;
-					this.SnapToHelplines(owningWall.AllHelpLines, false, true);
+					if (useSnap) {
+						this.SnapToHelplines(owningWall.AllHelpLines, false, true);
+					}
 					if ((!this.CheckValidity(owningWall, 0, 0)) || this.Height < 0) {
 						this.Height = tmpHeight;
 						this.GraphPosY = tmpY;
@@ -241,7 +249,7 @@ namespace Europlan.Common {
 			return true;
 		}
 
-		public override bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
+		public override bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			this.startDrag = null;
 			return false;
 		}
