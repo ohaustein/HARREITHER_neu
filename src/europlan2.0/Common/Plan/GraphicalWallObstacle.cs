@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using WW.Math.Geometry;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
 
@@ -71,14 +73,16 @@ namespace Europlan.Common {
 			Other
 		}
 
+		protected bool error = false;
+
 		public abstract bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset);
 		public abstract void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale);
 		public abstract void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error);
 		public abstract IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset);
 		public abstract WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset);
-		public abstract bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall);
-		public abstract bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall);
-		public abstract bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall);
+		public abstract bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct);
+		public abstract bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct);
+		public abstract bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct);
 		public abstract List<Anchor> GetAnchors(double scale);
 		public abstract void BackupState();
 		public abstract void RevertState();
@@ -108,6 +112,11 @@ namespace Europlan.Common {
 		public abstract double Height {
 			get;
 			set;
+		}
+		[XmlIgnore]
+		public bool Error {
+			get { return this.error; }
+			set { this.error = value; }
 		}
 
 		public double GetGraphPosXLeft(GraphicalWall owningWall) {
@@ -306,7 +315,7 @@ namespace Europlan.Common {
 
 
 
-		public bool PositionAndSizeOk(GraphicalWall owningWall, double offsetX, double offsetY) {
+		public bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
 			Polygon2D borders = this.GetObjectBorders(offsetX, offsetY);
 			if (this.Width < 10 || this.Height < 10) {
 				return false;
@@ -357,6 +366,53 @@ namespace Europlan.Common {
 			usableArea.Outset(this.BorderDistance * 100.0);
 			return usableArea;
 		}
+
+		protected Pen GetObstacleBorderPen(double scale, bool selected, bool error) {
+			Pen pen = selected ? new Pen(Color.FromArgb(255, 0, 0), (float)(1.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
+			if (error) {
+				pen.DashPattern = new float[] { 1, 3 };
+			}
+			return pen;
+		}
+
+		protected Brush GetObstacleBrush(double scale, bool selected, bool error) {
+			return new SolidBrush(error ? Color.FromArgb(127, SystemColors.ControlLight) : SystemColors.ControlLight);
+		}
+
+		protected Pen GetUnusableBorderPen(double scale, bool selected, bool error) {
+			Pen pen = selected ? new Pen(Color.FromArgb(127, 63, 63), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
+			if (error) {
+				pen.DashPattern = new float[] { 1, 3 };
+			}
+			return pen;
+		}
+
+		protected Brush GetUnusableBrush(double scale, bool selected, bool error) {
+			Color c = selected ? Color.FromArgb(127, 63, 63) : Color.Gray;
+			if (error) {
+				c = Color.FromArgb(127, c);
+			}
+			return new HatchBrush(HatchStyle.BackwardDiagonal, c, Color.Transparent);
+		}
+
+		protected Brush GetUnusableBrushForOther(double scale, bool selected, bool error) {
+			Color fg = Color.Gray;
+			Color bg = SystemColors.ControlLight;
+			if (error) {
+				fg = Color.FromArgb(127, fg);
+				bg = Color.FromArgb(127, bg);
+			}
+			return new HatchBrush(HatchStyle.BackwardDiagonal, fg, bg);
+		}
+
+		private bool isNew = false;
+		[XmlIgnore]
+		public bool IsNew {
+			get { return this.isNew; }
+			set { this.isNew = value; }
+		}
+
+		public abstract bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom);
 	}
 
 }

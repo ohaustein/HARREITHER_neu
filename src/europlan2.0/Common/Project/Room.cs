@@ -639,7 +639,7 @@ namespace Europlan.Common {
 		public List<double> HelpLines {
 			get { return this.helpLines; }
 			set { this.helpLines = value; }
-		}		
+		}
 
 		public Nullable<double> PlanSettingX {
 			get { return planSettingX; }
@@ -791,6 +791,174 @@ namespace Europlan.Common {
 			}
 			return pickedWall;
 		}
-	}
 
+		public GraphicalWall GetOwningWall(IGraphicalWallObject obj) {
+			GraphicalWall owner = null;
+			foreach (GraphicalWall wall in this.Walls) {
+				owner = wall.GetOwningWall(obj);
+				if (owner != null) {
+					break;
+				}
+			}
+			return owner;
+		}
+
+		public List<GraphicalWall> GetAllWalls() {
+			List<GraphicalWall> allWalls = new List<GraphicalWall>();
+			foreach (GraphicalWall baseWall in this.Walls) {
+				GraphicalWall wall = baseWall;
+				while (wall != null) {
+					allWalls.Add(wall);
+					wall = wall.DachSchraege;
+				}
+			}
+			return allWalls;
+		}
+
+		public bool MarkErrors(IGraphicalWallObject obj, GraphicalWall owningWall) {
+			if (obj is GraphicalWall) {
+				// TODO
+			} else if (obj is GraphicalWallObstacle) {
+				foreach (PlannedProduct pp in this.PlannedProducts) {
+					if (pp.Product is HithermProduct) {
+						HithermProduct hp = pp.Product as HithermProduct;
+						foreach (HithermCircuit c in hp.PlannedCircuits) {
+							foreach (GraphicalHithermVerbindung link in c.Links) {
+								link.Error = false;
+							}
+						}
+						Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
+						WW.Math.Geometry.Polygon2D objBorder = obj.GetObjectBorders(offset.X, offset.Y);
+						WW.Math.Geometry.Polygon2D unsableBorder = (obj as GraphicalWallObstacle).GetOutsideBorder(offset.X, offset.Y);
+						foreach (GraphicalHithermRegisterWrapper register in owningWall.Registers) {
+							register.Error = register.CollisionTest(unsableBorder, offset.X, offset.Y, false);
+							if (register.Error) {
+								HithermCircuit c = hp.GetCircuitForRegister(register.Register);
+								GraphicalHithermVerbindung link = c.GetInputLink(register.Register);
+								if (link != null) {
+									link.Error = true;
+								}
+								link = c.GetOutputLink(register.Register);
+								if (link != null) {
+									link.Error = true;
+								}
+							}
+						}
+						foreach (HithermCircuit c in hp.PlannedCircuits) {
+							foreach (GraphicalHithermVerbindung link in c.Links) {
+								link.Error = link.Error || link.CollisionTest(objBorder, 0, 0, true);
+							}
+						}
+					} else if (pp.Product is HithermCompactProduct) {
+						// TODO
+					}
+				}
+			} else if (obj is GraphicalHithermVerbindung) {
+				// nothing to do
+			} else if (obj is GraphicalRegisterWrapper) {
+				foreach (PlannedProduct pp in this.PlannedProducts) {
+					if (pp.Product is HithermProduct) {
+						HithermProduct hp = pp.Product as HithermProduct;
+						Vector2D offset = this.GetWallOffset(owningWall).Value * 100.0;
+						WW.Math.Geometry.Polygon2D poly = obj.GetObjectBorders(offset.X, offset.Y);
+						foreach (HithermCircuit c in hp.PlannedCircuits) {
+							foreach (GraphicalHithermVerbindung link in c.Links) {
+								link.Error = link.CollisionTest(poly, 0, 0, false);
+							}
+						}
+					} else if (pp.Product is HithermCompactProduct) {
+						// TODO
+					}
+				}
+			}
+			return true;
+		}
+
+		public bool ClearErrors() {
+			foreach (PlannedProduct pp in this.PlannedProducts) {
+				if (pp.Product is HithermProduct) {
+					HithermProduct hp = pp.Product as HithermProduct;
+					foreach (HithermCircuit hc in hp.PlannedCircuits) {
+						foreach (GraphicalHithermVerbindung link in hc.Links) {
+							link.Error = false;
+						}
+					}
+				} else if (pp.Product is HithermCompactProduct) {
+					// TODO
+				}
+			}
+			foreach (GraphicalWall baseWall in this.Walls) {
+				GraphicalWall wall = baseWall;
+				while (wall != null) {
+					wall.Error = false;
+					foreach (GraphicalWallObstacle obstacle in wall.Obstacles) {
+						obstacle.Error = false;
+					}
+					foreach (GraphicalRegisterWrapper register in wall.Registers) {
+						register.Error = false;
+					}
+					wall = wall.DachSchraege;
+				}
+			}
+			return true;
+		}
+
+		public bool DeleteErroneousObjects() {
+			List<HithermRegister> hithermRegistersToDelete = new List<HithermRegister>();
+			List<HithermCompactRegister> hithermCompactRegistersToDelete = new List<HithermCompactRegister>();
+			foreach (GraphicalWall baseWall in this.Walls) {
+				GraphicalWall wall = baseWall;
+				while (wall != null) {
+					wall.Error = false;
+					List<GraphicalWallObstacle> obstaclesToDelete = new List<GraphicalWallObstacle>();
+					foreach (GraphicalWallObstacle obstacle in wall.Obstacles) {
+						if (obstacle.Error) {
+							obstaclesToDelete.Add(obstacle);
+						}
+					}
+					foreach (GraphicalWallObstacle obstacle in obstaclesToDelete) {
+						wall.Obstacles.Remove(obstacle);
+					}
+					List<GraphicalRegisterWrapper> registersToDelete = new List<GraphicalRegisterWrapper>();
+					foreach (GraphicalRegisterWrapper register in wall.Registers) {
+						if (register.Error) {
+							registersToDelete.Add(register);
+							if (register is GraphicalHithermRegisterWrapper) {
+								hithermRegistersToDelete.Add((register as GraphicalHithermRegisterWrapper).Register);
+							// TODO for hitherm compact
+							//} else if (register is GraphicalHithermCompactRegisterWrapper) {
+								//hithermCompactRegistersToDelete.Add(register as HithermCompactRegister);
+							}
+						}
+					}
+					foreach (GraphicalRegisterWrapper register in registersToDelete) {
+						wall.Registers.Remove(register);
+					}
+					wall = wall.DachSchraege;
+				}
+			}
+			foreach (PlannedProduct pp in this.PlannedProducts) {
+				if (pp.Product is HithermProduct) {
+					HithermProduct hp = pp.Product as HithermProduct;
+					foreach (HithermRegister register in hithermRegistersToDelete) {
+						hp.RemoveRegisterFromCircuit(register);
+					}
+					foreach (HithermCircuit hc in hp.PlannedCircuits) {
+						List<GraphicalHithermVerbindung> linksToDelete = new List<GraphicalHithermVerbindung>();
+						foreach (GraphicalHithermVerbindung link in hc.Links) {
+							if (link.Error) {
+								linksToDelete.Add(link);
+							}
+						}
+						foreach (GraphicalHithermVerbindung link in linksToDelete) {
+							hc.Links.Remove(link);
+						}
+					}
+				} else if (pp.Product is HithermCompactProduct) {
+					// TODO
+				}
+			}
+			return true;
+		}
+	}
 }

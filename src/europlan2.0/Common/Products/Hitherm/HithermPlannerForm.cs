@@ -18,7 +18,7 @@ namespace Europlan.Common {
 		public HithermPlannerForm(HithermProduct product) {
 			InitializeComponent();
 
-			this.hithermPlanner.Product = product;
+			this.hithermPlanner.HithermProduct = product;
 			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
 			this.panelDefineWalls.BringToFront();
 
@@ -87,6 +87,12 @@ namespace Europlan.Common {
 			this.btnObstacleOther.Checked = this.btnObstacleOther == buttonToCheck;
 		}
 
+		private void ApplyConnectionButtonCheckedState(ToolStripButton buttonToCheck) {
+			this.btnConnectionManual.Checked = this.btnConnectionManual == buttonToCheck;
+			this.btnConnectionAuto.Checked = this.btnConnectionAuto == buttonToCheck;
+			this.btnConnectionDirect.Checked = this.btnConnectionDirect == buttonToCheck;
+		}
+
 		private void btnWallNewWall_Click(object sender, EventArgs e) {
 			NewWallForm form = new NewWallForm(false, false, SelectedObject != null ? (SelectedObject as GraphicalWall).GetWallWidth() * 100 : 0, graphicalWallPanel.Room.Walls.Count, (graphicalWallPanel.SelectedWall != null && !graphicalWallPanel.SelectedWall.IsDachSchraege));
 			DialogResult result = form.ShowDialog();
@@ -131,7 +137,7 @@ namespace Europlan.Common {
 			}
 			if (ok) {
 				this.graphicalWallPanel.Room.Walls.Clear();
-				this.hithermPlanner.Product.PlannedCircuits.Clear();
+				this.hithermPlanner.HithermProduct.PlannedCircuits.Clear();
 				NewWallForm form = new NewWallForm(true, false, 0, 0, false);
 				DialogResult result = form.ShowDialog();
 				if (result == DialogResult.OK) {
@@ -177,7 +183,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnPick_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.SelectedObject = null;
+			//this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_SELECT_OBJECT;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
 			ApplyButtonCheckedState(this.btnPick);
@@ -245,6 +251,9 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_CLICK;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_CONNECTION;
+			this.btnConnectionManual.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_MANUAL;
+			this.btnConnectionAuto.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_AUTO;
+			this.btnConnectionDirect.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_DIRECT;
 			UpdateModifyConnectionPanel(null);
 			this.panelModifyConnection.BringToFront();
 			ApplyButtonCheckedState(this.btnConnection);
@@ -286,6 +295,21 @@ namespace Europlan.Common {
 			ApplyObstacleButtonCheckedState(this.btnObstacleOther);
 		}
 
+		private void btnConnectionManual_Click(object sender, EventArgs e) {
+			this.hithermPlanner.NewConnectionMode = HithermPlanner.NewConnectionModeEnum.NCM_MANUAL;
+			ApplyConnectionButtonCheckedState(this.btnConnectionManual);
+		}
+
+		private void btnConnectionAuto_Click(object sender, EventArgs e) {
+			this.hithermPlanner.NewConnectionMode = HithermPlanner.NewConnectionModeEnum.NCM_AUTO;
+			ApplyConnectionButtonCheckedState(this.btnConnectionAuto);
+		}
+
+		private void btnConnectionDirect_Click(object sender, EventArgs e) {
+			this.hithermPlanner.NewConnectionMode = HithermPlanner.NewConnectionModeEnum.NCM_DIRECT;
+			ApplyConnectionButtonCheckedState(this.btnConnectionDirect);
+		}
+
 		private IGraphicalWallObject SelectedObject {
 			get { return this.graphicalWallPanel.SelectedObject; }
 		}
@@ -303,10 +327,10 @@ namespace Europlan.Common {
 				} else if (SelectedObject is GraphicalHithermVerbindung) {
 					UpdateModifyConnectionPanel(SelectedObject as GraphicalHithermVerbindung);
 				}
-			} 
-			if (e.OldSelectedObject is GraphicalWallObstacle) {
+			}
+			/*if (e.OldSelectedObject is GraphicalWallObstacle) {
 				GraphicalWallObstacle obstacle = e.OldSelectedObject as GraphicalWallObstacle;
-				if (!obstacle.PositionAndSizeOk(e.OldSelectedWall, 0, 0)) {
+				if (!obstacle.CheckValidity(e.OldSelectedWall, 0, 0)) {
 					obstacle.RevertState();
 				} else {
 					Vector2D offset = this.graphicalWallPanel.Room.GetWallOffset(e.OldSelectedWall).Value * 100;
@@ -322,7 +346,7 @@ namespace Europlan.Common {
 						DeleteRegister(wrapper as GraphicalHithermRegisterWrapper);
 					}
 					List<GraphicalHithermVerbindung> linksToDelete = new List<GraphicalHithermVerbindung>();
-					foreach (HithermCircuit c in this.hithermPlanner.Product.PlannedCircuits) {
+					foreach (HithermCircuit c in this.hithermPlanner.HithermProduct.PlannedCircuits) {
 						foreach (GraphicalHithermVerbindung link in c.Links) {
 							if (link.CollisionTest(outsideBorder, offset.X, offset.Y, false)) {
 								linksToDelete.Add(link);
@@ -333,12 +357,12 @@ namespace Europlan.Common {
 						DeleteVerbindung(link);
 					}
 				}
-			}
+			}*/
 
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
-		private void graphicalWallPanel_SelectedObjectModified(object sender, GraphicalWallPanel.SelectedObjectArgs e) {
+		private void graphicalWallPanel_SelectedObjectModified(object sender, EventArgs e) {
 			if (SelectedObject != null) {
 				unsavedChanges = true;
 				if (SelectedObject is GraphicalWall) {
@@ -364,6 +388,9 @@ namespace Europlan.Common {
 			this.btnRegisterHorizontal.Visible = this.btnRegister.Checked;
 			this.btnRegisterVertical.Visible = this.btnRegister.Checked;
 
+			this.btnConnectionManual.Visible = this.btnConnection.Checked;
+			this.btnConnectionAuto.Visible = this.btnConnection.Checked;
+			this.btnConnectionDirect.Visible = this.btnConnection.Checked;
 			//this.toolStripSubmenu.Visible = this.btnObstacle.Checked || this.btnRegister.Checked;
 		}
 
@@ -573,7 +600,7 @@ namespace Europlan.Common {
 
 		private void UpdateModifyRegisterPanelButtons(GraphicalHithermRegisterWrapper hithermRegister) {
 			if (hithermRegister != null) {
-				this.btnRegisterAccept.Enabled = unsavedChanges;
+				this.btnRegisterAccept.Enabled = unsavedChanges || hithermRegister.IsNew;
 				this.btnRegisterRevert.Enabled = unsavedChanges;
 				// TODO
 				//this.btnRegisterConnect.Enabled = true;
@@ -589,7 +616,7 @@ namespace Europlan.Common {
 
 		private void UpdateModifyObstaclesPanelButtons(GraphicalWallObstacle obstacle) {
 			if (obstacle != null) {
-				this.btnObstacleApply.Enabled = unsavedChanges;
+				this.btnObstacleApply.Enabled = unsavedChanges || obstacle.IsNew;
 				this.btnObstacleRevert.Enabled = unsavedChanges;
 				this.btnObstacleRemove.Enabled = true;
 				this.btnObstacleBorder.Enabled = true;
@@ -730,7 +757,7 @@ namespace Europlan.Common {
 			if (MessageBox.Show("Wollen Sie die aktuelle Wand wirklich löschen?", "Wand löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 				GraphicalWall wall = SelectedObject as GraphicalWall;
 				graphicalWallPanel.Room.Walls.Remove(wall);
-				wall.RemoveAllRegisters(this.hithermPlanner.Product);
+				wall.RemoveAllRegisters(this.hithermPlanner.HithermProduct);
 				this.graphicalWallPanel.SelectedObject = null;
 				UpdateDefineWallsPanel(null);
 				this.graphicalWallPanel.InvalidateGraphics();
@@ -763,15 +790,30 @@ namespace Europlan.Common {
 
 		private void numRegisterLeft_ValueChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
-				GraphicalHithermRegisterWrapper wrapper = SelectedObject as GraphicalHithermRegisterWrapper;
-				unsavedChanges = true;
-				UpdateModifyRegisterPanelButtons(wrapper);
+				if (SelectedObject is GraphicalHithermRegisterWrapper) {
+					GraphicalHithermRegisterWrapper wrapper = SelectedObject as GraphicalHithermRegisterWrapper;
+					HithermCircuit circuit = this.hithermPlanner.HithermProduct.GetCircuitForRegister(wrapper.Register);
+					foreach (GraphicalHithermVerbindung link in circuit.Links) {
+						if (link.Start == wrapper.Register) {
+							link.RevertState();
+						}
+						if (link.End == wrapper.Register) {
+							link.RevertState();
+						}
+					}
+					wrapper.UpdatePosition(this.graphicalWallPanel.SelectedWall, (double)numRegisterLeft.Value, wrapper.Y, true);
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
+					unsavedChanges = true;
+					UpdateModifyRegisterPanelButtons(wrapper);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
 			}
 		}
 
 		private void numRegisterVertical_ValueChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
 				GraphicalHithermRegisterWrapper wrapper = SelectedObject as GraphicalHithermRegisterWrapper;
+				this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 				unsavedChanges = true;
 				UpdateModifyRegisterPanelButtons(wrapper);
 			}
@@ -802,10 +844,11 @@ namespace Europlan.Common {
 		}
 
 		private void btnRegisterAccept_Click(object sender, EventArgs e) {
-			GraphicalHithermRegisterWrapper wrapper = SelectedObject as GraphicalHithermRegisterWrapper;
+			/*GraphicalHithermRegisterWrapper wrapper = SelectedObject as GraphicalHithermRegisterWrapper;
 			wrapper.Register.GraphPosX = (double)numRegisterLeft.Value;
-			wrapper.Register.GraphPosY = (double)numRegisterVertical.Value;
-			UpdateModifyRegisterPanel(wrapper);
+			wrapper.Register.GraphPosY = (double)numRegisterVertical.Value;*/
+			graphicalWallPanel.SelectedObject = null;
+			UpdateModifyRegisterPanel(null);
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
@@ -815,16 +858,14 @@ namespace Europlan.Common {
 
 		private void DeleteRegister(GraphicalHithermRegisterWrapper register) {
 			if (register != null) {
+				register.Error = true;
 				foreach (GraphicalWall wall in graphicalWallPanel.Room.Walls) {
 					GraphicalWall wrapperWall = wall.GetWallForWrapper(register);
 					if (wrapperWall != null) {
 						wrapperWall.Registers.Remove(register);
 					}
-					hithermPlanner.Product.RemoveRegisterFromCircuit(register.Register);
-					this.hithermPlanner.Product.CorrectCircuitIds();
-				}
-				if (register == SelectedObject) {
-					UpdateModifyRegisterPanel(register);
+					hithermPlanner.HithermProduct.RemoveRegisterFromCircuit(register.Register);
+					this.hithermPlanner.HithermProduct.CorrectCircuitIds();
 				}
 				this.graphicalWallPanel.SelectedObject = null;
 				this.graphicalWallPanel.InvalidateGraphics();
@@ -833,8 +874,11 @@ namespace Europlan.Common {
 
 		private void btnRegisterRevert_Click(object sender, EventArgs e) {
 			GraphicalHithermRegisterWrapper wrapper = SelectedObject as GraphicalHithermRegisterWrapper;
+			wrapper.RevertState();
+			this.graphicalWallPanel.Room.MarkErrors(wrapper, this.graphicalWallPanel.SelectedWall);
 			unsavedChanges = false;
 			UpdateModifyRegisterPanel(wrapper);
+			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
 		private void btnRegisterConnect_Click(object sender, EventArgs e) {
@@ -854,7 +898,7 @@ namespace Europlan.Common {
 		}
 
 		private void CalculateAndUpdate() {
-			HithermProduct product = this.hithermPlanner.Product;
+			HithermProduct product = this.hithermPlanner.HithermProduct;
 			PlannedProduct pp = Project.Instance.GetPlannedProduct(product);
 			product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
 			string errorMsg = pp.Product.LastErrorMessage;
@@ -1010,9 +1054,10 @@ namespace Europlan.Common {
 		private void btnObstacleRevert_Click(object sender, EventArgs e) {
 			GraphicalWallObstacle obstacle = SelectedObject as GraphicalWallObstacle;
 			obstacle.RevertState();
-			graphicalWallPanel.SelectedObject = null;
+			this.graphicalWallPanel.Room.MarkErrors(obstacle, this.graphicalWallPanel.SelectedWall);
+			//graphicalWallPanel.SelectedObject = null;
 			unsavedChanges = false;
-			UpdateModifyObstaclesPanel(null);
+			UpdateModifyObstaclesPanel(obstacle);
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
@@ -1036,6 +1081,7 @@ namespace Europlan.Common {
 					GraphicalWall obstacleWall = wall.GetWallForObstacle(obstacle);
 					if (obstacleWall != null) {
 						obstacleWall.Obstacles.Remove(obstacle);
+						obstacle.Error = true;
 						if (obstacle == this.SelectedObject) {
 							graphicalWallPanel.SelectedObject = null;
 							UpdateModifyObstaclesPanel(null);
@@ -1064,15 +1110,15 @@ namespace Europlan.Common {
 
 		private void DeleteVerbindung(GraphicalHithermVerbindung verbindung) {
 			if (verbindung != null) {
-				foreach (HithermCircuit c in this.hithermPlanner.Product.PlannedCircuits) {
+				foreach (HithermCircuit c in this.hithermPlanner.HithermProduct.PlannedCircuits) {
 					if (c.Links.Contains(verbindung)) {
 						c.Links.Remove(verbindung);
 						if (verbindung == this.graphicalWallPanel.SelectedObject) {
 							this.graphicalWallPanel.SelectedObject = null;
 						}
 						if (verbindung.Start != null && verbindung.End != null) {
-							this.hithermPlanner.Product.MoveRegisterToCircuit(verbindung.End, this.hithermPlanner.Product.GetNewHkId());
-							this.hithermPlanner.Product.CorrectCircuitIds();
+							this.hithermPlanner.HithermProduct.MoveRegisterToCircuit(verbindung.End, this.hithermPlanner.HithermProduct.GetNewHkId());
+							this.hithermPlanner.HithermProduct.CorrectCircuitIds();
 						}
 						this.graphicalWallPanel.InvalidateGraphics();
 						break;
@@ -1085,6 +1131,7 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).Width = (double)numObstacleWidth.Value;
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyObstaclesPanelButtons(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -1096,6 +1143,7 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).Height = (double)numObstacleHeight.Value;
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyObstaclesPanelButtons(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -1107,6 +1155,7 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).GraphPosY = (double)numObstacleVertical.Value;
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyObstaclesPanelButtons(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -1118,6 +1167,7 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).SetGraphPosXLeft((double)numObstacleHorizontalLeft.Value, graphicalWallPanel.SelectedWall);
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -1129,6 +1179,7 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).SetGraphPosXRight((double)numObstacleHorizontalRight.Value, graphicalWallPanel.SelectedWall);
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -1140,6 +1191,7 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).SetGraphDistanceXLeft((double)numObstacleDistanceLeft.Value, graphicalWallPanel.SelectedWall);
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -1151,6 +1203,7 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).SetGraphDistanceXRight((double)numObstacleDistanceRight.Value, graphicalWallPanel.SelectedWall);
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -1162,6 +1215,7 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).SetGraphMiddleDistanceXLeft((double)numObstacleMiddleDistanceLeft.Value, graphicalWallPanel.SelectedWall);
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -1173,6 +1227,7 @@ namespace Europlan.Common {
 			if (!updateOngoing) {
 				if (SelectedObject is GraphicalWallObstacle) {
 					(SelectedObject as GraphicalWallObstacle).SetGraphMiddleDistanceXRight((double)numObstacleMiddleDistanceRight.Value, graphicalWallPanel.SelectedWall);
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -1218,6 +1273,5 @@ namespace Europlan.Common {
 			form.Dispose();
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
-
 	}
 }

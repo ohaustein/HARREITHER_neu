@@ -21,6 +21,7 @@ namespace Europlan.Common {
 		private PlannedProduct product;
 		private string productGuid = null;
 		private bool finished = true;
+		protected bool error = false;
 
 		public List<Point2D> Vertices {
 		  get { return vertices; }
@@ -93,8 +94,9 @@ namespace Europlan.Common {
 			PointF newVertex;
 			bool first = true;
 			Pen p = new Pen(c, 2);
-			if (error) {
-				p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+			if (error || this.error) {
+				//p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+				p = new Pen(new HatchBrush(HatchStyle.DarkDownwardDiagonal, c, Color.Transparent));
 			}
 			p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
 			foreach (Point2D vertex in vertices) {
@@ -467,12 +469,12 @@ namespace Europlan.Common {
 						offset = new Vector2D(0, 0);
 					}
 					foreach (GraphicalHithermRegisterWrapper register in wall.Registers) {
-						if (register.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, true)) {
+						if (!register.Error && register.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, true)) {
 							return false;
 						}
 					}
 					foreach (GraphicalWallObstacle obstacle in wall.Obstacles) {
-						if (obstacle.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, false)) {
+						if (!obstacle.Error && obstacle.CollisionTest(linkBorders, offset.Value.X, offset.Value.Y, false)) {
 							return false;
 						}
 					}
@@ -481,7 +483,7 @@ namespace Europlan.Common {
 			}
 			foreach (HithermCircuit hc in this.Product.Product.PlannedCircuits) {
 				foreach (GraphicalHithermVerbindung link in hc.Links) {
-					if (link != this && link.CollisionTest(linkBorders, offsetX, offsetY, true)) {
+					if (!link.Error && link != this && link.CollisionTest(linkBorders, offsetX, offsetY, true)) {
 						return false;
 					}
 				}
@@ -492,14 +494,14 @@ namespace Europlan.Common {
 		private Nullable<Point2D> startDrag = null;
 		private List<Point2D> startVertices;
 
-		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			this.startDrag = planPoint;
 			this.startVertices = new List<Point2D>(this.vertices);
 			// nothing to do here as the verbindung doesn't have any anchors
 			return false;
 		}
 
-		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			// nothing to do here as the verbindung doesn't have any anchors
 			if (anchor != null && anchor is InvisibleSegmentAnchor) {
 				List<Point2D> oldVertices = this.vertices;
@@ -523,14 +525,14 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			// nothing to do here as the verbindung doesn't have any anchors
 			this.Simplify();
 			return true;
 		}
 		#endregion
 
-		public void UpdateStartPoint(GraphicalHithermRegisterWrapper register, GraphicalWall owningWall) {
+		public void UpdateStartPoint(GraphicalHithermRegisterWrapper register, GraphicalWall owningWall, bool checkValidity) {
 			if (this.vertices == null || this.vertices.Count < 2) {
 				return;
 			}
@@ -612,12 +614,14 @@ namespace Europlan.Common {
 				this.vertices[0] = newStartPoint;
 			}
 			this.Simplify();
-			if (!this.CheckValidity(owningWall, 0, 0)) {
-				this.vertices.Clear();
+			if (checkValidity) {
+				if (!this.CheckValidity(owningWall, 0, 0)) {
+					this.vertices.Clear();
+				}
 			}
 		}
 
-		public void UpdateEndPoint(GraphicalHithermRegisterWrapper register, GraphicalWall owningWall) {
+		public void UpdateEndPoint(GraphicalHithermRegisterWrapper register, GraphicalWall owningWall, bool checkValidity) {
 			if (this.vertices == null || this.vertices.Count < 2) {
 				return;
 			}
@@ -699,8 +703,10 @@ namespace Europlan.Common {
 				this.vertices[this.vertices.Count - 1] = newEndPoint;
 			}
 			this.Simplify();
-			if (!this.CheckValidity(owningWall, 0, 0)) {
-				this.vertices.Clear();
+			if (checkValidity) {
+				if (!this.CheckValidity(owningWall, 0, 0)) {
+					this.vertices.Clear();
+				}
 			}
 		}
 
@@ -769,6 +775,35 @@ namespace Europlan.Common {
 			get { return this.finished; }
 			set { this.finished = value; }
 		}
+
+		[XmlIgnore]
+		public bool Error {
+			get { return this.error; }
+			set { this.error = value; }
+		}
+
+		private List<Point2D> bakVertices = null;
+
+		public void BackupState() {
+			bakVertices = new List<Point2D>(this.vertices);
+		}
+
+		public void RevertState() {
+			if (bakVertices != null) {
+				this.vertices = new List<Point2D>(bakVertices);
+			}
+		}
+
+		private bool isNew = false;
+		[XmlIgnore]
+		public bool IsNew {
+			get { return this.isNew; }
+			set { this.isNew = value; }
+		}
+
+		public bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom) {
+			throw new Exception("TODO");
+		}
 	}
 
 	public class InvisibleSegmentAnchor : Anchor {
@@ -808,6 +843,13 @@ namespace Europlan.Common {
 
 		public override bool HitTest(Point2D planPoint, double xOffset, double yOffset, double scale) {
 			return segment.GetDistance(planPoint - new Vector2D(xOffset, yOffset)) <= thickness / 2.0;
+		}
+
+		private bool isNew = false;
+		[XmlIgnore]
+		public bool IsNew {
+			get { return this.isNew; }
+			set { this.isNew = value; }
 		}
 	}
 }

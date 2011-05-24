@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using WW.Math.Geometry;
 using WW.Math;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	public abstract class GraphicalRegisterWrapper : IGraphicalWallObject {
@@ -19,13 +20,36 @@ namespace Europlan.Common {
 
 		public abstract List<Anchor> GetAnchors(double scale);
 
-		public abstract bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall);
-		public abstract bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall);
-		public abstract bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall);
+		public abstract bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct);
+		public abstract bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct);
+		public abstract bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct);
+
+
+		public abstract void BackupState();
+		public abstract void RevertState();
+
+		public abstract bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY);
 
 		public virtual bool IsMoveable {
 			get { return true; }
 		}
 		#endregion
+
+		protected bool error = false;
+		[XmlIgnore]
+		public bool Error {
+			get { return this.error; }
+			set { this.error = value; }
+		}
+
+		private bool isNew = false;
+		[XmlIgnore]
+		public bool IsNew {
+			get { return this.isNew; }
+			set { this.isNew = value; }
+		}
+
+
+		public abstract bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom);
 	}
 }

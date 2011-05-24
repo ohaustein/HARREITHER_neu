@@ -20,7 +20,7 @@ namespace Europlan.Common.Icons {
 				return movePlan;
 			}
 		}
-
+		 
 		public static Cursor MOVE_PLAN_ACTIVE {
 			get {
 				if (movePlanActive == null) {

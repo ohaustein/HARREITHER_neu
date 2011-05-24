@@ -16,6 +16,12 @@ namespace Europlan.Common {
 			HPM_ADD_CONNECTION
 		}
 
+		public enum NewConnectionModeEnum {
+			NCM_MANUAL,
+			NCM_AUTO,
+			NCM_DIRECT
+		}
+
 		private GraphicalWallPanel connectedWallPanel;
 		private HithermPlannerMode mode = HithermPlannerMode.HPM_NONE;
 
@@ -40,6 +46,21 @@ namespace Europlan.Common {
 		private List<PossibleConnection> highlightedConnections = new List<PossibleConnection>();
 		private GraphicalHithermVerbindung newConnection = new GraphicalHithermVerbindung();
 		private GraphicalHithermVerbindung newConnectionDraw = new GraphicalHithermVerbindung(false);
+
+		private NewConnectionModeEnum newConnectionMode = NewConnectionModeEnum.NCM_MANUAL;
+
+		public NewConnectionModeEnum NewConnectionMode {
+			get { return this.newConnectionMode; }
+			set {
+				if (this.newConnectionStart != null) {
+					this.newConnectionStart = null;
+					this.startConnection = null;
+					this.newConnection.Vertices.Clear();
+					this.newConnectionDraw.Vertices.Clear();
+				}
+				this.newConnectionMode = value;
+			}
+		}
 
 		public HithermRegister.RohrabstandEnum NewRegisterRohrabstand {
 			get { return newRegisterRohrabstand; }
@@ -117,7 +138,9 @@ namespace Europlan.Common {
 			}
 			foreach (HithermCircuit c in this.product.PlannedCircuits) {
 				foreach (GraphicalHithermVerbindung link in c.Links) {
-					link.PaintObject(g, 0, 0, this.connectedWallPanel.SelectedObject, scale);
+					if (link != this.connectedWallPanel.SelectedObject) {
+						link.PaintObject(g, 0, 0, this.connectedWallPanel.SelectedObject, scale);
+					}
 				}
 			}
 			if (this.mode == HithermPlannerMode.HPM_ADD_CONNECTION) {
@@ -328,6 +351,7 @@ namespace Europlan.Common {
 						this.connectedWallPanel.SelectedWall = this.newRegisterWall;
 					}
 					this.newRegister = new GraphicalHithermRegisterWrapper(this.product);
+					this.newRegister.IsNew = true;
 				}
 			}
 
@@ -364,10 +388,18 @@ namespace Europlan.Common {
 						this.newRegister.Register.GraphWallId = this.newRegisterWall.Id;
 					}
 					if (this.newRegister.Register != null) {
-						this.newRegisterOk = this.newRegister.CheckPositionAndSize(this.newRegisterWall, this.newRegisterWallXOffset, this.newRegisterWallYOffset);
+						this.newRegisterOk = this.newRegister.CheckValidity(this.newRegisterWall, this.newRegisterWallXOffset, this.newRegisterWallYOffset);
+					} else {
+						this.newRegisterOk = false;
+					}
+					if (this.newRegisterOk) {
+						this.newRegisterWall.AssiociatedRoom.MarkErrors(this.newRegister, this.newRegisterWall);
+					} else {
+						this.newRegisterWall.AssiociatedRoom.ClearErrors();
 					}
 				} else {
 					this.newRegister.Register = null;
+					this.newRegisterWall.AssiociatedRoom.ClearErrors();
 				}
 				return true;
 			}
@@ -430,7 +462,7 @@ namespace Europlan.Common {
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public HithermProduct Product {
+		public HithermProduct HithermProduct {
 			get { return this.product; }
 			set {
 				this.product = value;
@@ -462,6 +494,10 @@ namespace Europlan.Common {
 				}
 
 			}
+		}
+
+		public Product Product {
+			get { return this.HithermProduct; }
 		}
 
 		/*/// <summary>
@@ -625,6 +661,5 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
-
 	}
 }

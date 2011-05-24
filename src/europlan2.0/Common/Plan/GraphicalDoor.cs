@@ -78,15 +78,10 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error) {
-			Pen doorBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
-			Brush doorBrush = new SolidBrush(SystemColors.ControlLight);
-			Pen unusableBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
-			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, this == selectedObject ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.Transparent);
-
-			if (error) {
-				doorBorderPen.DashStyle = DashStyle.DashDotDot;
-				unusableBorderPen.DashStyle = DashStyle.DashDotDot;
-			}
+			Pen doorBorderPen = this.GetObstacleBorderPen(scale, this == selectedObject, error);
+			Brush doorBrush = this.GetObstacleBrush(scale, this == selectedObject, error);
+			Pen unusableBorderPen = this.GetUnusableBorderPen(scale, this == selectedObject, error);
+			Brush unusableBrush = this.GetUnusableBrush(scale, this == selectedObject, error);
 
 			Region oldClip = g.Clip;
 			Region baseClip = new Region(oldClip.GetRegionData());
@@ -152,7 +147,7 @@ namespace Europlan.Common {
 		private Nullable<Point2D> startDrag = null;
 		private double startX, startY, startWidth, startHeight;
 
-		public override bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall) {
+		public override bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			this.startDrag = planPoint;
 			this.startX = this.GraphPosX;
 			this.startY = this.GraphPosY;
@@ -161,13 +156,13 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		public override bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall) {
+		public override bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			if (anchor == null) {
 				// move
 				double tmpX = this.GraphPosX;
 				double tmpY = this.GraphPosY;
 				this.GraphPosX = startX + planPoint.X - startDrag.Value.X;
-				if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+				if (!this.CheckValidity(owningWall, 0, 0)) {
 					this.GraphPosX = tmpX;
 				}
 			} else {
@@ -176,14 +171,14 @@ namespace Europlan.Common {
 					double tmpX = this.GraphPosX;
 					this.Width = this.startWidth - planPoint.X + startDrag.Value.X;
 					this.GraphPosX = this.startX + this.startWidth - this.Width;
-					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+					if (!this.CheckValidity(owningWall, 0, 0)) {
 						this.Width = tmpWidth;
 						this.GraphPosX = tmpX;
 					}
 				} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_RIGHT) == AnchorTypeEnum.ANCHOR_SCALE_RIGHT) {
 					double tmpWidth = this.Width;
 					this.Width = this.startWidth + planPoint.X - startDrag.Value.X;
-					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+					if (!this.CheckValidity(owningWall, 0, 0)) {
 						this.Width = tmpWidth;
 					}
 				}
@@ -191,15 +186,16 @@ namespace Europlan.Common {
 				if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_TOP) == AnchorTypeEnum.ANCHOR_SCALE_TOP) {
 					double tmpHeight = this.Height;
 					this.Height = this.startHeight + planPoint.Y - this.startDrag.Value.Y;
-					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+					if (!this.CheckValidity(owningWall, 0, 0)) {
 						this.Height = tmpHeight;
 					}
 				}
 			}
+			owningRoom.MarkErrors(this, owningWall);
 			return true;
 		}
 
-		public override bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall) {
+		public override bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			this.startDrag = null;
 			return false;
 		}
@@ -240,6 +236,10 @@ namespace Europlan.Common {
 			doorBorder.Add(new Point2D(xOffset + graphPosX + width + dist, yOffset + graphPosY + height + dist)); // right top
 			doorBorder.Add(new Point2D(xOffset + graphPosX + width + dist, yOffset + graphPosY)); // right bottom
 			return doorBorder;
+		}
+
+		public override bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom) {
+			throw new Exception("The method or operation is not implemented.");
 		}
 	}
 

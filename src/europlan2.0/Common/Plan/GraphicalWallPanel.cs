@@ -48,8 +48,8 @@ namespace Europlan.Common {
 			remove { this.objectSelected -= value; }
 		}
 
-		private event EventHandler<SelectedObjectArgs> selectedObjectModified;
-		public event EventHandler<SelectedObjectArgs> SelectedObjectModified {
+		private event EventHandler selectedObjectModified;
+		public event EventHandler SelectedObjectModified {
 			add { this.selectedObjectModified += value; }
 			remove { this.selectedObjectModified -= value; }
 		}
@@ -62,7 +62,7 @@ namespace Europlan.Common {
 
 		protected virtual void OnSelectedObjectModified(IGraphicalWallObject selectedObject) {
 			if (this.selectedObjectModified != null) {
-				this.selectedObjectModified(this, new SelectedObjectArgs(selectedObject, null, null));
+				this.selectedObjectModified(this, EventArgs.Empty);
 			}
 		}
 
@@ -232,6 +232,25 @@ namespace Europlan.Common {
 				this.newObstacle.PaintObject(e.Graphics, offset.X, offset.Y, this.newObstacle, scale, !this.newObstacleOk);
 			}
 
+			if (this.selectedObject != null && (!(this.selectedObject is GraphicalWall))) {
+				if (this.selectedWall != null) {
+					Vector2D offset = this.room.GetWallOffset(this.selectedWall).Value * 100;
+					List<PointF> borderPoints = new List<PointF>();
+					foreach (Point2D vertex in this.selectedWall.GetObjectBorders(offset.X, offset.Y)) {
+						borderPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
+					}
+
+					PointF[] pointArr = borderPoints.ToArray();
+
+					GraphicsPath wallPath = new GraphicsPath();
+					wallPath.AddPolygon(pointArr);
+					Region wallClip = new Region(wallPath);
+					e.Graphics.Clip = wallClip;
+					this.selectedObject.PaintObject(e.Graphics, offset.X, offset.Y, this.selectedObject, scale);
+				} else {
+					this.selectedObject.PaintObject(e.Graphics, 0, 0, this.selectedObject, scale);
+				}
+			}
 			if (this.mode == PlanMode.PM_SELECT_OBJECT && this.selectedObject != null) {
 				e.Graphics.ResetClip();
 				foreach (Anchor a in this.selectedObject.GetAnchors(scale)) {
@@ -345,7 +364,8 @@ namespace Europlan.Common {
 						this.newObstacleWall = null;
 					} else {
 						this.newObstacleOk = false;
-						this.SelectedObject = null;
+						this.newObstacle.IsNew = true;
+						//this.SelectedObject = this.newObstacle;
 					}
 				}
 			}
@@ -368,7 +388,7 @@ namespace Europlan.Common {
 						this.draggingAnchor = null;
 					}
 					if (this.draggingObject != null) {
-						invalidate = invalidate || this.draggingObject.StartDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
+						invalidate = invalidate || this.draggingObject.StartDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall, this.room, this.productPlanner == null ? null : this.productPlanner.Product);
 					}
 				}
 			}
@@ -422,7 +442,7 @@ namespace Europlan.Common {
 
 			if (mode == PlanMode.PM_SELECT_OBJECT) {
 				if (this.draggingObject != null) {
-					invalidate = invalidate || this.draggingObject.EndDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
+					invalidate = invalidate || this.draggingObject.EndDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall, this.room, this.productPlanner == null ? null : this.productPlanner.Product);
 					this.draggingObject = null;
 					this.draggingAnchor = null;
 					// TODO set cursor correctly;
@@ -473,12 +493,17 @@ namespace Europlan.Common {
 				this.newObstacle.GraphPosY = y;
 				this.newObstacle.Height = height;
 				this.newObstacle.Width = width;
-				this.newObstacleOk = this.newObstacle.PositionAndSizeOk(this.newObstacleWall, this.newObstacleWallXOffset, this.newObstacleWallYOffset);
+				this.newObstacleOk = this.newObstacle.CheckValidity(this.newObstacleWall, this.newObstacleWallXOffset, this.newObstacleWallYOffset);
+				if (this.newObstacleOk) {
+					this.room.MarkErrors(this.newObstacle, this.newObstacleWall);
+				} else {
+					this.room.ClearErrors();
+				}
 				invalidate = true;
 			}
 			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {
 				if (this.draggingObject != null) {
-					bool changed = this.draggingObject.MoveDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall);
+					bool changed = this.draggingObject.MoveDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall, this.room, this.productPlanner == null ? null : this.productPlanner.Product);
 					if (changed) {
 						this.OnSelectedObjectModified(this.selectedObject);
 					}
@@ -652,24 +677,18 @@ namespace Europlan.Common {
 					if (this.selectedObject != null) {
 						GraphicalWall owningWall = null;
 						bool found = false;
-						//double xOffset = 0.0;
 						foreach (GraphicalWall wall in this.room.Walls) {
 							if (wall == this.selectedObject) {
 								this.selectedWall = wall;
-								//this.selectedWallXOffset = xOffset;
-								//this.selectedWallYOffset = 0;
 								found = true;
 								break;
 							}
 							owningWall = wall.GetOwningWall(this.selectedObject);
 							if (owningWall != null) {
 								this.selectedWall = owningWall;
-								//this.selectedWallXOffset = xOffset;
-								//this.selectedWallYOffset = wall.GetWallYOffset(owningWall, 0).Value;
 								found = true;
 								break;
 							}
-							//xOffset += wall.GetWallWidth();
 						}
 						if (found) {
 							Vector2D offset = this.room.GetWallOffset(this.selectedWall).Value;
@@ -678,6 +697,46 @@ namespace Europlan.Common {
 						} else {
 							this.selectedWall = null;
 						}
+					}
+					if (selectedObject != oldSelectedObject && oldSelectedObject != null && oldSelectedWall != null) {
+						/*Vector2D offset = this.room.GetWallOffset(oldSelectedWall).Value * 100;
+						if (!oldSelectedObject.CheckValidity(oldSelectedWall, offset.X, offset.Y)) {
+							if (oldSelectedObject is GraphicalWallObstacle) {
+								oldSelectedWall.Obstacles.Remove(oldSelectedObject as GraphicalWallObstacle);
+							} else if (oldSelectedObject is GraphicalRegisterWrapper) {
+								oldSelectedWall.Registers.Remove(oldSelectedObject as GraphicalRegisterWrapper);
+								foreach (PlannedProduct pp in this.room.PlannedProducts) {
+									if (pp.Product is HithermProduct && oldSelectedObject is GraphicalHithermRegisterWrapper) {
+										(pp.Product as HithermProduct).RemoveRegisterFromCircuit((oldSelectedObject as GraphicalHithermRegisterWrapper).Register);
+									} else if (pp.Product is HithermCompactProduct) {
+										// TODO
+									}
+								}
+							} else if (oldSelectedObject is GraphicalHithermVerbindung) {
+								foreach (PlannedProduct pp in this.room.PlannedProducts) {
+									if (pp.Product is HithermProduct) {
+										HithermProduct hp = pp.Product as HithermProduct;
+										foreach (HithermCircuit hc in hp.PlannedCircuits) {
+											if (hc.Links.Contains(oldSelectedObject as GraphicalHithermVerbindung)) {
+												hc.Links.Remove(oldSelectedObject as GraphicalHithermVerbindung);
+											}
+										}
+									}
+								}
+							}
+						} else {
+							this.room.DeleteErroneousObjects();
+						}*/
+						oldSelectedObject.IsNew = false;
+						if (oldSelectedObject.Error) {
+							oldSelectedObject.RevertState();
+							this.room.ClearErrors();
+						} else {
+							this.room.DeleteErroneousObjects();
+						}
+					}
+					if (selectedObject != null) {
+						this.selectedObject.BackupState();
 					}
 					this.Invalidate();
 					this.OnObjectSelected(this.selectedObject, oldSelectedObject, oldSelectedWall);
@@ -734,7 +793,7 @@ namespace Europlan.Common {
 			private IGraphicalWallObject selectedObject;
 			private IGraphicalWallObject oldSelectedObject;
 			private GraphicalWall oldSelectedWall;
-
+			
 			public SelectedObjectArgs(IGraphicalWallObject selectedObject, IGraphicalWallObject oldSelectedObject, GraphicalWall oldSelectedWall) {
 				this.selectedObject = selectedObject;
 				this.oldSelectedObject = oldSelectedObject;

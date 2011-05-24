@@ -80,15 +80,10 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error) {
-			Pen windowBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
-			Brush windowBrush = new SolidBrush(SystemColors.ControlLight);
-			Pen unusableBorderPen = this == selectedObject ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
-			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, this == selectedObject ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.Transparent);
-
-			if (error) {
-				windowBorderPen.DashStyle = DashStyle.DashDotDot;
-				unusableBorderPen.DashStyle = DashStyle.DashDotDot;
-			}
+			Pen windowBorderPen = this.GetObstacleBorderPen(scale, this == selectedObject, error);
+			Brush windowBrush = this.GetObstacleBrush(scale, this == selectedObject, error);
+			Pen unusableBorderPen = this.GetUnusableBorderPen(scale, this == selectedObject, error);
+			Brush unusableBrush = this.GetUnusableBrush(scale, this == selectedObject, error);
 
 			Region oldClip = g.Clip;
 			Region baseClip = new Region(oldClip.GetRegionData());
@@ -167,7 +162,7 @@ namespace Europlan.Common {
 		private Nullable<Point2D> startDrag = null;
 		private double startX, startY, startWidth, startHeight;
 
-		public override bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall) {
+		public override bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			this.startDrag = planPoint;
 			this.startX = this.GraphPosX;
 			this.startY = this.GraphPosY;
@@ -176,7 +171,7 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		public override bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall) {
+		public override bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			if (anchor == null) {
 				// move
 				double tmpX = this.GraphPosX;
@@ -185,20 +180,22 @@ namespace Europlan.Common {
 				//this.GraphPosX = startX + planPoint.X - startDrag.Value.X;
 				this.GraphPosY = startY + planPoint.Y - startDrag.Value.Y;
 				bool retryY = false;
-				if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+				this.SnapToHelplines(owningWall.AllHelpLines, true, true);
+				if (!this.CheckValidity(owningWall, 0, 0)) {
 					this.GraphPosY = tmpY;
 					retryY = true;
 				}
 				
 				this.GraphPosX = startX + planPoint.X - startDrag.Value.X;
-				if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+				if (!this.CheckValidity(owningWall, 0, 0)) {
 					this.GraphPosX = tmpX;
 					retryY = false;
 				}
 
 				if (retryY) {
 					this.GraphPosY = startY + planPoint.Y - startDrag.Value.Y;
-					if (!this.PositionAndSizeOk(owningWall, 0, 0)) {
+					this.SnapToHelplines(owningWall.AllHelpLines, true, true);
+					if (!this.CheckValidity(owningWall, 0, 0)) {
 						this.GraphPosY = tmpY;
 					}
 				}
@@ -209,14 +206,14 @@ namespace Europlan.Common {
 					double tmpX = this.GraphPosX;
 					this.Width = this.startWidth - planPoint.X + startDrag.Value.X;
 					this.GraphPosX = this.startX + this.startWidth - this.Width;
-					if ((!this.PositionAndSizeOk(owningWall, 0, 0)) || this.Width < 0) {
+					if ((!this.CheckValidity(owningWall, 0, 0)) || this.Width < 0) {
 						this.Width = tmpWidth;
 						this.GraphPosX = tmpX;
 					}
 				} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_RIGHT) == AnchorTypeEnum.ANCHOR_SCALE_RIGHT) {
 					double tmpWidth = this.Width;
 					this.Width = this.startWidth + planPoint.X - startDrag.Value.X;
-					if ((!this.PositionAndSizeOk(owningWall, 0, 0)) || this.Width < 0) {
+					if ((!this.CheckValidity(owningWall, 0, 0)) || this.Width < 0) {
 						this.Width = tmpWidth;
 					}
 				}
@@ -224,7 +221,8 @@ namespace Europlan.Common {
 				if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_TOP) == AnchorTypeEnum.ANCHOR_SCALE_TOP) {
 					double tmpHeight = this.Height;
 					this.Height = this.startHeight + planPoint.Y - this.startDrag.Value.Y;
-					if ((!this.PositionAndSizeOk(owningWall, 0, 0)) || this.Height < 0) {
+					this.SnapToHelplines(owningWall.AllHelpLines, true, false);
+					if ((!this.CheckValidity(owningWall, 0, 0)) || this.Height < 0) {
 						this.Height = tmpHeight;
 					}
 				} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) == AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) {
@@ -232,16 +230,18 @@ namespace Europlan.Common {
 					double tmpY = this.GraphPosY;
 					this.Height = this.startHeight + this.startDrag.Value.Y - planPoint.Y;
 					this.GraphPosY = this.startY + this.startHeight - this.Height;
-					if ((!this.PositionAndSizeOk(owningWall, 0, 0)) || this.Height < 0) {
+					this.SnapToHelplines(owningWall.AllHelpLines, false, true);
+					if ((!this.CheckValidity(owningWall, 0, 0)) || this.Height < 0) {
 						this.Height = tmpHeight;
 						this.GraphPosY = tmpY;
 					}
 				}
 			}
+			owningRoom.MarkErrors(this, owningWall);
 			return true;
 		}
 
-		public override bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall) {
+		public override bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			this.startDrag = null;
 			return false;
 		}
@@ -276,6 +276,54 @@ namespace Europlan.Common {
 
 		public override Polygon2D GetOutsideBorder(double xOffset, double yOffset) {
 			return this.GetOutsideBorder(this.GetObjectBorders(xOffset, yOffset));
+		}
+
+		public override bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom) {
+			if (helplines == null) {
+				return false;
+			}
+			double top = this.GraphPosY + this.Height;
+			double bottom = this.GraphPosY;
+
+			double deltaTop = double.MaxValue;
+			double deltaBottom = double.MaxValue;
+
+			double newTop = top;
+			double newBottom = bottom;
+
+			double newDeltaTop, newDeltaBottom;
+			bool snappedTop = false;
+			bool snappedBottom = false;
+			foreach (double helpline in helplines) {
+				newDeltaTop = Math.Abs(helpline - top);
+				newDeltaBottom = Math.Abs(helpline - bottom);
+				if (newDeltaTop < newDeltaBottom) {
+					if (snapTop && newDeltaTop <= GraphicalWall.HELPLINE_SNAP_DISTANCE && newDeltaTop < deltaTop) {
+						deltaTop = newDeltaTop;
+						newTop = helpline;
+						snappedTop = true;
+					}
+				} else {
+					if (snapBottom && newDeltaBottom <= GraphicalWall.HELPLINE_SNAP_DISTANCE && newDeltaBottom < deltaBottom) {
+						deltaBottom = newDeltaBottom;
+						newBottom = helpline;
+						snappedBottom = true;
+					}
+				}
+			}
+			if (snapTop && snapBottom) {
+				if (deltaTop <= deltaBottom) {
+					this.GraphPosY = newTop - this.Height;
+				} else {
+					this.GraphPosY = newBottom;
+				}
+			} else if (snapTop) {
+				this.Height = newTop - this.GraphPosY;
+			} else if (snapBottom) {
+				this.GraphPosY = newBottom;
+				this.Height = newTop - newBottom;
+			}
+			return (snappedTop && snapTop) || (snappedBottom && snapBottom);
 		}
 	}
 

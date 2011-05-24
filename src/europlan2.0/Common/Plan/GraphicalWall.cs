@@ -11,6 +11,9 @@ namespace Europlan.Common {
 
 	public class GraphicalWall : IGraphicalWallObject {
 
+
+		public static double HELPLINE_SNAP_DISTANCE = 5.0;
+
 		private string id = Guid.NewGuid().ToString();
 		private string nextWallId = null;
 		private string prevWallId = null;
@@ -100,6 +103,20 @@ namespace Europlan.Common {
 		public List<double> HelpLines {
 			get { return this.helpLines; }
 			set { this.helpLines = value; }
+		}
+
+		[XmlIgnore]
+		public List<double> AllHelpLines {
+			get {
+				List<double> allHelplines = new List<double>();
+				if (this.HelpLines != null) {
+					allHelplines.AddRange(this.HelpLines);
+				}
+				if (this.ShowGlobalHelpLines && this.AssiociatedRoom != null && this.AssiociatedRoom.HelpLines != null) {
+					allHelplines.AddRange(this.AssiociatedRoom.HelpLines);
+				}
+				return allHelplines;
+			}
 		}
 
 		public bool ShowGlobalHelpLines {
@@ -212,29 +229,29 @@ namespace Europlan.Common {
 				g.DrawLine(helpLinesPen, (float)xOffset, (float)(yOffset + offset), (float)(xOffset + GetWallWidth() * 100), (float)(yOffset + offset));
 			}
 
-			bool drawSelected = false;
+			//bool drawSelected = false;
 
 			foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
 				if (obstacle != selectedObject) {
 					g.Clip = wallClip;
 					obstacle.PaintObject(g, xOffset, yOffset, selectedObject, scale);
-				} else {
-					drawSelected = true;
+				/*} else {
+					drawSelected = true;*/
 				}
 			}
 			foreach (GraphicalRegisterWrapper register in this.Registers) {
 				if (register != selectedObject) {
 					g.Clip = wallClip;
 					register.PaintObject(g, xOffset, yOffset, selectedObject, scale);
-				} else {
-					drawSelected = true;
+				/*} else {
+					drawSelected = true;*/
 				}
 			}
 
 			g.Clip = wallClip;
-			if (drawSelected) {
+			/*if (drawSelected) {
 				selectedObject.PaintObject(g, xOffset, yOffset, selectedObject, scale);
-			}
+			}*/
 
 			g.Clip = oldClip;
 
@@ -358,17 +375,17 @@ namespace Europlan.Common {
 			return new List<Anchor>();
 		}
 
-		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+		public bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			// nothing to do here as the wall doesn't have any anchors
 			return false;
 		}
 
-		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+		public bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			// nothing to do here as the wall doesn't have any anchors
 			return false;
 		}
 
-		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall) {
+		public bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct) {
 			// nothing to do here as the wall doesn't have any anchors
 			return false;
 		}
@@ -504,7 +521,7 @@ namespace Europlan.Common {
 
 		public PossibleConnection GetPossibleConnection(Point2D mousePointInPlan, double offsetX, double offsetY) {
 			if (offsetY > 0) {
-				// no conenctions for dachschrägen
+				// no connections for dachschrägen
 				return null;
 			}
 			double width = this.GetWallWidth() * 100;
@@ -541,9 +558,15 @@ namespace Europlan.Common {
 				if (assiociatedRoom == null) {
 					foreach (Floor floor in Project.Instance.Floors) {
 						foreach (Room room in floor.Rooms) {
-							if (room.Walls.Contains(this)) {
-								assiociatedRoom = room;
-								return assiociatedRoom;
+							foreach (GraphicalWall baseWall in room.Walls) {
+								GraphicalWall wall = baseWall;
+								while (wall != null) {
+									if (wall == this) {
+										this.assiociatedRoom = room;
+										return room;
+									}
+									wall = wall.DachSchraege;
+								}
 							}
 						}
 					}
@@ -552,5 +575,39 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public bool Error {
+			get { return false; }
+			set { }
+		}
+
+		public void BackupState() {
+			// TODO
+			//throw new Exception("TODO");
+		}
+
+		public void RevertState() {
+			// TODO
+			//throw new Exception("TODO");
+		}
+
+		public bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
+			// TODO
+			//throw new Exception("TODO");
+			return true;
+		}
+
+		private bool isNew = false;
+		[XmlIgnore]
+		public bool IsNew {
+			get { return this.isNew; }
+			set { this.isNew = value; }
+		}
+
+
+		public bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom) {
+			// nothing to do here
+			return false;
+		}
 	}
 }

@@ -29,5 +29,9 @@ namespace Europlan.Common {
 		bool PlannerKeyPress(Keys key);
 
 		IGraphicalWallObject PickObject(Point2D mousePosInPlan);
+
+		Product Product {
+			get;
+		}
 	}
 }
