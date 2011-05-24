@@ -103,7 +103,6 @@ namespace Europlan.Common {
 					btnDelete.Enabled = false;
 				}
 			}
-
 		}
 
 		private void ApplyDataSource(List<double> dataSource) {
