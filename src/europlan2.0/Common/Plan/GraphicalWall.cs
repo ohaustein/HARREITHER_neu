@@ -120,7 +120,7 @@ namespace Europlan.Common {
 		}
 
 		public bool ShowGlobalHelpLines {
-			get { return showGlobalHelpLines; }
+			get { return !IsDachSchraege && showGlobalHelpLines; }
 			set { showGlobalHelpLines = value; }
 		}
 

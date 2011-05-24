@@ -25,7 +25,12 @@ namespace Europlan.Common {
 				rbWall.Enabled = false;
 				chkUseGlobal.Enabled = false;
 			} else {
-				chkUseGlobal.Checked = wall.ShowGlobalHelpLines;
+				if (wall.IsDachSchraege) {
+					chkUseGlobal.Enabled = false;
+					rbWall.Checked = true;
+				} else {
+					chkUseGlobal.Checked = wall.ShowGlobalHelpLines;
+				}
 			}
 			ApplyDataSource(GetOffsets());
 			numOffset.Text = "";
@@ -119,9 +124,10 @@ namespace Europlan.Common {
 			e.DrawBackground();
 			if (e.Index >= 0) {
 				SizeF stringSize = new SizeF();
-				stringSize = e.Graphics.MeasureString(lstOffsets.Items[e.Index].ToString(), e.Font);
+				string text = lstOffsets.Items[e.Index].ToString() + " cm";
+				stringSize = e.Graphics.MeasureString(text, e.Font);
 				// Draw the current item text based on the current Font and the custom brush settings.
-				e.Graphics.DrawString(lstOffsets.Items[e.Index].ToString() + " cm", e.Font, new SolidBrush(e.ForeColor), new PointF(e.Bounds.Right - stringSize.Width, e.Bounds.Y));
+				e.Graphics.DrawString(text, e.Font, new SolidBrush(e.ForeColor), new PointF(e.Bounds.Right - stringSize.Width, e.Bounds.Y));
 				// If the ListBox has focus, draw a focus rectangle around the selected item.
 			}
 			e.DrawFocusRectangle();
