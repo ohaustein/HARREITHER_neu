@@ -191,7 +191,6 @@ namespace Europlan.Common {
 		}
 
 		private void btnMove_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_MOVE;
 			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
 			ApplyButtonCheckedState(this.btnMove);
