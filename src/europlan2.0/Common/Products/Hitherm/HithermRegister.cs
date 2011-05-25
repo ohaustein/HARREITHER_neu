@@ -673,22 +673,17 @@ namespace Europlan.Common {
 			}
 			set {
 				this.Rohre = 30;
-				while (this.RegisterBreiteForDrawing > value && this.Rohre > 3) {
-					this.Rohre--;
-				}
-				/*if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
-					value = value - 2.5;
-					if (HithermProduct.ConfigUsePlus) {
-						int rohre = (int)Math.Floor(value / 5);
-						rohre -= rohre / 15;
-						this.Rohre = rohre;
-					} else {
-						int rohre = (int)Math.Floor(value / 5);
-						rohre -= rohre / 10;
-						this.Rohre = rohre;
+				List<int> keys = new List<int>(this.PossibleWidths.Keys);
+				keys.Reverse();
+				foreach (int rohre in keys) {
+					this.Rohre = rohre;
+					if (this.RegisterBreiteForDrawing <= value) {
+						break;
 					}
-				} else {
-					this.Rohre = (int)Math.Floor(value / 10);
+				}
+
+				/*while (this.RegisterBreiteForDrawing > value && this.Rohre > 3) {
+					this.Rohre--;
 				}*/
 			}
 		}
@@ -696,34 +691,68 @@ namespace Europlan.Common {
 		static Dictionary<int, double> WIDTHS_HL_PLUS = null;
 		static Dictionary<int, double> WIDTHS_HL = null;
 		static Dictionary<int, double> WIDTHS_STD = null;
+		static Dictionary<int, double> WIDTHS_HL_PLUS_COMPLETE = null;
+		static Dictionary<int, double> WIDTHS_HL_COMPLETE = null;
+		static Dictionary<int, double> WIDTHS_STD_COMPLETE = null;
 		[XmlIgnore]
 		public Dictionary<int, double> PossibleWidths {
 			get {
-				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
-					if (HithermProduct.ConfigUsePlus) {
-						if (WIDTHS_HL_PLUS == null) {
-							WIDTHS_HL_PLUS = new Dictionary<int, double>();
-							for (int i = this.MinRohre; i <= this.MaxRohre; i++) {
-								WIDTHS_HL_PLUS.Add(i, GetRegisterBreiteForDrawing(RohrabstandEnum.RC_HOCHLEISTUNG, i, true));
+				if (this.onlyCompleteRegisters) {
+					if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
+						if (HithermProduct.ConfigUsePlus) {
+							if (WIDTHS_HL_PLUS_COMPLETE == null) {
+								WIDTHS_HL_PLUS_COMPLETE = new Dictionary<int, double>();
+								for (int i = 14; i <= 28; i += 14) {
+									WIDTHS_HL_PLUS_COMPLETE.Add(i, GetRegisterBreiteForDrawing(RohrabstandEnum.RC_HOCHLEISTUNG, i, true));
+								}
 							}
+							return WIDTHS_HL_PLUS_COMPLETE;
+						} else {
+							if (WIDTHS_HL_COMPLETE == null) {
+								WIDTHS_HL_COMPLETE = new Dictionary<int, double>();
+								for (int i = 9; i <= 27; i += 9) {
+									WIDTHS_HL_COMPLETE.Add(i, GetRegisterBreiteForDrawing(RohrabstandEnum.RC_HOCHLEISTUNG, i, false));
+								}
+							}
+							return WIDTHS_HL_COMPLETE;
 						}
-						return WIDTHS_HL_PLUS;
 					} else {
-						if (WIDTHS_HL == null) {
-							WIDTHS_HL = new Dictionary<int, double>();
-							for (int i = this.MinRohre; i <= this.MaxRohre; i++) {
-								WIDTHS_HL.Add(i, GetRegisterBreiteForDrawing(RohrabstandEnum.RC_HOCHLEISTUNG, i, false));
+						if (WIDTHS_STD_COMPLETE == null) {
+							WIDTHS_STD_COMPLETE = new Dictionary<int, double>();
+							for (int i = 5; i <= 30; i += 5) {
+								WIDTHS_STD_COMPLETE.Add(i, GetRegisterBreiteForDrawing(RohrabstandEnum.RC_STANDARD, i, false));
 							}
 						}
-						return WIDTHS_HL;
+						return WIDTHS_STD_COMPLETE;
 					}
 				} else {
-					if (WIDTHS_STD == null) {
-						for (int i = this.MinRohre; i <= this.MaxRohre; i++) {
-							WIDTHS_STD.Add(i, GetRegisterBreiteForDrawing(RohrabstandEnum.RC_STANDARD, i, false));
+					if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
+						if (HithermProduct.ConfigUsePlus) {
+							if (WIDTHS_HL_PLUS == null) {
+								WIDTHS_HL_PLUS = new Dictionary<int, double>();
+								for (int i = this.MinRohre; i <= this.MaxRohre; i++) {
+									WIDTHS_HL_PLUS.Add(i, GetRegisterBreiteForDrawing(RohrabstandEnum.RC_HOCHLEISTUNG, i, true));
+								}
+							}
+							return WIDTHS_HL_PLUS;
+						} else {
+							if (WIDTHS_HL == null) {
+								WIDTHS_HL = new Dictionary<int, double>();
+								for (int i = this.MinRohre; i <= this.MaxRohre; i++) {
+									WIDTHS_HL.Add(i, GetRegisterBreiteForDrawing(RohrabstandEnum.RC_HOCHLEISTUNG, i, false));
+								}
+							}
+							return WIDTHS_HL;
 						}
+					} else {
+						if (WIDTHS_STD == null) {
+							WIDTHS_STD = new Dictionary<int, double>();
+							for (int i = this.MinRohre; i <= this.MaxRohre; i++) {
+								WIDTHS_STD.Add(i, GetRegisterBreiteForDrawing(RohrabstandEnum.RC_STANDARD, i, false));
+							}
+						}
+						return WIDTHS_STD;
 					}
-					return WIDTHS_STD;
 				}
 			}
 		}
@@ -1004,6 +1033,13 @@ namespace Europlan.Common {
 		public bool GraphVorlaufRight {
 			get { return this.graphVorlaufRight; }
 			set { this.graphVorlaufRight = value; }
+		}
+
+		private bool onlyCompleteRegisters = false;
+		[XmlIgnore]
+		public bool OnlyCompleteRegisters {
+			get { return this.onlyCompleteRegisters; }
+			set { this.onlyCompleteRegisters = value; }
 		}
 	}
 }

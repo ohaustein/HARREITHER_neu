@@ -2240,7 +2240,7 @@ namespace Europlan.Common {
 			this.hithermPlanner.ConnectedWallPanel = this.graphicalWallPanel;
 			this.hithermPlanner.Mode = Europlan.Common.HithermPlanner.HithermPlannerMode.HPM_NONE;
 			this.hithermPlanner.NewConnectionMode = Europlan.Common.HithermPlanner.NewConnectionModeEnum.NCM_MANUAL;
-			this.hithermPlanner.NewRegisterOnlyWhole = false;
+			this.hithermPlanner.NewRegisterOnlyComplete = false;
 			this.hithermPlanner.NewRegisterOrientation = ((Europlan.Common.HithermRegister.RegisterOrientationEnum)(Europlan.Common.HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL));
 			this.hithermPlanner.NewRegisterRohrabstand = ((Europlan.Common.HithermRegister.RohrabstandEnum)(Europlan.Common.HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG));
 			this.hithermPlanner.NewRegisterUseHelpline = true;

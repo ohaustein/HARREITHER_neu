@@ -5,6 +5,7 @@ using System.Drawing;
 using WW.Math.Geometry;
 using WW.Math;
 using System.Drawing.Drawing2D;
+using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	public class GraphicalHithermRegisterWrapper : GraphicalRegisterWrapper {
@@ -22,7 +23,12 @@ namespace Europlan.Common {
 
 		public HithermRegister Register {
 			get { return this.register; }
-			set { this.register = value; }
+			set {
+				this.register = value;
+				if (this.register != null) {
+					this.register.OnlyCompleteRegisters = this.tmpOnlyCompleteRegisters;
+				}
+			}
 		}
 
 		public HithermProduct Product {
@@ -661,12 +667,12 @@ namespace Europlan.Common {
 			double moveHelpline = this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL ? -1.0 : 0;
 
 			foreach (double helpline in helplines) {
-				newDeltaTop = Math.Abs((helpline + moveHelpline) - top);
+				newDeltaTop = Math.Abs((helpline - moveHelpline) - top);
 				newDeltaBottom = Math.Abs((helpline + moveHelpline) - bottom);
 				if (newDeltaTop < newDeltaBottom) {
 					if (snapTop && newDeltaTop <= GraphicalWall.HELPLINE_SNAP_DISTANCE && newDeltaTop < deltaTop) {
 						deltaTop = newDeltaTop;
-						newTop = (helpline + moveHelpline);
+						newTop = (helpline - moveHelpline);
 						snappedTop = true;
 					}
 				} else {
@@ -678,18 +684,28 @@ namespace Europlan.Common {
 				}
 			}
 			if (snapTop && snapBottom) {
-				if (deltaTop <= deltaBottom) {
+				if (snappedTop && deltaTop <= deltaBottom) {
 					this.Register.GraphPosY = newTop - this.Height;
-				} else {
+				} else if (snappedBottom) {
 					this.Register.GraphPosY = newBottom;
 				}
-			} else if (snapTop) {
-				//this.Height = newTop - this.Y;
-			} else if (snapBottom) {
-				//this.Register.GraphPosY.Y = newBottom;
-				//this.Height = newTop - newBottom;
+			} else if (snapTop && snappedTop) {
+				this.Register.GraphPosY = newTop - this.Height;
+			} else if (snapBottom && snappedBottom) {
+				this.Register.GraphPosY = newBottom;
 			}
 			return (snappedTop && snapTop) || (snappedBottom && snapBottom);
+		}
+
+		private bool tmpOnlyCompleteRegisters = false;
+		public bool OnlyCompleteRegisters {
+			get { return this.register == null ? this.tmpOnlyCompleteRegisters : this.register.OnlyCompleteRegisters; }
+			set {
+				this.tmpOnlyCompleteRegisters = value;
+				if (this.register != null) {
+					this.register.OnlyCompleteRegisters = value;
+				}
+			}
 		}
 	}
 }

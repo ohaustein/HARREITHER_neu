@@ -319,6 +319,7 @@ namespace Europlan.Common {
 				if (SelectedObject is GraphicalWall) {
 					UpdateDefineWallsPanel(SelectedObject as GraphicalWall);
 				} else if (SelectedObject is GraphicalHithermRegisterWrapper) {
+					(SelectedObject as GraphicalHithermRegisterWrapper).OnlyCompleteRegisters = this.chkRegisterWholeRegister.Checked;
 					UpdateModifyRegisterPanel(SelectedObject as GraphicalHithermRegisterWrapper);
 				} else if (SelectedObject is GraphicalWallObstacle) {
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
@@ -424,7 +425,7 @@ namespace Europlan.Common {
 					}
 				}
 				chkRegisterHelpLines.Checked = this.hithermPlanner.NewRegisterUseHelpline;
-				chkRegisterWholeRegister.Checked = this.hithermPlanner.NewRegisterOnlyWhole;
+				chkRegisterWholeRegister.Checked = this.hithermPlanner.NewRegisterOnlyComplete;
 			} else {
 				lblRegisterSelectedRegister.Text = "Kein Register ausgewählt";
 				numRegisterLeft.Value = 0;
@@ -446,7 +447,7 @@ namespace Europlan.Common {
 					}
 				}
 				chkRegisterHelpLines.Checked = this.hithermPlanner.NewRegisterUseHelpline;
-				chkRegisterWholeRegister.Checked = this.hithermPlanner.NewRegisterOnlyWhole;
+				chkRegisterWholeRegister.Checked = this.hithermPlanner.NewRegisterOnlyComplete;
 			}
 			UpdateModifyRegisterPanelButtons(hithermRegister);
 			updateOngoing = false;
@@ -889,7 +890,10 @@ namespace Europlan.Common {
 		}
 
 		private void chkRegisterWholeRegister_CheckedChanged(object sender, EventArgs e) {
-			hithermPlanner.NewRegisterOnlyWhole = chkRegisterWholeRegister.Checked;
+			hithermPlanner.NewRegisterOnlyComplete = chkRegisterWholeRegister.Checked;
+			if (SelectedObject is GraphicalHithermRegisterWrapper) {
+				(SelectedObject as GraphicalHithermRegisterWrapper).OnlyCompleteRegisters = chkRegisterWholeRegister.Checked;
+			}
 		}
 
 		private void hithermPlanner_RecalculationNecessary(object sender, EventArgs e) {

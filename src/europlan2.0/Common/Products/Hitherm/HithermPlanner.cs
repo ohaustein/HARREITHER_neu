@@ -37,7 +37,7 @@ namespace Europlan.Common {
 		private HithermRegister.RohrabstandEnum newRegisterRohrabstand = HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG;
 		private bool newRegisterVorlaufRight = true;
 		private bool newRegisterUseHelpline = true;
-		private bool newRegisterOnlyWhole = false;
+		private bool newRegisterOnlyComplete = false;
 		private HithermRegister.RegisterOrientationEnum newRegisterOrientation = HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 
 		private PossibleHithermRegisterConnection newConnectionStart = null;
@@ -77,9 +77,9 @@ namespace Europlan.Common {
 			set { newRegisterUseHelpline = value; }
 		}
 
-		public bool NewRegisterOnlyWhole {
-			get { return newRegisterOnlyWhole; }
-			set { newRegisterOnlyWhole = value; }
+		public bool NewRegisterOnlyComplete {
+			get { return newRegisterOnlyComplete; }
+			set { newRegisterOnlyComplete = value; }
 		}
 
 		public HithermRegister.RegisterOrientationEnum NewRegisterOrientation {
@@ -351,6 +351,7 @@ namespace Europlan.Common {
 						this.connectedWallPanel.SelectedWall = this.newRegisterWall;
 					}
 					this.newRegister = new GraphicalHithermRegisterWrapper(this.product);
+					this.newRegister.OnlyCompleteRegisters = this.newRegisterOnlyComplete;
 					this.newRegister.IsNew = true;
 				}
 			}
@@ -388,6 +389,9 @@ namespace Europlan.Common {
 						this.newRegister.Register.GraphWallId = this.newRegisterWall.Id;
 					}
 					if (this.newRegister.Register != null) {
+						if (this.SnapEnabled) {
+							this.newRegister.SnapToHelplines(this.newRegisterWall.AllHelpLines, this.dragStart.Value.Y > this.dragEnd.Y, this.dragStart.Value.Y <= this.dragEnd.Y);
+						}
 						this.newRegisterOk = this.newRegister.CheckValidity(this.newRegisterWall, this.newRegisterWallXOffset, this.newRegisterWallYOffset);
 					} else {
 						this.newRegisterOk = false;
@@ -404,6 +408,10 @@ namespace Europlan.Common {
 				return true;
 			}
 			return false;
+		}
+
+		public bool SnapEnabled {
+			get { return this.connectedWallPanel != null ? this.connectedWallPanel.SnapEnabled : false; }
 		}
 
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, System.Windows.Forms.MouseButtons button) {
@@ -560,6 +568,10 @@ namespace Europlan.Common {
 
 			return transformation.GetInverse().Transform(transformedMousePoint);
 		}
+
+		/*private List<Point2D> GetNextAutomaticConnectionVertices(PossibleConnection endConnection) {
+			//List<Point2D>
+		}*/
 
 		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out PossibleConnection endConnection) {
 			List<Point2D> nextConnectionPoints = new List<Point2D>();
