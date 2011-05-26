@@ -78,12 +78,7 @@ namespace Europlan.Common {
 		public ExportPlanForm(Plan plan) {
 			InitializeComponent();
 			this.SetLanguage();
-			this.plan = plan;	
-
-			this.exportOptionTypeBindingSource.DataSource = Enum.GetValues(typeof(ExportOptionType));
-			this.exportOptionTypeBindingSource.ResetBindings(false);		
-			
-			UpdateForm();
+			this.plan = plan;
 		}
 
 		private void UpdateForm() {
@@ -107,6 +102,61 @@ namespace Europlan.Common {
 		private void ExportPlanForm_Load(object sender, EventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["ExportPlanForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
+
+			bool graphicalWallFromPlan = false;
+			bool floorIsPlanned = false;
+			bool ceilingIsPlanned = false;
+
+			foreach (Floor floor in Project.Instance.Floors) {
+				if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
+					foreach (Room room in floor.Rooms) {
+						if (!graphicalWallFromPlan) {
+							if (room.Walls != null && room.Walls.Count > 0) {
+								foreach (GraphicalWall wall in room.Walls) {
+									if (wall.PlanStartPoint.HasValue && wall.PlanEndPoint.HasValue) {
+										graphicalWallFromPlan = true;
+										break;
+									}
+								}
+							}
+						}
+						if (!floorIsPlanned || !ceilingIsPlanned) {
+							foreach (PlannedProduct pp in room.PlannedProducts) {
+								if (pp.Product.Type == Product.ProductType.DH) {
+									ceilingIsPlanned = true;
+									break;
+								} else if (pp.Product.Type == Product.ProductType.FBH) {
+									floorIsPlanned = true;
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+			if (graphicalWallFromPlan) {
+				chkExportWallNumbers.Enabled = true;
+				chkExportWallNumbers.Checked = true;
+			}
+			IList<ExportOptionType> list = new List<ExportOptionType>();
+			if (floorIsPlanned && ceilingIsPlanned) {
+				list.Add(ExportOptionType.DH_FBH);
+			}
+			if (floorIsPlanned) {
+				list.Add(ExportOptionType.FBH);
+			}
+			if (ceilingIsPlanned) {
+				list.Add(ExportOptionType.DH);
+			}
+			if (list.Count == 0) {
+				MessageBox.Show("Es sind keine Produkte ausgelegt, die exportiert werden können.");
+				this.Close();
+			}
+
+			this.exportOptionTypeBindingSource.DataSource = list;
+			this.exportOptionTypeBindingSource.ResetBindings(false);
+
+			UpdateForm();
 		}
 
 		private void ExportPlanForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -162,6 +212,28 @@ namespace Europlan.Common {
 							g.DrawLine(Pens.Blue, (float)expansionGap.Start.X, (float)expansionGap.Start.Y, (float)expansionGap.End.X, (float)expansionGap.End.Y);
 						}
 						foreach (Room room in floor.Rooms) {
+							if (chkExportWallNumbers.Enabled && chkExportWallNumbers.Checked) {
+								float size = (float)(plan.Measure * 0.1 );
+								Pen p = new Pen(Color.Black, size);
+								float fontSize = 8.0f / g.DpiX * plan.Measure.Value;
+								Font font = new Font("Arial", fontSize);
+								StringFormat stringFormat = new StringFormat();
+								stringFormat.Alignment = StringAlignment.Center;
+								stringFormat.LineAlignment = StringAlignment.Center;
+
+								foreach (GraphicalWall wall in room.Walls) {
+									Point2D start = wall.PlanStartPoint.Value;
+									Point2D end = wall.PlanEndPoint.Value;
+									Vector2D normVector = wall.PlanEndPoint.Value - wall.PlanStartPoint.Value;
+									normVector.Normalize();
+									normVector = new Vector2D(normVector.Y, -normVector.X);
+									Segment2D segment = new Segment2D(wall.PlanStartPoint.Value, wall.PlanEndPoint.Value);
+									Point2D numberStart = segment.GetCenter() + (normVector * (plan.Measure.Value * 0.15));
+									g.FillEllipse(Brushes.White, (float)(numberStart.X - fontSize), (float)(numberStart.Y - fontSize), fontSize * 2.0f, fontSize * 2.0f);
+									//g.DrawEllipse(Pens.Black, (float)(numberStart.X - fontSize), (float)(numberStart.Y - fontSize), fontSize * 2.0f, fontSize * 2.0f);
+									g.DrawString("" + (room.Walls.IndexOf(wall) + 1), font, new SolidBrush(p.Color), (float)numberStart.X, (float)numberStart.Y, stringFormat);
+								}
+							}
 							foreach (PlannedProduct pp in room.PlannedProducts) {
 								if ((cmbExportOption.SelectedValue.Equals(ExportOptionType.DH_FBH) &&
 									(pp.Product.Type == Product.ProductType.DH || pp.Product.Type == Product.ProductType.FBH))
@@ -225,6 +297,7 @@ namespace Europlan.Common {
 				// TODO: übersetzen
 				DxfLayer beplankungLayer = new DxfLayer("Beplankung");
 				DxfLayer dehnfugenLayer = new DxfLayer("Dehnfugen");
+				DxfLayer wandLayer = new DxfLayer("Wandnumerierungen");
 
 				foreach (Floor floor in Project.Instance.Floors) {
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
@@ -234,6 +307,30 @@ namespace Europlan.Common {
 							model.Entities.Add(line);
 						}
 						foreach (Room room in floor.Rooms) {
+							if (chkExportWallNumbers.Enabled && chkExportWallNumbers.Checked) {
+								if (!model.TextStyles.Contains("HarreitherStyle")) {
+									DxfTextStyle textStyle = new DxfTextStyle("HarreitherStyle", "Arial.ttf");
+									model.TextStyles.Add(textStyle);
+								}
+
+								foreach (GraphicalWall wall in room.Walls) {
+									Point2D start = wall.PlanStartPoint.Value;
+									Point2D end = wall.PlanEndPoint.Value;
+									Vector2D normVector = wall.PlanEndPoint.Value - wall.PlanStartPoint.Value;
+									normVector.Normalize();
+									normVector = new Vector2D(normVector.Y, -normVector.X);
+									Segment2D segment = new Segment2D(wall.PlanStartPoint.Value, wall.PlanEndPoint.Value);
+									Point2D numberStart = segment.GetCenter() + (normVector * (plan.Measure.Value * 0.15));
+									DxfText text = new DxfText("" + (room.Walls.IndexOf(wall) + 1), (Point3D)numberStart, 0.08f * plan.Measure.Value);
+									text.Style = model.TextStyles["HarreitherStyle"];
+									text.HorizontalAlignment = TextHorizontalAlignment.Center;
+									text.VerticalAlignment = TextVerticalAlignment.Middle;
+									text.Layer = wandLayer;
+									text.Color = Color.White;
+									model.Entities.Add(text);
+								}
+							}
+
 							foreach (PlannedProduct pp in room.PlannedProducts) {
 								if ((cmbExportOption.SelectedValue.Equals(ExportOptionType.DH_FBH) &&
 									(pp.Product.Type == Product.ProductType.DH || pp.Product.Type == Product.ProductType.FBH))

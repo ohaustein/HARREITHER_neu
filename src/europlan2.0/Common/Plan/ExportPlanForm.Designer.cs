@@ -32,6 +32,7 @@ namespace Europlan.Common {
 			this.cmbExportOption = new System.Windows.Forms.ComboBox();
 			this.lblExportOption = new System.Windows.Forms.Label();
 			this.btnCancel = new System.Windows.Forms.Button();
+			this.chkExportWallNumbers = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.exportOptionTypeBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -43,7 +44,7 @@ namespace Europlan.Common {
 			// 
 			this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnExport.Enabled = false;
-			this.btnExport.Location = new System.Drawing.Point(199, 107);
+			this.btnExport.Location = new System.Drawing.Point(199, 93);
 			this.btnExport.Name = "btnExport";
 			this.btnExport.Size = new System.Drawing.Size(137, 23);
 			this.btnExport.TabIndex = 3;
@@ -54,7 +55,7 @@ namespace Europlan.Common {
 			// btnSaveAs
 			// 
 			this.btnSaveAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnSaveAs.Location = new System.Drawing.Point(443, 31);
+			this.btnSaveAs.Location = new System.Drawing.Point(443, 54);
 			this.btnSaveAs.Name = "btnSaveAs";
 			this.btnSaveAs.Size = new System.Drawing.Size(36, 23);
 			this.btnSaveAs.TabIndex = 2;
@@ -66,7 +67,7 @@ namespace Europlan.Common {
 			// 
 			this.txtPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.txtPath.Location = new System.Drawing.Point(152, 33);
+			this.txtPath.Location = new System.Drawing.Point(152, 56);
 			this.txtPath.Name = "txtPath";
 			this.txtPath.ReadOnly = true;
 			this.txtPath.Size = new System.Drawing.Size(285, 20);
@@ -76,7 +77,7 @@ namespace Europlan.Common {
 			// lblFileName
 			// 
 			this.lblFileName.AutoSize = true;
-			this.lblFileName.Location = new System.Drawing.Point(12, 36);
+			this.lblFileName.Location = new System.Drawing.Point(12, 59);
 			this.lblFileName.Name = "lblFileName";
 			this.lblFileName.Size = new System.Drawing.Size(56, 13);
 			this.lblFileName.TabIndex = 9;
@@ -107,7 +108,7 @@ namespace Europlan.Common {
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(342, 107);
+			this.btnCancel.Location = new System.Drawing.Point(342, 93);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(137, 23);
 			this.btnCancel.TabIndex = 4;
@@ -115,13 +116,24 @@ namespace Europlan.Common {
 			this.btnCancel.UseVisualStyleBackColor = true;
 			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
 			// 
+			// chkExportWallNumbers
+			// 
+			this.chkExportWallNumbers.AutoSize = true;
+			this.chkExportWallNumbers.Location = new System.Drawing.Point(152, 33);
+			this.chkExportWallNumbers.Name = "chkExportWallNumbers";
+			this.chkExportWallNumbers.Size = new System.Drawing.Size(197, 17);
+			this.chkExportWallNumbers.TabIndex = 11;
+			this.chkExportWallNumbers.Text = "Numerierung der Wände exportieren";
+			this.chkExportWallNumbers.UseVisualStyleBackColor = true;
+			// 
 			// ExportPlanForm
 			// 
 			this.AcceptButton = this.btnExport;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(491, 142);
+			this.ClientSize = new System.Drawing.Size(491, 128);
+			this.Controls.Add(this.chkExportWallNumbers);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnExport);
 			this.Controls.Add(this.btnSaveAs);
@@ -152,5 +164,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ComboBox cmbExportOption;
 		private System.Windows.Forms.Label lblExportOption;
 		private System.Windows.Forms.Button btnCancel;
+		private System.Windows.Forms.CheckBox chkExportWallNumbers;
 	}
 }
