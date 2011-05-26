@@ -139,7 +139,7 @@ namespace Europlan.Common {
 			foreach (HithermCircuit c in this.product.PlannedCircuits) {
 				foreach (GraphicalHithermVerbindung link in c.Links) {
 					if (link != this.connectedWallPanel.SelectedObject) {
-						link.PaintObject(g, 0, 0, this.connectedWallPanel.SelectedObject, scale);
+						link.PaintObject(g, 0, 0, this.connectedWallPanel.SelectedObject, scale, false);
 					}
 				}
 			}
@@ -179,7 +179,7 @@ namespace Europlan.Common {
 					this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
 					//List<Point2D> nextVertices = this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn);
 					this.newConnectionDraw.Vertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn));
-					this.newConnectionDraw.PaintObject(g, Color.Green, !this.newConnectionDraw.CheckValidity(null, 0, 0), scale);
+					this.newConnectionDraw.PaintObject(g, Color.Green, !this.newConnectionDraw.CheckValidity(null, 0, 0), scale, false);
 				}
 			}
 		}

@@ -72,11 +72,11 @@ namespace Europlan.Common {
 			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
 		}
 
-		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
-			PaintObject(g, xOffset, yOffset, selectedObject, scale, false);
+		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
+			PaintObject(g, xOffset, yOffset, selectedObject, scale, false, export);
 		}
 
-		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error) {
+		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error, bool export) {
 			Pen windowBorderPen = this.GetObstacleBorderPen(scale, this == selectedObject, error);
 			Brush windowBrush = this.GetUnusableBrushForOther(scale, this == selectedObject, error);
 			Pen unusableBorderPen = this.GetUnusableBorderPen(scale, this == selectedObject, error);
@@ -117,12 +117,12 @@ namespace Europlan.Common {
 			excludePath.AddPolygon(doorPoints.ToArray());
 			clip.Exclude(excludePath);
 			clip.Intersect(baseClip);
-			g.Clip = clip;
-
-			g.FillPolygon(unusableBrush, outsidePoints.ToArray());
-
-			g.Clip = baseClip;
-			g.DrawPolygon(unusableBorderPen, outsidePoints.ToArray());
+			if (!export) {
+				g.Clip = clip;
+				g.FillPolygon(unusableBrush, outsidePoints.ToArray());
+				g.Clip = baseClip;
+				g.DrawPolygon(unusableBorderPen, outsidePoints.ToArray());
+			}
 			g.DrawPolygon(windowBorderPen, doorPointArr);
 			g.Clip = oldClip;
 

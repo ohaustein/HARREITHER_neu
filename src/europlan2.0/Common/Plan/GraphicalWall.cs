@@ -169,11 +169,11 @@ namespace Europlan.Common {
 			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
-			this.PaintObject(g, xOffset, yOffset, selectedObject, this.GetOwningWall(selectedObject), scale);
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
+			this.PaintObject(g, xOffset, yOffset, selectedObject, this.GetOwningWall(selectedObject), scale, export);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, GraphicalWall selectedWall, double scale) {
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, GraphicalWall selectedWall, double scale, bool export) {
 			Pen wallBorderPen = (this == selectedObject || this == selectedWall) ? new Pen(Color.FromArgb(128, 0, 0), (float)(3.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
 			Brush wallBrush = new SolidBrush(Color.White);
 			Pen unusableBorderPen = (this == selectedObject || this == selectedWall) ? new Pen(Color.FromArgb(128, 64, 64), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
@@ -193,7 +193,7 @@ namespace Europlan.Common {
 			GraphicsPath wallPath = new GraphicsPath();
 			wallPath.AddPolygon(pointArr);
 			Region wallClip = new Region(wallPath);
-			g.Clip = wallClip;
+			//g.Clip = wallClip;
 
 
 			g.FillPolygon(wallBrush, pointArr);
@@ -210,23 +210,26 @@ namespace Europlan.Common {
 			GraphicsPath excludePath = new GraphicsPath();
 			excludePath.AddPolygon(usablePoints.ToArray());
 			clip.Exclude(excludePath);
-			g.Clip = clip;
 
-			g.FillPolygon(unusableBrush, borderPoints.ToArray());
-
-			g.Clip = wallClip;
-			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
+			if (!export) {
+				g.Clip = clip;
+				g.FillPolygon(unusableBrush, borderPoints.ToArray());
+				g.Clip = wallClip;
+				g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
+			}
 			g.DrawPolygon(wallBorderPen, pointArr);
 
-			Pen helpLinesPen = new Pen(Color.Blue, (float)(1.0 / scale));
-			helpLinesPen.DashStyle = DashStyle.Dash;
-			if (ShowGlobalHelpLines && AssiociatedRoom != null) {
-				foreach (double offset in AssiociatedRoom.HelpLines) {
+			if (!export) {
+				Pen helpLinesPen = new Pen(Color.Blue, (float)(1.0 / scale));
+				helpLinesPen.DashStyle = DashStyle.Dash;
+				if (ShowGlobalHelpLines && AssiociatedRoom != null) {
+					foreach (double offset in AssiociatedRoom.HelpLines) {
+						g.DrawLine(helpLinesPen, (float)xOffset, (float)(yOffset + offset), (float)(xOffset + GetWallWidth() * 100), (float)(yOffset + offset));
+					}
+				}
+				foreach (double offset in HelpLines) {
 					g.DrawLine(helpLinesPen, (float)xOffset, (float)(yOffset + offset), (float)(xOffset + GetWallWidth() * 100), (float)(yOffset + offset));
 				}
-			}
-			foreach (double offset in HelpLines) {
-				g.DrawLine(helpLinesPen, (float)xOffset, (float)(yOffset + offset), (float)(xOffset + GetWallWidth() * 100), (float)(yOffset + offset));
 			}
 
 			//bool drawSelected = false;
@@ -234,7 +237,7 @@ namespace Europlan.Common {
 			foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
 				if (obstacle != selectedObject) {
 					g.Clip = wallClip;
-					obstacle.PaintObject(g, xOffset, yOffset, selectedObject, scale);
+					obstacle.PaintObject(g, xOffset, yOffset, selectedObject, scale, export);
 				/*} else {
 					drawSelected = true;*/
 				}
@@ -242,13 +245,13 @@ namespace Europlan.Common {
 			foreach (GraphicalRegisterWrapper register in this.Registers) {
 				if (register != selectedObject) {
 					g.Clip = wallClip;
-					register.PaintObject(g, xOffset, yOffset, selectedObject, scale);
+					register.PaintObject(g, xOffset, yOffset, selectedObject, scale, export);
 				/*} else {
 					drawSelected = true;*/
 				}
 			}
 
-			g.Clip = wallClip;
+			//g.Clip = wallClip;
 			/*if (drawSelected) {
 				selectedObject.PaintObject(g, xOffset, yOffset, selectedObject, scale);
 			}*/
@@ -256,7 +259,7 @@ namespace Europlan.Common {
 			g.Clip = oldClip;
 
 			if (this.DachSchraege != null) {
-				this.DachSchraege.PaintObject(g, xOffset, yOffset + this.GetWallHeight() * 100, selectedObject, scale);
+				this.DachSchraege.PaintObject(g, xOffset, yOffset + this.GetWallHeight() * 100, selectedObject, scale, export);
 			}
 		}
 

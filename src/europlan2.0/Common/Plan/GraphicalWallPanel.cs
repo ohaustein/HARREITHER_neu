@@ -211,7 +211,7 @@ namespace Europlan.Common {
 			foreach (GraphicalWall wall in this.Room.Walls) {
 				double xOffset = this.room.GetWallOffset(wall).Value.X * 100.0;
 				double yOffset = 0;
-				wall.PaintObject(e.Graphics, xOffset, yOffset, this.SelectedObject, this.SelectedWall, this.Scale);
+				wall.PaintObject(e.Graphics, xOffset, yOffset, this.SelectedObject, this.SelectedWall, this.Scale, false);
 				//xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
 			}
 
@@ -254,9 +254,9 @@ namespace Europlan.Common {
 					wallPath.AddPolygon(pointArr);
 					Region wallClip = new Region(wallPath);
 					e.Graphics.Clip = wallClip;
-					this.selectedObject.PaintObject(e.Graphics, offset.X, offset.Y, this.selectedObject, scale);
+					this.selectedObject.PaintObject(e.Graphics, offset.X, offset.Y, this.selectedObject, scale, false);
 				} else {
-					this.selectedObject.PaintObject(e.Graphics, 0, 0, this.selectedObject, scale);
+					this.selectedObject.PaintObject(e.Graphics, 0, 0, this.selectedObject, scale, false);
 				}
 			}
 			if (this.mode == PlanMode.PM_SELECT_OBJECT && this.selectedObject != null) {

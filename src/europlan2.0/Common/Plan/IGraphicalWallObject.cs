@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace Europlan.Common {
 	public interface IGraphicalWallObject {
 		bool HitTest(Point2D planPoint, double xOffset, double yOffset);
-		void PaintObject(Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale);
+		void PaintObject(Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export);
 		IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset);
 		Polygon2D GetObjectBorders(double xOffset, double yOffset);
 		bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders);

@@ -89,7 +89,7 @@ namespace Europlan.Common {
 		private static double arrowWidth = 5.0;
 		private static double arrowHeight = arrowWidth * 1.118;
 
-		public void PaintObject(Graphics g, Color c, bool error, double scale) {
+		public void PaintObject(Graphics g, Color c, bool error, double scale, bool export) {
 			PointF oldVertex = PointF.Empty;
 			PointF newVertex;
 			bool first = true;
@@ -342,8 +342,8 @@ namespace Europlan.Common {
 			return this.HitTest(planPoint, 2);
 		}
 
-		public void PaintObject(Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
-			this.PaintObject(g, (this == selectedObject) ? Color.Red : Color.Black, false, scale);
+		public void PaintObject(Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
+			this.PaintObject(g, (this == selectedObject) ? Color.Red : Color.Black, false, scale, export);
 		}
 
 		public IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset) {

@@ -10,7 +10,7 @@ namespace Europlan.Common {
 
 		#region IGraphicalWallObject Members
 
-		public abstract void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale);
+		public abstract void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export);
 
 		public abstract IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset);
 		public abstract Polygon2D GetObjectBorders(double xOffset, double yOffset);

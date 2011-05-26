@@ -8,6 +8,9 @@ using System.Windows.Forms;
 using WW.Math;
 using WW.Math.Geometry;
 using Star.SettingsXpress;
+using System.IO;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace Europlan.Common {
 	public partial class HithermPlannerForm : Form {
@@ -1280,6 +1283,69 @@ namespace Europlan.Common {
 		private void btnUseHelplines_Click(object sender, EventArgs e) {
 			this.graphicalWallPanel.SnapEnabled = !this.btnUseHelplines.Checked;
 			this.btnUseHelplines.Checked = this.graphicalWallPanel.SnapEnabled;
+		}
+
+		private void btnExport_Click(object sender, EventArgs e) {
+			float border = 20.0f;
+			Room room = graphicalWallPanel.Room;
+			if (room != null && room.Walls.Count > 0) {
+				SaveFileDialog dialog = new SaveFileDialog();
+				dialog.CheckPathExists = true;
+				dialog.CreatePrompt = true;
+				dialog.OverwritePrompt = true;
+				dialog.InitialDirectory = Path.GetDirectoryName(Project.Instance.ProjectFileName);
+				dialog.DefaultExt = ".jpg";
+				dialog.Filter = "Bild|*.jpg;*.png;*.bmp";
+				DialogResult result = dialog.ShowDialog();
+				if (result == DialogResult.OK) {
+					
+					Bitmap b;
+					Graphics g;
+					double width = (room.GetWallOffset(room.Walls[room.Walls.Count - 1]).Value.X * 100.0) + (room.Walls[room.Walls.Count - 1].GetWallWidth() * 100.0);
+					double height = 0;
+					foreach (GraphicalWall wall in room.Walls) {
+						height = Math.Max(height, wall.GetWallHeight() * 100.0);
+					}
+					width += border * 2;
+					height += border * 2;
+					b = new Bitmap((int)width, (int)height);
+					g = Graphics.FromImage(b);
+					//g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+					g.ResetClip();
+					g.FillRectangle(Brushes.White, 0, 0, (float)width, (float)height);
+					Matrix matrix = new Matrix();
+					matrix.Scale(1.0f, -1.0f);
+					matrix.Translate(border, -(float)(height - border));
+					g.Transform = matrix;
+
+					foreach (GraphicalWall wall in room.Walls) {
+						double xOffset = room.GetWallOffset(wall).Value.X * 100.0;
+						double yOffset = 0;
+						wall.PaintObject(g, xOffset, yOffset, null, null, 1.0, true);
+					}
+
+					foreach (HithermCircuit c in hithermPlanner.Product.PlannedCircuits) {
+						foreach (GraphicalHithermVerbindung link in c.Links) {
+							link.PaintObject(g, 0, 0, null, 1.0, true);
+						}
+					}
+
+					ImageFormat format = null;
+					string extension = Path.GetExtension(dialog.FileName);
+					if (extension.ToLower() == ".jpg") {
+						format = ImageFormat.Jpeg;
+					} else if (extension.ToLower() == ".png") {
+						format = ImageFormat.Png;
+					} if (extension.ToLower() == ".bmp") {
+						format = ImageFormat.Bmp;
+					}
+					b.Save(dialog.FileName, format);
+					g.Dispose();
+				}
+			} else {
+				MessageBox.Show("Es sind keine Wände zum exportieren vorhanden.");
+			}
 		}
 	}
 }

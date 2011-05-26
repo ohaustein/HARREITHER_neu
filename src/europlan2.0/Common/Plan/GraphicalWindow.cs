@@ -75,11 +75,11 @@ namespace Europlan.Common {
 			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
 		}
 
-		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale) {
-			PaintObject(g, xOffset, yOffset, selectedObject, scale, false);
+		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
+			PaintObject(g, xOffset, yOffset, selectedObject, scale, false, export);
 		}
 
-		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error) {
+		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error, bool export) {
 			Pen windowBorderPen = this.GetObstacleBorderPen(scale, this == selectedObject, error);
 			Brush windowBrush = this.GetObstacleBrush(scale, this == selectedObject, error);
 			Pen unusableBorderPen = this.GetUnusableBorderPen(scale, this == selectedObject, error);
@@ -112,22 +112,24 @@ namespace Europlan.Common {
 				outsidePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
 			}
 
-			if (outsideOk) {
-				GraphicsPath path = new GraphicsPath();
-				path.AddPolygon(outsidePoints.ToArray());
-				Region clip = new Region(path);
-				GraphicsPath excludePath = new GraphicsPath();
-				excludePath.AddPolygon(windowPoints.ToArray());
-				clip.Exclude(excludePath);
-				clip.Intersect(baseClip);
-				g.Clip = clip;
+			if (!export) {
+				if (outsideOk) {
+					GraphicsPath path = new GraphicsPath();
+					path.AddPolygon(outsidePoints.ToArray());
+					Region clip = new Region(path);
+					GraphicsPath excludePath = new GraphicsPath();
+					excludePath.AddPolygon(windowPoints.ToArray());
+					clip.Exclude(excludePath);
+					clip.Intersect(baseClip);
+					g.Clip = clip;
 
-				g.FillPolygon(unusableBrush, outsidePoints.ToArray());
-			}
+					g.FillPolygon(unusableBrush, outsidePoints.ToArray());
+				}
 
-			g.Clip = baseClip;
-			if (outsideOk) {
-				g.DrawPolygon(unusableBorderPen, outsidePoints.ToArray());
+				g.Clip = baseClip;
+				if (outsideOk) {
+					g.DrawPolygon(unusableBorderPen, outsidePoints.ToArray());
+				}
 			}
 			g.DrawPolygon(windowBorderPen, windowPointArr);
 			g.Clip = oldClip;
