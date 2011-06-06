@@ -1383,22 +1383,32 @@ namespace Europlan.Common {
 			}
 		}
 
-		private bool oldSnap = true;
-		private bool oldDirect = false;
+		//private bool oldSnap = true;
+		//private bool oldDirect = false;
+		private bool snapInverted = false;
 
 		private void InvertSnap() {
-			/*if (this.oldSnap == this.graphicalWallPanel.SnapEnabled) {
-				this.graphicalWallPanel.SnapEnabled
-			}
-			this.graphicalWallPanel.SnapEnabled = !this.btnUseHelplines.Checked;
-			this.btnUseHelplines.Checked = this.graphicalWallPanel.SnapEnabled;
+			if (!this.snapInverted) {
+				this.graphicalWallPanel.SnapEnabled = !this.btnUseHelplines.Checked;
+				this.btnUseHelplines.Checked = this.graphicalWallPanel.SnapEnabled;
 
-			this.hithermPlanner.NewConnectionsAlign = !this.btnConnectionAlign.Checked;
-			this.btnConnectionAlign.Checked = this.hithermPlanner.NewConnectionsAlign;
-			this.btnConnectionDirect.Checked = !this.hithermPlanner.NewConnectionsAlign;*/
+				this.hithermPlanner.NewConnectionsAlign = !this.btnConnectionAlign.Checked;
+				this.btnConnectionAlign.Checked = this.hithermPlanner.NewConnectionsAlign;
+				this.btnConnectionDirect.Checked = !this.hithermPlanner.NewConnectionsAlign;
+				this.snapInverted = true;
+			}
 		}
 
 		private void RestoreSnap() {
+			if (this.snapInverted) {
+				this.graphicalWallPanel.SnapEnabled = !this.btnUseHelplines.Checked;
+				this.btnUseHelplines.Checked = this.graphicalWallPanel.SnapEnabled;
+
+				this.hithermPlanner.NewConnectionsAlign = !this.btnConnectionAlign.Checked;
+				this.btnConnectionAlign.Checked = this.hithermPlanner.NewConnectionsAlign;
+				this.btnConnectionDirect.Checked = !this.hithermPlanner.NewConnectionsAlign;
+				this.snapInverted = false;
+			}
 		}
 	}
 }
