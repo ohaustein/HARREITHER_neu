@@ -325,6 +325,8 @@ namespace Europlan.Common {
 		private double newObstacleWallXOffset, newObstacleWallYOffset;
 		private bool newObstacleOk = true;
 
+		private Cursor oldCursor = null;
+
 		protected override void OnMouseDown(MouseEventArgs e) {
 			base.OnMouseDown(e);
 			if (this.room == null) {
@@ -345,6 +347,7 @@ namespace Europlan.Common {
 			if (mode == PlanMode.PM_ADD_OBSTACLE && this.room != null && e.Button == MouseButtons.Left) {
 				this.dragStart = mousePosInPlan;
 				this.newObstacleWall = this.room.GetWallForPoint(mousePosInPlan, out this.newObstacleWallXOffset, out this.newObstacleWallYOffset);
+				this.SelectedObject = null;
 				this.selectedWall = this.newObstacleWall;
 				if (this.newObstacleWall != null) {
 					switch (this.newObstacleType) {
@@ -413,6 +416,19 @@ namespace Europlan.Common {
 				this.startXPos = this.XPos;
 				this.startYPos = this.YPos;
 			}
+			if (this.productPlanner != null) {
+				if (this.productPlanner.CustomCursor != null) {
+					if (this.oldCursor == null) {
+						this.oldCursor = this.Cursor;
+					}
+					this.Cursor = this.productPlanner.CustomCursor;
+				} else {
+					if (this.oldCursor != null) {
+						this.Cursor = this.oldCursor;
+						this.oldCursor = null;
+					}
+				}
+			}
 			if (invalidate) {
 				this.Invalidate();
 			}
@@ -462,6 +478,18 @@ namespace Europlan.Common {
 			if (e.Button == MouseButtons.Middle) {
 				this.Cursor = this.tempCursor;
 				inMove = false;
+			} else if (this.productPlanner != null) {
+				if (this.productPlanner.CustomCursor != null) {
+					if (this.oldCursor == null) {
+						this.oldCursor = this.Cursor;
+					}
+					this.Cursor = this.productPlanner.CustomCursor;
+				} else {
+					if (this.oldCursor != null) {
+						this.Cursor = this.oldCursor;
+						this.oldCursor = null;
+					}
+				}
 			}
 			if (invalidate) {
 				this.Invalidate();
@@ -551,6 +579,19 @@ namespace Europlan.Common {
 				this.RecalculateScrollBar();
 				invalidate = true;
 			}
+			if (this.productPlanner != null) {
+				if (this.productPlanner.CustomCursor != null) {
+					if (this.oldCursor == null) {
+						this.oldCursor = this.Cursor;
+					}
+					this.Cursor = this.productPlanner.CustomCursor;
+				} else {
+					if (this.oldCursor != null) {
+						this.Cursor = this.oldCursor;
+						this.oldCursor = null;
+					}
+				}
+			}
 			if (invalidate) {
 				this.Invalidate();
 			}
@@ -590,6 +631,19 @@ namespace Europlan.Common {
 					if (pickedObject != null) {
 						invalidate = true;
 						this.SelectedObject = pickedObject;
+					}
+				}
+			}
+			if (this.productPlanner != null) {
+				if (this.productPlanner.CustomCursor != null) {
+					if (this.oldCursor == null) {
+						this.oldCursor = this.Cursor;
+					}
+					this.Cursor = this.productPlanner.CustomCursor;
+				} else {
+					if (this.oldCursor != null) {
+						this.Cursor = this.oldCursor;
+						this.oldCursor = null;
 					}
 				}
 			}

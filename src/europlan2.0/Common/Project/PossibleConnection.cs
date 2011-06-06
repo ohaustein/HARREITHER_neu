@@ -18,11 +18,12 @@ namespace Europlan.Common {
 		protected bool invertColors = false;
 		protected bool connectHorizontal = true;
 		protected bool connectVertical = true;
+		protected Nullable<Vector2D> preferredStartVector = null;
 
 		public PossibleConnection() {
 		}
 
-		public PossibleConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, double rotation, bool invertColors, bool connectHorizontal, bool connectVertical) {
+		public PossibleConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, double rotation, bool invertColors, bool connectHorizontal, bool connectVertical, Vector2D preferredStartVector) {
 			this.connectionPoint = connectionPoint;
 			this.connectionArea = connectionArea;
 			this.possibleInput = possibleInput;
@@ -35,6 +36,7 @@ namespace Europlan.Common {
 			this.invertColors = true;
 			this.connectHorizontal = connectHorizontal;
 			this.connectVertical = connectVertical;
+			this.preferredStartVector = preferredStartVector;
 		}
 
 		public PossibleConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, Product product, Circuit circuit, double rotation, int i, bool connectHorizontal, bool connectVertical) {
@@ -49,6 +51,21 @@ namespace Europlan.Common {
 			this.rotation = rotation;
 			this.connectHorizontal = connectHorizontal;
 			this.connectVertical = connectVertical;
+		}
+
+		public PossibleConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, Product product, Circuit circuit, double rotation, int i, bool connectHorizontal, bool connectVertical, Vector2D preferredStartVector) {
+			this.connectionPoint = connectionPoint;
+			this.connectionArea = connectionArea;
+			this.possibleInput = possibleInput;
+			this.possibleOutput = possibleOutput;
+			this.product = product;
+			this.circuit = circuit;
+			this.distributor = null;
+			this.distributorPosition = -1;
+			this.rotation = rotation;
+			this.connectHorizontal = connectHorizontal;
+			this.connectVertical = connectVertical;
+			this.preferredStartVector = preferredStartVector;
 		}
 
 		public PossibleConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, Product product, Circuit circuit, double rotation, int i) {
@@ -134,6 +151,10 @@ namespace Europlan.Common {
 			get { return this.connectVertical; }
 			set { this.connectVertical = value; }
 		}
+
+		public Nullable<Vector2D> PreferredStartVector {
+			get { return this.preferredStartVector; }
+		}
 	}
 
 	public class PossibleHithermRegisterConnection : PossibleConnection {
@@ -144,6 +165,11 @@ namespace Europlan.Common {
 
 		public PossibleHithermRegisterConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, HithermProduct product, HithermCircuit circuit, HithermRegister register, bool connectHorizontal, bool connectVertical)
 			: base(connectionPoint, connectionArea, possibleInput, possibleOutput, product, circuit, 0, 0, connectHorizontal, connectVertical) {
+			this.register = register;
+		}
+
+		public PossibleHithermRegisterConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, HithermProduct product, HithermCircuit circuit, HithermRegister register, bool connectHorizontal, bool connectVertical, Vector2D preferredStartVector)
+			: base(connectionPoint, connectionArea, possibleInput, possibleOutput, product, circuit, 0, 0, connectHorizontal, connectVertical, preferredStartVector) {
 			this.register = register;
 		}
 

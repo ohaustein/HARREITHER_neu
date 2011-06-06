@@ -91,9 +91,13 @@ namespace Europlan.Common {
 		}
 
 		private void ApplyConnectionButtonCheckedState(ToolStripButton buttonToCheck) {
-			this.btnConnectionManual.Checked = this.btnConnectionManual == buttonToCheck;
-			this.btnConnectionAuto.Checked = this.btnConnectionAuto == buttonToCheck;
-			this.btnConnectionDirect.Checked = this.btnConnectionDirect == buttonToCheck;
+			if (buttonToCheck != null) {
+				this.btnConnectionManual.Checked = this.btnConnectionManual == buttonToCheck;
+				this.btnConnectionAuto.Checked = this.btnConnectionAuto == buttonToCheck;
+			} else {
+				this.btnConnectionDirect.Checked = !this.hithermPlanner.NewConnectionsAlign;
+				this.btnConnectionAlign.Checked = this.hithermPlanner.NewConnectionsAlign;
+			}
 		}
 
 		private void btnWallNewWall_Click(object sender, EventArgs e) {
@@ -308,8 +312,13 @@ namespace Europlan.Common {
 		}
 
 		private void btnConnectionDirect_Click(object sender, EventArgs e) {
-			this.hithermPlanner.NewConnectionMode = HithermPlanner.NewConnectionModeEnum.NCM_DIRECT;
-			ApplyConnectionButtonCheckedState(this.btnConnectionDirect);
+			this.hithermPlanner.NewConnectionsAlign = false;
+			ApplyConnectionButtonCheckedState(null);
+		}
+
+		private void btnConnectionAlign_Click(object sender, EventArgs e) {
+			this.hithermPlanner.NewConnectionsAlign = true;
+			ApplyConnectionButtonCheckedState(null);
 		}
 
 		private IGraphicalWallObject SelectedObject {
@@ -393,8 +402,9 @@ namespace Europlan.Common {
 
 			this.btnConnectionManual.Visible = this.btnConnection.Checked;
 			this.btnConnectionAuto.Visible = this.btnConnection.Checked;
+			this.seperatorConnections.Visible = this.btnConnection.Checked;
 			this.btnConnectionDirect.Visible = this.btnConnection.Checked;
-			//this.toolStripSubmenu.Visible = this.btnObstacle.Checked || this.btnRegister.Checked;
+			this.btnConnectionAlign.Visible = this.btnConnection.Checked;
 		}
 
 		private void UpdateModifyRegisterPanel(GraphicalHithermRegisterWrapper hithermRegister) {
@@ -671,8 +681,12 @@ namespace Europlan.Common {
 
 		private void UpdateModifyConnectionPanelButtons(GraphicalHithermVerbindung connection) {
 			if (connection != null) {
+				this.btnConnectionApply.Enabled = unsavedChanges || connection.IsNew;
+				this.btnConnectionRevert.Enabled = unsavedChanges;
 				this.btnConnectionDelete.Enabled = true;
 			} else {
+				this.btnConnectionApply.Enabled = false;
+				this.btnConnectionRevert.Enabled = false;
 				this.btnConnectionDelete.Enabled = false;
 			}
 		}
@@ -1112,6 +1126,13 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			if (e.Shift) {
+				InvertSnap();
+			}
+		}
+
+		private void graphicalWallPanel_KeyUp(object sender, KeyEventArgs e) {
+			RestoreSnap();
 		}
 
 		private void DeleteVerbindung(GraphicalHithermVerbindung verbindung) {
@@ -1273,6 +1294,20 @@ namespace Europlan.Common {
 			DeleteVerbindung(SelectedObject as GraphicalHithermVerbindung);
 		}
 
+		private void btnConnectionRevert_Click(object sender, EventArgs e) {
+			SelectedObject.RevertState();
+			this.graphicalWallPanel.Room.MarkErrors(SelectedObject, null);
+			unsavedChanges = false;
+			UpdateModifyConnectionPanel(SelectedObject as GraphicalHithermVerbindung);
+			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void btnConnectionApply_Click(object sender, EventArgs e) {
+			graphicalWallPanel.SelectedObject = null;
+			UpdateModifyConnectionPanel(null);
+			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
 		private void btnWallHelpLine_Click(object sender, EventArgs e) {
 			WallHelpLinesForm form = new WallHelpLinesForm(graphicalWallPanel.Room, graphicalWallPanel.SelectedObject as GraphicalWall);
 			form.ShowDialog();
@@ -1346,6 +1381,24 @@ namespace Europlan.Common {
 			} else {
 				MessageBox.Show("Es sind keine Wände zum exportieren vorhanden.");
 			}
+		}
+
+		private bool oldSnap = true;
+		private bool oldDirect = false;
+
+		private void InvertSnap() {
+			/*if (this.oldSnap == this.graphicalWallPanel.SnapEnabled) {
+				this.graphicalWallPanel.SnapEnabled
+			}
+			this.graphicalWallPanel.SnapEnabled = !this.btnUseHelplines.Checked;
+			this.btnUseHelplines.Checked = this.graphicalWallPanel.SnapEnabled;
+
+			this.hithermPlanner.NewConnectionsAlign = !this.btnConnectionAlign.Checked;
+			this.btnConnectionAlign.Checked = this.hithermPlanner.NewConnectionsAlign;
+			this.btnConnectionDirect.Checked = !this.hithermPlanner.NewConnectionsAlign;*/
+		}
+
+		private void RestoreSnap() {
 		}
 	}
 }

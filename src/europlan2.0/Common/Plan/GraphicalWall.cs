@@ -550,7 +550,7 @@ namespace Europlan.Common {
 				area.Add(new Point2D(left, 10));
 				area.Add(new Point2D(right, 10));
 				area.Add(new Point2D(right, 0));
-				return new PossibleConnection(new Point2D(mousePointInPlan.X, 0), area, true, true, 0, true, false, true);
+				return new PossibleConnection(new Point2D(mousePointInPlan.X, 0), area, true, true, 0, true, false, true, new Vector2D(0, 10));
 			}
 			return null;
 		}

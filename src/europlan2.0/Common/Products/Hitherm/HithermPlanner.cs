@@ -6,6 +6,7 @@ using WW.Math;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using WW.Math.Geometry;
+using System.Windows.Forms;
 
 namespace Europlan.Common {
 	public class HithermPlanner : Component, IWallProductPlanner {
@@ -46,20 +47,35 @@ namespace Europlan.Common {
 		private List<PossibleConnection> highlightedConnections = new List<PossibleConnection>();
 		private GraphicalHithermVerbindung newConnection = new GraphicalHithermVerbindung();
 		private GraphicalHithermVerbindung newConnectionDraw = new GraphicalHithermVerbindung(false);
+		private bool newConnectionsAlign = true;
 
-		private NewConnectionModeEnum newConnectionMode = NewConnectionModeEnum.NCM_MANUAL;
+		private GraphicalHithermRegisterWrapper newConnectionAutoStart = null;
+		private PossibleHithermRegisterConnection newConnectionEnd = null;
+		private Vector2D newConnectionAutoStartWallOffset = new Vector2D();
+
+		private NewConnectionModeEnum newConnectionMode = NewConnectionModeEnum.NCM_AUTO;
 
 		public NewConnectionModeEnum NewConnectionMode {
 			get { return this.newConnectionMode; }
 			set {
-				if (this.newConnectionStart != null) {
+				if (value != this.newConnectionMode) {
+					this.newConnectionAutoStart = null;
 					this.newConnectionStart = null;
-					this.startConnection = null;
 					this.newConnection.Vertices.Clear();
 					this.newConnectionDraw.Vertices.Clear();
+					this.newConnectionMode = value;
+					this.customCursor = null;
+					if (this.connectedWallPanel != null) {
+						this.connectedWallPanel.SelectedObject = null;
+						this.connectedWallPanel.InvalidateGraphics();
+					}
 				}
-				this.newConnectionMode = value;
 			}
+		}
+
+		public bool NewConnectionsAlign {
+			get { return this.newConnectionsAlign; }
+			set { this.newConnectionsAlign = value; }
 		}
 
 		public HithermRegister.RohrabstandEnum NewRegisterRohrabstand {
@@ -115,7 +131,10 @@ namespace Europlan.Common {
 			}
 		}
 
-		public System.Windows.Forms.Cursor CustomCursor {
+		private Cursor customCursor = null;
+
+		public Cursor CustomCursor {
+			//get { return customCursor; }
 			get { return null; }
 		}
 
@@ -175,10 +194,9 @@ namespace Europlan.Common {
 					}
 				}
 				if (this.newConnectionStart != null) {
-					PossibleConnection endConn;
-					this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
-					//List<Point2D> nextVertices = this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn);
-					this.newConnectionDraw.Vertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn));
+					//PossibleConnection endConn;
+					//this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
+					//this.newConnectionDraw.Vertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn));
 					this.newConnectionDraw.PaintObject(g, Color.Green, !this.newConnectionDraw.CheckValidity(null, 0, 0), scale, false);
 				}
 			}
@@ -190,98 +208,141 @@ namespace Europlan.Common {
 			}
 
 			if (this.mode == HithermPlannerMode.HPM_ADD_CONNECTION) {
-				if (this.newConnectionStart == null) {
-					this.newConnection.Vertices.Clear();
-					foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
-						GraphicalWall wall = baseWall;
-						while (wall != null) {
-							Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall) * 100;
-							if (offset.HasValue) {
-								foreach (PossibleConnection conn in this.highlightedConnections) {
-									if (conn is PossibleHithermRegisterConnection && conn.ConnectionArea.IsInside(planPoint)) {
-										this.newConnectionStart = conn as PossibleHithermRegisterConnection;
-										this.newConnection.Vertices.Add(this.newConnectionStart.ConnectionPoint);
-										return true;
+				if (this.newConnectionMode == NewConnectionModeEnum.NCM_MANUAL) {
+					if (this.newConnectionStart == null) {
+						this.newConnection.Vertices.Clear();
+						foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
+							GraphicalWall wall = baseWall;
+							while (wall != null) {
+								Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall) * 100;
+								if (offset.HasValue) {
+									foreach (PossibleConnection conn in this.highlightedConnections) {
+										if (conn is PossibleHithermRegisterConnection && conn.ConnectionArea.IsInside(planPoint)) {
+											if (this.connectedWallPanel != null) {
+												this.connectedWallPanel.SelectedObject = null;
+											}
+											this.newConnectionStart = conn as PossibleHithermRegisterConnection;
+											this.newConnection.Vertices.Add(this.newConnectionStart.ConnectionPoint);
+											return true;
+										}
 									}
 								}
-								/*foreach (GraphicalRegisterWrapper wrapper in wall.Registers) {
-									if (wrapper == this.connectedWallPanel.SelectedObject || wrapper is GraphicalHithermRegisterWrapper && wrapper.HitTest(planPoint, offset.Value.X, offset.Value.Y)) {
-										PossibleHithermRegisterConnection conn = (wrapper as GraphicalHithermRegisterWrapper).GetOutputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
-										if (conn.ConnectionArea.IsInside(planPoint)) {
-											this.startConnection = conn;
-											this.newConnection.Vertices.Add(this.startConnection.ConnectionPoint);
-											return true;
-										}
-										conn = (wrapper as GraphicalHithermRegisterWrapper).GetInputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
-										if (conn.ConnectionArea.IsInside(planPoint)) {
-											this.startConnection = conn;
-											this.newConnection.Vertices.Add(this.startConnection.ConnectionPoint);
-											return true;
-										}
-									}
-								}*/
+								wall = wall.DachSchraege;
 							}
-							wall = wall.DachSchraege;
 						}
-					}
-				} else {
-					PossibleConnection endConnection;
+					} else {
+						PossibleConnection endConnection;
 
-					this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
-					List<Point2D> nextVertices = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection);
-					this.newConnectionDraw.Vertices.AddRange(nextVertices);
-					if (this.newConnectionDraw.CheckValidity(null, 0, 0)) {
+						this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
+						List<Point2D> nextVertices = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection);
+						this.newConnectionDraw.Vertices.AddRange(nextVertices);
+						if (this.newConnectionDraw.CheckValidity(null, 0, 0)) {
 
-						this.newConnection.Vertices.AddRange(nextVertices);
-						this.newConnection.Simplify();
-						if (endConnection != null) {
-							if ((endConnection == null || endConnection.PossibleInput) && (startConnection == null || startConnection.PossibleOutput)) {
-								startConnection = newConnectionStart;
-							} else {
-								startConnection = endConnection;
-								endConnection = newConnectionStart;
-								this.newConnection.Vertices.Reverse();
-							}
-							HithermRegister endRegister = null;
-							HithermCircuit endCircuit = null;
-							HithermRegister startRegister = null;
-							HithermCircuit startCircuit = null;
-							if (endConnection is PossibleHithermRegisterConnection) {
-								endRegister = (endConnection as PossibleHithermRegisterConnection).Register;
-								endCircuit = this.product.GetCircuitForRegister(endRegister);
-							}
-							if (startConnection is PossibleHithermRegisterConnection) {
-								startRegister = (startConnection as PossibleHithermRegisterConnection).Register;
-								startCircuit = this.product.GetCircuitForRegister(startRegister);
-							}
-							
-							if (startRegister != null && endRegister != null) {
-								HithermCircuit combinedCircuit = (startCircuit.HkLabelNr < endCircuit.HkLabelNr ? startCircuit : endCircuit);
-								HithermCircuit deleteCircuit = combinedCircuit == startCircuit ? endCircuit : startCircuit;
-								int combinedCircuitNr = combinedCircuit.HkLabelNr;
-								while (deleteCircuit.Registers.Count > 0) {
-									this.product.MoveRegisterToCircuit(deleteCircuit.Registers[0], combinedCircuitNr);
+							this.newConnection.Vertices.AddRange(nextVertices);
+							this.newConnection.Simplify();
+							if (endConnection != null) {
+								if ((endConnection == null || endConnection.PossibleInput) && (startConnection == null || startConnection.PossibleOutput)) {
+									startConnection = newConnectionStart;
+								} else {
+									startConnection = endConnection;
+									endConnection = newConnectionStart;
+									this.newConnection.Vertices.Reverse();
 								}
-								GraphicalHithermVerbindung newLink;
-								newLink = new GraphicalHithermVerbindung(startRegister, endRegister, this.newConnection.Vertices, combinedCircuit, Project.Instance.GetPlannedProduct(this.product));
-								combinedCircuit.Links.Add(newLink);
-							} else {
-								HithermCircuit circuitToAdd = (startCircuit == null ? endCircuit : startCircuit);
-								GraphicalHithermVerbindung newLink;
-								newLink = new GraphicalHithermVerbindung(startRegister, endRegister, this.newConnection.Vertices, this.product.GetCircuitForRegister(this.newConnectionStart.Register), Project.Instance.GetPlannedProduct(this.product));
-								circuitToAdd.Links.Add(newLink);
+								HithermRegister endRegister = null;
+								HithermCircuit endCircuit = null;
+								HithermRegister startRegister = null;
+								HithermCircuit startCircuit = null;
+								if (endConnection is PossibleHithermRegisterConnection) {
+									endRegister = (endConnection as PossibleHithermRegisterConnection).Register;
+									endCircuit = this.product.GetCircuitForRegister(endRegister);
+								}
+								if (startConnection is PossibleHithermRegisterConnection) {
+									startRegister = (startConnection as PossibleHithermRegisterConnection).Register;
+									startCircuit = this.product.GetCircuitForRegister(startRegister);
+								}
+
+								if (startRegister != null && endRegister != null) {
+									HithermCircuit combinedCircuit = (startCircuit.HkLabelNr < endCircuit.HkLabelNr ? startCircuit : endCircuit);
+									HithermCircuit deleteCircuit = combinedCircuit == startCircuit ? endCircuit : startCircuit;
+									int combinedCircuitNr = combinedCircuit.HkLabelNr;
+									while (deleteCircuit.Registers.Count > 0) {
+										this.product.MoveRegisterToCircuit(deleteCircuit.Registers[0], combinedCircuitNr);
+									}
+									GraphicalHithermVerbindung newLink = new GraphicalHithermVerbindung(startRegister, endRegister, this.newConnection.Vertices, combinedCircuit, Project.Instance.GetPlannedProduct(this.product));
+									combinedCircuit.Links.Add(newLink);
+									if (this.connectedWallPanel != null) {
+										this.connectedWallPanel.SelectedObject = newLink;
+									}
+								} else {
+									HithermCircuit circuitToAdd = (startCircuit == null ? endCircuit : startCircuit);
+									GraphicalHithermVerbindung newLink = new GraphicalHithermVerbindung(startRegister, endRegister, this.newConnection.Vertices, circuitToAdd, Project.Instance.GetPlannedProduct(this.product));
+									circuitToAdd.Links.Add(newLink);
+									if (this.connectedWallPanel != null) {
+										this.connectedWallPanel.SelectedObject = newLink;
+									}
+								}
+								this.product.CorrectCircuitIds();
+								this.newConnectionStart = null;
+								this.endConnection = null;
+								this.newConnection.Vertices.Clear();
+							}
+						}
+						return true;
+					}
+				} else if (this.newConnectionMode == NewConnectionModeEnum.NCM_AUTO) {
+					if (this.newConnectionAutoStart == null) {
+						this.newConnectionAutoStart = this.GetRegisterForPoint(planPoint);
+						double offsetX, offsetY;
+						this.product.AssociatedRoom.GetWallForPoint(planPoint, out offsetX, out offsetY);
+						this.newConnectionAutoStartWallOffset = new Vector2D(offsetX, offsetY);
+						if (this.newConnectionAutoStart != null && this.connectedWallPanel != null) {
+							this.connectedWallPanel.SelectedObject = this.newConnectionAutoStart;
+							this.connectedWallPanel.InvalidateGraphics();
+						}
+					} else {
+						if (this.newConnectionDraw.CheckValidity(null, 0, 0)) {
+							HithermRegister startRegister = this.newConnectionStart.PossibleOutput ? this.newConnectionStart.Register : this.newConnectionEnd.Register;
+							HithermRegister endRegister = this.newConnectionStart.PossibleOutput ? this.newConnectionEnd.Register : this.newConnectionStart.Register;
+							if (!this.newConnectionStart.PossibleOutput) {
+								this.newConnectionDraw.Vertices.Reverse();
+							}
+							HithermCircuit startCircuit = this.product.GetCircuitForRegister(startRegister);
+							HithermCircuit endCircuit = this.product.GetCircuitForRegister(endRegister);
+							HithermCircuit combinedCircuit = (startCircuit.HkLabelNr < endCircuit.HkLabelNr ? startCircuit : endCircuit);
+							HithermCircuit deleteCircuit = combinedCircuit == startCircuit ? endCircuit : startCircuit;
+							int combinedCircuitNr = combinedCircuit.HkLabelNr;
+							while (deleteCircuit.Registers.Count > 0) {
+								this.product.MoveRegisterToCircuit(deleteCircuit.Registers[0], combinedCircuitNr);
+							}
+							GraphicalHithermVerbindung newLink = new GraphicalHithermVerbindung(startRegister, endRegister, this.newConnectionDraw.Vertices, combinedCircuit, Project.Instance.GetPlannedProduct(this.product));
+							combinedCircuit.Links.Add(newLink);
+							if (this.connectedWallPanel != null) {
+								this.connectedWallPanel.SelectedObject = newLink;
 							}
 							this.product.CorrectCircuitIds();
 							this.newConnectionStart = null;
-							this.endConnection = null;
-							this.newConnection.Vertices.Clear();
+							this.newConnectionEnd = null;
+							this.newConnectionDraw.Vertices.Clear();
+							this.newConnectionAutoStart = null;
 						}
 					}
-					return true;
 				}
 			}
 
 			return false;
+		}
+
+		private GraphicalHithermRegisterWrapper GetRegisterForPoint(Point2D planPoint) {
+			double offsetX, offsetY;
+			GraphicalWall wall = this.product.AssociatedRoom.GetWallForPoint(planPoint, out offsetX, out offsetY);
+			if (wall != null) {
+				foreach (GraphicalHithermRegisterWrapper register in wall.Registers) {
+					if (register.HitTest(planPoint, offsetX, offsetY)) {
+						return register;
+					}
+				}
+			}
+			return null;
 		}
 
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, System.Windows.Forms.MouseButtons button) {
@@ -290,13 +351,19 @@ namespace Europlan.Common {
 			}
 
 			if (this.mode == HithermPlannerMode.HPM_ADD_CONNECTION) {
-				foreach (PossibleConnection conn in this.highlightedConnections) {
-					if (conn is PossibleHithermRegisterConnection &&  conn.ConnectionArea.IsInside(planPoint)) {
-						return true;
+				if (this.newConnectionMode == NewConnectionModeEnum.NCM_MANUAL) {
+					PossibleConnection endConn;
+					foreach (PossibleConnection conn in this.highlightedConnections) {
+						if (conn is PossibleHithermRegisterConnection && conn.ConnectionArea.IsInside(planPoint)) {
+							if (this.newConnectionStart != null) {
+								this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
+								this.newConnectionDraw.Vertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConn));
+							}
+							return true;
+						}
 					}
-				}
-				this.highlightedConnections.Clear();
-				//if (this.startConnection == null) {
+					this.highlightedConnections.Clear();
+					//if (this.startConnection == null) {
 					foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
 						GraphicalWall wall = baseWall;
 						while (wall != null) {
@@ -329,8 +396,70 @@ namespace Europlan.Common {
 							wall = wall.DachSchraege;
 						}
 					}
-				//}
-				return true;
+					//}
+					if (this.newConnectionStart != null) {
+						this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
+						this.newConnectionDraw.Vertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConn));
+					}
+					return true;
+				} else if (this.newConnectionMode == NewConnectionModeEnum.NCM_AUTO) {
+					if (this.newConnectionAutoStart == null) {
+						GraphicalHithermRegisterWrapper register = this.GetRegisterForPoint(planPoint);
+						if (register != null && (register.GetOutputLink() == null || register.GetInputLink() == null)) {
+							this.customCursor = null;
+						} else {
+							this.customCursor = Cursors.No;
+						}
+					} else {
+						double endOffsetX, endOffsetY;
+						GraphicalWall endWall = this.product.AssociatedRoom.GetWallForPoint(planPoint, out endOffsetX, out endOffsetY);
+						GraphicalHithermRegisterWrapper endRegister = this.GetRegisterForPoint(planPoint);
+
+						if (endRegister != null) {
+							GraphicalHithermRegisterWrapper startRegister = this.newConnectionAutoStart;
+							double startOffsetX = this.newConnectionAutoStartWallOffset.X;
+							double startOffsetY = this.newConnectionAutoStartWallOffset.Y;
+							if (endRegister.Register.GraphVorlaufRight == this.newConnectionAutoStart.Register.GraphVorlaufRight) {
+								if (endRegister.X + endOffsetX > startRegister.X + startOffsetX + startRegister.Width) {
+									if (endRegister.Register.GraphVorlaufRight && startRegister.GetInputLink() == null && endRegister.GetOutputLink() == null) {
+										this.newConnectionStart = startRegister.GetInputConnection(startOffsetX, startOffsetY, this.product, this.product.GetCircuitForRegister(startRegister.Register));
+										this.newConnectionEnd = endRegister.GetOutputConnection(endOffsetX, endOffsetY, product, product.GetCircuitForRegister(endRegister.Register));
+										this.newConnectionDraw.Vertices = this.GetNextAutomaticConnectionVertices(this.newConnectionEnd);
+										this.customCursor = this.newConnectionDraw.CheckValidity(null, 0, 0) ? null : Cursors.No;
+										return true;
+									} else if (!endRegister.Register.GraphVorlaufRight && startRegister.GetOutputLink() == null && endRegister.GetInputLink() == null) {
+										this.newConnectionStart = startRegister.GetOutputConnection(startOffsetX, startOffsetY, this.product, this.product.GetCircuitForRegister(startRegister.Register));
+										this.newConnectionEnd = endRegister.GetInputConnection(endOffsetX, endOffsetY, product, product.GetCircuitForRegister(endRegister.Register));
+										this.newConnectionDraw.Vertices = this.GetNextAutomaticConnectionVertices(this.newConnectionEnd);
+										this.customCursor = this.newConnectionDraw.CheckValidity(null, 0, 0) ? null : Cursors.No;
+										return true;
+									}
+								} else if (startRegister.X + startOffsetX > endRegister.X + endOffsetX + endRegister.Width) {
+									if (endRegister.Register.GraphVorlaufRight && startRegister.GetOutputLink() == null && endRegister.GetInputLink() == null) {
+										this.newConnectionStart = startRegister.GetOutputConnection(startOffsetX, startOffsetY, this.product, this.product.GetCircuitForRegister(startRegister.Register));
+										this.newConnectionEnd = endRegister.GetInputConnection(endOffsetX, endOffsetY, product, product.GetCircuitForRegister(endRegister.Register));
+										this.newConnectionDraw.Vertices = this.GetNextAutomaticConnectionVertices(this.newConnectionEnd);
+										this.customCursor = this.newConnectionDraw.CheckValidity(null, 0, 0) ? null : Cursors.No;
+										return true;
+									} else if (!endRegister.Register.GraphVorlaufRight && startRegister.GetInputLink() == null && endRegister.GetOutputLink() == null) {
+										this.newConnectionStart = startRegister.GetInputConnection(startOffsetX, startOffsetY, this.product, this.product.GetCircuitForRegister(startRegister.Register));
+										this.newConnectionEnd = endRegister.GetOutputConnection(endOffsetX, endOffsetY, product, product.GetCircuitForRegister(endRegister.Register));
+										this.newConnectionDraw.Vertices = this.GetNextAutomaticConnectionVertices(this.newConnectionEnd);
+										this.customCursor = this.newConnectionDraw.CheckValidity(null, 0, 0) ? null : Cursors.No;
+										return true;
+									}
+								}
+							}
+						}
+						this.customCursor = Cursors.No;
+						this.newConnectionStart = null;
+						this.newConnectionEnd = null;
+						if (this.newConnectionDraw.Vertices != null && this.newConnectionDraw.Vertices.Count > 0) {
+							this.newConnectionDraw.Vertices.Clear();
+							return true;
+						}
+					}
+				}
 			}
 
 			return false;
@@ -459,8 +588,9 @@ namespace Europlan.Common {
 				if (key == System.Windows.Forms.Keys.Escape) {
 					this.newConnectionStart = null;
 					this.newConnection.Vertices.Clear();
-					this.newRegisterOk = true;
-					this.newRegister = null;
+					this.newConnectionEnd = null;
+					this.newConnectionDraw.Vertices.Clear();
+					this.newConnectionAutoStart = null;
 					this.connectedWallPanel.InvalidateGraphics();
 				}
 			}
@@ -543,7 +673,19 @@ namespace Europlan.Common {
 
 		public HithermPlannerMode Mode {
 			get { return this.mode; }
-			set { this.mode = value; }
+			set {
+				if (value != this.mode) {
+					this.mode = value;
+					this.customCursor = null;
+					this.newConnectionAutoStart = null;
+					this.newConnectionStart = null;
+					this.newConnection.Vertices.Clear();
+					this.newConnectionDraw.Vertices.Clear();
+					if (this.connectedWallPanel != null) {
+						this.connectedWallPanel.InvalidateGraphics();
+					}
+				}
+			}
 		}
 
 		private Point2D GetNextConnectionVertex(Point2D mousePoint, double rotation, out bool horizontal) {
@@ -569,9 +711,74 @@ namespace Europlan.Common {
 			return transformation.GetInverse().Transform(transformedMousePoint);
 		}
 
-		/*private List<Point2D> GetNextAutomaticConnectionVertices(PossibleConnection endConnection) {
-			//List<Point2D>
-		}*/
+		private List<Point2D> GetNextAutomaticConnectionVertices(PossibleConnection endConnection) {
+			List<Point2D> nextVertices = new List<Point2D>();
+			if (this.newConnection != null && this.newConnectionStart != null) {
+				if (this.newConnectionsAlign) {
+					if (this.newConnection.Vertices.Count == 0) {
+						nextVertices.Add(this.newConnectionStart.ConnectionPoint);
+					}
+					List<Point2D> lastVertices = new List<Point2D>();
+					Point2D startPoint = this.newConnection.Vertices.Count == 0 ? nextVertices[0] : this.newConnection.Vertices[this.newConnection.Vertices.Count - 1];
+					Vector2D startVector = new Vector2D(0, 0);
+					if (this.newConnection.Vertices.Count < 2 && newConnectionStart.PreferredStartVector.HasValue) {
+						startVector = newConnectionStart.PreferredStartVector.Value;
+						startPoint = startPoint + startVector;
+						nextVertices.Add(startPoint);
+					} else {
+						startVector = this.newConnection.Vertices[this.newConnection.Vertices.Count - 1] - this.newConnection.Vertices[this.newConnection.Vertices.Count - 2];
+					}
+					Point2D endPoint = endConnection.ConnectionPoint;
+					lastVertices.Add(endPoint);
+					Vector2D endVector = new Vector2D(0, 0);
+					if (endConnection.PreferredStartVector.HasValue) {
+						endVector = endConnection.PreferredStartVector.Value;
+						endPoint = endPoint + endVector;
+						lastVertices.Add(endPoint);
+					}
+					Vector2D todo = endPoint - startPoint;
+					if ((startVector.Y < 0 && todo.Y > 0) || (startVector.Y > 0 && todo.Y < 0)) {
+						startVector = new Vector2D(todo.X >= 0 ? 10 : -10, 0);
+						startPoint = startPoint + startVector;
+						nextVertices.Add(startPoint);
+						todo = todo - startVector;
+					}
+					if ((startVector.X < 0 && todo.X > 0) || (startVector.X > 0 && todo.X < 0)) {
+						startVector = new Vector2D(0, todo.Y >= 0 ? 10 : -10);
+						startPoint = startPoint + startVector;
+						nextVertices.Add(startPoint);
+						todo = todo - startVector;
+					}
+					if ((endVector.X < 0 && todo.X < 0) || (endVector.X > 0 && todo.X > 0)) {
+						endVector = new Vector2D(0, todo.Y >= 0 ? 10 : -10);
+						endPoint = endPoint - endVector;
+						lastVertices.Add(endPoint);
+						todo = todo - endVector;
+					}
+					//if (Math.Abs(startVector.Y) <= 0.0001 && Math.Abs(endVector.X) <= 0.0001 &&
+					//(Math.Abs(startVector.X) > 0.0001 || Math.Abs(endVector.Y) > 0.0001)) {
+					if (Math.Abs(startVector.Y) <= 0.0001) {
+						nextVertices.Add(new Point2D(endPoint.X, startPoint.Y));
+						//nextVertices.Add(new Point2D(lastVertices[0].X, nextVertices.Count > 0 ? nextVertices[nextVertices.Count - 1].Y : this.newConnection.Vertices[this.newConnection.Vertices.Count - 1].Y));
+					} else {
+						nextVertices.Add(new Point2D(startPoint.X, endPoint.Y));
+						//nextVertices.Add(new Point2D(nextVertices.Count > 0 ? nextVertices[nextVertices.Count - 1].X : this.newConnection.Vertices[this.newConnection.Vertices.Count - 1].X, lastVertices[0].Y));
+					}
+					lastVertices.Reverse();
+					nextVertices.AddRange(lastVertices);
+				} else {
+					if (this.newConnection.Vertices.Count == 0) {
+						nextVertices.Add(this.newConnectionStart.ConnectionPoint);
+					}
+					if (this.newConnection.Vertices.Count + nextVertices.Count == 1) {
+						nextVertices.Add((this.newConnection.Vertices.Count == 1 ? this.newConnection.Vertices[0] : nextVertices[0]) + this.newConnectionStart.PreferredStartVector.Value);
+					}
+					nextVertices.Add(endConnection.ConnectionPoint + endConnection.PreferredStartVector.Value);
+					nextVertices.Add(endConnection.ConnectionPoint);
+				}
+			}
+			return nextVertices;
+		}
 
 		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out PossibleConnection endConnection) {
 			List<Point2D> nextConnectionPoints = new List<Point2D>();
@@ -594,64 +801,32 @@ namespace Europlan.Common {
 
 			if (endConnection == null) {
 				bool horizontal;
-				nextConnectionPoints.Add(this.GetNextConnectionVertex(mousePoint, this.newConnectionStart.Rotation, out horizontal));
-			} else {
-				Point2D connectionPoint = endConnection.ConnectionPoint;
-				if (this.newConnection.Vertices.Count > 1) {
-					Point2D p1 = this.newConnection.Vertices[this.newConnection.Vertices.Count - 2];
-					Point2D p2 = this.newConnection.Vertices[this.newConnection.Vertices.Count - 1];
-					Vector2D v = p1 - p2;
-					if (!endConnection.ConnectHorizontal && endConnection.ConnectVertical) {
-						v = new Vector2D(1, 0);
-					} else if (endConnection.ConnectHorizontal && !endConnection.ConnectVertical) {
-						v = new Vector2D(0, 1);
+				if (this.newConnectionsAlign) {
+					nextConnectionPoints.Add(this.GetNextConnectionVertex(mousePoint, this.newConnectionStart.Rotation, out horizontal));
+				} else {
+					if (this.newConnection.Vertices.Count == 1) {
+						nextConnectionPoints.Add(this.newConnection.Vertices[0] + this.newConnectionStart.PreferredStartVector.Value);
 					}
-					Line2D line1 = new Line2D(p2, v);
-					Line2D line2 = new Line2D(connectionPoint, new Vector2D(line1.Direction.Y, -line1.Direction.X));
-					Nullable<Point2D> intersection = Line2D.GetIntersection(line1, line2);
-					if (intersection.HasValue) {
-						nextConnectionPoints.Add(intersection.Value);
-					}
-				} else if (this.newConnection.Vertices.Count == 1) {
-					nextConnectionPoints.Add(new Point2D(connectionPoint.X, this.newConnection.Vertices[0].Y));
+					nextConnectionPoints.Add(mousePoint);
 				}
-				nextConnectionPoints.Add(connectionPoint);
-				//endRegister = (this.endConnection is PossibleHithermRegisterConnection) ? (this.endConnection as PossibleHithermRegisterConnection).Register : null;
+			} else {
+				if (this.newConnectionsAlign) {
+					nextConnectionPoints = this.GetNextAutomaticConnectionVertices(endConnection);
+				} else {
+					if (this.newConnection.Vertices.Count == 1) {
+						nextConnectionPoints.Add(this.newConnection.Vertices[0] + this.newConnectionStart.PreferredStartVector.Value);
+					}
+					if (endConnection.PreferredStartVector.HasValue) {
+						nextConnectionPoints.Add(endConnection.ConnectionPoint + endConnection.PreferredStartVector.Value);
+					}
+					nextConnectionPoints.Add(endConnection.ConnectionPoint);
+				}
 			}
 			this.endConnection = endConnection;
 			return nextConnectionPoints;
 		}
 
 		private PossibleConnection GetHoveredRegisterConnection(Point2D planPoint, bool checkInput, bool checkOutput) {
-		//private PossibleHithermRegisterConnection GetHoveredRegisterConnection(Point2D planPoint, bool checkInput, bool checkOutput) {
-			/*foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
-				GraphicalWall wall = baseWall;
-				while (wall != null) {
-					Nullable<Vector2D> offset = this.product.AssociatedRoom.GetWallOffset(wall);
-					if (offset.HasValue) {
-						offset = offset * 100;
-						foreach (GraphicalRegisterWrapper wrapper in wall.Registers) {
-							if (wrapper == this.connectedWallPanel.SelectedObject || wrapper is GraphicalHithermRegisterWrapper && wrapper.HitTest(planPoint, offset.Value.X, offset.Value.Y)) {
-								PossibleHithermRegisterConnection conn;
-								if (checkOutput) {
-									conn = (wrapper as GraphicalHithermRegisterWrapper).GetOutputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
-									if (conn.ConnectionArea.IsInside(planPoint)) {
-										return conn;
-									}
-								}
-								if (checkInput) {
-									conn = (wrapper as GraphicalHithermRegisterWrapper).GetInputConnection(offset.Value.X, offset.Value.Y, this.product, this.product.GetCircuitForRegister((wrapper as GraphicalHithermRegisterWrapper).Register));
-									if (conn.ConnectionArea.IsInside(planPoint)) {
-										return conn;
-									}
-								}
-							}
-						}
-						wall = wall.DachSchraege;
-					}
-				}
-			}
-			return null;*/
 			foreach (PossibleConnection conn in this.highlightedConnections) {
 				if (conn.ConnectionArea.IsInside(planPoint) && ((conn.PossibleInput && checkInput) || (conn.PossibleOutput && checkOutput))) {
 					return conn;
