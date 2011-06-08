@@ -144,7 +144,8 @@ namespace Europlan.Common {
 			}
 			if (ok) {
 				this.graphicalWallPanel.Room.Walls.Clear();
-				this.hithermPlanner.HithermProduct.PlannedCircuits.Clear();
+				//this.hithermPlanner.HithermProduct.PlannedCircuits.Clear();
+				this.hithermPlanner.HithermProduct.ResetProduct();
 				NewWallForm form = new NewWallForm(true, false, 0, 0, false);
 				DialogResult result = form.ShowDialog();
 				if (result == DialogResult.OK) {
@@ -402,9 +403,9 @@ namespace Europlan.Common {
 
 			this.btnConnectionManual.Visible = this.btnConnection.Checked;
 			this.btnConnectionAuto.Visible = this.btnConnection.Checked;
-			this.seperatorConnections.Visible = this.btnConnection.Checked;
-			this.btnConnectionDirect.Visible = this.btnConnection.Checked;
-			this.btnConnectionAlign.Visible = this.btnConnection.Checked;
+			this.seperatorConnections.Visible = false; //this.btnConnection.Checked;
+			this.btnConnectionDirect.Visible = false; //this.btnConnection.Checked;
+			this.btnConnectionAlign.Visible = false; //this.btnConnection.Checked;
 		}
 
 		private void UpdateModifyRegisterPanel(GraphicalHithermRegisterWrapper hithermRegister) {

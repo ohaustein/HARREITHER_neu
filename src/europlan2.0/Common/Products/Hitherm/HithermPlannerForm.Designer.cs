@@ -192,6 +192,7 @@ namespace Europlan.Common {
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.hithermPlanner = new Europlan.Common.HithermPlanner();
+			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMain.SuspendLayout();
 			this.toolStripSubmenu.SuspendLayout();
 			this.panelTop.SuspendLayout();
@@ -233,6 +234,7 @@ namespace Europlan.Common {
             this.btnSchraege,
             this.btnRegister,
             this.btnConnection,
+            this.toolStripSeparator5,
             this.btnUseHelplines});
 			this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
 			this.toolStripMain.Location = new System.Drawing.Point(0, 0);
@@ -2338,6 +2340,11 @@ namespace Europlan.Common {
 			this.hithermPlanner.NewRegisterVorlaufRight = true;
 			this.hithermPlanner.RecalculationNecessary += new System.EventHandler<System.EventArgs>(this.hithermPlanner_RecalculationNecessary);
 			// 
+			// toolStripSeparator5
+			// 
+			this.toolStripSeparator5.Name = "toolStripSeparator5";
+			this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+			// 
 			// HithermPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2567,6 +2574,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnConnectionApply;
 		private System.Windows.Forms.ToolStripSeparator seperatorConnections;
 		private System.Windows.Forms.ToolStripButton btnConnectionAlign;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 
 
 	}

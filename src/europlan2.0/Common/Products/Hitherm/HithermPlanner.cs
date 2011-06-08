@@ -591,7 +591,10 @@ namespace Europlan.Common {
 					this.newConnectionEnd = null;
 					this.newConnectionDraw.Vertices.Clear();
 					this.newConnectionAutoStart = null;
-					this.connectedWallPanel.InvalidateGraphics();
+					if (this.connectedWallPanel != null) {
+						this.connectedWallPanel.SelectedObject = null;
+						this.connectedWallPanel.InvalidateGraphics();
+					}
 				}
 			}
 			return false;

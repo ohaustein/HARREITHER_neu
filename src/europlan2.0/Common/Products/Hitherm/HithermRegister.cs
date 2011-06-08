@@ -345,6 +345,8 @@ namespace Europlan.Common {
 		private double graphPosY = 0;
 		private bool graphVorlaufRight = true;
 
+		private Dictionary<int, double> gaps = new Dictionary<int, double>();
+
 		/*private Nullable<Point> origin = null;*/
 
 		public HithermRegister() {
@@ -661,15 +663,17 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double RegisterBreiteForDrawing {
 			get {
+				double breite;
 				if (this.Rohrabstand == RohrabstandEnum.RC_HOCHLEISTUNG) {
 					if (HithermProduct.ConfigUsePlus) {
-						return (this.Rohre % 14 == 0) ? this.RegisterBreite : this.RegisterBreite + 2.5;
+						breite = (this.Rohre % 14 == 0) ? this.RegisterBreite : this.RegisterBreite + 2.5;
 					} else {
-						return (this.Rohre % 9 == 0) ? this.RegisterBreite : this.RegisterBreite + 2.5;
+						breite = (this.Rohre % 9 == 0) ? this.RegisterBreite : this.RegisterBreite + 2.5;
 					}
 				} else {
-					return this.RegisterBreite;
+					breite = this.RegisterBreite;
 				}
+				return breite + this.GapsSum;
 			}
 			set {
 				this.Rohre = 30;
@@ -680,6 +684,9 @@ namespace Europlan.Common {
 					if (this.RegisterBreiteForDrawing <= value) {
 						break;
 					}
+				}
+				if (this.Rohre < this.LastGap + 1) {
+					this.Rohre = this.LastGap + 1;
 				}
 
 				/*while (this.RegisterBreiteForDrawing > value && this.Rohre > 3) {
@@ -1040,6 +1047,40 @@ namespace Europlan.Common {
 		public bool OnlyCompleteRegisters {
 			get { return this.onlyCompleteRegisters; }
 			set { this.onlyCompleteRegisters = value; }
+		}
+
+		[XmlIgnore]
+		public Dictionary<int, double> Gaps {
+			get { return this.gaps; }
+			set { this.gaps = value; }
+		}
+
+		public void SetGap(int afterRohr, double distance) {
+			this.gaps.Add(afterRohr, distance);
+		}
+
+		public double GapsSum {
+			get {
+				double gapsSum = 0;
+				foreach (KeyValuePair<int, double> gap in this.gaps) {
+					//if (gap.Key < this.Rohre - 1) {
+						gapsSum += gap.Value;
+					//}
+				}
+				return gapsSum;
+			}
+		}
+
+		public int LastGap {
+			get {
+				int lastGap = -1;
+				foreach (int gap in this.gaps.Keys) {
+					if (gap > lastGap) {
+						lastGap = gap;
+					}
+				}
+				return lastGap;
+			}
 		}
 	}
 }

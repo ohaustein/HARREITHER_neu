@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 namespace Europlan.Common {
 	public class GraphicalHithermRegisterWrapper : GraphicalRegisterWrapper {
 		private HithermRegister register;
+		//private List<HithermRegister> registers = new List<HithermRegister>();
 		private HithermProduct product;
 
 		public GraphicalHithermRegisterWrapper(HithermProduct product) {
@@ -18,11 +19,19 @@ namespace Europlan.Common {
 
 		public GraphicalHithermRegisterWrapper(HithermRegister register, HithermProduct product) {
 			this.register = register;
+			//this.registers.Add(register);
 			this.product = product;
 		}
 
+		/*public List<HithermRegister> Registers {
+			get { return this.registers; }
+			set { this.registers = value; }
+		}*/
+
 		public HithermRegister Register {
-			get { return this.register; }
+			get { 
+				return this.register;
+			}
 			set {
 				this.register = value;
 				if (this.register != null) {
@@ -30,6 +39,20 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		/*public int RegisterCount {
+			get {
+				int count = 0;
+				foreach (HithermRegister register in hithermRegister.Registers) {
+					count += register.RegisterCount;
+				}
+				return count;
+			}
+		}
+
+		public bool IsHochleistungsRegister {
+			get { return (this.registers != null && this.registers.Count > 0) ? this.registers[0].IsHochleistungsRegister : false; }
+		}*/
 
 		public HithermProduct Product {
 			get { return this.product; }
@@ -93,6 +116,9 @@ namespace Europlan.Common {
 				g.DrawRectangle(registerPen, x, y2, breite, 2);
 				double pos = 5;
 				for (int i = 0; i < register.Rohre; i++) {
+					if (register.Gaps.ContainsKey(i)) {
+						pos += register.Gaps[i];
+					}
 					x = (float)(xOffset + register.GraphPosX + pos);
 					y1 = (float)(yOffset + register.GraphPosY + 1);
 					y2 = (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 1);
@@ -327,10 +353,13 @@ namespace Europlan.Common {
 			int bestRohre = 3;
 			double bestDelta = double.MaxValue;
 			foreach (KeyValuePair<int, double> kvp in this.register.PossibleWidths) {
-				if (Math.Abs(kvp.Value - width) < bestDelta) {
-					bestDelta = Math.Abs(kvp.Value - width);
+				if (Math.Abs(kvp.Value - width + register.GapsSum) < bestDelta) {
+					bestDelta = Math.Abs(kvp.Value - width + register.GapsSum);
 					bestRohre = kvp.Key;
 				}
+			}
+			if (bestRohre < register.LastGap + 1) {
+				bestRohre = register.LastGap + 1;
 			}
 			return bestRohre;
 		}
@@ -507,6 +536,7 @@ namespace Europlan.Common {
 			double oldWidth = this.register.RegisterBreiteForDrawing;
 			double oldHeight = this.register.RegisterHoehe;
 			int oldRohre = this.register.Rohre;
+			Dictionary<int, double> oldGaps = this.register.Gaps;
 			HithermRegister.HithermRegisterTypeEnum oldType = this.register.RegisterType;
 
 			Vector2D offset = this.product.AssociatedRoom.GetWallOffset(owningWall).Value * 100;
@@ -546,6 +576,13 @@ namespace Europlan.Common {
 					double oldBreite = this.register.RegisterBreiteForDrawing;
 					this.register.Rohre = newRohre.Value;
 					if (anchorRohreStart.HasValue && !anchorRohreStart.Value) {
+						/*foreach (int i in this.register.Gaps.Keys) {
+							this.register.Gaps[i] += this.register.Rohre - oldRohre;
+						}*/
+						this.register.Gaps = new Dictionary<int, double>();
+						foreach (KeyValuePair<int, double> kvp in oldGaps) {
+							this.register.Gaps.Add(kvp.Key + this.register.Rohre - oldRohre, kvp.Value);
+						}
 						if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
 							this.register.GraphPosX = this.register.GraphPosX + oldBreite - this.register.RegisterBreiteForDrawing;
 						} else {
@@ -571,6 +608,7 @@ namespace Europlan.Common {
 					this.register.GraphPosY = oldPosY;
 					this.register.Rohre = oldRohre;
 					this.register.RegisterType = oldType;
+					this.register.Gaps = oldGaps;
 				} else {
 					// TODO move Verbindeleitungen
 				}
