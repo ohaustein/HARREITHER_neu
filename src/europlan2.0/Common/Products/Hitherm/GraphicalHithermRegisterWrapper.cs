@@ -9,6 +9,39 @@ using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	public class GraphicalHithermRegisterWrapper : GraphicalRegisterWrapper {
+		public class RegisterGapAnchor : Anchor {
+			private int gapNr = 0;
+			private bool left = true;
+
+			public RegisterGapAnchor(double x, double y, AnchorTypeEnum anchorType, IGraphicalWallObject owner, int gapNr, bool left)
+				: base(x, y, anchorType, owner) {
+				this.gapNr = gapNr;
+				this.left = left;
+			}
+
+			public RegisterGapAnchor(Point2D position, AnchorTypeEnum anchorType, IGraphicalWallObject owner, int gapNr, bool left)
+				: base(position, anchorType, owner) {
+				this.gapNr = gapNr;
+				this.left = left;
+			}
+
+			public int GapNr {
+				get { return this.gapNr; }
+			}
+
+			public bool Left {
+				get { return this.left; }
+			}
+
+			public override void PaintAnchor(Graphics g, double xOffset, double yOffset, double scale) {
+				//Brush b = new SolidBrush(Color.DarkBlue);
+				Brush b = new SolidBrush(Color.Gray);
+				g.FillRectangle(b, (float)(this.position.X + xOffset - 3.0 / scale), (float)(this.position.Y + yOffset - 3.0 / scale), (float)(2.0 / scale), (float)(6.0 / scale));
+				g.FillRectangle(b, (float)(this.position.X + xOffset + 1.0 / scale), (float)(this.position.Y + yOffset - 3.0 / scale), (float)(2.0 / scale), (float)(6.0 / scale));
+			}
+		}
+
+
 		private HithermRegister register;
 		//private List<HithermRegister> registers = new List<HithermRegister>();
 		private HithermProduct product;
@@ -234,6 +267,33 @@ namespace Europlan.Common {
 			}*/
 		}
 
+		public double GetRohrOffset(int rohrNr) {
+			double offset = 5;
+			for (int i = 1; i < rohrNr; i++) {
+				if (register.Gaps.ContainsKey(i)) {
+					offset += register.Gaps[i];
+				}
+				if (register.Rohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG) {
+					if (HithermProduct.ConfigUsePlus) {
+						if (i % 14 == 13) {
+							offset += 10;
+						} else {
+							offset += 5;
+						}
+					} else {
+						if (i % 9 == 8) {
+							offset += 10;
+						} else {
+							offset += 5;
+						}
+					}
+				} else {
+					offset += 10;
+				}
+			}
+			return offset;
+		}
+
 		public override IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
 			if (HitTest(planPoint, xOffset, yOffset)) {
 				return this;
@@ -346,6 +406,10 @@ namespace Europlan.Common {
 			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_RIGHT,        this));
 			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y - px5,               AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_RIGHT, this));
 			anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y - px5,               AnchorTypeEnum.ANCHOR_SCALE_BOTTOM,       this));
+			foreach (KeyValuePair<int, double> gap in this.register.Gaps) {
+				anchors.Add(new RegisterGapAnchor(this.X + this.GetRohrOffset(gap.Key), this.Y + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT | AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this, gap.Key, true));
+				anchors.Add(new RegisterGapAnchor(this.X + this.GetRohrOffset(gap.Key + 1), this.Y + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT | AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this, gap.Key, false));
+			}
 			return anchors;
 		}
 
@@ -389,6 +453,7 @@ namespace Europlan.Common {
 		private int startDragRegisterHeight, startRegisterRohre;
 		private List<Point2D> startInputConnectionVertices, startOutputConnectionVertices;
 		private GraphicalHithermVerbindung startInputConnection, startOutputConnection;
+		private Dictionary<int, double> startGaps;
 
 		public override bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
 			this.startDrag = planPoint;
@@ -397,6 +462,7 @@ namespace Europlan.Common {
 			this.startDragRegisterHeight = this.register.RegisterHoehe;
 			this.startDragRegisterWidth = this.register.RegisterBreiteForDrawing;
 			this.startRegisterRohre = this.register.Rohre;
+			this.startGaps = new Dictionary<int, double>(this.register.Gaps);
 
 			this.startInputConnection = this.GetInputLink();
 			this.startOutputConnection = this.GetOutputLink();
@@ -425,7 +491,27 @@ namespace Europlan.Common {
 				if (anchor == null) {
 					// move
 					this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY + planPoint.Y - startDrag.Value.Y, checkLinks, useSnap);
-				} else {
+				} else if (anchor is RegisterGapAnchor) {
+					RegisterGapAnchor rga = anchor as RegisterGapAnchor;
+					if (rga.Left) {
+						double newGap = this.startGaps[rga.GapNr] - planPoint.X + startDrag.Value.X;
+						if (newGap < 0) {
+							newGap = 0;
+						}
+						this.UpdateGap(owningWall, rga.GapNr, newGap, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY, true, useSnap);
+						//this.register.Gaps[rga.GapNr] = newGap;
+						//this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY, true, useSnap);
+					} else {
+						double newGap = this.startGaps[rga.GapNr] + planPoint.X - startDrag.Value.X;
+						if (newGap < 0) {
+							newGap = 0;
+						}
+						this.UpdateGap(owningWall, rga.GapNr, newGap, startDragRegisterX, startDragRegisterY, true, useSnap);
+						//this.register.Gaps[rga.GapNr] = newGap;
+						//this.UpdatePosition(owningWall, startDragRegisterX, startDragRegisterY, true, useSnap);
+					}
+					// TODO
+				} else if (anchor is Anchor) {
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
 						this.UpdateRohre(owningWall, GetBestRohrCount(this.startDragRegisterWidth - planPoint.X + startDrag.Value.X), false, checkLinks, useSnap);
 					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_RIGHT) == AnchorTypeEnum.ANCHOR_SCALE_RIGHT) {
@@ -442,7 +528,9 @@ namespace Europlan.Common {
 				if (anchor == null) {
 					// move
 					this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY + planPoint.Y - startDrag.Value.Y, true, useSnap);
-				} else {
+				} else if (anchor is RegisterGapAnchor) {
+					// TODO
+				} else if (anchor is Anchor) {
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
 						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight - planPoint.X + this.startDrag.Value.X + 25), this.register.IsHochleistungsRegister, false).Value, false, checkLinks, useSnap);
 					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_RIGHT) == AnchorTypeEnum.ANCHOR_SCALE_RIGHT) {
@@ -519,29 +607,48 @@ namespace Europlan.Common {
 		}
 
 		public bool UpdatePosition(GraphicalWall owningWall, double newPosX, double newPosY, bool updateLinks, bool snapEnabled) {
-			return this.UpdatePositionAndSize(owningWall, newPosX, newPosY, null, null, null, null, updateLinks, snapEnabled);
+			return this.UpdatePositionAndSizeAndGap(owningWall, newPosX, newPosY, null, null, null, null, null, null, updateLinks, snapEnabled);
 		}
 
 		public bool UpdateRohre(GraphicalWall owningWall, int newRohre, bool anchorStart, bool updateLinks, bool snapEnabled) {
-			return this.UpdatePositionAndSize(owningWall, null, null, newRohre, anchorStart, null, null, updateLinks, snapEnabled);
+			return this.UpdatePositionAndSizeAndGap(owningWall, null, null, newRohre, anchorStart, null, null, null, null, updateLinks, snapEnabled);
 		}
 
 		public bool UpdateType(GraphicalWall owningWall, HithermRegister.HithermRegisterTypeEnum newType, bool anchorStart, bool updateLinks, bool snapEnabled) {
-			return this.UpdatePositionAndSize(owningWall, null, null, null, null, newType, anchorStart, updateLinks, snapEnabled);
+			return this.UpdatePositionAndSizeAndGap(owningWall, null, null, null, null, newType, null, null, anchorStart, updateLinks, snapEnabled);
 		}
 
-		public bool UpdatePositionAndSize(GraphicalWall owningWall, Nullable<double> newPosX, Nullable<double> newPosY, Nullable<int> newRohre, Nullable<bool> anchorRohreStart, Nullable<HithermRegister.HithermRegisterTypeEnum> newType, Nullable<bool> anchorTypeStart, bool checkLinks, bool useSnap) {
+		public bool UpdateGap(GraphicalWall owningWall, int gapNr, double gapWidth, double newXPos, double newYPos, bool updateLinks, bool snapEnabled) {
+			return this.UpdatePositionAndSizeAndGap(owningWall, newXPos, newYPos, null, null, null, gapNr, gapWidth, null, updateLinks, snapEnabled);
+		}
+
+		public bool UpdatePositionAndSizeAndGap(GraphicalWall owningWall, Nullable<double> newPosX, Nullable<double> newPosY, Nullable<int> newRohre, Nullable<bool> anchorRohreStart, Nullable<HithermRegister.HithermRegisterTypeEnum> newType, Nullable<int> setGap, Nullable<double> setGapTo, Nullable<bool> anchorTypeStart, bool checkLinks, bool useSnap) {
 			double oldPosX = this.register.GraphPosX;
 			double oldPosY = this.register.GraphPosY;
 			double oldWidth = this.register.RegisterBreiteForDrawing;
 			double oldHeight = this.register.RegisterHoehe;
 			int oldRohre = this.register.Rohre;
-			Dictionary<int, double> oldGaps = this.register.Gaps;
+			Dictionary<int, double> oldGaps = new Dictionary<int,double>(this.register.Gaps);
 			HithermRegister.HithermRegisterTypeEnum oldType = this.register.RegisterType;
 
 			Vector2D offset = this.product.AssociatedRoom.GetWallOffset(owningWall).Value * 100;
 			bool ok = false;
-			if (newPosX.HasValue && newPosY.HasValue && !newRohre.HasValue && !newType.HasValue) {
+			if (setGap.HasValue) {
+				this.register.Gaps[setGap.Value] = setGapTo.Value;
+				if (newPosX.HasValue) {
+					this.register.GraphPosX = newPosX.Value;
+				}
+				if (newPosY.HasValue) {
+					this.register.GraphPosY = newPosY.Value;
+				}
+				ok = true;
+				if (!this.CheckValidity(owningWall, offset.X, offset.Y)) {
+					this.register.GraphPosX = oldPosX;
+					this.register.GraphPosY = oldPosY;
+					this.register.Gaps = oldGaps;
+					ok = false;
+				}
+			} else if (newPosX.HasValue && newPosY.HasValue && !newRohre.HasValue && !newType.HasValue) {
 				this.register.GraphPosY = newPosY.Value;
 				bool retryY = false;
 				if (useSnap) {

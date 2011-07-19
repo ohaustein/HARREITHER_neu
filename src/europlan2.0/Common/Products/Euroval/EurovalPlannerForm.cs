@@ -67,6 +67,7 @@ namespace Europlan.Common.Products {
 			this.SetLanguage();
 			this.UpdateToolbar(this.tabs.SelectedTab);
 			this.CalculateAndUpdate();
+			this.connectionPlanner.Product = product;
 		}
 
 		private void SetLanguage() {
@@ -113,17 +114,6 @@ namespace Europlan.Common.Products {
 
 		private void btnMove_Click(object sender, EventArgs e) {
 			if (!btnMove.Checked) {
-				//if (this.eurovalPlanner.ContainsNotConfirmedModules) {
-				//    DialogResult result = MessageBox.Show("Wollen Sie die neu hinzugefügten Module übernehmen?", "Module übernehmen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-				//    if (result == DialogResult.Cancel) {
-				//        return;
-				//    } else if (result == DialogResult.Yes) {
-				//        ModulBodenCircuit newCircuit = this.eurovalPlanner.ConfirmNewModules();
-				//        if (newCircuit != null) {
-				//            this.UpdateLists(true, true);
-				//        }
-				//    }
-				//}
 				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_NONE;
 				this.planPanel.Mode = PlanMode.PM_MOVE;
 				this.UpdateButtons();
@@ -132,6 +122,7 @@ namespace Europlan.Common.Products {
 
 		private void btnDefineArea_Click(object sender, EventArgs e) {
 			if (!btnDefineArea.Checked) {
+				this.SetProductPlanner();
 				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_ADD_AREA;
 				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
 				this.UpdateButtons();
@@ -140,6 +131,7 @@ namespace Europlan.Common.Products {
 
 		private void btnAddReduced_Click(object sender, EventArgs e) {
 			if (!btnAddReduced.Checked) {
+				this.SetProductPlanner();
 				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_ADD_RED;
 				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
 				this.UpdateButtons();
@@ -148,6 +140,7 @@ namespace Europlan.Common.Products {
 
 		private void btnDelReduced_Click(object sender, EventArgs e) {
 			if (!btnDelReduced.Checked) {
+				this.SetProductPlanner();
 				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_DEL_RED;
 				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
 				this.UpdateButtons();
@@ -156,6 +149,7 @@ namespace Europlan.Common.Products {
 
 		private void btnAddRz_Click(object sender, EventArgs e) {
 			if (!btnAddRz.Checked) {
+				this.SetProductPlanner();
 				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_ADD_RZ;
 				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
 				this.UpdateButtons();
@@ -164,6 +158,7 @@ namespace Europlan.Common.Products {
 
 		private void btnDelRz_Click(object sender, EventArgs e) {
 			if (!btnDelRz.Checked) {
+				this.SetProductPlanner();
 				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_DEL_RZ;
 				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
 				this.UpdateButtons();
@@ -172,12 +167,30 @@ namespace Europlan.Common.Products {
 
 		private void btnSetText_Click(object sender, EventArgs e) {
 			if (!btnSetText.Checked) {
+				this.SetProductPlanner();
 				this.eurovalPlanner.Mode = EurovalPlanner.EurovalMode.EVM_SET_TEXT;
 				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
 				this.UpdateButtons();
 			}
 		}
 
+		private void btnAddAnbindeleitungen_Click(object sender, EventArgs e) {
+			if (!this.btnAddAnbindeleitungen.Checked) {
+				this.SetConnectionPlanner();
+				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.connectionPlanner.Mode = ConnectionPlanner.ConnectionMode.KDM_ADD_CONNECTION;
+				this.UpdateButtons();
+			}
+		}
+
+		private void btnSelectAnbindeleitungen_Click(object sender, EventArgs e) {
+			if (!this.btnSelectAnbindeleitungen.Checked) {
+				this.SetConnectionPlanner();
+				this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
+				this.connectionPlanner.Mode = ConnectionPlanner.ConnectionMode.KDM_SELECT_CONNECTION;
+				this.UpdateButtons();
+			}
+		}
 
 		//private void btnAddModules_Click(object sender, EventArgs e) {
 		//    if (!btnAddModules.Checked) {
@@ -221,7 +234,9 @@ namespace Europlan.Common.Products {
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
 				this.btnSetText.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_AREA) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.eurovalPlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_AREA) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = true;
 				this.btnAddReduced.Checked = false;
@@ -229,7 +244,9 @@ namespace Europlan.Common.Products {
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
 				this.btnSetText.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_RED) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.eurovalPlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_RED) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
 				this.btnAddReduced.Checked = true;
@@ -237,7 +254,9 @@ namespace Europlan.Common.Products {
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
 				this.btnSetText.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_DEL_RED) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.eurovalPlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_DEL_RED) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
 				this.btnAddReduced.Checked = false;
@@ -245,7 +264,9 @@ namespace Europlan.Common.Products {
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
 				this.btnSetText.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_RZ) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.eurovalPlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_ADD_RZ) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
 				this.btnAddReduced.Checked = false;
@@ -253,7 +274,9 @@ namespace Europlan.Common.Products {
 				this.btnAddRz.Checked = true;
 				this.btnDelRz.Checked = false;
 				this.btnSetText.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_DEL_RZ) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.eurovalPlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_DEL_RZ) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
 				this.btnAddReduced.Checked = false;
@@ -261,7 +284,9 @@ namespace Europlan.Common.Products {
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = true;
 				this.btnSetText.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_SET_TEXT) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.eurovalPlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.eurovalPlanner.Mode == EurovalPlanner.EurovalMode.EVM_SET_TEXT) {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
 				this.btnAddReduced.Checked = false;
@@ -269,6 +294,26 @@ namespace Europlan.Common.Products {
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
 				this.btnSetText.Checked = true;
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.connectionPlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.connectionPlanner.Mode == ConnectionPlanner.ConnectionMode.KDM_ADD_CONNECTION) {
+				this.btnMove.Checked = false;
+				this.btnDefineArea.Checked = false;
+				this.btnAddReduced.Checked = false;
+				this.btnDelReduced.Checked = false;
+				this.btnAddRz.Checked = false;
+				this.btnDelRz.Checked = false;
+				this.btnAddAnbindeleitungen.Checked = true;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.connectionPlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.connectionPlanner.Mode == ConnectionPlanner.ConnectionMode.KDM_SELECT_CONNECTION) {
+				this.btnMove.Checked = false;
+				this.btnDefineArea.Checked = false;
+				this.btnAddReduced.Checked = false;
+				this.btnDelReduced.Checked = false;
+				this.btnAddRz.Checked = false;
+				this.btnDelRz.Checked = false;
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = true;
 			} else {
 				this.btnMove.Checked = false;
 				this.btnDefineArea.Checked = false;
@@ -276,6 +321,8 @@ namespace Europlan.Common.Products {
 				this.btnDelReduced.Checked = false;
 				this.btnAddRz.Checked = false;
 				this.btnDelRz.Checked = false;
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
 			}
 		}
 
@@ -695,12 +742,21 @@ namespace Europlan.Common.Products {
 		}
 
 		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
-			if (this.cmbCircuits.SelectedIndex >= (this.cmbCircuitsContainsAutomatic ? 1 : 0)) {
-				(this.plannedProduct.Product as EurovalProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex + (this.cmbCircuitsContainsAutomatic ? 0 : 1);
-			} else {
-				(this.plannedProduct.Product as EurovalProduct).RequestedCircuits = null;
+			if (this.cmbCircuits.SelectedIndex + (this.cmbCircuitsContainsAutomatic ? 0 : 1) != this.eurovalPlanner.Product.RequestedCircuits || ((this.cmbCircuitsContainsAutomatic && this.cmbCircuits.SelectedIndex == 0) != (this.eurovalPlanner.Product.RequestedCircuits == null))) {
+				if (this.eurovalPlanner.Product.Connections != null && this.eurovalPlanner.Product.Connections.Count > 0) {
+					if (MessageBox.Show("Die Anzahl der Heizkreise von Systemen die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen des Systems löschen?", "Anbindeleitungen löschen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+						this.cmbCircuits.SelectedIndex = this.eurovalPlanner.Product.RequestedCircuits.Value + (this.cmbCircuitsContainsAutomatic ? 0 : 1);
+						return;
+					}
+					this.eurovalPlanner.Product.Connections.Clear();
+				}
+				if (this.cmbCircuits.SelectedIndex >= (this.cmbCircuitsContainsAutomatic ? 1 : 0)) {
+					(this.plannedProduct.Product as EurovalProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex + (this.cmbCircuitsContainsAutomatic ? 0 : 1);
+				} else {
+					(this.plannedProduct.Product as EurovalProduct).RequestedCircuits = null;
+				}
+				this.CalculateAndUpdate();
 			}
-			this.CalculateAndUpdate();
 		}
 
 		private void numCorners_ValueChanged(object sender, EventArgs e) {
@@ -708,5 +764,32 @@ namespace Europlan.Common.Products {
 			this.CalculateAndUpdate();
 		}
 
+		private void SetProductPlanner() {
+			if (this.planPanel.ProductPlanner != this.eurovalPlanner) {
+				double scale = this.planPanel.PlanScale;
+				Vector2D translation = this.planPanel.PlanTranslation;
+				this.planPanel.ProductPlanner = this.eurovalPlanner;
+				this.planPanel.PlanScale = scale;
+				this.planPanel.PlanTranslation = translation;
+			}
+		}
+
+		private void SetConnectionPlanner() {
+			if (this.planPanel.ProductPlanner != this.connectionPlanner) {
+				double scale = this.planPanel.PlanScale;
+				Vector2D translation = this.planPanel.PlanTranslation;
+				this.planPanel.ProductPlanner = this.connectionPlanner;
+				this.planPanel.PlanScale = scale;
+				this.planPanel.PlanTranslation = translation;
+			}
+		}
+
+		private void connectionPlanner_AnbindeleitungAdded(object sender, EventArgs e) {
+			if (this.cmbCircuitsContainsAutomatic && this.cmbCircuits.SelectedIndex == 0) {
+				this.cmbCircuits.SelectedIndex = this.eurovalPlanner.Product.PlannedCircuitCount;
+			}
+			this.connectionPlanner.ReGenerateConnectionPipes();
+			this.CalculateAndUpdate();
+		}
 	}
 }

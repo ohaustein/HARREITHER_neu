@@ -195,6 +195,7 @@ namespace Europlan.Common {
 		private PipeTypeEnum pipeType;
 		private VerlegeartEnum verlegeart;
 		private InsulationEnum insulation;
+		private bool generated = false;
 
 		public ConnectionPipe() {
 			this.vorlauf = 0;
@@ -216,6 +217,11 @@ namespace Europlan.Common {
 		public double Ruecklauf {
 			get { return this.ruecklauf; }
 			set { this.ruecklauf = value; }
+		}
+
+		public bool IsGenerated {
+			get { return this.generated; }
+			set { this.generated = value; }
 		}
 
 		[XmlIgnore]
@@ -277,7 +283,7 @@ namespace Europlan.Common {
 							}
 						}
 					}
-				} else if (this.product == null) {
+				} else if (this.product == null && !this.IsGenerated) {
 					bool found = false;
 					if (this.room != null) {
 						int i = 0;
@@ -289,9 +295,6 @@ namespace Europlan.Common {
 							i++;
 						}
 					}
-					/*if (!found) {
-						this.product = null;
-					}*/
 				}
 				return this.product;
 			}

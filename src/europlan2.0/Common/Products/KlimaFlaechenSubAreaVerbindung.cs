@@ -37,8 +37,14 @@ namespace Europlan.Common {
 		}
 
 		public KlimaFlaechenSubAreaVerbindung(IEnumerable<KlimaFlaechenModul> start, IEnumerable<KlimaFlaechenModul> end, IEnumerable<IEnumerable<Point2D>> vertices, Circuit circuit, PlannedProduct product) {
-			this.start = new List<KlimaFlaechenModul>(start);
-			this.end = new List<KlimaFlaechenModul>(end);
+			this.start = new List<KlimaFlaechenModul>();
+			if (start != null) {
+				this.start.AddRange(start);
+			}
+			this.end = new List<KlimaFlaechenModul>();
+			if (end != null) {
+				this.end.AddRange(end);
+			}
 			this.vertices = new List<List<Point2D>>();
 			foreach (IEnumerable<Point2D> v in vertices) {
 				this.vertices.Add(new List<Point2D>(v));
@@ -156,7 +162,7 @@ namespace Europlan.Common {
 						throw new Exception("todo");
 					} else if (this.Circuit is ModulDeckeCircuit) {
 						ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-						this.start = new List<KlimaFlaechenModul>();
+						this.end = new List<KlimaFlaechenModul>();
 						for (int i = 0; i < this.moduleEndIndices.Count; i++) {
 							this.end.Add(mdc.SubAreas[this.subAreaEndIndices[i]].Rows[this.rowEndIndices[i]].List[this.moduleEndIndices[i]]);
 						}

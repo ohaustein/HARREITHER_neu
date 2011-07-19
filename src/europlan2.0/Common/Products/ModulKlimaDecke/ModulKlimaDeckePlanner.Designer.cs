@@ -23,9 +23,18 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			components = new System.ComponentModel.Container();
+			this.components = new System.ComponentModel.Container();
+			this.connectionDrawer = new Europlan.Common.ConnectionDrawer(this.components);
+			// 
+			// connectionDrawer
+			// 
+			this.connectionDrawer.PlanCeiling = true;
+			this.connectionDrawer.PlanFloor = false;
+
 		}
 
 		#endregion
+
+		private ConnectionDrawer connectionDrawer;
 	}
 }

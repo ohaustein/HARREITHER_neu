@@ -61,6 +61,7 @@ namespace Europlan.Common {
 		public ModulKlimaBodenPlanner(IContainer container) {
 			container.Add(this);
 
+
 			InitializeComponent();
 		}
 
@@ -101,6 +102,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				this.connectionDrawer.Floor = (this.product != null && this.product.AssociatedRoom != null) ? this.product.AssociatedRoom.AssociatedFloor : null;
 			}
 		}
 
@@ -142,7 +144,7 @@ namespace Europlan.Common {
 
 		private void connectedPlanPanel_KeyDown(object sender, KeyEventArgs e) {
 			if (this.mode == KlimaBodenMode.KDM_PICK_MODULE) {
-				KeyDown(e.KeyCode, this.highlightModules);
+				//KeyDown(e.KeyCode, this.highlightModules);
 			} else if (this.mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH || this.mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE) {
 				if (e.KeyCode == Keys.Escape) {
 					this.layoutAddArea = null;
@@ -169,41 +171,63 @@ namespace Europlan.Common {
 
 		private bool KeyDown(Keys key, List<KlimaFlaechenModul> modules) {
 			if (key == Keys.Delete && modules != null) {
-					List<Circuit> emptyCircuits = new List<Circuit>();
+				if (modules.Count > 0 && this.product.Connections != null && this.product.Connections.Count > 0) {
+					bool ask = false;
 					foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
-					foreach (KlimaFlaechenModul kfm in modules) {
-							if (c.Row.List.Contains(kfm)) {
-								KlimaFlaechenModulVerbindung link = kfm.GetInputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
-								if (link != null) {
-									c.Links.Remove(link);
-								}
-								link = kfm.GetOutputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
-								if (link != null) {
-									c.Links.Remove(link);
-								}
-								c.Row.List.Remove(kfm);
+						bool empty = true;
+						foreach (KlimaFlaechenModul m in c.Row.List) {
+							if (!modules.Contains(m)) {
+								empty = false;
+								break;
 							}
 						}
-						if (c.Row.List.Count == 0) {
-							emptyCircuits.Add(c);
+						if (empty) {
+							ask = true;
+							break;
 						}
 					}
-					foreach (Circuit emptyCircuit in emptyCircuits) {
-						this.product.PlannedCircuits.Remove(emptyCircuit);
+					if (ask) {
+						if (MessageBox.Show("Wenn Sie einen Heizkreis löschen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?", "Heizkreis löschen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+							return true;
+						}
+						this.product.Connections.Clear();
 					}
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
+				}
+				List<Circuit> emptyCircuits = new List<Circuit>();
+				foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
+					foreach (KlimaFlaechenModul kfm in modules) {
+						if (c.Row.List.Contains(kfm)) {
+							KlimaFlaechenModulVerbindung link = kfm.GetInputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
+							if (link != null) {
+								c.Links.Remove(link);
+							}
+							link = kfm.GetOutputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
+							if (link != null) {
+								c.Links.Remove(link);
+							}
+							c.Row.List.Remove(kfm);
+						}
 					}
-					if (this.ModuleSelected != null) {
-						this.ModuleSelected(this, EventArgs.Empty);
+					if (c.Row.List.Count == 0) {
+						emptyCircuits.Add(c);
 					}
-					this.ConnectedPlanPanel.InvalidateGraphics();
-					if (this.ListsNeedUpdate != null) {
-						this.ListsNeedUpdate(this, EventArgs.Empty);
-					}
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
-					}
+				}
+				foreach (Circuit emptyCircuit in emptyCircuits) {
+					this.product.PlannedCircuits.Remove(emptyCircuit);
+				}
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				if (this.ModuleSelected != null) {
+					this.ModuleSelected(this, EventArgs.Empty);
+				}
+				this.ConnectedPlanPanel.InvalidateGraphics();
+				if (this.ListsNeedUpdate != null) {
+					this.ListsNeedUpdate(this, EventArgs.Empty);
+				}
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 				return true;
 			}
 			return false;
@@ -215,6 +239,7 @@ namespace Europlan.Common {
 
 		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
+				this.connectionDrawer.Paint(g, additionalTransformation);
 				GraphicsPath path = new GraphicsPath();
 				List<PointF> transformedPoints = new List<PointF>();
 				foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
@@ -337,6 +362,34 @@ namespace Europlan.Common {
 
 				// draw connection that is currently beeing added
 				if (this.mode == KlimaBodenMode.KDM_CONNECTIONS) {
+					if (hoverAnbindungen) {
+						g.ResetClip();
+						Brush bi = new SolidBrush(Color.FromArgb(127, Color.Red));
+						Brush bo = new SolidBrush(Color.FromArgb(127, Color.Blue));
+						//Brush bi = new SolidBrush(Color.Red);
+						//Brush bo = new SolidBrush(Color.Blue);
+						if (!this.newConnectionStartAtOutput) {
+							foreach (GraphicalConnectionAnbindungsPunkt anbindung in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, true)) {
+								PointF[] points = new PointF[anbindung.Area.Count];
+								for (int i = 0; i < anbindung.Area.Count; i++) {
+									Point2D tmp = additionalTransformation.TransformTo2D(anbindung.Area[i]);
+									points[i] = new PointF((float)tmp.X, (float)tmp.Y);
+								}
+								g.FillPolygon(bi, points);
+								g.DrawPolygon(Pens.Red, points);
+							}
+						} else {
+							foreach (GraphicalConnectionAnbindungsPunkt anbindung in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, false)) {
+								PointF[] points = new PointF[anbindung.Area.Count];
+								for (int i = 0; i < anbindung.Area.Count; i++) {
+									Point2D tmp = additionalTransformation.TransformTo2D(anbindung.Area[i]);
+									points[i] = new PointF((float)tmp.X, (float)tmp.Y);
+								}
+								g.FillPolygon(bo, points);
+								g.DrawPolygon(Pens.Blue, points);
+							}
+						}
+					}
 					Pen p = new Pen(Color.Green, (float)(0.021 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * additionalTransformation.M00));
 					if (this.newConnectionVertices != null && this.newConnectionVertices.Count > 0) {
 						PointF oldVertex = PointF.Empty;
@@ -525,7 +578,8 @@ namespace Europlan.Common {
 						this.newConnectionStart = null;
 					}*/
 					KlimaFlaechenModul endModul;
-					this.newConnectionVertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endModul));
+					bool endsAtAnbindung;
+					this.newConnectionVertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endModul, out endsAtAnbindung));
 					this.nextConnectionPoints.Clear();
 					if (endModul != null) {
 						int index;
@@ -537,6 +591,19 @@ namespace Europlan.Common {
 							c.Links.Add(new KlimaFlaechenModulVerbindung(this.newConnectionStart, endModul, this.newConnectionVertices, c, Project.Instance.GetPlannedProduct(this.product)));
 						} else {
 							c.Links.Add(new KlimaFlaechenModulVerbindung(endModul, this.newConnectionStart, this.newConnectionVertices, c, Project.Instance.GetPlannedProduct(this.product)));
+						}
+						this.newConnectionVertices = null;
+						this.newConnectionStart = null;
+					} else if (endsAtAnbindung) {
+						int index;
+						ModulBodenCircuit c = this.product.GetCircuitForModul(this.newConnectionStart, out index);
+						if (c.Links == null) {
+							c.Links = new List<KlimaFlaechenModulVerbindung>();
+						}
+						if (this.newConnectionStartAtOutput) {
+							c.Links.Add(new KlimaFlaechenModulVerbindung(this.newConnectionStart, null, this.newConnectionVertices, c, Project.Instance.GetPlannedProduct(this.product)));
+						} else {
+							c.Links.Add(new KlimaFlaechenModulVerbindung(null, this.newConnectionStart, this.newConnectionVertices, c, Project.Instance.GetPlannedProduct(this.product)));
 						}
 						this.newConnectionVertices = null;
 						this.newConnectionStart = null;
@@ -588,10 +655,12 @@ namespace Europlan.Common {
 			return transformation.GetInverse().Transform(transformedMousePoint);
 		}
 
-		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out KlimaFlaechenModul endModule) {
+		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out KlimaFlaechenModul endModule, out bool endsAtAnbindung) {
 			List<Point2D> nextConnectionPoints = new List<Point2D>();
 			endModule = null;
+			endsAtAnbindung = false;
 			int index;
+			GraphicalConnectionAnbindungsPunkt anbindungsPunkt = null;
 			if (this.newConnectionStartAtOutput) {
 				foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> input in this.GetModuleInputs()) {
 					if (input.Value.IsInside(mousePoint)) {
@@ -599,6 +668,15 @@ namespace Europlan.Common {
 							endModule = input.Key;
 						}
 						break;
+					}
+				}
+				if (endModule == null) {
+					foreach (GraphicalConnectionAnbindungsPunkt output in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, false)) {
+						if (output.Area.IsInside(mousePoint)) {
+							endsAtAnbindung = true;
+							anbindungsPunkt = output;
+							break;
+						}
 					}
 				}
 			} else {
@@ -610,14 +688,20 @@ namespace Europlan.Common {
 						break;
 					}
 				}
+				if (endModule == null) {
+					foreach (GraphicalConnectionAnbindungsPunkt input in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, true)) {
+						if (input.Area.IsInside(mousePoint)) {
+							endsAtAnbindung = true;
+							anbindungsPunkt = input;
+							break;
+						}
+					}
+				}
 			}
 			if (this.product.GetCircuitForModul(this.newConnectionStart, out index).GetAllLinkedModules(this.newConnectionStart).Contains(endModule)) {
 				endModule = null;
 			}
-			if (endModule == null) {
-				bool horizontal;
-				nextConnectionPoints.Add(this.GetNextConnectionVertex(mousePoint, this.newConnectionStart.GraphRotation, out horizontal));
-			} else {
+			if (endModule != null) {
 				Point2D connectionPoint = this.newConnectionStartAtOutput ? endModule.GetInputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product) : endModule.GetOutputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
 				if (this.newConnectionVertices.Count > 1) {
 					Point2D p1 = this.newConnectionVertices[this.newConnectionVertices.Count - 2];
@@ -630,6 +714,22 @@ namespace Europlan.Common {
 					}
 				}
 				nextConnectionPoints.Add(connectionPoint);
+			} else if (endsAtAnbindung == true) {
+				Point2D connectionPoint = anbindungsPunkt.Point;
+				if (this.newConnectionVertices.Count > 1) {
+					Point2D p1 = this.newConnectionVertices[this.newConnectionVertices.Count - 2];
+					Point2D p2 = this.newConnectionVertices[this.newConnectionVertices.Count - 1];
+					Line2D line1 = new Line2D(p1, p1 - p2);
+					Line2D line2 = new Line2D(connectionPoint, new Vector2D(line1.Direction.Y, -line1.Direction.X));
+					Nullable<Point2D> intersection = Line2D.GetIntersection(line1, line2);
+					if (intersection.HasValue) {
+						nextConnectionPoints.Add(intersection.Value);
+					}
+				}
+				nextConnectionPoints.Add(connectionPoint);
+			} else {
+				bool horizontal;
+				nextConnectionPoints.Add(this.GetNextConnectionVertex(mousePoint, this.newConnectionStart.GraphRotation, out horizontal));
 			}
 			return nextConnectionPoints;
 		}
@@ -638,6 +738,7 @@ namespace Europlan.Common {
 		private bool hoverInput = false;
 		private bool hoverOutput = false;
 		private List<Point2D> nextConnectionPoints = new List<Point2D>();
+		private bool hoverAnbindungen = false;
 
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			// TODO
@@ -652,6 +753,7 @@ namespace Europlan.Common {
 					}
 				}
 			} else if (this.Mode == KlimaBodenMode.KDM_CONNECTIONS) {
+
 				Dictionary<KlimaFlaechenModul, Polygon2D> areas = this.GetModuleAreas();
 				KlimaFlaechenModul modul = null;
 				foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> area in areas) {
@@ -683,9 +785,24 @@ namespace Europlan.Common {
 					this.hoverInput = false;
 					this.hoverOutput = false;
 				}
+
+				
+				Point2D lastVertex = this.product.AssociatedRoom.RoomCoordinates[this.product.AssociatedRoom.RoomCoordinates.Count - 1];
+				Segment2D segment;
+				this.hoverAnbindungen = this.newConnectionStart != null;
+				/*foreach (Point2D vertex in this.product.AssociatedRoom.RoomCoordinates) {
+					segment = new Segment2D(lastVertex, vertex);
+					if (segment.GetDistance(planPoint) < 10) {
+						this.hoverAnbindungen = true;
+						break;
+					}
+					lastVertex = vertex;
+				}*/
+
 				if (this.newConnectionStart != null) {
 					KlimaFlaechenModul tmp;
-					this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out tmp);
+					bool tmp2;
+					this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out tmp, out tmp2);
 				} else {
 					this.nextConnectionPoints = new List<Point2D>();
 				}
@@ -951,17 +1068,25 @@ namespace Europlan.Common {
 			}
 		}
 
+		private double NewModulesStepX {
+			get {
+				double stepX;
+				if (this.product.GraphConstruction is ModulKlimaBodenConstructionStaffeln) {
+					stepX = (this.product.GraphConstruction as ModulKlimaBodenConstructionStaffeln).StaffelnAchsabstand * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+				} else {
+					stepX = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesXDicht;
+				}
+				return stepX;
+			}
+		}
+
 		[XmlIgnore]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public double NewModulesOffsetX {
 			get { return newModulesOffsetX; }
 			set {
-				double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-				double stepX = width;
-				stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesXDicht;
-				/*if (!this.newModulesXDicht) {
-					stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-				}*/
+				double stepX = this.NewModulesStepX;
 
 				newModulesOffsetX = value;
 				while (newModulesOffsetX < 0) {
@@ -1124,13 +1249,18 @@ namespace Europlan.Common {
 			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
 			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
 
-			double stepX = width;
-			stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesXDicht;
+			/*double stepX = width;
+			if (this.product.GraphConstruction is ModulKlimaBodenConstructionStaffeln) {
+				stepX = ((this.product.GraphConstruction as ModulKlimaBodenConstructionStaffeln).StaffelnAbstand + (this.product.GraphConstruction as ModulKlimaBodenConstructionStaffeln).StaffelnBreite) * measure;
+			} else {
+				stepX += modulierendDistance * measure * (int)this.newModulesXDicht;
+			}*/
 			/*if (!this.newModulesXDicht) {
 				stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			}*/
+			double stepX = this.NewModulesStepX;
 			double stepY = height;
-			stepY += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesYDicht;
+			stepY += modulierendDistance * measure * (int)this.newModulesYDicht;
 			/*if (!this.newModulesYDicht) {
 				stepY += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			}*/
@@ -1969,6 +2099,37 @@ namespace Europlan.Common {
 
 		public ModulBodenCircuit ConfirmNewModules() {
 			bool newCircuit = this.highlightCircuit == null;
+			if (newCircuit) {
+				bool productConnected = false;
+				foreach (GraphicalProductConnection conn in this.product.Connections) {
+					if (conn.OtherCircuits) {
+						productConnected = true;
+						break;
+					}
+				}
+				if (productConnected) {
+					if (MessageBox.Show("Wenn Sie einen neuen Heizkreis hinzufügen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?", "Neuer Heizkreis", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+						this.layoutAddArea = null;
+						this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
+						if (this.connectedPlanPanel != null) {
+							this.connectedPlanPanel.InvalidateGraphics();
+						}
+						return null;
+					}
+					this.product.Connections.Clear();
+					foreach (ModulBodenCircuit mbc in this.product.PlannedCircuits) {
+						List<KlimaFlaechenModulVerbindung> linksToDelete = new List<KlimaFlaechenModulVerbindung>();
+						foreach (KlimaFlaechenModulVerbindung link in mbc.Links) {
+							if (link.Start == null || link.End == null) {
+								linksToDelete.Add(link);
+							}
+						}
+						foreach (KlimaFlaechenModulVerbindung link in linksToDelete) {
+							mbc.Links.Remove(link);
+						}
+					}
+				}
+			}
 			ModulBodenCircuit c;
 			if (newCircuit) {
 				c = new ModulBodenCircuit();
@@ -2022,7 +2183,9 @@ namespace Europlan.Common {
 			set {
 				this.highlightCircuit = value;
 				this.highlightModules = null;
-				this.ConnectedPlanPanel.InvalidateGraphics();
+				if (this.ConnectedPlanPanel != null) {
+					this.ConnectedPlanPanel.InvalidateGraphics();
+				}
 			}
 		}
 

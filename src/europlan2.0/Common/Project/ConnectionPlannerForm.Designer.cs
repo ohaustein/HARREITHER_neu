@@ -32,9 +32,13 @@ namespace Europlan.Common {
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.btnFirstCircuit = new System.Windows.Forms.ToolStripButton();
+			this.btnOtherCircuits = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnConnections = new System.Windows.Forms.ToolStripButton();
 			this.btnDeleteConnection = new System.Windows.Forms.ToolStripButton();
+			this.btnPickConnection = new System.Windows.Forms.ToolStripButton();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.connectionPlanner = new Europlan.Common.ConnectionPlanner(this.components);
@@ -50,9 +54,13 @@ namespace Europlan.Common {
             this.btnZoomOut,
             this.btnZoomIn,
             this.toolStripSeparator1,
+            this.btnFirstCircuit,
+            this.btnOtherCircuits,
+            this.toolStripSeparator3,
             this.btnMove,
             this.btnConnections,
-            this.btnDeleteConnection});
+            this.btnDeleteConnection,
+            this.btnPickConnection});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(892, 25);
@@ -113,6 +121,37 @@ namespace Europlan.Common {
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
 			// 
+			// btnFirstCircuit
+			// 
+			this.btnFirstCircuit.Checked = true;
+			this.btnFirstCircuit.CheckOnClick = true;
+			this.btnFirstCircuit.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.btnFirstCircuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnFirstCircuit.Image = ((System.Drawing.Image)(resources.GetObject("btnFirstCircuit.Image")));
+			this.btnFirstCircuit.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnFirstCircuit.Name = "btnFirstCircuit";
+			this.btnFirstCircuit.Size = new System.Drawing.Size(23, 22);
+			this.btnFirstCircuit.Text = "erster Heizkreis";
+			this.btnFirstCircuit.Click += new System.EventHandler(this.btnCircuits_Click);
+			// 
+			// btnOtherCircuits
+			// 
+			this.btnOtherCircuits.Checked = true;
+			this.btnOtherCircuits.CheckOnClick = true;
+			this.btnOtherCircuits.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.btnOtherCircuits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnOtherCircuits.Image = ((System.Drawing.Image)(resources.GetObject("btnOtherCircuits.Image")));
+			this.btnOtherCircuits.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnOtherCircuits.Name = "btnOtherCircuits";
+			this.btnOtherCircuits.Size = new System.Drawing.Size(23, 22);
+			this.btnOtherCircuits.Text = "restliche Heizkreise";
+			this.btnOtherCircuits.Click += new System.EventHandler(this.btnCircuits_Click);
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+			// 
 			// btnMove
 			// 
 			this.btnMove.AutoToolTip = false;
@@ -146,6 +185,15 @@ namespace Europlan.Common {
 			this.btnDeleteConnection.Size = new System.Drawing.Size(23, 22);
 			this.btnDeleteConnection.Text = "Verbindeleitung löschen";
 			this.btnDeleteConnection.Click += new System.EventHandler(this.btnDeleteConnection_Click);
+			// 
+			// btnPickConnection
+			// 
+			this.btnPickConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnPickConnection.Image = ((System.Drawing.Image)(resources.GetObject("btnPickConnection.Image")));
+			this.btnPickConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnPickConnection.Name = "btnPickConnection";
+			this.btnPickConnection.Size = new System.Drawing.Size(23, 22);
+			this.btnPickConnection.Click += new System.EventHandler(this.btnPickConnection_Click);
 			// 
 			// planPanel
 			// 
@@ -195,5 +243,9 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripButton btnBoden;
 		private System.Windows.Forms.ToolStripButton btnDecke;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripButton btnPickConnection;
+		private System.Windows.Forms.ToolStripButton btnFirstCircuit;
+		private System.Windows.Forms.ToolStripButton btnOtherCircuits;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 	}
 }

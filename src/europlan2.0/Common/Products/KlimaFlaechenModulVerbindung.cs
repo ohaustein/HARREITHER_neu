@@ -13,6 +13,10 @@ namespace Europlan.Common {
 		private List<Point2D> vertices;
 		private int startIndex = -1;
 		private int endIndex = -1;
+		private int startRow = -1;
+		private int endRow = -1;
+		private int startSubarea = -1;
+		private int endSubarea = -1;
 		private Circuit circuit;
 		private int circuitIndex = -1;
 		private PlannedProduct product;
@@ -66,18 +70,30 @@ namespace Europlan.Common {
 
 		public void Draw(Graphics g, Matrix4D additionalTransformation, Color c, double measure) {
 			Point2D newVertex2D;
-			PointF oldVertex = PointF.Empty;
+			Point2D oldVertex2D = additionalTransformation.TransformTo2D(this.vertices[0]);
 			PointF newVertex;
-			bool first = true;
+			PointF oldVertex = new PointF((float)oldVertex2D.X, (float)oldVertex2D.Y);
+			//bool first = true;
 			Pen p = new Pen(c, (float)(0.021 * measure * additionalTransformation.M00));
-			foreach (Point2D vertex in vertices) {
+			p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+			Point2D vertex;
+			for (int i = 1; i < this.vertices.Count; i++) {
+			//foreach (Point2D vertex in vertices) {
+				vertex = this.vertices[i];
 				newVertex2D = additionalTransformation.TransformTo2D(vertex);
 				newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
-				if (first) {
+				if (i == 2) {
+					p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+				}
+				if (i == this.vertices.Count - 1) {
+					p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
+				}
+				g.DrawLine(p, oldVertex, newVertex);
+				/*if (first) {
 					first = false;
 				} else {
 					g.DrawLine(p, oldVertex, newVertex);
-				}
+				}*/
 				oldVertex = newVertex;
 			}
 			// TODO
@@ -115,10 +131,20 @@ namespace Europlan.Common {
 						this.start = mbc.Row.List[this.startIndex];
 						this.startIndex = -1;
 					} else if (this.Circuit is ModulDeckeCircuit) {
-						throw new Exception("todo");
+						if (this.startRow >= 0 && this.startSubarea >= 0) {
+							ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+							this.start = mdc.SubAreas[this.startSubarea].Rows[this.startRow].List[this.startIndex];
+							this.startIndex = -1;
+							this.startRow = -1;
+							this.startSubarea = -1;
+						}
 					}
 				}
 				return this.start;
+			}
+			set {
+				this.startIndex = -1;
+				this.start = value;
 			}
 		}
 
@@ -131,10 +157,20 @@ namespace Europlan.Common {
 						this.end = mbc.Row.List[this.endIndex];
 						this.endIndex = -1;
 					} else if (this.Circuit is ModulDeckeCircuit) {
-						throw new Exception("todo");
+						if (this.endRow >= 0 && this.endSubarea >= 0) {
+							ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+							this.end = mdc.SubAreas[this.endSubarea].Rows[this.endRow].List[this.endIndex];
+							this.endIndex = -1;
+							this.endRow = -1;
+							this.endSubarea = -1;
+						}
 					}
 				}
 				return this.end;
+			}
+			set {
+				this.endIndex = -1;
+				this.end = value;
 			}
 		}
 
@@ -155,7 +191,25 @@ namespace Europlan.Common {
 						i++;
 					}
 				} else if (this.Circuit is ModulDeckeCircuit) {
-					throw new Exception("todo");
+					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							int i = 0;
+							foreach (KlimaFlaechenModul m in row.List) {
+								if (m == this.start) {
+									index = i;
+									break;
+								}
+								i++;
+							}
+							if (index >= 0) {
+								break;
+							}
+						}
+						if (index >= 0) {
+							break;
+						}
+					}
 				}
 				return index;
 			}
@@ -179,11 +233,161 @@ namespace Europlan.Common {
 						i++;
 					}
 				} else if (this.Circuit is ModulDeckeCircuit) {
-					throw new Exception("todo");
+					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							int i = 0;
+							foreach (KlimaFlaechenModul m in row.List) {
+								if (m == this.end) {
+									index = i;
+									break;
+								}
+								i++;
+							}
+							if (index >= 0) {
+								break;
+							}
+						}
+						if (index >= 0) {
+							break;
+						}
+					}
 				}
 				return index;
 			}
 			set { this.endIndex = value; }
+		}
+
+		public int StartRow {
+			get {
+				if (this.startRow >= 0) {
+					return this.startRow;
+				}
+				if (this.start == null) {
+					return -1;
+				}
+				int index = -1;
+				if (this.Circuit is ModulBodenCircuit) {
+					// klimaboden doesn't have multiple rows
+					index = 0;
+				} else if (this.Circuit is ModulDeckeCircuit) {
+					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+						int i = 0;
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							if (row.List.Contains(this.start)) {
+								index = i;
+								break;
+							}
+							i++;
+						}
+						if (index >= 0) {
+							break;
+						}
+					}
+				}
+				return index;
+			}
+			set { this.startRow = value; }
+		}
+
+		public int EndRow {
+			get {
+				if (this.endRow >= 0) {
+					return this.endRow;
+				}
+				if (this.end == null) {
+					return -1;
+				}
+				int index = -1;
+				if (this.Circuit is ModulBodenCircuit) {
+					// klimaboden doesn't have multiple rows
+					index = 0;
+				} else if (this.Circuit is ModulDeckeCircuit) {
+					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+						int i = 0;
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							if (row.List.Contains(this.end)) {
+								index = i;
+								break;
+							}
+							i++;
+						}
+						if (index >= 0) {
+							break;
+						}
+					}
+				}
+				return index;
+			}
+			set { this.endRow = value; }
+		}
+
+		public int StartSubarea {
+			get {
+				if (this.startSubarea >= 0) {
+					return this.startSubarea;
+				}
+				if (this.start == null) {
+					return -1;
+				}
+				int index = -1;
+				if (this.Circuit is ModulBodenCircuit) {
+					// klimaboden doesn't have multiple rows
+					index = 0;
+				} else if (this.Circuit is ModulDeckeCircuit) {
+					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+					int i = 0;
+					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							if (row.List.Contains(this.start)) {
+								index = i;
+								break;
+							}
+						}
+						if (index >= 0) {
+							break;
+						}
+						i++;
+					}
+				}
+				return index;
+			}
+			set { this.startSubarea = value; }
+		}
+
+		public int EndSubarea {
+			get {
+				if (this.endSubarea >= 0) {
+					return this.endSubarea;
+				}
+				if (this.end == null) {
+					return -1;
+				}
+				int index = -1;
+				if (this.Circuit is ModulBodenCircuit) {
+					// klimaboden doesn't have multiple rows
+					index = 0;
+				} else if (this.Circuit is ModulDeckeCircuit) {
+					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+					int i = 0;
+					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							if (row.List.Contains(this.end)) {
+								index = i;
+								break;
+							}
+						}
+						if (index >= 0) {
+							break;
+						}
+						i++;
+					}
+				}
+				return index;
+			}
+			set { this.endSubarea = value; }
 		}
 
 		[XmlIgnore]

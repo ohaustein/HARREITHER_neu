@@ -15,7 +15,11 @@ namespace Europlan.AdminApplication {
 		[STAThread]
 		static void Main() {
 			//DATA_PATH = Path.Combine(Application.StartupPath, "data");
+#if DEBUG
+			PathUtil.UseCommonAppDataPath = true;
+#else
 			PathUtil.UseCommonAppDataPath = false;
+#endif
 			if (!Directory.Exists(PathUtil.DataPath)) {
 				string message = "Die benötigten Konfigurationsdateiein wurden nicht gefunden";
 				string caption = "Europlan 2.0 Wartungsbereich kann nicht gestartet werden!";

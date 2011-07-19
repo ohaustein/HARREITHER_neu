@@ -6,6 +6,8 @@ using System.Globalization;
 using System.Windows.Forms;
 using Europlan.Licensing;
 using System.Threading;
+using WW.Math;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
 
@@ -1497,6 +1499,87 @@ namespace Europlan.Common {
 			}
 		}*/
 
+		public override PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertXAxis, Point2D currentMousePoint) {
+			if (this.AssociatedRoom.RoomCoordinates.Count < 3 || !Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates) || (!firstCircuit && !otherCircuits) || (!input && !output) || this.circuits == null || this.circuits.Count < 1) {
+				return null;
+			}
+
+			PossibleProductConnection possibleConnection = null;
+
+			foreach (GraphicalProductConnection connection in this.Connections) {
+				if (connection.FirstCircuit) {
+					firstCircuit = false;
+				} else if (connection.OtherCircuits) {
+					otherCircuits = false;
+				}
+			}
+
+
+			int connectionsCount = 0;
+			if (firstCircuit) {
+				connectionsCount++;
+			}
+			if (otherCircuits) {
+				connectionsCount += this.circuits.Count - 1;
+			}
+			if (input && output) {
+				connectionsCount = connectionsCount * 2;
+			}
+
+			double width = connectionsCount * 0.05 * measure;
+
+			Segment2D segment;
+			double bestDistance = double.MaxValue;
+			Segment2D bestSegment = new Segment2D();
+			Polygon2D room = new Polygon2D(this.AssociatedRoom.RoomCoordinates);
+			if (room.IsClockwise()) {
+				room.Reverse();
+			}
+			Point2D lastPoint = room[room.Count - 1];
+			Point2D bestConnectionPoint = new Point2D();
+			foreach (Point2D point in room) {
+				segment = new Segment2D(lastPoint, point);
+				if (segment.GetLength() >= width) {
+					Point2D newConnectionPoint = segment.GetClosestPoint(currentMousePoint);
+					if ((segment.Start - newConnectionPoint).GetLength() < width / 2) {
+						Vector2D v = segment.End - segment.Start;
+						v.Normalize();
+						newConnectionPoint = segment.Start + v * (width / 2);
+					}
+					if ((segment.End - newConnectionPoint).GetLength() < width / 2) {
+						Vector2D v = (segment.Start - segment.End);
+						v.Normalize();
+						newConnectionPoint = segment.End + v * (width / 2);
+					}
+					double distance = segment.GetDistance(currentMousePoint);
+					//double distance = (newConnectionPoint - currentMousePoint).GetLength();
+					if (distance < bestDistance) {
+						bestDistance = distance;
+						bestSegment = segment;
+						bestConnectionPoint = newConnectionPoint;
+					}
+				}
+				lastPoint = point;
+			}
+			if (bestDistance < 10) {
+				//Point2D connectionPoint = bestSegment.GetClosestPoint(currentMousePoint);
+				//if ((connectionPoint - bestSegment.Start).GetLength() >= width / 2 && (connectionPoint - bestSegment.End).GetLength() >= width / 2) {
+				Polygon2D polygon = new Polygon2D();
+				Vector2D v = bestSegment.End - bestSegment.Start;
+				v.Normalize();
+				Vector2D v2 = new Vector2D(-v.Y, v.X);
+				polygon.Add(bestConnectionPoint + (v * width / 2));
+				polygon.Add(bestConnectionPoint + (v * width / 2) + (v2 * 0.05 * measure));
+				polygon.Add(bestConnectionPoint - (v * width / 2) + (v2 * 0.05 * measure));
+				polygon.Add(bestConnectionPoint - (v * width / 2));
+
+				double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
+
+				possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
+				//}
+			}
+			return possibleConnection;
+		}
 	}
 	
 }

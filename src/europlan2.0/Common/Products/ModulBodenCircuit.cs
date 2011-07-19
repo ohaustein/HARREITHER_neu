@@ -424,6 +424,28 @@ namespace Europlan.Common {
 			return linkedModules;
 		}
 
+		public KlimaFlaechenModulVerbindung GetNextLink(KlimaFlaechenModul modul) {
+			if (this.verbindungen != null) {
+				foreach (KlimaFlaechenModulVerbindung link in this.verbindungen) {
+					if (link.Start == modul) {
+						return link;
+					}
+				}
+			}
+			return null;
+		}
+
+		public KlimaFlaechenModulVerbindung GetPreviousLink(KlimaFlaechenModul modul) {
+			if (this.verbindungen != null) {
+				foreach (KlimaFlaechenModulVerbindung link in this.verbindungen) {
+					if (link.End == modul) {
+						return link;
+					}
+				}
+			}
+			return null;
+		}
+
 		private KlimaFlaechenModul GetNextLinkedModule(KlimaFlaechenModul referenceModul) {
 			if (this.verbindungen != null) {
 				foreach (KlimaFlaechenModulVerbindung link in this.verbindungen) {

@@ -19,7 +19,8 @@ namespace Europlan.Common {
 		public enum ConnectionMode {
 			CM_NONE,
 			KDM_ADD_CONNECTION,
-			KDM_DEL_CONNECTION
+			KDM_DEL_CONNECTION,
+			KDM_SELECT_CONNECTION
 		}
 
 		public ConnectionPlanner() {
@@ -42,27 +43,48 @@ namespace Europlan.Common {
 		private Dictionary<Distributor, DistributorPositioner> distributorsInFloor = new Dictionary<Distributor, DistributorPositioner>();
 		private Floor floor = null;
 		private bool planFloor = true;
+		private Product product = null;
 
 		public event EventHandler<EventArgs> ModeChanged;
+		public event EventHandler<EventArgs> AnbindeleitungAdded;
+
+		private GraphicalProductConnection selectedConnection = null;
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Floor Floor {
 			get { return this.floor; }
 			set {
-				this.floor = value;
-				this.distributorsInFloor.Clear();
-				if (this.floor == null) {
-					this.Plan = null;
-				} else {
-					this.Plan = floor.AssociatedPlan;
-					DistributorPositioner positioner;
-					foreach (Distributor d in this.GetAllDistributors()) {
-						positioner = new DistributorPositioner();
-						positioner.Floor = floor;
-						positioner.Distributor = d;
-						positioner.ConnectedPlanPanel = this.connectedPlanPanel;
-						this.distributorsInFloor.Add(d, positioner);
+				if (value != this.floor) {
+					this.floor = value;
+					this.distributorsInFloor.Clear();
+					if (this.floor == null) {
+						this.Plan = null;
+						this.product = null;
+					} else {
+						if (this.product != null && (this.product.AssociatedRoom == null || this.product.AssociatedRoom.AssociatedFloor != this.floor)) {
+							this.product = null;
+						}
+						this.Plan = floor.AssociatedPlan;
+						DistributorPositioner positioner;
+						foreach (Distributor d in this.GetAllDistributors()) {
+							positioner = new DistributorPositioner();
+							positioner.Floor = floor;
+							positioner.Distributor = d;
+							positioner.ConnectedPlanPanel = this.connectedPlanPanel;
+							this.distributorsInFloor.Add(d, positioner);
+						}
 					}
+				}
+			}
+		}
+
+		// if this is null all products in the floor can be planned
+		public Product Product {
+			get { return this.product; }
+			set {
+				if (this.product != value) {
+					this.product = value;
+					this.Floor = (this.product != null && this.product.AssociatedRoom != null) ? this.product.AssociatedRoom.AssociatedFloor : null;
 				}
 			}
 		}
@@ -105,6 +127,26 @@ namespace Europlan.Common {
 			}
 		}
 
+		public bool AddFirstCircuit {
+			get { return this.addFirstCircuit; }
+			set { this.addFirstCircuit = value; }
+		}
+
+		public bool AddOtherCircuits {
+			get { return this.addOtherCircuits; }
+			set { this.addOtherCircuits = value; }
+		}
+
+		public bool AddVorlauf {
+			get { return this.addInput; }
+			set { this.addInput = value; }
+		}
+
+		public bool AddRuecklauf {
+			get { return this.addOutput; }
+			set { this.addOutput = value; }
+		}
+
 		private void ResetProducts() {
 			this.productsInFloor.Clear();
 			foreach (Product p in this.GetAllProducts()) {
@@ -117,6 +159,23 @@ namespace Europlan.Common {
 						pp.DrawExpansionGaps = false;
 						pp.HighlightRoomCoordinates = false;
 						productsInFloor.Add(p, pp);
+					} else if (p is EurovalProduct) {
+						EurovalPlanner pp = new EurovalPlanner();
+						pp.Product = p as EurovalProduct;
+						pp.ConnectedPlanPanel = this.connectedPlanPanel;
+						pp.DrawExpansionGaps = false;
+						pp.HighlightRoomCoordinates = false;
+						productsInFloor.Add(p, pp);
+					} else if (p is EcothermProduct) {
+						// TODO
+						/*EcothermPlanner pp = new EcothermPlanner();
+						pp.Product = p as EcothermProduct;
+						pp.ConnectedPlanPanel = this.connectedPlanPanel;
+						pp.DrawExpansionGaps = false;
+						pp.HighlightRoomCoordinates = false;
+						productsInFloor.Add(p, pp);*/
+					} else if (p is HithermProduct) {
+						productsInFloor.Add(p, null);
 					}
 				} else {
 					if (p is ModulKlimaDeckeProduct) {
@@ -163,6 +222,9 @@ namespace Europlan.Common {
 				this.productsInFloor.Clear();
 				if (this.Plan != null) {
 					this.ResetProducts();
+				}
+				foreach (DistributorPositioner distPositioner in this.distributorsInFloor.Values) {
+					distPositioner.ConnectedPlanPanel = this.connectedPlanPanel;
 				}
 			}
 		}
@@ -267,117 +329,170 @@ namespace Europlan.Common {
 				g.Clip = clip;
 				foreach (KeyValuePair<Product, IProductPlanner> kvp in this.productsInFloor) {
 					foreach (GraphicalProductConnection connection in kvp.Key.Connections) {
-						connection.Draw(g, additionalTransformation, connection.Vorlauf ? Color.Red : Color.Blue, this.Plan.Measure.Value);
+						connection.Draw(g, additionalTransformation, connection.Vorlauf ? Color.Red : Color.Blue, this.Plan.Measure.Value, connection == this.selectedConnection && this.Mode == ConnectionMode.KDM_SELECT_CONNECTION);
 					}
 				}
 				if (this.mode == ConnectionMode.KDM_ADD_CONNECTION) {
-					if (this.possibleConnections != null) {
-						foreach (PossibleConnection pc in this.possibleConnections) {
+					if (this.possibleProductConnection != null) {
+						//foreach (PossibleConnection pc in this.possibleConnections) {
 							List<PointF> connectionPoly = new List<PointF>();
 							Point2D tmp;
-							foreach (Point2D point in pc.ConnectionArea) {
+							foreach (Point2D point in this.possibleProductConnection.ConnectionArea) {
 								tmp = additionalTransformation.TransformTo2D(point);
 								connectionPoly.Add(new PointF((float)tmp.X, (float)tmp.Y));
 							}
-							if (pc.PossibleInput && pc.Product != null || pc.PossibleOutput && pc.Distributor != null) {
-								if (pc.PossibleOutput && pc.Product != null || pc.PossibleInput && pc.Distributor != null) {
+							if (this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Distributor != null) {
+								if (this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Distributor != null) {
 									PointF[] poly = connectionPoly.ToArray();
 									//g.DrawPolygon(new Pen(Color.LightGray), poly);
-									g.FillPolygon(new SolidBrush(Color.FromArgb(128, Color.LightGray)), poly);
+									g.FillPolygon(new SolidBrush(Color.FromArgb(128, this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? Color.Black : Color.White)), poly);
 								} else {
 									PointF[] poly = connectionPoly.ToArray();
 									//g.DrawPolygon(new Pen(Color.Red), poly);
 									g.FillPolygon(new SolidBrush(Color.FromArgb(128, Color.Red)), poly);
 								}
-							} else if (pc.PossibleOutput && pc.Product != null || pc.PossibleInput && pc.Distributor != null) {
+							} else if (this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Distributor != null) {
 								PointF[] poly = connectionPoly.ToArray();
 								//g.DrawPolygon(new Pen(Color.Blue), poly);
 								g.FillPolygon(new SolidBrush(Color.FromArgb(128, Color.Blue)), poly);
 							}
-						}
+						//}
 					}
 
-					Pen p = new Pen(Color.Green, (float)(0.021 * this.Plan.Measure.Value * additionalTransformation.M00));
+					//Pen p = new Pen(Color.Green, (float)(0.021 * this.Plan.Measure.Value * additionalTransformation.M00));
 					if (this.newConnectionVertices != null && this.newConnectionVertices.Count > 0) {
-						PointF oldVertex = PointF.Empty;
+						List<Point2D> vertices = new List<Point2D>();
+						vertices.AddRange(this.newConnectionVertices);
+						vertices.AddRange(this.nextConnectionPoints);
+						GraphicalProductConnection tmpConnection = new GraphicalProductConnection(Project.Instance.GetPlannedProduct(this.selectedProduct), null, vertices, this.addFirstCircuit, this.addOtherCircuits, 0, this.AddVorlauf, this.AddRuecklauf, Product.ProductType.REST);
+						tmpConnection.FinishedConnection = this.newConnectionEndsAtDistributor;
+						//tmpConnection.Vertices.AddRange(this.newConnectionVertices);
+						//tmpConnection.Vertices.AddRange(this.nextConnectionPoints);
+						tmpConnection.Draw(g, additionalTransformation, Color.Green, this.Plan.Measure.Value, true);
+						/*double width = this.newConnectionStart.ProductCircuitCount * 0.05;
+						Pen p = new Pen(new System.Drawing.Drawing2D.HatchBrush(System.Drawing.Drawing2D.HatchStyle.LargeCheckerBoard, Color.Red, Color.Blue), (float)(width * this.Plan.Measure.Value * additionalTransformation.M00));
+						Point2D oldVertex2D = additionalTransformation.TransformTo2D(this.newConnectionVertices.Vertices[0]);
+						PointF oldVertex = new PointF((float)oldVertex2D.X, (float)oldVertex2D.Y);
 						Point2D newVertex2D;
 						PointF newVertex;
-						bool first = true;
-						foreach (Point2D vertex in this.newConnectionVertices) {
-							newVertex2D = additionalTransformation.TransformTo2D(vertex);
+						p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+						for (int i = 1; i < this.newConnectionVertices.Count; i++) {
+							newVertex2D = additionalTransformation.TransformTo2D(this.newConnectionVertices.Vertices[i]);
 							newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
-							if (first) {
-								first = false;
-							} else {
-								g.DrawLine(p, oldVertex, newVertex);
+							if (i == 2) {
+								p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
 							}
-							oldVertex = newVertex;
-						}
-						foreach (Point2D vertex in this.nextConnectionPoints) {
-							newVertex2D = additionalTransformation.TransformTo2D(vertex);
-							newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
 							g.DrawLine(p, oldVertex, newVertex);
 							oldVertex = newVertex;
 						}
+						for (int i = 0; i < this.nextConnectionPoints.Count; i++) {
+							newVertex2D = additionalTransformation.TransformTo2D(this.nextConnectionPoints[i]);
+							newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
+							if (i == 2) {
+								p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+							}
+							if (i == this.nextConnectionPoints.Count - 1) {
+								p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
+							}
+							g.DrawLine(p, oldVertex, newVertex);
+							oldVertex = newVertex;
+						}*/
 					}
+				}
+				if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null && this.product.AssociatedRoom.RoomCoordinates.Count > 2) {
+					GraphicsPath fillPath = new GraphicsPath();
+					fillPath.StartFigure();
+					PointF[] array = new PointF[this.product.AssociatedRoom.RoomCoordinates.Count];
+					int i = 0;
+					foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
+						Point2D tmp = additionalTransformation.TransformTo2D(point);
+						array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
+					}
+					fillPath.AddPolygon(array);
+					fillPath.CloseFigure();
+					Color c = Color.FromArgb(128, Color.Green);
+					Brush b = new SolidBrush(c);
+					//g.FillPath(b, fillPath);
+					g.DrawPath(new Pen(b, (float)(0.05 * this.Plan.Measure.Value * additionalTransformation.M00)), fillPath);
+					fillPath.Dispose();
 				}
 			}
 		}
 
 		private List<Point2D> newConnectionVertices = null;
-		private PossibleConnection newConnectionStart = null;
+		//private GraphicalProductConnection newConnectionVertices = null;
+		private PossibleProductConnection newConnectionStart = null;
 		private bool newConnectionStartAtOutput = true;
 		//private bool newConnectionLastSegmentHorizontal = true;
 
 		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			bool redraw = false;
 			if (this.mode == ConnectionMode.KDM_ADD_CONNECTION && button != MouseButtons.Middle) {
-				if (this.newConnectionStart == null) {
-					PossibleConnection connection = null;
-					foreach (PossibleConnection pc in this.possibleConnections) {
+				if (this.newConnectionStart == null && this.possibleProductConnection != null) {
+					PossibleProductConnection connection = null;
+					/*foreach (PossibleConnection pc in this.possibleConnections) {
 						if (pc.ConnectionArea.IsInside(planPoint)) {
 							connection = pc;
 							break;
 						}
+					}*/
+					if (this.possibleProductConnection.ConnectionArea.IsInside(planPoint)) {
+						connection = this.possibleProductConnection;
 					}
 					if (connection != null) {
 						if (connection.PossibleInput && connection.PossibleOutput) {
-							this.contextMenu.Show(this.connectedPlanPanel as Control, pointInControl);
+							//this.newConnectionStart = connection;
+							//this.contextMenu.Show(this.connectedPlanPanel as Control, pointInControl);
+							this.AddConnection(connection, true);
 						} else if (connection.PossibleInput) {
 							this.AddConnection(connection, true);
 						} else if (connection.PossibleOutput) {
 							this.AddConnection(connection, false);
 						}
+						this.newConnectionEndsAtDistributor = false;
+						this.selectedProduct = connection.Product;
 					}
-				} else {
-					PossibleConnection endConnection;
+				} else if (this.newConnectionStart != null) {
+					PossibleProductConnection endConnection;
 					this.newConnectionVertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection));
 					this.nextConnectionPoints.Clear();
 					if (endConnection != null) {
 						int index;
 						// TODO check if connection is valid!
-						PossibleConnection productConnection;
-						PossibleConnection distributorConnection;
+						PossibleProductConnection productConnection;
+						PossibleProductConnection distributorConnection;
 						bool ok = false;
 						bool vorlauf = true;
 						if (this.newConnectionStart.Product != null && endConnection.Distributor != null) {
 							productConnection = this.newConnectionStart;
 							distributorConnection = endConnection;
-							vorlauf = !this.newConnectionStartAtOutput;
+							//vorlauf = !this.newConnectionStartAtOutput;
 							ok = true;
 						} else if (endConnection.Product != null && this.newConnectionStart.Distributor != null) {
 							distributorConnection = this.newConnectionStart;
 							productConnection = endConnection;
-							vorlauf = this.newConnectionStartAtOutput;
+							//vorlauf = this.newConnectionStartAtOutput;
 							ok = true;
 						} else {
-							productConnection = new PossibleConnection();
-							distributorConnection = new PossibleConnection();
+							productConnection = new PossibleProductConnection();
+							distributorConnection = new PossibleProductConnection();
 						}
+						int count = productConnection.Product.PlannedCircuits.Count;
+						List<int> openInputs = distributorConnection.Distributor.GetOpenInputs();
+						List<int> openOutputs = distributorConnection.Distributor.GetOpenOutputs();
+						List<int> distributorIndices = new List<int>();
 						if (ok) {
-							productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.Circuit, distributorConnection.DistributorIndex, vorlauf, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
+							//productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.Circuits, distributorConnection.DistributorStartPosition, distributorConnection.DistributorCircuitCount, vorlauf, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
+							productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, this.newConnectionStart.ProductFirstCircuit, this.newConnectionStart.ProductOtherCircuits, distributorConnection.DistributorStartPosition, this.newConnectionStart.PossibleInput, this.newConnectionStart.PossibleOutput, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
 							this.newConnectionVertices = null;
 							this.newConnectionStart = null;
+							this.selectedCircuit = null;
+							this.selectedProduct = null;
+							this.selectedDistributor = null;
+							this.selectedDistributorNr = null;
+							if (this.AnbindeleitungAdded != null) {
+								this.AnbindeleitungAdded(this, EventArgs.Empty);
+							}
 						}
 					}
 					redraw = true;
@@ -402,11 +517,32 @@ namespace Europlan.Common {
 					bestProduct.Connections.Remove(bestConnection);
 					redraw = true;
 				}
+			} else if (this.Mode == ConnectionMode.KDM_SELECT_CONNECTION) {
+				this.selectedConnection = null;
+				foreach (Room room in this.floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						foreach (GraphicalProductConnection conn in pp.Product.Connections) {
+							if (conn.HitTest(planPoint, this.Plan.Measure.Value)) {
+								this.selectedConnection = conn;
+								break;
+							}
+						}
+						if (this.selectedConnection != null) {
+							break;
+						}
+					}
+					if (this.selectedConnection != null) {
+						break;
+					}
+				}
+				if (this.connectedPlanPanel != null) {
+					this.connectedPlanPanel.InvalidateGraphics();
+				}
 			}
 			return redraw;
 		}
 
-		private void AddConnection(PossibleConnection connection, bool input) {
+		private void AddConnection(PossibleProductConnection connection, bool input) {
 			this.newConnectionVertices = new List<Point2D>();
 			this.newConnectionVertices.Add(connection.ConnectionPoint);
 			this.newConnectionStart = connection;
@@ -489,27 +625,49 @@ namespace Europlan.Common {
 		private Nullable<int> selectedDistributorNr = null;
 		private Product selectedProduct = null;
 		private Circuit selectedCircuit = null;
-		List<PossibleConnection> possibleConnections = null;
+		//List<PossibleConnection> possibleConnections = null;
+		private PossibleProductConnection possibleProductConnection = null;
+		private bool newConnectionEndsAtDistributor = false;
+
+		private bool addInput = true;
+		private bool addOutput = true;
+		private bool addFirstCircuit = true;
+		private bool addOtherCircuits = true;
 
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			bool redraw = false;
 			if (this.Mode == ConnectionMode.KDM_ADD_CONNECTION) {
 				// TODO
-				List<PossibleConnection> oldPossibleConnections = possibleConnections;
-				possibleConnections = new List<PossibleConnection>();
-				if (selectedDistributor == null) {
+				//List<PossibleConnection> oldPossibleConnections = possibleConnections;
+				PossibleProductConnection oldPossibleProductConnection = possibleProductConnection;
+				//possibleConnections = new List<PossibleConnection>();
+				possibleProductConnection = null;
+				if (this.newConnectionStart != null && this.selectedProduct != null && selectedDistributor == null) {
 					foreach (Distributor d in this.GetAllDistributors()) {
-						possibleConnections.AddRange(d.GetPossibleConnections(this.newConnectionStart == null || this.newConnectionStartAtOutput, this.newConnectionStart == null || !this.newConnectionStartAtOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, selectedProduct, selectedCircuit, this.floor));
+						//possibleConnections.AddRange(d.GetPossibleConnections(this.newConnectionStart == null || this.newConnectionStartAtOutput, this.newConnectionStart == null || !this.newConnectionStartAtOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, selectedProduct, selectedCircuit, this.floor));
+						//possibleProductConnection = d.GetPossibleProductConnection();
+						possibleProductConnection = d.GetPossibleProductConnections(addInput, addOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, this.selectedProduct, this.floor, this.newConnectionStart.ProductCircuitCount);
+						if (possibleProductConnection != null) {
+							break;
+						}
 					}
 				}
-				if (selectedProduct == null) {
-					foreach (Product p in this.GetAllProducts()) {
-						possibleConnections.AddRange(p.GetPossibleConnections(this.newConnectionStart == null || this.newConnectionStartAtOutput, this.newConnectionStart == null || !this.newConnectionStartAtOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, selectedDistributor, selectedDistributorNr));
+				if (possibleProductConnection == null && selectedProduct == null) {
+					if (this.product == null) {
+						foreach (Product p in this.GetAllProducts()) {
+							//possibleConnections.AddRange(p.GetPossibleConnections(this.newConnectionStart == null || this.newConnectionStartAtOutput, this.newConnectionStart == null || !this.newConnectionStartAtOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, selectedDistributor, selectedDistributorNr));
+							possibleProductConnection = p.GetPossibleProductConnection(addInput, addOutput, addFirstCircuit, addOtherCircuits, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint);
+							if (possibleProductConnection != null) {
+								break;
+							}
+						}
+					} else {
+						possibleProductConnection = this.product.GetPossibleProductConnection(addInput, addOutput, addFirstCircuit, addOtherCircuits, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint);
 					}
 				}
 				//redraw = true;
 
-				if (oldPossibleConnections == null) {
+				/*if (oldPossibleConnections == null) {
 					if (possibleConnections.Count == 0) {
 						redraw = redraw || this.newConnectionStart != null;
 					} else {
@@ -523,28 +681,106 @@ namespace Europlan.Common {
 						}
 						possibleConnections.Remove(pc);
 					}
+				}*/
+				if (oldPossibleProductConnection == null) {
+					redraw = redraw || possibleProductConnection != null || this.newConnectionStart != null;
+				} else {
+					redraw = redraw || possibleProductConnection == null || this.newConnectionStart != null;
 				}
 				if (this.newConnectionStart != null) {
-					PossibleConnection tmp;
-					this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out tmp);
+					PossibleProductConnection endConnection;
+					this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection);
+					this.newConnectionEndsAtDistributor = endConnection != null && endConnection.Distributor != null;
 				} else {
 					this.nextConnectionPoints = new List<Point2D>();
 				}
-				redraw = redraw || possibleConnections.Count > 0 || this.newConnectionStart != null;
+				redraw = redraw || possibleProductConnection != null || this.newConnectionStart != null;
+			} else if (this.mode == ConnectionMode.KDM_SELECT_CONNECTION) {
+				double bestDist = double.MaxValue;
+				GraphicalProductConnection bestConnection = null;
+				Product bestProduct = null;
+				double scale = 1;
+				if (this.Plan is ImagePlan) {
+					scale = (this.Plan as ImagePlan).Scale.Value;
+				} else if (this.Plan is CadPlan) {
+					scale = (this.Plan as CadPlan).Scale;
+				}
+				bool found = false;
+				if (this.selectedConnection != null) {
+					foreach (GraphicalConnectionAnchor a in this.selectedConnection.GetAnchors(this.Plan.Measure.Value)) {
+						if (a.HitTest(planPoint, this.Plan.Measure.Value)) {
+							(this.ConnectedPlanPanel as Control).Cursor = a.Cursor;
+							found = true;
+							break;
+						}
+					}
+				}
+				if (!found) {
+					(this.ConnectedPlanPanel as Control).Cursor = Cursors.Cross;
+				}
+				/*foreach (Room room in this.floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						foreach (GraphicalProductConnection conn in pp.Product.Connections) {
+							foreach (GraphicalConnectionAnchor a in conn.GetAnchors(this.Plan.Measure.Value)) {
+								if (a.HitTest(planPoint, scale)) {
+									(this.ConnectedPlanPanel as Control).Cursor = a.Cursor;
+									found = true;
+									break;
+								}
+							}
+							if (found) {
+								break;
+							}
+						}
+						if (found) {
+							break;
+						}
+					}
+					if (found) {
+						break;
+					}
+				}
+				if (!found) {
+					(this.ConnectedPlanPanel as Control).Cursor = Cursors.Cross;
+				}*/
 			}
 			return redraw;
 		}
 
+		private GraphicalProductConnection draggingConnection = null;
+		private GraphicalConnectionAnchor draggingAnchor = null;
+
 		public bool PlannerDragStart(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			return false;
+			if (this.Mode == ConnectionMode.KDM_SELECT_CONNECTION) {
+				foreach (Product p in this.productsInFloor.Keys) {
+					foreach (GraphicalProductConnection c in p.Connections) {
+						foreach (GraphicalConnectionAnchor a in c.GetAnchors(this.Plan.Measure.Value)) {
+							if (a.HitTest(planPoint, this.Plan.Measure.Value)) {
+								draggingConnection = c;
+								draggingAnchor = a;
+								draggingConnection.StartDrag(draggingAnchor, planPoint);
+								break;
+							}
+						}
+					}
+				}
+			}
+			return true;
 		}
 
 		public bool PlannerDragMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			return false;
+			if (this.Mode == ConnectionMode.KDM_SELECT_CONNECTION && this.draggingConnection != null && this.draggingAnchor != null) {
+				this.draggingConnection.MoveDrag(draggingAnchor, planPoint);
+			}
+			return true;
 		}
 
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			return false;
+			if (this.Mode == ConnectionMode.KDM_SELECT_CONNECTION && this.draggingConnection != null && this.draggingAnchor != null) {
+				this.draggingConnection.EndDrag(draggingAnchor, planPoint);
+				this.draggingAnchor = null;
+			}
+			return true;
 		}
 
 		internal bool ShiftPressed {
@@ -556,7 +792,20 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerKeyPress(Keys key) {
-			return false;
+			bool redraw = false;
+			if (this.Mode == ConnectionMode.KDM_SELECT_CONNECTION && this.selectedConnection != null) {
+				if (key == Keys.Delete) {
+					foreach (Product product in this.productsInFloor.Keys) {
+						if (product.Connections.Contains(this.selectedConnection)) {
+							product.Connections.Remove(this.selectedConnection);
+							this.selectedConnection = null;
+							redraw = true;
+							break;
+						}
+					}
+				}
+			}
+			return redraw;
 		}
 
 		#endregion
@@ -691,28 +940,42 @@ namespace Europlan.Common {
 		}
 
 		private void cmVorRuecklauf(object sender, EventArgs e) {
-
+			if (sender == this.cmVorlauf) {
+				this.newConnectionStart.PossibleInput = false;
+				this.AddConnection(this.newConnectionStart, true);
+			} else if (sender == this.cmRuecklauf) {
+				this.newConnectionStart.PossibleOutput = false;
+				this.AddConnection(this.newConnectionStart, false);
+			}
 		}
 
-		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out PossibleConnection endConnection) {
+		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out PossibleProductConnection endConnection) {
 			List<Point2D> nextConnectionPoints = new List<Point2D>();
 			endConnection = null;
 			int index;
 			if (this.newConnectionStartAtOutput) {
-				foreach (PossibleConnection pc in this.possibleConnections) {
+				/*foreach (PossibleConnection pc in this.possibleConnections) {
 					if (pc.ConnectionArea.IsInside(mousePoint)) {
 						// TODO check if this connection is valid!
 						endConnection = pc;
 						break;
 					}
+				}*/
+				if (this.possibleProductConnection != null && this.possibleProductConnection.ConnectionArea.IsInside(mousePoint)) {
+					// TODO check if this connection is valid
+					endConnection = this.possibleProductConnection;
 				}
 			} else {
-				foreach (PossibleConnection pc in this.possibleConnections) {
+				/*foreach (PossibleConnection pc in this.possibleConnections) {
 					if (pc.ConnectionArea.IsInside(mousePoint)) {
 						// TODO check if this connection is valid!
 						endConnection = pc;
 						break;
 					}
+				}*/
+				if (this.possibleProductConnection != null && this.possibleProductConnection.ConnectionArea.IsInside(mousePoint)) {
+					// TODO check if this connection is valid
+					endConnection = this.possibleProductConnection;
 				}
 			}
 			// TODO check if the connection is valid!
@@ -737,6 +1000,277 @@ namespace Europlan.Common {
 				nextConnectionPoints.Add(connectionPoint);
 			}
 			return nextConnectionPoints;
+		}
+
+		public void ReGenerateConnectionPipes() {
+			ConnectionPlanner.ReGenerateConnectionPipes(this.Floor);
+		}
+
+		public static void ReGenerateConnectionPipes(Floor floor) {
+			if (floor == null) {
+				return;
+			}
+			Plan plan = floor.AssociatedPlan;
+			if (plan == null) {
+				return;
+			}
+			double measure = plan.Measure.Value;
+			// Update connectionpipes in products to match the graphical connections
+			foreach (Room room in floor.Rooms) {
+				foreach (PlannedProduct pp in room.PlannedProducts) {
+					Dictionary<Product, ConnectionPipe> previousProductPipesVl = new Dictionary<Product, ConnectionPipe>();
+					Dictionary<Product, ConnectionPipe> previousProductPipesRl = new Dictionary<Product, ConnectionPipe>();
+					Dictionary<Room, ConnectionPipe> previousRoomPipesVl = new Dictionary<Room, ConnectionPipe>();
+					Dictionary<Room, ConnectionPipe> previousRoomPipesRl = new Dictionary<Room, ConnectionPipe>();
+					ConnectionPipe previousRestPipeVl = null;
+					ConnectionPipe previousRestPipeRl = null;
+					List<ConnectionPipe> deletePipes = new List<ConnectionPipe>();
+					foreach (ConnectionPipe pipe in pp.Product.PlannedConnectionPipes) {
+						if (pipe.IsGenerated) {
+							deletePipes.Add(pipe);
+							if (pipe.ConnectionThrough != null) {
+								if (pipe.Ruecklauf > 0) {
+									previousProductPipesRl.Add(pipe.ConnectionThrough.Product, pipe);
+								} else {
+									previousProductPipesVl.Add(pipe.ConnectionThrough.Product, pipe);
+								}
+							} else if (pipe.Room != null) {
+								if (pipe.Ruecklauf > 0) {
+									previousRoomPipesRl.Add(pipe.Room, pipe);
+								} else {
+									previousRoomPipesVl.Add(pipe.Room, pipe);
+								}
+							} else {
+								if (pipe.Ruecklauf > 0) {
+									previousRestPipeRl = pipe;
+								} else {
+									previousRestPipeVl = pipe;
+								}
+							}
+						}
+					}
+
+					Dictionary<Product, double> vlThroughProduct = new Dictionary<Product, double>();
+					Dictionary<Product, double> rlThroughProduct = new Dictionary<Product, double>();
+					Dictionary<Room, double> vlThroughRoom = new Dictionary<Room, double>();
+					Dictionary<Room, double> rlThroughRoom = new Dictionary<Room, double>();
+					double vlRest = 0;
+					double rlRest = 0;
+
+					foreach (GraphicalProductConnection connection in pp.Product.Connections) {
+						if (connection.Vorlauf) {
+							vlRest += connection.GetLength(measure);
+						}
+						if (connection.Ruecklauf) {
+							rlRest += connection.GetLength(measure);
+						}
+						foreach (Room roomThrough in floor.Rooms) {
+							double roomLength = connection.GetPartInsidePolygon(new Polygon2D(roomThrough.RoomCoordinates)) * measure;
+							if (roomLength > 0) {
+								if (connection.Vorlauf) {
+									vlRest -= roomLength;
+								}
+								if (connection.Ruecklauf) {
+									rlRest -= roomLength;
+								}
+								foreach (PlannedProduct ppThrough in roomThrough.PlannedProducts) {
+									if (pp != ppThrough) {
+										double throughLength = connection.GetPartInsidePolygon(ppThrough.Product.GraphicalArea) * measure;
+										if (throughLength > 0) {
+											roomLength -= throughLength;
+											if (connection.Vorlauf) {
+												if (vlThroughProduct.ContainsKey(ppThrough.Product)) {
+													vlThroughProduct[ppThrough.Product] += throughLength;
+												} else {
+													vlThroughProduct[ppThrough.Product] = throughLength;
+												}
+											}
+											if (connection.Ruecklauf) {
+												if (rlThroughProduct.ContainsKey(ppThrough.Product)) {
+													rlThroughProduct[ppThrough.Product] += throughLength;
+												} else {
+													rlThroughProduct[ppThrough.Product] = throughLength;
+												}
+											}
+										}
+									}
+								}
+								if (roomLength > 0) {
+									if (connection.Vorlauf) {
+										if (vlThroughRoom.ContainsKey(roomThrough)) {
+											vlThroughRoom[roomThrough] += roomLength;
+										} else {
+											vlThroughRoom[roomThrough] = roomLength;
+										}
+									}
+									if (connection.Ruecklauf) {
+										if (rlThroughRoom.ContainsKey(roomThrough)) {
+											rlThroughRoom[roomThrough] += roomLength;
+										} else {
+											rlThroughRoom[roomThrough] = roomLength;
+										}
+									}
+								}
+							}
+						}
+					}
+
+					foreach (ConnectionPipe pipe in deletePipes) {
+						pp.Product.PlannedConnectionPipes.Remove(pipe);
+					}
+
+					foreach (Room roomThrough in floor.Rooms) {
+						foreach (PlannedProduct ppThrough in roomThrough.PlannedProducts) {
+							if (vlThroughProduct.ContainsKey(ppThrough.Product)) {
+								ConnectionPipe pipe = new ConnectionPipe();
+								if (previousProductPipesVl.ContainsKey(ppThrough.Product)) {
+									pipe.PipeType = previousProductPipesVl[ppThrough.Product].PipeType;
+									pipe.Insulation = previousProductPipesVl[ppThrough.Product].Insulation;
+									pipe.Verlegeart = previousProductPipesVl[ppThrough.Product].Verlegeart;
+								} else if (previousRoomPipesVl.ContainsKey(roomThrough)) {
+									pipe.PipeType = previousRoomPipesVl[roomThrough].PipeType;
+									pipe.Insulation = previousRoomPipesVl[roomThrough].Insulation;
+									pipe.Verlegeart = previousRoomPipesVl[roomThrough].Verlegeart;
+								} else if (previousRestPipeVl != null) {
+									pipe.PipeType = previousRestPipeVl.PipeType;
+									pipe.Insulation = previousRestPipeVl.Insulation;
+									pipe.Verlegeart = previousRestPipeVl.Verlegeart;
+								} else if (previousProductPipesRl.ContainsKey(ppThrough.Product)) {
+									pipe.PipeType = previousProductPipesRl[ppThrough.Product].PipeType;
+									pipe.Insulation = previousProductPipesRl[ppThrough.Product].Insulation;
+									pipe.Verlegeart = previousProductPipesRl[ppThrough.Product].Verlegeart;
+								} else if (previousRoomPipesRl.ContainsKey(roomThrough)) {
+									pipe.PipeType = previousRoomPipesRl[roomThrough].PipeType;
+									pipe.Insulation = previousRoomPipesRl[roomThrough].Insulation;
+									pipe.Verlegeart = previousRoomPipesRl[roomThrough].Verlegeart;
+								} else if (previousRestPipeRl != null) {
+									pipe.PipeType = previousRestPipeRl.PipeType;
+									pipe.Insulation = previousRestPipeRl.Insulation;
+									pipe.Verlegeart = previousRestPipeRl.Verlegeart;
+								}
+								pipe.IsGenerated = true;
+								pipe.Room = roomThrough;
+								pipe.ConnectionThrough = ppThrough;
+								pipe.Vorlauf = vlThroughProduct[ppThrough.Product];
+								pp.Product.PlannedConnectionPipes.Add(pipe);
+							}
+							if (rlThroughProduct.ContainsKey(ppThrough.Product)) {
+								ConnectionPipe pipe = new ConnectionPipe();
+								if (previousProductPipesRl.ContainsKey(ppThrough.Product)) {
+									pipe.PipeType = previousProductPipesRl[ppThrough.Product].PipeType;
+									pipe.Insulation = previousProductPipesRl[ppThrough.Product].Insulation;
+									pipe.Verlegeart = previousProductPipesRl[ppThrough.Product].Verlegeart;
+								} else if (previousRoomPipesRl.ContainsKey(roomThrough)) {
+									pipe.PipeType = previousRoomPipesRl[roomThrough].PipeType;
+									pipe.Insulation = previousRoomPipesRl[roomThrough].Insulation;
+									pipe.Verlegeart = previousRoomPipesRl[roomThrough].Verlegeart;
+								} else if (previousRestPipeRl != null) {
+									pipe.PipeType = previousRestPipeRl.PipeType;
+									pipe.Insulation = previousRestPipeRl.Insulation;
+									pipe.Verlegeart = previousRestPipeRl.Verlegeart;
+								} else if (previousProductPipesVl.ContainsKey(ppThrough.Product)) {
+									pipe.PipeType = previousProductPipesVl[ppThrough.Product].PipeType;
+									pipe.Insulation = previousProductPipesVl[ppThrough.Product].Insulation;
+									pipe.Verlegeart = previousProductPipesVl[ppThrough.Product].Verlegeart;
+								} else if (previousRoomPipesVl.ContainsKey(roomThrough)) {
+									pipe.PipeType = previousRoomPipesVl[roomThrough].PipeType;
+									pipe.Insulation = previousRoomPipesVl[roomThrough].Insulation;
+									pipe.Verlegeart = previousRoomPipesVl[roomThrough].Verlegeart;
+								} else if (previousRestPipeVl != null) {
+									pipe.PipeType = previousRestPipeVl.PipeType;
+									pipe.Insulation = previousRestPipeVl.Insulation;
+									pipe.Verlegeart = previousRestPipeVl.Verlegeart;
+								}
+								pipe.IsGenerated = true;
+								pipe.Room = roomThrough;
+								pipe.ConnectionThrough = ppThrough;
+								pipe.Ruecklauf = rlThroughProduct[ppThrough.Product];
+								pp.Product.PlannedConnectionPipes.Add(pipe);
+							}
+						}
+						if (vlThroughRoom.ContainsKey(roomThrough)) {
+							ConnectionPipe pipe = new ConnectionPipe();
+							if (previousRoomPipesVl.ContainsKey(roomThrough)) {
+								pipe.PipeType = previousRoomPipesVl[roomThrough].PipeType;
+								pipe.Insulation = previousRoomPipesVl[roomThrough].Insulation;
+								pipe.Verlegeart = previousRoomPipesVl[roomThrough].Verlegeart;
+							} else if (previousRestPipeVl != null) {
+								pipe.PipeType = previousRestPipeVl.PipeType;
+								pipe.Insulation = previousRestPipeVl.Insulation;
+								pipe.Verlegeart = previousRestPipeVl.Verlegeart;
+							} else if (previousRoomPipesRl.ContainsKey(roomThrough)) {
+								pipe.PipeType = previousRoomPipesRl[roomThrough].PipeType;
+								pipe.Insulation = previousRoomPipesRl[roomThrough].Insulation;
+								pipe.Verlegeart = previousRoomPipesRl[roomThrough].Verlegeart;
+							} else if (previousRestPipeRl != null) {
+								pipe.PipeType = previousRestPipeRl.PipeType;
+								pipe.Insulation = previousRestPipeRl.Insulation;
+								pipe.Verlegeart = previousRestPipeRl.Verlegeart;
+							}
+							pipe.IsGenerated = true;
+							pipe.Room = roomThrough;
+							pipe.ConnectionThrough = null;
+							pipe.Vorlauf = vlThroughRoom[roomThrough];
+							pp.Product.PlannedConnectionPipes.Add(pipe);
+						}
+						if (rlThroughRoom.ContainsKey(roomThrough)) {
+							ConnectionPipe pipe = new ConnectionPipe();
+							if (previousRoomPipesRl.ContainsKey(roomThrough)) {
+								pipe.PipeType = previousRoomPipesRl[roomThrough].PipeType;
+								pipe.Insulation = previousRoomPipesRl[roomThrough].Insulation;
+								pipe.Verlegeart = previousRoomPipesRl[roomThrough].Verlegeart;
+							} else if (previousRestPipeRl != null) {
+								pipe.PipeType = previousRestPipeRl.PipeType;
+								pipe.Insulation = previousRestPipeRl.Insulation;
+								pipe.Verlegeart = previousRestPipeRl.Verlegeart;
+							} else if (previousRoomPipesVl.ContainsKey(roomThrough)) {
+								pipe.PipeType = previousRoomPipesVl[roomThrough].PipeType;
+								pipe.Insulation = previousRoomPipesVl[roomThrough].Insulation;
+								pipe.Verlegeart = previousRoomPipesVl[roomThrough].Verlegeart;
+							} else if (previousRestPipeVl != null) {
+								pipe.PipeType = previousRestPipeVl.PipeType;
+								pipe.Insulation = previousRestPipeVl.Insulation;
+								pipe.Verlegeart = previousRestPipeVl.Verlegeart;
+							}
+							pipe.IsGenerated = true;
+							pipe.Room = roomThrough;
+							pipe.ConnectionThrough = null;
+							pipe.Ruecklauf = rlThroughRoom[roomThrough];
+							pp.Product.PlannedConnectionPipes.Add(pipe);
+						}
+					}
+					if (vlRest > 0) {
+						ConnectionPipe pipe = new ConnectionPipe();
+						if (previousRestPipeVl != null) {
+							pipe.PipeType = previousRestPipeVl.PipeType;
+							pipe.Insulation = previousRestPipeVl.Insulation;
+							pipe.Verlegeart = previousRestPipeVl.Verlegeart;
+						} else if (previousRestPipeRl != null) {
+							pipe.PipeType = previousRestPipeRl.PipeType;
+							pipe.Insulation = previousRestPipeRl.Insulation;
+							pipe.Verlegeart = previousRestPipeRl.Verlegeart;
+						}
+						pipe.IsGenerated = true;
+						pipe.Vorlauf = vlRest;
+						pp.Product.PlannedConnectionPipes.Add(pipe);
+					}
+					if (rlRest > 0) {
+						ConnectionPipe pipe = new ConnectionPipe();
+						if (previousRestPipeRl != null) {
+							pipe.PipeType = previousRestPipeRl.PipeType;
+							pipe.Insulation = previousRestPipeRl.Insulation;
+							pipe.Verlegeart = previousRestPipeRl.Verlegeart;
+						} else if (previousRestPipeVl != null) {
+							pipe.PipeType = previousRestPipeVl.PipeType;
+							pipe.Insulation = previousRestPipeVl.Insulation;
+							pipe.Verlegeart = previousRestPipeVl.Verlegeart;
+						}
+						pipe.IsGenerated = true;
+						pipe.Ruecklauf = rlRest;
+						pp.Product.PlannedConnectionPipes.Add(pipe);
+					}
+				}
+			}
 		}
 	}
 }

@@ -31,6 +31,7 @@ namespace Europlan.Common {
 						
 			UpdateDefineWallsPanelButtons(null);
 			ApplyButtonCheckedState(this.btnPick);
+			this.connectionPlanner.Product = product;
 		}
 
 		private void HithermPlannerForm_Load(object sender, EventArgs e) {
@@ -67,14 +68,18 @@ namespace Europlan.Common {
 		}
 
 		private void ApplyButtonCheckedState(ToolStripButton buttonToCheck) {
-			this.btnPick.Checked = false;
+			ToolStripButton[] buttons = new ToolStripButton[] { this.btnPick, this.btnMove, this.btnWall, this.btnObstacle, this.btnSchraege, this.btnRegister, this.btnConnection, this.btnAddAnbindeleitungen, this.btnSelectAnbindeleitungen };
+			foreach (ToolStripButton button in buttons) {
+				button.Checked = (button == buttonToCheck);
+			}
+			/*this.btnPick.Checked = false;
 			this.btnMove.Checked = false;
 			this.btnWall.Checked = false;
 			this.btnObstacle.Checked = false;
 			this.btnSchraege.Checked = false;
 			this.btnRegister.Checked = false;
 			this.btnConnection.Checked = false;
-			buttonToCheck.Checked = true;
+			buttonToCheck.Checked = true;*/
 		}
 
 		private void ApplyRegisterButtonCheckedState(ToolStripButton buttonToCheck) {
@@ -192,79 +197,119 @@ namespace Europlan.Common {
 
 		private void btnPick_Click(object sender, EventArgs e) {
 			//this.graphicalWallPanel.SelectedObject = null;
-			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_SELECT_OBJECT;
-			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
-			ApplyButtonCheckedState(this.btnPick);
-			this.UpdateSubmenuToolstrip();
+			if (!this.btnPick.Checked) {
+				this.SetProductPlanner();
+				this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_SELECT_OBJECT;
+				this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+				ApplyButtonCheckedState(this.btnPick);
+				this.UpdateSubmenuToolstrip();
+			}
 		}
 
 		private void btnMove_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_MOVE;
-			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
-			ApplyButtonCheckedState(this.btnMove);
-			this.UpdateSubmenuToolstrip();
+			if (!this.btnMove.Checked) {
+				this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_MOVE;
+				this.planPanel.Mode = PlanMode.PM_MOVE;
+				this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+				this.connectionPlanner.Mode = ConnectionPlanner.ConnectionMode.CM_NONE;
+				ApplyButtonCheckedState(this.btnMove);
+				this.UpdateSubmenuToolstrip();
+			}
 		}
 
 		private void btnWall_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.SelectedObject = null;
-			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_MOVE;
-			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
-			UpdateDefineWallsPanel(null);
-			this.panelDefineWalls.BringToFront();
-			ApplyButtonCheckedState(this.btnWall);
-			this.UpdateSubmenuToolstrip();
+			if (!this.btnWall.Checked) {
+				this.SetProductPlanner();
+				this.graphicalWallPanel.SelectedObject = null;
+				this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_MOVE;
+				this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+				UpdateDefineWallsPanel(null);
+				this.panelDefineWalls.BringToFront();
+				ApplyButtonCheckedState(this.btnWall);
+				this.UpdateSubmenuToolstrip();
+			}
 		}
 
 		private void btnObstacle_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.SelectedObject = null;
-			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_ADD_OBSTACLE;
-			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
-			this.btnObstacleDoor.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.Door;
-			this.btnObstacleWindow.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.Window;
-			this.btnObstacleTriangleWindowLeft.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleLeft;
-			this.btnObstacleTriangleWindowRight.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleRight;
-			this.btnObstacleOther.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.Other;
-			UpdateModifyObstaclesPanel(null);
-			this.panelModifyObstacle.BringToFront();
-			ApplyButtonCheckedState(this.btnObstacle);
-			this.UpdateSubmenuToolstrip();
+			if (!this.btnObstacle.Checked) {
+				this.SetProductPlanner();
+				this.graphicalWallPanel.SelectedObject = null;
+				this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_ADD_OBSTACLE;
+				this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+				this.btnObstacleDoor.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.Door;
+				this.btnObstacleWindow.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.Window;
+				this.btnObstacleTriangleWindowLeft.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleLeft;
+				this.btnObstacleTriangleWindowRight.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.WindowTriangleRight;
+				this.btnObstacleOther.Checked = this.graphicalWallPanel.NewObstacleType == GraphicalWallObstacle.ObstacleTypeEnum.Other;
+				UpdateModifyObstaclesPanel(null);
+				this.panelModifyObstacle.BringToFront();
+				ApplyButtonCheckedState(this.btnObstacle);
+				this.UpdateSubmenuToolstrip();
+			}
 		}
 
 
 		private void btnSchraege_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.SelectedObject = null;
-			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_ADD_SCHRAEGE;
-			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
-			UpdateModifySchraegePanel(null);
-			this.panelModifySchraege.BringToFront();
-			ApplyButtonCheckedState(this.btnSchraege);
-			this.UpdateSubmenuToolstrip();
+			if (!this.btnSchraege.Checked) {
+				this.SetProductPlanner();
+				this.graphicalWallPanel.SelectedObject = null;
+				this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_ADD_SCHRAEGE;
+				this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_NONE;
+				UpdateModifySchraegePanel(null);
+				this.panelModifySchraege.BringToFront();
+				ApplyButtonCheckedState(this.btnSchraege);
+				this.UpdateSubmenuToolstrip();
+			}
 		}
 
 		private void btnRegister_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.SelectedObject = null;
-			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
-			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_REGISTER;
-			//this.hithermPlanner.NewRegisterOrientation = (this.btnRegisterHorizontal.Checked ? HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL : HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL);
-			this.btnRegisterHorizontal.Checked = this.hithermPlanner.NewRegisterOrientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL;
-			this.btnRegisterVertical.Checked = this.hithermPlanner.NewRegisterOrientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
-			UpdateModifyRegisterPanel(null);
-			this.panelModifyHitherm.BringToFront();
-			ApplyButtonCheckedState(this.btnRegister);
-			this.UpdateSubmenuToolstrip();
+			if (!this.btnRegister.Checked) {
+				this.SetProductPlanner();
+				this.graphicalWallPanel.SelectedObject = null;
+				this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
+				this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_REGISTER;
+				//this.hithermPlanner.NewRegisterOrientation = (this.btnRegisterHorizontal.Checked ? HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL : HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL);
+				this.btnRegisterHorizontal.Checked = this.hithermPlanner.NewRegisterOrientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL;
+				this.btnRegisterVertical.Checked = this.hithermPlanner.NewRegisterOrientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
+				UpdateModifyRegisterPanel(null);
+				this.panelModifyHitherm.BringToFront();
+				ApplyButtonCheckedState(this.btnRegister);
+				this.UpdateSubmenuToolstrip();
+			}
 		}
 
 		private void btnConnection_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.SelectedObject = null;
-			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_CLICK;
-			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_CONNECTION;
-			this.btnConnectionManual.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_MANUAL;
-			this.btnConnectionAuto.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_AUTO;
-			this.btnConnectionDirect.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_DIRECT;
-			UpdateModifyConnectionPanel(null);
-			this.panelModifyConnection.BringToFront();
-			ApplyButtonCheckedState(this.btnConnection);
-			this.UpdateSubmenuToolstrip();
+			if (!this.btnConnection.Checked) {
+				this.SetProductPlanner();
+				this.graphicalWallPanel.SelectedObject = null;
+				this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_CLICK;
+				this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_CONNECTION;
+				this.btnConnectionManual.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_MANUAL;
+				this.btnConnectionAuto.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_AUTO;
+				this.btnConnectionDirect.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_DIRECT;
+				UpdateModifyConnectionPanel(null);
+				this.panelModifyConnection.BringToFront();
+				ApplyButtonCheckedState(this.btnConnection);
+				this.UpdateSubmenuToolstrip();
+			}
+		}
+
+		private void btnAddAnbindeleitungen_Click(object sender, EventArgs e) {
+			if (!this.btnAddAnbindeleitungen.Checked) {
+				this.SetConnectionPlanner();
+				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.connectionPlanner.Mode = ConnectionPlanner.ConnectionMode.KDM_ADD_CONNECTION;
+				this.ApplyButtonCheckedState(this.btnAddAnbindeleitungen);
+			}
+		}
+
+		private void btnSelectAnbindeleitungen_Click(object sender, EventArgs e) {
+			if (!this.btnSelectAnbindeleitungen.Checked) {
+				this.SetConnectionPlanner();
+				this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
+				this.connectionPlanner.Mode = ConnectionPlanner.ConnectionMode.KDM_SELECT_CONNECTION;
+				this.ApplyButtonCheckedState(this.btnSelectAnbindeleitungen);
+			}
 		}
 
 		private void btnRegisterVertical_Click(object sender, EventArgs e) {
@@ -616,9 +661,7 @@ namespace Europlan.Common {
 			if (hithermRegister != null) {
 				this.btnRegisterAccept.Enabled = unsavedChanges || hithermRegister.IsNew;
 				this.btnRegisterRevert.Enabled = unsavedChanges;
-				// TODO
-				//this.btnRegisterConnect.Enabled = true;
-				this.btnRegisterConnect.Enabled = false;
+				this.btnRegisterConnect.Enabled = true;
 				this.btnRegisterDelete.Enabled = true;
 			} else {
 				this.btnRegisterAccept.Enabled = false;
@@ -899,8 +942,14 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
+		private GraphicalWallPanel.PlanMode oldPanelMode;
+		private HithermPlanner.HithermPlannerMode oldPlannerMode;
+
 		private void btnRegisterConnect_Click(object sender, EventArgs e) {
-			// TODO
+			oldPanelMode = this.graphicalWallPanel.Mode;
+			oldPlannerMode = this.hithermPlanner.Mode;
+			this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_CONNECT_REGISTERS;
+			this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_CLICK;
 		}
 
 		private void chkRegisterHelpLines_CheckedChanged(object sender, EventArgs e) {
@@ -1410,6 +1459,24 @@ namespace Europlan.Common {
 				this.btnConnectionDirect.Checked = !this.hithermPlanner.NewConnectionsAlign;
 				this.snapInverted = false;
 			}
+		}
+
+		private void hithermPlanner_RestoreMode(object sender, EventArgs e) {
+			this.graphicalWallPanel.Mode = this.oldPanelMode;
+			this.hithermPlanner.Mode = this.oldPlannerMode;
+			this.graphicalWallPanel.InvalidateGraphics();
+		}
+
+		private void SetProductPlanner() {
+			this.planPanel.Visible = false;
+			this.graphicalWallPanel.Visible = true;
+			this.panelTop.Visible = true;
+		}
+
+		private void SetConnectionPlanner() {
+			this.graphicalWallPanel.Visible = false;
+			this.panelTop.Visible = false;
+			this.planPanel.Visible = true;
 		}
 	}
 }

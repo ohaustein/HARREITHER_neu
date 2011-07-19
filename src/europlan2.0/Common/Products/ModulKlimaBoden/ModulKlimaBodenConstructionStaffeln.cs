@@ -127,6 +127,17 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
+		public double StaffelnAchsabstand {
+			get { return this.staffelnAbstand + this.staffelnBreite; }
+			set {
+				this.staffelnAbstand = value - this.staffelnBreite;
+				if (this.staffelnAbstand < 0) {
+					this.staffelnAbstand = 0;
+				}
+			}
+		}
+
 		public double Offset {
 			get { return this.offset; }
 			set {

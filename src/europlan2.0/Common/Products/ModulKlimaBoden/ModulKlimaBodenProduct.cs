@@ -573,12 +573,14 @@ namespace Europlan.Common {
 					} else {
 						int langeFittinge = 0;
 						double verbindeleitung = 0;
-						foreach (KlimaFlaechenModulVerbindung link in c.Links) {
-							Segment2D test;
-							if (link.IsLangerFitting(measure)) {
-								langeFittinge++;
-							} else {
-								verbindeleitung += link.GetLength(measure);
+						if (c.Links != null) {
+							foreach (KlimaFlaechenModulVerbindung link in c.Links) {
+								Segment2D test;
+								if (link.IsLangerFitting(measure)) {
+									langeFittinge++;
+								} else {
+									verbindeleitung += link.GetLength(measure);
+								}
 							}
 						}
 						c.LangeFittinge = langeFittinge;
@@ -1217,7 +1219,7 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public override List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertXAxis, Point2D currentMousePoint, Distributor distributor, Nullable<int> nr) {
+		/*public override List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertXAxis, Point2D currentMousePoint, Distributor distributor, Nullable<int> nr) {
 			if (!Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates)) {
 				return new List<PossibleConnection>();
 			}
@@ -1307,16 +1309,18 @@ namespace Europlan.Common {
 			}
 
 			return possibleConnections;
-		}
+		}*/
 
-		private List<ModulBodenCircuit> GetOpenInputs() {
+		/*private List<ModulBodenCircuit> GetOpenInputs() {
 			List<ModulBodenCircuit> openInputs = new List<ModulBodenCircuit>();
 			foreach (ModulBodenCircuit c in this.PlannedCircuits) {
 				openInputs.Add(c);
 			}
 			foreach (GraphicalProductConnection conn in this.Connections) {
 				if (conn.Vorlauf) {
-					openInputs.Remove(conn.ProductCircuit as ModulBodenCircuit);
+					foreach (ModulBodenCircuit c in conn.ProductCircuits) {
+						openInputs.Remove(c);
+					}
 				}
 			}
 			return openInputs;
@@ -1329,15 +1333,128 @@ namespace Europlan.Common {
 			}
 			foreach (GraphicalProductConnection conn in this.Connections) {
 				if (!conn.Vorlauf) {
-					openOutputs.Remove(conn.ProductCircuit as ModulBodenCircuit);
+					foreach (ModulBodenCircuit c in conn.ProductCircuits) {
+						openOutputs.Remove(c);
+					}
 				}
 			}
 			return openOutputs;
+		}*/
+
+		private bool IsFirstCircuitConnected() {
+			foreach (GraphicalProductConnection conn in this.Connections) {
+				if (conn.FirstCircuit) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		private bool AreOtherCircuitsConnected() {
+			foreach (GraphicalProductConnection conn in this.Connections) {
+				if (conn.OtherCircuits) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		[XmlIgnore]
 		public override WW.Math.Geometry.Polygon2D GraphicalArea {
 			get { return (this.GraphicalMode.HasValue && this.GraphicalMode.Value == true) ? new Polygon2D(this.AssociatedRoom.RoomCoordinates) : null; }
 		}
+
+		public override PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertXAxis, Point2D currentMousePoint) {
+			if (this.AssociatedRoom.RoomCoordinates.Count < 3 || !Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates) || (!firstCircuit && !otherCircuits) || (!input && !output) || this.circuits == null || this.circuits.Count < 1) {
+				return null;
+			}
+
+			PossibleProductConnection possibleConnection = null;
+
+			foreach (GraphicalProductConnection connection in this.Connections) {
+				if (connection.FirstCircuit) {
+					firstCircuit = false;
+				} else if (connection.OtherCircuits) {
+					otherCircuits = false;
+				}
+			}
+
+
+			int connectionsCount = 0;
+			if (firstCircuit) {
+				connectionsCount++;
+			}
+			if (otherCircuits) {
+				connectionsCount += this.circuits.Count - 1;
+			}
+			if (input && output) {
+				connectionsCount = connectionsCount * 2;
+			}
+
+			double width = connectionsCount * 0.05 * measure;
+
+			Segment2D segment;
+			double bestDistance = double.MaxValue;
+			Segment2D bestSegment = new Segment2D();
+			Polygon2D room = new Polygon2D(this.AssociatedRoom.RoomCoordinates);
+			if (room.IsClockwise()) {
+				room.Reverse();
+			}
+			Point2D lastPoint = room[room.Count - 1];
+			Point2D bestConnectionPoint = new Point2D();
+			foreach (Point2D point in room) {
+				segment = new Segment2D(lastPoint, point);
+				if (segment.GetLength() >= width) {
+					Point2D newConnectionPoint = segment.GetClosestPoint(currentMousePoint);
+					if ((segment.Start - newConnectionPoint).GetLength() < width / 2) {
+						Vector2D v = segment.End - segment.Start;
+						v.Normalize();
+						newConnectionPoint = segment.Start + v * (width / 2);
+					}
+					if ((segment.End - newConnectionPoint).GetLength() < width / 2) {
+						Vector2D v = (segment.Start - segment.End);
+						v.Normalize();
+						newConnectionPoint = segment.End + v * (width / 2);
+					}
+					double distance = segment.GetDistance(currentMousePoint);
+					//double distance = (newConnectionPoint - currentMousePoint).GetLength();
+					if (distance < bestDistance) {
+						bestDistance = distance;
+						bestSegment = segment;
+						bestConnectionPoint = newConnectionPoint;
+					}
+				}
+				lastPoint = point;
+			}
+			if (bestDistance < 10) {
+				//Point2D connectionPoint = bestSegment.GetClosestPoint(currentMousePoint);
+				//if ((connectionPoint - bestSegment.Start).GetLength() >= width / 2 && (connectionPoint - bestSegment.End).GetLength() >= width / 2) {
+				Polygon2D polygon = new Polygon2D();
+				Vector2D v = bestSegment.End - bestSegment.Start;
+				v.Normalize();
+				Vector2D v2 = new Vector2D(-v.Y, v.X);
+				polygon.Add(bestConnectionPoint + (v * width / 2));
+				polygon.Add(bestConnectionPoint + (v * width / 2) + (v2 * 0.1 * measure));
+				polygon.Add(bestConnectionPoint - (v * width / 2) + (v2 * 0.1 * measure));
+				polygon.Add(bestConnectionPoint - (v * width / 2));
+
+				double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
+
+				possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
+				//}
+			}
+			return possibleConnection;
+		}
+
+		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool input) {
+			List<GraphicalConnectionAnbindungsPunkt> anbindungsPunkte = new List<GraphicalConnectionAnbindungsPunkt>();
+			if (this.connections != null) {
+				foreach (GraphicalProductConnection connection in this.connections) {
+					anbindungsPunkte.AddRange(connection.GetAnbindungsPunkte(measure, input));
+				}
+			}
+			return anbindungsPunkte;
+		}
+
 	}
 }

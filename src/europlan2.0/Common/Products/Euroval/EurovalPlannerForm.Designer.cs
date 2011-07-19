@@ -26,8 +26,8 @@ namespace Europlan.Common.Products {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EurovalPlannerForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
-			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
+			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnDefineArea = new System.Windows.Forms.ToolStripButton();
@@ -36,6 +36,9 @@ namespace Europlan.Common.Products {
 			this.btnAddReduced = new System.Windows.Forms.ToolStripButton();
 			this.btnDelReduced = new System.Windows.Forms.ToolStripButton();
 			this.btnSetText = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.btnAddAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
+			this.btnSelectAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.pageAuslegung = new System.Windows.Forms.TabPage();
@@ -130,6 +133,7 @@ namespace Europlan.Common.Products {
 			this.label1 = new System.Windows.Forms.Label();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.eurovalPlanner = new Europlan.Common.EurovalPlanner(this.components);
+			this.connectionPlanner = new Europlan.Common.ConnectionPlanner(this.components);
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -149,23 +153,15 @@ namespace Europlan.Common.Products {
             this.btnDelRz,
             this.btnAddReduced,
             this.btnDelReduced,
-            this.btnSetText});
+            this.btnSetText,
+            this.toolStripSeparator2,
+            this.btnAddAnbindeleitungen,
+            this.btnSelectAnbindeleitungen});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(846, 25);
 			this.toolStrip.TabIndex = 1;
 			this.toolStrip.Text = "toolStrip1";
-			// 
-			// btnZoomOut
-			// 
-			this.btnZoomOut.AutoToolTip = false;
-			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
-			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnZoomOut.Name = "btnZoomOut";
-			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomOut.Text = "zoomOut";
-			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// btnZoomIn
 			// 
@@ -177,6 +173,17 @@ namespace Europlan.Common.Products {
 			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
 			this.btnZoomIn.Text = "zoomIn";
 			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+			// 
+			// btnZoomOut
+			// 
+			this.btnZoomOut.AutoToolTip = false;
+			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
+			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnZoomOut.Name = "btnZoomOut";
+			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
+			this.btnZoomOut.Text = "zoomOut";
+			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -257,6 +264,31 @@ namespace Europlan.Common.Products {
 			this.btnSetText.Size = new System.Drawing.Size(23, 22);
 			this.btnSetText.Text = "Textbox positionieren";
 			this.btnSetText.Click += new System.EventHandler(this.btnSetText_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+			// 
+			// btnAddAnbindeleitungen
+			// 
+			this.btnAddAnbindeleitungen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddAnbindeleitungen.Image = ((System.Drawing.Image)(resources.GetObject("btnAddAnbindeleitungen.Image")));
+			this.btnAddAnbindeleitungen.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddAnbindeleitungen.Name = "btnAddAnbindeleitungen";
+			this.btnAddAnbindeleitungen.Size = new System.Drawing.Size(23, 22);
+			this.btnAddAnbindeleitungen.Text = "Anbindeleitungen";
+			this.btnAddAnbindeleitungen.Click += new System.EventHandler(this.btnAddAnbindeleitungen_Click);
+			// 
+			// btnSelectAnbindeleitungen
+			// 
+			this.btnSelectAnbindeleitungen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnSelectAnbindeleitungen.Image = ((System.Drawing.Image)(resources.GetObject("btnSelectAnbindeleitungen.Image")));
+			this.btnSelectAnbindeleitungen.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSelectAnbindeleitungen.Name = "btnSelectAnbindeleitungen";
+			this.btnSelectAnbindeleitungen.Size = new System.Drawing.Size(23, 22);
+			this.btnSelectAnbindeleitungen.Text = "Anbindeleitungen ändern";
+			this.btnSelectAnbindeleitungen.Click += new System.EventHandler(this.btnSelectAnbindeleitungen_Click);
 			// 
 			// panel1
 			// 
@@ -1256,6 +1288,17 @@ namespace Europlan.Common.Products {
 			this.eurovalPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.eurovalPlanner_ModeChanged);
 			this.eurovalPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.europlanPlanner_ProjectChanged);
 			// 
+			// connectionPlanner
+			// 
+			this.connectionPlanner.AddFirstCircuit = true;
+			this.connectionPlanner.AddOtherCircuits = true;
+			this.connectionPlanner.AddRuecklauf = true;
+			this.connectionPlanner.AddVorlauf = true;
+			this.connectionPlanner.Mode = Europlan.Common.ConnectionPlanner.ConnectionMode.CM_NONE;
+			this.connectionPlanner.PlanCeiling = false;
+			this.connectionPlanner.PlanFloor = true;
+			this.connectionPlanner.AnbindeleitungAdded += new System.EventHandler<System.EventArgs>(this.connectionPlanner_AnbindeleitungAdded);
+			// 
 			// EurovalPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1387,5 +1430,9 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.ToolStripButton btnAddReduced;
 		private System.Windows.Forms.ToolStripButton btnDelReduced;
 		private System.Windows.Forms.ToolStripButton btnSetText;
+		private System.Windows.Forms.ToolStripButton btnAddAnbindeleitungen;
+		private System.Windows.Forms.ToolStripButton btnSelectAnbindeleitungen;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private ConnectionPlanner connectionPlanner;
 	}
 }

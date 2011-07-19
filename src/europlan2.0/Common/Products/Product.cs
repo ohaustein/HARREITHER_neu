@@ -1627,9 +1627,13 @@ namespace Europlan.Common {
 			get { return false; }
 		}
 
-		public virtual List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertXAxis, Point2D currentMousePoint, Distributor distributor, Nullable<int> nr) {
+		/*public virtual List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertXAxis, Point2D currentMousePoint, Distributor distributor, Nullable<int> nr) {
 			// must be overriden by all products that can be planned graphically
 			return new List<PossibleConnection>();
+		}*/
+
+		public virtual PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertXAxis, Point2D currentMousePoint) {
+			return null;
 		}
 
 		public List<GraphicalProductConnection> Connections {

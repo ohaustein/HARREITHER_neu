@@ -275,7 +275,7 @@ namespace Europlan.Common {
 		protected override void OnMouseClick(MouseEventArgs e) {
 			base.OnMouseClick(e);
 			bool invalidate = false;
-			if ((this.mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_SET_DISTRIBUTOR) && this.productPlanner != null) {
+			if ((this.mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_PLANNER_DRAG || this.mode == PlanMode.PM_SET_DISTRIBUTOR) && this.productPlanner != null) {
 				Point2D pickedPoint;
 				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));
@@ -317,14 +317,14 @@ namespace Europlan.Common {
 		protected override void OnMouseMove(MouseEventArgs e) {
 			base.OnMouseMove(e);
 			bool invalidate = false;
-			if (mouseDown && this.mode == PlanMode.PM_PLANNER_DRAG && e.Button != MouseButtons.Middle && this.productPlanner != null) {
+			if (mouseDown && this.mode == PlanMode.PM_PLANNER_DRAG && e.Button != MouseButtons.Middle && e.Button != MouseButtons.None && this.productPlanner != null) {
 				/*Point2D pickedPoint;
 				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));*/
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(e.X, e.Y, 0));
 				invalidate = this.productPlanner.PlannerDragMove(new Point2D(planPoint.X, planPoint.Y), e.Location, e.Button);
 			}
-			if ((this.mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_SET_DISTRIBUTOR) && this.productPlanner != null) {
+			if ((this.mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_SET_DISTRIBUTOR || (this.mode == PlanMode.PM_PLANNER_DRAG && e.Button == MouseButtons.None)) && this.productPlanner != null) {
 				/*Point2D pickedPoint;
 				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));*/

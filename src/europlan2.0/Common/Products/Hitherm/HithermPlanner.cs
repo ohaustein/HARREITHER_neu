@@ -14,7 +14,8 @@ namespace Europlan.Common {
 		public enum HithermPlannerMode {
 			HPM_NONE,
 			HPM_ADD_REGISTER,
-			HPM_ADD_CONNECTION
+			HPM_ADD_CONNECTION,
+			HPM_CONNECT_REGISTERS
 		}
 
 		public enum NewConnectionModeEnum {
@@ -53,6 +54,8 @@ namespace Europlan.Common {
 		private PossibleHithermRegisterConnection newConnectionEnd = null;
 		private Vector2D newConnectionAutoStartWallOffset = new Vector2D();
 
+		//private GraphicalHithermRegisterWrapper connectRegistersFirst = null;
+		//
 		private NewConnectionModeEnum newConnectionMode = NewConnectionModeEnum.NCM_AUTO;
 
 		public NewConnectionModeEnum NewConnectionMode {
@@ -109,6 +112,12 @@ namespace Europlan.Common {
 		public event EventHandler<EventArgs> RecalculationNecessary {
 			add { this.recalculationNecessary += value; }
 			remove { this.recalculationNecessary -= value; }
+		}
+
+		private event EventHandler<EventArgs> restoreMode;
+		public event EventHandler<EventArgs> RestoreMode {
+			add { this.restoreMode += value; }
+			remove { this.restoreMode -= value; }
 		}
 
 		protected virtual void OnRecalculationNecessary() {
@@ -326,6 +335,72 @@ namespace Europlan.Common {
 							this.newConnectionAutoStart = null;
 						}
 					}
+				}
+			} else if (this.mode == HithermPlannerMode.HPM_CONNECT_REGISTERS) {
+				//if (this.connectRegistersFirst == null) {
+					//this.connectRegistersFirst = this.GetRegisterForPoint(planPoint);
+				if (this.connectedWallPanel != null && this.connectedWallPanel.SelectedObject is GraphicalHithermRegisterWrapper) {
+					GraphicalHithermRegisterWrapper first = this.connectedWallPanel.SelectedObject as GraphicalHithermRegisterWrapper;
+					GraphicalHithermRegisterWrapper second = this.GetRegisterForPoint(planPoint);
+					if (second != null) {
+						bool ok = true;
+						if (first.Register.Orientation != second.Register.Orientation || first.Register.RegisterType != second.Register.RegisterType) {
+							ok = false;
+						}
+						if (ok) {
+							if (first.Register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
+								double firstLeft = first.X;
+								double firstRight = first.X + first.Width;
+								double secondLeft = second.X;
+								double secondRight = second.X + second.Width;
+								if ((firstLeft < secondLeft && firstRight >= secondLeft) || (firstLeft >= secondLeft && firstRight <= secondLeft)) {
+									ok = false;
+								}
+								GraphicalWall firstOwningWall = null;
+								GraphicalWall secondOwningWall = null;
+								foreach (GraphicalWall wall in this.product.AssociatedRoom.Walls) {
+									if (firstOwningWall == null) {
+										firstOwningWall = wall.GetWallForWrapper(first);
+									}
+									if (secondOwningWall == null) {
+										secondOwningWall = wall.GetWallForWrapper(second);
+									}
+								}
+								if (firstOwningWall == null || secondOwningWall == null || firstOwningWall != secondOwningWall) {
+									ok  = false;
+								}
+
+								// TODO check if number of rohre is ok
+								// TODO other checks
+								if (ok) {
+									second.Error = true;
+									secondOwningWall.Registers.Remove(second);
+									Vector2D offset = this.product.AssociatedRoom.GetWallOffset(firstOwningWall).Value;
+									this.product.RemoveRegisterFromCircuit(second.Register);
+									this.product.CorrectCircuitIds();
+
+									int oldRohre = first.Register.Rohre;
+									first.Register.Rohre =first.Register.Rohre + second.Register.Rohre;
+									first.Register.Gaps[oldRohre] = (firstLeft < secondLeft) ? secondLeft - firstRight : firstLeft - secondRight;
+									if (!first.CheckValidity(firstOwningWall, offset.X, offset.Y)) {
+										// TODO revert
+									}
+									if (this.connectedWallPanel != null) {
+										this.connectedWallPanel.InvalidateGraphics();
+									}
+								}
+
+							} else {
+								// TODO
+							}
+						}
+						if (!ok) {
+							MessageBox.Show("Diese beiden Register können nicht verbunden werden", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						}
+					}
+				}
+				if (this.restoreMode != null) {
+					this.restoreMode(this, EventArgs.Empty);
 				}
 			}
 

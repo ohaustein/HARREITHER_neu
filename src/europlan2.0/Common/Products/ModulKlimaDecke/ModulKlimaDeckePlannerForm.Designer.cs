@@ -26,8 +26,8 @@ namespace Europlan.Common.Products {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModulKlimaDeckePlannerForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
-			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
+			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnConstruction = new System.Windows.Forms.ToolStripButton();
@@ -145,6 +145,10 @@ namespace Europlan.Common.Products {
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.modulKlimaDeckePlanner = new Europlan.Common.ModulKlimaDeckePlanner(this.components);
+			this.connectionPlanner = new Europlan.Common.ConnectionPlanner(this.components);
+			this.btnAddAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
+			this.btnSelectAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -175,23 +179,15 @@ namespace Europlan.Common.Products {
             this.btnSelectModule,
             this.btnAddConnections,
             this.btnDeleteConnection,
-            this.btnShowBeplankung});
+            this.btnShowBeplankung,
+            this.toolStripSeparator2,
+            this.btnAddAnbindeleitungen,
+            this.btnSelectAnbindeleitungen});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(892, 25);
 			this.toolStrip.TabIndex = 1;
 			this.toolStrip.Text = "toolStrip1";
-			// 
-			// btnZoomOut
-			// 
-			this.btnZoomOut.AutoToolTip = false;
-			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
-			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnZoomOut.Name = "btnZoomOut";
-			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomOut.Text = "zoomOut";
-			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// btnZoomIn
 			// 
@@ -203,6 +199,17 @@ namespace Europlan.Common.Products {
 			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
 			this.btnZoomIn.Text = "zoomIn";
 			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+			// 
+			// btnZoomOut
+			// 
+			this.btnZoomOut.AutoToolTip = false;
+			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
+			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnZoomOut.Name = "btnZoomOut";
+			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
+			this.btnZoomOut.Text = "zoomOut";
+			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -1544,6 +1551,43 @@ namespace Europlan.Common.Products {
 			this.modulKlimaDeckePlanner.ListsNeedUpdate += new System.EventHandler<Europlan.Common.ModulKlimaDeckePlanner.ListNeedsUpdateEventArgs>(this.modulKlimaBodenPlanner_ListsNeedUpdate);
 			this.modulKlimaDeckePlanner.UpdateNewCount += new System.EventHandler<Europlan.Common.ModulKlimaDeckePlanner.UpdateNewCountArgs>(this.modulKlimaDeckePlanner_UpdateNewCount);
 			// 
+			// connectionPlanner
+			// 
+			this.connectionPlanner.AddFirstCircuit = true;
+			this.connectionPlanner.AddOtherCircuits = true;
+			this.connectionPlanner.AddRuecklauf = true;
+			this.connectionPlanner.AddVorlauf = true;
+			this.connectionPlanner.Mode = Europlan.Common.ConnectionPlanner.ConnectionMode.CM_NONE;
+			this.connectionPlanner.PlanCeiling = true;
+			this.connectionPlanner.PlanFloor = false;
+			// 
+			// btnAddAnbindeleitungen
+			// 
+			this.btnAddAnbindeleitungen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddAnbindeleitungen.Image = ((System.Drawing.Image)(resources.GetObject("btnAddAnbindeleitungen.Image")));
+			this.btnAddAnbindeleitungen.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddAnbindeleitungen.Name = "btnAddAnbindeleitungen";
+			this.btnAddAnbindeleitungen.Size = new System.Drawing.Size(23, 22);
+			this.btnAddAnbindeleitungen.Text = "Anbindeleitungen";
+			this.btnAddAnbindeleitungen.Visible = false;
+			this.btnAddAnbindeleitungen.Click += new System.EventHandler(this.btnAddAnbindeleitungen_Click);
+			// 
+			// btnSelectAnbindeleitungen
+			// 
+			this.btnSelectAnbindeleitungen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnSelectAnbindeleitungen.Image = ((System.Drawing.Image)(resources.GetObject("btnSelectAnbindeleitungen.Image")));
+			this.btnSelectAnbindeleitungen.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSelectAnbindeleitungen.Name = "btnSelectAnbindeleitungen";
+			this.btnSelectAnbindeleitungen.Size = new System.Drawing.Size(23, 22);
+			this.btnSelectAnbindeleitungen.Text = "Anbindeleitungen ändern";
+			this.btnSelectAnbindeleitungen.Visible = false;
+			this.btnSelectAnbindeleitungen.Click += new System.EventHandler(this.btnSelectAnbindeleitungen_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+			// 
 			// ModulKlimaDeckePlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1709,5 +1753,9 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.ToolStripButton btnAddConnections;
 		private System.Windows.Forms.ToolStripButton btnDeleteConnection;
 		private System.Windows.Forms.Label lblNewModules;
+		private ConnectionPlanner connectionPlanner;
+		private System.Windows.Forms.ToolStripButton btnAddAnbindeleitungen;
+		private System.Windows.Forms.ToolStripButton btnSelectAnbindeleitungen;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 	}
 }

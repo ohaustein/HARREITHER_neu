@@ -326,6 +326,12 @@
     <Compile Include="Plan\PlanSetMeasureForm.Designer.cs">
       <DependentUpon>PlanSetMeasureForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\Hitherm\HithermDrawer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Products\Hitherm\HithermDrawer.Designer.cs">
+      <DependentUpon>HithermDrawer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Hitherm\GraphicalHithermRegisterWrapper.cs" />
     <Compile Include="Products\Hitherm\HithermPlanner.cs">
       <SubType>Component</SubType>
@@ -338,6 +344,12 @@
     </Compile>
     <Compile Include="Products\Hitherm\GraphicalHithermVerbindung.cs" />
     <Compile Include="Products\KlimaFlaechenSubAreaVerbindung.cs" />
+    <Compile Include="Project\ConnectionDrawer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Project\ConnectionDrawer.Designer.cs">
+      <DependentUpon>ConnectionDrawer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\PossibleConnection.cs" />
     <Compile Include="Products\Circuit.cs" />
     <Compile Include="Products\ConnectionPipePanel.cs">
@@ -1090,6 +1102,26 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons\hand.cur" />
     <EmbeddedResource Include="Icons\handGrabbed.cur" />
+    <EmbeddedResource Include="Products\Euroval\EurovalPlanner.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EurovalPlanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\Hitherm\HithermDrawer.resx">
+      <DependentUpon>HithermDrawer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\ModulKlimaBoden\ModulKlimaBodenPlanner.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ModulKlimaBodenPlanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\ModulKlimaDecke\ModulKlimaDeckePlanner.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ModulKlimaDeckePlanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ConnectionDrawer.resx">
+      <DependentUpon>ConnectionDrawer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="Icons\default.png" />
     <Content Include="Reporting\Harreither.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

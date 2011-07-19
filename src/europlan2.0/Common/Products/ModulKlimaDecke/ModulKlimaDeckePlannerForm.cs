@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Star.SettingsXpress;
+using WW.Math;
 
 namespace Europlan.Common.Products {
 	public partial class ModulKlimaDeckePlannerForm : Form {
@@ -234,6 +235,8 @@ namespace Europlan.Common.Products {
 			this.UpdateButtons();
 			this.UpdateControls();
 			this.CalculateAndUpdate();
+
+			this.connectionPlanner.Product = product;
 		}
 
 		private void UpdateControls() {
@@ -333,6 +336,7 @@ namespace Europlan.Common.Products {
 
 		private void btnConstruction_Click(object sender, EventArgs e) {
 			if (!btnConstruction.Checked) {
+				this.SetProductPlanner();
 				this.modulKlimaDeckePlanner.Mode = ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION;
 				this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
 				this.UpdateButtons();
@@ -341,6 +345,7 @@ namespace Europlan.Common.Products {
 
 		private void btnAddModules_Click(object sender, EventArgs e) {
 			if (!btnAddModules.Checked) {
+				this.SetProductPlanner();
 				this.modulKlimaDeckePlanner.Mode = ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_LAYOUT_ADD_AREA;
 				this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
 				this.UpdateButtons();
@@ -349,8 +354,45 @@ namespace Europlan.Common.Products {
 
 		private void btnSelectModule_Click(object sender, EventArgs e) {
 			if (!btnSelectModule.Checked) {
+				this.SetProductPlanner();
 				this.modulKlimaDeckePlanner.Mode = ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_PICK_MODULE;
 				this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
+				this.UpdateButtons();
+			}
+		}
+
+		private void btnAddConnections_Click(object sender, EventArgs e) {
+			if (!this.btnAddConnections.Checked) {
+				this.SetProductPlanner();
+				this.modulKlimaDeckePlanner.Mode = ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_ADD_CONNECTION;
+				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
+			}
+		}
+
+		private void btnDeleteConnection_Click(object sender, EventArgs e) {
+			if (!this.btnDeleteConnection.Checked) {
+				this.SetProductPlanner();
+				this.modulKlimaDeckePlanner.Mode = ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_DEL_CONNECTION;
+				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.UpdateButtons();
+			}
+		}
+
+		private void btnAddAnbindeleitungen_Click(object sender, EventArgs e) {
+			if (!this.btnAddAnbindeleitungen.Checked) {
+				this.SetConnectionPlanner();
+				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
+				this.connectionPlanner.Mode = ConnectionPlanner.ConnectionMode.KDM_ADD_CONNECTION;
+				this.UpdateButtons();
+			}
+		}
+
+		private void btnSelectAnbindeleitungen_Click(object sender, EventArgs e) {
+			if (!this.btnSelectAnbindeleitungen.Checked) {
+				this.SetConnectionPlanner();
+				this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
+				this.connectionPlanner.Mode = ConnectionPlanner.ConnectionMode.KDM_SELECT_CONNECTION;
 				this.UpdateButtons();
 			}
 		}
@@ -363,41 +405,71 @@ namespace Europlan.Common.Products {
 				this.btnSelectModule.Checked = false;
 				this.btnAddConnections.Checked = false;
 				this.btnDeleteConnection.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.modulKlimaDeckePlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION) {
 				this.btnMove.Checked = false;
 				this.btnConstruction.Checked = true;
 				this.btnAddModules.Checked = false;
 				this.btnSelectModule.Checked = false;
 				this.btnAddConnections.Checked = false;
 				this.btnDeleteConnection.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_LAYOUT_ADD_AREA) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.modulKlimaDeckePlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_LAYOUT_ADD_AREA) {
 				this.btnMove.Checked = false;
 				this.btnConstruction.Checked = false;
 				this.btnAddModules.Checked = true;
 				this.btnSelectModule.Checked = false;
 				this.btnAddConnections.Checked = false;
 				this.btnDeleteConnection.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_PICK_MODULE) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.modulKlimaDeckePlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_PICK_MODULE) {
 				this.btnMove.Checked = false;
 				this.btnConstruction.Checked = false;
 				this.btnAddModules.Checked = false;
 				this.btnSelectModule.Checked = true;
 				this.btnAddConnections.Checked = false;
 				this.btnDeleteConnection.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_ADD_CONNECTION) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.modulKlimaDeckePlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_ADD_CONNECTION) {
 				this.btnMove.Checked = false;
 				this.btnConstruction.Checked = false;
 				this.btnAddModules.Checked = false;
 				this.btnSelectModule.Checked = false;
 				this.btnAddConnections.Checked = true;
 				this.btnDeleteConnection.Checked = false;
-			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_ADD_CONNECTION) {
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.modulKlimaDeckePlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_ADD_CONNECTION) {
 				this.btnMove.Checked = false;
 				this.btnConstruction.Checked = false;
 				this.btnAddModules.Checked = false;
 				this.btnSelectModule.Checked = false;
 				this.btnAddConnections.Checked = false;
 				this.btnDeleteConnection.Checked = true;
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.connectionPlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.connectionPlanner.Mode == ConnectionPlanner.ConnectionMode.KDM_ADD_CONNECTION) {
+				this.btnMove.Checked = false;
+				this.btnConstruction.Checked = false;
+				this.btnAddModules.Checked = false;
+				this.btnSelectModule.Checked = false;
+				this.btnAddConnections.Checked = false;
+				this.btnDeleteConnection.Checked = false;
+				this.btnAddAnbindeleitungen.Checked = true;
+				this.btnSelectAnbindeleitungen.Checked = false;
+			} else if (this.planPanel.ProductPlanner == this.connectionPlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.connectionPlanner.Mode == ConnectionPlanner.ConnectionMode.KDM_SELECT_CONNECTION) {
+				this.btnMove.Checked = false;
+				this.btnConstruction.Checked = false;
+				this.btnAddModules.Checked = false;
+				this.btnSelectModule.Checked = false;
+				this.btnAddConnections.Checked = false;
+				this.btnDeleteConnection.Checked = false;
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = true;
 			} else {
 				this.btnMove.Checked = false;
 				this.btnConstruction.Checked = false;
@@ -405,6 +477,8 @@ namespace Europlan.Common.Products {
 				this.btnSelectModule.Checked = false;
 				this.btnAddConnections.Checked = false;
 				this.btnDeleteConnection.Checked = false;
+				this.btnAddAnbindeleitungen.Checked = false;
+				this.btnSelectAnbindeleitungen.Checked = false;
 			}
 			this.grpSelectedModules.Visible = this.btnSelectModule.Checked;
 			this.grpSelection.Visible = this.btnSelectModule.Checked;
@@ -602,6 +676,8 @@ namespace Europlan.Common.Products {
 				this.btnSelectModule.Visible = true;
 				this.btnAddConnections.Visible = true;
 				this.btnDeleteConnection.Visible = true;
+				this.btnAddAnbindeleitungen.Visible = true;
+				this.btnSelectAnbindeleitungen.Visible = true;
 				if (!this.btnAddModules.Checked && !this.btnSelectModule.Checked && !this.btnMove.Checked) {
 					this.planPanel.Mode = PlanMode.PM_MOVE;
 					this.modulKlimaDeckePlanner.Mode = ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_NONE;
@@ -613,6 +689,8 @@ namespace Europlan.Common.Products {
 				this.btnConstruction.Visible = true;
 				this.btnAddConnections.Visible = false;
 				this.btnDeleteConnection.Visible = false;
+				this.btnAddAnbindeleitungen.Visible = false;
+				this.btnSelectAnbindeleitungen.Visible = false;
 				if (!this.btnConstruction.Checked && !this.btnMove.Checked) {
 					this.planPanel.Mode = PlanMode.PM_MOVE;
 					this.modulKlimaDeckePlanner.Mode = ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_NONE;
@@ -1384,18 +1462,6 @@ namespace Europlan.Common.Products {
 			this.modulKlimaDeckePlanner.PlannerKeyPress(e.KeyCode);
 		}
 
-		private void btnAddConnections_Click(object sender, EventArgs e) {
-			this.modulKlimaDeckePlanner.Mode = ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_ADD_CONNECTION;
-			this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
-			this.UpdateButtons();
-		}
-
-		private void btnDeleteConnection_Click(object sender, EventArgs e) {
-			this.modulKlimaDeckePlanner.Mode = ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_DEL_CONNECTION;
-			this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
-			this.UpdateButtons();
-		}
-
 		private void modulKlimaDeckePlanner_UpdateNewCount(object sender, ModulKlimaDeckePlanner.UpdateNewCountArgs e) {
 			if (e.count == 0) {
 				this.lblNewModules.Visible = false;
@@ -1405,5 +1471,24 @@ namespace Europlan.Common.Products {
 			}
 		}
 
+		private void SetProductPlanner() {
+			if (this.planPanel.ProductPlanner != this.modulKlimaDeckePlanner) {
+				double scale = this.planPanel.PlanScale;
+				Vector2D translation = this.planPanel.PlanTranslation;
+				this.planPanel.ProductPlanner = this.modulKlimaDeckePlanner;
+				this.planPanel.PlanScale = scale;
+				this.planPanel.PlanTranslation = translation;
+			}
+		}
+
+		private void SetConnectionPlanner() {
+			if (this.planPanel.ProductPlanner != this.connectionPlanner) {
+				double scale = this.planPanel.PlanScale;
+				Vector2D translation = this.planPanel.PlanTranslation;
+				this.planPanel.ProductPlanner = this.connectionPlanner;
+				this.planPanel.PlanScale = scale;
+				this.planPanel.PlanTranslation = translation;
+			}
+		}
 	}
 }

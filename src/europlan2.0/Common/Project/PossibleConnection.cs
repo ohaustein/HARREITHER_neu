@@ -177,4 +177,148 @@ namespace Europlan.Common {
 			get { return this.register; }
 		}
 	}
+
+	public class PossibleProductConnection {
+		protected Point2D connectionPoint;
+		protected Polygon2D connectionArea;
+		protected bool possibleInput;
+		protected bool possibleOutput;
+		protected Product product;
+		protected Distributor distributor;
+		protected int distributorStartPosition;
+		protected int distributorCircuitCount;
+		protected double rotation;
+		protected bool firstCircuit;
+		protected bool otherCircuits;
+
+		public PossibleProductConnection() {
+		}
+
+		public PossibleProductConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, double rotation, Product product, bool firstCircuit, bool otherCircuits) {
+			this.connectionPoint = connectionPoint;
+			this.connectionArea = connectionArea;
+			this.possibleInput = possibleInput;
+			this.possibleOutput = possibleOutput;
+			this.product = product;
+			this.rotation = rotation;
+			this.firstCircuit = firstCircuit;
+			this.otherCircuits = otherCircuits;
+			this.distributor = null;
+			this.distributorStartPosition = -1;
+			this.distributorCircuitCount = 0;
+		}
+
+		public PossibleProductConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, double rotation, Distributor distributor, int distributorStartPosition, int distributorCircuitCount) {
+			this.connectionPoint = connectionPoint;
+			this.connectionArea = connectionArea;
+			this.possibleInput = possibleInput;
+			this.possibleOutput = possibleOutput;
+			this.product = null;
+			this.rotation = rotation;
+			this.firstCircuit = false;
+			this.otherCircuits = false;
+			this.distributor = distributor;
+			this.distributorStartPosition = distributorStartPosition;
+			this.distributorCircuitCount = distributorCircuitCount;
+		}
+
+		public Point2D ConnectionPoint {
+			get { return connectionPoint; }
+			set { connectionPoint = value; }
+		}
+
+		public Polygon2D ConnectionArea {
+			get { return connectionArea; }
+			set { connectionArea = value; }
+		}
+
+		public bool PossibleInput {
+			get { return possibleInput; }
+			set { possibleInput = value; }
+		}
+
+		public bool PossibleOutput {
+			get { return possibleOutput; }
+			set { possibleOutput = value; }
+		}
+
+		public Product Product {
+			get { return this.product; }
+			set { this.product = value; }
+		}
+
+		/*public List<Circuit> Circuits {
+			get {
+				List<Circuit> circuits = new List<Circuit>();
+				if (this.firstCircuit) {
+					circuits.Add(this.product.PlannedCircuits[0]);
+				}
+				if (this.otherCircuits) {
+					for (int i = 1; i < this.product.PlannedCircuits.Count; i++) {
+						circuits.Add(this.product.PlannedCircuits[i]);
+					}
+				}
+				foreach (GraphicalProductConnection conn in this.product.Connections) {
+					foreach (Circuit c in conn.ProductCircuits) {
+						if (circuits.Contains(c)) {
+							circuits.Remove(c);
+						}
+					}
+				}
+				return circuits;
+			}
+			//set { this.circuits = value; }
+		}*/
+
+		public int ProductCircuitCount {
+			get {
+				int circuitCount = 0;
+				if (this.product != null) {
+					if (this.firstCircuit && this.product.PlannedCircuits.Count > 0) {
+						circuitCount++;
+					}
+					if (this.otherCircuits && this.product.PlannedCircuits.Count > 0) {
+						circuitCount += this.product.PlannedCircuits.Count - 1;
+					}
+				}
+				return circuitCount;
+			}
+		}
+
+		public bool ProductFirstCircuit {
+			get { return this.firstCircuit; }
+			set { this.firstCircuit = value; }
+		}
+
+		public bool ProductOtherCircuits {
+			get { return this.otherCircuits; }
+			set { this.otherCircuits = value; }
+		}
+
+		public double Rotation {
+			get { return this.rotation; }
+			set { this.rotation = value; }
+		}
+
+		public Distributor Distributor {
+			get { return this.distributor; }
+			set { this.distributor = value; }
+		}
+
+		public int DistributorStartPosition {
+			get { return this.distributorStartPosition; }
+			set { this.distributorStartPosition = value; }
+		}
+
+		public int DistributorCircuitCount {
+			get { return this.distributorCircuitCount; }
+			set { this.distributorCircuitCount = value; }
+		}
+
+		/*public List<int> DistributorIndices {
+			// TODO
+			get { return new List<int>(); }
+			//set { }
+		}*/
+	}
 }

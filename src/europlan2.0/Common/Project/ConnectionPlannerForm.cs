@@ -56,14 +56,22 @@ namespace Europlan.Common {
 				this.btnMove.Checked = true;
 				this.btnConnections.Checked = false;
 				this.btnDeleteConnection.Checked = false;
+				this.btnPickConnection.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.connectionPlanner.Mode == ConnectionPlanner.ConnectionMode.KDM_ADD_CONNECTION) {
 				this.btnMove.Checked = false;
 				this.btnConnections.Checked = true;
 				this.btnDeleteConnection.Checked = false;
+				this.btnPickConnection.Checked = false;
 			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.connectionPlanner.Mode == ConnectionPlanner.ConnectionMode.KDM_DEL_CONNECTION) {
 				this.btnMove.Checked = false;
 				this.btnConnections.Checked = false;
 				this.btnDeleteConnection.Checked = true;
+				this.btnPickConnection.Checked = false;
+			} else if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.connectionPlanner.Mode == ConnectionPlanner.ConnectionMode.KDM_SELECT_CONNECTION) {
+				this.btnMove.Checked = false;
+				this.btnConnections.Checked = false;
+				this.btnDeleteConnection.Checked = false;
+				this.btnPickConnection.Checked = true;
 			} else {
 				this.btnMove.Checked = false;
 			}
@@ -81,7 +89,7 @@ namespace Europlan.Common {
 		}
 
 		private void ModulKlimaBodenPlannerForm_FormClosing(object sender, FormClosingEventArgs e) {
-			double measure = this.connectionPlanner.Floor.AssociatedPlan.Measure.Value;
+			/*double measure = this.connectionPlanner.Floor.AssociatedPlan.Measure.Value;
 			// Update connectionpipes in products to match the graphical connections
 			foreach (Room room in this.connectionPlanner.Floor.Rooms) {
 				foreach (PlannedProduct pp in room.PlannedProducts) {
@@ -99,60 +107,62 @@ namespace Europlan.Common {
 					Dictionary<PlannedProduct, int> otherCircuitCountRl = new Dictionary<PlannedProduct, int>();
 					Dictionary<PlannedProduct, Room> rooms = new Dictionary<PlannedProduct, Room>();
 					foreach (GraphicalProductConnection connection in pp.Product.Connections) {
-						if (false && connection.ProductCircuitIndex == 0) { // TODO
-							if (connection.Vorlauf) {
-								restFirstCircuitVl = connection.GetLength(1); // do not use measure here as unmeasured lengths will be subtracted
+						//foreach (int circuitIndex in connection.ProductCircuitIndices) {
+							*//*if (false && circuitIndex == 0) { // TODO
+								if (connection.Vorlauf) {
+									restFirstCircuitVl = connection.GetLength(1); // do not use measure here as unmeasured lengths will be subtracted
+								} else {
+									restFirstCircuitRl = connection.GetLength(1);
+								}
 							} else {
-								restFirstCircuitRl = connection.GetLength(1);
+								if (connection.Vorlauf) {
+									restOtherCircuitVl += connection.GetLength(1);
+									restOtherCircuitCountVl++;
+								} else {
+									restOtherCircuitRl += connection.GetLength(1);
+									restOtherCircuitCountRl++;
+								}
 							}
-						} else {
-							if (connection.Vorlauf) {
-								restOtherCircuitVl += connection.GetLength(1);
-								restOtherCircuitCountVl++;
-							} else {
-								restOtherCircuitRl += connection.GetLength(1);
-								restOtherCircuitCountRl++;
-							}
-						}
-						foreach (Room room2 in this.connectionPlanner.Floor.Rooms) {
-							foreach (PlannedProduct pp2 in room2.PlannedProducts) {
-								rooms[pp2] = room2;
-								if (pp != pp2 && pp2.Product.Type == connection.ConnectionType && pp2.Product.GraphicalArea != null) {
-									double length = connection.GetPartInsidePolygon(pp2.Product.GraphicalArea);
-									if (length > 0) {
-										if (false && connection.ProductCircuitIndex == 0) { // TODO
-											if (connection.Vorlauf) {
-												firstCircuitVl[pp2] = length;
-												restFirstCircuitVl -= length;
-											} else {
-												firstCircuitRl[pp2] = length;
-												restFirstCircuitRl -= length;
-											}
-										} else {
-											if (connection.Vorlauf) {
-												if (otherCircuitVl.ContainsKey(pp2)) {
-													otherCircuitVl[pp2] += length;
-													otherCircuitCountVl[pp2]++;
+							foreach (Room room2 in this.connectionPlanner.Floor.Rooms) {
+								foreach (PlannedProduct pp2 in room2.PlannedProducts) {
+									rooms[pp2] = room2;
+									if (pp != pp2 && pp2.Product.Type == connection.ConnectionType && pp2.Product.GraphicalArea != null) {
+										double length = connection.GetPartInsidePolygon(pp2.Product.GraphicalArea);
+										if (length > 0) {
+											if (false && circuitIndex == 0) { // TODO
+												if (connection.Vorlauf) {
+													firstCircuitVl[pp2] = length;
+													restFirstCircuitVl -= length;
 												} else {
-													otherCircuitVl[pp2] = length;
-													otherCircuitCountVl[pp2] = 1;
+													firstCircuitRl[pp2] = length;
+													restFirstCircuitRl -= length;
 												}
-												restOtherCircuitVl -= length;
 											} else {
-												if (otherCircuitRl.ContainsKey(pp2)) {
-													otherCircuitRl[pp2] += length;
-													otherCircuitCountRl[pp2]++;
+												if (connection.Vorlauf) {
+													if (otherCircuitVl.ContainsKey(pp2)) {
+														otherCircuitVl[pp2] += length;
+														otherCircuitCountVl[pp2]++;
+													} else {
+														otherCircuitVl[pp2] = length;
+														otherCircuitCountVl[pp2] = 1;
+													}
+													restOtherCircuitVl -= length;
 												} else {
-													otherCircuitRl[pp2] = length;
-													otherCircuitCountRl[pp2] = 1;
+													if (otherCircuitRl.ContainsKey(pp2)) {
+														otherCircuitRl[pp2] += length;
+														otherCircuitCountRl[pp2]++;
+													} else {
+														otherCircuitRl[pp2] = length;
+														otherCircuitCountRl[pp2] = 1;
+													}
+													restOtherCircuitRl -= length;
 												}
-												restOtherCircuitRl -= length;
 											}
 										}
 									}
 								}
-							}
-						}
+							}*//*
+						//}
 					}
 					if (pp.Product.Connections != null && pp.Product.Connections.Count > 0) {
 						pp.Product.PlannedConnectionPipes.Clear();
@@ -215,7 +225,8 @@ namespace Europlan.Common {
 						}
 					}
 				}
-			}
+			}*/
+			this.connectionPlanner.ReGenerateConnectionPipes();
 
 			SettingsKey settings = SettingsFile.Settings["ConnectionPlannerForm"];
 			settings.StorePoint("Location", this.Location);
@@ -251,6 +262,12 @@ namespace Europlan.Common {
 			this.UpdateButtons();
 		}
 
+		private void btnPickConnection_Click(object sender, EventArgs e) {
+			this.connectionPlanner.Mode = ConnectionPlanner.ConnectionMode.KDM_SELECT_CONNECTION;
+			this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
+			this.UpdateButtons();
+		}
+
 		private void btnBoden_Click(object sender, EventArgs e) {
 			this.btnBoden.Checked = true;
 			this.btnDecke.Checked = false;
@@ -262,5 +279,18 @@ namespace Europlan.Common {
 			this.btnDecke.Checked = true;
 			this.connectionPlanner.PlanCeiling = true;
 		}
+
+		private void btnCircuits_Click(object sender, EventArgs e) {
+			if (!this.btnFirstCircuit.Checked && !this.btnOtherCircuits.Checked) {
+				if (sender == this.btnFirstCircuit) {
+					this.btnOtherCircuits.Checked = true;
+				} else {
+					this.btnFirstCircuit.Checked = true;
+				}
+			}
+			this.connectionPlanner.AddFirstCircuit = this.btnFirstCircuit.Checked;
+			this.connectionPlanner.AddOtherCircuits = this.btnOtherCircuits.Checked;
+		}
+
 	}
 }

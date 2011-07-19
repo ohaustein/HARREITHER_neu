@@ -14,7 +14,7 @@ using WW.Cad.Model.Tables;
 using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
-	public partial class EurovalPlanner : Component, IPlanner {
+	public partial class EurovalPlanner : Component, IProductPlanner {
 
 		public enum EurovalMode {
 			EVM_NONE,
@@ -67,6 +67,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				this.connectionDrawer.Floor = (this.product != null && this.product.AssociatedRoom != null) ? this.product.AssociatedRoom.AssociatedFloor : null;
 			}
 		}
 
@@ -136,6 +137,7 @@ namespace Europlan.Common {
 
 		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
+				this.connectionDrawer.Paint(g, additionalTransformation);
 				GraphicsPath path = new GraphicsPath();
 				List<PointF> transformedPoints = new List<PointF>();
 				foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
@@ -865,12 +867,21 @@ namespace Europlan.Common {
 
 		private bool Reset() {
 			if (this.Mode == EurovalMode.EVM_ADD_AREA) {
-				DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Fläche verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+				DialogResult result;
+				if (this.product.Connections != null && this.product.Connections.Count > 0) {
+					result = MessageBox.Show("Wollen Sie die bereits definierte Fläche und die bestehenden Anbindeleitungen verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+				} else {
+					result = MessageBox.Show("Wollen Sie die bereits definierte Fläche verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+				}
 				if (result == DialogResult.No) {
 					return false;
 				}
+				if (this.product.Connections != null) {
+					this.product.Connections.Clear();
+				}
 				this.product.PlannedAreaGraphical.Clear();
 				this.product.PlannedRimSegments.Clear();
+				this.product.PlannedReducedAreas.Clear();
 				this.product.PlannedRimLength = 0;
 				this.product.PlannedRimCorners = 0;
 				this.connectedPlanPanel.InvalidateGraphics();
