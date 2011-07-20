@@ -100,6 +100,8 @@ namespace Europlan.Common {
 		internal void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 			Pen pen = Pens.Red;
+			Pen otherPen = new Pen(Color.FromArgb(128, Color.Red));
+			Brush otherBrush = new SolidBrush(Color.FromArgb(128, Color.Red));
 			double width = distributor.Width * this.floor.AssociatedPlan.Measure.Value;
 			double height = distributor.Height * this.floor.AssociatedPlan.Measure.Value;
 
@@ -107,6 +109,42 @@ namespace Europlan.Common {
 			Point2D leftTop = Point2D.Zero;
 			Point2D rightTop = Point2D.Zero;
 			Point2D rightBottom = Point2D.Zero;
+
+			Matrix4D transformation = additionalTransformation;
+
+			foreach (Distributor d in floor.Distributors) {
+				if (d.Id != this.distributor.Id) {
+					foreach (Distributor.GraphicalRepresentation gp in d.GraphicalRepresentations) {
+						if (gp.floorId == this.floor.Id) {
+							if (this.ConnectedPlanPanel.Plan is CadPlan) {
+								transformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
+								transformation = transformation * Transformation4D.RotateZ(-gp.rotation * Math.PI / 180.0);
+								transformation = transformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
+
+								leftBottom = transformation.TransformTo2D(gp.position);
+								leftTop = transformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y + height));
+								rightTop = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y + height));
+								rightBottom = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
+							} else {
+								transformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
+								transformation = transformation * Transformation4D.RotateZ(gp.rotation * Math.PI / 180.0);
+								transformation = transformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
+
+								leftBottom = transformation.TransformTo2D(gp.position);
+								leftTop = transformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y - height));
+								rightTop = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y - height));
+								rightBottom = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
+							}
+							g.DrawLine(otherPen, (float)leftBottom.X, (float)leftBottom.Y, (float)rightBottom.X, (float)rightBottom.Y);
+							g.DrawLine(otherPen, (float)rightBottom.X, (float)rightBottom.Y, (float)rightTop.X, (float)rightTop.Y);
+							g.DrawLine(otherPen, (float)rightTop.X, (float)rightTop.Y, (float)leftTop.X, (float)leftTop.Y);
+							g.DrawLine(otherPen, (float)leftTop.X, (float)leftTop.Y, (float)leftBottom.X, (float)leftBottom.Y);
+							g.FillPolygon(otherBrush, new PointF[] { new PointF((float)leftBottom.X, (float)leftBottom.Y), new PointF((float)rightBottom.X, (float)rightBottom.Y), new PointF((float)rightTop.X, (float)rightTop.Y) });
+							break;
+						}
+					}
+				}
+			}
 
 			if (this.Mode == DistributorPositionerMode.DPM_POSITION) {
 				if (this.ConnectedPlanPanel.Plan is CadPlan) {
