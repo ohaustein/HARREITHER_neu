@@ -17,14 +17,14 @@ namespace Europlan.Common {
 			Schraege
 		}
 
-		private static double defaultHeight = 250.0;
+		//private static double defaultHeight = 250.0;
 		private bool autoGeneration;
 		private bool isCompact;
 		private string wallId;
 		private double selectedWidth = 0;
 		private int wallCount = 0;
 
-		public NewWallForm(bool autoGeneration, bool isCompact, double selectedWidth, int wallCount, bool allowSchraege) {
+		public NewWallForm(bool autoGeneration, bool isCompact, double selectedWidth, int wallCount, bool allowSchraege, float defaultHeight) {
 			InitializeComponent();
 
 			this.autoGeneration = autoGeneration;
@@ -34,7 +34,7 @@ namespace Europlan.Common {
 			rbSchraege.Enabled = allowSchraege;
 
 			this.numWidth.Enabled = !autoGeneration;
-			this.numHeight.Value = (decimal)defaultHeight;
+			this.numHeight.Value = (decimal)defaultHeight * 100.0;
 
 			if (isCompact) {
 				wallId = Project.Instance.HithermCompactWalls[0].Id;
@@ -69,7 +69,7 @@ namespace Europlan.Common {
 					e.Cancel = true;
 					return;
 				}
-				defaultHeight = (double)this.numHeight.Value;
+				//defaultHeight = (double)this.numHeight.Value;
 			}
 
 			SettingsKey settings = SettingsFile.Settings["NewWallForm"];

@@ -14,6 +14,7 @@ namespace Europlan.Common {
 
 		private string name;
 		private string id;
+		private float defaultRoomHeight = 2.6f;
 
 		private TreeNode floorNode = new TreeNode();
 
@@ -331,6 +332,12 @@ namespace Europlan.Common {
 				return null;
 			}
 		}
+
+		public float DefaultRoomHeight {
+			get { return defaultRoomHeight; }
+			set { defaultRoomHeight = value; }
+		}
+
 	}
 }
 

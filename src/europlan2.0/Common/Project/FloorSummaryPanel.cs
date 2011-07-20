@@ -85,6 +85,7 @@ namespace Europlan.Common {
 			this.lblFloorName.Text = floor.Name;
 			this.floorRoomsSource.ResetBindings(false);
 			this.btnRemoveDistributor.Enabled = floor.Distributors.Count > 0;
+			this.numRoomHeight.Value = (decimal)floor.DefaultRoomHeight;
 
 			if (selectedRoom != null) {
 				foreach (DataGridViewRow row in this.gridRooms.Rows) {
@@ -510,6 +511,10 @@ namespace Europlan.Common {
 		private void btnDefineConnections_Click(object sender, EventArgs e) {
 			ConnectionPlannerForm form = new ConnectionPlannerForm(this.floor);
 			form.ShowDialog();
+		}
+
+		private void numRoomHeight_ValueChanged(object sender, EventArgs e) {
+			floor.DefaultRoomHeight = (float)numRoomHeight.Value;
 		}
 
 	}
