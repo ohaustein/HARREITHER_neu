@@ -36,6 +36,8 @@ namespace Europlan.Common.Products {
 			this.btnAddReduced = new System.Windows.Forms.ToolStripButton();
 			this.btnDelReduced = new System.Windows.Forms.ToolStripButton();
 			this.btnSetText = new System.Windows.Forms.ToolStripButton();
+			this.btnFontPlus = new System.Windows.Forms.ToolStripButton();
+			this.btnFontMinus = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnAddAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
 			this.btnSelectAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
@@ -154,6 +156,8 @@ namespace Europlan.Common.Products {
             this.btnAddReduced,
             this.btnDelReduced,
             this.btnSetText,
+            this.btnFontPlus,
+            this.btnFontMinus,
             this.toolStripSeparator2,
             this.btnAddAnbindeleitungen,
             this.btnSelectAnbindeleitungen});
@@ -264,6 +268,26 @@ namespace Europlan.Common.Products {
 			this.btnSetText.Size = new System.Drawing.Size(23, 22);
 			this.btnSetText.Text = "Textbox positionieren";
 			this.btnSetText.Click += new System.EventHandler(this.btnSetText_Click);
+			// 
+			// btnFontPlus
+			// 
+			this.btnFontPlus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnFontPlus.Image = ((System.Drawing.Image)(resources.GetObject("btnFontPlus.Image")));
+			this.btnFontPlus.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnFontPlus.Name = "btnFontPlus";
+			this.btnFontPlus.Size = new System.Drawing.Size(23, 22);
+			this.btnFontPlus.Text = "Textbox vergrößern";
+			this.btnFontPlus.Click += new System.EventHandler(this.btnFontPlus_Click);
+			// 
+			// btnFontMinus
+			// 
+			this.btnFontMinus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnFontMinus.Image = ((System.Drawing.Image)(resources.GetObject("btnFontMinus.Image")));
+			this.btnFontMinus.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnFontMinus.Name = "btnFontMinus";
+			this.btnFontMinus.Size = new System.Drawing.Size(23, 22);
+			this.btnFontMinus.Text = "Textbox verkleinern";
+			this.btnFontMinus.Click += new System.EventHandler(this.btnFontMinus_Click);
 			// 
 			// toolStripSeparator2
 			// 
@@ -1297,6 +1321,7 @@ namespace Europlan.Common.Products {
 			this.connectionPlanner.Mode = Europlan.Common.ConnectionPlanner.ConnectionMode.CM_NONE;
 			this.connectionPlanner.PlanCeiling = false;
 			this.connectionPlanner.PlanFloor = true;
+			this.connectionPlanner.Product = null;
 			this.connectionPlanner.AnbindeleitungAdded += new System.EventHandler<System.EventArgs>(this.connectionPlanner_AnbindeleitungAdded);
 			// 
 			// EurovalPlannerForm
@@ -1434,5 +1459,7 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.ToolStripButton btnSelectAnbindeleitungen;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private ConnectionPlanner connectionPlanner;
+		private System.Windows.Forms.ToolStripButton btnFontPlus;
+		private System.Windows.Forms.ToolStripButton btnFontMinus;
 	}
 }

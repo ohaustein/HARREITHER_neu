@@ -367,7 +367,7 @@ namespace Europlan.Common {
 				}
 
 				if (this.product.TextBoxPosition != Point2D.Zero) {
-					Font font = new Font("Arial", 5.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
+					Font font = new Font("Arial", this.product.TextBoxFontSize / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
 					float maxWidth = 0;
 					float maxHeight = 0;
 
@@ -1458,7 +1458,7 @@ namespace Europlan.Common {
 					}
 					Point2D pos = product.TextBoxPosition;
 					
-					DxfText text = new DxfText("Name: ", (Point3D)pos, 0.05f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
+					DxfText text = new DxfText("Name: ", (Point3D)pos, (this.product.TextBoxFontSize / 100.0f) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
 					text.Style = model.TextStyles["HarreitherStyle"];
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);

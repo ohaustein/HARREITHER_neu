@@ -85,6 +85,7 @@ namespace Europlan.Common {
 		private List<Point2D> plannedAreaGraphical = new List<Point2D>();
 		private List<List<Point2D>> plannedReducedAreas = new List<List<Point2D>>();
 		private Point2D textBoxPosition = Point2D.Zero;
+		private float textBoxFontSize = 5.0f;
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			int i = 0;
@@ -2223,6 +2224,12 @@ namespace Europlan.Common {
 		public Point2D TextBoxPosition {
 			get { return this.textBoxPosition; }
 			set { this.textBoxPosition = value;	}
+		}
+
+
+		public float TextBoxFontSize {
+			get { return textBoxFontSize; }
+			set { textBoxFontSize = value; }
 		}
 
 		/*public override List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertXAxis, Point2D currentMousePoint, Distributor distributor, Nullable<int> nr) {

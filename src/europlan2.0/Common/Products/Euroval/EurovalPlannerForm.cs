@@ -174,6 +174,16 @@ namespace Europlan.Common.Products {
 			}
 		}
 
+		private void btnFontPlus_Click(object sender, EventArgs e) {
+			this.eurovalPlanner.Product.TextBoxFontSize = this.eurovalPlanner.Product.TextBoxFontSize + 1;
+			this.planPanel.InvalidateGraphics();
+		}
+
+		private void btnFontMinus_Click(object sender, EventArgs e) {
+			this.eurovalPlanner.Product.TextBoxFontSize = Math.Max(this.eurovalPlanner.Product.TextBoxFontSize - 1, 3.0f);
+			this.planPanel.InvalidateGraphics();
+		}
+
 		private void btnAddAnbindeleitungen_Click(object sender, EventArgs e) {
 			if (!this.btnAddAnbindeleitungen.Checked) {
 				this.SetConnectionPlanner();
@@ -791,5 +801,7 @@ namespace Europlan.Common.Products {
 			this.connectionPlanner.ReGenerateConnectionPipes();
 			this.CalculateAndUpdate();
 		}
+
+
 	}
 }
