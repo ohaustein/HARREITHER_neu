@@ -47,7 +47,7 @@ namespace Europlan.Common {
 
 			this.tvDistributors.Nodes.Clear();
 			this.product = product;
-			DistributorList distributors = floor.GetAllAvailableDistributors();
+			DistributorList distributors = floor.GetAllAvailableDistributors(true);
 			TreeNode[] distributorNodes = new TreeNode[distributors.Count];
 			int i = 0;
 			foreach (Distributor d in distributors) {

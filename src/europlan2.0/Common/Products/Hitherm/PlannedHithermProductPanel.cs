@@ -724,6 +724,19 @@ namespace Europlan.Common {
 		}
 
 		private void btnDistributor_Click(object sender, EventArgs e) {
+			if (this.product.Product.Connections != null && this.product.Product.Connections.Count > 0) {
+				if (MessageBox.Show("Für dieses Produkt wurden bereits grafische Anbindeleitungen verplant, wenn Sie den Verteileranschluss ändern werden die grafischen Anbindeleitungen gelöscht", "Grafische Anbindeleitungen löschen", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
+					return;
+				}
+				this.product.Product.Connections.Clear();
+				List<ConnectionPipe> pipesToDelete = new List<ConnectionPipe>();
+				foreach (ConnectionPipe pipe in this.product.Product.PlannedConnectionPipes) {
+					pipesToDelete.Add(pipe);
+				}
+				foreach (ConnectionPipe pipe in pipesToDelete) {
+					this.product.Product.PlannedConnectionPipes.Remove(pipe);
+				}
+			}
 			SelectConnectionForProductForm form = new SelectConnectionForProductForm(this.product, this.product.Product.AssociatedRoom.AssociatedFloor);
 			//form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnection;
 			//if (form.ShowDialog() == DialogResult.OK) {

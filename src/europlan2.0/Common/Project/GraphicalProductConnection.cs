@@ -235,44 +235,21 @@ namespace Europlan.Common {
 			this.ruecklaufVerticesForDrawing = null;
 		}
 
-		public void Draw(Graphics g, Matrix4D additionalTransformation, Color c, double measure, bool selected) {
+		public void Draw(Graphics g, Matrix4D additionalTransformation, double measure, bool selected, bool gray) {
 			if (this.vertices.Count < 2) {
 				return;
 			}
-			/*Point2D oldVertex2D = additionalTransformation.TransformTo2D(this.vertices[0]);
-			Point2D newVertex2D;
-			PointF oldVertex = new PointF((float)oldVertex2D.X, (float)oldVertex2D.Y);
-			PointF newVertex;
-			Pen p = new Pen(new System.Drawing.Drawing2D.HatchBrush(System.Drawing.Drawing2D.HatchStyle.LargeCheckerBoard, Color.Red, Color.Blue), (float)(this.ConnectionWidth * measure * additionalTransformation.M00));
-			if (selected) {
-				p = new Pen(Color.Green, (float)(this.ConnectionWidth * measure * additionalTransformation.M00));
-			}
-			p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-			for (int i = 1; i < this.vertices.Count; i++) {
-				newVertex2D = additionalTransformation.TransformTo2D(this.vertices[i]);
-				newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
-				if (i == 2) {
-					p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-				}
-				if (i == this.vertices.Count - 2) {
-					p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
-				}
-				if (i == this.vertices.Count - 1) {
-					p.Width = (float)(this.ConnectionDistributorWidth * measure * additionalTransformation.M00);
-					p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
-				}
-				g.DrawLine(p, oldVertex, newVertex);
-				oldVertex = newVertex;
-			}*/
 
 			if (this.vorlaufVerticesForDrawing == null || this.ruecklaufVerticesForDrawing == null) {
 				this.CalculateVerticesForDrawing(measure);
 			}
+			Color c = selected ? Color.Green : (gray ? Color.FromArgb(100, 0, 0) : Color.Red);
 			foreach (List<Point2D> singleConnection in this.vorlaufVerticesForDrawing) {
-				this.DrawSingleConnection(g, additionalTransformation, singleConnection, selected ? Color.Green : Color.Red, measure);
+				this.DrawSingleConnection(g, additionalTransformation, singleConnection, c, measure);
 			}
+			c = selected ? Color.Green : (gray ? Color.FromArgb(0, 0, 100) : Color.Blue);
 			foreach (List<Point2D> singleConnection in this.ruecklaufVerticesForDrawing) {
-				this.DrawSingleConnection(g, additionalTransformation, singleConnection, selected ? Color.Green : Color.Blue, measure);
+				this.DrawSingleConnection(g, additionalTransformation, singleConnection, c, measure);
 			}
 		}
 

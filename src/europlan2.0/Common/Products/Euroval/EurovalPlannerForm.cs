@@ -796,6 +796,7 @@ namespace Europlan.Common.Products {
 
 		private void connectionPlanner_AnbindeleitungAdded(object sender, EventArgs e) {
 			if (this.cmbCircuitsContainsAutomatic && this.cmbCircuits.SelectedIndex == 0) {
+				this.eurovalPlanner.Product.RequestedCircuits = this.eurovalPlanner.Product.PlannedCircuitCount;
 				this.cmbCircuits.SelectedIndex = this.eurovalPlanner.Product.PlannedCircuitCount;
 			}
 			this.connectionPlanner.ReGenerateConnectionPipes();

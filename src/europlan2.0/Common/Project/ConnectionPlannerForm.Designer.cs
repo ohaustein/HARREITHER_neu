@@ -173,7 +173,7 @@ namespace Europlan.Common {
 			this.btnConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnConnections.Name = "btnConnections";
 			this.btnConnections.Size = new System.Drawing.Size(23, 22);
-			this.btnConnections.Text = "Verbindeleitung hinzufügen";
+			this.btnConnections.Text = "Anbindeleitung hinzufügen";
 			this.btnConnections.Click += new System.EventHandler(this.btnConnections_Click);
 			// 
 			// btnDeleteConnection
@@ -184,6 +184,7 @@ namespace Europlan.Common {
 			this.btnDeleteConnection.Name = "btnDeleteConnection";
 			this.btnDeleteConnection.Size = new System.Drawing.Size(23, 22);
 			this.btnDeleteConnection.Text = "Verbindeleitung löschen";
+			this.btnDeleteConnection.Visible = false;
 			this.btnDeleteConnection.Click += new System.EventHandler(this.btnDeleteConnection_Click);
 			// 
 			// btnPickConnection
@@ -193,6 +194,7 @@ namespace Europlan.Common {
 			this.btnPickConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnPickConnection.Name = "btnPickConnection";
 			this.btnPickConnection.Size = new System.Drawing.Size(23, 22);
+			this.btnPickConnection.Text = "Anbindeleitungen ändern";
 			this.btnPickConnection.Click += new System.EventHandler(this.btnPickConnection_Click);
 			// 
 			// planPanel
@@ -206,9 +208,14 @@ namespace Europlan.Common {
 			// 
 			// connectionPlanner
 			// 
+			this.connectionPlanner.AddFirstCircuit = true;
+			this.connectionPlanner.AddOtherCircuits = true;
+			this.connectionPlanner.AddRuecklauf = true;
+			this.connectionPlanner.AddVorlauf = true;
 			this.connectionPlanner.Mode = Europlan.Common.ConnectionPlanner.ConnectionMode.CM_NONE;
 			this.connectionPlanner.PlanCeiling = false;
 			this.connectionPlanner.PlanFloor = true;
+			this.connectionPlanner.Product = null;
 			// 
 			// ConnectionPlannerForm
 			// 

@@ -1455,10 +1455,10 @@ namespace Europlan.Common {
 		/// </summary>
 		private bool CompareParameters(double oldFloorTempHeatRim, double oldFloorTempHeatRes, double oldHeatLoad, double oldPressureLossHeat,
 			double oldFloorTempCoolRim, double oldFloorTempCoolRes, double oldCoolLoad, double oldPressureLossCool, 
-			double oldCircuitLength,
+			double oldCircuitLength, double oldAreaRim, double oldAreaResidence,
 			double newFloorTempHeatRim, double newFloorTempHeatRes, double newHeatLoad, double newPressureLossHeat,
 			double newFloorTempCoolRim, double newFloorTempCoolRes, double newCoolLoad, double newPressureLossCool, 
-			double newCircuitLength,
+			double newCircuitLength, double newAreaRim, double newAreaResidence,
 			double requestedHeatLoad, double requestedCoolLoad, bool checkHeat, bool checkCool, bool ignoreResidence, bool ignoreRim, bool ignoreCircuits) {
 
 			bool oldOk = CheckHardParameters(oldFloorTempHeatRim, oldFloorTempHeatRes, oldPressureLossHeat, 
@@ -1476,11 +1476,19 @@ namespace Europlan.Common {
 				if (oldCovers != newCovers) {
 					return newCovers;
 				}
+				bool oldRimWidthOk = oldAreaRim * 2 <= oldAreaResidence;
+				bool newRimWidthOk = newAreaRim * 2 <= newAreaResidence;
+				if (oldRimWidthOk != newRimWidthOk) {
+					return newRimWidthOk;
+				}
 				if (oldCovers) {
 					// TODO implement better decisison which parameters should be used
 					/*if (checkCool) {
 						return newFloorTempCoolRes >= oldFloorTempCoolRes;
 					}*/
+					if (!oldRimWidthOk && newAreaRim != oldAreaRim) {
+						return newAreaRim < oldAreaRim;
+					}
 					return newFloorTempHeatRes <= oldFloorTempHeatRes;
 				} else {
 					/*if (checkCool) {
@@ -1686,10 +1694,14 @@ namespace Europlan.Common {
 			double bestPressureLossCool = double.MaxValue;
 			double bestHeatLoad = 0;
 			double bestCoolLoad = 0;
+			double bestAreaRim = 0;
+			double bestAreaResidence = 0;
 
 			this.CalculateHeatAndCoolFlow();
 			foreach (EurovalLayDistance ld in teilungen.Keys) {
 				foreach (Nullable<EurovalRimType> rt in teilungen[ld]) {
+					this.PlannedRimType = rt;
+					this.PlannedLayDistance = ld;
 					bool tryCalc = true;
 					int circuitCount = 1;
 					if (this.requestedCircuits.HasValue) {
@@ -1763,10 +1775,10 @@ namespace Europlan.Common {
 					bool useNew = !bestLaydistance.HasValue || bestLaydistance.Value == EurovalLayDistance.NONE ||
 						this.CompareParameters(bestFloorTempRimHeat, bestFloorTempResidenceHeat, bestHeatLoad, bestPressureLossHeat,
 							bestFloorTempRimCool, bestFloorTempResidenceCool, bestCoolLoad, bestPressureLossCool,
-							bestPipeLength,
+							bestPipeLength, bestAreaRim, bestAreaResidence,
 							this.PlannedFloorTemperatureHeatRim, this.PlannedFloorTemperatureHeatResidence, this.PlannedHeatLoad, this.PlannedDeltaRhoHeat,
 							this.PlannedFloorTemperatureCoolRim, this.PlannedFloorTemperatureCoolResidence, this.PlannedCoolLoad, this.PlannedDeltaRhoCool,
-							this.PlannedPipeLengthPerCircuit,
+							this.PlannedPipeLengthPerCircuit, this.PlannedAreaRim, this.PlannedAreaResidence,
 							requestedHeatLoad - this.PlannedHeatLoadAnbindung, requestedCoolLoad - this.PlannedCoolLoadAnbindung, calculateHeat, calculateCool, this.requestedLayDistance.HasValue, this.requestedRimType.HasValue, this.requestedCircuits.HasValue);
 					if (useNew) {
 						bestLaydistance = ld;
@@ -1781,6 +1793,8 @@ namespace Europlan.Common {
 						bestFloorTempResidenceCool = this.PlannedFloorTemperatureCoolResidence;
 						bestCoolLoad = this.PlannedCoolLoad;
 						bestPressureLossCool = this.PlannedDeltaRhoCool;
+						bestAreaRim = this.PlannedAreaRim;
+						bestAreaResidence = this.PlannedAreaResidence;
 					}
 				}
 			}
@@ -2368,9 +2382,10 @@ namespace Europlan.Common {
 			PossibleProductConnection possibleConnection = null;
 
 			foreach (GraphicalProductConnection connection in this.Connections) {
-				if (connection.FirstCircuit) {
+				if (connection.FirstCircuit && ((input && connection.Vorlauf) || (output && connection.Ruecklauf))) {
 					firstCircuit = false;
-				} else if (connection.OtherCircuits) {
+				}
+				if (connection.OtherCircuits && ((input && connection.Vorlauf) || (output && connection.Ruecklauf))) {
 					otherCircuits = false;
 				}
 			}
@@ -2385,6 +2400,10 @@ namespace Europlan.Common {
 			}
 			if (input && output) {
 				connectionsCount = connectionsCount * 2;
+			}
+
+			if (connectionsCount == 0) {
+				return null;
 			}
 
 			double width = connectionsCount * 0.05 * measure;

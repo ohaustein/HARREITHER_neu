@@ -1372,9 +1372,10 @@ namespace Europlan.Common {
 			PossibleProductConnection possibleConnection = null;
 
 			foreach (GraphicalProductConnection connection in this.Connections) {
-				if (connection.FirstCircuit) {
+				if (connection.FirstCircuit && ((input && connection.Vorlauf) || (output && connection.Ruecklauf))) {
 					firstCircuit = false;
-				} else if (connection.OtherCircuits) {
+				}
+				if (connection.OtherCircuits && ((input && connection.Vorlauf) || (output && connection.Ruecklauf))) {
 					otherCircuits = false;
 				}
 			}
@@ -1389,6 +1390,10 @@ namespace Europlan.Common {
 			}
 			if (input && output) {
 				connectionsCount = connectionsCount * 2;
+			}
+
+			if (connectionsCount == 0) {
+				return null;
 			}
 
 			double width = connectionsCount * 0.05 * measure;

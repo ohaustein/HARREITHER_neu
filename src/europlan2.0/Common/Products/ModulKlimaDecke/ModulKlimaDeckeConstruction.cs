@@ -33,12 +33,27 @@ namespace Europlan.Common {
 		public abstract void EndDrag(Point2D planPoint, Point pointInControl);
 		#endregion
 
-		private ModulKlimaDeckePlanner planner;
+		//private ModulKlimaDeckePlanner planner;
 
-		[XmlIgnore]
+		/*[XmlIgnore]
 		public ModulKlimaDeckePlanner Planner {
 			get { return this.planner; }
 			set { this.planner = value; }
+		}*/
+
+		private ModulKlimaDeckeProduct product;
+		private PlanPanel planPanel;
+
+		[XmlIgnore]
+		public ModulKlimaDeckeProduct Product {
+			set { this.product = value; }
+			get { return this.product; }
+		}
+
+		[XmlIgnore]
+		public PlanPanel PlanPanel {
+			set { this.planPanel = value; }
+			get { return this.planPanel; }
 		}
 		
 		[XmlIgnore]
@@ -48,12 +63,12 @@ namespace Europlan.Common {
 
 		protected Matrix4D AdditionalTransformation {
 			get {
-				if (this.Planner != null && 
-					this.Planner.Product != null && 
-					this.Planner.Product.AssociatedRoom != null && 
-					this.Planner.Product.AssociatedRoom.AssociatedPlan != null &&
-					this.Planner.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
-					return (this.Planner.Product.AssociatedRoom.AssociatedPlan as CadPlan).GdiGraphics3D.To2DTransform;
+				if (/*this.Planner != null && */
+					this.Product != null && 
+					this.Product.AssociatedRoom != null && 
+					this.Product.AssociatedRoom.AssociatedPlan != null &&
+					this.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
+					return (this.Product.AssociatedRoom.AssociatedPlan as CadPlan).GdiGraphics3D.To2DTransform;
 				} else {
 					return Matrix4D.Identity;
 				}
@@ -71,23 +86,32 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public virtual double RotationRelativeToPlan {
 			get {
-				if (this.Planner.Product.AssociatedRoom.AssociatedPlan is ImagePlan) {
-					return this.rotation + (this.Planner.Product.AssociatedRoom.AssociatedPlan as ImagePlan).Rotation;
-				} else if (this.Planner.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
+				if (this.Product.AssociatedRoom.AssociatedPlan is ImagePlan) {
+					return this.rotation + (this.Product.AssociatedRoom.AssociatedPlan as ImagePlan).Rotation;
+				} else if (this.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
 					return -this.rotation;
 				}
 				return this.rotation;
 			}
 			set {
-				if (this.Planner.Product.AssociatedRoom.AssociatedPlan is ImagePlan) {
-					this.Rotation = value - (this.Planner.Product.AssociatedRoom.AssociatedPlan as ImagePlan).Rotation;
-				} else if (this.Planner.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
+				if (this.Product.AssociatedRoom.AssociatedPlan is ImagePlan) {
+					this.Rotation = value - (this.Product.AssociatedRoom.AssociatedPlan as ImagePlan).Rotation;
+				} else if (this.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
 					this.Rotation = -value;
 				} else {
 					this.Rotation = value;
 				}
 			}
 		}
+
+		/*protected void RecalculateSchienen() {
+			if ( this.Product == null ||
+				this.Product.AssociatedRoom == null ||
+				this.Product.AssociatedRoom.AssociatedPlan == null) {
+				return;
+			}
+			this.RecalculateSchienen(this.Product);
+		}*/
 
 		public abstract void RecalculateSchienen();
 

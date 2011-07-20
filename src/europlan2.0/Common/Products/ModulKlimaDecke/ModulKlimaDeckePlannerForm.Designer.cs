@@ -36,6 +36,9 @@ namespace Europlan.Common.Products {
 			this.btnAddConnections = new System.Windows.Forms.ToolStripButton();
 			this.btnDeleteConnection = new System.Windows.Forms.ToolStripButton();
 			this.btnShowBeplankung = new System.Windows.Forms.ToolStripButton();
+			this.sepAnbindeleitungen = new System.Windows.Forms.ToolStripSeparator();
+			this.btnAddAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
+			this.btnSelectAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabs = new System.Windows.Forms.TabControl();
 			this.pageConstruction = new System.Windows.Forms.TabPage();
@@ -146,9 +149,6 @@ namespace Europlan.Common.Products {
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.modulKlimaDeckePlanner = new Europlan.Common.ModulKlimaDeckePlanner(this.components);
 			this.connectionPlanner = new Europlan.Common.ConnectionPlanner(this.components);
-			this.btnAddAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
-			this.btnSelectAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -180,7 +180,7 @@ namespace Europlan.Common.Products {
             this.btnAddConnections,
             this.btnDeleteConnection,
             this.btnShowBeplankung,
-            this.toolStripSeparator2,
+            this.sepAnbindeleitungen,
             this.btnAddAnbindeleitungen,
             this.btnSelectAnbindeleitungen});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
@@ -302,6 +302,33 @@ namespace Europlan.Common.Products {
 			this.btnShowBeplankung.Size = new System.Drawing.Size(74, 22);
 			this.btnShowBeplankung.Text = "Beplankung";
 			this.btnShowBeplankung.Click += new System.EventHandler(this.btnShowBeplankung_Click);
+			// 
+			// sepAnbindeleitungen
+			// 
+			this.sepAnbindeleitungen.Name = "sepAnbindeleitungen";
+			this.sepAnbindeleitungen.Size = new System.Drawing.Size(6, 25);
+			// 
+			// btnAddAnbindeleitungen
+			// 
+			this.btnAddAnbindeleitungen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnAddAnbindeleitungen.Image = ((System.Drawing.Image)(resources.GetObject("btnAddAnbindeleitungen.Image")));
+			this.btnAddAnbindeleitungen.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnAddAnbindeleitungen.Name = "btnAddAnbindeleitungen";
+			this.btnAddAnbindeleitungen.Size = new System.Drawing.Size(23, 22);
+			this.btnAddAnbindeleitungen.Text = "Anbindeleitungen hinzufügen";
+			this.btnAddAnbindeleitungen.Visible = false;
+			this.btnAddAnbindeleitungen.Click += new System.EventHandler(this.btnAddAnbindeleitungen_Click);
+			// 
+			// btnSelectAnbindeleitungen
+			// 
+			this.btnSelectAnbindeleitungen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnSelectAnbindeleitungen.Image = ((System.Drawing.Image)(resources.GetObject("btnSelectAnbindeleitungen.Image")));
+			this.btnSelectAnbindeleitungen.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSelectAnbindeleitungen.Name = "btnSelectAnbindeleitungen";
+			this.btnSelectAnbindeleitungen.Size = new System.Drawing.Size(23, 22);
+			this.btnSelectAnbindeleitungen.Text = "Anbindeleitungen ändern";
+			this.btnSelectAnbindeleitungen.Visible = false;
+			this.btnSelectAnbindeleitungen.Click += new System.EventHandler(this.btnSelectAnbindeleitungen_Click);
 			// 
 			// panel1
 			// 
@@ -1560,33 +1587,7 @@ namespace Europlan.Common.Products {
 			this.connectionPlanner.Mode = Europlan.Common.ConnectionPlanner.ConnectionMode.CM_NONE;
 			this.connectionPlanner.PlanCeiling = true;
 			this.connectionPlanner.PlanFloor = false;
-			// 
-			// btnAddAnbindeleitungen
-			// 
-			this.btnAddAnbindeleitungen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnAddAnbindeleitungen.Image = ((System.Drawing.Image)(resources.GetObject("btnAddAnbindeleitungen.Image")));
-			this.btnAddAnbindeleitungen.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnAddAnbindeleitungen.Name = "btnAddAnbindeleitungen";
-			this.btnAddAnbindeleitungen.Size = new System.Drawing.Size(23, 22);
-			this.btnAddAnbindeleitungen.Text = "Anbindeleitungen";
-			this.btnAddAnbindeleitungen.Visible = false;
-			this.btnAddAnbindeleitungen.Click += new System.EventHandler(this.btnAddAnbindeleitungen_Click);
-			// 
-			// btnSelectAnbindeleitungen
-			// 
-			this.btnSelectAnbindeleitungen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnSelectAnbindeleitungen.Image = ((System.Drawing.Image)(resources.GetObject("btnSelectAnbindeleitungen.Image")));
-			this.btnSelectAnbindeleitungen.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnSelectAnbindeleitungen.Name = "btnSelectAnbindeleitungen";
-			this.btnSelectAnbindeleitungen.Size = new System.Drawing.Size(23, 22);
-			this.btnSelectAnbindeleitungen.Text = "Anbindeleitungen ändern";
-			this.btnSelectAnbindeleitungen.Visible = false;
-			this.btnSelectAnbindeleitungen.Click += new System.EventHandler(this.btnSelectAnbindeleitungen_Click);
-			// 
-			// toolStripSeparator2
-			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+			this.connectionPlanner.Product = null;
 			// 
 			// ModulKlimaDeckePlannerForm
 			// 
@@ -1756,6 +1757,6 @@ namespace Europlan.Common.Products {
 		private ConnectionPlanner connectionPlanner;
 		private System.Windows.Forms.ToolStripButton btnAddAnbindeleitungen;
 		private System.Windows.Forms.ToolStripButton btnSelectAnbindeleitungen;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripSeparator sepAnbindeleitungen;
 	}
 }

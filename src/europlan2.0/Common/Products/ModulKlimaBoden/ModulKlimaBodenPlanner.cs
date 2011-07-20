@@ -102,7 +102,8 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				this.connectionDrawer.Floor = (this.product != null && this.product.AssociatedRoom != null) ? this.product.AssociatedRoom.AssociatedFloor : null;
+				this.connectionDrawer.Product = this.product;
+				//this.connectionDrawer.Floor = (this.product != null && this.product.AssociatedRoom != null) ? this.product.AssociatedRoom.AssociatedFloor : null;
 			}
 		}
 

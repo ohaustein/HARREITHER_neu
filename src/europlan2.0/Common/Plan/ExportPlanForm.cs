@@ -124,10 +124,14 @@ namespace Europlan.Common {
 							foreach (PlannedProduct pp in room.PlannedProducts) {
 								if (pp.Product.Type == Product.ProductType.DH) {
 									ceilingIsPlanned = true;
-									break;
+									if (floorIsPlanned) {
+										break;
+									}
 								} else if (pp.Product.Type == Product.ProductType.FBH) {
 									floorIsPlanned = true;
-									break;
+									if (ceilingIsPlanned) {
+										break;
+									}
 								}
 							}
 						}
@@ -244,7 +248,7 @@ namespace Europlan.Common {
 										if (p is ModulKlimaDeckeProduct) {
 											ModulKlimaDeckePlanner planner = new ModulKlimaDeckePlanner();
 											planner.Product = p as ModulKlimaDeckeProduct;
-											(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
+											//(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
 											(p as ModulKlimaDeckeProduct).GraphConstruction.RecalculateSchienen();
 											planner.HighlightRoomCoordinates = false;
 											// TODO
@@ -342,7 +346,7 @@ namespace Europlan.Common {
 											DxfLayer modulLayer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaDeckeProduct), model);
 											ModulKlimaDeckePlanner planner = new ModulKlimaDeckePlanner();
 											planner.Product = p as ModulKlimaDeckeProduct;
-											(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
+											//(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
 											(p as ModulKlimaDeckeProduct).GraphConstruction.RecalculateSchienen();
 											planner.HighlightRoomCoordinates = false;
 											// TODO

@@ -31,8 +31,8 @@ namespace Europlan.Common {
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnExport = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.btnPick = new System.Windows.Forms.ToolStripButton();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
+			this.btnPick = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnWall = new System.Windows.Forms.ToolStripButton();
 			this.btnObstacle = new System.Windows.Forms.ToolStripButton();
@@ -41,7 +41,7 @@ namespace Europlan.Common {
 			this.btnConnection = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnUseHelplines = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+			this.sepAnbindeleitungen = new System.Windows.Forms.ToolStripSeparator();
 			this.btnAddAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
 			this.btnSelectAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSubmenu = new System.Windows.Forms.ToolStrip();
@@ -241,7 +241,7 @@ namespace Europlan.Common {
             this.btnConnection,
             this.toolStripSeparator5,
             this.btnUseHelplines,
-            this.toolStripSeparator6,
+            this.sepAnbindeleitungen,
             this.btnAddAnbindeleitungen,
             this.btnSelectAnbindeleitungen});
 			this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
@@ -293,6 +293,16 @@ namespace Europlan.Common {
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
 			// 
+			// btnMove
+			// 
+			this.btnMove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
+			this.btnMove.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnMove.Name = "btnMove";
+			this.btnMove.Size = new System.Drawing.Size(23, 22);
+			this.btnMove.Text = "Ausschnitt verschieben";
+			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+			// 
 			// btnPick
 			// 
 			this.btnPick.Checked = true;
@@ -304,16 +314,6 @@ namespace Europlan.Common {
 			this.btnPick.Size = new System.Drawing.Size(23, 22);
 			this.btnPick.Text = "Objekte bearbeiten";
 			this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
-			// 
-			// btnMove
-			// 
-			this.btnMove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
-			this.btnMove.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnMove.Name = "btnMove";
-			this.btnMove.Size = new System.Drawing.Size(23, 22);
-			this.btnMove.Text = "Ausschnitt verschieben";
-			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
 			// 
 			// toolStripSeparator2
 			// 
@@ -367,7 +367,7 @@ namespace Europlan.Common {
 			this.btnConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnConnection.Name = "btnConnection";
 			this.btnConnection.Size = new System.Drawing.Size(23, 22);
-			this.btnConnection.Text = "Anbindeleitungen";
+			this.btnConnection.Text = "Anbindeleitungen hinzufügen";
 			this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
 			// 
 			// toolStripSeparator5
@@ -387,10 +387,10 @@ namespace Europlan.Common {
 			this.btnUseHelplines.Text = "An Hilfslinine ausrichten";
 			this.btnUseHelplines.Click += new System.EventHandler(this.btnUseHelplines_Click);
 			// 
-			// toolStripSeparator6
+			// sepAnbindeleitungen
 			// 
-			this.toolStripSeparator6.Name = "toolStripSeparator6";
-			this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+			this.sepAnbindeleitungen.Name = "sepAnbindeleitungen";
+			this.sepAnbindeleitungen.Size = new System.Drawing.Size(6, 25);
 			// 
 			// btnAddAnbindeleitungen
 			// 
@@ -2635,6 +2635,6 @@ namespace Europlan.Common {
 		private ConnectionPlanner connectionPlanner;
 		private System.Windows.Forms.ToolStripButton btnAddAnbindeleitungen;
 		private System.Windows.Forms.ToolStripButton btnSelectAnbindeleitungen;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+		private System.Windows.Forms.ToolStripSeparator sepAnbindeleitungen;
 	}
 }

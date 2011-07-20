@@ -129,13 +129,15 @@ namespace Europlan.Common {
 			}
 		}
 
-		public DistributorList GetAllAvailableDistributors() {
+		public DistributorList GetAllAvailableDistributors(bool addUsableFromOtherFloors) {
 			DistributorList list = new DistributorList();
 			list.AddRange(this.distributors);
-			foreach (Floor f in Project.Instance.Floors) {
-				foreach (Distributor d in f.Distributors) {
-					if (d.AdditionalFloors.Contains(this) && !list.Contains(d)) {
-						list.Add(d);
+			if (addUsableFromOtherFloors) {
+				foreach (Floor f in Project.Instance.Floors) {
+					foreach (Distributor d in f.Distributors) {
+						if (d.AdditionalFloors.Contains(this) && !list.Contains(d)) {
+							list.Add(d);
+						}
 					}
 				}
 			}

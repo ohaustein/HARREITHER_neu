@@ -105,7 +105,8 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				this.connectionDrawer.Floor = (this.product != null && this.product.AssociatedRoom != null) ? this.product.AssociatedRoom.AssociatedFloor : null;
+				this.connectionDrawer.Product = this.product;
+				//this.connectionDrawer.Floor = (this.product != null && this.product.AssociatedRoom != null) ? this.product.AssociatedRoom.AssociatedFloor : null;
 			}
 		}
 
@@ -251,10 +252,7 @@ namespace Europlan.Common {
 		}
 		public event EventHandler<ListNeedsUpdateEventArgs> ListsNeedUpdate;
 
-		//private double breite = 0.1; // meter
-		//private double abstand = 0.5; // meter
-
-		public delegate void AddModuleDelegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added);
+		public delegate void AddModuleDelegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added, out KlimaFlaechenModul addedModule, out KlimaFlaechenList rowOfAddedModul, KlimaFlaechenModul lastAddedModul, KlimaFlaechenList rowOfLastAddedModul);
 			//Graphics g, Matrix4D additionalTransformation, Matrix3D invRotation, double step, ref bool left, PossibleModulLane lane, Point2D borderLeftOrigin, ref double y, bool bottomUp, double start, double end);
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
@@ -347,7 +345,9 @@ namespace Europlan.Common {
 					g.DrawPolygon(Pens.Red, drawArea);
 
 					int count = 0;
-					this.AddModulesForLayoutArea(delegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added) {
+					this.AddModulesForLayoutArea(delegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added, out KlimaFlaechenModul addedModul, out KlimaFlaechenList rowOfAddedModul, KlimaFlaechenModul lastAddedModul, KlimaFlaechenList rowOfLastAddedModul) {
+						addedModul = null;
+						rowOfAddedModul = null;
 						added = this.TryDrawModule(g, additionalTransformation, ref y, start, end, step, ref left, this.layoutAddAreaBottomUp, invRotation, lane, borderLeftOrigin);
 						if (added) {
 							count++;
@@ -464,6 +464,10 @@ namespace Europlan.Common {
 			double moduleHeightTolerance = 0.0001 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			//double moduleHeightTolerance = 0;
 
+			KlimaFlaechenModul lastAddedModul = null;
+			KlimaFlaechenModul addedModul = null;
+			KlimaFlaechenList rowOfLastAddedModul = null;
+			KlimaFlaechenList rowOfAddedModul = null;
 			if (alignRectangle) {
 				// rectangle aligned to schienen
 				Segment2D topSeg = new Segment2D(rotation.Transform(this.layoutAddArea[0]), rotation.Transform(this.layoutAddArea[3]));
@@ -482,8 +486,10 @@ namespace Europlan.Common {
 					if (Line2D.Intersects(new Line2D(borderLeftOrigin, new Vector2D(0, 1)), topSeg) && Line2D.Intersects(new Line2D(borderRighOrigin, new Vector2D(0, 1)), topSeg)) {
 						if (this.layoutAddAreaBottomUp) {
 							for (double y = start - step; y > end; y -= step) {
-								doIt(ref y, start, end, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added);
+								doIt(ref y, start, end, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added, out addedModul, out rowOfAddedModul, lastAddedModul, rowOfLastAddedModul);
 								if (added) {
+									lastAddedModul = addedModul;
+									rowOfLastAddedModul = rowOfAddedModul;
 									if (laneCount == 0) {
 										newRows++;
 									}
@@ -496,8 +502,10 @@ namespace Europlan.Common {
 							}
 						} else {
 							for (double y = start; y < end - step; y += step) {
-								doIt(ref y, start, end, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added);
+								doIt(ref y, start, end, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added, out addedModul, out rowOfAddedModul, lastAddedModul, rowOfLastAddedModul);
 								if (added) {
+									lastAddedModul = addedModul;
+									rowOfLastAddedModul = rowOfAddedModul;
 									if (laneCount == 0) {
 										newRows++;
 									}
@@ -544,15 +552,19 @@ namespace Europlan.Common {
 							}
 							if (this.layoutAddAreaBottomUp) {
 								for (double y = bottom - step; y > top; y -= step) {
-									doIt(ref y, top, bottom, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added);
+									doIt(ref y, top, bottom, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added, out addedModul, out rowOfAddedModul, lastAddedModul, rowOfLastAddedModul);
 									if (added) {
+										lastAddedModul = addedModul;
+										rowOfLastAddedModul = rowOfAddedModul;
 										count++;
 									}
 								}
 							} else {
 								for (double y = top; y < bottom - step; y += step) {
-									doIt(ref y, top, bottom, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added);
+									doIt(ref y, top, bottom, step - moduleHeightTolerance, ref left, invRotation, lane, borderLeftOrigin, out added, out addedModul, out rowOfAddedModul, lastAddedModul, rowOfLastAddedModul);
 									if (added) {
+										lastAddedModul = addedModul;
+										rowOfLastAddedModul = rowOfAddedModul;
 										count++;
 									}
 								}
@@ -715,7 +727,9 @@ namespace Europlan.Common {
 			return false;
 		}
 
-		private bool TryAddModule(Matrix4D additionalTransformation, ref double y, double start, double end, double step, ref bool left, bool bottomUp, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, Dictionary<PossibleModulLane ,KlimaFlaechenList> laneToRowMapping, ModulDeckeSubArea subArea, KlimaFlaechenList row, List<KlimaFlaechenModul> modulesAdded, bool tryToFindRow, bool onlyAddToExistingHks) {
+		private bool TryAddModule(Matrix4D additionalTransformation, ref double y, double start, double end, double step, ref bool left, bool bottomUp, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, Dictionary<PossibleModulLane, KlimaFlaechenList> laneToRowMapping, ModulDeckeSubArea subArea, KlimaFlaechenList row, List<KlimaFlaechenModul> modulesAdded, bool tryToFindRow, bool onlyAddToExistingHks, out KlimaFlaechenModul addedModul, out KlimaFlaechenList rowOfAddedModul, KlimaFlaechenModul lastAddedModul, KlimaFlaechenList rowOfLastAddedModul, ModulDeckeCircuit circuitToAdd) {
+			addedModul = lastAddedModul;
+			rowOfAddedModul = rowOfLastAddedModul;
 			double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			foreach (FreeModulLaneArea area in lane.GetFreeAreas(this.product, null)) {
 				if (!this.alignRectangle || this.optimalLayout) {
@@ -740,10 +754,12 @@ namespace Europlan.Common {
 										if (modulInLane.modul.GraphPositionInLan < modul.GraphPositionInLan && modulInLane.modul.GraphPositionInLan > bestPosBefore) {
 											bestPosBefore = modulInLane.modul.GraphPositionInLan;
 											usedRow = modulInLane.row;
+											circuitToAdd = modulInLane.circuit;
 										}
 										if (usedRow == null && modulInLane.modul.GraphPositionInLan > modul.GraphPositionInLan && modulInLane.modul.GraphPositionInLan < bestPosAfter) {
 											bestPosAfter = modulInLane.modul.GraphPositionInLan;
 											usedRow = modulInLane.row;
+											circuitToAdd = modulInLane.circuit;
 										}
 									}
 								} else if (row != null) {
@@ -761,7 +777,29 @@ namespace Europlan.Common {
 									}
 									usedRow.List.Add(modul);
 									modulesAdded.Add(modul);
+									addedModul = modul;
+									rowOfAddedModul = usedRow;
 									left = !left;
+									if (addedModul != lastAddedModul && rowOfAddedModul == rowOfLastAddedModul) {
+										int tmp;
+										Point2D output1 = lastAddedModul.GetOutputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+										Point2D input1 = addedModul.GetInputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+
+										Point2D output2 = addedModul.GetOutputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+										Point2D input2 = lastAddedModul.GetInputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+
+										if ((output1 - input1).GetLength() <= (output2 - input2).GetLength()) {
+											if (rowOfAddedModul.Links == null) {
+												rowOfAddedModul.Links = new List<KlimaFlaechenModulVerbindung>();
+											}
+											rowOfAddedModul.Links.Add(new KlimaFlaechenModulVerbindung(lastAddedModul, addedModul, new Point2D[] { output1, input1 }, circuitToAdd, Project.Instance.GetPlannedProduct(this.product)));
+										} else {
+											if (rowOfAddedModul.Links == null) {
+												rowOfAddedModul.Links = new List<KlimaFlaechenModulVerbindung>();
+											}
+											rowOfAddedModul.Links.Add(new KlimaFlaechenModulVerbindung(addedModul, lastAddedModul, new Point2D[] { output2, input2 }, circuitToAdd, Project.Instance.GetPlannedProduct(this.product)));
+										}
+									}
 									return true;
 								} else {
 									return false;
@@ -787,8 +825,26 @@ namespace Europlan.Common {
 							laneToRowMapping.Add(lane, usedRow);
 						}
 						usedRow.List.Add(modul);
+						addedModul = modul;
+						rowOfAddedModul = usedRow;
 
 						left = !left;
+						if (addedModul != lastAddedModul && rowOfAddedModul == rowOfLastAddedModul) {
+							int tmp;
+							ModulDeckeCircuit circuit = this.product.GetCircuitForModul(addedModul, out tmp);
+
+							Point2D output1 = lastAddedModul.GetOutputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+							Point2D input1 = addedModul.GetInputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+
+							Point2D output2 = addedModul.GetOutputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+							Point2D input2 = lastAddedModul.GetInputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+
+							if ((output1 - input1).GetLength() <= (output2 - input2).GetLength()) {
+								rowOfAddedModul.Links.Add(new KlimaFlaechenModulVerbindung(lastAddedModul, addedModul, new Point2D[] { output1, input1 }, circuit, Project.Instance.GetPlannedProduct(this.product)));
+							} else {
+								rowOfAddedModul.Links.Add(new KlimaFlaechenModulVerbindung(addedModul, lastAddedModul, new Point2D[] { output2, input2 }, circuit, Project.Instance.GetPlannedProduct(this.product)));
+							}
+						}
 						return true;
 					}
 				}
@@ -1484,6 +1540,7 @@ namespace Europlan.Common {
 					ModulDeckeCircuit newCircuit = null;
 					ModulDeckeSubArea oldSubArea = null;
 					KlimaFlaechenList oldRow = null;
+					ModulDeckeCircuit circuitToAdd = this.highlightCircuit;
 					bool onlyAddToExisting = false;
 					if (this.highlightCircuit == null && highlightSubArea == null && highlightRow == null) {
 						if (this.product.Connections != null && this.product.Connections.Count > 0) {
@@ -1499,6 +1556,7 @@ namespace Europlan.Common {
 						newCircuit.CircuitColor = this.GetNewCircuitColor();
 						newSubArea = newCircuit.SubAreas[0];
 						newSubArea.Rows.Clear();
+						circuitToAdd = newCircuit;
 					} else if (this.highlightSubArea == null && highlightRow == null) {
 						newSubArea = new ModulDeckeSubArea();
 						newSubArea.Rows.Clear();
@@ -1509,8 +1567,8 @@ namespace Europlan.Common {
 					}
 					Dictionary<PossibleModulLane, KlimaFlaechenList> laneToRowMapping = new Dictionary<PossibleModulLane, KlimaFlaechenList>();
 					List<KlimaFlaechenModul> modulesAdded = new List<KlimaFlaechenModul>();
-					int count = this.AddModulesForLayoutArea(delegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added) {
-						added = this.TryAddModule(this.ConnectedPlanPanel.PlanTransformation, ref y, start, end, step, ref left, this.layoutAddAreaBottomUp, invRotation, lane, borderLeftOrigin, laneToRowMapping, (newSubArea != null ? newSubArea : oldSubArea), oldRow, modulesAdded, this.automaticRows, onlyAddToExisting);
+					int count = this.AddModulesForLayoutArea(delegate(ref double y, double start, double end, double step, ref bool left, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, out bool added, out KlimaFlaechenModul addedModul, out KlimaFlaechenList rowOfAddedModul, KlimaFlaechenModul lastAddedModul, KlimaFlaechenList rowOfLastAddedModul) {
+						added = this.TryAddModule(this.ConnectedPlanPanel.PlanTransformation, ref y, start, end, step, ref left, this.layoutAddAreaBottomUp, invRotation, lane, borderLeftOrigin, laneToRowMapping, (newSubArea != null ? newSubArea : oldSubArea), oldRow, modulesAdded, this.automaticRows, onlyAddToExisting, out addedModul, out rowOfAddedModul, lastAddedModul, rowOfLastAddedModul, circuitToAdd);
 					});
 					if (this.UpdateNewCount != null) {
 						this.UpdateNewCount(this, new UpdateNewCountArgs(0));

@@ -46,21 +46,19 @@ namespace Europlan.Common {
 		public List<Point2D> CeilingCoordinatesAkustik {
 			get {
 				//return base.CeilingCoordinates;
-				if (this.Planner == null || this.Planner.Product == null || this.Planner.Product.AssociatedRoom == null || this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
+				if (/*this.Planner == null ||*/ this.Product == null || this.Product.AssociatedRoom == null || this.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
 					return null;
 				}
-				Polygon2D coords = new Polygon2D(this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse);
-				if (this.Planner == null || this.Planner.Product == null ||
-					this.Planner.Product.AssociatedRoom == null ||
-					this.Planner.Product.AssociatedRoom.AssociatedPlan == null ||
-					this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
+				Polygon2D coords = new Polygon2D(this.Product.AssociatedRoom.CeilingCoordinatesToUse);
+				if (this.Product.AssociatedRoom.AssociatedPlan == null ||
+					this.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
 					return coords;
 				}
 
 				if (!coords.IsClockwise()) {
 					coords.Reverse();
 				}
-				coords.RightSet(this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value * this.randfries);
+				coords.RightSet(this.Product.AssociatedRoom.AssociatedPlan.Measure.Value * this.randfries);
 				return coords;
 			}
 		}

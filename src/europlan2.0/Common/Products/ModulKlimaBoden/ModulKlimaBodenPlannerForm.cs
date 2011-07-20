@@ -340,6 +340,7 @@ namespace Europlan.Common.Products {
 				this.btnDeleteConnection.Visible = true;
 				this.btnAddAnbindeleitungen.Visible = true;
 				this.btnSelectAnbindeleitungen.Visible = true;
+				this.sepAnbindeleitungen.Visible = true;
 				if (!this.btnAddModules.Checked && !this.btnSelectModule.Checked && !this.btnMove.Checked) {
 					this.planPanel.Mode = PlanMode.PM_MOVE;
 					this.modulKlimaBodenPlanner.Mode = ModulKlimaBodenPlanner.KlimaBodenMode.KDM_NONE;
@@ -353,6 +354,7 @@ namespace Europlan.Common.Products {
 				this.btnDeleteConnection.Visible = false;
 				this.btnAddAnbindeleitungen.Visible = false;
 				this.btnSelectAnbindeleitungen.Visible = false;
+				this.sepAnbindeleitungen.Visible = false;
 				if (!this.btnConstruction.Checked && !this.btnMove.Checked) {
 					this.planPanel.Mode = PlanMode.PM_MOVE;
 					this.modulKlimaBodenPlanner.Mode = ModulKlimaBodenPlanner.KlimaBodenMode.KDM_NONE;

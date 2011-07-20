@@ -827,7 +827,7 @@ namespace Europlan.Common {
 
 		private void btnWallApply_Click(object sender, EventArgs e) {
 			GraphicalWall wall = SelectedObject as GraphicalWall;
-			if (wall.WallId != txtWallConstruction.Text || Math.Round((decimal)wall.GetWallWidth() * 100, 0) != numWallHorizontal.Value) {
+			if (Math.Round((decimal)wall.GetWallWidth() * 100, 0) != numWallHorizontal.Value) {
 				if (IsChangeAllowed()) {
 					wall.WallId = txtWallConstruction.Text;
 					wall.SetWallWidth((double)numWallHorizontal.Value / 100.0);

@@ -32,20 +32,21 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override List<Point2D> CeilingCoordinates {
 			get {
-				if (this.Planner == null || this.Planner.Product == null || this.Planner.Product.AssociatedRoom == null || this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
+				if (/*this.Planner == null ||*/ this.Product == null || this.Product.AssociatedRoom == null || this.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
 					return null;
 				}
-				return this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse;
+				return this.Product.AssociatedRoom.CeilingCoordinatesToUse;
 			}
 		}
 
 		public override void RecalculateSchienen() {
-			if (this.Planner == null || this.Planner.Product == null ||
-				this.Planner.Product.AssociatedRoom == null ||
+			if (/*this.Planner == null ||*/ this.Product == null ||
+				this.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
-				this.Planner.Product.AssociatedRoom.AssociatedPlan == null) {
+				this.Product.AssociatedRoom.AssociatedPlan == null) {
 				return;
 			}
+			List<Point2D> ceilingCoordinates = this.CeilingCoordinates;
 			Matrix3D matrix = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0);
 
 			Point2D tmp;
@@ -53,7 +54,7 @@ namespace Europlan.Common {
 			double minX = double.MaxValue;
 			double maxY = double.MinValue;
 			double minY = double.MaxValue;
-			foreach (Point2D point in this.CeilingCoordinates) {
+			foreach (Point2D point in ceilingCoordinates) {
 				tmp = matrix.Transform(point);
 				if (tmp.X > maxX) {
 					maxX = tmp.X;
@@ -73,7 +74,8 @@ namespace Europlan.Common {
 			this.schienen.Clear();
 			this.possibleLanes.Clear();
 
-			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			//double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			double measure = this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			double increment = (SchienenBreite + schienenAbstand) * measure;
 			double curPos = (minX + maxX - SchienenBreite * measure) / 2.0 + (offset * measure);
 			double curYPos = (minY + maxY) / 2.0 + (offsetY * measure);
@@ -120,7 +122,7 @@ namespace Europlan.Common {
 				}
 			}
 
-			Polygon2D room = new Polygon2D(this.CeilingCoordinates);
+			Polygon2D room = new Polygon2D(ceilingCoordinates);
 			if (room.IsClockwise()) {
 				room = room.GetReverse();
 			}
@@ -146,10 +148,11 @@ namespace Europlan.Common {
 		private List<PossibleModulLaneArea> GetPossibleModuleAreasInLane(Polygon2D lane) {
 			Line2D rightBorder = new Line2D(lane[0], lane[0] - lane[1]);
 			Line2D leftBorder = new Line2D(lane[3], lane[3] - lane[2]);
-			List<LineSegment> unusableSegments = GetUnusableSegments(leftBorder, rightBorder, this.CeilingCoordinates, false, 0.15);
-			if (this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
+			List<Point2D> ceilingCoordinates = this.Product.AssociatedRoom.CeilingCoordinatesToUse;
+			List<LineSegment> unusableSegments = GetUnusableSegments(leftBorder, rightBorder, ceilingCoordinates, false, 0.15);
+			if (this.Product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
 				List<LineSegment> tmp;
-				foreach (List<Point2D> unusedArea in this.Planner.Product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
+				foreach (List<Point2D> unusedArea in this.Product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
 					tmp = GetUnusableSegments(leftBorder, rightBorder, unusedArea, true, 0);
 					unusableSegments.AddRange(tmp);
 					LineSegment.NormalizeSegments(unusableSegments);
@@ -248,7 +251,7 @@ namespace Europlan.Common {
 			if (wallDist != 0) {
 				List<LineSegment> segmentsUsable = LineSegment.InvertSegments(segmentsUnusable);
 				int i = 0;
-				double wallDistAdd = wallDist * this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+				double wallDistAdd = wallDist * this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 				while (i < segmentsUsable.Count) {
 					segmentsUsable[i].Start += wallDistAdd;
 					segmentsUsable[i].End -= wallDistAdd;
@@ -486,7 +489,7 @@ namespace Europlan.Common {
 		protected GraphicsPath GetCeilingPath() {
 			List<PointF> transformedPoints = new List<PointF>();
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
-			foreach (Point2D point in this.Planner.Product.AssociatedRoom.CeilingCoordinatesToUse) {
+			foreach (Point2D point in this.Product.AssociatedRoom.CeilingCoordinatesToUse) {
 				Point2D tmp = additionalTransformation.TransformTo2D(point);
 				transformedPoints.Add(new PointF((float)tmp.X, (float)tmp.Y));
 			}
@@ -535,16 +538,16 @@ namespace Europlan.Common {
 		}
 
 		public override void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode, bool drawBeplankung) {
-			if (this.Planner == null ||
-				this.Planner.Product == null ||
-				this.Planner.Product.AssociatedRoom == null ||
+			if (/*this.Planner == null ||*/
+				this.Product == null ||
+				this.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
 				this.CeilingCoordinates.Count < 3 ||
-				this.Planner.Product.AssociatedRoom.AssociatedPlan == null ||
-				this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
+				this.Product.AssociatedRoom.AssociatedPlan == null ||
+				this.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
 				return;
 			}
-			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			double measure = this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
 
 			/*double minX, maxX, minY, maxY;*/
@@ -601,16 +604,16 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintDxf(DxfModel model, DxfLayer constructionLayer, DxfLayer beplankungLayer, bool drawBeplankung) {
-			if (this.Planner == null ||
-				this.Planner.Product == null ||
-				this.Planner.Product.AssociatedRoom == null ||
+			if (/*this.Planner == null ||*/
+				this.Product == null ||
+				this.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
 				this.CeilingCoordinates.Count < 3 ||
-				this.Planner.Product.AssociatedRoom.AssociatedPlan == null ||
-				this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
+				this.Product.AssociatedRoom.AssociatedPlan == null ||
+				this.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
 				return;
 			}
-			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+			double measure = this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 
 			Polygon2D clipRegion = new Polygon2D();
 			foreach (Point2D point in this.CeilingCoordinates) {
@@ -698,13 +701,13 @@ namespace Europlan.Common {
 		}
 
 		public override bool HitTest(Point2D planPoint, Point pointInControl) {
-			if (this.Planner == null ||
-				this.Planner.Product == null ||
-				this.Planner.Product.AssociatedRoom == null ||
+			if (/*this.Planner == null ||*/
+				this.Product == null ||
+				this.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
 				this.CeilingCoordinates.Count < 3 ||
-				this.Planner.Product.AssociatedRoom.AssociatedPlan == null ||
-				this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
+				this.Product.AssociatedRoom.AssociatedPlan == null ||
+				this.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
 				return false;
 			}
 
@@ -736,11 +739,11 @@ namespace Europlan.Common {
 
 		public override void MoveDrag(Point2D planPoint, Point pointInControl) {
 			Vector2D move = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0).Transform(planPoint - startPlanPoint);
-			this.Offset = startOffset + (move.X / this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
-			this.OffsetY = startOffsetY + (move.Y / this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
+			this.Offset = startOffset + (move.X / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
+			this.OffsetY = startOffsetY + (move.Y / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
 
-			if (this.Planner.ConnectedPlanPanel != null) {
-				this.Planner.ConnectedPlanPanel.InvalidateGraphics();
+			if (this.PlanPanel != null) {
+				this.PlanPanel.InvalidateGraphics();
 			}
 		}
 

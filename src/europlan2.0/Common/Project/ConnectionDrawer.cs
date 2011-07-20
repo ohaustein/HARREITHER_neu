@@ -28,11 +28,21 @@ namespace Europlan.Common {
 
 		private List<Product> productsInFloor = new List<Product>();
 		//private Dictionary<Distributor, DistributorPositioner> distributorsInFloor = new Dictionary<Distributor, DistributorPositioner>();
+		private Product product = null;
 		private Floor floor = null;
 		private bool planFloor = true;
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public Floor Floor {
+		public Product Product {
+			get { return this.product; }
+			set {
+				this.product = value;
+				this.Floor = (this.product != null && this.product.AssociatedRoom != null) ? this.product.AssociatedRoom.AssociatedFloor : null;
+			}
+		}
+
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		private Floor Floor {
 			get { return this.floor; }
 			set {
 				this.floor = value;
@@ -171,7 +181,7 @@ namespace Europlan.Common {
 				g.Clip = clip;
 				foreach (Product product in this.productsInFloor) {
 					foreach (GraphicalProductConnection connection in product.Connections) {
-						connection.Draw(g, additionalTransformation, connection.Vorlauf ? Color.Red : Color.Blue, this.Plan.Measure.Value, false);
+						connection.Draw(g, additionalTransformation, this.Plan.Measure.Value, false, this.product != product);
 					}
 				}
 			}

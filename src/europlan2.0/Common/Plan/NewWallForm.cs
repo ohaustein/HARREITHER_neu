@@ -40,8 +40,19 @@ namespace Europlan.Common {
 				wallId = Project.Instance.HithermCompactWalls[0].Id;
 				this.lblConstructionName.Text = Project.Instance.HithermCompactWalls[0].Name;
 			} else {
-				wallId = Project.Instance.HithermWalls[0].Id;
-				this.lblConstructionName.Text = Project.Instance.HithermWalls[0].Name;
+				bool found = false;
+				foreach (HithermWall hw in Project.Instance.HithermWalls) {
+					if (hw.Id == "STW02") {
+						found = true;
+						wallId = hw.Id;
+						this.lblConstructionName.Text = hw.Name;
+						break;
+					}
+				}
+				if (!found && Project.Instance.HithermWalls.Count > 0) {
+					wallId = Project.Instance.HithermWalls[0].Id;
+					this.lblConstructionName.Text = Project.Instance.HithermWalls[0].Name;
+				}
 			}
 			this.txtConstruction.Text = wallId;
 

@@ -38,7 +38,7 @@ namespace Europlan.Common.Products {
 			this.btnSetText = new System.Windows.Forms.ToolStripButton();
 			this.btnFontPlus = new System.Windows.Forms.ToolStripButton();
 			this.btnFontMinus = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.sepAnbindeleitungen = new System.Windows.Forms.ToolStripSeparator();
 			this.btnAddAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
 			this.btnSelectAnbindeleitungen = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
@@ -158,7 +158,7 @@ namespace Europlan.Common.Products {
             this.btnSetText,
             this.btnFontPlus,
             this.btnFontMinus,
-            this.toolStripSeparator2,
+            this.sepAnbindeleitungen,
             this.btnAddAnbindeleitungen,
             this.btnSelectAnbindeleitungen});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
@@ -289,10 +289,10 @@ namespace Europlan.Common.Products {
 			this.btnFontMinus.Text = "Textbox verkleinern";
 			this.btnFontMinus.Click += new System.EventHandler(this.btnFontMinus_Click);
 			// 
-			// toolStripSeparator2
+			// sepAnbindeleitungen
 			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+			this.sepAnbindeleitungen.Name = "sepAnbindeleitungen";
+			this.sepAnbindeleitungen.Size = new System.Drawing.Size(6, 25);
 			// 
 			// btnAddAnbindeleitungen
 			// 
@@ -301,7 +301,7 @@ namespace Europlan.Common.Products {
 			this.btnAddAnbindeleitungen.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnAddAnbindeleitungen.Name = "btnAddAnbindeleitungen";
 			this.btnAddAnbindeleitungen.Size = new System.Drawing.Size(23, 22);
-			this.btnAddAnbindeleitungen.Text = "Anbindeleitungen";
+			this.btnAddAnbindeleitungen.Text = "Anbindeleitungen hinzufügen";
 			this.btnAddAnbindeleitungen.Click += new System.EventHandler(this.btnAddAnbindeleitungen_Click);
 			// 
 			// btnSelectAnbindeleitungen
@@ -1457,7 +1457,7 @@ namespace Europlan.Common.Products {
 		private System.Windows.Forms.ToolStripButton btnSetText;
 		private System.Windows.Forms.ToolStripButton btnAddAnbindeleitungen;
 		private System.Windows.Forms.ToolStripButton btnSelectAnbindeleitungen;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripSeparator sepAnbindeleitungen;
 		private ConnectionPlanner connectionPlanner;
 		private System.Windows.Forms.ToolStripButton btnFontPlus;
 		private System.Windows.Forms.ToolStripButton btnFontMinus;
