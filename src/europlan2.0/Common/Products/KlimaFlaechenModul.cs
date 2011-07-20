@@ -664,6 +664,34 @@ namespace Europlan.Common {
 			return link;
 		}
 
+		/*public KlimaFlaechenSubAreaVerbindung GetSubAreaInputLink(Circuit circuit) {
+			if (circuit is ModulDeckeCircuit) {
+				ModulDeckeCircuit mdc = circuit as ModulDeckeCircuit;
+				foreach (KlimaFlaechenSubAreaVerbindung verbindung in mdc.Links) {
+					foreach (KlimaFlaechenModul kfm in verbindung.End) {
+						if (kfm == this) {
+							return verbindung;
+						}
+					}
+				}
+			}
+			return null;
+		}
+
+		public KlimaFlaechenSubAreaVerbindung GetSubAreaOutputLink(Circuit circuit) {
+			if (circuit is ModulDeckeCircuit) {
+				ModulDeckeCircuit mdc = circuit as ModulDeckeCircuit;
+				foreach (KlimaFlaechenSubAreaVerbindung verbindung in mdc.Links) {
+					foreach (KlimaFlaechenModul kfm in verbindung.Start) {
+						if (kfm == this) {
+							return verbindung;
+						}
+					}
+				}
+			}
+			return null;
+		}*/
+
 		public KlimaFlaechenModulVerbindung GetOutputLink(Circuit circuit, bool invertXAxis) {
 			//if (invertXAxis) {
 			//	return GetInputLink(circuit, false);

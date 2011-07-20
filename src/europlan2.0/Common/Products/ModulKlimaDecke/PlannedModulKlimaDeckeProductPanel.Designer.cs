@@ -80,6 +80,7 @@ namespace Europlan.Common {
 			this.groupBox10 = new System.Windows.Forms.GroupBox();
 			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
 			this.groupBox9 = new System.Windows.Forms.GroupBox();
+			this.btnGraphicalAnbindleitungen = new System.Windows.Forms.Button();
 			this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
 			this.btnDistributor = new System.Windows.Forms.Button();
 			this.lblDistributor = new System.Windows.Forms.Label();
@@ -960,6 +961,7 @@ namespace Europlan.Common {
 			// 
 			this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox9.Controls.Add(this.btnGraphicalAnbindleitungen);
 			this.groupBox9.Controls.Add(this.chkStellAntriebe);
 			this.groupBox9.Controls.Add(this.btnDistributor);
 			this.groupBox9.Controls.Add(this.lblDistributor);
@@ -969,6 +971,17 @@ namespace Europlan.Common {
 			this.groupBox9.Size = new System.Drawing.Size(886, 41);
 			this.groupBox9.TabIndex = 0;
 			this.groupBox9.TabStop = false;
+			// 
+			// btnGraphicalAnbindleitungen
+			// 
+			this.btnGraphicalAnbindleitungen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnGraphicalAnbindleitungen.Location = new System.Drawing.Point(723, 12);
+			this.btnGraphicalAnbindleitungen.Name = "btnGraphicalAnbindleitungen";
+			this.btnGraphicalAnbindleitungen.Size = new System.Drawing.Size(157, 23);
+			this.btnGraphicalAnbindleitungen.TabIndex = 8;
+			this.btnGraphicalAnbindleitungen.Text = "grafische Anbindeleitungen";
+			this.btnGraphicalAnbindleitungen.UseVisualStyleBackColor = true;
+			this.btnGraphicalAnbindleitungen.Click += new System.EventHandler(this.btnGraphicalAnbindleitungen_Click);
 			// 
 			// chkStellAntriebe
 			// 
@@ -1109,7 +1122,7 @@ namespace Europlan.Common {
 			// btnGraphical
 			// 
 			this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnGraphical.Location = new System.Drawing.Point(687, 32);
+			this.btnGraphical.Location = new System.Drawing.Point(675, 32);
 			this.btnGraphical.Name = "btnGraphical";
 			this.btnGraphical.Size = new System.Drawing.Size(167, 23);
 			this.btnGraphical.TabIndex = 169;
@@ -1131,7 +1144,7 @@ namespace Europlan.Common {
 			this.lstError.Location = new System.Drawing.Point(3, 557);
 			this.lstError.Name = "lstError";
 			this.lstError.ShowGroups = false;
-			this.lstError.Size = new System.Drawing.Size(766, 30);
+			this.lstError.Size = new System.Drawing.Size(754, 30);
 			this.lstError.TabIndex = 168;
 			this.lstError.UseCompatibleStateImageBehavior = false;
 			this.lstError.View = System.Windows.Forms.View.Details;
@@ -1679,7 +1692,7 @@ namespace Europlan.Common {
 			// btnConnectionPipes
 			// 
 			this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnConnectionPipes.Location = new System.Drawing.Point(687, 3);
+			this.btnConnectionPipes.Location = new System.Drawing.Point(675, 3);
 			this.btnConnectionPipes.Name = "btnConnectionPipes";
 			this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
 			this.btnConnectionPipes.TabIndex = 73;
@@ -1739,7 +1752,7 @@ namespace Europlan.Common {
 			this.dgvModules.Boden = false;
 			this.dgvModules.Location = new System.Drawing.Point(340, 43);
 			this.dgvModules.Name = "dgvModules";
-			this.dgvModules.Size = new System.Drawing.Size(442, 212);
+			this.dgvModules.Size = new System.Drawing.Size(430, 212);
 			this.dgvModules.TabIndex = 34;
 			this.dgvModules.GridContentChanged += new Europlan.Common.KlimaFlaechenModulGridContentChangedHandler(this.dgvModules_GridContentChanged);
 			// 
@@ -2023,5 +2036,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.RadioButton rbLayoutGraphical;
 		private System.Windows.Forms.RadioButton rbLayoutTable;
 		private System.Windows.Forms.Panel panel3;
+		private System.Windows.Forms.Button btnGraphicalAnbindleitungen;
 	}
 }

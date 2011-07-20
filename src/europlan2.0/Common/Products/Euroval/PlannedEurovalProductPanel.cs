@@ -1535,6 +1535,11 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void btnGraphicalAnbindleitungen_Click(object sender, EventArgs e) {
+			ConnectionPlannerForm form = new ConnectionPlannerForm(this.product.Product, false);
+			form.ShowDialog();
+		}
+
 		/*private void rbExtendedCorrections_CheckedChanged(object sender, EventArgs e) {
 			if (this.ignoreCorrections == 0) {
 				(this.product.Product as EurovalProduct).PlannedCorrections = rbExtendedCorrections.Checked;

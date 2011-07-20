@@ -201,6 +201,22 @@ namespace Europlan.Common {
 						foreach (KlimaFlaechenList kfl in sa.Rows) {
 							foreach (KlimaFlaechenModul kfm in modules) {
 								if (kfl.List.Contains(kfm)) {
+									KlimaFlaechenModulVerbindung link = kfm.GetInputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
+									if (link != null) {
+										kfl.Links.Remove(link);
+									}
+									link = kfm.GetOutputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
+									if (link != null) {
+										kfl.Links.Remove(link);
+									}
+									KlimaFlaechenSubAreaVerbindung saLink = kfm.GetSubareaInputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
+									if (saLink != null) {
+										dc.Links.Remove(saLink);
+									}
+									saLink = kfm.GetSubareaOutputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
+									if (saLink != null) {
+										dc.Links.Remove(saLink);
+									}
 									kfl.List.Remove(kfm);
 								}
 							}

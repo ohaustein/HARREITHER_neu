@@ -32,6 +32,23 @@ namespace Europlan.Common {
 			this.UpdateToolbar(null);
 		}
 
+		public ConnectionPlannerForm(Product product, bool ceiling) {
+			InitializeComponent();
+
+			this.connectionPlanner.Product = product;
+			this.connectionPlanner.PlanCeiling = ceiling;
+
+			/*foreach (Distributor distributor in floor.GetAllAvailableDistributors()) {
+				foreach (Distributor.GraphicalRepresentation rep in distributor.GraphicalRepresentations) {
+					if (rep.floorId == floor.Id) {
+						this.distributors.Add(distributor, rep);
+					}
+				}
+			}*/
+
+			this.UpdateToolbar(null);
+		}
+
 		private void UpdateControls() {
 		}
 

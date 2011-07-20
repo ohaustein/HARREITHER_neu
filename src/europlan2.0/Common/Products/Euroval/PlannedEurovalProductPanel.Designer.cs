@@ -113,6 +113,7 @@ namespace Europlan.Common {
 			this.label14 = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
 			this.grpResults = new System.Windows.Forms.GroupBox();
+			this.btnGraphical = new System.Windows.Forms.Button();
 			this.btnConnectionPipes = new System.Windows.Forms.Button();
 			this.lblSpreizungCool = new System.Windows.Forms.Label();
 			this.lblSpreizungHeat = new System.Windows.Forms.Label();
@@ -187,7 +188,7 @@ namespace Europlan.Common {
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.lblTitle = new System.Windows.Forms.Label();
-			this.btnGraphical = new System.Windows.Forms.Button();
+			this.btnGraphicalAnbindleitungen = new System.Windows.Forms.Button();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -1151,6 +1152,7 @@ namespace Europlan.Common {
 			// 
 			this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox9.Controls.Add(this.btnGraphicalAnbindleitungen);
 			this.groupBox9.Controls.Add(this.chkStellAntriebe);
 			this.groupBox9.Controls.Add(this.btnDistributor);
 			this.groupBox9.Controls.Add(this.lblDistributor);
@@ -1490,6 +1492,17 @@ namespace Europlan.Common {
 			this.grpResults.TabIndex = 0;
 			this.grpResults.TabStop = false;
 			this.grpResults.Text = "Berechnungsergebnisse";
+			// 
+			// btnGraphical
+			// 
+			this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnGraphical.Location = new System.Drawing.Point(713, 39);
+			this.btnGraphical.Name = "btnGraphical";
+			this.btnGraphical.Size = new System.Drawing.Size(167, 23);
+			this.btnGraphical.TabIndex = 173;
+			this.btnGraphical.Text = "Grafische Auslegung öffnen";
+			this.btnGraphical.UseVisualStyleBackColor = true;
+			this.btnGraphical.Click += new System.EventHandler(this.btnGraphical_Click);
 			// 
 			// btnConnectionPipes
 			// 
@@ -2155,16 +2168,16 @@ namespace Europlan.Common {
 			this.lblTitle.TabIndex = 81;
 			this.lblTitle.Text = "Euroval®";
 			// 
-			// btnGraphical
+			// btnGraphicalAnbindleitungen
 			// 
-			this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnGraphical.Location = new System.Drawing.Point(713, 39);
-			this.btnGraphical.Name = "btnGraphical";
-			this.btnGraphical.Size = new System.Drawing.Size(167, 23);
-			this.btnGraphical.TabIndex = 173;
-			this.btnGraphical.Text = "Grafische Auslegung öffnen";
-			this.btnGraphical.UseVisualStyleBackColor = true;
-			this.btnGraphical.Click += new System.EventHandler(this.btnGraphical_Click);
+			this.btnGraphicalAnbindleitungen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnGraphicalAnbindleitungen.Location = new System.Drawing.Point(723, 12);
+			this.btnGraphicalAnbindleitungen.Name = "btnGraphicalAnbindleitungen";
+			this.btnGraphicalAnbindleitungen.Size = new System.Drawing.Size(157, 23);
+			this.btnGraphicalAnbindleitungen.TabIndex = 9;
+			this.btnGraphicalAnbindleitungen.Text = "grafische Anbindeleitungen";
+			this.btnGraphicalAnbindleitungen.UseVisualStyleBackColor = true;
+			this.btnGraphicalAnbindleitungen.Click += new System.EventHandler(this.btnGraphicalAnbindleitungen_Click);
 			// 
 			// PlannedEurovalProductPanel
 			// 
@@ -2370,5 +2383,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.RadioButton rbLayoutGraphical;
 		private System.Windows.Forms.Label lblLayoutType;
 		private System.Windows.Forms.Button btnGraphical;
+		private System.Windows.Forms.Button btnGraphicalAnbindleitungen;
 	}
 }

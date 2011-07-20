@@ -1113,5 +1113,10 @@ namespace Europlan.Common {
 				this.ProjectChanged(this);
 			}
 		}
+
+		private void btnGraphicalAnbindleitungen_Click(object sender, EventArgs e) {
+			ConnectionPlannerForm form = new ConnectionPlannerForm(this.product.Product, false);
+			form.ShowDialog();
+		}
 	}
 }

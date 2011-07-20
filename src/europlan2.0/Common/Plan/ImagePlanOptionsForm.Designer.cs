@@ -78,7 +78,8 @@ namespace Europlan.Common {
 			this.btnRotateLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRotateLeft.Name = "btnRotateLeft";
 			this.btnRotateLeft.Size = new System.Drawing.Size(23, 22);
-			this.btnRotateLeft.Text = "btnRotateLeft";
+			this.btnRotateLeft.Text = "5° gegen den Uhrzeigersinn drehen";
+			this.btnRotateLeft.ToolTipText = "5° gegen den Uhrzeigersinn drehen";
 			this.btnRotateLeft.Click += new System.EventHandler(this.btnRotateLeft_Click);
 			// 
 			// btnRotateLeftSmall
@@ -89,7 +90,8 @@ namespace Europlan.Common {
 			this.btnRotateLeftSmall.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRotateLeftSmall.Name = "btnRotateLeftSmall";
 			this.btnRotateLeftSmall.Size = new System.Drawing.Size(23, 22);
-			this.btnRotateLeftSmall.Text = "btnRotateLeft";
+			this.btnRotateLeftSmall.Text = "0.1° gegen den Uhrzeigersinn drehen";
+			this.btnRotateLeftSmall.ToolTipText = "0.1° gegen den Uhrzeigersinn drehen";
 			this.btnRotateLeftSmall.Click += new System.EventHandler(this.btnRotateLeftSmall_Click);
 			// 
 			// btnRotateRightSmall
@@ -100,7 +102,8 @@ namespace Europlan.Common {
 			this.btnRotateRightSmall.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRotateRightSmall.Name = "btnRotateRightSmall";
 			this.btnRotateRightSmall.Size = new System.Drawing.Size(23, 22);
-			this.btnRotateRightSmall.Text = "toolStripButton2";
+			this.btnRotateRightSmall.Text = "0.1° im Uhrzeigersinn drehen";
+			this.btnRotateRightSmall.ToolTipText = "0.1° im Uhrzeigersinn drehen";
 			this.btnRotateRightSmall.Click += new System.EventHandler(this.btnRotateRightSmall_Click);
 			// 
 			// btnRotateRight
@@ -111,7 +114,8 @@ namespace Europlan.Common {
 			this.btnRotateRight.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnRotateRight.Name = "btnRotateRight";
 			this.btnRotateRight.Size = new System.Drawing.Size(23, 22);
-			this.btnRotateRight.Text = "toolStripButton2";
+			this.btnRotateRight.Text = "5° im Uhrzeigersinn drehen";
+			this.btnRotateRight.ToolTipText = "5° im Uhrzeigersinn drehen";
 			this.btnRotateRight.Click += new System.EventHandler(this.btnRotateRight_Click);
 			// 
 			// toolStripSeparator1
@@ -127,7 +131,8 @@ namespace Europlan.Common {
 			this.btnZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnZoomIn.Name = "btnZoomIn";
 			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomIn.Text = "toolStripButton1";
+			this.btnZoomIn.Text = "Heranzoomen";
+			this.btnZoomIn.ToolTipText = "Heranzoomen";
 			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
 			// 
 			// btnZoomOut
@@ -138,7 +143,8 @@ namespace Europlan.Common {
 			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnZoomOut.Name = "btnZoomOut";
 			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomOut.Text = "toolStripButton1";
+			this.btnZoomOut.Text = "Herauszoomen";
+			this.btnZoomOut.ToolTipText = "Herauszoomen";
 			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// toolStripSeparator2

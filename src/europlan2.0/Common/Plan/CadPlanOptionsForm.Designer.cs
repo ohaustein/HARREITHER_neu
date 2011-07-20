@@ -25,8 +25,8 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CadPlanOptionsForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
-			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
+			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnDistance = new System.Windows.Forms.ToolStripButton();
@@ -35,9 +35,9 @@ namespace Europlan.Common {
 			this.btnSetLength = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.lstLayers = new System.Windows.Forms.ListView();
-			this.cadPanel = new Europlan.Common.CadPanel();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.btnOk = new System.Windows.Forms.Button();
+			this.cadPanel = new Europlan.Common.CadPanel();
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
@@ -61,17 +61,6 @@ namespace Europlan.Common {
 			this.toolStrip.TabIndex = 1;
 			this.toolStrip.Text = "toolStrip";
 			// 
-			// btnZoomOut
-			// 
-			this.btnZoomOut.AutoToolTip = false;
-			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
-			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnZoomOut.Name = "btnZoomOut";
-			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomOut.Text = "zoomOut";
-			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
-			// 
 			// btnZoomIn
 			// 
 			this.btnZoomIn.AutoToolTip = false;
@@ -80,8 +69,21 @@ namespace Europlan.Common {
 			this.btnZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnZoomIn.Name = "btnZoomIn";
 			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomIn.Text = "zoomIn";
+			this.btnZoomIn.Text = "Heranzoomen";
+			this.btnZoomIn.ToolTipText = "Heranzoomen";
 			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+			// 
+			// btnZoomOut
+			// 
+			this.btnZoomOut.AutoToolTip = false;
+			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
+			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnZoomOut.Name = "btnZoomOut";
+			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
+			this.btnZoomOut.Text = "Herauszoomen";
+			this.btnZoomOut.ToolTipText = "Heranzoomen";
+			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -163,17 +165,6 @@ namespace Europlan.Common {
 			this.lstLayers.UseCompatibleStateImageBehavior = false;
 			this.lstLayers.View = System.Windows.Forms.View.List;
 			// 
-			// cadPanel
-			// 
-			this.cadPanel.BackColor = System.Drawing.Color.White;
-			this.cadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.cadPanel.Location = new System.Drawing.Point(200, 25);
-			this.cadPanel.Name = "cadPanel";
-			this.cadPanel.Size = new System.Drawing.Size(468, 377);
-			this.cadPanel.TabIndex = 2;
-			this.cadPanel.EndPointSelected += new System.EventHandler<Europlan.Common.CadPanel.EndPointSelectedArgs>(this.cadPanel_EndPointSelected);
-			this.cadPanel.StartPointSelected += new System.EventHandler<Europlan.Common.CadPanel.StartPointSelectedArgs>(this.cadPanel_StartPointSelected);
-			// 
 			// panel2
 			// 
 			this.panel2.Controls.Add(this.btnOk);
@@ -193,6 +184,17 @@ namespace Europlan.Common {
 			this.btnOk.Text = "Übernehmen";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+			// 
+			// cadPanel
+			// 
+			this.cadPanel.BackColor = System.Drawing.Color.White;
+			this.cadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cadPanel.Location = new System.Drawing.Point(200, 25);
+			this.cadPanel.Name = "cadPanel";
+			this.cadPanel.Size = new System.Drawing.Size(468, 377);
+			this.cadPanel.TabIndex = 2;
+			this.cadPanel.EndPointSelected += new System.EventHandler<Europlan.Common.CadPanel.EndPointSelectedArgs>(this.cadPanel_EndPointSelected);
+			this.cadPanel.StartPointSelected += new System.EventHandler<Europlan.Common.CadPanel.StartPointSelectedArgs>(this.cadPanel_StartPointSelected);
 			// 
 			// CadPlanOptionsForm
 			// 

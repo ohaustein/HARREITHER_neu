@@ -173,6 +173,7 @@ namespace Europlan.Common {
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.lblTitle = new System.Windows.Forms.Label();
+			this.btnGraphicalAnbindleitungen = new System.Windows.Forms.Button();
 			this.grpPowerArea.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabs.SuspendLayout();
@@ -998,6 +999,7 @@ namespace Europlan.Common {
 			// 
 			this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox9.Controls.Add(this.btnGraphicalAnbindleitungen);
 			this.groupBox9.Controls.Add(this.chkStellAntriebe);
 			this.groupBox9.Controls.Add(this.btnDistributor);
 			this.groupBox9.Controls.Add(this.lblDistributor);
@@ -1973,6 +1975,17 @@ namespace Europlan.Common {
 			this.lblTitle.TabIndex = 83;
 			this.lblTitle.Text = "Modul Klima-Boden";
 			// 
+			// btnGraphicalAnbindleitungen
+			// 
+			this.btnGraphicalAnbindleitungen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnGraphicalAnbindleitungen.Location = new System.Drawing.Point(723, 12);
+			this.btnGraphicalAnbindleitungen.Name = "btnGraphicalAnbindleitungen";
+			this.btnGraphicalAnbindleitungen.Size = new System.Drawing.Size(157, 23);
+			this.btnGraphicalAnbindleitungen.TabIndex = 9;
+			this.btnGraphicalAnbindleitungen.Text = "grafische Anbindeleitungen";
+			this.btnGraphicalAnbindleitungen.UseVisualStyleBackColor = true;
+			this.btnGraphicalAnbindleitungen.Click += new System.EventHandler(this.btnGraphicalAnbindleitungen_Click);
+			// 
 			// PlannedModulKlimaBodenProductPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2157,5 +2170,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.RadioButton rbLayoutTable;
 		private System.Windows.Forms.RadioButton rbLayoutGraphical;
 		private System.Windows.Forms.Label lblLayoutType;
+		private System.Windows.Forms.Button btnGraphicalAnbindleitungen;
 	}
 }
