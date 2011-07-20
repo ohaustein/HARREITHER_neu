@@ -33,10 +33,11 @@ namespace Europlan.Common {
 			}
 		}
 
-		public RoomPickerForm(Room room) {
+		public RoomPickerForm(Room room, bool isCeiling) {
 			InitializeComponent();
 			this.SetLanguage();
 			this.roomPicker.Room = room;
+			this.roomPicker.IsCeiling = isCeiling;
 			this.panel.Plan = room.AssociatedPlan;
 			this.panel.Mode = PlanMode.PM_MOVE;
 			switch (Product.ConfigPlanMeasureEnum) {

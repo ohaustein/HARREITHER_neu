@@ -42,6 +42,7 @@ namespace Europlan.Common {
 		private List<Point2D> coordsPickedSoFar = new List<Point2D>();
 		private bool inDesign = false;
 		private bool unsavedChanges = false;
+		private bool isCeiling = false;
 		private Nullable<Point2D> referencePoint = null;
 		private Point2D newUnheatedAreaPos = new Point2D();
 		private Size2D newUnheatedAreaSize = new Size2D();
@@ -99,6 +100,39 @@ namespace Europlan.Common {
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			Graphics g = e.Graphics;
+
+			List<List<Point2D>> otherRoomCoordinates = new List<List<Point2D>>();
+			foreach (Room r in this.room.AssociatedFloor.Rooms) {
+				if (r.Id != this.room.Id) {
+					if (IsCeiling) {
+						if (r.CeilingCoordinatesToUse != null && r.CeilingCoordinatesToUse.Count > 2) {
+							otherRoomCoordinates.Add(r.CeilingCoordinatesToUse);
+						}
+					} else {
+						if (r.RoomCoordinates != null && r.RoomCoordinates.Count > 2) {
+							otherRoomCoordinates.Add(r.RoomCoordinates);
+						}
+					}
+				}
+			}
+			foreach (List<Point2D> otherRoomCoordinate in otherRoomCoordinates) {
+				GraphicsPath fillPath = new GraphicsPath();
+				fillPath.StartFigure();
+				PointF[] array = new PointF[otherRoomCoordinate.Count];
+				int i = 0;
+				foreach (Point2D point in otherRoomCoordinate) {
+					Point2D tmp = additionalTransformation.TransformTo2D(point);
+					array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
+				}
+				fillPath.AddPolygon(array);
+				fillPath.CloseFigure();
+				Color c = Color.FromArgb(80, Color.DarkRed);
+				Brush b = new SolidBrush(c);
+				g.FillPath(b, fillPath);
+				g.DrawPath(new Pen(b), fillPath);
+				fillPath.Dispose();
+			}
+
 			if (roomCoordinates.Count > 2) {
 				GraphicsPath fillPath = new GraphicsPath();
 				fillPath.StartFigure();
@@ -671,6 +705,11 @@ namespace Europlan.Common {
 
 		public bool UnsavedChanges {
 			get { return this.unsavedChanges; }
+		}
+
+		public bool IsCeiling {
+			get { return this.isCeiling; }
+			set { this.isCeiling = value; }
 		}
 
 		public List<Point2D> RoomCoordinates {

@@ -391,19 +391,19 @@ namespace Europlan.Common {
 		}
 
 		private void btnGeometry_Click(object sender, EventArgs e) {
-			openGeometryPicker(room.RoomCoordinates, room.RoomUnusedAreaCoordinates , true);
+			openGeometryPicker(room.RoomCoordinates, room.RoomUnusedAreaCoordinates , true, false);
 			UpdateControl(false);
 		}
 
 		private void btnCeilingGeometry_Click(object sender, EventArgs e) {
-			openGeometryPicker(room.CeilingCoordinates, room.CeilingUnusedAreaCoordinates, false);
+			openGeometryPicker(room.CeilingCoordinates, room.CeilingUnusedAreaCoordinates, false, true);
 			UpdateControl(false);
 		}
 
-		private void openGeometryPicker(List<Point2D> coordinates, List<List<Point2D>> unusedCoordinates, bool calculateRoomArea) {
+		private void openGeometryPicker(List<Point2D> coordinates, List<List<Point2D>> unusedCoordinates, bool calculateRoomArea, bool isCeiling) {
 			Plan plan = this.room.AssociatedPlan;
 			if (plan != null) {
-				RoomPickerForm form = new RoomPickerForm(this.room);
+				RoomPickerForm form = new RoomPickerForm(this.room, isCeiling);
 				if (room.PlanSettingX.HasValue &&
 					room.PlanSettingY.HasValue &&
 					room.PlanSettingScale.HasValue &&
