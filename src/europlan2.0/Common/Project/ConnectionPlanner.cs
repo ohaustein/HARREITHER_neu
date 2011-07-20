@@ -378,8 +378,12 @@ namespace Europlan.Common {
 						List<Point2D> vertices = new List<Point2D>();
 						vertices.AddRange(this.newConnectionVertices);
 						vertices.AddRange(this.nextConnectionPoints);
-						GraphicalProductConnection tmpConnection = new GraphicalProductConnection(Project.Instance.GetPlannedProduct(this.selectedProduct), null, vertices, this.addFirstCircuit, this.addOtherCircuits, 0, this.AddVorlauf, this.AddRuecklauf, Product.ProductType.REST);
-						tmpConnection.FinishedConnection = this.newConnectionEndsAtDistributor;
+						if (this.newConnectionStart.Distributor != null) {
+							vertices.Reverse();
+						}
+						Europlan.Common.Product productToUse = this.selectedProduct != null ? this.selectedProduct : this.product;
+						GraphicalProductConnection tmpConnection = new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productToUse), this.newConnectionStart.Distributor, vertices, this.addFirstCircuit, this.addOtherCircuits, 0, this.AddVorlauf, this.AddRuecklauf, Product.ProductType.REST);
+						tmpConnection.FinishedConnection = this.newConnectionEndsAtDistributor || this.newConnectionStart.Distributor != null;
 						//tmpConnection.Vertices.AddRange(this.newConnectionVertices);
 						//tmpConnection.Vertices.AddRange(this.nextConnectionPoints);
 						tmpConnection.Draw(g, additionalTransformation, this.Plan.Measure.Value, true, false);
@@ -485,6 +489,7 @@ namespace Europlan.Common {
 						} else if (endConnection.Product != null && this.newConnectionStart.Distributor != null) {
 							distributorConnection = this.newConnectionStart;
 							productConnection = endConnection;
+							this.newConnectionVertices.Reverse();
 							//vorlauf = this.newConnectionStartAtOutput;
 							ok = true;
 						} else {
@@ -496,11 +501,11 @@ namespace Europlan.Common {
 						List<int> openOutputs = distributorConnection.Distributor.GetOpenOutputs();
 						List<int> distributorIndices = new List<int>();
 						if (ok) {
-							if (this.selectedProduct.PlannedConnection == null || distributorConnection.Distributor != this.selectedProduct.PlannedConnection.Distributor) {
-								this.selectedProduct.PlannedConnection = new ProductConnection(distributorConnection.Distributor);
+							if (productConnection.Product.PlannedConnection == null || distributorConnection.Distributor != productConnection.Product.PlannedConnection.Distributor) {
+								productConnection.Product.PlannedConnection = new ProductConnection(distributorConnection.Distributor);
 							}
 							//productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.Circuits, distributorConnection.DistributorStartPosition, distributorConnection.DistributorCircuitCount, vorlauf, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
-							productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, this.newConnectionStart.ProductFirstCircuit, this.newConnectionStart.ProductOtherCircuits, distributorConnection.DistributorStartPosition, this.newConnectionStart.PossibleInput, this.newConnectionStart.PossibleOutput, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
+							productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.ProductFirstCircuit, productConnection.ProductOtherCircuits, distributorConnection.DistributorStartPosition, productConnection.PossibleInput, productConnection.PossibleOutput, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
 							this.newConnectionVertices = null;
 							this.newConnectionStart = null;
 							this.selectedCircuit = null;
@@ -661,14 +666,14 @@ namespace Europlan.Common {
 				PossibleProductConnection oldPossibleProductConnection = possibleProductConnection;
 				//possibleConnections = new List<PossibleConnection>();
 				possibleProductConnection = null;
-				//Europlan.Common.Product productToUse = this.selectedProduct != null ? this.selectedProduct : this.product;
-				if (this.newConnectionStart != null && this.selectedProduct != null && selectedDistributor == null) {
+				Europlan.Common.Product productToUse = this.selectedProduct != null ? this.selectedProduct : this.product;
+				if (/*this.newConnectionStart != null && this.selectedProduct != null*/ productToUse != null && selectedDistributor == null) {
 					foreach (Distributor d in this.GetAllDistributors()) {
 						//possibleConnections.AddRange(d.GetPossibleConnections(this.newConnectionStart == null || this.newConnectionStartAtOutput, this.newConnectionStart == null || !this.newConnectionStartAtOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, selectedProduct, selectedCircuit, this.floor));
 						//possibleProductConnection = d.GetPossibleProductConnection();
-						if (this.selectedProduct.Connections != null) {
+						if (productToUse.Connections != null) {
 							bool ok = true;
-							foreach (GraphicalProductConnection conn in this.selectedProduct.Connections) {
+							foreach (GraphicalProductConnection conn in productToUse.Connections) {
 								if (conn.Distributor != null && conn.Distributor != d) {
 									ok = false;
 									break;
@@ -678,9 +683,28 @@ namespace Europlan.Common {
 								continue;
 							}
 						}
-						possibleProductConnection = d.GetPossibleProductConnections(addInput, addOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, this.selectedProduct, this.floor, this.newConnectionStart.ProductCircuitCount);
-						if (possibleProductConnection != null) {
-							break;
+						bool addFirst = this.addFirstCircuit;
+						bool addOthers = this.addOtherCircuits;
+						foreach (GraphicalProductConnection conn in productToUse.Connections) {
+							if (conn.FirstCircuit) {
+								addFirst = false;
+							}
+							if (conn.OtherCircuits) {
+								addOthers = false;
+							}
+						}
+						int circuitCount = 0;
+						if (addFirst) {
+							circuitCount++;
+						}
+						if (addOthers) {
+							circuitCount += productToUse.PlannedCircuitCount - 1;
+						}
+						if (circuitCount > 0) {
+							possibleProductConnection = d.GetPossibleProductConnections(addInput, addOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, productToUse, this.floor, circuitCount);
+							if (possibleProductConnection != null) {
+								break;
+							}
 						}
 					}
 				}

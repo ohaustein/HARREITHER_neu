@@ -132,6 +132,7 @@ namespace Europlan.Common {
 			this.btnFirstCircuit.Name = "btnFirstCircuit";
 			this.btnFirstCircuit.Size = new System.Drawing.Size(23, 22);
 			this.btnFirstCircuit.Text = "erster Heizkreis";
+			this.btnFirstCircuit.Visible = false;
 			this.btnFirstCircuit.Click += new System.EventHandler(this.btnCircuits_Click);
 			// 
 			// btnOtherCircuits
@@ -145,6 +146,7 @@ namespace Europlan.Common {
 			this.btnOtherCircuits.Name = "btnOtherCircuits";
 			this.btnOtherCircuits.Size = new System.Drawing.Size(23, 22);
 			this.btnOtherCircuits.Text = "restliche Heizkreise";
+			this.btnOtherCircuits.Visible = false;
 			this.btnOtherCircuits.Click += new System.EventHandler(this.btnCircuits_Click);
 			// 
 			// toolStripSeparator3

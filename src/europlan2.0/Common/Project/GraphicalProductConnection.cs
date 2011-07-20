@@ -146,7 +146,7 @@ namespace Europlan.Common {
 				} else {
 					newVector = (oldVertex - newVertex);
 					newVector.Normalize();
-					if (newVector.X < 0) {
+					if (newVector.X < 0 || (newVector.X == 0 && newVector.Y < 0)) {
 						newVector.X = -newVector.X;
 						newVector.Y = -newVector.Y;
 					}
