@@ -436,19 +436,23 @@ namespace Europlan.Common {
 					maxWidth = Math.Max(maxWidth, g.MeasureString("AZ: ", font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString("RZ: ", font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString("HK: ", font).Width);
+					maxWidth = Math.Max(maxWidth, g.MeasureString("Rohrl.: ", font).Width);
 					maxHeight = Math.Max(maxHeight, g.MeasureString("Name: ", font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString("AZ: ", font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString("RZ: ", font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString("HK: ", font).Height);
+					maxHeight = Math.Max(maxHeight, g.MeasureString("Rohrl.: ", font).Height);
 
 					maxWidth = Math.Max(maxWidth, g.MeasureString(productName, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(az, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(rz, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(product.PlannedCircuitCount.ToString(), font).Width);
+					maxWidth = Math.Max(maxWidth, g.MeasureString(product.PlannedPipeLengthPerCircuit.ToString(), font).Width);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(productName, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(az, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(rz, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(product.PlannedCircuitCount.ToString(), font).Height);
+					maxHeight = Math.Max(maxHeight, g.MeasureString(product.PlannedPipeLengthPerCircuit.ToString(), font).Height);
 
 					Pen p;
 					if (this.connectedPlanPanel != null && this.connectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
@@ -469,11 +473,13 @@ namespace Europlan.Common {
 					PaintTextBox("AZ: ", font, pos, maxWidth, 0, maxHeight, 1, border, p, g, additionalTransformation);
 					PaintTextBox("RZ: ", font, pos, maxWidth, 0, maxHeight, 2, border, p, g, additionalTransformation);
 					PaintTextBox("HK: ", font, pos, maxWidth, 0, maxHeight, 3, border, p, g, additionalTransformation);
+					PaintTextBox("Rohrl.: ", font, pos, maxWidth, 0, maxHeight, 4, border, p, g, additionalTransformation);
 
 					PaintTextBox(productName, font, pos, maxWidth, 1, maxHeight, 0, border, p, g, additionalTransformation);
 					PaintTextBox(az, font, pos, maxWidth, 1, maxHeight, 1, border, p, g, additionalTransformation);
 					PaintTextBox(rz, font, pos, maxWidth, 1, maxHeight, 2, border, p, g, additionalTransformation);
 					PaintTextBox(product.PlannedCircuitCount.ToString(), font, pos, maxWidth, 1, maxHeight, 3, border, p, g, additionalTransformation);
+					PaintTextBox(product.PlannedPipeLengthPerCircuit.ToString(), font, pos, maxWidth, 1, maxHeight, 4, border, p, g, additionalTransformation);
 				}
 
 				path.Dispose();
@@ -1471,6 +1477,9 @@ namespace Europlan.Common {
 					text.Text = "HK: ";
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
+					text.Text = "Rohrl.: ";
+					maxWidth = Math.Max(maxWidth, text.BoxWidth);
+					maxHeight = Math.Max(maxHeight, text.BoxHeight);					
 
 					text.Text = productName;
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
@@ -1482,6 +1491,9 @@ namespace Europlan.Common {
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
 					text.Text = product.PlannedCircuitCount.ToString();
+					maxWidth = Math.Max(maxWidth, text.BoxWidth);
+					maxHeight = Math.Max(maxHeight, text.BoxHeight);
+					text.Text = product.PlannedPipeLengthPerCircuit.ToString();
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
 
@@ -1497,11 +1509,13 @@ namespace Europlan.Common {
 					PaintDxfTextBox("AZ: ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, -1, border, color, model, layer);
 					PaintDxfTextBox("RZ: ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, -2, border, color, model, layer);
 					PaintDxfTextBox("HK: ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, -3, border, color, model, layer);
+					PaintDxfTextBox("Rohrl.: ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, -4, border, color, model, layer);
 
 					PaintDxfTextBox(productName, "HarreitherStyle", pos, maxWidth, 1, maxHeight, 0, border, color, model, layer);
 					PaintDxfTextBox(az, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -1, border, color, model, layer);
 					PaintDxfTextBox(rz, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -2, border, color, model, layer);
 					PaintDxfTextBox(product.PlannedCircuitCount.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -3, border, color, model, layer);
+					PaintDxfTextBox(product.PlannedPipeLengthPerCircuit.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -4, border, color, model, layer);
 				}
 
 
