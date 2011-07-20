@@ -34,7 +34,7 @@ namespace Europlan.Common {
 			rbSchraege.Enabled = allowSchraege;
 
 			this.numWidth.Enabled = !autoGeneration;
-			this.numHeight.Value = (decimal)defaultHeight * 100.0;
+			this.numHeight.Value = (decimal)(defaultHeight * 100.0f);
 
 			if (isCompact) {
 				wallId = Project.Instance.HithermCompactWalls[0].Id;
