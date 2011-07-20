@@ -158,5 +158,10 @@ namespace Europlan.Common {
 			this.UpdateButtons();
 		}
 
+		public bool DrawOtherDistributorsInPlan {
+			get { return this.distributorPositioner.DrawOtherDistributorsInPlan; }
+			set { this.distributorPositioner.DrawOtherDistributorsInPlan = value; }
+		}
+
 	}
 }

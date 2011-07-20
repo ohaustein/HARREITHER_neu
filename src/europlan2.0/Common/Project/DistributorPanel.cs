@@ -266,6 +266,7 @@ namespace Europlan.Common {
 
 		private void btnGraphicalPosition_Click(object sender, EventArgs e) {
 			DistributorPositionerForm form = new DistributorPositionerForm(this.distributor, this.distributor.AssociatedFloor);
+			form.DrawOtherDistributorsInPlan = true;
 			form.ShowDialog();
 			if (form.UnsavedChanges) {
 				if (ProjectChanged != null) {
