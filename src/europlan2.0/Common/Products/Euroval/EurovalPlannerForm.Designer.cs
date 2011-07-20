@@ -833,7 +833,7 @@ namespace Europlan.Common.Products {
 			this.label36.Name = "label36";
 			this.label36.Size = new System.Drawing.Size(70, 26);
 			this.label36.TabIndex = 123;
-			this.label36.Text = "Rorhl.\nm";
+			this.label36.Text = "Rohrl.\nm";
 			this.label36.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// label37
