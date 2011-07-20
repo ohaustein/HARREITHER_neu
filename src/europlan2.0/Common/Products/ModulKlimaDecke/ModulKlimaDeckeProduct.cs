@@ -78,8 +78,8 @@ namespace Europlan.Common {
 		private static double rLambdaDach = 0.0; /* Deckenschicht; durch echte Konstruktion ersetzen! */
 		private static double atmt = 1.06; /* Fixwert laut Norm */
 		private static double b = 6.5; /* Fixwert laut Norm */
-		private static double leistungsFaktorHeizen = 0.95;
-		private static double leistungsFaktorKuehlen = 0.95;
+		private static double leistungsFaktorHeizen = 1.0;
+		private static double leistungsFaktorKuehlen = 1.0;
 
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
@@ -105,7 +105,7 @@ namespace Europlan.Common {
 		private static int maxDurchfluss = 240;
 		private static int maxModulesInRow = 20;
 		private static int maxModulesInParallel = 6;
-		private static int maxModulesInCircuit = 50;
+		private static int maxModulesInCircuit = 45;
 		private static double spreizungHeizMin = 4;
 		private static double spreizungHeizMax = 12;
 		private static double spreizungKuehlMin = 2;

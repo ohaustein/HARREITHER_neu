@@ -185,6 +185,7 @@ namespace Europlan.Common {
 		private void CalculateVerticesForDrawing(double measure) {
 			this.vorlaufVerticesForDrawing = new List<List<Point2D>>();
 			this.ruecklaufVerticesForDrawing = new List<List<Point2D>>();
+			double factor = CalculateFactor();
 			for (int i = 0; i < this.NrOfCircuits; i++) {
 				List<Point2D> vl = new List<Point2D>(), rl = new List<Point2D>();
 				double distVl = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - i * 2);
@@ -202,8 +203,8 @@ namespace Europlan.Common {
 					curVector = endPoint - startPoint;
 					curVector.Normalize();
 					moveVector = new Vector2D(curVector.Y, -curVector.X);
-					curLineVl = new Line2D(startPoint + moveVector * ((j < this.vertices.Count - 2 ? distVl : distVlFirst) * measure), curVector);
-					curLineRl = new Line2D(startPoint + moveVector * ((j < this.vertices.Count - 2 ? distRl : distRlFirst) * measure), curVector);
+					curLineVl = new Line2D(startPoint + moveVector * ((j < this.vertices.Count - 2 ? distVl : distVlFirst) * measure * factor), curVector);
+					curLineRl = new Line2D(startPoint + moveVector * ((j < this.vertices.Count - 2 ? distRl : distRlFirst) * measure * factor), curVector);
 					if (lastLineVl == null) {
 						vl.Add(curLineVl.Origin);
 					} else {
@@ -223,11 +224,38 @@ namespace Europlan.Common {
 					lastLineVl = curLineVl;
 					lastLineRl = curLineRl;
 				}
-				vl.Add(this.vertices[this.vertices.Count - 1] + moveVector * (distVlFirst * measure));
-				rl.Add(this.vertices[this.vertices.Count - 1] + moveVector * (distRlFirst * measure));
+				vl.Add(this.vertices[this.vertices.Count - 1] + moveVector * (distVlFirst * measure * factor));
+				rl.Add(this.vertices[this.vertices.Count - 1] + moveVector * (distRlFirst * measure * factor));
 				this.vorlaufVerticesForDrawing.Add(vl);
 				this.ruecklaufVerticesForDrawing.Add(rl);
 			}
+		}
+
+		private double CalculateFactor() {
+			return 1;
+			// TODO
+			double factor = 1;
+			if (this.Distributor != null && this.vertices != null && this.vertices.Count > 1 && this.Product != null) {
+				Nullable<Distributor.GraphicalRepresentation> distRep = null;
+				foreach (Distributor.GraphicalRepresentation gr in this.Distributor.GraphicalRepresentations) {
+					if (gr.floorId == this.Product.Product.AssociatedRoom.AssociatedFloor.Id) {
+						distRep = gr;
+						break;
+					}
+				}
+				if (distRep != null) {
+					Vector2D startVector = this.vertices[this.vertices.Count - 2] - this.vertices[this.vertices.Count - 1];
+					startVector.Normalize();
+					double angle = Math.Atan2(startVector.Y, startVector.X) * 180 / Math.PI;
+					angle = angle - distRep.Value.rotation;
+					if (angle >= 0 && angle < 180) {
+						factor = 1;
+					} else {
+						factor = -1;
+					}
+				}
+			}
+			return factor;
 		}
 
 		public void ResetCachedVerticesForDrawing() {
@@ -604,6 +632,9 @@ namespace Europlan.Common {
 		}
 
 		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool input) {
+			if (this.CalculateFactor() < 0) {
+				input = !input;
+			}
 			List<GraphicalConnectionAnbindungsPunkt> anbindungsPunkte = new List<GraphicalConnectionAnbindungsPunkt>();
 			if ((input && this.vorlauf) || (!input && this.ruecklauf)) {
 				Vector2D startVector = this.Vertices[1] - this.Vertices[0];
