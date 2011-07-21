@@ -94,6 +94,24 @@ namespace Europlan.Common {
 
 		private void btnPosition_Click(object sender, EventArgs e) {
 			if (!btnPosition.Checked) {
+				if (this.distributorPositioner.Distributor.AreProductsConnected) {
+					if (MessageBox.Show("An diesen Verteiler sind bereits grafische Anbindeleitunge angeschlossen. Wenn sie die Position des Verteilers ändern wollen, werden diese Anbindeleitungen gelöscht!", "Anbindeleitungen löschen", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) {
+						return;
+					}
+					foreach (Floor f in Project.Instance.Floors) {
+						foreach (Room r in f.Rooms) {
+							foreach (PlannedProduct pp in r.PlannedProducts) {
+								List<GraphicalProductConnection> connectionsToDelete = new List<GraphicalProductConnection>();
+								foreach (GraphicalProductConnection c in pp.Product.Connections) {
+									connectionsToDelete.Add(c);
+								}
+								foreach (GraphicalProductConnection c in connectionsToDelete) {
+									pp.Product.Connections.Remove(c);
+								}
+							}
+						}
+					}
+				}
 				this.distributorPositioner.Mode = DistributorPositioner.DistributorPositionerMode.DPM_POSITION;
 				this.panel.Mode = PlanMode.PM_SET_DISTRIBUTOR;
 				this.UpdateButtons();

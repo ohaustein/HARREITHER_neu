@@ -1150,6 +1150,8 @@ namespace Europlan.Common.Products {
 		}
 
 		private void ModulKlimaDeckePlannerForm_FormClosing(object sender, FormClosingEventArgs e) {
+			this.connectionPlanner.ReGenerateConnectionPipes();
+
 			SettingsKey settings = SettingsFile.Settings["ModulKlimaDeckePlannerForm"];
 			settings.StorePoint("Location", this.Location);
 			settings.StoreSize("Size", this.Size);

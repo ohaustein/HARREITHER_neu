@@ -822,5 +822,23 @@ namespace Europlan.Common {
 
 			return possibleConnection;
 		}
+
+		[XmlIgnore]
+		public bool AreProductsConnected {
+			get {
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						foreach (PlannedProduct pp in room.PlannedProducts) {
+							foreach (GraphicalProductConnection conn in pp.Product.Connections) {
+								if (conn.Distributor == this) {
+									return true;
+								}
+							}
+						}
+					}
+				}
+				return false;
+			}
+		}
 	}
 }

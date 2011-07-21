@@ -98,6 +98,7 @@ namespace Europlan.Common {
 			//        this.plan.DisabledLayers.Add(layer.Name);
 			//    }
 			//}
+			ConnectionPlanner.ReGenerateConnectionPipes(this.roomPicker.Room.AssociatedFloor);
 
 			SettingsKey settings = SettingsFile.Settings["CadPlanRoomPickerForm"];
 			settings.StorePoint("Location", this.Location);

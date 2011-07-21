@@ -389,6 +389,8 @@ namespace Europlan.Common.Products {
 		}
 
 		private void EurovalPlannerForm_FormClosing(object sender, FormClosingEventArgs e) {
+			this.connectionPlanner.ReGenerateConnectionPipes();
+
 			SettingsKey settings = SettingsFile.Settings["EurovalPlannerForm"];
 			settings.StorePoint("Location", this.Location);
 			settings.StoreSize("Size", this.Size);

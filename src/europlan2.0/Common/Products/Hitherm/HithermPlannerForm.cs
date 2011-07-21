@@ -46,6 +46,8 @@ namespace Europlan.Common {
 		}
 
 		private void HithermPlannerForm_FormClosing(object sender, FormClosingEventArgs e) {
+			this.connectionPlanner.ReGenerateConnectionPipes();
+
 			SettingsKey settings = SettingsFile.Settings["HithermPlannerForm"];
 			if (this.WindowState == FormWindowState.Normal) {
 				settings.StorePoint("Location", this.Location);

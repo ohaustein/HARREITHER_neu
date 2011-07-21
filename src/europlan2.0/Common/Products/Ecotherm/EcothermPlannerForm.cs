@@ -315,6 +315,8 @@ namespace Europlan.Common.Products {
 		}
 
 		private void EcothermPlannerForm_FormClosing(object sender, FormClosingEventArgs e) {
+			this.connectionPlanner.ReGenerateConnectionPipes();
+
 			SettingsKey settings = SettingsFile.Settings["EcothermPlannerForm"];
 			settings.StorePoint("Location", this.Location);
 			settings.StoreSize("Size", this.Size);
