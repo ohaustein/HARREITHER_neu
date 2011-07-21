@@ -374,7 +374,7 @@ namespace Europlan.Common {
 
 					string productName = Project.Instance.GetPlannedProduct(product).InternalName;
 					string az = "--";
-					if (product.PlannedLayDistance.HasValue) {
+					if (this.product.PlannedCalculationComplete && product.PlannedLayDistance.HasValue) {
 						switch (product.PlannedLayDistance) {
 							case EurovalProduct.EurovalLayDistance.EV5:
 								az = EuroplanRes.EurovalProduct_EV5; //"EV5";
@@ -404,7 +404,7 @@ namespace Europlan.Common {
 					}
 
 					string rz = "--";
-					if (product.PlannedRimType.HasValue) {
+					if (this.product.PlannedCalculationComplete && product.PlannedRimType.HasValue) {
 						switch (product.PlannedRimLayDistance) {
 							case EurovalProduct.EurovalLayDistance.EV5:
 								rz = EuroplanRes.EurovalProduct_EV5 + "/" + product.PlannedRimWidth.ToString(); //"EV5";
@@ -453,7 +453,8 @@ namespace Europlan.Common {
 					maxHeight = Math.Max(maxHeight, g.MeasureString(az, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(rz, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(product.PlannedCircuitCount.ToString(), font).Height);
-					maxHeight = Math.Max(maxHeight, g.MeasureString(product.PlannedPipeLengthPerCircuit.ToString(), font).Height);
+					double pipeLength = Math.Round(product.PlannedPipeLengthPerCircuit, 2);
+					maxHeight = Math.Max(maxHeight, g.MeasureString(pipeLength.ToString(), font).Height);
 
 					Pen p;
 					if (this.connectedPlanPanel != null && this.connectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
@@ -480,7 +481,7 @@ namespace Europlan.Common {
 					PaintTextBox(az, font, pos, maxWidth, 1, maxHeight, 1, border, p, g, additionalTransformation);
 					PaintTextBox(rz, font, pos, maxWidth, 1, maxHeight, 2, border, p, g, additionalTransformation);
 					PaintTextBox(product.PlannedCircuitCount.ToString(), font, pos, maxWidth, 1, maxHeight, 3, border, p, g, additionalTransformation);
-					PaintTextBox(product.PlannedPipeLengthPerCircuit.ToString(), font, pos, maxWidth, 1, maxHeight, 4, border, p, g, additionalTransformation);
+					PaintTextBox(pipeLength.ToString(), font, pos, maxWidth, 1, maxHeight, 4, border, p, g, additionalTransformation);
 				}
 
 				path.Dispose();
@@ -1400,7 +1401,7 @@ namespace Europlan.Common {
 
 					string productName = Project.Instance.GetPlannedProduct(product).InternalName;
 					string az = "--";
-					if (product.PlannedLayDistance.HasValue) {
+					if (this.product.PlannedCalculationComplete && product.PlannedLayDistance.HasValue) {
 						switch (product.PlannedLayDistance) {
 							case EurovalProduct.EurovalLayDistance.EV5:
 								az = EuroplanRes.EurovalProduct_EV5; //"EV5";
@@ -1430,7 +1431,7 @@ namespace Europlan.Common {
 					}
 
 					string rz = "--";
-					if (product.PlannedRimType.HasValue) {
+					if (this.product.PlannedCalculationComplete && product.PlannedRimType.HasValue) {
 						switch (product.PlannedRimLayDistance) {
 							case EurovalProduct.EurovalLayDistance.EV5:
 								rz = EuroplanRes.EurovalProduct_EV5 + "/" + product.PlannedRimWidth.ToString(); //"EV5";
@@ -1494,7 +1495,8 @@ namespace Europlan.Common {
 					text.Text = product.PlannedCircuitCount.ToString();
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
-					text.Text = product.PlannedPipeLengthPerCircuit.ToString();
+					double pipeLength = Math.Round(product.PlannedPipeLengthPerCircuit, 2);
+					text.Text = pipeLength.ToString();
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
 
@@ -1516,7 +1518,7 @@ namespace Europlan.Common {
 					PaintDxfTextBox(az, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -1, border, color, model, layer);
 					PaintDxfTextBox(rz, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -2, border, color, model, layer);
 					PaintDxfTextBox(product.PlannedCircuitCount.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -3, border, color, model, layer);
-					PaintDxfTextBox(product.PlannedPipeLengthPerCircuit.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -4, border, color, model, layer);
+					PaintDxfTextBox(pipeLength.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -4, border, color, model, layer);
 				}
 
 

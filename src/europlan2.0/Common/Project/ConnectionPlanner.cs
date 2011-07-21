@@ -1134,7 +1134,7 @@ namespace Europlan.Common {
 							rlRest += connection.GetLength(measure);
 						}
 						foreach (Room roomThrough in floor.Rooms) {
-							double roomLength = connection.GetPartInsidePolygon(new Polygon2D(roomThrough.RoomCoordinates)) * measure;
+							double roomLength = connection.GetPartInsidePolygon(new Polygon2D(roomThrough.RoomCoordinates)) / measure;
 							if (roomLength > 0) {
 								if (connection.Vorlauf) {
 									vlRest -= roomLength;
@@ -1144,7 +1144,7 @@ namespace Europlan.Common {
 								}
 								foreach (PlannedProduct ppThrough in roomThrough.PlannedProducts) {
 									if (pp != ppThrough) {
-										double throughLength = connection.GetPartInsidePolygon(ppThrough.Product.GraphicalArea) * measure;
+										double throughLength = connection.GetPartInsidePolygon(ppThrough.Product.GraphicalArea) / measure;
 										if (throughLength > 0) {
 											roomLength -= throughLength;
 											if (connection.Vorlauf) {
