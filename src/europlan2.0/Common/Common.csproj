@@ -326,6 +326,25 @@
     <Compile Include="Plan\PlanSetMeasureForm.Designer.cs">
       <DependentUpon>PlanSetMeasureForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\Ecotherm\EcothermPlaner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Products\Ecotherm\EcothermPlannerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Ecotherm\EcothermPlannerForm.Designer.cs">
+      <DependentUpon>EcothermPlannerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\Euroval\EurovalPlanner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Products\Euroval\IPipeProduct.cs" />
+    <Compile Include="Products\Euroval\PipeProductPlanner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Products\Euroval\PipeProductPlanner.Designer.cs">
+      <DependentUpon>PipeProductPlanner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Hitherm\HithermDrawer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -359,12 +378,6 @@
       <DependentUpon>ConnectionPipePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\GraphicalProductConnection.cs" />
-    <Compile Include="Products\Euroval\EurovalPlanner.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Products\Euroval\EurovalPlanner.Designer.cs">
-      <DependentUpon>EurovalPlanner.cs</DependentUpon>
-    </Compile>
     <Compile Include="Products\Euroval\EurovalPlannerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1102,9 +1115,13 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons\hand.cur" />
     <EmbeddedResource Include="Icons\handGrabbed.cur" />
-    <EmbeddedResource Include="Products\Euroval\EurovalPlanner.resx">
+    <EmbeddedResource Include="Products\Ecotherm\EcothermPlannerForm.resx">
+      <DependentUpon>EcothermPlannerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <DependentUpon>EurovalPlanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\Euroval\PipeProductPlanner.resx">
+      <DependentUpon>PipeProductPlanner.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\Hitherm\HithermDrawer.resx">
       <DependentUpon>HithermDrawer.cs</DependentUpon>

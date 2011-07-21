@@ -94,8 +94,9 @@ namespace Europlan.Common {
 			set {
 				if (this.planFloor != value) {
 					this.planFloor = value;
-					// quick workaround to get affected products
-					this.Plan = this.Plan;
+					if (this.ConnectedPlanPanel != null) {
+						this.ConnectedPlanPanel.InvalidateGraphics();
+					}
 				}
 			}
 		}
@@ -105,8 +106,9 @@ namespace Europlan.Common {
 			set {
 				if (this.planFloor == value) {
 					this.planFloor = !value;
-					// quick workaround to get affected products
-					this.Plan = this.Plan;
+					if (this.ConnectedPlanPanel != null) {
+						this.ConnectedPlanPanel.InvalidateGraphics();
+					}
 				}
 			}
 		}
@@ -151,7 +153,7 @@ namespace Europlan.Common {
 			this.productsInFloor.Clear();
 			foreach (Product p in this.GetAllProducts()) {
 				// TODO add other products
-				if (this.planFloor) {
+				//if (this.planFloor) {
 					if (p is ModulKlimaBodenProduct) {
 						ModulKlimaBodenPlanner pp = new ModulKlimaBodenPlanner();
 						pp.Product = p as ModulKlimaBodenProduct;
@@ -167,17 +169,16 @@ namespace Europlan.Common {
 						pp.HighlightRoomCoordinates = false;
 						productsInFloor.Add(p, pp);
 					} else if (p is EcothermProduct) {
-						// TODO
-						/*EcothermPlanner pp = new EcothermPlanner();
+						EcothermPlanner pp = new EcothermPlanner();
 						pp.Product = p as EcothermProduct;
 						pp.ConnectedPlanPanel = this.connectedPlanPanel;
 						pp.DrawExpansionGaps = false;
 						pp.HighlightRoomCoordinates = false;
-						productsInFloor.Add(p, pp);*/
+						productsInFloor.Add(p, pp);
 					} else if (p is HithermProduct) {
 						productsInFloor.Add(p, null);
-					}
-				} else {
+					} else
+				//} else {
 					if (p is ModulKlimaDeckeProduct) {
 						ModulKlimaDeckePlanner pp = new ModulKlimaDeckePlanner();
 						pp.Product = p as ModulKlimaDeckeProduct;
@@ -185,7 +186,7 @@ namespace Europlan.Common {
 						pp.HighlightRoomCoordinates = false;
 						productsInFloor.Add(p, pp);
 					}
-				}
+				//}
 			}
 			if (this.connectedPlanPanel as Control != null) {
 				this.connectedPlanPanel.InvalidateGraphics();
@@ -296,10 +297,10 @@ namespace Europlan.Common {
 					if (floor.AssociatedPlanId == this.Plan.Id) {
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct product in room.PlannedProducts) {
-								if ((this.PlanFloor && product.Product.Type == Product.ProductType.FBH) ||
-									(this.PlanCeiling && product.Product.Type == Product.ProductType.DH)) {
+								//if ((this.PlanFloor && product.Product.Type == Product.ProductType.FBH) ||
+									//(this.PlanCeiling && product.Product.Type == Product.ProductType.DH)) {
 									products.Add(product.Product);
-								}
+								//}
 							}
 						}
 					}
@@ -336,14 +337,16 @@ namespace Europlan.Common {
 					}
 				}
 				foreach (KeyValuePair<Product, IProductPlanner> kvp in this.productsInFloor) {
-					if (kvp.Value != null) {
+					if (kvp.Value != null && ((kvp.Key.Type == Product.ProductType.FBH && this.PlanFloor) || (kvp.Key.Type == Product.ProductType.DH && this.PlanCeiling))) {
 						kvp.Value.PaintAfterPlanPannel(g, additionalTransformation, mousePositionInPlan, mousePositionInControl);
 					}
 				}
 				g.Clip = clip;
 				foreach (KeyValuePair<Product, IProductPlanner> kvp in this.productsInFloor) {
 					foreach (GraphicalProductConnection connection in kvp.Key.Connections) {
-						connection.Draw(g, additionalTransformation, this.Plan.Measure.Value, connection == this.selectedConnection && this.Mode == ConnectionMode.KDM_SELECT_CONNECTION, this.product != null && kvp.Key != this.product);
+						if ((connection.ConnectionType == Product.ProductType.FBH && this.PlanFloor) || (connection.ConnectionType == Product.ProductType.DH && this.PlanCeiling)) {
+							connection.Draw(g, additionalTransformation, this.Plan.Measure.Value, connection == this.selectedConnection && this.Mode == ConnectionMode.KDM_SELECT_CONNECTION, this.product != null && kvp.Key != this.product);
+						}
 					}
 				}
 				if (this.mode == ConnectionMode.KDM_ADD_CONNECTION) {
@@ -1143,7 +1146,7 @@ namespace Europlan.Common {
 									rlRest -= roomLength;
 								}
 								foreach (PlannedProduct ppThrough in roomThrough.PlannedProducts) {
-									if (pp != ppThrough) {
+									if (pp != ppThrough && connection.ConnectionType == ppThrough.Product.Type) {
 										double throughLength = connection.GetPartInsidePolygon(ppThrough.Product.GraphicalArea) / measure;
 										if (throughLength > 0) {
 											roomLength -= throughLength;

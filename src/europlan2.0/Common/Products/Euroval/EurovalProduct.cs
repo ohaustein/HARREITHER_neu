@@ -13,7 +13,7 @@ namespace Europlan.Common {
 
 	[Serializable()]
 	[ProductName("Product_EurovalName", "Product_EurovalFullName")]
-	public class EurovalProduct : Product, ProductWithInsulationConstruction {
+	public class EurovalProduct : Product, ProductWithInsulationConstruction, IPipeProduct<EurovalProduct.EurovalLayDistance, EurovalProduct.EurovalRimType> {
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(EurovalProduct));
 
@@ -160,8 +160,69 @@ namespace Europlan.Common {
 			}
 		}
 
-		[System.ComponentModel.TypeConverter(typeof(LayDistanceConverter))]
+		public class RimTypeConverter : System.ComponentModel.TypeConverter {
+			private static readonly string EV5_40 = EuroplanRes.EurovalProduct_EV5_40;
+			private static readonly string EV5_80 = EuroplanRes.EurovalProduct_EV5_80;
+			private static readonly string EV5_120 = EuroplanRes.EurovalProduct_EV5_120;
+			private static readonly string EV10_55 = EuroplanRes.EurovalProduct_EV10_55;
+			private static readonly string EV10_110 = EuroplanRes.EurovalProduct_EV10_110;
+			private static readonly string EV10_165 = EuroplanRes.EurovalProduct_EV10_165;
+			private static readonly string EV15_60 = EuroplanRes.EurovalProduct_EV15_60;
+			private static readonly string EV15_120 = EuroplanRes.EurovalProduct_EV15_120;
+			private static readonly string EV15_180 = EuroplanRes.EurovalProduct_EV15_180;
 
+			private Dictionary<string, EurovalRimType> mappingFromString = new Dictionary<string, EurovalRimType>();
+			private Dictionary<EurovalRimType, string> mappingToString = new Dictionary<EurovalRimType, string>();
+
+			public RimTypeConverter() {
+				mappingFromString.Add(EV5_40, EurovalRimType.EV5_40);
+				mappingFromString.Add(EV5_80, EurovalRimType.EV5_80);
+				mappingFromString.Add(EV5_120, EurovalRimType.EV5_120);
+				mappingFromString.Add(EV10_55, EurovalRimType.EV10_55);
+				mappingFromString.Add(EV10_110, EurovalRimType.EV10_110);
+				mappingFromString.Add(EV10_165, EurovalRimType.EV10_165);
+				mappingFromString.Add(EV15_60, EurovalRimType.EV15_60);
+				mappingFromString.Add(EV15_120, EurovalRimType.EV15_120);
+				mappingFromString.Add(EV15_180, EurovalRimType.EV15_180);
+				mappingToString.Add(EurovalRimType.EV5_40, EV5_40);
+				mappingToString.Add(EurovalRimType.EV5_80, EV5_80);
+				mappingToString.Add(EurovalRimType.EV5_120, EV5_120);
+				mappingToString.Add(EurovalRimType.EV10_55, EV10_55);
+				mappingToString.Add(EurovalRimType.EV10_110, EV10_110);
+				mappingToString.Add(EurovalRimType.EV10_165, EV10_165);
+				mappingToString.Add(EurovalRimType.EV15_60, EV15_60);
+				mappingToString.Add(EurovalRimType.EV15_120, EV15_120);
+				mappingToString.Add(EurovalRimType.EV15_180, EV15_180);
+			}
+
+			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
+				return sourceType == typeof(string);
+			}
+
+			public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
+				return destinationType == typeof(string);
+			}
+
+			public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+				if (value is string) {
+					if (mappingFromString.ContainsKey((string)value)) {
+						return mappingFromString[(string)value];
+					}
+				}
+				return base.ConvertFrom(context, culture, value);
+			}
+
+			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+				if (value is EurovalRimType && destinationType == typeof(string)) {
+					if (mappingToString.ContainsKey((EurovalRimType)value)) {
+						return mappingToString[(EurovalRimType)value];
+					}
+				}
+				return base.ConvertTo(context, culture, value, destinationType);
+			}
+		}
+
+		[System.ComponentModel.TypeConverter(typeof(LayDistanceConverter))]
 		public enum EurovalLayDistance {
 			A5 = 0,
 			EV5 = 1,
@@ -174,6 +235,7 @@ namespace Europlan.Common {
 			NONE = -1
 		}
 
+		[System.ComponentModel.TypeConverter(typeof(RimTypeConverter))]
 		public enum EurovalRimType {
 			EV15_60,
 			EV15_120,
@@ -1345,7 +1407,7 @@ namespace Europlan.Common {
 				if (this.incompleteCalculation) {
 					return 0;
 				}
-				double value = Double.MaxValue;
+				double value = double.MaxValue;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.C_FloorTempAzCool < value) {
 						value = ec.C_FloorTempAzCool;

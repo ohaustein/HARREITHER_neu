@@ -6,12 +6,14 @@ using System.Collections;
 using log4net;
 using System.Threading;
 using Europlan.Licensing;
+using WW.Math.Geometry;
+using WW.Math;
 
 namespace Europlan.Common {
 
 	[Serializable()]
 	[ProductName("Product_EcothermName", "Product_EcothermFullName")]
-	public class EcothermProduct : Product, ProductWithInsulationConstruction {
+	public class EcothermProduct : Product, ProductWithInsulationConstruction, IPipeProduct<EcothermProduct.EcothermLayDistance, EcothermProduct.EcothermRimType> {
 
 		// quick dimensioning
 		private static int quickDimensioningHeatPowerPerSquareMeter = 50;
@@ -77,6 +79,11 @@ namespace Europlan.Common {
 		private Nullable<EcothermRimType> plannedRimType = null;
 
 		private List<ExtendedCorrections> plannedCorrectionList = new List<ExtendedCorrections>();
+		private List<Segment2D> plannedRimSegments = new List<Segment2D>();
+		private List<Point2D> plannedAreaGraphical = new List<Point2D>();
+		private List<List<Point2D>> plannedReducedAreas = new List<List<Point2D>>();
+		private Point2D textBoxPosition = Point2D.Zero;
+		private float textBoxFontSize = 5.0f;
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			int i = 0;
@@ -150,9 +157,69 @@ namespace Europlan.Common {
 				return base.ConvertTo(context, culture, value, destinationType);
 			}
 		}
+		public class RimTypeConverter : System.ComponentModel.TypeConverter {
+			private static readonly string EV5_40 = EuroplanRes.EcothermProduct_EV5_40;
+			private static readonly string EV5_80 = EuroplanRes.EcothermProduct_EV5_80;
+			private static readonly string EV5_120 = EuroplanRes.EcothermProduct_EV5_120;
+			private static readonly string EV10_55 = EuroplanRes.EcothermProduct_EV10_55;
+			private static readonly string EV10_110 = EuroplanRes.EcothermProduct_EV10_110;
+			private static readonly string EV10_165 = EuroplanRes.EcothermProduct_EV10_165;
+			private static readonly string EV15_60 = EuroplanRes.EcothermProduct_EV15_60;
+			private static readonly string EV15_120 = EuroplanRes.EcothermProduct_EV15_120;
+			private static readonly string EV15_180 = EuroplanRes.EcothermProduct_EV15_180;
+
+			private Dictionary<string, EcothermRimType> mappingFromString = new Dictionary<string, EcothermRimType>();
+			private Dictionary<EcothermRimType, string> mappingToString = new Dictionary<EcothermRimType, string>();
+
+			public RimTypeConverter() {
+				mappingFromString.Add(EV5_40, EcothermRimType.EV5_40);
+				mappingFromString.Add(EV5_80, EcothermRimType.EV5_80);
+				mappingFromString.Add(EV5_120, EcothermRimType.EV5_120);
+				mappingFromString.Add(EV10_55, EcothermRimType.EV10_55);
+				mappingFromString.Add(EV10_110, EcothermRimType.EV10_110);
+				mappingFromString.Add(EV10_165, EcothermRimType.EV10_165);
+				mappingFromString.Add(EV15_60, EcothermRimType.EV15_60);
+				mappingFromString.Add(EV15_120, EcothermRimType.EV15_120);
+				mappingFromString.Add(EV15_180, EcothermRimType.EV15_180);
+				mappingToString.Add(EcothermRimType.EV5_40, EV5_40);
+				mappingToString.Add(EcothermRimType.EV5_80, EV5_80);
+				mappingToString.Add(EcothermRimType.EV5_120, EV5_120);
+				mappingToString.Add(EcothermRimType.EV10_55, EV10_55);
+				mappingToString.Add(EcothermRimType.EV10_110, EV10_110);
+				mappingToString.Add(EcothermRimType.EV10_165, EV10_165);
+				mappingToString.Add(EcothermRimType.EV15_60, EV15_60);
+				mappingToString.Add(EcothermRimType.EV15_120, EV15_120);
+				mappingToString.Add(EcothermRimType.EV15_180, EV15_180);
+			}
+
+			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
+				return sourceType == typeof(string);
+			}
+
+			public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
+				return destinationType == typeof(string);
+			}
+
+			public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+				if (value is string) {
+					if (mappingFromString.ContainsKey((string)value)) {
+						return mappingFromString[(string)value];
+					}
+				}
+				return base.ConvertFrom(context, culture, value);
+			}
+
+			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+				if (value is EcothermRimType && destinationType == typeof(string)) {
+					if (mappingToString.ContainsKey((EcothermRimType)value)) {
+						return mappingToString[(EcothermRimType)value];
+					}
+				}
+				return base.ConvertTo(context, culture, value, destinationType);
+			}
+		}
 
 		[System.ComponentModel.TypeConverter(typeof(LayDistanceConverter))]
-
 		public enum EcothermLayDistance {
 			A5 = 0,
 			EV5 = 1,
@@ -165,6 +232,7 @@ namespace Europlan.Common {
 			NONE = -1
 		}
 
+		[System.ComponentModel.TypeConverter(typeof(RimTypeConverter))]
 		public enum EcothermRimType {
 			EV15_60,
 			EV15_120,
@@ -201,10 +269,32 @@ namespace Europlan.Common {
             get { return "Fuﬂbodenheizung.png"; }
 		}
 
+		[XmlIgnore]
+		public override bool AllowToSwitchMode {
+			get {
+				return (PlannedFloorArea == 0 || PlannedFloorArea == this.associatedRoom.Area) &&
+						PlannedAreaReduced == 0 &&
+						PlannedAreaUnheated == 0 &&
+						PlannedRimLength == 0 &&
+						PlannedRimCorners == 0 &&
+						RequestedLayDistance == null &&
+						RequestedRimType == null &&
+						RequestedCircuits == null;
+			}
+		}
 		public new static void StaticInitialize(Configuration config) {
 			Product.StaticInitialize<EcothermProduct>(config);
 		}
-
+		public void ResetProduct() {
+			PlannedFloorArea = 0;
+			PlannedAreaReduced = 0;
+			PlannedAreaUnheated = 0;
+			PlannedRimLength = 0;
+			plannedRimCorners = 0;
+			RequestedLayDistance = null;
+			RequestedRimType = null;
+			RequestedCircuits = null;
+		}
 		public static string GlobalNotificationMessage {
 			get {
 				string message = null;
@@ -806,6 +896,30 @@ namespace Europlan.Common {
 		}
 
 		/// <summary>
+		/// The rim segments planned in the graphical mode
+		/// </summary>
+		public List<Segment2D> PlannedRimSegments {
+			get { return this.plannedRimSegments; }
+			set { this.plannedRimSegments = value; }
+		}
+
+		/// <summary>
+		/// The graphical representation of the area
+		/// </summary>
+		public List<Point2D> PlannedAreaGraphical {
+			get { return this.plannedAreaGraphical; }
+			set { this.plannedAreaGraphical = value; }
+		}
+
+		/// <summary>
+		/// The graphical representation of the areas 
+		/// </summary>
+		public List<List<Point2D>> PlannedReducedAreas {
+			get { return this.plannedReducedAreas; }
+			set { this.plannedReducedAreas = value; }
+		}
+
+		/// <summary>
 		/// The number of corners in the rim the user planned.
 		/// </summary>
 		public int PlannedRimCorners {
@@ -1344,10 +1458,10 @@ namespace Europlan.Common {
 		/// </summary>
 		private bool CompareParameters(double oldFloorTempHeatRim, double oldFloorTempHeatRes, double oldHeatLoad, double oldPressureLossHeat,
 			double oldFloorTempCoolRim, double oldFloorTempCoolRes, double oldCoolLoad, double oldPressureLossCool, 
-			double oldCircuitLength,
+			double oldCircuitLength, double oldAreaRim, double oldAreaResidence,
 			double newFloorTempHeatRim, double newFloorTempHeatRes, double newHeatLoad, double newPressureLossHeat,
 			double newFloorTempCoolRim, double newFloorTempCoolRes, double newCoolLoad, double newPressureLossCool, 
-			double newCircuitLength,
+			double newCircuitLength, double newAreaRim, double newAreaResidence,
 			double requestedHeatLoad, double requestedCoolLoad, bool checkHeat, bool checkCool, bool ignoreResidence, bool ignoreRim, bool ignoreCircuits) {
 
 			bool oldOk = CheckHardParameters(oldFloorTempHeatRim, oldFloorTempHeatRes, oldPressureLossHeat, 
@@ -1365,11 +1479,19 @@ namespace Europlan.Common {
 				if (oldCovers != newCovers) {
 					return newCovers;
 				}
+				bool oldRimWidthOk = oldAreaRim * 2 <= oldAreaResidence;
+				bool newRimWidthOk = newAreaRim * 2 <= newAreaResidence;
+				if (oldRimWidthOk != newRimWidthOk) {
+					return newRimWidthOk;
+				}
 				if (oldCovers) {
 					// TODO implement better decisison which parameters should be used
 					/*if (checkCool) {
 						return newFloorTempCoolRes >= oldFloorTempCoolRes;
 					}*/
+					if (!oldRimWidthOk && newAreaRim != oldAreaRim) {
+						return newAreaRim < oldAreaRim;
+					}
 					return newFloorTempHeatRes <= oldFloorTempHeatRes;
 				} else {
 					/*if (checkCool) {
@@ -1575,10 +1697,14 @@ namespace Europlan.Common {
 			double bestPressureLossCool = double.MaxValue;
 			double bestHeatLoad = 0;
 			double bestCoolLoad = 0;
+			double bestAreaRim = 0;
+			double bestAreaResidence = 0;
 
 			this.CalculateHeatAndCoolFlow();
 			foreach (EcothermLayDistance ld in teilungen.Keys) {
 				foreach (Nullable<EcothermRimType> rt in teilungen[ld]) {
+					this.PlannedRimType = rt;
+					this.PlannedLayDistance = ld;
 					bool tryCalc = true;
 					int circuitCount = 1;
 					if (this.requestedCircuits.HasValue) {
@@ -1652,10 +1778,10 @@ namespace Europlan.Common {
 					bool useNew = !bestLaydistance.HasValue || bestLaydistance.Value == EcothermLayDistance.NONE ||
 						this.CompareParameters(bestFloorTempRimHeat, bestFloorTempResidenceHeat, bestHeatLoad, bestPressureLossHeat,
 							bestFloorTempRimCool, bestFloorTempResidenceCool, bestCoolLoad, bestPressureLossCool,
-							bestPipeLength,
+							bestPipeLength, bestAreaRim, bestAreaResidence,
 							this.PlannedFloorTemperatureHeatRim, this.PlannedFloorTemperatureHeatResidence, this.PlannedHeatLoad, this.PlannedDeltaRhoHeat,
 							this.PlannedFloorTemperatureCoolRim, this.PlannedFloorTemperatureCoolResidence, this.PlannedCoolLoad, this.PlannedDeltaRhoCool,
-							this.PlannedPipeLengthPerCircuit,
+							this.PlannedPipeLengthPerCircuit, this.PlannedAreaRim, this.PlannedAreaResidence,
 							requestedHeatLoad - this.PlannedHeatLoadAnbindung, requestedCoolLoad - this.PlannedCoolLoadAnbindung, calculateHeat, calculateCool, this.requestedLayDistance.HasValue, this.requestedRimType.HasValue, this.requestedCircuits.HasValue);
 					if (useNew) {
 						bestLaydistance = ld;
@@ -1670,6 +1796,8 @@ namespace Europlan.Common {
 						bestFloorTempResidenceCool = this.PlannedFloorTemperatureCoolResidence;
 						bestCoolLoad = this.PlannedCoolLoad;
 						bestPressureLossCool = this.PlannedDeltaRhoCool;
+						bestAreaRim = this.PlannedAreaRim;
+						bestAreaResidence = this.PlannedAreaResidence;
 					}
 				}
 			}
@@ -2100,7 +2228,104 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override WW.Math.Geometry.Polygon2D GraphicalArea {
 			// TODO
-			get { return null; }
+			get { return new Polygon2D(this.plannedAreaGraphical); }
+		}
+
+		public Point2D TextBoxPosition {
+			get { return this.textBoxPosition; }
+			set { this.textBoxPosition = value;	}
+		}
+
+
+		public float TextBoxFontSize {
+			get { return textBoxFontSize; }
+			set { textBoxFontSize = value; }
+		}
+		public override PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertXAxis, Point2D currentMousePoint) {
+			if (this.AssociatedRoom.RoomCoordinates.Count < 3 || !Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates) || (!firstCircuit && !otherCircuits) || (!input && !output) || this.circuits == null || this.circuits.Count < 1) {
+				return null;
+			}
+
+			PossibleProductConnection possibleConnection = null;
+
+			foreach (GraphicalProductConnection connection in this.Connections) {
+				if (connection.FirstCircuit && ((input && connection.Vorlauf) || (output && connection.Ruecklauf))) {
+					firstCircuit = false;
+				}
+				if (connection.OtherCircuits && ((input && connection.Vorlauf) || (output && connection.Ruecklauf))) {
+					otherCircuits = false;
+				}
+			}
+
+
+			int connectionsCount = 0;
+			if (firstCircuit) {
+				connectionsCount++;
+			}
+			if (otherCircuits) {
+				connectionsCount += this.circuits.Count - 1;
+			}
+			if (input && output) {
+				connectionsCount = connectionsCount * 2;
+			}
+
+			if (connectionsCount == 0) {
+				return null;
+			}
+
+			double width = connectionsCount * 0.05 * measure;
+
+			Segment2D segment;
+			double bestDistance = double.MaxValue;
+			Segment2D bestSegment = new Segment2D();
+			Polygon2D room = new Polygon2D(this.AssociatedRoom.RoomCoordinates);
+			if (room.IsClockwise()) {
+				room.Reverse();
+			}
+			Point2D lastPoint = room[room.Count - 1];
+			Point2D bestConnectionPoint = new Point2D();
+			foreach (Point2D point in room) {
+				segment = new Segment2D(lastPoint, point);
+				if (segment.GetLength() >= width) {
+					Point2D newConnectionPoint = segment.GetClosestPoint(currentMousePoint);
+					if ((segment.Start - newConnectionPoint).GetLength() < width / 2) {
+						Vector2D v = segment.End - segment.Start;
+						v.Normalize();
+						newConnectionPoint = segment.Start + v * (width / 2);
+					}
+					if ((segment.End - newConnectionPoint).GetLength() < width / 2) {
+						Vector2D v = (segment.Start - segment.End);
+						v.Normalize();
+						newConnectionPoint = segment.End + v * (width / 2);
+					}
+					double distance = segment.GetDistance(currentMousePoint);
+					//double distance = (newConnectionPoint - currentMousePoint).GetLength();
+					if (distance < bestDistance) {
+						bestDistance = distance;
+						bestSegment = segment;
+						bestConnectionPoint = newConnectionPoint;
+					}
+				}
+				lastPoint = point;
+			}
+			if (bestDistance < 10) {
+				//Point2D connectionPoint = bestSegment.GetClosestPoint(currentMousePoint);
+				//if ((connectionPoint - bestSegment.Start).GetLength() >= width / 2 && (connectionPoint - bestSegment.End).GetLength() >= width / 2) {
+					Polygon2D polygon = new Polygon2D();
+					Vector2D v = bestSegment.End - bestSegment.Start;
+					v.Normalize();
+					Vector2D v2 = new Vector2D(-v.Y, v.X);
+					polygon.Add(bestConnectionPoint + (v * width / 2));
+					polygon.Add(bestConnectionPoint + (v * width / 2) + (v2 * 0.05 * measure));
+					polygon.Add(bestConnectionPoint - (v * width / 2) + (v2 * 0.05 * measure));
+					polygon.Add(bestConnectionPoint - (v * width / 2));
+
+					double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
+
+					possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
+				//}
+			}
+			return possibleConnection;
 		}
 	}
 }

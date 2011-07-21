@@ -68,7 +68,7 @@ namespace Europlan.Common {
 				if (this.planFloor != value) {
 					this.planFloor = value;
 					// quick workaround to get affected products
-					this.Plan = this.Plan;
+					//this.Plan = this.Plan;
 				}
 			}
 		}
@@ -79,7 +79,7 @@ namespace Europlan.Common {
 				if (this.planFloor == value) {
 					this.planFloor = !value;
 					// quick workaround to get affected products
-					this.Plan = this.Plan;
+					//this.Plan = this.Plan;
 				}
 			}
 		}
@@ -97,24 +97,26 @@ namespace Europlan.Common {
 		}
 
 		private void ResetProducts() {
-			this.productsInFloor.Clear();
+			this.productsInFloor = this.GetAllProducts();
+			/*this.productsInFloor.Clear();
 			foreach (Product p in this.GetAllProducts()) {
 				// TODO add other products
-				if (this.planFloor) {
+				//if (this.planFloor) {
 					if (p is ModulKlimaBodenProduct) {
 						productsInFloor.Add(p);
 					} else if (p is EurovalProduct) {
 						productsInFloor.Add(p);
 					} else if (p is EcothermProduct) {
-						// TODO
-						//productsInFloor.Add(p);
-					}
-				} else {
+						productsInFloor.Add(p);
+					} else if (p is HithermProduct) {
+						productsInFloor.Add(p);
+					} else
+				//} else {
 					if (p is ModulKlimaDeckeProduct) {
 						productsInFloor.Add(p);
 					}
-				}
-			}
+				//}
+			}*/
 		}
 
 		private List<Floor> GetAllFloors() {
@@ -150,10 +152,10 @@ namespace Europlan.Common {
 					if (floor.AssociatedPlanId == this.Plan.Id) {
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct product in room.PlannedProducts) {
-								if ((this.PlanFloor && product.Product.Type == Product.ProductType.FBH) ||
-									(this.PlanCeiling && product.Product.Type == Product.ProductType.DH)) {
+								//if ((this.PlanFloor && product.Product.Type == Product.ProductType.FBH) ||
+									//(this.PlanCeiling && product.Product.Type == Product.ProductType.DH)) {
 									products.Add(product.Product);
-								}
+								//}
 							}
 						}
 					}
@@ -181,7 +183,9 @@ namespace Europlan.Common {
 				g.Clip = clip;
 				foreach (Product product in this.productsInFloor) {
 					foreach (GraphicalProductConnection connection in product.Connections) {
-						connection.Draw(g, additionalTransformation, this.Plan.Measure.Value, false, this.product != product);
+						if ((connection.ConnectionType == Product.ProductType.FBH && this.PlanFloor) || (connection.ConnectionType == Product.ProductType.DH && this.PlanCeiling)) {
+							connection.Draw(g, additionalTransformation, this.Plan.Measure.Value, false, this.product != product);
+						}
 					}
 				}
 			}

@@ -1,5 +1,5 @@
 namespace Europlan.Common.Products {
-	partial class EurovalPlannerForm {
+	partial class EcothermPlannerForm {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -24,7 +24,7 @@ namespace Europlan.Common.Products {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EurovalPlannerForm));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EcothermPlannerForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
@@ -134,7 +134,7 @@ namespace Europlan.Common.Products {
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.planPanel = new Europlan.Common.PlanPanel();
-			this.eurovalPlanner = new Europlan.Common.EurovalPlanner(this.components);
+			this.eurovalPlanner = new Europlan.Common.EcothermPlanner(this.components);
 			this.connectionPlanner = new Europlan.Common.ConnectionPlanner(this.components);
 			this.toolStrip.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -336,8 +336,6 @@ namespace Europlan.Common.Products {
 			this.tabs.SelectedIndex = 0;
 			this.tabs.Size = new System.Drawing.Size(846, 212);
 			this.tabs.TabIndex = 2;
-			this.tabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabs_Selecting);
-			this.tabs.Deselected += new System.Windows.Forms.TabControlEventHandler(this.tabs_Deselected);
 			// 
 			// pageAuslegung
 			// 
@@ -1310,7 +1308,7 @@ namespace Europlan.Common.Products {
 			// 
 			// eurovalPlanner
 			// 
-			this.eurovalPlanner.Mode = Europlan.Common.EurovalPlanner.PipeProductMode.EVM_NONE;
+			this.eurovalPlanner.Mode = Europlan.Common.EcothermPlanner.PipeProductMode.EVM_NONE;
 			this.eurovalPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.eurovalPlanner_ModeChanged);
 			this.eurovalPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.europlanPlanner_ProjectChanged);
 			// 
@@ -1326,7 +1324,7 @@ namespace Europlan.Common.Products {
 			this.connectionPlanner.Product = null;
 			this.connectionPlanner.AnbindeleitungAdded += new System.EventHandler<System.EventArgs>(this.connectionPlanner_AnbindeleitungAdded);
 			// 
-			// EurovalPlannerForm
+			// EcothermPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1334,10 +1332,10 @@ namespace Europlan.Common.Products {
 			this.Controls.Add(this.planPanel);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.toolStrip);
-			this.Name = "EurovalPlannerForm";
-			this.Text = "Euroval® - grafische Auslegung";
-			this.Load += new System.EventHandler(this.EurovalPlannerForm_Load);
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EurovalPlannerForm_FormClosing);
+			this.Name = "EcothermPlannerForm";
+			this.Text = "Ecotherm® - grafische Auslegung";
+			this.Load += new System.EventHandler(this.EcothermPlannerForm_Load);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EcothermPlannerForm_FormClosing);
 			this.toolStrip.ResumeLayout(false);
 			this.toolStrip.PerformLayout();
 			this.panel1.ResumeLayout(false);
@@ -1352,7 +1350,7 @@ namespace Europlan.Common.Products {
 
 		#endregion
 
-		private EurovalPlanner eurovalPlanner;
+		private EcothermPlanner eurovalPlanner;
 		private PlanPanel planPanel;
 		private System.Windows.Forms.ToolStrip toolStrip;
 		private System.Windows.Forms.ToolStripButton btnZoomIn;

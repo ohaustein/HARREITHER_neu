@@ -1,5 +1,5 @@
 namespace Europlan.Common {
-	partial class EurovalPlanner {
+	partial class PipeProductPlanner<ProductType, LayDistanceType, RimType> {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>

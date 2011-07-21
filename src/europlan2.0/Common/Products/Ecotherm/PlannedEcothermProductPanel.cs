@@ -12,8 +12,9 @@ namespace Europlan.Common {
 		private PlannedProduct product = null;
 
 		private bool gridContentChanged = false;
+		private bool updateOngoing = false;
 
-		private class LayDistanceItem {
+		public class LayDistanceItem {
 			public Nullable<EcothermProduct.EcothermLayDistance> layDistance;
 			public string name;
 
@@ -35,7 +36,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private class RimTypeItem {
+		public class RimTypeItem {
 			public Nullable<EcothermProduct.EcothermRimType> rimType;
 			public string name;
 
@@ -216,6 +217,7 @@ namespace Europlan.Common {
 			SEPARATE_CIRCUIT = 65536,
 			CORRECTIONS = 131072,
 			//CORRECTIONS_LIST = 262144,
+			LAYOUT_TYPE = 262144
 		}
 
 		/*private class ComboItem {
@@ -296,6 +298,7 @@ namespace Europlan.Common {
 		private int ignoreCalculationMode = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
+			updateOngoing = true;
 			if (this.product != null) {
 				ignoreCoverHeatLoad++;
 				ignoreHeatLoad++;
@@ -320,6 +323,35 @@ namespace Europlan.Common {
 				ignoreCalculationMode++;
 
 				EcothermProduct evProduct = this.product.Product as EcothermProduct;
+
+				if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
+					this.rbLayoutTable.Enabled = true;
+					this.rbLayoutGraphical.Enabled = true;
+				} else {
+					this.rbLayoutTable.Enabled = false;
+					this.rbLayoutGraphical.Enabled = false;
+				}
+
+				bool graphicalMode = false;
+				if (this.product.Product.GraphicalMode.HasValue) {
+					graphicalMode = this.product.Product.GraphicalMode.Value;
+				} else {
+					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
+						graphicalMode = true;
+						this.product.Product.GraphicalMode = true;
+					} else {
+						graphicalMode = false;
+						this.product.Product.GraphicalMode = false;
+					}
+				}
+
+				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
+					if (graphicalMode) {
+						this.rbLayoutGraphical.Checked = true;
+					} else {
+						this.rbLayoutTable.Checked = true;
+					}
+				}
 
 				//bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0 && evProduct.PlannedLayDistance != EcothermProduct.EcothermLayDistance.NONE;
 				//bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0 && evProduct.PlannedLayDistance != EcothermProduct.EcothermLayDistance.NONE;
@@ -375,6 +407,14 @@ namespace Europlan.Common {
 				this.numCorners.Enabled = evProduct.PlannedRimLength > 0;
 				this.cmbRimType.Enabled = evProduct.PlannedRimLength > 0;
 
+				if (evProduct.CalculateMode == Product.CalculateModeEnum.HEAT) {
+					rbHeat.Checked = true;
+				} else if (evProduct.CalculateMode == Product.CalculateModeEnum.COOL) {
+					rbCool.Checked = true;
+				} else if (evProduct.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL) {
+					rbHeatAndCool.Checked = true;
+				}
+
 				// disable the following controls if the product is a connection
 				this.numRim.Enabled = !evProduct.PlannedProductIsConnection;
 				this.numCorners.Enabled = this.numCorners.Enabled && !evProduct.PlannedProductIsConnection;
@@ -385,14 +425,6 @@ namespace Europlan.Common {
 				this.cmbLayDistance.Enabled = !evProduct.PlannedProductIsConnection;
 				this.cmbRimType.Enabled = this.cmbRimType.Enabled && !evProduct.PlannedProductIsConnection;
 				this.cmbCircuits.Enabled = !evProduct.PlannedProductIsConnection;
-
-				if (evProduct.CalculateMode == Product.CalculateModeEnum.HEAT) {
-					rbHeat.Checked = true;
-				} else if (evProduct.CalculateMode == Product.CalculateModeEnum.COOL) {
-					rbCool.Checked = true;
-				} else if (evProduct.CalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL) {
-					rbHeatAndCool.Checked = true;
-				}
 
 				bool newCmbCircuitsContainsAutomatic = !evProduct.ManualMode;
 				bool newCmbLayDistanceContainsAutomatic = !evProduct.ManualMode;
@@ -809,6 +841,33 @@ namespace Europlan.Common {
 					this.gridExtendedCorrections.Enabled = evProduct.PlannedCorrections;
 				}*/
 
+				this.tabs.TabPages.Remove(pageCorrections);
+
+				if (graphicalMode) {
+					this.numArea.Enabled = false;
+					this.numAreaPercentage.Enabled = false;
+					this.numAreaReduced.Enabled = false;
+					this.numAreaUnheated.Enabled = false;
+					this.numRim.Enabled = false;
+					this.numCorners.Enabled = false;
+					this.cmbLayDistance.Enabled = false;
+					this.cmbRimType.Enabled = false;
+					this.cmbCircuits.Enabled = false;
+					this.btnGraphical.Enabled = true;
+				} else {
+					this.tabs.TabPages.Add(pageCorrections);
+					this.numArea.Enabled = true;
+					this.numAreaPercentage.Enabled = true;
+					this.numAreaReduced.Enabled = true;
+					this.numAreaUnheated.Enabled = true;
+					this.numRim.Enabled = true;
+					this.numCorners.Enabled = true;
+					//this.cmbLayDistance.Enabled = true;
+					//this.cmbRimType.Enabled = true;
+					//this.cmbCircuits.Enabled = true;
+					this.btnGraphical.Enabled = false;
+				}
+
 				ignoreCoverHeatLoad--;
 				ignoreHeatLoad--;
 				ignoreHeatLoadPercentage--;
@@ -831,6 +890,7 @@ namespace Europlan.Common {
 				ignoreCorrections--;
 				ignoreCalculationMode--;
 			}
+			updateOngoing = false;
 			// TODO
 		}
 
@@ -1430,6 +1490,55 @@ namespace Europlan.Common {
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
 			}
+		}
+
+		private void rbGraphical_CheckedChanged(object sender, EventArgs e) {
+			if (!updateOngoing && (sender as RadioButton).Checked) {
+				if (this.product.Product.GraphicalMode.HasValue && this.product.Product.GraphicalMode.Value != rbLayoutGraphical.Checked) {
+					// change from graphical to table based
+					if (this.product.Product.GraphicalMode.Value) {
+						if (!this.product.Product.AllowToSwitchMode) {
+							DialogResult result = MessageBox.Show(EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Grafisch, EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Titel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								this.UpdateControl(FieldEnum.NONE);
+								return;
+							}
+						}
+						// change from table based to graphical  
+					} else {
+						if (!this.product.Product.AllowToSwitchMode) {
+							DialogResult result = MessageBox.Show(EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Tabellarisch, EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Titel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								this.UpdateControl(FieldEnum.NONE);
+								return;
+							} else {
+								(this.product.Product as EurovalProduct).ResetProduct();
+							}
+						}
+					}
+				}
+				this.product.Product.GraphicalMode = rbLayoutGraphical.Checked;
+				this.UpdateControl(FieldEnum.LAYOUT_TYPE);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+			}
+		}
+
+		private void btnGraphical_Click(object sender, EventArgs e) {
+			if (this.product != null) {
+				Europlan.Common.Products.EcothermPlannerForm form = new Europlan.Common.Products.EcothermPlannerForm(this.product);
+				form.ShowDialog();
+				if (form.Changed && this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
+				this.UpdateControl(FieldEnum.NONE);
+			}
+		}
+
+		private void btnGraphicalAnbindleitungen_Click(object sender, EventArgs e) {
+			ConnectionPlannerForm form = new ConnectionPlannerForm(this.product.Product, false);
+			form.ShowDialog();
 		}
 
 		/*private void rbExtendedCorrections_CheckedChanged(object sender, EventArgs e) {
