@@ -757,6 +757,16 @@ namespace Europlan.Common {
 					}
 				}
 			}
+			if (this.Mode == RoomPickerMode.RPM_ADD_EXPANSION_GAP || this.Mode == RoomPickerMode.RPM_DEL_EXPANSION_GAP) {
+				expansionGapStart = Point2D.Zero;
+				this.Mode = RoomPickerMode.RPM_NONE;
+				this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
+				this.ConnectedPlanPanel.InvalidateGraphics();
+				if (this.ModeChanged != null) {
+					this.ModeChanged(this, EventArgs.Empty);
+				}
+				return true;
+			}
 			return false;
 		}
 

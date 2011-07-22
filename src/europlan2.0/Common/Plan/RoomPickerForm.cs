@@ -195,6 +195,8 @@ namespace Europlan.Common {
 				this.btnPickRoom.Checked = false;
 				this.btnPickUnused.Checked = false;
 				this.btnDelUnused.Checked = false;
+				this.btnAddExpansionGap.Checked = false;
+				this.btnRemoveExpansionGap.Checked = false;
 			} else if (this.panel.Mode == PlanMode.PM_PLANNER_CLICK) {
 				if (this.roomPicker.Mode == RoomPicker.RoomPickerMode.RPM_PICK_ROOM) {
 					this.btnMove.Checked = false;
