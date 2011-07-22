@@ -1381,6 +1381,15 @@ namespace Europlan.Common {
 				dialog.CreatePrompt = true;
 				dialog.OverwritePrompt = true;
 				dialog.InitialDirectory = Path.GetDirectoryName(Project.Instance.ProjectFileName);
+				string productName = "";
+				foreach (PlannedProduct pp in room.PlannedProducts) {
+					if (pp.Product == this.hithermPlanner.Product) {
+						productName = pp.Node.Text.Replace(":", "_");
+						productName = productName.Replace(" ", "");
+						break;
+					}
+				}
+				dialog.FileName = room.AssociatedFloor.Name + "_" + room.Name + "_" + productName;
 				dialog.DefaultExt = ".jpg";
 				dialog.Filter = "Bild|*.jpg;*.png;*.bmp";
 				DialogResult result = dialog.ShowDialog();
@@ -1391,7 +1400,11 @@ namespace Europlan.Common {
 					double width = (room.GetWallOffset(room.Walls[room.Walls.Count - 1]).Value.X * 100.0) + (room.Walls[room.Walls.Count - 1].GetWallWidth() * 100.0);
 					double height = 0;
 					foreach (GraphicalWall wall in room.Walls) {
-						height = Math.Max(height, wall.GetWallHeight() * 100.0);
+						if (wall.DachSchraege != null) {
+							height = Math.Max(height, (wall.GetWallHeight() + wall.DachSchraege.GetWallHeight()) * 100.0);
+						} else {
+							height = Math.Max(height, wall.GetWallHeight() * 100.0);
+						}
 					}
 					width += border * 2;
 					height += border * 2;
