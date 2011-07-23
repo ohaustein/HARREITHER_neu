@@ -46,7 +46,7 @@ namespace Europlan.Common {
 			this.btnCancel.Location = new System.Drawing.Point(419, 37);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 3;
+			this.btnCancel.TabIndex = 2;
 			this.btnCancel.Text = "&Abbrechen";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
@@ -57,7 +57,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(338, 37);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 2;
+			this.btnOk.TabIndex = 1;
 			this.btnOk.Text = "&OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			// 
@@ -86,7 +86,7 @@ namespace Europlan.Common {
             0});
 			this.numEdgeDistance.Name = "numEdgeDistance";
 			this.numEdgeDistance.Size = new System.Drawing.Size(197, 20);
-			this.numEdgeDistance.TabIndex = 1;
+			this.numEdgeDistance.TabIndex = 0;
 			this.numEdgeDistance.Text = "0";
 			this.numEdgeDistance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numEdgeDistance.Value = new decimal(new int[] {

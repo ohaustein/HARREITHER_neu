@@ -25,7 +25,6 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -35,6 +34,12 @@ namespace Europlan.Common {
 			this.lblName = new System.Windows.Forms.Label();
 			this.lblThickness = new System.Windows.Forms.Label();
 			this.gridLayers = new System.Windows.Forms.DataGridView();
+			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colMaterial = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.colLambdaValue = new Europlan.Common.NumericColumn();
+			this.colThickness = new Europlan.Common.NumericColumn();
+			this.colRValue = new Europlan.Common.NumericColumn();
+			this.colMaterialId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.constructionLayerBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.cbPeFoil = new System.Windows.Forms.CheckBox();
 			this.lblFactor = new System.Windows.Forms.Label();
@@ -42,12 +47,6 @@ namespace Europlan.Common {
 			this.numThickness = new Europlan.Common.NumericBox();
 			this.chkHitherm = new System.Windows.Forms.CheckBox();
 			this.chkHithermCompact = new System.Windows.Forms.CheckBox();
-			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colMaterial = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.colLambdaValue = new Europlan.Common.NumericColumn();
-			this.colThickness = new Europlan.Common.NumericColumn();
-			this.colRValue = new Europlan.Common.NumericColumn();
-			this.colMaterialId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridLayers)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.constructionLayerBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -123,6 +122,71 @@ namespace Europlan.Common {
 			this.gridLayers.Name = "gridLayers";
 			this.gridLayers.Size = new System.Drawing.Size(624, 268);
 			this.gridLayers.TabIndex = 5;
+			// 
+			// colName
+			// 
+			this.colName.DataPropertyName = "Name";
+			this.colName.FillWeight = 150F;
+			this.colName.HeaderText = "Bezeichnung";
+			this.colName.Name = "colName";
+			this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colName.Width = 150;
+			// 
+			// colMaterial
+			// 
+			this.colMaterial.DataPropertyName = "LayerMaterial";
+			this.colMaterial.FillWeight = 150F;
+			this.colMaterial.HeaderText = "Material";
+			this.colMaterial.Name = "colMaterial";
+			this.colMaterial.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colMaterial.Width = 150;
+			// 
+			// colLambdaValue
+			// 
+			this.colLambdaValue.DataPropertyName = "LambdaValue";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle2.Format = "F3";
+			this.colLambdaValue.DefaultCellStyle = dataGridViewCellStyle2;
+			this.colLambdaValue.FillWeight = 70F;
+			this.colLambdaValue.HeaderText = "lambda (W/m K)";
+			this.colLambdaValue.Name = "colLambdaValue";
+			this.colLambdaValue.NumEditType = Europlan.Common.NumericBox.NumericEditType.LAMBDA_VALUE;
+			this.colLambdaValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colLambdaValue.Width = 70;
+			// 
+			// colThickness
+			// 
+			this.colThickness.DataPropertyName = "Thickness";
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle3.Format = "F2";
+			this.colThickness.DefaultCellStyle = dataGridViewCellStyle3;
+			this.colThickness.FillWeight = 70F;
+			this.colThickness.HeaderText = "d (mm)";
+			this.colThickness.Name = "colThickness";
+			this.colThickness.NumEditType = Europlan.Common.NumericBox.NumericEditType.FLOOR_CONSTRUCTION_THICKNESS;
+			this.colThickness.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colThickness.Width = 70;
+			// 
+			// colRValue
+			// 
+			this.colRValue.DataPropertyName = "RValue";
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle4.Format = "F3";
+			this.colRValue.DefaultCellStyle = dataGridViewCellStyle4;
+			this.colRValue.FillWeight = 70F;
+			this.colRValue.HeaderText = "R (m²K/W)";
+			this.colRValue.Name = "colRValue";
+			this.colRValue.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
+			this.colRValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colRValue.Width = 70;
+			// 
+			// colMaterialId
+			// 
+			this.colMaterialId.DataPropertyName = "MaterialId";
+			this.colMaterialId.HeaderText = "MaterialId";
+			this.colMaterialId.Name = "colMaterialId";
+			this.colMaterialId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colMaterialId.Visible = false;
 			// 
 			// constructionLayerBindingSource
 			// 
@@ -212,7 +276,7 @@ namespace Europlan.Common {
 			this.chkHitherm.Location = new System.Drawing.Point(220, 57);
 			this.chkHitherm.Name = "chkHitherm";
 			this.chkHitherm.Size = new System.Drawing.Size(70, 17);
-			this.chkHitherm.TabIndex = 10;
+			this.chkHitherm.TabIndex = 3;
 			this.chkHitherm.Text = "Hitherm®";
 			this.chkHitherm.UseVisualStyleBackColor = true;
 			this.chkHitherm.Visible = false;
@@ -224,76 +288,11 @@ namespace Europlan.Common {
 			this.chkHithermCompact.Location = new System.Drawing.Point(296, 57);
 			this.chkHithermCompact.Name = "chkHithermCompact";
 			this.chkHithermCompact.Size = new System.Drawing.Size(115, 17);
-			this.chkHithermCompact.TabIndex = 11;
+			this.chkHithermCompact.TabIndex = 4;
 			this.chkHithermCompact.Text = "Hitherm® Compact";
 			this.chkHithermCompact.UseVisualStyleBackColor = true;
 			this.chkHithermCompact.Visible = false;
 			this.chkHithermCompact.CheckedChanged += new System.EventHandler(this.chkHithermCompact_CheckedChanged);
-			// 
-			// colName
-			// 
-			this.colName.DataPropertyName = "Name";
-			this.colName.FillWeight = 150F;
-			this.colName.HeaderText = "Bezeichnung";
-			this.colName.Name = "colName";
-			this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colName.Width = 150;
-			// 
-			// colMaterial
-			// 
-			this.colMaterial.DataPropertyName = "LayerMaterial";
-			this.colMaterial.FillWeight = 150F;
-			this.colMaterial.HeaderText = "Material";
-			this.colMaterial.Name = "colMaterial";
-			this.colMaterial.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colMaterial.Width = 150;
-			// 
-			// colLambdaValue
-			// 
-			this.colLambdaValue.DataPropertyName = "LambdaValue";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F0";
-			this.colLambdaValue.DefaultCellStyle = dataGridViewCellStyle2;
-			this.colLambdaValue.FillWeight = 70F;
-			this.colLambdaValue.HeaderText = "lambda (W/m K)";
-			this.colLambdaValue.Name = "colLambdaValue";
-			this.colLambdaValue.NumEditType = Europlan.Common.NumericBox.NumericEditType.LAMBDA_VALUE;
-			this.colLambdaValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colLambdaValue.Width = 70;
-			// 
-			// colThickness
-			// 
-			this.colThickness.DataPropertyName = "Thickness";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
-			this.colThickness.DefaultCellStyle = dataGridViewCellStyle3;
-			this.colThickness.FillWeight = 70F;
-			this.colThickness.HeaderText = "d (mm)";
-			this.colThickness.Name = "colThickness";
-			this.colThickness.NumEditType = Europlan.Common.NumericBox.NumericEditType.FLOOR_CONSTRUCTION_THICKNESS;
-			this.colThickness.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colThickness.Width = 70;
-			// 
-			// colRValue
-			// 
-			this.colRValue.DataPropertyName = "RValue";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F0";
-			this.colRValue.DefaultCellStyle = dataGridViewCellStyle4;
-			this.colRValue.FillWeight = 70F;
-			this.colRValue.HeaderText = "R (m²K/W)";
-			this.colRValue.Name = "colRValue";
-			this.colRValue.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
-			this.colRValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colRValue.Width = 70;
-			// 
-			// colMaterialId
-			// 
-			this.colMaterialId.DataPropertyName = "MaterialId";
-			this.colMaterialId.HeaderText = "MaterialId";
-			this.colMaterialId.Name = "colMaterialId";
-			this.colMaterialId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colMaterialId.Visible = false;
 			// 
 			// ConstructionEditor
 			// 

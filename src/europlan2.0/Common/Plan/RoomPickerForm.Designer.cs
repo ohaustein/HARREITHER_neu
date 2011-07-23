@@ -26,8 +26,8 @@ namespace Europlan.Common {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RoomPickerForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
-			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
+			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnPickRoom = new System.Windows.Forms.ToolStripButton();
@@ -72,7 +72,7 @@ namespace Europlan.Common {
 			this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnZoomIn,
-			this.btnZoomOut,
+            this.btnZoomOut,
             this.toolStripSeparator1,
             this.btnMove,
             this.btnPickRoom,
@@ -83,19 +83,8 @@ namespace Europlan.Common {
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(679, 25);
-			this.toolStrip.TabIndex = 1;
+			this.toolStrip.TabIndex = 14;
 			this.toolStrip.Text = "toolStrip";
-			// 
-			// btnZoomOut
-			// 
-			this.btnZoomOut.AutoToolTip = false;
-			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
-			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnZoomOut.Name = "btnZoomOut";
-			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomOut.Text = "zoomOut";
-			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// btnZoomIn
 			// 
@@ -107,6 +96,17 @@ namespace Europlan.Common {
 			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
 			this.btnZoomIn.Text = "zoomIn";
 			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+			// 
+			// btnZoomOut
+			// 
+			this.btnZoomOut.AutoToolTip = false;
+			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
+			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnZoomOut.Name = "btnZoomOut";
+			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
+			this.btnZoomOut.Text = "zoomOut";
+			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -190,7 +190,7 @@ namespace Europlan.Common {
 			this.panUnheatedArea.Location = new System.Drawing.Point(522, 25);
 			this.panUnheatedArea.Name = "panUnheatedArea";
 			this.panUnheatedArea.Size = new System.Drawing.Size(157, 408);
-			this.panUnheatedArea.TabIndex = 3;
+			this.panUnheatedArea.TabIndex = 1;
 			this.panUnheatedArea.Visible = false;
 			// 
 			// cbEnterArea
@@ -200,7 +200,7 @@ namespace Europlan.Common {
 			this.cbEnterArea.Location = new System.Drawing.Point(6, 107);
 			this.cbEnterArea.Name = "cbEnterArea";
 			this.cbEnterArea.Size = new System.Drawing.Size(145, 23);
-			this.cbEnterArea.TabIndex = 7;
+			this.cbEnterArea.TabIndex = 5;
 			this.cbEnterArea.Text = "Fläche eingeben";
 			this.cbEnterArea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.cbEnterArea.UseVisualStyleBackColor = true;
@@ -212,7 +212,7 @@ namespace Europlan.Common {
 			this.btnAddUnheatedArea.Location = new System.Drawing.Point(6, 363);
 			this.btnAddUnheatedArea.Name = "btnAddUnheatedArea";
 			this.btnAddUnheatedArea.Size = new System.Drawing.Size(145, 23);
-			this.btnAddUnheatedArea.TabIndex = 4;
+			this.btnAddUnheatedArea.TabIndex = 12;
 			this.btnAddUnheatedArea.Text = "Fläche hinzufügen";
 			this.btnAddUnheatedArea.UseVisualStyleBackColor = true;
 			this.btnAddUnheatedArea.Click += new System.EventHandler(this.btnAddUnheatedArea_Click);
@@ -229,7 +229,7 @@ namespace Europlan.Common {
 			this.grpSize.Location = new System.Drawing.Point(6, 257);
 			this.grpSize.Name = "grpSize";
 			this.grpSize.Size = new System.Drawing.Size(145, 100);
-			this.grpSize.TabIndex = 6;
+			this.grpSize.TabIndex = 9;
 			this.grpSize.TabStop = false;
 			this.grpSize.Text = "Größe";
 			// 
@@ -254,7 +254,7 @@ namespace Europlan.Common {
 			this.numSizeY.MinValue = null;
 			this.numSizeY.Name = "numSizeY";
 			this.numSizeY.Size = new System.Drawing.Size(100, 20);
-			this.numSizeY.TabIndex = 12;
+			this.numSizeY.TabIndex = 11;
 			this.numSizeY.Text = "0";
 			this.numSizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numSizeY.Value = new decimal(new int[] {
@@ -293,7 +293,7 @@ namespace Europlan.Common {
 			this.numSizeX.MinValue = null;
 			this.numSizeX.Name = "numSizeX";
 			this.numSizeX.Size = new System.Drawing.Size(100, 20);
-			this.numSizeX.TabIndex = 9;
+			this.numSizeX.TabIndex = 10;
 			this.numSizeX.Text = "0";
 			this.numSizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numSizeX.Value = new decimal(new int[] {
@@ -323,7 +323,7 @@ namespace Europlan.Common {
 			this.grpDistance.Location = new System.Drawing.Point(6, 136);
 			this.grpDistance.Name = "grpDistance";
 			this.grpDistance.Size = new System.Drawing.Size(145, 115);
-			this.grpDistance.TabIndex = 4;
+			this.grpDistance.TabIndex = 6;
 			this.grpDistance.TabStop = false;
 			this.grpDistance.Text = "Abstand vom Referenzpunkt";
 			// 
@@ -348,7 +348,7 @@ namespace Europlan.Common {
 			this.numDistanceY.MinValue = null;
 			this.numDistanceY.Name = "numDistanceY";
 			this.numDistanceY.Size = new System.Drawing.Size(100, 20);
-			this.numDistanceY.TabIndex = 6;
+			this.numDistanceY.TabIndex = 8;
 			this.numDistanceY.Text = "0";
 			this.numDistanceY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numDistanceY.Value = new decimal(new int[] {
@@ -387,7 +387,7 @@ namespace Europlan.Common {
 			this.numDistanceX.MinValue = null;
 			this.numDistanceX.Name = "numDistanceX";
 			this.numDistanceX.Size = new System.Drawing.Size(100, 20);
-			this.numDistanceX.TabIndex = 4;
+			this.numDistanceX.TabIndex = 7;
 			this.numDistanceX.Text = "0";
 			this.numDistanceX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numDistanceX.Value = new decimal(new int[] {
@@ -424,7 +424,7 @@ namespace Europlan.Common {
 			this.cbUnheatedTextual.Location = new System.Drawing.Point(12, 41);
 			this.cbUnheatedTextual.Name = "cbUnheatedTextual";
 			this.cbUnheatedTextual.Size = new System.Drawing.Size(101, 17);
-			this.cbUnheatedTextual.TabIndex = 5;
+			this.cbUnheatedTextual.TabIndex = 3;
 			this.cbUnheatedTextual.Text = "Größe eingeben";
 			this.cbUnheatedTextual.UseVisualStyleBackColor = true;
 			this.cbUnheatedTextual.CheckedChanged += new System.EventHandler(this.cbUnheatedTextual_CheckedChanged);
@@ -436,7 +436,7 @@ namespace Europlan.Common {
 			this.cbUnheatedGraphical.Location = new System.Drawing.Point(12, 22);
 			this.cbUnheatedGraphical.Name = "cbUnheatedGraphical";
 			this.cbUnheatedGraphical.Size = new System.Drawing.Size(108, 17);
-			this.cbUnheatedGraphical.TabIndex = 4;
+			this.cbUnheatedGraphical.TabIndex = 2;
 			this.cbUnheatedGraphical.TabStop = true;
 			this.cbUnheatedGraphical.Text = "grafisch festlegen";
 			this.cbUnheatedGraphical.UseVisualStyleBackColor = true;
@@ -457,10 +457,11 @@ namespace Europlan.Common {
 			this.panel.Name = "panel";
 			this.panel.ProductPlanner = this.roomPicker;
 			this.panel.Size = new System.Drawing.Size(679, 437);
-			this.panel.TabIndex = 2;
+			this.panel.TabIndex = 0;
 			// 
 			// roomPicker
 			// 
+			this.roomPicker.IsCeiling = false;
 			this.roomPicker.Mode = Europlan.Common.RoomPicker.RoomPickerMode.RPM_NONE;
 			this.roomPicker.RoomCoordinates = ((System.Collections.Generic.List<WW.Math.Point2D>)(resources.GetObject("roomPicker.RoomCoordinates")));
 			this.roomPicker.UnusedCoordinates = ((System.Collections.Generic.List<System.Collections.Generic.List<WW.Math.Point2D>>)(resources.GetObject("roomPicker.UnusedCoordinates")));
@@ -481,7 +482,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(581, 3);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(95, 23);
-			this.btnOk.TabIndex = 4;
+			this.btnOk.TabIndex = 13;
 			this.btnOk.Text = "Übernehmen";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);

@@ -26,8 +26,8 @@ namespace Europlan.Common {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistributorPositionerForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
-			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
+			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnPosition = new System.Windows.Forms.ToolStripButton();
@@ -51,26 +51,15 @@ namespace Europlan.Common {
 			this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnZoomIn,
-			this.btnZoomOut,
+            this.btnZoomOut,
             this.toolStripSeparator1,
             this.btnMove,
             this.btnPosition});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(679, 25);
-			this.toolStrip.TabIndex = 1;
+			this.toolStrip.TabIndex = 7;
 			this.toolStrip.Text = "toolStrip";
-			// 
-			// btnZoomOut
-			// 
-			this.btnZoomOut.AutoToolTip = false;
-			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
-			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnZoomOut.Name = "btnZoomOut";
-			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomOut.Text = "zoomOut";
-			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// btnZoomIn
 			// 
@@ -82,6 +71,17 @@ namespace Europlan.Common {
 			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
 			this.btnZoomIn.Text = "zoomIn";
 			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+			// 
+			// btnZoomOut
+			// 
+			this.btnZoomOut.AutoToolTip = false;
+			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
+			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnZoomOut.Name = "btnZoomOut";
+			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
+			this.btnZoomOut.Text = "zoomOut";
+			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -157,7 +157,7 @@ namespace Europlan.Common {
             0});
 			this.numRotation.Name = "numRotation";
 			this.numRotation.Size = new System.Drawing.Size(74, 20);
-			this.numRotation.TabIndex = 19;
+			this.numRotation.TabIndex = 5;
 			this.numRotation.Text = "0";
 			this.numRotation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numRotation.Value = new decimal(new int[] {
@@ -182,7 +182,7 @@ namespace Europlan.Common {
 			this.btnCwLarge.Location = new System.Drawing.Point(72, 3);
 			this.btnCwLarge.Name = "btnCwLarge";
 			this.btnCwLarge.Size = new System.Drawing.Size(24, 24);
-			this.btnCwLarge.TabIndex = 17;
+			this.btnCwLarge.TabIndex = 4;
 			this.btnCwLarge.UseVisualStyleBackColor = true;
 			this.btnCwLarge.Click += new System.EventHandler(this.btnRotate_Click);
 			// 
@@ -192,7 +192,7 @@ namespace Europlan.Common {
 			this.btnCwSmall.Location = new System.Drawing.Point(49, 3);
 			this.btnCwSmall.Name = "btnCwSmall";
 			this.btnCwSmall.Size = new System.Drawing.Size(24, 24);
-			this.btnCwSmall.TabIndex = 16;
+			this.btnCwSmall.TabIndex = 3;
 			this.btnCwSmall.UseVisualStyleBackColor = true;
 			this.btnCwSmall.Click += new System.EventHandler(this.btnRotate_Click);
 			// 
@@ -202,7 +202,7 @@ namespace Europlan.Common {
 			this.btnCcwSmall.Location = new System.Drawing.Point(26, 3);
 			this.btnCcwSmall.Name = "btnCcwSmall";
 			this.btnCcwSmall.Size = new System.Drawing.Size(24, 24);
-			this.btnCcwSmall.TabIndex = 15;
+			this.btnCcwSmall.TabIndex = 2;
 			this.btnCcwSmall.UseVisualStyleBackColor = true;
 			this.btnCcwSmall.Click += new System.EventHandler(this.btnRotate_Click);
 			// 
@@ -212,7 +212,7 @@ namespace Europlan.Common {
 			this.btnCcwLarge.Location = new System.Drawing.Point(3, 3);
 			this.btnCcwLarge.Name = "btnCcwLarge";
 			this.btnCcwLarge.Size = new System.Drawing.Size(24, 24);
-			this.btnCcwLarge.TabIndex = 14;
+			this.btnCcwLarge.TabIndex = 1;
 			this.btnCcwLarge.UseVisualStyleBackColor = true;
 			this.btnCcwLarge.Click += new System.EventHandler(this.btnRotate_Click);
 			// 
@@ -222,7 +222,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(581, 3);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(95, 23);
-			this.btnOk.TabIndex = 4;
+			this.btnOk.TabIndex = 6;
 			this.btnOk.Text = "Übernehmen";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -234,10 +234,11 @@ namespace Europlan.Common {
 			this.panel.Name = "panel";
 			this.panel.ProductPlanner = this.distributorPositioner;
 			this.panel.Size = new System.Drawing.Size(679, 437);
-			this.panel.TabIndex = 2;
+			this.panel.TabIndex = 0;
 			// 
 			// distributorPositioner
 			// 
+			this.distributorPositioner.DrawOtherDistributorsInPlan = false;
 			this.distributorPositioner.Mode = Europlan.Common.DistributorPositioner.DistributorPositionerMode.DPM_NONE;
 			this.distributorPositioner.ModeChanged += new System.EventHandler(this.distributorPositioner_ModeChanged);
 			// 

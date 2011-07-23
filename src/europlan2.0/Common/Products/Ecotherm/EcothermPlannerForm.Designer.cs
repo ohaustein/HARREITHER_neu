@@ -164,7 +164,7 @@ namespace Europlan.Common.Products {
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(846, 25);
-			this.toolStrip.TabIndex = 1;
+			this.toolStrip.TabIndex = 10;
 			this.toolStrip.Text = "toolStrip1";
 			// 
 			// btnZoomIn
@@ -335,7 +335,7 @@ namespace Europlan.Common.Products {
 			this.tabs.Name = "tabs";
 			this.tabs.SelectedIndex = 0;
 			this.tabs.Size = new System.Drawing.Size(846, 212);
-			this.tabs.TabIndex = 2;
+			this.tabs.TabIndex = 1;
 			// 
 			// pageAuslegung
 			// 
@@ -389,7 +389,7 @@ namespace Europlan.Common.Products {
 			this.numCorners.MinValue = null;
 			this.numCorners.Name = "numCorners";
 			this.numCorners.Size = new System.Drawing.Size(109, 20);
-			this.numCorners.TabIndex = 92;
+			this.numCorners.TabIndex = 9;
 			this.numCorners.Text = "0";
 			this.numCorners.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numCorners.Value = new decimal(new int[] {
@@ -433,7 +433,7 @@ namespace Europlan.Common.Products {
             0});
 			this.numRim.Name = "numRim";
 			this.numRim.Size = new System.Drawing.Size(194, 20);
-			this.numRim.TabIndex = 89;
+			this.numRim.TabIndex = 8;
 			this.numRim.Text = "0";
 			this.numRim.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numRim.Value = new decimal(new int[] {
@@ -493,7 +493,7 @@ namespace Europlan.Common.Products {
 			this.cmbCircuits.Location = new System.Drawing.Point(464, 59);
 			this.cmbCircuits.Name = "cmbCircuits";
 			this.cmbCircuits.Size = new System.Drawing.Size(138, 21);
-			this.cmbCircuits.TabIndex = 84;
+			this.cmbCircuits.TabIndex = 7;
 			this.cmbCircuits.SelectedIndexChanged += new System.EventHandler(this.cmbCircuits_SelectedIndexChanged);
 			// 
 			// label29
@@ -510,7 +510,7 @@ namespace Europlan.Common.Products {
 			this.rbCalculateBoth.Location = new System.Drawing.Point(8, 52);
 			this.rbCalculateBoth.Name = "rbCalculateBoth";
 			this.rbCalculateBoth.Size = new System.Drawing.Size(153, 17);
-			this.rbCalculateBoth.TabIndex = 82;
+			this.rbCalculateBoth.TabIndex = 4;
 			this.rbCalculateBoth.TabStop = true;
 			this.rbCalculateBoth.Text = "nach Heiz- und Kühlbetrieb";
 			this.rbCalculateBoth.UseVisualStyleBackColor = true;
@@ -522,7 +522,7 @@ namespace Europlan.Common.Products {
 			this.rbCalculateCool.Location = new System.Drawing.Point(8, 29);
 			this.rbCalculateCool.Name = "rbCalculateCool";
 			this.rbCalculateCool.Size = new System.Drawing.Size(105, 17);
-			this.rbCalculateCool.TabIndex = 81;
+			this.rbCalculateCool.TabIndex = 3;
 			this.rbCalculateCool.TabStop = true;
 			this.rbCalculateCool.Text = "nach Kühlbetrieb";
 			this.rbCalculateCool.UseVisualStyleBackColor = true;
@@ -535,7 +535,7 @@ namespace Europlan.Common.Products {
 			this.rbCalculateHeat.Location = new System.Drawing.Point(8, 6);
 			this.rbCalculateHeat.Name = "rbCalculateHeat";
 			this.rbCalculateHeat.Size = new System.Drawing.Size(105, 17);
-			this.rbCalculateHeat.TabIndex = 80;
+			this.rbCalculateHeat.TabIndex = 2;
 			this.rbCalculateHeat.TabStop = true;
 			this.rbCalculateHeat.Text = "nach Heizbetrieb";
 			this.rbCalculateHeat.UseVisualStyleBackColor = true;
@@ -557,7 +557,7 @@ namespace Europlan.Common.Products {
 			this.cmbRimType.Location = new System.Drawing.Point(464, 32);
 			this.cmbRimType.Name = "cmbRimType";
 			this.cmbRimType.Size = new System.Drawing.Size(138, 21);
-			this.cmbRimType.TabIndex = 79;
+			this.cmbRimType.TabIndex = 6;
 			this.cmbRimType.SelectedIndexChanged += new System.EventHandler(this.cmbRimType_SelectedIndexChanged);
 			// 
 			// cmbLayDistance
@@ -576,7 +576,7 @@ namespace Europlan.Common.Products {
 			this.cmbLayDistance.Location = new System.Drawing.Point(464, 5);
 			this.cmbLayDistance.Name = "cmbLayDistance";
 			this.cmbLayDistance.Size = new System.Drawing.Size(138, 21);
-			this.cmbLayDistance.TabIndex = 78;
+			this.cmbLayDistance.TabIndex = 5;
 			this.cmbLayDistance.SelectedIndexChanged += new System.EventHandler(this.cmbLayDistance_SelectedIndexChanged);
 			// 
 			// label14
@@ -690,6 +690,7 @@ namespace Europlan.Common.Products {
 			this.lstError.ShowGroups = false;
 			this.lstError.Size = new System.Drawing.Size(375, 85);
 			this.lstError.TabIndex = 139;
+			this.lstError.TabStop = false;
 			this.lstError.UseCompatibleStateImageBehavior = false;
 			this.lstError.View = System.Windows.Forms.View.Details;
 			this.lstError.Visible = false;
@@ -1308,7 +1309,7 @@ namespace Europlan.Common.Products {
 			// 
 			// eurovalPlanner
 			// 
-			this.eurovalPlanner.Mode = Europlan.Common.EcothermPlanner.PipeProductMode.EVM_NONE;
+			this.eurovalPlanner.Mode = Europlan.Common.PipeProductPlanner<Europlan.Common.EcothermProduct, Europlan.Common.EcothermProduct.EcothermLayDistance, Europlan.Common.EcothermProduct.EcothermRimType>.PipeProductMode.EVM_NONE;
 			this.eurovalPlanner.ModeChanged += new System.EventHandler<System.EventArgs>(this.eurovalPlanner_ModeChanged);
 			this.eurovalPlanner.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.europlanPlanner_ProjectChanged);
 			// 
@@ -1332,6 +1333,7 @@ namespace Europlan.Common.Products {
 			this.Controls.Add(this.planPanel);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.toolStrip);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "EcothermPlannerForm";
 			this.Text = "Ecotherm® - grafische Auslegung";
 			this.Load += new System.EventHandler(this.EcothermPlannerForm_Load);

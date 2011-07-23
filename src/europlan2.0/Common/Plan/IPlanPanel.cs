@@ -69,6 +69,8 @@ namespace Europlan.Common {
 			get;
 		}
 
+		[System.ComponentModel.Browsable(false)]
+		[System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
 		System.Windows.Forms.Cursor PlanCursor {
 			set;
 			get;

@@ -53,7 +53,7 @@ namespace Europlan.Common {
 			this.btnImport.Location = new System.Drawing.Point(3, 37);
 			this.btnImport.Name = "btnImport";
 			this.btnImport.Size = new System.Drawing.Size(130, 23);
-			this.btnImport.TabIndex = 21;
+			this.btnImport.TabIndex = 0;
 			this.btnImport.Text = "Plan importieren";
 			this.btnImport.UseVisualStyleBackColor = true;
 			this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
@@ -63,7 +63,7 @@ namespace Europlan.Common {
 			this.btnDelete.Location = new System.Drawing.Point(139, 37);
 			this.btnDelete.Name = "btnDelete";
 			this.btnDelete.Size = new System.Drawing.Size(130, 23);
-			this.btnDelete.TabIndex = 22;
+			this.btnDelete.TabIndex = 1;
 			this.btnDelete.Text = "Plan entfernen";
 			this.btnDelete.UseVisualStyleBackColor = true;
 			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -89,7 +89,7 @@ namespace Europlan.Common {
 			this.dgvPlans.RowHeadersVisible = false;
 			this.dgvPlans.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvPlans.Size = new System.Drawing.Size(866, 487);
-			this.dgvPlans.TabIndex = 23;
+			this.dgvPlans.TabIndex = 3;
 			this.dgvPlans.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlans_CellValueChanged);
 			this.dgvPlans.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlans_CellClick);
 			// 
@@ -133,7 +133,7 @@ namespace Europlan.Common {
 			this.btnExport.Location = new System.Drawing.Point(275, 37);
 			this.btnExport.Name = "btnExport";
 			this.btnExport.Size = new System.Drawing.Size(130, 23);
-			this.btnExport.TabIndex = 24;
+			this.btnExport.TabIndex = 2;
 			this.btnExport.Text = "Plan exportieren";
 			this.btnExport.UseVisualStyleBackColor = true;
 			this.btnExport.Click += new System.EventHandler(this.btnExport_Click);

@@ -31,6 +31,13 @@ namespace Europlan.Common {
 			this.btnView = new System.Windows.Forms.Button();
 			this.btnNew = new System.Windows.Forms.Button();
 			this.gridConstructions = new System.Windows.Forms.DataGridView();
+			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.thicknessDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+			this.colRValue = new Europlan.Common.NumericColumn();
+			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.colScope = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.constructionsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.cmsView = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tsmiFloorConstruction = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,13 +57,6 @@ namespace Europlan.Common {
 			this.tsmiNewFloorConstructionDryAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiNewInsulationConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiNewCeilingConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
-			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.thicknessDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.colRValue = new Europlan.Common.NumericColumn();
-			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
-			this.colScope = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panBottom.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridConstructions)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.constructionsWrapperBindingSource)).BeginInit();
@@ -80,7 +80,7 @@ namespace Europlan.Common {
 			this.btnView.Location = new System.Drawing.Point(120, 3);
 			this.btnView.Name = "btnView";
 			this.btnView.Size = new System.Drawing.Size(231, 23);
-			this.btnView.TabIndex = 1;
+			this.btnView.TabIndex = 2;
 			this.btnView.Text = "Angezeigte Konstruktionen (Alle)";
 			this.btnView.UseVisualStyleBackColor = true;
 			this.btnView.Click += new System.EventHandler(this.btnView_Click);
@@ -90,7 +90,7 @@ namespace Europlan.Common {
 			this.btnNew.Location = new System.Drawing.Point(0, 3);
 			this.btnNew.Name = "btnNew";
 			this.btnNew.Size = new System.Drawing.Size(114, 23);
-			this.btnNew.TabIndex = 0;
+			this.btnNew.TabIndex = 1;
 			this.btnNew.Text = "Neue Konstruktion";
 			this.btnNew.UseVisualStyleBackColor = true;
 			this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
@@ -123,10 +123,86 @@ namespace Europlan.Common {
 			this.gridConstructions.Name = "gridConstructions";
 			this.gridConstructions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridConstructions.Size = new System.Drawing.Size(704, 398);
-			this.gridConstructions.TabIndex = 3;
+			this.gridConstructions.TabIndex = 0;
 			this.gridConstructions.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridConstructions_UserDeletingRow);
 			this.gridConstructions.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridConstructions_RowsAdded);
 			this.gridConstructions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridConstructions_CellClick);
+			// 
+			// colId
+			// 
+			this.colId.DataPropertyName = "Id";
+			this.colId.FillWeight = 50F;
+			this.colId.HeaderText = "Nr.";
+			this.colId.Name = "colId";
+			this.colId.ReadOnly = true;
+			this.colId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colId.Width = 50;
+			// 
+			// colName
+			// 
+			this.colName.DataPropertyName = "Name";
+			this.colName.FillWeight = 150F;
+			this.colName.HeaderText = "Bezeichnung";
+			this.colName.Name = "colName";
+			this.colName.ReadOnly = true;
+			this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colName.Width = 150;
+			// 
+			// colType
+			// 
+			this.colType.DataPropertyName = "Type";
+			this.colType.FillWeight = 150F;
+			this.colType.HeaderText = "Type";
+			this.colType.Name = "colType";
+			this.colType.ReadOnly = true;
+			this.colType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colType.Width = 150;
+			// 
+			// thicknessDataGridViewTextBoxColumn
+			// 
+			this.thicknessDataGridViewTextBoxColumn.DataPropertyName = "Thickness";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle2.Format = "F2";
+			this.thicknessDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+			this.thicknessDataGridViewTextBoxColumn.HeaderText = "Thickness";
+			this.thicknessDataGridViewTextBoxColumn.Name = "thicknessDataGridViewTextBoxColumn";
+			this.thicknessDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.FLOOR_CONSTRUCTION_THICKNESS;
+			this.thicknessDataGridViewTextBoxColumn.ReadOnly = true;
+			this.thicknessDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.thicknessDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// colRValue
+			// 
+			this.colRValue.DataPropertyName = "RValue";
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle3.Format = "F3";
+			this.colRValue.DefaultCellStyle = dataGridViewCellStyle3;
+			this.colRValue.FillWeight = 50F;
+			this.colRValue.HeaderText = "R (m²K/W)";
+			this.colRValue.Name = "colRValue";
+			this.colRValue.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
+			this.colRValue.ReadOnly = true;
+			this.colRValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colRValue.Width = 50;
+			// 
+			// colEdit
+			// 
+			this.colEdit.FillWeight = 65F;
+			this.colEdit.HeaderText = "Bearbeiten";
+			this.colEdit.Name = "colEdit";
+			this.colEdit.ReadOnly = true;
+			this.colEdit.Text = "...";
+			this.colEdit.UseColumnTextForButtonValue = true;
+			this.colEdit.Width = 65;
+			// 
+			// colScope
+			// 
+			this.colScope.DataPropertyName = "Scope";
+			this.colScope.HeaderText = "Scope";
+			this.colScope.Name = "colScope";
+			this.colScope.ReadOnly = true;
+			this.colScope.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colScope.Visible = false;
 			// 
 			// constructionsWrapperBindingSource
 			// 
@@ -281,82 +357,6 @@ namespace Europlan.Common {
 			this.tsmiNewCeilingConstructionAdmin.Size = new System.Drawing.Size(249, 22);
 			this.tsmiNewCeilingConstructionAdmin.Text = "Deckenkonstruktion";
 			this.tsmiNewCeilingConstructionAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
-			// 
-			// colId
-			// 
-			this.colId.DataPropertyName = "Id";
-			this.colId.FillWeight = 50F;
-			this.colId.HeaderText = "Nr.";
-			this.colId.Name = "colId";
-			this.colId.ReadOnly = true;
-			this.colId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colId.Width = 50;
-			// 
-			// colName
-			// 
-			this.colName.DataPropertyName = "Name";
-			this.colName.FillWeight = 150F;
-			this.colName.HeaderText = "Bezeichnung";
-			this.colName.Name = "colName";
-			this.colName.ReadOnly = true;
-			this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colName.Width = 150;
-			// 
-			// colType
-			// 
-			this.colType.DataPropertyName = "Type";
-			this.colType.FillWeight = 150F;
-			this.colType.HeaderText = "Type";
-			this.colType.Name = "colType";
-			this.colType.ReadOnly = true;
-			this.colType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colType.Width = 150;
-			// 
-			// thicknessDataGridViewTextBoxColumn
-			// 
-			this.thicknessDataGridViewTextBoxColumn.DataPropertyName = "Thickness";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F0";
-			this.thicknessDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-			this.thicknessDataGridViewTextBoxColumn.HeaderText = "Thickness";
-			this.thicknessDataGridViewTextBoxColumn.Name = "thicknessDataGridViewTextBoxColumn";
-			this.thicknessDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.FLOOR_CONSTRUCTION_THICKNESS;
-			this.thicknessDataGridViewTextBoxColumn.ReadOnly = true;
-			this.thicknessDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.thicknessDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// colRValue
-			// 
-			this.colRValue.DataPropertyName = "RValue";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
-			this.colRValue.DefaultCellStyle = dataGridViewCellStyle3;
-			this.colRValue.FillWeight = 50F;
-			this.colRValue.HeaderText = "R (m²K/W)";
-			this.colRValue.Name = "colRValue";
-			this.colRValue.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
-			this.colRValue.ReadOnly = true;
-			this.colRValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colRValue.Width = 50;
-			// 
-			// colEdit
-			// 
-			this.colEdit.FillWeight = 65F;
-			this.colEdit.HeaderText = "Bearbeiten";
-			this.colEdit.Name = "colEdit";
-			this.colEdit.ReadOnly = true;
-			this.colEdit.Text = "...";
-			this.colEdit.UseColumnTextForButtonValue = true;
-			this.colEdit.Width = 65;
-			// 
-			// colScope
-			// 
-			this.colScope.DataPropertyName = "Scope";
-			this.colScope.HeaderText = "Scope";
-			this.colScope.Name = "colScope";
-			this.colScope.ReadOnly = true;
-			this.colScope.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colScope.Visible = false;
 			// 
 			// ConstructionEditorGrid
 			// 

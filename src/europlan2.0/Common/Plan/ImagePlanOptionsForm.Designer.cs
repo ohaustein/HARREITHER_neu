@@ -67,7 +67,7 @@ namespace Europlan.Common {
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(668, 25);
-			this.toolStrip.TabIndex = 1;
+			this.toolStrip.TabIndex = 2;
 			this.toolStrip.Text = "toolStrip";
 			// 
 			// btnRotateLeft
@@ -229,7 +229,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(568, 428);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(95, 23);
-			this.btnOk.TabIndex = 2;
+			this.btnOk.TabIndex = 1;
 			this.btnOk.Text = "Übernehmen";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);

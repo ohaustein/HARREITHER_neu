@@ -47,7 +47,7 @@ namespace Europlan.Common {
 			this.btnExport.Location = new System.Drawing.Point(199, 93);
 			this.btnExport.Name = "btnExport";
 			this.btnExport.Size = new System.Drawing.Size(137, 23);
-			this.btnExport.TabIndex = 3;
+			this.btnExport.TabIndex = 4;
 			this.btnExport.Text = "Exportieren";
 			this.btnExport.UseVisualStyleBackColor = true;
 			this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
@@ -58,7 +58,7 @@ namespace Europlan.Common {
 			this.btnSaveAs.Location = new System.Drawing.Point(443, 54);
 			this.btnSaveAs.Name = "btnSaveAs";
 			this.btnSaveAs.Size = new System.Drawing.Size(36, 23);
-			this.btnSaveAs.TabIndex = 2;
+			this.btnSaveAs.TabIndex = 3;
 			this.btnSaveAs.Text = "...";
 			this.btnSaveAs.UseVisualStyleBackColor = true;
 			this.btnSaveAs.Click += new System.EventHandler(this.btnSaveAs_Click);
@@ -71,7 +71,7 @@ namespace Europlan.Common {
 			this.txtPath.Name = "txtPath";
 			this.txtPath.ReadOnly = true;
 			this.txtPath.Size = new System.Drawing.Size(285, 20);
-			this.txtPath.TabIndex = 10;
+			this.txtPath.TabIndex = 2;
 			this.txtPath.TabStop = false;
 			// 
 			// lblFileName
@@ -93,7 +93,7 @@ namespace Europlan.Common {
 			this.cmbExportOption.Location = new System.Drawing.Point(152, 6);
 			this.cmbExportOption.Name = "cmbExportOption";
 			this.cmbExportOption.Size = new System.Drawing.Size(327, 21);
-			this.cmbExportOption.TabIndex = 1;
+			this.cmbExportOption.TabIndex = 0;
 			// 
 			// lblExportOption
 			// 
@@ -111,7 +111,7 @@ namespace Europlan.Common {
 			this.btnCancel.Location = new System.Drawing.Point(342, 93);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(137, 23);
-			this.btnCancel.TabIndex = 4;
+			this.btnCancel.TabIndex = 5;
 			this.btnCancel.Text = "Abbrechen";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -122,7 +122,7 @@ namespace Europlan.Common {
 			this.chkExportWallNumbers.Location = new System.Drawing.Point(152, 33);
 			this.chkExportWallNumbers.Name = "chkExportWallNumbers";
 			this.chkExportWallNumbers.Size = new System.Drawing.Size(197, 17);
-			this.chkExportWallNumbers.TabIndex = 11;
+			this.chkExportWallNumbers.TabIndex = 1;
 			this.chkExportWallNumbers.Text = "Numerierung der Wände exportieren";
 			this.chkExportWallNumbers.UseVisualStyleBackColor = true;
 			// 

@@ -274,10 +274,31 @@
   <metadata name="modulKlimaDeckePlanner.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="modulKlimaDeckePlanner.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <metadata name="connectionPlanner.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>419, 17</value>
   </metadata>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAZmZm////////////////////////////////////////////////////////////////////
+        //9mZmb/AAAAAGZmZv//////////////////////////////////////////////////////////////
+        ////////ZmZm/wAAAABmZmb/////////////////////////////////////////////////////////
+        /////////////2ZmZv8AAAAAZmZm////////////////////////////////////////////////////
+        //////////////////9mZmb/AAAAAGZmZv//////////////////////////////////////////////
+        ////////////////////////ZmZm/wAAAABmZmb/////////////////////////////////////////
+        /////////////////////////////2ZmZv8AAAAAZmZm////////////////////////////////////
+        //////////////////////////////////9mZmb/AAAAAGZmZv//////////////////////////////
+        //////////////////////////////314f//////ZmZm/2ZmZv9mZmb///////XPaf//////////////
+        //////////////////////////////rntf/wtBj/+uez/2ZmZv9mZmafb2ti/9q8bf/yvzn/9c5p//31
+        4v/+/Pf///////////////////////jem//ywUL/9tN4/9anLP9va2H/AAAAAGZmZmBvbGT/vqJZ//bR
+        dP/2037//PDU///9+f////////////njrf/10HP/99eH/72eTf9mZmb/ZmZmYAAAAAAAAAAAZmZmQGZm
+        Zu+tmmv/99qU//nhq//88dj//vz3//rmuf/54Kb/99qQ/5uLY/9mZmbvZmZmMAAAAAAAAAAAAAAAAAAA
+        AABmZmYwZmZmz52SeP/w2qn/+ujD//768//77Mv/79ii/4F6af9mZmbPZmZmEAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAGZmZhBmZma/gn10//Hfuf/99eP/3cqd/29taf9mZmafAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAGZmZp9vbmv/sKWP/29uav9mZmZwAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZmZmcGZmZu9mZmZAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAAAAAAAAAAAAAMABAADgAwAA8AcAAPgP
+        AAD8PwAA/38AAA==
+</value>
+  </data>
 </root>

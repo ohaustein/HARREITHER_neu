@@ -48,7 +48,7 @@ namespace Europlan.Common {
 			this.btnClose.Location = new System.Drawing.Point(302, 326);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(75, 23);
-			this.btnClose.TabIndex = 4;
+			this.btnClose.TabIndex = 10;
 			this.btnClose.Text = "Schließen";
 			this.btnClose.UseVisualStyleBackColor = true;
 			// 
@@ -65,7 +65,7 @@ namespace Europlan.Common {
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(365, 74);
-			this.groupBox1.TabIndex = 3;
+			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Bearbeitungsmodus";
 			// 
@@ -75,7 +75,7 @@ namespace Europlan.Common {
 			this.rbWall.Location = new System.Drawing.Point(6, 43);
 			this.rbWall.Name = "rbWall";
 			this.rbWall.Size = new System.Drawing.Size(282, 17);
-			this.rbWall.TabIndex = 1;
+			this.rbWall.TabIndex = 2;
 			this.rbWall.Text = "Individuelle Hilfslinien für die aktuelle Wand bearbeiten";
 			this.rbWall.UseVisualStyleBackColor = true;
 			this.rbWall.CheckedChanged += new System.EventHandler(this.rbType_CheckedChanged);
@@ -87,7 +87,7 @@ namespace Europlan.Common {
 			this.rbGlobal.Location = new System.Drawing.Point(7, 20);
 			this.rbGlobal.Name = "rbGlobal";
 			this.rbGlobal.Size = new System.Drawing.Size(277, 17);
-			this.rbGlobal.TabIndex = 0;
+			this.rbGlobal.TabIndex = 1;
 			this.rbGlobal.TabStop = true;
 			this.rbGlobal.Text = "Globale Hilfslinien für den gesamten Raum bearbeiten";
 			this.rbGlobal.UseVisualStyleBackColor = true;
@@ -101,7 +101,7 @@ namespace Europlan.Common {
 			this.groupBox2.Location = new System.Drawing.Point(12, 92);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(365, 47);
-			this.groupBox2.TabIndex = 4;
+			this.groupBox2.TabIndex = 3;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Eigenschaften der Wand";
 			// 
@@ -111,7 +111,7 @@ namespace Europlan.Common {
 			this.chkUseGlobal.Location = new System.Drawing.Point(7, 20);
 			this.chkUseGlobal.Name = "chkUseGlobal";
 			this.chkUseGlobal.Size = new System.Drawing.Size(158, 17);
-			this.chkUseGlobal.TabIndex = 0;
+			this.chkUseGlobal.TabIndex = 4;
 			this.chkUseGlobal.Text = "Globale Hilfslinien aktivieren";
 			this.chkUseGlobal.UseVisualStyleBackColor = true;
 			this.chkUseGlobal.CheckedChanged += new System.EventHandler(this.chkUseGlobal_CheckedChanged);
@@ -139,7 +139,7 @@ namespace Europlan.Common {
 			this.btnDelete.Location = new System.Drawing.Point(156, 47);
 			this.btnDelete.Name = "btnDelete";
 			this.btnDelete.Size = new System.Drawing.Size(107, 23);
-			this.btnDelete.TabIndex = 4;
+			this.btnDelete.TabIndex = 9;
 			this.btnDelete.Text = "Löschen";
 			this.btnDelete.UseVisualStyleBackColor = true;
 			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -153,7 +153,7 @@ namespace Europlan.Common {
 			this.lstOffsets.Location = new System.Drawing.Point(7, 46);
 			this.lstOffsets.Name = "lstOffsets";
 			this.lstOffsets.Size = new System.Drawing.Size(116, 121);
-			this.lstOffsets.TabIndex = 3;
+			this.lstOffsets.TabIndex = 7;
 			this.lstOffsets.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lstOffsets_DrawItem);
 			this.lstOffsets.SelectedValueChanged += new System.EventHandler(this.lstOffsets_SelectedValueChanged);
 			// 
@@ -163,7 +163,7 @@ namespace Europlan.Common {
 			this.btnAdd.Location = new System.Drawing.Point(156, 18);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(107, 23);
-			this.btnAdd.TabIndex = 2;
+			this.btnAdd.TabIndex = 8;
 			this.btnAdd.Text = "Hinzufügen";
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -190,7 +190,7 @@ namespace Europlan.Common {
 			this.numOffset.MinValue = null;
 			this.numOffset.Name = "numOffset";
 			this.numOffset.Size = new System.Drawing.Size(116, 20);
-			this.numOffset.TabIndex = 0;
+			this.numOffset.TabIndex = 6;
 			this.numOffset.Text = "0";
 			this.numOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numOffset.Value = new decimal(new int[] {

@@ -30,6 +30,7 @@ namespace Europlan.Common {
 		private List<double> helpLines = new List<double>();
 		private bool showGlobalHelpLines = true;
 		private Room assiociatedRoom = null;
+		private List<GraphicalDachschraege> schraegen = null;
 
 		public GraphicalWall() {
 			//GraphicalDoor door = new GraphicalDoor();
@@ -93,6 +94,32 @@ namespace Europlan.Common {
 		public List<GraphicalWallObstacle> Obstacles {
 			get { return obstacles; }
 			set { obstacles = value; }
+		}
+
+		[XmlIgnore]
+		public List<GraphicalDachschraege> Schraegen {
+			get {
+				if (this.schraegen == null & this.ceilingContour != null && this.ceilingContour.Count > 3) {
+					this.schraegen = new List<GraphicalDachschraege>();
+					GraphicalDachschraege newSchraege;
+					if (this.ceilingContour[0].X != this.ceilingContour[1].X) {
+						newSchraege = new GraphicalDachschraege(this, GraphicalDachschraege.OrientationEnum.LEFT);
+						newSchraege.Width = this.ceilingContour[1].X - this.ceilingContour[0].X;
+						newSchraege.Height = this.ceilingContour[1].Y - this.ceilingContour[0].Y;
+						this.schraegen.Add(newSchraege);
+					}
+					if (this.ceilingContour[this.ceilingContour.Count  - 1].X != this.ceilingContour[this.ceilingContour.Count - 2].X) {
+						newSchraege = new GraphicalDachschraege(this, GraphicalDachschraege.OrientationEnum.LEFT);
+						newSchraege.Width = this.ceilingContour[this.ceilingContour.Count - 1].X - this.ceilingContour[this.ceilingContour.Count - 2].X;
+						newSchraege.Height = this.ceilingContour[this.ceilingContour.Count - 2].Y - this.ceilingContour[this.ceilingContour.Count - 1].Y;
+						this.schraegen.Add(newSchraege);
+					}
+				}
+				if (this.schraegen == null) {
+					return new List<GraphicalDachschraege>();
+				}
+				return this.schraegen;
+			}
 		}
 
 		public string WallId {
@@ -293,6 +320,12 @@ namespace Europlan.Common {
 
 			foreach (GraphicalRegisterWrapper register in this.Registers) {
 				pickedObject = register.GetPickedObject(planPoint, xOffset, yOffset);
+				if (pickedObject != null) {
+					return pickedObject;
+				}
+			}
+			foreach (GraphicalDachschraege schraege in this.Schraegen) {
+				pickedObject = schraege.GetPickedObject(planPoint, xOffset, yOffset);
 				if (pickedObject != null) {
 					return pickedObject;
 				}
@@ -504,6 +537,11 @@ namespace Europlan.Common {
 			}
 			foreach (GraphicalWallObstacle obstacle in this.obstacles) {
 				if (obstacle == obj) {
+					return this;
+				}
+			}
+			foreach (GraphicalDachschraege schraege in this.Schraegen) {
+				if (schraege == obj) {
 					return this;
 				}
 			}

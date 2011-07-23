@@ -24,9 +24,9 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.cadOptions = new System.Windows.Forms.Panel();
+			this.cadPanelOptions = new Europlan.Common.CadPanelOptions();
 			this.imagePanel = new Europlan.Common.ImagePanel();
 			this.cadPanel = new Europlan.Common.CadPanel();
-			this.cadPanelOptions = new Europlan.Common.CadPanelOptions();
 			this.cadOptions.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -39,6 +39,16 @@ namespace Europlan.Common {
 			this.cadOptions.Size = new System.Drawing.Size(200, 459);
 			this.cadOptions.TabIndex = 0;
 			this.cadOptions.Visible = false;
+			// 
+			// cadPanelOptions
+			// 
+			this.cadPanelOptions.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cadPanelOptions.Location = new System.Drawing.Point(0, 0);
+			this.cadPanelOptions.Name = "cadPanelOptions";
+			this.cadPanelOptions.Plan = null;
+			this.cadPanelOptions.Size = new System.Drawing.Size(200, 459);
+			this.cadPanelOptions.TabIndex = 0;
+			this.cadPanelOptions.InvalidateNeeded += new System.EventHandler(this.cadPanelOptions_InvalidateNeeded);
 			// 
 			// imagePanel
 			// 
@@ -53,7 +63,7 @@ namespace Europlan.Common {
 			this.imagePanel.ShowRaster = false;
 			this.imagePanel.Size = new System.Drawing.Size(561, 459);
 			this.imagePanel.StartPoint = null;
-			this.imagePanel.TabIndex = 2;
+			this.imagePanel.TabIndex = 1;
 			this.imagePanel.XPos = 0F;
 			this.imagePanel.YPos = 0F;
 			this.imagePanel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.imagePanel_KeyUp);
@@ -69,16 +79,6 @@ namespace Europlan.Common {
 			this.cadPanel.Visible = false;
 			this.cadPanel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.imagePanel_KeyUp);
 			this.cadPanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.imagePanel_KeyDown);
-			// 
-			// cadPanelOptions
-			// 
-			this.cadPanelOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.cadPanelOptions.Location = new System.Drawing.Point(0, 0);
-			this.cadPanelOptions.Name = "cadPanelOptions";
-			this.cadPanelOptions.Plan = null;
-			this.cadPanelOptions.Size = new System.Drawing.Size(200, 459);
-			this.cadPanelOptions.TabIndex = 1;
-			this.cadPanelOptions.InvalidateNeeded += new System.EventHandler(this.cadPanelOptions_InvalidateNeeded);
 			// 
 			// PlanPanel
 			// 

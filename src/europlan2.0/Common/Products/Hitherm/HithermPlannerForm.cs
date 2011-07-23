@@ -107,6 +107,11 @@ namespace Europlan.Common {
 			}
 		}
 
+		private void ApplySchraegeCuttonCheckedState(ToolStripButton buttonToCheck) {
+			this.btnSchraegeLeft.Checked = this.btnSchraegeLeft == buttonToCheck;
+			this.btnSchraegeRight.Checked = this.btnSchraegeRight == buttonToCheck;
+		}
+
 		private void btnWallNewWall_Click(object sender, EventArgs e) {
 			NewWallForm form = new NewWallForm(false, false, SelectedObject != null ? (SelectedObject as GraphicalWall).GetWallWidth() * 100 : 0, graphicalWallPanel.Room.Walls.Count, (graphicalWallPanel.SelectedWall != null && !graphicalWallPanel.SelectedWall.IsDachSchraege), graphicalWallPanel.Room.AssociatedFloor.DefaultRoomHeight);
 			DialogResult result = form.ShowDialog();
@@ -369,6 +374,16 @@ namespace Europlan.Common {
 			ApplyConnectionButtonCheckedState(null);
 		}
 
+		private void btnSchraegeLeft_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.NewSchraegeOrientation = GraphicalDachschraege.OrientationEnum.LEFT;
+			ApplySchraegeCuttonCheckedState(this.btnSchraegeLeft);
+		}
+
+		private void btnSchraegeRight_Click(object sender, EventArgs e) {
+			this.graphicalWallPanel.NewSchraegeOrientation = GraphicalDachschraege.OrientationEnum.RIGHT;
+			ApplySchraegeCuttonCheckedState(this.btnSchraegeRight);
+		}
+
 		private IGraphicalWallObject SelectedObject {
 			get { return this.graphicalWallPanel.SelectedObject; }
 		}
@@ -453,6 +468,9 @@ namespace Europlan.Common {
 			this.seperatorConnections.Visible = false; //this.btnConnection.Checked;
 			this.btnConnectionDirect.Visible = false; //this.btnConnection.Checked;
 			this.btnConnectionAlign.Visible = false; //this.btnConnection.Checked;
+
+			this.btnSchraegeLeft.Visible = this.btnSchraege.Checked;
+			this.btnSchraegeRight.Visible = this.btnSchraege.Checked;
 		}
 
 		private void UpdateModifyRegisterPanel(GraphicalHithermRegisterWrapper hithermRegister) {

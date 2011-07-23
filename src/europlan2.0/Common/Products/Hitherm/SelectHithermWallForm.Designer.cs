@@ -36,7 +36,7 @@ namespace Europlan.Common {
 			this.btnCancel.Location = new System.Drawing.Point(237, 193);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 6;
+			this.btnCancel.TabIndex = 2;
 			this.btnCancel.Text = "Abbrechen";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
@@ -47,11 +47,11 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(156, 193);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 5;
+			this.btnOk.TabIndex = 1;
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			// 
-			// lstConstructions
+			// lstWalls
 			// 
 			this.lstWalls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
@@ -61,9 +61,9 @@ namespace Europlan.Common {
 			this.lstWalls.HideSelection = false;
 			this.lstWalls.Location = new System.Drawing.Point(12, 12);
 			this.lstWalls.MultiSelect = false;
-			this.lstWalls.Name = "lstConstructions";
+			this.lstWalls.Name = "lstWalls";
 			this.lstWalls.Size = new System.Drawing.Size(300, 175);
-			this.lstWalls.TabIndex = 4;
+			this.lstWalls.TabIndex = 0;
 			this.lstWalls.UseCompatibleStateImageBehavior = false;
 			this.lstWalls.View = System.Windows.Forms.View.List;
 			this.lstWalls.DoubleClick += new System.EventHandler(this.lstConstructions_DoubleClick);

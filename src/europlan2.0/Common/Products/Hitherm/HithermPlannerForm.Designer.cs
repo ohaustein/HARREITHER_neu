@@ -58,28 +58,9 @@ namespace Europlan.Common {
 			this.seperatorConnections = new System.Windows.Forms.ToolStripSeparator();
 			this.btnConnectionAlign = new System.Windows.Forms.ToolStripButton();
 			this.btnConnectionDirect = new System.Windows.Forms.ToolStripButton();
+			this.btnSchraegeLeft = new System.Windows.Forms.ToolStripButton();
+			this.btnSchraegeRight = new System.Windows.Forms.ToolStripButton();
 			this.panelTop = new System.Windows.Forms.Panel();
-			this.panelModifyHitherm = new System.Windows.Forms.Panel();
-			this.chkRegisterWholeRegister = new System.Windows.Forms.CheckBox();
-			this.chkRegisterHelpLines = new System.Windows.Forms.CheckBox();
-			this.btnRegisterConnect = new System.Windows.Forms.Button();
-			this.btnRegisterDelete = new System.Windows.Forms.Button();
-			this.btnRegisterRevert = new System.Windows.Forms.Button();
-			this.btnRegisterAccept = new System.Windows.Forms.Button();
-			this.groupBox6 = new System.Windows.Forms.GroupBox();
-			this.rbRegister10 = new System.Windows.Forms.RadioButton();
-			this.rbRegister5 = new System.Windows.Forms.RadioButton();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
-			this.rbRegisterRight = new System.Windows.Forms.RadioButton();
-			this.rbRegisterLeft = new System.Windows.Forms.RadioButton();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.numRegisterVertical = new Europlan.Common.NumericBox();
-			this.numRegisterLeft = new Europlan.Common.NumericBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
-			this.lblRegisterSelectedRegister = new System.Windows.Forms.Label();
 			this.panelModifySchraege = new System.Windows.Forms.Panel();
 			this.lblSchraege = new System.Windows.Forms.Label();
 			this.btnSchraegeDelete = new System.Windows.Forms.Button();
@@ -151,6 +132,27 @@ namespace Europlan.Common {
 			this.btnWallDelete = new System.Windows.Forms.Button();
 			this.btnWallRevert = new System.Windows.Forms.Button();
 			this.btnWallApply = new System.Windows.Forms.Button();
+			this.panelModifyHitherm = new System.Windows.Forms.Panel();
+			this.chkRegisterWholeRegister = new System.Windows.Forms.CheckBox();
+			this.chkRegisterHelpLines = new System.Windows.Forms.CheckBox();
+			this.btnRegisterConnect = new System.Windows.Forms.Button();
+			this.btnRegisterDelete = new System.Windows.Forms.Button();
+			this.btnRegisterRevert = new System.Windows.Forms.Button();
+			this.btnRegisterAccept = new System.Windows.Forms.Button();
+			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.rbRegister10 = new System.Windows.Forms.RadioButton();
+			this.rbRegister5 = new System.Windows.Forms.RadioButton();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.rbRegisterRight = new System.Windows.Forms.RadioButton();
+			this.rbRegisterLeft = new System.Windows.Forms.RadioButton();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.numRegisterVertical = new Europlan.Common.NumericBox();
+			this.numRegisterLeft = new Europlan.Common.NumericBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.lblRegisterSelectedRegister = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.lblHeat = new System.Windows.Forms.Label();
 			this.lblCool = new System.Windows.Forms.Label();
@@ -201,10 +203,6 @@ namespace Europlan.Common {
 			this.toolStripMain.SuspendLayout();
 			this.toolStripSubmenu.SuspendLayout();
 			this.panelTop.SuspendLayout();
-			this.panelModifyHitherm.SuspendLayout();
-			this.groupBox6.SuspendLayout();
-			this.groupBox5.SuspendLayout();
-			this.groupBox4.SuspendLayout();
 			this.panelModifySchraege.SuspendLayout();
 			this.groupBox17.SuspendLayout();
 			this.groupBox18.SuspendLayout();
@@ -219,6 +217,10 @@ namespace Europlan.Common {
 			this.groupBox3.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
+			this.panelModifyHitherm.SuspendLayout();
+			this.groupBox6.SuspendLayout();
+			this.groupBox5.SuspendLayout();
+			this.groupBox4.SuspendLayout();
 			this.panelBottom.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -248,7 +250,7 @@ namespace Europlan.Common {
 			this.toolStripMain.Location = new System.Drawing.Point(0, 0);
 			this.toolStripMain.Name = "toolStripMain";
 			this.toolStripMain.Size = new System.Drawing.Size(886, 25);
-			this.toolStripMain.TabIndex = 0;
+			this.toolStripMain.TabIndex = 67;
 			this.toolStripMain.Text = "toolStrip1";
 			// 
 			// btnZoomIn
@@ -432,11 +434,13 @@ namespace Europlan.Common {
             this.btnConnectionAuto,
             this.seperatorConnections,
             this.btnConnectionAlign,
-            this.btnConnectionDirect});
+            this.btnConnectionDirect,
+            this.btnSchraegeLeft,
+            this.btnSchraegeRight});
 			this.toolStripSubmenu.Location = new System.Drawing.Point(0, 25);
 			this.toolStripSubmenu.Name = "toolStripSubmenu";
 			this.toolStripSubmenu.Size = new System.Drawing.Size(25, 507);
-			this.toolStripSubmenu.TabIndex = 1;
+			this.toolStripSubmenu.TabIndex = 68;
 			this.toolStripSubmenu.Text = "toolStrip2";
 			// 
 			// toolStripSeparator3
@@ -575,305 +579,42 @@ namespace Europlan.Common {
 			this.btnConnectionDirect.Visible = false;
 			this.btnConnectionDirect.Click += new System.EventHandler(this.btnConnectionDirect_Click);
 			// 
+			// btnSchraegeLeft
+			// 
+			this.btnSchraegeLeft.Checked = true;
+			this.btnSchraegeLeft.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.btnSchraegeLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnSchraegeLeft.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeLeft.Image")));
+			this.btnSchraegeLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSchraegeLeft.Name = "btnSchraegeLeft";
+			this.btnSchraegeLeft.Size = new System.Drawing.Size(23, 20);
+			this.btnSchraegeLeft.Text = "Schräge links";
+			this.btnSchraegeLeft.Visible = false;
+			this.btnSchraegeLeft.Click += new System.EventHandler(this.btnSchraegeLeft_Click);
+			// 
+			// btnSchraegeRight
+			// 
+			this.btnSchraegeRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnSchraegeRight.Image = ((System.Drawing.Image)(resources.GetObject("btnSchraegeRight.Image")));
+			this.btnSchraegeRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnSchraegeRight.Name = "btnSchraegeRight";
+			this.btnSchraegeRight.Size = new System.Drawing.Size(23, 20);
+			this.btnSchraegeRight.Text = "Schräge rechts";
+			this.btnSchraegeRight.Visible = false;
+			this.btnSchraegeRight.Click += new System.EventHandler(this.btnSchraegeRight_Click);
+			// 
 			// panelTop
 			// 
-			this.panelTop.Controls.Add(this.panelModifyHitherm);
 			this.panelTop.Controls.Add(this.panelModifySchraege);
 			this.panelTop.Controls.Add(this.panelModifyConnection);
 			this.panelTop.Controls.Add(this.panelModifyObstacle);
 			this.panelTop.Controls.Add(this.panelDefineWalls);
+			this.panelTop.Controls.Add(this.panelModifyHitherm);
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelTop.Location = new System.Drawing.Point(25, 25);
 			this.panelTop.Name = "panelTop";
 			this.panelTop.Size = new System.Drawing.Size(861, 91);
 			this.panelTop.TabIndex = 2;
-			// 
-			// panelModifyHitherm
-			// 
-			this.panelModifyHitherm.Controls.Add(this.chkRegisterWholeRegister);
-			this.panelModifyHitherm.Controls.Add(this.chkRegisterHelpLines);
-			this.panelModifyHitherm.Controls.Add(this.btnRegisterConnect);
-			this.panelModifyHitherm.Controls.Add(this.btnRegisterDelete);
-			this.panelModifyHitherm.Controls.Add(this.btnRegisterRevert);
-			this.panelModifyHitherm.Controls.Add(this.btnRegisterAccept);
-			this.panelModifyHitherm.Controls.Add(this.groupBox6);
-			this.panelModifyHitherm.Controls.Add(this.groupBox5);
-			this.panelModifyHitherm.Controls.Add(this.groupBox4);
-			this.panelModifyHitherm.Controls.Add(this.lblRegisterSelectedRegister);
-			this.panelModifyHitherm.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelModifyHitherm.Location = new System.Drawing.Point(0, 0);
-			this.panelModifyHitherm.Name = "panelModifyHitherm";
-			this.panelModifyHitherm.Size = new System.Drawing.Size(861, 91);
-			this.panelModifyHitherm.TabIndex = 2;
-			// 
-			// chkRegisterWholeRegister
-			// 
-			this.chkRegisterWholeRegister.AutoSize = true;
-			this.chkRegisterWholeRegister.Location = new System.Drawing.Point(652, 65);
-			this.chkRegisterWholeRegister.Name = "chkRegisterWholeRegister";
-			this.chkRegisterWholeRegister.Size = new System.Drawing.Size(117, 17);
-			this.chkRegisterWholeRegister.TabIndex = 27;
-			this.chkRegisterWholeRegister.Text = "Nur ganze Register";
-			this.chkRegisterWholeRegister.UseVisualStyleBackColor = true;
-			this.chkRegisterWholeRegister.CheckedChanged += new System.EventHandler(this.chkRegisterWholeRegister_CheckedChanged);
-			// 
-			// chkRegisterHelpLines
-			// 
-			this.chkRegisterHelpLines.AutoSize = true;
-			this.chkRegisterHelpLines.Location = new System.Drawing.Point(652, 40);
-			this.chkRegisterHelpLines.Name = "chkRegisterHelpLines";
-			this.chkRegisterHelpLines.Size = new System.Drawing.Size(138, 17);
-			this.chkRegisterHelpLines.TabIndex = 26;
-			this.chkRegisterHelpLines.Text = "An Hilfslinien ausrichten";
-			this.chkRegisterHelpLines.UseVisualStyleBackColor = true;
-			this.chkRegisterHelpLines.Visible = false;
-			this.chkRegisterHelpLines.CheckedChanged += new System.EventHandler(this.chkRegisterHelpLines_CheckedChanged);
-			// 
-			// btnRegisterConnect
-			// 
-			this.btnRegisterConnect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnRegisterConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterConnect.Image")));
-			this.btnRegisterConnect.Location = new System.Drawing.Point(607, 60);
-			this.btnRegisterConnect.Name = "btnRegisterConnect";
-			this.btnRegisterConnect.Size = new System.Drawing.Size(25, 25);
-			this.btnRegisterConnect.TabIndex = 25;
-			this.toolTip.SetToolTip(this.btnRegisterConnect, "Register verbinden");
-			this.btnRegisterConnect.UseVisualStyleBackColor = true;
-			this.btnRegisterConnect.Click += new System.EventHandler(this.btnRegisterConnect_Click);
-			// 
-			// btnRegisterDelete
-			// 
-			this.btnRegisterDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnRegisterDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterDelete.Image")));
-			this.btnRegisterDelete.Location = new System.Drawing.Point(607, 29);
-			this.btnRegisterDelete.Name = "btnRegisterDelete";
-			this.btnRegisterDelete.Size = new System.Drawing.Size(25, 25);
-			this.btnRegisterDelete.TabIndex = 24;
-			this.toolTip.SetToolTip(this.btnRegisterDelete, "Register löschen");
-			this.btnRegisterDelete.UseVisualStyleBackColor = true;
-			this.btnRegisterDelete.Click += new System.EventHandler(this.btnRegisterDelete_Click);
-			// 
-			// btnRegisterRevert
-			// 
-			this.btnRegisterRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnRegisterRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterRevert.Image")));
-			this.btnRegisterRevert.Location = new System.Drawing.Point(576, 60);
-			this.btnRegisterRevert.Name = "btnRegisterRevert";
-			this.btnRegisterRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnRegisterRevert.TabIndex = 23;
-			this.toolTip.SetToolTip(this.btnRegisterRevert, "Änderungen verwerfen");
-			this.btnRegisterRevert.UseVisualStyleBackColor = true;
-			this.btnRegisterRevert.Click += new System.EventHandler(this.btnRegisterRevert_Click);
-			// 
-			// btnRegisterAccept
-			// 
-			this.btnRegisterAccept.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.btnRegisterAccept.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterAccept.Image")));
-			this.btnRegisterAccept.Location = new System.Drawing.Point(576, 29);
-			this.btnRegisterAccept.Name = "btnRegisterAccept";
-			this.btnRegisterAccept.Size = new System.Drawing.Size(25, 25);
-			this.btnRegisterAccept.TabIndex = 22;
-			this.toolTip.SetToolTip(this.btnRegisterAccept, "Änderungen speichern");
-			this.btnRegisterAccept.UseVisualStyleBackColor = true;
-			this.btnRegisterAccept.Click += new System.EventHandler(this.btnRegisterAccept_Click);
-			// 
-			// groupBox6
-			// 
-			this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox6.Controls.Add(this.rbRegister10);
-			this.groupBox6.Controls.Add(this.rbRegister5);
-			this.groupBox6.Location = new System.Drawing.Point(401, 21);
-			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(169, 66);
-			this.groupBox6.TabIndex = 21;
-			this.groupBox6.TabStop = false;
-			this.groupBox6.Text = "Rohrabstand";
-			// 
-			// rbRegister10
-			// 
-			this.rbRegister10.AutoSize = true;
-			this.rbRegister10.Location = new System.Drawing.Point(6, 43);
-			this.rbRegister10.Name = "rbRegister10";
-			this.rbRegister10.Size = new System.Drawing.Size(124, 17);
-			this.rbRegister10.TabIndex = 1;
-			this.rbRegister10.TabStop = true;
-			this.rbRegister10.Text = "10 cm (Standardreg.)";
-			this.rbRegister10.UseVisualStyleBackColor = true;
-			this.rbRegister10.CheckedChanged += new System.EventHandler(this.rbPipeDistance_CheckedChanged);
-			// 
-			// rbRegister5
-			// 
-			this.rbRegister5.AutoSize = true;
-			this.rbRegister5.Location = new System.Drawing.Point(6, 20);
-			this.rbRegister5.Name = "rbRegister5";
-			this.rbRegister5.Size = new System.Drawing.Size(142, 17);
-			this.rbRegister5.TabIndex = 0;
-			this.rbRegister5.TabStop = true;
-			this.rbRegister5.Text = "5 cm (Hochleistungsreg.)";
-			this.rbRegister5.UseVisualStyleBackColor = true;
-			this.rbRegister5.CheckedChanged += new System.EventHandler(this.rbPipeDistance_CheckedChanged);
-			// 
-			// groupBox5
-			// 
-			this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox5.Controls.Add(this.rbRegisterRight);
-			this.groupBox5.Controls.Add(this.rbRegisterLeft);
-			this.groupBox5.Location = new System.Drawing.Point(226, 21);
-			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(169, 66);
-			this.groupBox5.TabIndex = 20;
-			this.groupBox5.TabStop = false;
-			this.groupBox5.Text = "Vorlauf";
-			// 
-			// rbRegisterRight
-			// 
-			this.rbRegisterRight.AutoSize = true;
-			this.rbRegisterRight.Location = new System.Drawing.Point(6, 20);
-			this.rbRegisterRight.Name = "rbRegisterRight";
-			this.rbRegisterRight.Size = new System.Drawing.Size(117, 17);
-			this.rbRegisterRight.TabIndex = 1;
-			this.rbRegisterRight.TabStop = true;
-			this.rbRegisterRight.Text = "Rechts unten (Std.)";
-			this.rbRegisterRight.UseVisualStyleBackColor = true;
-			this.rbRegisterRight.CheckedChanged += new System.EventHandler(this.rbRegisterLeftRight_CheckedChanged);
-			// 
-			// rbRegisterLeft
-			// 
-			this.rbRegisterLeft.AutoSize = true;
-			this.rbRegisterLeft.Location = new System.Drawing.Point(6, 43);
-			this.rbRegisterLeft.Name = "rbRegisterLeft";
-			this.rbRegisterLeft.Size = new System.Drawing.Size(80, 17);
-			this.rbRegisterLeft.TabIndex = 0;
-			this.rbRegisterLeft.TabStop = true;
-			this.rbRegisterLeft.Text = "Links unten";
-			this.rbRegisterLeft.UseVisualStyleBackColor = true;
-			this.rbRegisterLeft.CheckedChanged += new System.EventHandler(this.rbRegisterLeftRight_CheckedChanged);
-			// 
-			// groupBox4
-			// 
-			this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)));
-			this.groupBox4.Controls.Add(this.numRegisterVertical);
-			this.groupBox4.Controls.Add(this.numRegisterLeft);
-			this.groupBox4.Controls.Add(this.label1);
-			this.groupBox4.Controls.Add(this.label4);
-			this.groupBox4.Controls.Add(this.label5);
-			this.groupBox4.Controls.Add(this.label6);
-			this.groupBox4.Location = new System.Drawing.Point(3, 21);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(217, 66);
-			this.groupBox4.TabIndex = 17;
-			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "Position";
-			// 
-			// numRegisterVertical
-			// 
-			this.numRegisterVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numRegisterVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numRegisterVertical.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.Location = new System.Drawing.Point(97, 42);
-			this.numRegisterVertical.MaxValue = null;
-			this.numRegisterVertical.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.Name = "numRegisterVertical";
-			this.numRegisterVertical.Size = new System.Drawing.Size(87, 20);
-			this.numRegisterVertical.TabIndex = 2;
-			this.numRegisterVertical.Text = "1";
-			this.numRegisterVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRegisterVertical.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterVertical.ValueChanged += new System.EventHandler(this.numRegisterVertical_ValueChanged);
-			// 
-			// numRegisterLeft
-			// 
-			this.numRegisterLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.numRegisterLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-			this.numRegisterLeft.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.Location = new System.Drawing.Point(97, 19);
-			this.numRegisterLeft.MaxValue = null;
-			this.numRegisterLeft.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.Name = "numRegisterLeft";
-			this.numRegisterLeft.Size = new System.Drawing.Size(87, 20);
-			this.numRegisterLeft.TabIndex = 1;
-			this.numRegisterLeft.Text = "1";
-			this.numRegisterLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.numRegisterLeft.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numRegisterLeft.ValueChanged += new System.EventHandler(this.numRegisterLeft_ValueChanged);
-			// 
-			// label1
-			// 
-			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(190, 45);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(21, 13);
-			this.label1.TabIndex = 19;
-			this.label1.Text = "cm";
-			// 
-			// label4
-			// 
-			this.label4.Location = new System.Drawing.Point(6, 45);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(85, 18);
-			this.label4.TabIndex = 18;
-			this.label4.Text = "Vertikal:";
-			// 
-			// label5
-			// 
-			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(190, 22);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(21, 13);
-			this.label5.TabIndex = 16;
-			this.label5.Text = "cm";
-			// 
-			// label6
-			// 
-			this.label6.Location = new System.Drawing.Point(6, 22);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(85, 23);
-			this.label6.TabIndex = 15;
-			this.label6.Text = "Links:";
-			// 
-			// lblRegisterSelectedRegister
-			// 
-			this.lblRegisterSelectedRegister.AutoSize = true;
-			this.lblRegisterSelectedRegister.Location = new System.Drawing.Point(4, 3);
-			this.lblRegisterSelectedRegister.Name = "lblRegisterSelectedRegister";
-			this.lblRegisterSelectedRegister.Size = new System.Drawing.Size(123, 13);
-			this.lblRegisterSelectedRegister.TabIndex = 1;
-			this.lblRegisterSelectedRegister.Text = "Keine Wand ausgewählt";
 			// 
 			// panelModifySchraege
 			// 
@@ -887,7 +628,7 @@ namespace Europlan.Common {
 			this.panelModifySchraege.Location = new System.Drawing.Point(0, 0);
 			this.panelModifySchraege.Name = "panelModifySchraege";
 			this.panelModifySchraege.Size = new System.Drawing.Size(861, 91);
-			this.panelModifySchraege.TabIndex = 1;
+			this.panelModifySchraege.TabIndex = 52;
 			// 
 			// lblSchraege
 			// 
@@ -906,7 +647,7 @@ namespace Europlan.Common {
 			this.btnSchraegeDelete.Location = new System.Drawing.Point(345, 25);
 			this.btnSchraegeDelete.Name = "btnSchraegeDelete";
 			this.btnSchraegeDelete.Size = new System.Drawing.Size(25, 25);
-			this.btnSchraegeDelete.TabIndex = 29;
+			this.btnSchraegeDelete.TabIndex = 61;
 			this.toolTip.SetToolTip(this.btnSchraegeDelete, "Schräge löschen");
 			this.btnSchraegeDelete.UseVisualStyleBackColor = true;
 			this.btnSchraegeDelete.Click += new System.EventHandler(this.btnSchraegeDelete_Click);
@@ -919,7 +660,7 @@ namespace Europlan.Common {
 			this.btnSchraegeRevert.Location = new System.Drawing.Point(314, 56);
 			this.btnSchraegeRevert.Name = "btnSchraegeRevert";
 			this.btnSchraegeRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnSchraegeRevert.TabIndex = 28;
+			this.btnSchraegeRevert.TabIndex = 60;
 			this.toolTip.SetToolTip(this.btnSchraegeRevert, "Änderungen verwerfen");
 			this.btnSchraegeRevert.UseVisualStyleBackColor = true;
 			this.btnSchraegeRevert.Click += new System.EventHandler(this.btnSchraegeRevert_Click);
@@ -932,7 +673,7 @@ namespace Europlan.Common {
 			this.btnSchraegeApply.Location = new System.Drawing.Point(314, 25);
 			this.btnSchraegeApply.Name = "btnSchraegeApply";
 			this.btnSchraegeApply.Size = new System.Drawing.Size(25, 25);
-			this.btnSchraegeApply.TabIndex = 27;
+			this.btnSchraegeApply.TabIndex = 59;
 			this.toolTip.SetToolTip(this.btnSchraegeApply, "Änderungen speichern");
 			this.btnSchraegeApply.UseVisualStyleBackColor = true;
 			this.btnSchraegeApply.Click += new System.EventHandler(this.btnSchraegeApply_Click);
@@ -946,9 +687,10 @@ namespace Europlan.Common {
 			this.groupBox17.Location = new System.Drawing.Point(210, 19);
 			this.groupBox17.Name = "groupBox17";
 			this.groupBox17.Size = new System.Drawing.Size(98, 66);
-			this.groupBox17.TabIndex = 26;
+			this.groupBox17.TabIndex = 56;
 			this.groupBox17.TabStop = false;
 			this.groupBox17.Text = "Position";
+			this.groupBox17.Visible = false;
 			// 
 			// rbSchraegeLeft
 			// 
@@ -956,7 +698,7 @@ namespace Europlan.Common {
 			this.rbSchraegeLeft.Location = new System.Drawing.Point(6, 20);
 			this.rbSchraegeLeft.Name = "rbSchraegeLeft";
 			this.rbSchraegeLeft.Size = new System.Drawing.Size(50, 17);
-			this.rbSchraegeLeft.TabIndex = 1;
+			this.rbSchraegeLeft.TabIndex = 57;
 			this.rbSchraegeLeft.TabStop = true;
 			this.rbSchraegeLeft.Text = "Links";
 			this.rbSchraegeLeft.UseVisualStyleBackColor = true;
@@ -968,7 +710,7 @@ namespace Europlan.Common {
 			this.rbSchraegeRight.Location = new System.Drawing.Point(6, 43);
 			this.rbSchraegeRight.Name = "rbSchraegeRight";
 			this.rbSchraegeRight.Size = new System.Drawing.Size(59, 17);
-			this.rbSchraegeRight.TabIndex = 0;
+			this.rbSchraegeRight.TabIndex = 58;
 			this.rbSchraegeRight.TabStop = true;
 			this.rbSchraegeRight.Text = "Rechts";
 			this.rbSchraegeRight.UseVisualStyleBackColor = true;
@@ -987,7 +729,7 @@ namespace Europlan.Common {
 			this.groupBox18.Location = new System.Drawing.Point(9, 19);
 			this.groupBox18.Name = "groupBox18";
 			this.groupBox18.Size = new System.Drawing.Size(195, 66);
-			this.groupBox18.TabIndex = 25;
+			this.groupBox18.TabIndex = 53;
 			this.groupBox18.TabStop = false;
 			this.groupBox18.Text = "Größe";
 			// 
@@ -1010,7 +752,7 @@ namespace Europlan.Common {
             0});
 			this.numSchraegeVertical.Name = "numSchraegeVertical";
 			this.numSchraegeVertical.Size = new System.Drawing.Size(65, 20);
-			this.numSchraegeVertical.TabIndex = 2;
+			this.numSchraegeVertical.TabIndex = 55;
 			this.numSchraegeVertical.Text = "1";
 			this.numSchraegeVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numSchraegeVertical.Value = new decimal(new int[] {
@@ -1039,7 +781,7 @@ namespace Europlan.Common {
             0});
 			this.numSchraegeHorizontal.Name = "numSchraegeHorizontal";
 			this.numSchraegeHorizontal.Size = new System.Drawing.Size(65, 20);
-			this.numSchraegeHorizontal.TabIndex = 1;
+			this.numSchraegeHorizontal.TabIndex = 54;
 			this.numSchraegeHorizontal.Text = "1";
 			this.numSchraegeHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numSchraegeHorizontal.Value = new decimal(new int[] {
@@ -1095,7 +837,7 @@ namespace Europlan.Common {
 			this.panelModifyConnection.Location = new System.Drawing.Point(0, 0);
 			this.panelModifyConnection.Name = "panelModifyConnection";
 			this.panelModifyConnection.Size = new System.Drawing.Size(861, 91);
-			this.panelModifyConnection.TabIndex = 0;
+			this.panelModifyConnection.TabIndex = 62;
 			// 
 			// btnConnectionRevert
 			// 
@@ -1105,7 +847,7 @@ namespace Europlan.Common {
 			this.btnConnectionRevert.Location = new System.Drawing.Point(9, 56);
 			this.btnConnectionRevert.Name = "btnConnectionRevert";
 			this.btnConnectionRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnConnectionRevert.TabIndex = 33;
+			this.btnConnectionRevert.TabIndex = 64;
 			this.toolTip.SetToolTip(this.btnConnectionRevert, "Änderungen verwerfen");
 			this.btnConnectionRevert.UseVisualStyleBackColor = true;
 			this.btnConnectionRevert.Click += new System.EventHandler(this.btnConnectionRevert_Click);
@@ -1118,7 +860,7 @@ namespace Europlan.Common {
 			this.btnConnectionApply.Location = new System.Drawing.Point(9, 25);
 			this.btnConnectionApply.Name = "btnConnectionApply";
 			this.btnConnectionApply.Size = new System.Drawing.Size(25, 25);
-			this.btnConnectionApply.TabIndex = 32;
+			this.btnConnectionApply.TabIndex = 63;
 			this.toolTip.SetToolTip(this.btnConnectionApply, "Änderungen speichern");
 			this.btnConnectionApply.UseVisualStyleBackColor = true;
 			this.btnConnectionApply.Click += new System.EventHandler(this.btnConnectionApply_Click);
@@ -1140,7 +882,7 @@ namespace Europlan.Common {
 			this.btnConnectionDelete.Location = new System.Drawing.Point(40, 25);
 			this.btnConnectionDelete.Name = "btnConnectionDelete";
 			this.btnConnectionDelete.Size = new System.Drawing.Size(25, 25);
-			this.btnConnectionDelete.TabIndex = 30;
+			this.btnConnectionDelete.TabIndex = 65;
 			this.toolTip.SetToolTip(this.btnConnectionDelete, "Anbindeleitung löschen");
 			this.btnConnectionDelete.UseVisualStyleBackColor = true;
 			this.btnConnectionDelete.Click += new System.EventHandler(this.btnConnectionDelete_Click);
@@ -1161,7 +903,7 @@ namespace Europlan.Common {
 			this.panelModifyObstacle.Location = new System.Drawing.Point(0, 0);
 			this.panelModifyObstacle.Name = "panelModifyObstacle";
 			this.panelModifyObstacle.Size = new System.Drawing.Size(861, 91);
-			this.panelModifyObstacle.TabIndex = 23;
+			this.panelModifyObstacle.TabIndex = 16;
 			// 
 			// groupBox16
 			// 
@@ -1174,7 +916,7 @@ namespace Europlan.Common {
 			this.groupBox16.Location = new System.Drawing.Point(395, 19);
 			this.groupBox16.Name = "groupBox16";
 			this.groupBox16.Size = new System.Drawing.Size(91, 66);
-			this.groupBox16.TabIndex = 30;
+			this.groupBox16.TabIndex = 28;
 			this.groupBox16.TabStop = false;
 			this.groupBox16.Text = "Mittelmaß hor.";
 			// 
@@ -1197,7 +939,7 @@ namespace Europlan.Common {
             0});
 			this.numObstacleMiddleDistanceRight.Name = "numObstacleMiddleDistanceRight";
 			this.numObstacleMiddleDistanceRight.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleMiddleDistanceRight.TabIndex = 21;
+			this.numObstacleMiddleDistanceRight.TabIndex = 30;
 			this.numObstacleMiddleDistanceRight.Text = "0";
 			this.numObstacleMiddleDistanceRight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numObstacleMiddleDistanceRight.Value = new decimal(new int[] {
@@ -1226,7 +968,7 @@ namespace Europlan.Common {
             0});
 			this.numObstacleMiddleDistanceLeft.Name = "numObstacleMiddleDistanceLeft";
 			this.numObstacleMiddleDistanceLeft.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleMiddleDistanceLeft.TabIndex = 20;
+			this.numObstacleMiddleDistanceLeft.TabIndex = 29;
 			this.numObstacleMiddleDistanceLeft.Text = "0";
 			this.numObstacleMiddleDistanceLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numObstacleMiddleDistanceLeft.Value = new decimal(new int[] {
@@ -1267,7 +1009,7 @@ namespace Europlan.Common {
 			this.groupBox15.Location = new System.Drawing.Point(298, 19);
 			this.groupBox15.Name = "groupBox15";
 			this.groupBox15.Size = new System.Drawing.Size(91, 66);
-			this.groupBox15.TabIndex = 29;
+			this.groupBox15.TabIndex = 25;
 			this.groupBox15.TabStop = false;
 			this.groupBox15.Text = "Abstand hor.";
 			// 
@@ -1290,7 +1032,7 @@ namespace Europlan.Common {
             0});
 			this.numObstacleDistanceRight.Name = "numObstacleDistanceRight";
 			this.numObstacleDistanceRight.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleDistanceRight.TabIndex = 21;
+			this.numObstacleDistanceRight.TabIndex = 27;
 			this.numObstacleDistanceRight.Text = "0";
 			this.numObstacleDistanceRight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numObstacleDistanceRight.Value = new decimal(new int[] {
@@ -1319,7 +1061,7 @@ namespace Europlan.Common {
             0});
 			this.numObstacleDistanceLeft.Name = "numObstacleDistanceLeft";
 			this.numObstacleDistanceLeft.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleDistanceLeft.TabIndex = 20;
+			this.numObstacleDistanceLeft.TabIndex = 26;
 			this.numObstacleDistanceLeft.Text = "0";
 			this.numObstacleDistanceLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numObstacleDistanceLeft.Value = new decimal(new int[] {
@@ -1360,7 +1102,7 @@ namespace Europlan.Common {
 			this.groupBox14.Location = new System.Drawing.Point(201, 19);
 			this.groupBox14.Name = "groupBox14";
 			this.groupBox14.Size = new System.Drawing.Size(91, 66);
-			this.groupBox14.TabIndex = 28;
+			this.groupBox14.TabIndex = 22;
 			this.groupBox14.TabStop = false;
 			this.groupBox14.Text = "Position hor.";
 			// 
@@ -1383,7 +1125,7 @@ namespace Europlan.Common {
             0});
 			this.numObstacleHorizontalRight.Name = "numObstacleHorizontalRight";
 			this.numObstacleHorizontalRight.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleHorizontalRight.TabIndex = 21;
+			this.numObstacleHorizontalRight.TabIndex = 24;
 			this.numObstacleHorizontalRight.Text = "0";
 			this.numObstacleHorizontalRight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numObstacleHorizontalRight.Value = new decimal(new int[] {
@@ -1412,7 +1154,7 @@ namespace Europlan.Common {
             0});
 			this.numObstacleHorizontalLeft.Name = "numObstacleHorizontalLeft";
 			this.numObstacleHorizontalLeft.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleHorizontalLeft.TabIndex = 20;
+			this.numObstacleHorizontalLeft.TabIndex = 23;
 			this.numObstacleHorizontalLeft.Text = "0";
 			this.numObstacleHorizontalLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numObstacleHorizontalLeft.Value = new decimal(new int[] {
@@ -1459,7 +1201,7 @@ namespace Europlan.Common {
 			this.btnObstacleRevert.Location = new System.Drawing.Point(492, 56);
 			this.btnObstacleRevert.Name = "btnObstacleRevert";
 			this.btnObstacleRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleRevert.TabIndex = 30;
+			this.btnObstacleRevert.TabIndex = 32;
 			this.toolTip.SetToolTip(this.btnObstacleRevert, "Änderungen verwerfen");
 			this.btnObstacleRevert.UseVisualStyleBackColor = true;
 			this.btnObstacleRevert.Click += new System.EventHandler(this.btnObstacleRevert_Click);
@@ -1472,7 +1214,7 @@ namespace Europlan.Common {
 			this.btnObstacleApply.Location = new System.Drawing.Point(492, 25);
 			this.btnObstacleApply.Name = "btnObstacleApply";
 			this.btnObstacleApply.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleApply.TabIndex = 29;
+			this.btnObstacleApply.TabIndex = 31;
 			this.toolTip.SetToolTip(this.btnObstacleApply, "Änderungen speichern");
 			this.btnObstacleApply.UseVisualStyleBackColor = true;
 			this.btnObstacleApply.Click += new System.EventHandler(this.btnObstacleApply_Click);
@@ -1486,7 +1228,7 @@ namespace Europlan.Common {
 			this.groupBox13.Location = new System.Drawing.Point(104, 19);
 			this.groupBox13.Name = "groupBox13";
 			this.groupBox13.Size = new System.Drawing.Size(91, 66);
-			this.groupBox13.TabIndex = 28;
+			this.groupBox13.TabIndex = 20;
 			this.groupBox13.TabStop = false;
 			this.groupBox13.Text = "Position vert.";
 			// 
@@ -1509,7 +1251,7 @@ namespace Europlan.Common {
             0});
 			this.numObstacleVertical.Name = "numObstacleVertical";
 			this.numObstacleVertical.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleVertical.TabIndex = 20;
+			this.numObstacleVertical.TabIndex = 21;
 			this.numObstacleVertical.Text = "0";
 			this.numObstacleVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numObstacleVertical.Value = new decimal(new int[] {
@@ -1540,7 +1282,7 @@ namespace Europlan.Common {
 			this.groupBox12.Location = new System.Drawing.Point(7, 19);
 			this.groupBox12.Name = "groupBox12";
 			this.groupBox12.Size = new System.Drawing.Size(91, 66);
-			this.groupBox12.TabIndex = 27;
+			this.groupBox12.TabIndex = 17;
 			this.groupBox12.TabStop = false;
 			this.groupBox12.Text = "Größe";
 			// 
@@ -1563,7 +1305,7 @@ namespace Europlan.Common {
             0});
 			this.numObstacleHeight.Name = "numObstacleHeight";
 			this.numObstacleHeight.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleHeight.TabIndex = 21;
+			this.numObstacleHeight.TabIndex = 19;
 			this.numObstacleHeight.Text = "0";
 			this.numObstacleHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numObstacleHeight.Value = new decimal(new int[] {
@@ -1592,7 +1334,7 @@ namespace Europlan.Common {
             0});
 			this.numObstacleWidth.Name = "numObstacleWidth";
 			this.numObstacleWidth.Size = new System.Drawing.Size(49, 20);
-			this.numObstacleWidth.TabIndex = 20;
+			this.numObstacleWidth.TabIndex = 18;
 			this.numObstacleWidth.Text = "0";
 			this.numObstacleWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numObstacleWidth.Value = new decimal(new int[] {
@@ -1630,7 +1372,7 @@ namespace Europlan.Common {
 			this.btnObstacleBorder.Location = new System.Drawing.Point(523, 56);
 			this.btnObstacleBorder.Name = "btnObstacleBorder";
 			this.btnObstacleBorder.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleBorder.TabIndex = 25;
+			this.btnObstacleBorder.TabIndex = 34;
 			this.toolTip.SetToolTip(this.btnObstacleBorder, "Randabstand ändern");
 			this.btnObstacleBorder.UseVisualStyleBackColor = true;
 			this.btnObstacleBorder.Click += new System.EventHandler(this.btnObstacleBorder_Click);
@@ -1643,7 +1385,7 @@ namespace Europlan.Common {
 			this.btnObstacleRemove.Location = new System.Drawing.Point(523, 25);
 			this.btnObstacleRemove.Name = "btnObstacleRemove";
 			this.btnObstacleRemove.Size = new System.Drawing.Size(25, 25);
-			this.btnObstacleRemove.TabIndex = 24;
+			this.btnObstacleRemove.TabIndex = 33;
 			this.toolTip.SetToolTip(this.btnObstacleRemove, "Objekt löschen");
 			this.btnObstacleRemove.UseVisualStyleBackColor = true;
 			this.btnObstacleRemove.Click += new System.EventHandler(this.btnObstacleRemove_Click);
@@ -1665,7 +1407,7 @@ namespace Europlan.Common {
 			this.panelDefineWalls.Location = new System.Drawing.Point(0, 0);
 			this.panelDefineWalls.Name = "panelDefineWalls";
 			this.panelDefineWalls.Size = new System.Drawing.Size(861, 91);
-			this.panelDefineWalls.TabIndex = 1;
+			this.panelDefineWalls.TabIndex = 35;
 			// 
 			// btnWallHelpLine
 			// 
@@ -1675,7 +1417,7 @@ namespace Europlan.Common {
 			this.btnWallHelpLine.Location = new System.Drawing.Point(527, 56);
 			this.btnWallHelpLine.Name = "btnWallHelpLine";
 			this.btnWallHelpLine.Size = new System.Drawing.Size(25, 25);
-			this.btnWallHelpLine.TabIndex = 22;
+			this.btnWallHelpLine.TabIndex = 50;
 			this.toolTip.SetToolTip(this.btnWallHelpLine, "Hilfslinien einrichten");
 			this.btnWallHelpLine.UseVisualStyleBackColor = true;
 			this.btnWallHelpLine.Click += new System.EventHandler(this.btnWallHelpLine_Click);
@@ -1688,7 +1430,7 @@ namespace Europlan.Common {
 			this.btnWallEdgeDistance.Location = new System.Drawing.Point(527, 25);
 			this.btnWallEdgeDistance.Name = "btnWallEdgeDistance";
 			this.btnWallEdgeDistance.Size = new System.Drawing.Size(25, 25);
-			this.btnWallEdgeDistance.TabIndex = 21;
+			this.btnWallEdgeDistance.TabIndex = 49;
 			this.toolTip.SetToolTip(this.btnWallEdgeDistance, "Randabstand ändern");
 			this.btnWallEdgeDistance.UseVisualStyleBackColor = true;
 			this.btnWallEdgeDistance.Click += new System.EventHandler(this.btnWallEdgeDistance_Click);
@@ -1702,7 +1444,7 @@ namespace Europlan.Common {
 			this.groupBox3.Location = new System.Drawing.Point(382, 19);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Size = new System.Drawing.Size(77, 66);
-			this.groupBox3.TabIndex = 16;
+			this.groupBox3.TabIndex = 42;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Position";
 			// 
@@ -1711,7 +1453,7 @@ namespace Europlan.Common {
 			this.btnWallLeft.Location = new System.Drawing.Point(6, 22);
 			this.btnWallLeft.Name = "btnWallLeft";
 			this.btnWallLeft.Size = new System.Drawing.Size(30, 36);
-			this.btnWallLeft.TabIndex = 16;
+			this.btnWallLeft.TabIndex = 43;
 			this.btnWallLeft.Text = "<";
 			this.toolTip.SetToolTip(this.btnWallLeft, "Wand nach links verschienben");
 			this.btnWallLeft.UseVisualStyleBackColor = true;
@@ -1723,7 +1465,7 @@ namespace Europlan.Common {
 			this.btnWallRight.Location = new System.Drawing.Point(41, 22);
 			this.btnWallRight.Name = "btnWallRight";
 			this.btnWallRight.Size = new System.Drawing.Size(30, 36);
-			this.btnWallRight.TabIndex = 15;
+			this.btnWallRight.TabIndex = 44;
 			this.btnWallRight.Text = ">";
 			this.toolTip.SetToolTip(this.btnWallRight, "Wand nach rechts verschieben");
 			this.btnWallRight.UseVisualStyleBackColor = true;
@@ -1738,7 +1480,7 @@ namespace Europlan.Common {
 			this.groupBox1.Location = new System.Drawing.Point(7, 19);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(146, 66);
-			this.groupBox1.TabIndex = 2;
+			this.groupBox1.TabIndex = 36;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Konstruktion";
 			// 
@@ -1748,7 +1490,7 @@ namespace Europlan.Common {
 			this.btnWallSelectConstruction.Location = new System.Drawing.Point(110, 17);
 			this.btnWallSelectConstruction.Name = "btnWallSelectConstruction";
 			this.btnWallSelectConstruction.Size = new System.Drawing.Size(30, 23);
-			this.btnWallSelectConstruction.TabIndex = 15;
+			this.btnWallSelectConstruction.TabIndex = 38;
 			this.btnWallSelectConstruction.Text = "...";
 			this.btnWallSelectConstruction.UseVisualStyleBackColor = true;
 			this.btnWallSelectConstruction.Click += new System.EventHandler(this.btnWallSelectConstruction_Click);
@@ -1761,7 +1503,8 @@ namespace Europlan.Common {
 			this.txtWallConstruction.Name = "txtWallConstruction";
 			this.txtWallConstruction.ReadOnly = true;
 			this.txtWallConstruction.Size = new System.Drawing.Size(98, 20);
-			this.txtWallConstruction.TabIndex = 14;
+			this.txtWallConstruction.TabIndex = 37;
+			this.txtWallConstruction.TabStop = false;
 			// 
 			// lblSelectedWall
 			// 
@@ -1778,7 +1521,7 @@ namespace Europlan.Common {
 			this.btnCreateWalls.Location = new System.Drawing.Point(606, 3);
 			this.btnCreateWalls.Name = "btnCreateWalls";
 			this.btnCreateWalls.Size = new System.Drawing.Size(252, 23);
-			this.btnCreateWalls.TabIndex = 0;
+			this.btnCreateWalls.TabIndex = 51;
 			this.btnCreateWalls.Text = "Wände aus Raumgeometrie erzeugen";
 			this.btnCreateWalls.UseVisualStyleBackColor = true;
 			this.btnCreateWalls.Click += new System.EventHandler(this.btnCreateWalls_Click);
@@ -1796,7 +1539,7 @@ namespace Europlan.Common {
 			this.groupBox2.Location = new System.Drawing.Point(159, 19);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(217, 66);
-			this.groupBox2.TabIndex = 16;
+			this.groupBox2.TabIndex = 39;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Größe";
 			// 
@@ -1819,7 +1562,7 @@ namespace Europlan.Common {
             0});
 			this.numWallVertical.Name = "numWallVertical";
 			this.numWallVertical.Size = new System.Drawing.Size(87, 20);
-			this.numWallVertical.TabIndex = 21;
+			this.numWallVertical.TabIndex = 41;
 			this.numWallVertical.Text = "0";
 			this.numWallVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWallVertical.Value = new decimal(new int[] {
@@ -1848,7 +1591,7 @@ namespace Europlan.Common {
             0});
 			this.numWallHorizontal.Name = "numWallHorizontal";
 			this.numWallHorizontal.Size = new System.Drawing.Size(87, 20);
-			this.numWallHorizontal.TabIndex = 20;
+			this.numWallHorizontal.TabIndex = 40;
 			this.numWallHorizontal.Text = "0";
 			this.numWallHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWallHorizontal.Value = new decimal(new int[] {
@@ -1902,7 +1645,7 @@ namespace Europlan.Common {
 			this.btnWallNewWall.Location = new System.Drawing.Point(496, 56);
 			this.btnWallNewWall.Name = "btnWallNewWall";
 			this.btnWallNewWall.Size = new System.Drawing.Size(25, 25);
-			this.btnWallNewWall.TabIndex = 20;
+			this.btnWallNewWall.TabIndex = 48;
 			this.toolTip.SetToolTip(this.btnWallNewWall, "Neue Wand anlegen");
 			this.btnWallNewWall.UseVisualStyleBackColor = true;
 			this.btnWallNewWall.Click += new System.EventHandler(this.btnWallNewWall_Click);
@@ -1915,7 +1658,7 @@ namespace Europlan.Common {
 			this.btnWallDelete.Location = new System.Drawing.Point(496, 25);
 			this.btnWallDelete.Name = "btnWallDelete";
 			this.btnWallDelete.Size = new System.Drawing.Size(25, 25);
-			this.btnWallDelete.TabIndex = 19;
+			this.btnWallDelete.TabIndex = 47;
 			this.toolTip.SetToolTip(this.btnWallDelete, "Wand löschen");
 			this.btnWallDelete.UseVisualStyleBackColor = true;
 			this.btnWallDelete.Click += new System.EventHandler(this.btnWallDelete_Click);
@@ -1928,7 +1671,7 @@ namespace Europlan.Common {
 			this.btnWallRevert.Location = new System.Drawing.Point(465, 56);
 			this.btnWallRevert.Name = "btnWallRevert";
 			this.btnWallRevert.Size = new System.Drawing.Size(25, 25);
-			this.btnWallRevert.TabIndex = 18;
+			this.btnWallRevert.TabIndex = 46;
 			this.toolTip.SetToolTip(this.btnWallRevert, "Änderungen verwerfen");
 			this.btnWallRevert.UseVisualStyleBackColor = true;
 			this.btnWallRevert.Click += new System.EventHandler(this.btnWallRevert_Click);
@@ -1941,10 +1684,297 @@ namespace Europlan.Common {
 			this.btnWallApply.Location = new System.Drawing.Point(465, 25);
 			this.btnWallApply.Name = "btnWallApply";
 			this.btnWallApply.Size = new System.Drawing.Size(25, 25);
-			this.btnWallApply.TabIndex = 17;
+			this.btnWallApply.TabIndex = 45;
 			this.toolTip.SetToolTip(this.btnWallApply, "Änderungen speichern");
 			this.btnWallApply.UseVisualStyleBackColor = true;
 			this.btnWallApply.Click += new System.EventHandler(this.btnWallApply_Click);
+			// 
+			// panelModifyHitherm
+			// 
+			this.panelModifyHitherm.Controls.Add(this.chkRegisterWholeRegister);
+			this.panelModifyHitherm.Controls.Add(this.chkRegisterHelpLines);
+			this.panelModifyHitherm.Controls.Add(this.btnRegisterConnect);
+			this.panelModifyHitherm.Controls.Add(this.btnRegisterDelete);
+			this.panelModifyHitherm.Controls.Add(this.btnRegisterRevert);
+			this.panelModifyHitherm.Controls.Add(this.btnRegisterAccept);
+			this.panelModifyHitherm.Controls.Add(this.groupBox6);
+			this.panelModifyHitherm.Controls.Add(this.groupBox5);
+			this.panelModifyHitherm.Controls.Add(this.groupBox4);
+			this.panelModifyHitherm.Controls.Add(this.lblRegisterSelectedRegister);
+			this.panelModifyHitherm.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelModifyHitherm.Location = new System.Drawing.Point(0, 0);
+			this.panelModifyHitherm.Name = "panelModifyHitherm";
+			this.panelModifyHitherm.Size = new System.Drawing.Size(861, 91);
+			this.panelModifyHitherm.TabIndex = 0;
+			// 
+			// chkRegisterWholeRegister
+			// 
+			this.chkRegisterWholeRegister.AutoSize = true;
+			this.chkRegisterWholeRegister.Location = new System.Drawing.Point(652, 65);
+			this.chkRegisterWholeRegister.Name = "chkRegisterWholeRegister";
+			this.chkRegisterWholeRegister.Size = new System.Drawing.Size(117, 17);
+			this.chkRegisterWholeRegister.TabIndex = 15;
+			this.chkRegisterWholeRegister.Text = "Nur ganze Register";
+			this.chkRegisterWholeRegister.UseVisualStyleBackColor = true;
+			this.chkRegisterWholeRegister.CheckedChanged += new System.EventHandler(this.chkRegisterWholeRegister_CheckedChanged);
+			// 
+			// chkRegisterHelpLines
+			// 
+			this.chkRegisterHelpLines.AutoSize = true;
+			this.chkRegisterHelpLines.Location = new System.Drawing.Point(652, 40);
+			this.chkRegisterHelpLines.Name = "chkRegisterHelpLines";
+			this.chkRegisterHelpLines.Size = new System.Drawing.Size(138, 17);
+			this.chkRegisterHelpLines.TabIndex = 14;
+			this.chkRegisterHelpLines.Text = "An Hilfslinien ausrichten";
+			this.chkRegisterHelpLines.UseVisualStyleBackColor = true;
+			this.chkRegisterHelpLines.Visible = false;
+			this.chkRegisterHelpLines.CheckedChanged += new System.EventHandler(this.chkRegisterHelpLines_CheckedChanged);
+			// 
+			// btnRegisterConnect
+			// 
+			this.btnRegisterConnect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterConnect.Image")));
+			this.btnRegisterConnect.Location = new System.Drawing.Point(607, 60);
+			this.btnRegisterConnect.Name = "btnRegisterConnect";
+			this.btnRegisterConnect.Size = new System.Drawing.Size(25, 25);
+			this.btnRegisterConnect.TabIndex = 13;
+			this.toolTip.SetToolTip(this.btnRegisterConnect, "Register verbinden");
+			this.btnRegisterConnect.UseVisualStyleBackColor = true;
+			this.btnRegisterConnect.Click += new System.EventHandler(this.btnRegisterConnect_Click);
+			// 
+			// btnRegisterDelete
+			// 
+			this.btnRegisterDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterDelete.Image")));
+			this.btnRegisterDelete.Location = new System.Drawing.Point(607, 29);
+			this.btnRegisterDelete.Name = "btnRegisterDelete";
+			this.btnRegisterDelete.Size = new System.Drawing.Size(25, 25);
+			this.btnRegisterDelete.TabIndex = 12;
+			this.toolTip.SetToolTip(this.btnRegisterDelete, "Register löschen");
+			this.btnRegisterDelete.UseVisualStyleBackColor = true;
+			this.btnRegisterDelete.Click += new System.EventHandler(this.btnRegisterDelete_Click);
+			// 
+			// btnRegisterRevert
+			// 
+			this.btnRegisterRevert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterRevert.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterRevert.Image")));
+			this.btnRegisterRevert.Location = new System.Drawing.Point(576, 60);
+			this.btnRegisterRevert.Name = "btnRegisterRevert";
+			this.btnRegisterRevert.Size = new System.Drawing.Size(25, 25);
+			this.btnRegisterRevert.TabIndex = 11;
+			this.toolTip.SetToolTip(this.btnRegisterRevert, "Änderungen verwerfen");
+			this.btnRegisterRevert.UseVisualStyleBackColor = true;
+			this.btnRegisterRevert.Click += new System.EventHandler(this.btnRegisterRevert_Click);
+			// 
+			// btnRegisterAccept
+			// 
+			this.btnRegisterAccept.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.btnRegisterAccept.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterAccept.Image")));
+			this.btnRegisterAccept.Location = new System.Drawing.Point(576, 29);
+			this.btnRegisterAccept.Name = "btnRegisterAccept";
+			this.btnRegisterAccept.Size = new System.Drawing.Size(25, 25);
+			this.btnRegisterAccept.TabIndex = 10;
+			this.toolTip.SetToolTip(this.btnRegisterAccept, "Änderungen speichern");
+			this.btnRegisterAccept.UseVisualStyleBackColor = true;
+			this.btnRegisterAccept.Click += new System.EventHandler(this.btnRegisterAccept_Click);
+			// 
+			// groupBox6
+			// 
+			this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox6.Controls.Add(this.rbRegister10);
+			this.groupBox6.Controls.Add(this.rbRegister5);
+			this.groupBox6.Location = new System.Drawing.Point(401, 21);
+			this.groupBox6.Name = "groupBox6";
+			this.groupBox6.Size = new System.Drawing.Size(169, 66);
+			this.groupBox6.TabIndex = 7;
+			this.groupBox6.TabStop = false;
+			this.groupBox6.Text = "Rohrabstand";
+			// 
+			// rbRegister10
+			// 
+			this.rbRegister10.AutoSize = true;
+			this.rbRegister10.Location = new System.Drawing.Point(6, 43);
+			this.rbRegister10.Name = "rbRegister10";
+			this.rbRegister10.Size = new System.Drawing.Size(124, 17);
+			this.rbRegister10.TabIndex = 9;
+			this.rbRegister10.TabStop = true;
+			this.rbRegister10.Text = "10 cm (Standardreg.)";
+			this.rbRegister10.UseVisualStyleBackColor = true;
+			this.rbRegister10.CheckedChanged += new System.EventHandler(this.rbPipeDistance_CheckedChanged);
+			// 
+			// rbRegister5
+			// 
+			this.rbRegister5.AutoSize = true;
+			this.rbRegister5.Location = new System.Drawing.Point(6, 20);
+			this.rbRegister5.Name = "rbRegister5";
+			this.rbRegister5.Size = new System.Drawing.Size(142, 17);
+			this.rbRegister5.TabIndex = 8;
+			this.rbRegister5.TabStop = true;
+			this.rbRegister5.Text = "5 cm (Hochleistungsreg.)";
+			this.rbRegister5.UseVisualStyleBackColor = true;
+			this.rbRegister5.CheckedChanged += new System.EventHandler(this.rbPipeDistance_CheckedChanged);
+			// 
+			// groupBox5
+			// 
+			this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox5.Controls.Add(this.rbRegisterRight);
+			this.groupBox5.Controls.Add(this.rbRegisterLeft);
+			this.groupBox5.Location = new System.Drawing.Point(226, 21);
+			this.groupBox5.Name = "groupBox5";
+			this.groupBox5.Size = new System.Drawing.Size(169, 66);
+			this.groupBox5.TabIndex = 4;
+			this.groupBox5.TabStop = false;
+			this.groupBox5.Text = "Vorlauf";
+			// 
+			// rbRegisterRight
+			// 
+			this.rbRegisterRight.AutoSize = true;
+			this.rbRegisterRight.Location = new System.Drawing.Point(6, 20);
+			this.rbRegisterRight.Name = "rbRegisterRight";
+			this.rbRegisterRight.Size = new System.Drawing.Size(117, 17);
+			this.rbRegisterRight.TabIndex = 5;
+			this.rbRegisterRight.TabStop = true;
+			this.rbRegisterRight.Text = "Rechts unten (Std.)";
+			this.rbRegisterRight.UseVisualStyleBackColor = true;
+			this.rbRegisterRight.CheckedChanged += new System.EventHandler(this.rbRegisterLeftRight_CheckedChanged);
+			// 
+			// rbRegisterLeft
+			// 
+			this.rbRegisterLeft.AutoSize = true;
+			this.rbRegisterLeft.Location = new System.Drawing.Point(6, 43);
+			this.rbRegisterLeft.Name = "rbRegisterLeft";
+			this.rbRegisterLeft.Size = new System.Drawing.Size(80, 17);
+			this.rbRegisterLeft.TabIndex = 3;
+			this.rbRegisterLeft.TabStop = true;
+			this.rbRegisterLeft.Text = "Links unten";
+			this.rbRegisterLeft.UseVisualStyleBackColor = true;
+			this.rbRegisterLeft.CheckedChanged += new System.EventHandler(this.rbRegisterLeftRight_CheckedChanged);
+			// 
+			// groupBox4
+			// 
+			this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox4.Controls.Add(this.numRegisterVertical);
+			this.groupBox4.Controls.Add(this.numRegisterLeft);
+			this.groupBox4.Controls.Add(this.label1);
+			this.groupBox4.Controls.Add(this.label4);
+			this.groupBox4.Controls.Add(this.label5);
+			this.groupBox4.Controls.Add(this.label6);
+			this.groupBox4.Location = new System.Drawing.Point(3, 21);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Size = new System.Drawing.Size(217, 66);
+			this.groupBox4.TabIndex = 1;
+			this.groupBox4.TabStop = false;
+			this.groupBox4.Text = "Position";
+			// 
+			// numRegisterVertical
+			// 
+			this.numRegisterVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numRegisterVertical.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numRegisterVertical.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.Location = new System.Drawing.Point(97, 42);
+			this.numRegisterVertical.MaxValue = null;
+			this.numRegisterVertical.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.Name = "numRegisterVertical";
+			this.numRegisterVertical.Size = new System.Drawing.Size(87, 20);
+			this.numRegisterVertical.TabIndex = 3;
+			this.numRegisterVertical.Text = "1";
+			this.numRegisterVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRegisterVertical.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterVertical.ValueChanged += new System.EventHandler(this.numRegisterVertical_ValueChanged);
+			// 
+			// numRegisterLeft
+			// 
+			this.numRegisterLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.numRegisterLeft.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+			this.numRegisterLeft.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.Location = new System.Drawing.Point(97, 19);
+			this.numRegisterLeft.MaxValue = null;
+			this.numRegisterLeft.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.Name = "numRegisterLeft";
+			this.numRegisterLeft.Size = new System.Drawing.Size(87, 20);
+			this.numRegisterLeft.TabIndex = 2;
+			this.numRegisterLeft.Text = "1";
+			this.numRegisterLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.numRegisterLeft.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numRegisterLeft.ValueChanged += new System.EventHandler(this.numRegisterLeft_ValueChanged);
+			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(190, 45);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(21, 13);
+			this.label1.TabIndex = 19;
+			this.label1.Text = "cm";
+			// 
+			// label4
+			// 
+			this.label4.Location = new System.Drawing.Point(6, 45);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(85, 18);
+			this.label4.TabIndex = 18;
+			this.label4.Text = "Vertikal:";
+			// 
+			// label5
+			// 
+			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(190, 22);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(21, 13);
+			this.label5.TabIndex = 16;
+			this.label5.Text = "cm";
+			// 
+			// label6
+			// 
+			this.label6.Location = new System.Drawing.Point(6, 22);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(85, 23);
+			this.label6.TabIndex = 15;
+			this.label6.Text = "Links:";
+			// 
+			// lblRegisterSelectedRegister
+			// 
+			this.lblRegisterSelectedRegister.AutoSize = true;
+			this.lblRegisterSelectedRegister.Location = new System.Drawing.Point(4, 3);
+			this.lblRegisterSelectedRegister.Name = "lblRegisterSelectedRegister";
+			this.lblRegisterSelectedRegister.Size = new System.Drawing.Size(123, 13);
+			this.lblRegisterSelectedRegister.TabIndex = 1;
+			this.lblRegisterSelectedRegister.Text = "Keine Wand ausgewählt";
 			// 
 			// label7
 			// 
@@ -2343,7 +2373,7 @@ namespace Europlan.Common {
 			this.panelBottom.Location = new System.Drawing.Point(25, 326);
 			this.panelBottom.Name = "panelBottom";
 			this.panelBottom.Size = new System.Drawing.Size(861, 206);
-			this.panelBottom.TabIndex = 3;
+			this.panelBottom.TabIndex = 66;
 			// 
 			// graphicalWallPanel
 			// 
@@ -2413,6 +2443,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.toolStripMain);
 			this.Controls.Add(this.graphicalWallPanel);
 			this.Controls.Add(this.planPanel);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "HithermPlannerForm";
 			this.Text = "Hitherm - grafische Auslegung";
 			this.Load += new System.EventHandler(this.HithermPlannerForm_Load);
@@ -2422,14 +2453,6 @@ namespace Europlan.Common {
 			this.toolStripSubmenu.ResumeLayout(false);
 			this.toolStripSubmenu.PerformLayout();
 			this.panelTop.ResumeLayout(false);
-			this.panelModifyHitherm.ResumeLayout(false);
-			this.panelModifyHitherm.PerformLayout();
-			this.groupBox6.ResumeLayout(false);
-			this.groupBox6.PerformLayout();
-			this.groupBox5.ResumeLayout(false);
-			this.groupBox5.PerformLayout();
-			this.groupBox4.ResumeLayout(false);
-			this.groupBox4.PerformLayout();
 			this.panelModifySchraege.ResumeLayout(false);
 			this.panelModifySchraege.PerformLayout();
 			this.groupBox17.ResumeLayout(false);
@@ -2457,6 +2480,14 @@ namespace Europlan.Common {
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
+			this.panelModifyHitherm.ResumeLayout(false);
+			this.panelModifyHitherm.PerformLayout();
+			this.groupBox6.ResumeLayout(false);
+			this.groupBox6.PerformLayout();
+			this.groupBox5.ResumeLayout(false);
+			this.groupBox5.PerformLayout();
+			this.groupBox4.ResumeLayout(false);
+			this.groupBox4.PerformLayout();
 			this.panelBottom.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -2638,5 +2669,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripButton btnAddAnbindeleitungen;
 		private System.Windows.Forms.ToolStripButton btnSelectAnbindeleitungen;
 		private System.Windows.Forms.ToolStripSeparator sepAnbindeleitungen;
+		private System.Windows.Forms.ToolStripButton btnSchraegeLeft;
+		private System.Windows.Forms.ToolStripButton btnSchraegeRight;
 	}
 }

@@ -1599,6 +1599,7 @@ namespace Europlan.Common.Products {
 			this.Controls.Add(this.planPanel);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.toolStrip);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "ModulKlimaDeckePlannerForm";
 			this.Text = "Modul Klima-Decke - grafische Auslegung";
 			this.Load += new System.EventHandler(this.ModulKlimaDeckePlannerForm_Load);

@@ -64,7 +64,7 @@ namespace Europlan.Common {
 			this.numHeightOffset.MinValue = null;
 			this.numHeightOffset.Name = "numHeightOffset";
 			this.numHeightOffset.Size = new System.Drawing.Size(168, 20);
-			this.numHeightOffset.TabIndex = 26;
+			this.numHeightOffset.TabIndex = 3;
 			this.numHeightOffset.Text = "0";
 			this.numHeightOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numHeightOffset.Value = new decimal(new int[] {
@@ -88,7 +88,7 @@ namespace Europlan.Common {
 			this.cmbType.Location = new System.Drawing.Point(138, 6);
 			this.cmbType.Name = "cmbType";
 			this.cmbType.Size = new System.Drawing.Size(168, 21);
-			this.cmbType.TabIndex = 25;
+			this.cmbType.TabIndex = 0;
 			this.cmbType.SelectedValueChanged += new System.EventHandler(this.cmbType_SelectedValueChanged);
 			// 
 			// label3
@@ -128,7 +128,7 @@ namespace Europlan.Common {
 			this.numHeight.MinValue = null;
 			this.numHeight.Name = "numHeight";
 			this.numHeight.Size = new System.Drawing.Size(168, 20);
-			this.numHeight.TabIndex = 18;
+			this.numHeight.TabIndex = 2;
 			this.numHeight.Text = "0";
 			this.numHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numHeight.Value = new decimal(new int[] {
@@ -169,7 +169,7 @@ namespace Europlan.Common {
 			this.numWidth.MinValue = null;
 			this.numWidth.Name = "numWidth";
 			this.numWidth.Size = new System.Drawing.Size(168, 20);
-			this.numWidth.TabIndex = 16;
+			this.numWidth.TabIndex = 1;
 			this.numWidth.Text = "0";
 			this.numWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWidth.Value = new decimal(new int[] {
@@ -185,7 +185,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(216, 121);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 19;
+			this.btnOk.TabIndex = 4;
 			this.btnOk.Text = "&OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			// 
@@ -196,7 +196,7 @@ namespace Europlan.Common {
 			this.btnCancel.Location = new System.Drawing.Point(297, 121);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 20;
+			this.btnCancel.TabIndex = 5;
 			this.btnCancel.Text = "&Abbrechen";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 

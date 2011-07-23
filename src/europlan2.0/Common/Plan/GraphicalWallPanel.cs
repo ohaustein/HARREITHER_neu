@@ -42,6 +42,8 @@ namespace Europlan.Common {
 
 		private GraphicalWallObstacle.ObstacleTypeEnum newObstacleType = GraphicalWallObstacle.ObstacleTypeEnum.Window;
 
+		private GraphicalDachschraege.OrientationEnum newSchraegeOrientation = GraphicalDachschraege.OrientationEnum.LEFT;
+
 		private bool snapEnabled = true;
 
 		private event EventHandler<SelectedObjectArgs> objectSelected;
@@ -112,6 +114,11 @@ namespace Europlan.Common {
 		public GraphicalWallObstacle.ObstacleTypeEnum NewObstacleType {
 			get { return newObstacleType; }
 			set { newObstacleType = value; }
+		}
+
+		public GraphicalDachschraege.OrientationEnum NewSchraegeOrientation {
+			get { return this.newSchraegeOrientation; }
+			set { this.newSchraegeOrientation = value; }
 		}
 
 		public double TotalWidth {
@@ -320,10 +327,16 @@ namespace Europlan.Common {
 
 		private Nullable<Point2D> dragStart = null;
 		private Point2D dragEnd = Point2D.Zero;
+
 		private GraphicalWallObstacle newObstacle = null;
 		private GraphicalWall newObstacleWall = null;
 		private double newObstacleWallXOffset, newObstacleWallYOffset;
 		private bool newObstacleOk = true;
+
+		private GraphicalDachschraege newSchraege = null;
+		private GraphicalWall newSchraegeWall = null;
+		private double newSchraegeWallXOffset, newSchraegeWallYOffset;
+		private bool newSchraegeOk = true;
 
 		private Cursor oldCursor = null;
 
@@ -378,6 +391,17 @@ namespace Europlan.Common {
 						this.newObstacle.IsNew = true;
 						//this.SelectedObject = this.newObstacle;
 					}
+				}
+			}
+			if (mode == PlanMode.PM_ADD_SCHRAEGE && this.room != null && e.Button == MouseButtons.Left) {
+				//this.dragStart = mousePosInPlan;
+				this.newSchraegeWall = this.room.GetWallForPoint(mousePosInPlan, out this.newSchraegeWallXOffset, out this.newSchraegeWallYOffset);
+				this.SelectedObject = null;
+				this.selectedWall = this.newSchraegeWall;
+				if (this.newSchraegeWall != null) {
+					this.newSchraege = new GraphicalDachschraege(this.newSchraegeWall, this.newSchraegeOrientation);
+					//this.newSchraegeOk = false;
+					this.newSchraege.IsNew = true;
 				}
 			}
 			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button == MouseButtons.Left) {
@@ -463,6 +487,17 @@ namespace Europlan.Common {
 				}
 				invalidate = true;
 			}
+			if (mode == PlanMode.PM_ADD_SCHRAEGE) {
+				if (this.newSchraegeWall != null && this.newSchraege != null) {
+					if (this.newSchraegeOk) {
+						this.newSchraegeWall.Schraegen.Add(this.newSchraege);
+						this.SelectedObject = this.newSchraege;
+					}
+					this.newSchraege = null;
+					this.newSchraegeWall = null;
+				}
+				invalidate = true;
+			}
 
 			if (mode == PlanMode.PM_SELECT_OBJECT) {
 				if (this.draggingObject != null) {
@@ -539,6 +574,22 @@ namespace Europlan.Common {
 				} else {
 					this.room.ClearErrors();
 				}
+				invalidate = true;
+			}
+			if (this.mode == PlanMode.PM_ADD_SCHRAEGE && this.newSchraege != null && this.newSchraegeWall != null && e.Button != MouseButtons.Middle) {
+				double width, height;
+				if (this.newSchraege.Orientation == GraphicalDachschraege.OrientationEnum.LEFT) {
+					width = mousePosInPlan.X - this.newSchraegeWallXOffset;
+					height = -(mousePosInPlan.Y - this.newSchraegeWallYOffset - this.newSchraegeWall.GetWallHeight() * 100.0);
+					this.newSchraege.Width = width;
+					this.newSchraege.Height = height;
+				} else {
+					width = this.newSchraegeWallXOffset + this.newSchraegeWall.GetWallWidth() * 100.0 - mousePosInPlan.X;
+					height = -(mousePosInPlan.Y - this.newSchraegeWallYOffset - this.newSchraegeWall.GetWallHeight() * 100.0);
+					this.newSchraege.Width = width;
+					this.newSchraege.Height = height;
+				}
+				// TODO
 				invalidate = true;
 			}
 			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {

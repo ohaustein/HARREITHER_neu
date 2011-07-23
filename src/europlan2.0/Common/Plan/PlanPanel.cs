@@ -277,6 +277,8 @@ namespace Europlan.Common {
 			return false;
 		}
 
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Cursor PlanCursor {
 			get { return this.panel != null ? this.panel.PlanCursor : tmpCursor; }
 			set {

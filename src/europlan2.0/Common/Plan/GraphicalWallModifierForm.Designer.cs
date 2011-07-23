@@ -26,8 +26,8 @@ namespace Europlan.Common {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraphicalWallModifierForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
-			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
+			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnPickWall = new System.Windows.Forms.ToolStripButton();
@@ -62,7 +62,7 @@ namespace Europlan.Common {
 			this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnZoomIn,
-			this.btnZoomOut,
+            this.btnZoomOut,
             this.toolStripSeparator1,
             this.btnMove,
             this.btnPickWall,
@@ -70,19 +70,8 @@ namespace Europlan.Common {
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(679, 25);
-			this.toolStrip.TabIndex = 1;
+			this.toolStrip.TabIndex = 9;
 			this.toolStrip.Text = "toolStrip";
-			// 
-			// btnZoomOut
-			// 
-			this.btnZoomOut.AutoToolTip = false;
-			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
-			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnZoomOut.Name = "btnZoomOut";
-			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomOut.Text = "zoomOut";
-			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// btnZoomIn
 			// 
@@ -94,6 +83,17 @@ namespace Europlan.Common {
 			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
 			this.btnZoomIn.Text = "zoomIn";
 			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+			// 
+			// btnZoomOut
+			// 
+			this.btnZoomOut.AutoToolTip = false;
+			this.btnZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.Image")));
+			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnZoomOut.Name = "btnZoomOut";
+			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
+			this.btnZoomOut.Text = "zoomOut";
+			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -152,7 +152,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(475, 49);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(93, 23);
-			this.btnOk.TabIndex = 1;
+			this.btnOk.TabIndex = 7;
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			// 
@@ -163,7 +163,7 @@ namespace Europlan.Common {
 			this.btnCancel.Location = new System.Drawing.Point(574, 49);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(93, 23);
-			this.btnCancel.TabIndex = 2;
+			this.btnCancel.TabIndex = 8;
 			this.btnCancel.Text = "Abbrechen";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
@@ -216,7 +216,7 @@ namespace Europlan.Common {
             0});
 			this.numWallVertical.Name = "numWallVertical";
 			this.numWallVertical.Size = new System.Drawing.Size(87, 20);
-			this.numWallVertical.TabIndex = 21;
+			this.numWallVertical.TabIndex = 4;
 			this.numWallVertical.Text = "0";
 			this.numWallVertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWallVertical.Value = new decimal(new int[] {
@@ -246,7 +246,7 @@ namespace Europlan.Common {
             0});
 			this.numWallHorizontal.Name = "numWallHorizontal";
 			this.numWallHorizontal.Size = new System.Drawing.Size(87, 20);
-			this.numWallHorizontal.TabIndex = 20;
+			this.numWallHorizontal.TabIndex = 3;
 			this.numWallHorizontal.Text = "0";
 			this.numWallHorizontal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numWallHorizontal.Value = new decimal(new int[] {
@@ -310,7 +310,7 @@ namespace Europlan.Common {
 			this.btnWallSelectConstruction.Location = new System.Drawing.Point(110, 17);
 			this.btnWallSelectConstruction.Name = "btnWallSelectConstruction";
 			this.btnWallSelectConstruction.Size = new System.Drawing.Size(30, 23);
-			this.btnWallSelectConstruction.TabIndex = 15;
+			this.btnWallSelectConstruction.TabIndex = 2;
 			this.btnWallSelectConstruction.Text = "...";
 			this.btnWallSelectConstruction.UseVisualStyleBackColor = true;
 			this.btnWallSelectConstruction.Click += new System.EventHandler(this.btnWallSelectConstruction_Click);
@@ -323,7 +323,7 @@ namespace Europlan.Common {
 			this.txtWallConstruction.Name = "txtWallConstruction";
 			this.txtWallConstruction.ReadOnly = true;
 			this.txtWallConstruction.Size = new System.Drawing.Size(98, 20);
-			this.txtWallConstruction.TabIndex = 14;
+			this.txtWallConstruction.TabIndex = 1;
 			// 
 			// chkStartWall
 			// 
@@ -331,7 +331,7 @@ namespace Europlan.Common {
 			this.chkStartWall.Location = new System.Drawing.Point(513, 26);
 			this.chkStartWall.Name = "chkStartWall";
 			this.chkStartWall.Size = new System.Drawing.Size(154, 17);
-			this.chkStartWall.TabIndex = 1;
+			this.chkStartWall.TabIndex = 6;
 			this.chkStartWall.Text = "Als erste Wand verwenden";
 			this.chkStartWall.UseVisualStyleBackColor = true;
 			this.chkStartWall.CheckedChanged += new System.EventHandler(this.chkStartWall_CheckedChanged);
@@ -342,7 +342,7 @@ namespace Europlan.Common {
 			this.chkEnable.Location = new System.Drawing.Point(387, 26);
 			this.chkEnable.Name = "chkEnable";
 			this.chkEnable.Size = new System.Drawing.Size(108, 17);
-			this.chkEnable.TabIndex = 0;
+			this.chkEnable.TabIndex = 5;
 			this.chkEnable.Text = "Wand erzeugen?";
 			this.chkEnable.UseVisualStyleBackColor = true;
 			this.chkEnable.CheckedChanged += new System.EventHandler(this.chkEnable_CheckedChanged);
@@ -354,7 +354,7 @@ namespace Europlan.Common {
 			this.panel.Name = "panel";
 			this.panel.ProductPlanner = this.graphicalWallModifier;
 			this.panel.Size = new System.Drawing.Size(679, 437);
-			this.panel.TabIndex = 2;
+			this.panel.TabIndex = 0;
 			// 
 			// graphicalWallModifier
 			// 

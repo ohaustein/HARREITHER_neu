@@ -58,7 +58,7 @@ namespace Europlan.Common {
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Size = new System.Drawing.Size(668, 25);
-			this.toolStrip.TabIndex = 1;
+			this.toolStrip.TabIndex = 3;
 			this.toolStrip.Text = "toolStrip";
 			// 
 			// btnZoomIn
@@ -180,7 +180,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(570, 3);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(95, 23);
-			this.btnOk.TabIndex = 3;
+			this.btnOk.TabIndex = 2;
 			this.btnOk.Text = "Übernehmen";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -192,7 +192,7 @@ namespace Europlan.Common {
 			this.cadPanel.Location = new System.Drawing.Point(200, 25);
 			this.cadPanel.Name = "cadPanel";
 			this.cadPanel.Size = new System.Drawing.Size(468, 377);
-			this.cadPanel.TabIndex = 2;
+			this.cadPanel.TabIndex = 1;
 			this.cadPanel.EndPointSelected += new System.EventHandler<Europlan.Common.CadPanel.EndPointSelectedArgs>(this.cadPanel_EndPointSelected);
 			this.cadPanel.StartPointSelected += new System.EventHandler<Europlan.Common.CadPanel.StartPointSelectedArgs>(this.cadPanel_StartPointSelected);
 			// 

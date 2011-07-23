@@ -29,7 +29,6 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.materialCategoryGridItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.gridMaterials = new System.Windows.Forms.DataGridView();
-			this.materialsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.userDefinedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.partNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,6 +37,7 @@ namespace Europlan.Common {
 			this.denominationDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.priceDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.Category = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.materialsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.materialCategoryGridItemBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridMaterials)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.materialsWrapperBindingSource)).BeginInit();
@@ -74,15 +74,10 @@ namespace Europlan.Common {
 			this.gridMaterials.MultiSelect = false;
 			this.gridMaterials.Name = "gridMaterials";
 			this.gridMaterials.Size = new System.Drawing.Size(612, 440);
-			this.gridMaterials.TabIndex = 2;
+			this.gridMaterials.TabIndex = 0;
 			this.gridMaterials.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMaterials_CellValueChanged);
 			this.gridMaterials.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridMaterials_UserDeletingRow);
 			this.gridMaterials.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridMaterials_RowsAdded);
-			// 
-			// materialsWrapperBindingSource
-			// 
-			this.materialsWrapperBindingSource.DataSource = typeof(Europlan.Common.MaterialListWrapper);
-			this.materialsWrapperBindingSource.Filter = "";
 			// 
 			// userDefinedDataGridViewCheckBoxColumn
 			// 
@@ -146,7 +141,7 @@ namespace Europlan.Common {
 			// 
 			this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
+			dataGridViewCellStyle3.Format = "F2";
 			this.priceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.priceDataGridViewTextBoxColumn.FillWeight = 60F;
 			this.priceDataGridViewTextBoxColumn.HeaderText = "Preis pro Einheit";
@@ -166,6 +161,11 @@ namespace Europlan.Common {
 			this.Category.ValueMember = "ItemCategory";
 			this.Category.Visible = false;
 			this.Category.Width = 250;
+			// 
+			// materialsWrapperBindingSource
+			// 
+			this.materialsWrapperBindingSource.DataSource = typeof(Europlan.Common.MaterialListWrapper);
+			this.materialsWrapperBindingSource.Filter = global::Europlan.Common.EuroplanRes.Material_a834583d_750c_4695_ba45_7e346108551f;
 			// 
 			// MaterialEditorGrid
 			// 

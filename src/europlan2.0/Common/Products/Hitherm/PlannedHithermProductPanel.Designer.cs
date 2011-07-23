@@ -38,6 +38,7 @@ namespace Europlan.Common {
 			this.groupBox10 = new System.Windows.Forms.GroupBox();
 			this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
 			this.groupBox9 = new System.Windows.Forms.GroupBox();
+			this.btnGraphicalAnbindleitungen = new System.Windows.Forms.Button();
 			this.btnDistributor = new System.Windows.Forms.Button();
 			this.lblDistributor = new System.Windows.Forms.Label();
 			this.txtDistributor = new System.Windows.Forms.TextBox();
@@ -162,7 +163,6 @@ namespace Europlan.Common {
 			this.numericColumn1 = new Europlan.Common.NumericColumn();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.btnGraphicalAnbindleitungen = new System.Windows.Forms.Button();
 			this.pageCircuit.SuspendLayout();
 			this.groupBox10.SuspendLayout();
 			this.groupBox9.SuspendLayout();
@@ -210,7 +210,7 @@ namespace Europlan.Common {
 			this.groupBox10.Location = new System.Drawing.Point(3, 53);
 			this.groupBox10.Name = "groupBox10";
 			this.groupBox10.Size = new System.Drawing.Size(886, 480);
-			this.groupBox10.TabIndex = 2;
+			this.groupBox10.TabIndex = 25;
 			this.groupBox10.TabStop = false;
 			this.groupBox10.Text = "Anbindeleitungen";
 			// 
@@ -221,7 +221,7 @@ namespace Europlan.Common {
 			this.connectionPipePanel.Name = "connectionPipePanel";
 			this.connectionPipePanel.ShowPipesThroughProduct = false;
 			this.connectionPipePanel.Size = new System.Drawing.Size(880, 461);
-			this.connectionPipePanel.TabIndex = 0;
+			this.connectionPipePanel.TabIndex = 26;
 			this.connectionPipePanel.GridContentChanged += new Europlan.Common.ConnectionPipePanelContentChangedHandler(this.connectionPipePanel1_GridContentChanged);
 			// 
 			// groupBox9
@@ -236,15 +236,26 @@ namespace Europlan.Common {
 			this.groupBox9.Location = new System.Drawing.Point(3, 6);
 			this.groupBox9.Name = "groupBox9";
 			this.groupBox9.Size = new System.Drawing.Size(886, 41);
-			this.groupBox9.TabIndex = 0;
+			this.groupBox9.TabIndex = 20;
 			this.groupBox9.TabStop = false;
+			// 
+			// btnGraphicalAnbindleitungen
+			// 
+			this.btnGraphicalAnbindleitungen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnGraphicalAnbindleitungen.Location = new System.Drawing.Point(723, 12);
+			this.btnGraphicalAnbindleitungen.Name = "btnGraphicalAnbindleitungen";
+			this.btnGraphicalAnbindleitungen.Size = new System.Drawing.Size(157, 23);
+			this.btnGraphicalAnbindleitungen.TabIndex = 24;
+			this.btnGraphicalAnbindleitungen.Text = "grafische Anbindeleitungen";
+			this.btnGraphicalAnbindleitungen.UseVisualStyleBackColor = true;
+			this.btnGraphicalAnbindleitungen.Click += new System.EventHandler(this.btnGraphicalAnbindleitungen_Click);
 			// 
 			// btnDistributor
 			// 
 			this.btnDistributor.Location = new System.Drawing.Point(388, 13);
 			this.btnDistributor.Name = "btnDistributor";
 			this.btnDistributor.Size = new System.Drawing.Size(25, 20);
-			this.btnDistributor.TabIndex = 5;
+			this.btnDistributor.TabIndex = 22;
 			this.btnDistributor.Text = "...";
 			this.btnDistributor.UseVisualStyleBackColor = true;
 			this.btnDistributor.Click += new System.EventHandler(this.btnDistributor_Click);
@@ -263,7 +274,8 @@ namespace Europlan.Common {
 			this.txtDistributor.Name = "txtDistributor";
 			this.txtDistributor.ReadOnly = true;
 			this.txtDistributor.Size = new System.Drawing.Size(194, 20);
-			this.txtDistributor.TabIndex = 3;
+			this.txtDistributor.TabIndex = 21;
+			this.txtDistributor.TabStop = false;
 			// 
 			// chkStellAntriebe
 			// 
@@ -271,7 +283,7 @@ namespace Europlan.Common {
 			this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
 			this.chkStellAntriebe.Name = "chkStellAntriebe";
 			this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
-			this.chkStellAntriebe.TabIndex = 7;
+			this.chkStellAntriebe.TabIndex = 23;
 			this.chkStellAntriebe.Text = "Stellantrieb(e) verwenden";
 			this.chkStellAntriebe.UseVisualStyleBackColor = true;
 			this.chkStellAntriebe.CheckedChanged += new System.EventHandler(this.chkStellAntriebe_CheckedChanged);
@@ -292,7 +304,7 @@ namespace Europlan.Common {
 			this.tabs.SelectedIndex = 0;
 			this.helpProvider.SetShowHelp(this.tabs, true);
 			this.tabs.Size = new System.Drawing.Size(900, 561);
-			this.tabs.TabIndex = 2;
+			this.tabs.TabIndex = 0;
 			this.tabs.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabs_Deselecting);
 			// 
 			// pageInput
@@ -341,7 +353,7 @@ namespace Europlan.Common {
 			this.grpPowerArea.MinimumSize = new System.Drawing.Size(640, 0);
 			this.grpPowerArea.Name = "grpPowerArea";
 			this.grpPowerArea.Size = new System.Drawing.Size(884, 121);
-			this.grpPowerArea.TabIndex = 1;
+			this.grpPowerArea.TabIndex = 8;
 			this.grpPowerArea.TabStop = false;
 			// 
 			// btnRestkaelte
@@ -349,7 +361,7 @@ namespace Europlan.Common {
 			this.btnRestkaelte.Location = new System.Drawing.Point(712, 37);
 			this.btnRestkaelte.Name = "btnRestkaelte";
 			this.btnRestkaelte.Size = new System.Drawing.Size(165, 23);
-			this.btnRestkaelte.TabIndex = 28;
+			this.btnRestkaelte.TabIndex = 16;
 			this.btnRestkaelte.Text = "Restkälte übernehmen";
 			this.btnRestkaelte.UseVisualStyleBackColor = true;
 			this.btnRestkaelte.Click += new System.EventHandler(this.btnRestkaelte_Click);
@@ -359,14 +371,14 @@ namespace Europlan.Common {
 			this.btnRestwaerme.Location = new System.Drawing.Point(712, 11);
 			this.btnRestwaerme.Name = "btnRestwaerme";
 			this.btnRestwaerme.Size = new System.Drawing.Size(165, 23);
-			this.btnRestwaerme.TabIndex = 27;
+			this.btnRestwaerme.TabIndex = 12;
 			this.btnRestwaerme.Text = "Restwärme übernehmen";
 			this.btnRestwaerme.UseVisualStyleBackColor = true;
 			this.btnRestwaerme.Click += new System.EventHandler(this.btnRestwaerme_Click);
 			// 
 			// lblAreaPercentage
 			// 
-			this.lblAreaPercentage.Location = new System.Drawing.Point(388, 95);
+			this.lblAreaPercentage.Location = new System.Drawing.Point(443, 95);
 			this.lblAreaPercentage.Name = "lblAreaPercentage";
 			this.lblAreaPercentage.Size = new System.Drawing.Size(19, 13);
 			this.lblAreaPercentage.TabIndex = 23;
@@ -394,7 +406,7 @@ namespace Europlan.Common {
             0});
 			this.numAreaPercentage.Name = "numAreaPercentage";
 			this.numAreaPercentage.Size = new System.Drawing.Size(54, 20);
-			this.numAreaPercentage.TabIndex = 22;
+			this.numAreaPercentage.TabIndex = 19;
 			this.numAreaPercentage.Text = "0";
 			this.numAreaPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numAreaPercentage.Value = new decimal(new int[] {
@@ -431,7 +443,7 @@ namespace Europlan.Common {
             0});
 			this.numArea.Name = "numArea";
 			this.numArea.Size = new System.Drawing.Size(109, 20);
-			this.numArea.TabIndex = 20;
+			this.numArea.TabIndex = 18;
 			this.numArea.Text = "0";
 			this.numArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numArea.Value = new decimal(new int[] {
@@ -466,7 +478,7 @@ namespace Europlan.Common {
 			this.cmbType.Location = new System.Drawing.Point(243, 65);
 			this.cmbType.Name = "cmbType";
 			this.cmbType.Size = new System.Drawing.Size(109, 21);
-			this.cmbType.TabIndex = 14;
+			this.cmbType.TabIndex = 17;
 			this.cmbType.SelectedValueChanged += new System.EventHandler(this.cmbType_SelectedValueChanged);
 			// 
 			// lblCoolLoadTotal
@@ -485,7 +497,7 @@ namespace Europlan.Common {
 			this.chkCoverCoolLoad.Location = new System.Drawing.Point(468, 41);
 			this.chkCoverCoolLoad.Name = "chkCoverCoolLoad";
 			this.chkCoverCoolLoad.Size = new System.Drawing.Size(102, 17);
-			this.chkCoverCoolLoad.TabIndex = 12;
+			this.chkCoverCoolLoad.TabIndex = 15;
 			this.chkCoverCoolLoad.Text = "Kühllast decken";
 			this.chkCoverCoolLoad.UseVisualStyleBackColor = true;
 			this.chkCoverCoolLoad.CheckedChanged += new System.EventHandler(this.chkCoverCoolLoad_CheckedChanged);
@@ -520,7 +532,7 @@ namespace Europlan.Common {
             0});
 			this.numCoolLoadPercentage.Name = "numCoolLoadPercentage";
 			this.numCoolLoadPercentage.Size = new System.Drawing.Size(54, 20);
-			this.numCoolLoadPercentage.TabIndex = 10;
+			this.numCoolLoadPercentage.TabIndex = 14;
 			this.numCoolLoadPercentage.Text = "0";
 			this.numCoolLoadPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numCoolLoadPercentage.Value = new decimal(new int[] {
@@ -560,7 +572,7 @@ namespace Europlan.Common {
             0});
 			this.numCoolLoad.Name = "numCoolLoad";
 			this.numCoolLoad.Size = new System.Drawing.Size(109, 20);
-			this.numCoolLoad.TabIndex = 8;
+			this.numCoolLoad.TabIndex = 13;
 			this.numCoolLoad.Text = "0";
 			this.numCoolLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numCoolLoad.Value = new decimal(new int[] {
@@ -595,7 +607,7 @@ namespace Europlan.Common {
 			this.chkCoverHeatLoad.Location = new System.Drawing.Point(468, 15);
 			this.chkCoverHeatLoad.Name = "chkCoverHeatLoad";
 			this.chkCoverHeatLoad.Size = new System.Drawing.Size(129, 17);
-			this.chkCoverHeatLoad.TabIndex = 5;
+			this.chkCoverHeatLoad.TabIndex = 11;
 			this.chkCoverHeatLoad.Text = "Wärmebedarf decken";
 			this.chkCoverHeatLoad.UseVisualStyleBackColor = true;
 			this.chkCoverHeatLoad.CheckedChanged += new System.EventHandler(this.chkCoverHeatLoad_CheckedChanged);
@@ -630,7 +642,7 @@ namespace Europlan.Common {
             0});
 			this.numHeatLoadPercentage.Name = "numHeatLoadPercentage";
 			this.numHeatLoadPercentage.Size = new System.Drawing.Size(54, 20);
-			this.numHeatLoadPercentage.TabIndex = 3;
+			this.numHeatLoadPercentage.TabIndex = 10;
 			this.numHeatLoadPercentage.Text = "0";
 			this.numHeatLoadPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numHeatLoadPercentage.Value = new decimal(new int[] {
@@ -670,7 +682,7 @@ namespace Europlan.Common {
             0});
 			this.numHeatLoad.Name = "numHeatLoad";
 			this.numHeatLoad.Size = new System.Drawing.Size(109, 20);
-			this.numHeatLoad.TabIndex = 1;
+			this.numHeatLoad.TabIndex = 9;
 			this.numHeatLoad.Text = "0";
 			this.numHeatLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numHeatLoad.Value = new decimal(new int[] {
@@ -701,7 +713,7 @@ namespace Europlan.Common {
 			this.groupBox11.Location = new System.Drawing.Point(3, 6);
 			this.groupBox11.Name = "groupBox11";
 			this.groupBox11.Size = new System.Drawing.Size(884, 92);
-			this.groupBox11.TabIndex = 0;
+			this.groupBox11.TabIndex = 1;
 			this.groupBox11.TabStop = false;
 			// 
 			// panel3
@@ -711,7 +723,7 @@ namespace Europlan.Common {
 			this.panel3.Location = new System.Drawing.Point(511, 12);
 			this.panel3.Name = "panel3";
 			this.panel3.Size = new System.Drawing.Size(200, 70);
-			this.panel3.TabIndex = 10;
+			this.panel3.TabIndex = 5;
 			// 
 			// rbLayoutTable
 			// 
@@ -720,7 +732,7 @@ namespace Europlan.Common {
 			this.rbLayoutTable.Location = new System.Drawing.Point(0, 7);
 			this.rbLayoutTable.Name = "rbLayoutTable";
 			this.rbLayoutTable.Size = new System.Drawing.Size(78, 17);
-			this.rbLayoutTable.TabIndex = 2;
+			this.rbLayoutTable.TabIndex = 6;
 			this.rbLayoutTable.TabStop = true;
 			this.rbLayoutTable.Text = "tabellarisch";
 			this.rbLayoutTable.UseVisualStyleBackColor = true;
@@ -732,7 +744,7 @@ namespace Europlan.Common {
 			this.rbLayoutGraphical.Location = new System.Drawing.Point(0, 30);
 			this.rbLayoutGraphical.Name = "rbLayoutGraphical";
 			this.rbLayoutGraphical.Size = new System.Drawing.Size(62, 17);
-			this.rbLayoutGraphical.TabIndex = 3;
+			this.rbLayoutGraphical.TabIndex = 7;
 			this.rbLayoutGraphical.Text = "grafisch";
 			this.rbLayoutGraphical.UseVisualStyleBackColor = true;
 			this.rbLayoutGraphical.CheckedChanged += new System.EventHandler(this.rbGraphical_CheckedChanged);
@@ -759,7 +771,7 @@ namespace Europlan.Common {
 			this.rbHeatAndCool.Location = new System.Drawing.Point(243, 65);
 			this.rbHeatAndCool.Name = "rbHeatAndCool";
 			this.rbHeatAndCool.Size = new System.Drawing.Size(115, 17);
-			this.rbHeatAndCool.TabIndex = 2;
+			this.rbHeatAndCool.TabIndex = 4;
 			this.rbHeatAndCool.TabStop = true;
 			this.rbHeatAndCool.Text = "Heizen und Kühlen";
 			this.rbHeatAndCool.UseVisualStyleBackColor = true;
@@ -771,7 +783,7 @@ namespace Europlan.Common {
 			this.rbCool.Location = new System.Drawing.Point(243, 42);
 			this.rbCool.Name = "rbCool";
 			this.rbCool.Size = new System.Drawing.Size(58, 17);
-			this.rbCool.TabIndex = 1;
+			this.rbCool.TabIndex = 3;
 			this.rbCool.TabStop = true;
 			this.rbCool.Text = "Kühlen";
 			this.rbCool.UseVisualStyleBackColor = true;
@@ -783,7 +795,7 @@ namespace Europlan.Common {
 			this.rbHeat.Location = new System.Drawing.Point(243, 19);
 			this.rbHeat.Name = "rbHeat";
 			this.rbHeat.Size = new System.Drawing.Size(58, 17);
-			this.rbHeat.TabIndex = 0;
+			this.rbHeat.TabIndex = 2;
 			this.rbHeat.TabStop = true;
 			this.rbHeat.Text = "Heizen";
 			this.rbHeat.UseVisualStyleBackColor = true;
@@ -819,7 +831,7 @@ namespace Europlan.Common {
 			this.hithermWallGrid1.Name = "hithermWallGrid1";
 			this.hithermWallGrid1.ShowCompact = false;
 			this.hithermWallGrid1.Size = new System.Drawing.Size(880, 523);
-			this.hithermWallGrid1.TabIndex = 0;
+			this.hithermWallGrid1.TabIndex = 27;
 			this.hithermWallGrid1.WallChanged += new System.EventHandler<Europlan.Common.HithermWallGrid.WallEventArgs>(this.hithermWallGrid1_WallChanged);
 			this.hithermWallGrid1.WallRemoved += new System.EventHandler<Europlan.Common.HithermWallGrid.WallEventArgs>(this.hithermWallGrid1_WallRemoved);
 			// 
@@ -910,7 +922,7 @@ namespace Europlan.Common {
 			this.btnGrafischeAuslegung.Location = new System.Drawing.Point(699, 32);
 			this.btnGrafischeAuslegung.Name = "btnGrafischeAuslegung";
 			this.btnGrafischeAuslegung.Size = new System.Drawing.Size(167, 23);
-			this.btnGrafischeAuslegung.TabIndex = 169;
+			this.btnGrafischeAuslegung.TabIndex = 30;
 			this.btnGrafischeAuslegung.Text = "Grafische Auslegung";
 			this.btnGrafischeAuslegung.UseVisualStyleBackColor = true;
 			this.btnGrafischeAuslegung.Click += new System.EventHandler(this.btnGrafischeAuslegung_Click);
@@ -930,6 +942,7 @@ namespace Europlan.Common {
 			this.lstError.ShowGroups = false;
 			this.lstError.Size = new System.Drawing.Size(863, 30);
 			this.lstError.TabIndex = 168;
+			this.lstError.TabStop = false;
 			this.lstError.UseCompatibleStateImageBehavior = false;
 			this.lstError.View = System.Windows.Forms.View.Details;
 			this.lstError.Visible = false;
@@ -1082,7 +1095,7 @@ namespace Europlan.Common {
 			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
 			this.dgvRegisters.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
 			this.dgvRegisters.Size = new System.Drawing.Size(667, 280);
-			this.dgvRegisters.TabIndex = 139;
+			this.dgvRegisters.TabIndex = 28;
 			this.dgvRegisters.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRegisters_CellValueChanged);
 			this.dgvRegisters.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvRegisters_UserDeletingRow);
 			this.dgvRegisters.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRegisters_CellLeave);
@@ -1605,7 +1618,7 @@ namespace Europlan.Common {
 			this.btnConnectionPipes.Location = new System.Drawing.Point(699, 3);
 			this.btnConnectionPipes.Name = "btnConnectionPipes";
 			this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
-			this.btnConnectionPipes.TabIndex = 73;
+			this.btnConnectionPipes.TabIndex = 29;
 			this.btnConnectionPipes.Text = "Anbindeleitungen bearbeiten";
 			this.btnConnectionPipes.UseVisualStyleBackColor = true;
 			this.btnConnectionPipes.Click += new System.EventHandler(this.btnConnectionPipes_Click);
@@ -1660,17 +1673,6 @@ namespace Europlan.Common {
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.dataGridViewTextBoxColumn2.Visible = false;
-			// 
-			// btnGraphicalAnbindleitungen
-			// 
-			this.btnGraphicalAnbindleitungen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnGraphicalAnbindleitungen.Location = new System.Drawing.Point(723, 12);
-			this.btnGraphicalAnbindleitungen.Name = "btnGraphicalAnbindleitungen";
-			this.btnGraphicalAnbindleitungen.Size = new System.Drawing.Size(157, 23);
-			this.btnGraphicalAnbindleitungen.TabIndex = 9;
-			this.btnGraphicalAnbindleitungen.Text = "grafische Anbindeleitungen";
-			this.btnGraphicalAnbindleitungen.UseVisualStyleBackColor = true;
-			this.btnGraphicalAnbindleitungen.Click += new System.EventHandler(this.btnGraphicalAnbindleitungen_Click);
 			// 
 			// PlannedHithermProductPanel
 			// 

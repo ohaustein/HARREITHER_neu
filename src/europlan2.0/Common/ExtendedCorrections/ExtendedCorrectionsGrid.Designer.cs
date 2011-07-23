@@ -25,7 +25,6 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -33,11 +32,8 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.gridExtendedCorrections = new System.Windows.Forms.DataGridView();
-			this.rbExtendedCorrections = new System.Windows.Forms.RadioButton();
-			this.rbStandardCorrections = new System.Windows.Forms.RadioButton();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.extendedCorrectionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.CircuitNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.correctAreaDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.areaValueDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
@@ -51,6 +47,10 @@ namespace Europlan.Common {
 			this.correctConnectionsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.connectionsPercentageDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
 			this.connectionsValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.extendedCorrectionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.rbExtendedCorrections = new System.Windows.Forms.RadioButton();
+			this.rbStandardCorrections = new System.Windows.Forms.RadioButton();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridExtendedCorrections)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.extendedCorrectionsBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -96,52 +96,11 @@ namespace Europlan.Common {
 			this.gridExtendedCorrections.Name = "gridExtendedCorrections";
 			this.gridExtendedCorrections.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.gridExtendedCorrections.Size = new System.Drawing.Size(845, 407);
-			this.gridExtendedCorrections.TabIndex = 5;
+			this.gridExtendedCorrections.TabIndex = 2;
 			this.gridExtendedCorrections.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridExtendedCorrections_CellValueChanged);
 			this.gridExtendedCorrections.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridExtendedCorrections_RowsAdded);
 			this.gridExtendedCorrections.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.gridExtendedCorrections_CellPainting_1);
 			this.gridExtendedCorrections.CurrentCellDirtyStateChanged += new System.EventHandler(this.gridExtendedCorrections_CurrentCellDirtyStateChanged);
-			// 
-			// rbExtendedCorrections
-			// 
-			this.rbExtendedCorrections.AutoSize = true;
-			this.rbExtendedCorrections.Location = new System.Drawing.Point(3, 26);
-			this.rbExtendedCorrections.Name = "rbExtendedCorrections";
-			this.rbExtendedCorrections.Size = new System.Drawing.Size(178, 17);
-			this.rbExtendedCorrections.TabIndex = 4;
-			this.rbExtendedCorrections.Text = "erweiterte Korrekturen aktivieren";
-			this.rbExtendedCorrections.UseVisualStyleBackColor = true;
-			this.rbExtendedCorrections.CheckedChanged += new System.EventHandler(this.rbExtendedCorrections_CheckedChanged);
-			// 
-			// rbStandardCorrections
-			// 
-			this.rbStandardCorrections.AutoSize = true;
-			this.rbStandardCorrections.Checked = true;
-			this.rbStandardCorrections.Location = new System.Drawing.Point(3, 3);
-			this.rbStandardCorrections.Name = "rbStandardCorrections";
-			this.rbStandardCorrections.Size = new System.Drawing.Size(344, 17);
-			this.rbStandardCorrections.TabIndex = 3;
-			this.rbStandardCorrections.TabStop = true;
-			this.rbStandardCorrections.Text = "nur Standardkorrekturen verwenden (keine erweiterten Korrekturen)";
-			this.rbStandardCorrections.UseVisualStyleBackColor = true;
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "CircuitNr";
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-			this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle9;
-			this.dataGridViewTextBoxColumn1.FillWeight = 70F;
-			this.dataGridViewTextBoxColumn1.Frozen = true;
-			this.dataGridViewTextBoxColumn1.HeaderText = "Heiz-\nkreis\nNr.";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.dataGridViewTextBoxColumn1.Width = 70;
-			// 
-			// extendedCorrectionsBindingSource
-			// 
-			this.extendedCorrectionsBindingSource.DataSource = typeof(Europlan.Common.ExtendedCorrections);
 			// 
 			// CircuitNr
 			// 
@@ -170,7 +129,7 @@ namespace Europlan.Common {
 			// 
 			this.areaValueDataGridViewTextBoxColumn.DataPropertyName = "AreaValue";
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F0";
+			dataGridViewCellStyle3.Format = "F1";
 			this.areaValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
 			this.areaValueDataGridViewTextBoxColumn.FillWeight = 55F;
 			this.areaValueDataGridViewTextBoxColumn.Frozen = true;
@@ -184,7 +143,7 @@ namespace Europlan.Common {
 			// 
 			this.areaPercentageDataGridViewTextBoxColumn.DataPropertyName = "AreaPercentage";
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle4.Format = "F0";
+			dataGridViewCellStyle4.Format = "F1";
 			this.areaPercentageDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
 			this.areaPercentageDataGridViewTextBoxColumn.FillWeight = 55F;
 			this.areaPercentageDataGridViewTextBoxColumn.Frozen = true;
@@ -225,7 +184,7 @@ namespace Europlan.Common {
 			// 
 			this.rimLengthValueDataGridViewTextBoxColumn.DataPropertyName = "RimLengthValue";
 			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle5.Format = "F0";
+			dataGridViewCellStyle5.Format = "F1";
 			this.rimLengthValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
 			this.rimLengthValueDataGridViewTextBoxColumn.FillWeight = 55F;
 			this.rimLengthValueDataGridViewTextBoxColumn.Frozen = true;
@@ -239,7 +198,7 @@ namespace Europlan.Common {
 			// 
 			this.rimPercentageDataGridViewTextBoxColumn.DataPropertyName = "RimPercentage";
 			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle6.Format = "F0";
+			dataGridViewCellStyle6.Format = "F1";
 			this.rimPercentageDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
 			this.rimPercentageDataGridViewTextBoxColumn.FillWeight = 55F;
 			this.rimPercentageDataGridViewTextBoxColumn.Frozen = true;
@@ -275,7 +234,7 @@ namespace Europlan.Common {
 			// 
 			this.connectionsPercentageDataGridViewTextBoxColumn.DataPropertyName = "ConnectionsPercentage";
 			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle8.Format = "F0";
+			dataGridViewCellStyle8.Format = "F1";
 			this.connectionsPercentageDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
 			this.connectionsPercentageDataGridViewTextBoxColumn.FillWeight = 70F;
 			this.connectionsPercentageDataGridViewTextBoxColumn.HeaderText = "Fläche\n%";
@@ -291,6 +250,47 @@ namespace Europlan.Common {
 			this.connectionsValueDataGridViewTextBoxColumn.Name = "connectionsValueDataGridViewTextBoxColumn";
 			this.connectionsValueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.connectionsValueDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// extendedCorrectionsBindingSource
+			// 
+			this.extendedCorrectionsBindingSource.DataSource = typeof(Europlan.Common.ExtendedCorrections);
+			// 
+			// rbExtendedCorrections
+			// 
+			this.rbExtendedCorrections.AutoSize = true;
+			this.rbExtendedCorrections.Location = new System.Drawing.Point(3, 26);
+			this.rbExtendedCorrections.Name = "rbExtendedCorrections";
+			this.rbExtendedCorrections.Size = new System.Drawing.Size(178, 17);
+			this.rbExtendedCorrections.TabIndex = 1;
+			this.rbExtendedCorrections.Text = "erweiterte Korrekturen aktivieren";
+			this.rbExtendedCorrections.UseVisualStyleBackColor = true;
+			this.rbExtendedCorrections.CheckedChanged += new System.EventHandler(this.rbExtendedCorrections_CheckedChanged);
+			// 
+			// rbStandardCorrections
+			// 
+			this.rbStandardCorrections.AutoSize = true;
+			this.rbStandardCorrections.Checked = true;
+			this.rbStandardCorrections.Location = new System.Drawing.Point(3, 3);
+			this.rbStandardCorrections.Name = "rbStandardCorrections";
+			this.rbStandardCorrections.Size = new System.Drawing.Size(344, 17);
+			this.rbStandardCorrections.TabIndex = 0;
+			this.rbStandardCorrections.TabStop = true;
+			this.rbStandardCorrections.Text = "nur Standardkorrekturen verwenden (keine erweiterten Korrekturen)";
+			this.rbStandardCorrections.UseVisualStyleBackColor = true;
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "CircuitNr";
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+			this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle9;
+			this.dataGridViewTextBoxColumn1.FillWeight = 70F;
+			this.dataGridViewTextBoxColumn1.Frozen = true;
+			this.dataGridViewTextBoxColumn1.HeaderText = "Heiz-\nkreis\nNr.";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn1.Width = 70;
 			// 
 			// ExtendedCorrectionsGrid
 			// 

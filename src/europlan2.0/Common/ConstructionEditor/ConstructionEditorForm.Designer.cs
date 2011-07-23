@@ -65,8 +65,9 @@ namespace Europlan.Common {
 			this.constructionEditor.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.constructionEditor.Location = new System.Drawing.Point(0, 32);
 			this.constructionEditor.Name = "constructionEditor";
+			this.constructionEditor.ReadOnly = false;
 			this.constructionEditor.Size = new System.Drawing.Size(667, 325);
-			this.constructionEditor.TabIndex = 3;
+			this.constructionEditor.TabIndex = 0;
 			// 
 			// ConstructionEditorForm
 			// 
