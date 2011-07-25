@@ -398,7 +398,6 @@ namespace Europlan.Common {
 					UpdateModifyRegisterPanel(SelectedObject as GraphicalHithermRegisterWrapper);
 				} else if (SelectedObject is GraphicalWallObstacle) {
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
-					(SelectedObject as GraphicalWallObstacle).BackupState();
 				} else if (SelectedObject is GraphicalHithermVerbindung) {
 					UpdateModifyConnectionPanel(SelectedObject as GraphicalHithermVerbindung);
 				} else if (SelectedObject is GraphicalWallSchraege) {
@@ -623,14 +622,10 @@ namespace Europlan.Common {
 			updateOngoing = true;
 			this.panelModifySchraege.BringToFront();
 			if (schraege != null) {
-				this.numSchraegeHorizontal.Enabled = true;
-				this.numSchraegeVertical.Enabled = true;
 				this.numSchraegeHorizontal.Value = (decimal)schraege.Width;
 				this.numSchraegeVertical.Value = (decimal)schraege.Height;
 				this.lblSchraege.Text = "Schräge " + (schraege.Orientation == GraphicalWallSchraege.OrientationEnum.LEFT ? "links" : "rechts") + ": " + Math.Round(schraege.Width, 0).ToString() + "cm x " + Math.Round(schraege.Height, 0).ToString() + "cm";
 			} else {
-				this.numSchraegeHorizontal.Enabled = false;
-				this.numSchraegeVertical.Enabled = false;
 				this.numSchraegeHorizontal.Text = "";
 				this.numSchraegeVertical.Text = "";
 				this.lblSchraege.Text = "Keine Schräge ausgewählt";
@@ -740,7 +735,11 @@ namespace Europlan.Common {
 
 		private void UpdateModifySchraegePanelButtons(IGraphicalWallObject schraege) {
 			if (schraege != null) {
-
+				this.btnSchraegeApply.Enabled = unsavedChanges || schraege.IsNew;
+				this.btnSchraegeRevert.Enabled = unsavedChanges;
+				this.btnSchraegeDelete.Enabled = true;
+				this.numSchraegeHorizontal.Enabled = true;
+				this.numSchraegeVertical.Enabled = true;
 			} else {
 				this.numSchraegeHorizontal.Enabled = false;
 				this.numSchraegeVertical.Enabled = false;
@@ -1367,27 +1366,52 @@ namespace Europlan.Common {
 		}
 
 		private void btnSchraegeApply_Click(object sender, EventArgs e) {
-
+			graphicalWallPanel.SelectedObject = null;
+			UpdateModifySchraegePanel(null);
+			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
 		private void btnSchraegeRevert_Click(object sender, EventArgs e) {
-
+			GraphicalWallSchraege schraege = SelectedObject as GraphicalWallSchraege;
+			schraege.RevertState();
+			this.graphicalWallPanel.Room.MarkErrors(schraege, this.graphicalWallPanel.SelectedWall);
+			//graphicalWallPanel.SelectedObject = null;
+			unsavedChanges = false;
+			UpdateModifySchraegePanel(schraege);
+			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
 		private void btnSchraegeDelete_Click(object sender, EventArgs e) {
-
+			GraphicalWallSchraege schraege = SelectedObject as GraphicalWallSchraege;
+			this.DeleteSchraege(schraege);
 		}
 
 		private void numSchraegeHorizontal_ValueChanged(object sender, EventArgs e) {
-
+			if (!updateOngoing) {
+				if (SelectedObject is GraphicalWallSchraege) {
+					(SelectedObject as GraphicalWallSchraege).Width = (double)numSchraegeHorizontal.Value;
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
+					unsavedChanges = true;
+					UpdateModifySchraegePanelButtons(SelectedObject as GraphicalWallSchraege);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
+			}
 		}
 
 		private void numSchraegeVertical_ValueChanged(object sender, EventArgs e) {
-
+			if (!updateOngoing) {
+				if (SelectedObject is GraphicalWallSchraege) {
+					(SelectedObject as GraphicalWallSchraege).Height = (double)numSchraegeVertical.Value;
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
+					unsavedChanges = true;
+					UpdateModifySchraegePanelButtons(SelectedObject as GraphicalWallSchraege);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
+			}
 		}
 
 		private void rbSchraegeLeft_CheckedChanged(object sender, EventArgs e) {
-
+			DeleteSchraege(SelectedObject as GraphicalWallSchraege);
 		}
 
 		private void rbSchraegeRight_CheckedChanged(object sender, EventArgs e) {

@@ -638,14 +638,16 @@ namespace Europlan.Common {
 			set { }
 		}
 
+		List<Point2D> bakCeilingContour;
+
 		public void BackupState() {
-			// TODO
-			//throw new Exception("TODO");
+			bakCeilingContour = new List<Point2D>(this.ceilingContour);
 		}
 
 		public void RevertState() {
-			// TODO
-			//throw new Exception("TODO");
+			if (bakCeilingContour != null) {
+				this.ceilingContour = new List<Point2D>(this.bakCeilingContour);
+			}
 		}
 
 		public bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
