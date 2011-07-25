@@ -42,7 +42,7 @@ namespace Europlan.Common {
 
 		private GraphicalWallObstacle.ObstacleTypeEnum newObstacleType = GraphicalWallObstacle.ObstacleTypeEnum.Window;
 
-		private GraphicalDachschraege.OrientationEnum newSchraegeOrientation = GraphicalDachschraege.OrientationEnum.LEFT;
+		private GraphicalWallSchraege.OrientationEnum newSchraegeOrientation = GraphicalWallSchraege.OrientationEnum.LEFT;
 
 		private bool snapEnabled = true;
 
@@ -116,7 +116,7 @@ namespace Europlan.Common {
 			set { newObstacleType = value; }
 		}
 
-		public GraphicalDachschraege.OrientationEnum NewSchraegeOrientation {
+		public GraphicalWallSchraege.OrientationEnum NewSchraegeOrientation {
 			get { return this.newSchraegeOrientation; }
 			set { this.newSchraegeOrientation = value; }
 		}
@@ -246,6 +246,10 @@ namespace Europlan.Common {
 
 				this.newObstacle.PaintObject(e.Graphics, offset.X, offset.Y, this.newObstacle, scale, !this.newObstacleOk);
 			}
+			if (this.newSchraege != null && this.newSchraegeWall != null) {
+				Vector2D offset = this.room.GetWallOffset(this.newSchraegeWall).Value * 100;
+				this.newSchraege.PaintObject(e.Graphics, offset.X, offset.Y, this.newSchraege, scale, !this.newObstacleOk);
+			}
 
 			if (this.selectedObject != null && (!(this.selectedObject is GraphicalWall))) {
 				if (this.selectedWall != null) {
@@ -333,7 +337,7 @@ namespace Europlan.Common {
 		private double newObstacleWallXOffset, newObstacleWallYOffset;
 		private bool newObstacleOk = true;
 
-		private GraphicalDachschraege newSchraege = null;
+		private GraphicalWallSchraege newSchraege = null;
 		private GraphicalWall newSchraegeWall = null;
 		private double newSchraegeWallXOffset, newSchraegeWallYOffset;
 		private bool newSchraegeOk = true;
@@ -399,7 +403,7 @@ namespace Europlan.Common {
 				this.SelectedObject = null;
 				this.selectedWall = this.newSchraegeWall;
 				if (this.newSchraegeWall != null) {
-					this.newSchraege = new GraphicalDachschraege(this.newSchraegeWall, this.newSchraegeOrientation);
+					this.newSchraege = new GraphicalWallSchraege(this.newSchraegeWall, this.newSchraegeOrientation);
 					//this.newSchraegeOk = false;
 					this.newSchraege.IsNew = true;
 				}
@@ -578,7 +582,7 @@ namespace Europlan.Common {
 			}
 			if (this.mode == PlanMode.PM_ADD_SCHRAEGE && this.newSchraege != null && this.newSchraegeWall != null && e.Button != MouseButtons.Middle) {
 				double width, height;
-				if (this.newSchraege.Orientation == GraphicalDachschraege.OrientationEnum.LEFT) {
+				if (this.newSchraege.Orientation == GraphicalWallSchraege.OrientationEnum.LEFT) {
 					width = mousePosInPlan.X - this.newSchraegeWallXOffset;
 					height = -(mousePosInPlan.Y - this.newSchraegeWallYOffset - this.newSchraegeWall.GetWallHeight() * 100.0);
 					this.newSchraege.Width = width;
@@ -589,6 +593,7 @@ namespace Europlan.Common {
 					this.newSchraege.Width = width;
 					this.newSchraege.Height = height;
 				}
+				this.room.MarkErrors(this.newSchraege, this.newSchraegeWall);
 				// TODO
 				invalidate = true;
 			}

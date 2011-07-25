@@ -87,7 +87,7 @@ namespace Europlan.Common {
 			this.chkSpreizung.Location = new System.Drawing.Point(227, 43);
 			this.chkSpreizung.Name = "chkSpreizung";
 			this.chkSpreizung.Size = new System.Drawing.Size(297, 17);
-			this.chkSpreizung.TabIndex = 1;
+			this.chkSpreizung.TabIndex = 2;
 			this.chkSpreizung.Text = "variable Spreizung für endgültige Berechnung verwenden";
 			this.chkSpreizung.UseVisualStyleBackColor = true;
 			this.chkSpreizung.CheckedChanged += new System.EventHandler(this.chkSpreizung_CheckedChanged);
@@ -113,7 +113,7 @@ namespace Europlan.Common {
 			this.groupBox1.Location = new System.Drawing.Point(3, 39);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(713, 71);
-			this.groupBox1.TabIndex = 28;
+			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Generell";
 			// 
@@ -138,7 +138,7 @@ namespace Europlan.Common {
             -2147483648});
 			this.numNormOutsideTemperature.Name = "numNormOutsideTemperature";
 			this.numNormOutsideTemperature.Size = new System.Drawing.Size(52, 20);
-			this.numNormOutsideTemperature.TabIndex = 0;
+			this.numNormOutsideTemperature.TabIndex = 1;
 			this.numNormOutsideTemperature.Text = "0";
 			this.numNormOutsideTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numNormOutsideTemperature.Value = new decimal(new int[] {
@@ -168,7 +168,7 @@ namespace Europlan.Common {
 			this.groupBox2.Location = new System.Drawing.Point(3, 116);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(713, 141);
-			this.groupBox2.TabIndex = 29;
+			this.groupBox2.TabIndex = 3;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Kühlung";
 			// 
@@ -205,7 +205,7 @@ namespace Europlan.Common {
 			this.numDewPoint.Location = new System.Drawing.Point(227, 110);
 			this.numDewPoint.Name = "numDewPoint";
 			this.numDewPoint.Size = new System.Drawing.Size(52, 20);
-			this.numDewPoint.TabIndex = 6;
+			this.numDewPoint.TabIndex = 8;
 			this.numDewPoint.Text = "0";
 			this.numDewPoint.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			// 
@@ -248,7 +248,7 @@ namespace Europlan.Common {
             0});
 			this.numInsideTemperature.Name = "numInsideTemperature";
 			this.numInsideTemperature.Size = new System.Drawing.Size(52, 20);
-			this.numInsideTemperature.TabIndex = 5;
+			this.numInsideTemperature.TabIndex = 7;
 			this.numInsideTemperature.Text = "1";
 			this.numInsideTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numInsideTemperature.Value = new decimal(new int[] {
@@ -288,7 +288,7 @@ namespace Europlan.Common {
             0});
 			this.numHumidity.Name = "numHumidity";
 			this.numHumidity.Size = new System.Drawing.Size(52, 20);
-			this.numHumidity.TabIndex = 4;
+			this.numHumidity.TabIndex = 6;
 			this.numHumidity.Text = "10";
 			this.numHumidity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numHumidity.Value = new decimal(new int[] {
@@ -337,7 +337,7 @@ namespace Europlan.Common {
             -2147483648});
 			this.numOutsideTemperature.Name = "numOutsideTemperature";
 			this.numOutsideTemperature.Size = new System.Drawing.Size(52, 20);
-			this.numOutsideTemperature.TabIndex = 3;
+			this.numOutsideTemperature.TabIndex = 5;
 			this.numOutsideTemperature.Text = "0";
 			this.numOutsideTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numOutsideTemperature.Value = new decimal(new int[] {
@@ -353,7 +353,7 @@ namespace Europlan.Common {
 			this.chkCool.Location = new System.Drawing.Point(227, 20);
 			this.chkCool.Name = "chkCool";
 			this.chkCool.Size = new System.Drawing.Size(137, 17);
-			this.chkCool.TabIndex = 2;
+			this.chkCool.TabIndex = 4;
 			this.chkCool.Text = "Kühlleistung berechnen";
 			this.chkCool.UseVisualStyleBackColor = true;
 			this.chkCool.CheckedChanged += new System.EventHandler(this.chkCool_CheckedChanged);
@@ -364,7 +364,7 @@ namespace Europlan.Common {
 			this.btnNext.Location = new System.Drawing.Point(638, 447);
 			this.btnNext.Name = "btnNext";
 			this.btnNext.Size = new System.Drawing.Size(75, 23);
-			this.btnNext.TabIndex = 7;
+			this.btnNext.TabIndex = 9;
 			this.btnNext.Text = "Weiter";
 			this.btnNext.UseVisualStyleBackColor = true;
 			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);

@@ -682,8 +682,12 @@ namespace Europlan.Common {
 			get { return this.product; }
 			set {
 				this.product = value;
-				foreach (GraphicalWall wall in this.product.AssociatedRoom.Walls) {
-					wall.Registers.Clear();
+				foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
+					GraphicalWall wall = baseWall;
+					while (wall != null) {
+						wall.Registers.Clear();
+						wall = wall.DachSchraege;
+					}
 				}
 				foreach (HithermCircuit c in product.PlannedCircuits) {
 					foreach (HithermRegister r in c.Registers) {

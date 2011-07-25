@@ -23,7 +23,7 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectSummaryPanel));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectSummaryPanel));
 			this.lblProjectName = new System.Windows.Forms.Label();
 			this.lblContact = new System.Windows.Forms.Label();
 			this.lblNotes = new System.Windows.Forms.Label();
@@ -41,8 +41,8 @@ namespace Europlan.Common {
 			this.label2 = new System.Windows.Forms.Label();
 			this.btnNext = new System.Windows.Forms.Button();
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// lblProjectName
@@ -102,7 +102,7 @@ namespace Europlan.Common {
 			this.txtProjectName.Name = "txtProjectName";
 			this.txtProjectName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.txtProjectName.Size = new System.Drawing.Size(583, 69);
-			this.txtProjectName.TabIndex = 6;
+			this.txtProjectName.TabIndex = 1;
 			this.txtProjectName.TextChanged += new System.EventHandler(this.txtProjectName_TextChanged);
 			// 
 			// txtContact
@@ -114,7 +114,7 @@ namespace Europlan.Common {
 			this.txtContact.Name = "txtContact";
 			this.txtContact.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.txtContact.Size = new System.Drawing.Size(583, 69);
-			this.txtContact.TabIndex = 7;
+			this.txtContact.TabIndex = 2;
 			this.txtContact.TextChanged += new System.EventHandler(this.txtContact_TextChanged);
 			// 
 			// txtNotes
@@ -126,7 +126,7 @@ namespace Europlan.Common {
 			this.txtNotes.Name = "txtNotes";
 			this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.txtNotes.Size = new System.Drawing.Size(583, 69);
-			this.txtNotes.TabIndex = 8;
+			this.txtNotes.TabIndex = 3;
 			this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
 			// 
 			// txtEditor
@@ -137,7 +137,7 @@ namespace Europlan.Common {
 			this.txtEditor.Name = "txtEditor";
 			this.txtEditor.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
 			this.txtEditor.Size = new System.Drawing.Size(583, 20);
-			this.txtEditor.TabIndex = 11;
+			this.txtEditor.TabIndex = 6;
 			this.txtEditor.TextChanged += new System.EventHandler(this.txtEditor_TextChanged);
 			// 
 			// txtCreated
@@ -147,7 +147,8 @@ namespace Europlan.Common {
 			this.txtCreated.ReadOnly = true;
 			this.txtCreated.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
 			this.txtCreated.Size = new System.Drawing.Size(168, 20);
-			this.txtCreated.TabIndex = 12;
+			this.txtCreated.TabIndex = 4;
+			this.txtCreated.TabStop = false;
 			// 
 			// txtChanged
 			// 
@@ -156,7 +157,8 @@ namespace Europlan.Common {
 			this.txtChanged.ReadOnly = true;
 			this.txtChanged.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
 			this.txtChanged.Size = new System.Drawing.Size(168, 20);
-			this.txtChanged.TabIndex = 13;
+			this.txtChanged.TabIndex = 5;
+			this.txtChanged.TabStop = false;
 			// 
 			// txtNumber
 			// 
@@ -166,7 +168,7 @@ namespace Europlan.Common {
 			this.txtNumber.Name = "txtNumber";
 			this.txtNumber.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
 			this.txtNumber.Size = new System.Drawing.Size(583, 20);
-			this.txtNumber.TabIndex = 15;
+			this.txtNumber.TabIndex = 0;
 			this.txtNumber.TextChanged += new System.EventHandler(this.txtNumber_TextChanged);
 			// 
 			// label1
@@ -181,7 +183,7 @@ namespace Europlan.Common {
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(34, 5);
+			this.label2.Location = new System.Drawing.Point(34, 5);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(126, 24);
 			this.label2.TabIndex = 16;
@@ -193,7 +195,7 @@ namespace Europlan.Common {
 			this.btnNext.Location = new System.Drawing.Point(641, 447);
 			this.btnNext.Name = "btnNext";
 			this.btnNext.Size = new System.Drawing.Size(75, 23);
-			this.btnNext.TabIndex = 17;
+			this.btnNext.TabIndex = 7;
 			this.btnNext.Text = "Weiter";
 			this.btnNext.UseVisualStyleBackColor = true;
 			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -202,23 +204,23 @@ namespace Europlan.Common {
 			// 
 			this.helpProvider.HelpNamespace = "europlan.chm";
 			// 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
-            this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            // 
+			// pictureBox1
+			// 
+			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+			this.pictureBox1.MaximumSize = new System.Drawing.Size(32, 32);
+			this.pictureBox1.MinimumSize = new System.Drawing.Size(32, 32);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+			this.pictureBox1.TabIndex = 18;
+			this.pictureBox1.TabStop = false;
+			// 
 			// ProjectSummaryPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
-            this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.btnNext);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.txtNumber);
@@ -240,7 +242,7 @@ namespace Europlan.Common {
 			this.Name = "ProjectSummaryPanel";
 			this.helpProvider.SetShowHelp(this, true);
 			this.Size = new System.Drawing.Size(716, 473);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

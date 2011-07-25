@@ -375,12 +375,12 @@ namespace Europlan.Common {
 		}
 
 		private void btnSchraegeLeft_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.NewSchraegeOrientation = GraphicalDachschraege.OrientationEnum.LEFT;
+			this.graphicalWallPanel.NewSchraegeOrientation = GraphicalWallSchraege.OrientationEnum.LEFT;
 			ApplySchraegeCuttonCheckedState(this.btnSchraegeLeft);
 		}
 
 		private void btnSchraegeRight_Click(object sender, EventArgs e) {
-			this.graphicalWallPanel.NewSchraegeOrientation = GraphicalDachschraege.OrientationEnum.RIGHT;
+			this.graphicalWallPanel.NewSchraegeOrientation = GraphicalWallSchraege.OrientationEnum.RIGHT;
 			ApplySchraegeCuttonCheckedState(this.btnSchraegeRight);
 		}
 
@@ -401,6 +401,8 @@ namespace Europlan.Common {
 					(SelectedObject as GraphicalWallObstacle).BackupState();
 				} else if (SelectedObject is GraphicalHithermVerbindung) {
 					UpdateModifyConnectionPanel(SelectedObject as GraphicalHithermVerbindung);
+				} else if (SelectedObject is GraphicalWallSchraege) {
+					UpdateModifySchraegePanel(SelectedObject as GraphicalWallSchraege);
 				}
 			}
 			/*if (e.OldSelectedObject is GraphicalWallObstacle) {
@@ -552,6 +554,7 @@ namespace Europlan.Common {
 				this.numWallHorizontal.Value = (decimal)wall.GetWallWidth() * 100;
 				this.numWallVertical.Value = (decimal)wall.GetWallHeight() * 100;
 				this.btnWallNewWall.Enabled = !wall.IsDachSchraege;
+				this.numWallHorizontal.Enabled = !wall.IsDachSchraege;
 			} else {
 				this.lblSelectedWall.Text = "Keine Wand ausgewählt";
 				this.txtWallConstruction.Text = "";
@@ -616,12 +619,18 @@ namespace Europlan.Common {
 			updateOngoing = false;
 		}
 
-		private void UpdateModifySchraegePanel(IGraphicalWallObject schraege) {
+		private void UpdateModifySchraegePanel(GraphicalWallSchraege schraege) {
 			updateOngoing = true;
 			this.panelModifySchraege.BringToFront();
 			if (schraege != null) {
-
+				this.numSchraegeHorizontal.Enabled = true;
+				this.numSchraegeVertical.Enabled = true;
+				this.numSchraegeHorizontal.Value = (decimal)schraege.Width;
+				this.numSchraegeVertical.Value = (decimal)schraege.Height;
+				this.lblSchraege.Text = "Schräge " + (schraege.Orientation == GraphicalWallSchraege.OrientationEnum.LEFT ? "links" : "rechts") + ": " + Math.Round(schraege.Width, 0).ToString() + "cm x " + Math.Round(schraege.Height, 0).ToString() + "cm";
 			} else {
+				this.numSchraegeHorizontal.Enabled = false;
+				this.numSchraegeVertical.Enabled = false;
 				this.numSchraegeHorizontal.Text = "";
 				this.numSchraegeVertical.Text = "";
 				this.lblSchraege.Text = "Keine Schräge ausgewählt";
@@ -857,6 +866,9 @@ namespace Europlan.Common {
 				wall.WallId = txtWallConstruction.Text;
 				wall.SetWallWidth((double)numWallHorizontal.Value / 100.0);
 				wall.SetWallHeight((double)numWallVertical.Value / 100.0);
+			}
+			foreach (GraphicalHithermRegisterWrapper register in wall.Registers) {
+				register.Register.WallId = wall.WallId;
 			}
 			unsavedChanges = false;
 			UpdateDefineWallsPanel(wall);
@@ -1181,7 +1193,27 @@ namespace Europlan.Common {
 				}
 			}
 		}
-		
+
+		private void DeleteSchraege(GraphicalWallSchraege schraege) {
+			if (schraege != null) {
+				schraege.Width = 0;
+				this.UpdateModifySchraegePanel(null);
+				this.graphicalWallPanel.SelectedObject = null;
+				/*foreach (GraphicalWall wall in graphicalWallPanel.Room.Walls) {
+					GraphicalWall schraegeWall = wall.GetWallForObstacle(schraege);
+					if (schraegeWall != null) {
+						obstacleWall.Obstacles.Remove(obstacle);
+						obstacle.Error = true;
+						if (obstacle == this.SelectedObject) {
+							graphicalWallPanel.SelectedObject = null;
+							UpdateModifyObstaclesPanel(null);
+						}
+						this.graphicalWallPanel.InvalidateGraphics();
+					}
+				}*/
+			}
+		}
+
 		private void graphicalWallPanel_KeyDown(object sender, KeyEventArgs e) {
 			if (e.KeyCode == Keys.Delete) {
 				if (SelectedObject != null) {
@@ -1193,6 +1225,8 @@ namespace Europlan.Common {
 						DeleteRegister(SelectedObject as GraphicalHithermRegisterWrapper);
 					} else if (SelectedObject is GraphicalHithermVerbindung) {
 						DeleteVerbindung(SelectedObject as GraphicalHithermVerbindung);
+					} else if (SelectedObject is GraphicalWallSchraege) {
+						DeleteSchraege(SelectedObject as GraphicalWallSchraege);
 					}
 				}
 			}

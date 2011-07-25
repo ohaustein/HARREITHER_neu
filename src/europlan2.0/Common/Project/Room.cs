@@ -689,8 +689,9 @@ namespace Europlan.Common {
 					xOffset += 0.2;
 				}
 				yOffset = curWall.GetWallYOffset(wall, 0);
+				Nullable<double> dachschraegeXOffset = curWall.GetDachschraegeXOffset(wall, 0);
 				if (yOffset.HasValue) {
-					return new Vector2D(xOffset, yOffset.Value);
+					return new Vector2D(xOffset + (dachschraegeXOffset.HasValue ? dachschraegeXOffset.Value : 0), yOffset.Value);
 				}
 				xOffset += curWall.GetWallWidth();
 				oldWall = curWall;
@@ -869,6 +870,48 @@ namespace Europlan.Common {
 					} else if (pp.Product is HithermCompactProduct) {
 						// TODO
 					}
+				}
+			} else if (obj is GraphicalWallSchraege) {
+				foreach (PlannedProduct pp in this.PlannedProducts) {
+					if (pp.Product is HithermProduct) {
+						HithermProduct hp = pp.Product as HithermProduct;
+						foreach (HithermCircuit c in hp.PlannedCircuits) {
+							foreach (GraphicalHithermVerbindung link in c.Links) {
+								link.Error = false;
+							}
+						}
+						Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
+						foreach (GraphicalHithermRegisterWrapper register in owningWall.Registers) {
+							WW.Math.Geometry.Polygon2D registerBorders = register.GetObjectBorders(offset.X, offset.Y);
+							register.Error = owningWall.CollisionTest(registerBorders, offset.X, offset.Y, false);
+							if (register.Error) {
+								HithermCircuit c = hp.GetCircuitForRegister(register.Register);
+								GraphicalHithermVerbindung link = c.GetInputLink(register.Register);
+								if (link != null) {
+									link.Error = true;
+								}
+								link = c.GetOutputLink(register.Register);
+								if (link != null) {
+									link.Error = true;
+								}
+							}
+						}
+						foreach (HithermCircuit c in hp.PlannedCircuits) {
+							foreach (GraphicalHithermVerbindung link in c.Links) {
+								link.Error = link.Error || !link.CheckValidity(owningWall, 0, 0);
+							}
+						}
+					} else if (pp.Product is HithermCompactProduct) {
+						// TODO
+					}
+				}
+				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
+					Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
+					WW.Math.Geometry.Polygon2D obstacleBorders = obstacle.GetObjectBorders(offset.X, offset.Y);
+					obstacle.Error = owningWall.CollisionTest(obstacleBorders, offset.X, offset.Y, true);
+				}
+				if (owningWall.DachSchraege != null) {
+					this.MarkErrors(obj, owningWall.DachSchraege);
 				}
 			}
 			return true;

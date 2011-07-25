@@ -369,8 +369,8 @@ namespace Europlan.Common {
 
 		protected Pen GetObstacleBorderPen(double scale, bool selected, bool error) {
 			Pen pen = selected ? new Pen(Color.FromArgb(255, 0, 0), (float)(1.0 / scale)) : new Pen(Color.Black, (float)(1.0 / scale));
-			if (error) {
-				pen.DashPattern = new float[] { 1, 3 };
+			if (error || this.error) {
+				pen.DashPattern = new float[] { 1, 2 };
 			}
 			return pen;
 		}
@@ -381,8 +381,8 @@ namespace Europlan.Common {
 
 		protected Pen GetUnusableBorderPen(double scale, bool selected, bool error) {
 			Pen pen = selected ? new Pen(Color.FromArgb(127, 63, 63), (float)(1.0 / scale)) : new Pen(Color.Gray, (float)(1.0 / scale));
-			if (error) {
-				pen.DashPattern = new float[] { 1, 3 };
+			if (error || this.error) {
+				pen.DashPattern = new float[] { 1, 2 };
 			}
 			return pen;
 		}

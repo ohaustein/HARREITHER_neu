@@ -2379,19 +2379,20 @@ namespace Europlan.Common {
 			// 
 			this.graphicalWallPanel.Cursor = System.Windows.Forms.Cursors.Default;
 			this.graphicalWallPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.graphicalWallPanel.Location = new System.Drawing.Point(0, 0);
+			this.graphicalWallPanel.Location = new System.Drawing.Point(25, 116);
 			this.graphicalWallPanel.Mode = Europlan.Common.GraphicalWallPanel.PlanMode.PM_MOVE;
 			this.graphicalWallPanel.Name = "graphicalWallPanel";
 			this.graphicalWallPanel.NewObstacleType = ((Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum)(Europlan.Common.GraphicalWallObstacle.ObstacleTypeEnum.Window));
+			this.graphicalWallPanel.NewSchraegeOrientation = Europlan.Common.GraphicalWallSchraege.OrientationEnum.LEFT;
 			this.graphicalWallPanel.ProductPlanner = this.hithermPlanner;
 			this.graphicalWallPanel.Room = null;
 			this.graphicalWallPanel.Scale = 1;
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.SelectedWall = null;
-			this.graphicalWallPanel.Size = new System.Drawing.Size(886, 532);
+			this.graphicalWallPanel.Size = new System.Drawing.Size(861, 210);
 			this.graphicalWallPanel.TabIndex = 4;
-			this.graphicalWallPanel.XPos = 433;
-			this.graphicalWallPanel.YPos = -266;
+			this.graphicalWallPanel.XPos = 420.5;
+			this.graphicalWallPanel.YPos = -105;
 			this.graphicalWallPanel.SelectedObjectModified += new System.EventHandler(this.graphicalWallPanel_SelectedObjectModified);
 			this.graphicalWallPanel.ObjectSelected += new System.EventHandler<Europlan.Common.GraphicalWallPanel.SelectedObjectArgs>(this.graphicalWallPanel_ObjectSelected);
 			this.graphicalWallPanel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.graphicalWallPanel_KeyUp);
@@ -2437,11 +2438,11 @@ namespace Europlan.Common {
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(886, 532);
+			this.Controls.Add(this.graphicalWallPanel);
 			this.Controls.Add(this.panelBottom);
 			this.Controls.Add(this.panelTop);
 			this.Controls.Add(this.toolStripSubmenu);
 			this.Controls.Add(this.toolStripMain);
-			this.Controls.Add(this.graphicalWallPanel);
 			this.Controls.Add(this.planPanel);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "HithermPlannerForm";

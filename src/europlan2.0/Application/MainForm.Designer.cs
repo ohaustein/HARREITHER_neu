@@ -98,6 +98,7 @@ namespace Europlan.Application {
 			// splitContainer.Panel2
 			// 
 			resources.ApplyResources(this.splitContainer.Panel2, "splitContainer.Panel2");
+			this.splitContainer.TabStop = false;
 			// 
 			// projectTree
 			// 

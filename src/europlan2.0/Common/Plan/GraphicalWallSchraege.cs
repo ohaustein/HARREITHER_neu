@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using WW.Math;
 using System.Drawing;
+using System.Xml.Serialization;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
-	public class GraphicalDachschraege : IGraphicalWallObject {
+	public class GraphicalWallSchraege : IGraphicalWallObject {
 
 		public enum OrientationEnum {
 			LEFT,
@@ -17,7 +19,7 @@ namespace Europlan.Common {
 		//private double width;
 		//private double height;
 
-		public GraphicalDachschraege(GraphicalWall wall, OrientationEnum orientation) {
+		public GraphicalWallSchraege(GraphicalWall wall, OrientationEnum orientation) {
 			this.wall = wall;
 			this.orientation = orientation;
 		}
@@ -65,6 +67,9 @@ namespace Europlan.Common {
 					if (this.wall.CeilingContour[count - 1].X < this.wall.CeilingContour[count - 2].X) {
 						this.wall.CeilingContour[count - 2] = new Point2D(this.wall.CeilingContour[count - 1].X, this.wall.CeilingContour[count - 2].Y);
 					}
+				}
+				if (this.wall.DachSchraege != null) {
+					this.wall.DachSchraege.AdjustWidth(this.wall.CeilingContour[2].X - this.wall.CeilingContour[1].X, this.orientation == OrientationEnum.LEFT);
 				}
 			}
 		}
@@ -114,25 +119,40 @@ namespace Europlan.Common {
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
 			if (selectedObject == this) {
 				Region oldClip = g.Clip;
-				System.Drawing.Region clip = new System.Drawing.Region();
+				Region clip = new Region();
 				clip.MakeInfinite();
 				g.Clip = clip;
-				System.Drawing.Pen pen = new System.Drawing.Pen(System.Drawing.Color.Red, (float)(2.0 / scale));
+				Pen pen = new Pen(Color.Red, (float)(2.0 / scale));
+				PointF start;
+				PointF end;
 				if (this.orientation == OrientationEnum.LEFT) {
-					System.Drawing.PointF start = new System.Drawing.PointF((float)xOffset, (float)(yOffset + this.wall.GetWallHeight() * 100.0 - this.Height));
-					System.Drawing.PointF end = new System.Drawing.PointF((float)(xOffset + this.Width), (float)(yOffset + this.wall.GetWallHeight() * 100));
-					g.DrawLine(pen, start, end);
+					start = new PointF((float)xOffset, (float)(yOffset + this.wall.GetWallHeight() * 100.0 - this.Height));
+					end = new PointF((float)(xOffset + this.Width), (float)(yOffset + this.wall.GetWallHeight() * 100));
 				} else {
-					System.Drawing.PointF start = new System.Drawing.PointF((float)(xOffset + this.wall.GetWallWidth() * 100 - this.Width), (float)(yOffset + this.wall.GetWallHeight() * 100.0));
-					System.Drawing.PointF end = new System.Drawing.PointF((float)(xOffset + this.wall.GetWallWidth() * 100), (float)(yOffset + this.wall.GetWallHeight() * 100 - this.Height));
-					g.DrawLine(pen, start, end);
+					start = new PointF((float)(xOffset + this.wall.GetWallWidth() * 100), (float)(yOffset + this.wall.GetWallHeight() * 100 - this.Height));
+					end = new PointF((float)(xOffset + this.wall.GetWallWidth() * 100 - this.Width), (float)(yOffset + this.wall.GetWallHeight() * 100.0));
 				}
+				PointF p = new PointF(end.X, start.Y);
+				g.DrawLine(pen, start, end);
+				pen.Width = (float)(1.0 / scale);
+				pen.DashPattern = new float[] { 1, 2 };
+				g.DrawLine(pen, start, p);
+				g.DrawLine(pen, p, end);
 				g.Clip = oldClip;
 			}
 			// nothing to do as the dachschraege is painted by the wall
 		}
 
 		public IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
+			Segment2D schraege;
+			if (this.orientation == OrientationEnum.LEFT) {
+				schraege = new Segment2D(new Point2D(xOffset, yOffset + this.wall.GetWallHeight() * 100.0 - this.Height), new Point2D(xOffset + this.Width, yOffset + this.wall.GetWallHeight() * 100.0));
+			} else {
+				schraege = new Segment2D(new Point2D(xOffset + this.wall.GetWallWidth() * 100.0, yOffset + this.wall.GetWallHeight() * 100.0 - this.Height), new Point2D(xOffset + this.wall.GetWallWidth() * 100.0 - this.Width, yOffset + this.wall.GetWallHeight() * 100.0));
+			}
+			if (schraege.GetDistance(planPoint) > 10) {
+				return null;
+			}
 			if (this.orientation == OrientationEnum.LEFT) {
 				if (planPoint.X - xOffset < 0) {
 					return null;
@@ -201,6 +221,7 @@ namespace Europlan.Common {
 		}
 
 		public bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap) {
+			owningRoom.MarkErrors(this, owningWall);
 			this.startDrag = null;
 			return false;
 		}
@@ -268,22 +289,28 @@ namespace Europlan.Common {
 			throw new Exception("The method or operation is not implemented.");
 		}
 
+		private bool isNew = false;
+		[XmlIgnore]
 		public bool IsNew {
-			get {
-				return false;
-				// TODO
-				//throw new Exception("The method or operation is not implemented.");
-			}
-			set {
-				// TODO
-				//throw new Exception("The method or operation is not implemented.");
-			}
+			get { return this.isNew; }
+			set { this.isNew = value; }
 		}
 
 		public bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom) {
 			throw new Exception("The method or operation is not implemented.");
 		}
 
+		public override bool Equals(object obj) {
+			if (obj is GraphicalWallSchraege) {
+				GraphicalWallSchraege other = obj as GraphicalWallSchraege;
+				return this.wall == other.wall && this.orientation == other.orientation;
+			}
+			return base.Equals(obj);
+		}
+
+		public override int GetHashCode() {
+			return (this.wall != null ? this.wall.GetHashCode() : 0) ^ this.orientation.GetHashCode();
+		}
 		#endregion
 	}
 }
