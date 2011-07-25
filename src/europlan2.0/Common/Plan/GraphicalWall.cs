@@ -638,15 +638,40 @@ namespace Europlan.Common {
 			set { }
 		}
 
-		List<Point2D> bakCeilingContour;
+		private List<Point2D> bakCeilingContour;
+		private String bakWallId;
 
 		public void BackupState() {
 			bakCeilingContour = new List<Point2D>(this.ceilingContour);
+			bakWallId = this.wallId;
+			if (this.IsDachSchraege) {
+				foreach (GraphicalRegisterWrapper wrapper in this.Registers) {
+					wrapper.BackupState();
+				}
+				foreach (GraphicalWallObstacle obstable in this.Obstacles) {
+					obstable.BackupState();
+				}
+			}
+			if (this.DachSchraege != null) {
+				this.DachSchraege.BackupState();
+			}
 		}
 
 		public void RevertState() {
 			if (bakCeilingContour != null) {
 				this.ceilingContour = new List<Point2D>(this.bakCeilingContour);
+				this.wallId = bakWallId;
+			}
+			if (this.IsDachSchraege) {
+				foreach (GraphicalRegisterWrapper wrapper in this.Registers) {
+					wrapper.RevertState();
+				}
+				foreach (GraphicalWallObstacle obstable in this.Obstacles) {
+					obstable.RevertState();
+				}
+			}
+			if (this.DachSchraege != null) {
+				this.DachSchraege.RevertState();
 			}
 		}
 

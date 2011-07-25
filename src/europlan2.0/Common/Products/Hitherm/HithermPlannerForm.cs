@@ -449,6 +449,8 @@ namespace Europlan.Common {
 					UpdateModifyObstaclesPanel(SelectedObject as GraphicalWallObstacle);
 				} else if (SelectedObject is GraphicalHithermVerbindung) {
 					UpdateModifyConnectionPanel(SelectedObject as GraphicalHithermVerbindung);
+				} else if (SelectedObject is GraphicalWallSchraege) {
+					UpdateModifySchraegePanel(SelectedObject as GraphicalWallSchraege);
 				}
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
@@ -553,7 +555,6 @@ namespace Europlan.Common {
 				this.numWallHorizontal.Value = (decimal)wall.GetWallWidth() * 100;
 				this.numWallVertical.Value = (decimal)wall.GetWallHeight() * 100;
 				this.btnWallNewWall.Enabled = !wall.IsDachSchraege;
-				this.numWallHorizontal.Enabled = !wall.IsDachSchraege;
 			} else {
 				this.lblSelectedWall.Text = "Keine Wand ausgewählt";
 				this.txtWallConstruction.Text = "";
@@ -651,7 +652,7 @@ namespace Europlan.Common {
 		private void UpdateDefineWallsPanelButtons(GraphicalWall wall) {
 			if (wall != null) {
 				this.btnWallSelectConstruction.Enabled = true;
-				this.numWallHorizontal.Enabled = true;
+				this.numWallHorizontal.Enabled = !wall.IsDachSchraege;
 				this.numWallVertical.Enabled = true;
 				this.btnWallApply.Enabled = unsavedChanges;
 				this.btnWallRevert.Enabled = unsavedChanges;
@@ -766,28 +767,42 @@ namespace Europlan.Common {
 		private void btnWallSelectConstruction_Click(object sender, EventArgs e) {
 			SelectHithermWallForm form = new SelectHithermWallForm(false);
 			if (form.ShowDialog() == DialogResult.OK) {
-				GraphicalWall wall = SelectedObject as GraphicalWall;
-				this.txtWallConstruction.Text = form.SelectedWall.Id;
-				unsavedChanges = true;
-				UpdateDefineWallsPanelButtons(wall);
+				if (SelectedObject is GraphicalWall) {
+					this.txtWallConstruction.Text = form.SelectedWall.Id;
+					(SelectedObject as GraphicalWall).WallId = form.SelectedWall.Id;
+					foreach (GraphicalHithermRegisterWrapper register in (SelectedObject as GraphicalWall).Registers) {
+						register.Register.WallId = form.SelectedWall.Id;
+					}
+					//this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
+					unsavedChanges = true;
+					UpdateDefineWallsPanelButtons(SelectedObject as GraphicalWall);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
 			}
 			form.Dispose();
 		}
 
 		private void numWallHorizontal_ValueChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
-				GraphicalWall wall = SelectedObject as GraphicalWall;
-				unsavedChanges = true;
-				UpdateDefineWallsPanelButtons(wall);
+				if (SelectedObject is GraphicalWall) {
+					(SelectedObject as GraphicalWall).SetWallWidth((double)numWallHorizontal.Value / 100.0);
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
+					unsavedChanges = true;
+					UpdateDefineWallsPanelButtons(SelectedObject as GraphicalWall);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
 			}
-			
 		}
 
 		private void numWallVertical_ValueChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
-				GraphicalWall wall = SelectedObject as GraphicalWall;
-				unsavedChanges = true;
-				UpdateDefineWallsPanelButtons(wall);
+				if (SelectedObject is GraphicalWall) {
+					(SelectedObject as GraphicalWall).SetWallHeight((double)numWallVertical.Value / 100.0);
+					this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
+					unsavedChanges = true;
+					UpdateDefineWallsPanelButtons(SelectedObject as GraphicalWall);
+					this.graphicalWallPanel.InvalidateGraphics();
+				}
 			}
 		}
 
@@ -854,7 +869,12 @@ namespace Europlan.Common {
 		}
 
 		private void btnWallApply_Click(object sender, EventArgs e) {
-			GraphicalWall wall = SelectedObject as GraphicalWall;
+			GraphicalWall wall = graphicalWallPanel.SelectedObject as GraphicalWall;
+			graphicalWallPanel.SelectedObject = null;
+			graphicalWallPanel.SelectedObject = wall;
+			this.graphicalWallPanel.InvalidateGraphics();
+
+			/*GraphicalWall wall = SelectedObject as GraphicalWall;
 			if (Math.Round((decimal)wall.GetWallWidth() * 100, 0) != numWallHorizontal.Value) {
 				if (IsChangeAllowed()) {
 					wall.WallId = txtWallConstruction.Text;
@@ -871,13 +891,17 @@ namespace Europlan.Common {
 			}
 			unsavedChanges = false;
 			UpdateDefineWallsPanel(wall);
-			this.graphicalWallPanel.InvalidateGraphics();
+			this.graphicalWallPanel.InvalidateGraphics();*/
 		}
 
 		private void btnWallRevert_Click(object sender, EventArgs e) {
 			GraphicalWall wall = SelectedObject as GraphicalWall;
+			wall.RevertState();
+			this.graphicalWallPanel.Room.MarkErrors(wall, this.graphicalWallPanel.SelectedWall);
+			//graphicalWallPanel.SelectedObject = null;
 			unsavedChanges = false;
-			UpdateDefineWallsPanel(wall);		
+			UpdateDefineWallsPanel(wall);
+			this.graphicalWallPanel.InvalidateGraphics();
 		}
 
 		private void numRegisterLeft_ValueChanged(object sender, EventArgs e) {
