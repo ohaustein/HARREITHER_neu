@@ -168,29 +168,29 @@
   <data name="btnDelUnused.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAB4SURBVDhPrZNLDsAgCEQ5ujfH0FrkM6aYYOJKeMwgEHUd
-        Jho319U1iVyAaIxCVpI8fPekxsVEgCTtAA7Hvi27CJAhbzBUhwFS2Cd4VabZZwCGjMdUCZBl74YUAdhG
-        SUFsWLajX9z+jW2D9LcTeZTFS2EHHLhriWkCiU9u2OJ13zsAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAB+SURBVDhPrZNJDsAgCEU5ujenxQFlqGKDCXEhPPgIAFkH
+        AcqNibw9EN+b7ARiP4YowA4ygquPBlDm6YDqrG+9Sg9gIc1ZZB4yfQAllgGyqqVH3wAfUqqoEMCWPRsS
+        BPgyQhXohlk5PCfp3+h+lZrM7SD9H2XSEtgBsSNZSwwPjnFw1FJKn9QAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="btnAddExpansionGap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABOSURBVDhPY/hPIWCgUP//UQP+/2fwt///HxnjDNR//8BS
-        6OrBBiBLEIoVmAEwPeBYQDYEmy3ompD1UO4CosMA6jeMMCDkZ0Lyoynx/38AF4HFjHsEv8YAAAAASUVO
-        RK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABDSURBVDhPY2AYBYMgBPzt//9HxoSchKEeJADSBJMg1gCY
+        HrB6ZEOQDcPmOnS1KJphkvhcgexSsHqKw4CQn0flCYcAACZEYMngNLbwAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnRemoveExpansionGap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADcSURBVDhPlZI9CgIxEIVzEW8i2AoWiyAKChZ2nsHWa1l4
-        BsHGyp9GK7fb7rkz2ayTzKxuAiEJyfuS9zIOuz3wLpHdbg9gPIPD6QwUqzwIiUlTj45vzoEIMUk9oC8k
-        EceAfxBDrAFdkA4xA4pRnYfoys7zxWnjeuet9DwD5EaUyWQBUKeQmxYAQcMhSkhYL4clLoMpd5pbZ1oL
-        6gVUWPTPdHPyxeoFKgMpNr5YZdCao0lV+cCE5ygTo2K/hUTi9RY4HCNmtDAq1gP6iA07HGKW2IA4zDe/
-        n91lqLHzAUrakPActuvZAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABySURBVDhPzZMBCsAgDAP7sz1h/39NR4VI6bJGEGFCEWyu
+        xqpmvxlu5hHK0KcOia6I1HQCCcM6E7bwfbnniEIZqPBLHwsBIcGc5L5kHdgBowjm6oJpxmbMwcoRJlvP
+        pJrIejbfztY1rtxzq9l+yuoPHMs/z33WGdBJYecAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="roomPicker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>115, 17</value>
+  </metadata>
   <metadata name="roomPicker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>115, 17</value>
   </metadata>

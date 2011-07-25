@@ -670,6 +670,24 @@ namespace Europlan.Common {
 						this.connectedWallPanel.SelectedObject = null;
 						this.connectedWallPanel.InvalidateGraphics();
 					}
+				} else if (key == Keys.Back) {
+					if (this.newConnection.Vertices != null && this.newConnection.Vertices.Count > 1) {
+						this.newConnection.Vertices.RemoveAt(this.newConnection.Vertices.Count - 1);
+						if (this.connectedWallPanel != null) {
+							this.connectedWallPanel.SelectedObject = null;
+							this.connectedWallPanel.InvalidateGraphics();
+						}
+					} else {
+						this.newConnectionStart = null;
+						this.newConnection.Vertices.Clear();
+						this.newConnectionEnd = null;
+						this.newConnectionDraw.Vertices.Clear();
+						this.newConnectionAutoStart = null;
+						if (this.connectedWallPanel != null) {
+							this.connectedWallPanel.SelectedObject = null;
+							this.connectedWallPanel.InvalidateGraphics();
+						}
+					}
 				}
 			}
 			return false;
