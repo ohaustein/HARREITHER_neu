@@ -1042,15 +1042,27 @@ namespace Europlan.Common {
 					foreach (HithermRegister register in hithermRegistersToDelete) {
 						hp.RemoveRegisterFromCircuit(register);
 					}
+					Dictionary<HithermCircuit, List<GraphicalHithermVerbindung>> linksToDelete = new Dictionary<HithermCircuit,List<GraphicalHithermVerbindung>>();
 					foreach (HithermCircuit hc in hp.PlannedCircuits) {
-						List<GraphicalHithermVerbindung> linksToDelete = new List<GraphicalHithermVerbindung>();
+						List<GraphicalHithermVerbindung> linksToDeleteInCircuit = new List<GraphicalHithermVerbindung>();
 						foreach (GraphicalHithermVerbindung link in hc.Links) {
 							if (link.Error) {
-								linksToDelete.Add(link);
+								linksToDeleteInCircuit.Add(link);
 							}
 						}
-						foreach (GraphicalHithermVerbindung link in linksToDelete) {
+						foreach (GraphicalHithermVerbindung link in linksToDeleteInCircuit) {
 							hc.Links.Remove(link);
+						}
+						if (linksToDeleteInCircuit.Count > 0) {
+							linksToDelete.Add(hc, linksToDeleteInCircuit);
+						}
+					}
+					foreach (List<GraphicalHithermVerbindung> links in linksToDelete.Values) {
+						foreach (GraphicalHithermVerbindung link in links) {
+							if (link.Start != null && link.End != null) {
+								hp.MoveRegisterToCircuit(link.End, hp.GetNewHkId());
+								hp.CorrectCircuitIds();
+							}
 						}
 					}
 				} else if (pp.Product is HithermCompactProduct) {

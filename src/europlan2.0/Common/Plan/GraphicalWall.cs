@@ -369,6 +369,19 @@ namespace Europlan.Common {
 			return height;
 		}
 
+		public double GetBackupWallHeight() {
+			if (this.bakCeilingContour == null || this.bakCeilingContour.Count == 0) {
+				return 0;
+			}
+			double height = 0;
+			foreach (Point2D point in this.bakCeilingContour) {
+				if (point.Y > height) {
+					height = point.Y;
+				}
+			}
+			return height;
+		}
+
 		/// <summary>
 		/// Returns the width of the wall in meter
 		/// </summary>
@@ -388,7 +401,7 @@ namespace Europlan.Common {
 		}
 
 		public double GetTotalWallHeight() {
-			return this.DachSchraege != null ? this.GetWallHeight() + this.DachSchraege.GetWallHeight() : this.GetWallHeight();
+			return this.DachSchraege != null ? this.GetWallHeight() + this.DachSchraege.GetTotalWallHeight() : this.GetWallHeight();
 		}
 
 		/*public Polygon2D GetWallPolygon(double xOffset, double yOffset) {
@@ -464,13 +477,90 @@ namespace Europlan.Common {
 				ceilingContour[2] = new Point2D(ceilingContour[2].X + delta, ceilingContour[2].Y);
 				ceilingContour[3] = new Point2D(ceilingContour[3].X + delta, ceilingContour[3].Y);
 				if (!this.IsDachSchraege) {
+					AdjustLinks();
+				}
+			}
+			if (this.DachSchraege != null) {
+				this.DachSchraege.SetWallWidth(ceilingContour[2].X - ceilingContour[1].X);
+			}
+		}
+
+		private void AdjustLinks() {
+			double newWidth = this.GetWallWidth();
+			double newHeight = this.GetWallHeight();
+			Point2D vertex;
+			Nullable<Vector2D> offset = this.AssiociatedRoom.GetWallOffset(this);
+			if (offset.HasValue) {
+				double backupedWidth = this.GetBackupWallWidth();
+				double xBorder = (offset.Value.X + backupedWidth) * 100.0;
+				double newXBorder = (offset.Value.X + newWidth) * 100.0;
+				double linkXDelta = (newWidth - backupedWidth) * 100.0;
+				double backupedHeight = this.GetBackupWallHeight();
+				double leftBorder = offset.Value.X * 100.0;
+				double rightBorder = (offset.Value.X + newWidth) * 100.0;
+				double yBorder = (offset.Value.Y + backupedHeight) * 100.0;
+				double newYBorder = (offset.Value.Y + newHeight) * 100.0;
+				double linkYDelta = (newHeight - backupedHeight) * 100.0;
+				foreach (PlannedProduct pp in this.AssiociatedRoom.PlannedProducts) {
+					if (pp.Product is HithermProduct) {
+						HithermProduct hp = pp.Product as HithermProduct;
+						if (hp.GraphicalMode.HasValue && hp.GraphicalMode.Value == true) {
+							foreach (HithermCircuit hc in hp.PlannedCircuits) {
+								foreach (GraphicalHithermVerbindung link in hc.Links) {
+									link.RevertState();
+									for (int i = 0; i < link.Vertices.Count; i++) {
+										vertex = link.Vertices[i];
+										if (vertex.X > xBorder) {
+											vertex.X += linkXDelta;
+											link.Vertices[i] = vertex;
+										} else if (vertex.X > newXBorder) {
+											vertex.X = newXBorder;
+											link.Vertices[i] = vertex;
+										}
+										if (vertex.X >= leftBorder && vertex.X <= rightBorder) {
+											if (vertex.Y > yBorder) {
+												vertex.Y += linkYDelta;
+												link.Vertices[i] = vertex;
+											} else if (vertex.Y > newYBorder) {
+												vertex.Y = newYBorder;
+												link.Vertices[i] = vertex;
+											}
+										}
+									}
+									link.Simplify();
+								}
+							}
+						}
+					} else if (pp.Product is HithermCompactProduct) {
+						HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
+						if (hcp.GraphicalMode.HasValue && hcp.GraphicalMode.Value == true) {
+							throw new Exception("TODO");
+						}
+					}
+				}
+			}
+		}
+
+		public void SetWallHeight(double height) {
+			double currentHeight = GetWallHeight();
+			double delta = height - currentHeight;
+			if (Math.Round(delta, 2) != 0) {
+				for (int i = 0; i < CeilingContour.Count; i++) {
+					Point2D p = ceilingContour[i];
+					double y = p.Y + delta > 0 ? p.Y + delta : 0;
+					ceilingContour[i] = new Point2D(p.X, y);
+				}
+				this.AdjustLinks();
+				/*if (this.DachSchraege != null) {
 					Point2D vertex;
 					Nullable<Vector2D> offset = this.AssiociatedRoom.GetWallOffset(this);
 					if (offset.HasValue) {
-						double backupedWidth = this.GetBackupWallWidth();
-						double xBorder = (offset.Value.X + backupedWidth) * 100.0;
-						double newXBorder = (offset.Value.X + width) * 100.0;
-						double linkDelta = (width - backupedWidth) * 100.0;
+						double backupedHeihgt= this.GetBackupWallHeight();
+						double yBorder = (offset.Value.Y + backupedHeight) * 100.0;
+						double newYBorder = (offset.Value.Y + height) * 100.0;
+						double leftBorder = offset.Value.X * 100.0;
+						double rightBorder = (offset.Value.X + this.GetWallWidth()) * 100.0;
+						double linkDelta = (height - backupedHeight) * 100.0;
 						foreach (PlannedProduct pp in this.AssiociatedRoom.PlannedProducts) {
 							if (pp.Product is HithermProduct) {
 								HithermProduct hp = pp.Product as HithermProduct;
@@ -500,22 +590,7 @@ namespace Europlan.Common {
 							}
 						}
 					}
-				}
-			}
-			if (this.DachSchraege != null) {
-				this.DachSchraege.SetWallWidth(ceilingContour[2].X - ceilingContour[1].X);
-			}
-		}
-
-		public void SetWallHeight(double height) {
-			double currentHeight = GetWallHeight();
-			double delta = height - currentHeight;
-			if (Math.Round(delta, 2) != 0) {
-				for (int i = 0; i < CeilingContour.Count; i++) {
-					Point2D p = ceilingContour[i];
-					double y = p.Y + delta > 0 ? p.Y + delta : 0;
-					ceilingContour[i] = new Point2D(p.X, y);
-				}
+				}*/
 			}
 		}
 
