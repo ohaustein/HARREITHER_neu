@@ -380,6 +380,13 @@ namespace Europlan.Common {
 			return this.CeilingContour[this.CeilingContour.Count - 1].X;
 		}
 
+		public double GetBackupWallWidth() {
+			if (this.bakCeilingContour == null || this.bakCeilingContour.Count == 0) {
+				return 0;
+			}
+			return this.bakCeilingContour[this.bakCeilingContour.Count - 1].X;
+		}
+
 		public double GetTotalWallHeight() {
 			return this.DachSchraege != null ? this.GetWallHeight() + this.DachSchraege.GetWallHeight() : this.GetWallHeight();
 		}
@@ -456,6 +463,44 @@ namespace Europlan.Common {
 			if (Math.Round(delta, 2) != 0) {
 				ceilingContour[2] = new Point2D(ceilingContour[2].X + delta, ceilingContour[2].Y);
 				ceilingContour[3] = new Point2D(ceilingContour[3].X + delta, ceilingContour[3].Y);
+				if (!this.IsDachSchraege) {
+					Point2D vertex;
+					Nullable<Vector2D> offset = this.AssiociatedRoom.GetWallOffset(this);
+					if (offset.HasValue) {
+						double backupedWidth = this.GetBackupWallWidth();
+						double xBorder = (offset.Value.X + backupedWidth) * 100.0;
+						double newXBorder = (offset.Value.X + width) * 100.0;
+						double linkDelta = (width - backupedWidth) * 100.0;
+						foreach (PlannedProduct pp in this.AssiociatedRoom.PlannedProducts) {
+							if (pp.Product is HithermProduct) {
+								HithermProduct hp = pp.Product as HithermProduct;
+								if (hp.GraphicalMode.HasValue && hp.GraphicalMode.Value == true) {
+									foreach (HithermCircuit hc in hp.PlannedCircuits) {
+										foreach (GraphicalHithermVerbindung link in hc.Links) {
+											link.RevertState();
+											for (int i = 0; i < link.Vertices.Count; i++) {
+												vertex = link.Vertices[i];
+												if (vertex.X > xBorder) {
+													vertex.X += linkDelta;
+													link.Vertices[i] = vertex;
+												} else if (vertex.X > newXBorder) {
+													vertex.X = newXBorder;
+													link.Vertices[i] = vertex;
+												}
+											}
+											link.Simplify();
+										}
+									}
+								}
+							} else if (pp.Product is HithermCompactProduct) {
+								HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
+								if (hcp.GraphicalMode.HasValue && hcp.GraphicalMode.Value == true) {
+									throw new Exception("TODO");
+								}
+							}
+						}
+					}
+				}
 			}
 			if (this.DachSchraege != null) {
 				this.DachSchraege.SetWallWidth(ceilingContour[2].X - ceilingContour[1].X);
@@ -652,6 +697,23 @@ namespace Europlan.Common {
 					obstable.BackupState();
 				}
 			}
+			foreach (PlannedProduct pp in this.AssiociatedRoom.PlannedProducts) {
+				if (pp.Product is HithermProduct) {
+					HithermProduct hp = pp.Product as HithermProduct;
+					if (hp.GraphicalMode.HasValue && hp.GraphicalMode.Value == true) {
+						foreach (HithermCircuit hc in hp.PlannedCircuits) {
+							foreach (GraphicalHithermVerbindung link in hc.Links) {
+								link.BackupState();
+							}
+						}
+					}
+				} else if (pp.Product is HithermCompactProduct) {
+					HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
+					if (hcp.GraphicalMode.HasValue && hcp.GraphicalMode.Value == true) {
+						throw new Exception("TODO");
+					}
+				}
+			}
 			if (this.DachSchraege != null) {
 				this.DachSchraege.BackupState();
 			}
@@ -668,6 +730,23 @@ namespace Europlan.Common {
 				}
 				foreach (GraphicalWallObstacle obstable in this.Obstacles) {
 					obstable.RevertState();
+				}
+			}
+			foreach (PlannedProduct pp in this.AssiociatedRoom.PlannedProducts) {
+				if (pp.Product is HithermProduct) {
+					HithermProduct hp = pp.Product as HithermProduct;
+					if (hp.GraphicalMode.HasValue && hp.GraphicalMode.Value == true) {
+						foreach (HithermCircuit hc in hp.PlannedCircuits) {
+							foreach (GraphicalHithermVerbindung link in hc.Links) {
+								link.RevertState();
+							}
+						}
+					}
+				} else if (pp.Product is HithermCompactProduct) {
+					HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
+					if (hcp.GraphicalMode.HasValue && hcp.GraphicalMode.Value == true) {
+						throw new Exception("TODO");
+					}
 				}
 			}
 			if (this.DachSchraege != null) {
