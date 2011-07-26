@@ -154,6 +154,7 @@ namespace Europlan.Common {
 		private void openPlanOptions(Plan plan) {
 			DialogResult result = DialogResult.OK;
 			if (plan != null) {
+
 				if (plan is ImagePlan) {
 					ImagePlanOptionsForm ipoForm = new ImagePlanOptionsForm(plan as ImagePlan);
 					result = ipoForm.ShowDialog();
@@ -164,14 +165,23 @@ namespace Europlan.Common {
 					}
 					ipoForm.Dispose();
 				} else if (plan is CadPlan) {
-					CadPlanOptionsForm cpoForm = new CadPlanOptionsForm(plan as CadPlan);
-					result = cpoForm.ShowDialog();
-					if (cpoForm.UnsavedChanges) {
-						if (ProjectChanged != null) {
-							ProjectChanged(this);
+					CadPlanOptionsForm cpoForm = null;
+					try {
+						cpoForm = new CadPlanOptionsForm(plan as CadPlan);
+						result = cpoForm.ShowDialog();
+						if (cpoForm.UnsavedChanges) {
+							if (ProjectChanged != null) {
+								ProjectChanged(this);
+							}
+						}
+					} catch (Exception) {
+						MessageBox.Show("Beim Einlesen des Plans ist leider ein Fehler aufgetreten. Bitte versuchen Sie, falls möglich, den Plan mit einem CAD-Programm erneut abzuspeichern und nochmals zu importieren.", "Fehler beim Einlesen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						deletePlan(plan);
+					} finally {
+						if (cpoForm != null) {
+							cpoForm.Dispose();
 						}
 					}
-					cpoForm.Dispose();
 				}
 				if (result == DialogResult.Cancel) {
 					deletePlan(plan);
