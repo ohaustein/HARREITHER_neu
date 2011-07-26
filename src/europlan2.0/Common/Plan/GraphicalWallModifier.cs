@@ -131,7 +131,12 @@ namespace Europlan.Common {
 				normVector.Normalize();
 				normVector = new Vector2D(normVector.Y, -normVector.X);
 				Segment2D segment = new Segment2D(wall.PlanStartPoint.Value, wall.PlanEndPoint.Value);
-				Point2D numberStart = segment.GetCenter() + (normVector * (room.AssociatedPlan.Measure.Value * 0.15));
+				Point2D numberStart = Point2D.Zero;
+				if (room.AssociatedPlan.InvertYAxis) {
+					numberStart = segment.GetCenter() + (normVector * (room.AssociatedPlan.Measure.Value * 0.15));
+				} else {
+					numberStart = segment.GetCenter() - (normVector * (room.AssociatedPlan.Measure.Value * 0.15));
+				}
 				numberStart = additionalTransformation.TransformTo2D(numberStart);
 				g.DrawLine(p, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
 
