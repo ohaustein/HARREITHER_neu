@@ -272,12 +272,31 @@ namespace Europlan.Common {
 			//Graphics g, Matrix4D additionalTransformation, Matrix3D invRotation, double step, ref bool left, PossibleModulLane lane, Point2D borderLeftOrigin, ref double y, bool bottomUp, double start, double end);
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
-			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl, false);
 		}
 
-		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
+		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl, bool export) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.CeilingCoordinatesToUse != null) {
-				this.connectionDrawer.Paint(g, additionalTransformation);
+
+				if (!export) {
+					// paint distributors in floor
+					Floor floor = this.product.AssociatedRoom.AssociatedFloor;
+					double measure = floor.AssociatedPlan.Measure.Value;
+					bool invertYAxis = floor.AssociatedPlan.InvertYAxis;
+					Region oldClip = g.Clip;
+					Region newClip = new Region();
+					newClip.MakeInfinite();
+					g.Clip = newClip;
+					foreach (Distributor dist in this.product.AssociatedRoom.AssociatedFloor.GetAllAvailableDistributors(true)) {
+						dist.Draw(g, additionalTransformation, measure, invertYAxis, floor);
+					}
+					g.Clip = oldClip;
+
+					// paint anbindeleitungen
+					this.connectionDrawer.Paint(g, additionalTransformation);
+				}
+
+				// generate clip for product
 				GraphicsPath path = new GraphicsPath();
 				List<PointF> transformedPoints = new List<PointF>();
 				foreach (Point2D point in this.product.AssociatedRoom.CeilingCoordinatesToUse) {
@@ -289,6 +308,8 @@ namespace Europlan.Common {
 				clipDisabled.MakeInfinite();
 				clipDisabled.Exclude(path);
 				path.Dispose();
+
+				// select color for painting depending depending on the background color of the plan
 				Color c = Color.Black;
 				if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
 					c = Color.White;
@@ -296,11 +317,12 @@ namespace Europlan.Common {
 				Brush b = new SolidBrush(c);
 				b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(128, c), Color.FromArgb(112, c));
 
-				if (highlightRoomCoordinates) {
+				if (highlightRoomCoordinates && !export) {
 					// gray out all except the room
 					g.FillRegion(b, clipDisabled);
 				}
 
+				// paint construction
 				if (this.product.AssociatedRoom.AssociatedPlan != null && this.product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
 					if (this.product.GraphConstruction != null) {
 						this.product.GraphConstruction.Paint(g, this.Mode, this.drawBeplankung);
@@ -374,6 +396,7 @@ namespace Europlan.Common {
 					}
 				}
 
+				// paint unused areas
 				if (this.product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
 					List<PointF> unusedPoints = new List<PointF>();
 					foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
@@ -387,7 +410,6 @@ namespace Europlan.Common {
 						unusedPoints.Clear();
 					}
 				}
-
 
 				if (this.dragStartedInPlan.HasValue && this.dragEndedInPlan.HasValue) {
 					Matrix3D rotation = Transformation3D.Rotate(this.Product.AssociatedRoom.AssociatedPlan.Rotation * Math.PI / 180.0);
@@ -416,8 +438,6 @@ namespace Europlan.Common {
 						g.ResetClip();
 						Brush bi = new SolidBrush(Color.FromArgb(127, Color.Red));
 						Brush bo = new SolidBrush(Color.FromArgb(127, Color.Blue));
-						//Brush bi = new SolidBrush(Color.Red);
-						//Brush bo = new SolidBrush(Color.Blue);
 						if (!this.newConnectionStartAtOutput) {
 							foreach (GraphicalConnectionAnbindungsPunkt anbindung in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, true)) {
 								PointF[] points = new PointF[anbindung.Area.Count];

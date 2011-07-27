@@ -1645,5 +1645,9 @@ namespace Europlan.Common {
 		public abstract Polygon2D GraphicalArea {
 			get;
 		}
+
+		public virtual void DeleteConnection(GraphicalProductConnection connection) {
+			this.connections.Remove(connection);
+		}
 	}
 }

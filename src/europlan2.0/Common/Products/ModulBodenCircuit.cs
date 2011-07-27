@@ -468,10 +468,13 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public int GetDistributorConnectionIndex() {
-			foreach (KlimaFlaechenModulVerbindung link in this.Links) {
-				if (link.EndConnectedToAnbindung || link.StartConnectedToAnbindung) {
-					return link.DistributorIndex;
+		public int GetDistributorConnectionIndex(bool checkVorlauf, bool checkRuecklauf) {
+			if (this.Links != null) {
+				foreach (KlimaFlaechenModulVerbindung link in this.Links) {
+					if ((checkRuecklauf && link.EndConnectedToAnbindung) || 
+						(checkVorlauf && link.StartConnectedToAnbindung)) {
+						return link.DistributorIndex;
+					}
 				}
 			}
 			return -1;

@@ -26,6 +26,7 @@ namespace Europlan.Common {
 		private bool ruecklauf = true;
 		private Product.ProductType connectionType;
 		private bool finishedConnection = true;
+		private bool automatic = false;
 
 		private List<List<Point2D>> vorlaufVerticesForDrawing = null;
 		private List<List<Point2D>> ruecklaufVerticesForDrawing = null;
@@ -35,6 +36,7 @@ namespace Europlan.Common {
 		  set { vertices = value; }
 		}
 
+		[XmlIgnore]
 		public bool FinishedConnection {
 			get { return this.finishedConnection; }
 			set { this.finishedConnection = value; }
@@ -400,6 +402,11 @@ namespace Europlan.Common {
 			set { this.distributorStartIndex = value; }
 		}
 
+		public bool Automatic {
+			get { return this.automatic; }
+			set { this.automatic = true; }
+		}
+
 		/*public int DistributorIndicesCount {
 			get { return this.distributorIndicesCount; }
 			set { this.distributorIndicesCount = value; }
@@ -635,7 +642,7 @@ namespace Europlan.Common {
 			//throw new Exception("The method or operation is not implemented.");
 		}
 
-		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool input, int distributorIndex, bool newProductConnection, double moveConnection) {
+		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool input, int distributorIndex, List<int> ignoreDistributorIndices, bool newProductConnection) {
 			if (this.Vertices == null || this.Vertices.Count < 2) {
 				return new List<GraphicalConnectionAnbindungsPunkt>();
 			}
@@ -648,11 +655,19 @@ namespace Europlan.Common {
 				startVector.Normalize();
 				Vector2D v = new Vector2D(-startVector.Y, startVector.X);
 				Point2D po1, po2, po3, po4, pi1, pi2, pi3, pi4, po, pi;
-				Point2D connectionPoint = this.Vertices[0];
+				Point2D connectionPoint;
+				if (this.automatic) {
+					connectionPoint = this.Vertices[0] + ((this.Vertices[1] - this.Vertices[0]) / 2.0);
+				} else {
+					connectionPoint = this.Vertices[0];
+				}
 				double connectionWidth = (this.Vertices.Count > 2 ? 0.05 : 0.055 / 2.0) * measure;
 				double connectionDepth = 0.1 * measure;
 				for (int i = 0; i < this.NrOfCircuits; i++) {
-					pi1 = connectionPoint - v * ((this.NrOfCircuits) / 2.0 - i /*+ 0.5*/) * connectionWidth * 2 - startVector * (moveConnection * measure);
+					pi1 = connectionPoint - v * ((this.NrOfCircuits) / 2.0 - i /*+ 0.5*/) * connectionWidth * 2;
+					if (this.automatic) {
+						pi1 -= (startVector * connectionDepth / 2.0);
+					}
 					pi2 = pi1 + v * connectionWidth;
 					pi3 = pi2 + startVector * connectionDepth;
 					pi4 = pi1 + startVector * connectionDepth;
@@ -660,9 +675,10 @@ namespace Europlan.Common {
 					po2 = po1 + v * connectionWidth;
 					po3 = po2 + startVector * connectionDepth;
 					po4 = pi3;
-					po = po1 + ((po2 - po1) / 2) + startVector * (moveConnection * measure);
-					pi = pi1 + ((pi2 - pi1) / 2) + startVector * (moveConnection * measure);
-					if (distributorIndex < 0 || this.distributorStartIndex + i == distributorIndex) {
+					po = po1 + (((automatic ? po3 : po2) - po1) / 2);
+					pi = pi1 + (((automatic ? pi3 : pi2) - pi1) / 2);
+					if ((distributorIndex < 0 || this.distributorStartIndex + i == distributorIndex) &&
+						(ignoreDistributorIndices == null || !ignoreDistributorIndices.Contains(this.distributorStartIndex + i))) {
 						if (input) {
 							anbindungsPunkte.Add(new GraphicalConnectionAnbindungsPunkt(pi, new Polygon2D(new Point2D[] { pi1, pi2, pi3, pi4 }), this.distributorStartIndex + i, newProductConnection ? this : null));
 						} else {

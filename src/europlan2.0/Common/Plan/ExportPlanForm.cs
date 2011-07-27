@@ -254,7 +254,7 @@ namespace Europlan.Common {
 											// TODO
 											// planner.DrawBeplankung = ???
 											// planner.Mode = ???
-											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty);
+											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty, true);
 										} else if (p is ModulKlimaBodenProduct) {
 											ModulKlimaBodenPlanner planner = new ModulKlimaBodenPlanner();
 											planner.Product = p as ModulKlimaBodenProduct;
@@ -265,13 +265,19 @@ namespace Europlan.Common {
 											// TODO
 											// planner.DrawBeplankung = ???
 											// planner.Mode = ???
-											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty);
+											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty, true);
 										} else if (p is EurovalProduct) {
 											EurovalPlanner planner = new EurovalPlanner();
 											planner.Product = p as EurovalProduct;
 											planner.HighlightRoomCoordinates = false;
 											planner.DrawExpansionGaps = false;
-											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty);
+											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty, true);
+										} else if (p is EcothermProduct) {
+											EcothermPlanner planner = new EcothermPlanner();
+											planner.Product = p as EcothermProduct;
+											planner.HighlightRoomCoordinates = false;
+											planner.DrawExpansionGaps = false;
+											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty, true);
 										}
 										//...
 									}

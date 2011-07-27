@@ -40,7 +40,8 @@ namespace Europlan.Common {
 		private bool highlightRoomCoordinates = true;
 		private bool drawExpansionGaps = true;
 		private Dictionary<Product, IProductPlanner> productsInFloor = new Dictionary<Product, IProductPlanner>();
-		private Dictionary<Distributor, DistributorPositioner> distributorsInFloor = new Dictionary<Distributor, DistributorPositioner>();
+		//private Dictionary<Distributor, DistributorPositioner> distributorsInFloor = new Dictionary<Distributor, DistributorPositioner>();
+		private List<Distributor> distributorsInFloor = new List<Distributor>();
 		private Floor floor = null;
 		private bool planFloor = true;
 		private Product product = null;
@@ -65,14 +66,15 @@ namespace Europlan.Common {
 							this.product = null;
 						}
 						this.Plan = floor.AssociatedPlan;
-						DistributorPositioner positioner;
+						/*DistributorPositioner positioner;
 						foreach (Distributor d in this.GetAllDistributors()) {
 							positioner = new DistributorPositioner();
 							positioner.Floor = floor;
 							positioner.Distributor = d;
 							positioner.ConnectedPlanPanel = this.connectedPlanPanel;
 							this.distributorsInFloor.Add(d, positioner);
-						}
+						}*/
+						this.distributorsInFloor.AddRange(this.GetAllDistributors());
 					}
 				}
 			}
@@ -224,9 +226,9 @@ namespace Europlan.Common {
 				if (this.Plan != null) {
 					this.ResetProducts();
 				}
-				foreach (DistributorPositioner distPositioner in this.distributorsInFloor.Values) {
-					distPositioner.ConnectedPlanPanel = this.connectedPlanPanel;
-				}
+				//foreach (DistributorPositioner distPositioner in this.distributorsInFloor.Values) {
+					//distPositioner.ConnectedPlanPanel = this.connectedPlanPanel;
+				//}
 			}
 		}
 
@@ -261,7 +263,7 @@ namespace Europlan.Common {
 		}
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
-			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl, false);
 		}
 
 		private List<Floor> GetAllFloors() {
@@ -320,14 +322,18 @@ namespace Europlan.Common {
 			return distributors;*/
 		}
 
-		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
+		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl, bool export) {
 			if (this.Plan != null) {
 				Region clip = g.Clip;
-				foreach (KeyValuePair<Distributor, DistributorPositioner> kvp in this.distributorsInFloor) {
-					kvp.Value.PaintAfterPlanPannel(g, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+				if (!export) {
+					//foreach (KeyValuePair<Distributor, DistributorPositioner> kvp in this.distributorsInFloor) {
+					foreach (Distributor dist in this.distributorsInFloor) {
+						//kvp.Value.PaintAfterPlanPannel(g, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+						dist.Draw(g, additionalTransformation, (float)this.Plan.Measure.Value, this.Plan.InvertYAxis, this.Floor);
+					}
+					g.Clip = clip;
 				}
-				g.Clip = clip;
-				if (drawExpansionGaps && this.planFloor) {
+				if (drawExpansionGaps && this.planFloor && !export) {
 					foreach (Floor floor in this.GetAllFloors()) {
 						foreach (Segment2D expansionGap in floor.ExpansionGaps) {
 							Point2D start = additionalTransformation.TransformTo2D(expansionGap.Start);
@@ -336,9 +342,11 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				foreach (KeyValuePair<Product, IProductPlanner> kvp in this.productsInFloor) {
-					if (kvp.Value != null && ((kvp.Key.Type == Product.ProductType.FBH && this.PlanFloor) || (kvp.Key.Type == Product.ProductType.DH && this.PlanCeiling))) {
-						kvp.Value.PaintAfterPlanPannel(g, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+				if (!export) {
+					foreach (KeyValuePair<Product, IProductPlanner> kvp in this.productsInFloor) {
+						if (kvp.Value != null && ((kvp.Key.Type == Product.ProductType.FBH && this.PlanFloor) || (kvp.Key.Type == Product.ProductType.DH && this.PlanCeiling))) {
+							kvp.Value.PaintAfterPlanPannel(g, additionalTransformation, mousePositionInPlan, mousePositionInControl, export);
+						}
 					}
 				}
 				g.Clip = clip;
@@ -420,7 +428,7 @@ namespace Europlan.Common {
 						}*/
 					}
 				}
-				if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null && this.product.AssociatedRoom.RoomCoordinates.Count > 2) {
+				if (!export && this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null && this.product.AssociatedRoom.RoomCoordinates.Count > 2) {
 					GraphicsPath fillPath = new GraphicsPath();
 					fillPath.StartFigure();
 					PointF[] array = new PointF[this.product.AssociatedRoom.RoomCoordinates.Count];
@@ -866,7 +874,7 @@ namespace Europlan.Common {
 				if (key == Keys.Delete) {
 					foreach (Product product in this.productsInFloor.Keys) {
 						if (product.Connections.Contains(this.selectedConnection)) {
-							product.Connections.Remove(this.selectedConnection);
+							product.DeleteConnection(this.selectedConnection);
 							this.selectedConnection = null;
 							redraw = true;
 							break;

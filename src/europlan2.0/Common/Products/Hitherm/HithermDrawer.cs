@@ -64,12 +64,30 @@ namespace Europlan.Common {
 		}
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
-			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl, false);
 		}
 
-		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
+		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl, bool export) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
-				this.connectionDrawer.Paint(g, additionalTransformation);
+
+				if (!export) {
+					// paint distributors in floor
+					Floor floor = this.product.AssociatedRoom.AssociatedFloor;
+					double measure = floor.AssociatedPlan.Measure.Value;
+					bool invertYAxis = floor.AssociatedPlan.InvertYAxis;
+					Region oldClip = g.Clip;
+					Region newClip = new Region();
+					newClip.MakeInfinite();
+					g.Clip = newClip;
+					foreach (Distributor dist in this.product.AssociatedRoom.AssociatedFloor.GetAllAvailableDistributors(true)) {
+						dist.Draw(g, additionalTransformation, measure, invertYAxis, floor);
+					}
+					g.Clip = oldClip;
+
+					// paint anbindeleitungen
+					this.connectionDrawer.Paint(g, additionalTransformation);
+				}
+				
 				GraphicsPath path = new GraphicsPath();
 				List<PointF> transformedPoints = new List<PointF>();
 				foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {

@@ -1561,7 +1561,7 @@ namespace Europlan.Common {
 			List<GraphicalConnectionAnbindungsPunkt> anbindungsPunkte = new List<GraphicalConnectionAnbindungsPunkt>();
 			if (this.connections != null) {
 				foreach (GraphicalProductConnection connection in this.connections) {
-					anbindungsPunkte.AddRange(connection.GetAnbindungsPunkte(measure, input, -1, false, 0.0));
+					anbindungsPunkte.AddRange(connection.GetAnbindungsPunkte(measure, input, -1, null, false));
 				}
 			}
 			return anbindungsPunkte;
@@ -1570,6 +1570,34 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override WW.Math.Geometry.Polygon2D GraphicalArea {
 			get { return (this.GraphicalMode.HasValue && this.GraphicalMode.Value == true) ? new Polygon2D(this.AssociatedRoom.CeilingCoordinatesToUse) : null; }
+		}
+
+		public override void DeleteConnection(GraphicalProductConnection connection) {
+			base.DeleteConnection(connection);
+			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
+				List<KlimaFlaechenSubAreaVerbindung> saLinksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
+				foreach (KlimaFlaechenSubAreaVerbindung link in c.Links) {
+					if (link.EndConnectedToAnbindung || link.StartConnectedToAnbindung) {
+						saLinksToDelete.Add(link);
+					}
+				}
+				foreach (KlimaFlaechenSubAreaVerbindung link in saLinksToDelete) {
+					c.Links.Remove(link);
+				}
+				foreach (ModulDeckeSubArea sa in c.SubAreas) {
+					foreach (KlimaFlaechenList row in sa.Rows) {
+						List<KlimaFlaechenModulVerbindung> linksToDelete = new List<KlimaFlaechenModulVerbindung>();
+						foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+							if (link.EndConnectedToAnbindung || link.StartConnectedToAnbindung) {
+								linksToDelete.Add(link);
+							}
+						}
+						foreach (KlimaFlaechenModulVerbindung link in linksToDelete) {
+							row.Links.Remove(link);
+						}
+					}
+				}
+			}
 		}
 	}
 

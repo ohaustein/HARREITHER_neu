@@ -1451,25 +1451,26 @@ namespace Europlan.Common {
 			return possibleConnection;
 		}
 
-		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool invertYAxis, bool input, int distributorIndex, Nullable<Point2D> mousePoint) {
+		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool invertYAxis, bool input, int distributorIndex, List<int> ignoreDistributorIndices, Nullable<Point2D> mousePoint) {
 			List<GraphicalConnectionAnbindungsPunkt> anbindungsPunkte = new List<GraphicalConnectionAnbindungsPunkt>();
 			if (this.connections != null) {
 				foreach (GraphicalProductConnection connection in this.connections) {
-					anbindungsPunkte.AddRange(connection.GetAnbindungsPunkte(measure, input, distributorIndex, false, 0.0));
+					anbindungsPunkte.AddRange(connection.GetAnbindungsPunkte(measure, input, distributorIndex, ignoreDistributorIndices, false));
 				}
 			}
 			if (mousePoint.HasValue && (this.connections == null || this.connections.Count == 0)) {
 				double planRotation = this.associatedRoom.AssociatedPlan.Rotation;
-				foreach (Floor f in Project.Instance.Floors) {
-					foreach (Distributor d in f.GetAllAvailableDistributors(true)) {
-						if (d.IsInsideProduct(this)) {
-							if (d.IsPointInside(mousePoint.Value, this.AssociatedRoom.AssociatedFloor, measure, invertYAxis)) {
-								PossibleProductConnection ppc = d.GetPossibleProductConnections(true, true, measure, invertYAxis, mousePoint.Value, this, this.AssociatedRoom.AssociatedFloor, this.PlannedCircuitCount, true, -0.055 / 4.0);
-								Point2D secondPoint = ppc.ConnectionPoint + new Vector2D(0.01 * measure * Math.Sin((-ppc.Rotation + 0) * Math.PI / 180.0), 0.01 * measure * Math.Cos((-ppc.Rotation + 0) * Math.PI / 180.0));
-								if (ppc != null) {
-									GraphicalProductConnection gpc = new GraphicalProductConnection(Project.Instance.GetPlannedProduct(this), d, new Point2D[] { secondPoint, ppc.ConnectionPoint }, true, true, ppc.DistributorStartPosition, true, true, ProductType.FBH);
-									anbindungsPunkte.AddRange(gpc.GetAnbindungsPunkte(measure, input, ppc.DistributorStartPosition, true, 0.108 / 2.0 - 0.015));
-								}
+				foreach (Distributor d in this.associatedRoom.AssociatedFloor.GetAllAvailableDistributors(true)) {
+					if (d.IsInsideProduct(this)) {
+						if (d.IsPointInside(mousePoint.Value, this.AssociatedRoom.AssociatedFloor, measure, invertYAxis)) {
+							PossibleProductConnection ppc = d.GetPossibleProductConnections(true, true, measure, invertYAxis, mousePoint.Value, this, this.AssociatedRoom.AssociatedFloor, this.PlannedCircuitCount, true, input ? -0.055 / 4.0 : 0.055 / 4.0);
+							Vector2D vector = new Vector2D(0.01 * measure * Math.Sin((-ppc.Rotation + 0) * Math.PI / 180.0), 0.01 * measure * Math.Cos((-ppc.Rotation + 0) * Math.PI / 180.0));
+							Point2D firstPoint = ppc.ConnectionPoint + vector;
+							Point2D secondPoint = ppc.ConnectionPoint - vector;
+							if (ppc != null) {
+								GraphicalProductConnection gpc = new GraphicalProductConnection(Project.Instance.GetPlannedProduct(this), d, new Point2D[] { firstPoint, secondPoint }, true, true, ppc.DistributorStartPosition, true, true, ProductType.FBH);
+								gpc.Automatic = true;
+								anbindungsPunkte.AddRange(gpc.GetAnbindungsPunkte(measure, input, ppc.DistributorStartPosition, ignoreDistributorIndices, true));
 							}
 						}
 					}
@@ -1478,5 +1479,19 @@ namespace Europlan.Common {
 			return anbindungsPunkte;
 		}
 
+		public override void DeleteConnection(GraphicalProductConnection connection) {
+			base.DeleteConnection(connection);
+			foreach (ModulBodenCircuit c in this.PlannedCircuits) {
+				List<KlimaFlaechenModulVerbindung> linksToDelete = new List<KlimaFlaechenModulVerbindung>();
+				foreach (KlimaFlaechenModulVerbindung link in c.Links) {
+					if (link.EndConnectedToAnbindung || link.StartConnectedToAnbindung) {
+						linksToDelete.Add(link);
+					}
+				}
+				foreach (KlimaFlaechenModulVerbindung link in linksToDelete) {
+					c.Links.Remove(link);
+				}
+			}
+		}
 	}
 }

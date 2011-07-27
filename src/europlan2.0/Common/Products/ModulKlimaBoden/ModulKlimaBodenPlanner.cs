@@ -238,16 +238,31 @@ namespace Europlan.Common {
 		}
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
-			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl, false);
 		}
 
 		private List<GraphicalConnectionAnbindungsPunkt> possibleAnbindungspunkte = new List<GraphicalConnectionAnbindungsPunkt>();
 
-		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
+		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl, bool export) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
 
-				// paint anbindeleitungen
-				this.connectionDrawer.Paint(g, additionalTransformation);
+				if (!export) {
+					// paint distributors in floor
+					Floor floor = this.product.AssociatedRoom.AssociatedFloor;
+					double measure = floor.AssociatedPlan.Measure.Value;
+					bool invertYAxis = floor.AssociatedPlan.InvertYAxis;
+					Region oldClip = g.Clip;
+					Region newClip = new Region();
+					newClip.MakeInfinite();
+					g.Clip = newClip;
+					foreach (Distributor dist in this.product.AssociatedRoom.AssociatedFloor.GetAllAvailableDistributors(true)) {
+						dist.Draw(g, additionalTransformation, measure, invertYAxis, floor);
+					}
+					g.Clip = oldClip;
+
+					// paint anbindeleitungen
+					this.connectionDrawer.Paint(g, additionalTransformation);
+				}
 
 				// generate clip for product
 				GraphicsPath path = new GraphicsPath();
@@ -270,7 +285,7 @@ namespace Europlan.Common {
 				Brush b = new SolidBrush(c);
 				b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(128, c), Color.FromArgb(112, c));
 
-				if (highlightRoomCoordinates) {
+				if (highlightRoomCoordinates && !export) {
 					// gray out all except the room
 					g.FillRegion(b, clipDisabled);
 				}
@@ -337,19 +352,6 @@ namespace Europlan.Common {
 					g.DrawPolygon(new Pen(Color.Red), new Point[] { this.dragStartedInControl.Value, new Point(this.dragStartedInControl.Value.X, this.dragEndedInControl.Value.Y), this.dragEndedInControl.Value, new Point(this.dragEndedInControl.Value.X, this.dragStartedInControl.Value.Y) });
 					g.Transform = transform;
 				}
-
-				// paint distributors in floor
-				Floor floor = this.product.AssociatedRoom.AssociatedFloor;
-				double measure = floor.AssociatedPlan.Measure.Value;
-				bool invertYAxis = floor.AssociatedPlan.InvertYAxis;
-				Region oldClip = g.Clip;
-				Region newClip = new Region();
-				newClip.MakeInfinite();
-				g.Clip = newClip;
-				foreach (Distributor dist in this.product.AssociatedRoom.AssociatedFloor.GetAllAvailableDistributors(true)) {
-					dist.Draw(g, additionalTransformation, measure, invertYAxis, floor);
-				}
-				g.Clip = oldClip;
 
 				// paint modules
 				List<KlimaFlaechenModul> selectedModules = this.GetAllSelectedModules();
@@ -428,6 +430,7 @@ namespace Europlan.Common {
 		private bool newConnectionStartAtOutput = true;
 		private ModulBodenCircuit newConnectionCircuit = null;
 		private int newConnectionCircuitDistributorIndex = -1;
+		private List<int> newConnectionIgnoreDistributorIndices = null;
 
 		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			bool redraw = false;
@@ -440,7 +443,6 @@ namespace Europlan.Common {
 						break;
 					}
 				}
-
 
 				if (pickedModul != null) {
 					Matrix3D rotation = Transformation3D.Rotate(-this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
@@ -510,7 +512,14 @@ namespace Europlan.Common {
 								this.newConnectionStart = input.Key;
 								this.newConnectionStartAtOutput = false;
 								this.newConnectionCircuit = circuit;
-								this.newConnectionCircuitDistributorIndex = this.newConnectionCircuit.GetDistributorConnectionIndex();
+								this.newConnectionCircuitDistributorIndex = this.newConnectionCircuit.GetDistributorConnectionIndex(true, true);
+								this.newConnectionIgnoreDistributorIndices = new List<int>();
+								foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
+									int index = c.GetDistributorConnectionIndex(true, false);
+									if (index >= 0) {
+										this.newConnectionIgnoreDistributorIndices.Add(index);
+									}
+								}
 							}
 							break;
 						}
@@ -524,7 +533,14 @@ namespace Europlan.Common {
 									this.newConnectionStart = output.Key;
 									this.newConnectionStartAtOutput = true;
 									this.newConnectionCircuit = circuit;
-									this.newConnectionCircuitDistributorIndex = this.newConnectionCircuit.GetDistributorConnectionIndex();
+									this.newConnectionCircuitDistributorIndex = this.newConnectionCircuit.GetDistributorConnectionIndex(true, true);
+									this.newConnectionIgnoreDistributorIndices = new List<int>();
+									foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
+										int index = c.GetDistributorConnectionIndex(false, true);
+										if (index >= 0) {
+											this.newConnectionIgnoreDistributorIndices.Add(index);
+										}
+									}
 								}
 								break;
 							}
@@ -594,6 +610,29 @@ namespace Europlan.Common {
 				}
 				if (bestLink != null) {
 					bestCircuit.Links.Remove(bestLink);
+					bool stillConnected = false;
+					foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
+						foreach (KlimaFlaechenModulVerbindung link in c.Links) {
+							if (link.StartConnectedToAnbindung || link.EndConnectedToAnbindung) {
+								stillConnected = true;
+								break;
+							}
+						}
+						if (stillConnected) {
+							break;
+						}
+					}
+					if (!stillConnected) {
+						List<GraphicalProductConnection> connectionsToDelete = new List<GraphicalProductConnection>();
+						foreach (GraphicalProductConnection conn in this.product.Connections) {
+							if (conn.Automatic) {
+								connectionsToDelete.Add(conn);
+							}
+						}
+						foreach (GraphicalProductConnection conn in connectionsToDelete) {
+							this.product.Connections.Remove(conn);
+						}
+					}
 					redraw = true;
 				}
 			}
@@ -723,9 +762,9 @@ namespace Europlan.Common {
 
 				if (this.newConnectionStart != null) {
 					if (!this.newConnectionStartAtOutput) {
-						this.possibleAnbindungspunkte = this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, true, this.newConnectionCircuitDistributorIndex, planPoint);
+						this.possibleAnbindungspunkte = this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, true, this.newConnectionCircuitDistributorIndex, this.newConnectionIgnoreDistributorIndices, planPoint);
 					} else {
-						this.possibleAnbindungspunkte = this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, false, this.newConnectionCircuitDistributorIndex, planPoint);
+						this.possibleAnbindungspunkte = this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, false, this.newConnectionCircuitDistributorIndex, this.newConnectionIgnoreDistributorIndices, planPoint);
 					}
 				}
 

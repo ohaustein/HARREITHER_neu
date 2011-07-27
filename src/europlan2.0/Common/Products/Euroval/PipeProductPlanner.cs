@@ -179,12 +179,31 @@ namespace Europlan.Common {
 		}
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
-			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl);
+			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl, false);
 		}
 
-		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
+		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl, bool export) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
-				this.connectionDrawer.Paint(g, additionalTransformation);
+
+				if (!export) {
+					// paint distributors in floor
+					Floor floor = this.product.AssociatedRoom.AssociatedFloor;
+					double measure = floor.AssociatedPlan.Measure.Value;
+					bool invertYAxis = floor.AssociatedPlan.InvertYAxis;
+					Region oldClip = g.Clip;
+					Region newClip = new Region();
+					newClip.MakeInfinite();
+					g.Clip = newClip;
+					foreach (Distributor dist in this.product.AssociatedRoom.AssociatedFloor.GetAllAvailableDistributors(true)) {
+						dist.Draw(g, additionalTransformation, measure, invertYAxis, floor);
+					}
+					g.Clip = oldClip;
+
+					// paint anbindeleitungen
+					this.connectionDrawer.Paint(g, additionalTransformation);
+				}
+
+				// generate clip for product
 				GraphicsPath path = new GraphicsPath();
 				List<PointF> transformedPoints = new List<PointF>();
 				foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
@@ -195,6 +214,8 @@ namespace Europlan.Common {
 				Region clipDisabled = new Region();
 				clipDisabled.MakeInfinite();
 				clipDisabled.Exclude(path);
+
+				// select color for painting depending depending on the background color of the plan
 				Color c = Color.Black;
 				if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
 					c = Color.White;
@@ -202,12 +223,12 @@ namespace Europlan.Common {
 				Brush b = new SolidBrush(c);
 				b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(128, c), Color.FromArgb(112, c));
 
-				if (highlightRoomCoordinates) {
+				if (highlightRoomCoordinates && !export) {
 					// gray out all except the room
 					g.FillRegion(b, clipDisabled);
 				}
 
-
+				// paint planned area
 				if (this.product.PlannedAreaGraphical.Count > 2) {
 					GraphicsPath fillPath = new GraphicsPath();
 					fillPath.StartFigure();
@@ -251,9 +272,9 @@ namespace Europlan.Common {
 						g.Clip = oldClip;
 					}
 				}
-
 				path.Reset();
 				transformedPoints.Clear();
+
 				if (coordsPickedSoFar.Count > 0 && inDesign) {
 					List<Point2D> border = new List<Point2D>();
 					if (this.Mode == PipeProductMode.EVM_ADD_AREA) {
@@ -319,11 +340,6 @@ namespace Europlan.Common {
 					}
 				}
 
-				// paint product
-				//path.Reset();
-				//transformedPoints.Clear();
-				//g.FillPath(new SolidBrush(Color.FromArgb(64, Color.Red)), path);
-
 				if (this.mode == PipeProductMode.EVM_ADD_RZ) {
 					Point2D rzPoint = GetSnapPoint(this.product.PlannedAreaGraphical, mousePositionInPlan);
 
@@ -379,6 +395,7 @@ namespace Europlan.Common {
 					}
 				}
 
+				// paint reduced areas
 				if (this.product.PlannedReducedAreas.Count > 0) {
 					List<PointF> reducedPoints = new List<PointF>();
 					foreach (List<Point2D> reducedArea in this.product.PlannedReducedAreas) {
@@ -399,6 +416,7 @@ namespace Europlan.Common {
 				}
 
 				if (drawExpansionGaps) {
+					// paint expansion gaps
 					foreach (Segment2D expansionGap in this.Product.AssociatedRoom.AssociatedFloor.ExpansionGaps) {
 						Point2D start = additionalTransformation.TransformTo2D(expansionGap.Start);
 						Point2D end = additionalTransformation.TransformTo2D(expansionGap.End);
@@ -407,6 +425,7 @@ namespace Europlan.Common {
 				}
 
 				if (this.product.TextBoxPosition == Point2D.Zero && product.PlannedAreaGraphical.Count > 0) {
+					// find position for textbox if it has not been set by the user
 					Polygon2D polygon = new Polygon2D(product.PlannedAreaGraphical);
 					if (polygon.GetCentroid().HasValue) {
 						product.TextBoxPosition = polygon.GetCentroid().Value;
@@ -414,6 +433,7 @@ namespace Europlan.Common {
 				}
 
 				if (this.product.TextBoxPosition != Point2D.Zero) {
+					// paint textbox
 					Font font = new Font("Arial", this.product.TextBoxFontSize / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
 					float maxWidth = 0;
 					float maxHeight = 0;

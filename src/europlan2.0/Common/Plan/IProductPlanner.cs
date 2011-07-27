@@ -29,6 +29,6 @@ namespace Europlan.Common {
 	}
 
 	public interface IProductPlanner : IPlanner {
-		void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl);
+		void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl, bool export);
 	}
 }
